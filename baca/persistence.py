@@ -311,6 +311,11 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> commands(
+        ...     "Music_Voice",
+        ...     baca.make_mmrests(),
+        ...     baca.reapply_persistent_indicators(),
+        ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
@@ -517,6 +522,8 @@ r"""
         >>> commands(
         ...     "Music_Voice",
         ...     baca.clef("treble"),
+        ...     baca.make_mmrests(),
+        ...     baca.reapply_persistent_indicators(),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -748,6 +755,7 @@ r"""
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
+        ...     baca.reapply_persistent_indicators(),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -879,6 +887,7 @@ r"""
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
+        ...     baca.reapply_persistent_indicators(),
         ...     baca.dynamic("f"),
         ... )
 
@@ -1634,6 +1643,7 @@ r"""
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
+        ...     baca.reapply_persistent_indicators(),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -1981,8 +1991,9 @@ r"""
         ... )
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.instrument(instruments["Flute"]),
         ...     baca.make_notes(),
+        ...     baca.reapply_persistent_indicators(),
+        ...     baca.instrument(instruments["Flute"]),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -2704,6 +2715,7 @@ r"""
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
+        ...     baca.reapply_persistent_indicators(),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -3111,8 +3123,9 @@ r"""
         ... )
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.margin_markup(margin_markups["I+II"]),
         ...     baca.make_notes(),
+        ...     baca.reapply_persistent_indicators(),
+        ...     baca.margin_markup(margin_markups["I+II"]),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -3649,6 +3662,7 @@ r"""
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
+        ...     baca.reapply_persistent_indicators(),
         ... )
         >>> commands(
         ...     "Global_Skips",
@@ -3858,6 +3872,7 @@ r"""
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
+        ...     baca.reapply_persistent_indicators(),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -4058,6 +4073,7 @@ r"""
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
+        ...     baca.reapply_persistent_indicators(),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -4356,6 +4372,7 @@ r"""
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
+        ...     baca.reapply_persistent_indicators(),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -4495,6 +4512,7 @@ r"""
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
+        ...     baca.reapply_persistent_indicators(),
         ...     baca.staff_lines(5),
         ... )
 
@@ -4780,6 +4798,7 @@ r"""
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
+        ...     baca.reapply_persistent_indicators(),
         ... )
         >>> commands(
         ...     "Global_Skips",
@@ -4964,6 +4983,7 @@ r"""
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
+        ...     baca.reapply_persistent_indicators(),
         ... )
 
         >>> metadata, persist = {}, {}

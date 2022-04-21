@@ -232,105 +232,6 @@ def _assert_nonoverlapping_rhythms(rhythms, voice):
         previous_stop_offset = stop_offset
 
 
-# TODO: rename argument to staff_or_staff_group
-def _attach_default_indicators(context):
-    """
-    Attaches defaults to all staff and staff group contexts in ``context`` when
-    ``context`` is a score.
-
-    Attaches defaults to ``context`` (without iterating ``context``) when ``context``
-    is a staff or staff group.
-
-    Returns list of one wrapper for every indicator attached.
-    """
-    assert not isinstance(context, abjad.Score), repr(context)
-    prototype = (abjad.Score, abjad.Staff, abjad.StaffGroup)
-    assert isinstance(context, prototype), repr(context)
-    wrappers = []
-    tag = _enums.REMOVE_ALL_EMPTY_STAVES
-    empty_prototype = (abjad.MultimeasureRest, abjad.Skip)
-    prototype = (abjad.Staff, abjad.StaffGroup)
-    if isinstance(context, abjad.Score):
-        staff_or_staff_groups = abjad.select.components(context, prototype)
-        staves = abjad.select.components(context, abjad.Staff)
-    elif isinstance(context, abjad.Staff):
-        staff_or_staff_groups = [context]
-        staves = [context]
-    else:
-        assert isinstance(context, abjad.StaffGroup), repr(context)
-        staff_or_staff_groups = [context]
-        staves = []
-    for staff_or_staff_group in staff_or_staff_groups:
-        leaf = None
-        voices = abjad.select.components(staff_or_staff_group, abjad.Voice)
-        assert isinstance(voices, list), repr(voices)
-        # find leaf 0 in first nonempty voice
-        for voice in voices:
-            leaves = []
-            for leaf_ in abjad.iterate.leaves(voice):
-                if abjad.get.has_indicator(leaf_, _enums.HIDDEN):
-                    leaves.append(leaf_)
-            if not all(isinstance(_, empty_prototype) for _ in leaves):
-                leaf = abjad.get.leaf(voice, 0)
-                break
-        # otherwise, find first leaf in voice in non-removable staff
-        if leaf is None:
-            for voice in voices:
-                voice_might_vanish = False
-                for component in abjad.get.parentage(voice):
-                    if abjad.get.annotation(component, tag) is True:
-                        voice_might_vanish = True
-                if not voice_might_vanish:
-                    leaf = abjad.get.leaf(voice, 0)
-                    if leaf is not None:
-                        break
-        # otherwise, as last resort find first leaf in first voice
-        if leaf is None:
-            leaf = abjad.get.leaf(voices[0], 0)
-        if leaf is None:
-            continue
-        instrument = abjad.get.indicator(leaf, abjad.Instrument)
-        if instrument is None:
-            string = "default_instrument"
-            instrument = abjad.get.annotation(staff_or_staff_group, string)
-            if instrument is not None:
-                wrapper = abjad.attach(
-                    instrument,
-                    leaf,
-                    context=staff_or_staff_group.lilypond_type,
-                    tag=_tags.function_name(_frame(), n=1),
-                    wrapper=True,
-                )
-                wrappers.append(wrapper)
-        margin_markup = abjad.get.indicator(leaf, abjad.MarginMarkup)
-        if margin_markup is None:
-            string = "default_margin_markup"
-            margin_markup = abjad.get.annotation(staff_or_staff_group, string)
-            if margin_markup is not None:
-                wrapper = abjad.attach(
-                    margin_markup,
-                    leaf,
-                    tag=_tags.NOT_PARTS.append(_tags.function_name(_frame(), n=2)),
-                    wrapper=True,
-                )
-                wrappers.append(wrapper)
-    for staff in staves:
-        leaf = abjad.get.leaf(staff, 0)
-        clef = abjad.get.indicator(leaf, abjad.Clef)
-        if clef is not None:
-            continue
-        clef = abjad.get.annotation(staff, "default_clef")
-        if clef is not None:
-            wrapper = abjad.attach(
-                clef,
-                leaf,
-                tag=_tags.function_name(_frame(), n=3),
-                wrapper=True,
-            )
-            wrappers.append(wrapper)
-    return wrappers
-
-
 def _attach_fermatas(
     always_make_global_rests,
     append_phantom_measure,
@@ -777,6 +678,7 @@ def _bracket_metric_modulation(metronome_mark, metric_modulation):
 
 def _bundle_runtime(
     allows_instrument=None,
+    already_reapplied_contexts=None,
     instruments=None,
     manifests=None,
     margin_markups=None,
@@ -787,6 +689,7 @@ def _bundle_runtime(
 ):
     runtime = {}
     runtime["allows_instrument"] = allows_instrument
+    runtime["already_reapplied_contexts"] = already_reapplied_contexts
     runtime["instruments"] = instruments
     runtime["manifests"] = manifests
     runtime["margin_markups"] = margin_markups
@@ -867,6 +770,7 @@ def _calculate_clock_times(
 def _call_commands(
     allow_empty_selections,
     allows_instrument,
+    already_reapplied_contexts,
     cache,
     commands,
     measure_count,
@@ -895,6 +799,7 @@ def _call_commands(
         previous_persistent_indicators = previous_persist.get("persistent_indicators")
         runtime = _bundle_runtime(
             allows_instrument=allows_instrument,
+            already_reapplied_contexts=already_reapplied_contexts,
             manifests=manifests,
             offset_to_measure_number=offset_to_measure_number,
             previous_persistent_indicators=previous_persistent_indicators,
@@ -2355,11 +2260,21 @@ def _prototype_string(class_):
 
 
 def _reapply_persistent_indicators(
+    already_reapplied_contexts,
     manifests,
     previous_persistent_indicators,
     score,
+    *,
+    do_not_iterate=None,
 ):
-    for context in abjad.iterate.components(score, abjad.Context):
+    if do_not_iterate is not None:
+        contexts = [do_not_iterate]
+    else:
+        contexts = abjad.select.components(score, abjad.Context)
+    for context in contexts:
+        if context.name in already_reapplied_contexts:
+            continue
+        already_reapplied_contexts.add(context.name)
         mementos = previous_persistent_indicators.get(context.name)
         if not mementos:
             continue
@@ -3071,7 +2986,7 @@ def interpreter(
     persist = dict(persist or {})
     previous_metadata = dict(previous_metadata or {})
     previous_persist = dict(previous_persist or {})
-    previous_persistent_indicators = previous_persist.get("persistent_indicators")
+    previous_persistent_indicators = previous_persist.get("persistent_indicators", {})
     assert isinstance(transpose_score, bool)
     assert isinstance(treat_untreated_persistent_wrappers, bool)
     voice_metadata = {}
@@ -3082,15 +2997,24 @@ def interpreter(
         elif getattr(command, "name", None) in (
             "attach_first_segment_default_indicators",
             "attach_first_apperance_default_indicators",
+            "reapply_persistent_indicators",
         ):
             default_indicator_commands.append(command)
         else:
             other_commands.append(command)
     other_commands[0:0] = default_indicator_commands
+    already_reapplied_contexts = set()
     with abjad.Timer() as timer:
         # temporary hack to make baca.select.mleaves() work
         dummy_container = abjad.Container([score], name="Dummy_Container")
         _make_global_skips(append_phantom_measure, global_skips, time_signatures)
+        _reapply_persistent_indicators(
+            already_reapplied_contexts,
+            manifests,
+            previous_persistent_indicators,
+            score,
+            do_not_iterate=score,
+        )
         if attach_nonfirst_empty_start_bar and not first_segment:
             _attach_nonfirst_empty_start_bar(global_skips)
         _label_measure_numbers(first_measure_number, global_skips)
@@ -3135,19 +3059,12 @@ def interpreter(
         "Rhythm commands", timer, print_timing=print_timing, suffix=command_count
     )
     with abjad.Timer() as timer:
-        if previous_persistent_indicators and not first_segment:
-            _reapply_persistent_indicators(
-                manifests,
-                previous_persistent_indicators,
-                score,
-            )
-    # _print_timing("Cleanup", timer, print_timing=print_timing)
-    with abjad.Timer() as timer:
         with abjad.ForbidUpdate(component=score, update_on_exit=True):
             cache = None
             cache, command_count = _call_commands(
                 allow_empty_selections,
                 allows_instrument,
+                already_reapplied_contexts,
                 cache,
                 other_commands,
                 measure_count,
