@@ -302,7 +302,7 @@ def extern(
             lines.append(variable_line)
         not_topmost_index = None
         for j, line in enumerate(reversed(lines)):
-            if line == f"%! {_tags.NOT_TOPMOST.string}\n":
+            if line.strip() == f"%! {_tags.NOT_TOPMOST.string}":
                 not_topmost_index = j
                 break
             if line.isspace():

@@ -23,10 +23,7 @@ def _also_untagged(segment_directory):
         if not tagged.exists():
             continue
         with tagged.open() as pointer:
-            lines = []
-            for line in pointer.readlines():
-                if "%@%" not in line:
-                    lines.append(line)
+            lines = pointer.readlines()
         string = "".join(lines)
         string = abjad.tag.remove_tags(string)
         parts = []
