@@ -4274,8 +4274,8 @@ class FigureMaker:
                 {
                     \scaleDurations #'(1 . 1)
                     {
-                        \time 3/2
                         \override Staff.Stem.stemlet-length = 1.5
+                        \time 3/2
                         c'8.
                         [
                         r16

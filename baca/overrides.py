@@ -1341,8 +1341,8 @@ def mmrest_color(
                         <<
                             \context Voice = "Music_Voice"
                             {
-                                \abjad-invisible-music-coloring
                                 %@% \abjad-invisible-music
+                                \abjad-invisible-music-coloring
                                 b'1 * 1/2
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"2"
                             }
@@ -1452,8 +1452,8 @@ def mmrest_text_color(
                         <<
                             \context Voice = "Music_Voice"
                             {
-                                \abjad-invisible-music-coloring
                                 %@% \abjad-invisible-music
+                                \abjad-invisible-music-coloring
                                 b'1 * 1/2
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"2"
                             }
@@ -1583,8 +1583,8 @@ def mmrest_text_extra_offset(
                         <<
                             \context Voice = "Music_Voice"
                             {
-                                \abjad-invisible-music-coloring
                                 %@% \abjad-invisible-music
+                                \abjad-invisible-music-coloring
                                 b'1 * 1/2
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"2"
                             }
@@ -1679,8 +1679,8 @@ def mmrest_text_padding(
                         <<
                             \context Voice = "Music_Voice"
                             {
-                                \abjad-invisible-music-coloring
                                 %@% \abjad-invisible-music
+                                \abjad-invisible-music-coloring
                                 b'1 * 1/2
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"2"
                             }
@@ -1774,8 +1774,8 @@ def mmrest_text_parent_center(
                         <<
                             \context Voice = "Music_Voice"
                             {
-                                \abjad-invisible-music-coloring
                                 %@% \abjad-invisible-music
+                                \abjad-invisible-music-coloring
                                 b'1 * 1/2
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"2"
                             }
@@ -1870,8 +1870,8 @@ def mmrest_text_staff_padding(
                         <<
                             \context Voice = "Music_Voice"
                             {
-                                \abjad-invisible-music-coloring
                                 %@% \abjad-invisible-music
+                                \abjad-invisible-music-coloring
                                 b'1 * 1/2
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"2"
                             }
@@ -3654,8 +3654,8 @@ def slur_up(
                     \times 9/10
                     {
                         \override Slur.direction = #up
-                        \override TupletBracket.staff-padding = 2
                         \override TupletBracket.direction = #down
+                        \override TupletBracket.staff-padding = 2
                         \time 11/8
                         r8
                         \override Stem.direction = #down
@@ -3694,8 +3694,8 @@ def slur_up(
                         \revert Stem.direction
                         r4
                         \revert Slur.direction
-                        \revert TupletBracket.staff-padding
                         \revert TupletBracket.direction
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -5147,8 +5147,8 @@ def text_spanner_staff_padding(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
                     {
-                        \override TextSpanner.staff-padding = 6
                         \override TextScript.staff-padding = 6
+                        \override TextSpanner.staff-padding = 6
                         \override TupletBracket.staff-padding = 2
                         \time 11/8
                         r8
@@ -5188,8 +5188,8 @@ def text_spanner_staff_padding(
                         a'16
                         \stopTextSpan
                         r4
-                        \revert TextSpanner.staff-padding
                         \revert TextScript.staff-padding
+                        \revert TextSpanner.staff-padding
                         \revert TupletBracket.staff-padding
                     }
                 }
@@ -5679,8 +5679,8 @@ def tuplet_bracket_down(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
                     {
-                        \override TupletBracket.staff-padding = 2
                         \override TupletBracket.direction = #down
+                        \override TupletBracket.staff-padding = 2
                         \time 11/8
                         r8
                         c'16
@@ -5712,8 +5712,8 @@ def tuplet_bracket_down(
                     {
                         a'16
                         r4
-                        \revert TupletBracket.staff-padding
                         \revert TupletBracket.direction
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -6004,8 +6004,8 @@ def tuplet_bracket_up(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
                     {
-                        \override TupletBracket.staff-padding = 2
                         \override TupletBracket.direction = #up
+                        \override TupletBracket.staff-padding = 2
                         \time 11/8
                         r8
                         c'16
@@ -6037,8 +6037,8 @@ def tuplet_bracket_up(
                     {
                         a'16
                         r4
-                        \revert TupletBracket.staff-padding
                         \revert TupletBracket.direction
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -6108,8 +6108,8 @@ def tuplet_number_extra_offset(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
                     {
-                        \override TupletBracket.staff-padding = 2
                         \once \override TupletNumber.extra-offset = #'(-1 . 0)
+                        \override TupletBracket.staff-padding = 2
                         \time 11/8
                         r8
                         c'16

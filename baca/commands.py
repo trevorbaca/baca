@@ -3933,8 +3933,8 @@ class RegisterInterpolationCommand(_command.Command):
                 {
                     \scaleDurations #'(1 . 1)
                     {
-                        \time 3/2
                         \abjad-color-music #'green
+                        \time 3/2
                         fs'16
                         [
                         \abjad-color-music #'green
@@ -4096,8 +4096,8 @@ class RegisterInterpolationCommand(_command.Command):
                 {
                     \scaleDurations #'(1 . 1)
                     {
-                        \time 3/2
                         \abjad-color-music #'red
+                        \time 3/2
                         fs'16
                         [
                         \abjad-color-music #'red
@@ -4952,8 +4952,8 @@ def bass_to_octave(
                 {
                     \scaleDurations #'(1 . 1)
                     {
-                        \time 5/4
                         \abjad-color-music #'green
+                        \time 5/4
                         <c d bf>8
                         [
                         ~
@@ -5039,8 +5039,8 @@ def bass_to_octave(
                 {
                     \scaleDurations #'(1 . 1)
                     {
-                        \time 5/4
                         \abjad-color-music #'red
+                        \time 5/4
                         <c d bf>8
                         [
                         ~
@@ -5138,8 +5138,8 @@ def center_to_octave(
                 {
                     \scaleDurations #'(1 . 1)
                     {
-                        \time 5/4
                         \abjad-color-music #'green
+                        \time 5/4
                         <c, d, bf,>8
                         [
                         ~
@@ -5225,8 +5225,8 @@ def center_to_octave(
                 {
                     \scaleDurations #'(1 . 1)
                     {
-                        \time 5/4
                         \abjad-color-music #'red
+                        \time 5/4
                         <c d bf>8
                         [
                         ~
@@ -6290,8 +6290,8 @@ def soprano_to_octave(
                 {
                     \scaleDurations #'(1 . 1)
                     {
-                        \time 5/4
                         \abjad-color-music #'green
+                        \time 5/4
                         <c,, d,, bf,,>8
                         [
                         ~
@@ -6377,8 +6377,8 @@ def soprano_to_octave(
                 {
                     \scaleDurations #'(1 . 1)
                     {
-                        \time 5/4
                         \abjad-color-music #'red
+                        \time 5/4
                         <c d bf>8
                         [
                         ~
@@ -10166,8 +10166,8 @@ def color(
                     \times 9/10
                     {
                         \override TupletBracket.staff-padding = 2
-                        \time 11/8
                         \abjad-color-music #'red
+                        \time 11/8
                         r8
                         \abjad-color-music #'blue
                         c'16
@@ -10512,8 +10512,8 @@ def dynamic_down(*, selector=lambda _: abjad.select.leaf(_, 0)) -> IndicatorComm
                     \times 9/10
                     {
                         \override TupletBracket.staff-padding = 2
-                        \time 11/8
                         \dynamicDown
+                        \time 11/8
                         r8
                         c'16
                         \p
@@ -10603,8 +10603,8 @@ def dynamic_up(*, selector=lambda _: abjad.select.leaf(_, 0)) -> IndicatorComman
                     \times 9/10
                     {
                         \override TupletBracket.staff-padding = 2
-                        \time 11/8
                         \dynamicUp
+                        \time 11/8
                         r8
                         c'16
                         \p

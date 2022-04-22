@@ -60,17 +60,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -79,8 +79,8 @@ r"""
                         <<
                             \context Voice = "Music_Voice"
                             {
-                                \abjad-invisible-music-coloring
                                 %@% \abjad-invisible-music
+                                \abjad-invisible-music-coloring
                                 \clef "treble"
                                 \once \override Staff.Clef.color = #(x11-color 'DarkViolet)
                                 %@% \override Staff.Clef.color = ##f
@@ -153,17 +153,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -172,8 +172,8 @@ r"""
                         <<
                             \context Voice = "Music_Voice"
                             {
-                                \abjad-invisible-music-coloring
                                 %@% \abjad-invisible-music
+                                \abjad-invisible-music-coloring
                                 \clef "treble"
                                 \once \override Staff.Clef.color = #(x11-color 'blue)
                                 %@% \override Staff.Clef.color = ##f
@@ -255,17 +255,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -274,8 +274,8 @@ r"""
                         <<
                             \context Voice = "Music_Voice"
                             {
-                                \abjad-invisible-music-coloring
                                 %@% \abjad-invisible-music
+                                \abjad-invisible-music-coloring
                                 \clef "alto"
                                 \once \override Staff.Clef.color = #(x11-color 'blue)
                                 %@% \override Staff.Clef.color = ##f
@@ -361,17 +361,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -380,8 +380,8 @@ r"""
                         <<
                             \context Voice = "Music_Voice"
                             {
-                                \abjad-invisible-music-coloring
                                 %@% \abjad-invisible-music
+                                \abjad-invisible-music-coloring
                                 \clef "treble"
                                 \once \override Staff.Clef.color = #(x11-color 'green4)
                                 %@% \override Staff.Clef.color = ##f
@@ -455,20 +455,20 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
-                        \noBreak
                         \baca-new-spacing-section #1 #24
+                        \noBreak
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -477,8 +477,8 @@ r"""
                         <<
                             \context Voice = "Music_Voice"
                             {
-                                \abjad-invisible-music-coloring
                                 %@% \abjad-invisible-music
+                                \abjad-invisible-music-coloring
                                 \clef "treble"
                                 \once \override Staff.Clef.color = #(x11-color 'blue)
                                 %@% \override Staff.Clef.color = ##f
@@ -570,17 +570,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -589,8 +589,8 @@ r"""
                         <<
                             \context Voice = "Music_Voice"
                             {
-                                \abjad-invisible-music-coloring
                                 %@% \abjad-invisible-music
+                                \abjad-invisible-music-coloring
                                 \clef "treble"
                                 \once \override Staff.Clef.color = #(x11-color 'DeepPink1)
                                 %@% \override Staff.Clef.color = ##f
@@ -659,8 +659,8 @@ r"""
                     \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
                         \baca-time-signature-color #'blue
+                        \time 3/8
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
@@ -728,8 +728,8 @@ r"""
                     \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
                         \baca-time-signature-color #'blue
+                        \time 3/8
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
@@ -799,8 +799,8 @@ r"""
                     \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
                         \baca-time-signature-color #'blue
+                        \time 3/8
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
@@ -860,8 +860,8 @@ r"""
                     \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
                         \baca-time-signature-color #'blue
+                        \time 3/8
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
@@ -932,8 +932,8 @@ r"""
                     \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
                         \baca-time-signature-color #'blue
+                        \time 3/8
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
@@ -991,8 +991,8 @@ r"""
                     \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
                         \baca-time-signature-color #'blue
+                        \time 3/8
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
@@ -1062,8 +1062,8 @@ r"""
                     \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
                         \baca-time-signature-color #'blue
+                        \time 3/8
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
@@ -1123,8 +1123,8 @@ r"""
                     \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
                         \baca-time-signature-color #'blue
+                        \time 3/8
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
@@ -1210,17 +1210,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -1253,17 +1253,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -1292,17 +1292,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -1363,17 +1363,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -1406,17 +1406,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -1446,17 +1446,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -1526,17 +1526,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -1569,17 +1569,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -1608,17 +1608,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -1690,17 +1690,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -1733,17 +1733,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -1773,17 +1773,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -1855,20 +1855,20 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 4/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 4/8
                         s1 * 1/2
-                        \noBreak
                         \baca-new-spacing-section #1 #24
+                        \noBreak
                         s1 * 1/2
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 1/2
                     }
@@ -1903,20 +1903,20 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 4/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 4/8
                         s1 * 1/2
-                        \noBreak
                         \baca-new-spacing-section #1 #24
+                        \noBreak
                         s1 * 1/2
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 1/2
                     }
@@ -1947,20 +1947,20 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 4/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 4/8
                         s1 * 1/2
-                        \noBreak
                         \baca-new-spacing-section #1 #24
+                        \noBreak
                         s1 * 1/2
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 1/2
                     }
@@ -2040,17 +2040,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -2083,17 +2083,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -2122,17 +2122,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -2222,17 +2222,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -2271,17 +2271,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -2316,17 +2316,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -2394,17 +2394,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -2443,17 +2443,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -2488,17 +2488,17 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
@@ -2574,25 +2574,25 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
                     \context Voice = "Music_Voice"
                     {
-                        \set Staff.shortInstrumentName =
-                        \markup III+IV
                         \set Staff.instrumentName =
+                        \markup III+IV
+                        \set Staff.shortInstrumentName =
                         \markup III+IV
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'4.
@@ -2625,25 +2625,25 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
                     \context Voice = "Music_Voice"
                     {
-                        \set Staff.shortInstrumentName =
-                        \markup III+IV
                         \set Staff.instrumentName =
+                        \markup III+IV
+                        \set Staff.shortInstrumentName =
                         \markup III+IV
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'4.
@@ -2672,25 +2672,25 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
                     \context Voice = "Music_Voice"
                     {
-                        \set Staff.shortInstrumentName =
-                        \markup III+IV
                         \set Staff.instrumentName =
+                        \markup III+IV
+                        \set Staff.shortInstrumentName =
                         \markup III+IV
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'4.
@@ -2762,25 +2762,25 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
                     \context Voice = "Music_Voice"
                     {
-                        \set Staff.shortInstrumentName =
-                        \markup I+II
                         \set Staff.instrumentName =
+                        \markup I+II
+                        \set Staff.shortInstrumentName =
                         \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'green4)
                         b'4.
@@ -2813,25 +2813,25 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
                     \context Voice = "Music_Voice"
                     {
-                        \set Staff.shortInstrumentName =
-                        \markup I+II
                         \set Staff.instrumentName =
+                        \markup I+II
+                        \set Staff.shortInstrumentName =
                         \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'green4)
                         b'4.
@@ -2860,25 +2860,25 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
                     \context Voice = "Music_Voice"
                     {
-                        \set Staff.shortInstrumentName =
-                        \markup I+II
                         \set Staff.instrumentName =
+                        \markup I+II
+                        \set Staff.shortInstrumentName =
                         \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'green4)
                         b'4.
@@ -2951,20 +2951,20 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 4/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 4/8
                         s1 * 1/2
-                        \noBreak
                         \baca-new-spacing-section #1 #24
+                        \noBreak
                         s1 * 1/2
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 1/2
                     }
@@ -3011,20 +3011,20 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 4/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 4/8
                         s1 * 1/2
-                        \noBreak
                         \baca-new-spacing-section #1 #24
+                        \noBreak
                         s1 * 1/2
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 1/2
                     }
@@ -3067,20 +3067,20 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 4/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 4/8
                         s1 * 1/2
-                        \noBreak
                         \baca-new-spacing-section #1 #24
+                        \noBreak
                         s1 * 1/2
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 1/2
                     }
@@ -3172,25 +3172,25 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
                     \context Voice = "Music_Voice"
                     {
-                        \set Staff.shortInstrumentName =
-                        \markup I+II
                         \set Staff.instrumentName =
+                        \markup I+II
+                        \set Staff.shortInstrumentName =
                         \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                         b'4.
@@ -3223,25 +3223,25 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
                     \context Voice = "Music_Voice"
                     {
-                        \set Staff.shortInstrumentName =
-                        \markup I+II
                         \set Staff.instrumentName =
+                        \markup I+II
+                        \set Staff.shortInstrumentName =
                         \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                         b'4.
@@ -3270,25 +3270,25 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         \break
                         s1 * 3/8
                     }
                     \context Voice = "Music_Voice"
                     {
-                        \set Staff.shortInstrumentName =
-                        \markup I+II
                         \set Staff.instrumentName =
+                        \markup I+II
+                        \set Staff.shortInstrumentName =
                         \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                         b'4.
@@ -3370,21 +3370,21 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #0 #'(11)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \time 4/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 4/8
                         s1 * 1/2
                         \baca-lbsd #15 #'(11)
-                        \noBreak
                         \baca-new-spacing-section #1 #24
+                        \noBreak
                         \break
                         s1 * 1/2
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         s1 * 1/2
                     }
                     \context Voice = "Music_Voice"
@@ -3399,9 +3399,9 @@ r"""
                         ^ \baca-explicit-indicator-markup "[“I+II”]"
                         %@% ^ \baca-explicit-indicator-markup "[“III+IV”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
+                        %@% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName =
                         \markup I+II
-                        %@% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName =
                         \markup III+IV
                         b'2
@@ -3479,13 +3479,13 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #4 #'(8)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #25
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         %@% - \abjad-invisible-line
                         %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "112"
@@ -3493,13 +3493,13 @@ r"""
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'blue
                         \bacaStartTextSpanMM
-                        \noBreak
                         \baca-new-spacing-section #1 #25
-                        s1 * 3/8
                         \noBreak
+                        s1 * 3/8
                         \baca-new-spacing-section #1 #4
-                        \time 1/4
+                        \noBreak
                         \baca-time-signature-transparent
+                        \time 1/4
                         s1 * 1/4
                         \bacaStopTextSpanMM
                         \once \override Score.BarLine.transparent = ##t
@@ -3512,15 +3512,15 @@ r"""
                         <<
                             \context Voice = "Music_Voice"
                             {
-                                \abjad-invisible-music-coloring
                                 %@% \abjad-invisible-music
+                                \abjad-invisible-music-coloring
                                 b'1 * 1/4
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                             }
                             \context Voice = "Rest_Voice"
                             {
-                                \once \override Score.TimeSignature.X-extent = ##f
                                 \once \override MultiMeasureRest.transparent = ##t
+                                \once \override Score.TimeSignature.X-extent = ##f
                                 \stopStaff
                                 \once \override Staff.StaffSymbol.transparent = ##t
                                 \startStaff
@@ -3595,14 +3595,14 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #4 #'(8)
-                        \override TextSpanner.staff-padding = 4
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
+                        \override TextSpanner.staff-padding = 4
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         %@% - \abjad-invisible-line
                         %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "112"
@@ -3610,14 +3610,14 @@ r"""
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'blue
                         \bacaStartTextSpanMM
-                        \noBreak
                         \baca-new-spacing-section #1 #24
+                        \noBreak
                         s1 * 3/8
                         \revert TextSpanner.staff-padding
-                        \noBreak
                         \baca-new-spacing-section #1 #4
-                        \time 1/4
+                        \noBreak
                         \baca-time-signature-transparent
+                        \time 1/4
                         s1 * 1/4
                         \bacaStopTextSpanMM
                         \once \override Score.BarLine.transparent = ##t
@@ -3630,15 +3630,15 @@ r"""
                         <<
                             \context Voice = "Music_Voice"
                             {
-                                \abjad-invisible-music-coloring
                                 %@% \abjad-invisible-music
+                                \abjad-invisible-music-coloring
                                 b'1 * 1/4
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                             }
                             \context Voice = "Rest_Voice"
                             {
-                                \once \override Score.TimeSignature.X-extent = ##f
                                 \once \override MultiMeasureRest.transparent = ##t
+                                \once \override Score.TimeSignature.X-extent = ##f
                                 \stopStaff
                                 \once \override Staff.StaffSymbol.transparent = ##t
                                 \startStaff
@@ -3713,14 +3713,14 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #4 #'(8)
-                        \override TextSpanner.staff-padding = 4
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
+                        \override TextSpanner.staff-padding = 4
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         %@% - \abjad-invisible-line
                         %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "90"
@@ -3728,8 +3728,8 @@ r"""
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "90" #'green4
                         \bacaStartTextSpanMM
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         s1 * 3/8
                         \bacaStopTextSpanMM
                         \revert TextSpanner.staff-padding
@@ -3796,13 +3796,13 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #4 #'(8)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         %@% - \abjad-invisible-line
                         %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "112"
@@ -3810,8 +3810,8 @@ r"""
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'blue
                         \bacaStartTextSpanMM
-                        \noBreak
                         \baca-new-spacing-section #1 #24
+                        \noBreak
                         s1 * 3/8
                         \bacaStopTextSpanMM
                         %@% - \abjad-invisible-line
@@ -3820,10 +3820,10 @@ r"""
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'DeepPink1
                         \bacaStartTextSpanMM
-                        \noBreak
                         \baca-new-spacing-section #1 #4
-                        \time 1/4
+                        \noBreak
                         \baca-time-signature-transparent
+                        \time 1/4
                         s1 * 1/4
                         \bacaStopTextSpanMM
                         \once \override Score.BarLine.transparent = ##t
@@ -3836,15 +3836,15 @@ r"""
                         <<
                             \context Voice = "Music_Voice"
                             {
-                                \abjad-invisible-music-coloring
                                 %@% \abjad-invisible-music
+                                \abjad-invisible-music-coloring
                                 b'1 * 1/4
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                             }
                             \context Voice = "Rest_Voice"
                             {
-                                \once \override Score.TimeSignature.X-extent = ##f
                                 \once \override MultiMeasureRest.transparent = ##t
+                                \once \override Score.TimeSignature.X-extent = ##f
                                 \stopStaff
                                 \once \override Staff.StaffSymbol.transparent = ##t
                                 \startStaff
@@ -3920,14 +3920,14 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #4 #'(8)
-                        \override TextSpanner.staff-padding = 4
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
+                        \override TextSpanner.staff-padding = 4
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         %@% - \abjad-invisible-line
                         %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "112"
@@ -3935,14 +3935,14 @@ r"""
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'DeepPink1
                         \bacaStartTextSpanMM
-                        \noBreak
                         \baca-new-spacing-section #1 #24
+                        \noBreak
                         s1 * 3/8
                         \revert TextSpanner.staff-padding
-                        \noBreak
                         \baca-new-spacing-section #1 #4
-                        \time 1/4
+                        \noBreak
                         \baca-time-signature-transparent
+                        \time 1/4
                         s1 * 1/4
                         \bacaStopTextSpanMM
                         \once \override Score.BarLine.transparent = ##t
@@ -3955,15 +3955,15 @@ r"""
                         <<
                             \context Voice = "Music_Voice"
                             {
-                                \abjad-invisible-music-coloring
                                 %@% \abjad-invisible-music
+                                \abjad-invisible-music-coloring
                                 b'1 * 1/4
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                             }
                             \context Voice = "Rest_Voice"
                             {
-                                \once \override Score.TimeSignature.X-extent = ##f
                                 \once \override MultiMeasureRest.transparent = ##t
+                                \once \override Score.TimeSignature.X-extent = ##f
                                 \stopStaff
                                 \once \override Staff.StaffSymbol.transparent = ##t
                                 \startStaff
@@ -4036,8 +4036,8 @@ r"""
                     \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
                         \baca-time-signature-color #'blue
+                        \time 3/8
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
@@ -4123,8 +4123,8 @@ r"""
                     \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
                         \baca-time-signature-color #'blue
+                        \time 3/8
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
@@ -4207,8 +4207,8 @@ r"""
                     \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
                         \baca-time-signature-color #'blue
+                        \time 3/8
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
@@ -4270,8 +4270,8 @@ r"""
                     \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
                         \baca-time-signature-color #'blue
+                        \time 3/8
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
@@ -4342,8 +4342,8 @@ r"""
                     \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
                         \baca-time-signature-color #'blue
+                        \time 3/8
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
@@ -4416,8 +4416,8 @@ r"""
                     \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
                         \baca-time-signature-color #'blue
+                        \time 3/8
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
@@ -4479,8 +4479,8 @@ r"""
                     \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
                         \baca-time-signature-color #'blue
+                        \time 3/8
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
@@ -4557,8 +4557,8 @@ r"""
                     \context Voice = "Global_Skips"
                     {
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
                         \baca-time-signature-color #'blue
+                        \time 3/8
                         s1 * 3/8
                         \baca-new-spacing-section #1 #4
                         s1 * 3/8
@@ -4645,13 +4645,13 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #4 #'(8)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #25
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         %@% - \abjad-dashed-line-with-arrow
                         %@% - \tweak bound-details.left.text \markup \concat { \large \upright accel. \hspace #0.5 }
@@ -4659,13 +4659,13 @@ r"""
                         - \abjad-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'blue) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        \noBreak
                         \baca-new-spacing-section #1 #25
-                        s1 * 3/8
                         \noBreak
+                        s1 * 3/8
                         \baca-new-spacing-section #1 #4
-                        \time 1/4
+                        \noBreak
                         \baca-time-signature-transparent
+                        \time 1/4
                         s1 * 1/4
                         \bacaStopTextSpanMM
                         \once \override Score.BarLine.transparent = ##t
@@ -4678,15 +4678,15 @@ r"""
                         <<
                             \context Voice = "Music_Voice"
                             {
-                                \abjad-invisible-music-coloring
                                 %@% \abjad-invisible-music
+                                \abjad-invisible-music-coloring
                                 b'1 * 1/4
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                             }
                             \context Voice = "Rest_Voice"
                             {
-                                \once \override Score.TimeSignature.X-extent = ##f
                                 \once \override MultiMeasureRest.transparent = ##t
+                                \once \override Score.TimeSignature.X-extent = ##f
                                 \stopStaff
                                 \once \override Staff.StaffSymbol.transparent = ##t
                                 \startStaff
@@ -4757,14 +4757,14 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #4 #'(8)
-                        \override TextSpanner.staff-padding = 4
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
+                        \override TextSpanner.staff-padding = 4
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         %@% - \abjad-dashed-line-with-arrow
                         %@% - \tweak bound-details.left.text \markup \concat { \large \upright accel. \hspace #0.5 }
@@ -4772,8 +4772,8 @@ r"""
                         - \abjad-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'blue) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         s1 * 3/8
                         \bacaStopTextSpanMM
                         \revert TextSpanner.staff-padding
@@ -4847,14 +4847,14 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #4 #'(8)
-                        \override TextSpanner.staff-padding = 4
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
+                        \override TextSpanner.staff-padding = 4
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         %@% - \abjad-dashed-line-with-arrow
                         %@% - \tweak bound-details.left.text \markup \concat { \large \upright accel. \hspace #0.5 }
@@ -4862,8 +4862,8 @@ r"""
                         - \abjad-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'green4) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         s1 * 3/8
                         \bacaStopTextSpanMM
                         \revert TextSpanner.staff-padding
@@ -4930,13 +4930,13 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #4 #'(8)
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         %@% - \abjad-dashed-line-with-arrow
                         %@% - \tweak bound-details.left.text \markup \concat { \large \upright accel. \hspace #0.5 }
@@ -4944,8 +4944,8 @@ r"""
                         - \abjad-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'blue) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        \noBreak
                         \baca-new-spacing-section #1 #24
+                        \noBreak
                         s1 * 3/8
                         \bacaStopTextSpanMM
                         %@% - \abjad-dashed-line-with-arrow
@@ -4954,8 +4954,8 @@ r"""
                         - \abjad-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'DeepPink1) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         s1 * 3/8
                         \bacaStopTextSpanMM
                     }
@@ -5028,14 +5028,14 @@ r"""
                 <<
                     \context Voice = "Global_Skips"
                     {
-                        \baca-lbsd #4 #'(8)
-                        \override TextSpanner.staff-padding = 4
                         \autoPageBreaksOff
-                        \noBreak
+                        \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
-                        \time 3/8
+                        \noBreak
+                        \override TextSpanner.staff-padding = 4
                         \baca-time-signature-color #'blue
                         \pageBreak
+                        \time 3/8
                         s1 * 3/8
                         %@% - \abjad-dashed-line-with-arrow
                         %@% - \tweak bound-details.left.text \markup \concat { \large \upright accel. \hspace #0.5 }
@@ -5043,8 +5043,8 @@ r"""
                         - \abjad-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'DeepPink1) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        \noBreak
                         \baca-new-spacing-section #1 #4
+                        \noBreak
                         s1 * 3/8
                         \bacaStopTextSpanMM
                         \revert TextSpanner.staff-padding

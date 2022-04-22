@@ -645,7 +645,6 @@ def directory():
 
 def handle_build_tags(_segments_directory):
     contents_directory = baca.path.get_contents_directory(_segments_directory)
-    # segments_directory = contents_directory / "segments"
     segments_directory = contents_directory / "sections"
     paths = sorted(segments_directory.glob("*"))
     segment_directories = [_ for _ in paths if _.is_dir()]

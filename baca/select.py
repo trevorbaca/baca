@@ -251,8 +251,8 @@ def clparts(
                 \tweak text #tuplet-number::calc-fraction-text
                 \times 10/9
                 {
-                    \time 7/4
                     \abjad-color-music #'red
+                    \time 7/4
                     r16
                     \abjad-color-music #'red
                     bf'16
@@ -347,8 +347,8 @@ def cmgroups(
                 autoBeaming = ##f
             }
             {
-                \time 2/8
                 \abjad-color-music #'red
+                \time 2/8
                 r8
                 \abjad-color-music #'red
                 d'8
@@ -356,15 +356,15 @@ def cmgroups(
                 e'8
                 \abjad-color-music #'red
                 f'8
-                \time 3/8
                 \abjad-color-music #'blue
+                \time 3/8
                 g'8
                 \abjad-color-music #'blue
                 a'8
                 \abjad-color-music #'blue
                 b'8
-                \time 1/8
                 \abjad-color-music #'blue
+                \time 1/8
                 r8
                 d''8
             }
@@ -1140,8 +1140,8 @@ def lparts(
                 \tweak text #tuplet-number::calc-fraction-text
                 \times 10/9
                 {
-                    \time 7/4
                     \abjad-color-music #'red
+                    \time 7/4
                     r16
                     \abjad-color-music #'red
                     bf'16
@@ -1913,8 +1913,8 @@ def lts(
                 \tweak text #tuplet-number::calc-fraction-text
                 \times 10/9
                 {
-                    \time 7/4
                     \abjad-color-music #'red
+                    \time 7/4
                     r16
                     \abjad-color-music #'blue
                     bf'16
@@ -2006,8 +2006,8 @@ def mgroups(
                 autoBeaming = ##f
             }
             {
-                \time 2/8
                 \abjad-color-music #'red
+                \time 2/8
                 r8
                 \abjad-color-music #'red
                 d'8
@@ -2074,8 +2074,8 @@ def mleaves(
                 autoBeaming = ##f
             }
             {
-                \time 2/8
                 \abjad-color-music #'red
+                \time 2/8
                 r8
                 \abjad-color-music #'blue
                 d'8
@@ -2083,8 +2083,8 @@ def mleaves(
                 e'8
                 \abjad-color-music #'blue
                 f'8
-                \time 3/8
                 \abjad-color-music #'red
+                \time 3/8
                 g'8
                 \abjad-color-music #'blue
                 a'8
@@ -2136,15 +2136,15 @@ def mleaves(
                 e'8
                 \abjad-color-music #'blue
                 f'8
-                \time 3/8
                 \abjad-color-music #'red
+                \time 3/8
                 g'8
                 \abjad-color-music #'blue
                 a'8
                 \abjad-color-music #'red
                 b'8
-                \time 1/8
                 \abjad-color-music #'blue
+                \time 1/8
                 r8
             }
 
@@ -2488,8 +2488,8 @@ def omgroups(
                 autoBeaming = ##f
             }
             {
-                \time 2/8
                 \abjad-color-music #'red
+                \time 2/8
                 r8
                 \abjad-color-music #'red
                 d'8
@@ -2497,15 +2497,15 @@ def omgroups(
                 e'8
                 \abjad-color-music #'red
                 f'8
-                \time 3/8
                 \abjad-color-music #'blue
+                \time 3/8
                 g'8
                 \abjad-color-music #'blue
                 a'8
                 \abjad-color-music #'blue
                 b'8
-                \time 1/8
                 \abjad-color-music #'blue
+                \time 1/8
                 r8
                 \abjad-color-music #'blue
                 d''8
@@ -3994,8 +3994,8 @@ def rmleaves(
                 autoBeaming = ##f
             }
             {
-                \time 2/8
                 \abjad-color-music #'red
+                \time 2/8
                 r8
                 \abjad-color-music #'blue
                 d'8
@@ -4003,8 +4003,8 @@ def rmleaves(
                 e'8
                 \abjad-color-music #'blue
                 f'8
-                \time 3/8
                 \abjad-color-music #'red
+                \time 3/8
                 g'8
                 a'8
                 b'8
