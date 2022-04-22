@@ -123,10 +123,10 @@ Constellation.
                     <b cs' f'>4
                     ^ \markup { 1-12 }
                     <b ef' f' fs' a' cs''>4
-                    ^ \markup { 1-13 }
                     - \tweak staff-padding 22
                     - \tweak transparent ##t
                     ^ \markup A
+                    ^ \markup { 1-13 }
                     <b f' g' ef'' fs'' a'' cs'''>4
                     ^ \markup { 1-14 }
                     <b f' g'' ef''' fs''' a''' cs''''>4
@@ -150,10 +150,10 @@ Constellation.
                     <g' bf' ef'' fs'' af'' a'' b'' cs''' f'''>4
                     ^ \markup { 1-24 }
                     <bf' g'' af'' b'' ef''' f''' fs''' a''' cs''''>4
-                    ^ \markup { 1-25 }
                     - \tweak staff-padding 22
                     - \tweak transparent ##t
                     ^ \markup A
+                    ^ \markup { 1-25 }
                     <bf'' af''' b''' f''''>4
                     ^ \markup { 1-26 }
                     <cs' bf'' af''' b''' f''''>4
@@ -177,10 +177,10 @@ Constellation.
                     r4
                     ^ \markup { 1-36 }
                     cs'4
-                    ^ \markup { 1-37 }
                     - \tweak staff-padding 22
                     - \tweak transparent ##t
                     ^ \markup A
+                    ^ \markup { 1-37 }
                     <ef' fs' a' cs''>4
                     ^ \markup { 1-38 }
                     <g' ef'' fs'' a'' cs'''>4
@@ -204,10 +204,10 @@ Constellation.
                     <ef' fs' af' a' b' cs'' f''>4
                     ^ \markup { 1-48 }
                     <g' af' b' ef'' f'' fs'' a'' cs'''>4
-                    ^ \markup { 1-49 }
                     - \tweak staff-padding 22
                     - \tweak transparent ##t
                     ^ \markup A
+                    ^ \markup { 1-49 }
                     <af' b' f'' g'' ef''' fs''' a''' cs''''>4
                     ^ \markup { 1-50 }
                     <bf' af'' b'' f'''>4
@@ -231,10 +231,10 @@ Constellation.
                     <g'' bf'' ef''' fs''' af''' a''' b''' cs'''' f''''>4
                     ^ \markup { 1-60 }
                     e'4
-                    ^ \markup { 1-61 }
                     - \tweak staff-padding 22
                     - \tweak transparent ##t
                     ^ \markup A
+                    ^ \markup { 1-61 }
                     <cs' e'>4
                     ^ \markup { 1-62 }
                     <ef' e' fs' a' cs''>4
@@ -258,10 +258,10 @@ Constellation.
                     <b cs' e' f'>4
                     ^ \markup { 1-72 }
                     <b ef' e' f' fs' a' cs''>4
-                    ^ \markup { 1-73 }
                     - \tweak staff-padding 22
                     - \tweak transparent ##t
                     ^ \markup A
+                    ^ \markup { 1-73 }
                     <b e' f' g' ef'' fs'' a'' cs'''>4
                     ^ \markup { 1-74 }
                     <b e' f' g'' ef''' fs''' a''' cs''''>4
@@ -285,10 +285,10 @@ Constellation.
                     <e' g' bf' ef'' fs'' af'' a'' b'' cs''' f'''>4
                     ^ \markup { 1-84 }
                     <e' bf' g'' af'' b'' ef''' f''' fs''' a''' cs''''>4
-                    ^ \markup { 1-85 }
                     - \tweak staff-padding 22
                     - \tweak transparent ##t
                     ^ \markup A
+                    ^ \markup { 1-85 }
                     <e' bf'' af''' b''' f''''>4
                     ^ \markup { 1-86 }
                     <cs' e' bf'' af''' b''' f''''>4
@@ -312,10 +312,10 @@ Constellation.
                     <c' d' e''>4
                     ^ \markup { 1-96 }
                     <c' cs' d' e''>4
-                    ^ \markup { 1-97 }
                     - \tweak staff-padding 22
                     - \tweak transparent ##t
                     ^ \markup A
+                    ^ \markup { 1-97 }
                     <c' d' ef' fs' a' cs'' e''>4
                     ^ \markup { 1-98 }
                     <c' d' g' ef'' e'' fs'' a'' cs'''>4
@@ -339,10 +339,10 @@ Constellation.
                     <c' d' ef' fs' af' a' b' cs'' e'' f''>4
                     ^ \markup { 1-108 }
                     <c' d' g' af' b' ef'' e'' f'' fs'' a'' cs'''>4
-                    ^ \markup { 1-109 }
                     - \tweak staff-padding 22
                     - \tweak transparent ##t
                     ^ \markup A
+                    ^ \markup { 1-109 }
                     <c' d' af' b' e'' f'' g'' ef''' fs''' a''' cs''''>4
                     ^ \markup { 1-110 }
                     <c' d' bf' e'' af'' b'' f'''>4
@@ -366,10 +366,10 @@ Constellation.
                     <c' d' e'' g'' bf'' ef''' fs''' af''' a''' b''' cs'''' f''''>4
                     ^ \markup { 1-120 }
                     <c'' d'' e'''>4
-                    ^ \markup { 1-121 }
                     - \tweak staff-padding 22
                     - \tweak transparent ##t
                     ^ \markup A
+                    ^ \markup { 1-121 }
                     <cs' c'' d'' e'''>4
                     ^ \markup { 1-122 }
                     <ef' fs' a' c'' cs'' d'' e'''>4
@@ -393,10 +393,10 @@ Constellation.
                     <b cs' f' c'' d'' e'''>4
                     ^ \markup { 1-132 }
                     <b ef' f' fs' a' c'' cs'' d'' e'''>4
-                    ^ \markup { 1-133 }
                     - \tweak staff-padding 22
                     - \tweak transparent ##t
                     ^ \markup A
+                    ^ \markup { 1-133 }
                     <b f' g' c'' d'' ef'' fs'' a'' cs''' e'''>4
                     ^ \markup { 1-134 }
                     <b f' c'' d'' g'' ef''' e''' fs''' a''' cs''''>4
@@ -420,10 +420,10 @@ Constellation.
                     <g' bf' c'' d'' ef'' fs'' af'' a'' b'' cs''' e''' f'''>4
                     ^ \markup { 1-144 }
                     <bf' c'' d'' g'' af'' b'' ef''' e''' f''' fs''' a''' cs''''>4
-                    ^ \markup { 1-145 }
                     - \tweak staff-padding 22
                     - \tweak transparent ##t
                     ^ \markup A
+                    ^ \markup { 1-145 }
                     <c'' d'' bf'' e''' af''' b''' f''''>4
                     ^ \markup { 1-146 }
                     <cs' c'' d'' bf'' e''' af''' b''' f''''>4
@@ -447,10 +447,10 @@ Constellation.
                     <c''' d''' e''''>4
                     ^ \markup { 1-156 }
                     <cs' c''' d''' e''''>4
-                    ^ \markup { 1-157 }
                     - \tweak staff-padding 22
                     - \tweak transparent ##t
                     ^ \markup A
+                    ^ \markup { 1-157 }
                     <ef' fs' a' cs'' c''' d''' e''''>4
                     ^ \markup { 1-158 }
                     <g' ef'' fs'' a'' c''' cs''' d''' e''''>4
@@ -474,10 +474,10 @@ Constellation.
                     <ef' fs' af' a' b' cs'' f'' c''' d''' e''''>4
                     ^ \markup { 1-168 }
                     <g' af' b' ef'' f'' fs'' a'' c''' cs''' d''' e''''>4
-                    ^ \markup { 1-169 }
                     - \tweak staff-padding 22
                     - \tweak transparent ##t
                     ^ \markup A
+                    ^ \markup { 1-169 }
                     <af' b' f'' g'' c''' d''' ef''' fs''' a''' cs'''' e''''>4
                     ^ \markup { 1-170 }
                     <bf' af'' b'' c''' d''' f''' e''''>4

@@ -3487,12 +3487,12 @@ r"""
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        %@% - \abjad-invisible-line
-                        %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "112"
-                        %@% \bacaStartTextSpanMM
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'blue
                         \bacaStartTextSpanMM
+                        %@% - \abjad-invisible-line
+                        %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "112"
+                        %@% \bacaStartTextSpanMM
                         \baca-new-spacing-section #1 #25
                         \noBreak
                         s1 * 3/8
@@ -3604,12 +3604,12 @@ r"""
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        %@% - \abjad-invisible-line
-                        %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "112"
-                        %@% \bacaStartTextSpanMM
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'blue
                         \bacaStartTextSpanMM
+                        %@% - \abjad-invisible-line
+                        %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "112"
+                        %@% \bacaStartTextSpanMM
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
@@ -3722,12 +3722,12 @@ r"""
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        %@% - \abjad-invisible-line
-                        %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "90"
-                        %@% \bacaStartTextSpanMM
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "90" #'green4
                         \bacaStartTextSpanMM
+                        %@% - \abjad-invisible-line
+                        %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "90"
+                        %@% \bacaStartTextSpanMM
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         s1 * 3/8
@@ -3804,22 +3804,22 @@ r"""
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        %@% - \abjad-invisible-line
-                        %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "112"
-                        %@% \bacaStartTextSpanMM
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'blue
                         \bacaStartTextSpanMM
+                        %@% - \abjad-invisible-line
+                        %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "112"
+                        %@% \bacaStartTextSpanMM
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
                         \bacaStopTextSpanMM
-                        %@% - \abjad-invisible-line
-                        %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "112"
-                        %@% \bacaStartTextSpanMM
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'DeepPink1
                         \bacaStartTextSpanMM
+                        %@% - \abjad-invisible-line
+                        %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "112"
+                        %@% \bacaStartTextSpanMM
                         \baca-new-spacing-section #1 #4
                         \noBreak
                         \baca-time-signature-transparent
@@ -3929,12 +3929,12 @@ r"""
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        %@% - \abjad-invisible-line
-                        %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "112"
-                        %@% \bacaStartTextSpanMM
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'DeepPink1
                         \bacaStartTextSpanMM
+                        %@% - \abjad-invisible-line
+                        %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "112"
+                        %@% \bacaStartTextSpanMM
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8

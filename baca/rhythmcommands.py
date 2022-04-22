@@ -735,13 +735,13 @@ def make_repeat_tied_notes(
                         - \tweak stencil ##f
                         ~
                         b'4
-                        \repeatTie
                         - \tweak stencil ##f
                         ~
+                        \repeatTie
                         b'4.
-                        \repeatTie
                         - \tweak stencil ##f
                         ~
+                        \repeatTie
                         b'4
                         \repeatTie
                     }

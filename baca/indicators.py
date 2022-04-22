@@ -83,6 +83,7 @@ class Accelerando:
         if self.markup is not None:
             assert isinstance(self.markup, abjad.Markup), repr(self.markup)
 
+    # TODO: remove
     def __str__(self) -> str:
         r"""
         Gets string representation of accelerando.
@@ -111,8 +112,7 @@ class Accelerando:
         return str(self)
 
     def _default_markup(self):
-        contents = r"\large \upright accel."
-        return abjad.Markup(rf"\markup {contents}")
+        return abjad.Markup(r"\markup \large \upright accel.")
 
     def _get_lilypond_format(self):
         return str(self)
@@ -121,10 +121,8 @@ class Accelerando:
         contributions = abjad.ContributionsBySite()
         if not self.hide:
             markup = self._get_markup()
-            contributions_ = markup._get_contributions(
-                component=component, wrapper=wrapper
-            )
-            contributions.update(contributions_)
+            string = markup._get_lilypond_format(wrapper=wrapper)
+            contributions.after.markup.append(string)
         return contributions
 
     def _get_markup(self):
@@ -377,6 +375,7 @@ class Ritardando:
         if self.markup is not None:
             assert isinstance(self.markup, abjad.Markup), repr(self.markup)
 
+    # TODO: remove
     def __str__(self) -> str:
         r"""
         Gets string representation of ritardando.
@@ -415,10 +414,8 @@ class Ritardando:
         contributions = abjad.ContributionsBySite()
         if not self.hide:
             markup = self._get_markup()
-            contributions_ = markup._get_contributions(
-                component=component, wrapper=wrapper
-            )
-            contributions.update(contributions_)
+            string = markup._get_lilypond_format(wrapper=wrapper)
+            contributions.after.markup.append(string)
         return contributions
 
     def _get_markup(self):
