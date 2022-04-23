@@ -293,12 +293,12 @@ def bar_line_transparent(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.rhythm(
         ...         rmakers.talea([1, 1, 1, -1], 8),
         ...         rmakers.beam(),
         ...         rmakers.extract_trivial(),
         ...     ),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.bar_line_transparent(
         ...         selector=lambda _: abjad.select.group_by_measure(_)[1]
         ...     ),
@@ -1300,6 +1300,7 @@ def mmrest_color(
 
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_mmrests(),
         ...     baca.mmrest_color("#(x11-color 'DarkOrchid)"),
         ... )
 
@@ -1343,6 +1344,8 @@ def mmrest_color(
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
+                                \once \override Accidental.stencil = ##f
+                                \once \override NoteColumn.ignore-collision = ##t
                                 b'1 * 1/2
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"2"
                             }
@@ -1407,6 +1410,7 @@ def mmrest_text_color(
 
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_mmrests(),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: baca.select.mmrest(_, 1),
@@ -1454,6 +1458,8 @@ def mmrest_text_color(
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
+                                \once \override Accidental.stencil = ##f
+                                \once \override NoteColumn.ignore-collision = ##t
                                 b'1 * 1/2
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"2"
                             }
@@ -1538,6 +1544,7 @@ def mmrest_text_extra_offset(
 
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_mmrests(),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: baca.select.mmrest(_, 1),
@@ -1585,6 +1592,8 @@ def mmrest_text_extra_offset(
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
+                                \once \override Accidental.stencil = ##f
+                                \once \override NoteColumn.ignore-collision = ##t
                                 b'1 * 1/2
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"2"
                             }
@@ -1634,6 +1643,7 @@ def mmrest_text_padding(
 
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_mmrests(),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: baca.select.mmrest(_, 1),
@@ -1681,6 +1691,8 @@ def mmrest_text_padding(
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
+                                \once \override Accidental.stencil = ##f
+                                \once \override NoteColumn.ignore-collision = ##t
                                 b'1 * 1/2
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"2"
                             }
@@ -1729,6 +1741,7 @@ def mmrest_text_parent_center(
 
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_mmrests(),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: baca.select.mmrest(_, 1),
@@ -1776,6 +1789,8 @@ def mmrest_text_parent_center(
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
+                                \once \override Accidental.stencil = ##f
+                                \once \override NoteColumn.ignore-collision = ##t
                                 b'1 * 1/2
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"2"
                             }
@@ -1825,6 +1840,7 @@ def mmrest_text_staff_padding(
 
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_mmrests(),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: baca.select.mmrest(_, 1),
@@ -1872,6 +1888,8 @@ def mmrest_text_staff_padding(
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
+                                \once \override Accidental.stencil = ##f
+                                \once \override NoteColumn.ignore-collision = ##t
                                 b'1 * 1/2
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"2"
                             }
@@ -4336,6 +4354,7 @@ def text_script_color(
 
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_mmrests(),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: abjad.select.leaf(_, 1),
@@ -4470,6 +4489,7 @@ def text_script_down(
 
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_mmrests(),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: abjad.select.leaf(_, 1),
@@ -4522,6 +4542,7 @@ def text_script_extra_offset(
 
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_mmrests(),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: abjad.select.leaf(_, 1),
@@ -4679,6 +4700,7 @@ def text_script_padding(
 
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_mmrests(),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: abjad.select.leaf(_, 1),
@@ -4858,6 +4880,7 @@ def text_script_staff_padding(
 
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_mmrests(),
         ...     baca.markup(
         ...         r"\baca-boxed-markkup still",
         ...         selector=lambda _: abjad.select.leaf(_, 1),
@@ -4992,6 +5015,7 @@ def text_script_up(
 
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_mmrests(),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: abjad.select.leaf(_, 1),

@@ -24,6 +24,7 @@ r"""
         ... )
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_mmrests(),
         ...     baca.attach_first_segment_default_indicators(),
         ... )
 
@@ -81,6 +82,8 @@ r"""
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
+                                \once \override Accidental.stencil = ##f
+                                \once \override NoteColumn.ignore-collision = ##t
                                 \clef "treble"
                                 \once \override Staff.Clef.color = #(x11-color 'DarkViolet)
                                 %@% \override Staff.Clef.color = ##f
@@ -118,6 +121,7 @@ r"""
         ... )
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_mmrests(),
         ...     baca.clef("treble"),
         ... )
 
@@ -174,6 +178,8 @@ r"""
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
+                                \once \override Accidental.stencil = ##f
+                                \once \override NoteColumn.ignore-collision = ##t
                                 \clef "treble"
                                 \once \override Staff.Clef.color = #(x11-color 'blue)
                                 %@% \override Staff.Clef.color = ##f
@@ -209,6 +215,7 @@ r"""
         ... )
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_mmrests(),
         ...     baca.clef("alto"),
         ... )
 
@@ -276,6 +283,8 @@ r"""
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
+                                \once \override Accidental.stencil = ##f
+                                \once \override NoteColumn.ignore-collision = ##t
                                 \clef "alto"
                                 \once \override Staff.Clef.color = #(x11-color 'blue)
                                 %@% \override Staff.Clef.color = ##f
@@ -382,6 +391,8 @@ r"""
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
+                                \once \override Accidental.stencil = ##f
+                                \once \override NoteColumn.ignore-collision = ##t
                                 \clef "treble"
                                 \once \override Staff.Clef.color = #(x11-color 'green4)
                                 %@% \override Staff.Clef.color = ##f
@@ -419,6 +430,7 @@ r"""
         ... )
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_mmrests(),
         ...     baca.clef("treble", selector=lambda _: abjad.select.leaf(_, 0)),
         ...     baca.clef("treble", selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
@@ -479,6 +491,8 @@ r"""
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
+                                \once \override Accidental.stencil = ##f
+                                \once \override NoteColumn.ignore-collision = ##t
                                 \clef "treble"
                                 \once \override Staff.Clef.color = #(x11-color 'blue)
                                 %@% \override Staff.Clef.color = ##f
@@ -591,6 +605,8 @@ r"""
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
+                                \once \override Accidental.stencil = ##f
+                                \once \override NoteColumn.ignore-collision = ##t
                                 \clef "treble"
                                 \once \override Staff.Clef.color = #(x11-color 'DeepPink1)
                                 %@% \override Staff.Clef.color = ##f
@@ -3514,6 +3530,8 @@ r"""
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
+                                \once \override Accidental.stencil = ##f
+                                \once \override NoteColumn.ignore-collision = ##t
                                 b'1 * 1/4
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                             }
@@ -3632,6 +3650,8 @@ r"""
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
+                                \once \override Accidental.stencil = ##f
+                                \once \override NoteColumn.ignore-collision = ##t
                                 b'1 * 1/4
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                             }
@@ -3838,6 +3858,8 @@ r"""
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
+                                \once \override Accidental.stencil = ##f
+                                \once \override NoteColumn.ignore-collision = ##t
                                 b'1 * 1/4
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                             }
@@ -3957,6 +3979,8 @@ r"""
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
+                                \once \override Accidental.stencil = ##f
+                                \once \override NoteColumn.ignore-collision = ##t
                                 b'1 * 1/4
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                             }
@@ -4680,6 +4704,8 @@ r"""
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
+                                \once \override Accidental.stencil = ##f
+                                \once \override NoteColumn.ignore-collision = ##t
                                 b'1 * 1/4
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                             }

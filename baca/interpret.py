@@ -767,6 +767,10 @@ def _calculate_clock_times(
     return duration_clock_string, clock_times, start_clock_time, stop_clock_time
 
 
+def _call_all_commands():
+    raise NotImplementedError
+
+
 def _call_commands(
     allow_empty_selections,
     allows_instrument,
@@ -1606,6 +1610,10 @@ def _intercalate_rests(
         if start_offset < previous_stop_offset:
             raise Exception("overlapping offsets: {timespan!r}.")
         if previous_stop_offset < start_offset:
+            # raise Exception(
+            #     f"{voice_name} needs multimeasure rests"
+            #     f" ({previous_stop_offset} to {start_offset})"
+            # )
             components = _make_measure_silences(
                 measure_start_offsets,
                 skips_instead_of_rests,
@@ -1620,6 +1628,7 @@ def _intercalate_rests(
         duration = abjad.get.duration(components)
         previous_stop_offset = start_offset + duration
     if previous_stop_offset < section_duration:
+        # raise Exception(f"{voice_name} needs section-final multimeasure rests.")
         components = _make_measure_silences(
             measure_start_offsets,
             skips_instead_of_rests,
@@ -2074,6 +2083,7 @@ def _make_multimeasure_rest_container(
     voice_name,
     duration,
     skips_instead_of_rests,
+    *,
     phantom=False,
     suppress_note=False,
 ):
@@ -2090,6 +2100,8 @@ def _make_multimeasure_rest_container(
         note_or_rest = _tags.NOTE
         tag = tag.append(_tags.NOTE)
         note = abjad.Note("c'1", multiplier=duration, tag=tag)
+        abjad.override(note).Accidental.stencil = False
+        abjad.override(note).NoteColumn.ignore_collision = True
         abjad.attach(_enums.NOTE, note)
         abjad.attach(_enums.NOT_YET_PITCHED, note)
     else:
@@ -2919,6 +2931,7 @@ def interpreter(
     deactivate=None,
     do_not_append_phantom_measure=False,
     do_not_require_margin_markup=False,
+    do_not_sort_commands=False,
     error_on_not_yet_pitched=False,
     fermata_extra_offset_y=2.5,
     fermata_measure_empty_overrides=None,
@@ -2990,19 +3003,6 @@ def interpreter(
     assert isinstance(transpose_score, bool)
     assert isinstance(treat_untreated_persistent_wrappers, bool)
     voice_metadata = {}
-    default_indicator_commands, other_commands, rhythm_commands = [], [], []
-    for command in commands:
-        if isinstance(command, _rhythmcommands.RhythmCommand):
-            rhythm_commands.append(command)
-        elif getattr(command, "name", None) in (
-            "attach_first_segment_default_indicators",
-            "attach_first_apperance_default_indicators",
-            "reapply_persistent_indicators",
-        ):
-            default_indicator_commands.append(command)
-        else:
-            other_commands.append(command)
-    other_commands[0:0] = default_indicator_commands
     already_reapplied_contexts = set()
     with abjad.Timer() as timer:
         # temporary hack to make baca.select.mleaves() work
@@ -3038,35 +3038,15 @@ def interpreter(
             time_signatures,
         )
     # _print_timing("Initialization", timer, print_timing=print_timing)
-    with abjad.Timer() as timer:
-        with abjad.ForbidUpdate(component=score, update_on_exit=True):
-            command_count, section_duration = _call_rhythm_commands(
-                always_make_global_rests,
-                attach_rhythm_annotation_spanners,
-                call_phantom_measure_append_functions_by_hand,
-                call_rest_intercalation_functions_by_hand,
-                rhythm_commands,
-                append_phantom_measure,
-                manifests,
-                measure_count,
-                previous_persist,
-                score,
-                skips_instead_of_rests,
-                time_signatures,
-                voice_metadata,
-            )
-    _print_timing(
-        "Rhythm commands", timer, print_timing=print_timing, suffix=command_count
-    )
-    with abjad.Timer() as timer:
-        with abjad.ForbidUpdate(component=score, update_on_exit=True):
+    if do_not_sort_commands is True:
+        with abjad.Timer() as timer:
             cache = None
-            cache, command_count = _call_commands(
+            cache, command_count = _call_all_commands(
                 allow_empty_selections,
                 allows_instrument,
                 already_reapplied_contexts,
                 cache,
-                other_commands,
+                commands,
                 measure_count,
                 offset_to_measure_number,
                 manifests,
@@ -3074,11 +3054,64 @@ def interpreter(
                 score,
                 voice_metadata,
             )
-        _extend_beams(score)
-        _attach_sounds_during(score)
-    _print_timing(
-        "Other commands", timer, print_timing=print_timing, suffix=command_count
-    )
+        _print_timing(
+            "All commands", timer, print_timing=print_timing, suffix=command_count
+        )
+    else:
+        default_indicator_commands, other_commands, rhythm_commands = [], [], []
+        for command in commands:
+            if isinstance(command, _rhythmcommands.RhythmCommand):
+                rhythm_commands.append(command)
+            elif getattr(command, "name", None) in (
+                "attach_first_segment_default_indicators",
+                "attach_first_apperance_default_indicators",
+                "reapply_persistent_indicators",
+            ):
+                default_indicator_commands.append(command)
+            else:
+                other_commands.append(command)
+        other_commands[0:0] = default_indicator_commands
+        with abjad.Timer() as timer:
+            with abjad.ForbidUpdate(component=score, update_on_exit=True):
+                command_count, section_duration = _call_rhythm_commands(
+                    always_make_global_rests,
+                    attach_rhythm_annotation_spanners,
+                    call_phantom_measure_append_functions_by_hand,
+                    call_rest_intercalation_functions_by_hand,
+                    rhythm_commands,
+                    append_phantom_measure,
+                    manifests,
+                    measure_count,
+                    previous_persist,
+                    score,
+                    skips_instead_of_rests,
+                    time_signatures,
+                    voice_metadata,
+                )
+        _print_timing(
+            "Rhythm commands", timer, print_timing=print_timing, suffix=command_count
+        )
+        with abjad.Timer() as timer:
+            with abjad.ForbidUpdate(component=score, update_on_exit=True):
+                cache = None
+                cache, command_count = _call_commands(
+                    allow_empty_selections,
+                    allows_instrument,
+                    already_reapplied_contexts,
+                    cache,
+                    other_commands,
+                    measure_count,
+                    offset_to_measure_number,
+                    manifests,
+                    previous_persist,
+                    score,
+                    voice_metadata,
+                )
+            _extend_beams(score)
+            _attach_sounds_during(score)
+        _print_timing(
+            "Other commands", timer, print_timing=print_timing, suffix=command_count
+        )
     with abjad.Timer() as timer:
         with abjad.ForbidUpdate(component=score, update_on_exit=True):
             if not first_segment:
