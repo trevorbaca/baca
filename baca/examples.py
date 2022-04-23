@@ -302,8 +302,8 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     >>> commands(
     ...     "Music_Voice",
-    ...     baca.instrument(instruments["clarinet"]),
     ...     baca.make_even_divisions(),
+    ...     baca.instrument(instruments["clarinet"]),
     ...     baca.pitches("E4 F4"),
     ... )
 
@@ -384,8 +384,8 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     >>> commands(
     ...     "Music_Voice",
-    ...     baca.instrument(instruments["clarinet"]),
     ...     baca.make_even_divisions(),
+    ...     baca.instrument(instruments["clarinet"]),
     ...     baca.pitches("E4 F4"),
     ... )
 
@@ -483,8 +483,8 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ... )
     >>> commands(
     ...     ("Music_Voice", 1),
-    ...     baca.instrument(abjad.Violin()),
     ...     baca.music(figures_, do_not_check_total_duration=True),
+    ...     baca.instrument(abjad.Violin()),
     ... )
 
     >>> _, _ = baca.interpreter(

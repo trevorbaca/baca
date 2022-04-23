@@ -131,11 +131,11 @@ def beam(
 
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_even_divisions(),
+        ...     baca.pitch("C4"),
         ...     baca.beam(
         ...         direction=abjad.DOWN,
         ...     ),
-        ...     baca.make_even_divisions(),
-        ...     baca.pitch("C4"),
         ... )
 
         >>> _, _ = baca.interpreter(

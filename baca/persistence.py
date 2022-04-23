@@ -535,9 +535,9 @@ r"""
         ... )
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.clef("treble"),
         ...     baca.make_mmrests(),
         ...     baca.reapply_persistent_indicators(),
+        ...     baca.clef("treble"),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -641,8 +641,8 @@ r"""
         ... )
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.dynamic("f"),
         ...     baca.make_notes(),
+        ...     baca.dynamic("f"),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -1342,8 +1342,8 @@ r"""
         ... )
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.instrument(instruments["Flute"]),
         ...     baca.make_notes(),
+        ...     baca.instrument(instruments["Flute"]),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -1494,8 +1494,8 @@ r"""
         ... )
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.instrument(instruments["Flute"]),
         ...     baca.make_notes(),
+        ...     baca.instrument(instruments["Flute"]),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -1830,12 +1830,12 @@ r"""
         ... )
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_notes(),
         ...     baca.instrument(instruments["Flute"]),
         ...     baca.new(
         ...         baca.instrument(instruments["Flute"]),
         ...         map=lambda _: baca.select.leaves(_)[1:2],
         ...     ),
-        ...     baca.make_notes(),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -2372,8 +2372,8 @@ r"""
         ... )
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.margin_markup(margin_markups["I+II"]),
         ...     baca.make_notes(),
+        ...     baca.margin_markup(margin_markups["I+II"]),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -2542,8 +2542,8 @@ r"""
         ... )
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.margin_markup(margin_markups["III+IV"]),
         ...     baca.make_notes(),
+        ...     baca.margin_markup(margin_markups["III+IV"]),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -2925,12 +2925,12 @@ r"""
         ... )
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_notes(),
         ...     baca.margin_markup(margin_markups["I+II"]),
         ...     baca.new(
         ...         baca.margin_markup(margin_markups["I+II"]),
         ...         map=lambda _: baca.select.leaves(_)[1:2],
         ...     ),
-        ...     baca.make_notes(),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -3335,6 +3335,7 @@ r"""
         ... )
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_notes(),
         ...     baca.tag(
         ...         baca.tags.NOT_PARTS,
         ...         baca.margin_markup(margin_markups["I+II"]),
@@ -3349,7 +3350,6 @@ r"""
         ...         baca.margin_markup(margin_markups["III+IV"]),
         ...         deactivate=True,
         ...     ),
-        ...     baca.make_notes(),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -3459,6 +3459,7 @@ r"""
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
+        ...     baca.append_phantom_measure(),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -3466,6 +3467,7 @@ r"""
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     append_phantom_measure=commands.append_phantom_measure,
+        ...     do_not_sort_commands=True,
         ...     metronome_marks=commands.metronome_marks,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3566,6 +3568,7 @@ r"""
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
+        ...     baca.append_phantom_measure(),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -3582,6 +3585,7 @@ r"""
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     append_phantom_measure=commands.append_phantom_measure,
+        ...     do_not_sort_commands=True,
         ...     metronome_marks=commands.metronome_marks,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -3780,6 +3784,7 @@ r"""
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
+        ...     baca.append_phantom_measure(),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -3787,6 +3792,7 @@ r"""
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     append_phantom_measure=commands.append_phantom_measure,
+        ...     do_not_sort_commands=True,
         ...     metronome_marks=commands.metronome_marks,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3895,6 +3901,7 @@ r"""
         ...     "Music_Voice",
         ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
+        ...     baca.append_phantom_measure(),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -3911,6 +3918,7 @@ r"""
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     append_phantom_measure=commands.append_phantom_measure,
+        ...     do_not_sort_commands=True,
         ...     metronome_marks=commands.metronome_marks,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -4019,13 +4027,15 @@ r"""
         ... )
         >>> tag = abjad.Tag("baca.bar_extent_persistent")
         >>> command = baca.IndicatorCommand(
-        ...     indicators=[override], selector=lambda _: abjad.select.leaf(_, 0), tags=[tag]
+        ...     indicators=[override],
+        ...     selector=lambda _: abjad.select.leaf(_, 0),
+        ...     tags=[tag],
         ... )
 
         >>> commands(
         ...     "Music_Voice",
-        ...     command,
         ...     baca.make_notes(),
+        ...     command,
         ...     baca.staff_lines(1),
         ...     baca.staff_position(0),
         ... )
@@ -4176,12 +4186,14 @@ r"""
         ... )
         >>> tag = abjad.Tag("baca.bar_extent_persistent")
         >>> command = baca.IndicatorCommand(
-        ...     indicators=[override], selector=lambda _: abjad.select.leaf(_, 0), tags=[tag]
+        ...     indicators=[override],
+        ...     selector=lambda _: abjad.select.leaf(_, 0),
+        ...     tags=[tag],
         ... )
         >>> commands(
         ...     "Music_Voice",
-        ...     command,
         ...     baca.make_notes(),
+        ...     command,
         ... )
 
         >>> metadata, persist = {}, {}
@@ -4633,6 +4645,7 @@ r"""
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
+        ...     baca.append_phantom_measure(),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -4640,6 +4653,7 @@ r"""
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     append_phantom_measure=commands.append_phantom_measure,
+        ...     do_not_sort_commands=True,
         ...     metronome_marks=commands.metronome_marks,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),

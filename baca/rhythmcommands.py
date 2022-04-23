@@ -153,10 +153,10 @@ class RhythmCommand(_command.Command):
         ...     )
         >>> commands(
         ...     "Music_Voice",
+        ...     command,
         ...     baca.label(label_with_durations),
         ...     baca.text_script_font_size(-2),
         ...     baca.text_script_staff_padding(5),
-        ...     command,
         ... )
 
         >>> _, _ = baca.interpreter(

@@ -880,6 +880,31 @@ def attach_first_segment_default_indicators(
     return command
 
 
+def append_phantom_measure(*, selector=lambda _: _select.leaves(_)) -> GenericCommand:
+    def function(argument, *, runtime=None):
+        from . import interpret as _interpret
+
+        leaf = abjad.get.leaf(argument, 0)
+        parentage = abjad.get.parentage(leaf)
+        voice = parentage.get(abjad.Voice, n=-1)
+        final_leaf = abjad.get.leaf(voice, -1)
+        suppress_note = False
+        if isinstance(final_leaf, abjad.MultimeasureRest):
+            suppress_note = True
+        container = _interpret._make_multimeasure_rest_container(
+            voice.name,
+            (1, 4),
+            skips_instead_of_rests=False,
+            phantom=True,
+            suppress_note=suppress_note,
+        )
+        voice.append(container)
+
+    command = GenericCommand(function=function, selector=selector)
+    command.name = "append_phantom_measure"
+    return command
+
+
 def reapply_persistent_indicators(
     *, selector=lambda _: _select.leaves(_)
 ) -> GenericCommand:
@@ -1285,11 +1310,11 @@ class AccidentalAdjustmentCommand(_command.Command):
 
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_notes(repeat_ties=True),
+        ...     baca.pitches("E4 F4"),
         ...     baca.force_accidental(
         ...         selector=lambda _: baca.select.pleaves(_)[:2],
         ...     ),
-        ...     baca.make_notes(repeat_ties=True),
-        ...     baca.pitches("E4 F4"),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -1519,8 +1544,8 @@ class ClusterCommand(_command.Command):
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.pitch("E4"),
         ...     baca.make_notes(repeat_ties=True),
+        ...     baca.pitch("E4"),
         ...     baca.natural_clusters(widths=[3]),
         ... )
 
@@ -1773,8 +1798,8 @@ class ClusterCommand(_command.Command):
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.clusters([1, 2, 3, 4], start_pitch="E4"),
         ...     baca.make_notes(repeat_ties=True),
+        ...     baca.clusters([1, 2, 3, 4], start_pitch="E4"),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -1857,8 +1882,8 @@ class ClusterCommand(_command.Command):
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.clusters([1, 3], start_pitch="E4"),
         ...     baca.make_notes(repeat_ties=True),
+        ...     baca.clusters([1, 3], start_pitch="E4"),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -2074,8 +2099,8 @@ class ColorFingeringCommand(_command.Command):
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.pitch("E4"),
         ...     baca.make_notes(repeat_ties=True),
+        ...     baca.pitch("E4"),
         ...     baca.ColorFingeringCommand(numbers=[0, 1, 2, 1]),
         ... )
 
@@ -2307,8 +2332,8 @@ class MicrotoneDeviationCommand(_command.Command):
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.pitches("E4"),
         ...     baca.make_even_divisions(),
+        ...     baca.pitches("E4"),
         ...     baca.deviation([0, 0.5, 0, -0.5]),
         ... )
 
@@ -3107,8 +3132,8 @@ class RegisterCommand(_command.Command):
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.pitches("G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4"),
         ...     baca.make_even_divisions(),
+        ...     baca.pitches("G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4"),
         ...     baca.RegisterCommand(
         ...         registration=baca.Registration([("[A0, C8]", 15)]),
         ...     ),
@@ -3377,8 +3402,8 @@ class RegisterInterpolationCommand(_command.Command):
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.pitches(pitches),
         ...     baca.make_even_divisions(),
+        ...     baca.pitches(pitches),
         ...     baca.register(12, 12),
         ... )
 
@@ -3484,8 +3509,8 @@ class RegisterInterpolationCommand(_command.Command):
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.pitches(pitches),
         ...     baca.make_even_divisions(),
+        ...     baca.pitches(pitches),
         ...     baca.register(12, 0),
         ... )
 
@@ -3591,8 +3616,8 @@ class RegisterInterpolationCommand(_command.Command):
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.pitches(pitches),
         ...     baca.make_even_divisions(),
+        ...     baca.pitches(pitches),
         ...     baca.register(0, 12),
         ... )
 
@@ -3698,8 +3723,8 @@ class RegisterInterpolationCommand(_command.Command):
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.pitches(pitches),
         ...     baca.make_even_divisions(),
+        ...     baca.pitches(pitches),
         ...     baca.register(12, -12),
         ... )
 
@@ -3805,8 +3830,8 @@ class RegisterInterpolationCommand(_command.Command):
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.pitches(pitches),
         ...     baca.make_even_divisions(),
+        ...     baca.pitches(pitches),
         ...     baca.register(-12, 12),
         ... )
 
@@ -5490,13 +5515,13 @@ def force_accidental(
 
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_notes(repeat_ties=True),
+        ...     baca.pitches("E4 F4"),
         ...     baca.not_parts(
         ...         baca.force_accidental(
         ...             selector=lambda _: baca.select.pleaves(_)[:2],
         ...         ),
         ...     ),
-        ...     baca.make_notes(repeat_ties=True),
-        ...     baca.pitches("E4 F4"),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -7741,8 +7766,8 @@ def hide_black_note_heads(
 
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_notes(),
         ...     baca.hide_black_note_heads(),
-        ...     baca.make_notes()
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -8689,8 +8714,8 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.clef("percussion"),
         ...     baca.make_notes(),
+        ...     baca.clef("percussion"),
         ...     baca.staff_lines(1),
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
         ... )
@@ -8758,8 +8783,8 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.clef("bass"),
         ...     baca.make_notes(),
+        ...     baca.clef("bass"),
         ...     baca.staff_lines(1),
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
         ... )
@@ -8828,8 +8853,8 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.clef("percussion"),
         ...     baca.make_notes(),
+        ...     baca.clef("percussion"),
         ...     baca.staff_lines(2),
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
         ... )
@@ -8896,8 +8921,8 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.clef("bass"),
         ...     baca.make_notes(),
+        ...     baca.clef("bass"),
         ...     baca.staff_lines(2),
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
         ... )
@@ -10308,6 +10333,7 @@ def container(
 
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_notes(repeat_ties=True),
         ...     baca.container(
         ...         "ViolinI",
         ...         selector=lambda _: baca.select.leaves(_)[:2],
@@ -10316,7 +10342,6 @@ def container(
         ...         "ViolinII",
         ...         selector=lambda _: baca.select.leaves(_)[2:],
         ...     ),
-        ...     baca.make_notes(repeat_ties=True),
         ...     baca.pitches("E4 F4"),
         ... )
 
@@ -10689,16 +10714,16 @@ def finger_pressure_transition(
 
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_notes(),
+        ...     baca.pitch("C5"),
+        ...     baca.note_head_style_harmonic(selector=lambda _: abjad.select.note(_, 0)),
+        ...     baca.note_head_style_harmonic(selector=lambda _: abjad.select.note(_, 2)),
         ...     baca.finger_pressure_transition(
         ...         selector=lambda _: abjad.select.notes(_)[:2],
         ...     ),
         ...     baca.finger_pressure_transition(
         ...         selector=lambda _: abjad.select.notes(_)[2:],
         ...     ),
-        ...     baca.make_notes(),
-        ...     baca.note_head_style_harmonic(selector=lambda _: abjad.select.note(_, 0)),
-        ...     baca.note_head_style_harmonic(selector=lambda _: abjad.select.note(_, 2)),
-        ...     baca.pitch("C5"),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -10993,8 +11018,8 @@ def glissando(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.make_even_divisions(),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.glissando(selector=lambda _: baca.select.plts(_)[:2]),
         ...     baca.glissando(selector=lambda _: baca.select.plts(_)[-2:]),
         ... )
@@ -11322,11 +11347,11 @@ def invisible_music(
 
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_notes(),
+        ...     baca.pitch("C5"),
         ...     baca.invisible_music(
         ...         selector=lambda _: baca.select.leaves(_)[1:-1],
         ...     ),
-        ...     baca.make_notes(),
-        ...     baca.pitch("C5"),
         ... )
 
         >>> _, _ = baca.interpreter(

@@ -962,15 +962,15 @@ def dynamic(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
+        ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ...     baca.dynamic("p"),
         ...     baca.dynamic("<"),
         ...     baca.dynamic(
         ...         "!",
         ...         selector=lambda _: baca.select.pleaf(_, -1),
         ...     ),
-        ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
+        ...     baca.dls_staff_padding(5),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -1056,13 +1056,13 @@ def dynamic(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
+        ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ...     baca.dynamic(
         ...         "p",
         ...         abjad.Tweak(r"- \tweak extra-offset #'(-4 . 0)"),
         ...     ),
-        ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
+        ...     baca.dls_staff_padding(5),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -1184,10 +1184,10 @@ def hairpin(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.dls_staff_padding(5),
-        ...     baca.hairpin("p < f", bookend=-1),
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
+        ...     baca.hairpin("p < f", bookend=-1),
+        ...     baca.dls_staff_padding(5),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -1273,10 +1273,10 @@ def hairpin(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
-        ...     baca.hairpin('"ff" >o niente'),
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
+        ...     baca.hairpin('"ff" >o niente'),
+        ...     baca.dls_staff_padding(5),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -1364,10 +1364,10 @@ def hairpin(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
-        ...     baca.hairpin('niente o< "ff"'),
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
+        ...     baca.hairpin('niente o< "ff"'),
+        ...     baca.dls_staff_padding(5),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -1454,10 +1454,10 @@ def hairpin(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
-        ...     baca.hairpin('"p" -- f'),
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
+        ...     baca.hairpin('"p" -- f'),
+        ...     baca.dls_staff_padding(5),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -1544,8 +1544,8 @@ def hairpin(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
+        ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ...     baca.hairpin(
         ...         '"mp" <| "f"',
         ...         selector=lambda _: baca.select.leaves(_)[:7],
@@ -1554,7 +1554,7 @@ def hairpin(
         ...         '"mf" |> "p"',
         ...         selector=lambda _: baca.select.leaves(_)[7:],
         ...         ),
-        ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
+        ...     baca.dls_staff_padding(5),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -1646,13 +1646,13 @@ def hairpin(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.dls_staff_padding(5),
+        ...     baca.make_even_divisions(),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.hairpin(
         ...         "p f",
         ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
         ...     ),
-        ...     baca.make_even_divisions(),
-        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
+        ...     baca.dls_staff_padding(5),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -1737,13 +1737,13 @@ def hairpin(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.dls_staff_padding(5),
+        ...     baca.make_even_divisions(),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.hairpin(
         ...         "p < f >",
         ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
         ...     ),
-        ...     baca.make_even_divisions(),
-        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
+        ...     baca.dls_staff_padding(5),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -1836,14 +1836,14 @@ def hairpin(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.dls_staff_padding(5),
+        ...     baca.make_even_divisions(),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.hairpin(
         ...         "p f",
         ...         bookend=True,
         ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
         ...     ),
-        ...     baca.make_even_divisions(),
-        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
+        ...     baca.dls_staff_padding(5),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -1931,14 +1931,14 @@ def hairpin(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.dls_staff_padding(5),
+        ...     baca.make_even_divisions(),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.hairpin(
         ...         "p -- f >",
         ...         bookend=True,
         ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
         ...     ),
-        ...     baca.make_even_divisions(),
-        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
+        ...     baca.dls_staff_padding(5),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -2038,10 +2038,10 @@ def hairpin(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
-        ...     baca.hairpin("f", bookend=False),
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
+        ...     baca.hairpin("f", bookend=False),
+        ...     baca.dls_staff_padding(5),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -2124,10 +2124,10 @@ def hairpin(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.dls_staff_padding(5),
-        ...     baca.hairpin("< !"),
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
+        ...     baca.hairpin("< !"),
+        ...     baca.dls_staff_padding(5),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -2211,7 +2211,8 @@ def hairpin(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.dls_staff_padding(4),
+        ...     baca.skeleton("{ c2 r4. c2 r4. }"),
+        ...     baca.pitches("C4 D4"),
         ...     baca.hairpin(
         ...         "p -- niente",
         ...         abjad.Tweak(r"- \tweak to-barline ##t"),
@@ -2222,8 +2223,7 @@ def hairpin(
         ...         abjad.Tweak(r"- \tweak to-barline ##t"),
         ...         selector=lambda _: baca.select.leaves(_)[2:],
         ...     ),
-        ...     baca.pitches("C4 D4"),
-        ...     baca.skeleton("{ c2 r4. c2 r4. }"),
+        ...     baca.dls_staff_padding(4),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -2301,14 +2301,14 @@ def hairpin(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.dls_staff_padding(4),
+        ...     baca.make_even_divisions(),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.hairpin(
         ...         "mf niente o< p",
         ...         bookend=False,
         ...         pieces=lambda _: baca.select.mgroups(_, [1, 2, 1]),
         ...     ),
-        ...     baca.make_even_divisions(),
-        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
+        ...     baca.dls_staff_padding(4),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -2396,10 +2396,10 @@ def hairpin(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.dls_staff_padding(4),
-        ...     baca.hairpin("(mp) < mf"),
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
+        ...     baca.hairpin("(mp) < mf"),
+        ...     baca.dls_staff_padding(4),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -3401,9 +3401,9 @@ def text_spanner(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.text_spanner("pont. => ord."),
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
+        ...     baca.text_spanner("pont. => ord."),
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
@@ -3491,9 +3491,9 @@ def text_spanner(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.text_spanner("pont. =| ord."),
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
+        ...     baca.text_spanner("pont. =| ord."),
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
@@ -3581,9 +3581,9 @@ def text_spanner(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.text_spanner("pont. -> ord."),
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
+        ...     baca.text_spanner("pont. -> ord."),
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
@@ -3671,9 +3671,9 @@ def text_spanner(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.text_spanner("pont. -| ord."),
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
+        ...     baca.text_spanner("pont. -| ord."),
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
@@ -3761,9 +3761,9 @@ def text_spanner(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.text_spanner("pont. || ord."),
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
+        ...     baca.text_spanner("pont. || ord."),
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
@@ -3853,14 +3853,14 @@ def text_spanner(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.dls_staff_padding(5),
+        ...     baca.make_even_divisions(),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner(
         ...         "A || B",
         ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
         ...     ),
-        ...     baca.make_even_divisions(),
-        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner_staff_padding(4.5),
+        ...     baca.dls_staff_padding(5),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -3961,14 +3961,14 @@ def text_spanner(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.dls_staff_padding(5),
+        ...     baca.make_even_divisions(),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner(
         ...         "A -> B ->",
         ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
         ...     ),
-        ...     baca.make_even_divisions(),
-        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner_staff_padding(4.5),
+        ...     baca.dls_staff_padding(5),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -4069,15 +4069,15 @@ def text_spanner(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.dls_staff_padding(5),
+        ...     baca.make_even_divisions(),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner(
         ...         "A || B",
         ...         bookend=True,
         ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
         ...     ),
-        ...     baca.make_even_divisions(),
-        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner_staff_padding(4.5),
+        ...     baca.dls_staff_padding(5),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -4187,15 +4187,15 @@ def text_spanner(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.dls_staff_padding(5),
+        ...     baca.make_even_divisions(),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner(
         ...         "A -> B ->",
         ...         bookend=True,
         ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
         ...     ),
-        ...     baca.make_even_divisions(),
-        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner_staff_padding(4.5),
+        ...     baca.dls_staff_padding(5),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -4308,6 +4308,8 @@ def text_spanner(
 
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.skeleton("{ c2 c4. c2 c4. }"),
+        ...     baca.pitches("C4 D4 E4 F4"),
         ...     baca.text_spanner(
         ...         "P -> T ->",
         ...         (abjad.Tweak(r"- \tweak color #red"), 0),
@@ -4317,8 +4319,6 @@ def text_spanner(
         ...         final_piece_spanner=False,
         ...         pieces=lambda _: baca.select.plts(_),
         ...     ),
-        ...     baca.skeleton("{ c2 c4. c2 c4. }"),
-        ...     baca.pitches("C4 D4 E4 F4"),
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
@@ -4403,15 +4403,15 @@ def text_spanner(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.dls_staff_padding(5),
+        ...     baca.make_even_divisions(),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner(
         ...         r"\baca-damp-markup =|",
         ...         bookend=False,
         ...         selector=lambda _: baca.select.rmleaves(_, 2),
         ...     ),
-        ...     baca.make_even_divisions(),
-        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner_staff_padding(4.5),
+        ...     baca.dls_staff_padding(5),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -4499,14 +4499,14 @@ def text_spanner(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.dls_staff_padding(5),
+        ...     baca.make_even_divisions(),
+        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner(
         ...         "A -| B -|",
         ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
         ...     ),
-        ...     baca.make_even_divisions(),
-        ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner_staff_padding(4.5),
+        ...     baca.dls_staff_padding(5),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -4609,12 +4609,12 @@ def text_spanner(
 
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_notes(),
+        ...     baca.pitches("C4 D4 E4 F4 G4 A4"),
         ...     baca.text_spanner(
         ...         "P -> T -> P",
         ...         pieces=lambda _: baca.select.plts(_),
         ...     ),
-        ...     baca.make_notes(),
-        ...     baca.pitches("C4 D4 E4 F4 G4 A4"),
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
@@ -4710,13 +4710,13 @@ def text_spanner(
 
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.skeleton("{ c2 c4. c2 c4 ~ c8 }"),
+        ...     baca.pitches("C4 D4 E4 F4"),
         ...     baca.text_spanner(
         ...         "P -> T ->",
         ...         final_piece_spanner=False,
         ...         pieces=lambda _: baca.select.plts(_),
         ...     ),
-        ...     baca.skeleton("{ c2 c4. c2 c4 ~ c8 }"),
-        ...     baca.pitches("C4 D4 E4 F4"),
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 

@@ -220,13 +220,13 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
 
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_even_divisions(),
         ...     baca.new(
         ...         baca.marcato(),
         ...         baca.slur(),
         ...         baca.staccato(),
         ...         selector=lambda _: baca.select.leaves(_)[4:-3],
         ...     ),
-        ...     baca.make_even_divisions(),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -322,13 +322,13 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
 
         >>> commands(
         ...     "Music_Voice",
+        ...     baca.make_even_divisions(),
         ...     baca.new(
         ...         baca.marcato(),
         ...         baca.slur(),
         ...         baca.staccato(),
         ...         selector=lambda _: baca.select.cmgroups(_)[1:-1],
         ...     ),
-        ...     baca.make_even_divisions(),
         ... )
 
         >>> _, _ = baca.interpreter(
