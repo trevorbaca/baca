@@ -774,10 +774,9 @@ def _call_all_commands(
     already_reapplied_contexts,
     always_make_global_rests,
     append_phantom_measure,
+    append_phantom_measures_by_hand,
     attach_rhythm_annotation_spanners,
     cache,
-    call_phantom_measure_append_functions_by_hand,
-    call_rest_intercalation_functions_by_hand,
     commands,
     manifests,
     measure_count,
@@ -940,8 +939,8 @@ def _call_commands(
 def _call_rhythm_commands(
     always_make_global_rests,
     attach_rhythm_annotation_spanners,
-    call_phantom_measure_append_functions_by_hand,
-    call_rest_intercalation_functions_by_hand,
+    append_phantom_measures_by_hand,
+    intercalate_mmrests_by_hand,
     commands,
     append_phantom_measure,
     manifests,
@@ -1007,14 +1006,14 @@ def _call_rhythm_commands(
             voice_metadata[voice.name] = voice_metadata_
         timespans.sort()
         _assert_nonoverlapping_rhythms(timespans, voice.name)
-        if call_rest_intercalation_functions_by_hand is False:
-            components, section_duration = _intercalate_rests(
-                skips_instead_of_rests,
-                time_signatures,
-                timespans,
-                voice.name,
-            )
-        if call_phantom_measure_append_functions_by_hand is False:
+        components, section_duration = _intercalate_mmrests(
+            intercalate_mmrests_by_hand,
+            skips_instead_of_rests,
+            time_signatures,
+            timespans,
+            voice.name,
+        )
+        if append_phantom_measures_by_hand is False:
             if append_phantom_measure:
                 suppress_note = False
                 final_leaf = abjad.get.leaf(components, -1)
@@ -1705,7 +1704,8 @@ def _handle_mutator(score, cache, command):
     return cache
 
 
-def _intercalate_rests(
+def _intercalate_mmrests(
+    intercalate_mmrests_by_hand,
     skips_instead_of_rests,
     time_signatures,
     timespans,
@@ -1721,10 +1721,11 @@ def _intercalate_rests(
         if start_offset < previous_stop_offset:
             raise Exception("overlapping offsets: {timespan!r}.")
         if previous_stop_offset < start_offset:
-            # raise Exception(
-            #     f"{voice_name} needs multimeasure rests"
-            #     f" ({previous_stop_offset} to {start_offset})"
-            # )
+            if intercalate_mmrests_by_hand is True:
+                raise Exception(
+                    f"{voice_name} needs multimeasure rests"
+                    f" ({previous_stop_offset} to {start_offset})"
+                )
             components = _make_measure_silences(
                 measure_start_offsets,
                 skips_instead_of_rests,
@@ -1739,7 +1740,8 @@ def _intercalate_rests(
         duration = abjad.get.duration(components)
         previous_stop_offset = start_offset + duration
     if previous_stop_offset < section_duration:
-        # raise Exception(f"{voice_name} needs section-final multimeasure rests.")
+        if intercalate_mmrests_by_hand is True:
+            raise Exception(f"{voice_name} needs section-final multimeasure rests.")
         components = _make_measure_silences(
             measure_start_offsets,
             skips_instead_of_rests,
@@ -3030,8 +3032,8 @@ def interpreter(
     append_phantom_measure=False,
     attach_nonfirst_empty_start_bar=False,
     attach_rhythm_annotation_spanners=False,
-    call_phantom_measure_append_functions_by_hand=False,
-    call_rest_intercalation_functions_by_hand=False,
+    append_phantom_measures_by_hand=False,
+    intercalate_mmrests_by_hand=False,
     check_persistent_indicators=False,
     check_wellformedness=False,
     clock_time_extra_offset=None,
@@ -3159,11 +3161,10 @@ def interpreter(
                 already_reapplied_contexts=already_reapplied_contexts,
                 always_make_global_rests=always_make_global_rests,
                 append_phantom_measure=append_phantom_measure,
+                append_phantom_measures_by_hand=append_phantom_measures_by_hand,
                 attach_rhythm_annotation_spanners=attach_rhythm_annotation_spanners,
                 cache=cache,
-                call_phantom_measure_append_functions_by_hand=call_phantom_measure_append_functions_by_hand,
                 commands=commands,
-                call_rest_intercalation_functions_by_hand=call_rest_intercalation_functions_by_hand,
                 manifests=manifests,
                 measure_count=measure_count,
                 offset_to_measure_number=offset_to_measure_number,
@@ -3195,8 +3196,8 @@ def interpreter(
                 command_count, section_duration = _call_rhythm_commands(
                     always_make_global_rests,
                     attach_rhythm_annotation_spanners,
-                    call_phantom_measure_append_functions_by_hand,
-                    call_rest_intercalation_functions_by_hand,
+                    append_phantom_measures_by_hand,
+                    intercalate_mmrests_by_hand,
                     rhythm_commands,
                     append_phantom_measure,
                     manifests,
