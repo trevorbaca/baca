@@ -49,7 +49,7 @@ class Command:
             return self._call(argument=argument)
 
     def __repr__(self):
-        return f"{type(self).__name__}()"
+        return f"{type(self).__name__}(scope={self.scope})"
 
     def _call(self, argument=None):
         pass
@@ -136,9 +136,6 @@ class Suite:
         ...     measures=(1, 2),
         ...     selector=lambda _: baca.select.pleaves(_),
         ... )
-
-        >>> suite
-        Suite(commands=(IndicatorCommand(), IndicatorCommand()))
 
     ..  container:: example
 

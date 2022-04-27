@@ -15,14 +15,8 @@ from . import typings
 
 @dataclasses.dataclass
 class OverrideCommand(_command.Command):
-    r"""
+    """
     Override command.
-
-    ..  container:: example
-
-        >>> baca.OverrideCommand()
-        OverrideCommand()
-
     """
 
     after: bool = False

@@ -238,8 +238,6 @@ class BCPCommand(_command.Command):
         ...     [(1, 2), (1, 4)],
         ...     abjad.Tweak(r"- \tweak color #red"),
         ... )
-        >>> command
-        BCPCommand()
 
         >>> import copy
         >>> new_command = copy.copy(command)
@@ -1298,11 +1296,6 @@ class AccidentalAdjustmentCommand(_command.Command):
 
     ..  container:: example
 
-        >>> baca.AccidentalAdjustmentCommand()
-        AccidentalAdjustmentCommand()
-
-    ..  container:: example
-
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -2280,12 +2273,6 @@ class Loop(abjad.CyclicTuple):
 
         >>> isinstance(loop, abjad.CyclicTuple)
         True
-
-    ..  container:: example
-
-        >>> command = baca.loop([0, 2, 4], [1])
-        >>> command
-        PitchCommand()
 
     """
 
