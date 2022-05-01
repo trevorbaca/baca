@@ -101,7 +101,7 @@ def _get_lilypond_include_string():
     abjad_repo = pathlib.Path(abjad.__file__).parent.parent
     baca_repo = pathlib.Path(baca.__file__).parent.parent
     string = f"--include={abjad_repo}/abjad/scm"
-    string += f" --include={baca_repo}/lilypond"
+    string += f" --include={baca_repo}/baca/scm"
     return string
 
 
