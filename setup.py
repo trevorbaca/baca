@@ -19,5 +19,5 @@ if __name__ == "__main__":
         platforms="Any",
         python_requires=">=3.10",
         url="https://github.com/trevorbaca/baca",
-        version="3.8",
+        version="3.9",
     )
