@@ -1419,7 +1419,7 @@ class ClusterCommand(_command.Command):
         >>> stack = baca.stack(
         ...     baca.figure([1], 16),
         ...     rmakers.beam(),
-        ...     baca.clusters([3, 4]),
+        ...     baca.replace_with_clusters([3, 4]),
         ... )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -1624,7 +1624,7 @@ class ClusterCommand(_command.Command):
         ...     "Music_Voice",
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.pitches("C4 D4 E4 F4"),
-        ...     baca.clusters([3]),
+        ...     baca.replace_with_clusters([3]),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -1708,7 +1708,7 @@ class ClusterCommand(_command.Command):
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(repeat_ties=True),
-        ...     baca.clusters([3], start_pitch="G4"),
+        ...     baca.replace_with_clusters([3], start_pitch="G4"),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -1792,7 +1792,7 @@ class ClusterCommand(_command.Command):
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(repeat_ties=True),
-        ...     baca.clusters([1, 2, 3, 4], start_pitch="E4"),
+        ...     baca.replace_with_clusters([1, 2, 3, 4], start_pitch="E4"),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -1876,7 +1876,7 @@ class ClusterCommand(_command.Command):
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(repeat_ties=True),
-        ...     baca.clusters([1, 3], start_pitch="E4"),
+        ...     baca.replace_with_clusters([1, 3], start_pitch="E4"),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -1961,7 +1961,7 @@ class ClusterCommand(_command.Command):
         ...     "Music_Voice",
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.pitch("E4"),
-        ...     baca.clusters([]),
+        ...     baca.replace_with_clusters([]),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -5298,18 +5298,6 @@ def center_to_octave(
     return RegisterToOctaveCommand(
         anchor=abjad.CENTER, octave_number=n, selector=selector
     )
-
-
-def clusters(
-    widths: list[int],
-    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
-    *,
-    start_pitch: int | str | abjad.NamedPitch | None = None,
-) -> ClusterCommand:
-    """
-    Makes clusters with ``widths`` and ``start_pitch``.
-    """
-    return ClusterCommand(selector=selector, start_pitch=start_pitch, widths=widths)
 
 
 def color_fingerings(
@@ -11781,6 +11769,18 @@ def previous_metadata(path: str):
     previous_segment = paths[previous_index]
     previous_metadata = _path.get_metadata(previous_segment)
     return previous_metadata
+
+
+def replace_with_clusters(
+    widths: list[int],
+    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
+    *,
+    start_pitch: int | str | abjad.NamedPitch | None = None,
+) -> ClusterCommand:
+    """
+    Makes clusters with ``widths`` and ``start_pitch``.
+    """
+    return ClusterCommand(selector=selector, start_pitch=start_pitch, widths=widths)
 
 
 def untie(selector) -> DetachCommand:
