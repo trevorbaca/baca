@@ -1,6 +1,8 @@
 import dataclasses
 import typing
 
+import abjad
+
 from . import typings as _typings
 
 
@@ -77,6 +79,78 @@ class TimelineScope:
             scopes = scopes_
             scopes = tuple(scopes)
             self.scopes = scopes
+
+
+def _make_regions(measures, *, total=None):
+    result = []
+    for left, right in abjad.sequence.nwise(measures):
+        result.append(left)
+        if isinstance(left, int):
+            stop = left
+        else:
+            assert isinstance(left, tuple)
+            assert len(left) == 2
+            stop = left[1]
+        assert isinstance(stop, int)
+        if isinstance(right, int):
+            start = right
+        else:
+            assert isinstance(right, tuple)
+            assert len(right) == 2
+            start = right[1]
+        assert isinstance(start, int)
+        difference = start - stop
+        assert 1 < difference, measures
+        if difference == 2:
+            result.append(stop + 1)
+        else:
+            pair = (stop + 1, start - 1)
+            result.append(pair)
+    result.append(right)
+    if total is not None:
+        assert isinstance(total, int), repr(total)
+        if isinstance(right, int):
+            stop = right
+        else:
+            stop = right[1]
+        difference = total - stop
+        if difference == 1:
+            result.append(total)
+        elif 1 < difference:
+            pair = (stop + 1, total)
+            result.append(pair)
+    if isinstance(measures[0], int):
+        start = measures[0]
+    else:
+        assert isinstance(measures[0], tuple)
+        start = measures[0][0]
+    if start == 1:
+        begin_with_maker_2 = False
+    elif start == 2:
+        result.insert(0, 1)
+        begin_with_maker_2 = True
+    else:
+        assert 2 < start
+        pair = (1, start - 1)
+        result.insert(0, pair)
+        begin_with_maker_2 = True
+    return result, begin_with_maker_2
+
+
+def alternate_makers(
+    accumulator, voice_name, measures, maker_1, maker_2, *, total=None
+):
+    regions, begin_with_maker_2 = _make_regions(measures, total=total)
+    makers = [maker_1, maker_2]
+    for i, region in enumerate(regions):
+        if not begin_with_maker_2:
+            maker = makers[i % 2]
+        else:
+            maker = makers[(i + 1) % 2]
+        accumulator(
+            (voice_name, region),
+            maker,
+        )
 
 
 def timeline(scopes) -> TimelineScope:
