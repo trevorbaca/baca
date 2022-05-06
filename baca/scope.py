@@ -97,7 +97,7 @@ def _make_regions(measures, *, total=None):
         else:
             assert isinstance(right, tuple)
             assert len(right) == 2
-            start = right[1]
+            start = right[0]
         assert isinstance(start, int)
         difference = start - stop
         assert 1 < difference, measures
