@@ -81,7 +81,7 @@ class TimelineScope:
             self.scopes = scopes
 
 
-def _make_regions(measures, *, total=None):
+def _make_regions(measures, *, absolute_start=1, total=None):
     result = []
     for left, right in abjad.sequence.nwise(measures):
         result.append(left)
@@ -124,23 +124,31 @@ def _make_regions(measures, *, total=None):
     else:
         assert isinstance(measures[0], tuple)
         start = measures[0][0]
-    if start == 1:
+    # if start == 1:
+    if start == absolute_start:
         begin_with_maker_2 = False
-    elif start == 2:
-        result.insert(0, 1)
+    # elif start == 2:
+    elif start == absolute_start + 1:
+        # result.insert(0, 1)
+        result.insert(0, absolute_start + 1)
         begin_with_maker_2 = True
     else:
-        assert 2 < start
-        pair = (1, start - 1)
+        difference = start - absolute_start
+        # assert 2 < start
+        assert 2 < difference
+        # pair = (1, start - 1)
+        pair = (absolute_start, start - 1)
         result.insert(0, pair)
         begin_with_maker_2 = True
     return result, begin_with_maker_2
 
 
 def alternate_makers(
-    accumulator, voice_name, measures, maker_1, maker_2, *, total=None
+    accumulator, voice_name, measures, maker_1, maker_2, *, absolute_start=1, total=None
 ):
-    regions, begin_with_maker_2 = _make_regions(measures, total=total)
+    regions, begin_with_maker_2 = _make_regions(
+        measures, absolute_start=absolute_start, total=total
+    )
     makers = [maker_1, maker_2]
     for i, region in enumerate(regions):
         if not begin_with_maker_2:
