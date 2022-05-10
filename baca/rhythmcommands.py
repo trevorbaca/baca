@@ -847,6 +847,38 @@ def make_single_attack(duration, *, measures=None):
     )
 
 
+def make_skeleton(
+    argument,
+    *,
+    do_not_check_total_duration=None,
+    tag=abjad.Tag(),
+):
+    """
+    Makes rhythm command from ``string`` and attaches NOT_YET_PITCHED indicators to
+    music.
+    """
+    tag = tag.append(_tags.function_name(_frame()))
+    if isinstance(argument, str):
+        string = f"{{ {argument} }}"
+        container = abjad.parse(string)
+        selection = abjad.mutate.eject_contents(container)
+    elif isinstance(argument, list):
+        selection = argument
+    else:
+        message = "baca.make_skeleton() accepts string or selection,"
+        message += " not {repr(argument)}."
+        raise TypeError(message)
+    if tag is not None:
+        _tag_components(selection, tag)
+    return RhythmCommand(
+        rhythm_maker=selection,
+        annotation_spanner_color="#darkcyan",
+        annotation_spanner_text="baca.make_skeleton() =|",
+        attach_not_yet_pitched=True,
+        do_not_check_total_duration=do_not_check_total_duration,
+    )
+
+
 def make_tied_notes(*, measures=None):
     """
     Makes tied notes; rewrites meter.
@@ -951,36 +983,4 @@ def rhythm(
         frame=frame,
         measures=measures,
         persist=persist,
-    )
-
-
-def skeleton(
-    argument,
-    *,
-    do_not_check_total_duration=None,
-    tag=abjad.Tag(),
-):
-    """
-    Makes rhythm command from ``string`` and attaches NOT_YET_PITCHED indicators to
-    music.
-    """
-    tag = tag.append(_tags.function_name(_frame()))
-    if isinstance(argument, str):
-        string = f"{{ {argument} }}"
-        container = abjad.parse(string)
-        selection = abjad.mutate.eject_contents(container)
-    elif isinstance(argument, list):
-        selection = argument
-    else:
-        message = "baca.skeleton() accepts string or selection,"
-        message += " not {repr(argument)}."
-        raise TypeError(message)
-    if tag is not None:
-        _tag_components(selection, tag)
-    return RhythmCommand(
-        rhythm_maker=selection,
-        annotation_spanner_color="#darkcyan",
-        annotation_spanner_text="baca.skeleton() =|",
-        attach_not_yet_pitched=True,
-        do_not_check_total_duration=do_not_check_total_duration,
     )

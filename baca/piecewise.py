@@ -2211,7 +2211,7 @@ def hairpin(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.skeleton("{ c2 r4. c2 r4. }"),
+        ...     baca.make_skeleton("{ c2 r4. c2 r4. }"),
         ...     baca.pitches("C4 D4"),
         ...     baca.hairpin(
         ...         "p -- niente",
@@ -4308,7 +4308,7 @@ def text_spanner(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.skeleton("{ c2 c4. c2 c4. }"),
+        ...     baca.make_skeleton("{ c2 c4. c2 c4. }"),
         ...     baca.pitches("C4 D4 E4 F4"),
         ...     baca.text_spanner(
         ...         "P -> T ->",
@@ -4710,7 +4710,7 @@ def text_spanner(
 
         >>> commands(
         ...     "Music_Voice",
-        ...     baca.skeleton("{ c2 c4. c2 c4 ~ c8 }"),
+        ...     baca.make_skeleton("{ c2 c4. c2 c4 ~ c8 }"),
         ...     baca.pitches("C4 D4 E4 F4"),
         ...     baca.text_spanner(
         ...         "P -> T ->",
