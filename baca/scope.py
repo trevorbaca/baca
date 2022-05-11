@@ -130,12 +130,14 @@ def _make_regions(measures, *, absolute_start=1, total=None):
     # elif start == 2:
     elif start == absolute_start + 1:
         # result.insert(0, 1)
-        result.insert(0, absolute_start + 1)
+        # result.insert(0, absolute_start + 1)
+        result.insert(0, absolute_start)
         begin_with_maker_2 = True
     else:
         difference = start - absolute_start
         # assert 2 < start
-        assert 2 < difference
+        # assert 2 < difference
+        assert 1 < difference
         # pair = (1, start - 1)
         pair = (absolute_start, start - 1)
         result.insert(0, pair)

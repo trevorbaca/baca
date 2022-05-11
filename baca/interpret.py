@@ -836,6 +836,7 @@ def _call_all_commands(
                 state["name"] = command.persist
                 voice_metadata_ = voice_metadata.get(command.scope.voice_name, {})
                 voice_metadata_[command.parameter] = command.state
+                voice_metadata[command.scope.voice_name] = voice_metadata_
             components = abjad.sequence.flatten(components, depth=-1)
             voice = voice_name_to_voice[command.scope.voice_name]
             voice.extend(components)
@@ -3152,7 +3153,6 @@ def interpreter(
         )
     # _print_timing("Initialization", timer, print_timing=print_timing)
     if do_not_sort_commands is True:
-        # if True:
         with abjad.Timer() as timer:
             cache = None
             cache, command_count = _call_all_commands(
