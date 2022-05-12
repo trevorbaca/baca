@@ -99,12 +99,7 @@ def _externalize_music_ly(music_ly):
 
 def _get_lilypond_include_string():
     abjad_contents = pathlib.Path(abjad.__file__).parent
-    print(abjad_contents)
-    print(sorted(os.listdir(abjad_contents)))
     baca_contents = pathlib.Path(baca.__file__).parent
-    print(baca_contents)
-    print(sorted(os.listdir(baca_contents)))
-    print(sorted(os.listdir(baca_contents / "scm")))
     string = f"--include={abjad_contents}/scm"
     string += f" --include={baca_contents}/scm"
     return string
@@ -1258,7 +1253,6 @@ def run_lilypond(ly_file_path, *, pdf_mtime=None, remove=None):
     lilypond_log_file_path = directory / lilypond_log_file_name
     with abjad.TemporaryDirectoryChange(directory=directory):
         flags = _get_lilypond_include_string()
-        print(flags)
         abjad.io.run_lilypond(
             str(ly_file_path),
             flags=flags,
