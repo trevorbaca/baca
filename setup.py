@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import setuptools
 
+
 if __name__ == "__main__":
     setuptools.setup(
         author="Trevor Bača",
@@ -19,5 +20,6 @@ if __name__ == "__main__":
         platforms="Any",
         python_requires=">=3.10",
         url="https://github.com/trevorbaca/baca",
+        # TODO: add baca/_version.py and retrieve dynamically
         version="3.9",
     )
