@@ -1,1 +1,3 @@
+include baca/scm
+include baca/scm/ *
 recursive-include baca/ *
