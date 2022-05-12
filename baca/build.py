@@ -1105,6 +1105,7 @@ def make_layout_ly(
         add_container_identifiers=True,
         comment_measure_numbers=True,
         do_not_append_phantom_measure=do_not_append_phantom_measure,
+        do_not_sort_commands=True,
         first_measure_number=first_measure_number,
         first_segment=True,
         page_layout_profile=page_layout_profile,
