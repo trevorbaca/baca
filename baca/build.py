@@ -98,10 +98,10 @@ def _externalize_music_ly(music_ly):
 
 
 def _get_lilypond_include_string():
-    abjad_repo = pathlib.Path(abjad.__file__).parent.parent
-    baca_repo = pathlib.Path(baca.__file__).parent.parent
-    string = f"--include={abjad_repo}/abjad/scm"
-    string += f" --include={baca_repo}/baca/scm"
+    abjad_contents = pathlib.Path(abjad.__file__).parent
+    baca_contents = pathlib.Path(baca.__file__).parent
+    string = f"--include={abjad_contents}/scm"
+    string += f" --include={baca_contents}/scm"
     return string
 
 
