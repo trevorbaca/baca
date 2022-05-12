@@ -10385,12 +10385,12 @@ def cross_staff(*, selector=lambda _: _select.phead(_, 0)) -> IndicatorCommand:
 
         >>> commands(
         ...     ("Music_Voice_1", 1),
-        ...     baca.music(abjad.Container("e'4 f' g' a'")[:]),
+        ...     baca.make_music(abjad.Container("e'4 f' g' a'")[:]),
         ... )
 
         >>> commands(
         ...     ("Music_Voice_2", 1),
-        ...     baca.music(abjad.Container("c'4 d' e' f'")[:]),
+        ...     baca.make_music(abjad.Container("c'4 d' e' f'")[:]),
         ...     baca.cross_staff(
         ...         selector=lambda _: baca.select.pleaves(_)[-2:],
         ...     ),

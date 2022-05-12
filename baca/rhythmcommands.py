@@ -930,7 +930,7 @@ def make_tied_repeated_durations(durations, *, measures=None):
     )
 
 
-def music(
+def make_music(
     argument,
     *,
     annotation_spanner=False,
@@ -942,7 +942,7 @@ def music(
     """
     annotation_spanner_text = None
     if annotation_spanner is True:
-        annotation_spanner_text = "baca.music() =|"
+        annotation_spanner_text = "baca.make_music() =|"
     tag = tag.append(_tags.function_name(_frame()))
     if isinstance(argument, str):
         string = f"{{ {argument} }}"
@@ -951,7 +951,7 @@ def music(
     elif isinstance(argument, list):
         selection = argument
     else:
-        message = "baca.music() accepts string or selection,"
+        message = "baca.make_music() accepts string or selection,"
         message += f" not {repr(argument)}."
         raise TypeError(message)
     if tag is not None:

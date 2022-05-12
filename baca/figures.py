@@ -2951,7 +2951,7 @@ class FigureAccumulator:
                 continue
             command_accumulator(
                 (voice_name, 1),
-                _rhythmcommands.music(
+                _rhythmcommands.make_music(
                     selection, do_not_check_total_duration=True, tag=abjad.Tag()
                 ),
             )

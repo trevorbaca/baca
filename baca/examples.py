@@ -217,12 +217,12 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
 
     >>> commands(
     ...     ("Music_Voice_1", 1),
-    ...     baca.music(abjad.Container("d'4 e' f' g' a' b'")[:]),
+    ...     baca.make_music(abjad.Container("d'4 e' f' g' a' b'")[:]),
     ... )
 
     >>> commands(
     ...     ("Music_Voice_2", 1),
-    ...     baca.music(abjad.Container("a4 g f e d c")[:]),
+    ...     baca.make_music(abjad.Container("a4 g f e d c")[:]),
     ...     baca.clef("bass"),
     ... )
 
@@ -483,7 +483,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ... )
     >>> commands(
     ...     ("Music_Voice", 1),
-    ...     baca.music(figures_, do_not_check_total_duration=True),
+    ...     baca.make_music(figures_, do_not_check_total_duration=True),
     ...     baca.instrument(abjad.Violin()),
     ... )
 
@@ -590,7 +590,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ... )
     >>> commands(
     ...     ("Music_Voice", 1),
-    ...     baca.music(figures, do_not_check_total_duration=True),
+    ...     baca.make_music(figures, do_not_check_total_duration=True),
     ... )
 
     >>> _, _ = baca.interpreter(
