@@ -774,7 +774,6 @@ def _call_all_commands(
     already_reapplied_contexts,
     always_make_global_rests,
     append_phantom_measure,
-    append_phantom_measures_by_hand,
     attach_rhythm_annotation_spanners,
     cache,
     commands,
@@ -1555,7 +1554,6 @@ def _handle_mutator(score, cache, command):
 
 
 def _intercalate_mmrests(
-    intercalate_mmrests_by_hand,
     skips_instead_of_rests,
     time_signatures,
     timespans,
@@ -1571,11 +1569,6 @@ def _intercalate_mmrests(
         if start_offset < previous_stop_offset:
             raise Exception("overlapping offsets: {timespan!r}.")
         if previous_stop_offset < start_offset:
-            if intercalate_mmrests_by_hand is True:
-                raise Exception(
-                    f"{voice_name} needs multimeasure rests"
-                    f" ({previous_stop_offset} to {start_offset})"
-                )
             components = _make_measure_silences(
                 measure_start_offsets,
                 skips_instead_of_rests,
@@ -1590,8 +1583,6 @@ def _intercalate_mmrests(
         duration = abjad.get.duration(components)
         previous_stop_offset = start_offset + duration
     if previous_stop_offset < section_duration:
-        if intercalate_mmrests_by_hand is True:
-            raise Exception(f"{voice_name} needs section-final multimeasure rests.")
         components = _make_measure_silences(
             measure_start_offsets,
             skips_instead_of_rests,
@@ -2882,8 +2873,6 @@ def interpreter(
     append_phantom_measure=False,
     attach_nonfirst_empty_start_bar=False,
     attach_rhythm_annotation_spanners=False,
-    append_phantom_measures_by_hand=False,
-    intercalate_mmrests_by_hand=False,
     check_persistent_indicators=False,
     check_wellformedness=False,
     clock_time_extra_offset=None,
@@ -2894,7 +2883,6 @@ def interpreter(
     deactivate=None,
     do_not_append_phantom_measure=False,
     do_not_require_margin_markup=False,
-    do_not_sort_commands=False,
     error_on_not_yet_pitched=False,
     fermata_extra_offset_y=2.5,
     fermata_measure_empty_overrides=None,
@@ -3009,7 +2997,6 @@ def interpreter(
             already_reapplied_contexts=already_reapplied_contexts,
             always_make_global_rests=always_make_global_rests,
             append_phantom_measure=append_phantom_measure,
-            append_phantom_measures_by_hand=append_phantom_measures_by_hand,
             attach_rhythm_annotation_spanners=attach_rhythm_annotation_spanners,
             cache=cache,
             commands=commands,
