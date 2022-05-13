@@ -2929,6 +2929,11 @@ class FigureAccumulator:
         if 0 < first_start_offset:
             first_gap = abjad.Timespan(0, first_start_offset)
             gaps.append(first_gap)
+        final_stop_offset = floating_selections[-1].stop_offset
+        total_duration = sum([_.duration for _ in self.time_signatures])
+        if final_stop_offset < total_duration:
+            final_gap = abjad.Timespan(final_stop_offset, total_duration)
+            gaps.append(final_gap)
         selections = floating_selections + list(gaps)
         selections.sort()
         fused_selection = []
