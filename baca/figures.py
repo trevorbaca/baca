@@ -2914,8 +2914,7 @@ class FigureAccumulator:
 
     def assemble(self, voice_name) -> list | None:
         floating_selections = self._floating_selections[voice_name]
-        if not floating_selections:
-            return None
+        total_duration = sum([_.duration for _ in self.time_signatures])
         for floating_selection in floating_selections:
             assert isinstance(floating_selection, abjad.Timespan)
         floating_selections = list(floating_selections)
@@ -2923,14 +2922,20 @@ class FigureAccumulator:
         try:
             first_start_offset = floating_selections[0].start_offset
         except Exception:
-            raise Exception(floating_selections, voice_name)
+            first_start_offset = abjad.Offset(0)
         timespans = abjad.TimespanList(floating_selections)
-        gaps = ~timespans
+        if timespans:
+            gaps = ~timespans
+        else:
+            sectionwide_gap = abjad.Timespan(0, total_duration)
+            gaps = abjad.TimespanList([sectionwide_gap])
         if 0 < first_start_offset:
             first_gap = abjad.Timespan(0, first_start_offset)
             gaps.append(first_gap)
-        final_stop_offset = floating_selections[-1].stop_offset
-        total_duration = sum([_.duration for _ in self.time_signatures])
+        if floating_selections:
+            final_stop_offset = floating_selections[-1].stop_offset
+        else:
+            final_stop_offset = total_duration
         if final_stop_offset < total_duration:
             final_gap = abjad.Timespan(final_stop_offset, total_duration)
             gaps.append(final_gap)
