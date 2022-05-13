@@ -882,157 +882,6 @@ def _call_all_commands(
     return cache, command_count
 
 
-def _call_commands(
-    allow_empty_selections,
-    allows_instrument,
-    already_reapplied_contexts,
-    cache,
-    commands,
-    measure_count,
-    offset_to_measure_number,
-    manifests,
-    previous_persist,
-    score,
-    voice_metadata,
-):
-    command_count = 0
-    for command in commands:
-        assert isinstance(command, _command.Command)
-        assert not isinstance(command, _rhythmcommands.RhythmCommand)
-        command_count += 1
-        selection, cache = _scope_to_leaf_selection(
-            score,
-            allow_empty_selections,
-            cache,
-            command,
-            measure_count,
-        )
-        voice_name = command.scope.voice_name
-        previous_segment_voice_metadata = _get_previous_segment_voice_metadata(
-            previous_persist, voice_name
-        )
-        previous_persistent_indicators = previous_persist.get("persistent_indicators")
-        runtime = _bundle_runtime(
-            allows_instrument=allows_instrument,
-            already_reapplied_contexts=already_reapplied_contexts,
-            manifests=manifests,
-            offset_to_measure_number=offset_to_measure_number,
-            previous_persistent_indicators=previous_persistent_indicators,
-            previous_segment_voice_metadata=previous_segment_voice_metadata,
-        )
-        try:
-            command(selection, runtime)
-        except Exception:
-            print(f"Interpreting ...\n\n{command}\n")
-            raise
-        cache = _handle_mutator(score, cache, command)
-        if getattr(command, "persist", None):
-            parameter = command.parameter
-            state = command.state
-            assert "name" not in state
-            state["name"] = command.persist
-            if voice_name not in voice_metadata:
-                voice_metadata[voice_name] = {}
-            voice_metadata[voice_name][parameter] = state
-    return cache, command_count
-
-
-def _call_rhythm_commands(
-    always_make_global_rests,
-    attach_rhythm_annotation_spanners,
-    append_phantom_measures_by_hand,
-    intercalate_mmrests_by_hand,
-    commands,
-    append_phantom_measure,
-    manifests,
-    measure_count,
-    previous_persist,
-    score,
-    skips_instead_of_rests,
-    time_signatures,
-    voice_metadata,
-):
-    command_count, section_duration = 0, None
-    for voice in abjad.select.components(score, abjad.Voice):
-        assert not len(voice), repr(voice)
-        voice_metadata_ = voice_metadata.get(voice.name, {})
-        commands_ = _voice_to_rhythm_commands(commands, voice)
-        timespans = []
-        for command in commands_:
-            assert command.scope.measures, repr(command)
-            measures = command.scope.measures
-            start_offset, time_signatures_ = _get_measure_time_signatures(
-                measure_count,
-                score,
-                time_signatures,
-                *measures,
-            )
-            previous_segment_voice_metadata = _get_previous_segment_voice_metadata(
-                previous_persist, voice.name
-            )
-            runtime = _bundle_runtime(
-                manifests=manifests,
-                previous_segment_voice_metadata=previous_segment_voice_metadata,
-            )
-            components = None
-            try:
-                components = command._make_components(time_signatures_, runtime)
-            except Exception:
-                print(f"Interpreting ...\n\n{command}\n")
-                raise
-            for voice_ in abjad.select.components(components, abjad.Voice):
-                if voice_.name == "Rhythm_Maker_Music_Voice":
-                    voice_.name = command.scope.voice_name
-                elif voice_.name == "Change_Me_Voice":
-                    voice_.name = command.scope.voice_name
-                elif voice_.name == "Change_Me_Rest_Voice":
-                    scope_voice_name = command.scope.voice_name
-                    if "Music_Voice" in scope_voice_name:
-                        foo = scope_voice_name.replace("Music_Voice", "Rest_Voice")
-                    else:
-                        assert "Voice" in scope_voice_name
-                        foo = scope_voice_name.replace("Voice", "Rest_Voice")
-                    voice_.name = foo
-            if attach_rhythm_annotation_spanners:
-                _attach_rhythm_annotation_spanner(command, components)
-            timespan = abjad.Timespan(start_offset=start_offset, annotation=components)
-            timespans.append(timespan)
-            if command.persist and command.state:
-                state = command.state
-                assert "name" not in state
-                state["name"] = command.persist
-                voice_metadata_[command.parameter] = command.state
-            command_count += 1
-        if bool(voice_metadata_):
-            voice_metadata[voice.name] = voice_metadata_
-        timespans.sort()
-        _assert_nonoverlapping_rhythms(timespans, voice.name)
-        components, section_duration = _intercalate_mmrests(
-            intercalate_mmrests_by_hand,
-            skips_instead_of_rests,
-            time_signatures,
-            timespans,
-            voice.name,
-        )
-        if append_phantom_measures_by_hand is False:
-            if append_phantom_measure:
-                suppress_note = False
-                final_leaf = abjad.get.leaf(components, -1)
-                if isinstance(final_leaf, abjad.MultimeasureRest):
-                    suppress_note = True
-                container = _make_multimeasure_rest_container(
-                    voice.name,
-                    (1, 4),
-                    skips_instead_of_rests,
-                    phantom=True,
-                    suppress_note=suppress_note,
-                )
-                components.append(container)
-        components = abjad.sequence.flatten(components, depth=-1)
-        voice.extend(components)
-    return command_count, section_duration
-
-
 def _check_all_music_in_part_containers(score):
     indicator = _enums.MULTIMEASURE_REST_CONTAINER
     for voice in abjad.iterate.components(score, abjad.Voice):
@@ -3152,84 +3001,30 @@ def interpreter(
             time_signatures,
         )
     # _print_timing("Initialization", timer, print_timing=print_timing)
-    if do_not_sort_commands is True:
-        with abjad.Timer() as timer:
-            cache = None
-            cache, command_count = _call_all_commands(
-                allow_empty_selections=allow_empty_selections,
-                allows_instrument=allows_instrument,
-                already_reapplied_contexts=already_reapplied_contexts,
-                always_make_global_rests=always_make_global_rests,
-                append_phantom_measure=append_phantom_measure,
-                append_phantom_measures_by_hand=append_phantom_measures_by_hand,
-                attach_rhythm_annotation_spanners=attach_rhythm_annotation_spanners,
-                cache=cache,
-                commands=commands,
-                manifests=manifests,
-                measure_count=measure_count,
-                offset_to_measure_number=offset_to_measure_number,
-                previous_persist=previous_persist,
-                score=score,
-                skips_instead_of_rests=skips_instead_of_rests,
-                time_signatures=time_signatures,
-                voice_metadata=voice_metadata,
-            )
-        _print_timing(
-            "All commands", timer, print_timing=print_timing, suffix=command_count
+    with abjad.Timer() as timer:
+        cache = None
+        cache, command_count = _call_all_commands(
+            allow_empty_selections=allow_empty_selections,
+            allows_instrument=allows_instrument,
+            already_reapplied_contexts=already_reapplied_contexts,
+            always_make_global_rests=always_make_global_rests,
+            append_phantom_measure=append_phantom_measure,
+            append_phantom_measures_by_hand=append_phantom_measures_by_hand,
+            attach_rhythm_annotation_spanners=attach_rhythm_annotation_spanners,
+            cache=cache,
+            commands=commands,
+            manifests=manifests,
+            measure_count=measure_count,
+            offset_to_measure_number=offset_to_measure_number,
+            previous_persist=previous_persist,
+            score=score,
+            skips_instead_of_rests=skips_instead_of_rests,
+            time_signatures=time_signatures,
+            voice_metadata=voice_metadata,
         )
-    else:
-        default_indicator_commands, other_commands, rhythm_commands = [], [], []
-        for command in commands:
-            if isinstance(command, _rhythmcommands.RhythmCommand):
-                rhythm_commands.append(command)
-            elif getattr(command, "name", None) in (
-                "attach_first_segment_default_indicators",
-                "attach_first_apperance_default_indicators",
-                "reapply_persistent_indicators",
-            ):
-                default_indicator_commands.append(command)
-            else:
-                other_commands.append(command)
-        other_commands[0:0] = default_indicator_commands
-        with abjad.Timer() as timer:
-            with abjad.ForbidUpdate(component=score, update_on_exit=True):
-                command_count, section_duration = _call_rhythm_commands(
-                    always_make_global_rests,
-                    attach_rhythm_annotation_spanners,
-                    append_phantom_measures_by_hand,
-                    intercalate_mmrests_by_hand,
-                    rhythm_commands,
-                    append_phantom_measure,
-                    manifests,
-                    measure_count,
-                    previous_persist,
-                    score,
-                    skips_instead_of_rests,
-                    time_signatures,
-                    voice_metadata,
-                )
-        _print_timing(
-            "Rhythm commands", timer, print_timing=print_timing, suffix=command_count
-        )
-        with abjad.Timer() as timer:
-            with abjad.ForbidUpdate(component=score, update_on_exit=True):
-                cache = None
-                cache, command_count = _call_commands(
-                    allow_empty_selections,
-                    allows_instrument,
-                    already_reapplied_contexts,
-                    cache,
-                    other_commands,
-                    measure_count,
-                    offset_to_measure_number,
-                    manifests,
-                    previous_persist,
-                    score,
-                    voice_metadata,
-                )
-        _print_timing(
-            "Other commands", timer, print_timing=print_timing, suffix=command_count
-        )
+    _print_timing(
+        "All commands", timer, print_timing=print_timing, suffix=command_count
+    )
     _extend_beams(score)
     _attach_sounds_during(score)
     with abjad.Timer() as timer:
