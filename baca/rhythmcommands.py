@@ -485,9 +485,7 @@ class TimeSignatureMaker:
 
 def _make_mmrests(time_signatures):
     mmrests = []
-    # TODO: update tag
-    # tag = _tags.function_name(_frame())
-    tag = abjad.Tag("baca._make_measure_silences()")
+    tag = _tags.function_name(_frame())
     for i, time_signature in enumerate(time_signatures):
         duration = time_signature.duration
         if i == 0:
