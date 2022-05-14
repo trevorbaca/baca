@@ -859,6 +859,7 @@ def attach_first_appearance_default_indicators(
     return command
 
 
+# TODO: move to interpret.py
 def attach_first_segment_default_indicators(
     *, selector=lambda _: _select.leaves(_)
 ) -> GenericCommand:
@@ -875,64 +876,6 @@ def attach_first_segment_default_indicators(
 
     command = GenericCommand(function=function, selector=selector)
     command.name = "attach_first_segment_default_indicators"
-    return command
-
-
-def append_phantom_measure(*, selector=lambda _: _select.leaves(_)) -> GenericCommand:
-    def function(argument, *, runtime=None):
-        from . import interpret as _interpret
-
-        leaf = abjad.get.leaf(argument, 0)
-        parentage = abjad.get.parentage(leaf)
-        voice = parentage.get(abjad.Voice, n=-1)
-        final_leaf = abjad.get.leaf(voice, -1)
-        suppress_note = False
-        if isinstance(final_leaf, abjad.MultimeasureRest):
-            suppress_note = True
-        container = _interpret._make_multimeasure_rest_container(
-            voice.name,
-            (1, 4),
-            skips_instead_of_rests=False,
-            phantom=True,
-            suppress_note=suppress_note,
-        )
-        voice.append(container)
-
-    command = GenericCommand(function=function, selector=selector)
-    command.name = "append_phantom_measure"
-    return command
-
-
-def reapply_persistent_indicators(
-    *, selector=lambda _: _select.leaves(_)
-) -> GenericCommand:
-    from . import interpret as _interpret
-
-    def function(argument, *, runtime=None):
-        already_reapplied_contexts = runtime["already_reapplied_contexts"]
-        manifests = runtime["manifests"]
-        previous_persistent_indicators = runtime["previous_persistent_indicators"]
-        leaf = abjad.select.leaf(argument, 0)
-        parentage = abjad.get.parentage(leaf)
-        contexts = []
-        score = None
-        for component in parentage:
-            if isinstance(component, abjad.Score):
-                score = component
-            elif isinstance(component, abjad.Context):
-                contexts.append(component)
-        assert isinstance(score, abjad.Score)
-        for context in contexts:
-            _interpret._reapply_persistent_indicators(
-                already_reapplied_contexts,
-                manifests,
-                previous_persistent_indicators,
-                score,
-                do_not_iterate=context,
-            )
-
-    command = GenericCommand(function=function, selector=selector)
-    command.name = "reapply_persistent_indicators"
     return command
 
 

@@ -23,8 +23,10 @@ from .enums import colors, enums
 from .figures import *
 from .indicators import *
 from .interpret import (
+    append_phantom_measure,
     interpreter,
     make_lilypond_file,
+    reapply_persistent_indicators,
     score_interpretation_defaults,
 )
 from .layout import *

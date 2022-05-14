@@ -316,14 +316,6 @@ class RhythmCommand(_command.Command):
                 self._state = rcommand.maker.state
             elif isinstance(rcommand, types.FunctionType):
                 selection = rcommand(time_signatures)
-            # TODO: remove this branch?
-            else:
-                raise Exception(f"What is {rcommand}?")
-                selection = rcommand(
-                    time_signatures,
-                    previous_segment_stop_state=previous_segment_stop_state,
-                )
-                self._state = rcommand.state
         assert isinstance(selection, list), repr(selection)
         if self.attach_not_yet_pitched or not isinstance(self.rhythm_maker, list):
             container = abjad.Container(selection, name="Dummy")
@@ -491,6 +483,98 @@ class TimeSignatureMaker:
         return result
 
 
+def _make_mmrests(time_signatures):
+    mmrests = []
+    # TODO: update tag
+    # tag = _tags.function_name(_frame())
+    tag = abjad.Tag("baca._make_measure_silences()")
+    for i, time_signature in enumerate(time_signatures):
+        duration = time_signature.duration
+        if i == 0:
+            voice_name = "Change_Me_Voice"
+            mmrest = _make_multimeasure_rest_container(voice_name, duration)
+        else:
+            mmrest = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
+        mmrests.append(mmrest)
+    return mmrests
+
+
+def _make_multimeasure_rest_container(
+    voice_name,
+    duration,
+    *,
+    phantom=False,
+    suppress_note=False,
+):
+    if suppress_note is True:
+        assert phantom is True
+    if phantom is True:
+        phantom_tag = _tags.PHANTOM
+    else:
+        phantom_tag = abjad.Tag()
+    tag = _tags.function_name(_frame(), n=1)
+    tag = tag.append(phantom_tag)
+    tag = tag.append(_tags.HIDDEN)
+    if suppress_note is not True:
+        note_or_rest = _tags.NOTE
+        tag = tag.append(_tags.NOTE)
+        note = abjad.Note("c'1", multiplier=duration, tag=tag)
+        abjad.override(note).Accidental.stencil = False
+        abjad.override(note).NoteColumn.ignore_collision = True
+        abjad.attach(_enums.NOTE, note)
+        abjad.attach(_enums.NOT_YET_PITCHED, note)
+    else:
+        note_or_rest = _tags.MULTIMEASURE_REST
+        tag = tag.append(_tags.MULTIMEASURE_REST)
+        note = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
+        abjad.attach(_enums.MULTIMEASURE_REST, note)
+    abjad.attach(_enums.HIDDEN, note)
+    tag = _tags.function_name(_frame(), n=2)
+    tag = tag.append(phantom_tag)
+    tag = tag.append(note_or_rest)
+    tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
+    literal = abjad.LilyPondLiteral(r"\abjad-invisible-music-coloring", site="before")
+    abjad.attach(literal, note, tag=tag)
+    tag = _tags.function_name(_frame(), n=3)
+    tag = tag.append(phantom_tag)
+    tag = tag.append(note_or_rest)
+    tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
+    literal = abjad.LilyPondLiteral(r"\abjad-invisible-music", site="before")
+    abjad.attach(literal, note, deactivate=True, tag=tag)
+    abjad.attach(_enums.HIDDEN, note)
+    tag = _tags.function_name(_frame(), n=4)
+    tag = tag.append(phantom_tag)
+    hidden_note_voice = abjad.Voice([note], name=voice_name, tag=tag)
+    abjad.attach(_enums.INTERMITTENT, hidden_note_voice)
+    tag = _tags.function_name(_frame(), n=5)
+    tag = tag.append(phantom_tag)
+    tag = tag.append(_tags.REST_VOICE)
+    tag = tag.append(_tags.MULTIMEASURE_REST)
+    rest = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
+    abjad.attach(_enums.MULTIMEASURE_REST, rest)
+    abjad.attach(_enums.REST_VOICE, rest)
+    if "Music_Voice" in voice_name:
+        name = voice_name.replace("Music_Voice", "Rest_Voice")
+    else:
+        name = voice_name.replace("Voice", "Rest_Voice")
+    tag = _tags.function_name(_frame(), n=6)
+    tag = tag.append(phantom_tag)
+    multimeasure_rest_voice = abjad.Voice([rest], name=name, tag=tag)
+    abjad.attach(_enums.INTERMITTENT, multimeasure_rest_voice)
+    tag = _tags.function_name(_frame(), n=7)
+    tag = tag.append(phantom_tag)
+    container = abjad.Container(
+        [hidden_note_voice, multimeasure_rest_voice],
+        simultaneous=True,
+        tag=tag,
+    )
+    abjad.attach(_enums.MULTIMEASURE_REST_CONTAINER, container)
+    if phantom is True:
+        for component in abjad.iterate.components(container):
+            abjad.attach(_enums.PHANTOM, component)
+    return container
+
+
 def make_even_divisions(*, measures=None):
     """
     Makes even divisions.
@@ -538,30 +622,11 @@ def make_fused_tuplet_monads(
     )
 
 
-def _make_flamingo_notes(time_signatures):
-    from . import interpret as _interpret
-
-    silences = []
-    # TODO: eventually update tag:
-    tag = abjad.Tag("baca._make_measure_silences()")
-    for i, time_signature in enumerate(time_signatures):
-        duration = time_signature.duration
-        if i == 0:
-            voice_name = "Change_Me_Voice"
-            silence = _interpret._make_multimeasure_rest_container(
-                voice_name, duration, skips_instead_of_rests=False
-            )
-        else:
-            silence = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
-        silences.append(silence)
-    return silences
-
-
 def make_mmrests(
     measures=None,
 ):
     return RhythmCommand(
-        rhythm_maker=_make_flamingo_notes,
+        rhythm_maker=_make_mmrests,
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
         measures=measures,

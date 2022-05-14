@@ -790,8 +790,9 @@ def _call_all_commands(
     for voice in abjad.select.components(score, abjad.Voice):
         voice_name_to_voice[voice.name] = voice
     command_count = 0
-    for command in commands:
+    for i, command in enumerate(commands):
         assert isinstance(command, _command.Command)
+        # print(f"{i=}, {command.scope=}")
         if isinstance(command, _rhythmcommands.RhythmCommand):
             assert command.scope.measures, repr(command)
             measures = command.scope.measures
@@ -1553,49 +1554,6 @@ def _handle_mutator(score, cache, command):
     return cache
 
 
-def _intercalate_mmrests(
-    skips_instead_of_rests,
-    time_signatures,
-    timespans,
-    voice_name,
-):
-    lists = []
-    durations = [_.duration for _ in time_signatures]
-    measure_start_offsets = abjad.math.cumulative_sums(durations)
-    section_duration = measure_start_offsets[-1]
-    previous_stop_offset = abjad.Offset(0)
-    for timespan in timespans:
-        start_offset = timespan.start_offset
-        if start_offset < previous_stop_offset:
-            raise Exception("overlapping offsets: {timespan!r}.")
-        if previous_stop_offset < start_offset:
-            components = _make_measure_silences(
-                measure_start_offsets,
-                skips_instead_of_rests,
-                previous_stop_offset,
-                start_offset,
-                voice_name,
-            )
-            lists.append(components)
-        components = timespan.annotation
-        assert isinstance(components, list), repr(timespan)
-        lists.append(components)
-        duration = abjad.get.duration(components)
-        previous_stop_offset = start_offset + duration
-    if previous_stop_offset < section_duration:
-        components = _make_measure_silences(
-            measure_start_offsets,
-            skips_instead_of_rests,
-            previous_stop_offset,
-            section_duration,
-            voice_name,
-        )
-        assert isinstance(components, list)
-        lists.append(components)
-    assert all(isinstance(_, list) for _ in lists)
-    return lists, section_duration
-
-
 def _label_clock_time(
     clock_time_override,
     fermata_measure_numbers,
@@ -2001,118 +1959,6 @@ def _make_lilypond_file(
         lilypond_file["score"].items[:] = [container]
         lilypond_file["score"].items.append("")
     return lilypond_file
-
-
-def _make_measure_silences(
-    measure_start_offsets,
-    skips_instead_of_rests,
-    start,
-    stop,
-    voice_name,
-):
-    tag = _tags.function_name(_frame())
-    offsets = [start]
-    for measure_start_offset in measure_start_offsets:
-        if start < measure_start_offset < stop:
-            offsets.append(measure_start_offset)
-    offsets.append(stop)
-    silences = []
-    durations = abjad.math.difference_series(offsets)
-    for i, duration in enumerate(durations):
-        if i == 0:
-            silence = _make_multimeasure_rest_container(
-                voice_name, duration, skips_instead_of_rests
-            )
-        else:
-            if skips_instead_of_rests:
-                silence = abjad.Skip(1, multiplier=duration, tag=tag)
-            else:
-                silence = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
-        silences.append(silence)
-    assert all(isinstance(_, abjad.Component) for _ in silences)
-    return silences
-
-
-def _make_multimeasure_rest_container(
-    voice_name,
-    duration,
-    skips_instead_of_rests,
-    *,
-    phantom=False,
-    suppress_note=False,
-):
-    if suppress_note is True:
-        assert phantom is True
-    if phantom is True:
-        phantom_tag = _tags.PHANTOM
-    else:
-        phantom_tag = abjad.Tag()
-    tag = _tags.function_name(_frame(), n=1)
-    tag = tag.append(phantom_tag)
-    tag = tag.append(_tags.HIDDEN)
-    if suppress_note is not True:
-        note_or_rest = _tags.NOTE
-        tag = tag.append(_tags.NOTE)
-        note = abjad.Note("c'1", multiplier=duration, tag=tag)
-        abjad.override(note).Accidental.stencil = False
-        abjad.override(note).NoteColumn.ignore_collision = True
-        abjad.attach(_enums.NOTE, note)
-        abjad.attach(_enums.NOT_YET_PITCHED, note)
-    else:
-        note_or_rest = _tags.MULTIMEASURE_REST
-        tag = tag.append(_tags.MULTIMEASURE_REST)
-        note = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
-        abjad.attach(_enums.MULTIMEASURE_REST, note)
-    abjad.attach(_enums.HIDDEN, note)
-    tag = _tags.function_name(_frame(), n=2)
-    tag = tag.append(phantom_tag)
-    tag = tag.append(note_or_rest)
-    tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
-    literal = abjad.LilyPondLiteral(r"\abjad-invisible-music-coloring", site="before")
-    abjad.attach(literal, note, tag=tag)
-    tag = _tags.function_name(_frame(), n=3)
-    tag = tag.append(phantom_tag)
-    tag = tag.append(note_or_rest)
-    tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
-    literal = abjad.LilyPondLiteral(r"\abjad-invisible-music", site="before")
-    abjad.attach(literal, note, deactivate=True, tag=tag)
-    abjad.attach(_enums.HIDDEN, note)
-    tag = _tags.function_name(_frame(), n=4)
-    tag = tag.append(phantom_tag)
-    hidden_note_voice = abjad.Voice([note], name=voice_name, tag=tag)
-    abjad.attach(_enums.INTERMITTENT, hidden_note_voice)
-    tag = _tags.function_name(_frame(), n=5)
-    tag = tag.append(phantom_tag)
-    tag = tag.append(_tags.REST_VOICE)
-    if skips_instead_of_rests:
-        tag = tag.append(_tags.SKIP)
-        rest = abjad.Skip(1, multiplier=duration, tag=tag)
-        abjad.attach(_enums.SKIP, rest)
-    else:
-        tag = tag.append(_tags.MULTIMEASURE_REST)
-        rest = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
-        abjad.attach(_enums.MULTIMEASURE_REST, rest)
-    abjad.attach(_enums.REST_VOICE, rest)
-    if "Music_Voice" in voice_name:
-        name = voice_name.replace("Music_Voice", "Rest_Voice")
-    else:
-        name = voice_name.replace("Voice", "Rest_Voice")
-    tag = _tags.function_name(_frame(), n=6)
-    tag = tag.append(phantom_tag)
-    multimeasure_rest_voice = abjad.Voice([rest], name=name, tag=tag)
-    abjad.attach(_enums.INTERMITTENT, multimeasure_rest_voice)
-    tag = _tags.function_name(_frame(), n=7)
-    tag = tag.append(phantom_tag)
-    container = abjad.Container(
-        [hidden_note_voice, multimeasure_rest_voice],
-        simultaneous=True,
-        tag=tag,
-    )
-    abjad.attach(_enums.MULTIMEASURE_REST_CONTAINER, container)
-    if phantom is True:
-        for component in abjad.iterate.components(container):
-            abjad.attach(_enums.PHANTOM, component)
-    return container
 
 
 def _memento_to_indicator(dictionary, memento):
@@ -2827,6 +2673,30 @@ def _whitespace_leaves(score):
         abjad.attach(literal, container, tag=None)
 
 
+def append_phantom_measure(
+    *, selector=lambda _: _select.leaves(_)
+) -> _commands.GenericCommand:
+    def function(argument, *, runtime=None):
+        leaf = abjad.get.leaf(argument, 0)
+        parentage = abjad.get.parentage(leaf)
+        voice = parentage.get(abjad.Voice, n=-1)
+        final_leaf = abjad.get.leaf(voice, -1)
+        suppress_note = False
+        if isinstance(final_leaf, abjad.MultimeasureRest):
+            suppress_note = True
+        container = _rhythmcommands._make_multimeasure_rest_container(
+            voice.name,
+            (1, 4),
+            phantom=True,
+            suppress_note=suppress_note,
+        )
+        voice.append(container)
+
+    command = _commands.GenericCommand(function=function, selector=selector)
+    command.name = "append_phantom_measure"
+    return command
+
+
 def color_out_of_range_pitches(score):
     indicator = _enums.ALLOW_OUT_OF_RANGE
     tag = _tags.function_name(_frame())
@@ -2955,40 +2825,36 @@ def interpreter(
     assert isinstance(treat_untreated_persistent_wrappers, bool)
     voice_metadata = {}
     already_reapplied_contexts = set()
-    with abjad.Timer() as timer:
-        # temporary hack to make baca.select.mleaves() work
-        dummy_container = abjad.Container([score], name="Dummy_Container")
-        _make_global_skips(append_phantom_measure, global_skips, time_signatures)
-        _reapply_persistent_indicators(
-            already_reapplied_contexts,
-            manifests,
-            previous_persistent_indicators,
+    _make_global_skips(append_phantom_measure, global_skips, time_signatures)
+    if attach_nonfirst_empty_start_bar and not first_segment:
+        _attach_nonfirst_empty_start_bar(global_skips)
+    _label_measure_numbers(first_measure_number, global_skips)
+    _label_stage_numbers(global_skips, stage_markup)
+    _label_moment_numbers(global_skips, moment_markup)
+    offset_to_measure_number = _populate_offset_to_measure_number(
+        first_measure_number,
+        global_skips,
+    )
+    if spacing is not None:
+        _apply_spacing(
+            page_layout_profile,
             score,
-            do_not_iterate=score,
+            spacing,
+            do_not_append_phantom_measure=do_not_append_phantom_measure,
         )
-        if attach_nonfirst_empty_start_bar and not first_segment:
-            _attach_nonfirst_empty_start_bar(global_skips)
-        _label_measure_numbers(first_measure_number, global_skips)
-        _label_stage_numbers(global_skips, stage_markup)
-        _label_moment_numbers(global_skips, moment_markup)
-        offset_to_measure_number = _populate_offset_to_measure_number(
-            first_measure_number,
-            global_skips,
-        )
-        if spacing is not None:
-            _apply_spacing(
-                page_layout_profile,
-                score,
-                spacing,
-                do_not_append_phantom_measure=do_not_append_phantom_measure,
-            )
-        _attach_fermatas(
-            always_make_global_rests,
-            append_phantom_measure,
-            score,
-            time_signatures,
-        )
-    # _print_timing("Initialization", timer, print_timing=print_timing)
+    _attach_fermatas(
+        always_make_global_rests,
+        append_phantom_measure,
+        score,
+        time_signatures,
+    )
+    _reapply_persistent_indicators(
+        already_reapplied_contexts,
+        manifests,
+        previous_persistent_indicators,
+        score,
+        do_not_iterate=score,
+    )
     with abjad.Timer() as timer:
         cache = None
         cache, command_count = _call_all_commands(
@@ -3161,7 +3027,6 @@ def interpreter(
         )
         if append_phantom_measure:
             _style_phantom_measures(score)
-    dummy_container[:] = []
     return metadata, persist
 
 
@@ -3200,6 +3065,37 @@ def make_lilypond_file(
         score,
     )
     return lilypond_file
+
+
+def reapply_persistent_indicators(
+    *, selector=lambda _: _select.leaves(_)
+) -> _commands.GenericCommand:
+    def function(argument, *, runtime=None):
+        already_reapplied_contexts = runtime["already_reapplied_contexts"]
+        manifests = runtime["manifests"]
+        previous_persistent_indicators = runtime["previous_persistent_indicators"]
+        leaf = abjad.select.leaf(argument, 0)
+        parentage = abjad.get.parentage(leaf)
+        contexts = []
+        score = None
+        for component in parentage:
+            if isinstance(component, abjad.Score):
+                score = component
+            elif isinstance(component, abjad.Context):
+                contexts.append(component)
+        assert isinstance(score, abjad.Score)
+        for context in contexts:
+            _reapply_persistent_indicators(
+                already_reapplied_contexts,
+                manifests,
+                previous_persistent_indicators,
+                score,
+                do_not_iterate=context,
+            )
+
+    command = _commands.GenericCommand(function=function, selector=selector)
+    command.name = "reapply_persistent_indicators"
+    return command
 
 
 def score_interpretation_defaults():
