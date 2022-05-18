@@ -497,6 +497,16 @@ def _make_mmrests(time_signatures):
     return mmrests
 
 
+def _make_mmrests_flat(time_signatures):
+    mmrests = []
+    tag = _tags.function_name(_frame())
+    for time_signature in time_signatures:
+        duration = time_signature.duration
+        mmrest = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
+        mmrests.append(mmrest)
+    return mmrests
+
+
 def _make_multimeasure_rest_container(
     voice_name,
     duration,
@@ -625,6 +635,17 @@ def make_mmrests(
 ):
     return RhythmCommand(
         rhythm_maker=_make_mmrests,
+        annotation_spanner_color="#darkcyan",
+        frame=_frame(),
+        measures=measures,
+    )
+
+
+def make_mmrests_flat(
+    measures=None,
+):
+    return RhythmCommand(
+        rhythm_maker=_make_mmrests_flat,
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
         measures=measures,
