@@ -934,6 +934,7 @@ def make_single_attack(duration, *, measures=None):
 def make_skeleton(
     argument,
     *,
+    attach_annotation_spanner=False,
     do_not_check_total_duration=None,
     tag=abjad.Tag(),
 ):
@@ -954,10 +955,14 @@ def make_skeleton(
         raise TypeError(message)
     if tag is not None:
         _tag_components(selection, tag)
+    if attach_annotation_spanner is True:
+        annotation_spanner_text = "baca.make_skeleton() =|"
+    else:
+        annotation_spanner_text = None
     return RhythmCommand(
         rhythm_maker=selection,
         annotation_spanner_color="#darkcyan",
-        annotation_spanner_text="baca.make_skeleton() =|",
+        annotation_spanner_text=annotation_spanner_text,
         attach_not_yet_pitched=True,
         do_not_check_total_duration=do_not_check_total_duration,
     )
