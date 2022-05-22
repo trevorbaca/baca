@@ -8,6 +8,7 @@ class enums(enum.Enum):
     ALLOW_OCTAVE = enum.auto()
     ALLOW_OUT_OF_RANGE = enum.auto()
     ALLOW_REPEAT_PITCH = enum.auto()
+    ANCHOR = enum.auto()
 
     BOW_SPEED = enum.auto()
 

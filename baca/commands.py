@@ -742,8 +742,8 @@ class GenericCommand(_command.Command):
     def _call(self, argument=None) -> None:
         if argument is None:
             return
-        assert self.selector is not None
-        argument = self.selector(argument)
+        if self.selector is not None:
+            argument = self.selector(argument)
         self.function(argument, runtime=self._runtime)
 
 

@@ -23,6 +23,7 @@ from .enums import colors, enums
 from .figures import *
 from .indicators import *
 from .interpret import (
+    append_anchor_note,
     append_phantom_measure,
     interpreter,
     make_lilypond_file,

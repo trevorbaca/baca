@@ -549,6 +549,7 @@ def _make_multimeasure_rest_container(
     tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
     literal = abjad.LilyPondLiteral(r"\abjad-invisible-music", site="before")
     abjad.attach(literal, note, deactivate=True, tag=tag)
+    # TODO: remove 1 line below?
     abjad.attach(_enums.HIDDEN, note)
     tag = _tags.function_name(_frame(), n=4)
     tag = tag.append(phantom_tag)

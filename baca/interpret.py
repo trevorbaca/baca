@@ -2381,6 +2381,15 @@ def _sort_by_timeline(leaves):
     return leaves
 
 
+def _style_anchor_notes(score):
+    for note in abjad.select.components(score, abjad.Note):
+        if not abjad.get.has_indicator(note, _enums.ANCHOR):
+            continue
+        _append_tag_to_wrappers(note, _tags.function_name(_frame()))
+        _append_tag_to_wrappers(note, _tags.PHANTOM)
+        # _append_tag_to_wrappers(note, _tags.ANCHOR)
+
+
 def _style_fermata_measures(
     fermata_extra_offset_y,
     fermata_measure_empty_overrides,
@@ -2673,9 +2682,57 @@ def _whitespace_leaves(score):
         abjad.attach(literal, container, tag=None)
 
 
-def append_phantom_measure(
-    *, selector=lambda _: _select.leaves(_)
-) -> _commands.GenericCommand:
+def append_anchor_note() -> _commands.GenericCommand:
+    def function(argument, *, runtime=None):
+        leaf = abjad.get.leaf(argument, 0)
+        parentage = abjad.get.parentage(leaf)
+        voice = parentage.get(abjad.Voice, n=-1)
+        tag = abjad.Tag("baca.append_anchor_note(1)")
+        tag = tag.append(_tags.PHANTOM)
+        tag = tag.append(_tags.HIDDEN)
+        tag = tag.append(_tags.NOTE)
+        note = abjad.Note("c'1", multiplier=(1, 4), tag=tag)
+        abjad.attach(_enums.ANCHOR, note)
+        abjad.attach(_enums.HIDDEN, note)
+        abjad.attach(_enums.NOT_YET_PITCHED, note)
+        abjad.attach(_enums.NOTE, note)
+        abjad.attach(_enums.PHANTOM, note)
+        #
+        tag = abjad.Tag("baca.append_anchor_note(2)")
+        tag = tag.append(_tags.PHANTOM)
+        tag = tag.append(_tags.NOTE)
+        tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
+        literal = abjad.LilyPondLiteral(
+            r"\abjad-invisible-music-coloring", site="before"
+        )
+        abjad.attach(literal, note, tag=tag)
+        #
+        tag = abjad.Tag("baca.append_anchor_note(3)")
+        tag = tag.append(_tags.PHANTOM)
+        tag = tag.append(_tags.NOTE)
+        tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
+        literal = abjad.LilyPondLiteral(r"\abjad-invisible-music", site="before")
+        abjad.attach(literal, note, deactivate=True, tag=tag)
+        #
+        strings = [
+            r"\stopStaff",
+            r"\once \override Staff.StaffSymbol.transparent = ##t",
+            r"\startStaff",
+        ]
+        literal = abjad.LilyPondLiteral(strings)
+        abjad.attach(
+            literal,
+            note,
+            tag=abjad.Tag("baca.append_anchor_note(4)"),
+        )
+        #
+        voice.append(note)
+
+    command = _commands.GenericCommand(function=function)
+    return command
+
+
+def append_phantom_measure() -> _commands.GenericCommand:
     def function(argument, *, runtime=None):
         leaf = abjad.get.leaf(argument, 0)
         parentage = abjad.get.parentage(leaf)
@@ -2692,8 +2749,7 @@ def append_phantom_measure(
         )
         voice.append(container)
 
-    command = _commands.GenericCommand(function=function, selector=selector)
-    command.name = "append_phantom_measure"
+    command = _commands.GenericCommand(function=function)
     return command
 
 
@@ -3027,6 +3083,7 @@ def interpreter(
         )
         if append_phantom_measure:
             _style_phantom_measures(score)
+            _style_anchor_notes(score)
     return metadata, persist
 
 
