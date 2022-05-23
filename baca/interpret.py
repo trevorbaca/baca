@@ -76,7 +76,7 @@ def _add_container_identifiers(score, segment_number):
             context_identifier = f"{segment_number}.{suffixed_context_name}"
         else:
             context_identifier = suffixed_context_name
-        context_identifier = context_identifier.replace("_", ".")
+        # context_identifier = context_identifier.replace("_", ".")
         context.identifier = f"%*% {context_identifier}"
         part_container_count = 0
         for container in abjad.iterate.components(context, abjad.Container):
@@ -91,7 +91,10 @@ def _add_container_identifiers(score, segment_number):
                 container_identifier = (
                     f"{context_identifier}.part.{part_container_count}"
                 )
-                assert "_" not in container_identifier, repr(container_identifier)
+                # assert "_" not in container_identifier, repr(container_identifier)
+                assert abjad.string.is_lilypond_identifier(container_identifier), repr(
+                    container_identifier
+                )
                 assert container_identifier not in container_to_part_assignment
                 timespan = container._get_timespan()
                 pair = (part, timespan)
