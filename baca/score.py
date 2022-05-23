@@ -20,7 +20,7 @@ def assert_matching_custom_context_names(score):
             continue
         if context.name == context.lilypond_type:
             continue
-        if context.name.replace("_", "") == context.lilypond_type:
+        if context.name.replace("_", "").replace(".", "") == context.lilypond_type:
             continue
         raise Exception(f"context {context.lilypond_type} has name {context.name!r}.")
 
