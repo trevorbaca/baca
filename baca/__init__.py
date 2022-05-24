@@ -12,7 +12,7 @@ from . import sequence
 from . import typings
 from .accumulator import (
     CommandAccumulator,
-    segment_accumulation_defaults,
+    section_accumulation_defaults,
 )
 from .command import *
 from .commands import *

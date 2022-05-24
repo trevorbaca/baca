@@ -143,7 +143,7 @@ def get_voice_names(score):
     return tuple(voice_names)
 
 
-def segment_accumulation_defaults():
+def section_accumulation_defaults():
     return {
         "append_phantom_measure": True,
     }

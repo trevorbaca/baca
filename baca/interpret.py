@@ -121,9 +121,9 @@ def _adjust_first_measure_number(first_measure_number, previous_metadata):
     return first_measure_number
 
 
-def _alive_during_previous_segment(previous_persist, context):
+def _alive_during_previous_section(previous_persist, context):
     assert isinstance(context, abjad.Context), repr(context)
-    names = previous_persist.get("alive_during_segment", [])
+    names = previous_persist.get("alive_during_section", [])
     return context.name in names
 
 
@@ -254,7 +254,7 @@ def _attach_fermatas(
 
 
 def _attach_nonfirst_empty_start_bar(global_skips):
-    # empty start bar allows LilyPond to print bar numbers at start of nonfirst segments
+    # empty start bar allows LilyPond to print bar numbers at start of nonfirst sections
     first_skip = _select.skip(global_skips, 0)
     literal = abjad.LilyPondLiteral(r'\bar ""')
     tag = _tags.EMPTY_START_BAR
@@ -685,7 +685,7 @@ def _bundle_runtime(
     metronome_marks=None,
     offset_to_measure_number=None,
     previous_persistent_indicators=None,
-    previous_segment_voice_metadata=None,
+    previous_section_voice_metadata=None,
 ):
     runtime = {}
     runtime["allows_instrument"] = allows_instrument
@@ -696,7 +696,7 @@ def _bundle_runtime(
     runtime["metronome_marks"] = metronome_marks
     runtime["offset_to_measure_number"] = offset_to_measure_number or {}
     runtime["previous_persistent_indicators"] = previous_persistent_indicators
-    runtime["previous_segment_voice_metadata"] = previous_segment_voice_metadata
+    runtime["previous_section_voice_metadata"] = previous_section_voice_metadata
     return runtime
 
 
@@ -802,12 +802,12 @@ def _call_all_commands(
                 time_signatures,
                 *measures,
             )
-            previous_segment_voice_metadata = _get_previous_segment_voice_metadata(
+            previous_section_voice_metadata = _get_previous_section_voice_metadata(
                 previous_persist, command.scope.voice_name
             )
             runtime = _bundle_runtime(
                 manifests=manifests,
-                previous_segment_voice_metadata=previous_segment_voice_metadata,
+                previous_section_voice_metadata=previous_section_voice_metadata,
             )
             components = None
             try:
@@ -850,7 +850,7 @@ def _call_all_commands(
                 measure_count,
             )
             voice_name = command.scope.voice_name
-            previous_segment_voice_metadata = _get_previous_segment_voice_metadata(
+            previous_section_voice_metadata = _get_previous_section_voice_metadata(
                 previous_persist, voice_name
             )
             previous_persistent_indicators = previous_persist.get(
@@ -862,7 +862,7 @@ def _call_all_commands(
                 manifests=manifests,
                 offset_to_measure_number=offset_to_measure_number,
                 previous_persistent_indicators=previous_persistent_indicators,
-                previous_segment_voice_metadata=previous_segment_voice_metadata,
+                previous_section_voice_metadata=previous_section_voice_metadata,
             )
             try:
                 command(selection, runtime)
@@ -1017,7 +1017,7 @@ def _clean_up_repeat_tie_direction(score):
                 break
 
 
-def _clone_segment_initial_short_instrument_name(score):
+def _clone_section_initial_short_instrument_name(score):
     prototype = abjad.MarginMarkup
     for context in abjad.iterate.components(score, abjad.Context):
         first_leaf = abjad.get.leaf(context, 0)
@@ -1042,7 +1042,7 @@ def _clone_segment_initial_short_instrument_name(score):
         )
 
 
-def _collect_alive_during_segment(score):
+def _collect_alive_during_section(score):
     result = []
     for context in abjad.iterate.components(score, abjad.Context):
         if context.name not in result:
@@ -1068,7 +1068,7 @@ def _collect_metadata(
     voice_metadata,
 ):
     metadata_, persist_ = {}, {}
-    persist_["alive_during_segment"] = _collect_alive_during_segment(score)
+    persist_["alive_during_section"] = _collect_alive_during_section(score)
     # make-layout-ly scripts adds bol measure numbers to metadata
     bol_measure_numbers = metadata.get("bol_measure_numbers")
     if bol_measure_numbers:
@@ -1538,7 +1538,7 @@ def _get_measure_timespan(score, measure_number):
     return abjad.Timespan(start_offset, stop_offset)
 
 
-def _get_previous_segment_voice_metadata(previous_persist, voice_name):
+def _get_previous_section_voice_metadata(previous_persist, voice_name):
     if not previous_persist:
         return
     voice_metadata = previous_persist.get("voice_metadata")
@@ -2814,7 +2814,7 @@ def interpreter(
     fermata_measure_empty_overrides=None,
     final_section=False,
     first_measure_number=None,
-    first_segment=False,
+    first_section=False,
     force_nonnatural_accidentals=False,
     global_rests_in_every_staff=False,
     global_rests_in_topmost_staff=False,
@@ -2860,7 +2860,7 @@ def interpreter(
         first_measure_number,
         previous_metadata,
     )
-    assert isinstance(first_segment, bool)
+    assert isinstance(first_section, bool)
     assert isinstance(force_nonnatural_accidentals, bool)
     global_skips = score["Global_Skips"]
     manifests = {
@@ -2882,7 +2882,7 @@ def interpreter(
     voice_metadata = {}
     already_reapplied_contexts = set()
     _make_global_skips(append_phantom_measure, global_skips, time_signatures)
-    if attach_nonfirst_empty_start_bar and not first_segment:
+    if attach_nonfirst_empty_start_bar and not first_section:
         _attach_nonfirst_empty_start_bar(global_skips)
     _label_measure_numbers(first_measure_number, global_skips)
     _label_stage_numbers(global_skips, stage_markup)
@@ -2938,8 +2938,8 @@ def interpreter(
     _attach_sounds_during(score)
     with abjad.Timer() as timer:
         with abjad.ForbidUpdate(component=score, update_on_exit=True):
-            if not first_segment:
-                _clone_segment_initial_short_instrument_name(score)
+            if not first_section:
+                _clone_section_initial_short_instrument_name(score)
             cached_time_signatures = _remove_redundant_time_signatures(
                 append_phantom_measure,
                 global_skips,

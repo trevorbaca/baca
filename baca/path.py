@@ -376,15 +376,15 @@ def get_measure_profile_metadata(path) -> tuple[int, int, list]:
         measure_count = 0
         fermata_measure_numbers = []
         contents_directory = get_contents_directory(path)
-        segments_directory = contents_directory / "sections"
-        segment_directories = list(sorted(segments_directory.glob("*")))
-        for segment_directory in segment_directories:
-            if not segment_directory.is_dir():
+        sections_directory = contents_directory / "sections"
+        section_directories = list(sorted(sections_directory.glob("*")))
+        for section_directory in section_directories:
+            if not section_directory.is_dir():
                 continue
-            time_signatures = get_metadatum(segment_directory, "time_signatures")
+            time_signatures = get_metadatum(section_directory, "time_signatures")
             measure_count += len(time_signatures)
             fermata_measure_numbers_ = get_metadatum(
-                segment_directory,
+                section_directory,
                 "fermata_measure_numbers",
                 [],
             )

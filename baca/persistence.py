@@ -25,14 +25,14 @@ r"""
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_mmrests(),
-        ...     baca.attach_first_segment_default_indicators(),
+        ...     baca.attach_first_section_default_indicators(),
         ... )
 
         >>> _, _ = baca.interpreter(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     first_segment=True,
+        ...     first_section=True,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(
@@ -1189,14 +1189,14 @@ r"""
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     baca.attach_first_segment_default_indicators(),
+        ...     baca.attach_first_section_default_indicators(),
         ... )
 
         >>> _, _ = baca.interpreter(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     first_segment=True,
+        ...     first_section=True,
         ...     instruments=commands.instruments,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2201,14 +2201,14 @@ r"""
         >>> commands(
         ...     "Music_Voice",
         ...     baca.make_notes(),
-        ...     baca.attach_first_segment_default_indicators(),
+        ...     baca.attach_first_section_default_indicators(),
         ... )
 
         >>> _, _ = baca.interpreter(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     first_segment=True,
+        ...     first_section=True,
         ...     margin_markups=commands.margin_markups,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2380,7 +2380,7 @@ r"""
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     first_segment=True,
+        ...     first_section=True,
         ...     margin_markups=commands.margin_markups,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -2937,7 +2937,7 @@ r"""
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     first_segment=True,
+        ...     first_section=True,
         ...     margin_markups=commands.margin_markups,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3356,7 +3356,7 @@ r"""
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     first_segment=True,
+        ...     first_section=True,
         ...     margin_markups=commands.margin_markups,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),

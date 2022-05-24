@@ -42,7 +42,7 @@ def _also_untagged(section_directory):
         untagged.write_text(string)
 
 
-def _call_lilypond_on_music_ly_in_segment(music_ly, music_pdf_mtime):
+def _call_lilypond_on_music_ly_in_section(music_ly, music_pdf_mtime):
     music_pdf = music_ly.with_name("music.pdf")
     with abjad.Timer() as timer:
         run_lilypond(music_ly, pdf_mtime=music_pdf_mtime)
@@ -150,9 +150,9 @@ def _get_previous_metadata(section_directory):
         previous_metadata = None
         previous_persist = None
     else:
-        previous_segment = str(int(section_directory.name) - 1).zfill(2)
-        previous_segment = section_directory.parent / previous_segment
-        path = previous_segment / "__metadata__"
+        previous_section = str(int(section_directory.name) - 1).zfill(2)
+        previous_section = section_directory.parent / previous_section
+        path = previous_section / "__metadata__"
         file = pathlib.Path(path)
         namespace = {"abjad": abjad, "baca": baca}
         namespace.update(abjad.__dict__)
@@ -161,7 +161,7 @@ def _get_previous_metadata(section_directory):
             previous_metadata = eval(string, namespace)
         else:
             previous_metadata = None
-        path = previous_segment / "__persist__"
+        path = previous_section / "__persist__"
         file = pathlib.Path(path)
         if file.is_file():
             lines = file.read_text()
@@ -248,7 +248,7 @@ def _make_annotation_jobs(directory, *, undo=False):
     return jobs
 
 
-def _make_segment_clicktrack(lilypond_file, mtime, section_directory):
+def _make_section_clicktrack(lilypond_file, mtime, section_directory):
     metadata = baca.path.get_metadata(section_directory)
     if metadata.get("first_metronome_mark") is False:
         _print_main_task("Skipping clicktrack ...")
@@ -325,7 +325,7 @@ def _make_segment_clicktrack(lilypond_file, mtime, section_directory):
         _print_error(f"Can not find {baca.path.trim(clicktrack_path)} ...")
 
 
-def _make_segment_midi(lilypond_file, mtime, section_directory):
+def _make_section_midi(lilypond_file, mtime, section_directory):
     metadata = baca.path.get_metadata(section_directory)
     if metadata.get("first_metronome_mark") is False:
         _print_main_task("Skipping MIDI ...")
@@ -355,7 +355,7 @@ def _make_segment_midi(lilypond_file, mtime, section_directory):
         _print_error(f"Can not find {baca.path.trim(music_midi)} ...")
 
 
-def _make_segment_pdf(
+def _make_section_pdf(
     lilypond_file,
     music_pdf_mtime,
     section_directory,
@@ -381,7 +381,7 @@ def _make_segment_pdf(
     # _handle_music_ly_tags_in_section(music_ily)
     if music_pdf.is_file():
         _print_file_handling(f"Existing {baca.path.trim(music_pdf)} ...")
-    timing.lilypond_runtime = _call_lilypond_on_music_ly_in_segment(
+    timing.lilypond_runtime = _call_lilypond_on_music_ly_in_section(
         music_ly,
         music_pdf_mtime,
     )
@@ -581,22 +581,22 @@ def build_score(score_directory, debug_sections=False):
         sys.exit(1)
 
 
-def collect_section_lys(_segments_directory):
-    contents_directory = baca.path.get_contents_directory(_segments_directory)
-    segments_directory = contents_directory / "sections"
-    segment_lys = sorted(segments_directory.glob("**/music.ly"))
-    if not segment_lys:
+def collect_section_lys(_sections_directory):
+    contents_directory = baca.path.get_contents_directory(_sections_directory)
+    sections_directory = contents_directory / "sections"
+    section_lys = sorted(sections_directory.glob("**/music.ly"))
+    if not section_lys:
         _print_file_handling("Missing section lys ...")
         sys.exit(1)
-    if _segments_directory.exists():
-        _print_file_handling(f"Removing {baca.path.trim(_segments_directory)} ...")
-        shutil.rmtree(str(_segments_directory))
-    _segments_directory.mkdir()
+    if _sections_directory.exists():
+        _print_file_handling(f"Removing {baca.path.trim(_sections_directory)} ...")
+        shutil.rmtree(str(_sections_directory))
+    _sections_directory.mkdir()
     targets = []
-    for source_ly in segment_lys:
+    for source_ly in section_lys:
         text = _trim_music_ly(source_ly)
         section_number = source_ly.parent.name
-        target_ly = _segments_directory / f"{section_number}.ly"
+        target_ly = _sections_directory / f"{section_number}.ly"
         targets.append(f"{target_ly.name}")
         target_ly.write_text(text)
         name = source_ly.name.removesuffix(".ly")
@@ -607,9 +607,9 @@ def collect_section_lys(_segments_directory):
             targets.append(f"{target_ily.name}")
             shutil.copyfile(str(source_ily), str(target_ily))
     targets = ", ".join(targets)
-    message = f"Collecting {baca.path.trim(_segments_directory)}/{targets} ..."
+    message = f"Collecting {baca.path.trim(_sections_directory)}/{targets} ..."
     _print_file_handling(message)
-    handle_build_tags(_segments_directory)
+    handle_build_tags(_sections_directory)
 
 
 def color_persistent_indicators(directory, *, undo=False):
@@ -637,12 +637,12 @@ def directory():
     return pathlib.Path(os.getcwd())
 
 
-def handle_build_tags(_segments_directory):
-    contents_directory = baca.path.get_contents_directory(_segments_directory)
-    segments_directory = contents_directory / "sections"
-    paths = sorted(segments_directory.glob("*"))
-    segment_directories = [_ for _ in paths if _.is_dir()]
-    final_section_directory_name = segment_directories[-1].name
+def handle_build_tags(_sections_directory):
+    contents_directory = baca.path.get_contents_directory(_sections_directory)
+    sections_directory = contents_directory / "sections"
+    paths = sorted(sections_directory.glob("*"))
+    section_directories = [_ for _ in paths if _.is_dir()]
+    final_section_directory_name = section_directories[-1].name
     final_ily_name = f"{final_section_directory_name}.ily"
 
     def match_left_broken_should_deactivate(tags):
@@ -686,54 +686,54 @@ def handle_build_tags(_segments_directory):
             _print_tags(message)
 
     for job in (
-        baca.jobs.handle_edition_tags(_segments_directory),
-        baca.jobs.handle_fermata_bar_lines(_segments_directory),
-        baca.jobs.handle_shifted_clefs(_segments_directory),
-        baca.jobs.handle_mol_tags(_segments_directory),
-        baca.jobs.color_persistent_indicators(_segments_directory, undo=True),
-        baca.jobs.show_music_annotations(_segments_directory, undo=True),
-        baca.jobs.join_broken_spanners(_segments_directory),
+        baca.jobs.handle_edition_tags(_sections_directory),
+        baca.jobs.handle_fermata_bar_lines(_sections_directory),
+        baca.jobs.handle_shifted_clefs(_sections_directory),
+        baca.jobs.handle_mol_tags(_sections_directory),
+        baca.jobs.color_persistent_indicators(_sections_directory, undo=True),
+        baca.jobs.show_music_annotations(_sections_directory, undo=True),
+        baca.jobs.join_broken_spanners(_sections_directory),
         baca.jobs.show_tag(
-            _segments_directory,
+            _sections_directory,
             "left-broken-should-deactivate",
             match=match_left_broken_should_deactivate,
             undo=True,
         ),
         baca.jobs.show_tag(
-            _segments_directory, baca.tags.PHANTOM, skip_file_name=final_ily_name
+            _sections_directory, baca.tags.PHANTOM, skip_file_name=final_ily_name
         ),
         baca.jobs.show_tag(
-            _segments_directory,
+            _sections_directory,
             baca.tags.PHANTOM,
             prepend_empty_chord=True,
             skip_file_name=final_ily_name,
             undo=True,
         ),
         baca.jobs.show_tag(
-            _segments_directory,
+            _sections_directory,
             "phantom-should-activate",
             match=match_phantom_should_activate,
             skip_file_name=final_ily_name,
         ),
         baca.jobs.show_tag(
-            _segments_directory,
+            _sections_directory,
             "phantom-should-deactivate",
             match=match_phantom_should_deactivate,
             skip_file_name=final_ily_name,
             undo=True,
         ),
         baca.jobs.show_tag(
-            _segments_directory,
+            _sections_directory,
             baca.tags.EOS_STOP_MM_SPANNER,
             skip_file_name=final_ily_name,
         ),
         baca.jobs.show_tag(
-            _segments_directory,
+            _sections_directory,
             baca.tags.METRIC_MODULATION_IS_STRIPPED,
             undo=True,
         ),
         baca.jobs.show_tag(
-            _segments_directory,
+            _sections_directory,
             baca.tags.METRIC_MODULATION_IS_SCALED,
             undo=True,
         ),
@@ -903,7 +903,7 @@ def interpret_build_music(
     """
     Interprets music.ly file in build directory.
 
-    Collects segments and handles tags.
+    Collects sections and handles tags.
 
     Skips section collection when skip_section_collection=True.
     """
@@ -919,22 +919,22 @@ def interpret_build_music(
     if not music_ly.is_file():
         raise Exception(f"Missing {baca.path.trim(music_ly)} ...")
     if build_type == "score":
-        _segments_directory = build_directory / "_sections"
+        _sections_directory = build_directory / "_sections"
     else:
         assert build_type == "part"
-        _segments_directory = build_directory.parent / "_sections"
+        _sections_directory = build_directory.parent / "_sections"
     if skip_section_collection:
         _print_file_handling("Skipping section collection ...")
     else:
-        collect_section_lys(_segments_directory)
+        collect_section_lys(_sections_directory)
     if build_directory.parent.name.endswith("-parts"):
         if skip_section_collection:
             _print_tags("Skipping tag handling ...")
         else:
             handle_part_tags(build_directory)
     remove = None
-    if _segments_directory.is_dir() and not debug_sections:
-        remove = _segments_directory
+    if _sections_directory.is_dir() and not debug_sections:
+        remove = _sections_directory
     music_pdf = music_ly.with_name("music.pdf")
     if music_pdf.is_file():
         _print_file_handling(f"Existing {baca.path.trim(music_pdf)} ...")
@@ -945,7 +945,7 @@ def interpret_section(
     score,
     commands,
     *,
-    first_segment=False,
+    first_section=False,
     interpreter=None,
     **keywords,
 ):
@@ -959,7 +959,7 @@ def interpret_section(
     metadata = baca.path.get_metadata(section_directory)
     persist = baca.path.get_metadata(section_directory, file_name="__persist__")
     previous_metadata, previous_persist = _get_previous_metadata(section_directory)
-    first_segment = first_segment or section_directory.name == "01"
+    first_section = first_section or section_directory.name == "01"
     with abjad.Timer() as timer:
         metadata, persist = interpreter(
             score,
@@ -971,7 +971,7 @@ def interpret_section(
             metronome_marks=commands.metronome_marks,
             skips_instead_of_rests=commands.skips_instead_of_rests,
             **keywords,
-            first_segment=first_segment,
+            first_section=first_section,
             metadata=metadata,
             persist=persist,
             previous_metadata=previous_metadata,
@@ -1073,8 +1073,8 @@ def make_layout_ly(
         first_measure_number = 1
         time_signatures = []
         contents_directory = baca.path.get_contents_directory(layout_directory)
-        segments_directory = contents_directory / "sections"
-        for section_directory in sorted(segments_directory.glob("*")):
+        sections_directory = contents_directory / "sections"
+        for section_directory in sorted(sections_directory.glob("*")):
             if not section_directory.is_dir():
                 continue
             time_signatures_ = baca.path.get_metadatum(
@@ -1101,7 +1101,7 @@ def make_layout_ly(
         comment_measure_numbers=True,
         do_not_append_phantom_measure=do_not_append_phantom_measure,
         first_measure_number=first_measure_number,
-        first_segment=True,
+        first_section=True,
         page_layout_profile=page_layout_profile,
         remove_tags=baca.tags.layout_removal_tags(),
         spacing=spacing,
@@ -1134,10 +1134,10 @@ def make_layout_ly(
     if layout_directory.parent.name == "sections":
         if layout_directory.name != "01":
             previous_section_number = str(int(layout_directory.name) - 1).zfill(2)
-            previous_segment_directory = (
+            previous_section_directory = (
                 layout_directory.parent / previous_section_number
             )
-            previous_layout_ly = previous_segment_directory / "layout.ly"
+            previous_layout_ly = previous_section_directory / "layout.ly"
             if previous_layout_ly.is_file():
                 result = _get_preamble_page_count_overview(previous_layout_ly)
                 if result is not None:
@@ -1213,15 +1213,15 @@ def persist(lilypond_file, metadata, persist, timing):
     if _arguments.clicktrack:
         path = section_directory / "clicktrack.midi"
         mtime = os.path.getmtime(path) if path.is_file() else None
-        _make_segment_clicktrack(lilypond_file, mtime, section_directory)
+        _make_section_clicktrack(lilypond_file, mtime, section_directory)
     if _arguments.midi:
         path = section_directory / "music.midi"
         mtime = os.path.getmtime(path) if path.is_file() else None
-        _make_segment_midi(lilypond_file, mtime, section_directory)
+        _make_section_midi(lilypond_file, mtime, section_directory)
     if _arguments.pdf:
         path = section_directory / "music.pdf"
         mtime = os.path.getmtime(path) if path.is_file() else None
-        _make_segment_pdf(
+        _make_section_pdf(
             lilypond_file,
             mtime,
             section_directory,

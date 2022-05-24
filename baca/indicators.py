@@ -61,7 +61,7 @@ class Accelerando:
             ^ \markup \large \upright accel.
 
     Tweak extra-offset to align accelerando markup with other metronome mark spanner
-    segments.
+    pieces.
 
     Accelerandi format as LilyPond markup.
 
@@ -354,7 +354,7 @@ class Ritardando:
             ^ \markup \large \upright rit.
 
     Tweak extra-offset to align ritardando markup with other metronome mark spanner
-    segments.
+    pieces.
 
     Ritardandi format as LilyPond markup.
 

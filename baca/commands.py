@@ -832,7 +832,7 @@ def _attach_default_indicators(staff_or_staff_group):
     return wrappers
 
 
-def _attach_first_segment_default_indicators(manifests, staff_or_staff_group):
+def _attach_first_section_default_indicators(manifests, staff_or_staff_group):
     for wrapper in _attach_default_indicators(staff_or_staff_group):
         _treat.treat_persistent_wrapper(manifests, wrapper, "default")
 
@@ -860,7 +860,7 @@ def attach_first_appearance_default_indicators(
 
 
 # TODO: move to interpret.py
-def attach_first_segment_default_indicators(
+def attach_first_section_default_indicators(
     *, selector=lambda _: _select.leaves(_)
 ) -> GenericCommand:
     def function(argument, *, runtime=None):
@@ -872,10 +872,10 @@ def attach_first_segment_default_indicators(
             if isinstance(component, abjad.Staff | abjad.StaffGroup):
                 staff_or_staff_groups.append(component)
         for staff_or_staff_group in staff_or_staff_groups:
-            _attach_first_segment_default_indicators(manifests, staff_or_staff_group)
+            _attach_first_section_default_indicators(manifests, staff_or_staff_group)
 
     command = GenericCommand(function=function, selector=selector)
-    command.name = "attach_first_segment_default_indicators"
+    command.name = "attach_first_section_default_indicators"
     return command
 
 
@@ -2026,7 +2026,7 @@ class ColorFingeringCommand(_command.Command):
 
     ..  container:: example
 
-        With segment-commands:
+        With section-commands:
 
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
@@ -2949,7 +2949,7 @@ class PitchCommand(_command.Command):
         return self._mutated_score
 
     def _previous_pitches_consumed(self):
-        dictionary = self.runtime.get("previous_segment_voice_metadata", None)
+        dictionary = self.runtime.get("previous_section_voice_metadata", None)
         if not dictionary:
             return 0
         dictionary = dictionary.get(_enums.PITCH.name, None)
@@ -2963,7 +2963,7 @@ class PitchCommand(_command.Command):
         assert 1 <= pitches_consumed
         if self.ignore_incomplete:
             return pitches_consumed
-        dictionary = self.runtime["previous_segment_voice_metadata"]
+        dictionary = self.runtime["previous_section_voice_metadata"]
         dictionary = dictionary.get(_enums.RHYTHM.name, None)
         if dictionary:
             if dictionary.get("incomplete_final_note", False):
@@ -3053,7 +3053,7 @@ class RegisterCommand(_command.Command):
 
     ..  container:: example
 
-        With segment-commands:
+        With section-commands:
 
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
@@ -8048,7 +8048,7 @@ def margin_markup(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     first_segment=True,
+        ...     first_section=True,
         ...     margin_markups=commands.margin_markups,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -10841,7 +10841,7 @@ def glissando(
 
     ..  container:: example
 
-        With segment-commands:
+        With section-commands:
 
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
@@ -11691,24 +11691,24 @@ def open_volta(
 
 def previous_metadata(path: str):
     """
-    Gets previous segment metadata before ``path``.
+    Gets previous section metadata before ``path``.
     """
     # reproduces baca.path.Path.get_previous_path()
     # because Travis isn't configured for scores-directory calculations
     music_py = pathlib.Path(path)
-    segment = pathlib.Path(music_py).parent
-    assert segment.parent.name == "sections", repr(segment)
-    segments = segment.parent
-    assert segments.name == "sections", repr(segments)
-    paths = list(sorted(segments.glob("*")))
+    section = pathlib.Path(music_py).parent
+    assert section.parent.name == "sections", repr(section)
+    sections = section.parent
+    assert sections.name == "sections", repr(sections)
+    paths = list(sorted(sections.glob("*")))
     paths = [_ for _ in paths if not _.name.startswith(".")]
     paths = [_ for _ in paths if _.is_dir()]
-    index = paths.index(segment)
+    index = paths.index(section)
     if index == 0:
         return {}
     previous_index = index - 1
-    previous_segment = paths[previous_index]
-    previous_metadata = _path.get_metadata(previous_segment)
+    previous_section = paths[previous_index]
+    previous_metadata = _path.get_metadata(previous_section)
     return previous_metadata
 
 

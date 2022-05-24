@@ -308,10 +308,10 @@ class RhythmCommand(_command.Command):
                 rcommand = self.rhythm_maker
             else:
                 rcommand = rmakers.stack(self.rhythm_maker)
-            previous_segment_stop_state = self._previous_segment_stop_state(runtime)
+            previous_section_stop_state = self._previous_section_stop_state(runtime)
             if isinstance(rcommand, rmakers.Stack):
                 selection = rcommand(
-                    time_signatures, previous_state=previous_segment_stop_state
+                    time_signatures, previous_state=previous_section_stop_state
                 )
                 self._state = rcommand.maker.state
             elif isinstance(rcommand, types.FunctionType):
@@ -330,17 +330,17 @@ class RhythmCommand(_command.Command):
             container[:] = []
         return selection
 
-    def _previous_segment_stop_state(self, runtime):
-        previous_segment_stop_state = None
-        dictionary = runtime.get("previous_segment_voice_metadata")
+    def _previous_section_stop_state(self, runtime):
+        previous_section_stop_state = None
+        dictionary = runtime.get("previous_section_voice_metadata")
         if dictionary:
-            previous_segment_stop_state = dictionary.get(_enums.RHYTHM.name)
+            previous_section_stop_state = dictionary.get(_enums.RHYTHM.name)
             if (
-                previous_segment_stop_state is not None
-                and previous_segment_stop_state.get("name") != self.persist
+                previous_section_stop_state is not None
+                and previous_section_stop_state.get("name") != self.persist
             ):
-                previous_segment_stop_state = None
-        return previous_segment_stop_state
+                previous_section_stop_state = None
+        return previous_section_stop_state
 
     @property
     def parameter(self) -> str:
