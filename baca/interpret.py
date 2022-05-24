@@ -41,12 +41,12 @@ def _activate_tags(score, tags):
                     break
 
 
-def _add_container_identifiers(score, segment_number):
-    if segment_number is not None:
-        assert segment_number, repr(segment_number)
-        segment_number = f"segment.{segment_number}"
+def _add_container_identifiers(score, section_number):
+    if section_number is not None:
+        assert section_number, repr(section_number)
+        section_number = f"section_number.{section_number}"
     else:
-        segment_number = ""
+        section_number = ""
     contexts = []
     try:
         context = score["Global_Skips"]
@@ -72,11 +72,10 @@ def _add_container_identifiers(score, segment_number):
         else:
             suffixed_context_name = f"{context.name}.count.{count}"
         context_name_counts[context.name] = count + 1
-        if segment_number:
-            context_identifier = f"{segment_number}.{suffixed_context_name}"
+        if section_number:
+            context_identifier = f"{section_number}.{suffixed_context_name}"
         else:
             context_identifier = suffixed_context_name
-        # context_identifier = context_identifier.replace("_", ".")
         context.identifier = f"%*% {context_identifier}"
         part_container_count = 0
         for container in abjad.iterate.components(context, abjad.Container):
@@ -91,7 +90,6 @@ def _add_container_identifiers(score, segment_number):
                 container_identifier = (
                     f"{context_identifier}.part.{part_container_count}"
                 )
-                # assert "_" not in container_identifier, repr(container_identifier)
                 assert abjad.string.is_lilypond_identifier(container_identifier), repr(
                     container_identifier
                 )
@@ -101,11 +99,10 @@ def _add_container_identifiers(score, segment_number):
                 container_to_part_assignment[container_identifier] = pair
                 container.identifier = f"%*% {container_identifier}"
     for staff in abjad.iterate.components(score, abjad.Staff):
-        if segment_number:
-            context_identifier = f"{segment_number}.{staff.name}"
+        if section_number:
+            context_identifier = f"{section_number}.{staff.name}"
         else:
             context_identifier = staff.name
-        context_identifier = context_identifier.replace("_", ".")
         staff.identifier = f"%*% {context_identifier}"
     return container_to_part_assignment
 
@@ -142,7 +139,7 @@ def _analyze_memento(score, dictionary, context, memento):
                 memento_context = context
                 break
     else:
-        # context alive in previous segment doesn't exist in this segment
+        # context alive in previous section doesn't exist in this section
         return
     leaf = abjad.get.leaf(memento_context, 0)
     if isinstance(previous_indicator, abjad.Instrument):
@@ -2837,7 +2834,7 @@ def interpreter(
     previous_persist=None,
     print_timing=False,
     remove_tags=None,
-    segment_number=None,
+    section_number=None,
     shift_measure_initial_clefs=False,
     skips_instead_of_rests=False,
     spacing=None,
@@ -3012,7 +3009,7 @@ def interpreter(
             if add_container_identifiers:
                 container_to_part_assignment = _add_container_identifiers(
                     score,
-                    segment_number,
+                    section_number,
                 )
                 if all_music_in_part_containers:
                     _check_all_music_in_part_containers(score)

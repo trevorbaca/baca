@@ -360,7 +360,7 @@ class RhythmCommand(_command.Command):
         """
         Gets postcall state of rhythm command.
 
-        Populated by segment-maker.
+        Populated by interpreter.
         """
         return self._state
 

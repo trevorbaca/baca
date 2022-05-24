@@ -520,7 +520,7 @@ r"""
                 >>
             }
 
-        Even at the beginning of a segment:
+        Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
         >>> breaks = baca.breaks(
@@ -894,7 +894,7 @@ r"""
                 >>
             }
 
-        Even at the beginning of a segment:
+        Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
@@ -1025,7 +1025,7 @@ r"""
                 >>
             }
 
-        Even at the beginning of a segment:
+        Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
@@ -1991,7 +1991,7 @@ r"""
                 >>
             }
 
-        Even at the beginning of a segment:
+        Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
         >>> breaks = baca.breaks(
@@ -3123,7 +3123,7 @@ r"""
                 >>
             }
 
-        Even at the beginning of a segment:
+        Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
         >>> breaks = baca.breaks(
@@ -3881,7 +3881,7 @@ r"""
                 >>
             }
 
-        Even at the beginning of a segment:
+        Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
@@ -4086,7 +4086,7 @@ r"""
                 >>
             }
 
-        Persistent overrides also appear in segment metadata:
+        Persistent overrides also appear in section metadata:
 
         >>> dictionary = persist["persistent_indicators"]
         >>> dictionary
@@ -4168,7 +4168,7 @@ r"""
                 >>
             }
 
-        Even at the beginning of a segment:
+        Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
@@ -4535,7 +4535,7 @@ r"""
                 >>
             }
 
-        Even at the beginning of a segment:
+        Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
@@ -5003,7 +5003,7 @@ r"""
                 >>
             }
 
-        Even at the beginning of a segment:
+        Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(

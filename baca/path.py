@@ -29,7 +29,7 @@ def activate(
     Case 0: path is a non-LilyPond file. Method does nothing.
 
     Case 1: path is a LilyPond (.ily, .ly) file starting with ``music``, ``layout`` or
-    ``segment``. Method activates ``tag`` in file.
+    ``section``. Method activates ``tag`` in file.
 
     Case 2: path is a directory. Method descends directory recursively and activates
     ``tag`` in LilyPond files given in case 1.
@@ -354,14 +354,13 @@ def get_measure_profile_metadata(path) -> tuple[int, int, list]:
     """
     Gets measure profile metadata.
 
-    Reads segment metadata when path is segment.
+    Reads section metadata when path is section.
 
-    Reads score metadata when path is not segment.
+    Reads score metadata when path is not section.
 
     Returns tuple of three metadata: first measure number; measure count; list of fermata
     measure numbers.
     """
-    # if path.parent.parent.name == "segments":
     if path.parent.parent.name == "sections":
         string = "first_measure_number"
         first_measure_number = get_metadatum(path.parent, string)
@@ -377,7 +376,6 @@ def get_measure_profile_metadata(path) -> tuple[int, int, list]:
         measure_count = 0
         fermata_measure_numbers = []
         contents_directory = get_contents_directory(path)
-        # segments_directory = contents_directory / "segments"
         segments_directory = contents_directory / "sections"
         segment_directories = list(sorted(segments_directory.glob("*")))
         for segment_directory in segment_directories:

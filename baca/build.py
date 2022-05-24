@@ -595,8 +595,8 @@ def collect_section_lys(_segments_directory):
     targets = []
     for source_ly in segment_lys:
         text = _trim_music_ly(source_ly)
-        segment_number = source_ly.parent.name
-        target_ly = _segments_directory / f"{segment_number}.ly"
+        section_number = source_ly.parent.name
+        target_ly = _segments_directory / f"{section_number}.ly"
         targets.append(f"{target_ly.name}")
         target_ly.write_text(text)
         name = source_ly.name.removesuffix(".ly")
@@ -905,7 +905,7 @@ def interpret_build_music(
 
     Collects segments and handles tags.
 
-    Skips segment collection when skip_section_collection=True.
+    Skips section collection when skip_section_collection=True.
     """
     build_type = None
     if build_directory.name.endswith("-score"):
@@ -924,7 +924,7 @@ def interpret_build_music(
         assert build_type == "part"
         _segments_directory = build_directory.parent / "_sections"
     if skip_section_collection:
-        _print_file_handling("Skipping segment collection ...")
+        _print_file_handling("Skipping section collection ...")
     else:
         collect_section_lys(_segments_directory)
     if build_directory.parent.name.endswith("-parts"):
@@ -976,7 +976,7 @@ def interpret_section(
             persist=persist,
             previous_metadata=previous_metadata,
             previous_persist=previous_persist,
-            segment_number=section_directory.name,
+            section_number=section_directory.name,
         )
     timing = types.SimpleNamespace()
     timing.runtime = int(timer.elapsed_time)
@@ -1133,9 +1133,9 @@ def make_layout_ly(
     # TODO: remove first_page_number embedding
     if layout_directory.parent.name == "sections":
         if layout_directory.name != "01":
-            previous_segment_number = str(int(layout_directory.name) - 1).zfill(2)
+            previous_section_number = str(int(layout_directory.name) - 1).zfill(2)
             previous_segment_directory = (
-                layout_directory.parent / previous_segment_number
+                layout_directory.parent / previous_section_number
             )
             previous_layout_ly = previous_segment_directory / "layout.ly"
             if previous_layout_ly.is_file():

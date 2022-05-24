@@ -3390,7 +3390,7 @@ def text_spanner(
 
     ..  container:: example
 
-        Single-segment spanners.
+        1-piece spanners.
 
         Dashed line with arrow:
 

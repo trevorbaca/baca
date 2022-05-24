@@ -982,21 +982,20 @@ def _expand_members(token):
     return members
 
 
-def _global_rest_identifier(segment_number):
+def _global_rest_identifier(section_number):
     """
     Gets global rest identifier.
 
     ..  container:: example
 
         >>> baca.parts._global_rest_identifier("01")
-        'segment.01.Global.Rests'
+        'section_number.01.Global.Rests'
 
         >>> baca.parts._global_rest_identifier("02")
-        'segment.02.Global.Rests'
+        'section_number.02.Global.Rests'
 
     """
-    identifier = f"segment.{segment_number}.Global.Rests"
-    assert "_" not in identifier, repr(identifier)
+    identifier = f"section_number.{section_number}.Global.Rests"
     return identifier
 
 
@@ -1078,7 +1077,7 @@ def part_to_identifiers(path, part, container_to_part_assignment):
     dictionary = container_to_part_assignment
     if not dictionary:
         return "empty container-to-part-assignment dictionary"
-    for i, (segment_number, dictionary_) in enumerate(dictionary.items()):
+    for i, (section_number, dictionary_) in enumerate(dictionary.items()):
         pairs = []
         for identifier, (part_assignment, timespan) in dictionary_.items():
             if part in part_assignment:
@@ -1088,6 +1087,6 @@ def part_to_identifiers(path, part, container_to_part_assignment):
             identifiers_ = [_[0] for _ in pairs]
             identifiers.extend(identifiers_)
         else:
-            identifier = _global_rest_identifier(segment_number)
+            identifier = _global_rest_identifier(section_number)
             identifiers.append(identifier)
     return identifiers
