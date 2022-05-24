@@ -14,12 +14,12 @@ import abjad
 import baca
 
 
-def _also_untagged(segment_directory):
+def _also_untagged(section_directory):
     if os.environ.get("GITHUB_WORKSPACE"):
         return
     _print_main_task("Writing untagged ...")
     for name in ("music.ly", "music.ily", "layout.ly"):
-        tagged = segment_directory / name
+        tagged = section_directory / name
         if not tagged.exists():
             continue
         with tagged.open() as pointer:
@@ -145,13 +145,13 @@ def _get_preamble_time_signatures(path):
     return None
 
 
-def _get_previous_metadata(segment_directory):
-    if segment_directory.name == "01":
+def _get_previous_metadata(section_directory):
+    if section_directory.name == "01":
         previous_metadata = None
         previous_persist = None
     else:
-        previous_segment = str(int(segment_directory.name) - 1).zfill(2)
-        previous_segment = segment_directory.parent / previous_segment
+        previous_segment = str(int(section_directory.name) - 1).zfill(2)
+        previous_segment = section_directory.parent / previous_segment
         path = previous_segment / "__metadata__"
         file = pathlib.Path(path)
         namespace = {"abjad": abjad, "baca": baca}
@@ -185,10 +185,10 @@ def _handle_music_ly_tags_in_section(music_ly):
             _print_tags(message)
 
 
-def _log_timing(segment_directory, timing):
+def _log_timing(section_directory, timing):
     _print_main_task("Logging time ...")
     _print_all_timing(timing)
-    _timing = segment_directory / ".timing"
+    _timing = section_directory / ".timing"
     with _timing.open(mode="a") as pointer:
         pointer.write("\n")
         line = time.strftime("%Y-%m-%d %H:%M:%S") + "\n"
@@ -248,14 +248,14 @@ def _make_annotation_jobs(directory, *, undo=False):
     return jobs
 
 
-def _make_segment_clicktrack(lilypond_file, mtime, segment_directory):
-    metadata = baca.path.get_metadata(segment_directory)
+def _make_segment_clicktrack(lilypond_file, mtime, section_directory):
+    metadata = baca.path.get_metadata(section_directory)
     if metadata.get("first_metronome_mark") is False:
         _print_main_task("Skipping clicktrack ...")
         return
     _print_main_task("Making clicktrack ...")
     clicktrack_file_name = "clicktrack.midi"
-    clicktrack_path = segment_directory / clicktrack_file_name
+    clicktrack_path = section_directory / clicktrack_file_name
     if clicktrack_path.is_file():
         _print_file_handling(f"Existing {baca.path.trim(clicktrack_path)} ...")
     global_skips = lilypond_file["Global_Skips"]
@@ -325,19 +325,19 @@ def _make_segment_clicktrack(lilypond_file, mtime, segment_directory):
         _print_error(f"Can not find {baca.path.trim(clicktrack_path)} ...")
 
 
-def _make_segment_midi(lilypond_file, mtime, segment_directory):
-    metadata = baca.path.get_metadata(segment_directory)
+def _make_segment_midi(lilypond_file, mtime, section_directory):
+    metadata = baca.path.get_metadata(section_directory)
     if metadata.get("first_metronome_mark") is False:
         _print_main_task("Skipping MIDI ...")
         return
     _print_main_task("Making MIDI ...")
-    music_midi = segment_directory / "music.midi"
+    music_midi = section_directory / "music.midi"
     if music_midi.exists():
         _print_file_handling(f"Existing {baca.path.trim(music_midi)} ...")
     score = lilypond_file["Score"]
     score_block = abjad.Block("score", [score, abjad.Block("midi")])
     lilypond_file = abjad.LilyPondFile([score_block])
-    tmp_midi = segment_directory / "tmp.midi"
+    tmp_midi = section_directory / "tmp.midi"
     _print_file_handling(f"Writing {baca.path.trim(music_midi)} ...")
     abjad.persist.as_midi(lilypond_file, tmp_midi)
     if tmp_midi.is_file():
@@ -358,7 +358,7 @@ def _make_segment_midi(lilypond_file, mtime, segment_directory):
 def _make_segment_pdf(
     lilypond_file,
     music_pdf_mtime,
-    segment_directory,
+    section_directory,
     timing,
     *,
     also_untagged=False,
@@ -366,9 +366,8 @@ def _make_segment_pdf(
     print_timing=False,
 ):
     _print_main_task("Making PDF ...")
-    music_ly = segment_directory / "music.ly"
-    # music_ily = segment_directory / "music.ily"
-    music_pdf = segment_directory / "music.pdf"
+    music_ly = section_directory / "music.ly"
+    music_pdf = section_directory / "music.pdf"
     music_ly_mtime = os.path.getmtime(music_ly) if music_ly.is_file() else 0
     timing.abjad_format_time = _write_music_ly(lilypond_file, music_ly)
     if music_ly.is_file() and music_ly_mtime < os.path.getmtime(music_ly):
@@ -387,12 +386,12 @@ def _make_segment_pdf(
         music_pdf_mtime,
     )
     if also_untagged is True:
-        _also_untagged(segment_directory)
+        _also_untagged(section_directory)
     if print_timing:
         _print_main_task("Printing time ...")
         _print_all_timing(timing)
     if log_timing:
-        _log_timing(segment_directory, timing)
+        _log_timing(section_directory, timing)
 
 
 def _print_all_timing(timing):
@@ -492,16 +491,16 @@ def _trim_music_ly(ly):
     return lines
 
 
-def _write_metadata(metadata, persist, segment_directory):
-    metadata_file = segment_directory / "__metadata__"
+def _write_metadata(metadata, persist, section_directory):
+    metadata_file = section_directory / "__metadata__"
     _print_file_handling(f"Writing {baca.path.trim(metadata_file)} ...")
-    baca.path.write_metadata_py(segment_directory, metadata)
+    baca.path.write_metadata_py(section_directory, metadata)
     # TODO: import black here instead
     os.system("black --target-version=py38 __metadata__ 1>/dev/null 2>&1")
-    persist_file = segment_directory / "__persist__"
+    persist_file = section_directory / "__persist__"
     _print_file_handling(f"Writing {baca.path.trim(persist_file)} ...")
     baca.path.write_metadata_py(
-        segment_directory,
+        section_directory,
         persist,
         file_name="__persist__",
     )
@@ -584,7 +583,6 @@ def build_score(score_directory, debug_sections=False):
 
 def collect_section_lys(_segments_directory):
     contents_directory = baca.path.get_contents_directory(_segments_directory)
-    # segments_directory = contents_directory / "segments"
     segments_directory = contents_directory / "sections"
     segment_lys = sorted(segments_directory.glob("**/music.ly"))
     if not segment_lys:
@@ -616,7 +614,6 @@ def collect_section_lys(_segments_directory):
 
 def color_persistent_indicators(directory, *, undo=False):
     directory = pathlib.Path(directory)
-    # if directory.parent.name != "segments":
     if directory.parent.name != "sections":
         _print_always("Must call in section directory ...")
         sys.exit(1)
@@ -645,8 +642,8 @@ def handle_build_tags(_segments_directory):
     segments_directory = contents_directory / "sections"
     paths = sorted(segments_directory.glob("*"))
     segment_directories = [_ for _ in paths if _.is_dir()]
-    final_segment_directory_name = segment_directories[-1].name
-    final_ily_name = f"{final_segment_directory_name}.ily"
+    final_section_directory_name = segment_directories[-1].name
+    final_ily_name = f"{final_section_directory_name}.ily"
 
     def match_left_broken_should_deactivate(tags):
         if baca.tags.LEFT_BROKEN in tags and baca.tags.SPANNER_START in tags:
@@ -922,10 +919,10 @@ def interpret_build_music(
     if not music_ly.is_file():
         raise Exception(f"Missing {baca.path.trim(music_ly)} ...")
     if build_type == "score":
-        _segments_directory = build_directory / "_segments"
+        _segments_directory = build_directory / "_sections"
     else:
         assert build_type == "part"
-        _segments_directory = build_directory.parent / "_segments"
+        _segments_directory = build_directory.parent / "_sections"
     if skip_section_collection:
         _print_file_handling("Skipping segment collection ...")
     else:
@@ -952,17 +949,17 @@ def interpret_section(
     interpreter=None,
     **keywords,
 ):
-    segment_directory = pathlib.Path(os.getcwd())
+    section_directory = pathlib.Path(os.getcwd())
     _arguments = arguments("--clicktrack", "--midi", "--pdf")
     if not any([_arguments.clicktrack, _arguments.midi, _arguments.pdf]):
         _print_always("Missing --clicktrack, --midi, --pdf ...")
         sys.exit(1)
     _print_main_task("Interpreting commands ...")
     interpreter = interpreter or baca.interpret.interpreter
-    metadata = baca.path.get_metadata(segment_directory)
-    persist = baca.path.get_metadata(segment_directory, file_name="__persist__")
-    previous_metadata, previous_persist = _get_previous_metadata(segment_directory)
-    first_segment = first_segment or segment_directory.name == "01"
+    metadata = baca.path.get_metadata(section_directory)
+    persist = baca.path.get_metadata(section_directory, file_name="__persist__")
+    previous_metadata, previous_persist = _get_previous_metadata(section_directory)
+    first_segment = first_segment or section_directory.name == "01"
     with abjad.Timer() as timer:
         metadata, persist = interpreter(
             score,
@@ -979,7 +976,7 @@ def interpret_section(
             persist=persist,
             previous_metadata=previous_metadata,
             previous_persist=previous_persist,
-            segment_number=segment_directory.name,
+            segment_number=section_directory.name,
         )
     timing = types.SimpleNamespace()
     timing.runtime = int(timer.elapsed_time)
@@ -1062,7 +1059,6 @@ def make_layout_ly(
     document_name = abjad.string.to_shout_case(layout_directory.name)
     if time_signatures is not None:
         first_measure_number = 1
-    # elif layout_directory.parent.name == "segments":
     elif layout_directory.parent.name == "sections":
         string = "first_measure_number"
         first_measure_number = baca.path.get_metadatum(
@@ -1077,13 +1073,12 @@ def make_layout_ly(
         first_measure_number = 1
         time_signatures = []
         contents_directory = baca.path.get_contents_directory(layout_directory)
-        # segments_directory = contents_directory / "segments"
         segments_directory = contents_directory / "sections"
-        for segment_directory in sorted(segments_directory.glob("*")):
-            if not segment_directory.is_dir():
+        for section_directory in sorted(segments_directory.glob("*")):
+            if not section_directory.is_dir():
                 continue
             time_signatures_ = baca.path.get_metadatum(
-                segment_directory,
+                section_directory,
                 "time_signatures",
             )
             time_signatures.extend(time_signatures_)
@@ -1136,7 +1131,6 @@ def make_layout_ly(
     layout_ly = layout_directory / file_name
     lines = []
     # TODO: remove first_page_number embedding
-    # if layout_directory.parent.name == "segments":
     if layout_directory.parent.name == "sections":
         if layout_directory.name != "01":
             previous_segment_number = str(int(layout_directory.name) - 1).zfill(2)
@@ -1214,23 +1208,23 @@ def persist(lilypond_file, metadata, persist, timing):
         "--pdf",
         "--print-timing",
     )
-    segment_directory = pathlib.Path(os.getcwd())
-    _write_metadata(metadata, persist, segment_directory)
+    section_directory = pathlib.Path(os.getcwd())
+    _write_metadata(metadata, persist, section_directory)
     if _arguments.clicktrack:
-        path = segment_directory / "clicktrack.midi"
+        path = section_directory / "clicktrack.midi"
         mtime = os.path.getmtime(path) if path.is_file() else None
-        _make_segment_clicktrack(lilypond_file, mtime, segment_directory)
+        _make_segment_clicktrack(lilypond_file, mtime, section_directory)
     if _arguments.midi:
-        path = segment_directory / "music.midi"
+        path = section_directory / "music.midi"
         mtime = os.path.getmtime(path) if path.is_file() else None
-        _make_segment_midi(lilypond_file, mtime, segment_directory)
+        _make_segment_midi(lilypond_file, mtime, section_directory)
     if _arguments.pdf:
-        path = segment_directory / "music.pdf"
+        path = section_directory / "music.pdf"
         mtime = os.path.getmtime(path) if path.is_file() else None
         _make_segment_pdf(
             lilypond_file,
             mtime,
-            segment_directory,
+            section_directory,
             timing,
             also_untagged=_arguments.also_untagged,
             log_timing=_arguments.log_timing,
@@ -1280,7 +1274,6 @@ def run_lilypond(ly_file_path, *, pdf_mtime=None, remove=None):
 
 def show_annotations(directory, *, undo=False):
     directory = pathlib.Path(directory)
-    # if directory.parent.name != "segments":
     if directory.parent.name != "sections":
         _print_always("Must call in section directory ...")
         sys.exit(1)

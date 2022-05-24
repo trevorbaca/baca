@@ -401,7 +401,7 @@ def handle_fermata_bar_lines(path):
     """
     Handles fermata bar lines.
     """
-    if path.name == "_segments":
+    if path.name == "_sections":
         path = path.parent
 
     def activate(tags):
@@ -436,7 +436,7 @@ def handle_mol_tags(path):
     """
     Handles MOL (middle-of-line) tags.
     """
-    if path.name == "_segments":
+    if path.name == "_sections":
         path = path.parent
 
     # activate all middle-of-line tags
@@ -483,7 +483,7 @@ def handle_shifted_clefs(path):
         return _tags.SHIFTED_CLEF in tags
 
     # then deactivate shifted clefs at BOL:
-    if path.name == "_segments":
+    if path.name == "_sections":
         metadata_source = path.parent
     else:
         metadata_source = path

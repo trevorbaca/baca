@@ -2397,7 +2397,7 @@ def _style_fermata_measures(
     fermata_extra_offset_y,
     fermata_measure_empty_overrides,
     fermata_start_offsets,
-    final_segment,
+    final_section,
     offset_to_measure_number,
     score,
 ):
@@ -2443,7 +2443,7 @@ def _style_fermata_measures(
                     leaf,
                     tag=_tags.function_name(_frame(), n=1),
                 )
-                if not final_segment:
+                if not final_section:
                     abjad.attach(
                         empty_bar_extent,
                         leaf,
@@ -2504,7 +2504,7 @@ def _style_fermata_measures(
                 )
             if start_offset in bar_lines_already_styled:
                 continue
-            if not (next_leaf is None and final_segment):
+            if not (next_leaf is None and final_section):
                 # TODO: replace literal with override
                 strings = []
                 string = r"Score.BarLine.transparent = ##t"
@@ -2815,7 +2815,7 @@ def interpreter(
     error_on_not_yet_pitched=False,
     fermata_extra_offset_y=2.5,
     fermata_measure_empty_overrides=None,
-    final_segment=False,
+    final_section=False,
     first_measure_number=None,
     first_segment=False,
     force_nonnatural_accidentals=False,
@@ -2858,7 +2858,7 @@ def interpreter(
     if deactivate is not None:
         assert all(isinstance(_, abjad.Tag) for _ in deactivate)
     assert isinstance(do_not_require_margin_markup, bool)
-    assert isinstance(final_segment, bool)
+    assert isinstance(final_section, bool)
     first_measure_number = _adjust_first_measure_number(
         first_measure_number,
         previous_metadata,
@@ -2996,7 +2996,7 @@ def interpreter(
                 fermata_extra_offset_y,
                 fermata_measure_empty_overrides,
                 fermata_start_offsets,
-                final_segment,
+                final_section,
                 offset_to_measure_number,
                 score,
             )
