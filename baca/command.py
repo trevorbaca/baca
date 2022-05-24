@@ -447,7 +447,7 @@ def not_score(command: Command | Suite) -> Command | Suite:
     return tag(_tags.NOT_SCORE, command)
 
 
-def not_segment(command: Command | Suite) -> Command | Suite:
+def not_section(command: Command | Suite) -> Command | Suite:
     """
     Tags ``command`` with ``-SEGMENT``.
     """
@@ -545,7 +545,7 @@ def only_score(command: Command | Suite) -> Command | Suite:
     return tag(_tags.ONLY_SCORE, command)
 
 
-def only_segment(command: Command | Suite) -> Command | Suite:
+def only_section(command: Command | Suite) -> Command | Suite:
     """
     Tags ``command`` with ``+SEGMENT``.
     """
