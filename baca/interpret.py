@@ -44,7 +44,7 @@ def _activate_tags(score, tags):
 def _add_container_identifiers(score, section_number):
     if section_number is not None:
         assert section_number, repr(section_number)
-        section_number = f"section_number.{int(section_number)}"
+        section_number = f"number.{int(section_number)}"
     else:
         section_number = ""
     contexts = []
