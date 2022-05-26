@@ -33,15 +33,14 @@ def assert_unique_context_names(score):
 
 
 def attach_lilypond_tag(tag, context, *, part_manifest=None):
-    for tag_ in tag.split("."):
-        if not abjad.string.is_lilypond_identifier(tag_):
-            raise Exception(f"invalid LilyPond identifier: {tag_!r}.")
-        part_names = []
-        if part_manifest is not None:
-            part_names = [_.name for _ in part_manifest.parts]
-        if part_names and tag_ not in part_names:
-            raise Exception(f"not listed in parts manifest: {tag_!r}.")
-    literal = abjad.LilyPondLiteral(rf"\tag {tag}", "before")
+    if not abjad.string.is_lilypond_identifier(tag):
+        raise Exception(f"invalid LilyPond identifier: {tag!r}.")
+    part_names = []
+    if part_manifest is not None:
+        part_names = [_.name for _ in part_manifest.parts]
+    if part_names and tag not in part_names:
+        raise Exception(f"not listed in parts manifest: {tag!r}.")
+    literal = abjad.LilyPondLiteral(rf"\tag #'{tag}", "before")
     tag = _tags.function_name(_frame())
     abjad.attach(literal, context, tag=tag)
 
