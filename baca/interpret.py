@@ -49,12 +49,12 @@ def _add_container_identifiers(score, section_number):
         section_number = ""
     contexts = []
     try:
-        context = score["Global_Skips"]
+        context = score["GlobalSkips"]
         contexts.append(context)
     except ValueError:
         pass
     try:
-        context = score["Global_Rests"]
+        context = score["GlobalRests"]
         contexts.append(context)
     except ValueError:
         pass
@@ -181,7 +181,7 @@ def _apply_breaks(score, spacing):
         return
     if spacing.breaks is None:
         return
-    global_skips = score["Global_Skips"]
+    global_skips = score["GlobalSkips"]
     skips = _select.skips(global_skips)
     measure_count = len(skips)
     literal = abjad.LilyPondLiteral(r"\autoPageBreaksOff", "before")
@@ -239,13 +239,13 @@ def _attach_fermatas(
     time_signatures,
 ):
     if not always_make_global_rests:
-        del score["Global_Rests"]
+        del score["GlobalRests"]
         return
     has_fermata = False
     if not has_fermata and not always_make_global_rests:
-        del score["Global_Rests"]
+        del score["GlobalRests"]
         return
-    context = score["Global_Rests"]
+    context = score["GlobalRests"]
     rests = _make_global_rests(
         append_phantom_measure,
         time_signatures,
@@ -728,11 +728,11 @@ def _calculate_clock_times(
     first_measure_number,
     previous_stop_clock_time,
 ):
-    skips = _select.skips(score["Global_Skips"])
-    if "Global_Rests" not in score:
+    skips = _select.skips(score["GlobalSkips"])
+    if "GlobalRests" not in score:
         return None, None, None, None
     for context in abjad.iterate.components(score, abjad.Context):
-        if context.name == "Global_Rests":
+        if context.name == "GlobalRests":
             break
     rests = abjad.select.rests(context)
     assert len(skips) == len(rests)
@@ -1428,8 +1428,8 @@ def _force_nonnatural_accidentals(score):
 def _get_fermata_measure_numbers(first_measure_number, score):
     fermata_start_offsets, fermata_measure_numbers = [], []
     final_measure_is_fermata = False
-    if "Global_Rests" in score:
-        context = score["Global_Rests"]
+    if "GlobalRests" in score:
+        context = score["GlobalRests"]
         rests = abjad.select.leaves(context, abjad.MultimeasureRest)
         final_measure_index = len(rests) - 1
         final_measure_index -= 1
@@ -1499,7 +1499,7 @@ def _get_measure_number_tag(leaf, offset_to_measure_number):
 
 
 def _get_measure_offsets(score, start_measure, stop_measure):
-    skips = _select.skips(score["Global_Skips"])
+    skips = _select.skips(score["GlobalSkips"])
     start_skip = skips[start_measure - 1]
     assert isinstance(start_skip, abjad.Skip), start_skip
     start_offset = abjad.get.timespan(start_skip).start_offset
@@ -1561,7 +1561,7 @@ def _label_clock_time(
     previous_metadata,
     score,
 ):
-    skips = _select.skips(score["Global_Skips"])
+    skips = _select.skips(score["GlobalSkips"])
     previous_stop_clock_time = previous_metadata.get("stop_clock_time")
     result = _calculate_clock_times(
         score,
@@ -1863,13 +1863,13 @@ def _magnify_staves(magnify_staves, score):
 
 
 def _make_global_context():
-    global_rests = abjad.Context(lilypond_type="GlobalRests", name="Global_Rests")
-    global_skips = abjad.Context(lilypond_type="GlobalSkips", name="Global_Skips")
+    global_rests = abjad.Context(lilypond_type="GlobalRests", name="GlobalRests")
+    global_skips = abjad.Context(lilypond_type="GlobalSkips", name="GlobalSkips")
     global_context = abjad.Context(
         [global_rests, global_skips],
         lilypond_type="GlobalContext",
         simultaneous=True,
-        name="Global_Context",
+        name="GlobalContext",
     )
     return global_context
 
@@ -1991,8 +1991,8 @@ def _memento_to_indicator(dictionary, memento):
 
 
 def _move_global_context(score):
-    assert "Global_Rests" not in score
-    global_skips = score["Global_Skips"]
+    assert "GlobalRests" not in score
+    global_skips = score["GlobalSkips"]
     global_skips.lilypond_type = "Voice"
     music_context = score["Music_Context"]
     for component in abjad.iterate.components(music_context):
@@ -2001,8 +2001,8 @@ def _move_global_context(score):
             break
     first_music_staff.simultaneous = True
     first_music_staff.insert(0, global_skips)
-    score["Global_Context"][:] = []
-    del score["Global_Context"]
+    score["GlobalContext"][:] = []
+    del score["GlobalContext"]
     assert len(score) == 1, repr(score)
     score[:] = music_context[:]
     if len(score) == 1:
@@ -2016,10 +2016,10 @@ def _move_global_rests(
 ):
     if not global_rests_in_topmost_staff and not global_rests_in_every_staff:
         return
-    if "Global_Rests" not in score:
+    if "GlobalRests" not in score:
         return
-    global_rests = score["Global_Rests"]
-    score["Global_Context"].remove(global_rests)
+    global_rests = score["GlobalRests"]
+    score["GlobalContext"].remove(global_rests)
     music_context = score["Music_Context"]
     if global_rests_in_topmost_staff is True:
         for staff in abjad.iterate.components(music_context, abjad.Staff):
@@ -2526,7 +2526,7 @@ def _style_fermata_measures(
                     tag=tag.append(_tags.function_name(_frame(), n=7)),
                 )
             bar_lines_already_styled.append(start_offset)
-    rests = abjad.select.leaves(score["Global_Rests"], abjad.MultimeasureRest)
+    rests = abjad.select.leaves(score["GlobalRests"], abjad.MultimeasureRest)
     for measure_number in fermata_measure_empty_overrides:
         measure_index = measure_number - 1
         rest = rests[measure_index]
@@ -2535,7 +2535,7 @@ def _style_fermata_measures(
 
 
 def _style_phantom_measures(score):
-    skip = abjad.get.leaf(score["Global_Skips"], -1)
+    skip = abjad.get.leaf(score["GlobalSkips"], -1)
     for literal in abjad.get.indicators(skip, abjad.LilyPondLiteral):
         if r"\baca-time-signature-color" in literal.argument:
             abjad.detach(literal, skip)
@@ -2558,9 +2558,9 @@ def _style_phantom_measures(score):
         skip,
         tag=_tags.function_name(_frame(), n=3).append(_tags.PHANTOM),
     )
-    if "Global_Rests" in score:
+    if "GlobalRests" in score:
         for context in abjad.iterate.components(score, abjad.Context):
-            if context.name == "Global_Rests":
+            if context.name == "GlobalRests":
                 rest = context[-1]
                 break
         _append_tag_to_wrappers(rest, _tags.function_name(_frame(), n=4))
@@ -2862,7 +2862,7 @@ def interpreter(
     )
     assert isinstance(first_section, bool)
     assert isinstance(force_nonnatural_accidentals, bool)
-    global_skips = score["Global_Skips"]
+    global_skips = score["GlobalSkips"]
     manifests = {
         "abjad.Instrument": instruments,
         "abjad.MarginMarkup": margin_markups,
@@ -3060,7 +3060,7 @@ def interpreter(
             score,
         )
         first_metronome_mark = True
-        skip = abjad.select.leaf(score["Global_Skips"], 0)
+        skip = abjad.select.leaf(score["GlobalSkips"], 0)
         metronome_mark = abjad.get.effective(skip, abjad.MetronomeMark)
         if metronome_mark is None:
             first_metronome_mark = False

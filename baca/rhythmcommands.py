@@ -70,7 +70,7 @@ class RhythmCommand(_command.Command):
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 3/8
@@ -182,7 +182,7 @@ class RhythmCommand(_command.Command):
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #16
                         \time 4/8
@@ -692,7 +692,7 @@ def make_monads(fractions):
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #4
                         \time 4/4
@@ -808,7 +808,7 @@ def make_repeat_tied_notes(
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #4
                         \time 10/8

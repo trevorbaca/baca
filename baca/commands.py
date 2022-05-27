@@ -93,7 +93,7 @@ class BCPCommand(_command.Command):
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #16
                         \time 4/8
@@ -291,7 +291,7 @@ class BCPCommand(_command.Command):
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #16
                         \time 4/8
@@ -651,7 +651,7 @@ class ContainerCommand(_command.Command):
         {
             \context Staff = "Music_Staff"
             <<
-                \context Voice = "Global_Skips"
+                \context Voice = "GlobalSkips"
                 {
                     \time 4/8
                     s1 * 1/2
@@ -1274,7 +1274,7 @@ class AccidentalAdjustmentCommand(_command.Command):
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1505,7 +1505,7 @@ class ClusterCommand(_command.Command):
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1590,7 +1590,7 @@ class ClusterCommand(_command.Command):
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1674,7 +1674,7 @@ class ClusterCommand(_command.Command):
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1758,7 +1758,7 @@ class ClusterCommand(_command.Command):
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1842,7 +1842,7 @@ class ClusterCommand(_command.Command):
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1928,7 +1928,7 @@ class ClusterCommand(_command.Command):
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -2061,7 +2061,7 @@ class ColorFingeringCommand(_command.Command):
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -2288,7 +2288,7 @@ class MicrotoneDeviationCommand(_command.Command):
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -2406,7 +2406,7 @@ class OctaveDisplacementCommand(_command.Command):
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -2636,7 +2636,7 @@ class PitchCommand(_command.Command):
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -2711,7 +2711,7 @@ class PitchCommand(_command.Command):
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -2786,7 +2786,7 @@ class PitchCommand(_command.Command):
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -3089,7 +3089,7 @@ class RegisterCommand(_command.Command):
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -3357,7 +3357,7 @@ class RegisterInterpolationCommand(_command.Command):
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -3464,7 +3464,7 @@ class RegisterInterpolationCommand(_command.Command):
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -3571,7 +3571,7 @@ class RegisterInterpolationCommand(_command.Command):
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -3678,7 +3678,7 @@ class RegisterInterpolationCommand(_command.Command):
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -3785,7 +3785,7 @@ class RegisterInterpolationCommand(_command.Command):
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -5464,7 +5464,7 @@ def force_accidental(
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -5776,7 +5776,7 @@ def pitch(
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -7710,7 +7710,7 @@ def hide_black_note_heads(
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -8068,7 +8068,7 @@ def margin_markup(
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -8661,7 +8661,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 3/8
@@ -8730,7 +8730,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 3/8
@@ -8800,7 +8800,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 3/8
@@ -8868,7 +8868,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 3/8
@@ -8936,7 +8936,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 3/8
@@ -9811,7 +9811,7 @@ def assign_parts(
         {
             \context Staff = "Music_Staff"
             <<
-                \context Voice = "Global_Skips"
+                \context Voice = "GlobalSkips"
                 {
                     \time 4/8
                     s1 * 1/2
@@ -9923,7 +9923,7 @@ def bcps(
                 {
                     \context Staff = "Music_Staff"
                     <<
-                        \context Voice = "Global_Skips"
+                        \context Voice = "GlobalSkips"
                         {
                             \baca-new-spacing-section #1 #16
                             \time 4/8
@@ -10281,7 +10281,7 @@ def container(
         {
             \context Staff = "Music_Staff"
             <<
-                \context Voice = "Global_Skips"
+                \context Voice = "GlobalSkips"
                 {
                     \time 4/8
                     s1 * 1/2
@@ -10362,7 +10362,7 @@ def cross_staff(*, selector=lambda _: _select.phead(_, 0)) -> IndicatorCommand:
                 <<
                     \context Staff = "Music_Staff_1"
                     <<
-                        \context Voice = "Global_Skips"
+                        \context Voice = "GlobalSkips"
                         {
                             \time 4/4
                             s1 * 1
@@ -10666,7 +10666,7 @@ def finger_pressure_transition(
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -10873,7 +10873,7 @@ def glissando(
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -10960,7 +10960,7 @@ def glissando(
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -11037,7 +11037,7 @@ def glissando(
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -11139,7 +11139,7 @@ def glissando(
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -11294,7 +11294,7 @@ def invisible_music(
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8

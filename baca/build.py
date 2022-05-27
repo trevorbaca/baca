@@ -258,7 +258,7 @@ def _make_section_clicktrack(lilypond_file, mtime, section_directory):
     clicktrack_path = section_directory / clicktrack_file_name
     if clicktrack_path.is_file():
         _print_file_handling(f"Existing {baca.path.trim(clicktrack_path)} ...")
-    global_skips = lilypond_file["Global_Skips"]
+    global_skips = lilypond_file["GlobalSkips"]
     time_signatures = []
     for skip in global_skips[:-1]:
         time_signature = abjad.get.effective(skip, abjad.TimeSignature)
@@ -280,8 +280,8 @@ def _make_section_clicktrack(lilypond_file, mtime, section_directory):
     abjad.setting(staff).midiInstrument = '#"drums"'
     score = abjad.Score([staff], name="Score", simultaneous=False)
     fermata_measure_numbers = []
-    if "Global_Rests" in lilypond_file:
-        global_rests = lilypond_file["Global_Rests"]
+    if "GlobalRests" in lilypond_file:
+        global_rests = lilypond_file["GlobalRests"]
         for i, rest in enumerate(global_rests):
             if abjad.get.has_indicator(rest, baca.enums.FERMATA_MEASURE):
                 measure_number = i + 1
@@ -1108,7 +1108,7 @@ def make_layout_ly(
         whitespace_leaves=True,
     )
     lilypond_file = baca.make_lilypond_file(score)
-    context = lilypond_file["Global_Skips"]
+    context = lilypond_file["GlobalSkips"]
     if curtail_measure_count is not None:
         del context[curtail_measure_count:]
     context.lilypond_type = "PageLayout"
@@ -1125,7 +1125,7 @@ def make_layout_ly(
         text = abjad.lilypond(page_layout_context, tags=tags)
     else:
         text = abjad.lilypond(score, tags=tags)
-    text = text.replace("Global_Skips", "Page_Layout")
+    text = text.replace("GlobalSkips", "Page_Layout")
     text = text.replace("Global.Skips", "Page.Layout")
     text = abjad.tag.left_shift_tags(text)
     layout_ly = layout_directory / file_name

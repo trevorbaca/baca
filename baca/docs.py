@@ -65,12 +65,12 @@ def make_empty_score(*counts):
         >>> print(string)
         \context Score = "Score"
         <<
-            \context GlobalContext = "Global_Context"
+            \context GlobalContext = "GlobalContext"
             <<
-                \context GlobalRests = "Global_Rests"
+                \context GlobalRests = "GlobalRests"
                 {
                 }
-                \context GlobalSkips = "Global_Skips"
+                \context GlobalSkips = "GlobalSkips"
                 {
                 }
             >>
@@ -92,12 +92,12 @@ def make_empty_score(*counts):
         >>> print(string)
         \context Score = "Score"
         <<
-            \context GlobalContext = "Global_Context"
+            \context GlobalContext = "GlobalContext"
             <<
-                \context GlobalRests = "Global_Rests"
+                \context GlobalRests = "GlobalRests"
                 {
                 }
-                \context GlobalSkips = "Global_Skips"
+                \context GlobalSkips = "GlobalSkips"
                 {
                 }
             >>
@@ -128,12 +128,12 @@ def make_empty_score(*counts):
         >>> print(string)
         \context Score = "Score"
         <<
-            \context GlobalContext = "Global_Context"
+            \context GlobalContext = "GlobalContext"
             <<
-                \context GlobalRests = "Global_Rests"
+                \context GlobalRests = "GlobalRests"
                 {
                 }
-                \context GlobalSkips = "Global_Skips"
+                \context GlobalSkips = "GlobalSkips"
                 {
                 }
             >>
@@ -176,12 +176,12 @@ def make_empty_score(*counts):
         >>> print(string)
         \context Score = "Score"
         <<
-            \context GlobalContext = "Global_Context"
+            \context GlobalContext = "GlobalContext"
             <<
-                \context GlobalRests = "Global_Rests"
+                \context GlobalRests = "GlobalRests"
                 {
                 }
-                \context GlobalSkips = "Global_Skips"
+                \context GlobalSkips = "GlobalSkips"
                 {
                 }
             >>

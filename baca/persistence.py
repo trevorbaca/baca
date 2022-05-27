@@ -59,7 +59,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -155,7 +155,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -260,7 +260,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -368,7 +368,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -465,7 +465,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -582,7 +582,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -672,7 +672,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
@@ -741,7 +741,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
@@ -812,7 +812,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
@@ -873,7 +873,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
@@ -945,7 +945,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
@@ -1004,7 +1004,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
@@ -1075,7 +1075,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
@@ -1136,7 +1136,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
@@ -1224,7 +1224,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -1267,7 +1267,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -1306,7 +1306,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -1377,7 +1377,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -1420,7 +1420,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -1460,7 +1460,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -1540,7 +1540,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -1583,7 +1583,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -1622,7 +1622,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -1704,7 +1704,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -1747,7 +1747,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -1787,7 +1787,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -1869,7 +1869,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -1917,7 +1917,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -1961,7 +1961,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -2054,7 +2054,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -2097,7 +2097,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -2136,7 +2136,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -2236,7 +2236,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -2285,7 +2285,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -2330,7 +2330,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -2408,7 +2408,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -2457,7 +2457,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -2502,7 +2502,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -2588,7 +2588,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -2639,7 +2639,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -2686,7 +2686,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -2776,7 +2776,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -2827,7 +2827,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -2874,7 +2874,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -2965,7 +2965,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -3025,7 +3025,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -3081,7 +3081,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -3186,7 +3186,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -3237,7 +3237,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -3284,7 +3284,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -3384,7 +3384,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
@@ -3453,7 +3453,7 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
-        ...     "Global_Skips",
+        ...     "GlobalSkips",
         ...     baca.metronome_mark("112"),
         ... )
         >>> commands(
@@ -3494,7 +3494,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #4 #'(8)
@@ -3560,7 +3560,7 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
-        ...     "Global_Skips",
+        ...     "GlobalSkips",
         ...     baca.metronome_mark("112"),
         ...     baca.text_spanner_staff_padding(4),
         ... )
@@ -3574,7 +3574,7 @@ r"""
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]['Score'] = [
         ...     baca.Memento(
-        ...         context="Global_Skips",
+        ...         context="GlobalSkips",
         ...         manifest="metronome_marks",
         ...         value="90",
         ...     )
@@ -3613,7 +3613,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #4 #'(8)
@@ -3687,7 +3687,7 @@ r"""
         ...     baca.reapply_persistent_indicators(),
         ... )
         >>> commands(
-        ...     "Global_Skips",
+        ...     "GlobalSkips",
         ...     baca.text_spanner_staff_padding(4),
         ... )
 
@@ -3695,7 +3695,7 @@ r"""
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]['Score'] = [
         ...     baca.Memento(
-        ...         context="Global_Skips",
+        ...         context="GlobalSkips",
         ...         manifest="metronome_marks",
         ...         value="90",
         ...     )
@@ -3733,7 +3733,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #4 #'(8)
@@ -3775,7 +3775,7 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
-        ...     "Global_Skips",
+        ...     "GlobalSkips",
         ...     baca.metronome_mark("112"),
         ...     baca.metronome_mark("112", selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
@@ -3817,7 +3817,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #4 #'(8)
@@ -3890,7 +3890,7 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
-        ...     "Global_Skips",
+        ...     "GlobalSkips",
         ...     baca.metronome_mark("112"),
         ...     baca.text_spanner_staff_padding(4),
         ... )
@@ -3905,7 +3905,7 @@ r"""
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Score"] = [
         ...     baca.Memento(
-        ...         context="Global_Skips",
+        ...         context="GlobalSkips",
         ...         manifest="metronome_marks",
         ...         value="112",
         ...     )
@@ -3944,7 +3944,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #4 #'(8)
@@ -4063,7 +4063,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
@@ -4090,7 +4090,7 @@ r"""
 
         >>> dictionary = persist["persistent_indicators"]
         >>> dictionary
-        {'Music_Staff': [baca.Memento(context='Music_Voice', edition=None, manifest=None, prototype='baca.PersistentOverride', synthetic_offset=None, value=PersistentOverride(after=False, attribute='bar_extent', context='Staff', grob='BarLine', hide=False, value="#'(0 . 0)")), baca.Memento(context='Music_Voice', edition=None, manifest=None, prototype='baca.StaffLines', synthetic_offset=None, value=1), baca.Memento(context='Music_Voice', edition=Tag(string='-PARTS'), manifest=None, prototype='baca.BarExtent', synthetic_offset=None, value=1)], 'Score': [baca.Memento(context='Global_Skips', edition=None, manifest=None, prototype='abjad.TimeSignature', synthetic_offset=None, value='3/8')]}
+        {'Music_Staff': [baca.Memento(context='Music_Voice', edition=None, manifest=None, prototype='baca.PersistentOverride', synthetic_offset=None, value=PersistentOverride(after=False, attribute='bar_extent', context='Staff', grob='BarLine', hide=False, value="#'(0 . 0)")), baca.Memento(context='Music_Voice', edition=None, manifest=None, prototype='baca.StaffLines', synthetic_offset=None, value=1), baca.Memento(context='Music_Voice', edition=Tag(string='-PARTS'), manifest=None, prototype='baca.BarExtent', synthetic_offset=None, value=1)], 'Score': [baca.Memento(context='GlobalSkips', edition=None, manifest=None, prototype='abjad.TimeSignature', synthetic_offset=None, value='3/8')]}
 
     ..  container:: example
 
@@ -4150,7 +4150,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
@@ -4236,7 +4236,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
@@ -4299,7 +4299,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
@@ -4371,7 +4371,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
@@ -4445,7 +4445,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
@@ -4508,7 +4508,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
@@ -4586,7 +4586,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
@@ -4635,7 +4635,7 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
-        ...     "Global_Skips",
+        ...     "GlobalSkips",
         ...     baca.metronome_mark(baca.Accelerando()),
         ... )
         >>> commands(
@@ -4676,7 +4676,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #4 #'(8)
@@ -4741,7 +4741,7 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> commands(
-        ...     "Global_Skips",
+        ...     "GlobalSkips",
         ...     baca.metronome_mark(baca.Accelerando()),
         ...     baca.text_spanner_staff_padding(4),
         ... )
@@ -4754,7 +4754,7 @@ r"""
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Score"] = [
         ...     baca.Memento(
-        ...         context="Global_Skips",
+        ...         context="GlobalSkips",
         ...         prototype="baca.Ritardando",
         ...     )
         ... ]
@@ -4790,7 +4790,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #4 #'(8)
@@ -4836,7 +4836,7 @@ r"""
         ...     baca.reapply_persistent_indicators(),
         ... )
         >>> commands(
-        ...     "Global_Skips",
+        ...     "GlobalSkips",
         ...     baca.text_spanner_staff_padding(4),
         ... )
 
@@ -4844,7 +4844,7 @@ r"""
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Score"] = [
         ...     baca.Memento(
-        ...         context="Global_Skips",
+        ...         context="GlobalSkips",
         ...         prototype="baca.Accelerando",
         ...     )
         ... ]
@@ -4880,7 +4880,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #4 #'(8)
@@ -4921,7 +4921,7 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
         ... )
         >>> commands(
-        ...     "Global_Skips",
+        ...     "GlobalSkips",
         ...     baca.metronome_mark(baca.Accelerando()),
         ...     baca.metronome_mark(
         ...         baca.Accelerando(),
@@ -4963,7 +4963,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #4 #'(8)
@@ -5011,7 +5011,7 @@ r"""
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
-        ...     "Global_Skips",
+        ...     "GlobalSkips",
         ...     baca.metronome_mark(baca.Accelerando()),
         ...     baca.text_spanner_staff_padding(4),
         ... )
@@ -5025,7 +5025,7 @@ r"""
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Score"] = [
         ...     baca.Memento(
-        ...         context="Global_Skips",
+        ...         context="GlobalSkips",
         ...         prototype="baca.Accelerando",
         ...     )
         ... ]
@@ -5061,7 +5061,7 @@ r"""
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "Global_Skips"
+                    \context Voice = "GlobalSkips"
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #4 #'(8)
