@@ -489,7 +489,7 @@ def _make_mmrests(time_signatures):
     for i, time_signature in enumerate(time_signatures):
         duration = time_signature.duration
         if i == 0:
-            voice_name = "Change_Me_Voice"
+            voice_name = "ChangeMeVoice"
             mmrest = _make_multimeasure_rest_container(voice_name, duration)
         else:
             mmrest = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)

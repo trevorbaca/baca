@@ -818,9 +818,9 @@ def _call_all_commands(
             for voice_ in abjad.select.components(components, abjad.Voice):
                 if voice_.name == "RhythmMakerMusicVoice":
                     voice_.name = command.scope.voice_name
-                elif voice_.name == "Change_Me_Voice":
+                elif voice_.name == "ChangeMeVoice":
                     voice_.name = command.scope.voice_name
-                elif voice_.name == "Change_Me_RestVoice":
+                elif voice_.name == "ChangeMeRestVoice":
                     scope_voice_name = command.scope.voice_name
                     if "Music_Voice" in scope_voice_name:
                         foo = scope_voice_name.replace("Music_Voice", "RestVoice")
