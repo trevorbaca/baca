@@ -747,7 +747,9 @@ class GenericCommand(_command.Command):
         self.function(argument, runtime=self._runtime)
 
 
-def _attach_default_indicators(staff_or_staff_group):
+def _attach_default_indicators(
+    staff_or_staff_group, *, attach_instruments_by_hand=False
+):
     prototype = (abjad.Staff, abjad.StaffGroup)
     assert isinstance(staff_or_staff_group, prototype), repr(staff_or_staff_group)
     wrappers = []
@@ -790,19 +792,20 @@ def _attach_default_indicators(staff_or_staff_group):
             leaf = abjad.get.leaf(voices[0], 0)
         if leaf is None:
             continue
-        instrument = abjad.get.indicator(leaf, abjad.Instrument)
-        if instrument is None:
-            string = "default_instrument"
-            instrument = abjad.get.annotation(staff_or_staff_group, string)
-            if instrument is not None:
-                wrapper = abjad.attach(
-                    instrument,
-                    leaf,
-                    context=staff_or_staff_group.lilypond_type,
-                    tag=_tags.function_name(_frame(), n=1),
-                    wrapper=True,
-                )
-                wrappers.append(wrapper)
+        if attach_instruments_by_hand is False:
+            instrument = abjad.get.indicator(leaf, abjad.Instrument)
+            if instrument is None:
+                string = "default_instrument"
+                instrument = abjad.get.annotation(staff_or_staff_group, string)
+                if instrument is not None:
+                    wrapper = abjad.attach(
+                        instrument,
+                        leaf,
+                        context=staff_or_staff_group.lilypond_type,
+                        tag=_tags.function_name(_frame(), n=1),
+                        wrapper=True,
+                    )
+                    wrappers.append(wrapper)
         margin_markup = abjad.get.indicator(leaf, abjad.MarginMarkup)
         if margin_markup is None:
             string = "default_margin_markup"
@@ -832,13 +835,21 @@ def _attach_default_indicators(staff_or_staff_group):
     return wrappers
 
 
-def _attach_first_section_default_indicators(manifests, staff_or_staff_group):
-    for wrapper in _attach_default_indicators(staff_or_staff_group):
+def _attach_first_section_default_indicators(
+    manifests,
+    staff_or_staff_group,
+    *,
+    attach_instruments_by_hand=False,
+):
+    for wrapper in _attach_default_indicators(
+        staff_or_staff_group,
+        attach_instruments_by_hand=attach_instruments_by_hand,
+    ):
         _treat.treat_persistent_wrapper(manifests, wrapper, "default")
 
 
 def attach_first_appearance_default_indicators(
-    *, selector=lambda _: _select.leaves(_)
+    *, attach_instruments_by_hand=False, selector=lambda _: _select.leaves(_)
 ) -> GenericCommand:
     def function(argument, *, runtime=None):
         manifests = runtime["manifests"]
@@ -851,7 +862,10 @@ def attach_first_appearance_default_indicators(
                 if component.name not in previous_persistent_indicators:
                     staff_or_staff_groups.append(component)
         for staff_or_staff_group in staff_or_staff_groups:
-            for wrapper in _attach_default_indicators(staff_or_staff_group):
+            for wrapper in _attach_default_indicators(
+                staff_or_staff_group,
+                attach_instruments_by_hand=attach_instruments_by_hand,
+            ):
                 _treat.treat_persistent_wrapper(manifests, wrapper, "default")
 
     command = GenericCommand(function=function, selector=selector)
@@ -861,7 +875,7 @@ def attach_first_appearance_default_indicators(
 
 # TODO: move to interpret.py
 def attach_first_section_default_indicators(
-    *, selector=lambda _: _select.leaves(_)
+    *, attach_instruments_by_hand=False, selector=lambda _: _select.leaves(_)
 ) -> GenericCommand:
     def function(argument, *, runtime=None):
         manifests = runtime["manifests"]
@@ -872,7 +886,11 @@ def attach_first_section_default_indicators(
             if isinstance(component, abjad.Staff | abjad.StaffGroup):
                 staff_or_staff_groups.append(component)
         for staff_or_staff_group in staff_or_staff_groups:
-            _attach_first_section_default_indicators(manifests, staff_or_staff_group)
+            _attach_first_section_default_indicators(
+                manifests,
+                staff_or_staff_group,
+                attach_instruments_by_hand=attach_instruments_by_hand,
+            )
 
     command = GenericCommand(function=function, selector=selector)
     command.name = "attach_first_section_default_indicators"

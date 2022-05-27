@@ -2797,6 +2797,7 @@ def interpreter(
     allows_instrument=None,
     always_make_global_rests=False,
     append_phantom_measure=False,
+    attach_instruments_by_hand=False,
     attach_nonfirst_empty_start_bar=False,
     attach_rhythm_annotation_spanners=False,
     check_persistent_indicators=False,
