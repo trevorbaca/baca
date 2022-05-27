@@ -78,7 +78,7 @@ def make_empty_score(*counts):
             {
                 \context Staff = "Music_Staff"
                 {
-                    \context Voice = "Music_Voice"
+                    \context Voice = "MusicVoice"
                     {
                     }
                 }
@@ -233,7 +233,7 @@ def make_empty_score(*counts):
         voices = []
         for voice_index in range(voice_count):
             if single_voice:
-                name = "Music_Voice"
+                name = "MusicVoice"
             else:
                 name = f"Music_Voice_{voice_number}"
             voice = abjad.Voice(name=name, tag=tag)

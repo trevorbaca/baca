@@ -43,7 +43,7 @@ class RhythmCommand(_command.Command):
         ... )
 
         >>> commands(
-        ...     "Music_Voice",
+        ...     "MusicVoice",
         ...     command,
         ... )
 
@@ -85,7 +85,7 @@ class RhythmCommand(_command.Command):
                         \time 4/8
                         s1 * 1/2
                     }
-                    \context Voice = "Music_Voice"
+                    \context Voice = "MusicVoice"
                     {
                         b'8
                         [
@@ -152,7 +152,7 @@ class RhythmCommand(_command.Command):
         ...         denominator=16,
         ...     )
         >>> commands(
-        ...     "Music_Voice",
+        ...     "MusicVoice",
         ...     command,
         ...     baca.label(label_with_durations),
         ...     baca.text_script_font_size(-2),
@@ -196,7 +196,7 @@ class RhythmCommand(_command.Command):
                         \baca-new-spacing-section #1 #4
                         s1 * 1/2
                     }
-                    \context Voice = "Music_Voice"
+                    \context Voice = "MusicVoice"
                     {
                         \override TextScript.font-size = -2
                         \override TextScript.staff-padding = 5
@@ -562,8 +562,8 @@ def _make_multimeasure_rest_container(
     rest = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
     abjad.attach(_enums.MULTIMEASURE_REST, rest)
     abjad.attach(_enums.REST_VOICE, rest)
-    if "Music_Voice" in voice_name:
-        name = voice_name.replace("Music_Voice", "RestVoice")
+    if "MusicVoice" in voice_name:
+        name = voice_name.replace("MusicVoice", "RestVoice")
     else:
         name = voice_name.replace("Voice", "RestVoice")
     tag = _tags.function_name(_frame(), n=6)
@@ -665,7 +665,7 @@ def make_monads(fractions):
         ... )
 
         >>> commands(
-        ...     "Music_Voice",
+        ...     "MusicVoice",
         ...     baca.make_monads("2/5 2/5 1/5"),
         ... )
 
@@ -698,7 +698,7 @@ def make_monads(fractions):
                         \time 4/4
                         s1 * 1
                     }
-                    \context Voice = "Music_Voice"
+                    \context Voice = "MusicVoice"
                     {
                         \tweak edge-height #'(0.7 . 0)
                         \times 4/5
@@ -781,7 +781,7 @@ def make_repeat_tied_notes(
         ... )
 
         >>> commands(
-        ...     "Music_Voice",
+        ...     "MusicVoice",
         ...     baca.make_repeat_tied_notes(),
         ... )
 
@@ -814,7 +814,7 @@ def make_repeat_tied_notes(
                         \time 10/8
                         s1 * 5/4
                     }
-                    \context Voice = "Music_Voice"
+                    \context Voice = "MusicVoice"
                     {
                         b'4.
                         - \tweak stencil ##f

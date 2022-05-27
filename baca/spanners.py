@@ -130,7 +130,7 @@ def beam(
         ... )
 
         >>> commands(
-        ...     "Music_Voice",
+        ...     "MusicVoice",
         ...     baca.make_even_divisions(),
         ...     baca.pitch("C4"),
         ...     baca.beam(
@@ -176,7 +176,7 @@ def beam(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "Music_Voice"
+                    \context Voice = "MusicVoice"
                     {
                         c'8
                         _ [

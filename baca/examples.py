@@ -11,7 +11,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ... )
 
     >>> commands(
-    ...     "Music_Voice",
+    ...     "MusicVoice",
     ...     baca.make_even_divisions(),
     ...     baca.label(lambda _: abjad.label.with_indices(_)),
     ... )
@@ -46,7 +46,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                     \time 3/8
                     s1 * 3/8
                 }
-                \context Voice = "Music_Voice"
+                \context Voice = "MusicVoice"
                 {
                     b'8
                     ^ \markup 0
@@ -104,7 +104,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     >>> list_.append(baca.label(lambda _: abjad.label.with_indices(_)))
 
     >>> commands(
-    ...     "Music_Voice",
+    ...     "MusicVoice",
     ...     list_,
     ... )
 
@@ -138,7 +138,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                     \time 3/8
                     s1 * 3/8
                 }
-                \context Voice = "Music_Voice"
+                \context Voice = "MusicVoice"
                 {
                     b'8
                     ^ \markup 0
@@ -185,7 +185,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     Raises exception on noncommand input:
 
     >>> commands(
-    ...     "Music_Voice",
+    ...     "MusicVoice",
     ...     "text",
     ... )
     Traceback (most recent call last):
@@ -301,7 +301,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ... )
 
     >>> commands(
-    ...     "Music_Voice",
+    ...     "MusicVoice",
     ...     baca.make_even_divisions(),
     ...     baca.instrument(instruments["clarinet"]),
     ...     baca.pitches("E4 F4"),
@@ -342,7 +342,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                     \time 3/8
                     s1 * 3/8
                 }
-                \context Voice = "Music_Voice"
+                \context Voice = "MusicVoice"
                 {
                     fs'8
                     [
@@ -383,7 +383,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ... )
 
     >>> commands(
-    ...     "Music_Voice",
+    ...     "MusicVoice",
     ...     baca.make_even_divisions(),
     ...     baca.instrument(instruments["clarinet"]),
     ...     baca.pitches("E4 F4"),
@@ -421,7 +421,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                     \time 3/8
                     s1 * 3/8
                 }
-                \context Voice = "Music_Voice"
+                \context Voice = "MusicVoice"
                 {
                     e'8
                     [
@@ -482,7 +482,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     time_signatures=time_signatures,
     ... )
     >>> commands(
-    ...     ("Music_Voice", 1),
+    ...     ("MusicVoice", 1),
     ...     baca.make_music(figures_, do_not_check_total_duration=True),
     ...     baca.instrument(abjad.Violin()),
     ... )
@@ -526,7 +526,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                     \time 3/8
                     s1 * 3/8
                 }
-                \context Voice = "Music_Voice"
+                \context Voice = "MusicVoice"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -589,7 +589,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     time_signatures=time_signatures,
     ... )
     >>> commands(
-    ...     ("Music_Voice", 1),
+    ...     ("MusicVoice", 1),
     ...     baca.make_music(figures, do_not_check_total_duration=True),
     ... )
 
@@ -630,7 +630,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                     \time 3/8
                     s1 * 3/8
                 }
-                \context Voice = "Music_Voice"
+                \context Voice = "MusicVoice"
                 {
                     \scaleDurations #'(1 . 1)
                     {
