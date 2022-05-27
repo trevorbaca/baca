@@ -816,17 +816,17 @@ def _call_all_commands(
                 print(f"Interpreting ...\n\n{command}\n")
                 raise
             for voice_ in abjad.select.components(components, abjad.Voice):
-                if voice_.name == "Rhythm_Maker_Music_Voice":
+                if voice_.name == "RhythmMakerMusicVoice":
                     voice_.name = command.scope.voice_name
                 elif voice_.name == "Change_Me_Voice":
                     voice_.name = command.scope.voice_name
-                elif voice_.name == "Change_Me_Rest_Voice":
+                elif voice_.name == "Change_Me_RestVoice":
                     scope_voice_name = command.scope.voice_name
                     if "Music_Voice" in scope_voice_name:
-                        foo = scope_voice_name.replace("Music_Voice", "Rest_Voice")
+                        foo = scope_voice_name.replace("Music_Voice", "RestVoice")
                     else:
                         assert "Voice" in scope_voice_name
-                        foo = scope_voice_name.replace("Voice", "Rest_Voice")
+                        foo = scope_voice_name.replace("Voice", "RestVoice")
                     voice_.name = foo
             if attach_rhythm_annotation_spanners:
                 _attach_rhythm_annotation_spanner(command, components)
@@ -2415,7 +2415,7 @@ def _style_fermata_measures(
             if start_offset not in fermata_start_offsets:
                 continue
             voice = abjad.get.parentage(leaf).get(abjad.Voice)
-            if "Rest_Voice" in voice.name:
+            if "RestVoice" in voice.name:
                 continue
             if start_offset not in empty_fermata_measure_start_offsets:
                 continue

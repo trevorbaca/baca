@@ -66,7 +66,7 @@ class TimelineScope:
 
     scopes: typing.Any = None
 
-    voice_name: typing.ClassVar[str] = "Timeline_Scope"
+    voice_name: typing.ClassVar[str] = "TimelineScope"
 
     def __post_init__(self):
         if self.scopes is not None:

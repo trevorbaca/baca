@@ -92,7 +92,7 @@ r"""
                                 %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                                 \override Staff.Clef.color = #(x11-color 'violet)
                             }
-                            \context Voice = "Rest_Voice"
+                            \context Voice = "RestVoice"
                             {
                                 R1 * 3/8
                                 %@% ^ \baca-duration-multiplier-markup #"3" #"8"
@@ -188,7 +188,7 @@ r"""
                                 %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             }
-                            \context Voice = "Rest_Voice"
+                            \context Voice = "RestVoice"
                             {
                                 R1 * 3/8
                                 %@% ^ \baca-duration-multiplier-markup #"3" #"8"
@@ -293,7 +293,7 @@ r"""
                                 %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             }
-                            \context Voice = "Rest_Voice"
+                            \context Voice = "RestVoice"
                             {
                                 R1 * 3/8
                                 %@% ^ \baca-duration-multiplier-markup #"3" #"8"
@@ -401,7 +401,7 @@ r"""
                                 %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                                 \override Staff.Clef.color = #(x11-color 'OliveDrab)
                             }
-                            \context Voice = "Rest_Voice"
+                            \context Voice = "RestVoice"
                             {
                                 R1 * 3/8
                                 %@% ^ \baca-duration-multiplier-markup #"3" #"8"
@@ -501,7 +501,7 @@ r"""
                                 %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             }
-                            \context Voice = "Rest_Voice"
+                            \context Voice = "RestVoice"
                             {
                                 R1 * 3/8
                                 %@% ^ \baca-duration-multiplier-markup #"3" #"8"
@@ -615,7 +615,7 @@ r"""
                                 %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                                 \override Staff.Clef.color = #(x11-color 'DeepPink4)
                             }
-                            \context Voice = "Rest_Voice"
+                            \context Voice = "RestVoice"
                             {
                                 R1 * 3/8
                                 %@% ^ \baca-duration-multiplier-markup #"3" #"8"
@@ -3536,7 +3536,7 @@ r"""
                                 b'1 * 1/4
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                             }
-                            \context Voice = "Rest_Voice"
+                            \context Voice = "RestVoice"
                             {
                                 \once \override MultiMeasureRest.transparent = ##t
                                 \once \override Score.TimeSignature.X-extent = ##f
@@ -3657,7 +3657,7 @@ r"""
                                 b'1 * 1/4
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                             }
-                            \context Voice = "Rest_Voice"
+                            \context Voice = "RestVoice"
                             {
                                 \once \override MultiMeasureRest.transparent = ##t
                                 \once \override Score.TimeSignature.X-extent = ##f
@@ -3866,7 +3866,7 @@ r"""
                                 b'1 * 1/4
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                             }
-                            \context Voice = "Rest_Voice"
+                            \context Voice = "RestVoice"
                             {
                                 \once \override MultiMeasureRest.transparent = ##t
                                 \once \override Score.TimeSignature.X-extent = ##f
@@ -3988,7 +3988,7 @@ r"""
                                 b'1 * 1/4
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                             }
-                            \context Voice = "Rest_Voice"
+                            \context Voice = "RestVoice"
                             {
                                 \once \override MultiMeasureRest.transparent = ##t
                                 \once \override Score.TimeSignature.X-extent = ##f
@@ -4718,7 +4718,7 @@ r"""
                                 b'1 * 1/4
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                             }
-                            \context Voice = "Rest_Voice"
+                            \context Voice = "RestVoice"
                             {
                                 \once \override MultiMeasureRest.transparent = ##t
                                 \once \override Score.TimeSignature.X-extent = ##f

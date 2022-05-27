@@ -1343,7 +1343,7 @@ def mmrest_color(
                                 b'1 * 1/2
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"2"
                             }
-                            \context Voice = "Rest_Voice"
+                            \context Voice = "RestVoice"
                             {
                                 R1 * 1/2
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"2"
@@ -1457,7 +1457,7 @@ def mmrest_text_color(
                                 b'1 * 1/2
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"2"
                             }
-                            \context Voice = "Rest_Voice"
+                            \context Voice = "RestVoice"
                             {
                                 R1 * 1/2
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"2"
@@ -1591,7 +1591,7 @@ def mmrest_text_extra_offset(
                                 b'1 * 1/2
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"2"
                             }
-                            \context Voice = "Rest_Voice"
+                            \context Voice = "RestVoice"
                             {
                                 R1 * 1/2
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"2"
@@ -1690,7 +1690,7 @@ def mmrest_text_padding(
                                 b'1 * 1/2
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"2"
                             }
-                            \context Voice = "Rest_Voice"
+                            \context Voice = "RestVoice"
                             {
                                 R1 * 1/2
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"2"
@@ -1788,7 +1788,7 @@ def mmrest_text_parent_center(
                                 b'1 * 1/2
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"2"
                             }
-                            \context Voice = "Rest_Voice"
+                            \context Voice = "RestVoice"
                             {
                                 R1 * 1/2
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"2"
@@ -1887,7 +1887,7 @@ def mmrest_text_staff_padding(
                                 b'1 * 1/2
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"2"
                             }
-                            \context Voice = "Rest_Voice"
+                            \context Voice = "RestVoice"
                             {
                                 R1 * 1/2
                                 %@% ^ \baca-duration-multiplier-markup #"1" #"2"

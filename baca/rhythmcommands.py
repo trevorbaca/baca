@@ -563,9 +563,9 @@ def _make_multimeasure_rest_container(
     abjad.attach(_enums.MULTIMEASURE_REST, rest)
     abjad.attach(_enums.REST_VOICE, rest)
     if "Music_Voice" in voice_name:
-        name = voice_name.replace("Music_Voice", "Rest_Voice")
+        name = voice_name.replace("Music_Voice", "RestVoice")
     else:
-        name = voice_name.replace("Voice", "Rest_Voice")
+        name = voice_name.replace("Voice", "RestVoice")
     tag = _tags.function_name(_frame(), n=6)
     tag = tag.append(phantom_tag)
     multimeasure_rest_voice = abjad.Voice([rest], name=name, tag=tag)
