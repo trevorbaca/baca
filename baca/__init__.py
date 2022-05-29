@@ -25,8 +25,6 @@ from .indicators import *
 from .interpret import (
     append_anchor_note,
     append_phantom_measure,
-    attach_first_appearance_default_indicators,
-    attach_first_section_default_indicators,
     interpreter,
     make_lilypond_file,
     reapply_persistent_indicators,
