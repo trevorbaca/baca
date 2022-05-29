@@ -232,6 +232,64 @@ def _assert_nonoverlapping_rhythms(rhythms, voice):
         previous_stop_offset = stop_offset
 
 
+def _attach_default_indicators(
+    staff_or_staff_group, *, attach_instruments_by_hand=False
+):
+    prototype = (abjad.Staff, abjad.StaffGroup)
+    assert isinstance(staff_or_staff_group, prototype), repr(staff_or_staff_group)
+    wrappers = []
+    tag = _enums.REMOVE_ALL_EMPTY_STAVES
+    empty_prototype = (abjad.MultimeasureRest, abjad.Skip)
+    prototype = (abjad.Staff, abjad.StaffGroup)
+    if isinstance(staff_or_staff_group, abjad.Staff):
+        staff_or_staff_groups = [staff_or_staff_group]
+    else:
+        assert isinstance(staff_or_staff_group, abjad.StaffGroup)
+        staff_or_staff_groups = [staff_or_staff_group]
+    for staff_or_staff_group in staff_or_staff_groups:
+        leaf = None
+        voices = abjad.select.components(staff_or_staff_group, abjad.Voice)
+        assert isinstance(voices, list), repr(voices)
+        # find leaf 0 in first nonempty voice
+        for voice in voices:
+            leaves = []
+            for leaf_ in abjad.iterate.leaves(voice):
+                if abjad.get.has_indicator(leaf_, _enums.HIDDEN):
+                    leaves.append(leaf_)
+            if not all(isinstance(_, empty_prototype) for _ in leaves):
+                leaf = abjad.get.leaf(voice, 0)
+                break
+        # otherwise, find first leaf in voice in non-removable staff
+        if leaf is None:
+            for voice in voices:
+                voice_might_vanish = False
+                for component in abjad.get.parentage(voice):
+                    if abjad.get.annotation(component, tag) is True:
+                        voice_might_vanish = True
+                if not voice_might_vanish:
+                    leaf = abjad.get.leaf(voice, 0)
+                    if leaf is not None:
+                        break
+        # otherwise, as last resort find first leaf in first voice
+        if leaf is None:
+            leaf = abjad.get.leaf(voices[0], 0)
+        if leaf is None:
+            continue
+        margin_markup = abjad.get.indicator(leaf, abjad.MarginMarkup)
+        if margin_markup is None:
+            string = "default_margin_markup"
+            margin_markup = abjad.get.annotation(staff_or_staff_group, string)
+            if margin_markup is not None:
+                wrapper = abjad.attach(
+                    margin_markup,
+                    leaf,
+                    tag=_tags.NOT_PARTS.append(_tags.function_name(_frame(), n=2)),
+                    wrapper=True,
+                )
+                wrappers.append(wrapper)
+    return wrappers
+
+
 def _attach_fermatas(
     always_make_global_rests,
     append_phantom_measure,
@@ -251,6 +309,19 @@ def _attach_fermatas(
         time_signatures,
     )
     context.extend(rests)
+
+
+def _attach_first_section_default_indicators(
+    manifests,
+    staff_or_staff_group,
+    *,
+    attach_instruments_by_hand=False,
+):
+    for wrapper in _attach_default_indicators(
+        staff_or_staff_group,
+        attach_instruments_by_hand=attach_instruments_by_hand,
+    ):
+        _treat.treat_persistent_wrapper(manifests, wrapper, "default")
 
 
 def _attach_nonfirst_empty_start_bar(global_skips):
@@ -2750,6 +2821,54 @@ def append_phantom_measure() -> _commands.GenericCommand:
         voice.append(container)
 
     command = _commands.GenericCommand(function=function)
+    return command
+
+
+def attach_first_appearance_default_indicators(
+    *, attach_instruments_by_hand=False, selector=lambda _: _select.leaves(_)
+) -> _commands.GenericCommand:
+    def function(argument, *, runtime=None):
+        manifests = runtime["manifests"]
+        previous_persistent_indicators = runtime["previous_persistent_indicators"]
+        leaf = abjad.select.leaf(argument, 0)
+        parentage = abjad.get.parentage(leaf)
+        staff_or_staff_groups = []
+        for component in parentage:
+            if isinstance(component, abjad.Staff | abjad.StaffGroup):
+                if component.name not in previous_persistent_indicators:
+                    staff_or_staff_groups.append(component)
+        for staff_or_staff_group in staff_or_staff_groups:
+            for wrapper in _attach_default_indicators(
+                staff_or_staff_group,
+                attach_instruments_by_hand=attach_instruments_by_hand,
+            ):
+                _treat.treat_persistent_wrapper(manifests, wrapper, "default")
+
+    command = _commands.GenericCommand(function=function, selector=selector)
+    command.name = "attach_first_apperance_default_indicators"
+    return command
+
+
+def attach_first_section_default_indicators(
+    *, attach_instruments_by_hand=False, selector=lambda _: _select.leaves(_)
+) -> _commands.GenericCommand:
+    def function(argument, *, runtime=None):
+        manifests = runtime["manifests"]
+        leaf = abjad.select.leaf(argument, 0)
+        parentage = abjad.get.parentage(leaf)
+        staff_or_staff_groups = []
+        for component in parentage:
+            if isinstance(component, abjad.Staff | abjad.StaffGroup):
+                staff_or_staff_groups.append(component)
+        for staff_or_staff_group in staff_or_staff_groups:
+            _attach_first_section_default_indicators(
+                manifests,
+                staff_or_staff_group,
+                attach_instruments_by_hand=attach_instruments_by_hand,
+            )
+
+    command = _commands.GenericCommand(function=function, selector=selector)
+    command.name = "attach_first_section_default_indicators"
     return command
 
 
