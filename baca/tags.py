@@ -13,10 +13,6 @@ REDUNDANT_BAR_EXTENT = abjad.Tag("REDUNDANT_BAR_EXTENT")
 
 ### CLEF ###
 
-DEFAULT_CLEF = abjad.Tag("DEFAULT_CLEF")
-DEFAULT_CLEF_COLOR = abjad.Tag("DEFAULT_CLEF_COLOR")
-DEFAULT_CLEF_COLOR_CANCELLATION = abjad.Tag("DEFAULT_CLEF_COLOR_CANCELLATION")
-DEFAULT_CLEF_REDRAW_COLOR = abjad.Tag("DEFAULT_CLEF_REDRAW_COLOR")
 EXPLICIT_CLEF = abjad.Tag("EXPLICIT_CLEF")
 EXPLICIT_CLEF_COLOR = abjad.Tag("EXPLICIT_CLEF_COLOR")
 EXPLICIT_CLEF_COLOR_CANCELLATION = abjad.Tag("EXPLICIT_CLEF_COLOR_CANCELLATION")
@@ -67,7 +63,6 @@ STAGE_NUMBER = abjad.Tag("STAGE_NUMBER")
 ### DOCUMENT TYPES ###
 
 BUILD = abjad.Tag("BUILD")
-FIRST_SEGMENT_DEFAULT = abjad.Tag("FIRST_SEGMENT_DEFAULT")
 PARTS = abjad.Tag("PARTS")
 SCORE = abjad.Tag("SCORE")
 SEGMENT = abjad.Tag("SEGMENT")
@@ -89,11 +84,6 @@ RECOLLECTION = abjad.Tag("RECOLLECTION")
 
 ### INSTRUMENT ###
 
-DEFAULT_INSTRUMENT = abjad.Tag("DEFAULT_INSTRUMENT")
-DEFAULT_INSTRUMENT_ALERT = abjad.Tag("DEFAULT_INSTRUMENT_ALERT")
-DEFAULT_INSTRUMENT_COLOR = abjad.Tag("DEFAULT_INSTRUMENT_COLOR")
-REDRAWN_DEFAULT_INSTRUMENT = abjad.Tag("REDRAWN_DEFAULT_INSTRUMENT")
-REDRAWN_DEFAULT_INSTRUMENT_COLOR = abjad.Tag("REDRAWN_DEFAULT_INSTRUMENT_COLOR")
 EXPLICIT_INSTRUMENT = abjad.Tag("EXPLICIT_INSTRUMENT")
 EXPLICIT_INSTRUMENT_ALERT = abjad.Tag("EXPLICIT_INSTRUMENT_ALERT")
 EXPLICIT_INSTRUMENT_COLOR = abjad.Tag("EXPLICIT_INSTRUMENT_COLOR")
@@ -112,11 +102,6 @@ REDRAWN_REDUNDANT_INSTRUMENT_COLOR = abjad.Tag("REDRAWN_REDUNDANT_INSTRUMENT_COL
 
 ### MARGIN MARKUP ###
 
-DEFAULT_MARGIN_MARKUP = abjad.Tag("DEFAULT_MARGIN_MARKUP")
-DEFAULT_MARGIN_MARKUP_ALERT = abjad.Tag("DEFAULT_MARGIN_MARKUP_ALERT")
-DEFAULT_MARGIN_MARKUP_COLOR = abjad.Tag("DEFAULT_MARGIN_MARKUP_COLOR")
-REDRAWN_DEFAULT_MARGIN_MARKUP = abjad.Tag("REDRAWN_DEFAULT_MARGIN_MARKUP")
-REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR = abjad.Tag("REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR")
 EXPLICIT_MARGIN_MARKUP = abjad.Tag("EXPLICIT_MARGIN_MARKUP")
 EXPLICIT_MARGIN_MARKUP_ALERT = abjad.Tag("EXPLICIT_MARGIN_MARKUP_ALERT")
 EXPLICIT_MARGIN_MARKUP_COLOR = abjad.Tag("EXPLICIT_MARGIN_MARKUP_COLOR")
@@ -266,8 +251,6 @@ def clef_color_tags(path=None):
         >>> for tag in baca.tags.clef_color_tags():
         ...     tag
         ...
-        Tag(string='DEFAULT_CLEF_COLOR')
-        Tag(string='DEFAULT_CLEF_REDRAW_COLOR')
         Tag(string='EXPLICIT_CLEF_COLOR')
         Tag(string='EXPLICIT_CLEF_REDRAW_COLOR')
         Tag(string='REAPPLIED_CLEF_COLOR')
@@ -284,8 +267,6 @@ def clef_color_tags(path=None):
         >>> for tag in baca.tags.clef_color_tags(path=path):
         ...     tag
         ...
-        Tag(string='DEFAULT_CLEF_COLOR')
-        Tag(string='DEFAULT_CLEF_REDRAW_COLOR')
         Tag(string='EXPLICIT_CLEF_COLOR')
         Tag(string='EXPLICIT_CLEF_REDRAW_COLOR')
         Tag(string='REAPPLIED_CLEF_COLOR')
@@ -301,8 +282,6 @@ def clef_color_tags(path=None):
         >>> for tag in baca.tags.clef_color_tags(path=path):
         ...     tag
         ...
-        Tag(string='DEFAULT_CLEF_COLOR')
-        Tag(string='DEFAULT_CLEF_REDRAW_COLOR')
         Tag(string='EXPLICIT_CLEF_COLOR')
         Tag(string='EXPLICIT_CLEF_REDRAW_COLOR')
         Tag(string='REAPPLIED_CLEF_COLOR')
@@ -318,8 +297,6 @@ def clef_color_tags(path=None):
         >>> for tag in baca.tags.clef_color_tags(path=path):
         ...     tag
         ...
-        Tag(string='DEFAULT_CLEF_COLOR')
-        Tag(string='DEFAULT_CLEF_REDRAW_COLOR')
         Tag(string='EXPLICIT_CLEF_COLOR')
         Tag(string='EXPLICIT_CLEF_REDRAW_COLOR')
         Tag(string='REAPPLIED_CLEF_COLOR')
@@ -330,8 +307,6 @@ def clef_color_tags(path=None):
 
     """
     tags = [
-        DEFAULT_CLEF_COLOR,
-        DEFAULT_CLEF_REDRAW_COLOR,
         EXPLICIT_CLEF_COLOR,
         EXPLICIT_CLEF_REDRAW_COLOR,
         REAPPLIED_CLEF_COLOR,
@@ -432,9 +407,6 @@ def instrument_color_tags(path=None):
         >>> for tag in baca.tags.instrument_color_tags():
         ...     tag
         ...
-        Tag(string='DEFAULT_INSTRUMENT_ALERT')
-        Tag(string='DEFAULT_INSTRUMENT_COLOR')
-        Tag(string='REDRAWN_DEFAULT_INSTRUMENT_COLOR')
         Tag(string='EXPLICIT_INSTRUMENT_ALERT')
         Tag(string='EXPLICIT_INSTRUMENT_COLOR')
         Tag(string='REAPPLIED_INSTRUMENT_COLOR')
@@ -448,9 +420,6 @@ def instrument_color_tags(path=None):
     Ignores ``path``.
     """
     return [
-        DEFAULT_INSTRUMENT_ALERT,
-        DEFAULT_INSTRUMENT_COLOR,
-        REDRAWN_DEFAULT_INSTRUMENT_COLOR,
         EXPLICIT_INSTRUMENT_ALERT,
         EXPLICIT_INSTRUMENT_COLOR,
         REAPPLIED_INSTRUMENT_COLOR,
@@ -499,9 +468,6 @@ def margin_markup_color_tags(path=None):
         >>> for tag in baca.tags.margin_markup_color_tags():
         ...     tag
         ...
-        Tag(string='DEFAULT_MARGIN_MARKUP_ALERT')
-        Tag(string='DEFAULT_MARGIN_MARKUP_COLOR')
-        Tag(string='REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR')
         Tag(string='EXPLICIT_MARGIN_MARKUP_ALERT')
         Tag(string='EXPLICIT_MARGIN_MARKUP_COLOR')
         Tag(string='REAPPLIED_MARGIN_MARKUP_ALERT')
@@ -515,9 +481,6 @@ def margin_markup_color_tags(path=None):
     Ignores ``path``.
     """
     return [
-        DEFAULT_MARGIN_MARKUP_ALERT,
-        DEFAULT_MARGIN_MARKUP_COLOR,
-        REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR,
         EXPLICIT_MARGIN_MARKUP_ALERT,
         EXPLICIT_MARGIN_MARKUP_COLOR,
         REAPPLIED_MARGIN_MARKUP_ALERT,
@@ -624,8 +587,6 @@ def persistent_indicator_color_expression_tags(path=None):
         >>> for tag in tags:
         ...     tag
         ...
-        Tag(string='DEFAULT_CLEF_COLOR')
-        Tag(string='DEFAULT_CLEF_REDRAW_COLOR')
         Tag(string='EXPLICIT_CLEF_COLOR')
         Tag(string='EXPLICIT_CLEF_REDRAW_COLOR')
         Tag(string='REAPPLIED_CLEF_COLOR')
@@ -636,9 +597,6 @@ def persistent_indicator_color_expression_tags(path=None):
         Tag(string='REAPPLIED_DYNAMIC')
         Tag(string='REAPPLIED_DYNAMIC_COLOR')
         Tag(string='REDUNDANT_DYNAMIC_COLOR')
-        Tag(string='DEFAULT_INSTRUMENT_ALERT')
-        Tag(string='DEFAULT_INSTRUMENT_COLOR')
-        Tag(string='REDRAWN_DEFAULT_INSTRUMENT_COLOR')
         Tag(string='EXPLICIT_INSTRUMENT_ALERT')
         Tag(string='EXPLICIT_INSTRUMENT_COLOR')
         Tag(string='REAPPLIED_INSTRUMENT_COLOR')
@@ -648,9 +606,6 @@ def persistent_indicator_color_expression_tags(path=None):
         Tag(string='REDUNDANT_INSTRUMENT_ALERT')
         Tag(string='REDUNDANT_INSTRUMENT_COLOR')
         Tag(string='REDRAWN_REDUNDANT_INSTRUMENT_COLOR')
-        Tag(string='DEFAULT_MARGIN_MARKUP_ALERT')
-        Tag(string='DEFAULT_MARGIN_MARKUP_COLOR')
-        Tag(string='REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR')
         Tag(string='EXPLICIT_MARGIN_MARKUP_ALERT')
         Tag(string='EXPLICIT_MARGIN_MARKUP_COLOR')
         Tag(string='REAPPLIED_MARGIN_MARKUP_ALERT')
@@ -679,8 +634,6 @@ def persistent_indicator_color_expression_tags(path=None):
         >>> for tag in tags:
         ...     tag
         ...
-        Tag(string='DEFAULT_CLEF_COLOR')
-        Tag(string='DEFAULT_CLEF_REDRAW_COLOR')
         Tag(string='EXPLICIT_CLEF_COLOR')
         Tag(string='EXPLICIT_CLEF_REDRAW_COLOR')
         Tag(string='REAPPLIED_CLEF_COLOR')
@@ -691,9 +644,6 @@ def persistent_indicator_color_expression_tags(path=None):
         Tag(string='REAPPLIED_DYNAMIC')
         Tag(string='REAPPLIED_DYNAMIC_COLOR')
         Tag(string='REDUNDANT_DYNAMIC_COLOR')
-        Tag(string='DEFAULT_INSTRUMENT_ALERT')
-        Tag(string='DEFAULT_INSTRUMENT_COLOR')
-        Tag(string='REDRAWN_DEFAULT_INSTRUMENT_COLOR')
         Tag(string='EXPLICIT_INSTRUMENT_ALERT')
         Tag(string='EXPLICIT_INSTRUMENT_COLOR')
         Tag(string='REAPPLIED_INSTRUMENT_COLOR')
@@ -703,9 +653,6 @@ def persistent_indicator_color_expression_tags(path=None):
         Tag(string='REDUNDANT_INSTRUMENT_ALERT')
         Tag(string='REDUNDANT_INSTRUMENT_COLOR')
         Tag(string='REDRAWN_REDUNDANT_INSTRUMENT_COLOR')
-        Tag(string='DEFAULT_MARGIN_MARKUP_ALERT')
-        Tag(string='DEFAULT_MARGIN_MARKUP_COLOR')
-        Tag(string='REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR')
         Tag(string='EXPLICIT_MARGIN_MARKUP_ALERT')
         Tag(string='EXPLICIT_MARGIN_MARKUP_COLOR')
         Tag(string='REAPPLIED_MARGIN_MARKUP_ALERT')
@@ -734,8 +681,6 @@ def persistent_indicator_color_expression_tags(path=None):
         >>> for tag in tags:
         ...     tag
         ...
-        Tag(string='DEFAULT_CLEF_COLOR')
-        Tag(string='DEFAULT_CLEF_REDRAW_COLOR')
         Tag(string='EXPLICIT_CLEF_COLOR')
         Tag(string='EXPLICIT_CLEF_REDRAW_COLOR')
         Tag(string='REAPPLIED_CLEF_COLOR')
@@ -746,9 +691,6 @@ def persistent_indicator_color_expression_tags(path=None):
         Tag(string='REAPPLIED_DYNAMIC')
         Tag(string='REAPPLIED_DYNAMIC_COLOR')
         Tag(string='REDUNDANT_DYNAMIC_COLOR')
-        Tag(string='DEFAULT_INSTRUMENT_ALERT')
-        Tag(string='DEFAULT_INSTRUMENT_COLOR')
-        Tag(string='REDRAWN_DEFAULT_INSTRUMENT_COLOR')
         Tag(string='EXPLICIT_INSTRUMENT_ALERT')
         Tag(string='EXPLICIT_INSTRUMENT_COLOR')
         Tag(string='REAPPLIED_INSTRUMENT_COLOR')
@@ -758,9 +700,6 @@ def persistent_indicator_color_expression_tags(path=None):
         Tag(string='REDUNDANT_INSTRUMENT_ALERT')
         Tag(string='REDUNDANT_INSTRUMENT_COLOR')
         Tag(string='REDRAWN_REDUNDANT_INSTRUMENT_COLOR')
-        Tag(string='DEFAULT_MARGIN_MARKUP_ALERT')
-        Tag(string='DEFAULT_MARGIN_MARKUP_COLOR')
-        Tag(string='REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR')
         Tag(string='EXPLICIT_MARGIN_MARKUP_ALERT')
         Tag(string='EXPLICIT_MARGIN_MARKUP_COLOR')
         Tag(string='REAPPLIED_MARGIN_MARKUP_ALERT')
@@ -791,8 +730,6 @@ def persistent_indicator_color_expression_tags(path=None):
         >>> for tag in tags:
         ...     tag
         ...
-        Tag(string='DEFAULT_CLEF_COLOR')
-        Tag(string='DEFAULT_CLEF_REDRAW_COLOR')
         Tag(string='EXPLICIT_CLEF_COLOR')
         Tag(string='EXPLICIT_CLEF_REDRAW_COLOR')
         Tag(string='REAPPLIED_CLEF_COLOR')
@@ -804,9 +741,6 @@ def persistent_indicator_color_expression_tags(path=None):
         Tag(string='REAPPLIED_DYNAMIC')
         Tag(string='REAPPLIED_DYNAMIC_COLOR')
         Tag(string='REDUNDANT_DYNAMIC_COLOR')
-        Tag(string='DEFAULT_INSTRUMENT_ALERT')
-        Tag(string='DEFAULT_INSTRUMENT_COLOR')
-        Tag(string='REDRAWN_DEFAULT_INSTRUMENT_COLOR')
         Tag(string='EXPLICIT_INSTRUMENT_ALERT')
         Tag(string='EXPLICIT_INSTRUMENT_COLOR')
         Tag(string='REAPPLIED_INSTRUMENT_COLOR')
@@ -816,9 +750,6 @@ def persistent_indicator_color_expression_tags(path=None):
         Tag(string='REDUNDANT_INSTRUMENT_ALERT')
         Tag(string='REDUNDANT_INSTRUMENT_COLOR')
         Tag(string='REDRAWN_REDUNDANT_INSTRUMENT_COLOR')
-        Tag(string='DEFAULT_MARGIN_MARKUP_ALERT')
-        Tag(string='DEFAULT_MARGIN_MARKUP_COLOR')
-        Tag(string='REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR')
         Tag(string='EXPLICIT_MARGIN_MARKUP_ALERT')
         Tag(string='EXPLICIT_MARGIN_MARKUP_COLOR')
         Tag(string='REAPPLIED_MARGIN_MARKUP_ALERT')
@@ -905,18 +836,15 @@ def persistent_indicator_tags():
         >>> for tag in baca.tags.persistent_indicator_tags():
         ...     tag
         ...
-        Tag(string='DEFAULT_CLEF')
         Tag(string='EXPLICIT_CLEF')
         Tag(string='REAPPLIED_CLEF')
         Tag(string='REDUNDANT_CLEF')
         Tag(string='EXPLICIT_DYNAMIC')
         Tag(string='REAPPLIED_DYNAMIC')
         Tag(string='REDUNDANT_DYNAMIC')
-        Tag(string='DEFAULT_INSTRUMENT')
         Tag(string='EXPLICIT_INSTRUMENT')
         Tag(string='REAPPLIED_INSTRUMENT')
         Tag(string='REDUNDANT_INSTRUMENT')
-        Tag(string='DEFAULT_MARGIN_MARKUP')
         Tag(string='EXPLICIT_MARGIN_MARKUP')
         Tag(string='REAPPLIED_MARGIN_MARKUP')
         Tag(string='REDUNDANT_MARGIN_MARKUP')
@@ -935,7 +863,6 @@ def persistent_indicator_tags():
 
     """
     return [
-        DEFAULT_CLEF,
         EXPLICIT_CLEF,
         REAPPLIED_CLEF,
         REDUNDANT_CLEF,
@@ -944,12 +871,10 @@ def persistent_indicator_tags():
         REAPPLIED_DYNAMIC,
         REDUNDANT_DYNAMIC,
         #
-        DEFAULT_INSTRUMENT,
         EXPLICIT_INSTRUMENT,
         REAPPLIED_INSTRUMENT,
         REDUNDANT_INSTRUMENT,
         #
-        DEFAULT_MARGIN_MARKUP,
         EXPLICIT_MARGIN_MARKUP,
         REAPPLIED_MARGIN_MARKUP,
         REDUNDANT_MARGIN_MARKUP,
@@ -1119,12 +1044,6 @@ def has_persistence_tag(tag):
 
         >>> baca.tags.has_persistence_tag(abjad.Tag("FOO"))
         False
-
-        >>> baca.tags.has_persistence_tag(abjad.Tag("FOO:DEFAULT_CLEF"))
-        True
-
-        >>> baca.tags.has_persistence_tag(abjad.Tag("DEFAULT_CLEF"))
-        True
 
     """
     tags = persistent_indicator_tags()

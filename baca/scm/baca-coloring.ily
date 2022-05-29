@@ -95,17 +95,6 @@ baca-explicit-indicator-markup = #(
     #}
     )
 
-baca-default-indicator-markup = #(
-    define-music-function
-    string
-    (string?)
-    #{
-    - \markup
-    \with-color #(x11-color 'DarkViolet)
-    #string
-    #}
-    )
-
 baca-redundant-indicator-markup = #(
     define-music-function
     string

@@ -408,7 +408,6 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
             words = []
             for word in tag.string.split(":"):
                 if "METRONOME_MARK" in word:
-                    word = word.replace("DEFAULT", "EXPLICIT")
                     word = word.replace("REAPPLIED", "EXPLICIT")
                     word = word.replace("REDUNDANT", "EXPLICIT")
                 words.append(word)
@@ -470,9 +469,7 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
                 ),
             )
         string = tag.string
-        if "DEFAULT" in string:
-            status = "default"
-        elif "EXPLICIT" in string:
+        if "EXPLICIT" in string:
             status = "explicit"
         elif "REAPPLIED" in string:
             status = "reapplied"
@@ -511,9 +508,7 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
             wrapper = abjad.get.wrapper(skips[-1], abjad.MetronomeMark)
             tag = wrapper.tag
             string = tag.string
-            if "DEFAULT" in string:
-                status = "default"
-            elif "EXPLICIT" in string:
+            if "EXPLICIT" in string:
                 status = "explicit"
             elif "REAPPLIED" in tag.string:
                 status = "reapplied"

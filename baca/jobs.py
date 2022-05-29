@@ -508,30 +508,6 @@ def handle_shifted_clefs(path):
     )
 
 
-def hide_default_clefs(path, undo=False):
-    """
-    Hides default clefs.
-    """
-    name = "default clef"
-
-    def match(tags):
-        tags_ = [_tags.DEFAULT_CLEF]
-        return bool(set(tags) & set(tags_))
-
-    if undo:
-        return Job(
-            activate=(match, name),
-            path=path,
-            title="Showing default clefs ...",
-        )
-    else:
-        return Job(
-            deactivate=(match, name),
-            path=path,
-            title="Hiding default clefs ...",
-        )
-
-
 def join_broken_spanners(path):
     """
     Joins broken spanners.

@@ -128,9 +128,7 @@ def _attach_latent_indicator_alert(
     else:
         key = type(wrapper.unbundle_indicator()).__name__
     if isinstance(wrapper.unbundle_indicator(), abjad.Instrument):
-        if status == "default":
-            tag = _tags.DEFAULT_INSTRUMENT_ALERT
-        elif status == "explicit":
+        if status == "explicit":
             tag = _tags.EXPLICIT_INSTRUMENT_ALERT
         elif status == "reapplied":
             tag = _tags.REAPPLIED_INSTRUMENT_ALERT
@@ -140,9 +138,7 @@ def _attach_latent_indicator_alert(
         left, right = "(", ")"
     else:
         assert isinstance(wrapper.unbundle_indicator(), abjad.MarginMarkup)
-        if status == "default":
-            tag = _tags.DEFAULT_MARGIN_MARKUP_ALERT
-        elif status == "explicit":
+        if status == "explicit":
             tag = _tags.EXPLICIT_MARGIN_MARKUP_ALERT
         elif status == "reapplied":
             tag = _tags.REAPPLIED_MARGIN_MARKUP_ALERT
@@ -243,7 +239,6 @@ def _set_status_tag(wrapper, status, redraw=None, stem=None):
 
 
 _status_to_color = {
-    "default": "DarkViolet",
     "explicit": "blue",
     "reapplied": "green4",
     "redundant": "DeepPink1",
@@ -251,14 +246,12 @@ _status_to_color = {
 
 
 _status_to_markup_function = {
-    "default": "baca-default-indicator-markup",
     "explicit": "baca-explicit-indicator-markup",
     "reapplied": "baca-reapplied-indicator-markup",
     "redundant": "baca-redundant-indicator-markup",
 }
 
 _status_to_redraw_color = {
-    "default": "violet",
     "explicit": "DeepSkyBlue2",
     "reapplied": "OliveDrab",
     "redundant": "DeepPink4",
@@ -388,7 +381,7 @@ def remove_reapplied_wrappers(leaf, item):
         is_reapplied_wrapper = False
         assert isinstance(wrapper.tag, abjad.Tag)
         for word in wrapper.tag.words():
-            if f"REAPPLIED_{stem}" in word or f"DEFAULT_{stem}" in word:
+            if f"REAPPLIED_{stem}" in word:
                 is_reapplied_wrapper = True
         if not is_reapplied_wrapper:
             continue
