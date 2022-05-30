@@ -2419,8 +2419,9 @@ def _style_fermata_measures(
             previous_staff_lines = abjad.get.effective(leaf, _indicators.StaffLines)
             previous_bar_extent = abjad.get.effective(leaf, _indicators.BarExtent)
             next_leaf = abjad.get.leaf(leaf, 1)
-            if abjad.get.has_indicator(next_leaf, _enums.PHANTOM):
-                next_leaf = None
+            if next_leaf is not None:
+                if abjad.get.has_indicator(next_leaf, _enums.PHANTOM):
+                    next_leaf = None
             next_staff_lines = None
             if next_leaf is not None:
                 next_staff_lines = abjad.get.effective(
@@ -2505,7 +2506,7 @@ def _style_fermata_measures(
                 string = r"Score.SpanBar.transparent = ##t"
                 string = r"\once \override " + string
                 strings.append(string)
-                literal = abjad.LilyPondLiteral(strings)
+                literal = abjad.LilyPondLiteral(strings, site="after")
                 tag = _tags.FERMATA_MEASURE
                 measure_number_tag = _get_measure_number_tag(
                     leaf,
@@ -2513,11 +2514,9 @@ def _style_fermata_measures(
                 )
                 if measure_number_tag is not None:
                     tag = tag.append(measure_number_tag)
-                next_leaf_ = abjad.get.leaf(leaf, 1)
-                assert next_leaf_ is not None, repr(next_leaf_)
                 abjad.attach(
                     literal,
-                    next_leaf_,
+                    leaf,
                     tag=tag.append(_tags.function_name(_frame(), n=7)),
                 )
             bar_lines_already_styled.append(start_offset)
