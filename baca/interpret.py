@@ -2382,7 +2382,7 @@ def _style_anchor_notes(score):
             continue
         _append_tag_to_wrappers(note, _tags.function_name(_frame()))
         _append_tag_to_wrappers(note, _tags.PHANTOM)
-        # _append_tag_to_wrappers(note, _tags.ANCHOR)
+        _append_tag_to_wrappers(note, _tags.ANCHOR)
 
 
 def _style_fermata_measures(
@@ -2682,9 +2682,10 @@ def append_anchor_note() -> _commands.GenericCommand:
         parentage = abjad.get.parentage(leaf)
         voice = parentage.get(abjad.Voice, n=-1)
         tag = abjad.Tag("baca.append_anchor_note(1)")
-        tag = tag.append(_tags.PHANTOM)
+        tag = tag.append(_tags.ANCHOR)
         tag = tag.append(_tags.HIDDEN)
         tag = tag.append(_tags.NOTE)
+        tag = tag.append(_tags.PHANTOM)
         note = abjad.Note("c'1", multiplier=(1, 4), tag=tag)
         abjad.attach(_enums.ANCHOR, note)
         abjad.attach(_enums.HIDDEN, note)
@@ -2693,18 +2694,20 @@ def append_anchor_note() -> _commands.GenericCommand:
         abjad.attach(_enums.PHANTOM, note)
         #
         tag = abjad.Tag("baca.append_anchor_note(2)")
+        tag = tag.append(_tags.ANCHOR)
+        tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
         tag = tag.append(_tags.PHANTOM)
         tag = tag.append(_tags.NOTE)
-        tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
         literal = abjad.LilyPondLiteral(
             r"\abjad-invisible-music-coloring", site="before"
         )
         abjad.attach(literal, note, tag=tag)
         #
         tag = abjad.Tag("baca.append_anchor_note(3)")
+        tag = tag.append(_tags.ANCHOR)
+        tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
         tag = tag.append(_tags.PHANTOM)
         tag = tag.append(_tags.NOTE)
-        tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
         literal = abjad.LilyPondLiteral(r"\abjad-invisible-music", site="before")
         abjad.attach(literal, note, deactivate=True, tag=tag)
         #
