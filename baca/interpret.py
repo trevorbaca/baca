@@ -787,7 +787,6 @@ def _call_all_commands(
     command_count = 0
     for i, command in enumerate(commands):
         assert isinstance(command, _command.Command)
-        # print(f"{i=}, {command.scope=}")
         if isinstance(command, _rhythmcommands.RhythmCommand):
             assert command.scope.measures, repr(command)
             measures = command.scope.measures
@@ -2743,27 +2742,6 @@ def append_anchor_note() -> _commands.GenericCommand:
     return command
 
 
-def append_phantom_measure() -> _commands.GenericCommand:
-    def function(argument, *, runtime=None):
-        leaf = abjad.get.leaf(argument, 0)
-        parentage = abjad.get.parentage(leaf)
-        voice = parentage.get(abjad.Voice, n=-1)
-        final_leaf = abjad.get.leaf(voice, -1)
-        suppress_note = False
-        if isinstance(final_leaf, abjad.MultimeasureRest):
-            suppress_note = True
-        container = _rhythmcommands._make_multimeasure_rest_container(
-            voice.name,
-            (1, 4),
-            phantom=True,
-            suppress_note=suppress_note,
-        )
-        voice.append(container)
-
-    command = _commands.GenericCommand(function=function)
-    return command
-
-
 def color_out_of_range_pitches(score):
     indicator = _enums.ALLOW_OUT_OF_RANGE
     tag = _tags.function_name(_frame())
@@ -2819,6 +2797,7 @@ def interpreter(
     color_octaves=False,
     comment_measure_numbers=False,
     deactivate=None,
+    # TODO: remove do_not_append_phantom_measure in favor of append_phantom_measure
     do_not_append_phantom_measure=False,
     do_not_require_margin_markup=False,
     error_on_not_yet_pitched=False,
@@ -3093,6 +3072,7 @@ def interpreter(
             cached_time_signatures,
             voice_metadata,
         )
+        # TODO: combine suite into _style_anchor_leaves()
         if append_phantom_measure:
             _style_phantom_measures(score)
             _style_anchor_notes(score)

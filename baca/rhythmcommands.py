@@ -507,44 +507,24 @@ def _make_mmrests_flat(time_signatures):
     return mmrests
 
 
-def _make_multimeasure_rest_container(
-    voice_name,
-    duration,
-    *,
-    phantom=False,
-    suppress_note=False,
-):
-    if suppress_note is True:
-        assert phantom is True
-    if phantom is True:
-        phantom_tag = _tags.PHANTOM
-    else:
-        phantom_tag = abjad.Tag()
+# TODO: make inner function of _make_mmrests()
+def _make_multimeasure_rest_container(voice_name, duration):
     tag = _tags.function_name(_frame(), n=1)
-    tag = tag.append(phantom_tag)
     tag = tag.append(_tags.HIDDEN)
-    if suppress_note is not True:
-        note_or_rest = _tags.NOTE
-        tag = tag.append(_tags.NOTE)
-        note = abjad.Note("c'1", multiplier=duration, tag=tag)
-        abjad.override(note).Accidental.stencil = False
-        abjad.override(note).NoteColumn.ignore_collision = True
-        abjad.attach(_enums.NOTE, note)
-        abjad.attach(_enums.NOT_YET_PITCHED, note)
-    else:
-        note_or_rest = _tags.MULTIMEASURE_REST
-        tag = tag.append(_tags.MULTIMEASURE_REST)
-        note = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
-        abjad.attach(_enums.MULTIMEASURE_REST, note)
+    note_or_rest = _tags.NOTE
+    tag = tag.append(_tags.NOTE)
+    note = abjad.Note("c'1", multiplier=duration, tag=tag)
+    abjad.override(note).Accidental.stencil = False
+    abjad.override(note).NoteColumn.ignore_collision = True
+    abjad.attach(_enums.NOTE, note)
+    abjad.attach(_enums.NOT_YET_PITCHED, note)
     abjad.attach(_enums.HIDDEN, note)
     tag = _tags.function_name(_frame(), n=2)
-    tag = tag.append(phantom_tag)
     tag = tag.append(note_or_rest)
     tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
     literal = abjad.LilyPondLiteral(r"\abjad-invisible-music-coloring", site="before")
     abjad.attach(literal, note, tag=tag)
     tag = _tags.function_name(_frame(), n=3)
-    tag = tag.append(phantom_tag)
     tag = tag.append(note_or_rest)
     tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
     literal = abjad.LilyPondLiteral(r"\abjad-invisible-music", site="before")
@@ -552,11 +532,9 @@ def _make_multimeasure_rest_container(
     # TODO: remove 1 line below?
     abjad.attach(_enums.HIDDEN, note)
     tag = _tags.function_name(_frame(), n=4)
-    tag = tag.append(phantom_tag)
     hidden_note_voice = abjad.Voice([note], name=voice_name, tag=tag)
     abjad.attach(_enums.INTERMITTENT, hidden_note_voice)
     tag = _tags.function_name(_frame(), n=5)
-    tag = tag.append(phantom_tag)
     tag = tag.append(_tags.REST_VOICE)
     tag = tag.append(_tags.MULTIMEASURE_REST)
     rest = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
@@ -567,20 +545,15 @@ def _make_multimeasure_rest_container(
     else:
         name = voice_name.replace("Voice", "RestVoice")
     tag = _tags.function_name(_frame(), n=6)
-    tag = tag.append(phantom_tag)
     multimeasure_rest_voice = abjad.Voice([rest], name=name, tag=tag)
     abjad.attach(_enums.INTERMITTENT, multimeasure_rest_voice)
     tag = _tags.function_name(_frame(), n=7)
-    tag = tag.append(phantom_tag)
     container = abjad.Container(
         [hidden_note_voice, multimeasure_rest_voice],
         simultaneous=True,
         tag=tag,
     )
     abjad.attach(_enums.MULTIMEASURE_REST_CONTAINER, container)
-    if phantom is True:
-        for component in abjad.iterate.components(container):
-            abjad.attach(_enums.PHANTOM, component)
     return container
 
 

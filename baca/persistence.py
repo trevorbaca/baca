@@ -3028,7 +3028,7 @@ r"""
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
-        ...     baca.append_phantom_measure(),
+        ...     baca.append_anchor_note(),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -3095,27 +3095,13 @@ r"""
                     {
                         b'4.
                         b'4.
-                        <<
-                            \context Voice = "MusicVoice"
-                            {
-                                %@% \abjad-invisible-music
-                                \abjad-invisible-music-coloring
-                                \once \override Accidental.stencil = ##f
-                                \once \override NoteColumn.ignore-collision = ##t
-                                b'1 * 1/4
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                            }
-                            \context Voice = "RestVoice"
-                            {
-                                \once \override MultiMeasureRest.transparent = ##t
-                                \once \override Score.TimeSignature.X-extent = ##f
-                                \stopStaff
-                                \once \override Staff.StaffSymbol.transparent = ##t
-                                \startStaff
-                                R1 * 1/4
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                            }
-                        >>
+                        %@% \abjad-invisible-music
+                        \abjad-invisible-music-coloring
+                        \stopStaff
+                        \once \override Staff.StaffSymbol.transparent = ##t
+                        \startStaff
+                        b'1 * 1/4
+                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                     }
                 >>
             }
@@ -3135,7 +3121,7 @@ r"""
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
-        ...     baca.append_phantom_measure(),
+        ...     baca.append_anchor_note(),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -3215,27 +3201,13 @@ r"""
                     {
                         b'4.
                         b'4.
-                        <<
-                            \context Voice = "MusicVoice"
-                            {
-                                %@% \abjad-invisible-music
-                                \abjad-invisible-music-coloring
-                                \once \override Accidental.stencil = ##f
-                                \once \override NoteColumn.ignore-collision = ##t
-                                b'1 * 1/4
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                            }
-                            \context Voice = "RestVoice"
-                            {
-                                \once \override MultiMeasureRest.transparent = ##t
-                                \once \override Score.TimeSignature.X-extent = ##f
-                                \stopStaff
-                                \once \override Staff.StaffSymbol.transparent = ##t
-                                \startStaff
-                                R1 * 1/4
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                            }
-                        >>
+                        %@% \abjad-invisible-music
+                        \abjad-invisible-music-coloring
+                        \stopStaff
+                        \once \override Staff.StaffSymbol.transparent = ##t
+                        \startStaff
+                        b'1 * 1/4
+                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                     }
                 >>
             }
@@ -3349,7 +3321,7 @@ r"""
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
-        ...     baca.append_phantom_measure(),
+        ...     baca.append_anchor_note(),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -3423,27 +3395,13 @@ r"""
                     {
                         b'4.
                         b'4.
-                        <<
-                            \context Voice = "MusicVoice"
-                            {
-                                %@% \abjad-invisible-music
-                                \abjad-invisible-music-coloring
-                                \once \override Accidental.stencil = ##f
-                                \once \override NoteColumn.ignore-collision = ##t
-                                b'1 * 1/4
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                            }
-                            \context Voice = "RestVoice"
-                            {
-                                \once \override MultiMeasureRest.transparent = ##t
-                                \once \override Score.TimeSignature.X-extent = ##f
-                                \stopStaff
-                                \once \override Staff.StaffSymbol.transparent = ##t
-                                \startStaff
-                                R1 * 1/4
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                            }
-                        >>
+                        %@% \abjad-invisible-music
+                        \abjad-invisible-music-coloring
+                        \stopStaff
+                        \once \override Staff.StaffSymbol.transparent = ##t
+                        \startStaff
+                        b'1 * 1/4
+                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                     }
                 >>
             }
@@ -3464,7 +3422,7 @@ r"""
         ...     "MusicVoice",
         ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
-        ...     baca.append_phantom_measure(),
+        ...     baca.append_anchor_note(),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -3544,27 +3502,13 @@ r"""
                     {
                         b'4.
                         b'4.
-                        <<
-                            \context Voice = "MusicVoice"
-                            {
-                                %@% \abjad-invisible-music
-                                \abjad-invisible-music-coloring
-                                \once \override Accidental.stencil = ##f
-                                \once \override NoteColumn.ignore-collision = ##t
-                                b'1 * 1/4
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                            }
-                            \context Voice = "RestVoice"
-                            {
-                                \once \override MultiMeasureRest.transparent = ##t
-                                \once \override Score.TimeSignature.X-extent = ##f
-                                \stopStaff
-                                \once \override Staff.StaffSymbol.transparent = ##t
-                                \startStaff
-                                R1 * 1/4
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                            }
-                        >>
+                        %@% \abjad-invisible-music
+                        \abjad-invisible-music-coloring
+                        \stopStaff
+                        \once \override Staff.StaffSymbol.transparent = ##t
+                        \startStaff
+                        b'1 * 1/4
+                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                     }
                 >>
             }
@@ -4206,7 +4150,7 @@ r"""
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
-        ...     baca.append_phantom_measure(),
+        ...     baca.append_anchor_note(),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -4273,27 +4217,13 @@ r"""
                     {
                         b'4.
                         b'4.
-                        <<
-                            \context Voice = "MusicVoice"
-                            {
-                                %@% \abjad-invisible-music
-                                \abjad-invisible-music-coloring
-                                \once \override Accidental.stencil = ##f
-                                \once \override NoteColumn.ignore-collision = ##t
-                                b'1 * 1/4
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                            }
-                            \context Voice = "RestVoice"
-                            {
-                                \once \override MultiMeasureRest.transparent = ##t
-                                \once \override Score.TimeSignature.X-extent = ##f
-                                \stopStaff
-                                \once \override Staff.StaffSymbol.transparent = ##t
-                                \startStaff
-                                R1 * 1/4
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"
-                            }
-                        >>
+                        %@% \abjad-invisible-music
+                        \abjad-invisible-music-coloring
+                        \stopStaff
+                        \once \override Staff.StaffSymbol.transparent = ##t
+                        \startStaff
+                        b'1 * 1/4
+                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                     }
                 >>
             }

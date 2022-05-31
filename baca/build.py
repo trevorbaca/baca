@@ -1019,6 +1019,7 @@ def make_layout_ly(
     spacing,
     *,
     curtail_measure_count=None,
+    # TODO: remove do_not_append_phantom_measure and read from metadata
     do_not_append_phantom_measure=False,
     do_not_tag=False,
     do_not_write_metadata=False,
