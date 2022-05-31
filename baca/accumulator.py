@@ -143,19 +143,12 @@ def get_voice_names(score):
     return tuple(voice_names)
 
 
-def section_accumulation_defaults():
-    return {
-        "append_phantom_measure": True,
-    }
-
-
 class CommandAccumulator:
     """
     Command accumulator.
     """
 
     __slots__ = (
-        "append_phantom_measure",
         "commands",
         "functions",
         "instruments",
@@ -170,7 +163,6 @@ class CommandAccumulator:
     def __init__(
         self,
         *functions,
-        append_phantom_measure=False,
         instruments=None,
         margin_markups=None,
         metronome_marks=None,
@@ -180,8 +172,6 @@ class CommandAccumulator:
         voice_names=None,
     ):
         self.functions = functions or ()
-        assert append_phantom_measure in (True, False)
-        self.append_phantom_measure = append_phantom_measure
         self.commands = []
         self.instruments = instruments
         self.margin_markups = margin_markups

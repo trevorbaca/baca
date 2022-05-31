@@ -3018,7 +3018,6 @@ r"""
 
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     append_phantom_measure=True,
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -3036,7 +3035,7 @@ r"""
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     append_phantom_measure=commands.append_phantom_measure,
+        ...     append_phantom_measure=True,
         ...     metronome_marks=commands.metronome_marks,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3125,7 +3124,6 @@ r"""
 
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     append_phantom_measure=True,
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -3153,7 +3151,7 @@ r"""
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     append_phantom_measure=commands.append_phantom_measure,
+        ...     append_phantom_measure=True,
         ...     metronome_marks=commands.metronome_marks,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -3340,7 +3338,6 @@ r"""
 
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     append_phantom_measure=True,
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -3359,7 +3356,7 @@ r"""
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     append_phantom_measure=commands.append_phantom_measure,
+        ...     append_phantom_measure=True,
         ...     metronome_marks=commands.metronome_marks,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -3455,7 +3452,6 @@ r"""
 
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     append_phantom_measure=True,
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -3484,7 +3480,7 @@ r"""
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     append_phantom_measure=commands.append_phantom_measure,
+        ...     append_phantom_measure=True,
         ...     metronome_marks=commands.metronome_marks,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -4200,7 +4196,6 @@ r"""
 
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     append_phantom_measure=True,
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
@@ -4218,7 +4213,7 @@ r"""
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     append_phantom_measure=commands.append_phantom_measure,
+        ...     append_phantom_measure=True,
         ...     metronome_marks=commands.metronome_marks,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),

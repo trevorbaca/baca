@@ -965,7 +965,6 @@ def interpret_section(
             score,
             commands.commands,
             commands.time_signatures,
-            append_phantom_measure=commands.append_phantom_measure,
             instruments=commands.instruments,
             margin_markups=commands.margin_markups,
             metronome_marks=commands.metronome_marks,
@@ -1089,14 +1088,13 @@ def make_layout_ly(
     assert abjad.string.is_shout_case(document_name)
     score = baca.docs.make_empty_score(1)
     commands = baca.CommandAccumulator(
-        append_phantom_measure=not (do_not_append_phantom_measure),
         time_signatures=time_signatures,
     )
     _, _ = baca.interpreter(
         score,
         commands.commands,
         commands.time_signatures,
-        append_phantom_measure=commands.append_phantom_measure,
+        append_phantom_measure=not (do_not_append_phantom_measure),
         add_container_identifiers=True,
         comment_measure_numbers=True,
         do_not_append_phantom_measure=do_not_append_phantom_measure,

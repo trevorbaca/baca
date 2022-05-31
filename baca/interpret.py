@@ -3171,6 +3171,7 @@ def reapply_persistent_indicators(
 def score_interpretation_defaults():
     return {
         "add_container_identifiers": True,
+        "append_phantom_measure": True,
         "attach_nonfirst_empty_start_bar": True,
         "attach_rhythm_annotation_spanners": True,
         "check_persistent_indicators": True,
