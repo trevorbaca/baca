@@ -970,6 +970,20 @@ def _check_persistent_indicators_for_leaf(
         raise Exception(f"{voice_name} leaf {i} ({leaf!s}) missing clef.")
 
 
+def _check_phantom_leaves_are_final(score):
+    phantom_count, violators = 0, []
+    for leaf in abjad.iterate.leaves(score):
+        if abjad.get.has_indicator(leaf, _enums.PHANTOM):
+            phantom_count += 1
+            next_leaf = abjad.get.leaf(leaf, 1)
+            if next_leaf is not None:
+                violators.append(leaf)
+    if violators:
+        message = f"{len(violators)} / {phantom_count} phantom leaves"
+        message += " are not section-final."
+        raise Exception(message)
+
+
 def _clean_up_laissez_vibrer_tie_direction(score):
     default = abjad.Clef("treble")
     for note in abjad.iterate.leaves(score, abjad.Note):
@@ -3082,6 +3096,7 @@ def interpreter(
         if append_phantom_measure:
             _style_phantom_measures(score)
             _style_anchor_notes(score)
+        _check_phantom_leaves_are_final(score)
     return metadata, persist
 
 
