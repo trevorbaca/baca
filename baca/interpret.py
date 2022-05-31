@@ -730,7 +730,7 @@ def _calculate_clock_times(
         if context.name == "GlobalRests":
             break
     rests = abjad.select.rests(context)
-    assert len(skips) == len(rests)
+    assert (len(skips) == len(rests)) or (len(skips) == len(rests) + 1)
     start_clock_time = previous_stop_clock_time
     start_clock_time = start_clock_time or "0'00''"
     start_offset = abjad.Duration.from_clock_string(start_clock_time)
@@ -1439,7 +1439,7 @@ def _get_fermata_measure_numbers(first_measure_number, score):
     if "GlobalRests" in score:
         context = score["GlobalRests"]
         rests = abjad.select.leaves(context, abjad.MultimeasureRest)
-        final_measure_index = len(rests) - 1
+        final_measure_index = len(rests)
         final_measure_index -= 1
         indicator = _enums.FERMATA_MEASURE
         for measure_index, rest in enumerate(rests):
@@ -1890,11 +1890,6 @@ def _make_global_rests(append_phantom_measure, time_signatures):
             multiplier=time_signature.duration,
             tag=_tags.function_name(_frame(), n=1),
         )
-        rests.append(rest)
-    if append_phantom_measure:
-        tag = _tags.function_name(_frame(), n=2).append(_tags.PHANTOM)
-        rest = abjad.MultimeasureRest(abjad.Duration(1), multiplier=(1, 4), tag=tag)
-        abjad.attach(_enums.PHANTOM, rest)
         rests.append(rest)
     return rests
 
@@ -2802,7 +2797,7 @@ def interpreter(
     do_not_require_margin_markup=False,
     error_on_not_yet_pitched=False,
     fermata_extra_offset_y=2.5,
-    fermata_measure_empty_overrides=None,
+    fermata_measure_empty_overrides=(),
     final_section=False,
     first_measure_number=None,
     first_section=False,
@@ -2846,6 +2841,7 @@ def interpreter(
     if deactivate is not None:
         assert all(isinstance(_, abjad.Tag) for _ in deactivate)
     assert isinstance(do_not_require_margin_markup, bool)
+    assert all(0 < _ for _ in fermata_measure_empty_overrides)
     assert isinstance(final_section, bool)
     first_measure_number = _adjust_first_measure_number(
         first_measure_number,
