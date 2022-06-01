@@ -81,7 +81,7 @@ class RhythmCommand(_command.Command):
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
                     }
@@ -193,7 +193,7 @@ class RhythmCommand(_command.Command):
                         s1 * 1/2
                         \baca-new-spacing-section #1 #16
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #16
                         s1 * 1/2
                     }
                     \context Voice = "MusicVoice"
@@ -667,7 +667,7 @@ def make_monads(fractions):
                 <<
                     \context Voice = "GlobalSkips"
                     {
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 4/4
                         s1 * 1
                     }
@@ -783,7 +783,7 @@ def make_repeat_tied_notes(
                 <<
                     \context Voice = "GlobalSkips"
                     {
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 10/8
                         s1 * 5/4
                     }

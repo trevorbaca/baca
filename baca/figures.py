@@ -1841,7 +1841,7 @@ class Imbrication:
                     <<
                         \context Voice = "GlobalSkips"
                         {
-                            \baca-new-spacing-section #1 #4
+                            \baca-new-spacing-section #1 #32
                             \time 5/8
                             s1 * 5/8
                         }
@@ -2057,7 +2057,7 @@ class Imbrication:
                     <<
                         \context Voice = "GlobalSkips"
                         {
-                            \baca-new-spacing-section #1 #4
+                            \baca-new-spacing-section #1 #32
                             \time 15/16
                             s1 * 15/16
                         }
@@ -2258,7 +2258,7 @@ class Imbrication:
                     <<
                         \context Voice = "GlobalSkips"
                         {
-                            \baca-new-spacing-section #1 #4
+                            \baca-new-spacing-section #1 #32
                             \time 9/8
                             s1 * 9/8
                         }
@@ -2480,7 +2480,7 @@ class Imbrication:
                     <<
                         \context Voice = "GlobalSkips"
                         {
-                            \baca-new-spacing-section #1 #4
+                            \baca-new-spacing-section #1 #32
                             \time 45/32
                             s1 * 45/32
                         }
@@ -6350,7 +6350,7 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
                 <<
                     \context Voice = "GlobalSkips"
                     {
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #32
                         \time 3/4
                         s1 * 3/4
                     }
@@ -6499,7 +6499,7 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
                 <<
                     \context Voice = "GlobalSkips"
                     {
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #32
                         \time 9/8
                         s1 * 9/8
                     }
@@ -6688,7 +6688,7 @@ def extend_beam(
                         \baca-new-spacing-section #1 #32
                         \time 7/16
                         s1 * 7/16
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #32
                         \time 1/4
                         s1 * 1/4
                     }
@@ -6884,7 +6884,7 @@ def imbricate(
                 <<
                     \context Voice = "GlobalSkips"
                     {
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #32
                         \time 15/16
                         s1 * 15/16
                     }
@@ -7063,7 +7063,7 @@ def imbricate(
                 <<
                     \context Voice = "GlobalSkips"
                     {
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #32
                         \time 15/16
                         s1 * 15/16
                     }
@@ -7289,7 +7289,7 @@ def imbricate(
                 <<
                     \context Voice = "GlobalSkips"
                     {
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #32
                         \time 9/8
                         s1 * 9/8
                     }
@@ -7497,7 +7497,7 @@ def imbricate(
                 <<
                     \context Voice = "GlobalSkips"
                     {
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \time 27/16
                         s1 * 27/16
                     }
@@ -7638,7 +7638,7 @@ def imbricate(
                 <<
                     \context Voice = "GlobalSkips"
                     {
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #32
                         \time 11/16
                         s1 * 11/16
                     }
@@ -7803,7 +7803,7 @@ def imbricate(
                 <<
                     \context Voice = "GlobalSkips"
                     {
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #32
                         \time 19/16
                         s1 * 19/16
                     }

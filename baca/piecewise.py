@@ -1010,7 +1010,7 @@ def dynamic(
                         \baca-new-spacing-section #1 #13
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #13
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1102,7 +1102,7 @@ def dynamic(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1227,7 +1227,7 @@ def hairpin(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1316,7 +1316,7 @@ def hairpin(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1407,7 +1407,7 @@ def hairpin(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1497,7 +1497,7 @@ def hairpin(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1594,7 +1594,7 @@ def hairpin(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1692,7 +1692,7 @@ def hairpin(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1783,7 +1783,7 @@ def hairpin(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1883,7 +1883,7 @@ def hairpin(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1978,7 +1978,7 @@ def hairpin(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -2081,7 +2081,7 @@ def hairpin(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -2167,7 +2167,7 @@ def hairpin(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -2263,7 +2263,7 @@ def hairpin(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -2348,7 +2348,7 @@ def hairpin(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -2439,7 +2439,7 @@ def hairpin(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -3444,7 +3444,7 @@ def text_spanner(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -3534,7 +3534,7 @@ def text_spanner(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -3624,7 +3624,7 @@ def text_spanner(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -3714,7 +3714,7 @@ def text_spanner(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -3804,7 +3804,7 @@ def text_spanner(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -3900,7 +3900,7 @@ def text_spanner(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -4008,7 +4008,7 @@ def text_spanner(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -4117,7 +4117,7 @@ def text_spanner(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -4235,7 +4235,7 @@ def text_spanner(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -4359,7 +4359,7 @@ def text_spanner(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -4451,7 +4451,7 @@ def text_spanner(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -4546,7 +4546,7 @@ def text_spanner(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -4661,7 +4661,7 @@ def text_spanner(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -4757,7 +4757,7 @@ def text_spanner(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }

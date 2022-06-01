@@ -32,6 +32,7 @@ from . import indicators as _indicators
 from . import select as _select
 from . import tags as _tags
 
+# TODO: apply magic_lilypond_eol_adjustment to last measure in all doc examples
 magic_lilypond_eol_adjustment = abjad.Multiplier(35, 24)
 
 fermata_measure_duration = abjad.Duration(1, 4)
@@ -41,8 +42,6 @@ class SpacingSpecifier:
     """
     Spacing specifier.
     """
-
-    ### INITIALIZER ###
 
     def __init__(
         self,
@@ -59,9 +58,7 @@ class SpacingSpecifier:
         self.fallback_duration = fallback_duration
         self.overrides = overrides
 
-    ### SPECIAL METHODS ###
-
-    def __call__(self, score, page_layout_profile, *, do_not_append_anchor_skip=False):
+    def __call__(self, score, page_layout_profile, *, has_anchor_skip=False):
         if self.fallback_duration is None:
             return
         page_layout_profile = page_layout_profile or {}
@@ -102,7 +99,7 @@ class SpacingSpecifier:
         measure_count = len(skips)
         for measure_index, skip in enumerate(skips):
             measure_number = measure_index + 1
-            if not do_not_append_anchor_skip and measure_number == measure_count:
+            if has_anchor_skip and measure_number == measure_count:
                 duration = abjad.Duration(1, 4)
             elif measures:
                 duration = measures[measure_number]

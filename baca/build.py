@@ -1029,8 +1029,6 @@ def make_layout_ly(
     spacing,
     *,
     curtail_measure_count=None,
-    # TODO: remove do_not_append_anchor_skip and read from metadata
-    do_not_append_anchor_skip=False,
     do_not_tag=False,
     do_not_write_metadata=False,
     file_name="layout.ly",
@@ -1066,6 +1064,10 @@ def make_layout_ly(
         "fermata_measure_numbers": fermata_measure_numbers,
         "measure_count": measure_count,
     }
+    has_anchor_skip = baca.path.get_metadatum(
+        layout_directory,
+        "has_anchor_skip",
+    )
     document_name = abjad.string.to_shout_case(layout_directory.name)
     if time_signatures is not None:
         first_measure_number = 1
@@ -1105,10 +1107,9 @@ def make_layout_ly(
         score,
         commands.commands,
         commands.time_signatures,
-        append_anchor_skip=not (do_not_append_anchor_skip),
+        append_anchor_skip=has_anchor_skip,
         add_container_identifiers=True,
         comment_measure_numbers=True,
-        do_not_append_anchor_skip=do_not_append_anchor_skip,
         first_measure_number=first_measure_number,
         first_section=True,
         page_layout_profile=page_layout_profile,

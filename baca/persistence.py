@@ -68,7 +68,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -173,7 +173,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -281,7 +281,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -381,7 +381,7 @@ r"""
                         \noBreak
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -495,7 +495,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -580,7 +580,7 @@ r"""
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "MusicVoice"
@@ -649,7 +649,7 @@ r"""
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "MusicVoice"
@@ -720,7 +720,7 @@ r"""
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "MusicVoice"
@@ -781,7 +781,7 @@ r"""
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "MusicVoice"
@@ -853,7 +853,7 @@ r"""
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "MusicVoice"
@@ -912,7 +912,7 @@ r"""
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "MusicVoice"
@@ -983,7 +983,7 @@ r"""
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "MusicVoice"
@@ -1044,7 +1044,7 @@ r"""
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "MusicVoice"
@@ -1135,7 +1135,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -1178,7 +1178,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -1218,7 +1218,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -1298,7 +1298,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -1341,7 +1341,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -1380,7 +1380,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -1462,7 +1462,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -1505,7 +1505,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -1545,7 +1545,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -1630,7 +1630,7 @@ r"""
                         \noBreak
                         s1 * 1/2
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 1/2
@@ -1678,7 +1678,7 @@ r"""
                         \noBreak
                         s1 * 1/2
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 1/2
@@ -1722,7 +1722,7 @@ r"""
                         \noBreak
                         s1 * 1/2
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 1/2
@@ -1812,7 +1812,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -1855,7 +1855,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -1894,7 +1894,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -1989,7 +1989,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -2038,7 +2038,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -2083,7 +2083,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -2169,7 +2169,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -2220,7 +2220,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -2267,7 +2267,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -2357,7 +2357,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -2408,7 +2408,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -2455,7 +2455,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -2549,7 +2549,7 @@ r"""
                         \noBreak
                         s1 * 1/2
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 1/2
@@ -2609,7 +2609,7 @@ r"""
                         \noBreak
                         s1 * 1/2
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 1/2
@@ -2665,7 +2665,7 @@ r"""
                         \noBreak
                         s1 * 1/2
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 1/2
@@ -2767,7 +2767,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -2818,7 +2818,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -2865,7 +2865,7 @@ r"""
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
                         s1 * 3/8
@@ -2969,7 +2969,7 @@ r"""
                         \noBreak
                         \break
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 1/2
                     }
@@ -3292,7 +3292,7 @@ r"""
                         %@% - \abjad-invisible-line
                         %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "90"
                         %@% \bacaStartTextSpanMM
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
                         \bacaStopTextSpanMM
@@ -3583,7 +3583,7 @@ r"""
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "MusicVoice"
@@ -3670,7 +3670,7 @@ r"""
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "MusicVoice"
@@ -3756,7 +3756,7 @@ r"""
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "MusicVoice"
@@ -3819,7 +3819,7 @@ r"""
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "MusicVoice"
@@ -3891,7 +3891,7 @@ r"""
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "MusicVoice"
@@ -3965,7 +3965,7 @@ r"""
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "MusicVoice"
@@ -4028,7 +4028,7 @@ r"""
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "MusicVoice"
@@ -4106,7 +4106,7 @@ r"""
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "MusicVoice"
@@ -4307,7 +4307,7 @@ r"""
                         - \abjad-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'blue) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
                         \bacaStopTextSpanMM
@@ -4397,7 +4397,7 @@ r"""
                         - \abjad-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'green4) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
                         \bacaStopTextSpanMM
@@ -4489,7 +4489,7 @@ r"""
                         - \abjad-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'DeepPink1) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
                         \bacaStopTextSpanMM
@@ -4578,7 +4578,7 @@ r"""
                         - \abjad-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'DeepPink1) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
                         \bacaStopTextSpanMM

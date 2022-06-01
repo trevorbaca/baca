@@ -208,17 +208,12 @@ def _apply_breaks(score, spacing):
             command(global_skips)
 
 
-def _apply_spacing(
-    page_layout_profile, score, spacing, *, do_not_append_anchor_skip=False
-):
-    with abjad.Timer() as timer:
-        spacing(
-            score,
-            page_layout_profile,
-            do_not_append_anchor_skip=do_not_append_anchor_skip,
-        )
-    count = int(timer.elapsed_time)
-    return count
+def _apply_spacing(page_layout_profile, score, spacing, *, has_anchor_skip=False):
+    spacing(
+        score,
+        page_layout_profile,
+        has_anchor_skip=has_anchor_skip,
+    )
 
 
 def _assert_nonoverlapping_rhythms(rhythms, voice):
@@ -1057,6 +1052,7 @@ def _collect_metadata(
     final_measure_number,
     first_measure_number,
     first_metronome_mark,
+    has_anchor_skip,
     metadata,
     persist,
     persistent_indicators,
@@ -1087,6 +1083,8 @@ def _collect_metadata(
         metadata_["final_measure_is_fermata"] = True
     if first_metronome_mark is False:
         metadata_["first_metronome_mark"] = first_metronome_mark
+    if has_anchor_skip is True:
+        metadata_["has_anchor_skip"] = has_anchor_skip
     if persistent_indicators:
         persist_["persistent_indicators"] = persistent_indicators
     if start_clock_time is not None:
@@ -2744,8 +2742,6 @@ def interpreter(
     color_octaves=False,
     comment_measure_numbers=False,
     deactivate=None,
-    # TODO: remove do_not_append_anchor_skip in favor of append_anchor_skip
-    do_not_append_anchor_skip=False,
     do_not_require_margin_markup=False,
     error_on_not_yet_pitched=False,
     fermata_extra_offset_y=2.5,
@@ -2835,7 +2831,7 @@ def interpreter(
             page_layout_profile,
             score,
             spacing,
-            do_not_append_anchor_skip=do_not_append_anchor_skip,
+            has_anchor_skip=append_anchor_skip,
         )
     _attach_fermatas(
         always_make_global_rests,
@@ -3009,6 +3005,7 @@ def interpreter(
             final_measure_number,
             first_measure_number,
             first_metronome_mark,
+            append_anchor_skip,
             metadata,
             persist,
             persistent_indicators,
@@ -3018,7 +3015,6 @@ def interpreter(
             cached_time_signatures,
             voice_metadata,
         )
-        # if append_anchor_skip:
         _style_anchor_skip(score)
         _style_anchor_notes(score)
         _check_anchors_are_final(score)

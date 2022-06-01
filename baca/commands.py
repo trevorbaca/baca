@@ -104,7 +104,7 @@ class BCPCommand(_command.Command):
                         \baca-new-spacing-section #1 #16
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #16
                         \time 3/8
                         s1 * 3/8
                     }
@@ -302,7 +302,7 @@ class BCPCommand(_command.Command):
                         \baca-new-spacing-section #1 #16
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #16
                         \time 3/8
                         s1 * 3/8
                     }
@@ -8540,7 +8540,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         s1 * 3/8
                     }
                     \context Voice = "MusicVoice"
@@ -8609,7 +8609,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         s1 * 3/8
                     }
                     \context Voice = "MusicVoice"
@@ -8679,7 +8679,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         s1 * 3/8
                     }
                     \context Voice = "MusicVoice"
@@ -8747,7 +8747,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         s1 * 3/8
                     }
                     \context Voice = "MusicVoice"
@@ -8815,7 +8815,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         s1 * 3/8
                     }
                     \context Voice = "MusicVoice"
@@ -9802,7 +9802,7 @@ def bcps(
                             \baca-new-spacing-section #1 #16
                             \time 4/8
                             s1 * 1/2
-                            \baca-new-spacing-section #1 #4
+                            \baca-new-spacing-section #1 #16
                             \time 3/8
                             s1 * 3/8
                         }
@@ -10545,7 +10545,7 @@ def finger_pressure_transition(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
@@ -11173,7 +11173,7 @@ def invisible_music(
                         \baca-new-spacing-section #1 #12
                         \time 4/8
                         s1 * 1/2
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                     }
