@@ -2386,11 +2386,11 @@ def _sort_by_timeline(leaves):
 
 def _style_anchor_notes(score):
     for note in abjad.select.components(score, abjad.Note):
-        if not abjad.get.has_indicator(note, _enums.ANCHOR):
+        if not abjad.get.has_indicator(note, _enums.ANCHOR_NOTE):
             continue
         _append_tag_to_wrappers(note, _tags.function_name(_frame()))
         _append_tag_to_wrappers(note, _tags.PHANTOM)
-        _append_tag_to_wrappers(note, _tags.ANCHOR)
+        _append_tag_to_wrappers(note, _tags.ANCHOR_NOTE)
 
 
 def _style_fermata_measures(
@@ -2690,19 +2690,19 @@ def append_anchor_note() -> _commands.GenericCommand:
         parentage = abjad.get.parentage(leaf)
         voice = parentage.get(abjad.Voice, n=-1)
         tag = abjad.Tag("baca.append_anchor_note(1)")
-        tag = tag.append(_tags.ANCHOR)
+        tag = tag.append(_tags.ANCHOR_NOTE)
         tag = tag.append(_tags.HIDDEN)
         tag = tag.append(_tags.NOTE)
         tag = tag.append(_tags.PHANTOM)
         note = abjad.Note("c'1", multiplier=(1, 4), tag=tag)
-        abjad.attach(_enums.ANCHOR, note)
+        abjad.attach(_enums.ANCHOR_NOTE, note)
         abjad.attach(_enums.HIDDEN, note)
         abjad.attach(_enums.NOT_YET_PITCHED, note)
         abjad.attach(_enums.NOTE, note)
         abjad.attach(_enums.PHANTOM, note)
         #
         tag = abjad.Tag("baca.append_anchor_note(2)")
-        tag = tag.append(_tags.ANCHOR)
+        tag = tag.append(_tags.ANCHOR_NOTE)
         tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
         tag = tag.append(_tags.PHANTOM)
         tag = tag.append(_tags.NOTE)
@@ -2712,7 +2712,7 @@ def append_anchor_note() -> _commands.GenericCommand:
         abjad.attach(literal, note, tag=tag)
         #
         tag = abjad.Tag("baca.append_anchor_note(3)")
-        tag = tag.append(_tags.ANCHOR)
+        tag = tag.append(_tags.ANCHOR_NOTE)
         tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
         tag = tag.append(_tags.PHANTOM)
         tag = tag.append(_tags.NOTE)
