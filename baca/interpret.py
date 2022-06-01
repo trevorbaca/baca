@@ -209,13 +209,13 @@ def _apply_breaks(score, spacing):
 
 
 def _apply_spacing(
-    page_layout_profile, score, spacing, *, do_not_append_phantom_measure=False
+    page_layout_profile, score, spacing, *, do_not_append_anchor_skip=False
 ):
     with abjad.Timer() as timer:
         spacing(
             score,
             page_layout_profile,
-            do_not_append_phantom_measure=do_not_append_phantom_measure,
+            do_not_append_anchor_skip=do_not_append_anchor_skip,
         )
     count = int(timer.elapsed_time)
     return count
@@ -234,7 +234,7 @@ def _assert_nonoverlapping_rhythms(rhythms, voice):
 
 def _attach_fermatas(
     always_make_global_rests,
-    append_phantom_measure,
+    append_anchor_skip,
     score,
     time_signatures,
 ):
@@ -247,7 +247,7 @@ def _attach_fermatas(
         return
     context = score["GlobalRests"]
     rests = _make_global_rests(
-        append_phantom_measure,
+        append_anchor_skip,
         time_signatures,
     )
     context.extend(rests)
@@ -768,7 +768,7 @@ def _call_all_commands(
     allows_instrument,
     already_reapplied_contexts,
     always_make_global_rests,
-    append_phantom_measure,
+    append_anchor_skip,
     attach_rhythm_annotation_spanners,
     cache,
     commands,
@@ -1882,7 +1882,7 @@ def _make_global_context():
     return global_context
 
 
-def _make_global_rests(append_phantom_measure, time_signatures):
+def _make_global_rests(append_anchor_skip, time_signatures):
     rests = []
     for time_signature in time_signatures:
         rest = abjad.MultimeasureRest(
@@ -1895,7 +1895,7 @@ def _make_global_rests(append_phantom_measure, time_signatures):
 
 
 def _make_global_skips(
-    append_phantom_measure,
+    append_anchor_skip,
     global_skips,
     time_signatures,
 ):
@@ -1912,7 +1912,7 @@ def _make_global_skips(
             tag=_tags.function_name(_frame(), n=2),
         )
         global_skips.append(skip)
-    if append_phantom_measure:
+    if append_anchor_skip:
         tag = _tags.function_name(_frame(), n=3)
         tag = tag.append(_tags.PHANTOM)
         skip = abjad.Skip(1, multiplier=(1, 4), tag=tag)
@@ -2208,11 +2208,11 @@ def _reanalyze_trending_dynamics(manifests, score):
                 _treat.treat_persistent_wrapper(manifests, wrapper, "explicit")
 
 
-def _remove_redundant_time_signatures(append_phantom_measure, global_skips):
+def _remove_redundant_time_signatures(append_anchor_skip, global_skips):
     previous_time_signature = None
     cached_time_signatures = []
     skips = _select.skips(global_skips)
-    if append_phantom_measure:
+    if append_anchor_skip:
         skips = skips[:-1]
     for skip in skips:
         time_signature = abjad.get.indicator(skip, abjad.TimeSignature)
@@ -2780,7 +2780,7 @@ def interpreter(
     allow_empty_selections=False,
     allows_instrument=None,
     always_make_global_rests=False,
-    append_phantom_measure=False,
+    append_anchor_skip=False,
     attach_instruments_by_hand=False,
     attach_nonfirst_empty_start_bar=False,
     attach_rhythm_annotation_spanners=False,
@@ -2792,8 +2792,8 @@ def interpreter(
     color_octaves=False,
     comment_measure_numbers=False,
     deactivate=None,
-    # TODO: remove do_not_append_phantom_measure in favor of append_phantom_measure
-    do_not_append_phantom_measure=False,
+    # TODO: remove do_not_append_anchor_skip in favor of append_anchor_skip
+    do_not_append_anchor_skip=False,
     do_not_require_margin_markup=False,
     error_on_not_yet_pitched=False,
     fermata_extra_offset_y=2.5,
@@ -2868,7 +2868,7 @@ def interpreter(
     assert isinstance(treat_untreated_persistent_wrappers, bool)
     voice_metadata = {}
     already_reapplied_contexts = set()
-    _make_global_skips(append_phantom_measure, global_skips, time_signatures)
+    _make_global_skips(append_anchor_skip, global_skips, time_signatures)
     if attach_nonfirst_empty_start_bar and not first_section:
         _attach_nonfirst_empty_start_bar(global_skips)
     _label_measure_numbers(first_measure_number, global_skips)
@@ -2883,11 +2883,11 @@ def interpreter(
             page_layout_profile,
             score,
             spacing,
-            do_not_append_phantom_measure=do_not_append_phantom_measure,
+            do_not_append_anchor_skip=do_not_append_anchor_skip,
         )
     _attach_fermatas(
         always_make_global_rests,
-        append_phantom_measure,
+        append_anchor_skip,
         score,
         time_signatures,
     )
@@ -2905,7 +2905,7 @@ def interpreter(
             allows_instrument=allows_instrument,
             already_reapplied_contexts=already_reapplied_contexts,
             always_make_global_rests=always_make_global_rests,
-            append_phantom_measure=append_phantom_measure,
+            append_anchor_skip=append_anchor_skip,
             attach_rhythm_annotation_spanners=attach_rhythm_annotation_spanners,
             cache=cache,
             commands=commands,
@@ -2928,7 +2928,7 @@ def interpreter(
             if not first_section:
                 _clone_section_initial_short_instrument_name(score)
             cached_time_signatures = _remove_redundant_time_signatures(
-                append_phantom_measure,
+                append_anchor_skip,
                 global_skips,
             )
             result = _get_fermata_measure_numbers(first_measure_number, score)
@@ -3069,7 +3069,7 @@ def interpreter(
             voice_metadata,
         )
         # TODO: combine suite into _style_anchor_leaves()
-        if append_phantom_measure:
+        if append_anchor_skip:
             _style_phantom_measures(score)
             _style_anchor_notes(score)
         _check_phantom_leaves_are_final(score)
@@ -3147,7 +3147,7 @@ def reapply_persistent_indicators(
 def score_interpretation_defaults():
     return {
         "add_container_identifiers": True,
-        "append_phantom_measure": True,
+        "append_anchor_skip": True,
         "attach_nonfirst_empty_start_bar": True,
         "attach_rhythm_annotation_spanners": True,
         "check_persistent_indicators": True,

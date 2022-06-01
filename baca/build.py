@@ -1019,8 +1019,8 @@ def make_layout_ly(
     spacing,
     *,
     curtail_measure_count=None,
-    # TODO: remove do_not_append_phantom_measure and read from metadata
-    do_not_append_phantom_measure=False,
+    # TODO: remove do_not_append_anchor_skip and read from metadata
+    do_not_append_anchor_skip=False,
     do_not_tag=False,
     do_not_write_metadata=False,
     file_name="layout.ly",
@@ -1095,10 +1095,10 @@ def make_layout_ly(
         score,
         commands.commands,
         commands.time_signatures,
-        append_phantom_measure=not (do_not_append_phantom_measure),
+        append_anchor_skip=not (do_not_append_anchor_skip),
         add_container_identifiers=True,
         comment_measure_numbers=True,
-        do_not_append_phantom_measure=do_not_append_phantom_measure,
+        do_not_append_anchor_skip=do_not_append_anchor_skip,
         first_measure_number=first_measure_number,
         first_section=True,
         page_layout_profile=page_layout_profile,

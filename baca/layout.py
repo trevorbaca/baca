@@ -61,9 +61,7 @@ class SpacingSpecifier:
 
     ### SPECIAL METHODS ###
 
-    def __call__(
-        self, score, page_layout_profile, *, do_not_append_phantom_measure=False
-    ):
+    def __call__(self, score, page_layout_profile, *, do_not_append_anchor_skip=False):
         if self.fallback_duration is None:
             return
         page_layout_profile = page_layout_profile or {}
@@ -104,7 +102,7 @@ class SpacingSpecifier:
         measure_count = len(skips)
         for measure_index, skip in enumerate(skips):
             measure_number = measure_index + 1
-            if not do_not_append_phantom_measure and measure_number == measure_count:
+            if not do_not_append_anchor_skip and measure_number == measure_count:
                 duration = abjad.Duration(1, 4)
             elif measures:
                 duration = measures[measure_number]
