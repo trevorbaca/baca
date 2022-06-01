@@ -234,7 +234,6 @@ def _assert_nonoverlapping_rhythms(rhythms, voice):
 
 def _attach_fermatas(
     always_make_global_rests,
-    append_anchor_skip,
     score,
     time_signatures,
 ):
@@ -246,10 +245,7 @@ def _attach_fermatas(
         del score["GlobalRests"]
         return
     context = score["GlobalRests"]
-    rests = _make_global_rests(
-        append_anchor_skip,
-        time_signatures,
-    )
+    rests = _make_global_rests(time_signatures)
     context.extend(rests)
 
 
@@ -768,7 +764,6 @@ def _call_all_commands(
     allows_instrument,
     already_reapplied_contexts,
     always_make_global_rests,
-    append_anchor_skip,
     attach_rhythm_annotation_spanners,
     cache,
     commands,
@@ -896,6 +891,20 @@ def _check_all_music_in_part_containers(score):
             raise Exception(message)
 
 
+def _check_anchors_are_final(score):
+    anchor_count, violators = 0, []
+    for leaf in abjad.iterate.leaves(score):
+        if abjad.get.has_indicator(leaf, _enums.PHANTOM):
+            anchor_count += 1
+            next_leaf = abjad.get.leaf(leaf, 1)
+            if next_leaf is not None:
+                violators.append(leaf)
+    if violators:
+        message = f"{len(violators)} / {anchor_count} anchor leaves"
+        message += " are not section-final."
+        raise Exception(message)
+
+
 def _check_doubled_dynamics(score):
     for leaf in abjad.iterate.leaves(score):
         dynamics = abjad.get.indicators(leaf, abjad.Dynamic)
@@ -967,20 +976,6 @@ def _check_persistent_indicators_for_leaf(
     clef = abjad.get.effective(leaf, abjad.Clef)
     if clef is None:
         raise Exception(f"{voice_name} leaf {i} ({leaf!s}) missing clef.")
-
-
-def _check_phantom_leaves_are_final(score):
-    phantom_count, violators = 0, []
-    for leaf in abjad.iterate.leaves(score):
-        if abjad.get.has_indicator(leaf, _enums.PHANTOM):
-            phantom_count += 1
-            next_leaf = abjad.get.leaf(leaf, 1)
-            if next_leaf is not None:
-                violators.append(leaf)
-    if violators:
-        message = f"{len(violators)} / {phantom_count} phantom leaves"
-        message += " are not section-final."
-        raise Exception(message)
 
 
 def _clean_up_laissez_vibrer_tie_direction(score):
@@ -1140,7 +1135,7 @@ def _collect_persistent_indicators(
             name_to_wrappers[context.name] = []
         wrappers = context._dependent_wrappers[:]
         name_to_wrappers[context.name].extend(wrappers)
-    do_not_persist_on_phantom_measure = (
+    do_not_persist_on_anchor_leaf = (
         abjad.Instrument,
         abjad.MetronomeMark,
         abjad.MarginMarkup,
@@ -1154,16 +1149,14 @@ def _collect_persistent_indicators(
             omit_with_indicator=_enums.PHANTOM,
         )
         for wrapper in dictionary.values():
-            if isinstance(
-                wrapper.unbundle_indicator(), do_not_persist_on_phantom_measure
-            ):
+            if isinstance(wrapper.unbundle_indicator(), do_not_persist_on_anchor_leaf):
                 wrappers.append(wrapper)
         dictionary = abjad._getlib._get_persistent_wrappers(
             dependent_wrappers=dependent_wrappers
         )
         for wrapper in dictionary.values():
             if not isinstance(
-                wrapper.unbundle_indicator(), do_not_persist_on_phantom_measure
+                wrapper.unbundle_indicator(), do_not_persist_on_anchor_leaf
             ):
                 wrappers.append(wrapper)
         for wrapper in wrappers:
@@ -1882,7 +1875,7 @@ def _make_global_context():
     return global_context
 
 
-def _make_global_rests(append_anchor_skip, time_signatures):
+def _make_global_rests(time_signatures):
     rests = []
     for time_signature in time_signatures:
         rest = abjad.MultimeasureRest(
@@ -1914,13 +1907,16 @@ def _make_global_skips(
         global_skips.append(skip)
     if append_anchor_skip:
         tag = _tags.function_name(_frame(), n=3)
+        tag = tag.append(_tags.ANCHOR_SKIP)
         tag = tag.append(_tags.PHANTOM)
         skip = abjad.Skip(1, multiplier=(1, 4), tag=tag)
+        abjad.attach(_enums.ANCHOR_SKIP, skip)
         abjad.attach(_enums.PHANTOM, skip)
         global_skips.append(skip)
         if time_signature != abjad.TimeSignature((1, 4)):
             time_signature = abjad.TimeSignature((1, 4))
-            abjad.attach(time_signature, skip, context="Score", tag=tag)
+            # abjad.attach(time_signature, skip, context="Score", tag=tag)
+            abjad.attach(time_signature, skip, context="Score", tag=None)
 
 
 def _make_lilypond_file(
@@ -2213,6 +2209,7 @@ def _remove_redundant_time_signatures(append_anchor_skip, global_skips):
     cached_time_signatures = []
     skips = _select.skips(global_skips)
     if append_anchor_skip:
+        assert abjad.get.has_indicator(skips[-1], _enums.ANCHOR_SKIP)
         skips = skips[:-1]
     for skip in skips:
         time_signature = abjad.get.indicator(skip, abjad.TimeSignature)
@@ -2389,8 +2386,42 @@ def _style_anchor_notes(score):
         if not abjad.get.has_indicator(note, _enums.ANCHOR_NOTE):
             continue
         _append_tag_to_wrappers(note, _tags.function_name(_frame()))
-        _append_tag_to_wrappers(note, _tags.PHANTOM)
         _append_tag_to_wrappers(note, _tags.ANCHOR_NOTE)
+        _append_tag_to_wrappers(note, _tags.PHANTOM)
+
+
+def _style_anchor_skip(score):
+    global_skips = score["GlobalSkips"]
+    skip = abjad.get.leaf(global_skips, -1)
+    if not abjad.get.has_indicator(skip, _enums.ANCHOR_SKIP):
+        return
+    for literal in abjad.get.indicators(skip, abjad.LilyPondLiteral):
+        if r"\baca-time-signature-color" in literal.argument:
+            abjad.detach(literal, skip)
+    tag = _tags.function_name(_frame(), n=1)
+    tag = tag.append(_tags.ANCHOR_SKIP)
+    tag = tag.append(_tags.PHANTOM)
+    _append_tag_to_wrappers(skip, tag)
+    tag = _tags.function_name(_frame(), n=2)
+    tag = tag.append(_tags.PHANTOM)
+    tag = tag.append(_tags.ANCHOR_SKIP)
+    abjad.attach(
+        abjad.LilyPondLiteral(r"\baca-time-signature-transparent"), skip, tag=tag
+    )
+    tag = _tags.function_name(_frame(), n=3)
+    tag = tag.append(_tags.PHANTOM)
+    tag = tag.append(_tags.ANCHOR_SKIP)
+    abjad.attach(
+        abjad.LilyPondLiteral(
+            [
+                r"\once \override Score.BarLine.transparent = ##t",
+                r"\once \override Score.SpanBar.transparent = ##t",
+            ],
+            site="after",
+        ),
+        skip,
+        tag=tag,
+    )
 
 
 def _style_fermata_measures(
@@ -2534,82 +2565,6 @@ def _style_fermata_measures(
         rest = rests[measure_index]
         grob = abjad.override(rest).MultiMeasureRestText
         grob.extra_offset = (0, fermata_extra_offset_y)
-
-
-def _style_phantom_measures(score):
-    skip = abjad.get.leaf(score["GlobalSkips"], -1)
-    for literal in abjad.get.indicators(skip, abjad.LilyPondLiteral):
-        if r"\baca-time-signature-color" in literal.argument:
-            abjad.detach(literal, skip)
-    _append_tag_to_wrappers(skip, _tags.function_name(_frame(), n=1))
-    _append_tag_to_wrappers(skip, _tags.PHANTOM)
-    string = r"\baca-time-signature-transparent"
-    literal = abjad.LilyPondLiteral(string)
-    abjad.attach(
-        literal,
-        skip,
-        tag=_tags.function_name(_frame(), n=2).append(_tags.PHANTOM),
-    )
-    strings = [
-        r"\once \override Score.BarLine.transparent = ##t",
-        r"\once \override Score.SpanBar.transparent = ##t",
-    ]
-    literal = abjad.LilyPondLiteral(strings, site="after")
-    abjad.attach(
-        literal,
-        skip,
-        tag=_tags.function_name(_frame(), n=3).append(_tags.PHANTOM),
-    )
-    if "GlobalRests" in score:
-        for context in abjad.iterate.components(score, abjad.Context):
-            if context.name == "GlobalRests":
-                rest = context[-1]
-                break
-        _append_tag_to_wrappers(rest, _tags.function_name(_frame(), n=4))
-        _append_tag_to_wrappers(rest, _tags.PHANTOM)
-    start_offset = abjad.get.timespan(skip).start_offset
-    enumeration = _enums.MULTIMEASURE_REST_CONTAINER
-    containers = []
-    for container in abjad.select.components(score, abjad.Container):
-        if not abjad.get.has_indicator(container, enumeration):
-            continue
-        leaf = abjad.get.leaf(container, 0)
-        if abjad.get.timespan(leaf).start_offset != start_offset:
-            continue
-        containers.append(container)
-    string_1 = r"\once \override Score.TimeSignature.X-extent = ##f"
-    string_2 = r"\once \override MultiMeasureRest.transparent = ##t"
-    strings = [
-        r"\stopStaff",
-        r"\once \override Staff.StaffSymbol.transparent = ##t",
-        r"\startStaff",
-    ]
-    for container in containers:
-        for leaf in abjad.select.leaves(container):
-            _append_tag_to_wrappers(leaf, _tags.function_name(_frame(), n=5))
-            _append_tag_to_wrappers(leaf, _tags.PHANTOM)
-            if not isinstance(leaf, abjad.MultimeasureRest):
-                continue
-            if abjad.get.has_indicator(leaf, _enums.HIDDEN):
-                continue
-            literal = abjad.LilyPondLiteral(string_1)
-            abjad.attach(
-                literal,
-                leaf,
-                tag=_tags.function_name(_frame(), n=6).append(_tags.PHANTOM),
-            )
-            literal = abjad.LilyPondLiteral(string_2)
-            abjad.attach(
-                literal,
-                leaf,
-                tag=_tags.function_name(_frame(), n=7).append(_tags.PHANTOM),
-            )
-            literal = abjad.LilyPondLiteral(strings)
-            abjad.attach(
-                literal,
-                leaf,
-                tag=_tags.function_name(_frame(), n=8).append(_tags.PHANTOM),
-            )
 
 
 def _transpose_score(score):
@@ -2887,7 +2842,6 @@ def interpreter(
         )
     _attach_fermatas(
         always_make_global_rests,
-        append_anchor_skip,
         score,
         time_signatures,
     )
@@ -2905,7 +2859,6 @@ def interpreter(
             allows_instrument=allows_instrument,
             already_reapplied_contexts=already_reapplied_contexts,
             always_make_global_rests=always_make_global_rests,
-            append_anchor_skip=append_anchor_skip,
             attach_rhythm_annotation_spanners=attach_rhythm_annotation_spanners,
             cache=cache,
             commands=commands,
@@ -3068,11 +3021,10 @@ def interpreter(
             cached_time_signatures,
             voice_metadata,
         )
-        # TODO: combine suite into _style_anchor_leaves()
-        if append_anchor_skip:
-            _style_phantom_measures(score)
-            _style_anchor_notes(score)
-        _check_phantom_leaves_are_final(score)
+        # if append_anchor_skip:
+        _style_anchor_skip(score)
+        _style_anchor_notes(score)
+        _check_anchors_are_final(score)
     return metadata, persist
 
 
