@@ -2647,28 +2647,40 @@ def append_anchor_note() -> _commands.GenericCommand:
         tag = tag.append(_tags.ANCHOR_NOTE)
         tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
         tag = tag.append(_tags.NOTE)
-        literal = abjad.LilyPondLiteral(
-            r"\abjad-invisible-music-coloring", site="before"
+        abjad.attach(
+            abjad.LilyPondLiteral(r"\abjad-invisible-music-coloring", site="before"),
+            note,
+            tag=tag,
         )
-        abjad.attach(literal, note, tag=tag)
         #
         tag = abjad.Tag("baca.append_anchor_note(3)")
         tag = tag.append(_tags.ANCHOR_NOTE)
         tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
         tag = tag.append(_tags.NOTE)
-        literal = abjad.LilyPondLiteral(r"\abjad-invisible-music", site="before")
-        abjad.attach(literal, note, deactivate=True, tag=tag)
-        #
-        strings = [
-            r"\stopStaff",
-            r"\once \override Staff.StaffSymbol.transparent = ##t",
-            r"\startStaff",
-        ]
-        literal = abjad.LilyPondLiteral(strings)
         abjad.attach(
-            literal,
+            abjad.LilyPondLiteral(r"\abjad-invisible-music", site="before"),
+            note,
+            deactivate=True,
+            tag=tag,
+        )
+        #
+        abjad.attach(
+            abjad.LilyPondLiteral(
+                [
+                    r"\stopStaff",
+                    r"\once \override Staff.StaffSymbol.transparent = ##t",
+                    r"\startStaff",
+                ]
+            ),
             note,
             tag=abjad.Tag("baca.append_anchor_note(4)"),
+        )
+        #
+        abjad.attach(
+            # TODO: use override object once they exist and can be tagged
+            abjad.LilyPondLiteral(r"\once \override Accidental.stencil = ##f"),
+            note,
+            tag=abjad.Tag("baca.append_anchor_note(5)"),
         )
         #
         voice.append(note)

@@ -3097,6 +3097,7 @@ r"""
                         b'4.
                         %@% \abjad-invisible-music
                         \abjad-invisible-music-coloring
+                        \once \override Accidental.stencil = ##f
                         \stopStaff
                         \once \override Staff.StaffSymbol.transparent = ##t
                         \startStaff
@@ -3203,6 +3204,7 @@ r"""
                         b'4.
                         %@% \abjad-invisible-music
                         \abjad-invisible-music-coloring
+                        \once \override Accidental.stencil = ##f
                         \stopStaff
                         \once \override Staff.StaffSymbol.transparent = ##t
                         \startStaff
@@ -3397,6 +3399,7 @@ r"""
                         b'4.
                         %@% \abjad-invisible-music
                         \abjad-invisible-music-coloring
+                        \once \override Accidental.stencil = ##f
                         \stopStaff
                         \once \override Staff.StaffSymbol.transparent = ##t
                         \startStaff
@@ -3504,6 +3507,7 @@ r"""
                         b'4.
                         %@% \abjad-invisible-music
                         \abjad-invisible-music-coloring
+                        \once \override Accidental.stencil = ##f
                         \stopStaff
                         \once \override Staff.StaffSymbol.transparent = ##t
                         \startStaff
@@ -4219,6 +4223,7 @@ r"""
                         b'4.
                         %@% \abjad-invisible-music
                         \abjad-invisible-music-coloring
+                        \once \override Accidental.stencil = ##f
                         \stopStaff
                         \once \override Staff.StaffSymbol.transparent = ##t
                         \startStaff
