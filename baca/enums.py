@@ -38,9 +38,6 @@ class enums(enum.Enum):
     NOT_YET_REGISTERED = enum.auto()
     NOTE = enum.auto()
 
-    PHANTOM = enum.auto()
-    PHANTOM_MULTIMEASURE_REST = enum.auto()
-    PHANTOM_NOTE = enum.auto()
     PITCH = enum.auto()
 
     RHYTHM = enum.auto()

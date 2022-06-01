@@ -591,11 +591,7 @@ def _attach_shadow_tie_indicators(score):
 
 def _attach_sounds_during(score):
     for voice in abjad.iterate.components(score, abjad.Voice):
-        pleaves = []
-        for pleaf in _select.pleaves(voice):
-            if abjad.get.has_indicator(pleaf, _enums.PHANTOM):
-                continue
-            pleaves.append(pleaf)
+        pleaves = _select.pleaves(voice)
         if bool(pleaves):
             abjad.attach(_enums.SOUNDS_DURING_SEGMENT, voice)
 
@@ -894,7 +890,7 @@ def _check_all_music_in_part_containers(score):
 def _check_anchors_are_final(score):
     anchor_count, violators = 0, []
     for leaf in abjad.iterate.leaves(score):
-        if abjad.get.has_indicator(leaf, _enums.PHANTOM):
+        if abjad.get.has_indicator(leaf, (_enums.ANCHOR_NOTE, _enums.ANCHOR_SKIP)):
             anchor_count += 1
             next_leaf = abjad.get.leaf(leaf, 1)
             if next_leaf is not None:
@@ -1146,7 +1142,7 @@ def _collect_persistent_indicators(
         wrappers = []
         dictionary = abjad._getlib._get_persistent_wrappers(
             dependent_wrappers=dependent_wrappers,
-            omit_with_indicator=_enums.PHANTOM,
+            omit_with_indicator=(_enums.ANCHOR_NOTE, _enums.ANCHOR_SKIP),
         )
         for wrapper in dictionary.values():
             if isinstance(wrapper.unbundle_indicator(), do_not_persist_on_anchor_leaf):
@@ -1666,8 +1662,6 @@ def _label_duration_multipliers(score):
                 tag_ = tag_.append(_tags.MULTIMEASURE_REST)
             if abjad.get.has_indicator(leaf, _enums.NOTE):
                 tag_ = tag_.append(_tags.NOTE)
-            if abjad.get.has_indicator(leaf, _enums.PHANTOM):
-                tag_ = tag_.append(_tags.PHANTOM)
             if abjad.get.has_indicator(leaf, _enums.REST_VOICE):
                 tag_ = tag_.append(_tags.REST_VOICE)
             abjad.attach(markup, leaf, deactivate=True, direction=abjad.UP, tag=tag_)
@@ -1908,10 +1902,8 @@ def _make_global_skips(
     if append_anchor_skip:
         tag = _tags.function_name(_frame(), n=3)
         tag = tag.append(_tags.ANCHOR_SKIP)
-        tag = tag.append(_tags.PHANTOM)
         skip = abjad.Skip(1, multiplier=(1, 4), tag=tag)
         abjad.attach(_enums.ANCHOR_SKIP, skip)
-        abjad.attach(_enums.PHANTOM, skip)
         global_skips.append(skip)
         if time_signature != abjad.TimeSignature((1, 4)):
             time_signature = abjad.TimeSignature((1, 4))
@@ -2387,7 +2379,6 @@ def _style_anchor_notes(score):
             continue
         _append_tag_to_wrappers(note, _tags.function_name(_frame()))
         _append_tag_to_wrappers(note, _tags.ANCHOR_NOTE)
-        _append_tag_to_wrappers(note, _tags.PHANTOM)
 
 
 def _style_anchor_skip(score):
@@ -2400,16 +2391,13 @@ def _style_anchor_skip(score):
             abjad.detach(literal, skip)
     tag = _tags.function_name(_frame(), n=1)
     tag = tag.append(_tags.ANCHOR_SKIP)
-    tag = tag.append(_tags.PHANTOM)
     _append_tag_to_wrappers(skip, tag)
     tag = _tags.function_name(_frame(), n=2)
-    tag = tag.append(_tags.PHANTOM)
     tag = tag.append(_tags.ANCHOR_SKIP)
     abjad.attach(
         abjad.LilyPondLiteral(r"\baca-time-signature-transparent"), skip, tag=tag
     )
     tag = _tags.function_name(_frame(), n=3)
-    tag = tag.append(_tags.PHANTOM)
     tag = tag.append(_tags.ANCHOR_SKIP)
     abjad.attach(
         abjad.LilyPondLiteral(
@@ -2443,7 +2431,7 @@ def _style_fermata_measures(
         empty_fermata_measure_start_offsets.append(timespan.start_offset)
     for staff in abjad.iterate.components(score, abjad.Staff):
         for leaf in abjad.iterate.leaves(staff):
-            if abjad.get.has_indicator(leaf, _enums.PHANTOM):
+            if abjad.get.has_indicator(leaf, (_enums.ANCHOR_NOTE, _enums.ANCHOR_SKIP)):
                 continue
             start_offset = abjad.get.timespan(leaf).start_offset
             if start_offset not in fermata_start_offsets:
@@ -2458,8 +2446,9 @@ def _style_fermata_measures(
             previous_staff_lines = abjad.get.effective(leaf, _indicators.StaffLines)
             previous_bar_extent = abjad.get.effective(leaf, _indicators.BarExtent)
             next_leaf = abjad.get.leaf(leaf, 1)
+            anchors = (_enums.ANCHOR_NOTE, _enums.ANCHOR_SKIP)
             if next_leaf is not None:
-                if abjad.get.has_indicator(next_leaf, _enums.PHANTOM):
+                if abjad.get.has_indicator(next_leaf, anchors):
                     next_leaf = None
             next_staff_lines = None
             if next_leaf is not None:
@@ -2648,18 +2637,15 @@ def append_anchor_note() -> _commands.GenericCommand:
         tag = tag.append(_tags.ANCHOR_NOTE)
         tag = tag.append(_tags.HIDDEN)
         tag = tag.append(_tags.NOTE)
-        tag = tag.append(_tags.PHANTOM)
         note = abjad.Note("c'1", multiplier=(1, 4), tag=tag)
         abjad.attach(_enums.ANCHOR_NOTE, note)
         abjad.attach(_enums.HIDDEN, note)
         abjad.attach(_enums.NOT_YET_PITCHED, note)
         abjad.attach(_enums.NOTE, note)
-        abjad.attach(_enums.PHANTOM, note)
         #
         tag = abjad.Tag("baca.append_anchor_note(2)")
         tag = tag.append(_tags.ANCHOR_NOTE)
         tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
-        tag = tag.append(_tags.PHANTOM)
         tag = tag.append(_tags.NOTE)
         literal = abjad.LilyPondLiteral(
             r"\abjad-invisible-music-coloring", site="before"
@@ -2669,7 +2655,6 @@ def append_anchor_note() -> _commands.GenericCommand:
         tag = abjad.Tag("baca.append_anchor_note(3)")
         tag = tag.append(_tags.ANCHOR_NOTE)
         tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
-        tag = tag.append(_tags.PHANTOM)
         tag = tag.append(_tags.NOTE)
         literal = abjad.LilyPondLiteral(r"\abjad-invisible-music", site="before")
         abjad.attach(literal, note, deactivate=True, tag=tag)

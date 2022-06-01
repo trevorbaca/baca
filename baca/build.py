@@ -656,8 +656,8 @@ def handle_build_tags(_sections_directory):
             return True
         return False
 
-    def match_phantom_should_activate(tags):
-        if baca.tags.PHANTOM not in tags:
+    def match_anchor_should_activate(tags):
+        if baca.tags.ANCHOR_NOTE not in tags and baca.tags.ANCHOR_SKIP not in tags:
             return False
         if baca.tags.ONE_VOICE_COMMAND in tags:
             return True
@@ -667,8 +667,8 @@ def handle_build_tags(_sections_directory):
             return True
         return False
 
-    def match_phantom_should_deactivate(tags):
-        if baca.tags.PHANTOM not in tags:
+    def match_anchor_should_deactivate(tags):
+        if baca.tags.ANCHOR_NOTE not in tags and baca.tags.ANCHOR_SKIP not in tags:
             return False
         if baca.tags.SPANNER_START in tags and baca.tags.LEFT_BROKEN in tags:
             return True
@@ -700,25 +700,35 @@ def handle_build_tags(_sections_directory):
             undo=True,
         ),
         baca.jobs.show_tag(
-            _sections_directory, baca.tags.PHANTOM, skip_file_name=final_ily_name
+            _sections_directory, baca.tags.ANCHOR_NOTE, skip_file_name=final_ily_name
+        ),
+        baca.jobs.show_tag(
+            _sections_directory, baca.tags.ANCHOR_SKIP, skip_file_name=final_ily_name
         ),
         baca.jobs.show_tag(
             _sections_directory,
-            baca.tags.PHANTOM,
+            baca.tags.ANCHOR_NOTE,
             prepend_empty_chord=True,
             skip_file_name=final_ily_name,
             undo=True,
         ),
         baca.jobs.show_tag(
             _sections_directory,
-            "phantom-should-activate",
-            match=match_phantom_should_activate,
+            baca.tags.ANCHOR_SKIP,
+            prepend_empty_chord=True,
+            skip_file_name=final_ily_name,
+            undo=True,
+        ),
+        baca.jobs.show_tag(
+            _sections_directory,
+            "anchor-should-activate",
+            match=match_anchor_should_activate,
             skip_file_name=final_ily_name,
         ),
         baca.jobs.show_tag(
             _sections_directory,
-            "phantom-should-deactivate",
-            match=match_phantom_should_deactivate,
+            "anchor-should-deactivate",
+            match=match_anchor_should_deactivate,
             skip_file_name=final_ily_name,
             undo=True,
         ),
