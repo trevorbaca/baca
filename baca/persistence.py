@@ -1910,19 +1910,15 @@ r"""
 
 ..  container:: example
 
-    Margin markups.
+    Short instrument names.
 
     ..  container:: example
 
-        Margin markup for examples:
+        Short instrument names for examples:
 
-        >>> margin_markups = {}
-        >>> margin_markups["I+II"] = abjad.MarginMarkup(
-        ...     markup=abjad.Markup(r"\markup I+II"),
-        ... )
-        >>> margin_markups["III+IV"] = abjad.MarginMarkup(
-        ...     markup=abjad.Markup(r"\markup III+IV"),
-        ... )
+        >>> short_instrument_names = {}
+        >>> short_instrument_names["I+II"] = abjad.ShortInstrumentName(r"\markup I+II")
+        >>> short_instrument_names["III+IV"] = abjad.ShortInstrumentName(r"\markup III+IV")
         >>> breaks = baca.breaks(
         ...     baca.page(
         ...         1,
@@ -1933,17 +1929,17 @@ r"""
 
     ..  container:: example
 
-        Explicit margin markup color blue and redraw dull blue:
+        Explicit short instrument names color blue and redraw dull blue:
 
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     margin_markups=margin_markups,
+        ...     short_instrument_names=short_instrument_names,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
-        ...     baca.margin_markup(margin_markups["I+II"]),
+        ...     baca.short_instrument_name(short_instrument_names["I+II"]),
         ... )
 
         >>> _, _ = baca.interpreter(
@@ -1951,7 +1947,7 @@ r"""
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     first_section=True,
-        ...     margin_markups=commands.margin_markups,
+        ...     short_instrument_names=commands.short_instrument_names,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(
@@ -2012,7 +2008,7 @@ r"""
         >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.tag.left_shift_tags(text)
-        >>> tags_ = baca.tags.margin_markup_color_tags()
+        >>> tags_ = baca.tags.short_instrument_name_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.tag.left_shift_tags(text)
@@ -2058,7 +2054,7 @@ r"""
                 >>
             }
 
-        >>> tags_ = baca.tags.margin_markup_color_tags()
+        >>> tags_ = baca.tags.short_instrument_name_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -2103,17 +2099,17 @@ r"""
                 >>
             }
 
-        Even after previous margin markup:
+        Even after previous short instrument name:
 
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     margin_markups=margin_markups,
+        ...     short_instrument_names=short_instrument_names,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
-        ...     baca.margin_markup(margin_markups["III+IV"]),
+        ...     baca.short_instrument_name(short_instrument_names["III+IV"]),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -2121,7 +2117,7 @@ r"""
         >>> persist["persistent_indicators"]["Music_Staff"] = [
         ...     baca.Memento(
         ...         context="MusicVoice",
-        ...         manifest="margin_markups",
+        ...         manifest="short_instrument_names",
         ...         value="I+II",
         ...     )
         ... ]
@@ -2129,7 +2125,7 @@ r"""
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     margin_markups=commands.margin_markups,
+        ...     short_instrument_names=commands.short_instrument_names,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -2194,7 +2190,7 @@ r"""
         >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.tag.left_shift_tags(text)
-        >>> tags_ = baca.tags.margin_markup_color_tags()
+        >>> tags_ = baca.tags.short_instrument_name_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.tag.left_shift_tags(text)
@@ -2242,7 +2238,7 @@ r"""
                 >>
             }
 
-        >>> tags_ = baca.tags.margin_markup_color_tags()
+        >>> tags_ = baca.tags.short_instrument_name_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -2291,11 +2287,11 @@ r"""
 
     ..  container:: example
 
-        Reapplied margin markup color green and redraw dull green:
+        Reapplied short instrument names color green and redraw dull green:
 
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     margin_markups=margin_markups,
+        ...     short_instrument_names=short_instrument_names,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
@@ -2309,7 +2305,7 @@ r"""
         >>> persist["persistent_indicators"]["Music_Staff"] = [
         ...     baca.Memento(
         ...         context="MusicVoice",
-        ...         manifest="margin_markups",
+        ...         manifest="short_instrument_names",
         ...         value="I+II",
         ...     )
         ... ]
@@ -2317,7 +2313,7 @@ r"""
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     margin_markups=commands.margin_markups,
+        ...     short_instrument_names=commands.short_instrument_names,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -2382,7 +2378,7 @@ r"""
         >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.tag.left_shift_tags(text)
-        >>> tags_ = baca.tags.margin_markup_color_tags()
+        >>> tags_ = baca.tags.short_instrument_name_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.tag.left_shift_tags(text)
@@ -2430,7 +2426,7 @@ r"""
                 >>
             }
 
-        >>> tags_ = baca.tags.margin_markup_color_tags()
+        >>> tags_ = baca.tags.short_instrument_name_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -2479,7 +2475,7 @@ r"""
 
     ..  container:: example
 
-        Redundant margin markup color pink and redraw dull pink:
+        Redundant short instrument names color pink and redraw dull pink:
 
         >>> score = baca.docs.make_empty_score(1)
         >>> breaks = baca.breaks(
@@ -2490,15 +2486,15 @@ r"""
         ...     ),
         ... )
         >>> commands = baca.CommandAccumulator(
-        ...     margin_markups=margin_markups,
+        ...     short_instrument_names=short_instrument_names,
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
-        ...     baca.margin_markup(margin_markups["I+II"]),
+        ...     baca.short_instrument_name(short_instrument_names["I+II"]),
         ...     baca.new(
-        ...         baca.margin_markup(margin_markups["I+II"]),
+        ...         baca.short_instrument_name(short_instrument_names["I+II"]),
         ...         map=lambda _: baca.select.leaves(_)[1:2],
         ...     ),
         ... )
@@ -2508,7 +2504,7 @@ r"""
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     first_section=True,
-        ...     margin_markups=commands.margin_markups,
+        ...     short_instrument_names=commands.short_instrument_names,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(
@@ -2580,7 +2576,7 @@ r"""
         >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.tag.left_shift_tags(text)
-        >>> tags_ = baca.tags.margin_markup_color_tags()
+        >>> tags_ = baca.tags.short_instrument_name_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.tag.left_shift_tags(text)
@@ -2637,7 +2633,7 @@ r"""
                 >>
             }
 
-        >>> tags_ = baca.tags.margin_markup_color_tags()
+        >>> tags_ = baca.tags.short_instrument_name_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -2704,14 +2700,14 @@ r"""
         ...     ),
         ... )
         >>> commands = baca.CommandAccumulator(
-        ...     margin_markups=margin_markups,
+        ...     short_instrument_names=short_instrument_names,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
-        ...     baca.margin_markup(margin_markups["I+II"]),
+        ...     baca.short_instrument_name(short_instrument_names["I+II"]),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -2719,7 +2715,7 @@ r"""
         >>> persist["persistent_indicators"]["Music_Staff"] = [
         ...     baca.Memento(
         ...         context="MusicVoice",
-        ...         manifest="margin_markups",
+        ...         manifest="short_instrument_names",
         ...         value="I+II",
         ...     )
         ... ]
@@ -2727,7 +2723,7 @@ r"""
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
-        ...     margin_markups=commands.margin_markups,
+        ...     short_instrument_names=commands.short_instrument_names,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -2792,7 +2788,7 @@ r"""
         >>> score = lilypond_file["Score"]
         >>> text = abjad.lilypond(score)
         >>> text = abjad.tag.left_shift_tags(text)
-        >>> tags_ = baca.tags.margin_markup_color_tags()
+        >>> tags_ = baca.tags.short_instrument_name_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.tag.left_shift_tags(text)
@@ -2840,7 +2836,7 @@ r"""
                 >>
             }
 
-        >>> tags_ = baca.tags.margin_markup_color_tags()
+        >>> tags_ = baca.tags.short_instrument_name_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
@@ -2889,7 +2885,7 @@ r"""
 
     ..  container:: example
 
-        Multiple margin markup are allowed so long as only one is active:
+        Multiple short instrument names are allowed so long as only one is active:
 
         >>> score = baca.docs.make_empty_score(1)
         >>> breaks = baca.breaks(
@@ -2900,7 +2896,7 @@ r"""
         ...     ),
         ... )
         >>> commands = baca.CommandAccumulator(
-        ...     margin_markups=margin_markups,
+        ...     short_instrument_names=short_instrument_names,
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ... )
         >>> commands(
@@ -2908,16 +2904,16 @@ r"""
         ...     baca.make_notes(),
         ...     baca.tag(
         ...         baca.tags.NOT_PARTS,
-        ...         baca.margin_markup(margin_markups["I+II"]),
+        ...         baca.short_instrument_name(short_instrument_names["I+II"]),
         ...     ),
         ...     baca.tag(
         ...         baca.tags.NOT_PARTS,
-        ...         baca.margin_markup(margin_markups["III+IV"]),
+        ...         baca.short_instrument_name(short_instrument_names["III+IV"]),
         ...         deactivate=True,
         ...     ),
         ...     baca.tag(
         ...         baca.tags.NOT_PARTS,
-        ...         baca.margin_markup(margin_markups["III+IV"]),
+        ...         baca.short_instrument_name(short_instrument_names["III+IV"]),
         ...         deactivate=True,
         ...     ),
         ... )
@@ -2927,7 +2923,7 @@ r"""
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     first_section=True,
-        ...     margin_markups=commands.margin_markups,
+        ...     short_instrument_names=commands.short_instrument_names,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     spacing=baca.SpacingSpecifier(
@@ -2975,10 +2971,8 @@ r"""
                     }
                     \context Voice = "MusicVoice"
                     {
-                        \set Staff.shortInstrumentName =
-                        \markup I+II
-                        %@% \set Staff.shortInstrumentName =
-                        %@% \markup III+IV
+                        \set Staff.shortInstrumentName = \markup I+II
+                        %@% \set Staff.shortInstrumentName = \markup III+IV
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         %@% \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'2
@@ -2986,10 +2980,8 @@ r"""
                         %@% ^ \baca-explicit-indicator-markup "[“III+IV”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         %@% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
-                        \set Staff.shortInstrumentName =
-                        \markup I+II
-                        \set Staff.shortInstrumentName =
-                        \markup III+IV
+                        \set Staff.shortInstrumentName = \markup I+II
+                        \set Staff.shortInstrumentName = \markup III+IV
                         b'2
                         b'2
                     }

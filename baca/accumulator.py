@@ -152,8 +152,8 @@ class CommandAccumulator:
         "commands",
         "functions",
         "instruments",
-        "margin_markups",
         "metronome_marks",
+        "short_instrument_names",
         "skips_instead_of_rests",
         "time_signatures",
         "voice_abbreviations",
@@ -164,8 +164,8 @@ class CommandAccumulator:
         self,
         *functions,
         instruments=None,
-        margin_markups=None,
         metronome_marks=None,
+        short_instrument_names=None,
         skips_instead_of_rests=False,
         time_signatures=None,
         voice_abbreviations=None,
@@ -174,8 +174,8 @@ class CommandAccumulator:
         self.functions = functions or ()
         self.commands = []
         self.instruments = instruments
-        self.margin_markups = margin_markups
         self.metronome_marks = metronome_marks
+        self.short_instrument_names = short_instrument_names
         self.skips_instead_of_rests = skips_instead_of_rests
         self.time_signatures = _initialize_time_signatures(time_signatures)
         self.voice_abbreviations = voice_abbreviations or {}

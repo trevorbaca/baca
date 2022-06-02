@@ -137,14 +137,14 @@ def _attach_latent_indicator_alert(
             tag = _tags.REDUNDANT_INSTRUMENT_ALERT
         left, right = "(", ")"
     else:
-        assert isinstance(wrapper.unbundle_indicator(), abjad.MarginMarkup)
+        assert isinstance(wrapper.unbundle_indicator(), abjad.ShortInstrumentName)
         if status == "explicit":
-            tag = _tags.EXPLICIT_MARGIN_MARKUP_ALERT
+            tag = _tags.EXPLICIT_SHORT_INSTRUMENT_NAME_ALERT
         elif status == "reapplied":
-            tag = _tags.REAPPLIED_MARGIN_MARKUP_ALERT
+            tag = _tags.REAPPLIED_SHORT_INSTRUMENT_NAME_ALERT
         else:
             assert status == "redundant", repr(status)
-            tag = _tags.REDUNDANT_MARGIN_MARKUP_ALERT
+            tag = _tags.REDUNDANT_SHORT_INSTRUMENT_NAME_ALERT
         left, right = "[", "]"
     assert isinstance(tag, abjad.Tag), repr(tag)
     string = f"{left}{key}{right}"
@@ -184,7 +184,7 @@ def _indicator_to_grob(indicator):
         return "InstrumentName"
     elif isinstance(indicator, abjad.MetronomeMark):
         return "TextScript"
-    elif isinstance(indicator, abjad.MarginMarkup):
+    elif isinstance(indicator, abjad.ShortInstrumentName):
         return "InstrumentName"
     elif isinstance(indicator, _indicators.StaffLines):
         return "StaffSymbol"
@@ -205,8 +205,8 @@ def _indicator_to_key(indicator, manifests):
         key = _get_key(manifests["abjad.Instrument"], indicator)
     elif isinstance(indicator, abjad.MetronomeMark):
         key = _get_key(manifests["abjad.MetronomeMark"], indicator)
-    elif isinstance(indicator, abjad.MarginMarkup):
-        key = _get_key(manifests["abjad.MarginMarkup"], indicator)
+    elif isinstance(indicator, abjad.ShortInstrumentName):
+        key = _get_key(manifests["abjad.ShortInstrumentName"], indicator)
     elif isinstance(indicator, abjad.TimeSignature):
         key = f"{indicator.numerator}/{indicator.denominator}"
     elif isinstance(indicator, _memento.PersistentOverride):
@@ -352,13 +352,13 @@ def remove_reapplied_wrappers(leaf, item):
         "CLEF",
         "DYNAMIC",
         "INSTRUMENT",
-        "MARGIN_MARKUP",
         "METRONOME_MARK",
         "OTTAVA",
         "PEDAL",
         "PERSISTENT_OVERRIDE",
         "PHRASING_SLUR",
         "REPEAT_TIE",
+        "SHORT_INSTRUMENT_NAME",
         "SLUR",
         "STAFF_LINES",
         "TIE",
@@ -497,7 +497,7 @@ def treat_persistent_wrapper(manifests, wrapper, status):
         existing_tag=existing_tag,
     )
     if isinstance(
-        wrapper.unbundle_indicator(), abjad.Instrument | abjad.MarginMarkup
+        wrapper.unbundle_indicator(), abjad.Instrument | abjad.ShortInstrumentName
     ) and not getattr(wrapper.unbundle_indicator(), "hide", False):
         strings = wrapper.unbundle_indicator()._get_lilypond_format(context=context)
         literal = abjad.LilyPondLiteral(strings, site="absolute_after")

@@ -7932,7 +7932,7 @@ def marcato(
     )
 
 
-def margin_markup(
+def short_instrument_name(
     argument: str,
     selector=lambda _: abjad.select.leaf(_, 0),
     *,
@@ -7944,19 +7944,19 @@ def margin_markup(
 
     ..  container:: example
 
-        >>> margin_markups = {}
+        >>> short_instrument_names = {}
         >>> markup = abjad.Markup(r"\markup Fl.")
-        >>> margin_markups["Fl."] = abjad.MarginMarkup(markup=markup)
+        >>> short_instrument_names["Fl."] = abjad.ShortInstrumentName(markup)
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
-        ...     margin_markups=margin_markups,
+        ...     short_instrument_names=short_instrument_names,
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
 
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(repeat_ties=True),
-        ...     baca.margin_markup(r"\markup Fl."),
+        ...     baca.short_instrument_name(r"\markup Fl."),
         ...     baca.pitches("E4 F4"),
         ... )
 
@@ -7965,7 +7965,7 @@ def margin_markup(
         ...     commands.commands,
         ...     commands.time_signatures,
         ...     first_section=True,
-        ...     margin_markups=commands.margin_markups,
+        ...     short_instrument_names=commands.short_instrument_names,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -8010,17 +8010,17 @@ def margin_markup(
     """
     if isinstance(argument, str):
         markup = abjad.Markup(argument)
-        margin_markup = abjad.MarginMarkup(context=context, markup=markup)
+        short_instrument_name = abjad.ShortInstrumentName(markup, context=context)
     elif isinstance(argument, abjad.Markup):
         markup = abjad.Markup(argument)
-        margin_markup = abjad.MarginMarkup(context=context, markup=markup)
-    elif isinstance(argument, abjad.MarginMarkup):
-        margin_markup = dataclasses.replace(argument, context=context)
+        short_instrument_name = abjad.ShortInstrumentName(markup, context=context)
+    elif isinstance(argument, abjad.ShortInstrumentName):
+        short_instrument_name = dataclasses.replace(argument, context=context)
     else:
         raise TypeError(argument)
-    assert isinstance(margin_markup, abjad.MarginMarkup)
+    assert isinstance(short_instrument_name, abjad.ShortInstrumentName)
     command = IndicatorCommand(
-        indicators=[margin_markup],
+        indicators=[short_instrument_name],
         selector=selector,
         tags=[_tags.function_name(_frame())],
     )

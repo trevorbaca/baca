@@ -663,22 +663,22 @@ def _bundle_runtime(
     already_reapplied_contexts=None,
     instruments=None,
     manifests=None,
-    margin_markups=None,
     metronome_marks=None,
     offset_to_measure_number=None,
     previous_persistent_indicators=None,
     previous_section_voice_metadata=None,
+    short_instrument_names=None,
 ):
     runtime = {}
     runtime["allows_instrument"] = allows_instrument
     runtime["already_reapplied_contexts"] = already_reapplied_contexts
     runtime["instruments"] = instruments
     runtime["manifests"] = manifests
-    runtime["margin_markups"] = margin_markups
     runtime["metronome_marks"] = metronome_marks
     runtime["offset_to_measure_number"] = offset_to_measure_number or {}
     runtime["previous_persistent_indicators"] = previous_persistent_indicators
     runtime["previous_section_voice_metadata"] = previous_section_voice_metadata
+    runtime["short_instrument_names"] = short_instrument_names
     return runtime
 
 
@@ -932,19 +932,19 @@ def _check_duplicate_part_assignments(dictionary, part_manifest):
         raise Exception(message)
 
 
-def _check_persistent_indicators(do_not_require_margin_markup, score):
+def _check_persistent_indicators(do_not_require_short_instrument_names, score):
     indicator = _enums.SOUNDS_DURING_SEGMENT
     for voice in abjad.iterate.components(score, abjad.Voice):
         if not abjad.get.has_indicator(voice, indicator):
             continue
         for i, leaf in enumerate(abjad.iterate.leaves(voice)):
             _check_persistent_indicators_for_leaf(
-                do_not_require_margin_markup, leaf, i, voice.name
+                do_not_require_short_instrument_names, leaf, i, voice.name
             )
 
 
 def _check_persistent_indicators_for_leaf(
-    do_not_require_margin_markup, leaf, i, voice_name
+    do_not_require_short_instrument_names, leaf, i, voice_name
 ):
     prototype = (
         _indicators.Accelerando,
@@ -959,8 +959,8 @@ def _check_persistent_indicators_for_leaf(
     if instrument is None:
         message = f"{voice_name} leaf {i} ({leaf!s}) missing instrument."
         raise Exception(message)
-    if not do_not_require_margin_markup:
-        markup = abjad.get.effective(leaf, abjad.MarginMarkup)
+    if not do_not_require_short_instrument_names:
+        markup = abjad.get.effective(leaf, abjad.ShortInstrumentName)
         if markup is None:
             message = f"{voice_name} leaf {i} ({leaf!s}) missing margin markup."
             raise Exception(message)
@@ -1012,22 +1012,22 @@ def _clean_up_repeat_tie_direction(score):
 
 
 def _clone_section_initial_short_instrument_name(score):
-    prototype = abjad.MarginMarkup
+    prototype = abjad.ShortInstrumentName
     for context in abjad.iterate.components(score, abjad.Context):
         first_leaf = abjad.get.leaf(context, 0)
         if abjad.get.has_indicator(first_leaf, abjad.InstrumentName):
             continue
-        margin_markup = abjad.get.indicator(first_leaf, prototype)
-        if margin_markup is None:
+        short_instrument_name = abjad.get.indicator(first_leaf, prototype)
+        if short_instrument_name is None:
             continue
-        if isinstance(margin_markup.markup, str):
-            markup = margin_markup.markup
+        if isinstance(short_instrument_name.markup, str):
+            markup = short_instrument_name.markup
         else:
-            markup = dataclasses.replace(margin_markup.markup)
+            markup = dataclasses.replace(short_instrument_name.markup)
         instrument_name = abjad.InstrumentName(
             markup,
-            context=margin_markup.context,
-            site=margin_markup.site,
+            context=short_instrument_name.context,
+            site=short_instrument_name.site,
         )
         abjad.attach(
             instrument_name,
@@ -1074,9 +1074,9 @@ def _collect_metadata(
         metadata_["duration"] = duration
     if fermata_measure_numbers:
         metadata_["fermata_measure_numbers"] = fermata_measure_numbers
-    dictionary = metadata.get("first_appearance_margin_markup")
+    dictionary = metadata.get("first_appearance_short_instrument_names")
     if dictionary:
-        metadata_["first_appearance_margin_markup"] = dictionary
+        metadata_["first_appearance_short_instrument_names"] = dictionary
     metadata_["first_measure_number"] = first_measure_number
     metadata_["final_measure_number"] = final_measure_number
     if final_measure_is_fermata is True:
@@ -1132,7 +1132,7 @@ def _collect_persistent_indicators(
     do_not_persist_on_anchor_leaf = (
         abjad.Instrument,
         abjad.MetronomeMark,
-        abjad.MarginMarkup,
+        abjad.ShortInstrumentName,
         abjad.TimeSignature,
     )
     for name, dependent_wrappers in name_to_wrappers.items():
@@ -1181,8 +1181,8 @@ def _collect_persistent_indicators(
                 manifest = "instruments"
             elif isinstance(indicator, abjad.MetronomeMark):
                 manifest = "metronome_marks"
-            elif isinstance(indicator, abjad.MarginMarkup):
-                manifest = "margin_markups"
+            elif isinstance(indicator, abjad.ShortInstrumentName):
+                manifest = "short_instrument_names"
             else:
                 prototype = type(indicator)
                 prototype = _prototype_string(prototype)
@@ -2083,10 +2083,10 @@ def _reapply_persistent_indicators(
             if memento.manifest is not None:
                 if memento.manifest == "instruments":
                     dictionary = manifests["abjad.Instrument"]
-                elif memento.manifest == "margin_markups":
-                    dictionary = manifests["abjad.MarginMarkup"]
                 elif memento.manifest == "metronome_marks":
                     dictionary = manifests["abjad.MetronomeMark"]
+                elif memento.manifest == "short_instrument_names":
+                    dictionary = manifests["abjad.ShortInstrumentName"]
                 else:
                     raise Exception(memento.manifest)
             else:
@@ -2141,7 +2141,7 @@ def _reapply_persistent_indicators(
             attached = False
             function_name = _tags.function_name(_frame(), n=3)
             tag = edition.append(function_name)
-            if isinstance(previous_indicator, abjad.MarginMarkup):
+            if isinstance(previous_indicator, abjad.ShortInstrumentName):
                 if _tags.NOT_PARTS.string not in tag.string:
                     tag = tag.append(_tags.NOT_PARTS)
             try:
@@ -2742,7 +2742,7 @@ def interpreter(
     color_octaves=False,
     comment_measure_numbers=False,
     deactivate=None,
-    do_not_require_margin_markup=False,
+    do_not_require_short_instrument_names=False,
     error_on_not_yet_pitched=False,
     fermata_extra_offset_y=2.5,
     fermata_measure_empty_overrides=(),
@@ -2755,7 +2755,6 @@ def interpreter(
     instruments=None,
     label_clock_time=False,
     magnify_staves=None,
-    margin_markups=None,
     metadata=None,
     metronome_marks=None,
     moment_markup=None,
@@ -2770,6 +2769,7 @@ def interpreter(
     remove_tags=None,
     section_number=None,
     shift_measure_initial_clefs=False,
+    short_instrument_names=None,
     skips_instead_of_rests=False,
     spacing=None,
     stage_markup=None,
@@ -2788,7 +2788,7 @@ def interpreter(
     assert isinstance(check_wellformedness, bool)
     if deactivate is not None:
         assert all(isinstance(_, abjad.Tag) for _ in deactivate)
-    assert isinstance(do_not_require_margin_markup, bool)
+    assert isinstance(do_not_require_short_instrument_names, bool)
     assert all(0 < _ for _ in fermata_measure_empty_overrides)
     assert isinstance(final_section, bool)
     first_measure_number = _adjust_first_measure_number(
@@ -2800,8 +2800,8 @@ def interpreter(
     global_skips = score["GlobalSkips"]
     manifests = {
         "abjad.Instrument": instruments,
-        "abjad.MarginMarkup": margin_markups,
         "abjad.MetronomeMark": metronome_marks,
+        "abjad.ShortInstrumentName": short_instrument_names,
     }
     measure_count = len(time_signatures)
     metadata = dict(metadata or {})
@@ -2902,7 +2902,7 @@ def interpreter(
             color_out_of_range_pitches(score)
             if check_persistent_indicators:
                 _check_persistent_indicators(
-                    do_not_require_margin_markup,
+                    do_not_require_short_instrument_names,
                     score,
                 )
             color_repeat_pitch_classes(score)

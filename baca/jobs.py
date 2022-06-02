@@ -187,27 +187,27 @@ def color_instruments(path, undo=False):
         )
 
 
-def color_margin_markup(path, undo=False):
+def color_short_instrument_names(path, undo=False):
     """
-    Colors margin markup.
+    Colors short instrument names.
     """
-    name = "margin markup color"
+    name = "short instrument name color"
 
     def match(tags):
-        tags_ = _tags.margin_markup_color_tags(path)
+        tags_ = _tags.short_instrumet_name_color_tags(path)
         return bool(set(tags) & set(tags_))
 
     if undo:
         return Job(
             deactivate=(match, name),
             path=path,
-            title="Uncoloring margin markup ...",
+            title="Uncoloring short instrument names ...",
         )
     else:
         return Job(
             activate=(match, name),
             path=path,
-            title="Coloring margin markup ...",
+            title="Coloring short instrument names ...",
         )
 
 
