@@ -1042,7 +1042,7 @@ def _part_name_to_default_clef(path, part_name):
     instrument = instruments.get(key, None)
     if not instrument:
         raise Exception(f"can not find {key!r}.")
-    clef = abjad.Clef(instrument.allowable_clefs[0])
+    clef = abjad.Clef(instrument.clefs[0])
     return clef
 
 
