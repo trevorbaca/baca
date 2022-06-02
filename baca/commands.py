@@ -7612,6 +7612,54 @@ def hide_black_note_heads(
     )
 
 
+def instrument_name(
+    argument: str | list[str],
+    selector=lambda _: abjad.select.leaf(_, 0),
+    *,
+    context: str = "Staff",
+    hcenter_in: int | float | None = None,
+    literal: bool = False,
+) -> IndicatorCommand:
+    """
+    Attaches instrument name.
+    """
+    if literal is True or (isinstance(argument, str) and argument.startswith("\\")):
+        assert isinstance(argument, str), repr(argument)
+        assert argument.startswith("\\"), repr(argument)
+        instrument_name = abjad.InstrumentName(argument)
+    elif isinstance(argument, str):
+        width = hcenter_in or 16
+        string = rf'\markup \hcenter-in #{width} "{argument}"'
+        instrument_name = abjad.InstrumentName(string)
+    elif isinstance(argument, list) and len(argument) == 2:
+        width = hcenter_in or 16
+        line_1 = rf'\hcenter-in #{width} "{argument[0]}"'
+        line_2 = rf'\hcenter-in #{width} "{argument[1]}"'
+        string = rf"\markup \column {{ {line_1} {line_2} }}"
+        instrument_name = abjad.InstrumentName(string)
+    elif isinstance(argument, list) and len(argument) == 3:
+        width = hcenter_in or 16
+        line_1 = rf'\hcenter-in #{width} "{argument[0]}"'
+        line_2 = rf'\hcenter-in #{width} "{argument[1]}"'
+        line_3 = rf'\hcenter-in #{width} "{argument[2]}"'
+        string = rf"\markup \column {{ {line_1} {line_2} {line_3} }}"
+        instrument_name = abjad.InstrumentName(string)
+    elif isinstance(argument, abjad.Markup):
+        instrument_name = abjad.InstrumentName(argument)
+    elif isinstance(argument, abjad.InstrumentName):
+        instrument_name = argument
+    else:
+        raise TypeError(argument)
+    assert isinstance(instrument_name, abjad.InstrumentName)
+    instrument_name = dataclasses.replace(instrument_name, context=context)
+    command = IndicatorCommand(
+        indicators=[instrument_name],
+        selector=selector,
+        tags=[_tags.function_name(_frame()), _tags.NOT_PARTS],
+    )
+    return command
+
+
 def laissez_vibrer(
     selector=lambda _: _select.ptail(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
@@ -8846,54 +8894,6 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         tags=[_tags.function_name(_frame())],
     )
     return _command.suite(command_1, command_2)
-
-
-def start_markup(
-    argument: str | list[str],
-    selector=lambda _: abjad.select.leaf(_, 0),
-    *,
-    context: str = "Staff",
-    hcenter_in: int | float | None = None,
-    literal: bool = False,
-) -> IndicatorCommand:
-    """
-    Attaches start markup.
-    """
-    if literal is True or (isinstance(argument, str) and argument.startswith("\\")):
-        assert isinstance(argument, str), repr(argument)
-        assert argument.startswith("\\"), repr(argument)
-        start_markup = abjad.StartMarkup(markup=argument)
-    elif isinstance(argument, str):
-        width = hcenter_in or 16
-        string = rf'\markup \hcenter-in #{width} "{argument}"'
-        start_markup = abjad.StartMarkup(markup=string)
-    elif isinstance(argument, list) and len(argument) == 2:
-        width = hcenter_in or 16
-        line_1 = rf'\hcenter-in #{width} "{argument[0]}"'
-        line_2 = rf'\hcenter-in #{width} "{argument[1]}"'
-        string = rf"\markup \column {{ {line_1} {line_2} }}"
-        start_markup = abjad.StartMarkup(markup=string)
-    elif isinstance(argument, list) and len(argument) == 3:
-        width = hcenter_in or 16
-        line_1 = rf'\hcenter-in #{width} "{argument[0]}"'
-        line_2 = rf'\hcenter-in #{width} "{argument[1]}"'
-        line_3 = rf'\hcenter-in #{width} "{argument[2]}"'
-        string = rf"\markup \column {{ {line_1} {line_2} {line_3} }}"
-        start_markup = abjad.StartMarkup(markup=string)
-    elif isinstance(argument, abjad.Markup):
-        start_markup = abjad.StartMarkup(markup=argument)
-    elif isinstance(argument, abjad.StartMarkup):
-        start_markup = argument
-    else:
-        raise TypeError(argument)
-    assert isinstance(start_markup, abjad.StartMarkup)
-    start_markup = dataclasses.replace(start_markup, context=context)
-    command = IndicatorCommand(
-        indicators=[start_markup],
-        selector=selector,
-        tags=[_tags.function_name(_frame()), _tags.NOT_PARTS],
-    )
-    return command
 
 
 def stem_tremolo(

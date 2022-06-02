@@ -1015,7 +1015,7 @@ def _clone_section_initial_short_instrument_name(score):
     prototype = abjad.MarginMarkup
     for context in abjad.iterate.components(score, abjad.Context):
         first_leaf = abjad.get.leaf(context, 0)
-        if abjad.get.has_indicator(first_leaf, abjad.StartMarkup):
+        if abjad.get.has_indicator(first_leaf, abjad.InstrumentName):
             continue
         margin_markup = abjad.get.indicator(first_leaf, prototype)
         if margin_markup is None:
@@ -1024,13 +1024,13 @@ def _clone_section_initial_short_instrument_name(score):
             markup = margin_markup.markup
         else:
             markup = dataclasses.replace(margin_markup.markup)
-        start_markup = abjad.StartMarkup(
+        instrument_name = abjad.InstrumentName(
+            markup,
             context=margin_markup.context,
             site=margin_markup.site,
-            markup=markup,
         )
         abjad.attach(
-            start_markup,
+            instrument_name,
             first_leaf,
             tag=_tags.function_name(_frame()),
         )
