@@ -263,6 +263,7 @@ def _make_annotation_jobs(directory, *, undo=False):
     def _annotation_spanners(tags):
         tags_ = (
             baca.tags.MATERIAL_ANNOTATION_SPANNER,
+            baca.tags.MOMENT_ANNOTATION_SPANNER,
             baca.tags.PITCH_ANNOTATION_SPANNER,
             baca.tags.RHYTHM_ANNOTATION_SPANNER,
         )

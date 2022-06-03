@@ -1741,13 +1741,12 @@ def _label_moment_numbers(global_skips, moment_markup):
         measure_index = lmn - 1
         skip = skips[measure_index]
         tag = _tags.MOMENT_NUMBER
+        tag = tag.append(_tags.MOMENT_ANNOTATION_SPANNER)
         tag = tag.append(_tags.function_name(_frame()))
         if color is not None:
-            string = r"- \baca-start-xnm-colored-left-only"
-            string += f' "{value}" {color}'
+            string = rf'- \baca-start-xnm-colored-left-only "{value}" {color}'
         else:
-            string = r"- \baca-start-xnm-left-only"
-            string += f' "{value}"'
+            string = rf'- \baca-start-xnm-left-only "{value}"'
         start_text_span = abjad.StartTextSpan(
             command=r"\bacaStartTextSpanXNM", left_text=string
         )
@@ -1760,6 +1759,7 @@ def _label_moment_numbers(global_skips, moment_markup):
         )
         if 0 < i:
             tag = _tags.MOMENT_NUMBER
+            tag = tag.append(_tags.MOMENT_ANNOTATION_SPANNER)
             tag = tag.append(_tags.function_name(_frame()))
             stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanXNM")
             abjad.attach(
@@ -1771,6 +1771,7 @@ def _label_moment_numbers(global_skips, moment_markup):
             )
     skip = skips[-1]
     tag = _tags.MOMENT_NUMBER
+    tag = tag.append(_tags.MOMENT_ANNOTATION_SPANNER)
     tag = tag.append(_tags.function_name(_frame()))
     stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanXNM")
     abjad.attach(
