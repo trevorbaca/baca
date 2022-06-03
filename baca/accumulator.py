@@ -131,7 +131,7 @@ def _unpack_scopes(scopes, abbreviations):
 
 
 def get_voice_names(score):
-    voice_names = ["GlobalSkips", "GlobalRests", "TimelineScope"]
+    voice_names = ["Skips", "Rests", "TimelineScope"]
     for voice in abjad.iterate.components(score, abjad.Voice):
         if voice.name is not None:
             voice_names.append(voice.name)

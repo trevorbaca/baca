@@ -320,7 +320,7 @@ def bar_line_transparent(
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "GlobalSkips"
+                    \context Voice = "Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1320,7 +1320,7 @@ def mmrest_color(
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "GlobalSkips"
+                    \context Voice = "Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1434,7 +1434,7 @@ def mmrest_text_color(
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "GlobalSkips"
+                    \context Voice = "Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1568,7 +1568,7 @@ def mmrest_text_extra_offset(
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "GlobalSkips"
+                    \context Voice = "Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1667,7 +1667,7 @@ def mmrest_text_padding(
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "GlobalSkips"
+                    \context Voice = "Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1765,7 +1765,7 @@ def mmrest_text_parent_center(
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "GlobalSkips"
+                    \context Voice = "Skips"
                     {
                         \time 4/8
                         s1 * 1/2
@@ -1864,7 +1864,7 @@ def mmrest_text_staff_padding(
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "GlobalSkips"
+                    \context Voice = "Skips"
                     {
                         \time 4/8
                         s1 * 1/2

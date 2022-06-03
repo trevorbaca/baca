@@ -35,7 +35,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
         {
             \context Staff = "Music_Staff"
             <<
-                \context Voice = "GlobalSkips"
+                \context Voice = "Skips"
                 {
                     \time 4/8
                     s1 * 1/2
@@ -127,7 +127,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
         {
             \context Staff = "Music_Staff"
             <<
-                \context Voice = "GlobalSkips"
+                \context Voice = "Skips"
                 {
                     \time 4/8
                     s1 * 1/2
@@ -251,7 +251,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
             <<
                 \context Staff = "Music_Staff_1"
                 <<
-                    \context Voice = "GlobalSkips"
+                    \context Voice = "Skips"
                     {
                         \time 6/4
                         s1 * 3/2
@@ -331,7 +331,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
         {
             \context Staff = "Music_Staff"
             <<
-                \context Voice = "GlobalSkips"
+                \context Voice = "Skips"
                 {
                     \time 4/8
                     s1 * 1/2
@@ -410,7 +410,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
         {
             \context Staff = "Music_Staff"
             <<
-                \context Voice = "GlobalSkips"
+                \context Voice = "Skips"
                 {
                     \time 4/8
                     s1 * 1/2
@@ -515,7 +515,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
         {
             \context Staff = "Music_Staff"
             <<
-                \context Voice = "GlobalSkips"
+                \context Voice = "Skips"
                 {
                     \time 1/16
                     s1 * 1/16
@@ -619,7 +619,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
         {
             \context Staff = "Music_Staff"
             <<
-                \context Voice = "GlobalSkips"
+                \context Voice = "Skips"
                 {
                     \time 1/16
                     s1 * 1/16

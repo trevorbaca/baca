@@ -49,12 +49,12 @@ def make_global_context():
     tag = _tags.function_name(_frame())
     global_rests = abjad.Context(
         lilypond_type="GlobalRests",
-        name="GlobalRests",
+        name="Rests",
         tag=tag,
     )
     global_skips = abjad.Context(
         lilypond_type="GlobalSkips",
-        name="GlobalSkips",
+        name="Skips",
         tag=tag,
     )
     global_context = abjad.Context(

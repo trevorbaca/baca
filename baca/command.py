@@ -249,7 +249,7 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "GlobalSkips"
+                    \context Voice = "Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -351,7 +351,7 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "GlobalSkips"
+                    \context Voice = "Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
@@ -505,7 +505,7 @@ def only_parts(command: Command | Suite) -> Command | Suite:
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "GlobalSkips"
+                    \context Voice = "Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8

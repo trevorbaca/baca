@@ -161,7 +161,7 @@ def beam(
             {
                 \context Staff = "Music_Staff"
                 <<
-                    \context Voice = "GlobalSkips"
+                    \context Voice = "Skips"
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8

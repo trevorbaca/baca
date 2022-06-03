@@ -67,10 +67,10 @@ def make_empty_score(*counts):
         <<
             \context GlobalContext = "GlobalContext"
             <<
-                \context GlobalRests = "GlobalRests"
+                \context GlobalRests = "Rests"
                 {
                 }
-                \context GlobalSkips = "GlobalSkips"
+                \context GlobalSkips = "Skips"
                 {
                 }
             >>
@@ -94,10 +94,10 @@ def make_empty_score(*counts):
         <<
             \context GlobalContext = "GlobalContext"
             <<
-                \context GlobalRests = "GlobalRests"
+                \context GlobalRests = "Rests"
                 {
                 }
-                \context GlobalSkips = "GlobalSkips"
+                \context GlobalSkips = "Skips"
                 {
                 }
             >>
@@ -130,10 +130,10 @@ def make_empty_score(*counts):
         <<
             \context GlobalContext = "GlobalContext"
             <<
-                \context GlobalRests = "GlobalRests"
+                \context GlobalRests = "Rests"
                 {
                 }
-                \context GlobalSkips = "GlobalSkips"
+                \context GlobalSkips = "Skips"
                 {
                 }
             >>
@@ -178,10 +178,10 @@ def make_empty_score(*counts):
         <<
             \context GlobalContext = "GlobalContext"
             <<
-                \context GlobalRests = "GlobalRests"
+                \context GlobalRests = "Rests"
                 {
                 }
-                \context GlobalSkips = "GlobalSkips"
+                \context GlobalSkips = "Skips"
                 {
                 }
             >>
