@@ -47,6 +47,54 @@ def _also_untagged(section_directory):
             untagged.parent.mkdir(parents=True)
         _print_file_handling(f"Writing {untagged} ...")
         untagged.write_text(string)
+    for name in ("music.ly", "music.ily", "layout.ly"):
+        tagged = section_directory / name
+        if not tagged.exists():
+            continue
+        safekeeping = section_directory / f"{name}.original"
+        shutil.copyfile(tagged, safekeeping)
+    color_persistent_indicators(section_directory, undo=True)
+    show_annotations(section_directory, undo=True)
+    for name in ("music.ly", "music.ily", "layout.ly"):
+        tagged = section_directory / name
+        if not tagged.exists():
+            continue
+        with tagged.open() as pointer:
+            lines = pointer.readlines()
+        lines_ = []
+        for line in lines:
+            if line.strip().startswith("%! "):
+                continue
+            if line.strip().startswith("%%% "):
+                continue
+            if line.strip().startswith("%@% "):
+                continue
+            if line.strip().startswith("% ") and line.strip().endswith(":"):
+                continue
+            lines_.append(line)
+        lines = lines_
+        string = "".join(lines)
+        # string = abjad.tag.remove_tags(string)
+        parts = []
+        for part in tagged.parts:
+            if part == os.path.sep:
+                pass
+            elif part == "Scores":
+                parts.append("bw")
+            else:
+                parts.append(part)
+        bw = "/" + os.path.sep.join(parts)
+        bw = pathlib.Path(bw)
+        if not bw.parent.is_dir():
+            bw.parent.mkdir(parents=True)
+        _print_file_handling(f"Writing {bw} ...")
+        bw.write_text(string)
+    for name in ("music.ly", "music.ily", "layout.ly"):
+        tagged = section_directory / name
+        if not tagged.exists():
+            continue
+        safekeeping = section_directory / f"{name}.original"
+        shutil.move(safekeeping, tagged)
 
 
 def _call_lilypond_on_music_ly_in_section(music_ly, music_pdf_mtime):

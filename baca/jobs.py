@@ -194,7 +194,7 @@ def color_short_instrument_names(path, undo=False):
     name = "short instrument name color"
 
     def match(tags):
-        tags_ = _tags.short_instrumet_name_color_tags(path)
+        tags_ = _tags.short_instrument_name_color_tags(path)
         return bool(set(tags) & set(tags_))
 
     if undo:

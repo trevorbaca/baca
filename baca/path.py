@@ -127,41 +127,6 @@ def add_metadatum(path, name, value, *, file_name="__metadata__"):
     write_metadata_py(path, metadata)
 
 
-def count(path, tag):
-    """
-    Counts ``tag`` in path.
-
-    Returns two pairs.
-
-    Pair 1 gives (active tags, activate lines).
-
-    Pair 2 gives (deactivated tags, deactivated lines).
-    """
-    assert isinstance(tag, str) or callable(tag), repr(tag)
-    assert path.is_file(), repr(path)
-    active_tags, active_lines = 0, 0
-    deactivated_tags, deactivated_lines = 0, 0
-    with open(path) as pointer:
-        last_line_had_tag = False
-        for line_ in pointer.readlines():
-            line = abjad.Line(line_)
-            if line.match(tag):
-                if line.is_active():
-                    active_lines += 1
-                    if not last_line_had_tag:
-                        active_tags += 1
-                else:
-                    deactivated_lines += 1
-                    if not last_line_had_tag:
-                        deactivated_tags += 1
-                last_line_had_tag = True
-            else:
-                last_line_had_tag = False
-    pair_1 = (active_tags, active_lines)
-    pair_2 = (deactivated_tags, deactivated_lines)
-    return pair_1, pair_2
-
-
 def deactivate(
     path,
     tag,

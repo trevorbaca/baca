@@ -9086,7 +9086,7 @@ def stop_trill(
     ``\stopTrillSpan`` appears after ``\set instrumentName`` commands (and probably other
     ``\set`` commands). Setting format slot to closing here positions ``\stopTrillSpan``
     after the leaf in question (which is required) and also draws ``\stopTrillSpan``
-    closer to the leaf in question, prior to ``\set instrumetName`` and other commands
+    closer to the leaf in question, prior to ``\set instrumentName`` and other commands
     positioned in the after slot.
 
     Eventually it will probably be necessary to model ``\stopTrillSpan`` with a dedicated
