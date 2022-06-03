@@ -804,6 +804,8 @@ def _call_all_commands(
                     scope_voice_name = command.scope.voice_name
                     if "MusicVoice" in scope_voice_name:
                         foo = scope_voice_name.replace("MusicVoice", "RestVoice")
+                    elif "Music" in scope_voice_name:
+                        foo = scope_voice_name.replace("Music", "Rests")
                     else:
                         assert "Voice" in scope_voice_name
                         foo = scope_voice_name.replace("Voice", "RestVoice")

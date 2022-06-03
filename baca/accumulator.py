@@ -137,6 +137,8 @@ def get_voice_names(score):
             voice_names.append(voice.name)
             if "MusicVoice" in voice.name:
                 name = voice.name.replace("MusicVoice", "RestVoice")
+            elif "Music" in voice.name:
+                name = voice.name.replace("Music", "Rests")
             else:
                 name = voice.name.replace("Voice", "RestVoice")
             voice_names.append(name)
