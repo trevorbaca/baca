@@ -74,7 +74,7 @@ def make_empty_score(*counts):
                 {
                 }
             >>
-            \context MusicContext = "Music_Context"
+            \context MusicContext = "MusicContext"
             {
                 \context Staff = "Music_Staff"
                 {
@@ -101,7 +101,7 @@ def make_empty_score(*counts):
                 {
                 }
             >>
-            \context MusicContext = "Music_Context"
+            \context MusicContext = "MusicContext"
             {
                 \context Staff = "Music_Staff"
                 <<
@@ -137,7 +137,7 @@ def make_empty_score(*counts):
                 {
                 }
             >>
-            \context MusicContext = "Music_Context"
+            \context MusicContext = "MusicContext"
             <<
                 \context StaffGroup = "Music_Staff_Group"
                 <<
@@ -185,7 +185,7 @@ def make_empty_score(*counts):
                 {
                 }
             >>
-            \context MusicContext = "Music_Context"
+            \context MusicContext = "MusicContext"
             <<
                 \context StaffGroup = "Music_Staff_Group"
                 <<
@@ -253,7 +253,7 @@ def make_empty_score(*counts):
         music,
         lilypond_type="MusicContext",
         simultaneous=simultaneous,
-        name="Music_Context",
+        name="MusicContext",
         tag=tag,
     )
 

@@ -74,7 +74,7 @@ def make_music_context(*contexts):
         contexts,
         lilypond_type="MusicContext",
         simultaneous=True,
-        name="Music_Context",
+        name="MusicContext",
         tag=tag,
     )
 

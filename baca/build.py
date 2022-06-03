@@ -24,6 +24,13 @@ def _also_untagged(section_directory):
             continue
         with tagged.open() as pointer:
             lines = pointer.readlines()
+        lines_ = []
+        for line in lines:
+            if line.strip().startswith("% "):
+                if line.strip().endswith(":"):
+                    continue
+            lines_.append(line)
+        lines = lines_
         string = "".join(lines)
         string = abjad.tag.remove_tags(string)
         parts = []
@@ -1122,20 +1129,20 @@ def make_layout_ly(
     if curtail_measure_count is not None:
         del context[curtail_measure_count:]
     context.lilypond_type = "PageLayout"
-    context.name = "Page_Layout"
+    context.name = "PageLayout"
     skips = baca.skips(context)
     for skip in skips:
         abjad.detach(abjad.TimeSignature, skip)
     score = lilypond_file["Score"]
-    del score["Music_Context"]
+    del score["MusicContext"]
     score = lilypond_file["Score"]
     tags = not do_not_tag
     if page_layout_context_only:
-        page_layout_context = score["Page_Layout"]
+        page_layout_context = score["PageLayout"]
         text = abjad.lilypond(page_layout_context, tags=tags)
     else:
         text = abjad.lilypond(score, tags=tags)
-    text = text.replace("GlobalSkips", "Page_Layout")
+    text = text.replace("GlobalSkips", "PageLayout")
     text = text.replace("Global.Skips", "Page.Layout")
     text = abjad.tag.left_shift_tags(text)
     layout_ly = layout_directory / file_name
@@ -1174,7 +1181,7 @@ def make_layout_ly(
     message += f" {baca.path.trim(layout_ly)} ..."
     _print_file_handling(message)
     bol_measure_numbers = []
-    skips = abjad.iterate.leaves(score["Page_Layout"], abjad.Skip)
+    skips = abjad.iterate.leaves(score["PageLayout"], abjad.Skip)
     for i, skip in enumerate(skips):
         for literal in abjad.get.indicators(skip, abjad.LilyPondLiteral):
             if literal.argument in (r"\break", r"\pageBreak"):

@@ -1983,7 +1983,7 @@ def _move_global_context(score):
     assert "GlobalRests" not in score
     global_skips = score["GlobalSkips"]
     global_skips.lilypond_type = "Voice"
-    music_context = score["Music_Context"]
+    music_context = score["MusicContext"]
     for component in abjad.iterate.components(music_context):
         if isinstance(component, abjad.Staff):
             first_music_staff = component
@@ -2009,7 +2009,7 @@ def _move_global_rests(
         return
     global_rests = score["GlobalRests"]
     score["GlobalContext"].remove(global_rests)
-    music_context = score["Music_Context"]
+    music_context = score["MusicContext"]
     if global_rests_in_topmost_staff is True:
         for staff in abjad.iterate.components(music_context, abjad.Staff):
             break
