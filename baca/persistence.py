@@ -1995,7 +1995,6 @@ r"""
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'4.
-                        ^ \baca-explicit-short-instrument-name-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
                         b'4.
@@ -2042,7 +2041,6 @@ r"""
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'4.
-                        ^ \baca-explicit-short-instrument-name-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
                         b'4.
@@ -2085,7 +2083,6 @@ r"""
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'4.
-                        ^ \baca-explicit-short-instrument-name-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
                         b'4.
@@ -2170,7 +2167,6 @@ r"""
                         \set Staff.shortInstrumentName = \markup III+IV
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'4.
-                        ^ \baca-explicit-short-instrument-name-markup "[“III+IV”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup III+IV
                         b'4.
@@ -2218,7 +2214,6 @@ r"""
                         \set Staff.shortInstrumentName = \markup III+IV
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'4.
-                        ^ \baca-explicit-short-instrument-name-markup "[“III+IV”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup III+IV
                         b'4.
@@ -2262,7 +2257,6 @@ r"""
                         \set Staff.shortInstrumentName = \markup III+IV
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'4.
-                        ^ \baca-explicit-short-instrument-name-markup "[“III+IV”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup III+IV
                         b'4.
@@ -2349,7 +2343,6 @@ r"""
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'green4)
                         b'4.
-                        ^ \baca-reapplied-short-instrument-name-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                         \set Staff.shortInstrumentName = \markup I+II
                         b'4.
@@ -2397,7 +2390,6 @@ r"""
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'green4)
                         b'4.
-                        ^ \baca-reapplied-short-instrument-name-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                         \set Staff.shortInstrumentName = \markup I+II
                         b'4.
@@ -2441,7 +2433,6 @@ r"""
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'green4)
                         b'4.
-                        ^ \baca-reapplied-short-instrument-name-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                         \set Staff.shortInstrumentName = \markup I+II
                         b'4.
@@ -2531,13 +2522,11 @@ r"""
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'2
-                        ^ \baca-explicit-short-instrument-name-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                         b'2
-                        ^ \baca-redundant-short-instrument-name-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName = \markup I+II
                         b'2
@@ -2587,13 +2576,11 @@ r"""
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'2
-                        ^ \baca-explicit-short-instrument-name-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                         b'2
-                        ^ \baca-redundant-short-instrument-name-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName = \markup I+II
                         b'2
@@ -2639,13 +2626,11 @@ r"""
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'2
-                        ^ \baca-explicit-short-instrument-name-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                         b'2
-                        ^ \baca-redundant-short-instrument-name-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName = \markup I+II
                         b'2
@@ -2738,7 +2723,6 @@ r"""
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                         b'4.
-                        ^ \baca-redundant-short-instrument-name-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName = \markup I+II
                         b'4.
@@ -2786,7 +2770,6 @@ r"""
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                         b'4.
-                        ^ \baca-redundant-short-instrument-name-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName = \markup I+II
                         b'4.
@@ -2830,7 +2813,6 @@ r"""
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                         b'4.
-                        ^ \baca-redundant-short-instrument-name-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName = \markup I+II
                         b'4.
@@ -2931,8 +2913,6 @@ r"""
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         %@% \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'2
-                        ^ \baca-explicit-short-instrument-name-markup "[“I+II”]"
-                        %@% ^ \baca-explicit-short-instrument-name-markup "[“III+IV”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         %@% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II

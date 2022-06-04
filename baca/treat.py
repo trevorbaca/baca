@@ -137,25 +137,14 @@ def _attach_latent_indicator_alert(
             tag = _tags.REDUNDANT_INSTRUMENT_ALERT
         left, right = "(", ")"
         markup_function = _status_to_instrument_markup_function[status]
-    else:
-        assert isinstance(wrapper.unbundle_indicator(), abjad.ShortInstrumentName)
-        if status == "explicit":
-            tag = _tags.EXPLICIT_SHORT_INSTRUMENT_NAME_ALERT
-        elif status == "reapplied":
-            tag = _tags.REAPPLIED_SHORT_INSTRUMENT_NAME_ALERT
-        else:
-            assert status == "redundant", repr(status)
-            tag = _tags.REDUNDANT_SHORT_INSTRUMENT_NAME_ALERT
-        left, right = "[", "]"
-        markup_function = _status_to_short_instrument_name_markup_function[status]
-    assert isinstance(tag, abjad.Tag), repr(tag)
-    string = f"{left}{key}{right}"
-    string = rf'\{markup_function} "{string}"'
-    markup = abjad.Markup(string)
-    tag = tag.append(_tags.function_name(_frame()))
-    abjad.attach(
-        markup, leaf, deactivate=existing_deactivate, direction=abjad.UP, tag=tag
-    )
+        assert isinstance(tag, abjad.Tag), repr(tag)
+        string = f"{left}{key}{right}"
+        string = rf'\{markup_function} "{string}"'
+        markup = abjad.Markup(string)
+        tag = tag.append(_tags.function_name(_frame()))
+        abjad.attach(
+            markup, leaf, deactivate=existing_deactivate, direction=abjad.UP, tag=tag
+        )
 
 
 def _get_key(dictionary, value):
