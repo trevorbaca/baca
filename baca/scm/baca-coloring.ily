@@ -82,9 +82,9 @@ baca-time-signature-transparent = #(
     #}
     )
 
-%%% PERSISTENT INDICATOR MARKUP %%%
+%%% INSTRUMENT COLORING %%%
 
-baca-explicit-indicator-markup = #(
+baca-explicit-instrument-markup = #(
     define-music-function
     string
     (string?)
@@ -95,7 +95,18 @@ baca-explicit-indicator-markup = #(
     #}
     )
 
-baca-redundant-indicator-markup = #(
+baca-reapplied-instrument-markup = #(
+    define-music-function
+    string
+    (string?)
+    #{
+    - \markup
+    \with-color #(x11-color 'green4)
+    #string
+    #}
+    )
+
+baca-redundant-instrument-markup = #(
     define-music-function
     string
     (string?)
@@ -106,7 +117,20 @@ baca-redundant-indicator-markup = #(
     #}
     )
 
-baca-reapplied-indicator-markup = #(
+%%% SHORT INSTRUMENT NAME COLORING %%%
+
+baca-explicit-short-instrument-name-markup = #(
+    define-music-function
+    string
+    (string?)
+    #{
+    - \markup
+    \with-color #(x11-color 'blue)
+    #string
+    #}
+    )
+
+baca-reapplied-short-instrument-name-markup = #(
     define-music-function
     string
     (string?)
@@ -116,6 +140,19 @@ baca-reapplied-indicator-markup = #(
     #string
     #}
     )
+
+baca-redundant-short-instrument-name-markup = #(
+    define-music-function
+    string
+    (string?)
+    #{
+    - \markup
+    \with-color #(x11-color 'DeepPink1)
+    #string
+    #}
+    )
+
+%%% NOTES
 
 % Note that this works:
 %zebra = #(
