@@ -7612,6 +7612,7 @@ def hide_black_note_heads(
     )
 
 
+# TODO: remove most of this; always pass only a string
 def instrument_name(
     argument: str | list[str],
     selector=lambda _: abjad.select.leaf(_, 0),
