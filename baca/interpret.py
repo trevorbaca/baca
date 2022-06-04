@@ -2011,7 +2011,7 @@ def _move_global_rests(
     global_rests_in_topmost_staff,
     score,
 ):
-    if not global_rests_in_topmost_staff and not global_rests_in_every_staff:
+    if not (global_rests_in_topmost_staff or global_rests_in_every_staff):
         return
     if "Rests" not in score:
         return
@@ -2023,8 +2023,7 @@ def _move_global_rests(
             break
         staff.simultaneous = True
         staff.insert(0, global_rests)
-        return
-    if global_rests_in_every_staff is True:
+    elif global_rests_in_every_staff is True:
         topmost_staff = True
         tag = global_rests.tag or abjad.Tag()
         for staff in abjad.iterate.components(music_context, abjad.Staff):
