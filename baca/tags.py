@@ -572,7 +572,6 @@ def persistent_indicator_color_expression_tags(path=None):
         >>> tags = baca.tags.persistent_indicator_color_expression_tags()
         >>> for tag in tags:
         ...     tag
-        ...
         Tag(string='EXPLICIT_CLEF_COLOR')
         Tag(string='EXPLICIT_CLEF_REDRAW_COLOR')
         Tag(string='REAPPLIED_CLEF_COLOR')
@@ -596,7 +595,9 @@ def persistent_indicator_color_expression_tags(path=None):
         Tag(string='EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR')
         Tag(string='REAPPLIED_SHORT_INSTRUMENT_NAME_ALERT')
         Tag(string='REAPPLIED_SHORT_INSTRUMENT_NAME_COLOR')
+        Tag(string='REDRAWN_EXPLICIT_SHORT_INSTRUMENT_NAME')
         Tag(string='REDRAWN_EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR')
+        Tag(string='REDRAWN_REAPPLIED_SHORT_INSTRUMENT_NAME')
         Tag(string='REDRAWN_REAPPLIED_SHORT_INSTRUMENT_NAME_COLOR')
         Tag(string='REDUNDANT_SHORT_INSTRUMENT_NAME_ALERT')
         Tag(string='REDUNDANT_SHORT_INSTRUMENT_NAME_COLOR')
@@ -619,7 +620,6 @@ def persistent_indicator_color_expression_tags(path=None):
         >>> tags = baca.tags.persistent_indicator_color_expression_tags(path)
         >>> for tag in tags:
         ...     tag
-        ...
         Tag(string='EXPLICIT_CLEF_COLOR')
         Tag(string='EXPLICIT_CLEF_REDRAW_COLOR')
         Tag(string='REAPPLIED_CLEF_COLOR')
@@ -643,7 +643,9 @@ def persistent_indicator_color_expression_tags(path=None):
         Tag(string='EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR')
         Tag(string='REAPPLIED_SHORT_INSTRUMENT_NAME_ALERT')
         Tag(string='REAPPLIED_SHORT_INSTRUMENT_NAME_COLOR')
+        Tag(string='REDRAWN_EXPLICIT_SHORT_INSTRUMENT_NAME')
         Tag(string='REDRAWN_EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR')
+        Tag(string='REDRAWN_REAPPLIED_SHORT_INSTRUMENT_NAME')
         Tag(string='REDRAWN_REAPPLIED_SHORT_INSTRUMENT_NAME_COLOR')
         Tag(string='REDUNDANT_SHORT_INSTRUMENT_NAME_ALERT')
         Tag(string='REDUNDANT_SHORT_INSTRUMENT_NAME_COLOR')
@@ -666,7 +668,6 @@ def persistent_indicator_color_expression_tags(path=None):
         >>> tags = baca.tags.persistent_indicator_color_expression_tags(path)
         >>> for tag in tags:
         ...     tag
-        ...
         Tag(string='EXPLICIT_CLEF_COLOR')
         Tag(string='EXPLICIT_CLEF_REDRAW_COLOR')
         Tag(string='REAPPLIED_CLEF_COLOR')
@@ -690,7 +691,9 @@ def persistent_indicator_color_expression_tags(path=None):
         Tag(string='EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR')
         Tag(string='REAPPLIED_SHORT_INSTRUMENT_NAME_ALERT')
         Tag(string='REAPPLIED_SHORT_INSTRUMENT_NAME_COLOR')
+        Tag(string='REDRAWN_EXPLICIT_SHORT_INSTRUMENT_NAME')
         Tag(string='REDRAWN_EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR')
+        Tag(string='REDRAWN_REAPPLIED_SHORT_INSTRUMENT_NAME')
         Tag(string='REDRAWN_REAPPLIED_SHORT_INSTRUMENT_NAME_COLOR')
         Tag(string='REDUNDANT_SHORT_INSTRUMENT_NAME_ALERT')
         Tag(string='REDUNDANT_SHORT_INSTRUMENT_NAME_COLOR')
@@ -715,7 +718,6 @@ def persistent_indicator_color_expression_tags(path=None):
         >>> tags = baca.tags.persistent_indicator_color_expression_tags(path)
         >>> for tag in tags:
         ...     tag
-        ...
         Tag(string='EXPLICIT_CLEF_COLOR')
         Tag(string='EXPLICIT_CLEF_REDRAW_COLOR')
         Tag(string='REAPPLIED_CLEF_COLOR')
@@ -740,7 +742,9 @@ def persistent_indicator_color_expression_tags(path=None):
         Tag(string='EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR')
         Tag(string='REAPPLIED_SHORT_INSTRUMENT_NAME_ALERT')
         Tag(string='REAPPLIED_SHORT_INSTRUMENT_NAME_COLOR')
+        Tag(string='REDRAWN_EXPLICIT_SHORT_INSTRUMENT_NAME')
         Tag(string='REDRAWN_EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR')
+        Tag(string='REDRAWN_REAPPLIED_SHORT_INSTRUMENT_NAME')
         Tag(string='REDRAWN_REAPPLIED_SHORT_INSTRUMENT_NAME_COLOR')
         Tag(string='REDUNDANT_SHORT_INSTRUMENT_NAME_ALERT')
         Tag(string='REDUNDANT_SHORT_INSTRUMENT_NAME_COLOR')
@@ -892,12 +896,13 @@ def short_instrument_name_color_tags(path=None):
 
         >>> for tag in baca.tags.short_instrument_name_color_tags():
         ...     tag
-        ...
         Tag(string='EXPLICIT_SHORT_INSTRUMENT_NAME_ALERT')
         Tag(string='EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR')
         Tag(string='REAPPLIED_SHORT_INSTRUMENT_NAME_ALERT')
         Tag(string='REAPPLIED_SHORT_INSTRUMENT_NAME_COLOR')
+        Tag(string='REDRAWN_EXPLICIT_SHORT_INSTRUMENT_NAME')
         Tag(string='REDRAWN_EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR')
+        Tag(string='REDRAWN_REAPPLIED_SHORT_INSTRUMENT_NAME')
         Tag(string='REDRAWN_REAPPLIED_SHORT_INSTRUMENT_NAME_COLOR')
         Tag(string='REDUNDANT_SHORT_INSTRUMENT_NAME_ALERT')
         Tag(string='REDUNDANT_SHORT_INSTRUMENT_NAME_COLOR')
@@ -910,7 +915,9 @@ def short_instrument_name_color_tags(path=None):
         EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR,
         REAPPLIED_SHORT_INSTRUMENT_NAME_ALERT,
         REAPPLIED_SHORT_INSTRUMENT_NAME_COLOR,
+        REDRAWN_EXPLICIT_SHORT_INSTRUMENT_NAME,
         REDRAWN_EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR,
+        REDRAWN_REAPPLIED_SHORT_INSTRUMENT_NAME,
         REDRAWN_REAPPLIED_SHORT_INSTRUMENT_NAME_COLOR,
         REDUNDANT_SHORT_INSTRUMENT_NAME_ALERT,
         REDUNDANT_SHORT_INSTRUMENT_NAME_COLOR,

@@ -2398,11 +2398,12 @@ def _style_anchor_skip(score):
     tag = _tags.function_name(_frame(), n=1)
     tag = tag.append(_tags.ANCHOR_SKIP)
     _append_tag_to_wrappers(skip, tag)
-    tag = _tags.function_name(_frame(), n=2)
-    tag = tag.append(_tags.ANCHOR_SKIP)
-    abjad.attach(
-        abjad.LilyPondLiteral(r"\baca-time-signature-transparent"), skip, tag=tag
-    )
+    if abjad.get.has_indicator(skip, abjad.TimeSignature):
+        tag = _tags.function_name(_frame(), n=2)
+        tag = tag.append(_tags.ANCHOR_SKIP)
+        abjad.attach(
+            abjad.LilyPondLiteral(r"\baca-time-signature-transparent"), skip, tag=tag
+        )
     tag = _tags.function_name(_frame(), n=3)
     tag = tag.append(_tags.ANCHOR_SKIP)
     abjad.attach(
@@ -2444,6 +2445,8 @@ def _style_fermata_measures(
                 continue
             voice = abjad.get.parentage(leaf).get(abjad.Voice)
             if "RestVoice" in voice.name:
+                continue
+            if "Rests" in voice.name:
                 continue
             if start_offset not in empty_fermata_measure_start_offsets:
                 continue
@@ -2531,28 +2534,6 @@ def _style_fermata_measures(
                 )
             if start_offset in bar_lines_already_styled:
                 continue
-            if not (next_leaf is None and final_section):
-                # TODO: replace literal with override
-                strings = []
-                string = r"Score.BarLine.transparent = ##t"
-                string = r"\once \override " + string
-                strings.append(string)
-                string = r"Score.SpanBar.transparent = ##t"
-                string = r"\once \override " + string
-                strings.append(string)
-                literal = abjad.LilyPondLiteral(strings, site="after")
-                tag = _tags.FERMATA_MEASURE
-                measure_number_tag = _get_measure_number_tag(
-                    leaf,
-                    offset_to_measure_number,
-                )
-                if measure_number_tag is not None:
-                    tag = tag.append(measure_number_tag)
-                abjad.attach(
-                    literal,
-                    leaf,
-                    tag=tag.append(_tags.function_name(_frame(), n=7)),
-                )
             bar_lines_already_styled.append(start_offset)
     rests = abjad.select.leaves(score["Rests"], abjad.MultimeasureRest)
     for measure_number in fermata_measure_empty_overrides:
@@ -2560,6 +2541,29 @@ def _style_fermata_measures(
         rest = rests[measure_index]
         grob = abjad.override(rest).MultiMeasureRestText
         grob.extra_offset = (0, fermata_extra_offset_y)
+        next_leaf = abjad.get.leaf(rest, 1)
+        if not (next_leaf is None and final_section):
+            # TODO: replace literal with override
+            strings = []
+            string = r"Score.BarLine.transparent = ##t"
+            string = r"\once \override " + string
+            strings.append(string)
+            string = r"Score.SpanBar.transparent = ##t"
+            string = r"\once \override " + string
+            strings.append(string)
+            literal = abjad.LilyPondLiteral(strings, site="after")
+            tag = _tags.FERMATA_MEASURE
+            measure_number_tag = _get_measure_number_tag(
+                rest,
+                offset_to_measure_number,
+            )
+            if measure_number_tag is not None:
+                tag = tag.append(measure_number_tag)
+            abjad.attach(
+                literal,
+                rest,
+                tag=tag.append(_tags.function_name(_frame(), n=7)),
+            )
 
 
 def _transpose_score(score):
