@@ -7612,47 +7612,18 @@ def hide_black_note_heads(
     )
 
 
-# TODO: remove most of this; always pass only a string
 def instrument_name(
-    argument: str | list[str],
+    argument: str,
     selector=lambda _: abjad.select.leaf(_, 0),
     *,
     context: str = "Staff",
-    hcenter_in: int | float | None = None,
-    literal: bool = False,
 ) -> IndicatorCommand:
     """
     Attaches instrument name.
     """
-    if literal is True or (isinstance(argument, str) and argument.startswith("\\")):
-        assert isinstance(argument, str), repr(argument)
-        assert argument.startswith("\\"), repr(argument)
-        instrument_name = abjad.InstrumentName(argument)
-    elif isinstance(argument, str):
-        width = hcenter_in or 16
-        string = rf'\markup \hcenter-in #{width} "{argument}"'
-        instrument_name = abjad.InstrumentName(string)
-    elif isinstance(argument, list) and len(argument) == 2:
-        width = hcenter_in or 16
-        line_1 = rf'\hcenter-in #{width} "{argument[0]}"'
-        line_2 = rf'\hcenter-in #{width} "{argument[1]}"'
-        string = rf"\markup \column {{ {line_1} {line_2} }}"
-        instrument_name = abjad.InstrumentName(string)
-    elif isinstance(argument, list) and len(argument) == 3:
-        width = hcenter_in or 16
-        line_1 = rf'\hcenter-in #{width} "{argument[0]}"'
-        line_2 = rf'\hcenter-in #{width} "{argument[1]}"'
-        line_3 = rf'\hcenter-in #{width} "{argument[2]}"'
-        string = rf"\markup \column {{ {line_1} {line_2} {line_3} }}"
-        instrument_name = abjad.InstrumentName(string)
-    elif isinstance(argument, abjad.Markup):
-        instrument_name = abjad.InstrumentName(argument)
-    elif isinstance(argument, abjad.InstrumentName):
-        instrument_name = argument
-    else:
-        raise TypeError(argument)
-    assert isinstance(instrument_name, abjad.InstrumentName)
-    instrument_name = dataclasses.replace(instrument_name, context=context)
+    assert isinstance(argument, str), repr(argument)
+    assert argument.startswith("\\"), repr(argument)
+    instrument_name = abjad.InstrumentName(argument, context=context)
     command = IndicatorCommand(
         indicators=[instrument_name],
         selector=selector,
