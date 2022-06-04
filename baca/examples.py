@@ -38,11 +38,11 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                 \context Voice = "Skips"
                 {
                     \time 4/8
-                    s1 * 1/2
+                    s1 * 4/8
                     \time 3/8
                     s1 * 3/8
                     \time 4/8
-                    s1 * 1/2
+                    s1 * 4/8
                     \time 3/8
                     s1 * 3/8
                 }
@@ -130,11 +130,11 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                 \context Voice = "Skips"
                 {
                     \time 4/8
-                    s1 * 1/2
+                    s1 * 4/8
                     \time 3/8
                     s1 * 3/8
                     \time 4/8
-                    s1 * 1/2
+                    s1 * 4/8
                     \time 3/8
                     s1 * 3/8
                 }
@@ -254,7 +254,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                     \context Voice = "Skips"
                     {
                         \time 6/4
-                        s1 * 3/2
+                        s1 * 6/4
                     }
                     \context Voice = "Music_Voice_1"
                     {
@@ -334,11 +334,11 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                 \context Voice = "Skips"
                 {
                     \time 4/8
-                    s1 * 1/2
+                    s1 * 4/8
                     \time 3/8
                     s1 * 3/8
                     \time 4/8
-                    s1 * 1/2
+                    s1 * 4/8
                     \time 3/8
                     s1 * 3/8
                 }
@@ -413,11 +413,11 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                 \context Voice = "Skips"
                 {
                     \time 4/8
-                    s1 * 1/2
+                    s1 * 4/8
                     \time 3/8
                     s1 * 3/8
                     \time 4/8
-                    s1 * 1/2
+                    s1 * 4/8
                     \time 3/8
                     s1 * 3/8
                 }

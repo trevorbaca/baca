@@ -1304,10 +1304,15 @@ def _comment_measure_numbers(first_measure_number, offset_to_measure_number, sco
         measure_number = offset_to_measure_number.get(offset, None)
         if measure_number is None:
             continue
-        local_measure_number = measure_number - first_measure_number
-        local_measure_number += 1
         context = abjad.get.parentage(leaf).get(abjad.Context)
-        string = f"% [{context.name} measure {local_measure_number}]"
+        if abjad.get.has_indicator(leaf, _enums.ANCHOR_SKIP):
+            string = "% [anchor skip]"
+        elif abjad.get.has_indicator(leaf, _enums.ANCHOR_NOTE):
+            string = f"% [{context.name} anchor note]"
+        else:
+            local_measure_number = measure_number - first_measure_number
+            local_measure_number += 1
+            string = f"% [{context.name} measure {local_measure_number}]"
         literal = abjad.LilyPondLiteral(string, site="absolute_before")
         abjad.attach(literal, leaf, tag=_tags.function_name(_frame()))
 
@@ -1875,7 +1880,7 @@ def _make_global_rests(time_signatures):
     for time_signature in time_signatures:
         rest = abjad.MultimeasureRest(
             abjad.Duration(1),
-            multiplier=time_signature.duration,
+            multiplier=abjad.NonreducedFraction(time_signature.pair),
             tag=_tags.function_name(_frame(), n=1),
         )
         rests.append(rest)
@@ -1890,7 +1895,7 @@ def _make_global_skips(
     for time_signature in time_signatures:
         skip = abjad.Skip(
             1,
-            multiplier=time_signature.duration,
+            multiplier=abjad.NonreducedFraction(time_signature.pair),
             tag=_tags.function_name(_frame(), n=1),
         )
         abjad.attach(

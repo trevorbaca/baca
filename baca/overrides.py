@@ -323,11 +323,11 @@ def bar_line_transparent(
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1323,11 +1323,11 @@ def mmrest_color(
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1340,20 +1340,20 @@ def mmrest_color(
                                 \abjad-invisible-music-coloring
                                 \once \override Accidental.stencil = ##f
                                 \once \override NoteColumn.ignore-collision = ##t
-                                b'1 * 1/2
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                                b'1 * 4/8
+                                %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                             }
                             \context Voice = "RestVoice"
                             {
-                                R1 * 1/2
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                                R1 * 4/8
+                                %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                             }
                         >>
                         \override MultiMeasureRest.color = #(x11-color 'DarkOrchid)
                         R1 * 3/8
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                        R1 * 1/2
-                        %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                        R1 * 4/8
+                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                         R1 * 3/8
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                         \revert MultiMeasureRest.color
@@ -1437,11 +1437,11 @@ def mmrest_text_color(
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1454,21 +1454,21 @@ def mmrest_text_color(
                                 \abjad-invisible-music-coloring
                                 \once \override Accidental.stencil = ##f
                                 \once \override NoteColumn.ignore-collision = ##t
-                                b'1 * 1/2
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                                b'1 * 4/8
+                                %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                             }
                             \context Voice = "RestVoice"
                             {
-                                R1 * 1/2
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                                R1 * 4/8
+                                %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                             }
                         >>
                         \override MultiMeasureRestText.color = #red
                         R1 * 3/8
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                        R1 * 1/2
+                        R1 * 4/8
                         ^ \baca-boxed-markup still
-                        %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                         R1 * 3/8
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                         \revert MultiMeasureRestText.color
@@ -1571,11 +1571,11 @@ def mmrest_text_extra_offset(
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1588,21 +1588,21 @@ def mmrest_text_extra_offset(
                                 \abjad-invisible-music-coloring
                                 \once \override Accidental.stencil = ##f
                                 \once \override NoteColumn.ignore-collision = ##t
-                                b'1 * 1/2
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                                b'1 * 4/8
+                                %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                             }
                             \context Voice = "RestVoice"
                             {
-                                R1 * 1/2
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                                R1 * 4/8
+                                %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                             }
                         >>
                         \override MultiMeasureRestText.extra-offset = #'(0 . 2)
                         R1 * 3/8
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                        R1 * 1/2
+                        R1 * 4/8
                         ^ \baca-boxed-markup still
-                        %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                         R1 * 3/8
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                         \revert MultiMeasureRestText.extra-offset
@@ -1670,11 +1670,11 @@ def mmrest_text_padding(
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1687,21 +1687,21 @@ def mmrest_text_padding(
                                 \abjad-invisible-music-coloring
                                 \once \override Accidental.stencil = ##f
                                 \once \override NoteColumn.ignore-collision = ##t
-                                b'1 * 1/2
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                                b'1 * 4/8
+                                %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                             }
                             \context Voice = "RestVoice"
                             {
-                                R1 * 1/2
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                                R1 * 4/8
+                                %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                             }
                         >>
                         \override MultiMeasureRestText.padding = 2
                         R1 * 3/8
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                        R1 * 1/2
+                        R1 * 4/8
                         ^ \baca-boxed-markup still
-                        %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                         R1 * 3/8
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                         \revert MultiMeasureRestText.padding
@@ -1768,11 +1768,11 @@ def mmrest_text_parent_center(
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1785,21 +1785,21 @@ def mmrest_text_parent_center(
                                 \abjad-invisible-music-coloring
                                 \once \override Accidental.stencil = ##f
                                 \once \override NoteColumn.ignore-collision = ##t
-                                b'1 * 1/2
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                                b'1 * 4/8
+                                %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                             }
                             \context Voice = "RestVoice"
                             {
-                                R1 * 1/2
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                                R1 * 4/8
+                                %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                             }
                         >>
                         \override MultiMeasureRestText.parent-alignment-X = 0
                         R1 * 3/8
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                        R1 * 1/2
+                        R1 * 4/8
                         ^ \baca-boxed-markup still
-                        %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                         R1 * 3/8
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                         \revert MultiMeasureRestText.parent-alignment-X
@@ -1867,11 +1867,11 @@ def mmrest_text_staff_padding(
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1884,21 +1884,21 @@ def mmrest_text_staff_padding(
                                 \abjad-invisible-music-coloring
                                 \once \override Accidental.stencil = ##f
                                 \once \override NoteColumn.ignore-collision = ##t
-                                b'1 * 1/2
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                                b'1 * 4/8
+                                %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                             }
                             \context Voice = "RestVoice"
                             {
-                                R1 * 1/2
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                                R1 * 4/8
+                                %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                             }
                         >>
                         \override MultiMeasureRestText.staff-padding = 2
                         R1 * 3/8
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
-                        R1 * 1/2
+                        R1 * 4/8
                         ^ \baca-boxed-markup still
-                        %@% ^ \baca-duration-multiplier-markup #"1" #"2"
+                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                         R1 * 3/8
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                         \revert MultiMeasureRestText.staff-padding

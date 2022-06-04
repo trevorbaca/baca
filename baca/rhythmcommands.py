@@ -77,13 +77,13 @@ class RhythmCommand(_command.Command):
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                     }
                     \context Voice = "MusicVoice"
                     {
@@ -186,15 +186,15 @@ class RhythmCommand(_command.Command):
                     {
                         \baca-new-spacing-section #1 #16
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #16
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #16
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #16
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #16
-                        s1 * 1/2
+                        s1 * 4/8
                     }
                     \context Voice = "MusicVoice"
                     {
@@ -487,12 +487,12 @@ def _make_mmrests(time_signatures):
     mmrests = []
     tag = _tags.function_name(_frame())
     for i, time_signature in enumerate(time_signatures):
-        duration = time_signature.duration
+        multiplier = abjad.NonreducedFraction(time_signature.pair)
         if i == 0:
             voice_name = "ChangeMeVoice"
-            mmrest = _make_multimeasure_rest_container(voice_name, duration)
+            mmrest = _make_multimeasure_rest_container(voice_name, multiplier)
         else:
-            mmrest = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
+            mmrest = abjad.MultimeasureRest(1, multiplier=multiplier, tag=tag)
         mmrests.append(mmrest)
     return mmrests
 
@@ -501,19 +501,19 @@ def _make_mmrests_flat(time_signatures):
     mmrests = []
     tag = _tags.function_name(_frame())
     for time_signature in time_signatures:
-        duration = time_signature.duration
-        mmrest = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
+        multiplier = abjad.NonreducedFraction(time_signature.pair)
+        mmrest = abjad.MultimeasureRest(1, multiplier=multiplier, tag=tag)
         mmrests.append(mmrest)
     return mmrests
 
 
 # TODO: make inner function of _make_mmrests()
-def _make_multimeasure_rest_container(voice_name, duration):
+def _make_multimeasure_rest_container(voice_name, multiplier):
     tag = _tags.function_name(_frame(), n=1)
     tag = tag.append(_tags.HIDDEN)
     note_or_rest = _tags.NOTE
     tag = tag.append(_tags.NOTE)
-    note = abjad.Note("c'1", multiplier=duration, tag=tag)
+    note = abjad.Note("c'1", multiplier=multiplier, tag=tag)
     abjad.override(note).Accidental.stencil = False
     abjad.override(note).NoteColumn.ignore_collision = True
     abjad.attach(_enums.NOTE, note)
@@ -537,7 +537,7 @@ def _make_multimeasure_rest_container(voice_name, duration):
     tag = _tags.function_name(_frame(), n=5)
     tag = tag.append(_tags.REST_VOICE)
     tag = tag.append(_tags.MULTIMEASURE_REST)
-    rest = abjad.MultimeasureRest(1, multiplier=duration, tag=tag)
+    rest = abjad.MultimeasureRest(1, multiplier=multiplier, tag=tag)
     abjad.attach(_enums.MULTIMEASURE_REST, rest)
     abjad.attach(_enums.REST_VOICE, rest)
     if "MusicVoice" in voice_name:
@@ -671,7 +671,7 @@ def make_monads(fractions):
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/4
-                        s1 * 1
+                        s1 * 4/4
                     }
                     \context Voice = "MusicVoice"
                     {
@@ -787,7 +787,7 @@ def make_repeat_tied_notes(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 10/8
-                        s1 * 5/4
+                        s1 * 10/8
                     }
                     \context Voice = "MusicVoice"
                     {

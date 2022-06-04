@@ -1625,15 +1625,15 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #24
                         \noBreak
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
-                        s1 * 1/2
+                        s1 * 4/8
                     }
                     \context Voice = "MusicVoice"
                     {
@@ -1673,15 +1673,15 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #24
                         \noBreak
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
-                        s1 * 1/2
+                        s1 * 4/8
                     }
                     \context Voice = "MusicVoice"
                     {
@@ -1717,15 +1717,15 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #24
                         \noBreak
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
-                        s1 * 1/2
+                        s1 * 4/8
                     }
                     \context Voice = "MusicVoice"
                     {
@@ -2540,34 +2540,30 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #24
                         \noBreak
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
-                        s1 * 1/2
+                        s1 * 4/8
                     }
                     \context Voice = "MusicVoice"
                     {
-                        \set Staff.shortInstrumentName =
-                        \markup I+II
+                        \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'2
                         ^ \baca-explicit-indicator-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
-                        \set Staff.shortInstrumentName =
-                        \markup I+II
-                        \set Staff.shortInstrumentName =
-                        \markup I+II
+                        \set Staff.shortInstrumentName = \markup I+II
+                        \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                         b'2
                         ^ \baca-redundant-indicator-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
-                        \set Staff.shortInstrumentName =
-                        \markup I+II
+                        \set Staff.shortInstrumentName = \markup I+II
                         b'2
                     }
                 >>
@@ -2600,34 +2596,30 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #24
                         \noBreak
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
-                        s1 * 1/2
+                        s1 * 4/8
                     }
                     \context Voice = "MusicVoice"
                     {
-                        \set Staff.shortInstrumentName =
-                        \markup I+II
+                        \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'2
                         ^ \baca-explicit-indicator-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
-                        \set Staff.shortInstrumentName =
-                        \markup I+II
-                        \set Staff.shortInstrumentName =
-                        \markup I+II
+                        \set Staff.shortInstrumentName = \markup I+II
+                        \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                         b'2
                         ^ \baca-redundant-indicator-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
-                        \set Staff.shortInstrumentName =
-                        \markup I+II
+                        \set Staff.shortInstrumentName = \markup I+II
                         b'2
                     }
                 >>
@@ -2656,34 +2648,30 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #24
                         \noBreak
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
-                        s1 * 1/2
+                        s1 * 4/8
                     }
                     \context Voice = "MusicVoice"
                     {
-                        \set Staff.shortInstrumentName =
-                        \markup I+II
+                        \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         b'2
                         ^ \baca-explicit-indicator-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
-                        \set Staff.shortInstrumentName =
-                        \markup I+II
-                        \set Staff.shortInstrumentName =
-                        \markup I+II
+                        \set Staff.shortInstrumentName = \markup I+II
+                        \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                         b'2
                         ^ \baca-redundant-indicator-markup "[“I+II”]"
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
-                        \set Staff.shortInstrumentName =
-                        \markup I+II
+                        \set Staff.shortInstrumentName = \markup I+II
                         b'2
                     }
                 >>
@@ -2959,15 +2947,15 @@ r"""
                         \baca-time-signature-color #'blue
                         \pageBreak
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \break
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #24
                         \noBreak
-                        s1 * 1/2
+                        s1 * 4/8
                     }
                     \context Voice = "MusicVoice"
                     {

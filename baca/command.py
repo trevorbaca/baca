@@ -253,13 +253,13 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
@@ -355,13 +355,13 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
@@ -509,13 +509,13 @@ def only_parts(command: Command | Suite) -> Command | Suite:
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8

@@ -97,13 +97,13 @@ class BCPCommand(_command.Command):
                     {
                         \baca-new-spacing-section #1 #16
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #16
                         \time 3/8
                         s1 * 3/8
                         \baca-new-spacing-section #1 #16
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #16
                         \time 3/8
                         s1 * 3/8
@@ -295,13 +295,13 @@ class BCPCommand(_command.Command):
                     {
                         \baca-new-spacing-section #1 #16
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #16
                         \time 3/8
                         s1 * 3/8
                         \baca-new-spacing-section #1 #16
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #16
                         \time 3/8
                         s1 * 3/8
@@ -654,11 +654,11 @@ class ContainerCommand(_command.Command):
                 \context Voice = "Skips"
                 {
                     \time 4/8
-                    s1 * 1/2
+                    s1 * 4/8
                     \time 3/8
                     s1 * 3/8
                     \time 4/8
-                    s1 * 1/2
+                    s1 * 4/8
                     \time 3/8
                     s1 * 3/8
                 }
@@ -1145,11 +1145,11 @@ class AccidentalAdjustmentCommand(_command.Command):
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1376,11 +1376,11 @@ class ClusterCommand(_command.Command):
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1461,11 +1461,11 @@ class ClusterCommand(_command.Command):
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1545,11 +1545,11 @@ class ClusterCommand(_command.Command):
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1629,11 +1629,11 @@ class ClusterCommand(_command.Command):
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1713,11 +1713,11 @@ class ClusterCommand(_command.Command):
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1799,11 +1799,11 @@ class ClusterCommand(_command.Command):
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1932,11 +1932,11 @@ class ColorFingeringCommand(_command.Command):
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -2159,11 +2159,11 @@ class MicrotoneDeviationCommand(_command.Command):
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -2277,11 +2277,11 @@ class OctaveDisplacementCommand(_command.Command):
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -2507,11 +2507,11 @@ class PitchCommand(_command.Command):
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -2582,11 +2582,11 @@ class PitchCommand(_command.Command):
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -2657,11 +2657,11 @@ class PitchCommand(_command.Command):
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -2960,11 +2960,11 @@ class RegisterCommand(_command.Command):
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -3228,19 +3228,19 @@ class RegisterInterpolationCommand(_command.Command):
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -3335,19 +3335,19 @@ class RegisterInterpolationCommand(_command.Command):
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -3442,19 +3442,19 @@ class RegisterInterpolationCommand(_command.Command):
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -3549,19 +3549,19 @@ class RegisterInterpolationCommand(_command.Command):
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -3656,19 +3656,19 @@ class RegisterInterpolationCommand(_command.Command):
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -5335,11 +5335,11 @@ def force_accidental(
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -5647,11 +5647,11 @@ def pitch(
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -7581,11 +7581,11 @@ def hide_black_note_heads(
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -7987,18 +7987,17 @@ def short_instrument_name(
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
                     \context Voice = "MusicVoice"
                     {
-                        \set Staff.shortInstrumentName =
-                        \markup Fl.
+                        \set Staff.shortInstrumentName = \markup Fl.
                         e'2
                         f'4.
                         e'2
@@ -9682,11 +9681,11 @@ def assign_parts(
                 \context Voice = "Skips"
                 {
                     \time 4/8
-                    s1 * 1/2
+                    s1 * 4/8
                     \time 3/8
                     s1 * 3/8
                     \time 4/8
-                    s1 * 1/2
+                    s1 * 4/8
                     \time 3/8
                     s1 * 3/8
                 }
@@ -9795,13 +9794,13 @@ def bcps(
                         {
                             \baca-new-spacing-section #1 #16
                             \time 4/8
-                            s1 * 1/2
+                            s1 * 4/8
                             \baca-new-spacing-section #1 #16
                             \time 3/8
                             s1 * 3/8
                             \baca-new-spacing-section #1 #16
                             \time 4/8
-                            s1 * 1/2
+                            s1 * 4/8
                             \baca-new-spacing-section #1 #16
                             \time 3/8
                             s1 * 3/8
@@ -10152,11 +10151,11 @@ def container(
                 \context Voice = "Skips"
                 {
                     \time 4/8
-                    s1 * 1/2
+                    s1 * 4/8
                     \time 3/8
                     s1 * 3/8
                     \time 4/8
-                    s1 * 1/2
+                    s1 * 4/8
                     \time 3/8
                     s1 * 3/8
                 }
@@ -10233,7 +10232,7 @@ def cross_staff(*, selector=lambda _: _select.phead(_, 0)) -> IndicatorCommand:
                         \context Voice = "Skips"
                         {
                             \time 4/4
-                            s1 * 1
+                            s1 * 4/4
                         }
                         \context Voice = "Music_Voice_1"
                         {
@@ -10538,13 +10537,13 @@ def finger_pressure_transition(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
@@ -10744,11 +10743,11 @@ def glissando(
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -10831,11 +10830,11 @@ def glissando(
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -10908,11 +10907,11 @@ def glissando(
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -11010,11 +11009,11 @@ def glissando(
                     \context Voice = "Skips"
                     {
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \time 3/8
                         s1 * 3/8
                     }
@@ -11166,13 +11165,13 @@ def invisible_music(
                     {
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
                         \baca-new-spacing-section #1 #12
                         \time 4/8
-                        s1 * 1/2
+                        s1 * 4/8
                         \baca-new-spacing-section #1 #12
                         \time 3/8
                         s1 * 3/8
