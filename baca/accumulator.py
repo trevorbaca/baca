@@ -232,3 +232,10 @@ class CommandAccumulator:
                     command_ = copy.copy(command_)
                     command_.scope = scope_
                     self.commands.append(command_)
+
+    def manifests(self):
+        return {
+            "abjad.Instrument": self.instruments,
+            "abjad.MetronomeMark": self.metronome_marks,
+            "abjad.ShortInstrumentName": self.short_instrument_names,
+        }

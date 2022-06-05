@@ -284,6 +284,12 @@ def bar_line_transparent(
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -1291,6 +1297,12 @@ def mmrest_color(
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -1400,7 +1412,13 @@ def mmrest_text_color(
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -1485,6 +1503,12 @@ def mmrest_text_color(
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -1534,6 +1558,12 @@ def mmrest_text_extra_offset(
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
         ... )
 
         >>> commands(
@@ -1634,6 +1664,12 @@ def mmrest_text_padding(
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -1731,6 +1767,12 @@ def mmrest_text_parent_center(
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
         ... )
 
         >>> commands(
@@ -1830,6 +1872,12 @@ def mmrest_text_staff_padding(
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
         ... )
 
         >>> commands(
@@ -4345,6 +4393,12 @@ def text_script_color(
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -4480,6 +4534,12 @@ def text_script_down(
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -4532,6 +4592,12 @@ def text_script_extra_offset(
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
         ... )
 
         >>> commands(
@@ -4690,6 +4756,12 @@ def text_script_padding(
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
         ... )
 
         >>> commands(
@@ -4871,6 +4943,12 @@ def text_script_staff_padding(
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -5005,6 +5083,12 @@ def text_script_up(
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
         ... )
 
         >>> commands(

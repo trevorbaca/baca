@@ -35,6 +35,13 @@ class RhythmCommand(_command.Command):
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (4, 8), (3,8), (4, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
 
         >>> command = baca.rhythm(
         ...     rmakers.even_division([8]),
@@ -53,7 +60,6 @@ class RhythmCommand(_command.Command):
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -121,6 +127,13 @@ class RhythmCommand(_command.Command):
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=5 * [(4, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
+        ... )
 
         >>> note_command = rmakers.stack(
         ...     rmakers.note(),
@@ -165,7 +178,6 @@ class RhythmCommand(_command.Command):
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -638,6 +650,13 @@ def make_monads(fractions):
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 4)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -650,7 +669,6 @@ def make_monads(fractions):
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -754,6 +772,13 @@ def make_repeat_tied_notes(
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(10, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -766,7 +791,6 @@ def make_repeat_tied_notes(
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,

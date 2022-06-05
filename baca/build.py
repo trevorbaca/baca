@@ -202,7 +202,7 @@ def _get_preamble_time_signatures(path):
     return None
 
 
-def _get_previous_metadata(section_directory):
+def get_previous_metadata(section_directory):
     if section_directory.name == "01":
         previous_metadata = None
         previous_persist = None
@@ -1026,7 +1026,7 @@ def interpret_section(
     interpreter = interpreter or baca.interpret.interpreter
     metadata = baca.path.get_metadata(section_directory)
     persist = baca.path.get_metadata(section_directory, file_name="__persist__")
-    previous_metadata, previous_persist = _get_previous_metadata(section_directory)
+    previous_metadata, previous_persist = get_previous_metadata(section_directory)
     first_section = first_section or section_directory.name == "01"
     with abjad.Timer() as timer:
         metadata, persist = interpreter(
@@ -1093,6 +1093,8 @@ def make_layout_ly(
     page_layout_context_only=False,
     time_signatures=None,
 ):
+    from . import interpret as _interpret
+
     layout_directory = pathlib.Path(os.getcwd())
     _print_main_task("Making layout ...")
     assert isinstance(spacing, baca.SpacingSpecifier), repr(spacing)
@@ -1161,6 +1163,15 @@ def make_layout_ly(
     commands = baca.CommandAccumulator(
         time_signatures=time_signatures,
     )
+    _interpret.set_up_score(
+        score,
+        commands.manifests(),
+        commands.time_signatures,
+        append_anchor_skip=has_anchor_skip,
+        do_not_reapply_persistent_indicators=True,
+        page_layout_profile=page_layout_profile,
+        spacing=spacing,
+    )
     _, _ = baca.interpreter(
         score,
         commands.commands,
@@ -1170,9 +1181,9 @@ def make_layout_ly(
         comment_measure_numbers=True,
         first_measure_number=first_measure_number,
         first_section=True,
-        page_layout_profile=page_layout_profile,
+        # page_layout_profile=page_layout_profile,
         remove_tags=baca.tags.layout_removal_tags(),
-        spacing=spacing,
+        # spacing=spacing,
         whitespace_leaves=True,
     )
     lilypond_file = baca.make_lilypond_file(score)

@@ -9,13 +9,17 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     >>> commands = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-
+    >>> baca.interpret.set_up_score(
+    ...     score,
+    ...     commands.manifests(),
+    ...     commands.time_signatures,
+    ...     docs=True,
+    ... )
     >>> commands(
     ...     "MusicVoice",
     ...     baca.make_even_divisions(),
     ...     baca.label(lambda _: abjad.label.with_indices(_)),
     ... )
-
     >>> _, _ = baca.interpreter(
     ...     score,
     ...     commands.commands,
@@ -97,6 +101,12 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     >>> commands = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ...     voice_names=voice_names,
+    ... )
+    >>> baca.interpret.set_up_score(
+    ...     score,
+    ...     commands.manifests(),
+    ...     commands.time_signatures,
+    ...     docs=True,
     ... )
 
     >>> list_ = []
@@ -214,6 +224,12 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     >>> commands = baca.CommandAccumulator(
     ...     time_signatures=[(6, 4)],
     ... )
+    >>> baca.interpret.set_up_score(
+    ...     score,
+    ...     commands.manifests(),
+    ...     commands.time_signatures,
+    ...     docs=True,
+    ... )
 
     >>> commands(
     ...     ("Music_Voice_1", 1),
@@ -299,6 +315,12 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     instruments=instruments,
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
+    >>> baca.interpret.set_up_score(
+    ...     score,
+    ...     commands.manifests(),
+    ...     commands.time_signatures,
+    ...     docs=True,
+    ... )
 
     >>> commands(
     ...     "MusicVoice",
@@ -380,6 +402,12 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     >>> commands = baca.CommandAccumulator(
     ...     instruments=instruments,
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+    ... )
+    >>> baca.interpret.set_up_score(
+    ...     score,
+    ...     commands.manifests(),
+    ...     commands.time_signatures,
+    ...     docs=True,
     ... )
 
     >>> commands(
@@ -480,6 +508,12 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     >>> commands = baca.CommandAccumulator(
     ...     instruments=instruments,
     ...     time_signatures=time_signatures,
+    ... )
+    >>> baca.interpret.set_up_score(
+    ...     score,
+    ...     commands.manifests(),
+    ...     commands.time_signatures,
+    ...     docs=True,
     ... )
     >>> commands(
     ...     ("MusicVoice", 1),
@@ -587,6 +621,12 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     >>> score = baca.docs.make_empty_score(1)
     >>> commands = baca.CommandAccumulator(
     ...     time_signatures=time_signatures,
+    ... )
+    >>> baca.interpret.set_up_score(
+    ...     score,
+    ...     commands.manifests(),
+    ...     commands.time_signatures,
+    ...     docs=True,
     ... )
     >>> commands(
     ...     ("MusicVoice", 1),

@@ -1804,6 +1804,13 @@ class Imbrication:
             >>> commands = baca.CommandAccumulator(
             ...     time_signatures=figures.time_signatures,
             ... )
+            >>> baca.interpret.set_up_score(
+            ...     score,
+            ...     commands.manifests(),
+            ...     commands.time_signatures,
+            ...     docs=True,
+            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
+            ... )
             >>> figures.populate_commands(commands)
 
             >>> commands(
@@ -1822,7 +1829,6 @@ class Imbrication:
             ...     commands.time_signatures,
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
             >>> lilypond_file = baca.make_lilypond_file(
             ...     score,
@@ -2020,6 +2026,13 @@ class Imbrication:
             >>> commands = baca.CommandAccumulator(
             ...     time_signatures=figures.time_signatures,
             ... )
+            >>> baca.interpret.set_up_score(
+            ...     score,
+            ...     commands.manifests(),
+            ...     commands.time_signatures,
+            ...     docs=True,
+            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
+            ... )
             >>> figures.populate_commands(commands)
 
             >>> commands(
@@ -2038,7 +2051,6 @@ class Imbrication:
             ...     commands.time_signatures,
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
             >>> lilypond_file = baca.make_lilypond_file(
             ...     score,
@@ -2221,6 +2233,13 @@ class Imbrication:
             >>> commands = baca.CommandAccumulator(
             ...     time_signatures=figures.time_signatures,
             ... )
+            >>> baca.interpret.set_up_score(
+            ...     score,
+            ...     commands.manifests(),
+            ...     commands.time_signatures,
+            ...     docs=True,
+            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
+            ... )
             >>> figures.populate_commands(commands)
 
             >>> commands(
@@ -2239,7 +2258,6 @@ class Imbrication:
             ...     commands.time_signatures,
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
             >>> lilypond_file = baca.make_lilypond_file(
             ...     score,
@@ -2443,6 +2461,13 @@ class Imbrication:
             >>> commands = baca.CommandAccumulator(
             ...     time_signatures=figures.time_signatures,
             ... )
+            >>> baca.interpret.set_up_score(
+            ...     score,
+            ...     commands.manifests(),
+            ...     commands.time_signatures,
+            ...     docs=True,
+            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
+            ... )
             >>> figures.populate_commands(commands)
 
             >>> commands(
@@ -2461,7 +2486,6 @@ class Imbrication:
             ...     commands.time_signatures,
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
             >>> lilypond_file = baca.make_lilypond_file(
             ...     score,
@@ -6313,6 +6337,13 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=figures.time_signatures,
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
+        ... )
         >>> figures.populate_commands(commands)
 
         >>> commands(
@@ -6331,7 +6362,6 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -6462,6 +6492,13 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=figures.time_signatures,
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
+        ... )
         >>> figures.populate_commands(commands)
 
         >>> commands(
@@ -6480,7 +6517,6 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -6648,6 +6684,13 @@ def extend_beam(
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=figures.time_signatures,
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
+        ... )
         >>> figures.populate_commands(commands)
 
         >>> commands(
@@ -6666,7 +6709,6 @@ def extend_beam(
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -6847,6 +6889,13 @@ def imbricate(
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=figures.time_signatures,
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
+        ... )
         >>> figures.populate_commands(commands)
 
         >>> commands(
@@ -6865,7 +6914,6 @@ def imbricate(
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -7037,6 +7085,13 @@ def imbricate(
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=figures.time_signatures,
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
+        ... )
         >>> figures.populate_commands(commands)
         >>> _, _ = baca.interpreter(
         ...     score,
@@ -7044,7 +7099,6 @@ def imbricate(
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -7252,6 +7306,13 @@ def imbricate(
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=figures.time_signatures,
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
+        ... )
         >>> figures.populate_commands(commands)
 
         >>> commands(
@@ -7270,7 +7331,6 @@ def imbricate(
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -7460,6 +7520,13 @@ def imbricate(
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=figures.time_signatures,
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ... )
         >>> figures.populate_commands(commands)
 
         >>> commands(
@@ -7478,7 +7545,6 @@ def imbricate(
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -7601,6 +7667,13 @@ def imbricate(
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=figures.time_signatures,
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
+        ... )
         >>> figures.populate_commands(commands)
 
         >>> commands(
@@ -7619,7 +7692,6 @@ def imbricate(
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -7766,6 +7838,13 @@ def imbricate(
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=figures.time_signatures,
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
+        ... )
         >>> figures.populate_commands(commands)
 
         >>> commands(
@@ -7784,7 +7863,6 @@ def imbricate(
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,

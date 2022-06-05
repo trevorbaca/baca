@@ -21,6 +21,16 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_mmrests(),
@@ -33,10 +43,6 @@ r"""
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -115,6 +121,16 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_mmrests(),
@@ -138,10 +154,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -222,6 +234,16 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_mmrests(),
@@ -245,10 +267,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -330,6 +348,16 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_mmrests(),
@@ -342,10 +370,6 @@ r"""
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -435,6 +459,16 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_mmrests(),
@@ -459,10 +493,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -541,6 +571,13 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -553,7 +590,6 @@ r"""
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -599,6 +635,13 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -622,7 +665,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -670,6 +712,13 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -693,7 +742,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -741,6 +789,13 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -754,7 +809,6 @@ r"""
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -802,6 +856,13 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -826,7 +887,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -872,6 +932,13 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -885,7 +952,6 @@ r"""
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -933,6 +999,13 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -956,7 +1029,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -1004,6 +1076,13 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -1017,7 +1096,6 @@ r"""
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -1087,6 +1165,16 @@ r"""
         ...     instruments=instruments,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -1100,10 +1188,6 @@ r"""
         ...     instruments=commands.instruments,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -1239,6 +1323,16 @@ r"""
         ...     instruments=instruments,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -1263,10 +1357,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -1403,6 +1493,16 @@ r"""
         ...     instruments=instruments,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -1427,10 +1527,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -1575,6 +1671,16 @@ r"""
         ...     instruments=instruments,
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -1592,10 +1698,6 @@ r"""
         ...     instruments=commands.instruments,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -1752,6 +1854,16 @@ r"""
         ...     instruments=instruments,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -1777,10 +1889,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -1936,6 +2044,16 @@ r"""
         ...     short_instrument_names=short_instrument_names,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -1950,10 +2068,6 @@ r"""
         ...     short_instrument_names=commands.short_instrument_names,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -2097,6 +2211,16 @@ r"""
         ...     short_instrument_names=short_instrument_names,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -2121,10 +2245,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -2273,6 +2393,16 @@ r"""
         ...     short_instrument_names=short_instrument_names,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -2297,10 +2427,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -2456,6 +2582,16 @@ r"""
         ...     short_instrument_names=short_instrument_names,
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -2474,10 +2610,6 @@ r"""
         ...     short_instrument_names=commands.short_instrument_names,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -2652,6 +2784,16 @@ r"""
         ...     short_instrument_names=short_instrument_names,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -2677,10 +2819,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -2836,6 +2974,16 @@ r"""
         ...     short_instrument_names=short_instrument_names,
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -2863,10 +3011,6 @@ r"""
         ...     short_instrument_names=commands.short_instrument_names,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -2948,6 +3092,17 @@ r"""
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     append_anchor_skip=True,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 25),
+        ...     ),
+        ... )
         >>> commands(
         ...     "Skips",
         ...     baca.metronome_mark("112"),
@@ -2966,10 +3121,6 @@ r"""
         ...     metronome_marks=commands.metronome_marks,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 25),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -3041,6 +3192,17 @@ r"""
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     append_anchor_skip=True,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ... )
         >>> commands(
         ...     "Skips",
         ...     baca.metronome_mark("112"),
@@ -3054,7 +3216,7 @@ r"""
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]['Score'] = [
+        >>> persist["persistent_indicators"]["Score"] = [
         ...     baca.Memento(
         ...         context="Skips",
         ...         manifest="metronome_marks",
@@ -3071,10 +3233,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -3145,10 +3303,30 @@ r"""
 
         Reapplied metronome marks color green:
 
+        >>> metadata, persist = {}, {}
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]['Score'] = [
+        ...     baca.Memento(
+        ...         context="Skips",
+        ...         manifest="metronome_marks",
+        ...         value="90",
+        ...     )
+        ... ]
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     previous_persist=persist,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ... )
         >>> commands(
         ...     "MusicVoice",
@@ -3160,15 +3338,6 @@ r"""
         ...     baca.text_spanner_staff_padding(4),
         ... )
 
-        >>> metadata, persist = {}, {}
-        >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]['Score'] = [
-        ...     baca.Memento(
-        ...         context="Skips",
-        ...         manifest="metronome_marks",
-        ...         value="90",
-        ...     )
-        ... ]
         >>> _, _ = baca.interpreter(
         ...     score,
         ...     commands.commands,
@@ -3178,10 +3347,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -3242,6 +3407,17 @@ r"""
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     append_anchor_skip=True,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ... )
         >>> commands(
         ...     "Skips",
         ...     baca.metronome_mark("112"),
@@ -3261,10 +3437,6 @@ r"""
         ...     metronome_marks=commands.metronome_marks,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -3338,10 +3510,31 @@ r"""
 
         Even at the beginning of a section:
 
+        >>> metadata, persist = {}, {}
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]["Score"] = [
+        ...     baca.Memento(
+        ...         context="Skips",
+        ...         manifest="metronome_marks",
+        ...         value="112",
+        ...     )
+        ... ]
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     append_anchor_skip=True,
+        ...     docs=True,
+        ...     previous_persist=persist,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ... )
         >>> commands(
         ...     "Skips",
@@ -3355,15 +3548,6 @@ r"""
         ...     baca.append_anchor_note(),
         ... )
 
-        >>> metadata, persist = {}, {}
-        >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]["Score"] = [
-        ...     baca.Memento(
-        ...         context="Skips",
-        ...         manifest="metronome_marks",
-        ...         value="112",
-        ...     )
-        ... ]
         >>> _, _ = baca.interpreter(
         ...     score,
         ...     commands.commands,
@@ -3374,10 +3558,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -3456,6 +3636,13 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ... )
         >>> override = baca.PersistentOverride(
         ...     attribute="bar_extent",
         ...     context="Staff",
@@ -3483,7 +3670,6 @@ r"""
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -3541,6 +3727,13 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -3570,7 +3763,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -3615,6 +3807,13 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ... )
         >>> override = baca.PersistentOverride(
         ...     attribute="bar_extent",
         ...     context="Staff",
@@ -3656,7 +3855,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -3707,6 +3905,13 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -3719,7 +3924,6 @@ r"""
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -3768,6 +3972,13 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -3791,7 +4002,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -3842,6 +4052,13 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -3865,7 +4082,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -3915,6 +4131,13 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -3928,7 +4151,6 @@ r"""
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -3982,6 +4204,13 @@ r"""
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
+        ... )
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -4006,7 +4235,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -4074,6 +4302,17 @@ r"""
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     append_anchor_skip=True,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 25),
+        ...     ),
+        ... )
         >>> commands(
         ...     "Skips",
         ...     baca.metronome_mark(baca.Accelerando()),
@@ -4092,10 +4331,6 @@ r"""
         ...     metronome_marks=commands.metronome_marks,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 25),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -4167,6 +4402,16 @@ r"""
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ... )
         >>> commands(
         ...     "Skips",
         ...     baca.metronome_mark(baca.Accelerando()),
@@ -4193,10 +4438,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -4252,10 +4493,29 @@ r"""
 
         Reapplied tempo trends color green:
 
+        >>> metadata, persist = {}, {}
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]["Score"] = [
+        ...     baca.Memento(
+        ...         context="Skips",
+        ...         prototype="baca.Accelerando",
+        ...     )
+        ... ]
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     previous_persist=persist,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ... )
         >>> commands(
         ...     "MusicVoice",
@@ -4267,14 +4527,6 @@ r"""
         ...     baca.text_spanner_staff_padding(4),
         ... )
 
-        >>> metadata, persist = {}, {}
-        >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]["Score"] = [
-        ...     baca.Memento(
-        ...         context="Skips",
-        ...         prototype="baca.Accelerando",
-        ...     )
-        ... ]
         >>> _, _ = baca.interpreter(
         ...     score,
         ...     commands.commands,
@@ -4283,10 +4535,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -4347,6 +4595,16 @@ r"""
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
+        ... )
         >>> commands(
         ...     "Skips",
         ...     baca.metronome_mark(baca.Accelerando()),
@@ -4366,10 +4624,6 @@ r"""
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
@@ -4432,10 +4686,29 @@ r"""
 
         Even at the beginning of a section:
 
+        >>> metadata, persist = {}, {}
+        >>> persist["persistent_indicators"] = {}
+        >>> persist["persistent_indicators"]["Score"] = [
+        ...     baca.Memento(
+        ...         context="Skips",
+        ...         prototype="baca.Accelerando",
+        ...     )
+        ... ]
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     previous_persist=persist,
+        ...     spacing=baca.SpacingSpecifier(
+        ...         breaks=breaks,
+        ...         fallback_duration=(1, 24),
+        ...     ),
         ... )
         >>> commands(
         ...     "Skips",
@@ -4447,15 +4720,6 @@ r"""
         ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ... )
-
-        >>> metadata, persist = {}, {}
-        >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]["Score"] = [
-        ...     baca.Memento(
-        ...         context="Skips",
-        ...         prototype="baca.Accelerando",
-        ...     )
-        ... ]
         >>> _, _ = baca.interpreter(
         ...     score,
         ...     commands.commands,
@@ -4464,10 +4728,6 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> lilypond_file = baca.make_lilypond_file(

@@ -2,10 +2,13 @@ import copy
 import dataclasses
 import functools
 import importlib
+import os
+import pathlib
 from inspect import currentframe as _frame
 
 import abjad
 
+from . import build as _build
 from . import command as _command
 from . import commands as _commands
 from . import indicators as _indicators
@@ -2743,7 +2746,7 @@ def interpreter(
     always_make_global_rests=False,
     append_anchor_skip=False,
     attach_instruments_by_hand=False,
-    attach_nonfirst_empty_start_bar=False,
+    # attach_nonfirst_empty_start_bar=False,
     attach_rhythm_annotation_spanners=False,
     check_persistent_indicators=False,
     check_wellformedness=False,
@@ -2768,9 +2771,7 @@ def interpreter(
     magnify_staves=None,
     metadata=None,
     metronome_marks=None,
-    moment_markup=None,
     move_global_context=False,
-    page_layout_profile=None,
     part_manifest=None,
     parts_metric_modulation_multiplier=None,
     persist=None,
@@ -2782,8 +2783,6 @@ def interpreter(
     shift_measure_initial_clefs=False,
     short_instrument_names=None,
     skips_instead_of_rests=False,
-    spacing=None,
-    stage_markup=None,
     transpose_score=False,
     treat_untreated_persistent_wrappers=False,
     whitespace_leaves=False,
@@ -2826,35 +2825,11 @@ def interpreter(
     assert isinstance(transpose_score, bool)
     assert isinstance(treat_untreated_persistent_wrappers, bool)
     voice_metadata = {}
-    already_reapplied_contexts = set()
-    _make_global_skips(append_anchor_skip, global_skips, time_signatures)
-    if attach_nonfirst_empty_start_bar and not first_section:
-        _attach_nonfirst_empty_start_bar(global_skips)
-    _label_measure_numbers(first_measure_number, global_skips)
-    _label_stage_numbers(global_skips, stage_markup)
-    _label_moment_numbers(global_skips, moment_markup)
+    already_reapplied_contexts = {"Score"}
+    # set_up_score()
     offset_to_measure_number = _populate_offset_to_measure_number(
         first_measure_number,
         global_skips,
-    )
-    if spacing is not None:
-        _apply_spacing(
-            page_layout_profile,
-            score,
-            spacing,
-            has_anchor_skip=append_anchor_skip,
-        )
-    _attach_fermatas(
-        always_make_global_rests,
-        score,
-        time_signatures,
-    )
-    _reapply_persistent_indicators(
-        already_reapplied_contexts,
-        manifests,
-        previous_persistent_indicators,
-        score,
-        do_not_iterate=score,
     )
     with abjad.Timer() as timer:
         cache = None
@@ -2932,7 +2907,7 @@ def interpreter(
                     offset_to_measure_number,
                     score,
                 )
-            _apply_breaks(score, spacing)
+            # _apply_breaks(score, spacing)
             _style_fermata_measures(
                 fermata_extra_offset_y,
                 fermata_measure_empty_overrides,
@@ -3104,7 +3079,7 @@ def score_interpretation_defaults():
     return {
         "add_container_identifiers": True,
         "append_anchor_skip": True,
-        "attach_nonfirst_empty_start_bar": True,
+        # "attach_nonfirst_empty_start_bar": True,
         "attach_rhythm_annotation_spanners": True,
         "check_persistent_indicators": True,
         "check_wellformedness": True,
@@ -3117,3 +3092,70 @@ def score_interpretation_defaults():
         "treat_untreated_persistent_wrappers": True,
         "whitespace_leaves": True,
     }
+
+
+def set_up_score(
+    score,
+    manifests,
+    time_signatures,
+    *,
+    always_make_global_rests=False,
+    append_anchor_skip=False,
+    attach_nonfirst_empty_start_bar=False,
+    do_not_reapply_persistent_indicators=False,
+    docs=False,
+    moment_markup=None,
+    page_layout_profile=None,
+    previous_persist=None,
+    spacing=None,
+    stage_markup=None,
+):
+    assert isinstance(manifests, dict), repr(manifests)
+    if docs is True:
+        first_section = True
+        previous_metadata = {}
+        previous_persist = previous_persist or {}
+    else:
+        section_directory = pathlib.Path(os.getcwd())
+        first_section = section_directory.name == "01"
+        previous_metadata, previous_persist = _build.get_previous_metadata(
+            section_directory
+        )
+    previous_persist = previous_persist or {}
+    global_skips = score["Skips"]
+    _make_global_skips(append_anchor_skip, global_skips, time_signatures)
+    if attach_nonfirst_empty_start_bar and not first_section:
+        _attach_nonfirst_empty_start_bar(global_skips)
+    first_measure_number = None
+    first_measure_number = _adjust_first_measure_number(
+        first_measure_number,
+        previous_metadata,
+    )
+    _label_measure_numbers(first_measure_number, global_skips)
+    _label_stage_numbers(global_skips, stage_markup)
+    _label_moment_numbers(global_skips, moment_markup)
+    if spacing is not None:
+        _apply_spacing(
+            page_layout_profile,
+            score,
+            spacing,
+            has_anchor_skip=append_anchor_skip,
+        )
+        _apply_breaks(score, spacing)
+    _attach_fermatas(
+        always_make_global_rests,
+        score,
+        time_signatures,
+    )
+    if do_not_reapply_persistent_indicators is False:
+        already_reapplied_contexts = set()
+        previous_persistent_indicators = previous_persist.get(
+            "persistent_indicators", {}
+        )
+        _reapply_persistent_indicators(
+            already_reapplied_contexts,
+            manifests,
+            previous_persistent_indicators,
+            score,
+            do_not_iterate=score,
+        )

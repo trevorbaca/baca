@@ -56,6 +56,13 @@ class BCPCommand(_command.Command):
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -75,7 +82,6 @@ class BCPCommand(_command.Command):
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -252,6 +258,13 @@ class BCPCommand(_command.Command):
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -275,7 +288,6 @@ class BCPCommand(_command.Command):
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -617,6 +629,12 @@ class ContainerCommand(_command.Command):
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
         ... )
 
         >>> commands(
@@ -1111,6 +1129,13 @@ class AccidentalAdjustmentCommand(_command.Command):
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
+
 
         >>> commands(
         ...     "MusicVoice",
@@ -1345,6 +1370,13 @@ class ClusterCommand(_command.Command):
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
+
 
         >>> commands(
         ...     "MusicVoice",
@@ -1430,6 +1462,13 @@ class ClusterCommand(_command.Command):
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
+
 
         >>> commands(
         ...     "MusicVoice",
@@ -1515,6 +1554,12 @@ class ClusterCommand(_command.Command):
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -1598,6 +1643,12 @@ class ClusterCommand(_command.Command):
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
         ... )
 
         >>> commands(
@@ -1683,6 +1734,12 @@ class ClusterCommand(_command.Command):
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -1766,6 +1823,12 @@ class ClusterCommand(_command.Command):
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
         ... )
 
         >>> commands(
@@ -1899,6 +1962,12 @@ class ColorFingeringCommand(_command.Command):
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
         ... )
 
         >>> commands(
@@ -2127,6 +2196,12 @@ class MicrotoneDeviationCommand(_command.Command):
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -2242,6 +2317,12 @@ class OctaveDisplacementCommand(_command.Command):
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
         ... )
 
         >>> commands(
@@ -2476,6 +2557,12 @@ class PitchCommand(_command.Command):
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -2551,6 +2638,12 @@ class PitchCommand(_command.Command):
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -2625,6 +2718,12 @@ class PitchCommand(_command.Command):
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
         ... )
 
         >>> commands(
@@ -2927,6 +3026,12 @@ class RegisterCommand(_command.Command):
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -3196,6 +3301,12 @@ class RegisterInterpolationCommand(_command.Command):
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=time_signatures,
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> commands(
@@ -3302,6 +3413,12 @@ class RegisterInterpolationCommand(_command.Command):
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=time_signatures,
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
         ... )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
@@ -3410,6 +3527,12 @@ class RegisterInterpolationCommand(_command.Command):
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=time_signatures,
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> commands(
@@ -3517,6 +3640,12 @@ class RegisterInterpolationCommand(_command.Command):
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=time_signatures,
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> commands(
@@ -3623,6 +3752,12 @@ class RegisterInterpolationCommand(_command.Command):
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=time_signatures,
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
         ... )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
@@ -5298,6 +5433,12 @@ def force_accidental(
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -5611,6 +5752,12 @@ def pitch(
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
         ... )
 
         >>> commands(
@@ -7549,6 +7696,12 @@ def hide_black_note_heads(
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -7923,6 +8076,12 @@ def short_instrument_name(
         >>> commands = baca.CommandAccumulator(
         ...     short_instrument_names=short_instrument_names,
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
         ... )
 
         >>> commands(
@@ -8516,6 +8675,13 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -8531,7 +8697,6 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -8584,7 +8749,14 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
-        ...     )
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -8600,7 +8772,6 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -8655,6 +8826,13 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -8670,7 +8848,6 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -8723,6 +8900,13 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -8738,7 +8922,6 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -8791,6 +8974,13 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -8806,7 +8996,6 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -9626,6 +9815,12 @@ def assign_parts(
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -9681,6 +9876,12 @@ def assign_parts(
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
 
         >>> part_assignment = baca.parts.PartAssignment("Flute")
 
@@ -9722,156 +9923,162 @@ def bcps(
     r"""
     Makes bow contact point command.
 
-        ..  container:: example
+    ..  container:: example
 
-            >>> score = baca.docs.make_empty_score(1)
-            >>> commands = baca.CommandAccumulator(
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ... )
+        >>> score = baca.docs.make_empty_score(1)
+        >>> commands = baca.CommandAccumulator(
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
+        ... )
 
-            >>> commands(
-            ...     "MusicVoice",
-            ...     baca.make_even_divisions(),
-            ...     baca.bcps(
-            ...         [(1, 5), (3, 5), (2, 5), (4, 5), (5, 5)],
-            ...     ),
-            ...     baca.pitches("E4 F4"),
-            ...     baca.script_staff_padding(5.5),
-            ...     baca.text_spanner_staff_padding(2.5),
-            ... )
+        >>> commands(
+        ...     "MusicVoice",
+        ...     baca.make_even_divisions(),
+        ...     baca.bcps(
+        ...         [(1, 5), (3, 5), (2, 5), (4, 5), (5, 5)],
+        ...     ),
+        ...     baca.pitches("E4 F4"),
+        ...     baca.script_staff_padding(5.5),
+        ...     baca.text_spanner_staff_padding(2.5),
+        ... )
 
-            >>> _, _ = baca.interpreter(
-            ...     score,
-            ...     commands.commands,
-            ...     commands.time_signatures,
-            ...     move_global_context=True,
-            ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
-            ... )
-            >>> lilypond_file = baca.make_lilypond_file(
-            ...     score,
-            ...     includes=["baca.ily"],
-            ... )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> _, _ = baca.interpreter(
+        ...     score,
+        ...     commands.commands,
+        ...     commands.time_signatures,
+        ...     move_global_context=True,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
+        ... )
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            ..  docs::
+        ..  docs::
 
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                {
-                    \context Staff = "Music_Staff"
-                    <<
-                        \context Voice = "Skips"
-                        {
-                            \baca-new-spacing-section #1 #16
-                            \time 4/8
-                            s1 * 4/8
-                            \baca-new-spacing-section #1 #16
-                            \time 3/8
-                            s1 * 3/8
-                            \baca-new-spacing-section #1 #16
-                            \time 4/8
-                            s1 * 4/8
-                            \baca-new-spacing-section #1 #16
-                            \time 3/8
-                            s1 * 3/8
-                        }
-                        \context Voice = "MusicVoice"
-                        {
-                            \override Script.staff-padding = 5.5
-                            \override TextSpanner.staff-padding = 2.5
-                            e'8
-                            - \downbow
-                            [
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #1 #5
-                            \bacaStartTextSpanBCP
-                            f'8
-                            - \upbow
-                            \bacaStopTextSpanBCP
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #3 #5
-                            \bacaStartTextSpanBCP
-                            e'8
-                            - \downbow
-                            \bacaStopTextSpanBCP
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #2 #5
-                            \bacaStartTextSpanBCP
-                            f'8
-                            \bacaStopTextSpanBCP
-                            ]
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #4 #5
-                            \bacaStartTextSpanBCP
-                            e'8
-                            - \upbow
-                            \bacaStopTextSpanBCP
-                            [
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #5 #5
-                            \bacaStartTextSpanBCP
-                            f'8
-                            - \downbow
-                            \bacaStopTextSpanBCP
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #1 #5
-                            \bacaStartTextSpanBCP
-                            e'8
-                            - \upbow
-                            \bacaStopTextSpanBCP
-                            ]
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #3 #5
-                            \bacaStartTextSpanBCP
-                            f'8
-                            - \downbow
-                            \bacaStopTextSpanBCP
-                            [
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #2 #5
-                            \bacaStartTextSpanBCP
-                            e'8
-                            \bacaStopTextSpanBCP
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #4 #5
-                            \bacaStartTextSpanBCP
-                            f'8
-                            - \upbow
-                            \bacaStopTextSpanBCP
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #5 #5
-                            \bacaStartTextSpanBCP
-                            e'8
-                            - \downbow
-                            \bacaStopTextSpanBCP
-                            ]
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #1 #5
-                            \bacaStartTextSpanBCP
-                            f'8
-                            - \upbow
-                            \bacaStopTextSpanBCP
-                            [
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #3 #5
-                            \bacaStartTextSpanBCP
-                            e'8
-                            - \downbow
-                            \bacaStopTextSpanBCP
-                            - \abjad-solid-line-with-arrow
-                            - \baca-bcp-spanner-left-text #2 #5
-                            - \baca-bcp-spanner-right-text #4 #5
-                            \bacaStartTextSpanBCP
-                            f'8
-                            \bacaStopTextSpanBCP
-                            ]
-                            \revert Script.staff-padding
-                            \revert TextSpanner.staff-padding
-                        }
-                    >>
-                }
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            {
+                \context Staff = "Music_Staff"
+                <<
+                    \context Voice = "Skips"
+                    {
+                        \baca-new-spacing-section #1 #16
+                        \time 4/8
+                        s1 * 4/8
+                        \baca-new-spacing-section #1 #16
+                        \time 3/8
+                        s1 * 3/8
+                        \baca-new-spacing-section #1 #16
+                        \time 4/8
+                        s1 * 4/8
+                        \baca-new-spacing-section #1 #16
+                        \time 3/8
+                        s1 * 3/8
+                    }
+                    \context Voice = "MusicVoice"
+                    {
+                        \override Script.staff-padding = 5.5
+                        \override TextSpanner.staff-padding = 2.5
+                        e'8
+                        - \downbow
+                        [
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #1 #5
+                        \bacaStartTextSpanBCP
+                        f'8
+                        - \upbow
+                        \bacaStopTextSpanBCP
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #3 #5
+                        \bacaStartTextSpanBCP
+                        e'8
+                        - \downbow
+                        \bacaStopTextSpanBCP
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #2 #5
+                        \bacaStartTextSpanBCP
+                        f'8
+                        \bacaStopTextSpanBCP
+                        ]
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #4 #5
+                        \bacaStartTextSpanBCP
+                        e'8
+                        - \upbow
+                        \bacaStopTextSpanBCP
+                        [
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #5 #5
+                        \bacaStartTextSpanBCP
+                        f'8
+                        - \downbow
+                        \bacaStopTextSpanBCP
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #1 #5
+                        \bacaStartTextSpanBCP
+                        e'8
+                        - \upbow
+                        \bacaStopTextSpanBCP
+                        ]
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #3 #5
+                        \bacaStartTextSpanBCP
+                        f'8
+                        - \downbow
+                        \bacaStopTextSpanBCP
+                        [
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #2 #5
+                        \bacaStartTextSpanBCP
+                        e'8
+                        \bacaStopTextSpanBCP
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #4 #5
+                        \bacaStartTextSpanBCP
+                        f'8
+                        - \upbow
+                        \bacaStopTextSpanBCP
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #5 #5
+                        \bacaStartTextSpanBCP
+                        e'8
+                        - \downbow
+                        \bacaStopTextSpanBCP
+                        ]
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #1 #5
+                        \bacaStartTextSpanBCP
+                        f'8
+                        - \upbow
+                        \bacaStopTextSpanBCP
+                        [
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #3 #5
+                        \bacaStartTextSpanBCP
+                        e'8
+                        - \downbow
+                        \bacaStopTextSpanBCP
+                        - \abjad-solid-line-with-arrow
+                        - \baca-bcp-spanner-left-text #2 #5
+                        - \baca-bcp-spanner-right-text #4 #5
+                        \bacaStartTextSpanBCP
+                        f'8
+                        \bacaStopTextSpanBCP
+                        ]
+                        \revert Script.staff-padding
+                        \revert TextSpanner.staff-padding
+                    }
+                >>
+            }
 
     """
     if final_spanner is not None:
@@ -10087,6 +10294,12 @@ def container(
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -10163,6 +10376,12 @@ def cross_staff(*, selector=lambda _: _select.phead(_, 0)) -> IndicatorCommand:
         >>> score = baca.docs.make_empty_score(1, 1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 4)],
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
         ... )
 
         >>> commands(
@@ -10468,6 +10687,13 @@ def finger_pressure_transition(
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -10489,7 +10715,6 @@ def finger_pressure_transition(
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
@@ -10686,6 +10911,12 @@ def glissando(
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -10772,6 +11003,12 @@ def glissando(
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -10847,6 +11084,12 @@ def glissando(
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
         ... )
 
         >>> commands(
@@ -10948,6 +11191,12 @@ def glissando(
         >>> score = baca.docs.make_empty_score(1)
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
         ... )
 
         >>> commands(
@@ -11101,6 +11350,13 @@ def invisible_music(
         >>> commands = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
 
         >>> commands(
         ...     "MusicVoice",
@@ -11117,7 +11373,6 @@ def invisible_music(
         ...     commands.time_signatures,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> lilypond_file = baca.make_lilypond_file(
         ...     score,
