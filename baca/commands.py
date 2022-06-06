@@ -1017,29 +1017,35 @@ class LabelCommand(_command.Command):
         self.callable_(argument)
 
 
+def _metronome_mark(skip, indicator, manifests, *, deactivate=False, tag=None):
+    reapplied = _treat.remove_reapplied_wrappers(skip, indicator)
+    wrapper = abjad.attach(
+        indicator,
+        skip,
+        deactivate=deactivate,
+        tag=tag,
+        wrapper=True,
+    )
+    if indicator == reapplied:
+        _treat.treat_persistent_wrapper(manifests, wrapper, "redundant")
+
+
 @dataclasses.dataclass(slots=True)
 class MetronomeMarkCommand(_command.Command):
     """
     Metronome mark command.
     """
 
-    key: str | _indicators.Accelerando | _indicators.Ritardando | None = None
-    redundant: bool = False
+    key: str | _indicators.Accelerando | _indicators.Ritardando = ""
     selector: typing.Callable = lambda _: abjad.select.leaf(_, 0)
 
     def __post_init__(self):
         _command.Command.__post_init__(self)
         prototype = (str, _indicators.Accelerando, _indicators.Ritardando)
-        if self.key is not None:
-            assert isinstance(self.key, prototype), repr(self.key)
-        self.redundant = bool(self.redundant)
+        assert isinstance(self.key, prototype), repr(self.key)
 
     def _call(self, argument=None) -> None:
         if argument is None:
-            return
-        if self.key is None:
-            return
-        if self.redundant is True:
             return
         if isinstance(self.key, str) and self.runtime["manifests"] is not None:
             metronome_marks = self.runtime["manifests"]["abjad.MetronomeMark"]
@@ -1053,18 +1059,13 @@ class MetronomeMarkCommand(_command.Command):
         if not argument:
             return
         leaf = abjad.select.leaf(argument, 0)
-        reapplied = _treat.remove_reapplied_wrappers(leaf, indicator)
-        wrapper = abjad.attach(
-            indicator,
+        _metronome_mark(
             leaf,
+            indicator,
+            self.runtime["manifests"],
             deactivate=self.deactivate,
             tag=self.tag,
-            wrapper=True,
         )
-        if indicator == reapplied:
-            _treat.treat_persistent_wrapper(
-                self.runtime["manifests"], wrapper, "redundant"
-            )
 
 
 @dataclasses.dataclass(slots=True)
@@ -11745,15 +11746,11 @@ def markup(
 def metronome_mark(
     key: str | _indicators.Accelerando | _indicators.Ritardando,
     selector=lambda _: abjad.select.leaf(_, 0),
-    *,
-    redundant: bool = False,
-) -> MetronomeMarkCommand | None:
+) -> MetronomeMarkCommand:
     """
-    Attaches metronome mark matching ``key`` metronome mark manifest.
+    Attaches metronome mark matching ``key`` in metronome marks dictionary.
     """
-    if redundant is True:
-        return None
-    return MetronomeMarkCommand(key=key, redundant=redundant, selector=selector)
+    return MetronomeMarkCommand(key=key, selector=selector)
 
 
 def one_voice(

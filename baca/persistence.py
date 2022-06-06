@@ -3103,9 +3103,10 @@ r"""
         ...         fallback_duration=(1, 25),
         ...     ),
         ... )
-        >>> commands(
-        ...     "Skips",
-        ...     baca.metronome_mark("112"),
+        >>> baca.commands._metronome_mark(
+        ...     score["Skips"][1 - 1],
+        ...     metronome_marks["112"],
+        ...     commands.manifests(),
         ... )
         >>> commands(
         ...     "MusicVoice",
@@ -3203,9 +3204,13 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
+        >>> baca.commands._metronome_mark(
+        ...     score["Skips"][1 - 1],
+        ...     metronome_marks["112"],
+        ...     commands.manifests(),
+        ... )
         >>> commands(
         ...     "Skips",
-        ...     baca.metronome_mark("112"),
         ...     baca.text_spanner_staff_padding(4),
         ... )
         >>> commands(
@@ -3418,10 +3423,15 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> commands(
-        ...     "Skips",
-        ...     baca.metronome_mark("112"),
-        ...     baca.metronome_mark("112", selector=lambda _: abjad.select.leaf(_, 1)),
+        >>> baca.commands._metronome_mark(
+        ...     score["Skips"][1 - 1],
+        ...     metronome_marks["112"],
+        ...     commands.manifests(),
+        ... )
+        >>> baca.commands._metronome_mark(
+        ...     score["Skips"][2 - 1],
+        ...     metronome_marks["112"],
+        ...     commands.manifests(),
         ... )
         >>> commands(
         ...     "MusicVoice",
@@ -3536,9 +3546,13 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
+        >>> baca.commands._metronome_mark(
+        ...     score["Skips"][1 - 1],
+        ...     metronome_marks["112"],
+        ...     commands.manifests(),
+        ... )
         >>> commands(
         ...     "Skips",
-        ...     baca.metronome_mark("112"),
         ...     baca.text_spanner_staff_padding(4),
         ... )
         >>> commands(
@@ -4313,9 +4327,10 @@ r"""
         ...         fallback_duration=(1, 25),
         ...     ),
         ... )
-        >>> commands(
-        ...     "Skips",
-        ...     baca.metronome_mark(baca.Accelerando()),
+        >>> baca.commands._metronome_mark(
+        ...     score["Skips"][1 - 1],
+        ...     baca.Accelerando(),
+        ...     commands.manifests(),
         ... )
         >>> commands(
         ...     "MusicVoice",
@@ -4412,9 +4427,13 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
+        >>> baca.commands._metronome_mark(
+        ...     score["Skips"][1 - 1],
+        ...     baca.Accelerando(),
+        ...     commands.manifests(),
+        ... )
         >>> commands(
         ...     "Skips",
-        ...     baca.metronome_mark(baca.Accelerando()),
         ...     baca.text_spanner_staff_padding(4),
         ... )
         >>> commands(
@@ -4605,13 +4624,15 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> commands(
-        ...     "Skips",
-        ...     baca.metronome_mark(baca.Accelerando()),
-        ...     baca.metronome_mark(
-        ...         baca.Accelerando(),
-        ...         selector=lambda _: abjad.select.leaf(_, 1),
-        ...     ),
+        >>> baca.commands._metronome_mark(
+        ...     score["Skips"][1 - 1],
+        ...     baca.Accelerando(),
+        ...     commands.manifests(),
+        ... )
+        >>> baca.commands._metronome_mark(
+        ...     score["Skips"][2 - 1],
+        ...     baca.Accelerando(),
+        ...     commands.manifests(),
         ... )
         >>> commands(
         ...     "MusicVoice",
@@ -4710,9 +4731,13 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
+        >>> baca.commands._metronome_mark(
+        ...     score["Skips"][1 - 1],
+        ...     baca.Accelerando(),
+        ...     commands.manifests(),
+        ... )
         >>> commands(
         ...     "Skips",
-        ...     baca.metronome_mark(baca.Accelerando()),
         ...     baca.text_spanner_staff_padding(4),
         ... )
         >>> commands(
