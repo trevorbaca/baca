@@ -1165,6 +1165,7 @@ def make_layout_ly(
     )
     _interpret.set_up_score(
         score,
+        commands,
         commands.manifests(),
         commands.time_signatures,
         append_anchor_skip=has_anchor_skip,

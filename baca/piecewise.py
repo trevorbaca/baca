@@ -964,6 +964,7 @@ def dynamic(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -1064,6 +1065,7 @@ def dynamic(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -1198,6 +1200,7 @@ def hairpin(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -1293,6 +1296,7 @@ def hairpin(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -1390,6 +1394,7 @@ def hairpin(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -1486,6 +1491,7 @@ def hairpin(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -1582,6 +1588,7 @@ def hairpin(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -1690,6 +1697,7 @@ def hairpin(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -1787,6 +1795,7 @@ def hairpin(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -1892,6 +1901,7 @@ def hairpin(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -1993,6 +2003,7 @@ def hairpin(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -2106,6 +2117,7 @@ def hairpin(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -2198,6 +2210,7 @@ def hairpin(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -2291,6 +2304,7 @@ def hairpin(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -2387,6 +2401,7 @@ def hairpin(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -2488,6 +2503,7 @@ def hairpin(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -3499,6 +3515,7 @@ def text_spanner(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -3595,6 +3612,7 @@ def text_spanner(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -3691,6 +3709,7 @@ def text_spanner(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -3787,6 +3806,7 @@ def text_spanner(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -3883,6 +3903,7 @@ def text_spanner(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -3981,6 +4002,7 @@ def text_spanner(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -4095,6 +4117,7 @@ def text_spanner(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -4209,6 +4232,7 @@ def text_spanner(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -4333,6 +4357,7 @@ def text_spanner(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -4460,6 +4485,7 @@ def text_spanner(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -4561,6 +4587,7 @@ def text_spanner(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -4663,6 +4690,7 @@ def text_spanner(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -4779,6 +4807,7 @@ def text_spanner(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -4886,6 +4915,7 @@ def text_spanner(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,

@@ -58,6 +58,7 @@ class BCPCommand(_command.Command):
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -260,6 +261,7 @@ class BCPCommand(_command.Command):
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -632,6 +634,7 @@ class ContainerCommand(_command.Command):
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -1101,6 +1104,7 @@ class AccidentalAdjustmentCommand(_command.Command):
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -1342,6 +1346,7 @@ class ClusterCommand(_command.Command):
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -1434,6 +1439,7 @@ class ClusterCommand(_command.Command):
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -1526,6 +1532,7 @@ class ClusterCommand(_command.Command):
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -1616,6 +1623,7 @@ class ClusterCommand(_command.Command):
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -1706,6 +1714,7 @@ class ClusterCommand(_command.Command):
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -1796,6 +1805,7 @@ class ClusterCommand(_command.Command):
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -1935,6 +1945,7 @@ class ColorFingeringCommand(_command.Command):
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -2168,6 +2179,7 @@ class MicrotoneDeviationCommand(_command.Command):
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -2290,6 +2302,7 @@ class OctaveDisplacementCommand(_command.Command):
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -2529,6 +2542,7 @@ class PitchCommand(_command.Command):
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -2610,6 +2624,7 @@ class PitchCommand(_command.Command):
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -2691,6 +2706,7 @@ class PitchCommand(_command.Command):
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -2998,6 +3014,7 @@ class RegisterCommand(_command.Command):
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -3273,6 +3290,7 @@ class RegisterInterpolationCommand(_command.Command):
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -3386,6 +3404,7 @@ class RegisterInterpolationCommand(_command.Command):
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -3499,6 +3518,7 @@ class RegisterInterpolationCommand(_command.Command):
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -3612,6 +3632,7 @@ class RegisterInterpolationCommand(_command.Command):
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -3725,6 +3746,7 @@ class RegisterInterpolationCommand(_command.Command):
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -5405,6 +5427,7 @@ def force_accidental(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -5725,6 +5748,7 @@ def pitch(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -6907,7 +6931,22 @@ def bar_line(
     )
 
 
-_bar_line_function = bar_line
+def _bar_line(
+    skip,
+    abbreviation: str = "|",
+    *,
+    deactivate: bool = False,
+    site: str = "after",
+    tag=abjad.Tag("baca.IndicatorCommand._call():baca.bar_line()"),
+):
+    assert isinstance(abbreviation, str), repr(abbreviation)
+    indicator = abjad.BarLine(abbreviation, site=site)
+    abjad.attach(
+        indicator,
+        skip,
+        deactivate=deactivate,
+        tag=tag,
+    )
 
 
 def breathe(
@@ -7668,6 +7707,7 @@ def hide_black_note_heads(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -8049,6 +8089,7 @@ def short_instrument_name(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -8647,6 +8688,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -8722,6 +8764,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -8798,6 +8841,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -8872,6 +8916,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -8946,6 +8991,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -9787,6 +9833,7 @@ def assign_parts(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -9848,6 +9895,7 @@ def assign_parts(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -9901,6 +9949,7 @@ def bcps(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -10266,6 +10315,7 @@ def container(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -10349,6 +10399,7 @@ def cross_staff(*, selector=lambda _: _select.phead(_, 0)) -> IndicatorCommand:
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -10659,6 +10710,7 @@ def finger_pressure_transition(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -10883,6 +10935,7 @@ def glissando(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -10975,6 +11028,7 @@ def glissando(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -11057,6 +11111,7 @@ def glissando(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -11164,6 +11219,7 @@ def glissando(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -11322,6 +11378,7 @@ def invisible_music(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -11726,16 +11783,21 @@ def one_voice(
     )
 
 
-def open_volta(
-    selector=lambda _: abjad.select.leaf(_, 0),
-) -> _command.Suite:
-    """
-    Attaches bar line and overrides bar line X-extent.
-    """
-    return _command.suite(
-        _bar_line_function(".|:", selector, site="before"),
-        _command.not_mol(_overrides.bar_line_x_extent((0, 2), selector)),
-        _command.only_mol(_overrides.bar_line_x_extent((0, 3), selector)),
+def _open_volta(skip, first_measure_number):
+    assert isinstance(first_measure_number, int), repr(first_measure_number)
+    _bar_line(skip, ".|:", site="before")
+    measure_number = abjad.get.measure_number(skip)
+    measure_number += first_measure_number - 1
+    measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
+    _overrides._bar_line_x_extent(
+        [skip],
+        (0, 2),
+        tags=[_tags.NOT_MOL, measure_number_tag],
+    )
+    _overrides._bar_line_x_extent(
+        [skip],
+        (0, 3),
+        tags=[_tags.ONLY_MOL, measure_number_tag],
     )
 
 

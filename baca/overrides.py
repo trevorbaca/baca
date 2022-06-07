@@ -13,6 +13,67 @@ from . import tags as _tags
 from . import typings
 
 
+def _call_override_command(
+    leaves,
+    grob,
+    attribute,
+    value,
+    first_tag,
+    final_tag,
+    after=False,
+    allowlist=None,
+    blocklist=None,
+    context=None,
+    deactivate=False,
+):
+    if blocklist:
+        for leaf in leaves:
+            if isinstance(leaf, blocklist):
+                raise Exception(f"{type(leaf).__name__} is forbidden.")
+    if allowlist:
+        for leaf in leaves:
+            if not isinstance(leaf, allowlist):
+                names = ",".join(_.__name__ for _ in allowlist)
+                violator = type(leaf).__name__
+                raise Exception(f"only {names} (not {violator}) allowed.")
+    lilypond_type = context
+    if lilypond_type is not None:
+        assert isinstance(lilypond_type, str), repr(lilypond_type)
+    if lilypond_type in dir(abjad):
+        context = getattr(abjad, lilypond_type)
+        assert issubclass(context, abjad.Context), repr(context)
+        context = abjad.get.parentage(leaves[0]).get(context) or context()
+        lilypond_type = context.lilypond_type
+        assert isinstance(lilypond_type, str), repr(lilypond_type)
+    assert isinstance(grob, str)
+    assert isinstance(attribute, str)
+    once = bool(len(leaves) == 1)
+    override = abjad.LilyPondOverride(
+        lilypond_type=lilypond_type,
+        grob_name=grob,
+        once=once,
+        property_path=attribute,
+        value=value,
+    )
+    string = override.override_string
+    site = "before"
+    if after is True:
+        site = "after"
+    literal = abjad.LilyPondLiteral(string, site=site)
+    abjad.attach(literal, leaves[0], deactivate=deactivate, tag=first_tag)
+    if once:
+        return
+    override = abjad.LilyPondOverride(
+        lilypond_type=lilypond_type,
+        grob_name=grob,
+        is_revert=True,
+        property_path=attribute,
+    )
+    string = override.revert_string
+    literal = abjad.LilyPondLiteral(string, "after")
+    abjad.attach(literal, leaves[-1], deactivate=deactivate, tag=final_tag)
+
+
 @dataclasses.dataclass
 class OverrideCommand(_command.Command):
     """
@@ -56,67 +117,31 @@ class OverrideCommand(_command.Command):
         if not argument:
             return
         leaves = abjad.select.leaves(argument)
-        if self.blocklist:
-            for leaf in leaves:
-                if isinstance(leaf, self.blocklist):
-                    raise Exception(f"{type(leaf).__name__} is forbidden.")
-        if self.allowlist:
-            for leaf in leaves:
-                if not isinstance(leaf, self.allowlist):
-                    names = ",".join(_.__name__ for _ in self.allowlist)
-                    violator = type(leaf).__name__
-                    raise Exception(f"only {names} (not {violator}) allowed.")
-        lilypond_type = self.context
-        if lilypond_type is not None:
-            assert isinstance(lilypond_type, str), repr(lilypond_type)
-        if lilypond_type in dir(abjad):
-            context = getattr(abjad, lilypond_type)
-            assert issubclass(context, abjad.Context), repr(context)
-            context = abjad.get.parentage(leaves[0]).get(context) or context()
-            lilypond_type = context.lilypond_type
-            assert isinstance(lilypond_type, str), repr(lilypond_type)
-        grob = self.grob
-        assert isinstance(grob, str)
-        attribute = self.attribute
-        assert isinstance(attribute, str)
-        value = self.value
-        once = bool(len(leaves) == 1)
-        override = abjad.LilyPondOverride(
-            lilypond_type=lilypond_type,
-            grob_name=grob,
-            once=once,
-            property_path=attribute,
-            value=value,
-        )
-        string = override.override_string
-        site = "before"
-        if self.after is True:
-            site = "after"
-        literal = abjad.LilyPondLiteral(string, site)
-        tag = self.get_tag(leaves[0])
+        first_tag = self.get_tag(leaves[0])
         function_name = _tags.function_name(_frame(), self, n=1)
-        if tag:
-            tag = tag.append(function_name)
+        if first_tag:
+            first_tag = first_tag.append(function_name)
         else:
-            tag = function_name
-        abjad.attach(literal, leaves[0], deactivate=self.deactivate, tag=tag)
-        if once:
-            return
-        override = abjad.LilyPondOverride(
-            lilypond_type=lilypond_type,
-            grob_name=grob,
-            is_revert=True,
-            property_path=attribute,
-        )
-        string = override.revert_string
-        literal = abjad.LilyPondLiteral(string, "after")
-        tag = self.get_tag(leaves[-1])
+            first_tag = function_name
+        final_tag = self.get_tag(leaves[-1])
         function_name = _tags.function_name(_frame(), self, n=2)
-        if tag:
-            tag = tag.append(function_name)
+        if final_tag:
+            final_tag = final_tag.append(function_name)
         else:
-            tag = function_name
-        abjad.attach(literal, leaves[-1], deactivate=self.deactivate, tag=tag)
+            final_tag = function_name
+        _call_override_command(
+            leaves,
+            self.grob,
+            self.attribute,
+            self.value,
+            first_tag,
+            final_tag,
+            after=self.after,
+            allowlist=self.allowlist,
+            blocklist=self.blocklist,
+            context=self.context,
+            deactivate=self.deactivate,
+        )
 
 
 def accidental_extra_offset(
@@ -286,6 +311,7 @@ def bar_line_transparent(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -398,6 +424,48 @@ def bar_line_x_extent(
         grob="BarLine",
         selector=selector,
         tags=[_tags.function_name(_frame())],
+    )
+
+
+def _bar_line_x_extent(
+    leaves,
+    pair: tuple[int | float, int | float],
+    *,
+    after: bool = False,
+    context: str = "Score",
+    tags: list[abjad.Tag] = None,
+) -> None:
+    """
+    return OverrideCommand(
+        after=after,
+        attribute="X_extent",
+        value=f"#'({pair[0]} . {pair[1]})",
+        context=context,
+        # measures=measures,
+        grob="BarLine",
+        # selector=selector,
+        # tags=[_tags.function_name(_frame())],
+    )
+    """
+    assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
+    first_tag = abjad.Tag("baca.OverrideCommand._call(1):baca.bar_line_x_extent()")
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = abjad.Tag("baca.OverrideCommand._call(2):baca.bar_line_x_extent()")
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _call_override_command(
+        leaves,
+        "BarLine",
+        "X_extent",
+        f"#'({pair[0]} . {pair[1]})",
+        first_tag,
+        final_tag,
+        after=after,
+        allowlist=None,
+        blocklist=None,
+        context=context,
+        deactivate=False,
     )
 
 
@@ -1299,6 +1367,7 @@ def mmrest_color(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -1415,6 +1484,7 @@ def mmrest_text_color(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -1505,6 +1575,7 @@ def mmrest_text_color(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -1561,6 +1632,7 @@ def mmrest_text_extra_offset(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -1666,6 +1738,7 @@ def mmrest_text_padding(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -1770,6 +1843,7 @@ def mmrest_text_parent_center(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -1875,6 +1949,7 @@ def mmrest_text_staff_padding(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -4395,6 +4470,7 @@ def text_script_color(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -4536,6 +4612,7 @@ def text_script_down(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -4595,6 +4672,7 @@ def text_script_extra_offset(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -4759,6 +4837,7 @@ def text_script_padding(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -4945,6 +5024,7 @@ def text_script_staff_padding(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -5086,6 +5166,7 @@ def text_script_up(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,

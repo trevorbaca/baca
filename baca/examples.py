@@ -11,6 +11,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ... )
     >>> baca.interpret.set_up_score(
     ...     score,
+    ...     commands,
     ...     commands.manifests(),
     ...     commands.time_signatures,
     ...     docs=True,
@@ -104,6 +105,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ... )
     >>> baca.interpret.set_up_score(
     ...     score,
+    ...     commands,
     ...     commands.manifests(),
     ...     commands.time_signatures,
     ...     docs=True,
@@ -226,6 +228,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ... )
     >>> baca.interpret.set_up_score(
     ...     score,
+    ...     commands,
     ...     commands.manifests(),
     ...     commands.time_signatures,
     ...     docs=True,
@@ -317,6 +320,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ... )
     >>> baca.interpret.set_up_score(
     ...     score,
+    ...     commands,
     ...     commands.manifests(),
     ...     commands.time_signatures,
     ...     docs=True,
@@ -405,6 +409,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ... )
     >>> baca.interpret.set_up_score(
     ...     score,
+    ...     commands,
     ...     commands.manifests(),
     ...     commands.time_signatures,
     ...     docs=True,
@@ -511,6 +516,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ... )
     >>> baca.interpret.set_up_score(
     ...     score,
+    ...     commands,
     ...     commands.manifests(),
     ...     commands.time_signatures,
     ...     docs=True,
@@ -624,6 +630,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ... )
     >>> baca.interpret.set_up_score(
     ...     score,
+    ...     commands,
     ...     commands.manifests(),
     ...     commands.time_signatures,
     ...     docs=True,

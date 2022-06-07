@@ -123,6 +123,27 @@ class Command:
         return None
 
 
+"""
+def _get_tag(leaf: abjad.Leaf, command) -> abjad.Tag | None:
+    tags = command.tags[:]
+    if command.tag_measure_number:
+        start_offset = abjad.get.timespan(leaf).start_offset
+        measure_number = command.runtime["offset_to_measure_number"].get(start_offset)
+        if getattr(command, "after", None) is True:
+            measure_number += 1
+        if measure_number is not None:
+            tag = abjad.Tag(f"MEASURE_{measure_number}")
+            tags.append(tag)
+    if tags:
+        words = [_.string for _ in tags]
+        string = ":".join(words)
+        tag = abjad.Tag(string)
+        return tag
+    # TODO: return empty tag (instead of none)
+    return None
+"""
+
+
 @dataclasses.dataclass(slots=True)
 class Suite:
     """
@@ -216,6 +237,7 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -324,6 +346,7 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -487,6 +510,7 @@ def only_parts(command: Command | Suite) -> Command | Suite:
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,

@@ -8,6 +8,7 @@ from inspect import currentframe as _frame
 
 import abjad
 
+from . import accumulator as _accumulator
 from . import build as _build
 from . import command as _command
 from . import commands as _commands
@@ -2746,7 +2747,6 @@ def interpreter(
     always_make_global_rests=False,
     append_anchor_skip=False,
     attach_instruments_by_hand=False,
-    # attach_nonfirst_empty_start_bar=False,
     attach_rhythm_annotation_spanners=False,
     check_persistent_indicators=False,
     check_wellformedness=False,
@@ -3096,6 +3096,7 @@ def score_interpretation_defaults():
 
 def set_up_score(
     score,
+    commands,
     manifests,
     time_signatures,
     *,
@@ -3110,6 +3111,7 @@ def set_up_score(
     spacing=None,
     stage_markup=None,
 ):
+    assert isinstance(commands, _accumulator.CommandAccumulator), repr(commands)
     assert isinstance(manifests, dict), repr(manifests)
     if docs is True:
         first_section = True
@@ -3126,11 +3128,8 @@ def set_up_score(
     _make_global_skips(append_anchor_skip, global_skips, time_signatures)
     if attach_nonfirst_empty_start_bar and not first_section:
         _attach_nonfirst_empty_start_bar(global_skips)
-    first_measure_number = None
-    first_measure_number = _adjust_first_measure_number(
-        first_measure_number,
-        previous_metadata,
-    )
+    first_measure_number = _adjust_first_measure_number(None, previous_metadata)
+    commands.first_measure_number = first_measure_number
     _label_measure_numbers(first_measure_number, global_skips)
     _label_stage_numbers(global_skips, stage_markup)
     _label_moment_numbers(global_skips, moment_markup)

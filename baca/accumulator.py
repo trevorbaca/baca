@@ -152,6 +152,7 @@ class CommandAccumulator:
 
     __slots__ = (
         "commands",
+        "first_measure_number",
         "functions",
         "instruments",
         "metronome_marks",
@@ -173,8 +174,9 @@ class CommandAccumulator:
         voice_abbreviations=None,
         voice_names=None,
     ):
-        self.functions = functions or ()
         self.commands = []
+        self.first_measure_number = None
+        self.functions = functions or ()
         self.instruments = instruments
         self.metronome_marks = metronome_marks
         self.short_instrument_names = short_instrument_names

@@ -37,6 +37,7 @@ class RhythmCommand(_command.Command):
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -129,6 +130,7 @@ class RhythmCommand(_command.Command):
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -652,6 +654,7 @@ def make_monads(fractions):
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -774,6 +777,7 @@ def make_repeat_tied_notes(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,

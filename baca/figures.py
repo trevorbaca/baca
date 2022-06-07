@@ -1806,6 +1806,7 @@ class Imbrication:
             ... )
             >>> baca.interpret.set_up_score(
             ...     score,
+            ...     commands,
             ...     commands.manifests(),
             ...     commands.time_signatures,
             ...     docs=True,
@@ -2028,6 +2029,7 @@ class Imbrication:
             ... )
             >>> baca.interpret.set_up_score(
             ...     score,
+            ...     commands,
             ...     commands.manifests(),
             ...     commands.time_signatures,
             ...     docs=True,
@@ -2235,6 +2237,7 @@ class Imbrication:
             ... )
             >>> baca.interpret.set_up_score(
             ...     score,
+            ...     commands,
             ...     commands.manifests(),
             ...     commands.time_signatures,
             ...     docs=True,
@@ -2463,6 +2466,7 @@ class Imbrication:
             ... )
             >>> baca.interpret.set_up_score(
             ...     score,
+            ...     commands,
             ...     commands.manifests(),
             ...     commands.time_signatures,
             ...     docs=True,
@@ -6339,6 +6343,7 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -6494,6 +6499,7 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -6686,6 +6692,7 @@ def extend_beam(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -6891,6 +6898,7 @@ def imbricate(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -7087,6 +7095,7 @@ def imbricate(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -7308,6 +7317,7 @@ def imbricate(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -7522,6 +7532,7 @@ def imbricate(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -7669,6 +7680,7 @@ def imbricate(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
@@ -7840,6 +7852,7 @@ def imbricate(
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
+        ...     commands,
         ...     commands.manifests(),
         ...     commands.time_signatures,
         ...     docs=True,
