@@ -1018,6 +1018,13 @@ class LabelCommand(_command.Command):
 
 
 def _metronome_mark(skip, indicator, manifests, *, deactivate=False, tag=None):
+    prototype = (
+        abjad.MetricModulation,
+        abjad.MetronomeMark,
+        _indicators.Accelerando,
+        _indicators.Ritardando,
+    )
+    assert isinstance(indicator, prototype), repr(indicator)
     reapplied = _treat.remove_reapplied_wrappers(skip, indicator)
     wrapper = abjad.attach(
         indicator,
@@ -1028,44 +1035,6 @@ def _metronome_mark(skip, indicator, manifests, *, deactivate=False, tag=None):
     )
     if indicator == reapplied:
         _treat.treat_persistent_wrapper(manifests, wrapper, "redundant")
-
-
-@dataclasses.dataclass(slots=True)
-class MetronomeMarkCommand(_command.Command):
-    """
-    Metronome mark command.
-    """
-
-    key: str | _indicators.Accelerando | _indicators.Ritardando = ""
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0)
-
-    def __post_init__(self):
-        _command.Command.__post_init__(self)
-        prototype = (str, _indicators.Accelerando, _indicators.Ritardando)
-        assert isinstance(self.key, prototype), repr(self.key)
-
-    def _call(self, argument=None) -> None:
-        if argument is None:
-            return
-        if isinstance(self.key, str) and self.runtime["manifests"] is not None:
-            metronome_marks = self.runtime["manifests"]["abjad.MetronomeMark"]
-            indicator = metronome_marks.get(self.key)
-            if indicator is None:
-                raise Exception(f"can not find metronome mark {self.key!r}.")
-        else:
-            indicator = self.key
-        if self.selector is not None:
-            argument = self.selector(argument)
-        if not argument:
-            return
-        leaf = abjad.select.leaf(argument, 0)
-        _metronome_mark(
-            leaf,
-            indicator,
-            self.runtime["manifests"],
-            deactivate=self.deactivate,
-            tag=self.tag,
-        )
 
 
 @dataclasses.dataclass(slots=True)
@@ -11741,16 +11710,6 @@ def markup(
         tags=[_tags.function_name(_frame())],
         # tweaks=tweaks,
     )
-
-
-def metronome_mark(
-    key: str | _indicators.Accelerando | _indicators.Ritardando,
-    selector=lambda _: abjad.select.leaf(_, 0),
-) -> MetronomeMarkCommand:
-    """
-    Attaches metronome mark matching ``key`` in metronome marks dictionary.
-    """
-    return MetronomeMarkCommand(key=key, selector=selector)
 
 
 def one_voice(
