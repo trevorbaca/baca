@@ -404,7 +404,7 @@ def bar_line_transparent(
     )
 
 
-def bar_line_x_extent(
+def bar_line_x_extent_command(
     pair: tuple[int | float, int | float],
     selector=lambda _: abjad.select.leaf(_, 0),
     *,
@@ -412,9 +412,6 @@ def bar_line_x_extent(
     context: str = "Score",
     measures: typings.Slice = None,
 ) -> OverrideCommand:
-    """
-    Overrides bar line X extent.
-    """
     return OverrideCommand(
         after=after,
         attribute="X_extent",
@@ -427,7 +424,7 @@ def bar_line_x_extent(
     )
 
 
-def _bar_line_x_extent(
+def bar_line_x_extent(
     leaves,
     pair: tuple[int | float, int | float],
     *,
@@ -435,23 +432,11 @@ def _bar_line_x_extent(
     context: str = "Score",
     tags: list[abjad.Tag] = None,
 ) -> None:
-    """
-    return OverrideCommand(
-        after=after,
-        attribute="X_extent",
-        value=f"#'({pair[0]} . {pair[1]})",
-        context=context,
-        # measures=measures,
-        grob="BarLine",
-        # selector=selector,
-        # tags=[_tags.function_name(_frame())],
-    )
-    """
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
-    first_tag = abjad.Tag("baca.OverrideCommand._call(1):baca.bar_line_x_extent()")
+    first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
-    final_tag = abjad.Tag("baca.OverrideCommand._call(2):baca.bar_line_x_extent()")
+    final_tag = _tags.function_name(_frame(), n=2)
     for tag in tags or []:
         final_tag = final_tag.append(tag)
     _call_override_command(

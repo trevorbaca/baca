@@ -6914,7 +6914,7 @@ def articulations(
     )
 
 
-def bar_line(
+def bar_line_command(
     abbreviation: str = "|",
     selector=lambda _: abjad.select.leaf(_, 0),
     *,
@@ -6931,13 +6931,12 @@ def bar_line(
     )
 
 
-def _bar_line(
+def bar_line(
     skip,
     abbreviation: str = "|",
     *,
     deactivate: bool = False,
     site: str = "after",
-    tag=abjad.Tag("baca.IndicatorCommand._call():baca.bar_line()"),
 ):
     assert isinstance(abbreviation, str), repr(abbreviation)
     indicator = abjad.BarLine(abbreviation, site=site)
@@ -6945,7 +6944,7 @@ def _bar_line(
         indicator,
         skip,
         deactivate=deactivate,
-        tag=tag,
+        tag=_tags.function_name(_frame()),
     )
 
 
@@ -10125,9 +10124,9 @@ def close_volta(
     after = site == "after"
     # does not require not_mol() tagging, just only_mol() tagging:
     return _command.suite(
-        bar_line(":|.", selector, site=site),
+        bar_line_command(":|.", selector, site=site),
         _command.only_mol(
-            _overrides.bar_line_x_extent((0, 1.5), selector, after=after)
+            _overrides.bar_line_x_extent_command((0, 1.5), selector, after=after)
         ),
     )
 
@@ -10484,9 +10483,9 @@ def double_volta(
     Attaches bar line and overrides bar line X-extent.
     """
     return _command.suite(
-        bar_line(":.|.:", selector, site="before"),
-        _command.not_mol(_overrides.bar_line_x_extent((0, 3), selector)),
-        _command.only_mol(_overrides.bar_line_x_extent((0, 4), selector)),
+        bar_line_command(":.|.:", selector, site="before"),
+        _command.not_mol(_overrides.bar_line_x_extent_command((0, 3), selector)),
+        _command.only_mol(_overrides.bar_line_x_extent_command((0, 4), selector)),
     )
 
 
@@ -11783,21 +11782,22 @@ def one_voice(
     )
 
 
-def _open_volta(skip, first_measure_number):
+def open_volta(skip, first_measure_number):
     assert isinstance(first_measure_number, int), repr(first_measure_number)
-    _bar_line(skip, ".|:", site="before")
+    bar_line(skip, ".|:", site="before")
+    tag = _tags.function_name(_frame())
     measure_number = abjad.get.measure_number(skip)
     measure_number += first_measure_number - 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
-    _overrides._bar_line_x_extent(
+    _overrides.bar_line_x_extent(
         [skip],
         (0, 2),
-        tags=[_tags.NOT_MOL, measure_number_tag],
+        tags=[tag, _tags.NOT_MOL, measure_number_tag],
     )
-    _overrides._bar_line_x_extent(
+    _overrides.bar_line_x_extent(
         [skip],
         (0, 3),
-        tags=[_tags.ONLY_MOL, measure_number_tag],
+        tags=[tag, _tags.ONLY_MOL, measure_number_tag],
     )
 
 
