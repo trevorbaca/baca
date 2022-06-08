@@ -1708,6 +1708,33 @@ def mmrest_text_extra_offset(
     )
 
 
+def mmrest_text_extra_offset_function(
+    argument,
+    pair: tuple[int | float, int | float],
+    *,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _call_override_command(
+        leaves,
+        "MultiMeasureRestText",
+        "extra_offset",
+        f"#'({pair[0]} . {pair[1]})",
+        first_tag,
+        final_tag,
+    )
+
+
 def mmrest_text_padding(
     n: int | float,
     selector=lambda _: _select.mmrests(_),
