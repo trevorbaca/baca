@@ -192,6 +192,8 @@ class CommandAccumulator:
         abbreviations = self.voice_abbreviations
         assert isinstance(abbreviations, dict), repr(abbreviations)
         scopes_ = _unpack_scopes(scopes, abbreviations)
+        for scope_ in scopes_:
+            assert scope_.voice_name != "Skips", repr(scope_)
         scope_type = (_scope.Scope, _scope.TimelineScope)
         assert all(isinstance(_, scope_type) for _ in scopes_), repr(scopes_)
         for command in commands:

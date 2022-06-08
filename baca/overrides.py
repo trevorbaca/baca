@@ -4638,6 +4638,42 @@ def text_script_down(
     )
 
 
+def text_script_extra_offset_function(
+    argument,
+    pair: tuple[int | float, int | float],
+    *,
+    allow_mmrests: bool = False,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    blocklist = []
+    if allow_mmrests is not True:
+        blocklist.append(abjad.MultimeasureRest)
+    _call_override_command(
+        leaves,
+        "TextScript",
+        "extra_offset",
+        f"#'({pair[0]} . {pair[1]})",
+        first_tag,
+        final_tag,
+        # after=after,
+        # allowlist=None,
+        blocklist=tuple(blocklist),
+        # context=context,
+        # deactivate=False,
+    )
+
+
 def text_script_extra_offset(
     pair: tuple[int | float, int | float],
     selector=lambda _: _select.leaves(_),
@@ -5252,6 +5288,32 @@ def text_spanner_left_padding(
     )
 
 
+def text_spanner_left_padding_function(
+    argument,
+    n: int | float,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _call_override_command(
+        leaves,
+        "TextSpanner",
+        "bound_details__left__padding",
+        n,
+        first_tag,
+        final_tag,
+    )
+
+
 def text_spanner_right_padding(
     n: int | float,
     selector=lambda _: _select.leaves(_),
@@ -5373,6 +5435,32 @@ def text_spanner_staff_padding(
     )
 
 
+def text_spanner_staff_padding_function(
+    argument,
+    n: int | float,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _call_override_command(
+        leaves,
+        "TextSpanner",
+        "staff_padding",
+        n,
+        first_tag,
+        final_tag,
+    )
+
+
 def text_spanner_stencil_false(
     selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
@@ -5416,6 +5504,32 @@ def text_spanner_y_offset(
         selector=selector,
         tags=[_tags.function_name(_frame())],
         value=n,
+    )
+
+
+def text_spanner_y_offset_function(
+    argument,
+    n: int | float,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _call_override_command(
+        leaves,
+        "TextSpanner",
+        "Y_offset",
+        n,
+        first_tag,
+        final_tag,
     )
 
 

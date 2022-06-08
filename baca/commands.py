@@ -7817,14 +7817,26 @@ def literal(
     *,
     site: str = "before",
 ) -> IndicatorCommand:
-    """
-    Attaches LilyPond literal.
-    """
     literal = abjad.LilyPondLiteral(string, site=site)
     return IndicatorCommand(
         indicators=[literal],
         selector=selector,
         tags=[_tags.function_name(_frame())],
+    )
+
+
+def literal_function(
+    leaf: abjad.Leaf,
+    string: str | list[str],
+    *,
+    site: str = "before",
+) -> None:
+    assert isinstance(leaf, abjad.Leaf), repr(leaf)
+    indicator = abjad.LilyPondLiteral(string, site=site)
+    abjad.attach(
+        indicator,
+        leaf,
+        tag=_tags.function_name(_frame()),
     )
 
 
@@ -8225,9 +8237,6 @@ def rehearsal_mark(
     *tweaks: abjad.Tweak,
     font_size: int = 10,
 ) -> IndicatorCommand:
-    """
-    Attaches rehearsal mark.
-    """
     assert isinstance(argument, str), repr(argument)
     assert isinstance(font_size, int | float), repr(font_size)
     string = rf'\baca-rehearsal-mark-markup "{argument}" #{font_size}'
@@ -8239,7 +8248,31 @@ def rehearsal_mark(
         indicators=[indicator],
         selector=selector,
         tags=[_tags.function_name(_frame())],
-        # tweaks=tweaks,
+    )
+
+
+def rehearsal_mark_function(
+    leaf: abjad.Leaf,
+    argument: int | str,
+    *tweaks: abjad.Tweak,
+    font_size: int = 10,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    assert isinstance(leaf, abjad.Leaf), repr(leaf)
+    assert isinstance(argument, str), repr(argument)
+    assert isinstance(font_size, int | float), repr(font_size)
+    string = rf'\baca-rehearsal-mark-markup "{argument}" #{font_size}'
+    indicator: abjad.Markup | abjad.Bundle
+    indicator = abjad.Markup(string)
+    indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+    tag = _tags.function_name(_frame())
+    for tag_ in tags or []:
+        tag = tag.append(tag_)
+    abjad.attach(
+        indicator,
+        leaf,
+        direction=abjad.CENTER,
+        tag=tag,
     )
 
 
@@ -11745,6 +11778,43 @@ def markup(
         selector=selector,
         tags=[_tags.function_name(_frame())],
         # tweaks=tweaks,
+    )
+
+
+def markup_function(
+    leaf,
+    argument: str | abjad.Markup,
+    *tweaks: abjad.Tweak,
+    direction=abjad.UP,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    assert isinstance(leaf, abjad.Leaf), repr(leaf)
+    if direction not in (abjad.DOWN, abjad.UP):
+        message = f"direction must be up or down (not {direction!r})."
+        raise Exception(message)
+    indicator: abjad.Markup | abjad.Bundle
+    if isinstance(argument, str):
+        indicator = abjad.Markup(argument)
+    elif isinstance(argument, abjad.Markup):
+        indicator = dataclasses.replace(argument)
+    else:
+        message = "MarkupLibary.__call__():\n"
+        message += "  Value of 'argument' must be str or markup.\n"
+        message += f"  Not {argument!r}."
+        raise Exception(message)
+    if tweaks:
+        indicator = abjad.bundle(indicator, *tweaks)
+    tag = _tags.function_name(_frame())
+    for tag_ in tags or []:
+        tag = tag.append(tag_)
+    abjad.attach(
+        indicator,
+        leaf,
+        # context=self.context,
+        # deactivate=self.deactivate,
+        direction=direction,
+        # do_not_test=self.do_not_test,
+        tag=tag,
     )
 
 

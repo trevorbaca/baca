@@ -591,6 +591,7 @@ def only_section(command: Command | Suite) -> Command | Suite:
     """
     Tags ``command`` with ``+SEGMENT``.
     """
+    # TODO: change tag name to _tags.ONLY_SECTION
     return tag(_tags.ONLY_SEGMENT, command)
 
 

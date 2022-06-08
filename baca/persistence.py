@@ -3235,10 +3235,7 @@ r"""
         ...     metronome_marks["112"],
         ...     commands.manifests(),
         ... )
-        >>> commands(
-        ...     "Skips",
-        ...     baca.text_spanner_staff_padding(4),
-        ... )
+        >>> baca.text_spanner_staff_padding_function(score["Skips"][:-1], 4)
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -3365,10 +3362,7 @@ r"""
         ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ... )
-        >>> commands(
-        ...     "Skips",
-        ...     baca.text_spanner_staff_padding(4),
-        ... )
+        >>> baca.text_spanner_staff_padding_function(score["Skips"], 4)
 
         >>> _, _ = baca.interpreter(
         ...     score,
@@ -3580,10 +3574,7 @@ r"""
         ...     metronome_marks["112"],
         ...     commands.manifests(),
         ... )
-        >>> commands(
-        ...     "Skips",
-        ...     baca.text_spanner_staff_padding(4),
-        ... )
+        >>> baca.text_spanner_staff_padding_function(score["Skips"][:-1], 4)
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -4471,10 +4462,7 @@ r"""
         ...     baca.Accelerando(),
         ...     commands.manifests(),
         ... )
-        >>> commands(
-        ...     "Skips",
-        ...     baca.text_spanner_staff_padding(4),
-        ... )
+        >>> baca.text_spanner_staff_padding_function(score["Skips"], 4)
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
@@ -4581,10 +4569,7 @@ r"""
         ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ... )
-        >>> commands(
-        ...     "Skips",
-        ...     baca.text_spanner_staff_padding(4),
-        ... )
+        >>> baca.text_spanner_staff_padding_function(score["Skips"], 4)
 
         >>> _, _ = baca.interpreter(
         ...     score,
@@ -4778,10 +4763,7 @@ r"""
         ...     baca.Accelerando(),
         ...     commands.manifests(),
         ... )
-        >>> commands(
-        ...     "Skips",
-        ...     baca.text_spanner_staff_padding(4),
-        ... )
+        >>> baca.text_spanner_staff_padding_function(score["Skips"], 4)
         >>> commands(
         ...     "MusicVoice",
         ...     baca.make_notes(),
