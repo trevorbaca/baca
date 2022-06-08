@@ -860,31 +860,38 @@ class GlobalFermataCommand(_command.Command):
         else:
             raise Exception(self.description)
         for leaf in abjad.iterate.leaves(argument):
-            assert isinstance(leaf, abjad.MultimeasureRest)
-            string = rf"\baca-{command}-markup"
-            markup = abjad.Markup(string)
-            markup = dataclasses.replace(markup)
-            abjad.attach(
-                markup,
-                leaf,
-                direction=abjad.UP,
-                tag=self.tag.append(_tags.function_name(_frame(), self, n=1)),
-            )
-            literal = abjad.LilyPondLiteral(r"\baca-fermata-measure")
-            abjad.attach(
-                literal,
-                leaf,
-                tag=self.tag.append(_tags.function_name(_frame(), self, n=2)),
-            )
-            tag = abjad.Tag(_enums.FERMATA_MEASURE.name)
-            tag = tag.append(self.tag)
-            tag = tag.append(_tags.function_name(_frame(), self, n=3))
-            abjad.attach(
-                _enums.FERMATA_MEASURE,
-                leaf,
-                tag=_tags.FERMATA_MEASURE,
-            )
-            abjad.annotate(leaf, _enums.FERMATA_DURATION, fermata_duration)
+            _global_fermata(leaf, command, fermata_duration)
+
+
+def _global_fermata(mmrest, command, fermata_duration):
+    assert isinstance(mmrest, abjad.MultimeasureRest), repr(mmrest)
+    assert isinstance(command, str), repr(command)
+    assert isinstance(fermata_duration, int), repr(fermata_duration)
+    markup = abjad.Markup(rf"\baca-{command}-markup")
+    abjad.attach(
+        markup,
+        mmrest,
+        direction=abjad.UP,
+        # tag=self.tag.append(_tags.function_name(_frame(), self, n=1)),
+        tag=_tags.function_name(_frame(), n=1),
+    )
+    literal = abjad.LilyPondLiteral(r"\baca-fermata-measure")
+    abjad.attach(
+        literal,
+        mmrest,
+        # tag=self.tag.append(_tags.function_name(_frame(), self, n=2)),
+        tag=_tags.function_name(_frame(), n=2),
+    )
+    # tag = abjad.Tag(_enums.FERMATA_MEASURE.name)
+    # tag = tag.append(self.tag)
+    # tag = tag.append(_tags.function_name(_frame(), n=3))
+    abjad.attach(
+        _enums.FERMATA_MEASURE,
+        mmrest,
+        # TODO: remove enum tag?
+        tag=_tags.FERMATA_MEASURE,
+    )
+    abjad.annotate(mmrest, _enums.FERMATA_DURATION, fermata_duration)
 
 
 def _token_to_indicators(token):
@@ -10112,22 +10119,23 @@ def bcps(
     )
 
 
-def close_volta(
-    selector=lambda _: abjad.select.leaf(_, 0),
-    *,
-    site: str = "before",
-) -> _command.Suite:
-    """
-    Attaches bar line and overrides bar line X-extent.
-    """
-    assert site in ("after", "before"), repr(site)
+def close_volta(skip, first_measure_number, site: str = "before"):
+    assert isinstance(first_measure_number, int), repr(first_measure_number)
+    assert isinstance(site, str), repr(site)
     after = site == "after"
-    # does not require not_mol() tagging, just only_mol() tagging:
-    return _command.suite(
-        bar_line_command(":|.", selector, site=site),
-        _command.only_mol(
-            _overrides.bar_line_x_extent_command((0, 1.5), selector, after=after)
-        ),
+    bar_line(skip, ":|.", site=site)
+    tag = _tags.function_name(_frame())
+    measure_number = abjad.get.measure_number(skip)
+    measure_number += first_measure_number - 1
+    if after is True:
+        measure_number += 1
+    measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
+    # ONLY_MOL instead of NOT_MOL
+    _overrides.bar_line_x_extent(
+        [skip],
+        (0, 1.5),
+        after=after,
+        tags=[tag, measure_number_tag, _tags.ONLY_MOL],
     )
 
 
@@ -10476,16 +10484,22 @@ def cross_staff(*, selector=lambda _: _select.phead(_, 0)) -> IndicatorCommand:
     )
 
 
-def double_volta(
-    selector=lambda _: abjad.select.leaf(_, 0),
-) -> _command.Suite:
-    """
-    Attaches bar line and overrides bar line X-extent.
-    """
-    return _command.suite(
-        bar_line_command(":.|.:", selector, site="before"),
-        _command.not_mol(_overrides.bar_line_x_extent_command((0, 3), selector)),
-        _command.only_mol(_overrides.bar_line_x_extent_command((0, 4), selector)),
+def double_volta(skip, first_measure_number):
+    assert isinstance(first_measure_number, int), repr(first_measure_number)
+    bar_line(skip, ":.|.:", site="before")
+    tag = _tags.function_name(_frame())
+    measure_number = abjad.get.measure_number(skip)
+    measure_number += first_measure_number - 1
+    measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
+    _overrides.bar_line_x_extent(
+        [skip],
+        (0, 3),
+        tags=[tag, _tags.NOT_MOL, measure_number_tag],
+    )
+    _overrides.bar_line_x_extent(
+        [skip],
+        (0, 4),
+        tags=[tag, _tags.ONLY_MOL, measure_number_tag],
     )
 
 
@@ -11328,9 +11342,6 @@ def global_fermata(
     description: str = "fermata",
     selector=lambda _: abjad.select.leaf(_, 0),
 ) -> GlobalFermataCommand:
-    """
-    Attaches global fermata.
-    """
     fermatas = GlobalFermataCommand.description_to_command.keys()
     if description not in fermatas:
         message = f"must be in {repr(', '.join(fermatas))}:\n"
@@ -11341,6 +11352,33 @@ def global_fermata(
         selector=selector,
         tags=[_tags.function_name(_frame())],
     )
+
+
+def global_fermata_function(
+    mmrest: abjad.MultimeasureRest,
+    description: str = "fermata",
+) -> None:
+    fermatas = GlobalFermataCommand.description_to_command.keys()
+    if description not in fermatas:
+        message = f"must be in {repr(', '.join(fermatas))}:\n"
+        message += f"   {repr(description)}"
+        raise Exception(message)
+    if isinstance(description, str) and description != "fermata":
+        command = description.replace("_", "-")
+        command = f"{command}-fermata"
+    else:
+        command = "fermata"
+    if description == "short":
+        fermata_duration = 1
+    elif description == "fermata":
+        fermata_duration = 2
+    elif description == "long":
+        fermata_duration = 4
+    elif description == "very_long":
+        fermata_duration = 8
+    else:
+        raise Exception(description)
+    _global_fermata(mmrest, command, fermata_duration)
 
 
 def instrument(
