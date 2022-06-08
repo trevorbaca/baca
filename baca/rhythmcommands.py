@@ -497,31 +497,6 @@ class TimeSignatureMaker:
         return result
 
 
-def _make_mmrests(time_signatures):
-    mmrests = []
-    tag = _tags.function_name(_frame())
-    for i, time_signature in enumerate(time_signatures):
-        multiplier = abjad.NonreducedFraction(time_signature.pair)
-        if i == 0:
-            voice_name = "ChangeMeVoice"
-            mmrest = _make_multimeasure_rest_container(voice_name, multiplier)
-        else:
-            mmrest = abjad.MultimeasureRest(1, multiplier=multiplier, tag=tag)
-        mmrests.append(mmrest)
-    return mmrests
-
-
-def _make_mmrests_flat(time_signatures):
-    mmrests = []
-    tag = _tags.function_name(_frame())
-    for time_signature in time_signatures:
-        multiplier = abjad.NonreducedFraction(time_signature.pair)
-        mmrest = abjad.MultimeasureRest(1, multiplier=multiplier, tag=tag)
-        mmrests.append(mmrest)
-    return mmrests
-
-
-# TODO: make inner function of _make_mmrests()
 def _make_multimeasure_rest_container(voice_name, multiplier):
     tag = _tags.function_name(_frame(), n=1)
     tag = tag.append(_tags.HIDDEN)
@@ -621,25 +596,44 @@ def make_fused_tuplet_monads(
 
 
 def make_mmrests(
+    *,
+    head: bool = False,
+    # TODO: remove measures keyword?
     measures=None,
 ):
+    if head is True:
+
+        def rhythm_maker(time_signatures):
+            return make_mmrests_function(time_signatures, head=head)
+
+    else:
+        rhythm_maker = make_mmrests_function
     return RhythmCommand(
-        rhythm_maker=_make_mmrests,
+        rhythm_maker=rhythm_maker,
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
         measures=measures,
     )
 
 
-def make_mmrests_flat(
-    measures=None,
-):
-    return RhythmCommand(
-        rhythm_maker=_make_mmrests_flat,
-        annotation_spanner_color="#darkcyan",
-        frame=_frame(),
-        measures=measures,
-    )
+def make_mmrests_function(time_signatures, *, head: bool = False):
+    tag = _tags.function_name(_frame())
+    mmrests = []
+    if head is False:
+        for time_signature in time_signatures:
+            multiplier = abjad.NonreducedFraction(time_signature.pair)
+            mmrest = abjad.MultimeasureRest(1, multiplier=multiplier, tag=tag)
+            mmrests.append(mmrest)
+    else:
+        for i, time_signature in enumerate(time_signatures):
+            multiplier = abjad.NonreducedFraction(time_signature.pair)
+            if i == 0:
+                voice_name = "ChangeMeVoice"
+                mmrest = _make_multimeasure_rest_container(voice_name, multiplier)
+            else:
+                mmrest = abjad.MultimeasureRest(1, multiplier=multiplier, tag=tag)
+            mmrests.append(mmrest)
+    return mmrests
 
 
 def make_monads(fractions):

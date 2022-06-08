@@ -34,7 +34,7 @@ r"""
         ... )
         >>> commands(
         ...     "MusicVoice",
-        ...     baca.make_mmrests(),
+        ...     baca.make_mmrests(head=True),
         ...     baca.clef("treble"),
         ... )
 
@@ -135,7 +135,7 @@ r"""
         ... )
         >>> commands(
         ...     "MusicVoice",
-        ...     baca.make_mmrests(),
+        ...     baca.make_mmrests(head=True),
         ...     baca.clef("alto"),
         ... )
 
@@ -249,7 +249,7 @@ r"""
         ... )
         >>> commands(
         ...     "MusicVoice",
-        ...     baca.make_mmrests(),
+        ...     baca.make_mmrests(head=True),
         ...     baca.reapply_persistent_indicators(),
         ... )
 
@@ -364,7 +364,7 @@ r"""
         ... )
         >>> commands(
         ...     "MusicVoice",
-        ...     baca.make_mmrests(),
+        ...     baca.make_mmrests(head=True),
         ...     baca.clef("treble", selector=lambda _: abjad.select.leaf(_, 0)),
         ...     baca.clef("treble", selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
@@ -476,7 +476,7 @@ r"""
         ... )
         >>> commands(
         ...     "MusicVoice",
-        ...     baca.make_mmrests(),
+        ...     baca.make_mmrests(head=True),
         ...     baca.reapply_persistent_indicators(),
         ...     baca.clef("treble"),
         ... )

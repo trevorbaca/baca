@@ -1360,7 +1360,7 @@ def mmrest_color(
 
         >>> commands(
         ...     "MusicVoice",
-        ...     baca.make_mmrests(),
+        ...     baca.make_mmrests(head=True),
         ...     baca.mmrest_color("#(x11-color 'DarkOrchid)"),
         ... )
 
@@ -1477,7 +1477,7 @@ def mmrest_text_color(
 
         >>> commands(
         ...     "MusicVoice",
-        ...     baca.make_mmrests(),
+        ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: baca.select.mmrest(_, 1),
@@ -1625,7 +1625,7 @@ def mmrest_text_extra_offset(
 
         >>> commands(
         ...     "MusicVoice",
-        ...     baca.make_mmrests(),
+        ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: baca.select.mmrest(_, 1),
@@ -1758,7 +1758,7 @@ def mmrest_text_padding(
 
         >>> commands(
         ...     "MusicVoice",
-        ...     baca.make_mmrests(),
+        ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: baca.select.mmrest(_, 1),
@@ -1863,7 +1863,7 @@ def mmrest_text_parent_center(
 
         >>> commands(
         ...     "MusicVoice",
-        ...     baca.make_mmrests(),
+        ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: baca.select.mmrest(_, 1),
@@ -1969,7 +1969,7 @@ def mmrest_text_staff_padding(
 
         >>> commands(
         ...     "MusicVoice",
-        ...     baca.make_mmrests(),
+        ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: baca.select.mmrest(_, 1),
@@ -4490,7 +4490,7 @@ def text_script_color(
 
         >>> commands(
         ...     "MusicVoice",
-        ...     baca.make_mmrests(),
+        ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: abjad.select.leaf(_, 1),
@@ -4632,7 +4632,7 @@ def text_script_down(
 
         >>> commands(
         ...     "MusicVoice",
-        ...     baca.make_mmrests(),
+        ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: abjad.select.leaf(_, 1),
@@ -4728,7 +4728,7 @@ def text_script_extra_offset(
 
         >>> commands(
         ...     "MusicVoice",
-        ...     baca.make_mmrests(),
+        ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: abjad.select.leaf(_, 1),
@@ -4893,7 +4893,7 @@ def text_script_padding(
 
         >>> commands(
         ...     "MusicVoice",
-        ...     baca.make_mmrests(),
+        ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: abjad.select.leaf(_, 1),
@@ -5080,7 +5080,7 @@ def text_script_staff_padding(
 
         >>> commands(
         ...     "MusicVoice",
-        ...     baca.make_mmrests(),
+        ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markkup still",
         ...         selector=lambda _: abjad.select.leaf(_, 1),
@@ -5222,7 +5222,7 @@ def text_script_up(
 
         >>> commands(
         ...     "MusicVoice",
-        ...     baca.make_mmrests(),
+        ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: abjad.select.leaf(_, 1),
