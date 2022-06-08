@@ -819,81 +819,6 @@ class GlissandoCommand(_command.Command):
         )
 
 
-@dataclasses.dataclass(slots=True)
-class GlobalFermataCommand(_command.Command):
-    """
-    Global fermata command.
-    """
-
-    description: str = ""
-
-    description_to_command = {
-        "short": "shortfermata",
-        "fermata": "fermata",
-        "long": "longfermata",
-        "very_long": "verylongfermata",
-    }
-
-    def __post_init__(self):
-        _command.Command.__post_init__(self)
-        if self.description is not None:
-            assert self.description in self.description_to_command
-
-    def _call(self, argument=None) -> None:
-        if argument is None:
-            return
-        if self.selector is not None:
-            argument = self.selector(argument)
-        if isinstance(self.description, str) and self.description != "fermata":
-            description = self.description.replace("_", "-")
-            command = f"{description}-fermata"
-        else:
-            command = "fermata"
-        if self.description == "short":
-            fermata_duration = 1
-        elif self.description == "fermata":
-            fermata_duration = 2
-        elif self.description == "long":
-            fermata_duration = 4
-        elif self.description == "very_long":
-            fermata_duration = 8
-        else:
-            raise Exception(self.description)
-        for leaf in abjad.iterate.leaves(argument):
-            _global_fermata(leaf, command, fermata_duration)
-
-
-def _global_fermata(mmrest, command, fermata_duration):
-    assert isinstance(mmrest, abjad.MultimeasureRest), repr(mmrest)
-    assert isinstance(command, str), repr(command)
-    assert isinstance(fermata_duration, int), repr(fermata_duration)
-    markup = abjad.Markup(rf"\baca-{command}-markup")
-    abjad.attach(
-        markup,
-        mmrest,
-        direction=abjad.UP,
-        # tag=self.tag.append(_tags.function_name(_frame(), self, n=1)),
-        tag=_tags.function_name(_frame(), n=1),
-    )
-    literal = abjad.LilyPondLiteral(r"\baca-fermata-measure")
-    abjad.attach(
-        literal,
-        mmrest,
-        # tag=self.tag.append(_tags.function_name(_frame(), self, n=2)),
-        tag=_tags.function_name(_frame(), n=2),
-    )
-    # tag = abjad.Tag(_enums.FERMATA_MEASURE.name)
-    # tag = tag.append(self.tag)
-    # tag = tag.append(_tags.function_name(_frame(), n=3))
-    abjad.attach(
-        _enums.FERMATA_MEASURE,
-        mmrest,
-        # TODO: remove enum tag?
-        tag=_tags.FERMATA_MEASURE,
-    )
-    abjad.annotate(mmrest, _enums.FERMATA_DURATION, fermata_duration)
-
-
 def _token_to_indicators(token):
     result = []
     if not isinstance(token, tuple | list):
@@ -11339,26 +11264,16 @@ def glissando(
 
 
 def global_fermata(
-    description: str = "fermata",
-    selector=lambda _: abjad.select.leaf(_, 0),
-) -> GlobalFermataCommand:
-    fermatas = GlobalFermataCommand.description_to_command.keys()
-    if description not in fermatas:
-        message = f"must be in {repr(', '.join(fermatas))}:\n"
-        message += f"   {repr(description)}"
-        raise Exception(message)
-    return GlobalFermataCommand(
-        description=description,
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
-def global_fermata_function(
     mmrest: abjad.MultimeasureRest,
     description: str = "fermata",
 ) -> None:
-    fermatas = GlobalFermataCommand.description_to_command.keys()
+    description_to_command = {
+        "short": "shortfermata",
+        "fermata": "fermata",
+        "long": "longfermata",
+        "very_long": "verylongfermata",
+    }
+    fermatas = description_to_command.keys()
     if description not in fermatas:
         message = f"must be in {repr(', '.join(fermatas))}:\n"
         message += f"   {repr(description)}"
@@ -11378,7 +11293,34 @@ def global_fermata_function(
         fermata_duration = 8
     else:
         raise Exception(description)
-    _global_fermata(mmrest, command, fermata_duration)
+    assert isinstance(mmrest, abjad.MultimeasureRest), repr(mmrest)
+    assert isinstance(command, str), repr(command)
+    assert isinstance(fermata_duration, int), repr(fermata_duration)
+    markup = abjad.Markup(rf"\baca-{command}-markup")
+    abjad.attach(
+        markup,
+        mmrest,
+        direction=abjad.UP,
+        # tag=self.tag.append(_tags.function_name(_frame(), self, n=1)),
+        tag=_tags.function_name(_frame(), n=1),
+    )
+    literal = abjad.LilyPondLiteral(r"\baca-fermata-measure")
+    abjad.attach(
+        literal,
+        mmrest,
+        # tag=self.tag.append(_tags.function_name(_frame(), self, n=2)),
+        tag=_tags.function_name(_frame(), n=2),
+    )
+    # tag = abjad.Tag(_enums.FERMATA_MEASURE.name)
+    # tag = tag.append(self.tag)
+    # tag = tag.append(_tags.function_name(_frame(), n=3))
+    abjad.attach(
+        _enums.FERMATA_MEASURE,
+        mmrest,
+        # TODO: remove enum tag?
+        tag=_tags.FERMATA_MEASURE,
+    )
+    abjad.annotate(mmrest, _enums.FERMATA_DURATION, fermata_duration)
 
 
 def instrument(
