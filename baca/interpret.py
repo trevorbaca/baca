@@ -773,6 +773,8 @@ def _call_all_commands(
 ):
     voice_name_to_voice = {}
     for voice in abjad.select.components(score, abjad.Voice):
+        if voice.name in voice_name_to_voice:
+            continue
         voice_name_to_voice[voice.name] = voice
     command_count = 0
     for i, command in enumerate(commands):
@@ -2907,7 +2909,6 @@ def interpreter(
                     offset_to_measure_number,
                     score,
                 )
-            # _apply_breaks(score, spacing)
             _style_fermata_measures(
                 fermata_extra_offset_y,
                 fermata_measure_empty_overrides,

@@ -616,22 +616,24 @@ def make_mmrests(
     )
 
 
-def make_mmrests_function(time_signatures, *, head: bool = False):
+def make_mmrests_function(time_signatures, *, head: str | bool = ""):
+    assert isinstance(head, (str, bool)), repr(head)
     tag = _tags.function_name(_frame())
     mmrests = []
-    if head is False:
-        for time_signature in time_signatures:
-            multiplier = abjad.NonreducedFraction(time_signature.pair)
-            mmrest = abjad.MultimeasureRest(1, multiplier=multiplier, tag=tag)
-            mmrests.append(mmrest)
-    else:
+    if head is True:
+        head = "ChangeMeVoice"
+    if head:
         for i, time_signature in enumerate(time_signatures):
             multiplier = abjad.NonreducedFraction(time_signature.pair)
             if i == 0:
-                voice_name = "ChangeMeVoice"
-                mmrest = _make_multimeasure_rest_container(voice_name, multiplier)
+                mmrest = _make_multimeasure_rest_container(head, multiplier)
             else:
                 mmrest = abjad.MultimeasureRest(1, multiplier=multiplier, tag=tag)
+            mmrests.append(mmrest)
+    else:
+        for time_signature in time_signatures:
+            multiplier = abjad.NonreducedFraction(time_signature.pair)
+            mmrest = abjad.MultimeasureRest(1, multiplier=multiplier, tag=tag)
             mmrests.append(mmrest)
     return mmrests
 
@@ -731,25 +733,43 @@ def make_notes(
     measures=None,
     repeat_ties=False,
 ):
-    """
-    Makes notes; rewrites meter.
-    """
-    if repeat_ties:
-        repeat_tie_specifier = [rmakers.force_repeat_tie()]
-    else:
-        repeat_tie_specifier = []
+    rhythm_maker = _make_notes(*specifiers, repeat_ties=repeat_ties)
     return RhythmCommand(
-        rhythm_maker=rmakers.stack(
-            rmakers.note(),
-            *specifiers,
-            rmakers.rewrite_meter(),
-            *repeat_tie_specifier,
-            tag=_tags.function_name(_frame()),
-        ),
+        rhythm_maker=rhythm_maker,
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
         measures=measures,
     )
+
+
+def _make_notes(
+    *specifiers,
+    repeat_ties=False,
+):
+    if repeat_ties:
+        repeat_tie_specifier = [rmakers.force_repeat_tie()]
+    else:
+        repeat_tie_specifier = []
+    rhythm_maker = rmakers.stack(
+        rmakers.note(),
+        *specifiers,
+        rmakers.rewrite_meter(),
+        *repeat_tie_specifier,
+        # tag=_tags.function_name(_frame()),
+        tag=abjad.Tag("baca.make_notes()"),
+    )
+    return rhythm_maker
+
+
+def make_notes_function(
+    time_signatures,
+    *specifiers,
+    repeat_ties=False,
+):
+    assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
+    rhythm_maker = _make_notes(*specifiers, repeat_ties=repeat_ties)
+    music = rhythm_maker(time_signatures)
+    return music
 
 
 def make_repeat_tied_notes(
@@ -831,6 +851,20 @@ def make_repeat_tied_notes(
             }
 
     """
+    rhythm_maker = _make_repeat_tied_notes(
+        *specifiers, do_not_rewrite_meter=do_not_rewrite_meter
+    )
+    return RhythmCommand(
+        rhythm_maker=rhythm_maker,
+        annotation_spanner_color="#darkcyan",
+        frame=_frame(),
+    )
+
+
+def _make_repeat_tied_notes(
+    *specifiers,
+    do_not_rewrite_meter=None,
+):
     specifiers_ = list(specifiers)
     specifier = rmakers.beam(lambda _: _select.plts(_))
     specifiers_.append(specifier)
@@ -841,24 +875,34 @@ def make_repeat_tied_notes(
         specifiers_.append(command)
     specifier = rmakers.force_repeat_tie()
     specifiers_.append(specifier)
-    return RhythmCommand(
-        rhythm_maker=rmakers.stack(
-            rmakers.note(), *specifiers_, tag=_tags.function_name(_frame())
-        ),
-        annotation_spanner_color="#darkcyan",
-        frame=_frame(),
+    rhythm_maker = rmakers.stack(
+        rmakers.note(),
+        *specifiers_,
+        # tag=_tags.function_name(_frame(),
+        tag=abjad.Tag("baca.make_repeat_tied_notes()"),
     )
+    return rhythm_maker
 
 
-def make_repeated_duration_notes(
+def make_repeat_tied_notes_function(
+    time_signatures,
+    *specifiers,
+    do_not_rewrite_meter=None,
+):
+    assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
+    rhythm_maker = _make_repeat_tied_notes(
+        *specifiers, do_not_rewrite_meter=do_not_rewrite_meter
+    )
+    music = rhythm_maker(time_signatures)
+    return music
+
+
+def _make_repeated_duration_notes(
     durations,
     *specifiers,
     do_not_rewrite_meter=None,
     measures=None,
 ):
-    """
-    Makes repeated-duration notes; rewrites meter.
-    """
     if isinstance(durations, abjad.Duration):
         durations = [durations]
     elif isinstance(durations, tuple):
@@ -873,19 +917,66 @@ def make_repeated_duration_notes(
     rewrite_specifiers = []
     if not do_not_rewrite_meter:
         rewrite_specifiers.append(rmakers.rewrite_meter())
+    rhythm_maker = rmakers.stack(
+        rmakers.note(),
+        *specifiers,
+        *rewrite_specifiers,
+        rmakers.force_repeat_tie(),
+        preprocessor=preprocessor,
+        # tag=_tags.function_name(_frame()),
+        tag=abjad.Tag("baca.make_repeated_duration_notes()"),
+    )
+    return rhythm_maker
+
+
+def make_repeated_duration_notes(
+    durations,
+    *specifiers,
+    do_not_rewrite_meter=None,
+    measures=None,
+):
+    #    if isinstance(durations, abjad.Duration):
+    #        durations = [durations]
+    #    elif isinstance(durations, tuple):
+    #        assert len(durations) == 2
+    #        durations = [abjad.Duration(durations)]
+    #
+    #    def preprocessor(divisions):
+    #        divisions = _sequence.fuse(divisions)
+    #        divisions = _sequence.split_divisions(divisions, durations, cyclic=True)
+    #        return divisions
+    #
+    #    rewrite_specifiers = []
+    #    if not do_not_rewrite_meter:
+    #        rewrite_specifiers.append(rmakers.rewrite_meter())
+    rhythm_maker = _make_repeated_duration_notes(
+        durations,
+        *specifiers,
+        do_not_rewrite_meter=do_not_rewrite_meter,
+        measures=measures,
+    )
     return RhythmCommand(
-        rhythm_maker=rmakers.stack(
-            rmakers.note(),
-            *specifiers,
-            *rewrite_specifiers,
-            rmakers.force_repeat_tie(),
-            preprocessor=preprocessor,
-            tag=_tags.function_name(_frame()),
-        ),
+        rhythm_maker=rhythm_maker,
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
         measures=measures,
     )
+
+
+def make_repeated_duration_notes_function(
+    time_signatures,
+    durations,
+    *specifiers,
+    do_not_rewrite_meter=None,
+):
+    assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
+    rhythm_maker = _make_repeated_duration_notes(
+        durations,
+        *specifiers,
+        do_not_rewrite_meter=do_not_rewrite_meter,
+    )
+    music = rhythm_maker(time_signatures)
+    return music
 
 
 def make_rests(*, measures=None):

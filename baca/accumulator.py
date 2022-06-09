@@ -237,6 +237,13 @@ class CommandAccumulator:
                     command_.scope = scope_
                     self.commands.append(command_)
 
+    def get(self, start, stop=None):
+        assert 0 < start, start
+        if stop is None:
+            stop = start
+        assert 0 < stop, stop
+        return self.time_signatures[start - 1 : stop]
+
     def manifests(self):
         return {
             "abjad.Instrument": self.instruments,
