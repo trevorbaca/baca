@@ -1020,18 +1020,13 @@ def make_single_attack(duration, *, measures=None):
     )
 
 
-def make_skeleton(
+def _make_skeleton(
     argument,
     *,
-    attach_annotation_spanner=False,
     do_not_check_total_duration=None,
     tag=abjad.Tag(),
 ):
-    """
-    Makes rhythm command from ``string`` and attaches NOT_YET_PITCHED indicators to
-    music.
-    """
-    tag = tag.append(_tags.function_name(_frame()))
+    tag = tag.append(abjad.Tag("baca.make_skeleton()"))
     if isinstance(argument, str):
         string = f"{{ {argument} }}"
         container = abjad.parse(string)
@@ -1044,6 +1039,25 @@ def make_skeleton(
         raise TypeError(message)
     if tag is not None:
         _tag_components(selection, tag)
+    return selection
+
+
+def make_skeleton(
+    argument,
+    *,
+    attach_annotation_spanner=False,
+    do_not_check_total_duration=None,
+    tag=abjad.Tag(),
+):
+    """
+    Makes rhythm command from ``string`` and attaches NOT_YET_PITCHED indicators to
+    music.
+    """
+    selection = _make_skeleton(
+        argument,
+        do_not_check_total_duration=do_not_check_total_duration,
+        tag=tag,
+    )
     if attach_annotation_spanner is True:
         annotation_spanner_text = "baca.make_skeleton() =|"
     else:
@@ -1055,6 +1069,11 @@ def make_skeleton(
         attach_not_yet_pitched=True,
         do_not_check_total_duration=do_not_check_total_duration,
     )
+
+
+def make_skeleton_function(argument):
+    selection = _make_skeleton(argument)
+    return selection
 
 
 def make_tied_notes(*, measures=None):

@@ -7454,6 +7454,25 @@ def espressivo(
     )
 
 
+def espressivo_function(
+    leaf,
+    *tweaks: abjad.Tweak,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    indicator: abjad.Articulation | abjad.Bundle
+    indicator = abjad.Articulation("espressivo")
+    indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+    # tag = _tags.function_name(_frame())
+    tag = abjad.Tag("baca.espressivo()")
+    for tag_ in tags or []:
+        tag = tag.append(tag_)
+    abjad.attach(
+        indicator,
+        leaf,
+        tag=tag,
+    )
+
+
 def fermata(
     selector=lambda _: abjad.select.leaf(_, 0),
 ) -> IndicatorCommand:
