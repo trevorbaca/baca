@@ -237,7 +237,9 @@ class CommandAccumulator:
                     command_.scope = scope_
                     self.commands.append(command_)
 
-    def get(self, start, stop=None):
+    def get(self, start=None, stop=None):
+        if start is None and stop is None:
+            return self.time_signatures
         assert 0 < start, start
         if stop is None:
             stop = start

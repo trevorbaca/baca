@@ -1075,10 +1075,7 @@ def make_tied_notes(*, measures=None):
     )
 
 
-def make_tied_repeated_durations(durations, *, measures=None):
-    """
-    Makes tied repeated durations; does not rewrite meter.
-    """
+def _make_tied_repeated_durations(durations):
     specifiers = []
     if isinstance(durations, abjad.Duration):
         durations = [durations]
@@ -1095,17 +1092,34 @@ def make_tied_repeated_durations(durations, *, measures=None):
         divisions = _sequence.split_divisions(divisions, durations, cyclic=True)
         return divisions
 
+    rhythm_maker = rmakers.stack(
+        rmakers.note(),
+        *specifiers,
+        preprocessor=preprocessor,
+        # tag=_tags.function_name(_frame()),
+        tag=abjad.Tag("baca.make_tied_repeated_durations()"),
+    )
+    return rhythm_maker
+
+
+def make_tied_repeated_durations(durations, *, measures=None):
+    """
+    Makes tied repeated durations; does not rewrite meter.
+    """
+    rhythm_maker = _make_tied_repeated_durations(durations)
     return RhythmCommand(
-        rhythm_maker=rmakers.stack(
-            rmakers.note(),
-            *specifiers,
-            preprocessor=preprocessor,
-            tag=_tags.function_name(_frame()),
-        ),
+        rhythm_maker=rhythm_maker,
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
         measures=measures,
     )
+
+
+def make_tied_repeated_durations_function(time_signatures, durations):
+    assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
+    rhythm_maker = _make_tied_repeated_durations(durations)
+    music = rhythm_maker(time_signatures)
+    return music
 
 
 def make_music(

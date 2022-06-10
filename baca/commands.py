@@ -9409,6 +9409,17 @@ def tie(selector) -> IndicatorCommand:
     )
 
 
+def tie_function(leaf: abjad.Leaf) -> None:
+    assert isinstance(leaf, abjad.Leaf), repr(leaf)
+    indicator = abjad.Tie()
+    abjad.attach(
+        indicator,
+        leaf,
+        # tag=_tags.function_name(_frame())
+        tag=abjad.Tag("baca.tie()"),
+    )
+
+
 def tenuto(
     selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
