@@ -8389,6 +8389,17 @@ def repeat_tie(selector, *, allow_rest: bool = False) -> IndicatorCommand:
     )
 
 
+def repeat_tie_function(leaf: abjad.Leaf) -> None:
+    assert isinstance(leaf, abjad.Leaf), repr(leaf)
+    indicator = abjad.RepeatTie()
+    abjad.attach(
+        indicator,
+        leaf,
+        # tag=_tags.function_name(_frame())
+        tag=abjad.Tag("baca.repeat_tie()"),
+    )
+
+
 def short_fermata(
     selector=lambda _: abjad.select.leaf(_, 0),
 ) -> IndicatorCommand:
