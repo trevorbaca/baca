@@ -548,6 +548,129 @@ def _make_multimeasure_rest_container(voice_name, multiplier):
     return container
 
 
+def _make_notes(
+    *specifiers,
+    repeat_ties=False,
+):
+    if repeat_ties:
+        repeat_tie_specifier = [rmakers.force_repeat_tie()]
+    else:
+        repeat_tie_specifier = []
+    rhythm_maker = rmakers.stack(
+        rmakers.note(),
+        *specifiers,
+        rmakers.rewrite_meter(),
+        *repeat_tie_specifier,
+        # tag=_tags.function_name(_frame()),
+        tag=abjad.Tag("baca.make_notes()"),
+    )
+    return rhythm_maker
+
+
+def _make_repeat_tied_notes(
+    *specifiers,
+    do_not_rewrite_meter=None,
+):
+    specifiers_ = list(specifiers)
+    specifier = rmakers.beam(lambda _: _select.plts(_))
+    specifiers_.append(specifier)
+    specifier = rmakers.repeat_tie(lambda _: _select.pheads(_)[1:])
+    specifiers_.append(specifier)
+    if not do_not_rewrite_meter:
+        command = rmakers.rewrite_meter()
+        specifiers_.append(command)
+    specifier = rmakers.force_repeat_tie()
+    specifiers_.append(specifier)
+    rhythm_maker = rmakers.stack(
+        rmakers.note(),
+        *specifiers_,
+        # tag=_tags.function_name(_frame(),
+        tag=abjad.Tag("baca.make_repeat_tied_notes()"),
+    )
+    return rhythm_maker
+
+
+def _make_repeated_duration_notes(
+    durations,
+    *specifiers,
+    do_not_rewrite_meter=None,
+    measures=None,
+):
+    if isinstance(durations, abjad.Duration):
+        durations = [durations]
+    elif isinstance(durations, tuple):
+        assert len(durations) == 2
+        durations = [abjad.Duration(durations)]
+
+    def preprocessor(divisions):
+        divisions = _sequence.fuse(divisions)
+        divisions = _sequence.split_divisions(divisions, durations, cyclic=True)
+        return divisions
+
+    rewrite_specifiers = []
+    if not do_not_rewrite_meter:
+        rewrite_specifiers.append(rmakers.rewrite_meter())
+    rhythm_maker = rmakers.stack(
+        rmakers.note(),
+        *specifiers,
+        *rewrite_specifiers,
+        rmakers.force_repeat_tie(),
+        preprocessor=preprocessor,
+        # tag=_tags.function_name(_frame()),
+        tag=abjad.Tag("baca.make_repeated_duration_notes()"),
+    )
+    return rhythm_maker
+
+
+def _make_skeleton(
+    argument,
+    *,
+    do_not_check_total_duration=None,
+    tag=abjad.Tag(),
+):
+    tag = tag.append(abjad.Tag("baca.make_skeleton()"))
+    if isinstance(argument, str):
+        string = f"{{ {argument} }}"
+        container = abjad.parse(string)
+        selection = abjad.mutate.eject_contents(container)
+    elif isinstance(argument, list):
+        selection = argument
+    else:
+        message = "baca.make_skeleton() accepts string or selection,"
+        message += " not {repr(argument)}."
+        raise TypeError(message)
+    if tag is not None:
+        _tag_components(selection, tag)
+    return selection
+
+
+def _make_tied_repeated_durations(durations):
+    specifiers = []
+    if isinstance(durations, abjad.Duration):
+        durations = [durations]
+    elif isinstance(durations, tuple):
+        assert len(durations) == 2
+        durations = [abjad.Duration(durations)]
+    tie_specifier = rmakers.repeat_tie(lambda _: _select.pheads(_)[1:])
+    specifiers.append(tie_specifier)
+    tie_specifier = rmakers.force_repeat_tie()
+    specifiers.append(tie_specifier)
+
+    def preprocessor(divisions):
+        divisions = _sequence.fuse(divisions)
+        divisions = _sequence.split_divisions(divisions, durations, cyclic=True)
+        return divisions
+
+    rhythm_maker = rmakers.stack(
+        rmakers.note(),
+        *specifiers,
+        preprocessor=preprocessor,
+        # tag=_tags.function_name(_frame()),
+        tag=abjad.Tag("baca.make_tied_repeated_durations()"),
+    )
+    return rhythm_maker
+
+
 def make_even_divisions(*, measures=None):
     """
     Makes even divisions.
@@ -638,19 +761,7 @@ def make_mmrests_function(time_signatures, *, head: str | bool = ""):
     return mmrests
 
 
-def _make_monads(fractions):
-    components = []
-    maker = abjad.LeafMaker()
-    pitch = 0
-    for fraction in fractions.split():
-        leaves = maker([pitch], [fraction])
-        components.extend(leaves)
-    for tuplet in abjad.select.tuplets(components):
-        tuplet.multiplier = abjad.Multiplier(tuplet.multiplier)
-    return components
-
-
-def make_monads(fractions):
+def make_monads_function(fractions):
     r"""
     Makes monads.
 
@@ -668,12 +779,8 @@ def make_monads(fractions):
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
-
-        >>> commands(
-        ...     "MusicVoice",
-        ...     baca.make_monads("2/5 2/5 1/5"),
-        ... )
-
+        >>> music = baca.make_monads_function("2/5 2/5 1/5")
+        >>> score["MusicVoice"].extend(music)
         >>> _, _ = baca.interpreter(
         ...     score,
         ...     commands.commands,
@@ -707,35 +814,69 @@ def make_monads(fractions):
                         \tweak edge-height #'(0.7 . 0)
                         \times 4/5
                         {
-                            b'2
+                            \baca-repeat-pitch-class-coloring
+                            c'2
                         }
                         \tweak edge-height #'(0.7 . 0)
                         \times 4/5
                         {
-                            b'2
+                            \baca-repeat-pitch-class-coloring
+                            c'2
                         }
                         \tweak edge-height #'(0.7 . 0)
                         \times 4/5
                         {
-                            b'4
+                            \baca-repeat-pitch-class-coloring
+                            c'4
                         }
                     }
                 >>
             }
 
     """
-    components = _make_monads(fractions)
-    return RhythmCommand(
-        rhythm_maker=components,
-        annotation_spanner_color="#darkcyan",
-        attach_not_yet_pitched=True,
-        frame=_frame(),
-    )
-
-
-def make_monads_function(fractions):
-    components = _make_monads(fractions)
+    components = []
+    maker = abjad.LeafMaker()
+    pitch = 0
+    for fraction in fractions.split():
+        leaves = maker([pitch], [fraction])
+        components.extend(leaves)
+    for tuplet in abjad.select.tuplets(components):
+        tuplet.multiplier = abjad.Multiplier(tuplet.multiplier)
     return components
+
+
+def make_music(
+    argument,
+    *,
+    annotation_spanner=False,
+    do_not_check_total_duration=None,
+    tag=abjad.Tag(),
+):
+    """
+    Makes rhythm command from string or selection ``argument``.
+    """
+    annotation_spanner_text = None
+    if annotation_spanner is True:
+        annotation_spanner_text = "baca.make_music() =|"
+    tag = tag.append(_tags.function_name(_frame()))
+    if isinstance(argument, str):
+        string = f"{{ {argument} }}"
+        container = abjad.parse(string)
+        selection = abjad.mutate.eject_contents(container)
+    elif isinstance(argument, list):
+        selection = argument
+    else:
+        message = "baca.make_music() accepts string or selection,"
+        message += f" not {repr(argument)}."
+        raise TypeError(message)
+    if tag is not None:
+        _tag_components(selection, tag)
+    return RhythmCommand(
+        rhythm_maker=selection,
+        annotation_spanner_color="#darkcyan",
+        annotation_spanner_text=annotation_spanner_text,
+        do_not_check_total_duration=do_not_check_total_duration,
+    )
 
 
 def make_notes(
@@ -750,25 +891,6 @@ def make_notes(
         frame=_frame(),
         measures=measures,
     )
-
-
-def _make_notes(
-    *specifiers,
-    repeat_ties=False,
-):
-    if repeat_ties:
-        repeat_tie_specifier = [rmakers.force_repeat_tie()]
-    else:
-        repeat_tie_specifier = []
-    rhythm_maker = rmakers.stack(
-        rmakers.note(),
-        *specifiers,
-        rmakers.rewrite_meter(),
-        *repeat_tie_specifier,
-        # tag=_tags.function_name(_frame()),
-        tag=abjad.Tag("baca.make_notes()"),
-    )
-    return rhythm_maker
 
 
 def make_notes_function(
@@ -871,29 +993,6 @@ def make_repeat_tied_notes(
     )
 
 
-def _make_repeat_tied_notes(
-    *specifiers,
-    do_not_rewrite_meter=None,
-):
-    specifiers_ = list(specifiers)
-    specifier = rmakers.beam(lambda _: _select.plts(_))
-    specifiers_.append(specifier)
-    specifier = rmakers.repeat_tie(lambda _: _select.pheads(_)[1:])
-    specifiers_.append(specifier)
-    if not do_not_rewrite_meter:
-        command = rmakers.rewrite_meter()
-        specifiers_.append(command)
-    specifier = rmakers.force_repeat_tie()
-    specifiers_.append(specifier)
-    rhythm_maker = rmakers.stack(
-        rmakers.note(),
-        *specifiers_,
-        # tag=_tags.function_name(_frame(),
-        tag=abjad.Tag("baca.make_repeat_tied_notes()"),
-    )
-    return rhythm_maker
-
-
 def make_repeat_tied_notes_function(
     time_signatures,
     *specifiers,
@@ -907,58 +1006,12 @@ def make_repeat_tied_notes_function(
     return music
 
 
-def _make_repeated_duration_notes(
-    durations,
-    *specifiers,
-    do_not_rewrite_meter=None,
-    measures=None,
-):
-    if isinstance(durations, abjad.Duration):
-        durations = [durations]
-    elif isinstance(durations, tuple):
-        assert len(durations) == 2
-        durations = [abjad.Duration(durations)]
-
-    def preprocessor(divisions):
-        divisions = _sequence.fuse(divisions)
-        divisions = _sequence.split_divisions(divisions, durations, cyclic=True)
-        return divisions
-
-    rewrite_specifiers = []
-    if not do_not_rewrite_meter:
-        rewrite_specifiers.append(rmakers.rewrite_meter())
-    rhythm_maker = rmakers.stack(
-        rmakers.note(),
-        *specifiers,
-        *rewrite_specifiers,
-        rmakers.force_repeat_tie(),
-        preprocessor=preprocessor,
-        # tag=_tags.function_name(_frame()),
-        tag=abjad.Tag("baca.make_repeated_duration_notes()"),
-    )
-    return rhythm_maker
-
-
 def make_repeated_duration_notes(
     durations,
     *specifiers,
     do_not_rewrite_meter=None,
     measures=None,
 ):
-    #    if isinstance(durations, abjad.Duration):
-    #        durations = [durations]
-    #    elif isinstance(durations, tuple):
-    #        assert len(durations) == 2
-    #        durations = [abjad.Duration(durations)]
-    #
-    #    def preprocessor(divisions):
-    #        divisions = _sequence.fuse(divisions)
-    #        divisions = _sequence.split_divisions(divisions, durations, cyclic=True)
-    #        return divisions
-    #
-    #    rewrite_specifiers = []
-    #    if not do_not_rewrite_meter:
-    #        rewrite_specifiers.append(rmakers.rewrite_meter())
     rhythm_maker = _make_repeated_duration_notes(
         durations,
         *specifiers,
@@ -1030,28 +1083,6 @@ def make_single_attack(duration, *, measures=None):
     )
 
 
-def _make_skeleton(
-    argument,
-    *,
-    do_not_check_total_duration=None,
-    tag=abjad.Tag(),
-):
-    tag = tag.append(abjad.Tag("baca.make_skeleton()"))
-    if isinstance(argument, str):
-        string = f"{{ {argument} }}"
-        container = abjad.parse(string)
-        selection = abjad.mutate.eject_contents(container)
-    elif isinstance(argument, list):
-        selection = argument
-    else:
-        message = "baca.make_skeleton() accepts string or selection,"
-        message += " not {repr(argument)}."
-        raise TypeError(message)
-    if tag is not None:
-        _tag_components(selection, tag)
-    return selection
-
-
 def make_skeleton(
     argument,
     *,
@@ -1104,33 +1135,6 @@ def make_tied_notes(*, measures=None):
     )
 
 
-def _make_tied_repeated_durations(durations):
-    specifiers = []
-    if isinstance(durations, abjad.Duration):
-        durations = [durations]
-    elif isinstance(durations, tuple):
-        assert len(durations) == 2
-        durations = [abjad.Duration(durations)]
-    tie_specifier = rmakers.repeat_tie(lambda _: _select.pheads(_)[1:])
-    specifiers.append(tie_specifier)
-    tie_specifier = rmakers.force_repeat_tie()
-    specifiers.append(tie_specifier)
-
-    def preprocessor(divisions):
-        divisions = _sequence.fuse(divisions)
-        divisions = _sequence.split_divisions(divisions, durations, cyclic=True)
-        return divisions
-
-    rhythm_maker = rmakers.stack(
-        rmakers.note(),
-        *specifiers,
-        preprocessor=preprocessor,
-        # tag=_tags.function_name(_frame()),
-        tag=abjad.Tag("baca.make_tied_repeated_durations()"),
-    )
-    return rhythm_maker
-
-
 def make_tied_repeated_durations(durations, *, measures=None):
     """
     Makes tied repeated durations; does not rewrite meter.
@@ -1149,40 +1153,6 @@ def make_tied_repeated_durations_function(time_signatures, durations):
     rhythm_maker = _make_tied_repeated_durations(durations)
     music = rhythm_maker(time_signatures)
     return music
-
-
-def make_music(
-    argument,
-    *,
-    annotation_spanner=False,
-    do_not_check_total_duration=None,
-    tag=abjad.Tag(),
-):
-    """
-    Makes rhythm command from string or selection ``argument``.
-    """
-    annotation_spanner_text = None
-    if annotation_spanner is True:
-        annotation_spanner_text = "baca.make_music() =|"
-    tag = tag.append(_tags.function_name(_frame()))
-    if isinstance(argument, str):
-        string = f"{{ {argument} }}"
-        container = abjad.parse(string)
-        selection = abjad.mutate.eject_contents(container)
-    elif isinstance(argument, list):
-        selection = argument
-    else:
-        message = "baca.make_music() accepts string or selection,"
-        message += f" not {repr(argument)}."
-        raise TypeError(message)
-    if tag is not None:
-        _tag_components(selection, tag)
-    return RhythmCommand(
-        rhythm_maker=selection,
-        annotation_spanner_color="#darkcyan",
-        annotation_spanner_text=annotation_spanner_text,
-        do_not_check_total_duration=do_not_check_total_duration,
-    )
 
 
 def rhythm(
