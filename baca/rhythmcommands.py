@@ -638,6 +638,18 @@ def make_mmrests_function(time_signatures, *, head: str | bool = ""):
     return mmrests
 
 
+def _make_monads(fractions):
+    components = []
+    maker = abjad.LeafMaker()
+    pitch = 0
+    for fraction in fractions.split():
+        leaves = maker([pitch], [fraction])
+        components.extend(leaves)
+    for tuplet in abjad.select.tuplets(components):
+        tuplet.multiplier = abjad.Multiplier(tuplet.multiplier)
+    return components
+
+
 def make_monads(fractions):
     r"""
     Makes monads.
@@ -712,20 +724,18 @@ def make_monads(fractions):
             }
 
     """
-    components = []
-    maker = abjad.LeafMaker()
-    pitch = 0
-    for fraction in fractions.split():
-        leaves = maker([pitch], [fraction])
-        components.extend(leaves)
-    for tuplet in abjad.select.tuplets(components):
-        tuplet.multiplier = abjad.Multiplier(tuplet.multiplier)
+    components = _make_monads(fractions)
     return RhythmCommand(
         rhythm_maker=components,
         annotation_spanner_color="#darkcyan",
         attach_not_yet_pitched=True,
         frame=_frame(),
     )
+
+
+def make_monads_function(fractions):
+    components = _make_monads(fractions)
+    return components
 
 
 def make_notes(
