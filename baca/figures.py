@@ -1787,12 +1787,12 @@ class Imbrication:
             ...     [15, 20, 19, 9, 0],
             ... ]
             >>> figures(
-            ...     "Music_Voice_2",
+            ...     "Music.2",
             ...     collections,
             ...     baca.figure([1], 16),
             ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.imbricate(
-            ...         "Music_Voice_1",
+            ...         "Music.1",
             ...         [2, 19, 9, 18, 16],
             ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
             ...         rmakers.beam_groups(beam_rests=True),
@@ -1815,12 +1815,12 @@ class Imbrication:
             >>> figures.populate_commands(commands)
 
             >>> commands(
-            ...     "Music_Voice_1",
+            ...     "Music.1",
             ...     baca.voice_one(),
             ... )
 
             >>> commands(
-            ...     "Music_Voice_2",
+            ...     "Music.2",
             ...     baca.voice_two(),
             ... )
 
@@ -1844,7 +1844,7 @@ class Imbrication:
                 >>> print(string)
                 \context Score = "Score"
                 {
-                    \context Staff = "Music_Staff"
+                    \context Staff = "Staff"
                     <<
                         \context Voice = "Skips"
                         {
@@ -1852,7 +1852,7 @@ class Imbrication:
                             \time 5/8
                             s1 * 5/8
                         }
-                        \context Voice = "Music_Voice_1"
+                        \context Voice = "Music.1"
                         {
                             {
                                 \override TupletBracket.stencil = ##f
@@ -1889,7 +1889,7 @@ class Imbrication:
                                 \revert TupletNumber.stencil
                             }
                         }
-                        \context Voice = "Music_Voice_2"
+                        \context Voice = "Music.2"
                         {
                             {
                                 \scaleDurations #'(1 . 1)
@@ -1958,12 +1958,12 @@ class Imbrication:
             ...     [15, 20, 19, 9, 0],
             ... ]
             >>> figures(
-            ...     "Music_Voice_2",
+            ...     "Music.2",
             ...     collections,
             ...     baca.figure([1], 16),
             ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.imbricate(
-            ...         "Music_Voice_1",
+            ...         "Music.1",
             ...         [2, 19, 9, 18, 16],
             ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
             ...         rmakers.beam_groups(beam_rests=True),
@@ -2010,12 +2010,12 @@ class Imbrication:
             ...     [2, 10, 18, 16, 15],
             ... ]
             >>> figures(
-            ...     "Music_Voice_2",
+            ...     "Music.2",
             ...     collections,
             ...     baca.figure([1], 16),
             ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.imbricate(
-            ...         "Music_Voice_1",
+            ...         "Music.1",
             ...         [2, 19, 9, 18, 16],
             ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
             ...         rmakers.beam_groups(beam_rests=True),
@@ -2038,12 +2038,12 @@ class Imbrication:
             >>> figures.populate_commands(commands)
 
             >>> commands(
-            ...     "Music_Voice_1",
+            ...     "Music.1",
             ...     baca.voice_one(),
             ... )
 
             >>> commands(
-            ...     "Music_Voice_2",
+            ...     "Music.2",
             ...     baca.voice_two(),
             ... )
 
@@ -2067,7 +2067,7 @@ class Imbrication:
                 >>> print(string)
                 \context Score = "Score"
                 {
-                    \context Staff = "Music_Staff"
+                    \context Staff = "Staff"
                     <<
                         \context Voice = "Skips"
                         {
@@ -2075,7 +2075,7 @@ class Imbrication:
                             \time 15/16
                             s1 * 15/16
                         }
-                        \context Voice = "Music_Voice_1"
+                        \context Voice = "Music.1"
                         {
                             {
                                 \override TupletBracket.stencil = ##f
@@ -2126,7 +2126,7 @@ class Imbrication:
                                 \revert TupletNumber.stencil
                             }
                         }
-                        \context Voice = "Music_Voice_2"
+                        \context Voice = "Music.2"
                         {
                             {
                                 \scaleDurations #'(1 . 1)
@@ -2218,12 +2218,12 @@ class Imbrication:
             ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
             ... ]
             >>> figures(
-            ...     "Music_Voice_2",
+            ...     "Music.2",
             ...     collections,
             ...     baca.figure([1], 16),
             ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.imbricate(
-            ...         "Music_Voice_1",
+            ...         "Music.1",
             ...         [2, 18, 16, 15],
             ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
             ...         rmakers.beam_groups(beam_rests=True),
@@ -2246,12 +2246,12 @@ class Imbrication:
             >>> figures.populate_commands(commands)
 
             >>> commands(
-            ...     "Music_Voice_1",
+            ...     "Music.1",
             ...     baca.voice_one(),
             ... )
 
             >>> commands(
-            ...     "Music_Voice_2",
+            ...     "Music.2",
             ...     baca.voice_two(),
             ... )
 
@@ -2275,7 +2275,7 @@ class Imbrication:
                 >>> print(string)
                 \context Score = "Score"
                 {
-                    \context Staff = "Music_Staff"
+                    \context Staff = "Staff"
                     <<
                         \context Voice = "Skips"
                         {
@@ -2283,7 +2283,7 @@ class Imbrication:
                             \time 9/8
                             s1 * 9/8
                         }
-                        \context Voice = "Music_Voice_1"
+                        \context Voice = "Music.1"
                         {
                             {
                                 \override TupletBracket.stencil = ##f
@@ -2337,7 +2337,7 @@ class Imbrication:
                                 \revert TupletNumber.stencil
                             }
                         }
-                        \context Voice = "Music_Voice_2"
+                        \context Voice = "Music.2"
                         {
                             {
                                 \scaleDurations #'(1 . 1)
@@ -2449,12 +2449,12 @@ class Imbrication:
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> figures(
-            ...     "Music_Voice_2",
+            ...     "Music.2",
             ...     collections,
             ...     baca.figure([5], 32),
             ...     rmakers.beam(),
             ...     baca.imbricate(
-            ...         "Music_Voice_1",
+            ...         "Music.1",
             ...         [2, 10, 18, 19, 9],
             ...         rmakers.beam_groups(beam_rests=True),
             ...         truncate_ties=True,
@@ -2475,12 +2475,12 @@ class Imbrication:
             >>> figures.populate_commands(commands)
 
             >>> commands(
-            ...     "Music_Voice_1",
+            ...     "Music.1",
             ...     baca.voice_one(),
             ... )
 
             >>> commands(
-            ...     "Music_Voice_2",
+            ...     "Music.2",
             ...     baca.voice_two(),
             ... )
 
@@ -2504,7 +2504,7 @@ class Imbrication:
                 >>> print(string)
                 \context Score = "Score"
                 {
-                    \context Staff = "Music_Staff"
+                    \context Staff = "Staff"
                     <<
                         \context Voice = "Skips"
                         {
@@ -2512,7 +2512,7 @@ class Imbrication:
                             \time 45/32
                             s1 * 45/32
                         }
-                        \context Voice = "Music_Voice_1"
+                        \context Voice = "Music.1"
                         {
                             {
                                 \override TupletBracket.stencil = ##f
@@ -2561,7 +2561,7 @@ class Imbrication:
                                 \revert TupletNumber.stencil
                             }
                         }
-                        \context Voice = "Music_Voice_2"
+                        \context Voice = "Music.2"
                         {
                             {
                                 \scaleDurations #'(1 . 1)
@@ -2640,14 +2640,14 @@ class FigureAccumulator:
         ... ]
 
         >>> figures(
-        ...     "Music_Voice_1",
+        ...     "Music.1",
         ...     [[0, 1, 2, 3]],
         ...     *commands,
         ...     figure_name='D',
         ... )
 
         >>> figures(
-        ...     "Music_Voice_1",
+        ...     "Music.1",
         ...     [[4, 5, 6, 7]],
         ...     *commands,
         ...     figure_name='D',
@@ -6322,7 +6322,7 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
         >>> figures = baca.FigureAccumulator(score)
 
         >>> figures(
-        ...     "Music_Voice_2",
+        ...     "Music.2",
         ...     3 * [[0, 2, 10]],
         ...     baca.figure(
         ...         [1],
@@ -6332,7 +6332,7 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
         ...     ),
         ...     rmakers.beam(),
         ...     baca.imbricate(
-        ...         "Music_Voice_1",
+        ...         "Music.1",
         ...         [baca.coat(0), baca.coat(2), 10, 0, 2],
         ...         rmakers.beam_groups(),
         ...     ),
@@ -6352,12 +6352,12 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
         >>> figures.populate_commands(commands)
 
         >>> commands(
-        ...     "Music_Voice_1",
+        ...     "Music.1",
         ...     baca.voice_one(),
         ... )
 
         >>> commands(
-        ...     "Music_Voice_2",
+        ...     "Music.2",
         ...     baca.voice_two(),
         ... )
 
@@ -6381,7 +6381,7 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -6389,7 +6389,7 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
                         \time 3/4
                         s1 * 3/4
                     }
-                    \context Voice = "Music_Voice_1"
+                    \context Voice = "Music.1"
                     {
                         {
                             \override TupletBracket.stencil = ##f
@@ -6428,7 +6428,7 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
                             \revert TupletNumber.stencil
                         }
                     }
-                    \context Voice = "Music_Voice_2"
+                    \context Voice = "Music.2"
                     {
                         {
                             \times 4/5
@@ -6482,12 +6482,12 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
         ...     10, 18,
         ... ]
         >>> figures(
-        ...     "Music_Voice_2",
+        ...     "Music.2",
         ...     collections,
         ...     baca.figure([1], 16),
         ...     rmakers.beam(),
         ...     baca.imbricate(
-        ...         "Music_Voice_1",
+        ...         "Music.1",
         ...         segment,
         ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
         ...         rmakers.beam_groups(beam_rests=True),
@@ -6508,12 +6508,12 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
         >>> figures.populate_commands(commands)
 
         >>> commands(
-        ...     "Music_Voice_1",
+        ...     "Music.1",
         ...     baca.voice_one(),
         ... )
 
         >>> commands(
-        ...     "Music_Voice_2",
+        ...     "Music.2",
         ...     baca.voice_two(),
         ... )
 
@@ -6537,7 +6537,7 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -6545,7 +6545,7 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
                         \time 9/8
                         s1 * 9/8
                     }
-                    \context Voice = "Music_Voice_1"
+                    \context Voice = "Music.1"
                     {
                         {
                             \override TupletBracket.stencil = ##f
@@ -6596,7 +6596,7 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
                             \revert TupletNumber.stencil
                         }
                     }
-                    \context Voice = "Music_Voice_2"
+                    \context Voice = "Music.2"
                     {
                         {
                             \scaleDurations #'(1 . 1)
@@ -6661,12 +6661,12 @@ def extend_beam(
         >>> figures = baca.FigureAccumulator(score)
 
         >>> figures(
-        ...     "Music_Voice_2",
+        ...     "Music.2",
         ...     [[0, 2, 10, 18], [16, 15, 23]],
         ...     baca.figure([1], 16),
         ...     rmakers.beam_groups(),
         ...     baca.imbricate(
-        ...         "Music_Voice_1",
+        ...         "Music.1",
         ...         [2, 10],
         ...         baca.staccato(selector=lambda _: baca.select.pheads(_)),
         ...         rmakers.beam_groups(beam_rests=True),
@@ -6675,12 +6675,12 @@ def extend_beam(
         ... )
 
         >>> figures(
-        ...     "Music_Voice_2",
+        ...     "Music.2",
         ...     [[19, 13, 9, 8]],
         ...     baca.figure([1], 16),
         ...     rmakers.beam_groups(),
         ...     baca.imbricate(
-        ...         "Music_Voice_1",
+        ...         "Music.1",
         ...         [13, 9],
         ...         baca.staccato(selector=lambda _: baca.select.pheads(_)),
         ...         rmakers.beam_groups(beam_rests=True),
@@ -6701,12 +6701,12 @@ def extend_beam(
         >>> figures.populate_commands(commands)
 
         >>> commands(
-        ...     "Music_Voice_1",
+        ...     "Music.1",
         ...     baca.voice_one(),
         ... )
 
         >>> commands(
-        ...     "Music_Voice_2",
+        ...     "Music.2",
         ...     baca.voice_two(),
         ... )
 
@@ -6730,7 +6730,7 @@ def extend_beam(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -6741,7 +6741,7 @@ def extend_beam(
                         \time 1/4
                         s1 * 1/4
                     }
-                    \context Voice = "Music_Voice_1"
+                    \context Voice = "Music.1"
                     {
                         {
                             \override TupletBracket.stencil = ##f
@@ -6795,7 +6795,7 @@ def extend_beam(
                             \revert TupletNumber.stencil
                         }
                     }
-                    \context Voice = "Music_Voice_2"
+                    \context Voice = "Music.2"
                     {
                         {
                             \scaleDurations #'(1 . 1)
@@ -6882,12 +6882,12 @@ def imbricate(
         ...     [2, 10, 18, 16, 15],
         ... ]
         >>> figures(
-        ...     "Music_Voice_2",
+        ...     "Music.2",
         ...     collections,
         ...     baca.figure([1], 16),
         ...     rmakers.beam_groups(),
         ...     baca.imbricate(
-        ...         "Music_Voice_1",
+        ...         "Music.1",
         ...         [2, 19, 9, 18, 16],
         ...         rmakers.beam_groups(),
         ...     ),
@@ -6907,12 +6907,12 @@ def imbricate(
         >>> figures.populate_commands(commands)
 
         >>> commands(
-        ...     "Music_Voice_1",
+        ...     "Music.1",
         ...     baca.voice_one(),
         ... )
 
         >>> commands(
-        ...     "Music_Voice_2",
+        ...     "Music.2",
         ...     baca.voice_two(),
         ... )
 
@@ -6936,7 +6936,7 @@ def imbricate(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -6944,7 +6944,7 @@ def imbricate(
                         \time 15/16
                         s1 * 15/16
                     }
-                    \context Voice = "Music_Voice_1"
+                    \context Voice = "Music.1"
                     {
                         {
                             \override TupletBracket.stencil = ##f
@@ -6992,7 +6992,7 @@ def imbricate(
                             \revert TupletNumber.stencil
                         }
                     }
-                    \context Voice = "Music_Voice_2"
+                    \context Voice = "Music.2"
                     {
                         {
                             \scaleDurations #'(1 . 1)
@@ -7070,18 +7070,18 @@ def imbricate(
         ...     [2, 10, 18, 16, 15],
         ... ]
         >>> figures(
-        ...     "Music_Voice_2",
+        ...     "Music.2",
         ...     collections,
         ...     baca.figure([1], 16),
         ...     baca.imbricate(
-        ...         "Music_Voice_1",
+        ...         "Music.1",
         ...         [2, 19, 9],
         ...         rmakers.beam_groups(beam_rests=True),
         ...         baca.beam_positions(6),
         ...         baca.staccato(selector=lambda _: baca.select.pheads(_)),
         ...         ),
         ...     baca.imbricate(
-        ...         "Music_Voice_3",
+        ...         "Music.3",
         ...         [16, 10, 18],
         ...         rmakers.beam_groups(beam_rests=True),
         ...         baca.beam_positions(8),
@@ -7122,7 +7122,7 @@ def imbricate(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -7130,7 +7130,7 @@ def imbricate(
                         \time 15/16
                         s1 * 15/16
                     }
-                    \context Voice = "Music_Voice_1"
+                    \context Voice = "Music.1"
                     {
                         {
                             \override TupletBracket.stencil = ##f
@@ -7176,7 +7176,7 @@ def imbricate(
                             \revert TupletNumber.stencil
                         }
                     }
-                    \context Voice = "Music_Voice_2"
+                    \context Voice = "Music.2"
                     {
                         {
                             \scaleDurations #'(1 . 1)
@@ -7237,7 +7237,7 @@ def imbricate(
                             }
                         }
                     }
-                    \context Voice = "Music_Voice_3"
+                    \context Voice = "Music.3"
                     {
                         {
                             \override TupletBracket.stencil = ##f
@@ -7299,12 +7299,12 @@ def imbricate(
         ...     [2, 10, 18, 16, 15],
         ... ]
         >>> figures(
-        ...     "Music_Voice_2",
+        ...     "Music.2",
         ...     collections,
         ...     baca.figure([1], 16, treatments=[1]),
         ...     rmakers.beam_groups(beam_rests=True),
         ...     baca.imbricate(
-        ...         "Music_Voice_1",
+        ...         "Music.1",
         ...         [2, 19, 9, 18, 16],
         ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
         ...         rmakers.beam_groups(beam_rests=True),
@@ -7326,12 +7326,12 @@ def imbricate(
         >>> figures.populate_commands(commands)
 
         >>> commands(
-        ...     "Music_Voice_1",
+        ...     "Music.1",
         ...     baca.voice_one(),
         ... )
 
         >>> commands(
-        ...     "Music_Voice_2",
+        ...     "Music.2",
         ...     baca.voice_two(),
         ... )
 
@@ -7355,7 +7355,7 @@ def imbricate(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -7363,7 +7363,7 @@ def imbricate(
                         \time 9/8
                         s1 * 9/8
                     }
-                    \context Voice = "Music_Voice_1"
+                    \context Voice = "Music.1"
                     {
                         {
                             \override TupletBracket.stencil = ##f
@@ -7417,7 +7417,7 @@ def imbricate(
                             \revert TupletNumber.stencil
                         }
                     }
-                    \context Voice = "Music_Voice_2"
+                    \context Voice = "Music.2"
                     {
                         {
                             \tweak text #tuplet-number::calc-fraction-text
@@ -7515,12 +7515,12 @@ def imbricate(
         ... ]
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> figures(
-        ...     "Music_Voice_2",
+        ...     "Music.2",
         ...     collections,
         ...     baca.figure([3], 16),
         ...     rmakers.beam(),
         ...     baca.imbricate(
-        ...         "Music_Voice_1",
+        ...         "Music.1",
         ...         segment,
         ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
         ...         rmakers.beam_groups(beam_rests=True),
@@ -7541,12 +7541,12 @@ def imbricate(
         >>> figures.populate_commands(commands)
 
         >>> commands(
-        ...     "Music_Voice_1",
+        ...     "Music.1",
         ...     baca.voice_one(),
         ... )
 
         >>> commands(
-        ...     "Music_Voice_2",
+        ...     "Music.2",
         ...     baca.voice_two(),
         ... )
 
@@ -7570,7 +7570,7 @@ def imbricate(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -7578,7 +7578,7 @@ def imbricate(
                         \time 27/16
                         s1 * 27/16
                     }
-                    \context Voice = "Music_Voice_1"
+                    \context Voice = "Music.1"
                     {
                         {
                             \override TupletBracket.stencil = ##f
@@ -7620,7 +7620,7 @@ def imbricate(
                             \revert TupletNumber.stencil
                         }
                     }
-                    \context Voice = "Music_Voice_2"
+                    \context Voice = "Music.2"
                     {
                         {
                             \scaleDurations #'(1 . 1)
@@ -7664,12 +7664,12 @@ def imbricate(
         ...     [2, 10, 18, 16, 15],
         ... ]
         >>> figures(
-        ...     "Music_Voice_2",
+        ...     "Music.2",
         ...     collections,
         ...     baca.figure([1], 16),
         ...     rmakers.beam_groups(),
         ...     baca.imbricate(
-        ...         "Music_Voice_1",
+        ...         "Music.1",
         ...         [2, 19, 9, 18, 16],
         ...         rmakers.beam_groups(),
         ...     ),
@@ -7689,12 +7689,12 @@ def imbricate(
         >>> figures.populate_commands(commands)
 
         >>> commands(
-        ...     "Music_Voice_1",
+        ...     "Music.1",
         ...     baca.voice_one(),
         ... )
 
         >>> commands(
-        ...     "Music_Voice_2",
+        ...     "Music.2",
         ...     baca.voice_two(),
         ... )
 
@@ -7718,7 +7718,7 @@ def imbricate(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -7726,7 +7726,7 @@ def imbricate(
                         \time 11/16
                         s1 * 11/16
                     }
-                    \context Voice = "Music_Voice_1"
+                    \context Voice = "Music.1"
                     {
                         {
                             \override TupletBracket.stencil = ##f
@@ -7770,7 +7770,7 @@ def imbricate(
                             \revert TupletNumber.stencil
                         }
                     }
-                    \context Voice = "Music_Voice_2"
+                    \context Voice = "Music.2"
                     {
                         {
                             \scaleDurations #'(1 . 1)
@@ -7836,12 +7836,12 @@ def imbricate(
         ...     [2, 10, 18, 16, 15],
         ... ]
         >>> figures(
-        ...     "Music_Voice_2",
+        ...     "Music.2",
         ...     collections,
         ...     baca.figure([1], 16, affix=baca.rests_around([2], [2])),
         ...     rmakers.beam_groups(),
         ...     baca.imbricate(
-        ...         "Music_Voice_1",
+        ...         "Music.1",
         ...         [2, 19, 9, 18, 16],
         ...         rmakers.beam_groups(),
         ...     ),
@@ -7861,12 +7861,12 @@ def imbricate(
         >>> figures.populate_commands(commands)
 
         >>> commands(
-        ...     "Music_Voice_1",
+        ...     "Music.1",
         ...     baca.voice_one(),
         ... )
 
         >>> commands(
-        ...     "Music_Voice_2",
+        ...     "Music.2",
         ...     baca.voice_two(),
         ... )
 
@@ -7890,7 +7890,7 @@ def imbricate(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -7898,7 +7898,7 @@ def imbricate(
                         \time 19/16
                         s1 * 19/16
                     }
-                    \context Voice = "Music_Voice_1"
+                    \context Voice = "Music.1"
                     {
                         {
                             \override TupletBracket.stencil = ##f
@@ -7948,7 +7948,7 @@ def imbricate(
                             \revert TupletNumber.stencil
                         }
                     }
-                    \context Voice = "Music_Voice_2"
+                    \context Voice = "Music.2"
                     {
                         {
                             \scaleDurations #'(1 . 1)

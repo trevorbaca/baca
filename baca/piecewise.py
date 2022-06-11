@@ -972,7 +972,7 @@ def dynamic(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ...     baca.dynamic("p"),
@@ -1004,7 +1004,7 @@ def dynamic(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1021,7 +1021,7 @@ def dynamic(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override DynamicLineSpanner.staff-padding = 5
                         e'8
@@ -1073,7 +1073,7 @@ def dynamic(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ...     baca.dynamic(
@@ -1103,7 +1103,7 @@ def dynamic(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1120,7 +1120,7 @@ def dynamic(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override DynamicLineSpanner.staff-padding = 5
                         e'8
@@ -1208,7 +1208,7 @@ def hairpin(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.hairpin("p < f", bookend=-1),
@@ -1235,7 +1235,7 @@ def hairpin(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1252,7 +1252,7 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override DynamicLineSpanner.staff-padding = 5
                         e'8
@@ -1304,7 +1304,7 @@ def hairpin(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ...     baca.hairpin('"ff" >o niente'),
@@ -1331,7 +1331,7 @@ def hairpin(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1348,7 +1348,7 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override DynamicLineSpanner.staff-padding = 5
                         e'8
@@ -1402,7 +1402,7 @@ def hairpin(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ...     baca.hairpin('niente o< "ff"'),
@@ -1429,7 +1429,7 @@ def hairpin(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1446,7 +1446,7 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override DynamicLineSpanner.staff-padding = 5
                         e'8
@@ -1499,7 +1499,7 @@ def hairpin(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ...     baca.hairpin('"p" -- f'),
@@ -1526,7 +1526,7 @@ def hairpin(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1543,7 +1543,7 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override DynamicLineSpanner.staff-padding = 5
                         e'8
@@ -1596,7 +1596,7 @@ def hairpin(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ...     baca.hairpin(
@@ -1630,7 +1630,7 @@ def hairpin(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1647,7 +1647,7 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override DynamicLineSpanner.staff-padding = 5
                         e'8
@@ -1705,7 +1705,7 @@ def hairpin(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.hairpin(
@@ -1735,7 +1735,7 @@ def hairpin(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1752,7 +1752,7 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override DynamicLineSpanner.staff-padding = 5
                         e'8
@@ -1803,7 +1803,7 @@ def hairpin(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.hairpin(
@@ -1833,7 +1833,7 @@ def hairpin(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1850,7 +1850,7 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override DynamicLineSpanner.staff-padding = 5
                         e'8
@@ -1909,7 +1909,7 @@ def hairpin(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.hairpin(
@@ -1940,7 +1940,7 @@ def hairpin(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1957,7 +1957,7 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override DynamicLineSpanner.staff-padding = 5
                         e'8
@@ -2011,7 +2011,7 @@ def hairpin(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.hairpin(
@@ -2042,7 +2042,7 @@ def hairpin(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2059,7 +2059,7 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override DynamicLineSpanner.staff-padding = 5
                         e'8
@@ -2125,7 +2125,7 @@ def hairpin(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ...     baca.hairpin("f", bookend=False),
@@ -2152,7 +2152,7 @@ def hairpin(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2169,7 +2169,7 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override DynamicLineSpanner.staff-padding = 5
                         e'8
@@ -2218,7 +2218,7 @@ def hairpin(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ...     baca.hairpin("< !"),
@@ -2245,7 +2245,7 @@ def hairpin(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2262,7 +2262,7 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override DynamicLineSpanner.staff-padding = 5
                         e'8
@@ -2312,7 +2312,7 @@ def hairpin(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_skeleton("{ c2 r4. c2 r4. }"),
         ...     baca.pitches("C4 D4"),
         ...     baca.hairpin(
@@ -2348,7 +2348,7 @@ def hairpin(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2365,7 +2365,7 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         {
                             \override DynamicLineSpanner.staff-padding = 4
@@ -2409,7 +2409,7 @@ def hairpin(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.hairpin(
@@ -2440,7 +2440,7 @@ def hairpin(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2457,7 +2457,7 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override DynamicLineSpanner.staff-padding = 4
                         e'8
@@ -2511,7 +2511,7 @@ def hairpin(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.hairpin("(mp) < mf"),
@@ -2538,7 +2538,7 @@ def hairpin(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2555,7 +2555,7 @@ def hairpin(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override DynamicLineSpanner.staff-padding = 4
                         e'8
@@ -3523,7 +3523,7 @@ def text_spanner(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner("pont. => ord."),
@@ -3550,7 +3550,7 @@ def text_spanner(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -3567,7 +3567,7 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override TextSpanner.staff-padding = 4.5
                         e'8
@@ -3620,7 +3620,7 @@ def text_spanner(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner("pont. =| ord."),
@@ -3647,7 +3647,7 @@ def text_spanner(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -3664,7 +3664,7 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override TextSpanner.staff-padding = 4.5
                         e'8
@@ -3717,7 +3717,7 @@ def text_spanner(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner("pont. -> ord."),
@@ -3744,7 +3744,7 @@ def text_spanner(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -3761,7 +3761,7 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override TextSpanner.staff-padding = 4.5
                         e'8
@@ -3814,7 +3814,7 @@ def text_spanner(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner("pont. -| ord."),
@@ -3841,7 +3841,7 @@ def text_spanner(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -3858,7 +3858,7 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override TextSpanner.staff-padding = 4.5
                         e'8
@@ -3911,7 +3911,7 @@ def text_spanner(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner("pont. || ord."),
@@ -3938,7 +3938,7 @@ def text_spanner(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -3955,7 +3955,7 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override TextSpanner.staff-padding = 4.5
                         e'8
@@ -4010,7 +4010,7 @@ def text_spanner(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner(
@@ -4041,7 +4041,7 @@ def text_spanner(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -4058,7 +4058,7 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override DynamicLineSpanner.staff-padding = 5
                         \override TextSpanner.staff-padding = 4.5
@@ -4125,7 +4125,7 @@ def text_spanner(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner(
@@ -4156,7 +4156,7 @@ def text_spanner(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -4173,7 +4173,7 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override DynamicLineSpanner.staff-padding = 5
                         \override TextSpanner.staff-padding = 4.5
@@ -4240,7 +4240,7 @@ def text_spanner(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner(
@@ -4272,7 +4272,7 @@ def text_spanner(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -4289,7 +4289,7 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override DynamicLineSpanner.staff-padding = 5
                         \override TextSpanner.staff-padding = 4.5
@@ -4365,7 +4365,7 @@ def text_spanner(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner(
@@ -4397,7 +4397,7 @@ def text_spanner(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -4414,7 +4414,7 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override DynamicLineSpanner.staff-padding = 5
                         \override TextSpanner.staff-padding = 4.5
@@ -4493,7 +4493,7 @@ def text_spanner(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_skeleton("{ c2 c4. c2 c4. }"),
         ...     baca.pitches("C4 D4 E4 F4"),
         ...     baca.text_spanner(
@@ -4528,7 +4528,7 @@ def text_spanner(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -4545,7 +4545,7 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         {
                             \override TextSpanner.staff-padding = 4.5
@@ -4595,7 +4595,7 @@ def text_spanner(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner(
@@ -4627,7 +4627,7 @@ def text_spanner(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -4644,7 +4644,7 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override DynamicLineSpanner.staff-padding = 5
                         \override TextSpanner.staff-padding = 4.5
@@ -4698,7 +4698,7 @@ def text_spanner(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner(
@@ -4729,7 +4729,7 @@ def text_spanner(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -4746,7 +4746,7 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override DynamicLineSpanner.staff-padding = 5
                         \override TextSpanner.staff-padding = 4.5
@@ -4815,7 +4815,7 @@ def text_spanner(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.pitches("C4 D4 E4 F4 G4 A4"),
         ...     baca.text_spanner(
@@ -4845,7 +4845,7 @@ def text_spanner(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -4868,7 +4868,7 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override TextSpanner.staff-padding = 4.5
                         c'2
@@ -4923,7 +4923,7 @@ def text_spanner(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_skeleton("{ c2 c4. c2 c4 ~ c8 }"),
         ...     baca.pitches("C4 D4 E4 F4"),
         ...     baca.text_spanner(
@@ -4954,7 +4954,7 @@ def text_spanner(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -4971,7 +4971,7 @@ def text_spanner(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         {
                             \override TextSpanner.staff-padding = 4.5

@@ -33,7 +33,7 @@ r"""
         ...     ),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_mmrests(head=True),
         ...     baca.clef("treble"),
         ... )
@@ -62,7 +62,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -80,10 +80,10 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         <<
-                            \context Voice = "MusicVoice"
+                            \context Voice = "Music"
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
@@ -97,7 +97,7 @@ r"""
                                 %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             }
-                            \context Voice = "RestVoice"
+                            \context Voice = "Rests"
                             {
                                 R1 * 3/8
                                 %@% ^ \baca-duration-multiplier-markup #"3" #"8"
@@ -134,16 +134,16 @@ r"""
         ...     ),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_mmrests(head=True),
         ...     baca.clef("alto"),
         ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]["Music_Staff"] = [
+        >>> persist["persistent_indicators"]["Staff"] = [
         ...     baca.Memento(
-        ...         context="MusicVoice",
+        ...         context="Music",
         ...         prototype="abjad.Clef",
         ...         value="treble",
         ...     )
@@ -174,7 +174,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -192,10 +192,10 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         <<
-                            \context Voice = "MusicVoice"
+                            \context Voice = "Music"
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
@@ -209,7 +209,7 @@ r"""
                                 %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             }
-                            \context Voice = "RestVoice"
+                            \context Voice = "Rests"
                             {
                                 R1 * 3/8
                                 %@% ^ \baca-duration-multiplier-markup #"3" #"8"
@@ -248,16 +248,16 @@ r"""
         ...     ),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_mmrests(head=True),
         ...     baca.reapply_persistent_indicators(),
         ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]["Music_Staff"] = [
+        >>> persist["persistent_indicators"]["Staff"] = [
         ...     baca.Memento(
-        ...         context="MusicVoice",
+        ...         context="Music",
         ...         prototype="abjad.Clef",
         ...         value="treble",
         ...     )
@@ -289,7 +289,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -307,10 +307,10 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         <<
-                            \context Voice = "MusicVoice"
+                            \context Voice = "Music"
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
@@ -324,7 +324,7 @@ r"""
                                 %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                                 \override Staff.Clef.color = #(x11-color 'OliveDrab)
                             }
-                            \context Voice = "RestVoice"
+                            \context Voice = "Rests"
                             {
                                 R1 * 3/8
                                 %@% ^ \baca-duration-multiplier-markup #"3" #"8"
@@ -363,7 +363,7 @@ r"""
         ...     ),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_mmrests(head=True),
         ...     baca.clef("treble", selector=lambda _: abjad.select.leaf(_, 0)),
         ...     baca.clef("treble", selector=lambda _: abjad.select.leaf(_, 1)),
@@ -393,7 +393,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -414,10 +414,10 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         <<
-                            \context Voice = "MusicVoice"
+                            \context Voice = "Music"
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
@@ -431,7 +431,7 @@ r"""
                                 %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             }
-                            \context Voice = "RestVoice"
+                            \context Voice = "Rests"
                             {
                                 R1 * 3/8
                                 %@% ^ \baca-duration-multiplier-markup #"3" #"8"
@@ -475,7 +475,7 @@ r"""
         ...     ),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_mmrests(head=True),
         ...     baca.reapply_persistent_indicators(),
         ...     baca.clef("treble"),
@@ -483,9 +483,9 @@ r"""
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]["Music_Staff"] = [
+        >>> persist["persistent_indicators"]["Staff"] = [
         ...     baca.Memento(
-        ...         context="MusicVoice",
+        ...         context="Music",
         ...         prototype="abjad.Clef",
         ...         value="treble",
         ...     )
@@ -517,7 +517,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -535,10 +535,10 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         <<
-                            \context Voice = "MusicVoice"
+                            \context Voice = "Music"
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
@@ -552,7 +552,7 @@ r"""
                                 %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                                 \override Staff.Clef.color = #(x11-color 'DeepPink4)
                             }
-                            \context Voice = "RestVoice"
+                            \context Voice = "Rests"
                             {
                                 R1 * 3/8
                                 %@% ^ \baca-duration-multiplier-markup #"3" #"8"
@@ -585,7 +585,7 @@ r"""
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.dynamic("f"),
         ... )
@@ -614,7 +614,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -625,7 +625,7 @@ r"""
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         - \tweak color #(x11-color 'blue)
@@ -650,16 +650,16 @@ r"""
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.dynamic("p"),
         ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]["MusicVoice"] = [
+        >>> persist["persistent_indicators"]["Music"] = [
         ...     baca.Memento(
-        ...         context="MusicVoice",
+        ...         context="Music",
         ...         prototype="abjad.Dynamic",
         ...         value="f",
         ...     )
@@ -690,7 +690,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -701,7 +701,7 @@ r"""
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         - \tweak color #(x11-color 'blue)
@@ -728,16 +728,16 @@ r"""
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]["MusicVoice"] = [
+        >>> persist["persistent_indicators"]["Music"] = [
         ...     baca.Memento(
-        ...         context="MusicVoice",
+        ...         context="Music",
         ...         prototype="abjad.Dynamic",
         ...         value="f",
         ...     )
@@ -768,7 +768,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -779,7 +779,7 @@ r"""
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         - \tweak color #(x11-color 'green4)
@@ -806,7 +806,7 @@ r"""
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.dynamic("f"),
         ...     baca.dynamic("f", selector=lambda _: abjad.select.leaf(_, 1)),
@@ -836,7 +836,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -847,7 +847,7 @@ r"""
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         - \tweak color #(x11-color 'blue)
@@ -874,7 +874,7 @@ r"""
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ...     baca.dynamic("f"),
@@ -882,9 +882,9 @@ r"""
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]["MusicVoice"] = [
+        >>> persist["persistent_indicators"]["Music"] = [
         ...     baca.Memento(
-        ...         context="MusicVoice",
+        ...         context="Music",
         ...         prototype="abjad.Dynamic",
         ...         value="f",
         ...     )
@@ -915,7 +915,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -926,7 +926,7 @@ r"""
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         - \tweak color #(x11-color 'DeepPink1)
@@ -951,7 +951,7 @@ r"""
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.dynamic("sfz"),
         ...     baca.dynamic("sfz", selector=lambda _: abjad.select.leaf(_, 1)),
@@ -981,7 +981,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -992,7 +992,7 @@ r"""
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         - \tweak color #(x11-color 'blue)
@@ -1019,16 +1019,16 @@ r"""
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.dynamic("sfz"),
         ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]["MusicVoice"] = [
+        >>> persist["persistent_indicators"]["Music"] = [
         ...     baca.Memento(
-        ...         context="MusicVoice",
+        ...         context="Music",
         ...         prototype="abjad.Dynamic",
         ...         value="sfz",
         ...     )
@@ -1059,7 +1059,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1070,7 +1070,7 @@ r"""
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         - \tweak color #(x11-color 'blue)
@@ -1097,7 +1097,7 @@ r"""
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.dynamic("mf"),
         ...     baca.dynamic('"mf"', selector=lambda _: abjad.select.leaf(_, 1)),
@@ -1127,7 +1127,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1138,7 +1138,7 @@ r"""
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         - \tweak color #(x11-color 'blue)
@@ -1190,7 +1190,7 @@ r"""
         ...     ),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.instrument(instruments["Flute"]),
         ... )
@@ -1220,7 +1220,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1238,7 +1238,7 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
@@ -1263,7 +1263,7 @@ r"""
             >>> print(text)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1281,7 +1281,7 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
@@ -1303,7 +1303,7 @@ r"""
             >>> print(text)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1321,7 +1321,7 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
@@ -1349,16 +1349,16 @@ r"""
         ...     ),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.instrument(instruments["Flute"]),
         ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]["Music_Staff"] = [
+        >>> persist["persistent_indicators"]["Staff"] = [
         ...     baca.Memento(
-        ...         context="MusicVoice",
+        ...         context="Music",
         ...         manifest="instruments",
         ...         value="Piccolo",
         ...     )
@@ -1390,7 +1390,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1408,7 +1408,7 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
@@ -1433,7 +1433,7 @@ r"""
             >>> print(text)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1451,7 +1451,7 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
@@ -1472,7 +1472,7 @@ r"""
             >>> print(text)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1490,7 +1490,7 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
@@ -1520,16 +1520,16 @@ r"""
         ...     ),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]["Music_Staff"] = [
+        >>> persist["persistent_indicators"]["Staff"] = [
         ...     baca.Memento(
-        ...         context="MusicVoice",
+        ...         context="Music",
         ...         manifest="instruments",
         ...         value="Flute",
         ...     )
@@ -1561,7 +1561,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1579,7 +1579,7 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         ^ \baca-reapplied-instrument-markup "(“Flute”)"
@@ -1604,7 +1604,7 @@ r"""
             >>> print(text)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1622,7 +1622,7 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         ^ \baca-reapplied-instrument-markup "(“Flute”)"
@@ -1644,7 +1644,7 @@ r"""
             >>> print(text)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1662,7 +1662,7 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         ^ \baca-reapplied-instrument-markup "(“Flute”)"
@@ -1699,7 +1699,7 @@ r"""
         ...     ),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.instrument(instruments["Flute"]),
         ...     baca.new(
@@ -1733,7 +1733,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1754,7 +1754,7 @@ r"""
                         \break
                         s1 * 4/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'2
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
@@ -1781,7 +1781,7 @@ r"""
             >>> print(text)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1802,7 +1802,7 @@ r"""
                         \break
                         s1 * 4/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'2
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
@@ -1825,7 +1825,7 @@ r"""
             >>> print(text)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1846,7 +1846,7 @@ r"""
                         \break
                         s1 * 4/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'2
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
@@ -1883,7 +1883,7 @@ r"""
         ...     ),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ...     baca.instrument(instruments["Flute"]),
@@ -1891,9 +1891,9 @@ r"""
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]["Music_Staff"] = [
+        >>> persist["persistent_indicators"]["Staff"] = [
         ...     baca.Memento(
-        ...         context="MusicVoice",
+        ...         context="Music",
         ...         manifest="instruments",
         ...         value="Flute",
         ...     )
@@ -1925,7 +1925,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1943,7 +1943,7 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         ^ \baca-redundant-instrument-markup "(“Flute”)"
@@ -1968,7 +1968,7 @@ r"""
             >>> print(text)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1986,7 +1986,7 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         ^ \baca-redundant-instrument-markup "(“Flute”)"
@@ -2007,7 +2007,7 @@ r"""
             >>> print(text)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2025,7 +2025,7 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         ^ \baca-redundant-instrument-markup "(“Flute”)"
@@ -2074,7 +2074,7 @@ r"""
         ...     ),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.short_instrument_name(short_instrument_names["I+II"]),
         ... )
@@ -2105,7 +2105,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2123,7 +2123,7 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
@@ -2151,7 +2151,7 @@ r"""
             >>> print(text)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2169,7 +2169,7 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
@@ -2193,7 +2193,7 @@ r"""
             >>> print(text)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2211,7 +2211,7 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
@@ -2242,16 +2242,16 @@ r"""
         ...     ),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.short_instrument_name(short_instrument_names["III+IV"]),
         ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]["Music_Staff"] = [
+        >>> persist["persistent_indicators"]["Staff"] = [
         ...     baca.Memento(
-        ...         context="MusicVoice",
+        ...         context="Music",
         ...         manifest="short_instrument_names",
         ...         value="I+II",
         ...     )
@@ -2283,7 +2283,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2301,7 +2301,7 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \set Staff.instrumentName = \markup III+IV
                         \set Staff.shortInstrumentName = \markup III+IV
@@ -2330,7 +2330,7 @@ r"""
             >>> print(text)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2348,7 +2348,7 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \set Staff.instrumentName = \markup III+IV
                         \set Staff.shortInstrumentName = \markup III+IV
@@ -2373,7 +2373,7 @@ r"""
             >>> print(text)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2391,7 +2391,7 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \set Staff.instrumentName = \markup III+IV
                         \set Staff.shortInstrumentName = \markup III+IV
@@ -2425,16 +2425,16 @@ r"""
         ...     ),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]["Music_Staff"] = [
+        >>> persist["persistent_indicators"]["Staff"] = [
         ...     baca.Memento(
-        ...         context="MusicVoice",
+        ...         context="Music",
         ...         manifest="short_instrument_names",
         ...         value="I+II",
         ...     )
@@ -2466,7 +2466,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2484,7 +2484,7 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \set Staff.instrumentName = \markup I+II
                         \set Staff.shortInstrumentName = \markup I+II
@@ -2513,7 +2513,7 @@ r"""
             >>> print(text)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2531,7 +2531,7 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \set Staff.instrumentName = \markup I+II
                         \set Staff.shortInstrumentName = \markup I+II
@@ -2556,7 +2556,7 @@ r"""
             >>> print(text)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2574,7 +2574,7 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \set Staff.instrumentName = \markup I+II
                         \set Staff.shortInstrumentName = \markup I+II
@@ -2615,7 +2615,7 @@ r"""
         ...     ),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.short_instrument_name(short_instrument_names["I+II"]),
         ...     baca.new(
@@ -2650,7 +2650,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2671,7 +2671,7 @@ r"""
                         \break
                         s1 * 4/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
@@ -2704,7 +2704,7 @@ r"""
             >>> print(text)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2725,7 +2725,7 @@ r"""
                         \break
                         s1 * 4/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
@@ -2754,7 +2754,7 @@ r"""
             >>> print(text)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2775,7 +2775,7 @@ r"""
                         \break
                         s1 * 4/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
@@ -2818,7 +2818,7 @@ r"""
         ...     ),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ...     baca.short_instrument_name(short_instrument_names["I+II"]),
@@ -2826,9 +2826,9 @@ r"""
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]["Music_Staff"] = [
+        >>> persist["persistent_indicators"]["Staff"] = [
         ...     baca.Memento(
-        ...         context="MusicVoice",
+        ...         context="Music",
         ...         manifest="short_instrument_names",
         ...         value="I+II",
         ...     )
@@ -2860,7 +2860,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2878,7 +2878,7 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \set Staff.instrumentName = \markup I+II
                         \set Staff.shortInstrumentName = \markup I+II
@@ -2907,7 +2907,7 @@ r"""
             >>> print(text)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2925,7 +2925,7 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \set Staff.instrumentName = \markup I+II
                         \set Staff.shortInstrumentName = \markup I+II
@@ -2950,7 +2950,7 @@ r"""
             >>> print(text)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2968,7 +2968,7 @@ r"""
                         \break
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \set Staff.instrumentName = \markup I+II
                         \set Staff.shortInstrumentName = \markup I+II
@@ -3009,7 +3009,7 @@ r"""
         ...     ),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.tag(
         ...         baca.tags.NOT_PARTS,
@@ -3053,7 +3053,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -3074,7 +3074,7 @@ r"""
                         \noBreak
                         s1 * 4/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \set Staff.shortInstrumentName = \markup I+II
                         %@% \set Staff.shortInstrumentName = \markup III+IV
@@ -3134,7 +3134,7 @@ r"""
         ...     commands.manifests(),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.append_anchor_note(),
         ... )
@@ -3165,7 +3165,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -3195,7 +3195,7 @@ r"""
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         b'4.
@@ -3237,7 +3237,7 @@ r"""
         ... )
         >>> baca.text_spanner_staff_padding_function(score["Skips"][:-1], 4)
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.append_anchor_note(),
         ... )
@@ -3279,7 +3279,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -3311,7 +3311,7 @@ r"""
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         b'4.
@@ -3358,7 +3358,7 @@ r"""
         ...     ),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ... )
@@ -3391,7 +3391,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -3416,7 +3416,7 @@ r"""
                         \bacaStopTextSpanMM
                         \revert TextSpanner.staff-padding
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         b'4.
@@ -3456,7 +3456,7 @@ r"""
         ...     commands.manifests(),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.append_anchor_note(),
         ... )
@@ -3487,7 +3487,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -3524,7 +3524,7 @@ r"""
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         b'4.
@@ -3576,7 +3576,7 @@ r"""
         ... )
         >>> baca.text_spanner_staff_padding_function(score["Skips"][:-1], 4)
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ...     baca.append_anchor_note(),
@@ -3610,7 +3610,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -3642,7 +3642,7 @@ r"""
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         b'4.
@@ -3692,7 +3692,7 @@ r"""
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     command,
         ...     baca.staff_lines(1),
@@ -3723,7 +3723,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -3734,7 +3734,7 @@ r"""
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override Staff.BarLine.bar-extent = #'(0 . 0)
                         \override Staff.BarLine.bar-extent = #'(0 . 0)
@@ -3752,7 +3752,7 @@ r"""
 
         >>> dictionary = persist["persistent_indicators"]
         >>> dictionary
-        {'Music_Staff': [baca.Memento(context='MusicVoice', edition=None, manifest=None, prototype='baca.PersistentOverride', synthetic_offset=None, value=PersistentOverride(after=False, attribute='bar_extent', context='Staff', grob='BarLine', hide=False, value="#'(0 . 0)")), baca.Memento(context='MusicVoice', edition=None, manifest=None, prototype='baca.StaffLines', synthetic_offset=None, value=1), baca.Memento(context='MusicVoice', edition=Tag(string='-PARTS'), manifest=None, prototype='baca.BarExtent', synthetic_offset=None, value=1)], 'Score': [baca.Memento(context='Skips', edition=None, manifest=None, prototype='abjad.TimeSignature', synthetic_offset=None, value='3/8')]}
+        {'Score': [baca.Memento(context='Skips', edition=None, manifest=None, prototype='abjad.TimeSignature', synthetic_offset=None, value='3/8')], 'Staff': [baca.Memento(context='Music', edition=None, manifest=None, prototype='baca.PersistentOverride', synthetic_offset=None, value=PersistentOverride(after=False, attribute='bar_extent', context='Staff', grob='BarLine', hide=False, value="#'(0 . 0)")), baca.Memento(context='Music', edition=None, manifest=None, prototype='baca.StaffLines', synthetic_offset=None, value=1), baca.Memento(context='Music', edition=Tag(string='-PARTS'), manifest=None, prototype='baca.BarExtent', synthetic_offset=None, value=1)]}
 
     ..  container:: example
 
@@ -3771,16 +3771,16 @@ r"""
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]["MusicVoice"] = [
+        >>> persist["persistent_indicators"]["Music"] = [
         ...     baca.Memento(
-        ...         context="MusicVoice",
+        ...         context="Music",
         ...         prototype='baca.PersistentOverride',
         ...         value=baca.PersistentOverride(
         ...             after=True,
@@ -3817,7 +3817,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -3828,7 +3828,7 @@ r"""
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         \override Staff.BarLine.bar-extent = #'(0 . 0)
@@ -3864,16 +3864,16 @@ r"""
         ...     tags=[tag],
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     command,
         ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]["MusicVoice"] = [
+        >>> persist["persistent_indicators"]["Music"] = [
         ...     baca.Memento(
-        ...         context="MusicVoice",
+        ...         context="Music",
         ...         prototype="baca.PersistentOverride",
         ...         value=baca.PersistentOverride(
         ...             after=True,
@@ -3910,7 +3910,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -3921,7 +3921,7 @@ r"""
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override Staff.BarLine.bar-extent = #'(0 . 0)
                         b'4.
@@ -3951,7 +3951,7 @@ r"""
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.staff_lines(5),
         ... )
@@ -3980,7 +3980,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -3991,7 +3991,7 @@ r"""
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override Staff.BarLine.bar-extent = #'(-2 . 2)
                         \stopStaff
@@ -4019,16 +4019,16 @@ r"""
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.staff_lines(1),
         ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]["Music_Staff"] = [
+        >>> persist["persistent_indicators"]["Staff"] = [
         ...     baca.Memento(
-        ...         context="MusicVoice",
+        ...         context="Music",
         ...         prototype='baca.StaffLines',
         ...         value=5,
         ...     )
@@ -4059,7 +4059,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -4070,7 +4070,7 @@ r"""
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override Staff.BarLine.bar-extent = #'(0 . 0)
                         \stopStaff
@@ -4100,16 +4100,16 @@ r"""
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ... )
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]["Music_Staff"] = [
+        >>> persist["persistent_indicators"]["Staff"] = [
         ...     baca.Memento(
-        ...         context="MusicVoice",
+        ...         context="Music",
         ...         prototype="baca.StaffLines",
         ...         value=5,
         ...     )
@@ -4140,7 +4140,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -4151,7 +4151,7 @@ r"""
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \stopStaff
                         \once \override Staff.StaffSymbol.line-count = 5
@@ -4180,7 +4180,7 @@ r"""
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.staff_lines(5),
         ...     baca.staff_lines(5, selector=lambda _: abjad.select.leaf(_, 1)),
@@ -4210,7 +4210,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -4221,7 +4221,7 @@ r"""
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override Staff.BarLine.bar-extent = #'(-2 . 2)
                         \stopStaff
@@ -4254,7 +4254,7 @@ r"""
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ...     baca.staff_lines(5),
@@ -4262,9 +4262,9 @@ r"""
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]["Music_Staff"] = [
+        >>> persist["persistent_indicators"]["Staff"] = [
         ...     baca.Memento(
-        ...         context="MusicVoice",
+        ...         context="Music",
         ...         prototype="baca.StaffLines",
         ...         value=5,
         ...     )
@@ -4295,7 +4295,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -4306,7 +4306,7 @@ r"""
                         \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override Staff.BarLine.bar-extent = #'(-2 . 2)
                         \stopStaff
@@ -4362,7 +4362,7 @@ r"""
         ...     commands.manifests(),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.append_anchor_note(),
         ... )
@@ -4393,7 +4393,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -4423,7 +4423,7 @@ r"""
                         \once \override Score.BarLine.transparent = ##t
                         \once \override Score.SpanBar.transparent = ##t
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         b'4.
@@ -4464,7 +4464,7 @@ r"""
         ... )
         >>> baca.text_spanner_staff_padding_function(score["Skips"], 4)
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ... )
 
@@ -4502,7 +4502,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -4527,7 +4527,7 @@ r"""
                         \bacaStopTextSpanMM
                         \revert TextSpanner.staff-padding
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         b'4.
@@ -4565,7 +4565,7 @@ r"""
         ...     ),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ... )
@@ -4597,7 +4597,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -4622,7 +4622,7 @@ r"""
                         \bacaStopTextSpanMM
                         \revert TextSpanner.staff-padding
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         b'4.
@@ -4661,7 +4661,7 @@ r"""
         ...     commands.manifests(),
         ... )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ... )
 
@@ -4689,7 +4689,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -4722,7 +4722,7 @@ r"""
                         s1 * 3/8
                         \bacaStopTextSpanMM
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         b'4.
@@ -4765,7 +4765,7 @@ r"""
         ... )
         >>> baca.text_spanner_staff_padding_function(score["Skips"], 4)
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ... )
@@ -4795,7 +4795,7 @@ r"""
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -4820,7 +4820,7 @@ r"""
                         \bacaStopTextSpanMM
                         \revert TextSpanner.staff-padding
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         b'4.

@@ -245,7 +245,7 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.new(
         ...         baca.marcato(),
@@ -275,7 +275,7 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -292,7 +292,7 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'8
                         [
@@ -354,7 +354,7 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.new(
         ...         baca.marcato(),
@@ -384,7 +384,7 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -401,7 +401,7 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'8
                         [
@@ -518,7 +518,7 @@ def only_parts(command: Command | Suite) -> Command | Suite:
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.only_parts(
         ...         baca.hairpin("p < f"),
@@ -545,7 +545,7 @@ def only_parts(command: Command | Suite) -> Command | Suite:
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -562,7 +562,7 @@ def only_parts(command: Command | Suite) -> Command | Suite:
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'2
                         - \tweak color #(x11-color 'blue)

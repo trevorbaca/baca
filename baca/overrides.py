@@ -318,7 +318,7 @@ def bar_line_transparent(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.rhythm(
         ...         rmakers.talea([1, 1, 1, -1], 8),
         ...         rmakers.beam(),
@@ -350,7 +350,7 @@ def bar_line_transparent(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -363,7 +363,7 @@ def bar_line_transparent(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         e'8
                         [
@@ -1359,7 +1359,7 @@ def mmrest_color(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_mmrests(head=True),
         ...     baca.mmrest_color("#(x11-color 'DarkOrchid)"),
         ... )
@@ -1384,7 +1384,7 @@ def mmrest_color(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1397,10 +1397,10 @@ def mmrest_color(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         <<
-                            \context Voice = "MusicVoice"
+                            \context Voice = "Music"
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
@@ -1409,7 +1409,7 @@ def mmrest_color(
                                 b'1 * 4/8
                                 %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                             }
-                            \context Voice = "RestVoice"
+                            \context Voice = "Rests"
                             {
                                 R1 * 4/8
                                 %@% ^ \baca-duration-multiplier-markup #"4" #"8"
@@ -1476,7 +1476,7 @@ def mmrest_text_color(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
@@ -1505,7 +1505,7 @@ def mmrest_text_color(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1518,10 +1518,10 @@ def mmrest_text_color(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         <<
-                            \context Voice = "MusicVoice"
+                            \context Voice = "Music"
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
@@ -1530,7 +1530,7 @@ def mmrest_text_color(
                                 b'1 * 4/8
                                 %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                             }
-                            \context Voice = "RestVoice"
+                            \context Voice = "Rests"
                             {
                                 R1 * 4/8
                                 %@% ^ \baca-duration-multiplier-markup #"4" #"8"
@@ -1567,7 +1567,7 @@ def mmrest_text_color(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
@@ -1624,7 +1624,7 @@ def mmrest_text_extra_offset(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
@@ -1653,7 +1653,7 @@ def mmrest_text_extra_offset(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1666,10 +1666,10 @@ def mmrest_text_extra_offset(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         <<
-                            \context Voice = "MusicVoice"
+                            \context Voice = "Music"
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
@@ -1678,7 +1678,7 @@ def mmrest_text_extra_offset(
                                 b'1 * 4/8
                                 %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                             }
-                            \context Voice = "RestVoice"
+                            \context Voice = "Rests"
                             {
                                 R1 * 4/8
                                 %@% ^ \baca-duration-multiplier-markup #"4" #"8"
@@ -1757,7 +1757,7 @@ def mmrest_text_padding(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
@@ -1786,7 +1786,7 @@ def mmrest_text_padding(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1799,10 +1799,10 @@ def mmrest_text_padding(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         <<
-                            \context Voice = "MusicVoice"
+                            \context Voice = "Music"
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
@@ -1811,7 +1811,7 @@ def mmrest_text_padding(
                                 b'1 * 4/8
                                 %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                             }
-                            \context Voice = "RestVoice"
+                            \context Voice = "Rests"
                             {
                                 R1 * 4/8
                                 %@% ^ \baca-duration-multiplier-markup #"4" #"8"
@@ -1862,7 +1862,7 @@ def mmrest_text_parent_center(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
@@ -1891,7 +1891,7 @@ def mmrest_text_parent_center(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1904,10 +1904,10 @@ def mmrest_text_parent_center(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         <<
-                            \context Voice = "MusicVoice"
+                            \context Voice = "Music"
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
@@ -1916,7 +1916,7 @@ def mmrest_text_parent_center(
                                 b'1 * 4/8
                                 %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                             }
-                            \context Voice = "RestVoice"
+                            \context Voice = "Rests"
                             {
                                 R1 * 4/8
                                 %@% ^ \baca-duration-multiplier-markup #"4" #"8"
@@ -1968,7 +1968,7 @@ def mmrest_text_staff_padding(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
@@ -1997,7 +1997,7 @@ def mmrest_text_staff_padding(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2010,10 +2010,10 @@ def mmrest_text_staff_padding(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         <<
-                            \context Voice = "MusicVoice"
+                            \context Voice = "Music"
                             {
                                 %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
@@ -2022,7 +2022,7 @@ def mmrest_text_staff_padding(
                                 b'1 * 4/8
                                 %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                             }
-                            \context Voice = "RestVoice"
+                            \context Voice = "Rests"
                             {
                                 R1 * 4/8
                                 %@% ^ \baca-duration-multiplier-markup #"4" #"8"
@@ -4489,7 +4489,7 @@ def text_script_color(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
@@ -4631,7 +4631,7 @@ def text_script_down(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
@@ -4727,7 +4727,7 @@ def text_script_extra_offset(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
@@ -4892,7 +4892,7 @@ def text_script_padding(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
@@ -5079,7 +5079,7 @@ def text_script_staff_padding(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markkup still",
@@ -5221,7 +5221,7 @@ def text_script_up(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",

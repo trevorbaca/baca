@@ -14,10 +14,10 @@ class Scope:
 
         >>> scope = baca.Scope(
         ...     measures=(1, 9),
-        ...     voice_name="ViolinMusicVoice",
+        ...     voice_name="Violin.Music",
         ... )
         >>> scope
-        Scope(measures=(1, 9), voice_name='ViolinMusicVoice')
+        Scope(measures=(1, 9), voice_name='Violin.Music')
 
     """
 
@@ -48,17 +48,17 @@ class TimelineScope:
     ..  container:: example
 
         >>> scope = baca.timeline([
-        ...     ("PianoMusicVoice", (5, 9)),
-        ...     ("ClarinetMusicVoice", (7, 12)),
-        ...     ("ViolinMusicVoice", (8, 12)),
-        ...     ("OboeMusicVoice", (9, 12)),
+        ...     ("Piano.Music", (5, 9)),
+        ...     ("Clarinet.Music", (7, 12)),
+        ...     ("Violin.Music", (8, 12)),
+        ...     ("Oboe.Music", (9, 12)),
         ... ])
 
         >>> for _ in scope.scopes: _
-        Scope(measures=(5, 9), voice_name='PianoMusicVoice')
-        Scope(measures=(7, 12), voice_name='ClarinetMusicVoice')
-        Scope(measures=(8, 12), voice_name='ViolinMusicVoice')
-        Scope(measures=(9, 12), voice_name='OboeMusicVoice')
+        Scope(measures=(5, 9), voice_name='Piano.Music')
+        Scope(measures=(7, 12), voice_name='Clarinet.Music')
+        Scope(measures=(8, 12), voice_name='Violin.Music')
+        Scope(measures=(9, 12), voice_name='Oboe.Music')
 
     """
 

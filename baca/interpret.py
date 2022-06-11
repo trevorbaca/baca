@@ -808,10 +808,13 @@ def _call_all_commands(
                     voice_.name = command.scope.voice_name
                 elif voice_.name == "ChangeMeRestVoice":
                     scope_voice_name = command.scope.voice_name
+                    # TODO: remove this branch:
                     if "MusicVoice" in scope_voice_name:
                         foo = scope_voice_name.replace("MusicVoice", "RestVoice")
+                    # keep only this branch:
                     elif "Music" in scope_voice_name:
                         foo = scope_voice_name.replace("Music", "Rests")
+                    # TODO: remove this branch:
                     else:
                         assert "Voice" in scope_voice_name
                         foo = scope_voice_name.replace("Voice", "RestVoice")
@@ -1994,7 +1997,6 @@ def _memento_to_indicator(dictionary, memento):
 
 
 def _move_global_context(score):
-    assert "Rests" not in score
     global_skips = score["Skips"]
     global_skips.lilypond_type = "Voice"
     music_context = score["MusicContext"]

@@ -51,7 +51,7 @@ class RhythmCommand(_command.Command):
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     command,
         ... )
 
@@ -75,7 +75,7 @@ class RhythmCommand(_command.Command):
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -92,7 +92,7 @@ class RhythmCommand(_command.Command):
                         \time 4/8
                         s1 * 4/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'8
                         [
@@ -167,7 +167,7 @@ class RhythmCommand(_command.Command):
         ...         denominator=16,
         ...     )
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     command,
         ...     baca.label(label_with_durations),
         ...     baca.text_script_font_size(-2),
@@ -194,7 +194,7 @@ class RhythmCommand(_command.Command):
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -210,7 +210,7 @@ class RhythmCommand(_command.Command):
                         \baca-new-spacing-section #1 #16
                         s1 * 4/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override TextScript.font-size = -2
                         \override TextScript.staff-padding = 5
@@ -529,11 +529,10 @@ def _make_multimeasure_rest_container(voice_name, multiplier):
     rest = abjad.MultimeasureRest(1, multiplier=multiplier, tag=tag)
     abjad.attach(_enums.MULTIMEASURE_REST, rest)
     abjad.attach(_enums.REST_VOICE, rest)
-    if "MusicVoice" in voice_name:
-        name = voice_name.replace("MusicVoice", "RestVoice")
-    elif "Music" in voice_name:
+    if "Music" in voice_name:
         name = voice_name.replace("Music", "Rests")
     else:
+        # TODO: remove this branch:
         name = voice_name.replace("Voice", "RestVoice")
     tag = _tags.function_name(_frame(), n=6)
     multimeasure_rest_voice = abjad.Voice([rest], name=name, tag=tag)
@@ -780,7 +779,7 @@ def make_monads_function(fractions):
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
         >>> music = baca.make_monads_function("2/5 2/5 1/5")
-        >>> score["MusicVoice"].extend(music)
+        >>> score["Music"].extend(music)
         >>> _, _ = baca.interpreter(
         ...     score,
         ...     commands.commands,
@@ -801,7 +800,7 @@ def make_monads_function(fractions):
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -809,7 +808,7 @@ def make_monads_function(fractions):
                         \time 4/4
                         s1 * 4/4
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \tweak edge-height #'(0.7 . 0)
                         \times 4/5
@@ -931,7 +930,7 @@ def make_repeat_tied_notes(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_repeat_tied_notes(),
         ... )
 
@@ -955,7 +954,7 @@ def make_repeat_tied_notes(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -963,7 +962,7 @@ def make_repeat_tied_notes(
                         \time 10/8
                         s1 * 10/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'4.
                         - \tweak stencil ##f

@@ -66,7 +66,7 @@ class BCPCommand(_command.Command):
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.bcps(
         ...         [(1, 5), (2, 5)],
@@ -98,7 +98,7 @@ class BCPCommand(_command.Command):
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -115,7 +115,7 @@ class BCPCommand(_command.Command):
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override Script.staff-padding = 5
                         e'8
@@ -269,7 +269,7 @@ class BCPCommand(_command.Command):
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.new(
         ...         baca.bcps(bcps=[(1, 5), (2, 5)]),
@@ -303,7 +303,7 @@ class BCPCommand(_command.Command):
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -320,7 +320,7 @@ class BCPCommand(_command.Command):
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override Script.staff-padding = 5.5
                         \override TextSpanner.staff-padding = 2.5
@@ -641,7 +641,7 @@ class ContainerCommand(_command.Command):
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.container(
         ...         "ViolinI",
@@ -670,7 +670,7 @@ class ContainerCommand(_command.Command):
         >>> print(string)
         \context Score = "Score"
         {
-            \context Staff = "Music_Staff"
+            \context Staff = "Staff"
             <<
                 \context Voice = "Skips"
                 {
@@ -683,7 +683,7 @@ class ContainerCommand(_command.Command):
                     \time 3/8
                     s1 * 3/8
                 }
-                \context Voice = "MusicVoice"
+                \context Voice = "Music"
                 {
                     {   %*% ViolinI
                         e'2
@@ -1044,7 +1044,7 @@ class AccidentalAdjustmentCommand(_command.Command):
 
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.pitches("E4 F4"),
         ...     baca.force_accidental(
@@ -1071,7 +1071,7 @@ class AccidentalAdjustmentCommand(_command.Command):
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1084,7 +1084,7 @@ class AccidentalAdjustmentCommand(_command.Command):
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         e'!2
                         f'!4.
@@ -1286,7 +1286,7 @@ class ClusterCommand(_command.Command):
 
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.pitch("E4"),
         ...     baca.natural_clusters(widths=[3]),
@@ -1310,7 +1310,7 @@ class ClusterCommand(_command.Command):
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1323,7 +1323,7 @@ class ClusterCommand(_command.Command):
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
@@ -1379,7 +1379,7 @@ class ClusterCommand(_command.Command):
 
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.pitches("C4 D4 E4 F4"),
         ...     baca.replace_with_clusters([3]),
@@ -1403,7 +1403,7 @@ class ClusterCommand(_command.Command):
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1416,7 +1416,7 @@ class ClusterCommand(_command.Command):
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
@@ -1471,7 +1471,7 @@ class ClusterCommand(_command.Command):
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.replace_with_clusters([3], start_pitch="G4"),
         ... )
@@ -1494,7 +1494,7 @@ class ClusterCommand(_command.Command):
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1507,7 +1507,7 @@ class ClusterCommand(_command.Command):
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
@@ -1562,7 +1562,7 @@ class ClusterCommand(_command.Command):
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.replace_with_clusters([1, 2, 3, 4], start_pitch="E4"),
         ... )
@@ -1585,7 +1585,7 @@ class ClusterCommand(_command.Command):
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1598,7 +1598,7 @@ class ClusterCommand(_command.Command):
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
@@ -1653,7 +1653,7 @@ class ClusterCommand(_command.Command):
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.replace_with_clusters([1, 3], start_pitch="E4"),
         ... )
@@ -1676,7 +1676,7 @@ class ClusterCommand(_command.Command):
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1689,7 +1689,7 @@ class ClusterCommand(_command.Command):
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
@@ -1744,7 +1744,7 @@ class ClusterCommand(_command.Command):
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.pitch("E4"),
         ...     baca.replace_with_clusters([]),
@@ -1769,7 +1769,7 @@ class ClusterCommand(_command.Command):
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1782,7 +1782,7 @@ class ClusterCommand(_command.Command):
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         e'2
                         e'4.
@@ -1884,7 +1884,7 @@ class ColorFingeringCommand(_command.Command):
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.pitch("E4"),
         ...     baca.ColorFingeringCommand(numbers=[0, 1, 2, 1]),
@@ -1909,7 +1909,7 @@ class ColorFingeringCommand(_command.Command):
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -1922,7 +1922,7 @@ class ColorFingeringCommand(_command.Command):
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         e'2
                         e'4.
@@ -2118,7 +2118,7 @@ class MicrotoneDeviationCommand(_command.Command):
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4"),
         ...     baca.deviation([0, 0.5, 0, -0.5]),
@@ -2143,7 +2143,7 @@ class MicrotoneDeviationCommand(_command.Command):
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2156,7 +2156,7 @@ class MicrotoneDeviationCommand(_command.Command):
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         e'8
                         [
@@ -2241,7 +2241,7 @@ class OctaveDisplacementCommand(_command.Command):
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.suite(
         ...         baca.pitch("G4"),
@@ -2268,7 +2268,7 @@ class OctaveDisplacementCommand(_command.Command):
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2281,7 +2281,7 @@ class OctaveDisplacementCommand(_command.Command):
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         g'8
                         [
@@ -2481,7 +2481,7 @@ class PitchCommand(_command.Command):
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches([19, 13, 15, 16, 17, 23]),
         ... )
@@ -2505,7 +2505,7 @@ class PitchCommand(_command.Command):
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2518,7 +2518,7 @@ class PitchCommand(_command.Command):
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         g''8
                         [
@@ -2563,7 +2563,7 @@ class PitchCommand(_command.Command):
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("C4 F4 F#4 <B4 C#5> D5"),
         ... )
@@ -2587,7 +2587,7 @@ class PitchCommand(_command.Command):
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2600,7 +2600,7 @@ class PitchCommand(_command.Command):
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         c'8
                         [
@@ -2645,7 +2645,7 @@ class PitchCommand(_command.Command):
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("<C4 D4 E4 F4 G4 A4 B4 C4>", allow_repeats=True)
         ... )
@@ -2669,7 +2669,7 @@ class PitchCommand(_command.Command):
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2682,7 +2682,7 @@ class PitchCommand(_command.Command):
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         <c' d' e' f' g' a' b'>8
                         [
@@ -2953,7 +2953,7 @@ class RegisterCommand(_command.Command):
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4"),
         ...     baca.RegisterCommand(
@@ -2979,7 +2979,7 @@ class RegisterCommand(_command.Command):
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -2992,7 +2992,7 @@ class RegisterCommand(_command.Command):
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         g''8
                         [
@@ -3230,7 +3230,7 @@ class RegisterInterpolationCommand(_command.Command):
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches(pitches),
         ...     baca.register(12, 12),
@@ -3254,7 +3254,7 @@ class RegisterInterpolationCommand(_command.Command):
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -3275,7 +3275,7 @@ class RegisterInterpolationCommand(_command.Command):
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         fs''8
                         [
@@ -3344,7 +3344,7 @@ class RegisterInterpolationCommand(_command.Command):
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches(pitches),
         ...     baca.register(12, 0),
@@ -3368,7 +3368,7 @@ class RegisterInterpolationCommand(_command.Command):
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -3389,7 +3389,7 @@ class RegisterInterpolationCommand(_command.Command):
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         fs''8
                         [
@@ -3458,7 +3458,7 @@ class RegisterInterpolationCommand(_command.Command):
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches(pitches),
         ...     baca.register(0, 12),
@@ -3482,7 +3482,7 @@ class RegisterInterpolationCommand(_command.Command):
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -3503,7 +3503,7 @@ class RegisterInterpolationCommand(_command.Command):
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         fs'8
                         [
@@ -3572,7 +3572,7 @@ class RegisterInterpolationCommand(_command.Command):
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches(pitches),
         ...     baca.register(12, -12),
@@ -3596,7 +3596,7 @@ class RegisterInterpolationCommand(_command.Command):
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -3617,7 +3617,7 @@ class RegisterInterpolationCommand(_command.Command):
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         fs''8
                         [
@@ -3686,7 +3686,7 @@ class RegisterInterpolationCommand(_command.Command):
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches(pitches),
         ...     baca.register(-12, 12),
@@ -3710,7 +3710,7 @@ class RegisterInterpolationCommand(_command.Command):
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -3731,7 +3731,7 @@ class RegisterInterpolationCommand(_command.Command):
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         fs8
                         [
@@ -5366,7 +5366,7 @@ def force_accidental(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.pitches("E4 F4"),
         ...     baca.not_parts(
@@ -5396,7 +5396,7 @@ def force_accidental(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -5409,7 +5409,7 @@ def force_accidental(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         e'2
                         %@% e'!2
@@ -5687,7 +5687,7 @@ def pitch(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.rhythm(
         ...         rmakers.note(),
         ...         rmakers.written_duration(1),
@@ -5715,7 +5715,7 @@ def pitch(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -5728,7 +5728,7 @@ def pitch(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         <c' d' e'>1 * 1/2
                         %@% ^ \baca-duration-multiplier-markup #"1" #"2"
@@ -7664,7 +7664,7 @@ def hide_black_note_heads(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.hide_black_note_heads(),
         ... )
@@ -7689,7 +7689,7 @@ def hide_black_note_heads(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -7702,7 +7702,7 @@ def hide_black_note_heads(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         b'2
                         \once \override NoteHead.transparent = ##t
@@ -8058,7 +8058,7 @@ def short_instrument_name(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.short_instrument_name(r"\markup Fl."),
         ...     baca.pitches("E4 F4"),
@@ -8086,7 +8086,7 @@ def short_instrument_name(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -8099,7 +8099,7 @@ def short_instrument_name(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \set Staff.shortInstrumentName = \markup Fl.
                         e'2
@@ -8690,7 +8690,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.clef("percussion"),
         ...     baca.staff_lines(1),
@@ -8717,7 +8717,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -8733,7 +8733,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
                         \baca-new-spacing-section #1 #12
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override Staff.BarLine.bar-extent = #'(0 . 0)
                         \stopStaff
@@ -8766,7 +8766,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.clef("bass"),
         ...     baca.staff_lines(1),
@@ -8793,7 +8793,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -8809,7 +8809,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
                         \baca-new-spacing-section #1 #12
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override Staff.BarLine.bar-extent = #'(0 . 0)
                         \stopStaff
@@ -8843,7 +8843,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.clef("percussion"),
         ...     baca.staff_lines(2),
@@ -8870,7 +8870,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -8886,7 +8886,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
                         \baca-new-spacing-section #1 #12
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override Staff.BarLine.bar-extent = #'(-0.5 . 0.5)
                         \stopStaff
@@ -8918,7 +8918,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.clef("bass"),
         ...     baca.staff_lines(2),
@@ -8945,7 +8945,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -8961,7 +8961,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
                         \baca-new-spacing-section #1 #12
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override Staff.BarLine.bar-extent = #'(-0.5 . 0.5)
                         \stopStaff
@@ -8993,7 +8993,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.staff_lines(2),
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
@@ -9020,7 +9020,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -9036,7 +9036,7 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
                         \baca-new-spacing-section #1 #12
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override Staff.BarLine.bar-extent = #'(-0.5 . 0.5)
                         \stopStaff
@@ -9845,9 +9845,9 @@ def assign_parts(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
-        ...     baca.assign_parts(baca.parts.PartAssignment("MusicVoice")),
+        ...     baca.assign_parts(baca.parts.PartAssignment("Music")),
         ...     baca.pitch("E4"),
         ... )
 
@@ -9865,7 +9865,7 @@ def assign_parts(
         >>> print(string)
         \context Score = "Score"
         {
-            \context Staff = "Music_Staff"
+            \context Staff = "Staff"
             <<
                 \context Voice = "Skips"
                 {
@@ -9878,14 +9878,14 @@ def assign_parts(
                     \time 3/8
                     s1 * 3/8
                 }
-                \context Voice = "MusicVoice"
+                \context Voice = "Music"
                 {
-                    {   %*% PartAssignment('MusicVoice')
+                    {   %*% PartAssignment('Music')
                         e'2
                         e'4.
                         e'2
                         e'4.
-                    }   %*% PartAssignment('MusicVoice')
+                    }   %*% PartAssignment('Music')
                 }
             >>
         }
@@ -9909,9 +9909,9 @@ def assign_parts(
         >>> part_assignment = baca.parts.PartAssignment("Flute")
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
-        ...     baca.assign_parts(baca.parts.PartAssignment("Flute_Voice")),
+        ...     baca.assign_parts(baca.parts.PartAssignment("Flute.Music")),
         ...     baca.pitches("E4 F4"),
         ... )
 
@@ -9924,8 +9924,8 @@ def assign_parts(
         ... )
         Traceback (most recent call last):
             ...
-        Exception: MusicVoice does not allow Flute_Voice part assignment:
-          baca.PartAssignment('Flute_Voice')
+        Exception: Music does not allow Flute.Music part assignment:
+          baca.PartAssignment('Flute.Music')
 
     """
     if not isinstance(part_assignment, _parts.PartAssignment):
@@ -9962,7 +9962,7 @@ def bcps(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.bcps(
         ...         [(1, 5), (3, 5), (2, 5), (4, 5), (5, 5)],
@@ -9991,7 +9991,7 @@ def bcps(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -10008,7 +10008,7 @@ def bcps(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \override Script.staff-padding = 5.5
                         \override TextSpanner.staff-padding = 2.5
@@ -10328,7 +10328,7 @@ def container(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.container(
         ...         "ViolinI",
@@ -10357,7 +10357,7 @@ def container(
         >>> print(string)
         \context Score = "Score"
         {
-            \context Staff = "Music_Staff"
+            \context Staff = "Staff"
             <<
                 \context Voice = "Skips"
                 {
@@ -10370,7 +10370,7 @@ def container(
                     \time 3/8
                     s1 * 3/8
                 }
-                \context Voice = "MusicVoice"
+                \context Voice = "Music"
                 {
                     {   %*% ViolinI
                         e'2
@@ -10412,12 +10412,12 @@ def cross_staff(*, selector=lambda _: _select.phead(_, 0)) -> IndicatorCommand:
         ... )
 
         >>> commands(
-        ...     ("Music_Voice_1", 1),
+        ...     ("Music.1", 1),
         ...     baca.make_music(abjad.Container("e'4 f' g' a'")[:]),
         ... )
 
         >>> commands(
-        ...     ("Music_Voice_2", 1),
+        ...     ("Music.2", 1),
         ...     baca.make_music(abjad.Container("c'4 d' e' f'")[:]),
         ...     baca.cross_staff(
         ...         selector=lambda _: baca.select.pleaves(_)[-2:],
@@ -10443,16 +10443,16 @@ def cross_staff(*, selector=lambda _: _select.phead(_, 0)) -> IndicatorCommand:
             >>> print(string)
             \context Score = "Score"
             {
-                \context StaffGroup = "Music_Staff_Group"
+                \context StaffGroup = "StaffGroup"
                 <<
-                    \context Staff = "Music_Staff_1"
+                    \context Staff = "Staff.1"
                     <<
                         \context Voice = "Skips"
                         {
                             \time 4/4
                             s1 * 4/4
                         }
-                        \context Voice = "Music_Voice_1"
+                        \context Voice = "Music.1"
                         {
                             e'4
                             f'4
@@ -10460,9 +10460,9 @@ def cross_staff(*, selector=lambda _: _select.phead(_, 0)) -> IndicatorCommand:
                             a'4
                         }
                     >>
-                    \context Staff = "Music_Staff_2"
+                    \context Staff = "Staff.2"
                     {
-                        \context Voice = "Music_Voice_2"
+                        \context Voice = "Music.2"
                         {
                             c'4
                             d'4
@@ -10730,7 +10730,7 @@ def finger_pressure_transition(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.pitch("C5"),
         ...     baca.note_head_style_harmonic(selector=lambda _: abjad.select.note(_, 0)),
@@ -10762,7 +10762,7 @@ def finger_pressure_transition(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -10779,7 +10779,7 @@ def finger_pressure_transition(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         \once \override NoteHead.style = #'harmonic
                         c''2
@@ -10954,7 +10954,7 @@ def glissando(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.glissando()
@@ -10976,7 +10976,7 @@ def glissando(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -10989,7 +10989,7 @@ def glissando(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         e'8
                         [
@@ -11047,7 +11047,7 @@ def glissando(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.glissando(selector=lambda _: baca.select.plts(_)[:2]),
@@ -11070,7 +11070,7 @@ def glissando(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -11083,7 +11083,7 @@ def glissando(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         e'8
                         [
@@ -11130,7 +11130,7 @@ def glissando(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.glissando(
@@ -11154,7 +11154,7 @@ def glissando(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -11167,7 +11167,7 @@ def glissando(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         e'8
                         [
@@ -11238,7 +11238,7 @@ def glissando(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.glissando(
@@ -11263,7 +11263,7 @@ def glissando(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -11276,7 +11276,7 @@ def glissando(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         e'8
                         [
@@ -11439,7 +11439,7 @@ def invisible_music(
         ... )
 
         >>> commands(
-        ...     "MusicVoice",
+        ...     "Music",
         ...     baca.make_notes(),
         ...     baca.pitch("C5"),
         ...     baca.invisible_music(
@@ -11466,7 +11466,7 @@ def invisible_music(
             >>> print(string)
             \context Score = "Score"
             {
-                \context Staff = "Music_Staff"
+                \context Staff = "Staff"
                 <<
                     \context Voice = "Skips"
                     {
@@ -11483,7 +11483,7 @@ def invisible_music(
                         \time 3/8
                         s1 * 3/8
                     }
-                    \context Voice = "MusicVoice"
+                    \context Voice = "Music"
                     {
                         c''2
                         %@% \abjad-invisible-music

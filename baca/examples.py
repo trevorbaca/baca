@@ -17,7 +17,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     docs=True,
     ... )
     >>> commands(
-    ...     "MusicVoice",
+    ...     "Music",
     ...     baca.make_even_divisions(),
     ...     baca.label(lambda _: abjad.label.with_indices(_)),
     ... )
@@ -38,7 +38,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
         >>> print(string)
         \context Score = "Score"
         {
-            \context Staff = "Music_Staff"
+            \context Staff = "Staff"
             <<
                 \context Voice = "Skips"
                 {
@@ -51,7 +51,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                     \time 3/8
                     s1 * 3/8
                 }
-                \context Voice = "MusicVoice"
+                \context Voice = "Music"
                 {
                     b'8
                     ^ \markup 0
@@ -116,7 +116,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     >>> list_.append(baca.label(lambda _: abjad.label.with_indices(_)))
 
     >>> commands(
-    ...     "MusicVoice",
+    ...     "Music",
     ...     list_,
     ... )
 
@@ -137,7 +137,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
         >>> print(string)
         \context Score = "Score"
         {
-            \context Staff = "Music_Staff"
+            \context Staff = "Staff"
             <<
                 \context Voice = "Skips"
                 {
@@ -150,7 +150,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                     \time 3/8
                     s1 * 3/8
                 }
-                \context Voice = "MusicVoice"
+                \context Voice = "Music"
                 {
                     b'8
                     ^ \markup 0
@@ -197,7 +197,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     Raises exception on noncommand input:
 
     >>> commands(
-    ...     "MusicVoice",
+    ...     "Music",
     ...     "text",
     ... )
     Traceback (most recent call last):
@@ -235,12 +235,12 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ... )
 
     >>> commands(
-    ...     ("Music_Voice_1", 1),
+    ...     ("Music.1", 1),
     ...     baca.make_music(abjad.Container("d'4 e' f' g' a' b'")[:]),
     ... )
 
     >>> commands(
-    ...     ("Music_Voice_2", 1),
+    ...     ("Music.2", 1),
     ...     baca.make_music(abjad.Container("a4 g f e d c")[:]),
     ...     baca.clef("bass"),
     ... )
@@ -266,16 +266,16 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
         >>> print(string)
         \context Score = "Score"
         {
-            \context StaffGroup = "Music_Staff_Group"
+            \context StaffGroup = "StaffGroup"
             <<
-                \context Staff = "Music_Staff_1"
+                \context Staff = "Staff.1"
                 <<
                     \context Voice = "Skips"
                     {
                         \time 6/4
                         s1 * 6/4
                     }
-                    \context Voice = "Music_Voice_1"
+                    \context Voice = "Music.1"
                     {
                         d'4
                         e'4
@@ -288,9 +288,9 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                         b'4
                     }
                 >>
-                \context Staff = "Music_Staff_2"
+                \context Staff = "Staff.2"
                 {
-                    \context Voice = "Music_Voice_2"
+                    \context Voice = "Music.2"
                     {
                         \clef "bass"
                         a4
@@ -327,7 +327,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ... )
 
     >>> commands(
-    ...     "MusicVoice",
+    ...     "Music",
     ...     baca.make_even_divisions(),
     ...     baca.instrument(instruments["clarinet"]),
     ...     baca.pitches("E4 F4"),
@@ -355,7 +355,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
         >>> print(string)
         \context Score = "Score"
         {
-            \context Staff = "Music_Staff"
+            \context Staff = "Staff"
             <<
                 \context Voice = "Skips"
                 {
@@ -368,7 +368,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                     \time 3/8
                     s1 * 3/8
                 }
-                \context Voice = "MusicVoice"
+                \context Voice = "Music"
                 {
                     fs'8
                     [
@@ -416,7 +416,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ... )
 
     >>> commands(
-    ...     "MusicVoice",
+    ...     "Music",
     ...     baca.make_even_divisions(),
     ...     baca.instrument(instruments["clarinet"]),
     ...     baca.pitches("E4 F4"),
@@ -441,7 +441,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
         >>> print(string)
         \context Score = "Score"
         {
-            \context Staff = "Music_Staff"
+            \context Staff = "Staff"
             <<
                 \context Voice = "Skips"
                 {
@@ -454,7 +454,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                     \time 3/8
                     s1 * 3/8
                 }
-                \context Voice = "MusicVoice"
+                \context Voice = "Music"
                 {
                     e'8
                     [
@@ -522,7 +522,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     docs=True,
     ... )
     >>> commands(
-    ...     ("MusicVoice", 1),
+    ...     ("Music", 1),
     ...     baca.make_music(figures_, do_not_check_total_duration=True),
     ...     baca.instrument(abjad.Violin()),
     ... )
@@ -553,7 +553,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
             autoBeaming = ##f
         }
         {
-            \context Staff = "Music_Staff"
+            \context Staff = "Staff"
             <<
                 \context Voice = "Skips"
                 {
@@ -566,7 +566,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                     \time 3/8
                     s1 * 3/8
                 }
-                \context Voice = "MusicVoice"
+                \context Voice = "Music"
                 {
                     \scaleDurations #'(1 . 1)
                     {
@@ -636,7 +636,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     docs=True,
     ... )
     >>> commands(
-    ...     ("MusicVoice", 1),
+    ...     ("Music", 1),
     ...     baca.make_music(figures, do_not_check_total_duration=True),
     ... )
 
@@ -664,7 +664,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
             autoBeaming = ##f
         }
         {
-            \context Staff = "Music_Staff"
+            \context Staff = "Staff"
             <<
                 \context Voice = "Skips"
                 {
@@ -677,7 +677,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                     \time 3/8
                     s1 * 3/8
                 }
-                \context Voice = "MusicVoice"
+                \context Voice = "Music"
                 {
                     \scaleDurations #'(1 . 1)
                     {
