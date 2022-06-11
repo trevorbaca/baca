@@ -529,11 +529,8 @@ def _make_multimeasure_rest_container(voice_name, multiplier):
     rest = abjad.MultimeasureRest(1, multiplier=multiplier, tag=tag)
     abjad.attach(_enums.MULTIMEASURE_REST, rest)
     abjad.attach(_enums.REST_VOICE, rest)
-    if "Music" in voice_name:
-        name = voice_name.replace("Music", "Rests")
-    else:
-        # TODO: remove this branch:
-        name = voice_name.replace("Voice", "RestVoice")
+    assert "Music" in voice_name, repr(voice_name)
+    name = voice_name.replace("Music", "Rests")
     tag = _tags.function_name(_frame(), n=6)
     multimeasure_rest_voice = abjad.Voice([rest], name=name, tag=tag)
     abjad.attach(_enums.INTERMITTENT, multimeasure_rest_voice)
@@ -743,7 +740,7 @@ def make_mmrests_function(time_signatures, *, head: str | bool = ""):
     tag = _tags.function_name(_frame())
     mmrests = []
     if head is True:
-        head = "ChangeMeVoice"
+        head = "MultimeasureRestContainer.Music"
     if head:
         for i, time_signature in enumerate(time_signatures):
             multiplier = abjad.NonreducedFraction(time_signature.pair)
