@@ -640,6 +640,18 @@ def _make_skeleton(
     return selection
 
 
+def _make_tied_notes():
+    rhythm_maker = rmakers.stack(
+        rmakers.note(),
+        rmakers.beam(lambda _: _select.plts(_)),
+        rmakers.tie(lambda _: _select.ptails(_)[:-1]),
+        rmakers.rewrite_meter(),
+        # tag=_tags.function_name(_frame()),
+        tag=abjad.Tag("baca.make_tied_notes()"),
+    )
+    return rhythm_maker
+
+
 def _make_tied_repeated_durations(durations):
     specifiers = []
     if isinstance(durations, abjad.Duration):
@@ -1118,17 +1130,18 @@ def make_tied_notes(*, measures=None):
     Makes tied notes; rewrites meter.
     """
     return RhythmCommand(
-        rhythm_maker=rmakers.stack(
-            rmakers.note(),
-            rmakers.beam(lambda _: _select.plts(_)),
-            rmakers.tie(lambda _: _select.ptails(_)[:-1]),
-            rmakers.rewrite_meter(),
-            tag=_tags.function_name(_frame()),
-        ),
+        rhythm_maker=_make_tied_notes,
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
         measures=measures,
     )
+
+
+def make_tied_notes_function(time_signatures):
+    assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
+    rhythm_maker = _make_tied_notes()
+    music = rhythm_maker(time_signatures)
+    return music
 
 
 def make_tied_repeated_durations(durations, *, measures=None):
