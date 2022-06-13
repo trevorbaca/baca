@@ -9173,6 +9173,24 @@ def stem_tremolo(
     )
 
 
+def stem_tremolo_function(
+    leaf: abjad.Leaf,
+    *,
+    tremolo_flags: int = 32,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    indicator = abjad.StemTremolo(tremolo_flags=tremolo_flags)
+    # tag = _tags.function_name(_frame())
+    tag = abjad.Tag("baca.stem_tremolo()")
+    for tag_ in tags or []:
+        tag = tag.append(tag_)
+    abjad.attach(
+        indicator,
+        leaf,
+        tag=tag,
+    )
+
+
 def stop_on_string(
     selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
     *,
