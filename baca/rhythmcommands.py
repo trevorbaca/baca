@@ -618,6 +618,25 @@ def _make_repeated_duration_notes(
     return rhythm_maker
 
 
+def _make_single_attack(duration):
+    duration = abjad.Duration(duration)
+    numerator, denominator = duration.pair
+    rhythm_maker = rmakers.stack(
+        rmakers.incised(
+            fill_with_rests=True,
+            outer_divisions_only=True,
+            prefix_talea=[numerator],
+            prefix_counts=[1],
+            talea_denominator=denominator,
+        ),
+        rmakers.beam(),
+        rmakers.extract_trivial(),
+        # tag=_tags.function_name(_frame()),
+        tag=abjad.Tag("baca.make_single_attack()"),
+    )
+    return rhythm_maker
+
+
 def _make_skeleton(
     argument,
     *,
@@ -1066,29 +1085,36 @@ def make_rests(*, measures=None):
     )
 
 
+def make_rests_function(time_signatures):
+    assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
+    rhythm_maker = rmakers.stack(
+        rmakers.note(),
+        rmakers.force_rest(lambda _: _select.lts(_)),
+        # tag=_tags.function_name(_frame()),
+        tag=abjad.Tag("baca.make_rests()"),
+    )
+    music = rhythm_maker(time_signatures)
+    return music
+
+
 def make_single_attack(duration, *, measures=None):
     """
     Makes single attacks with ``duration``.
     """
-    duration = abjad.Duration(duration)
-    numerator, denominator = duration.pair
+    rhythm_maker = _make_single_attack(duration)
     return RhythmCommand(
-        rhythm_maker=rmakers.stack(
-            rmakers.incised(
-                fill_with_rests=True,
-                outer_divisions_only=True,
-                prefix_talea=[numerator],
-                prefix_counts=[1],
-                talea_denominator=denominator,
-            ),
-            rmakers.beam(),
-            rmakers.extract_trivial(),
-            tag=_tags.function_name(_frame()),
-        ),
+        rhythm_maker=rhythm_maker,
         annotation_spanner_color="#darkcyan",
         frame=_frame(),
         measures=measures,
     )
+
+
+def make_single_attack_function(time_signatures, duration):
+    assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
+    rhythm_maker = _make_single_attack(duration)
+    music = rhythm_maker(time_signatures)
+    return music
 
 
 def make_skeleton(

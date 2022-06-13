@@ -6899,6 +6899,26 @@ def breathe(
     )
 
 
+def breathe_function(
+    leaf,
+    *tweaks: abjad.Tweak,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    indicator: abjad.LilyPondLiteral | abjad.Bundle
+    # TODO: change to abjad.Articulation("breathe", site="after")?
+    indicator = abjad.LilyPondLiteral(r"\breathe", site="after")
+    indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+    # tag = _tags.function_name(_frame())
+    tag = abjad.Tag("baca.breathe()")
+    for tag_ in tags or []:
+        tag = tag.append(tag_)
+    abjad.attach(
+        indicator,
+        leaf,
+        tag=tag,
+    )
+
+
 def clef(
     clef: str = "treble",
     selector=lambda _: abjad.select.leaf(_, 0),
