@@ -124,7 +124,6 @@ class Part:
             name = self.section
         self.name = name
 
-    @property
     def identifier(self):
         """
         Gets identifier.
@@ -138,7 +137,7 @@ class Part:
             ...     section_abbreviation="VN-1",
             ... )
 
-            >>> part.identifier
+            >>> part.identifier()
             'VN-1-18'
 
         """
