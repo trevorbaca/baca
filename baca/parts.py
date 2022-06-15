@@ -20,28 +20,24 @@ class Part:
         >>> part = baca.Part(
         ...     member=18,
         ...     section="FirstViolin",
-        ...     section_abbreviation="VN-1",
         ... )
 
         >>> part
-        Part(member=18, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=18, section='FirstViolin')
 
     ..  container:: example
 
         >>> part_1 = baca.Part(
         ...     member=18,
         ...     section="FirstViolin",
-        ...     section_abbreviation="VN-1",
         ... )
         >>> part_2 = baca.Part(
         ...     member=18,
         ...     section="FirstViolin",
-        ...     section_abbreviation="VN-1",
         ... )
         >>> part_3 = baca.Part(
         ...     member=18,
         ...     section="SecondViolin",
-        ...     section_abbreviation="VN-2",
         ... )
 
         >>> part_1 == part_1
@@ -69,7 +65,6 @@ class Part:
 
     member: typing.Any = None
     section: typing.Any = None
-    section_abbreviation: typing.Any = dataclasses.field(compare=False, default=None)
 
     def __post_init__(self):
         if self.member is not None:
@@ -78,11 +73,6 @@ class Part:
         if self.section is not None:
             if not isinstance(self.section, str):
                 raise Exception(f"section must be string (not {self.section!r}).")
-        if self.section_abbreviation is not None:
-            if not isinstance(self.section_abbreviation, str):
-                message = "section_abbreviation must be string"
-                message += f" (not {self.section_abbreviation!r})."
-                raise Exception(message)
 
     def identifier(self):
         """
@@ -93,19 +83,17 @@ class Part:
             >>> part = baca.Part(
             ...     member=18,
             ...     section="FirstViolin",
-            ...     section_abbreviation="VN-1",
             ... )
 
             >>> part.identifier()
-            'VN-1-18'
+            'FirstViolin-18'
 
         """
-        assert isinstance(self.section_abbreviation, str)
         if self.member is None:
-            return self.section_abbreviation
+            return self.section
         else:
             assert isinstance(self.member, int)
-            return f"{self.section_abbreviation}-{self.member}"
+            return f"{self.section}-{self.member}"
 
     def name(self):
         if self.member is not None:
@@ -189,40 +177,40 @@ class PartAssignment:
             >>> for part in parts:
             ...     part, part in part_assignment
             ...
-            (Part(member=1, section='Horn', section_abbreviation=None), True)
-            (Part(member=2, section='Horn', section_abbreviation=None), True)
-            (Part(member=3, section='Horn', section_abbreviation=None), True)
-            (Part(member=4, section='Horn', section_abbreviation=None), True)
+            (Part(member=1, section='Horn'), True)
+            (Part(member=2, section='Horn'), True)
+            (Part(member=3, section='Horn'), True)
+            (Part(member=4, section='Horn'), True)
 
             >>> part_assignment = baca.PartAssignment("Horn", 1)
             >>> for part in parts:
             ...     part, part in part_assignment
             ...
-            (Part(member=1, section='Horn', section_abbreviation=None), True)
-            (Part(member=2, section='Horn', section_abbreviation=None), False)
-            (Part(member=3, section='Horn', section_abbreviation=None), False)
-            (Part(member=4, section='Horn', section_abbreviation=None), False)
+            (Part(member=1, section='Horn'), True)
+            (Part(member=2, section='Horn'), False)
+            (Part(member=3, section='Horn'), False)
+            (Part(member=4, section='Horn'), False)
 
             >>> part_assignment = baca.PartAssignment("Horn", 2)
             >>> for part in parts: part
-            Part(member=1, section='Horn', section_abbreviation=None)
-            Part(member=2, section='Horn', section_abbreviation=None)
-            Part(member=3, section='Horn', section_abbreviation=None)
-            Part(member=4, section='Horn', section_abbreviation=None)
+            Part(member=1, section='Horn')
+            Part(member=2, section='Horn')
+            Part(member=3, section='Horn')
+            Part(member=4, section='Horn')
 
             >>> part_assignment = baca.PartAssignment("Horn", (3, 4))
             >>> for part in parts: part
-            Part(member=1, section='Horn', section_abbreviation=None)
-            Part(member=2, section='Horn', section_abbreviation=None)
-            Part(member=3, section='Horn', section_abbreviation=None)
-            Part(member=4, section='Horn', section_abbreviation=None)
+            Part(member=1, section='Horn')
+            Part(member=2, section='Horn')
+            Part(member=3, section='Horn')
+            Part(member=4, section='Horn')
 
             >>> part_assignment = baca.PartAssignment("Horn", [1, 3])
             >>> for part in parts: part
-            Part(member=1, section='Horn', section_abbreviation=None)
-            Part(member=2, section='Horn', section_abbreviation=None)
-            Part(member=3, section='Horn', section_abbreviation=None)
-            Part(member=4, section='Horn', section_abbreviation=None)
+            Part(member=1, section='Horn')
+            Part(member=2, section='Horn')
+            Part(member=3, section='Horn')
+            Part(member=4, section='Horn')
 
         """
         assert isinstance(part, Part), repr(part)
@@ -342,24 +330,24 @@ class Section:
             ... )
 
             >>> for part in section.parts(): part
-            Part(member=1, section='FirstViolin', section_abbreviation='VN-1')
-            Part(member=2, section='FirstViolin', section_abbreviation='VN-1')
-            Part(member=3, section='FirstViolin', section_abbreviation='VN-1')
-            Part(member=4, section='FirstViolin', section_abbreviation='VN-1')
-            Part(member=5, section='FirstViolin', section_abbreviation='VN-1')
-            Part(member=6, section='FirstViolin', section_abbreviation='VN-1')
-            Part(member=7, section='FirstViolin', section_abbreviation='VN-1')
-            Part(member=8, section='FirstViolin', section_abbreviation='VN-1')
-            Part(member=9, section='FirstViolin', section_abbreviation='VN-1')
-            Part(member=10, section='FirstViolin', section_abbreviation='VN-1')
-            Part(member=11, section='FirstViolin', section_abbreviation='VN-1')
-            Part(member=12, section='FirstViolin', section_abbreviation='VN-1')
-            Part(member=13, section='FirstViolin', section_abbreviation='VN-1')
-            Part(member=14, section='FirstViolin', section_abbreviation='VN-1')
-            Part(member=15, section='FirstViolin', section_abbreviation='VN-1')
-            Part(member=16, section='FirstViolin', section_abbreviation='VN-1')
-            Part(member=17, section='FirstViolin', section_abbreviation='VN-1')
-            Part(member=18, section='FirstViolin', section_abbreviation='VN-1')
+            Part(member=1, section='FirstViolin')
+            Part(member=2, section='FirstViolin')
+            Part(member=3, section='FirstViolin')
+            Part(member=4, section='FirstViolin')
+            Part(member=5, section='FirstViolin')
+            Part(member=6, section='FirstViolin')
+            Part(member=7, section='FirstViolin')
+            Part(member=8, section='FirstViolin')
+            Part(member=9, section='FirstViolin')
+            Part(member=10, section='FirstViolin')
+            Part(member=11, section='FirstViolin')
+            Part(member=12, section='FirstViolin')
+            Part(member=13, section='FirstViolin')
+            Part(member=14, section='FirstViolin')
+            Part(member=15, section='FirstViolin')
+            Part(member=16, section='FirstViolin')
+            Part(member=17, section='FirstViolin')
+            Part(member=18, section='FirstViolin')
 
         """
         parts = []
@@ -371,7 +359,6 @@ class Section:
                 part = Part(
                     member=member,
                     section=self.name,
-                    section_abbreviation=self.abbreviation,
                 )
                 parts.append(part)
         return parts
@@ -386,10 +373,10 @@ class PartManifest:
         Initializes from parts:
 
         >>> part_manifest = baca.PartManifest(
-        ...     baca.Part(section="BassClarinet", section_abbreviation="BCL"),
-        ...     baca.Part(section="Violin", section_abbreviation="VN"),
-        ...     baca.Part(section="Viola", section_abbreviation="VA"),
-        ...     baca.Part(section="Cello", section_abbreviation="VC"),
+        ...     baca.Part(section="BassClarinet"),
+        ...     baca.Part(section="Violin"),
+        ...     baca.Part(section="Viola"),
+        ...     baca.Part(section="Cello"),
         ... )
         >>> len(part_manifest.parts)
         4
@@ -410,7 +397,6 @@ class PartManifest:
         ...         name="Oboe",
         ...     ),
         ...     baca.Part(
-        ...         section_abbreviation="EH",
         ...         section="EnglishHorn",
         ...     ),
         ...     baca.Section(
@@ -432,16 +418,16 @@ class PartManifest:
         Makes parts on initialization:
 
         >>> part_manifest = baca.PartManifest(
-        ...     baca.Part(section="BassClarinet", section_abbreviation="BCL"),
-        ...     baca.Part(section="Violin", section_abbreviation="VN"),
-        ...     baca.Part(section="Viola", section_abbreviation="VA"),
-        ...     baca.Part(section="Cello", section_abbreviation="VC"),
+        ...     baca.Part(section="BassClarinet"),
+        ...     baca.Part(section="Violin"),
+        ...     baca.Part(section="Viola"),
+        ...     baca.Part(section="Cello"),
         ... )
         >>> for part in part_manifest.parts: part
-        Part(member=None, section='BassClarinet', section_abbreviation='BCL')
-        Part(member=None, section='Violin', section_abbreviation='VN')
-        Part(member=None, section='Viola', section_abbreviation='VA')
-        Part(member=None, section='Cello', section_abbreviation='VC')
+        Part(member=None, section='BassClarinet')
+        Part(member=None, section='Violin')
+        Part(member=None, section='Viola')
+        Part(member=None, section='Cello')
 
     ..  container:: example
 
@@ -457,7 +443,6 @@ class PartManifest:
         ...         name="Oboe",
         ...     ),
         ...     baca.Part(
-        ...         section_abbreviation="EH",
         ...         section="EnglishHorn",
         ...     ),
         ...     baca.Section(
@@ -473,50 +458,50 @@ class PartManifest:
         ... )
 
         >>> for part in part_manifest.parts: part
-        Part(member=1, section='Flute', section_abbreviation='FL')
-        Part(member=2, section='Flute', section_abbreviation='FL')
-        Part(member=3, section='Flute', section_abbreviation='FL')
-        Part(member=4, section='Flute', section_abbreviation='FL')
-        Part(member=1, section='Oboe', section_abbreviation='OB')
-        Part(member=2, section='Oboe', section_abbreviation='OB')
-        Part(member=3, section='Oboe', section_abbreviation='OB')
-        Part(member=None, section='EnglishHorn', section_abbreviation='EH')
-        Part(member=1, section='FirstViolin', section_abbreviation='VN-1')
-        Part(member=2, section='FirstViolin', section_abbreviation='VN-1')
-        Part(member=3, section='FirstViolin', section_abbreviation='VN-1')
-        Part(member=4, section='FirstViolin', section_abbreviation='VN-1')
-        Part(member=5, section='FirstViolin', section_abbreviation='VN-1')
-        Part(member=6, section='FirstViolin', section_abbreviation='VN-1')
-        Part(member=7, section='FirstViolin', section_abbreviation='VN-1')
-        Part(member=8, section='FirstViolin', section_abbreviation='VN-1')
-        Part(member=9, section='FirstViolin', section_abbreviation='VN-1')
-        Part(member=10, section='FirstViolin', section_abbreviation='VN-1')
-        Part(member=11, section='FirstViolin', section_abbreviation='VN-1')
-        Part(member=12, section='FirstViolin', section_abbreviation='VN-1')
-        Part(member=13, section='FirstViolin', section_abbreviation='VN-1')
-        Part(member=14, section='FirstViolin', section_abbreviation='VN-1')
-        Part(member=15, section='FirstViolin', section_abbreviation='VN-1')
-        Part(member=16, section='FirstViolin', section_abbreviation='VN-1')
-        Part(member=17, section='FirstViolin', section_abbreviation='VN-1')
-        Part(member=18, section='FirstViolin', section_abbreviation='VN-1')
-        Part(member=1, section='SecondViolin', section_abbreviation='VN-2')
-        Part(member=2, section='SecondViolin', section_abbreviation='VN-2')
-        Part(member=3, section='SecondViolin', section_abbreviation='VN-2')
-        Part(member=4, section='SecondViolin', section_abbreviation='VN-2')
-        Part(member=5, section='SecondViolin', section_abbreviation='VN-2')
-        Part(member=6, section='SecondViolin', section_abbreviation='VN-2')
-        Part(member=7, section='SecondViolin', section_abbreviation='VN-2')
-        Part(member=8, section='SecondViolin', section_abbreviation='VN-2')
-        Part(member=9, section='SecondViolin', section_abbreviation='VN-2')
-        Part(member=10, section='SecondViolin', section_abbreviation='VN-2')
-        Part(member=11, section='SecondViolin', section_abbreviation='VN-2')
-        Part(member=12, section='SecondViolin', section_abbreviation='VN-2')
-        Part(member=13, section='SecondViolin', section_abbreviation='VN-2')
-        Part(member=14, section='SecondViolin', section_abbreviation='VN-2')
-        Part(member=15, section='SecondViolin', section_abbreviation='VN-2')
-        Part(member=16, section='SecondViolin', section_abbreviation='VN-2')
-        Part(member=17, section='SecondViolin', section_abbreviation='VN-2')
-        Part(member=18, section='SecondViolin', section_abbreviation='VN-2')
+        Part(member=1, section='Flute')
+        Part(member=2, section='Flute')
+        Part(member=3, section='Flute')
+        Part(member=4, section='Flute')
+        Part(member=1, section='Oboe')
+        Part(member=2, section='Oboe')
+        Part(member=3, section='Oboe')
+        Part(member=None, section='EnglishHorn')
+        Part(member=1, section='FirstViolin')
+        Part(member=2, section='FirstViolin')
+        Part(member=3, section='FirstViolin')
+        Part(member=4, section='FirstViolin')
+        Part(member=5, section='FirstViolin')
+        Part(member=6, section='FirstViolin')
+        Part(member=7, section='FirstViolin')
+        Part(member=8, section='FirstViolin')
+        Part(member=9, section='FirstViolin')
+        Part(member=10, section='FirstViolin')
+        Part(member=11, section='FirstViolin')
+        Part(member=12, section='FirstViolin')
+        Part(member=13, section='FirstViolin')
+        Part(member=14, section='FirstViolin')
+        Part(member=15, section='FirstViolin')
+        Part(member=16, section='FirstViolin')
+        Part(member=17, section='FirstViolin')
+        Part(member=18, section='FirstViolin')
+        Part(member=1, section='SecondViolin')
+        Part(member=2, section='SecondViolin')
+        Part(member=3, section='SecondViolin')
+        Part(member=4, section='SecondViolin')
+        Part(member=5, section='SecondViolin')
+        Part(member=6, section='SecondViolin')
+        Part(member=7, section='SecondViolin')
+        Part(member=8, section='SecondViolin')
+        Part(member=9, section='SecondViolin')
+        Part(member=10, section='SecondViolin')
+        Part(member=11, section='SecondViolin')
+        Part(member=12, section='SecondViolin')
+        Part(member=13, section='SecondViolin')
+        Part(member=14, section='SecondViolin')
+        Part(member=15, section='SecondViolin')
+        Part(member=16, section='SecondViolin')
+        Part(member=17, section='SecondViolin')
+        Part(member=18, section='SecondViolin')
 
     ..  container:: example
 
@@ -531,10 +516,10 @@ class PartManifest:
         Makes sections at initialization:
 
         >>> part_manifest = baca.PartManifest(
-        ...     baca.Part(section="BassClarinet", section_abbreviation="BCL"),
-        ...     baca.Part(section="Violin", section_abbreviation="VN"),
-        ...     baca.Part(section="Viola", section_abbreviation="VA"),
-        ...     baca.Part(section="Cello", section_abbreviation="VC"),
+        ...     baca.Part(section="BassClarinet"),
+        ...     baca.Part(section="Violin"),
+        ...     baca.Part(section="Viola"),
+        ...     baca.Part(section="Cello"),
         ... )
         >>> part_manifest.sections
         []
@@ -551,7 +536,6 @@ class PartManifest:
         ...         name="Oboe",
         ...     ),
         ...     baca.Part(
-        ...         section_abbreviation="EH",
         ...         section="EnglishHorn",
         ...     ),
         ...     baca.Section(
@@ -631,7 +615,6 @@ class PartManifest:
             ...         name="Oboe",
             ...     ),
             ...     baca.Part(
-            ...         section_abbreviation="EH",
             ...         section="EnglishHorn",
             ...     ),
             ...     baca.Section(
@@ -648,9 +631,9 @@ class PartManifest:
 
             >>> part_assignment = baca.PartAssignment("Oboe")
             >>> for part in part_manifest.expand(part_assignment): part
-            Part(member=1, section='Oboe', section_abbreviation='OB')
-            Part(member=2, section='Oboe', section_abbreviation='OB')
-            Part(member=3, section='Oboe', section_abbreviation='OB')
+            Part(member=1, section='Oboe')
+            Part(member=2, section='Oboe')
+            Part(member=3, section='Oboe')
 
         """
         assert isinstance(part_assignment, PartAssignment)
