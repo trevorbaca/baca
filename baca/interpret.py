@@ -67,15 +67,15 @@ def _add_container_identifiers(score, section_number):
             continue
         contexts.append(voice)
     container_to_part_assignment = {}
-    context_name_counts = {}
+    context_name_to_count = {}
     for context in contexts:
         assert context.name is not None, repr(context)
-        count = context_name_counts.get(context.name, 0)
+        count = context_name_to_count.get(context.name, 0)
         if count == 0:
             suffixed_context_name = context.name
         else:
-            suffixed_context_name = f"{context.name}.count.{count}"
-        context_name_counts[context.name] = count + 1
+            suffixed_context_name = f"{context.name}.item.{count}"
+        context_name_to_count[context.name] = count + 1
         if section_number:
             context_identifier = f"{section_number}.{suffixed_context_name}"
         else:
