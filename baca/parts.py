@@ -115,8 +115,7 @@ class Part:
         return name
 
 
-# TODO: frozen=True
-@dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class PartAssignment:
     """
     Part assignment.
@@ -140,8 +139,6 @@ class PartAssignment:
 
     ..  container:: example
 
-        Compares ``section``, ``members``:
-
         >>> part_assignment_1 = baca.PartAssignment("Horn", (1, 2))
         >>> part_assignment_2 = baca.PartAssignment("Horn", [1, 2])
         >>> part_assignment_3 = baca.PartAssignment("Horn")
@@ -149,12 +146,12 @@ class PartAssignment:
         >>> part_assignment_1 == part_assignment_1
         True
         >>> part_assignment_1 == part_assignment_2
-        True
+        False
         >>> part_assignment_1 == part_assignment_3
         False
 
         >>> part_assignment_2 == part_assignment_1
-        True
+        False
         >>> part_assignment_2 == part_assignment_2
         True
         >>> part_assignment_2 == part_assignment_3
@@ -167,40 +164,14 @@ class PartAssignment:
         >>> part_assignment_3 == part_assignment_3
         True
 
-    ..  container:: example
-
-        Expands parts on initialization:
-
-        >>> baca.PartAssignment("Horn").parts
-        [Part(member=None, section='Horn', section_abbreviation=None)]
-
-        >>> baca.PartAssignment("Horn", 1).parts
-        [Part(member=1, section='Horn', section_abbreviation=None)]
-
-        >>> baca.PartAssignment("Horn", 2).parts
-        [Part(member=2, section='Horn', section_abbreviation=None)]
-
-        >>> baca.PartAssignment("Horn", (3, 4)).parts
-        [Part(member=3, section='Horn', section_abbreviation=None), Part(member=4, section='Horn', section_abbreviation=None)]
-
-        >>> baca.PartAssignment("Horn", [1, 3]).parts
-        [Part(member=1, section='Horn', section_abbreviation=None), Part(member=3, section='Horn', section_abbreviation=None)]
-
     """
 
-    members: typing.Any = dataclasses.field(init=False, repr=False)
-    parts: typing.Any = dataclasses.field(compare=False, init=False, repr=False)
     section: typing.Any = None
-    token: typing.Any = dataclasses.field(compare=False, default=None)
+    token: typing.Any = None
 
     def __post_init__(self):
-        if self.token is not None:
-            assert _is_part_assignment_token(self.token), repr(self.token)
-        self.members = _expand_members(self.token)
-        self.parts = self._expand_parts()
-        assert isinstance(self.parts, list), repr(self.parts)
+        assert _is_part_assignment_token(self.token), repr(self.token)
 
-    # TODO: remove in favor of part in part_assignment.parts
     def __contains__(self, part: Part):
         """
         Is true when part assignment contains ``part``.
@@ -253,48 +224,55 @@ class PartAssignment:
             Part(member=3, section='Horn', section_abbreviation=None)
             Part(member=4, section='Horn', section_abbreviation=None)
 
-        ..  container:: example
-
-            Raises exception when input is not part:
-
-            >>> part_assignment = baca.PartAssignment("Horn")
-            >>> "Horn" in part_assignment
-            Traceback (most recent call last):
-                ...
-            TypeError: must be part (not 'Horn').
-
         """
-        if not isinstance(part, Part):
-            raise TypeError(f"must be part (not {part!r}).")
+        assert isinstance(part, Part), repr(part)
+        members = self.members()
         if part.section == self.section:
             if (
                 part.member is None
-                or self.members is None
-                or part.member in self.members
-                or []
+                or members is None
+                or part.member in members
+                or members == []
             ):
                 return True
             return False
         return False
 
-    def _expand_parts(self):
-        parts = []
-        if self.members is None:
-            parts.append(Part(section=self.section))
-        else:
-            for member in self.members:
-                part = Part(member=member, section=self.section)
-                parts.append(part)
-        return parts
-
+    # TODO: add keyword section=, token= to repr
     def __repr__(self):
         """
-        Custom repr for __persist__ files.
+        Custom repr for "baca.PartAssignment" in __persist__ files.
         """
         if self.token is not None:
             return f"baca.{type(self).__name__}({self.section!r}, {self.token!r})"
         else:
             return f"baca.{type(self).__name__}({self.section!r})"
+
+    def members(self):
+        members = []
+        if self.token is None:
+            return members
+        if isinstance(self.token, int):
+            members.append(self.token)
+        elif isinstance(self.token, tuple):
+            assert len(self.token) == 2, repr(self.token)
+            for member in range(self.token[0], self.token[1] + 1):
+                members.append(member)
+        else:
+            assert isinstance(self.token, list), repr(self.token)
+            members.extend(self.token)
+        return members
+
+    def parts(self):
+        parts = []
+        members = self.members()
+        if members is None:
+            parts.append(Part(section=self.section))
+        else:
+            for member in members:
+                part = Part(member=member, section=self.section)
+                parts.append(part)
+        return parts
 
 
 # TODO: frozen=True
@@ -748,25 +726,9 @@ class PartManifest:
             if part.section == part_assignment.section:
                 if part_assignment.token is None:
                     parts.append(part)
-                elif part.member in part_assignment.members:
+                elif part.member in part_assignment.members():
                     parts.append(part)
         return parts
-
-
-def _expand_members(token):
-    if token is None:
-        return
-    members = []
-    if isinstance(token, int):
-        members.append(token)
-    elif isinstance(token, tuple):
-        assert len(token) == 2, repr(token)
-        for member in range(token[0], token[1] + 1):
-            members.append(member)
-    else:
-        assert isinstance(token, list), repr(token)
-        members.extend(token)
-    return members
 
 
 def _global_rest_identifier(section_number):
@@ -796,6 +758,8 @@ def _import_score_package(contents_directory):
 
 
 def _is_part_assignment_token(argument):
+    if argument is None:
+        return True
     if isinstance(argument, int) and 1 <= argument:
         return True
     if (
