@@ -671,10 +671,10 @@ class PartManifest:
 
     ..  container:: example
 
-        >>> baca.Part(section='FirstViolin', member=18) in part_manifest.parts
+        >>> baca.Part(section="FirstViolin", member=18) in part_manifest.parts
         True
 
-        >>> baca.Part(section='FirstViolin', member=19) in part_manifest.parts
+        >>> baca.Part(section="FirstViolin", member=19) in part_manifest.parts
         False
 
     ..  container:: example
