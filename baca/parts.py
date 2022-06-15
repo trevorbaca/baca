@@ -10,8 +10,7 @@ import abjad
 from . import path as _path
 
 
-# TODO: frozen=True
-@dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Part:
     """
     Part.
@@ -25,7 +24,7 @@ class Part:
         ... )
 
         >>> part
-        Part(instrument='FirstViolin', member=18, number=None, section='FirstViolin', section_abbreviation='VN-1', zfill=None)
+        Part(member=18, section='FirstViolin', section_abbreviation='VN-1')
 
     ..  container:: example
 
@@ -66,44 +65,16 @@ class Part:
         >>> part_3 == part_3
         True
 
-    ..  container:: example
-
-        >>> part = baca.Part(
-        ...     instrument="Violin",
-        ...     member=9,
-        ...     number=99,
-        ...     section="FirstViolin",
-        ...     section_abbreviation="VN-1",
-        ...     zfill=2,
-        ... )
-
-        >>> part.zfill
-        2
-
-        >>> str(part.member).zfill(part.zfill)
-        '09'
-
     """
 
-    instrument: typing.Any = dataclasses.field(compare=False, default=None)
     member: typing.Any = None
-    name: str | None = dataclasses.field(compare=False, init=False, repr=False)
-    number: typing.Any = dataclasses.field(compare=False, default=None)
     section: typing.Any = None
     section_abbreviation: typing.Any = dataclasses.field(compare=False, default=None)
-    zfill: typing.Any = dataclasses.field(compare=False, default=None)
 
     def __post_init__(self):
-        self.instrument = self.instrument or self.section
-        if self.instrument is not None:
-            if not isinstance(self.instrument, str):
-                raise Exception("instrument must be string (not {self.instrument!r}).")
         if self.member is not None:
             if not isinstance(self.member, int):
                 raise Exception("member must be integer (not {self.member!r}).")
-        if self.number is not None:
-            assert isinstance(self.number, int), repr(self.number)
-            assert 1 <= self.number, repr(self.number)
         if self.section is not None:
             if not isinstance(self.section, str):
                 raise Exception(f"section must be string (not {self.section!r}).")
@@ -112,17 +83,6 @@ class Part:
                 message = "section_abbreviation must be string"
                 message += f" (not {self.section_abbreviation!r})."
                 raise Exception(message)
-        if self.zfill is not None:
-            assert isinstance(self.zfill, int), repr(self.zfill)
-            assert 1 <= self.zfill, repr(self.zfill)
-        if self.member is not None:
-            member_ = str(self.member)
-            if self.zfill is not None:
-                member_ = member_.zfill(self.zfill)
-            name = f"{self.section}{member_}"
-        else:
-            name = self.section
-        self.name = name
 
     def identifier(self):
         """
@@ -131,7 +91,6 @@ class Part:
         ..  container:: example
 
             >>> part = baca.Part(
-            ...     instrument="Violin",
             ...     member=18,
             ...     section="FirstViolin",
             ...     section_abbreviation="VN-1",
@@ -147,6 +106,13 @@ class Part:
         else:
             assert isinstance(self.member, int)
             return f"{self.section_abbreviation}-{self.member}"
+
+    def name(self):
+        if self.member is not None:
+            name = f"{self.section}{self.member}"
+        else:
+            name = self.section
+        return name
 
 
 # TODO: frozen=True
@@ -206,19 +172,19 @@ class PartAssignment:
         Expands parts on initialization:
 
         >>> baca.PartAssignment("Horn").parts
-        [Part(instrument='Horn', member=None, number=None, section='Horn', section_abbreviation=None, zfill=None)]
+        [Part(member=None, section='Horn', section_abbreviation=None)]
 
         >>> baca.PartAssignment("Horn", 1).parts
-        [Part(instrument='Horn', member=1, number=None, section='Horn', section_abbreviation=None, zfill=None)]
+        [Part(member=1, section='Horn', section_abbreviation=None)]
 
         >>> baca.PartAssignment("Horn", 2).parts
-        [Part(instrument='Horn', member=2, number=None, section='Horn', section_abbreviation=None, zfill=None)]
+        [Part(member=2, section='Horn', section_abbreviation=None)]
 
         >>> baca.PartAssignment("Horn", (3, 4)).parts
-        [Part(instrument='Horn', member=3, number=None, section='Horn', section_abbreviation=None, zfill=None), Part(instrument='Horn', member=4, number=None, section='Horn', section_abbreviation=None, zfill=None)]
+        [Part(member=3, section='Horn', section_abbreviation=None), Part(member=4, section='Horn', section_abbreviation=None)]
 
         >>> baca.PartAssignment("Horn", [1, 3]).parts
-        [Part(instrument='Horn', member=1, number=None, section='Horn', section_abbreviation=None, zfill=None), Part(instrument='Horn', member=3, number=None, section='Horn', section_abbreviation=None, zfill=None)]
+        [Part(member=1, section='Horn', section_abbreviation=None), Part(member=3, section='Horn', section_abbreviation=None)]
 
     """
 
@@ -234,6 +200,7 @@ class PartAssignment:
         self.parts = self._expand_parts()
         assert isinstance(self.parts, list), repr(self.parts)
 
+    # TODO: remove in favor of part in part_assignment.parts
     def __contains__(self, part: Part):
         """
         Is true when part assignment contains ``part``.
@@ -251,46 +218,40 @@ class PartAssignment:
             >>> for part in parts:
             ...     part, part in part_assignment
             ...
-            (Part(instrument='Horn', member=1, number=None, section='Horn', section_abbreviation=None, zfill=None), True)
-            (Part(instrument='Horn', member=2, number=None, section='Horn', section_abbreviation=None, zfill=None), True)
-            (Part(instrument='Horn', member=3, number=None, section='Horn', section_abbreviation=None, zfill=None), True)
-            (Part(instrument='Horn', member=4, number=None, section='Horn', section_abbreviation=None, zfill=None), True)
+            (Part(member=1, section='Horn', section_abbreviation=None), True)
+            (Part(member=2, section='Horn', section_abbreviation=None), True)
+            (Part(member=3, section='Horn', section_abbreviation=None), True)
+            (Part(member=4, section='Horn', section_abbreviation=None), True)
 
             >>> part_assignment = baca.PartAssignment("Horn", 1)
             >>> for part in parts:
             ...     part, part in part_assignment
             ...
-            (Part(instrument='Horn', member=1, number=None, section='Horn', section_abbreviation=None, zfill=None), True)
-            (Part(instrument='Horn', member=2, number=None, section='Horn', section_abbreviation=None, zfill=None), False)
-            (Part(instrument='Horn', member=3, number=None, section='Horn', section_abbreviation=None, zfill=None), False)
-            (Part(instrument='Horn', member=4, number=None, section='Horn', section_abbreviation=None, zfill=None), False)
+            (Part(member=1, section='Horn', section_abbreviation=None), True)
+            (Part(member=2, section='Horn', section_abbreviation=None), False)
+            (Part(member=3, section='Horn', section_abbreviation=None), False)
+            (Part(member=4, section='Horn', section_abbreviation=None), False)
 
             >>> part_assignment = baca.PartAssignment("Horn", 2)
-            >>> for part in parts:
-            ...     part, part in part_assignment
-            ...
-            (Part(instrument='Horn', member=1, number=None, section='Horn', section_abbreviation=None, zfill=None), False)
-            (Part(instrument='Horn', member=2, number=None, section='Horn', section_abbreviation=None, zfill=None), True)
-            (Part(instrument='Horn', member=3, number=None, section='Horn', section_abbreviation=None, zfill=None), False)
-            (Part(instrument='Horn', member=4, number=None, section='Horn', section_abbreviation=None, zfill=None), False)
+            >>> for part in parts: part
+            Part(member=1, section='Horn', section_abbreviation=None)
+            Part(member=2, section='Horn', section_abbreviation=None)
+            Part(member=3, section='Horn', section_abbreviation=None)
+            Part(member=4, section='Horn', section_abbreviation=None)
 
             >>> part_assignment = baca.PartAssignment("Horn", (3, 4))
-            >>> for part in parts:
-            ...     part, part in part_assignment
-            ...
-            (Part(instrument='Horn', member=1, number=None, section='Horn', section_abbreviation=None, zfill=None), False)
-            (Part(instrument='Horn', member=2, number=None, section='Horn', section_abbreviation=None, zfill=None), False)
-            (Part(instrument='Horn', member=3, number=None, section='Horn', section_abbreviation=None, zfill=None), True)
-            (Part(instrument='Horn', member=4, number=None, section='Horn', section_abbreviation=None, zfill=None), True)
+            >>> for part in parts: part
+            Part(member=1, section='Horn', section_abbreviation=None)
+            Part(member=2, section='Horn', section_abbreviation=None)
+            Part(member=3, section='Horn', section_abbreviation=None)
+            Part(member=4, section='Horn', section_abbreviation=None)
 
             >>> part_assignment = baca.PartAssignment("Horn", [1, 3])
-            >>> for part in parts:
-            ...     part, part in part_assignment
-            ...
-            (Part(instrument='Horn', member=1, number=None, section='Horn', section_abbreviation=None, zfill=None), True)
-            (Part(instrument='Horn', member=2, number=None, section='Horn', section_abbreviation=None, zfill=None), False)
-            (Part(instrument='Horn', member=3, number=None, section='Horn', section_abbreviation=None, zfill=None), True)
-            (Part(instrument='Horn', member=4, number=None, section='Horn', section_abbreviation=None, zfill=None), False)
+            >>> for part in parts: part
+            Part(member=1, section='Horn', section_abbreviation=None)
+            Part(member=2, section='Horn', section_abbreviation=None)
+            Part(member=3, section='Horn', section_abbreviation=None)
+            Part(member=4, section='Horn', section_abbreviation=None)
 
         ..  container:: example
 
@@ -315,22 +276,6 @@ class PartAssignment:
                 return True
             return False
         return False
-
-    def __iter__(self):
-        """
-        Iterates parts in assignment.
-
-        ..  container:: example
-
-            >>> part_assignment = baca.PartAssignment("Horn", [1, 3])
-            >>> for part in part_assignment:
-            ...     part
-            ...
-            Part(instrument='Horn', member=1, number=None, section='Horn', section_abbreviation=None, zfill=None)
-            Part(instrument='Horn', member=3, number=None, section='Horn', section_abbreviation=None, zfill=None)
-
-        """
-        return iter(self.parts)
 
     def _expand_parts(self):
         parts = []
@@ -453,27 +398,25 @@ class Section:
         ...     name="FirstViolin",
         ... )
 
-        >>> for part in section.parts:
-        ...     part
-        ...
-        Part(instrument='Violin', member=1, number=None, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=2, number=None, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=3, number=None, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=4, number=None, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=5, number=None, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=6, number=None, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=7, number=None, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=8, number=None, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=9, number=None, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=10, number=None, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=11, number=None, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=12, number=None, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=13, number=None, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=14, number=None, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=15, number=None, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=16, number=None, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=17, number=None, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=18, number=None, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
+        >>> for part in section.parts: part
+        Part(member=1, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=2, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=3, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=4, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=5, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=6, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=7, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=8, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=9, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=10, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=11, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=12, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=13, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=14, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=15, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=16, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=17, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=18, section='FirstViolin', section_abbreviation='VN-1')
 
     """
 
@@ -503,17 +446,11 @@ class Section:
             part = Part(self.name)
             parts.append(part)
         else:
-            if 1 < len(str(self.count)):
-                zfill = len(str(self.count))
-            else:
-                zfill = None
             for member in range(1, self.count + 1):
                 part = Part(
                     member=member,
-                    instrument=self.instrument,
                     section=self.name,
                     section_abbreviation=self.abbreviation,
-                    zfill=zfill,
                 )
                 parts.append(part)
         self.parts = parts
@@ -533,7 +470,7 @@ class PartManifest:
         ...     baca.Part(section="Viola", section_abbreviation="VA"),
         ...     baca.Part(section="Cello", section_abbreviation="VC"),
         ... )
-        >>> len(part_manifest)
+        >>> len(part_manifest.parts)
         4
 
     ..  container:: example
@@ -568,7 +505,7 @@ class PartManifest:
         ...         name="SecondViolin",
         ...         ),
         ... )
-        >>> len(part_manifest)
+        >>> len(part_manifest.parts)
         44
 
     ..  container:: example
@@ -581,13 +518,11 @@ class PartManifest:
         ...     baca.Part(section="Viola", section_abbreviation="VA"),
         ...     baca.Part(section="Cello", section_abbreviation="VC"),
         ... )
-        >>> for part in part_manifest.parts:
-        ...     part
-        ...
-        Part(instrument='BassClarinet', member=None, number=1, section='BassClarinet', section_abbreviation='BCL', zfill=None)
-        Part(instrument='Violin', member=None, number=2, section='Violin', section_abbreviation='VN', zfill=None)
-        Part(instrument='Viola', member=None, number=3, section='Viola', section_abbreviation='VA', zfill=None)
-        Part(instrument='Cello', member=None, number=4, section='Cello', section_abbreviation='VC', zfill=None)
+        >>> for part in part_manifest.parts: part
+        Part(member=None, section='BassClarinet', section_abbreviation='BCL')
+        Part(member=None, section='Violin', section_abbreviation='VN')
+        Part(member=None, section='Viola', section_abbreviation='VA')
+        Part(member=None, section='Cello', section_abbreviation='VC')
 
     ..  container:: example
 
@@ -620,53 +555,51 @@ class PartManifest:
         ...     ),
         ... )
 
-        >>> for part in part_manifest.parts:
-        ...     part
-        ...
-        Part(instrument='Flute', member=1, number=1, section='Flute', section_abbreviation='FL', zfill=None)
-        Part(instrument='Flute', member=2, number=2, section='Flute', section_abbreviation='FL', zfill=None)
-        Part(instrument='Flute', member=3, number=3, section='Flute', section_abbreviation='FL', zfill=None)
-        Part(instrument='Flute', member=4, number=4, section='Flute', section_abbreviation='FL', zfill=None)
-        Part(instrument='Oboe', member=1, number=5, section='Oboe', section_abbreviation='OB', zfill=None)
-        Part(instrument='Oboe', member=2, number=6, section='Oboe', section_abbreviation='OB', zfill=None)
-        Part(instrument='Oboe', member=3, number=7, section='Oboe', section_abbreviation='OB', zfill=None)
-        Part(instrument='EnglishHorn', member=None, number=8, section='EnglishHorn', section_abbreviation='EH', zfill=None)
-        Part(instrument='Violin', member=1, number=9, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=2, number=10, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=3, number=11, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=4, number=12, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=5, number=13, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=6, number=14, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=7, number=15, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=8, number=16, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=9, number=17, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=10, number=18, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=11, number=19, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=12, number=20, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=13, number=21, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=14, number=22, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=15, number=23, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=16, number=24, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=17, number=25, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=18, number=26, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-        Part(instrument='Violin', member=1, number=27, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-        Part(instrument='Violin', member=2, number=28, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-        Part(instrument='Violin', member=3, number=29, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-        Part(instrument='Violin', member=4, number=30, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-        Part(instrument='Violin', member=5, number=31, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-        Part(instrument='Violin', member=6, number=32, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-        Part(instrument='Violin', member=7, number=33, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-        Part(instrument='Violin', member=8, number=34, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-        Part(instrument='Violin', member=9, number=35, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-        Part(instrument='Violin', member=10, number=36, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-        Part(instrument='Violin', member=11, number=37, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-        Part(instrument='Violin', member=12, number=38, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-        Part(instrument='Violin', member=13, number=39, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-        Part(instrument='Violin', member=14, number=40, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-        Part(instrument='Violin', member=15, number=41, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-        Part(instrument='Violin', member=16, number=42, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-        Part(instrument='Violin', member=17, number=43, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-        Part(instrument='Violin', member=18, number=44, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
+        >>> for part in part_manifest.parts: part
+        Part(member=1, section='Flute', section_abbreviation='FL')
+        Part(member=2, section='Flute', section_abbreviation='FL')
+        Part(member=3, section='Flute', section_abbreviation='FL')
+        Part(member=4, section='Flute', section_abbreviation='FL')
+        Part(member=1, section='Oboe', section_abbreviation='OB')
+        Part(member=2, section='Oboe', section_abbreviation='OB')
+        Part(member=3, section='Oboe', section_abbreviation='OB')
+        Part(member=None, section='EnglishHorn', section_abbreviation='EH')
+        Part(member=1, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=2, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=3, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=4, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=5, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=6, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=7, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=8, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=9, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=10, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=11, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=12, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=13, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=14, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=15, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=16, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=17, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=18, section='FirstViolin', section_abbreviation='VN-1')
+        Part(member=1, section='SecondViolin', section_abbreviation='VN-2')
+        Part(member=2, section='SecondViolin', section_abbreviation='VN-2')
+        Part(member=3, section='SecondViolin', section_abbreviation='VN-2')
+        Part(member=4, section='SecondViolin', section_abbreviation='VN-2')
+        Part(member=5, section='SecondViolin', section_abbreviation='VN-2')
+        Part(member=6, section='SecondViolin', section_abbreviation='VN-2')
+        Part(member=7, section='SecondViolin', section_abbreviation='VN-2')
+        Part(member=8, section='SecondViolin', section_abbreviation='VN-2')
+        Part(member=9, section='SecondViolin', section_abbreviation='VN-2')
+        Part(member=10, section='SecondViolin', section_abbreviation='VN-2')
+        Part(member=11, section='SecondViolin', section_abbreviation='VN-2')
+        Part(member=12, section='SecondViolin', section_abbreviation='VN-2')
+        Part(member=13, section='SecondViolin', section_abbreviation='VN-2')
+        Part(member=14, section='SecondViolin', section_abbreviation='VN-2')
+        Part(member=15, section='SecondViolin', section_abbreviation='VN-2')
+        Part(member=16, section='SecondViolin', section_abbreviation='VN-2')
+        Part(member=17, section='SecondViolin', section_abbreviation='VN-2')
+        Part(member=18, section='SecondViolin', section_abbreviation='VN-2')
 
     ..  container:: example
 
@@ -758,151 +691,8 @@ class PartManifest:
                 parts.extend(argument.parts)
             else:
                 raise TypeError(f"must be part or section (not {argument}).")
-        for i, part in enumerate(parts):
-            number = i + 1
-            part.number = number
         self.parts = parts
         self.sections = sections
-
-    # TODO: eliminate in favor of PartManifest.parts
-    def __iter__(self):
-        """
-        Iterates parts in manifest.
-
-        ..  container:: example
-
-            >>> part_manifest = baca.PartManifest(
-            ...     baca.Section(
-            ...         abbreviation="FL",
-            ...         count=4,
-            ...         name="Flute",
-            ...     ),
-            ...     baca.Section(
-            ...         abbreviation="OB",
-            ...         count=3,
-            ...         name="Oboe",
-            ...     ),
-            ...     baca.Part(
-            ...         section_abbreviation="EH",
-            ...         section="EnglishHorn",
-            ...     ),
-            ...     baca.Section(
-            ...         abbreviation="VN-1",
-            ...         count=18,
-            ...         instrument="Violin",
-            ...         name="FirstViolin",
-            ...     ),
-            ...     baca.Section(
-            ...         abbreviation="VN-2",
-            ...         count=18,
-            ...         instrument="Violin",
-            ...         name="SecondViolin",
-            ...     ),
-            ... )
-
-            >>> for part in part_manifest:
-            ...     part
-            ...
-            Part(instrument='Flute', member=1, number=1, section='Flute', section_abbreviation='FL', zfill=None)
-            Part(instrument='Flute', member=2, number=2, section='Flute', section_abbreviation='FL', zfill=None)
-            Part(instrument='Flute', member=3, number=3, section='Flute', section_abbreviation='FL', zfill=None)
-            Part(instrument='Flute', member=4, number=4, section='Flute', section_abbreviation='FL', zfill=None)
-            Part(instrument='Oboe', member=1, number=5, section='Oboe', section_abbreviation='OB', zfill=None)
-            Part(instrument='Oboe', member=2, number=6, section='Oboe', section_abbreviation='OB', zfill=None)
-            Part(instrument='Oboe', member=3, number=7, section='Oboe', section_abbreviation='OB', zfill=None)
-            Part(instrument='EnglishHorn', member=None, number=8, section='EnglishHorn', section_abbreviation='EH', zfill=None)
-            Part(instrument='Violin', member=1, number=9, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-            Part(instrument='Violin', member=2, number=10, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-            Part(instrument='Violin', member=3, number=11, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-            Part(instrument='Violin', member=4, number=12, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-            Part(instrument='Violin', member=5, number=13, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-            Part(instrument='Violin', member=6, number=14, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-            Part(instrument='Violin', member=7, number=15, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-            Part(instrument='Violin', member=8, number=16, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-            Part(instrument='Violin', member=9, number=17, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-            Part(instrument='Violin', member=10, number=18, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-            Part(instrument='Violin', member=11, number=19, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-            Part(instrument='Violin', member=12, number=20, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-            Part(instrument='Violin', member=13, number=21, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-            Part(instrument='Violin', member=14, number=22, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-            Part(instrument='Violin', member=15, number=23, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-            Part(instrument='Violin', member=16, number=24, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-            Part(instrument='Violin', member=17, number=25, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-            Part(instrument='Violin', member=18, number=26, section='FirstViolin', section_abbreviation='VN-1', zfill=2)
-            Part(instrument='Violin', member=1, number=27, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-            Part(instrument='Violin', member=2, number=28, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-            Part(instrument='Violin', member=3, number=29, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-            Part(instrument='Violin', member=4, number=30, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-            Part(instrument='Violin', member=5, number=31, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-            Part(instrument='Violin', member=6, number=32, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-            Part(instrument='Violin', member=7, number=33, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-            Part(instrument='Violin', member=8, number=34, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-            Part(instrument='Violin', member=9, number=35, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-            Part(instrument='Violin', member=10, number=36, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-            Part(instrument='Violin', member=11, number=37, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-            Part(instrument='Violin', member=12, number=38, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-            Part(instrument='Violin', member=13, number=39, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-            Part(instrument='Violin', member=14, number=40, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-            Part(instrument='Violin', member=15, number=41, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-            Part(instrument='Violin', member=16, number=42, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-            Part(instrument='Violin', member=17, number=43, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-            Part(instrument='Violin', member=18, number=44, section='SecondViolin', section_abbreviation='VN-2', zfill=2)
-
-        """
-        return iter(self.parts)
-
-    # TODO: eliminate in favor of PartManifest.parts
-    def __len__(self):
-        """
-        Gets number of parts in manifest.
-
-        ..  container:: example
-
-            >>> part_manifest = baca.PartManifest(
-            ...     baca.Part(section="BassClarinet", section_abbreviation="BCL"),
-            ...     baca.Part(section="Violin", section_abbreviation="VN"),
-            ...     baca.Part(section="Viola", section_abbreviation="VA"),
-            ...     baca.Part(section="Cello", section_abbreviation="VC"),
-            ... )
-            >>> len(part_manifest)
-            4
-
-        ..  container:: example
-
-            >>> part_manifest = baca.PartManifest(
-            ...     baca.Section(
-            ...         abbreviation="FL",
-            ...         count=4,
-            ...         name="Flute",
-            ...     ),
-            ...     baca.Section(
-            ...         abbreviation="OB",
-            ...         count=3,
-            ...         name="Oboe",
-            ...     ),
-            ...     baca.Part(
-            ...         section_abbreviation="EH",
-            ...         section="EnglishHorn",
-            ...     ),
-            ...     baca.Section(
-            ...         abbreviation="VN-1",
-            ...         count=18,
-            ...         instrument="Violin",
-            ...         name="FirstViolin",
-            ...     ),
-            ...     baca.Section(
-            ...         abbreviation="VN-2",
-            ...         count=18,
-            ...         instrument="Violin",
-            ...         name="SecondViolin",
-            ...     ),
-            ... )
-
-            >>> len(part_manifest)
-            44
-
-        """
-        return len(self.parts)
 
     def __repr__(self):
         """
@@ -946,12 +736,10 @@ class PartManifest:
             ... )
 
             >>> part_assignment = baca.PartAssignment("Oboe")
-            >>> for part in part_manifest.expand(part_assignment):
-            ...     part
-            ...
-            Part(instrument='Oboe', member=1, number=5, section='Oboe', section_abbreviation='OB', zfill=None)
-            Part(instrument='Oboe', member=2, number=6, section='Oboe', section_abbreviation='OB', zfill=None)
-            Part(instrument='Oboe', member=3, number=7, section='Oboe', section_abbreviation='OB', zfill=None)
+            >>> for part in part_manifest.expand(part_assignment): part
+            Part(member=1, section='Oboe', section_abbreviation='OB')
+            Part(member=2, section='Oboe', section_abbreviation='OB')
+            Part(member=3, section='Oboe', section_abbreviation='OB')
 
         """
         assert isinstance(part_assignment, PartAssignment)

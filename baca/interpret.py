@@ -919,9 +919,9 @@ def _check_duplicate_part_assignments(dictionary, part_manifest):
     part_to_timespans = {}
     for identifier, (part_assignment, timespan) in dictionary.items():
         for part in part_manifest.expand(part_assignment):
-            if part.name not in part_to_timespans:
-                part_to_timespans[part.name] = []
-            part_to_timespans[part.name].append(timespan)
+            if part.name() not in part_to_timespans:
+                part_to_timespans[part.name()] = []
+            part_to_timespans[part.name()].append(timespan)
     messages = []
     for part_name, timespans in part_to_timespans.items():
         if len(timespans) <= 1:
