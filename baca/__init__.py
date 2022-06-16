@@ -31,7 +31,7 @@ from .interpret import (
 from .layout import *
 from .memento import *
 from .overrides import *
-from .parts import *
+from .parts import Part, PartAssignment
 from .path import *
 from .pcollections import (
     ArpeggiationSpacingSpecifier,

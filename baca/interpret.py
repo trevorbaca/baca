@@ -927,7 +927,7 @@ def _check_duplicate_part_assignments(dictionary, part_manifest):
         return
     part_to_timespans = {}
     for identifier, (part_assignment, timespan) in dictionary.items():
-        for part in part_assignment.parts():
+        for part in part_assignment.make_parts():
             if part.identifier() not in part_to_timespans:
                 part_to_timespans[part.identifier()] = []
             part_to_timespans[part.identifier()].append(timespan)
