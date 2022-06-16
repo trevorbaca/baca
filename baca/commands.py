@@ -603,9 +603,6 @@ class BCPCommand(_command.Command):
 
 @dataclasses.dataclass(slots=True)
 class ColorCommand(_command.Command):
-    """
-    Color command.
-    """
 
     lone: bool = False
 
@@ -727,9 +724,6 @@ class ContainerCommand(_command.Command):
 
 @dataclasses.dataclass(slots=True)
 class DetachCommand(_command.Command):
-    """
-    Detach command.
-    """
 
     arguments: typing.Sequence[typing.Any] = ()
 
@@ -770,9 +764,6 @@ class GenericCommand(_command.Command):
 
 @dataclasses.dataclass(slots=True)
 class GlissandoCommand(_command.Command):
-    """
-    Glissando command.
-    """
 
     allow_repeats: bool = False
     allow_ties: bool = False
@@ -832,9 +823,6 @@ def _token_to_indicators(token):
 
 @dataclasses.dataclass(slots=True)
 class IndicatorCommand(_command.Command):
-    """
-    Indicator command.
-    """
 
     indicators: typing.Sequence = ()
     context: str | None = None
@@ -906,10 +894,6 @@ class IndicatorCommand(_command.Command):
 
 @dataclasses.dataclass(slots=True)
 class InstrumentChangeCommand(IndicatorCommand):
-    """
-    Instrument change command.
-    """
-
     def _call(self, argument=None) -> None:
         if argument is None:
             return
@@ -933,9 +917,6 @@ class InstrumentChangeCommand(IndicatorCommand):
 
 @dataclasses.dataclass(slots=True)
 class LabelCommand(_command.Command):
-    """
-    Label command.
-    """
 
     callable_: typing.Any = None
 
@@ -974,18 +955,12 @@ def _metronome_mark(skip, indicator, manifests, *, deactivate=False, tag=None):
 
 @dataclasses.dataclass(slots=True)
 class PartAssignmentCommand(_command.Command):
-    """
-    Part assignment command.
-    """
 
     part_assignment: _parts.PartAssignment | None = None
 
     def __post_init__(self):
         _command.Command.__post_init__(self)
-        if not isinstance(self.part_assignment, _parts.PartAssignment):
-            message = "part_assignment must be part assignment"
-            message += f" (not {self.part_assignment!r})."
-            raise Exception(message)
+        assert isinstance(self.part_assignment, _parts.PartAssignment)
 
     __repr__ = _command.Command.__repr__
 
@@ -4698,9 +4673,6 @@ class StaffPositionCommand(_command.Command):
 
 @dataclasses.dataclass(slots=True)
 class StaffPositionInterpolationCommand(_command.Command):
-    """
-    Staff position interpolation command.
-    """
 
     start: int | str | abjad.NamedPitch | abjad.StaffPosition | None = None
     stop: int | str | abjad.NamedPitch | abjad.StaffPosition | None = None
@@ -9860,7 +9832,7 @@ def allow_octaves(*, selector=lambda _: _select.leaves(_)) -> IndicatorCommand:
     return IndicatorCommand(indicators=[_enums.ALLOW_OCTAVE], selector=selector)
 
 
-def assign_parts(
+def assign_part(
     part_assignment: _parts.PartAssignment,
     *,
     selector=lambda _: _select.leaves(_),
@@ -9885,7 +9857,7 @@ def assign_parts(
         >>> commands(
         ...     "Music",
         ...     baca.make_notes(),
-        ...     baca.assign_parts(baca.parts.PartAssignment("Music")),
+        ...     baca.assign_part(baca.parts.PartAssignment("Music")),
         ...     baca.pitch("E4"),
         ... )
 
@@ -9949,7 +9921,7 @@ def assign_parts(
         >>> commands(
         ...     "Music",
         ...     baca.make_notes(),
-        ...     baca.assign_parts(baca.parts.PartAssignment("Flute.Music")),
+        ...     baca.assign_part(baca.parts.PartAssignment("Flute.Music")),
         ...     baca.pitches("E4 F4"),
         ... )
 
@@ -9966,10 +9938,7 @@ def assign_parts(
           baca.PartAssignment('Flute.Music')
 
     """
-    if not isinstance(part_assignment, _parts.PartAssignment):
-        message = "part_assignment must be part assignment"
-        message += f" (not {part_assignment!r})."
-        raise Exception(message)
+    assert isinstance(part_assignment, _parts.PartAssignment), repr(part_assignment)
     return PartAssignmentCommand(part_assignment=part_assignment, selector=selector)
 
 
