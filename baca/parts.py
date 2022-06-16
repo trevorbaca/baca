@@ -48,21 +48,21 @@ class PartAssignment:
     ..  container:: example
 
         >>> baca.PartAssignment("Horn", 1)
-        baca.PartAssignment('Horn', 1)
+        PartAssignment(name='Horn', token=1)
 
         >>> baca.PartAssignment("Horn", 2)
-        baca.PartAssignment('Horn', 2)
+        PartAssignment(name='Horn', token=2)
 
         >>> baca.PartAssignment("Horn", (3, 4))
-        baca.PartAssignment('Horn', (3, 4))
+        PartAssignment(name='Horn', token=(3, 4))
 
         >>> baca.PartAssignment("Horn", [1, 3])
-        baca.PartAssignment('Horn', [1, 3])
+        PartAssignment(name='Horn', token=[1, 3])
 
     ..  container:: example
 
         >>> baca.PartAssignment("BassClarinet")
-        baca.PartAssignment('BassClarinet')
+        PartAssignment(name='BassClarinet', token=None)
 
     """
 
@@ -72,16 +72,6 @@ class PartAssignment:
     def __post_init__(self):
         assert isinstance(self.name, str), repr(self.name)
         assert self._validate_token(self.token), repr(self.token)
-
-    # TODO: add keyword section=, token= to repr
-    def __repr__(self):
-        """
-        Custom repr for "baca.PartAssignment" in __persist__ files.
-        """
-        if self.token is not None:
-            return f"baca.{type(self).__name__}({self.name!r}, {self.token!r})"
-        else:
-            return f"baca.{type(self).__name__}({self.name!r})"
 
     @staticmethod
     def _validate_token(argument):

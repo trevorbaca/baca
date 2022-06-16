@@ -369,6 +369,7 @@ def get_metadata(path, file_name="__metadata__"):
         baca = importlib.import_module("baca")
         namespace = {"abjad": abjad, "baca": baca}
         namespace.update(abjad.__dict__)
+        namespace.update(baca.__dict__)
         metadata = eval(file_contents_string, namespace)
     return dict(metadata)
 

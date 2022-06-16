@@ -213,6 +213,7 @@ def get_previous_metadata(section_directory):
         file = pathlib.Path(path)
         namespace = {"abjad": abjad, "baca": baca}
         namespace.update(abjad.__dict__)
+        namespace.update(baca.__dict__)
         if file.is_file():
             string = file.read_text()
             previous_metadata = eval(string, namespace)

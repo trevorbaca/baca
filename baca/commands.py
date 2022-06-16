@@ -9935,7 +9935,7 @@ def assign_part(
         Traceback (most recent call last):
             ...
         Exception: Music does not allow Flute.Music part assignment:
-          baca.PartAssignment('Flute.Music')
+          PartAssignment(name='Flute.Music', token=None)
 
     """
     assert isinstance(part_assignment, _parts.PartAssignment), repr(part_assignment)
