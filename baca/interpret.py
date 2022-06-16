@@ -808,8 +808,11 @@ def _call_all_commands(
                     voice_.name = command.scope.voice_name
                 elif voice_.name == "MultimeasureRestContainer.Rests":
                     scope_voice_name = command.scope.voice_name
-                    assert "Music" in scope_voice_name, repr(scope_voice_name)
-                    foo = scope_voice_name.replace("Music", "Rests")
+                    if "Music" in scope_voice_name:
+                        foo = scope_voice_name.replace("Music", "Rests")
+                    else:
+                        assert "Voice" in scope_voice_name
+                        foo = f"{scope_voice_name}.Rests"
                     voice_.name = foo
             if attach_rhythm_annotation_spanners:
                 _attach_rhythm_annotation_spanner(command, components)

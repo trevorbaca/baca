@@ -135,9 +135,13 @@ def get_voice_names(score):
     for voice in abjad.iterate.components(score, abjad.Voice):
         if voice.name is not None:
             voice_names.append(voice.name)
-            if "Music" in voice.name:
-                name = voice.name.replace("Music", "Rests")
-                voice_names.append(name)
+            words = voice.name.split(".")
+            if "Music" in words:
+                rest_voice_name = voice.name.replace("Music", "Rests")
+                voice_names.append(rest_voice_name)
+            elif "Voice" in words:
+                rest_voice_name = f"{voice.name}.Rests"
+                voice_names.append(rest_voice_name)
     return tuple(voice_names)
 
 
