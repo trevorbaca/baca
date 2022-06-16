@@ -975,19 +975,19 @@ class PartAssignmentCommand(_command.Command):
         voice = abjad.get.parentage(first_leaf).get(abjad.Voice, -1)
         if voice is not None and self.part_assignment is not None:
             assert isinstance(voice, abjad.Voice)
-            section = self.part_assignment.section or "ZZZ"
+            section = self.part_assignment.name or "ZZZ"
             assert voice.name is not None
             if not voice.name.startswith(section):
                 message = f"{voice.name} does not allow"
-                message += f" {self.part_assignment.section} part assignment:"
+                message += f" {self.part_assignment.name} part assignment:"
                 message += f"\n  {self.part_assignment}"
                 raise Exception(message)
         assert self.part_assignment is not None
-        section, token = self.part_assignment.section, self.part_assignment.token
-        if token is None:
-            identifier = f"%*% PartAssignment({section!r})"
+        name, number_token = self.part_assignment.name, self.part_assignment.number
+        if number_token is None:
+            identifier = f"%*% PartAssignment({name!r})"
         else:
-            identifier = f"%*% PartAssignment({section!r}, {token!r})"
+            identifier = f"%*% PartAssignment({name!r}, {number_token!r})"
         container = abjad.Container(identifier=identifier)
         leaves = abjad.select.leaves(argument)
         components = abjad.select.top(leaves)

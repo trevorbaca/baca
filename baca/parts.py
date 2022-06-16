@@ -3,7 +3,6 @@ Parts.
 """
 import dataclasses
 import importlib
-import typing
 
 import abjad
 
@@ -70,14 +69,14 @@ class PartAssignment:
 
     """
 
-    section: typing.Any = None
-    token: typing.Any = None
+    name: str
+    number: int | tuple[int, int] | list[int] | None = None
 
     def __post_init__(self):
-        assert isinstance(self.section, str), repr(self.section)
-        assert _is_part_assignment_token(self.token), repr(self.token)
+        assert isinstance(self.name, str), repr(self.name)
+        assert _is_part_assignment_token(self.number), repr(self.number)
 
-    def __contains__(self, part: Part):
+    def __contains__(self, part: Part) -> bool:
         """
         Is true when part assignment contains ``part``.
 
@@ -137,13 +136,13 @@ class PartAssignment:
 
         """
         assert isinstance(part, Part), repr(part)
-        members = self.members()
-        if part.name == self.section:
+        numbers = self.numbers()
+        if part.name == self.name:
             if (
                 part.number is None
-                or members is None
-                or part.number in members
-                or members == []
+                or numbers is None
+                or part.number in numbers
+                or numbers == []
             ):
                 return True
             return False
@@ -154,35 +153,35 @@ class PartAssignment:
         """
         Custom repr for "baca.PartAssignment" in __persist__ files.
         """
-        if self.token is not None:
-            return f"baca.{type(self).__name__}({self.section!r}, {self.token!r})"
+        if self.number is not None:
+            return f"baca.{type(self).__name__}({self.name!r}, {self.number!r})"
         else:
-            return f"baca.{type(self).__name__}({self.section!r})"
+            return f"baca.{type(self).__name__}({self.name!r})"
 
-    def members(self):
-        members = []
-        if self.token is None:
-            return members
-        if isinstance(self.token, int):
-            members.append(self.token)
-        elif isinstance(self.token, tuple):
-            assert len(self.token) == 2, repr(self.token)
-            for member in range(self.token[0], self.token[1] + 1):
-                members.append(member)
+    def numbers(self):
+        numbers = []
+        if self.number is None:
+            return numbers
+        if isinstance(self.number, int):
+            numbers.append(self.number)
+        elif isinstance(self.number, tuple):
+            assert len(self.number) == 2, repr(self.number)
+            for number in range(self.number[0], self.number[1] + 1):
+                numbers.append(number)
         else:
-            assert isinstance(self.token, list), repr(self.token)
-            members.extend(self.token)
-        return members
+            assert isinstance(self.number, list), repr(self.number)
+            numbers.extend(self.number)
+        return numbers
 
     def parts(self):
         parts = []
-        members = self.members()
-        if members is None:
-            part = Part(name=self.section)
+        numbers = self.numbers()
+        if numbers is None:
+            part = Part(name=self.number)
             parts.append(part)
         else:
-            for member in members:
-                part = Part(name=self.section, number=member)
+            for number in numbers:
+                part = Part(self.name, number)
                 parts.append(part)
         return parts
 
@@ -552,10 +551,10 @@ class PartManifest:
         assert isinstance(part_assignment, PartAssignment)
         parts = []
         for part in self.parts:
-            if part.name == part_assignment.section:
-                if part_assignment.token is None:
+            if part.name == part_assignment.name:
+                if part_assignment.number is None:
                     parts.append(part)
-                elif part.number in part_assignment.members():
+                elif part.number in part_assignment.numbers():
                     parts.append(part)
         return parts
 
