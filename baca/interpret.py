@@ -82,6 +82,12 @@ def _add_container_identifiers(score, section_number):
             context_identifier = suffixed_context_name
         context.identifier = f"%*% {context_identifier}"
         part_container_count = 0
+        total_part_containers = 0
+        for container in abjad.iterate.components(context, abjad.Container):
+            if not container.identifier:
+                continue
+            if container.identifier.startswith("%*% Part"):
+                total_part_containers += 1
         for container in abjad.iterate.components(context, abjad.Container):
             if not container.identifier:
                 continue
@@ -91,9 +97,9 @@ def _add_container_identifiers(score, section_number):
                 globals_ = globals()
                 globals_["PartAssignment"] = _parts.PartAssignment
                 part = eval(part, globals_)
-                container_identifier = (
-                    f"{context_identifier}.part.{part_container_count}"
-                )
+                container_identifier = f"{context_identifier}.container"
+                if 1 < total_part_containers:
+                    container_identifier += f".{part_container_count}"
                 assert abjad.string.is_lilypond_identifier(container_identifier), repr(
                     container_identifier
                 )
