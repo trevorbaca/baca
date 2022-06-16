@@ -85,6 +85,6 @@ def make_staff_group(stem, *contexts):
     tag = _tags.function_name(_frame())
     contexts = tuple(_ for _ in contexts if _ is not None)
     if contexts:
-        return abjad.StaffGroup(contexts, name=f"{stem}_Staff_Group", tag=tag)
+        return abjad.StaffGroup(contexts, name=f"{stem}StaffGroup", tag=tag)
     else:
         return None
