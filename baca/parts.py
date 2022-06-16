@@ -52,9 +52,6 @@ class PartAssignment:
 
     ..  container:: example
 
-        >>> baca.PartAssignment("Horn")
-        baca.PartAssignment('Horn')
-
         >>> baca.PartAssignment("Horn", 1)
         baca.PartAssignment('Horn', 1)
 
@@ -67,14 +64,19 @@ class PartAssignment:
         >>> baca.PartAssignment("Horn", [1, 3])
         baca.PartAssignment('Horn', [1, 3])
 
+    ..  container:: example
+
+        >>> baca.PartAssignment("BassClarinet")
+        baca.PartAssignment('BassClarinet')
+
     """
 
     name: str
-    number: int | tuple[int, int] | list[int] | None = None
+    token: int | tuple[int, int] | list[int] | None = None
 
     def __post_init__(self):
         assert isinstance(self.name, str), repr(self.name)
-        assert _is_part_assignment_token(self.number), repr(self.number)
+        assert self._validate_token(self.token), repr(self.token)
 
     def __contains__(self, part: Part) -> bool:
         """
@@ -88,15 +90,6 @@ class PartAssignment:
             ...     baca.Part(name="Horn", number=3),
             ...     baca.Part(name="Horn", number=4),
             ... ]
-
-            >>> part_assignment = baca.PartAssignment("Horn")
-            >>> for part in parts:
-            ...     part, part in part_assignment
-            ...
-            (Part(name='Horn', number=1), True)
-            (Part(name='Horn', number=2), True)
-            (Part(name='Horn', number=3), True)
-            (Part(name='Horn', number=4), True)
 
             >>> part_assignment = baca.PartAssignment("Horn", 1)
             >>> for part in parts:
@@ -153,34 +146,55 @@ class PartAssignment:
         """
         Custom repr for "baca.PartAssignment" in __persist__ files.
         """
-        if self.number is not None:
-            return f"baca.{type(self).__name__}({self.name!r}, {self.number!r})"
+        if self.token is not None:
+            return f"baca.{type(self).__name__}({self.name!r}, {self.token!r})"
         else:
             return f"baca.{type(self).__name__}({self.name!r})"
 
+    @staticmethod
+    def _validate_token(argument):
+        if argument is None:
+            return True
+        if isinstance(argument, int) and 1 <= argument:
+            return True
+        if (
+            isinstance(argument, tuple)
+            and len(argument) == 2
+            and isinstance(argument[0], int)
+            and isinstance(argument[1], int)
+        ):
+            return True
+        if isinstance(argument, list):
+            for item in argument:
+                if not isinstance(item, int):
+                    return False
+                if not 1 <= item:
+                    return False
+            return True
+        return False
+
     def numbers(self):
         numbers = []
-        if self.number is None:
-            return numbers
-        if isinstance(self.number, int):
-            numbers.append(self.number)
-        elif isinstance(self.number, tuple):
-            assert len(self.number) == 2, repr(self.number)
-            for number in range(self.number[0], self.number[1] + 1):
+        if self.token is None:
+            pass
+        elif isinstance(self.token, int):
+            numbers.append(self.token)
+        elif isinstance(self.token, tuple):
+            assert len(self.token) == 2, repr(self.token)
+            for number in range(self.token[0], self.token[1] + 1):
                 numbers.append(number)
         else:
-            assert isinstance(self.number, list), repr(self.number)
-            numbers.extend(self.number)
+            assert isinstance(self.token, list), repr(self.token)
+            numbers.extend(self.token)
         return numbers
 
     def parts(self):
         parts = []
-        numbers = self.numbers()
-        if numbers is None:
-            part = Part(name=self.number)
+        if self.token is None:
+            part = Part(self.name)
             parts.append(part)
         else:
-            for number in numbers:
+            for number in self.numbers():
                 part = Part(self.name, number)
                 parts.append(part)
         return parts
@@ -276,11 +290,11 @@ class PartManifest:
         Initializes from orchestra sections:
 
         >>> part_manifest = baca.PartManifest(
-        ...     baca.Section("Flute", 4),
-        ...     baca.Section("Oboe", 3),
+        ...     *[baca.Part("Flute", _) for _ in (1, 2, 3, 4)],
+        ...     *[baca.Part("Oboe", _) for _ in (1, 2, 3)],
         ...     baca.Part("EnglishHorn"),
-        ...     baca.Section("FirstViolin", 18),
-        ...     baca.Section("SecondViolin", 18),
+        ...     *[baca.Part("FirstViolin", _) for _ in range(1, 18 + 1)],
+        ...     *[baca.Part("SecondViolin", _) for _ in range(1, 18 + 1)],
         ... )
         >>> len(part_manifest.parts)
         44
@@ -304,23 +318,11 @@ class PartManifest:
     ..  container:: example
 
         >>> part_manifest = baca.PartManifest(
-        ...     baca.Section(
-        ...         count=4,
-        ...         name="Flute",
-        ...     ),
-        ...     baca.Section(
-        ...         count=3,
-        ...         name="Oboe",
-        ...     ),
+        ...     *[baca.Part("Flute", _) for _ in (1, 2, 3, 4)],
+        ...     *[baca.Part("Oboe", _) for _ in (1, 2, 3)],
         ...     baca.Part("EnglishHorn"),
-        ...     baca.Section(
-        ...         count=18,
-        ...         name="FirstViolin",
-        ...     ),
-        ...     baca.Section(
-        ...         count=18,
-        ...         name="SecondViolin",
-        ...     ),
+        ...     *[baca.Part("FirstViolin", _) for _ in range(1, 18 + 1)],
+        ...     *[baca.Part("SecondViolin", _) for _ in range(1, 18 + 1)],
         ... )
 
         >>> for part in part_manifest.parts: part
@@ -371,132 +373,22 @@ class PartManifest:
 
     ..  container:: example
 
-        >>> baca.Part("FirstViolin",18) in part_manifest.parts
+        >>> baca.Part("FirstViolin") in part_manifest.parts
+        False
+
+        >>> baca.Part("FirstViolin", 18) in part_manifest.parts
         True
 
         >>> baca.Part("FirstViolin", 19) in part_manifest.parts
         False
 
-    ..  container:: example
-
-        Makes sections at initialization:
-
-        >>> part_manifest = baca.PartManifest(
-        ...     baca.Part("BassClarinet"),
-        ...     baca.Part("Violin"),
-        ...     baca.Part("Viola"),
-        ...     baca.Part("Cello"),
-        ... )
-        >>> part_manifest.sections
-        []
-
-        >>> part_manifest = baca.PartManifest(
-        ...     baca.Section(
-        ...         count=4,
-        ...         name="Flute",
-        ...     ),
-        ...     baca.Section(
-        ...         count=3,
-        ...         name="Oboe",
-        ...     ),
-        ...     baca.Part("EnglishHorn"),
-        ...     baca.Section(
-        ...         count=18,
-        ...         name="FirstViolin",
-        ...     ),
-        ...     baca.Section(
-        ...         count=18,
-        ...         name="SecondViolin",
-        ...     ),
-        ... )
-
-        >>> for section in part_manifest.sections:
-        ...     section
-        ...
-        Section(name='Flute', count=4)
-        Section(name='Oboe', count=3)
-        Section(name='FirstViolin', count=18)
-        Section(name='SecondViolin', count=18)
-
-        >>> section = baca.Section(
-        ...     count=18,
-        ...     name="FirstViolin",
-        ... )
-        >>> section in part_manifest.sections
-        True
-
-        >>> section = baca.Section(
-        ...     count=36,
-        ...     name="FirstViolin",
-        ... )
-        >>> section in part_manifest.sections
-        False
-
     """
 
-    __slots__ = ("parts", "sections")
+    __slots__ = ("parts",)
 
-    def __init__(self, *arguments):
-        parts, sections = [], []
-        for argument in arguments:
-            if isinstance(argument, Part):
-                parts.append(argument)
-            elif isinstance(argument, Section):
-                sections.append(argument)
-                parts.extend(argument.make_parts())
-            else:
-                raise TypeError(f"must be part or section (not {argument}).")
+    def __init__(self, *parts):
+        assert all(isinstance(_, Part) for _ in parts), repr(parts)
         self.parts = parts
-        self.sections = sections
-
-    def __repr__(self):
-        """
-        Gets repr.
-        """
-        return f"{type(self).__name__}()"
-
-    def expand(self, part_assignment):
-        """
-        Expands ``part_assignment``.
-
-        ..  container:: example
-
-            >>> part_manifest = baca.PartManifest(
-            ...     baca.Section(
-            ...         count=4,
-            ...         name="Flute",
-            ...     ),
-            ...     baca.Section(
-            ...         count=3,
-            ...         name="Oboe",
-            ...     ),
-            ...     baca.Part("EnglishHorn"),
-            ...     baca.Section(
-            ...         count=18,
-            ...         name="FirstViolin",
-            ...     ),
-            ...     baca.Section(
-            ...         count=18,
-            ...         name="SecondViolin",
-            ...     ),
-            ... )
-
-            >>> part_assignment = baca.PartAssignment("Oboe")
-            >>> for part in part_manifest.expand(part_assignment): part
-            Part(name='Oboe', number=1)
-            Part(name='Oboe', number=2)
-            Part(name='Oboe', number=3)
-
-        """
-        assert isinstance(part_assignment, PartAssignment)
-        parts = []
-        for part in self.parts:
-            if part.name == part_assignment.name:
-                if part_assignment.number is None:
-                    parts.append(part)
-                elif part.number in part_assignment.numbers():
-                    parts.append(part)
-        return parts
 
 
 def _global_rest_identifier(section_number):
@@ -523,28 +415,6 @@ def _import_score_package(contents_directory):
     except Exception:
         return
     return module
-
-
-def _is_part_assignment_token(argument):
-    if argument is None:
-        return True
-    if isinstance(argument, int) and 1 <= argument:
-        return True
-    if (
-        isinstance(argument, tuple)
-        and len(argument) == 2
-        and isinstance(argument[0], int)
-        and isinstance(argument[1], int)
-    ):
-        return True
-    if isinstance(argument, list):
-        for item in argument:
-            if not isinstance(item, int):
-                return False
-            if not 1 <= item:
-                return False
-        return True
-    return False
 
 
 def _part_name_to_default_clef(path, part_name):

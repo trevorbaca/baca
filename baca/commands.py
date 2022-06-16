@@ -983,11 +983,11 @@ class PartAssignmentCommand(_command.Command):
                 message += f"\n  {self.part_assignment}"
                 raise Exception(message)
         assert self.part_assignment is not None
-        name, number_token = self.part_assignment.name, self.part_assignment.number
-        if number_token is None:
+        name, token = self.part_assignment.name, self.part_assignment.token
+        if token is None:
             identifier = f"%*% PartAssignment({name!r})"
         else:
-            identifier = f"%*% PartAssignment({name!r}, {number_token!r})"
+            identifier = f"%*% PartAssignment({name!r}, {token!r})"
         container = abjad.Container(identifier=identifier)
         leaves = abjad.select.leaves(argument)
         components = abjad.select.top(leaves)
