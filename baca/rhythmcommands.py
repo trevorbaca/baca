@@ -533,8 +533,11 @@ def _make_multimeasure_rest_container(voice_name, multiplier):
     rest = abjad.MultimeasureRest(1, multiplier=multiplier, tag=tag)
     abjad.attach(_enums.MULTIMEASURE_REST, rest)
     abjad.attach(_enums.REST_VOICE, rest)
-    assert "Music" in voice_name, repr(voice_name)
-    name = voice_name.replace("Music", "Rests")
+    if "Music" in voice_name:
+        name = voice_name.replace("Music", "Rests")
+    else:
+        assert "Voice" in voice_name
+        name = f"{voice_name}.Rests"
     tag = _tags.function_name(_frame(), n=6)
     multimeasure_rest_voice = abjad.Voice([rest], name=name, tag=tag)
     abjad.attach(_enums.INTERMITTENT, multimeasure_rest_voice)
