@@ -3160,3 +3160,19 @@ def set_up_score(
             score,
             do_not_iterate=score,
         )
+
+
+def update_voice_metadata(
+    voice_metadata: dict, voice_name: str, parameter: str, persist: str, state: dict
+):
+    assert isinstance(voice_metadata, dict), repr(voice_metadata)
+    assert isinstance(voice_name, str), repr(voice_name)
+    assert isinstance(parameter, str), repr(parameter)
+    assert isinstance(persist, str), repr(persist)
+    assert isinstance(state, dict), repr(state)
+    assert "name" not in state
+    state["name"] = persist
+    state = dict(sorted(state.items()))
+    voice_metadata_ = voice_metadata.get(voice_name, {})
+    voice_metadata_[parameter] = state
+    voice_metadata[voice_name] = voice_metadata_

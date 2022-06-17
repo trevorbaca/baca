@@ -322,7 +322,10 @@ class RhythmCommand(_command.Command):
                 rcommand = self.rhythm_maker
             else:
                 rcommand = rmakers.stack(self.rhythm_maker)
-            previous_section_stop_state = self._previous_section_stop_state(runtime)
+            dictionary = runtime.get("previous_section_voice_metadata")
+            previous_section_stop_state = self._previous_section_stop_state(
+                dictionary, self.persist
+            )
             if isinstance(rcommand, rmakers.Stack):
                 selection = rcommand(
                     time_signatures, previous_state=previous_section_stop_state
@@ -344,14 +347,15 @@ class RhythmCommand(_command.Command):
             container[:] = []
         return selection
 
-    def _previous_section_stop_state(self, runtime):
+    @staticmethod
+    def _previous_section_stop_state(dictionary, persist):
         previous_section_stop_state = None
-        dictionary = runtime.get("previous_section_voice_metadata")
+        # dictionary = runtime.get("previous_section_voice_metadata")
         if dictionary:
             previous_section_stop_state = dictionary.get(_enums.RHYTHM.name)
             if (
                 previous_section_stop_state is not None
-                and previous_section_stop_state.get("name") != self.persist
+                and previous_section_stop_state.get("name") != persist
             ):
                 previous_section_stop_state = None
         return previous_section_stop_state

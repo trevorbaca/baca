@@ -11899,7 +11899,7 @@ def open_volta(skip, first_measure_number):
     )
 
 
-def previous_metadata(path: str):
+def previous_metadata(path: str, file_name: str = "__metadata__"):
     """
     Gets previous section metadata before ``path``.
     """
@@ -11918,7 +11918,7 @@ def previous_metadata(path: str):
         return {}
     previous_index = index - 1
     previous_section = paths[previous_index]
-    previous_metadata = _path.get_metadata(previous_section)
+    previous_metadata = _path.get_metadata(previous_section, file_name=file_name)
     return previous_metadata
 
 

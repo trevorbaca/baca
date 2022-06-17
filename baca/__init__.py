@@ -27,6 +27,7 @@ from .interpret import (
     make_lilypond_file,
     reapply_persistent_indicators,
     score_interpretation_defaults,
+    update_voice_metadata,
 )
 from .layout import *
 from .memento import *
