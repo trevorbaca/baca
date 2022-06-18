@@ -64,10 +64,10 @@ class BCPCommand(_command.Command):
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
         ... )
-
+        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_even_divisions(),
         ...     baca.bcps(
         ...         [(1, 5), (2, 5)],
         ...         abjad.Tweak(r"- \tweak color #red"),
@@ -268,9 +268,10 @@ class BCPCommand(_command.Command):
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
         ... )
 
+        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_even_divisions(),
         ...     baca.new(
         ...         baca.bcps(bcps=[(1, 5), (2, 5)]),
         ...         measures=(1, 2),
@@ -637,9 +638,10 @@ class ContainerCommand(_command.Command):
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_notes_function(commands.get(), repeat_ties=True)
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(repeat_ties=True),
         ...     baca.container(
         ...         "ViolinI",
         ...         selector=lambda _: baca.select.leaves(_)[:2],
@@ -1018,9 +1020,10 @@ class AccidentalAdjustmentCommand(_command.Command):
         ... )
 
 
+        >>> music = baca.make_notes_function(commands.get(), repeat_ties=True)
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(repeat_ties=True),
         ...     baca.pitches("E4 F4"),
         ...     baca.force_accidental(
         ...         selector=lambda _: baca.select.pleaves(_)[:2],
@@ -1260,9 +1263,10 @@ class ClusterCommand(_command.Command):
         ... )
 
 
+        >>> music = baca.make_notes_function(commands.get(), repeat_ties=True)
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(repeat_ties=True),
         ...     baca.pitch("E4"),
         ...     baca.natural_clusters(widths=[3]),
         ... )
@@ -1353,9 +1357,10 @@ class ClusterCommand(_command.Command):
         ... )
 
 
+        >>> music = baca.make_notes_function(commands.get(), repeat_ties=True)
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(repeat_ties=True),
         ...     baca.pitches("C4 D4 E4 F4"),
         ...     baca.replace_with_clusters([3]),
         ... )
@@ -1445,9 +1450,10 @@ class ClusterCommand(_command.Command):
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_notes_function(commands.get(), repeat_ties=True)
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(repeat_ties=True),
         ...     baca.replace_with_clusters([3], start_pitch="G4"),
         ... )
 
@@ -1536,9 +1542,10 @@ class ClusterCommand(_command.Command):
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_notes_function(commands.get(), repeat_ties=True)
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(repeat_ties=True),
         ...     baca.replace_with_clusters([1, 2, 3, 4], start_pitch="E4"),
         ... )
 
@@ -1627,9 +1634,10 @@ class ClusterCommand(_command.Command):
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_notes_function(commands.get(), repeat_ties=True)
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(repeat_ties=True),
         ...     baca.replace_with_clusters([1, 3], start_pitch="E4"),
         ... )
 
@@ -1718,9 +1726,10 @@ class ClusterCommand(_command.Command):
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_notes_function(commands.get(), repeat_ties=True)
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(repeat_ties=True),
         ...     baca.pitch("E4"),
         ...     baca.replace_with_clusters([]),
         ... )
@@ -1858,9 +1867,10 @@ class ColorFingeringCommand(_command.Command):
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_notes_function(commands.get(), repeat_ties=True)
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(repeat_ties=True),
         ...     baca.pitch("E4"),
         ...     baca.ColorFingeringCommand(numbers=[0, 1, 2, 1]),
         ... )
@@ -2092,9 +2102,10 @@ class MicrotoneDeviationCommand(_command.Command):
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_even_divisions(),
         ...     baca.pitches("E4"),
         ...     baca.deviation([0, 0.5, 0, -0.5]),
         ... )
@@ -2215,9 +2226,10 @@ class OctaveDisplacementCommand(_command.Command):
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_even_divisions(),
         ...     baca.suite(
         ...         baca.pitch("G4"),
         ...         baca.displacement([0, 0, 1, 1, 0, 0, -1, -1, 2, 2]),
@@ -2455,9 +2467,10 @@ class PitchCommand(_command.Command):
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_even_divisions(),
         ...     baca.pitches([19, 13, 15, 16, 17, 23]),
         ... )
 
@@ -2537,9 +2550,10 @@ class PitchCommand(_command.Command):
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_even_divisions(),
         ...     baca.pitches("C4 F4 F#4 <B4 C#5> D5"),
         ... )
 
@@ -2619,9 +2633,10 @@ class PitchCommand(_command.Command):
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_even_divisions(),
         ...     baca.pitches("<C4 D4 E4 F4 G4 A4 B4 C4>", allow_repeats=True)
         ... )
 
@@ -2927,9 +2942,10 @@ class RegisterCommand(_command.Command):
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_even_divisions(),
         ...     baca.pitches("G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4"),
         ...     baca.RegisterCommand(
         ...         registration=baca.Registration([("[A0, C8]", 15)]),
@@ -3204,9 +3220,10 @@ class RegisterInterpolationCommand(_command.Command):
         ... )
 
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
+        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_even_divisions(),
         ...     baca.pitches(pitches),
         ...     baca.register(12, 12),
         ... )
@@ -3317,10 +3334,11 @@ class RegisterInterpolationCommand(_command.Command):
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> commands(
         ...     "Music",
-        ...     baca.make_even_divisions(),
         ...     baca.pitches(pitches),
         ...     baca.register(12, 0),
         ... )
@@ -3431,10 +3449,11 @@ class RegisterInterpolationCommand(_command.Command):
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> commands(
         ...     "Music",
-        ...     baca.make_even_divisions(),
         ...     baca.pitches(pitches),
         ...     baca.register(0, 12),
         ... )
@@ -3545,10 +3564,11 @@ class RegisterInterpolationCommand(_command.Command):
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> commands(
         ...     "Music",
-        ...     baca.make_even_divisions(),
         ...     baca.pitches(pitches),
         ...     baca.register(12, -12),
         ... )
@@ -3659,10 +3679,11 @@ class RegisterInterpolationCommand(_command.Command):
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> commands(
         ...     "Music",
-        ...     baca.make_even_divisions(),
         ...     baca.pitches(pitches),
         ...     baca.register(-12, 12),
         ... )
@@ -5337,9 +5358,10 @@ def force_accidental(
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_notes_function(commands.get(), repeat_ties=True)
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(repeat_ties=True),
         ...     baca.pitches("E4 F4"),
         ...     baca.not_parts(
         ...         baca.force_accidental(
@@ -5658,12 +5680,15 @@ def pitch(
         ...     docs=True,
         ... )
 
+        >>> stack = rmakers.stack(
+        ...     rmakers.note(),
+        ...     rmakers.written_duration(1),
+        ... )
+        >>> music = stack(commands.get())
+        >>> score["Music"].extend(music)
+
         >>> commands(
         ...     "Music",
-        ...     baca.rhythm(
-        ...         rmakers.note(),
-        ...         rmakers.written_duration(1),
-        ...     ),
         ...     baca.pitch("<C4 D4 E4>"),
         ... )
 
@@ -7655,9 +7680,10 @@ def hide_black_note_heads(
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.hide_black_note_heads(),
         ... )
 
@@ -7696,12 +7722,16 @@ def hide_black_note_heads(
                     }
                     \context Voice = "Music"
                     {
-                        b'2
+                        \baca-repeat-pitch-class-coloring
+                        c'2
+                        \baca-repeat-pitch-class-coloring
                         \once \override NoteHead.transparent = ##t
-                        b'4.
-                        b'2
+                        c'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'2
+                        \baca-repeat-pitch-class-coloring
                         \once \override NoteHead.transparent = ##t
-                        b'4.
+                        c'4.
                     }
                 >>
             }
@@ -8049,9 +8079,10 @@ def short_instrument_name(
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_notes_function(commands.get(), repeat_ties=True)
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(repeat_ties=True),
         ...     baca.short_instrument_name(r"\markup Fl."),
         ...     baca.pitches("E4 F4"),
         ... )
@@ -8681,9 +8712,10 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.clef("percussion"),
         ...     baca.staff_lines(1),
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
@@ -8757,9 +8789,10 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.clef("bass"),
         ...     baca.staff_lines(1),
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
@@ -8834,9 +8867,10 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.clef("percussion"),
         ...     baca.staff_lines(2),
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
@@ -8909,9 +8943,10 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.clef("bass"),
         ...     baca.staff_lines(2),
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
@@ -8984,9 +9019,10 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.staff_lines(2),
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
         ...     baca.clef("bass"),
@@ -9854,9 +9890,10 @@ def assign_part(
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.assign_part(baca.parts.PartAssignment("Music")),
         ...     baca.pitch("E4"),
         ... )
@@ -9918,9 +9955,10 @@ def assign_part(
 
         >>> part_assignment = baca.parts.PartAssignment("Flute")
 
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.assign_part(baca.parts.PartAssignment("Flute.Music")),
         ...     baca.pitches("E4 F4"),
         ... )
@@ -9968,9 +10006,10 @@ def bcps(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
         ... )
 
+        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_even_divisions(),
         ...     baca.bcps(
         ...         [(1, 5), (3, 5), (2, 5), (4, 5), (5, 5)],
         ...     ),
@@ -10334,9 +10373,10 @@ def container(
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_notes_function(commands.get(), repeat_ties=True)
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(repeat_ties=True),
         ...     baca.container(
         ...         "ViolinI",
         ...         selector=lambda _: baca.select.leaves(_)[:2],
@@ -10418,14 +10458,14 @@ def cross_staff(*, selector=lambda _: _select.phead(_, 0)) -> IndicatorCommand:
         ...     docs=True,
         ... )
 
-        >>> commands(
-        ...     ("Music.1", 1),
-        ...     baca.make_music(abjad.Container("e'4 f' g' a'")[:]),
-        ... )
+        >>> music = abjad.Container("e'4 f' g' a'")[:]
+        >>> score["Music.1"].extend(music)
+
+        >>> music = abjad.Container("c'4 d' e' f'")[:]
+        >>> score["Music.2"].extend(music)
 
         >>> commands(
         ...     ("Music.2", 1),
-        ...     baca.make_music(abjad.Container("c'4 d' e' f'")[:]),
         ...     baca.cross_staff(
         ...         selector=lambda _: baca.select.pleaves(_)[-2:],
         ...     ),
@@ -10736,9 +10776,10 @@ def finger_pressure_transition(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.pitch("C5"),
         ...     baca.note_head_style_harmonic(selector=lambda _: abjad.select.note(_, 0)),
         ...     baca.note_head_style_harmonic(selector=lambda _: abjad.select.note(_, 2)),
@@ -10960,9 +11001,10 @@ def glissando(
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.glissando()
         ... )
@@ -11053,9 +11095,10 @@ def glissando(
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.glissando(selector=lambda _: baca.select.plts(_)[:2]),
         ...     baca.glissando(selector=lambda _: baca.select.plts(_)[-2:]),
@@ -11136,9 +11179,10 @@ def glissando(
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.glissando(
         ...         abjad.Tweak(r"- \tweak color #red"),
@@ -11244,9 +11288,10 @@ def glissando(
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_even_divisions(),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.glissando(
         ...         (abjad.Tweak(r"- \tweak color #red"), 0),
@@ -11445,9 +11490,10 @@ def invisible_music(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.pitch("C5"),
         ...     baca.invisible_music(
         ...         selector=lambda _: baca.select.leaves(_)[1:-1],

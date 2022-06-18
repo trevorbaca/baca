@@ -16,9 +16,10 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     commands.time_signatures,
     ...     docs=True,
     ... )
+    >>> music = baca.make_even_divisions_function(commands.get())
+    >>> score["Music"].extend(music)
     >>> commands(
     ...     "Music",
-    ...     baca.make_even_divisions(),
     ...     baca.label(lambda _: abjad.label.with_indices(_)),
     ... )
     >>> _, _ = baca.interpreter(
@@ -28,7 +29,10 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
-    >>> lilypond_file = baca.make_lilypond_file(score)
+    >>> lilypond_file = baca.make_lilypond_file(
+    ...     score,
+    ...     includes=["baca.ily"],
+    ... )
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -53,139 +57,54 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
                 }
                 \context Voice = "Music"
                 {
-                    b'8
+                    \baca-repeat-pitch-class-coloring
+                    c'8
                     ^ \markup 0
                     [
-                    b'8
+                    \baca-repeat-pitch-class-coloring
+                    c'8
                     ^ \markup 1
-                    b'8
+                    \baca-repeat-pitch-class-coloring
+                    c'8
                     ^ \markup 2
-                    b'8
+                    \baca-repeat-pitch-class-coloring
+                    c'8
                     ^ \markup 3
                     ]
-                    b'8
+                    \baca-repeat-pitch-class-coloring
+                    c'8
                     ^ \markup 4
                     [
-                    b'8
+                    \baca-repeat-pitch-class-coloring
+                    c'8
                     ^ \markup 5
-                    b'8
+                    \baca-repeat-pitch-class-coloring
+                    c'8
                     ^ \markup 6
                     ]
-                    b'8
+                    \baca-repeat-pitch-class-coloring
+                    c'8
                     ^ \markup 7
                     [
-                    b'8
+                    \baca-repeat-pitch-class-coloring
+                    c'8
                     ^ \markup 8
-                    b'8
+                    \baca-repeat-pitch-class-coloring
+                    c'8
                     ^ \markup 9
-                    b'8
+                    \baca-repeat-pitch-class-coloring
+                    c'8
                     ^ \markup 10
                     ]
-                    b'8
+                    \baca-repeat-pitch-class-coloring
+                    c'8
                     ^ \markup 11
                     [
-                    b'8
+                    \baca-repeat-pitch-class-coloring
+                    c'8
                     ^ \markup 12
-                    b'8
-                    ^ \markup 13
-                    ]
-                }
-            >>
-        }
-
-..  container:: example
-
-    Commands may be grouped into lists:
-
-    >>> score = baca.docs.make_empty_score(1)
-    >>> voice_names = baca.accumulator.get_voice_names(score)
-    >>> commands = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ...     voice_names=voice_names,
-    ... )
-    >>> baca.interpret.set_up_score(
-    ...     score,
-    ...     commands,
-    ...     commands.manifests(),
-    ...     commands.time_signatures,
-    ...     docs=True,
-    ... )
-
-    >>> list_ = []
-    >>> list_.append(baca.make_even_divisions())
-    >>> list_.append(baca.label(lambda _: abjad.label.with_indices(_)))
-
-    >>> commands(
-    ...     "Music",
-    ...     list_,
-    ... )
-
-    >>> _, _ = baca.interpreter(
-    ...     score,
-    ...     commands.commands,
-    ...     commands.time_signatures,
-    ...     move_global_context=True,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.make_lilypond_file(score)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        {
-            \context Staff = "Staff"
-            <<
-                \context Voice = "Skips"
-                {
-                    \time 4/8
-                    s1 * 4/8
-                    \time 3/8
-                    s1 * 3/8
-                    \time 4/8
-                    s1 * 4/8
-                    \time 3/8
-                    s1 * 3/8
-                }
-                \context Voice = "Music"
-                {
-                    b'8
-                    ^ \markup 0
-                    [
-                    b'8
-                    ^ \markup 1
-                    b'8
-                    ^ \markup 2
-                    b'8
-                    ^ \markup 3
-                    ]
-                    b'8
-                    ^ \markup 4
-                    [
-                    b'8
-                    ^ \markup 5
-                    b'8
-                    ^ \markup 6
-                    ]
-                    b'8
-                    ^ \markup 7
-                    [
-                    b'8
-                    ^ \markup 8
-                    b'8
-                    ^ \markup 9
-                    b'8
-                    ^ \markup 10
-                    ]
-                    b'8
-                    ^ \markup 11
-                    [
-                    b'8
-                    ^ \markup 12
-                    b'8
+                    \baca-repeat-pitch-class-coloring
+                    c'8
                     ^ \markup 13
                     ]
                 }
@@ -206,18 +125,6 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     Must be command:
     'text'
 
-..  container:: example exception
-
-    Raises exception on unknown voice name:
-
-    >>> commands(
-    ...     "Percussion_Voice",
-    ...     baca.make_repeated_duration_notes([(1, 4)]),
-    ... )
-    Traceback (most recent call last):
-        ...
-    Exception: unknown voice name 'Percussion_Voice'.
-
 ..  container:: example
 
     Colors octaves:
@@ -234,14 +141,14 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     docs=True,
     ... )
 
-    >>> commands(
-    ...     ("Music.1", 1),
-    ...     baca.make_music(abjad.Container("d'4 e' f' g' a' b'")[:]),
-    ... )
+    >>> music = abjad.Container("d'4 e' f' g' a' b'")[:]
+    >>> score["Music.1"].extend(music)
+
+    >>> music = abjad.Container("a4 g f e d c")[:]
+    >>> score["Music.2"].extend(music)
 
     >>> commands(
     ...     ("Music.2", 1),
-    ...     baca.make_music(abjad.Container("a4 g f e d c")[:]),
     ...     baca.clef("bass"),
     ... )
 
@@ -326,9 +233,10 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     docs=True,
     ... )
 
+    >>> music = baca.make_even_divisions_function(commands.get())
+    >>> score["Music"].extend(music)
     >>> commands(
     ...     "Music",
-    ...     baca.make_even_divisions(),
     ...     baca.instrument(instruments["clarinet"]),
     ...     baca.pitches("E4 F4"),
     ... )
@@ -415,9 +323,10 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     docs=True,
     ... )
 
+    >>> music = baca.make_even_divisions_function(commands.get())
+    >>> score["Music"].extend(music)
     >>> commands(
     ...     "Music",
-    ...     baca.make_even_divisions(),
     ...     baca.instrument(instruments["clarinet"]),
     ...     baca.pitches("E4 F4"),
     ... )
@@ -521,9 +430,9 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     commands.time_signatures,
     ...     docs=True,
     ... )
+    >>> score["Music"].extend(figures_)
     >>> commands(
     ...     ("Music", 1),
-    ...     baca.make_music(figures_, do_not_check_total_duration=True),
     ...     baca.instrument(abjad.Violin()),
     ... )
 
@@ -635,11 +544,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     commands.time_signatures,
     ...     docs=True,
     ... )
-    >>> commands(
-    ...     ("Music", 1),
-    ...     baca.make_music(figures, do_not_check_total_duration=True),
-    ... )
-
+    >>> score["Music"].extend(figures_)
     >>> _, _ = baca.interpreter(
     ...     score,
     ...     commands.commands,

@@ -317,13 +317,16 @@ def bar_line_transparent(
         ...     docs=True,
         ... )
 
+        >>> stack = rmakers.stack(
+        ...     rmakers.talea([1, 1, 1, -1], 8),
+        ...     rmakers.beam(),
+        ...     rmakers.extract_trivial(),
+        ... )
+        >>> music = stack(commands.get())
+        >>> score["Music"].extend(music)
+
         >>> commands(
         ...     "Music",
-        ...     baca.rhythm(
-        ...         rmakers.talea([1, 1, 1, -1], 8),
-        ...         rmakers.beam(),
-        ...         rmakers.extract_trivial(),
-        ...     ),
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.bar_line_transparent(
         ...         selector=lambda _: abjad.select.group_by_measure(_)[1]
@@ -1358,9 +1361,10 @@ def mmrest_color(
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_mmrests(head=True),
         ...     baca.mmrest_color("#(x11-color 'DarkOrchid)"),
         ... )
 
@@ -1475,9 +1479,10 @@ def mmrest_text_color(
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: baca.select.mmrest(_, 1),
@@ -1566,9 +1571,10 @@ def mmrest_text_color(
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: abjad.select.leaf(_, 1),
@@ -1623,9 +1629,10 @@ def mmrest_text_extra_offset(
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: baca.select.mmrest(_, 1),
@@ -1756,9 +1763,10 @@ def mmrest_text_padding(
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: baca.select.mmrest(_, 1),
@@ -1861,9 +1869,10 @@ def mmrest_text_parent_center(
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: baca.select.mmrest(_, 1),
@@ -1967,9 +1976,10 @@ def mmrest_text_staff_padding(
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: baca.select.mmrest(_, 1),
@@ -4514,9 +4524,10 @@ def text_script_color(
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: abjad.select.leaf(_, 1),
@@ -4656,9 +4667,10 @@ def text_script_down(
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: abjad.select.leaf(_, 1),
@@ -4752,9 +4764,10 @@ def text_script_extra_offset(
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: abjad.select.leaf(_, 1),
@@ -4917,9 +4930,10 @@ def text_script_padding(
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: abjad.select.leaf(_, 1),
@@ -5104,9 +5118,10 @@ def text_script_staff_padding(
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markkup still",
         ...         selector=lambda _: abjad.select.leaf(_, 1),
@@ -5246,9 +5261,10 @@ def text_script_up(
         ...     docs=True,
         ... )
 
+        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_mmrests(head=True),
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         selector=lambda _: abjad.select.leaf(_, 1),

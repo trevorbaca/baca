@@ -1812,7 +1812,7 @@ class Imbrication:
             ...     docs=True,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
-            >>> figures.populate_commands(commands)
+            >>> figures.populate_commands(score, commands)
 
             >>> commands(
             ...     "Music.1",
@@ -2035,7 +2035,7 @@ class Imbrication:
             ...     docs=True,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
-            >>> figures.populate_commands(commands)
+            >>> figures.populate_commands(score, commands)
 
             >>> commands(
             ...     "Music.1",
@@ -2243,7 +2243,7 @@ class Imbrication:
             ...     docs=True,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
-            >>> figures.populate_commands(commands)
+            >>> figures.populate_commands(score, commands)
 
             >>> commands(
             ...     "Music.1",
@@ -2472,7 +2472,7 @@ class Imbrication:
             ...     docs=True,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
-            >>> figures.populate_commands(commands)
+            >>> figures.populate_commands(score, commands)
 
             >>> commands(
             ...     "Music.1",
@@ -2982,17 +2982,13 @@ class FigureAccumulator:
                 fused_selection.append(skip)
         return fused_selection
 
-    def populate_commands(self, command_accumulator):
+    def populate_commands(self, score, commands):
         for voice_name in sorted(self._floating_selections):
             selection = self.assemble(voice_name)
             if not selection:
                 continue
-            command_accumulator(
-                (voice_name, 1),
-                _rhythmcommands.make_music(
-                    selection, do_not_check_total_duration=True, tag=abjad.Tag()
-                ),
-            )
+            voice = score[voice_name]
+            voice.extend(selection)
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -6349,7 +6345,7 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
-        >>> figures.populate_commands(commands)
+        >>> figures.populate_commands(score, commands)
 
         >>> commands(
         ...     "Music.1",
@@ -6505,7 +6501,7 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
-        >>> figures.populate_commands(commands)
+        >>> figures.populate_commands(score, commands)
 
         >>> commands(
         ...     "Music.1",
@@ -6698,7 +6694,7 @@ def extend_beam(
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
-        >>> figures.populate_commands(commands)
+        >>> figures.populate_commands(score, commands)
 
         >>> commands(
         ...     "Music.1",
@@ -6904,7 +6900,7 @@ def imbricate(
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
-        >>> figures.populate_commands(commands)
+        >>> figures.populate_commands(score, commands)
 
         >>> commands(
         ...     "Music.1",
@@ -7101,7 +7097,7 @@ def imbricate(
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
-        >>> figures.populate_commands(commands)
+        >>> figures.populate_commands(score, commands)
         >>> _, _ = baca.interpreter(
         ...     score,
         ...     commands.commands,
@@ -7323,7 +7319,7 @@ def imbricate(
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
-        >>> figures.populate_commands(commands)
+        >>> figures.populate_commands(score, commands)
 
         >>> commands(
         ...     "Music.1",
@@ -7538,7 +7534,7 @@ def imbricate(
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> figures.populate_commands(commands)
+        >>> figures.populate_commands(score, commands)
 
         >>> commands(
         ...     "Music.1",
@@ -7686,7 +7682,7 @@ def imbricate(
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
-        >>> figures.populate_commands(commands)
+        >>> figures.populate_commands(score, commands)
 
         >>> commands(
         ...     "Music.1",
@@ -7858,7 +7854,7 @@ def imbricate(
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
-        >>> figures.populate_commands(commands)
+        >>> figures.populate_commands(score, commands)
 
         >>> commands(
         ...     "Music.1",

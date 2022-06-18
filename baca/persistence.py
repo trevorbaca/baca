@@ -32,9 +32,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
+        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_mmrests(head=True),
         ...     baca.clef("treble"),
         ... )
 
@@ -133,9 +134,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
+        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_mmrests(head=True),
         ...     baca.clef("alto"),
         ... )
 
@@ -247,9 +249,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
+        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_mmrests(head=True),
         ...     baca.reapply_persistent_indicators(),
         ... )
 
@@ -362,9 +365,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
+        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_mmrests(head=True),
         ...     baca.clef("treble", selector=lambda _: abjad.select.leaf(_, 0)),
         ...     baca.clef("treble", selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
@@ -474,9 +478,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
+        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_mmrests(head=True),
         ...     baca.reapply_persistent_indicators(),
         ...     baca.clef("treble"),
         ... )
@@ -584,9 +589,10 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.dynamic("f"),
         ... )
 
@@ -627,10 +633,12 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         - \tweak color #(x11-color 'blue)
                         \f
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -649,9 +657,10 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.dynamic("p"),
         ... )
 
@@ -703,10 +712,12 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         - \tweak color #(x11-color 'blue)
                         \p
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -727,9 +738,10 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ... )
 
@@ -781,10 +793,12 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         - \tweak color #(x11-color 'green4)
                         \f
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -805,9 +819,10 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.dynamic("f"),
         ...     baca.dynamic("f", selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
@@ -849,10 +864,12 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         - \tweak color #(x11-color 'blue)
                         \f
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         - \tweak color #(x11-color 'DeepPink1)
                         \f
                     }
@@ -873,9 +890,10 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ...     baca.dynamic("f"),
         ... )
@@ -928,10 +946,12 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         - \tweak color #(x11-color 'DeepPink1)
                         \f
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -950,9 +970,10 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.dynamic("sfz"),
         ...     baca.dynamic("sfz", selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
@@ -994,10 +1015,12 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         - \tweak color #(x11-color 'blue)
                         \sfz
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         - \tweak color #(x11-color 'blue)
                         \sfz
                     }
@@ -1018,9 +1041,10 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.dynamic("sfz"),
         ... )
 
@@ -1072,10 +1096,12 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         - \tweak color #(x11-color 'blue)
                         \sfz
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -1096,9 +1122,10 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.dynamic("mf"),
         ...     baca.dynamic('"mf"', selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
@@ -1140,10 +1167,12 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         - \tweak color #(x11-color 'blue)
                         \mf
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         - \tweak color #(x11-color 'blue)
                         \baca-effort-mf
                     }
@@ -1189,9 +1218,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.instrument(instruments["Flute"]),
         ... )
 
@@ -1240,9 +1270,11 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -1283,9 +1315,11 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -1323,9 +1357,11 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -1348,9 +1384,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.instrument(instruments["Flute"]),
         ... )
 
@@ -1410,9 +1447,11 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -1453,9 +1492,11 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -1492,9 +1533,11 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -1519,9 +1562,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ... )
 
@@ -1581,9 +1625,11 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         ^ \baca-reapplied-instrument-markup "(“Flute”)"
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -1624,9 +1670,11 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         ^ \baca-reapplied-instrument-markup "(“Flute”)"
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -1664,9 +1712,11 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         ^ \baca-reapplied-instrument-markup "(“Flute”)"
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -1698,9 +1748,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.instrument(instruments["Flute"]),
         ...     baca.new(
         ...         baca.instrument(instruments["Flute"]),
@@ -1756,11 +1807,14 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'2
+                        \baca-repeat-pitch-class-coloring
+                        c'2
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
-                        b'2
+                        \baca-repeat-pitch-class-coloring
+                        c'2
                         ^ \baca-redundant-instrument-markup "(“Flute”)"
-                        b'2
+                        \baca-repeat-pitch-class-coloring
+                        c'2
                     }
                 >>
             }
@@ -1804,11 +1858,14 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'2
+                        \baca-repeat-pitch-class-coloring
+                        c'2
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
-                        b'2
+                        \baca-repeat-pitch-class-coloring
+                        c'2
                         ^ \baca-redundant-instrument-markup "(“Flute”)"
-                        b'2
+                        \baca-repeat-pitch-class-coloring
+                        c'2
                     }
                 >>
             }
@@ -1848,11 +1905,14 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'2
+                        \baca-repeat-pitch-class-coloring
+                        c'2
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
-                        b'2
+                        \baca-repeat-pitch-class-coloring
+                        c'2
                         ^ \baca-redundant-instrument-markup "(“Flute”)"
-                        b'2
+                        \baca-repeat-pitch-class-coloring
+                        c'2
                     }
                 >>
             }
@@ -1882,9 +1942,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ...     baca.instrument(instruments["Flute"]),
         ... )
@@ -1945,9 +2006,11 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         ^ \baca-redundant-instrument-markup "(“Flute”)"
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -1988,9 +2051,11 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         ^ \baca-redundant-instrument-markup "(“Flute”)"
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -2027,9 +2092,11 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         ^ \baca-redundant-instrument-markup "(“Flute”)"
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -2073,9 +2140,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.short_instrument_name(short_instrument_names["I+II"]),
         ... )
 
@@ -2125,12 +2193,14 @@ r"""
                     }
                     \context Voice = "Music"
                     {
+                        \baca-repeat-pitch-class-coloring
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
-                        b'4.
+                        c'4.
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -2171,12 +2241,14 @@ r"""
                     }
                     \context Voice = "Music"
                     {
+                        \baca-repeat-pitch-class-coloring
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
-                        b'4.
+                        c'4.
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -2213,12 +2285,14 @@ r"""
                     }
                     \context Voice = "Music"
                     {
+                        \baca-repeat-pitch-class-coloring
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
-                        b'4.
+                        c'4.
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -2241,9 +2315,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.short_instrument_name(short_instrument_names["III+IV"]),
         ... )
 
@@ -2303,13 +2378,15 @@ r"""
                     }
                     \context Voice = "Music"
                     {
+                        \baca-repeat-pitch-class-coloring
                         \set Staff.instrumentName = \markup III+IV
                         \set Staff.shortInstrumentName = \markup III+IV
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
-                        b'4.
+                        c'4.
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup III+IV
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -2350,13 +2427,15 @@ r"""
                     }
                     \context Voice = "Music"
                     {
+                        \baca-repeat-pitch-class-coloring
                         \set Staff.instrumentName = \markup III+IV
                         \set Staff.shortInstrumentName = \markup III+IV
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
-                        b'4.
+                        c'4.
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup III+IV
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -2393,13 +2472,15 @@ r"""
                     }
                     \context Voice = "Music"
                     {
+                        \baca-repeat-pitch-class-coloring
                         \set Staff.instrumentName = \markup III+IV
                         \set Staff.shortInstrumentName = \markup III+IV
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
-                        b'4.
+                        c'4.
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup III+IV
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -2424,9 +2505,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ... )
 
@@ -2486,13 +2568,15 @@ r"""
                     }
                     \context Voice = "Music"
                     {
+                        \baca-repeat-pitch-class-coloring
                         \set Staff.instrumentName = \markup I+II
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'green4)
-                        b'4.
+                        c'4.
                         \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                         \set Staff.shortInstrumentName = \markup I+II
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -2533,13 +2617,15 @@ r"""
                     }
                     \context Voice = "Music"
                     {
+                        \baca-repeat-pitch-class-coloring
                         \set Staff.instrumentName = \markup I+II
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'green4)
-                        b'4.
+                        c'4.
                         \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                         \set Staff.shortInstrumentName = \markup I+II
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -2576,13 +2662,15 @@ r"""
                     }
                     \context Voice = "Music"
                     {
+                        \baca-repeat-pitch-class-coloring
                         \set Staff.instrumentName = \markup I+II
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'green4)
-                        b'4.
+                        c'4.
                         \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                         \set Staff.shortInstrumentName = \markup I+II
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -2614,9 +2702,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.short_instrument_name(short_instrument_names["I+II"]),
         ...     baca.new(
         ...         baca.short_instrument_name(short_instrument_names["I+II"]),
@@ -2673,17 +2762,20 @@ r"""
                     }
                     \context Voice = "Music"
                     {
+                        \baca-repeat-pitch-class-coloring
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
-                        b'2
+                        c'2
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
+                        \baca-repeat-pitch-class-coloring
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
-                        b'2
+                        c'2
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName = \markup I+II
-                        b'2
+                        \baca-repeat-pitch-class-coloring
+                        c'2
                     }
                 >>
             }
@@ -2727,17 +2819,20 @@ r"""
                     }
                     \context Voice = "Music"
                     {
+                        \baca-repeat-pitch-class-coloring
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
-                        b'2
+                        c'2
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
+                        \baca-repeat-pitch-class-coloring
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
-                        b'2
+                        c'2
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName = \markup I+II
-                        b'2
+                        \baca-repeat-pitch-class-coloring
+                        c'2
                     }
                 >>
             }
@@ -2777,17 +2872,20 @@ r"""
                     }
                     \context Voice = "Music"
                     {
+                        \baca-repeat-pitch-class-coloring
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
-                        b'2
+                        c'2
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
+                        \baca-repeat-pitch-class-coloring
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
-                        b'2
+                        c'2
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName = \markup I+II
-                        b'2
+                        \baca-repeat-pitch-class-coloring
+                        c'2
                     }
                 >>
             }
@@ -2817,9 +2915,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ...     baca.short_instrument_name(short_instrument_names["I+II"]),
         ... )
@@ -2880,13 +2979,15 @@ r"""
                     }
                     \context Voice = "Music"
                     {
+                        \baca-repeat-pitch-class-coloring
                         \set Staff.instrumentName = \markup I+II
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
-                        b'4.
+                        c'4.
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName = \markup I+II
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -2927,13 +3028,15 @@ r"""
                     }
                     \context Voice = "Music"
                     {
+                        \baca-repeat-pitch-class-coloring
                         \set Staff.instrumentName = \markup I+II
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
-                        b'4.
+                        c'4.
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName = \markup I+II
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -2970,13 +3073,15 @@ r"""
                     }
                     \context Voice = "Music"
                     {
+                        \baca-repeat-pitch-class-coloring
                         \set Staff.instrumentName = \markup I+II
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
-                        b'4.
+                        c'4.
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName = \markup I+II
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -3008,9 +3113,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.tag(
         ...         baca.tags.NOT_PARTS,
         ...         baca.short_instrument_name(short_instrument_names["I+II"]),
@@ -3076,17 +3182,20 @@ r"""
                     }
                     \context Voice = "Music"
                     {
+                        \baca-repeat-pitch-class-coloring
                         \set Staff.shortInstrumentName = \markup I+II
                         %@% \set Staff.shortInstrumentName = \markup III+IV
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         %@% \once \override Staff.InstrumentName.color = #(x11-color 'blue)
-                        b'2
+                        c'2
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         %@% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
                         \set Staff.shortInstrumentName = \markup III+IV
-                        b'2
-                        b'2
+                        \baca-repeat-pitch-class-coloring
+                        c'2
+                        \baca-repeat-pitch-class-coloring
+                        c'2
                     }
                 >>
             }
@@ -3133,9 +3242,10 @@ r"""
         ...     metronome_marks["112"],
         ...     commands.manifests(),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.append_anchor_note(),
         ... )
 
@@ -3197,8 +3307,10 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         %@% \abjad-invisible-music
                         \abjad-invisible-music-coloring
                         \once \override Accidental.stencil = ##f
@@ -3236,9 +3348,10 @@ r"""
         ...     commands.manifests(),
         ... )
         >>> baca.text_spanner_staff_padding_function(score["Skips"][:-1], 4)
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.append_anchor_note(),
         ... )
 
@@ -3313,8 +3426,10 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         %@% \abjad-invisible-music
                         \abjad-invisible-music-coloring
                         \once \override Accidental.stencil = ##f
@@ -3357,9 +3472,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ... )
         >>> baca.text_spanner_staff_padding_function(score["Skips"], 4)
@@ -3418,8 +3534,10 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -3455,9 +3573,10 @@ r"""
         ...     metronome_marks["112"],
         ...     commands.manifests(),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.append_anchor_note(),
         ... )
 
@@ -3526,8 +3645,10 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         %@% \abjad-invisible-music
                         \abjad-invisible-music-coloring
                         \once \override Accidental.stencil = ##f
@@ -3575,9 +3696,10 @@ r"""
         ...     commands.manifests(),
         ... )
         >>> baca.text_spanner_staff_padding_function(score["Skips"][:-1], 4)
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ...     baca.append_anchor_note(),
         ... )
@@ -3644,8 +3766,10 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         %@% \abjad-invisible-music
                         \abjad-invisible-music-coloring
                         \once \override Accidental.stencil = ##f
@@ -3691,9 +3815,10 @@ r"""
         ...     tags=[tag],
         ... )
 
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     command,
         ...     baca.staff_lines(1),
         ...     baca.staff_position(0),
@@ -3770,9 +3895,10 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ... )
 
@@ -3830,9 +3956,11 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         \override Staff.BarLine.bar-extent = #'(0 . 0)
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -3863,9 +3991,10 @@ r"""
         ...     selector=lambda _: abjad.select.leaf(_, 0),
         ...     tags=[tag],
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     command,
         ... )
 
@@ -3923,9 +4052,11 @@ r"""
                     }
                     \context Voice = "Music"
                     {
+                        \baca-repeat-pitch-class-coloring
                         \override Staff.BarLine.bar-extent = #'(0 . 0)
-                        b'4.
-                        b'4.
+                        c'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -3950,9 +4081,10 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.staff_lines(5),
         ... )
 
@@ -3993,13 +4125,15 @@ r"""
                     }
                     \context Voice = "Music"
                     {
+                        \baca-repeat-pitch-class-coloring
                         \override Staff.BarLine.bar-extent = #'(-2 . 2)
                         \stopStaff
                         \once \override Staff.StaffSymbol.line-count = 5
                         \startStaff
                         \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
-                        b'4.
-                        b'4.
+                        c'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -4018,9 +4152,10 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.staff_lines(1),
         ... )
 
@@ -4072,13 +4207,15 @@ r"""
                     }
                     \context Voice = "Music"
                     {
+                        \baca-repeat-pitch-class-coloring
                         \override Staff.BarLine.bar-extent = #'(0 . 0)
                         \stopStaff
                         \once \override Staff.StaffSymbol.line-count = 1
                         \startStaff
                         \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
-                        b'4.
-                        b'4.
+                        c'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -4099,9 +4236,10 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ... )
 
@@ -4153,12 +4291,14 @@ r"""
                     }
                     \context Voice = "Music"
                     {
+                        \baca-repeat-pitch-class-coloring
                         \stopStaff
                         \once \override Staff.StaffSymbol.line-count = 5
                         \startStaff
                         \once \override Staff.StaffSymbol.color = #(x11-color 'green4)
-                        b'4.
-                        b'4.
+                        c'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -4179,9 +4319,10 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.staff_lines(5),
         ...     baca.staff_lines(5, selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
@@ -4223,18 +4364,20 @@ r"""
                     }
                     \context Voice = "Music"
                     {
+                        \baca-repeat-pitch-class-coloring
                         \override Staff.BarLine.bar-extent = #'(-2 . 2)
                         \stopStaff
                         \once \override Staff.StaffSymbol.line-count = 5
                         \startStaff
                         \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
-                        b'4.
+                        c'4.
+                        \baca-repeat-pitch-class-coloring
                         \override Staff.BarLine.bar-extent = #'(-2 . 2)
                         \stopStaff
                         \once \override Staff.StaffSymbol.line-count = 5
                         \startStaff
                         \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)
-                        b'4.
+                        c'4.
                     }
                 >>
             }
@@ -4253,9 +4396,10 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ...     baca.staff_lines(5),
         ... )
@@ -4308,13 +4452,15 @@ r"""
                     }
                     \context Voice = "Music"
                     {
+                        \baca-repeat-pitch-class-coloring
                         \override Staff.BarLine.bar-extent = #'(-2 . 2)
                         \stopStaff
                         \once \override Staff.StaffSymbol.line-count = 5
                         \startStaff
                         \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)
-                        b'4.
-                        b'4.
+                        c'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -4361,9 +4507,10 @@ r"""
         ...     baca.Accelerando(),
         ...     commands.manifests(),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.append_anchor_note(),
         ... )
 
@@ -4425,8 +4572,10 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         %@% \abjad-invisible-music
                         \abjad-invisible-music-coloring
                         \once \override Accidental.stencil = ##f
@@ -4463,10 +4612,8 @@ r"""
         ...     commands.manifests(),
         ... )
         >>> baca.text_spanner_staff_padding_function(score["Skips"], 4)
-        >>> commands(
-        ...     "Music",
-        ...     baca.make_notes(),
-        ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
@@ -4529,8 +4676,10 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -4564,9 +4713,10 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ... )
         >>> baca.text_spanner_staff_padding_function(score["Skips"], 4)
@@ -4624,8 +4774,10 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -4660,10 +4812,8 @@ r"""
         ...     baca.Accelerando(),
         ...     commands.manifests(),
         ... )
-        >>> commands(
-        ...     "Music",
-        ...     baca.make_notes(),
-        ... )
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
 
         >>> _, _ = baca.interpreter(
         ...     score,
@@ -4724,9 +4874,12 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
-                        b'4.
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }
@@ -4764,9 +4917,10 @@ r"""
         ...     commands.manifests(),
         ... )
         >>> baca.text_spanner_staff_padding_function(score["Skips"], 4)
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.reapply_persistent_indicators(),
         ... )
         >>> _, _ = baca.interpreter(
@@ -4822,8 +4976,10 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                     }
                 >>
             }

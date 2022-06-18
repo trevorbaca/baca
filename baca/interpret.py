@@ -820,15 +820,6 @@ def _call_all_commands(
                         assert "Voice" in scope_voice_name
                         foo = f"{scope_voice_name}.Rests"
                     voice_.name = foo
-            if attach_rhythm_annotation_spanners:
-                _attach_rhythm_annotation_spanner(command, components)
-            if command.persist and command.state:
-                state = command.state
-                assert "name" not in state
-                state["name"] = command.persist
-                voice_metadata_ = voice_metadata.get(command.scope.voice_name, {})
-                voice_metadata_[command.parameter] = command.state
-                voice_metadata[command.scope.voice_name] = voice_metadata_
             components = abjad.sequence.flatten(components, depth=-1)
             voice = voice_name_to_voice[command.scope.voice_name]
             voice.extend(components)

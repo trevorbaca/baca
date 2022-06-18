@@ -244,9 +244,10 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
+        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_even_divisions(),
         ...     baca.new(
         ...         baca.marcato(),
         ...         baca.slur(),
@@ -294,43 +295,57 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
                     }
                     \context Voice = "Music"
                     {
-                        b'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
                         [
-                        b'8
-                        b'8
-                        b'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
                         ]
-                        b'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
                         - \marcato
                         - \staccato
                         [
                         (
-                        b'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
                         - \marcato
                         - \staccato
-                        b'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
                         - \marcato
                         - \staccato
                         ]
-                        b'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
                         - \marcato
                         - \staccato
                         [
-                        b'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
                         - \marcato
                         - \staccato
-                        b'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
                         - \marcato
                         - \staccato
-                        b'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
                         - \marcato
                         - \staccato
                         )
                         ]
-                        b'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
                         [
-                        b'8
-                        b'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
                         ]
                     }
                 >>
@@ -353,9 +368,10 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
+        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_even_divisions(),
         ...     baca.new(
         ...         baca.marcato(),
         ...         baca.slur(),
@@ -403,43 +419,57 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
                     }
                     \context Voice = "Music"
                     {
-                        b'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
                         [
-                        b'8
-                        b'8
-                        b'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
                         ]
-                        b'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
                         - \marcato
                         - \staccato
                         [
                         (
-                        b'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
                         - \marcato
                         - \staccato
-                        b'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
                         - \marcato
                         - \staccato
                         ]
-                        b'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
                         - \marcato
                         - \staccato
                         [
-                        b'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
                         - \marcato
                         - \staccato
-                        b'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
                         - \marcato
                         - \staccato
-                        b'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
                         - \marcato
                         - \staccato
                         )
                         ]
-                        b'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
                         [
-                        b'8
-                        b'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
+                        \baca-repeat-pitch-class-coloring
+                        c'8
                         ]
                     }
                 >>
@@ -517,9 +547,10 @@ def only_parts(command: Command | Suite) -> Command | Suite:
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
+        >>> music = baca.make_notes_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_notes(),
         ...     baca.only_parts(
         ...         baca.hairpin("p < f"),
         ...     ),
@@ -564,13 +595,17 @@ def only_parts(command: Command | Suite) -> Command | Suite:
                     }
                     \context Voice = "Music"
                     {
-                        b'2
+                        \baca-repeat-pitch-class-coloring
+                        c'2
                         - \tweak color #(x11-color 'blue)
                         \p
                         \<
-                        b'4.
-                        b'2
-                        b'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
+                        \baca-repeat-pitch-class-coloring
+                        c'2
+                        \baca-repeat-pitch-class-coloring
+                        c'4.
                         \f
                     }
                 >>

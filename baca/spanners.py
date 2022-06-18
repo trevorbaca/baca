@@ -137,9 +137,10 @@ def beam(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
+        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
-        ...     baca.make_even_divisions(),
         ...     baca.pitch("C4"),
         ...     baca.beam(
         ...         direction=abjad.DOWN,

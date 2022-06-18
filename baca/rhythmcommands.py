@@ -26,229 +26,6 @@ def _tag_components(selection, tag):
 
 @dataclasses.dataclass
 class RhythmCommand(_command.Command):
-    r"""
-    Rhythm command.
-
-    ..  container:: example
-
-        >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (4, 8), (3,8), (4, 8)],
-        ... )
-        >>> baca.interpret.set_up_score(
-        ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
-        ... )
-
-        >>> command = baca.rhythm(
-        ...     rmakers.even_division([8]),
-        ...     rmakers.beam(),
-        ...     rmakers.extract_trivial(),
-        ... )
-
-        >>> commands(
-        ...     "Music",
-        ...     command,
-        ... )
-
-        >>> _, _ = baca.interpreter(
-        ...     score,
-        ...     commands.commands,
-        ...     commands.time_signatures,
-        ...     move_global_context=True,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ... )
-        >>> lilypond_file = baca.make_lilypond_file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            {
-                \context Staff = "Staff"
-                <<
-                    \context Voice = "Skips"
-                    {
-                        \baca-new-spacing-section #1 #12
-                        \time 3/8
-                        s1 * 3/8
-                        \baca-new-spacing-section #1 #12
-                        \time 4/8
-                        s1 * 4/8
-                        \baca-new-spacing-section #1 #12
-                        \time 3/8
-                        s1 * 3/8
-                        \baca-new-spacing-section #1 #12
-                        \time 4/8
-                        s1 * 4/8
-                    }
-                    \context Voice = "Music"
-                    {
-                        b'8
-                        [
-                        b'8
-                        b'8
-                        ]
-                        b'8
-                        [
-                        b'8
-                        b'8
-                        b'8
-                        ]
-                        b'8
-                        [
-                        b'8
-                        b'8
-                        ]
-                        b'8
-                        [
-                        b'8
-                        b'8
-                        b'8
-                        ]
-                    }
-                >>
-            }
-
-    ..  container:: example
-
-        Talea rhythm-maker remembers previous state across gaps:
-
-        >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
-        ...     time_signatures=5 * [(4, 8)],
-        ... )
-        >>> baca.interpret.set_up_score(
-        ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
-        ... )
-
-        >>> note_command = rmakers.stack(
-        ...     rmakers.note(),
-        ...     rmakers.force_rest(
-        ...         lambda _: baca.select.lts(_),
-        ...     ),
-        ...     rmakers.beam(lambda _: baca.select.plts(_)),
-        ... )
-        >>> talea_command = rmakers.stack(
-        ...     rmakers.talea([3, 4], 16),
-        ...     rmakers.beam(),
-        ...     rmakers.extract_trivial(),
-        ... )
-        >>> command = baca.rhythm(
-        ...     rmakers.bind(
-        ...         rmakers.assign(note_command, abjad.index([2])),
-        ...         rmakers.assign(
-        ...             talea_command,
-        ...             abjad.index([0], 1),
-        ...             remember_state_across_gaps=True,
-        ...         ),
-        ...     ),
-        ... )
-
-        >>> def label_with_durations(music):
-        ...     return abjad.label.with_durations(
-        ...         music,
-        ...         direction=abjad.DOWN,
-        ...         denominator=16,
-        ...     )
-        >>> commands(
-        ...     "Music",
-        ...     command,
-        ...     baca.label(label_with_durations),
-        ...     baca.text_script_font_size(-2),
-        ...     baca.text_script_staff_padding(5),
-        ... )
-
-        >>> _, _ = baca.interpreter(
-        ...     score,
-        ...     commands.commands,
-        ...     commands.time_signatures,
-        ...     move_global_context=True,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ... )
-        >>> lilypond_file = baca.make_lilypond_file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            {
-                \context Staff = "Staff"
-                <<
-                    \context Voice = "Skips"
-                    {
-                        \baca-new-spacing-section #1 #16
-                        \time 4/8
-                        s1 * 4/8
-                        \baca-new-spacing-section #1 #16
-                        s1 * 4/8
-                        \baca-new-spacing-section #1 #16
-                        s1 * 4/8
-                        \baca-new-spacing-section #1 #16
-                        s1 * 4/8
-                        \baca-new-spacing-section #1 #16
-                        s1 * 4/8
-                    }
-                    \context Voice = "Music"
-                    {
-                        \override TextScript.font-size = -2
-                        \override TextScript.staff-padding = 5
-                        b'8.
-                        _ \markup \fraction 3 16
-                        b'4
-                        _ \markup \fraction 4 16
-                        b'16
-                        _ \markup \fraction 3 16
-                        ~
-                        b'8
-                        b'4
-                        _ \markup \fraction 4 16
-                        b'8
-                        _ \markup \fraction 2 16
-                        r2
-                        _ \markup \fraction 8 16
-                        b'16
-                        _ \markup \fraction 1 16
-                        b'4
-                        _ \markup \fraction 4 16
-                        b'8.
-                        _ \markup \fraction 3 16
-                        b'4
-                        _ \markup \fraction 4 16
-                        b'8.
-                        _ \markup \fraction 3 16
-                        [
-                        b'16
-                        _ \markup \fraction 1 16
-                        ]
-                        \revert TextScript.font-size
-                        \revert TextScript.staff-padding
-                    }
-                >>
-            }
-
-    """
 
     rhythm_maker: typing.Any = None
     annotation_spanner_color: typing.Any = None
@@ -258,7 +35,6 @@ class RhythmCommand(_command.Command):
     frame: typing.Any = None
     match: typing.Any = None
     measures: typing.Any = None
-    persist: typing.Any = None
     scope: typing.Any = None
 
     def __post_init__(self):
@@ -271,10 +47,7 @@ class RhythmCommand(_command.Command):
             self.attach_not_yet_pitched = bool(self.attach_not_yet_pitched)
         if self.do_not_check_total_duration is not None:
             self.do_not_check_total_duration = bool(self.do_not_check_total_duration)
-        if self.persist is not None:
-            assert isinstance(self.persist, str), repr(self.persist)
         self._check_rhythm_maker_input(self.rhythm_maker)
-        self._state = None
 
     def _check_rhythm_maker_input(self, rhythm_maker):
         if rhythm_maker is None:
@@ -322,15 +95,8 @@ class RhythmCommand(_command.Command):
                 rcommand = self.rhythm_maker
             else:
                 rcommand = rmakers.stack(self.rhythm_maker)
-            dictionary = runtime.get("previous_section_voice_metadata")
-            previous_section_stop_state = self._previous_section_stop_state(
-                dictionary, self.persist
-            )
             if isinstance(rcommand, rmakers.Stack):
-                selection = rcommand(
-                    time_signatures, previous_state=previous_section_stop_state
-                )
-                self._state = rcommand.maker.state
+                selection = rcommand(time_signatures)
             elif isinstance(rcommand, types.FunctionType):
                 selection = rcommand(time_signatures)
         assert isinstance(selection, list), repr(selection)
@@ -350,7 +116,6 @@ class RhythmCommand(_command.Command):
     @staticmethod
     def _previous_section_stop_state(dictionary, persist):
         previous_section_stop_state = None
-        # dictionary = runtime.get("previous_section_voice_metadata")
         if dictionary:
             previous_section_stop_state = dictionary.get(_enums.RHYTHM.name)
             if (
@@ -360,52 +125,8 @@ class RhythmCommand(_command.Command):
                 previous_section_stop_state = None
         return previous_section_stop_state
 
-    @property
-    def parameter(self) -> str:
-        """
-        Gets persistence parameter.
-
-        ..  container:: example
-
-            >>> baca.RhythmCommand(rhythm_maker=rmakers.note()).parameter
-            'RHYTHM'
-
-        """
-        return _enums.RHYTHM.name
-
-    @property
-    def state(self):
-        """
-        Gets postcall state of rhythm command.
-
-        Populated by interpreter.
-        """
-        return self._state
-
 
 class TimeSignatureMaker:
-    """
-    Time-signature-maker.
-
-    ..  container:: example
-
-        >>> time_signatures = [
-        ...     [(1, 16), (2, 16), (3, 16)],
-        ...     [(1, 8), (2, 8), (3, 8)],
-        ... ]
-        >>> maker = baca.TimeSignatureMaker(
-        ...     time_signatures=time_signatures,
-        ...     count=5,
-        ...     fermata_measures=[5],
-        ... )
-        >>> for _ in maker.run(): _
-        (1, 16)
-        (2, 16)
-        (3, 16)
-        (1, 8)
-        TimeSignature(pair=(1, 4), hide=False, partial=None)
-
-    """
 
     __slots__ = (
         "_count",
@@ -705,72 +426,21 @@ def _make_tied_repeated_durations(durations):
     return rhythm_maker
 
 
-def make_even_divisions(*, measures=None):
-    """
-    Makes even divisions.
-    """
-    return RhythmCommand(
+# FUNCTIONS
+
+
+def make_even_divisions_function(time_signatures):
+    command = RhythmCommand(
         rhythm_maker=rmakers.stack(
             rmakers.even_division([8]),
             rmakers.beam(),
             rmakers.extract_trivial(),
             tag=_tags.function_name(_frame()),
         ),
-        annotation_spanner_color="#darkcyan",
         frame=_frame(),
-        measures=measures,
     )
-
-
-def make_fused_tuplet_monads(
-    *,
-    measures=None,
-    tuplet_ratio=None,
-):
-    """
-    Makes fused tuplet monads.
-    """
-    tuplet_ratios = []
-    if tuplet_ratio is None:
-        tuplet_ratios.append((1,))
-    else:
-        tuplet_ratios.append(tuplet_ratio)
-    return RhythmCommand(
-        rhythm_maker=rmakers.stack(
-            rmakers.tuplet(tuplet_ratios),
-            rmakers.beam(),
-            rmakers.rewrite_rest_filled(),
-            rmakers.trivialize(),
-            rmakers.extract_trivial(),
-            rmakers.force_repeat_tie(),
-            preprocessor=lambda _: [sum(_)],
-            tag=_tags.function_name(_frame()),
-        ),
-        annotation_spanner_color="#darkcyan",
-        frame=_frame(),
-        measures=measures,
-    )
-
-
-def make_mmrests(
-    *,
-    head: bool = False,
-    # TODO: remove measures keyword?
-    measures=None,
-):
-    if head is True:
-
-        def rhythm_maker(time_signatures):
-            return make_mmrests_function(time_signatures, head=head)
-
-    else:
-        rhythm_maker = make_mmrests_function
-    return RhythmCommand(
-        rhythm_maker=rhythm_maker,
-        annotation_spanner_color="#darkcyan",
-        frame=_frame(),
-        measures=measures,
-    )
+    music = command.rhythm_maker(time_signatures)
+    return music
 
 
 def make_mmrests_function(time_signatures, *, head: str | bool = ""):
@@ -879,54 +549,6 @@ def make_monads_function(fractions):
     return components
 
 
-def make_music(
-    argument,
-    *,
-    annotation_spanner=False,
-    do_not_check_total_duration=None,
-    tag=abjad.Tag(),
-):
-    """
-    Makes rhythm command from string or selection ``argument``.
-    """
-    annotation_spanner_text = None
-    if annotation_spanner is True:
-        annotation_spanner_text = "baca.make_music() =|"
-    tag = tag.append(_tags.function_name(_frame()))
-    if isinstance(argument, str):
-        string = f"{{ {argument} }}"
-        container = abjad.parse(string)
-        selection = abjad.mutate.eject_contents(container)
-    elif isinstance(argument, list):
-        selection = argument
-    else:
-        message = "baca.make_music() accepts string or selection,"
-        message += f" not {repr(argument)}."
-        raise TypeError(message)
-    if tag is not None:
-        _tag_components(selection, tag)
-    return RhythmCommand(
-        rhythm_maker=selection,
-        annotation_spanner_color="#darkcyan",
-        annotation_spanner_text=annotation_spanner_text,
-        do_not_check_total_duration=do_not_check_total_duration,
-    )
-
-
-def make_notes(
-    *specifiers,
-    measures=None,
-    repeat_ties=False,
-):
-    rhythm_maker = _make_notes(*specifiers, repeat_ties=repeat_ties)
-    return RhythmCommand(
-        rhythm_maker=rhythm_maker,
-        annotation_spanner_color="#darkcyan",
-        frame=_frame(),
-        measures=measures,
-    )
-
-
 def make_notes_function(
     time_signatures,
     *specifiers,
@@ -938,10 +560,10 @@ def make_notes_function(
     return music
 
 
-def make_repeat_tied_notes(
+def make_repeat_tied_notes_function(
+    time_signatures,
     *specifiers,
     do_not_rewrite_meter=None,
-    measures=None,
 ):
     r"""
     Makes repeat-tied notes; rewrites meter.
@@ -964,10 +586,8 @@ def make_repeat_tied_notes(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> commands(
-        ...     "Music",
-        ...     baca.make_repeat_tied_notes(),
-        ... )
+        >>> music = baca.make_repeat_tied_notes_function(commands.get())
+        >>> score["Music"].extend(music)
 
         >>> _, _ = baca.interpreter(
         ...     score,
@@ -999,65 +619,30 @@ def make_repeat_tied_notes(
                     }
                     \context Voice = "Music"
                     {
-                        b'4.
+                        c'4.
                         - \tweak stencil ##f
                         ~
-                        b'4
-                        - \tweak stencil ##f
-                        ~
-                        \repeatTie
-                        b'4.
+                        c'4
                         - \tweak stencil ##f
                         ~
                         \repeatTie
-                        b'4
+                        c'4.
+                        - \tweak stencil ##f
+                        ~
+                        \repeatTie
+                        c'4
                         \repeatTie
                     }
                 >>
             }
 
     """
-    rhythm_maker = _make_repeat_tied_notes(
-        *specifiers, do_not_rewrite_meter=do_not_rewrite_meter
-    )
-    return RhythmCommand(
-        rhythm_maker=rhythm_maker,
-        annotation_spanner_color="#darkcyan",
-        frame=_frame(),
-    )
-
-
-def make_repeat_tied_notes_function(
-    time_signatures,
-    *specifiers,
-    do_not_rewrite_meter=None,
-):
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     rhythm_maker = _make_repeat_tied_notes(
         *specifiers, do_not_rewrite_meter=do_not_rewrite_meter
     )
     music = rhythm_maker(time_signatures)
     return music
-
-
-def make_repeated_duration_notes(
-    durations,
-    *specifiers,
-    do_not_rewrite_meter=None,
-    measures=None,
-):
-    rhythm_maker = _make_repeated_duration_notes(
-        durations,
-        *specifiers,
-        do_not_rewrite_meter=do_not_rewrite_meter,
-        measures=measures,
-    )
-    return RhythmCommand(
-        rhythm_maker=rhythm_maker,
-        annotation_spanner_color="#darkcyan",
-        frame=_frame(),
-        measures=measures,
-    )
 
 
 def make_repeated_duration_notes_function(
@@ -1076,22 +661,6 @@ def make_repeated_duration_notes_function(
     return music
 
 
-def make_rests(*, measures=None):
-    """
-    Makes rests.
-    """
-    return RhythmCommand(
-        rhythm_maker=rmakers.stack(
-            rmakers.note(),
-            rmakers.force_rest(lambda _: _select.lts(_)),
-            tag=_tags.function_name(_frame()),
-        ),
-        annotation_spanner_color="#darkcyan",
-        frame=_frame(),
-        measures=measures,
-    )
-
-
 def make_rests_function(time_signatures):
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     rhythm_maker = rmakers.stack(
@@ -1104,19 +673,6 @@ def make_rests_function(time_signatures):
     return music
 
 
-def make_single_attack(duration, *, measures=None):
-    """
-    Makes single attacks with ``duration``.
-    """
-    rhythm_maker = _make_single_attack(duration)
-    return RhythmCommand(
-        rhythm_maker=rhythm_maker,
-        annotation_spanner_color="#darkcyan",
-        frame=_frame(),
-        measures=measures,
-    )
-
-
 def make_single_attack_function(time_signatures, duration):
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     rhythm_maker = _make_single_attack(duration)
@@ -1124,50 +680,9 @@ def make_single_attack_function(time_signatures, duration):
     return music
 
 
-def make_skeleton(
-    argument,
-    *,
-    attach_annotation_spanner=False,
-    do_not_check_total_duration=None,
-    tag=abjad.Tag(),
-):
-    """
-    Makes rhythm command from ``string`` and attaches NOT_YET_PITCHED indicators to
-    music.
-    """
-    selection = _make_skeleton(
-        argument,
-        do_not_check_total_duration=do_not_check_total_duration,
-        tag=tag,
-    )
-    if attach_annotation_spanner is True:
-        annotation_spanner_text = "baca.make_skeleton() =|"
-    else:
-        annotation_spanner_text = None
-    return RhythmCommand(
-        rhythm_maker=selection,
-        annotation_spanner_color="#darkcyan",
-        annotation_spanner_text=annotation_spanner_text,
-        attach_not_yet_pitched=True,
-        do_not_check_total_duration=do_not_check_total_duration,
-    )
-
-
 def make_skeleton_function(argument):
-    selection = _make_skeleton(argument)
-    return selection
-
-
-def make_tied_notes(*, measures=None):
-    """
-    Makes tied notes; rewrites meter.
-    """
-    return RhythmCommand(
-        rhythm_maker=_make_tied_notes,
-        annotation_spanner_color="#darkcyan",
-        frame=_frame(),
-        measures=measures,
-    )
+    music = _make_skeleton(argument)
+    return music
 
 
 def make_tied_notes_function(time_signatures):
@@ -1175,19 +690,6 @@ def make_tied_notes_function(time_signatures):
     rhythm_maker = _make_tied_notes()
     music = rhythm_maker(time_signatures)
     return music
-
-
-def make_tied_repeated_durations(durations, *, measures=None):
-    """
-    Makes tied repeated durations; does not rewrite meter.
-    """
-    rhythm_maker = _make_tied_repeated_durations(durations)
-    return RhythmCommand(
-        rhythm_maker=rhythm_maker,
-        annotation_spanner_color="#darkcyan",
-        frame=_frame(),
-        measures=measures,
-    )
 
 
 def make_tied_repeated_durations_function(time_signatures, durations):
@@ -1202,12 +704,8 @@ def rhythm(
     frame=None,
     preprocessor=None,
     measures=None,
-    persist=None,
     tag=abjad.Tag(),
 ):
-    """
-    Makes rhythm command from ``argument``.
-    """
     assert isinstance(tag, abjad.Tag), repr(tag)
     argument = rmakers.stack(*arguments, preprocessor=preprocessor, tag=tag)
     return RhythmCommand(
@@ -1215,5 +713,4 @@ def rhythm(
         attach_not_yet_pitched=True,
         frame=frame,
         measures=measures,
-        persist=persist,
     )
