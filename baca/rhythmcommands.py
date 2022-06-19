@@ -1,103 +1,15 @@
 """
 Rhythm commands.
 """
-import dataclasses
-import types
-import typing
 from inspect import currentframe as _frame
 
 import abjad
 from abjadext import rmakers
 
-from . import command as _command
 from . import select as _select
 from . import sequence as _sequence
 from . import tags as _tags
 from .enums import enums as _enums
-
-
-@dataclasses.dataclass
-class RhythmCommand(_command.Command):
-
-    rhythm_maker: typing.Any = None
-    annotation_spanner_color: typing.Any = None
-    annotation_spanner_text: typing.Any = None
-    attach_not_yet_pitched: typing.Any = None
-    frame: typing.Any = None
-    match: typing.Any = None
-    measures: typing.Any = None
-    scope: typing.Any = None
-
-    def __post_init__(self):
-        _command.Command.__post_init__(self)
-        if self.annotation_spanner_color is not None:
-            assert isinstance(self.annotation_spanner_color, str)
-        if self.annotation_spanner_text is not None:
-            assert isinstance(self.annotation_spanner_text, str)
-        if self.attach_not_yet_pitched is not None:
-            self.attach_not_yet_pitched = bool(self.attach_not_yet_pitched)
-        self._check_rhythm_maker_input(self.rhythm_maker)
-
-    def _check_rhythm_maker_input(self, rhythm_maker):
-        if rhythm_maker is None:
-            return
-        prototype = (
-            list,
-            rmakers.RhythmMaker,
-            rmakers.Assignment,
-            rmakers.Stack,
-            rmakers.Bind,
-            typing.Callable,
-        )
-        if isinstance(rhythm_maker, prototype):
-            return
-        message = '\n  Input parameter "rhythm_maker" accepts:'
-        message += "\n    rhythm-maker"
-        message += "\n    selection"
-        message += "\n    sequence of division assignment objects"
-        message += "\n    none"
-        message += '\n  Input parameter "rhythm_maker" received:'
-        message += f"\n    {rhythm_maker!r}"
-        raise Exception(message)
-
-    def _make_components(
-        self,
-        time_signatures,
-        runtime=None,
-    ):
-        rhythm_maker = self.rhythm_maker
-        if isinstance(rhythm_maker, list):
-            selection = rhythm_maker
-            total_duration = sum([_.duration for _ in time_signatures])
-            selection_duration = abjad.get.duration(selection)
-            if selection_duration != total_duration:
-                message = f"selection duration ({selection_duration}) does not"
-                message += f" equal total duration ({total_duration})."
-                raise Exception(message)
-        else:
-            if isinstance(self.rhythm_maker, rmakers.Stack):
-                rcommand = self.rhythm_maker
-            elif isinstance(self.rhythm_maker, types.FunctionType):
-                rcommand = self.rhythm_maker
-            else:
-                rcommand = rmakers.stack(self.rhythm_maker)
-            if isinstance(rcommand, rmakers.Stack):
-                selection = rcommand(time_signatures)
-            elif isinstance(rcommand, types.FunctionType):
-                selection = rcommand(time_signatures)
-        assert isinstance(selection, list), repr(selection)
-        if self.attach_not_yet_pitched or not isinstance(self.rhythm_maker, list):
-            container = abjad.Container(selection, name="Dummy")
-            rest_prototype = (abjad.MultimeasureRest, abjad.Rest, abjad.Skip)
-            for leaf in abjad.iterate.leaves(container):
-                if isinstance(leaf, abjad.Note | abjad.Chord):
-                    abjad.attach(_enums.NOT_YET_PITCHED, leaf, tag=abjad.Tag())
-                elif isinstance(leaf, rest_prototype):
-                    pass
-                else:
-                    raise TypeError(leaf)
-            container[:] = []
-        return selection
 
 
 class TimeSignatureMaker:
@@ -623,20 +535,3 @@ def make_tied_repeated_durations(time_signatures, durations):
     )
     music = rhythm_maker(time_signatures)
     return music
-
-
-def rhythm(
-    *arguments,
-    frame=None,
-    preprocessor=None,
-    measures=None,
-    tag=abjad.Tag(),
-):
-    assert isinstance(tag, abjad.Tag), repr(tag)
-    argument = rmakers.stack(*arguments, preprocessor=preprocessor, tag=tag)
-    return RhythmCommand(
-        rhythm_maker=argument,
-        attach_not_yet_pitched=True,
-        frame=frame,
-        measures=measures,
-    )

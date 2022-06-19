@@ -19,7 +19,6 @@ from . import overrides as _overrides
 from . import parts as _parts
 from . import pcollections as _pcollections
 from . import piecewise as _piecewise
-from . import rhythmcommands as _rhythmcommands
 from . import scope as _scope
 from . import select as _select
 from . import tags as _tags
@@ -785,7 +784,6 @@ def _call_all_commands(
     command_count = 0
     for i, command in enumerate(commands):
         assert isinstance(command, _command.Command)
-        assert not isinstance(command, _rhythmcommands.RhythmCommand), repr(command)
         selection, cache = _scope_to_leaf_selection(
             score,
             allow_empty_selections,
@@ -2568,15 +2566,6 @@ def _update_score_one_time(score):
     score._is_forbidden_to_update = False
     abjad._updatelib._update_now(score, offsets=True)
     score._is_forbidden_to_update = is_forbidden_to_update
-
-
-def _voice_to_rhythm_commands(commands, voice):
-    commands_ = []
-    for command in commands:
-        assert isinstance(command, _rhythmcommands.RhythmCommand)
-        if command.scope.voice_name == voice.name:
-            commands_.append(command)
-    return commands_
 
 
 def _whitespace_leaves(score):
