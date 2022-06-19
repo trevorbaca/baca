@@ -589,7 +589,7 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -657,7 +657,7 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -738,7 +738,7 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -819,7 +819,7 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -890,7 +890,7 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -970,7 +970,7 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -1041,7 +1041,7 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -1122,7 +1122,7 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -1218,7 +1218,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -1384,7 +1384,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -1562,7 +1562,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -1748,7 +1748,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -1942,7 +1942,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -2140,7 +2140,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -2315,7 +2315,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -2505,7 +2505,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -2702,7 +2702,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -2915,7 +2915,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -3113,7 +3113,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -3242,7 +3242,7 @@ r"""
         ...     metronome_marks["112"],
         ...     commands.manifests(),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -3348,7 +3348,7 @@ r"""
         ...     commands.manifests(),
         ... )
         >>> baca.text_spanner_staff_padding_function(score["Skips"][:-1], 4)
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -3472,7 +3472,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -3573,7 +3573,7 @@ r"""
         ...     metronome_marks["112"],
         ...     commands.manifests(),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -3696,7 +3696,7 @@ r"""
         ...     commands.manifests(),
         ... )
         >>> baca.text_spanner_staff_padding_function(score["Skips"][:-1], 4)
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -3815,7 +3815,7 @@ r"""
         ...     tags=[tag],
         ... )
 
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -3895,7 +3895,7 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -3991,7 +3991,7 @@ r"""
         ...     selector=lambda _: abjad.select.leaf(_, 0),
         ...     tags=[tag],
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -4081,7 +4081,7 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -4152,7 +4152,7 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -4236,7 +4236,7 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -4319,7 +4319,7 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -4396,7 +4396,7 @@ r"""
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -4507,7 +4507,7 @@ r"""
         ...     baca.Accelerando(),
         ...     commands.manifests(),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -4612,7 +4612,7 @@ r"""
         ...     commands.manifests(),
         ... )
         >>> baca.text_spanner_staff_padding_function(score["Skips"], 4)
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
 
         >>> metadata, persist = {}, {}
@@ -4713,7 +4713,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -4812,7 +4812,7 @@ r"""
         ...     baca.Accelerando(),
         ...     commands.manifests(),
         ... )
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
 
         >>> _, _ = baca.interpreter(
@@ -4917,7 +4917,7 @@ r"""
         ...     commands.manifests(),
         ... )
         >>> baca.text_spanner_staff_padding_function(score["Skips"], 4)
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",

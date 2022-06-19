@@ -1571,7 +1571,7 @@ def mmrest_text_color(
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",

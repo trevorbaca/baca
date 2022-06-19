@@ -16,7 +16,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     commands.time_signatures,
     ...     docs=True,
     ... )
-    >>> music = baca.make_even_divisions_function(commands.get())
+    >>> music = baca.make_even_divisions(commands.get())
     >>> score["Music"].extend(music)
     >>> commands(
     ...     "Music",
@@ -233,7 +233,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     docs=True,
     ... )
 
-    >>> music = baca.make_even_divisions_function(commands.get())
+    >>> music = baca.make_even_divisions(commands.get())
     >>> score["Music"].extend(music)
     >>> commands(
     ...     "Music",
@@ -323,7 +323,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     docs=True,
     ... )
 
-    >>> music = baca.make_even_divisions_function(commands.get())
+    >>> music = baca.make_even_divisions(commands.get())
     >>> score["Music"].extend(music)
     >>> commands(
     ...     "Music",

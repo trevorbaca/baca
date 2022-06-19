@@ -137,7 +137,7 @@ def beam(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",

@@ -971,7 +971,7 @@ def dynamic(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 13)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -1073,7 +1073,7 @@ def dynamic(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -1209,7 +1209,7 @@ def hairpin(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -1306,7 +1306,7 @@ def hairpin(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -1405,7 +1405,7 @@ def hairpin(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -1503,7 +1503,7 @@ def hairpin(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -1601,7 +1601,7 @@ def hairpin(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -1711,7 +1711,7 @@ def hairpin(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -1810,7 +1810,7 @@ def hairpin(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -1917,7 +1917,7 @@ def hairpin(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -2020,7 +2020,7 @@ def hairpin(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -2135,7 +2135,7 @@ def hairpin(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -2229,7 +2229,7 @@ def hairpin(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -2324,7 +2324,7 @@ def hairpin(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_skeleton_function("{ c2 r4. c2 r4. }")
+        >>> music = baca.make_skeleton("{ c2 r4. c2 r4. }")
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -2422,7 +2422,7 @@ def hairpin(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -2525,7 +2525,7 @@ def hairpin(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -3538,7 +3538,7 @@ def text_spanner(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -3636,7 +3636,7 @@ def text_spanner(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -3734,7 +3734,7 @@ def text_spanner(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -3832,7 +3832,7 @@ def text_spanner(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -3930,7 +3930,7 @@ def text_spanner(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -4030,7 +4030,7 @@ def text_spanner(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -4146,7 +4146,7 @@ def text_spanner(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -4262,7 +4262,7 @@ def text_spanner(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -4388,7 +4388,7 @@ def text_spanner(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -4517,7 +4517,7 @@ def text_spanner(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_skeleton_function("{ c2 c4. c2 c4. }")
+        >>> music = baca.make_skeleton("{ c2 c4. c2 c4. }")
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -4620,7 +4620,7 @@ def text_spanner(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -4724,7 +4724,7 @@ def text_spanner(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -4842,7 +4842,7 @@ def text_spanner(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -4951,7 +4951,7 @@ def text_spanner(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_skeleton_function("{ c2 c4. c2 c4 ~ c8 }")
+        >>> music = baca.make_skeleton("{ c2 c4. c2 c4 ~ c8 }")
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",

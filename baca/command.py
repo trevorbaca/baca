@@ -244,7 +244,7 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -368,7 +368,7 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions_function(commands.get())
+        >>> music = baca.make_even_divisions(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -547,7 +547,7 @@ def only_parts(command: Command | Suite) -> Command | Suite:
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_notes_function(commands.get())
+        >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
