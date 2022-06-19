@@ -443,25 +443,75 @@ def make_even_divisions_function(time_signatures):
     return music
 
 
-def make_mmrests_function(time_signatures, *, head: str | bool = ""):
-    assert isinstance(head, (str, bool)), repr(head)
-    tag = _tags.function_name(_frame())
-    mmrests = []
-    if head is True:
-        head = "MultimeasureRestContainer.Music"
-    if head:
-        for i, time_signature in enumerate(time_signatures):
-            multiplier = abjad.NonreducedFraction(time_signature.pair)
-            if i == 0:
-                mmrest = _make_multimeasure_rest_container(head, multiplier)
-            else:
-                mmrest = abjad.MultimeasureRest(1, multiplier=multiplier, tag=tag)
-            mmrests.append(mmrest)
-    else:
+def make_mmrests(time_signatures, *, head: str = ""):
+    assert isinstance(head, str), repr(head)
+    mmrests: list[abjad.MultimeasureRest | abjad.Container] = []
+    if not head:
+        tag = _tags.function_name(_frame(), n=1)
         for time_signature in time_signatures:
             multiplier = abjad.NonreducedFraction(time_signature.pair)
             mmrest = abjad.MultimeasureRest(1, multiplier=multiplier, tag=tag)
             mmrests.append(mmrest)
+    else:
+        assert isinstance(head, str)
+        voice_name = head
+        for i, time_signature in enumerate(time_signatures):
+            multiplier = abjad.NonreducedFraction(time_signature.pair)
+            if i == 0:
+                tag = _tags.function_name(_frame(), n=2)
+                tag = tag.append(_tags.HIDDEN)
+                note_or_rest = _tags.NOTE
+                tag = tag.append(_tags.NOTE)
+                note = abjad.Note("c'1", multiplier=multiplier, tag=tag)
+                abjad.override(note).Accidental.stencil = False
+                abjad.override(note).NoteColumn.ignore_collision = True
+                abjad.attach(_enums.NOTE, note)
+                abjad.attach(_enums.NOT_YET_PITCHED, note)
+                abjad.attach(_enums.HIDDEN, note)
+                tag = _tags.function_name(_frame(), n=3)
+                tag = tag.append(note_or_rest)
+                tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
+                literal = abjad.LilyPondLiteral(
+                    r"\abjad-invisible-music-coloring", site="before"
+                )
+                abjad.attach(literal, note, tag=tag)
+                tag = _tags.function_name(_frame(), n=4)
+                tag = tag.append(note_or_rest)
+                tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
+                literal = abjad.LilyPondLiteral(
+                    r"\abjad-invisible-music", site="before"
+                )
+                abjad.attach(literal, note, deactivate=True, tag=tag)
+                # TODO: remove 1 line below?
+                abjad.attach(_enums.HIDDEN, note)
+                tag = _tags.function_name(_frame(), n=5)
+                hidden_note_voice = abjad.Voice([note], name=voice_name, tag=tag)
+                abjad.attach(_enums.INTERMITTENT, hidden_note_voice)
+                tag = _tags.function_name(_frame(), n=6)
+                tag = tag.append(_tags.REST_VOICE)
+                tag = tag.append(_tags.MULTIMEASURE_REST)
+                rest = abjad.MultimeasureRest(1, multiplier=multiplier, tag=tag)
+                abjad.attach(_enums.MULTIMEASURE_REST, rest)
+                abjad.attach(_enums.REST_VOICE, rest)
+                if "Music" in voice_name:
+                    name = voice_name.replace("Music", "Rests")
+                else:
+                    assert "Voice" in voice_name
+                    name = f"{voice_name}.Rests"
+                tag = _tags.function_name(_frame(), n=7)
+                multimeasure_rest_voice = abjad.Voice([rest], name=name, tag=tag)
+                abjad.attach(_enums.INTERMITTENT, multimeasure_rest_voice)
+                tag = _tags.function_name(_frame(), n=8)
+                container = abjad.Container(
+                    [hidden_note_voice, multimeasure_rest_voice],
+                    simultaneous=True,
+                    tag=tag,
+                )
+                abjad.attach(_enums.MULTIMEASURE_REST_CONTAINER, container)
+                mmrests.append(container)
+            else:
+                mmrest = abjad.MultimeasureRest(1, multiplier=multiplier, tag=tag)
+                mmrests.append(mmrest)
     return mmrests
 
 

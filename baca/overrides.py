@@ -1361,7 +1361,7 @@ def mmrest_color(
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(commands.get(), head="Music")
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -1479,7 +1479,7 @@ def mmrest_text_color(
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(commands.get(), head="Music")
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -1629,7 +1629,7 @@ def mmrest_text_extra_offset(
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(commands.get(), head="Music")
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -1763,7 +1763,7 @@ def mmrest_text_padding(
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(commands.get(), head="Music")
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -1869,7 +1869,7 @@ def mmrest_text_parent_center(
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(commands.get(), head="Music")
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -1976,7 +1976,7 @@ def mmrest_text_staff_padding(
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(commands.get(), head="Music")
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -4524,7 +4524,7 @@ def text_script_color(
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(commands.get(), head="Music")
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -4667,7 +4667,7 @@ def text_script_down(
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(commands.get(), head="Music")
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -4764,7 +4764,7 @@ def text_script_extra_offset(
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(commands.get(), head="Music")
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -4930,7 +4930,7 @@ def text_script_padding(
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(commands.get(), head="Music")
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -5118,7 +5118,7 @@ def text_script_staff_padding(
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(commands.get(), head="Music")
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -5261,7 +5261,7 @@ def text_script_up(
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(commands.get(), head="Music")
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",

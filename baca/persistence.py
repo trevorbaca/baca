@@ -32,7 +32,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(commands.get(), head="Music")
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -134,7 +134,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(commands.get(), head="Music")
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -249,7 +249,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(commands.get(), head="Music")
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -365,7 +365,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(commands.get(), head="Music")
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
@@ -478,7 +478,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_mmrests_function(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(commands.get(), head="Music")
         >>> score["Music"].extend(music)
         >>> commands(
         ...     "Music",
