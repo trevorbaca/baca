@@ -12,7 +12,6 @@ from abjadext import rmakers
 
 from . import commands as _commands
 from . import cursor as _cursor
-from . import rhythmcommands as _rhythmcommands
 from . import select as _select
 from . import tags as _tags
 from .enums import enums as _enums
@@ -1747,8 +1746,6 @@ class Imbrication:
         selections = container[:]
         for command in commands:
             if isinstance(command, Assignment):
-                continue
-            if isinstance(command, _rhythmcommands.RhythmCommand):
                 continue
             if isinstance(command, Imbrication):
                 continue

@@ -99,18 +99,6 @@ class RhythmCommand(_command.Command):
             container[:] = []
         return selection
 
-    @staticmethod
-    def _previous_section_stop_state(dictionary, persist):
-        previous_section_stop_state = None
-        if dictionary:
-            previous_section_stop_state = dictionary.get(_enums.RHYTHM.name)
-            if (
-                previous_section_stop_state is not None
-                and previous_section_stop_state.get("name") != persist
-            ):
-                previous_section_stop_state = None
-        return previous_section_stop_state
-
 
 class TimeSignatureMaker:
 
@@ -208,17 +196,28 @@ class TimeSignatureMaker:
         return result
 
 
+def get_previous_section_stop_state(previous_section_voice_metadata, persist):
+    previous_section_stop_state = None
+    if previous_section_voice_metadata:
+        previous_section_stop_state = previous_section_voice_metadata.get(
+            _enums.RHYTHM.name
+        )
+        if (
+            previous_section_stop_state is not None
+            and previous_section_stop_state.get("name") != persist
+        ):
+            previous_section_stop_state = None
+    return previous_section_stop_state
+
+
 def make_even_divisions(time_signatures):
-    command = RhythmCommand(
-        rhythm_maker=rmakers.stack(
-            rmakers.even_division([8]),
-            rmakers.beam(),
-            rmakers.extract_trivial(),
-            tag=_tags.function_name(_frame()),
-        ),
-        frame=_frame(),
+    rhythm_maker = rmakers.stack(
+        rmakers.even_division([8]),
+        rmakers.beam(),
+        rmakers.extract_trivial(),
+        tag=_tags.function_name(_frame()),
     )
-    music = command.rhythm_maker(time_signatures)
+    music = rhythm_maker(time_signatures)
     return music
 
 
