@@ -668,7 +668,6 @@ def _bracket_metric_modulation(metronome_mark, metric_modulation):
 
 
 def _bundle_runtime(
-    allows_instrument=None,
     already_reapplied_contexts=None,
     instruments=None,
     manifests=None,
@@ -679,7 +678,6 @@ def _bundle_runtime(
     short_instrument_names=None,
 ):
     runtime = {}
-    runtime["allows_instrument"] = allows_instrument
     runtime["already_reapplied_contexts"] = already_reapplied_contexts
     runtime["instruments"] = instruments
     runtime["manifests"] = manifests
@@ -761,7 +759,6 @@ def _calculate_clock_times(
 def _call_all_commands(
     *,
     allow_empty_selections,
-    allows_instrument,
     already_reapplied_contexts,
     always_make_global_rests,
     attach_rhythm_annotation_spanners,
@@ -797,7 +794,6 @@ def _call_all_commands(
         )
         previous_persistent_indicators = previous_persist.get("persistent_indicators")
         runtime = _bundle_runtime(
-            allows_instrument=allows_instrument,
             already_reapplied_contexts=already_reapplied_contexts,
             manifests=manifests,
             offset_to_measure_number=offset_to_measure_number,
@@ -920,9 +916,9 @@ def _check_persistent_indicators_for_leaf(
         message = f"{voice_name} leaf {i} ({leaf!s}) missing instrument."
         raise Exception(message)
     if not do_not_require_short_instrument_names:
-        markup = abjad.get.effective(leaf, abjad.ShortInstrumentName)
-        if markup is None:
-            message = f"{voice_name} leaf {i} ({leaf!s}) missing margin markup."
+        name = abjad.get.effective(leaf, abjad.ShortInstrumentName)
+        if name is None:
+            message = f"{voice_name} leaf {i} ({leaf!s}) missing short instrument name."
             raise Exception(message)
     clef = abjad.get.effective(leaf, abjad.Clef)
     if clef is None:
@@ -2685,7 +2681,6 @@ def interpreter(
     add_container_identifiers=False,
     all_music_in_part_containers=False,
     allow_empty_selections=False,
-    allows_instrument=None,
     always_make_global_rests=False,
     append_anchor_skip=False,
     attach_instruments_by_hand=False,
@@ -2777,7 +2772,6 @@ def interpreter(
         cache = None
         cache, command_count = _call_all_commands(
             allow_empty_selections=allow_empty_selections,
-            allows_instrument=allows_instrument,
             already_reapplied_contexts=already_reapplied_contexts,
             always_make_global_rests=always_make_global_rests,
             attach_rhythm_annotation_spanners=attach_rhythm_annotation_spanners,
@@ -3099,6 +3093,11 @@ def set_up_score(
             score,
             do_not_iterate=score,
         )
+    for voice in abjad.iterate.components(score, abjad.Voice):
+        commands._voice_name_to_voice[voice.name] = voice
+        for abbreviation, voice_name in commands.voice_abbreviations.items():
+            if voice_name == voice.name:
+                commands._voice_name_to_voice[abbreviation] = voice
 
 
 def update_voice_metadata(

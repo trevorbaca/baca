@@ -903,17 +903,6 @@ class InstrumentChangeCommand(IndicatorCommand):
             argument = self.selector(argument)
         if self.indicators is None:
             return
-        first_leaf = abjad.get.leaf(argument, 0)
-        if first_leaf is not None:
-            staff = abjad.get.parentage(first_leaf).get(abjad.Staff)
-            assert isinstance(staff, abjad.Staff)
-            instrument = self.indicators[0]
-            assert isinstance(instrument, abjad.Instrument), repr(instrument)
-            if self.runtime["allows_instrument"]:
-                if not self.runtime["allows_instrument"](staff.name, instrument):
-                    message = f"{staff.name} does not allow instrument:\n"
-                    message += f"  {instrument}"
-                    raise Exception(message)
         IndicatorCommand._call(self, argument)
 
 
@@ -5168,9 +5157,6 @@ def color_fingerings(
     *tweaks: _typings.IndexedTweak,
     selector=lambda _: _select.pheads(_, exclude=_enums.HIDDEN),
 ) -> ColorFingeringCommand:
-    """
-    Adds color fingerings.
-    """
     return ColorFingeringCommand(numbers=numbers, selector=selector, tweaks=tweaks)
 
 
@@ -5178,9 +5164,6 @@ def deviation(
     deviations: list[int | float],
     selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
 ) -> MicrotoneDeviationCommand:
-    """
-    Sets microtone ``deviations``.
-    """
     return MicrotoneDeviationCommand(deviations=deviations, selector=selector)
 
 
@@ -5188,9 +5171,6 @@ def diatonic_clusters(
     widths: list[int],
     selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
 ) -> DiatonicClusterCommand:
-    """
-    Makes diatonic clusters with ``widths``.
-    """
     return DiatonicClusterCommand(selector=selector, widths=widths)
 
 
@@ -5614,9 +5594,6 @@ _interpolate_staff_positions_function = interpolate_staff_positions
 
 
 def levine_multiphonic(n: int) -> abjad.Markup:
-    """
-    Makes Levine multiphonic markup.
-    """
     assert isinstance(n, int), repr(n)
     return abjad.Markup(rf'\baca-boxed-markup "L.{n}"')
 
@@ -5639,9 +5616,6 @@ def natural_clusters(
     *,
     start_pitch: int | str | abjad.NamedPitch | None = None,
 ) -> ClusterCommand:
-    """
-    Makes natural clusters with ``widths`` and ``start_pitch``.
-    """
     return ClusterCommand(
         hide_flat_markup=True,
         selector=selector,
@@ -5779,9 +5753,6 @@ def pitches(
     ignore_incomplete: bool = False,
     persist: str = None,
 ) -> PitchCommand:
-    """
-    Makes pitch command.
-    """
     if do_not_transpose not in (None, True, False):
         raise Exception(f"do_not_transpose must be boolean (not {do_not_transpose!r}).")
     if bool(exact):
@@ -6328,9 +6299,6 @@ def staff_position(
     mock: bool = False,
     set_chord_pitches_equal: bool = False,
 ) -> StaffPositionCommand:
-    """
-    Makes staff position command; allows repeats.
-    """
     assert isinstance(argument, int | list | abjad.StaffPosition), repr(argument)
     if isinstance(argument, list):
         assert all(isinstance(_, int | abjad.StaffPosition) for _ in argument)
@@ -6357,9 +6325,6 @@ def staff_positions(
     mock: bool = False,
     exact: bool = False,
 ) -> StaffPositionCommand:
-    """
-    Makes staff position command; does not allow repeats.
-    """
     if allow_repeats is None and len(numbers) == 1:
         allow_repeats = True
     return StaffPositionCommand(
@@ -6818,9 +6783,6 @@ def articulation(
     articulation: str,
     selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
-    """
-    Attaches articulation.
-    """
     articulation_ = abjad.Articulation(articulation)
     return IndicatorCommand(
         indicators=[articulation_],
@@ -6833,9 +6795,6 @@ def articulations(
     articulations: list,
     selector=lambda _: _select.pheads(_, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
-    """
-    Attaches articulations.
-    """
     return IndicatorCommand(
         indicators=articulations,
         selector=selector,
@@ -6849,9 +6808,6 @@ def bar_line_command(
     *,
     site: str = "after",
 ) -> IndicatorCommand:
-    """
-    Attaches bar line.
-    """
     indicator = abjad.BarLine(abbreviation, site=site)
     return IndicatorCommand(
         indicators=[indicator],
@@ -6881,9 +6837,6 @@ def breathe(
     selector=lambda _: _select.pleaf(_, -1, exclude=_enums.HIDDEN),
     *tweaks: abjad.Tweak,
 ) -> IndicatorCommand:
-    """
-    Attaches breathe command.
-    """
     indicator: abjad.LilyPondLiteral | abjad.Bundle
     # TODO: change to abjad.Articulation("breathe", site="after")?
     indicator = abjad.LilyPondLiteral(r"\breathe", site="after")
@@ -7006,13 +6959,25 @@ def clef(
     )
 
 
+def clef_function(
+    leaf,
+    clef: str = "treble",
+) -> None:
+    assert isinstance(leaf, abjad.Leaf), repr(leaf)
+    assert isinstance(clef, str), repr(clef)
+    indicator = abjad.Clef(clef)
+    abjad.attach(
+        indicator,
+        leaf,
+        # tag=_tags.function_name(_frame()),
+        tag=abjad.Tag("baca.clef()"),
+    )
+
+
 def damp(
     selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
     *tweaks: abjad.Tweak,
 ) -> IndicatorCommand:
-    """
-    Attaches damp.
-    """
     indicator: abjad.Articulation | abjad.Bundle
     indicator = abjad.Articulation("baca-damp")
     indicator = _tweaks.bundle_tweaks(indicator, tweaks)
@@ -7027,9 +6992,6 @@ def damp(
 def double_flageolet(
     selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
-    """
-    Attaches double flageolet.
-    """
     return IndicatorCommand(
         indicators=[abjad.Articulation("baca-double-flageolet")],
         selector=selector,
@@ -7753,9 +7715,6 @@ def instrument_name(
     *,
     context: str = "Staff",
 ) -> IndicatorCommand:
-    """
-    Attaches instrument name.
-    """
     assert isinstance(argument, str), repr(argument)
     assert argument.startswith("\\"), repr(argument)
     instrument_name = abjad.InstrumentName(argument, context=context)
@@ -7765,6 +7724,25 @@ def instrument_name(
         tags=[_tags.function_name(_frame()), _tags.NOT_PARTS],
     )
     return command
+
+
+def instrument_name_function(
+    leaf: abjad.Leaf,
+    argument: str,
+    *,
+    context: str = "Staff",
+) -> None:
+    assert isinstance(argument, str), repr(argument)
+    assert argument.startswith("\\"), repr(argument)
+    indicator = abjad.InstrumentName(argument, context=context)
+    # tag = _tags.function_name(_frame())
+    tag = abjad.Tag("baca.instrument_name()")
+    tag = tag.append(_tags.NOT_PARTS)
+    abjad.attach(
+        indicator,
+        leaf,
+        tag=tag,
+    )
 
 
 def laissez_vibrer(
@@ -8059,7 +8037,7 @@ def short_instrument_name(
     context: str = "Staff",
 ) -> IndicatorCommand | _command.Suite:
     r"""
-    Attaches margin markup.
+    Attaches short instrument name.
 
     ..  container:: example
 
@@ -8157,14 +8135,30 @@ def short_instrument_name(
         return command
 
 
+def short_instrument_name_function(
+    leaf,
+    short_instrument_name: abjad.ShortInstrumentName,
+    *,
+    context: str = "Staff",
+) -> None:
+    assert isinstance(short_instrument_name, abjad.ShortInstrumentName), repr(
+        short_instrument_name
+    )
+    # tag = _tags.function_name(_frame())
+    tag = abjad.Tag("baca.short_instrument_name()")
+    tag = tag.append(_tags.NOT_PARTS)
+    abjad.attach(
+        short_instrument_name,
+        leaf,
+        tag=tag,
+    )
+
+
 def mark(
     argument: str,
     selector=lambda _: abjad.select.leaf(_, 0),
     *tweaks: abjad.Tweak,
 ) -> IndicatorCommand:
-    """
-    Attaches mark.
-    """
     assert isinstance(argument, abjad.Markup | str), repr(argument)
     rehearsal_mark = abjad.RehearsalMark(markup=argument)
     return IndicatorCommand(
@@ -8263,9 +8257,6 @@ def parenthesize(
 def quadruple_staccato(
     selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
-    """
-    Attaches quadruple-staccato.
-    """
     return IndicatorCommand(
         indicators=[abjad.Articulation("baca-staccati #4")],
         selector=selector,
@@ -8511,9 +8502,6 @@ def short_fermata(
 def snap_pizzicato(
     selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
-    """
-    Attaches snap pizzicato.
-    """
     return IndicatorCommand(
         indicators=[abjad.Articulation("snappizzicato")],
         selector=selector,
@@ -9084,14 +9072,34 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
     command_1 = IndicatorCommand(
         indicators=[_indicators.BarExtent(n)],
         selector=selector,
+        # TODO: tag with frame n=1
         tags=[_tags.NOT_PARTS],
     )
     command_2 = IndicatorCommand(
         indicators=[_indicators.StaffLines(n)],
         selector=selector,
+        # TODO: tag with frame n=2
         tags=[_tags.function_name(_frame())],
     )
     return _command.suite(command_1, command_2)
+
+
+def staff_lines_function(leaf: abjad.Leaf, n: int) -> None:
+    assert isinstance(leaf, abjad.Leaf), repr(leaf)
+    assert isinstance(n, int), repr(n)
+    bar_extent = _indicators.BarExtent(n)
+    abjad.attach(
+        bar_extent,
+        leaf,
+        tag=_tags.NOT_PARTS,
+    )
+    staff_lines = _indicators.StaffLines(n)
+    abjad.attach(
+        staff_lines,
+        leaf,
+        # tag=_tags.function_name(_frame()),
+        tag=abjad.Tag("baca.staff_lines()"),
+    )
 
 
 def stem_tremolo(
@@ -9584,9 +9592,6 @@ def tenuto(
 def triple_staccato(
     selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
-    """
-    Attaches triple-staccato.
-    """
     return IndicatorCommand(
         indicators=[abjad.Articulation("baca-staccati #3")],
         selector=selector,
@@ -10883,9 +10888,6 @@ def flat_glissando(
     selector=lambda _: _select.pleaves(_),
     stop_pitch: str | abjad.NamedPitch | abjad.StaffPosition | None = None,
 ) -> _command.Suite:
-    """
-    Makes flat glissando.
-    """
     prototype = (list, str, abjad.NamedPitch, abjad.StaffPosition)
     if pitch is not None:
         assert isinstance(pitch, prototype), repr(pitch)
@@ -10957,9 +10959,6 @@ def flat_glissando(
 
 
 def fractions(items):
-    """
-    Makes fractions.
-    """
     result = []
     for item in items:
         item_ = abjad.NonreducedFraction(item)
@@ -11453,15 +11452,28 @@ def instrument(
     instrument: abjad.Instrument,
     selector=lambda _: abjad.select.leaf(_, 0),
 ) -> InstrumentChangeCommand:
-    """
-    Makes instrument change command.
-    """
-    if not isinstance(instrument, abjad.Instrument):
-        raise Exception(f"instrument must be instrument (not {instrument!r}).")
+    assert isinstance(instrument, abjad.Instrument), repr(instrument)
     return InstrumentChangeCommand(
         indicators=[instrument],
         selector=selector,
         tags=[_tags.function_name(_frame())],
+    )
+
+
+def instrument_function(
+    leaf: abjad.Leaf,
+    instrument: abjad.Instrument,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    assert isinstance(instrument, abjad.Instrument), repr(instrument)
+    # tag = _tags.function_name(_frame())
+    tag = abjad.Tag("baca.instrument()")
+    for tag_ in tags or []:
+        tag = tag.append(tag_)
+    abjad.attach(
+        instrument,
+        leaf,
+        tag=tag,
     )
 
 
@@ -11915,9 +11927,6 @@ def markup_function(
 def one_voice(
     selector=lambda _: abjad.select.leaf(_, 0),
 ) -> IndicatorCommand:
-    r"""
-    Makes LilyPond ``\oneVoice`` command.
-    """
     literal = abjad.LilyPondLiteral(r"\oneVoice")
     return IndicatorCommand(
         indicators=[literal],
@@ -11946,9 +11955,6 @@ def open_volta(skip, first_measure_number):
 
 
 def previous_metadata(path: str, file_name: str = "__metadata__"):
-    """
-    Gets previous section metadata before ``path``.
-    """
     # reproduces baca.path.Path.get_previous_path()
     # because Travis isn't configured for scores-directory calculations
     music_py = pathlib.Path(path)
@@ -11974,25 +11980,16 @@ def replace_with_clusters(
     *,
     start_pitch: int | str | abjad.NamedPitch | None = None,
 ) -> ClusterCommand:
-    """
-    Makes clusters with ``widths`` and ``start_pitch``.
-    """
     return ClusterCommand(selector=selector, start_pitch=start_pitch, widths=widths)
 
 
 def untie(selector) -> DetachCommand:
-    """
-    Makes (repeat-)tie detach command.
-    """
     return DetachCommand(arguments=[abjad.Tie, abjad.RepeatTie], selector=selector)
 
 
 def voice_four(
     selector=lambda _: abjad.select.leaf(_, 0),
 ) -> IndicatorCommand:
-    r"""
-    Makes LilyPond ``\voiceFour`` command.
-    """
     literal = abjad.LilyPondLiteral(r"\voiceFour")
     return IndicatorCommand(
         indicators=[literal],
@@ -12004,9 +12001,6 @@ def voice_four(
 def voice_one(
     selector=lambda _: abjad.select.leaf(_, 0),
 ) -> IndicatorCommand:
-    r"""
-    Makes LilyPond ``\voiceOne`` command.
-    """
     literal = abjad.LilyPondLiteral(r"\voiceOne")
     return IndicatorCommand(
         indicators=[literal],
@@ -12018,9 +12012,6 @@ def voice_one(
 def voice_three(
     selector=lambda _: abjad.select.leaf(_, 0),
 ) -> IndicatorCommand:
-    r"""
-    Makes LilyPond ``\voiceThree`` command.
-    """
     literal = abjad.LilyPondLiteral(r"\voiceThree")
     return IndicatorCommand(
         indicators=[literal],
@@ -12032,9 +12023,6 @@ def voice_three(
 def voice_two(
     selector=lambda _: abjad.select.leaf(_, 0),
 ) -> IndicatorCommand:
-    r"""
-    Makes LilyPond ``\voiceTwo`` command.
-    """
     literal = abjad.LilyPondLiteral(r"\voiceTwo")
     return IndicatorCommand(
         indicators=[literal],

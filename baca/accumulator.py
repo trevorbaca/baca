@@ -151,6 +151,7 @@ class CommandAccumulator:
     """
 
     __slots__ = (
+        "_voice_name_to_voice",
         "commands",
         "first_measure_number",
         "functions",
@@ -174,6 +175,7 @@ class CommandAccumulator:
         voice_abbreviations=None,
         voice_names=None,
     ):
+        self._voice_name_to_voice = {}
         self.commands = []
         self.first_measure_number = None
         self.functions = functions or ()
@@ -252,3 +254,8 @@ class CommandAccumulator:
             "abjad.MetronomeMark": self.metronome_marks,
             "abjad.ShortInstrumentName": self.short_instrument_names,
         }
+
+    def voice(self, abbreviation):
+        assert isinstance(abbreviation, str), repr(abbreviation)
+        assert abbreviation in self._voice_name_to_voice, repr(abbreviation)
+        return self._voice_name_to_voice[abbreviation]
