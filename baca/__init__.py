@@ -25,6 +25,7 @@ from .interpret import (
     append_anchor_note,
     interpreter,
     make_lilypond_file,
+    reapply,
     reapply_persistent_indicators,
     score_interpretation_defaults,
     update_voice_metadata,

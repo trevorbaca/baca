@@ -2975,35 +2975,50 @@ def make_lilypond_file(
     return lilypond_file
 
 
+def reapply(commands, manifests, previous_persist, voice_names):
+    previous_persistent_indicators = previous_persist.get("persistent_indicators", {})
+    runtime = {
+        "already_reapplied_contexts": {"Score"},
+        "manifests": manifests,
+        "previous_persistent_indicators": previous_persistent_indicators,
+    }
+    for voice_name in [_ for _ in voice_names if "Music" in _]:
+        voice = commands.voice(voice_name)
+        reapply_persistent_indicators_function(voice, runtime=runtime)
+
+
 def reapply_persistent_indicators(
     *, selector=lambda _: _select.leaves(_)
 ) -> _commands.GenericCommand:
-    def function(argument, *, runtime=None):
-        already_reapplied_contexts = runtime["already_reapplied_contexts"]
-        manifests = runtime["manifests"]
-        previous_persistent_indicators = runtime["previous_persistent_indicators"]
-        leaf = abjad.select.leaf(argument, 0)
-        parentage = abjad.get.parentage(leaf)
-        contexts = []
-        score = None
-        for component in parentage:
-            if isinstance(component, abjad.Score):
-                score = component
-            elif isinstance(component, abjad.Context):
-                contexts.append(component)
-        assert isinstance(score, abjad.Score)
-        for context in contexts:
-            _reapply_persistent_indicators(
-                already_reapplied_contexts,
-                manifests,
-                previous_persistent_indicators,
-                score,
-                do_not_iterate=context,
-            )
-
-    command = _commands.GenericCommand(function=function, selector=selector)
+    command = _commands.GenericCommand(
+        function=reapply_persistent_indicators_function, selector=selector
+    )
     command.name = "reapply_persistent_indicators"
     return command
+
+
+def reapply_persistent_indicators_function(argument, *, runtime=None):
+    already_reapplied_contexts = runtime["already_reapplied_contexts"]
+    manifests = runtime["manifests"]
+    previous_persistent_indicators = runtime["previous_persistent_indicators"]
+    leaf = abjad.select.leaf(argument, 0)
+    parentage = abjad.get.parentage(leaf)
+    contexts = []
+    score = None
+    for component in parentage:
+        if isinstance(component, abjad.Score):
+            score = component
+        elif isinstance(component, abjad.Context):
+            contexts.append(component)
+    assert isinstance(score, abjad.Score)
+    for context in contexts:
+        _reapply_persistent_indicators(
+            already_reapplied_contexts,
+            manifests,
+            previous_persistent_indicators,
+            score,
+            do_not_iterate=context,
+        )
 
 
 def score_interpretation_defaults():
