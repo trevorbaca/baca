@@ -2252,12 +2252,17 @@ def _set_intermittent_to_staff_position_zero(score):
             for pleaf in abjad.iterate.leaves(voice, pitched=True):
                 if abjad.get.has_indicator(pleaf, _enums.NOT_YET_PITCHED):
                     pleaves.append(pleaf)
-    command = _commands.staff_position(
+    #    command = _commands.staff_position(
+    #        0,
+    #        lambda _: _select.plts(_),
+    #        set_chord_pitches_equal=True,
+    #    )
+    #    command(pleaves)
+    _commands.staff_position_function(
+        pleaves,
         0,
-        lambda _: _select.plts(_),
         set_chord_pitches_equal=True,
     )
-    command(pleaves)
 
 
 def _set_not_yet_pitched_to_staff_position_zero(score):
@@ -2266,15 +2271,21 @@ def _set_not_yet_pitched_to_staff_position_zero(score):
         if not abjad.get.has_indicator(pleaf, _enums.NOT_YET_PITCHED):
             continue
         pleaves.append(pleaf)
-    command = _commands.staff_position(
+    #    command = _commands.staff_position(
+    #        0,
+    #        lambda _: _select.plts(_),
+    #        set_chord_pitches_equal=True,
+    #    )
+    #    command(pleaves)
+    _commands.staff_position_function(
+        pleaves,
         0,
-        lambda _: _select.plts(_),
         set_chord_pitches_equal=True,
     )
-    command(pleaves)
 
 
 def _shift_measure_initial_clefs(
+    first_measure_number,
     offset_to_measure_number,
     previous_persist,
     score,
@@ -2292,10 +2303,9 @@ def _shift_measure_initial_clefs(
                 continue
             clef = wrapper.unbundle_indicator()
             suite = _overrides.clef_shift(clef, selector=lambda _: abjad.select.leaf(0))
-            runtime = _bundle_runtime(
-                offset_to_measure_number=offset_to_measure_number,
-            )
+            runtime = _bundle_runtime(offset_to_measure_number=offset_to_measure_number)
             suite(leaf, runtime=runtime)
+            # _overrides.clef_shift_function(leaf, clef, first_measure_number)
 
 
 def _sort_dictionary(dictionary):
@@ -2853,6 +2863,7 @@ def interpreter(
             )
             if shift_measure_initial_clefs:
                 _shift_measure_initial_clefs(
+                    first_measure_number,
                     offset_to_measure_number,
                     previous_persist,
                     score,

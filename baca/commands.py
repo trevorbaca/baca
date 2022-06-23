@@ -25,6 +25,29 @@ from . import typings as _typings
 from .enums import enums as _enums
 
 
+def _coerce_pitches(pitches):
+    if isinstance(pitches, str):
+        pitches = _parse_string(pitches)
+    items = []
+    for item in pitches:
+        if isinstance(item, str) and "<" in item and ">" in item:
+            item = item.strip("<")
+            item = item.strip(">")
+            item = set(abjad.NamedPitch(_) for _ in item.split())
+        elif isinstance(item, str):
+            item = abjad.NamedPitch(item)
+        elif isinstance(item, collections.abc.Iterable):
+            item = set(abjad.NamedPitch(_) for _ in item)
+        else:
+            item = abjad.NamedPitch(item)
+        items.append(item)
+    if isinstance(pitches, Loop):
+        pitches = type(pitches)(items=items, intervals=pitches.intervals)
+    else:
+        pitches = abjad.CyclicTuple(items)
+    return pitches
+
+
 def _is_rest(argument):
     prototype = (abjad.Rest, abjad.MultimeasureRest, abjad.Skip)
     if isinstance(argument, prototype):
@@ -33,6 +56,197 @@ def _is_rest(argument):
     if annotation is False:
         return True
     return False
+
+
+def _metronome_mark(skip, indicator, manifests, *, deactivate=False, tag=None):
+    prototype = (
+        abjad.MetricModulation,
+        abjad.MetronomeMark,
+        _indicators.Accelerando,
+        _indicators.Ritardando,
+    )
+    assert isinstance(indicator, prototype), repr(indicator)
+    reapplied = _treat.remove_reapplied_wrappers(skip, indicator)
+    wrapper = abjad.attach(
+        indicator,
+        skip,
+        deactivate=deactivate,
+        tag=tag,
+        wrapper=True,
+    )
+    if indicator == reapplied:
+        _treat.treat_persistent_wrapper(manifests, wrapper, "redundant")
+
+
+def _parse_string(string):
+    items, current_chord = [], []
+    for part in string.split():
+        if "<" in part:
+            assert not current_chord
+            current_chord.append(part)
+        elif ">" in part:
+            assert current_chord
+            current_chord.append(part)
+            item = " ".join(current_chord)
+            items.append(item)
+            current_chord = []
+        elif current_chord:
+            current_chord.append(part)
+        else:
+            items.append(part)
+    assert not current_chord, repr(current_chord)
+    return items
+
+
+def _set_lt_pitch(
+    lt,
+    pitch,
+    *,
+    allow_repitch=False,
+    mock=False,
+    set_chord_pitches_equal=False,
+):
+    new_lt = None
+    already_pitched = _enums.ALREADY_PITCHED
+    for leaf in lt:
+        abjad.detach(_enums.NOT_YET_PITCHED, leaf)
+        if mock is True:
+            abjad.attach(_enums.MOCK, leaf)
+        if allow_repitch:
+            continue
+        if abjad.get.has_indicator(leaf, already_pitched):
+            voice = abjad.get.parentage(leaf).get(abjad.Voice)
+            if voice is None:
+                name = "no voice"
+            else:
+                name = voice.name
+            raise Exception(f"already pitched {repr(leaf)} in {name}.")
+        abjad.attach(already_pitched, leaf)
+    if pitch is None:
+        if not lt.is_pitched:
+            pass
+        else:
+            for leaf in lt:
+                rest = abjad.Rest(leaf.written_duration, multiplier=leaf.multiplier)
+                abjad.mutate.replace(leaf, rest, wrappers=True)
+            new_lt = abjad.get.logical_tie(rest)
+    elif isinstance(pitch, collections.abc.Iterable):
+        if isinstance(lt.head, abjad.Chord):
+            for chord in lt:
+                chord.written_pitches = pitch
+        else:
+            assert isinstance(lt.head, abjad.Note | abjad.Rest)
+            for leaf in lt:
+                chord = abjad.Chord(
+                    pitch,
+                    leaf.written_duration,
+                    multiplier=leaf.multiplier,
+                )
+                abjad.mutate.replace(leaf, chord, wrappers=True)
+            new_lt = abjad.get.logical_tie(chord)
+    else:
+        if isinstance(lt.head, abjad.Note):
+            for note in lt:
+                note.written_pitch = pitch
+        elif set_chord_pitches_equal is True and isinstance(lt.head, abjad.Chord):
+            for chord in lt:
+                for note_head in chord.note_heads:
+                    note_head.written_pitch = pitch
+        else:
+            assert isinstance(lt.head, abjad.Chord | abjad.Rest)
+            for leaf in lt:
+                note = abjad.Note(
+                    pitch,
+                    leaf.written_duration,
+                    multiplier=leaf.multiplier,
+                )
+                abjad.mutate.replace(leaf, note, wrappers=True)
+            new_lt = abjad.get.logical_tie(note)
+    return new_lt
+
+
+def _staff_position_function(
+    argument,
+    numbers,
+    *,
+    allow_out_of_range=False,
+    allow_repeats=False,
+    allow_repitch=False,
+    exact=False,
+    mock=False,
+    set_chord_pitches_equal=False,
+):
+    numbers = abjad.CyclicTuple(numbers)
+    plt_count = 0
+    mutated_score = False
+    for i, plt in enumerate(_select.plts(argument)):
+        clef = abjad.get.effective(
+            plt.head,
+            abjad.Clef,
+            default=abjad.Clef("treble"),
+        )
+        # number = self.numbers[i]
+        number = numbers[i]
+        # TODO: remove this first branch because never executed?
+        if isinstance(number, list):
+            positions = [abjad.StaffPosition(_) for _ in number]
+            pitches = [_.to_pitch(clef) for _ in positions]
+            new_lt = _set_lt_pitch(
+                plt,
+                pitches,
+                # allow_repitch=self.allow_repitch,
+                # mock=self.mock,
+                # set_chord_pitches_equal=self.set_chord_pitches_equal,
+                allow_repitch=allow_repitch,
+                mock=mock,
+                set_chord_pitches_equal=set_chord_pitches_equal,
+            )
+            if new_lt is not None:
+                mutated_score = True
+                plt = new_lt
+        else:
+            position = abjad.StaffPosition(number)
+            pitch = clef.to_pitch(position)
+            new_lt = _set_lt_pitch(
+                plt,
+                pitch,
+                # allow_repitch=self.allow_repitch,
+                # mock=self.mock,
+                # set_chord_pitches_equal=self.set_chord_pitches_equal,
+                allow_repitch=allow_repitch,
+                mock=mock,
+                set_chord_pitches_equal=set_chord_pitches_equal,
+            )
+            if new_lt is not None:
+                mutated_score = True
+                plt = new_lt
+        plt_count += 1
+        for pleaf in plt:
+            abjad.attach(_enums.STAFF_POSITION, pleaf)
+            # if self.allow_out_of_range:
+            if allow_out_of_range:
+                abjad.attach(_enums.ALLOW_OUT_OF_RANGE, pleaf)
+            # if self.allow_repeats:
+            if allow_repeats:
+                abjad.attach(_enums.ALLOW_REPEAT_PITCH, pleaf)
+                abjad.attach(_enums.DO_NOT_TRANSPOSE, pleaf)
+    # if self.exact and plt_count != len(self.numbers):
+    if exact and plt_count != len(numbers):
+        message = f"PLT count ({plt_count}) does not match"
+        message += f" staff position count ({len(numbers)})."
+        raise Exception(message)
+    return mutated_score
+
+
+def _token_to_indicators(token):
+    result = []
+    if not isinstance(token, tuple | list):
+        token = [token]
+    for item in token:
+        if item is None:
+            continue
+        result.append(item)
+    return result
 
 
 def _validate_bcps(bcps):
@@ -812,17 +1026,6 @@ class GlissandoCommand(_command.Command):
         )
 
 
-def _token_to_indicators(token):
-    result = []
-    if not isinstance(token, tuple | list):
-        token = [token]
-    for item in token:
-        if item is None:
-            continue
-        result.append(item)
-    return result
-
-
 @dataclasses.dataclass(slots=True)
 class IndicatorCommand(_command.Command):
 
@@ -832,7 +1035,6 @@ class IndicatorCommand(_command.Command):
     do_not_test: bool = False
     predicate: typing.Callable | None = None
     redundant: bool = False
-    tweaks: typing.Sequence[_typings.IndexedTweak] = ()
 
     def __post_init__(self):
         _command.Command.__post_init__(self)
@@ -847,7 +1049,6 @@ class IndicatorCommand(_command.Command):
                 indicators_ = abjad.CyclicTuple([self.indicators])
         self.indicators = indicators_
         self.redundant = bool(self.redundant)
-        _tweaks.validate_indexed_tweaks(self.tweaks)
 
     def __copy__(self, *arguments):
         result = dataclasses.replace(self)
@@ -875,8 +1076,6 @@ class IndicatorCommand(_command.Command):
             indicators = _token_to_indicators(indicators)
             for indicator in indicators:
                 reapplied = _treat.remove_reapplied_wrappers(leaf, indicator)
-                if self.tweaks:
-                    indicator = _tweaks.bundle_tweaks(indicator, self.tweaks)
                 wrapper = abjad.attach(
                     indicator,
                     leaf,
@@ -922,26 +1121,6 @@ class LabelCommand(_command.Command):
         if self.selector:
             argument = self.selector(argument)
         self.callable_(argument)
-
-
-def _metronome_mark(skip, indicator, manifests, *, deactivate=False, tag=None):
-    prototype = (
-        abjad.MetricModulation,
-        abjad.MetronomeMark,
-        _indicators.Accelerando,
-        _indicators.Ritardando,
-    )
-    assert isinstance(indicator, prototype), repr(indicator)
-    reapplied = _treat.remove_reapplied_wrappers(skip, indicator)
-    wrapper = abjad.attach(
-        indicator,
-        skip,
-        deactivate=deactivate,
-        tag=tag,
-        wrapper=True,
-    )
-    if indicator == reapplied:
-        _treat.treat_persistent_wrapper(manifests, wrapper, "redundant")
 
 
 @dataclasses.dataclass(slots=True)
@@ -2323,116 +2502,6 @@ class OctaveDisplacementCommand(_command.Command):
             if all(isinstance(_, int) for _ in argument):
                 return True
         return False
-
-
-def _parse_string(string):
-    items, current_chord = [], []
-    for part in string.split():
-        if "<" in part:
-            assert not current_chord
-            current_chord.append(part)
-        elif ">" in part:
-            assert current_chord
-            current_chord.append(part)
-            item = " ".join(current_chord)
-            items.append(item)
-            current_chord = []
-        elif current_chord:
-            current_chord.append(part)
-        else:
-            items.append(part)
-    assert not current_chord, repr(current_chord)
-    return items
-
-
-def _coerce_pitches(pitches):
-    if isinstance(pitches, str):
-        pitches = _parse_string(pitches)
-    items = []
-    for item in pitches:
-        if isinstance(item, str) and "<" in item and ">" in item:
-            item = item.strip("<")
-            item = item.strip(">")
-            item = set(abjad.NamedPitch(_) for _ in item.split())
-        elif isinstance(item, str):
-            item = abjad.NamedPitch(item)
-        elif isinstance(item, collections.abc.Iterable):
-            item = set(abjad.NamedPitch(_) for _ in item)
-        else:
-            item = abjad.NamedPitch(item)
-        items.append(item)
-    if isinstance(pitches, Loop):
-        pitches = type(pitches)(items=items, intervals=pitches.intervals)
-    else:
-        pitches = abjad.CyclicTuple(items)
-    return pitches
-
-
-def _set_lt_pitch(
-    lt,
-    pitch,
-    *,
-    allow_repitch=False,
-    mock=False,
-    set_chord_pitches_equal=False,
-):
-    new_lt = None
-    already_pitched = _enums.ALREADY_PITCHED
-    for leaf in lt:
-        abjad.detach(_enums.NOT_YET_PITCHED, leaf)
-        if mock is True:
-            abjad.attach(_enums.MOCK, leaf)
-        if allow_repitch:
-            continue
-        if abjad.get.has_indicator(leaf, already_pitched):
-            voice = abjad.get.parentage(leaf).get(abjad.Voice)
-            if voice is None:
-                name = "no voice"
-            else:
-                name = voice.name
-            raise Exception(f"already pitched {repr(leaf)} in {name}.")
-        abjad.attach(already_pitched, leaf)
-    if pitch is None:
-        if not lt.is_pitched:
-            pass
-        else:
-            for leaf in lt:
-                rest = abjad.Rest(leaf.written_duration, multiplier=leaf.multiplier)
-                abjad.mutate.replace(leaf, rest, wrappers=True)
-            new_lt = abjad.get.logical_tie(rest)
-    elif isinstance(pitch, collections.abc.Iterable):
-        if isinstance(lt.head, abjad.Chord):
-            for chord in lt:
-                chord.written_pitches = pitch
-        else:
-            assert isinstance(lt.head, abjad.Note | abjad.Rest)
-            for leaf in lt:
-                chord = abjad.Chord(
-                    pitch,
-                    leaf.written_duration,
-                    multiplier=leaf.multiplier,
-                )
-                abjad.mutate.replace(leaf, chord, wrappers=True)
-            new_lt = abjad.get.logical_tie(chord)
-    else:
-        if isinstance(lt.head, abjad.Note):
-            for note in lt:
-                note.written_pitch = pitch
-        elif set_chord_pitches_equal is True and isinstance(lt.head, abjad.Chord):
-            for chord in lt:
-                for note_head in chord.note_heads:
-                    note_head.written_pitch = pitch
-        else:
-            assert isinstance(lt.head, abjad.Chord | abjad.Rest)
-            for leaf in lt:
-                note = abjad.Note(
-                    pitch,
-                    leaf.written_duration,
-                    multiplier=leaf.multiplier,
-                )
-                abjad.mutate.replace(leaf, note, wrappers=True)
-            new_lt = abjad.get.logical_tie(note)
-    return new_lt
 
 
 @dataclasses.dataclass(slots=True)
@@ -4549,6 +4618,249 @@ class RegisterToOctaveCommand(_command.Command):
         abjad.detach(_enums.NOT_YET_REGISTERED, leaf)
 
 
+class SchemeManifest:
+    """
+    Scheme manifest.
+
+    New functions defined in ``~/baca/lilypond/baca.ily`` must currently be added here by
+    hand.
+
+    TODO: eliminate duplication. Define custom Scheme functions here (``SchemeManifest``)
+    and teach ``SchemeManifest`` to write ``~/baca/lilypond/baca.ily`` automatically.
+    """
+
+    ### CLASS VARIABLES ###
+
+    _dynamics = (
+        ("baca-appena-udibile", "appena udibile"),
+        ("baca-f-but-accents-sffz", "f"),
+        ("baca-f-sub-but-accents-continue-sffz", "f"),
+        ("baca-ffp", "p"),
+        ("baca-fffp", "p"),
+        ("niente", "niente"),
+        ("baca-p-sub-but-accents-continue-sffz", "p"),
+        #
+        ("baca-pppf", "f"),
+        ("baca-pppff", "ff"),
+        ("baca-pppfff", "fff"),
+        #
+        ("baca-ppf", "f"),
+        ("baca-ppff", "ff"),
+        ("baca-ppfff", "fff"),
+        #
+        ("baca-pf", "f"),
+        ("baca-pff", "ff"),
+        ("baca-pfff", "fff"),
+        #
+        ("baca-ppp-ppp", "ppp"),
+        ("baca-ppp-pp", "pp"),
+        ("baca-ppp-p", "p"),
+        ("baca-ppp-mp", "mp"),
+        ("baca-ppp-mf", "mf"),
+        ("baca-ppp-f", "f"),
+        ("baca-ppp-ff", "ff"),
+        ("baca-ppp-fff", "fff"),
+        #
+        ("baca-pp-ppp", "ppp"),
+        ("baca-pp-pp", "pp"),
+        ("baca-pp-p", "p"),
+        ("baca-pp-mp", "mp"),
+        ("baca-pp-mf", "mf"),
+        ("baca-pp-f", "f"),
+        ("baca-pp-ff", "ff"),
+        ("baca-pp-fff", "fff"),
+        #
+        ("baca-p-ppp", "ppp"),
+        ("baca-p-pp", "pp"),
+        ("baca-p-p", "p"),
+        ("baca-p-mp", "mp"),
+        ("baca-p-mf", "mf"),
+        ("baca-p-f", "f"),
+        ("baca-p-ff", "ff"),
+        ("baca-p-fff", "fff"),
+        #
+        ("baca-mp-ppp", "ppp"),
+        ("baca-mp-pp", "pp"),
+        ("baca-mp-p", "p"),
+        ("baca-mp-mp", "mp"),
+        ("baca-mp-mf", "mf"),
+        ("baca-mp-f", "f"),
+        ("baca-mp-ff", "ff"),
+        ("baca-mp-fff", "fff"),
+        #
+        ("baca-mf-ppp", "ppp"),
+        ("baca-mf-pp", "pp"),
+        ("baca-mf-p", "p"),
+        ("baca-mf-mp", "mp"),
+        ("baca-mf-mf", "mf"),
+        ("baca-mf-f", "f"),
+        ("baca-mf-ff", "ff"),
+        ("baca-mf-fff", "fff"),
+        #
+        ("baca-f-ppp", "ppp"),
+        ("baca-f-pp", "pp"),
+        ("baca-f-p", "p"),
+        ("baca-f-mp", "mp"),
+        ("baca-f-mf", "mf"),
+        ("baca-f-f", "f"),
+        ("baca-f-ff", "ff"),
+        ("baca-f-fff", "fff"),
+        #
+        ("baca-ff-ppp", "ppp"),
+        ("baca-ff-pp", "pp"),
+        ("baca-ff-p", "p"),
+        ("baca-ff-mp", "mp"),
+        ("baca-ff-mf", "mf"),
+        ("baca-ff-f", "f"),
+        ("baca-ff-ff", "ff"),
+        ("baca-ff-fff", "fff"),
+        #
+        ("baca-fff-ppp", "ppp"),
+        ("baca-fff-pp", "pp"),
+        ("baca-fff-p", "p"),
+        ("baca-fff-mp", "mp"),
+        ("baca-fff-mf", "mf"),
+        ("baca-fff-f", "f"),
+        ("baca-fff-ff", "ff"),
+        ("baca-fff-fff", "fff"),
+        #
+        ("baca-sff", "ff"),
+        ("baca-sffp", "p"),
+        ("baca-sffpp", "pp"),
+        ("baca-sfffz", "fff"),
+        ("baca-sffz", "ff"),
+        ("baca-sfpp", "pp"),
+        ("baca-sfz-f", "f"),
+        ("baca-sfz-p", "p"),
+    )
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def dynamics(self) -> list[str]:
+        """
+        Gets dynamics.
+
+        ..  container:: example
+
+            >>> scheme_manifest = baca.SchemeManifest()
+            >>> for dynamic in scheme_manifest.dynamics:
+            ...     dynamic
+            ...
+            'baca-appena-udibile'
+            'baca-f-but-accents-sffz'
+            'baca-f-sub-but-accents-continue-sffz'
+            'baca-ffp'
+            'baca-fffp'
+            'niente'
+            'baca-p-sub-but-accents-continue-sffz'
+            'baca-pppf'
+            'baca-pppff'
+            'baca-pppfff'
+            'baca-ppf'
+            'baca-ppff'
+            'baca-ppfff'
+            'baca-pf'
+            'baca-pff'
+            'baca-pfff'
+            'baca-ppp-ppp'
+            'baca-ppp-pp'
+            'baca-ppp-p'
+            'baca-ppp-mp'
+            'baca-ppp-mf'
+            'baca-ppp-f'
+            'baca-ppp-ff'
+            'baca-ppp-fff'
+            'baca-pp-ppp'
+            'baca-pp-pp'
+            'baca-pp-p'
+            'baca-pp-mp'
+            'baca-pp-mf'
+            'baca-pp-f'
+            'baca-pp-ff'
+            'baca-pp-fff'
+            'baca-p-ppp'
+            'baca-p-pp'
+            'baca-p-p'
+            'baca-p-mp'
+            'baca-p-mf'
+            'baca-p-f'
+            'baca-p-ff'
+            'baca-p-fff'
+            'baca-mp-ppp'
+            'baca-mp-pp'
+            'baca-mp-p'
+            'baca-mp-mp'
+            'baca-mp-mf'
+            'baca-mp-f'
+            'baca-mp-ff'
+            'baca-mp-fff'
+            'baca-mf-ppp'
+            'baca-mf-pp'
+            'baca-mf-p'
+            'baca-mf-mp'
+            'baca-mf-mf'
+            'baca-mf-f'
+            'baca-mf-ff'
+            'baca-mf-fff'
+            'baca-f-ppp'
+            'baca-f-pp'
+            'baca-f-p'
+            'baca-f-mp'
+            'baca-f-mf'
+            'baca-f-f'
+            'baca-f-ff'
+            'baca-f-fff'
+            'baca-ff-ppp'
+            'baca-ff-pp'
+            'baca-ff-p'
+            'baca-ff-mp'
+            'baca-ff-mf'
+            'baca-ff-f'
+            'baca-ff-ff'
+            'baca-ff-fff'
+            'baca-fff-ppp'
+            'baca-fff-pp'
+            'baca-fff-p'
+            'baca-fff-mp'
+            'baca-fff-mf'
+            'baca-fff-f'
+            'baca-fff-ff'
+            'baca-fff-fff'
+            'baca-sff'
+            'baca-sffp'
+            'baca-sffpp'
+            'baca-sfffz'
+            'baca-sffz'
+            'baca-sfpp'
+            'baca-sfz-f'
+            'baca-sfz-p'
+
+        """
+        return [_[0] for _ in self._dynamics]
+
+    ### PUBLIC METHODS ###
+
+    def dynamic_to_steady_state(self, dynamic):
+        """
+        Changes ``dynamic`` to steady state.
+
+        ..  container:: example
+
+            >>> scheme_manifest = baca.SchemeManifest()
+            >>> scheme_manifest.dynamic_to_steady_state("sfz-p")
+            'p'
+
+        Returns string.
+        """
+        for dynamic_, steady_state in self._dynamics:
+            if dynamic_ == dynamic:
+                return steady_state
+            if dynamic_ == "baca-" + dynamic:
+                return steady_state
+        raise KeyError(dynamic)
+
+
 @dataclasses.dataclass(slots=True)
 class StaffPositionCommand(_command.Command):
     r"""
@@ -4606,6 +4918,7 @@ class StaffPositionCommand(_command.Command):
     mock: bool = False
     selector: typing.Callable = lambda _: _select.plts(_)
     set_chord_pitches_equal: bool = False
+    _mutated_score: bool = False
 
     def __post_init__(self):
         _command.Command.__post_init__(self)
@@ -4627,52 +4940,16 @@ class StaffPositionCommand(_command.Command):
             return
         if self.selector:
             argument = self.selector(argument)
-        plt_count = 0
-        for i, plt in enumerate(_select.plts(argument)):
-            clef = abjad.get.effective(
-                plt.head,
-                abjad.Clef,
-                default=abjad.Clef("treble"),
-            )
-            number = self.numbers[i]
-            if isinstance(number, list):
-                positions = [abjad.StaffPosition(_) for _ in number]
-                pitches = [_.to_pitch(clef) for _ in positions]
-                new_lt = _set_lt_pitch(
-                    plt,
-                    pitches,
-                    allow_repitch=self.allow_repitch,
-                    mock=self.mock,
-                    set_chord_pitches_equal=self.set_chord_pitches_equal,
-                )
-                if new_lt is not None:
-                    self._mutated_score = True
-                    plt = new_lt
-            else:
-                position = abjad.StaffPosition(number)
-                pitch = clef.to_pitch(position)
-                new_lt = _set_lt_pitch(
-                    plt,
-                    pitch,
-                    allow_repitch=self.allow_repitch,
-                    mock=self.mock,
-                    set_chord_pitches_equal=self.set_chord_pitches_equal,
-                )
-                if new_lt is not None:
-                    self._mutated_score = True
-                    plt = new_lt
-            plt_count += 1
-            for pleaf in plt:
-                abjad.attach(_enums.STAFF_POSITION, pleaf)
-                if self.allow_out_of_range:
-                    abjad.attach(_enums.ALLOW_OUT_OF_RANGE, pleaf)
-                if self.allow_repeats:
-                    abjad.attach(_enums.ALLOW_REPEAT_PITCH, pleaf)
-                    abjad.attach(_enums.DO_NOT_TRANSPOSE, pleaf)
-        if self.exact and plt_count != len(self.numbers):
-            message = f"PLT count ({plt_count}) does not match"
-            message += f" staff position count ({len(self.numbers)})."
-            raise Exception(message)
+        mutated_score = _staff_position_function(
+            argument,
+            self.numbers,
+            allow_out_of_range=self.allow_out_of_range,
+            allow_repeats=self.allow_repeats,
+            allow_repitch=self.allow_repitch,
+            exact=self.exact,
+            set_chord_pitches_equal=self.set_chord_pitches_equal,
+        )
+        self._mutated_score = mutated_score
 
     def _mutates_score(self):
         numbers = self.numbers or []
@@ -5316,6 +5593,406 @@ def displacement(
     return OctaveDisplacementCommand(displacements=displacements, selector=selector)
 
 
+def dynamic(
+    dynamic: str | abjad.Dynamic,
+    *tweaks: abjad.Tweak,
+    map=None,
+    match: _typings.Indices = None,
+    measures: _typings.Slice = None,
+    selector=lambda _: _select.phead(_, 0),
+    redundant: bool = False,
+) -> IndicatorCommand:
+    r"""
+    Attaches dynamic.
+
+    ..  container:: example
+
+        Attaches dynamic to pitched head 0:
+
+        >>> stack = baca.stack(
+        ...     baca.figure(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         restart_talea=True,
+        ...         treatments=[-1],
+        ...     ),
+        ...     rmakers.beam(),
+        ...     baca.dynamic("f"),
+        ...     baca.tuplet_bracket_staff_padding(2),
+        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10
+                    {
+                        \override TupletBracket.staff-padding = 2
+                        \time 11/8
+                        r8
+                        c'16
+                        \f
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10
+                    {
+                        fs''16
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \times 4/5
+                    {
+                        a'16
+                        r4
+                        \revert TupletBracket.staff-padding
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Works with effort dynamics:
+
+        >>> stack = baca.stack(
+        ...     baca.figure(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         restart_talea=True,
+        ...         treatments=[-1],
+        ...     ),
+        ...     rmakers.beam(),
+        ...     baca.dynamic('"f"'),
+        ...     baca.tuplet_bracket_staff_padding(2),
+        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+
+        >>> lilypond_file = abjad.illustrators.selection(
+        ...     selection, includes=["baca.ily"]
+        ... )
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10
+                    {
+                        \override TupletBracket.staff-padding = 2
+                        \time 11/8
+                        r8
+                        c'16
+                        \baca-effort-f
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10
+                    {
+                        fs''16
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \times 4/5
+                    {
+                        a'16
+                        r4
+                        \revert TupletBracket.staff-padding
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Works with hairpins:
+
+        >>> score = baca.docs.make_empty_score(1)
+        >>> commands = baca.CommandAccumulator(
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 13)),
+        ... )
+
+        >>> music = baca.make_even_divisions(commands.get())
+        >>> score["Music"].extend(music)
+        >>> commands(
+        ...     "Music",
+        ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
+        ...     baca.dynamic("p"),
+        ...     baca.dynamic("<"),
+        ...     baca.dynamic(
+        ...         "!",
+        ...         selector=lambda _: baca.select.pleaf(_, -1),
+        ...     ),
+        ...     baca.dls_staff_padding(5),
+        ... )
+
+        >>> _, _ = baca.interpreter(
+        ...     score,
+        ...     commands.commands,
+        ...     commands.time_signatures,
+        ...     move_global_context=True,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
+        ... )
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            {
+                \context Staff = "Staff"
+                <<
+                    \context Voice = "Skips"
+                    {
+                        \baca-new-spacing-section #1 #13
+                        \time 4/8
+                        s1 * 4/8
+                        \baca-new-spacing-section #1 #13
+                        \time 3/8
+                        s1 * 3/8
+                        \baca-new-spacing-section #1 #13
+                        \time 4/8
+                        s1 * 4/8
+                        \baca-new-spacing-section #1 #13
+                        \time 3/8
+                        s1 * 3/8
+                    }
+                    \context Voice = "Music"
+                    {
+                        \override DynamicLineSpanner.staff-padding = 5
+                        e'8
+                        - \tweak color #(x11-color 'blue)
+                        \p
+                        [
+                        \<
+                        d''8
+                        f'8
+                        c''8
+                        ]
+                        g'8
+                        [
+                        f''8
+                        e'8
+                        ]
+                        d''8
+                        [
+                        f'8
+                        c''8
+                        g'8
+                        ]
+                        f''8
+                        [
+                        e'8
+                        d''8
+                        \!
+                        ]
+                        \revert DynamicLineSpanner.staff-padding
+                    }
+                >>
+            }
+
+    ..  container:: example
+
+        Works with tweaks:
+
+        >>> score = baca.docs.make_empty_score(1)
+        >>> commands = baca.CommandAccumulator(
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     commands,
+        ...     commands.manifests(),
+        ...     commands.time_signatures,
+        ...     docs=True,
+        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
+        ... )
+
+        >>> music = baca.make_even_divisions(commands.get())
+        >>> score["Music"].extend(music)
+        >>> commands(
+        ...     "Music",
+        ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
+        ...     baca.dynamic(
+        ...         "p",
+        ...         abjad.Tweak(r"- \tweak extra-offset #'(-4 . 0)"),
+        ...     ),
+        ...     baca.dls_staff_padding(5),
+        ... )
+
+        >>> _, _ = baca.interpreter(
+        ...     score,
+        ...     commands.commands,
+        ...     commands.time_signatures,
+        ...     move_global_context=True,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
+        >>> lilypond_file = baca.make_lilypond_file(
+        ...     score,
+        ...     includes=["baca.ily"],
+        ... )
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            {
+                \context Staff = "Staff"
+                <<
+                    \context Voice = "Skips"
+                    {
+                        \baca-new-spacing-section #1 #12
+                        \time 4/8
+                        s1 * 4/8
+                        \baca-new-spacing-section #1 #12
+                        \time 3/8
+                        s1 * 3/8
+                        \baca-new-spacing-section #1 #12
+                        \time 4/8
+                        s1 * 4/8
+                        \baca-new-spacing-section #1 #12
+                        \time 3/8
+                        s1 * 3/8
+                    }
+                    \context Voice = "Music"
+                    {
+                        \override DynamicLineSpanner.staff-padding = 5
+                        e'8
+                        - \tweak extra-offset #'(-4 . 0)
+                        \p
+                        [
+                        d''8
+                        f'8
+                        c''8
+                        ]
+                        g'8
+                        [
+                        f''8
+                        e'8
+                        ]
+                        d''8
+                        [
+                        f'8
+                        c''8
+                        g'8
+                        ]
+                        f''8
+                        [
+                        e'8
+                        d''8
+                        ]
+                        \revert DynamicLineSpanner.staff-padding
+                    }
+                >>
+            }
+
+    """
+    if isinstance(dynamic, str):
+        indicator = make_dynamic(dynamic)
+    else:
+        indicator = dynamic
+    prototype = (abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin)
+    assert isinstance(indicator, prototype), repr(indicator)
+    indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+    return IndicatorCommand(
+        context="Voice",
+        indicators=[indicator],
+        map=map,
+        match=match,
+        measures=measures,
+        redundant=redundant,
+        selector=selector,
+        tags=[_tags.function_name(_frame())],
+    )
+
+
+def dynamic_function(
+    leaf: abjad.Leaf,
+    dynamic: str | abjad.Dynamic,
+    *tweaks: abjad.Tweak,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(dynamic, str):
+        indicator = make_dynamic(dynamic)
+    else:
+        indicator = dynamic
+    prototype = (abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin)
+    assert isinstance(indicator, prototype), repr(indicator)
+    indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+    # tag = _tags.function_name(_frame())
+    tag = abjad.Tag("baca.dynamic()")
+    for tag_ in tags or []:
+        tag = tag.append(tag_)
+    abjad.attach(
+        indicator,
+        leaf,
+        tag=tag,
+    )
+
+
 def force_accidental(
     selector=lambda _: _select.pleaf(_, 0, exclude=_enums.HIDDEN),
 ) -> AccidentalAdjustmentCommand:
@@ -5608,6 +6285,303 @@ def loop(
     """
     loop = Loop(items=items, intervals=intervals)
     return pitches(loop, selector=selector)
+
+
+def make_dynamic(
+    string: str, *, forbid_al_niente_to_bar_line: bool = False
+) -> abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin | abjad.Bundle:
+    r"""
+    Makes dynamic.
+
+    ..  container:: example
+
+        >>> baca.make_dynamic("p")
+        Dynamic(name='p', command=None, format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+
+        >>> baca.make_dynamic("sffz")
+        Dynamic(name='ff', command='\\baca-sffz', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=3)
+
+        >>> baca.make_dynamic("niente")
+        Dynamic(name='niente', command='\\!', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=NegativeInfinity())
+
+        >>> baca.make_dynamic("<")
+        StartHairpin(shape='<')
+
+        >>> baca.make_dynamic("o<|")
+        StartHairpin(shape='o<|')
+
+        >>> baca.make_dynamic("appena-udibile")
+        Dynamic(name='appena udibile', command='\\baca-appena-udibile', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=None)
+
+    ..  container:: example
+
+        Stop hairpin:
+
+        >>> baca.make_dynamic("!")
+        StopHairpin(leak=False)
+
+    ..  container:: example
+
+        Ancora dynamics:
+
+        >>> baca.make_dynamic("p-ancora")
+        Dynamic(name='p', command='\\baca-p-ancora', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+
+        >>> baca.make_dynamic("f-ancora")
+        Dynamic(name='f', command='\\baca-f-ancora', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+
+    ..  container:: example
+
+        Composite dynamics:
+
+        >>> baca.make_dynamic("pf")
+        Dynamic(name='f', command='\\baca-pf', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=2)
+
+        >>> baca.make_dynamic("pff")
+        Dynamic(name='ff', command='\\baca-pff', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=True, ordinal=3)
+
+    ..  container:: example
+
+        Effort dynamics:
+
+        >>> baca.make_dynamic('"p"')
+        Dynamic(name='"p"', command='\\baca-effort-p', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+
+        >>> baca.make_dynamic('"f"')
+        Dynamic(name='"f"', command='\\baca-effort-f', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+
+    ..  container:: example
+
+        Effort dynamics (parenthesized):
+
+        >>> baca.make_dynamic('("p")')
+        Dynamic(name='p', command='\\baca-effort-p-parenthesized', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+
+        >>> baca.make_dynamic('("f")')
+        Dynamic(name='f', command='\\baca-effort-f-parenthesized', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+
+    ..  container:: example
+
+        Effort dynamics (ancora):
+
+        >>> baca.make_dynamic('"p"-ancora')
+        Dynamic(name='p', command='\\baca-effort-ancora-p', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+
+        >>> baca.make_dynamic('"f"-ancora')
+        Dynamic(name='f', command='\\baca-effort-ancora-f', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+
+    ..  container:: example
+
+        Effort dynamics (sempre):
+
+        >>> baca.make_dynamic('"p"-sempre')
+        Dynamic(name='p', command='\\baca-effort-p-sempre', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+
+        >>> baca.make_dynamic('"f"-sempre')
+        Dynamic(name='f', command='\\baca-effort-f-sempre', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+
+    ..  container:: example
+
+        Sub. effort dynamics:
+
+        >>> baca.make_dynamic("p-effort-sub")
+        Dynamic(name='p', command='\\baca-p-effort-sub', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+
+        >>> baca.make_dynamic("f-effort-sub")
+        Dynamic(name='f', command='\\baca-f-effort-sub', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+
+    ..  container:: example
+
+        Mezzo:
+
+        >>> baca.make_dynamic("m")
+        Dynamic(name='m', command='\\baca-m', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=None)
+
+    ..  container:: example
+
+        Parenthesized dynamics:
+
+        >>> baca.make_dynamic("(p)")
+        Dynamic(name='p', command='\\baca-p-parenthesized', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+
+        >>> baca.make_dynamic("(f)")
+        Dynamic(name='f', command='\\baca-f-parenthesized', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+
+    ..  container:: example
+
+        Poco scratch dynamics:
+
+        >>> baca.make_dynamic("p-poco-scratch")
+        Dynamic(name='p', command='\\baca-p-poco-scratch', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+
+        >>> baca.make_dynamic("f-poco-scratch")
+        Dynamic(name='f', command='\\baca-f-poco-scratch', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+
+    ..  container:: example
+
+        Possibile dynamics:
+
+        >>> baca.make_dynamic("p-poss")
+        Dynamic(name='p', command='\\baca-p-poss', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+
+        >>> baca.make_dynamic("f-poss")
+        Dynamic(name='f', command='\\baca-f-poss', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+
+    ..  container:: example
+
+        Scratch dynamics:
+
+        >>> baca.make_dynamic("p-scratch")
+        Dynamic(name='p', command='\\baca-p-scratch', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+
+        >>> baca.make_dynamic("f-scratch")
+        Dynamic(name='f', command='\\baca-f-scratch', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+
+    ..  container:: example
+
+        Sempre dynamics:
+
+        >>> baca.make_dynamic("p-sempre")
+        Dynamic(name='p', command='\\baca-p-sempre', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+
+        >>> baca.make_dynamic("f-sempre")
+        Dynamic(name='f', command='\\baca-f-sempre', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+
+    ..  container:: example
+
+        Subito dynamics:
+
+        >>> baca.make_dynamic("p-sub")
+        Dynamic(name='p', command='\\baca-p-sub', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+
+        >>> baca.make_dynamic("f-sub")
+        Dynamic(name='f', command='\\baca-f-sub', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+
+    ..  container:: example
+
+        Whiteout dynamics:
+
+        >>> baca.make_dynamic("p-whiteout")
+        Dynamic(name='p', command='\\baca-p-whiteout', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=-2)
+
+        >>> baca.make_dynamic("f-whiteout")
+        Dynamic(name='f', command='\\baca-f-whiteout', format_hairpin_stop=False, hide=False, leak=False, name_is_textual=False, ordinal=2)
+
+    ..  container:: example
+
+        Al niente hairpins are special-cased to carry to-barline tweaks:
+
+        >>> baca.make_dynamic(">o")
+        Bundle(indicator=StartHairpin(shape='>o'), tweaks=(Tweak(string='- \\tweak to-barline ##t', tag=None),))
+
+        >>> baca.make_dynamic("|>o")
+        Bundle(indicator=StartHairpin(shape='|>o'), tweaks=(Tweak(string='- \\tweak to-barline ##t', tag=None),))
+
+    ..  container:: example exception
+
+        Errors on nondynamic input:
+
+        >>> baca.make_dynamic("text")
+        Traceback (most recent call last):
+            ...
+        Exception: the string 'text' initializes no known dynamic.
+
+    """
+    assert isinstance(string, str), repr(string)
+    scheme_manifest = SchemeManifest()
+    known_shapes = abjad.StartHairpin("<").known_shapes
+    indicator: abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin | abjad.Bundle
+    if "_" in string:
+        raise Exception(f"use hyphens instead of underscores ({string!r}).")
+    if string == "niente":
+        indicator = abjad.Dynamic("niente", command=r"\!")
+    elif string.endswith("-ancora") and '"' not in string:
+        dynamic = string.split("-")[0]
+        command = rf"\baca-{dynamic}-ancora"
+        indicator = abjad.Dynamic(dynamic, command=command)
+    elif string.endswith("-ancora") and '"' in string:
+        dynamic = string.split("-")[0]
+        dynamic = dynamic.strip('"')
+        command = rf"\baca-effort-ancora-{dynamic}"
+        indicator = abjad.Dynamic(dynamic, command=command)
+    elif string.endswith("-effort-sub"):
+        dynamic = string.split("-")[0]
+        command = rf"\baca-{dynamic}-effort-sub"
+        indicator = abjad.Dynamic(dynamic, command=command)
+    elif string.startswith('("') and string.endswith('")'):
+        dynamic = string.strip('(")')
+        command = rf"\baca-effort-{dynamic}-parenthesized"
+        indicator = abjad.Dynamic(dynamic, command=command)
+    elif string.startswith("(") and string.endswith(")"):
+        dynamic = string.strip("()")
+        command = rf"\baca-{dynamic}-parenthesized"
+        indicator = abjad.Dynamic(dynamic, command=command)
+    elif string.endswith("-poco-scratch"):
+        dynamic = string.split("-")[0]
+        command = rf"\baca-{dynamic}-poco-scratch"
+        indicator = abjad.Dynamic(dynamic, command=command)
+    elif string.endswith("-poss"):
+        dynamic = string.split("-")[0]
+        command = rf"\baca-{dynamic}-poss"
+        indicator = abjad.Dynamic(dynamic, command=command)
+    elif string.endswith("-scratch"):
+        dynamic = string.split("-")[0]
+        command = rf"\baca-{dynamic}-scratch"
+        indicator = abjad.Dynamic(dynamic, command=command)
+    elif string.endswith("-sempre") and not string.startswith('"'):
+        dynamic = string.split("-")[0]
+        command = rf"\baca-{dynamic}-sempre"
+        indicator = abjad.Dynamic(dynamic, command=command)
+    elif string.endswith("-sempre") and string.startswith('"'):
+        dynamic = string.split("-")[0].strip('"')
+        command = rf"\baca-effort-{dynamic}-sempre"
+        indicator = abjad.Dynamic(dynamic, command=command)
+    elif string.endswith("-sub"):
+        dynamic = string.split("-")[0]
+        command = rf"\baca-{dynamic}-sub"
+        indicator = abjad.Dynamic(dynamic, command=command)
+    elif string.endswith("-whiteout"):
+        dynamic = string.split("-")[0]
+        command = rf"\baca-{dynamic}-whiteout"
+        indicator = abjad.Dynamic(dynamic, command=command)
+    elif "baca-" + string in scheme_manifest.dynamics:
+        name = scheme_manifest.dynamic_to_steady_state(string)
+        command = "\\baca-" + string
+        pieces = string.split("-")
+        if pieces[0] in ("sfz", "sffz", "sfffz"):
+            sforzando = True
+        else:
+            sforzando = False
+        name_is_textual = not (sforzando)
+        indicator = abjad.Dynamic(
+            name,
+            command=command,
+            name_is_textual=name_is_textual,
+        )
+    elif string.startswith('"'):
+        assert string.endswith('"')
+        stripped_string = string.strip('"')
+        command = rf"\baca-effort-{stripped_string}"
+        indicator = abjad.Dynamic(f"{string}", command=command)
+    elif string in known_shapes:
+        indicator = abjad.StartHairpin(string)
+        if string.endswith(">o") and not forbid_al_niente_to_bar_line:
+            indicator = abjad.bundle(indicator, r"- \tweak to-barline ##t")
+    elif string == "!":
+        indicator = abjad.StopHairpin()
+    elif string == "m":
+        indicator = abjad.Dynamic("m", command=r"\baca-m")
+    else:
+        failed = False
+        try:
+            indicator = abjad.Dynamic(string)
+        except Exception:
+            failed = True
+        if failed:
+            raise Exception(f"the string {string!r} initializes no known dynamic.")
+    prototype = (abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin, abjad.Bundle)
+    assert isinstance(indicator, prototype), repr(indicator)
+    return indicator
 
 
 def natural_clusters(
@@ -6313,7 +7287,32 @@ def staff_position(
     )
 
 
-_staff_position_function = staff_position
+def staff_position_function(
+    components: typing.Iterable[abjad.Component],
+    numbers: int | list | abjad.StaffPosition,
+    *,
+    allow_out_of_range: bool = False,
+    allow_repitch: bool = False,
+    mock: bool = False,
+    set_chord_pitches_equal: bool = False,
+) -> bool:
+    assert all(isinstance(_, abjad.Component) for _ in components), repr(components)
+    assert isinstance(numbers, int | list | abjad.StaffPosition), repr(numbers)
+    if isinstance(numbers, list):
+        assert all(isinstance(_, int | abjad.StaffPosition) for _ in numbers)
+    mutated_score = _staff_position_function(
+        components,
+        [numbers],
+        allow_out_of_range=allow_out_of_range,
+        allow_repeats=True,
+        allow_repitch=allow_repitch,
+        mock=mock,
+        set_chord_pitches_equal=set_chord_pitches_equal,
+    )
+    return mutated_score
+
+
+_staff_position_command = staff_position
 
 
 def staff_positions(
@@ -6688,7 +7687,6 @@ def alternate_bow_strokes(
         indicators=indicators,
         selector=selector,
         tags=[_tags.function_name(_frame())],
-        # tweaks=tweaks,
     )
 
 
@@ -6845,7 +7843,6 @@ def breathe(
         indicators=[indicator],
         selector=selector,
         tags=[_tags.function_name(_frame())],
-        # tweaks=tweaks,
     )
 
 
@@ -6985,7 +7982,6 @@ def damp(
         indicators=[indicator],
         selector=selector,
         tags=[_tags.function_name(_frame())],
-        # tweaks=tweaks,
     )
 
 
@@ -7339,7 +8335,30 @@ def down_bow(
         indicators=[indicator],
         selector=selector,
         tags=[_tags.function_name(_frame())],
-        # tweaks=tweaks,
+    )
+
+
+def down_bow_function(
+    leaf: abjad.Leaf,
+    *tweaks: abjad.Tweak,
+    full: bool = False,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    assert isinstance(leaf, abjad.Leaf), repr(leaf)
+    indicator: abjad.Articulation | abjad.Bundle
+    if full:
+        indicator = abjad.Articulation("baca-full-downbow")
+    else:
+        indicator = abjad.Articulation("downbow")
+    indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+    # tag = _tags.function_name(_frame())
+    tag = abjad.Tag("baca.down_bow()")
+    for tag_ in tags or []:
+        tag = tag.append(tag_)
+    abjad.attach(
+        indicator,
+        leaf,
+        tag=tag,
     )
 
 
@@ -7429,7 +8448,6 @@ def espressivo(
         indicators=[indicator],
         selector=selector,
         tags=[_tags.function_name(_frame())],
-        # tweaks=tweaks,
     )
 
 
@@ -7849,13 +8867,18 @@ def literal_function(
     string: str | list[str],
     *,
     site: str = "before",
+    tags: list[abjad.Tag] = None,
 ) -> None:
     assert isinstance(leaf, abjad.Leaf), repr(leaf)
     indicator = abjad.LilyPondLiteral(string, site=site)
+    # tag = _tags.function_name(_frame())
+    tag = abjad.Tag("baca.literal()")
+    for tag_ in tags or []:
+        tag = tag.append(tag_)
     abjad.attach(
         indicator,
         leaf,
-        tag=_tags.function_name(_frame()),
+        tag=tag,
     )
 
 
@@ -8161,11 +9184,11 @@ def mark(
 ) -> IndicatorCommand:
     assert isinstance(argument, abjad.Markup | str), repr(argument)
     rehearsal_mark = abjad.RehearsalMark(markup=argument)
+    rehearsal_mark = _tweaks.bundle_tweaks(rehearsal_mark, tweaks)
     return IndicatorCommand(
         indicators=[rehearsal_mark],
         selector=selector,
         tags=[_tags.function_name(_frame())],
-        tweaks=tweaks,
     )
 
 
@@ -9777,7 +10800,6 @@ def up_bow(
         indicators=[indicator],
         selector=selector,
         tags=[_tags.function_name(_frame())],
-        # tweaks=tweaks,
     )
 
 
@@ -10927,13 +11949,13 @@ def flat_glissando(
         if isinstance(pitch, abjad.StaffPosition) or (
             isinstance(pitch, list) and isinstance(pitch[0], abjad.StaffPosition)
         ):
-            staff_position_command = _staff_position_function(
+            staff_position_command_object = _staff_position_command(
                 pitch,
                 allow_repitch=allow_repitch,
                 mock=mock,
                 selector=new_selector,
             )
-            commands.append(staff_position_command)
+            commands.append(staff_position_command_object)
         else:
             pitch_command = _pitch_function(
                 pitch,
@@ -11883,7 +12905,6 @@ def markup(
         measures=measures,
         selector=selector,
         tags=[_tags.function_name(_frame())],
-        # tweaks=tweaks,
     )
 
 
@@ -11910,16 +12931,15 @@ def markup_function(
         raise Exception(message)
     if tweaks:
         indicator = abjad.bundle(indicator, *tweaks)
+    # TODO: swap tag to baca.markup() during refactor
     tag = _tags.function_name(_frame())
+    # tag = abjad.Tag("baca.markup()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
     abjad.attach(
         indicator,
         leaf,
-        # context=self.context,
-        # deactivate=self.deactivate,
         direction=direction,
-        # do_not_test=self.do_not_test,
         tag=tag,
     )
 

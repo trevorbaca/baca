@@ -17,9 +17,6 @@ from . import typings as _typings
 
 @dataclasses.dataclass
 class SpannerIndicatorCommand(_command.Command):
-    """
-    Spanner indicator command.
-    """
 
     detach_first: bool = False
     direction: int | None = None
@@ -108,6 +105,28 @@ class SpannerIndicatorCommand(_command.Command):
         if _treat.compare_persistent_indicators(indicator, reapplied):
             status = "redundant"
             _treat.treat_persistent_wrapper(self.runtime["manifests"], wrapper, status)
+
+
+def _attach_start_stop_indicators(
+    leaves, tag, start_indicator=None, stop_indicator=None
+):
+    assert isinstance(tag, abjad.Tag), repr(tag)
+    if start_indicator is not None:
+        first_leaf = leaves[0]
+        here = _tags.function_name(_frame(), n=2)
+        abjad.attach(
+            start_indicator,
+            first_leaf,
+            tag=tag.append(_tags.SPANNER_START).append(here),
+        )
+    if stop_indicator is not None:
+        final_leaf = leaves[-1]
+        here = _tags.function_name(_frame(), n=4)
+        abjad.attach(
+            stop_indicator,
+            final_leaf,
+            tag=tag.append(_tags.SPANNER_STOP).append(here),
+        )
 
 
 def beam(
@@ -502,6 +521,34 @@ def slur(
         stop_indicator=stop_slur_,
         tags=[_tags.function_name(_frame())],
         tweaks=tweaks,
+    )
+
+
+def slur_function(
+    leaves: typing.Sequence[abjad.Leaf],
+    *tweaks: abjad.Tweak,
+    phrasing_slur: bool = False,
+    start_slur: abjad.StartSlur = None,
+    stop_slur: abjad.StopSlur = None,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
+    if phrasing_slur is True:
+        start_slur_ = start_slur or abjad.StartPhrasingSlur()
+        stop_slur_ = stop_slur or abjad.StopPhrasingSlur()
+    else:
+        start_slur_ = start_slur or abjad.StartSlur()
+        stop_slur_ = stop_slur or abjad.StopSlur()
+    start_slur_ = _tweaks.bundle_tweaks(start_slur_, tweaks)
+    stop_slur_ = _tweaks.bundle_tweaks(stop_slur_, tweaks)
+    tag = abjad.Tag("baca.slur()")
+    for tag_ in tags or []:
+        tag = tag.append(tag_)
+    _attach_start_stop_indicators(
+        leaves,
+        tag,
+        start_indicator=start_slur_,
+        stop_indicator=stop_slur_,
     )
 
 

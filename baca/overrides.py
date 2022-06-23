@@ -576,9 +576,6 @@ def clef_extra_offset(
     pair: tuple[int | float, int | float],
     selector=lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
-    """
-    Overrides clef extra offset.
-    """
     return OverrideCommand(
         attribute="extra_offset",
         context="Staff",
@@ -589,13 +586,47 @@ def clef_extra_offset(
     )
 
 
+# HERE
+def clef_extra_offset_function(
+    argument,
+    pair: tuple[int | float, int | float],
+    *,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    #    return OverrideCommand(
+    #        attribute="extra_offset",
+    #        context="Staff",
+    #        grob="Clef",
+    #        selector=selector,
+    #        tags=[_tags.function_name(_frame())],
+    #        value=f"#'({pair[0]} . {pair[1]})",
+    #    )
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _call_override_command(
+        leaves,
+        "Clef",
+        "extra_offset",
+        f"#'({pair[0]} . {pair[1]})",
+        first_tag,
+        final_tag,
+        context="Staff",
+    )
+
+
 def clef_shift(
     clef: str | abjad.Clef,
     selector=lambda _: abjad.select.leaf(_, 0),
 ) -> _command.Suite:
-    """
-    Shifts clef to left by width of clef.
-    """
     extra_offset_x: int | float
     if isinstance(clef, str):
         clef = abjad.Clef(clef)
@@ -611,6 +642,31 @@ def clef_shift(
     _command.tag(_tags.function_name(_frame()), suite)
     _command.tag(_tags.SHIFTED_CLEF, suite, tag_measure_number=True)
     return suite
+
+
+def clef_shift_function(
+    leaf,
+    clef: str | abjad.Clef,
+    first_measure_number: int,
+) -> None:
+    assert isinstance(leaf, abjad.Leaf), repr(leaf)
+    measure_number = abjad.get.measure_number(leaf)
+    measure_number += first_measure_number - 1
+    measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
+    clef_x_extent_false_function(leaf, tags=[_tags.SHIFTED_CLEF, measure_number_tag])
+    extra_offset_x: int | float
+    if isinstance(clef, str):
+        clef = abjad.Clef(clef)
+    if isinstance(clef, int | float):
+        extra_offset_x = clef
+    else:
+        assert isinstance(clef, abjad.Clef)
+        width = clef._to_width[clef.name]
+        extra_offset_x = -width
+    pair = (extra_offset_x, 0)
+    clef_extra_offset_function(
+        leaf, pair, tags=[_tags.SHIFTED_CLEF, measure_number_tag]
+    )
 
 
 def clef_whiteout(
@@ -643,6 +699,33 @@ def clef_x_extent_false(
         selector=selector,
         tags=[_tags.function_name(_frame())],
         value=False,
+    )
+
+
+def clef_x_extent_false_function(
+    argument,
+    *,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _call_override_command(
+        leaves,
+        "Clef",
+        "X_extent",
+        False,
+        first_tag,
+        final_tag,
+        context="Staff",
     )
 
 

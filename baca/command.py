@@ -31,6 +31,7 @@ class Command:
     _tags: list[abjad.Tag] = dataclasses.field(init=False, repr=False)
 
     def __post_init__(self):
+        # raise Exception("ASDF")
         if self.selector is not None:
             assert callable(self.selector)
         self.tags = list(self.tags or [])
