@@ -2504,6 +2504,77 @@ class OctaveDisplacementCommand(_command.Command):
         return False
 
 
+def _do_pitch_command(
+    argument,
+    cyclic,
+    pitches,
+    *,
+    allow_octaves: bool = False,
+    allow_out_of_range: bool = False,
+    allow_repeats: bool = False,
+    allow_repitch: bool = False,
+    do_not_transpose: bool = False,
+    mock: bool = False,
+    previous_pitches_consumed: int = 0,
+) -> tuple[int, bool]:
+    assert isinstance(previous_pitches_consumed, int)
+    pitches = _coerce_pitches(pitches)
+    plts = []
+    for pleaf in _select.pleaves(argument):
+        plt = abjad.get.logical_tie(pleaf)
+        if plt.head is pleaf:
+            plts.append(plt)
+    # if not self.cyclic:
+    if not cyclic:
+        # if len(self.pitches) < len(plts):
+        if len(pitches) < len(plts):
+            # message = f"only {len(self.pitches)} pitches"
+            message = f"only {len(pitches)} pitches"
+            message += f" for {len(plts)} logical ties:\n\n"
+            message += f"{pitches!r} and {plts!r}."
+            raise Exception(message)
+    # pitches = self.pitches
+    # if self.cyclic and not isinstance(pitches, abjad.CyclicTuple):
+    if cyclic and not isinstance(pitches, abjad.CyclicTuple):
+        pitches = abjad.CyclicTuple(pitches)
+    # previous_pitches_consumed = self._previous_pitches_consumed()
+    # if self.cyclic and not isinstance(pitches, abjad.CyclicTuple):
+    #     pitches = abjad.CyclicTuple(pitches)
+    pitches_consumed = 0
+    mutated_score = False
+    for i, plt in enumerate(plts):
+        pitch = pitches[i + previous_pitches_consumed]
+        new_plt = _set_lt_pitch(
+            # plt, pitch, allow_repitch=self.allow_repitch, mock=self.mock
+            plt,
+            pitch,
+            allow_repitch=allow_repitch,
+            mock=mock,
+        )
+        if new_plt is not None:
+            # self._mutated_score = True
+            mutated_score = True
+            plt = new_plt
+        # if self.allow_octaves:
+        if allow_octaves:
+            for pleaf in plt:
+                abjad.attach(_enums.ALLOW_OCTAVE, pleaf)
+        # if self.allow_out_of_range:
+        if allow_out_of_range:
+            for pleaf in plt:
+                abjad.attach(_enums.ALLOW_OUT_OF_RANGE, pleaf)
+        # if self.allow_repeats:
+        if allow_repeats:
+            for pleaf in plt:
+                abjad.attach(_enums.ALLOW_REPEAT_PITCH, pleaf)
+        # if self.do_not_transpose is True:
+        if do_not_transpose is True:
+            for pleaf in plt:
+                abjad.attach(_enums.DO_NOT_TRANSPOSE, pleaf)
+        pitches_consumed += 1
+    return pitches_consumed, mutated_score
+
+
 @dataclasses.dataclass(slots=True)
 class PitchCommand(_command.Command):
     r"""
@@ -2828,52 +2899,23 @@ class PitchCommand(_command.Command):
             argument = self.selector(argument)
         if not argument:
             return
-        plts = []
-        for pleaf in _select.pleaves(argument):
-            plt = abjad.get.logical_tie(pleaf)
-            if plt.head is pleaf:
-                plts.append(plt)
-        self._check_length(plts)
-        pitches = self.pitches
-        if self.cyclic and not isinstance(pitches, abjad.CyclicTuple):
-            pitches = abjad.CyclicTuple(pitches)
         previous_pitches_consumed = self._previous_pitches_consumed()
-        if self.cyclic and not isinstance(pitches, abjad.CyclicTuple):
-            pitches = abjad.CyclicTuple(pitches)
-        pitches_consumed = 0
-        for i, plt in enumerate(plts):
-            pitch = pitches[i + previous_pitches_consumed]
-            new_plt = _set_lt_pitch(
-                plt, pitch, allow_repitch=self.allow_repitch, mock=self.mock
-            )
-            if new_plt is not None:
-                self._mutated_score = True
-                plt = new_plt
-            if self.allow_octaves:
-                for pleaf in plt:
-                    abjad.attach(_enums.ALLOW_OCTAVE, pleaf)
-            if self.allow_out_of_range:
-                for pleaf in plt:
-                    abjad.attach(_enums.ALLOW_OUT_OF_RANGE, pleaf)
-            if self.allow_repeats:
-                for pleaf in plt:
-                    abjad.attach(_enums.ALLOW_REPEAT_PITCH, pleaf)
-            if self.do_not_transpose is True:
-                for pleaf in plt:
-                    abjad.attach(_enums.DO_NOT_TRANSPOSE, pleaf)
-            pitches_consumed += 1
+        pitches_consumed, mutated_score = _do_pitch_command(
+            argument,
+            self.cyclic,
+            self.pitches,
+            allow_octaves=self.allow_octaves,
+            allow_out_of_range=self.allow_out_of_range,
+            allow_repeats=self.allow_repeats,
+            allow_repitch=self.allow_repitch,
+            do_not_transpose=self.do_not_transpose,
+            mock=self.mock,
+            previous_pitches_consumed=previous_pitches_consumed,
+        )
         self._state = {}
         pitches_consumed += previous_pitches_consumed
         self.state["pitches_consumed"] = pitches_consumed
-
-    def _check_length(self, plts):
-        if self.cyclic:
-            return
-        if len(self.pitches) < len(plts):
-            message = f"only {len(self.pitches)} pitches"
-            message += f" for {len(plts)} logical ties:\n\n"
-            message += f"{self!r} and {plts!r}."
-            raise Exception(message)
+        self._mutated_score = mutated_score
 
     def _mutates_score(self):
         pitches = self.pitches or []
@@ -6711,7 +6753,7 @@ def pitch(
     )
 
 
-_pitch_function = pitch
+_pitch_command_factory = pitch
 
 
 def pitches(
@@ -6753,6 +6795,47 @@ def pitches(
         pitches=pitches,
         selector=selector,
     )
+
+
+def pitches_function(
+    argument,
+    pitches,
+    *,
+    allow_octaves: bool = False,
+    allow_repeats: bool = False,
+    allow_repitch: bool = False,
+    mock: bool = False,
+    do_not_transpose: bool = False,
+    exact: bool = False,
+    ignore_incomplete: bool = False,
+    persist: str = None,
+) -> bool:
+    if do_not_transpose not in (None, True, False):
+        raise Exception(f"do_not_transpose must be boolean (not {do_not_transpose!r}).")
+    if bool(exact):
+        cyclic = False
+    else:
+        cyclic = True
+    if ignore_incomplete not in (None, True, False):
+        raise Exception(
+            f"ignore_incomplete must be boolean (not {ignore_incomplete!r})."
+        )
+    if ignore_incomplete is True and not persist:
+        raise Exception("ignore_incomplete is ignored when persist is not set.")
+    if persist is not None and not isinstance(persist, str):
+        raise Exception(f"persist name must be string (not {persist!r}).")
+    result = _do_pitch_command(
+        argument,
+        cyclic,
+        pitches,
+        allow_octaves=allow_octaves,
+        allow_repeats=allow_repeats,
+        allow_repitch=allow_repitch,
+        do_not_transpose=do_not_transpose,
+        mock=mock,
+    )
+    pitches_consumed, mutated_score = result
+    return mutated_score
 
 
 def register(
@@ -10107,19 +10190,24 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
     return _command.suite(command_1, command_2)
 
 
-def staff_lines_function(leaf: abjad.Leaf, n: int) -> None:
-    assert isinstance(leaf, abjad.Leaf), repr(leaf)
+# TODO: redo with _do_indicator_command()
+# def staff_lines_function(leaf: abjad.Leaf, n: int) -> None:
+def staff_lines_function(argument, n: int) -> None:
+    # assert isinstance(leaf, abjad.Leaf), repr(leaf)
     assert isinstance(n, int), repr(n)
+    first_leaf = abjad.select.leaf(argument, 0)
     bar_extent = _indicators.BarExtent(n)
     abjad.attach(
         bar_extent,
-        leaf,
+        # leaf,
+        first_leaf,
         tag=_tags.NOT_PARTS,
     )
     staff_lines = _indicators.StaffLines(n)
     abjad.attach(
         staff_lines,
-        leaf,
+        # leaf,
+        first_leaf,
         # tag=_tags.function_name(_frame()),
         tag=abjad.Tag("baca.staff_lines()"),
     )
@@ -11957,13 +12045,13 @@ def flat_glissando(
             )
             commands.append(staff_position_command_object)
         else:
-            pitch_command = _pitch_function(
+            pitch_command_object = _pitch_command_factory(
                 pitch,
                 allow_repitch=allow_repitch,
                 mock=mock,
                 selector=new_selector,
             )
-            commands.append(pitch_command)
+            commands.append(pitch_command_object)
     elif pitch is not None and stop_pitch is not None:
         if isinstance(pitch, abjad.StaffPosition):
             assert isinstance(stop_pitch, abjad.StaffPosition)
@@ -12931,9 +13019,8 @@ def markup_function(
         raise Exception(message)
     if tweaks:
         indicator = abjad.bundle(indicator, *tweaks)
-    # TODO: swap tag to baca.markup() during refactor
-    tag = _tags.function_name(_frame())
-    # tag = abjad.Tag("baca.markup()")
+    # tag = _tags.function_name(_frame())
+    tag = abjad.Tag("baca.markup()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
     abjad.attach(

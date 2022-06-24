@@ -23,6 +23,8 @@ from .figures import *
 from .indicators import *
 from .interpret import (
     append_anchor_note,
+    append_anchor_note_function,
+    getter,
     interpreter,
     make_lilypond_file,
     reapply,

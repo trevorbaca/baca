@@ -2574,64 +2574,65 @@ def _whitespace_leaves(score):
         abjad.attach(literal, container, tag=None)
 
 
-def append_anchor_note() -> _commands.GenericCommand:
-    def function(argument, *, runtime=None):
-        leaf = abjad.get.leaf(argument, 0)
-        parentage = abjad.get.parentage(leaf)
-        voice = parentage.get(abjad.Voice, n=-1)
-        tag = abjad.Tag("baca.append_anchor_note(1)")
-        tag = tag.append(_tags.ANCHOR_NOTE)
-        tag = tag.append(_tags.HIDDEN)
-        tag = tag.append(_tags.NOTE)
-        note = abjad.Note("c'1", multiplier=(1, 4), tag=tag)
-        abjad.attach(_enums.ANCHOR_NOTE, note)
-        abjad.attach(_enums.HIDDEN, note)
-        abjad.attach(_enums.NOT_YET_PITCHED, note)
-        abjad.attach(_enums.NOTE, note)
-        #
-        tag = abjad.Tag("baca.append_anchor_note(2)")
-        tag = tag.append(_tags.ANCHOR_NOTE)
-        tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
-        tag = tag.append(_tags.NOTE)
-        abjad.attach(
-            abjad.LilyPondLiteral(r"\abjad-invisible-music-coloring", site="before"),
-            note,
-            tag=tag,
-        )
-        #
-        tag = abjad.Tag("baca.append_anchor_note(3)")
-        tag = tag.append(_tags.ANCHOR_NOTE)
-        tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
-        tag = tag.append(_tags.NOTE)
-        abjad.attach(
-            abjad.LilyPondLiteral(r"\abjad-invisible-music", site="before"),
-            note,
-            deactivate=True,
-            tag=tag,
-        )
-        #
-        abjad.attach(
-            abjad.LilyPondLiteral(
-                [
-                    r"\stopStaff",
-                    r"\once \override Staff.StaffSymbol.transparent = ##t",
-                    r"\startStaff",
-                ]
-            ),
-            note,
-            tag=abjad.Tag("baca.append_anchor_note(4)"),
-        )
-        #
-        abjad.attach(
-            # TODO: use override object once they exist and can be tagged
-            abjad.LilyPondLiteral(r"\once \override Accidental.stencil = ##f"),
-            note,
-            tag=abjad.Tag("baca.append_anchor_note(5)"),
-        )
-        #
-        voice.append(note)
+def append_anchor_note_function(argument, *, runtime=None):
+    leaf = abjad.get.leaf(argument, 0)
+    parentage = abjad.get.parentage(leaf)
+    voice = parentage.get(abjad.Voice, n=-1)
+    tag = abjad.Tag("baca.append_anchor_note(1)")
+    tag = tag.append(_tags.ANCHOR_NOTE)
+    tag = tag.append(_tags.HIDDEN)
+    tag = tag.append(_tags.NOTE)
+    note = abjad.Note("c'1", multiplier=(1, 4), tag=tag)
+    abjad.attach(_enums.ANCHOR_NOTE, note)
+    abjad.attach(_enums.HIDDEN, note)
+    abjad.attach(_enums.NOT_YET_PITCHED, note)
+    abjad.attach(_enums.NOTE, note)
+    #
+    tag = abjad.Tag("baca.append_anchor_note(2)")
+    tag = tag.append(_tags.ANCHOR_NOTE)
+    tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
+    tag = tag.append(_tags.NOTE)
+    abjad.attach(
+        abjad.LilyPondLiteral(r"\abjad-invisible-music-coloring", site="before"),
+        note,
+        tag=tag,
+    )
+    #
+    tag = abjad.Tag("baca.append_anchor_note(3)")
+    tag = tag.append(_tags.ANCHOR_NOTE)
+    tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
+    tag = tag.append(_tags.NOTE)
+    abjad.attach(
+        abjad.LilyPondLiteral(r"\abjad-invisible-music", site="before"),
+        note,
+        deactivate=True,
+        tag=tag,
+    )
+    #
+    abjad.attach(
+        abjad.LilyPondLiteral(
+            [
+                r"\stopStaff",
+                r"\once \override Staff.StaffSymbol.transparent = ##t",
+                r"\startStaff",
+            ]
+        ),
+        note,
+        tag=abjad.Tag("baca.append_anchor_note(4)"),
+    )
+    #
+    abjad.attach(
+        # TODO: use override object once they exist and can be tagged
+        abjad.LilyPondLiteral(r"\once \override Accidental.stencil = ##f"),
+        note,
+        tag=abjad.Tag("baca.append_anchor_note(5)"),
+    )
+    #
+    voice.append(note)
 
-    command = _commands.GenericCommand(function=function)
+
+def append_anchor_note() -> _commands.GenericCommand:
+    command = _commands.GenericCommand(function=append_anchor_note_function)
     return command
 
 
@@ -2665,6 +2666,20 @@ def color_repeat_pitch_classes(score):
             string = r"\baca-repeat-pitch-class-coloring"
             literal = abjad.LilyPondLiteral(string, site="before")
             abjad.attach(literal, leaf, tag=tag)
+
+
+def getter(cache, argument):
+    if isinstance(argument, int):
+        return cache[argument]
+    result = []
+    assert isinstance(argument, tuple), repr(argument)
+    start, stop = argument
+    assert 0 < start, repr(start)
+    assert 0 < stop, repr(stop)
+    for number in range(start, stop + 1):
+        leaves = cache[number]
+        result.extend(leaves)
+    return result
 
 
 def interpreter(

@@ -2,6 +2,8 @@ import typing
 
 import abjad
 
+from .enums import enums as _enums
+
 
 def _handle_pair(selection, pair):
     if isinstance(pair, tuple):
@@ -4212,9 +4214,16 @@ def rruns(argument, *, exclude: abjad.typings.Exclude = None) -> list[list[abjad
 
 def runs(argument, *, exclude=None, rleak=False):
     result = abjad.select.runs(argument, exclude=exclude)
-    # result = _handle_pair(result, pair)
     if rleak is True:
         result = abjad.select.with_next_leaf(result)
+    return result
+
+
+def shown(argument):
+    result = []
+    for component in argument:
+        if not abjad.get.has_indicator(component, _enums.HIDDEN):
+            result.append(component)
     return result
 
 
