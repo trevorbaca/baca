@@ -1068,29 +1068,58 @@ class IndicatorCommand(_command.Command):
             argument = self.selector(argument)
         if not argument:
             return
-        leaves = abjad.select.leaves(argument)
-        for i, leaf in enumerate(leaves):
-            if self.predicate and not self.predicate(leaf):
-                continue
-            indicators = self.indicators[i]
-            indicators = _token_to_indicators(indicators)
-            for indicator in indicators:
-                reapplied = _treat.remove_reapplied_wrappers(leaf, indicator)
-                wrapper = abjad.attach(
-                    indicator,
-                    leaf,
-                    context=self.context,
-                    deactivate=self.deactivate,
-                    direction=self.direction,
-                    do_not_test=self.do_not_test,
-                    tag=self.tag.append(_tags.function_name(_frame(), self)),
-                    wrapper=True,
-                )
-                if _treat.compare_persistent_indicators(indicator, reapplied):
-                    status = "redundant"
-                    _treat.treat_persistent_wrapper(
-                        self.runtime["manifests"], wrapper, status
-                    )
+        _do_indicator_command(
+            argument,
+            self.indicators,
+            context=self.context,
+            do_not_test=self.do_not_test,
+            deactivate=self.deactivate,
+            direction=self.direction,
+            manifests=self.runtime.get("manifests", {}),
+            predicate=self.predicate,
+            tag=self.tag,
+        )
+
+
+def _do_indicator_command(
+    argument,
+    indicators,
+    *,
+    context=None,
+    do_not_test=False,
+    deactivate=False,
+    direction=None,
+    manifests=None,
+    predicate=None,
+    tag=None,
+):
+    assert isinstance(manifests, dict), repr(manifests)
+    if isinstance(indicators, collections.abc.Iterable):
+        cyclic_indicators = abjad.CyclicTuple(indicators)
+    else:
+        cyclic_indicators = abjad.CyclicTuple([indicators])
+    leaves = abjad.select.leaves(argument)
+    # tag = tag.append(_tags.function_name(_frame()))
+    tag = tag.append(abjad.Tag("baca.IndicatorCommand._call()"))
+    for i, leaf in enumerate(leaves):
+        if predicate and not predicate(leaf):
+            continue
+        indicators = cyclic_indicators[i]
+        indicators = _token_to_indicators(indicators)
+        for indicator in indicators:
+            reapplied = _treat.remove_reapplied_wrappers(leaf, indicator)
+            wrapper = abjad.attach(
+                indicator,
+                leaf,
+                context=context,
+                deactivate=deactivate,
+                direction=direction,
+                do_not_test=do_not_test,
+                tag=tag,
+                wrapper=True,
+            )
+            if _treat.compare_persistent_indicators(indicator, reapplied):
+                _treat.treat_persistent_wrapper(manifests, wrapper, "redundant")
 
 
 @dataclasses.dataclass(slots=True)
@@ -10178,38 +10207,32 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
     command_1 = IndicatorCommand(
         indicators=[_indicators.BarExtent(n)],
         selector=selector,
-        # TODO: tag with frame n=1
-        tags=[_tags.NOT_PARTS],
+        tags=[_tags.function_name(_frame(), n=1), _tags.NOT_PARTS],
     )
     command_2 = IndicatorCommand(
         indicators=[_indicators.StaffLines(n)],
         selector=selector,
-        # TODO: tag with frame n=2
-        tags=[_tags.function_name(_frame())],
+        tags=[_tags.function_name(_frame(), n=2)],
     )
     return _command.suite(command_1, command_2)
 
 
-# TODO: redo with _do_indicator_command()
-# def staff_lines_function(leaf: abjad.Leaf, n: int) -> None:
-def staff_lines_function(argument, n: int) -> None:
-    # assert isinstance(leaf, abjad.Leaf), repr(leaf)
+def staff_lines_function(argument, n: int, manifests: dict) -> None:
     assert isinstance(n, int), repr(n)
-    first_leaf = abjad.select.leaf(argument, 0)
+    assert isinstance(manifests, dict), repr(manifests)
     bar_extent = _indicators.BarExtent(n)
-    abjad.attach(
-        bar_extent,
-        # leaf,
-        first_leaf,
-        tag=_tags.NOT_PARTS,
+    _do_indicator_command(
+        argument,
+        [bar_extent],
+        manifests=manifests,
+        tag=abjad.Tag("baca.staff_lines(n=1)").append(_tags.NOT_PARTS),
     )
     staff_lines = _indicators.StaffLines(n)
-    abjad.attach(
-        staff_lines,
-        # leaf,
-        first_leaf,
-        # tag=_tags.function_name(_frame()),
-        tag=abjad.Tag("baca.staff_lines()"),
+    _do_indicator_command(
+        argument,
+        [staff_lines],
+        manifests=manifests,
+        tag=abjad.Tag("baca.staff_lines(n=2)"),
     )
 
 
