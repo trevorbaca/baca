@@ -58,26 +58,6 @@ def _is_rest(argument):
     return False
 
 
-def _metronome_mark(skip, indicator, manifests, *, deactivate=False, tag=None):
-    prototype = (
-        abjad.MetricModulation,
-        abjad.MetronomeMark,
-        _indicators.Accelerando,
-        _indicators.Ritardando,
-    )
-    assert isinstance(indicator, prototype), repr(indicator)
-    reapplied = _treat.remove_reapplied_wrappers(skip, indicator)
-    wrapper = abjad.attach(
-        indicator,
-        skip,
-        deactivate=deactivate,
-        tag=tag,
-        wrapper=True,
-    )
-    if indicator == reapplied:
-        _treat.treat_persistent_wrapper(manifests, wrapper, "redundant")
-
-
 def _parse_string(string):
     items, current_chord = [], []
     for part in string.split():
@@ -6653,6 +6633,26 @@ def make_dynamic(
     prototype = (abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin, abjad.Bundle)
     assert isinstance(indicator, prototype), repr(indicator)
     return indicator
+
+
+def metronome_mark(skip, indicator, manifests, *, deactivate=False, tag=None):
+    prototype = (
+        abjad.MetricModulation,
+        abjad.MetronomeMark,
+        _indicators.Accelerando,
+        _indicators.Ritardando,
+    )
+    assert isinstance(indicator, prototype), repr(indicator)
+    reapplied = _treat.remove_reapplied_wrappers(skip, indicator)
+    wrapper = abjad.attach(
+        indicator,
+        skip,
+        deactivate=deactivate,
+        tag=tag,
+        wrapper=True,
+    )
+    if indicator == reapplied:
+        _treat.treat_persistent_wrapper(manifests, wrapper, "redundant")
 
 
 def natural_clusters(

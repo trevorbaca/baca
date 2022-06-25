@@ -2704,6 +2704,7 @@ def interpreter(
     comment_measure_numbers=False,
     deactivate=None,
     do_not_require_short_instrument_names=False,
+    empty_accumulator=False,
     error_on_not_yet_pitched=False,
     fermata_extra_offset_y=2.5,
     fermata_measure_empty_overrides=(),
@@ -2778,27 +2779,28 @@ def interpreter(
         first_measure_number,
         global_skips,
     )
-    with abjad.Timer() as timer:
-        cache = None
-        cache, command_count = _call_all_commands(
-            allow_empty_selections=allow_empty_selections,
-            already_reapplied_contexts=already_reapplied_contexts,
-            always_make_global_rests=always_make_global_rests,
-            attach_rhythm_annotation_spanners=attach_rhythm_annotation_spanners,
-            cache=cache,
-            commands=commands,
-            manifests=manifests,
-            measure_count=measure_count,
-            offset_to_measure_number=offset_to_measure_number,
-            previous_persist=previous_persist,
-            score=score,
-            skips_instead_of_rests=skips_instead_of_rests,
-            time_signatures=time_signatures,
-            voice_metadata=voice_metadata,
+    if empty_accumulator is False:
+        with abjad.Timer() as timer:
+            cache = None
+            cache, command_count = _call_all_commands(
+                allow_empty_selections=allow_empty_selections,
+                already_reapplied_contexts=already_reapplied_contexts,
+                always_make_global_rests=always_make_global_rests,
+                attach_rhythm_annotation_spanners=attach_rhythm_annotation_spanners,
+                cache=cache,
+                commands=commands,
+                manifests=manifests,
+                measure_count=measure_count,
+                offset_to_measure_number=offset_to_measure_number,
+                previous_persist=previous_persist,
+                score=score,
+                skips_instead_of_rests=skips_instead_of_rests,
+                time_signatures=time_signatures,
+                voice_metadata=voice_metadata,
+            )
+        _print_timing(
+            "All commands", timer, print_timing=print_timing, suffix=command_count
         )
-    _print_timing(
-        "All commands", timer, print_timing=print_timing, suffix=command_count
-    )
     _extend_beams(score)
     _attach_sounds_during(score)
     with abjad.Timer() as timer:

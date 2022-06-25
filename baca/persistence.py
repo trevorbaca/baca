@@ -3237,7 +3237,7 @@ r"""
         ...         fallback_duration=(1, 25),
         ...     ),
         ... )
-        >>> baca.commands._metronome_mark(
+        >>> baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
         ...     commands.manifests(),
@@ -3342,7 +3342,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> baca.commands._metronome_mark(
+        >>> baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
         ...     commands.manifests(),
@@ -3563,12 +3563,12 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> baca.commands._metronome_mark(
+        >>> baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
         ...     commands.manifests(),
         ... )
-        >>> baca.commands._metronome_mark(
+        >>> baca.metronome_mark(
         ...     score["Skips"][2 - 1],
         ...     metronome_marks["112"],
         ...     commands.manifests(),
@@ -3690,7 +3690,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> baca.commands._metronome_mark(
+        >>> baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
         ...     commands.manifests(),
@@ -4502,7 +4502,7 @@ r"""
         ...         fallback_duration=(1, 25),
         ...     ),
         ... )
-        >>> baca.commands._metronome_mark(
+        >>> baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
         ...     commands.manifests(),
@@ -4606,7 +4606,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> baca.commands._metronome_mark(
+        >>> baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
         ...     commands.manifests(),
@@ -4802,12 +4802,12 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> baca.commands._metronome_mark(
+        >>> baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
         ...     commands.manifests(),
         ... )
-        >>> baca.commands._metronome_mark(
+        >>> baca.metronome_mark(
         ...     score["Skips"][2 - 1],
         ...     baca.Accelerando(),
         ...     commands.manifests(),
@@ -4911,7 +4911,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> baca.commands._metronome_mark(
+        >>> baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
         ...     commands.manifests(),
