@@ -6037,9 +6037,10 @@ def dynamic_function(
     tag = abjad.Tag("baca.dynamic()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
-    abjad.attach(
-        indicator,
+    _do_indicator_command(
         leaf,
+        [indicator],
+        manifests={},
         tag=tag,
     )
 
