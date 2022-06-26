@@ -80,9 +80,6 @@ class TimelineScope:
 
 
 def timeline(scopes) -> TimelineScope:
-    """
-    Makes timeline scope.
-    """
     scopes_ = []
     for scope in scopes:
         voice_name, measures = scope

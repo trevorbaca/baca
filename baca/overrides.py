@@ -542,6 +542,30 @@ def beam_positions(
     )
 
 
+def beam_positions_function(
+    argument, n: int | float, *, tags: list[abjad.Tag] = None
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _call_override_command(
+        leaves,
+        "Beam",
+        "positions",
+        f"#'({n} . {n})",
+        first_tag,
+        final_tag,
+    )
+
+
 def beam_stencil_false(
     selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
@@ -586,21 +610,12 @@ def clef_extra_offset(
     )
 
 
-# HERE
 def clef_extra_offset_function(
     argument,
     pair: tuple[int | float, int | float],
     *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    #    return OverrideCommand(
-    #        attribute="extra_offset",
-    #        context="Staff",
-    #        grob="Clef",
-    #        selector=selector,
-    #        tags=[_tags.function_name(_frame())],
-    #        value=f"#'({pair[0]} . {pair[1]})",
-    #    )
     if isinstance(argument, abjad.Leaf):
         leaves = [argument]
     else:
@@ -6381,6 +6396,33 @@ def tuplet_bracket_staff_padding(
         selector=selector,
         tags=[_tags.function_name(_frame())],
         value=n,
+    )
+
+
+def tuplet_bracket_staff_padding_function(
+    argument,
+    n: int | float,
+    *,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _call_override_command(
+        leaves,
+        "TupletBracket",
+        "staff_padding",
+        n,
+        first_tag,
+        final_tag,
     )
 
 

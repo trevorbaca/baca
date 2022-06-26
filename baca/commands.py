@@ -9815,6 +9815,24 @@ def staccato(
     )
 
 
+def staccato_function(
+    argument,
+    *,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    # tag = _tags.function_name(_frame())
+    tag = abjad.Tag("baca.staccato()")
+    for tag_ in tags or []:
+        tag = tag.append(tag_)
+    for leaf in abjad.iterate.leaves(argument):
+        indicator = abjad.Articulation("staccato")
+        abjad.attach(
+            indicator,
+            leaf,
+            tag=tag,
+        )
+
+
 def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.Suite:
     r"""
     Makes staff line command.
