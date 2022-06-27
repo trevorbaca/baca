@@ -647,6 +647,43 @@ def sustain_pedal(
     )
 
 
+def _prepare_trill_spanner_arguments(
+    *,
+    alteration,
+    harmonic,
+    start_trill_span,
+    stop_trill_span,
+):
+    if alteration is not None:
+        prototype = (abjad.NamedPitch, abjad.NamedInterval, str)
+        if not isinstance(alteration, prototype):
+            message = "trill spanner 'alteration' must be pitch, interval, str:"
+            message += f"\n   {alteration}"
+            raise Exception(message)
+    interval = pitch = None
+    if alteration is not None:
+        try:
+            pitch = abjad.NamedPitch(alteration)
+        except Exception:
+            try:
+                interval = abjad.NamedInterval(alteration)
+            except Exception:
+                pass
+    start_trill_span_: abjad.StartTrillSpan | abjad.Bundle
+    start_trill_span_ = start_trill_span or abjad.StartTrillSpan()
+    if pitch is not None or interval is not None:
+        start_trill_span_ = dataclasses.replace(
+            start_trill_span_, interval=interval, pitch=pitch
+        )
+    if harmonic is True:
+        string = "#(lambda (grob) (grob-interpret-markup grob"
+        string += r' #{ \markup \musicglyph #"noteheads.s0harmonic" #}))'
+        string = rf"- \tweak TrillPitchHead.stencil {string}"
+        start_trill_span_ = abjad.bundle(start_trill_span_, string)
+    stop_trill_span = stop_trill_span or abjad.StopTrillSpan()
+    return start_trill_span_, stop_trill_span
+
+
 def trill_spanner(
     *tweaks: abjad.Tweak,
     alteration: str = None,
@@ -895,33 +932,12 @@ def trill_spanner(
             >>
 
     """
-    if alteration is not None:
-        prototype = (abjad.NamedPitch, abjad.NamedInterval, str)
-        if not isinstance(alteration, prototype):
-            message = "trill spanner 'alteration' must be pitch, interval, str:"
-            message += f"\n   {alteration}"
-            raise Exception(message)
-    interval = pitch = None
-    if alteration is not None:
-        try:
-            pitch = abjad.NamedPitch(alteration)
-        except Exception:
-            try:
-                interval = abjad.NamedInterval(alteration)
-            except Exception:
-                pass
-    start_trill_span_: abjad.StartTrillSpan | abjad.Bundle
-    start_trill_span_ = start_trill_span or abjad.StartTrillSpan()
-    if pitch is not None or interval is not None:
-        start_trill_span_ = dataclasses.replace(
-            start_trill_span_, interval=interval, pitch=pitch
-        )
-    if harmonic is True:
-        string = "#(lambda (grob) (grob-interpret-markup grob"
-        string += r' #{ \markup \musicglyph #"noteheads.s0harmonic" #}))'
-        string = rf"- \tweak TrillPitchHead.stencil {string}"
-        start_trill_span_ = abjad.bundle(start_trill_span_, string)
-    stop_trill_span = stop_trill_span or abjad.StopTrillSpan()
+    start_trill_span_, stop_trill_span = _prepare_trill_spanner_arguments(
+        alteration=alteration,
+        harmonic=harmonic,
+        start_trill_span=start_trill_span,
+        stop_trill_span=stop_trill_span,
+    )
     return SpannerIndicatorCommand(
         left_broken=left_broken,
         map=map,
@@ -931,4 +947,31 @@ def trill_spanner(
         stop_indicator=stop_trill_span,
         tags=[_tags.function_name(_frame())],
         tweaks=tweaks,
+    )
+
+
+def trill_spanner_function(
+    leaves: typing.Sequence[abjad.Leaf],
+    *tweaks: abjad.Tweak,
+    alteration: str = None,
+    harmonic: bool = False,
+    start_trill_span: abjad.StartTrillSpan = None,
+    stop_trill_span: abjad.StopTrillSpan = None,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
+    start_trill_span_, stop_trill_span = _prepare_trill_spanner_arguments(
+        alteration=alteration,
+        harmonic=harmonic,
+        start_trill_span=start_trill_span,
+        stop_trill_span=stop_trill_span,
+    )
+    tag = abjad.Tag("baca.trill_spanner()")
+    for tag_ in tags or []:
+        tag = tag.append(tag_)
+    _attach_start_stop_indicators(
+        leaves,
+        tag,
+        start_indicator=start_trill_span_,
+        stop_indicator=stop_trill_span,
     )

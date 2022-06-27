@@ -60,6 +60,73 @@ class _Specifier:
         return False
 
 
+def _attach_indicators(
+    specifier,
+    leaf,
+    i,
+    manifests,
+    self_tag,
+    self_tweaks,
+    total_pieces,
+    *,
+    autodetected_right_padding=None,
+    just_bookended_leaf=None,
+    tag=None,
+):
+    assert isinstance(manifests, dict), repr(manifests)
+    assert isinstance(tag, abjad.Tag), repr(tag)
+    for indicator in specifier:
+        if (
+            not getattr(_unbundle_indicator(indicator), "trend", False)
+            and leaf is just_bookended_leaf
+        ):
+            continue
+        if not isinstance(indicator, bool | abjad.Bundle):
+            indicator = dataclasses.replace(indicator)
+        if (
+            _is_maybe_bundled(indicator, abjad.StartTextSpan)
+            and autodetected_right_padding is not None
+        ):
+            number = autodetected_right_padding
+            tweak = abjad.Tweak(
+                rf"- \tweak bound-details.right.padding {number}",
+                tag=self_tag.append(tag)
+                .append(_tags.AUTODETECT)
+                .append(_tags.SPANNER_START),
+            )
+            indicator = abjad.bundle(indicator, tweak, overwrite=True)
+        if _is_maybe_bundled(indicator, abjad.StartTextSpan) and self_tweaks:
+            for item in self_tweaks:
+                if isinstance(item, abjad.Tweak):
+                    new_tweak = item
+                else:
+                    assert isinstance(item, tuple), repr(item)
+                    new_tweak = item[0]
+                assert isinstance(new_tweak, abjad.Tweak), repr(item)
+            indicator = _tweaks.bundle_tweaks(
+                indicator, self_tweaks, i=i, total=total_pieces, overwrite=True
+            )
+        reapplied = _treat.remove_reapplied_wrappers(leaf, indicator)
+        tag_ = self_tag.append(tag)
+        if getattr(indicator, "spanner_start", None) is True:
+            tag_ = tag_.append(_tags.SPANNER_START)
+        elif (
+            isinstance(indicator, abjad.Bundle)
+            and getattr(indicator.indicator, "spanner_start", None) is True
+        ):
+            tag_ = tag_.append(_tags.SPANNER_START)
+        if getattr(indicator, "spanner_stop", None) is True:
+            tag_ = tag_.append(_tags.SPANNER_STOP)
+        elif (
+            isinstance(indicator, abjad.Bundle)
+            and getattr(indicator.indicator, "spanner_stop", None) is True
+        ):
+            tag_ = tag_.append(_tags.SPANNER_STOP)
+        wrapper = abjad.attach(indicator, leaf, tag=tag_, wrapper=True)
+        if _treat.compare_persistent_indicators(indicator, reapplied):
+            _treat.treat_persistent_wrapper(manifests, wrapper, "redundant")
+
+
 def _unbundle_indicator(argument):
     if isinstance(argument, abjad.Bundle):
         return argument.indicator
@@ -96,26 +163,17 @@ class PiecewiseCommand(_command.Command):
 
     def __post_init__(self):
         _command.Command.__post_init__(self)
-        if self.autodetect_right_padding is not None:
-            self.autodetect_right_padding = bool(self.autodetect_right_padding)
-        if self.bookend is not None:
-            assert isinstance(self.bookend, int | bool), repr(self.bookend)
-        bundles_ = None
-        if self.specifiers is not None:
-            bundles_ = abjad.CyclicTuple(self.specifiers)
-        self.specifiers = bundles_
+        assert isinstance(self.autodetect_right_padding, bool)
+        assert isinstance(self.bookend, bool | int), repr(self.bookend)
+        assert self.specifiers is not None
+        self.specifiers = abjad.CyclicTuple(self.specifiers)
         if self.final_piece_spanner not in (None, False):
             assert getattr(self.final_piece_spanner, "spanner_start", False)
-        if self.leak_spanner_stop is not None:
-            self.leak_spanner_stop = bool(self.leak_spanner_stop)
-        if self.left_broken is not None:
-            self.left_broken = bool(self.left_broken)
+        assert isinstance(self.leak_spanner_stop, bool), repr(self.leak_spanner_stop)
+        assert isinstance(self.left_broken, bool), repr(self.left_broken)
         if self.pieces is not None:
             assert callable(self.pieces), repr(self.pieces)
-        if self.remove_length_1_spanner_start is not None:
-            self.remove_length_1_spanner_start = bool(
-                self.remove_length_1_spanner_start
-            )
+        assert isinstance(self.remove_length_1_spanner_start, bool)
         _tweaks.validate_indexed_tweaks(self.tweaks)
 
     def __copy__(self, *arguments):
@@ -150,6 +208,7 @@ class PiecewiseCommand(_command.Command):
         just_bookended_leaf = None
         previous_had_bookend = None
         total_pieces = len(pieces)
+        manifests = self.runtime.get("manifests", {})
         for i, piece in enumerate(pieces):
             start_leaf = abjad.select.leaf(piece, 0)
             stop_leaf = abjad.select.leaf(piece, -1)
@@ -160,7 +219,16 @@ class PiecewiseCommand(_command.Command):
                 specifier = _Specifier(spanner_start=self.right_broken)
                 tag = _tags.function_name(_frame(), self, n=1)
                 tag = tag.append(_tags.RIGHT_BROKEN)
-                self._attach_indicators(specifier, stop_leaf, i, total_pieces, tag=tag)
+                _attach_indicators(
+                    specifier,
+                    stop_leaf,
+                    i,
+                    manifests,
+                    self.tag,
+                    self.tweaks,
+                    total_pieces,
+                    tag=tag,
+                )
             if bookend_pattern.matches_index(i, piece_count) and 1 < len(piece):
                 should_bookend = True
             else:
@@ -237,10 +305,13 @@ class PiecewiseCommand(_command.Command):
                 # there's probably a third case for normal midmeasure leaf
                 # else:
                 #    autodetected_right_padding = 1.25
-            self._attach_indicators(
+            _attach_indicators(
                 specifier,
                 start_leaf,
                 i,
+                manifests,
+                self.tag,
+                self.tweaks,
                 total_pieces,
                 autodetected_right_padding=autodetected_right_padding,
                 just_bookended_leaf=just_bookended_leaf,
@@ -254,8 +325,15 @@ class PiecewiseCommand(_command.Command):
                     next_bundle = dataclasses.replace(next_bundle, spanner_start=None)
                 if next_bundle.compound():
                     next_bundle = dataclasses.replace(next_bundle, spanner_start=None)
-                self._attach_indicators(
-                    next_bundle, stop_leaf, i, total_pieces, tag=tag
+                _attach_indicators(
+                    next_bundle,
+                    stop_leaf,
+                    i,
+                    manifests,
+                    self.tag,
+                    self.tweaks,
+                    total_pieces,
+                    tag=tag,
                 )
                 just_bookended_leaf = stop_leaf
             elif (
@@ -271,73 +349,17 @@ class PiecewiseCommand(_command.Command):
                 tag = _tags.function_name(_frame(), self, n=4)
                 if self.right_broken:
                     tag = tag.append(_tags.RIGHT_BROKEN)
-                self._attach_indicators(specifier, stop_leaf, i, total_pieces, tag=tag)
+                _attach_indicators(
+                    specifier,
+                    stop_leaf,
+                    i,
+                    manifests,
+                    self.tag,
+                    self.tweaks,
+                    total_pieces,
+                    tag=tag,
+                )
             previous_had_bookend = should_bookend
-
-    def _attach_indicators(
-        self,
-        specifier,
-        leaf,
-        i,
-        total_pieces,
-        autodetected_right_padding=None,
-        just_bookended_leaf=None,
-        tag=None,
-    ):
-        assert isinstance(tag, abjad.Tag), repr(tag)
-        for indicator in specifier:
-            if (
-                not getattr(_unbundle_indicator(indicator), "trend", False)
-                and leaf is just_bookended_leaf
-            ):
-                continue
-            if not isinstance(indicator, bool | abjad.Bundle):
-                indicator = dataclasses.replace(indicator)
-            if (
-                _is_maybe_bundled(indicator, abjad.StartTextSpan)
-                and autodetected_right_padding is not None
-            ):
-                number = autodetected_right_padding
-                tweak = abjad.Tweak(
-                    rf"- \tweak bound-details.right.padding {number}",
-                    tag=self.tag.append(tag)
-                    .append(_tags.AUTODETECT)
-                    .append(_tags.SPANNER_START),
-                )
-                indicator = abjad.bundle(indicator, tweak, overwrite=True)
-            if _is_maybe_bundled(indicator, abjad.StartTextSpan) and self.tweaks:
-                for item in self.tweaks:
-                    if isinstance(item, abjad.Tweak):
-                        new_tweak = item
-                    else:
-                        assert isinstance(item, tuple), repr(item)
-                        new_tweak = item[0]
-                    assert isinstance(new_tweak, abjad.Tweak), repr(item)
-                indicator = _tweaks.bundle_tweaks(
-                    indicator, self.tweaks, i=i, total=total_pieces, overwrite=True
-                )
-            reapplied = _treat.remove_reapplied_wrappers(leaf, indicator)
-            tag_ = self.tag.append(tag)
-            if getattr(indicator, "spanner_start", None) is True:
-                tag_ = tag_.append(_tags.SPANNER_START)
-            elif (
-                isinstance(indicator, abjad.Bundle)
-                and getattr(indicator.indicator, "spanner_start", None) is True
-            ):
-                tag_ = tag_.append(_tags.SPANNER_START)
-            if getattr(indicator, "spanner_stop", None) is True:
-                tag_ = tag_.append(_tags.SPANNER_STOP)
-            elif (
-                isinstance(indicator, abjad.Bundle)
-                and getattr(indicator.indicator, "spanner_stop", None) is True
-            ):
-                tag_ = tag_.append(_tags.SPANNER_STOP)
-            wrapper = abjad.attach(indicator, leaf, tag=tag_, wrapper=True)
-            if _treat.compare_persistent_indicators(indicator, reapplied):
-                status = "redundant"
-                _treat.treat_persistent_wrapper(
-                    self.runtime["manifests"], wrapper, status
-                )
 
 
 def bow_speed_spanner(
@@ -553,6 +575,31 @@ def damp_spanner(
     result = dataclasses.replace(command, tags=[tag])
     assert isinstance(result, PiecewiseCommand)
     return result
+
+
+def _prepare_hairpin_arguments(
+    *,
+    dynamics,
+    final_hairpin,
+    forbid_al_niente_to_bar_line,
+    tweaks,
+):
+    if isinstance(dynamics, str):
+        specifiers = parse_hairpin_descriptor(
+            dynamics,
+            *tweaks,
+            forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
+        )
+    else:
+        specifiers = dynamics
+    for item in specifiers:
+        assert isinstance(item, _Specifier), repr(dynamics)
+    final_hairpin_: bool | abjad.StartHairpin | None = None
+    if isinstance(final_hairpin, bool):
+        final_hairpin_ = final_hairpin
+    elif isinstance(final_hairpin, str):
+        final_hairpin_ = abjad.StartHairpin(final_hairpin)
+    return final_hairpin_, specifiers
 
 
 def hairpin(
@@ -1987,25 +2034,17 @@ def hairpin(
             }
 
     """
-    if isinstance(dynamics, str):
-        specifiers = parse_hairpin_descriptor(
-            dynamics,
-            *tweaks,
-            forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
-        )
-    else:
-        specifiers = dynamics
-    for item in specifiers:
-        assert isinstance(item, _Specifier), repr(dynamics)
-    final_hairpin_: bool | abjad.StartHairpin | None = None
-    if isinstance(final_hairpin, bool):
-        final_hairpin_ = final_hairpin
-    elif isinstance(final_hairpin, str):
-        final_hairpin_ = abjad.StartHairpin(final_hairpin)
-    if left_broken is not None:
-        left_broken = bool(left_broken)
-    if remove_length_1_spanner_start is not None:
-        remove_length_1_spanner_start = bool(remove_length_1_spanner_start)
+    final_hairpin_, specifiers = _prepare_hairpin_arguments(
+        dynamics=dynamics,
+        final_hairpin=final_hairpin,
+        forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
+        tweaks=tweaks,
+    )
+    assert isinstance(bookend, bool | int), repr(bookend)
+    assert isinstance(left_broken, bool), repr(left_broken)
+    assert isinstance(remove_length_1_spanner_start, bool), repr(
+        remove_length_1_spanner_start
+    )
     right_broken_: typing.Any = False
     if bool(right_broken) is True:
         right_broken_ = abjad.LilyPondLiteral(r"\!", site="after")
@@ -2022,6 +2061,28 @@ def hairpin(
         right_broken=right_broken_,
         selector=selector,
         tags=[_tags.function_name(_frame())],
+    )
+
+
+def hairpin_function(
+    argument,
+    dynamics: str | list,
+    *tweaks: abjad.Tweak,
+    bookend: bool | int = -1,
+    final_hairpin: bool | str | abjad.StartHairpin | None = None,
+    forbid_al_niente_to_bar_line: bool = False,
+    remove_length_1_spanner_start: bool = False,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    final_hairpin_, specifiers = _prepare_hairpin_arguments(
+        dynamics=dynamics,
+        final_hairpin=final_hairpin,
+        forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
+        tweaks=tweaks,
+    )
+    assert isinstance(bookend, bool | int), repr(bookend)
+    assert isinstance(remove_length_1_spanner_start, bool), repr(
+        remove_length_1_spanner_start
     )
 
 

@@ -6783,6 +6783,37 @@ def pitch(
     )
 
 
+def pitch_function(
+    argument,
+    pitch,
+    *,
+    allow_out_of_range: bool = False,
+    allow_repitch: bool = False,
+    mock: bool = False,
+    do_not_transpose: bool = False,
+    persist: str = None,
+) -> bool:
+    assert isinstance(pitch, str | list | tuple | abjad.Pitch), repr(pitch)
+    if isinstance(pitch, list | tuple) and len(pitch) == 1:
+        raise Exception(f"one-note chord {pitch!r}?")
+    assert isinstance(allow_out_of_range, bool), repr(allow_out_of_range)
+    assert isinstance(do_not_transpose, bool), repr(do_not_transpose)
+    if persist is not None:
+        assert isinstance(persist, str), repr(persist)
+    cyclic = True
+    result = _do_pitch_command(
+        argument,
+        cyclic,
+        [pitch],
+        allow_repeats=True,
+        allow_repitch=allow_repitch,
+        do_not_transpose=do_not_transpose,
+        mock=mock,
+    )
+    pitches_consumed, mutated_score = result
+    return mutated_score
+
+
 _pitch_command_factory = pitch
 
 
