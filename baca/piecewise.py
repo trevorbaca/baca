@@ -189,177 +189,213 @@ class PiecewiseCommand(_command.Command):
         if self.selector is not None:
             assert not isinstance(self.selector, str)
             argument = self.selector(argument)
-        if self.pieces is not None:
-            assert not isinstance(self.pieces, str)
-            pieces = self.pieces(argument)
-        else:
-            pieces = argument
-        assert pieces is not None
-        piece_count = len(pieces)
-        assert 0 < piece_count, repr(piece_count)
-        if self.bookend in (False, None):
-            bookend_pattern = abjad.Pattern()
-        elif self.bookend is True:
-            bookend_pattern = abjad.index([0], 1)
-        else:
-            assert isinstance(self.bookend, int), repr(self.bookend)
-            bookend_pattern = abjad.index([self.bookend], period=piece_count)
-        just_backstole_right_text = None
-        just_bookended_leaf = None
-        previous_had_bookend = None
-        total_pieces = len(pieces)
-        manifests = self.runtime.get("manifests", {})
-        for i, piece in enumerate(pieces):
-            start_leaf = abjad.select.leaf(piece, 0)
-            stop_leaf = abjad.select.leaf(piece, -1)
-            is_first_piece = i == 0
-            is_penultimate_piece = i == piece_count - 2
-            is_final_piece = i == piece_count - 1
-            if is_final_piece and self.right_broken:
-                specifier = _Specifier(spanner_start=self.right_broken)
-                tag = _tags.function_name(_frame(), self, n=1)
-                tag = tag.append(_tags.RIGHT_BROKEN)
-                _attach_indicators(
-                    specifier,
-                    stop_leaf,
-                    i,
-                    manifests,
-                    self.tag,
-                    self.tweaks,
-                    total_pieces,
-                    tag=tag,
-                )
-            if bookend_pattern.matches_index(i, piece_count) and 1 < len(piece):
-                should_bookend = True
-            else:
-                should_bookend = False
-            if is_final_piece and self.final_piece_spanner is False:
-                should_bookend = False
-            specifier = self.specifiers[i]
-            if (
-                is_final_piece
-                and self.right_broken
-                and not _is_maybe_bundled(specifier.spanner_start, abjad.StartTextSpan)
-            ):
-                should_bookend = False
-            if is_final_piece and just_backstole_right_text:
-                specifier = dataclasses.replace(specifier, spanner_start=None)
-            next_bundle = self.specifiers[i + 1]
-            if should_bookend and specifier.bookended_spanner_start:
-                specifier = dataclasses.replace(
-                    specifier, spanner_start=specifier.bookended_spanner_start
-                )
-            if (
-                is_penultimate_piece
-                and (len(pieces[-1]) == 1 or self.final_piece_spanner is False)
-                and _is_maybe_bundled(next_bundle.spanner_start, abjad.StartTextSpan)
-            ):
-                specifier = dataclasses.replace(
-                    specifier, spanner_start=specifier.bookended_spanner_start
-                )
-                just_backstole_right_text = True
-            if (
-                len(piece) == 1
-                and specifier.compound()
-                and self.remove_length_1_spanner_start
-            ):
-                specifier = dataclasses.replace(specifier, spanner_start=None)
-            if is_final_piece and specifier.spanner_start:
-                if _is_maybe_bundled(specifier.spanner_start, abjad.StartHairpin):
-                    if self.final_piece_spanner:
-                        specifier = dataclasses.replace(
-                            specifier, spanner_start=self.final_piece_spanner
-                        )
-                    elif self.final_piece_spanner is False:
-                        specifier = dataclasses.replace(specifier, spanner_start=None)
-                elif _is_maybe_bundled(specifier.spanner_start, abjad.StartTextSpan):
-                    if self.final_piece_spanner is False:
-                        specifier = dataclasses.replace(specifier, spanner_start=None)
-            tag = _tags.function_name(_frame(), self, n=2)
-            if is_first_piece or previous_had_bookend:
-                specifier = dataclasses.replace(specifier, spanner_stop=None)
-                if self.left_broken:
-                    tag = tag.append(_tags.LEFT_BROKEN)
-            if is_final_piece and self.right_broken:
-                tag = tag.append(_tags.RIGHT_BROKEN)
-            autodetected_right_padding = None
-            # solution is merely heuristic;
-            # TextSpanner.bound-details.right.to-extent = ##t implementation
-            # only 100% workable solution
-            if is_final_piece and self.autodetect_right_padding:
-                if (
-                    abjad.get.annotation(stop_leaf, _enums.ANCHOR_NOTE) is True
-                    or abjad.get.annotation(stop_leaf, _enums.ANCHOR_SKIP) is True
-                ):
-                    autodetected_right_padding = 2.5
-                # stop leaf multiplied whole note on fermata measure downbeat
-                elif (
-                    isinstance(stop_leaf, abjad.Note)
-                    and stop_leaf.written_duration == 1
-                    and stop_leaf.multiplier == abjad.Multiplier(1, 4)
-                ):
-                    autodetected_right_padding = 3.25
-                # stop leaf on normal measure downbeat
-                else:
-                    autodetected_right_padding = 2.75
-                # there's probably a third case for normal midmeasure leaf
-                # else:
-                #    autodetected_right_padding = 1.25
+        _do_piecewise_command(
+            argument,
+            manifests=self.runtime.get("manifests", {}),
+            self_autodetect_right_padding=self.autodetect_right_padding,
+            self_bookend=self.bookend,
+            self_final_piece_spanner=self.final_piece_spanner,
+            self_leak_spanner_stop=self.leak_spanner_stop,
+            self_left_broken=self.left_broken,
+            self_pieces=self.pieces,
+            self_remove_length_1_spanner_start=self.remove_length_1_spanner_start,
+            self_right_broken=self.right_broken,
+            self_specifiers=self.specifiers,
+            self_tag=self.tag,
+            self_tweaks=self.tweaks,
+        )
+
+
+def _do_piecewise_command(
+    argument,
+    *,
+    manifests,
+    self_autodetect_right_padding,
+    self_bookend,
+    self_final_piece_spanner,
+    self_leak_spanner_stop,
+    self_left_broken,
+    self_pieces,
+    self_remove_length_1_spanner_start,
+    self_right_broken,
+    self_specifiers,
+    self_tag,
+    self_tweaks,
+):
+    if self_pieces is not None:
+        assert not isinstance(self_pieces, str)
+        pieces = self_pieces(argument)
+    else:
+        pieces = argument
+    assert pieces is not None
+    piece_count = len(pieces)
+    assert 0 < piece_count, repr(piece_count)
+    if self_bookend in (False, None):
+        bookend_pattern = abjad.Pattern()
+    elif self_bookend is True:
+        bookend_pattern = abjad.index([0], 1)
+    else:
+        assert isinstance(self_bookend, int), repr(self_bookend)
+        bookend_pattern = abjad.index([self_bookend], period=piece_count)
+    just_backstole_right_text = None
+    just_bookended_leaf = None
+    previous_had_bookend = None
+    total_pieces = len(pieces)
+    for i, piece in enumerate(pieces):
+        start_leaf = abjad.select.leaf(piece, 0)
+        stop_leaf = abjad.select.leaf(piece, -1)
+        is_first_piece = i == 0
+        is_penultimate_piece = i == piece_count - 2
+        is_final_piece = i == piece_count - 1
+        if is_final_piece and self_right_broken:
+            specifier = _Specifier(spanner_start=self_right_broken)
+            # tag = _tags.function_name(_frame(), self, n=1)
+            tag = abjad.Tag("baca.PiecewiseCommand._call(1)")
+            tag = tag.append(_tags.RIGHT_BROKEN)
             _attach_indicators(
                 specifier,
-                start_leaf,
+                stop_leaf,
                 i,
                 manifests,
-                self.tag,
-                self.tweaks,
+                self_tag,
+                self_tweaks,
                 total_pieces,
-                autodetected_right_padding=autodetected_right_padding,
-                just_bookended_leaf=just_bookended_leaf,
                 tag=tag,
             )
-            if should_bookend:
-                tag = _tags.function_name(_frame(), self, n=3)
-                if is_final_piece and self.right_broken:
-                    tag = tag.append(_tags.RIGHT_BROKEN)
-                if specifier.bookended_spanner_start is not None:
-                    next_bundle = dataclasses.replace(next_bundle, spanner_start=None)
-                if next_bundle.compound():
-                    next_bundle = dataclasses.replace(next_bundle, spanner_start=None)
-                _attach_indicators(
-                    next_bundle,
-                    stop_leaf,
-                    i,
-                    manifests,
-                    self.tag,
-                    self.tweaks,
-                    total_pieces,
-                    tag=tag,
-                )
-                just_bookended_leaf = stop_leaf
-            elif (
-                is_final_piece
-                and not just_backstole_right_text
-                and next_bundle.spanner_stop
-                and ((start_leaf is not stop_leaf) or self.leak_spanner_stop)
+        if bookend_pattern.matches_index(i, piece_count) and 1 < len(piece):
+            should_bookend = True
+        else:
+            should_bookend = False
+        if is_final_piece and self_final_piece_spanner is False:
+            should_bookend = False
+        specifier = self_specifiers[i]
+        if (
+            is_final_piece
+            and self_right_broken
+            and not _is_maybe_bundled(specifier.spanner_start, abjad.StartTextSpan)
+        ):
+            should_bookend = False
+        if is_final_piece and just_backstole_right_text:
+            specifier = dataclasses.replace(specifier, spanner_start=None)
+        next_bundle = self_specifiers[i + 1]
+        if should_bookend and specifier.bookended_spanner_start:
+            specifier = dataclasses.replace(
+                specifier, spanner_start=specifier.bookended_spanner_start
+            )
+        if (
+            is_penultimate_piece
+            and (len(pieces[-1]) == 1 or self_final_piece_spanner is False)
+            and _is_maybe_bundled(next_bundle.spanner_start, abjad.StartTextSpan)
+        ):
+            specifier = dataclasses.replace(
+                specifier, spanner_start=specifier.bookended_spanner_start
+            )
+            just_backstole_right_text = True
+        if (
+            len(piece) == 1
+            and specifier.compound()
+            and self_remove_length_1_spanner_start
+        ):
+            specifier = dataclasses.replace(specifier, spanner_start=None)
+        if is_final_piece and specifier.spanner_start:
+            if _is_maybe_bundled(specifier.spanner_start, abjad.StartHairpin):
+                if self_final_piece_spanner:
+                    specifier = dataclasses.replace(
+                        specifier, spanner_start=self_final_piece_spanner
+                    )
+                elif self_final_piece_spanner is False:
+                    specifier = dataclasses.replace(specifier, spanner_start=None)
+            elif _is_maybe_bundled(specifier.spanner_start, abjad.StartTextSpan):
+                if self_final_piece_spanner is False:
+                    specifier = dataclasses.replace(specifier, spanner_start=None)
+        # tag = _tags.function_name(_frame(), self, n=2)
+        tag = abjad.Tag("baca.PiecewiseCommand._call(2)")
+        if is_first_piece or previous_had_bookend:
+            specifier = dataclasses.replace(specifier, spanner_stop=None)
+            if self_left_broken:
+                tag = tag.append(_tags.LEFT_BROKEN)
+        if is_final_piece and self_right_broken:
+            tag = tag.append(_tags.RIGHT_BROKEN)
+        autodetected_right_padding = None
+        # solution is merely heuristic;
+        # TextSpanner.bound-details.right.to-extent = ##t implementation
+        # only 100% workable solution
+        if is_final_piece and self_autodetect_right_padding:
+            if (
+                abjad.get.annotation(stop_leaf, _enums.ANCHOR_NOTE) is True
+                or abjad.get.annotation(stop_leaf, _enums.ANCHOR_SKIP) is True
             ):
-                spanner_stop = dataclasses.replace(next_bundle.spanner_stop)
-                if self.leak_spanner_stop:
-                    spanner_stop = dataclasses.replace(spanner_stop, leak=True)
-                specifier = _Specifier(spanner_stop=spanner_stop)
-                tag = _tags.function_name(_frame(), self, n=4)
-                if self.right_broken:
-                    tag = tag.append(_tags.RIGHT_BROKEN)
-                _attach_indicators(
-                    specifier,
-                    stop_leaf,
-                    i,
-                    manifests,
-                    self.tag,
-                    self.tweaks,
-                    total_pieces,
-                    tag=tag,
-                )
-            previous_had_bookend = should_bookend
+                autodetected_right_padding = 2.5
+            # stop leaf multiplied whole note on fermata measure downbeat
+            elif (
+                isinstance(stop_leaf, abjad.Note)
+                and stop_leaf.written_duration == 1
+                and stop_leaf.multiplier == abjad.Multiplier(1, 4)
+            ):
+                autodetected_right_padding = 3.25
+            # stop leaf on normal measure downbeat
+            else:
+                autodetected_right_padding = 2.75
+            # there's probably a third case for normal midmeasure leaf
+            # else:
+            #    autodetected_right_padding = 1.25
+        _attach_indicators(
+            specifier,
+            start_leaf,
+            i,
+            manifests,
+            self_tag,
+            self_tweaks,
+            total_pieces,
+            autodetected_right_padding=autodetected_right_padding,
+            just_bookended_leaf=just_bookended_leaf,
+            tag=tag,
+        )
+        if should_bookend:
+            # tag = _tags.function_name(_frame(), self, n=3)
+            tag = abjad.Tag("baca.PiecewiseCommand._call(3)")
+            if is_final_piece and self_right_broken:
+                tag = tag.append(_tags.RIGHT_BROKEN)
+            if specifier.bookended_spanner_start is not None:
+                next_bundle = dataclasses.replace(next_bundle, spanner_start=None)
+            if next_bundle.compound():
+                next_bundle = dataclasses.replace(next_bundle, spanner_start=None)
+            _attach_indicators(
+                next_bundle,
+                stop_leaf,
+                i,
+                manifests,
+                self_tag,
+                self_tweaks,
+                total_pieces,
+                tag=tag,
+            )
+            just_bookended_leaf = stop_leaf
+        elif (
+            is_final_piece
+            and not just_backstole_right_text
+            and next_bundle.spanner_stop
+            and ((start_leaf is not stop_leaf) or self_leak_spanner_stop)
+        ):
+            spanner_stop = dataclasses.replace(next_bundle.spanner_stop)
+            if self_leak_spanner_stop:
+                spanner_stop = dataclasses.replace(spanner_stop, leak=True)
+            specifier = _Specifier(spanner_stop=spanner_stop)
+            # tag = _tags.function_name(_frame(), self, n=4)
+            tag = abjad.Tag("baca.PiecewiseCommand._call(4)")
+            if self_right_broken:
+                tag = tag.append(_tags.RIGHT_BROKEN)
+            _attach_indicators(
+                specifier,
+                stop_leaf,
+                i,
+                manifests,
+                self_tag,
+                self_tweaks,
+                total_pieces,
+                tag=tag,
+            )
+        previous_had_bookend = should_bookend
 
 
 def bow_speed_spanner(
