@@ -209,19 +209,20 @@ class PiecewiseCommand(_command.Command):
 def _do_piecewise_command(
     argument,
     *,
-    manifests,
-    self_autodetect_right_padding,
-    self_bookend,
-    self_final_piece_spanner,
-    self_leak_spanner_stop,
-    self_left_broken,
-    self_pieces,
-    self_remove_length_1_spanner_start,
-    self_right_broken,
-    self_specifiers,
+    manifests=None,
+    self_autodetect_right_padding: bool = False,
+    self_bookend: bool | int = False,
+    self_final_piece_spanner=None,
+    self_leak_spanner_stop: bool = False,
+    self_left_broken: bool = False,
+    self_pieces: typing.Callable = lambda _: _select.leaves(_),
+    self_remove_length_1_spanner_start: bool = False,
+    self_right_broken: typing.Any = None,
+    self_specifiers: typing.Sequence[_Specifier] = (),
     self_tag,
-    self_tweaks,
+    self_tweaks: typing.Sequence[_typings.IndexedTweak] = (),
 ):
+    manifests = manifests or {}
     if self_pieces is not None:
         assert not isinstance(self_pieces, str)
         pieces = self_pieces(argument)
@@ -2107,6 +2108,7 @@ def hairpin_function(
     bookend: bool | int = -1,
     final_hairpin: bool | str | abjad.StartHairpin | None = None,
     forbid_al_niente_to_bar_line: bool = False,
+    pieces: typing.Callable = lambda _: abjad.select.group(_),
     remove_length_1_spanner_start: bool = False,
     tags: list[abjad.Tag] = None,
 ) -> None:
@@ -2119,6 +2121,25 @@ def hairpin_function(
     assert isinstance(bookend, bool | int), repr(bookend)
     assert isinstance(remove_length_1_spanner_start, bool), repr(
         remove_length_1_spanner_start
+    )
+    manifests: dict = {}
+    tag = abjad.Tag("baca.hairpin()")
+    for tag_ in tags or []:
+        tag = tag.append(tag_)
+    _do_piecewise_command(
+        argument,
+        manifests=manifests,
+        # self_autodetect_right_padding,
+        self_bookend=bookend,
+        self_final_piece_spanner=final_hairpin_,
+        # self_leak_spanner_stop,
+        # self_left_broken,
+        self_pieces=pieces,
+        self_remove_length_1_spanner_start=remove_length_1_spanner_start,
+        # self_right_broken,
+        self_specifiers=specifiers,
+        self_tag=tag,
+        # self_tweaks,
     )
 
 

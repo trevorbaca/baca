@@ -7432,7 +7432,8 @@ def staff_position(
 
 
 def staff_position_function(
-    components: typing.Iterable[abjad.Component],
+    # components: typing.Iterable[abjad.Component],
+    argument,
     numbers: int | list | abjad.StaffPosition,
     *,
     allow_out_of_range: bool = False,
@@ -7440,12 +7441,13 @@ def staff_position_function(
     mock: bool = False,
     set_chord_pitches_equal: bool = False,
 ) -> bool:
-    assert all(isinstance(_, abjad.Component) for _ in components), repr(components)
+    # assert all(isinstance(_, abjad.Component) for _ in components), repr(components)
     assert isinstance(numbers, int | list | abjad.StaffPosition), repr(numbers)
     if isinstance(numbers, list):
         assert all(isinstance(_, int | abjad.StaffPosition) for _ in numbers)
     mutated_score = _staff_position_function(
-        components,
+        # components,
+        argument,
         [numbers],
         allow_out_of_range=allow_out_of_range,
         allow_repeats=True,
@@ -12567,6 +12569,50 @@ def glissando(
         selector=selector,
         tags=[_tags.function_name(_frame())],
         tweaks=tweaks,
+        zero_padding=zero_padding,
+    )
+
+
+def glissando_function(
+    argument,
+    *tweaks: abjad.Tweak,
+    allow_repeats: bool = False,
+    allow_ties: bool = False,
+    hide_middle_note_heads: bool = False,
+    hide_middle_stems: bool = False,
+    hide_stem_selector: typing.Callable = None,
+    left_broken: bool = False,
+    # map=None,
+    parenthesize_repeats: bool = False,
+    right_broken: bool = False,
+    right_broken_show_next: bool = False,
+    # selector=lambda _: _select.tleaves(_),
+    style: str = None,
+    tags: list[abjad.Tag] = None,
+    zero_padding: bool = False,
+) -> None:
+    leaves = abjad.select.leaves(argument)
+    tweaks_ = []
+    prototype = (abjad.Tweak, tuple)
+    for tweak in tweaks or []:
+        assert isinstance(tweak, prototype), repr(tweak)
+        tweaks_.append(tweak)
+    tag = abjad.Tag("baca.glissando()")
+    for tag_ in tags or []:
+        tag = tag.append(tag_)
+    abjad.glissando(
+        leaves,
+        *tweaks_,
+        allow_repeats=allow_repeats,
+        allow_ties=allow_ties,
+        hide_middle_note_heads=hide_middle_note_heads,
+        hide_middle_stems=hide_middle_stems,
+        hide_stem_selector=hide_stem_selector,
+        left_broken=left_broken,
+        parenthesize_repeats=parenthesize_repeats,
+        right_broken=right_broken,
+        right_broken_show_next=right_broken_show_next,
+        tag=tag,
         zero_padding=zero_padding,
     )
 
