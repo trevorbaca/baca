@@ -10269,21 +10269,20 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
     return _command.suite(command_1, command_2)
 
 
-def staff_lines_function(argument, n: int, manifests: dict) -> None:
+def staff_lines_function(argument, n: int) -> None:
     assert isinstance(n, int), repr(n)
-    assert isinstance(manifests, dict), repr(manifests)
     bar_extent = _indicators.BarExtent(n)
     _do_indicator_command(
         argument,
         [bar_extent],
-        manifests=manifests,
+        manifests={},
         tag=abjad.Tag("baca.staff_lines(n=1)").append(_tags.NOT_PARTS),
     )
     staff_lines = _indicators.StaffLines(n)
     _do_indicator_command(
         argument,
         [staff_lines],
-        manifests=manifests,
+        manifests={},
         tag=abjad.Tag("baca.staff_lines(n=2)"),
     )
 
