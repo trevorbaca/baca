@@ -2576,6 +2576,8 @@ class Selection:
     def __init__(self, argument):
         if isinstance(argument, abjad.Leaf):
             self.leaf = argument
+        elif isinstance(argument, list) and isinstance(argument[0], list):
+            self.groups = argument
         else:
             self.leaves = argument
 
@@ -2583,6 +2585,8 @@ class Selection:
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
+        if hasattr(self, "groups"):
+            del self.groups
         if hasattr(self, "leaf"):
             del self.leaf
         if hasattr(self, "leaves"):
