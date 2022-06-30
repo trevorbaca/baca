@@ -689,27 +689,6 @@ def _bundle_runtime(
     return runtime
 
 
-def _cache_leaves(score, measure_count):
-    measure_timespans = []
-    for measure_index in range(measure_count):
-        measure_number = measure_index + 1
-        measure_timespan = _get_measure_timespan(score, measure_number)
-        measure_timespans.append(measure_timespan)
-    cache = {}
-    for leaf in abjad.select.leaves(score):
-        parentage = abjad.get.parentage(leaf)
-        context = parentage.get(abjad.Context)
-        leaves_by_measure_number = cache.setdefault(context.name, {})
-        leaf_timespan = abjad.get.timespan(leaf)
-        # TODO: replace loop with bisection:
-        for i, measure_timespan in enumerate(measure_timespans):
-            measure_number = i + 1
-            if leaf_timespan.starts_during_timespan(measure_timespan):
-                cached_leaves = leaves_by_measure_number.setdefault(measure_number, [])
-                cached_leaves.append(leaf)
-    return cache
-
-
 def _calculate_clock_times(
     score,
     clock_time_override,
@@ -2215,7 +2194,7 @@ def _scope_to_leaf_selection(
 
 def _scope_to_leaf_selections(score, cache, measure_count, scope):
     if cache is None:
-        cache = _cache_leaves(score, measure_count)
+        cache = cache_leaves(score, measure_count)
     if isinstance(scope, _scope.Scope):
         scopes = [scope]
     else:
@@ -2574,6 +2553,42 @@ def _whitespace_leaves(score):
         abjad.attach(literal, container, tag=None)
 
 
+class Cache:
+    def __init__(self, cache):
+        self.cache = cache
+
+    def __getitem__(self, argument):
+        if isinstance(argument, int):
+            result = self.cache[argument]
+        else:
+            result = []
+            assert isinstance(argument, tuple), repr(argument)
+            start, stop = argument
+            assert 0 < start, repr(start)
+            assert 0 < stop, repr(stop)
+            for number in range(start, stop + 1):
+                leaves = self.cache[number]
+                result.extend(leaves)
+        return result
+
+
+class Selection:
+    def __init__(self, argument):
+        if isinstance(argument, abjad.Leaf):
+            self.leaf = argument
+        else:
+            self.leaves = argument
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        if hasattr(self, "leaf"):
+            del self.leaf
+        if hasattr(self, "leaves"):
+            del self.leaves
+
+
 def append_anchor_note_function(argument, *, runtime=None):
     leaf = abjad.get.leaf(argument, 0)
     parentage = abjad.get.parentage(leaf)
@@ -2636,6 +2651,27 @@ def append_anchor_note() -> _commands.GenericCommand:
     return command
 
 
+def cache_leaves(score, measure_count):
+    measure_timespans = []
+    for measure_index in range(measure_count):
+        measure_number = measure_index + 1
+        measure_timespan = _get_measure_timespan(score, measure_number)
+        measure_timespans.append(measure_timespan)
+    cache = {}
+    for leaf in abjad.select.leaves(score):
+        parentage = abjad.get.parentage(leaf)
+        context = parentage.get(abjad.Context)
+        leaves_by_measure_number = cache.setdefault(context.name, {})
+        leaf_timespan = abjad.get.timespan(leaf)
+        # TODO: replace loop with bisection:
+        for i, measure_timespan in enumerate(measure_timespans):
+            measure_number = i + 1
+            if leaf_timespan.starts_during_timespan(measure_timespan):
+                cached_leaves = leaves_by_measure_number.setdefault(measure_number, [])
+                cached_leaves.append(leaf)
+    return cache
+
+
 def color_out_of_range_pitches(score):
     indicator = _enums.ALLOW_OUT_OF_RANGE
     tag = _tags.function_name(_frame())
@@ -2668,18 +2704,8 @@ def color_repeat_pitch_classes(score):
             abjad.attach(literal, leaf, tag=tag)
 
 
-def getter(cache, argument):
-    if isinstance(argument, int):
-        return cache[argument]
-    result = []
-    assert isinstance(argument, tuple), repr(argument)
-    start, stop = argument
-    assert 0 < start, repr(start)
-    assert 0 < stop, repr(stop)
-    for number in range(start, stop + 1):
-        leaves = cache[number]
-        result.extend(leaves)
-    return result
+def get(cache):
+    return Selection(cache)
 
 
 def interpreter(
