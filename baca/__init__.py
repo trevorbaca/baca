@@ -22,15 +22,13 @@ from .enums import colors, enums
 from .figures import *
 from .indicators import *
 from .interpret import (
-    Cache,
-    Selection,
     append_anchor_note,
     append_anchor_note_function,
-    get,
     interpreter,
     make_lilypond_file,
     reapply,
     reapply_persistent_indicators,
+    scope,
     score_interpretation_defaults,
     update_voice_metadata,
 )

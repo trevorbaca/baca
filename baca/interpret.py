@@ -2552,7 +2552,23 @@ def _whitespace_leaves(score):
         abjad.attach(literal, container, tag=None)
 
 
-class Cache:
+class CacheGetItemWrapper:
+    def __init__(self, cache, voice_abbreviations):
+        self.cache = cache
+        self.abbreviation_to_voice_name = {}
+        for abbreviation, voice_name in voice_abbreviations.items():
+            self.abbreviation_to_voice_name[abbreviation] = voice_name
+
+    def __getitem__(self, argument):
+        try:
+            result = self.cache[argument]
+        except KeyError:
+            voice_name = self.abbreviation_to_voice_name[argument]
+            result = self.cache[voice_name]
+        return DictionaryGetItemWrapper(result)
+
+
+class DictionaryGetItemWrapper:
     def __init__(self, cache):
         self.cache = cache
 
@@ -2571,7 +2587,7 @@ class Cache:
         return result
 
 
-class Selection:
+class DynamicScope:
     def __init__(self, argument):
         if isinstance(argument, abjad.Leaf):
             self.leaf = argument
@@ -2590,22 +2606,6 @@ class Selection:
             del self.leaf
         if hasattr(self, "leaves"):
             del self.leaves
-
-
-class SmartCache:
-    def __init__(self, cache, voice_abbreviations):
-        self.cache = cache
-        self.abbreviation_to_voice_name = {}
-        for abbreviation, voice_name in voice_abbreviations.items():
-            self.abbreviation_to_voice_name[abbreviation] = voice_name
-
-    def __getitem__(self, argument):
-        try:
-            result = self.cache[argument]
-        except KeyError:
-            voice_name = self.abbreviation_to_voice_name[argument]
-            result = self.cache[voice_name]
-        return Cache(result)
 
 
 def append_anchor_note_function(argument, *, runtime=None):
@@ -2689,7 +2689,7 @@ def cache_leaves(score, measure_count, voice_abbreviations=None):
                 cached_leaves = leaves_by_measure_number.setdefault(measure_number, [])
                 cached_leaves.append(leaf)
     if voice_abbreviations:
-        cache = SmartCache(cache, voice_abbreviations)
+        cache = CacheGetItemWrapper(cache, voice_abbreviations)
     return cache
 
 
@@ -2725,8 +2725,8 @@ def color_repeat_pitch_classes(score):
             abjad.attach(literal, leaf, tag=tag)
 
 
-def get(cache):
-    return Selection(cache)
+def scope(cache):
+    return DynamicScope(cache)
 
 
 def interpreter(
