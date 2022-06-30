@@ -2589,6 +2589,22 @@ class Selection:
             del self.leaves
 
 
+class SmartCache:
+    def __init__(self, cache, voice_abbreviations):
+        self.cache = cache
+        self.abbreviation_to_voice_name = {}
+        for abbreviation, voice_name in voice_abbreviations.items():
+            self.abbreviation_to_voice_name[abbreviation] = voice_name
+
+    def __getitem__(self, argument):
+        try:
+            result = self.cache[argument]
+        except KeyError:
+            voice_name = self.abbreviation_to_voice_name[argument]
+            result = self.cache[voice_name]
+        return Cache(result)
+
+
 def append_anchor_note_function(argument, *, runtime=None):
     leaf = abjad.get.leaf(argument, 0)
     parentage = abjad.get.parentage(leaf)
@@ -2649,22 +2665,6 @@ def append_anchor_note_function(argument, *, runtime=None):
 def append_anchor_note() -> _commands.GenericCommand:
     command = _commands.GenericCommand(function=append_anchor_note_function)
     return command
-
-
-class SmartCache:
-    def __init__(self, cache, voice_abbreviations):
-        self.cache = cache
-        self.abbreviation_to_voice_name = {}
-        for abbreviation, voice_name in voice_abbreviations.items():
-            self.abbreviation_to_voice_name[abbreviation] = voice_name
-
-    def __getitem__(self, argument):
-        try:
-            result = self.cache[argument]
-        except KeyError:
-            voice_name = self.abbreviation_to_voice_name[argument]
-            result = self.cache[voice_name]
-        return result
 
 
 def cache_leaves(score, measure_count, voice_abbreviations=None):
