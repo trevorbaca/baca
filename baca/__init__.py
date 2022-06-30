@@ -49,7 +49,6 @@ from .pcollections import (
 )
 from .piecewise import *
 from .rhythmcommands import *
-from .scope import *
 from .select import *
 from .spanners import *
 
