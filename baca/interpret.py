@@ -2651,7 +2651,23 @@ def append_anchor_note() -> _commands.GenericCommand:
     return command
 
 
-def cache_leaves(score, measure_count):
+class SmartCache:
+    def __init__(self, cache, voice_abbreviations):
+        self.cache = cache
+        self.abbreviation_to_voice_name = {}
+        for abbreviation, voice_name in voice_abbreviations.items():
+            self.abbreviation_to_voice_name[abbreviation] = voice_name
+
+    def __getitem__(self, argument):
+        try:
+            result = self.cache[argument]
+        except KeyError:
+            voice_name = self.abbreviation_to_voice_name[argument]
+            result = self.cache[voice_name]
+        return result
+
+
+def cache_leaves(score, measure_count, voice_abbreviations=None):
     measure_timespans = []
     for measure_index in range(measure_count):
         measure_number = measure_index + 1
@@ -2669,6 +2685,8 @@ def cache_leaves(score, measure_count):
             if leaf_timespan.starts_during_timespan(measure_timespan):
                 cached_leaves = leaves_by_measure_number.setdefault(measure_number, [])
                 cached_leaves.append(leaf)
+    if voice_abbreviations:
+        cache = SmartCache(cache, voice_abbreviations)
     return cache
 
 
