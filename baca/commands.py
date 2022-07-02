@@ -25,6 +25,50 @@ from . import typings as _typings
 from .enums import enums as _enums
 
 
+def _attach_persistent_indicator(
+    argument,
+    indicators,
+    *,
+    context=None,
+    do_not_test=False,
+    deactivate=False,
+    direction=None,
+    manifests=None,
+    predicate=None,
+    tag=None,
+):
+    assert isinstance(manifests, dict), repr(manifests)
+    if isinstance(indicators, collections.abc.Iterable):
+        cyclic_indicators = abjad.CyclicTuple(indicators)
+    else:
+        cyclic_indicators = abjad.CyclicTuple([indicators])
+    # TODO: eventually uncomment following two lines:
+    # for indicator in cyclic_indicators:
+    #     assert getattr(indicator, "persistent", False) is True, repr(indicator)
+    leaves = abjad.select.leaves(argument)
+    # tag = tag.append(_tags.function_name(_frame()))
+    tag = tag.append(abjad.Tag("baca.IndicatorCommand._call()"))
+    for i, leaf in enumerate(leaves):
+        if predicate and not predicate(leaf):
+            continue
+        indicators = cyclic_indicators[i]
+        indicators = _token_to_indicators(indicators)
+        for indicator in indicators:
+            reapplied = _treat.remove_reapplied_wrappers(leaf, indicator)
+            wrapper = abjad.attach(
+                indicator,
+                leaf,
+                context=context,
+                deactivate=deactivate,
+                direction=direction,
+                do_not_test=do_not_test,
+                tag=tag,
+                wrapper=True,
+            )
+            if _treat.compare_persistent_indicators(indicator, reapplied):
+                _treat.treat_persistent_wrapper(manifests, wrapper, "redundant")
+
+
 def _coerce_pitches(pitches):
     if isinstance(pitches, str):
         pitches = _parse_string(pitches)
@@ -1048,7 +1092,7 @@ class IndicatorCommand(_command.Command):
             argument = self.selector(argument)
         if not argument:
             return
-        _do_indicator_command(
+        _attach_persistent_indicator(
             argument,
             self.indicators,
             context=self.context,
@@ -1059,47 +1103,6 @@ class IndicatorCommand(_command.Command):
             predicate=self.predicate,
             tag=self.tag,
         )
-
-
-def _do_indicator_command(
-    argument,
-    indicators,
-    *,
-    context=None,
-    do_not_test=False,
-    deactivate=False,
-    direction=None,
-    manifests=None,
-    predicate=None,
-    tag=None,
-):
-    assert isinstance(manifests, dict), repr(manifests)
-    if isinstance(indicators, collections.abc.Iterable):
-        cyclic_indicators = abjad.CyclicTuple(indicators)
-    else:
-        cyclic_indicators = abjad.CyclicTuple([indicators])
-    leaves = abjad.select.leaves(argument)
-    # tag = tag.append(_tags.function_name(_frame()))
-    tag = tag.append(abjad.Tag("baca.IndicatorCommand._call()"))
-    for i, leaf in enumerate(leaves):
-        if predicate and not predicate(leaf):
-            continue
-        indicators = cyclic_indicators[i]
-        indicators = _token_to_indicators(indicators)
-        for indicator in indicators:
-            reapplied = _treat.remove_reapplied_wrappers(leaf, indicator)
-            wrapper = abjad.attach(
-                indicator,
-                leaf,
-                context=context,
-                deactivate=deactivate,
-                direction=direction,
-                do_not_test=do_not_test,
-                tag=tag,
-                wrapper=True,
-            )
-            if _treat.compare_persistent_indicators(indicator, reapplied):
-                _treat.treat_persistent_wrapper(manifests, wrapper, "redundant")
 
 
 @dataclasses.dataclass(slots=True)
@@ -6037,7 +6040,7 @@ def dynamic_function(
     tag = abjad.Tag("baca.dynamic()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
-    _do_indicator_command(
+    _attach_persistent_indicator(
         leaf,
         [indicator],
         manifests={},
@@ -8103,16 +8106,16 @@ def clef(
 
 
 def clef_function(
-    leaf,
-    clef: str = "treble",
+    leaf: abjad.Leaf,
+    clef: str,
 ) -> None:
     assert isinstance(leaf, abjad.Leaf), repr(leaf)
     assert isinstance(clef, str), repr(clef)
     indicator = abjad.Clef(clef)
-    abjad.attach(
-        indicator,
+    _attach_persistent_indicator(
         leaf,
-        # tag=_tags.function_name(_frame()),
+        [indicator],
+        manifests={},
         tag=abjad.Tag("baca.clef()"),
     )
 
@@ -10272,14 +10275,14 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
 def staff_lines_function(argument, n: int) -> None:
     assert isinstance(n, int), repr(n)
     bar_extent = _indicators.BarExtent(n)
-    _do_indicator_command(
+    _attach_persistent_indicator(
         argument,
         [bar_extent],
         manifests={},
         tag=abjad.Tag("baca.staff_lines(1)").append(_tags.NOT_PARTS),
     )
     staff_lines = _indicators.StaffLines(n)
-    _do_indicator_command(
+    _attach_persistent_indicator(
         argument,
         [staff_lines],
         manifests={},
