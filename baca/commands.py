@@ -7570,6 +7570,23 @@ def accent(
     )
 
 
+def _alternate_bow_strokes_preparation(*tweaks, downbow_first, full):
+    indicators: list[abjad.Articulation | abjad.Bundle]
+    if downbow_first:
+        if full:
+            strings = ["baca-full-downbow", "baca-full-upbow"]
+        else:
+            strings = ["downbow", "upbow"]
+    else:
+        if full:
+            strings = ["baca-full-upbow", "baca-full-downbow"]
+        else:
+            strings = ["upbow", "downbow"]
+    indicators = [abjad.Articulation(_) for _ in strings]
+    indicators = [_tweaks.bundle_tweaks(_, tweaks) for _ in indicators]
+    return indicators
+
+
 def alternate_bow_strokes(
     selector=lambda _: _select.pheads(_, exclude=_enums.HIDDEN),
     *tweaks: abjad.Tweak,
@@ -7819,24 +7836,40 @@ def alternate_bow_strokes(
             >>
 
     """
-    indicators: list[abjad.Articulation | abjad.Bundle]
-    if downbow_first:
-        if full:
-            strings = ["baca-full-downbow", "baca-full-upbow"]
-        else:
-            strings = ["downbow", "upbow"]
-    else:
-        if full:
-            strings = ["baca-full-upbow", "baca-full-downbow"]
-        else:
-            strings = ["upbow", "downbow"]
-    indicators = [abjad.Articulation(_) for _ in strings]
-    indicators = [_tweaks.bundle_tweaks(_, tweaks) for _ in indicators]
+    indicators = _alternate_bow_strokes_preparation(
+        *tweaks, downbow_first=downbow_first, full=full
+    )
     return IndicatorCommand(
         indicators=indicators,
         selector=selector,
         tags=[_tags.function_name(_frame())],
     )
+
+
+def alternate_bow_strokes_function(
+    argument,
+    *tweaks: abjad.Tweak,
+    downbow_first: bool = True,
+    full: bool = False,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    pass
+    # tag = _tags.function_name(_frame())
+    tag = abjad.Tag("baca.alternate_bow_strokes()")
+    for tag_ in tags or []:
+        tag = tag.append(tag_)
+    indicators = _alternate_bow_strokes_preparation(
+        *tweaks, downbow_first=downbow_first, full=full
+    )
+    indicators = abjad.CyclicTuple(indicators)
+    leaves = abjad.select.leaves(argument)
+    for i, leaf in enumerate(leaves):
+        indicator = indicators[i]
+        abjad.attach(
+            indicator,
+            leaf,
+            tag=tag,
+        )
 
 
 def arpeggio(

@@ -2567,6 +2567,44 @@ class CacheGetItemWrapper:
             result = self.cache[voice_name]
         return DictionaryGetItemWrapper(result)
 
+    @staticmethod
+    def _get_for_voice(result, voice, argument):
+        if isinstance(argument, tuple):
+            assert len(argument) == 2, repr(argument)
+            result_ = voice[argument]
+            result.append(result_)
+        else:
+            assert isinstance(argument, list), repr(argument)
+            for pair in argument:
+                assert isinstance(pair, tuple), repr(pair)
+                assert len(pair) == 2, repr(pair)
+                result_ = voice[pair]
+                result.append(result_)
+
+    def get(self, *items):
+        result = []
+        for item in items:
+            if isinstance(item, str):
+                voice = self[item]
+                result.append(voice)
+            elif isinstance(item, tuple):
+                assert len(item) == 2, repr(item)
+                if isinstance(item[0], str):
+                    voice = self[item[0]]
+                    self._get_for_voice(result, voice, item[1])
+                else:
+                    assert isinstance(item[0], list), repr(item[0])
+                    for abbreviation in item[0]:
+                        assert isinstance(abbreviation, str), repr(abbreviation)
+                        voice = self[abbreviation]
+                        self._get_for_voice(result, voice, item[1])
+            else:
+                assert isinstance(item, list), repr(item)
+                for item_ in item:
+                    result_ = self.get(item_)
+                    result.append(result_)
+        return result
+
 
 class DictionaryGetItemWrapper:
     def __init__(self, cache):
