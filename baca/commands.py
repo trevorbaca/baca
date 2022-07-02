@@ -10276,14 +10276,14 @@ def staff_lines_function(argument, n: int) -> None:
         argument,
         [bar_extent],
         manifests={},
-        tag=abjad.Tag("baca.staff_lines(n=1)").append(_tags.NOT_PARTS),
+        tag=abjad.Tag("baca.staff_lines(1)").append(_tags.NOT_PARTS),
     )
     staff_lines = _indicators.StaffLines(n)
     _do_indicator_command(
         argument,
         [staff_lines],
         manifests={},
-        tag=abjad.Tag("baca.staff_lines(n=2)"),
+        tag=abjad.Tag("baca.staff_lines(2)"),
     )
 
 

@@ -2494,6 +2494,30 @@ def note_head_style_harmonic(
     )
 
 
+def note_head_style_harmonic_function(
+    argument, *, tags: list[abjad.Tag] = None
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _call_override_command(
+        leaves,
+        "NoteHead",
+        "style",
+        "#'harmonic",
+        first_tag,
+        final_tag,
+    )
+
+
 def note_head_style_harmonic_black(
     selector=lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
