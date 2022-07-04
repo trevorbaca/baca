@@ -2233,6 +2233,7 @@ def _set_intermittent_to_staff_position_zero(score):
     _commands.staff_position_function(
         pleaves,
         0,
+        allow_hidden=True,
         set_chord_pitches_equal=True,
     )
 
@@ -2246,6 +2247,7 @@ def _set_not_yet_pitched_to_staff_position_zero(score):
     _commands.staff_position_function(
         pleaves,
         0,
+        allow_hidden=True,
         set_chord_pitches_equal=True,
     )
 

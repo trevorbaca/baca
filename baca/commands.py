@@ -126,6 +126,7 @@ def _set_lt_pitch(
     lt,
     pitch,
     *,
+    allow_hidden=False,
     allow_repitch=False,
     mock=False,
     set_chord_pitches_equal=False,
@@ -133,6 +134,8 @@ def _set_lt_pitch(
     new_lt = None
     already_pitched = _enums.ALREADY_PITCHED
     for leaf in lt:
+        if not allow_hidden and abjad.get.has_indicator(leaf, _enums.HIDDEN):
+            continue
         abjad.detach(_enums.NOT_YET_PITCHED, leaf)
         if mock is True:
             abjad.attach(_enums.MOCK, leaf)
@@ -193,6 +196,7 @@ def _staff_position_function(
     argument,
     numbers,
     *,
+    allow_hidden=False,
     allow_out_of_range=False,
     allow_repeats=False,
     allow_repitch=False,
@@ -218,6 +222,7 @@ def _staff_position_function(
             new_lt = _set_lt_pitch(
                 plt,
                 pitches,
+                allow_hidden=allow_hidden,
                 # allow_repitch=self.allow_repitch,
                 # mock=self.mock,
                 # set_chord_pitches_equal=self.set_chord_pitches_equal,
@@ -234,6 +239,7 @@ def _staff_position_function(
             new_lt = _set_lt_pitch(
                 plt,
                 pitch,
+                allow_hidden=allow_hidden,
                 # allow_repitch=self.allow_repitch,
                 # mock=self.mock,
                 # set_chord_pitches_equal=self.set_chord_pitches_equal,
@@ -2521,6 +2527,7 @@ def _do_pitch_command(
     cyclic,
     pitches,
     *,
+    allow_hidden: bool = False,
     allow_octaves: bool = False,
     allow_out_of_range: bool = False,
     allow_repeats: bool = False,
@@ -2536,50 +2543,37 @@ def _do_pitch_command(
         plt = abjad.get.logical_tie(pleaf)
         if plt.head is pleaf:
             plts.append(plt)
-    # if not self.cyclic:
     if not cyclic:
-        # if len(self.pitches) < len(plts):
         if len(pitches) < len(plts):
-            # message = f"only {len(self.pitches)} pitches"
             message = f"only {len(pitches)} pitches"
             message += f" for {len(plts)} logical ties:\n\n"
             message += f"{pitches!r} and {plts!r}."
             raise Exception(message)
-    # pitches = self.pitches
-    # if self.cyclic and not isinstance(pitches, abjad.CyclicTuple):
     if cyclic and not isinstance(pitches, abjad.CyclicTuple):
         pitches = abjad.CyclicTuple(pitches)
-    # previous_pitches_consumed = self._previous_pitches_consumed()
-    # if self.cyclic and not isinstance(pitches, abjad.CyclicTuple):
-    #     pitches = abjad.CyclicTuple(pitches)
     pitches_consumed = 0
     mutated_score = False
     for i, plt in enumerate(plts):
         pitch = pitches[i + previous_pitches_consumed]
         new_plt = _set_lt_pitch(
-            # plt, pitch, allow_repitch=self.allow_repitch, mock=self.mock
             plt,
             pitch,
+            allow_hidden=allow_hidden,
             allow_repitch=allow_repitch,
             mock=mock,
         )
         if new_plt is not None:
-            # self._mutated_score = True
             mutated_score = True
             plt = new_plt
-        # if self.allow_octaves:
         if allow_octaves:
             for pleaf in plt:
                 abjad.attach(_enums.ALLOW_OCTAVE, pleaf)
-        # if self.allow_out_of_range:
         if allow_out_of_range:
             for pleaf in plt:
                 abjad.attach(_enums.ALLOW_OUT_OF_RANGE, pleaf)
-        # if self.allow_repeats:
         if allow_repeats:
             for pleaf in plt:
                 abjad.attach(_enums.ALLOW_REPEAT_PITCH, pleaf)
-        # if self.do_not_transpose is True:
         if do_not_transpose is True:
             for pleaf in plt:
                 abjad.attach(_enums.DO_NOT_TRANSPOSE, pleaf)
@@ -2873,6 +2867,7 @@ class PitchCommand(_command.Command):
 
     """
 
+    allow_hidden: bool = False
     allow_octaves: bool = False
     allow_out_of_range: bool = False
     allow_repeats: bool = False
@@ -2886,6 +2881,7 @@ class PitchCommand(_command.Command):
 
     def __post_init__(self):
         _command.Command.__post_init__(self)
+        assert isinstance(self.allow_hidden, bool), repr(self.allow_hidden)
         self.allow_octaves = bool(self.allow_octaves)
         self.allow_out_of_range = bool(self.allow_out_of_range)
         self.allow_repeats = bool(self.allow_repeats)
@@ -2916,6 +2912,7 @@ class PitchCommand(_command.Command):
             argument,
             self.cyclic,
             self.pitches,
+            allow_hidden=self.allow_hidden,
             allow_octaves=self.allow_octaves,
             allow_out_of_range=self.allow_out_of_range,
             allow_repeats=self.allow_repeats,
@@ -4965,6 +4962,7 @@ class StaffPositionCommand(_command.Command):
     """
 
     numbers: typing.Any = ()
+    allow_hidden: bool = False
     allow_out_of_range: bool = False
     allow_repeats: bool = False
     allow_repitch: bool = False
@@ -4979,6 +4977,7 @@ class StaffPositionCommand(_command.Command):
         prototype = (int, list, abjad.StaffPosition)
         assert all(isinstance(_, prototype) for _ in self.numbers), repr(self.numbers)
         self.numbers = abjad.CyclicTuple(self.numbers)
+        assert isinstance(self.allow_hidden, bool), repr(self.allow_hidden)
         self.allow_out_of_range = bool(self.allow_out_of_range)
         self.allow_repeats = bool(self.allow_repeats)
         self.allow_repitch = bool(self.allow_repitch)
@@ -4997,6 +4996,7 @@ class StaffPositionCommand(_command.Command):
         mutated_score = _staff_position_function(
             argument,
             self.numbers,
+            allow_hidden=self.allow_hidden,
             allow_out_of_range=self.allow_out_of_range,
             allow_repeats=self.allow_repeats,
             allow_repitch=self.allow_repitch,
@@ -5017,6 +5017,7 @@ class StaffPositionInterpolationCommand(_command.Command):
 
     start: int | str | abjad.NamedPitch | abjad.StaffPosition | None = None
     stop: int | str | abjad.NamedPitch | abjad.StaffPosition | None = None
+    allow_hidden: bool = False
     mock: bool = False
     pitches_instead_of_staff_positions: bool = False
     selector: typing.Callable = lambda _: _select.plts(_)
@@ -5034,6 +5035,7 @@ class StaffPositionInterpolationCommand(_command.Command):
         elif isinstance(self.stop, int):
             self.stop = abjad.StaffPosition(self.stop)
         assert isinstance(self.stop, prototype), repr(self.stop)
+        assert isinstance(self.allow_hidden, bool), repr(self.allow_hidden)
         self.mock = bool(self.mock)
         if self.pitches_instead_of_staff_positions is not None:
             self.pitches_instead_of_staff_positions = bool(
@@ -5078,7 +5080,13 @@ class StaffPositionInterpolationCommand(_command.Command):
                 default=abjad.Clef("treble"),
             )
             pitch = clef.to_pitch(staff_position)
-            new_lt = _set_lt_pitch(plt, pitch, allow_repitch=True, mock=self.mock)
+            new_lt = _set_lt_pitch(
+                plt,
+                pitch,
+                allow_hidden=self.allow_hidden,
+                allow_repitch=True,
+                mock=self.mock,
+            )
             assert new_lt is None, repr(new_lt)
             for leaf in plt:
                 abjad.attach(_enums.ALLOW_REPEAT_PITCH, leaf)
@@ -5094,7 +5102,13 @@ class StaffPositionInterpolationCommand(_command.Command):
                 default=abjad.Clef("treble"),
             )
             start_pitch = clef.to_pitch(self.start)
-        new_lt = _set_lt_pitch(plts[0], start_pitch, allow_repitch=True, mock=self.mock)
+        new_lt = _set_lt_pitch(
+            plts[0],
+            start_pitch,
+            allow_hidden=self.allow_hidden,
+            allow_repitch=True,
+            mock=self.mock,
+        )
         assert new_lt is None, repr(new_lt)
         if isinstance(self.stop, abjad.NamedPitch):
             stop_pitch = self.stop
@@ -5106,7 +5120,13 @@ class StaffPositionInterpolationCommand(_command.Command):
                 default=abjad.Clef("treble"),
             )
             stop_pitch = clef.to_pitch(self.stop)
-        new_lt = _set_lt_pitch(plts[-1], stop_pitch, allow_repitch=True, mock=self.mock)
+        new_lt = _set_lt_pitch(
+            plts[-1],
+            stop_pitch,
+            allow_hidden=self.allow_hidden,
+            allow_repitch=True,
+            mock=self.mock,
+        )
         assert new_lt is None, repr(new_lt)
 
 
@@ -6136,6 +6156,7 @@ def interpolate_pitches(
     stop: int | str | abjad.NamedPitch,
     selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
     *,
+    allow_hidden: bool = False,
     mock: bool = False,
 ) -> StaffPositionInterpolationCommand:
     r"""
@@ -6290,6 +6311,7 @@ def interpolate_pitches(
     return StaffPositionInterpolationCommand(
         start=start_,
         stop=stop_,
+        allow_hidden=allow_hidden,
         mock=mock,
         pitches_instead_of_staff_positions=True,
         selector=selector,
@@ -6304,6 +6326,7 @@ def interpolate_staff_positions(
     stop: int | abjad.StaffPosition,
     selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
     *,
+    allow_hidden: bool = False,
     mock: bool = False,
 ) -> StaffPositionInterpolationCommand:
     """
@@ -6318,7 +6341,11 @@ def interpolate_staff_positions(
     else:
         stop_ = abjad.StaffPosition(stop)
     return StaffPositionInterpolationCommand(
-        start=start_, stop=stop_, mock=mock, selector=selector
+        start=start_,
+        stop=stop_,
+        allow_hidden=allow_hidden,
+        mock=mock,
+        selector=selector,
     )
 
 
@@ -6677,6 +6704,7 @@ def pitch(
     pitch,
     selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
     *,
+    allow_hidden: bool = False,
     allow_out_of_range: bool = False,
     allow_repitch: bool = False,
     mock: bool = False,
@@ -6774,6 +6802,7 @@ def pitch(
     if persist is not None and not isinstance(persist, str):
         raise Exception(f"persist name must be string (not {persist!r}).")
     return PitchCommand(
+        allow_hidden=allow_hidden,
         allow_out_of_range=allow_out_of_range,
         allow_repeats=True,
         allow_repitch=allow_repitch,
@@ -7415,6 +7444,7 @@ def staff_position(
     argument: int | list | abjad.StaffPosition,
     selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
     *,
+    allow_hidden: bool = False,
     allow_out_of_range: bool = False,
     allow_repitch: bool = False,
     mock: bool = False,
@@ -7425,6 +7455,7 @@ def staff_position(
         assert all(isinstance(_, int | abjad.StaffPosition) for _ in argument)
     return StaffPositionCommand(
         numbers=[argument],
+        allow_hidden=allow_hidden,
         allow_out_of_range=allow_out_of_range,
         allow_repeats=True,
         allow_repitch=allow_repitch,
@@ -7435,23 +7466,22 @@ def staff_position(
 
 
 def staff_position_function(
-    # components: typing.Iterable[abjad.Component],
     argument,
     numbers: int | list | abjad.StaffPosition,
     *,
+    allow_hidden: bool = False,
     allow_out_of_range: bool = False,
     allow_repitch: bool = False,
     mock: bool = False,
     set_chord_pitches_equal: bool = False,
 ) -> bool:
-    # assert all(isinstance(_, abjad.Component) for _ in components), repr(components)
     assert isinstance(numbers, int | list | abjad.StaffPosition), repr(numbers)
     if isinstance(numbers, list):
         assert all(isinstance(_, int | abjad.StaffPosition) for _ in numbers)
     mutated_score = _staff_position_function(
-        # components,
         argument,
         [numbers],
+        allow_hidden=allow_hidden,
         allow_out_of_range=allow_out_of_range,
         allow_repeats=True,
         allow_repitch=allow_repitch,
@@ -7468,6 +7498,7 @@ def staff_positions(
     numbers,
     selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
     *,
+    allow_hidden: bool = False,
     allow_out_of_range: bool = False,
     allow_repeats: bool = False,
     mock: bool = False,
@@ -7477,6 +7508,7 @@ def staff_positions(
         allow_repeats = True
     return StaffPositionCommand(
         numbers=numbers,
+        allow_hidden=allow_hidden,
         allow_out_of_range=allow_out_of_range,
         allow_repeats=allow_repeats,
         exact=exact,
@@ -12096,6 +12128,7 @@ def flat_glissando(
     | list[abjad.StaffPosition]
     | None = None,
     *tweaks,
+    allow_hidden: bool = False,
     allow_repitch: bool = False,
     do_not_hide_middle_note_heads: bool = False,
     mock: bool = False,
@@ -12149,6 +12182,7 @@ def flat_glissando(
         ):
             staff_position_command_object = _staff_position_command(
                 pitch,
+                allow_hidden=allow_hidden,
                 allow_repitch=allow_repitch,
                 mock=mock,
                 selector=new_selector,
@@ -12157,6 +12191,7 @@ def flat_glissando(
         else:
             pitch_command_object = _pitch_command_factory(
                 pitch,
+                allow_hidden=allow_hidden,
                 allow_repitch=allow_repitch,
                 mock=mock,
                 selector=new_selector,
@@ -12166,13 +12201,21 @@ def flat_glissando(
         if isinstance(pitch, abjad.StaffPosition):
             assert isinstance(stop_pitch, abjad.StaffPosition)
             interpolation_command = _interpolate_staff_positions_function(
-                pitch, stop_pitch, mock=mock, selector=new_selector
+                pitch,
+                stop_pitch,
+                allow_hidden=allow_hidden,
+                mock=mock,
+                selector=new_selector,
             )
         else:
             assert isinstance(pitch, str | abjad.NamedPitch)
             assert isinstance(stop_pitch, str | abjad.NamedPitch)
             interpolation_command = _interpolate_pitches_function(
-                pitch, stop_pitch, mock=mock, selector=new_selector
+                pitch,
+                stop_pitch,
+                allow_hidden=allow_hidden,
+                mock=mock,
+                selector=new_selector,
             )
         commands.append(interpolation_command)
     return _command.suite(*commands)
