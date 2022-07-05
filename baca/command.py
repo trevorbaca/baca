@@ -86,6 +86,7 @@ class TimelineScope:
 
 
 @dataclasses.dataclass(slots=True)
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Command:
     """
     Command.
@@ -100,7 +101,6 @@ class Command:
     tag_measure_number: bool = False
     tags: list[abjad.Tag] = dataclasses.field(default_factory=list)
     _mutated_score: bool = dataclasses.field(default=False, init=False, repr=False)
-    # _runtime: dict = dataclasses.field(default_factory=dict, init=False, repr=False)
     _state: dict = dataclasses.field(default_factory=dict, init=False, repr=False)
     _tags: list[abjad.Tag] = dataclasses.field(default_factory=list, repr=False)
 
@@ -112,7 +112,6 @@ class Command:
 
     def __call__(self, argument=None, runtime: dict = None) -> None:
         runtime = runtime or {}
-        # self._runtime = runtime or {}
         if self.map is not None:
             assert callable(self.map)
             argument = self.map(argument)
@@ -143,10 +142,6 @@ class Command:
             if i not in self.match:
                 return False
         return True
-
-    #    @property
-    #    def runtime(self) -> dict:
-    #        return self._runtime
 
     # TODO: reimplement as method with leaf argument
     # TODO: supply with all self.get_tag(leaf) functionality

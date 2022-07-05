@@ -271,7 +271,7 @@ def _staff_position_function(
             default=abjad.Clef("treble"),
         )
         number = numbers[i]
-        # TODO: remove this first branch because never executed?
+        # TODO: remove this first branch (after migration) because never executed?
         if isinstance(number, list):
             raise Exception("ASDF")
             positions = [abjad.StaffPosition(_) for _ in number]
@@ -342,6 +342,7 @@ def _validate_bcps(bcps):
 
 
 @dataclasses.dataclass(slots=True)
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class BCPCommand(_command.Command):
     r"""
     Bow contact point command.
@@ -901,6 +902,7 @@ class BCPCommand(_command.Command):
 
 
 @dataclasses.dataclass(slots=True)
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class ColorCommand(_command.Command):
 
     lone: bool = False
@@ -918,6 +920,7 @@ class ColorCommand(_command.Command):
 
 
 @dataclasses.dataclass(slots=True)
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class ContainerCommand(_command.Command):
     r"""
     Container command.
@@ -1023,6 +1026,7 @@ class ContainerCommand(_command.Command):
 
 
 @dataclasses.dataclass(slots=True)
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class DetachCommand(_command.Command):
 
     arguments: typing.Sequence[typing.Any] = ()
@@ -1045,6 +1049,7 @@ class DetachCommand(_command.Command):
 
 
 @dataclasses.dataclass(slots=True)
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class GenericCommand(_command.Command):
 
     function: typing.Callable = lambda _: _
@@ -1063,6 +1068,7 @@ class GenericCommand(_command.Command):
 
 
 @dataclasses.dataclass(slots=True)
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class GlissandoCommand(_command.Command):
 
     allow_repeats: bool = False
@@ -1111,6 +1117,7 @@ class GlissandoCommand(_command.Command):
 
 
 @dataclasses.dataclass(slots=True)
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class IndicatorCommand(_command.Command):
 
     indicators: typing.Sequence = ()
@@ -1125,19 +1132,11 @@ class IndicatorCommand(_command.Command):
         if self.context is not None:
             assert isinstance(self.context, str), repr(self.context)
         assert isinstance(self.do_not_test, bool), repr(self.do_not_test)
-        # TODO: do not modify in post-init:
-        indicators_ = None
-        if self.indicators is not None:
-            if isinstance(self.indicators, collections.abc.Iterable):
-                indicators_ = abjad.CyclicTuple(self.indicators)
-            else:
-                indicators_ = abjad.CyclicTuple([self.indicators])
-        self.indicators = indicators_
         assert isinstance(self.redundant, bool), repr(self.redundant)
 
     def __copy__(self, *arguments):
         result = dataclasses.replace(self)
-        result.indicators = copy.deepcopy(self.indicators)
+        result.indicators = copy.deepcopy(self._indicators_coerced())
         return result
 
     __repr__ = _command.Command.__repr__
@@ -1145,7 +1144,7 @@ class IndicatorCommand(_command.Command):
     def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
-        if self.indicators is None:
+        if self._indicators_coerced() is None:
             return
         if self.redundant is True:
             return
@@ -1155,7 +1154,7 @@ class IndicatorCommand(_command.Command):
             return
         _attach_persistent_indicator(
             argument,
-            self.indicators,
+            self._indicators_coerced(),
             context=self.context,
             do_not_test=self.do_not_test,
             deactivate=self.deactivate,
@@ -1165,20 +1164,31 @@ class IndicatorCommand(_command.Command):
             tag=self.tag,
         )
 
+    def _indicators_coerced(self):
+        indicators_ = None
+        if self.indicators is not None:
+            if isinstance(self.indicators, collections.abc.Iterable):
+                indicators_ = abjad.CyclicTuple(self.indicators)
+            else:
+                indicators_ = abjad.CyclicTuple([self.indicators])
+        return indicators_
+
 
 @dataclasses.dataclass(slots=True)
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class InstrumentChangeCommand(IndicatorCommand):
     def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        if self.indicators is None:
+        if self._indicators_coerced() is None:
             return
         IndicatorCommand._call(self, argument=argument, runtime=runtime)
 
 
 @dataclasses.dataclass(slots=True)
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class LabelCommand(_command.Command):
 
     callable_: typing.Any = None
@@ -1197,6 +1207,7 @@ class LabelCommand(_command.Command):
 
 
 @dataclasses.dataclass(slots=True)
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class PartAssignmentCommand(_command.Command):
 
     part_assignment: _parts.PartAssignment | None = None
@@ -1242,6 +1253,7 @@ class PartAssignmentCommand(_command.Command):
 
 
 @dataclasses.dataclass(slots=True)
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class AccidentalAdjustmentCommand(_command.Command):
     r"""
     Accidental adjustment command.
@@ -1371,6 +1383,7 @@ class AccidentalAdjustmentCommand(_command.Command):
 
 
 @dataclasses.dataclass(slots=True)
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class ClusterCommand(_command.Command):
     r"""
     Cluster command.
@@ -2026,17 +2039,17 @@ class ClusterCommand(_command.Command):
     direction: abjad.Vertical | None = abjad.UP
     hide_flat_markup: bool = False
     selector: typing.Callable = lambda _: _select.plts(_)
-    start_pitch: typing.Any = None
-    widths: typing.Any = None
+    start_pitch: abjad.NamedPitch | None = None
+    widths: typing.Sequence[int] | None = None
 
     def __post_init__(self):
         _command.Command.__post_init__(self)
         assert isinstance(self.hide_flat_markup, bool), repr(self.hide_flat_markup)
-        # TODO: do not modify in post-init:
         if self.start_pitch is not None:
-            self.start_pitch = abjad.NamedPitch(self.start_pitch)
+            assert isinstance(self.start_pitch, abjad.NamedPitch), repr(
+                self.start_pitch
+            )
         assert abjad.math.all_are_nonnegative_integers(self.widths)
-        self.widths = abjad.CyclicTuple(self.widths)
 
     def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
@@ -2049,9 +2062,10 @@ class ClusterCommand(_command.Command):
             return
         leaf = abjad.select.leaf(argument, 0)
         root = abjad.get.parentage(leaf).root
+        widths = abjad.CyclicTuple(self.widths)
         with abjad.ForbidUpdate(component=root):
             for i, plt in enumerate(_select.plts(argument)):
-                width = self.widths[i]
+                width = widths[i]
                 self._make_cluster(plt, width)
 
     def _make_cluster(self, plt, width):
@@ -2089,6 +2103,7 @@ class ClusterCommand(_command.Command):
 
 
 @dataclasses.dataclass(slots=True)
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class ColorFingeringCommand(_command.Command):
     r"""
     Color fingering command.
@@ -2170,9 +2185,7 @@ class ColorFingeringCommand(_command.Command):
 
     def __post_init__(self):
         _command.Command.__post_init__(self)
-        # TODO: do not modify in post-init:
         assert abjad.math.all_are_nonnegative_integers(self.numbers)
-        self.numbers = abjad.CyclicTuple(self.numbers)
         _tweaks.validate_indexed_tweaks(self.tweaks)
 
     def _call(self, *, argument=None, runtime=None) -> None:
@@ -2186,8 +2199,9 @@ class ColorFingeringCommand(_command.Command):
             return
         pheads = _select.pheads(argument)
         total = len(pheads)
+        numbers = abjad.CyclicTuple(self.numbers)
         for i, phead in enumerate(pheads):
-            number = self.numbers[i]
+            number = numbers[i]
             if number != 0:
                 fingering = abjad.ColorFingering(number)
                 fingering = _tweaks.bundle_tweaks(
@@ -2197,6 +2211,7 @@ class ColorFingeringCommand(_command.Command):
 
 
 @dataclasses.dataclass(slots=True)
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class DiatonicClusterCommand(_command.Command):
     r"""
     Diatonic cluster command.
@@ -2228,8 +2243,7 @@ class DiatonicClusterCommand(_command.Command):
     def __post_init__(self):
         _command.Command.__post_init__(self)
         assert abjad.math.all_are_nonnegative_integers(self.widths)
-        # TODO: do not modify in post-init:
-        self.widths = abjad.CyclicTuple(self.widths)
+        assert all(isinstance(_, int) for _ in self.widths), repr(self.widths)
 
     def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
@@ -2240,8 +2254,9 @@ class DiatonicClusterCommand(_command.Command):
             argument = self.selector(argument)
         if not argument:
             return
+        widths = abjad.CyclicTuple(self.widths)
         for i, plt in enumerate(_select.plts(argument)):
-            width = self.widths[i]
+            width = widths[i]
             start = self._get_lowest_diatonic_pitch_number(plt)
             numbers = range(start, start + width)
             change = abjad.pitch._diatonic_pc_number_to_pitch_class_number
@@ -2317,6 +2332,7 @@ class Loop:
         return self.pitches.__iter__()
 
 
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 @dataclasses.dataclass(slots=True)
 class MicrotoneDeviationCommand(_command.Command):
     r"""
@@ -2412,9 +2428,7 @@ class MicrotoneDeviationCommand(_command.Command):
 
     def __post_init__(self):
         _command.Command.__post_init__(self)
-        # TODO: do not modify in post-init:
         assert all(isinstance(_, int | float) for _ in self.deviations)
-        self.deviations = abjad.CyclicTuple(self.deviations)
 
     def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
@@ -2423,8 +2437,9 @@ class MicrotoneDeviationCommand(_command.Command):
             return
         if self.selector:
             argument = self.selector(argument)
+        deviations = abjad.CyclicTuple(self.deviations)
         for i, plt in enumerate(_select.plts(argument)):
-            deviation = self.deviations[i]
+            deviation = deviations[i]
             self._adjust_pitch(plt, deviation)
 
     def _adjust_pitch(self, plt, deviation):
@@ -2440,6 +2455,7 @@ class MicrotoneDeviationCommand(_command.Command):
             abjad.attach(annotation, pleaf)
 
 
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 @dataclasses.dataclass(slots=True)
 class OctaveDisplacementCommand(_command.Command):
     r"""
@@ -2537,10 +2553,7 @@ class OctaveDisplacementCommand(_command.Command):
 
     def __post_init__(self):
         _command.Command.__post_init__(self)
-        # TODO: do not modify in post-init:
-        self.displacements = tuple(self.displacements)
         assert self._is_octave_displacement_vector(self.displacements)
-        self.displacements = abjad.CyclicTuple(self.displacements)
 
     def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
@@ -2549,8 +2562,9 @@ class OctaveDisplacementCommand(_command.Command):
             return
         if self.selector:
             argument = self.selector(argument)
+        displacements = abjad.CyclicTuple(self.displacements)
         for i, plt in enumerate(_select.plts(argument)):
-            displacement = self.displacements[i]
+            displacement = displacements[i]
             interval = abjad.NumberedInterval(12 * displacement)
             for pleaf in plt:
                 if isinstance(pleaf, abjad.Note):
@@ -2572,6 +2586,7 @@ class OctaveDisplacementCommand(_command.Command):
 
 
 @dataclasses.dataclass(slots=True)
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class PitchCommand(_command.Command):
     r"""
     Pitch command.
@@ -2881,8 +2896,6 @@ class PitchCommand(_command.Command):
         assert isinstance(self.do_not_transpose, bool), repr(self.do_not_transpose)
         assert isinstance(self.ignore_incomplete, bool), repr(self.ignore_incomplete)
         assert isinstance(self.persist, str), repr(self.persist)
-        # TODO: do not modify in post-init:
-        self.pitches = _coerce_pitches(self.pitches)
         self._mutated_score = False
         self._state = {}
 
@@ -2898,10 +2911,11 @@ class PitchCommand(_command.Command):
         if not argument:
             return
         previous_pitches_consumed = self._previous_pitches_consumed(runtime)
+        pitches = _coerce_pitches(self.pitches)
         pitches_consumed, mutated_score = _do_pitch_command(
             argument,
             self.cyclic,
-            self.pitches,
+            pitches,
             allow_hidden=self.allow_hidden,
             allow_octaves=self.allow_octaves,
             allow_out_of_range=self.allow_out_of_range,
@@ -2967,6 +2981,7 @@ class PitchCommand(_command.Command):
 
 
 @dataclasses.dataclass(slots=True)
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class RegisterCommand(_command.Command):
     r"""
     Register command.
@@ -3178,6 +3193,7 @@ class RegisterCommand(_command.Command):
 
 
 @dataclasses.dataclass(slots=True)
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class RegisterInterpolationCommand(_command.Command):
     r"""
     Register interpolation command.
@@ -4135,14 +4151,13 @@ class RegisterInterpolationCommand(_command.Command):
 
     """
 
-    start_pitch: int | float | abjad.NumberedPitch = 0
-    stop_pitch: int | float | abjad.NumberedPitch = 0
+    start_pitch: abjad.NumberedPitch = abjad.NumberedPitch(0)
+    stop_pitch: abjad.NumberedPitch = abjad.NumberedPitch(0)
 
     def __post_init__(self):
         _command.Command.__post_init__(self)
-        # TODO: do not modify in post-init:
-        self.start_pitch = abjad.NumberedPitch(self.start_pitch)
-        self.stop_pitch = abjad.NumberedPitch(self.stop_pitch)
+        assert isinstance(self.start_pitch, abjad.NumberedPitch), repr(self.start_pitch)
+        assert isinstance(self.stop_pitch, abjad.NumberedPitch), repr(self.stop_pitch)
 
     def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
@@ -4176,6 +4191,7 @@ class RegisterInterpolationCommand(_command.Command):
 
 
 @dataclasses.dataclass(slots=True)
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class RegisterToOctaveCommand(_command.Command):
     r"""
     Register-to-octave command.
@@ -4900,6 +4916,7 @@ class SchemeManifest:
 
 
 @dataclasses.dataclass(slots=True)
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class StaffPositionCommand(_command.Command):
     r"""
     Staff position command.
@@ -4948,7 +4965,7 @@ class StaffPositionCommand(_command.Command):
 
     """
 
-    numbers: typing.Any = ()
+    numbers: typing.Sequence[int | list | abjad.StaffPosition] = ()
     allow_hidden: bool = False
     allow_out_of_range: bool = False
     allow_repeats: bool = False
@@ -4963,8 +4980,6 @@ class StaffPositionCommand(_command.Command):
         _command.Command.__post_init__(self)
         prototype = (int, list, abjad.StaffPosition)
         assert all(isinstance(_, prototype) for _ in self.numbers), repr(self.numbers)
-        # TODO: do not modify in post-init:
-        self.numbers = abjad.CyclicTuple(self.numbers)
         assert isinstance(self.allow_hidden, bool), repr(self.allow_hidden)
         assert isinstance(self.allow_out_of_range, bool), repr(self.allow_out_of_range)
         assert isinstance(self.allow_repeats, bool), repr(self.allow_repeats)
@@ -4983,9 +4998,10 @@ class StaffPositionCommand(_command.Command):
             return
         if self.selector:
             argument = self.selector(argument)
+        numbers = abjad.CyclicTuple(self.numbers)
         mutated_score = _staff_position_function(
             argument,
-            self.numbers,
+            numbers,
             allow_hidden=self.allow_hidden,
             allow_out_of_range=self.allow_out_of_range,
             allow_repeats=self.allow_repeats,
@@ -5003,6 +5019,7 @@ class StaffPositionCommand(_command.Command):
 
 
 @dataclasses.dataclass(slots=True)
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class StaffPositionInterpolationCommand(_command.Command):
 
     start: int | str | abjad.NamedPitch | abjad.StaffPosition | None = None
@@ -6683,6 +6700,8 @@ def natural_clusters(
     *,
     start_pitch: int | str | abjad.NamedPitch | None = None,
 ) -> ClusterCommand:
+    if start_pitch is not None:
+        start_pitch = abjad.NamedPitch(start_pitch)
     return ClusterCommand(
         hide_flat_markup=True,
         selector=selector,
@@ -7240,12 +7259,17 @@ def register(
 
     """
     if stop is None:
+        start_pitch = abjad.NumberedPitch(start)
         return RegisterCommand(
-            registration=_pcollections.Registration([("[A0, C8]", start)]),
+            registration=_pcollections.Registration([("[A0, C8]", start_pitch)]),
             selector=selector,
         )
+    if start is not None:
+        start_pitch = abjad.NumberedPitch(start)
+    if stop is not None:
+        stop_pitch = abjad.NumberedPitch(stop)
     return RegisterInterpolationCommand(
-        selector=selector, start_pitch=start, stop_pitch=stop
+        selector=selector, start_pitch=start_pitch, stop_pitch=stop_pitch
     )
 
 
@@ -12171,6 +12195,7 @@ def flat_glissando(
     untie_command = untie(_leaves_of_selector)
     commands.append(untie_command)
     if pitch is not None and stop_pitch is None:
+        # TODO: remove list test from or-clause?
         if isinstance(pitch, abjad.StaffPosition) or (
             isinstance(pitch, list) and isinstance(pitch[0], abjad.StaffPosition)
         ):
@@ -13278,6 +13303,8 @@ def replace_with_clusters(
     *,
     start_pitch: int | str | abjad.NamedPitch | None = None,
 ) -> ClusterCommand:
+    if start_pitch is not None:
+        start_pitch = abjad.NamedPitch(start_pitch)
     return ClusterCommand(selector=selector, start_pitch=start_pitch, widths=widths)
 
 

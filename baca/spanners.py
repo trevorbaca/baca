@@ -15,11 +15,12 @@ from . import tweaks as _tweaks
 from . import typings as _typings
 
 
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 @dataclasses.dataclass
 class SpannerIndicatorCommand(_command.Command):
 
     detach_first: bool = False
-    direction: int | None = None
+    direction: abjad.Vertical | None = None
     left_broken: bool = False
     right_broken: bool = False
     start_indicator: typing.Any = None
@@ -28,9 +29,9 @@ class SpannerIndicatorCommand(_command.Command):
 
     def __post_init__(self):
         _command.Command.__post_init__(self)
-        self.detach_first = bool(self.detach_first)
-        self.left_broken = bool(self.left_broken)
-        self.right_broken = bool(self.right_broken)
+        assert isinstance(self.detach_first, bool), repr(self.detach_first)
+        assert isinstance(self.left_broken, bool), repr(self.left_broken)
+        assert isinstance(self.right_broken, bool), repr(self.right_broken)
         _tweaks.validate_indexed_tweaks(self.tweaks)
 
     def _call(self, *, argument=None, runtime=None) -> None:
@@ -137,7 +138,7 @@ def _attach_start_stop_indicators(
 
 def beam(
     *tweaks: abjad.Tweak,
-    direction: int = None,
+    direction: abjad.Vertical | None = None,
     selector=lambda _: _select.tleaves(_),
     start_beam: abjad.StartBeam = None,
     stop_beam: abjad.StopBeam = None,

@@ -75,6 +75,7 @@ def _call_override_command(
 
 
 @dataclasses.dataclass
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class OverrideCommand(_command.Command):
     """
     Override command.
@@ -93,13 +94,11 @@ class OverrideCommand(_command.Command):
         _command.Command.__post_init__(self)
         self.after = bool(self.after)
         if self.allowlist is not None:
-            self.allowlist = tuple(self.allowlist)
             assert isinstance(self.allowlist, tuple), repr(self.allowlist)
             assert all(issubclass(_, abjad.Leaf) for _ in self.allowlist)
         if self.attribute is not None:
             assert isinstance(self.attribute, str), repr(self.attribute)
         if self.blocklist is not None:
-            self.blocklist = tuple(self.blocklist)
             assert isinstance(self.blocklist, tuple), repr(self.blocklist)
             assert all(issubclass(_, abjad.Leaf) for _ in self.blocklist)
         if self.context is not None:

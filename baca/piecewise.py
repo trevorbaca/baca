@@ -133,6 +133,7 @@ def _unbundle_indicator(argument):
     return argument
 
 
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 @dataclasses.dataclass
 class PiecewiseCommand(_command.Command):
     """
@@ -166,7 +167,6 @@ class PiecewiseCommand(_command.Command):
         assert isinstance(self.autodetect_right_padding, bool)
         assert isinstance(self.bookend, bool | int), repr(self.bookend)
         assert self.specifiers is not None
-        self.specifiers = abjad.CyclicTuple(self.specifiers)
         if self.final_piece_spanner not in (None, False):
             assert getattr(self.final_piece_spanner, "spanner_start", False)
         assert isinstance(self.leak_spanner_stop, bool), repr(self.leak_spanner_stop)
@@ -189,6 +189,7 @@ class PiecewiseCommand(_command.Command):
         if self.selector is not None:
             assert not isinstance(self.selector, str)
             argument = self.selector(argument)
+        specifiers = abjad.CyclicTuple(self.specifiers)
         _do_piecewise_command(
             argument,
             manifests=runtime.get("manifests", {}),
@@ -200,7 +201,7 @@ class PiecewiseCommand(_command.Command):
             self_pieces=self.pieces,
             self_remove_length_1_spanner_start=self.remove_length_1_spanner_start,
             self_right_broken=self.right_broken,
-            self_specifiers=self.specifiers,
+            self_specifiers=specifiers,
             self_tag=self.tag,
             self_tweaks=self.tweaks,
         )
@@ -218,10 +219,11 @@ def _do_piecewise_command(
     self_pieces: typing.Callable = lambda _: _select.leaves(_),
     self_remove_length_1_spanner_start: bool = False,
     self_right_broken: typing.Any = None,
-    self_specifiers: typing.Sequence[_Specifier] = (),
+    self_specifiers: abjad.CyclicTuple | list = abjad.CyclicTuple(),
     self_tag,
     self_tweaks: typing.Sequence[_typings.IndexedTweak] = (),
 ):
+    assert isinstance(self_specifiers, abjad.CyclicTuple | list), repr(self_specifiers)
     manifests = manifests or {}
     if self_pieces is not None:
         assert not isinstance(self_pieces, str)
@@ -250,7 +252,6 @@ def _do_piecewise_command(
         is_final_piece = i == piece_count - 1
         if is_final_piece and self_right_broken:
             specifier = _Specifier(spanner_start=self_right_broken)
-            # tag = _tags.function_name(_frame(), self, n=1)
             tag = abjad.Tag("baca.PiecewiseCommand._call(1)")
             tag = tag.append(_tags.RIGHT_BROKEN)
             _attach_indicators(
@@ -309,7 +310,6 @@ def _do_piecewise_command(
             elif _is_maybe_bundled(specifier.spanner_start, abjad.StartTextSpan):
                 if self_final_piece_spanner is False:
                     specifier = dataclasses.replace(specifier, spanner_start=None)
-        # tag = _tags.function_name(_frame(), self, n=2)
         tag = abjad.Tag("baca.PiecewiseCommand._call(2)")
         if is_first_piece or previous_had_bookend:
             specifier = dataclasses.replace(specifier, spanner_stop=None)
@@ -353,7 +353,6 @@ def _do_piecewise_command(
             tag=tag,
         )
         if should_bookend:
-            # tag = _tags.function_name(_frame(), self, n=3)
             tag = abjad.Tag("baca.PiecewiseCommand._call(3)")
             if is_final_piece and self_right_broken:
                 tag = tag.append(_tags.RIGHT_BROKEN)
@@ -382,7 +381,6 @@ def _do_piecewise_command(
             if self_leak_spanner_stop:
                 spanner_stop = dataclasses.replace(spanner_stop, leak=True)
             specifier = _Specifier(spanner_stop=spanner_stop)
-            # tag = _tags.function_name(_frame(), self, n=4)
             tag = abjad.Tag("baca.PiecewiseCommand._call(4)")
             if self_right_broken:
                 tag = tag.append(_tags.RIGHT_BROKEN)
