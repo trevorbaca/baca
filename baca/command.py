@@ -98,20 +98,19 @@ class Command:
     scope: Scope | TimelineScope | None = None
     selector: typing.Callable | None = None
     tag_measure_number: bool = False
-    tags: list[abjad.Tag | None] = dataclasses.field(default_factory=list)
+    tags: list[abjad.Tag] = dataclasses.field(default_factory=list)
     _mutated_score: bool = dataclasses.field(default=False, init=False, repr=False)
     _runtime: dict = dataclasses.field(default_factory=dict, init=False, repr=False)
     _state: dict = dataclasses.field(default_factory=dict, init=False, repr=False)
-    _tags: list[abjad.Tag] = dataclasses.field(init=False, repr=False)
+    # _tags: list[abjad.Tag] = dataclasses.field(init=False, repr=False)
+    _tags: list[abjad.Tag] = dataclasses.field(default_factory=list, repr=False)
 
     def __post_init__(self):
-        # raise Exception("ASDF")
         if self.selector is not None:
             assert callable(self.selector)
-        self.tags = list(self.tags or [])
         assert isinstance(self.tags, list), repr(self.tags)
         assert all(isinstance(_, abjad.Tag) for _ in self.tags), repr(self.tags)
-        self._initialize_tags(self.tags)
+        # self._initialize_tags(self.tags)
 
     def __call__(self, argument=None, runtime: dict = None) -> None:
         self._runtime = runtime or {}
@@ -129,21 +128,21 @@ class Command:
     def _call(self, argument=None):
         pass
 
-    def _initialize_tags(self, tags):
-        tags_ = []
-        for tag in tags or []:
-            if tag in (None, ""):
-                continue
-            elif isinstance(tag, str):
-                for word in tag.split(":"):
-                    tag_ = abjad.Tag(word)
-                    tags_.append(tag_)
-            elif isinstance(tag, abjad.Tag):
-                tags_.append(tag)
-            else:
-                raise TypeError(tag)
-        assert all(isinstance(_, abjad.Tag) for _ in tags_)
-        self._tags = tags_
+    #    def _initialize_tags(self, tags):
+    #        tags_ = []
+    #        for tag in tags or []:
+    #            if tag in (None, ""):
+    #                continue
+    #            elif isinstance(tag, str):
+    #                for word in tag.split(":"):
+    #                    tag_ = abjad.Tag(word)
+    #                    tags_.append(tag_)
+    #            elif isinstance(tag, abjad.Tag):
+    #                tags_.append(tag)
+    #            else:
+    #                raise TypeError(tag)
+    #        assert all(isinstance(_, abjad.Tag) for _ in tags_)
+    #        self._tags = tags_
 
     def _matches_scope_index(self, scope_count, i):
         if isinstance(self.match, int):

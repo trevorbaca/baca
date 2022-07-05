@@ -2208,11 +2208,10 @@ def register_pcs(pitches, pcs):
     return result
 
 
-def pitches_to_octave_adjustment(pitches, *, anchor=None, octave_number=4):
+def pitches_to_octave_adjustment(pitches, *, anchor=abjad.DOWN, octave_number=4):
     def _get_anchor_octave_number(pitches, anchor):
         pitches = list(set(pitches))
         pitches.sort()
-        anchor = anchor or abjad.DOWN
         if anchor == abjad.DOWN:
             pitch = pitches[0]
         elif anchor == abjad.UP:

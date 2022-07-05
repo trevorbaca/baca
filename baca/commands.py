@@ -4,7 +4,6 @@ Command classes.
 import collections
 import copy
 import dataclasses
-import numbers
 import pathlib
 import typing
 from inspect import currentframe as _frame
@@ -89,6 +88,65 @@ def _coerce_pitches(pitches):
         items.append(item)
     pitches = abjad.CyclicTuple(items)
     return pitches
+
+
+def _do_pitch_command(
+    argument,
+    cyclic,
+    pitches,
+    *,
+    allow_hidden: bool = False,
+    allow_octaves: bool = False,
+    allow_out_of_range: bool = False,
+    allow_repeats: bool = False,
+    allow_repitch: bool = False,
+    do_not_transpose: bool = False,
+    mock: bool = False,
+    previous_pitches_consumed: int = 0,
+) -> tuple[int, bool]:
+    assert isinstance(previous_pitches_consumed, int)
+    pitches = _coerce_pitches(pitches)
+    plts = []
+    for pleaf in _select.pleaves(argument):
+        plt = abjad.get.logical_tie(pleaf)
+        if plt.head is pleaf:
+            plts.append(plt)
+    if not cyclic:
+        if len(pitches) < len(plts):
+            message = f"only {len(pitches)} pitches"
+            message += f" for {len(plts)} logical ties:\n\n"
+            message += f"{pitches!r} and {plts!r}."
+            raise Exception(message)
+    if cyclic and not isinstance(pitches, abjad.CyclicTuple | Loop):
+        pitches = abjad.CyclicTuple(pitches)
+    pitches_consumed = 0
+    mutated_score = False
+    for i, plt in enumerate(plts):
+        pitch = pitches[i + previous_pitches_consumed]
+        new_plt = _set_lt_pitch(
+            plt,
+            pitch,
+            allow_hidden=allow_hidden,
+            allow_repitch=allow_repitch,
+            mock=mock,
+        )
+        if new_plt is not None:
+            mutated_score = True
+            plt = new_plt
+        if allow_octaves:
+            for pleaf in plt:
+                abjad.attach(_enums.ALLOW_OCTAVE, pleaf)
+        if allow_out_of_range:
+            for pleaf in plt:
+                abjad.attach(_enums.ALLOW_OUT_OF_RANGE, pleaf)
+        if allow_repeats:
+            for pleaf in plt:
+                abjad.attach(_enums.ALLOW_REPEAT_PITCH, pleaf)
+        if do_not_transpose is True:
+            for pleaf in plt:
+                abjad.attach(_enums.DO_NOT_TRANSPOSE, pleaf)
+        pitches_consumed += 1
+    return pitches_consumed, mutated_score
 
 
 def _is_rest(argument):
@@ -212,10 +270,10 @@ def _staff_position_function(
             abjad.Clef,
             default=abjad.Clef("treble"),
         )
-        # number = self.numbers[i]
         number = numbers[i]
         # TODO: remove this first branch because never executed?
         if isinstance(number, list):
+            raise Exception("ASDF")
             positions = [abjad.StaffPosition(_) for _ in number]
             pitches = [_.to_pitch(clef) for _ in positions]
             new_lt = _set_lt_pitch(
@@ -252,14 +310,11 @@ def _staff_position_function(
         plt_count += 1
         for pleaf in plt:
             abjad.attach(_enums.STAFF_POSITION, pleaf)
-            # if self.allow_out_of_range:
             if allow_out_of_range:
                 abjad.attach(_enums.ALLOW_OUT_OF_RANGE, pleaf)
-            # if self.allow_repeats:
             if allow_repeats:
                 abjad.attach(_enums.ALLOW_REPEAT_PITCH, pleaf)
                 abjad.attach(_enums.DO_NOT_TRANSPOSE, pleaf)
-    # if self.exact and plt_count != len(self.numbers):
     if exact and plt_count != len(numbers):
         message = f"PLT count ({plt_count}) does not match"
         message += f" staff position count ({len(numbers)})."
@@ -670,7 +725,7 @@ class BCPCommand(_command.Command):
         _command.Command.__post_init__(self)
         _validate_bcps(self.bcps)
         _tweaks.validate_indexed_tweaks(self.bow_change_tweaks)
-        self.final_spanner = bool(self.final_spanner)
+        assert isinstance(self.final_spanner, bool), repr(self.final_spanner)
         assert callable(self.helper), repr(self.helper)
         _tweaks.validate_indexed_tweaks(self.tweaks)
 
@@ -1069,7 +1124,8 @@ class IndicatorCommand(_command.Command):
         _command.Command.__post_init__(self)
         if self.context is not None:
             assert isinstance(self.context, str), repr(self.context)
-        self.do_not_test = bool(self.do_not_test)
+        assert isinstance(self.do_not_test, bool), repr(self.do_not_test)
+        # TODO: do not modify in post-init:
         indicators_ = None
         if self.indicators is not None:
             if isinstance(self.indicators, collections.abc.Iterable):
@@ -1077,7 +1133,7 @@ class IndicatorCommand(_command.Command):
             else:
                 indicators_ = abjad.CyclicTuple([self.indicators])
         self.indicators = indicators_
-        self.redundant = bool(self.redundant)
+        assert isinstance(self.redundant, bool), repr(self.redundant)
 
     def __copy__(self, *arguments):
         result = dataclasses.replace(self)
@@ -1265,9 +1321,9 @@ class AccidentalAdjustmentCommand(_command.Command):
 
     def __post_init__(self):
         _command.Command.__post_init__(self)
-        self.cautionary = bool(self.cautionary)
-        self.forced = bool(self.forced)
-        self.parenthesized = bool(self.parenthesized)
+        assert isinstance(self.cautionary, bool), repr(self.cautionary)
+        assert isinstance(self.forced, bool), repr(self.forced)
+        assert isinstance(self.parenthesized, bool), repr(self.parenthesized)
 
     __repr__ = _command.Command.__repr__
 
@@ -1975,7 +2031,8 @@ class ClusterCommand(_command.Command):
 
     def __post_init__(self):
         _command.Command.__post_init__(self)
-        self.hide_flat_markup = bool(self.hide_flat_markup)
+        assert isinstance(self.hide_flat_markup, bool), repr(self.hide_flat_markup)
+        # TODO: do not modify in post-init:
         if self.start_pitch is not None:
             self.start_pitch = abjad.NamedPitch(self.start_pitch)
         assert abjad.math.all_are_nonnegative_integers(self.widths)
@@ -2108,14 +2165,14 @@ class ColorFingeringCommand(_command.Command):
     """
 
     direction: abjad.Vertical | None = abjad.UP
-    numbers: typing.Any = None
+    numbers: typing.Sequence[int] = ()
     tweaks: tuple[_typings.IndexedTweak, ...] = ()
 
     def __post_init__(self):
         _command.Command.__post_init__(self)
-        if self.numbers is not None:
-            assert abjad.math.all_are_nonnegative_integers(self.numbers)
-            self.numbers = abjad.CyclicTuple(self.numbers)
+        # TODO: do not modify in post-init:
+        assert abjad.math.all_are_nonnegative_integers(self.numbers)
+        self.numbers = abjad.CyclicTuple(self.numbers)
         _tweaks.validate_indexed_tweaks(self.tweaks)
 
     def _call(self, argument=None) -> None:
@@ -2165,12 +2222,13 @@ class DiatonicClusterCommand(_command.Command):
 
     """
 
-    widths: typing.Any = None
+    widths: typing.Sequence[int] = ()
     selector: typing.Callable = lambda _: _select.plts(_)
 
     def __post_init__(self):
         _command.Command.__post_init__(self)
         assert abjad.math.all_are_nonnegative_integers(self.widths)
+        # TODO: do not modify in post-init:
         self.widths = abjad.CyclicTuple(self.widths)
 
     def _call(self, argument=None) -> None:
@@ -2350,13 +2408,12 @@ class MicrotoneDeviationCommand(_command.Command):
 
     """
 
-    deviations: typing.Any = None
+    deviations: typing.Sequence[int | float] = ()
 
     def __post_init__(self):
         _command.Command.__post_init__(self)
-        if self.deviations is not None:
-            assert isinstance(self.deviations, collections.abc.Iterable)
-            assert all(isinstance(_, numbers.Number) for _ in self.deviations)
+        # TODO: do not modify in post-init:
+        assert all(isinstance(_, int | float) for _ in self.deviations)
         self.deviations = abjad.CyclicTuple(self.deviations)
 
     def _call(self, argument=None) -> None:
@@ -2476,14 +2533,14 @@ class OctaveDisplacementCommand(_command.Command):
 
     """
 
-    displacements: typing.Any = None
+    displacements: typing.Sequence[int] = ()
 
     def __post_init__(self):
         _command.Command.__post_init__(self)
-        if self.displacements is not None:
-            self.displacements = tuple(self.displacements)
-            assert self._is_octave_displacement_vector(self.displacements)
-            self.displacements = abjad.CyclicTuple(self.displacements)
+        # TODO: do not modify in post-init:
+        self.displacements = tuple(self.displacements)
+        assert self._is_octave_displacement_vector(self.displacements)
+        self.displacements = abjad.CyclicTuple(self.displacements)
 
     def _call(self, argument=None) -> None:
         if argument is None:
@@ -2512,65 +2569,6 @@ class OctaveDisplacementCommand(_command.Command):
             if all(isinstance(_, int) for _ in argument):
                 return True
         return False
-
-
-def _do_pitch_command(
-    argument,
-    cyclic,
-    pitches,
-    *,
-    allow_hidden: bool = False,
-    allow_octaves: bool = False,
-    allow_out_of_range: bool = False,
-    allow_repeats: bool = False,
-    allow_repitch: bool = False,
-    do_not_transpose: bool = False,
-    mock: bool = False,
-    previous_pitches_consumed: int = 0,
-) -> tuple[int, bool]:
-    assert isinstance(previous_pitches_consumed, int)
-    pitches = _coerce_pitches(pitches)
-    plts = []
-    for pleaf in _select.pleaves(argument):
-        plt = abjad.get.logical_tie(pleaf)
-        if plt.head is pleaf:
-            plts.append(plt)
-    if not cyclic:
-        if len(pitches) < len(plts):
-            message = f"only {len(pitches)} pitches"
-            message += f" for {len(plts)} logical ties:\n\n"
-            message += f"{pitches!r} and {plts!r}."
-            raise Exception(message)
-    if cyclic and not isinstance(pitches, abjad.CyclicTuple | Loop):
-        pitches = abjad.CyclicTuple(pitches)
-    pitches_consumed = 0
-    mutated_score = False
-    for i, plt in enumerate(plts):
-        pitch = pitches[i + previous_pitches_consumed]
-        new_plt = _set_lt_pitch(
-            plt,
-            pitch,
-            allow_hidden=allow_hidden,
-            allow_repitch=allow_repitch,
-            mock=mock,
-        )
-        if new_plt is not None:
-            mutated_score = True
-            plt = new_plt
-        if allow_octaves:
-            for pleaf in plt:
-                abjad.attach(_enums.ALLOW_OCTAVE, pleaf)
-        if allow_out_of_range:
-            for pleaf in plt:
-                abjad.attach(_enums.ALLOW_OUT_OF_RANGE, pleaf)
-        if allow_repeats:
-            for pleaf in plt:
-                abjad.attach(_enums.ALLOW_REPEAT_PITCH, pleaf)
-        if do_not_transpose is True:
-            for pleaf in plt:
-                abjad.attach(_enums.DO_NOT_TRANSPOSE, pleaf)
-        pitches_consumed += 1
-    return pitches_consumed, mutated_score
 
 
 @dataclasses.dataclass(slots=True)
@@ -2868,24 +2866,24 @@ class PitchCommand(_command.Command):
     cyclic: bool = False
     do_not_transpose: bool = False
     ignore_incomplete: bool = False
-    persist: str | None = None
+    persist: str = ""
     pitches: typing.Sequence | Loop = ()
 
     def __post_init__(self):
         _command.Command.__post_init__(self)
         assert isinstance(self.allow_hidden, bool), repr(self.allow_hidden)
-        self.allow_octaves = bool(self.allow_octaves)
-        self.allow_out_of_range = bool(self.allow_out_of_range)
-        self.allow_repeats = bool(self.allow_repeats)
-        self.allow_repitch = bool(self.allow_repitch)
-        self.mock = bool(self.mock)
-        self.cyclic = bool(self.cyclic)
-        self.do_not_transpose = bool(self.do_not_transpose)
-        self.ignore_incomplete = bool(self.ignore_incomplete)
-        self._mutated_score = False
-        if self.persist is not None:
-            assert isinstance(self.persist, str), repr(self.persist)
+        assert isinstance(self.allow_octaves, bool), repr(self.allow_octaves)
+        assert isinstance(self.allow_out_of_range, bool), repr(self.allow_out_of_range)
+        assert isinstance(self.allow_repeats, bool), repr(self.allow_repeats)
+        assert isinstance(self.allow_repitch, bool), repr(self.allow_repitch)
+        assert isinstance(self.mock, bool), repr(self.mock)
+        assert isinstance(self.cyclic, bool), repr(self.cyclic)
+        assert isinstance(self.do_not_transpose, bool), repr(self.do_not_transpose)
+        assert isinstance(self.ignore_incomplete, bool), repr(self.ignore_incomplete)
+        assert isinstance(self.persist, str), repr(self.persist)
+        # TODO: do not modify in post-init:
         self.pitches = _coerce_pitches(self.pitches)
+        self._mutated_score = False
         self._state = {}
 
     __repr__ = _command.Command.__repr__
@@ -3147,13 +3145,12 @@ class RegisterCommand(_command.Command):
 
     """
 
-    registration: typing.Any = None
+    registration: _pcollections.Registration | None = None
 
     def __post_init__(self):
         _command.Command.__post_init__(self)
-        if self.registration is not None:
-            prototype = _pcollections.Registration
-            assert isinstance(self.registration, prototype), repr(self.registration)
+        prototype = _pcollections.Registration
+        assert isinstance(self.registration, prototype), repr(self.registration)
 
     def _call(self, argument=None) -> None:
         if argument is None:
@@ -4142,6 +4139,7 @@ class RegisterInterpolationCommand(_command.Command):
 
     def __post_init__(self):
         _command.Command.__post_init__(self)
+        # TODO: do not modify in post-init:
         self.start_pitch = abjad.NumberedPitch(self.start_pitch)
         self.stop_pitch = abjad.NumberedPitch(self.stop_pitch)
 
@@ -4623,16 +4621,14 @@ class RegisterToOctaveCommand(_command.Command):
 
     """
 
-    anchor: typing.Any = None
-    octave_number: typing.Any = None
+    anchor: abjad.Vertical = abjad.DOWN
+    octave_number: int | None = None
 
     def __post_init__(self):
         _command.Command.__post_init__(self)
-        if self.anchor is not None:
-            prototype = (abjad.CENTER, abjad.DOWN, abjad.UP)
-            assert self.anchor in prototype, repr(self.anchor)
-        if self.octave_number is not None:
-            assert isinstance(self.octave_number, int), repr(self.octave_number)
+        prototype = (abjad.CENTER, abjad.DOWN, abjad.UP)
+        assert self.anchor in prototype, repr(self.anchor)
+        assert isinstance(self.octave_number, int), repr(self.octave_number)
 
     __repr__ = _command.Command.__repr__
 
@@ -4671,8 +4667,6 @@ class SchemeManifest:
     TODO: eliminate duplication. Define custom Scheme functions here (``SchemeManifest``)
     and teach ``SchemeManifest`` to write ``~/baca/lilypond/baca.ily`` automatically.
     """
-
-    ### CLASS VARIABLES ###
 
     _dynamics = (
         ("baca-appena-udibile", "appena udibile"),
@@ -4968,15 +4962,18 @@ class StaffPositionCommand(_command.Command):
         _command.Command.__post_init__(self)
         prototype = (int, list, abjad.StaffPosition)
         assert all(isinstance(_, prototype) for _ in self.numbers), repr(self.numbers)
+        # TODO: do not modify in post-init:
         self.numbers = abjad.CyclicTuple(self.numbers)
         assert isinstance(self.allow_hidden, bool), repr(self.allow_hidden)
-        self.allow_out_of_range = bool(self.allow_out_of_range)
-        self.allow_repeats = bool(self.allow_repeats)
-        self.allow_repitch = bool(self.allow_repitch)
-        self.mock = bool(self.mock)
-        self.exact = bool(self.exact)
+        assert isinstance(self.allow_out_of_range, bool), repr(self.allow_out_of_range)
+        assert isinstance(self.allow_repeats, bool), repr(self.allow_repeats)
+        assert isinstance(self.allow_repitch, bool), repr(self.allow_repitch)
+        assert isinstance(self.mock, bool), repr(self.mock)
+        assert isinstance(self.exact, bool), repr(self.exact)
+        assert isinstance(self.set_chord_pitches_equal, bool), repr(
+            self.set_chord_pitches_equal
+        )
         self._mutated_score = False
-        self.set_chord_pitches_equal = bool(self.set_chord_pitches_equal)
 
     def _call(self, argument=None) -> None:
         if argument is None:
@@ -5028,7 +5025,7 @@ class StaffPositionInterpolationCommand(_command.Command):
             self.stop = abjad.StaffPosition(self.stop)
         assert isinstance(self.stop, prototype), repr(self.stop)
         assert isinstance(self.allow_hidden, bool), repr(self.allow_hidden)
-        self.mock = bool(self.mock)
+        assert isinstance(self.mock, bool), repr(self.mock)
         if self.pitches_instead_of_staff_positions is not None:
             self.pitches_instead_of_staff_positions = bool(
                 self.pitches_instead_of_staff_positions
@@ -5496,7 +5493,7 @@ def center_to_octave(
 
 
 def color_fingerings(
-    numbers: list[int | float],
+    numbers: list[int],
     *tweaks: _typings.IndexedTweak,
     selector=lambda _: _select.pheads(_, exclude=_enums.HIDDEN),
 ) -> ColorFingeringCommand:
@@ -6702,7 +6699,7 @@ def pitch(
     allow_repitch: bool = False,
     mock: bool = False,
     do_not_transpose: bool = False,
-    persist: str = None,
+    persist: str = "",
 ) -> PitchCommand:
     r"""
     Makes pitch command.
@@ -6853,7 +6850,7 @@ def pitches(
     do_not_transpose: bool = False,
     exact: bool = False,
     ignore_incomplete: bool = False,
-    persist: str = None,
+    persist: str = "",
 ) -> PitchCommand:
     if do_not_transpose not in (None, True, False):
         raise Exception(f"do_not_transpose must be boolean (not {do_not_transpose!r}).")
