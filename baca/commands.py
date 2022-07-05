@@ -2207,10 +2207,8 @@ class DiatonicClusterCommand(_command.Command):
         return True
 
 
-# TODO:
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-@dataclasses.dataclass
-class Loop(abjad.CyclicTuple):
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class Loop:
     """
     Loop.
 
@@ -2218,7 +2216,7 @@ class Loop(abjad.CyclicTuple):
 
         >>> loop = baca.Loop([0, 2, 4], [1])
         >>> loop
-        Loop(items=(0, 2, 4), intervals=[1])
+        Loop(pitches=[0, 2, 4], intervals=[1])
 
         >>> for i in range(12):
         ...     loop[i]
@@ -2237,13 +2235,11 @@ class Loop(abjad.CyclicTuple):
 
     """
 
-    items: typing.Sequence[int]
+    pitches: typing.Sequence[int]
     intervals: typing.Sequence[int]
 
     def __post_init__(self):
-        assert all(isinstance(_, int) for _ in self.items), self.items
-        self.items = tuple(self.items)
-        self.pitches = tuple(self.items)
+        assert all(isinstance(_, int) for _ in self.pitches), self.pitches
         assert all(isinstance(_, int) for _ in self.intervals), self.intervals
 
     def __getitem__(self, i: int) -> abjad.NamedPitch:
@@ -2545,7 +2541,7 @@ def _do_pitch_command(
             message += f" for {len(plts)} logical ties:\n\n"
             message += f"{pitches!r} and {plts!r}."
             raise Exception(message)
-    if cyclic and not isinstance(pitches, abjad.CyclicTuple):
+    if cyclic and not isinstance(pitches, abjad.CyclicTuple | Loop):
         pitches = abjad.CyclicTuple(pitches)
     pitches_consumed = 0
     mutated_score = False
