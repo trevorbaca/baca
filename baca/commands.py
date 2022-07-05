@@ -731,7 +731,7 @@ class BCPCommand(_command.Command):
 
     __repr__ = _command.Command.__repr__
 
-    def _call(self, argument=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         if self.bcps is None:
@@ -909,7 +909,7 @@ class ColorCommand(_command.Command):
         assert self.selector is not None
         _command.Command.__post_init__(self)
 
-    def _call(self, argument=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         assert self.selector is not None
@@ -1002,7 +1002,7 @@ class ContainerCommand(_command.Command):
         _command.Command.__post_init__(self)
         assert isinstance(self.identifier, str), repr(self.identifier)
 
-    def _call(self, argument=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         if self.selector is not None:
@@ -1032,7 +1032,7 @@ class DetachCommand(_command.Command):
 
     __repr__ = _command.Command.__repr__
 
-    def _call(self, argument=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         assert self.selector is not None
@@ -1054,12 +1054,12 @@ class GenericCommand(_command.Command):
         assert callable(self.function), repr(self.function)
         _command.Command.__post_init__(self)
 
-    def _call(self, argument=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        self.function(argument, runtime=self._runtime)
+        self.function(argument, runtime=runtime)
 
 
 @dataclasses.dataclass(slots=True)
@@ -1082,7 +1082,7 @@ class GlissandoCommand(_command.Command):
         _command.Command.__post_init__(self)
         _tweaks.validate_indexed_tweaks(self.tweaks)
 
-    def _call(self, argument=None):
+    def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         if self.selector is not None:
@@ -1142,7 +1142,7 @@ class IndicatorCommand(_command.Command):
 
     __repr__ = _command.Command.__repr__
 
-    def _call(self, argument=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         if self.indicators is None:
@@ -1160,7 +1160,7 @@ class IndicatorCommand(_command.Command):
             do_not_test=self.do_not_test,
             deactivate=self.deactivate,
             direction=self.direction,
-            manifests=self.runtime.get("manifests", {}),
+            manifests=runtime.get("manifests", {}),
             predicate=self.predicate,
             tag=self.tag,
         )
@@ -1168,14 +1168,14 @@ class IndicatorCommand(_command.Command):
 
 @dataclasses.dataclass(slots=True)
 class InstrumentChangeCommand(IndicatorCommand):
-    def _call(self, argument=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         if self.selector is not None:
             argument = self.selector(argument)
         if self.indicators is None:
             return
-        IndicatorCommand._call(self, argument)
+        IndicatorCommand._call(self, argument=argument, runtime=runtime)
 
 
 @dataclasses.dataclass(slots=True)
@@ -1186,7 +1186,7 @@ class LabelCommand(_command.Command):
     def __post_init__(self):
         _command.Command.__post_init__(self)
 
-    def _call(self, argument=None):
+    def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         if self.callable_ is None:
@@ -1207,7 +1207,7 @@ class PartAssignmentCommand(_command.Command):
 
     __repr__ = _command.Command.__repr__
 
-    def _call(self, argument=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         if self.selector is not None:
@@ -1327,7 +1327,7 @@ class AccidentalAdjustmentCommand(_command.Command):
 
     __repr__ = _command.Command.__repr__
 
-    def _call(self, argument=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         if self.selector is not None:
@@ -2038,7 +2038,7 @@ class ClusterCommand(_command.Command):
         assert abjad.math.all_are_nonnegative_integers(self.widths)
         self.widths = abjad.CyclicTuple(self.widths)
 
-    def _call(self, argument=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         if not self.widths:
@@ -2175,7 +2175,7 @@ class ColorFingeringCommand(_command.Command):
         self.numbers = abjad.CyclicTuple(self.numbers)
         _tweaks.validate_indexed_tweaks(self.tweaks)
 
-    def _call(self, argument=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         if not self.numbers:
@@ -2231,7 +2231,7 @@ class DiatonicClusterCommand(_command.Command):
         # TODO: do not modify in post-init:
         self.widths = abjad.CyclicTuple(self.widths)
 
-    def _call(self, argument=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         if not self.widths:
@@ -2416,7 +2416,7 @@ class MicrotoneDeviationCommand(_command.Command):
         assert all(isinstance(_, int | float) for _ in self.deviations)
         self.deviations = abjad.CyclicTuple(self.deviations)
 
-    def _call(self, argument=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         if not self.deviations:
@@ -2542,7 +2542,7 @@ class OctaveDisplacementCommand(_command.Command):
         assert self._is_octave_displacement_vector(self.displacements)
         self.displacements = abjad.CyclicTuple(self.displacements)
 
-    def _call(self, argument=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         if self.displacements is None:
@@ -2888,7 +2888,7 @@ class PitchCommand(_command.Command):
 
     __repr__ = _command.Command.__repr__
 
-    def _call(self, argument=None):
+    def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         if not self.pitches:
@@ -2897,7 +2897,7 @@ class PitchCommand(_command.Command):
             argument = self.selector(argument)
         if not argument:
             return
-        previous_pitches_consumed = self._previous_pitches_consumed()
+        previous_pitches_consumed = self._previous_pitches_consumed(runtime)
         pitches_consumed, mutated_score = _do_pitch_command(
             argument,
             self.cyclic,
@@ -2922,8 +2922,9 @@ class PitchCommand(_command.Command):
             return True
         return self._mutated_score
 
-    def _previous_pitches_consumed(self):
-        dictionary = self.runtime.get("previous_section_voice_metadata", None)
+    def _previous_pitches_consumed(self, runtime):
+        assert isinstance(runtime, dict), repr(runtime)
+        dictionary = runtime.get("previous_section_voice_metadata", None)
         if not dictionary:
             return 0
         dictionary = dictionary.get(_enums.PITCH.name, None)
@@ -2937,7 +2938,7 @@ class PitchCommand(_command.Command):
         assert 1 <= pitches_consumed
         if self.ignore_incomplete:
             return pitches_consumed
-        dictionary = self.runtime["previous_section_voice_metadata"]
+        dictionary = runtime["previous_section_voice_metadata"]
         dictionary = dictionary.get(_enums.RHYTHM.name, None)
         if dictionary:
             if dictionary.get("incomplete_final_note", False):
@@ -3152,7 +3153,7 @@ class RegisterCommand(_command.Command):
         prototype = _pcollections.Registration
         assert isinstance(self.registration, prototype), repr(self.registration)
 
-    def _call(self, argument=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         if self.registration is None:
@@ -4143,7 +4144,7 @@ class RegisterInterpolationCommand(_command.Command):
         self.start_pitch = abjad.NumberedPitch(self.start_pitch)
         self.stop_pitch = abjad.NumberedPitch(self.stop_pitch)
 
-    def _call(self, argument=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         if self.selector:
@@ -4632,7 +4633,7 @@ class RegisterToOctaveCommand(_command.Command):
 
     __repr__ = _command.Command.__repr__
 
-    def _call(self, argument=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         if self.octave_number is None:
@@ -4975,7 +4976,7 @@ class StaffPositionCommand(_command.Command):
         )
         self._mutated_score = False
 
-    def _call(self, argument=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         if not self.numbers:
@@ -5031,7 +5032,7 @@ class StaffPositionInterpolationCommand(_command.Command):
                 self.pitches_instead_of_staff_positions
             )
 
-    def _call(self, argument=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         if self.selector:

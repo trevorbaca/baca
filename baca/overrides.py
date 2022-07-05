@@ -109,7 +109,7 @@ class OverrideCommand(_command.Command):
 
     __repr__ = _command.Command.__repr__
 
-    def _call(self, argument=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         if self.selector:
@@ -117,13 +117,13 @@ class OverrideCommand(_command.Command):
         if not argument:
             return
         leaves = abjad.select.leaves(argument)
-        first_tag = self.get_tag(leaves[0])
+        first_tag = self.get_tag(leaves[0], runtime=runtime)
         function_name = _tags.function_name(_frame(), self, n=1)
         if first_tag:
             first_tag = first_tag.append(function_name)
         else:
             first_tag = function_name
-        final_tag = self.get_tag(leaves[-1])
+        final_tag = self.get_tag(leaves[-1], runtime=runtime)
         function_name = _tags.function_name(_frame(), self, n=2)
         if final_tag:
             final_tag = final_tag.append(function_name)

@@ -181,7 +181,7 @@ class PiecewiseCommand(_command.Command):
         result.specifiers = copy.deepcopy(self.specifiers)
         return result
 
-    def _call(self, argument=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         if not self.specifiers:
@@ -191,7 +191,7 @@ class PiecewiseCommand(_command.Command):
             argument = self.selector(argument)
         _do_piecewise_command(
             argument,
-            manifests=self.runtime.get("manifests", {}),
+            manifests=runtime.get("manifests", {}),
             self_autodetect_right_padding=self.autodetect_right_padding,
             self_bookend=self.bookend,
             self_final_piece_spanner=self.final_piece_spanner,

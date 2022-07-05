@@ -33,7 +33,7 @@ class SpannerIndicatorCommand(_command.Command):
         self.right_broken = bool(self.right_broken)
         _tweaks.validate_indexed_tweaks(self.tweaks)
 
-    def _call(self, argument=None):
+    def _call(self, *, argument=None, runtime=None) -> None:
         if argument is None:
             return
         if self.start_indicator is None and self.stop_indicator is None:
@@ -52,6 +52,7 @@ class SpannerIndicatorCommand(_command.Command):
                     start_indicator,
                     first_leaf,
                     deactivate=self.deactivate,
+                    runtime=runtime,
                     tag=_tags.function_name(_frame(), self, n=1)
                     .append(_tags.SPANNER_START)
                     .append(_tags.LEFT_BROKEN),
@@ -61,6 +62,7 @@ class SpannerIndicatorCommand(_command.Command):
                     start_indicator,
                     first_leaf,
                     deactivate=self.deactivate,
+                    runtime=runtime,
                     tag=_tags.function_name(_frame(), self, n=2).append(
                         _tags.SPANNER_START
                     ),
@@ -76,6 +78,7 @@ class SpannerIndicatorCommand(_command.Command):
                     stop_indicator,
                     final_leaf,
                     deactivate=self.deactivate,
+                    runtime=runtime,
                     tag=_tags.function_name(_frame(), self, n=3)
                     .append(_tags.SPANNER_STOP)
                     .append(_tags.RIGHT_BROKEN),
@@ -85,12 +88,15 @@ class SpannerIndicatorCommand(_command.Command):
                     stop_indicator,
                     final_leaf,
                     deactivate=self.deactivate,
+                    runtime=runtime,
                     tag=_tags.function_name(_frame(), self, n=4).append(
                         _tags.SPANNER_STOP
                     ),
                 )
 
-    def _attach_indicator(self, indicator, leaf, deactivate=None, tag=None):
+    def _attach_indicator(
+        self, indicator, leaf, *, deactivate=None, runtime=None, tag=None
+    ):
         assert isinstance(tag, abjad.Tag), repr(tag)
         reapplied = _treat.remove_reapplied_wrappers(leaf, indicator)
         tag_ = self.tag.append(tag)
@@ -104,7 +110,7 @@ class SpannerIndicatorCommand(_command.Command):
         )
         if _treat.compare_persistent_indicators(indicator, reapplied):
             status = "redundant"
-            _treat.treat_persistent_wrapper(self.runtime["manifests"], wrapper, status)
+            _treat.treat_persistent_wrapper(runtime["manifests"], wrapper, status)
 
 
 def _attach_start_stop_indicators(

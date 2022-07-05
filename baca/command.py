@@ -100,9 +100,8 @@ class Command:
     tag_measure_number: bool = False
     tags: list[abjad.Tag] = dataclasses.field(default_factory=list)
     _mutated_score: bool = dataclasses.field(default=False, init=False, repr=False)
-    _runtime: dict = dataclasses.field(default_factory=dict, init=False, repr=False)
+    # _runtime: dict = dataclasses.field(default_factory=dict, init=False, repr=False)
     _state: dict = dataclasses.field(default_factory=dict, init=False, repr=False)
-    # _tags: list[abjad.Tag] = dataclasses.field(init=False, repr=False)
     _tags: list[abjad.Tag] = dataclasses.field(default_factory=list, repr=False)
 
     def __post_init__(self):
@@ -110,39 +109,23 @@ class Command:
             assert callable(self.selector)
         assert isinstance(self.tags, list), repr(self.tags)
         assert all(isinstance(_, abjad.Tag) for _ in self.tags), repr(self.tags)
-        # self._initialize_tags(self.tags)
 
     def __call__(self, argument=None, runtime: dict = None) -> None:
-        self._runtime = runtime or {}
+        runtime = runtime or {}
+        # self._runtime = runtime or {}
         if self.map is not None:
             assert callable(self.map)
             argument = self.map(argument)
             for subargument in argument:
-                self._call(argument=subargument)
+                self._call(argument=subargument, runtime=runtime)
         else:
-            return self._call(argument=argument)
+            return self._call(argument=argument, runtime=runtime)
 
     def __repr__(self):
         return f"{type(self).__name__}(scope={self.scope})"
 
-    def _call(self, argument=None):
+    def _call(self, *, argument=None, runtime=None) -> None:
         pass
-
-    #    def _initialize_tags(self, tags):
-    #        tags_ = []
-    #        for tag in tags or []:
-    #            if tag in (None, ""):
-    #                continue
-    #            elif isinstance(tag, str):
-    #                for word in tag.split(":"):
-    #                    tag_ = abjad.Tag(word)
-    #                    tags_.append(tag_)
-    #            elif isinstance(tag, abjad.Tag):
-    #                tags_.append(tag)
-    #            else:
-    #                raise TypeError(tag)
-    #        assert all(isinstance(_, abjad.Tag) for _ in tags_)
-    #        self._tags = tags_
 
     def _matches_scope_index(self, scope_count, i):
         if isinstance(self.match, int):
@@ -161,9 +144,9 @@ class Command:
                 return False
         return True
 
-    @property
-    def runtime(self) -> dict:
-        return self._runtime
+    #    @property
+    #    def runtime(self) -> dict:
+    #        return self._runtime
 
     # TODO: reimplement as method with leaf argument
     # TODO: supply with all self.get_tag(leaf) functionality
@@ -178,11 +161,14 @@ class Command:
         return tag
 
     # TODO: replace in favor of self.tag(leaf)
-    def get_tag(self, leaf: abjad.Leaf = None) -> abjad.Tag | None:
+    def get_tag(
+        self, leaf: abjad.Leaf = None, *, runtime: dict = None
+    ) -> abjad.Tag | None:
         tags = self.tags[:]
         if self.tag_measure_number:
+            assert runtime, repr(runtime)
             start_offset = abjad.get.timespan(leaf).start_offset
-            measure_number = self.runtime["offset_to_measure_number"].get(start_offset)
+            measure_number = runtime["offset_to_measure_number"].get(start_offset)
             if getattr(self, "after", None) is True:
                 measure_number += 1
             if measure_number is not None:
