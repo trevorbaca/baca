@@ -181,11 +181,11 @@ class PiecewiseCommand(_command.Command):
         result.specifiers = copy.deepcopy(self.specifiers)
         return result
 
-    def _call(self, *, argument=None, runtime=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
-            return
+            return False
         if not self.specifiers:
-            return
+            return False
         if self.selector is not None:
             assert not isinstance(self.selector, str)
             argument = self.selector(argument)
@@ -205,6 +205,7 @@ class PiecewiseCommand(_command.Command):
             self_tag=self.tag,
             self_tweaks=self.tweaks,
         )
+        return False
 
 
 def _do_piecewise_command(

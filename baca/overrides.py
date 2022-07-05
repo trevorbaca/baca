@@ -108,13 +108,13 @@ class OverrideCommand(_command.Command):
 
     __repr__ = _command.Command.__repr__
 
-    def _call(self, *, argument=None, runtime=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
-            return
+            return False
         if self.selector:
             argument = self.selector(argument)
         if not argument:
-            return
+            return False
         leaves = abjad.select.leaves(argument)
         first_tag = self.get_tag(leaves[0], runtime=runtime)
         function_name = _tags.function_name(_frame(), self, n=1)
@@ -141,6 +141,7 @@ class OverrideCommand(_command.Command):
             context=self.context,
             deactivate=self.deactivate,
         )
+        return False
 
 
 def accidental_extra_offset(

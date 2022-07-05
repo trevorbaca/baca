@@ -24,7 +24,7 @@ class Stack:
 
     __slots__ = ("_commands",)
 
-    # remove after removal of new()
+    # TODO: remove after removal of new()
     _positional_arguments_name = "commands"
 
     def __init__(self, *commands) -> None:
@@ -48,9 +48,11 @@ class Stack:
                 message = "exception while calling:\n"
                 message += f"   {command}"
                 raise Exception(message)
-            if result_ is not None:
+            # if result_ is not None:
+            if result_ not in (True, False, None):
                 result = result_
-        return result
+        if result not in (True, False, None):
+            return result
 
     def __eq__(self, argument) -> bool:
         """

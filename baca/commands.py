@@ -732,11 +732,11 @@ class BCPCommand(_command.Command):
 
     __repr__ = _command.Command.__repr__
 
-    def _call(self, *, argument=None, runtime=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
-            return
+            return False
         if self.bcps is None:
-            return
+            return False
         if self.selector:
             argument = self.selector(argument)
         bcps_ = list(self.bcps)
@@ -885,6 +885,7 @@ class BCPCommand(_command.Command):
                         tag=self.tag.append(_tags.function_name(_frame(), self, n=8)),
                     )
             previous_bcp = bcp
+        return False
 
     @property
     def start_command(self) -> str:
@@ -911,12 +912,13 @@ class ColorCommand(_command.Command):
         assert self.selector is not None
         _command.Command.__post_init__(self)
 
-    def _call(self, *, argument=None, runtime=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
-            return
+            return False
         assert self.selector is not None
         argument = self.selector(argument)
         abjad.label.by_selector(argument, self.selector, lone=self.lone)
+        return False
 
 
 @dataclasses.dataclass(slots=True)
@@ -1005,9 +1007,9 @@ class ContainerCommand(_command.Command):
         _command.Command.__post_init__(self)
         assert isinstance(self.identifier, str), repr(self.identifier)
 
-    def _call(self, *, argument=None, runtime=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
-            return
+            return False
         if self.selector is not None:
             argument = self.selector(argument)
         if not self.identifier:
@@ -1020,8 +1022,6 @@ class ContainerCommand(_command.Command):
         leaves = abjad.select.leaves(argument)
         components = abjad.select.top(leaves)
         abjad.mutate.wrap(components, container)
-
-    def _mutates_score(self):
         return True
 
 
@@ -1036,9 +1036,9 @@ class DetachCommand(_command.Command):
 
     __repr__ = _command.Command.__repr__
 
-    def _call(self, *, argument=None, runtime=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
-            return
+            return False
         assert self.selector is not None
         argument = self.selector(argument)
         leaves = abjad.select.leaves(argument)
@@ -1046,6 +1046,7 @@ class DetachCommand(_command.Command):
         for leaf in leaves:
             for argument in self.arguments:
                 abjad.detach(argument, leaf)
+        return False
 
 
 @dataclasses.dataclass(slots=True)
@@ -1059,12 +1060,13 @@ class GenericCommand(_command.Command):
         assert callable(self.function), repr(self.function)
         _command.Command.__post_init__(self)
 
-    def _call(self, *, argument=None, runtime=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
-            return
+            return False
         if self.selector is not None:
             argument = self.selector(argument)
         self.function(argument, runtime=runtime)
+        return False
 
 
 @dataclasses.dataclass(slots=True)
@@ -1088,9 +1090,9 @@ class GlissandoCommand(_command.Command):
         _command.Command.__post_init__(self)
         _tweaks.validate_indexed_tweaks(self.tweaks)
 
-    def _call(self, *, argument=None, runtime=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
-            return
+            return False
         if self.selector is not None:
             argument = self.selector(argument)
         leaves = abjad.select.leaves(argument)
@@ -1114,6 +1116,7 @@ class GlissandoCommand(_command.Command):
             tag=self.tag,
             zero_padding=self.zero_padding,
         )
+        return False
 
 
 @dataclasses.dataclass(slots=True)
@@ -1141,17 +1144,17 @@ class IndicatorCommand(_command.Command):
 
     __repr__ = _command.Command.__repr__
 
-    def _call(self, *, argument=None, runtime=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
-            return
+            return False
         if self._indicators_coerced() is None:
-            return
+            return False
         if self.redundant is True:
-            return
+            return False
         if self.selector:
             argument = self.selector(argument)
         if not argument:
-            return
+            return False
         _attach_persistent_indicator(
             argument,
             self._indicators_coerced(),
@@ -1163,6 +1166,7 @@ class IndicatorCommand(_command.Command):
             predicate=self.predicate,
             tag=self.tag,
         )
+        return False
 
     def _indicators_coerced(self):
         indicators_ = None
@@ -1177,14 +1181,14 @@ class IndicatorCommand(_command.Command):
 @dataclasses.dataclass(slots=True)
 # @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class InstrumentChangeCommand(IndicatorCommand):
-    def _call(self, *, argument=None, runtime=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
-            return
+            return False
         if self.selector is not None:
             argument = self.selector(argument)
         if self._indicators_coerced() is None:
-            return
-        IndicatorCommand._call(self, argument=argument, runtime=runtime)
+            return False
+        return IndicatorCommand._call(self, argument=argument, runtime=runtime)
 
 
 @dataclasses.dataclass(slots=True)
@@ -1196,14 +1200,15 @@ class LabelCommand(_command.Command):
     def __post_init__(self):
         _command.Command.__post_init__(self)
 
-    def _call(self, *, argument=None, runtime=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
-            return
+            return False
         if self.callable_ is None:
-            return
+            return False
         if self.selector:
             argument = self.selector(argument)
         self.callable_(argument)
+        return False
 
 
 @dataclasses.dataclass(slots=True)
@@ -1218,14 +1223,14 @@ class PartAssignmentCommand(_command.Command):
 
     __repr__ = _command.Command.__repr__
 
-    def _call(self, *, argument=None, runtime=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
-            return
+            return False
         if self.selector is not None:
             argument = self.selector(argument)
         first_leaf = abjad.get.leaf(argument, 0)
         if first_leaf is None:
-            return
+            return False
         voice = abjad.get.parentage(first_leaf).get(abjad.Voice, -1)
         if voice is not None and self.part_assignment is not None:
             assert isinstance(voice, abjad.Voice)
@@ -1246,9 +1251,6 @@ class PartAssignmentCommand(_command.Command):
         leaves = abjad.select.leaves(argument)
         components = abjad.select.top(leaves)
         abjad.mutate.wrap(components, container)
-
-    def _mutates_score(self):
-        # return True
         return False
 
 
@@ -1339,9 +1341,9 @@ class AccidentalAdjustmentCommand(_command.Command):
 
     __repr__ = _command.Command.__repr__
 
-    def _call(self, *, argument=None, runtime=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
-            return
+            return False
         if self.selector is not None:
             argument = self.selector(argument)
         if self.tag.string:
@@ -1380,6 +1382,7 @@ class AccidentalAdjustmentCommand(_command.Command):
                         alternative_tag,
                         primary_tag,
                     )
+        return False
 
 
 @dataclasses.dataclass(slots=True)
@@ -2051,15 +2054,15 @@ class ClusterCommand(_command.Command):
             )
         assert abjad.math.all_are_nonnegative_integers(self.widths)
 
-    def _call(self, *, argument=None, runtime=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
-            return
+            return False
         if not self.widths:
-            return
+            return False
         if self.selector:
             argument = self.selector(argument)
         if not argument:
-            return
+            return False
         leaf = abjad.select.leaf(argument, 0)
         root = abjad.get.parentage(leaf).root
         widths = abjad.CyclicTuple(self.widths)
@@ -2067,11 +2070,12 @@ class ClusterCommand(_command.Command):
             for i, plt in enumerate(_select.plts(argument)):
                 width = widths[i]
                 self._make_cluster(plt, width)
+        return True
 
     def _make_cluster(self, plt, width):
         assert plt.is_pitched, repr(plt)
         if not width:
-            return
+            return False
         if self.start_pitch is not None:
             start_pitch = self.start_pitch
         else:
@@ -2097,9 +2101,6 @@ class ClusterCommand(_command.Command):
             assert pitch.accidental == abjad.Accidental("natural")
             pitches.append(pitch)
         return pitches
-
-    def _mutates_score(self):
-        return True
 
 
 @dataclasses.dataclass(slots=True)
@@ -2188,15 +2189,15 @@ class ColorFingeringCommand(_command.Command):
         assert abjad.math.all_are_nonnegative_integers(self.numbers)
         _tweaks.validate_indexed_tweaks(self.tweaks)
 
-    def _call(self, *, argument=None, runtime=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
-            return
+            return False
         if not self.numbers:
-            return
+            return False
         if self.selector:
             argument = self.selector(argument)
         if not argument:
-            return
+            return False
         pheads = _select.pheads(argument)
         total = len(pheads)
         numbers = abjad.CyclicTuple(self.numbers)
@@ -2208,6 +2209,7 @@ class ColorFingeringCommand(_command.Command):
                     fingering, self.tweaks, i=i, total=total
                 )
                 abjad.attach(fingering, phead, direction=self.direction)
+        return False
 
 
 @dataclasses.dataclass(slots=True)
@@ -2221,6 +2223,8 @@ class DiatonicClusterCommand(_command.Command):
         >>> staff = abjad.Staff("c' d' e' f'")
         >>> command = baca.diatonic_clusters([4, 6])
         >>> command(staff)
+        True
+
         >>> abjad.show(staff) # doctest: +SKIP
 
         ..  docs::
@@ -2245,15 +2249,15 @@ class DiatonicClusterCommand(_command.Command):
         assert abjad.math.all_are_nonnegative_integers(self.widths)
         assert all(isinstance(_, int) for _ in self.widths), repr(self.widths)
 
-    def _call(self, *, argument=None, runtime=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
-            return
+            return False
         if not self.widths:
-            return
+            return False
         if self.selector:
             argument = self.selector(argument)
         if not argument:
-            return
+            return False
         widths = abjad.CyclicTuple(self.widths)
         for i, plt in enumerate(_select.plts(argument)):
             width = widths[i]
@@ -2266,6 +2270,7 @@ class DiatonicClusterCommand(_command.Command):
                 chord = abjad.Chord(pleaf)
                 chord.note_heads[:] = pitches
                 abjad.mutate.replace(pleaf, chord)
+        return True
 
     def _get_lowest_diatonic_pitch_number(self, plt):
         if isinstance(plt.head, abjad.Note):
@@ -2275,9 +2280,6 @@ class DiatonicClusterCommand(_command.Command):
         else:
             raise TypeError(plt)
         return pitch._get_diatonic_pitch_number()
-
-    def _mutates_score(self):
-        return True
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -2430,17 +2432,18 @@ class MicrotoneDeviationCommand(_command.Command):
         _command.Command.__post_init__(self)
         assert all(isinstance(_, int | float) for _ in self.deviations)
 
-    def _call(self, *, argument=None, runtime=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
-            return
+            return False
         if not self.deviations:
-            return
+            return False
         if self.selector:
             argument = self.selector(argument)
         deviations = abjad.CyclicTuple(self.deviations)
         for i, plt in enumerate(_select.plts(argument)):
             deviation = deviations[i]
             self._adjust_pitch(plt, deviation)
+        return False
 
     def _adjust_pitch(self, plt, deviation):
         assert deviation in (0.5, 0, -0.5)
@@ -2555,11 +2558,11 @@ class OctaveDisplacementCommand(_command.Command):
         _command.Command.__post_init__(self)
         assert self._is_octave_displacement_vector(self.displacements)
 
-    def _call(self, *, argument=None, runtime=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
-            return
+            return False
         if self.displacements is None:
-            return
+            return False
         if self.selector:
             argument = self.selector(argument)
         displacements = abjad.CyclicTuple(self.displacements)
@@ -2577,6 +2580,7 @@ class OctaveDisplacementCommand(_command.Command):
                     pleaf.written_pitches = tuple(pitches)
                 else:
                     raise TypeError(pleaf)
+        return False
 
     def _is_octave_displacement_vector(self, argument):
         if isinstance(argument, tuple | list):
@@ -2851,6 +2855,8 @@ class PitchCommand(_command.Command):
 
         >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
         >>> command(staff)
+        False
+
         >>> abjad.show(staff) # doctest: +SKIP
 
         ..  docs::
@@ -2896,20 +2902,18 @@ class PitchCommand(_command.Command):
         assert isinstance(self.do_not_transpose, bool), repr(self.do_not_transpose)
         assert isinstance(self.ignore_incomplete, bool), repr(self.ignore_incomplete)
         assert isinstance(self.persist, str), repr(self.persist)
-        self._mutated_score = False
-        self._state = {}
 
     __repr__ = _command.Command.__repr__
 
-    def _call(self, *, argument=None, runtime=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
-            return
+            return False
         if not self.pitches:
-            return
+            return False
         if self.selector:
             argument = self.selector(argument)
         if not argument:
-            return
+            return False
         previous_pitches_consumed = self._previous_pitches_consumed(runtime)
         pitches = _coerce_pitches(self.pitches)
         pitches_consumed, mutated_score = _do_pitch_command(
@@ -2928,13 +2932,7 @@ class PitchCommand(_command.Command):
         self._state = {}
         pitches_consumed += previous_pitches_consumed
         self.state["pitches_consumed"] = pitches_consumed
-        self._mutated_score = mutated_score
-
-    def _mutates_score(self):
-        pitches = self.pitches or []
-        if any(isinstance(_, collections.abc.Iterable) for _ in pitches):
-            return True
-        return self._mutated_score
+        return mutated_score
 
     def _previous_pitches_consumed(self, runtime):
         assert isinstance(runtime, dict), repr(runtime)
@@ -3168,11 +3166,11 @@ class RegisterCommand(_command.Command):
         prototype = _pcollections.Registration
         assert isinstance(self.registration, prototype), repr(self.registration)
 
-    def _call(self, *, argument=None, runtime=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
-            return
+            return False
         if self.registration is None:
-            return
+            return False
         if self.selector:
             argument = self.selector(argument)
         plts = _select.plts(argument)
@@ -3190,6 +3188,7 @@ class RegisterCommand(_command.Command):
                 else:
                     raise TypeError(pleaf)
                 abjad.detach(_enums.NOT_YET_REGISTERED, pleaf)
+        return False
 
 
 @dataclasses.dataclass(slots=True)
@@ -4159,9 +4158,9 @@ class RegisterInterpolationCommand(_command.Command):
         assert isinstance(self.start_pitch, abjad.NumberedPitch), repr(self.start_pitch)
         assert isinstance(self.stop_pitch, abjad.NumberedPitch), repr(self.stop_pitch)
 
-    def _call(self, *, argument=None, runtime=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
-            return
+            return False
         if self.selector:
             argument = self.selector(argument)
         plts = _select.plts(argument)
@@ -4178,6 +4177,7 @@ class RegisterInterpolationCommand(_command.Command):
                 else:
                     raise TypeError(pleaf)
                 abjad.detach(_enums.NOT_YET_REGISTERED, pleaf)
+        return False
 
     def _get_registration(self, i, length):
         start_pitch = self.start_pitch.number
@@ -4521,6 +4521,7 @@ class RegisterToOctaveCommand(_command.Command):
         ...     octave_number=5,
         ... )
         >>> command(chord)
+        False
 
         ..  docs::
 
@@ -4538,6 +4539,7 @@ class RegisterToOctaveCommand(_command.Command):
         ...     octave_number=5,
         ... )
         >>> command(chord)
+        False
 
         ..  docs::
 
@@ -4555,6 +4557,7 @@ class RegisterToOctaveCommand(_command.Command):
         ...     octave_number=5,
         ... )
         >>> command(chord)
+        False
 
         ..  docs::
 
@@ -4581,6 +4584,7 @@ class RegisterToOctaveCommand(_command.Command):
         >>> chord = abjad.Chord("<c, d e'>1")
         >>> command = baca.RegisterToOctaveCommand(octave_number=1)
         >>> command(chord)
+        False
 
         ..  docs::
 
@@ -4593,6 +4597,7 @@ class RegisterToOctaveCommand(_command.Command):
         >>> chord = abjad.Chord("<c, d e'>1")
         >>> command = baca.RegisterToOctaveCommand(octave_number=2)
         >>> command(chord)
+        False
 
         ..  docs::
 
@@ -4605,6 +4610,7 @@ class RegisterToOctaveCommand(_command.Command):
         >>> chord = abjad.Chord("<c, d e'>1")
         >>> command = baca.RegisterToOctaveCommand(octave_number=3)
         >>> command(chord)
+        False
 
         ..  docs::
 
@@ -4617,6 +4623,7 @@ class RegisterToOctaveCommand(_command.Command):
         >>> chord = abjad.Chord("<c, d e'>1")
         >>> command = baca.RegisterToOctaveCommand(octave_number=4)
         >>> command(chord)
+        False
 
         ..  docs::
 
@@ -4629,6 +4636,7 @@ class RegisterToOctaveCommand(_command.Command):
         >>> chord = abjad.Chord("<c, d e'>1")
         >>> command = baca.RegisterToOctaveCommand(octave_number=5)
         >>> command(chord)
+        False
 
         ..  docs::
 
@@ -4649,11 +4657,11 @@ class RegisterToOctaveCommand(_command.Command):
 
     __repr__ = _command.Command.__repr__
 
-    def _call(self, *, argument=None, runtime=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
-            return
+            return False
         if self.octave_number is None:
-            return
+            return False
         if self.selector:
             argument = self.selector(argument)
         pitches = abjad.iterate.pitches(argument)
@@ -4663,6 +4671,7 @@ class RegisterToOctaveCommand(_command.Command):
         pleaves = _select.pleaves(argument)
         for pleaf in pleaves:
             self._set_pitch(pleaf, lambda _: _.transpose(n=12 * octave_adjustment))
+        return False
 
     def _set_pitch(self, leaf, transposition):
         if isinstance(leaf, abjad.Note):
@@ -4927,6 +4936,8 @@ class StaffPositionCommand(_command.Command):
         >>> abjad.attach(abjad.Clef("treble"), staff[0])
         >>> command = baca.staff_positions([0, 2])
         >>> command(staff)
+        False
+
         >>> abjad.show(staff) # doctest: +SKIP
 
         ..  docs::
@@ -4948,6 +4959,8 @@ class StaffPositionCommand(_command.Command):
         >>> abjad.attach(abjad.Clef("percussion"), staff[0])
         >>> command = baca.staff_positions([0, 2])
         >>> command(staff)
+        False
+
         >>> abjad.show(staff) # doctest: +SKIP
 
         ..  docs::
@@ -4974,7 +4987,6 @@ class StaffPositionCommand(_command.Command):
     mock: bool = False
     selector: typing.Callable = lambda _: _select.plts(_)
     set_chord_pitches_equal: bool = False
-    _mutated_score: bool = False
 
     def __post_init__(self):
         _command.Command.__post_init__(self)
@@ -4989,13 +5001,12 @@ class StaffPositionCommand(_command.Command):
         assert isinstance(self.set_chord_pitches_equal, bool), repr(
             self.set_chord_pitches_equal
         )
-        self._mutated_score = False
 
-    def _call(self, *, argument=None, runtime=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
-            return
+            return False
         if not self.numbers:
-            return
+            return False
         if self.selector:
             argument = self.selector(argument)
         numbers = abjad.CyclicTuple(self.numbers)
@@ -5009,13 +5020,7 @@ class StaffPositionCommand(_command.Command):
             exact=self.exact,
             set_chord_pitches_equal=self.set_chord_pitches_equal,
         )
-        self._mutated_score = mutated_score
-
-    def _mutates_score(self):
-        numbers = self.numbers or []
-        if any(isinstance(_, collections.abc.Iterable) for _ in numbers):
-            return True
-        return self._mutated_score
+        return mutated_score
 
 
 @dataclasses.dataclass(slots=True)
@@ -5049,14 +5054,14 @@ class StaffPositionInterpolationCommand(_command.Command):
                 self.pitches_instead_of_staff_positions
             )
 
-    def _call(self, *, argument=None, runtime=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
-            return
+            return False
         if self.selector:
             argument = self.selector(argument)
         plts = _select.plts(argument)
         if not plts:
-            return
+            return False
         count = len(plts)
         if isinstance(self.start, abjad.StaffPosition):
             start_staff_position = self.start
@@ -5135,6 +5140,7 @@ class StaffPositionInterpolationCommand(_command.Command):
             mock=self.mock,
         )
         assert new_lt is None, repr(new_lt)
+        return False
 
 
 def bass_to_octave(

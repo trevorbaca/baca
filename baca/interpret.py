@@ -779,11 +779,11 @@ def _call_all_commands(
             previous_section_voice_metadata=previous_section_voice_metadata,
         )
         try:
-            command(selection, runtime)
+            command_result = command(selection, runtime)
         except Exception:
             print(f"Interpreting ...\n\n{command}\n")
             raise
-        cache = _handle_mutator(score, cache, command)
+        cache = _handle_mutator(score, cache, command_result)
         if getattr(command, "persist", None):
             parameter = command.parameter
             state = command.state
@@ -1481,8 +1481,8 @@ def _get_previous_section_voice_metadata(previous_persist, voice_name):
     return voice_metadata.get(voice_name, {})
 
 
-def _handle_mutator(score, cache, command):
-    if hasattr(command, "_mutates_score") and command._mutates_score():
+def _handle_mutator(score, cache, command_result):
+    if command_result is True:
         cache = None
         _update_score_one_time(score)
     return cache

@@ -34,11 +34,11 @@ class SpannerIndicatorCommand(_command.Command):
         assert isinstance(self.right_broken, bool), repr(self.right_broken)
         _tweaks.validate_indexed_tweaks(self.tweaks)
 
-    def _call(self, *, argument=None, runtime=None) -> None:
+    def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
-            return
+            return False
         if self.start_indicator is None and self.stop_indicator is None:
-            return
+            return False
         if self.selector:
             argument = self.selector(argument)
         if self.start_indicator is not None:
@@ -94,6 +94,7 @@ class SpannerIndicatorCommand(_command.Command):
                         _tags.SPANNER_STOP
                     ),
                 )
+        return False
 
     def _attach_indicator(
         self, indicator, leaf, *, deactivate=None, runtime=None, tag=None

@@ -100,7 +100,6 @@ class Command:
     selector: typing.Callable | None = None
     tag_measure_number: bool = False
     tags: list[abjad.Tag] = dataclasses.field(default_factory=list)
-    _mutated_score: bool = dataclasses.field(default=False, init=False, repr=False)
     _state: dict = dataclasses.field(default_factory=dict, init=False, repr=False)
     _tags: list[abjad.Tag] = dataclasses.field(default_factory=list, repr=False)
 
@@ -110,21 +109,23 @@ class Command:
         assert isinstance(self.tags, list), repr(self.tags)
         assert all(isinstance(_, abjad.Tag) for _ in self.tags), repr(self.tags)
 
-    def __call__(self, argument=None, runtime: dict = None) -> None:
+    def __call__(self, argument=None, runtime: dict = None) -> bool:
         runtime = runtime or {}
         if self.map is not None:
             assert callable(self.map)
             argument = self.map(argument)
+            result = False
             for subargument in argument:
-                self._call(argument=subargument, runtime=runtime)
+                result = self._call(argument=subargument, runtime=runtime)
+            return result
         else:
             return self._call(argument=argument, runtime=runtime)
 
     def __repr__(self):
         return f"{type(self).__name__}(scope={self.scope})"
 
-    def _call(self, *, argument=None, runtime=None) -> None:
-        pass
+    def _call(self, *, argument=None, runtime=None) -> bool:
+        return False
 
     def _matches_scope_index(self, scope_count, i):
         if isinstance(self.match, int):
