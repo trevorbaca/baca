@@ -70,6 +70,8 @@ def _attach_persistent_indicator(
 
 
 def _coerce_pitches(pitches):
+    if isinstance(pitches, Loop):
+        return pitches
     if isinstance(pitches, str):
         pitches = _parse_string(pitches)
     items = []
@@ -85,10 +87,7 @@ def _coerce_pitches(pitches):
         else:
             item = abjad.NamedPitch(item)
         items.append(item)
-    if isinstance(pitches, Loop):
-        pitches = type(pitches)(items=items, intervals=pitches.intervals)
-    else:
-        pitches = abjad.CyclicTuple(items)
+    pitches = abjad.CyclicTuple(items)
     return pitches
 
 
@@ -2208,17 +2207,18 @@ class DiatonicClusterCommand(_command.Command):
         return True
 
 
-# TODO: frozen=True
-@dataclasses.dataclass(slots=True)
+# TODO:
+# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass
 class Loop(abjad.CyclicTuple):
     """
     Loop.
 
     ..  container:: example
 
-        >>> loop = baca.Loop([0, 2, 4], intervals=[1])
+        >>> loop = baca.Loop([0, 2, 4], [1])
         >>> loop
-        Loop(items=CyclicTuple(items=(NamedPitch("c'"), NamedPitch("d'"), NamedPitch("e'"))), intervals=CyclicTuple(items=(1,)))
+        Loop(items=(0, 2, 4), intervals=[1])
 
         >>> for i in range(12):
         ...     loop[i]
@@ -2235,36 +2235,32 @@ class Loop(abjad.CyclicTuple):
         NamedPitch("f'")
         NamedPitch("g'")
 
-        >>> isinstance(loop, abjad.CyclicTuple)
-        True
-
     """
 
-    intervals: typing.Any = None
+    items: typing.Sequence[int]
+    intervals: typing.Sequence[int]
 
     def __post_init__(self):
-        if self.items is not None:
-            assert isinstance(self.items, collections.abc.Iterable), repr(self.items)
-            self.items = [abjad.NamedPitch(_) for _ in self.items]
-            self.items = abjad.CyclicTuple(self.items)
-        if self.intervals is not None:
-            assert isinstance(self.items, collections.abc.Iterable), repr(self.items)
-            self.intervals = abjad.CyclicTuple(self.intervals)
+        assert all(isinstance(_, int) for _ in self.items), self.items
+        self.items = tuple(self.items)
+        self.pitches = tuple(self.items)
+        assert all(isinstance(_, int) for _ in self.intervals), self.intervals
 
-    def __getitem__(self, i) -> abjad.Pitch:
-        """
-        Gets pitch ``i`` cyclically with intervals.
-        """
-        if isinstance(i, slice):
-            raise NotImplementedError
-        iteration = i // len(self)
-        if self.intervals is None:
+    def __getitem__(self, i: int) -> abjad.NamedPitch:
+        assert isinstance(i, int), repr(i)
+        intervals = abjad.CyclicTuple(self.intervals)
+        pitches = abjad.CyclicTuple(self.pitches)
+        iteration = i // len(pitches)
+        if not pitches:
             transposition = 0
         else:
-            transposition = sum(self.intervals[:iteration])
-        pitch_ = abjad.CyclicTuple(list(self))[i]
-        pitch = type(pitch_)(pitch_.number + transposition)
+            transposition = sum(intervals[:iteration])
+        number = pitches[i]
+        pitch = abjad.NamedPitch(number + transposition)
         return pitch
+
+    def __iter__(self):
+        return self.pitches.__iter__()
 
 
 @dataclasses.dataclass(slots=True)
@@ -6358,15 +6354,16 @@ def levine_multiphonic(n: int) -> abjad.Markup:
 
 
 def loop(
-    items: typing.Sequence,
-    intervals: typing.Sequence,
+    pitches: list[int],
+    intervals: list[int],
+    *,
     selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
 ) -> PitchCommand:
     """
-    Loops ``items`` at ``intervals``.
+    Loops ``pitches`` at ``intervals``.
     """
-    loop = Loop(items=items, intervals=intervals)
-    return pitches(loop, selector=selector)
+    loop = Loop(pitches, intervals)
+    return _pitches_command_factory(loop, selector=selector)
 
 
 def make_dynamic(
@@ -6888,6 +6885,9 @@ def pitches(
         pitches=pitches,
         selector=selector,
     )
+
+
+_pitches_command_factory = pitches
 
 
 def pitches_function(
