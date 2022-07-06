@@ -15,8 +15,7 @@ from . import tweaks as _tweaks
 from . import typings as _typings
 
 
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-@dataclasses.dataclass
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class SpannerIndicatorCommand(_command.Command):
 
     detach_first: bool = False

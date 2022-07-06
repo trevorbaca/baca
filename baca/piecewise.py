@@ -133,8 +133,7 @@ def _unbundle_indicator(argument):
     return argument
 
 
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-@dataclasses.dataclass
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class PiecewiseCommand(_command.Command):
     """
     Piecewise indicator command.

@@ -3095,9 +3095,10 @@ def reapply_persistent_indicators(
     *, selector=lambda _: _select.leaves(_)
 ) -> _commands.GenericCommand:
     command = _commands.GenericCommand(
-        function=reapply_persistent_indicators_function, selector=selector
+        function=reapply_persistent_indicators_function,
+        name="reapply_persistent_indicators",
+        selector=selector,
     )
-    command.name = "reapply_persistent_indicators"
     return command
 
 

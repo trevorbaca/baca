@@ -74,8 +74,7 @@ def _call_override_command(
     abjad.attach(literal, leaves[-1], deactivate=deactivate, tag=final_tag)
 
 
-@dataclasses.dataclass
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class OverrideCommand(_command.Command):
     """
     Override command.
@@ -92,7 +91,7 @@ class OverrideCommand(_command.Command):
 
     def __post_init__(self):
         _command.Command.__post_init__(self)
-        self.after = bool(self.after)
+        assert isinstance(self.after, bool), repr(self.after)
         if self.allowlist is not None:
             assert isinstance(self.allowlist, tuple), repr(self.allowlist)
             assert all(issubclass(_, abjad.Leaf) for _ in self.allowlist)

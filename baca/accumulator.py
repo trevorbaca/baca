@@ -1,4 +1,3 @@
-import copy
 import dataclasses
 
 import abjad
@@ -236,8 +235,9 @@ class CommandAccumulator:
                         scope_ = dataclasses.replace(current_scope, measures=measures)
                     else:
                         scope_ = dataclasses.replace(current_scope)
-                    command_ = copy.copy(command_)
-                    command_.scope = scope_
+                    # command_ = copy.copy(command_)
+                    # command_.scope = scope_
+                    command_ = dataclasses.replace(command_, scope=scope_)
                     self.commands.append(command_)
 
     def get(self, start=None, stop=None):

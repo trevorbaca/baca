@@ -85,8 +85,7 @@ class TimelineScope:
             self.scopes = scopes
 
 
-@dataclasses.dataclass(slots=True)
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Command:
     """
     Command.
@@ -100,7 +99,7 @@ class Command:
     selector: typing.Callable | None = None
     tag_measure_number: bool = False
     tags: list[abjad.Tag] = dataclasses.field(default_factory=list)
-    _state: dict = dataclasses.field(default_factory=dict, init=False, repr=False)
+    _state: dict = dataclasses.field(default_factory=dict, repr=False)
     _tags: list[abjad.Tag] = dataclasses.field(default_factory=list, repr=False)
 
     def __post_init__(self):
@@ -736,8 +735,13 @@ def tag(
             pass
         assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
         command.tags.extend(tags)
-        command.deactivate = deactivate
-        command.tag_measure_number = tag_measure_number
+        # command.deactivate = deactivate
+        # command.tag_measure_number = tag_measure_number
+        command = dataclasses.replace(
+            command,
+            deactivate=deactivate,
+            tag_measure_number=tag_measure_number,
+        )
     return command
 
 

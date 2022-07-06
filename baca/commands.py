@@ -341,8 +341,7 @@ def _validate_bcps(bcps):
         assert len(bcp) == 2, repr(bcp)
 
 
-@dataclasses.dataclass(slots=True)
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class BCPCommand(_command.Command):
     r"""
     Bow contact point command.
@@ -902,8 +901,7 @@ class BCPCommand(_command.Command):
         return r"\bacaStopTextSpanBCP"
 
 
-@dataclasses.dataclass(slots=True)
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class ColorCommand(_command.Command):
 
     lone: bool = False
@@ -921,8 +919,7 @@ class ColorCommand(_command.Command):
         return False
 
 
-@dataclasses.dataclass(slots=True)
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class ContainerCommand(_command.Command):
     r"""
     Container command.
@@ -1025,8 +1022,7 @@ class ContainerCommand(_command.Command):
         return True
 
 
-@dataclasses.dataclass(slots=True)
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class DetachCommand(_command.Command):
 
     arguments: typing.Sequence[typing.Any] = ()
@@ -1049,8 +1045,7 @@ class DetachCommand(_command.Command):
         return False
 
 
-@dataclasses.dataclass(slots=True)
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class GenericCommand(_command.Command):
 
     function: typing.Callable = lambda _: _
@@ -1069,8 +1064,7 @@ class GenericCommand(_command.Command):
         return False
 
 
-@dataclasses.dataclass(slots=True)
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class GlissandoCommand(_command.Command):
 
     allow_repeats: bool = False
@@ -1119,8 +1113,7 @@ class GlissandoCommand(_command.Command):
         return False
 
 
-@dataclasses.dataclass(slots=True)
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class IndicatorCommand(_command.Command):
 
     indicators: typing.Sequence = ()
@@ -1178,8 +1171,7 @@ class IndicatorCommand(_command.Command):
         return indicators_
 
 
-@dataclasses.dataclass(slots=True)
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class InstrumentChangeCommand(IndicatorCommand):
     def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
@@ -1191,8 +1183,7 @@ class InstrumentChangeCommand(IndicatorCommand):
         return IndicatorCommand._call(self, argument=argument, runtime=runtime)
 
 
-@dataclasses.dataclass(slots=True)
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class LabelCommand(_command.Command):
 
     callable_: typing.Any = None
@@ -1211,8 +1202,7 @@ class LabelCommand(_command.Command):
         return False
 
 
-@dataclasses.dataclass(slots=True)
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class PartAssignmentCommand(_command.Command):
 
     part_assignment: _parts.PartAssignment | None = None
@@ -1254,8 +1244,7 @@ class PartAssignmentCommand(_command.Command):
         return False
 
 
-@dataclasses.dataclass(slots=True)
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class AccidentalAdjustmentCommand(_command.Command):
     r"""
     Accidental adjustment command.
@@ -1385,8 +1374,7 @@ class AccidentalAdjustmentCommand(_command.Command):
         return False
 
 
-@dataclasses.dataclass(slots=True)
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class ClusterCommand(_command.Command):
     r"""
     Cluster command.
@@ -2103,8 +2091,7 @@ class ClusterCommand(_command.Command):
         return pitches
 
 
-@dataclasses.dataclass(slots=True)
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class ColorFingeringCommand(_command.Command):
     r"""
     Color fingering command.
@@ -2212,8 +2199,7 @@ class ColorFingeringCommand(_command.Command):
         return False
 
 
-@dataclasses.dataclass(slots=True)
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class DiatonicClusterCommand(_command.Command):
     r"""
     Diatonic cluster command.
@@ -2334,8 +2320,7 @@ class Loop:
         return self.pitches.__iter__()
 
 
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-@dataclasses.dataclass(slots=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class MicrotoneDeviationCommand(_command.Command):
     r"""
     Microtone deviation command.
@@ -2458,8 +2443,7 @@ class MicrotoneDeviationCommand(_command.Command):
             abjad.attach(annotation, pleaf)
 
 
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-@dataclasses.dataclass(slots=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class OctaveDisplacementCommand(_command.Command):
     r"""
     Octave displacement command.
@@ -2589,8 +2573,7 @@ class OctaveDisplacementCommand(_command.Command):
         return False
 
 
-@dataclasses.dataclass(slots=True)
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class PitchCommand(_command.Command):
     r"""
     Pitch command.
@@ -2929,7 +2912,6 @@ class PitchCommand(_command.Command):
             mock=self.mock,
             previous_pitches_consumed=previous_pitches_consumed,
         )
-        self._state = {}
         pitches_consumed += previous_pitches_consumed
         self.state["pitches_consumed"] = pitches_consumed
         return mutated_score
@@ -2978,8 +2960,7 @@ class PitchCommand(_command.Command):
         return self._state
 
 
-@dataclasses.dataclass(slots=True)
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class RegisterCommand(_command.Command):
     r"""
     Register command.
@@ -3191,8 +3172,7 @@ class RegisterCommand(_command.Command):
         return False
 
 
-@dataclasses.dataclass(slots=True)
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class RegisterInterpolationCommand(_command.Command):
     r"""
     Register interpolation command.
@@ -4190,8 +4170,7 @@ class RegisterInterpolationCommand(_command.Command):
         return _pcollections.Registration([("[A0, C8]", current_pitch)])
 
 
-@dataclasses.dataclass(slots=True)
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class RegisterToOctaveCommand(_command.Command):
     r"""
     Register-to-octave command.
@@ -4924,8 +4903,7 @@ class SchemeManifest:
         raise KeyError(dynamic)
 
 
-@dataclasses.dataclass(slots=True)
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class StaffPositionCommand(_command.Command):
     r"""
     Staff position command.
@@ -5023,8 +5001,7 @@ class StaffPositionCommand(_command.Command):
         return mutated_score
 
 
-@dataclasses.dataclass(slots=True)
-# @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class StaffPositionInterpolationCommand(_command.Command):
 
     start: int | str | abjad.NamedPitch | abjad.StaffPosition | None = None
@@ -5049,10 +5026,7 @@ class StaffPositionInterpolationCommand(_command.Command):
         assert isinstance(self.stop, prototype), repr(self.stop)
         assert isinstance(self.allow_hidden, bool), repr(self.allow_hidden)
         assert isinstance(self.mock, bool), repr(self.mock)
-        if self.pitches_instead_of_staff_positions is not None:
-            self.pitches_instead_of_staff_positions = bool(
-                self.pitches_instead_of_staff_positions
-            )
+        assert isinstance(self.pitches_instead_of_staff_positions, bool)
 
     def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
