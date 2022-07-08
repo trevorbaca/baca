@@ -107,7 +107,11 @@ def _do_pitch_command(
     assert isinstance(previous_pitches_consumed, int)
     pitches = _coerce_pitches(pitches)
     plts = []
-    for pleaf in _select.pleaves(argument):
+    if allow_hidden:
+        pleaves = _select.pleaves(argument)
+    else:
+        pleaves = _select.pleaves(argument, exclude=_enums.HIDDEN)
+    for pleaf in pleaves:
         plt = abjad.get.logical_tie(pleaf)
         if plt.head is pleaf:
             plts.append(plt)
@@ -6809,6 +6813,7 @@ def pitch_function(
     argument,
     pitch,
     *,
+    allow_hidden: bool = False,
     allow_out_of_range: bool = False,
     allow_repitch: bool = False,
     mock: bool = False,
@@ -6827,6 +6832,7 @@ def pitch_function(
         argument,
         cyclic,
         [pitch],
+        allow_hidden=allow_hidden,
         allow_repeats=True,
         allow_repitch=allow_repitch,
         do_not_transpose=do_not_transpose,
@@ -6843,6 +6849,7 @@ def pitches(
     pitches,
     selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
     *,
+    allow_hidden: bool = False,
     allow_octaves: bool = False,
     allow_repeats: bool = False,
     allow_repitch: bool = False,
@@ -6867,6 +6874,7 @@ def pitches(
     if persist is not None and not isinstance(persist, str):
         raise Exception(f"persist name must be string (not {persist!r}).")
     return PitchCommand(
+        allow_hidden=allow_hidden,
         allow_octaves=allow_octaves,
         allow_repeats=allow_repeats,
         allow_repitch=allow_repitch,
@@ -6887,6 +6895,7 @@ def pitches_function(
     argument,
     pitches,
     *,
+    allow_hidden: bool = False,
     allow_octaves: bool = False,
     allow_repeats: bool = False,
     allow_repitch: bool = False,
@@ -6914,6 +6923,7 @@ def pitches_function(
         argument,
         cyclic,
         pitches,
+        allow_hidden=allow_hidden,
         allow_octaves=allow_octaves,
         allow_repeats=allow_repeats,
         allow_repitch=allow_repitch,
