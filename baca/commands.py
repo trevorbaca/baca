@@ -6348,19 +6348,6 @@ def levine_multiphonic(n: int) -> abjad.Markup:
     return abjad.Markup(rf'\baca-boxed-markup "L.{n}"')
 
 
-def loop(
-    pitches: list[int],
-    intervals: list[int],
-    *,
-    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
-) -> PitchCommand:
-    """
-    Loops ``pitches`` at ``intervals``.
-    """
-    loop = Loop(pitches, intervals)
-    return _pitches_command_factory(loop, selector=selector)
-
-
 def make_dynamic(
     string: str, *, forbid_al_niente_to_bar_line: bool = False
 ) -> abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin | abjad.Bundle:
