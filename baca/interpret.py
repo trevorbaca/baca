@@ -2635,23 +2635,21 @@ class DictionaryGetItemWrapper:
 
 class DynamicScope:
     def __init__(self, argument):
-        if isinstance(argument, abjad.Leaf):
-            self.leaf = argument
-        elif isinstance(argument, list) and isinstance(argument[0], list):
-            self.groups = argument
-        else:
-            self.leaves = argument
+        self.argument = argument
+        self.leaves = argument
 
     def __enter__(self):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        if hasattr(self, "groups"):
-            del self.groups
-        if hasattr(self, "leaf"):
-            del self.leaf
-        if hasattr(self, "leaves"):
-            del self.leaves
+        del self.argument
+        del self.leaves
+
+    def __iter__(self):
+        return iter(self.argument)
+
+    def leaf(self, n):
+        return abjad.select.leaf(self.argument, n, exclude=_enums.HIDDEN)
 
     def phead(self, n):
         return _select.phead(self.leaves, n, exclude=_enums.HIDDEN)
