@@ -2636,32 +2636,42 @@ class DictionaryGetItemWrapper:
 class DynamicScope:
     def __init__(self, argument):
         self.argument = argument
-        self.leaves = argument
 
     def __enter__(self):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
         del self.argument
-        del self.leaves
+
+    def __getitem__(self, i):
+        return self.argument.__getitem__(i)
 
     def __iter__(self):
         return iter(self.argument)
 
+    def __len__(self):
+        return len(self.argument)
+
     def leaf(self, n):
         return abjad.select.leaf(self.argument, n, exclude=_enums.HIDDEN)
 
+    def leaves(self):
+        return abjad.select.leaves(self.argument, exclude=_enums.HIDDEN)
+
     def phead(self, n):
-        return _select.phead(self.leaves, n, exclude=_enums.HIDDEN)
+        return _select.phead(self.argument, n, exclude=_enums.HIDDEN)
 
     def pheads(self):
-        return _select.pheads(self.leaves, exclude=_enums.HIDDEN)
+        return _select.pheads(self.argument, exclude=_enums.HIDDEN)
 
     def pleaf(self, n):
-        return _select.pleaf(self.leaves, n, exclude=_enums.HIDDEN)
+        return _select.pleaf(self.argument, n, exclude=_enums.HIDDEN)
+
+    def rleak(self):
+        return _select.rleak(self.argument)
 
     def tleaves(self):
-        return _select.tleaves(self.leaves)
+        return _select.tleaves(self.argument)
 
 
 def append_anchor_note_function(argument, *, runtime=None):
