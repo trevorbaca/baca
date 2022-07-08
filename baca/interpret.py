@@ -2571,7 +2571,11 @@ class CacheGetItemWrapper:
 
     @staticmethod
     def _get_for_voice(result, voice, argument):
-        if isinstance(argument, tuple):
+        if isinstance(argument, int):
+            assert 1 <= argument, repr(argument)
+            result_ = voice[argument]
+            result.append(result_)
+        elif isinstance(argument, tuple):
             assert len(argument) == 2, repr(argument)
             result_ = voice[argument]
             result.append(result_)

@@ -2697,6 +2697,180 @@ def tasto_spanner(
     return result
 
 
+def _prepare_text_spanner_arguments(
+    items,
+    *tweaks,
+    autodetect_right_padding,
+    bookend,
+    boxed,
+    direction,
+    final_piece_spanner,
+    leak_spanner_stop,
+    left_broken,
+    left_broken_text,
+    lilypond_id,
+    right_broken,
+):
+    original_items = items
+    if autodetect_right_padding is not None:
+        autodetect_right_padding = bool(autodetect_right_padding)
+    if direction == abjad.DOWN:
+        shape_to_style = {
+            "=>": "dashed-line-with-arrow",
+            "=|": "dashed-line-with-up-hook",
+            "||": "invisible-line",
+            "->": "solid-line-with-arrow",
+            "-|": "solid-line-with-up-hook",
+        }
+    else:
+        shape_to_style = {
+            "=>": "dashed-line-with-arrow",
+            "=|": "dashed-line-with-hook",
+            "||": "invisible-line",
+            "->": "solid-line-with-arrow",
+            "-|": "solid-line-with-hook",
+        }
+    if isinstance(items, str):
+        items_: list[str | abjad.Markup] = []
+        current_item: list[str] = []
+        for word in items.split():
+            if word in shape_to_style:
+                if current_item:
+                    item_ = " ".join(current_item)
+                    if boxed:
+                        string = rf'\baca-boxed-markup "{item_}"'
+                        markup = abjad.Markup(string)
+                        items_.append(markup)
+                    else:
+                        items_.append(item_)
+                    current_item = []
+                items_.append(word)
+            else:
+                current_item.append(word)
+        if current_item:
+            item_ = " ".join(current_item)
+            if boxed:
+                string = rf'\baca-boxed-markup "{item_}"'
+                markup = abjad.Markup(string)
+                items_.append(markup)
+            else:
+                items_.append(item_)
+        items = items_
+    specifiers = []
+    if len(items) == 1:
+        message = f"lone item not yet implemented ({original_items!r})."
+        raise NotImplementedError(message)
+    if lilypond_id is None:
+        command = r"\stopTextSpan"
+    elif lilypond_id == 1:
+        command = r"\stopTextSpanOne"
+    elif lilypond_id == 2:
+        command = r"\stopTextSpanTwo"
+    elif lilypond_id == 3:
+        command = r"\stopTextSpanThree"
+    elif isinstance(lilypond_id, str):
+        command = rf"\bacaStopTextSpan{lilypond_id}"
+    else:
+        message = "lilypond_id must be 1, 2, 3, str or none"
+        message += f" (not {lilypond_id})."
+        raise ValueError(message)
+    stop_text_span = abjad.StopTextSpan(command=command)
+    cyclic_items = abjad.CyclicTuple(items)
+    for i, item in enumerate(cyclic_items):
+        item_markup: str | abjad.Markup
+        if item in shape_to_style:
+            continue
+        if isinstance(item, str) and item.startswith("\\"):
+            item_markup = rf"- \baca-text-spanner-left-markup {item}"
+        elif isinstance(item, str):
+            item_markup = rf'- \baca-text-spanner-left-text "{item}"'
+        else:
+            item_markup = item
+            assert isinstance(item_markup, abjad.Markup)
+            string = item_markup.string
+            item_markup = abjad.Markup(r"\upright {string}")
+            assert isinstance(item_markup, abjad.Markup)
+        prototype = (str, abjad.Markup)
+        assert isinstance(item_markup, prototype)
+        style = "invisible-line"
+        if cyclic_items[i + 1] in shape_to_style:
+            style = shape_to_style[cyclic_items[i + 1]]
+            right_text = cyclic_items[i + 2]
+        else:
+            right_text = cyclic_items[i + 1]
+        right_markup: str | abjad.Markup
+        if isinstance(right_text, str):
+            if "hook" not in style:
+                if right_text.startswith("\\"):
+                    right_markup = r"- \baca-text-spanner-right-markup"
+                    right_markup += rf" {right_text}"
+                else:
+                    right_markup = r"- \baca-text-spanner-right-text"
+                    right_markup += rf' "{right_text}"'
+            else:
+                right_markup = abjad.Markup(rf"\upright {right_text}")
+        else:
+            assert isinstance(right_text, abjad.Markup)
+            string = right_text.string
+            right_markup = abjad.Markup(r"\upright {string}")
+        if lilypond_id is None:
+            command = r"\startTextSpan"
+        elif lilypond_id == 1:
+            command = r"\startTextSpanOne"
+        elif lilypond_id == 2:
+            command = r"\startTextSpanTwo"
+        elif lilypond_id == 3:
+            command = r"\startTextSpanThree"
+        elif isinstance(lilypond_id, str):
+            command = rf"\bacaStartTextSpan{lilypond_id}"
+        else:
+            raise ValueError(lilypond_id)
+        left_broken_markup = None
+        if isinstance(left_broken_text, str):
+            left_broken_markup = abjad.Markup(left_broken_text)
+        elif isinstance(left_broken_text, abjad.Markup):
+            left_broken_markup = left_broken_text
+        start_text_span = abjad.StartTextSpan(
+            command=command,
+            left_broken_text=left_broken_markup,
+            left_text=item_markup,
+            style=style,
+        )
+        # kerns bookended hook
+        if "hook" in style:
+            assert isinstance(right_markup, abjad.Markup)
+            content_string = right_markup.string
+            string = r"\markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75"
+            string += rf" \general-align #Y #1 {content_string} }}"
+            right_markup = abjad.Markup(string)
+        bookended_spanner_start: abjad.StartTextSpan | abjad.Bundle
+        bookended_spanner_start = dataclasses.replace(
+            start_text_span, right_text=right_markup
+        )
+        # TODO: find some way to make these tweaks explicit to composer
+        bookended_spanner_start = abjad.bundle(
+            bookended_spanner_start,
+            r"- \tweak bound-details.right.stencil-align-dir-y #center",
+        )
+        if "hook" in style:
+            bookended_spanner_start = abjad.bundle(
+                bookended_spanner_start,
+                r"- \tweak bound-details.right.padding 1.25",
+            )
+        else:
+            bookended_spanner_start = abjad.bundle(
+                bookended_spanner_start,
+                r"- \tweak bound-details.right.padding 0.5",
+            )
+        specifier = _Specifier(
+            bookended_spanner_start=bookended_spanner_start,
+            spanner_start=start_text_span,
+            spanner_stop=stop_text_span,
+        )
+        specifiers.append(specifier)
+    return specifiers
+
+
 def text_spanner(
     items: str | list,
     *tweaks: _typings.IndexedTweak,
@@ -4245,163 +4419,21 @@ def text_spanner(
         ValueError: lilypond_id must be 1, 2, 3, str or none (not 4).
 
     """
-    original_items = items
-    if autodetect_right_padding is not None:
-        autodetect_right_padding = bool(autodetect_right_padding)
-    if direction == abjad.DOWN:
-        shape_to_style = {
-            "=>": "dashed-line-with-arrow",
-            "=|": "dashed-line-with-up-hook",
-            "||": "invisible-line",
-            "->": "solid-line-with-arrow",
-            "-|": "solid-line-with-up-hook",
-        }
-    else:
-        shape_to_style = {
-            "=>": "dashed-line-with-arrow",
-            "=|": "dashed-line-with-hook",
-            "||": "invisible-line",
-            "->": "solid-line-with-arrow",
-            "-|": "solid-line-with-hook",
-        }
-    if isinstance(items, str):
-        items_: list[str | abjad.Markup] = []
-        current_item: list[str] = []
-        for word in items.split():
-            if word in shape_to_style:
-                if current_item:
-                    item_ = " ".join(current_item)
-                    if boxed:
-                        string = rf'\baca-boxed-markup "{item_}"'
-                        markup = abjad.Markup(string)
-                        items_.append(markup)
-                    else:
-                        items_.append(item_)
-                    current_item = []
-                items_.append(word)
-            else:
-                current_item.append(word)
-        if current_item:
-            item_ = " ".join(current_item)
-            if boxed:
-                string = rf'\baca-boxed-markup "{item_}"'
-                markup = abjad.Markup(string)
-                items_.append(markup)
-            else:
-                items_.append(item_)
-        items = items_
-    specifiers = []
-    if len(items) == 1:
-        message = f"lone item not yet implemented ({original_items!r})."
-        raise NotImplementedError(message)
-    if lilypond_id is None:
-        command = r"\stopTextSpan"
-    elif lilypond_id == 1:
-        command = r"\stopTextSpanOne"
-    elif lilypond_id == 2:
-        command = r"\stopTextSpanTwo"
-    elif lilypond_id == 3:
-        command = r"\stopTextSpanThree"
-    elif isinstance(lilypond_id, str):
-        command = rf"\bacaStopTextSpan{lilypond_id}"
-    else:
-        message = "lilypond_id must be 1, 2, 3, str or none"
-        message += f" (not {lilypond_id})."
-        raise ValueError(message)
-    stop_text_span = abjad.StopTextSpan(command=command)
-    cyclic_items = abjad.CyclicTuple(items)
-    for i, item in enumerate(cyclic_items):
-        item_markup: str | abjad.Markup
-        if item in shape_to_style:
-            continue
-        if isinstance(item, str) and item.startswith("\\"):
-            item_markup = rf"- \baca-text-spanner-left-markup {item}"
-        elif isinstance(item, str):
-            item_markup = rf'- \baca-text-spanner-left-text "{item}"'
-        else:
-            item_markup = item
-            assert isinstance(item_markup, abjad.Markup)
-            string = item_markup.string
-            item_markup = abjad.Markup(r"\upright {string}")
-            assert isinstance(item_markup, abjad.Markup)
-        prototype = (str, abjad.Markup)
-        assert isinstance(item_markup, prototype)
-        style = "invisible-line"
-        if cyclic_items[i + 1] in shape_to_style:
-            style = shape_to_style[cyclic_items[i + 1]]
-            right_text = cyclic_items[i + 2]
-        else:
-            right_text = cyclic_items[i + 1]
-        right_markup: str | abjad.Markup
-        if isinstance(right_text, str):
-            if "hook" not in style:
-                if right_text.startswith("\\"):
-                    right_markup = r"- \baca-text-spanner-right-markup"
-                    right_markup += rf" {right_text}"
-                else:
-                    right_markup = r"- \baca-text-spanner-right-text"
-                    right_markup += rf' "{right_text}"'
-            else:
-                right_markup = abjad.Markup(rf"\upright {right_text}")
-        else:
-            assert isinstance(right_text, abjad.Markup)
-            string = right_text.string
-            right_markup = abjad.Markup(r"\upright {string}")
-        if lilypond_id is None:
-            command = r"\startTextSpan"
-        elif lilypond_id == 1:
-            command = r"\startTextSpanOne"
-        elif lilypond_id == 2:
-            command = r"\startTextSpanTwo"
-        elif lilypond_id == 3:
-            command = r"\startTextSpanThree"
-        elif isinstance(lilypond_id, str):
-            command = rf"\bacaStartTextSpan{lilypond_id}"
-        else:
-            raise ValueError(lilypond_id)
-        left_broken_markup = None
-        if isinstance(left_broken_text, str):
-            left_broken_markup = abjad.Markup(left_broken_text)
-        elif isinstance(left_broken_text, abjad.Markup):
-            left_broken_markup = left_broken_text
-        start_text_span = abjad.StartTextSpan(
-            command=command,
-            left_broken_text=left_broken_markup,
-            left_text=item_markup,
-            style=style,
-        )
-        # kerns bookended hook
-        if "hook" in style:
-            assert isinstance(right_markup, abjad.Markup)
-            content_string = right_markup.string
-            string = r"\markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75"
-            string += rf" \general-align #Y #1 {content_string} }}"
-            right_markup = abjad.Markup(string)
-        bookended_spanner_start: abjad.StartTextSpan | abjad.Bundle
-        bookended_spanner_start = dataclasses.replace(
-            start_text_span, right_text=right_markup
-        )
-        # TODO: find some way to make these tweaks explicit to composer
-        bookended_spanner_start = abjad.bundle(
-            bookended_spanner_start,
-            r"- \tweak bound-details.right.stencil-align-dir-y #center",
-        )
-        if "hook" in style:
-            bookended_spanner_start = abjad.bundle(
-                bookended_spanner_start,
-                r"- \tweak bound-details.right.padding 1.25",
-            )
-        else:
-            bookended_spanner_start = abjad.bundle(
-                bookended_spanner_start,
-                r"- \tweak bound-details.right.padding 0.5",
-            )
-        specifier = _Specifier(
-            bookended_spanner_start=bookended_spanner_start,
-            spanner_start=start_text_span,
-            spanner_stop=stop_text_span,
-        )
-        specifiers.append(specifier)
+    # HERE
+    specifiers = _prepare_text_spanner_arguments(
+        items,
+        *tweaks,
+        autodetect_right_padding=autodetect_right_padding,
+        bookend=bookend,
+        boxed=boxed,
+        direction=direction,
+        final_piece_spanner=final_piece_spanner,
+        leak_spanner_stop=leak_spanner_stop,
+        left_broken=left_broken,
+        left_broken_text=left_broken_text,
+        lilypond_id=lilypond_id,
+        right_broken=right_broken,
+    )
     return PiecewiseCommand(
         autodetect_right_padding=autodetect_right_padding,
         bookend=bookend,
@@ -4418,6 +4450,29 @@ def text_spanner(
         tags=[_tags.function_name(_frame())],
         tweaks=tweaks,
     )
+
+
+def text_spanner_function(
+    items: str | list,
+    *tweaks: _typings.IndexedTweak,
+    autodetect_right_padding: bool = False,
+    bookend: bool | int = -1,
+    boxed: bool = False,
+    direction: int = None,
+    final_piece_spanner: bool | None = None,
+    leak_spanner_stop: bool = False,
+    left_broken: bool = False,
+    left_broken_text: str = None,
+    lilypond_id: int | str | None = None,
+    map=None,
+    match: _typings.Indices = None,
+    measures: _typings.Slice = None,
+    pieces: typing.Callable = lambda _: abjad.select.group(_),
+    right_broken: bool = False,
+    selector=lambda _: _select.leaves(_),
+) -> None:
+    pass
+    # HERE
 
 
 def vibrato_spanner(
