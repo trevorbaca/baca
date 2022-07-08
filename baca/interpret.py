@@ -2626,6 +2626,12 @@ class DictionaryGetItemWrapper:
                 result.extend(leaves)
         return result
 
+    def leaves(self):
+        result = []
+        for measure_number, leaves in self.cache.items():
+            result.extend(leaves)
+        return result
+
 
 class DynamicScope:
     def __init__(self, argument):
@@ -2646,6 +2652,18 @@ class DynamicScope:
             del self.leaf
         if hasattr(self, "leaves"):
             del self.leaves
+
+    def phead(self, n):
+        return _select.phead(self.leaves, n, exclude=_enums.HIDDEN)
+
+    def pheads(self):
+        return _select.pheads(self.leaves, exclude=_enums.HIDDEN)
+
+    def pleaf(self, n):
+        return _select.pleaf(self.leaves, n, exclude=_enums.HIDDEN)
+
+    def tleaves(self):
+        return _select.tleaves(self.leaves)
 
 
 def append_anchor_note_function(argument, *, runtime=None):
