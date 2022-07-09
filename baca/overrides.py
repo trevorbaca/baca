@@ -2599,6 +2599,33 @@ def ottava_bracket_staff_padding(
     )
 
 
+def ottava_bracket_staff_padding_function(
+    argument,
+    n: int | float,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _call_override_command(
+        leaves,
+        "OttavaBracket",
+        "staff_padding",
+        n,
+        first_tag,
+        final_tag,
+        context="Staff",
+    )
+
+
 def rehearsal_mark_down(
     selector=lambda _: abjad.select.leaf(_, 0),
     *,
