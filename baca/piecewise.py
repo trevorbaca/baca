@@ -2120,13 +2120,12 @@ def hairpin_function(
     assert isinstance(remove_length_1_spanner_start, bool), repr(
         remove_length_1_spanner_start
     )
-    manifests: dict = {}
     tag = abjad.Tag("baca.hairpin()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
     _do_piecewise_command(
         argument,
-        manifests=manifests,
+        manifests={},
         # self_autodetect_right_padding,
         self_bookend=bookend,
         self_final_piece_spanner=final_hairpin_,
@@ -4419,7 +4418,6 @@ def text_spanner(
         ValueError: lilypond_id must be 1, 2, 3, str or none (not 4).
 
     """
-    # HERE
     specifiers = _prepare_text_spanner_arguments(
         items,
         *tweaks,
@@ -4453,6 +4451,7 @@ def text_spanner(
 
 
 def text_spanner_function(
+    argument,
     items: str | list,
     *tweaks: _typings.IndexedTweak,
     autodetect_right_padding: bool = False,
@@ -4464,15 +4463,45 @@ def text_spanner_function(
     left_broken: bool = False,
     left_broken_text: str = None,
     lilypond_id: int | str | None = None,
-    map=None,
-    match: _typings.Indices = None,
-    measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
-    selector=lambda _: _select.leaves(_),
+    tags: list[abjad.Tag] = None,
 ) -> None:
-    pass
-    # HERE
+    specifiers = _prepare_text_spanner_arguments(
+        items,
+        *tweaks,
+        autodetect_right_padding=autodetect_right_padding,
+        bookend=bookend,
+        boxed=boxed,
+        direction=direction,
+        final_piece_spanner=final_piece_spanner,
+        leak_spanner_stop=leak_spanner_stop,
+        left_broken=left_broken,
+        left_broken_text=left_broken_text,
+        lilypond_id=lilypond_id,
+        right_broken=right_broken,
+    )
+    tag = abjad.Tag("baca.text_spanner()")
+    for tag_ in tags or []:
+        tag = tag.append(tag_)
+    _do_piecewise_command(
+        argument,
+        manifests={},
+        # self_autodetect_right_padding,
+        self_autodetect_right_padding=autodetect_right_padding,
+        self_bookend=bookend,
+        self_final_piece_spanner=final_piece_spanner,
+        # self_leak_spanner_stop,
+        self_leak_spanner_stop=leak_spanner_stop,
+        # self_left_broken,
+        self_left_broken=left_broken,
+        self_pieces=pieces,
+        # self_remove_length_1_spanner_start,
+        # self_right_broken,
+        self_specifiers=specifiers,
+        self_tag=tag,
+        # self_tweaks,
+    )
 
 
 def vibrato_spanner(
