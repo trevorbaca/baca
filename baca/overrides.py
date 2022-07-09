@@ -2668,6 +2668,7 @@ def rehearsal_mark_down_function(
         abjad.DOWN,
         first_tag,
         final_tag,
+        context=context,
     )
 
 
@@ -2734,6 +2735,7 @@ def rehearsal_mark_padding_function(
         n,
         first_tag,
         final_tag,
+        context=context,
     )
 
 
@@ -2781,6 +2783,7 @@ def rehearsal_mark_self_alignment_x_function(
         n,
         first_tag,
         final_tag,
+        context=context,
     )
 
 
