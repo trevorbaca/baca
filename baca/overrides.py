@@ -2644,6 +2644,33 @@ def rehearsal_mark_down(
     )
 
 
+def rehearsal_mark_down_function(
+    argument,
+    *,
+    context: str = "Score",
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _call_override_command(
+        leaves,
+        "RehearsalMark",
+        "direction",
+        abjad.DOWN,
+        first_tag,
+        final_tag,
+    )
+
+
 def rehearsal_mark_extra_offset(
     pair: tuple[int | float, int | float],
     selector=lambda _: abjad.select.leaf(_, 0),
@@ -2682,6 +2709,34 @@ def rehearsal_mark_padding(
     )
 
 
+def rehearsal_mark_padding_function(
+    argument,
+    n: int | float,
+    *,
+    context: str = "Score",
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _call_override_command(
+        leaves,
+        "RehearsalMark",
+        "padding",
+        n,
+        first_tag,
+        final_tag,
+    )
+
+
 def rehearsal_mark_self_alignment_x(
     n: int,
     selector=lambda _: abjad.select.leaf(_, 0),
@@ -2698,6 +2753,34 @@ def rehearsal_mark_self_alignment_x(
         grob="RehearsalMark",
         selector=selector,
         tags=[_tags.function_name(_frame())],
+    )
+
+
+def rehearsal_mark_self_alignment_x_function(
+    argument,
+    n: int,
+    *,
+    context: str = "Score",
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _call_override_command(
+        leaves,
+        "RehearsalMark",
+        "self_alignment_X",
+        n,
+        first_tag,
+        final_tag,
     )
 
 
@@ -2835,6 +2918,7 @@ def repeat_tie_extra_offset(
 def repeat_tie_extra_offset_function(
     argument,
     pair: tuple[int | float, int | float],
+    *,
     tags: list[abjad.Tag] = None,
 ) -> None:
     if isinstance(argument, abjad.Leaf):

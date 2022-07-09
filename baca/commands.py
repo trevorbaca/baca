@@ -9368,7 +9368,7 @@ def short_instrument_name(
 
 
 def short_instrument_name_function(
-    leaf,
+    leaf: abjad.Leaf,
     short_instrument_name: abjad.ShortInstrumentName,
     *,
     context: str = "Staff",
@@ -9398,6 +9398,22 @@ def mark(
         indicators=[rehearsal_mark],
         selector=selector,
         tags=[_tags.function_name(_frame())],
+    )
+
+
+def mark_function(
+    leaf: abjad.Leaf,
+    argument: str,
+    *tweaks: abjad.Tweak,
+) -> None:
+    assert isinstance(argument, abjad.Markup | str), repr(argument)
+    rehearsal_mark = abjad.RehearsalMark(markup=argument)
+    rehearsal_mark = _tweaks.bundle_tweaks(rehearsal_mark, tweaks)
+    tag = abjad.Tag("baca.mark()")
+    abjad.attach(
+        rehearsal_mark,
+        leaf,
+        tag=tag,
     )
 
 
