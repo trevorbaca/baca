@@ -2,6 +2,7 @@ import copy
 import dataclasses
 import functools
 import importlib
+import inspect
 import os
 import pathlib
 from inspect import currentframe as _frame
@@ -206,14 +207,21 @@ def _apply_breaks(score, spacing):
                 skip,
                 tag=_tags.BREAK.append(_tags.function_name(_frame(), n=2)),
             )
-    assert spacing.breaks.commands is not None
-    for measure_number, commands in spacing.breaks.commands.items():
+    tag = _tags.function_name(inspect.currentframe())
+    tag = tag.append(_tags.BREAK)
+    for skip_index, indicators in spacing.breaks.skip_index_to_indicators.items():
+        measure_number = skip_index + 1
         if measure_count < measure_number:
             message = f"score ends at measure {measure_count}"
             message += f" (not {measure_number})."
             raise Exception(message)
-        for command in commands:
-            command(global_skips)
+        skip = global_skips[skip_index]
+        for indicator in indicators:
+            abjad.attach(
+                indicator,
+                skip,
+                tag=tag,
+            )
 
 
 def _apply_spacing(page_layout_profile, score, spacing, *, has_anchor_skip=False):

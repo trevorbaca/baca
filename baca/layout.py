@@ -27,7 +27,6 @@ from inspect import currentframe as _frame
 
 import abjad
 
-from . import commands as _commands
 from . import indicators as _indicators
 from . import select as _select
 from . import tags as _tags
@@ -187,12 +186,12 @@ def breaks(*page_specifiers):
     """
     Makes break measure map.
     """
-    commands = {}
     page_count = len(page_specifiers)
     assert 0 < page_count, repr(page_count)
     first_system = page_specifiers[0].systems[0]
     assert first_system.measure == 1, repr(first_system)
     bol_measure_numbers = []
+    skip_index_to_indicators = {}
     for i, page_specifier in enumerate(page_specifiers):
         page_number = i + 1
         if page_specifier.number is not None:
@@ -207,31 +206,17 @@ def breaks(*page_specifiers):
             y_offset = system.y_offset
             alignment_distances = system.distances
             assert 0 <= skip_index
-            selector = make_skip_selector(skip_index)
             if j == 0:
                 literal = abjad.LilyPondLiteral(r"\pageBreak")
             else:
                 literal = abjad.LilyPondLiteral(r"\break")
-            command = _commands.IndicatorCommand(
-                indicators=[literal], selector=selector
-            )
             alignment_distances = abjad.sequence.flatten(alignment_distances, depth=-1)
             lbsd = LBSD(alignment_distances=alignment_distances, y_offset=y_offset)
-            lbsd_command = _commands.IndicatorCommand(
-                indicators=[lbsd], selector=selector
-            )
-            commands[measure_number] = [command, lbsd_command]
-    commands_ = {}
-    for measure_number, list_ in commands.items():
-        commands_[measure_number] = []
-        for command in list_:
-            command_ = dataclasses.replace(command, tags=[_tags.BREAK])
-            commands_[measure_number].append(command_)
-    commands = commands_
+            skip_index_to_indicators[skip_index] = (literal, lbsd)
     breaks = BreakMeasureMap(
         bol_measure_numbers=bol_measure_numbers,
-        commands=commands,
         page_count=page_count,
+        skip_index_to_indicators=skip_index_to_indicators,
     )
     return breaks
 
@@ -252,7 +237,7 @@ space = collections.namedtuple(
 
 BreakMeasureMap = collections.namedtuple(
     "BreakMeasureMap",
-    ["bol_measure_numbers", "commands", "page_count"],
+    ["bol_measure_numbers", "page_count", "skip_index_to_indicators"],
 )
 
 
