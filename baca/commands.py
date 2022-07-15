@@ -2553,21 +2553,7 @@ class OctaveDisplacementCommand(_command.Command):
             return False
         if self.selector:
             argument = self.selector(argument)
-        displacements = abjad.CyclicTuple(self.displacements)
-        for i, plt in enumerate(_select.plts(argument)):
-            displacement = displacements[i]
-            interval = abjad.NumberedInterval(12 * displacement)
-            for pleaf in plt:
-                if isinstance(pleaf, abjad.Note):
-                    pitch = pleaf.written_pitch
-                    assert isinstance(pitch, abjad.NamedPitch)
-                    pitch += interval
-                    pleaf.written_pitch = pitch
-                elif isinstance(pleaf, abjad.Chord):
-                    pitches = [_ + interval for _ in pleaf.written_pitches]
-                    pleaf.written_pitches = tuple(pitches)
-                else:
-                    raise TypeError(pleaf)
+        _do_octave_displacement_command(argument, self.displacements)
         return False
 
     def _is_octave_displacement_vector(self, argument):
@@ -2575,6 +2561,24 @@ class OctaveDisplacementCommand(_command.Command):
             if all(isinstance(_, int) for _ in argument):
                 return True
         return False
+
+
+def _do_octave_displacement_command(argument, displacements):
+    displacements = abjad.CyclicTuple(displacements)
+    for i, plt in enumerate(_select.plts(argument)):
+        displacement = displacements[i]
+        interval = abjad.NumberedInterval(12 * displacement)
+        for pleaf in plt:
+            if isinstance(pleaf, abjad.Note):
+                pitch = pleaf.written_pitch
+                assert isinstance(pitch, abjad.NamedPitch)
+                pitch += interval
+                pleaf.written_pitch = pitch
+            elif isinstance(pleaf, abjad.Chord):
+                pitches = [_ + interval for _ in pleaf.written_pitches]
+                pleaf.written_pitches = tuple(pitches)
+            else:
+                raise TypeError(pleaf)
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -3158,22 +3162,28 @@ class RegisterCommand(_command.Command):
             return False
         if self.selector:
             argument = self.selector(argument)
-        plts = _select.plts(argument)
-        assert isinstance(plts, list)
-        for plt in plts:
-            for pleaf in plt:
-                if isinstance(pleaf, abjad.Note):
-                    pitch = pleaf.written_pitch
-                    pitches = self.registration([pitch])
-                    pleaf.written_pitch = pitches[0]
-                elif isinstance(pleaf, abjad.Chord):
-                    pitches = pleaf.written_pitches
-                    pitches = self.registration(pitches)
-                    pleaf.written_pitches = pitches
-                else:
-                    raise TypeError(pleaf)
-                abjad.detach(_enums.NOT_YET_REGISTERED, pleaf)
+        _do_register_command(argument, self.registration)
         return False
+
+
+def _do_register_command(argument, registration):
+    plts = _select.plts(argument)
+    assert isinstance(plts, list)
+    for plt in plts:
+        for pleaf in plt:
+            if isinstance(pleaf, abjad.Note):
+                pitch = pleaf.written_pitch
+                # pitches = self.registration([pitch])
+                pitches = registration([pitch])
+                pleaf.written_pitch = pitches[0]
+            elif isinstance(pleaf, abjad.Chord):
+                pitches = pleaf.written_pitches
+                # pitches = self.registration(pitches)
+                pitches = registration(pitches)
+                pleaf.written_pitches = pitches
+            else:
+                raise TypeError(pleaf)
+            abjad.detach(_enums.NOT_YET_REGISTERED, pleaf)
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -4147,31 +4157,36 @@ class RegisterInterpolationCommand(_command.Command):
             return False
         if self.selector:
             argument = self.selector(argument)
-        plts = _select.plts(argument)
-        length = len(plts)
-        for i, plt in enumerate(plts):
-            registration = self._get_registration(i, length)
-            for pleaf in plt:
-                if isinstance(pleaf, abjad.Note):
-                    written_pitches = registration([pleaf.written_pitch])
-                    pleaf.written_pitch = written_pitches[0]
-                elif isinstance(pleaf, abjad.Chord):
-                    written_pitches = registration(pleaf.written_pitches)
-                    pleaf.written_pitches = written_pitches
-                else:
-                    raise TypeError(pleaf)
-                abjad.detach(_enums.NOT_YET_REGISTERED, pleaf)
+        _do_interpolate_register_command(argument, self.start_pitch, self.stop_pitch)
         return False
 
-    def _get_registration(self, i, length):
-        start_pitch = self.start_pitch.number
-        stop_pitch = self.stop_pitch.number
-        compass = stop_pitch - start_pitch
-        fraction = abjad.Fraction(i, length)
-        addendum = fraction * compass
-        current_pitch = start_pitch + addendum
-        current_pitch = int(current_pitch)
-        return _pcollections.Registration([("[A0, C8]", current_pitch)])
+
+def _do_interpolate_register_command(argument, start_pitch, stop_pitch):
+    plts = _select.plts(argument)
+    length = len(plts)
+    for i, plt in enumerate(plts):
+        registration = _get_registration(start_pitch, stop_pitch, i, length)
+        for pleaf in plt:
+            if isinstance(pleaf, abjad.Note):
+                written_pitches = registration([pleaf.written_pitch])
+                pleaf.written_pitch = written_pitches[0]
+            elif isinstance(pleaf, abjad.Chord):
+                written_pitches = registration(pleaf.written_pitches)
+                pleaf.written_pitches = written_pitches
+            else:
+                raise TypeError(pleaf)
+            abjad.detach(_enums.NOT_YET_REGISTERED, pleaf)
+
+
+def _get_registration(start_pitch, stop_pitch, i, length):
+    start_pitch = start_pitch.number
+    stop_pitch = stop_pitch.number
+    compass = stop_pitch - start_pitch
+    fraction = abjad.Fraction(i, length)
+    addendum = fraction * compass
+    current_pitch = start_pitch + addendum
+    current_pitch = int(current_pitch)
+    return _pcollections.Registration([("[A0, C8]", current_pitch)])
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -5656,6 +5671,11 @@ def displacement(
 
     """
     return OctaveDisplacementCommand(displacements=displacements, selector=selector)
+
+
+# HERE
+def displacement_function(argument, displacements: list[int]) -> None:
+    _do_octave_displacement_command(argument, displacements)
 
 
 def dynamic(
@@ -7235,19 +7255,38 @@ def register(
             >>
 
     """
-    if stop is None:
-        start_pitch = abjad.NumberedPitch(start)
+    start_pitch, stop_pitch = register_prepare(start, stop)
+    if stop_pitch is None:
         return RegisterCommand(
             registration=_pcollections.Registration([("[A0, C8]", start_pitch)]),
             selector=selector,
         )
+    return RegisterInterpolationCommand(
+        selector=selector, start_pitch=start_pitch, stop_pitch=stop_pitch
+    )
+
+
+def register_function(
+    argument,
+    start: int,
+    stop: int = None,
+) -> None:
+    start_pitch, stop_pitch = register_prepare(start, stop)
+    if stop_pitch is None:
+        registration = _pcollections.Registration([("[A0, C8]", start_pitch)])
+        _do_register_command(argument, registration)
+    else:
+        _do_interpolate_register_command(argument, start_pitch, stop_pitch)
+
+
+def register_prepare(start, stop):
     if start is not None:
         start_pitch = abjad.NumberedPitch(start)
     if stop is not None:
         stop_pitch = abjad.NumberedPitch(stop)
-    return RegisterInterpolationCommand(
-        selector=selector, start_pitch=start_pitch, stop_pitch=stop_pitch
-    )
+    else:
+        stop_pitch = None
+    return start_pitch, stop_pitch
 
 
 def soprano_to_octave(

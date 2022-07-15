@@ -2634,7 +2634,10 @@ class DictionaryGetItemWrapper:
             assert 0 < start, repr(start)
             assert 0 < stop, repr(stop)
             for number in range(start, stop + 1):
-                leaves = self.cache[number]
+                try:
+                    leaves = self.cache[number]
+                except KeyError:
+                    leaves = []
                 result.extend(leaves)
         return result
 
