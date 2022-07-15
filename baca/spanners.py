@@ -173,7 +173,7 @@ def beam(
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,

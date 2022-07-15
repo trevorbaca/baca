@@ -681,7 +681,7 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -778,7 +778,7 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -877,7 +877,7 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -975,7 +975,7 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -1080,7 +1080,7 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -1186,7 +1186,7 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -1285,7 +1285,7 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -1393,7 +1393,7 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -1496,7 +1496,7 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -1607,7 +1607,7 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -1701,7 +1701,7 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -1805,7 +1805,7 @@ def hairpin(
         ...     baca.dls_staff_padding(4),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -1898,7 +1898,7 @@ def hairpin(
         ...     baca.dls_staff_padding(4),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -1997,7 +1997,7 @@ def hairpin(
         ...     baca.dls_staff_padding(4),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -2920,7 +2920,7 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -3018,7 +3018,7 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -3116,7 +3116,7 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -3214,7 +3214,7 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -3312,7 +3312,7 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -3416,7 +3416,7 @@ def text_spanner(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -3532,7 +3532,7 @@ def text_spanner(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -3649,7 +3649,7 @@ def text_spanner(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -3775,7 +3775,7 @@ def text_spanner(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -3907,7 +3907,7 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -4007,7 +4007,7 @@ def text_spanner(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -4110,7 +4110,7 @@ def text_spanner(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -4227,7 +4227,7 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -4337,7 +4337,7 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,

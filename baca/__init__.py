@@ -24,7 +24,7 @@ from .indicators import *
 from .interpret import (
     append_anchor_note,
     append_anchor_note_function,
-    interpreter,
+    interpret_section,
     make_lilypond_file,
     reapply,
     reapply_persistent_indicators,

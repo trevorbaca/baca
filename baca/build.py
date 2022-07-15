@@ -1024,7 +1024,7 @@ def interpret_section(
         _print_always("Missing --clicktrack, --midi, --pdf ...")
         sys.exit(1)
     _print_main_task("Interpreting commands ...")
-    interpreter = interpreter or baca.interpret.interpreter
+    interpreter = interpreter or baca.interpret.interpret_section
     metadata = baca.path.get_metadata(section_directory)
     persist = baca.path.get_metadata(section_directory, file_name="__persist__")
     previous_metadata, previous_persist = get_previous_metadata(section_directory)
@@ -1174,7 +1174,7 @@ def make_layout_ly(
         page_layout_profile=page_layout_profile,
         spacing=spacing,
     )
-    _, _ = baca.interpreter(
+    _, _ = baca.interpret.interpret_section(
         score,
         commands.commands,
         commands.time_signatures,

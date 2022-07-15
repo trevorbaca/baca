@@ -22,7 +22,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     "Music",
     ...     baca.label(lambda _: abjad.label.with_indices(_)),
     ... )
-    >>> _, _ = baca.interpreter(
+    >>> _, _ = baca.interpret_section(
     ...     score,
     ...     commands.commands,
     ...     commands.time_signatures,
@@ -152,7 +152,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     baca.clef("bass"),
     ... )
 
-    >>> _, _ = baca.interpreter(
+    >>> _, _ = baca.interpret_section(
     ...     score,
     ...     commands.commands,
     ...     commands.time_signatures,
@@ -241,7 +241,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     baca.pitches("E4 F4"),
     ... )
 
-    >>> _, _ = baca.interpreter(
+    >>> _, _ = baca.interpret_section(
     ...     score,
     ...     commands.commands,
     ...     commands.time_signatures,
@@ -331,7 +331,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     baca.pitches("E4 F4"),
     ... )
 
-    >>> _, _ = baca.interpreter(
+    >>> _, _ = baca.interpret_section(
     ...     score,
     ...     commands.commands,
     ...     commands.time_signatures,
@@ -436,7 +436,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     baca.instrument(abjad.Violin()),
     ... )
 
-    >>> _, _ = baca.interpreter(
+    >>> _, _ = baca.interpret_section(
     ...     score,
     ...     commands.commands,
     ...     commands.time_signatures,
@@ -545,7 +545,7 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     docs=True,
     ... )
     >>> score["Music"].extend(figures_)
-    >>> _, _ = baca.interpreter(
+    >>> _, _ = baca.interpret_section(
     ...     score,
     ...     commands.commands,
     ...     commands.time_signatures,

@@ -1823,7 +1823,7 @@ class Imbrication:
             ...     baca.voice_two(),
             ... )
 
-            >>> _, _ = baca.interpreter(
+            >>> _, _ = baca.interpret_section(
             ...     score,
             ...     commands.commands,
             ...     commands.time_signatures,
@@ -2046,7 +2046,7 @@ class Imbrication:
             ...     baca.voice_two(),
             ... )
 
-            >>> _, _ = baca.interpreter(
+            >>> _, _ = baca.interpret_section(
             ...     score,
             ...     commands.commands,
             ...     commands.time_signatures,
@@ -2254,7 +2254,7 @@ class Imbrication:
             ...     baca.voice_two(),
             ... )
 
-            >>> _, _ = baca.interpreter(
+            >>> _, _ = baca.interpret_section(
             ...     score,
             ...     commands.commands,
             ...     commands.time_signatures,
@@ -2483,7 +2483,7 @@ class Imbrication:
             ...     baca.voice_two(),
             ... )
 
-            >>> _, _ = baca.interpreter(
+            >>> _, _ = baca.interpret_section(
             ...     score,
             ...     commands.commands,
             ...     commands.time_signatures,
@@ -6356,7 +6356,7 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -6512,7 +6512,7 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -6705,7 +6705,7 @@ def extend_beam(
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -6911,7 +6911,7 @@ def imbricate(
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -7097,7 +7097,7 @@ def imbricate(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> figures.populate_commands(score, commands)
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -7330,7 +7330,7 @@ def imbricate(
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -7545,7 +7545,7 @@ def imbricate(
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -7693,7 +7693,7 @@ def imbricate(
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -7865,7 +7865,7 @@ def imbricate(
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,

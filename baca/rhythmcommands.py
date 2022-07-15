@@ -225,7 +225,7 @@ def make_monads(fractions):
         ... )
         >>> music = baca.make_monads("2/5 2/5 1/5")
         >>> score["Music"].extend(music)
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -339,7 +339,7 @@ def make_repeat_tied_notes(
         >>> music = baca.make_repeat_tied_notes(commands.get())
         >>> score["Music"].extend(music)
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,

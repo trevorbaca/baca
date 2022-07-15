@@ -2810,7 +2810,7 @@ def scope(cache):
     return DynamicScope(cache)
 
 
-def interpreter(
+def interpret_section(
     score,
     commands,
     time_signatures,

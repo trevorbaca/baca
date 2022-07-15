@@ -39,7 +39,7 @@ r"""
         ...     baca.clef("treble"),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -150,7 +150,7 @@ r"""
         ...         value="treble",
         ...     )
         ... ]
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -265,7 +265,7 @@ r"""
         ...         value="treble",
         ...     )
         ... ]
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -372,7 +372,7 @@ r"""
         ...     baca.clef("treble", selector=lambda _: abjad.select.leaf(_, 0)),
         ...     baca.clef("treble", selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -495,7 +495,7 @@ r"""
         ...         value="treble",
         ...     )
         ... ]
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -596,7 +596,7 @@ r"""
         ...     baca.dynamic("f"),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -673,7 +673,7 @@ r"""
         ...         value="f",
         ...     )
         ... ]
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -754,7 +754,7 @@ r"""
         ...         value="f",
         ...     )
         ... ]
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -827,7 +827,7 @@ r"""
         ...     baca.dynamic("f", selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -907,7 +907,7 @@ r"""
         ...         value="f",
         ...     )
         ... ]
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -978,7 +978,7 @@ r"""
         ...     baca.dynamic("sfz", selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -1057,7 +1057,7 @@ r"""
         ...         value="sfz",
         ...     )
         ... ]
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -1130,7 +1130,7 @@ r"""
         ...     baca.dynamic('"mf"', selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -1225,7 +1225,7 @@ r"""
         ...     baca.instrument(instruments["Flute"]),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -1400,7 +1400,7 @@ r"""
         ...         value="Piccolo",
         ...     )
         ... ]
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -1578,7 +1578,7 @@ r"""
         ...         value="Flute",
         ...     )
         ... ]
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -1759,7 +1759,7 @@ r"""
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -1959,7 +1959,7 @@ r"""
         ...         value="Flute",
         ...     )
         ... ]
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -2147,7 +2147,7 @@ r"""
         ...     baca.short_instrument_name(short_instrument_names["I+II"]),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -2331,7 +2331,7 @@ r"""
         ...         value="I+II",
         ...     )
         ... ]
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -2521,7 +2521,7 @@ r"""
         ...         value="I+II",
         ...     )
         ... ]
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -2713,7 +2713,7 @@ r"""
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -2932,7 +2932,7 @@ r"""
         ...         value="I+II",
         ...     )
         ... ]
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -3133,7 +3133,7 @@ r"""
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -3249,7 +3249,7 @@ r"""
         ...     baca.append_anchor_note(),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -3364,7 +3364,7 @@ r"""
         ...         value="90",
         ...     )
         ... ]
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -3480,7 +3480,7 @@ r"""
         ... )
         >>> baca.text_spanner_staff_padding_function(score["Skips"], 4)
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -3580,7 +3580,7 @@ r"""
         ...     baca.append_anchor_note(),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -3704,7 +3704,7 @@ r"""
         ...     baca.append_anchor_note(),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -3824,7 +3824,7 @@ r"""
         ...     baca.staff_position(0),
         ... )
 
-        >>> metadata, persist = baca.interpreter(
+        >>> metadata, persist = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -3917,7 +3917,7 @@ r"""
         ...         ),
         ...     )
         ... ]
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -4013,7 +4013,7 @@ r"""
         ...         ),
         ...     )
         ... ]
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -4088,7 +4088,7 @@ r"""
         ...     baca.staff_lines(5),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -4168,7 +4168,7 @@ r"""
         ...         value=5,
         ...     )
         ... ]
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -4252,7 +4252,7 @@ r"""
         ...         value=5,
         ...     )
         ... ]
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -4327,7 +4327,7 @@ r"""
         ...     baca.staff_lines(5, selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -4413,7 +4413,7 @@ r"""
         ...         value=5,
         ...     )
         ... ]
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -4514,7 +4514,7 @@ r"""
         ...     baca.append_anchor_note(),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -4623,7 +4623,7 @@ r"""
         ...         prototype="baca.Ritardando",
         ...     )
         ... ]
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -4721,7 +4721,7 @@ r"""
         ... )
         >>> baca.text_spanner_staff_padding_function(score["Skips"], 4)
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -4815,7 +4815,7 @@ r"""
         >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -4923,7 +4923,7 @@ r"""
         ...     "Music",
         ...     baca.reapply_persistent_indicators(),
         ... )
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,

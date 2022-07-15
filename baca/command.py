@@ -290,7 +290,7 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -414,7 +414,7 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
@@ -590,7 +590,7 @@ def only_parts(command: Command | Suite) -> Command | Suite:
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpreter(
+        >>> _, _ = baca.interpret_section(
         ...     score,
         ...     commands.commands,
         ...     commands.time_signatures,
