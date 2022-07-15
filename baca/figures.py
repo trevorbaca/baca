@@ -1823,10 +1823,11 @@ class Imbrication:
             ...     baca.voice_two(),
             ... )
 
-            >>> _, _ = baca.interpret_section(
+            >>> _, _ = baca.interpret.interpret_section(
             ...     score,
-            ...     commands.commands,
+            ...     commands.manifests(),
             ...     commands.time_signatures,
+            ...     commands=commands.commands,
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ... )
@@ -2046,10 +2047,11 @@ class Imbrication:
             ...     baca.voice_two(),
             ... )
 
-            >>> _, _ = baca.interpret_section(
+            >>> _, _ = baca.interpret.interpret_section(
             ...     score,
-            ...     commands.commands,
+            ...     commands.manifests(),
             ...     commands.time_signatures,
+            ...     commands=commands.commands,
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ... )
@@ -2254,10 +2256,11 @@ class Imbrication:
             ...     baca.voice_two(),
             ... )
 
-            >>> _, _ = baca.interpret_section(
+            >>> _, _ = baca.interpret.interpret_section(
             ...     score,
-            ...     commands.commands,
+            ...     commands.manifests(),
             ...     commands.time_signatures,
+            ...     commands=commands.commands,
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ... )
@@ -2483,10 +2486,11 @@ class Imbrication:
             ...     baca.voice_two(),
             ... )
 
-            >>> _, _ = baca.interpret_section(
+            >>> _, _ = baca.interpret.interpret_section(
             ...     score,
-            ...     commands.commands,
+            ...     commands.manifests(),
             ...     commands.time_signatures,
+            ...     commands=commands.commands,
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ... )
@@ -6356,10 +6360,11 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -6512,10 +6517,11 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -6705,10 +6711,11 @@ def extend_beam(
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -6911,10 +6918,11 @@ def imbricate(
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -7097,10 +7105,11 @@ def imbricate(
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
         >>> figures.populate_commands(score, commands)
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -7330,10 +7339,11 @@ def imbricate(
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -7545,10 +7555,11 @@ def imbricate(
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -7693,10 +7704,11 @@ def imbricate(
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -7865,10 +7877,11 @@ def imbricate(
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )

@@ -39,10 +39,11 @@ r"""
         ...     baca.clef("treble"),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -150,10 +151,11 @@ r"""
         ...         value="treble",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -265,10 +267,11 @@ r"""
         ...         value="treble",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -372,10 +375,11 @@ r"""
         ...     baca.clef("treble", selector=lambda _: abjad.select.leaf(_, 0)),
         ...     baca.clef("treble", selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -495,10 +499,11 @@ r"""
         ...         value="treble",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -596,10 +601,11 @@ r"""
         ...     baca.dynamic("f"),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -673,10 +679,11 @@ r"""
         ...         value="f",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -754,10 +761,11 @@ r"""
         ...         value="f",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -827,10 +835,11 @@ r"""
         ...     baca.dynamic("f", selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -907,10 +916,11 @@ r"""
         ...         value="f",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -978,10 +988,11 @@ r"""
         ...     baca.dynamic("sfz", selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -1057,10 +1068,11 @@ r"""
         ...         value="sfz",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -1130,10 +1142,11 @@ r"""
         ...     baca.dynamic('"mf"', selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -1225,10 +1238,11 @@ r"""
         ...     baca.instrument(instruments["Flute"]),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     instruments=commands.instruments,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1400,10 +1414,11 @@ r"""
         ...         value="Piccolo",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     instruments=commands.instruments,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -1578,10 +1593,11 @@ r"""
         ...         value="Flute",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     instruments=commands.instruments,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -1759,10 +1775,11 @@ r"""
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     instruments=commands.instruments,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1959,10 +1976,11 @@ r"""
         ...         value="Flute",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     instruments=commands.instruments,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -2147,10 +2165,11 @@ r"""
         ...     baca.short_instrument_name(short_instrument_names["I+II"]),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     first_section=True,
         ...     short_instrument_names=commands.short_instrument_names,
         ...     move_global_context=True,
@@ -2331,10 +2350,11 @@ r"""
         ...         value="I+II",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     short_instrument_names=commands.short_instrument_names,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -2521,10 +2541,11 @@ r"""
         ...         value="I+II",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     short_instrument_names=commands.short_instrument_names,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -2713,10 +2734,11 @@ r"""
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     first_section=True,
         ...     short_instrument_names=commands.short_instrument_names,
         ...     move_global_context=True,
@@ -2932,10 +2954,11 @@ r"""
         ...         value="I+II",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     short_instrument_names=commands.short_instrument_names,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -3133,10 +3156,11 @@ r"""
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     first_section=True,
         ...     short_instrument_names=commands.short_instrument_names,
         ...     move_global_context=True,
@@ -3249,10 +3273,11 @@ r"""
         ...     baca.append_anchor_note(),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     append_anchor_skip=True,
         ...     metronome_marks=commands.metronome_marks,
         ...     move_global_context=True,
@@ -3364,10 +3389,11 @@ r"""
         ...         value="90",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     append_anchor_skip=True,
         ...     metronome_marks=commands.metronome_marks,
         ...     move_global_context=True,
@@ -3480,10 +3506,11 @@ r"""
         ... )
         >>> baca.text_spanner_staff_padding_function(score["Skips"], 4)
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     metronome_marks=commands.metronome_marks,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
@@ -3580,10 +3607,11 @@ r"""
         ...     baca.append_anchor_note(),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     append_anchor_skip=True,
         ...     metronome_marks=commands.metronome_marks,
         ...     move_global_context=True,
@@ -3704,10 +3732,11 @@ r"""
         ...     baca.append_anchor_note(),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     append_anchor_skip=True,
         ...     metronome_marks=commands.metronome_marks,
         ...     move_global_context=True,
@@ -3824,10 +3853,11 @@ r"""
         ...     baca.staff_position(0),
         ... )
 
-        >>> metadata, persist = baca.interpret_section(
+        >>> metadata, persist = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -3917,10 +3947,11 @@ r"""
         ...         ),
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -4013,10 +4044,11 @@ r"""
         ...         ),
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -4088,10 +4120,11 @@ r"""
         ...     baca.staff_lines(5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -4168,10 +4201,11 @@ r"""
         ...         value=5,
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -4252,10 +4286,11 @@ r"""
         ...         value=5,
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -4327,10 +4362,11 @@ r"""
         ...     baca.staff_lines(5, selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -4413,10 +4449,11 @@ r"""
         ...         value=5,
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -4514,10 +4551,11 @@ r"""
         ...     baca.append_anchor_note(),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     append_anchor_skip=True,
         ...     metronome_marks=commands.metronome_marks,
         ...     move_global_context=True,
@@ -4623,10 +4661,11 @@ r"""
         ...         prototype="baca.Ritardando",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -4721,10 +4760,11 @@ r"""
         ... )
         >>> baca.text_spanner_staff_padding_function(score["Skips"], 4)
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -4815,10 +4855,11 @@ r"""
         >>> music = baca.make_notes(commands.get())
         >>> score["Music"].extend(music)
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -4923,10 +4964,11 @@ r"""
         ...     "Music",
         ...     baca.reapply_persistent_indicators(),
         ... )
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,

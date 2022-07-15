@@ -1012,8 +1012,10 @@ def interpret_build_music(
 
 def interpret_section(
     score,
-    commands,
+    manifests,
+    time_signatures,
     *,
+    commands=None,
     first_section=False,
     interpreter=None,
     **keywords,
@@ -1032,13 +1034,10 @@ def interpret_section(
     with abjad.Timer() as timer:
         metadata, persist = interpreter(
             score,
-            commands.commands,
-            commands.time_signatures,
-            instruments=commands.instruments,
-            short_instrument_names=commands.short_instrument_names,
-            metronome_marks=commands.metronome_marks,
-            skips_instead_of_rests=commands.skips_instead_of_rests,
+            manifests,
+            time_signatures,
             **keywords,
+            commands=commands.commands,
             first_section=first_section,
             metadata=metadata,
             persist=persist,
@@ -1176,10 +1175,11 @@ def make_layout_ly(
     )
     _, _ = baca.interpret.interpret_section(
         score,
-        commands.commands,
+        {},
         commands.time_signatures,
         append_anchor_skip=has_anchor_skip,
         add_container_identifiers=True,
+        commands=commands.commands,
         comment_measure_numbers=True,
         first_measure_number=first_measure_number,
         first_section=True,

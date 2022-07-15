@@ -681,10 +681,11 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -778,10 +779,11 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -877,10 +879,11 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -975,10 +978,11 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1080,10 +1084,11 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1186,10 +1191,11 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1285,10 +1291,11 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1393,10 +1400,11 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1496,10 +1504,11 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1607,10 +1616,11 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1701,10 +1711,11 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1805,10 +1816,11 @@ def hairpin(
         ...     baca.dls_staff_padding(4),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1898,10 +1910,11 @@ def hairpin(
         ...     baca.dls_staff_padding(4),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1997,10 +2010,11 @@ def hairpin(
         ...     baca.dls_staff_padding(4),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -2920,10 +2934,11 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -3018,10 +3033,11 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -3116,10 +3132,11 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -3214,10 +3231,11 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -3312,10 +3330,11 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -3416,10 +3435,11 @@ def text_spanner(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -3532,10 +3552,11 @@ def text_spanner(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -3649,10 +3670,11 @@ def text_spanner(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -3775,10 +3797,11 @@ def text_spanner(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -3907,10 +3930,11 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -4007,10 +4031,11 @@ def text_spanner(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -4110,10 +4135,11 @@ def text_spanner(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -4227,10 +4253,11 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -4337,10 +4364,11 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )

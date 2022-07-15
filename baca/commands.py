@@ -379,10 +379,11 @@ class BCPCommand(_command.Command):
         ...     baca.script_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -587,10 +588,11 @@ class BCPCommand(_command.Command):
         ...     baca.text_spanner_staff_padding(2.5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -957,10 +959,11 @@ class ContainerCommand(_command.Command):
         ...     baca.pitches("E4 F4"),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1278,10 +1281,11 @@ class AccidentalAdjustmentCommand(_command.Command):
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1520,10 +1524,11 @@ class ClusterCommand(_command.Command):
         ...     baca.natural_clusters(widths=[3]),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1614,10 +1619,11 @@ class ClusterCommand(_command.Command):
         ...     baca.replace_with_clusters([3]),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1706,10 +1712,11 @@ class ClusterCommand(_command.Command):
         ...     baca.replace_with_clusters([3], start_pitch="G4"),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1798,10 +1805,11 @@ class ClusterCommand(_command.Command):
         ...     baca.replace_with_clusters([1, 2, 3, 4], start_pitch="E4"),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1890,10 +1898,11 @@ class ClusterCommand(_command.Command):
         ...     baca.replace_with_clusters([1, 3], start_pitch="E4"),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1983,10 +1992,11 @@ class ClusterCommand(_command.Command):
         ...     baca.replace_with_clusters([]),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -2124,10 +2134,11 @@ class ColorFingeringCommand(_command.Command):
         ...     baca.ColorFingeringCommand(numbers=[0, 1, 2, 1]),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -2353,10 +2364,11 @@ class MicrotoneDeviationCommand(_command.Command):
         ...     baca.deviation([0, 0.5, 0, -0.5]),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -2478,10 +2490,11 @@ class OctaveDisplacementCommand(_command.Command):
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -2609,10 +2622,11 @@ class PitchCommand(_command.Command):
         ...     baca.pitches([19, 13, 15, 16, 17, 23]),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -2692,10 +2706,11 @@ class PitchCommand(_command.Command):
         ...     baca.pitches("C4 F4 F#4 <B4 C#5> D5"),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -2775,10 +2790,11 @@ class PitchCommand(_command.Command):
         ...     baca.pitches("<C4 D4 E4 F4 G4 A4 B4 C4>", allow_repeats=True)
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -3054,10 +3070,11 @@ class RegisterCommand(_command.Command):
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -3336,10 +3353,11 @@ class RegisterInterpolationCommand(_command.Command):
         ...     baca.register(12, 12),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -3451,10 +3469,11 @@ class RegisterInterpolationCommand(_command.Command):
         ...     baca.register(12, 0),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -3566,10 +3585,11 @@ class RegisterInterpolationCommand(_command.Command):
         ...     baca.register(0, 12),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -3681,10 +3701,11 @@ class RegisterInterpolationCommand(_command.Command):
         ...     baca.register(12, -12),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -3796,10 +3817,11 @@ class RegisterInterpolationCommand(_command.Command):
         ...     baca.register(-12, 12),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -5865,10 +5887,11 @@ def dynamic(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -5965,10 +5988,11 @@ def dynamic(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -6113,10 +6137,11 @@ def force_accidental(
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -6744,10 +6769,11 @@ def pitch(
         ...     baca.pitch("<C4 D4 E4>"),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -8915,10 +8941,11 @@ def hide_black_note_heads(
         ...     baca.hide_black_note_heads(),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -9336,10 +9363,11 @@ def short_instrument_name(
         ...     baca.pitches("E4 F4"),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     first_section=True,
         ...     short_instrument_names=commands.short_instrument_names,
         ...     move_global_context=True,
@@ -10014,10 +10042,11 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -10091,10 +10120,11 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -10169,10 +10199,11 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -10245,10 +10276,11 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -10321,10 +10353,11 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
         ...     baca.clef("bass"),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -11205,10 +11238,11 @@ def assign_part(
         ...     baca.pitch("E4"),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -11270,10 +11304,11 @@ def assign_part(
         ...     baca.pitches("E4 F4"),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -11325,10 +11360,11 @@ def bcps(
         ...     baca.text_spanner_staff_padding(2.5),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -11695,10 +11731,11 @@ def container(
         ...     baca.pitches("E4 F4"),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -11778,10 +11815,11 @@ def cross_staff(*, selector=lambda _: _select.phead(_, 0)) -> IndicatorCommand:
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -12098,10 +12136,11 @@ def finger_pressure_transition(
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -12322,10 +12361,11 @@ def glissando(
         ...     baca.glissando()
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -12417,10 +12457,11 @@ def glissando(
         ...     baca.glissando(selector=lambda _: baca.select.plts(_)[-2:]),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -12502,10 +12543,11 @@ def glissando(
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -12612,10 +12654,11 @@ def glissando(
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -12870,10 +12913,11 @@ def invisible_music(
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )

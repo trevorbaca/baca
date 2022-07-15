@@ -22,10 +22,11 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     "Music",
     ...     baca.label(lambda _: abjad.label.with_indices(_)),
     ... )
-    >>> _, _ = baca.interpret_section(
+    >>> _, _ = baca.interpret.interpret_section(
     ...     score,
-    ...     commands.commands,
+    ...     commands.manifests(),
     ...     commands.time_signatures,
+    ...     commands=commands.commands,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -152,10 +153,11 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     baca.clef("bass"),
     ... )
 
-    >>> _, _ = baca.interpret_section(
+    >>> _, _ = baca.interpret.interpret_section(
     ...     score,
-    ...     commands.commands,
+    ...     commands.manifests(),
     ...     commands.time_signatures,
+    ...     commands=commands.commands,
     ...     color_octaves=True,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -241,10 +243,11 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     baca.pitches("E4 F4"),
     ... )
 
-    >>> _, _ = baca.interpret_section(
+    >>> _, _ = baca.interpret.interpret_section(
     ...     score,
-    ...     commands.commands,
+    ...     commands.manifests(),
     ...     commands.time_signatures,
+    ...     commands=commands.commands,
     ...     instruments=commands.instruments,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -331,10 +334,11 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     baca.pitches("E4 F4"),
     ... )
 
-    >>> _, _ = baca.interpret_section(
+    >>> _, _ = baca.interpret.interpret_section(
     ...     score,
-    ...     commands.commands,
+    ...     commands.manifests(),
     ...     commands.time_signatures,
+    ...     commands=commands.commands,
     ...     instruments=commands.instruments,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -436,10 +440,11 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     baca.instrument(abjad.Violin()),
     ... )
 
-    >>> _, _ = baca.interpret_section(
+    >>> _, _ = baca.interpret.interpret_section(
     ...     score,
-    ...     commands.commands,
+    ...     commands.manifests(),
     ...     commands.time_signatures,
+    ...     commands=commands.commands,
     ...     instruments=instruments,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -545,10 +550,11 @@ Wraps each command in ``commands`` with each scope in ``scopes``.
     ...     docs=True,
     ... )
     >>> score["Music"].extend(figures_)
-    >>> _, _ = baca.interpret_section(
+    >>> _, _ = baca.interpret.interpret_section(
     ...     score,
-    ...     commands.commands,
+    ...     commands.manifests(),
     ...     commands.time_signatures,
+    ...     commands=commands.commands,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )

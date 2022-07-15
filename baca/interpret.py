@@ -755,7 +755,6 @@ def _call_all_commands(
     offset_to_measure_number,
     previous_persist,
     score,
-    skips_instead_of_rests,
     time_signatures,
     voice_metadata,
 ):
@@ -2812,7 +2811,7 @@ def scope(cache):
 
 def interpret_section(
     score,
-    commands,
+    manifests,
     time_signatures,
     *,
     activate=None,
@@ -2829,6 +2828,7 @@ def interpret_section(
     clock_time_override=None,
     color_not_yet_pitched=False,
     color_octaves=False,
+    commands=None,
     comment_measure_numbers=False,
     deactivate=None,
     do_not_require_short_instrument_names=False,
@@ -2858,7 +2858,6 @@ def interpret_section(
     section_number=None,
     shift_measure_initial_clefs=False,
     short_instrument_names=None,
-    skips_instead_of_rests=False,
     transpose_score=False,
     treat_untreated_persistent_wrappers=False,
     whitespace_leaves=False,
@@ -2884,7 +2883,7 @@ def interpret_section(
     assert isinstance(first_section, bool)
     assert isinstance(force_nonnatural_accidentals, bool)
     global_skips = score["Skips"]
-    manifests = {
+    manifests = manifests or {
         "abjad.Instrument": instruments,
         "abjad.MetronomeMark": metronome_marks,
         "abjad.ShortInstrumentName": short_instrument_names,
@@ -2922,7 +2921,6 @@ def interpret_section(
                 offset_to_measure_number=offset_to_measure_number,
                 previous_persist=previous_persist,
                 score=score,
-                skips_instead_of_rests=skips_instead_of_rests,
                 time_signatures=time_signatures,
                 voice_metadata=voice_metadata,
             )

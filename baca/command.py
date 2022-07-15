@@ -290,10 +290,11 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -414,10 +415,11 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -590,10 +592,11 @@ def only_parts(command: Command | Suite) -> Command | Suite:
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret_section(
+        >>> _, _ = baca.interpret.interpret_section(
         ...     score,
-        ...     commands.commands,
+        ...     commands.manifests(),
         ...     commands.time_signatures,
+        ...     commands=commands.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
