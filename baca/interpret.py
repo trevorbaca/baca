@@ -2730,9 +2730,10 @@ def reapply(commands, manifests, previous_persist, voice_names):
         "manifests": manifests,
         "previous_persistent_indicators": previous_persistent_indicators,
     }
-    for voice_name in [_ for _ in voice_names if "Music" in _]:
+    for voice_name in voice_names:
         voice = commands.voice(voice_name)
-        reapply_persistent_indicators_function(voice, runtime=runtime)
+        if voice is not None:
+            reapply_persistent_indicators_function(voice, runtime=runtime)
 
 
 def reapply_persistent_indicators(

@@ -255,5 +255,5 @@ class CommandAccumulator:
 
     def voice(self, abbreviation):
         assert isinstance(abbreviation, str), repr(abbreviation)
-        assert abbreviation in self._voice_name_to_voice, repr(abbreviation)
-        return self._voice_name_to_voice[abbreviation]
+        if abbreviation in self._voice_name_to_voice:
+            return self._voice_name_to_voice[abbreviation]
