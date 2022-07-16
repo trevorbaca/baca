@@ -305,14 +305,14 @@ def bar_line_transparent(
         Makes bar line before measure 1 transparent:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
 
@@ -321,10 +321,10 @@ def bar_line_transparent(
         ...     rmakers.beam(),
         ...     rmakers.extract_trivial(),
         ... )
-        >>> music = stack(commands.get())
+        >>> music = stack(accumulator.get())
         >>> score["Music"].extend(music)
 
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.bar_line_transparent(
@@ -332,15 +332,15 @@ def bar_line_transparent(
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -1448,33 +1448,33 @@ def mmrest_color(
         REGRESSION. Coerces X11 color names:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_mmrests(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.mmrest_color("#(x11-color 'DarkOrchid)"),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -1567,20 +1567,20 @@ def mmrest_text_color(
     ..  container:: example
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_mmrests(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
@@ -1589,15 +1589,15 @@ def mmrest_text_color(
         ...     baca.mmrest_text_color("#red"),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -1660,20 +1660,20 @@ def mmrest_text_color(
         rests:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
@@ -1686,11 +1686,11 @@ def mmrest_text_color(
         ...     baca.pitches([2, 4]),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -1719,20 +1719,20 @@ def mmrest_text_extra_offset(
     ..  container:: example
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_mmrests(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
@@ -1741,15 +1741,15 @@ def mmrest_text_extra_offset(
         ...     baca.mmrest_text_extra_offset((0, 2)),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -1854,20 +1854,20 @@ def mmrest_text_padding(
     ..  container:: example
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_mmrests(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
@@ -1876,15 +1876,15 @@ def mmrest_text_padding(
         ...     baca.mmrest_text_padding(2),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -1961,20 +1961,20 @@ def mmrest_text_parent_center(
     ..  container:: example
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_mmrests(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
@@ -1983,15 +1983,15 @@ def mmrest_text_parent_center(
         ...     baca.mmrest_text_parent_center(),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -2069,20 +2069,20 @@ def mmrest_text_staff_padding(
     ..  container:: example
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_mmrests(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
@@ -2091,15 +2091,15 @@ def mmrest_text_staff_padding(
         ...     baca.mmrest_text_staff_padding(2),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -4756,20 +4756,20 @@ def text_script_color(
         Raises exception when called on multimeasure rests:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_mmrests(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
@@ -4778,11 +4778,11 @@ def text_script_color(
         ...     baca.text_script_color("#red"),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -4900,20 +4900,20 @@ def text_script_down(
         Raises exception when called on multimeasure rests:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_mmrests(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
@@ -4922,11 +4922,11 @@ def text_script_down(
         ...     baca.text_script_down()
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -4998,20 +4998,20 @@ def text_script_extra_offset(
         Raises exception when called on multimeasure rests:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_mmrests(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
@@ -5020,11 +5020,11 @@ def text_script_extra_offset(
         ...     baca.text_script_extra_offset((0, 2)),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -5165,20 +5165,20 @@ def text_script_padding(
         Raises exception when called on multimeasure rests:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_mmrests(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
@@ -5187,11 +5187,11 @@ def text_script_padding(
         ...     baca.text_script_padding(2),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -5354,20 +5354,20 @@ def text_script_staff_padding(
         Raises exception when called on multimeasure rests:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_mmrests(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.markup(
         ...         r"\baca-boxed-markkup still",
@@ -5376,11 +5376,11 @@ def text_script_staff_padding(
         ...     baca.text_script_staff_padding(2)
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -5498,20 +5498,20 @@ def text_script_up(
         Raises exception when called on multimeasure rests:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
 
-        >>> music = baca.make_mmrests(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
@@ -5520,11 +5520,11 @@ def text_script_up(
         ...     baca.text_script_up()
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )

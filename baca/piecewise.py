@@ -660,36 +660,36 @@ def hairpin(
         Conventional dynamics:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.hairpin("p < f", bookend=-1),
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -758,36 +758,36 @@ def hairpin(
         Effort dynamic al niente:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ...     baca.hairpin('"ff" >o niente'),
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -858,36 +858,36 @@ def hairpin(
         Effort dynamic dal niente:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ...     baca.hairpin('niente o< "ff"'),
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -957,36 +957,36 @@ def hairpin(
         Effort dynamic constante:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ...     baca.hairpin('"p" -- f'),
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -1056,21 +1056,21 @@ def hairpin(
         Effort dynamics crescendo subito, decrescendo subito:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ...     baca.hairpin(
@@ -1084,15 +1084,15 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -1167,21 +1167,21 @@ def hairpin(
         Piece selector groups leaves by measures:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.hairpin(
@@ -1191,15 +1191,15 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -1267,21 +1267,21 @@ def hairpin(
         With hairpins:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.hairpin(
@@ -1291,15 +1291,15 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -1375,21 +1375,21 @@ def hairpin(
         Bookends each piece:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.hairpin(
@@ -1400,15 +1400,15 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -1479,21 +1479,21 @@ def hairpin(
         With hairpins:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.hairpin(
@@ -1504,15 +1504,15 @@ def hairpin(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -1595,36 +1595,36 @@ def hairpin(
         REGRESSION. Works with lone dynamic:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ...     baca.hairpin("f", bookend=False),
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -1690,36 +1690,36 @@ def hairpin(
         REGRESSION. Works with lone hairpin:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
         ...     baca.hairpin("< !"),
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -1786,21 +1786,21 @@ def hairpin(
         REGRESSION. Works with to-barline tweak:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
         >>> music = baca.make_skeleton("{ c2 r4. c2 r4. }")
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("C4 D4"),
         ...     baca.hairpin(
@@ -1816,15 +1816,15 @@ def hairpin(
         ...     baca.dls_staff_padding(4),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -1885,21 +1885,21 @@ def hairpin(
         Works with interposed niente dynamics:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.hairpin(
@@ -1910,15 +1910,15 @@ def hairpin(
         ...     baca.dls_staff_padding(4),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -1989,36 +1989,36 @@ def hairpin(
         Works with parenthesized dynamics:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.hairpin("(mp) < mf"),
         ...     baca.dls_staff_padding(4),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -2413,7 +2413,7 @@ def parse_hairpin_descriptor(
         if _is_maybe_bundled(left, abjad.StartHairpin) and _is_maybe_bundled(
             right, abjad.StartHairpin
         ):
-            raise Exception("consecutive start hairpin commands.")
+            raise Exception("consecutive start hairpin accumulator.")
         elif _is_maybe_bundled(left, abjad.Dynamic) and _is_maybe_bundled(
             right, abjad.Dynamic
         ):
@@ -2913,36 +2913,36 @@ def text_spanner(
         Dashed line with arrow:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner("pont. => ord."),
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -3012,36 +3012,36 @@ def text_spanner(
         Dashed line with hook:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner("pont. =| ord."),
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -3111,36 +3111,36 @@ def text_spanner(
         Solid line with arrow:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner("pont. -> ord."),
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -3210,36 +3210,36 @@ def text_spanner(
         Solid line with hook:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner("pont. -| ord."),
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -3309,36 +3309,36 @@ def text_spanner(
         Invisible lines:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner("pont. || ord."),
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -3410,21 +3410,21 @@ def text_spanner(
         Piece selector groups leaves by measures:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner(
@@ -3435,15 +3435,15 @@ def text_spanner(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -3527,21 +3527,21 @@ def text_spanner(
         With spanners:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner(
@@ -3552,15 +3552,15 @@ def text_spanner(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -3644,21 +3644,21 @@ def text_spanner(
         Bookends each piece:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner(
@@ -3670,15 +3670,15 @@ def text_spanner(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -3771,21 +3771,21 @@ def text_spanner(
         With spanners:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner(
@@ -3797,15 +3797,15 @@ def text_spanner(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -3901,21 +3901,21 @@ def text_spanner(
         0, 1, 2 but piece 3 carries only a stop text span:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
         >>> music = baca.make_skeleton("{ c2 c4. c2 c4. }")
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("C4 D4 E4 F4"),
         ...     baca.text_spanner(
@@ -3930,15 +3930,15 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -4005,21 +4005,21 @@ def text_spanner(
         REGRESSION. Handles backslashed markup correctly:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner(
@@ -4031,15 +4031,15 @@ def text_spanner(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -4110,21 +4110,21 @@ def text_spanner(
         REGRESSION. Kerns bookended hooks:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
         ...     baca.text_spanner(
@@ -4135,15 +4135,15 @@ def text_spanner(
         ...     baca.dls_staff_padding(5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -4229,21 +4229,21 @@ def text_spanner(
         REGRESSION. Backsteals left text from length-1 final piece:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("C4 D4 E4 F4 G4 A4"),
         ...     baca.text_spanner(
@@ -4253,15 +4253,15 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -4339,21 +4339,21 @@ def text_spanner(
         REGRESSION. Backsteals left text from spannerless final piece:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
         >>> music = baca.make_skeleton("{ c2 c4. c2 c4 ~ c8 }")
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.pitches("C4 D4 E4 F4"),
         ...     baca.text_spanner(
@@ -4364,15 +4364,15 @@ def text_spanner(
         ...     baca.text_spanner_staff_padding(4.5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )

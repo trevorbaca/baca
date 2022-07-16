@@ -18,37 +18,37 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_mmrests(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.clef("treble"),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -121,23 +121,23 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_mmrests(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.clef("alto"),
         ... )
@@ -151,18 +151,18 @@ r"""
         ...         value="treble",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -237,23 +237,23 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_mmrests(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.reapply_persistent_indicators(),
         ... )
@@ -267,18 +267,18 @@ r"""
         ...         value="treble",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -354,37 +354,37 @@ r"""
         ...         baca.system(measure=3, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_mmrests(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.clef("treble", selector=lambda _: abjad.select.leaf(_, 0)),
         ...     baca.clef("treble", selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -468,23 +468,23 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_mmrests(commands.get(), head="Music")
+        >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.reapply_persistent_indicators(),
         ...     baca.clef("treble"),
@@ -499,18 +499,18 @@ r"""
         ...         value="treble",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -583,34 +583,34 @@ r"""
         Explicit dynamics color blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.dynamic("f"),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -652,20 +652,20 @@ r"""
         Even after a previous dynamic:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.dynamic("p"),
         ... )
@@ -679,18 +679,18 @@ r"""
         ...         value="f",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -734,20 +734,20 @@ r"""
         Reapplied dynamics color green:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.reapply_persistent_indicators(),
         ... )
@@ -761,18 +761,18 @@ r"""
         ...         value="f",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -816,35 +816,35 @@ r"""
         Redundant dynamics color pink:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.dynamic("f"),
         ...     baca.dynamic("f", selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -888,20 +888,20 @@ r"""
         Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.reapply_persistent_indicators(),
         ...     baca.dynamic("f"),
@@ -916,18 +916,18 @@ r"""
         ...         value="f",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -969,35 +969,35 @@ r"""
         Sforzando dynamics do not count as redundant:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.dynamic("sfz"),
         ...     baca.dynamic("sfz", selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -1041,20 +1041,20 @@ r"""
         Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.dynamic("sfz"),
         ... )
@@ -1068,18 +1068,18 @@ r"""
         ...         value="sfz",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -1123,35 +1123,35 @@ r"""
         REGRESSION. Conventional and effort dynamics analyze nonredundantly:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.dynamic("mf"),
         ...     baca.dynamic('"mf"', selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -1216,39 +1216,39 @@ r"""
         Explicit instruments color blue and redraw dull blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     instruments=instruments,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.instrument(instruments["Flute"]),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
-        ...     instruments=commands.instruments,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
+        ...     instruments=accumulator.instruments,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -1383,24 +1383,24 @@ r"""
         Even after a previous instrument:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     instruments=instruments,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.instrument(instruments["Flute"]),
         ... )
@@ -1414,19 +1414,19 @@ r"""
         ...         value="Piccolo",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
-        ...     instruments=commands.instruments,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
+        ...     instruments=accumulator.instruments,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -1562,24 +1562,24 @@ r"""
         Reapplied instruments color green and redraw dull green:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     instruments=instruments,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.reapply_persistent_indicators(),
         ... )
@@ -1593,19 +1593,19 @@ r"""
         ...         value="Flute",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
-        ...     instruments=commands.instruments,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
+        ...     instruments=accumulator.instruments,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -1749,24 +1749,24 @@ r"""
         ...         baca.system(measure=3, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     instruments=instruments,
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.instrument(instruments["Flute"]),
         ...     baca.new(
@@ -1775,17 +1775,17 @@ r"""
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
-        ...     instruments=commands.instruments,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
+        ...     instruments=accumulator.instruments,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -1944,24 +1944,24 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     instruments=instruments,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.reapply_persistent_indicators(),
         ...     baca.instrument(instruments["Flute"]),
@@ -1976,19 +1976,19 @@ r"""
         ...         value="Flute",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
-        ...     instruments=commands.instruments,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
+        ...     instruments=accumulator.instruments,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -2143,40 +2143,40 @@ r"""
         Explicit short instrument names color blue and redraw dull blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     short_instrument_names=short_instrument_names,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.short_instrument_name(short_instrument_names["I+II"]),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     first_section=True,
-        ...     short_instrument_names=commands.short_instrument_names,
+        ...     short_instrument_names=accumulator.short_instrument_names,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -2319,24 +2319,24 @@ r"""
         Even after previous short instrument name:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     short_instrument_names=short_instrument_names,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.short_instrument_name(short_instrument_names["III+IV"]),
         ... )
@@ -2350,19 +2350,19 @@ r"""
         ...         value="I+II",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
-        ...     short_instrument_names=commands.short_instrument_names,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
+        ...     short_instrument_names=accumulator.short_instrument_names,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -2510,24 +2510,24 @@ r"""
         Reapplied short instrument names color green and redraw dull green:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     short_instrument_names=short_instrument_names,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.reapply_persistent_indicators(),
         ... )
@@ -2541,19 +2541,19 @@ r"""
         ...         value="I+II",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
-        ...     short_instrument_names=commands.short_instrument_names,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
+        ...     short_instrument_names=accumulator.short_instrument_names,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -2708,24 +2708,24 @@ r"""
         ...         baca.system(measure=3, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     short_instrument_names=short_instrument_names,
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.short_instrument_name(short_instrument_names["I+II"]),
         ...     baca.new(
@@ -2734,18 +2734,18 @@ r"""
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     first_section=True,
-        ...     short_instrument_names=commands.short_instrument_names,
+        ...     short_instrument_names=accumulator.short_instrument_names,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -2922,24 +2922,24 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     short_instrument_names=short_instrument_names,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.reapply_persistent_indicators(),
         ...     baca.short_instrument_name(short_instrument_names["I+II"]),
@@ -2954,19 +2954,19 @@ r"""
         ...         value="I+II",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
-        ...     short_instrument_names=commands.short_instrument_names,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
+        ...     short_instrument_names=accumulator.short_instrument_names,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -3121,24 +3121,24 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     short_instrument_names=short_instrument_names,
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.tag(
         ...         baca.tags.NOT_PARTS,
@@ -3156,18 +3156,18 @@ r"""
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     first_section=True,
-        ...     short_instrument_names=commands.short_instrument_names,
+        ...     short_instrument_names=accumulator.short_instrument_names,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -3245,15 +3245,15 @@ r"""
         Explicit metronome marks color blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     append_anchor_skip=True,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -3264,27 +3264,27 @@ r"""
         >>> baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
-        ...     commands.manifests(),
+        ...     accumulator.manifests(),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.append_anchor_note(),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     append_anchor_skip=True,
-        ...     metronome_marks=commands.metronome_marks,
+        ...     metronome_marks=accumulator.metronome_marks,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -3351,15 +3351,15 @@ r"""
         Even after a previous metronome mark:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     append_anchor_skip=True,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -3370,12 +3370,12 @@ r"""
         >>> baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
-        ...     commands.manifests(),
+        ...     accumulator.manifests(),
         ... )
         >>> baca.text_spanner_staff_padding_function(score["Skips"][:-1], 4)
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.append_anchor_note(),
         ... )
@@ -3389,20 +3389,20 @@ r"""
         ...         value="90",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     append_anchor_skip=True,
-        ...     metronome_marks=commands.metronome_marks,
+        ...     metronome_marks=accumulator.metronome_marks,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -3482,15 +3482,15 @@ r"""
         ...     )
         ... ]
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     previous_persist=persist,
         ...     spacing=baca.SpacingSpecifier(
@@ -3498,27 +3498,27 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.reapply_persistent_indicators(),
         ... )
         >>> baca.text_spanner_staff_padding_function(score["Skips"], 4)
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
-        ...     metronome_marks=commands.metronome_marks,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
+        ...     metronome_marks=accumulator.metronome_marks,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -3574,15 +3574,15 @@ r"""
         Redundant metronome marks color pink:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     append_anchor_skip=True,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -3593,32 +3593,32 @@ r"""
         >>> baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
-        ...     commands.manifests(),
+        ...     accumulator.manifests(),
         ... )
         >>> baca.metronome_mark(
         ...     score["Skips"][2 - 1],
         ...     metronome_marks["112"],
-        ...     commands.manifests(),
+        ...     accumulator.manifests(),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.append_anchor_note(),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     append_anchor_skip=True,
-        ...     metronome_marks=commands.metronome_marks,
+        ...     metronome_marks=accumulator.metronome_marks,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -3701,15 +3701,15 @@ r"""
         ...     )
         ... ]
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     append_anchor_skip=True,
         ...     docs=True,
         ...     previous_persist=persist,
@@ -3721,31 +3721,31 @@ r"""
         >>> baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
-        ...     commands.manifests(),
+        ...     accumulator.manifests(),
         ... )
         >>> baca.text_spanner_staff_padding_function(score["Skips"][:-1], 4)
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.reapply_persistent_indicators(),
         ...     baca.append_anchor_note(),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     append_anchor_skip=True,
-        ...     metronome_marks=commands.metronome_marks,
+        ...     metronome_marks=accumulator.metronome_marks,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -3820,14 +3820,14 @@ r"""
         Explicit persistent overrides work but do not color:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
@@ -3844,25 +3844,25 @@ r"""
         ...     tags=[tag],
         ... )
 
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     command,
         ...     baca.staff_lines(1),
         ...     baca.staff_position(0),
         ... )
 
-        >>> metadata, persist = baca.interpret.interpret_section(
+        >>> metadata, persist = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -3914,20 +3914,20 @@ r"""
         Reapplied persistent overrides work but do not color:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.reapply_persistent_indicators(),
         ... )
@@ -3947,18 +3947,18 @@ r"""
         ...         ),
         ...     )
         ... ]
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -3999,14 +3999,14 @@ r"""
         Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
@@ -4022,9 +4022,9 @@ r"""
         ...     selector=lambda _: abjad.select.leaf(_, 0),
         ...     tags=[tag],
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     command,
         ... )
@@ -4044,18 +4044,18 @@ r"""
         ...         ),
         ...     )
         ... ]
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -4102,34 +4102,34 @@ r"""
         Explicit staff lines color blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.staff_lines(5),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -4174,20 +4174,20 @@ r"""
         Even after previous staff lines:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.staff_lines(1),
         ... )
@@ -4201,18 +4201,18 @@ r"""
         ...         value=5,
         ...     )
         ... ]
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -4259,20 +4259,20 @@ r"""
         Reapplied staff lines color green:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.reapply_persistent_indicators(),
         ... )
@@ -4286,18 +4286,18 @@ r"""
         ...         value=5,
         ...     )
         ... ]
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -4343,35 +4343,35 @@ r"""
         Redundant staff lines color pink:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.staff_lines(5),
         ...     baca.staff_lines(5, selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -4421,20 +4421,20 @@ r"""
         Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.reapply_persistent_indicators(),
         ...     baca.staff_lines(5),
@@ -4449,18 +4449,18 @@ r"""
         ...         value=5,
         ...     )
         ... ]
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -4523,15 +4523,15 @@ r"""
         Explicit tempo trends color blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     append_anchor_skip=True,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -4542,27 +4542,27 @@ r"""
         >>> baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
-        ...     commands.manifests(),
+        ...     accumulator.manifests(),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.append_anchor_note(),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     append_anchor_skip=True,
-        ...     metronome_marks=commands.metronome_marks,
+        ...     metronome_marks=accumulator.metronome_marks,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -4629,15 +4629,15 @@ r"""
         Even after a previous tempo trend:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -4647,10 +4647,10 @@ r"""
         >>> baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
-        ...     commands.manifests(),
+        ...     accumulator.manifests(),
         ... )
         >>> baca.text_spanner_staff_padding_function(score["Skips"], 4)
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
 
         >>> metadata, persist = {}, {}
@@ -4661,18 +4661,18 @@ r"""
         ...         prototype="baca.Ritardando",
         ...     )
         ... ]
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -4736,15 +4736,15 @@ r"""
         ...     )
         ... ]
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     previous_persist=persist,
         ...     spacing=baca.SpacingSpecifier(
@@ -4752,26 +4752,26 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.reapply_persistent_indicators(),
         ... )
         >>> baca.text_spanner_staff_padding_function(score["Skips"], 4)
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -4827,15 +4827,15 @@ r"""
         Redundant tempo trends color pink:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -4845,26 +4845,26 @@ r"""
         >>> baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
-        ...     commands.manifests(),
+        ...     accumulator.manifests(),
         ... )
         >>> baca.metronome_mark(
         ...     score["Skips"][2 - 1],
         ...     baca.Accelerando(),
-        ...     commands.manifests(),
+        ...     accumulator.manifests(),
         ... )
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -4936,15 +4936,15 @@ r"""
         ...     )
         ... ]
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     previous_persist=persist,
         ...     spacing=baca.SpacingSpecifier(
@@ -4955,27 +4955,27 @@ r"""
         >>> baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
-        ...     commands.manifests(),
+        ...     accumulator.manifests(),
         ... )
         >>> baca.text_spanner_staff_padding_function(score["Skips"], 4)
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.reapply_persistent_indicators(),
         ... )
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )

@@ -1010,46 +1010,6 @@ def interpret_build_music(
     run_lilypond(music_ly, remove=remove)
 
 
-def interpret_section(
-    score,
-    manifests,
-    time_signatures,
-    *,
-    commands=None,
-    first_section=False,
-    interpreter=None,
-    **keywords,
-):
-    section_directory = pathlib.Path(os.getcwd())
-    _arguments = arguments("--clicktrack", "--midi", "--pdf")
-    if not any([_arguments.clicktrack, _arguments.midi, _arguments.pdf]):
-        _print_always("Missing --clicktrack, --midi, --pdf ...")
-        sys.exit(1)
-    _print_main_task("Interpreting commands ...")
-    interpreter = interpreter or baca.interpret.interpret_section
-    metadata = baca.path.get_metadata(section_directory)
-    persist = baca.path.get_metadata(section_directory, file_name="__persist__")
-    previous_metadata, previous_persist = get_previous_metadata(section_directory)
-    first_section = first_section or section_directory.name == "01"
-    with abjad.Timer() as timer:
-        metadata, persist = interpreter(
-            score,
-            manifests,
-            time_signatures,
-            **keywords,
-            commands=commands.commands,
-            first_section=first_section,
-            metadata=metadata,
-            persist=persist,
-            previous_metadata=previous_metadata,
-            previous_persist=previous_persist,
-            section_number=section_directory.name,
-        )
-    timing = types.SimpleNamespace()
-    timing.runtime = int(timer.elapsed_time)
-    return metadata, persist, score, timing
-
-
 def interpret_tex_file(tex):
     if not tex.is_file():
         _print_error(f"Can not find {baca.path.trim(tex)} ...")
@@ -1173,7 +1133,7 @@ def make_layout_ly(
         page_layout_profile=page_layout_profile,
         spacing=spacing,
     )
-    _, _ = baca.interpret.interpret_section(
+    _, _ = baca.interpret.section(
         score,
         {},
         commands.time_signatures,
@@ -1188,7 +1148,7 @@ def make_layout_ly(
         # spacing=spacing,
         whitespace_leaves=True,
     )
-    lilypond_file = baca.make_lilypond_file(score)
+    lilypond_file = baca.lilypond.file(score)
     context = lilypond_file["Skips"]
     if curtail_measure_count is not None:
         del context[curtail_measure_count:]
@@ -1355,6 +1315,47 @@ def run_lilypond(ly_file_path, *, pdf_mtime=None, remove=None):
         else:
             _print_error(f"Can not find {baca.path.trim(pdf)} ...")
         assert lilypond_log_file_path.exists()
+
+
+def section(
+    score,
+    manifests,
+    time_signatures,
+    *,
+    commands=None,
+    first_section=False,
+    interpreter=None,
+    **keywords,
+):
+    section_directory = pathlib.Path(os.getcwd())
+    _arguments = arguments("--clicktrack", "--midi", "--pdf")
+    if not any([_arguments.clicktrack, _arguments.midi, _arguments.pdf]):
+        _print_always("Missing --clicktrack, --midi, --pdf ...")
+        sys.exit(1)
+    commands = commands or []
+    _print_main_task("Interpreting commands ...")
+    interpreter = interpreter or baca.interpret.section
+    metadata = baca.path.get_metadata(section_directory)
+    persist = baca.path.get_metadata(section_directory, file_name="__persist__")
+    previous_metadata, previous_persist = get_previous_metadata(section_directory)
+    first_section = first_section or section_directory.name == "01"
+    with abjad.Timer() as timer:
+        metadata, persist = interpreter(
+            score,
+            manifests,
+            time_signatures,
+            **keywords,
+            commands=commands,
+            first_section=first_section,
+            metadata=metadata,
+            persist=persist,
+            previous_metadata=previous_metadata,
+            previous_persist=previous_persist,
+            section_number=section_directory.name,
+        )
+    timing = types.SimpleNamespace()
+    timing.runtime = int(timer.elapsed_time)
+    return metadata, persist, score, timing
 
 
 def show_annotations(directory, *, undo=False):

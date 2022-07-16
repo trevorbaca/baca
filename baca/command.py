@@ -266,21 +266,21 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
         Applies leaf selector to commands:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.new(
         ...         baca.marcato(),
@@ -290,15 +290,15 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -391,21 +391,21 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
         Applies measure selector to commands:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_even_divisions(commands.get())
+        >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.new(
         ...         baca.marcato(),
@@ -415,15 +415,15 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -571,36 +571,36 @@ def only_parts(command: Command | Suite) -> Command | Suite:
         REGRESSION. Dynamic status color tweaks copy dynamic edition tags:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
 
-        >>> music = baca.make_notes(commands.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> commands(
+        >>> accumulator(
         ...     "Music",
         ...     baca.only_parts(
         ...         baca.hairpin("p < f"),
         ...     ),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )

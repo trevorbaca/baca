@@ -1800,38 +1800,38 @@ class Imbrication:
             ...     baca.staccato(selector=lambda _: baca.select.pheads(_)),
             ... )
 
-            >>> commands = baca.CommandAccumulator(
+            >>> accumulator = baca.CommandAccumulator(
             ...     time_signatures=figures.time_signatures,
             ... )
             >>> baca.interpret.set_up_score(
             ...     score,
-            ...     commands,
-            ...     commands.manifests(),
-            ...     commands.time_signatures,
+            ...     accumulator,
+            ...     accumulator.manifests(),
+            ...     accumulator.time_signatures,
             ...     docs=True,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
-            >>> figures.populate_commands(score, commands)
+            >>> figures.populate_commands(score, accumulator)
 
-            >>> commands(
+            >>> accumulator(
             ...     "Music.1",
             ...     baca.voice_one(),
             ... )
 
-            >>> commands(
+            >>> accumulator(
             ...     "Music.2",
             ...     baca.voice_two(),
             ... )
 
-            >>> _, _ = baca.interpret.interpret_section(
+            >>> _, _ = baca.interpret.section(
             ...     score,
-            ...     commands.manifests(),
-            ...     commands.time_signatures,
-            ...     commands=commands.commands,
+            ...     accumulator.manifests(),
+            ...     accumulator.time_signatures,
+            ...     commands=accumulator.commands,
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ... )
-            >>> lilypond_file = baca.make_lilypond_file(
+            >>> lilypond_file = baca.lilypond.file(
             ...     score,
             ...     includes=["baca.ily"],
             ... )
@@ -2024,38 +2024,38 @@ class Imbrication:
             ...     baca.staccato(selector=lambda _: baca.select.pheads(_)),
             ... )
 
-            >>> commands = baca.CommandAccumulator(
+            >>> accumulator = baca.CommandAccumulator(
             ...     time_signatures=figures.time_signatures,
             ... )
             >>> baca.interpret.set_up_score(
             ...     score,
-            ...     commands,
-            ...     commands.manifests(),
-            ...     commands.time_signatures,
+            ...     accumulator,
+            ...     accumulator.manifests(),
+            ...     accumulator.time_signatures,
             ...     docs=True,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
-            >>> figures.populate_commands(score, commands)
+            >>> figures.populate_commands(score, accumulator)
 
-            >>> commands(
+            >>> accumulator(
             ...     "Music.1",
             ...     baca.voice_one(),
             ... )
 
-            >>> commands(
+            >>> accumulator(
             ...     "Music.2",
             ...     baca.voice_two(),
             ... )
 
-            >>> _, _ = baca.interpret.interpret_section(
+            >>> _, _ = baca.interpret.section(
             ...     score,
-            ...     commands.manifests(),
-            ...     commands.time_signatures,
-            ...     commands=commands.commands,
+            ...     accumulator.manifests(),
+            ...     accumulator.time_signatures,
+            ...     commands=accumulator.commands,
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ... )
-            >>> lilypond_file = baca.make_lilypond_file(
+            >>> lilypond_file = baca.lilypond.file(
             ...     score,
             ...     includes=["baca.ily"],
             ... )
@@ -2233,38 +2233,38 @@ class Imbrication:
             ...     baca.staccato(selector=lambda _: baca.select.pheads(_)),
             ... )
 
-            >>> commands = baca.CommandAccumulator(
+            >>> accumulator = baca.CommandAccumulator(
             ...     time_signatures=figures.time_signatures,
             ... )
             >>> baca.interpret.set_up_score(
             ...     score,
-            ...     commands,
-            ...     commands.manifests(),
-            ...     commands.time_signatures,
+            ...     accumulator,
+            ...     accumulator.manifests(),
+            ...     accumulator.time_signatures,
             ...     docs=True,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
-            >>> figures.populate_commands(score, commands)
+            >>> figures.populate_commands(score, accumulator)
 
-            >>> commands(
+            >>> accumulator(
             ...     "Music.1",
             ...     baca.voice_one(),
             ... )
 
-            >>> commands(
+            >>> accumulator(
             ...     "Music.2",
             ...     baca.voice_two(),
             ... )
 
-            >>> _, _ = baca.interpret.interpret_section(
+            >>> _, _ = baca.interpret.section(
             ...     score,
-            ...     commands.manifests(),
-            ...     commands.time_signatures,
-            ...     commands=commands.commands,
+            ...     accumulator.manifests(),
+            ...     accumulator.time_signatures,
+            ...     commands=accumulator.commands,
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ... )
-            >>> lilypond_file = baca.make_lilypond_file(
+            >>> lilypond_file = baca.lilypond.file(
             ...     score,
             ...     includes=["baca.ily"],
             ... )
@@ -2463,38 +2463,38 @@ class Imbrication:
             ...     ),
             ... )
 
-            >>> commands = baca.CommandAccumulator(
+            >>> accumulator = baca.CommandAccumulator(
             ...     time_signatures=figures.time_signatures,
             ... )
             >>> baca.interpret.set_up_score(
             ...     score,
-            ...     commands,
-            ...     commands.manifests(),
-            ...     commands.time_signatures,
+            ...     accumulator,
+            ...     accumulator.manifests(),
+            ...     accumulator.time_signatures,
             ...     docs=True,
             ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
             ... )
-            >>> figures.populate_commands(score, commands)
+            >>> figures.populate_commands(score, accumulator)
 
-            >>> commands(
+            >>> accumulator(
             ...     "Music.1",
             ...     baca.voice_one(),
             ... )
 
-            >>> commands(
+            >>> accumulator(
             ...     "Music.2",
             ...     baca.voice_two(),
             ... )
 
-            >>> _, _ = baca.interpret.interpret_section(
+            >>> _, _ = baca.interpret.section(
             ...     score,
-            ...     commands.manifests(),
-            ...     commands.time_signatures,
-            ...     commands=commands.commands,
+            ...     accumulator.manifests(),
+            ...     accumulator.time_signatures,
+            ...     commands=accumulator.commands,
             ...     move_global_context=True,
             ...     remove_tags=baca.tags.documentation_removal_tags(),
             ... )
-            >>> lilypond_file = baca.make_lilypond_file(
+            >>> lilypond_file = baca.lilypond.file(
             ...     score,
             ...     includes=["baca.ily"],
             ... )
@@ -6337,38 +6337,38 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
         ...     ),
         ... )
 
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=figures.time_signatures,
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
-        >>> figures.populate_commands(score, commands)
+        >>> figures.populate_commands(score, accumulator)
 
-        >>> commands(
+        >>> accumulator(
         ...     "Music.1",
         ...     baca.voice_one(),
         ... )
 
-        >>> commands(
+        >>> accumulator(
         ...     "Music.2",
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -6494,38 +6494,38 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
         ...     ),
         ... )
 
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=figures.time_signatures,
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
-        >>> figures.populate_commands(score, commands)
+        >>> figures.populate_commands(score, accumulator)
 
-        >>> commands(
+        >>> accumulator(
         ...     "Music.1",
         ...     baca.voice_one(),
         ... )
 
-        >>> commands(
+        >>> accumulator(
         ...     "Music.2",
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -6688,38 +6688,38 @@ def extend_beam(
         ...     ),
         ... )
 
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=figures.time_signatures,
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
-        >>> figures.populate_commands(score, commands)
+        >>> figures.populate_commands(score, accumulator)
 
-        >>> commands(
+        >>> accumulator(
         ...     "Music.1",
         ...     baca.voice_one(),
         ... )
 
-        >>> commands(
+        >>> accumulator(
         ...     "Music.2",
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -6895,38 +6895,38 @@ def imbricate(
         ...     ),
         ... )
 
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=figures.time_signatures,
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
-        >>> figures.populate_commands(score, commands)
+        >>> figures.populate_commands(score, accumulator)
 
-        >>> commands(
+        >>> accumulator(
         ...     "Music.1",
         ...     baca.voice_one(),
         ... )
 
-        >>> commands(
+        >>> accumulator(
         ...     "Music.2",
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -7093,27 +7093,27 @@ def imbricate(
         ...     rmakers.beam_groups(),
         ... )
 
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=figures.time_signatures,
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
-        >>> figures.populate_commands(score, commands)
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> figures.populate_commands(score, accumulator)
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -7316,38 +7316,38 @@ def imbricate(
         ...     baca.staccato(selector=lambda _: baca.select.pheads(_)),
         ... )
 
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=figures.time_signatures,
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
-        >>> figures.populate_commands(score, commands)
+        >>> figures.populate_commands(score, accumulator)
 
-        >>> commands(
+        >>> accumulator(
         ...     "Music.1",
         ...     baca.voice_one(),
         ... )
 
-        >>> commands(
+        >>> accumulator(
         ...     "Music.2",
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -7532,38 +7532,38 @@ def imbricate(
         ...     ),
         ... )
 
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=figures.time_signatures,
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
-        >>> figures.populate_commands(score, commands)
+        >>> figures.populate_commands(score, accumulator)
 
-        >>> commands(
+        >>> accumulator(
         ...     "Music.1",
         ...     baca.voice_one(),
         ... )
 
-        >>> commands(
+        >>> accumulator(
         ...     "Music.2",
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -7681,38 +7681,38 @@ def imbricate(
         ...     ),
         ... )
 
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=figures.time_signatures,
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
-        >>> figures.populate_commands(score, commands)
+        >>> figures.populate_commands(score, accumulator)
 
-        >>> commands(
+        >>> accumulator(
         ...     "Music.1",
         ...     baca.voice_one(),
         ... )
 
-        >>> commands(
+        >>> accumulator(
         ...     "Music.2",
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )
@@ -7854,38 +7854,38 @@ def imbricate(
         ...     ),
         ... )
 
-        >>> commands = baca.CommandAccumulator(
+        >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=figures.time_signatures,
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
-        ...     commands,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
         ... )
-        >>> figures.populate_commands(score, commands)
+        >>> figures.populate_commands(score, accumulator)
 
-        >>> commands(
+        >>> accumulator(
         ...     "Music.1",
         ...     baca.voice_one(),
         ... )
 
-        >>> commands(
+        >>> accumulator(
         ...     "Music.2",
         ...     baca.voice_two(),
         ... )
 
-        >>> _, _ = baca.interpret.interpret_section(
+        >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     commands.manifests(),
-        ...     commands.time_signatures,
-        ...     commands=commands.commands,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
-        >>> lilypond_file = baca.make_lilypond_file(
+        >>> lilypond_file = baca.lilypond.file(
         ...     score,
         ...     includes=["baca.ily"],
         ... )

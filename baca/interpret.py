@@ -1391,47 +1391,6 @@ def _get_fermata_measure_numbers(first_measure_number, score):
     )
 
 
-def _get_global_spanner_extra_offsets(
-    clock_time_extra_offset,
-    local_measure_number_extra_offset,
-    measure_number_extra_offset,
-    spacing_extra_offset,
-    stage_number_extra_offset,
-):
-    strings = []
-    if clock_time_extra_offset is not None:
-        value = clock_time_extra_offset
-        assert isinstance(value, tuple)
-        string = f"#'({value[0]} . {value[1]})"
-        string = f"clock-time-extra-offset = {string}"
-        strings.append(string)
-    if local_measure_number_extra_offset is not None:
-        value = local_measure_number_extra_offset
-        assert isinstance(value, tuple)
-        string = f"#'({value[0]} . {value[1]})"
-        string = f"local-measure-number-extra-offset = {string}"
-        strings.append(string)
-    if measure_number_extra_offset is not None:
-        value = measure_number_extra_offset
-        assert isinstance(value, tuple)
-        string = f"#'({value[0]} . {value[1]})"
-        string = f"measure-number-extra-offset = {string}"
-        strings.append(string)
-    if spacing_extra_offset is not None:
-        value = spacing_extra_offset
-        assert isinstance(value, tuple)
-        string = f"#'({value[0]} . {value[1]})"
-        string = f"spacing-extra-offset = {string}"
-        strings.append(string)
-    if stage_number_extra_offset is not None:
-        value = stage_number_extra_offset
-        assert isinstance(value, tuple)
-        string = f"#'({value[0]} . {value[1]})"
-        string = f"stage-number-extra-offset = {string}"
-        strings.append(string)
-    return strings
-
-
 def _get_measure_number_tag(leaf, offset_to_measure_number):
     start_offset = abjad.get.timespan(leaf).start_offset
     measure_number = offset_to_measure_number.get(start_offset)
@@ -1854,47 +1813,6 @@ def _make_global_skips(
             time_signature = abjad.TimeSignature((1, 4))
             # abjad.attach(time_signature, skip, context="Score", tag=tag)
             abjad.attach(time_signature, skip, context="Score", tag=None)
-
-
-def _make_lilypond_file(
-    include_layout_ly,
-    includes,
-    preamble,
-    score,
-):
-    tag = _tags.function_name(_frame())
-    items = []
-    items.extend(includes)
-    items.append("")
-    if preamble:
-        string = "\n".join(preamble)
-        items.append(string)
-    block = abjad.Block("score")
-    block.items.append(score)
-    items.append(block)
-    lilypond_file = abjad.LilyPondFile(
-        items=items,
-        lilypond_language_token=False,
-        tag=tag,
-    )
-    if include_layout_ly:
-        assert len(lilypond_file["score"].items) == 1
-        score = lilypond_file["Score"]
-        assert isinstance(score, abjad.Score)
-        include = abjad.Container(tag=tag)
-        literal = abjad.LilyPondLiteral("", site="absolute_before")
-        abjad.attach(literal, include, tag=None)
-        string = r'\include "layout.ly"'
-        literal = abjad.LilyPondLiteral(string, site="opening")
-        abjad.attach(literal, include, tag=tag)
-        container = abjad.Container([include, score], simultaneous=True, tag=tag)
-        literal = abjad.LilyPondLiteral("", site="absolute_before")
-        abjad.attach(literal, container, tag=None)
-        literal = abjad.LilyPondLiteral("", site="closing")
-        abjad.attach(literal, container, tag=None)
-        lilypond_file["score"].items[:] = [container]
-        lilypond_file["score"].items.append("")
-    return lilypond_file
 
 
 def _memento_to_indicator(dictionary, memento):
@@ -2805,11 +2723,58 @@ def color_repeat_pitch_classes(score):
             abjad.attach(literal, leaf, tag=tag)
 
 
+def reapply(commands, manifests, previous_persist, voice_names):
+    previous_persistent_indicators = previous_persist.get("persistent_indicators", {})
+    runtime = {
+        "already_reapplied_contexts": {"Score"},
+        "manifests": manifests,
+        "previous_persistent_indicators": previous_persistent_indicators,
+    }
+    for voice_name in [_ for _ in voice_names if "Music" in _]:
+        voice = commands.voice(voice_name)
+        reapply_persistent_indicators_function(voice, runtime=runtime)
+
+
+def reapply_persistent_indicators(
+    *, selector=lambda _: _select.leaves(_)
+) -> _commands.GenericCommand:
+    command = _commands.GenericCommand(
+        function=reapply_persistent_indicators_function,
+        name="reapply_persistent_indicators",
+        selector=selector,
+    )
+    return command
+
+
+def reapply_persistent_indicators_function(argument, *, runtime=None):
+    already_reapplied_contexts = runtime["already_reapplied_contexts"]
+    manifests = runtime["manifests"]
+    previous_persistent_indicators = runtime["previous_persistent_indicators"]
+    leaf = abjad.select.leaf(argument, 0)
+    parentage = abjad.get.parentage(leaf)
+    contexts = []
+    score = None
+    for component in parentage:
+        if isinstance(component, abjad.Score):
+            score = component
+        elif isinstance(component, abjad.Context):
+            contexts.append(component)
+    assert isinstance(score, abjad.Score)
+    for context in contexts:
+        _reapply_persistent_indicators(
+            already_reapplied_contexts,
+            manifests,
+            previous_persistent_indicators,
+            score,
+            do_not_iterate=context,
+        )
+
+
 def scope(cache):
     return DynamicScope(cache)
 
 
-def interpret_section(
+def section(
     score,
     manifests,
     time_signatures,
@@ -2832,7 +2797,6 @@ def interpret_section(
     comment_measure_numbers=False,
     deactivate=None,
     do_not_require_short_instrument_names=False,
-    empty_accumulator=False,
     error_on_not_yet_pitched=False,
     fermata_extra_offset_y=2.5,
     fermata_measure_empty_overrides=(),
@@ -2906,27 +2870,26 @@ def interpret_section(
         first_measure_number,
         global_skips,
     )
-    if empty_accumulator is False:
-        with abjad.Timer() as timer:
-            cache = None
-            cache, command_count = _call_all_commands(
-                allow_empty_selections=allow_empty_selections,
-                already_reapplied_contexts=already_reapplied_contexts,
-                always_make_global_rests=always_make_global_rests,
-                attach_rhythm_annotation_spanners=attach_rhythm_annotation_spanners,
-                cache=cache,
-                commands=commands,
-                manifests=manifests,
-                measure_count=measure_count,
-                offset_to_measure_number=offset_to_measure_number,
-                previous_persist=previous_persist,
-                score=score,
-                time_signatures=time_signatures,
-                voice_metadata=voice_metadata,
-            )
-        _print_timing(
-            "All commands", timer, print_timing=print_timing, suffix=command_count
+    with abjad.Timer() as timer:
+        cache = None
+        cache, command_count = _call_all_commands(
+            allow_empty_selections=allow_empty_selections,
+            already_reapplied_contexts=already_reapplied_contexts,
+            always_make_global_rests=always_make_global_rests,
+            attach_rhythm_annotation_spanners=attach_rhythm_annotation_spanners,
+            cache=cache,
+            commands=commands,
+            manifests=manifests,
+            measure_count=measure_count,
+            offset_to_measure_number=offset_to_measure_number,
+            previous_persist=previous_persist,
+            score=score,
+            time_signatures=time_signatures,
+            voice_metadata=voice_metadata,
         )
+    _print_timing(
+        "All commands", timer, print_timing=print_timing, suffix=command_count
+    )
     _extend_beams(score)
     _attach_sounds_during(score)
     with abjad.Timer() as timer:
@@ -3081,91 +3044,7 @@ def interpret_section(
     return metadata, persist
 
 
-def make_lilypond_file(
-    score,
-    clock_time_extra_offset=None,
-    include_layout_ly=False,
-    includes=None,
-    local_measure_number_extra_offset=None,
-    measure_number_extra_offset=None,
-    preamble=None,
-    spacing_extra_offset=None,
-    stage_number_extra_offset=None,
-):
-    assert isinstance(score, abjad.Score), repr(score)
-    if clock_time_extra_offset not in (False, None):
-        assert isinstance(clock_time_extra_offset, tuple)
-        assert len(clock_time_extra_offset) == 2
-    includes = list(includes or [])
-    includes = [rf'\include "{_}"' for _ in includes]
-    preamble = list(preamble or [])
-    if preamble:
-        assert all(isinstance(_, str) for _ in preamble), repr(preamble)
-    strings = _get_global_spanner_extra_offsets(
-        clock_time_extra_offset,
-        local_measure_number_extra_offset,
-        measure_number_extra_offset,
-        spacing_extra_offset,
-        stage_number_extra_offset,
-    )
-    preamble.extend(strings)
-    lilypond_file = _make_lilypond_file(
-        include_layout_ly,
-        includes,
-        preamble,
-        score,
-    )
-    return lilypond_file
-
-
-def reapply(commands, manifests, previous_persist, voice_names):
-    previous_persistent_indicators = previous_persist.get("persistent_indicators", {})
-    runtime = {
-        "already_reapplied_contexts": {"Score"},
-        "manifests": manifests,
-        "previous_persistent_indicators": previous_persistent_indicators,
-    }
-    for voice_name in [_ for _ in voice_names if "Music" in _]:
-        voice = commands.voice(voice_name)
-        reapply_persistent_indicators_function(voice, runtime=runtime)
-
-
-def reapply_persistent_indicators(
-    *, selector=lambda _: _select.leaves(_)
-) -> _commands.GenericCommand:
-    command = _commands.GenericCommand(
-        function=reapply_persistent_indicators_function,
-        name="reapply_persistent_indicators",
-        selector=selector,
-    )
-    return command
-
-
-def reapply_persistent_indicators_function(argument, *, runtime=None):
-    already_reapplied_contexts = runtime["already_reapplied_contexts"]
-    manifests = runtime["manifests"]
-    previous_persistent_indicators = runtime["previous_persistent_indicators"]
-    leaf = abjad.select.leaf(argument, 0)
-    parentage = abjad.get.parentage(leaf)
-    contexts = []
-    score = None
-    for component in parentage:
-        if isinstance(component, abjad.Score):
-            score = component
-        elif isinstance(component, abjad.Context):
-            contexts.append(component)
-    assert isinstance(score, abjad.Score)
-    for context in contexts:
-        _reapply_persistent_indicators(
-            already_reapplied_contexts,
-            manifests,
-            previous_persistent_indicators,
-            score,
-            do_not_iterate=context,
-        )
-
-
-def score_interpretation_defaults():
+def section_defaults():
     return {
         "add_container_identifiers": True,
         "append_anchor_skip": True,

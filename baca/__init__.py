@@ -24,14 +24,13 @@ from .indicators import *
 from .interpret import (
     append_anchor_note,
     append_anchor_note_function,
-    make_lilypond_file,
     reapply,
     reapply_persistent_indicators,
     scope,
-    score_interpretation_defaults,
     update_voice_metadata,
 )
 from .layout import *
+from .lilypond import file, make_lilypond_file
 from .memento import *
 from .overrides import *
 from .parts import Part, PartAssignment
