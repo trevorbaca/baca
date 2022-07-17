@@ -13,7 +13,7 @@ from . import tags as _tags
 from . import typings
 
 
-def _call_override_command(
+def _do_override_command(
     leaves,
     grob,
     attribute,
@@ -127,7 +127,7 @@ class OverrideCommand(_command.Command):
             final_tag = final_tag.append(function_name)
         else:
             final_tag = function_name
-        _call_override_command(
+        _do_override_command(
             leaves,
             self.grob,
             self.attribute,
@@ -442,7 +442,7 @@ def bar_line_x_extent(
     final_tag = _tags.function_name(_frame(), n=2)
     for tag in tags or []:
         final_tag = final_tag.append(tag)
-    _call_override_command(
+    _do_override_command(
         leaves,
         "BarLine",
         "X_extent",
@@ -556,7 +556,7 @@ def beam_positions_function(
     final_tag = _tags.function_name(_frame(), n=2)
     for tag in tags or []:
         final_tag = final_tag.append(tag)
-    _call_override_command(
+    _do_override_command(
         leaves,
         "Beam",
         "positions",
@@ -627,7 +627,7 @@ def clef_extra_offset_function(
     final_tag = _tags.function_name(_frame(), n=2)
     for tag in tags or []:
         final_tag = final_tag.append(tag)
-    _call_override_command(
+    _do_override_command(
         leaves,
         "Clef",
         "extra_offset",
@@ -733,7 +733,7 @@ def clef_x_extent_false_function(
     final_tag = _tags.function_name(_frame(), n=2)
     for tag in tags or []:
         final_tag = final_tag.append(tag)
-    _call_override_command(
+    _do_override_command(
         leaves,
         "Clef",
         "X_extent",
@@ -1834,7 +1834,7 @@ def mmrest_text_extra_offset_function(
     final_tag = _tags.function_name(_frame(), n=2)
     for tag in tags or []:
         final_tag = final_tag.append(tag)
-    _call_override_command(
+    _do_override_command(
         leaves,
         "MultiMeasureRestText",
         "extra_offset",
@@ -2515,7 +2515,7 @@ def note_head_style_harmonic_function(
     final_tag = _tags.function_name(_frame(), n=2)
     for tag in tags or []:
         final_tag = final_tag.append(tag)
-    _call_override_command(
+    _do_override_command(
         leaves,
         "NoteHead",
         "style",
@@ -2623,7 +2623,7 @@ def ottava_bracket_staff_padding_function(
     final_tag = _tags.function_name(_frame(), n=2)
     for tag in tags or []:
         final_tag = final_tag.append(tag)
-    _call_override_command(
+    _do_override_command(
         leaves,
         "OttavaBracket",
         "staff_padding",
@@ -2669,7 +2669,7 @@ def rehearsal_mark_down_function(
     final_tag = _tags.function_name(_frame(), n=2)
     for tag in tags or []:
         final_tag = final_tag.append(tag)
-    _call_override_command(
+    _do_override_command(
         leaves,
         "RehearsalMark",
         "direction",
@@ -2736,7 +2736,7 @@ def rehearsal_mark_padding_function(
     final_tag = _tags.function_name(_frame(), n=2)
     for tag in tags or []:
         final_tag = final_tag.append(tag)
-    _call_override_command(
+    _do_override_command(
         leaves,
         "RehearsalMark",
         "padding",
@@ -2784,7 +2784,7 @@ def rehearsal_mark_self_alignment_x_function(
     final_tag = _tags.function_name(_frame(), n=2)
     for tag in tags or []:
         final_tag = final_tag.append(tag)
-    _call_override_command(
+    _do_override_command(
         leaves,
         "RehearsalMark",
         "self_alignment_X",
@@ -2943,7 +2943,7 @@ def repeat_tie_extra_offset_function(
     final_tag = _tags.function_name(_frame(), n=2)
     for tag in tags or []:
         final_tag = final_tag.append(tag)
-    _call_override_command(
+    _do_override_command(
         leaves,
         "RepeatTie",
         "extra_offset",
@@ -4969,7 +4969,7 @@ def text_script_extra_offset_function(
     blocklist = []
     if allow_mmrests is not True:
         blocklist.append(abjad.MultimeasureRest)
-    _call_override_command(
+    _do_override_command(
         leaves,
         "TextScript",
         "extra_offset",
@@ -5622,7 +5622,7 @@ def text_spanner_left_padding_function(
     final_tag = _tags.function_name(_frame(), n=2)
     for tag in tags or []:
         final_tag = final_tag.append(tag)
-    _call_override_command(
+    _do_override_command(
         leaves,
         "TextSpanner",
         "bound_details__left__padding",
@@ -5769,7 +5769,7 @@ def text_spanner_staff_padding_function(
     final_tag = _tags.function_name(_frame(), n=2)
     for tag in tags or []:
         final_tag = final_tag.append(tag)
-    _call_override_command(
+    _do_override_command(
         leaves,
         "TextSpanner",
         "staff_padding",
@@ -5841,7 +5841,7 @@ def text_spanner_y_offset_function(
     final_tag = _tags.function_name(_frame(), n=2)
     for tag in tags or []:
         final_tag = final_tag.append(tag)
-    _call_override_command(
+    _do_override_command(
         leaves,
         "TextSpanner",
         "Y_offset",
@@ -6567,7 +6567,7 @@ def tuplet_bracket_staff_padding_function(
     final_tag = _tags.function_name(_frame(), n=2)
     for tag in tags or []:
         final_tag = final_tag.append(tag)
-    _call_override_command(
+    _do_override_command(
         leaves,
         "TupletBracket",
         "staff_padding",
