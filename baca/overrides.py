@@ -4374,6 +4374,32 @@ def stem_down(
     )
 
 
+def stem_down_function(
+    argument,
+    *,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _do_override_command(
+        leaves,
+        "Stem",
+        "direction",
+        abjad.DOWN,
+        first_tag,
+        final_tag,
+    )
+
+
 def stem_extra_offset(
     pair: tuple[int | float, int | float],
     selector=lambda _: abjad.select.leaf(_, 0),
@@ -4521,6 +4547,32 @@ def stem_up(
         grob="Stem",
         selector=selector,
         tags=[_tags.function_name(_frame())],
+    )
+
+
+def stem_up_function(
+    argument,
+    *,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _do_override_command(
+        leaves,
+        "Stem",
+        "direction",
+        abjad.UP,
+        first_tag,
+        final_tag,
     )
 
 
@@ -5210,6 +5262,42 @@ def text_script_padding(
         grob="TextScript",
         selector=selector,
         tags=[_tags.function_name(_frame())],
+    )
+
+
+def text_script_padding_function(
+    argument,
+    n: int | float,
+    *,
+    allow_mmrests: bool = False,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    blocklist = []
+    if allow_mmrests is not True:
+        blocklist.append(abjad.MultimeasureRest)
+    _do_override_command(
+        leaves,
+        "TextScript",
+        "padding",
+        str(n),
+        first_tag,
+        final_tag,
+        # after=after,
+        # allowlist=None,
+        blocklist=tuple(blocklist),
+        # context=context,
+        # deactivate=False,
     )
 
 

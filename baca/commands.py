@@ -10928,6 +10928,24 @@ def tenuto(
     )
 
 
+def tenuto_function(
+    argument,
+    *,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    # tag = _tags.function_name(_frame())
+    tag = abjad.Tag("baca.tenuto()")
+    for tag_ in tags or []:
+        tag = tag.append(tag_)
+    for leaf in abjad.iterate.leaves(argument):
+        indicator = abjad.Articulation("tenuto")
+        abjad.attach(
+            indicator,
+            leaf,
+            tag=tag,
+        )
+
+
 def triple_staccato(
     selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
