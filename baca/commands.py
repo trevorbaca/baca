@@ -744,167 +744,205 @@ class BCPCommand(_command.Command):
             return False
         if self.selector:
             argument = self.selector(argument)
-        bcps_ = list(self.bcps)
-        bcps_ = self.helper(bcps_, argument)
-        bcps = abjad.CyclicTuple(bcps_)
-        lts = _select.lts(argument)
-        add_right_text_to_me = None
-        if not self.final_spanner:
-            rest_count, nonrest_count = 0, 0
-            for lt in reversed(lts):
-                if _is_rest(lt.head):
-                    rest_count += 1
-                else:
-                    if 0 < rest_count and nonrest_count == 0:
-                        add_right_text_to_me = lt.head
-                        break
-                    if 0 < nonrest_count and rest_count == 0:
-                        add_right_text_to_me = lt.head
-                        break
-                    nonrest_count += 1
-        if self.final_spanner and not _is_rest(lts[-1]) and len(lts[-1]) == 1:
-            next_leaf_after_argument = abjad.get.leaf(lts[-1][-1], 1)
-            if next_leaf_after_argument is None:
-                message = "can not attach final spanner:"
-                message += " argument includes end of score."
-                raise Exception(message)
-        previous_bcp = None
-        i = 0
-        for lt in lts:
-            stop_text_span = abjad.StopTextSpan(command=self.stop_command)
-            if not self.final_spanner and lt is lts[-1] and not _is_rest(lt.head):
-                abjad.attach(
-                    stop_text_span,
-                    lt.head,
-                    tag=self.tag.append(_tags.function_name(_frame(), self, n=1)),
-                )
-                break
-            previous_leaf = abjad.get.leaf(lt.head, -1)
-            next_leaf = abjad.get.leaf(lt.head, 1)
-            if _is_rest(lt.head) and (_is_rest(previous_leaf) or previous_leaf is None):
-                continue
-            if (
-                isinstance(lt.head, abjad.Note)
-                and _is_rest(previous_leaf)
-                and previous_bcp is not None
-            ):
-                numerator, denominator = previous_bcp
+        _do_bcp_command(
+            argument,
+            self.bcps,
+            bow_change_tweaks=self.bow_change_tweaks,
+            helper=self.helper,
+            final_spanner=self.final_spanner,
+            tag=self.tag,
+            tweaks=self.tweaks,
+        )
+        return False
+
+
+def _do_bcp_command(
+    argument,
+    bcps,
+    *,
+    bow_change_tweaks=None,
+    helper: typing.Callable = lambda x, y: x,
+    final_spanner=None,
+    tag=None,
+    tweaks=None,
+):
+    if tag is None:
+        tag = abjad.Tag()
+    # bcps_ = list(self.bcps)
+    bcps_ = list(bcps)
+    # bcps_ = self.helper(bcps_, argument)
+    bcps_ = helper(bcps_, argument)
+    bcps = abjad.CyclicTuple(bcps_)
+    lts = _select.lts(argument)
+    add_right_text_to_me = None
+    # if not self.final_spanner:
+    if not final_spanner:
+        rest_count, nonrest_count = 0, 0
+        for lt in reversed(lts):
+            if _is_rest(lt.head):
+                rest_count += 1
             else:
-                bcp = bcps[i]
-                numerator, denominator = bcp
-                i += 1
-                next_bcp = bcps[i]
-            left_text = r"- \baca-bcp-spanner-left-text"
-            left_text += rf" #{numerator} #{denominator}"
-            if lt is lts[-1]:
-                if self.final_spanner:
-                    style = "solid-line-with-arrow"
-                else:
-                    style = "invisible-line"
-            elif not _is_rest(lt.head):
+                if 0 < rest_count and nonrest_count == 0:
+                    add_right_text_to_me = lt.head
+                    break
+                if 0 < nonrest_count and rest_count == 0:
+                    add_right_text_to_me = lt.head
+                    break
+                nonrest_count += 1
+    # if self.final_spanner and not _is_rest(lts[-1]) and len(lts[-1]) == 1:
+    if final_spanner and not _is_rest(lts[-1]) and len(lts[-1]) == 1:
+        next_leaf_after_argument = abjad.get.leaf(lts[-1][-1], 1)
+        if next_leaf_after_argument is None:
+            message = "can not attach final spanner:"
+            message += " argument includes end of score."
+            raise Exception(message)
+    previous_bcp = None
+    i = 0
+    for lt in lts:
+        stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanBCP")
+        # if not self.final_spanner and lt is lts[-1] and not _is_rest(lt.head):
+        if not final_spanner and lt is lts[-1] and not _is_rest(lt.head):
+            abjad.attach(
+                stop_text_span,
+                lt.head,
+                # tag=self.tag.append(_tags.function_name(_frame(), self, n=1)),
+                tag=tag.append(abjad.Tag("baca.bcps(1)")),
+            )
+            break
+        previous_leaf = abjad.get.leaf(lt.head, -1)
+        next_leaf = abjad.get.leaf(lt.head, 1)
+        if _is_rest(lt.head) and (_is_rest(previous_leaf) or previous_leaf is None):
+            continue
+        if (
+            isinstance(lt.head, abjad.Note)
+            and _is_rest(previous_leaf)
+            and previous_bcp is not None
+        ):
+            numerator, denominator = previous_bcp
+        else:
+            bcp = bcps[i]
+            numerator, denominator = bcp
+            i += 1
+            next_bcp = bcps[i]
+        left_text = r"- \baca-bcp-spanner-left-text"
+        left_text += rf" #{numerator} #{denominator}"
+        if lt is lts[-1]:
+            # if self.final_spanner:
+            if final_spanner:
                 style = "solid-line-with-arrow"
             else:
                 style = "invisible-line"
-            right_text = None
-            if lt.head is add_right_text_to_me:
-                numerator, denominator = next_bcp
-                right_text = r"- \baca-bcp-spanner-right-text"
-                right_text += rf" #{numerator} #{denominator}"
-            start_text_span = abjad.StartTextSpan(
-                command=self.start_command,
-                left_text=left_text,
-                right_text=right_text,
-                style=style,
+        elif not _is_rest(lt.head):
+            style = "solid-line-with-arrow"
+        else:
+            style = "invisible-line"
+        right_text = None
+        if lt.head is add_right_text_to_me:
+            numerator, denominator = next_bcp
+            right_text = r"- \baca-bcp-spanner-right-text"
+            right_text += rf" #{numerator} #{denominator}"
+        start_text_span = abjad.StartTextSpan(
+            command=r"\bacaStartTextSpanBCP",
+            left_text=left_text,
+            right_text=right_text,
+            style=style,
+        )
+        # if self.tweaks:
+        if tweaks:
+            # start_text_span = _tweaks.bundle_tweaks(start_text_span, self.tweaks)
+            start_text_span = _tweaks.bundle_tweaks(start_text_span, tweaks)
+        if _is_rest(lt.head) and (_is_rest(next_leaf) or next_leaf is None):
+            pass
+        else:
+            abjad.attach(
+                start_text_span,
+                lt.head,
+                # tag=self.tag.append(_tags.function_name(_frame(), self, n=2)),
+                tag=tag.append(abjad.Tag("baca.bcps(2)")),
             )
-            if self.tweaks:
-                start_text_span = _tweaks.bundle_tweaks(start_text_span, self.tweaks)
-            if _is_rest(lt.head) and (_is_rest(next_leaf) or next_leaf is None):
-                pass
-            else:
+        if 0 < i - 1:
+            abjad.attach(
+                stop_text_span,
+                lt.head,
+                # tag=self.tag.append(_tags.function_name(_frame(), self, n=3)),
+                tag=tag.append(abjad.Tag("baca.bcps(3)")),
+            )
+        # if lt is lts[-1] and self.final_spanner:
+        if lt is lts[-1] and final_spanner:
+            abjad.attach(
+                stop_text_span,
+                next_leaf_after_argument,
+                # tag=self.tag.append(_tags.function_name(_frame(), self, n=4)),
+                tag=tag.append(abjad.Tag("baca.bcps(4)")),
+            )
+        bcp_fraction = abjad.Fraction(*bcp)
+        next_bcp_fraction = abjad.Fraction(*bcps[i])
+        if _is_rest(lt.head):
+            pass
+        elif _is_rest(previous_leaf) or previous_bcp is None:
+            if bcp_fraction > next_bcp_fraction:
+                articulation = abjad.Articulation("upbow")
+                # if self.bow_change_tweaks:
+                if bow_change_tweaks:
+                    articulation = _tweaks.bundle_tweaks(
+                        # articulation, self.bow_change_tweaks
+                        articulation,
+                        bow_change_tweaks,
+                    )
                 abjad.attach(
-                    start_text_span,
+                    articulation,
                     lt.head,
-                    tag=self.tag.append(_tags.function_name(_frame(), self, n=2)),
+                    # tag=self.tag.append(_tags.function_name(_frame(), self, n=5)),
+                    tag=tag.append(abjad.Tag("baca.bcps(5)")),
                 )
-            if 0 < i - 1:
+            elif bcp_fraction < next_bcp_fraction:
+                articulation = abjad.Articulation("downbow")
+                # if self.bow_change_tweaks:
+                if bow_change_tweaks:
+                    articulation = _tweaks.bundle_tweaks(
+                        # articulation, self.bow_change_tweaks
+                        articulation,
+                        bow_change_tweaks,
+                    )
                 abjad.attach(
-                    stop_text_span,
+                    articulation,
                     lt.head,
-                    tag=self.tag.append(_tags.function_name(_frame(), self, n=3)),
+                    # tag=self.tag.append(_tags.function_name(_frame(), self, n=6)),
+                    tag=tag.append(abjad.Tag("baca.bcps(6)")),
                 )
-            if lt is lts[-1] and self.final_spanner:
+        else:
+            previous_bcp_fraction = abjad.Fraction(*previous_bcp)
+            if previous_bcp_fraction < bcp_fraction > next_bcp_fraction:
+                articulation = abjad.Articulation("upbow")
+                # if self.bow_change_tweaks:
+                if bow_change_tweaks:
+                    articulation = _tweaks.bundle_tweaks(
+                        # articulation, self.bow_change_tweaks
+                        articulation,
+                        bow_change_tweaks,
+                    )
                 abjad.attach(
-                    stop_text_span,
-                    next_leaf_after_argument,
-                    tag=self.tag.append(_tags.function_name(_frame(), self, n=4)),
+                    articulation,
+                    lt.head,
+                    # tag=self.tag.append(_tags.function_name(_frame(), self, n=7)),
+                    tag=tag.append(abjad.Tag("baca.bcps(7)")),
                 )
-            bcp_fraction = abjad.Fraction(*bcp)
-            next_bcp_fraction = abjad.Fraction(*bcps[i])
-            if _is_rest(lt.head):
-                pass
-            elif _is_rest(previous_leaf) or previous_bcp is None:
-                if bcp_fraction > next_bcp_fraction:
-                    articulation = abjad.Articulation("upbow")
-                    if self.bow_change_tweaks:
-                        articulation = _tweaks.bundle_tweaks(
-                            articulation, self.bow_change_tweaks
-                        )
-                    abjad.attach(
+            elif previous_bcp_fraction > bcp_fraction < next_bcp_fraction:
+                articulation = abjad.Articulation("downbow")
+                # if self.bow_change_tweaks:
+                if bow_change_tweaks:
+                    articulation = _tweaks.bundle_tweaks(
+                        # articulation, self.bow_change_tweaks
                         articulation,
-                        lt.head,
-                        tag=self.tag.append(_tags.function_name(_frame(), self, n=5)),
+                        bow_change_tweaks,
                     )
-                elif bcp_fraction < next_bcp_fraction:
-                    articulation = abjad.Articulation("downbow")
-                    if self.bow_change_tweaks:
-                        articulation = _tweaks.bundle_tweaks(
-                            articulation, self.bow_change_tweaks
-                        )
-                    abjad.attach(
-                        articulation,
-                        lt.head,
-                        tag=self.tag.append(_tags.function_name(_frame(), self, n=6)),
-                    )
-            else:
-                previous_bcp_fraction = abjad.Fraction(*previous_bcp)
-                if previous_bcp_fraction < bcp_fraction > next_bcp_fraction:
-                    articulation = abjad.Articulation("upbow")
-                    if self.bow_change_tweaks:
-                        articulation = _tweaks.bundle_tweaks(
-                            articulation, self.bow_change_tweaks
-                        )
-                    abjad.attach(
-                        articulation,
-                        lt.head,
-                        tag=self.tag.append(_tags.function_name(_frame(), self, n=7)),
-                    )
-                elif previous_bcp_fraction > bcp_fraction < next_bcp_fraction:
-                    articulation = abjad.Articulation("downbow")
-                    if self.bow_change_tweaks:
-                        articulation = _tweaks.bundle_tweaks(
-                            articulation, self.bow_change_tweaks
-                        )
-                    abjad.attach(
-                        articulation,
-                        lt.head,
-                        tag=self.tag.append(_tags.function_name(_frame(), self, n=8)),
-                    )
-            previous_bcp = bcp
-        return False
-
-    @property
-    def start_command(self) -> str:
-        r"""
-        Gets ``"\bacaStartTextSpanBCP"``.
-        """
-        return r"\bacaStartTextSpanBCP"
-
-    @property
-    def stop_command(self) -> str:
-        r"""
-        Gets ``"\bacaStopTextSpanBCP"``.
-        """
-        return r"\bacaStopTextSpanBCP"
+                abjad.attach(
+                    articulation,
+                    lt.head,
+                    # tag=self.tag.append(_tags.function_name(_frame(), self, n=8)),
+                    tag=tag.append(abjad.Tag("baca.bcps(8)")),
+                )
+        previous_bcp = bcp
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -11524,7 +11562,7 @@ def bcps(
 
     """
     if final_spanner is not None:
-        final_spanner = bool(final_spanner)
+        assert isinstance(final_spanner, bool), repr(final_spanner)
     return BCPCommand(
         bcps=bcps,
         bow_change_tweaks=tuple(bow_change_tweaks),
