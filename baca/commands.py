@@ -11574,6 +11574,26 @@ def bcps(
     )
 
 
+def bcps_function(
+    argument,
+    bcps,
+    *tweaks: _typings.IndexedTweak,
+    bow_change_tweaks: typing.Sequence[_typings.IndexedTweak] = (),
+    final_spanner: bool = False,
+    helper: typing.Callable = lambda x, y: x,
+    tag=abjad.Tag("baca.bcps()"),
+) -> None:
+    _do_bcp_command(
+        argument,
+        bcps,
+        bow_change_tweaks=bow_change_tweaks,
+        helper=helper,
+        final_spanner=final_spanner,
+        tag=tag,
+        tweaks=tweaks,
+    )
+
+
 def close_volta(skip, first_measure_number, site: str = "before"):
     assert isinstance(first_measure_number, int), repr(first_measure_number)
     assert isinstance(site, str), repr(site)
