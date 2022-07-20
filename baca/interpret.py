@@ -2128,7 +2128,7 @@ def _scope_to_leaf_selections(score, cache, measure_count, scope):
     for scope in scopes:
         leaves = []
         try:
-            leaves_by_measure_number = cache[scope.voice_name]
+            measure_number_to_leaves = cache[scope.voice_name]
         except KeyError:
             print(f"Unknown voice {scope.voice_name} ...\n")
             raise
@@ -2142,7 +2142,7 @@ def _scope_to_leaf_selections(score, cache, measure_count, scope):
         if stop < 0:
             stop = measure_count - abs(stop) + 1
         for measure_number in range(start, stop):
-            leaves_ = leaves_by_measure_number.get(measure_number, [])
+            leaves_ = measure_number_to_leaves.get(measure_number, [])
             leaves.extend(leaves_)
         leaf_selections.append(leaves)
     return leaf_selections, cache
@@ -2480,19 +2480,19 @@ def _whitespace_leaves(score):
 
 
 class CacheGetItemWrapper:
-    def __init__(self, cache, voice_abbreviations):
-        self.cache = cache
+    def __init__(self, voice_name_to_leaves_by_measure, voice_abbreviations):
+        self.voice_name_to_leaves_by_measure = voice_name_to_leaves_by_measure
         self.abbreviation_to_voice_name = {}
         for abbreviation, voice_name in voice_abbreviations.items():
             self.abbreviation_to_voice_name[abbreviation] = voice_name
 
     def __getitem__(self, argument):
         try:
-            result = self.cache[argument]
+            measure_number_to_leaves = self.voice_name_to_leaves_by_measure[argument]
         except KeyError:
             voice_name = self.abbreviation_to_voice_name[argument]
-            result = self.cache[voice_name]
-        return DictionaryGetItemWrapper(result)
+            measure_number_to_leaves = self.voice_name_to_leaves_by_measure[voice_name]
+        return DictionaryGetItemWrapper(measure_number_to_leaves)
 
     @staticmethod
     def _get_for_voice(result, voice, argument):
@@ -2536,14 +2536,20 @@ class CacheGetItemWrapper:
                     result.append(result_)
         return result
 
+    def rebuild(self):
+        cache = cache_leaves(
+            self._score, self._measure_count, self._voice_abbreviations
+        )
+        return cache
+
 
 class DictionaryGetItemWrapper:
-    def __init__(self, cache):
-        self.cache = cache
+    def __init__(self, measure_number_to_leaves):
+        self.measure_number_to_leaves = measure_number_to_leaves
 
     def __getitem__(self, argument):
         if isinstance(argument, int):
-            result = self.cache[argument]
+            result = self.measure_number_to_leaves[argument]
         else:
             result = []
             assert isinstance(argument, tuple), repr(argument)
@@ -2552,7 +2558,7 @@ class DictionaryGetItemWrapper:
             assert 0 < stop, repr(stop)
             for number in range(start, stop + 1):
                 try:
-                    leaves = self.cache[number]
+                    leaves = self.measure_number_to_leaves[number]
                 except KeyError:
                     leaves = []
                 result.extend(leaves)
@@ -2560,7 +2566,7 @@ class DictionaryGetItemWrapper:
 
     def leaves(self):
         result = []
-        for measure_number, leaves in self.cache.items():
+        for measure_number, leaves in self.measure_number_to_leaves.items():
             result.extend(leaves)
         return result
 
@@ -2680,21 +2686,28 @@ def cache_leaves(score, measure_count, voice_abbreviations=None):
         measure_number = measure_index + 1
         measure_timespan = _get_measure_timespan(score, measure_number)
         measure_timespans.append(measure_timespan)
-    cache = {}
+    voice_name_to_leaves_by_measure = {}
     for leaf in abjad.select.leaves(score):
         parentage = abjad.get.parentage(leaf)
         context = parentage.get(abjad.Context)
-        leaves_by_measure_number = cache.setdefault(context.name, {})
+        measure_number_to_leaves = voice_name_to_leaves_by_measure.setdefault(
+            context.name, {}
+        )
         leaf_timespan = abjad.get.timespan(leaf)
         # TODO: replace loop with bisection:
         for i, measure_timespan in enumerate(measure_timespans):
             measure_number = i + 1
             if leaf_timespan.starts_during_timespan(measure_timespan):
-                cached_leaves = leaves_by_measure_number.setdefault(measure_number, [])
+                cached_leaves = measure_number_to_leaves.setdefault(measure_number, [])
                 cached_leaves.append(leaf)
     if voice_abbreviations:
-        cache = CacheGetItemWrapper(cache, voice_abbreviations)
-    return cache
+        voice_name_to_leaves_by_measure = CacheGetItemWrapper(
+            voice_name_to_leaves_by_measure, voice_abbreviations
+        )
+        voice_name_to_leaves_by_measure._score = score
+        voice_name_to_leaves_by_measure._measure_count = measure_count
+        voice_name_to_leaves_by_measure._voice_abbreviations = voice_abbreviations
+    return voice_name_to_leaves_by_measure
 
 
 def color_out_of_range_pitches(score):

@@ -7727,6 +7727,24 @@ def accent(
     )
 
 
+def accent_function(
+    argument,
+    *,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    # tag = _tags.function_name(_frame())
+    tag = abjad.Tag("baca.accent()")
+    for tag_ in tags or []:
+        tag = tag.append(tag_)
+    for leaf in abjad.iterate.leaves(argument):
+        indicator = abjad.Articulation("accent")
+        abjad.attach(
+            indicator,
+            leaf,
+            tag=tag,
+        )
+
+
 def _alternate_bow_strokes_preparation(*tweaks, downbow_first, full):
     indicators: list[abjad.Articulation | abjad.Bundle]
     if downbow_first:
@@ -10491,17 +10509,18 @@ def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.
 
 
 def staff_lines_function(argument, n: int) -> None:
+    leaf = abjad.select.leaf(argument, 0)
     assert isinstance(n, int), repr(n)
     bar_extent = _indicators.BarExtent(n)
     _attach_persistent_indicator(
-        argument,
+        leaf,
         [bar_extent],
         manifests={},
         tag=abjad.Tag("baca.staff_lines(1)").append(_tags.NOT_PARTS),
     )
     staff_lines = _indicators.StaffLines(n)
     _attach_persistent_indicator(
-        argument,
+        leaf,
         [staff_lines],
         manifests={},
         tag=abjad.Tag("baca.staff_lines(2)"),
@@ -10596,7 +10615,7 @@ def stem_tremolo(
 
 
 def stem_tremolo_function(
-    leaf: abjad.Leaf,
+    argument,
     *,
     tremolo_flags: int = 32,
     tags: list[abjad.Tag] = None,
@@ -10606,11 +10625,12 @@ def stem_tremolo_function(
     tag = abjad.Tag("baca.stem_tremolo()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
-    abjad.attach(
-        indicator,
-        leaf,
-        tag=tag,
-    )
+    for leaf in abjad.select.leaves(argument):
+        abjad.attach(
+            indicator,
+            leaf,
+            tag=tag,
+        )
 
 
 def stop_on_string(
