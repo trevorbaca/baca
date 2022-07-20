@@ -760,6 +760,33 @@ def dls_padding(
     )
 
 
+def dls_padding_function(
+    argument,
+    n: int | float,
+    *,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _do_override_command(
+        leaves,
+        "DynamicLineSpanner",
+        "padding",
+        n,
+        first_tag,
+        final_tag,
+    )
+
+
 def dls_staff_padding(
     n: int | float,
     selector=lambda _: _select.leaves(_),
@@ -6562,6 +6589,33 @@ def tuplet_bracket_padding(
         selector=selector,
         tags=[_tags.function_name(_frame())],
         value=n,
+    )
+
+
+def tuplet_bracket_padding_function(
+    argument,
+    n: int | float,
+    *,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _do_override_command(
+        leaves,
+        "TupletBracket",
+        "padding",
+        n,
+        first_tag,
+        final_tag,
     )
 
 
