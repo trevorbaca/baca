@@ -2599,6 +2599,12 @@ class DynamicScope:
     def pleaf(self, n):
         return _select.pleaf(self.argument, n, exclude=_enums.HIDDEN)
 
+    def pleaves(self):
+        return _select.pleaves(self.argument, exclude=_enums.HIDDEN)
+
+    def plts(self):
+        return _select.plts(self.argument, exclude=_enums.HIDDEN)
+
     def rleak(self):
         return _select.rleak(self.argument)
 

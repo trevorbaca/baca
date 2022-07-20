@@ -90,6 +90,277 @@ def _coerce_pitches(pitches):
     return pitches
 
 
+def _do_bcp_command(
+    argument,
+    bcps,
+    *,
+    bow_change_tweaks=None,
+    helper: typing.Callable = lambda x, y: x,
+    final_spanner=None,
+    tag=None,
+    tweaks=None,
+):
+    if tag is None:
+        tag = abjad.Tag()
+    # bcps_ = list(self.bcps)
+    bcps_ = list(bcps)
+    # bcps_ = self.helper(bcps_, argument)
+    bcps_ = helper(bcps_, argument)
+    bcps = abjad.CyclicTuple(bcps_)
+    lts = _select.lts(argument)
+    add_right_text_to_me = None
+    # if not self.final_spanner:
+    if not final_spanner:
+        rest_count, nonrest_count = 0, 0
+        for lt in reversed(lts):
+            if _is_rest(lt.head):
+                rest_count += 1
+            else:
+                if 0 < rest_count and nonrest_count == 0:
+                    add_right_text_to_me = lt.head
+                    break
+                if 0 < nonrest_count and rest_count == 0:
+                    add_right_text_to_me = lt.head
+                    break
+                nonrest_count += 1
+    # if self.final_spanner and not _is_rest(lts[-1]) and len(lts[-1]) == 1:
+    if final_spanner and not _is_rest(lts[-1]) and len(lts[-1]) == 1:
+        next_leaf_after_argument = abjad.get.leaf(lts[-1][-1], 1)
+        if next_leaf_after_argument is None:
+            message = "can not attach final spanner:"
+            message += " argument includes end of score."
+            raise Exception(message)
+    previous_bcp = None
+    i = 0
+    for lt in lts:
+        stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanBCP")
+        # if not self.final_spanner and lt is lts[-1] and not _is_rest(lt.head):
+        if not final_spanner and lt is lts[-1] and not _is_rest(lt.head):
+            abjad.attach(
+                stop_text_span,
+                lt.head,
+                # tag=self.tag.append(_tags.function_name(_frame(), self, n=1)),
+                tag=tag.append(abjad.Tag("baca.bcps(1)")),
+            )
+            break
+        previous_leaf = abjad.get.leaf(lt.head, -1)
+        next_leaf = abjad.get.leaf(lt.head, 1)
+        if _is_rest(lt.head) and (_is_rest(previous_leaf) or previous_leaf is None):
+            continue
+        if (
+            isinstance(lt.head, abjad.Note)
+            and _is_rest(previous_leaf)
+            and previous_bcp is not None
+        ):
+            numerator, denominator = previous_bcp
+        else:
+            bcp = bcps[i]
+            numerator, denominator = bcp
+            i += 1
+            next_bcp = bcps[i]
+        left_text = r"- \baca-bcp-spanner-left-text"
+        left_text += rf" #{numerator} #{denominator}"
+        if lt is lts[-1]:
+            # if self.final_spanner:
+            if final_spanner:
+                style = "solid-line-with-arrow"
+            else:
+                style = "invisible-line"
+        elif not _is_rest(lt.head):
+            style = "solid-line-with-arrow"
+        else:
+            style = "invisible-line"
+        right_text = None
+        if lt.head is add_right_text_to_me:
+            numerator, denominator = next_bcp
+            right_text = r"- \baca-bcp-spanner-right-text"
+            right_text += rf" #{numerator} #{denominator}"
+        start_text_span = abjad.StartTextSpan(
+            command=r"\bacaStartTextSpanBCP",
+            left_text=left_text,
+            right_text=right_text,
+            style=style,
+        )
+        # if self.tweaks:
+        if tweaks:
+            # start_text_span = _tweaks.bundle_tweaks(start_text_span, self.tweaks)
+            start_text_span = _tweaks.bundle_tweaks(start_text_span, tweaks)
+        if _is_rest(lt.head) and (_is_rest(next_leaf) or next_leaf is None):
+            pass
+        else:
+            abjad.attach(
+                start_text_span,
+                lt.head,
+                # tag=self.tag.append(_tags.function_name(_frame(), self, n=2)),
+                tag=tag.append(abjad.Tag("baca.bcps(2)")),
+            )
+        if 0 < i - 1:
+            abjad.attach(
+                stop_text_span,
+                lt.head,
+                # tag=self.tag.append(_tags.function_name(_frame(), self, n=3)),
+                tag=tag.append(abjad.Tag("baca.bcps(3)")),
+            )
+        # if lt is lts[-1] and self.final_spanner:
+        if lt is lts[-1] and final_spanner:
+            abjad.attach(
+                stop_text_span,
+                next_leaf_after_argument,
+                # tag=self.tag.append(_tags.function_name(_frame(), self, n=4)),
+                tag=tag.append(abjad.Tag("baca.bcps(4)")),
+            )
+        bcp_fraction = abjad.Fraction(*bcp)
+        next_bcp_fraction = abjad.Fraction(*bcps[i])
+        if _is_rest(lt.head):
+            pass
+        elif _is_rest(previous_leaf) or previous_bcp is None:
+            if bcp_fraction > next_bcp_fraction:
+                articulation = abjad.Articulation("upbow")
+                # if self.bow_change_tweaks:
+                if bow_change_tweaks:
+                    articulation = _tweaks.bundle_tweaks(
+                        # articulation, self.bow_change_tweaks
+                        articulation,
+                        bow_change_tweaks,
+                    )
+                abjad.attach(
+                    articulation,
+                    lt.head,
+                    # tag=self.tag.append(_tags.function_name(_frame(), self, n=5)),
+                    tag=tag.append(abjad.Tag("baca.bcps(5)")),
+                )
+            elif bcp_fraction < next_bcp_fraction:
+                articulation = abjad.Articulation("downbow")
+                # if self.bow_change_tweaks:
+                if bow_change_tweaks:
+                    articulation = _tweaks.bundle_tweaks(
+                        # articulation, self.bow_change_tweaks
+                        articulation,
+                        bow_change_tweaks,
+                    )
+                abjad.attach(
+                    articulation,
+                    lt.head,
+                    # tag=self.tag.append(_tags.function_name(_frame(), self, n=6)),
+                    tag=tag.append(abjad.Tag("baca.bcps(6)")),
+                )
+        else:
+            previous_bcp_fraction = abjad.Fraction(*previous_bcp)
+            if previous_bcp_fraction < bcp_fraction > next_bcp_fraction:
+                articulation = abjad.Articulation("upbow")
+                # if self.bow_change_tweaks:
+                if bow_change_tweaks:
+                    articulation = _tweaks.bundle_tweaks(
+                        # articulation, self.bow_change_tweaks
+                        articulation,
+                        bow_change_tweaks,
+                    )
+                abjad.attach(
+                    articulation,
+                    lt.head,
+                    # tag=self.tag.append(_tags.function_name(_frame(), self, n=7)),
+                    tag=tag.append(abjad.Tag("baca.bcps(7)")),
+                )
+            elif previous_bcp_fraction > bcp_fraction < next_bcp_fraction:
+                articulation = abjad.Articulation("downbow")
+                # if self.bow_change_tweaks:
+                if bow_change_tweaks:
+                    articulation = _tweaks.bundle_tweaks(
+                        # articulation, self.bow_change_tweaks
+                        articulation,
+                        bow_change_tweaks,
+                    )
+                abjad.attach(
+                    articulation,
+                    lt.head,
+                    # tag=self.tag.append(_tags.function_name(_frame(), self, n=8)),
+                    tag=tag.append(abjad.Tag("baca.bcps(8)")),
+                )
+        previous_bcp = bcp
+
+
+def _do_cluster_command(
+    argument, widths, *, direction=abjad.UP, hide_flat_markup=False, start_pitch=None
+):
+    if not argument:
+        return False
+    leaf = abjad.select.leaf(argument, 0)
+    root = abjad.get.parentage(leaf).root
+    widths = abjad.CyclicTuple(widths)
+    with abjad.ForbidUpdate(component=root):
+        for i, plt in enumerate(_select.plts(argument)):
+            width = widths[i]
+            _make_cluster(
+                plt,
+                width,
+                direction=direction,
+                hide_flat_markup=hide_flat_markup,
+                start_pitch=start_pitch,
+            )
+    return True
+
+
+def _do_interpolate_register_command(argument, start_pitch, stop_pitch):
+    plts = _select.plts(argument)
+    length = len(plts)
+    for i, plt in enumerate(plts):
+        registration = _get_registration(start_pitch, stop_pitch, i, length)
+        for pleaf in plt:
+            if isinstance(pleaf, abjad.Note):
+                written_pitches = registration([pleaf.written_pitch])
+                pleaf.written_pitch = written_pitches[0]
+            elif isinstance(pleaf, abjad.Chord):
+                written_pitches = registration(pleaf.written_pitches)
+                pleaf.written_pitches = written_pitches
+            else:
+                raise TypeError(pleaf)
+            abjad.detach(_enums.NOT_YET_REGISTERED, pleaf)
+
+
+def _do_octave_displacement_command(argument, displacements):
+    displacements = abjad.CyclicTuple(displacements)
+    for i, plt in enumerate(_select.plts(argument)):
+        displacement = displacements[i]
+        interval = abjad.NumberedInterval(12 * displacement)
+        for pleaf in plt:
+            if isinstance(pleaf, abjad.Note):
+                pitch = pleaf.written_pitch
+                assert isinstance(pitch, abjad.NamedPitch)
+                pitch += interval
+                pleaf.written_pitch = pitch
+            elif isinstance(pleaf, abjad.Chord):
+                pitches = [_ + interval for _ in pleaf.written_pitches]
+                pleaf.written_pitches = tuple(pitches)
+            else:
+                raise TypeError(pleaf)
+
+
+def _do_part_assignment_command(argument, part_assignment):
+    first_leaf = abjad.get.leaf(argument, 0)
+    if first_leaf is None:
+        return False
+    voice = abjad.get.parentage(first_leaf).get(abjad.Voice, -1)
+    if voice is not None and part_assignment is not None:
+        assert isinstance(voice, abjad.Voice)
+        section = part_assignment.name or "ZZZ"
+        assert voice.name is not None
+        if not voice.name.startswith(section):
+            message = f"{voice.name} does not allow"
+            message += f" {part_assignment.name} part assignment:"
+            message += f"\n  {part_assignment}"
+            raise Exception(message)
+    assert part_assignment is not None
+    name, token = part_assignment.name, part_assignment.token
+    if token is None:
+        identifier = f"%*% PartAssignment({name!r})"
+    else:
+        identifier = f"%*% PartAssignment({name!r}, {token!r})"
+    container = abjad.Container(identifier=identifier)
+    leaves = abjad.select.leaves(argument)
+    components = abjad.select.top(leaves)
+    abjad.mutate.wrap(components, container)
+
+
 def _do_pitch_command(
     argument,
     cyclic,
@@ -153,6 +424,37 @@ def _do_pitch_command(
     return pitches_consumed, mutated_score
 
 
+def _do_register_command(argument, registration):
+    plts = _select.plts(argument)
+    assert isinstance(plts, list)
+    for plt in plts:
+        for pleaf in plt:
+            if isinstance(pleaf, abjad.Note):
+                pitch = pleaf.written_pitch
+                # pitches = self.registration([pitch])
+                pitches = registration([pitch])
+                pleaf.written_pitch = pitches[0]
+            elif isinstance(pleaf, abjad.Chord):
+                pitches = pleaf.written_pitches
+                # pitches = self.registration(pitches)
+                pitches = registration(pitches)
+                pleaf.written_pitches = pitches
+            else:
+                raise TypeError(pleaf)
+            abjad.detach(_enums.NOT_YET_REGISTERED, pleaf)
+
+
+def _get_registration(start_pitch, stop_pitch, i, length):
+    start_pitch = start_pitch.number
+    stop_pitch = stop_pitch.number
+    compass = stop_pitch - start_pitch
+    fraction = abjad.Fraction(i, length)
+    addendum = fraction * compass
+    current_pitch = start_pitch + addendum
+    current_pitch = int(current_pitch)
+    return _pcollections.Registration([("[A0, C8]", current_pitch)])
+
+
 def _is_rest(argument):
     prototype = (abjad.Rest, abjad.MultimeasureRest, abjad.Skip)
     if isinstance(argument, prototype):
@@ -161,6 +463,38 @@ def _is_rest(argument):
     if annotation is False:
         return True
     return False
+
+
+def _make_cluster(
+    plt, width, *, direction=abjad.UP, hide_flat_markup=False, start_pitch=None
+):
+    assert plt.is_pitched, repr(plt)
+    if not width:
+        return False
+    if start_pitch is None:
+        start_pitch = plt.head.written_pitch
+    pitches = _make_cluster_pitches(start_pitch, width)
+    key_cluster = abjad.KeyCluster(include_flat_markup=(not hide_flat_markup))
+    for pleaf in plt:
+        chord = abjad.Chord(pitches, pleaf.written_duration)
+        wrappers = abjad.get.wrappers(pleaf)
+        abjad.detach(object, pleaf)
+        for wrapper in wrappers:
+            abjad.attach(wrapper, chord, direction=wrapper.direction)
+        abjad.mutate.replace(pleaf, chord)
+        abjad.attach(key_cluster, chord, direction=direction)
+        abjad.attach(_enums.ALLOW_REPEAT_PITCH, chord)
+        abjad.detach(_enums.NOT_YET_PITCHED, chord)
+
+
+def _make_cluster_pitches(start_pitch, width):
+    pitches = [start_pitch]
+    for i in range(width - 1):
+        pitch = pitches[-1] + abjad.NamedInterval("M3")
+        pitch = abjad.NamedPitch(pitch, accidental="natural")
+        assert pitch.accidental == abjad.Accidental("natural")
+        pitches.append(pitch)
+    return pitches
 
 
 def _parse_string(string):
@@ -343,6 +677,137 @@ def _validate_bcps(bcps):
     for bcp in bcps:
         assert isinstance(bcp, tuple), repr(bcp)
         assert len(bcp) == 2, repr(bcp)
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class AccidentalAdjustmentCommand(_command.Command):
+    r"""
+    Accidental adjustment command.
+
+    ..  container:: example
+
+        >>> score = baca.docs.make_empty_score(1)
+        >>> accumulator = baca.CommandAccumulator(
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+        >>> baca.interpret.set_up_score(
+        ...     score,
+        ...     accumulator,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     docs=True,
+        ... )
+
+
+        >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
+        >>> score["Music"].extend(music)
+        >>> accumulator(
+        ...     "Music",
+        ...     baca.pitches("E4 F4"),
+        ...     baca.force_accidental(
+        ...         selector=lambda _: baca.select.pleaves(_)[:2],
+        ...     ),
+        ... )
+
+        >>> _, _ = baca.interpret.section(
+        ...     score,
+        ...     accumulator.manifests(),
+        ...     accumulator.time_signatures,
+        ...     commands=accumulator.commands,
+        ...     move_global_context=True,
+        ...     remove_tags=baca.tags.documentation_removal_tags(),
+        ... )
+        >>> lilypond_file = baca.lilypond.file(
+        ...     score,
+        ...     includes=["baca.ily"],
+        ... )
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            {
+                \context Staff = "Staff"
+                <<
+                    \context Voice = "Skips"
+                    {
+                        \time 4/8
+                        s1 * 4/8
+                        \time 3/8
+                        s1 * 3/8
+                        \time 4/8
+                        s1 * 4/8
+                        \time 3/8
+                        s1 * 3/8
+                    }
+                    \context Voice = "Music"
+                    {
+                        e'!2
+                        f'!4.
+                        e'2
+                        f'4.
+                    }
+                >>
+            }
+
+    """
+
+    cautionary: bool = False
+    forced: bool = False
+    parenthesized: bool = False
+
+    def __post_init__(self):
+        _command.Command.__post_init__(self)
+        assert isinstance(self.cautionary, bool), repr(self.cautionary)
+        assert isinstance(self.forced, bool), repr(self.forced)
+        assert isinstance(self.parenthesized, bool), repr(self.parenthesized)
+
+    __repr__ = _command.Command.__repr__
+
+    def _call(self, *, argument=None, runtime=None) -> bool:
+        if argument is None:
+            return False
+        if self.selector is not None:
+            argument = self.selector(argument)
+        if self.tag.string:
+            if not self.tag.only_edition() and not self.tag.not_editions():
+                raise Exception(f"tag must have edition: {self.tag!r}.")
+            tag = _tags.function_name(_frame(), self)
+            alternative_tag = self.tag.append(tag)
+            primary_tag = alternative_tag.invert_edition_tags()
+        pleaves = _select.pleaves(argument)
+        assert isinstance(pleaves, list)
+        for pleaf in pleaves:
+            if isinstance(pleaf, abjad.Note):
+                note_heads = [pleaf.note_head]
+            else:
+                assert isinstance(pleaf, abjad.Chord)
+                note_heads = list(pleaf.note_heads)
+            for note_head in note_heads:
+                assert note_head is not None
+                if not self.tag.string:
+                    if self.cautionary:
+                        note_head.is_cautionary = True
+                    if self.forced:
+                        note_head.is_forced = True
+                    if self.parenthesized:
+                        note_head.is_parenthesized = True
+                else:
+                    alternative = copy.copy(note_head)
+                    if self.cautionary:
+                        alternative.is_cautionary = True
+                    if self.forced:
+                        alternative.is_forced = True
+                    if self.parenthesized:
+                        alternative.is_parenthesized = True
+                    note_head.alternative = (
+                        alternative,
+                        alternative_tag,
+                        primary_tag,
+                    )
+        return False
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -756,195 +1221,6 @@ class BCPCommand(_command.Command):
         return False
 
 
-def _do_bcp_command(
-    argument,
-    bcps,
-    *,
-    bow_change_tweaks=None,
-    helper: typing.Callable = lambda x, y: x,
-    final_spanner=None,
-    tag=None,
-    tweaks=None,
-):
-    if tag is None:
-        tag = abjad.Tag()
-    # bcps_ = list(self.bcps)
-    bcps_ = list(bcps)
-    # bcps_ = self.helper(bcps_, argument)
-    bcps_ = helper(bcps_, argument)
-    bcps = abjad.CyclicTuple(bcps_)
-    lts = _select.lts(argument)
-    add_right_text_to_me = None
-    # if not self.final_spanner:
-    if not final_spanner:
-        rest_count, nonrest_count = 0, 0
-        for lt in reversed(lts):
-            if _is_rest(lt.head):
-                rest_count += 1
-            else:
-                if 0 < rest_count and nonrest_count == 0:
-                    add_right_text_to_me = lt.head
-                    break
-                if 0 < nonrest_count and rest_count == 0:
-                    add_right_text_to_me = lt.head
-                    break
-                nonrest_count += 1
-    # if self.final_spanner and not _is_rest(lts[-1]) and len(lts[-1]) == 1:
-    if final_spanner and not _is_rest(lts[-1]) and len(lts[-1]) == 1:
-        next_leaf_after_argument = abjad.get.leaf(lts[-1][-1], 1)
-        if next_leaf_after_argument is None:
-            message = "can not attach final spanner:"
-            message += " argument includes end of score."
-            raise Exception(message)
-    previous_bcp = None
-    i = 0
-    for lt in lts:
-        stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanBCP")
-        # if not self.final_spanner and lt is lts[-1] and not _is_rest(lt.head):
-        if not final_spanner and lt is lts[-1] and not _is_rest(lt.head):
-            abjad.attach(
-                stop_text_span,
-                lt.head,
-                # tag=self.tag.append(_tags.function_name(_frame(), self, n=1)),
-                tag=tag.append(abjad.Tag("baca.bcps(1)")),
-            )
-            break
-        previous_leaf = abjad.get.leaf(lt.head, -1)
-        next_leaf = abjad.get.leaf(lt.head, 1)
-        if _is_rest(lt.head) and (_is_rest(previous_leaf) or previous_leaf is None):
-            continue
-        if (
-            isinstance(lt.head, abjad.Note)
-            and _is_rest(previous_leaf)
-            and previous_bcp is not None
-        ):
-            numerator, denominator = previous_bcp
-        else:
-            bcp = bcps[i]
-            numerator, denominator = bcp
-            i += 1
-            next_bcp = bcps[i]
-        left_text = r"- \baca-bcp-spanner-left-text"
-        left_text += rf" #{numerator} #{denominator}"
-        if lt is lts[-1]:
-            # if self.final_spanner:
-            if final_spanner:
-                style = "solid-line-with-arrow"
-            else:
-                style = "invisible-line"
-        elif not _is_rest(lt.head):
-            style = "solid-line-with-arrow"
-        else:
-            style = "invisible-line"
-        right_text = None
-        if lt.head is add_right_text_to_me:
-            numerator, denominator = next_bcp
-            right_text = r"- \baca-bcp-spanner-right-text"
-            right_text += rf" #{numerator} #{denominator}"
-        start_text_span = abjad.StartTextSpan(
-            command=r"\bacaStartTextSpanBCP",
-            left_text=left_text,
-            right_text=right_text,
-            style=style,
-        )
-        # if self.tweaks:
-        if tweaks:
-            # start_text_span = _tweaks.bundle_tweaks(start_text_span, self.tweaks)
-            start_text_span = _tweaks.bundle_tweaks(start_text_span, tweaks)
-        if _is_rest(lt.head) and (_is_rest(next_leaf) or next_leaf is None):
-            pass
-        else:
-            abjad.attach(
-                start_text_span,
-                lt.head,
-                # tag=self.tag.append(_tags.function_name(_frame(), self, n=2)),
-                tag=tag.append(abjad.Tag("baca.bcps(2)")),
-            )
-        if 0 < i - 1:
-            abjad.attach(
-                stop_text_span,
-                lt.head,
-                # tag=self.tag.append(_tags.function_name(_frame(), self, n=3)),
-                tag=tag.append(abjad.Tag("baca.bcps(3)")),
-            )
-        # if lt is lts[-1] and self.final_spanner:
-        if lt is lts[-1] and final_spanner:
-            abjad.attach(
-                stop_text_span,
-                next_leaf_after_argument,
-                # tag=self.tag.append(_tags.function_name(_frame(), self, n=4)),
-                tag=tag.append(abjad.Tag("baca.bcps(4)")),
-            )
-        bcp_fraction = abjad.Fraction(*bcp)
-        next_bcp_fraction = abjad.Fraction(*bcps[i])
-        if _is_rest(lt.head):
-            pass
-        elif _is_rest(previous_leaf) or previous_bcp is None:
-            if bcp_fraction > next_bcp_fraction:
-                articulation = abjad.Articulation("upbow")
-                # if self.bow_change_tweaks:
-                if bow_change_tweaks:
-                    articulation = _tweaks.bundle_tweaks(
-                        # articulation, self.bow_change_tweaks
-                        articulation,
-                        bow_change_tweaks,
-                    )
-                abjad.attach(
-                    articulation,
-                    lt.head,
-                    # tag=self.tag.append(_tags.function_name(_frame(), self, n=5)),
-                    tag=tag.append(abjad.Tag("baca.bcps(5)")),
-                )
-            elif bcp_fraction < next_bcp_fraction:
-                articulation = abjad.Articulation("downbow")
-                # if self.bow_change_tweaks:
-                if bow_change_tweaks:
-                    articulation = _tweaks.bundle_tweaks(
-                        # articulation, self.bow_change_tweaks
-                        articulation,
-                        bow_change_tweaks,
-                    )
-                abjad.attach(
-                    articulation,
-                    lt.head,
-                    # tag=self.tag.append(_tags.function_name(_frame(), self, n=6)),
-                    tag=tag.append(abjad.Tag("baca.bcps(6)")),
-                )
-        else:
-            previous_bcp_fraction = abjad.Fraction(*previous_bcp)
-            if previous_bcp_fraction < bcp_fraction > next_bcp_fraction:
-                articulation = abjad.Articulation("upbow")
-                # if self.bow_change_tweaks:
-                if bow_change_tweaks:
-                    articulation = _tweaks.bundle_tweaks(
-                        # articulation, self.bow_change_tweaks
-                        articulation,
-                        bow_change_tweaks,
-                    )
-                abjad.attach(
-                    articulation,
-                    lt.head,
-                    # tag=self.tag.append(_tags.function_name(_frame(), self, n=7)),
-                    tag=tag.append(abjad.Tag("baca.bcps(7)")),
-                )
-            elif previous_bcp_fraction > bcp_fraction < next_bcp_fraction:
-                articulation = abjad.Articulation("downbow")
-                # if self.bow_change_tweaks:
-                if bow_change_tweaks:
-                    articulation = _tweaks.bundle_tweaks(
-                        # articulation, self.bow_change_tweaks
-                        articulation,
-                        bow_change_tweaks,
-                    )
-                abjad.attach(
-                    articulation,
-                    lt.head,
-                    # tag=self.tag.append(_tags.function_name(_frame(), self, n=8)),
-                    tag=tag.append(abjad.Tag("baca.bcps(8)")),
-                )
-        previous_bcp = bcp
-
-
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class ColorCommand(_command.Command):
 
@@ -1065,337 +1341,6 @@ class ContainerCommand(_command.Command):
         components = abjad.select.top(leaves)
         abjad.mutate.wrap(components, container)
         return True
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class DetachCommand(_command.Command):
-
-    arguments: typing.Sequence[typing.Any] = ()
-
-    def __post_init__(self):
-        _command.Command.__post_init__(self)
-
-    __repr__ = _command.Command.__repr__
-
-    def _call(self, *, argument=None, runtime=None) -> bool:
-        if argument is None:
-            return False
-        assert self.selector is not None
-        argument = self.selector(argument)
-        leaves = abjad.select.leaves(argument)
-        assert isinstance(leaves, list)
-        for leaf in leaves:
-            for argument in self.arguments:
-                abjad.detach(argument, leaf)
-        return False
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class GenericCommand(_command.Command):
-
-    function: typing.Callable = lambda _: _
-    name: str = ""
-
-    def __post_init__(self):
-        assert callable(self.function), repr(self.function)
-        _command.Command.__post_init__(self)
-
-    def _call(self, *, argument=None, runtime=None) -> bool:
-        if argument is None:
-            return False
-        if self.selector is not None:
-            argument = self.selector(argument)
-        self.function(argument, runtime=runtime)
-        return False
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class GlissandoCommand(_command.Command):
-
-    allow_repeats: bool = False
-    allow_ties: bool = False
-    hide_middle_note_heads: bool = False
-    hide_middle_stems: bool = False
-    hide_stem_selector: typing.Callable | None = None
-    left_broken: bool = False
-    parenthesize_repeats: bool = False
-    right_broken: bool = False
-    right_broken_show_next: bool = False
-    selector: typing.Callable = lambda _: _select.tleaves(_)
-    tweaks: typing.Sequence[abjad.Tweak] = ()
-    zero_padding: bool = False
-
-    def __post_init__(self):
-        _command.Command.__post_init__(self)
-        _tweaks.validate_indexed_tweaks(self.tweaks)
-
-    def _call(self, *, argument=None, runtime=None) -> bool:
-        if argument is None:
-            return False
-        if self.selector is not None:
-            argument = self.selector(argument)
-        leaves = abjad.select.leaves(argument)
-        tweaks_ = []
-        prototype = (abjad.Tweak, tuple)
-        for tweak in self.tweaks or []:
-            assert isinstance(tweak, prototype), repr(tweak)
-            tweaks_.append(tweak)
-        abjad.glissando(
-            leaves,
-            *tweaks_,
-            allow_repeats=self.allow_repeats,
-            allow_ties=self.allow_ties,
-            hide_middle_note_heads=self.hide_middle_note_heads,
-            hide_middle_stems=self.hide_middle_stems,
-            hide_stem_selector=self.hide_stem_selector,
-            left_broken=self.left_broken,
-            parenthesize_repeats=self.parenthesize_repeats,
-            right_broken=self.right_broken,
-            right_broken_show_next=self.right_broken_show_next,
-            tag=self.tag,
-            zero_padding=self.zero_padding,
-        )
-        return False
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class IndicatorCommand(_command.Command):
-
-    indicators: typing.Sequence = ()
-    context: str | None = None
-    direction: abjad.Vertical | None = None
-    do_not_test: bool = False
-    predicate: typing.Callable | None = None
-    redundant: bool = False
-
-    def __post_init__(self):
-        _command.Command.__post_init__(self)
-        if self.context is not None:
-            assert isinstance(self.context, str), repr(self.context)
-        assert isinstance(self.do_not_test, bool), repr(self.do_not_test)
-        assert isinstance(self.redundant, bool), repr(self.redundant)
-
-    def __copy__(self, *arguments):
-        result = dataclasses.replace(self)
-        result.indicators = copy.deepcopy(self._indicators_coerced())
-        return result
-
-    __repr__ = _command.Command.__repr__
-
-    def _call(self, *, argument=None, runtime=None) -> bool:
-        if argument is None:
-            return False
-        if self._indicators_coerced() is None:
-            return False
-        if self.redundant is True:
-            return False
-        if self.selector:
-            argument = self.selector(argument)
-        if not argument:
-            return False
-        _attach_persistent_indicator(
-            argument,
-            self._indicators_coerced(),
-            context=self.context,
-            do_not_test=self.do_not_test,
-            deactivate=self.deactivate,
-            direction=self.direction,
-            manifests=runtime.get("manifests", {}),
-            predicate=self.predicate,
-            tag=self.tag,
-        )
-        return False
-
-    def _indicators_coerced(self):
-        indicators_ = None
-        if self.indicators is not None:
-            if isinstance(self.indicators, collections.abc.Iterable):
-                indicators_ = abjad.CyclicTuple(self.indicators)
-            else:
-                indicators_ = abjad.CyclicTuple([self.indicators])
-        return indicators_
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class InstrumentChangeCommand(IndicatorCommand):
-    def _call(self, *, argument=None, runtime=None) -> bool:
-        if argument is None:
-            return False
-        if self.selector is not None:
-            argument = self.selector(argument)
-        if self._indicators_coerced() is None:
-            return False
-        return IndicatorCommand._call(self, argument=argument, runtime=runtime)
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class LabelCommand(_command.Command):
-
-    callable_: typing.Any = None
-
-    def __post_init__(self):
-        _command.Command.__post_init__(self)
-
-    def _call(self, *, argument=None, runtime=None) -> bool:
-        if argument is None:
-            return False
-        if self.callable_ is None:
-            return False
-        if self.selector:
-            argument = self.selector(argument)
-        self.callable_(argument)
-        return False
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class PartAssignmentCommand(_command.Command):
-
-    part_assignment: _parts.PartAssignment | None = None
-
-    def __post_init__(self):
-        _command.Command.__post_init__(self)
-        assert isinstance(self.part_assignment, _parts.PartAssignment)
-
-    __repr__ = _command.Command.__repr__
-
-    def _call(self, *, argument=None, runtime=None) -> bool:
-        if argument is None:
-            return False
-        if self.selector is not None:
-            argument = self.selector(argument)
-        _do_part_assignment_command(argument, self.part_assignment)
-        return False
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class AccidentalAdjustmentCommand(_command.Command):
-    r"""
-    Accidental adjustment command.
-
-    ..  container:: example
-
-        >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ... )
-        >>> baca.interpret.set_up_score(
-        ...     score,
-        ...     accumulator,
-        ...     accumulator.manifests(),
-        ...     accumulator.time_signatures,
-        ...     docs=True,
-        ... )
-
-
-        >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
-        >>> score["Music"].extend(music)
-        >>> accumulator(
-        ...     "Music",
-        ...     baca.pitches("E4 F4"),
-        ...     baca.force_accidental(
-        ...         selector=lambda _: baca.select.pleaves(_)[:2],
-        ...     ),
-        ... )
-
-        >>> _, _ = baca.interpret.section(
-        ...     score,
-        ...     accumulator.manifests(),
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
-        ...     move_global_context=True,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            {
-                \context Staff = "Staff"
-                <<
-                    \context Voice = "Skips"
-                    {
-                        \time 4/8
-                        s1 * 4/8
-                        \time 3/8
-                        s1 * 3/8
-                        \time 4/8
-                        s1 * 4/8
-                        \time 3/8
-                        s1 * 3/8
-                    }
-                    \context Voice = "Music"
-                    {
-                        e'!2
-                        f'!4.
-                        e'2
-                        f'4.
-                    }
-                >>
-            }
-
-    """
-
-    cautionary: bool = False
-    forced: bool = False
-    parenthesized: bool = False
-
-    def __post_init__(self):
-        _command.Command.__post_init__(self)
-        assert isinstance(self.cautionary, bool), repr(self.cautionary)
-        assert isinstance(self.forced, bool), repr(self.forced)
-        assert isinstance(self.parenthesized, bool), repr(self.parenthesized)
-
-    __repr__ = _command.Command.__repr__
-
-    def _call(self, *, argument=None, runtime=None) -> bool:
-        if argument is None:
-            return False
-        if self.selector is not None:
-            argument = self.selector(argument)
-        if self.tag.string:
-            if not self.tag.only_edition() and not self.tag.not_editions():
-                raise Exception(f"tag must have edition: {self.tag!r}.")
-            tag = _tags.function_name(_frame(), self)
-            alternative_tag = self.tag.append(tag)
-            primary_tag = alternative_tag.invert_edition_tags()
-        pleaves = _select.pleaves(argument)
-        assert isinstance(pleaves, list)
-        for pleaf in pleaves:
-            if isinstance(pleaf, abjad.Note):
-                note_heads = [pleaf.note_head]
-            else:
-                assert isinstance(pleaf, abjad.Chord)
-                note_heads = list(pleaf.note_heads)
-            for note_head in note_heads:
-                assert note_head is not None
-                if not self.tag.string:
-                    if self.cautionary:
-                        note_head.is_cautionary = True
-                    if self.forced:
-                        note_head.is_forced = True
-                    if self.parenthesized:
-                        note_head.is_parenthesized = True
-                else:
-                    alternative = copy.copy(note_head)
-                    if self.cautionary:
-                        alternative.is_cautionary = True
-                    if self.forced:
-                        alternative.is_forced = True
-                    if self.parenthesized:
-                        alternative.is_parenthesized = True
-                    note_head.alternative = (
-                        alternative,
-                        alternative_tag,
-                        primary_tag,
-                    )
-        return False
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -2079,46 +2024,13 @@ class ClusterCommand(_command.Command):
             return False
         if self.selector:
             argument = self.selector(argument)
-        if not argument:
-            return False
-        leaf = abjad.select.leaf(argument, 0)
-        root = abjad.get.parentage(leaf).root
-        widths = abjad.CyclicTuple(self.widths)
-        with abjad.ForbidUpdate(component=root):
-            for i, plt in enumerate(_select.plts(argument)):
-                width = widths[i]
-                self._make_cluster(plt, width)
-        return True
-
-    def _make_cluster(self, plt, width):
-        assert plt.is_pitched, repr(plt)
-        if not width:
-            return False
-        if self.start_pitch is not None:
-            start_pitch = self.start_pitch
-        else:
-            start_pitch = plt.head.written_pitch
-        pitches = self._make_pitches(start_pitch, width)
-        key_cluster = abjad.KeyCluster(include_flat_markup=not self.hide_flat_markup)
-        for pleaf in plt:
-            chord = abjad.Chord(pitches, pleaf.written_duration)
-            wrappers = abjad.get.wrappers(pleaf)
-            abjad.detach(object, pleaf)
-            for wrapper in wrappers:
-                abjad.attach(wrapper, chord, direction=wrapper.direction)
-            abjad.mutate.replace(pleaf, chord)
-            abjad.attach(key_cluster, chord, direction=self.direction)
-            abjad.attach(_enums.ALLOW_REPEAT_PITCH, chord)
-            abjad.detach(_enums.NOT_YET_PITCHED, chord)
-
-    def _make_pitches(self, start_pitch, width):
-        pitches = [start_pitch]
-        for i in range(width - 1):
-            pitch = pitches[-1] + abjad.NamedInterval("M3")
-            pitch = abjad.NamedPitch(pitch, accidental="natural")
-            assert pitch.accidental == abjad.Accidental("natural")
-            pitches.append(pitch)
-        return pitches
+        return _do_cluster_command(
+            argument,
+            self.widths,
+            direction=self.direction,
+            hide_flat_markup=self.hide_flat_markup,
+            start_pitch=self.start_pitch,
+        )
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -2231,6 +2143,29 @@ class ColorFingeringCommand(_command.Command):
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class DetachCommand(_command.Command):
+
+    arguments: typing.Sequence[typing.Any] = ()
+
+    def __post_init__(self):
+        _command.Command.__post_init__(self)
+
+    __repr__ = _command.Command.__repr__
+
+    def _call(self, *, argument=None, runtime=None) -> bool:
+        if argument is None:
+            return False
+        assert self.selector is not None
+        argument = self.selector(argument)
+        leaves = abjad.select.leaves(argument)
+        assert isinstance(leaves, list)
+        for leaf in leaves:
+            for argument in self.arguments:
+                abjad.detach(argument, leaf)
+        return False
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class DiatonicClusterCommand(_command.Command):
     r"""
     Diatonic cluster command.
@@ -2297,6 +2232,163 @@ class DiatonicClusterCommand(_command.Command):
         else:
             raise TypeError(plt)
         return pitch._get_diatonic_pitch_number()
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class GenericCommand(_command.Command):
+
+    function: typing.Callable = lambda _: _
+    name: str = ""
+
+    def __post_init__(self):
+        assert callable(self.function), repr(self.function)
+        _command.Command.__post_init__(self)
+
+    def _call(self, *, argument=None, runtime=None) -> bool:
+        if argument is None:
+            return False
+        if self.selector is not None:
+            argument = self.selector(argument)
+        self.function(argument, runtime=runtime)
+        return False
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class GlissandoCommand(_command.Command):
+
+    allow_repeats: bool = False
+    allow_ties: bool = False
+    hide_middle_note_heads: bool = False
+    hide_middle_stems: bool = False
+    hide_stem_selector: typing.Callable | None = None
+    left_broken: bool = False
+    parenthesize_repeats: bool = False
+    right_broken: bool = False
+    right_broken_show_next: bool = False
+    selector: typing.Callable = lambda _: _select.tleaves(_)
+    tweaks: typing.Sequence[abjad.Tweak] = ()
+    zero_padding: bool = False
+
+    def __post_init__(self):
+        _command.Command.__post_init__(self)
+        _tweaks.validate_indexed_tweaks(self.tweaks)
+
+    def _call(self, *, argument=None, runtime=None) -> bool:
+        if argument is None:
+            return False
+        if self.selector is not None:
+            argument = self.selector(argument)
+        leaves = abjad.select.leaves(argument)
+        tweaks_ = []
+        prototype = (abjad.Tweak, tuple)
+        for tweak in self.tweaks or []:
+            assert isinstance(tweak, prototype), repr(tweak)
+            tweaks_.append(tweak)
+        abjad.glissando(
+            leaves,
+            *tweaks_,
+            allow_repeats=self.allow_repeats,
+            allow_ties=self.allow_ties,
+            hide_middle_note_heads=self.hide_middle_note_heads,
+            hide_middle_stems=self.hide_middle_stems,
+            hide_stem_selector=self.hide_stem_selector,
+            left_broken=self.left_broken,
+            parenthesize_repeats=self.parenthesize_repeats,
+            right_broken=self.right_broken,
+            right_broken_show_next=self.right_broken_show_next,
+            tag=self.tag,
+            zero_padding=self.zero_padding,
+        )
+        return False
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class IndicatorCommand(_command.Command):
+
+    indicators: typing.Sequence = ()
+    context: str | None = None
+    direction: abjad.Vertical | None = None
+    do_not_test: bool = False
+    predicate: typing.Callable | None = None
+    redundant: bool = False
+
+    def __post_init__(self):
+        _command.Command.__post_init__(self)
+        if self.context is not None:
+            assert isinstance(self.context, str), repr(self.context)
+        assert isinstance(self.do_not_test, bool), repr(self.do_not_test)
+        assert isinstance(self.redundant, bool), repr(self.redundant)
+
+    def __copy__(self, *arguments):
+        result = dataclasses.replace(self)
+        result.indicators = copy.deepcopy(self._indicators_coerced())
+        return result
+
+    __repr__ = _command.Command.__repr__
+
+    def _call(self, *, argument=None, runtime=None) -> bool:
+        if argument is None:
+            return False
+        if self._indicators_coerced() is None:
+            return False
+        if self.redundant is True:
+            return False
+        if self.selector:
+            argument = self.selector(argument)
+        if not argument:
+            return False
+        _attach_persistent_indicator(
+            argument,
+            self._indicators_coerced(),
+            context=self.context,
+            do_not_test=self.do_not_test,
+            deactivate=self.deactivate,
+            direction=self.direction,
+            manifests=runtime.get("manifests", {}),
+            predicate=self.predicate,
+            tag=self.tag,
+        )
+        return False
+
+    def _indicators_coerced(self):
+        indicators_ = None
+        if self.indicators is not None:
+            if isinstance(self.indicators, collections.abc.Iterable):
+                indicators_ = abjad.CyclicTuple(self.indicators)
+            else:
+                indicators_ = abjad.CyclicTuple([self.indicators])
+        return indicators_
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class InstrumentChangeCommand(IndicatorCommand):
+    def _call(self, *, argument=None, runtime=None) -> bool:
+        if argument is None:
+            return False
+        if self.selector is not None:
+            argument = self.selector(argument)
+        if self._indicators_coerced() is None:
+            return False
+        return IndicatorCommand._call(self, argument=argument, runtime=runtime)
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class LabelCommand(_command.Command):
+
+    callable_: typing.Any = None
+
+    def __post_init__(self):
+        _command.Command.__post_init__(self)
+
+    def _call(self, *, argument=None, runtime=None) -> bool:
+        if argument is None:
+            return False
+        if self.callable_ is None:
+            return False
+        if self.selector:
+            argument = self.selector(argument)
+        self.callable_(argument)
+        return False
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -2592,22 +2684,24 @@ class OctaveDisplacementCommand(_command.Command):
         return False
 
 
-def _do_octave_displacement_command(argument, displacements):
-    displacements = abjad.CyclicTuple(displacements)
-    for i, plt in enumerate(_select.plts(argument)):
-        displacement = displacements[i]
-        interval = abjad.NumberedInterval(12 * displacement)
-        for pleaf in plt:
-            if isinstance(pleaf, abjad.Note):
-                pitch = pleaf.written_pitch
-                assert isinstance(pitch, abjad.NamedPitch)
-                pitch += interval
-                pleaf.written_pitch = pitch
-            elif isinstance(pleaf, abjad.Chord):
-                pitches = [_ + interval for _ in pleaf.written_pitches]
-                pleaf.written_pitches = tuple(pitches)
-            else:
-                raise TypeError(pleaf)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class PartAssignmentCommand(_command.Command):
+
+    part_assignment: _parts.PartAssignment | None = None
+
+    def __post_init__(self):
+        _command.Command.__post_init__(self)
+        assert isinstance(self.part_assignment, _parts.PartAssignment)
+
+    __repr__ = _command.Command.__repr__
+
+    def _call(self, *, argument=None, runtime=None) -> bool:
+        if argument is None:
+            return False
+        if self.selector is not None:
+            argument = self.selector(argument)
+        _do_part_assignment_command(argument, self.part_assignment)
+        return False
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -3197,52 +3291,6 @@ class RegisterCommand(_command.Command):
             argument = self.selector(argument)
         _do_register_command(argument, self.registration)
         return False
-
-
-def _do_part_assignment_command(argument, part_assignment):
-    first_leaf = abjad.get.leaf(argument, 0)
-    if first_leaf is None:
-        return False
-    voice = abjad.get.parentage(first_leaf).get(abjad.Voice, -1)
-    if voice is not None and part_assignment is not None:
-        assert isinstance(voice, abjad.Voice)
-        section = part_assignment.name or "ZZZ"
-        assert voice.name is not None
-        if not voice.name.startswith(section):
-            message = f"{voice.name} does not allow"
-            message += f" {part_assignment.name} part assignment:"
-            message += f"\n  {part_assignment}"
-            raise Exception(message)
-    assert part_assignment is not None
-    name, token = part_assignment.name, part_assignment.token
-    if token is None:
-        identifier = f"%*% PartAssignment({name!r})"
-    else:
-        identifier = f"%*% PartAssignment({name!r}, {token!r})"
-    container = abjad.Container(identifier=identifier)
-    leaves = abjad.select.leaves(argument)
-    components = abjad.select.top(leaves)
-    abjad.mutate.wrap(components, container)
-
-
-def _do_register_command(argument, registration):
-    plts = _select.plts(argument)
-    assert isinstance(plts, list)
-    for plt in plts:
-        for pleaf in plt:
-            if isinstance(pleaf, abjad.Note):
-                pitch = pleaf.written_pitch
-                # pitches = self.registration([pitch])
-                pitches = registration([pitch])
-                pleaf.written_pitch = pitches[0]
-            elif isinstance(pleaf, abjad.Chord):
-                pitches = pleaf.written_pitches
-                # pitches = self.registration(pitches)
-                pitches = registration(pitches)
-                pleaf.written_pitches = pitches
-            else:
-                raise TypeError(pleaf)
-            abjad.detach(_enums.NOT_YET_REGISTERED, pleaf)
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -4223,34 +4271,6 @@ class RegisterInterpolationCommand(_command.Command):
             argument = self.selector(argument)
         _do_interpolate_register_command(argument, self.start_pitch, self.stop_pitch)
         return False
-
-
-def _do_interpolate_register_command(argument, start_pitch, stop_pitch):
-    plts = _select.plts(argument)
-    length = len(plts)
-    for i, plt in enumerate(plts):
-        registration = _get_registration(start_pitch, stop_pitch, i, length)
-        for pleaf in plt:
-            if isinstance(pleaf, abjad.Note):
-                written_pitches = registration([pleaf.written_pitch])
-                pleaf.written_pitch = written_pitches[0]
-            elif isinstance(pleaf, abjad.Chord):
-                written_pitches = registration(pleaf.written_pitches)
-                pleaf.written_pitches = written_pitches
-            else:
-                raise TypeError(pleaf)
-            abjad.detach(_enums.NOT_YET_REGISTERED, pleaf)
-
-
-def _get_registration(start_pitch, stop_pitch, i, length):
-    start_pitch = start_pitch.number
-    stop_pitch = stop_pitch.number
-    compass = stop_pitch - start_pitch
-    fraction = abjad.Fraction(i, length)
-    addendum = fraction * compass
-    current_pitch = start_pitch + addendum
-    current_pitch = int(current_pitch)
-    return _pcollections.Registration([("[A0, C8]", current_pitch)])
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -6120,11 +6140,12 @@ def dynamic(
 
 
 def dynamic_function(
-    leaf: abjad.Leaf,
+    argument,
     dynamic: str | abjad.Dynamic,
     *tweaks: abjad.Tweak,
     tags: list[abjad.Tag] = None,
 ) -> None:
+    leaf = abjad.select.leaf(argument, 0)
     if isinstance(dynamic, str):
         indicator = make_dynamic(dynamic)
     else:
@@ -8272,10 +8293,13 @@ def clef(
 
 
 def clef_function(
-    leaf: abjad.Leaf,
+    argument,
     clef: str,
 ) -> None:
-    assert isinstance(leaf, abjad.Leaf), repr(leaf)
+    if isinstance(argument, abjad.Leaf):
+        leaf = argument
+    else:
+        leaf = abjad.select.leaf(argument, 0)
     assert isinstance(clef, str), repr(clef)
     indicator = abjad.Clef(clef)
     _attach_persistent_indicator(
@@ -9061,14 +9085,15 @@ def instrument_name(
 
 
 def instrument_name_function(
-    leaf: abjad.Leaf,
-    argument: str,
+    argument,
+    string: str,
     *,
     context: str = "Staff",
 ) -> None:
-    assert isinstance(argument, str), repr(argument)
-    assert argument.startswith("\\"), repr(argument)
-    indicator = abjad.InstrumentName(argument, context=context)
+    leaf = abjad.select.leaf(argument, 0)
+    assert isinstance(string, str), repr(string)
+    assert string.startswith("\\"), repr(string)
+    indicator = abjad.InstrumentName(string, context=context)
     # tag = _tags.function_name(_frame())
     tag = abjad.Tag("baca.instrument_name()")
     tag = tag.append(_tags.NOT_PARTS)
@@ -9476,11 +9501,12 @@ def short_instrument_name(
 
 
 def short_instrument_name_function(
-    leaf: abjad.Leaf,
+    argument,
     short_instrument_name: abjad.ShortInstrumentName,
     *,
     context: str = "Staff",
 ) -> None:
+    leaf = abjad.select.leaf(argument, 0)
     assert isinstance(short_instrument_name, abjad.ShortInstrumentName), repr(
         short_instrument_name
     )
@@ -12949,10 +12975,11 @@ def instrument(
 
 
 def instrument_function(
-    leaf: abjad.Leaf,
+    argument,
     instrument: abjad.Instrument,
     tags: list[abjad.Tag] = None,
 ) -> None:
+    leaf = abjad.select.leaf(argument, 0)
     assert isinstance(instrument, abjad.Instrument), repr(instrument)
     # tag = _tags.function_name(_frame())
     tag = abjad.Tag("baca.instrument()")
@@ -13376,25 +13403,25 @@ def markup(
 
 
 def markup_function(
-    leaf,
-    argument: str | abjad.Markup,
+    argument,
+    markup: str | abjad.Markup,
     *tweaks: abjad.Tweak,
     direction=abjad.UP,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    assert isinstance(leaf, abjad.Leaf), repr(leaf)
+    leaf = abjad.select.leaf(argument, 0)
     if direction not in (abjad.DOWN, abjad.UP):
         message = f"direction must be up or down (not {direction!r})."
         raise Exception(message)
     indicator: abjad.Markup | abjad.Bundle
-    if isinstance(argument, str):
-        indicator = abjad.Markup(argument)
-    elif isinstance(argument, abjad.Markup):
-        indicator = dataclasses.replace(argument)
+    if isinstance(markup, str):
+        indicator = abjad.Markup(markup)
+    elif isinstance(markup, abjad.Markup):
+        indicator = dataclasses.replace(markup)
     else:
         message = "MarkupLibary.__call__():\n"
-        message += "  Value of 'argument' must be str or markup.\n"
-        message += f"  Not {argument!r}."
+        message += "  Value of 'markup' must be str or markup.\n"
+        message += f"  Not {markup!r}."
         raise Exception(message)
     if tweaks:
         indicator = abjad.bundle(indicator, *tweaks)
@@ -13469,6 +13496,17 @@ def replace_with_clusters(
     if start_pitch is not None:
         start_pitch = abjad.NamedPitch(start_pitch)
     return ClusterCommand(selector=selector, start_pitch=start_pitch, widths=widths)
+
+
+def replace_with_clusters_function(
+    argument,
+    widths: list[int],
+    *,
+    start_pitch: int | str | abjad.NamedPitch | None = None,
+) -> None:
+    if start_pitch is not None:
+        start_pitch = abjad.NamedPitch(start_pitch)
+    return _do_cluster_command(argument, widths, start_pitch=start_pitch)
 
 
 def untie(selector) -> DetachCommand:
