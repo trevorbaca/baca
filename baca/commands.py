@@ -288,16 +288,18 @@ def _do_cluster_command(
     root = abjad.get.parentage(leaf).root
     widths = abjad.CyclicTuple(widths)
     with abjad.ForbidUpdate(component=root):
+        chords = []
         for i, plt in enumerate(_select.plts(argument)):
             width = widths[i]
-            _make_cluster(
+            chord = _make_cluster(
                 plt,
                 width,
                 direction=direction,
                 hide_flat_markup=hide_flat_markup,
                 start_pitch=start_pitch,
             )
-    return True
+            chords.append(chord)
+    return chords
 
 
 def _do_interpolate_register_command(argument, start_pitch, stop_pitch):
@@ -469,8 +471,7 @@ def _make_cluster(
     plt, width, *, direction=abjad.UP, hide_flat_markup=False, start_pitch=None
 ):
     assert plt.is_pitched, repr(plt)
-    if not width:
-        return False
+    assert isinstance(width, int), repr(width)
     if start_pitch is None:
         start_pitch = plt.head.written_pitch
     pitches = _make_cluster_pitches(start_pitch, width)
@@ -485,6 +486,7 @@ def _make_cluster(
         abjad.attach(key_cluster, chord, direction=direction)
         abjad.attach(_enums.ALLOW_REPEAT_PITCH, chord)
         abjad.detach(_enums.NOT_YET_PITCHED, chord)
+    return chord
 
 
 def _make_cluster_pitches(start_pitch, width):
@@ -2024,13 +2026,14 @@ class ClusterCommand(_command.Command):
             return False
         if self.selector:
             argument = self.selector(argument)
-        return _do_cluster_command(
+        chords = _do_cluster_command(
             argument,
             self.widths,
             direction=self.direction,
             hide_flat_markup=self.hide_flat_markup,
             start_pitch=self.start_pitch,
         )
+        return bool(chords)
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -13503,10 +13506,12 @@ def replace_with_clusters_function(
     widths: list[int],
     *,
     start_pitch: int | str | abjad.NamedPitch | None = None,
-) -> None:
+) -> list[abjad.Chord]:
     if start_pitch is not None:
         start_pitch = abjad.NamedPitch(start_pitch)
-    return _do_cluster_command(argument, widths, start_pitch=start_pitch)
+    chords = _do_cluster_command(argument, widths, start_pitch=start_pitch)
+    assert all(isinstance(_, abjad.Chord) for _ in chords)
+    return chords
 
 
 def untie(selector) -> DetachCommand:
