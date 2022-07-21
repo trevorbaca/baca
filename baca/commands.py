@@ -45,7 +45,6 @@ def _attach_persistent_indicator(
     # for indicator in cyclic_indicators:
     #     assert getattr(indicator, "persistent", False) is True, repr(indicator)
     leaves = abjad.select.leaves(argument)
-    # tag = tag.append(_tags.function_name(_frame()))
     tag = tag.append(abjad.Tag("baca.IndicatorCommand._call()"))
     for i, leaf in enumerate(leaves):
         if predicate and not predicate(leaf):
@@ -6146,9 +6145,13 @@ def dynamic_function(
     argument,
     dynamic: str | abjad.Dynamic,
     *tweaks: abjad.Tweak,
+    allow_rests=False,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    leaf = abjad.select.leaf(argument, 0)
+    if allow_rests is True:
+        leaf = abjad.select.leaf(argument, 0)
+    else:
+        leaf = _select.pleaf(argument, 0)
     if isinstance(dynamic, str):
         indicator = make_dynamic(dynamic)
     else:
@@ -6156,7 +6159,6 @@ def dynamic_function(
     prototype = (abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin)
     assert isinstance(indicator, prototype), repr(indicator)
     indicator = _tweaks.bundle_tweaks(indicator, tweaks)
-    # tag = _tags.function_name(_frame())
     tag = abjad.Tag("baca.dynamic()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
@@ -7732,7 +7734,6 @@ def accent_function(
     *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    # tag = _tags.function_name(_frame())
     tag = abjad.Tag("baca.accent()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
@@ -8029,7 +8030,6 @@ def alternate_bow_strokes_function(
     tags: list[abjad.Tag] = None,
 ) -> None:
     pass
-    # tag = _tags.function_name(_frame())
     tag = abjad.Tag("baca.alternate_bow_strokes()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
@@ -8212,7 +8212,6 @@ def breathe_function(
     # TODO: change to abjad.Articulation("breathe", site="after")?
     indicator = abjad.LilyPondLiteral(r"\breathe", site="after")
     indicator = _tweaks.bundle_tweaks(indicator, tweaks)
-    # tag = _tags.function_name(_frame())
     tag = abjad.Tag("baca.breathe()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
@@ -8711,7 +8710,6 @@ def down_bow_function(
     else:
         indicator = abjad.Articulation("downbow")
     indicator = _tweaks.bundle_tweaks(indicator, tweaks)
-    # tag = _tags.function_name(_frame())
     tag = abjad.Tag("baca.down_bow()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
@@ -8819,7 +8817,6 @@ def espressivo_function(
     indicator: abjad.Articulation | abjad.Bundle
     indicator = abjad.Articulation("espressivo")
     indicator = _tweaks.bundle_tweaks(indicator, tweaks)
-    # tag = _tags.function_name(_frame())
     tag = abjad.Tag("baca.espressivo()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
@@ -9115,7 +9112,6 @@ def instrument_name_function(
     assert isinstance(string, str), repr(string)
     assert string.startswith("\\"), repr(string)
     indicator = abjad.InstrumentName(string, context=context)
-    # tag = _tags.function_name(_frame())
     tag = abjad.Tag("baca.instrument_name()")
     tag = tag.append(_tags.NOT_PARTS)
     abjad.attach(
@@ -9210,6 +9206,23 @@ def laissez_vibrer(
     )
 
 
+def laissez_vibrer_function(
+    argument,
+    *,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    tag = abjad.Tag("baca.laissez_vibrer()")
+    for tag_ in tags or []:
+        tag = tag.append(tag_)
+    for leaf in abjad.iterate.leaves(argument):
+        indicator = abjad.LaissezVibrer()
+        abjad.attach(
+            indicator,
+            leaf,
+            tag=tag,
+        )
+
+
 def literal(
     string: str | list[str],
     selector=lambda _: abjad.select.leaf(_, 0),
@@ -9233,7 +9246,6 @@ def literal_function(
 ) -> None:
     assert isinstance(leaf, abjad.Leaf), repr(leaf)
     indicator = abjad.LilyPondLiteral(string, site=site)
-    # tag = _tags.function_name(_frame())
     tag = abjad.Tag("baca.literal()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
@@ -9524,6 +9536,7 @@ def short_instrument_name(
 def short_instrument_name_function(
     argument,
     short_instrument_name: abjad.ShortInstrumentName,
+    manifests: dict = None,
     *,
     context: str = "Staff",
 ) -> None:
@@ -9531,12 +9544,13 @@ def short_instrument_name_function(
     assert isinstance(short_instrument_name, abjad.ShortInstrumentName), repr(
         short_instrument_name
     )
-    # tag = _tags.function_name(_frame())
+    manifests = manifests or {}
     tag = abjad.Tag("baca.short_instrument_name()")
     tag = tag.append(_tags.NOT_PARTS)
-    abjad.attach(
-        short_instrument_name,
+    _attach_persistent_indicator(
         leaf,
+        [short_instrument_name],
+        manifests=manifests,
         tag=tag,
     )
 
@@ -9812,7 +9826,6 @@ def repeat_tie_function(argument) -> None:
         abjad.attach(
             indicator,
             leaf,
-            # tag=_tags.function_name(_frame())
             tag=abjad.Tag("baca.repeat_tie()"),
         )
 
@@ -10087,7 +10100,6 @@ def staccato_function(
     *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    # tag = _tags.function_name(_frame())
     tag = abjad.Tag("baca.staccato()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
@@ -10621,7 +10633,6 @@ def stem_tremolo_function(
     tags: list[abjad.Tag] = None,
 ) -> None:
     indicator = abjad.StemTremolo(tremolo_flags=tremolo_flags)
-    # tag = _tags.function_name(_frame())
     tag = abjad.Tag("baca.stem_tremolo()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
@@ -10925,7 +10936,6 @@ def tie_function(leaf: abjad.Leaf) -> None:
     abjad.attach(
         indicator,
         leaf,
-        # tag=_tags.function_name(_frame())
         tag=abjad.Tag("baca.tie()"),
     )
 
@@ -11020,7 +11030,6 @@ def tenuto_function(
     *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    # tag = _tags.function_name(_frame())
     tag = abjad.Tag("baca.tenuto()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
@@ -12963,14 +12972,12 @@ def global_fermata(
         markup,
         mmrest,
         direction=abjad.UP,
-        # tag=self.tag.append(_tags.function_name(_frame(), self, n=1)),
         tag=_tags.function_name(_frame(), n=1),
     )
     literal = abjad.LilyPondLiteral(r"\baca-fermata-measure")
     abjad.attach(
         literal,
         mmrest,
-        # tag=self.tag.append(_tags.function_name(_frame(), self, n=2)),
         tag=_tags.function_name(_frame(), n=2),
     )
     # tag = abjad.Tag(_enums.FERMATA_MEASURE.name)
@@ -13000,17 +13007,19 @@ def instrument(
 def instrument_function(
     argument,
     instrument: abjad.Instrument,
+    manifests: dict = None,
     tags: list[abjad.Tag] = None,
 ) -> None:
     leaf = abjad.select.leaf(argument, 0)
     assert isinstance(instrument, abjad.Instrument), repr(instrument)
-    # tag = _tags.function_name(_frame())
+    manifests = manifests or {}
     tag = abjad.Tag("baca.instrument()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
-    abjad.attach(
-        instrument,
+    _attach_persistent_indicator(
         leaf,
+        [instrument],
+        manifests=manifests,
         tag=tag,
     )
 
@@ -13429,10 +13438,14 @@ def markup_function(
     argument,
     markup: str | abjad.Markup,
     *tweaks: abjad.Tweak,
+    allow_rests: bool = False,
     direction=abjad.UP,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    leaf = abjad.select.leaf(argument, 0)
+    if allow_rests:
+        leaf = abjad.select.leaf(argument, 0)
+    else:
+        leaf = _select.pleaf(argument, 0)
     if direction not in (abjad.DOWN, abjad.UP):
         message = f"direction must be up or down (not {direction!r})."
         raise Exception(message)
@@ -13448,7 +13461,6 @@ def markup_function(
         raise Exception(message)
     if tweaks:
         indicator = abjad.bundle(indicator, *tweaks)
-    # tag = _tags.function_name(_frame())
     tag = abjad.Tag("baca.markup()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
