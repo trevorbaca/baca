@@ -24,6 +24,19 @@ from . import typings as _typings
 from .enums import enums as _enums
 
 
+def _adjust_microtone_deviation_pitch(plt, deviation):
+    assert deviation in (0.5, 0, -0.5)
+    if deviation == 0:
+        return
+    for pleaf in plt:
+        pitch = pleaf.written_pitch
+        accidental = pitch.accidental.semitones + deviation
+        pitch = abjad.NamedPitch(pitch, accidental=accidental)
+        pleaf.written_pitch = pitch
+        annotation = {"color microtone": True}
+        abjad.attach(annotation, pleaf)
+
+
 def _attach_persistent_indicator(
     argument,
     indicators,
@@ -311,6 +324,14 @@ def _do_interpolate_register_command(argument, start_pitch, stop_pitch):
             else:
                 raise TypeError(pleaf)
             abjad.detach(_enums.NOT_YET_REGISTERED, pleaf)
+
+
+def _do_microtone_deviation_command(argument, deviations):
+    deviations = abjad.CyclicTuple(deviations)
+    for i, plt in enumerate(_select.plts(argument)):
+        deviation = deviations[i]
+        _adjust_microtone_deviation_pitch(plt, deviation)
+    return False
 
 
 def _do_octave_displacement_command(argument, displacements):
@@ -2535,23 +2556,8 @@ class MicrotoneDeviationCommand(_command.Command):
             return False
         if self.selector:
             argument = self.selector(argument)
-        deviations = abjad.CyclicTuple(self.deviations)
-        for i, plt in enumerate(_select.plts(argument)):
-            deviation = deviations[i]
-            self._adjust_pitch(plt, deviation)
+        _do_microtone_deviation_command(argument, self.deviations)
         return False
-
-    def _adjust_pitch(self, plt, deviation):
-        assert deviation in (0.5, 0, -0.5)
-        if deviation == 0:
-            return
-        for pleaf in plt:
-            pitch = pleaf.written_pitch
-            accidental = pitch.accidental.semitones + deviation
-            pitch = abjad.NamedPitch(pitch, accidental=accidental)
-            pleaf.written_pitch = pitch
-            annotation = {"color microtone": True}
-            abjad.attach(annotation, pleaf)
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -5601,6 +5607,13 @@ def deviation(
     selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
 ) -> MicrotoneDeviationCommand:
     return MicrotoneDeviationCommand(deviations=deviations, selector=selector)
+
+
+def deviation_function(
+    argument,
+    deviations: list[int | float],
+) -> None:
+    _do_microtone_deviation_command(argument, deviations)
 
 
 def diatonic_clusters(
