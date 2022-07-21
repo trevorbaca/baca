@@ -101,14 +101,11 @@ def _do_bcp_command(
 ):
     if tag is None:
         tag = abjad.Tag()
-    # bcps_ = list(self.bcps)
     bcps_ = list(bcps)
-    # bcps_ = self.helper(bcps_, argument)
     bcps_ = helper(bcps_, argument)
     bcps = abjad.CyclicTuple(bcps_)
     lts = _select.lts(argument)
     add_right_text_to_me = None
-    # if not self.final_spanner:
     if not final_spanner:
         rest_count, nonrest_count = 0, 0
         for lt in reversed(lts):
@@ -122,7 +119,6 @@ def _do_bcp_command(
                     add_right_text_to_me = lt.head
                     break
                 nonrest_count += 1
-    # if self.final_spanner and not _is_rest(lts[-1]) and len(lts[-1]) == 1:
     if final_spanner and not _is_rest(lts[-1]) and len(lts[-1]) == 1:
         next_leaf_after_argument = abjad.get.leaf(lts[-1][-1], 1)
         if next_leaf_after_argument is None:
@@ -133,7 +129,6 @@ def _do_bcp_command(
     i = 0
     for lt in lts:
         stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanBCP")
-        # if not self.final_spanner and lt is lts[-1] and not _is_rest(lt.head):
         if not final_spanner and lt is lts[-1] and not _is_rest(lt.head):
             abjad.attach(
                 stop_text_span,
@@ -160,7 +155,6 @@ def _do_bcp_command(
         left_text = r"- \baca-bcp-spanner-left-text"
         left_text += rf" #{numerator} #{denominator}"
         if lt is lts[-1]:
-            # if self.final_spanner:
             if final_spanner:
                 style = "solid-line-with-arrow"
             else:
@@ -180,9 +174,7 @@ def _do_bcp_command(
             right_text=right_text,
             style=style,
         )
-        # if self.tweaks:
         if tweaks:
-            # start_text_span = _tweaks.bundle_tweaks(start_text_span, self.tweaks)
             start_text_span = _tweaks.bundle_tweaks(start_text_span, tweaks)
         if _is_rest(lt.head) and (_is_rest(next_leaf) or next_leaf is None):
             pass
@@ -200,7 +192,6 @@ def _do_bcp_command(
                 # tag=self.tag.append(_tags.function_name(_frame(), self, n=3)),
                 tag=tag.append(abjad.Tag("baca.bcps(3)")),
             )
-        # if lt is lts[-1] and self.final_spanner:
         if lt is lts[-1] and final_spanner:
             abjad.attach(
                 stop_text_span,
@@ -215,10 +206,8 @@ def _do_bcp_command(
         elif _is_rest(previous_leaf) or previous_bcp is None:
             if bcp_fraction > next_bcp_fraction:
                 articulation = abjad.Articulation("upbow")
-                # if self.bow_change_tweaks:
                 if bow_change_tweaks:
                     articulation = _tweaks.bundle_tweaks(
-                        # articulation, self.bow_change_tweaks
                         articulation,
                         bow_change_tweaks,
                     )
@@ -230,10 +219,8 @@ def _do_bcp_command(
                 )
             elif bcp_fraction < next_bcp_fraction:
                 articulation = abjad.Articulation("downbow")
-                # if self.bow_change_tweaks:
                 if bow_change_tweaks:
                     articulation = _tweaks.bundle_tweaks(
-                        # articulation, self.bow_change_tweaks
                         articulation,
                         bow_change_tweaks,
                     )
@@ -247,10 +234,8 @@ def _do_bcp_command(
             previous_bcp_fraction = abjad.Fraction(*previous_bcp)
             if previous_bcp_fraction < bcp_fraction > next_bcp_fraction:
                 articulation = abjad.Articulation("upbow")
-                # if self.bow_change_tweaks:
                 if bow_change_tweaks:
                     articulation = _tweaks.bundle_tweaks(
-                        # articulation, self.bow_change_tweaks
                         articulation,
                         bow_change_tweaks,
                     )
@@ -262,10 +247,8 @@ def _do_bcp_command(
                 )
             elif previous_bcp_fraction > bcp_fraction < next_bcp_fraction:
                 articulation = abjad.Articulation("downbow")
-                # if self.bow_change_tweaks:
                 if bow_change_tweaks:
                     articulation = _tweaks.bundle_tweaks(
-                        # articulation, self.bow_change_tweaks
                         articulation,
                         bow_change_tweaks,
                     )
@@ -299,6 +282,18 @@ def _do_cluster_command(
             )
             chords.append(chord)
     return chords
+
+
+def _do_color_fingering_command(argument, numbers, *, direction=abjad.UP, tweaks=None):
+    pheads = _select.pheads(argument)
+    total = len(pheads)
+    numbers = abjad.CyclicTuple(numbers)
+    for i, phead in enumerate(pheads):
+        number = numbers[i]
+        if number != 0:
+            fingering = abjad.ColorFingering(number)
+            fingering = _tweaks.bundle_tweaks(fingering, tweaks, i=i, total=total)
+            abjad.attach(fingering, phead, direction=direction)
 
 
 def _do_interpolate_register_command(argument, start_pitch, stop_pitch):
@@ -432,12 +427,10 @@ def _do_register_command(argument, registration):
         for pleaf in plt:
             if isinstance(pleaf, abjad.Note):
                 pitch = pleaf.written_pitch
-                # pitches = self.registration([pitch])
                 pitches = registration([pitch])
                 pleaf.written_pitch = pitches[0]
             elif isinstance(pleaf, abjad.Chord):
                 pitches = pleaf.written_pitches
-                # pitches = self.registration(pitches)
                 pitches = registration(pitches)
                 pleaf.written_pitches = pitches
             else:
@@ -2130,17 +2123,9 @@ class ColorFingeringCommand(_command.Command):
             argument = self.selector(argument)
         if not argument:
             return False
-        pheads = _select.pheads(argument)
-        total = len(pheads)
-        numbers = abjad.CyclicTuple(self.numbers)
-        for i, phead in enumerate(pheads):
-            number = numbers[i]
-            if number != 0:
-                fingering = abjad.ColorFingering(number)
-                fingering = _tweaks.bundle_tweaks(
-                    fingering, self.tweaks, i=i, total=total
-                )
-                abjad.attach(fingering, phead, direction=self.direction)
+        _do_color_fingering_command(
+            argument, self.numbers, direction=self.direction, tweaks=self.tweaks
+        )
         return False
 
 
@@ -5601,6 +5586,14 @@ def color_fingerings(
     selector=lambda _: _select.pheads(_, exclude=_enums.HIDDEN),
 ) -> ColorFingeringCommand:
     return ColorFingeringCommand(numbers=numbers, selector=selector, tweaks=tweaks)
+
+
+def color_fingerings_function(
+    argument,
+    numbers: list[int],
+    *tweaks: _typings.IndexedTweak,
+) -> None:
+    _do_color_fingering_command(argument, numbers, tweaks=tweaks)
 
 
 def deviation(
