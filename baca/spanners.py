@@ -452,6 +452,28 @@ def ottava_bassa(
     )
 
 
+def ottava_bassa_function(
+    leaves: typing.Sequence[abjad.Leaf],
+    *,
+    start_ottava: abjad.Ottava = abjad.Ottava(n=-1),
+    stop_ottava: abjad.Ottava = abjad.Ottava(n=0, site="after"),
+    # selector=lambda _: _select.tleaves(_),
+    tags: list[abjad.Tag] = None,
+) -> None:
+    assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
+    assert isinstance(start_ottava, abjad.Ottava), repr(start_ottava)
+    assert isinstance(stop_ottava, abjad.Ottava), repr(stop_ottava)
+    tag = abjad.Tag("baca.ottava_bassa()")
+    for tag_ in tags or []:
+        tag = tag.append(tag_)
+    _attach_start_stop_indicators(
+        leaves,
+        tag,
+        start_indicator=start_ottava,
+        stop_indicator=stop_ottava,
+    )
+
+
 def slur(
     *tweaks: abjad.Tweak,
     map=None,

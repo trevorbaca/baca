@@ -2540,7 +2540,7 @@ class CacheGetItemWrapper:
         cache = cache_leaves(
             self._score, self._measure_count, self._voice_abbreviations
         )
-        return cache
+        self.voice_name_to_leaves_by_measure = cache.voice_name_to_leaves_by_measure
 
 
 class DictionaryGetItemWrapper:

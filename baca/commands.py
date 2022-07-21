@@ -9426,6 +9426,23 @@ def marcato(
     )
 
 
+def marcato_function(
+    argument,
+    *,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    tag = abjad.Tag("baca.marcato()")
+    for tag_ in tags or []:
+        tag = tag.append(tag_)
+    for leaf in abjad.iterate.leaves(argument):
+        indicator = abjad.Articulation("marcato")
+        abjad.attach(
+            indicator,
+            leaf,
+            tag=tag,
+        )
+
+
 def short_instrument_name(
     argument: str,
     selector=lambda _: abjad.select.leaf(_, 0),
@@ -10008,6 +10025,23 @@ def staccatissimo(
         selector=selector,
         tags=[_tags.function_name(_frame())],
     )
+
+
+def staccatissimo_function(
+    argument,
+    *,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    tag = abjad.Tag("baca.staccatissimo()")
+    for tag_ in tags or []:
+        tag = tag.append(tag_)
+    for leaf in abjad.iterate.leaves(argument):
+        indicator = abjad.Articulation("staccatissimo")
+        abjad.attach(
+            indicator,
+            leaf,
+            tag=tag,
+        )
 
 
 def staccato(
