@@ -1,6 +1,5 @@
 import copy
 import dataclasses
-import functools
 import importlib
 import inspect
 import os
@@ -2112,7 +2111,7 @@ def _scope_to_leaf_selection(
             raise Exception(message)
     assert all(isinstance(_, abjad.Leaf) for _ in selection), repr(selection)
     if isinstance(command.scope, _command.TimelineScope):
-        selection = _sort_by_timeline(selection)
+        selection = _select.sort_by_timeline(selection)
     return selection, cache
 
 
@@ -2206,29 +2205,6 @@ def _sort_dictionary(dictionary):
         if isinstance(value, dict):
             _sort_dictionary(value)
         dictionary[key] = value
-
-
-def _sort_by_timeline(leaves):
-    assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
-
-    def compare(leaf_1, leaf_2):
-        start_offset_1 = abjad.get.timespan(leaf_1).start_offset
-        start_offset_2 = abjad.get.timespan(leaf_2).start_offset
-        if start_offset_1 < start_offset_2:
-            return -1
-        if start_offset_2 < start_offset_1:
-            return 1
-        index_1 = abjad.get.parentage(leaf_1).score_index()
-        index_2 = abjad.get.parentage(leaf_2).score_index()
-        if index_1 < index_2:
-            return -1
-        if index_2 < index_1:
-            return 1
-        return 0
-
-    leaves = list(leaves)
-    leaves.sort(key=functools.cmp_to_key(compare))
-    return leaves
 
 
 def _style_anchor_notes(score):
@@ -2486,6 +2462,9 @@ class CacheGetItemWrapper:
         for abbreviation, voice_name in voice_abbreviations.items():
             self.abbreviation_to_voice_name[abbreviation] = voice_name
 
+    def __getattr__(self, string):
+        return self.__getitem__(string)
+
     def __getitem__(self, argument):
         try:
             measure_number_to_leaves = self.voice_name_to_leaves_by_measure[argument]
@@ -2563,6 +2542,12 @@ class DictionaryGetItemWrapper:
                     leaves = []
                 result.extend(leaves)
         return result
+
+    def get(self, start, stop=None):
+        if stop is not None:
+            return self.__getitem__((start, stop))
+        else:
+            return self.__getitem__(start)
 
     def leaves(self):
         result = []

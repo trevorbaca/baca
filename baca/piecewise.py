@@ -4528,7 +4528,7 @@ def text_spanner_function(
         # self_right_broken,
         self_specifiers=specifiers,
         self_tag=tag,
-        # self_tweaks,
+        self_tweaks=tweaks,
     )
 
 

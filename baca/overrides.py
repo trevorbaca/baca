@@ -2556,13 +2556,14 @@ def note_head_style_harmonic(
 
 
 def note_head_style_harmonic_function(
-    argument, *, tags: list[abjad.Tag] = None
+    argument, *, allow_rests: bool = False, tags: list[abjad.Tag] = None
 ) -> None:
     if isinstance(argument, abjad.Leaf):
         leaves = [argument]
+    elif allow_rests:
+        leaves = abjad.select.leaves(argument)
     else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+        leaves = _select.pleaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
