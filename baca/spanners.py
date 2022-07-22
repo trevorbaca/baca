@@ -342,12 +342,14 @@ def ottava(
 def ottava_function(
     leaves: typing.Sequence[abjad.Leaf],
     *,
+    allow_rests: bool = False,
     start_ottava: abjad.Ottava = abjad.Ottava(n=1),
     stop_ottava: abjad.Ottava = abjad.Ottava(n=0, site="after"),
     # right_broken: bool = False,
-    # selector=lambda _: _select.tleaves(_),
     tags: list[abjad.Tag] = None,
 ) -> None:
+    if not allow_rests:
+        leaves = _select.tleaves(leaves)
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
     assert isinstance(start_ottava, abjad.Ottava), repr(start_ottava)
     assert isinstance(stop_ottava, abjad.Ottava), repr(stop_ottava)
@@ -455,11 +457,13 @@ def ottava_bassa(
 def ottava_bassa_function(
     leaves: typing.Sequence[abjad.Leaf],
     *,
+    allow_rests: bool = False,
     start_ottava: abjad.Ottava = abjad.Ottava(n=-1),
     stop_ottava: abjad.Ottava = abjad.Ottava(n=0, site="after"),
-    # selector=lambda _: _select.tleaves(_),
     tags: list[abjad.Tag] = None,
 ) -> None:
+    if not allow_rests:
+        leaves = _select.pleaves(leaves)
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
     assert isinstance(start_ottava, abjad.Ottava), repr(start_ottava)
     assert isinstance(stop_ottava, abjad.Ottava), repr(stop_ottava)
