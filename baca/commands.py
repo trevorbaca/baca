@@ -9594,12 +9594,13 @@ def mark(
 
 
 def mark_function(
-    leaf: abjad.Leaf,
-    argument: str,
+    argument,
+    string: str,
     *tweaks: abjad.Tweak,
 ) -> None:
-    assert isinstance(argument, abjad.Markup | str), repr(argument)
-    rehearsal_mark = abjad.RehearsalMark(markup=argument)
+    leaf = abjad.select.leaf(argument, 0)
+    assert isinstance(string, abjad.Markup | str), repr(string)
+    rehearsal_mark = abjad.RehearsalMark(markup=string)
     rehearsal_mark = _tweaks.bundle_tweaks(rehearsal_mark, tweaks)
     tag = abjad.Tag("baca.mark()")
     abjad.attach(

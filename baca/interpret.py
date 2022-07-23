@@ -2596,6 +2596,9 @@ class DynamicScope:
     def plts(self):
         return _select.plts(self.argument, exclude=_enums.HIDDEN)
 
+    def ptails(self):
+        return _select.ptails(self.argument, exclude=_enums.HIDDEN)
+
     def rleak(self):
         return _select.rleak(self.argument)
 
