@@ -60,9 +60,11 @@ def _do_override_command(
     if after is True:
         site = "after"
     literal = abjad.LilyPondLiteral(string, site=site)
-    abjad.attach(literal, leaves[0], deactivate=deactivate, tag=first_tag)
+    wrapper_1 = abjad.attach(
+        literal, leaves[0], deactivate=deactivate, tag=first_tag, wrapper=True
+    )
     if once:
-        return
+        return wrapper_1
     override = abjad.LilyPondOverride(
         lilypond_type=lilypond_type,
         grob_name=grob,
@@ -71,7 +73,10 @@ def _do_override_command(
     )
     string = override.revert_string
     literal = abjad.LilyPondLiteral(string, "after")
-    abjad.attach(literal, leaves[-1], deactivate=deactivate, tag=final_tag)
+    wrapper_2 = abjad.attach(
+        literal, leaves[-1], deactivate=deactivate, tag=final_tag, wrapper=True
+    )
+    return wrapper_1, wrapper_2
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -1207,6 +1212,33 @@ def dynamic_text_extra_offset(
     )
 
 
+def dynamic_text_extra_offset_function(
+    argument,
+    pair: tuple[int | float, int | float],
+    *,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _do_override_command(
+        leaves,
+        "DynamicText",
+        "extra_offset",
+        f"#'({pair[0]} . {pair[1]})",
+        first_tag,
+        final_tag,
+    )
+
+
 def dynamic_text_parent_alignment_x(
     n: int | float,
     selector=lambda _: _select.pleaf(_, 0),
@@ -1281,6 +1313,32 @@ def dynamic_text_x_extent_zero(
         grob="DynamicText",
         selector=selector,
         tags=[_tags.function_name(_frame())],
+    )
+
+
+def dynamic_text_x_extent_zero_function(
+    argument,
+    *,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _do_override_command(
+        leaves,
+        "DynamicText",
+        "X_extent",
+        (0, 0),
+        first_tag,
+        final_tag,
     )
 
 
@@ -1394,6 +1452,33 @@ def hairpin_shorten_pair(
     )
 
 
+def hairpin_shorten_pair_function(
+    argument,
+    pair: tuple[int | float, int | float],
+    *,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _do_override_command(
+        leaves,
+        "Hairpin",
+        "shorten_pair",
+        f"#'({pair[0]} . {pair[1]})",
+        first_tag,
+        final_tag,
+    )
+
+
 def hairpin_start_shift(
     dynamic: str | abjad.Dynamic,
     selector=lambda _: abjad.select.leaf(_, 0),
@@ -1412,6 +1497,20 @@ def hairpin_start_shift(
     )
     _command.tag(_tags.function_name(_frame()), suite)
     return suite
+
+
+def hairpin_start_shift_function(
+    argument,
+    dynamic: str | abjad.Dynamic,
+) -> None:
+    dynamic = abjad.Dynamic(dynamic)
+    width = dynamic._to_width[str(dynamic.name)]
+    extra_offset_x = -width
+    hairpin_shorten_left = width - 1.25
+    leaf = abjad.select.leaf(argument, 0)
+    dynamic_text_extra_offset_function(leaf, (extra_offset_x, 0))
+    dynamic_text_x_extent_zero_function(leaf)
+    hairpin_shorten_pair_function(argument, (hairpin_shorten_left, 0))
 
 
 def hairpin_stencil_false(
@@ -5119,7 +5218,7 @@ def text_script_extra_offset_function(
     *,
     allow_mmrests: bool = False,
     tags: list[abjad.Tag] = None,
-) -> None:
+) -> abjad.Wrapper:
     if isinstance(argument, abjad.Leaf):
         leaves = [argument]
     else:
@@ -5134,7 +5233,7 @@ def text_script_extra_offset_function(
     blocklist = []
     if allow_mmrests is not True:
         blocklist.append(abjad.MultimeasureRest)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "TextScript",
         "extra_offset",

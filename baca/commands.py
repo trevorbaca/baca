@@ -309,6 +309,15 @@ def _do_color_fingering_command(argument, numbers, *, direction=abjad.UP, tweaks
             abjad.attach(fingering, phead, direction=direction)
 
 
+def _do_detach_command(argument, indicators):
+    leaves = abjad.select.leaves(argument)
+    assert isinstance(leaves, list)
+    for leaf in leaves:
+        for indicator in indicators:
+            abjad.detach(indicator, leaf)
+    return False
+
+
 def _do_interpolate_register_command(argument, start_pitch, stop_pitch):
     plts = _select.plts(argument)
     length = len(plts)
@@ -624,11 +633,11 @@ def _staff_position_function(
             default=abjad.Clef("treble"),
         )
         number = numbers[i]
-        # TODO: remove this first branch (after migration) because never executed?
+        # TODO: remove branch because never used?
         if isinstance(number, list):
             raise Exception("ASDF")
             positions = [abjad.StaffPosition(_) for _ in number]
-            pitches = [_.to_pitch(clef) for _ in positions]
+            pitches = [clef.to_pitch(_) for _ in positions]
             new_lt = _set_lt_pitch(
                 plt,
                 pitches,
@@ -2165,11 +2174,7 @@ class DetachCommand(_command.Command):
             return False
         assert self.selector is not None
         argument = self.selector(argument)
-        leaves = abjad.select.leaves(argument)
-        assert isinstance(leaves, list)
-        for leaf in leaves:
-            for argument in self.arguments:
-                abjad.detach(argument, leaf)
+        _do_detach_command(argument, self.arguments)
         return False
 
 
@@ -7650,6 +7655,31 @@ def staff_positions(
     )
 
 
+def staff_positions_function(
+    argument,
+    numbers,
+    *,
+    allow_hidden: bool = False,
+    allow_out_of_range: bool = False,
+    allow_repeats: bool = False,
+    mock: bool = False,
+    exact: bool = False,
+) -> None:
+    if allow_repeats is None and len(numbers) == 1:
+        allow_repeats = True
+    mutated_score = _staff_position_function(
+        argument,
+        numbers,
+        allow_hidden=allow_hidden,
+        allow_out_of_range=allow_out_of_range,
+        allow_repeats=allow_repeats,
+        # allow_repitch=allow_repitch,
+        mock=mock,
+        # set_chord_pitches_equal=set_chord_pitches_equal,
+    )
+    return mutated_score
+
+
 def accent(
     selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ):
@@ -8446,6 +8476,23 @@ def double_staccato(
         selector=selector,
         tags=[_tags.function_name(_frame())],
     )
+
+
+def double_staccato_function(
+    argument,
+    *,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    tag = abjad.Tag("baca.double_staccato()")
+    for tag_ in tags or []:
+        tag = tag.append(tag_)
+    for leaf in abjad.iterate.leaves(argument):
+        indicator = abjad.Articulation("baca-staccati #2")
+        abjad.attach(
+            indicator,
+            leaf,
+            tag=tag,
+        )
 
 
 def down_arpeggio(
@@ -13591,6 +13638,10 @@ def replace_with_clusters_function(
 
 def untie(selector) -> DetachCommand:
     return DetachCommand(arguments=[abjad.Tie, abjad.RepeatTie], selector=selector)
+
+
+def untie_function(argument) -> None:
+    _do_detach_command(argument, indicators=[abjad.Tie, abjad.RepeatTie])
 
 
 def voice_four(
