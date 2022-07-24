@@ -2148,7 +2148,7 @@ def hairpin_function(
         self_pieces=pieces,
         self_remove_length_1_spanner_start=remove_length_1_spanner_start,
         # self_right_broken,
-        self_specifiers=specifiers,
+        self_specifiers=abjad.CyclicTuple(specifiers),
         self_tag=tag,
         # self_tweaks,
     )
