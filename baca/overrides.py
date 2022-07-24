@@ -5409,6 +5409,42 @@ def text_script_parent_alignment_x(
     )
 
 
+def text_script_parent_alignment_x_function(
+    argument,
+    n: int | float,
+    *,
+    allow_mmrests: bool = False,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    blocklist = []
+    if allow_mmrests is not True:
+        blocklist.append(abjad.MultimeasureRest)
+    _do_override_command(
+        leaves,
+        "TextScript",
+        "parent_alignment_X",
+        n,
+        first_tag,
+        final_tag,
+        # after=after,
+        # allowlist=None,
+        blocklist=tuple(blocklist),
+        # context=context,
+        # deactivate=False,
+    )
+
+
 def text_script_self_alignment_x(
     n: int | float,
     selector=lambda _: _select.leaves(_),
@@ -5573,6 +5609,42 @@ def text_script_staff_padding(
         grob="TextScript",
         selector=selector,
         tags=[_tags.function_name(_frame())],
+    )
+
+
+def text_script_staff_padding_function(
+    argument,
+    n: int | float,
+    *,
+    allow_mmrests: bool = False,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    blocklist = []
+    if allow_mmrests is not True:
+        blocklist.append(abjad.MultimeasureRest)
+    _do_override_command(
+        leaves,
+        "TextScript",
+        "staff_padding",
+        n,
+        first_tag,
+        final_tag,
+        # after=after,
+        # allowlist=None,
+        blocklist=tuple(blocklist),
+        # context=context,
+        # deactivate=False,
     )
 
 

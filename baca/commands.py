@@ -8177,11 +8177,12 @@ def bar_line_command(
     )
 
 
+# TODO: if deactivate is necessary, return wrapper
 def bar_line(
     skip,
     abbreviation: str = "|",
     *,
-    deactivate: bool = False,
+    # deactivate: bool = False,
     site: str = "after",
 ):
     assert isinstance(abbreviation, str), repr(abbreviation)
@@ -8189,7 +8190,7 @@ def bar_line(
     abjad.attach(
         indicator,
         skip,
-        deactivate=deactivate,
+        # deactivate=deactivate,
         tag=_tags.function_name(_frame()),
     )
 
@@ -13482,7 +13483,7 @@ def markup_function(
     allow_rests: bool = False,
     direction=abjad.UP,
     tags: list[abjad.Tag] = None,
-) -> None:
+) -> abjad.Wrapper:
     if allow_rests:
         leaf = abjad.select.leaf(argument, 0)
     else:
@@ -13505,11 +13506,12 @@ def markup_function(
     tag = abjad.Tag("baca.markup()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
-    abjad.attach(
+    return abjad.attach(
         indicator,
         leaf,
         direction=direction,
         tag=tag,
+        wrapper=True,
     )
 
 
