@@ -13529,12 +13529,9 @@ def markup_function(
     *tweaks: abjad.Tweak,
     allow_rests: bool = False,
     direction=abjad.UP,
+    persistent: bool = True,
     tags: list[abjad.Tag] = None,
-) -> abjad.Wrapper:
-    if allow_rests:
-        leaf = abjad.select.leaf(argument, 0)
-    else:
-        leaf = _select.pleaf(argument, 0)
+) -> abjad.Wrapper | list[abjad.Wrapper]:
     if direction not in (abjad.DOWN, abjad.UP):
         message = f"direction must be up or down (not {direction!r})."
         raise Exception(message)
@@ -13553,12 +13550,53 @@ def markup_function(
     tag = abjad.Tag("baca.markup()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
-    return abjad.attach(
-        indicator,
-        leaf,
+    if persistent is True:
+        if allow_rests:
+            leaf = abjad.select.leaf(argument, 0)
+        else:
+            leaf = _select.pleaf(argument, 0)
+        return abjad.attach(
+            indicator,
+            leaf,
+            direction=direction,
+            tag=tag,
+            wrapper=True,
+        )
+    else:
+        if allow_rests:
+            leaves = abjad.select.leaves(argument)
+        else:
+            leaves = _select.pleaves(argument)
+        wrappers = []
+        for leaf in leaves:
+            wrapper = abjad.attach(
+                indicator,
+                leaf,
+                direction=direction,
+                tag=tag,
+                wrapper=True,
+            )
+            wrappers.append(wrapper)
+        return wrappers
+
+
+def nonpersistent_markup(
+    argument,
+    markup: str | abjad.Markup,
+    *tweaks: abjad.Tweak,
+    allow_rests: bool = False,
+    direction=abjad.UP,
+    persistent: bool = True,
+    tags: list[abjad.Tag] = None,
+) -> abjad.Wrapper | list[abjad.Wrapper]:
+    return markup_function(
+        argument,
+        markup,
+        *tweaks,
+        allow_rests=allow_rests,
         direction=direction,
-        tag=tag,
-        wrapper=True,
+        persistent=False,
+        tags=tags,
     )
 
 

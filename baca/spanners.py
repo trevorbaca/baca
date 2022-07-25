@@ -115,9 +115,13 @@ class SpannerIndicatorCommand(_command.Command):
 
 
 def _attach_start_stop_indicators(
-    leaves, tag, start_indicator=None, stop_indicator=None
+    leaves, tag, *, detach_first=False, start_indicator=None, stop_indicator=None
 ):
     assert isinstance(tag, abjad.Tag), repr(tag)
+    if detach_first:
+        for leaf in abjad.iterate.leaves(leaves, grace=False):
+            abjad.detach(type(start_indicator), leaf)
+            abjad.detach(type(stop_indicator), leaf)
     if start_indicator is not None:
         first_leaf = leaves[0]
         here = _tags.function_name(_frame(), n=2)
@@ -244,6 +248,33 @@ def beam(
         stop_indicator=stop_beam,
         tags=[_tags.function_name(_frame())],
         tweaks=tweaks,
+    )
+
+
+def beam_function(
+    argument,
+    *tweaks: abjad.Tweak,
+    direction: abjad.Vertical | None = None,
+    # selector=lambda _: _select.tleaves(_),
+    start_beam: abjad.StartBeam = None,
+    stop_beam: abjad.StopBeam = None,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    # TODO: eventually remove tleaves and force call in section files
+    leaves = _select.tleaves(argument)
+    start_beam = start_beam or abjad.StartBeam()
+    stop_beam = stop_beam or abjad.StopBeam()
+    assert isinstance(start_beam, abjad.StartBeam), repr(start_beam)
+    assert isinstance(stop_beam, abjad.StopBeam), repr(stop_beam)
+    tag = abjad.Tag("baca.beam()")
+    for tag_ in tags or []:
+        tag = tag.append(tag_)
+    _attach_start_stop_indicators(
+        leaves,
+        tag,
+        detach_first=True,
+        start_indicator=start_beam,
+        stop_indicator=stop_beam,
     )
 
 

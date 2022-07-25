@@ -412,6 +412,33 @@ def bar_line_transparent(
     )
 
 
+def bar_line_transparent_function(
+    argument,
+    *,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _do_override_command(
+        leaves,
+        "BarLine",
+        "transparent",
+        True,
+        first_tag,
+        final_tag,
+        context="Score",
+    )
+
+
 def bar_line_x_extent_command(
     pair: tuple[int | float, int | float],
     selector=lambda _: abjad.select.leaf(_, 0),
@@ -1543,6 +1570,32 @@ def hairpin_to_barline(
     )
 
 
+def hairpin_to_barline_function(
+    argument,
+    *,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _do_override_command(
+        leaves,
+        "Hairpin",
+        "to_barline",
+        True,
+        first_tag,
+        final_tag,
+    )
+
+
 def hairpin_transparent(
     selector=lambda _: _select.leaves(_),
 ) -> OverrideCommand:
@@ -1697,7 +1750,7 @@ def mmrest_color(
 def mmrest_transparent(
     selector=lambda _: _select.mmrests(_),
 ) -> OverrideCommand:
-    r"""
+    """
     Overrides multimeasure rest transparent.
     """
     return OverrideCommand(
@@ -1707,6 +1760,32 @@ def mmrest_transparent(
         selector=selector,
         tags=[_tags.function_name(_frame())],
         allowlist=(abjad.MultimeasureRest,),
+    )
+
+
+def mmrest_transparent_function(
+    argument,
+    *,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _do_override_command(
+        leaves,
+        "MultiMeasureRest",
+        "transparent",
+        True,
+        first_tag,
+        final_tag,
     )
 
 
@@ -3477,6 +3556,33 @@ def rest_position(
     )
 
 
+def rest_staff_position_function(
+    argument,
+    n: int | float,
+    *,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _do_override_command(
+        leaves,
+        "Rest",
+        "staff_position",
+        n,
+        first_tag,
+        final_tag,
+    )
+
+
 def rest_transparent(
     selector=lambda _: abjad.select.rests(_),
 ) -> OverrideCommand:
@@ -4401,6 +4507,33 @@ def span_bar_transparent(
         grob="SpanBar",
         selector=selector,
         tags=[_tags.function_name(_frame())],
+    )
+
+
+def span_bar_transparent_function(
+    argument,
+    *,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _do_override_command(
+        leaves,
+        "SpanBar",
+        "transparent",
+        True,
+        first_tag,
+        final_tag,
+        context="Score",
     )
 
 
@@ -5593,6 +5726,42 @@ def text_script_self_alignment_x(
     )
 
 
+def text_script_self_alignment_x_function(
+    argument,
+    n: int | float,
+    *,
+    allow_mmrests: bool = False,
+    tags: list[abjad.Tag] = None,
+) -> abjad.Wrapper:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    blocklist = []
+    if allow_mmrests is not True:
+        blocklist.append(abjad.MultimeasureRest)
+    return _do_override_command(
+        leaves,
+        "TextScript",
+        "self_alignment_X",
+        n,
+        first_tag,
+        final_tag,
+        # after=after,
+        # allowlist=None,
+        blocklist=tuple(blocklist),
+        # context=context,
+        # deactivate=False,
+    )
+
+
 def text_script_staff_padding(
     n: int | float,
     selector=lambda _: _select.leaves(_),
@@ -6504,6 +6673,33 @@ def time_signature_stencil_false(
         selector=selector,
         tags=[_tags.function_name(_frame())],
         value=False,
+    )
+
+
+def time_signature_stencil_false_function(
+    argument,
+    *,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    else:
+        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
+        leaves = argument
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _do_override_command(
+        leaves,
+        "TimeSignature",
+        "stencil",
+        False,
+        first_tag,
+        final_tag,
+        context="Score",
     )
 
 
