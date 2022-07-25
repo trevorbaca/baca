@@ -150,7 +150,8 @@ class OverrideCommand(_command.Command):
 
 def accidental_extra_offset(
     pair: tuple[int | float, int | float],
-    selector=lambda _: abjad.select.leaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides accidental extra-offset.
@@ -166,7 +167,8 @@ def accidental_extra_offset(
 
 def accidental_font_size(
     n: int | float,
-    selector=lambda _: abjad.select.leaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides accidental font size.
@@ -181,7 +183,8 @@ def accidental_font_size(
 
 
 def accidental_stencil_false(
-    selector=lambda _: abjad.select.leaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides accidental stencil.
@@ -196,7 +199,8 @@ def accidental_stencil_false(
 
 
 def accidental_transparent(
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ):
     """
     Overrides accidental transparency on.
@@ -211,7 +215,8 @@ def accidental_transparent(
 
 
 def accidental_x_extent_false(
-    selector=lambda _: abjad.select.leaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides accidental X-extent.
@@ -227,7 +232,8 @@ def accidental_x_extent_false(
 
 def accidental_x_offset(
     n: int | float,
-    selector=lambda _: abjad.select.leaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides accidental X-offset.
@@ -243,7 +249,8 @@ def accidental_x_offset(
 
 def accidental_y_offset(
     n: int | float,
-    selector=lambda _: abjad.select.leaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides accidental Y-offset.
@@ -259,10 +266,10 @@ def accidental_y_offset(
 
 def bar_line_color(
     color: str,
-    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     after: bool = False,
     context: str = "Score",
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides bar line color.
@@ -280,10 +287,10 @@ def bar_line_color(
 
 def bar_line_extra_offset(
     pair: tuple[int | float, int | float],
-    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     after: bool = False,
     context: str = "Score",
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides bar line extra offset.
@@ -300,7 +307,8 @@ def bar_line_extra_offset(
 
 
 def bar_line_transparent(
-    selector=lambda _: abjad.select.leaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     r"""
     Overrides bar line transparency.
@@ -441,11 +449,11 @@ def bar_line_transparent_function(
 
 def bar_line_x_extent_command(
     pair: tuple[int | float, int | float],
-    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     after: bool = False,
     context: str = "Score",
     measures: typings.Slice = None,
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     return OverrideCommand(
         after=after,
@@ -491,7 +499,8 @@ def bar_line_x_extent(
 
 def beam_positions(
     n: int | float,
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides beam positions.
@@ -599,7 +608,8 @@ def beam_positions_function(
 
 
 def beam_stencil_false(
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides beam stencil.
@@ -614,7 +624,8 @@ def beam_stencil_false(
 
 
 def beam_transparent(
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides beam transparency.
@@ -630,7 +641,8 @@ def beam_transparent(
 
 def clef_extra_offset(
     pair: tuple[int | float, int | float],
-    selector=lambda _: abjad.select.leaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -672,7 +684,8 @@ def clef_extra_offset_function(
 
 def clef_shift(
     clef: str | abjad.Clef,
-    selector=lambda _: abjad.select.leaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> _command.Suite:
     extra_offset_x: int | float
     if isinstance(clef, str):
@@ -718,7 +731,8 @@ def clef_shift_function(
 
 def clef_whiteout(
     n: int | float,
-    selector=lambda _: abjad.select.leaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides clef whiteout.
@@ -734,7 +748,8 @@ def clef_whiteout(
 
 
 def clef_x_extent_false(
-    selector=lambda _: abjad.select.leaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides clef x-extent.
@@ -778,7 +793,8 @@ def clef_x_extent_false_function(
 
 def dls_padding(
     n: int | float,
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides dynamic line spanner padding.
@@ -821,7 +837,8 @@ def dls_padding_function(
 
 def dls_staff_padding(
     n: int | float,
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides dynamic line spanner staff padding
@@ -951,7 +968,8 @@ def dls_staff_padding_function(
 
 
 def dls_up(
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides dynamic line spanner direction.
@@ -1055,7 +1073,8 @@ def dls_up(
 
 def dots_extra_offset(
     pair: tuple[int | float, int | float],
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides dots extra offset.
@@ -1070,7 +1089,8 @@ def dots_extra_offset(
 
 
 def dots_stencil_false(
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides dots stencil.
@@ -1085,7 +1105,8 @@ def dots_stencil_false(
 
 
 def dots_transparent(
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides dots transparency.
@@ -1100,7 +1121,8 @@ def dots_transparent(
 
 
 def dots_x_extent_false(
-    selector=lambda _: abjad.select.leaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides dots X-extent.
@@ -1116,7 +1138,8 @@ def dots_x_extent_false(
 
 def dynamic_text_color(
     color: str = "#red",
-    selector=lambda _: _select.pleaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides dynamic text color.
@@ -1132,7 +1155,8 @@ def dynamic_text_color(
 
 def dynamic_text_extra_offset(
     pair: tuple[int | float, int | float],
-    selector=lambda _: _select.pleaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     r"""
     Overrides dynamic text extra offset.
@@ -1268,7 +1292,8 @@ def dynamic_text_extra_offset_function(
 
 def dynamic_text_parent_alignment_x(
     n: int | float,
-    selector=lambda _: _select.pleaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides dynamic text parent alignment X to ``n``.
@@ -1284,7 +1309,8 @@ def dynamic_text_parent_alignment_x(
 
 def dynamic_text_self_alignment_x(
     n: int | float,
-    selector=lambda _: _select.pleaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides dynamic text self-alignment-X to ``n``.
@@ -1299,7 +1325,8 @@ def dynamic_text_self_alignment_x(
 
 
 def dynamic_text_stencil_false(
-    selector=lambda _: _select.pleaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides dynamic text stencil.
@@ -1314,7 +1341,8 @@ def dynamic_text_stencil_false(
 
 
 def dynamic_text_transparent(
-    selector=lambda _: _select.pleaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides dynamic text transparency.
@@ -1329,7 +1357,8 @@ def dynamic_text_transparent(
 
 
 def dynamic_text_x_extent_zero(
-    selector=lambda _: _select.pleaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides dynamic text X-extent.
@@ -1371,7 +1400,8 @@ def dynamic_text_x_extent_zero_function(
 
 def dynamic_text_x_offset(
     n: int | float,
-    selector=lambda _: _select.pleaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides dynamic text X-extent.
@@ -1387,7 +1417,8 @@ def dynamic_text_x_offset(
 
 def dynamic_text_y_offset(
     n: int | float,
-    selector=lambda _: _select.pleaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides dynamic text Y-extent.
@@ -1403,7 +1434,8 @@ def dynamic_text_y_offset(
 
 def flag_extra_offset(
     pair: tuple[int | float, int | float],
-    selector=lambda _: abjad.select.leaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides flag extra-offset.
@@ -1418,7 +1450,8 @@ def flag_extra_offset(
 
 
 def flag_stencil_false(
-    selector=lambda _: _select.pleaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides flag stencil.
@@ -1433,7 +1466,8 @@ def flag_stencil_false(
 
 
 def flag_transparent(
-    selector=lambda _: _select.pleaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     """
     Overrides flag transparency.
@@ -1449,7 +1483,8 @@ def flag_transparent(
 
 def glissando_thickness(
     n: int | float,
-    selector=lambda _: _select.pleaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     """
     Overrides glissando thickness.
@@ -1465,7 +1500,8 @@ def glissando_thickness(
 
 def hairpin_shorten_pair(
     pair: tuple[int | float, int | float],
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides hairpin shorten pair.
@@ -1508,7 +1544,8 @@ def hairpin_shorten_pair_function(
 
 def hairpin_start_shift(
     dynamic: str | abjad.Dynamic,
-    selector=lambda _: abjad.select.leaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> _command.Suite:
     """
     Shifts hairpin start dynamic to left by width of dynamic.
@@ -1541,7 +1578,8 @@ def hairpin_start_shift_function(
 
 
 def hairpin_stencil_false(
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides hairpin stencil.
@@ -1556,7 +1594,8 @@ def hairpin_stencil_false(
 
 
 def hairpin_to_barline(
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides hairpin to-barline to true.
@@ -1597,7 +1636,8 @@ def hairpin_to_barline_function(
 
 
 def hairpin_transparent(
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides hairpin transparency.
@@ -1612,7 +1652,8 @@ def hairpin_transparent(
 
 
 def laissez_vibrer_tie_down(
-    selector=lambda _: _select.pleaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides laissez-vibrer-tie direction.
@@ -1627,7 +1668,8 @@ def laissez_vibrer_tie_down(
 
 
 def laissez_vibrer_tie_up(
-    selector=lambda _: _select.pleaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides laissez-vibrer-tie direction.
@@ -1643,7 +1685,8 @@ def laissez_vibrer_tie_up(
 
 def mmrest_color(
     color: str = "#red",
-    selector=lambda _: _select.mmrests(_),
+    *,
+    selector: typing.Callable = lambda _: _select.mmrests(_),
 ) -> OverrideCommand:
     r"""
     Overrides multimeasure rest color.
@@ -1748,7 +1791,8 @@ def mmrest_color(
 
 
 def mmrest_transparent(
-    selector=lambda _: _select.mmrests(_),
+    *,
+    selector: typing.Callable = lambda _: _select.mmrests(_),
 ) -> OverrideCommand:
     """
     Overrides multimeasure rest transparent.
@@ -1792,7 +1836,8 @@ def mmrest_transparent_function(
 
 def mmrest_text_color(
     color: str = "#red",
-    selector=lambda _: _select.mmrests(_),
+    *,
+    selector: typing.Callable = lambda _: _select.mmrests(_),
 ) -> OverrideCommand:
     r"""
     Overrides multimeasure rest text color.
@@ -1944,7 +1989,8 @@ def mmrest_text_color(
 
 def mmrest_text_extra_offset(
     pair: tuple[int | float, int | float],
-    selector=lambda _: _select.mmrests(_),
+    *,
+    selector: typing.Callable = lambda _: _select.mmrests(_),
 ) -> OverrideCommand:
     r"""
     Overrides multimeasure rest text extra offset.
@@ -2079,7 +2125,8 @@ def mmrest_text_extra_offset_function(
 
 def mmrest_text_padding(
     n: int | float,
-    selector=lambda _: _select.mmrests(_),
+    *,
+    selector: typing.Callable = lambda _: _select.mmrests(_),
 ) -> OverrideCommand:
     r"""
     Overrides multimeasure rest text padding.
@@ -2186,7 +2233,8 @@ def mmrest_text_padding(
 
 
 def mmrest_text_parent_center(
-    selector=lambda _: _select.mmrests(_),
+    *,
+    selector: typing.Callable = lambda _: _select.mmrests(_),
 ) -> OverrideCommand:
     r"""
     Overrides multimeasure rest text parent alignment X to center.
@@ -2294,7 +2342,8 @@ def mmrest_text_parent_center(
 
 def mmrest_text_staff_padding(
     n: int | float,
-    selector=lambda _: _select.mmrests(_),
+    *,
+    selector: typing.Callable = lambda _: _select.mmrests(_),
 ) -> OverrideCommand:
     r"""
     Overrides multimeasure rest text staff padding.
@@ -2401,7 +2450,8 @@ def mmrest_text_staff_padding(
 
 
 def mmrest_text_transparent(
-    selector=lambda _: _select.mmrests(_),
+    *,
+    selector: typing.Callable = lambda _: _select.mmrests(_),
 ) -> OverrideCommand:
     """
     Overrides script transparent.
@@ -2417,7 +2467,8 @@ def mmrest_text_transparent(
 
 
 def no_ledgers(
-    selector=lambda _: _select.pleaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     """
     Overrides note-head no-ledgers.
@@ -2433,7 +2484,8 @@ def no_ledgers(
 
 def note_column_shift(
     n: int | float,
-    selector=lambda _: abjad.select.leaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides note column force hshift.
@@ -2449,7 +2501,8 @@ def note_column_shift(
 
 def note_head_color(
     color: str,
-    selector=lambda _: _select.pleaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     """
     Overrides note-head color.
@@ -2465,7 +2518,8 @@ def note_head_color(
 
 def note_head_duration_log(
     n: int,
-    selector=lambda _: _select.pleaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     """
     Overrides note-head duration-log property.
@@ -2506,7 +2560,8 @@ def note_head_duration_log_function(
 
 def note_head_extra_offset(
     pair: tuple[int | float, int | float],
-    selector=lambda _: _select.pleaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides note-head color.
@@ -2522,7 +2577,8 @@ def note_head_extra_offset(
 
 def note_head_font_size(
     n: int | float,
-    selector=lambda _: _select.pleaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides note-head font size.
@@ -2538,7 +2594,8 @@ def note_head_font_size(
 
 def note_head_no_ledgers(
     value: bool,
-    selector=lambda _: _select.pleaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides note-head no-ledgers property.
@@ -2578,7 +2635,8 @@ def note_head_no_ledgers_function(
 
 
 def note_head_stencil_false(
-    selector=lambda _: _select.pleaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides note-head stencil.
@@ -2594,7 +2652,8 @@ def note_head_stencil_false(
 
 def note_head_style(
     string: str,
-    selector=lambda _: _select.pleaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides note-head style property.
@@ -2634,7 +2693,8 @@ def note_head_style_function(
 
 
 def note_head_style_cross(
-    selector=lambda _: _select.pleaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides note-head style.
@@ -2722,7 +2782,8 @@ def note_head_style_cross(
 
 
 def note_head_style_harmonic(
-    selector=lambda _: _select.pleaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides note-head style for ``selector`` output.
@@ -2835,7 +2896,8 @@ def note_head_style_harmonic_function(
 
 
 def note_head_style_harmonic_black(
-    selector=lambda _: _select.pleaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides note-head style to harmonic-black.
@@ -2850,7 +2912,8 @@ def note_head_style_harmonic_black(
 
 
 def note_head_transparent(
-    selector=lambda _: _select.pleaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaves(_),
 ):
     """
     Overrides note-head transparency.
@@ -2865,7 +2928,8 @@ def note_head_transparent(
 
 
 def note_head_x_extent_zero(
-    selector=lambda _: _select.pleaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides note-head X-extent.
@@ -2884,7 +2948,8 @@ def note_head_x_extent_zero(
 
 def ottava_bracket_shorten_pair(
     pair: tuple[int | float, int | float] = (-0.8, -0.6),
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides ottava bracket shorten pair.
@@ -2901,7 +2966,8 @@ def ottava_bracket_shorten_pair(
 
 def ottava_bracket_staff_padding(
     n: int | float,
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides ottava bracket staff padding.
@@ -2944,9 +3010,9 @@ def ottava_bracket_staff_padding_function(
 
 
 def rehearsal_mark_down(
-    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     context: str = "Score",
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides rehearsal mark direction.
@@ -2991,9 +3057,9 @@ def rehearsal_mark_down_function(
 
 def rehearsal_mark_extra_offset(
     pair: tuple[int | float, int | float],
-    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     context: str = "Score",
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides rehearsal mark extra offset.
@@ -3039,9 +3105,9 @@ def rehearsal_mark_extra_offset_function(
 
 def rehearsal_mark_padding(
     n: int | float,
-    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     context: str = "Score",
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides rehearsal mark padding.
@@ -3087,9 +3153,9 @@ def rehearsal_mark_padding_function(
 
 def rehearsal_mark_self_alignment_x(
     n: int,
-    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     context: str = "Score",
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides rehearsal mark self-alignment-X.
@@ -3135,9 +3201,9 @@ def rehearsal_mark_self_alignment_x_function(
 
 def rehearsal_mark_y_offset(
     n: int | float,
-    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     context: str = "Score",
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides rehearsal mark Y offset.
@@ -3153,7 +3219,8 @@ def rehearsal_mark_y_offset(
 
 
 def repeat_tie_down(
-    selector=lambda _: _select.pleaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides repeat tie direction.
@@ -3250,7 +3317,8 @@ def repeat_tie_down(
 
 def repeat_tie_extra_offset(
     pair: tuple[int | float, int | float],
-    selector=lambda _: _select.pleaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides repeat tie extra-offset.
@@ -3292,7 +3360,8 @@ def repeat_tie_extra_offset_function(
 
 
 def repeat_tie_stencil_false(
-    selector=lambda _: _select.pleaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides repeat tie stencil.
@@ -3307,7 +3376,8 @@ def repeat_tie_stencil_false(
 
 
 def repeat_tie_transparent(
-    selector=lambda _: _select.pleaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaves(_),
 ):
     """
     Overrides repeat tie transparency.
@@ -3322,7 +3392,8 @@ def repeat_tie_transparent(
 
 
 def repeat_tie_up(
-    selector=lambda _: _select.pleaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides repeat tie direction.
@@ -3421,7 +3492,8 @@ def repeat_tie_up(
 
 def rest_color(
     color: str,
-    selector=lambda _: _select.rest(_, 0),
+    *,
+    selector: typing.Callable = lambda _: _select.rest(_, 0),
 ) -> OverrideCommand:
     """
     Overrides rest extra offset.
@@ -3436,7 +3508,8 @@ def rest_color(
 
 
 def rest_down(
-    selector=lambda _: abjad.select.rests(_),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.rests(_),
 ) -> OverrideCommand:
     r"""
     Overrides rest direction.
@@ -3525,7 +3598,8 @@ def rest_down(
 
 def rest_extra_offset(
     pair: tuple[int | float, int | float],
-    selector=lambda _: _select.rest(_, 0),
+    *,
+    selector: typing.Callable = lambda _: _select.rest(_, 0),
 ) -> OverrideCommand:
     """
     Overrides rest extra offset.
@@ -3545,7 +3619,8 @@ def rest_extra_offset(
 
 def rest_position(
     n: int | float,
-    selector=lambda _: abjad.select.rests(_),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.rests(_),
 ) -> OverrideCommand:
     r"""
     Overrides rest position.
@@ -3660,7 +3735,8 @@ def rest_staff_position_function(
 
 
 def rest_transparent(
-    selector=lambda _: abjad.select.rests(_),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.rests(_),
 ) -> OverrideCommand:
     r"""
     Overrides rest transparency.
@@ -3748,7 +3824,8 @@ def rest_transparent(
 
 
 def rest_up(
-    selector=lambda _: abjad.select.rests(_),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.rests(_),
 ) -> OverrideCommand:
     r"""
     Overrides rest direction.
@@ -3836,7 +3913,8 @@ def rest_up(
 
 
 def rest_x_extent_zero(
-    selector=lambda _: _select.rest(_, 0),
+    *,
+    selector: typing.Callable = lambda _: _select.rest(_, 0),
 ) -> OverrideCommand:
     """
     Overrides rest X-extent.
@@ -3856,7 +3934,8 @@ def rest_x_extent_zero(
 
 def script_color(
     color: str = "#red",
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides script color.
@@ -3954,7 +4033,8 @@ def script_color(
 
 
 def script_down(
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides script direction.
@@ -4053,7 +4133,8 @@ def script_down(
 
 def script_extra_offset(
     pair: tuple[int | float, int | float],
-    selector=lambda _: abjad.select.leaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     r"""
     Overrides script extra offset.
@@ -4154,7 +4235,8 @@ def script_extra_offset(
 
 def script_padding(
     number: int | float,
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides script padding.
@@ -4170,7 +4252,8 @@ def script_padding(
 
 def script_staff_padding(
     n: int | float,
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides script staff padding.
@@ -4212,7 +4295,8 @@ def script_staff_padding_function(
 
 
 def script_up(
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides script direction.
@@ -4310,7 +4394,8 @@ def script_up(
 
 
 def script_x_extent_zero(
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides script X-extent.
@@ -4325,7 +4410,8 @@ def script_x_extent_zero(
 
 
 def slur_down(
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides slur direction.
@@ -4424,7 +4510,8 @@ def slur_down(
 
 
 def slur_up(
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides slur direction.
@@ -4530,10 +4617,10 @@ def slur_up(
 
 def span_bar_color(
     color: str,
-    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     after: bool = False,
     context: str = "Score",
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides span bar color.
@@ -4551,10 +4638,10 @@ def span_bar_color(
 
 def span_bar_extra_offset(
     pair: tuple[int | float, int | float],
-    selector=lambda _: abjad.select.leaf(_, 0),
     *,
     after: bool = False,
     context: str = "Score",
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides span bar extra offset.
@@ -4571,7 +4658,8 @@ def span_bar_extra_offset(
 
 
 def span_bar_transparent(
-    selector=lambda _: abjad.select.leaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides span bar transparency.
@@ -4615,9 +4703,9 @@ def span_bar_transparent_function(
 
 def stem_color(
     color: str = "#red",
-    selector=lambda _: _select.pleaves(_),
     *,
     context: str = None,
+    selector: typing.Callable = lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides stem color.
@@ -4706,7 +4794,8 @@ def stem_color(
 
 
 def stem_down(
-    selector=lambda _: _select.pleaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides stem direction.
@@ -4821,7 +4910,8 @@ def stem_down_function(
 
 def stem_extra_offset(
     pair: tuple[int | float, int | float],
-    selector=lambda _: abjad.select.leaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides stem extra-offset.
@@ -4836,7 +4926,8 @@ def stem_extra_offset(
 
 
 def stem_stencil_false(
-    selector=lambda _: _select.pleaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides stem stencil.
@@ -4851,7 +4942,8 @@ def stem_stencil_false(
 
 
 def stem_transparent(
-    selector=lambda _: _select.pleaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     """
     Overrides stem transparency.
@@ -4867,7 +4959,8 @@ def stem_transparent(
 
 def stem_tremolo_extra_offset(
     pair: tuple[int | float, int | float],
-    selector=lambda _: abjad.select.leaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides stem tremolo extra-offset.
@@ -4882,7 +4975,8 @@ def stem_tremolo_extra_offset(
 
 
 def stem_up(
-    selector=lambda _: _select.pleaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides stem direction.
@@ -4998,7 +5092,8 @@ def stem_up_function(
 
 
 def strict_note_spacing_off(
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides spacing spanner strict note spacing.
@@ -5015,9 +5110,9 @@ def strict_note_spacing_off(
 
 def sustain_pedal_staff_padding(
     n: int | float,
-    selector=lambda _: _select.leaves(_),
     *,
     context: str = "Staff",
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides sustain pedal staff padding.
@@ -5119,7 +5214,7 @@ def tacet(
     color="#green",
     *,
     measures=None,
-    selector=lambda _: _select.mmrests(_),
+    selector: typing.Callable = lambda _: _select.mmrests(_),
 ):
     """
     Colors multimeasure rests.
@@ -5134,9 +5229,9 @@ def tacet(
 
 def text_script_color(
     color: str = "#red",
-    selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides text script color.
@@ -5278,9 +5373,9 @@ def text_script_color(
 
 
 def text_script_down(
-    selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides text script direction.
@@ -5459,9 +5554,9 @@ def text_script_extra_offset_function(
 
 def text_script_extra_offset(
     pair: tuple[int | float, int | float],
-    selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides text script extra offset.
@@ -5521,9 +5616,9 @@ def text_script_extra_offset(
 
 def text_script_font_size(
     n: int | float,
-    selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides text script font size.
@@ -5543,9 +5638,9 @@ def text_script_font_size(
 
 def text_script_padding(
     n: int | float,
-    selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides text script padding.
@@ -5724,9 +5819,9 @@ def text_script_padding_function(
 
 def text_script_parent_alignment_x(
     n: int | float,
-    selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides text script parent-alignment-X.
@@ -5782,9 +5877,9 @@ def text_script_parent_alignment_x_function(
 
 def text_script_self_alignment_x(
     n: int | float,
-    selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides text script self-alignment-X.
@@ -5840,9 +5935,9 @@ def text_script_self_alignment_x_function(
 
 def text_script_staff_padding(
     n: int | float,
-    selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides text script staff padding.
@@ -6020,9 +6115,9 @@ def text_script_staff_padding_function(
 
 
 def text_script_up(
-    selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides text script direction.
@@ -6165,9 +6260,9 @@ def text_script_up(
 
 def text_script_x_offset(
     n: int | float,
-    selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides text script X-offset.
@@ -6187,9 +6282,9 @@ def text_script_x_offset(
 
 def text_script_y_offset(
     n: int | float,
-    selector=lambda _: _select.leaves(_),
     *,
     allow_mmrests: bool = False,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides text script Y-offset.
@@ -6209,7 +6304,8 @@ def text_script_y_offset(
 
 def text_spanner_left_padding(
     n: int | float,
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides text spanner left padding.
@@ -6251,7 +6347,8 @@ def text_spanner_left_padding_function(
 
 def text_spanner_right_padding(
     n: int | float,
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides text spanner right padding.
@@ -6267,7 +6364,8 @@ def text_spanner_right_padding(
 
 def text_spanner_staff_padding(
     n: int | float,
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides text spanner staff padding.
@@ -6397,7 +6495,8 @@ def text_spanner_staff_padding_function(
 
 
 def text_spanner_stencil_false(
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides text spanner stencil.
@@ -6412,7 +6511,8 @@ def text_spanner_stencil_false(
 
 
 def text_spanner_transparent(
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides text spanner transparent.
@@ -6428,7 +6528,8 @@ def text_spanner_transparent(
 
 def text_spanner_y_offset(
     n: int | float,
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides text spanner Y-offset.
@@ -6469,7 +6570,8 @@ def text_spanner_y_offset_function(
 
 
 def tie_down(
-    selector=lambda _: _select.pleaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides tie direction.
@@ -6560,7 +6662,8 @@ def tie_down(
 
 
 def tie_up(
-    selector=lambda _: _select.pleaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.pleaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides tie direction.
@@ -6648,6 +6751,7 @@ def tie_up(
 
 def time_signature_extra_offset(
     pair: tuple[int | float, int | float],
+    *,
     selector: typing.Callable = lambda _: _select.hleaf(_, 0),
 ) -> OverrideCommand:
     r"""
@@ -6737,6 +6841,7 @@ def time_signature_extra_offset(
 
 
 def time_signature_stencil_false(
+    *,
     selector: typing.Callable = lambda _: _select.hleaves(_),
 ) -> OverrideCommand:
     """
@@ -6780,6 +6885,7 @@ def time_signature_stencil_false_function(
 
 
 def time_signature_transparent(
+    *,
     selector: typing.Callable = lambda _: _select.hleaves(_),
 ) -> OverrideCommand:
     r"""
@@ -6870,7 +6976,8 @@ def time_signature_transparent(
 
 def trill_spanner_staff_padding(
     n: int | float,
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides trill spanner staff padding.
@@ -6885,7 +6992,8 @@ def trill_spanner_staff_padding(
 
 
 def tuplet_bracket_down(
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides tuplet bracket direction.
@@ -7000,7 +7108,8 @@ def tuplet_bracket_down_function(
 
 def tuplet_bracket_extra_offset(
     pair: tuple[int | float, int | float],
-    selector=lambda _: abjad.select.leaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     r"""
     Overrides tuplet bracket extra offset.
@@ -7088,7 +7197,8 @@ def tuplet_bracket_extra_offset(
 
 def tuplet_bracket_outside_staff_priority(
     n: int | float,
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides tuplet bracket outside-staff-priority.
@@ -7104,7 +7214,8 @@ def tuplet_bracket_outside_staff_priority(
 
 def tuplet_bracket_padding(
     n: int | float,
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides tuplet bracket padding.
@@ -7147,7 +7258,8 @@ def tuplet_bracket_padding_function(
 
 def tuplet_bracket_shorten_pair(
     pair: tuple[int | float, int | float],
-    selector=lambda _: abjad.select.leaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     """
     Overrides tuplet bracket shorten pair.
@@ -7190,7 +7302,8 @@ def tuplet_bracket_shorten_pair_function(
 
 def tuplet_bracket_staff_padding(
     n: int | float,
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides tuplet bracket staff padding.
@@ -7302,7 +7415,8 @@ def tuplet_bracket_staff_padding_function(
 
 
 def tuplet_bracket_transparent(
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides tuplet bracket transparency.
@@ -7317,7 +7431,8 @@ def tuplet_bracket_transparent(
 
 
 def tuplet_bracket_up(
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     r"""
     Overrides tuplet bracket direction.
@@ -7405,7 +7520,8 @@ def tuplet_bracket_up(
 
 
 def tuplet_number_denominator(
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides tuplet number text.
@@ -7421,7 +7537,8 @@ def tuplet_number_denominator(
 
 def tuplet_number_extra_offset(
     pair: tuple[int | float, int | float],
-    selector=lambda _: abjad.select.leaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> OverrideCommand:
     r"""
     Overrides tuplet number extra offset.
@@ -7509,7 +7626,8 @@ def tuplet_number_extra_offset(
 
 def tuplet_number_text(
     string: str,
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides tuplet number text.
@@ -7525,7 +7643,8 @@ def tuplet_number_text(
 
 
 def tuplet_number_transparent(
-    selector=lambda _: _select.leaves(_),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     """
     Overrides tuplet number transparent.
