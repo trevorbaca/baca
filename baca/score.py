@@ -14,17 +14,6 @@ def assert_lilypond_identifiers(score):
             raise Exception(f"invalid LilyPond identifier: {context.name!r}")
 
 
-def assert_matching_custom_context_names(score):
-    for context in abjad.iterate.components(score, abjad.Context):
-        if context.lilypond_type in abjad.Context.lilypond_types:
-            continue
-        if context.name == context.lilypond_type:
-            continue
-        if context.name.replace("_", "").replace(".", "") == context.lilypond_type:
-            continue
-        raise Exception(f"context {context.lilypond_type} has name {context.name!r}.")
-
-
 def assert_unique_context_names(score):
     names = []
     for context in abjad.iterate.components(score, abjad.Context):
