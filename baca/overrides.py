@@ -1773,6 +1773,7 @@ def mmrest_transparent_function(
     else:
         assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
         leaves = argument
+    mmrests = _select.mmrests(leaves)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -1780,7 +1781,7 @@ def mmrest_transparent_function(
     for tag in tags or []:
         final_tag = final_tag.append(tag)
     _do_override_command(
-        leaves,
+        mmrests,
         "MultiMeasureRest",
         "transparent",
         True,
@@ -2478,6 +2479,31 @@ def note_head_duration_log(
     )
 
 
+def note_head_duration_log_function(
+    argument, n: int, *, allow_rests: bool = False, tags: list[abjad.Tag] = None
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    elif allow_rests:
+        leaves = abjad.select.leaves(argument)
+    else:
+        leaves = _select.pleaves(argument)
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _do_override_command(
+        leaves,
+        "NoteHead",
+        "duration_log",
+        n,
+        first_tag,
+        final_tag,
+    )
+
+
 def note_head_extra_offset(
     pair: tuple[int | float, int | float],
     selector=lambda _: _select.pleaf(_, 0),
@@ -2526,6 +2552,31 @@ def note_head_no_ledgers(
     )
 
 
+def note_head_no_ledgers_function(
+    argument, value: bool, *, allow_rests: bool = False, tags: list[abjad.Tag] = None
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    elif allow_rests:
+        leaves = abjad.select.leaves(argument)
+    else:
+        leaves = _select.pleaves(argument)
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _do_override_command(
+        leaves,
+        "NoteHead",
+        "no_ledgers",
+        value,
+        first_tag,
+        final_tag,
+    )
+
+
 def note_head_stencil_false(
     selector=lambda _: _select.pleaf(_, 0),
 ) -> OverrideCommand:
@@ -2554,6 +2605,31 @@ def note_head_style(
         selector=selector,
         tags=[_tags.function_name(_frame())],
         value=string,
+    )
+
+
+def note_head_style_function(
+    argument, string: str, *, allow_rests: bool = False, tags: list[abjad.Tag] = None
+) -> None:
+    if isinstance(argument, abjad.Leaf):
+        leaves = [argument]
+    elif allow_rests:
+        leaves = abjad.select.leaves(argument)
+    else:
+        leaves = _select.pleaves(argument)
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _do_override_command(
+        leaves,
+        "NoteHead",
+        "style",
+        string,
+        first_tag,
+        final_tag,
     )
 
 
