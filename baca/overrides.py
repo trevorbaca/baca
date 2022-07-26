@@ -1129,7 +1129,7 @@ def laissez_vibrer_tie_up(
 def mmrest_color(
     color: str = "#red",
     *,
-    selector: typing.Callable = lambda _: _select.mmrests(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="color",
@@ -1143,7 +1143,7 @@ def mmrest_color(
 
 def mmrest_transparent(
     *,
-    selector: typing.Callable = lambda _: _select.mmrests(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="transparent",
@@ -1185,7 +1185,7 @@ def mmrest_transparent_function(
 def mmrest_text_color(
     color: str = "#red",
     *,
-    selector: typing.Callable = lambda _: _select.mmrests(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="color",
@@ -1200,7 +1200,7 @@ def mmrest_text_color(
 def mmrest_text_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: _select.mmrests(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -1242,7 +1242,7 @@ def mmrest_text_extra_offset_function(
 def mmrest_text_padding(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.mmrests(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="padding",
@@ -1256,7 +1256,7 @@ def mmrest_text_padding(
 
 def mmrest_text_parent_center(
     *,
-    selector: typing.Callable = lambda _: _select.mmrests(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="parent_alignment_X",
@@ -1271,7 +1271,7 @@ def mmrest_text_parent_center(
 def mmrest_text_staff_padding(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.mmrests(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="staff_padding",
@@ -1285,7 +1285,7 @@ def mmrest_text_staff_padding(
 
 def mmrest_text_transparent(
     *,
-    selector: typing.Callable = lambda _: _select.mmrests(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="transparent",
@@ -2464,7 +2464,7 @@ def tacet(
     color="#green",
     *,
     measures=None,
-    selector: typing.Callable = lambda _: _select.mmrests(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ):
     command = mmrest_color(color, selector=selector)
     _command.tag(_tags.TACET_COLORING, command)

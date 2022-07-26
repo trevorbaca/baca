@@ -438,7 +438,10 @@ Example overrides.
     >>> score["Music"].extend(music)
     >>> accumulator(
     ...     "Music",
-    ...     baca.mmrest_color("#(x11-color 'DarkOrchid)"),
+    ...     baca.mmrest_color(
+    ...         "#(x11-color 'DarkOrchid)",
+    ...         selector=lambda _: baca.select.mmrests(_)
+    ...     ),
     ... )
 
     >>> _, _ = baca.interpret.section(
@@ -527,7 +530,10 @@ Example overrides.
     ...         r"\baca-boxed-markup still",
     ...         selector=lambda _: baca.select.mmrest(_, 1),
     ...     ),
-    ...     baca.mmrest_text_color("#red"),
+    ...     baca.mmrest_text_color(
+    ...         "#red",
+    ...         selector=lambda _: baca.select.mmrests(_)
+    ...     ),
     ... )
 
     >>> _, _ = baca.interpret.section(
@@ -661,7 +667,10 @@ Example overrides.
     ...         r"\baca-boxed-markup still",
     ...         selector=lambda _: baca.select.mmrest(_, 1),
     ...     ),
-    ...     baca.mmrest_text_extra_offset((0, 2)),
+    ...     baca.mmrest_text_extra_offset(
+    ...         (0, 2),
+    ...         selector=lambda _: baca.select.mmrests(_)
+    ...     ),
     ... )
 
     >>> _, _ = baca.interpret.section(
@@ -751,7 +760,10 @@ Example overrides.
     ...         r"\baca-boxed-markup still",
     ...         selector=lambda _: baca.select.mmrest(_, 1),
     ...     ),
-    ...     baca.mmrest_text_padding(2),
+    ...     baca.mmrest_text_padding(
+    ...         2,
+    ...         selector=lambda _: baca.select.mmrests(_)
+    ...     ),
     ... )
 
     >>> _, _ = baca.interpret.section(
@@ -841,7 +853,9 @@ Example overrides.
     ...         r"\baca-boxed-markup still",
     ...         selector=lambda _: baca.select.mmrest(_, 1),
     ...     ),
-    ...     baca.mmrest_text_parent_center(),
+    ...     baca.mmrest_text_parent_center(
+    ...         selector=lambda _: baca.select.mmrests(_)
+    ...     ),
     ... )
 
     >>> _, _ = baca.interpret.section(
@@ -931,7 +945,10 @@ Example overrides.
     ...         r"\baca-boxed-markup still",
     ...         selector=lambda _: baca.select.mmrest(_, 1),
     ...     ),
-    ...     baca.mmrest_text_staff_padding(2),
+    ...     baca.mmrest_text_staff_padding(
+    ...         2,
+    ...         selector=lambda _: baca.select.mmrests(_)
+    ...     ),
     ... )
 
     >>> _, _ = baca.interpret.section(
