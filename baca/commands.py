@@ -7800,10 +7800,10 @@ def _alternate_bow_strokes_preparation(*tweaks, downbow_first, full):
 
 
 def alternate_bow_strokes(
-    selector=lambda _: _select.pheads(_, exclude=_enums.HIDDEN),
     *tweaks: abjad.Tweak,
     downbow_first: bool = True,
     full: bool = False,
+    selector=lambda _: _select.pheads(_, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches alternate bow strokes.
@@ -8368,8 +8368,8 @@ def clef_function(
 
 
 def damp(
-    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
     *tweaks: abjad.Tweak,
+    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     indicator: abjad.Articulation | abjad.Bundle
     indicator = abjad.Articulation("baca-damp")
