@@ -1335,7 +1335,7 @@ Example overrides.
     ...         treatments=[-1],
     ...     ),
     ...     rmakers.beam(),
-    ...     baca.rest_down(),
+    ...     baca.rest_down(selector=lambda _: abjad.select.rests(_)),
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
     >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
@@ -1407,7 +1407,7 @@ Example overrides.
     ...         treatments=[-1],
     ...     ),
     ...     rmakers.beam(),
-    ...     baca.rest_position(-6),
+    ...     baca.rest_staff_position(-6),
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
     >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
@@ -1551,7 +1551,7 @@ Example overrides.
     ...         treatments=[-1],
     ...     ),
     ...     rmakers.beam(),
-    ...     baca.rest_up(),
+    ...     baca.rest_up(selector=lambda _: abjad.select.rests(_)),
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
     >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
@@ -3307,7 +3307,9 @@ Example overrides.
     ...         treatments=[-1],
     ...     ),
     ...     rmakers.beam(),
-    ...     baca.time_signature_extra_offset((-6, 0)),
+    ...     baca.time_signature_extra_offset(
+    ...         (-6, 0), selector=lambda _: abjad.select.rest(_, 0)
+    ...     ),
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
     >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])

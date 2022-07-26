@@ -1933,7 +1933,7 @@ def repeat_tie_up(
 def rest_color(
     color: str,
     *,
-    selector: typing.Callable = lambda _: _select.rest(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="color",
@@ -1946,7 +1946,7 @@ def rest_color(
 
 def rest_down(
     *,
-    selector: typing.Callable = lambda _: abjad.select.rests(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -1960,12 +1960,8 @@ def rest_down(
 def rest_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: _select.rest(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
-    if not isinstance(pair, tuple):
-        raise Exception(f"rest extra offset must be pair (not {pair!r}).")
-    if len(pair) != 2:
-        raise Exception(f"rest extra offset must be pair (not {pair!r}).")
     return OverrideCommand(
         attribute="extra_offset",
         value=f"#'({pair[0]} . {pair[1]})",
@@ -1975,10 +1971,10 @@ def rest_extra_offset(
     )
 
 
-def rest_position(
+def rest_staff_position(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: abjad.select.rests(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="staff_position",
@@ -2018,7 +2014,7 @@ def rest_staff_position_function(
 
 def rest_transparent(
     *,
-    selector: typing.Callable = lambda _: abjad.select.rests(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="transparent",
@@ -2031,7 +2027,7 @@ def rest_transparent(
 
 def rest_up(
     *,
-    selector: typing.Callable = lambda _: abjad.select.rests(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -2044,7 +2040,7 @@ def rest_up(
 
 def rest_x_extent_zero(
     *,
-    selector: typing.Callable = lambda _: _select.rest(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="X_extent",
@@ -3050,7 +3046,7 @@ def tie_up(
 def time_signature_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: _select.hleaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     assert isinstance(pair, tuple), repr(pair)
     return OverrideCommand(
@@ -3065,7 +3061,7 @@ def time_signature_extra_offset(
 
 def time_signature_stencil_false(
     *,
-    selector: typing.Callable = lambda _: _select.hleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="stencil",
@@ -3106,7 +3102,7 @@ def time_signature_stencil_false_function(
 
 def time_signature_transparent(
     *,
-    selector: typing.Callable = lambda _: _select.hleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="transparent",
