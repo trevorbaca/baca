@@ -6151,7 +6151,7 @@ def dynamic_function(
     argument,
     dynamic: str | abjad.Dynamic,
     *tweaks: abjad.Tweak,
-    allow_rests=False,
+    allow_rests: bool = False,
     tags: list[abjad.Tag] = None,
 ) -> None:
     if allow_rests is True:
