@@ -108,7 +108,7 @@ Example overrides.
     ...         affix=baca.rests_around([2], [4]),
     ...         treatments=[-1],
     ...     ),
-    ...     baca.stem_up(),
+    ...     baca.stem_up(selector=lambda _: baca.select.pleaves(_)),
     ...     rmakers.beam(),
     ...     baca.beam_positions(6),
     ...     baca.tuplet_bracket_staff_padding(4),
@@ -1029,7 +1029,7 @@ Example overrides.
     ...         treatments=[-1],
     ...     ),
     ...     rmakers.beam(),
-    ...     baca.note_head_style_cross(),
+    ...     baca.note_head_style_cross(selector=lambda _: baca.select.pleaves(_)),
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
     >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
@@ -1101,7 +1101,7 @@ Example overrides.
     ...         treatments=[-1],
     ...     ),
     ...     rmakers.beam(),
-    ...     baca.note_head_style_harmonic(),
+    ...     baca.note_head_style_harmonic(selector=lambda _: baca.select.pleaves(_)),
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
     >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
@@ -1177,8 +1177,8 @@ Example overrides.
     ...         baca.repeat_tie(selector=lambda _: baca.select.pleaves(_)[1:]),
     ...         map=lambda _: baca.select.qruns(_),
     ...     ),
-    ...     baca.repeat_tie_down(),
-    ...     baca.stem_up(),
+    ...     baca.repeat_tie_down(selector=lambda _: baca.select.pleaves(_)),
+    ...     baca.stem_up(selector=lambda _: baca.select.pleaves(_)),
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
     >>> selection = stack([[11, 11, 12], [11, 11, 11], [11]])
@@ -1259,8 +1259,8 @@ Example overrides.
     ...         ),
     ...         map=lambda _: baca.select.qruns(_),
     ...     ),
-    ...     baca.repeat_tie_up(),
-    ...     baca.stem_down(),
+    ...     baca.repeat_tie_up(selector=lambda _: baca.select.pleaves(_)),
+    ...     baca.stem_down(selector=lambda _: baca.select.pleaves(_)),
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
     >>> selection = stack([[11, 11, 12], [11, 11, 11], [11]])
@@ -2044,7 +2044,7 @@ Example overrides.
     ...     rmakers.beam(),
     ...     baca.slur(map=selector),
     ...     baca.slur_up(),
-    ...     baca.stem_down(),
+    ...     baca.stem_down(selector=lambda _: baca.select.pleaves(_)),
     ...     baca.tuplet_bracket_staff_padding(2),
     ...     baca.tuplet_bracket_down(),
     ... )
@@ -2125,7 +2125,7 @@ Example overrides.
     ...         treatments=[-1],
     ...     ),
     ...     rmakers.beam(),
-    ...     baca.stem_color(color="#red"),
+    ...     baca.stem_color("#red", selector=lambda _: baca.select.pleaves(_)),
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
     >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
@@ -2197,7 +2197,7 @@ Example overrides.
     ...         treatments=[-1],
     ...     ),
     ...     rmakers.beam(),
-    ...     baca.stem_down(),
+    ...     baca.stem_down(selector=lambda _: baca.select.pleaves(_)),
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
     >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
@@ -2269,7 +2269,7 @@ Example overrides.
     ...         treatments=[-1],
     ...     ),
     ...     rmakers.beam(),
-    ...     baca.stem_up(),
+    ...     baca.stem_up(selector=lambda _: baca.select.pleaves(_)),
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
     >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
@@ -3161,11 +3161,11 @@ Example overrides.
     ...         treatments=[-1],
     ...     ),
     ...     rmakers.beam(),
-    ...     baca.stem_up(),
+    ...     baca.stem_up(selector=lambda _: baca.select.pleaves(_)),
     ...     baca.tie(
     ...         selector=lambda _: baca.select.pleaf(_, 0),
     ...     ),
-    ...     baca.tie_down(),
+    ...     baca.tie_down(selector=lambda _: baca.select.pleaves(_)),
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
     >>> selection = stack([[11, 11, 12], [11, 11, 11], [11]])
@@ -3236,8 +3236,8 @@ Example overrides.
     ...         treatments=[-1],
     ...     ),
     ...     rmakers.beam(),
-    ...     baca.stem_down(),
-    ...     baca.tie_up(),
+    ...     baca.stem_down(selector=lambda _: baca.select.pleaves(_)),
+    ...     baca.tie_up(selector=lambda _: baca.select.pleaves(_)),
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
     >>> selection = stack([[11, 11, 12], [11, 11, 11], [11]])

@@ -937,7 +937,7 @@ def flag_stencil_false(
 
 def flag_transparent(
     *,
-    selector: typing.Callable = lambda _: _select.pleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="transparent",
@@ -951,7 +951,7 @@ def flag_transparent(
 def glissando_thickness(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.pleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="thickness",
@@ -1102,7 +1102,7 @@ def hairpin_transparent(
 
 def laissez_vibrer_tie_down(
     *,
-    selector: typing.Callable = lambda _: _select.pleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -1115,7 +1115,7 @@ def laissez_vibrer_tie_down(
 
 def laissez_vibrer_tie_up(
     *,
-    selector: typing.Callable = lambda _: _select.pleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -1297,19 +1297,6 @@ def mmrest_text_transparent(
     )
 
 
-def no_ledgers(
-    *,
-    selector: typing.Callable = lambda _: _select.pleaves(_),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="no_ledgers",
-        value=True,
-        grob="NoteHead",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def note_column_shift(
     n: int | float,
     *,
@@ -1327,7 +1314,7 @@ def note_column_shift(
 def note_head_color(
     color: str,
     *,
-    selector: typing.Callable = lambda _: _select.pleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="color",
@@ -1341,7 +1328,7 @@ def note_head_color(
 def note_head_duration_log(
     n: int,
     *,
-    selector: typing.Callable = lambda _: _select.pleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="duration_log",
@@ -1498,7 +1485,7 @@ def note_head_style_function(
 
 def note_head_style_cross(
     *,
-    selector: typing.Callable = lambda _: _select.pleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="style",
@@ -1511,7 +1498,7 @@ def note_head_style_cross(
 
 def note_head_style_harmonic(
     *,
-    selector: typing.Callable = lambda _: _select.pleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="style",
@@ -1549,7 +1536,7 @@ def note_head_style_harmonic_function(
 
 def note_head_style_harmonic_black(
     *,
-    selector: typing.Callable = lambda _: _select.pleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="style",
@@ -1562,7 +1549,7 @@ def note_head_style_harmonic_black(
 
 def note_head_transparent(
     *,
-    selector: typing.Callable = lambda _: _select.pleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ):
     return OverrideCommand(
         attribute="transparent",
@@ -1839,7 +1826,7 @@ def rehearsal_mark_y_offset(
 
 def repeat_tie_down(
     *,
-    selector: typing.Callable = lambda _: _select.pleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -1906,7 +1893,7 @@ def repeat_tie_stencil_false(
 
 def repeat_tie_transparent(
     *,
-    selector: typing.Callable = lambda _: _select.pleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ):
     return OverrideCommand(
         attribute="transparent",
@@ -1919,7 +1906,7 @@ def repeat_tie_transparent(
 
 def repeat_tie_up(
     *,
-    selector: typing.Callable = lambda _: _select.pleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -2280,7 +2267,7 @@ def stem_color(
     color: str = "#red",
     *,
     context: str = None,
-    selector: typing.Callable = lambda _: _select.pleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="color",
@@ -2294,7 +2281,7 @@ def stem_color(
 
 def stem_down(
     *,
-    selector: typing.Callable = lambda _: _select.pleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -2360,7 +2347,7 @@ def stem_stencil_false(
 
 def stem_transparent(
     *,
-    selector: typing.Callable = lambda _: _select.pleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="transparent",
@@ -2387,7 +2374,7 @@ def stem_tremolo_extra_offset(
 
 def stem_up(
     *,
-    selector: typing.Callable = lambda _: _select.pleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -3019,7 +3006,7 @@ def text_spanner_y_offset_function(
 
 def tie_down(
     *,
-    selector: typing.Callable = lambda _: _select.pleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -3032,7 +3019,7 @@ def tie_down(
 
 def tie_up(
     *,
-    selector: typing.Callable = lambda _: _select.pleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
