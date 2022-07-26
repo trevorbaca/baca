@@ -148,7 +148,7 @@ class OverrideCommand(_command.Command):
 def accidental_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -162,7 +162,7 @@ def accidental_extra_offset(
 def accidental_font_size(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="font_size",
@@ -175,7 +175,7 @@ def accidental_font_size(
 
 def accidental_stencil_false(
     *,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="stencil",
@@ -201,7 +201,7 @@ def accidental_transparent(
 
 def accidental_x_extent_false(
     *,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="X_extent",
@@ -215,7 +215,7 @@ def accidental_x_extent_false(
 def accidental_x_offset(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="X_offset",
@@ -229,7 +229,7 @@ def accidental_x_offset(
 def accidental_y_offset(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="Y_offset",
@@ -245,7 +245,7 @@ def bar_line_color(
     *,
     after: bool = False,
     context: str = "Score",
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         after=after,
@@ -263,7 +263,7 @@ def bar_line_extra_offset(
     *,
     after: bool = False,
     context: str = "Score",
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         after=after,
@@ -278,7 +278,7 @@ def bar_line_extra_offset(
 
 def bar_line_transparent(
     *,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="transparent",
@@ -323,7 +323,7 @@ def bar_line_x_extent_command(
     after: bool = False,
     context: str = "Score",
     measures: typings.Slice = None,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         after=after,
@@ -437,7 +437,7 @@ def beam_transparent(
 def clef_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -480,7 +480,7 @@ def clef_extra_offset_function(
 def clef_shift(
     clef: str | abjad.Clef,
     *,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> _command.Suite:
     extra_offset_x: int | float
     if isinstance(clef, str):
@@ -527,7 +527,7 @@ def clef_shift_function(
 def clef_whiteout(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="whiteout",
@@ -541,7 +541,7 @@ def clef_whiteout(
 
 def clef_x_extent_false(
     *,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="X_extent",
@@ -717,7 +717,7 @@ def dots_transparent(
 
 def dots_x_extent_false(
     *,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="X_extent",
@@ -911,7 +911,7 @@ def dynamic_text_y_offset(
 def flag_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -1006,7 +1006,7 @@ def hairpin_shorten_pair_function(
 def hairpin_start_shift(
     dynamic: str | abjad.Dynamic,
     *,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> _command.Suite:
     dynamic = abjad.Dynamic(dynamic)
     width = dynamic._to_width[str(dynamic.name)]
@@ -1313,7 +1313,7 @@ def no_ledgers(
 def note_column_shift(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="force_hshift",
@@ -1646,7 +1646,7 @@ def ottava_bracket_staff_padding_function(
 def rehearsal_mark_down(
     *,
     context: str = "Score",
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -1690,7 +1690,7 @@ def rehearsal_mark_extra_offset(
     pair: tuple[int | float, int | float],
     *,
     context: str = "Score",
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -1735,7 +1735,7 @@ def rehearsal_mark_padding(
     n: int | float,
     *,
     context: str = "Score",
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="padding",
@@ -1780,7 +1780,7 @@ def rehearsal_mark_self_alignment_x(
     n: int,
     *,
     context: str = "Score",
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="self_alignment_X",
@@ -1825,7 +1825,7 @@ def rehearsal_mark_y_offset(
     n: int | float,
     *,
     context: str = "Score",
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="Y_offset",
@@ -2085,7 +2085,7 @@ def script_down(
 def script_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -2208,7 +2208,7 @@ def span_bar_color(
     *,
     after: bool = False,
     context: str = "Score",
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         after=after,
@@ -2226,7 +2226,7 @@ def span_bar_extra_offset(
     *,
     after: bool = False,
     context: str = "Score",
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         after=after,
@@ -2241,7 +2241,7 @@ def span_bar_extra_offset(
 
 def span_bar_transparent(
     *,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="transparent",
@@ -2338,7 +2338,7 @@ def stem_down_function(
 def stem_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -2378,7 +2378,7 @@ def stem_transparent(
 def stem_tremolo_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -3174,7 +3174,7 @@ def tuplet_bracket_down_function(
 def tuplet_bracket_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -3243,7 +3243,7 @@ def tuplet_bracket_padding_function(
 def tuplet_bracket_shorten_pair(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="shorten_pair",
@@ -3364,7 +3364,7 @@ def tuplet_number_denominator(
 def tuplet_number_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",

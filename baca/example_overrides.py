@@ -3502,7 +3502,10 @@ Example overrides.
     ...         treatments=[-1],
     ...     ),
     ...     rmakers.beam(),
-    ...     baca.tuplet_bracket_extra_offset((-1, 0)),
+    ...     baca.tuplet_bracket_extra_offset(
+    ...         (-1, 0),
+    ...         selector=lambda _: abjad.select.leaf(_, 0),
+    ...     ),
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
     >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
@@ -3715,7 +3718,10 @@ Example overrides.
     ...     ),
     ...     rmakers.beam(),
     ...     baca.tuplet_bracket_staff_padding(2),
-    ...     baca.tuplet_number_extra_offset((-1, 0)),
+    ...     baca.tuplet_number_extra_offset(
+    ...         (-1, 0),
+    ...         selector=lambda _: abjad.select.leaf(_, 0)
+    ...     ),
     ... )
     >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
 
