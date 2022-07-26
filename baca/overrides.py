@@ -295,11 +295,7 @@ def bar_line_transparent_function(
     *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -387,11 +383,7 @@ def beam_positions(
 def beam_positions_function(
     argument, n: int | float, *, tags: list[abjad.Tag] = None
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -455,11 +447,7 @@ def clef_extra_offset_function(
     *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -558,11 +546,7 @@ def clef_x_extent_false_function(
     *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -600,11 +584,7 @@ def dls_padding_function(
     *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -641,11 +621,7 @@ def dls_staff_padding_function(
     *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -766,11 +742,7 @@ def dynamic_text_extra_offset_function(
     *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -859,11 +831,7 @@ def dynamic_text_x_extent_zero_function(
     *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -982,11 +950,7 @@ def hairpin_shorten_pair_function(
     *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -1066,11 +1030,7 @@ def hairpin_to_barline_function(
     *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -1160,11 +1120,7 @@ def mmrest_transparent_function(
     *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     mmrests = _select.mmrests(leaves)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
@@ -1218,11 +1174,7 @@ def mmrest_text_extra_offset_function(
     *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -1340,14 +1292,9 @@ def note_head_duration_log(
 
 
 def note_head_duration_log_function(
-    argument, n: int, *, allow_rests: bool = False, tags: list[abjad.Tag] = None
+    argument, n: int, *, tags: list[abjad.Tag] = None
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    elif allow_rests:
-        leaves = abjad.select.leaves(argument)
-    else:
-        leaves = _select.pleaves(argument)
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -1407,14 +1354,9 @@ def note_head_no_ledgers(
 
 
 def note_head_no_ledgers_function(
-    argument, value: bool, *, allow_rests: bool = False, tags: list[abjad.Tag] = None
+    argument, value: bool, *, tags: list[abjad.Tag] = None
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    elif allow_rests:
-        leaves = abjad.select.leaves(argument)
-    else:
-        leaves = _select.pleaves(argument)
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -1459,14 +1401,9 @@ def note_head_style(
 
 
 def note_head_style_function(
-    argument, string: str, *, allow_rests: bool = False, tags: list[abjad.Tag] = None
+    argument, string: str, *, tags: list[abjad.Tag] = None
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    elif allow_rests:
-        leaves = abjad.select.leaves(argument)
-    else:
-        leaves = _select.pleaves(argument)
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -1510,14 +1447,9 @@ def note_head_style_harmonic(
 
 
 def note_head_style_harmonic_function(
-    argument, *, allow_rests: bool = False, tags: list[abjad.Tag] = None
+    argument, *, tags: list[abjad.Tag] = None
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    elif allow_rests:
-        leaves = abjad.select.leaves(argument)
-    else:
-        leaves = _select.pleaves(argument)
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -1606,13 +1538,10 @@ def ottava_bracket_staff_padding(
 def ottava_bracket_staff_padding_function(
     argument,
     n: int | float,
+    *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -1651,11 +1580,7 @@ def rehearsal_mark_down_function(
     context: str = "Score",
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -1696,11 +1621,7 @@ def rehearsal_mark_extra_offset_function(
     context: str = "Score",
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -1741,11 +1662,7 @@ def rehearsal_mark_padding_function(
     context: str = "Score",
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -1786,11 +1703,7 @@ def rehearsal_mark_self_alignment_x_function(
     context: str = "Score",
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -1857,11 +1770,7 @@ def repeat_tie_extra_offset_function(
     *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -1978,11 +1887,7 @@ def rest_staff_position_function(
     *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -2113,11 +2018,7 @@ def script_staff_padding_function(
     *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -2241,11 +2142,7 @@ def span_bar_transparent_function(
     *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -2297,11 +2194,7 @@ def stem_down_function(
     *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -2388,15 +2281,9 @@ def stem_up(
 def stem_up_function(
     argument,
     *,
-    allow_rests: bool = False,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    elif allow_rests:
-        leaves = abjad.select.leaves(argument)
-    else:
-        leaves = _select.pleaves(argument)
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -2501,11 +2388,7 @@ def text_script_extra_offset_function(
     allow_mmrests: bool = False,
     tags: list[abjad.Tag] = None,
 ) -> abjad.Wrapper:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -2594,11 +2477,7 @@ def text_script_padding_function(
     allow_mmrests: bool = False,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -2649,11 +2528,7 @@ def text_script_parent_alignment_x_function(
     allow_mmrests: bool = False,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -2704,11 +2579,7 @@ def text_script_self_alignment_x_function(
     allow_mmrests: bool = False,
     tags: list[abjad.Tag] = None,
 ) -> abjad.Wrapper:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -2759,11 +2630,7 @@ def text_script_staff_padding_function(
     allow_mmrests: bool = False,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -2863,11 +2730,7 @@ def text_spanner_left_padding_function(
     n: int | float,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -2917,11 +2780,7 @@ def text_spanner_staff_padding_function(
     n: int | float,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -2983,11 +2842,7 @@ def text_spanner_y_offset_function(
     n: int | float,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -3065,11 +2920,7 @@ def time_signature_stencil_false_function(
     *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -3133,11 +2984,7 @@ def tuplet_bracket_down_function(
     *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -3202,11 +3049,7 @@ def tuplet_bracket_padding_function(
     *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -3243,11 +3086,7 @@ def tuplet_bracket_shorten_pair_function(
     *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
@@ -3284,11 +3123,7 @@ def tuplet_bracket_staff_padding_function(
     *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaves = [argument]
-    else:
-        assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-        leaves = argument
+    leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
         first_tag = first_tag.append(tag)
