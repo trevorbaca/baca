@@ -731,7 +731,7 @@ def dots_x_extent_false(
 def dynamic_text_color(
     color: str = "#red",
     *,
-    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="color",
@@ -745,7 +745,7 @@ def dynamic_text_color(
 def dynamic_text_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     if not isinstance(pair, tuple):
         raise Exception(f"dynamic text extra offset must be pair (not {pair}).")
@@ -790,7 +790,7 @@ def dynamic_text_extra_offset_function(
 def dynamic_text_parent_alignment_x(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="parent_alignment_X",
@@ -804,7 +804,7 @@ def dynamic_text_parent_alignment_x(
 def dynamic_text_self_alignment_x(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="self_alignment_X",
@@ -817,7 +817,7 @@ def dynamic_text_self_alignment_x(
 
 def dynamic_text_stencil_false(
     *,
-    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="stencil",
@@ -830,7 +830,7 @@ def dynamic_text_stencil_false(
 
 def dynamic_text_transparent(
     *,
-    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="transparent",
@@ -843,7 +843,7 @@ def dynamic_text_transparent(
 
 def dynamic_text_x_extent_zero(
     *,
-    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="X_extent",
@@ -883,7 +883,7 @@ def dynamic_text_x_extent_zero_function(
 def dynamic_text_x_offset(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="X_offset",
@@ -897,7 +897,7 @@ def dynamic_text_x_offset(
 def dynamic_text_y_offset(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="Y_offset",
@@ -924,7 +924,7 @@ def flag_extra_offset(
 
 def flag_stencil_false(
     *,
-    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="stencil",
@@ -1380,7 +1380,7 @@ def note_head_duration_log_function(
 def note_head_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -1394,7 +1394,7 @@ def note_head_extra_offset(
 def note_head_font_size(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="font_size",
@@ -1408,7 +1408,7 @@ def note_head_font_size(
 def note_head_no_ledgers(
     value: bool,
     *,
-    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="no_ledgers",
@@ -1446,7 +1446,7 @@ def note_head_no_ledgers_function(
 
 def note_head_stencil_false(
     *,
-    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="stencil",
@@ -1460,7 +1460,7 @@ def note_head_stencil_false(
 def note_head_style(
     string: str,
     *,
-    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="style",
@@ -1575,7 +1575,7 @@ def note_head_transparent(
 
 def note_head_x_extent_zero(
     *,
-    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="X_extent",
@@ -1853,7 +1853,7 @@ def repeat_tie_down(
 def repeat_tie_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -1893,7 +1893,7 @@ def repeat_tie_extra_offset_function(
 
 def repeat_tie_stencil_false(
     *,
-    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="stencil",
@@ -2351,7 +2351,7 @@ def stem_extra_offset(
 
 def stem_stencil_false(
     *,
-    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="stencil",

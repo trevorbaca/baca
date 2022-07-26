@@ -355,7 +355,10 @@ Example overrides.
     ...     rmakers.beam(),
     ...     baca.dynamic("p"),
     ...     baca.dynamic("f", selector=selector),
-    ...     baca.dynamic_text_extra_offset((-3, 0)),
+    ...     baca.dynamic_text_extra_offset(
+    ...         (-3, 0),
+    ...         selector=lambda _: baca.select.pleaf(_, 0)
+    ...     ),
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
     >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
