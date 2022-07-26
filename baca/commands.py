@@ -611,13 +611,12 @@ def _set_lt_pitch(
     return new_lt
 
 
-def _staff_position_function(
+def _do_staff_position_command(
     argument,
     numbers,
     *,
     allow_hidden=False,
     allow_out_of_range=False,
-    allow_repeats=False,
     allow_repitch=False,
     exact=False,
     mock=False,
@@ -674,9 +673,8 @@ def _staff_position_function(
             abjad.attach(_enums.STAFF_POSITION, pleaf)
             if allow_out_of_range:
                 abjad.attach(_enums.ALLOW_OUT_OF_RANGE, pleaf)
-            if allow_repeats:
-                abjad.attach(_enums.ALLOW_REPEAT_PITCH, pleaf)
-                abjad.attach(_enums.DO_NOT_TRANSPOSE, pleaf)
+            abjad.attach(_enums.ALLOW_REPEAT_PITCH, pleaf)
+            abjad.attach(_enums.DO_NOT_TRANSPOSE, pleaf)
     if exact and plt_count != len(numbers):
         message = f"PLT count ({plt_count}) does not match"
         message += f" staff position count ({len(numbers)})."
@@ -5060,7 +5058,6 @@ class StaffPositionCommand(_command.Command):
     numbers: typing.Sequence[int | list | abjad.StaffPosition] = ()
     allow_hidden: bool = False
     allow_out_of_range: bool = False
-    allow_repeats: bool = False
     allow_repitch: bool = False
     exact: bool = False
     mock: bool = False
@@ -5073,7 +5070,6 @@ class StaffPositionCommand(_command.Command):
         assert all(isinstance(_, prototype) for _ in self.numbers), repr(self.numbers)
         assert isinstance(self.allow_hidden, bool), repr(self.allow_hidden)
         assert isinstance(self.allow_out_of_range, bool), repr(self.allow_out_of_range)
-        assert isinstance(self.allow_repeats, bool), repr(self.allow_repeats)
         assert isinstance(self.allow_repitch, bool), repr(self.allow_repitch)
         assert isinstance(self.mock, bool), repr(self.mock)
         assert isinstance(self.exact, bool), repr(self.exact)
@@ -5089,12 +5085,11 @@ class StaffPositionCommand(_command.Command):
         if self.selector:
             argument = self.selector(argument)
         numbers = abjad.CyclicTuple(self.numbers)
-        mutated_score = _staff_position_function(
+        mutated_score = _do_staff_position_command(
             argument,
             numbers,
             allow_hidden=self.allow_hidden,
             allow_out_of_range=self.allow_out_of_range,
-            allow_repeats=self.allow_repeats,
             allow_repitch=self.allow_repitch,
             exact=self.exact,
             set_chord_pitches_equal=self.set_chord_pitches_equal,
@@ -7595,7 +7590,6 @@ def staff_position(
         numbers=[argument],
         allow_hidden=allow_hidden,
         allow_out_of_range=allow_out_of_range,
-        allow_repeats=True,
         allow_repitch=allow_repitch,
         mock=mock,
         selector=selector,
@@ -7616,12 +7610,11 @@ def staff_position_function(
     assert isinstance(numbers, int | list | abjad.StaffPosition), repr(numbers)
     if isinstance(numbers, list):
         assert all(isinstance(_, int | abjad.StaffPosition) for _ in numbers)
-    mutated_score = _staff_position_function(
+    mutated_score = _do_staff_position_command(
         argument,
         [numbers],
         allow_hidden=allow_hidden,
         allow_out_of_range=allow_out_of_range,
-        allow_repeats=True,
         allow_repitch=allow_repitch,
         mock=mock,
         set_chord_pitches_equal=set_chord_pitches_equal,
@@ -7638,17 +7631,13 @@ def staff_positions(
     *,
     allow_hidden: bool = False,
     allow_out_of_range: bool = False,
-    allow_repeats: bool = False,
     mock: bool = False,
     exact: bool = False,
 ) -> StaffPositionCommand:
-    if allow_repeats is None and len(numbers) == 1:
-        allow_repeats = True
     return StaffPositionCommand(
         numbers=numbers,
         allow_hidden=allow_hidden,
         allow_out_of_range=allow_out_of_range,
-        allow_repeats=allow_repeats,
         exact=exact,
         mock=mock,
         selector=selector,
@@ -7667,12 +7656,11 @@ def staff_positions_function(
 ) -> None:
     if allow_repeats is None and len(numbers) == 1:
         allow_repeats = True
-    mutated_score = _staff_position_function(
+    mutated_score = _do_staff_position_command(
         argument,
         numbers,
         allow_hidden=allow_hidden,
         allow_out_of_range=allow_out_of_range,
-        allow_repeats=allow_repeats,
         # allow_repitch=allow_repitch,
         mock=mock,
         # set_chord_pitches_equal=set_chord_pitches_equal,
