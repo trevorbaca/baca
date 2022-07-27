@@ -1,4 +1,5 @@
 r"""
+Articulations.
 
 ..  container:: example
 
