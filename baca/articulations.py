@@ -141,7 +141,7 @@ def alternate_bow_strokes_function(
 
 
 def arpeggio(
-    selector: typing.Callable = lambda _: _select.chead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
     return _commands.IndicatorCommand(
         indicators=[abjad.Articulation("arpeggio")],
@@ -174,7 +174,7 @@ def articulations(
 
 
 def breathe(
-    selector: typing.Callable = lambda _: _select.pleaf(_, -1, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
     *tweaks: abjad.Tweak,
 ) -> _commands.IndicatorCommand:
     indicator: abjad.LilyPondLiteral | abjad.Bundle
@@ -200,6 +200,7 @@ def breathe_function(
     tag = abjad.Tag("baca.breathe()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
+    # TODO: iterate over leaves:
     abjad.attach(
         indicator,
         leaf,
@@ -275,7 +276,7 @@ def double_staccato_function(
 
 
 def down_arpeggio(
-    selector: typing.Callable = lambda _: _select.chead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
     return _commands.IndicatorCommand(
         indicators=[abjad.Arpeggio(direction=abjad.DOWN)],
@@ -358,7 +359,7 @@ def espressivo_function(
 
 
 def fermata(
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
     return _commands.IndicatorCommand(
         indicators=[abjad.Articulation("fermata")],
@@ -378,7 +379,7 @@ def flageolet(
 
 
 def laissez_vibrer(
-    selector: typing.Callable = lambda _: _select.ptail(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
     return _commands.IndicatorCommand(
         indicators=[abjad.LaissezVibrer()],
@@ -405,7 +406,7 @@ def laissez_vibrer_function(
 
 
 def long_fermata(
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
     return _commands.IndicatorCommand(
         indicators=[abjad.Articulation("longfermata")],
@@ -442,7 +443,7 @@ def marcato_function(
 
 
 def short_fermata(
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
     return _commands.IndicatorCommand(
         indicators=[abjad.Articulation("shortfermata")],
@@ -516,7 +517,7 @@ def staccato_function(
 
 
 def stem_tremolo(
-    selector: typing.Callable = lambda _: _select.pleaf(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
     *,
     tremolo_flags: int = 32,
 ) -> _commands.IndicatorCommand:
@@ -597,7 +598,7 @@ def triple_staccato(
 
 
 def up_arpeggio(
-    selector: typing.Callable = lambda _: _select.chead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
     return _commands.IndicatorCommand(
         indicators=[abjad.Arpeggio(direction=abjad.UP)],
@@ -625,7 +626,7 @@ def up_bow(
 
 
 def very_long_fermata(
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
     return _commands.IndicatorCommand(
         indicators=[abjad.Articulation("verylongfermata")],
