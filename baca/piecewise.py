@@ -411,7 +411,7 @@ def bow_speed_spanner(
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
 ) -> PiecewiseCommand:
     """
     Makes bow speed spanner.
@@ -450,7 +450,7 @@ def circle_bow_spanner(
     qualifier: str = None,
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
 ) -> PiecewiseCommand:
     """
     Makes circle bow spanner.
@@ -495,7 +495,7 @@ def clb_spanner(
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
 ) -> PiecewiseCommand:
     """
     Makes clb spanner.
@@ -546,7 +546,7 @@ def covered_spanner(
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
 ) -> PiecewiseCommand:
     """
     Makes covered spanner.
@@ -585,7 +585,7 @@ def damp_spanner(
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
 ) -> PiecewiseCommand:
     """
     Makes damp spanner.
@@ -650,7 +650,7 @@ def hairpin(
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     remove_length_1_spanner_start: bool = False,
     right_broken: bool = False,
-    selector=lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> PiecewiseCommand:
     r"""
     Attaches hairpin.
@@ -2164,7 +2164,7 @@ def half_clt_spanner(
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
 ) -> PiecewiseCommand:
     """
     Makes 1/2 clt spanner.
@@ -2210,7 +2210,7 @@ def material_annotation_spanner(
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner()
-    selector=lambda _: _select.rleaves(_),
+    selector: typing.Callable = lambda _: _select.rleaves(_),
 ) -> PiecewiseCommand:
     """
     Makes material annotation spanner.
@@ -2247,7 +2247,7 @@ def metric_modulation_spanner(
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner()
-    selector=lambda _: _select.rleaves(_),
+    selector: typing.Callable = lambda _: _select.rleaves(_),
 ) -> PiecewiseCommand:
     """
     Makes metric modulation spanner.
@@ -2442,7 +2442,7 @@ def pitch_annotation_spanner(
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner()
-    selector=lambda _: _select.rleaves(_),
+    selector: typing.Callable = lambda _: _select.rleaves(_),
 ) -> PiecewiseCommand:
     """
     Makes pitch annotation spanner.
@@ -2480,7 +2480,7 @@ def pizzicato_spanner(
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
 ) -> PiecewiseCommand:
     """
     Makes pizzicato spanner.
@@ -2518,7 +2518,7 @@ def rhythm_annotation_spanner(
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner()
-    selector=lambda _: _select.rleaves(_),
+    selector: typing.Callable = lambda _: _select.rleaves(_),
 ) -> PiecewiseCommand:
     """
     Makes rhythm command spanner.
@@ -2559,7 +2559,7 @@ def scp_spanner(
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
 ) -> PiecewiseCommand:
     """
     Makes SCP spanner.
@@ -2600,7 +2600,7 @@ def spazzolato_spanner(
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
 ) -> PiecewiseCommand:
     """
     Makes spazzolato spanner.
@@ -2641,7 +2641,7 @@ def string_number_spanner(
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
 ) -> PiecewiseCommand:
     """
     Makes string number spanner.
@@ -2682,7 +2682,7 @@ def tasto_spanner(
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
 ) -> PiecewiseCommand:
     """
     Makes tasto spanner.
@@ -2901,7 +2901,7 @@ def text_spanner(
     measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
-    selector=lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> PiecewiseCommand:
     r"""
     Attaches text span indicators.
@@ -4546,7 +4546,7 @@ def vibrato_spanner(
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
 ) -> PiecewiseCommand:
     """
     Makes vibrato spanner.
@@ -4587,7 +4587,7 @@ def xfb_spanner(
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector=lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
 ) -> PiecewiseCommand:
     """
     Makes XFB spanner.

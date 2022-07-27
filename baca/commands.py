@@ -5215,7 +5215,7 @@ class StaffPositionInterpolationCommand(_command.Command):
 
 def bass_to_octave(
     n: int,
-    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.plts(_, exclude=_enums.HIDDEN),
 ) -> RegisterToOctaveCommand:
     r"""
     Octave-transposes music.
@@ -5402,7 +5402,7 @@ def bass_to_octave(
 
 def center_to_octave(
     n: int,
-    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.plts(_, exclude=_enums.HIDDEN),
 ) -> RegisterToOctaveCommand:
     r"""
     Octave-transposes music.
@@ -5589,7 +5589,7 @@ def center_to_octave(
 def color_fingerings(
     numbers: list[int],
     *tweaks: _typings.IndexedTweak,
-    selector=lambda _: _select.pheads(_, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.pheads(_, exclude=_enums.HIDDEN),
 ) -> ColorFingeringCommand:
     return ColorFingeringCommand(numbers=numbers, selector=selector, tweaks=tweaks)
 
@@ -5604,7 +5604,7 @@ def color_fingerings_function(
 
 def deviation(
     deviations: list[int | float],
-    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.plts(_, exclude=_enums.HIDDEN),
 ) -> MicrotoneDeviationCommand:
     return MicrotoneDeviationCommand(deviations=deviations, selector=selector)
 
@@ -5618,14 +5618,14 @@ def deviation_function(
 
 def diatonic_clusters(
     widths: list[int],
-    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.plts(_, exclude=_enums.HIDDEN),
 ) -> DiatonicClusterCommand:
     return DiatonicClusterCommand(selector=selector, widths=widths)
 
 
 def displacement(
     displacements: list[int],
-    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.plts(_, exclude=_enums.HIDDEN),
 ) -> OctaveDisplacementCommand:
     r"""
     Octave-displaces ``selector`` output.
@@ -5775,7 +5775,7 @@ def dynamic(
     map=None,
     match: _typings.Indices = None,
     measures: _typings.Slice = None,
-    selector=lambda _: _select.phead(_, 0),
+    selector: typing.Callable = lambda _: _select.phead(_, 0),
     redundant: bool = False,
 ) -> IndicatorCommand:
     r"""
@@ -6177,7 +6177,7 @@ def dynamic_function(
 
 
 def force_accidental(
-    selector=lambda _: _select.pleaf(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.pleaf(_, 0, exclude=_enums.HIDDEN),
 ) -> AccidentalAdjustmentCommand:
     r"""
     Forces accidental.
@@ -6263,7 +6263,7 @@ def force_accidental(
 def interpolate_pitches(
     start: int | str | abjad.NamedPitch,
     stop: int | str | abjad.NamedPitch,
-    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.plts(_, exclude=_enums.HIDDEN),
     *,
     allow_hidden: bool = False,
     mock: bool = False,
@@ -6433,7 +6433,7 @@ _interpolate_pitches_function = interpolate_pitches
 def interpolate_staff_positions(
     start: int | abjad.StaffPosition,
     stop: int | abjad.StaffPosition,
-    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.plts(_, exclude=_enums.HIDDEN),
     *,
     allow_hidden: bool = False,
     mock: bool = False,
@@ -6785,7 +6785,7 @@ def metronome_mark(skip, indicator, manifests, *, deactivate=False, tag=None):
 
 def natural_clusters(
     widths: typing.Sequence[int],
-    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.plts(_, exclude=_enums.HIDDEN),
     *,
     start_pitch: int | str | abjad.NamedPitch | None = None,
 ) -> ClusterCommand:
@@ -6801,7 +6801,7 @@ def natural_clusters(
 
 def pitch(
     pitch,
-    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.plts(_, exclude=_enums.HIDDEN),
     *,
     allow_hidden: bool = False,
     allow_out_of_range: bool = False,
@@ -6953,7 +6953,7 @@ _pitch_command_factory = pitch
 
 def pitches(
     pitches,
-    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.plts(_, exclude=_enums.HIDDEN),
     *,
     allow_hidden: bool = False,
     allow_octaves: bool = False,
@@ -7044,7 +7044,7 @@ def register(
     start: int,
     stop: int = None,
     *,
-    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.plts(_, exclude=_enums.HIDDEN),
 ) -> RegisterCommand | RegisterInterpolationCommand:
     r"""
     Octave-transposes ``selector`` output.
@@ -7390,7 +7390,7 @@ def register_prepare(start, stop):
 
 def soprano_to_octave(
     n: int,
-    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.plts(_, exclude=_enums.HIDDEN),
 ) -> RegisterToOctaveCommand:
     r"""
     Octave-transposes music.
@@ -7575,7 +7575,7 @@ def soprano_to_octave(
 
 def staff_position(
     argument: int | list | abjad.StaffPosition,
-    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.plts(_, exclude=_enums.HIDDEN),
     *,
     allow_hidden: bool = False,
     allow_out_of_range: bool = False,
@@ -7627,7 +7627,7 @@ _staff_position_command = staff_position
 
 def staff_positions(
     numbers,
-    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.plts(_, exclude=_enums.HIDDEN),
     *,
     allow_hidden: bool = False,
     allow_out_of_range: bool = False,
@@ -7668,411 +7668,8 @@ def staff_positions_function(
     return mutated_score
 
 
-def accent(
-    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
-):
-    r"""
-    Attaches accent.
-
-    ..  container:: example
-
-        Attaches accent to pitched head 0:
-
-        >>> stack = baca.stack(
-        ...     baca.figure(
-        ...         [1, 1, 5, -1],
-        ...         16,
-        ...         affix=baca.rests_around([2], [4]),
-        ...         restart_talea=True,
-        ...         treatments=[-1],
-        ...     ),
-        ...     rmakers.beam(),
-        ...     baca.accent(),
-        ...     baca.tuplet_bracket_staff_padding(2),
-        ... )
-        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
-        >>> lilypond_file = abjad.illustrators.selection(selection)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        \override TupletBracket.staff-padding = 2
-                        \time 11/8
-                        r8
-                        c'16
-                        - \accent
-                        [
-                        d'16
-                        ]
-                        bf'4
-                        ~
-                        bf'16
-                        r16
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        fs''16
-                        [
-                        e''16
-                        ]
-                        ef''4
-                        ~
-                        ef''16
-                        r16
-                        af''16
-                        [
-                        g''16
-                        ]
-                    }
-                    \times 4/5
-                    {
-                        a'16
-                        r4
-                        \revert TupletBracket.staff-padding
-                    }
-                }
-            >>
-
-    """
-    return IndicatorCommand(
-        indicators=[abjad.Articulation(">")],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
-def accent_function(
-    argument,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
-    tag = abjad.Tag("baca.accent()")
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
-    for leaf in abjad.iterate.leaves(argument):
-        indicator = abjad.Articulation("accent")
-        abjad.attach(
-            indicator,
-            leaf,
-            tag=tag,
-        )
-
-
-def _alternate_bow_strokes_preparation(*tweaks, downbow_first, full):
-    indicators: list[abjad.Articulation | abjad.Bundle]
-    if downbow_first:
-        if full:
-            strings = ["baca-full-downbow", "baca-full-upbow"]
-        else:
-            strings = ["downbow", "upbow"]
-    else:
-        if full:
-            strings = ["baca-full-upbow", "baca-full-downbow"]
-        else:
-            strings = ["upbow", "downbow"]
-    indicators = [abjad.Articulation(_) for _ in strings]
-    indicators = [_tweaks.bundle_tweaks(_, tweaks) for _ in indicators]
-    return indicators
-
-
-def alternate_bow_strokes(
-    *tweaks: abjad.Tweak,
-    downbow_first: bool = True,
-    full: bool = False,
-    selector=lambda _: _select.pheads(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    r"""
-    Attaches alternate bow strokes.
-
-    ..  container:: example
-
-        Attaches alternate bow strokes to pitched heads (down-bow first):
-
-        >>> stack = baca.stack(
-        ...     baca.figure(
-        ...         [1, 1, 5, -1],
-        ...         16,
-        ...         affix=baca.rests_around([2], [4]),
-        ...         restart_talea=True,
-        ...         treatments=[-1],
-        ...     ),
-        ...     rmakers.beam(),
-        ...     baca.alternate_bow_strokes(downbow_first=True),
-        ...     baca.tuplet_bracket_staff_padding(2),
-        ... )
-        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
-        >>> lilypond_file = abjad.illustrators.selection(selection)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        \override TupletBracket.staff-padding = 2
-                        \time 11/8
-                        r8
-                        c'16
-                        - \downbow
-                        [
-                        d'16
-                        - \upbow
-                        ]
-                        bf'4
-                        - \downbow
-                        ~
-                        bf'16
-                        r16
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        fs''16
-                        - \upbow
-                        [
-                        e''16
-                        - \downbow
-                        ]
-                        ef''4
-                        - \upbow
-                        ~
-                        ef''16
-                        r16
-                        af''16
-                        - \downbow
-                        [
-                        g''16
-                        - \upbow
-                        ]
-                    }
-                    \times 4/5
-                    {
-                        a'16
-                        - \downbow
-                        r4
-                        \revert TupletBracket.staff-padding
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Attaches alternate bow strokes to pitched heads (up-bow first):
-
-        >>> stack = baca.stack(
-        ...     baca.figure(
-        ...         [1, 1, 5, -1],
-        ...         16,
-        ...         affix=baca.rests_around([2], [4]),
-        ...         restart_talea=True,
-        ...         treatments=[-1],
-        ...     ),
-        ...     rmakers.beam(),
-        ...     baca.alternate_bow_strokes(downbow_first=False),
-        ...     baca.tuplet_bracket_staff_padding(6),
-        ... )
-        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
-        >>> lilypond_file = abjad.illustrators.selection(selection)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        \override TupletBracket.staff-padding = 6
-                        \time 11/8
-                        r8
-                        c'16
-                        - \upbow
-                        [
-                        d'16
-                        - \downbow
-                        ]
-                        bf'4
-                        - \upbow
-                        ~
-                        bf'16
-                        r16
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        fs''16
-                        - \downbow
-                        [
-                        e''16
-                        - \upbow
-                        ]
-                        ef''4
-                        - \downbow
-                        ~
-                        ef''16
-                        r16
-                        af''16
-                        - \upbow
-                        [
-                        g''16
-                        - \downbow
-                        ]
-                    }
-                    \times 4/5
-                    {
-                        a'16
-                        - \upbow
-                        r4
-                        \revert TupletBracket.staff-padding
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Attaches alternate full bow strokes to pitched heads:
-
-        >>> stack = baca.stack(
-        ...     baca.figure(
-        ...         [1, 1, 5, -1],
-        ...         16,
-        ...         affix=baca.rests_around([2], [4]),
-        ...         restart_talea=True,
-        ...         treatments=[-1],
-        ...     ),
-        ...     rmakers.beam(),
-        ...     baca.alternate_bow_strokes(full=True),
-        ...     baca.tuplet_bracket_staff_padding(6),
-        ... )
-        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
-        >>> lilypond_file = abjad.illustrators.selection(
-        ...     selection, includes=["baca.ily"]
-        ... )
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        \override TupletBracket.staff-padding = 6
-                        \time 11/8
-                        r8
-                        c'16
-                        - \baca-full-downbow
-                        [
-                        d'16
-                        - \baca-full-upbow
-                        ]
-                        bf'4
-                        - \baca-full-downbow
-                        ~
-                        bf'16
-                        r16
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        fs''16
-                        - \baca-full-upbow
-                        [
-                        e''16
-                        - \baca-full-downbow
-                        ]
-                        ef''4
-                        - \baca-full-upbow
-                        ~
-                        ef''16
-                        r16
-                        af''16
-                        - \baca-full-downbow
-                        [
-                        g''16
-                        - \baca-full-upbow
-                        ]
-                    }
-                    \times 4/5
-                    {
-                        a'16
-                        - \baca-full-downbow
-                        r4
-                        \revert TupletBracket.staff-padding
-                    }
-                }
-            >>
-
-    """
-    indicators = _alternate_bow_strokes_preparation(
-        *tweaks, downbow_first=downbow_first, full=full
-    )
-    return IndicatorCommand(
-        indicators=indicators,
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
-def alternate_bow_strokes_function(
-    argument,
-    *tweaks: abjad.Tweak,
-    downbow_first: bool = True,
-    full: bool = False,
-    tags: list[abjad.Tag] = None,
-) -> None:
-    pass
-    tag = abjad.Tag("baca.alternate_bow_strokes()")
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
-    indicators = _alternate_bow_strokes_preparation(
-        *tweaks, downbow_first=downbow_first, full=full
-    )
-    indicators = abjad.CyclicTuple(indicators)
-    leaves = abjad.select.leaves(argument)
-    for i, leaf in enumerate(leaves):
-        indicator = indicators[i]
-        abjad.attach(
-            indicator,
-            leaf,
-            tag=tag,
-        )
-
-
 def arpeggio(
-    selector=lambda _: _select.chead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.chead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches arpeggio.
@@ -8160,7 +7757,7 @@ def arpeggio(
 
 def articulation(
     articulation: str,
-    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     articulation_ = abjad.Articulation(articulation)
     return IndicatorCommand(
@@ -8172,7 +7769,7 @@ def articulation(
 
 def articulations(
     articulations: list,
-    selector=lambda _: _select.pheads(_, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.pheads(_, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     return IndicatorCommand(
         indicators=articulations,
@@ -8183,7 +7780,7 @@ def articulations(
 
 def bar_line_command(
     abbreviation: str = "|",
-    selector=lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
     *,
     site: str = "after",
 ) -> IndicatorCommand:
@@ -8214,7 +7811,7 @@ def bar_line(
 
 
 def breathe(
-    selector=lambda _: _select.pleaf(_, -1, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.pleaf(_, -1, exclude=_enums.HIDDEN),
     *tweaks: abjad.Tweak,
 ) -> IndicatorCommand:
     indicator: abjad.LilyPondLiteral | abjad.Bundle
@@ -8249,7 +7846,7 @@ def breathe_function(
 
 def clef(
     clef: str = "treble",
-    selector=lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
     *,
     redundant: bool = False,
 ) -> IndicatorCommand:
@@ -8357,7 +7954,7 @@ def clef_function(
 
 def damp(
     *tweaks: abjad.Tweak,
-    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     indicator: abjad.Articulation | abjad.Bundle
     indicator = abjad.Articulation("baca-damp")
@@ -8370,7 +7967,7 @@ def damp(
 
 
 def double_flageolet(
-    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     return IndicatorCommand(
         indicators=[abjad.Articulation("baca-double-flageolet")],
@@ -8380,7 +7977,7 @@ def double_flageolet(
 
 
 def double_staccato(
-    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches double-staccato.
@@ -8484,7 +8081,7 @@ def double_staccato_function(
 
 
 def down_arpeggio(
-    selector=lambda _: _select.chead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.chead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches down-arpeggio.
@@ -8572,7 +8169,7 @@ def down_arpeggio(
 
 
 def down_bow(
-    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
     *tweaks: abjad.Tweak,
     full: bool = False,
 ) -> IndicatorCommand:
@@ -8763,7 +8360,7 @@ def down_bow_function(
 
 
 def espressivo(
-    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
     *tweaks: abjad.Tweak,
 ) -> IndicatorCommand:
     r"""
@@ -8870,7 +8467,7 @@ def espressivo_function(
 
 
 def fermata(
-    selector=lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> IndicatorCommand:
     r"""
     Attaches fermata.
@@ -8955,7 +8552,7 @@ def fermata(
 
 
 def flageolet(
-    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches flageolet.
@@ -9040,7 +8637,7 @@ def flageolet(
 
 
 def hide_black_note_heads(
-    selector=lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches note-head stencil false to black note-heads.
@@ -9129,7 +8726,7 @@ def hide_black_note_heads(
 
 def instrument_name(
     argument: str,
-    selector=lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
     *,
     context: str = "Staff",
 ) -> IndicatorCommand:
@@ -9164,7 +8761,7 @@ def instrument_name_function(
 
 
 def laissez_vibrer(
-    selector=lambda _: _select.ptail(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.ptail(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches laissez vibrer.
@@ -9267,7 +8864,7 @@ def laissez_vibrer_function(
 
 def literal(
     string: str | list[str],
-    selector=lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
     *,
     site: str = "before",
 ) -> IndicatorCommand:
@@ -9299,7 +8896,7 @@ def literal_function(
 
 
 def long_fermata(
-    selector=lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> IndicatorCommand:
     r"""
     Attaches long fermata.
@@ -9384,7 +8981,7 @@ def long_fermata(
 
 
 def marcato(
-    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches marcato.
@@ -9487,7 +9084,7 @@ def marcato_function(
 
 def short_instrument_name(
     argument: str,
-    selector=lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
     *,
     alert: IndicatorCommand = None,
     context: str = "Staff",
@@ -9616,7 +9213,7 @@ def short_instrument_name_function(
 
 def mark(
     argument: str,
-    selector=lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
     *tweaks: abjad.Tweak,
 ) -> IndicatorCommand:
     assert isinstance(argument, abjad.Markup | str), repr(argument)
@@ -9647,7 +9244,7 @@ def mark_function(
 
 
 def parenthesize(
-    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches LilyPond ``\parenthesize`` command.
@@ -9732,7 +9329,7 @@ def parenthesize(
 
 
 def quadruple_staccato(
-    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     return IndicatorCommand(
         indicators=[abjad.Articulation("baca-staccati #4")],
@@ -9743,7 +9340,7 @@ def quadruple_staccato(
 
 def rehearsal_mark(
     argument: int | str,
-    selector=lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
     *tweaks: abjad.Tweak,
     font_size: int = 10,
 ) -> IndicatorCommand:
@@ -9891,7 +9488,7 @@ def repeat_tie_function(argument) -> None:
 
 
 def short_fermata(
-    selector=lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> IndicatorCommand:
     r"""
     Attaches short fermata.
@@ -9976,7 +9573,7 @@ def short_fermata(
 
 
 def snap_pizzicato(
-    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     return IndicatorCommand(
         indicators=[abjad.Articulation("snappizzicato")],
@@ -9986,7 +9583,7 @@ def snap_pizzicato(
 
 
 def staccatissimo(
-    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches staccatissimo.
@@ -10087,109 +9684,9 @@ def staccatissimo_function(
         )
 
 
-def staccato(
-    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    r"""
-    Attaches staccato.
-
-    ..  container:: example
-
-        Attaches staccato to pitched head 0:
-
-        >>> stack = baca.stack(
-        ...     baca.figure(
-        ...         [1, 1, 5, -1],
-        ...         16,
-        ...         affix=baca.rests_around([2], [4]),
-        ...         restart_talea=True,
-        ...         treatments=[-1],
-        ...     ),
-        ...     rmakers.beam(),
-        ...     baca.staccato(),
-        ...     baca.tuplet_bracket_staff_padding(2),
-        ... )
-        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
-        >>> lilypond_file = abjad.illustrators.selection(selection)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        \override TupletBracket.staff-padding = 2
-                        \time 11/8
-                        r8
-                        c'16
-                        - \staccato
-                        [
-                        d'16
-                        ]
-                        bf'4
-                        ~
-                        bf'16
-                        r16
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        fs''16
-                        [
-                        e''16
-                        ]
-                        ef''4
-                        ~
-                        ef''16
-                        r16
-                        af''16
-                        [
-                        g''16
-                        ]
-                    }
-                    \times 4/5
-                    {
-                        a'16
-                        r4
-                        \revert TupletBracket.staff-padding
-                    }
-                }
-            >>
-
-    """
-    return IndicatorCommand(
-        indicators=[abjad.Articulation("staccato")],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
-def staccato_function(
-    argument,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
-    tag = abjad.Tag("baca.staccato()")
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
-    for leaf in abjad.iterate.leaves(argument):
-        indicator = abjad.Articulation("staccato")
-        abjad.attach(
-            indicator,
-            leaf,
-            tag=tag,
-        )
-
-
-def staff_lines(n: int, selector=lambda _: abjad.select.leaf(_, 0)) -> _command.Suite:
+def staff_lines(
+    n: int, selector: typing.Callable = lambda _: abjad.select.leaf(_, 0)
+) -> _command.Suite:
     r"""
     Makes staff line command.
 
@@ -10617,7 +10114,7 @@ def staff_lines_function(argument, n: int) -> None:
 
 
 def stem_tremolo(
-    selector=lambda _: _select.pleaf(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.pleaf(_, 0, exclude=_enums.HIDDEN),
     *,
     tremolo_flags: int = 32,
 ) -> IndicatorCommand:
@@ -10722,7 +10219,7 @@ def stem_tremolo_function(
 
 
 def stop_on_string(
-    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
     *,
     map=None,
 ) -> IndicatorCommand:
@@ -10815,7 +10312,7 @@ def stop_on_string(
 
 
 def stop_trill(
-    selector=lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> IndicatorCommand:
     r"""
     Attaches stop trill to closing-slot.
@@ -10834,7 +10331,7 @@ def stop_trill(
 
 
 def stopped(
-    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches stopped +-sign.
@@ -11018,7 +10515,7 @@ def tie_function(leaf: abjad.Leaf) -> None:
 
 
 def tenuto(
-    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches tenuto.
@@ -11120,7 +10617,7 @@ def tenuto_function(
 
 
 def triple_staccato(
-    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     return IndicatorCommand(
         indicators=[abjad.Articulation("baca-staccati #3")],
@@ -11130,7 +10627,7 @@ def triple_staccato(
 
 
 def up_arpeggio(
-    selector=lambda _: _select.chead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.chead(_, 0, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches up-arpeggio.
@@ -11218,7 +10715,7 @@ def up_arpeggio(
 
 
 def up_bow(
-    selector=lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
     *tweaks: abjad.Tweak,
     full: bool = False,
 ) -> IndicatorCommand:
@@ -11311,7 +10808,7 @@ def up_bow(
 
 
 def very_long_fermata(
-    selector=lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> IndicatorCommand:
     r"""
     Attaches very long fermata.
@@ -11395,7 +10892,9 @@ def very_long_fermata(
     )
 
 
-def allow_octaves(*, selector=lambda _: _select.leaves(_)) -> IndicatorCommand:
+def allow_octaves(
+    *, selector: typing.Callable = lambda _: _select.leaves(_)
+) -> IndicatorCommand:
     """
     Attaches ALLOW_OCTAVE constant.
     """
@@ -11405,7 +10904,7 @@ def allow_octaves(*, selector=lambda _: _select.leaves(_)) -> IndicatorCommand:
 def assign_part(
     part_assignment: _parts.PartAssignment,
     *,
-    selector=lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> PartAssignmentCommand:
     r"""
     Inserts ``selector`` output in container and sets part assignment.
@@ -11530,7 +11029,7 @@ def bcps(
     bow_change_tweaks: typing.Sequence[_typings.IndexedTweak] = (),
     final_spanner: bool = False,
     helper: typing.Callable = lambda x, y: x,
-    selector=lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> BCPCommand:
     r"""
     Makes bow contact point command.
@@ -11750,7 +11249,7 @@ def close_volta(skip, first_measure_number, site: str = "before"):
 
 
 def color(
-    selector=lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
     lone=False,
 ) -> ColorCommand:
     r"""
@@ -11919,7 +11418,7 @@ def color(
 def container(
     identifier: str = None,
     *,
-    selector=lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> ContainerCommand:
     r"""
     Makes container with ``identifier`` and extends container with ``selector`` output.
@@ -12004,7 +11503,9 @@ def container(
     return ContainerCommand(identifier=identifier, selector=selector)
 
 
-def cross_staff(*, selector=lambda _: _select.phead(_, 0)) -> IndicatorCommand:
+def cross_staff(
+    *, selector: typing.Callable = lambda _: _select.phead(_, 0)
+) -> IndicatorCommand:
     r"""
     Attaches cross-staff command.
 
@@ -12116,7 +11617,9 @@ def double_volta(skip, first_measure_number):
     )
 
 
-def dynamic_down(*, selector=lambda _: abjad.select.leaf(_, 0)) -> IndicatorCommand:
+def dynamic_down(
+    *, selector: typing.Callable = lambda _: abjad.select.leaf(_, 0)
+) -> IndicatorCommand:
     r"""
     Attaches dynamic-down command.
 
@@ -12207,7 +11710,9 @@ def dynamic_down(*, selector=lambda _: abjad.select.leaf(_, 0)) -> IndicatorComm
     )
 
 
-def dynamic_up(*, selector=lambda _: abjad.select.leaf(_, 0)) -> IndicatorCommand:
+def dynamic_up(
+    *, selector: typing.Callable = lambda _: abjad.select.leaf(_, 0)
+) -> IndicatorCommand:
     r"""
     Attaches dynamic-up command.
 
@@ -12322,7 +11827,7 @@ def edition(
 
 def finger_pressure_transition(
     *,
-    selector=lambda _: _select.tleaves(_),
+    selector: typing.Callable = lambda _: _select.tleaves(_),
     right_broken: bool = False,
 ) -> GlissandoCommand:
     r"""
@@ -12449,7 +11954,7 @@ def flat_glissando(
     right_broken: bool = False,
     right_broken_show_next: bool = False,
     rleak: bool = False,
-    selector=lambda _: _select.pleaves(_),
+    selector: typing.Callable = lambda _: _select.pleaves(_),
     stop_pitch: str | abjad.NamedPitch | abjad.StaffPosition | None = None,
 ) -> _command.Suite:
     prototype = (list, str, abjad.NamedPitch, abjad.StaffPosition)
@@ -12552,7 +12057,7 @@ def glissando(
     map=None,
     right_broken: bool = False,
     right_broken_show_next: bool = False,
-    selector=lambda _: _select.tleaves(_),
+    selector: typing.Callable = lambda _: _select.tleaves(_),
     style: str = None,
     zero_padding: bool = False,
 ) -> GlissandoCommand:
@@ -12980,7 +12485,7 @@ def glissando_function(
     parenthesize_repeats: bool = False,
     right_broken: bool = False,
     right_broken_show_next: bool = False,
-    # selector=lambda _: _select.tleaves(_),
+    # selector: typing.Callable = lambda _: _select.tleaves(_),
     style: str = None,
     tags: list[abjad.Tag] = None,
     zero_padding: bool = False,
@@ -13071,7 +12576,7 @@ def global_fermata(
 
 def instrument(
     instrument: abjad.Instrument,
-    selector=lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> InstrumentChangeCommand:
     assert isinstance(instrument, abjad.Instrument), repr(instrument)
     return InstrumentChangeCommand(
@@ -13102,7 +12607,7 @@ def instrument_function(
 
 
 def invisible_music(
-    selector=lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
     *,
     map=None,
 ) -> _command.Suite:
@@ -13210,7 +12715,7 @@ def invisible_music(
 
 def label(
     callable_,
-    selector=lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> LabelCommand:
     r"""
     Applies label ``callable_`` to ``selector`` output.
@@ -13305,7 +12810,7 @@ def markup(
     map=None,
     match: _typings.Indices = None,
     measures: _typings.Slice = None,
-    selector=lambda _: _select.pleaf(_, 0),
+    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
 ) -> IndicatorCommand:
     r"""
     Makes markup and inserts into indicator command.
@@ -13589,7 +13094,7 @@ def nonpersistent_markup(
 
 
 def one_voice(
-    selector=lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> IndicatorCommand:
     literal = abjad.LilyPondLiteral(r"\oneVoice")
     return IndicatorCommand(
@@ -13640,7 +13145,7 @@ def previous_metadata(path: str, file_name: str = "__metadata__"):
 
 def replace_with_clusters(
     widths: list[int],
-    selector=lambda _: _select.plts(_, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.plts(_, exclude=_enums.HIDDEN),
     *,
     start_pitch: int | str | abjad.NamedPitch | None = None,
 ) -> ClusterCommand:
@@ -13671,7 +13176,7 @@ def untie_function(argument) -> None:
 
 
 def voice_four(
-    selector=lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> IndicatorCommand:
     literal = abjad.LilyPondLiteral(r"\voiceFour")
     return IndicatorCommand(
@@ -13682,7 +13187,7 @@ def voice_four(
 
 
 def voice_one(
-    selector=lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> IndicatorCommand:
     literal = abjad.LilyPondLiteral(r"\voiceOne")
     return IndicatorCommand(
@@ -13693,7 +13198,7 @@ def voice_one(
 
 
 def voice_three(
-    selector=lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> IndicatorCommand:
     literal = abjad.LilyPondLiteral(r"\voiceThree")
     return IndicatorCommand(
@@ -13704,7 +13209,7 @@ def voice_three(
 
 
 def voice_two(
-    selector=lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> IndicatorCommand:
     literal = abjad.LilyPondLiteral(r"\voiceTwo")
     return IndicatorCommand(

@@ -6649,7 +6649,7 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
 
 
 def extend_beam(
-    selector=lambda _: abjad.select.leaf(_, -1),
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, -1),
 ) -> _commands.IndicatorCommand:
     r"""
     Attaches RIGHT_BROKEN_BEAM to selector output.

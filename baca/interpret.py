@@ -4,6 +4,7 @@ import importlib
 import inspect
 import os
 import pathlib
+import typing
 from inspect import currentframe as _frame
 
 import abjad
@@ -2753,7 +2754,7 @@ def reapply(commands, manifests, previous_persist, voice_names):
 
 
 def reapply_persistent_indicators(
-    *, selector=lambda _: _select.leaves(_)
+    *, selector: typing.Callable = lambda _: _select.leaves(_)
 ) -> _commands.GenericCommand:
     command = _commands.GenericCommand(
         function=reapply_persistent_indicators_function,
