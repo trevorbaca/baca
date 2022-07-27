@@ -440,6 +440,16 @@ def marcato_function(
         )
 
 
+def quadruple_staccato(
+    selector: typing.Callable = lambda _: _select.leaves(_),
+) -> _commands.IndicatorCommand:
+    return _commands.IndicatorCommand(
+        indicators=[abjad.Articulation("baca-staccati #4")],
+        selector=selector,
+        tags=[_tags.function_name(_frame())],
+    )
+
+
 def short_fermata(
     selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
@@ -553,6 +563,16 @@ def stop_on_string(
     return _commands.IndicatorCommand(
         indicators=[articulation],
         map=map,
+        selector=selector,
+        tags=[_tags.function_name(_frame())],
+    )
+
+
+def stopped(
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
+) -> _commands.IndicatorCommand:
+    return _commands.IndicatorCommand(
+        indicators=[abjad.Articulation("stopped")],
         selector=selector,
         tags=[_tags.function_name(_frame())],
     )

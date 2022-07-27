@@ -1235,7 +1235,10 @@ r"""
         >>> score["Music"].extend(music)
         >>> accumulator(
         ...     "Music",
-        ...     baca.instrument(instruments["Flute"]),
+        ...     baca.instrument(
+        ...         instruments["Flute"],
+        ...         selector=lambda _: abjad.select.leaf(_, 0),
+        ...     ),
         ... )
 
         >>> _, _ = baca.interpret.section(
@@ -1402,7 +1405,10 @@ r"""
         >>> score["Music"].extend(music)
         >>> accumulator(
         ...     "Music",
-        ...     baca.instrument(instruments["Flute"]),
+        ...     baca.instrument(
+        ...         instruments["Flute"],
+        ...         selector=lambda _: abjad.select.leaf(_, 0),
+        ...     ),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -1768,7 +1774,10 @@ r"""
         >>> score["Music"].extend(music)
         >>> accumulator(
         ...     "Music",
-        ...     baca.instrument(instruments["Flute"]),
+        ...     baca.instrument(
+        ...         instruments["Flute"],
+        ...         selector=lambda _: abjad.select.leaf(_, 0),
+        ...     ),
         ...     baca.new(
         ...         baca.instrument(instruments["Flute"]),
         ...         map=lambda _: baca.select.leaves(_)[1:2],
@@ -1964,7 +1973,10 @@ r"""
         >>> accumulator(
         ...     "Music",
         ...     baca.reapply_persistent_indicators(),
-        ...     baca.instrument(instruments["Flute"]),
+        ...     baca.instrument(
+        ...         instruments["Flute"],
+        ...         selector=lambda _: abjad.select.leaf(_, 0),
+        ...     ),
         ... )
 
         >>> metadata, persist = {}, {}

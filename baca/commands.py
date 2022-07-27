@@ -8082,16 +8082,6 @@ def parenthesize(
     )
 
 
-def quadruple_staccato(
-    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.Articulation("baca-staccati #4")],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def rehearsal_mark(
     argument: int | str,
     selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
@@ -8138,89 +8128,6 @@ def rehearsal_mark_function(
 
 
 def repeat_tie(selector, *, allow_rest: bool = False) -> IndicatorCommand:
-    r"""
-    Attaches repeat-tie.
-
-    ..  container:: example
-
-        Attaches repeat-tie to pitched head 1:
-
-        >>> stack = baca.stack(
-        ...     baca.figure(
-        ...         [1, 1, 5, -1],
-        ...         16,
-        ...         affix=baca.rests_around([2], [4]),
-        ...         restart_talea=True,
-        ...         treatments=[-1],
-        ...     ),
-        ...     rmakers.beam(),
-        ...     baca.chunk(
-        ...         baca.pitch(
-        ...             0,
-        ...             selector=lambda _: baca.select.plt(_, 1),
-        ...         ),
-        ...         baca.repeat_tie(
-        ...             lambda _: baca.select.phead(_, 1),
-        ...         ),
-        ...     ),
-        ...     baca.tuplet_bracket_staff_padding(2),
-        ... )
-        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
-        >>> lilypond_file = abjad.illustrators.selection(selection)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        \override TupletBracket.staff-padding = 2
-                        \time 11/8
-                        r8
-                        c'16
-                        [
-                        c'16
-                        ]
-                        \repeatTie
-                        bf'4
-                        ~
-                        bf'16
-                        r16
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        fs''16
-                        [
-                        e''16
-                        ]
-                        ef''4
-                        ~
-                        ef''16
-                        r16
-                        af''16
-                        [
-                        g''16
-                        ]
-                    }
-                    \times 4/5
-                    {
-                        a'16
-                        r4
-                        \revert TupletBracket.staff-padding
-                    }
-                }
-            >>
-
-    """
     if allow_rest is not None:
         allow_rest = bool(allow_rest)
     return IndicatorCommand(
@@ -8677,185 +8584,19 @@ def stop_trill(
     Attaches stop trill to closing-slot.
 
     The closing format slot is important because LilyPond fails to compile when
-    ``\stopTrillSpan`` appears after ``\set instrumentName`` accumulator (and probably other
-    ``\set`` accumulator). Setting format slot to closing here positions ``\stopTrillSpan``
-    after the leaf in question (which is required) and also draws ``\stopTrillSpan``
-    closer to the leaf in question, prior to ``\set instrumentName`` and other accumulator
-    positioned in the after slot.
+    ``\stopTrillSpan`` appears after ``\set instrumentName`` accumulator (and
+    probably other ``\set`` accumulator). Setting format slot to closing here
+    positions ``\stopTrillSpan`` after the leaf in question (which is required)
+    and also draws ``\stopTrillSpan`` closer to the leaf in question, prior to
+    ``\set instrumentName`` and other accumulator positioned in the after slot.
 
-    Eventually it will probably be necessary to model ``\stopTrillSpan`` with a dedicated
-    format slot.
+    Eventually it will probably be necessary to model ``\stopTrillSpan`` with a
+    dedicated format slot.
     """
     return literal(r"\stopTrillSpan", site="closing", selector=selector)
 
 
-def stopped(
-    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    r"""
-    Attaches stopped +-sign.
-
-    ..  container:: example
-
-        Attaches stopped +-sign to pitched head 0:
-
-        >>> stack = baca.stack(
-        ...     baca.figure(
-        ...         [1, 1, 5, -1],
-        ...         16,
-        ...         affix=baca.rests_around([2], [4]),
-        ...         restart_talea=True,
-        ...         treatments=[-1],
-        ...     ),
-        ...     rmakers.beam(),
-        ...     baca.stopped(),
-        ...     baca.tuplet_bracket_staff_padding(2),
-        ... )
-        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
-        >>> lilypond_file = abjad.illustrators.selection(selection)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        \override TupletBracket.staff-padding = 2
-                        \time 11/8
-                        r8
-                        c'16
-                        - \stopped
-                        [
-                        d'16
-                        ]
-                        bf'4
-                        ~
-                        bf'16
-                        r16
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        fs''16
-                        [
-                        e''16
-                        ]
-                        ef''4
-                        ~
-                        ef''16
-                        r16
-                        af''16
-                        [
-                        g''16
-                        ]
-                    }
-                    \times 4/5
-                    {
-                        a'16
-                        r4
-                        \revert TupletBracket.staff-padding
-                    }
-                }
-            >>
-
-    """
-    return IndicatorCommand(
-        indicators=[abjad.Articulation("stopped")],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def tie(selector) -> IndicatorCommand:
-    r"""
-    Attaches tie.
-
-    ..  container:: example
-
-        Attaches tie to pitched tail 0:
-
-        >>> stack = baca.stack(
-        ...     baca.figure(
-        ...         [1, 1, 5, -1],
-        ...         16,
-        ...         affix=baca.rests_around([2], [4]),
-        ...         restart_talea=True,
-        ...         treatments=[-1],
-        ...     ),
-        ...     rmakers.beam(),
-        ...     baca.chunk(
-        ...         baca.pitch(
-        ...             2,
-        ...             selector=lambda _: baca.select.plt(_, 0),
-        ...         ),
-        ...         baca.tie(lambda _: baca.select.ptail(_, 0)),
-        ...     ),
-        ...     baca.tuplet_bracket_staff_padding(2),
-        ... )
-        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
-        >>> lilypond_file = abjad.illustrators.selection(selection)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        \override TupletBracket.staff-padding = 2
-                        \time 11/8
-                        r8
-                        d'16
-                        [
-                        ~
-                        d'16
-                        ]
-                        bf'4
-                        ~
-                        bf'16
-                        r16
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        fs''16
-                        [
-                        e''16
-                        ]
-                        ef''4
-                        ~
-                        ef''16
-                        r16
-                        af''16
-                        [
-                        g''16
-                        ]
-                    }
-                    \times 4/5
-                    {
-                        a'16
-                        r4
-                        \revert TupletBracket.staff-padding
-                    }
-                }
-            >>
-
-    """
     return IndicatorCommand(
         indicators=[abjad.Tie()],
         selector=selector,
@@ -10557,7 +10298,8 @@ def global_fermata(
 
 def instrument(
     instrument: abjad.Instrument,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> InstrumentChangeCommand:
     assert isinstance(instrument, abjad.Instrument), repr(instrument)
     return InstrumentChangeCommand(
@@ -10571,20 +10313,21 @@ def instrument_function(
     argument,
     instrument: abjad.Instrument,
     manifests: dict = None,
+    *,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    leaf = abjad.select.leaf(argument, 0)
     assert isinstance(instrument, abjad.Instrument), repr(instrument)
     manifests = manifests or {}
     tag = abjad.Tag("baca.instrument()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
-    _attach_persistent_indicator(
-        leaf,
-        [instrument],
-        manifests=manifests,
-        tag=tag,
-    )
+    for leaf in abjad.select.leaves(argument):
+        _attach_persistent_indicator(
+            leaf,
+            [instrument],
+            manifests=manifests,
+            tag=tag,
+        )
 
 
 def invisible_music(
