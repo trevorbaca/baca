@@ -7768,16 +7768,16 @@ def hide_black_note_heads(
 
 
 def instrument_name(
-    argument: str,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    string: str,
     *,
     context: str = "Staff",
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
-    assert isinstance(argument, str), repr(argument)
-    assert argument.startswith("\\"), repr(argument)
-    instrument_name = abjad.InstrumentName(argument, context=context)
+    assert isinstance(string, str), repr(string)
+    assert string.startswith("\\"), repr(string)
+    indicator = abjad.InstrumentName(string, context=context)
     command = IndicatorCommand(
-        indicators=[instrument_name],
+        indicators=[indicator],
         selector=selector,
         tags=[_tags.function_name(_frame()), _tags.NOT_PARTS],
     )
@@ -7790,23 +7790,23 @@ def instrument_name_function(
     *,
     context: str = "Staff",
 ) -> None:
-    leaf = abjad.select.leaf(argument, 0)
     assert isinstance(string, str), repr(string)
     assert string.startswith("\\"), repr(string)
-    indicator = abjad.InstrumentName(string, context=context)
     tag = abjad.Tag("baca.instrument_name()")
     tag = tag.append(_tags.NOT_PARTS)
-    abjad.attach(
-        indicator,
-        leaf,
-        tag=tag,
-    )
+    for leaf in abjad.select.leaves(argument):
+        indicator = abjad.InstrumentName(string, context=context)
+        abjad.attach(
+            indicator,
+            leaf,
+            tag=tag,
+        )
 
 
 def literal(
     string: str | list[str],
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
     *,
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
     site: str = "before",
 ) -> IndicatorCommand:
     literal = abjad.LilyPondLiteral(string, site=site)
@@ -7818,30 +7818,30 @@ def literal(
 
 
 def literal_function(
-    leaf: abjad.Leaf,
+    argument,
     string: str | list[str],
     *,
     site: str = "before",
     tags: list[abjad.Tag] = None,
 ) -> None:
-    assert isinstance(leaf, abjad.Leaf), repr(leaf)
-    indicator = abjad.LilyPondLiteral(string, site=site)
     tag = abjad.Tag("baca.literal()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
-    abjad.attach(
-        indicator,
-        leaf,
-        tag=tag,
-    )
+    for leaf in abjad.select.leaves(argument):
+        indicator = abjad.LilyPondLiteral(string, site=site)
+        abjad.attach(
+            indicator,
+            leaf,
+            tag=tag,
+        )
 
 
 def short_instrument_name(
     argument: str,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
     *,
     alert: IndicatorCommand = None,
     context: str = "Staff",
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand | _command.Suite:
     r"""
     Attaches short instrument name.
@@ -7868,7 +7868,10 @@ def short_instrument_name(
         >>> score["Music"].extend(music)
         >>> accumulator(
         ...     "Music",
-        ...     baca.short_instrument_name(r"\markup Fl."),
+        ...     baca.short_instrument_name(
+        ...         r"\markup Fl.",
+        ...         selector=lambda _: abjad.select.leaf(_, 0),
+        ...     ),
         ...     baca.pitches("E4 F4"),
         ... )
 
@@ -7950,19 +7953,19 @@ def short_instrument_name_function(
     *,
     context: str = "Staff",
 ) -> None:
-    leaf = abjad.select.leaf(argument, 0)
     assert isinstance(short_instrument_name, abjad.ShortInstrumentName), repr(
         short_instrument_name
     )
     manifests = manifests or {}
     tag = abjad.Tag("baca.short_instrument_name()")
     tag = tag.append(_tags.NOT_PARTS)
-    _attach_persistent_indicator(
-        leaf,
-        [short_instrument_name],
-        manifests=manifests,
-        tag=tag,
-    )
+    for leaf in abjad.select.leaves(argument):
+        _attach_persistent_indicator(
+            leaf,
+            [short_instrument_name],
+            manifests=manifests,
+            tag=tag,
+        )
 
 
 def mark(

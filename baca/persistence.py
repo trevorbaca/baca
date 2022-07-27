@@ -2174,7 +2174,10 @@ r"""
         >>> score["Music"].extend(music)
         >>> accumulator(
         ...     "Music",
-        ...     baca.short_instrument_name(short_instrument_names["I+II"]),
+        ...     baca.short_instrument_name(
+        ...         short_instrument_names["I+II"],
+        ...         selector=lambda _: abjad.select.leaf(_, 0),
+        ...     ),
         ... )
 
         >>> _, _ = baca.interpret.section(
@@ -2350,7 +2353,10 @@ r"""
         >>> score["Music"].extend(music)
         >>> accumulator(
         ...     "Music",
-        ...     baca.short_instrument_name(short_instrument_names["III+IV"]),
+        ...     baca.short_instrument_name(
+        ...         short_instrument_names["III+IV"],
+        ...         selector=lambda _: abjad.select.leaf(_, 0),
+        ...     ),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -2739,7 +2745,10 @@ r"""
         >>> score["Music"].extend(music)
         >>> accumulator(
         ...     "Music",
-        ...     baca.short_instrument_name(short_instrument_names["I+II"]),
+        ...     baca.short_instrument_name(
+        ...         short_instrument_names["I+II"],
+        ...         selector=lambda _: abjad.select.leaf(_, 0),
+        ...     ),
         ...     baca.new(
         ...         baca.short_instrument_name(short_instrument_names["I+II"]),
         ...         map=lambda _: baca.select.leaves(_)[1:2],
@@ -2954,7 +2963,10 @@ r"""
         >>> accumulator(
         ...     "Music",
         ...     baca.reapply_persistent_indicators(),
-        ...     baca.short_instrument_name(short_instrument_names["I+II"]),
+        ...     baca.short_instrument_name(
+        ...         short_instrument_names["I+II"],
+        ...         selector=lambda _: abjad.select.leaf(_, 0),
+        ...     ),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -3154,16 +3166,25 @@ r"""
         ...     "Music",
         ...     baca.tag(
         ...         baca.tags.NOT_PARTS,
-        ...         baca.short_instrument_name(short_instrument_names["I+II"]),
+        ...         baca.short_instrument_name(
+        ...             short_instrument_names["I+II"],
+        ...             selector=lambda _: abjad.select.leaf(_, 0),
+        ...         ),
         ...     ),
         ...     baca.tag(
         ...         baca.tags.NOT_PARTS,
-        ...         baca.short_instrument_name(short_instrument_names["III+IV"]),
+        ...         baca.short_instrument_name(
+        ...             short_instrument_names["III+IV"],
+        ...             selector=lambda _: abjad.select.leaf(_, 0),
+        ...         ),
         ...         deactivate=True,
         ...     ),
         ...     baca.tag(
         ...         baca.tags.NOT_PARTS,
-        ...         baca.short_instrument_name(short_instrument_names["III+IV"]),
+        ...         baca.short_instrument_name(
+        ...             short_instrument_names["III+IV"],
+        ...             selector=lambda _: abjad.select.leaf(_, 0),
+        ...         ),
         ...         deactivate=True,
         ...     ),
         ... )
