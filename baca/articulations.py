@@ -73,7 +73,7 @@ class ColorFingeringCommand(_command.Command):
 
 
 def accent(
-    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
     return _commands.IndicatorCommand(
         indicators=[abjad.Articulation(">")],
@@ -103,7 +103,7 @@ def alternate_bow_strokes(
     *tweaks: abjad.Tweak,
     downbow_first: bool = True,
     full: bool = False,
-    selector: typing.Callable = lambda _: _select.pheads(_, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
     indicators = _prepare_alternate_bow_strokes(
         *tweaks, downbow_first=downbow_first, full=full
@@ -152,7 +152,7 @@ def arpeggio(
 
 def articulation(
     articulation: str,
-    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
     articulation_ = abjad.Articulation(articulation)
     return _commands.IndicatorCommand(
@@ -164,7 +164,7 @@ def articulation(
 
 def articulations(
     articulations: list,
-    selector: typing.Callable = lambda _: _select.pheads(_, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
     return _commands.IndicatorCommand(
         indicators=articulations,
@@ -178,7 +178,6 @@ def breathe(
     *tweaks: abjad.Tweak,
 ) -> _commands.IndicatorCommand:
     indicator: abjad.LilyPondLiteral | abjad.Bundle
-    # TODO: change to abjad.Articulation("breathe", site="after")?
     indicator = abjad.LilyPondLiteral(r"\breathe", site="after")
     indicator = _tweaks.bundle_tweaks(indicator, tweaks)
     return _commands.IndicatorCommand(
@@ -194,7 +193,6 @@ def breathe_function(
     tags: list[abjad.Tag] = None,
 ) -> None:
     indicator: abjad.LilyPondLiteral | abjad.Bundle
-    # TODO: change to abjad.Articulation("breathe", site="after")?
     indicator = abjad.LilyPondLiteral(r"\breathe", site="after")
     indicator = _tweaks.bundle_tweaks(indicator, tweaks)
     tag = abjad.Tag("baca.breathe()")
@@ -211,7 +209,7 @@ def breathe_function(
 def color_fingerings(
     numbers: list[int],
     *tweaks: _typings.IndexedTweak,
-    selector: typing.Callable = lambda _: _select.pheads(_, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> ColorFingeringCommand:
     return ColorFingeringCommand(numbers=numbers, selector=selector, tweaks=tweaks)
 
@@ -226,7 +224,7 @@ def color_fingerings_function(
 
 def damp(
     *tweaks: abjad.Tweak,
-    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
     indicator: abjad.Articulation | abjad.Bundle
     indicator = abjad.Articulation("baca-damp")
@@ -239,7 +237,7 @@ def damp(
 
 
 def double_flageolet(
-    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
     return _commands.IndicatorCommand(
         indicators=[abjad.Articulation("baca-double-flageolet")],
@@ -249,7 +247,7 @@ def double_flageolet(
 
 
 def double_staccato(
-    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
     return _commands.IndicatorCommand(
         indicators=[abjad.Articulation("baca-staccati #2")],
@@ -286,7 +284,7 @@ def down_arpeggio(
 
 
 def down_bow(
-    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
     *tweaks: abjad.Tweak,
     full: bool = False,
 ) -> _commands.IndicatorCommand:
@@ -327,7 +325,7 @@ def down_bow_function(
 
 
 def espressivo(
-    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
     *tweaks: abjad.Tweak,
 ) -> _commands.IndicatorCommand:
     indicator: abjad.Articulation | abjad.Bundle
@@ -369,7 +367,7 @@ def fermata(
 
 
 def flageolet(
-    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
     return _commands.IndicatorCommand(
         indicators=[abjad.Articulation("flageolet")],
@@ -416,7 +414,7 @@ def long_fermata(
 
 
 def marcato(
-    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
     return _commands.IndicatorCommand(
         indicators=[abjad.Articulation("marcato")],
@@ -453,7 +451,7 @@ def short_fermata(
 
 
 def snap_pizzicato(
-    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
     return _commands.IndicatorCommand(
         indicators=[abjad.Articulation("snappizzicato")],
@@ -463,7 +461,7 @@ def snap_pizzicato(
 
 
 def staccatissimo(
-    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
     return _commands.IndicatorCommand(
         indicators=[abjad.Articulation("staccatissimo")],
@@ -490,7 +488,7 @@ def staccatissimo_function(
 
 
 def staccato(
-    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
     return _commands.IndicatorCommand(
         indicators=[abjad.Articulation("staccato")],
@@ -547,7 +545,7 @@ def stem_tremolo_function(
 
 
 def stop_on_string(
-    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
     *,
     map=None,
 ) -> _commands.IndicatorCommand:
@@ -561,7 +559,7 @@ def stop_on_string(
 
 
 def tenuto(
-    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
     return _commands.IndicatorCommand(
         indicators=[abjad.Articulation("tenuto")],
@@ -588,7 +586,7 @@ def tenuto_function(
 
 
 def triple_staccato(
-    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
     return _commands.IndicatorCommand(
         indicators=[abjad.Articulation("baca-staccati #3")],
@@ -608,7 +606,7 @@ def up_arpeggio(
 
 
 def up_bow(
-    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
     *tweaks: abjad.Tweak,
     full: bool = False,
 ) -> _commands.IndicatorCommand:
