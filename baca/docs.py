@@ -1,3 +1,6 @@
+"""
+Docs.
+"""
 import abjad
 
 from . import score as _score

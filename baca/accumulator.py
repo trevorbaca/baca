@@ -1,3 +1,6 @@
+"""
+Accumulator.
+"""
 import dataclasses
 
 import abjad

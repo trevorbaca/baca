@@ -1,3 +1,6 @@
+"""
+Sequence.
+"""
 import collections
 import copy
 import itertools

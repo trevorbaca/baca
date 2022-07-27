@@ -1,3 +1,6 @@
+"""
+LilyPond.
+"""
 from inspect import currentframe as _frame
 
 import abjad
