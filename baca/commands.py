@@ -10277,39 +10277,32 @@ def markup_function(
     argument,
     markup: str | abjad.Markup,
     *tweaks: abjad.Tweak,
-    allow_rests: bool = False,
-    direction=abjad.UP,
+    direction: abjad.Vertical = abjad.UP,
     tags: list[abjad.Tag] = None,
-) -> abjad.Wrapper | list[abjad.Wrapper]:
-    if direction not in (abjad.DOWN, abjad.UP):
-        message = f"direction must be up or down (not {direction!r})."
-        raise Exception(message)
-    indicator: abjad.Markup | abjad.Bundle
-    if isinstance(markup, str):
-        indicator = abjad.Markup(markup)
-    elif isinstance(markup, abjad.Markup):
-        indicator = dataclasses.replace(markup)
-    else:
-        message = "MarkupLibary.__call__():\n"
-        message += "  Value of 'markup' must be str or markup.\n"
-        message += f"  Not {markup!r}."
-        raise Exception(message)
-    if tweaks:
-        indicator = abjad.bundle(indicator, *tweaks)
+) -> list[abjad.Wrapper]:
+    assert direction in (abjad.DOWN, abjad.UP), repr(direction)
     tag = abjad.Tag("baca.markup()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
-    if allow_rests:
-        leaf = abjad.select.leaf(argument, 0)
-    else:
-        leaf = _select.pleaf(argument, 0)
-    return abjad.attach(
-        indicator,
-        leaf,
-        direction=direction,
-        tag=tag,
-        wrapper=True,
-    )
+    wrappers = []
+    for leaf in abjad.select.leaves(argument):
+        indicator: abjad.Markup | abjad.Bundle
+        if isinstance(markup, str):
+            indicator = abjad.Markup(markup)
+        else:
+            assert isinstance(markup, abjad.Markup), repr(markup)
+            indicator = dataclasses.replace(markup)
+        if tweaks:
+            indicator = abjad.bundle(indicator, *tweaks)
+        wrapper = abjad.attach(
+            indicator,
+            leaf,
+            direction=direction,
+            tag=tag,
+            wrapper=True,
+        )
+        wrappers.append(wrapper)
+    return wrappers
 
 
 def one_voice(
