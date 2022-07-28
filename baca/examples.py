@@ -150,7 +150,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
 
     >>> accumulator(
     ...     ("Music.2", 1),
-    ...     baca.clef("bass"),
+    ...     baca.clef("bass", selector=lambda _: abjad.select.leaf(_, 0)),
     ... )
 
     >>> _, _ = baca.interpret.section(

@@ -36,7 +36,7 @@ r"""
         >>> score["Music"].extend(music)
         >>> accumulator(
         ...     "Music",
-        ...     baca.clef("treble"),
+        ...     baca.clef("treble", selector=lambda _: abjad.select.leaf(_, 0)),
         ... )
 
         >>> _, _ = baca.interpret.section(
@@ -139,7 +139,7 @@ r"""
         >>> score["Music"].extend(music)
         >>> accumulator(
         ...     "Music",
-        ...     baca.clef("alto"),
+        ...     baca.clef("alto", selector=lambda _: abjad.select.leaf(_, 0)),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -487,7 +487,7 @@ r"""
         >>> accumulator(
         ...     "Music",
         ...     baca.reapply_persistent_indicators(),
-        ...     baca.clef("treble"),
+        ...     baca.clef("treble", selector=lambda _: abjad.select.leaf(_, 0)),
         ... )
 
         >>> metadata, persist = {}, {}

@@ -6074,7 +6074,7 @@ def interpolate_pitches(
         >>> stack = baca.stack(
         ...     baca.figure([1], 16),
         ...     rmakers.beam(),
-        ...     baca.clef("treble"),
+        ...     baca.clef("treble", selector=lambda _: abjad.select.leaf(_, 0)),
         ...     baca.interpolate_pitches("Eb4", "F#5"),
         ... )
 
@@ -6137,7 +6137,7 @@ def interpolate_pitches(
         >>> stack = baca.stack(
         ...     baca.figure([1], 16),
         ...     rmakers.beam(),
-        ...     baca.clef("treble"),
+        ...     baca.clef("treble", selector=lambda _: abjad.select.leaf(_, 0)),
         ...     baca.interpolate_pitches("Eb4", "F#5"),
         ...     baca.glissando(
         ...         allow_repeats=True,
@@ -7499,85 +7499,10 @@ def bar_line(
 
 def clef(
     clef: str = "treble",
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
     *,
     redundant: bool = False,
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
-    r"""
-    Attaches clef.
-
-    ..  container:: example
-
-        Attaches clef to leaf 0:
-
-        >>> stack = baca.stack(
-        ...     baca.figure(
-        ...         [1, 1, 5, -1],
-        ...         16,
-        ...         affix=baca.rests_around([2], [4]),
-        ...         restart_talea=True,
-        ...         treatments=[-1],
-        ...     ),
-        ...     rmakers.beam(),
-        ...     baca.clef("alto"),
-        ...     baca.tuplet_bracket_staff_padding(7),
-        ... )
-        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
-        >>> lilypond_file = abjad.illustrators.selection(selection)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        \override TupletBracket.staff-padding = 7
-                        \clef "alto"
-                        \time 11/8
-                        r8
-                        c'16
-                        [
-                        d'16
-                        ]
-                        bf'4
-                        ~
-                        bf'16
-                        r16
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        fs''16
-                        [
-                        e''16
-                        ]
-                        ef''4
-                        ~
-                        ef''16
-                        r16
-                        af''16
-                        [
-                        g''16
-                        ]
-                    }
-                    \times 4/5
-                    {
-                        a'16
-                        r4
-                        \revert TupletBracket.staff-padding
-                    }
-                }
-            >>
-
-    """
     indicator = abjad.Clef(clef)
     return IndicatorCommand(
         indicators=[indicator],
@@ -7591,18 +7516,15 @@ def clef_function(
     argument,
     clef: str,
 ) -> None:
-    if isinstance(argument, abjad.Leaf):
-        leaf = argument
-    else:
-        leaf = abjad.select.leaf(argument, 0)
     assert isinstance(clef, str), repr(clef)
-    indicator = abjad.Clef(clef)
-    _attach_persistent_indicator(
-        leaf,
-        [indicator],
-        manifests={},
-        tag=abjad.Tag("baca.clef()"),
-    )
+    for leaf in abjad.select.leaves(argument):
+        indicator = abjad.Clef(clef)
+        _attach_persistent_indicator(
+            leaf,
+            [indicator],
+            manifests={},
+            tag=abjad.Tag("baca.clef()"),
+        )
 
 
 def hide_black_note_heads(
@@ -8104,7 +8026,7 @@ def staff_lines(
         >>> score["Music"].extend(music)
         >>> accumulator(
         ...     "Music",
-        ...     baca.clef("percussion"),
+        ...     baca.clef("percussion", selector=lambda _: abjad.select.leaf(_, 0)),
         ...     baca.staff_lines(1),
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
         ... )
@@ -8182,7 +8104,7 @@ def staff_lines(
         >>> score["Music"].extend(music)
         >>> accumulator(
         ...     "Music",
-        ...     baca.clef("bass"),
+        ...     baca.clef("bass", selector=lambda _: abjad.select.leaf(_, 0)),
         ...     baca.staff_lines(1),
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
         ... )
@@ -8261,7 +8183,7 @@ def staff_lines(
         >>> score["Music"].extend(music)
         >>> accumulator(
         ...     "Music",
-        ...     baca.clef("percussion"),
+        ...     baca.clef("percussion", selector=lambda _: abjad.select.leaf(_, 0)),
         ...     baca.staff_lines(2),
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
         ... )
@@ -8338,7 +8260,7 @@ def staff_lines(
         >>> score["Music"].extend(music)
         >>> accumulator(
         ...     "Music",
-        ...     baca.clef("bass"),
+        ...     baca.clef("bass", selector=lambda _: abjad.select.leaf(_, 0)),
         ...     baca.staff_lines(2),
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
         ... )
@@ -8417,7 +8339,7 @@ def staff_lines(
         ...     "Music",
         ...     baca.staff_lines(2),
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
-        ...     baca.clef("bass"),
+        ...     baca.clef("bass", selector=lambda _: abjad.select.leaf(_, 0)),
         ... )
 
         >>> _, _ = baca.interpret.section(
