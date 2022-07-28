@@ -5952,29 +5952,25 @@ def dynamic_function(
     argument,
     dynamic: str | abjad.Dynamic,
     *tweaks: abjad.Tweak,
-    allow_rests: bool = False,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    if allow_rests is True:
-        leaf = abjad.select.leaf(argument, 0)
-    else:
-        leaf = _select.pleaf(argument, 0)
-    if isinstance(dynamic, str):
-        indicator = make_dynamic(dynamic)
-    else:
-        indicator = dynamic
-    prototype = (abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin)
-    assert isinstance(indicator, prototype), repr(indicator)
-    indicator = _tweaks.bundle_tweaks(indicator, tweaks)
     tag = abjad.Tag("baca.dynamic()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
-    _attach_persistent_indicator(
-        leaf,
-        [indicator],
-        manifests={},
-        tag=tag,
-    )
+    for leaf in abjad.select.leaves(argument):
+        if isinstance(dynamic, str):
+            indicator = make_dynamic(dynamic)
+        else:
+            indicator = dynamic
+        prototype = (abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin)
+        assert isinstance(indicator, prototype), repr(indicator)
+        indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+        _attach_persistent_indicator(
+            leaf,
+            [indicator],
+            manifests={},
+            tag=tag,
+        )
 
 
 def force_accidental(
