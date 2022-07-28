@@ -353,7 +353,7 @@ Example overrides.
     ...         treatments=[-1],
     ...     ),
     ...     rmakers.beam(),
-    ...     baca.dynamic("p"),
+    ...     baca.dynamic("p", selector=lambda _: baca.select.pleaf(_, 0)),
     ...     baca.dynamic("f", selector=selector),
     ...     baca.dynamic_text_extra_offset(
     ...         (-3, 0),

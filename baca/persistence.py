@@ -598,7 +598,7 @@ r"""
         >>> score["Music"].extend(music)
         >>> accumulator(
         ...     "Music",
-        ...     baca.dynamic("f"),
+        ...     baca.dynamic("f", selector=lambda _: baca.select.pleaf(_, 0)),
         ... )
 
         >>> _, _ = baca.interpret.section(
@@ -667,7 +667,7 @@ r"""
         >>> score["Music"].extend(music)
         >>> accumulator(
         ...     "Music",
-        ...     baca.dynamic("p"),
+        ...     baca.dynamic("p", selector=lambda _: baca.select.pleaf(_, 0)),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -831,7 +831,7 @@ r"""
         >>> score["Music"].extend(music)
         >>> accumulator(
         ...     "Music",
-        ...     baca.dynamic("f"),
+        ...     baca.dynamic("f", selector=lambda _: baca.select.pleaf(_, 0)),
         ...     baca.dynamic("f", selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
 
@@ -904,7 +904,7 @@ r"""
         >>> accumulator(
         ...     "Music",
         ...     baca.reapply_persistent_indicators(),
-        ...     baca.dynamic("f"),
+        ...     baca.dynamic("f", selector=lambda _: baca.select.pleaf(_, 0)),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -984,7 +984,7 @@ r"""
         >>> score["Music"].extend(music)
         >>> accumulator(
         ...     "Music",
-        ...     baca.dynamic("sfz"),
+        ...     baca.dynamic("sfz", selector=lambda _: baca.select.pleaf(_, 0)),
         ...     baca.dynamic("sfz", selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
 
@@ -1056,7 +1056,7 @@ r"""
         >>> score["Music"].extend(music)
         >>> accumulator(
         ...     "Music",
-        ...     baca.dynamic("sfz"),
+        ...     baca.dynamic("sfz", selector=lambda _: baca.select.pleaf(_, 0)),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -1138,7 +1138,7 @@ r"""
         >>> score["Music"].extend(music)
         >>> accumulator(
         ...     "Music",
-        ...     baca.dynamic("mf"),
+        ...     baca.dynamic("mf", selector=lambda _: baca.select.pleaf(_, 0)),
         ...     baca.dynamic('"mf"', selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
 

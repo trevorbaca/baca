@@ -5646,82 +5646,11 @@ def dynamic(
     map=None,
     match: _typings.Indices = None,
     measures: _typings.Slice = None,
-    selector: typing.Callable = lambda _: _select.phead(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
     redundant: bool = False,
 ) -> IndicatorCommand:
     r"""
     Attaches dynamic.
-
-    ..  container:: example
-
-        Attaches dynamic to pitched head 0:
-
-        >>> stack = baca.stack(
-        ...     baca.figure(
-        ...         [1, 1, 5, -1],
-        ...         16,
-        ...         affix=baca.rests_around([2], [4]),
-        ...         restart_talea=True,
-        ...         treatments=[-1],
-        ...     ),
-        ...     rmakers.beam(),
-        ...     baca.dynamic("f"),
-        ...     baca.tuplet_bracket_staff_padding(2),
-        ... )
-        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
-        >>> lilypond_file = abjad.illustrators.selection(selection)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        \override TupletBracket.staff-padding = 2
-                        \time 11/8
-                        r8
-                        c'16
-                        \f
-                        [
-                        d'16
-                        ]
-                        bf'4
-                        ~
-                        bf'16
-                        r16
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        fs''16
-                        [
-                        e''16
-                        ]
-                        ef''4
-                        ~
-                        ef''16
-                        r16
-                        af''16
-                        [
-                        g''16
-                        ]
-                    }
-                    \times 4/5
-                    {
-                        a'16
-                        r4
-                        \revert TupletBracket.staff-padding
-                    }
-                }
-            >>
 
     ..  container:: example
 
@@ -5736,7 +5665,7 @@ def dynamic(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.dynamic('"f"'),
+        ...     baca.dynamic('"f"', selector=lambda _: baca.select.pleaf(_, 0)),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
@@ -5818,8 +5747,8 @@ def dynamic(
         >>> accumulator(
         ...     "Music",
         ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
-        ...     baca.dynamic("p"),
-        ...     baca.dynamic("<"),
+        ...     baca.dynamic("p", selector=lambda _: baca.select.pleaf(_, 0)),
+        ...     baca.dynamic("<", selector=lambda _: baca.select.pleaf(_, 0)),
         ...     baca.dynamic(
         ...         "!",
         ...         selector=lambda _: baca.select.pleaf(_, -1),
@@ -5924,6 +5853,7 @@ def dynamic(
         ...     baca.dynamic(
         ...         "p",
         ...         abjad.Tweak(r"- \tweak extra-offset #'(-4 . 0)"),
+        ...         selector=lambda _: baca.select.pleaf(_, 0),
         ...     ),
         ...     baca.dls_staff_padding(5),
         ... )
@@ -9345,89 +9275,6 @@ def double_volta(skip, first_measure_number):
 def dynamic_down(
     *, selector: typing.Callable = lambda _: abjad.select.leaf(_, 0)
 ) -> IndicatorCommand:
-    r"""
-    Attaches dynamic-down command.
-
-    ..  container:: example
-
-        Attaches dynamic-down command to leaf 0:
-
-        >>> def forte_selector(argument):
-        ...     result = abjad.select.tuplet(argument, 1)
-        ...     result = baca.select.phead(result, 0)
-        ...     return result
-        >>> stack = baca.stack(
-        ...     baca.figure(
-        ...         [1, 1, 5, -1],
-        ...         16,
-        ...         affix=baca.rests_around([2], [4]),
-        ...         restart_talea=True,
-        ...         treatments=[-1],
-        ...     ),
-        ...     rmakers.beam(),
-        ...     baca.dynamic("p"),
-        ...     baca.dynamic("f", selector=forte_selector),
-        ...     baca.dynamic_down(),
-        ...     baca.tuplet_bracket_staff_padding(2),
-        ... )
-        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
-        >>> lilypond_file = abjad.illustrators.selection(selection)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        \override TupletBracket.staff-padding = 2
-                        \dynamicDown
-                        \time 11/8
-                        r8
-                        c'16
-                        \p
-                        [
-                        d'16
-                        ]
-                        bf'4
-                        ~
-                        bf'16
-                        r16
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        fs''16
-                        \f
-                        [
-                        e''16
-                        ]
-                        ef''4
-                        ~
-                        ef''16
-                        r16
-                        af''16
-                        [
-                        g''16
-                        ]
-                    }
-                    \times 4/5
-                    {
-                        a'16
-                        r4
-                        \revert TupletBracket.staff-padding
-                    }
-                }
-            >>
-
-    """
     return IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r"\dynamicDown")],
         selector=selector,
@@ -9438,89 +9285,6 @@ def dynamic_down(
 def dynamic_up(
     *, selector: typing.Callable = lambda _: abjad.select.leaf(_, 0)
 ) -> IndicatorCommand:
-    r"""
-    Attaches dynamic-up command.
-
-    ..  container:: example
-
-        Attaches dynamic-up command to leaf 0:
-
-        >>> def forte_selector(argument):
-        ...     result = abjad.select.tuplet(argument, 1)
-        ...     result = baca.select.phead(result, 0)
-        ...     return result
-        >>> stack = baca.stack(
-        ...     baca.figure(
-        ...         [1, 1, 5, -1],
-        ...         16,
-        ...         affix=baca.rests_around([2], [4]),
-        ...         restart_talea=True,
-        ...         treatments=[-1],
-        ...     ),
-        ...     rmakers.beam(),
-        ...     baca.dynamic("p"),
-        ...     baca.dynamic("f", selector=forte_selector),
-        ...     baca.dynamic_up(),
-        ...     baca.tuplet_bracket_staff_padding(2),
-        ... )
-        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
-        >>> lilypond_file = abjad.illustrators.selection(selection)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        \override TupletBracket.staff-padding = 2
-                        \dynamicUp
-                        \time 11/8
-                        r8
-                        c'16
-                        \p
-                        [
-                        d'16
-                        ]
-                        bf'4
-                        ~
-                        bf'16
-                        r16
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        fs''16
-                        \f
-                        [
-                        e''16
-                        ]
-                        ef''4
-                        ~
-                        ef''16
-                        r16
-                        af''16
-                        [
-                        g''16
-                        ]
-                    }
-                    \times 4/5
-                    {
-                        a'16
-                        r4
-                        \revert TupletBracket.staff-padding
-                    }
-                }
-            >>
-
-    """
     return IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r"\dynamicUp")],
         selector=selector,
