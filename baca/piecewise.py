@@ -2122,6 +2122,7 @@ def hairpin_function(
     forbid_al_niente_to_bar_line: bool = False,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     remove_length_1_spanner_start: bool = False,
+    right_broken: bool = False,
     tags: list[abjad.Tag] = None,
 ) -> None:
     final_hairpin_, specifiers = _prepare_hairpin_arguments(
@@ -2134,6 +2135,9 @@ def hairpin_function(
     assert isinstance(remove_length_1_spanner_start, bool), repr(
         remove_length_1_spanner_start
     )
+    right_broken_: typing.Any = False
+    if bool(right_broken) is True:
+        right_broken_ = abjad.LilyPondLiteral(r"\!", site="after")
     tag = abjad.Tag("baca.hairpin()")
     for tag_ in tags or []:
         tag = tag.append(tag_)
@@ -2147,7 +2151,7 @@ def hairpin_function(
         # self_left_broken,
         self_pieces=pieces,
         self_remove_length_1_spanner_start=remove_length_1_spanner_start,
-        # self_right_broken,
+        self_right_broken=right_broken_,
         self_specifiers=abjad.CyclicTuple(specifiers),
         self_tag=tag,
         # self_tweaks,

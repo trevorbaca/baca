@@ -7933,6 +7933,16 @@ def parenthesize(
     )
 
 
+def parenthesize_function(argument) -> None:
+    for leaf in abjad.select.leaves(argument):
+        indicator = abjad.LilyPondLiteral(r"\parenthesize")
+        abjad.attach(
+            indicator,
+            leaf,
+            tag=abjad.Tag("baca.parenthesize()"),
+        )
+
+
 def rehearsal_mark(
     argument: int | str,
     selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
