@@ -3882,7 +3882,7 @@ r"""
         >>> accumulator(
         ...     "Music",
         ...     command,
-        ...     baca.staff_lines(1),
+        ...     baca.staff_lines(1, selector=lambda _: abjad.select.leaf(_, 0)),
         ...     baca.staff_position(0),
         ... )
 
@@ -4150,7 +4150,7 @@ r"""
         >>> score["Music"].extend(music)
         >>> accumulator(
         ...     "Music",
-        ...     baca.staff_lines(5),
+        ...     baca.staff_lines(5, selector=lambda _: abjad.select.leaf(_, 0)),
         ... )
 
         >>> _, _ = baca.interpret.section(
@@ -4222,7 +4222,7 @@ r"""
         >>> score["Music"].extend(music)
         >>> accumulator(
         ...     "Music",
-        ...     baca.staff_lines(1),
+        ...     baca.staff_lines(1, selector=lambda _: abjad.select.leaf(_, 0)),
         ... )
 
         >>> metadata, persist = {}, {}
@@ -4391,7 +4391,7 @@ r"""
         >>> score["Music"].extend(music)
         >>> accumulator(
         ...     "Music",
-        ...     baca.staff_lines(5),
+        ...     baca.staff_lines(5, selector=lambda _: abjad.select.leaf(_, 0)),
         ...     baca.staff_lines(5, selector=lambda _: abjad.select.leaf(_, 1)),
         ... )
 
@@ -4470,7 +4470,7 @@ r"""
         >>> accumulator(
         ...     "Music",
         ...     baca.reapply_persistent_indicators(),
-        ...     baca.staff_lines(5),
+        ...     baca.staff_lines(5, selector=lambda _: abjad.select.leaf(_, 0)),
         ... )
 
         >>> metadata, persist = {}, {}

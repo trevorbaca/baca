@@ -8000,7 +8000,8 @@ def repeat_tie_function(argument) -> None:
 
 
 def staff_lines(
-    n: int, selector: typing.Callable = lambda _: abjad.select.leaf(_, 0)
+    n: int,
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _command.Suite:
     r"""
     Makes staff line command.
@@ -8027,7 +8028,7 @@ def staff_lines(
         >>> accumulator(
         ...     "Music",
         ...     baca.clef("percussion", selector=lambda _: abjad.select.leaf(_, 0)),
-        ...     baca.staff_lines(1),
+        ...     baca.staff_lines(1, selector=lambda _: abjad.select.leaf(_, 0)),
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
         ... )
 
@@ -8105,7 +8106,7 @@ def staff_lines(
         >>> accumulator(
         ...     "Music",
         ...     baca.clef("bass", selector=lambda _: abjad.select.leaf(_, 0)),
-        ...     baca.staff_lines(1),
+        ...     baca.staff_lines(1, selector=lambda _: abjad.select.leaf(_, 0)),
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
         ... )
 
@@ -8184,7 +8185,7 @@ def staff_lines(
         >>> accumulator(
         ...     "Music",
         ...     baca.clef("percussion", selector=lambda _: abjad.select.leaf(_, 0)),
-        ...     baca.staff_lines(2),
+        ...     baca.staff_lines(2, selector=lambda _: abjad.select.leaf(_, 0)),
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
         ... )
 
@@ -8261,7 +8262,7 @@ def staff_lines(
         >>> accumulator(
         ...     "Music",
         ...     baca.clef("bass", selector=lambda _: abjad.select.leaf(_, 0)),
-        ...     baca.staff_lines(2),
+        ...     baca.staff_lines(2, selector=lambda _: abjad.select.leaf(_, 0)),
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
         ... )
 
@@ -8337,7 +8338,7 @@ def staff_lines(
         >>> score["Music"].extend(music)
         >>> accumulator(
         ...     "Music",
-        ...     baca.staff_lines(2),
+        ...     baca.staff_lines(2, selector=lambda _: abjad.select.leaf(_, 0)),
         ...     baca.staff_positions([-2, -1, 0, 1, 2]),
         ...     baca.clef("bass", selector=lambda _: abjad.select.leaf(_, 0)),
         ... )
@@ -8410,22 +8411,22 @@ def staff_lines(
 
 
 def staff_lines_function(argument, n: int) -> None:
-    leaf = abjad.select.leaf(argument, 0)
     assert isinstance(n, int), repr(n)
-    bar_extent = _indicators.BarExtent(n)
-    _attach_persistent_indicator(
-        leaf,
-        [bar_extent],
-        manifests={},
-        tag=abjad.Tag("baca.staff_lines(1)").append(_tags.NOT_PARTS),
-    )
-    staff_lines = _indicators.StaffLines(n)
-    _attach_persistent_indicator(
-        leaf,
-        [staff_lines],
-        manifests={},
-        tag=abjad.Tag("baca.staff_lines(2)"),
-    )
+    for leaf in abjad.select.leaves(argument):
+        bar_extent = _indicators.BarExtent(n)
+        _attach_persistent_indicator(
+            leaf,
+            [bar_extent],
+            manifests={},
+            tag=abjad.Tag("baca.staff_lines(1)").append(_tags.NOT_PARTS),
+        )
+        staff_lines = _indicators.StaffLines(n)
+        _attach_persistent_indicator(
+            leaf,
+            [staff_lines],
+            manifests={},
+            tag=abjad.Tag("baca.staff_lines(2)"),
+        )
 
 
 def stop_trill(
