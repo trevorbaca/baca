@@ -2427,7 +2427,10 @@ Example overrides.
     ...         treatments=[-1],
     ...     ),
     ...     rmakers.beam(),
-    ...     baca.markup(r'\markup "più mosso"'),
+    ...     baca.markup(
+    ...         r'\markup "più mosso"',
+    ...         selector=lambda _: baca.select.pleaf(_, 0)
+    ...     ),
     ...     baca.markup(
     ...         r'\markup "lo stesso tempo"',
     ...         selector=selector,
@@ -2550,7 +2553,10 @@ Example overrides.
     ...         treatments=[-1],
     ...     ),
     ...     rmakers.beam(),
-    ...     baca.markup(r'\markup "più mosso"'),
+    ...     baca.markup(
+    ...         r'\markup "più mosso"',
+    ...         selector=lambda _: baca.select.pleaf(_, 0)
+    ...     ),
     ...     baca.markup(
     ...         r'\markup "lo stesso tempo"',
     ...         selector=selector,
@@ -2711,7 +2717,10 @@ Example overrides.
     ...         treatments=[-1],
     ...     ),
     ...     rmakers.beam(),
-    ...     baca.markup(r'\markup "più mosso"'),
+    ...     baca.markup(
+    ...         r'\markup "più mosso"',
+    ...         selector=lambda _: baca.select.pleaf(_, 0)
+    ...     ),
     ...     baca.markup(
     ...         r'\markup "lo stesso tempo"',
     ...         selector=selector,
@@ -2833,7 +2842,10 @@ Example overrides.
     ...         treatments=[-1],
     ...     ),
     ...     rmakers.beam(),
-    ...     baca.markup(r'\markup "più mosso"'),
+    ...     baca.markup(
+    ...         r'\markup "più mosso"',
+    ...         selector=lambda _: baca.select.pleaf(_, 0)
+    ...     ),
     ...     baca.markup(
     ...         r'\markup "lo stesso tempo"',
     ...         selector=selector,
@@ -2955,7 +2967,10 @@ Example overrides.
     ...         treatments=[-1],
     ...     ),
     ...     rmakers.beam(),
-    ...     baca.markup(r'\markup "più mosso"'),
+    ...     baca.markup(
+    ...         r'\markup "più mosso"',
+    ...         selector=lambda _: baca.select.pleaf(_, 0)
+    ...     ),
     ...     baca.markup(
     ...         r'\markup "lo stesso tempo"',
     ...         selector=selector,

@@ -7970,8 +7970,8 @@ def short_instrument_name_function(
 
 def mark(
     argument: str,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
     *tweaks: abjad.Tweak,
+    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
 ) -> IndicatorCommand:
     assert isinstance(argument, abjad.Markup | str), repr(argument)
     rehearsal_mark = abjad.RehearsalMark(markup=argument)
@@ -9531,20 +9531,22 @@ def dynamic_up(
 def edition(
     not_parts: str | abjad.Markup | IndicatorCommand,
     only_parts: str | abjad.Markup | IndicatorCommand,
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _command.Suite:
     """
     Makes not-parts / only-parts markup suite.
     """
     if isinstance(not_parts, str):
-        not_parts = markup(rf"\markup {{ {not_parts} }}")
+        not_parts = markup(rf"\markup {{ {not_parts} }}", selector=selector)
     elif isinstance(not_parts, abjad.Markup):
-        not_parts = markup(not_parts)
+        not_parts = markup(not_parts, selector=selector)
     assert isinstance(not_parts, IndicatorCommand)
     not_parts_ = _command.not_parts(not_parts)
     if isinstance(only_parts, str):
-        only_parts = markup(rf"\markup {{ {only_parts} }}")
+        only_parts = markup(rf"\markup {{ {only_parts} }}", selector=selector)
     elif isinstance(only_parts, abjad.Markup):
-        only_parts = markup(only_parts)
+        only_parts = markup(only_parts, selector=selector)
     assert isinstance(only_parts, IndicatorCommand)
     only_parts_ = _command.only_parts(only_parts)
     return _command.suite(not_parts_, only_parts_)
@@ -10537,173 +10539,8 @@ def markup(
     map=None,
     match: _typings.Indices = None,
     measures: _typings.Slice = None,
-    selector: typing.Callable = lambda _: _select.pleaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
-    r"""
-    Makes markup and inserts into indicator command.
-
-    ..  container:: example
-
-        Attaches markup to pitched head 0:
-
-        >>> stack = baca.stack(
-        ...     baca.figure(
-        ...         [1, 1, 5, -1],
-        ...         16,
-        ...         affix=baca.rests_around([2], [4]),
-        ...         restart_talea=True,
-        ...         treatments=[-1],
-        ...     ),
-        ...     rmakers.beam(),
-        ...     baca.markup(r'\markup "più mosso"'),
-        ...     baca.tuplet_bracket_outside_staff_priority(1000),
-        ...     baca.tuplet_bracket_staff_padding(2),
-        ... )
-        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
-        >>> lilypond_file = abjad.illustrators.selection(selection)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        \override TupletBracket.outside-staff-priority = 1000
-                        \override TupletBracket.staff-padding = 2
-                        \time 11/8
-                        r8
-                        c'16
-                        ^ \markup "più mosso"
-                        [
-                        d'16
-                        ]
-                        bf'4
-                        ~
-                        bf'16
-                        r16
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        fs''16
-                        [
-                        e''16
-                        ]
-                        ef''4
-                        ~
-                        ef''16
-                        r16
-                        af''16
-                        [
-                        g''16
-                        ]
-                    }
-                    \times 4/5
-                    {
-                        a'16
-                        r4
-                        \revert TupletBracket.outside-staff-priority
-                        \revert TupletBracket.staff-padding
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Pass predefined markup accumulator like this:
-
-        >>> stack = baca.stack(
-        ...     baca.figure(
-        ...         [1, 1, 5, -1],
-        ...         16,
-        ...         affix=baca.rests_around([2], [4]),
-        ...         restart_talea=True,
-        ...         treatments=[-1],
-        ...     ),
-        ...     rmakers.beam(),
-        ...     baca.markup(r"\markup { \baca-triple-diamond-markup }"),
-        ...     baca.tuplet_bracket_outside_staff_priority(1000),
-        ...     baca.tuplet_bracket_staff_padding(2),
-        ... )
-        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
-        >>> lilypond_file = abjad.illustrators.selection(
-        ...     selection, includes=["baca.ily"]
-        ... )
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        \override TupletBracket.outside-staff-priority = 1000
-                        \override TupletBracket.staff-padding = 2
-                        \time 11/8
-                        r8
-                        c'16
-                        ^ \markup { \baca-triple-diamond-markup }
-                        [
-                        d'16
-                        ]
-                        bf'4
-                        ~
-                        bf'16
-                        r16
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        fs''16
-                        [
-                        e''16
-                        ]
-                        ef''4
-                        ~
-                        ef''16
-                        r16
-                        af''16
-                        [
-                        g''16
-                        ]
-                    }
-                    \times 4/5
-                    {
-                        a'16
-                        r4
-                        \revert TupletBracket.outside-staff-priority
-                        \revert TupletBracket.staff-padding
-                    }
-                }
-            >>
-
-    ..  container:: example exception
-
-        Raises exception on nonstring, nonmarkup ``argument``:
-
-        >>> baca.markup(['Allegro', 'ma non troppo'])
-        Traceback (most recent call last):
-            ...
-        Exception: MarkupLibary.__call__():
-            Value of 'argument' must be str or markup.
-            Not ['Allegro', 'ma non troppo'].
-
-    """
     if direction not in (abjad.DOWN, abjad.UP):
         message = f"direction must be up or down (not {direction!r})."
         raise Exception(message)
