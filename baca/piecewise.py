@@ -188,7 +188,6 @@ class PiecewiseCommand(_command.Command):
         if self.selector is not None:
             assert not isinstance(self.selector, str)
             argument = self.selector(argument)
-        specifiers = abjad.CyclicTuple(self.specifiers)
         _do_piecewise_command(
             argument,
             manifests=runtime.get("manifests", {}),
@@ -200,7 +199,7 @@ class PiecewiseCommand(_command.Command):
             self_pieces=self.pieces,
             self_remove_length_1_spanner_start=self.remove_length_1_spanner_start,
             self_right_broken=self.right_broken,
-            self_specifiers=specifiers,
+            self_specifiers=self.specifiers,
             self_tag=self.tag,
             self_tweaks=self.tweaks,
         )
@@ -219,11 +218,11 @@ def _do_piecewise_command(
     self_pieces: typing.Callable = lambda _: _select.leaves(_),
     self_remove_length_1_spanner_start: bool = False,
     self_right_broken: typing.Any = None,
-    self_specifiers: abjad.CyclicTuple | list = abjad.CyclicTuple(),
+    self_specifiers: typing.Sequence = (),
     self_tag,
     self_tweaks: typing.Sequence[_typings.IndexedTweak] = (),
 ):
-    assert isinstance(self_specifiers, abjad.CyclicTuple | list), repr(self_specifiers)
+    cyclic_specifiers = abjad.CyclicTuple(self_specifiers)
     manifests = manifests or {}
     if self_pieces is not None:
         assert not isinstance(self_pieces, str)
@@ -270,7 +269,7 @@ def _do_piecewise_command(
             should_bookend = False
         if is_final_piece and self_final_piece_spanner is False:
             should_bookend = False
-        specifier = self_specifiers[i]
+        specifier = cyclic_specifiers[i]
         if (
             is_final_piece
             and self_right_broken
@@ -279,7 +278,7 @@ def _do_piecewise_command(
             should_bookend = False
         if is_final_piece and just_backstole_right_text:
             specifier = dataclasses.replace(specifier, spanner_start=None)
-        next_bundle = self_specifiers[i + 1]
+        next_bundle = cyclic_specifiers[i + 1]
         if should_bookend and specifier.bookended_spanner_start:
             specifier = dataclasses.replace(
                 specifier, spanner_start=specifier.bookended_spanner_start
@@ -2152,7 +2151,7 @@ def hairpin_function(
         self_pieces=pieces,
         self_remove_length_1_spanner_start=remove_length_1_spanner_start,
         self_right_broken=right_broken_,
-        self_specifiers=abjad.CyclicTuple(specifiers),
+        self_specifiers=specifiers,
         self_tag=tag,
         # self_tweaks,
     )
