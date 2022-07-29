@@ -16,7 +16,7 @@ from . import accumulator as _accumulator
 from . import build as _build
 from . import command as _command
 from . import commands as _commands
-from . import indicators as _indicators
+from . import indicatorclasses as _indicatorclasses
 from . import layout as _layout
 from . import memento as _memento
 from . import overrides as _overrides
@@ -144,7 +144,7 @@ def _analyze_memento(score, dictionary, context, memento):
     previous_indicator = _memento_to_indicator(dictionary, memento)
     if previous_indicator is None:
         return
-    if isinstance(previous_indicator, _indicators.SpacingSection):
+    if isinstance(previous_indicator, _indicatorclasses.SpacingSection):
         return
     if memento.context in score:
         for context in abjad.iterate.components(score, abjad.Context):
@@ -285,8 +285,8 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
     if final_leaf_metronome_mark:
         tempo_prototype = (
             abjad.MetronomeMark,
-            _indicators.Accelerando,
-            _indicators.Ritardando,
+            _indicatorclasses.Accelerando,
+            _indicatorclasses.Ritardando,
         )
         for skip in reversed(skips[:-1]):
             if abjad.get.has_indicator(skip, tempo_prototype):
@@ -295,8 +295,8 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
     for i, skip in enumerate(skips):
         metronome_mark = abjad.get.indicator(skip, abjad.MetronomeMark)
         metric_modulation = abjad.get.indicator(skip, abjad.MetricModulation)
-        accelerando = abjad.get.indicator(skip, _indicators.Accelerando)
-        ritardando = abjad.get.indicator(skip, _indicators.Ritardando)
+        accelerando = abjad.get.indicator(skip, _indicatorclasses.Accelerando)
+        ritardando = abjad.get.indicator(skip, _indicatorclasses.Ritardando)
         if (
             metronome_mark is None
             and metric_modulation is None
@@ -323,9 +323,9 @@ def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
         if metronome_mark is None and metric_modulation is not None:
             wrapper = abjad.get.wrapper(skip, abjad.MetricModulation)
         if metronome_mark is None and accelerando is not None:
-            wrapper = abjad.get.wrapper(skip, _indicators.Accelerando)
+            wrapper = abjad.get.wrapper(skip, _indicatorclasses.Accelerando)
         if metronome_mark is None and ritardando is not None:
-            wrapper = abjad.get.wrapper(skip, _indicators.Ritardando)
+            wrapper = abjad.get.wrapper(skip, _indicatorclasses.Ritardando)
         has_trend = accelerando is not None or ritardando is not None
         indicator_count += 1
         tag = wrapper.tag
@@ -892,9 +892,9 @@ def _check_persistent_indicators_for_leaf(
     do_not_require_short_instrument_names, leaf, i, voice_name
 ):
     prototype = (
-        _indicators.Accelerando,
+        _indicatorclasses.Accelerando,
         abjad.MetronomeMark,
-        _indicators.Ritardando,
+        _indicatorclasses.Ritardando,
     )
     mark = abjad.get.effective(leaf, prototype)
     if mark is None:
@@ -1834,7 +1834,7 @@ def _memento_to_indicator(dictionary, memento):
         indicator = class_(name="", command=memento.value)
     elif isinstance(memento.value, class_):
         indicator = memento.value
-    elif class_ is _indicators.StaffLines:
+    elif class_ is _indicatorclasses.StaffLines:
         indicator = class_(line_count=memento.value)
     elif memento.value is None:
         indicator = class_()
@@ -1974,9 +1974,9 @@ def _reapply_persistent_indicators(
                 continue
             # TODO: change to parameter comparison
             prototype = (
-                _indicators.Accelerando,
+                _indicatorclasses.Accelerando,
                 abjad.MetronomeMark,
-                _indicators.Ritardando,
+                _indicatorclasses.Ritardando,
             )
             if isinstance(previous_indicator, prototype):
                 function_name = _tags.function_name(_frame(), n=2)
@@ -2281,10 +2281,12 @@ def _style_fermata_measures(
                 continue
             if start_offset not in empty_fermata_measure_start_offsets:
                 continue
-            empty_staff_lines = _indicators.StaffLines(0)
-            empty_bar_extent = _indicators.BarExtent(0)
-            previous_staff_lines = abjad.get.effective(leaf, _indicators.StaffLines)
-            previous_bar_extent = abjad.get.effective(leaf, _indicators.BarExtent)
+            empty_staff_lines = _indicatorclasses.StaffLines(0)
+            empty_bar_extent = _indicatorclasses.BarExtent(0)
+            previous_staff_lines = abjad.get.effective(
+                leaf, _indicatorclasses.StaffLines
+            )
+            previous_bar_extent = abjad.get.effective(leaf, _indicatorclasses.BarExtent)
             next_leaf = abjad.get.leaf(leaf, 1)
             anchors = (_enums.ANCHOR_NOTE, _enums.ANCHOR_SKIP)
             if next_leaf is not None:
@@ -2293,12 +2295,14 @@ def _style_fermata_measures(
             next_staff_lines = None
             if next_leaf is not None:
                 next_staff_lines = abjad.get.effective(
-                    next_leaf, _indicators.StaffLines
+                    next_leaf, _indicatorclasses.StaffLines
                 )
-                next_bar_extent = abjad.get.effective(next_leaf, _indicators.BarExtent)
+                next_bar_extent = abjad.get.effective(
+                    next_leaf, _indicatorclasses.BarExtent
+                )
             if (
                 previous_staff_lines != empty_staff_lines
-            ) and not abjad.get.has_indicator(leaf, _indicators.StaffLines):
+            ) and not abjad.get.has_indicator(leaf, _indicatorclasses.StaffLines):
                 abjad.attach(
                     empty_staff_lines,
                     leaf,
@@ -2314,14 +2318,16 @@ def _style_fermata_measures(
                     )
             if next_leaf is not None and empty_staff_lines != next_staff_lines:
                 if next_staff_lines is None:
-                    next_staff_lines_ = _indicators.StaffLines(5)
+                    next_staff_lines_ = _indicatorclasses.StaffLines(5)
                 else:
                     next_staff_lines_ = next_staff_lines
                 if next_bar_extent is None:
-                    next_bar_extent_ = _indicators.StaffLines(5)
+                    next_bar_extent_ = _indicatorclasses.StaffLines(5)
                 else:
                     next_bar_extent_ = next_bar_extent
-                wrapper = abjad.get.effective_wrapper(next_leaf, _indicators.StaffLines)
+                wrapper = abjad.get.effective_wrapper(
+                    next_leaf, _indicatorclasses.StaffLines
+                )
                 next_leaf_start_offset = abjad.get.timespan(next_leaf).start_offset
                 if wrapper is None or (wrapper.start_offset != next_leaf_start_offset):
                     abjad.attach(
@@ -2340,7 +2346,7 @@ def _style_fermata_measures(
                 previous_line_count = 5
                 if previous_staff_lines is not None:
                     previous_line_count = previous_staff_lines.line_count
-                resume_staff_lines = _indicators.StaffLines(
+                resume_staff_lines = _indicatorclasses.StaffLines(
                     previous_line_count, hide=True
                 )
                 abjad.attach(
@@ -2352,7 +2358,7 @@ def _style_fermata_measures(
                 previous_line_count = 5
                 if previous_bar_extent is not None:
                     previous_line_count = previous_bar_extent.line_count
-                resume_bar_extent = _indicators.BarExtent(
+                resume_bar_extent = _indicatorclasses.BarExtent(
                     previous_line_count, hide=True
                 )
                 abjad.attach(
@@ -2409,9 +2415,9 @@ def _transpose_score(score):
 def _treat_untreated_persistent_wrappers(manifests, score):
     dynamic_prototype = (abjad.Dynamic, abjad.StartHairpin)
     tempo_prototype = (
-        _indicators.Accelerando,
+        _indicatorclasses.Accelerando,
         abjad.MetronomeMark,
-        _indicators.Ritardando,
+        _indicatorclasses.Ritardando,
     )
     for leaf in abjad.iterate.leaves(score):
         for wrapper in abjad.get.wrappers(leaf):

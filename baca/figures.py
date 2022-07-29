@@ -1815,12 +1815,12 @@ class Imbrication:
 
             >>> accumulator(
             ...     "Music.1",
-            ...     baca.voice_one(),
+            ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
             ... )
 
             >>> accumulator(
             ...     "Music.2",
-            ...     baca.voice_two(),
+            ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
             ... )
 
             >>> _, _ = baca.interpret.section(
@@ -2039,12 +2039,12 @@ class Imbrication:
 
             >>> accumulator(
             ...     "Music.1",
-            ...     baca.voice_one(),
+            ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
             ... )
 
             >>> accumulator(
             ...     "Music.2",
-            ...     baca.voice_two(),
+            ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
             ... )
 
             >>> _, _ = baca.interpret.section(
@@ -2248,12 +2248,12 @@ class Imbrication:
 
             >>> accumulator(
             ...     "Music.1",
-            ...     baca.voice_one(),
+            ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
             ... )
 
             >>> accumulator(
             ...     "Music.2",
-            ...     baca.voice_two(),
+            ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
             ... )
 
             >>> _, _ = baca.interpret.section(
@@ -2478,12 +2478,12 @@ class Imbrication:
 
             >>> accumulator(
             ...     "Music.1",
-            ...     baca.voice_one(),
+            ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
             ... )
 
             >>> accumulator(
             ...     "Music.2",
-            ...     baca.voice_two(),
+            ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
             ... )
 
             >>> _, _ = baca.interpret.section(
@@ -6352,12 +6352,12 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
 
         >>> accumulator(
         ...     "Music.1",
-        ...     baca.voice_one(),
+        ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
         ... )
 
         >>> accumulator(
         ...     "Music.2",
-        ...     baca.voice_two(),
+        ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
         ... )
 
         >>> _, _ = baca.interpret.section(
@@ -6509,12 +6509,12 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
 
         >>> accumulator(
         ...     "Music.1",
-        ...     baca.voice_one(),
+        ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
         ... )
 
         >>> accumulator(
         ...     "Music.2",
-        ...     baca.voice_two(),
+        ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
         ... )
 
         >>> _, _ = baca.interpret.section(
@@ -6703,12 +6703,12 @@ def extend_beam(
 
         >>> accumulator(
         ...     "Music.1",
-        ...     baca.voice_one(),
+        ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
         ... )
 
         >>> accumulator(
         ...     "Music.2",
-        ...     baca.voice_two(),
+        ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
         ... )
 
         >>> _, _ = baca.interpret.section(
@@ -6910,12 +6910,12 @@ def imbricate(
 
         >>> accumulator(
         ...     "Music.1",
-        ...     baca.voice_one(),
+        ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
         ... )
 
         >>> accumulator(
         ...     "Music.2",
-        ...     baca.voice_two(),
+        ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
         ... )
 
         >>> _, _ = baca.interpret.section(
@@ -7331,12 +7331,12 @@ def imbricate(
 
         >>> accumulator(
         ...     "Music.1",
-        ...     baca.voice_one(),
+        ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
         ... )
 
         >>> accumulator(
         ...     "Music.2",
-        ...     baca.voice_two(),
+        ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
         ... )
 
         >>> _, _ = baca.interpret.section(
@@ -7547,12 +7547,12 @@ def imbricate(
 
         >>> accumulator(
         ...     "Music.1",
-        ...     baca.voice_one(),
+        ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
         ... )
 
         >>> accumulator(
         ...     "Music.2",
-        ...     baca.voice_two(),
+        ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
         ... )
 
         >>> _, _ = baca.interpret.section(
@@ -7696,12 +7696,12 @@ def imbricate(
 
         >>> accumulator(
         ...     "Music.1",
-        ...     baca.voice_one(),
+        ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
         ... )
 
         >>> accumulator(
         ...     "Music.2",
-        ...     baca.voice_two(),
+        ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
         ... )
 
         >>> _, _ = baca.interpret.section(
@@ -7869,12 +7869,12 @@ def imbricate(
 
         >>> accumulator(
         ...     "Music.1",
-        ...     baca.voice_one(),
+        ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
         ... )
 
         >>> accumulator(
         ...     "Music.2",
-        ...     baca.voice_two(),
+        ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
         ... )
 
         >>> _, _ = baca.interpret.section(

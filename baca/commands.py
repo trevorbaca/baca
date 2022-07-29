@@ -11,7 +11,7 @@ from inspect import currentframe as _frame
 import abjad
 
 from . import command as _command
-from . import indicators as _indicators
+from . import indicatorclasses as _indicatorclasses
 from . import overrides as _overrides
 from . import parts as _parts
 from . import path as _path
@@ -45,7 +45,9 @@ def _attach_persistent_indicator(
     # for indicator in cyclic_indicators:
     #     assert getattr(indicator, "persistent", False) is True, repr(indicator)
     leaves = abjad.select.leaves(argument)
-    tag = tag.append(abjad.Tag("baca.IndicatorCommand._call()"))
+    tag_ = abjad.Tag("baca._attach_persistent_indicator()")
+    if tag is not None:
+        tag_ = tag_.append(tag)
     for i, leaf in enumerate(leaves):
         if predicate and not predicate(leaf):
             continue
@@ -60,7 +62,7 @@ def _attach_persistent_indicator(
                 deactivate=deactivate,
                 direction=direction,
                 do_not_test=do_not_test,
-                tag=tag,
+                tag=tag_,
                 wrapper=True,
             )
             if _treat.compare_persistent_indicators(indicator, reapplied):
@@ -2123,56 +2125,48 @@ def make_dynamic(
     return indicator
 
 
-def metronome_mark(skip, indicator, manifests, *, deactivate=False, tag=None):
+def metronome_mark_function(
+    argument,
+    indicator,
+    manifests,
+    *,
+    deactivate=False,
+    tags: list[abjad.Tag] = None,
+):
     prototype = (
         abjad.MetricModulation,
         abjad.MetronomeMark,
-        _indicators.Accelerando,
-        _indicators.Ritardando,
+        _indicatorclasses.Accelerando,
+        _indicatorclasses.Ritardando,
     )
     assert isinstance(indicator, prototype), repr(indicator)
-    reapplied = _treat.remove_reapplied_wrappers(skip, indicator)
-    wrapper = abjad.attach(
-        indicator,
-        skip,
-        deactivate=deactivate,
-        tag=tag,
-        wrapper=True,
-    )
-    if indicator == reapplied:
-        _treat.treat_persistent_wrapper(manifests, wrapper, "redundant")
+    tag = abjad.Tag("baca.metronome_mark()")
+    for tag_ in tags or []:
+        tag = tag.append(tag_)
+    for leaf in abjad.select.leaves(argument):
+        _attach_persistent_indicator(
+            leaf,
+            [indicator],
+            deactivate=deactivate,
+            manifests=manifests,
+            tag=tag,
+        )
 
 
-def bar_line_command(
-    abbreviation: str = "|",
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
-    *,
-    site: str = "after",
-) -> IndicatorCommand:
-    indicator = abjad.BarLine(abbreviation, site=site)
-    return IndicatorCommand(
-        indicators=[indicator],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
-# TODO: if deactivate is necessary, return wrapper
-def bar_line(
-    skip,
+def bar_line_function(
+    argument,
     abbreviation: str = "|",
     *,
-    # deactivate: bool = False,
     site: str = "after",
 ):
     assert isinstance(abbreviation, str), repr(abbreviation)
-    indicator = abjad.BarLine(abbreviation, site=site)
-    abjad.attach(
-        indicator,
-        skip,
-        # deactivate=deactivate,
-        tag=_tags.function_name(_frame()),
-    )
+    for leaf in abjad.select.leaves(argument):
+        indicator = abjad.BarLine(abbreviation, site=site)
+        abjad.attach(
+            indicator,
+            leaf,
+            tag=abjad.Tag("baca.bar_line()"),
+        )
 
 
 def clef(
@@ -3086,12 +3080,12 @@ def staff_lines(
 
     """
     command_1 = IndicatorCommand(
-        indicators=[_indicators.BarExtent(n)],
+        indicators=[_indicatorclasses.BarExtent(n)],
         selector=selector,
         tags=[_tags.function_name(_frame(), n=1), _tags.NOT_PARTS],
     )
     command_2 = IndicatorCommand(
-        indicators=[_indicators.StaffLines(n)],
+        indicators=[_indicatorclasses.StaffLines(n)],
         selector=selector,
         tags=[_tags.function_name(_frame(), n=2)],
     )
@@ -3101,14 +3095,14 @@ def staff_lines(
 def staff_lines_function(argument, n: int) -> None:
     assert isinstance(n, int), repr(n)
     for leaf in abjad.select.leaves(argument):
-        bar_extent = _indicators.BarExtent(n)
+        bar_extent = _indicatorclasses.BarExtent(n)
         _attach_persistent_indicator(
             leaf,
             [bar_extent],
             manifests={},
             tag=abjad.Tag("baca.staff_lines(1)").append(_tags.NOT_PARTS),
         )
-        staff_lines = _indicators.StaffLines(n)
+        staff_lines = _indicatorclasses.StaffLines(n)
         _attach_persistent_indicator(
             leaf,
             [staff_lines],
@@ -3136,7 +3130,9 @@ def stop_trill(
     return literal(r"\stopTrillSpan", site="closing", selector=selector)
 
 
-def tie(selector) -> IndicatorCommand:
+def tie(
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
+) -> IndicatorCommand:
     return IndicatorCommand(
         indicators=[abjad.Tie()],
         selector=selector,
@@ -3490,12 +3486,12 @@ def bcps_function(
     )
 
 
-def close_volta(skip, first_measure_number, site: str = "before"):
+def close_volta_function(skip, first_measure_number, site: str = "before"):
     assert isinstance(first_measure_number, int), repr(first_measure_number)
     assert isinstance(site, str), repr(site)
     after = site == "after"
-    bar_line(skip, ":|.", site=site)
-    tag = _tags.function_name(_frame())
+    bar_line_function(skip, ":|.", site=site)
+    tag = abjad.Tag("baca.close_volta()")
     measure_number = abjad.get.measure_number(skip)
     measure_number += first_measure_number - 1
     if after is True:
@@ -3512,7 +3508,8 @@ def close_volta(skip, first_measure_number, site: str = "before"):
 
 def color(
     selector: typing.Callable = lambda _: _select.leaves(_),
-    lone=False,
+    *,
+    lone: bool = False,
 ) -> ColorCommand:
     r"""
     Makes color command.
@@ -3860,10 +3857,10 @@ def cross_staff(
     )
 
 
-def double_volta(skip, first_measure_number):
+def double_volta_function(skip, first_measure_number):
     assert isinstance(first_measure_number, int), repr(first_measure_number)
-    bar_line(skip, ":.|.:", site="before")
-    tag = _tags.function_name(_frame())
+    bar_line_function(skip, ":.|.:", site="before")
+    tag = abjad.Tag("baca.double_volta()")
     measure_number = abjad.get.measure_number(skip)
     measure_number += first_measure_number - 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
@@ -4581,11 +4578,9 @@ def glissando_function(
     hide_middle_stems: bool = False,
     hide_stem_selector: typing.Callable = None,
     left_broken: bool = False,
-    # map=None,
     parenthesize_repeats: bool = False,
     right_broken: bool = False,
     right_broken_show_next: bool = False,
-    # selector: typing.Callable = lambda _: _select.tleaves(_),
     style: str = None,
     tags: list[abjad.Tag] = None,
     zero_padding: bool = False,
@@ -4616,8 +4611,8 @@ def glissando_function(
     )
 
 
-def global_fermata(
-    mmrest: abjad.MultimeasureRest,
+def global_fermata_function(
+    argument,
     description: str = "fermata",
 ) -> None:
     description_to_command = {
@@ -4646,32 +4641,32 @@ def global_fermata(
         fermata_duration = 8
     else:
         raise Exception(description)
-    assert isinstance(mmrest, abjad.MultimeasureRest), repr(mmrest)
     assert isinstance(command, str), repr(command)
     assert isinstance(fermata_duration, int), repr(fermata_duration)
-    markup = abjad.Markup(rf"\baca-{command}-markup")
-    abjad.attach(
-        markup,
-        mmrest,
-        direction=abjad.UP,
-        tag=_tags.function_name(_frame(), n=1),
-    )
-    literal = abjad.LilyPondLiteral(r"\baca-fermata-measure")
-    abjad.attach(
-        literal,
-        mmrest,
-        tag=_tags.function_name(_frame(), n=2),
-    )
-    # tag = abjad.Tag(_enums.FERMATA_MEASURE.name)
-    # tag = tag.append(self.tag)
-    # tag = tag.append(_tags.function_name(_frame(), n=3))
-    abjad.attach(
-        _enums.FERMATA_MEASURE,
-        mmrest,
-        # TODO: remove enum tag?
-        tag=_tags.FERMATA_MEASURE,
-    )
-    abjad.annotate(mmrest, _enums.FERMATA_DURATION, fermata_duration)
+    for leaf in abjad.select.leaves(argument):
+        markup = abjad.Markup(rf"\baca-{command}-markup")
+        abjad.attach(
+            markup,
+            leaf,
+            direction=abjad.UP,
+            tag=abjad.Tag("baca.global_fermata(1)"),
+        )
+        literal = abjad.LilyPondLiteral(r"\baca-fermata-measure")
+        abjad.attach(
+            literal,
+            leaf,
+            tag=abjad.Tag("baca.global_fermata(2)"),
+        )
+        # tag = abjad.Tag(_enums.FERMATA_MEASURE.name)
+        # tag = tag.append(self.tag)
+        # tag = tag.append(_tags.function_name(_frame(), n=3))
+        abjad.attach(
+            _enums.FERMATA_MEASURE,
+            leaf,
+            # TODO: remove enum tag?
+            tag=_tags.FERMATA_MEASURE,
+        )
+        abjad.annotate(leaf, _enums.FERMATA_DURATION, fermata_duration)
 
 
 def instrument(
@@ -4817,6 +4812,7 @@ def invisible_music(
 
 def label(
     callable_,
+    *,
     selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> LabelCommand:
     r"""
@@ -4937,11 +4933,6 @@ def markup(
         message = "selector must be string or callable"
         message += f" (not {selector!r})."
         raise Exception(message)
-
-    def select_phead_0(argument):
-        return _select.phead(argument, 0)
-
-    selector = selector or select_phead_0
     return IndicatorCommand(
         direction=direction,
         indicators=[indicator],
@@ -4986,7 +4977,7 @@ def markup_function(
 
 
 def one_voice(
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     literal = abjad.LilyPondLiteral(r"\oneVoice")
     return IndicatorCommand(
@@ -4996,10 +4987,10 @@ def one_voice(
     )
 
 
-def open_volta(skip, first_measure_number):
+def open_volta_function(skip, first_measure_number):
     assert isinstance(first_measure_number, int), repr(first_measure_number)
-    bar_line(skip, ".|:", site="before")
-    tag = _tags.function_name(_frame())
+    bar_line_function(skip, ".|:", site="before")
+    tag = abjad.Tag("baca.open_volta()")
     measure_number = abjad.get.measure_number(skip)
     measure_number += first_measure_number - 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
@@ -5016,8 +5007,6 @@ def open_volta(skip, first_measure_number):
 
 
 def previous_metadata(path: str, file_name: str = "__metadata__"):
-    # reproduces baca.path.Path.get_previous_path()
-    # because Travis isn't configured for scores-directory calculations
     music_py = pathlib.Path(path)
     section = pathlib.Path(music_py).parent
     assert section.parent.name == "sections", repr(section)
@@ -5035,7 +5024,9 @@ def previous_metadata(path: str, file_name: str = "__metadata__"):
     return previous_metadata
 
 
-def untie(selector) -> DetachCommand:
+def untie(
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
+) -> DetachCommand:
     return DetachCommand(arguments=[abjad.Tie, abjad.RepeatTie], selector=selector)
 
 
@@ -5044,7 +5035,7 @@ def untie_function(argument) -> None:
 
 
 def voice_four(
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     literal = abjad.LilyPondLiteral(r"\voiceFour")
     return IndicatorCommand(
@@ -5055,7 +5046,7 @@ def voice_four(
 
 
 def voice_one(
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     literal = abjad.LilyPondLiteral(r"\voiceOne")
     return IndicatorCommand(
@@ -5066,7 +5057,7 @@ def voice_one(
 
 
 def voice_three(
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     literal = abjad.LilyPondLiteral(r"\voiceThree")
     return IndicatorCommand(
@@ -5077,7 +5068,7 @@ def voice_three(
 
 
 def voice_two(
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     literal = abjad.LilyPondLiteral(r"\voiceTwo")
     return IndicatorCommand(

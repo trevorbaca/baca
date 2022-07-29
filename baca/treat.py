@@ -5,7 +5,7 @@ from inspect import currentframe as _frame
 
 import abjad
 
-from . import indicators as _indicators
+from . import indicatorclasses as _indicatorclasses
 from . import memento as _memento
 from . import tags as _tags
 
@@ -28,7 +28,7 @@ def _attach_color_literal(
         return
     if isinstance(wrapper.unbundle_indicator(), _memento.PersistentOverride):
         return
-    if isinstance(wrapper.unbundle_indicator(), _indicators.BarExtent):
+    if isinstance(wrapper.unbundle_indicator(), _indicatorclasses.BarExtent):
         return
     stem = _to_indicator_stem(wrapper.unbundle_indicator())
     grob = _indicator_to_grob(wrapper.unbundle_indicator())
@@ -179,7 +179,7 @@ def _indicator_to_grob(indicator):
         return "TextScript"
     elif isinstance(indicator, abjad.ShortInstrumentName):
         return "InstrumentName"
-    elif isinstance(indicator, _indicators.StaffLines):
+    elif isinstance(indicator, _indicatorclasses.StaffLines):
         return "StaffSymbol"
     return type(indicator).__name__
 
@@ -204,11 +204,13 @@ def _indicator_to_key(indicator, manifests):
         key = f"{indicator.numerator}/{indicator.denominator}"
     elif isinstance(indicator, _memento.PersistentOverride):
         key = indicator
-    elif isinstance(indicator, _indicators.BarExtent):
+    elif isinstance(indicator, _indicatorclasses.BarExtent):
         key = indicator.line_count
-    elif isinstance(indicator, _indicators.StaffLines):
+    elif isinstance(indicator, _indicatorclasses.StaffLines):
         key = indicator.line_count
-    elif isinstance(indicator, _indicators.Accelerando | _indicators.Ritardando):
+    elif isinstance(
+        indicator, _indicatorclasses.Accelerando | _indicatorclasses.Ritardando
+    ):
         key = {"hide": indicator.hide}
     else:
         key = str(indicator)
@@ -333,8 +335,8 @@ def remove_reapplied_wrappers(leaf, item):
     dynamic_prototype = (abjad.Dynamic, abjad.StartHairpin)
     tempo_prototype = (
         abjad.MetronomeMark,
-        _indicators.Accelerando,
-        _indicators.Ritardando,
+        _indicatorclasses.Accelerando,
+        _indicatorclasses.Ritardando,
     )
     if isinstance(indicator, abjad.Instrument):
         prototype = abjad.Instrument
@@ -429,7 +431,7 @@ def treat_persistent_wrapper(manifests, wrapper, status):
     leaf = wrapper.component
     assert isinstance(leaf, abjad.Leaf), repr(wrapper)
     existing_tag = wrapper.tag
-    tempo_trend = (_indicators.Accelerando, _indicators.Ritardando)
+    tempo_trend = (_indicatorclasses.Accelerando, _indicatorclasses.Ritardando)
     if isinstance(
         wrapper.unbundle_indicator(), abjad.MetronomeMark
     ) and abjad.get.has_indicator(leaf, tempo_trend):

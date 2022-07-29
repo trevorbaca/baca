@@ -21,7 +21,7 @@ from .constellation import *
 from .cursor import Cursor
 from .docs import global_context_string
 from .figures import *
-from .indicators import *
+from .indicatorclasses import *
 from .interpret import (
     append_anchor_note,
     append_anchor_note_function,
