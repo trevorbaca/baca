@@ -23,6 +23,7 @@ from . import overrides as _overrides
 from . import parts as _parts
 from . import pcollections as _pcollections
 from . import piecewise as _piecewise
+from . import pitchfunctions as _pitchfunctions
 from . import select as _select
 from . import tags as _tags
 from . import treat as _treat
@@ -2158,7 +2159,7 @@ def _set_intermittent_to_staff_position_zero(score):
             for pleaf in abjad.iterate.leaves(voice, pitched=True):
                 if abjad.get.has_indicator(pleaf, _enums.NOT_YET_PITCHED):
                     pleaves.append(pleaf)
-    _commands.staff_position_function(
+    _pitchfunctions.staff_position_function(
         pleaves,
         0,
         allow_hidden=True,
@@ -2172,7 +2173,7 @@ def _set_not_yet_pitched_to_staff_position_zero(score):
         if not abjad.get.has_indicator(pleaf, _enums.NOT_YET_PITCHED):
             continue
         pleaves.append(pleaf)
-    _commands.staff_position_function(
+    _pitchfunctions.staff_position_function(
         pleaves,
         0,
         allow_hidden=True,

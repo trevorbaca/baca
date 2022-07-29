@@ -10,6 +10,7 @@ from . import score
 from . import select
 from . import sequence
 from . import typings
+from .enums import colors, enums
 from .accumulator import (
     CommandAccumulator,
 )
@@ -19,7 +20,6 @@ from .commands import *
 from .constellation import *
 from .cursor import Cursor
 from .docs import global_context_string
-from .enums import colors, enums
 from .figures import *
 from .indicators import *
 from .interpret import (
@@ -45,6 +45,7 @@ from .pcollections import (
     RegistrationComponent,
 )
 from .piecewise import *
+from .pitchfunctions import *
 from .rhythmcommands import *
 from .select import *
 from .spanners import *
