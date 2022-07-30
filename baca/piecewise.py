@@ -874,7 +874,7 @@ def hairpin_function(
     right_broken_: typing.Any = False
     if bool(right_broken) is True:
         right_broken_ = abjad.LilyPondLiteral(r"\!", site="after")
-    tag = abjad.Tag("baca.hairpin()")
+    tag = _tags.function_name(_frame())
     for tag_ in tags or []:
         tag = tag.append(tag_)
     _do_piecewise_command(
@@ -1493,7 +1493,7 @@ def text_spanner_function(
         lilypond_id=lilypond_id,
         right_broken=right_broken,
     )
-    tag = abjad.Tag("baca.text_spanner()")
+    tag = _tags.function_name(_frame())
     for tag_ in tags or []:
         tag = tag.append(tag_)
     _do_piecewise_command(

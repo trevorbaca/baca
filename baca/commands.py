@@ -45,7 +45,7 @@ def _attach_persistent_indicator(
     # for indicator in cyclic_indicators:
     #     assert getattr(indicator, "persistent", False) is True, repr(indicator)
     leaves = abjad.select.leaves(argument)
-    tag_ = abjad.Tag("baca._attach_persistent_indicator()")
+    tag_ = _tags.function_name(_frame())
     if tag is not None:
         tag_ = tag_.append(tag)
     for i, leaf in enumerate(leaves):
@@ -909,7 +909,7 @@ def dynamic_function(
     *tweaks: abjad.Tweak,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    tag = abjad.Tag("baca.dynamic()")
+    tag = _tags.function_name(_frame())
     for tag_ in tags or []:
         tag = tag.append(tag_)
     for leaf in abjad.select.leaves(argument):
@@ -1251,7 +1251,7 @@ def metronome_mark_function(
         _indicatorclasses.Ritardando,
     )
     assert isinstance(indicator, prototype), repr(indicator)
-    tag = abjad.Tag("baca.metronome_mark()")
+    tag = _tags.function_name(_frame())
     for tag_ in tags or []:
         tag = tag.append(tag_)
     for leaf in abjad.select.leaves(argument):
@@ -1271,12 +1271,13 @@ def bar_line_function(
     site: str = "after",
 ):
     assert isinstance(abbreviation, str), repr(abbreviation)
+    tag = _tags.function_name(_frame())
     for leaf in abjad.select.leaves(argument):
         indicator = abjad.BarLine(abbreviation, site=site)
         abjad.attach(
             indicator,
             leaf,
-            tag=abjad.Tag("baca.bar_line()"),
+            tag=tag,
         )
 
 
@@ -1300,13 +1301,14 @@ def clef_function(
     clef: str,
 ) -> None:
     assert isinstance(clef, str), repr(clef)
+    tag = _tags.function_name(_frame())
     for leaf in abjad.select.leaves(argument):
         indicator = abjad.Clef(clef)
         _attach_persistent_indicator(
             leaf,
             [indicator],
             manifests={},
-            tag=abjad.Tag("baca.clef()"),
+            tag=tag,
         )
 
 
@@ -1348,7 +1350,7 @@ def instrument_name_function(
 ) -> None:
     assert isinstance(string, str), repr(string)
     assert string.startswith("\\"), repr(string)
-    tag = abjad.Tag("baca.instrument_name()")
+    tag = _tags.function_name(_frame())
     tag = tag.append(_tags.NOT_PARTS)
     for leaf in abjad.select.leaves(argument):
         indicator = abjad.InstrumentName(string, context=context)
@@ -1380,7 +1382,7 @@ def literal_function(
     site: str = "before",
     tags: list[abjad.Tag] = None,
 ) -> None:
-    tag = abjad.Tag("baca.literal()")
+    tag = _tags.function_name(_frame())
     for tag_ in tags or []:
         tag = tag.append(tag_)
     for leaf in abjad.select.leaves(argument):
@@ -1433,7 +1435,7 @@ def short_instrument_name_function(
         short_instrument_name
     )
     manifests = manifests or {}
-    tag = abjad.Tag("baca.short_instrument_name()")
+    tag = _tags.function_name(_frame())
     tag = tag.append(_tags.NOT_PARTS)
     for leaf in abjad.select.leaves(argument):
         _attach_persistent_indicator(
@@ -1465,10 +1467,10 @@ def mark_function(
     *tweaks: abjad.Tweak,
 ) -> None:
     assert isinstance(string, abjad.Markup | str), repr(string)
+    tag = _tags.function_name(_frame())
     for leaf in abjad.select.leaves(argument):
         rehearsal_mark = abjad.RehearsalMark(markup=string)
         rehearsal_mark = _tweaks.bundle_tweaks(rehearsal_mark, tweaks)
-        tag = abjad.Tag("baca.mark()")
         abjad.attach(
             rehearsal_mark,
             leaf,
@@ -1487,12 +1489,13 @@ def parenthesize(
 
 
 def parenthesize_function(argument) -> None:
+    tag = _tags.function_name(_frame())
     for leaf in abjad.select.leaves(argument):
         indicator = abjad.LilyPondLiteral(r"\parenthesize")
         abjad.attach(
             indicator,
             leaf,
-            tag=abjad.Tag("baca.parenthesize()"),
+            tag=tag,
         )
 
 
@@ -1533,12 +1536,13 @@ def repeat_tie(selector, *, allow_rest: bool = False) -> IndicatorCommand:
 
 
 def repeat_tie_function(argument) -> None:
+    tag = _tags.function_name(_frame())
     for leaf in abjad.select.leaves(argument):
         indicator = abjad.RepeatTie()
         abjad.attach(
             indicator,
             leaf,
-            tag=abjad.Tag("baca.repeat_tie()"),
+            tag=tag,
         )
 
 
@@ -1567,14 +1571,14 @@ def staff_lines_function(argument, n: int) -> None:
             leaf,
             [bar_extent],
             manifests={},
-            tag=abjad.Tag("baca.staff_lines(1)").append(_tags.NOT_PARTS),
+            tag=abjad.Tag("baca.staff_lines_function(1)").append(_tags.NOT_PARTS),
         )
         staff_lines = _indicatorclasses.StaffLines(n)
         _attach_persistent_indicator(
             leaf,
             [staff_lines],
             manifests={},
-            tag=abjad.Tag("baca.staff_lines(2)"),
+            tag=abjad.Tag("baca.staff_lines_function(2)"),
         )
 
 
@@ -1608,13 +1612,15 @@ def tie(
     )
 
 
+# TODO: change 'leaf' to 'argument', and iterate leaves
 def tie_function(leaf: abjad.Leaf) -> None:
     assert isinstance(leaf, abjad.Leaf), repr(leaf)
+    tag = _tags.function_name(_frame())
     indicator = abjad.Tie()
     abjad.attach(
         indicator,
         leaf,
-        tag=abjad.Tag("baca.tie()"),
+        tag=tag,
     )
 
 
@@ -1669,7 +1675,7 @@ def bcps_function(
     bow_change_tweaks: typing.Sequence[_typings.IndexedTweak] = (),
     final_spanner: bool = False,
     helper: typing.Callable = lambda x, y: x,
-    tag=abjad.Tag("baca.bcps()"),
+    tag=abjad.Tag("baca.bcps_function()"),
 ) -> None:
     _do_bcp_command(
         argument,
@@ -1687,7 +1693,7 @@ def close_volta_function(skip, first_measure_number, site: str = "before"):
     assert isinstance(site, str), repr(site)
     after = site == "after"
     bar_line_function(skip, ":|.", site=site)
-    tag = abjad.Tag("baca.close_volta()")
+    tag = _tags.function_name(_frame())
     measure_number = abjad.get.measure_number(skip)
     measure_number += first_measure_number - 1
     if after is True:
@@ -1734,7 +1740,7 @@ def cross_staff(
 def double_volta_function(skip, first_measure_number):
     assert isinstance(first_measure_number, int), repr(first_measure_number)
     bar_line_function(skip, ":.|.:", site="before")
-    tag = abjad.Tag("baca.double_volta()")
+    tag = _tags.function_name(_frame())
     measure_number = abjad.get.measure_number(skip)
     measure_number += first_measure_number - 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
@@ -1979,7 +1985,7 @@ def glissando_function(
     for tweak in tweaks or []:
         assert isinstance(tweak, prototype), repr(tweak)
         tweaks_.append(tweak)
-    tag = abjad.Tag("baca.glissando()")
+    tag = _tags.function_name(_frame())
     for tag_ in tags or []:
         tag = tag.append(tag_)
     abjad.glissando(
@@ -2037,13 +2043,13 @@ def global_fermata_function(
             markup,
             leaf,
             direction=abjad.UP,
-            tag=abjad.Tag("baca.global_fermata(1)"),
+            tag=abjad.Tag("baca.global_fermata_function(1)"),
         )
         literal = abjad.LilyPondLiteral(r"\baca-fermata-measure")
         abjad.attach(
             literal,
             leaf,
-            tag=abjad.Tag("baca.global_fermata(2)"),
+            tag=abjad.Tag("baca.global_fermata_function(2)"),
         )
         abjad.attach(
             _enums.FERMATA_MEASURE,
@@ -2076,7 +2082,7 @@ def instrument_function(
 ) -> None:
     assert isinstance(instrument, abjad.Instrument), repr(instrument)
     manifests = manifests or {}
-    tag = abjad.Tag("baca.instrument()")
+    tag = _tags.function_name(_frame())
     for tag_ in tags or []:
         tag = tag.append(tag_)
     for leaf in abjad.select.leaves(argument):
@@ -2172,7 +2178,7 @@ def markup_function(
     tags: list[abjad.Tag] = None,
 ) -> list[abjad.Wrapper]:
     assert direction in (abjad.DOWN, abjad.UP), repr(direction)
-    tag = abjad.Tag("baca.markup()")
+    tag = _tags.function_name(_frame())
     for tag_ in tags or []:
         tag = tag.append(tag_)
     wrappers = []
@@ -2210,7 +2216,7 @@ def one_voice(
 def open_volta_function(skip, first_measure_number):
     assert isinstance(first_measure_number, int), repr(first_measure_number)
     bar_line_function(skip, ".|:", site="before")
-    tag = abjad.Tag("baca.open_volta()")
+    tag = _tags.function_name(_frame())
     measure_number = abjad.get.measure_number(skip)
     measure_number += first_measure_number - 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")

@@ -211,7 +211,7 @@ def beam_function(
     stop_beam = stop_beam or abjad.StopBeam()
     assert isinstance(start_beam, abjad.StartBeam), repr(start_beam)
     assert isinstance(stop_beam, abjad.StopBeam), repr(stop_beam)
-    tag = abjad.Tag("baca.beam()")
+    tag = _tags.function_name(_frame())
     for tag_ in tags or []:
         tag = tag.append(tag_)
     _attach_start_stop_indicators(
@@ -253,7 +253,7 @@ def ottava_function(
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
     assert isinstance(start_ottava, abjad.Ottava), repr(start_ottava)
     assert isinstance(stop_ottava, abjad.Ottava), repr(stop_ottava)
-    tag = abjad.Tag("baca.ottava()")
+    tag = _tags.function_name(_frame())
     for tag_ in tags or []:
         tag = tag.append(tag_)
     _attach_start_stop_indicators(
@@ -291,7 +291,7 @@ def ottava_bassa_function(
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
     assert isinstance(start_ottava, abjad.Ottava), repr(start_ottava)
     assert isinstance(stop_ottava, abjad.Ottava), repr(stop_ottava)
-    tag = abjad.Tag("baca.ottava_bassa()")
+    tag = _tags.function_name(_frame())
     for tag_ in tags or []:
         tag = tag.append(tag_)
     _attach_start_stop_indicators(
@@ -343,7 +343,7 @@ def slur_function(
         stop_slur_ = stop_slur or abjad.StopSlur()
     start_slur_ = _tweaks.bundle_tweaks(start_slur_, tweaks)
     stop_slur_ = _tweaks.bundle_tweaks(stop_slur_, tweaks)
-    tag = abjad.Tag("baca.slur()")
+    tag = _tags.function_name(_frame())
     for tag_ in tags or []:
         tag = tag.append(tag_)
     _attach_start_stop_indicators(
@@ -415,7 +415,7 @@ def trill_spanner_function(
         start_trill_span=start_trill_span,
         stop_trill_span=stop_trill_span,
     )
-    tag = abjad.Tag("baca.trill_spanner()")
+    tag = _tags.function_name(_frame())
     for tag_ in tags or []:
         tag = tag.append(tag_)
     _attach_start_stop_indicators(
