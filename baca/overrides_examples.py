@@ -1,5 +1,5 @@
 r"""
-Example overrides.
+overrides.py examples.
 
 ..  container:: example
 

@@ -1,5 +1,5 @@
 r"""
-Articulations.
+articulations.py examples.
 
 ..  container:: example
 
