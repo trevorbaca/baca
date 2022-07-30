@@ -6649,7 +6649,8 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
 
 
 def extend_beam(
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, -1),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
     r"""
     Attaches RIGHT_BROKEN_BEAM to selector output.
@@ -6671,7 +6672,7 @@ def extend_beam(
         ...         [2, 10],
         ...         baca.staccato(selector=lambda _: baca.select.pheads(_)),
         ...         rmakers.beam_groups(beam_rests=True),
-        ...         baca.extend_beam(),
+        ...         baca.extend_beam(selector=lambda _: abjad.select.leaf(_, -1)),
         ...     ),
         ... )
 

@@ -929,6 +929,7 @@ def dynamic_function(
 
 
 def force_accidental(
+    *,
     selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> AccidentalAdjustmentCommand:
     return AccidentalAdjustmentCommand(forced=True, selector=selector)
@@ -1312,19 +1313,6 @@ def clef_function(
         )
 
 
-def hide_black_note_heads(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    string = r"\once \override NoteHead.transparent = ##t"
-    literal = abjad.LilyPondLiteral(string)
-    return IndicatorCommand(
-        indicators=[literal],
-        predicate=lambda _: _.written_duration < abjad.Duration(1, 2),
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def instrument_name(
     string: str,
     *,
@@ -1478,16 +1466,6 @@ def mark_function(
         )
 
 
-def parenthesize(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.LilyPondLiteral(r"\parenthesize")],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def parenthesize_function(argument) -> None:
     tag = _tags.function_name(_frame())
     for leaf in abjad.select.leaves(argument):
@@ -1548,6 +1526,7 @@ def repeat_tie_function(argument) -> None:
 
 def staff_lines(
     n: int,
+    *,
     selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _command.Suite:
     command_1 = IndicatorCommand(
@@ -1603,7 +1582,7 @@ def stop_trill(
 
 
 def tie(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> IndicatorCommand:
     return IndicatorCommand(
         indicators=[abjad.Tie()],
@@ -1612,20 +1591,19 @@ def tie(
     )
 
 
-# TODO: change 'leaf' to 'argument', and iterate leaves
-def tie_function(leaf: abjad.Leaf) -> None:
-    assert isinstance(leaf, abjad.Leaf), repr(leaf)
+def tie_function(argument) -> None:
     tag = _tags.function_name(_frame())
-    indicator = abjad.Tie()
-    abjad.attach(
-        indicator,
-        leaf,
-        tag=tag,
-    )
+    for leaf in abjad.select.leaves(argument):
+        indicator = abjad.Tie()
+        abjad.attach(
+            indicator,
+            leaf,
+            tag=tag,
+        )
 
 
 def allow_octaves(
-    *, selector: typing.Callable = lambda _: _select.leaves(_)
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> IndicatorCommand:
     return IndicatorCommand(indicators=[_enums.ALLOW_OCTAVE], selector=selector)
 
@@ -1633,6 +1611,7 @@ def allow_octaves(
 def assign_part(
     part_assignment: _parts.PartAssignment,
     *,
+    # IMPORTANT: must include hidden leaves:
     selector: typing.Callable = lambda _: _select.leaves(_),
 ) -> PartAssignmentCommand:
     assert isinstance(part_assignment, _parts.PartAssignment), repr(part_assignment)
@@ -1653,7 +1632,7 @@ def bcps(
     bow_change_tweaks: typing.Sequence[_typings.IndexedTweak] = (),
     final_spanner: bool = False,
     helper: typing.Callable = lambda x, y: x,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> BCPCommand:
     if final_spanner is not None:
         assert isinstance(final_spanner, bool), repr(final_spanner)
@@ -1709,9 +1688,9 @@ def close_volta_function(skip, first_measure_number, site: str = "before"):
 
 
 def color(
-    selector: typing.Callable = lambda _: _select.leaves(_),
     *,
     lone: bool = False,
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> ColorCommand:
     return ColorCommand(selector=selector, lone=lone)
 
@@ -1719,7 +1698,7 @@ def color(
 def container(
     identifier: str = None,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> ContainerCommand:
     if identifier is not None:
         if not isinstance(identifier, str):
@@ -1728,7 +1707,7 @@ def container(
 
 
 def cross_staff(
-    *, selector: typing.Callable = lambda _: _select.phead(_, 0)
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> IndicatorCommand:
     return IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r"\crossStaff")],
@@ -1757,7 +1736,7 @@ def double_volta_function(skip, first_measure_number):
 
 
 def dynamic_down(
-    *, selector: typing.Callable = lambda _: abjad.select.leaf(_, 0)
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> IndicatorCommand:
     return IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r"\dynamicDown")],
@@ -1767,7 +1746,7 @@ def dynamic_down(
 
 
 def dynamic_up(
-    *, selector: typing.Callable = lambda _: abjad.select.leaf(_, 0)
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> IndicatorCommand:
     return IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r"\dynamicUp")],
@@ -2122,7 +2101,7 @@ def invisible_music(
 def label(
     callable_,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> LabelCommand:
     return LabelCommand(callable_=callable_, selector=selector)
 

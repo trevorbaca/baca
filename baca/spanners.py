@@ -13,6 +13,7 @@ from . import tags as _tags
 from . import treat as _treat
 from . import tweaks as _tweaks
 from . import typings as _typings
+from .enums import enums as _enums
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -356,7 +357,7 @@ def slur_function(
 
 def sustain_pedal(
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
     start_piano_pedal: abjad.StartPianoPedal = None,
     stop_piano_pedal: abjad.StopPianoPedal = None,
 ) -> SpannerIndicatorCommand:

@@ -556,7 +556,7 @@ class PiecewiseCommand(_command.Command):
     pieces: typing.Any = lambda _: _select.leaves(_)
     remove_length_1_spanner_start: bool = False
     right_broken: typing.Any = None
-    selector: typing.Callable = lambda _: _select.leaves(_)
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
     tweaks: typing.Sequence[_typings.IndexedTweak] = ()
 
     def __post_init__(self):
@@ -817,7 +817,7 @@ def hairpin(
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     remove_length_1_spanner_start: bool = False,
     right_broken: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> PiecewiseCommand:
     final_hairpin_, specifiers = _prepare_hairpin_arguments(
         dynamics=dynamics,
@@ -1428,7 +1428,7 @@ def text_spanner(
     measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> PiecewiseCommand:
     specifiers = _prepare_text_spanner_arguments(
         items,

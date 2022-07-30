@@ -2754,8 +2754,8 @@ class RegisterInterpolationCommand(_command.Command):
         ...     baca.figure([1], 16),
         ...     rmakers.beam(),
         ...     baca.color(
-        ...         lambda _: baca.select.tuplet(_, 0),
         ...         lone=True,
+        ...         selector=lambda _: baca.select.tuplet(_, 0),
         ...     ),
         ...     baca.register(
         ...         0, 24,
@@ -2836,8 +2836,8 @@ class RegisterInterpolationCommand(_command.Command):
         ...     baca.figure([1], 16),
         ...     rmakers.beam(),
         ...     baca.color(
-        ...         lambda _: baca.select.tuplet(_, -1),
         ...         lone=True,
+        ...         selector=lambda _: baca.select.tuplet(_, -1),
         ...     ),
         ...     baca.register(
         ...         0, 24,
@@ -2918,7 +2918,7 @@ class RegisterInterpolationCommand(_command.Command):
         ...     baca.figure([1], 16),
         ...     rmakers.beam(),
         ...     baca.color(
-        ...         lambda _: abjad.select.tuplets(_)
+        ...         selector=lambda _: abjad.select.tuplets(_)
         ...     ),
         ...     baca.new(
         ...         baca.register(0, 24),
@@ -3742,8 +3742,8 @@ def bass_to_octave(
         ...     rmakers.beam(),
         ...     baca.bass_to_octave(3),
         ...     baca.color(
-        ...         lambda _: baca.select.plts(_),
         ...         lone=True,
+        ...         selector=lambda _: baca.select.plts(_),
         ...     ),
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
@@ -3831,7 +3831,7 @@ def bass_to_octave(
         ...         baca.bass_to_octave(3),
         ...         map=lambda _: baca.select.plts(_),
         ...     ),
-        ...     baca.color(lambda _: baca.select.plts(_)),
+        ...     baca.color(selector=lambda _: baca.select.plts(_)),
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
 
@@ -3928,8 +3928,8 @@ def center_to_octave(
         ...     rmakers.beam(),
         ...     baca.center_to_octave(3),
         ...     baca.color(
-        ...         lambda _: baca.select.plts(_),
         ...         lone=True,
+        ...         selector=lambda _: baca.select.plts(_),
         ...     ),
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
@@ -4017,7 +4017,7 @@ def center_to_octave(
         ...         baca.center_to_octave(3),
         ...         map=lambda _: baca.select.plts(_),
         ...     ),
-        ...     baca.color(lambda _: baca.select.plts(_)),
+        ...     baca.color(selector=lambda _: baca.select.plts(_)),
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
 
@@ -4814,8 +4814,8 @@ def register(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.color(
-        ...         lambda _: baca.select.tuplet(_, 1),
         ...         lone=True,
+        ...         selector=lambda _: baca.select.tuplet(_, 1),
         ...     ),
         ...     baca.register(
         ...         -6,
@@ -4966,8 +4966,8 @@ def register(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.color(
-        ...         lambda _: baca.select.tuplet(_, 1),
         ...         lone=True,
+        ...         selector=lambda _: baca.select.tuplet(_, 1),
         ...     ),
         ...     baca.register(
         ...         -6, 18,
@@ -5123,8 +5123,8 @@ def soprano_to_octave(
         ...     baca.figure([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.color(
-        ...         lambda _: baca.select.plts(_),
         ...         lone=True,
+        ...         selector=lambda _: baca.select.plts(_),
         ...     ),
         ...     baca.soprano_to_octave(3),
         ... )
@@ -5213,7 +5213,7 @@ def soprano_to_octave(
         ...         baca.soprano_to_octave(3),
         ...         map=lambda _: baca.select.plts(_),
         ...     ),
-        ...     baca.color(lambda _: baca.select.plts(_)),
+        ...     baca.color(selector=lambda _: baca.select.plts(_)),
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
 

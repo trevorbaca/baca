@@ -441,7 +441,7 @@ def marcato_function(
 
 
 def quadruple_staccato(
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
     return _commands.IndicatorCommand(
         indicators=[abjad.Articulation("baca-staccati #4")],

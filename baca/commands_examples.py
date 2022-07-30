@@ -797,79 +797,6 @@ commands.py examles
 
 ..  container:: example
 
-    Hide black note heads. Attaches note-head stencil false to black note-heads:
-
-    >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
-    >>> baca.interpret.set_up_score(
-    ...     score,
-    ...     accumulator,
-    ...     accumulator.manifests(),
-    ...     accumulator.time_signatures,
-    ...     docs=True,
-    ... )
-
-    >>> music = baca.make_notes(accumulator.get())
-    >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.hide_black_note_heads(),
-    ... )
-
-    >>> _, _ = baca.interpret.section(
-    ...     score,
-    ...     accumulator.manifests(),
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
-    ...     move_global_context=True,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        {
-            \context Staff = "Staff"
-            <<
-                \context Voice = "Skips"
-                {
-                    \time 4/8
-                    s1 * 4/8
-                    \time 3/8
-                    s1 * 3/8
-                    \time 4/8
-                    s1 * 4/8
-                    \time 3/8
-                    s1 * 3/8
-                }
-                \context Voice = "Music"
-                {
-                    \baca-repeat-pitch-class-coloring
-                    c'2
-                    \baca-repeat-pitch-class-coloring
-                    \once \override NoteHead.transparent = ##t
-                    c'4.
-                    \baca-repeat-pitch-class-coloring
-                    c'2
-                    \baca-repeat-pitch-class-coloring
-                    \once \override NoteHead.transparent = ##t
-                    c'4.
-                }
-            >>
-        }
-
-..  container:: example
-
     Attaches short instrument name.
 
     >>> short_instrument_names = {}
@@ -1433,7 +1360,7 @@ commands.py examles
     ...         treatments=[-1],
     ...     ),
     ...     rmakers.beam(),
-    ...     baca.color(color_selector),
+    ...     baca.color(selector=color_selector),
     ...     rmakers.unbeam(),
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
