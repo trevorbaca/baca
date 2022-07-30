@@ -1019,7 +1019,7 @@ class GlissandoCommand(_command.Command):
     parenthesize_repeats: bool = False
     right_broken: bool = False
     right_broken_show_next: bool = False
-    selector: typing.Callable = lambda _: _select.tleaves(_)
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
     tweaks: typing.Sequence[abjad.Tweak] = ()
     zero_padding: bool = False
 
@@ -1740,7 +1740,7 @@ def dynamic_function(
 
 
 def force_accidental(
-    selector: typing.Callable = lambda _: _select.pleaf(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> AccidentalAdjustmentCommand:
     r"""
     Forces accidental.
@@ -2491,7 +2491,7 @@ def short_instrument_name_function(
 def mark(
     argument: str,
     *tweaks: abjad.Tweak,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     assert isinstance(argument, abjad.Markup | str), repr(argument)
     rehearsal_mark = abjad.RehearsalMark(markup=argument)
@@ -2508,20 +2508,20 @@ def mark_function(
     string: str,
     *tweaks: abjad.Tweak,
 ) -> None:
-    leaf = abjad.select.leaf(argument, 0)
     assert isinstance(string, abjad.Markup | str), repr(string)
-    rehearsal_mark = abjad.RehearsalMark(markup=string)
-    rehearsal_mark = _tweaks.bundle_tweaks(rehearsal_mark, tweaks)
-    tag = abjad.Tag("baca.mark()")
-    abjad.attach(
-        rehearsal_mark,
-        leaf,
-        tag=tag,
-    )
+    for leaf in abjad.select.leaves(argument):
+        rehearsal_mark = abjad.RehearsalMark(markup=string)
+        rehearsal_mark = _tweaks.bundle_tweaks(rehearsal_mark, tweaks)
+        tag = abjad.Tag("baca.mark()")
+        abjad.attach(
+            rehearsal_mark,
+            leaf,
+            tag=tag,
+        )
 
 
 def parenthesize(
-    selector: typing.Callable = lambda _: _select.phead(_, 0, exclude=_enums.HIDDEN),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches LilyPond ``\parenthesize`` command.
@@ -2539,7 +2539,7 @@ def parenthesize(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.parenthesize(),
+        ...     baca.parenthesize(selector=lambda _: baca.select.phead(_, 0)),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
@@ -2615,49 +2615,29 @@ def parenthesize_function(argument) -> None:
         )
 
 
-def rehearsal_mark(
-    argument: int | str,
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
-    *tweaks: abjad.Tweak,
-    font_size: int = 10,
-) -> IndicatorCommand:
-    assert isinstance(argument, str), repr(argument)
-    assert isinstance(font_size, int | float), repr(font_size)
-    string = rf'\baca-rehearsal-mark-markup "{argument}" #{font_size}'
-    indicator: abjad.Markup | abjad.Bundle
-    indicator = abjad.Markup(string)
-    indicator = _tweaks.bundle_tweaks(indicator, tweaks)
-    return IndicatorCommand(
-        direction=abjad.CENTER,
-        indicators=[indicator],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def rehearsal_mark_function(
-    leaf: abjad.Leaf,
-    argument: int | str,
+    argument,
+    string: str,
     *tweaks: abjad.Tweak,
     font_size: int = 10,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    assert isinstance(leaf, abjad.Leaf), repr(leaf)
-    assert isinstance(argument, str), repr(argument)
+    assert isinstance(string, str), repr(string)
     assert isinstance(font_size, int | float), repr(font_size)
-    string = rf'\baca-rehearsal-mark-markup "{argument}" #{font_size}'
-    indicator: abjad.Markup | abjad.Bundle
-    indicator = abjad.Markup(string)
-    indicator = _tweaks.bundle_tweaks(indicator, tweaks)
-    tag = _tags.function_name(_frame())
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
-    abjad.attach(
-        indicator,
-        leaf,
-        direction=abjad.CENTER,
-        tag=tag,
-    )
+    string = rf'\baca-rehearsal-mark-markup "{string}" #{font_size}'
+    for leaf in abjad.select.leaves(argument):
+        indicator: abjad.Markup | abjad.Bundle
+        indicator = abjad.Markup(string)
+        indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+        tag = _tags.function_name(_frame())
+        for tag_ in tags or []:
+            tag = tag.append(tag_)
+        abjad.attach(
+            indicator,
+            leaf,
+            direction=abjad.CENTER,
+            tag=tag,
+        )
 
 
 def repeat_tie(selector, *, allow_rest: bool = False) -> IndicatorCommand:
@@ -3112,7 +3092,8 @@ def staff_lines_function(argument, n: int) -> None:
 
 
 def stop_trill(
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
+    *,
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     r"""
     Attaches stop trill to closing-slot.
@@ -3922,7 +3903,7 @@ def edition(
 
 def finger_pressure_transition(
     *,
-    selector: typing.Callable = lambda _: _select.tleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
     right_broken: bool = False,
 ) -> GlissandoCommand:
     r"""
@@ -4048,8 +4029,9 @@ def flat_glissando(
     left_broken: bool = False,
     right_broken: bool = False,
     right_broken_show_next: bool = False,
+    # TODO: maybe remove rleak
     rleak: bool = False,
-    selector: typing.Callable = lambda _: _select.pleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
     stop_pitch: str | abjad.NamedPitch | abjad.StaffPosition | None = None,
 ) -> _command.Suite:
     prototype = (list, str, abjad.NamedPitch, abjad.StaffPosition)
@@ -4154,7 +4136,8 @@ def glissando(
     map=None,
     right_broken: bool = False,
     right_broken_show_next: bool = False,
-    selector: typing.Callable = lambda _: _select.tleaves(_),
+    # selector: typing.Callable = lambda _: _select.tleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
     style: str = None,
     zero_padding: bool = False,
 ) -> GlissandoCommand:
@@ -4704,9 +4687,9 @@ def instrument_function(
 
 
 def invisible_music(
-    selector: typing.Callable = lambda _: abjad.select.leaf(_, 0),
     *,
     map=None,
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _command.Suite:
     r"""
     Attaches ``\baca-invisible-music`` literal.

@@ -255,7 +255,6 @@ def beam_function(
     argument,
     *tweaks: abjad.Tweak,
     direction: abjad.Vertical | None = None,
-    # selector: typing.Callable = lambda _: _select.tleaves(_),
     start_beam: abjad.StartBeam = None,
     stop_beam: abjad.StopBeam = None,
     tags: list[abjad.Tag] = None,
