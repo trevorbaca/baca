@@ -628,7 +628,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
 """
 
 
-def example():
+def dummy():
     """
     Read module-level examples.
     """
