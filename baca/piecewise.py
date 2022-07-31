@@ -617,8 +617,7 @@ def bow_speed_spanner(
     measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
-    # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> PiecewiseCommand:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.BOW_SPEED_SPANNER)
@@ -653,8 +652,7 @@ def circle_bow_spanner(
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     qualifier: str = None,
     right_broken: bool = False,
-    # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> PiecewiseCommand:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.CIRCLE_BOW_SPANNER)
@@ -695,8 +693,7 @@ def clb_spanner(
     measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
-    # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> PiecewiseCommand:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.CLB_SPANNER)
@@ -743,8 +740,7 @@ def covered_spanner(
     measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
-    # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> PiecewiseCommand:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.COVERED_SPANNER)
@@ -779,8 +775,7 @@ def damp_spanner(
     measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
-    # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> PiecewiseCommand:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.DAMP_SPANNER)
@@ -903,8 +898,7 @@ def half_clt_spanner(
     measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
-    # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> PiecewiseCommand:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.HALF_CLT_SPANNER)
@@ -937,8 +931,7 @@ def material_annotation_spanner(
     measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
-    # NOTE: selector differs from text_spanner()
-    selector: typing.Callable = lambda _: _select.rleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> PiecewiseCommand:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.MATERIAL_ANNOTATION_SPANNER)
@@ -971,8 +964,7 @@ def metric_modulation_spanner(
     measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
-    # NOTE: selector differs from text_spanner()
-    selector: typing.Callable = lambda _: _select.rleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> PiecewiseCommand:
     # TODO: tag red tweak with METRIC_MODULATION_SPANNER_COLOR
     tag = _tags.function_name(_frame())
@@ -1163,8 +1155,7 @@ def pitch_annotation_spanner(
     measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
-    # NOTE: selector differs from text_spanner()
-    selector: typing.Callable = lambda _: _select.rleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> PiecewiseCommand:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.PITCH_ANNOTATION_SPANNER)
@@ -1198,8 +1189,7 @@ def pizzicato_spanner(
     measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
-    # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> PiecewiseCommand:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.PIZZICATO_SPANNER)
@@ -1233,8 +1223,7 @@ def rhythm_annotation_spanner(
     measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
-    # NOTE: selector differs from text_spanner()
-    selector: typing.Callable = lambda _: _select.rleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> PiecewiseCommand:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.RHYTHM_ANNOTATION_SPANNER)
@@ -1271,8 +1260,7 @@ def scp_spanner(
     measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
-    # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> PiecewiseCommand:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.SCP_SPANNER)
@@ -1309,8 +1297,7 @@ def spazzolato_spanner(
     measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
-    # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> PiecewiseCommand:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.SPAZZOLATO_SPANNER)
@@ -1347,8 +1334,7 @@ def string_number_spanner(
     measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
-    # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> PiecewiseCommand:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.STRING_NUMBER_SPANNER)
@@ -1385,8 +1371,7 @@ def tasto_spanner(
     measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
-    # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> PiecewiseCommand:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.TASTO_SPANNER)
@@ -1529,8 +1514,7 @@ def vibrato_spanner(
     measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
-    # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> PiecewiseCommand:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.VIBRATO_SPANNER)
@@ -1567,8 +1551,7 @@ def xfb_spanner(
     measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
-    # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: typing.Callable = lambda _: _select.rleak(_select.ltleaves(_)),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> PiecewiseCommand:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.BOW_SPEED_SPANNER)
