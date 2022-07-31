@@ -181,7 +181,7 @@ def _prepare_trill_spanner_arguments(
 def beam(
     *tweaks: abjad.Tweak,
     direction: abjad.Vertical | None = None,
-    selector: typing.Callable = lambda _: _select.tleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
     start_beam: abjad.StartBeam = None,
     stop_beam: abjad.StopBeam = None,
 ) -> SpannerIndicatorCommand:
@@ -206,7 +206,7 @@ def beam_function(
     stop_beam: abjad.StopBeam = None,
     tags: list[abjad.Tag] = None,
 ) -> None:
-    # TODO: eventually remove tleaves and force call in section files
+    # TODO: maybe remove tleaves and force call in section files?
     leaves = _select.tleaves(argument)
     start_beam = start_beam or abjad.StartBeam()
     stop_beam = stop_beam or abjad.StopBeam()
@@ -229,7 +229,7 @@ def ottava(
     stop_ottava: abjad.Ottava = abjad.Ottava(n=0, site="after"),
     *,
     right_broken: bool = False,
-    selector: typing.Callable = lambda _: _select.tleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> SpannerIndicatorCommand:
     return SpannerIndicatorCommand(
         right_broken=right_broken,
@@ -269,7 +269,7 @@ def ottava_bassa(
     start_ottava: abjad.Ottava = abjad.Ottava(n=-1),
     stop_ottava: abjad.Ottava = abjad.Ottava(n=0, site="after"),
     *,
-    selector: typing.Callable = lambda _: _select.tleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> SpannerIndicatorCommand:
     return SpannerIndicatorCommand(
         selector=selector,
@@ -307,7 +307,7 @@ def slur(
     *tweaks: abjad.Tweak,
     map=None,
     phrasing_slur=False,
-    selector: typing.Callable = lambda _: _select.tleaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
     start_slur: abjad.StartSlur = None,
     stop_slur: abjad.StopSlur = None,
 ) -> SpannerIndicatorCommand:
@@ -378,7 +378,7 @@ def trill_spanner(
     left_broken: bool = False,
     map=None,
     right_broken: bool = False,
-    selector: typing.Callable = lambda _: _select.tleaves(_, rleak=True),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
     start_trill_span: abjad.StartTrillSpan = None,
     stop_trill_span: abjad.StopTrillSpan = None,
 ) -> SpannerIndicatorCommand:

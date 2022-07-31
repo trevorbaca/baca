@@ -101,7 +101,7 @@ spanners.py examples
     ...         treatments=[-1],
     ...     ),
     ...     rmakers.beam(),
-    ...     baca.ottava(),
+    ...     baca.ottava(selector=lambda _: baca.select.tleaves(_)),
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
     >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
@@ -173,7 +173,7 @@ spanners.py examples
     ...         treatments=[-1],
     ...     ),
     ...     rmakers.beam(),
-    ...     baca.ottava_bassa(),
+    ...     baca.ottava_bassa(selector=lambda _: baca.select.tleaves(_)),
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
     >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
@@ -245,7 +245,7 @@ spanners.py examples
     ...         treatments=[-1],
     ...     ),
     ...     rmakers.beam(),
-    ...     baca.slur(),
+    ...     baca.slur(selector=lambda _: baca.select.tleaves(_)),
     ...     baca.slur_down(),
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
@@ -395,7 +395,7 @@ spanners.py examples
     ...         treatments=[-1],
     ...     ),
     ...     rmakers.beam(),
-    ...     baca.trill_spanner(),
+    ...     baca.trill_spanner(selector=lambda _: baca.select.tleaves(_, rleak=True)),
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
     >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
@@ -469,7 +469,7 @@ spanners.py examples
     ...     ),
     ...     rmakers.beam(),
     ...     baca.new(
-    ...         baca.trill_spanner(),
+    ...         baca.trill_spanner(selector=lambda _: baca.select.tleaves(_, rleak=True)),
     ...         map=lambda _: baca.select.runs(_),
     ...     ),
     ...     baca.tuplet_bracket_staff_padding(2),
@@ -553,6 +553,7 @@ spanners.py examples
     ...         baca.trill_spanner(
     ...             abjad.Tweak(r"- \tweak color #red"),
     ...             alteration="M2",
+    ...             selector=lambda _: baca.select.tleaves(_, rleak=True),
     ...         ),
     ...     ),
     ...     baca.tuplet_bracket_staff_padding(2),
