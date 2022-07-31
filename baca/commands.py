@@ -1902,6 +1902,90 @@ def flat_glissando(
     return _command.suite(*accumulator)
 
 
+def flat_glissando_function(
+    argument,
+    pitch: str
+    | abjad.NamedPitch
+    | abjad.StaffPosition
+    | list[abjad.StaffPosition]
+    | None = None,
+    *tweaks,
+    allow_hidden: bool = False,
+    allow_repitch: bool = False,
+    do_not_hide_middle_note_heads: bool = False,
+    mock: bool = False,
+    hide_middle_stems: bool = False,
+    hide_stem_selector: typing.Callable = None,
+    left_broken: bool = False,
+    right_broken: bool = False,
+    right_broken_show_next: bool = False,
+    stop_pitch: str | abjad.NamedPitch | abjad.StaffPosition | None = None,
+) -> None:
+    prototype = (list, str, abjad.NamedPitch, abjad.StaffPosition)
+    if pitch is not None:
+        assert isinstance(pitch, prototype), repr(pitch)
+    if stop_pitch is not None:
+        assert type(pitch) is type(stop_pitch), repr((pitch, stop_pitch))
+    glissando_function(
+        argument,
+        *tweaks,
+        allow_repeats=True,
+        allow_ties=True,
+        hide_middle_note_heads=not do_not_hide_middle_note_heads,
+        hide_middle_stems=hide_middle_stems,
+        hide_stem_selector=hide_stem_selector,
+        left_broken=left_broken,
+        right_broken=right_broken,
+        right_broken_show_next=right_broken_show_next,
+    )
+    untie_function(argument)
+    if pitch is not None and stop_pitch is None:
+        # TODO: remove list test from or-clause?
+        if isinstance(pitch, abjad.StaffPosition) or (
+            isinstance(pitch, list) and isinstance(pitch[0], abjad.StaffPosition)
+        ):
+            _pitchfunctions.staff_position_function(
+                argument,
+                pitch,
+                allow_hidden=allow_hidden,
+                allow_repitch=allow_repitch,
+                mock=mock,
+            )
+        else:
+            _pitchfunctions.pitch_function(
+                argument,
+                pitch,
+                allow_hidden=allow_hidden,
+                allow_repitch=allow_repitch,
+                mock=mock,
+            )
+    elif pitch is not None and stop_pitch is not None:
+        pass
+        """
+        TODO: make interpolate_staff_positions_function()
+        TODO: make interpolate_pitches_function()
+        if isinstance(pitch, abjad.StaffPosition):
+            assert isinstance(stop_pitch, abjad.StaffPosition)
+            _pitchfunctions._interpolate_staff_positions_function(
+                argument,
+                pitch,
+                stop_pitch,
+                allow_hidden=allow_hidden,
+                mock=mock,
+            )
+        else:
+            assert isinstance(pitch, str | abjad.NamedPitch)
+            assert isinstance(stop_pitch, str | abjad.NamedPitch)
+            _pitchfunctions._interpolate_pitches_function(
+                argument,
+                pitch,
+                stop_pitch,
+                allow_hidden=allow_hidden,
+                mock=mock,
+            )
+        """
+
+
 def fractions(items):
     result = []
     for item in items:
