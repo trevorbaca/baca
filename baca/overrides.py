@@ -787,6 +787,29 @@ def dynamic_text_self_alignment_x(
     )
 
 
+def dynamic_text_self_alignment_x_function(
+    argument,
+    n: int | float,
+    *,
+    tags: list[abjad.Tag] = None,
+) -> None:
+    leaves = abjad.select.leaves(argument)
+    first_tag = _tags.function_name(_frame(), n=1)
+    for tag in tags or []:
+        first_tag = first_tag.append(tag)
+    final_tag = _tags.function_name(_frame(), n=2)
+    for tag in tags or []:
+        final_tag = final_tag.append(tag)
+    _do_override_command(
+        leaves,
+        "DynamicText",
+        "self_alignment_X",
+        n,
+        first_tag,
+        final_tag,
+    )
+
+
 def dynamic_text_stencil_false(
     *,
     selector: typing.Callable = lambda _: _select.leaves(_),

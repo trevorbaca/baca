@@ -97,7 +97,6 @@ class Command:
     match: _typings.Indices = None
     measures: _typings.Slice = None
     scope: Scope | TimelineScope | None = None
-    # selector: typing.Callable | None = None
     selector: typing.Callable = lambda _: abjad.select.leaves(_, exclude=_enums.HIDDEN)
     tag_measure_number: bool = False
     tags: list[abjad.Tag] = dataclasses.field(default_factory=list)
