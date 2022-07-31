@@ -11,6 +11,7 @@ from . import command as _command
 from . import select as _select
 from . import tags as _tags
 from . import typings
+from .enums import enums as _enums
 
 
 def _do_override_command(
@@ -88,7 +89,7 @@ class OverrideCommand(_command.Command):
     blocklist: tuple[type, ...] = ()
     context: str | None = None
     grob: str | None = None
-    selector: typing.Callable = lambda _: _select.leaves(_)
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
     value: typing.Any = None
 
     def __post_init__(self):
@@ -148,7 +149,7 @@ class OverrideCommand(_command.Command):
 def accidental_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -162,7 +163,7 @@ def accidental_extra_offset(
 def accidental_font_size(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="font_size",
@@ -174,8 +175,7 @@ def accidental_font_size(
 
 
 def accidental_stencil_false(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="stencil",
@@ -187,8 +187,7 @@ def accidental_stencil_false(
 
 
 def accidental_transparent(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ):
     return OverrideCommand(
         attribute="transparent",
@@ -200,8 +199,7 @@ def accidental_transparent(
 
 
 def accidental_x_extent_false(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="X_extent",
@@ -215,7 +213,7 @@ def accidental_x_extent_false(
 def accidental_x_offset(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="X_offset",
@@ -229,7 +227,7 @@ def accidental_x_offset(
 def accidental_y_offset(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="Y_offset",
@@ -245,7 +243,7 @@ def bar_line_color(
     *,
     after: bool = False,
     context: str = "Score",
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         after=after,
@@ -263,7 +261,7 @@ def bar_line_extra_offset(
     *,
     after: bool = False,
     context: str = "Score",
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         after=after,
@@ -277,8 +275,7 @@ def bar_line_extra_offset(
 
 
 def bar_line_transparent(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="transparent",
@@ -319,7 +316,7 @@ def bar_line_x_extent_command(
     after: bool = False,
     context: str = "Score",
     measures: typings.Slice = None,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         after=after,
@@ -366,7 +363,7 @@ def bar_line_x_extent(
 def beam_positions(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     if not isinstance(n, int | float):
         message = f"beam position must be number (not {n})."
@@ -401,8 +398,7 @@ def beam_positions_function(
 
 
 def beam_stencil_false(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="stencil",
@@ -414,8 +410,7 @@ def beam_stencil_false(
 
 
 def beam_transparent(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="transparent",
@@ -429,7 +424,7 @@ def beam_transparent(
 def clef_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -468,7 +463,7 @@ def clef_extra_offset_function(
 def clef_shift(
     clef: str | abjad.Clef,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _command.Suite:
     extra_offset_x: int | float
     if isinstance(clef, str):
@@ -515,7 +510,7 @@ def clef_shift_function(
 def clef_whiteout(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="whiteout",
@@ -528,8 +523,7 @@ def clef_whiteout(
 
 
 def clef_x_extent_false(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="X_extent",
@@ -567,7 +561,7 @@ def clef_x_extent_false_function(
 def dls_padding(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="padding",
@@ -604,7 +598,7 @@ def dls_padding_function(
 def dls_staff_padding(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="staff_padding",
@@ -639,8 +633,7 @@ def dls_staff_padding_function(
 
 
 def dls_up(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -654,7 +647,7 @@ def dls_up(
 def dots_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -666,8 +659,7 @@ def dots_extra_offset(
 
 
 def dots_stencil_false(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="stencil",
@@ -679,8 +671,7 @@ def dots_stencil_false(
 
 
 def dots_transparent(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="transparent",
@@ -692,8 +683,7 @@ def dots_transparent(
 
 
 def dots_x_extent_false(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="X_extent",
@@ -707,7 +697,7 @@ def dots_x_extent_false(
 def dynamic_text_color(
     color: str = "#red",
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="color",
@@ -721,7 +711,7 @@ def dynamic_text_color(
 def dynamic_text_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     if not isinstance(pair, tuple):
         raise Exception(f"dynamic text extra offset must be pair (not {pair}).")
@@ -762,7 +752,7 @@ def dynamic_text_extra_offset_function(
 def dynamic_text_parent_alignment_x(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="parent_alignment_X",
@@ -776,7 +766,7 @@ def dynamic_text_parent_alignment_x(
 def dynamic_text_self_alignment_x(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="self_alignment_X",
@@ -811,8 +801,7 @@ def dynamic_text_self_alignment_x_function(
 
 
 def dynamic_text_stencil_false(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="stencil",
@@ -824,8 +813,7 @@ def dynamic_text_stencil_false(
 
 
 def dynamic_text_transparent(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="transparent",
@@ -837,8 +825,7 @@ def dynamic_text_transparent(
 
 
 def dynamic_text_x_extent_zero(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="X_extent",
@@ -874,7 +861,7 @@ def dynamic_text_x_extent_zero_function(
 def dynamic_text_x_offset(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="X_offset",
@@ -888,7 +875,7 @@ def dynamic_text_x_offset(
 def dynamic_text_y_offset(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="Y_offset",
@@ -902,7 +889,7 @@ def dynamic_text_y_offset(
 def flag_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -914,8 +901,7 @@ def flag_extra_offset(
 
 
 def flag_stencil_false(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="stencil",
@@ -927,8 +913,7 @@ def flag_stencil_false(
 
 
 def flag_transparent(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="transparent",
@@ -942,7 +927,7 @@ def flag_transparent(
 def glissando_thickness(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="thickness",
@@ -956,7 +941,7 @@ def glissando_thickness(
 def hairpin_shorten_pair(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="shorten_pair",
@@ -993,7 +978,7 @@ def hairpin_shorten_pair_function(
 def hairpin_start_shift(
     dynamic: str | abjad.Dynamic,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _command.Suite:
     dynamic = abjad.Dynamic(dynamic)
     width = dynamic._to_width[str(dynamic.name)]
@@ -1023,8 +1008,7 @@ def hairpin_start_shift_function(
 
 
 def hairpin_stencil_false(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="stencil",
@@ -1036,8 +1020,7 @@ def hairpin_stencil_false(
 
 
 def hairpin_to_barline(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="to_barline",
@@ -1071,8 +1054,7 @@ def hairpin_to_barline_function(
 
 
 def hairpin_transparent(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="transparent",
@@ -1084,8 +1066,7 @@ def hairpin_transparent(
 
 
 def laissez_vibrer_tie_down(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -1097,8 +1078,7 @@ def laissez_vibrer_tie_down(
 
 
 def laissez_vibrer_tie_up(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -1112,7 +1092,7 @@ def laissez_vibrer_tie_up(
 def mmrest_color(
     color: str = "#red",
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="color",
@@ -1125,8 +1105,7 @@ def mmrest_color(
 
 
 def mmrest_transparent(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="transparent",
@@ -1164,7 +1143,7 @@ def mmrest_transparent_function(
 def mmrest_text_color(
     color: str = "#red",
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="color",
@@ -1179,7 +1158,7 @@ def mmrest_text_color(
 def mmrest_text_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -1217,7 +1196,7 @@ def mmrest_text_extra_offset_function(
 def mmrest_text_padding(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="padding",
@@ -1230,8 +1209,7 @@ def mmrest_text_padding(
 
 
 def mmrest_text_parent_center(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="parent_alignment_X",
@@ -1246,7 +1224,7 @@ def mmrest_text_parent_center(
 def mmrest_text_staff_padding(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="staff_padding",
@@ -1259,8 +1237,7 @@ def mmrest_text_staff_padding(
 
 
 def mmrest_text_transparent(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="transparent",
@@ -1275,7 +1252,7 @@ def mmrest_text_transparent(
 def note_column_shift(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="force_hshift",
@@ -1289,7 +1266,7 @@ def note_column_shift(
 def note_head_color(
     color: str,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="color",
@@ -1303,7 +1280,7 @@ def note_head_color(
 def note_head_duration_log(
     n: int,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="duration_log",
@@ -1337,7 +1314,7 @@ def note_head_duration_log_function(
 def note_head_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -1351,7 +1328,7 @@ def note_head_extra_offset(
 def note_head_font_size(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="font_size",
@@ -1365,7 +1342,7 @@ def note_head_font_size(
 def note_head_no_ledgers(
     value: bool,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="no_ledgers",
@@ -1397,8 +1374,7 @@ def note_head_no_ledgers_function(
 
 
 def note_head_stencil_false(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="stencil",
@@ -1412,7 +1388,7 @@ def note_head_stencil_false(
 def note_head_style(
     string: str,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="style",
@@ -1444,8 +1420,7 @@ def note_head_style_function(
 
 
 def note_head_style_cross(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="style",
@@ -1457,8 +1432,7 @@ def note_head_style_cross(
 
 
 def note_head_style_harmonic(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="style",
@@ -1490,8 +1464,7 @@ def note_head_style_harmonic_function(
 
 
 def note_head_style_harmonic_black(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="style",
@@ -1503,8 +1476,7 @@ def note_head_style_harmonic_black(
 
 
 def note_head_transparent(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ):
     return OverrideCommand(
         attribute="transparent",
@@ -1516,8 +1488,7 @@ def note_head_transparent(
 
 
 def note_head_x_extent_zero(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="X_extent",
@@ -1531,7 +1502,7 @@ def note_head_x_extent_zero(
 def ottava_bracket_shorten_pair(
     pair: tuple[int | float, int | float] = (-0.8, -0.6),
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="shorten_pair",
@@ -1546,7 +1517,7 @@ def ottava_bracket_shorten_pair(
 def ottava_bracket_staff_padding(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="staff_padding",
@@ -1585,7 +1556,7 @@ def ottava_bracket_staff_padding_function(
 def rehearsal_mark_down(
     *,
     context: str = "Score",
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -1625,7 +1596,7 @@ def rehearsal_mark_extra_offset(
     pair: tuple[int | float, int | float],
     *,
     context: str = "Score",
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -1666,7 +1637,7 @@ def rehearsal_mark_padding(
     n: int | float,
     *,
     context: str = "Score",
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="padding",
@@ -1707,7 +1678,7 @@ def rehearsal_mark_self_alignment_x(
     n: int,
     *,
     context: str = "Score",
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="self_alignment_X",
@@ -1748,7 +1719,7 @@ def rehearsal_mark_y_offset(
     n: int | float,
     *,
     context: str = "Score",
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="Y_offset",
@@ -1761,8 +1732,7 @@ def rehearsal_mark_y_offset(
 
 
 def repeat_tie_down(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -1776,7 +1746,7 @@ def repeat_tie_down(
 def repeat_tie_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -1811,8 +1781,7 @@ def repeat_tie_extra_offset_function(
 
 
 def repeat_tie_stencil_false(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="stencil",
@@ -1824,8 +1793,7 @@ def repeat_tie_stencil_false(
 
 
 def repeat_tie_transparent(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ):
     return OverrideCommand(
         attribute="transparent",
@@ -1837,8 +1805,7 @@ def repeat_tie_transparent(
 
 
 def repeat_tie_up(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -1852,7 +1819,7 @@ def repeat_tie_up(
 def rest_color(
     color: str,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="color",
@@ -1864,8 +1831,7 @@ def rest_color(
 
 
 def rest_down(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -1879,7 +1845,7 @@ def rest_down(
 def rest_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -1893,7 +1859,7 @@ def rest_extra_offset(
 def rest_staff_position(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="staff_position",
@@ -1928,8 +1894,7 @@ def rest_staff_position_function(
 
 
 def rest_transparent(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="transparent",
@@ -1941,8 +1906,7 @@ def rest_transparent(
 
 
 def rest_up(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -1954,8 +1918,7 @@ def rest_up(
 
 
 def rest_x_extent_zero(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="X_extent",
@@ -1969,7 +1932,7 @@ def rest_x_extent_zero(
 def script_color(
     color: str = "#red",
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="color",
@@ -1981,8 +1944,7 @@ def script_color(
 
 
 def script_down(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -1996,7 +1958,7 @@ def script_down(
 def script_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -2010,7 +1972,7 @@ def script_extra_offset(
 def script_padding(
     number: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="padding",
@@ -2024,7 +1986,7 @@ def script_padding(
 def script_staff_padding(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="staff_padding",
@@ -2059,8 +2021,7 @@ def script_staff_padding_function(
 
 
 def script_up(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -2072,8 +2033,7 @@ def script_up(
 
 
 def script_x_extent_zero(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="X_extent",
@@ -2085,8 +2045,7 @@ def script_x_extent_zero(
 
 
 def slur_down(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -2098,8 +2057,7 @@ def slur_down(
 
 
 def slur_up(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -2115,7 +2073,7 @@ def span_bar_color(
     *,
     after: bool = False,
     context: str = "Score",
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         after=after,
@@ -2133,7 +2091,7 @@ def span_bar_extra_offset(
     *,
     after: bool = False,
     context: str = "Score",
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         after=after,
@@ -2147,8 +2105,7 @@ def span_bar_extra_offset(
 
 
 def span_bar_transparent(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="transparent",
@@ -2187,7 +2144,7 @@ def stem_color(
     color: str = "#red",
     *,
     context: str = None,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="color",
@@ -2200,8 +2157,7 @@ def stem_color(
 
 
 def stem_down(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -2237,7 +2193,7 @@ def stem_down_function(
 def stem_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -2249,8 +2205,7 @@ def stem_extra_offset(
 
 
 def stem_stencil_false(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="stencil",
@@ -2262,8 +2217,7 @@ def stem_stencil_false(
 
 
 def stem_transparent(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="transparent",
@@ -2277,7 +2231,7 @@ def stem_transparent(
 def stem_tremolo_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -2289,8 +2243,7 @@ def stem_tremolo_extra_offset(
 
 
 def stem_up(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -2324,8 +2277,7 @@ def stem_up_function(
 
 
 def strict_note_spacing_off(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="strict_note_spacing",
@@ -2341,7 +2293,7 @@ def sustain_pedal_staff_padding(
     n: int | float,
     *,
     context: str = "Staff",
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="staff_padding",
@@ -2357,7 +2309,7 @@ def tacet(
     color="#green",
     *,
     measures=None,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ):
     command = mmrest_color(color, selector=selector)
     _command.tag(_tags.TACET_COLORING, command)
@@ -2371,7 +2323,7 @@ def text_script_color(
     color: str = "#red",
     *,
     allow_mmrests: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     blocklist = []
     if allow_mmrests is not True:
@@ -2389,7 +2341,7 @@ def text_script_color(
 def text_script_down(
     *,
     allow_mmrests: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     blocklist = []
     if allow_mmrests is not True:
@@ -2440,7 +2392,7 @@ def text_script_extra_offset(
     pair: tuple[int | float, int | float],
     *,
     allow_mmrests: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     blocklist = []
     if allow_mmrests is not True:
@@ -2459,7 +2411,7 @@ def text_script_font_size(
     n: int | float,
     *,
     allow_mmrests: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     blocklist = []
     if allow_mmrests is not True:
@@ -2478,7 +2430,7 @@ def text_script_padding(
     n: int | float,
     *,
     allow_mmrests: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     blocklist = []
     if allow_mmrests is not True:
@@ -2529,7 +2481,7 @@ def text_script_parent_alignment_x(
     n: int | float,
     *,
     allow_mmrests: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     blocklist = []
     if allow_mmrests is not True:
@@ -2580,7 +2532,7 @@ def text_script_self_alignment_x(
     n: int | float,
     *,
     allow_mmrests: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     blocklist = []
     if allow_mmrests is not True:
@@ -2631,7 +2583,7 @@ def text_script_staff_padding(
     n: int | float,
     *,
     allow_mmrests: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     blocklist = []
     if allow_mmrests is not True:
@@ -2681,7 +2633,7 @@ def text_script_staff_padding_function(
 def text_script_up(
     *,
     allow_mmrests: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     blocklist = []
     if allow_mmrests is not True:
@@ -2700,7 +2652,7 @@ def text_script_x_offset(
     n: int | float,
     *,
     allow_mmrests: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     blocklist = []
     if allow_mmrests is not True:
@@ -2719,7 +2671,7 @@ def text_script_y_offset(
     n: int | float,
     *,
     allow_mmrests: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     blocklist = []
     if allow_mmrests is not True:
@@ -2737,7 +2689,7 @@ def text_script_y_offset(
 def text_spanner_left_padding(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="bound_details__left__padding",
@@ -2773,7 +2725,7 @@ def text_spanner_left_padding_function(
 def text_spanner_right_padding(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="bound_details__right__padding",
@@ -2787,7 +2739,7 @@ def text_spanner_right_padding(
 def text_spanner_staff_padding(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="staff_padding",
@@ -2821,8 +2773,7 @@ def text_spanner_staff_padding_function(
 
 
 def text_spanner_stencil_false(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="stencil",
@@ -2834,8 +2785,7 @@ def text_spanner_stencil_false(
 
 
 def text_spanner_transparent(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="transparent",
@@ -2849,7 +2799,7 @@ def text_spanner_transparent(
 def text_spanner_y_offset(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="Y_offset",
@@ -2883,8 +2833,7 @@ def text_spanner_y_offset_function(
 
 
 def tie_down(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -2896,8 +2845,7 @@ def tie_down(
 
 
 def tie_up(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -2911,7 +2859,7 @@ def tie_up(
 def time_signature_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     assert isinstance(pair, tuple), repr(pair)
     return OverrideCommand(
@@ -2925,8 +2873,7 @@ def time_signature_extra_offset(
 
 
 def time_signature_stencil_false(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="stencil",
@@ -2962,8 +2909,7 @@ def time_signature_stencil_false_function(
 
 
 def time_signature_transparent(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="transparent",
@@ -2978,7 +2924,7 @@ def time_signature_transparent(
 def trill_spanner_staff_padding(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="staff_padding",
@@ -2990,8 +2936,7 @@ def trill_spanner_staff_padding(
 
 
 def tuplet_bracket_down(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -3027,7 +2972,7 @@ def tuplet_bracket_down_function(
 def tuplet_bracket_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -3041,7 +2986,7 @@ def tuplet_bracket_extra_offset(
 def tuplet_bracket_outside_staff_priority(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="outside_staff_priority",
@@ -3055,7 +3000,7 @@ def tuplet_bracket_outside_staff_priority(
 def tuplet_bracket_padding(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="padding",
@@ -3092,7 +3037,7 @@ def tuplet_bracket_padding_function(
 def tuplet_bracket_shorten_pair(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="shorten_pair",
@@ -3129,7 +3074,7 @@ def tuplet_bracket_shorten_pair_function(
 def tuplet_bracket_staff_padding(
     n: int | float,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="staff_padding",
@@ -3164,8 +3109,7 @@ def tuplet_bracket_staff_padding_function(
 
 
 def tuplet_bracket_transparent(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="transparent",
@@ -3177,8 +3121,7 @@ def tuplet_bracket_transparent(
 
 
 def tuplet_bracket_up(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="direction",
@@ -3190,8 +3133,7 @@ def tuplet_bracket_up(
 
 
 def tuplet_number_denominator(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="text",
@@ -3205,7 +3147,7 @@ def tuplet_number_denominator(
 def tuplet_number_extra_offset(
     pair: tuple[int | float, int | float],
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="extra_offset",
@@ -3219,7 +3161,7 @@ def tuplet_number_extra_offset(
 def tuplet_number_text(
     string: str,
     *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     assert isinstance(string, str), repr(string)
     return OverrideCommand(
@@ -3232,8 +3174,7 @@ def tuplet_number_text(
 
 
 def tuplet_number_transparent(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_),
+    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
     return OverrideCommand(
         attribute="transparent",
