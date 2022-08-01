@@ -3294,7 +3294,7 @@ r"""
         ...         fallback_duration=(1, 25),
         ...     ),
         ... )
-        >>> baca.metronome_mark_function(
+        >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
         ...     accumulator.manifests(),
@@ -3400,7 +3400,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> baca.metronome_mark_function(
+        >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
         ...     accumulator.manifests(),
@@ -3623,12 +3623,12 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> baca.metronome_mark_function(
+        >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
         ...     accumulator.manifests(),
         ... )
-        >>> baca.metronome_mark_function(
+        >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][2 - 1],
         ...     metronome_marks["112"],
         ...     accumulator.manifests(),
@@ -3751,7 +3751,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> baca.metronome_mark_function(
+        >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
         ...     accumulator.manifests(),
@@ -4572,7 +4572,7 @@ r"""
         ...         fallback_duration=(1, 25),
         ...     ),
         ... )
-        >>> baca.metronome_mark_function(
+        >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
         ...     accumulator.manifests(),
@@ -4677,7 +4677,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> baca.metronome_mark_function(
+        >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
         ...     accumulator.manifests(),
@@ -4875,12 +4875,12 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> baca.metronome_mark_function(
+        >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
         ...     accumulator.manifests(),
         ... )
-        >>> baca.metronome_mark_function(
+        >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][2 - 1],
         ...     baca.Accelerando(),
         ...     accumulator.manifests(),
@@ -4985,7 +4985,7 @@ r"""
         ...         fallback_duration=(1, 24),
         ...     ),
         ... )
-        >>> baca.metronome_mark_function(
+        >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
         ...     accumulator.manifests(),

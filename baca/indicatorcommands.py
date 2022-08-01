@@ -82,14 +82,8 @@ def accent(
     )
 
 
-def accent_function(
-    argument,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+def accent_function(argument) -> None:
     tag = _tags.function_name(_frame())
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
     for leaf in abjad.iterate.leaves(argument):
         indicator = abjad.Articulation("accent")
         abjad.attach(
@@ -120,12 +114,9 @@ def alternate_bow_strokes_function(
     *tweaks: abjad.Tweak,
     downbow_first: bool = True,
     full: bool = False,
-    tags: list[abjad.Tag] = None,
 ) -> None:
     pass
     tag = _tags.function_name(_frame())
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
     indicators = _prepare_alternate_bow_strokes(
         *tweaks, downbow_first=downbow_first, full=full
     )
@@ -190,7 +181,6 @@ def breathe(
 def breathe_function(
     argument,
     *tweaks: abjad.Tweak,
-    tags: list[abjad.Tag] = None,
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
@@ -198,8 +188,6 @@ def breathe_function(
         indicator: abjad.LilyPondLiteral | abjad.Bundle
         indicator = abjad.LilyPondLiteral(r"\breathe", site="after")
         indicator = _tweaks.bundle_tweaks(indicator, tweaks)
-        for tag_ in tags or []:
-            tag = tag.append(tag_)
         wrapper = abjad.attach(
             indicator,
             leaf,
@@ -260,14 +248,8 @@ def double_staccato(
     )
 
 
-def double_staccato_function(
-    argument,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+def double_staccato_function(argument) -> None:
     tag = _tags.function_name(_frame())
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
     for leaf in abjad.iterate.leaves(argument):
         indicator = abjad.Articulation("baca-staccati #2")
         abjad.attach(
@@ -309,7 +291,6 @@ def down_bow_function(
     leaf: abjad.Leaf,
     *tweaks: abjad.Tweak,
     full: bool = False,
-    tags: list[abjad.Tag] = None,
 ) -> None:
     assert isinstance(leaf, abjad.Leaf), repr(leaf)
     indicator: abjad.Articulation | abjad.Bundle
@@ -319,8 +300,6 @@ def down_bow_function(
         indicator = abjad.Articulation("downbow")
     indicator = _tweaks.bundle_tweaks(indicator, tweaks)
     tag = _tags.function_name(_frame())
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
     abjad.attach(
         indicator,
         leaf,
@@ -392,14 +371,8 @@ def laissez_vibrer(
     )
 
 
-def laissez_vibrer_function(
-    argument,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+def laissez_vibrer_function(argument) -> None:
     tag = _tags.function_name(_frame())
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
     for leaf in abjad.iterate.leaves(argument):
         indicator = abjad.LaissezVibrer()
         abjad.attach(
@@ -429,14 +402,8 @@ def marcato(
     )
 
 
-def marcato_function(
-    argument,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+def marcato_function(argument) -> None:
     tag = _tags.function_name(_frame())
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
     for leaf in abjad.iterate.leaves(argument):
         indicator = abjad.Articulation("marcato")
         abjad.attach(
@@ -486,14 +453,8 @@ def staccatissimo(
     )
 
 
-def staccatissimo_function(
-    argument,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+def staccatissimo_function(argument) -> None:
     tag = _tags.function_name(_frame())
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
     for leaf in abjad.iterate.leaves(argument):
         indicator = abjad.Articulation("staccatissimo")
         abjad.attach(
@@ -513,14 +474,8 @@ def staccato(
     )
 
 
-def staccato_function(
-    argument,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+def staccato_function(argument) -> None:
     tag = _tags.function_name(_frame())
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
     for leaf in abjad.iterate.leaves(argument):
         indicator = abjad.Articulation("staccato")
         abjad.attach(
@@ -595,14 +550,8 @@ def tenuto(
     )
 
 
-def tenuto_function(
-    argument,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+def tenuto_function(argument) -> None:
     tag = _tags.function_name(_frame())
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
     for leaf in abjad.iterate.leaves(argument):
         indicator = abjad.Articulation("tenuto")
         abjad.attach(

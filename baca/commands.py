@@ -33,13 +33,11 @@ def _attach_persistent_indicator(
     direction=None,
     manifests=None,
     predicate=None,
+    # TODO: remove tag keyword?
     tag=None,
-):
+) -> list[abjad.Wrapper]:
     assert isinstance(manifests, dict), repr(manifests)
-    if isinstance(indicators, collections.abc.Iterable):
-        cyclic_indicators = abjad.CyclicTuple(indicators)
-    else:
-        cyclic_indicators = abjad.CyclicTuple([indicators])
+    cyclic_indicators = abjad.CyclicTuple(indicators)
     # TODO: eventually uncomment following two lines:
     # for indicator in cyclic_indicators:
     #     assert getattr(indicator, "persistent", False) is True, repr(indicator)
@@ -47,6 +45,7 @@ def _attach_persistent_indicator(
     tag_ = _tags.function_name(_frame())
     if tag is not None:
         tag_ = tag_.append(tag)
+    wrappers = []
     for i, leaf in enumerate(leaves):
         if predicate and not predicate(leaf):
             continue
@@ -66,6 +65,8 @@ def _attach_persistent_indicator(
             )
             if _treat.compare_persistent_indicators(indicator, reapplied):
                 _treat.treat_persistent_wrapper(manifests, wrapper, "redundant")
+            wrappers.append(wrapper)
+    return wrappers
 
 
 def _do_bcp_command(
@@ -860,11 +861,8 @@ def dynamic_function(
     argument,
     dynamic: str | abjad.Dynamic,
     *tweaks: abjad.Tweak,
-    tags: list[abjad.Tag] = None,
 ) -> None:
     tag = _tags.function_name(_frame())
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
     for leaf in abjad.select.leaves(argument):
         if isinstance(dynamic, str):
             indicator = make_dynamic(dynamic)
@@ -1194,10 +1192,7 @@ def metronome_mark_function(
     argument,
     indicator,
     manifests,
-    *,
-    deactivate=False,
-    tags: list[abjad.Tag] = None,
-):
+) -> list[abjad.Wrapper]:
     prototype = (
         abjad.MetricModulation,
         abjad.MetronomeMark,
@@ -1206,16 +1201,16 @@ def metronome_mark_function(
     )
     assert isinstance(indicator, prototype), repr(indicator)
     tag = _tags.function_name(_frame())
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
+    wrappers = []
     for leaf in abjad.select.leaves(argument):
-        _attach_persistent_indicator(
+        wrappers_ = _attach_persistent_indicator(
             leaf,
             [indicator],
-            deactivate=deactivate,
             manifests=manifests,
             tag=tag,
         )
+        wrappers.extend(wrappers_)
+    return wrappers
 
 
 def bar_line_function(
@@ -1436,7 +1431,6 @@ def rehearsal_mark_function(
     string: str,
     *tweaks: abjad.Tweak,
     font_size: int = 10,
-    tags: list[abjad.Tag] = None,
 ) -> list[abjad.Wrapper]:
     assert isinstance(string, str), repr(string)
     assert isinstance(font_size, int | float), repr(font_size)
@@ -1447,8 +1441,6 @@ def rehearsal_mark_function(
         indicator = abjad.Markup(string)
         indicator = _tweaks.bundle_tweaks(indicator, tweaks)
         tag = _tags.function_name(_frame())
-        for tag_ in tags or []:
-            tag = tag.append(tag_)
         wrapper = abjad.attach(
             indicator,
             leaf,
@@ -1977,7 +1969,6 @@ def glissando_function(
     right_broken: bool = False,
     right_broken_show_next: bool = False,
     style: str = None,
-    tags: list[abjad.Tag] = None,
     zero_padding: bool = False,
 ) -> None:
     leaves = abjad.select.leaves(argument)
@@ -1987,8 +1978,6 @@ def glissando_function(
         assert isinstance(tweak, prototype), repr(tweak)
         tweaks_.append(tweak)
     tag = _tags.function_name(_frame())
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
     abjad.glissando(
         leaves,
         *tweaks_,
@@ -2078,14 +2067,10 @@ def instrument_function(
     argument,
     instrument: abjad.Instrument,
     manifests: dict = None,
-    *,
-    tags: list[abjad.Tag] = None,
 ) -> None:
     assert isinstance(instrument, abjad.Instrument), repr(instrument)
     manifests = manifests or {}
     tag = _tags.function_name(_frame())
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
     for leaf in abjad.select.leaves(argument):
         _attach_persistent_indicator(
             leaf,
@@ -2176,12 +2161,9 @@ def markup_function(
     markup: str | abjad.Markup,
     *tweaks: abjad.Tweak,
     direction: abjad.Vertical = abjad.UP,
-    tags: list[abjad.Tag] = None,
 ) -> list[abjad.Wrapper]:
     assert direction in (abjad.DOWN, abjad.UP), repr(direction)
     tag = _tags.function_name(_frame())
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
     wrappers = []
     for leaf in abjad.select.leaves(argument):
         indicator: abjad.Markup | abjad.Bundle
