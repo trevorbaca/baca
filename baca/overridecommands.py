@@ -287,19 +287,11 @@ def bar_line_transparent(
     )
 
 
-def bar_line_transparent_function(
-    argument,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+def bar_line_transparent_function(argument) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "BarLine",
         "transparent",
@@ -336,16 +328,11 @@ def bar_line_x_extent(
     *,
     after: bool = False,
     context: str = "Score",
-    tags: list[abjad.Tag] = None,
-) -> None:
+) -> list[abjad.Wrapper]:
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "BarLine",
         "X_extent",
@@ -377,17 +364,11 @@ def beam_positions(
     )
 
 
-def beam_positions_function(
-    argument, n: int | float, *, tags: list[abjad.Tag] = None
-) -> None:
+def beam_positions_function(argument, n: int | float) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "Beam",
         "positions",
@@ -439,17 +420,11 @@ def clef_extra_offset(
 def clef_extra_offset_function(
     argument,
     pair: tuple[int | float, int | float],
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "Clef",
         "extra_offset",
@@ -482,16 +457,22 @@ def clef_shift(
     return suite
 
 
+# TODO: change 'leaf' to 'argument' and iterate leaves
 def clef_shift_function(
     leaf,
     clef: str | abjad.Clef,
     first_measure_number: int,
-) -> None:
+) -> list[abjad.Wrapper]:
     assert isinstance(leaf, abjad.Leaf), repr(leaf)
     measure_number = abjad.get.measure_number(leaf)
     measure_number += first_measure_number - 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
-    clef_x_extent_false_function(leaf, tags=[_tags.SHIFTED_CLEF, measure_number_tag])
+    wrappers = []
+    wrappers_ = clef_x_extent_false_function(leaf)
+    for wrapper in wrappers_:
+        wrapper.tag = wrapper.tag.append(_tags.SHIFTED_CLEF)
+        wrapper.tag = wrapper.tag.append(measure_number_tag)
+    wrappers.extend(wrappers_)
     extra_offset_x: int | float
     if isinstance(clef, str):
         clef = abjad.Clef(clef)
@@ -502,9 +483,12 @@ def clef_shift_function(
         width = clef._to_width[clef.name]
         extra_offset_x = -width
     pair = (extra_offset_x, 0)
-    clef_extra_offset_function(
-        leaf, pair, tags=[_tags.SHIFTED_CLEF, measure_number_tag]
-    )
+    wrappers_ = clef_extra_offset_function(leaf, pair)
+    for wrapper in wrappers_:
+        wrapper.tag = wrapper.tag.append(_tags.SHIFTED_CLEF)
+        wrapper.tag = wrapper.tag.append(measure_number_tag)
+    wrappers.extend(wrappers_)
+    return wrappers
 
 
 def clef_whiteout(
@@ -535,19 +519,11 @@ def clef_x_extent_false(
     )
 
 
-def clef_x_extent_false_function(
-    argument,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+def clef_x_extent_false_function(argument) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "Clef",
         "X_extent",
@@ -572,20 +548,11 @@ def dls_padding(
     )
 
 
-def dls_padding_function(
-    argument,
-    n: int | float,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+def dls_padding_function(argument, n: int | float) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "DynamicLineSpanner",
         "padding",
@@ -609,20 +576,11 @@ def dls_staff_padding(
     )
 
 
-def dls_staff_padding_function(
-    argument,
-    n: int | float,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+def dls_staff_padding_function(argument, n: int | float) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "DynamicLineSpanner",
         "staff_padding",
@@ -729,17 +687,11 @@ def dynamic_text_extra_offset(
 def dynamic_text_extra_offset_function(
     argument,
     pair: tuple[int | float, int | float],
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "DynamicText",
         "extra_offset",
@@ -778,19 +730,12 @@ def dynamic_text_self_alignment_x(
 
 
 def dynamic_text_self_alignment_x_function(
-    argument,
-    n: int | float,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+    argument, n: int | float
+) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "DynamicText",
         "self_alignment_X",
@@ -836,19 +781,11 @@ def dynamic_text_x_extent_zero(
     )
 
 
-def dynamic_text_x_extent_zero_function(
-    argument,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+def dynamic_text_x_extent_zero_function(argument) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "DynamicText",
         "X_extent",
@@ -955,17 +892,11 @@ def hairpin_shorten_pair(
 def hairpin_shorten_pair_function(
     argument,
     pair: tuple[int | float, int | float],
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "Hairpin",
         "shorten_pair",
@@ -994,17 +925,22 @@ def hairpin_start_shift(
 
 
 def hairpin_start_shift_function(
-    argument,
-    dynamic: str | abjad.Dynamic,
-) -> None:
+    argument, dynamic: str | abjad.Dynamic
+) -> list[abjad.Wrapper]:
+    wrappers = []
     dynamic = abjad.Dynamic(dynamic)
     width = dynamic._to_width[str(dynamic.name)]
     extra_offset_x = -width
     hairpin_shorten_left = width - 1.25
+    # TODO: pass 'argument' instead of 'leaf'
     leaf = abjad.select.leaf(argument, 0)
-    dynamic_text_extra_offset_function(leaf, (extra_offset_x, 0))
-    dynamic_text_x_extent_zero_function(leaf)
-    hairpin_shorten_pair_function(argument, (hairpin_shorten_left, 0))
+    wrappers_ = dynamic_text_extra_offset_function(leaf, (extra_offset_x, 0))
+    wrappers.extend(wrappers_)
+    wrappers_ = dynamic_text_x_extent_zero_function(leaf)
+    wrappers.extend(wrappers_)
+    wrappers_ = hairpin_shorten_pair_function(argument, (hairpin_shorten_left, 0))
+    wrappers.extend(wrappers_)
+    return wrappers
 
 
 def hairpin_stencil_false(
@@ -1109,20 +1045,13 @@ def mmrest_transparent(
     )
 
 
-def mmrest_transparent_function(
-    argument,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+def mmrest_transparent_function(argument) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
+    # TODO: force _select.mmrests() in calling code
     mmrests = _select.mmrests(leaves)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         mmrests,
         "MultiMeasureRest",
         "transparent",
@@ -1277,17 +1206,11 @@ def note_head_duration_log(
     )
 
 
-def note_head_duration_log_function(
-    argument, n: int, *, tags: list[abjad.Tag] = None
-) -> None:
+def note_head_duration_log_function(argument, n: int) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "NoteHead",
         "duration_log",
@@ -1339,17 +1262,11 @@ def note_head_no_ledgers(
     )
 
 
-def note_head_no_ledgers_function(
-    argument, value: bool, *, tags: list[abjad.Tag] = None
-) -> None:
+def note_head_no_ledgers_function(argument, value: bool) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "NoteHead",
         "no_ledgers",
@@ -1385,17 +1302,11 @@ def note_head_style(
     )
 
 
-def note_head_style_function(
-    argument, string: str, *, tags: list[abjad.Tag] = None
-) -> None:
+def note_head_style_function(argument, string: str) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "NoteHead",
         "style",
@@ -1429,17 +1340,11 @@ def note_head_style_harmonic(
     )
 
 
-def note_head_style_harmonic_function(
-    argument, *, tags: list[abjad.Tag] = None
-) -> None:
+def note_head_style_harmonic_function(argument) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "NoteHead",
         "style",
@@ -1516,19 +1421,12 @@ def ottava_bracket_staff_padding(
 
 
 def ottava_bracket_staff_padding_function(
-    argument,
-    n: int | float,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+    argument, n: int | float
+) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "OttavaBracket",
         "staff_padding",
@@ -1558,16 +1456,11 @@ def rehearsal_mark_down_function(
     argument,
     *,
     context: str = "Score",
-    tags: list[abjad.Tag] = None,
-) -> None:
+) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "RehearsalMark",
         "direction",
@@ -1599,16 +1492,11 @@ def rehearsal_mark_extra_offset_function(
     pair: tuple[int | float, int | float],
     *,
     context: str = "Score",
-    tags: list[abjad.Tag] = None,
-) -> None:
+) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "RehearsalMark",
         "extra_offset",
@@ -1640,16 +1528,11 @@ def rehearsal_mark_padding_function(
     n: int | float,
     *,
     context: str = "Score",
-    tags: list[abjad.Tag] = None,
-) -> None:
+) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "RehearsalMark",
         "padding",
@@ -1681,16 +1564,11 @@ def rehearsal_mark_self_alignment_x_function(
     n: int,
     *,
     context: str = "Score",
-    tags: list[abjad.Tag] = None,
-) -> None:
+) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "RehearsalMark",
         "self_alignment_X",
@@ -1746,17 +1624,11 @@ def repeat_tie_extra_offset(
 def repeat_tie_extra_offset_function(
     argument,
     pair: tuple[int | float, int | float],
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "RepeatTie",
         "extra_offset",
@@ -1856,20 +1728,11 @@ def rest_staff_position(
     )
 
 
-def rest_staff_position_function(
-    argument,
-    n: int | float,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+def rest_staff_position_function(argument, n: int | float) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "Rest",
         "staff_position",
@@ -1983,20 +1846,11 @@ def script_staff_padding(
     )
 
 
-def script_staff_padding_function(
-    argument,
-    n: int | float,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+def script_staff_padding_function(argument, n: int | float) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "Script",
         "staff_padding",
@@ -2103,19 +1957,11 @@ def span_bar_transparent(
     )
 
 
-def span_bar_transparent_function(
-    argument,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+def span_bar_transparent_function(argument) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "SpanBar",
         "transparent",
@@ -2154,19 +2000,11 @@ def stem_down(
     )
 
 
-def stem_down_function(
-    argument,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+def stem_down_function(argument) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "Stem",
         "direction",
@@ -2240,19 +2078,11 @@ def stem_up(
     )
 
 
-def stem_up_function(
-    argument,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+def stem_up_function(argument) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "Stem",
         "direction",
@@ -2346,11 +2176,13 @@ def text_script_extra_offset_function(
     argument,
     pair: tuple[int | float, int | float],
     *,
+    # TODO: remove allow_mmrests
     allow_mmrests: bool = False,
 ) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     final_tag = _tags.function_name(_frame(), n=2)
+    # TODO: remove blocklist
     blocklist = []
     if allow_mmrests is not True:
         blocklist.append(abjad.MultimeasureRest)
@@ -2430,20 +2262,17 @@ def text_script_padding_function(
     argument,
     n: int | float,
     *,
+    # TODO: remove allow_mmrests
     allow_mmrests: bool = False,
-    tags: list[abjad.Tag] = None,
-) -> None:
+) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
+    # TODO: remove blocklist
     blocklist = []
     if allow_mmrests is not True:
         blocklist.append(abjad.MultimeasureRest)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "TextScript",
         "padding",
@@ -2481,20 +2310,17 @@ def text_script_parent_alignment_x_function(
     argument,
     n: int | float,
     *,
+    # TODO: remove allow_mmrests
     allow_mmrests: bool = False,
-    tags: list[abjad.Tag] = None,
-) -> None:
+) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
+    # TODO: remove blocklist
     blocklist = []
     if allow_mmrests is not True:
         blocklist.append(abjad.MultimeasureRest)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "TextScript",
         "parent_alignment_X",
@@ -2532,16 +2358,12 @@ def text_script_self_alignment_x_function(
     argument,
     n: int | float,
     *,
+    # TODO: remove allow_mmrests
     allow_mmrests: bool = False,
-    tags: list[abjad.Tag] = None,
 ) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
     blocklist = []
     if allow_mmrests is not True:
         blocklist.append(abjad.MultimeasureRest)
@@ -2583,20 +2405,16 @@ def text_script_staff_padding_function(
     argument,
     n: int | float,
     *,
+    # TODO: remove allow_mmrests
     allow_mmrests: bool = False,
-    tags: list[abjad.Tag] = None,
-) -> None:
+) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
     blocklist = []
     if allow_mmrests is not True:
         blocklist.append(abjad.MultimeasureRest)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "TextScript",
         "staff_padding",
@@ -2727,18 +2545,12 @@ def text_spanner_staff_padding(
 
 
 def text_spanner_staff_padding_function(
-    argument,
-    n: int | float,
-    tags: list[abjad.Tag] = None,
-) -> None:
+    argument, n: int | float
+) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "TextSpanner",
         "staff_padding",
@@ -2856,19 +2668,11 @@ def time_signature_stencil_false(
     )
 
 
-def time_signature_stencil_false_function(
-    argument,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+def time_signature_stencil_false_function(argument) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "TimeSignature",
         "stencil",
@@ -2918,19 +2722,11 @@ def tuplet_bracket_down(
     )
 
 
-def tuplet_bracket_down_function(
-    argument,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+def tuplet_bracket_down_function(argument) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "TupletBracket",
         "direction",
@@ -2982,20 +2778,11 @@ def tuplet_bracket_padding(
     )
 
 
-def tuplet_bracket_padding_function(
-    argument,
-    n: int | float,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+def tuplet_bracket_padding_function(argument, n: int | float) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "TupletBracket",
         "padding",
@@ -3022,17 +2809,11 @@ def tuplet_bracket_shorten_pair(
 def tuplet_bracket_shorten_pair_function(
     argument,
     pair: tuple[int | float, int | float],
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "TupletBracket",
         "shorten_pair",
@@ -3059,17 +2840,11 @@ def tuplet_bracket_staff_padding(
 def tuplet_bracket_staff_padding_function(
     argument,
     n: int | float,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "TupletBracket",
         "staff_padding",

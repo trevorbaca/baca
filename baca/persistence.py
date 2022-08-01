@@ -3405,7 +3405,7 @@ r"""
         ...     metronome_marks["112"],
         ...     accumulator.manifests(),
         ... )
-        >>> baca.text_spanner_staff_padding_function(score["Skips"][:-1], 4)
+        >>> wrappers = baca.text_spanner_staff_padding_function(score["Skips"][:-1], 4)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -3537,7 +3537,7 @@ r"""
         ...     "Music",
         ...     baca.reapply_persistent_indicators(),
         ... )
-        >>> baca.text_spanner_staff_padding_function(score["Skips"], 4)
+        >>> wrappers = baca.text_spanner_staff_padding_function(score["Skips"], 4)
 
         >>> _, _ = baca.interpret.section(
         ...     score,
@@ -3756,7 +3756,7 @@ r"""
         ...     metronome_marks["112"],
         ...     accumulator.manifests(),
         ... )
-        >>> baca.text_spanner_staff_padding_function(score["Skips"][:-1], 4)
+        >>> wrappers = baca.text_spanner_staff_padding_function(score["Skips"][:-1], 4)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -4682,7 +4682,7 @@ r"""
         ...     baca.Accelerando(),
         ...     accumulator.manifests(),
         ... )
-        >>> baca.text_spanner_staff_padding_function(score["Skips"], 4)
+        >>> wrappers = baca.text_spanner_staff_padding_function(score["Skips"], 4)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
 
@@ -4791,7 +4791,7 @@ r"""
         ...     "Music",
         ...     baca.reapply_persistent_indicators(),
         ... )
-        >>> baca.text_spanner_staff_padding_function(score["Skips"], 4)
+        >>> wrappers = baca.text_spanner_staff_padding_function(score["Skips"], 4)
 
         >>> _, _ = baca.interpret.section(
         ...     score,
@@ -4990,7 +4990,7 @@ r"""
         ...     baca.Accelerando(),
         ...     accumulator.manifests(),
         ... )
-        >>> baca.text_spanner_staff_padding_function(score["Skips"], 4)
+        >>> wrappers = baca.text_spanner_staff_padding_function(score["Skips"], 4)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(

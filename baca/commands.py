@@ -1618,13 +1618,11 @@ def close_volta_function(skip, first_measure_number, site: str = "before"):
     if after is True:
         measure_number += 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
-    # ONLY_MOL instead of NOT_MOL
-    _overridecommands.bar_line_x_extent(
-        [skip],
-        (0, 1.5),
-        after=after,
-        tags=[tag, measure_number_tag, _tags.ONLY_MOL],
-    )
+    wrappers = _overridecommands.bar_line_x_extent([skip], (0, 1.5), after=after)
+    for wrapper in wrappers:
+        wrapper.tag = wrapper.tag.append(tag)
+        wrapper.tag = wrapper.tag.append(measure_number_tag)
+        wrapper.tag = wrapper.tag.append(_tags.ONLY_MOL)
 
 
 def color(
@@ -1663,16 +1661,16 @@ def double_volta_function(skip, first_measure_number):
     measure_number = abjad.get.measure_number(skip)
     measure_number += first_measure_number - 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
-    _overridecommands.bar_line_x_extent(
-        [skip],
-        (0, 3),
-        tags=[tag, _tags.NOT_MOL, measure_number_tag],
-    )
-    _overridecommands.bar_line_x_extent(
-        [skip],
-        (0, 4),
-        tags=[tag, _tags.ONLY_MOL, measure_number_tag],
-    )
+    wrappers = _overridecommands.bar_line_x_extent([skip], (0, 3))
+    for wrapper in wrappers:
+        wrapper.tag = wrapper.tag.append(tag)
+        wrapper.tag = wrapper.tag.append(_tags.NOT_MOL)
+        wrapper.tag = wrapper.tag.append(measure_number_tag)
+    wrappers = _overridecommands.bar_line_x_extent([skip], (0, 4))
+    for wrapper in wrappers:
+        wrapper.tag = wrapper.tag.append(tag)
+        wrapper.tag = wrapper.tag.append(_tags.ONLY_MOL)
+        wrapper.tag = wrapper.tag.append(measure_number_tag)
 
 
 def dynamic_down(
@@ -2223,16 +2221,16 @@ def open_volta_function(skip, first_measure_number):
     measure_number = abjad.get.measure_number(skip)
     measure_number += first_measure_number - 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
-    _overridecommands.bar_line_x_extent(
-        [skip],
-        (0, 2),
-        tags=[tag, _tags.NOT_MOL, measure_number_tag],
-    )
-    _overridecommands.bar_line_x_extent(
-        [skip],
-        (0, 3),
-        tags=[tag, _tags.ONLY_MOL, measure_number_tag],
-    )
+    wrappers = _overridecommands.bar_line_x_extent([skip], (0, 2))
+    for wrapper in wrappers:
+        wrapper.tag = wrapper.tag.append(tag)
+        wrapper.tag = wrapper.tag.append(_tags.NOT_MOL)
+        wrapper.tag = wrapper.tag.append(measure_number_tag)
+    wrappers = _overridecommands.bar_line_x_extent([skip], (0, 3))
+    for wrapper in wrappers:
+        wrapper.tag = wrapper.tag.append(tag)
+        wrapper.tag = wrapper.tag.append(_tags.ONLY_MOL)
+        wrapper.tag = wrapper.tag.append(measure_number_tag)
 
 
 def previous_metadata(path: str, file_name: str = "__metadata__"):
