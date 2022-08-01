@@ -1066,7 +1066,7 @@ class ClusterCommand(_command.Command):
 
     direction: abjad.Vertical | None = abjad.UP
     hide_flat_markup: bool = False
-    selector: typing.Callable = lambda _: _select.plts(_)
+    selector: typing.Callable = lambda _: _select.plts(_, exclude=_enums.HIDDEN)
     start_pitch: abjad.NamedPitch | None = None
     widths: typing.Sequence[int] | None = None
 
@@ -1125,7 +1125,7 @@ class DiatonicClusterCommand(_command.Command):
     """
 
     widths: typing.Sequence[int] = ()
-    selector: typing.Callable = lambda _: _select.plts(_)
+    selector: typing.Callable = lambda _: _select.plts(_, exclude=_enums.HIDDEN)
 
     def __post_init__(self):
         _command.Command.__post_init__(self)
@@ -3573,7 +3573,7 @@ class StaffPositionCommand(_command.Command):
     allow_repitch: bool = False
     exact: bool = False
     mock: bool = False
-    selector: typing.Callable = lambda _: _select.plts(_)
+    selector: typing.Callable = lambda _: _select.plts(_, exclude=_enums.HIDDEN)
     set_chord_pitches_equal: bool = False
 
     def __post_init__(self):
@@ -3617,7 +3617,7 @@ class StaffPositionInterpolationCommand(_command.Command):
     allow_hidden: bool = False
     mock: bool = False
     pitches_instead_of_staff_positions: bool = False
-    selector: typing.Callable = lambda _: _select.plts(_)
+    selector: typing.Callable = lambda _: _select.plts(_, exclude=_enums.HIDDEN)
 
     def __post_init__(self):
         _command.Command.__post_init__(self)

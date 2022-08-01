@@ -117,28 +117,34 @@ class SpannerIndicatorCommand(_command.Command):
 
 def _attach_start_stop_indicators(
     leaves, tag, *, detach_first=False, start_indicator=None, stop_indicator=None
-):
+) -> list[abjad.Wrapper]:
     assert isinstance(tag, abjad.Tag), repr(tag)
     if detach_first:
         for leaf in abjad.iterate.leaves(leaves, grace=False):
             abjad.detach(type(start_indicator), leaf)
             abjad.detach(type(stop_indicator), leaf)
+    wrappers = []
     if start_indicator is not None:
         first_leaf = leaves[0]
         here = _tags.function_name(_frame(), n=2)
-        abjad.attach(
+        wrapper = abjad.attach(
             start_indicator,
             first_leaf,
             tag=tag.append(_tags.SPANNER_START).append(here),
+            wrapper=True,
         )
+        wrappers.append(wrapper)
     if stop_indicator is not None:
         final_leaf = leaves[-1]
         here = _tags.function_name(_frame(), n=4)
-        abjad.attach(
+        wrapper = abjad.attach(
             stop_indicator,
             final_leaf,
             tag=tag.append(_tags.SPANNER_STOP).append(here),
+            wrapper=True,
         )
+        wrappers.append(wrapper)
+    return wrappers
 
 
 def _prepare_trill_spanner_arguments(
@@ -204,20 +210,16 @@ def beam_function(
     direction: abjad.Vertical | None = None,
     start_beam: abjad.StartBeam = None,
     stop_beam: abjad.StopBeam = None,
-    tags: list[abjad.Tag] = None,
-) -> None:
+) -> list[abjad.Wrapper]:
     # TODO: maybe remove tleaves and force call in section files?
     leaves = _select.tleaves(argument)
     start_beam = start_beam or abjad.StartBeam()
     stop_beam = stop_beam or abjad.StopBeam()
     assert isinstance(start_beam, abjad.StartBeam), repr(start_beam)
     assert isinstance(stop_beam, abjad.StopBeam), repr(stop_beam)
-    tag = _tags.function_name(_frame())
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
-    _attach_start_stop_indicators(
+    return _attach_start_stop_indicators(
         leaves,
-        tag,
+        tag=_tags.function_name(_frame()),
         detach_first=True,
         start_indicator=start_beam,
         stop_indicator=stop_beam,
@@ -247,19 +249,15 @@ def ottava_function(
     start_ottava: abjad.Ottava = abjad.Ottava(n=1),
     stop_ottava: abjad.Ottava = abjad.Ottava(n=0, site="after"),
     # right_broken: bool = False,
-    tags: list[abjad.Tag] = None,
-) -> None:
+) -> list[abjad.Wrapper]:
     if not allow_rests:
         leaves = _select.tleaves(leaves)
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
     assert isinstance(start_ottava, abjad.Ottava), repr(start_ottava)
     assert isinstance(stop_ottava, abjad.Ottava), repr(stop_ottava)
-    tag = _tags.function_name(_frame())
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
-    _attach_start_stop_indicators(
+    return _attach_start_stop_indicators(
         leaves,
-        tag,
+        tag=_tags.function_name(_frame()),
         start_indicator=start_ottava,
         stop_indicator=stop_ottava,
     )
@@ -285,19 +283,15 @@ def ottava_bassa_function(
     allow_rests: bool = False,
     start_ottava: abjad.Ottava = abjad.Ottava(n=-1),
     stop_ottava: abjad.Ottava = abjad.Ottava(n=0, site="after"),
-    tags: list[abjad.Tag] = None,
-) -> None:
+) -> list[abjad.Wrapper]:
     if not allow_rests:
         leaves = _select.pleaves(leaves)
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
     assert isinstance(start_ottava, abjad.Ottava), repr(start_ottava)
     assert isinstance(stop_ottava, abjad.Ottava), repr(stop_ottava)
-    tag = _tags.function_name(_frame())
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
-    _attach_start_stop_indicators(
+    return _attach_start_stop_indicators(
         leaves,
-        tag,
+        tag=_tags.function_name(_frame()),
         start_indicator=start_ottava,
         stop_indicator=stop_ottava,
     )
@@ -333,8 +327,7 @@ def slur_function(
     phrasing_slur: bool = False,
     start_slur: abjad.StartSlur = None,
     stop_slur: abjad.StopSlur = None,
-    tags: list[abjad.Tag] = None,
-) -> None:
+) -> list[abjad.Wrapper]:
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
     if phrasing_slur is True:
         start_slur_ = start_slur or abjad.StartPhrasingSlur()
@@ -344,12 +337,9 @@ def slur_function(
         stop_slur_ = stop_slur or abjad.StopSlur()
     start_slur_ = _tweaks.bundle_tweaks(start_slur_, tweaks)
     stop_slur_ = _tweaks.bundle_tweaks(stop_slur_, tweaks)
-    tag = _tags.function_name(_frame())
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
-    _attach_start_stop_indicators(
+    return _attach_start_stop_indicators(
         leaves,
-        tag,
+        tag=_tags.function_name(_frame()),
         start_indicator=start_slur_,
         stop_indicator=stop_slur_,
     )
@@ -407,8 +397,7 @@ def trill_spanner_function(
     harmonic: bool = False,
     start_trill_span: abjad.StartTrillSpan = None,
     stop_trill_span: abjad.StopTrillSpan = None,
-    tags: list[abjad.Tag] = None,
-) -> None:
+) -> list[abjad.Wrapper]:
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
     start_trill_span_, stop_trill_span = _prepare_trill_spanner_arguments(
         alteration=alteration,
@@ -416,12 +405,9 @@ def trill_spanner_function(
         start_trill_span=start_trill_span,
         stop_trill_span=stop_trill_span,
     )
-    tag = _tags.function_name(_frame())
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
-    _attach_start_stop_indicators(
+    return _attach_start_stop_indicators(
         leaves,
-        tag,
+        tag=_tags.function_name(_frame()),
         start_indicator=start_trill_span_,
         stop_indicator=stop_trill_span,
     )

@@ -188,22 +188,26 @@ def breathe(
 
 
 def breathe_function(
-    leaf,
+    argument,
     *tweaks: abjad.Tweak,
     tags: list[abjad.Tag] = None,
-) -> None:
-    indicator: abjad.LilyPondLiteral | abjad.Bundle
-    indicator = abjad.LilyPondLiteral(r"\breathe", site="after")
-    indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
-    # TODO: iterate over leaves:
-    abjad.attach(
-        indicator,
-        leaf,
-        tag=tag,
-    )
+    wrappers = []
+    for leaf in abjad.select.leaves(argument):
+        indicator: abjad.LilyPondLiteral | abjad.Bundle
+        indicator = abjad.LilyPondLiteral(r"\breathe", site="after")
+        indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+        for tag_ in tags or []:
+            tag = tag.append(tag_)
+        wrapper = abjad.attach(
+            indicator,
+            leaf,
+            tag=tag,
+            wrapper=True,
+        )
+        wrappers.append(wrapper)
+    return wrappers
 
 
 def color_fingerings(
@@ -339,21 +343,23 @@ def espressivo(
 
 
 def espressivo_function(
-    leaf,
+    argument,
     *tweaks: abjad.Tweak,
-    tags: list[abjad.Tag] = None,
-) -> None:
-    indicator: abjad.Articulation | abjad.Bundle
-    indicator = abjad.Articulation("espressivo")
-    indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
-    abjad.attach(
-        indicator,
-        leaf,
-        tag=tag,
-    )
+    wrappers = []
+    for leaf in abjad.select.leaves(argument):
+        indicator: abjad.Articulation | abjad.Bundle
+        indicator = abjad.Articulation("espressivo")
+        indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+        wrapper = abjad.attach(
+            indicator,
+            leaf,
+            tag=tag,
+            wrapper=True,
+        )
+        wrappers.append(wrapper)
+    return wrappers
 
 
 def fermata(
@@ -540,18 +546,19 @@ def stem_tremolo_function(
     argument,
     *,
     tremolo_flags: int = 32,
-    tags: list[abjad.Tag] = None,
-) -> None:
-    indicator = abjad.StemTremolo(tremolo_flags=tremolo_flags)
+) -> list[abjad.Wrapper]:
+    wrappers = []
     tag = _tags.function_name(_frame())
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
     for leaf in abjad.select.leaves(argument):
-        abjad.attach(
+        indicator = abjad.StemTremolo(tremolo_flags=tremolo_flags)
+        wrapper = abjad.attach(
             indicator,
             leaf,
             tag=tag,
+            wrapper=True,
         )
+        wrappers.append(wrapper)
+    return wrappers
 
 
 def stop_on_string(

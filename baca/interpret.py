@@ -19,11 +19,11 @@ from . import commands as _commands
 from . import indicatorclasses as _indicatorclasses
 from . import layout as _layout
 from . import memento as _memento
-from . import overrides as _overrides
+from . import overridecommands as _overridecommands
 from . import parts as _parts
 from . import pcollections as _pcollections
-from . import piecewise as _piecewise
-from . import pitchfunctions as _pitchfunctions
+from . import piecewisecommands as _piecewisecommands
+from . import pitchcommands as _pitchcommands
 from . import select as _select
 from . import tags as _tags
 from . import treat as _treat
@@ -577,7 +577,7 @@ def _attach_rhythm_annotation_spanner(command, selection):
     if string is None:
         string = command._make_rhythm_annotation_string()
     color = command.annotation_spanner_color or "#darkyellow"
-    command_ = _piecewise.rhythm_annotation_spanner(
+    command_ = _piecewisecommands.rhythm_annotation_spanner(
         string,
         abjad.Tweak(rf"- \tweak color {color}"),
         abjad.Tweak(r"- \tweak staff-padding 8"),
@@ -2159,7 +2159,7 @@ def _set_intermittent_to_staff_position_zero(score):
             for pleaf in abjad.iterate.leaves(voice, pitched=True):
                 if abjad.get.has_indicator(pleaf, _enums.NOT_YET_PITCHED):
                     pleaves.append(pleaf)
-    _pitchfunctions.staff_position_function(
+    _pitchcommands.staff_position_function(
         pleaves,
         0,
         allow_hidden=True,
@@ -2173,7 +2173,7 @@ def _set_not_yet_pitched_to_staff_position_zero(score):
         if not abjad.get.has_indicator(pleaf, _enums.NOT_YET_PITCHED):
             continue
         pleaves.append(pleaf)
-    _pitchfunctions.staff_position_function(
+    _pitchcommands.staff_position_function(
         pleaves,
         0,
         allow_hidden=True,
@@ -2199,7 +2199,7 @@ def _shift_measure_initial_clefs(
             if measure_number is None:
                 continue
             clef = wrapper.unbundle_indicator()
-            _overrides.clef_shift_function(leaf, clef, first_measure_number)
+            _overridecommands.clef_shift_function(leaf, clef, first_measure_number)
 
 
 def _sort_dictionary(dictionary):

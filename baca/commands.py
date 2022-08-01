@@ -12,9 +12,9 @@ import abjad
 
 from . import command as _command
 from . import indicatorclasses as _indicatorclasses
-from . import overrides as _overrides
+from . import overridecommands as _overridecommands
 from . import path as _path
-from . import pitchfunctions as _pitchfunctions
+from . import pitchcommands as _pitchcommands
 from . import select as _select
 from . import tags as _tags
 from . import treat as _treat
@@ -1321,18 +1321,19 @@ def literal_function(
     string: str | list[str],
     *,
     site: str = "before",
-    tags: list[abjad.Tag] = None,
-) -> None:
+) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
-    for tag_ in tags or []:
-        tag = tag.append(tag_)
+    wrappers = []
     for leaf in abjad.select.leaves(argument):
         indicator = abjad.LilyPondLiteral(string, site=site)
-        abjad.attach(
+        wrapper = abjad.attach(
             indicator,
             leaf,
             tag=tag,
+            wrapper=True,
         )
+        wrappers.append(wrapper)
+    return wrappers
 
 
 def short_instrument_name(
@@ -1436,10 +1437,11 @@ def rehearsal_mark_function(
     *tweaks: abjad.Tweak,
     font_size: int = 10,
     tags: list[abjad.Tag] = None,
-) -> None:
+) -> list[abjad.Wrapper]:
     assert isinstance(string, str), repr(string)
     assert isinstance(font_size, int | float), repr(font_size)
     string = rf'\baca-rehearsal-mark-markup "{string}" #{font_size}'
+    wrappers = []
     for leaf in abjad.select.leaves(argument):
         indicator: abjad.Markup | abjad.Bundle
         indicator = abjad.Markup(string)
@@ -1447,12 +1449,15 @@ def rehearsal_mark_function(
         tag = _tags.function_name(_frame())
         for tag_ in tags or []:
             tag = tag.append(tag_)
-        abjad.attach(
+        wrapper = abjad.attach(
             indicator,
             leaf,
             direction=abjad.CENTER,
             tag=tag,
+            wrapper=True,
         )
+        wrappers.append(wrapper)
+    return wrappers
 
 
 def repeat_tie(selector, *, allow_rest: bool = False) -> IndicatorCommand:
@@ -1614,7 +1619,7 @@ def close_volta_function(skip, first_measure_number, site: str = "before"):
         measure_number += 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
     # ONLY_MOL instead of NOT_MOL
-    _overrides.bar_line_x_extent(
+    _overridecommands.bar_line_x_extent(
         [skip],
         (0, 1.5),
         after=after,
@@ -1658,12 +1663,12 @@ def double_volta_function(skip, first_measure_number):
     measure_number = abjad.get.measure_number(skip)
     measure_number += first_measure_number - 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
-    _overrides.bar_line_x_extent(
+    _overridecommands.bar_line_x_extent(
         [skip],
         (0, 3),
         tags=[tag, _tags.NOT_MOL, measure_number_tag],
     )
-    _overrides.bar_line_x_extent(
+    _overridecommands.bar_line_x_extent(
         [skip],
         (0, 4),
         tags=[tag, _tags.ONLY_MOL, measure_number_tag],
@@ -1794,7 +1799,7 @@ def flat_glissando(
         if isinstance(pitch, abjad.StaffPosition) or (
             isinstance(pitch, list) and isinstance(pitch[0], abjad.StaffPosition)
         ):
-            staff_position_command_object = _pitchfunctions._staff_position_command(
+            staff_position_command_object = _pitchcommands._staff_position_command(
                 pitch,
                 allow_hidden=allow_hidden,
                 allow_repitch=allow_repitch,
@@ -1803,7 +1808,7 @@ def flat_glissando(
             )
             accumulator.append(staff_position_command_object)
         else:
-            pitch_command_object = _pitchfunctions._pitch_command_factory(
+            pitch_command_object = _pitchcommands._pitch_command_factory(
                 pitch,
                 allow_hidden=allow_hidden,
                 allow_repitch=allow_repitch,
@@ -1815,7 +1820,7 @@ def flat_glissando(
         if isinstance(pitch, abjad.StaffPosition):
             assert isinstance(stop_pitch, abjad.StaffPosition)
             interpolation_command = (
-                _pitchfunctions._interpolate_staff_positions_function(
+                _pitchcommands._interpolate_staff_positions_function(
                     pitch,
                     stop_pitch,
                     allow_hidden=allow_hidden,
@@ -1826,7 +1831,7 @@ def flat_glissando(
         else:
             assert isinstance(pitch, str | abjad.NamedPitch)
             assert isinstance(stop_pitch, str | abjad.NamedPitch)
-            interpolation_command = _pitchfunctions._interpolate_pitches_function(
+            interpolation_command = _pitchcommands._interpolate_pitches_function(
                 pitch,
                 stop_pitch,
                 allow_hidden=allow_hidden,
@@ -1879,7 +1884,7 @@ def flat_glissando_function(
         if isinstance(pitch, abjad.StaffPosition) or (
             isinstance(pitch, list) and isinstance(pitch[0], abjad.StaffPosition)
         ):
-            _pitchfunctions.staff_position_function(
+            _pitchcommands.staff_position_function(
                 argument,
                 pitch,
                 allow_hidden=allow_hidden,
@@ -1887,7 +1892,7 @@ def flat_glissando_function(
                 mock=mock,
             )
         else:
-            _pitchfunctions.pitch_function(
+            _pitchcommands.pitch_function(
                 argument,
                 pitch,
                 allow_hidden=allow_hidden,
@@ -1901,7 +1906,7 @@ def flat_glissando_function(
         TODO: make interpolate_pitches_function()
         if isinstance(pitch, abjad.StaffPosition):
             assert isinstance(stop_pitch, abjad.StaffPosition)
-            _pitchfunctions._interpolate_staff_positions_function(
+            _pitchcommands._interpolate_staff_positions_function(
                 argument,
                 pitch,
                 stop_pitch,
@@ -1911,7 +1916,7 @@ def flat_glissando_function(
         else:
             assert isinstance(pitch, str | abjad.NamedPitch)
             assert isinstance(stop_pitch, str | abjad.NamedPitch)
-            _pitchfunctions._interpolate_pitches_function(
+            _pitchcommands._interpolate_pitches_function(
                 argument,
                 pitch,
                 stop_pitch,
@@ -2218,12 +2223,12 @@ def open_volta_function(skip, first_measure_number):
     measure_number = abjad.get.measure_number(skip)
     measure_number += first_measure_number - 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
-    _overrides.bar_line_x_extent(
+    _overridecommands.bar_line_x_extent(
         [skip],
         (0, 2),
         tags=[tag, _tags.NOT_MOL, measure_number_tag],
     )
-    _overrides.bar_line_x_extent(
+    _overridecommands.bar_line_x_extent(
         [skip],
         (0, 3),
         tags=[tag, _tags.ONLY_MOL, measure_number_tag],

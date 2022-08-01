@@ -26,7 +26,7 @@ def _do_override_command(
     blocklist=None,
     context=None,
     deactivate=False,
-):
+) -> list[abjad.Wrapper]:
     if blocklist:
         for leaf in leaves:
             if isinstance(leaf, blocklist):
@@ -65,7 +65,7 @@ def _do_override_command(
         literal, leaves[0], deactivate=deactivate, tag=first_tag, wrapper=True
     )
     if once:
-        return wrapper_1
+        return [wrapper_1]
     override = abjad.LilyPondOverride(
         lilypond_type=lilypond_type,
         grob_name=grob,
@@ -77,7 +77,7 @@ def _do_override_command(
     wrapper_2 = abjad.attach(
         literal, leaves[-1], deactivate=deactivate, tag=final_tag, wrapper=True
     )
-    return wrapper_1, wrapper_2
+    return [wrapper_1, wrapper_2]
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -1031,19 +1031,11 @@ def hairpin_to_barline(
     )
 
 
-def hairpin_to_barline_function(
-    argument,
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+def hairpin_to_barline_function(argument) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "Hairpin",
         "to_barline",
@@ -1173,17 +1165,11 @@ def mmrest_text_extra_offset(
 def mmrest_text_extra_offset_function(
     argument,
     pair: tuple[int | float, int | float],
-    *,
-    tags: list[abjad.Tag] = None,
-) -> None:
+) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "MultiMeasureRestText",
         "extra_offset",
@@ -2361,15 +2347,10 @@ def text_script_extra_offset_function(
     pair: tuple[int | float, int | float],
     *,
     allow_mmrests: bool = False,
-    tags: list[abjad.Tag] = None,
-) -> abjad.Wrapper:
+) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
     blocklist = []
     if allow_mmrests is not True:
         blocklist.append(abjad.MultimeasureRest)
@@ -2553,7 +2534,7 @@ def text_script_self_alignment_x_function(
     *,
     allow_mmrests: bool = False,
     tags: list[abjad.Tag] = None,
-) -> abjad.Wrapper:
+) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     for tag in tags or []:
@@ -2703,16 +2684,11 @@ def text_spanner_left_padding(
 def text_spanner_left_padding_function(
     argument,
     n: int | float,
-    tags: list[abjad.Tag] = None,
-) -> None:
+) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "TextSpanner",
         "bound_details__left__padding",
@@ -2813,16 +2789,11 @@ def text_spanner_y_offset(
 def text_spanner_y_offset_function(
     argument,
     n: int | float,
-    tags: list[abjad.Tag] = None,
-) -> None:
+) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
-    for tag in tags or []:
-        first_tag = first_tag.append(tag)
     final_tag = _tags.function_name(_frame(), n=2)
-    for tag in tags or []:
-        final_tag = final_tag.append(tag)
-    _do_override_command(
+    return _do_override_command(
         leaves,
         "TextSpanner",
         "Y_offset",

@@ -200,7 +200,7 @@ def extern(
                 indent = count * " "
                 dereference = indent + rf"{{ \{name} }}"
                 first_line = finished_variables[name][0]
-                # these 4 lines can be removed after right-side tags:
+                # these 4 lines can be removed after tags on right-side:
                 if _tags.NOT_TOPMOST.string in first_line:
                     tag_ = tag.append(_tags.NOT_TOPMOST)
                 else:
