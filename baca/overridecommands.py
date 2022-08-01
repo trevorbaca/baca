@@ -1328,6 +1328,20 @@ def note_head_style_cross(
     )
 
 
+def note_head_style_cross_function(argument) -> list[abjad.Wrapper]:
+    leaves = abjad.select.leaves(argument)
+    first_tag = _tags.function_name(_frame(), n=1)
+    final_tag = _tags.function_name(_frame(), n=2)
+    return _do_override_command(
+        leaves,
+        "NoteHead",
+        "style",
+        "#'cross",
+        first_tag,
+        final_tag,
+    )
+
+
 def note_head_style_harmonic(
     *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> OverrideCommand:
