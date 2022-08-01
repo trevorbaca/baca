@@ -361,6 +361,17 @@ def flageolet(
     )
 
 
+def flageolet_function(argument) -> None:
+    tag = _tags.function_name(_frame())
+    for leaf in abjad.iterate.leaves(argument):
+        indicator = abjad.Articulation("flageolet")
+        abjad.attach(
+            indicator,
+            leaf,
+            tag=tag,
+        )
+
+
 def laissez_vibrer(
     selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
