@@ -13,7 +13,6 @@ import abjad
 from . import command as _command
 from . import indicatorclasses as _indicatorclasses
 from . import overrides as _overrides
-from . import parts as _parts
 from . import path as _path
 from . import pitchfunctions as _pitchfunctions
 from . import select as _select
@@ -248,32 +247,6 @@ def _do_detach_command(argument, indicators):
         for indicator in indicators:
             abjad.detach(indicator, leaf)
     return False
-
-
-def _do_part_assignment_command(argument, part_assignment):
-    first_leaf = abjad.get.leaf(argument, 0)
-    if first_leaf is None:
-        return False
-    voice = abjad.get.parentage(first_leaf).get(abjad.Voice, -1)
-    if voice is not None and part_assignment is not None:
-        assert isinstance(voice, abjad.Voice)
-        section = part_assignment.name or "ZZZ"
-        assert voice.name is not None
-        if not voice.name.startswith(section):
-            message = f"{voice.name} does not allow"
-            message += f" {part_assignment.name} part assignment:"
-            message += f"\n  {part_assignment}"
-            raise Exception(message)
-    assert part_assignment is not None
-    name, token = part_assignment.name, part_assignment.token
-    if token is None:
-        identifier = f"%*% PartAssignment({name!r})"
-    else:
-        identifier = f"%*% PartAssignment({name!r}, {token!r})"
-    container = abjad.Container(identifier=identifier)
-    leaves = abjad.select.leaves(argument)
-    components = abjad.select.top(leaves)
-    abjad.mutate.wrap(components, container)
 
 
 def _is_rest(argument):
@@ -620,26 +593,6 @@ class LabelCommand(_command.Command):
         if self.selector:
             argument = self.selector(argument)
         self.callable_(argument)
-        return False
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class PartAssignmentCommand(_command.Command):
-
-    part_assignment: _parts.PartAssignment | None = None
-
-    def __post_init__(self):
-        _command.Command.__post_init__(self)
-        assert isinstance(self.part_assignment, _parts.PartAssignment)
-
-    __repr__ = _command.Command.__repr__
-
-    def _call(self, *, argument=None, runtime=None) -> bool:
-        if argument is None:
-            return False
-        if self.selector is not None:
-            argument = self.selector(argument)
-        _do_part_assignment_command(argument, self.part_assignment)
         return False
 
 
@@ -1606,24 +1559,6 @@ def allow_octaves(
     *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
 ) -> IndicatorCommand:
     return IndicatorCommand(indicators=[_enums.ALLOW_OCTAVE], selector=selector)
-
-
-def assign_part(
-    part_assignment: _parts.PartAssignment,
-    *,
-    # IMPORTANT: must include hidden leaves:
-    selector: typing.Callable = lambda _: _select.leaves(_),
-) -> PartAssignmentCommand:
-    assert isinstance(part_assignment, _parts.PartAssignment), repr(part_assignment)
-    return PartAssignmentCommand(part_assignment=part_assignment, selector=selector)
-
-
-def assign_part_function(
-    argument,
-    part_assignment: _parts.PartAssignment,
-) -> None:
-    assert isinstance(part_assignment, _parts.PartAssignment), repr(part_assignment)
-    _do_part_assignment_command(argument, part_assignment)
 
 
 def bcps(

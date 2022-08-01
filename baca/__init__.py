@@ -34,6 +34,7 @@ from .layout import *
 from .lilypond import file, make_lilypond_file
 from .memento import *
 from .overrides import *
+from .othercommands import assign_part, assign_part_function
 from .parts import Part, PartAssignment
 from .path import *
 from .pcollections import (
