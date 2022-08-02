@@ -66,7 +66,7 @@ STAGE_NUMBER = abjad.Tag("STAGE_NUMBER")
 BUILD = abjad.Tag("BUILD")
 PARTS = abjad.Tag("PARTS")
 SCORE = abjad.Tag("SCORE")
-SEGMENT = abjad.Tag("SEGMENT")
+SECTION = abjad.Tag("SECTION")
 
 # DYNAMIC
 
@@ -241,13 +241,13 @@ NOT_PARTS = abjad.Tag("-PARTS")
 
 NOT_SCORE = abjad.Tag("-SCORE")
 
-NOT_SEGMENT = abjad.Tag("-SEGMENT")
+NOT_SECTION = abjad.Tag("-SECTION")
 
 ONLY_PARTS = abjad.Tag("+PARTS")
 
 ONLY_SCORE = abjad.Tag("+SCORE")
 
-ONLY_SEGMENT = abjad.Tag("+SEGMENT")
+ONLY_SECTION = abjad.Tag("+SECTION")
 
 # OTHER TAGS
 

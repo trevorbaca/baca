@@ -48,7 +48,7 @@ class enums(enum.Enum):
 
     SCP = enum.auto()
     SKIP = enum.auto()
-    SOUNDS_DURING_SEGMENT = enum.auto()
+    SOUNDS_DURING_SECTION = enum.auto()
     SPAZZOLATO = enum.auto()
     STAFF_POSITION = enum.auto()
     STRING_NUMBER = enum.auto()

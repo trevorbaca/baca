@@ -457,18 +457,17 @@ def clef_shift(
     return suite
 
 
-# TODO: change 'leaf' to 'argument' and iterate leaves
 def clef_shift_function(
-    leaf,
+    argument,
     clef: str | abjad.Clef,
     first_measure_number: int,
 ) -> list[abjad.Wrapper]:
-    assert isinstance(leaf, abjad.Leaf), repr(leaf)
+    leaf = abjad.select.leaf(argument, 0)
     measure_number = abjad.get.measure_number(leaf)
     measure_number += first_measure_number - 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
     wrappers = []
-    wrappers_ = clef_x_extent_false_function(leaf)
+    wrappers_ = clef_x_extent_false_function(argument)
     for wrapper in wrappers_:
         wrapper.tag = wrapper.tag.append(_tags.SHIFTED_CLEF)
         wrapper.tag = wrapper.tag.append(measure_number_tag)
@@ -483,7 +482,7 @@ def clef_shift_function(
         width = clef._to_width[clef.name]
         extra_offset_x = -width
     pair = (extra_offset_x, 0)
-    wrappers_ = clef_extra_offset_function(leaf, pair)
+    wrappers_ = clef_extra_offset_function(argument, pair)
     for wrapper in wrappers_:
         wrapper.tag = wrapper.tag.append(_tags.SHIFTED_CLEF)
         wrapper.tag = wrapper.tag.append(measure_number_tag)
@@ -932,11 +931,9 @@ def hairpin_start_shift_function(
     width = dynamic._to_width[str(dynamic.name)]
     extra_offset_x = -width
     hairpin_shorten_left = width - 1.25
-    # TODO: pass 'argument' instead of 'leaf'
-    leaf = abjad.select.leaf(argument, 0)
-    wrappers_ = dynamic_text_extra_offset_function(leaf, (extra_offset_x, 0))
+    wrappers_ = dynamic_text_extra_offset_function(argument, (extra_offset_x, 0))
     wrappers.extend(wrappers_)
-    wrappers_ = dynamic_text_x_extent_zero_function(leaf)
+    wrappers_ = dynamic_text_x_extent_zero_function(argument)
     wrappers.extend(wrappers_)
     wrappers_ = hairpin_shorten_pair_function(argument, (hairpin_shorten_left, 0))
     wrappers.extend(wrappers_)
@@ -1047,12 +1044,10 @@ def mmrest_transparent(
 
 def mmrest_transparent_function(argument) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
-    # TODO: force _select.mmrests() in calling code
-    mmrests = _select.mmrests(leaves)
     first_tag = _tags.function_name(_frame(), n=1)
     final_tag = _tags.function_name(_frame(), n=2)
     return _do_override_command(
-        mmrests,
+        leaves,
         "MultiMeasureRest",
         "transparent",
         True,
@@ -2189,17 +2184,10 @@ def text_script_down(
 def text_script_extra_offset_function(
     argument,
     pair: tuple[int | float, int | float],
-    *,
-    # TODO: remove allow_mmrests
-    allow_mmrests: bool = False,
 ) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     final_tag = _tags.function_name(_frame(), n=2)
-    # TODO: remove blocklist
-    blocklist = []
-    if allow_mmrests is not True:
-        blocklist.append(abjad.MultimeasureRest)
     return _do_override_command(
         leaves,
         "TextScript",
@@ -2207,11 +2195,6 @@ def text_script_extra_offset_function(
         f"#'({pair[0]} . {pair[1]})",
         first_tag,
         final_tag,
-        # after=after,
-        # allowlist=None,
-        blocklist=tuple(blocklist),
-        # context=context,
-        # deactivate=False,
     )
 
 
@@ -2272,20 +2255,10 @@ def text_script_padding(
     )
 
 
-def text_script_padding_function(
-    argument,
-    n: int | float,
-    *,
-    # TODO: remove allow_mmrests
-    allow_mmrests: bool = False,
-) -> list[abjad.Wrapper]:
+def text_script_padding_function(argument, n: int | float) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     final_tag = _tags.function_name(_frame(), n=2)
-    # TODO: remove blocklist
-    blocklist = []
-    if allow_mmrests is not True:
-        blocklist.append(abjad.MultimeasureRest)
     return _do_override_command(
         leaves,
         "TextScript",
@@ -2293,11 +2266,6 @@ def text_script_padding_function(
         str(n),
         first_tag,
         final_tag,
-        # after=after,
-        # allowlist=None,
-        blocklist=tuple(blocklist),
-        # context=context,
-        # deactivate=False,
     )
 
 
@@ -2323,17 +2291,10 @@ def text_script_parent_alignment_x(
 def text_script_parent_alignment_x_function(
     argument,
     n: int | float,
-    *,
-    # TODO: remove allow_mmrests
-    allow_mmrests: bool = False,
 ) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     final_tag = _tags.function_name(_frame(), n=2)
-    # TODO: remove blocklist
-    blocklist = []
-    if allow_mmrests is not True:
-        blocklist.append(abjad.MultimeasureRest)
     return _do_override_command(
         leaves,
         "TextScript",
@@ -2341,11 +2302,6 @@ def text_script_parent_alignment_x_function(
         n,
         first_tag,
         final_tag,
-        # after=after,
-        # allowlist=None,
-        blocklist=tuple(blocklist),
-        # context=context,
-        # deactivate=False,
     )
 
 
@@ -2371,16 +2327,10 @@ def text_script_self_alignment_x(
 def text_script_self_alignment_x_function(
     argument,
     n: int | float,
-    *,
-    # TODO: remove allow_mmrests
-    allow_mmrests: bool = False,
 ) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     final_tag = _tags.function_name(_frame(), n=2)
-    blocklist = []
-    if allow_mmrests is not True:
-        blocklist.append(abjad.MultimeasureRest)
     return _do_override_command(
         leaves,
         "TextScript",
@@ -2388,11 +2338,6 @@ def text_script_self_alignment_x_function(
         n,
         first_tag,
         final_tag,
-        # after=after,
-        # allowlist=None,
-        blocklist=tuple(blocklist),
-        # context=context,
-        # deactivate=False,
     )
 
 
@@ -2418,16 +2363,10 @@ def text_script_staff_padding(
 def text_script_staff_padding_function(
     argument,
     n: int | float,
-    *,
-    # TODO: remove allow_mmrests
-    allow_mmrests: bool = False,
 ) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
     first_tag = _tags.function_name(_frame(), n=1)
     final_tag = _tags.function_name(_frame(), n=2)
-    blocklist = []
-    if allow_mmrests is not True:
-        blocklist.append(abjad.MultimeasureRest)
     return _do_override_command(
         leaves,
         "TextScript",
@@ -2435,11 +2374,6 @@ def text_script_staff_padding_function(
         n,
         first_tag,
         final_tag,
-        # after=after,
-        # allowlist=None,
-        blocklist=tuple(blocklist),
-        # context=context,
-        # deactivate=False,
     )
 
 

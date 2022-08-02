@@ -552,9 +552,9 @@ def not_score(command: Command | Suite) -> Command | Suite:
 
 def not_section(command: Command | Suite) -> Command | Suite:
     """
-    Tags ``command`` with ``-SEGMENT``.
+    Tags ``command`` with ``-SECTION``.
     """
-    return tag(_tags.NOT_SEGMENT, command)
+    return tag(_tags.NOT_SECTION, command)
 
 
 def only_mol(command: Command | Suite) -> Command | Suite:
@@ -663,10 +663,9 @@ def only_score(command: Command | Suite) -> Command | Suite:
 
 def only_section(command: Command | Suite) -> Command | Suite:
     """
-    Tags ``command`` with ``+SEGMENT``.
+    Tags ``command`` with ``+SECTION``.
     """
-    # TODO: change tag name to _tags.ONLY_SECTION
-    return tag(_tags.ONLY_SEGMENT, command)
+    return tag(_tags.ONLY_SECTION, command)
 
 
 def suite(*commands: Command | Suite, **keywords) -> Suite:

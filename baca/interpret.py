@@ -269,7 +269,7 @@ def _attach_nonfirst_empty_start_bar(global_skips):
     first_skip = _select.skip(global_skips, 0)
     literal = abjad.LilyPondLiteral(r'\bar ""')
     tag = _tags.EMPTY_START_BAR
-    tag = tag.append(_tags.ONLY_SEGMENT)
+    tag = tag.append(_tags.ONLY_SECTION)
     abjad.attach(
         literal,
         first_skip,
@@ -608,7 +608,7 @@ def _attach_sounds_during(score):
     for voice in abjad.iterate.components(score, abjad.Voice):
         pleaves = _select.pleaves(voice)
         if bool(pleaves):
-            abjad.attach(_enums.SOUNDS_DURING_SEGMENT, voice)
+            abjad.attach(_enums.SOUNDS_DURING_SECTION, voice)
 
 
 def _bracket_metric_modulation(metronome_mark, metric_modulation):
@@ -878,7 +878,7 @@ def _check_duplicate_part_assignments(dictionary, part_manifest):
 
 
 def _check_persistent_indicators(do_not_require_short_instrument_names, score):
-    indicator = _enums.SOUNDS_DURING_SEGMENT
+    indicator = _enums.SOUNDS_DURING_SECTION
     for voice in abjad.iterate.components(score, abjad.Voice):
         if not abjad.get.has_indicator(voice, indicator):
             continue
