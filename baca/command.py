@@ -46,46 +46,6 @@ class Scope:
         assert isinstance(self.voice_name, str), repr(self.voice_name)
 
 
-# TODO: frozen=True
-@dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
-class TimelineScope:
-    """
-    Timeline scope.
-
-    ..  container:: example
-
-        >>> scope = baca.timeline([
-        ...     ("Piano.Music", (5, 9)),
-        ...     ("Clarinet.Music", (7, 12)),
-        ...     ("Violin.Music", (8, 12)),
-        ...     ("Oboe.Music", (9, 12)),
-        ... ])
-
-        >>> for _ in scope.scopes: _
-        Scope(measures=(5, 9), voice_name='Piano.Music')
-        Scope(measures=(7, 12), voice_name='Clarinet.Music')
-        Scope(measures=(8, 12), voice_name='Violin.Music')
-        Scope(measures=(9, 12), voice_name='Oboe.Music')
-
-    """
-
-    scopes: typing.Any = None
-
-    voice_name: typing.ClassVar[str] = "TimelineScope"
-
-    def __post_init__(self):
-        if self.scopes is not None:
-            assert isinstance(self.scopes, tuple | list)
-            scopes_ = []
-            for scope in self.scopes:
-                if not isinstance(scope, Scope):
-                    scope = Scope(*scope)
-                scopes_.append(scope)
-            scopes = scopes_
-            scopes = tuple(scopes)
-            self.scopes = scopes
-
-
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Command:
     """
@@ -96,7 +56,7 @@ class Command:
     map: typing.Any = None
     match: _typings.Indices = None
     measures: _typings.Slice = None
-    scope: Scope | TimelineScope | None = None
+    scope: Scope | None = None
     selector: typing.Callable = lambda _: abjad.select.leaves(_, exclude=_enums.HIDDEN)
     tag_measure_number: bool = False
     tags: list[abjad.Tag] = dataclasses.field(default_factory=list)
@@ -739,20 +699,9 @@ def tag(
             pass
         assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
         command.tags.extend(tags)
-        # command.deactivate = deactivate
-        # command.tag_measure_number = tag_measure_number
         command = dataclasses.replace(
             command,
             deactivate=deactivate,
             tag_measure_number=tag_measure_number,
         )
     return command
-
-
-def timeline(scopes) -> TimelineScope:
-    scopes_ = []
-    for scope in scopes:
-        voice_name, measures = scope
-        scope_ = Scope(measures=measures, voice_name=voice_name)
-        scopes_.append(scope_)
-    return TimelineScope(scopes=scopes_)

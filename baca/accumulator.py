@@ -75,13 +75,11 @@ def _unpack_scope_pair(scopes, abbreviations):
         for measure_token in measure_tokens:
             scope = _command.Scope(measures=measure_token, voice_name=voice_name)
             scopes_.append(scope)
-    prototype = (_command.Scope, _command.TimelineScope)
-    assert all(isinstance(_, prototype) for _ in scopes_)
+    assert all(isinstance(_, _command.Scope) for _ in scopes_)
     return scopes_
 
 
 def _unpack_scopes(scopes, abbreviations):
-    scope_type = (_command.Scope, _command.TimelineScope)
     if isinstance(scopes, str):
         result = abbreviations.get(scopes, scopes)
         if isinstance(result, str):
@@ -95,7 +93,7 @@ def _unpack_scopes(scopes, abbreviations):
             scopes__.append(scope)
     elif isinstance(scopes, tuple):
         scopes__ = _unpack_scope_pair(scopes, abbreviations)
-    elif isinstance(scopes, scope_type):
+    elif isinstance(scopes, _command.Scope):
         scopes__ = [scopes]
     else:
         assert isinstance(scopes, list), repr(scopes)
@@ -134,7 +132,7 @@ def _unpack_scopes(scopes, abbreviations):
 
 
 def get_voice_names(score):
-    voice_names = ["Skips", "Rests", "TimelineScope"]
+    voice_names = ["Skips", "Rests"]
     for voice in abjad.iterate.components(score, abjad.Voice):
         if voice.name is not None:
             voice_names.append(voice.name)
@@ -196,8 +194,7 @@ class CommandAccumulator:
         scopes_ = _unpack_scopes(scopes, abbreviations)
         for scope_ in scopes_:
             assert scope_.voice_name != "Skips", repr(scope_)
-        scope_type = (_command.Scope, _command.TimelineScope)
-        assert all(isinstance(_, scope_type) for _ in scopes_), repr(scopes_)
+        assert all(isinstance(_, _command.Scope) for _ in scopes_), repr(scopes_)
         for command in commands:
             if command is None:
                 continue
@@ -211,11 +208,6 @@ class CommandAccumulator:
         for i, current_scope in enumerate(scopes_):
             if self.voice_names and current_scope.voice_name not in self.voice_names:
                 raise Exception(f"unknown voice name {current_scope.voice_name!r}.")
-            if isinstance(current_scope, _command.TimelineScope):
-                for scope_ in current_scope.scopes:
-                    if scope_.voice_name in abbreviations:
-                        voice_name = abbreviations[scope_.voice_name]
-                        scope_.voice_name = voice_name
             for command in commands:
                 if command is None:
                     continue

@@ -2115,19 +2115,14 @@ def _scope_to_leaf_selection(
         else:
             raise Exception(message)
     assert all(isinstance(_, abjad.Leaf) for _ in selection), repr(selection)
-    if isinstance(command.scope, _command.TimelineScope):
-        selection = _select.sort_by_timeline(selection)
     return selection, cache
 
 
 def _scope_to_leaf_selections(score, cache, measure_count, scope):
     if cache is None:
         cache = cache_leaves(score, measure_count)
-    if isinstance(scope, _command.Scope):
-        scopes = [scope]
-    else:
-        assert isinstance(scope, _command.TimelineScope)
-        scopes = list(scope.scopes)
+    assert isinstance(scope, _command.Scope), repr(scope)
+    scopes = [scope]
     leaf_selections = []
     for scope in scopes:
         leaves = []
