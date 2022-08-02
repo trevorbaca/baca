@@ -1611,10 +1611,7 @@ def close_volta_function(skip, first_measure_number, site: str = "before"):
         measure_number += 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
     wrappers = _overridecommands.bar_line_x_extent([skip], (0, 1.5), after=after)
-    for wrapper in wrappers:
-        wrapper.tag = wrapper.tag.append(tag)
-        wrapper.tag = wrapper.tag.append(measure_number_tag)
-        wrapper.tag = wrapper.tag.append(_tags.ONLY_MOL)
+    _tags.wrappers(wrappers, tag, measure_number_tag, _tags.ONLY_MOL)
 
 
 def color(
@@ -1654,15 +1651,9 @@ def double_volta_function(skip, first_measure_number):
     measure_number += first_measure_number - 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
     wrappers = _overridecommands.bar_line_x_extent([skip], (0, 3))
-    for wrapper in wrappers:
-        wrapper.tag = wrapper.tag.append(tag)
-        wrapper.tag = wrapper.tag.append(_tags.NOT_MOL)
-        wrapper.tag = wrapper.tag.append(measure_number_tag)
+    _tags.wrappers(wrappers, tag, _tags.NOT_MOL, measure_number_tag)
     wrappers = _overridecommands.bar_line_x_extent([skip], (0, 4))
-    for wrapper in wrappers:
-        wrapper.tag = wrapper.tag.append(tag)
-        wrapper.tag = wrapper.tag.append(_tags.ONLY_MOL)
-        wrapper.tag = wrapper.tag.append(measure_number_tag)
+    _tags.wrappers(wrappers, tag, _tags.ONLY_MOL, measure_number_tag)
 
 
 def dynamic_down(
@@ -2204,15 +2195,9 @@ def open_volta_function(skip, first_measure_number):
     measure_number += first_measure_number - 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
     wrappers = _overridecommands.bar_line_x_extent([skip], (0, 2))
-    for wrapper in wrappers:
-        wrapper.tag = wrapper.tag.append(tag)
-        wrapper.tag = wrapper.tag.append(_tags.NOT_MOL)
-        wrapper.tag = wrapper.tag.append(measure_number_tag)
+    _tags.wrappers(wrappers, tag, _tags.NOT_MOL, measure_number_tag)
     wrappers = _overridecommands.bar_line_x_extent([skip], (0, 3))
-    for wrapper in wrappers:
-        wrapper.tag = wrapper.tag.append(tag)
-        wrapper.tag = wrapper.tag.append(_tags.ONLY_MOL)
-        wrapper.tag = wrapper.tag.append(measure_number_tag)
+    _tags.wrappers(wrappers, tag, _tags.ONLY_MOL, measure_number_tag)
 
 
 def previous_metadata(path: str, file_name: str = "__metadata__"):

@@ -416,6 +416,23 @@ def function_name(frame, self=None, *, n=None):
     return abjad.Tag(string)
 
 
+def has_persistence_tag(tag):
+    """
+    Is true when tag has persistence tag.
+
+    ..  container:: example
+
+        >>> baca.tags.has_persistence_tag(abjad.Tag("FOO"))
+        False
+
+    """
+    tags = persistent_indicator_tags()
+    for word in tag.words():
+        if type(tag)(word) in tags:
+            return True
+    return False
+
+
 def instrument_color_tags(path=None):
     """
     Gets instrument color tags.
@@ -1063,18 +1080,7 @@ def time_signature_color_tags(path=None):
     return tags
 
 
-def has_persistence_tag(tag):
-    """
-    Is true when tag has persistence tag.
-
-    ..  container:: example
-
-        >>> baca.tags.has_persistence_tag(abjad.Tag("FOO"))
-        False
-
-    """
-    tags = persistent_indicator_tags()
-    for word in tag.words():
-        if type(tag)(word) in tags:
-            return True
-    return False
+def wrappers(wrappers: list[abjad.Wrapper], *tags: abjad.Tag):
+    for wrapper in wrappers:
+        for tag in tags:
+            wrapper.tag = wrapper.tag.append(tag)
