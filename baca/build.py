@@ -1154,7 +1154,7 @@ def make_layout_ly(
         del context[curtail_measure_count:]
     context.lilypond_type = "PageLayout"
     context.name = "PageLayout"
-    skips = baca.skips(context)
+    skips = baca.select.skips(context)
     for skip in skips:
         abjad.detach(abjad.TimeSignature, skip)
     score = lilypond_file["Score"]

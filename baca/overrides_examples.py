@@ -1946,7 +1946,7 @@ overrides.py examples.
 
     >>> def selector(argument):
     ...     selection = abjad.select.tuplets(argument)
-    ...     items = [baca.tleaves(_) for _ in selection]
+    ...     items = [baca.select.tleaves(_) for _ in selection]
     ...     selection = abjad.select.nontrivial(items)
     ...     return selection
     ...
@@ -2029,7 +2029,7 @@ overrides.py examples.
 
     >>> def selector(argument):
     ...     selection = abjad.select.tuplets(argument)
-    ...     items = [baca.tleaves(_) for _ in selection]
+    ...     items = [baca.select.tleaves(_) for _ in selection]
     ...     selection = abjad.select.nontrivial(items)
     ...     return selection
     ...

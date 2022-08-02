@@ -72,7 +72,6 @@ from .piecewisecommands import (
 )
 from .pitchcommands import *
 from .rhythmcommands import *
-from .select import *
 from .spannercommands import (
     beam,
     beam_function,
