@@ -1326,6 +1326,38 @@ def spazzolato_spanner(
     return result
 
 
+def spazzolato_spanner_function(
+    argument,
+    *tweaks: _typings.IndexedTweak,
+    # NOTE: autodetect default differs from text_spanner():
+    autodetect_right_padding: bool = True,
+    items: str | list = r"\baca-spazzolato-markup =|",
+    left_broken: bool = False,
+    left_broken_text: str | None = r"\baca-left-broken-spazz-markup",
+    map=None,
+    match: _typings.Indices = None,
+    measures: _typings.Slice = None,
+    pieces: typing.Callable = lambda _: abjad.select.group(_),
+    right_broken: bool = False,
+) -> list[abjad.Wrapper]:
+    tag = _tags.function_name(_frame())
+    tag = tag.append(_tags.SPAZZOLATO_SPANNER)
+    wrappers = text_spanner_function(
+        argument,
+        items,
+        *tweaks,
+        autodetect_right_padding=autodetect_right_padding,
+        bookend=False,
+        left_broken=left_broken,
+        left_broken_text=left_broken_text,
+        lilypond_id="Spazzolato",
+        pieces=pieces,
+        right_broken=right_broken,
+    )
+    _tags.wrappers(wrappers, tag)
+    return wrappers
+
+
 def string_number_spanner(
     items: str | list,
     *tweaks: _typings.IndexedTweak,

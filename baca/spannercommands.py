@@ -217,6 +217,7 @@ def beam_function(
     stop_beam = stop_beam or abjad.StopBeam()
     assert isinstance(start_beam, abjad.StartBeam), repr(start_beam)
     assert isinstance(stop_beam, abjad.StopBeam), repr(stop_beam)
+    start_beam = _tweaks.bundle_tweaks(start_beam, tweaks)
     return _attach_start_stop_indicators(
         leaves,
         tag=_tags.function_name(_frame()),
@@ -390,6 +391,7 @@ def trill_spanner(
     )
 
 
+# TODO: change 'leaves' to 'argument'
 def trill_spanner_function(
     leaves: typing.Sequence[abjad.Leaf],
     *tweaks: abjad.Tweak,
@@ -405,6 +407,7 @@ def trill_spanner_function(
         start_trill_span=start_trill_span,
         stop_trill_span=stop_trill_span,
     )
+    start_trill_span_ = _tweaks.bundle_tweaks(start_trill_span_, tweaks)
     return _attach_start_stop_indicators(
         leaves,
         tag=_tags.function_name(_frame()),

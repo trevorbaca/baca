@@ -2587,6 +2587,9 @@ class DynamicScope:
     def leaves(self):
         return abjad.select.leaves(self.argument, exclude=_enums.HIDDEN)
 
+    def mmrest(self, n):
+        return _select.mmrest(self.argument, n, exclude=_enums.HIDDEN)
+
     def mmrests(self):
         return _select.mmrests(self.argument, exclude=_enums.HIDDEN)
 

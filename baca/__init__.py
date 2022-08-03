@@ -63,6 +63,7 @@ from .piecewisecommands import (
     rhythm_annotation_spanner,
     scp_spanner,
     spazzolato_spanner,
+    spazzolato_spanner_function,
     string_number_spanner,
     tasto_spanner,
     text_spanner,
