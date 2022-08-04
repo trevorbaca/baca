@@ -62,6 +62,7 @@ from .piecewisecommands import (
     pizzicato_spanner,
     rhythm_annotation_spanner,
     scp_spanner,
+    scp_spanner_function,
     spazzolato_spanner,
     spazzolato_spanner_function,
     string_number_spanner,
@@ -69,7 +70,9 @@ from .piecewisecommands import (
     text_spanner,
     text_spanner_function,
     vibrato_spanner,
+    vibrato_spanner_function,
     xfb_spanner,
+    xfb_spanner_function,
 )
 from .pitchcommands import *
 from .rhythmcommands import *

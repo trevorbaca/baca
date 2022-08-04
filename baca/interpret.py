@@ -2587,6 +2587,9 @@ class DynamicScope:
     def leaves(self):
         return abjad.select.leaves(self.argument, exclude=_enums.HIDDEN)
 
+    def ltleaves(self):
+        return _select.ltleaves(self.argument, exclude=_enums.HIDDEN)
+
     def mmrest(self, n):
         return _select.mmrest(self.argument, n, exclude=_enums.HIDDEN)
 
@@ -2604,6 +2607,9 @@ class DynamicScope:
 
     def pleaves(self):
         return _select.pleaves(self.argument, exclude=_enums.HIDDEN)
+
+    def plt(self, n):
+        return _select.plt(self.argument, n, exclude=_enums.HIDDEN)
 
     def plts(self):
         return _select.plts(self.argument, exclude=_enums.HIDDEN)

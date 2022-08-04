@@ -449,7 +449,7 @@ def _prepare_text_spanner_arguments(
             item_markup = rf'- \baca-text-spanner-left-text "{item}"'
         else:
             item_markup = item
-            assert isinstance(item_markup, abjad.Markup)
+            assert isinstance(item_markup, abjad.Markup), repr(item_markup)
             string = item_markup.string
             item_markup = abjad.Markup(r"\upright {string}")
             assert isinstance(item_markup, abjad.Markup)
@@ -1290,6 +1290,36 @@ def scp_spanner(
     return result
 
 
+def scp_spanner_function(
+    argument,
+    items: str | list,
+    *tweaks: _typings.IndexedTweak,
+    autodetect_right_padding: bool = True,
+    bookend: bool | int = False,
+    final_piece_spanner: bool | None = None,
+    left_broken: bool = False,
+    left_broken_text: str = None,
+    pieces: typing.Callable = lambda _: abjad.select.group(_),
+    right_broken: bool = False,
+) -> list[abjad.Wrapper]:
+    tag = _tags.function_name(_frame())
+    tag = tag.append(_tags.SCP_SPANNER)
+    wrappers = text_spanner_function(
+        argument,
+        items,
+        *tweaks,
+        autodetect_right_padding=autodetect_right_padding,
+        bookend=bookend,
+        left_broken=left_broken,
+        left_broken_text=left_broken_text,
+        lilypond_id="SCP",
+        pieces=pieces,
+        right_broken=right_broken,
+    )
+    _tags.wrappers(wrappers, tag)
+    return wrappers
+
+
 def spazzolato_spanner(
     *tweaks: _typings.IndexedTweak,
     # NOTE: autodetect default differs from text_spanner():
@@ -1572,6 +1602,36 @@ def vibrato_spanner(
     return result
 
 
+def vibrato_spanner_function(
+    argument,
+    items: str | list,
+    *tweaks: _typings.IndexedTweak,
+    autodetect_right_padding: bool = True,
+    bookend: bool | int = False,
+    final_piece_spanner: bool | None = None,
+    left_broken: bool = False,
+    left_broken_text: str = None,
+    pieces: typing.Callable = lambda _: abjad.select.group(_),
+    right_broken: bool = False,
+) -> list[abjad.Wrapper]:
+    tag = _tags.function_name(_frame())
+    tag = tag.append(_tags.VIBRATO_SPANNER)
+    wrappers = text_spanner_function(
+        argument,
+        items,
+        *tweaks,
+        autodetect_right_padding=autodetect_right_padding,
+        bookend=bookend,
+        left_broken=left_broken,
+        left_broken_text=left_broken_text,
+        lilypond_id="Vibrato",
+        pieces=pieces,
+        right_broken=right_broken,
+    )
+    _tags.wrappers(wrappers, tag)
+    return wrappers
+
+
 def xfb_spanner(
     *tweaks: _typings.IndexedTweak,
     autodetect_right_padding: bool = True,
@@ -1607,3 +1667,32 @@ def xfb_spanner(
     result = dataclasses.replace(command, tags=[tag])
     assert isinstance(result, PiecewiseCommand)
     return result
+
+
+def xfb_spanner_function(
+    argument,
+    *tweaks: _typings.IndexedTweak,
+    autodetect_right_padding: bool = True,
+    bookend: bool | int = False,
+    final_piece_spanner: bool | None = None,
+    left_broken: bool = False,
+    left_broken_text: str = r"\baca-left-broken-xfb-markup",
+    pieces: typing.Callable = lambda _: abjad.select.group(_),
+    right_broken: bool = False,
+) -> list[abjad.Wrapper]:
+    tag = _tags.function_name(_frame())
+    tag = tag.append(_tags.BOW_SPEED_SPANNER)
+    wrappers = text_spanner_function(
+        argument,
+        "XFB =|",
+        *tweaks,
+        autodetect_right_padding=autodetect_right_padding,
+        bookend=bookend,
+        left_broken=left_broken,
+        left_broken_text=left_broken_text,
+        lilypond_id="BowSpeed",
+        pieces=pieces,
+        right_broken=right_broken,
+    )
+    _tags.wrappers(wrappers, tag)
+    return wrappers
