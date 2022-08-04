@@ -364,9 +364,6 @@ def _do_staff_position_command(
                 plt,
                 pitches,
                 allow_hidden=allow_hidden,
-                # allow_repitch=self.allow_repitch,
-                # mock=self.mock,
-                # set_chord_pitches_equal=self.set_chord_pitches_equal,
                 allow_repitch=allow_repitch,
                 mock=mock,
                 set_chord_pitches_equal=set_chord_pitches_equal,
@@ -381,9 +378,6 @@ def _do_staff_position_command(
                 plt,
                 pitch,
                 allow_hidden=allow_hidden,
-                # allow_repitch=self.allow_repitch,
-                # mock=self.mock,
-                # set_chord_pitches_equal=self.set_chord_pitches_equal,
                 allow_repitch=allow_repitch,
                 mock=mock,
                 set_chord_pitches_equal=set_chord_pitches_equal,
@@ -403,6 +397,99 @@ def _do_staff_position_command(
         message += f" staff position count ({len(numbers)})."
         raise Exception(message)
     return mutated_score
+
+
+def _do_staff_position_interpolation_command(
+    argument,
+    start,
+    stop,
+    *,
+    allow_hidden=False,
+    mock=False,
+    pitches_instead_of_staff_positions=False,
+):
+    plts = _select.plts(argument)
+    if not plts:
+        return False
+    count = len(plts)
+    if isinstance(start, abjad.StaffPosition):
+        start_staff_position = start
+    else:
+        start_phead = plts[0].head
+        clef = abjad.get.effective(start_phead, abjad.Clef)
+        start_staff_position = clef.to_staff_position(start)
+    if isinstance(stop, abjad.StaffPosition):
+        stop_staff_position = stop
+    else:
+        stop_phead = plts[-1].head
+        clef = abjad.get.effective(
+            stop_phead,
+            abjad.Clef,
+            default=abjad.Clef("treble"),
+        )
+        stop_staff_position = clef.to_staff_position(stop)
+    unit_distance = abjad.Fraction(
+        stop_staff_position.number - start_staff_position.number, count - 1
+    )
+    for i, plt in enumerate(plts):
+        staff_position = unit_distance * i + start_staff_position.number
+        staff_position = round(staff_position)
+        staff_position = abjad.StaffPosition(staff_position)
+        clef = abjad.get.effective(
+            plt.head,
+            abjad.Clef,
+            default=abjad.Clef("treble"),
+        )
+        pitch = clef.to_pitch(staff_position)
+        new_lt = _set_lt_pitch(
+            plt,
+            pitch,
+            allow_hidden=allow_hidden,
+            allow_repitch=True,
+            mock=mock,
+        )
+        assert new_lt is None, repr(new_lt)
+        for leaf in plt:
+            abjad.attach(_enums.ALLOW_REPEAT_PITCH, leaf)
+            if not pitches_instead_of_staff_positions:
+                abjad.attach(_enums.STAFF_POSITION, leaf)
+    if isinstance(start, abjad.NamedPitch):
+        start_pitch = start
+    else:
+        assert isinstance(start, abjad.StaffPosition)
+        clef = abjad.get.effective(
+            plts[0],
+            abjad.Clef,
+            default=abjad.Clef("treble"),
+        )
+        start_pitch = clef.to_pitch(start)
+    new_lt = _set_lt_pitch(
+        plts[0],
+        start_pitch,
+        allow_hidden=allow_hidden,
+        allow_repitch=True,
+        mock=mock,
+    )
+    assert new_lt is None, repr(new_lt)
+    if isinstance(stop, abjad.NamedPitch):
+        stop_pitch = stop
+    else:
+        assert isinstance(stop, abjad.StaffPosition)
+        clef = abjad.get.effective(
+            plts[0],
+            abjad.Clef,
+            default=abjad.Clef("treble"),
+        )
+        stop_pitch = clef.to_pitch(stop)
+    new_lt = _set_lt_pitch(
+        plts[-1],
+        stop_pitch,
+        allow_hidden=allow_hidden,
+        allow_repitch=True,
+        mock=mock,
+    )
+    assert new_lt is None, repr(new_lt)
+    return False
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -3641,87 +3728,14 @@ class StaffPositionInterpolationCommand(_command.Command):
             return False
         if self.selector:
             argument = self.selector(argument)
-        plts = _select.plts(argument)
-        if not plts:
-            return False
-        count = len(plts)
-        if isinstance(self.start, abjad.StaffPosition):
-            start_staff_position = self.start
-        else:
-            start_phead = plts[0].head
-            clef = abjad.get.effective(start_phead, abjad.Clef)
-            start_staff_position = clef.to_staff_position(self.start)
-        if isinstance(self.stop, abjad.StaffPosition):
-            stop_staff_position = self.stop
-        else:
-            stop_phead = plts[-1].head
-            clef = abjad.get.effective(
-                stop_phead,
-                abjad.Clef,
-                default=abjad.Clef("treble"),
-            )
-            stop_staff_position = clef.to_staff_position(self.stop)
-        unit_distance = abjad.Fraction(
-            stop_staff_position.number - start_staff_position.number, count - 1
-        )
-        for i, plt in enumerate(plts):
-            staff_position = unit_distance * i + start_staff_position.number
-            staff_position = round(staff_position)
-            staff_position = abjad.StaffPosition(staff_position)
-            clef = abjad.get.effective(
-                plt.head,
-                abjad.Clef,
-                default=abjad.Clef("treble"),
-            )
-            pitch = clef.to_pitch(staff_position)
-            new_lt = _set_lt_pitch(
-                plt,
-                pitch,
-                allow_hidden=self.allow_hidden,
-                allow_repitch=True,
-                mock=self.mock,
-            )
-            assert new_lt is None, repr(new_lt)
-            for leaf in plt:
-                abjad.attach(_enums.ALLOW_REPEAT_PITCH, leaf)
-                if not self.pitches_instead_of_staff_positions:
-                    abjad.attach(_enums.STAFF_POSITION, leaf)
-        if isinstance(self.start, abjad.NamedPitch):
-            start_pitch = self.start
-        else:
-            assert isinstance(self.start, abjad.StaffPosition)
-            clef = abjad.get.effective(
-                plts[0],
-                abjad.Clef,
-                default=abjad.Clef("treble"),
-            )
-            start_pitch = clef.to_pitch(self.start)
-        new_lt = _set_lt_pitch(
-            plts[0],
-            start_pitch,
+        _do_staff_position_interpolation_command(
+            argument,
+            self.start,
+            self.stop,
             allow_hidden=self.allow_hidden,
-            allow_repitch=True,
             mock=self.mock,
+            pitches_instead_of_staff_positions=self.pitches_instead_of_staff_positions,
         )
-        assert new_lt is None, repr(new_lt)
-        if isinstance(self.stop, abjad.NamedPitch):
-            stop_pitch = self.stop
-        else:
-            assert isinstance(self.stop, abjad.StaffPosition)
-            clef = abjad.get.effective(
-                plts[0],
-                abjad.Clef,
-                default=abjad.Clef("treble"),
-            )
-            stop_pitch = clef.to_pitch(self.stop)
-        new_lt = _set_lt_pitch(
-            plts[-1],
-            stop_pitch,
-            allow_hidden=self.allow_hidden,
-            allow_repitch=True,
-            mock=self.mock,
-        )
-        assert new_lt is None, repr(new_lt)
         return False
 
 
@@ -4432,6 +4446,27 @@ def interpolate_pitches(
     )
 
 
+def interpolate_pitches_function(
+    argument,
+    start: int | str | abjad.NamedPitch,
+    stop: int | str | abjad.NamedPitch,
+    *,
+    allow_hidden: bool = False,
+    mock: bool = False,
+) -> None:
+    start_ = abjad.NamedPitch(start)
+    stop_ = abjad.NamedPitch(stop)
+    _do_staff_position_interpolation_command(
+        argument,
+        start_,
+        stop_,
+        allow_hidden=allow_hidden,
+        mock=mock,
+        pitches_instead_of_staff_positions=True,
+    )
+
+
+# TODO: change naming
 _interpolate_pitches_function = interpolate_pitches
 
 

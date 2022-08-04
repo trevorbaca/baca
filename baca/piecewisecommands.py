@@ -737,6 +737,46 @@ def clb_spanner(
     return result
 
 
+def clb_spanner_function(
+    argument,
+    string_number: int,
+    *tweaks: _typings.IndexedTweak,
+    # NOTE: autodetect default differs from text_spanner():
+    autodetect_right_padding: bool = True,
+    left_broken: bool = False,
+    left_broken_text: str | None = r"\baca-left-broken-clb-markup",
+    pieces: typing.Callable = lambda _: abjad.select.group(_),
+    right_broken: bool = False,
+) -> list[abjad.Wrapper]:
+    tag = _tags.function_name(_frame())
+    tag = tag.append(_tags.CLB_SPANNER)
+    assert string_number in (1, 2, 3, 4), repr(string_number)
+    if string_number == 1:
+        markup = r"\baca-damp-clb-one-markup"
+    elif string_number == 2:
+        markup = r"\baca-damp-clb-two-markup"
+    elif string_number == 3:
+        markup = r"\baca-damp-clb-three-markup"
+    elif string_number == 4:
+        markup = r"\baca-damp-clb-four-markup"
+    else:
+        raise Exception(string_number)
+    wrappers = text_spanner_function(
+        argument,
+        f"{markup} =|",
+        *tweaks,
+        autodetect_right_padding=autodetect_right_padding,
+        bookend=False,
+        left_broken=left_broken,
+        left_broken_text=left_broken_text,
+        lilypond_id="CLB",
+        pieces=pieces,
+        right_broken=right_broken,
+    )
+    _tags.wrappers(wrappers, tag)
+    return wrappers
+
+
 def covered_spanner(
     *tweaks: _typings.IndexedTweak,
     # NOTE: autodetect default differs from text_spanner():
@@ -957,6 +997,31 @@ def material_annotation_spanner(
     result = dataclasses.replace(command, tags=[tag])
     assert isinstance(result, PiecewiseCommand)
     return result
+
+
+def material_annotation_spanner_function(
+    argument,
+    items: str | list,
+    *tweaks: _typings.IndexedTweak,
+    left_broken: bool = False,
+    pieces: typing.Callable = lambda _: abjad.select.group(_),
+    right_broken: bool = False,
+) -> list[abjad.Wrapper]:
+    tag = _tags.function_name(_frame())
+    tag = tag.append(_tags.MATERIAL_ANNOTATION_SPANNER)
+    wrappers = text_spanner_function(
+        argument,
+        items,
+        *tweaks,
+        autodetect_right_padding=True,
+        bookend=False,
+        left_broken=left_broken,
+        lilypond_id="MaterialAnnotation",
+        pieces=pieces,
+        right_broken=right_broken,
+    )
+    _tags.wrappers(wrappers, tag)
+    return wrappers
 
 
 def metric_modulation_spanner(
