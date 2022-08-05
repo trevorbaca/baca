@@ -16,103 +16,25 @@ from . import typings as _typings
 from .enums import enums as _enums
 
 
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class SpannerIndicatorCommand(_command.Command):
-
-    detach_first: bool = False
-    direction: abjad.Vertical | None = None
-    left_broken: bool = False
-    right_broken: bool = False
-    start_indicator: typing.Any = None
-    stop_indicator: typing.Any = None
-    tweaks: tuple[_typings.IndexedTweak, ...] = ()
-
-    def __post_init__(self):
-        _command.Command.__post_init__(self)
-        assert isinstance(self.detach_first, bool), repr(self.detach_first)
-        assert isinstance(self.left_broken, bool), repr(self.left_broken)
-        assert isinstance(self.right_broken, bool), repr(self.right_broken)
-        _tweaks.validate_indexed_tweaks(self.tweaks)
-
-    def _call(self, *, argument=None, runtime=None) -> bool:
-        if argument is None:
-            return False
-        if self.start_indicator is None and self.stop_indicator is None:
-            return False
-        if self.selector:
-            argument = self.selector(argument)
-        if self.start_indicator is not None:
-            start_indicator = self.start_indicator
-            if self.detach_first:
-                for leaf in abjad.iterate.leaves(argument, grace=False):
-                    abjad.detach(type(start_indicator), leaf)
-            start_indicator = _tweaks.bundle_tweaks(start_indicator, self.tweaks)
-            first_leaf = abjad.select.leaf(argument, 0)
-            if self.left_broken:
-                self._attach_indicator(
-                    start_indicator,
-                    first_leaf,
-                    deactivate=self.deactivate,
-                    runtime=runtime,
-                    tag=_tags.function_name(_frame(), self, n=1)
-                    .append(_tags.SPANNER_START)
-                    .append(_tags.LEFT_BROKEN),
-                )
-            else:
-                self._attach_indicator(
-                    start_indicator,
-                    first_leaf,
-                    deactivate=self.deactivate,
-                    runtime=runtime,
-                    tag=_tags.function_name(_frame(), self, n=2).append(
-                        _tags.SPANNER_START
-                    ),
-                )
-        if self.stop_indicator is not None:
-            stop_indicator = self.stop_indicator
-            if self.detach_first:
-                for leaf in abjad.iterate.leaves(argument, grace=False):
-                    abjad.detach(type(stop_indicator), leaf)
-            final_leaf = abjad.select.leaf(argument, -1)
-            if self.right_broken:
-                self._attach_indicator(
-                    stop_indicator,
-                    final_leaf,
-                    deactivate=self.deactivate,
-                    runtime=runtime,
-                    tag=_tags.function_name(_frame(), self, n=3)
-                    .append(_tags.SPANNER_STOP)
-                    .append(_tags.RIGHT_BROKEN),
-                )
-            else:
-                self._attach_indicator(
-                    stop_indicator,
-                    final_leaf,
-                    deactivate=self.deactivate,
-                    runtime=runtime,
-                    tag=_tags.function_name(_frame(), self, n=4).append(
-                        _tags.SPANNER_STOP
-                    ),
-                )
-        return False
-
-    def _attach_indicator(
-        self, indicator, leaf, *, deactivate=None, runtime=None, tag=None
-    ):
-        assert isinstance(tag, abjad.Tag), repr(tag)
-        reapplied = _treat.remove_reapplied_wrappers(leaf, indicator)
-        tag_ = self.tag.append(tag)
-        wrapper = abjad.attach(
-            indicator,
-            leaf,
-            deactivate=deactivate,
-            direction=self.direction,
-            tag=tag_,
-            wrapper=True,
-        )
-        if _treat.compare_persistent_indicators(indicator, reapplied):
-            status = "redundant"
-            _treat.treat_persistent_wrapper(runtime["manifests"], wrapper, status)
+def _attach_indicator(
+    indicator, leaf, *, deactivate=None, direction=None, manifests=None, tag=None
+):
+    assert isinstance(tag, abjad.Tag), repr(tag)
+    reapplied = _treat.remove_reapplied_wrappers(leaf, indicator)
+    # tag_ = self.tag.append(tag)
+    tag_ = tag
+    wrapper = abjad.attach(
+        indicator,
+        leaf,
+        deactivate=deactivate,
+        # direction=self.direction,
+        direction=direction,
+        tag=tag_,
+        wrapper=True,
+    )
+    if _treat.compare_persistent_indicators(indicator, reapplied):
+        status = "redundant"
+        _treat.treat_persistent_wrapper(manifests, wrapper, status)
 
 
 def _attach_start_stop_indicators(
@@ -144,6 +66,98 @@ def _attach_start_stop_indicators(
             wrapper=True,
         )
         wrappers.append(wrapper)
+    return wrappers
+
+
+def _do_spanner_indicator_command(
+    argument,
+    start_indicator,
+    stop_indicator,
+    *tweaks,
+    deactivate=False,
+    detach_first=False,
+    direction=None,
+    left_broken=False,
+    manifests=None,
+    right_broken=False,
+) -> list[abjad.Wrapper]:
+    manifests = manifests or {}
+    wrappers = []
+    # if self.start_indicator is not None:
+    if start_indicator is not None:
+        # if self.detach_first:
+        if detach_first:
+            for leaf in abjad.iterate.leaves(argument, grace=False):
+                abjad.detach(type(start_indicator), leaf)
+        # start_indicator = _tweaks.bundle_tweaks(start_indicator, self.tweaks)
+        start_indicator = _tweaks.bundle_tweaks(start_indicator, tweaks)
+        first_leaf = abjad.select.leaf(argument, 0)
+        # if self.left_broken:
+        if left_broken:
+            # self._attach_indicator(
+            wrapper = _attach_indicator(
+                start_indicator,
+                first_leaf,
+                # deactivate=self.deactivate,
+                deactivate=deactivate,
+                direction=direction,
+                # runtime=runtime,
+                manifests=manifests,
+                tag=_tags.function_name(_frame(), n=1)
+                .append(_tags.SPANNER_START)
+                .append(_tags.LEFT_BROKEN),
+            )
+            wrappers.append(wrapper)
+        else:
+            # self._attach_indicator(
+            wrapper = _attach_indicator(
+                start_indicator,
+                first_leaf,
+                # deactivate=self.deactivate,
+                deactivate=deactivate,
+                direction=direction,
+                # runtime=runtime,
+                manifests=manifests,
+                tag=_tags.function_name(_frame(), n=2).append(_tags.SPANNER_START),
+            )
+            wrappers.append(wrapper)
+    # if self.stop_indicator is not None:
+    if stop_indicator is not None:
+        # stop_indicator = self.stop_indicator
+        # if self.detach_first:
+        if detach_first:
+            for leaf in abjad.iterate.leaves(argument, grace=False):
+                abjad.detach(type(stop_indicator), leaf)
+        final_leaf = abjad.select.leaf(argument, -1)
+        # if self.right_broken:
+        if right_broken:
+            # self._attach_indicator(
+            wrapper = _attach_indicator(
+                stop_indicator,
+                final_leaf,
+                # deactivate=self.deactivate,
+                deactivate=deactivate,
+                direction=direction,
+                # runtime=runtime,
+                manifests=manifests,
+                tag=_tags.function_name(_frame(), n=3)
+                .append(_tags.SPANNER_STOP)
+                .append(_tags.RIGHT_BROKEN),
+            )
+            wrappers.append(wrapper)
+        else:
+            # self._attach_indicator(
+            wrapper = _attach_indicator(
+                stop_indicator,
+                final_leaf,
+                # deactivate=self.deactivate,
+                deactivate=deactivate,
+                direction=direction,
+                # runtime=runtime,
+                manifests=manifests,
+                tag=_tags.function_name(_frame(), n=4).append(_tags.SPANNER_STOP),
+            )
+            wrappers.append(wrapper)
     return wrappers
 
 
@@ -182,6 +196,46 @@ def _prepare_trill_spanner_arguments(
         start_trill_span_ = abjad.bundle(start_trill_span_, string)
     stop_trill_span = stop_trill_span or abjad.StopTrillSpan()
     return start_trill_span_, stop_trill_span
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class SpannerIndicatorCommand(_command.Command):
+
+    detach_first: bool = False
+    direction: abjad.Vertical | None = None
+    left_broken: bool = False
+    right_broken: bool = False
+    start_indicator: typing.Any = None
+    stop_indicator: typing.Any = None
+    tweaks: tuple[_typings.IndexedTweak, ...] = ()
+
+    def __post_init__(self):
+        _command.Command.__post_init__(self)
+        assert isinstance(self.detach_first, bool), repr(self.detach_first)
+        assert isinstance(self.left_broken, bool), repr(self.left_broken)
+        assert isinstance(self.right_broken, bool), repr(self.right_broken)
+        _tweaks.validate_indexed_tweaks(self.tweaks)
+
+    def _call(self, *, argument=None, runtime=None) -> bool:
+        if argument is None:
+            return False
+        if self.start_indicator is None and self.stop_indicator is None:
+            return False
+        if self.selector:
+            argument = self.selector(argument)
+        _do_spanner_indicator_command(
+            argument,
+            self.start_indicator,
+            self.stop_indicator,
+            *self.tweaks,
+            deactivate=self.deactivate,
+            detach_first=self.detach_first,
+            direction=self.direction,
+            left_broken=self.left_broken,
+            manifests=runtime.get("manifests", {}),
+            right_broken=self.right_broken,
+        )
+        return False
 
 
 def beam(
@@ -246,21 +300,22 @@ def ottava(
 def ottava_function(
     leaves: typing.Sequence[abjad.Leaf],
     *,
+    # TODO: remove allow_rests keyword
     allow_rests: bool = False,
     start_ottava: abjad.Ottava = abjad.Ottava(n=1),
     stop_ottava: abjad.Ottava = abjad.Ottava(n=0, site="after"),
-    # right_broken: bool = False,
+    right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
     if not allow_rests:
         leaves = _select.tleaves(leaves)
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
     assert isinstance(start_ottava, abjad.Ottava), repr(start_ottava)
     assert isinstance(stop_ottava, abjad.Ottava), repr(stop_ottava)
-    return _attach_start_stop_indicators(
+    return _do_spanner_indicator_command(
         leaves,
-        tag=_tags.function_name(_frame()),
-        start_indicator=start_ottava,
-        stop_indicator=stop_ottava,
+        start_ottava,
+        stop_ottava,
+        right_broken=right_broken,
     )
 
 
