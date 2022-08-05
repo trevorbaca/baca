@@ -4642,15 +4642,12 @@ def pitch_function(
     allow_repitch: bool = False,
     mock: bool = False,
     do_not_transpose: bool = False,
-    persist: str = None,
 ) -> bool:
     assert isinstance(pitch, str | list | tuple | abjad.Pitch), repr(pitch)
     if isinstance(pitch, list | tuple) and len(pitch) == 1:
         raise Exception(f"one-note chord {pitch!r}?")
     assert isinstance(allow_out_of_range, bool), repr(allow_out_of_range)
     assert isinstance(do_not_transpose, bool), repr(do_not_transpose)
-    if persist is not None:
-        assert isinstance(persist, str), repr(persist)
     cyclic = True
     result = _do_pitch_command(
         argument,
@@ -4666,6 +4663,7 @@ def pitch_function(
     return mutated_score
 
 
+# TODO: rename
 _pitch_command_factory = pitch
 
 
@@ -4712,6 +4710,7 @@ def pitches(
     )
 
 
+# TODO: rename
 _pitches_command_factory = pitches
 
 
@@ -4723,11 +4722,12 @@ def pitches_function(
     allow_octaves: bool = False,
     allow_repeats: bool = False,
     allow_repitch: bool = False,
+    metadata: dict = None,
     mock: bool = False,
     do_not_transpose: bool = False,
     exact: bool = False,
     ignore_incomplete: bool = False,
-    persist: str = None,
+    persist: str = "",
 ) -> bool:
     if do_not_transpose not in (None, True, False):
         raise Exception(f"do_not_transpose must be boolean (not {do_not_transpose!r}).")
@@ -4741,8 +4741,12 @@ def pitches_function(
         )
     if ignore_incomplete is True and not persist:
         raise Exception("ignore_incomplete is ignored when persist is not set.")
-    if persist is not None and not isinstance(persist, str):
-        raise Exception(f"persist name must be string (not {persist!r}).")
+    if metadata is not None:
+        assert isinstance(metadata, dict), repr(metadata)
+        assert persist, repr(persist)
+    assert isinstance(persist, str), repr(persist)
+    if persist:
+        assert isinstance(metadata, dict), repr(metadata)
     result = _do_pitch_command(
         argument,
         cyclic,
@@ -4755,6 +4759,10 @@ def pitches_function(
         mock=mock,
     )
     pitches_consumed, mutated_score = result
+    if persist:
+        assert isinstance(metadata, dict), repr(metadata)
+        dictionary = {"name": persist, "pitches_consumed": pitches_consumed}
+        metadata.setdefault("PITCH", dictionary)
     return mutated_score
 
 
