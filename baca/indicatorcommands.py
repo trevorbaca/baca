@@ -434,6 +434,21 @@ def quadruple_staccato(
     )
 
 
+def quadruple_staccato_function(argument) -> list[abjad.Wrapper]:
+    wrappers = []
+    tag = _tags.function_name(_frame())
+    for leaf in abjad.iterate.leaves(argument):
+        indicator = abjad.Articulation("baca-staccati #4")
+        wrapper = abjad.attach(
+            indicator,
+            leaf,
+            tag=tag,
+            wrapper=True,
+        )
+        wrappers.append(wrapper)
+    return wrappers
+
+
 def short_fermata(
     selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> _commands.IndicatorCommand:
