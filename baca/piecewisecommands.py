@@ -1491,6 +1491,36 @@ def string_number_spanner(
     return result
 
 
+def string_number_spanner_function(
+    argument,
+    items: str | list,
+    *tweaks: _typings.IndexedTweak,
+    autodetect_right_padding: bool = True,
+    bookend: bool | int = False,
+    final_piece_spanner: bool | None = None,
+    left_broken: bool = False,
+    left_broken_text: str = None,
+    pieces: typing.Callable = lambda _: abjad.select.group(_),
+    right_broken: bool = False,
+) -> list[abjad.Wrapper]:
+    tag = _tags.function_name(_frame())
+    tag = tag.append(_tags.STRING_NUMBER_SPANNER)
+    wrappers = text_spanner_function(
+        argument,
+        items,
+        *tweaks,
+        autodetect_right_padding=autodetect_right_padding,
+        bookend=bookend,
+        left_broken=left_broken,
+        left_broken_text=left_broken_text,
+        lilypond_id="StringNumber",
+        pieces=pieces,
+        right_broken=right_broken,
+    )
+    _tags.wrappers(wrappers, tag)
+    return wrappers
+
+
 def tasto_spanner(
     *tweaks: _typings.IndexedTweak,
     autodetect_right_padding: bool = True,

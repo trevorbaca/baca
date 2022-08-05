@@ -68,6 +68,7 @@ from .piecewisecommands import (
     spazzolato_spanner,
     spazzolato_spanner_function,
     string_number_spanner,
+    string_number_spanner_function,
     tasto_spanner,
     text_spanner,
     text_spanner_function,
