@@ -195,145 +195,6 @@ def _do_register_command(argument, registration):
             abjad.detach(_enums.NOT_YET_REGISTERED, pleaf)
 
 
-def _get_registration(start_pitch, stop_pitch, i, length):
-    start_pitch = start_pitch.number
-    stop_pitch = stop_pitch.number
-    compass = stop_pitch - start_pitch
-    fraction = abjad.Fraction(i, length)
-    addendum = fraction * compass
-    current_pitch = start_pitch + addendum
-    current_pitch = int(current_pitch)
-    return _pcollections.Registration(
-        [
-            _pcollections.RegistrationComponent(
-                abjad.PitchRange("[A0, C8]"), abjad.NumberedPitch(current_pitch)
-            )
-        ]
-    )
-
-
-def _make_cluster(
-    plt, width, *, direction=abjad.UP, hide_flat_markup=False, start_pitch=None
-):
-    assert plt.is_pitched, repr(plt)
-    assert isinstance(width, int), repr(width)
-    if start_pitch is None:
-        start_pitch = plt.head.written_pitch
-    pitches = _make_cluster_pitches(start_pitch, width)
-    key_cluster = abjad.KeyCluster(include_flat_markup=(not hide_flat_markup))
-    for pleaf in plt:
-        chord = abjad.Chord(pitches, pleaf.written_duration)
-        wrappers = abjad.get.wrappers(pleaf)
-        abjad.detach(object, pleaf)
-        for wrapper in wrappers:
-            abjad.attach(wrapper, chord, direction=wrapper.direction)
-        abjad.mutate.replace(pleaf, chord)
-        abjad.attach(key_cluster, chord, direction=direction)
-        abjad.attach(_enums.ALLOW_REPEAT_PITCH, chord)
-        abjad.detach(_enums.NOT_YET_PITCHED, chord)
-    return chord
-
-
-def _make_cluster_pitches(start_pitch, width):
-    pitches = [start_pitch]
-    for i in range(width - 1):
-        pitch = pitches[-1] + abjad.NamedInterval("M3")
-        pitch = abjad.NamedPitch(pitch, accidental="natural")
-        assert pitch.accidental == abjad.Accidental("natural")
-        pitches.append(pitch)
-    return pitches
-
-
-def _parse_string(string):
-    items, current_chord = [], []
-    for part in string.split():
-        if "<" in part:
-            assert not current_chord
-            current_chord.append(part)
-        elif ">" in part:
-            assert current_chord
-            current_chord.append(part)
-            item = " ".join(current_chord)
-            items.append(item)
-            current_chord = []
-        elif current_chord:
-            current_chord.append(part)
-        else:
-            items.append(part)
-    assert not current_chord, repr(current_chord)
-    return items
-
-
-def _set_lt_pitch(
-    lt,
-    pitch,
-    *,
-    allow_hidden=False,
-    allow_repitch=False,
-    mock=False,
-    set_chord_pitches_equal=False,
-):
-    new_lt = None
-    already_pitched = _enums.ALREADY_PITCHED
-    for leaf in lt:
-        if not allow_hidden and abjad.get.has_indicator(leaf, _enums.HIDDEN):
-            continue
-        abjad.detach(_enums.NOT_YET_PITCHED, leaf)
-        if mock is True:
-            abjad.attach(_enums.MOCK, leaf)
-        if allow_repitch:
-            continue
-        if abjad.get.has_indicator(leaf, already_pitched):
-            voice = abjad.get.parentage(leaf).get(abjad.Voice)
-            if voice is None:
-                name = "no voice"
-            else:
-                name = voice.name
-            raise Exception(f"already pitched {repr(leaf)} in {name}.")
-        abjad.attach(already_pitched, leaf)
-    if pitch is None:
-        if not lt.is_pitched:
-            pass
-        else:
-            for leaf in lt:
-                rest = abjad.Rest(leaf.written_duration, multiplier=leaf.multiplier)
-                abjad.mutate.replace(leaf, rest, wrappers=True)
-            new_lt = abjad.get.logical_tie(rest)
-    elif isinstance(pitch, collections.abc.Iterable):
-        if isinstance(lt.head, abjad.Chord):
-            for chord in lt:
-                chord.written_pitches = pitch
-        else:
-            assert isinstance(lt.head, abjad.Note | abjad.Rest)
-            for leaf in lt:
-                chord = abjad.Chord(
-                    pitch,
-                    leaf.written_duration,
-                    multiplier=leaf.multiplier,
-                )
-                abjad.mutate.replace(leaf, chord, wrappers=True)
-            new_lt = abjad.get.logical_tie(chord)
-    else:
-        if isinstance(lt.head, abjad.Note):
-            for note in lt:
-                note.written_pitch = pitch
-        elif set_chord_pitches_equal is True and isinstance(lt.head, abjad.Chord):
-            for chord in lt:
-                for note_head in chord.note_heads:
-                    note_head.written_pitch = pitch
-        else:
-            assert isinstance(lt.head, abjad.Chord | abjad.Rest)
-            for leaf in lt:
-                note = abjad.Note(
-                    pitch,
-                    leaf.written_duration,
-                    multiplier=leaf.multiplier,
-                )
-                abjad.mutate.replace(leaf, note, wrappers=True)
-            new_lt = abjad.get.logical_tie(note)
-    return new_lt
-
-
 def _do_staff_position_command(
     argument,
     numbers,
@@ -490,6 +351,167 @@ def _do_staff_position_interpolation_command(
     )
     assert new_lt is None, repr(new_lt)
     return False
+
+
+def _get_registration(start_pitch, stop_pitch, i, length):
+    start_pitch = start_pitch.number
+    stop_pitch = stop_pitch.number
+    compass = stop_pitch - start_pitch
+    fraction = abjad.Fraction(i, length)
+    addendum = fraction * compass
+    current_pitch = start_pitch + addendum
+    current_pitch = int(current_pitch)
+    return _pcollections.Registration(
+        [
+            _pcollections.RegistrationComponent(
+                abjad.PitchRange("[A0, C8]"), abjad.NumberedPitch(current_pitch)
+            )
+        ]
+    )
+
+
+def _make_cluster(
+    plt, width, *, direction=abjad.UP, hide_flat_markup=False, start_pitch=None
+):
+    assert plt.is_pitched, repr(plt)
+    assert isinstance(width, int), repr(width)
+    if start_pitch is None:
+        start_pitch = plt.head.written_pitch
+    pitches = _make_cluster_pitches(start_pitch, width)
+    key_cluster = abjad.KeyCluster(include_flat_markup=(not hide_flat_markup))
+    for pleaf in plt:
+        chord = abjad.Chord(pitches, pleaf.written_duration)
+        wrappers = abjad.get.wrappers(pleaf)
+        abjad.detach(object, pleaf)
+        for wrapper in wrappers:
+            abjad.attach(wrapper, chord, direction=wrapper.direction)
+        abjad.mutate.replace(pleaf, chord)
+        abjad.attach(key_cluster, chord, direction=direction)
+        abjad.attach(_enums.ALLOW_REPEAT_PITCH, chord)
+        abjad.detach(_enums.NOT_YET_PITCHED, chord)
+    return chord
+
+
+def _make_cluster_pitches(start_pitch, width):
+    pitches = [start_pitch]
+    for i in range(width - 1):
+        pitch = pitches[-1] + abjad.NamedInterval("M3")
+        pitch = abjad.NamedPitch(pitch, accidental="natural")
+        assert pitch.accidental == abjad.Accidental("natural")
+        pitches.append(pitch)
+    return pitches
+
+
+def _parse_string(string):
+    items, current_chord = [], []
+    for part in string.split():
+        if "<" in part:
+            assert not current_chord
+            current_chord.append(part)
+        elif ">" in part:
+            assert current_chord
+            current_chord.append(part)
+            item = " ".join(current_chord)
+            items.append(item)
+            current_chord = []
+        elif current_chord:
+            current_chord.append(part)
+        else:
+            items.append(part)
+    assert not current_chord, repr(current_chord)
+    return items
+
+
+# HERE
+def _previous_pitches_consumed(dictionary, persist, *, ignore_incomplete=False):
+    if not dictionary:
+        return 0
+    dictionary = dictionary.get(_enums.PITCH.name, None)
+    if not dictionary:
+        return 0
+    if dictionary.get("name") != persist:
+        return 0
+    pitches_consumed = dictionary.get("pitches_consumed", None)
+    if not pitches_consumed:
+        return 0
+    assert 1 <= pitches_consumed
+    if ignore_incomplete:
+        return pitches_consumed
+    dictionary = dictionary.get(_enums.RHYTHM.name, None)
+    if dictionary:
+        if dictionary.get("incomplete_final_note", False):
+            pitches_consumed -= 1
+    return pitches_consumed
+
+
+def _set_lt_pitch(
+    lt,
+    pitch,
+    *,
+    allow_hidden=False,
+    allow_repitch=False,
+    mock=False,
+    set_chord_pitches_equal=False,
+):
+    new_lt = None
+    already_pitched = _enums.ALREADY_PITCHED
+    for leaf in lt:
+        if not allow_hidden and abjad.get.has_indicator(leaf, _enums.HIDDEN):
+            continue
+        abjad.detach(_enums.NOT_YET_PITCHED, leaf)
+        if mock is True:
+            abjad.attach(_enums.MOCK, leaf)
+        if allow_repitch:
+            continue
+        if abjad.get.has_indicator(leaf, already_pitched):
+            voice = abjad.get.parentage(leaf).get(abjad.Voice)
+            if voice is None:
+                name = "no voice"
+            else:
+                name = voice.name
+            raise Exception(f"already pitched {repr(leaf)} in {name}.")
+        abjad.attach(already_pitched, leaf)
+    if pitch is None:
+        if not lt.is_pitched:
+            pass
+        else:
+            for leaf in lt:
+                rest = abjad.Rest(leaf.written_duration, multiplier=leaf.multiplier)
+                abjad.mutate.replace(leaf, rest, wrappers=True)
+            new_lt = abjad.get.logical_tie(rest)
+    elif isinstance(pitch, collections.abc.Iterable):
+        if isinstance(lt.head, abjad.Chord):
+            for chord in lt:
+                chord.written_pitches = pitch
+        else:
+            assert isinstance(lt.head, abjad.Note | abjad.Rest)
+            for leaf in lt:
+                chord = abjad.Chord(
+                    pitch,
+                    leaf.written_duration,
+                    multiplier=leaf.multiplier,
+                )
+                abjad.mutate.replace(leaf, chord, wrappers=True)
+            new_lt = abjad.get.logical_tie(chord)
+    else:
+        if isinstance(lt.head, abjad.Note):
+            for note in lt:
+                note.written_pitch = pitch
+        elif set_chord_pitches_equal is True and isinstance(lt.head, abjad.Chord):
+            for chord in lt:
+                for note_head in chord.note_heads:
+                    note_head.written_pitch = pitch
+        else:
+            assert isinstance(lt.head, abjad.Chord | abjad.Rest)
+            for leaf in lt:
+                note = abjad.Note(
+                    pitch,
+                    leaf.written_duration,
+                    multiplier=leaf.multiplier,
+                )
+                abjad.mutate.replace(leaf, note, wrappers=True)
+            new_lt = abjad.get.logical_tie(note)
+    return new_lt
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -4745,8 +4767,12 @@ def pitches_function(
         assert isinstance(metadata, dict), repr(metadata)
         assert persist, repr(persist)
     assert isinstance(persist, str), repr(persist)
+    previous_pitches_consumed = 0
     if persist:
         assert isinstance(metadata, dict), repr(metadata)
+        previous_pitches_consumed = _previous_pitches_consumed(
+            metadata, persist, ignore_incomplete=ignore_incomplete
+        )
     result = _do_pitch_command(
         argument,
         cyclic,
@@ -4757,12 +4783,15 @@ def pitches_function(
         allow_repitch=allow_repitch,
         do_not_transpose=do_not_transpose,
         mock=mock,
+        previous_pitches_consumed=previous_pitches_consumed,
     )
     pitches_consumed, mutated_score = result
     if persist:
+        pitches_consumed += previous_pitches_consumed
         assert isinstance(metadata, dict), repr(metadata)
         dictionary = {"name": persist, "pitches_consumed": pitches_consumed}
-        metadata.setdefault("PITCH", dictionary)
+        metadata.setdefault("PITCH", {})
+        metadata["PITCH"].update(dictionary)
     return mutated_score
 
 

@@ -2620,6 +2620,9 @@ class DynamicScope:
     def ptails(self):
         return _select.ptails(self.argument, exclude=_enums.HIDDEN)
 
+    def rest(self, n):
+        return abjad.select.rest(self.argument, n, exclude=_enums.HIDDEN)
+
     def rests(self):
         return abjad.select.rests(self.argument)
 
