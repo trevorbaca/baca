@@ -9,7 +9,7 @@ from inspect import currentframe as _frame
 import abjad
 
 from . import command as _command
-from . import commands as _commands
+from . import indicatorcommands as _indicatorcommands
 from . import select as _select
 from . import tags as _tags
 from . import treat as _treat
@@ -1167,7 +1167,7 @@ def parse_hairpin_descriptor(
     ] = []
     specifiers: list[_Specifier] = []
     for string in descriptor.split():
-        indicator = _commands.make_dynamic(
+        indicator = _indicatorcommands.make_dynamic(
             string, forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line
         )
         if _is_maybe_bundled(indicator, abjad.StartHairpin):

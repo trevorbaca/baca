@@ -3818,7 +3818,7 @@ overrides.py examples.
 """
 
 
-def example():
+def dummy():
     """
     Read module-level examples.
     """
