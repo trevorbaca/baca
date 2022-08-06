@@ -15,24 +15,8 @@ from . import typings as _typings
 from .enums import enums as _enums
 
 
-# TODO: remove deactivate
-# TODO: remove tag
-def _attach_indicator(indicator, leaf, *, deactivate=None, direction=None, tag=None):
-    assert isinstance(tag, abjad.Tag), repr(tag)
-    tag_ = tag
-    wrapper = abjad.attach(
-        indicator,
-        leaf,
-        deactivate=deactivate,
-        direction=direction,
-        tag=tag_,
-        wrapper=True,
-    )
-    return wrapper
-
-
-# TODO: remove deactivate
-# TODO: maybe remove detach_first?
+# TODO: remove deactivate (after migration)
+# TODO: remove detach_first
 def _do_spanner_indicator_command(
     argument,
     start_indicator,
@@ -46,83 +30,66 @@ def _do_spanner_indicator_command(
 ) -> list[abjad.Wrapper]:
     wrappers = []
     if start_indicator is not None:
+        start_indicator = _tweaks.bundle_tweaks(start_indicator, tweaks)
+        tag = _tags.function_name(_frame(), n=1)
+        tag = tag.append(_tags.SPANNER_START)
+        if left_broken:
+            tag = tag.append(_tags.LEFT_BROKEN)
         if detach_first:
             for leaf in abjad.iterate.leaves(argument, grace=False):
                 abjad.detach(type(start_indicator), leaf)
-        start_indicator = _tweaks.bundle_tweaks(start_indicator, tweaks)
         first_leaf = abjad.select.leaf(argument, 0)
-        if left_broken:
-            wrapper = _attach_indicator(
-                start_indicator,
-                first_leaf,
-                deactivate=deactivate,
-                direction=direction,
-                tag=_tags.function_name(_frame(), n=1)
-                .append(_tags.SPANNER_START)
-                .append(_tags.LEFT_BROKEN),
-            )
-            wrappers.append(wrapper)
-        else:
-            wrapper = _attach_indicator(
-                start_indicator,
-                first_leaf,
-                deactivate=deactivate,
-                direction=direction,
-                tag=_tags.function_name(_frame(), n=2).append(_tags.SPANNER_START),
-            )
-            wrappers.append(wrapper)
+        wrapper = abjad.attach(
+            start_indicator,
+            first_leaf,
+            deactivate=deactivate,
+            direction=direction,
+            tag=tag,
+            wrapper=True,
+        )
+        wrappers.append(wrapper)
     if stop_indicator is not None:
+        tag = _tags.function_name(_frame(), n=2)
+        tag = tag.append(_tags.SPANNER_STOP)
+        if right_broken:
+            tag = tag.append(_tags.RIGHT_BROKEN)
         if detach_first:
             for leaf in abjad.iterate.leaves(argument, grace=False):
                 abjad.detach(type(stop_indicator), leaf)
         final_leaf = abjad.select.leaf(argument, -1)
-        if right_broken:
-            wrapper = _attach_indicator(
-                stop_indicator,
-                final_leaf,
-                deactivate=deactivate,
-                direction=direction,
-                tag=_tags.function_name(_frame(), n=3)
-                .append(_tags.SPANNER_STOP)
-                .append(_tags.RIGHT_BROKEN),
-            )
-            wrappers.append(wrapper)
-        else:
-            wrapper = _attach_indicator(
-                stop_indicator,
-                final_leaf,
-                deactivate=deactivate,
-                direction=direction,
-                tag=_tags.function_name(_frame(), n=4).append(_tags.SPANNER_STOP),
-            )
-            wrappers.append(wrapper)
+        wrapper = abjad.attach(
+            stop_indicator,
+            final_leaf,
+            deactivate=deactivate,
+            direction=direction,
+            tag=tag,
+            wrapper=True,
+        )
+        wrappers.append(wrapper)
     return wrappers
 
 
-def _prepare_trill_spanner_arguments(
+def _prepare_start_trill_span(
     *,
     alteration,
     harmonic,
     start_trill_span,
-    stop_trill_span,
 ):
-    if alteration is not None:
-        prototype = (abjad.NamedPitch, abjad.NamedInterval, str)
-        if not isinstance(alteration, prototype):
-            message = "trill spanner 'alteration' must be pitch, interval, str:"
-            message += f"\n   {alteration}"
-            raise Exception(message)
+    assert isinstance(start_trill_span, abjad.StartTrillSpan), repr(start_trill_span)
     interval = pitch = None
     if alteration is not None:
+        prototype = (abjad.NamedPitch, abjad.NamedInterval, str)
+        assert isinstance(alteration, prototype), repr(alteration)
         try:
             pitch = abjad.NamedPitch(alteration)
         except Exception:
-            try:
-                interval = abjad.NamedInterval(alteration)
-            except Exception:
-                pass
+            pass
+        try:
+            interval = abjad.NamedInterval(alteration)
+        except Exception:
+            pass
     start_trill_span_: abjad.StartTrillSpan | abjad.Bundle
-    start_trill_span_ = start_trill_span or abjad.StartTrillSpan()
+    start_trill_span_ = start_trill_span
     if pitch is not None or interval is not None:
         start_trill_span_ = dataclasses.replace(
             start_trill_span_, interval=interval, pitch=pitch
@@ -132,8 +99,7 @@ def _prepare_trill_spanner_arguments(
         string += r' #{ \markup \musicglyph #"noteheads.s0harmonic" #}))'
         string = rf"- \tweak TrillPitchHead.stencil {string}"
         start_trill_span_ = abjad.bundle(start_trill_span_, string)
-    stop_trill_span = stop_trill_span or abjad.StopTrillSpan()
-    return start_trill_span_, stop_trill_span
+    return start_trill_span_
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -202,12 +168,11 @@ def beam_function(
 ) -> list[abjad.Wrapper]:
     assert isinstance(start_beam, abjad.StartBeam), repr(start_beam)
     assert isinstance(stop_beam, abjad.StopBeam), repr(stop_beam)
-    # TODO: maybe move bundling into _do_spanner_indicator_command()?
-    start_beam = _tweaks.bundle_tweaks(start_beam, tweaks)
     wrappers = _do_spanner_indicator_command(
         argument,
         start_beam,
         stop_beam,
+        *tweaks,
         detach_first=True,
         direction=direction,
     )
@@ -218,7 +183,6 @@ def beam_function(
 
 def ottava(
     start_ottava: abjad.Ottava = abjad.Ottava(n=1),
-    # TODO: remove "after" and force selector instead
     stop_ottava: abjad.Ottava = abjad.Ottava(n=0, site="after"),
     *,
     right_broken: bool = False,
@@ -239,7 +203,6 @@ def ottava_function(
     argument,
     *,
     start_ottava: abjad.Ottava = abjad.Ottava(n=1),
-    # TODO: remove "after" and force selector instead
     stop_ottava: abjad.Ottava = abjad.Ottava(n=0, site="after"),
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
@@ -255,7 +218,6 @@ def ottava_function(
 
 def ottava_bassa(
     start_ottava: abjad.Ottava = abjad.Ottava(n=-1),
-    # TODO: remove "after" and force selector instead
     stop_ottava: abjad.Ottava = abjad.Ottava(n=0, site="after"),
     *,
     selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
@@ -274,7 +236,6 @@ def ottava_bassa_function(
     argument,
     *,
     start_ottava: abjad.Ottava = abjad.Ottava(n=-1),
-    # TODO: remove "after" and force selector instead
     stop_ottava: abjad.Ottava = abjad.Ottava(n=0, site="after"),
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
@@ -328,13 +289,11 @@ def slur_function(
     else:
         start_slur_ = start_slur or abjad.StartSlur()
         stop_slur_ = stop_slur or abjad.StopSlur()
-    # TODO: maybe move bundling into _do_spanner_indicator_command()?
-    start_slur_ = _tweaks.bundle_tweaks(start_slur_, tweaks)
-    stop_slur_ = _tweaks.bundle_tweaks(stop_slur_, tweaks)
     wrappers = _do_spanner_indicator_command(
         argument,
         start_slur_,
         stop_slur_,
+        *tweaks,
     )
     tag = _tags.function_name(_frame())
     _tags.wrappers(wrappers, tag)
@@ -386,11 +345,10 @@ def trill_spanner(
     start_trill_span: abjad.StartTrillSpan = abjad.StartTrillSpan(),
     stop_trill_span: abjad.StopTrillSpan = abjad.StopTrillSpan(),
 ) -> SpannerIndicatorCommand:
-    start_trill_span_, stop_trill_span = _prepare_trill_spanner_arguments(
+    start_trill_span_ = _prepare_start_trill_span(
         alteration=alteration,
         harmonic=harmonic,
         start_trill_span=start_trill_span,
-        stop_trill_span=stop_trill_span,
     )
     return SpannerIndicatorCommand(
         left_broken=left_broken,
@@ -412,18 +370,16 @@ def trill_spanner_function(
     start_trill_span: abjad.StartTrillSpan = abjad.StartTrillSpan(),
     stop_trill_span: abjad.StopTrillSpan = abjad.StopTrillSpan(),
 ) -> list[abjad.Wrapper]:
-    start_trill_span_, stop_trill_span = _prepare_trill_spanner_arguments(
+    start_trill_span_ = _prepare_start_trill_span(
         alteration=alteration,
         harmonic=harmonic,
         start_trill_span=start_trill_span,
-        stop_trill_span=stop_trill_span,
     )
-    # TODO: maybe move bundling into _do_spanner_indicator_command()?
-    start_trill_span_ = _tweaks.bundle_tweaks(start_trill_span_, tweaks)
     wrappers = _do_spanner_indicator_command(
         argument,
         start_trill_span_,
         stop_trill_span,
+        *tweaks,
     )
     tag = _tags.function_name(_frame())
     _tags.wrappers(wrappers, tag)
