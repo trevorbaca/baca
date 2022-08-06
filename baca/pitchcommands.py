@@ -422,7 +422,6 @@ def _parse_string(string):
     return items
 
 
-# HERE
 def _previous_pitches_consumed(dictionary, persist, *, ignore_incomplete=False):
     if not dictionary:
         return 0

@@ -9,7 +9,7 @@ from inspect import currentframe as _frame
 import abjad
 
 from . import command as _command
-from . import indicatorcommands as _indicatorcommands
+from . import dynamics as _dynamics
 from . import select as _select
 from . import tags as _tags
 from . import treat as _treat
@@ -781,7 +781,7 @@ def covered_spanner(
     *tweaks: _typings.IndexedTweak,
     # NOTE: autodetect default differs from text_spanner():
     autodetect_right_padding: bool = True,
-    argument: str = r"\baca-covered-markup =|",
+    items: str = r"\baca-covered-markup =|",
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-covered-markup",
     map=None,
@@ -794,7 +794,7 @@ def covered_spanner(
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.COVERED_SPANNER)
     command = text_spanner(
-        argument,
+        items,
         *tweaks,
         autodetect_right_padding=autodetect_right_padding,
         bookend=False,
@@ -811,6 +811,35 @@ def covered_spanner(
     result = dataclasses.replace(command, tags=[tag])
     assert isinstance(result, PiecewiseCommand)
     return result
+
+
+def covered_spanner_function(
+    argument,
+    *tweaks: _typings.IndexedTweak,
+    # NOTE: autodetect default differs from text_spanner():
+    autodetect_right_padding: bool = True,
+    items: str = r"\baca-covered-markup =|",
+    left_broken: bool = False,
+    left_broken_text: str | None = r"\baca-left-broken-covered-markup",
+    pieces: typing.Callable = lambda _: abjad.select.group(_),
+    right_broken: bool = False,
+) -> list[abjad.Wrapper]:
+    tag = _tags.function_name(_frame())
+    tag = tag.append(_tags.COVERED_SPANNER)
+    wrappers = text_spanner_function(
+        argument,
+        items,
+        *tweaks,
+        autodetect_right_padding=autodetect_right_padding,
+        bookend=False,
+        left_broken=left_broken,
+        left_broken_text=left_broken_text,
+        lilypond_id="Covered",
+        pieces=pieces,
+        right_broken=right_broken,
+    )
+    _tags.wrappers(wrappers, tag)
+    return wrappers
 
 
 def damp_spanner(
@@ -1026,7 +1055,7 @@ def material_annotation_spanner_function(
 
 def metric_modulation_spanner(
     *tweaks: _typings.IndexedTweak,
-    argument: str = r"MM =|",
+    items: str = r"MM =|",
     autodetect_right_padding: bool = True,
     left_broken: bool = False,
     map=None,
@@ -1036,11 +1065,10 @@ def metric_modulation_spanner(
     right_broken: bool = False,
     selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> PiecewiseCommand:
-    # TODO: tag red tweak with METRIC_MODULATION_SPANNER_COLOR
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.METRIC_MODULATION_SPANNER)
     command = text_spanner(
-        argument,
+        items,
         *tweaks,
         autodetect_right_padding=autodetect_right_padding,
         bookend=False,
@@ -1056,6 +1084,32 @@ def metric_modulation_spanner(
     result = dataclasses.replace(command, tags=[tag])
     assert isinstance(result, PiecewiseCommand)
     return result
+
+
+def metric_modulation_spanner_function(
+    argument,
+    *tweaks: _typings.IndexedTweak,
+    items: str = r"MM =|",
+    autodetect_right_padding: bool = True,
+    left_broken: bool = False,
+    pieces: typing.Callable = lambda _: abjad.select.group(_),
+    right_broken: bool = False,
+) -> list[abjad.Wrapper]:
+    tag = _tags.function_name(_frame())
+    tag = tag.append(_tags.METRIC_MODULATION_SPANNER)
+    wrappers = text_spanner_function(
+        argument,
+        items,
+        *tweaks,
+        autodetect_right_padding=autodetect_right_padding,
+        bookend=False,
+        left_broken=left_broken,
+        lilypond_id="MetricModulation",
+        pieces=pieces,
+        right_broken=right_broken,
+    )
+    _tags.wrappers(wrappers, tag)
+    return wrappers
 
 
 def parse_hairpin_descriptor(
@@ -1167,7 +1221,7 @@ def parse_hairpin_descriptor(
     ] = []
     specifiers: list[_Specifier] = []
     for string in descriptor.split():
-        indicator = _indicatorcommands.make_dynamic(
+        indicator = _dynamics.make_dynamic(
             string, forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line
         )
         if _is_maybe_bundled(indicator, abjad.StartHairpin):
