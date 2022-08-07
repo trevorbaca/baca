@@ -996,6 +996,32 @@ def half_clt_spanner(
     return result
 
 
+def half_clt_spanner_function(
+    argument,
+    *tweaks: _typings.IndexedTweak,
+    left_broken: bool = False,
+    left_broken_text: str | None = r"\baca-left-broken-half-clt-markup",
+    pieces: typing.Callable = lambda _: abjad.select.group(_),
+    right_broken: bool = False,
+) -> list[abjad.Wrapper]:
+    tag = _tags.function_name(_frame())
+    tag = tag.append(_tags.HALF_CLT_SPANNER)
+    wrappers = text_spanner_function(
+        argument,
+        "½ clt =|",
+        *tweaks,
+        autodetect_right_padding=True,
+        bookend=False,
+        left_broken=left_broken,
+        left_broken_text=left_broken_text,
+        lilypond_id="HalfCLT",
+        pieces=pieces,
+        right_broken=right_broken,
+    )
+    _tags.wrappers(wrappers, tag)
+    return wrappers
+
+
 def material_annotation_spanner(
     items: str | list,
     *tweaks: _typings.IndexedTweak,

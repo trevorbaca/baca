@@ -57,6 +57,7 @@ from .piecewisecommands import (
     hairpin,
     hairpin_function,
     half_clt_spanner,
+    half_clt_spanner_function,
     material_annotation_spanner,
     material_annotation_spanner_function,
     metric_modulation_spanner,

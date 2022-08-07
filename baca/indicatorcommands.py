@@ -1785,7 +1785,7 @@ def up_bow(
 
 
 def up_bow_function(
-    argument, *tweaks: abjad.Tweak, full: bool = True
+    argument, *tweaks: abjad.Tweak, full: bool = False
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
