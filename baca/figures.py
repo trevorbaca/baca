@@ -457,13 +457,13 @@ class Contribution:
 class FigureAccumulator:
 
     __slots__ = (
-        "_current_offset",
-        "_figure_number",
-        "_figure_names",
-        "_floating_selections",
-        "_music_maker",
-        "_score_stop_offset",
-        "_voice_names",
+        "current_offset",
+        "figure_number",
+        "figure_names",
+        "floating_selections",
+        "music_maker",
+        "score_stop_offset",
+        "voice_names",
         "score",
         "time_signatures",
         "voice_abbreviations",
@@ -476,12 +476,12 @@ class FigureAccumulator:
         voice_names = []
         for voice in abjad.iterate.components(score, abjad.Voice):
             voice_names.append(voice.name)
-        self._voice_names = voice_names
-        self._current_offset = abjad.Offset(0)
-        self._figure_number = 1
-        self._figure_names: list[str] = []
-        self._floating_selections = self._make_voice_dictionary()
-        self._score_stop_offset = abjad.Offset(0)
+        self.voice_names = voice_names
+        self.current_offset = abjad.Offset(0)
+        self.figure_number = 1
+        self.figure_names: list[str] = []
+        self.floating_selections = self._make_voice_dictionary()
+        self.score_stop_offset = abjad.Offset(0)
         self.time_signatures: list[abjad.TimeSignature] = []
 
     def __call__(
@@ -514,7 +514,7 @@ class FigureAccumulator:
         for command in commands_:
             if isinstance(command, Imbrication):
                 voice_name_ = self._abbreviation(command.voice_name)
-                command._voice_name = voice_name_
+                command.voice_name = voice_name_
         command = None
         maker = None
         selection: list
@@ -577,7 +577,7 @@ class FigureAccumulator:
         self._cache_floating_selection(contribution)
         self._cache_time_signature(contribution)
         if not do_not_label:
-            self._figure_number += 1
+            self.figure_number += 1
 
     def _abbreviation(self, voice_name):
         return self.voice_abbreviations.get(voice_name, voice_name)
@@ -585,10 +585,10 @@ class FigureAccumulator:
     def _cache_figure_name(self, contribution):
         if not contribution.figure_name:
             return
-        if contribution.figure_name in self._figure_names:
+        if contribution.figure_name in self.figure_names:
             name = contribution.figure_name
             raise Exception(f"duplicate figure name: {name!r}.")
-        self._figure_names.append(contribution.figure_name)
+        self.figure_names.append(contribution.figure_name)
 
     def _cache_floating_selection(self, contribution):
         for voice_name in contribution:
@@ -604,9 +604,9 @@ class FigureAccumulator:
                 timespan.stop_offset,
                 annotation=selection,
             )
-            self._floating_selections[voice_name].append(floating_selection)
-        self._current_offset = stop_offset
-        self._score_stop_offset = max(self._score_stop_offset, stop_offset)
+            self.floating_selections[voice_name].append(floating_selection)
+        self.current_offset = stop_offset
+        self.score_stop_offset = max(self.score_stop_offset, stop_offset)
 
     def _cache_time_signature(self, contribution):
         if contribution.hide_time_signature:
@@ -619,8 +619,8 @@ class FigureAccumulator:
             self.time_signatures.append(contribution.time_signature)
 
     def _get_figure_start_offset(self, figure_name):
-        for voice_name in sorted(self._floating_selections.keys()):
-            for floating_selection in self._floating_selections[voice_name]:
+        for voice_name in sorted(self.floating_selections.keys()):
+            for floating_selection in self.floating_selections[voice_name]:
                 leaf_start_offset = floating_selection.start_offset
                 leaves = abjad.iterate.leaves(floating_selection.annotation)
                 for leaf in leaves:
@@ -668,15 +668,15 @@ class FigureAccumulator:
             remote_selector = None
             use_remote_stop_offset = None
         if not anchored:
-            return self._current_offset
+            return self.current_offset
         if anchored and remote_voice_name is None:
-            return self._score_stop_offset
+            return self.score_stop_offset
         if remote_selector is None:
 
             def remote_selector(argument):
                 return abjad.select.leaf(argument, 0)
 
-        floating_selections = self._floating_selections[remote_voice_name]
+        floating_selections = self.floating_selections[remote_voice_name]
         selections = [_.annotation for _ in floating_selections]
         result = remote_selector(selections)
         selected_leaves = list(abjad.iterate.leaves(result))
@@ -703,7 +703,7 @@ class FigureAccumulator:
         return start_offset
 
     def _label_figure(self, container, figure_name, figure_label_direction):
-        figure_number = self._figure_number
+        figure_number = self.figure_number
         parts = figure_name.split("_")
         if len(parts) == 1:
             body = parts[0]
@@ -735,10 +735,10 @@ class FigureAccumulator:
         )
 
     def _make_voice_dictionary(self):
-        return dict([(_, []) for _ in self._voice_names])
+        return dict([(_, []) for _ in self.voice_names])
 
     def assemble(self, voice_name) -> list | None:
-        floating_selections = self._floating_selections[voice_name]
+        floating_selections = self.floating_selections[voice_name]
         total_duration = sum([_.duration for _ in self.time_signatures])
         for floating_selection in floating_selections:
             assert isinstance(floating_selection, abjad.Timespan)
@@ -780,7 +780,7 @@ class FigureAccumulator:
         return fused_selection
 
     def populate_commands(self, score, commands):
-        for voice_name in sorted(self._floating_selections):
+        for voice_name in sorted(self.floating_selections):
             selection = self.assemble(voice_name)
             if not selection:
                 continue
@@ -788,7 +788,7 @@ class FigureAccumulator:
             voice.extend(selection)
 
 
-@dataclasses.dataclass(slots=True)
+@dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
 class FigureMaker:
 
     talea: rmakers.Talea
@@ -1162,14 +1162,14 @@ class FigureMaker:
 class Imbrication:
 
     __slots__ = (
-        "_allow_unused_pitches",
-        "_by_pitch_class",
-        "_commands",
-        "_hocket",
-        "_segment",
-        "_selector",
-        "_truncate_ties",
-        "_voice_name",
+        "allow_unused_pitches",
+        "by_pitch_class",
+        "commands",
+        "hocket",
+        "segment",
+        "selector",
+        "truncate_ties",
+        "voice_name",
     )
 
     def __init__(
@@ -1184,23 +1184,23 @@ class Imbrication:
         truncate_ties: bool = False,
     ) -> None:
         assert isinstance(voice_name, str), repr(voice_name)
-        self._voice_name = voice_name
+        self.voice_name = voice_name
         if segment is not None:
             assert isinstance(segment, list), repr(segment)
-        self._segment = segment
-        self._commands = commands
+        self.segment = segment
+        self.commands = commands
         assert isinstance(allow_unused_pitches, bool), repr(allow_unused_pitches)
-        self._allow_unused_pitches = allow_unused_pitches
+        self.allow_unused_pitches = allow_unused_pitches
         assert isinstance(by_pitch_class, bool), repr(by_pitch_class)
-        self._by_pitch_class = by_pitch_class
+        self.by_pitch_class = by_pitch_class
         assert isinstance(hocket, bool), repr(hocket)
-        self._hocket = hocket
+        self.hocket = hocket
         if selector is not None:
             if not callable(selector):
                 raise TypeError(f"callable or none only: {selector!r}.")
-        self._selector = selector
+        self.selector = selector
         assert isinstance(truncate_ties, bool), repr(truncate_ties)
-        self._truncate_ties = truncate_ties
+        self.truncate_ties = truncate_ties
 
     def __call__(self, container: abjad.Container = None) -> dict[str, list]:
         original_container = container
@@ -1309,38 +1309,6 @@ class Imbrication:
         if nested_selections is not None:
             return nested_selections
         return selections
-
-    @property
-    def allow_unused_pitches(self) -> bool | None:
-        return self._allow_unused_pitches
-
-    @property
-    def by_pitch_class(self) -> bool | None:
-        return self._by_pitch_class
-
-    @property
-    def commands(self) -> list:
-        return list(self._commands)
-
-    @property
-    def hocket(self) -> bool | None:
-        return self._hocket
-
-    @property
-    def segment(self) -> list[int] | None:
-        return self._segment
-
-    @property
-    def selector(self):
-        return self._selector
-
-    @property
-    def truncate_ties(self) -> bool | None:
-        return self._truncate_ties
-
-    @property
-    def voice_name(self) -> str:
-        return self._voice_name
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
