@@ -6135,6 +6135,802 @@ figures.py examples.
             }
         >>
 
+..  container:: example
+
+    Imbrication allows unused pitches:
+
+    >>> score = baca.docs.make_empty_score(2)
+    >>> figures = baca.FigureAccumulator(score)
+
+    >>> collections = [
+    ...     [0, 2, 10, 18, 16],
+    ...     [15, 20, 19, 9, 0],
+    ... ]
+    >>> figures(
+    ...     "Music.2",
+    ...     collections,
+    ...     baca.figure([1], 16),
+    ...     rmakers.beam_groups(beam_rests=True),
+    ...     baca.imbricate(
+    ...         "Music.1",
+    ...         [2, 19, 9, 18, 16],
+    ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
+    ...         rmakers.beam_groups(beam_rests=True),
+    ...         allow_unused_pitches=True,
+    ...     ),
+    ...     baca.staccato(selector=lambda _: baca.select.pheads(_)),
+    ... )
+
+    >>> accumulator = baca.CommandAccumulator(
+    ...     time_signatures=figures.time_signatures,
+    ... )
+    >>> baca.interpret.set_up_score(
+    ...     score,
+    ...     accumulator,
+    ...     accumulator.manifests(),
+    ...     accumulator.time_signatures,
+    ...     docs=True,
+    ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
+    ... )
+    >>> figures.populate_commands(score, accumulator)
+
+    >>> accumulator(
+    ...     "Music.1",
+    ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
+    ... )
+
+    >>> accumulator(
+    ...     "Music.2",
+    ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
+    ... )
+
+    >>> _, _ = baca.interpret.section(
+    ...     score,
+    ...     accumulator.manifests(),
+    ...     accumulator.time_signatures,
+    ...     commands=accumulator.commands,
+    ...     move_global_context=True,
+    ...     remove_tags=baca.tags.documentation_removal_tags(),
+    ... )
+    >>> lilypond_file = baca.lilypond.file(
+    ...     score,
+    ...     includes=["baca.ily"],
+    ... )
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        {
+            \context Staff = "Staff"
+            <<
+                \context Voice = "Skips"
+                {
+                    \baca-new-spacing-section #1 #32
+                    \time 5/8
+                    s1 * 5/8
+                }
+                \context Voice = "Music.1"
+                {
+                    {
+                        \override TupletBracket.stencil = ##f
+                        \override TupletNumber.stencil = ##f
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \voiceOne
+                            s16
+                            [
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            d'16
+                            - \accent
+                            s16
+                            s16
+                            s16
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            s16
+                            s16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            g''16
+                            - \accent
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            a'16
+                            - \accent
+                            s16
+                            ]
+                        }
+                        \revert TupletBracket.stencil
+                        \revert TupletNumber.stencil
+                    }
+                }
+                \context Voice = "Music.2"
+                {
+                    {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \set stemLeftBeamCount = 0
+                            \set stemRightBeamCount = 2
+                            \voiceTwo
+                            c'16
+                            - \staccato
+                            [
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            d'16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            bf'16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            fs''16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
+                            e''16
+                            - \staccato
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
+                            ef''16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            af''16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            g''16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            a'16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 0
+                            c'16
+                            - \staccato
+                            ]
+                        }
+                    }
+                }
+            >>
+        }
+
+..  container:: example exception
+
+    Raises exception on unused pitches:
+
+    >>> score = baca.docs.make_empty_score(2)
+    >>> figures = baca.FigureAccumulator(score)
+
+    >>> collections = [
+    ...     [0, 2, 10, 18, 16],
+    ...     [15, 20, 19, 9, 0],
+    ... ]
+    >>> figures(
+    ...     "Music.2",
+    ...     collections,
+    ...     baca.figure([1], 16),
+    ...     rmakers.beam_groups(beam_rests=True),
+    ...     baca.imbricate(
+    ...         "Music.1",
+    ...         [2, 19, 9, 18, 16],
+    ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
+    ...         rmakers.beam_groups(beam_rests=True),
+    ...         allow_unused_pitches=False,
+    ...     ),
+    ...     baca.staccato(selector=lambda _: baca.select.pheads(_)),
+    ... )
+    Traceback (most recent call last):
+        ...
+    Exception: Cursor(...) used only 3 of 5 pitches.
+
+..  container:: example
+
+    When imbrication hockets voices:
+
+    >>> score = baca.docs.make_empty_score(2)
+    >>> figures = baca.FigureAccumulator(score)
+
+    >>> collections = [
+    ...     [0, 2, 10, 18, 16],
+    ...     [15, 20, 19, 9, 0],
+    ...     [2, 10, 18, 16, 15],
+    ... ]
+    >>> figures(
+    ...     "Music.2",
+    ...     collections,
+    ...     baca.figure([1], 16),
+    ...     rmakers.beam_groups(beam_rests=True),
+    ...     baca.imbricate(
+    ...         "Music.1",
+    ...         [2, 19, 9, 18, 16],
+    ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
+    ...         rmakers.beam_groups(beam_rests=True),
+    ...         hocket=True,
+    ...     ),
+    ...     baca.staccato(selector=lambda _: baca.select.pheads(_)),
+    ... )
+
+    >>> accumulator = baca.CommandAccumulator(
+    ...     time_signatures=figures.time_signatures,
+    ... )
+    >>> baca.interpret.set_up_score(
+    ...     score,
+    ...     accumulator,
+    ...     accumulator.manifests(),
+    ...     accumulator.time_signatures,
+    ...     docs=True,
+    ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
+    ... )
+    >>> figures.populate_commands(score, accumulator)
+
+    >>> accumulator(
+    ...     "Music.1",
+    ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
+    ... )
+
+    >>> accumulator(
+    ...     "Music.2",
+    ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
+    ... )
+
+    >>> _, _ = baca.interpret.section(
+    ...     score,
+    ...     accumulator.manifests(),
+    ...     accumulator.time_signatures,
+    ...     commands=accumulator.commands,
+    ...     move_global_context=True,
+    ...     remove_tags=baca.tags.documentation_removal_tags(),
+    ... )
+    >>> lilypond_file = baca.lilypond.file(
+    ...     score,
+    ...     includes=["baca.ily"],
+    ... )
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        {
+            \context Staff = "Staff"
+            <<
+                \context Voice = "Skips"
+                {
+                    \baca-new-spacing-section #1 #32
+                    \time 15/16
+                    s1 * 15/16
+                }
+                \context Voice = "Music.1"
+                {
+                    {
+                        \override TupletBracket.stencil = ##f
+                        \override TupletNumber.stencil = ##f
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \voiceOne
+                            s16
+                            [
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            d'16
+                            - \accent
+                            s16
+                            s16
+                            s16
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            s16
+                            s16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            g''16
+                            - \accent
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            a'16
+                            - \accent
+                            s16
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            s16
+                            s16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            fs''16
+                            - \accent
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            e''16
+                            - \accent
+                            s16
+                            ]
+                        }
+                        \revert TupletBracket.stencil
+                        \revert TupletNumber.stencil
+                    }
+                }
+                \context Voice = "Music.2"
+                {
+                    {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \set stemLeftBeamCount = 0
+                            \set stemRightBeamCount = 2
+                            \voiceTwo
+                            c'16
+                            - \staccato
+                            [
+                            s16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            bf'16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            fs''16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
+                            e''16
+                            - \staccato
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
+                            ef''16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            af''16
+                            - \staccato
+                            s16
+                            s16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
+                            c'16
+                            - \staccato
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
+                            d'16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            bf'16
+                            - \staccato
+                            s16
+                            s16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 0
+                            ef''16
+                            - \staccato
+                            ]
+                        }
+                    }
+                }
+            >>
+        }
+
+..  container:: example
+
+    When imbrication selects last nine notes:
+
+    >>> score = baca.docs.make_empty_score(2)
+    >>> figures = baca.FigureAccumulator(score)
+
+    >>> collections = [
+    ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
+    ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
+    ... ]
+    >>> figures(
+    ...     "Music.2",
+    ...     collections,
+    ...     baca.figure([1], 16),
+    ...     rmakers.beam_groups(beam_rests=True),
+    ...     baca.imbricate(
+    ...         "Music.1",
+    ...         [2, 18, 16, 15],
+    ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
+    ...         rmakers.beam_groups(beam_rests=True),
+    ...         selector=lambda _: baca.select.plts(_)[-9:],
+    ...     ),
+    ...     baca.staccato(selector=lambda _: baca.select.pheads(_)),
+    ... )
+
+    >>> accumulator = baca.CommandAccumulator(
+    ...     time_signatures=figures.time_signatures,
+    ... )
+    >>> baca.interpret.set_up_score(
+    ...     score,
+    ...     accumulator,
+    ...     accumulator.manifests(),
+    ...     accumulator.time_signatures,
+    ...     docs=True,
+    ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
+    ... )
+    >>> figures.populate_commands(score, accumulator)
+
+    >>> accumulator(
+    ...     "Music.1",
+    ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
+    ... )
+
+    >>> accumulator(
+    ...     "Music.2",
+    ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
+    ... )
+
+    >>> _, _ = baca.interpret.section(
+    ...     score,
+    ...     accumulator.manifests(),
+    ...     accumulator.time_signatures,
+    ...     commands=accumulator.commands,
+    ...     move_global_context=True,
+    ...     remove_tags=baca.tags.documentation_removal_tags(),
+    ... )
+    >>> lilypond_file = baca.lilypond.file(
+    ...     score,
+    ...     includes=["baca.ily"],
+    ... )
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        {
+            \context Staff = "Staff"
+            <<
+                \context Voice = "Skips"
+                {
+                    \baca-new-spacing-section #1 #32
+                    \time 9/8
+                    s1 * 9/8
+                }
+                \context Voice = "Music.1"
+                {
+                    {
+                        \override TupletBracket.stencil = ##f
+                        \override TupletNumber.stencil = ##f
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \voiceOne
+                            s16
+                            [
+                            s16
+                            s16
+                            s16
+                            s16
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            s16
+                            s16
+                            s16
+                            s16
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            s16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            d'16
+                            - \accent
+                            s16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            fs''16
+                            - \accent
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
+                            e''16
+                            - \accent
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
+                            ef''16
+                            - \accent
+                            s16
+                            s16
+                            s16
+                            ]
+                        }
+                        \revert TupletBracket.stencil
+                        \revert TupletNumber.stencil
+                    }
+                }
+                \context Voice = "Music.2"
+                {
+                    {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \set stemLeftBeamCount = 0
+                            \set stemRightBeamCount = 2
+                            \voiceTwo
+                            c'16
+                            - \staccato
+                            [
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            d'16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            bf'16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            fs''16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
+                            e''16
+                            - \staccato
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
+                            ef''16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            af''16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            g''16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
+                            a'16
+                            - \staccato
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
+                            c'16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            d'16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            bf'16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            fs''16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
+                            e''16
+                            - \staccato
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
+                            ef''16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            af''16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            g''16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 0
+                            a'16
+                            - \staccato
+                            ]
+                        }
+                    }
+                }
+            >>
+        }
+
+..  container:: example
+
+    When imbrication truncates ties:
+
+    >>> score = baca.docs.make_empty_score(2)
+    >>> figures = baca.FigureAccumulator(score)
+
+    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+    >>> figures(
+    ...     "Music.2",
+    ...     collections,
+    ...     baca.figure([5], 32),
+    ...     rmakers.beam(),
+    ...     baca.imbricate(
+    ...         "Music.1",
+    ...         [2, 10, 18, 19, 9],
+    ...         rmakers.beam_groups(beam_rests=True),
+    ...         truncate_ties=True,
+    ...     ),
+    ... )
+
+    >>> accumulator = baca.CommandAccumulator(
+    ...     time_signatures=figures.time_signatures,
+    ... )
+    >>> baca.interpret.set_up_score(
+    ...     score,
+    ...     accumulator,
+    ...     accumulator.manifests(),
+    ...     accumulator.time_signatures,
+    ...     docs=True,
+    ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
+    ... )
+    >>> figures.populate_commands(score, accumulator)
+
+    >>> accumulator(
+    ...     "Music.1",
+    ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
+    ... )
+
+    >>> accumulator(
+    ...     "Music.2",
+    ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
+    ... )
+
+    >>> _, _ = baca.interpret.section(
+    ...     score,
+    ...     accumulator.manifests(),
+    ...     accumulator.time_signatures,
+    ...     commands=accumulator.commands,
+    ...     move_global_context=True,
+    ...     remove_tags=baca.tags.documentation_removal_tags(),
+    ... )
+    >>> lilypond_file = baca.lilypond.file(
+    ...     score,
+    ...     includes=["baca.ily"],
+    ... )
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        {
+            \context Staff = "Staff"
+            <<
+                \context Voice = "Skips"
+                {
+                    \baca-new-spacing-section #1 #32
+                    \time 45/32
+                    s1 * 45/32
+                }
+                \context Voice = "Music.1"
+                {
+                    {
+                        \override TupletBracket.stencil = ##f
+                        \override TupletNumber.stencil = ##f
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \voiceOne
+                            s8
+                            [
+                            s32
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 1
+                            d'8
+                            s32
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 1
+                            bf'8
+                            s32
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 1
+                            fs''8
+                            s32
+                            s8
+                            s32
+                            s8
+                            s32
+                            s8
+                            s32
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 1
+                            g''8
+                            s32
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 1
+                            a'8
+                            s32
+                            ]
+                        }
+                        \revert TupletBracket.stencil
+                        \revert TupletNumber.stencil
+                    }
+                }
+                \context Voice = "Music.2"
+                {
+                    {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \voiceTwo
+                            c'8
+                            [
+                            ~
+                            c'32
+                            d'8
+                            ~
+                            d'32
+                            bf'8
+                            ~
+                            bf'32
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            fs''8
+                            [
+                            ~
+                            fs''32
+                            e''8
+                            ~
+                            e''32
+                            ef''8
+                            ~
+                            ef''32
+                            af''8
+                            ~
+                            af''32
+                            g''8
+                            ~
+                            g''32
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            a'8
+                            [
+                            ~
+                            a'32
+                            ]
+                        }
+                    }
+                }
+            >>
+        }
+
 """
 
 
