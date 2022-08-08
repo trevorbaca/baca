@@ -1667,28 +1667,10 @@ class Bind:
         return tuplets
 
 
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Coat:
-    """
-    Coat.
-    """
 
-    ### CLASS VARIABLES ###
-
-    __slots__ = ("_argument",)
-
-    ### INITIALIZER ###
-
-    def __init__(self, argument: int | str | abjad.Pitch) -> None:
-        self._argument = argument
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def argument(self) -> int | str | abjad.Pitch:
-        """
-        Gets argument.
-        """
-        return self._argument
+    argument: int | str | abjad.Pitch | None = None
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -6182,12 +6164,11 @@ class RestAffix:
 
 class Stack:
 
-    __slots__ = ("_commands",)
+    __slots__ = ("commands",)
 
     def __init__(self, *commands) -> None:
         commands = commands or ()
-        commands_ = tuple(commands)
-        self._commands = commands_
+        self.commands = tuple(commands)
 
     def __call__(self, argument: typing.Any, **keywords) -> typing.Any:
         if not self.commands:
@@ -6205,38 +6186,10 @@ class Stack:
                 message = "exception while calling:\n"
                 message += f"   {command}"
                 raise Exception(message)
-            # if result_ is not None:
             if result_ not in (True, False, None):
                 result = result_
         if result not in (True, False, None):
             return result
-
-    def __eq__(self, argument) -> bool:
-        """
-        Compares ``commands``.
-        """
-        if isinstance(argument, type(self)):
-            return self.commands == argument.commands
-        return False
-
-    def __hash__(self) -> int:
-        """
-        Hashes object.
-        """
-        return hash(str(self))
-
-    def __repr__(self) -> str:
-        """
-        Gets repr.
-        """
-        return f"{type(self).__name__}(commands={self.commands})"
-
-    @property
-    def commands(self):
-        """
-        Gets commands.
-        """
-        return list(self._commands)
 
 
 def anchor(
