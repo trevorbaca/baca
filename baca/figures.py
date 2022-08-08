@@ -16,69 +16,143 @@ from . import tags as _tags
 from .enums import enums as _enums
 
 
-class Stack:
-    """
-    Stack.
-    """
+def _add_rest_affixes(
+    leaves,
+    talea,
+    rest_prefix,
+    rest_suffix,
+    affix_skips_instead_of_rests,
+    increase_monotonic,
+):
+    if rest_prefix:
+        durations = [(_, talea.denominator) for _ in rest_prefix]
+        maker = abjad.LeafMaker(
+            increase_monotonic=increase_monotonic,
+            skips_instead_of_rests=affix_skips_instead_of_rests,
+        )
+        leaves_ = maker([None], durations)
+        leaves[0:0] = leaves_
+    if rest_suffix:
+        durations = [(_, talea.denominator) for _ in rest_suffix]
+        maker = abjad.LeafMaker(
+            increase_monotonic=increase_monotonic,
+            skips_instead_of_rests=affix_skips_instead_of_rests,
+        )
+        leaves_ = maker([None], durations)
+        leaves.extend(leaves_)
+    return leaves
 
-    __slots__ = ("_commands",)
 
-    # TODO: remove after removal of new()
-    _positional_arguments_name = "commands"
+def _coerce_collections(collections):
+    prototype = (
+        abjad.PitchClassSegment,
+        abjad.PitchSegment,
+        set,
+        frozenset,
+    )
+    if isinstance(collections, prototype):
+        return [collections]
+    return collections
 
-    def __init__(self, *commands) -> None:
-        commands = commands or ()
-        commands_ = tuple(commands)
-        self._commands = commands_
 
-    def __call__(self, argument: typing.Any, **keywords) -> typing.Any:
-        if not self.commands:
-            return argument
-        try:
-            result: typing.Any = self.commands[0](argument, **keywords)
-        except Exception:
-            message = "exception while calling:\n"
-            message += f"   {self.commands[0]}"
-            raise Exception(message)
-        for command in self.commands[1:]:
-            try:
-                result_ = command(result)
-            except Exception:
-                message = "exception while calling:\n"
-                message += f"   {command}"
-                raise Exception(message)
-            # if result_ is not None:
-            if result_ not in (True, False, None):
-                result = result_
-        if result not in (True, False, None):
-            return result
+def _fix_rounding_error(durations, total_duration):
+    current_duration = sum(durations)
+    if current_duration < total_duration:
+        missing_duration = total_duration - current_duration
+        if durations[0] < durations[-1]:
+            durations[-1] += missing_duration
+        else:
+            durations[0] += missing_duration
+    elif sum(durations) == total_duration:
+        return durations
+    elif total_duration < current_duration:
+        extra_duration = current_duration - total_duration
+        if durations[0] < durations[-1]:
+            durations[-1] -= extra_duration
+        else:
+            durations[0] -= extra_duration
+    assert sum(durations) == total_duration
+    return durations
 
-    def __eq__(self, argument) -> bool:
-        """
-        Compares ``commands``.
-        """
-        if isinstance(argument, type(self)):
-            return self.commands == argument.commands
+
+def _is_treatment(argument):
+    if argument is None:
+        return True
+    elif isinstance(argument, int):
+        return True
+    elif isinstance(argument, str):
+        return True
+    elif isinstance(argument, tuple) and len(argument) == 2:
+        return True
+    elif isinstance(argument, abjad.Ratio):
+        return True
+    elif isinstance(argument, abjad.Multiplier):
+        return True
+    elif argument.__class__ is abjad.Duration:
+        return True
+    elif argument in ("accel", "rit"):
+        return True
+    return False
+
+
+def _make_tuplet_with_extra_count(leaf_selection, extra_count, denominator):
+    contents_duration = abjad.get.duration(leaf_selection)
+    contents_duration = contents_duration.with_denominator(denominator)
+    contents_count = contents_duration.numerator
+    if 0 < extra_count:
+        extra_count %= contents_count
+    elif extra_count < 0:
+        extra_count = abs(extra_count)
+        extra_count %= python_math.ceil(contents_count / 2.0)
+        extra_count *= -1
+    new_contents_count = contents_count + extra_count
+    tuplet_multiplier = abjad.Multiplier(new_contents_count, contents_count)
+    if not tuplet_multiplier.normalized():
+        message = f"{leaf_selection!r} gives {tuplet_multiplier}"
+        message += " with {contents_count} and {new_contents_count}."
+        raise Exception(message)
+    tuplet = abjad.Tuplet(tuplet_multiplier, leaf_selection)
+    return tuplet
+
+
+def _matches_pitch(pitched_leaf, pitch_object):
+    if isinstance(pitch_object, Coat):
+        pitch_object = pitch_object.argument
+    if pitch_object is None:
         return False
+    if isinstance(pitched_leaf, abjad.Note):
+        written_pitches = [pitched_leaf.written_pitch]
+    elif isinstance(pitched_leaf, abjad.Chord):
+        written_pitches = pitched_leaf.written_pitches
+    else:
+        raise TypeError(pitched_leaf)
+    if isinstance(pitch_object, int | float):
+        source = [_.number for _ in written_pitches]
+    elif isinstance(pitch_object, abjad.NamedPitch):
+        source = written_pitches
+    elif isinstance(pitch_object, abjad.NumberedPitch):
+        source = [abjad.NumberedPitch(_) for _ in written_pitches]
+    elif isinstance(pitch_object, abjad.NamedPitchClass):
+        source = [abjad.NamedPitchClass(_) for _ in written_pitches]
+    elif isinstance(pitch_object, abjad.NumberedPitchClass):
+        source = [abjad.NumberedPitchClass(_) for _ in written_pitches]
+    else:
+        raise TypeError(f"unknown pitch object: {pitch_object!r}.")
+    if not type(source[0]) is type(pitch_object):
+        raise TypeError(f"{source!r} type must match {pitch_object!r}.")
+    return pitch_object in source
 
-    def __hash__(self) -> int:
-        """
-        Hashes object.
-        """
-        return hash(str(self))
 
-    def __repr__(self) -> str:
-        """
-        Gets repr.
-        """
-        return f"{type(self).__name__}(commands={self.commands})"
-
-    @property
-    def commands(self):
-        """
-        Gets commands.
-        """
-        return list(self._commands)
+def _trim_matching_chord(logical_tie, pitch_object):
+    if isinstance(logical_tie.head, abjad.Note):
+        return
+    assert isinstance(logical_tie.head, abjad.Chord), repr(logical_tie)
+    if isinstance(pitch_object, abjad.PitchClass):
+        raise NotImplementedError(logical_tie, pitch_object)
+    for chord in logical_tie:
+        duration = chord.written_duration
+        note = abjad.Note(pitch_object, duration)
+        abjad.mutate.replace(chord, [note])
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -1474,8 +1548,6 @@ class Acciaccatura:
     lmr: LMR = LMR()
 
     def __post_init__(self):
-        #        durations_ = [abjad.Duration(_) for _ in self.durations]
-        #        self.durations = durations_
         assert all(isinstance(_, abjad.Duration) for _ in self.durations), repr(
             self.durations
         )
@@ -1511,8 +1583,7 @@ class Acciaccatura:
         return acciaccatura_containers, collection
 
 
-# TODO: frozen=True
-@dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Anchor:
     """
     Anchor.
@@ -1541,6 +1612,61 @@ class Anchor:
         )
 
 
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class Assignment:
+
+    maker: "FigureMaker"
+    pattern: abjad.Pattern | None = None
+
+    def __post_init__(self):
+        assert isinstance(self.maker, FigureMaker)
+        if self.pattern is not None:
+            assert isinstance(self.pattern, abjad.Pattern)
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class Bind:
+    """
+    Bind.
+    """
+
+    assignments: typing.Sequence[Assignment] = ()
+
+    def __post_init__(self):
+        for assignment in self.assignments:
+            if not isinstance(assignment, Assignment):
+                raise Exception("must be assignment:\n   {assignment!r}")
+
+    def __call__(self, collections: typing.Sequence) -> list[abjad.Tuplet]:
+        collection_count = len(collections)
+        matches = []
+        for i, collection in enumerate(collections):
+            for assignment in self.assignments:
+                if assignment.pattern is None or assignment.pattern.matches_index(
+                    i, collection_count
+                ):
+                    match = rmakers.Match(assignment, collection)
+                    matches.append(match)
+                    break
+            else:
+                raise Exception(f"no maker match for collection {i}.")
+        assert len(collections) == len(matches)
+        groups = abjad.sequence.group_by(matches, lambda _: _.assignment.maker)
+        tuplets: list[abjad.Tuplet] = []
+        for group in groups:
+            maker = group[0].assignment.maker
+            collections_ = [match.payload for match in group]
+            selection = maker(
+                collections_,
+                collection_index=None,
+                state=None,
+                total_collections=None,
+            )
+            tuplets.extend(selection)
+        assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
+        return tuplets
+
+
 class Coat:
     """
     Coat.
@@ -1565,1064 +1691,46 @@ class Coat:
         return self._argument
 
 
-def _matches_pitch(pitched_leaf, pitch_object):
-    if isinstance(pitch_object, Coat):
-        pitch_object = pitch_object.argument
-    if pitch_object is None:
-        return False
-    if isinstance(pitched_leaf, abjad.Note):
-        written_pitches = [pitched_leaf.written_pitch]
-    elif isinstance(pitched_leaf, abjad.Chord):
-        written_pitches = pitched_leaf.written_pitches
-    else:
-        raise TypeError(pitched_leaf)
-    if isinstance(pitch_object, int | float):
-        source = [_.number for _ in written_pitches]
-    elif isinstance(pitch_object, abjad.NamedPitch):
-        source = written_pitches
-    elif isinstance(pitch_object, abjad.NumberedPitch):
-        source = [abjad.NumberedPitch(_) for _ in written_pitches]
-    elif isinstance(pitch_object, abjad.NamedPitchClass):
-        source = [abjad.NamedPitchClass(_) for _ in written_pitches]
-    elif isinstance(pitch_object, abjad.NumberedPitchClass):
-        source = [abjad.NumberedPitchClass(_) for _ in written_pitches]
-    else:
-        raise TypeError(f"unknown pitch object: {pitch_object!r}.")
-    if not type(source[0]) is type(pitch_object):
-        raise TypeError(f"{source!r} type must match {pitch_object!r}.")
-    return pitch_object in source
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class Contribution:
 
+    voice_to_selection: dict[str, list]
+    anchor: Anchor | None = None
+    figure_name: str | None = None
+    hide_time_signature: bool | None = None
+    time_signature: abjad.TimeSignature | None = None
 
-def _trim_matching_chord(logical_tie, pitch_object):
-    if isinstance(logical_tie.head, abjad.Note):
-        return
-    assert isinstance(logical_tie.head, abjad.Chord), repr(logical_tie)
-    if isinstance(pitch_object, abjad.PitchClass):
-        raise NotImplementedError(logical_tie, pitch_object)
-    for chord in logical_tie:
-        duration = chord.written_duration
-        note = abjad.Note(pitch_object, duration)
-        abjad.mutate.replace(chord, [note])
-
-
-class Imbrication:
-    """
-    Imbrication.
-    """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = (
-        "_allow_unused_pitches",
-        "_by_pitch_class",
-        "_commands",
-        "_hocket",
-        "_segment",
-        "_selector",
-        "_truncate_ties",
-        "_voice_name",
-    )
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        voice_name: str,
-        segment: list[int] = None,
-        *commands,
-        allow_unused_pitches: bool = False,
-        by_pitch_class: bool = False,
-        hocket: bool = False,
-        selector=None,
-        truncate_ties: bool = False,
-    ) -> None:
-        assert isinstance(voice_name, str), repr(voice_name)
-        self._voice_name = voice_name
-        if segment is not None:
-            assert isinstance(segment, list), repr(segment)
-        self._segment = segment
-        self._commands = commands
-        self._allow_unused_pitches = bool(allow_unused_pitches)
-        self._by_pitch_class = bool(by_pitch_class)
-        self._hocket = bool(hocket)
-        if selector is not None:
-            if not callable(selector):
-                raise TypeError(f"callable or none only: {selector!r}.")
-        self._selector = selector
-        self._truncate_ties = bool(truncate_ties)
-
-    ### SPECIAL METHODS ###
-
-    def __call__(self, container: abjad.Container = None) -> dict[str, list]:
-        """
-        Calls imbrication on ``container``.
-        """
-        original_container = container
-        container = copy.deepcopy(container)
-        abjad.override(container).TupletBracket.stencil = False
-        abjad.override(container).TupletNumber.stencil = False
-        segment = abjad.sequence.flatten(self.segment, depth=-1)
-        if self.by_pitch_class:
-            segment = [abjad.NumberedPitchClass(_) for _ in segment]
-        cursor = _cursor.Cursor(
-            singletons=True, source=segment, suppress_exception=True
-        )
-        pitch_number = cursor.next()
-        if self.selector is not None:
-            selection = self.selector(original_container)
-        selected_logical_ties = None
-        if self.selector is not None:
-            selection = self.selector(container)
-            generator = abjad.iterate.logical_ties(selection, pitched=True)
-            selected_logical_ties = list(generator)
-        original_logical_ties = abjad.select.logical_ties(original_container)
-        logical_ties = abjad.select.logical_ties(container)
-        pairs = zip(logical_ties, original_logical_ties)
-        for logical_tie, original_logical_tie in pairs:
-            if (
-                selected_logical_ties is not None
-                and logical_tie not in selected_logical_ties
-            ):
-                for leaf in logical_tie:
-                    duration = leaf.written_duration
-                    skip = abjad.Skip(duration)
-                    abjad.mutate.replace(leaf, [skip])
-            elif isinstance(logical_tie.head, abjad.Rest):
-                for leaf in logical_tie:
-                    duration = leaf.written_duration
-                    skip = abjad.Skip(duration)
-                    abjad.mutate.replace(leaf, [skip])
-            elif isinstance(logical_tie.head, abjad.Skip):
-                pass
-            elif _matches_pitch(logical_tie.head, pitch_number):
-                if isinstance(pitch_number, Coat):
-                    for leaf in logical_tie:
-                        duration = leaf.written_duration
-                        skip = abjad.Skip(duration)
-                        abjad.mutate.replace(leaf, [skip])
-                    pitch_number = cursor.next()
-                    continue
-                _trim_matching_chord(logical_tie, pitch_number)
-                pitch_number = cursor.next()
-                if self.truncate_ties:
-                    head = logical_tie.head
-                    tail = logical_tie.tail
-                    for leaf in logical_tie[1:]:
-                        duration = leaf.written_duration
-                        skip = abjad.Skip(duration)
-                        abjad.mutate.replace(leaf, [skip])
-                    abjad.detach(abjad.Tie, head)
-                    next_leaf = abjad.get.leaf(tail, 1)
-                    if next_leaf is not None:
-                        abjad.detach(abjad.RepeatTie, next_leaf)
-                if self.hocket:
-                    for leaf in original_logical_tie:
-                        duration = leaf.written_duration
-                        skip = abjad.Skip(duration)
-                        abjad.mutate.replace(leaf, [skip])
-            else:
-                for leaf in logical_tie:
-                    duration = leaf.written_duration
-                    skip = abjad.Skip(duration)
-                    abjad.mutate.replace(leaf, [skip])
-        if not self.allow_unused_pitches and not cursor.is_exhausted:
-            assert cursor.position is not None
-            current, total = cursor.position - 1, len(cursor)
-            raise Exception(f"{cursor!r} used only {current} of {total} pitches.")
-        self._call_commands(container)
-        selection = [container]
-        if not self.hocket:
-            pleaves = _select.pleaves(container)
-            assert isinstance(pleaves, list)
-            for pleaf in pleaves:
-                abjad.attach(_enums.ALLOW_OCTAVE, pleaf)
-        return {self.voice_name: selection}
-
-    ### PRIVATE METHODS ###
-
-    def _call_commands(self, container):
-        assert isinstance(container, abjad.Container), repr(container)
-        nested_selections = None
-        commands = self.commands or []
-        selections = container[:]
-        for command in commands:
-            if isinstance(command, Assignment):
-                continue
-            if isinstance(command, Imbrication):
-                continue
-            prototype = (
-                rmakers.BeamCommand,
-                rmakers.FeatherBeamCommand,
-                rmakers.BeamGroupsCommand,
-                rmakers.UnbeamCommand,
+    def __post_init__(self):
+        assert isinstance(self.voice_to_selection, dict), repr(self.voice_to_selection)
+        if self.anchor is not None:
+            assert isinstance(self.anchor, Anchor), repr(self.anchor)
+        if self.figure_name is not None:
+            assert isinstance(self.figure_name, str), repr(self.figure_name)
+        if self.hide_time_signature is not None:
+            assert isinstance(self.hide_time_signature, bool), repr(
+                self.hide_time_signature
             )
-            if isinstance(command, prototype):
-                rmakers.unbeam()(selections)
-            if isinstance(command, Nest):
-                nested_selections = command(selections)
-            else:
-                command(selections)
-        if nested_selections is not None:
-            return nested_selections
-        return selections
+        if self.time_signature is not None:
+            assert isinstance(self.time_signature, abjad.TimeSignature)
+        if self.voice_to_selection is not None:
+            assert isinstance(self.voice_to_selection, dict), repr(
+                self.voice_to_selection
+            )
+            for value in self.voice_to_selection.values():
+                assert isinstance(value, list), repr(value)
 
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def allow_unused_pitches(self) -> bool | None:
-        r"""
-        Is true when imbrication allows unused pitches.
-
-        ..  container:: example
-
-            Allows unused pitches:
-
-            >>> score = baca.docs.make_empty_score(2)
-            >>> figures = baca.FigureAccumulator(score)
-
-            >>> collections = [
-            ...     [0, 2, 10, 18, 16],
-            ...     [15, 20, 19, 9, 0],
-            ... ]
-            >>> figures(
-            ...     "Music.2",
-            ...     collections,
-            ...     baca.figure([1], 16),
-            ...     rmakers.beam_groups(beam_rests=True),
-            ...     baca.imbricate(
-            ...         "Music.1",
-            ...         [2, 19, 9, 18, 16],
-            ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
-            ...         rmakers.beam_groups(beam_rests=True),
-            ...         allow_unused_pitches=True,
-            ...     ),
-            ...     baca.staccato(selector=lambda _: baca.select.pheads(_)),
-            ... )
-
-            >>> accumulator = baca.CommandAccumulator(
-            ...     time_signatures=figures.time_signatures,
-            ... )
-            >>> baca.interpret.set_up_score(
-            ...     score,
-            ...     accumulator,
-            ...     accumulator.manifests(),
-            ...     accumulator.time_signatures,
-            ...     docs=True,
-            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
-            ... )
-            >>> figures.populate_commands(score, accumulator)
-
-            >>> accumulator(
-            ...     "Music.1",
-            ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
-            ... )
-
-            >>> accumulator(
-            ...     "Music.2",
-            ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
-            ... )
-
-            >>> _, _ = baca.interpret.section(
-            ...     score,
-            ...     accumulator.manifests(),
-            ...     accumulator.time_signatures,
-            ...     commands=accumulator.commands,
-            ...     move_global_context=True,
-            ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ... )
-            >>> lilypond_file = baca.lilypond.file(
-            ...     score,
-            ...     includes=["baca.ily"],
-            ... )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                {
-                    \context Staff = "Staff"
-                    <<
-                        \context Voice = "Skips"
-                        {
-                            \baca-new-spacing-section #1 #32
-                            \time 5/8
-                            s1 * 5/8
-                        }
-                        \context Voice = "Music.1"
-                        {
-                            {
-                                \override TupletBracket.stencil = ##f
-                                \override TupletNumber.stencil = ##f
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \voiceOne
-                                    s16
-                                    [
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    d'16
-                                    - \accent
-                                    s16
-                                    s16
-                                    s16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    s16
-                                    s16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    g''16
-                                    - \accent
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    a'16
-                                    - \accent
-                                    s16
-                                    ]
-                                }
-                                \revert TupletBracket.stencil
-                                \revert TupletNumber.stencil
-                            }
-                        }
-                        \context Voice = "Music.2"
-                        {
-                            {
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 0
-                                    \set stemRightBeamCount = 2
-                                    \voiceTwo
-                                    c'16
-                                    - \staccato
-                                    [
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    d'16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    bf'16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    fs''16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 1
-                                    e''16
-                                    - \staccato
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 2
-                                    ef''16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    af''16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    g''16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    a'16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 0
-                                    c'16
-                                    - \staccato
-                                    ]
-                                }
-                            }
-                        }
-                    >>
-                }
-
-        ..  container:: example exception
-
-            Raises exception on unused pitches:
-
-            >>> score = baca.docs.make_empty_score(2)
-            >>> figures = baca.FigureAccumulator(score)
-
-            >>> collections = [
-            ...     [0, 2, 10, 18, 16],
-            ...     [15, 20, 19, 9, 0],
-            ... ]
-            >>> figures(
-            ...     "Music.2",
-            ...     collections,
-            ...     baca.figure([1], 16),
-            ...     rmakers.beam_groups(beam_rests=True),
-            ...     baca.imbricate(
-            ...         "Music.1",
-            ...         [2, 19, 9, 18, 16],
-            ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
-            ...         rmakers.beam_groups(beam_rests=True),
-            ...         allow_unused_pitches=False,
-            ...     ),
-            ...     baca.staccato(selector=lambda _: baca.select.pheads(_)),
-            ... )
-            Traceback (most recent call last):
-                ...
-            Exception: Cursor(...) used only 3 of 5 pitches.
-
+    def __getitem__(self, voice_name) -> list:
         """
-        return self._allow_unused_pitches
-
-    @property
-    def by_pitch_class(self) -> bool | None:
+        Gets ``voice_name`` selection list.
         """
-        Is true when imbrication matches on pitch-class rather than pitch.
+        return self.voice_to_selection.__getitem__(voice_name)
+
+    def __iter__(self) -> typing.Iterator[str]:
         """
-        return self._by_pitch_class
-
-    @property
-    def commands(self) -> list:
+        Iterates figure contribution.
         """
-        Gets commands.
-        """
-        return list(self._commands)
-
-    @property
-    def hocket(self) -> bool | None:
-        r"""
-        Is true when imbrication hockets voices.
-
-        ..  container:: example
-
-            Hockets voices:
-
-            >>> score = baca.docs.make_empty_score(2)
-            >>> figures = baca.FigureAccumulator(score)
-
-            >>> collections = [
-            ...     [0, 2, 10, 18, 16],
-            ...     [15, 20, 19, 9, 0],
-            ...     [2, 10, 18, 16, 15],
-            ... ]
-            >>> figures(
-            ...     "Music.2",
-            ...     collections,
-            ...     baca.figure([1], 16),
-            ...     rmakers.beam_groups(beam_rests=True),
-            ...     baca.imbricate(
-            ...         "Music.1",
-            ...         [2, 19, 9, 18, 16],
-            ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
-            ...         rmakers.beam_groups(beam_rests=True),
-            ...         hocket=True,
-            ...     ),
-            ...     baca.staccato(selector=lambda _: baca.select.pheads(_)),
-            ... )
-
-            >>> accumulator = baca.CommandAccumulator(
-            ...     time_signatures=figures.time_signatures,
-            ... )
-            >>> baca.interpret.set_up_score(
-            ...     score,
-            ...     accumulator,
-            ...     accumulator.manifests(),
-            ...     accumulator.time_signatures,
-            ...     docs=True,
-            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
-            ... )
-            >>> figures.populate_commands(score, accumulator)
-
-            >>> accumulator(
-            ...     "Music.1",
-            ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
-            ... )
-
-            >>> accumulator(
-            ...     "Music.2",
-            ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
-            ... )
-
-            >>> _, _ = baca.interpret.section(
-            ...     score,
-            ...     accumulator.manifests(),
-            ...     accumulator.time_signatures,
-            ...     commands=accumulator.commands,
-            ...     move_global_context=True,
-            ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ... )
-            >>> lilypond_file = baca.lilypond.file(
-            ...     score,
-            ...     includes=["baca.ily"],
-            ... )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                {
-                    \context Staff = "Staff"
-                    <<
-                        \context Voice = "Skips"
-                        {
-                            \baca-new-spacing-section #1 #32
-                            \time 15/16
-                            s1 * 15/16
-                        }
-                        \context Voice = "Music.1"
-                        {
-                            {
-                                \override TupletBracket.stencil = ##f
-                                \override TupletNumber.stencil = ##f
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \voiceOne
-                                    s16
-                                    [
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    d'16
-                                    - \accent
-                                    s16
-                                    s16
-                                    s16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    s16
-                                    s16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    g''16
-                                    - \accent
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    a'16
-                                    - \accent
-                                    s16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    s16
-                                    s16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    fs''16
-                                    - \accent
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    e''16
-                                    - \accent
-                                    s16
-                                    ]
-                                }
-                                \revert TupletBracket.stencil
-                                \revert TupletNumber.stencil
-                            }
-                        }
-                        \context Voice = "Music.2"
-                        {
-                            {
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 0
-                                    \set stemRightBeamCount = 2
-                                    \voiceTwo
-                                    c'16
-                                    - \staccato
-                                    [
-                                    s16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    bf'16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    fs''16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 1
-                                    e''16
-                                    - \staccato
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 2
-                                    ef''16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    af''16
-                                    - \staccato
-                                    s16
-                                    s16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 1
-                                    c'16
-                                    - \staccato
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 2
-                                    d'16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    bf'16
-                                    - \staccato
-                                    s16
-                                    s16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 0
-                                    ef''16
-                                    - \staccato
-                                    ]
-                                }
-                            }
-                        }
-                    >>
-                }
-
-        """
-        return self._hocket
-
-    @property
-    def segment(self) -> list[int] | None:
-        """
-        Gets to-be-imbricated segment.
-        """
-        return self._segment
-
-    @property
-    def selector(self):
-        r"""
-        Gets selector.
-
-        ..  container:: example
-
-            Selects last nine notes:
-
-            >>> score = baca.docs.make_empty_score(2)
-            >>> figures = baca.FigureAccumulator(score)
-
-            >>> collections = [
-            ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
-            ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
-            ... ]
-            >>> figures(
-            ...     "Music.2",
-            ...     collections,
-            ...     baca.figure([1], 16),
-            ...     rmakers.beam_groups(beam_rests=True),
-            ...     baca.imbricate(
-            ...         "Music.1",
-            ...         [2, 18, 16, 15],
-            ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
-            ...         rmakers.beam_groups(beam_rests=True),
-            ...         selector=lambda _: baca.select.plts(_)[-9:],
-            ...     ),
-            ...     baca.staccato(selector=lambda _: baca.select.pheads(_)),
-            ... )
-
-            >>> accumulator = baca.CommandAccumulator(
-            ...     time_signatures=figures.time_signatures,
-            ... )
-            >>> baca.interpret.set_up_score(
-            ...     score,
-            ...     accumulator,
-            ...     accumulator.manifests(),
-            ...     accumulator.time_signatures,
-            ...     docs=True,
-            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
-            ... )
-            >>> figures.populate_commands(score, accumulator)
-
-            >>> accumulator(
-            ...     "Music.1",
-            ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
-            ... )
-
-            >>> accumulator(
-            ...     "Music.2",
-            ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
-            ... )
-
-            >>> _, _ = baca.interpret.section(
-            ...     score,
-            ...     accumulator.manifests(),
-            ...     accumulator.time_signatures,
-            ...     commands=accumulator.commands,
-            ...     move_global_context=True,
-            ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ... )
-            >>> lilypond_file = baca.lilypond.file(
-            ...     score,
-            ...     includes=["baca.ily"],
-            ... )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                {
-                    \context Staff = "Staff"
-                    <<
-                        \context Voice = "Skips"
-                        {
-                            \baca-new-spacing-section #1 #32
-                            \time 9/8
-                            s1 * 9/8
-                        }
-                        \context Voice = "Music.1"
-                        {
-                            {
-                                \override TupletBracket.stencil = ##f
-                                \override TupletNumber.stencil = ##f
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \voiceOne
-                                    s16
-                                    [
-                                    s16
-                                    s16
-                                    s16
-                                    s16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    s16
-                                    s16
-                                    s16
-                                    s16
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    s16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    d'16
-                                    - \accent
-                                    s16
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    fs''16
-                                    - \accent
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 1
-                                    e''16
-                                    - \accent
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 2
-                                    ef''16
-                                    - \accent
-                                    s16
-                                    s16
-                                    s16
-                                    ]
-                                }
-                                \revert TupletBracket.stencil
-                                \revert TupletNumber.stencil
-                            }
-                        }
-                        \context Voice = "Music.2"
-                        {
-                            {
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 0
-                                    \set stemRightBeamCount = 2
-                                    \voiceTwo
-                                    c'16
-                                    - \staccato
-                                    [
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    d'16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    bf'16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    fs''16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 1
-                                    e''16
-                                    - \staccato
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 2
-                                    ef''16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    af''16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    g''16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 1
-                                    a'16
-                                    - \staccato
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 2
-                                    c'16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    d'16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    bf'16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    fs''16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 1
-                                    e''16
-                                    - \staccato
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 2
-                                    ef''16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    af''16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    g''16
-                                    - \staccato
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 0
-                                    a'16
-                                    - \staccato
-                                    ]
-                                }
-                            }
-                        }
-                    >>
-                }
-
-        """
-        return self._selector
-
-    @property
-    def truncate_ties(self) -> bool | None:
-        r"""
-        Is true when imbrication truncates ties.
-
-        ..  container:: example
-
-            Truncates ties:
-
-            >>> score = baca.docs.make_empty_score(2)
-            >>> figures = baca.FigureAccumulator(score)
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> figures(
-            ...     "Music.2",
-            ...     collections,
-            ...     baca.figure([5], 32),
-            ...     rmakers.beam(),
-            ...     baca.imbricate(
-            ...         "Music.1",
-            ...         [2, 10, 18, 19, 9],
-            ...         rmakers.beam_groups(beam_rests=True),
-            ...         truncate_ties=True,
-            ...     ),
-            ... )
-
-            >>> accumulator = baca.CommandAccumulator(
-            ...     time_signatures=figures.time_signatures,
-            ... )
-            >>> baca.interpret.set_up_score(
-            ...     score,
-            ...     accumulator,
-            ...     accumulator.manifests(),
-            ...     accumulator.time_signatures,
-            ...     docs=True,
-            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
-            ... )
-            >>> figures.populate_commands(score, accumulator)
-
-            >>> accumulator(
-            ...     "Music.1",
-            ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
-            ... )
-
-            >>> accumulator(
-            ...     "Music.2",
-            ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
-            ... )
-
-            >>> _, _ = baca.interpret.section(
-            ...     score,
-            ...     accumulator.manifests(),
-            ...     accumulator.time_signatures,
-            ...     commands=accumulator.commands,
-            ...     move_global_context=True,
-            ...     remove_tags=baca.tags.documentation_removal_tags(),
-            ... )
-            >>> lilypond_file = baca.lilypond.file(
-            ...     score,
-            ...     includes=["baca.ily"],
-            ... )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> score = lilypond_file["Score"]
-                >>> string = abjad.lilypond(score)
-                >>> print(string)
-                \context Score = "Score"
-                {
-                    \context Staff = "Staff"
-                    <<
-                        \context Voice = "Skips"
-                        {
-                            \baca-new-spacing-section #1 #32
-                            \time 45/32
-                            s1 * 45/32
-                        }
-                        \context Voice = "Music.1"
-                        {
-                            {
-                                \override TupletBracket.stencil = ##f
-                                \override TupletNumber.stencil = ##f
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \voiceOne
-                                    s8
-                                    [
-                                    s32
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 1
-                                    d'8
-                                    s32
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 1
-                                    bf'8
-                                    s32
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 1
-                                    fs''8
-                                    s32
-                                    s8
-                                    s32
-                                    s8
-                                    s32
-                                    s8
-                                    s32
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 1
-                                    g''8
-                                    s32
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 1
-                                    a'8
-                                    s32
-                                    ]
-                                }
-                                \revert TupletBracket.stencil
-                                \revert TupletNumber.stencil
-                            }
-                        }
-                        \context Voice = "Music.2"
-                        {
-                            {
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    \voiceTwo
-                                    c'8
-                                    [
-                                    ~
-                                    c'32
-                                    d'8
-                                    ~
-                                    d'32
-                                    bf'8
-                                    ~
-                                    bf'32
-                                    ]
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    fs''8
-                                    [
-                                    ~
-                                    fs''32
-                                    e''8
-                                    ~
-                                    e''32
-                                    ef''8
-                                    ~
-                                    ef''32
-                                    af''8
-                                    ~
-                                    af''32
-                                    g''8
-                                    ~
-                                    g''32
-                                    ]
-                                }
-                                \scaleDurations #'(1 . 1)
-                                {
-                                    a'8
-                                    [
-                                    ~
-                                    a'32
-                                    ]
-                                }
-                            }
-                        }
-                    >>
-                }
-
-        """
-        return self._truncate_ties
-
-    @property
-    def voice_name(self) -> str:
-        """
-        Gets voice name.
-        """
-        return self._voice_name
+        for voice_name in self.voice_to_selection:
+            yield voice_name
 
 
 class FigureAccumulator:
@@ -2725,8 +1833,7 @@ class FigureAccumulator:
         selections: list
         if anchor is not None:
             voice_name_ = self._abbreviation(anchor.remote_voice_name)
-            # TODO: do not assign to frozen object
-            anchor.remote_voice_name = voice_name_
+            anchor = dataclasses.replace(anchor, remote_voice_name=voice_name_)
         if isinstance(collections, str):
             tuplet = abjad.Tuplet((1, 1), collections, hide=True)
             selections = [[tuplet]]
@@ -2991,752 +2098,6 @@ class FigureAccumulator:
                 continue
             voice = score[voice_name]
             voice.extend(selection)
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class Contribution:
-
-    voice_to_selection: dict[str, list]
-    anchor: Anchor | None = None
-    figure_name: str | None = None
-    hide_time_signature: bool | None = None
-    time_signature: abjad.TimeSignature | None = None
-
-    def __post_init__(self):
-        assert isinstance(self.voice_to_selection, dict), repr(self.voice_to_selection)
-        if self.anchor is not None:
-            assert isinstance(self.anchor, Anchor), repr(self.anchor)
-        if self.figure_name is not None:
-            assert isinstance(self.figure_name, str), repr(self.figure_name)
-        if self.hide_time_signature is not None:
-            assert isinstance(self.hide_time_signature, bool), repr(
-                self.hide_time_signature
-            )
-        if self.time_signature is not None:
-            assert isinstance(self.time_signature, abjad.TimeSignature)
-        if self.voice_to_selection is not None:
-            assert isinstance(self.voice_to_selection, dict), repr(
-                self.voice_to_selection
-            )
-            for value in self.voice_to_selection.values():
-                assert isinstance(value, list), repr(value)
-
-    def __getitem__(self, voice_name) -> list:
-        """
-        Gets ``voice_name`` selection list.
-        """
-        return self.voice_to_selection.__getitem__(voice_name)
-
-    def __iter__(self) -> typing.Iterator[str]:
-        """
-        Iterates figure contribution.
-        """
-        for voice_name in self.voice_to_selection:
-            yield voice_name
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class Nest:
-    r"""
-    Nest.
-
-    ..  container:: example
-
-        Augments one sixteenth:
-
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16),
-        ...     rmakers.beam_groups(),
-        ...     baca.nest("+1/16"),
-        ... )
-
-        >>> collections = [
-        ...     [0, 2, 10, 18],
-        ...     [16, 15, 23],
-        ...     [19, 13, 9, 8],
-        ... ]
-        >>> selection = stack(collections)
-
-        >>> lilypond_file = abjad.illustrators.selection(selection)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 12/11
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \set stemLeftBeamCount = 0
-                            \set stemRightBeamCount = 2
-                            \time 3/4
-                            c'16
-                            [
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
-                            d'16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
-                            bf'16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 1
-                            fs''16
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 2
-                            e''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
-                            ef''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 1
-                            b''16
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 2
-                            g''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
-                            cs''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
-                            a'16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 0
-                            af'16
-                            ]
-                        }
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        With rest affixes:
-
-        >>> affix = baca.rests_around([2], [3])
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16, affix=affix),
-        ...     rmakers.beam_groups(),
-        ...     baca.nest("+1/16"),
-        ... )
-
-        >>> collections = [
-        ...     [0, 2, 10, 18],
-        ...     [16, 15, 23],
-        ...     [19, 13, 9, 8],
-        ... ]
-        >>> selection = stack(collections)
-
-        >>> lilypond_file = abjad.illustrators.selection(selection)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 17/16
-                    {
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \time 17/16
-                            r8
-                            \set stemLeftBeamCount = 0
-                            \set stemRightBeamCount = 2
-                            c'16
-                            [
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
-                            d'16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
-                            bf'16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 1
-                            fs''16
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 2
-                            e''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
-                            ef''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 1
-                            b''16
-                        }
-                        \scaleDurations #'(1 . 1)
-                        {
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 2
-                            g''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
-                            cs''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
-                            a'16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 0
-                            af'16
-                            ]
-                            r8.
-                        }
-                    }
-                }
-            >>
-
-    """
-
-    treatments: typing.Sequence[int | str]
-    lmr: LMR | None = None
-
-    def __post_init__(self):
-        assert isinstance(self.treatments, list | tuple)
-        for treatment in self.treatments:
-            assert _is_treatment(treatment), repr(treatment)
-        if self.lmr is not None:
-            assert isinstance(self.lmr, LMR), repr(self.lmr)
-
-    def __call__(self, selection) -> list[abjad.Tuplet]:
-        treatments = self._get_treatments()
-        assert treatments is not None
-        tuplets = []
-        for item in selection:
-            if isinstance(item, abjad.Tuplet):
-                tuplets.append(item)
-            else:
-                assert isinstance(item, list), repr(item)
-                assert len(item) == 1, repr(item)
-                assert isinstance(item[0], abjad.Tuplet), repr(item)
-                tuplet = item[0]
-                tuplets.append(tuplet)
-        if self.lmr is None:
-            tuplet_selections = [tuplets]
-        else:
-            tuplet_selections = self.lmr(tuplets)
-            tuplet_selections = [list(_) for _ in tuplet_selections]
-        tuplets = []
-        for i, tuplet_selection in enumerate(tuplet_selections):
-            assert isinstance(tuplet_selection, list)
-            treatment = treatments[i]
-            if treatment is None:
-                tuplets.extend(tuplet_selection)
-            else:
-                assert isinstance(tuplet_selection, list)
-                for tuplet in tuplet_selection:
-                    assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
-                if isinstance(treatment, str):
-                    addendum = abjad.Duration(treatment)
-                    contents_duration = abjad.get.duration(tuplet_selection)
-                    target_duration = contents_duration + addendum
-                    multiplier = target_duration / contents_duration
-                    tuplet = abjad.Tuplet(multiplier, [])
-                    abjad.mutate.wrap(tuplet_selection, tuplet)
-                elif treatment.__class__ is abjad.Multiplier:
-                    tuplet = abjad.Tuplet(treatment, [])
-                    abjad.mutate.wrap(tuplet_selection, tuplet)
-                elif treatment.__class__ is abjad.Duration:
-                    target_duration = treatment
-                    contents_duration = abjad.get.duration(tuplet_selection)
-                    multiplier = target_duration / contents_duration
-                    tuplet = abjad.Tuplet(multiplier, [])
-                    abjad.mutate.wrap(tuplet_selection, tuplet)
-                else:
-                    raise Exception(f"bad time treatment: {treatment!r}.")
-                nested_tuplet = tuplet
-                tuplets.append(nested_tuplet)
-        return tuplets
-
-    def _get_treatments(self):
-        if self.treatments:
-            return abjad.CyclicTuple(self.treatments)
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class RestAffix:
-    r"""
-    Rest affix.
-
-    ..  container:: example
-
-        Affixes rests to complete output when pattern is none:
-
-        >>> affix = baca.RestAffix(
-        ...     prefix=[1],
-        ...     suffix=[2],
-        ... )
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16, affix=affix, treatments=[1]),
-        ...     rmakers.beam(),
-        ... )
-
-        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> selection = stack(collections)
-
-        >>> lilypond_file = abjad.illustrators.selection(selection)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 5/4
-                    {
-                        \time 15/16
-                        r16
-                        c'16
-                        [
-                        d'16
-                        bf'16
-                        ]
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 6/5
-                    {
-                        fs''16
-                        [
-                        e''16
-                        ef''16
-                        af''16
-                        g''16
-                        ]
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 4/3
-                    {
-                        a'16
-                        r8
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Affixes rest to complete output when pattern is none:
-
-        >>> affix = baca.RestAffix(
-        ...     prefix=[1],
-        ...     suffix=[2],
-        ... )
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16, affix=affix, treatments=[1]),
-        ...     rmakers.beam(),
-        ... )
-
-        >>> collections = [[18, 16, 15, 20, 19]]
-        >>> selection = stack(collections)
-
-        >>> lilypond_file = abjad.illustrators.selection(selection)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/8
-                    {
-                        \time 9/16
-                        r16
-                        fs''16
-                        [
-                        e''16
-                        ef''16
-                        af''16
-                        g''16
-                        ]
-                        r8
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Affixes rests to first and last collections only:
-
-        >>> affix = baca.RestAffix(
-        ...     pattern=abjad.Pattern(indices=[0, -1]),
-        ...     prefix=[1],
-        ...     suffix=[2],
-        ... )
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16, affix=affix, treatments=[1]),
-        ...     rmakers.beam(),
-        ... )
-
-        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> selection = stack(collections)
-
-        >>> lilypond_file = abjad.illustrators.selection(selection)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 7/6
-                    {
-                        \time 9/8
-                        r16
-                        c'16
-                        [
-                        d'16
-                        bf'16
-                        ]
-                        r8
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 6/5
-                    {
-                        fs''16
-                        [
-                        e''16
-                        ef''16
-                        af''16
-                        g''16
-                        ]
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 5/4
-                    {
-                        r16
-                        a'16
-                        r8
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Affixes rests to every collection:
-
-        >>> affix = baca.RestAffix(
-        ...     pattern=abjad.index_all(),
-        ...     prefix=[1],
-        ...     suffix=[2],
-        ... )
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16, affix=affix, treatments=[1]),
-        ...     rmakers.beam(),
-        ... )
-
-        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> selection = stack(collections)
-
-        >>> lilypond_file = abjad.illustrators.selection(selection)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 7/6
-                    {
-                        \time 21/16
-                        r16
-                        c'16
-                        [
-                        d'16
-                        bf'16
-                        ]
-                        r8
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/8
-                    {
-                        r16
-                        fs''16
-                        [
-                        e''16
-                        ef''16
-                        af''16
-                        g''16
-                        ]
-                        r8
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 5/4
-                    {
-                        r16
-                        a'16
-                        r8
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        >>> affix = baca.RestAffix(prefix=[3])
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16, affix=affix),
-        ...     rmakers.beam(),
-        ... )
-
-        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> selection = stack(collections)
-
-        >>> lilypond_file = abjad.illustrators.selection(selection)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \scaleDurations #'(1 . 1)
-                    {
-                        \time 3/4
-                        r8.
-                        c'16
-                        [
-                        d'16
-                        bf'16
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
-                        fs''16
-                        [
-                        e''16
-                        ef''16
-                        af''16
-                        g''16
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
-                        a'16
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        >>> affix = baca.RestAffix(suffix=[3])
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16, affix=affix),
-        ...     rmakers.beam(),
-        ... )
-
-        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> selection = stack(collections)
-
-        >>> lilypond_file = abjad.illustrators.selection(selection)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \scaleDurations #'(1 . 1)
-                    {
-                        \time 3/4
-                        c'16
-                        [
-                        d'16
-                        bf'16
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
-                        fs''16
-                        [
-                        e''16
-                        ef''16
-                        af''16
-                        g''16
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
-                        a'16
-                        r8.
-                    }
-                }
-            >>
-
-    """
-
-    pattern: abjad.Pattern | None = None
-    prefix: typing.Sequence[int] = ()
-    skips_instead_of_rests: bool = False
-    suffix: typing.Sequence[int] = ()
-
-    def __post_init__(self):
-        if self.pattern is not None:
-            assert isinstance(self.pattern, abjad.Pattern)
-        if self.prefix is not None:
-            assert all(isinstance(_, int) for _ in self.prefix)
-        assert isinstance(self.skips_instead_of_rests, bool), repr(
-            self.skips_instead_of_rests
-        )
-        if self.suffix is not None:
-            assert all(isinstance(_, int) for _ in self.suffix)
-
-    def __call__(
-        self, collection_index: int, total_collections: int
-    ) -> tuple[typing.Sequence[int] | None, typing.Sequence[int] | None]:
-        if self.pattern is None:
-            if collection_index == 0 and collection_index == total_collections - 1:
-                return self.prefix, self.suffix
-            if collection_index == 0:
-                return self.prefix, None
-            if collection_index == total_collections - 1:
-                return None, self.suffix
-        elif self.pattern.matches_index(collection_index, total_collections):
-            return self.prefix, self.suffix
-        return None, None
-
-
-def _add_rest_affixes(
-    leaves,
-    talea,
-    rest_prefix,
-    rest_suffix,
-    affix_skips_instead_of_rests,
-    increase_monotonic,
-):
-    if rest_prefix:
-        durations = [(_, talea.denominator) for _ in rest_prefix]
-        maker = abjad.LeafMaker(
-            increase_monotonic=increase_monotonic,
-            skips_instead_of_rests=affix_skips_instead_of_rests,
-        )
-        leaves_ = maker([None], durations)
-        leaves[0:0] = leaves_
-    if rest_suffix:
-        durations = [(_, talea.denominator) for _ in rest_suffix]
-        maker = abjad.LeafMaker(
-            increase_monotonic=increase_monotonic,
-            skips_instead_of_rests=affix_skips_instead_of_rests,
-        )
-        leaves_ = maker([None], durations)
-        leaves.extend(leaves_)
-    return leaves
-
-
-def _coerce_collections(collections):
-    prototype = (
-        abjad.PitchClassSegment,
-        abjad.PitchSegment,
-        set,
-        frozenset,
-    )
-    if isinstance(collections, prototype):
-        return [collections]
-    return collections
-
-
-def _fix_rounding_error(durations, total_duration):
-    current_duration = sum(durations)
-    if current_duration < total_duration:
-        missing_duration = total_duration - current_duration
-        if durations[0] < durations[-1]:
-            durations[-1] += missing_duration
-        else:
-            durations[0] += missing_duration
-    elif sum(durations) == total_duration:
-        return durations
-    elif total_duration < current_duration:
-        extra_duration = current_duration - total_duration
-        if durations[0] < durations[-1]:
-            durations[-1] -= extra_duration
-        else:
-            durations[0] -= extra_duration
-    assert sum(durations) == total_duration
-    return durations
-
-
-def _is_treatment(argument):
-    if argument is None:
-        return True
-    elif isinstance(argument, int):
-        return True
-    elif isinstance(argument, str):
-        return True
-    elif isinstance(argument, tuple) and len(argument) == 2:
-        return True
-    elif isinstance(argument, abjad.Ratio):
-        return True
-    elif isinstance(argument, abjad.Multiplier):
-        return True
-    elif argument.__class__ is abjad.Duration:
-        return True
-    elif argument in ("accel", "rit"):
-        return True
-    return False
-
-
-def _make_tuplet_with_extra_count(leaf_selection, extra_count, denominator):
-    contents_duration = abjad.get.duration(leaf_selection)
-    contents_duration = contents_duration.with_denominator(denominator)
-    contents_count = contents_duration.numerator
-    if 0 < extra_count:
-        extra_count %= contents_count
-    elif extra_count < 0:
-        extra_count = abs(extra_count)
-        extra_count %= python_math.ceil(contents_count / 2.0)
-        extra_count *= -1
-    new_contents_count = contents_count + extra_count
-    tuplet_multiplier = abjad.Multiplier(new_contents_count, contents_count)
-    if not tuplet_multiplier.normalized():
-        message = f"{leaf_selection!r} gives {tuplet_multiplier}"
-        message += " with {contents_count} and {new_contents_count}."
-        raise Exception(message)
-    tuplet = abjad.Tuplet(tuplet_multiplier, leaf_selection)
-    return tuplet
 
 
 @dataclasses.dataclass(slots=True)
@@ -5828,7 +4189,7 @@ class FigureMaker:
 
     talea: rmakers.Talea
     acciaccatura: Acciaccatura | None = None
-    affix: RestAffix | None = None
+    affix: typing.Optional["RestAffix"] = None
     restart_talea: bool = False
     signature: int | None = None
     spelling: rmakers.Spelling | None = None
@@ -6194,62 +4555,1688 @@ class FigureMaker:
         return tuplet
 
 
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class Assignment:
+class Imbrication:
     """
-    Assignment.
+    Imbrication.
     """
 
-    maker: FigureMaker
-    pattern: abjad.Pattern | None = None
+    ### CLASS VARIABLES ###
+
+    __slots__ = (
+        "_allow_unused_pitches",
+        "_by_pitch_class",
+        "_commands",
+        "_hocket",
+        "_segment",
+        "_selector",
+        "_truncate_ties",
+        "_voice_name",
+    )
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        voice_name: str,
+        segment: list[int] = None,
+        *commands,
+        allow_unused_pitches: bool = False,
+        by_pitch_class: bool = False,
+        hocket: bool = False,
+        selector=None,
+        truncate_ties: bool = False,
+    ) -> None:
+        assert isinstance(voice_name, str), repr(voice_name)
+        self._voice_name = voice_name
+        if segment is not None:
+            assert isinstance(segment, list), repr(segment)
+        self._segment = segment
+        self._commands = commands
+        self._allow_unused_pitches = bool(allow_unused_pitches)
+        self._by_pitch_class = bool(by_pitch_class)
+        self._hocket = bool(hocket)
+        if selector is not None:
+            if not callable(selector):
+                raise TypeError(f"callable or none only: {selector!r}.")
+        self._selector = selector
+        self._truncate_ties = bool(truncate_ties)
+
+    ### SPECIAL METHODS ###
+
+    def __call__(self, container: abjad.Container = None) -> dict[str, list]:
+        """
+        Calls imbrication on ``container``.
+        """
+        original_container = container
+        container = copy.deepcopy(container)
+        abjad.override(container).TupletBracket.stencil = False
+        abjad.override(container).TupletNumber.stencil = False
+        segment = abjad.sequence.flatten(self.segment, depth=-1)
+        if self.by_pitch_class:
+            segment = [abjad.NumberedPitchClass(_) for _ in segment]
+        cursor = _cursor.Cursor(
+            singletons=True, source=segment, suppress_exception=True
+        )
+        pitch_number = cursor.next()
+        if self.selector is not None:
+            selection = self.selector(original_container)
+        selected_logical_ties = None
+        if self.selector is not None:
+            selection = self.selector(container)
+            generator = abjad.iterate.logical_ties(selection, pitched=True)
+            selected_logical_ties = list(generator)
+        original_logical_ties = abjad.select.logical_ties(original_container)
+        logical_ties = abjad.select.logical_ties(container)
+        pairs = zip(logical_ties, original_logical_ties)
+        for logical_tie, original_logical_tie in pairs:
+            if (
+                selected_logical_ties is not None
+                and logical_tie not in selected_logical_ties
+            ):
+                for leaf in logical_tie:
+                    duration = leaf.written_duration
+                    skip = abjad.Skip(duration)
+                    abjad.mutate.replace(leaf, [skip])
+            elif isinstance(logical_tie.head, abjad.Rest):
+                for leaf in logical_tie:
+                    duration = leaf.written_duration
+                    skip = abjad.Skip(duration)
+                    abjad.mutate.replace(leaf, [skip])
+            elif isinstance(logical_tie.head, abjad.Skip):
+                pass
+            elif _matches_pitch(logical_tie.head, pitch_number):
+                if isinstance(pitch_number, Coat):
+                    for leaf in logical_tie:
+                        duration = leaf.written_duration
+                        skip = abjad.Skip(duration)
+                        abjad.mutate.replace(leaf, [skip])
+                    pitch_number = cursor.next()
+                    continue
+                _trim_matching_chord(logical_tie, pitch_number)
+                pitch_number = cursor.next()
+                if self.truncate_ties:
+                    head = logical_tie.head
+                    tail = logical_tie.tail
+                    for leaf in logical_tie[1:]:
+                        duration = leaf.written_duration
+                        skip = abjad.Skip(duration)
+                        abjad.mutate.replace(leaf, [skip])
+                    abjad.detach(abjad.Tie, head)
+                    next_leaf = abjad.get.leaf(tail, 1)
+                    if next_leaf is not None:
+                        abjad.detach(abjad.RepeatTie, next_leaf)
+                if self.hocket:
+                    for leaf in original_logical_tie:
+                        duration = leaf.written_duration
+                        skip = abjad.Skip(duration)
+                        abjad.mutate.replace(leaf, [skip])
+            else:
+                for leaf in logical_tie:
+                    duration = leaf.written_duration
+                    skip = abjad.Skip(duration)
+                    abjad.mutate.replace(leaf, [skip])
+        if not self.allow_unused_pitches and not cursor.is_exhausted:
+            assert cursor.position is not None
+            current, total = cursor.position - 1, len(cursor)
+            raise Exception(f"{cursor!r} used only {current} of {total} pitches.")
+        self._call_commands(container)
+        selection = [container]
+        if not self.hocket:
+            pleaves = _select.pleaves(container)
+            assert isinstance(pleaves, list)
+            for pleaf in pleaves:
+                abjad.attach(_enums.ALLOW_OCTAVE, pleaf)
+        return {self.voice_name: selection}
+
+    ### PRIVATE METHODS ###
+
+    def _call_commands(self, container):
+        assert isinstance(container, abjad.Container), repr(container)
+        nested_selections = None
+        commands = self.commands or []
+        selections = container[:]
+        for command in commands:
+            if isinstance(command, Assignment):
+                continue
+            if isinstance(command, Imbrication):
+                continue
+            prototype = (
+                rmakers.BeamCommand,
+                rmakers.FeatherBeamCommand,
+                rmakers.BeamGroupsCommand,
+                rmakers.UnbeamCommand,
+            )
+            if isinstance(command, prototype):
+                rmakers.unbeam()(selections)
+            if isinstance(command, Nest):
+                nested_selections = command(selections)
+            else:
+                command(selections)
+        if nested_selections is not None:
+            return nested_selections
+        return selections
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def allow_unused_pitches(self) -> bool | None:
+        r"""
+        Is true when imbrication allows unused pitches.
+
+        ..  container:: example
+
+            Allows unused pitches:
+
+            >>> score = baca.docs.make_empty_score(2)
+            >>> figures = baca.FigureAccumulator(score)
+
+            >>> collections = [
+            ...     [0, 2, 10, 18, 16],
+            ...     [15, 20, 19, 9, 0],
+            ... ]
+            >>> figures(
+            ...     "Music.2",
+            ...     collections,
+            ...     baca.figure([1], 16),
+            ...     rmakers.beam_groups(beam_rests=True),
+            ...     baca.imbricate(
+            ...         "Music.1",
+            ...         [2, 19, 9, 18, 16],
+            ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
+            ...         rmakers.beam_groups(beam_rests=True),
+            ...         allow_unused_pitches=True,
+            ...     ),
+            ...     baca.staccato(selector=lambda _: baca.select.pheads(_)),
+            ... )
+
+            >>> accumulator = baca.CommandAccumulator(
+            ...     time_signatures=figures.time_signatures,
+            ... )
+            >>> baca.interpret.set_up_score(
+            ...     score,
+            ...     accumulator,
+            ...     accumulator.manifests(),
+            ...     accumulator.time_signatures,
+            ...     docs=True,
+            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
+            ... )
+            >>> figures.populate_commands(score, accumulator)
+
+            >>> accumulator(
+            ...     "Music.1",
+            ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
+            ... )
+
+            >>> accumulator(
+            ...     "Music.2",
+            ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
+            ... )
+
+            >>> _, _ = baca.interpret.section(
+            ...     score,
+            ...     accumulator.manifests(),
+            ...     accumulator.time_signatures,
+            ...     commands=accumulator.commands,
+            ...     move_global_context=True,
+            ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ... )
+            >>> lilypond_file = baca.lilypond.file(
+            ...     score,
+            ...     includes=["baca.ily"],
+            ... )
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
+                >>> print(string)
+                \context Score = "Score"
+                {
+                    \context Staff = "Staff"
+                    <<
+                        \context Voice = "Skips"
+                        {
+                            \baca-new-spacing-section #1 #32
+                            \time 5/8
+                            s1 * 5/8
+                        }
+                        \context Voice = "Music.1"
+                        {
+                            {
+                                \override TupletBracket.stencil = ##f
+                                \override TupletNumber.stencil = ##f
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \voiceOne
+                                    s16
+                                    [
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    d'16
+                                    - \accent
+                                    s16
+                                    s16
+                                    s16
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    s16
+                                    s16
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    g''16
+                                    - \accent
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    a'16
+                                    - \accent
+                                    s16
+                                    ]
+                                }
+                                \revert TupletBracket.stencil
+                                \revert TupletNumber.stencil
+                            }
+                        }
+                        \context Voice = "Music.2"
+                        {
+                            {
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \set stemLeftBeamCount = 0
+                                    \set stemRightBeamCount = 2
+                                    \voiceTwo
+                                    c'16
+                                    - \staccato
+                                    [
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    d'16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    bf'16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    fs''16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
+                                    e''16
+                                    - \staccato
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
+                                    ef''16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    af''16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    g''16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    a'16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 0
+                                    c'16
+                                    - \staccato
+                                    ]
+                                }
+                            }
+                        }
+                    >>
+                }
+
+        ..  container:: example exception
+
+            Raises exception on unused pitches:
+
+            >>> score = baca.docs.make_empty_score(2)
+            >>> figures = baca.FigureAccumulator(score)
+
+            >>> collections = [
+            ...     [0, 2, 10, 18, 16],
+            ...     [15, 20, 19, 9, 0],
+            ... ]
+            >>> figures(
+            ...     "Music.2",
+            ...     collections,
+            ...     baca.figure([1], 16),
+            ...     rmakers.beam_groups(beam_rests=True),
+            ...     baca.imbricate(
+            ...         "Music.1",
+            ...         [2, 19, 9, 18, 16],
+            ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
+            ...         rmakers.beam_groups(beam_rests=True),
+            ...         allow_unused_pitches=False,
+            ...     ),
+            ...     baca.staccato(selector=lambda _: baca.select.pheads(_)),
+            ... )
+            Traceback (most recent call last):
+                ...
+            Exception: Cursor(...) used only 3 of 5 pitches.
+
+        """
+        return self._allow_unused_pitches
+
+    @property
+    def by_pitch_class(self) -> bool | None:
+        """
+        Is true when imbrication matches on pitch-class rather than pitch.
+        """
+        return self._by_pitch_class
+
+    @property
+    def commands(self) -> list:
+        """
+        Gets commands.
+        """
+        return list(self._commands)
+
+    @property
+    def hocket(self) -> bool | None:
+        r"""
+        Is true when imbrication hockets voices.
+
+        ..  container:: example
+
+            Hockets voices:
+
+            >>> score = baca.docs.make_empty_score(2)
+            >>> figures = baca.FigureAccumulator(score)
+
+            >>> collections = [
+            ...     [0, 2, 10, 18, 16],
+            ...     [15, 20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ... ]
+            >>> figures(
+            ...     "Music.2",
+            ...     collections,
+            ...     baca.figure([1], 16),
+            ...     rmakers.beam_groups(beam_rests=True),
+            ...     baca.imbricate(
+            ...         "Music.1",
+            ...         [2, 19, 9, 18, 16],
+            ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
+            ...         rmakers.beam_groups(beam_rests=True),
+            ...         hocket=True,
+            ...     ),
+            ...     baca.staccato(selector=lambda _: baca.select.pheads(_)),
+            ... )
+
+            >>> accumulator = baca.CommandAccumulator(
+            ...     time_signatures=figures.time_signatures,
+            ... )
+            >>> baca.interpret.set_up_score(
+            ...     score,
+            ...     accumulator,
+            ...     accumulator.manifests(),
+            ...     accumulator.time_signatures,
+            ...     docs=True,
+            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
+            ... )
+            >>> figures.populate_commands(score, accumulator)
+
+            >>> accumulator(
+            ...     "Music.1",
+            ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
+            ... )
+
+            >>> accumulator(
+            ...     "Music.2",
+            ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
+            ... )
+
+            >>> _, _ = baca.interpret.section(
+            ...     score,
+            ...     accumulator.manifests(),
+            ...     accumulator.time_signatures,
+            ...     commands=accumulator.commands,
+            ...     move_global_context=True,
+            ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ... )
+            >>> lilypond_file = baca.lilypond.file(
+            ...     score,
+            ...     includes=["baca.ily"],
+            ... )
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
+                >>> print(string)
+                \context Score = "Score"
+                {
+                    \context Staff = "Staff"
+                    <<
+                        \context Voice = "Skips"
+                        {
+                            \baca-new-spacing-section #1 #32
+                            \time 15/16
+                            s1 * 15/16
+                        }
+                        \context Voice = "Music.1"
+                        {
+                            {
+                                \override TupletBracket.stencil = ##f
+                                \override TupletNumber.stencil = ##f
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \voiceOne
+                                    s16
+                                    [
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    d'16
+                                    - \accent
+                                    s16
+                                    s16
+                                    s16
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    s16
+                                    s16
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    g''16
+                                    - \accent
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    a'16
+                                    - \accent
+                                    s16
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    s16
+                                    s16
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    fs''16
+                                    - \accent
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    e''16
+                                    - \accent
+                                    s16
+                                    ]
+                                }
+                                \revert TupletBracket.stencil
+                                \revert TupletNumber.stencil
+                            }
+                        }
+                        \context Voice = "Music.2"
+                        {
+                            {
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \set stemLeftBeamCount = 0
+                                    \set stemRightBeamCount = 2
+                                    \voiceTwo
+                                    c'16
+                                    - \staccato
+                                    [
+                                    s16
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    bf'16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    fs''16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
+                                    e''16
+                                    - \staccato
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
+                                    ef''16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    af''16
+                                    - \staccato
+                                    s16
+                                    s16
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
+                                    c'16
+                                    - \staccato
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
+                                    d'16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    bf'16
+                                    - \staccato
+                                    s16
+                                    s16
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 0
+                                    ef''16
+                                    - \staccato
+                                    ]
+                                }
+                            }
+                        }
+                    >>
+                }
+
+        """
+        return self._hocket
+
+    @property
+    def segment(self) -> list[int] | None:
+        """
+        Gets to-be-imbricated segment.
+        """
+        return self._segment
+
+    @property
+    def selector(self):
+        r"""
+        Gets selector.
+
+        ..  container:: example
+
+            Selects last nine notes:
+
+            >>> score = baca.docs.make_empty_score(2)
+            >>> figures = baca.FigureAccumulator(score)
+
+            >>> collections = [
+            ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
+            ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
+            ... ]
+            >>> figures(
+            ...     "Music.2",
+            ...     collections,
+            ...     baca.figure([1], 16),
+            ...     rmakers.beam_groups(beam_rests=True),
+            ...     baca.imbricate(
+            ...         "Music.1",
+            ...         [2, 18, 16, 15],
+            ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
+            ...         rmakers.beam_groups(beam_rests=True),
+            ...         selector=lambda _: baca.select.plts(_)[-9:],
+            ...     ),
+            ...     baca.staccato(selector=lambda _: baca.select.pheads(_)),
+            ... )
+
+            >>> accumulator = baca.CommandAccumulator(
+            ...     time_signatures=figures.time_signatures,
+            ... )
+            >>> baca.interpret.set_up_score(
+            ...     score,
+            ...     accumulator,
+            ...     accumulator.manifests(),
+            ...     accumulator.time_signatures,
+            ...     docs=True,
+            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
+            ... )
+            >>> figures.populate_commands(score, accumulator)
+
+            >>> accumulator(
+            ...     "Music.1",
+            ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
+            ... )
+
+            >>> accumulator(
+            ...     "Music.2",
+            ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
+            ... )
+
+            >>> _, _ = baca.interpret.section(
+            ...     score,
+            ...     accumulator.manifests(),
+            ...     accumulator.time_signatures,
+            ...     commands=accumulator.commands,
+            ...     move_global_context=True,
+            ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ... )
+            >>> lilypond_file = baca.lilypond.file(
+            ...     score,
+            ...     includes=["baca.ily"],
+            ... )
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
+                >>> print(string)
+                \context Score = "Score"
+                {
+                    \context Staff = "Staff"
+                    <<
+                        \context Voice = "Skips"
+                        {
+                            \baca-new-spacing-section #1 #32
+                            \time 9/8
+                            s1 * 9/8
+                        }
+                        \context Voice = "Music.1"
+                        {
+                            {
+                                \override TupletBracket.stencil = ##f
+                                \override TupletNumber.stencil = ##f
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \voiceOne
+                                    s16
+                                    [
+                                    s16
+                                    s16
+                                    s16
+                                    s16
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    s16
+                                    s16
+                                    s16
+                                    s16
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    s16
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    d'16
+                                    - \accent
+                                    s16
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    fs''16
+                                    - \accent
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
+                                    e''16
+                                    - \accent
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
+                                    ef''16
+                                    - \accent
+                                    s16
+                                    s16
+                                    s16
+                                    ]
+                                }
+                                \revert TupletBracket.stencil
+                                \revert TupletNumber.stencil
+                            }
+                        }
+                        \context Voice = "Music.2"
+                        {
+                            {
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \set stemLeftBeamCount = 0
+                                    \set stemRightBeamCount = 2
+                                    \voiceTwo
+                                    c'16
+                                    - \staccato
+                                    [
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    d'16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    bf'16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    fs''16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
+                                    e''16
+                                    - \staccato
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
+                                    ef''16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    af''16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    g''16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
+                                    a'16
+                                    - \staccato
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
+                                    c'16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    d'16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    bf'16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    fs''16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
+                                    e''16
+                                    - \staccato
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
+                                    ef''16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    af''16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    g''16
+                                    - \staccato
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 0
+                                    a'16
+                                    - \staccato
+                                    ]
+                                }
+                            }
+                        }
+                    >>
+                }
+
+        """
+        return self._selector
+
+    @property
+    def truncate_ties(self) -> bool | None:
+        r"""
+        Is true when imbrication truncates ties.
+
+        ..  container:: example
+
+            Truncates ties:
+
+            >>> score = baca.docs.make_empty_score(2)
+            >>> figures = baca.FigureAccumulator(score)
+
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> figures(
+            ...     "Music.2",
+            ...     collections,
+            ...     baca.figure([5], 32),
+            ...     rmakers.beam(),
+            ...     baca.imbricate(
+            ...         "Music.1",
+            ...         [2, 10, 18, 19, 9],
+            ...         rmakers.beam_groups(beam_rests=True),
+            ...         truncate_ties=True,
+            ...     ),
+            ... )
+
+            >>> accumulator = baca.CommandAccumulator(
+            ...     time_signatures=figures.time_signatures,
+            ... )
+            >>> baca.interpret.set_up_score(
+            ...     score,
+            ...     accumulator,
+            ...     accumulator.manifests(),
+            ...     accumulator.time_signatures,
+            ...     docs=True,
+            ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
+            ... )
+            >>> figures.populate_commands(score, accumulator)
+
+            >>> accumulator(
+            ...     "Music.1",
+            ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
+            ... )
+
+            >>> accumulator(
+            ...     "Music.2",
+            ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
+            ... )
+
+            >>> _, _ = baca.interpret.section(
+            ...     score,
+            ...     accumulator.manifests(),
+            ...     accumulator.time_signatures,
+            ...     commands=accumulator.commands,
+            ...     move_global_context=True,
+            ...     remove_tags=baca.tags.documentation_removal_tags(),
+            ... )
+            >>> lilypond_file = baca.lilypond.file(
+            ...     score,
+            ...     includes=["baca.ily"],
+            ... )
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> score = lilypond_file["Score"]
+                >>> string = abjad.lilypond(score)
+                >>> print(string)
+                \context Score = "Score"
+                {
+                    \context Staff = "Staff"
+                    <<
+                        \context Voice = "Skips"
+                        {
+                            \baca-new-spacing-section #1 #32
+                            \time 45/32
+                            s1 * 45/32
+                        }
+                        \context Voice = "Music.1"
+                        {
+                            {
+                                \override TupletBracket.stencil = ##f
+                                \override TupletNumber.stencil = ##f
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \voiceOne
+                                    s8
+                                    [
+                                    s32
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 1
+                                    d'8
+                                    s32
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 1
+                                    bf'8
+                                    s32
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 1
+                                    fs''8
+                                    s32
+                                    s8
+                                    s32
+                                    s8
+                                    s32
+                                    s8
+                                    s32
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 1
+                                    g''8
+                                    s32
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 1
+                                    a'8
+                                    s32
+                                    ]
+                                }
+                                \revert TupletBracket.stencil
+                                \revert TupletNumber.stencil
+                            }
+                        }
+                        \context Voice = "Music.2"
+                        {
+                            {
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    \voiceTwo
+                                    c'8
+                                    [
+                                    ~
+                                    c'32
+                                    d'8
+                                    ~
+                                    d'32
+                                    bf'8
+                                    ~
+                                    bf'32
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    fs''8
+                                    [
+                                    ~
+                                    fs''32
+                                    e''8
+                                    ~
+                                    e''32
+                                    ef''8
+                                    ~
+                                    ef''32
+                                    af''8
+                                    ~
+                                    af''32
+                                    g''8
+                                    ~
+                                    g''32
+                                    ]
+                                }
+                                \scaleDurations #'(1 . 1)
+                                {
+                                    a'8
+                                    [
+                                    ~
+                                    a'32
+                                    ]
+                                }
+                            }
+                        }
+                    >>
+                }
+
+        """
+        return self._truncate_ties
+
+    @property
+    def voice_name(self) -> str:
+        """
+        Gets voice name.
+        """
+        return self._voice_name
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class Nest:
+    r"""
+    Nest.
+
+    ..  container:: example
+
+        Augments one sixteenth:
+
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 16),
+        ...     rmakers.beam_groups(),
+        ...     baca.nest("+1/16"),
+        ... )
+
+        >>> collections = [
+        ...     [0, 2, 10, 18],
+        ...     [16, 15, 23],
+        ...     [19, 13, 9, 8],
+        ... ]
+        >>> selection = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 12/11
+                    {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \set stemLeftBeamCount = 0
+                            \set stemRightBeamCount = 2
+                            \time 3/4
+                            c'16
+                            [
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            d'16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            bf'16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
+                            fs''16
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
+                            e''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            ef''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
+                            b''16
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
+                            g''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            cs''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            a'16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 0
+                            af'16
+                            ]
+                        }
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        With rest affixes:
+
+        >>> affix = baca.rests_around([2], [3])
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 16, affix=affix),
+        ...     rmakers.beam_groups(),
+        ...     baca.nest("+1/16"),
+        ... )
+
+        >>> collections = [
+        ...     [0, 2, 10, 18],
+        ...     [16, 15, 23],
+        ...     [19, 13, 9, 8],
+        ... ]
+        >>> selection = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 17/16
+                    {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \time 17/16
+                            r8
+                            \set stemLeftBeamCount = 0
+                            \set stemRightBeamCount = 2
+                            c'16
+                            [
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            d'16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            bf'16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
+                            fs''16
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
+                            e''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            ef''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
+                            b''16
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
+                            g''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            cs''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            a'16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 0
+                            af'16
+                            ]
+                            r8.
+                        }
+                    }
+                }
+            >>
+
+    """
+
+    treatments: typing.Sequence[int | str]
+    lmr: LMR | None = None
 
     def __post_init__(self):
-        assert isinstance(self.maker, FigureMaker)
+        assert isinstance(self.treatments, list | tuple)
+        for treatment in self.treatments:
+            assert _is_treatment(treatment), repr(treatment)
+        if self.lmr is not None:
+            assert isinstance(self.lmr, LMR), repr(self.lmr)
+
+    def __call__(self, selection) -> list[abjad.Tuplet]:
+        treatments = self._get_treatments()
+        assert treatments is not None
+        tuplets = []
+        for item in selection:
+            if isinstance(item, abjad.Tuplet):
+                tuplets.append(item)
+            else:
+                assert isinstance(item, list), repr(item)
+                assert len(item) == 1, repr(item)
+                assert isinstance(item[0], abjad.Tuplet), repr(item)
+                tuplet = item[0]
+                tuplets.append(tuplet)
+        if self.lmr is None:
+            tuplet_selections = [tuplets]
+        else:
+            tuplet_selections = self.lmr(tuplets)
+            tuplet_selections = [list(_) for _ in tuplet_selections]
+        tuplets = []
+        for i, tuplet_selection in enumerate(tuplet_selections):
+            assert isinstance(tuplet_selection, list)
+            treatment = treatments[i]
+            if treatment is None:
+                tuplets.extend(tuplet_selection)
+            else:
+                assert isinstance(tuplet_selection, list)
+                for tuplet in tuplet_selection:
+                    assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
+                if isinstance(treatment, str):
+                    addendum = abjad.Duration(treatment)
+                    contents_duration = abjad.get.duration(tuplet_selection)
+                    target_duration = contents_duration + addendum
+                    multiplier = target_duration / contents_duration
+                    tuplet = abjad.Tuplet(multiplier, [])
+                    abjad.mutate.wrap(tuplet_selection, tuplet)
+                elif treatment.__class__ is abjad.Multiplier:
+                    tuplet = abjad.Tuplet(treatment, [])
+                    abjad.mutate.wrap(tuplet_selection, tuplet)
+                elif treatment.__class__ is abjad.Duration:
+                    target_duration = treatment
+                    contents_duration = abjad.get.duration(tuplet_selection)
+                    multiplier = target_duration / contents_duration
+                    tuplet = abjad.Tuplet(multiplier, [])
+                    abjad.mutate.wrap(tuplet_selection, tuplet)
+                else:
+                    raise Exception(f"bad time treatment: {treatment!r}.")
+                nested_tuplet = tuplet
+                tuplets.append(nested_tuplet)
+        return tuplets
+
+    def _get_treatments(self):
+        if self.treatments:
+            return abjad.CyclicTuple(self.treatments)
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class RestAffix:
+    r"""
+    Rest affix.
+
+    ..  container:: example
+
+        Affixes rests to complete output when pattern is none:
+
+        >>> affix = baca.RestAffix(
+        ...     prefix=[1],
+        ...     suffix=[2],
+        ... )
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 16, affix=affix, treatments=[1]),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> selection = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 5/4
+                    {
+                        \time 15/16
+                        r16
+                        c'16
+                        [
+                        d'16
+                        bf'16
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 6/5
+                    {
+                        fs''16
+                        [
+                        e''16
+                        ef''16
+                        af''16
+                        g''16
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 4/3
+                    {
+                        a'16
+                        r8
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Affixes rest to complete output when pattern is none:
+
+        >>> affix = baca.RestAffix(
+        ...     prefix=[1],
+        ...     suffix=[2],
+        ... )
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 16, affix=affix, treatments=[1]),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [[18, 16, 15, 20, 19]]
+        >>> selection = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/8
+                    {
+                        \time 9/16
+                        r16
+                        fs''16
+                        [
+                        e''16
+                        ef''16
+                        af''16
+                        g''16
+                        ]
+                        r8
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Affixes rests to first and last collections only:
+
+        >>> affix = baca.RestAffix(
+        ...     pattern=abjad.Pattern(indices=[0, -1]),
+        ...     prefix=[1],
+        ...     suffix=[2],
+        ... )
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 16, affix=affix, treatments=[1]),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> selection = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 7/6
+                    {
+                        \time 9/8
+                        r16
+                        c'16
+                        [
+                        d'16
+                        bf'16
+                        ]
+                        r8
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 6/5
+                    {
+                        fs''16
+                        [
+                        e''16
+                        ef''16
+                        af''16
+                        g''16
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 5/4
+                    {
+                        r16
+                        a'16
+                        r8
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Affixes rests to every collection:
+
+        >>> affix = baca.RestAffix(
+        ...     pattern=abjad.index_all(),
+        ...     prefix=[1],
+        ...     suffix=[2],
+        ... )
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 16, affix=affix, treatments=[1]),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> selection = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 7/6
+                    {
+                        \time 21/16
+                        r16
+                        c'16
+                        [
+                        d'16
+                        bf'16
+                        ]
+                        r8
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/8
+                    {
+                        r16
+                        fs''16
+                        [
+                        e''16
+                        ef''16
+                        af''16
+                        g''16
+                        ]
+                        r8
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 5/4
+                    {
+                        r16
+                        a'16
+                        r8
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        >>> affix = baca.RestAffix(prefix=[3])
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 16, affix=affix),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> selection = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 3/4
+                        r8.
+                        c'16
+                        [
+                        d'16
+                        bf'16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        fs''16
+                        [
+                        e''16
+                        ef''16
+                        af''16
+                        g''16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        a'16
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        >>> affix = baca.RestAffix(suffix=[3])
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 16, affix=affix),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> selection = stack(collections)
+
+        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> score = lilypond_file["Score"]
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \context Score = "Score"
+            <<
+                \context Staff = "Staff"
+                {
+                    \scaleDurations #'(1 . 1)
+                    {
+                        \time 3/4
+                        c'16
+                        [
+                        d'16
+                        bf'16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        fs''16
+                        [
+                        e''16
+                        ef''16
+                        af''16
+                        g''16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1)
+                    {
+                        a'16
+                        r8.
+                    }
+                }
+            >>
+
+    """
+
+    pattern: abjad.Pattern | None = None
+    prefix: typing.Sequence[int] = ()
+    skips_instead_of_rests: bool = False
+    suffix: typing.Sequence[int] = ()
+
+    def __post_init__(self):
         if self.pattern is not None:
             assert isinstance(self.pattern, abjad.Pattern)
+        if self.prefix is not None:
+            assert all(isinstance(_, int) for _ in self.prefix)
+        assert isinstance(self.skips_instead_of_rests, bool), repr(
+            self.skips_instead_of_rests
+        )
+        if self.suffix is not None:
+            assert all(isinstance(_, int) for _ in self.suffix)
+
+    def __call__(
+        self, collection_index: int, total_collections: int
+    ) -> tuple[typing.Sequence[int] | None, typing.Sequence[int] | None]:
+        if self.pattern is None:
+            if collection_index == 0 and collection_index == total_collections - 1:
+                return self.prefix, self.suffix
+            if collection_index == 0:
+                return self.prefix, None
+            if collection_index == total_collections - 1:
+                return None, self.suffix
+        elif self.pattern.matches_index(collection_index, total_collections):
+            return self.prefix, self.suffix
+        return None, None
 
 
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class Bind:
-    """
-    Bind.
-    """
+class Stack:
 
-    assignments: typing.Sequence[Assignment] = ()
+    __slots__ = ("_commands",)
 
-    def __post_init__(self):
-        for assignment in self.assignments:
-            if not isinstance(assignment, Assignment):
-                raise Exception("must be assignment:\n   {assignment!r}")
+    def __init__(self, *commands) -> None:
+        commands = commands or ()
+        commands_ = tuple(commands)
+        self._commands = commands_
 
-    def __call__(self, collections: typing.Sequence) -> list[abjad.Tuplet]:
-        collection_count = len(collections)
-        matches = []
-        for i, collection in enumerate(collections):
-            for assignment in self.assignments:
-                if assignment.pattern is None or assignment.pattern.matches_index(
-                    i, collection_count
-                ):
-                    match = rmakers.Match(assignment, collection)
-                    matches.append(match)
-                    break
-            else:
-                raise Exception(f"no maker match for collection {i}.")
-        assert len(collections) == len(matches)
-        groups = abjad.sequence.group_by(matches, lambda _: _.assignment.maker)
-        tuplets: list[abjad.Tuplet] = []
-        for group in groups:
-            maker = group[0].assignment.maker
-            collections_ = [match.payload for match in group]
-            selection = maker(
-                collections_,
-                collection_index=None,
-                state=None,
-                total_collections=None,
-            )
-            tuplets.extend(selection)
-        assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
-        return tuplets
+    def __call__(self, argument: typing.Any, **keywords) -> typing.Any:
+        if not self.commands:
+            return argument
+        try:
+            result: typing.Any = self.commands[0](argument, **keywords)
+        except Exception:
+            message = "exception while calling:\n"
+            message += f"   {self.commands[0]}"
+            raise Exception(message)
+        for command in self.commands[1:]:
+            try:
+                result_ = command(result)
+            except Exception:
+                message = "exception while calling:\n"
+                message += f"   {command}"
+                raise Exception(message)
+            # if result_ is not None:
+            if result_ not in (True, False, None):
+                result = result_
+        if result not in (True, False, None):
+            return result
+
+    def __eq__(self, argument) -> bool:
+        """
+        Compares ``commands``.
+        """
+        if isinstance(argument, type(self)):
+            return self.commands == argument.commands
+        return False
+
+    def __hash__(self) -> int:
+        """
+        Hashes object.
+        """
+        return hash(str(self))
+
+    def __repr__(self) -> str:
+        """
+        Gets repr.
+        """
+        return f"{type(self).__name__}(commands={self.commands})"
+
+    @property
+    def commands(self):
+        """
+        Gets commands.
+        """
+        return list(self._commands)
 
 
 def anchor(
@@ -6645,6 +6632,37 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
 
     """
     return Coat(pitch)
+
+
+def figure(
+    counts: typing.Sequence[int],
+    denominator: int,
+    *,
+    acciaccatura: bool | Acciaccatura | LMR | None = None,
+    affix: RestAffix = None,
+    restart_talea: bool = False,
+    signature: int = None,
+    spelling: rmakers.Spelling = None,
+    treatments: typing.Sequence = (),
+) -> FigureMaker:
+    """
+    Makes figure-maker.
+    """
+    if acciaccatura is True:
+        acciaccatura = Acciaccatura()
+    elif isinstance(acciaccatura, LMR):
+        acciaccatura = Acciaccatura(lmr=acciaccatura)
+    if acciaccatura is not None:
+        assert isinstance(acciaccatura, Acciaccatura), repr(acciaccatura)
+    return FigureMaker(
+        rmakers.Talea(counts=counts, denominator=denominator),
+        acciaccatura=acciaccatura,
+        affix=affix,
+        restart_talea=restart_talea,
+        signature=signature,
+        spelling=spelling,
+        treatments=treatments,
+    )
 
 
 def imbricate(
@@ -7982,37 +8000,6 @@ def nest(treatments: typing.Sequence, *, lmr: LMR = None) -> Nest:
     if not isinstance(treatments, list):
         treatments = [treatments]
     return Nest(lmr=lmr, treatments=treatments)
-
-
-def figure(
-    counts: typing.Sequence[int],
-    denominator: int,
-    *,
-    acciaccatura: bool | Acciaccatura | LMR | None = None,
-    affix: RestAffix = None,
-    restart_talea: bool = False,
-    signature: int = None,
-    spelling: rmakers.Spelling = None,
-    treatments: typing.Sequence = (),
-) -> FigureMaker:
-    """
-    Makes figure-maker.
-    """
-    if acciaccatura is True:
-        acciaccatura = Acciaccatura()
-    elif isinstance(acciaccatura, LMR):
-        acciaccatura = Acciaccatura(lmr=acciaccatura)
-    if acciaccatura is not None:
-        assert isinstance(acciaccatura, Acciaccatura), repr(acciaccatura)
-    return FigureMaker(
-        rmakers.Talea(counts=counts, denominator=denominator),
-        acciaccatura=acciaccatura,
-        affix=affix,
-        restart_talea=restart_talea,
-        signature=signature,
-        spelling=spelling,
-        treatments=treatments,
-    )
 
 
 def rests_after(counts: typing.Sequence[int]) -> RestAffix:
