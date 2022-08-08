@@ -75,6 +75,19 @@ def _fix_rounding_error(durations, total_duration):
     return durations
 
 
+def _get_figure_start_offset(figure_name, floating_selections):
+    for voice_name in sorted(floating_selections.keys()):
+        for floating_selection in floating_selections[voice_name]:
+            leaf_start_offset = floating_selection.start_offset
+            leaves = abjad.iterate.leaves(floating_selection.annotation)
+            for leaf in leaves:
+                if abjad.get.annotation(leaf, "figure_name") == figure_name:
+                    return leaf_start_offset
+                leaf_duration = abjad.get.duration(leaf)
+                leaf_start_offset += leaf_duration
+    raise Exception(f"can not find figure {figure_name!r}.")
+
+
 def _is_treatment(argument):
     if argument is None:
         return True
@@ -93,6 +106,38 @@ def _is_treatment(argument):
     elif argument in ("accel", "rit"):
         return True
     return False
+
+
+def _label_figure(container, figure_name, figure_label_direction, figure_number):
+    parts = figure_name.split("_")
+    if len(parts) == 1:
+        body = parts[0]
+        figure_label_string = f'"{body}"'
+    elif len(parts) == 2:
+        body, subscript = parts
+        figure_label_string = rf'\concat {{ "{body}" \sub {subscript} }}'
+    else:
+        raise Exception(f"unrecognized figure name: {figure_name!r}.")
+    string = r"\markup"
+    string += rf" \concat {{ [ \raise #0.25 \fontsize #-2 ({figure_number})"
+    if figure_name:
+        string += rf" \hspace #1 {figure_label_string} ] }}"
+    else:
+        string += r" ] }"
+    figure_label_markup = abjad.Markup(string)
+    bundle = abjad.bundle(figure_label_markup, r"- \tweak color #blue")
+    pleaves = _select.pleaves(container)
+    if pleaves:
+        leaf = pleaves[0]
+    else:
+        leaf = abjad.select.leaf(container, 0)
+    abjad.attach(
+        bundle,
+        leaf,
+        deactivate=True,
+        direction=figure_label_direction,
+        tag=_tags.FIGURE_LABEL,
+    )
 
 
 def _make_tuplet_with_extra_count(leaf_selection, extra_count, denominator):
@@ -480,7 +525,7 @@ class FigureAccumulator:
         self.current_offset = abjad.Offset(0)
         self.figure_number = 1
         self.figure_names: list[str] = []
-        self.floating_selections = self._make_voice_dictionary()
+        self.floating_selections = dict([(_, []) for _ in self.voice_names])
         self.score_stop_offset = abjad.Offset(0)
         self.time_signatures: list[abjad.TimeSignature] = []
 
@@ -497,7 +542,7 @@ class FigureAccumulator:
         signature: int = None,
     ) -> None:
         assert isinstance(figure_name, str), repr(figure_name)
-        voice_name = self._abbreviation(voice_name)
+        voice_name = self.voice_abbreviations.get(voice_name, voice_name)
         prototype = (
             list,
             str,
@@ -513,14 +558,18 @@ class FigureAccumulator:
         commands_ = list(commands)
         for command in commands_:
             if isinstance(command, Imbrication):
-                voice_name_ = self._abbreviation(command.voice_name)
+                voice_name_ = self.voice_abbreviations.get(
+                    command.voice_name, command.voice_name
+                )
                 command.voice_name = voice_name_
         command = None
         maker = None
         selection: list
         selections: list
         if anchor is not None:
-            voice_name_ = self._abbreviation(anchor.remote_voice_name)
+            voice_name_ = self.voice_abbreviations.get(
+                anchor.remote_voice_name, anchor.remote_voice_name
+            )
             anchor = dataclasses.replace(anchor, remote_voice_name=voice_name_)
         if isinstance(collections, str):
             tuplet = abjad.Tuplet((1, 1), collections, hide=True)
@@ -550,7 +599,9 @@ class FigureAccumulator:
         leaf = abjad.select.leaf(container, 0)
         abjad.annotate(leaf, "figure_name", figure_name)
         if not do_not_label:
-            self._label_figure(container, figure_name, figure_label_direction)
+            _label_figure(
+                container, figure_name, figure_label_direction, self.figure_number
+            )
         selection = [container]
         duration = abjad.get.duration(selection)
         if signature is None and maker:
@@ -573,24 +624,10 @@ class FigureAccumulator:
             hide_time_signature=hide_time_signature,
             time_signature=time_signature,
         )
-        self._cache_figure_name(contribution)
-        self._cache_floating_selection(contribution)
-        self._cache_time_signature(contribution)
-        if not do_not_label:
-            self.figure_number += 1
-
-    def _abbreviation(self, voice_name):
-        return self.voice_abbreviations.get(voice_name, voice_name)
-
-    def _cache_figure_name(self, contribution):
-        if not contribution.figure_name:
-            return
-        if contribution.figure_name in self.figure_names:
-            name = contribution.figure_name
-            raise Exception(f"duplicate figure name: {name!r}.")
-        self.figure_names.append(contribution.figure_name)
-
-    def _cache_floating_selection(self, contribution):
+        if contribution.figure_name:
+            if contribution.figure_name in self.figure_names:
+                raise Exception(f"duplicate figure name: {contribution.figure_name!r}.")
+            self.figure_names.append(contribution.figure_name)
         for voice_name in contribution:
             voice_name = self.voice_abbreviations.get(voice_name, voice_name)
             selection = contribution[voice_name]
@@ -607,28 +644,19 @@ class FigureAccumulator:
             self.floating_selections[voice_name].append(floating_selection)
         self.current_offset = stop_offset
         self.score_stop_offset = max(self.score_stop_offset, stop_offset)
-
-    def _cache_time_signature(self, contribution):
-        if contribution.hide_time_signature:
-            return
-        if (
-            contribution.anchor is None
-            or contribution.hide_time_signature is False
-            or (contribution.anchor and contribution.anchor.remote_voice_name is None)
-        ):
-            self.time_signatures.append(contribution.time_signature)
-
-    def _get_figure_start_offset(self, figure_name):
-        for voice_name in sorted(self.floating_selections.keys()):
-            for floating_selection in self.floating_selections[voice_name]:
-                leaf_start_offset = floating_selection.start_offset
-                leaves = abjad.iterate.leaves(floating_selection.annotation)
-                for leaf in leaves:
-                    if abjad.get.annotation(leaf, "figure_name") == figure_name:
-                        return leaf_start_offset
-                    leaf_duration = abjad.get.duration(leaf)
-                    leaf_start_offset += leaf_duration
-        raise Exception(f"can not find figure {figure_name!r}.")
+        if not contribution.hide_time_signature:
+            if (
+                contribution.anchor is None
+                or contribution.hide_time_signature is False
+                or (
+                    contribution.anchor
+                    and contribution.anchor.remote_voice_name is None
+                )
+            ):
+                assert isinstance(contribution.time_signature, abjad.TimeSignature)
+                self.time_signatures.append(contribution.time_signature)
+        if not do_not_label:
+            self.figure_number += 1
 
     def _get_leaf_timespan(self, leaf, floating_selections):
         found_leaf = False
@@ -655,7 +683,9 @@ class FigureAccumulator:
             and contribution.anchor.figure_name is not None
         ):
             figure_name = contribution.anchor.figure_name
-            start_offset = self._get_figure_start_offset(figure_name)
+            start_offset = _get_figure_start_offset(
+                figure_name, self.floating_selections
+            )
             return start_offset
         anchored = False
         if contribution.anchor is not None:
@@ -701,41 +731,6 @@ class FigureAccumulator:
             local_anchor_offset = timespan.start_offset
         start_offset = remote_anchor_offset - local_anchor_offset
         return start_offset
-
-    def _label_figure(self, container, figure_name, figure_label_direction):
-        figure_number = self.figure_number
-        parts = figure_name.split("_")
-        if len(parts) == 1:
-            body = parts[0]
-            figure_label_string = f'"{body}"'
-        elif len(parts) == 2:
-            body, subscript = parts
-            figure_label_string = rf'\concat {{ "{body}" \sub {subscript} }}'
-        else:
-            raise Exception(f"unrecognized figure name: {figure_name!r}.")
-        string = r"\markup"
-        string += rf" \concat {{ [ \raise #0.25 \fontsize #-2 ({figure_number})"
-        if figure_name:
-            string += rf" \hspace #1 {figure_label_string} ] }}"
-        else:
-            string += r" ] }"
-        figure_label_markup = abjad.Markup(string)
-        bundle = abjad.bundle(figure_label_markup, r"- \tweak color #blue")
-        pleaves = _select.pleaves(container)
-        if pleaves:
-            leaf = pleaves[0]
-        else:
-            leaf = abjad.select.leaf(container, 0)
-        abjad.attach(
-            bundle,
-            leaf,
-            deactivate=True,
-            direction=figure_label_direction,
-            tag=_tags.FIGURE_LABEL,
-        )
-
-    def _make_voice_dictionary(self):
-        return dict([(_, []) for _ in self.voice_names])
 
     def assemble(self, voice_name) -> list | None:
         floating_selections = self.floating_selections[voice_name]
