@@ -88,6 +88,82 @@ def _get_figure_start_offset(figure_name, floating_selections):
     raise Exception(f"can not find figure {figure_name!r}.")
 
 
+def _get_leaf_timespan(leaf, floating_selections):
+    found_leaf = False
+    for floating_selection in floating_selections:
+        leaf_start_offset = abjad.Offset(0)
+        for leaf_ in abjad.iterate.leaves(floating_selection.annotation):
+            leaf_duration = abjad.get.duration(leaf_)
+            if leaf_ is leaf:
+                found_leaf = True
+                break
+            leaf_start_offset += leaf_duration
+        if found_leaf:
+            break
+    if not found_leaf:
+        raise Exception(f"can not find {leaf!r} in floating selections.")
+    selection_start_offset = floating_selection.start_offset
+    leaf_start_offset = selection_start_offset + leaf_start_offset
+    leaf_stop_offset = leaf_start_offset + leaf_duration
+    return abjad.Timespan(leaf_start_offset, leaf_stop_offset)
+
+
+def _get_start_offset(
+    selection, contribution, floating_selections, current_offset, score_stop_offset
+):
+    if contribution.anchor is not None and contribution.anchor.figure_name is not None:
+        figure_name = contribution.anchor.figure_name
+        start_offset = _get_figure_start_offset(
+            figure_name,
+            floating_selections,
+        )
+        return start_offset
+    anchored = False
+    if contribution.anchor is not None:
+        remote_voice_name = contribution.anchor.remote_voice_name
+        remote_selector = contribution.anchor.remote_selector
+        use_remote_stop_offset = contribution.anchor.use_remote_stop_offset
+        anchored = True
+    else:
+        remote_voice_name = None
+        remote_selector = None
+        use_remote_stop_offset = None
+    if not anchored:
+        return current_offset
+    if anchored and remote_voice_name is None:
+        return score_stop_offset
+    if remote_selector is None:
+
+        def remote_selector(argument):
+            return abjad.select.leaf(argument, 0)
+
+    floating_selections_ = floating_selections[remote_voice_name]
+    selections = [_.annotation for _ in floating_selections_]
+    result = remote_selector(selections)
+    selected_leaves = list(abjad.iterate.leaves(result))
+    first_selected_leaf = selected_leaves[0]
+    timespan = _get_leaf_timespan(first_selected_leaf, floating_selections_)
+    if use_remote_stop_offset:
+        remote_anchor_offset = timespan.stop_offset
+    else:
+        remote_anchor_offset = timespan.start_offset
+    local_anchor_offset = abjad.Offset(0)
+    if contribution.anchor is not None:
+        local_selector = contribution.anchor.local_selector
+    else:
+        local_selector = None
+    if local_selector is not None:
+        result = local_selector(selection)
+        selected_leaves = list(abjad.iterate.leaves(result))
+        first_selected_leaf = selected_leaves[0]
+        dummy_container = abjad.Container(selection)
+        timespan = abjad.get.timespan(first_selected_leaf)
+        del dummy_container[:]
+        local_anchor_offset = timespan.start_offset
+    start_offset = remote_anchor_offset - local_anchor_offset
+    return start_offset
+
+
 def _is_treatment(argument):
     if argument is None:
         return True
@@ -633,7 +709,13 @@ class FigureAccumulator:
             selection = contribution[voice_name]
             if not selection:
                 continue
-            start_offset = self._get_start_offset(selection, contribution)
+            start_offset = _get_start_offset(
+                selection,
+                contribution,
+                self.floating_selections,
+                self.current_offset,
+                self.score_stop_offset,
+            )
             stop_offset = start_offset + abjad.get.duration(selection)
             timespan = abjad.Timespan(start_offset, stop_offset)
             floating_selection = abjad.Timespan(
@@ -657,80 +739,6 @@ class FigureAccumulator:
                 self.time_signatures.append(contribution.time_signature)
         if not do_not_label:
             self.figure_number += 1
-
-    def _get_leaf_timespan(self, leaf, floating_selections):
-        found_leaf = False
-        for floating_selection in floating_selections:
-            leaf_start_offset = abjad.Offset(0)
-            for leaf_ in abjad.iterate.leaves(floating_selection.annotation):
-                leaf_duration = abjad.get.duration(leaf_)
-                if leaf_ is leaf:
-                    found_leaf = True
-                    break
-                leaf_start_offset += leaf_duration
-            if found_leaf:
-                break
-        if not found_leaf:
-            raise Exception(f"can not find {leaf!r} in floating selections.")
-        selection_start_offset = floating_selection.start_offset
-        leaf_start_offset = selection_start_offset + leaf_start_offset
-        leaf_stop_offset = leaf_start_offset + leaf_duration
-        return abjad.Timespan(leaf_start_offset, leaf_stop_offset)
-
-    def _get_start_offset(self, selection, contribution):
-        if (
-            contribution.anchor is not None
-            and contribution.anchor.figure_name is not None
-        ):
-            figure_name = contribution.anchor.figure_name
-            start_offset = _get_figure_start_offset(
-                figure_name, self.floating_selections
-            )
-            return start_offset
-        anchored = False
-        if contribution.anchor is not None:
-            remote_voice_name = contribution.anchor.remote_voice_name
-            remote_selector = contribution.anchor.remote_selector
-            use_remote_stop_offset = contribution.anchor.use_remote_stop_offset
-            anchored = True
-        else:
-            remote_voice_name = None
-            remote_selector = None
-            use_remote_stop_offset = None
-        if not anchored:
-            return self.current_offset
-        if anchored and remote_voice_name is None:
-            return self.score_stop_offset
-        if remote_selector is None:
-
-            def remote_selector(argument):
-                return abjad.select.leaf(argument, 0)
-
-        floating_selections = self.floating_selections[remote_voice_name]
-        selections = [_.annotation for _ in floating_selections]
-        result = remote_selector(selections)
-        selected_leaves = list(abjad.iterate.leaves(result))
-        first_selected_leaf = selected_leaves[0]
-        timespan = self._get_leaf_timespan(first_selected_leaf, floating_selections)
-        if use_remote_stop_offset:
-            remote_anchor_offset = timespan.stop_offset
-        else:
-            remote_anchor_offset = timespan.start_offset
-        local_anchor_offset = abjad.Offset(0)
-        if contribution.anchor is not None:
-            local_selector = contribution.anchor.local_selector
-        else:
-            local_selector = None
-        if local_selector is not None:
-            result = local_selector(selection)
-            selected_leaves = list(abjad.iterate.leaves(result))
-            first_selected_leaf = selected_leaves[0]
-            dummy_container = abjad.Container(selection)
-            timespan = abjad.get.timespan(first_selected_leaf)
-            del dummy_container[:]
-            local_anchor_offset = timespan.start_offset
-        start_offset = remote_anchor_offset - local_anchor_offset
-        return start_offset
 
     def assemble(self, voice_name) -> list | None:
         floating_selections = self.floating_selections[voice_name]
