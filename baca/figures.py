@@ -319,6 +319,146 @@ def _make_accelerando_multipliers(durations, exponent):
     return multipliers
 
 
+def _make_figure_tuplet(
+    talea,
+    spelling,
+    treatments,
+    acciaccatura,
+    segment,
+    next_attack,
+    next_segment,
+    rest_prefix=None,
+    rest_suffix=None,
+    affix_skips_instead_of_rests=None,
+) -> tuple[abjad.Tuplet, int, int]:
+    spelling = spelling or rmakers.Spelling()
+    next_segment += 1
+    leaves = []
+    current_selection = next_segment - 1
+    if treatments:
+        treatment = abjad.CyclicTuple(treatments)[current_selection]
+    else:
+        treatment = 0
+    before_grace_containers = None
+    if acciaccatura is not None:
+        if isinstance(segment, set | frozenset):
+            raise Exception("decide how to model chords with acciaccatura.")
+        before_grace_containers, segment = acciaccatura(segment)
+        assert len(before_grace_containers) == len(segment)
+    if isinstance(segment, set | frozenset):
+        segment = [segment]
+    for pitch_expression in segment:
+        is_chord = False
+        if isinstance(pitch_expression, set | frozenset):
+            is_chord = True
+        prototype = abjad.NumberedPitchClass
+        if isinstance(pitch_expression, prototype):
+            pitch_expression = pitch_expression.number
+        count = next_attack
+        while talea[count] < abjad.NonreducedFraction(0, 1):
+            next_attack += 1
+            this_one = talea[count]
+            assert isinstance(this_one, abjad.NonreducedFraction)
+            duration = -this_one
+            maker = abjad.LeafMaker(increase_monotonic=spelling.increase_monotonic)
+            leaves_ = maker([None], [duration])
+            leaves.extend(leaves_)
+            count = next_attack
+        next_attack += 1
+        this_one = talea[count]
+        assert isinstance(this_one, abjad.NonreducedFraction)
+        duration = this_one
+        assert 0 < duration, repr(duration)
+        skips_instead_of_rests = False
+        if (
+            isinstance(pitch_expression, tuple)
+            and len(pitch_expression) == 2
+            and pitch_expression[-1] in (None, "skip")
+        ):
+            multiplier = pitch_expression[0]
+            duration = abjad.Duration(1, talea.denominator)
+            duration *= multiplier
+            if pitch_expression[-1] == "skip":
+                skips_instead_of_rests = True
+            pitch_expression = None
+        maker = abjad.LeafMaker(
+            increase_monotonic=spelling.increase_monotonic,
+            skips_instead_of_rests=skips_instead_of_rests,
+        )
+        if is_chord:
+            leaves_ = maker([tuple(pitch_expression)], [duration])
+        else:
+            leaves_ = maker([pitch_expression], [duration])
+        leaves.extend(leaves_)
+        count = next_attack
+        while (
+            talea[count] < abjad.NonreducedFraction(0, 1)
+            and not count % len(talea) == 0
+        ):
+            next_attack += 1
+            this_one = talea[count]
+            assert isinstance(this_one, abjad.NonreducedFraction)
+            duration = -this_one
+            maker = abjad.LeafMaker(increase_monotonic=spelling.increase_monotonic)
+            leaves_ = maker([None], [duration])
+            leaves.extend(leaves_)
+            count = next_attack
+    leaves = _add_rest_affixes(
+        leaves,
+        talea,
+        rest_prefix,
+        rest_suffix,
+        affix_skips_instead_of_rests,
+        spelling.increase_monotonic,
+    )
+    leaf_selection = list(leaves)
+    if isinstance(treatment, int):
+        tuplet = _make_tuplet_with_extra_count(
+            leaf_selection, treatment, talea.denominator
+        )
+    elif treatment in ("accel", "rit"):
+        tuplet = _make_accelerando(leaf_selection, treatment)
+    elif isinstance(treatment, abjad.Ratio):
+        numerator, denominator = treatment.numbers
+        multiplier = abjad.NonreducedFraction((denominator, numerator))
+        tuplet = abjad.Tuplet(multiplier, leaf_selection)
+    elif isinstance(treatment, str) and ":" in treatment:
+        numerator_str, denominator_str = treatment.split(":")
+        numerator, denominator = int(numerator_str), int(denominator_str)
+        tuplet = abjad.Tuplet((denominator, numerator), leaf_selection)
+    elif isinstance(treatment, abjad.Multiplier):
+        tuplet = abjad.Tuplet(treatment, leaf_selection)
+    elif treatment.__class__ is abjad.Duration:
+        tuplet_duration = treatment
+        contents_duration = abjad.get.duration(leaf_selection)
+        multiplier = tuplet_duration / contents_duration
+        tuplet = abjad.Tuplet(multiplier, leaf_selection)
+        if not abjad.Multiplier(tuplet.multiplier).normalized():
+            tuplet.normalize_multiplier()
+    elif isinstance(treatment, tuple) and len(treatment) == 2:
+        tuplet_duration = abjad.Duration(treatment)
+        contents_duration = abjad.get.duration(leaf_selection)
+        multiplier = tuplet_duration / contents_duration
+        tuplet = abjad.Tuplet(multiplier, leaf_selection)
+        if not abjad.Multiplier(tuplet.multiplier).normalized():
+            tuplet.normalize_multiplier()
+    else:
+        raise Exception(f"bad time treatment: {treatment!r}.")
+    assert isinstance(tuplet, abjad.Tuplet)
+    tag = abjad.Tag("baca._make_figure_tuplet()")
+    if before_grace_containers is not None:
+        logical_ties = abjad.iterate.logical_ties(tuplet)
+        pairs = zip(before_grace_containers, logical_ties)
+        for before_grace_container, logical_tie in pairs:
+            if before_grace_container is None:
+                continue
+            abjad.attach(before_grace_container, logical_tie.head, tag=tag)
+    if tuplet.trivial():
+        tuplet.hide = True
+    assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
+    return tuplet, next_attack, next_segment
+
+
 def _make_tuplet_with_extra_count(leaf_selection, extra_count, denominator):
     contents_duration = abjad.get.duration(leaf_selection)
     contents_duration = contents_duration.with_denominator(denominator)
@@ -863,7 +1003,12 @@ class FigureMaker:
                 else:
                     rest_prefix, rest_suffix = None, None
                     affix_skips_instead_of_rests = None
-                tuplet, next_attack, next_segment = self._make_figure_tuplet(
+                tuplet, next_attack, next_segment = _make_figure_tuplet(
+                    self.talea,
+                    self.spelling,
+                    self.treatments,
+                    self.acciaccatura,
+                    #
                     segment,
                     next_attack,
                     next_segment,
@@ -882,7 +1027,12 @@ class FigureMaker:
             else:
                 rest_prefix, rest_suffix = None, None
                 affix_skips_instead_of_rests = None
-            tuplet, next_attack, next_segment = self._make_figure_tuplet(
+            tuplet, next_attack, next_segment = _make_figure_tuplet(
+                self.talea,
+                self.spelling,
+                self.treatments,
+                self.acciaccatura,
+                #
                 segment,
                 next_attack,
                 next_segment,
@@ -893,143 +1043,6 @@ class FigureMaker:
             tuplets.append(tuplet)
         assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
         return tuplets, next_attack, next_segment
-
-    def _make_figure_tuplet(
-        self,
-        segment,
-        next_attack,
-        next_segment,
-        rest_prefix=None,
-        rest_suffix=None,
-        affix_skips_instead_of_rests=None,
-    ) -> tuple[abjad.Tuplet, int, int]:
-        next_segment += 1
-        talea = self.talea
-        leaves = []
-        spelling = self.spelling or rmakers.Spelling()
-        current_selection = next_segment - 1
-        if self.treatments:
-            treatment = abjad.CyclicTuple(self.treatments)[current_selection]
-        else:
-            treatment = 0
-        before_grace_containers = None
-        if self.acciaccatura is not None:
-            if isinstance(segment, set | frozenset):
-                raise Exception("decide how to model chords with acciaccatura.")
-            before_grace_containers, segment = self.acciaccatura(segment)
-            assert len(before_grace_containers) == len(segment)
-        if isinstance(segment, set | frozenset):
-            segment = [segment]
-        for pitch_expression in segment:
-            is_chord = False
-            if isinstance(pitch_expression, set | frozenset):
-                is_chord = True
-            prototype = abjad.NumberedPitchClass
-            if isinstance(pitch_expression, prototype):
-                pitch_expression = pitch_expression.number
-            count = next_attack
-            while talea[count] < abjad.NonreducedFraction(0, 1):
-                next_attack += 1
-                this_one = talea[count]
-                assert isinstance(this_one, abjad.NonreducedFraction)
-                duration = -this_one
-                maker = abjad.LeafMaker(increase_monotonic=spelling.increase_monotonic)
-                leaves_ = maker([None], [duration])
-                leaves.extend(leaves_)
-                count = next_attack
-            next_attack += 1
-            this_one = talea[count]
-            assert isinstance(this_one, abjad.NonreducedFraction)
-            duration = this_one
-            assert 0 < duration, repr(duration)
-            skips_instead_of_rests = False
-            if (
-                isinstance(pitch_expression, tuple)
-                and len(pitch_expression) == 2
-                and pitch_expression[-1] in (None, "skip")
-            ):
-                multiplier = pitch_expression[0]
-                duration = abjad.Duration(1, talea.denominator)
-                duration *= multiplier
-                if pitch_expression[-1] == "skip":
-                    skips_instead_of_rests = True
-                pitch_expression = None
-            maker = abjad.LeafMaker(
-                increase_monotonic=spelling.increase_monotonic,
-                skips_instead_of_rests=skips_instead_of_rests,
-            )
-            if is_chord:
-                leaves_ = maker([tuple(pitch_expression)], [duration])
-            else:
-                leaves_ = maker([pitch_expression], [duration])
-            leaves.extend(leaves_)
-            count = next_attack
-            while (
-                talea[count] < abjad.NonreducedFraction(0, 1)
-                and not count % len(talea) == 0
-            ):
-                next_attack += 1
-                this_one = talea[count]
-                assert isinstance(this_one, abjad.NonreducedFraction)
-                duration = -this_one
-                maker = abjad.LeafMaker(increase_monotonic=spelling.increase_monotonic)
-                leaves_ = maker([None], [duration])
-                leaves.extend(leaves_)
-                count = next_attack
-        leaves = _add_rest_affixes(
-            leaves,
-            talea,
-            rest_prefix,
-            rest_suffix,
-            affix_skips_instead_of_rests,
-            spelling.increase_monotonic,
-        )
-        leaf_selection = list(leaves)
-        if isinstance(treatment, int):
-            tuplet = _make_tuplet_with_extra_count(
-                leaf_selection, treatment, talea.denominator
-            )
-        elif treatment in ("accel", "rit"):
-            tuplet = _make_accelerando(leaf_selection, treatment)
-        elif isinstance(treatment, abjad.Ratio):
-            numerator, denominator = treatment.numbers
-            multiplier = abjad.NonreducedFraction((denominator, numerator))
-            tuplet = abjad.Tuplet(multiplier, leaf_selection)
-        elif isinstance(treatment, str) and ":" in treatment:
-            numerator_str, denominator_str = treatment.split(":")
-            numerator, denominator = int(numerator_str), int(denominator_str)
-            tuplet = abjad.Tuplet((denominator, numerator), leaf_selection)
-        elif isinstance(treatment, abjad.Multiplier):
-            tuplet = abjad.Tuplet(treatment, leaf_selection)
-        elif treatment.__class__ is abjad.Duration:
-            tuplet_duration = treatment
-            contents_duration = abjad.get.duration(leaf_selection)
-            multiplier = tuplet_duration / contents_duration
-            tuplet = abjad.Tuplet(multiplier, leaf_selection)
-            if not abjad.Multiplier(tuplet.multiplier).normalized():
-                tuplet.normalize_multiplier()
-        elif isinstance(treatment, tuple) and len(treatment) == 2:
-            tuplet_duration = abjad.Duration(treatment)
-            contents_duration = abjad.get.duration(leaf_selection)
-            multiplier = tuplet_duration / contents_duration
-            tuplet = abjad.Tuplet(multiplier, leaf_selection)
-            if not abjad.Multiplier(tuplet.multiplier).normalized():
-                tuplet.normalize_multiplier()
-        else:
-            raise Exception(f"bad time treatment: {treatment!r}.")
-        assert isinstance(tuplet, abjad.Tuplet)
-        tag = abjad.Tag("baca._make_figure_tuplet()")
-        if before_grace_containers is not None:
-            logical_ties = abjad.iterate.logical_ties(tuplet)
-            pairs = zip(before_grace_containers, logical_ties)
-            for before_grace_container, logical_tie in pairs:
-                if before_grace_container is None:
-                    continue
-                abjad.attach(before_grace_container, logical_tie.head, tag=tag)
-        if tuplet.trivial():
-            tuplet.hide = True
-        assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
-        return tuplet, next_attack, next_segment
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
