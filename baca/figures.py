@@ -43,6 +43,57 @@ def _add_rest_affixes(
     return leaves
 
 
+def _call_figure_maker(
+    affix,
+    talea,
+    spelling,
+    treatments,
+    acciaccatura,
+    collections: typing.Sequence,
+    collection_index: int = None,
+    restart_talea: bool = False,
+    total_collections: int = None,
+):
+    collections = _coerce_collections(collections)
+    next_attack = 0
+    next_segment = 0
+    tuplets: list[abjad.Tuplet] = []
+    if restart_talea:
+        total_collections = len(collections)
+        for i, collection in enumerate(collections):
+            next_attack = 0
+            next_segment = 0
+            selection_, next_attack, next_segment = _make_figure_music(
+                affix,
+                talea,
+                spelling,
+                treatments,
+                acciaccatura,
+                [collection],
+                next_attack,
+                next_segment,
+                collection_index=i,
+                total_collections=total_collections,
+            )
+            tuplets.extend(selection_)
+    else:
+        selection_, next_attack, next_segment = _make_figure_music(
+            affix,
+            talea,
+            spelling,
+            treatments,
+            acciaccatura,
+            collections,
+            next_attack,
+            next_segment,
+            collection_index=collection_index,
+            total_collections=total_collections,
+        )
+        tuplets.extend(selection_)
+    assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
+    return tuplets
+
+
 def _coerce_collections(collections):
     prototype = (
         abjad.PitchClassSegment,
@@ -1018,44 +1069,17 @@ class FigureMaker:
         collection_index: int = None,
         total_collections: int = None,
     ) -> list[abjad.Tuplet]:
-        collections = _coerce_collections(collections)
-        next_attack = 0
-        next_segment = 0
-        tuplets: list[abjad.Tuplet] = []
-        if self.restart_talea:
-            total_collections = len(collections)
-            for i, collection in enumerate(collections):
-                next_attack = 0
-                next_segment = 0
-                selection_, next_attack, next_segment = _make_figure_music(
-                    self.affix,
-                    self.talea,
-                    self.spelling,
-                    self.treatments,
-                    self.acciaccatura,
-                    [collection],
-                    next_attack,
-                    next_segment,
-                    collection_index=i,
-                    total_collections=total_collections,
-                )
-                tuplets.extend(selection_)
-        else:
-            selection_, next_attack, next_segment = _make_figure_music(
-                self.affix,
-                self.talea,
-                self.spelling,
-                self.treatments,
-                self.acciaccatura,
-                collections,
-                next_attack,
-                next_segment,
-                collection_index=collection_index,
-                total_collections=total_collections,
-            )
-            tuplets.extend(selection_)
-        assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
-        return tuplets
+        return _call_figure_maker(
+            self.affix,
+            self.talea,
+            self.spelling,
+            self.treatments,
+            self.acciaccatura,
+            collections=collections,
+            collection_index=collection_index,
+            restart_talea=self.restart_talea,
+            total_collections=total_collections,
+        )
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -1419,15 +1443,26 @@ def figure_function(
         acciaccatura = Acciaccatura(lmr=acciaccatura)
     if acciaccatura is not None:
         assert isinstance(acciaccatura, Acciaccatura), repr(acciaccatura)
+#    return _call_figure_maker(
+#        collections,
+#        rmakers.Talea(counts=counts, denominator=denominator),
+#        acciaccatura=acciaccatura,
+#        affix=affix,
+#        restart_talea=restart_talea,
+#        signature=signature,
+#        spelling=spelling,
+#        treatments=treatments,
+#    )
     return _call_figure_maker(
-        collections,
+        affix,
         rmakers.Talea(counts=counts, denominator=denominator),
-        acciaccatura=acciaccatura,
-        affix=affix,
+        spelling,
+        treatments,
+        acciaccatura,
+        collections=collections,
+        ### collection_index: int = None,
         restart_talea=restart_talea,
-        signature=signature,
-        spelling=spelling,
-        treatments=treatments,
+        ### total_collections: int = None,
     )
 """
 
