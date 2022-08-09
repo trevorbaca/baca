@@ -1340,57 +1340,6 @@ figures.py examples.
 
 ..  container:: example
 
-    With state manifest:
-
-    >>> stack = baca.stack(
-    ...     baca.figure([1, 1, 2], 16),
-    ...     rmakers.beam(),
-    ... )
-
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> state = {"next_attack": 2}
-    >>> selections = stack(collections, state=state)
-
-    >>> lilypond_file = abjad.illustrators.selection(selections)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        <<
-            \context Staff = "Staff"
-            {
-                \scaleDurations #'(1 . 1)
-                {
-                    \time 3/4
-                    c'8
-                    [
-                    d'16
-                    bf'16
-                    ]
-                }
-                \scaleDurations #'(1 . 1)
-                {
-                    fs''8
-                    [
-                    e''16
-                    ef''16
-                    af''8
-                    g''16
-                    ]
-                }
-                \scaleDurations #'(1 . 1)
-                {
-                    a'16
-                }
-            }
-        >>
-
-..  container:: example
-
     As many acciaccaturas as possible per collection:
 
     >>> stack = baca.stack(

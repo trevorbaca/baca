@@ -628,7 +628,6 @@ class Bind:
             selection = maker(
                 collections_,
                 collection_index=None,
-                state=None,
                 total_collections=None,
             )
             tuplets.extend(selection)
@@ -784,7 +783,7 @@ class FigureAccumulator:
             voice.extend(selection)
 
 
-# TODO: externalize state variables and then frozen=True
+# TODO: frozen=True
 @dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
 class FigureMaker:
 
@@ -817,17 +816,11 @@ class FigureMaker:
         self,
         collections: typing.Sequence,
         collection_index: int = None,
-        state: dict = None,
         total_collections: int = None,
     ) -> list[abjad.Tuplet]:
         collections = _coerce_collections(collections)
         self.next_attack = 0
         self.next_segment = 0
-        if state:
-            keys = ("next_attack", "next_segment")
-            for key, value in state.items():
-                assert key in keys, repr(key)
-                setattr(self, key, value)
         tuplets: list[abjad.Tuplet] = []
         if self.restart_talea:
             total_collections = len(collections)
