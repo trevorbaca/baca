@@ -50,9 +50,7 @@ def _call_figure_maker(
     treatments,
     acciaccatura,
     collections: typing.Sequence,
-    collection_index: int = None,
     restart_talea: bool = False,
-    total_collections: int = None,
 ):
     collections = _coerce_collections(collections)
     next_attack = 0
@@ -86,8 +84,6 @@ def _call_figure_maker(
             collections,
             next_attack,
             next_segment,
-            collection_index=collection_index,
-            total_collections=total_collections,
         )
         tuplets.extend(selection_)
     assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
@@ -1076,9 +1072,7 @@ class FigureMaker:
             self.treatments,
             self.acciaccatura,
             collections=collections,
-            collection_index=collection_index,
             restart_talea=self.restart_talea,
-            total_collections=total_collections,
         )
 
 
@@ -1424,7 +1418,6 @@ def figure(
     )
 
 
-"""
 def figure_function(
     collections,
     counts: typing.Sequence[int],
@@ -1443,16 +1436,6 @@ def figure_function(
         acciaccatura = Acciaccatura(lmr=acciaccatura)
     if acciaccatura is not None:
         assert isinstance(acciaccatura, Acciaccatura), repr(acciaccatura)
-#    return _call_figure_maker(
-#        collections,
-#        rmakers.Talea(counts=counts, denominator=denominator),
-#        acciaccatura=acciaccatura,
-#        affix=affix,
-#        restart_talea=restart_talea,
-#        signature=signature,
-#        spelling=spelling,
-#        treatments=treatments,
-#    )
     return _call_figure_maker(
         affix,
         rmakers.Talea(counts=counts, denominator=denominator),
@@ -1460,11 +1443,8 @@ def figure_function(
         treatments,
         acciaccatura,
         collections=collections,
-        ### collection_index: int = None,
         restart_talea=restart_talea,
-        ### total_collections: int = None,
     )
-"""
 
 
 def imbricate(
