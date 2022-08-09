@@ -797,9 +797,6 @@ class FigureMaker:
     treatments: typing.Sequence = ()
     _next_attack: int = dataclasses.field(default=0, init=False, repr=False)
     _next_segment: int = dataclasses.field(default=0, init=False, repr=False)
-    _state: dict = dataclasses.field(default_factory=dict, init=False, repr=False)
-
-    _state_variables = ("_next_attack", "_next_segment")
 
     def __post_init__(self):
         if self.acciaccatura is not None:
@@ -824,37 +821,34 @@ class FigureMaker:
         total_collections: int = None,
     ) -> list[abjad.Tuplet]:
         collections = _coerce_collections(collections)
-        self._state = state or {}
-        self._apply_state(state=state)
+        self._next_attack = 0
+        self._next_segment = 0
+        if state:
+            keys = ("_next_attack", "_next_segment")
+            for key, value in state.items():
+                assert key in keys, repr(key)
+                setattr(self, key, value)
         tuplets: list[abjad.Tuplet] = []
-        if not self.restart_talea:
-            selection_ = self._make_music(
-                collections,
-                collection_index=collection_index,
-                total_collections=total_collections,
-            )
-            tuplets.extend(selection_)
-        else:
+        if self.restart_talea:
             total_collections = len(collections)
             for i, collection in enumerate(collections):
-                self._apply_state(state=None)
+                self._next_attack = 0
+                self._next_segment = 0
                 selection_ = self._make_music(
                     [collection],
                     collection_index=i,
                     total_collections=total_collections,
                 )
                 tuplets.extend(selection_)
+        else:
+            selection_ = self._make_music(
+                collections,
+                collection_index=collection_index,
+                total_collections=total_collections,
+            )
+            tuplets.extend(selection_)
         assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
         return tuplets
-
-    def _apply_state(self, state=None):
-        for name in self._state_variables:
-            value = setattr(self, name, 0)
-        state = state or {}
-        assert isinstance(state, dict), repr(state)
-        for key in state:
-            value = state[key]
-            setattr(self, key, value)
 
     def _make_music(
         self, collections, collection_index=None, total_collections=None
