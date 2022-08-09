@@ -795,8 +795,8 @@ class FigureMaker:
     signature: int | None = None
     spelling: rmakers.Spelling | None = None
     treatments: typing.Sequence = ()
-    _next_attack: int = dataclasses.field(default=0, init=False, repr=False)
-    _next_segment: int = dataclasses.field(default=0, init=False, repr=False)
+    next_attack: int = dataclasses.field(default=0, init=False, repr=False)
+    next_segment: int = dataclasses.field(default=0, init=False, repr=False)
 
     def __post_init__(self):
         if self.acciaccatura is not None:
@@ -821,10 +821,10 @@ class FigureMaker:
         total_collections: int = None,
     ) -> list[abjad.Tuplet]:
         collections = _coerce_collections(collections)
-        self._next_attack = 0
-        self._next_segment = 0
+        self.next_attack = 0
+        self.next_segment = 0
         if state:
-            keys = ("_next_attack", "_next_segment")
+            keys = ("next_attack", "next_segment")
             for key, value in state.items():
                 assert key in keys, repr(key)
                 setattr(self, key, value)
@@ -832,8 +832,8 @@ class FigureMaker:
         if self.restart_talea:
             total_collections = len(collections)
             for i, collection in enumerate(collections):
-                self._next_attack = 0
-                self._next_segment = 0
+                self.next_attack = 0
+                self.next_segment = 0
                 selection_ = self._make_music(
                     [collection],
                     collection_index=i,
@@ -898,11 +898,11 @@ class FigureMaker:
         rest_suffix=None,
         affix_skips_instead_of_rests=None,
     ):
-        self._next_segment += 1
+        self.next_segment += 1
         talea = self.talea or rmakers.Talea()
         leaves = []
         spelling = self.spelling or rmakers.Spelling()
-        current_selection = self._next_segment - 1
+        current_selection = self.next_segment - 1
         if self.treatments:
             treatment = abjad.CyclicTuple(self.treatments)[current_selection]
         else:
@@ -923,15 +923,15 @@ class FigureMaker:
             prototype = abjad.NumberedPitchClass
             if isinstance(pitch_expression, prototype):
                 pitch_expression = pitch_expression.number
-            count = self._next_attack
+            count = self.next_attack
             while talea[count] < 0:
-                self._next_attack += 1
+                self.next_attack += 1
                 duration = -talea[count]
                 maker = abjad.LeafMaker(increase_monotonic=spelling.increase_monotonic)
                 leaves_ = maker([None], [duration])
                 leaves.extend(leaves_)
-                count = self._next_attack
-            self._next_attack += 1
+                count = self.next_attack
+            self.next_attack += 1
             duration = talea[count]
             assert 0 < duration, repr(duration)
             skips_instead_of_rests = False
@@ -955,14 +955,14 @@ class FigureMaker:
             else:
                 leaves_ = maker([pitch_expression], [duration])
             leaves.extend(leaves_)
-            count = self._next_attack
+            count = self.next_attack
             while talea[count] < 0 and not count % len(talea) == 0:
-                self._next_attack += 1
+                self.next_attack += 1
                 duration = -talea[count]
                 maker = abjad.LeafMaker(increase_monotonic=spelling.increase_monotonic)
                 leaves_ = maker([None], [duration])
                 leaves.extend(leaves_)
-                count = self._next_attack
+                count = self.next_attack
         leaves = _add_rest_affixes(
             leaves,
             talea,

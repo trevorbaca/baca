@@ -1348,7 +1348,7 @@ figures.py examples.
     ... )
 
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> state = {"_next_attack": 2}
+    >>> state = {"next_attack": 2}
     >>> selections = stack(collections, state=state)
 
     >>> lilypond_file = abjad.illustrators.selection(selections)
