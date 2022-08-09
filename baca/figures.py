@@ -216,6 +216,109 @@ def _label_figure(container, figure_name, figure_label_direction, figure_number)
     )
 
 
+def _make_accelerando(leaf_selection, accelerando_indicator):
+    assert accelerando_indicator in ("accel", "rit")
+    tuplet = abjad.Tuplet((1, 1), leaf_selection, hide=True)
+    if len(tuplet) == 1:
+        return tuplet
+    durations = [abjad.get.duration(_) for _ in leaf_selection]
+    if accelerando_indicator == "accel":
+        exponent = 0.625
+    elif accelerando_indicator == "rit":
+        exponent = 1.625
+    multipliers = _make_accelerando_multipliers(durations, exponent)
+    assert len(leaf_selection) == len(multipliers)
+    for multiplier, leaf in zip(multipliers, leaf_selection):
+        leaf.multiplier = multiplier
+    if rmakers.FeatherBeamCommand._is_accelerando(leaf_selection):
+        abjad.override(leaf_selection[0]).Beam.grow_direction = abjad.RIGHT
+    elif rmakers.FeatherBeamCommand._is_ritardando(leaf_selection):
+        abjad.override(leaf_selection[0]).Beam.grow_direction = abjad.LEFT
+    duration = abjad.get.duration(tuplet)
+    notes = abjad.LeafMaker()([0], [duration])
+    string = abjad.illustrators.selection_to_score_markup_string(notes)
+    string = rf"\markup \scale #'(0.75 . 0.75) {string}"
+    abjad.override(tuplet).TupletNumber.text = string
+    return tuplet
+
+
+def _make_accelerando_multipliers(durations, exponent):
+    r"""
+    Makes accelerando multipliers.
+
+    ..  container:: example
+
+        Set exponent less than 1 for decreasing durations:
+
+        >>> durations = 4 * [abjad.Duration(1)]
+        >>> result = baca.figures._make_accelerando_multipliers(durations, 0.5)
+        >>> for multiplier in result: multiplier
+        ...
+        NonreducedFraction(2048, 1024)
+        NonreducedFraction(848, 1024)
+        NonreducedFraction(651, 1024)
+        NonreducedFraction(549, 1024)
+
+    ..  container:: example
+
+        Set exponent to 1 for trivial multipliers:
+
+        >>> durations = 4 * [abjad.Duration(1)]
+        >>> result = baca.figures._make_accelerando_multipliers(durations, 1)
+        >>> for multiplier in result: multiplier
+        ...
+        NonreducedFraction(1024, 1024)
+        NonreducedFraction(1024, 1024)
+        NonreducedFraction(1024, 1024)
+        NonreducedFraction(1024, 1024)
+
+    ..  container:: example
+
+        Set exponent greater than 1 for increasing durations:
+
+        >>> durations = 4 * [abjad.Duration(1)]
+        >>> result = baca.figures._make_accelerando_multipliers(
+        ...     durations,
+        ...     0.5,
+        ... )
+        >>> for multiplier in result: multiplier
+        ...
+        NonreducedFraction(2048, 1024)
+        NonreducedFraction(848, 1024)
+        NonreducedFraction(651, 1024)
+        NonreducedFraction(549, 1024)
+
+    Set exponent greater than 1 for ritardando.
+
+    Set exponent less than 1 for accelerando.
+    """
+    sums = abjad.math.cumulative_sums(durations)
+    generator = abjad.sequence.nwise(sums, n=2)
+    pairs = list(generator)
+    total_duration = pairs[-1][-1]
+    start_offsets = [_[0] for _ in pairs]
+    start_offsets = [_ / total_duration for _ in start_offsets]
+    start_offsets_ = []
+    rhythm_maker_class = rmakers.AccelerandoRhythmMaker
+    for start_offset in start_offsets:
+        start_offset_ = rhythm_maker_class._interpolate_exponential(
+            0, total_duration, start_offset, exponent
+        )
+        start_offsets_.append(start_offset_)
+    start_offsets_.append(float(total_duration))
+    durations_ = abjad.math.difference_series(start_offsets_)
+    durations_ = rhythm_maker_class._round_durations(durations_, 2**10)
+    durations_ = _fix_rounding_error(durations_, total_duration)
+    multipliers = []
+    assert len(durations) == len(durations_)
+    for duration_, duration in zip(durations_, durations):
+        multiplier = duration_ / duration
+        multiplier = abjad.Multiplier(multiplier)
+        multiplier = multiplier.with_denominator(2**10)
+        multipliers.append(multiplier)
+    return multipliers
+
+
 def _make_tuplet_with_extra_count(leaf_selection, extra_count, denominator):
     contents_duration = abjad.get.duration(leaf_selection)
     contents_duration = contents_duration.with_denominator(denominator)
@@ -681,6 +784,7 @@ class FigureAccumulator:
             voice.extend(selection)
 
 
+# TODO: externalize state variables and then frozen=True
 @dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
 class FigureMaker:
 
@@ -709,7 +813,8 @@ class FigureMaker:
             assert isinstance(self.spelling, rmakers.Spelling), repr(self.spelling)
         assert isinstance(self.talea, rmakers.Talea), repr(self.talea)
         if self.treatments is not None:
-            self._check_treatments(self.treatments)
+            for treatment in self.treatments:
+                assert _is_treatment(treatment)
 
     def __call__(
         self,
@@ -750,139 +855,6 @@ class FigureMaker:
         for key in state:
             value = state[key]
             setattr(self, key, value)
-
-    def _check_treatments(self, treatments):
-        for treatment in treatments:
-            if not _is_treatment(treatment):
-                raise Exception(f"bad time treatment: {treatment!r}.")
-
-    def _get_acciaccatura_specifier(self, collection_index, total_collections):
-        if not self.acciaccatura:
-            return
-        pattern = self.acciaccatura._get_pattern()
-        if pattern.matches_index(collection_index, total_collections):
-            return self.acciaccatura
-
-    def _get_spelling_specifier(self):
-        if self.spelling is not None:
-            return self.spelling
-        return rmakers.Spelling()
-
-    def _get_talea(self):
-        if self.talea is not None:
-            return self.talea
-        return rmakers.Talea()
-
-    def _get_treatments(self):
-        if not self.treatments:
-            return abjad.CyclicTuple([0])
-        return abjad.CyclicTuple(self.treatments)
-
-    @classmethod
-    def _make_accelerando(class_, leaf_selection, accelerando_indicator):
-        assert accelerando_indicator in ("accel", "rit")
-        tuplet = abjad.Tuplet((1, 1), leaf_selection, hide=True)
-        if len(tuplet) == 1:
-            return tuplet
-        durations = [abjad.get.duration(_) for _ in leaf_selection]
-        if accelerando_indicator == "accel":
-            exponent = 0.625
-        elif accelerando_indicator == "rit":
-            exponent = 1.625
-        multipliers = class_._make_accelerando_multipliers(durations, exponent)
-        assert len(leaf_selection) == len(multipliers)
-        for multiplier, leaf in zip(multipliers, leaf_selection):
-            leaf.multiplier = multiplier
-        if rmakers.FeatherBeamCommand._is_accelerando(leaf_selection):
-            abjad.override(leaf_selection[0]).Beam.grow_direction = abjad.RIGHT
-        elif rmakers.FeatherBeamCommand._is_ritardando(leaf_selection):
-            abjad.override(leaf_selection[0]).Beam.grow_direction = abjad.LEFT
-        duration = abjad.get.duration(tuplet)
-        notes = abjad.LeafMaker()([0], [duration])
-        string = abjad.illustrators.selection_to_score_markup_string(notes)
-        string = rf"\markup \scale #'(0.75 . 0.75) {string}"
-        abjad.override(tuplet).TupletNumber.text = string
-        return tuplet
-
-    @classmethod
-    def _make_accelerando_multipliers(class_, durations, exponent):
-        r"""
-        Makes accelerando multipliers.
-
-        ..  container:: example
-
-            Set exponent less than 1 for decreasing durations:
-
-            >>> class_ = baca.FigureMaker
-            >>> durations = 4 * [abjad.Duration(1)]
-            >>> result = class_._make_accelerando_multipliers(durations, 0.5)
-            >>> for multiplier in result: multiplier
-            ...
-            NonreducedFraction(2048, 1024)
-            NonreducedFraction(848, 1024)
-            NonreducedFraction(651, 1024)
-            NonreducedFraction(549, 1024)
-
-        ..  container:: example
-
-            Set exponent to 1 for trivial multipliers:
-
-            >>> class_ = baca.FigureMaker
-            >>> durations = 4 * [abjad.Duration(1)]
-            >>> result = class_._make_accelerando_multipliers(durations, 1)
-            >>> for multiplier in result: multiplier
-            ...
-            NonreducedFraction(1024, 1024)
-            NonreducedFraction(1024, 1024)
-            NonreducedFraction(1024, 1024)
-            NonreducedFraction(1024, 1024)
-
-        ..  container:: example
-
-            Set exponent greater than 1 for increasing durations:
-
-            >>> class_ = baca.FigureMaker
-            >>> durations = 4 * [abjad.Duration(1)]
-            >>> result = class_._make_accelerando_multipliers(
-            ...     durations,
-            ...     0.5,
-            ... )
-            >>> for multiplier in result: multiplier
-            ...
-            NonreducedFraction(2048, 1024)
-            NonreducedFraction(848, 1024)
-            NonreducedFraction(651, 1024)
-            NonreducedFraction(549, 1024)
-
-        Set exponent greater than 1 for ritardando.
-
-        Set exponent less than 1 for accelerando.
-        """
-        sums = abjad.math.cumulative_sums(durations)
-        generator = abjad.sequence.nwise(sums, n=2)
-        pairs = list(generator)
-        total_duration = pairs[-1][-1]
-        start_offsets = [_[0] for _ in pairs]
-        start_offsets = [_ / total_duration for _ in start_offsets]
-        start_offsets_ = []
-        rhythm_maker_class = rmakers.AccelerandoRhythmMaker
-        for start_offset in start_offsets:
-            start_offset_ = rhythm_maker_class._interpolate_exponential(
-                0, total_duration, start_offset, exponent
-            )
-            start_offsets_.append(start_offset_)
-        start_offsets_.append(float(total_duration))
-        durations_ = abjad.math.difference_series(start_offsets_)
-        durations_ = rhythm_maker_class._round_durations(durations_, 2**10)
-        durations_ = _fix_rounding_error(durations_, total_duration)
-        multipliers = []
-        assert len(durations) == len(durations_)
-        for duration_, duration in zip(durations_, durations):
-            multiplier = duration_ / duration
-            multiplier = abjad.Multiplier(multiplier)
-            multiplier = multiplier.with_denominator(2**10)
-            multipliers.append(multiplier)
-        return multipliers
 
     def _make_music(
         self, collections, collection_index=None, total_collections=None
@@ -933,12 +905,13 @@ class FigureMaker:
         affix_skips_instead_of_rests=None,
     ):
         self._next_segment += 1
-        talea = self._get_talea()
+        talea = self.talea or rmakers.Talea()
         leaves = []
-        spelling = self._get_spelling_specifier()
+        spelling = self.spelling or rmakers.Spelling()
         current_selection = self._next_segment - 1
-        treatment = self._get_treatments()[current_selection]
-        if treatment is None:
+        if self.treatments:
+            treatment = abjad.CyclicTuple(self.treatments)[current_selection]
+        else:
             treatment = 0
         before_grace_containers = None
         if self.acciaccatura is not None:
@@ -1010,7 +983,7 @@ class FigureMaker:
                 leaf_selection, treatment, talea.denominator
             )
         elif treatment in ("accel", "rit"):
-            tuplet = self._make_accelerando(leaf_selection, treatment)
+            tuplet = _make_accelerando(leaf_selection, treatment)
         elif isinstance(treatment, abjad.Ratio):
             numerator, denominator = treatment.numbers
             multiplier = abjad.NonreducedFraction((denominator, numerator))
@@ -1198,7 +1171,7 @@ class Nest:
             assert isinstance(self.lmr, LMR), repr(self.lmr)
 
     def __call__(self, selection) -> list[abjad.Tuplet]:
-        treatments = self._get_treatments()
+        treatments = abjad.CyclicTuple(self.treatments)
         assert treatments is not None
         tuplets = []
         for item in selection:
@@ -1246,10 +1219,6 @@ class Nest:
                 nested_tuplet = tuplet
                 tuplets.append(nested_tuplet)
         return tuplets
-
-    def _get_treatments(self):
-        if self.treatments:
-            return abjad.CyclicTuple(self.treatments)
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -1396,6 +1365,38 @@ def figure(
         spelling=spelling,
         treatments=treatments,
     )
+
+
+"""
+def figure_function(
+    collections,
+    counts: typing.Sequence[int],
+    denominator: int,
+    *,
+    acciaccatura: bool | Acciaccatura | LMR | None = None,
+    affix: RestAffix = None,
+    restart_talea: bool = False,
+    signature: int = None,
+    spelling: rmakers.Spelling = None,
+    treatments: typing.Sequence = (),
+) -> list[abjad.Tuplet]:
+    if acciaccatura is True:
+        acciaccatura = Acciaccatura()
+    elif isinstance(acciaccatura, LMR):
+        acciaccatura = Acciaccatura(lmr=acciaccatura)
+    if acciaccatura is not None:
+        assert isinstance(acciaccatura, Acciaccatura), repr(acciaccatura)
+    return _call_figure_maker(
+        collections,
+        rmakers.Talea(counts=counts, denominator=denominator),
+        acciaccatura=acciaccatura,
+        affix=affix,
+        restart_talea=restart_talea,
+        signature=signature,
+        spelling=spelling,
+        treatments=treatments,
+    )
+"""
 
 
 def imbricate(
