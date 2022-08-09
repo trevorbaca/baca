@@ -816,27 +816,27 @@ class FigureMaker:
         total_collections: int = None,
     ) -> list[abjad.Tuplet]:
         collections = _coerce_collections(collections)
-        self_next_attack = 0
-        self_next_segment = 0
+        next_attack = 0
+        next_segment = 0
         tuplets: list[abjad.Tuplet] = []
         if self.restart_talea:
             total_collections = len(collections)
             for i, collection in enumerate(collections):
-                self_next_attack = 0
-                self_next_segment = 0
-                selection_, self_next_attack, self_next_segment = self._make_music(
+                next_attack = 0
+                next_segment = 0
+                selection_, next_attack, next_segment = self._make_music(
                     [collection],
-                    self_next_attack,
-                    self_next_segment,
+                    next_attack,
+                    next_segment,
                     collection_index=i,
                     total_collections=total_collections,
                 )
                 tuplets.extend(selection_)
         else:
-            selection_, self_next_attack, self_next_segment = self._make_music(
+            selection_, next_attack, next_segment = self._make_music(
                 collections,
-                self_next_attack,
-                self_next_segment,
+                next_attack,
+                next_segment,
                 collection_index=collection_index,
                 total_collections=total_collections,
             )
@@ -847,8 +847,8 @@ class FigureMaker:
     def _make_music(
         self,
         collections,
-        self_next_attack,
-        self_next_segment,
+        next_attack,
+        next_segment,
         collection_index=None,
         total_collections=None,
     ) -> tuple[list[abjad.Tuplet], int, int]:
@@ -863,10 +863,10 @@ class FigureMaker:
                 else:
                     rest_prefix, rest_suffix = None, None
                     affix_skips_instead_of_rests = None
-                tuplet, self_next_attack, self_next_segment = self._make_tuplet(
+                tuplet, next_attack, next_segment = self._make_tuplet(
                     segment,
-                    self_next_attack,
-                    self_next_segment,
+                    next_attack,
+                    next_segment,
                     rest_prefix=rest_prefix,
                     rest_suffix=rest_suffix,
                     affix_skips_instead_of_rests=affix_skips_instead_of_rests,
@@ -882,33 +882,32 @@ class FigureMaker:
             else:
                 rest_prefix, rest_suffix = None, None
                 affix_skips_instead_of_rests = None
-            tuplet, self_next_attack, self_next_segment = self._make_tuplet(
+            tuplet, next_attack, next_segment = self._make_tuplet(
                 segment,
-                self_next_attack,
-                self_next_segment,
+                next_attack,
+                next_segment,
                 rest_prefix=rest_prefix,
                 rest_suffix=rest_suffix,
                 affix_skips_instead_of_rests=affix_skips_instead_of_rests,
             )
             tuplets.append(tuplet)
         assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
-        return tuplets, self_next_attack, self_next_segment
+        return tuplets, next_attack, next_segment
 
     def _make_tuplet(
         self,
         segment,
-        self_next_attack,
-        self_next_segment,
+        next_attack,
+        next_segment,
         rest_prefix=None,
         rest_suffix=None,
         affix_skips_instead_of_rests=None,
     ) -> tuple[abjad.Tuplet, int, int]:
-        self_next_segment += 1
-        # talea = self.talea or rmakers.Talea()
+        next_segment += 1
         talea = self.talea
         leaves = []
         spelling = self.spelling or rmakers.Spelling()
-        current_selection = self_next_segment - 1
+        current_selection = next_segment - 1
         if self.treatments:
             treatment = abjad.CyclicTuple(self.treatments)[current_selection]
         else:
@@ -929,21 +928,19 @@ class FigureMaker:
             prototype = abjad.NumberedPitchClass
             if isinstance(pitch_expression, prototype):
                 pitch_expression = pitch_expression.number
-            count = self_next_attack
+            count = next_attack
             while talea[count] < abjad.NonreducedFraction(0, 1):
-                self_next_attack += 1
+                next_attack += 1
                 this_one = talea[count]
                 assert isinstance(this_one, abjad.NonreducedFraction)
-                # duration = -talea[count]
                 duration = -this_one
                 maker = abjad.LeafMaker(increase_monotonic=spelling.increase_monotonic)
                 leaves_ = maker([None], [duration])
                 leaves.extend(leaves_)
-                count = self_next_attack
-            self_next_attack += 1
+                count = next_attack
+            next_attack += 1
             this_one = talea[count]
             assert isinstance(this_one, abjad.NonreducedFraction)
-            # duration = talea[count]
             duration = this_one
             assert 0 < duration, repr(duration)
             skips_instead_of_rests = False
@@ -967,21 +964,19 @@ class FigureMaker:
             else:
                 leaves_ = maker([pitch_expression], [duration])
             leaves.extend(leaves_)
-            count = self_next_attack
-            # while talea[count] < 0 and not count % len(talea) == 0:
+            count = next_attack
             while (
                 talea[count] < abjad.NonreducedFraction(0, 1)
                 and not count % len(talea) == 0
             ):
-                self_next_attack += 1
-                # duration = -talea[count]
+                next_attack += 1
                 this_one = talea[count]
                 assert isinstance(this_one, abjad.NonreducedFraction)
                 duration = -this_one
                 maker = abjad.LeafMaker(increase_monotonic=spelling.increase_monotonic)
                 leaves_ = maker([None], [duration])
                 leaves.extend(leaves_)
-                count = self_next_attack
+                count = next_attack
         leaves = _add_rest_affixes(
             leaves,
             talea,
@@ -1035,7 +1030,7 @@ class FigureMaker:
         if tuplet.trivial():
             tuplet.hide = True
         assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
-        return tuplet, self_next_attack, self_next_segment
+        return tuplet, next_attack, next_segment
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
