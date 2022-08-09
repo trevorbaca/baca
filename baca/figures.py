@@ -319,6 +319,69 @@ def _make_accelerando_multipliers(durations, exponent):
     return multipliers
 
 
+def _make_figure_music(
+    affix,
+    talea,
+    spelling,
+    treatments,
+    acciaccatura,
+    collections,
+    next_attack,
+    next_segment,
+    collection_index=None,
+    total_collections=None,
+) -> tuple[list[abjad.Tuplet], int, int]:
+    segment_count = len(collections)
+    tuplets = []
+    if collection_index is None:
+        for i, segment in enumerate(collections):
+            if affix is not None:
+                result = affix(i, segment_count)
+                rest_prefix, rest_suffix = result
+                affix_skips_instead_of_rests = affix.skips_instead_of_rests
+            else:
+                rest_prefix, rest_suffix = None, None
+                affix_skips_instead_of_rests = None
+            tuplet, next_attack, next_segment = _make_figure_tuplet(
+                talea,
+                spelling,
+                treatments,
+                acciaccatura,
+                segment,
+                next_attack,
+                next_segment,
+                rest_prefix=rest_prefix,
+                rest_suffix=rest_suffix,
+                affix_skips_instead_of_rests=affix_skips_instead_of_rests,
+            )
+            tuplets.append(tuplet)
+    else:
+        assert len(collections) == 1, repr(collections)
+        segment = collections[0]
+        if affix is not None:
+            result = affix(collection_index, total_collections)
+            rest_prefix, rest_suffix = result
+            affix_skips_instead_of_rests = affix.skips_instead_of_rests
+        else:
+            rest_prefix, rest_suffix = None, None
+            affix_skips_instead_of_rests = None
+        tuplet, next_attack, next_segment = _make_figure_tuplet(
+            talea,
+            spelling,
+            treatments,
+            acciaccatura,
+            segment,
+            next_attack,
+            next_segment,
+            rest_prefix=rest_prefix,
+            rest_suffix=rest_suffix,
+            affix_skips_instead_of_rests=affix_skips_instead_of_rests,
+        )
+        tuplets.append(tuplet)
+    assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
+    return tuplets, next_attack, next_segment
+
+
 def _make_figure_tuplet(
     talea,
     spelling,
@@ -964,7 +1027,12 @@ class FigureMaker:
             for i, collection in enumerate(collections):
                 next_attack = 0
                 next_segment = 0
-                selection_, next_attack, next_segment = self._make_figure_music(
+                selection_, next_attack, next_segment = _make_figure_music(
+                    self.affix,
+                    self.talea,
+                    self.spelling,
+                    self.treatments,
+                    self.acciaccatura,
                     [collection],
                     next_attack,
                     next_segment,
@@ -973,7 +1041,12 @@ class FigureMaker:
                 )
                 tuplets.extend(selection_)
         else:
-            selection_, next_attack, next_segment = self._make_figure_music(
+            selection_, next_attack, next_segment = _make_figure_music(
+                self.affix,
+                self.talea,
+                self.spelling,
+                self.treatments,
+                self.acciaccatura,
                 collections,
                 next_attack,
                 next_segment,
@@ -983,66 +1056,6 @@ class FigureMaker:
             tuplets.extend(selection_)
         assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
         return tuplets
-
-    def _make_figure_music(
-        self,
-        collections,
-        next_attack,
-        next_segment,
-        collection_index=None,
-        total_collections=None,
-    ) -> tuple[list[abjad.Tuplet], int, int]:
-        segment_count = len(collections)
-        tuplets = []
-        if collection_index is None:
-            for i, segment in enumerate(collections):
-                if self.affix is not None:
-                    result = self.affix(i, segment_count)
-                    rest_prefix, rest_suffix = result
-                    affix_skips_instead_of_rests = self.affix.skips_instead_of_rests
-                else:
-                    rest_prefix, rest_suffix = None, None
-                    affix_skips_instead_of_rests = None
-                tuplet, next_attack, next_segment = _make_figure_tuplet(
-                    self.talea,
-                    self.spelling,
-                    self.treatments,
-                    self.acciaccatura,
-                    #
-                    segment,
-                    next_attack,
-                    next_segment,
-                    rest_prefix=rest_prefix,
-                    rest_suffix=rest_suffix,
-                    affix_skips_instead_of_rests=affix_skips_instead_of_rests,
-                )
-                tuplets.append(tuplet)
-        else:
-            assert len(collections) == 1, repr(collections)
-            segment = collections[0]
-            if self.affix is not None:
-                result = self.affix(collection_index, total_collections)
-                rest_prefix, rest_suffix = result
-                affix_skips_instead_of_rests = self.affix.skips_instead_of_rests
-            else:
-                rest_prefix, rest_suffix = None, None
-                affix_skips_instead_of_rests = None
-            tuplet, next_attack, next_segment = _make_figure_tuplet(
-                self.talea,
-                self.spelling,
-                self.treatments,
-                self.acciaccatura,
-                #
-                segment,
-                next_attack,
-                next_segment,
-                rest_prefix=rest_prefix,
-                rest_suffix=rest_suffix,
-                affix_skips_instead_of_rests=affix_skips_instead_of_rests,
-            )
-            tuplets.append(tuplet)
-        assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
-        return tuplets, next_attack, next_segment
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
