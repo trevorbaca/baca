@@ -824,7 +824,7 @@ class FigureMaker:
             for i, collection in enumerate(collections):
                 next_attack = 0
                 next_segment = 0
-                selection_, next_attack, next_segment = self._make_music(
+                selection_, next_attack, next_segment = self._make_figure_music(
                     [collection],
                     next_attack,
                     next_segment,
@@ -833,7 +833,7 @@ class FigureMaker:
                 )
                 tuplets.extend(selection_)
         else:
-            selection_, next_attack, next_segment = self._make_music(
+            selection_, next_attack, next_segment = self._make_figure_music(
                 collections,
                 next_attack,
                 next_segment,
@@ -844,7 +844,7 @@ class FigureMaker:
         assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
         return tuplets
 
-    def _make_music(
+    def _make_figure_music(
         self,
         collections,
         next_attack,
@@ -863,7 +863,7 @@ class FigureMaker:
                 else:
                     rest_prefix, rest_suffix = None, None
                     affix_skips_instead_of_rests = None
-                tuplet, next_attack, next_segment = self._make_tuplet(
+                tuplet, next_attack, next_segment = self._make_figure_tuplet(
                     segment,
                     next_attack,
                     next_segment,
@@ -882,7 +882,7 @@ class FigureMaker:
             else:
                 rest_prefix, rest_suffix = None, None
                 affix_skips_instead_of_rests = None
-            tuplet, next_attack, next_segment = self._make_tuplet(
+            tuplet, next_attack, next_segment = self._make_figure_tuplet(
                 segment,
                 next_attack,
                 next_segment,
@@ -894,7 +894,7 @@ class FigureMaker:
         assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
         return tuplets, next_attack, next_segment
 
-    def _make_tuplet(
+    def _make_figure_tuplet(
         self,
         segment,
         next_attack,
@@ -915,8 +915,7 @@ class FigureMaker:
         before_grace_containers = None
         if self.acciaccatura is not None:
             if isinstance(segment, set | frozenset):
-                message = "decide how to model chords with acciaccatura."
-                raise NotImplementedError(message)
+                raise Exception("decide how to model chords with acciaccatura.")
             before_grace_containers, segment = self.acciaccatura(segment)
             assert len(before_grace_containers) == len(segment)
         if isinstance(segment, set | frozenset):
@@ -1019,7 +1018,7 @@ class FigureMaker:
         else:
             raise Exception(f"bad time treatment: {treatment!r}.")
         assert isinstance(tuplet, abjad.Tuplet)
-        tag = _tags.function_name(_frame(), self)
+        tag = abjad.Tag("baca._make_figure_tuplet()")
         if before_grace_containers is not None:
             logical_ties = abjad.iterate.logical_ties(tuplet)
             pairs = zip(before_grace_containers, logical_ties)
