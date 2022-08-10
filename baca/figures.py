@@ -10,6 +10,7 @@ from inspect import currentframe as _frame
 import abjad
 from abjadext import rmakers
 
+from . import command as _command
 from . import cursor as _cursor
 from . import select as _select
 from . import tags as _tags
@@ -51,7 +52,7 @@ def _call_figure_maker(
     acciaccatura,
     collections: typing.Sequence,
     restart_talea: bool = False,
-):
+) -> list[abjad.Tuplet]:
     collections = _coerce_collections(collections)
     next_attack = 0
     next_segment = 0
@@ -894,14 +895,20 @@ class Coat:
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Contribution:
 
-    voice_to_selection: dict[str, list]
+    voice_name_to_selection: dict[str, list]
     anchor: Anchor | None = None
     figure_name: str | None = None
     hide_time_signature: bool | None = None
     time_signature: abjad.TimeSignature | None = None
 
     def __post_init__(self):
-        assert isinstance(self.voice_to_selection, dict), repr(self.voice_to_selection)
+        assert isinstance(self.voice_name_to_selection, dict), repr(
+            self.voice_name_to_selection
+        )
+        for value in self.voice_name_to_selection.values():
+            assert isinstance(value, list), repr(value)
+            assert len(value) == 1, repr(value)
+            assert isinstance(value[0], abjad.Container), repr(value)
         if self.anchor is not None:
             assert isinstance(self.anchor, Anchor), repr(self.anchor)
         if self.figure_name is not None:
@@ -912,19 +919,6 @@ class Contribution:
             )
         if self.time_signature is not None:
             assert isinstance(self.time_signature, abjad.TimeSignature)
-        if self.voice_to_selection is not None:
-            assert isinstance(self.voice_to_selection, dict), repr(
-                self.voice_to_selection
-            )
-            for value in self.voice_to_selection.values():
-                assert isinstance(value, list), repr(value)
-
-    def __getitem__(self, voice_name) -> list:
-        return self.voice_to_selection.__getitem__(voice_name)
-
-    def __iter__(self) -> typing.Iterator[str]:
-        for voice_name in self.voice_to_selection:
-            yield voice_name
 
 
 class FigureAccumulator:
@@ -1500,6 +1494,20 @@ def lmr(
     )
 
 
+# TODO
+def handle_figures(
+    accumulator: "FigureAccumulator",
+    voice_name: str,
+    anchor: "Anchor" = None,
+    do_not_label: bool = False,
+    figure_name: str = "",
+    figure_label_direction: int = None,
+    hide_time_signature: bool | None = None,
+    signature: int = None,
+):
+    assert isinstance(figure_name, str), repr(figure_name)
+
+
 def make_figures(
     accumulator: "FigureAccumulator",
     voice_name: str,
@@ -1514,7 +1522,8 @@ def make_figures(
 ):
     assert isinstance(figure_name, str), repr(figure_name)
     voice_name = accumulator.voice_abbreviations.get(voice_name, voice_name)
-    prototype = (
+    #
+    collection_prototype = (
         list,
         str,
         frozenset,
@@ -1522,7 +1531,7 @@ def make_figures(
         abjad.PitchClassSegment,
         abjad.PitchSegment,
     )
-    assert isinstance(collections, prototype), repr(collections)
+    assert isinstance(collections, collection_prototype), repr(collections)
     commands_ = []
     for command in commands:
         if isinstance(command, Imbrication):
@@ -1531,65 +1540,66 @@ def make_figures(
             )
             command = dataclasses.replace(command, voice_name=voice_name_)
         commands_.append(command)
-    assert len(commands) == len(commands_)
     commands = tuple(commands_)
-    command = None
-    maker = None
-    selection: list
-    selections: list
-    if anchor is not None:
-        voice_name_ = accumulator.voice_abbreviations.get(
-            anchor.remote_voice_name, anchor.remote_voice_name
-        )
-        anchor = dataclasses.replace(anchor, remote_voice_name=voice_name_)
+    command, figure_maker = None, None
     if isinstance(collections, str):
         tuplet = abjad.Tuplet((1, 1), collections, hide=True)
-        selections = [[tuplet]]
+        tuplets = [tuplet]
     elif all(isinstance(_, abjad.Component) for _ in collections):
         tuplet = abjad.Tuplet((1, 1), collections, hide=True)
-        selections = [[tuplet]]
+        tuplets = [tuplet]
     elif isinstance(commands[0], FigureMaker):
-        maker = commands[0]
-        selections = maker(collections)
-        selections = abjad.select.flatten(selections)
-        commands_ = list(commands[1:])
+        figure_maker = commands[0]
+        tuplets = figure_maker(collections)
+        commands = commands[1:]
     else:
         assert isinstance(commands[0], Bind)
         command = commands[0]
-        selections = commands[0](collections)
-        selections = abjad.select.flatten(selections)
-        commands_ = list(commands[1:])
-    container = abjad.Container(selections)
-    imbricated_selections: dict[str, list] = {}
-    for command_ in commands_:
+        tuplets = command(collections)
+        commands = commands[1:]
+    #
+    assert isinstance(tuplets, list), repr(tuplets)
+    assert all(isinstance(_, abjad.Tuplet) for _ in tuplets), repr(tuplets)
+    container = abjad.Container(tuplets)
+    imbricated_selections = {}
+    command_prototype = (_command.Command, rmakers.Command, Nest)
+    for command_ in commands:
         if isinstance(command_, Imbrication):
-            dictionary = command_(container)
-            imbricated_selections.update(dictionary)
+            voice_name_to_selection = command_(container)
+            imbricated_selections.update(voice_name_to_selection)
         else:
-            command_(selections)
+            assert isinstance(command_, command_prototype), repr(command_)
+            command_(container)
     leaf = abjad.select.leaf(container, 0)
     abjad.annotate(leaf, "figure_name", figure_name)
     if not do_not_label:
         _label_figure(
             container, figure_name, figure_label_direction, accumulator.figure_number
         )
-    selection = [container]
-    duration = abjad.get.duration(selection)
-    if signature is None and maker:
-        signature = maker.signature
+    duration = abjad.get.duration(container)
+    if signature is None and figure_maker:
+        signature = figure_maker.signature
     if signature is None and command:
         primary_maker = command.assignments[0].maker
         signature = primary_maker.signature
     if signature is not None:
         duration = duration.with_denominator(signature)
     time_signature = abjad.TimeSignature(duration)
+    selection = [container]
     assert isinstance(selection, list)
-    voice_to_selection = {voice_name: selection}
-    voice_to_selection.update(imbricated_selections)
-    for value in voice_to_selection.values():
+    voice_name_to_selection = {voice_name: selection}
+    voice_name_to_selection.update(imbricated_selections)
+    for value in voice_name_to_selection.values():
         assert isinstance(value, list), repr(value)
+        assert all(type(_).__name__ == "Container" for _ in value), repr(value)
+        assert len(value) == 1, repr(value)
+    if anchor is not None:
+        voice_name_ = accumulator.voice_abbreviations.get(
+            anchor.remote_voice_name, anchor.remote_voice_name
+        )
+        anchor = dataclasses.replace(anchor, remote_voice_name=voice_name_)
     contribution = Contribution(
-        voice_to_selection,
+        voice_name_to_selection,
         anchor=anchor,
         figure_name=figure_name,
         hide_time_signature=hide_time_signature,
@@ -1599,9 +1609,11 @@ def make_figures(
         if contribution.figure_name in accumulator.figure_names:
             raise Exception(f"duplicate figure name: {contribution.figure_name!r}.")
         accumulator.figure_names.append(contribution.figure_name)
-    for voice_name in contribution:
+    # for voice_name in contribution:
+    for voice_name in contribution.voice_name_to_selection:
         voice_name = accumulator.voice_abbreviations.get(voice_name, voice_name)
-        selection = contribution[voice_name]
+        # selection = contribution[voice_name]
+        selection = contribution.voice_name_to_selection[voice_name]
         if not selection:
             continue
         start_offset = _get_start_offset(
