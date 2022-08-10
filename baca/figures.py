@@ -1567,20 +1567,27 @@ def handle_figures(
 def make_figures(
     accumulator: "FigureAccumulator",
     voice_name: str,
-    collections: typing.Sequence,
+    collections: typing.Sequence | None,
     *commands,
     anchor: "Anchor" = None,
     do_not_label: bool = False,
     figure_name: str = "",
     figure_label_direction: int = None,
     hide_time_signature: bool | None = None,
+    imbricated_selections: dict[str, list[abjad.Container]] = None,
     tsd: int = None,
+    tuplets: list[abjad.Tuplet] = None,
 ):
     assert isinstance(figure_name, str), repr(figure_name)
     voice_name = accumulator.voice_abbreviations.get(voice_name, voice_name)
-    container, imbricated_selections, tsd = _collections_to_container(
-        accumulator, voice_name, collections, *commands, tsd=tsd
-    )
+    if collections is None:
+        assert tuplets is not None
+        container = abjad.Container(tuplets)
+        imbricated_selections = imbricated_selections or {}
+    else:
+        container, imbricated_selections, tsd = _collections_to_container(
+            accumulator, voice_name, collections, *commands, tsd=tsd
+        )
     duration = abjad.get.duration(container)
     if tsd is not None:
         duration = duration.with_denominator(tsd)
@@ -1593,7 +1600,9 @@ def make_figures(
         )
     selection = [container]
     voice_name_to_selection = {voice_name: selection}
-    voice_name_to_selection.update(imbricated_selections)
+    assert isinstance(imbricated_selections, dict)
+    for voice_name, selection in imbricated_selections.items():
+        voice_name_to_selection[voice_name] = selection
     if anchor is not None:
         voice_name_ = accumulator.voice_abbreviations.get(
             anchor.remote_voice_name, anchor.remote_voice_name
