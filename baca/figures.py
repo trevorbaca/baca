@@ -961,7 +961,7 @@ class FigureAccumulator:
         figure_name: str = "",
         figure_label_direction: int = None,
         hide_time_signature: bool | None = None,
-        signature: int = None,
+        tsd: int = None,
     ) -> None:
         make_figures(
             self,
@@ -973,7 +973,7 @@ class FigureAccumulator:
             figure_name=figure_name,
             figure_label_direction=figure_label_direction,
             hide_time_signature=hide_time_signature,
-            signature=signature,
+            tsd=tsd,
         )
 
     def assemble(self, voice_name) -> list | None:
@@ -1034,7 +1034,7 @@ class FigureMaker:
     acciaccatura: Acciaccatura | None = None
     affix: typing.Optional["RestAffix"] = None
     restart_talea: bool = False
-    signature: int | None = None
+    tsd: int | None = None
     spelling: rmakers.Spelling | None = None
     treatments: typing.Sequence = ()
 
@@ -1044,8 +1044,8 @@ class FigureMaker:
         if self.affix is not None:
             assert isinstance(self.affix, RestAffix), repr(self.affix)
         assert isinstance(self.restart_talea, bool), repr(self.restart_talea)
-        if self.signature is not None:
-            assert isinstance(self.signature, int), repr(self.signature)
+        if self.tsd is not None:
+            assert isinstance(self.tsd, int), repr(self.tsd)
         if self.spelling is not None:
             assert isinstance(self.spelling, rmakers.Spelling), repr(self.spelling)
         assert isinstance(self.talea, rmakers.Talea), repr(self.talea)
@@ -1391,7 +1391,7 @@ def figure(
     acciaccatura: bool | Acciaccatura | LMR | None = None,
     affix: RestAffix = None,
     restart_talea: bool = False,
-    signature: int = None,
+    tsd: int = None,
     spelling: rmakers.Spelling = None,
     treatments: typing.Sequence = (),
 ) -> FigureMaker:
@@ -1406,7 +1406,7 @@ def figure(
         acciaccatura=acciaccatura,
         affix=affix,
         restart_talea=restart_talea,
-        signature=signature,
+        tsd=tsd,
         spelling=spelling,
         treatments=treatments,
     )
@@ -1420,7 +1420,7 @@ def figure_function(
     acciaccatura: bool | Acciaccatura | LMR | None = None,
     affix: RestAffix = None,
     restart_talea: bool = False,
-    signature: int = None,
+    tsd: int = None,
     spelling: rmakers.Spelling = None,
     treatments: typing.Sequence = (),
 ) -> list[abjad.Tuplet]:
@@ -1503,7 +1503,7 @@ def handle_figures(
     figure_name: str = "",
     figure_label_direction: int = None,
     hide_time_signature: bool | None = None,
-    signature: int = None,
+    tsd: int = None,
 ):
     assert isinstance(figure_name, str), repr(figure_name)
 
@@ -1518,7 +1518,7 @@ def make_figures(
     figure_name: str = "",
     figure_label_direction: int = None,
     hide_time_signature: bool | None = None,
-    signature: int = None,
+    tsd: int = None,
 ):
     assert isinstance(figure_name, str), repr(figure_name)
     voice_name = accumulator.voice_abbreviations.get(voice_name, voice_name)
@@ -1577,13 +1577,12 @@ def make_figures(
             container, figure_name, figure_label_direction, accumulator.figure_number
         )
     duration = abjad.get.duration(container)
-    if signature is None and figure_maker:
-        signature = figure_maker.signature
-    if signature is None and command:
-        primary_maker = command.assignments[0].maker
-        signature = primary_maker.signature
-    if signature is not None:
-        duration = duration.with_denominator(signature)
+    if tsd is None and figure_maker:
+        tsd = figure_maker.tsd
+    if tsd is None and command:
+        tsd = command.assignments[0].maker.tsd
+    if tsd is not None:
+        duration = duration.with_denominator(tsd)
     time_signature = abjad.TimeSignature(duration)
     selection = [container]
     assert isinstance(selection, list)
