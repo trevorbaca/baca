@@ -159,6 +159,57 @@ def _collections_to_container(
     return container, imbricated_selections, tsd
 
 
+def _do_nest_command(argument, *, lmr=None, treatments=None) -> list[abjad.Tuplet]:
+    cyclic_treatments = abjad.CyclicTuple(treatments)
+    assert cyclic_treatments is not None
+    tuplets = []
+    for item in argument:
+        if isinstance(item, abjad.Tuplet):
+            tuplets.append(item)
+        else:
+            assert isinstance(item, list), repr(item)
+            assert len(item) == 1, repr(item)
+            assert isinstance(item[0], abjad.Tuplet), repr(item)
+            tuplet = item[0]
+            tuplets.append(tuplet)
+    if lmr is None:
+        tuplet_selections = [tuplets]
+    else:
+        tuplet_selections = lmr(tuplets)
+        tuplet_selections = [list(_) for _ in tuplet_selections]
+    tuplets = []
+    for i, tuplet_selection in enumerate(tuplet_selections):
+        assert isinstance(tuplet_selection, list)
+        treatment = cyclic_treatments[i]
+        if treatment is None:
+            tuplets.extend(tuplet_selection)
+        else:
+            assert isinstance(tuplet_selection, list)
+            for tuplet in tuplet_selection:
+                assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
+            if isinstance(treatment, str):
+                addendum = abjad.Duration(treatment)
+                contents_duration = abjad.get.duration(tuplet_selection)
+                target_duration = contents_duration + addendum
+                multiplier = target_duration / contents_duration
+                tuplet = abjad.Tuplet(multiplier, [])
+                abjad.mutate.wrap(tuplet_selection, tuplet)
+            elif treatment.__class__ is abjad.Multiplier:
+                tuplet = abjad.Tuplet(treatment, [])
+                abjad.mutate.wrap(tuplet_selection, tuplet)
+            elif treatment.__class__ is abjad.Duration:
+                target_duration = treatment
+                contents_duration = abjad.get.duration(tuplet_selection)
+                multiplier = target_duration / contents_duration
+                tuplet = abjad.Tuplet(multiplier, [])
+                abjad.mutate.wrap(tuplet_selection, tuplet)
+            else:
+                raise Exception(f"bad time treatment: {treatment!r}.")
+            nested_tuplet = tuplet
+            tuplets.append(nested_tuplet)
+    return tuplets
+
+
 def _fix_rounding_error(durations, total_duration):
     current_duration = sum(durations)
     if current_duration < total_duration:
@@ -1272,54 +1323,7 @@ class Nest:
             assert isinstance(self.lmr, LMR), repr(self.lmr)
 
     def __call__(self, selection) -> list[abjad.Tuplet]:
-        treatments = abjad.CyclicTuple(self.treatments)
-        assert treatments is not None
-        tuplets = []
-        for item in selection:
-            if isinstance(item, abjad.Tuplet):
-                tuplets.append(item)
-            else:
-                assert isinstance(item, list), repr(item)
-                assert len(item) == 1, repr(item)
-                assert isinstance(item[0], abjad.Tuplet), repr(item)
-                tuplet = item[0]
-                tuplets.append(tuplet)
-        if self.lmr is None:
-            tuplet_selections = [tuplets]
-        else:
-            tuplet_selections = self.lmr(tuplets)
-            tuplet_selections = [list(_) for _ in tuplet_selections]
-        tuplets = []
-        for i, tuplet_selection in enumerate(tuplet_selections):
-            assert isinstance(tuplet_selection, list)
-            treatment = treatments[i]
-            if treatment is None:
-                tuplets.extend(tuplet_selection)
-            else:
-                assert isinstance(tuplet_selection, list)
-                for tuplet in tuplet_selection:
-                    assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
-                if isinstance(treatment, str):
-                    addendum = abjad.Duration(treatment)
-                    contents_duration = abjad.get.duration(tuplet_selection)
-                    target_duration = contents_duration + addendum
-                    multiplier = target_duration / contents_duration
-                    tuplet = abjad.Tuplet(multiplier, [])
-                    abjad.mutate.wrap(tuplet_selection, tuplet)
-                elif treatment.__class__ is abjad.Multiplier:
-                    tuplet = abjad.Tuplet(treatment, [])
-                    abjad.mutate.wrap(tuplet_selection, tuplet)
-                elif treatment.__class__ is abjad.Duration:
-                    target_duration = treatment
-                    contents_duration = abjad.get.duration(tuplet_selection)
-                    multiplier = target_duration / contents_duration
-                    tuplet = abjad.Tuplet(multiplier, [])
-                    abjad.mutate.wrap(tuplet_selection, tuplet)
-                else:
-                    raise Exception(f"bad time treatment: {treatment!r}.")
-                nested_tuplet = tuplet
-                tuplets.append(nested_tuplet)
-        return tuplets
+        return _do_nest_command(selection, lmr=self.lmr, treatments=self.treatments)
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -1550,20 +1554,6 @@ def lmr(
     )
 
 
-# TODO
-def handle_figures(
-    accumulator: "FigureAccumulator",
-    voice_name: str,
-    anchor: "Anchor" = None,
-    do_not_label: bool = False,
-    figure_name: str = "",
-    figure_label_direction: int = None,
-    hide_time_signature: bool | None = None,
-    tsd: int = None,
-):
-    assert isinstance(figure_name, str), repr(figure_name)
-
-
 def make_figures(
     accumulator: "FigureAccumulator",
     voice_name: str,
@@ -1658,6 +1648,15 @@ def nest(treatments: typing.Sequence, *, lmr: LMR = None) -> Nest:
     if not isinstance(treatments, list):
         treatments = [treatments]
     return Nest(lmr=lmr, treatments=treatments)
+
+
+def nest_function(
+    argument, treatments: typing.Sequence, *, lmr: LMR = None
+) -> list[abjad.Tuplet]:
+    assert treatments is not None
+    if not isinstance(treatments, list):
+        treatments = [treatments]
+    return _do_nest_command(argument, lmr=lmr, treatments=treatments)
 
 
 def rests_after(counts: typing.Sequence[int]) -> RestAffix:
