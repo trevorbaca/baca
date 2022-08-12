@@ -92,6 +92,7 @@ from .spannercommands import (
     slur,
     slur_function,
     sustain_pedal,
+    sustain_pedal_function,
     trill_spanner,
     trill_spanner_function,
 )

@@ -5141,6 +5141,7 @@ def register_function(
     start: int,
     stop: int = None,
 ) -> None:
+    assert not isinstance(argument, int), repr(argument)
     start_pitch, stop_pitch = register_prepare(start, stop)
     if stop_pitch is None:
         registration = _pcollections.Registration(
