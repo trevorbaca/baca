@@ -138,16 +138,16 @@ def _collections_to_container(
         tsd = figure_maker.tsd
     if tsd is None and command:
         tsd = command.assignments[0].maker.tsd
-    imbricated_selections = {}
+    imbrications = {}
     command_prototype = (_command.Command, rmakers.Command, Nest)
     for command in commands:
         if isinstance(command, Imbrication):
             voice_name_to_selection = command(container)
-            imbricated_selections.update(voice_name_to_selection)
+            imbrications.update(voice_name_to_selection)
         else:
             assert isinstance(command, command_prototype), repr(command)
             command(container)
-    return container, imbricated_selections, tsd
+    return container, imbrications, tsd
 
 
 def _do_imbrication(
@@ -1554,7 +1554,7 @@ def make_figures(
     figure_name: str = "",
     figure_label_direction: int = None,
     hide_time_signature: bool | None = None,
-    imbricated_selections: dict[str, list[abjad.Container]] = None,
+    imbrications: dict[str, list[abjad.Container]] = None,
     tsd: int = None,
     tuplets: list[abjad.Tuplet] = None,
 ):
@@ -1563,14 +1563,14 @@ def make_figures(
     if container is not None:
         assert collections is None
         assert tuplets is None
-        imbricated_selections = imbricated_selections or {}
+        imbrications = imbrications or {}
     elif tuplets is not None:
         assert collections is None
         container = abjad.Container(tuplets)
-        imbricated_selections = imbricated_selections or {}
+        imbrications = imbrications or {}
     else:
         assert collections is not None
-        container, imbricated_selections, tsd = _collections_to_container(
+        container, imbrications, tsd = _collections_to_container(
             accumulator, voice_name, collections, *commands, tsd=tsd
         )
     duration = abjad.get.duration(container)
@@ -1585,8 +1585,8 @@ def make_figures(
         )
     selection = [container]
     voice_name_to_selection = {voice_name: selection}
-    assert isinstance(imbricated_selections, dict)
-    for voice_name, selection in imbricated_selections.items():
+    assert isinstance(imbrications, dict)
+    for voice_name, selection in imbrications.items():
         voice_name_to_selection[voice_name] = selection
     if anchor is not None:
         voice_name_ = accumulator.voice_abbreviations.get(
