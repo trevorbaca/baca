@@ -115,15 +115,6 @@ def _collections_to_container(
         abjad.PitchSegment,
     )
     assert isinstance(collections, collection_prototype), repr(collections)
-    commands_ = []
-    for command in commands:
-        if isinstance(command, Imbrication):
-            voice_name_ = accumulator.voice_abbreviations.get(
-                command.voice_name, command.voice_name
-            )
-            command = dataclasses.replace(command, voice_name=voice_name_)
-        commands_.append(command)
-    commands = tuple(commands_)
     command, figure_maker = None, None
     if isinstance(collections, str):
         tuplet = abjad.Tuplet((1, 1), collections, hide=True)
@@ -149,13 +140,13 @@ def _collections_to_container(
         tsd = command.assignments[0].maker.tsd
     imbricated_selections = {}
     command_prototype = (_command.Command, rmakers.Command, Nest)
-    for command_ in commands:
-        if isinstance(command_, Imbrication):
-            voice_name_to_selection = command_(container)
+    for command in commands:
+        if isinstance(command, Imbrication):
+            voice_name_to_selection = command(container)
             imbricated_selections.update(voice_name_to_selection)
         else:
-            assert isinstance(command_, command_prototype), repr(command_)
-            command_(container)
+            assert isinstance(command, command_prototype), repr(command)
+            command(container)
     return container, imbricated_selections, tsd
 
 
@@ -1613,11 +1604,7 @@ def make_figures(
         if contribution.figure_name in accumulator.figure_names:
             raise Exception(f"duplicate figure name: {contribution.figure_name!r}.")
         accumulator.figure_names.append(contribution.figure_name)
-    for voice_name in contribution.voice_name_to_selection:
-        voice_name = accumulator.voice_abbreviations.get(voice_name, voice_name)
-        selection = contribution.voice_name_to_selection[voice_name]
-        if not selection:
-            continue
+    for voice_name, selection in contribution.voice_name_to_selection.items():
         start_offset = _get_start_offset(
             selection,
             contribution,
@@ -1632,6 +1619,8 @@ def make_figures(
             timespan.stop_offset,
             annotation=selection,
         )
+        if voice_name not in accumulator.floating_selections:
+            voice_name = accumulator.voice_abbreviations.get(voice_name, voice_name)
         accumulator.floating_selections[voice_name].append(floating_selection)
     accumulator.current_offset = stop_offset
     accumulator.score_stop_offset = max(accumulator.score_stop_offset, stop_offset)
