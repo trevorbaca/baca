@@ -91,32 +91,6 @@ def _call_figure_maker(
     return tuplets
 
 
-def _call_imbrication_commands(container, commands):
-    assert isinstance(container, abjad.Container), repr(container)
-    nested_selections = None
-    selections = container[:]
-    for command in commands:
-        if isinstance(command, Assignment):
-            continue
-        if isinstance(command, Imbrication):
-            continue
-        prototype = (
-            rmakers.BeamCommand,
-            rmakers.FeatherBeamCommand,
-            rmakers.BeamGroupsCommand,
-            rmakers.UnbeamCommand,
-        )
-        if isinstance(command, prototype):
-            rmakers.unbeam()(selections)
-        if isinstance(command, Nest):
-            nested_selections = command(selections)
-        else:
-            command(selections)
-    if nested_selections is not None:
-        return nested_selections
-    return selections
-
-
 def _coerce_collections(collections):
     prototype = (
         abjad.PitchClassSegment,
@@ -187,8 +161,8 @@ def _collections_to_container(
 
 def _do_imbrication(
     container: abjad.Container,
-    segment,
-    voice_name,
+    segment: list,
+    voice_name: str,
     *commands,
     allow_unused_pitches: bool = False,
     by_pitch_class: bool = False,
@@ -250,7 +224,8 @@ def _do_imbrication(
         assert cursor.position is not None
         current, total = cursor.position - 1, len(cursor)
         raise Exception(f"{cursor!r} used only {current} of {total} pitches.")
-    _call_imbrication_commands(container, commands)
+    for command in commands:
+        command(container)
     selection = [container]
     if not hocket:
         pleaves = _select.pleaves(container)
@@ -1291,8 +1266,7 @@ class Imbrication:
 
     def __post_init__(self) -> None:
         assert isinstance(self.voice_name, str), repr(self.voice_name)
-        if self.segment is not None:
-            assert isinstance(self.segment, list), repr(self.segment)
+        assert isinstance(self.segment, list), repr(self.segment)
         assert isinstance(self.allow_unused_pitches, bool)
         assert isinstance(self.by_pitch_class, bool), repr(self.by_pitch_class)
         assert isinstance(self.hocket, bool), repr(self.hocket)
@@ -1534,11 +1508,11 @@ def imbricate_function(
     by_pitch_class: bool = False,
     hocket: bool = False,
     truncate_ties: bool = False,
-):
+) -> dict[str, list]:
     return _do_imbrication(
         container,
-        voice_name,
         segment,
+        voice_name,
         *specifiers,
         allow_unused_pitches=allow_unused_pitches,
         by_pitch_class=by_pitch_class,
