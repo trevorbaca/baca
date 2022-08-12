@@ -195,6 +195,20 @@ def _do_register_command(argument, registration):
             abjad.detach(_enums.NOT_YET_REGISTERED, pleaf)
 
 
+def _do_register_to_octave_command(argument, anchor, octave_number):
+    pitches = abjad.iterate.pitches(argument)
+    octave_adjustment = _pcollections.pitches_to_octave_adjustment(
+        # pitches, anchor=self.anchor, octave_number=self.octave_number
+        pitches,
+        anchor=anchor,
+        octave_number=octave_number,
+    )
+    pleaves = _select.pleaves(argument)
+    for pleaf in pleaves:
+        # self._set_pitch(pleaf, lambda _: _.transpose(n=12 * octave_adjustment))
+        _set_pitch(pleaf, lambda _: _.transpose(n=12 * octave_adjustment))
+
+
 def _do_staff_position_command(
     argument,
     numbers,
@@ -511,6 +525,16 @@ def _set_lt_pitch(
                 abjad.mutate.replace(leaf, note, wrappers=True)
             new_lt = abjad.get.logical_tie(note)
     return new_lt
+
+
+def _set_pitch(leaf, transposition):
+    if isinstance(leaf, abjad.Note):
+        pitch = transposition(leaf.written_pitch)
+        leaf.written_pitch = pitch
+    elif isinstance(leaf, abjad.Chord):
+        pitches = [transposition(_) for _ in leaf.written_pitches]
+        leaf.written_pitches = pitches
+    abjad.detach(_enums.NOT_YET_REGISTERED, leaf)
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -3597,29 +3621,12 @@ class RegisterToOctaveCommand(_command.Command):
     __repr__ = _command.Command.__repr__
 
     def _call(self, *, argument=None, runtime=None) -> bool:
-        if argument is None:
-            return False
-        if self.octave_number is None:
-            return False
         if self.selector:
             argument = self.selector(argument)
-        pitches = abjad.iterate.pitches(argument)
-        octave_adjustment = _pcollections.pitches_to_octave_adjustment(
-            pitches, anchor=self.anchor, octave_number=self.octave_number
+        _do_register_to_octave_command(
+            argument, anchor=self.anchor, octave_number=self.octave_number
         )
-        pleaves = _select.pleaves(argument)
-        for pleaf in pleaves:
-            self._set_pitch(pleaf, lambda _: _.transpose(n=12 * octave_adjustment))
         return False
-
-    def _set_pitch(self, leaf, transposition):
-        if isinstance(leaf, abjad.Note):
-            pitch = transposition(leaf.written_pitch)
-            leaf.written_pitch = pitch
-        elif isinstance(leaf, abjad.Chord):
-            pitches = [transposition(_) for _ in leaf.written_pitches]
-            leaf.written_pitches = pitches
-        abjad.detach(_enums.NOT_YET_REGISTERED, leaf)
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -3945,6 +3952,10 @@ def bass_to_octave(
     return RegisterToOctaveCommand(
         anchor=abjad.DOWN, octave_number=n, selector=selector
     )
+
+
+def bass_to_octave_function(argument, n: int) -> None:
+    _do_register_to_octave_command(argument, anchor=abjad.DOWN, octave_number=n)
 
 
 def center_to_octave(
