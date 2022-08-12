@@ -91,6 +91,32 @@ def _call_figure_maker(
     return tuplets
 
 
+def _call_imbrication_commands(container, commands):
+    assert isinstance(container, abjad.Container), repr(container)
+    nested_selections = None
+    selections = container[:]
+    for command in commands:
+        if isinstance(command, Assignment):
+            continue
+        if isinstance(command, Imbrication):
+            continue
+        prototype = (
+            rmakers.BeamCommand,
+            rmakers.FeatherBeamCommand,
+            rmakers.BeamGroupsCommand,
+            rmakers.UnbeamCommand,
+        )
+        if isinstance(command, prototype):
+            rmakers.unbeam()(selections)
+        if isinstance(command, Nest):
+            nested_selections = command(selections)
+        else:
+            command(selections)
+    if nested_selections is not None:
+        return nested_selections
+    return selections
+
+
 def _coerce_collections(collections):
     prototype = (
         abjad.PitchClassSegment,
@@ -157,6 +183,20 @@ def _collections_to_container(
             assert isinstance(command_, command_prototype), repr(command_)
             command_(container)
     return container, imbricated_selections, tsd
+
+
+def _do_imbrication(
+    container: abjad.Container,
+    voice_name: str,
+    segment: list,
+    *specifiers: typing.Any,
+    allow_unused_pitches: bool = False,
+    by_pitch_class: bool = False,
+    hocket: bool = False,
+    selector: typing.Callable = None,
+    truncate_ties: bool = False,
+):
+    pass
 
 
 def _do_nest_command(argument, *, lmr=None, treatments=None) -> list[abjad.Tuplet]:
@@ -1273,7 +1313,7 @@ class Imbrication:
             assert cursor.position is not None
             current, total = cursor.position - 1, len(cursor)
             raise Exception(f"{cursor!r} used only {current} of {total} pitches.")
-        self._call_commands(container)
+        _call_imbrication_commands(container, self.commands)
         selection = [container]
         if not self.hocket:
             pleaves = _select.pleaves(container)
@@ -1281,32 +1321,6 @@ class Imbrication:
             for pleaf in pleaves:
                 abjad.attach(_enums.ALLOW_OCTAVE, pleaf)
         return {self.voice_name: selection}
-
-    def _call_commands(self, container):
-        assert isinstance(container, abjad.Container), repr(container)
-        nested_selections = None
-        commands = self.commands or []
-        selections = container[:]
-        for command in commands:
-            if isinstance(command, Assignment):
-                continue
-            if isinstance(command, Imbrication):
-                continue
-            prototype = (
-                rmakers.BeamCommand,
-                rmakers.FeatherBeamCommand,
-                rmakers.BeamGroupsCommand,
-                rmakers.UnbeamCommand,
-            )
-            if isinstance(command, prototype):
-                rmakers.unbeam()(selections)
-            if isinstance(command, Nest):
-                nested_selections = command(selections)
-            else:
-                command(selections)
-        if nested_selections is not None:
-            return nested_selections
-        return selections
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -1510,7 +1524,7 @@ def imbricate(
     allow_unused_pitches: bool = False,
     by_pitch_class: bool = False,
     hocket: bool = False,
-    selector=None,
+    selector: typing.Callable = None,
     truncate_ties: bool = False,
 ):
     return Imbrication(
@@ -1521,6 +1535,29 @@ def imbricate(
         by_pitch_class=by_pitch_class,
         hocket=hocket,
         selector=selector,
+        truncate_ties=truncate_ties,
+    )
+
+
+def imbricate_function(
+    container: abjad.Container,
+    voice_name: str,
+    segment: list,
+    *specifiers: typing.Any,
+    allow_unused_pitches: bool = False,
+    by_pitch_class: bool = False,
+    hocket: bool = False,
+    selector: typing.Callable = None,
+    truncate_ties: bool = False,
+):
+    return _do_imbrication(
+        container,
+        voice_name,
+        segment,
+        *specifiers,
+        allow_unused_pitches=allow_unused_pitches,
+        by_pitch_class=by_pitch_class,
+        hocket=hocket,
         truncate_ties=truncate_ties,
     )
 
