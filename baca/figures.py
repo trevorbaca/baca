@@ -1483,14 +1483,14 @@ def figure_function(
     tsd: int = None,
     spelling: rmakers.Spelling = None,
     treatments: typing.Sequence = (),
-) -> list[abjad.Tuplet]:
+) -> abjad.Container:
     if acciaccatura is True:
         acciaccatura = Acciaccatura()
     elif isinstance(acciaccatura, LMR):
         acciaccatura = Acciaccatura(lmr=acciaccatura)
     if acciaccatura is not None:
         assert isinstance(acciaccatura, Acciaccatura), repr(acciaccatura)
-    return _call_figure_maker(
+    tuplets = _call_figure_maker(
         affix,
         rmakers.Talea(counts=counts, denominator=denominator),
         spelling,
@@ -1499,6 +1499,8 @@ def figure_function(
         collections=collections,
         restart_talea=restart_talea,
     )
+    container = abjad.Container(tuplets)
+    return container
 
 
 def imbricate(
