@@ -1562,6 +1562,7 @@ def make_figures(
     collections: typing.Sequence | None,
     *commands,
     anchor: "Anchor" = None,
+    container: abjad.Container = None,
     do_not_label: bool = False,
     figure_name: str = "",
     figure_label_direction: int = None,
@@ -1572,11 +1573,16 @@ def make_figures(
 ):
     assert isinstance(figure_name, str), repr(figure_name)
     voice_name = accumulator.voice_abbreviations.get(voice_name, voice_name)
-    if collections is None:
-        assert tuplets is not None
+    if container is not None:
+        assert collections is None
+        assert tuplets is None
+        imbricated_selections = imbricated_selections or {}
+    elif tuplets is not None:
+        assert collections is None
         container = abjad.Container(tuplets)
         imbricated_selections = imbricated_selections or {}
     else:
+        assert collections is not None
         container, imbricated_selections, tsd = _collections_to_container(
             accumulator, voice_name, collections, *commands, tsd=tsd
         )
