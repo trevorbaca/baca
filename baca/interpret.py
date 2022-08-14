@@ -2576,10 +2576,16 @@ class DynamicScope:
         return self.argument.__getitem__(i)
 
     def __iter__(self):
-        return iter(self.argument)
+        try:
+            return iter(self.argument)
+        except TypeError:
+            return iter([self.argument])
 
     def __len__(self):
-        return len(self.argument)
+        try:
+            return len(self.argument)
+        except TypeError:
+            return 1
 
     def leaf(self, n):
         return abjad.select.leaf(self.argument, n, exclude=_enums.HIDDEN)
