@@ -899,11 +899,13 @@ def instrument(
 
 def instrument_function(
     argument,
-    instrument: abjad.Instrument,
+    key: str,
     manifests: dict,
 ) -> list[abjad.Wrapper]:
-    assert isinstance(instrument, abjad.Instrument), repr(instrument)
+    assert isinstance(key, str), repr(key)
     assert isinstance(manifests, dict), repr(manifests)
+    dictionary = manifests["abjad.Instrument"]
+    instrument = dictionary[key]
     tag = _tags.function_name(_frame())
     wrappers = []
     for leaf in abjad.select.leaves(argument):
@@ -1417,15 +1419,15 @@ def short_instrument_name(
 
 def short_instrument_name_function(
     argument,
-    short_instrument_name: abjad.ShortInstrumentName,
+    key: str,
     manifests: dict,
     *,
     context: str = "Staff",
 ) -> list[abjad.Wrapper]:
-    assert isinstance(short_instrument_name, abjad.ShortInstrumentName), repr(
-        short_instrument_name
-    )
+    assert isinstance(key, str), repr(key)
     assert isinstance(manifests, dict), repr(manifests)
+    dictionary = manifests["abjad.ShortInstrumentName"]
+    short_instrument_name = dictionary[key]
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.NOT_PARTS)
     wrappers = []
