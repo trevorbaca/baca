@@ -4675,7 +4675,7 @@ def pitch_function(
     mock: bool = False,
     do_not_transpose: bool = False,
 ) -> bool:
-    assert isinstance(pitch, str | list | tuple | abjad.Pitch), repr(pitch)
+    assert isinstance(pitch, int | str | list | tuple | abjad.Pitch), repr(pitch)
     if isinstance(pitch, list | tuple) and len(pitch) == 1:
         raise Exception(f"one-note chord {pitch!r}?")
     assert isinstance(allow_out_of_range, bool), repr(allow_out_of_range)
