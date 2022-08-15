@@ -725,12 +725,10 @@ def edition_function(
     assert isinstance(not_parts, str), repr(not_parts)
     assert isinstance(only_parts, str), repr(only_parts)
     wrappers = []
-    not_parts_ = abjad.Markup(rf"\markup {{ {not_parts} }}")
-    wrappers_ = markup_function(argument, not_parts_)
+    wrappers_ = markup_function(argument, not_parts)
     _tags.wrappers(wrappers_, _tags.NOT_PARTS)
     wrappers.extend(wrappers_)
-    only_parts_ = abjad.Markup(rf"\markup {{ {only_parts} }}")
-    wrappers_ = markup_function(argument, only_parts_)
+    wrappers_ = markup_function(argument, only_parts)
     _tags.wrappers(wrappers_, _tags.ONLY_PARTS)
     wrappers.extend(wrappers_)
     return wrappers
