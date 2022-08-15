@@ -719,6 +719,23 @@ def edition(
     return _command.suite(not_parts_, only_parts_)
 
 
+def edition_function(
+    argument, *, not_parts: str, only_parts: str
+) -> list[abjad.Wrapper]:
+    assert isinstance(not_parts, str), repr(not_parts)
+    assert isinstance(only_parts, str), repr(only_parts)
+    wrappers = []
+    not_parts_ = abjad.Markup(rf"\markup {{ {not_parts} }}")
+    wrappers_ = markup_function(argument, not_parts_)
+    _tags.wrappers(wrappers_, _tags.NOT_PARTS)
+    wrappers.extend(wrappers_)
+    only_parts_ = abjad.Markup(rf"\markup {{ {only_parts} }}")
+    wrappers_ = markup_function(argument, only_parts_)
+    _tags.wrappers(wrappers_, _tags.ONLY_PARTS)
+    wrappers.extend(wrappers_)
+    return wrappers
+
+
 def espressivo(
     selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
     *tweaks: abjad.Tweak,
