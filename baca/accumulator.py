@@ -227,8 +227,6 @@ class CommandAccumulator:
                         scope_ = dataclasses.replace(current_scope, measures=measures)
                     else:
                         scope_ = dataclasses.replace(current_scope)
-                    # command_ = copy.copy(command_)
-                    # command_.scope = scope_
                     command_ = dataclasses.replace(command_, scope=scope_)
                     self.commands.append(command_)
 
