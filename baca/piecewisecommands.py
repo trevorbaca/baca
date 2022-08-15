@@ -929,6 +929,7 @@ def hairpin_function(
     bookend: bool | int = -1,
     final_hairpin: bool | str | abjad.StartHairpin | None = None,
     forbid_al_niente_to_bar_line: bool = False,
+    left_broken: bool = False,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     remove_length_1_spanner_start: bool = False,
     right_broken: bool = False,
@@ -940,6 +941,7 @@ def hairpin_function(
         tweaks=tweaks,
     )
     assert isinstance(bookend, bool | int), repr(bookend)
+    assert isinstance(left_broken, bool), repr(left_broken)
     assert isinstance(remove_length_1_spanner_start, bool), repr(
         remove_length_1_spanner_start
     )
@@ -953,7 +955,7 @@ def hairpin_function(
         self_bookend=bookend,
         self_final_piece_spanner=final_hairpin_,
         # self_leak_spanner_stop,
-        # self_left_broken,
+        self_left_broken=left_broken,
         self_pieces=pieces,
         self_remove_length_1_spanner_start=remove_length_1_spanner_start,
         self_right_broken=right_broken_,
