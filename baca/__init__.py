@@ -28,7 +28,7 @@ from .interpret import (
     reapply,
     reapply_persistent_indicators,
     scope,
-    update_voice_metadata,
+    update_voice_name_to_parameter_to_state,
 )
 from .layout import *
 from .lilypond import file, make_lilypond_file

@@ -795,6 +795,7 @@ def _call_all_commands(
             print(f"Interpreting ...\n\n{command}\n")
             raise
         cache = _handle_mutator(score, cache, command_result)
+        # TODO: change "persist" to "name"
         if getattr(command, "persist", None):
             parameter = command.parameter
             state = command.state
@@ -3181,17 +3182,23 @@ def set_up_score(
                 commands._voice_name_to_voice[abbreviation] = voice
 
 
-def update_voice_metadata(
-    voice_metadata: dict, voice_name: str, parameter: str, persist: str, state: dict
+def update_voice_name_to_parameter_to_state(
+    voice_name_to_parameter_to_state: dict,
+    voice_name: str,
+    parameter: str,
+    name: str,
+    state: dict,
 ):
-    assert isinstance(voice_metadata, dict), repr(voice_metadata)
+    assert isinstance(voice_name_to_parameter_to_state, dict), repr(
+        voice_name_to_parameter_to_state
+    )
     assert isinstance(voice_name, str), repr(voice_name)
     assert isinstance(parameter, str), repr(parameter)
-    assert isinstance(persist, str), repr(persist)
+    assert isinstance(name, str), repr(name)
     assert isinstance(state, dict), repr(state)
-    assert "name" not in state
-    state["name"] = persist
+    assert "name" not in state, repr(state)
+    state["name"] = name
     state = dict(sorted(state.items()))
-    voice_metadata_ = voice_metadata.get(voice_name, {})
+    voice_metadata_ = voice_name_to_parameter_to_state.get(voice_name, {})
     voice_metadata_[parameter] = state
-    voice_metadata[voice_name] = voice_metadata_
+    voice_name_to_parameter_to_state[voice_name] = voice_metadata_
