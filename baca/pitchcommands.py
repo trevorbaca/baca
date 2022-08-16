@@ -436,13 +436,13 @@ def _parse_string(string):
     return items
 
 
-def _previous_pitches_consumed(dictionary, persist, *, ignore_incomplete=False):
+def _previous_pitches_consumed(dictionary, name, *, ignore_incomplete=False):
     if not dictionary:
         return 0
     dictionary = dictionary.get(_enums.PITCH.name, None)
     if not dictionary:
         return 0
-    if dictionary.get("name") != persist:
+    if dictionary.get("name") != name:
         return 0
     pitches_consumed = dictionary.get("pitches_consumed", None)
     if not pitches_consumed:
@@ -1875,7 +1875,7 @@ class PitchCommand(_command.Command):
     cyclic: bool = False
     do_not_transpose: bool = False
     ignore_incomplete: bool = False
-    persist: str = ""
+    name: str = ""
     pitches: typing.Sequence | Loop = ()
 
     def __post_init__(self):
@@ -1889,7 +1889,7 @@ class PitchCommand(_command.Command):
         assert isinstance(self.cyclic, bool), repr(self.cyclic)
         assert isinstance(self.do_not_transpose, bool), repr(self.do_not_transpose)
         assert isinstance(self.ignore_incomplete, bool), repr(self.ignore_incomplete)
-        assert isinstance(self.persist, str), repr(self.persist)
+        assert isinstance(self.name, str), repr(self.name)
 
     __repr__ = _command.Command.__repr__
 
@@ -1923,24 +1923,26 @@ class PitchCommand(_command.Command):
 
     def _previous_pitches_consumed(self, runtime):
         assert isinstance(runtime, dict), repr(runtime)
-        dictionary = runtime.get("previous_voice_metadata", None)
-        if not dictionary:
+        previous_parameter_to_state = runtime.get("previous_parameter_to_state", None)
+        if not previous_parameter_to_state:
             return 0
-        dictionary = dictionary.get(_enums.PITCH.name, None)
-        if not dictionary:
+        previous_pitch_state = previous_parameter_to_state.get(_enums.PITCH.name, None)
+        if not previous_pitch_state:
             return 0
-        if dictionary.get("name") != self.persist:
+        if previous_pitch_state.get("name") != self.name:
             return 0
-        pitches_consumed = dictionary.get("pitches_consumed", None)
+        pitches_consumed = previous_pitch_state.get("pitches_consumed", None)
         if not pitches_consumed:
             return 0
         assert 1 <= pitches_consumed
         if self.ignore_incomplete:
             return pitches_consumed
-        dictionary = runtime["previous_voice_metadata"]
-        dictionary = dictionary.get(_enums.RHYTHM.name, None)
-        if dictionary:
-            if dictionary.get("incomplete_final_note", False):
+        previous_parameter_to_state = runtime["previous_parameter_to_state"]
+        previous_rhythm_state = previous_parameter_to_state.get(
+            _enums.RHYTHM.name, None
+        )
+        if previous_rhythm_state:
+            if previous_rhythm_state.get("incomplete_final_note", False):
                 pitches_consumed -= 1
         return pitches_consumed
 
@@ -4558,7 +4560,7 @@ def pitch(
     allow_repitch: bool = False,
     mock: bool = False,
     do_not_transpose: bool = False,
-    persist: str = "",
+    name: str = "",
 ) -> PitchCommand:
     r"""
     Makes pitch command.
@@ -4649,8 +4651,8 @@ def pitch(
         )
     if do_not_transpose not in (None, True, False):
         raise Exception(f"do_not_transpose must be boolean (not {do_not_transpose!r}).")
-    if persist is not None and not isinstance(persist, str):
-        raise Exception(f"persist name must be string (not {persist!r}).")
+    if name is not None and not isinstance(name, str):
+        raise Exception(f"name name must be string (not {name!r}).")
     return PitchCommand(
         allow_hidden=allow_hidden,
         allow_out_of_range=allow_out_of_range,
@@ -4659,7 +4661,7 @@ def pitch(
         cyclic=True,
         do_not_transpose=do_not_transpose,
         mock=mock,
-        persist=persist,
+        name=name,
         pitches=[pitch],
         selector=selector,
     )
@@ -4711,7 +4713,7 @@ def pitches(
     do_not_transpose: bool = False,
     exact: bool = False,
     ignore_incomplete: bool = False,
-    persist: str = "",
+    name: str = "",
 ) -> PitchCommand:
     if do_not_transpose not in (None, True, False):
         raise Exception(f"do_not_transpose must be boolean (not {do_not_transpose!r}).")
@@ -4723,10 +4725,10 @@ def pitches(
         raise Exception(
             f"ignore_incomplete must be boolean (not {ignore_incomplete!r})."
         )
-    if ignore_incomplete is True and not persist:
-        raise Exception("ignore_incomplete is ignored when persist is not set.")
-    if persist is not None and not isinstance(persist, str):
-        raise Exception(f"persist name must be string (not {persist!r}).")
+    if ignore_incomplete is True and not name:
+        raise Exception("ignore_incomplete is ignored when name is not set.")
+    if name is not None and not isinstance(name, str):
+        raise Exception(f"name name must be string (not {name!r}).")
     return PitchCommand(
         allow_hidden=allow_hidden,
         allow_octaves=allow_octaves,
@@ -4736,7 +4738,7 @@ def pitches(
         do_not_transpose=do_not_transpose,
         ignore_incomplete=ignore_incomplete,
         mock=mock,
-        persist=persist,
+        name=name,
         pitches=pitches,
         selector=selector,
     )
@@ -4759,7 +4761,7 @@ def pitches_function(
     do_not_transpose: bool = False,
     exact: bool = False,
     ignore_incomplete: bool = False,
-    persist: str = "",
+    name: str = "",
 ) -> bool:
     if do_not_transpose not in (None, True, False):
         raise Exception(f"do_not_transpose must be boolean (not {do_not_transpose!r}).")
@@ -4771,17 +4773,17 @@ def pitches_function(
         raise Exception(
             f"ignore_incomplete must be boolean (not {ignore_incomplete!r})."
         )
-    if ignore_incomplete is True and not persist:
-        raise Exception("ignore_incomplete is ignored when persist is not set.")
+    if ignore_incomplete is True and not name:
+        raise Exception("ignore_incomplete is ignored when name is not set.")
     if metadata is not None:
         assert isinstance(metadata, dict), repr(metadata)
-        assert persist, repr(persist)
-    assert isinstance(persist, str), repr(persist)
+        assert name, repr(name)
+    assert isinstance(name, str), repr(name)
     previous_pitches_consumed = 0
-    if persist:
+    if name:
         assert isinstance(metadata, dict), repr(metadata)
         previous_pitches_consumed = _previous_pitches_consumed(
-            metadata, persist, ignore_incomplete=ignore_incomplete
+            metadata, name, ignore_incomplete=ignore_incomplete
         )
     result = _do_pitch_command(
         argument,
@@ -4796,10 +4798,10 @@ def pitches_function(
         previous_pitches_consumed=previous_pitches_consumed,
     )
     pitches_consumed, mutated_score = result
-    if persist:
+    if name:
         pitches_consumed += previous_pitches_consumed
         assert isinstance(metadata, dict), repr(metadata)
-        dictionary = {"name": persist, "pitches_consumed": pitches_consumed}
+        dictionary = {"name": name, "pitches_consumed": pitches_consumed}
         metadata.setdefault("PITCH", {})
         metadata["PITCH"].update(dictionary)
     return mutated_score

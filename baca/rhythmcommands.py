@@ -108,19 +108,21 @@ class TimeSignatureMaker:
         return result
 
 
-def get_previous_state(previous_voice_metadata: dict, name: str) -> dict | None:
-    assert isinstance(previous_voice_metadata, dict), repr(previous_voice_metadata)
-    assert isinstance(name, str), repr(name)
-    previous_state = None
-    if previous_voice_metadata:
-        previous_state = previous_voice_metadata.get(_enums.RHYTHM.name)
-        if previous_state is not None and previous_state.get("name") != name:
-            previous_state = None
-    if previous_state is not None:
-        assert isinstance(previous_state, dict), repr(previous_state)
-        assert len(previous_state) in (4, 5), repr(previous_state)
-        assert previous_state["name"] == name, repr(previous_state)
-    return previous_state
+def get_previous_rhythm_state(
+    previous_parameter_to_state: dict, name: str
+) -> dict | None:
+    previous_rhythm_state = None
+    if previous_parameter_to_state:
+        previous_rhythm_state = previous_parameter_to_state.get(_enums.RHYTHM.name)
+        if (
+            previous_rhythm_state is not None
+            and previous_rhythm_state.get("name") != name
+        ):
+            previous_rhythm_state = None
+    if previous_rhythm_state is not None:
+        assert len(previous_rhythm_state) in (4, 5), repr(previous_rhythm_state)
+        assert previous_rhythm_state["name"] == name, repr(previous_rhythm_state)
+    return previous_rhythm_state
 
 
 def make_even_divisions(time_signatures):

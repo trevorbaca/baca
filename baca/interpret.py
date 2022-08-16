@@ -685,7 +685,7 @@ def _bundle_runtime(
     metronome_marks=None,
     offset_to_measure_number=None,
     previous_persistent_indicators=None,
-    previous_voice_metadata=None,
+    previous_parameter_to_state=None,
     short_instrument_names=None,
 ):
     runtime = {}
@@ -695,7 +695,7 @@ def _bundle_runtime(
     runtime["metronome_marks"] = metronome_marks
     runtime["offset_to_measure_number"] = offset_to_measure_number or {}
     runtime["previous_persistent_indicators"] = previous_persistent_indicators
-    runtime["previous_voice_metadata"] = previous_voice_metadata
+    runtime["previous_parameter_to_state"] = previous_parameter_to_state
     runtime["short_instrument_names"] = short_instrument_names
     return runtime
 
@@ -760,7 +760,7 @@ def _call_all_commands(
     previous_persist,
     score,
     time_signatures,
-    voice_metadata,
+    voice_name_to_parameter_to_state,
 ):
     voice_name_to_voice = {}
     for voice in abjad.select.components(score, abjad.Voice):
@@ -778,7 +778,7 @@ def _call_all_commands(
             measure_count,
         )
         voice_name = command.scope.voice_name
-        previous_voice_metadata = _get_previous_voice_metadata(
+        previous_parameter_to_state = _get_previous_parameter_to_state(
             previous_persist, voice_name
         )
         previous_persistent_indicators = previous_persist.get("persistent_indicators")
@@ -787,7 +787,7 @@ def _call_all_commands(
             manifests=manifests,
             offset_to_measure_number=offset_to_measure_number,
             previous_persistent_indicators=previous_persistent_indicators,
-            previous_voice_metadata=previous_voice_metadata,
+            previous_parameter_to_state=previous_parameter_to_state,
         )
         try:
             command_result = command(selection, runtime)
@@ -795,15 +795,16 @@ def _call_all_commands(
             print(f"Interpreting ...\n\n{command}\n")
             raise
         cache = _handle_mutator(score, cache, command_result)
-        # TODO: change "persist" to "name"
-        if getattr(command, "persist", None):
+        if hasattr(command, "parameter") and command.name:
+            assert isinstance(command, _pitchcommands.PitchCommand), repr(command)
             parameter = command.parameter
+            assert parameter == "PITCH", repr(parameter)
             state = command.state
-            assert "name" not in state
-            state["name"] = command.persist
-            if voice_name not in voice_metadata:
-                voice_metadata[voice_name] = {}
-            voice_metadata[voice_name][parameter] = state
+            assert "name" not in state, repr(state)
+            state["name"] = command.name
+            if voice_name not in voice_name_to_parameter_to_state:
+                voice_name_to_parameter_to_state[voice_name] = {}
+            voice_name_to_parameter_to_state[voice_name][parameter] = state
         command_count += 1
     return cache, command_count
 
@@ -1006,7 +1007,7 @@ def _collect_metadata(
     start_clock_time,
     stop_clock_time,
     time_signatures,
-    voice_metadata,
+    voice_name_to_parameter_to_state,
 ):
     metadata_, persist_ = {}, {}
     persist_["alive_during_section"] = _collect_alive_during_section(score)
@@ -1038,8 +1039,8 @@ def _collect_metadata(
     if stop_clock_time is not None:
         metadata_["stop_clock_time"] = stop_clock_time
     metadata_["time_signatures"] = time_signatures
-    if voice_metadata:
-        persist_["voice_metadata"] = voice_metadata
+    if voice_name_to_parameter_to_state:
+        persist_["voice_metadata"] = voice_name_to_parameter_to_state
     metadata.clear()
     metadata.update(metadata_)
     metadata = dict(metadata)
@@ -1443,13 +1444,14 @@ def _get_measure_timespan(score, measure_number):
     return abjad.Timespan(start_offset, stop_offset)
 
 
-def _get_previous_voice_metadata(previous_persist, voice_name):
+def _get_previous_parameter_to_state(previous_persist, voice_name):
     if not previous_persist:
         return
-    voice_metadata = previous_persist.get("voice_metadata")
-    if not voice_metadata:
+    voice_name_to_parameter_to_state = previous_persist.get("voice_metadata")
+    if not voice_name_to_parameter_to_state:
         return
-    return voice_metadata.get(voice_name, {})
+    parameter_to_state = voice_name_to_parameter_to_state.get(voice_name, {})
+    return parameter_to_state
 
 
 def _handle_mutator(score, cache, command_result):
@@ -2911,7 +2913,7 @@ def section(
     previous_persistent_indicators = previous_persist.get("persistent_indicators", {})
     assert isinstance(transpose_score, bool)
     assert isinstance(treat_untreated_persistent_wrappers, bool)
-    voice_metadata = {}
+    voice_name_to_parameter_to_state = {}
     already_reapplied_contexts = {"Score"}
     # set_up_score()
     offset_to_measure_number = _populate_offset_to_measure_number(
@@ -2933,7 +2935,7 @@ def section(
             previous_persist=previous_persist,
             score=score,
             time_signatures=time_signatures,
-            voice_metadata=voice_metadata,
+            voice_name_to_parameter_to_state=voice_name_to_parameter_to_state,
         )
     _print_timing(
         "All commands", timer, print_timing=print_timing, suffix=command_count
@@ -3084,7 +3086,7 @@ def section(
             start_clock_time,
             stop_clock_time,
             cached_time_signatures,
-            voice_metadata,
+            voice_name_to_parameter_to_state,
         )
         _style_anchor_skip(score)
         _style_anchor_notes(score)
