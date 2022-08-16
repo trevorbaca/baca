@@ -685,7 +685,7 @@ def _bundle_runtime(
     metronome_marks=None,
     offset_to_measure_number=None,
     previous_persistent_indicators=None,
-    previous_section_voice_metadata=None,
+    previous_voice_metadata=None,
     short_instrument_names=None,
 ):
     runtime = {}
@@ -695,7 +695,7 @@ def _bundle_runtime(
     runtime["metronome_marks"] = metronome_marks
     runtime["offset_to_measure_number"] = offset_to_measure_number or {}
     runtime["previous_persistent_indicators"] = previous_persistent_indicators
-    runtime["previous_section_voice_metadata"] = previous_section_voice_metadata
+    runtime["previous_voice_metadata"] = previous_voice_metadata
     runtime["short_instrument_names"] = short_instrument_names
     return runtime
 
@@ -778,7 +778,7 @@ def _call_all_commands(
             measure_count,
         )
         voice_name = command.scope.voice_name
-        previous_section_voice_metadata = _get_previous_section_voice_metadata(
+        previous_voice_metadata = _get_previous_voice_metadata(
             previous_persist, voice_name
         )
         previous_persistent_indicators = previous_persist.get("persistent_indicators")
@@ -787,7 +787,7 @@ def _call_all_commands(
             manifests=manifests,
             offset_to_measure_number=offset_to_measure_number,
             previous_persistent_indicators=previous_persistent_indicators,
-            previous_section_voice_metadata=previous_section_voice_metadata,
+            previous_voice_metadata=previous_voice_metadata,
         )
         try:
             command_result = command(selection, runtime)
@@ -1442,7 +1442,7 @@ def _get_measure_timespan(score, measure_number):
     return abjad.Timespan(start_offset, stop_offset)
 
 
-def _get_previous_section_voice_metadata(previous_persist, voice_name):
+def _get_previous_voice_metadata(previous_persist, voice_name):
     if not previous_persist:
         return
     voice_metadata = previous_persist.get("voice_metadata")

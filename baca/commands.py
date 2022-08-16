@@ -200,6 +200,23 @@ def _do_detach_command(argument, indicators):
     return False
 
 
+def _get_previous_section(path: str):
+    music_py = pathlib.Path(path)
+    section = pathlib.Path(music_py).parent
+    assert section.parent.name == "sections", repr(section)
+    sections = section.parent
+    assert sections.name == "sections", repr(sections)
+    paths = list(sorted(sections.glob("*")))
+    paths = [_ for _ in paths if not _.name.startswith(".")]
+    paths = [_ for _ in paths if _.is_dir()]
+    index = paths.index(section)
+    if index == 0:
+        return {}
+    previous_index = index - 1
+    previous_section = paths[previous_index]
+    return previous_section
+
+
 def _is_rest(argument):
     prototype = (abjad.Rest, abjad.MultimeasureRest, abjad.Skip)
     if isinstance(argument, prototype):
@@ -832,21 +849,15 @@ def label(
     return LabelCommand(callable_=callable_, selector=selector)
 
 
-def previous_metadata(path: str, file_name: str = "__metadata__"):
-    music_py = pathlib.Path(path)
-    section = pathlib.Path(music_py).parent
-    assert section.parent.name == "sections", repr(section)
-    sections = section.parent
-    assert sections.name == "sections", repr(sections)
-    paths = list(sorted(sections.glob("*")))
-    paths = [_ for _ in paths if not _.name.startswith(".")]
-    paths = [_ for _ in paths if _.is_dir()]
-    index = paths.index(section)
-    if index == 0:
-        return {}
-    previous_index = index - 1
-    previous_section = paths[previous_index]
-    previous_metadata = _path.get_metadata(previous_section, file_name=file_name)
+def previous_metadata(path: str):
+    previous_section = _get_previous_section(path)
+    previous_metadata = _path.get_metadata(previous_section, file_name="__metadata__")
+    return previous_metadata
+
+
+def previous_persist(path: str):
+    previous_section = _get_previous_section(path)
+    previous_metadata = _path.get_metadata(previous_section, file_name="__persist__")
     return previous_metadata
 
 

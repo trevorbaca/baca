@@ -1923,7 +1923,7 @@ class PitchCommand(_command.Command):
 
     def _previous_pitches_consumed(self, runtime):
         assert isinstance(runtime, dict), repr(runtime)
-        dictionary = runtime.get("previous_section_voice_metadata", None)
+        dictionary = runtime.get("previous_voice_metadata", None)
         if not dictionary:
             return 0
         dictionary = dictionary.get(_enums.PITCH.name, None)
@@ -1937,7 +1937,7 @@ class PitchCommand(_command.Command):
         assert 1 <= pitches_consumed
         if self.ignore_incomplete:
             return pitches_consumed
-        dictionary = runtime["previous_section_voice_metadata"]
+        dictionary = runtime["previous_voice_metadata"]
         dictionary = dictionary.get(_enums.RHYTHM.name, None)
         if dictionary:
             if dictionary.get("incomplete_final_note", False):
