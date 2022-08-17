@@ -2774,20 +2774,7 @@ def color_repeat_pitch_classes(score):
             abjad.attach(literal, leaf, tag=tag)
 
 
-def reapply(accumulator, manifests, previous_persist, voice_names):
-    previous_persistent_indicators = previous_persist.get("persistent_indicators", {})
-    runtime = {
-        "already_reapplied_contexts": {"Score"},
-        "manifests": manifests,
-        "previous_persistent_indicators": previous_persistent_indicators,
-    }
-    for voice_name in voice_names:
-        voice = accumulator.voice(voice_name)
-        if voice is not None:
-            reapply_persistent_indicators_function(voice, runtime=runtime)
-
-
-def reapply_new(voices, manifests, previous_persistent_indicators):
+def reapply(voices, manifests, previous_persistent_indicators):
     runtime = {
         "already_reapplied_contexts": {"Score"},
         "manifests": manifests,

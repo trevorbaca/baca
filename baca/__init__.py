@@ -26,7 +26,6 @@ from .interpret import (
     append_anchor_note,
     append_anchor_note_function,
     reapply,
-    reapply_new,
     reapply_persistent_indicators,
     scope,
     update_voice_name_to_parameter_to_state,
