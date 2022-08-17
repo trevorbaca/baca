@@ -1040,7 +1040,7 @@ def _collect_metadata(
         metadata_["stop_clock_time"] = stop_clock_time
     metadata_["time_signatures"] = time_signatures
     if voice_name_to_parameter_to_state:
-        persist_["voice_metadata"] = voice_name_to_parameter_to_state
+        persist_["voice_name_to_parameter_to_state"] = voice_name_to_parameter_to_state
     metadata.clear()
     metadata.update(metadata_)
     metadata = dict(metadata)
@@ -1447,7 +1447,9 @@ def _get_measure_timespan(score, measure_number):
 def _get_previous_parameter_to_state(previous_persist, voice_name):
     if not previous_persist:
         return
-    voice_name_to_parameter_to_state = previous_persist.get("voice_metadata")
+    voice_name_to_parameter_to_state = previous_persist.get(
+        "voice_name_to_parameter_to_state"
+    )
     if not voice_name_to_parameter_to_state:
         return
     parameter_to_state = voice_name_to_parameter_to_state.get(voice_name, {})
@@ -3201,6 +3203,8 @@ def update_voice_name_to_parameter_to_state(
     assert "name" not in state, repr(state)
     state["name"] = name
     state = dict(sorted(state.items()))
-    voice_metadata_ = voice_name_to_parameter_to_state.get(voice_name, {})
-    voice_metadata_[parameter] = state
-    voice_name_to_parameter_to_state[voice_name] = voice_metadata_
+    voice_name_to_parameter_to_state_ = voice_name_to_parameter_to_state.get(
+        voice_name, {}
+    )
+    voice_name_to_parameter_to_state_[parameter] = state
+    voice_name_to_parameter_to_state[voice_name] = voice_name_to_parameter_to_state_

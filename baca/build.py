@@ -1252,8 +1252,10 @@ def persist(lilypond_file, metadata, persist, timing):
         "--print-timing",
     )
     section_directory = pathlib.Path(os.getcwd())
-    if "voice_metadata" in persist:
-        persist["voice_metadata"] = dict(sorted(persist["voice_metadata"].items()))
+    if "voice_name_to_parameter_to_state" in persist:
+        persist["voice_name_to_parameter_to_state"] = dict(
+            sorted(persist["voice_name_to_parameter_to_state"].items())
+        )
     _write_metadata(metadata, persist, section_directory)
     if _arguments.clicktrack:
         path = section_directory / "clicktrack.midi"
