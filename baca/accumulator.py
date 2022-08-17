@@ -246,7 +246,16 @@ class CommandAccumulator:
             "abjad.ShortInstrumentName": self.short_instrument_names,
         }
 
-    def voice(self, abbreviation):
+    def voice(self, abbreviation: str) -> abjad.Voice | None:
         assert isinstance(abbreviation, str), repr(abbreviation)
         if abbreviation in self._voice_name_to_voice:
             return self._voice_name_to_voice[abbreviation]
+        return None
+
+    def voices(self, abbreviations=None) -> list[abjad.Voice]:
+        voices = []
+        for abbreviation in abbreviations or self.voice_names:
+            if abbreviation in self._voice_name_to_voice:
+                voice = self._voice_name_to_voice[abbreviation]
+                voices.append(voice)
+        return voices
