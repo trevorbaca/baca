@@ -1224,19 +1224,23 @@ def metronome_mark_function(
     indicator,
     manifests,
 ) -> list[abjad.Wrapper]:
+    if isinstance(indicator, str):
+        indicator_ = manifests["abjad.MetronomeMark"][indicator]
+    else:
+        indicator_ = indicator
     prototype = (
         abjad.MetricModulation,
         abjad.MetronomeMark,
         _indicatorclasses.Accelerando,
         _indicatorclasses.Ritardando,
     )
-    assert isinstance(indicator, prototype), repr(indicator)
+    assert isinstance(indicator_, prototype), repr(indicator_)
     tag = _tags.function_name(_frame())
     wrappers = []
     for leaf in abjad.select.leaves(argument):
         wrappers_ = _attach_persistent_indicator(
             leaf,
-            [indicator],
+            [indicator_],
             manifests=manifests,
             tag=tag,
         )
