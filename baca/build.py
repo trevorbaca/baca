@@ -1357,7 +1357,7 @@ def section(
         )
     timing = types.SimpleNamespace()
     timing.runtime = int(timer.elapsed_time)
-    return metadata, persist, score, timing
+    return metadata, persist, timing
 
 
 def show_annotations(directory, *, undo=False):

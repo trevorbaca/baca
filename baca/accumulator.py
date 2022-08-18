@@ -239,6 +239,9 @@ class CommandAccumulator:
         assert 0 < stop, stop
         return self.time_signatures[start - 1 : stop]
 
+    def measures(self):
+        return TimeSignatureGetter(self.time_signatures)
+
     def manifests(self):
         return {
             "abjad.Instrument": self.instruments,
@@ -259,3 +262,18 @@ class CommandAccumulator:
                 voice = self._voice_name_to_voice[abbreviation]
                 voices.append(voice)
         return voices
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class TimeSignatureGetter:
+
+    time_signatures: list[abjad.TimeSignature]
+
+    def __call__(self, start=None, stop=None):
+        if start is None and stop is None:
+            return self.time_signatures
+        assert 0 < start, start
+        if stop is None:
+            stop = start
+        assert 0 < stop, stop
+        return self.time_signatures[start - 1 : stop]
