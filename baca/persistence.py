@@ -1217,7 +1217,7 @@ r"""
 
         >>> score = baca.docs.make_empty_score(1)
         >>> accumulator = baca.CommandAccumulator(
-        ...     instruments=instruments,
+        ...     manifests={"abjad.Instrument": instruments},
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
@@ -1246,7 +1246,7 @@ r"""
         ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
-        ...     instruments=accumulator.instruments,
+        ...     instruments=accumulator.manifests["abjad.Instrument"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -1387,7 +1387,7 @@ r"""
 
         >>> score = baca.docs.make_empty_score(1)
         >>> accumulator = baca.CommandAccumulator(
-        ...     instruments=instruments,
+        ...     manifests={"abjad.Instrument": instruments},
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
@@ -1425,7 +1425,7 @@ r"""
         ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
-        ...     instruments=accumulator.instruments,
+        ...     instruments=accumulator.manifests["abjad.Instrument"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -1569,7 +1569,7 @@ r"""
 
         >>> score = baca.docs.make_empty_score(1)
         >>> accumulator = baca.CommandAccumulator(
-        ...     instruments=instruments,
+        ...     manifests={"abjad.Instrument": instruments},
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
@@ -1604,7 +1604,7 @@ r"""
         ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
-        ...     instruments=accumulator.instruments,
+        ...     instruments=accumulator.manifests["abjad.Instrument"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -1756,7 +1756,7 @@ r"""
         ...     ),
         ... )
         >>> accumulator = baca.CommandAccumulator(
-        ...     instruments=instruments,
+        ...     manifests={"abjad.Instrument": instruments},
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ... )
         >>> baca.interpret.set_up_score(
@@ -1789,7 +1789,7 @@ r"""
         ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
-        ...     instruments=accumulator.instruments,
+        ...     instruments=accumulator.manifests["abjad.Instrument"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -1954,7 +1954,7 @@ r"""
         ...     ),
         ... )
         >>> accumulator = baca.CommandAccumulator(
-        ...     instruments=instruments,
+        ...     manifests={"abjad.Instrument": instruments},
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
@@ -1993,7 +1993,7 @@ r"""
         ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
-        ...     instruments=accumulator.instruments,
+        ...     instruments=accumulator.manifests["abjad.Instrument"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -2156,7 +2156,7 @@ r"""
 
         >>> score = baca.docs.make_empty_score(1)
         >>> accumulator = baca.CommandAccumulator(
-        ...     short_instrument_names=short_instrument_names,
+        ...     manifests={"abjad.ShortInstrumentName": short_instrument_names},
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
@@ -2186,7 +2186,7 @@ r"""
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     first_section=True,
-        ...     short_instrument_names=accumulator.short_instrument_names,
+        ...     short_instrument_names=accumulator.manifests["abjad.ShortInstrumentName"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -2335,7 +2335,7 @@ r"""
 
         >>> score = baca.docs.make_empty_score(1)
         >>> accumulator = baca.CommandAccumulator(
-        ...     short_instrument_names=short_instrument_names,
+        ...     manifests={"abjad.ShortInstrumentName": short_instrument_names},
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
@@ -2373,7 +2373,7 @@ r"""
         ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
-        ...     short_instrument_names=accumulator.short_instrument_names,
+        ...     short_instrument_names=accumulator.manifests["abjad.ShortInstrumentName"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -2529,7 +2529,7 @@ r"""
 
         >>> score = baca.docs.make_empty_score(1)
         >>> accumulator = baca.CommandAccumulator(
-        ...     short_instrument_names=short_instrument_names,
+        ...     manifests={"abjad.ShortInstrumentName": short_instrument_names},
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
@@ -2564,7 +2564,7 @@ r"""
         ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
-        ...     short_instrument_names=accumulator.short_instrument_names,
+        ...     short_instrument_names=accumulator.manifests["abjad.ShortInstrumentName"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -2727,7 +2727,7 @@ r"""
         ...     ),
         ... )
         >>> accumulator = baca.CommandAccumulator(
-        ...     short_instrument_names=short_instrument_names,
+        ...     manifests={"abjad.ShortInstrumentName": short_instrument_names},
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ... )
         >>> baca.interpret.set_up_score(
@@ -2761,7 +2761,7 @@ r"""
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     first_section=True,
-        ...     short_instrument_names=accumulator.short_instrument_names,
+        ...     short_instrument_names=accumulator.manifests["abjad.ShortInstrumentName"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -2944,7 +2944,7 @@ r"""
         ...     ),
         ... )
         >>> accumulator = baca.CommandAccumulator(
-        ...     short_instrument_names=short_instrument_names,
+        ...     manifests={"abjad.ShortInstrumentName": short_instrument_names},
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
@@ -2983,7 +2983,7 @@ r"""
         ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
-        ...     short_instrument_names=accumulator.short_instrument_names,
+        ...     short_instrument_names=accumulator.manifests["abjad.ShortInstrumentName"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -3146,7 +3146,7 @@ r"""
         ...     ),
         ... )
         >>> accumulator = baca.CommandAccumulator(
-        ...     short_instrument_names=short_instrument_names,
+        ...     manifests={"abjad.ShortInstrumentName": short_instrument_names},
         ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
         ... )
         >>> baca.interpret.set_up_score(
@@ -3195,7 +3195,7 @@ r"""
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     first_section=True,
-        ...     short_instrument_names=accumulator.short_instrument_names,
+        ...     short_instrument_names=accumulator.manifests["abjad.ShortInstrumentName"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -3279,7 +3279,7 @@ r"""
 
         >>> score = baca.docs.make_empty_score(1)
         >>> accumulator = baca.CommandAccumulator(
-        ...     metronome_marks=metronome_marks,
+        ...     manifests={"abjad.MetronomeMark": metronome_marks},
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
@@ -3312,7 +3312,7 @@ r"""
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     append_anchor_skip=True,
-        ...     metronome_marks=accumulator.metronome_marks,
+        ...     metronome_marks=accumulator.manifests["abjad.MetronomeMark"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -3385,7 +3385,7 @@ r"""
 
         >>> score = baca.docs.make_empty_score(1)
         >>> accumulator = baca.CommandAccumulator(
-        ...     metronome_marks=metronome_marks,
+        ...     manifests={"abjad.MetronomeMark": metronome_marks},
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
@@ -3428,7 +3428,7 @@ r"""
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     append_anchor_skip=True,
-        ...     metronome_marks=accumulator.metronome_marks,
+        ...     metronome_marks=accumulator.manifests["abjad.MetronomeMark"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -3516,13 +3516,13 @@ r"""
         ... ]
         >>> score = baca.docs.make_empty_score(1)
         >>> accumulator = baca.CommandAccumulator(
-        ...     metronome_marks=metronome_marks,
+        ...     manifests={"abjad.MetronomeMark": metronome_marks},
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     accumulator.manifests,
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     previous_persist=persist,
@@ -3541,10 +3541,10 @@ r"""
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     accumulator.manifests,
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
-        ...     metronome_marks=accumulator.metronome_marks,
+        ...     metronome_marks=accumulator.manifests["abjad.MetronomeMark"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -3608,7 +3608,7 @@ r"""
 
         >>> score = baca.docs.make_empty_score(1)
         >>> accumulator = baca.CommandAccumulator(
-        ...     metronome_marks=metronome_marks,
+        ...     manifests={"abjad.MetronomeMark": metronome_marks},
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
@@ -3646,7 +3646,7 @@ r"""
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     append_anchor_skip=True,
-        ...     metronome_marks=accumulator.metronome_marks,
+        ...     metronome_marks=accumulator.manifests["abjad.MetronomeMark"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -3735,13 +3735,13 @@ r"""
         ... ]
         >>> score = baca.docs.make_empty_score(1)
         >>> accumulator = baca.CommandAccumulator(
-        ...     metronome_marks=metronome_marks,
+        ...     manifests={"abjad.MetronomeMark": metronome_marks},
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     accumulator.manifests,
         ...     accumulator.time_signatures,
         ...     append_anchor_skip=True,
         ...     docs=True,
@@ -3767,11 +3767,11 @@ r"""
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     accumulator.manifests,
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     append_anchor_skip=True,
-        ...     metronome_marks=accumulator.metronome_marks,
+        ...     metronome_marks=accumulator.manifests["abjad.MetronomeMark"],
         ...     move_global_context=True,
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
@@ -4557,7 +4557,7 @@ r"""
 
         >>> score = baca.docs.make_empty_score(1)
         >>> accumulator = baca.CommandAccumulator(
-        ...     metronome_marks=metronome_marks,
+        ...     manifests={"abjad.MetronomeMark": metronome_marks},
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
@@ -4590,7 +4590,7 @@ r"""
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     append_anchor_skip=True,
-        ...     metronome_marks=accumulator.metronome_marks,
+        ...     metronome_marks=accumulator.manifests["abjad.MetronomeMark"],
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -4663,7 +4663,7 @@ r"""
 
         >>> score = baca.docs.make_empty_score(1)
         >>> accumulator = baca.CommandAccumulator(
-        ...     metronome_marks=metronome_marks,
+        ...     manifests={"abjad.MetronomeMark": metronome_marks},
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
         >>> baca.interpret.set_up_score(
@@ -4770,7 +4770,7 @@ r"""
         ... ]
         >>> score = baca.docs.make_empty_score(1)
         >>> accumulator = baca.CommandAccumulator(
-        ...     metronome_marks=metronome_marks,
+        ...     manifests={"abjad.MetronomeMark": metronome_marks},
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
@@ -4861,7 +4861,7 @@ r"""
 
         >>> score = baca.docs.make_empty_score(1)
         >>> accumulator = baca.CommandAccumulator(
-        ...     metronome_marks=metronome_marks,
+        ...     manifests={"abjad.MetronomeMark": metronome_marks},
         ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(
@@ -4970,7 +4970,7 @@ r"""
         ... ]
         >>> score = baca.docs.make_empty_score(1)
         >>> accumulator = baca.CommandAccumulator(
-        ...     metronome_marks=metronome_marks,
+        ...     manifests={"abjad.MetronomeMark": metronome_marks},
         ...     time_signatures=[(3, 8), (3, 8)],
         ... )
         >>> baca.interpret.set_up_score(

@@ -1120,14 +1120,14 @@ def make_layout_ly(
         sys.exit(1)
     assert abjad.string.is_shout_case(document_name)
     score = baca.docs.make_empty_score(1)
-    commands = baca.CommandAccumulator(
+    accumulator = baca.CommandAccumulator(
         time_signatures=time_signatures,
     )
     _interpret.set_up_score(
         score,
-        commands,
-        commands.manifests(),
-        commands.time_signatures,
+        accumulator,
+        accumulator.manifests,
+        accumulator.time_signatures,
         append_anchor_skip=has_anchor_skip,
         do_not_reapply_persistent_indicators=True,
         page_layout_profile=page_layout_profile,
@@ -1136,10 +1136,10 @@ def make_layout_ly(
     _, _ = baca.interpret.section(
         score,
         {},
-        commands.time_signatures,
+        accumulator.time_signatures,
         append_anchor_skip=has_anchor_skip,
         add_container_identifiers=True,
-        commands=commands.commands,
+        commands=accumulator.commands,
         comment_measure_numbers=True,
         do_not_check_wellformedness=True,
         first_measure_number=first_measure_number,

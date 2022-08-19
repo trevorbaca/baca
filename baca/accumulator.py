@@ -152,9 +152,7 @@ class CommandAccumulator:
     _voice_abbreviations: dict | None = dataclasses.field(default_factory=dict)
     commands: list = dataclasses.field(default_factory=list, init=False)
     first_measure_number: int = 1
-    instruments: dict | None = dataclasses.field(default_factory=dict)
-    metronome_marks: dict | None = dataclasses.field(default_factory=dict)
-    short_instrument_names: dict | None = dataclasses.field(default_factory=dict)
+    manifests: dict | None = dataclasses.field(default_factory=dict)
     time_signatures: list[abjad.TimeSignature] = dataclasses.field(default_factory=list)
     voice_name_to_voice: dict = dataclasses.field(default_factory=dict, init=False)
     voice_names: tuple[str, ...] = dataclasses.field(default_factory=tuple)
@@ -229,13 +227,6 @@ class CommandAccumulator:
 
     def measures(self):
         return TimeSignatureGetter(self.time_signatures)
-
-    def manifests(self):
-        return {
-            "abjad.Instrument": self.instruments,
-            "abjad.MetronomeMark": self.metronome_marks,
-            "abjad.ShortInstrumentName": self.short_instrument_names,
-        }
 
     def voice(self, abbreviation: str) -> abjad.Voice | None:
         assert isinstance(abbreviation, str), repr(abbreviation)
