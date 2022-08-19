@@ -224,7 +224,6 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
     >>> score = baca.docs.make_empty_score(1)
     >>> accumulator = baca.CommandAccumulator(
-    ...     manifests={"abjad.Instrument": instruments},
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
     >>> baca.interpret.set_up_score(
@@ -248,7 +247,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
-    ...     instruments=accumulator.manifests["abjad.Instrument"],
+    ...     instruments=instruments,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ...     transpose_score=True,
@@ -315,7 +314,6 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
     >>> score = baca.docs.make_empty_score(1)
     >>> accumulator = baca.CommandAccumulator(
-    ...     manifests={"abjad.Instrument": instruments},
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
     >>> baca.interpret.set_up_score(
@@ -339,7 +337,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
-    ...     instruments=accumulator.manifests["abjad.Instrument"],
+    ...     instruments=instruments,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ...     transpose_score=False,
@@ -424,7 +422,6 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
 
     >>> score = baca.docs.make_empty_score(1)
     >>> accumulator = baca.CommandAccumulator(
-    ...     manifests={"abjad.Instrument": instruments},
     ...     time_signatures=time_signatures,
     ... )
     >>> baca.interpret.set_up_score(

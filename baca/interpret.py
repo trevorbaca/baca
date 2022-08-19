@@ -3134,7 +3134,6 @@ def set_up_score(
     if docs is True:
         first_section = True
         previous_metadata = {}
-        previous_persist = previous_persist or {}
     else:
         section_directory = pathlib.Path(os.getcwd())
         first_section = section_directory.name == "01"

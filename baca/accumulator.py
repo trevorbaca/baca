@@ -150,12 +150,11 @@ def get_voice_names(score):
 class CommandAccumulator:
 
     _voice_abbreviations: dict | None = dataclasses.field(default_factory=dict)
+    _voice_names: tuple[str, ...] = dataclasses.field(default_factory=tuple)
     commands: list = dataclasses.field(default_factory=list, init=False)
     first_measure_number: int = 1
-    manifests: dict | None = dataclasses.field(default_factory=dict)
     time_signatures: list[abjad.TimeSignature] = dataclasses.field(default_factory=list)
     voice_name_to_voice: dict = dataclasses.field(default_factory=dict, init=False)
-    voice_names: tuple[str, ...] = dataclasses.field(default_factory=tuple)
 
     def __post_init__(self):
         self.time_signatures = _initialize_time_signatures(self.time_signatures)
@@ -182,7 +181,7 @@ class CommandAccumulator:
                 raise Exception(message)
         scope_count = len(scopes_)
         for i, current_scope in enumerate(scopes_):
-            if self.voice_names and current_scope.voice_name not in self.voice_names:
+            if self._voice_names and current_scope.voice_name not in self._voice_names:
                 raise Exception(f"unknown voice name {current_scope.voice_name!r}.")
             for command in commands:
                 if command is None:
@@ -236,7 +235,7 @@ class CommandAccumulator:
 
     def voices(self, abbreviations=None) -> list[abjad.Voice]:
         voices = []
-        for abbreviation in abbreviations or self.voice_names:
+        for abbreviation in abbreviations or self._voice_names:
             if abbreviation in self.voice_name_to_voice:
                 voice = self.voice_name_to_voice[abbreviation]
                 voices.append(voice)

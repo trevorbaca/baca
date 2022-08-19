@@ -1053,6 +1053,7 @@ def make_layout_ly(
     page_layout_context_only=False,
     time_signatures=None,
 ):
+    # TODO: move to interpret.py and remove late import
     from . import interpret as _interpret
 
     layout_directory = pathlib.Path(os.getcwd())
@@ -1126,7 +1127,7 @@ def make_layout_ly(
     _interpret.set_up_score(
         score,
         accumulator,
-        accumulator.manifests,
+        {},
         accumulator.time_signatures,
         append_anchor_skip=has_anchor_skip,
         do_not_reapply_persistent_indicators=True,

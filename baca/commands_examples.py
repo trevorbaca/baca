@@ -804,7 +804,6 @@ commands.py examles
     >>> short_instrument_names["Fl."] = abjad.ShortInstrumentName(markup)
     >>> score = baca.docs.make_empty_score(1)
     >>> accumulator = baca.CommandAccumulator(
-    ...     manifests={"abjad.ShortInstrumentName": short_instrument_names},
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
     >>> baca.interpret.set_up_score(
@@ -832,7 +831,7 @@ commands.py examles
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     first_section=True,
-    ...     short_instrument_names=accumulator.manifests["abjad.ShortInstrumentName"],
+    ...     short_instrument_names=short_instrument_names,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
