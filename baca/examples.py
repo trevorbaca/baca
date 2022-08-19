@@ -444,6 +444,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ...     score,
     ...     accumulator.manifests(),
     ...     accumulator.time_signatures,
+    ...     do_not_check_wellformedness=True,
     ...     commands=accumulator.commands,
     ...     instruments=instruments,
     ...     move_global_context=True,

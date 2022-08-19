@@ -751,7 +751,6 @@ def _call_all_commands(
     allow_empty_selections,
     already_reapplied_contexts,
     always_make_global_rests,
-    attach_rhythm_annotation_spanners,
     cache,
     commands,
     manifests,
@@ -2835,9 +2834,7 @@ def section(
     always_make_global_rests=False,
     append_anchor_skip=False,
     attach_instruments_by_hand=False,
-    attach_rhythm_annotation_spanners=False,
     check_persistent_indicators=False,
-    check_wellformedness=False,
     clock_time_extra_offset=None,
     clock_time_override=None,
     color_not_yet_pitched=False,
@@ -2845,7 +2842,9 @@ def section(
     commands=None,
     comment_measure_numbers=False,
     deactivate=None,
+    do_not_check_wellformedness=False,
     do_not_require_short_instrument_names=False,
+    empty_fermata_measures=False,
     error_on_not_yet_pitched=False,
     fermata_extra_offset_y=2.5,
     fermata_measure_empty_overrides=(),
@@ -2883,10 +2882,11 @@ def section(
     if clock_time_override is not None:
         assert isinstance(clock_time_override, abjad.MetronomeMark)
     assert isinstance(color_octaves, bool)
-    assert isinstance(check_wellformedness, bool)
+    assert isinstance(do_not_check_wellformedness, bool)
     if deactivate is not None:
         assert all(isinstance(_, abjad.Tag) for _ in deactivate)
     assert isinstance(do_not_require_short_instrument_names, bool)
+    assert isinstance(empty_fermata_measures, bool)
     assert all(0 < _ for _ in fermata_measure_empty_overrides)
     assert isinstance(final_section, bool)
     first_measure_number = _adjust_first_measure_number(
@@ -2925,7 +2925,6 @@ def section(
             allow_empty_selections=allow_empty_selections,
             already_reapplied_contexts=already_reapplied_contexts,
             always_make_global_rests=always_make_global_rests,
-            attach_rhythm_annotation_spanners=attach_rhythm_annotation_spanners,
             cache=cache,
             commands=commands,
             manifests=manifests,
@@ -2953,6 +2952,10 @@ def section(
             fermata_start_offsets = result[0]
             fermata_measure_numbers = result[1]
             final_measure_is_fermata = result[2]
+            if empty_fermata_measures and not fermata_measure_empty_overrides:
+                fermata_measure_empty_overrides = [
+                    _ - first_measure_number + 1 for _ in fermata_measure_numbers
+                ]
             if treat_untreated_persistent_wrappers:
                 _treat_untreated_persistent_wrappers(manifests, score)
             _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier)
@@ -3032,7 +3035,7 @@ def section(
         if move_global_context:
             _move_global_context(score)
         _clean_up_on_beat_grace_containers(score)
-        if check_wellformedness:
+        if not do_not_check_wellformedness:
             count, message = abjad.wf.tabulate_wellformedness(
                 score, check_out_of_range_pitches=False
             )
@@ -3097,10 +3100,7 @@ def section_defaults():
     return {
         "add_container_identifiers": True,
         "append_anchor_skip": True,
-        # "attach_nonfirst_empty_start_bar": True,
-        "attach_rhythm_annotation_spanners": True,
         "check_persistent_indicators": True,
-        "check_wellformedness": True,
         "color_not_yet_pitched": True,
         "comment_measure_numbers": True,
         "force_nonnatural_accidentals": True,

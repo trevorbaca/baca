@@ -1141,6 +1141,7 @@ def make_layout_ly(
         add_container_identifiers=True,
         commands=commands.commands,
         comment_measure_numbers=True,
+        do_not_check_wellformedness=True,
         first_measure_number=first_measure_number,
         first_section=True,
         # page_layout_profile=page_layout_profile,
