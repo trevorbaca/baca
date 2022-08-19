@@ -146,52 +146,30 @@ def get_voice_names(score):
     return tuple(voice_names)
 
 
+@dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
 class CommandAccumulator:
-    """
-    Command accumulator.
-    """
 
-    __slots__ = (
-        "_voice_name_to_voice",
-        "commands",
-        "first_measure_number",
-        "functions",
-        "instruments",
-        "metronome_marks",
-        "short_instrument_names",
-        "time_signatures",
-        "voice_abbreviations",
-        "voice_names",
-    )
+    _voice_abbreviations: dict | None = dataclasses.field(default_factory=dict)
+    commands: list = dataclasses.field(default_factory=list, init=False)
+    first_measure_number: int = 1
+    instruments: dict | None = dataclasses.field(default_factory=dict)
+    metronome_marks: dict | None = dataclasses.field(default_factory=dict)
+    short_instrument_names: dict | None = dataclasses.field(default_factory=dict)
+    time_signatures: list[abjad.TimeSignature] = dataclasses.field(default_factory=list)
+    voice_name_to_voice: dict = dataclasses.field(default_factory=dict, init=False)
+    voice_names: tuple[str, ...] = dataclasses.field(default_factory=tuple)
 
-    def __init__(
-        self,
-        *functions,
-        instruments=None,
-        metronome_marks=None,
-        short_instrument_names=None,
-        time_signatures=None,
-        voice_abbreviations=None,
-        voice_names=None,
-    ):
-        self._voice_name_to_voice = {}
-        self.commands = []
-        self.first_measure_number = None
-        self.functions = functions or ()
-        self.instruments = instruments
-        self.metronome_marks = metronome_marks
-        self.short_instrument_names = short_instrument_names
-        self.time_signatures = _initialize_time_signatures(time_signatures)
-        self.voice_abbreviations = voice_abbreviations or {}
-        self.voice_names = voice_names
+    def __post_init__(self):
+        self.time_signatures = _initialize_time_signatures(self.time_signatures)
 
     def __call__(self, scopes, *commands):
         classes = (list, _command.Suite)
         commands_ = abjad.sequence.flatten(list(commands), classes=classes, depth=-1)
         commands = tuple(commands_)
-        abbreviations = self.voice_abbreviations
-        assert isinstance(abbreviations, dict), repr(abbreviations)
-        scopes_ = _unpack_scopes(scopes, abbreviations)
+        assert isinstance(self._voice_abbreviations, dict), repr(
+            self._voice_abbreviations
+        )
+        scopes_ = _unpack_scopes(scopes, self._voice_abbreviations)
         for scope_ in scopes_:
             assert scope_.voice_name != "Skips", repr(scope_)
         assert all(isinstance(_, _command.Scope) for _ in scopes_), repr(scopes_)
@@ -230,6 +208,13 @@ class CommandAccumulator:
                     command_ = dataclasses.replace(command_, scope=scope_)
                     self.commands.append(command_)
 
+    def _populate_voice_name_to_voice(self, score):
+        for voice in abjad.iterate.components(score, abjad.Voice):
+            self.voice_name_to_voice[voice.name] = voice
+            for abbreviation, voice_name in self._voice_abbreviations.items():
+                if voice_name == voice.name:
+                    self.voice_name_to_voice[abbreviation] = voice
+
     def get(self, start=None, stop=None):
         if start is None and stop is None:
             return self.time_signatures
@@ -238,6 +223,9 @@ class CommandAccumulator:
             stop = start
         assert 0 < stop, stop
         return self.time_signatures[start - 1 : stop]
+
+    def get_time_signatures(self):
+        return _initialize_time_signatures(self.time_signatures)
 
     def measures(self):
         return TimeSignatureGetter(self.time_signatures)
@@ -251,15 +239,15 @@ class CommandAccumulator:
 
     def voice(self, abbreviation: str) -> abjad.Voice | None:
         assert isinstance(abbreviation, str), repr(abbreviation)
-        if abbreviation in self._voice_name_to_voice:
-            return self._voice_name_to_voice[abbreviation]
+        if abbreviation in self.voice_name_to_voice:
+            return self.voice_name_to_voice[abbreviation]
         return None
 
     def voices(self, abbreviations=None) -> list[abjad.Voice]:
         voices = []
         for abbreviation in abbreviations or self.voice_names:
-            if abbreviation in self._voice_name_to_voice:
-                voice = self._voice_name_to_voice[abbreviation]
+            if abbreviation in self.voice_name_to_voice:
+                voice = self.voice_name_to_voice[abbreviation]
                 voices.append(voice)
         return voices
 

@@ -12,7 +12,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     docs=True,
     ... )
@@ -24,7 +24,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ... )
     >>> _, _ = baca.interpret.section(
     ...     score,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -137,7 +137,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     docs=True,
     ... )
@@ -155,7 +155,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
 
     >>> _, _ = baca.interpret.section(
     ...     score,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     color_octaves=True,
@@ -230,7 +230,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     docs=True,
     ... )
@@ -245,7 +245,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
 
     >>> _, _ = baca.interpret.section(
     ...     score,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     instruments=accumulator.instruments,
@@ -321,7 +321,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     docs=True,
     ... )
@@ -336,7 +336,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
 
     >>> _, _ = baca.interpret.section(
     ...     score,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     instruments=accumulator.instruments,
@@ -430,7 +430,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     docs=True,
     ... )
@@ -442,7 +442,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
 
     >>> _, _ = baca.interpret.section(
     ...     score,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     do_not_check_wellformedness=True,
     ...     commands=accumulator.commands,
@@ -546,14 +546,14 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     docs=True,
     ... )
     >>> score["Music"].extend(figures_)
     >>> _, _ = baca.interpret.section(
     ...     score,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,

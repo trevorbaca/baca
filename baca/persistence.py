@@ -24,7 +24,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -41,7 +41,7 @@ r"""
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -127,7 +127,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -153,7 +153,7 @@ r"""
         ... ]
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -243,7 +243,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -269,7 +269,7 @@ r"""
         ... ]
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -360,7 +360,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -377,7 +377,7 @@ r"""
         ... )
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -474,7 +474,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -501,7 +501,7 @@ r"""
         ... ]
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -589,7 +589,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
@@ -603,7 +603,7 @@ r"""
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -658,7 +658,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
@@ -681,7 +681,7 @@ r"""
         ... ]
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -740,7 +740,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
@@ -763,7 +763,7 @@ r"""
         ... ]
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -822,7 +822,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
@@ -837,7 +837,7 @@ r"""
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -894,7 +894,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
@@ -918,7 +918,7 @@ r"""
         ... ]
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -975,7 +975,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
@@ -990,7 +990,7 @@ r"""
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -1047,7 +1047,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
@@ -1070,7 +1070,7 @@ r"""
         ... ]
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -1129,7 +1129,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
@@ -1144,7 +1144,7 @@ r"""
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -1223,7 +1223,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -1243,7 +1243,7 @@ r"""
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     instruments=accumulator.instruments,
@@ -1393,7 +1393,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -1422,7 +1422,7 @@ r"""
         ... ]
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     instruments=accumulator.instruments,
@@ -1575,7 +1575,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -1601,7 +1601,7 @@ r"""
         ... ]
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     instruments=accumulator.instruments,
@@ -1762,7 +1762,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -1786,7 +1786,7 @@ r"""
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     instruments=accumulator.instruments,
@@ -1960,7 +1960,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -1990,7 +1990,7 @@ r"""
         ... ]
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     instruments=accumulator.instruments,
@@ -2162,7 +2162,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -2182,7 +2182,7 @@ r"""
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     first_section=True,
@@ -2341,7 +2341,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -2370,7 +2370,7 @@ r"""
         ... ]
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     short_instrument_names=accumulator.short_instrument_names,
@@ -2535,7 +2535,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -2561,7 +2561,7 @@ r"""
         ... ]
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     short_instrument_names=accumulator.short_instrument_names,
@@ -2733,7 +2733,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -2757,7 +2757,7 @@ r"""
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     first_section=True,
@@ -2950,7 +2950,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -2980,7 +2980,7 @@ r"""
         ... ]
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     short_instrument_names=accumulator.short_instrument_names,
@@ -3152,7 +3152,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -3191,7 +3191,7 @@ r"""
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     first_section=True,
@@ -3285,7 +3285,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     append_anchor_skip=True,
         ...     docs=True,
@@ -3297,7 +3297,7 @@ r"""
         >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
-        ...     accumulator.manifests(),
+        ...     {},
         ... )
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
@@ -3308,7 +3308,7 @@ r"""
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     append_anchor_skip=True,
@@ -3391,7 +3391,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     append_anchor_skip=True,
         ...     docs=True,
@@ -3403,7 +3403,7 @@ r"""
         >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
-        ...     accumulator.manifests(),
+        ...     {},
         ... )
         >>> wrappers = baca.text_spanner_staff_padding_function(score["Skips"][:-1], 4)
         >>> music = baca.make_notes(accumulator.get())
@@ -3424,7 +3424,7 @@ r"""
         ... ]
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     append_anchor_skip=True,
@@ -3614,7 +3614,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     append_anchor_skip=True,
         ...     docs=True,
@@ -3626,12 +3626,12 @@ r"""
         >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
-        ...     accumulator.manifests(),
+        ...     {},
         ... )
         >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][2 - 1],
         ...     metronome_marks["112"],
-        ...     accumulator.manifests(),
+        ...     {},
         ... )
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
@@ -3642,7 +3642,7 @@ r"""
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     append_anchor_skip=True,
@@ -3754,7 +3754,7 @@ r"""
         >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
-        ...     accumulator.manifests(),
+        ...     {},
         ... )
         >>> wrappers = baca.text_spanner_staff_padding_function(score["Skips"][:-1], 4)
         >>> music = baca.make_notes(accumulator.get())
@@ -3859,7 +3859,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
@@ -3888,7 +3888,7 @@ r"""
 
         >>> metadata, persist = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -3953,7 +3953,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
@@ -3982,7 +3982,7 @@ r"""
         ... ]
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -4038,7 +4038,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
@@ -4079,7 +4079,7 @@ r"""
         ... ]
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -4141,7 +4141,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
@@ -4155,7 +4155,7 @@ r"""
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -4213,7 +4213,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
@@ -4236,7 +4236,7 @@ r"""
         ... ]
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -4298,7 +4298,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
@@ -4321,7 +4321,7 @@ r"""
         ... ]
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -4382,7 +4382,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
@@ -4397,7 +4397,7 @@ r"""
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -4460,7 +4460,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
@@ -4484,7 +4484,7 @@ r"""
         ... ]
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -4563,7 +4563,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     append_anchor_skip=True,
         ...     docs=True,
@@ -4575,7 +4575,7 @@ r"""
         >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
-        ...     accumulator.manifests(),
+        ...     {},
         ... )
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
@@ -4586,7 +4586,7 @@ r"""
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     append_anchor_skip=True,
@@ -4669,7 +4669,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -4680,7 +4680,7 @@ r"""
         >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
-        ...     accumulator.manifests(),
+        ...     {},
         ... )
         >>> wrappers = baca.text_spanner_staff_padding_function(score["Skips"], 4)
         >>> music = baca.make_notes(accumulator.get())
@@ -4696,7 +4696,7 @@ r"""
         ... ]
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -4776,7 +4776,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     previous_persist=persist,
@@ -4795,7 +4795,7 @@ r"""
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -4867,7 +4867,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -4878,19 +4878,19 @@ r"""
         >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
-        ...     accumulator.manifests(),
+        ...     {},
         ... )
         >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][2 - 1],
         ...     baca.Accelerando(),
-        ...     accumulator.manifests(),
+        ...     {},
         ... )
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -4976,7 +4976,7 @@ r"""
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     previous_persist=persist,
@@ -4988,7 +4988,7 @@ r"""
         >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
-        ...     accumulator.manifests(),
+        ...     {},
         ... )
         >>> wrappers = baca.text_spanner_staff_padding_function(score["Skips"], 4)
         >>> music = baca.make_notes(accumulator.get())
@@ -4999,7 +4999,7 @@ r"""
         ... )
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,

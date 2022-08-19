@@ -3918,7 +3918,7 @@ figures.py examples.
     >>> baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     docs=True,
     ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
@@ -3937,7 +3937,7 @@ figures.py examples.
 
     >>> _, _ = baca.interpret.section(
     ...     score,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -4075,7 +4075,7 @@ figures.py examples.
     >>> baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     docs=True,
     ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
@@ -4094,7 +4094,7 @@ figures.py examples.
 
     >>> _, _ = baca.interpret.section(
     ...     score,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -4249,7 +4249,7 @@ figures.py examples.
     >>> baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     docs=True,
     ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
@@ -4268,7 +4268,7 @@ figures.py examples.
 
     >>> _, _ = baca.interpret.section(
     ...     score,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -4447,7 +4447,7 @@ figures.py examples.
     >>> baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     docs=True,
     ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
@@ -4455,7 +4455,7 @@ figures.py examples.
     >>> figures.populate_commands(score, accumulator)
     >>> _, _ = baca.interpret.section(
     ...     score,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -4670,7 +4670,7 @@ figures.py examples.
     >>> baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     docs=True,
     ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
@@ -4689,7 +4689,7 @@ figures.py examples.
 
     >>> _, _ = baca.interpret.section(
     ...     score,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -4886,7 +4886,7 @@ figures.py examples.
     >>> baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     docs=True,
     ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
@@ -4905,7 +4905,7 @@ figures.py examples.
 
     >>> _, _ = baca.interpret.section(
     ...     score,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -5035,7 +5035,7 @@ figures.py examples.
     >>> baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     docs=True,
     ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
@@ -5054,7 +5054,7 @@ figures.py examples.
 
     >>> _, _ = baca.interpret.section(
     ...     score,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -5208,7 +5208,7 @@ figures.py examples.
     >>> baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     docs=True,
     ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
@@ -5227,7 +5227,7 @@ figures.py examples.
 
     >>> _, _ = baca.interpret.section(
     ...     score,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -6116,7 +6116,7 @@ figures.py examples.
     >>> baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     docs=True,
     ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
@@ -6135,7 +6135,7 @@ figures.py examples.
 
     >>> _, _ = baca.interpret.section(
     ...     score,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -6318,7 +6318,7 @@ figures.py examples.
     >>> baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     docs=True,
     ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
@@ -6337,7 +6337,7 @@ figures.py examples.
 
     >>> _, _ = baca.interpret.section(
     ...     score,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -6507,7 +6507,7 @@ figures.py examples.
     >>> baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     docs=True,
     ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
@@ -6526,7 +6526,7 @@ figures.py examples.
 
     >>> _, _ = baca.interpret.section(
     ...     score,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,

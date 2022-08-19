@@ -12,7 +12,7 @@ articulations.py examples.
     >>> baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     docs=True,
     ... )
@@ -25,7 +25,7 @@ articulations.py examples.
     ... )
     >>> _, _ = baca.interpret.section(
     ...     score,
-    ...     accumulator.manifests(),
+    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,

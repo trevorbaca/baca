@@ -234,7 +234,7 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
@@ -254,7 +254,7 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -359,7 +359,7 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
@@ -379,7 +379,7 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -539,7 +539,7 @@ def only_parts(command: Command | Suite) -> Command | Suite:
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
@@ -556,7 +556,7 @@ def only_parts(command: Command | Suite) -> Command | Suite:
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,

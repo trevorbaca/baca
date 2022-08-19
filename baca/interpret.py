@@ -3114,7 +3114,7 @@ def section_defaults():
 
 def set_up_score(
     score,
-    commands,
+    accumulator,
     manifests,
     time_signatures,
     *,
@@ -3129,7 +3129,7 @@ def set_up_score(
     spacing=None,
     stage_markup=None,
 ):
-    assert isinstance(commands, _accumulator.CommandAccumulator), repr(commands)
+    assert isinstance(accumulator, _accumulator.CommandAccumulator), repr(accumulator)
     assert isinstance(manifests, dict), repr(manifests)
     if docs is True:
         first_section = True
@@ -3147,7 +3147,7 @@ def set_up_score(
     if attach_nonfirst_empty_start_bar and not first_section:
         _attach_nonfirst_empty_start_bar(global_skips)
     first_measure_number = _adjust_first_measure_number(None, previous_metadata)
-    commands.first_measure_number = first_measure_number
+    accumulator.first_measure_number = first_measure_number
     _label_measure_numbers(first_measure_number, global_skips)
     _label_stage_numbers(global_skips, stage_markup)
     _label_moment_numbers(global_skips, moment_markup)
@@ -3176,11 +3176,7 @@ def set_up_score(
             score,
             do_not_iterate=score,
         )
-    for voice in abjad.iterate.components(score, abjad.Voice):
-        commands._voice_name_to_voice[voice.name] = voice
-        for abbreviation, voice_name in commands.voice_abbreviations.items():
-            if voice_name == voice.name:
-                commands._voice_name_to_voice[abbreviation] = voice
+    accumulator._populate_voice_name_to_voice(score)
 
 
 def update_voice_name_to_parameter_to_state(

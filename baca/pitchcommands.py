@@ -665,7 +665,7 @@ class ClusterCommand(_command.Command):
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
@@ -681,7 +681,7 @@ class ClusterCommand(_command.Command):
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -760,7 +760,7 @@ class ClusterCommand(_command.Command):
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
@@ -776,7 +776,7 @@ class ClusterCommand(_command.Command):
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -855,7 +855,7 @@ class ClusterCommand(_command.Command):
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
@@ -869,7 +869,7 @@ class ClusterCommand(_command.Command):
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -948,7 +948,7 @@ class ClusterCommand(_command.Command):
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
@@ -962,7 +962,7 @@ class ClusterCommand(_command.Command):
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -1041,7 +1041,7 @@ class ClusterCommand(_command.Command):
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
@@ -1055,7 +1055,7 @@ class ClusterCommand(_command.Command):
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -1134,7 +1134,7 @@ class ClusterCommand(_command.Command):
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
@@ -1149,7 +1149,7 @@ class ClusterCommand(_command.Command):
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -1365,7 +1365,7 @@ class MicrotoneDeviationCommand(_command.Command):
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
@@ -1380,7 +1380,7 @@ class MicrotoneDeviationCommand(_command.Command):
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -1474,7 +1474,7 @@ class OctaveDisplacementCommand(_command.Command):
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
@@ -1491,7 +1491,7 @@ class OctaveDisplacementCommand(_command.Command):
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -1591,7 +1591,7 @@ class PitchCommand(_command.Command):
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
@@ -1605,7 +1605,7 @@ class PitchCommand(_command.Command):
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -1675,7 +1675,7 @@ class PitchCommand(_command.Command):
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
@@ -1689,7 +1689,7 @@ class PitchCommand(_command.Command):
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -1759,7 +1759,7 @@ class PitchCommand(_command.Command):
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
@@ -1773,7 +1773,7 @@ class PitchCommand(_command.Command):
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -2040,7 +2040,7 @@ class RegisterCommand(_command.Command):
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
@@ -2061,7 +2061,7 @@ class RegisterCommand(_command.Command):
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -2312,7 +2312,7 @@ class RegisterInterpolationCommand(_command.Command):
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
@@ -2328,7 +2328,7 @@ class RegisterInterpolationCommand(_command.Command):
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -2428,7 +2428,7 @@ class RegisterInterpolationCommand(_command.Command):
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
@@ -2444,7 +2444,7 @@ class RegisterInterpolationCommand(_command.Command):
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -2544,7 +2544,7 @@ class RegisterInterpolationCommand(_command.Command):
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
@@ -2560,7 +2560,7 @@ class RegisterInterpolationCommand(_command.Command):
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -2660,7 +2660,7 @@ class RegisterInterpolationCommand(_command.Command):
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
@@ -2676,7 +2676,7 @@ class RegisterInterpolationCommand(_command.Command):
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -2776,7 +2776,7 @@ class RegisterInterpolationCommand(_command.Command):
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
@@ -2792,7 +2792,7 @@ class RegisterInterpolationCommand(_command.Command):
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -4577,7 +4577,7 @@ def pitch(
         >>> baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     docs=True,
         ... )
@@ -4596,7 +4596,7 @@ def pitch(
 
         >>> _, _ = baca.interpret.section(
         ...     score,
-        ...     accumulator.manifests(),
+        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
