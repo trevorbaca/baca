@@ -25,6 +25,8 @@ from .indicatorcommands import *
 from .interpret import (
     append_anchor_note,
     append_anchor_note_function,
+    label_moment_numbers,
+    label_stage_numbers,
     reapply,
     reapply_persistent_indicators,
     scope,

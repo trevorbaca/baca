@@ -1642,119 +1642,6 @@ def _label_measure_numbers(first_measure_number, global_skips):
             )
 
 
-def _label_moment_numbers(global_skips, moment_markup):
-    if not moment_markup:
-        return
-    skips = _select.skips(global_skips)
-    for i, item in enumerate(moment_markup):
-        if len(item) == 2:
-            value, lmn = item
-            color = None
-        elif len(item) == 3:
-            value, lmn, color = item
-        else:
-            raise Exception(item)
-        measure_index = lmn - 1
-        skip = skips[measure_index]
-        tag = _tags.MOMENT_NUMBER
-        tag = tag.append(_tags.MOMENT_ANNOTATION_SPANNER)
-        tag = tag.append(_tags.function_name(_frame()))
-        if color is not None:
-            string = rf'- \baca-start-xnm-colored-left-only "{value}" {color}'
-        else:
-            string = rf'- \baca-start-xnm-left-only "{value}"'
-        start_text_span = abjad.StartTextSpan(
-            command=r"\bacaStartTextSpanXNM", left_text=string
-        )
-        abjad.attach(
-            start_text_span,
-            skip,
-            context="GlobalSkips",
-            deactivate=True,
-            tag=tag,
-        )
-        if 0 < i:
-            tag = _tags.MOMENT_NUMBER
-            tag = tag.append(_tags.MOMENT_ANNOTATION_SPANNER)
-            tag = tag.append(_tags.function_name(_frame()))
-            stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanXNM")
-            abjad.attach(
-                stop_text_span,
-                skip,
-                context="GlobalSkips",
-                deactivate=True,
-                tag=tag,
-            )
-    skip = skips[-1]
-    tag = _tags.MOMENT_NUMBER
-    tag = tag.append(_tags.MOMENT_ANNOTATION_SPANNER)
-    tag = tag.append(_tags.function_name(_frame()))
-    stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanXNM")
-    abjad.attach(
-        stop_text_span,
-        skip,
-        context="GlobalSkips",
-        deactivate=True,
-        tag=tag,
-    )
-
-
-def _label_stage_numbers(global_skips, stage_markup):
-    if not stage_markup:
-        return
-    skips = _select.skips(global_skips)
-    for i, item in enumerate(stage_markup):
-        if len(item) == 2:
-            value, lmn = item
-            color = None
-        elif len(item) == 3:
-            value, lmn, color = item
-        else:
-            raise Exception(item)
-        measure_index = lmn - 1
-        skip = skips[measure_index]
-        tag = _tags.STAGE_NUMBER
-        tag = tag.append(_tags.function_name(_frame()))
-        if color is not None:
-            string = r"- \baca-start-snm-colored-left-only"
-            string += f' "{value}" {color}'
-        else:
-            string = r"- \baca-start-snm-left-only"
-            string += f' "{value}"'
-        start_text_span = abjad.StartTextSpan(
-            command=r"\bacaStartTextSpanSNM", left_text=string
-        )
-        abjad.attach(
-            start_text_span,
-            skip,
-            context="GlobalSkips",
-            deactivate=True,
-            tag=tag,
-        )
-        if 0 < i:
-            tag = _tags.STAGE_NUMBER
-            tag = tag.append(_tags.function_name(_frame()))
-            stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanSNM")
-            abjad.attach(
-                stop_text_span,
-                skip,
-                context="GlobalSkips",
-                deactivate=True,
-                tag=tag,
-            )
-    skip = skips[-1]
-    tag = _tags.STAGE_NUMBER
-    tag = tag.append(_tags.function_name(_frame()))
-    stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanSNM")
-    abjad.attach(
-        stop_text_span,
-        skip,
-        context="GlobalSkips",
-        deactivate=True,
-        tag=tag,
-    )
-
-
 def _magnify_staves(magnify_staves, score):
     if magnify_staves is None:
         return
@@ -2974,6 +2861,119 @@ def make_layout_ly(
             )
 
 
+def label_moment_numbers(global_skips, moment_markup):
+    if not moment_markup:
+        return
+    skips = _select.skips(global_skips)
+    for i, item in enumerate(moment_markup):
+        if len(item) == 2:
+            value, lmn = item
+            color = None
+        elif len(item) == 3:
+            value, lmn, color = item
+        else:
+            raise Exception(item)
+        measure_index = lmn - 1
+        skip = skips[measure_index]
+        tag = _tags.MOMENT_NUMBER
+        tag = tag.append(_tags.MOMENT_ANNOTATION_SPANNER)
+        tag = tag.append(_tags.function_name(_frame()))
+        if color is not None:
+            string = rf'- \baca-start-xnm-colored-left-only "{value}" {color}'
+        else:
+            string = rf'- \baca-start-xnm-left-only "{value}"'
+        start_text_span = abjad.StartTextSpan(
+            command=r"\bacaStartTextSpanXNM", left_text=string
+        )
+        abjad.attach(
+            start_text_span,
+            skip,
+            context="GlobalSkips",
+            deactivate=True,
+            tag=tag,
+        )
+        if 0 < i:
+            tag = _tags.MOMENT_NUMBER
+            tag = tag.append(_tags.MOMENT_ANNOTATION_SPANNER)
+            tag = tag.append(_tags.function_name(_frame()))
+            stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanXNM")
+            abjad.attach(
+                stop_text_span,
+                skip,
+                context="GlobalSkips",
+                deactivate=True,
+                tag=tag,
+            )
+    skip = skips[-1]
+    tag = _tags.MOMENT_NUMBER
+    tag = tag.append(_tags.MOMENT_ANNOTATION_SPANNER)
+    tag = tag.append(_tags.function_name(_frame()))
+    stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanXNM")
+    abjad.attach(
+        stop_text_span,
+        skip,
+        context="GlobalSkips",
+        deactivate=True,
+        tag=tag,
+    )
+
+
+def label_stage_numbers(global_skips, stage_markup):
+    if not stage_markup:
+        return
+    skips = _select.skips(global_skips)
+    for i, item in enumerate(stage_markup):
+        if len(item) == 2:
+            value, lmn = item
+            color = None
+        elif len(item) == 3:
+            value, lmn, color = item
+        else:
+            raise Exception(item)
+        measure_index = lmn - 1
+        skip = skips[measure_index]
+        tag = _tags.STAGE_NUMBER
+        tag = tag.append(_tags.function_name(_frame()))
+        if color is not None:
+            string = r"- \baca-start-snm-colored-left-only"
+            string += f' "{value}" {color}'
+        else:
+            string = r"- \baca-start-snm-left-only"
+            string += f' "{value}"'
+        start_text_span = abjad.StartTextSpan(
+            command=r"\bacaStartTextSpanSNM", left_text=string
+        )
+        abjad.attach(
+            start_text_span,
+            skip,
+            context="GlobalSkips",
+            deactivate=True,
+            tag=tag,
+        )
+        if 0 < i:
+            tag = _tags.STAGE_NUMBER
+            tag = tag.append(_tags.function_name(_frame()))
+            stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanSNM")
+            abjad.attach(
+                stop_text_span,
+                skip,
+                context="GlobalSkips",
+                deactivate=True,
+                tag=tag,
+            )
+    skip = skips[-1]
+    tag = _tags.STAGE_NUMBER
+    tag = tag.append(_tags.function_name(_frame()))
+    stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanSNM")
+    abjad.attach(
+        stop_text_span,
+        skip,
+        context="GlobalSkips",
+        deactivate=True,
+        tag=tag,
+    )
+
+
 def reapply(voices, manifests, previous_persistent_indicators):
     runtime = {
         "already_reapplied_contexts": {"Score"},
@@ -3349,8 +3349,8 @@ def set_up_score(
     first_measure_number = _adjust_first_measure_number(None, previous_metadata)
     accumulator.first_measure_number = first_measure_number
     _label_measure_numbers(first_measure_number, global_skips)
-    _label_stage_numbers(global_skips, stage_markup)
-    _label_moment_numbers(global_skips, moment_markup)
+    label_stage_numbers(global_skips, stage_markup)
+    label_moment_numbers(global_skips, moment_markup)
     if spacing is not None:
         _apply_spacing(
             page_layout_profile,
