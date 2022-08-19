@@ -9,7 +9,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -134,7 +134,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(6, 4)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -226,7 +226,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -316,7 +316,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -424,7 +424,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=time_signatures,
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -540,7 +540,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=time_signatures,
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},

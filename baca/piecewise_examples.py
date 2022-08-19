@@ -9,7 +9,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -107,7 +107,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -207,7 +207,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -306,7 +306,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -405,7 +405,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -516,7 +516,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -616,7 +616,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -724,7 +724,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -828,7 +828,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -944,7 +944,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -1039,7 +1039,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -1135,7 +1135,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -1234,7 +1234,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -1338,7 +1338,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -1440,7 +1440,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -1539,7 +1539,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -1638,7 +1638,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -1737,7 +1737,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -1836,7 +1836,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -1937,7 +1937,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -2054,7 +2054,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -2171,7 +2171,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -2298,7 +2298,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -2428,7 +2428,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -2532,7 +2532,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -2637,7 +2637,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -2756,7 +2756,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -2866,7 +2866,7 @@ piecewise.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},

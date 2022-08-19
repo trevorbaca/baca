@@ -9,7 +9,7 @@ commands.py examles
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -213,7 +213,7 @@ commands.py examles
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -378,7 +378,7 @@ commands.py examles
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -526,7 +526,7 @@ commands.py examles
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -629,7 +629,7 @@ commands.py examles
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -729,7 +729,7 @@ commands.py examles
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -806,7 +806,7 @@ commands.py examles
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -880,7 +880,7 @@ commands.py examles
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -958,7 +958,7 @@ commands.py examles
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -1037,7 +1037,7 @@ commands.py examles
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -1114,7 +1114,7 @@ commands.py examles
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -1191,7 +1191,7 @@ commands.py examles
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -1427,7 +1427,7 @@ commands.py examles
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -1502,7 +1502,7 @@ commands.py examles
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 4)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -1583,7 +1583,7 @@ commands.py examles
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -1674,7 +1674,7 @@ commands.py examles
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -1784,7 +1784,7 @@ commands.py examles
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -1884,7 +1884,7 @@ commands.py examles
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -2041,7 +2041,7 @@ commands.py examles
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -2105,7 +2105,7 @@ commands.py examles
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},

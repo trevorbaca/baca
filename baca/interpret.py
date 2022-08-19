@@ -131,11 +131,11 @@ def _adjust_first_measure_number(first_measure_number, previous_metadata):
     if not previous_metadata:
         return 1
     string = "first_measure_number"
-    first_measure_number = previous_metadata.get(string)
-    time_signatures = previous_metadata.get("time_signatures")
-    if first_measure_number is None or time_signatures is None:
+    previous_first_measure_number = previous_metadata.get(string)
+    previous_time_signatures = previous_metadata.get("time_signatures")
+    if previous_first_measure_number is None or previous_time_signatures is None:
         return 1
-    first_measure_number += len(time_signatures)
+    first_measure_number = previous_first_measure_number + len(previous_time_signatures)
     return first_measure_number
 
 
@@ -3329,8 +3329,9 @@ def set_up_score(
     previous_persist=None,
     spacing=None,
     stage_markup=None,
-):
-    assert isinstance(accumulator, _accumulator.CommandAccumulator), repr(accumulator)
+) -> int:
+    if accumulator is not None:
+        assert isinstance(accumulator, _accumulator.CommandAccumulator)
     assert isinstance(manifests, dict), repr(manifests)
     if docs is True:
         first_section = True
@@ -3347,7 +3348,6 @@ def set_up_score(
     if attach_nonfirst_empty_start_bar and not first_section:
         _attach_nonfirst_empty_start_bar(global_skips)
     first_measure_number = _adjust_first_measure_number(None, previous_metadata)
-    accumulator.first_measure_number = first_measure_number
     _label_measure_numbers(first_measure_number, global_skips)
     label_stage_numbers(global_skips, stage_markup)
     label_moment_numbers(global_skips, moment_markup)
@@ -3365,7 +3365,7 @@ def set_up_score(
         time_signatures,
     )
     if do_not_reapply_persistent_indicators is False:
-        already_reapplied_contexts = set()
+        already_reapplied_contexts: set[str] = set()
         previous_persistent_indicators = previous_persist.get(
             "persistent_indicators", {}
         )
@@ -3377,6 +3377,7 @@ def set_up_score(
             do_not_iterate=score,
         )
     accumulator._populate_voice_name_to_voice(score)
+    return first_measure_number
 
 
 def update_voice_name_to_parameter_to_state(

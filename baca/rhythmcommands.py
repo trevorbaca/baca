@@ -218,7 +218,7 @@ def make_monads(fractions):
         >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 4)],
         ... )
-        >>> baca.interpret.set_up_score(
+        >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
         ...     {},
@@ -331,7 +331,7 @@ def make_repeat_tied_notes(
         >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(10, 8)],
         ... )
-        >>> baca.interpret.set_up_score(
+        >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
         ...     accumulator,
         ...     {},

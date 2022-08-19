@@ -3915,7 +3915,7 @@ figures.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -4072,7 +4072,7 @@ figures.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -4246,7 +4246,7 @@ figures.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -4444,7 +4444,7 @@ figures.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -4667,7 +4667,7 @@ figures.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -4883,7 +4883,7 @@ figures.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -5032,7 +5032,7 @@ figures.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -5205,7 +5205,7 @@ figures.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -6113,7 +6113,7 @@ figures.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -6315,7 +6315,7 @@ figures.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},
@@ -6504,7 +6504,7 @@ figures.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
-    >>> baca.interpret.set_up_score(
+    >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
     ...     accumulator,
     ...     {},

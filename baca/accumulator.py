@@ -152,7 +152,6 @@ class CommandAccumulator:
     _voice_abbreviations: dict | None = dataclasses.field(default_factory=dict)
     _voice_names: tuple[str, ...] = dataclasses.field(default_factory=tuple)
     commands: list = dataclasses.field(default_factory=list, init=False)
-    first_measure_number: int = 1
     time_signatures: list[abjad.TimeSignature] = dataclasses.field(default_factory=list)
     voice_name_to_voice: dict = dataclasses.field(default_factory=dict, init=False)
 
