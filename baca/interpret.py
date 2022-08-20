@@ -2762,9 +2762,7 @@ def make_layout_ly(
         do_not_check_wellformedness=True,
         first_measure_number=first_measure_number,
         first_section=True,
-        # page_layout_profile=page_layout_profile,
         remove_tags=_tags.layout_removal_tags(),
-        # spacing=spacing,
         whitespace_leaves=True,
     )
     lilypond_file = _lilypond.file(score)
@@ -3314,25 +3312,26 @@ def section_defaults():
 
 
 def set_up_score(
-    score,
-    manifests,
-    time_signatures,
-    accumulator=None,
+    score: abjad.Score,
+    manifests: dict,
+    time_signatures: typing.Sequence[abjad.TimeSignature],
+    accumulator: _accumulator.CommandAccumulator = None,
     *,
-    always_make_global_rests=False,
-    append_anchor_skip=False,
-    attach_nonfirst_empty_start_bar=False,
-    do_not_reapply_persistent_indicators=False,
-    docs=False,
-    moment_markup=None,
-    page_layout_profile=None,
-    previous_persist=None,
-    spacing=None,
-    stage_markup=None,
+    always_make_global_rests: bool = False,
+    append_anchor_skip: bool = False,
+    attach_nonfirst_empty_start_bar: bool = False,
+    do_not_reapply_persistent_indicators: bool = False,
+    docs: bool = False,
+    page_layout_profile: dict = None,
+    previous_persist: dict = None,
+    # TODO: change 'spacing' to 'spacing_specifier'
+    spacing: _layout.SpacingSpecifier = None,
 ) -> int:
     if accumulator is not None:
         assert isinstance(accumulator, _accumulator.CommandAccumulator)
     assert isinstance(manifests, dict), repr(manifests)
+    assert isinstance(page_layout_profile, dict | type(None))
+    assert isinstance(spacing, _layout.SpacingSpecifier | type(None))
     if docs is True:
         first_section = True
         previous_metadata = {}
@@ -3349,8 +3348,6 @@ def set_up_score(
         _attach_nonfirst_empty_start_bar(global_skips)
     first_measure_number = _adjust_first_measure_number(None, previous_metadata)
     _label_measure_numbers(first_measure_number, global_skips)
-    label_stage_numbers(global_skips, stage_markup)
-    label_moment_numbers(global_skips, moment_markup)
     if spacing is not None:
         _apply_spacing(
             page_layout_profile,
