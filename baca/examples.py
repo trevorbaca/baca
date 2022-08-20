@@ -11,7 +11,6 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
@@ -136,7 +135,6 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
@@ -228,7 +226,6 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
@@ -318,7 +315,6 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
@@ -426,7 +422,6 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
@@ -542,7 +537,6 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,

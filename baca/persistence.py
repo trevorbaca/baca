@@ -23,7 +23,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -126,7 +125,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -242,7 +240,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -359,7 +356,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -473,7 +469,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -588,7 +583,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -657,7 +651,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -739,7 +732,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -821,7 +813,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -893,7 +884,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -974,7 +964,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -1046,7 +1035,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -1128,7 +1116,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -1221,7 +1208,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -1390,7 +1376,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -1571,7 +1556,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -1757,7 +1741,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -1954,7 +1937,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -2155,7 +2137,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -2333,7 +2314,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -2526,7 +2506,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -2723,7 +2702,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -2939,7 +2917,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -3140,7 +3117,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -3272,7 +3248,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     append_anchor_skip=True,
@@ -3377,7 +3352,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     append_anchor_skip=True,
@@ -3507,9 +3481,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {"abjad.MetronomeMark": metronome_marks},
         ...     accumulator.time_signatures,
         ...     accumulator,
+        ...     {"abjad.MetronomeMark": metronome_marks},
         ...     docs=True,
         ...     previous_persist=persist,
         ...     spacing=baca.SpacingSpecifier(
@@ -3598,7 +3572,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     append_anchor_skip=True,
@@ -3724,9 +3697,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {"abjad.MetronomeMark": metronome_marks},
         ...     accumulator.time_signatures,
         ...     accumulator,
+        ...     {"abjad.MetronomeMark": metronome_marks},
         ...     append_anchor_skip=True,
         ...     docs=True,
         ...     previous_persist=persist,
@@ -3842,7 +3815,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -3936,7 +3908,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -4021,7 +3992,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -4124,7 +4094,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -4196,7 +4165,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -4281,7 +4249,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -4365,7 +4332,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -4443,7 +4409,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -4545,7 +4510,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     append_anchor_skip=True,
@@ -4650,7 +4614,6 @@ r"""
         ...     )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -4756,7 +4719,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -4846,7 +4808,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -4954,7 +4915,6 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,

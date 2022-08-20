@@ -11,7 +11,6 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
@@ -215,7 +214,6 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
@@ -380,7 +378,6 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
@@ -528,7 +525,6 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
@@ -631,7 +627,6 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
@@ -731,7 +726,6 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
@@ -808,7 +802,6 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
@@ -882,7 +875,6 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
@@ -960,7 +952,6 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
@@ -1039,7 +1030,6 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
@@ -1116,7 +1106,6 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
@@ -1193,7 +1182,6 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
@@ -1429,7 +1417,6 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
@@ -1504,7 +1491,6 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
@@ -1585,7 +1571,6 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
@@ -1676,7 +1661,6 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
@@ -1786,7 +1770,6 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
@@ -1886,7 +1869,6 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
@@ -2043,7 +2025,6 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
@@ -2107,7 +2088,6 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,

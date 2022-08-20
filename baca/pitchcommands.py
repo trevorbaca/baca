@@ -664,7 +664,6 @@ class ClusterCommand(_command.Command):
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -759,7 +758,6 @@ class ClusterCommand(_command.Command):
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -854,7 +852,6 @@ class ClusterCommand(_command.Command):
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -947,7 +944,6 @@ class ClusterCommand(_command.Command):
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -1040,7 +1036,6 @@ class ClusterCommand(_command.Command):
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -1133,7 +1128,6 @@ class ClusterCommand(_command.Command):
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -1364,7 +1358,6 @@ class MicrotoneDeviationCommand(_command.Command):
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -1473,7 +1466,6 @@ class OctaveDisplacementCommand(_command.Command):
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -1590,7 +1582,6 @@ class PitchCommand(_command.Command):
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -1674,7 +1665,6 @@ class PitchCommand(_command.Command):
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -1758,7 +1748,6 @@ class PitchCommand(_command.Command):
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -2039,7 +2028,6 @@ class RegisterCommand(_command.Command):
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -2311,7 +2299,6 @@ class RegisterInterpolationCommand(_command.Command):
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -2427,7 +2414,6 @@ class RegisterInterpolationCommand(_command.Command):
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -2543,7 +2529,6 @@ class RegisterInterpolationCommand(_command.Command):
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -2659,7 +2644,6 @@ class RegisterInterpolationCommand(_command.Command):
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -2775,7 +2759,6 @@ class RegisterInterpolationCommand(_command.Command):
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -4576,7 +4559,6 @@ def pitch(
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,

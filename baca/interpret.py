@@ -1824,13 +1824,15 @@ def _prototype_string(class_):
 
 
 def _reapply_persistent_indicators(
-    already_reapplied_contexts,
     manifests,
     previous_persistent_indicators,
     score,
     *,
+    already_reapplied_contexts=None,
     do_not_iterate=None,
 ):
+    if already_reapplied_contexts is None:
+        already_reapplied_contexts = set()
     if do_not_iterate is not None:
         contexts = [do_not_iterate]
     else:
@@ -1847,7 +1849,7 @@ def _reapply_persistent_indicators(
                 if memento.manifest == "instruments":
                     dictionary = manifests["abjad.Instrument"]
                 elif memento.manifest == "metronome_marks":
-                    dictionary = manifests["abjad.MetronomeMark"]
+                    dictionary = manifests.get("abjad.MetronomeMark")
                 elif memento.manifest == "short_instrument_names":
                     dictionary = manifests["abjad.ShortInstrumentName"]
                 else:
@@ -2743,7 +2745,6 @@ def make_layout_ly(
     )
     set_up_score(
         score,
-        {},
         accumulator.time_signatures,
         accumulator,
         append_anchor_skip=has_anchor_skip,
@@ -3009,10 +3010,10 @@ def reapply_persistent_indicators_function(argument, *, runtime=None):
     assert isinstance(score, abjad.Score)
     for context in contexts:
         _reapply_persistent_indicators(
-            already_reapplied_contexts,
             manifests,
             previous_persistent_indicators,
             score,
+            already_reapplied_contexts=already_reapplied_contexts,
             do_not_iterate=context,
         )
 
@@ -3313,9 +3314,9 @@ def section_defaults():
 
 def set_up_score(
     score: abjad.Score,
-    manifests: dict,
     time_signatures: typing.Sequence[abjad.TimeSignature],
     accumulator: _accumulator.CommandAccumulator = None,
+    manifests: dict = None,
     *,
     always_make_global_rests: bool = False,
     append_anchor_skip: bool = False,
@@ -3329,19 +3330,24 @@ def set_up_score(
 ) -> int:
     if accumulator is not None:
         assert isinstance(accumulator, _accumulator.CommandAccumulator)
+    manifests = manifests or {}
     assert isinstance(manifests, dict), repr(manifests)
     assert isinstance(page_layout_profile, dict | type(None))
+    previous_persist = previous_persist or {}
+    assert isinstance(previous_persist, dict), repr(previous_persist)
     assert isinstance(spacing, _layout.SpacingSpecifier | type(None))
     if docs is True:
         first_section = True
         previous_metadata = {}
     else:
+        # TODO: pass in first_section, or determine at top level:
         section_directory = pathlib.Path(os.getcwd())
         first_section = section_directory.name == "01"
+        # TODO: pass in previous_metadata, previous_persist:
         previous_metadata, previous_persist = _build.get_previous_metadata(
             section_directory
         )
-    previous_persist = previous_persist or {}
+        assert isinstance(previous_persist, dict)
     global_skips = score["Skips"]
     _make_global_skips(append_anchor_skip, global_skips, time_signatures)
     if attach_nonfirst_empty_start_bar and not first_section:
@@ -3361,13 +3367,11 @@ def set_up_score(
         score,
         time_signatures,
     )
-    if do_not_reapply_persistent_indicators is False:
-        already_reapplied_contexts: set[str] = set()
+    if not do_not_reapply_persistent_indicators:
         previous_persistent_indicators = previous_persist.get(
             "persistent_indicators", {}
         )
         _reapply_persistent_indicators(
-            already_reapplied_contexts,
             manifests,
             previous_persistent_indicators,
             score,

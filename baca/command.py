@@ -233,7 +233,6 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -358,7 +357,6 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
@@ -538,7 +536,6 @@ def only_parts(command: Command | Suite) -> Command | Suite:
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,

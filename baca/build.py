@@ -203,28 +203,11 @@ def _get_preamble_time_signatures(path):
 
 def get_previous_metadata(section_directory):
     if section_directory.name == "01":
-        previous_metadata = None
-        previous_persist = None
+        previous_metadata = {}
+        previous_persist = {}
     else:
-        previous_section = str(int(section_directory.name) - 1).zfill(2)
-        previous_section = section_directory.parent / previous_section
-        path = previous_section / "__metadata__"
-        file = pathlib.Path(path)
-        namespace = {"abjad": abjad, "baca": baca}
-        namespace.update(abjad.__dict__)
-        namespace.update(baca.__dict__)
-        if file.is_file():
-            string = file.read_text()
-            previous_metadata = eval(string, namespace)
-        else:
-            previous_metadata = None
-        path = previous_section / "__persist__"
-        file = pathlib.Path(path)
-        if file.is_file():
-            lines = file.read_text()
-            previous_persist = eval(lines, namespace)
-        else:
-            previous_persist = None
+        previous_persist = baca.previous_persist(section_directory / "dummy.txt")
+        previous_metadata = baca.previous_metadata(section_directory / "dummy.txt")
     return previous_metadata, previous_persist
 
 
