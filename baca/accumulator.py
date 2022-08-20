@@ -224,7 +224,7 @@ class CommandAccumulator:
         return _initialize_time_signatures(self.time_signatures)
 
     def measures(self):
-        return TimeSignatureGetter(self.time_signatures)
+        return MeasureServer(self.time_signatures)
 
     def voice(self, abbreviation: str) -> abjad.Voice | None:
         assert isinstance(abbreviation, str), repr(abbreviation)
@@ -242,7 +242,7 @@ class CommandAccumulator:
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class TimeSignatureGetter:
+class MeasureServer:
 
     time_signatures: list[abjad.TimeSignature]
 
