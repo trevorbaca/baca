@@ -11,9 +11,9 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
     ... )
@@ -215,9 +215,9 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 16)),
     ... )
@@ -380,9 +380,9 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 
@@ -528,9 +528,9 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 13)),
     ... )
@@ -631,9 +631,9 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
     ... )
@@ -731,9 +731,9 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 
@@ -808,9 +808,9 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 
@@ -882,9 +882,9 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
     ... )
@@ -960,9 +960,9 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
     ... )
@@ -1039,9 +1039,9 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
     ... )
@@ -1116,9 +1116,9 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
     ... )
@@ -1193,9 +1193,9 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
     ... )
@@ -1429,9 +1429,9 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 
@@ -1504,9 +1504,9 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 
@@ -1585,9 +1585,9 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
     ... )
@@ -1676,9 +1676,9 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 
@@ -1786,9 +1786,9 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 
@@ -1886,9 +1886,9 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
     ... )
@@ -2043,9 +2043,9 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 
@@ -2107,9 +2107,9 @@ commands.py examles
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 

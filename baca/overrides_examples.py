@@ -11,9 +11,9 @@ overrides.py examples.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 
@@ -428,9 +428,9 @@ overrides.py examples.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 
@@ -516,9 +516,9 @@ overrides.py examples.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 
@@ -612,9 +612,9 @@ overrides.py examples.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 
@@ -653,9 +653,9 @@ overrides.py examples.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 
@@ -746,9 +746,9 @@ overrides.py examples.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 
@@ -839,9 +839,9 @@ overrides.py examples.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 
@@ -931,9 +931,9 @@ overrides.py examples.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 
@@ -2506,9 +2506,9 @@ overrides.py examples.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 
@@ -2632,9 +2632,9 @@ overrides.py examples.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 
@@ -2671,9 +2671,9 @@ overrides.py examples.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 
@@ -2796,9 +2796,9 @@ overrides.py examples.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 
@@ -2921,9 +2921,9 @@ overrides.py examples.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 
@@ -3046,9 +3046,9 @@ overrides.py examples.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 

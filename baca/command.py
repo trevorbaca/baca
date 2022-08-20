@@ -233,9 +233,9 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
@@ -358,9 +358,9 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
@@ -538,9 +538,9 @@ def only_parts(command: Command | Suite) -> Command | Suite:
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )

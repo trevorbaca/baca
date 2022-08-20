@@ -2743,9 +2743,9 @@ def make_layout_ly(
     )
     set_up_score(
         score,
-        accumulator,
         {},
         accumulator.time_signatures,
+        accumulator,
         append_anchor_skip=has_anchor_skip,
         do_not_reapply_persistent_indicators=True,
         page_layout_profile=page_layout_profile,
@@ -3315,9 +3315,9 @@ def section_defaults():
 
 def set_up_score(
     score,
-    accumulator,
     manifests,
     time_signatures,
+    accumulator=None,
     *,
     always_make_global_rests=False,
     append_anchor_skip=False,
@@ -3376,7 +3376,8 @@ def set_up_score(
             score,
             do_not_iterate=score,
         )
-    accumulator._populate_voice_name_to_voice(score)
+    if accumulator is not None:
+        accumulator._populate_voice_name_to_voice(score)
     return first_measure_number
 
 

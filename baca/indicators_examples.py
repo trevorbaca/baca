@@ -40,9 +40,9 @@ indicatorcommands.py examples.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
     ... )

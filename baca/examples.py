@@ -11,9 +11,9 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
     >>> music = baca.make_even_divisions(accumulator.get())
@@ -136,9 +136,9 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 
@@ -228,9 +228,9 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 
@@ -318,9 +318,9 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
 
@@ -426,9 +426,9 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
     >>> score["Music"].extend(figures_)
@@ -542,9 +542,9 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ... )
     >>> first_measure_number = baca.interpret.set_up_score(
     ...     score,
-    ...     accumulator,
     ...     {},
     ...     accumulator.time_signatures,
+    ...     accumulator,
     ...     docs=True,
     ... )
     >>> score["Music"].extend(figures_)

@@ -220,9 +220,9 @@ def make_monads(fractions):
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
@@ -333,9 +333,9 @@ def make_repeat_tied_notes(
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )

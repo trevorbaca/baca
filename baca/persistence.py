@@ -23,9 +23,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -126,9 +126,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -242,9 +242,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -359,9 +359,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -473,9 +473,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -588,9 +588,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
@@ -657,9 +657,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
@@ -739,9 +739,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
@@ -821,9 +821,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
@@ -893,9 +893,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
@@ -974,9 +974,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
@@ -1046,9 +1046,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
@@ -1128,9 +1128,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
@@ -1221,9 +1221,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -1390,9 +1390,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -1571,9 +1571,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -1757,9 +1757,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -1954,9 +1954,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -2155,9 +2155,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -2333,9 +2333,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -2526,9 +2526,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -2723,9 +2723,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -2939,9 +2939,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -3140,9 +3140,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -3272,9 +3272,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     append_anchor_skip=True,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -3377,9 +3377,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     append_anchor_skip=True,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -3507,9 +3507,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {"abjad.MetronomeMark": metronome_marks},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     previous_persist=persist,
         ...     spacing=baca.SpacingSpecifier(
@@ -3598,9 +3598,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     append_anchor_skip=True,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -3724,9 +3724,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {"abjad.MetronomeMark": metronome_marks},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     append_anchor_skip=True,
         ...     docs=True,
         ...     previous_persist=persist,
@@ -3842,9 +3842,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
@@ -3936,9 +3936,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
@@ -4021,9 +4021,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
@@ -4124,9 +4124,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
@@ -4196,9 +4196,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
@@ -4281,9 +4281,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
@@ -4365,9 +4365,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
@@ -4443,9 +4443,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
@@ -4545,9 +4545,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     append_anchor_skip=True,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
@@ -4650,9 +4650,9 @@ r"""
         ...     )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -4756,9 +4756,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     previous_persist=persist,
         ...     spacing=baca.SpacingSpecifier(
@@ -4846,9 +4846,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
         ...         breaks=breaks,
@@ -4954,9 +4954,9 @@ r"""
         ... )
         >>> first_measure_number = baca.interpret.set_up_score(
         ...     score,
-        ...     accumulator,
         ...     {},
         ...     accumulator.time_signatures,
+        ...     accumulator,
         ...     docs=True,
         ...     previous_persist=persist,
         ...     spacing=baca.SpacingSpecifier(
