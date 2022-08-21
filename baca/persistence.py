@@ -576,8 +576,8 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> baca.SpacingSpecifier(fallback_duration=(1, 24))(score)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
