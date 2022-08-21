@@ -201,16 +201,6 @@ def _get_preamble_time_signatures(path):
     return None
 
 
-def get_previous_metadata(section_directory):
-    if section_directory.name == "01":
-        previous_metadata = {}
-        previous_persist = {}
-    else:
-        previous_persist = baca.previous_persist(section_directory / "dummy.txt")
-        previous_metadata = baca.previous_metadata(section_directory / "dummy.txt")
-    return previous_metadata, previous_persist
-
-
 def _handle_music_ly_tags_in_section(music_ly):
     text = music_ly.read_text()
     text = abjad.tag.left_shift_tags(text)
@@ -1122,7 +1112,11 @@ def section(
     interpreter = interpreter or baca.interpret.section
     metadata = baca.path.get_metadata(section_directory)
     persist = baca.path.get_metadata(section_directory, file_name="__persist__")
-    previous_metadata, previous_persist = get_previous_metadata(section_directory)
+    if section_directory.name == "01":
+        previous_metadata, previous_persist = {}, {}
+    else:
+        previous_metadata = baca.previous_metadata(section_directory / "dummy")
+        previous_persist = baca.previous_persist(section_directory / "dummy")
     first_section = first_section or section_directory.name == "01"
     with abjad.Timer() as timer:
         metadata, persist = interpreter(

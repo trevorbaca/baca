@@ -204,23 +204,6 @@ def _assert_nonoverlapping_rhythms(rhythms, voice):
         previous_stop_offset = stop_offset
 
 
-def _attach_fermatas(
-    always_make_global_rests,
-    score,
-    time_signatures,
-):
-    if not always_make_global_rests:
-        del score["Rests"]
-        return
-    has_fermata = False
-    if not has_fermata and not always_make_global_rests:
-        del score["Rests"]
-        return
-    context = score["Rests"]
-    rests = _make_global_rests(time_signatures)
-    context.extend(rests)
-
-
 def _attach_nonfirst_empty_start_bar(global_skips):
     # empty start bar allows LilyPond to print bar numbers at start of nonfirst sections
     first_skip = _select.skip(global_skips, 0)
@@ -1625,7 +1608,7 @@ def _make_global_context():
     return global_context
 
 
-def _make_global_rests(time_signatures):
+def _make_global_rests(global_rests, time_signatures):
     rests = []
     for time_signature in time_signatures:
         rest = abjad.MultimeasureRest(
@@ -1634,13 +1617,14 @@ def _make_global_rests(time_signatures):
             tag=_tags.function_name(_frame(), n=1),
         )
         rests.append(rest)
-    return rests
+    global_rests.extend(rests)
 
 
 def _make_global_skips(
-    append_anchor_skip,
     global_skips,
     time_signatures,
+    *,
+    append_anchor_skip=False,
 ):
     for time_signature in time_signatures:
         skip = abjad.Skip(
@@ -2744,6 +2728,7 @@ def make_layout_ly(
         accumulator,
         append_anchor_skip=has_anchor_skip,
         do_not_reapply_persistent_indicators=True,
+        layout=True,
     )
     spacing(score, page_layout_profile, has_anchor_skip=has_anchor_skip)
     # TODO: separate 'breaks' from SpacingSpecifier:
@@ -3316,40 +3301,41 @@ def set_up_score(
     *,
     always_make_global_rests: bool = False,
     append_anchor_skip: bool = False,
-    attach_nonfirst_empty_start_bar: bool = False,
     do_not_reapply_persistent_indicators: bool = False,
     docs: bool = False,
+    first_section: bool = False,
+    layout: bool = False,
+    previous_metadata: dict = None,
     previous_persist: dict = None,
 ) -> int:
     if accumulator is not None:
         assert isinstance(accumulator, _accumulator.CommandAccumulator)
     manifests = manifests or {}
     assert isinstance(manifests, dict), repr(manifests)
+    previous_metadata = previous_metadata or {}
     previous_persist = previous_persist or {}
-    assert isinstance(previous_persist, dict), repr(previous_persist)
-    if docs is True:
+    if docs:
         first_section = True
-        previous_metadata = {}
-    else:
-        # TODO: pass in first_section, or determine at top level:
+    elif first_section or layout:
+        previous_metadata, previous_persist = {}, {}
+    # TODO: pass previous_metadata, previous_persist in all sections:
+    elif not previous_metadata or not previous_persist:
         section_directory = pathlib.Path(os.getcwd())
-        first_section = section_directory.name == "01"
-        # TODO: pass in previous_metadata, previous_persist:
-        previous_metadata, previous_persist = _build.get_previous_metadata(
-            section_directory
-        )
-        assert isinstance(previous_persist, dict)
-    global_skips = score["Skips"]
-    _make_global_skips(append_anchor_skip, global_skips, time_signatures)
-    if attach_nonfirst_empty_start_bar and not first_section:
-        _attach_nonfirst_empty_start_bar(global_skips)
+        string = str(section_directory / "dummy.txt")
+        previous_metadata = _commands.previous_metadata(string)
+        previous_persist = _commands.previous_persist(string)
+    assert isinstance(previous_metadata, dict), repr(previous_metadata)
+    assert isinstance(previous_persist, dict), repr(previous_persist)
+    skips = score["Skips"]
+    _make_global_skips(skips, time_signatures, append_anchor_skip=append_anchor_skip)
+    if not first_section:
+        _attach_nonfirst_empty_start_bar(skips)
     first_measure_number = _adjust_first_measure_number(None, previous_metadata)
-    _label_measure_numbers(first_measure_number, global_skips)
-    _attach_fermatas(
-        always_make_global_rests,
-        score,
-        time_signatures,
-    )
+    _label_measure_numbers(first_measure_number, skips)
+    if always_make_global_rests:
+        _make_global_rests(score["Rests"], time_signatures)
+    else:
+        del score["Rests"]
     if not do_not_reapply_persistent_indicators:
         previous_persistent_indicators = previous_persist.get(
             "persistent_indicators", {}
