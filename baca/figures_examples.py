@@ -3920,8 +3920,8 @@ figures.py examples.
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
-    ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
     ... )
+    >>> baca.SpacingSpecifier((1, 32))(score)
     >>> figures.populate_commands(score, accumulator)
 
     >>> accumulator(
@@ -4076,8 +4076,8 @@ figures.py examples.
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
-    ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
     ... )
+    >>> baca.SpacingSpecifier((1, 32))(score)
     >>> figures.populate_commands(score, accumulator)
 
     >>> accumulator(
@@ -4249,8 +4249,8 @@ figures.py examples.
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
-    ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
     ... )
+    >>> baca.SpacingSpecifier((1, 32))(score)
     >>> figures.populate_commands(score, accumulator)
 
     >>> accumulator(
@@ -4446,8 +4446,8 @@ figures.py examples.
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
-    ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
     ... )
+    >>> baca.SpacingSpecifier((1, 32))(score)
     >>> figures.populate_commands(score, accumulator)
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -4668,8 +4668,8 @@ figures.py examples.
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
-    ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
     ... )
+    >>> baca.SpacingSpecifier((1, 32))(score)
     >>> figures.populate_commands(score, accumulator)
 
     >>> accumulator(
@@ -4883,8 +4883,8 @@ figures.py examples.
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
-    ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
     ... )
+    >>> baca.SpacingSpecifier((1, 24))(score)
     >>> figures.populate_commands(score, accumulator)
 
     >>> accumulator(
@@ -5031,8 +5031,8 @@ figures.py examples.
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
-    ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
     ... )
+    >>> baca.SpacingSpecifier((1, 32))(score)
     >>> figures.populate_commands(score, accumulator)
 
     >>> accumulator(
@@ -5203,8 +5203,8 @@ figures.py examples.
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
-    ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
     ... )
+    >>> baca.SpacingSpecifier((1, 32))(score)
     >>> figures.populate_commands(score, accumulator)
 
     >>> accumulator(
@@ -6110,8 +6110,8 @@ figures.py examples.
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
-    ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
     ... )
+    >>> baca.SpacingSpecifier((1, 32))(score)
     >>> figures.populate_commands(score, accumulator)
 
     >>> accumulator(
@@ -6311,8 +6311,8 @@ figures.py examples.
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
-    ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
     ... )
+    >>> baca.SpacingSpecifier((1, 32))(score)
     >>> figures.populate_commands(score, accumulator)
 
     >>> accumulator(
@@ -6499,8 +6499,8 @@ figures.py examples.
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
-    ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 32)),
     ... )
+    >>> baca.SpacingSpecifier((1, 32))(score)
     >>> figures.populate_commands(score, accumulator)
 
     >>> accumulator(

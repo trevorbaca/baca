@@ -44,9 +44,9 @@ class SpacingSpecifier:
 
     def __init__(
         self,
+        fallback_duration=None,
         *,
         breaks=None,
-        fallback_duration=None,
         overrides=None,
     ):
         if breaks is not None:
@@ -57,7 +57,7 @@ class SpacingSpecifier:
         self.fallback_duration = fallback_duration
         self.overrides = overrides
 
-    def __call__(self, score, page_layout_profile, *, has_anchor_skip=False):
+    def __call__(self, score, page_layout_profile=None, *, has_anchor_skip=False):
         if self.fallback_duration is None:
             return
         page_layout_profile = page_layout_profile or {}

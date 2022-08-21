@@ -223,8 +223,8 @@ def make_monads(fractions):
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
+        >>> baca.SpacingSpecifier((1, 12))(score)
         >>> music = baca.make_monads("2/5 2/5 1/5")
         >>> score["Music"].extend(music)
         >>> _, _ = baca.interpret.section(
@@ -335,8 +335,8 @@ def make_repeat_tied_notes(
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
+        >>> baca.SpacingSpecifier((1, 12))(score)
 
         >>> music = baca.make_repeat_tied_notes(accumulator.get())
         >>> score["Music"].extend(music)

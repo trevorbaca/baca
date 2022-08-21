@@ -26,11 +26,9 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -128,11 +126,9 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -243,11 +239,9 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -359,11 +353,9 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -472,11 +464,9 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -654,8 +644,8 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -735,8 +725,8 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -816,8 +806,8 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -887,8 +877,8 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -967,8 +957,8 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -1038,8 +1028,8 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -1119,8 +1109,8 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -1211,11 +1201,9 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -1379,11 +1367,9 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -1559,11 +1545,9 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -1744,11 +1728,9 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -1940,11 +1922,9 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -2140,11 +2120,9 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -2317,11 +2295,9 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -2509,11 +2485,9 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -2705,11 +2679,9 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -2920,11 +2892,9 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -3120,11 +3090,9 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -3253,10 +3221,11 @@ r"""
         ...     append_anchor_skip=True,
         ...     docs=True,
         ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
         ...         fallback_duration=(1, 25),
         ...     ),
         ... )
+        >>> # baca.SpacingSpecifier((1, 25))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
@@ -3486,11 +3455,9 @@ r"""
         ...     {"abjad.MetronomeMark": metronome_marks},
         ...     docs=True,
         ...     previous_persist=persist,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -3818,8 +3785,8 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
         >>> override = baca.PersistentOverride(
         ...     attribute="bar_extent",
         ...     context="Staff",
@@ -3911,8 +3878,8 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -3995,8 +3962,8 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
         >>> override = baca.PersistentOverride(
         ...     attribute="bar_extent",
         ...     context="Staff",
@@ -4097,8 +4064,8 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -4168,8 +4135,8 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -4252,8 +4219,8 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -4335,8 +4302,8 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -4412,8 +4379,8 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 24)),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(

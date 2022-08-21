@@ -236,8 +236,8 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
+        >>> baca.SpacingSpecifier(fallback_duration=(1, 12))(score)
 
         >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
@@ -360,8 +360,8 @@ def new(*commands: Command | Suite, **keywords) -> Command | Suite:
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
+        >>> baca.SpacingSpecifier((1, 12))(score)
 
         >>> music = baca.make_even_divisions(accumulator.get())
         >>> score["Music"].extend(music)
@@ -539,8 +539,8 @@ def only_parts(command: Command | Suite) -> Command | Suite:
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(fallback_duration=(1, 12)),
         ... )
+        >>> baca.SpacingSpecifier((1, 12))(score)
 
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)

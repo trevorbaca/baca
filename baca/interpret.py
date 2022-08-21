@@ -194,53 +194,6 @@ def _append_tag_to_wrappers(leaf, tag):
             wrapper.tag = tag_
 
 
-def _apply_breaks(score, spacing):
-    if spacing is None:
-        return
-    if spacing.breaks is None:
-        return
-    global_skips = score["Skips"]
-    skips = _select.skips(global_skips)
-    measure_count = len(skips)
-    literal = abjad.LilyPondLiteral(r"\autoPageBreaksOff", "before")
-    abjad.attach(
-        literal,
-        skips[0],
-        tag=_tags.BREAK.append(_tags.function_name(_frame(), n=1)),
-    )
-    for skip in skips[:measure_count]:
-        if not abjad.get.has_indicator(skip, _layout.LBSD):
-            literal = abjad.LilyPondLiteral(r"\noBreak", "before")
-            abjad.attach(
-                literal,
-                skip,
-                tag=_tags.BREAK.append(_tags.function_name(_frame(), n=2)),
-            )
-    tag = _tags.function_name(inspect.currentframe())
-    tag = tag.append(_tags.BREAK)
-    for skip_index, indicators in spacing.breaks.skip_index_to_indicators.items():
-        measure_number = skip_index + 1
-        if measure_count < measure_number:
-            message = f"score ends at measure {measure_count}"
-            message += f" (not {measure_number})."
-            raise Exception(message)
-        skip = global_skips[skip_index]
-        for indicator in indicators:
-            abjad.attach(
-                indicator,
-                skip,
-                tag=tag,
-            )
-
-
-def _apply_spacing(page_layout_profile, score, spacing, *, has_anchor_skip=False):
-    spacing(
-        score,
-        page_layout_profile,
-        has_anchor_skip=has_anchor_skip,
-    )
-
-
 def _assert_nonoverlapping_rhythms(rhythms, voice):
     previous_stop_offset = 0
     for rhythm in rhythms:
@@ -2605,6 +2558,43 @@ def append_anchor_note() -> _commands.GenericCommand:
     return command
 
 
+def apply_breaks(score, breaks) -> None:
+    if breaks is None:
+        return
+    global_skips = score["Skips"]
+    skips = _select.skips(global_skips)
+    measure_count = len(skips)
+    literal = abjad.LilyPondLiteral(r"\autoPageBreaksOff", "before")
+    abjad.attach(
+        literal,
+        skips[0],
+        tag=_tags.BREAK.append(_tags.function_name(_frame(), n=1)),
+    )
+    for skip in skips[:measure_count]:
+        if not abjad.get.has_indicator(skip, _layout.LBSD):
+            literal = abjad.LilyPondLiteral(r"\noBreak", "before")
+            abjad.attach(
+                literal,
+                skip,
+                tag=_tags.BREAK.append(_tags.function_name(_frame(), n=2)),
+            )
+    tag = _tags.function_name(inspect.currentframe())
+    tag = tag.append(_tags.BREAK)
+    for skip_index, indicators in breaks.skip_index_to_indicators.items():
+        measure_number = skip_index + 1
+        if measure_count < measure_number:
+            message = f"score ends at measure {measure_count}"
+            message += f" (not {measure_number})."
+            raise Exception(message)
+        skip = global_skips[skip_index]
+        for indicator in indicators:
+            abjad.attach(
+                indicator,
+                skip,
+                tag=tag,
+            )
+
+
 def cache_leaves(score, measure_count, voice_abbreviations=None):
     measure_timespans = []
     for measure_index in range(measure_count):
@@ -3325,7 +3315,6 @@ def set_up_score(
     docs: bool = False,
     page_layout_profile: dict = None,
     previous_persist: dict = None,
-    # TODO: change 'spacing' to 'spacing_specifier'
     spacing: _layout.SpacingSpecifier = None,
 ) -> int:
     if accumulator is not None:
@@ -3355,13 +3344,8 @@ def set_up_score(
     first_measure_number = _adjust_first_measure_number(None, previous_metadata)
     _label_measure_numbers(first_measure_number, global_skips)
     if spacing is not None:
-        _apply_spacing(
-            page_layout_profile,
-            score,
-            spacing,
-            has_anchor_skip=append_anchor_skip,
-        )
-        _apply_breaks(score, spacing)
+        spacing(score, page_layout_profile, has_anchor_skip=append_anchor_skip)
+        apply_breaks(score, spacing.breaks)
     _attach_fermatas(
         always_make_global_rests,
         score,
