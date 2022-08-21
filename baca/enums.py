@@ -71,3 +71,9 @@ colors = types.SimpleNamespace(
     red_bold="\033[1;31m",
     yellow="\033[33m",
 )
+
+
+def dummy():
+    """
+    Read module-level items.
+    """

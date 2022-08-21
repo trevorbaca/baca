@@ -4,7 +4,6 @@ Interpret.
 import copy
 import dataclasses
 import importlib
-import inspect
 import os
 import pathlib
 import pprint
@@ -2568,7 +2567,9 @@ def apply_breaks(score, breaks) -> None:
     abjad.attach(
         literal,
         skips[0],
-        tag=_tags.BREAK.append(_tags.function_name(_frame(), n=1)),
+        # TODO: restore function name
+        # tag=_tags.BREAK.append(_tags.function_name(_frame(), n=1)),
+        tag=_tags.BREAK.append(abjad.Tag("baca._apply_breaks(1)")),
     )
     for skip in skips[:measure_count]:
         if not abjad.get.has_indicator(skip, _layout.LBSD):
@@ -2576,9 +2577,13 @@ def apply_breaks(score, breaks) -> None:
             abjad.attach(
                 literal,
                 skip,
-                tag=_tags.BREAK.append(_tags.function_name(_frame(), n=2)),
+                # TODO: restore function name
+                # tag=_tags.BREAK.append(_tags.function_name(_frame(), n=2)),
+                tag=_tags.BREAK.append(abjad.Tag("baca._apply_breaks(2)")),
             )
-    tag = _tags.function_name(inspect.currentframe())
+    # TODO: restore function name
+    # tag = _tags.function_name(inspect.currentframe())
+    tag = abjad.Tag("baca._apply_breaks()")
     tag = tag.append(_tags.BREAK)
     for skip_index, indicators in breaks.skip_index_to_indicators.items():
         measure_number = skip_index + 1
@@ -2739,9 +2744,10 @@ def make_layout_ly(
         accumulator,
         append_anchor_skip=has_anchor_skip,
         do_not_reapply_persistent_indicators=True,
-        page_layout_profile=page_layout_profile,
-        spacing=spacing,
     )
+    spacing(score, page_layout_profile, has_anchor_skip=has_anchor_skip)
+    # TODO: separate 'breaks' from SpacingSpecifier:
+    apply_breaks(score, spacing.breaks)
     _, _ = section(
         score,
         {},
@@ -3313,18 +3319,14 @@ def set_up_score(
     attach_nonfirst_empty_start_bar: bool = False,
     do_not_reapply_persistent_indicators: bool = False,
     docs: bool = False,
-    page_layout_profile: dict = None,
     previous_persist: dict = None,
-    spacing: _layout.SpacingSpecifier = None,
 ) -> int:
     if accumulator is not None:
         assert isinstance(accumulator, _accumulator.CommandAccumulator)
     manifests = manifests or {}
     assert isinstance(manifests, dict), repr(manifests)
-    assert isinstance(page_layout_profile, dict | type(None))
     previous_persist = previous_persist or {}
     assert isinstance(previous_persist, dict), repr(previous_persist)
-    assert isinstance(spacing, _layout.SpacingSpecifier | type(None))
     if docs is True:
         first_section = True
         previous_metadata = {}
@@ -3343,9 +3345,6 @@ def set_up_score(
         _attach_nonfirst_empty_start_bar(global_skips)
     first_measure_number = _adjust_first_measure_number(None, previous_metadata)
     _label_measure_numbers(first_measure_number, global_skips)
-    if spacing is not None:
-        spacing(score, page_layout_profile, has_anchor_skip=append_anchor_skip)
-        apply_breaks(score, spacing.breaks)
     _attach_fermatas(
         always_make_global_rests,
         score,

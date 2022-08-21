@@ -3220,11 +3220,8 @@ r"""
         ...     accumulator,
         ...     append_anchor_skip=True,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         fallback_duration=(1, 25),
-        ...     ),
         ... )
-        >>> # baca.SpacingSpecifier((1, 25))(score)
+        >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
         >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][1 - 1],
@@ -3271,7 +3268,7 @@ r"""
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #4 #'(8)
-                        \baca-new-spacing-section #1 #25
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
@@ -3283,10 +3280,10 @@ r"""
                         %@% - \abjad-invisible-line
                         %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "112"
                         %@% \bacaStartTextSpanMM
-                        \baca-new-spacing-section #1 #25
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-time-signature-transparent
                         \time 1/4
@@ -3325,11 +3322,9 @@ r"""
         ...     accumulator,
         ...     append_anchor_skip=True,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
@@ -3404,7 +3399,7 @@ r"""
                         \noBreak
                         s1 * 3/8
                         \revert TextSpanner.staff-padding
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-time-signature-transparent
                         \time 1/4
@@ -3543,11 +3538,9 @@ r"""
         ...     accumulator,
         ...     append_anchor_skip=True,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
@@ -3620,7 +3613,7 @@ r"""
                         %@% - \abjad-invisible-line
                         %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "112"
                         %@% \bacaStartTextSpanMM
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-time-signature-transparent
                         \time 1/4
@@ -3670,11 +3663,9 @@ r"""
         ...     append_anchor_skip=True,
         ...     docs=True,
         ...     previous_persist=persist,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
@@ -3741,7 +3732,7 @@ r"""
                         \noBreak
                         s1 * 3/8
                         \revert TextSpanner.staff-padding
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-time-signature-transparent
                         \time 1/4
@@ -4481,11 +4472,9 @@ r"""
         ...     accumulator,
         ...     append_anchor_skip=True,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 25),
-        ...     ),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
@@ -4531,7 +4520,7 @@ r"""
                     {
                         \autoPageBreaksOff
                         \baca-lbsd #4 #'(8)
-                        \baca-new-spacing-section #1 #25
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-time-signature-color #'blue
                         \pageBreak
@@ -4543,10 +4532,10 @@ r"""
                         - \abjad-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'blue) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        \baca-new-spacing-section #1 #25
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #4
+                        \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-time-signature-transparent
                         \time 1/4
@@ -4584,11 +4573,9 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
@@ -4690,11 +4677,9 @@ r"""
         ...     accumulator,
         ...     docs=True,
         ...     previous_persist=persist,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
         >>> accumulator(
@@ -4778,11 +4763,9 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
@@ -4886,11 +4869,9 @@ r"""
         ...     accumulator,
         ...     docs=True,
         ...     previous_persist=persist,
-        ...     spacing=baca.SpacingSpecifier(
-        ...         breaks=breaks,
-        ...         fallback_duration=(1, 24),
-        ...     ),
         ... )
+        >>> baca.SpacingSpecifier((1, 24))(score)
+        >>> baca.interpret.apply_breaks(score, breaks)
         >>> wrappers = baca.metronome_mark_function(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
@@ -4968,8 +4949,7 @@ r"""
 """
 
 
-def persistence():
+def dummy():
     """
     Read module-level examples.
     """
-    pass
