@@ -4,6 +4,7 @@ Interpret.
 import copy
 import dataclasses
 import importlib
+import inspect
 import os
 import pathlib
 import pprint
@@ -2551,9 +2552,7 @@ def apply_breaks(score, breaks) -> None:
     abjad.attach(
         literal,
         skips[0],
-        # TODO: restore function name
-        # tag=_tags.BREAK.append(_tags.function_name(_frame(), n=1)),
-        tag=_tags.BREAK.append(abjad.Tag("baca._apply_breaks(1)")),
+        tag=_tags.BREAK.append(_tags.function_name(_frame(), n=1)),
     )
     for skip in skips[:measure_count]:
         if not abjad.get.has_indicator(skip, _layout.LBSD):
@@ -2561,13 +2560,9 @@ def apply_breaks(score, breaks) -> None:
             abjad.attach(
                 literal,
                 skip,
-                # TODO: restore function name
-                # tag=_tags.BREAK.append(_tags.function_name(_frame(), n=2)),
-                tag=_tags.BREAK.append(abjad.Tag("baca._apply_breaks(2)")),
+                tag=_tags.BREAK.append(_tags.function_name(_frame(), n=2)),
             )
-    # TODO: restore function name
-    # tag = _tags.function_name(inspect.currentframe())
-    tag = abjad.Tag("baca._apply_breaks()")
+    tag = _tags.function_name(inspect.currentframe())
     tag = tag.append(_tags.BREAK)
     for skip_index, indicators in breaks.skip_index_to_indicators.items():
         measure_number = skip_index + 1
