@@ -19,6 +19,63 @@ from . import typings as _typings
 from .enums import enums as _enums
 
 
+def _do_accidental_adjustment_command(
+    argument,
+    *,
+    cautionary: bool = False,
+    forced: bool = False,
+    parenthesized: bool = False,
+    tag: abjad.Tag = abjad.Tag(),
+):
+    # if self.tag.string:
+    if tag.string:
+        # if not self.tag.only_edition() and not self.tag.not_editions():
+        if not tag.only_edition() and not tag.not_editions():
+            # raise Exception(f"tag must have edition: {self.tag!r}.")
+            raise Exception(f"tag must have edition: {tag!r}.")
+        # tag = _tags.function_name(_frame(), self)
+        here_tag = _tags.function_name(_frame())
+        # alternative_tag = self.tag.append(tag)
+        alternative_tag = tag.append(here_tag)
+        primary_tag = alternative_tag.invert_edition_tags()
+    pleaves = _select.pleaves(argument)
+    for pleaf in pleaves:
+        if isinstance(pleaf, abjad.Note):
+            note_heads = [pleaf.note_head]
+        else:
+            assert isinstance(pleaf, abjad.Chord)
+            note_heads = list(pleaf.note_heads)
+        for note_head in note_heads:
+            assert note_head is not None
+            # if not self.tag.string:
+            if not tag.string:
+                # if self.cautionary:
+                if cautionary:
+                    note_head.is_cautionary = True
+                # if self.forced:
+                if forced:
+                    note_head.is_forced = True
+                # if self.parenthesized:
+                if parenthesized:
+                    note_head.is_parenthesized = True
+            else:
+                alternative = copy.copy(note_head)
+                # if self.cautionary:
+                if cautionary:
+                    alternative.is_cautionary = True
+                # if self.forced:
+                if forced:
+                    alternative.is_forced = True
+                # if self.parenthesized:
+                if parenthesized:
+                    alternative.is_parenthesized = True
+                note_head.alternative = (
+                    alternative,
+                    alternative_tag,
+                    primary_tag,
+                )
+
+
 def _do_bcp_command(
     argument,
     bcps,
@@ -255,42 +312,13 @@ class AccidentalAdjustmentCommand(_command.Command):
             return False
         if self.selector is not None:
             argument = self.selector(argument)
-        if self.tag.string:
-            if not self.tag.only_edition() and not self.tag.not_editions():
-                raise Exception(f"tag must have edition: {self.tag!r}.")
-            tag = _tags.function_name(_frame(), self)
-            alternative_tag = self.tag.append(tag)
-            primary_tag = alternative_tag.invert_edition_tags()
-        pleaves = _select.pleaves(argument)
-        assert isinstance(pleaves, list)
-        for pleaf in pleaves:
-            if isinstance(pleaf, abjad.Note):
-                note_heads = [pleaf.note_head]
-            else:
-                assert isinstance(pleaf, abjad.Chord)
-                note_heads = list(pleaf.note_heads)
-            for note_head in note_heads:
-                assert note_head is not None
-                if not self.tag.string:
-                    if self.cautionary:
-                        note_head.is_cautionary = True
-                    if self.forced:
-                        note_head.is_forced = True
-                    if self.parenthesized:
-                        note_head.is_parenthesized = True
-                else:
-                    alternative = copy.copy(note_head)
-                    if self.cautionary:
-                        alternative.is_cautionary = True
-                    if self.forced:
-                        alternative.is_forced = True
-                    if self.parenthesized:
-                        alternative.is_parenthesized = True
-                    note_head.alternative = (
-                        alternative,
-                        alternative_tag,
-                        primary_tag,
-                    )
+        _do_accidental_adjustment_command(
+            argument,
+            cautionary=self.cautionary,
+            forced=self.forced,
+            parenthesized=self.parenthesized,
+            tag=self.tag,
+        )
         return False
 
 
@@ -488,6 +516,10 @@ def force_accidental(
     selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> AccidentalAdjustmentCommand:
     return AccidentalAdjustmentCommand(forced=True, selector=selector)
+
+
+def force_accidental_function(argument, *, tag: abjad.Tag = abjad.Tag()) -> None:
+    return _do_accidental_adjustment_command(argument, forced=True)
 
 
 def levine_multiphonic(n: int) -> abjad.Markup:
