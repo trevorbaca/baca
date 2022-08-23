@@ -519,7 +519,7 @@ def force_accidental(
 
 
 def force_accidental_function(argument, *, tag: abjad.Tag = abjad.Tag()) -> None:
-    return _do_accidental_adjustment_command(argument, forced=True)
+    return _do_accidental_adjustment_command(argument, forced=True, tag=tag)
 
 
 def levine_multiphonic(n: int) -> abjad.Markup:
