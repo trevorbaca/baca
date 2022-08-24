@@ -606,6 +606,22 @@ def finger_pressure_transition(
     )
 
 
+def finger_pressure_transition_function(argument) -> None:
+    tag = _tags.function_name(_frame())
+    tweaks = (
+        abjad.Tweak(r"- \tweak arrow-length 2"),
+        abjad.Tweak(r"- \tweak arrow-width 0.5"),
+        abjad.Tweak(r"- \tweak bound-details.right.arrow ##t"),
+        abjad.Tweak(r"- \tweak thickness 3"),
+    )
+    abjad.glissando(
+        argument,
+        *tweaks,
+        allow_repeats=True,
+        tag=tag,
+    )
+
+
 def flat_glissando(
     pitch: str
     | abjad.NamedPitch

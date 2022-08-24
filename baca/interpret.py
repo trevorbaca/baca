@@ -2473,8 +2473,8 @@ class DynamicScope:
     def rleak(self):
         return _select.rleak(self.argument)
 
-    def rleaves(self):
-        return _select.rleaves(self.argument, exclude=_enums.HIDDEN)
+    def rleaves(self, *, count=1):
+        return _select.rleaves(self.argument, count=count, exclude=_enums.HIDDEN)
 
     def tleaves(self):
         return _select.tleaves(self.argument)
