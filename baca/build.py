@@ -1103,8 +1103,6 @@ def section(
     interpreter=None,
     **keywords,
 ):
-    if not first_section:
-        assert 1 < first_measure_number, repr(first_measure_number)
     section_directory = pathlib.Path(os.getcwd())
     _arguments = arguments("--clicktrack", "--midi", "--pdf")
     if not any([_arguments.clicktrack, _arguments.midi, _arguments.pdf]):
