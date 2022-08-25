@@ -3313,12 +3313,9 @@ def set_up_score(
         first_section = True
     elif first_section or layout:
         previous_metadata, previous_persist = {}, {}
-    # TODO: pass previous_metadata, previous_persist in all sections:
-    elif not previous_metadata or not previous_persist:
-        section_directory = pathlib.Path(os.getcwd())
-        string = str(section_directory / "dummy.txt")
-        previous_metadata = _commands.previous_metadata(string)
-        previous_persist = _commands.previous_persist(string)
+    else:
+        assert previous_metadata, repr(previous_metadata)
+        assert previous_persist, repr(previous_persist)
     assert isinstance(previous_metadata, dict), repr(previous_metadata)
     assert isinstance(previous_persist, dict), repr(previous_persist)
     skips = score["Skips"]
