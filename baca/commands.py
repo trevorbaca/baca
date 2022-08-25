@@ -897,13 +897,13 @@ def label(
     return LabelCommand(callable_=callable_, selector=selector)
 
 
-def previous_metadata(path: str):
+def previous_metadata(path: str) -> dict:
     previous_section = _get_previous_section(path)
     previous_metadata = _path.get_metadata(previous_section, file_name="__metadata__")
     return previous_metadata
 
 
-def previous_persist(path: str):
+def previous_persist(path: str) -> dict:
     previous_section = _get_previous_section(path)
     previous_metadata = _path.get_metadata(previous_section, file_name="__persist__")
     return previous_metadata

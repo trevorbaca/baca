@@ -1099,9 +1099,12 @@ def section(
     *,
     commands=None,
     first_section=False,
+    first_measure_number: int = 1,
     interpreter=None,
     **keywords,
 ):
+    if not first_section:
+        assert 1 < first_measure_number, repr(first_measure_number)
     section_directory = pathlib.Path(os.getcwd())
     _arguments = arguments("--clicktrack", "--midi", "--pdf")
     if not any([_arguments.clicktrack, _arguments.midi, _arguments.pdf]):
@@ -1115,8 +1118,8 @@ def section(
     if section_directory.name == "01":
         previous_metadata, previous_persist = {}, {}
     else:
-        previous_metadata = baca.previous_metadata(section_directory / "dummy")
-        previous_persist = baca.previous_persist(section_directory / "dummy")
+        previous_metadata = baca.previous_metadata(str(section_directory / "dummy"))
+        previous_persist = baca.previous_persist(str(section_directory / "dummy"))
     first_section = first_section or section_directory.name == "01"
     with abjad.Timer() as timer:
         metadata, persist = interpreter(
@@ -1126,6 +1129,7 @@ def section(
             **keywords,
             commands=commands,
             first_section=first_section,
+            first_measure_number=first_measure_number,
             metadata=metadata,
             persist=persist,
             previous_metadata=previous_metadata,

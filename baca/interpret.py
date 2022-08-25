@@ -125,20 +125,6 @@ def _add_container_identifiers(score, section_number):
     return container_to_part_assignment
 
 
-def _adjust_first_measure_number(first_measure_number, previous_metadata):
-    if first_measure_number is not None:
-        return first_measure_number
-    if not previous_metadata:
-        return 1
-    string = "first_measure_number"
-    previous_first_measure_number = previous_metadata.get(string)
-    previous_time_signatures = previous_metadata.get("time_signatures")
-    if previous_first_measure_number is None or previous_time_signatures is None:
-        return 1
-    first_measure_number = previous_first_measure_number + len(previous_time_signatures)
-    return first_measure_number
-
-
 def _alive_during_previous_section(previous_persist, context):
     assert isinstance(context, abjad.Context), repr(context)
     names = previous_persist.get("alive_during_section", [])
@@ -1268,6 +1254,24 @@ def _extend_beams(score):
     for leaf in abjad.iterate.leaves(score):
         if abjad.get.indicator(leaf, _enums.RIGHT_BROKEN_BEAM):
             _extend_beam(leaf)
+
+
+def _find_first_measure_number(previous_metadata):
+    if not previous_metadata:
+        raise Exception("ASDF")
+    #    previous_first_measure_number = previous_metadata.get("first_measure_number")
+    #    if previous_first_measure_number is None:
+    #        return 1
+    #    previous_time_signatures = previous_metadata.get("time_signatures")
+    #    if previous_time_signatures is None:
+    #        return 1
+    #    first_measure_number = previous_first_measure_number + len(previous_time_signatures)
+    #    return first_measure_number
+    previous_final_measure_number = previous_metadata.get("final_measure_number")
+    if previous_final_measure_number is None:
+        return 1
+    first_measure_number = previous_final_measure_number + 1
+    return first_measure_number
 
 
 def _find_repeat_pitch_classes(argument):
@@ -3025,7 +3029,7 @@ def section(
     fermata_extra_offset_y=2.5,
     fermata_measure_empty_overrides=(),
     final_section=False,
-    first_measure_number=None,
+    first_measure_number: int = 1,
     first_section=False,
     force_nonnatural_accidentals=False,
     global_rests_in_every_staff=False,
@@ -3065,10 +3069,7 @@ def section(
     assert isinstance(empty_fermata_measures, bool)
     assert all(0 < _ for _ in fermata_measure_empty_overrides)
     assert isinstance(final_section, bool)
-    first_measure_number = _adjust_first_measure_number(
-        first_measure_number,
-        previous_metadata,
-    )
+    assert isinstance(first_measure_number, int)
     assert isinstance(first_section, bool)
     assert isinstance(force_nonnatural_accidentals, bool)
     global_skips = score["Skips"]
@@ -3088,7 +3089,7 @@ def section(
     previous_persistent_indicators = previous_persist.get("persistent_indicators", {})
     assert isinstance(transpose_score, bool)
     assert isinstance(treat_untreated_persistent_wrappers, bool)
-    voice_name_to_parameter_to_state = {}
+    voice_name_to_parameter_to_state: dict[str, dict] = {}
     already_reapplied_contexts = {"Score"}
     # set_up_score()
     offset_to_measure_number = _populate_offset_to_measure_number(
@@ -3298,40 +3299,33 @@ def set_up_score(
     append_anchor_skip: bool = False,
     do_not_reapply_persistent_indicators: bool = False,
     docs: bool = False,
+    first_measure_number: int = 1,
     first_section: bool = False,
     layout: bool = False,
-    previous_metadata: dict = None,
-    previous_persist: dict = None,
+    previous_persistent_indicators: dict = None,
 ) -> int:
     if accumulator is not None:
         assert isinstance(accumulator, _accumulator.CommandAccumulator)
     manifests = manifests or {}
     assert isinstance(manifests, dict), repr(manifests)
-    previous_metadata = previous_metadata or {}
-    previous_persist = previous_persist or {}
     if docs:
         first_section = True
-    elif first_section or layout:
-        previous_metadata, previous_persist = {}, {}
-    else:
-        assert previous_metadata, repr(previous_metadata)
-        assert previous_persist, repr(previous_persist)
-    assert isinstance(previous_metadata, dict), repr(previous_metadata)
-    assert isinstance(previous_persist, dict), repr(previous_persist)
+    #    elif first_section or layout:
+    #        previous_metadata, previous_persist = {}, {}
+    #    else:
+    #        assert previous_metadata, repr(previous_metadata)
+    #        assert previous_persist, repr(previous_persist)
     skips = score["Skips"]
     _make_global_skips(skips, time_signatures, append_anchor_skip=append_anchor_skip)
     if not first_section:
         _attach_nonfirst_empty_start_bar(skips)
-    first_measure_number = _adjust_first_measure_number(None, previous_metadata)
+    # first_measure_number = _find_first_measure_number(previous_metadata)
     _label_measure_numbers(first_measure_number, skips)
     if always_make_global_rests:
         _make_global_rests(score["Rests"], time_signatures)
     else:
         del score["Rests"]
-    if not do_not_reapply_persistent_indicators:
-        previous_persistent_indicators = previous_persist.get(
-            "persistent_indicators", {}
-        )
+    if previous_persistent_indicators and not do_not_reapply_persistent_indicators:
         _reapply_persistent_indicators(
             manifests,
             previous_persistent_indicators,

@@ -3449,7 +3449,7 @@ r"""
         ...     accumulator,
         ...     {"abjad.MetronomeMark": metronome_marks},
         ...     docs=True,
-        ...     previous_persist=persist,
+        ...     previous_persistent_indicators=persist["persistent_indicators"],
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
@@ -3662,7 +3662,7 @@ r"""
         ...     {"abjad.MetronomeMark": metronome_marks},
         ...     append_anchor_skip=True,
         ...     docs=True,
-        ...     previous_persist=persist,
+        ...     previous_persistent_indicators=persist["persistent_indicators"],
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
@@ -4676,7 +4676,7 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     previous_persist=persist,
+        ...     previous_persistent_indicators=persist["persistent_indicators"],
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
@@ -4868,7 +4868,7 @@ r"""
         ...     accumulator.time_signatures,
         ...     accumulator,
         ...     docs=True,
-        ...     previous_persist=persist,
+        ...     previous_persistent_indicators=persist["persistent_indicators"],
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
