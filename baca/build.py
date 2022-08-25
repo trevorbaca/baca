@@ -1103,6 +1103,7 @@ def section(
     interpreter=None,
     **keywords,
 ):
+    # TODO: pass in section_directory; do not read global info here:
     section_directory = pathlib.Path(os.getcwd())
     _arguments = arguments("--clicktrack", "--midi", "--pdf")
     if not any([_arguments.clicktrack, _arguments.midi, _arguments.pdf]):
@@ -1111,12 +1112,17 @@ def section(
     commands = commands or []
     _print_main_task("Interpreting commands ...")
     interpreter = interpreter or baca.interpret.section
+    # TODO: pass in metadata; do not read global info here:
     metadata = baca.path.get_metadata(section_directory)
+    # TODO: pass in persist; do not read global info here:
+    # TODO: creat baca.path.get_persist() function:
     persist = baca.path.get_metadata(section_directory, file_name="__persist__")
     if section_directory.name == "01":
         previous_metadata, previous_persist = {}, {}
     else:
+        # TODO: pass in previous_metadata; do not read global info here:
         previous_metadata = baca.previous_metadata(str(section_directory / "dummy"))
+        # TODO: pass in previous_persist; do not read global info here:
         previous_persist = baca.previous_persist(str(section_directory / "dummy"))
     first_section = first_section or section_directory.name == "01"
     with abjad.Timer() as timer:
