@@ -1132,7 +1132,6 @@ def section(
             time_signatures,
             **keywords,
             commands=commands,
-            first_section=first_section,
             first_measure_number=first_measure_number,
             metadata=metadata,
             persist=persist,
