@@ -782,13 +782,10 @@ def flat_glissando_function(
                 mock=mock,
             )
     elif pitch is not None and stop_pitch is not None:
-        pass
-        """
-        TODO: make interpolate_staff_positions_function()
-        TODO: make interpolate_pitches_function()
         if isinstance(pitch, abjad.StaffPosition):
             assert isinstance(stop_pitch, abjad.StaffPosition)
-            _pitchcommands._interpolate_staff_positions_function(
+            raise Exception("port interpolate_staff_positions_function()")
+            _pitchcommands.interpolate_staff_positions_function(
                 argument,
                 pitch,
                 stop_pitch,
@@ -798,14 +795,13 @@ def flat_glissando_function(
         else:
             assert isinstance(pitch, str | abjad.NamedPitch)
             assert isinstance(stop_pitch, str | abjad.NamedPitch)
-            _pitchcommands._interpolate_pitches_function(
+            _pitchcommands.interpolate_pitches_function(
                 argument,
                 pitch,
                 stop_pitch,
                 allow_hidden=allow_hidden,
                 mock=mock,
             )
-        """
 
 
 def fractions(items):
