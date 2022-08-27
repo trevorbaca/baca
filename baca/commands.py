@@ -85,7 +85,8 @@ def _do_bcp_command(
     final_spanner=None,
     tag=None,
     tweaks=None,
-):
+) -> list[abjad.Wrapper]:
+    wrappers = []
     if tag is None:
         tag = abjad.Tag()
     bcps_ = list(bcps)
@@ -109,20 +110,21 @@ def _do_bcp_command(
     if final_spanner and not _is_rest(lts[-1]) and len(lts[-1]) == 1:
         next_leaf_after_argument = abjad.get.leaf(lts[-1][-1], 1)
         if next_leaf_after_argument is None:
-            message = "can not attach final spanner:"
-            message += " argument includes end of score."
+            message = "can not attach final spanner: argument includes end of score."
             raise Exception(message)
     previous_bcp = None
     i = 0
     for lt in lts:
         stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanBCP")
         if not final_spanner and lt is lts[-1] and not _is_rest(lt.head):
-            abjad.attach(
+            wrapper = abjad.attach(
                 stop_text_span,
                 lt.head,
                 # tag=self.tag.append(_tags.function_name(_frame(), self, n=1)),
                 tag=tag.append(abjad.Tag("baca.bcps(1)")),
+                wrapper=True,
             )
+            wrappers.append(wrapper)
             break
         previous_leaf = abjad.get.leaf(lt.head, -1)
         next_leaf = abjad.get.leaf(lt.head, 1)
@@ -166,26 +168,32 @@ def _do_bcp_command(
         if _is_rest(lt.head) and (_is_rest(next_leaf) or next_leaf is None):
             pass
         else:
-            abjad.attach(
+            wrapper = abjad.attach(
                 start_text_span,
                 lt.head,
                 # tag=self.tag.append(_tags.function_name(_frame(), self, n=2)),
                 tag=tag.append(abjad.Tag("baca.bcps(2)")),
+                wrapper=True,
             )
+            wrappers.append(wrapper)
         if 0 < i - 1:
-            abjad.attach(
+            wrapper = abjad.attach(
                 stop_text_span,
                 lt.head,
                 # tag=self.tag.append(_tags.function_name(_frame(), self, n=3)),
                 tag=tag.append(abjad.Tag("baca.bcps(3)")),
+                wrapper=True,
             )
+            wrappers.append(wrapper)
         if lt is lts[-1] and final_spanner:
-            abjad.attach(
+            wrapper = abjad.attach(
                 stop_text_span,
                 next_leaf_after_argument,
                 # tag=self.tag.append(_tags.function_name(_frame(), self, n=4)),
                 tag=tag.append(abjad.Tag("baca.bcps(4)")),
+                wrapper=True,
             )
+            wrappers.append(wrapper)
         bcp_fraction = abjad.Fraction(*bcp)
         next_bcp_fraction = abjad.Fraction(*bcps[i])
         if _is_rest(lt.head):
@@ -198,12 +206,14 @@ def _do_bcp_command(
                         articulation,
                         bow_change_tweaks,
                     )
-                abjad.attach(
+                wrapper = abjad.attach(
                     articulation,
                     lt.head,
                     # tag=self.tag.append(_tags.function_name(_frame(), self, n=5)),
                     tag=tag.append(abjad.Tag("baca.bcps(5)")),
+                    wrapper=True,
                 )
+                wrappers.append(wrapper)
             elif bcp_fraction < next_bcp_fraction:
                 articulation = abjad.Articulation("downbow")
                 if bow_change_tweaks:
@@ -211,12 +221,14 @@ def _do_bcp_command(
                         articulation,
                         bow_change_tweaks,
                     )
-                abjad.attach(
+                wrapper = abjad.attach(
                     articulation,
                     lt.head,
                     # tag=self.tag.append(_tags.function_name(_frame(), self, n=6)),
                     tag=tag.append(abjad.Tag("baca.bcps(6)")),
+                    wrapper=True,
                 )
+                wrappers.append(wrapper)
         else:
             previous_bcp_fraction = abjad.Fraction(*previous_bcp)
             if previous_bcp_fraction < bcp_fraction > next_bcp_fraction:
@@ -226,12 +238,14 @@ def _do_bcp_command(
                         articulation,
                         bow_change_tweaks,
                     )
-                abjad.attach(
+                wrapper = abjad.attach(
                     articulation,
                     lt.head,
                     # tag=self.tag.append(_tags.function_name(_frame(), self, n=7)),
                     tag=tag.append(abjad.Tag("baca.bcps(7)")),
+                    wrapper=True,
                 )
+                wrappers.append(wrapper)
             elif previous_bcp_fraction > bcp_fraction < next_bcp_fraction:
                 articulation = abjad.Articulation("downbow")
                 if bow_change_tweaks:
@@ -239,13 +253,16 @@ def _do_bcp_command(
                         articulation,
                         bow_change_tweaks,
                     )
-                abjad.attach(
+                wrapper = abjad.attach(
                     articulation,
                     lt.head,
                     # tag=self.tag.append(_tags.function_name(_frame(), self, n=8)),
                     tag=tag.append(abjad.Tag("baca.bcps(8)")),
+                    wrapper=True,
                 )
+                wrappers.append(wrapper)
         previous_bcp = bcp
+    return wrappers
 
 
 def _do_detach_command(argument, indicators):
@@ -556,8 +573,8 @@ def bcps_function(
     final_spanner: bool = False,
     helper: typing.Callable = lambda x, y: x,
     tag=abjad.Tag("baca.bcps_function()"),
-) -> None:
-    _do_bcp_command(
+) -> list[abjad.Wrapper]:
+    return _do_bcp_command(
         argument,
         bcps,
         bow_change_tweaks=bow_change_tweaks,
