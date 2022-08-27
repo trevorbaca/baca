@@ -27,15 +27,10 @@ def _do_accidental_adjustment_command(
     parenthesized: bool = False,
     tag: abjad.Tag = abjad.Tag(),
 ):
-    # if self.tag.string:
     if tag.string:
-        # if not self.tag.only_edition() and not self.tag.not_editions():
         if not tag.only_edition() and not tag.not_editions():
-            # raise Exception(f"tag must have edition: {self.tag!r}.")
             raise Exception(f"tag must have edition: {tag!r}.")
-        # tag = _tags.function_name(_frame(), self)
         here_tag = _tags.function_name(_frame())
-        # alternative_tag = self.tag.append(tag)
         alternative_tag = tag.append(here_tag)
         primary_tag = alternative_tag.invert_edition_tags()
     pleaves = _select.pleaves(argument)
@@ -47,26 +42,19 @@ def _do_accidental_adjustment_command(
             note_heads = list(pleaf.note_heads)
         for note_head in note_heads:
             assert note_head is not None
-            # if not self.tag.string:
             if not tag.string:
-                # if self.cautionary:
                 if cautionary:
                     note_head.is_cautionary = True
-                # if self.forced:
                 if forced:
                     note_head.is_forced = True
-                # if self.parenthesized:
                 if parenthesized:
                     note_head.is_parenthesized = True
             else:
                 alternative = copy.copy(note_head)
-                # if self.cautionary:
                 if cautionary:
                     alternative.is_cautionary = True
-                # if self.forced:
                 if forced:
                     alternative.is_forced = True
-                # if self.parenthesized:
                 if parenthesized:
                     alternative.is_parenthesized = True
                 note_head.alternative = (
@@ -120,8 +108,7 @@ def _do_bcp_command(
             wrapper = abjad.attach(
                 stop_text_span,
                 lt.head,
-                # tag=self.tag.append(_tags.function_name(_frame(), self, n=1)),
-                tag=tag.append(abjad.Tag("baca.bcps(1)")),
+                tag=_tags.function_name(_frame(), n=1),
                 wrapper=True,
             )
             wrappers.append(wrapper)
@@ -171,8 +158,7 @@ def _do_bcp_command(
             wrapper = abjad.attach(
                 start_text_span,
                 lt.head,
-                # tag=self.tag.append(_tags.function_name(_frame(), self, n=2)),
-                tag=tag.append(abjad.Tag("baca.bcps(2)")),
+                tag=_tags.function_name(_frame(), n=2),
                 wrapper=True,
             )
             wrappers.append(wrapper)
@@ -180,8 +166,7 @@ def _do_bcp_command(
             wrapper = abjad.attach(
                 stop_text_span,
                 lt.head,
-                # tag=self.tag.append(_tags.function_name(_frame(), self, n=3)),
-                tag=tag.append(abjad.Tag("baca.bcps(3)")),
+                tag=_tags.function_name(_frame(), n=3),
                 wrapper=True,
             )
             wrappers.append(wrapper)
@@ -189,8 +174,7 @@ def _do_bcp_command(
             wrapper = abjad.attach(
                 stop_text_span,
                 next_leaf_after_argument,
-                # tag=self.tag.append(_tags.function_name(_frame(), self, n=4)),
-                tag=tag.append(abjad.Tag("baca.bcps(4)")),
+                tag=_tags.function_name(_frame(), n=4),
                 wrapper=True,
             )
             wrappers.append(wrapper)
@@ -209,8 +193,7 @@ def _do_bcp_command(
                 wrapper = abjad.attach(
                     articulation,
                     lt.head,
-                    # tag=self.tag.append(_tags.function_name(_frame(), self, n=5)),
-                    tag=tag.append(abjad.Tag("baca.bcps(5)")),
+                    tag=_tags.function_name(_frame(), n=5),
                     wrapper=True,
                 )
                 wrappers.append(wrapper)
@@ -224,8 +207,7 @@ def _do_bcp_command(
                 wrapper = abjad.attach(
                     articulation,
                     lt.head,
-                    # tag=self.tag.append(_tags.function_name(_frame(), self, n=6)),
-                    tag=tag.append(abjad.Tag("baca.bcps(6)")),
+                    tag=_tags.function_name(_frame(), n=6),
                     wrapper=True,
                 )
                 wrappers.append(wrapper)
@@ -241,8 +223,7 @@ def _do_bcp_command(
                 wrapper = abjad.attach(
                     articulation,
                     lt.head,
-                    # tag=self.tag.append(_tags.function_name(_frame(), self, n=7)),
-                    tag=tag.append(abjad.Tag("baca.bcps(7)")),
+                    tag=_tags.function_name(_frame(), n=7),
                     wrapper=True,
                 )
                 wrappers.append(wrapper)
@@ -256,8 +237,7 @@ def _do_bcp_command(
                 wrapper = abjad.attach(
                     articulation,
                     lt.head,
-                    # tag=self.tag.append(_tags.function_name(_frame(), self, n=8)),
-                    tag=tag.append(abjad.Tag("baca.bcps(8)")),
+                    tag=_tags.function_name(_frame(), n=8),
                     wrapper=True,
                 )
                 wrappers.append(wrapper)
@@ -572,17 +552,18 @@ def bcps_function(
     bow_change_tweaks: typing.Sequence[_typings.IndexedTweak] = (),
     final_spanner: bool = False,
     helper: typing.Callable = lambda x, y: x,
-    tag=abjad.Tag("baca.bcps_function()"),
 ) -> list[abjad.Wrapper]:
-    return _do_bcp_command(
+    wrappers = _do_bcp_command(
         argument,
         bcps,
         bow_change_tweaks=bow_change_tweaks,
         helper=helper,
         final_spanner=final_spanner,
-        tag=tag,
         tweaks=tweaks,
     )
+    tag = _tags.function_name(_frame())
+    _tags.wrappers(wrappers, tag)
+    return wrappers
 
 
 def color(
