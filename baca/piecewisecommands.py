@@ -690,6 +690,38 @@ def circle_bow_spanner(
     return result
 
 
+def circle_bow_spanner_function(
+    argument,
+    *tweaks: _typings.IndexedTweak,
+    left_broken: bool = False,
+    left_broken_text: str | None = r"\baca-left-broken-circle-bowing-markup",
+    pieces: typing.Callable = lambda _: abjad.select.group(_),
+    qualifier: str = None,
+    right_broken: bool = False,
+) -> list[abjad.Wrapper]:
+    tag = _tags.function_name(_frame())
+    tag = tag.append(_tags.CIRCLE_BOW_SPANNER)
+    if qualifier is None:
+        string = r"\baca-circle-markup =|"
+    else:
+        assert isinstance(qualifier, str), repr(qualifier)
+        string = rf"\baca-circle-{qualifier}-markup =|"
+    wrappers = text_spanner_function(
+        argument,
+        string,
+        *tweaks,
+        autodetect_right_padding=True,
+        bookend=False,
+        left_broken=left_broken,
+        left_broken_text=left_broken_text,
+        lilypond_id="CircleBow",
+        pieces=pieces,
+        right_broken=right_broken,
+    )
+    _tags.wrappers(wrappers, tag)
+    return wrappers
+
+
 def clb_spanner(
     string_number: int,
     *tweaks: _typings.IndexedTweak,
@@ -875,6 +907,34 @@ def damp_spanner(
     result = dataclasses.replace(command, tags=[tag])
     assert isinstance(result, PiecewiseCommand)
     return result
+
+
+def damp_spanner_function(
+    argument,
+    *tweaks: _typings.IndexedTweak,
+    # NOTE: autodetect default differs from text_spanner():
+    autodetect_right_padding: bool = True,
+    left_broken: bool = False,
+    left_broken_text: str | None = r"\baca-left-broken-damp-markup",
+    pieces: typing.Callable = lambda _: abjad.select.group(_),
+    right_broken: bool = False,
+) -> list[abjad.Wrapper]:
+    tag = _tags.function_name(_frame())
+    tag = tag.append(_tags.DAMP_SPANNER)
+    wrappers = text_spanner_function(
+        argument,
+        r"\baca-damp-markup =|",
+        *tweaks,
+        autodetect_right_padding=autodetect_right_padding,
+        bookend=False,
+        left_broken=left_broken,
+        left_broken_text=left_broken_text,
+        lilypond_id="Damp",
+        pieces=pieces,
+        right_broken=right_broken,
+    )
+    _tags.wrappers(wrappers, tag)
+    return wrappers
 
 
 def hairpin(
@@ -1638,6 +1698,36 @@ def tasto_spanner(
     result = dataclasses.replace(command, tags=[tag])
     assert isinstance(result, PiecewiseCommand)
     return result
+
+
+def tasto_spanner_function(
+    argument,
+    *tweaks: _typings.IndexedTweak,
+    autodetect_right_padding: bool = True,
+    bookend: bool | int = False,
+    final_piece_spanner: bool | None = None,
+    left_broken: bool = False,
+    left_broken_text: str = r"\baca-left-broken-t-markup",
+    pieces: typing.Callable = lambda _: abjad.select.group(_),
+    right_broken: bool = False,
+) -> list[abjad.Wrapper]:
+    tag = _tags.function_name(_frame())
+    tag = tag.append(_tags.TASTO_SPANNER)
+    wrappers = text_spanner_function(
+        argument,
+        "T =|",
+        *tweaks,
+        autodetect_right_padding=autodetect_right_padding,
+        bookend=bookend,
+        final_piece_spanner=final_piece_spanner,
+        left_broken=left_broken,
+        left_broken_text=left_broken_text,
+        lilypond_id="SCP",
+        pieces=pieces,
+        right_broken=right_broken,
+    )
+    _tags.wrappers(wrappers, tag)
+    return wrappers
 
 
 def text_spanner(
