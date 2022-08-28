@@ -2432,6 +2432,12 @@ class DynamicScope:
     def leaves(self):
         return abjad.select.leaves(self.argument, exclude=_enums.HIDDEN)
 
+    def lleaf(self, n):
+        return _select.lleaf(self.argument, n, exclude=_enums.HIDDEN)
+
+    def lleaves(self):
+        return _select.lleaves(self.argument, exclude=_enums.HIDDEN)
+
     def ltleaves(self):
         return _select.ltleaves(self.argument, exclude=_enums.HIDDEN)
 
