@@ -90,7 +90,7 @@ def _make_lilypond_file(
     return lilypond_file
 
 
-def make_lilypond_file(
+def file(
     score,
     clock_time_extra_offset=None,
     include_layout_ly=False,
@@ -125,6 +125,3 @@ def make_lilypond_file(
         score,
     )
     return lilypond_file
-
-
-file = make_lilypond_file

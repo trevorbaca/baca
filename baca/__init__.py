@@ -33,7 +33,7 @@ from .interpret import (
     update_voice_name_to_parameter_to_state,
 )
 from .layout import *
-from .lilypond import file, make_lilypond_file
+from .lilypond import file
 from .memento import *
 from .overridecommands import *
 from .othercommands import assign_part, assign_part_function
