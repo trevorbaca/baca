@@ -3062,6 +3062,7 @@ def section(
 ):
     assert isinstance(score, abjad.Score), repr(score)
     if activate is not None:
+        assert isinstance(activate, list), repr(activate)
         assert all(isinstance(_, abjad.Tag) for _ in activate)
     assert isinstance(all_music_in_part_containers, bool)
     assert isinstance(allow_empty_selections, bool)
@@ -3070,6 +3071,7 @@ def section(
     assert isinstance(color_octaves, bool)
     assert isinstance(do_not_check_wellformedness, bool)
     if deactivate is not None:
+        assert isinstance(deactivate, list), repr(deactivate)
         assert all(isinstance(_, abjad.Tag) for _ in deactivate)
     assert isinstance(do_not_require_short_instrument_names, bool)
     assert isinstance(empty_fermata_measures, bool)
