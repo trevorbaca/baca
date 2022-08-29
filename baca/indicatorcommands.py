@@ -260,13 +260,14 @@ def articulations_function(argument, articulations: list) -> list[abjad.Wrapper]
     cyclic_articulations = abjad.CyclicTuple(articulations)
     for i, leaf in enumerate(leaves):
         indicator = cyclic_articulations[i]
-        wrapper = abjad.attach(
-            indicator,
-            leaf,
-            tag=tag,
-            wrapper=True,
-        )
-        wrappers.append(wrapper)
+        if indicator is not None:
+            wrapper = abjad.attach(
+                indicator,
+                leaf,
+                tag=tag,
+                wrapper=True,
+            )
+            wrappers.append(wrapper)
     return wrappers
 
 
