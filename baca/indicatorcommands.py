@@ -629,9 +629,12 @@ def dynamic_function(
     argument,
     dynamic: str | abjad.Dynamic,
     *tweaks: abjad.Tweak,
+    redundant: bool = False,
 ) -> list[abjad.Wrapper]:
+    wrappers: list[abjad.Wrapper] = []
+    if redundant:
+        return wrappers
     tag = _tags.function_name(_frame())
-    wrappers = []
     for leaf in abjad.select.leaves(argument):
         if isinstance(dynamic, str):
             indicator = _dynamics.make_dynamic(dynamic)
