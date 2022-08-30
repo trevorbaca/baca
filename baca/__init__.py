@@ -50,6 +50,7 @@ from .pcollections import (
 from .piecewisecommands import (
     PiecewiseCommand,
     bow_speed_spanner,
+    bow_speed_spanner_function,
     circle_bow_spanner,
     circle_bow_spanner_function,
     clb_spanner,
