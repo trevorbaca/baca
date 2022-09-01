@@ -2426,11 +2426,11 @@ class DynamicScope:
         except TypeError:
             return 1
 
-    def leaf(self, n):
-        return abjad.select.leaf(self.argument, n, exclude=_enums.HIDDEN)
+    def leaf(self, n, *, grace=None):
+        return abjad.select.leaf(self.argument, n, exclude=_enums.HIDDEN, grace=grace)
 
-    def leaves(self):
-        return abjad.select.leaves(self.argument, exclude=_enums.HIDDEN)
+    def leaves(self, *, grace=None):
+        return abjad.select.leaves(self.argument, exclude=_enums.HIDDEN, grace=grace)
 
     def lleaf(self, n):
         return _select.lleaf(self.argument, n, exclude=_enums.HIDDEN)
@@ -2450,20 +2450,20 @@ class DynamicScope:
     def phead(self, n):
         return _select.phead(self.argument, n, exclude=_enums.HIDDEN)
 
-    def pheads(self):
-        return _select.pheads(self.argument, exclude=_enums.HIDDEN)
+    def pheads(self, *, grace=None):
+        return _select.pheads(self.argument, exclude=_enums.HIDDEN, grace=grace)
 
-    def pleaf(self, n):
-        return _select.pleaf(self.argument, n, exclude=_enums.HIDDEN)
+    def pleaf(self, n, *, grace=None):
+        return _select.pleaf(self.argument, n, exclude=_enums.HIDDEN, grace=grace)
 
-    def pleaves(self):
-        return _select.pleaves(self.argument, exclude=_enums.HIDDEN)
+    def pleaves(self, *, grace=None):
+        return _select.pleaves(self.argument, exclude=_enums.HIDDEN, grace=grace)
 
     def plt(self, n):
         return _select.plt(self.argument, n, exclude=_enums.HIDDEN)
 
-    def plts(self):
-        return _select.plts(self.argument, exclude=_enums.HIDDEN)
+    def plts(self, *, grace=None):
+        return _select.plts(self.argument, exclude=_enums.HIDDEN, grace=grace)
 
     def ptail(self, n):
         return _select.ptail(self.argument, n, exclude=_enums.HIDDEN)

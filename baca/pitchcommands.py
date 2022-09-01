@@ -120,6 +120,7 @@ def _do_pitch_command(
     pitches,
     *,
     allow_hidden: bool = False,
+    allow_obgc_mutation: bool = False,
     allow_octaves: bool = False,
     allow_out_of_range: bool = False,
     allow_repeats: bool = False,
@@ -154,6 +155,7 @@ def _do_pitch_command(
         new_plt = _set_lt_pitch(
             plt,
             pitch,
+            allow_obgc_mutation=allow_obgc_mutation,
             allow_hidden=allow_hidden,
             allow_repitch=allow_repitch,
             mock=mock,
@@ -214,6 +216,7 @@ def _do_staff_position_command(
     numbers,
     *,
     allow_hidden=False,
+    allow_obgc_mutation=False,
     allow_out_of_range=False,
     allow_repitch=False,
     exact=False,
@@ -239,6 +242,7 @@ def _do_staff_position_command(
                 plt,
                 pitches,
                 allow_hidden=allow_hidden,
+                allow_obgc_mutation=allow_obgc_mutation,
                 allow_repitch=allow_repitch,
                 mock=mock,
                 set_chord_pitches_equal=set_chord_pitches_equal,
@@ -253,6 +257,7 @@ def _do_staff_position_command(
                 plt,
                 pitch,
                 allow_hidden=allow_hidden,
+                allow_obgc_mutation=allow_obgc_mutation,
                 allow_repitch=allow_repitch,
                 mock=mock,
                 set_chord_pitches_equal=set_chord_pitches_equal,
@@ -462,6 +467,7 @@ def _set_lt_pitch(
     pitch,
     *,
     allow_hidden=False,
+    allow_obgc_mutation=False,
     allow_repitch=False,
     mock=False,
     set_chord_pitches_equal=False,
@@ -516,6 +522,8 @@ def _set_lt_pitch(
                     note_head.written_pitch = pitch
         else:
             assert isinstance(lt.head, abjad.Chord | abjad.Rest)
+            if not allow_obgc_mutation:
+                raise Exception("set allow_obgc_mutation=True")
             for leaf in lt:
                 note = abjad.Note(
                     pitch,
@@ -4735,6 +4743,7 @@ def pitches_function(
     pitches,
     *,
     allow_hidden: bool = False,
+    allow_obgc_mutation: bool = False,
     allow_octaves: bool = False,
     allow_repeats: bool = False,
     allow_repitch: bool = False,
@@ -4773,6 +4782,7 @@ def pitches_function(
         pitches,
         allow_hidden=allow_hidden,
         allow_octaves=allow_octaves,
+        allow_obgc_mutation=allow_obgc_mutation,
         allow_repeats=allow_repeats,
         allow_repitch=allow_repitch,
         do_not_transpose=do_not_transpose,
@@ -5388,6 +5398,7 @@ def staff_position_function(
     numbers: int | list | abjad.StaffPosition,
     *,
     allow_hidden: bool = False,
+    allow_obgc_mutation: bool = False,
     allow_out_of_range: bool = False,
     allow_repitch: bool = False,
     mock: bool = False,
@@ -5400,6 +5411,7 @@ def staff_position_function(
         argument,
         [numbers],
         allow_hidden=allow_hidden,
+        allow_obgc_mutation=allow_obgc_mutation,
         allow_out_of_range=allow_out_of_range,
         allow_repitch=allow_repitch,
         mock=mock,
