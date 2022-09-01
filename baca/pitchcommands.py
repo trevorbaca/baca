@@ -522,8 +522,8 @@ def _set_lt_pitch(
                     note_head.written_pitch = pitch
         else:
             assert isinstance(lt.head, abjad.Chord | abjad.Rest)
-            if not allow_obgc_mutation:
-                raise Exception("set allow_obgc_mutation=True")
+            # if not allow_obgc_mutation:
+            #     raise Exception("set allow_obgc_mutation=True")
             for leaf in lt:
                 note = abjad.Note(
                     pitch,
