@@ -1548,6 +1548,7 @@ def scp_spanner_function(
         *tweaks,
         autodetect_right_padding=autodetect_right_padding,
         bookend=bookend,
+        final_piece_spanner=final_piece_spanner,
         left_broken=left_broken,
         left_broken_text=left_broken_text,
         lilypond_id="SCP",
