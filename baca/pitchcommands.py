@@ -522,8 +522,9 @@ def _set_lt_pitch(
                     note_head.written_pitch = pitch
         else:
             assert isinstance(lt.head, abjad.Chord | abjad.Rest)
-            # if not allow_obgc_mutation:
-            #     raise Exception("set allow_obgc_mutation=True")
+            if not allow_obgc_mutation:
+                # raise Exception("set allow_obgc_mutation=True")
+                pass
             for leaf in lt:
                 note = abjad.Note(
                     pitch,
@@ -5447,6 +5448,7 @@ def staff_positions_function(
     numbers,
     *,
     allow_hidden: bool = False,
+    allow_obgc_mutation: bool = False,
     allow_out_of_range: bool = False,
     allow_repeats: bool = False,
     mock: bool = False,
@@ -5458,6 +5460,7 @@ def staff_positions_function(
         argument,
         numbers,
         allow_hidden=allow_hidden,
+        allow_obgc_mutation=allow_obgc_mutation,
         allow_out_of_range=allow_out_of_range,
         # allow_repitch=allow_repitch,
         mock=mock,
