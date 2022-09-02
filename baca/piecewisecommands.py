@@ -1456,6 +1456,34 @@ def pizzicato_spanner(
     return result
 
 
+def pizzicato_spanner_function(
+    argument,
+    *tweaks: _typings.IndexedTweak,
+    # NOTE: autodetect default differs from text_spanner():
+    autodetect_right_padding: bool = True,
+    left_broken: bool = False,
+    left_broken_text: str | None = r"\baca-pizz-markup",
+    pieces: typing.Callable = lambda _: abjad.select.group(_),
+    right_broken: bool = False,
+) -> list[abjad.Wrapper]:
+    tag = _tags.function_name(_frame())
+    tag = tag.append(_tags.PIZZICATO_SPANNER)
+    wrappers = text_spanner_function(
+        argument,
+        r"\baca-pizz-markup =|",
+        *tweaks,
+        autodetect_right_padding=autodetect_right_padding,
+        bookend=False,
+        left_broken=left_broken,
+        left_broken_text=left_broken_text,
+        lilypond_id="Pizzicato",
+        pieces=pieces,
+        right_broken=right_broken,
+    )
+    _tags.wrappers(wrappers, tag)
+    return wrappers
+
+
 def rhythm_annotation_spanner(
     items: str | list,
     *tweaks: _typings.IndexedTweak,

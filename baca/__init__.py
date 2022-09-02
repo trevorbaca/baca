@@ -70,6 +70,7 @@ from .piecewisecommands import (
     parse_hairpin_descriptor,
     pitch_annotation_spanner,
     pizzicato_spanner,
+    pizzicato_spanner_function,
     rhythm_annotation_spanner,
     scp_spanner,
     scp_spanner_function,
