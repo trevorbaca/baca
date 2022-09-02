@@ -522,6 +522,7 @@ def _set_lt_pitch(
                     note_head.written_pitch = pitch
         else:
             assert isinstance(lt.head, abjad.Chord | abjad.Rest)
+            # zebra
             if not allow_obgc_mutation:
                 # raise Exception("set allow_obgc_mutation=True")
                 pass

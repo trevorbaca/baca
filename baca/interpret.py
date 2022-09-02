@@ -2435,8 +2435,8 @@ class DynamicScope:
     def lleaf(self, n):
         return _select.lleaf(self.argument, n, exclude=_enums.HIDDEN)
 
-    def lleaves(self):
-        return _select.lleaves(self.argument, exclude=_enums.HIDDEN)
+    def lleaves(self, *, count=None):
+        return _select.lleaves(self.argument, count=count, exclude=_enums.HIDDEN)
 
     def ltleaves(self):
         return _select.ltleaves(self.argument, exclude=_enums.HIDDEN)
@@ -2485,6 +2485,9 @@ class DynamicScope:
 
     def rleaves(self, *, count=1):
         return _select.rleaves(self.argument, count=count, exclude=_enums.HIDDEN)
+
+    def runs(self):
+        return _select.runs(self.argument, exclude=_enums.HIDDEN)
 
     def tleaves(self):
         return _select.tleaves(self.argument)
