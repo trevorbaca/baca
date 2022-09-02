@@ -367,6 +367,7 @@ def trill_spanner_function(
     *tweaks: abjad.Tweak,
     alteration: str = None,
     harmonic: bool = False,
+    left_broken: bool = False,
     right_broken: bool = False,
     start_trill_span: abjad.StartTrillSpan = abjad.StartTrillSpan(),
     stop_trill_span: abjad.StopTrillSpan = abjad.StopTrillSpan(),
@@ -381,6 +382,7 @@ def trill_spanner_function(
         start_trill_span_,
         stop_trill_span,
         *tweaks,
+        left_broken=left_broken,
         right_broken=right_broken,
     )
     tag = _tags.function_name(_frame())
