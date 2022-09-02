@@ -2486,11 +2486,14 @@ class DynamicScope:
     def rleaves(self, *, count=1):
         return _select.rleaves(self.argument, count=count, exclude=_enums.HIDDEN)
 
+    def run(self, n):
+        return abjad.select.run(self.argument, n, exclude=_enums.HIDDEN)
+
     def runs(self):
         return _select.runs(self.argument, exclude=_enums.HIDDEN)
 
-    def tleaves(self):
-        return _select.tleaves(self.argument)
+    def tleaves(self, *, grace=None):
+        return _select.tleaves(self.argument, grace=grace)
 
 
 def append_anchor_note_function(argument, *, runtime=None):
