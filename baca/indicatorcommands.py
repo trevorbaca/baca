@@ -1003,6 +1003,33 @@ def invisible_music(
     return _command.suite(command_1, command_2)
 
 
+def invisible_music_function(argument) -> list[abjad.Wrapper]:
+    wrappers = []
+    for leaf in abjad.iterate.leaves(argument):
+        tag = _tags.function_name(_frame(), n=1)
+        tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
+        indicator = abjad.LilyPondLiteral(r"\abjad-invisible-music")
+        wrapper = abjad.attach(
+            indicator,
+            leaf,
+            deactivate=True,
+            tag=tag,
+            wrapper=True,
+        )
+        wrappers.append(wrapper)
+        tag = _tags.function_name(_frame(), n=2)
+        tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
+        indicator = abjad.LilyPondLiteral(r"\abjad-invisible-music-coloring")
+        wrapper = abjad.attach(
+            indicator,
+            leaf,
+            tag=tag,
+            wrapper=True,
+        )
+        wrappers.append(wrapper)
+    return wrappers
+
+
 def laissez_vibrer(
     *,
     selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
