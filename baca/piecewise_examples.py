@@ -19,12 +19,10 @@ piecewise.py examples.
 
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
-    ...     baca.hairpin("p < f", bookend=-1),
-    ...     baca.dls_staff_padding(5),
-    ... )
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 E5 G4 F5")
+    >>> _ = baca.hairpin_function(voice, "p < f", bookend=-1)
+    >>> _ = baca.dls_staff_padding_function(voice, 5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -116,12 +114,10 @@ piecewise.py examples.
 
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
-    ...     baca.hairpin('"ff" >o niente'),
-    ...     baca.dls_staff_padding(5),
-    ... )
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 C5 G4 F5")
+    >>> _ = baca.hairpin_function(voice, '"ff" >o niente')
+    >>> _ = baca.dls_staff_padding_function(voice, 5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -215,12 +211,10 @@ piecewise.py examples.
 
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
-    ...     baca.hairpin('niente o< "ff"'),
-    ...     baca.dls_staff_padding(5),
-    ... )
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 C5 G4 F5")
+    >>> _ = baca.hairpin_function(voice, 'niente o< "ff"')
+    >>> _ = baca.dls_staff_padding_function(voice, 5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -313,12 +307,10 @@ piecewise.py examples.
 
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
-    ...     baca.hairpin('"p" -- f'),
-    ...     baca.dls_staff_padding(5),
-    ... )
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 C5 G4 F5")
+    >>> _ = baca.hairpin_function(voice, '"p" -- f')
+    >>> _ = baca.dls_staff_padding_function(voice, 5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -411,19 +403,11 @@ piecewise.py examples.
 
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
-    ...     baca.hairpin(
-    ...         '"mp" <| "f"',
-    ...         selector=lambda _: baca.select.leaves(_)[:7],
-    ...         ),
-    ...     baca.hairpin(
-    ...         '"mf" |> "p"',
-    ...         selector=lambda _: baca.select.leaves(_)[7:],
-    ...         ),
-    ...     baca.dls_staff_padding(5),
-    ... )
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 C5 G4 F5")
+    >>> _ = baca.hairpin_function(baca.select.leaves(voice)[:7], '"mp" <| "f"')
+    >>> _ = baca.hairpin_function(baca.select.leaves(voice)[7:], '"mf" |> "p"')
+    >>> _ = baca.dls_staff_padding_function(voice, 5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -521,15 +505,14 @@ piecewise.py examples.
 
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
-    ...     baca.hairpin(
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 E5 G4 F5")
+    >>> _ = baca.hairpin_function(
+    ...         voice,
     ...         "p f",
     ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
     ...     ),
-    ...     baca.dls_staff_padding(5),
-    ... )
+    >>> _ = baca.dls_staff_padding_function(voice, 5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -620,15 +603,14 @@ piecewise.py examples.
 
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
-    ...     baca.hairpin(
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 E5 G4 F5")
+    >>> _ = baca.hairpin_function(
+    ...         voice,
     ...         "p < f >",
     ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
-    ...     ),
-    ...     baca.dls_staff_padding(5),
-    ... )
+    ...     )
+    >>> _ = baca.dls_staff_padding_function(voice, 5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -727,16 +709,15 @@ piecewise.py examples.
 
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
-    ...     baca.hairpin(
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 E5 G4 F5")
+    >>> _ = baca.hairpin_function(
+    ...         voice,
     ...         "p f",
     ...         bookend=True,
     ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
-    ...     ),
-    ...     baca.dls_staff_padding(5),
-    ... )
+    ...     )
+    >>> _ = baca.dls_staff_padding_function(voice, 5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -830,16 +811,15 @@ piecewise.py examples.
 
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
-    ...     baca.hairpin(
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 E5 G4 F5")
+    >>> _ = baca.hairpin_function(
+    ...         voice,
     ...         "p -- f >",
     ...         bookend=True,
     ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
-    ...     ),
-    ...     baca.dls_staff_padding(5),
-    ... )
+    ...     )
+    >>> _ = baca.dls_staff_padding_function(voice, 5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -945,12 +925,10 @@ piecewise.py examples.
 
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
-    ...     baca.hairpin("f", bookend=False),
-    ...     baca.dls_staff_padding(5),
-    ... )
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 C5 G4 F5")
+    >>> _ = baca.hairpin_function(voice, "f", bookend=False)
+    >>> _ = baca.dls_staff_padding_function(voice, 5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -1039,12 +1017,10 @@ piecewise.py examples.
 
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
-    ...     baca.hairpin("< !"),
-    ...     baca.dls_staff_padding(5),
-    ... )
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 C5 G4 F5")
+    >>> _ = baca.hairpin_function(voice, "< !")
+    >>> _ = baca.dls_staff_padding_function(voice, 5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -1134,21 +1110,19 @@ piecewise.py examples.
 
     >>> music = baca.make_skeleton("{ c2 r4. c2 r4. }")
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("C4 D4"),
-    ...     baca.hairpin(
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "C4 D4")
+    >>> _ = baca.hairpin_function(
+    ...         baca.select.leaves(voice)[:2],
     ...         "p -- niente",
     ...         abjad.Tweak(r"- \tweak to-barline ##t"),
-    ...         selector=lambda _: baca.select.leaves(_)[:2],
-    ...     ),
-    ...     baca.hairpin(
+    ...     )
+    >>> _ = baca.hairpin_function(
+    ...         baca.select.leaves(voice)[2:],
     ...         "f -- niente",
     ...         abjad.Tweak(r"- \tweak to-barline ##t"),
-    ...         selector=lambda _: baca.select.leaves(_)[2:],
-    ...     ),
-    ...     baca.dls_staff_padding(4),
-    ... )
+    ...     )
+    >>> _ = baca.dls_staff_padding_function(voice, 4)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -1232,16 +1206,15 @@ piecewise.py examples.
 
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
-    ...     baca.hairpin(
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 E5 G4 F5")
+    >>> _ = baca.hairpin_function(
+    ...         voice,
     ...         "mf niente o< p",
     ...         bookend=False,
     ...         pieces=lambda _: baca.select.mgroups(_, [1, 2, 1]),
-    ...     ),
-    ...     baca.dls_staff_padding(4),
-    ... )
+    ...     )
+    >>> _ = baca.dls_staff_padding_function(voice, 4)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -1335,12 +1308,10 @@ piecewise.py examples.
 
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
-    ...     baca.hairpin("(mp) < mf"),
-    ...     baca.dls_staff_padding(4),
-    ... )
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 E5 G4 F5")
+    >>> _ = baca.hairpin_function(voice, "(mp) < mf")
+    >>> _ = baca.dls_staff_padding_function(voice, 4)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -1433,15 +1404,12 @@ piecewise.py examples.
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
-    ...     baca.text_spanner("pont. => ord."),
-    ...     baca.text_spanner_staff_padding(4.5),
-    ... )
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 E5 G4 F5")
+    >>> _ = baca.text_spanner_function(voice, "pont. => ord.")
+    >>> _ = baca.text_spanner_staff_padding_function(voice, 4.5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -1534,12 +1502,10 @@ piecewise.py examples.
 
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
-    ...     baca.text_spanner("pont. =| ord."),
-    ...     baca.text_spanner_staff_padding(4.5),
-    ... )
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 E5 G4 F5")
+    >>> _ = baca.text_spanner_function(voice, "pont. =| ord.")
+    >>> _ = baca.text_spanner_staff_padding_function(voice, 4.5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -1632,12 +1598,10 @@ piecewise.py examples.
 
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
-    ...     baca.text_spanner("pont. -> ord."),
-    ...     baca.text_spanner_staff_padding(4.5),
-    ... )
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 E5 G4 F5")
+    >>> _ = baca.text_spanner_function(voice, "pont. -> ord.")
+    >>> _ = baca.text_spanner_staff_padding_function(voice, 4.5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -1730,12 +1694,10 @@ piecewise.py examples.
 
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
-    ...     baca.text_spanner("pont. -| ord."),
-    ...     baca.text_spanner_staff_padding(4.5),
-    ... )
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 E5 G4 F5")
+    >>> _ = baca.text_spanner_function(voice, "pont. -| ord.")
+    >>> _ = baca.text_spanner_staff_padding_function(voice, 4.5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -1828,12 +1790,10 @@ piecewise.py examples.
 
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
-    ...     baca.text_spanner("pont. || ord."),
-    ...     baca.text_spanner_staff_padding(4.5),
-    ... )
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 E5 G4 F5")
+    >>> _ = baca.text_spanner_function(voice, "pont. || ord.")
+    >>> _ = baca.text_spanner_staff_padding_function(voice, 4.5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -1928,16 +1888,15 @@ piecewise.py examples.
 
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
-    ...     baca.text_spanner(
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 E5 G4 F5")
+    >>> _ = baca.text_spanner_function(
+    ...         voice,
     ...         "A || B",
     ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
-    ...     ),
-    ...     baca.text_spanner_staff_padding(4.5),
-    ...     baca.dls_staff_padding(5),
-    ... )
+    ...     )
+    >>> _ = baca.text_spanner_staff_padding_function(voice, 4.5)
+    >>> _ = baca.dls_staff_padding_function(voice, 5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -2044,16 +2003,15 @@ piecewise.py examples.
 
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
-    ...     baca.text_spanner(
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 E5 G4 F5")
+    >>> _ = baca.text_spanner_function(
+    ...         voice,
     ...         "A -> B ->",
     ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
-    ...     ),
-    ...     baca.text_spanner_staff_padding(4.5),
-    ...     baca.dls_staff_padding(5),
-    ... )
+    ...     )
+    >>> _ = baca.text_spanner_staff_padding_function(voice, 4.5)
+    >>> _ = baca.dls_staff_padding_function(voice, 5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -2160,17 +2118,16 @@ piecewise.py examples.
 
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
-    ...     baca.text_spanner(
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 E5 G4 F5")
+    >>> _ = baca.text_spanner_function(
+    ...         voice,
     ...         "A || B",
     ...         bookend=True,
     ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
-    ...     ),
-    ...     baca.text_spanner_staff_padding(4.5),
-    ...     baca.dls_staff_padding(5),
-    ... )
+    ...     )
+    >>> _ = baca.text_spanner_staff_padding_function(voice, 4.5)
+    >>> _ = baca.dls_staff_padding_function(voice, 5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -2286,17 +2243,16 @@ piecewise.py examples.
 
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
-    ...     baca.text_spanner(
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 E5 G4 F5")
+    >>> _ = baca.text_spanner_function(
+    ...         voice,
     ...         "A -> B ->",
     ...         bookend=True,
     ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
-    ...     ),
-    ...     baca.text_spanner_staff_padding(4.5),
-    ...     baca.dls_staff_padding(5),
-    ... )
+    ...     )
+    >>> _ = baca.text_spanner_staff_padding_function(voice, 4.5)
+    >>> _ = baca.dls_staff_padding_function(voice, 5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -2415,10 +2371,10 @@ piecewise.py examples.
 
     >>> music = baca.make_skeleton("{ c2 c4. c2 c4. }")
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("C4 D4 E4 F4"),
-    ...     baca.text_spanner(
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "C4 D4 E4 F4")
+    >>> _ = baca.text_spanner_function(
+    ...         voice,
     ...         "P -> T ->",
     ...         (abjad.Tweak(r"- \tweak color #red"), 0),
     ...         (abjad.Tweak(r"- \tweak color #blue"), 1),
@@ -2426,9 +2382,8 @@ piecewise.py examples.
     ...         (abjad.Tweak(r"- \tweak color #purple"), 3),
     ...         final_piece_spanner=False,
     ...         pieces=lambda _: baca.select.plts(_),
-    ...     ),
-    ...     baca.text_spanner_staff_padding(4.5),
-    ... )
+    ...     )
+    >>> _ = baca.text_spanner_staff_padding_function(voice, 4.5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -2518,17 +2473,15 @@ piecewise.py examples.
 
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
-    ...     baca.text_spanner(
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 E5 G4 F5")
+    >>> _ = baca.text_spanner_function(
+    ...         baca.select.rmleaves(voice, 2),
     ...         r"\baca-damp-markup =|",
     ...         bookend=False,
-    ...         selector=lambda _: baca.select.rmleaves(_, 2),
-    ...     ),
-    ...     baca.text_spanner_staff_padding(4.5),
-    ...     baca.dls_staff_padding(5),
-    ... )
+    ...     )
+    >>> _ = baca.text_spanner_staff_padding_function(voice, 4.5)
+    >>> _ = baca.dls_staff_padding_function(voice, 5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -2622,16 +2575,15 @@ piecewise.py examples.
 
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
-    ...     baca.text_spanner(
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 E5 G4 F5")
+    >>> _ = baca.text_spanner_function(
+    ...         voice,
     ...         "A -| B -|",
     ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
-    ...     ),
-    ...     baca.text_spanner_staff_padding(4.5),
-    ...     baca.dls_staff_padding(5),
-    ... )
+    ...     )
+    >>> _ = baca.text_spanner_staff_padding_function(voice, 4.5)
+    >>> _ = baca.dls_staff_padding_function(voice, 5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -2740,15 +2692,14 @@ piecewise.py examples.
 
     >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("C4 D4 E4 F4 G4 A4"),
-    ...     baca.text_spanner(
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "C4 D4 E4 F4 G4 A4")
+    >>> _ = baca.text_spanner_function(
+    ...         voice,
     ...         "P -> T -> P",
     ...         pieces=lambda _: baca.select.plts(_),
-    ...     ),
-    ...     baca.text_spanner_staff_padding(4.5),
-    ... )
+    ...     )
+    >>> _ = baca.text_spanner_staff_padding_function(voice, 4.5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -2849,16 +2800,15 @@ piecewise.py examples.
 
     >>> music = baca.make_skeleton("{ c2 c4. c2 c4 ~ c8 }")
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("C4 D4 E4 F4"),
-    ...     baca.text_spanner(
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "C4 D4 E4 F4")
+    >>> _ = baca.text_spanner_function(
+    ...         voice,
     ...         "P -> T ->",
     ...         final_piece_spanner=False,
     ...         pieces=lambda _: baca.select.plts(_),
-    ...     ),
-    ...     baca.text_spanner_staff_padding(4.5),
-    ... )
+    ...     )
+    >>> _ = baca.text_spanner_staff_padding_function(voice, 4.5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -2933,7 +2883,8 @@ piecewise.py examples.
 
     Errors on unknown LilyPond ID:
 
-    >>> baca.text_spanner(
+    >>> baca.text_spanner_function(
+    ...     voice,
     ...     "T -> P",
     ...     lilypond_id=4,
     ... )

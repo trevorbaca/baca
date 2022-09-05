@@ -165,28 +165,26 @@ overrides.py examples.
 
     Overrides dynamic line spanner staff padding on all leaves:
 
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
-    ...         treatments=[-1],
-    ...     ),
-    ...     rmakers.beam(),
-    ...     baca.dls_staff_padding(4),
-    ...     baca.new(
-    ...         baca.hairpin(
-    ...             "p < f",
-    ...             remove_length_1_spanner_start=True,
-    ...             selector=lambda _: baca.select.tleaves(_),
-    ...             ),
-    ...         map=lambda _: abjad.select.tuplets(_),
-    ...         ),
-    ...     baca.tuplet_bracket_staff_padding(2),
+    >>> container = baca.figure_function(
+    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     [1, 1, 5, -1],
+    ...     16,
+    ...     affix=baca.rests_around([2], [4]),
+    ...     restart_talea=True,
+    ...     treatments=[-1],
     ... )
-    >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+    >>> rmakers.beam_function(container)
+    >>> _ = baca.dls_staff_padding_function(container, 4)
+    >>> for tuplet in baca.select.tuplets(container):
+    ...     _ = baca.hairpin_function(
+    ...         baca.select.tleaves(tuplet),
+    ...         "p < f",
+    ...         remove_length_1_spanner_start=True,
+    ...     )
 
+    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -252,28 +250,26 @@ overrides.py examples.
 
     Up-overrides dynamic line spanner direction on all leaves:
 
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
-    ...         treatments=[-1],
-    ...     ),
-    ...     rmakers.beam(),
-    ...     baca.dls_up(),
-    ...     baca.new(
-    ...         baca.hairpin(
-    ...             "p < f",
-    ...             remove_length_1_spanner_start=True,
-    ...             selector=lambda _: baca.select.tleaves(_),
-    ...             ),
-    ...         map=lambda _: abjad.select.tuplets(_),
-    ...         ),
-    ...     baca.tuplet_bracket_staff_padding(2),
+    >>> container = baca.figure_function(
+    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     [1, 1, 5, -1],
+    ...     16,
+    ...     affix=baca.rests_around([2], [4]),
+    ...     restart_talea=True,
+    ...     treatments=[-1],
     ... )
-    >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+    >>> rmakers.beam_function(container)
+    >>> _ = baca.dls_up_function(container)
+    >>> for tuplet in baca.select.tuplets(container):
+    ...     _ = baca.hairpin_function(
+    ...         baca.select.tleaves(tuplet),
+    ...         "p < f",
+    ...         remove_length_1_spanner_start=True,
+    ...     )
 
+    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -334,6 +330,7 @@ overrides.py examples.
                 }
             }
         >>
+
 
 ..  container:: example
 
@@ -3065,25 +3062,21 @@ overrides.py examples.
 
     Overrides text spanner staff padding on all trimmed leaves:
 
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
-    ...         treatments=[-1],
-    ...     ),
-    ...     rmakers.beam(),
-    ...     baca.text_spanner_staff_padding(6),
-    ...     baca.text_script_staff_padding(6),
-    ...     baca.text_spanner(
-    ...         "pont. => ord.",
-    ...         selector=lambda _: baca.select.tleaves(_),
-    ...     ),
-    ...     baca.tuplet_bracket_staff_padding(2),
+    >>> container = baca.figure_function(
+    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     [1, 1, 5, -1],
+    ...     16,
+    ...     affix=baca.rests_around([2], [4]),
+    ...     restart_talea=True,
+    ...     treatments=[-1],
     ... )
-    >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
+    >>> rmakers.beam_function(container)
+    >>> _ = baca.text_spanner_staff_padding_function(container, 6)
+    >>> _ = baca.text_script_staff_padding_function(container, 6)
+    >>> _ = baca.text_spanner_function(baca.select.tleaves(container), "pont. => ord.")
+    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(
     ...     selection, includes=["baca.ily"]
     ... )

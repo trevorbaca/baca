@@ -524,7 +524,7 @@ def _set_lt_pitch(
             assert isinstance(lt.head, abjad.Chord | abjad.Rest)
             # zebra
             if not allow_obgc_mutation:
-                # raise Exception("set allow_obgc_mutation=True")
+                raise Exception("set allow_obgc_mutation=True")
                 pass
             for leaf in lt:
                 note = abjad.Note(

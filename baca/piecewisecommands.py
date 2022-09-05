@@ -613,44 +613,6 @@ class PiecewiseCommand(_command.Command):
         return False
 
 
-def bow_speed_spanner(
-    items: str | list,
-    *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = True,
-    bookend: bool | int = False,
-    final_piece_spanner: bool | None = None,
-    left_broken: bool = False,
-    left_broken_text: str = None,
-    map=None,
-    match: _typings.Indices = None,
-    measures: _typings.Slice = None,
-    pieces: typing.Callable = lambda _: abjad.select.group(_),
-    right_broken: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> PiecewiseCommand:
-    tag = _tags.function_name(_frame())
-    tag = tag.append(_tags.BOW_SPEED_SPANNER)
-    command = text_spanner(
-        items,
-        *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
-        bookend=bookend,
-        final_piece_spanner=final_piece_spanner,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id="BowSpeed",
-        map=map,
-        match=match,
-        measures=measures,
-        pieces=pieces,
-        right_broken=right_broken,
-        selector=selector,
-    )
-    result = dataclasses.replace(command, tags=[tag])
-    assert isinstance(result, PiecewiseCommand)
-    return result
-
-
 def bow_speed_spanner_function(
     argument,
     items: str | list,
@@ -680,45 +642,6 @@ def bow_speed_spanner_function(
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
-
-
-def circle_bow_spanner(
-    *tweaks: _typings.IndexedTweak,
-    left_broken: bool = False,
-    left_broken_text: str | None = r"\baca-left-broken-circle-bowing-markup",
-    map=None,
-    match: _typings.Indices = None,
-    measures: _typings.Slice = None,
-    pieces: typing.Callable = lambda _: abjad.select.group(_),
-    qualifier: str = None,
-    right_broken: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> PiecewiseCommand:
-    tag = _tags.function_name(_frame())
-    tag = tag.append(_tags.CIRCLE_BOW_SPANNER)
-    if qualifier is None:
-        string = r"\baca-circle-markup =|"
-    else:
-        assert isinstance(qualifier, str), repr(qualifier)
-        string = rf"\baca-circle-{qualifier}-markup =|"
-    command = text_spanner(
-        string,
-        *tweaks,
-        autodetect_right_padding=True,
-        bookend=False,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id="CircleBow",
-        map=map,
-        match=match,
-        measures=measures,
-        pieces=pieces,
-        right_broken=right_broken,
-        selector=selector,
-    )
-    result = dataclasses.replace(command, tags=[tag])
-    assert isinstance(result, PiecewiseCommand)
-    return result
 
 
 def circle_bow_spanner_function(
@@ -751,53 +674,6 @@ def circle_bow_spanner_function(
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
-
-
-def clb_spanner(
-    string_number: int,
-    *tweaks: _typings.IndexedTweak,
-    # NOTE: autodetect default differs from text_spanner():
-    autodetect_right_padding: bool = True,
-    left_broken: bool = False,
-    left_broken_text: str | None = r"\baca-left-broken-clb-markup",
-    map=None,
-    match: _typings.Indices = None,
-    measures: _typings.Slice = None,
-    pieces: typing.Callable = lambda _: abjad.select.group(_),
-    right_broken: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> PiecewiseCommand:
-    tag = _tags.function_name(_frame())
-    tag = tag.append(_tags.CLB_SPANNER)
-    assert string_number in (1, 2, 3, 4), repr(string_number)
-    if string_number == 1:
-        markup = r"\baca-damp-clb-one-markup"
-    elif string_number == 2:
-        markup = r"\baca-damp-clb-two-markup"
-    elif string_number == 3:
-        markup = r"\baca-damp-clb-three-markup"
-    elif string_number == 4:
-        markup = r"\baca-damp-clb-four-markup"
-    else:
-        raise Exception(string_number)
-    command = text_spanner(
-        f"{markup} =|",
-        *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
-        bookend=False,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id="CLB",
-        map=map,
-        match=match,
-        measures=measures,
-        pieces=pieces,
-        right_broken=right_broken,
-        selector=selector,
-    )
-    result = dataclasses.replace(command, tags=[tag])
-    assert isinstance(result, PiecewiseCommand)
-    return result
 
 
 def clb_spanner_function(
@@ -840,42 +716,6 @@ def clb_spanner_function(
     return wrappers
 
 
-def covered_spanner(
-    *tweaks: _typings.IndexedTweak,
-    # NOTE: autodetect default differs from text_spanner():
-    autodetect_right_padding: bool = True,
-    items: str = r"\baca-covered-markup =|",
-    left_broken: bool = False,
-    left_broken_text: str | None = r"\baca-left-broken-covered-markup",
-    map=None,
-    match: _typings.Indices = None,
-    measures: _typings.Slice = None,
-    pieces: typing.Callable = lambda _: abjad.select.group(_),
-    right_broken: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> PiecewiseCommand:
-    tag = _tags.function_name(_frame())
-    tag = tag.append(_tags.COVERED_SPANNER)
-    command = text_spanner(
-        items,
-        *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
-        bookend=False,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id="Covered",
-        map=map,
-        match=match,
-        measures=measures,
-        pieces=pieces,
-        right_broken=right_broken,
-        selector=selector,
-    )
-    result = dataclasses.replace(command, tags=[tag])
-    assert isinstance(result, PiecewiseCommand)
-    return result
-
-
 def covered_spanner_function(
     argument,
     *tweaks: _typings.IndexedTweak,
@@ -905,41 +745,6 @@ def covered_spanner_function(
     return wrappers
 
 
-def damp_spanner(
-    *tweaks: _typings.IndexedTweak,
-    # NOTE: autodetect default differs from text_spanner():
-    autodetect_right_padding: bool = True,
-    left_broken: bool = False,
-    left_broken_text: str | None = r"\baca-left-broken-damp-markup",
-    map=None,
-    match: _typings.Indices = None,
-    measures: _typings.Slice = None,
-    pieces: typing.Callable = lambda _: abjad.select.group(_),
-    right_broken: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> PiecewiseCommand:
-    tag = _tags.function_name(_frame())
-    tag = tag.append(_tags.DAMP_SPANNER)
-    command = text_spanner(
-        r"\baca-damp-markup =|",
-        *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
-        bookend=False,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id="Damp",
-        map=map,
-        match=match,
-        measures=measures,
-        pieces=pieces,
-        right_broken=right_broken,
-        selector=selector,
-    )
-    result = dataclasses.replace(command, tags=[tag])
-    assert isinstance(result, PiecewiseCommand)
-    return result
-
-
 def damp_spanner_function(
     argument,
     *tweaks: _typings.IndexedTweak,
@@ -966,51 +771,6 @@ def damp_spanner_function(
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
-
-
-def hairpin(
-    dynamics: str | list,
-    *tweaks: abjad.Tweak,
-    bookend: bool | int = -1,
-    final_hairpin: bool | str | abjad.StartHairpin | None = None,
-    forbid_al_niente_to_bar_line: bool = False,
-    left_broken: bool = False,
-    map=None,
-    match: _typings.Indices = None,
-    measures: _typings.Slice = None,
-    pieces: typing.Callable = lambda _: abjad.select.group(_),
-    remove_length_1_spanner_start: bool = False,
-    right_broken: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> PiecewiseCommand:
-    final_hairpin_, specifiers = _prepare_hairpin_arguments(
-        dynamics=dynamics,
-        final_hairpin=final_hairpin,
-        forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
-        tweaks=tweaks,
-    )
-    assert isinstance(bookend, bool | int), repr(bookend)
-    assert isinstance(left_broken, bool), repr(left_broken)
-    assert isinstance(remove_length_1_spanner_start, bool), repr(
-        remove_length_1_spanner_start
-    )
-    right_broken_: typing.Any = False
-    if bool(right_broken) is True:
-        right_broken_ = abjad.LilyPondLiteral(r"\!", site="after")
-    return PiecewiseCommand(
-        bookend=bookend,
-        specifiers=specifiers,
-        final_piece_spanner=final_hairpin_,
-        left_broken=left_broken,
-        match=match,
-        map=map,
-        measures=measures,
-        pieces=pieces,
-        remove_length_1_spanner_start=remove_length_1_spanner_start,
-        right_broken=right_broken_,
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
 
 
 def hairpin_function(
@@ -1056,39 +816,6 @@ def hairpin_function(
     )
 
 
-def half_clt_spanner(
-    *tweaks: _typings.IndexedTweak,
-    left_broken: bool = False,
-    left_broken_text: str | None = r"\baca-left-broken-half-clt-markup",
-    map=None,
-    match: _typings.Indices = None,
-    measures: _typings.Slice = None,
-    pieces: typing.Callable = lambda _: abjad.select.group(_),
-    right_broken: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> PiecewiseCommand:
-    tag = _tags.function_name(_frame())
-    tag = tag.append(_tags.HALF_CLT_SPANNER)
-    command = text_spanner(
-        "½ clt =|",
-        *tweaks,
-        autodetect_right_padding=True,
-        bookend=False,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id="HalfCLT",
-        map=map,
-        match=match,
-        measures=measures,
-        pieces=pieces,
-        right_broken=right_broken,
-        selector=selector,
-    )
-    result = dataclasses.replace(command, tags=[tag])
-    assert isinstance(result, PiecewiseCommand)
-    return result
-
-
 def half_clt_spanner_function(
     argument,
     *tweaks: _typings.IndexedTweak,
@@ -1115,38 +842,6 @@ def half_clt_spanner_function(
     return wrappers
 
 
-def material_annotation_spanner(
-    items: str | list,
-    *tweaks: _typings.IndexedTweak,
-    left_broken: bool = False,
-    map=None,
-    match: _typings.Indices = None,
-    measures: _typings.Slice = None,
-    pieces: typing.Callable = lambda _: abjad.select.group(_),
-    right_broken: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> PiecewiseCommand:
-    tag = _tags.function_name(_frame())
-    tag = tag.append(_tags.MATERIAL_ANNOTATION_SPANNER)
-    command = text_spanner(
-        items,
-        *tweaks,
-        autodetect_right_padding=True,
-        bookend=False,
-        left_broken=left_broken,
-        lilypond_id="MaterialAnnotation",
-        map=map,
-        match=match,
-        measures=measures,
-        pieces=pieces,
-        right_broken=right_broken,
-        selector=selector,
-    )
-    result = dataclasses.replace(command, tags=[tag])
-    assert isinstance(result, PiecewiseCommand)
-    return result
-
-
 def material_annotation_spanner_function(
     argument,
     items: str | list,
@@ -1170,39 +865,6 @@ def material_annotation_spanner_function(
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
-
-
-def metric_modulation_spanner(
-    *tweaks: _typings.IndexedTweak,
-    items: str = r"MM =|",
-    autodetect_right_padding: bool = True,
-    left_broken: bool = False,
-    map=None,
-    match: _typings.Indices = None,
-    measures: _typings.Slice = None,
-    pieces: typing.Callable = lambda _: abjad.select.group(_),
-    right_broken: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> PiecewiseCommand:
-    tag = _tags.function_name(_frame())
-    tag = tag.append(_tags.METRIC_MODULATION_SPANNER)
-    command = text_spanner(
-        items,
-        *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
-        bookend=False,
-        left_broken=left_broken,
-        lilypond_id="MetricModulation",
-        map=map,
-        match=match,
-        measures=measures,
-        pieces=pieces,
-        right_broken=right_broken,
-        selector=selector,
-    )
-    result = dataclasses.replace(command, tags=[tag])
-    assert isinstance(result, PiecewiseCommand)
-    return result
 
 
 def metric_modulation_spanner_function(
@@ -1389,73 +1051,6 @@ def parse_hairpin_descriptor(
     return specifiers
 
 
-def pitch_annotation_spanner(
-    items: str | list,
-    *tweaks: _typings.IndexedTweak,
-    left_broken: bool = False,
-    map=None,
-    match: _typings.Indices = None,
-    measures: _typings.Slice = None,
-    pieces: typing.Callable = lambda _: abjad.select.group(_),
-    right_broken: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> PiecewiseCommand:
-    tag = _tags.function_name(_frame())
-    tag = tag.append(_tags.PITCH_ANNOTATION_SPANNER)
-    command = text_spanner(
-        items,
-        *tweaks,
-        autodetect_right_padding=True,
-        bookend=False,
-        left_broken=left_broken,
-        lilypond_id="PitchAnnotation",
-        map=map,
-        match=match,
-        measures=measures,
-        pieces=pieces,
-        right_broken=right_broken,
-        selector=selector,
-    )
-    result = dataclasses.replace(command, tags=[tag])
-    assert isinstance(result, PiecewiseCommand)
-    return result
-
-
-def pizzicato_spanner(
-    *tweaks: _typings.IndexedTweak,
-    # NOTE: autodetect default differs from text_spanner():
-    autodetect_right_padding: bool = True,
-    left_broken: bool = False,
-    left_broken_text: str | None = r"\baca-pizz-markup",
-    map=None,
-    match: _typings.Indices = None,
-    measures: _typings.Slice = None,
-    pieces: typing.Callable = lambda _: abjad.select.group(_),
-    right_broken: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> PiecewiseCommand:
-    tag = _tags.function_name(_frame())
-    tag = tag.append(_tags.PIZZICATO_SPANNER)
-    command = text_spanner(
-        r"\baca-pizz-markup =|",
-        *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
-        bookend=False,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id="Pizzicato",
-        map=map,
-        match=match,
-        measures=measures,
-        pieces=pieces,
-        right_broken=right_broken,
-        selector=selector,
-    )
-    result = dataclasses.replace(command, tags=[tag])
-    assert isinstance(result, PiecewiseCommand)
-    return result
-
-
 def pizzicato_spanner_function(
     argument,
     *tweaks: _typings.IndexedTweak,
@@ -1482,78 +1077,6 @@ def pizzicato_spanner_function(
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
-
-
-def rhythm_annotation_spanner(
-    items: str | list,
-    *tweaks: _typings.IndexedTweak,
-    left_broken: bool = False,
-    leak_spanner_stop: bool = False,
-    map=None,
-    match: _typings.Indices = None,
-    measures: _typings.Slice = None,
-    pieces: typing.Callable = lambda _: abjad.select.group(_),
-    right_broken: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> PiecewiseCommand:
-    tag = _tags.function_name(_frame())
-    tag = tag.append(_tags.RHYTHM_ANNOTATION_SPANNER)
-    command = text_spanner(
-        items,
-        *tweaks,
-        autodetect_right_padding=True,
-        bookend=False,
-        leak_spanner_stop=leak_spanner_stop,
-        left_broken=left_broken,
-        lilypond_id="RhythmAnnotation",
-        map=map,
-        match=match,
-        measures=measures,
-        pieces=pieces,
-        right_broken=right_broken,
-        selector=selector,
-    )
-    result = dataclasses.replace(command, tags=[tag])
-    assert isinstance(result, PiecewiseCommand)
-    return result
-
-
-def scp_spanner(
-    items: str | list,
-    *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = True,
-    bookend: bool | int = False,
-    final_piece_spanner: bool | None = None,
-    left_broken: bool = False,
-    left_broken_text: str = None,
-    map=None,
-    match: _typings.Indices = None,
-    measures: _typings.Slice = None,
-    pieces: typing.Callable = lambda _: abjad.select.group(_),
-    right_broken: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> PiecewiseCommand:
-    tag = _tags.function_name(_frame())
-    tag = tag.append(_tags.SCP_SPANNER)
-    command = text_spanner(
-        items,
-        *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
-        bookend=bookend,
-        final_piece_spanner=final_piece_spanner,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id="SCP",
-        map=map,
-        match=match,
-        measures=measures,
-        pieces=pieces,
-        right_broken=right_broken,
-        selector=selector,
-    )
-    result = dataclasses.replace(command, tags=[tag])
-    assert isinstance(result, PiecewiseCommand)
-    return result
 
 
 def scp_spanner_function(
@@ -1585,42 +1108,6 @@ def scp_spanner_function(
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
-
-
-def spazzolato_spanner(
-    *tweaks: _typings.IndexedTweak,
-    # NOTE: autodetect default differs from text_spanner():
-    autodetect_right_padding: bool = True,
-    items: str | list = r"\baca-spazzolato-markup =|",
-    left_broken: bool = False,
-    left_broken_text: str | None = r"\baca-left-broken-spazz-markup",
-    map=None,
-    match: _typings.Indices = None,
-    measures: _typings.Slice = None,
-    pieces: typing.Callable = lambda _: abjad.select.group(_),
-    right_broken: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> PiecewiseCommand:
-    tag = _tags.function_name(_frame())
-    tag = tag.append(_tags.SPAZZOLATO_SPANNER)
-    command = text_spanner(
-        items,
-        *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
-        bookend=False,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id="Spazzolato",
-        map=map,
-        match=match,
-        measures=measures,
-        pieces=pieces,
-        right_broken=right_broken,
-        selector=selector,
-    )
-    result = dataclasses.replace(command, tags=[tag])
-    assert isinstance(command, PiecewiseCommand)
-    return result
 
 
 def spazzolato_spanner_function(
@@ -1655,44 +1142,6 @@ def spazzolato_spanner_function(
     return wrappers
 
 
-def string_number_spanner(
-    items: str | list,
-    *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = True,
-    bookend: bool | int = False,
-    final_piece_spanner: bool | None = None,
-    left_broken: bool = False,
-    left_broken_text: str = None,
-    map=None,
-    match: _typings.Indices = None,
-    measures: _typings.Slice = None,
-    pieces: typing.Callable = lambda _: abjad.select.group(_),
-    right_broken: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> PiecewiseCommand:
-    tag = _tags.function_name(_frame())
-    tag = tag.append(_tags.STRING_NUMBER_SPANNER)
-    command = text_spanner(
-        items,
-        *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
-        bookend=bookend,
-        final_piece_spanner=final_piece_spanner,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id="StringNumber",
-        map=map,
-        match=match,
-        measures=measures,
-        pieces=pieces,
-        right_broken=right_broken,
-        selector=selector,
-    )
-    result = dataclasses.replace(command, tags=[tag])
-    assert isinstance(result, PiecewiseCommand)
-    return result
-
-
 def string_number_spanner_function(
     argument,
     items: str | list,
@@ -1723,43 +1172,6 @@ def string_number_spanner_function(
     return wrappers
 
 
-def tasto_spanner(
-    *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = True,
-    bookend: bool | int = False,
-    final_piece_spanner: bool | None = None,
-    left_broken: bool = False,
-    left_broken_text: str = r"\baca-left-broken-t-markup",
-    map=None,
-    match: _typings.Indices = None,
-    measures: _typings.Slice = None,
-    pieces: typing.Callable = lambda _: abjad.select.group(_),
-    right_broken: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> PiecewiseCommand:
-    tag = _tags.function_name(_frame())
-    tag = tag.append(_tags.TASTO_SPANNER)
-    command = text_spanner(
-        "T =|",
-        *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
-        bookend=bookend,
-        final_piece_spanner=final_piece_spanner,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id="SCP",
-        map=map,
-        match=match,
-        measures=measures,
-        pieces=pieces,
-        right_broken=right_broken,
-        selector=selector,
-    )
-    result = dataclasses.replace(command, tags=[tag])
-    assert isinstance(result, PiecewiseCommand)
-    return result
-
-
 def tasto_spanner_function(
     argument,
     *tweaks: _typings.IndexedTweak,
@@ -1788,57 +1200,6 @@ def tasto_spanner_function(
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
-
-
-def text_spanner(
-    items: str | list,
-    *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = False,
-    bookend: bool | int = -1,
-    boxed: bool = False,
-    direction: int = None,
-    final_piece_spanner: bool | None = None,
-    leak_spanner_stop: bool = False,
-    left_broken: bool = False,
-    left_broken_text: str = None,
-    lilypond_id: int | str | None = None,
-    map=None,
-    match: _typings.Indices = None,
-    measures: _typings.Slice = None,
-    pieces: typing.Callable = lambda _: abjad.select.group(_),
-    right_broken: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> PiecewiseCommand:
-    specifiers = _prepare_text_spanner_arguments(
-        items,
-        *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
-        bookend=bookend,
-        boxed=boxed,
-        direction=direction,
-        final_piece_spanner=final_piece_spanner,
-        leak_spanner_stop=leak_spanner_stop,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id=lilypond_id,
-        right_broken=right_broken,
-    )
-    return PiecewiseCommand(
-        autodetect_right_padding=autodetect_right_padding,
-        bookend=bookend,
-        specifiers=specifiers,
-        final_piece_spanner=final_piece_spanner,
-        leak_spanner_stop=leak_spanner_stop,
-        left_broken=left_broken,
-        map=map,
-        match=match,
-        measures=measures,
-        pieces=pieces,
-        right_broken=right_broken,
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        tweaks=tweaks,
-    )
 
 
 def text_spanner_function(
@@ -1887,44 +1248,6 @@ def text_spanner_function(
     )
 
 
-def vibrato_spanner(
-    items: str | list,
-    *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = True,
-    bookend: bool | int = False,
-    final_piece_spanner: bool | None = None,
-    left_broken: bool = False,
-    left_broken_text: str = None,
-    map=None,
-    match: _typings.Indices = None,
-    measures: _typings.Slice = None,
-    pieces: typing.Callable = lambda _: abjad.select.group(_),
-    right_broken: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> PiecewiseCommand:
-    tag = _tags.function_name(_frame())
-    tag = tag.append(_tags.VIBRATO_SPANNER)
-    command = text_spanner(
-        items,
-        *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
-        bookend=bookend,
-        final_piece_spanner=final_piece_spanner,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id="Vibrato",
-        map=map,
-        match=match,
-        measures=measures,
-        pieces=pieces,
-        right_broken=right_broken,
-        selector=selector,
-    )
-    result = dataclasses.replace(command, tags=[tag])
-    assert isinstance(result, PiecewiseCommand)
-    return result
-
-
 def vibrato_spanner_function(
     argument,
     items: str | list,
@@ -1953,43 +1276,6 @@ def vibrato_spanner_function(
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
-
-
-def xfb_spanner(
-    *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = True,
-    bookend: bool | int = False,
-    final_piece_spanner: bool | None = None,
-    left_broken: bool = False,
-    left_broken_text: str = r"\baca-left-broken-xfb-markup",
-    map=None,
-    match: _typings.Indices = None,
-    measures: _typings.Slice = None,
-    pieces: typing.Callable = lambda _: abjad.select.group(_),
-    right_broken: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> PiecewiseCommand:
-    tag = _tags.function_name(_frame())
-    tag = tag.append(_tags.BOW_SPEED_SPANNER)
-    command = text_spanner(
-        "XFB =|",
-        *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
-        bookend=bookend,
-        final_piece_spanner=final_piece_spanner,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id="BowSpeed",
-        map=map,
-        match=match,
-        measures=measures,
-        pieces=pieces,
-        right_broken=right_broken,
-        selector=selector,
-    )
-    result = dataclasses.replace(command, tags=[tag])
-    assert isinstance(result, PiecewiseCommand)
-    return result
 
 
 def xfb_spanner_function(

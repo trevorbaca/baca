@@ -541,15 +541,11 @@ def only_parts(command: Command | Suite) -> Command | Suite:
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 12))(score)
-
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> accumulator(
-        ...     "Music",
-        ...     baca.only_parts(
-        ...         baca.hairpin("p < f"),
-        ...     ),
-        ... )
+        >>> voice = score["Music"]
+        >>> wrappers = baca.hairpin_function(voice, "p < f")
+        >>> baca.tags.wrappers(wrappers, baca.tags.ONLY_PARTS)
 
         >>> _, _ = baca.interpret.section(
         ...     score,

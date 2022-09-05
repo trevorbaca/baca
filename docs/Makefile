@@ -2,6 +2,7 @@
 
 # You can set these variables from the command line:
 # Debug crashing Sphinx builds with SPHINXOPTS = -nWT --keep-going -vvv
+# SPHINXOPTS = -nWT --keep-going -vvv
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 PAPER         =
