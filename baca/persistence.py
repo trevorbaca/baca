@@ -1733,18 +1733,10 @@ r"""
         >>> baca.interpret.apply_breaks(score, breaks)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> accumulator(
-        ...     "Music",
-        ...     baca.instrument(
-        ...         instruments["Flute"],
-        ...         selector=lambda _: abjad.select.leaf(_, 0),
-        ...     ),
-        ...     baca.new(
-        ...         baca.instrument(instruments["Flute"]),
-        ...         map=lambda _: baca.select.leaves(_)[1:2],
-        ...     ),
-        ... )
-
+        >>> voice = score["Music"]
+        >>> manifests = {"abjad.Instrument": instruments}
+        >>> _ = baca.instrument_function(voice[0], "Flute", manifests)
+        >>> _ = baca.instrument_function(voice[1], "Flute", manifests)
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -2684,18 +2676,10 @@ r"""
         >>> baca.interpret.apply_breaks(score, breaks)
         >>> music = baca.make_notes(accumulator.get())
         >>> score["Music"].extend(music)
-        >>> accumulator(
-        ...     "Music",
-        ...     baca.short_instrument_name(
-        ...         short_instrument_names["I+II"],
-        ...         selector=lambda _: abjad.select.leaf(_, 0),
-        ...     ),
-        ...     baca.new(
-        ...         baca.short_instrument_name(short_instrument_names["I+II"]),
-        ...         map=lambda _: baca.select.leaves(_)[1:2],
-        ...     ),
-        ... )
-
+        >>> voice = score["Music"]
+        >>> manifests = {"abjad.ShortInstrumentName": short_instrument_names}
+        >>> _ = baca.short_instrument_name_function(voice[0], "I+II", manifests)
+        >>> _ = baca.short_instrument_name_function(voice[1], "I+II", manifests)
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},

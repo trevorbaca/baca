@@ -458,23 +458,22 @@ spanners.py examples
     Attaches trill to trimmed leaves (leaked to the right) in every
     run:
 
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
-    ...         treatments=[-1],
-    ...     ),
-    ...     rmakers.beam(),
-    ...     baca.new(
-    ...         baca.trill_spanner(selector=lambda _: baca.select.tleaves(_, rleak=True)),
-    ...         map=lambda _: baca.select.runs(_),
-    ...     ),
-    ...     baca.tuplet_bracket_staff_padding(2),
+    >>> container = baca.figure_function(
+    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     [1, 1, 5, -1],
+    ...     16,
+    ...     affix=baca.rests_around([2], [4]),
+    ...     restart_talea=True,
+    ...     treatments=[-1],
     ... )
-    >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+    >>> rmakers.beam_function(container)
+    >>> for run in baca.select.runs(container):
+    ...     run = baca.select.rleak(run)
+    ...     _ = baca.trill_spanner_function(run)
 
+    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -521,13 +520,11 @@ spanners.py examples
                     [
                     \startTrillSpan
                     g''16
-                    \stopTrillSpan
                     ]
                 }
                 \times 4/5
                 {
                     a'16
-                    \startTrillSpan
                     r4
                     \stopTrillSpan
                     \revert TupletBracket.staff-padding
@@ -539,26 +536,23 @@ spanners.py examples
 
     Tweaks trill spanner:
 
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
-    ...         treatments=[-1],
-    ...     ),
-    ...     rmakers.beam(),
-    ...     baca.new(
-    ...         baca.trill_spanner(
-    ...             abjad.Tweak(r"- \tweak color #red"),
-    ...             alteration="M2",
-    ...             selector=lambda _: baca.select.tleaves(_, rleak=True),
-    ...         ),
-    ...     ),
-    ...     baca.tuplet_bracket_staff_padding(2),
+    >>> container = baca.figure_function(
+    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     [1, 1, 5, -1],
+    ...     16,
+    ...     affix=baca.rests_around([2], [4]),
+    ...     restart_talea=True,
+    ...     treatments=[-1],
     ... )
-    >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
+    >>> rmakers.beam_function(container)
+    >>> _ = baca.trill_spanner_function(
+    ...     baca.select.tleaves(container, rleak=True),
+    ...     abjad.Tweak(r"- \tweak color #red"),
+    ...     alteration="M2",
+    ... )
+    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
