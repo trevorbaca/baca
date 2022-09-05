@@ -602,7 +602,6 @@ def dynamic(
     *tweaks: abjad.Tweak,
     map=None,
     match: _typings.Indices = None,
-    measures: _typings.Slice = None,
     selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
     redundant: bool = False,
 ) -> IndicatorCommand:
@@ -618,7 +617,6 @@ def dynamic(
         indicators=[indicator],
         map=map,
         match=match,
-        measures=measures,
         redundant=redundant,
         selector=selector,
         tags=[_tags.function_name(_frame())],
@@ -1184,7 +1182,6 @@ def markup(
     direction=abjad.UP,
     map=None,
     match: _typings.Indices = None,
-    measures: _typings.Slice = None,
     selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     if direction not in (abjad.DOWN, abjad.UP):
@@ -1215,7 +1212,6 @@ def markup(
         indicators=[indicator],
         map=map,
         match=match,
-        measures=measures,
         selector=selector,
         tags=[_tags.function_name(_frame())],
     )

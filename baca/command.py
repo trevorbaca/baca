@@ -14,19 +14,6 @@ from .enums import enums as _enums
 # TODO: frozen=True
 @dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
 class Scope:
-    """
-    Scope.
-
-    ..  container:: example
-
-        >>> scope = baca.Scope(
-        ...     measures=(1, 9),
-        ...     voice_name="Violin.Music",
-        ... )
-        >>> scope
-        Scope(measures=(1, 9), voice_name='Violin.Music')
-
-    """
 
     # TODO: reverse order of parameters; make voice_name mandatory
 
@@ -142,35 +129,6 @@ class Command:
 
 @dataclasses.dataclass(slots=True)
 class Suite:
-    """
-    Suite.
-
-    ..  container:: example
-
-        >>> suite = baca.suite(
-        ...     baca.accent(),
-        ...     baca.tenuto(),
-        ...     measures=(1, 2),
-        ...     selector=lambda _: baca.select.pleaves(_),
-        ... )
-
-    ..  container:: example
-
-        REGRESSION. Templating works like this:
-
-        >>> suite = baca.suite(
-        ...     baca.accent(),
-        ...     baca.tenuto(),
-        ...     measures=(1, 2),
-        ... )
-        >>> suite.commands[0].measures
-        (1, 2)
-
-        >>> new_suite = baca.suite(suite.commands, measures=(3, 4))
-        >>> new_suite.commands[0].measures
-        (3, 4)
-
-    """
 
     commands: typing.Sequence["Command | Suite"] = ()
     keywords: dict | None = None

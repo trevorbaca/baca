@@ -10,7 +10,6 @@ import abjad
 from . import command as _command
 from . import select as _select
 from . import tags as _tags
-from . import typings
 from .enums import enums as _enums
 
 
@@ -435,7 +434,6 @@ def bar_line_x_extent_command(
     *,
     after: bool = False,
     context: str = "Score",
-    measures: typings.Slice = None,
     selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> OverrideCommand:
     return OverrideCommand(
@@ -443,7 +441,6 @@ def bar_line_x_extent_command(
         attribute="X_extent",
         value=f"#'({pair[0]} . {pair[1]})",
         context=context,
-        measures=measures,
         grob="BarLine",
         selector=selector,
         tags=[_tags.function_name(_frame())],
@@ -2844,20 +2841,6 @@ def sustain_pedal_staff_padding_function(
         value=n,
         context=context,
     )
-
-
-def tacet(
-    color="#green",
-    *,
-    measures=None,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-):
-    command = mmrest_color(color, selector=selector)
-    _command.tag(_tags.TACET_COLORING, command)
-    _command.tag(_tags.function_name(_frame()), command)
-    command_ = _command.new(command, measures=measures)
-    assert isinstance(command_, OverrideCommand)
-    return command_
 
 
 def tacet_function(argument, color="#green") -> list[abjad.Wrapper]:

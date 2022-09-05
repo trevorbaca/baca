@@ -219,23 +219,14 @@ commands.py examles
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 16))(score)
-
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.new(
-    ...         baca.bcps(bcps=[(1, 5), (2, 5)]),
-    ...         measures=(1, 2),
-    ...     ),
-    ...     baca.new(
-    ...         baca.bcps(bcps=[(3, 5), (4, 5)]),
-    ...         measures=(3, 4),
-    ...     ),
-    ...     baca.pitches("E4 F4"),
-    ...     baca.script_staff_padding(5.5),
-    ...     baca.text_spanner_staff_padding(2.5),
-    ... )
+    >>> voice = score["Music"]
+    >>> _ = baca.bcps_function(voice[:7], bcps=[(1, 5), (2, 5)])
+    >>> _ = baca.bcps_function(voice[7:], bcps=[(3, 5), (4, 5)])
+    >>> _ = baca.pitches_function(voice, "E4 F4")
+    >>> _ = baca.script_staff_padding_function(voice, 5.5)
+    >>> _ = baca.text_spanner_staff_padding_function(voice, 2.5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,

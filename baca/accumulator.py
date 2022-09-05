@@ -197,10 +197,8 @@ class CommandAccumulator:
                     measures = command_.measures
                     if isinstance(measures, int):
                         measures = (measures, measures)
-                    if measures is not None:
-                        scope_ = dataclasses.replace(current_scope, measures=measures)
-                    else:
-                        scope_ = dataclasses.replace(current_scope)
+                    assert measures is None
+                    scope_ = dataclasses.replace(current_scope)
                     command_ = dataclasses.replace(command_, scope=scope_)
                     self.commands.append(command_)
 
