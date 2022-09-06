@@ -591,11 +591,6 @@ figures.py examples.
 
     Sixteenth-note acciaccaturas by default:
 
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 8, acciaccatura=True),
-    ...     rmakers.beam(),
-    ... )
-
     >>> collections = [
     ...     [0],
     ...     [2, 10],
@@ -604,8 +599,10 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
-    >>> selection = stack(collections)
-
+    >>> container = baca.figure_function(collections, [1], 8, acciaccatura=True)
+    >>> rmakers.beam_function(abjad.select.leaves(container, grace=False))
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -683,12 +680,6 @@ figures.py examples.
 
     Eighth-note acciaccaturas:
 
-    >>> specifier = baca.Acciaccatura([abjad.Duration(1, 8)])
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 8, acciaccatura=specifier),
-    ...     rmakers.beam(),
-    ... )
-
     >>> collections = [
     ...     [0],
     ...     [2, 10],
@@ -697,9 +688,12 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
-    >>> selections = stack(collections)
-
-    >>> lilypond_file = abjad.illustrators.selection(selections)
+    >>> specifier = baca.Acciaccatura([abjad.Duration(1, 8)])
+    >>> container = baca.figure_function(collections, [1], 8, acciaccatura=specifier)
+    >>> rmakers.beam_function(abjad.select.leaves(container, grace=False))
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -776,11 +770,6 @@ figures.py examples.
 
     As many acciaccaturas as possible per collection:
 
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 8, acciaccatura=True),
-    ...     rmakers.beam(),
-    ... )
-
     >>> collections = [
     ...     [0],
     ...     [2, 10],
@@ -789,9 +778,11 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
-    >>> selections = stack(collections)
-
-    >>> lilypond_file = abjad.illustrators.selection(selections)
+    >>> container = baca.figure_function(collections, [1], 8, acciaccatura=True)
+    >>> rmakers.beam_function(abjad.select.leaves(container, grace=False))
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -868,6 +859,14 @@ figures.py examples.
 
     At most two acciaccaturas at the beginning of every collection:
 
+    >>> collections = [
+    ...     [0],
+    ...     [2, 10],
+    ...     [18, 16, 15],
+    ...     [20, 19, 9, 0],
+    ...     [2, 10, 18, 16, 15],
+    ...     [20, 19, 9, 0, 2, 10],
+    ... ]
     >>> stack = baca.stack(
     ...     baca.figure(
     ...         [1],
@@ -880,17 +879,7 @@ figures.py examples.
     ...     ),
     ...     rmakers.beam(),
     ... )
-
-    >>> collections = [
-    ...     [0],
-    ...     [2, 10],
-    ...     [18, 16, 15],
-    ...     [20, 19, 9, 0],
-    ...     [2, 10, 18, 16, 15],
-    ...     [20, 19, 9, 0, 2, 10],
-    ... ]
     >>> selections = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selections)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -974,6 +963,14 @@ figures.py examples.
 
     At most two acciaccaturas at the end of every collection:
 
+    >>> collections = [
+    ...     [0],
+    ...     [2, 10],
+    ...     [18, 16, 15],
+    ...     [20, 19, 9, 0],
+    ...     [2, 10, 18, 16, 15],
+    ...     [20, 19, 9, 0, 2, 10],
+    ... ]
     >>> stack = baca.stack(
     ...     baca.figure(
     ...         [1],
@@ -986,17 +983,7 @@ figures.py examples.
     ...     ),
     ...     rmakers.beam(),
     ... )
-
-    >>> collections = [
-    ...     [0],
-    ...     [2, 10],
-    ...     [18, 16, 15],
-    ...     [20, 19, 9, 0],
-    ...     [2, 10, 18, 16, 15],
-    ...     [20, 19, 9, 0, 2, 10],
-    ... ]
     >>> selections = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selections)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1081,6 +1068,14 @@ figures.py examples.
     At most two acciaccaturas at the beginning of every collection and then at
     most two acciaccaturas at the end of every collection:
 
+    >>> collections = [
+    ...     [0],
+    ...     [2, 10],
+    ...     [18, 16, 15],
+    ...     [20, 19, 9, 0],
+    ...     [2, 10, 18, 16, 15],
+    ...     [20, 19, 9, 0, 2, 10],
+    ... ]
     >>> stack = baca.stack(
     ...     baca.figure(
     ...         [1],
@@ -1094,17 +1089,7 @@ figures.py examples.
     ...     ),
     ...     rmakers.beam(),
     ... )
-
-    >>> collections = [
-    ...     [0],
-    ...     [2, 10],
-    ...     [18, 16, 15],
-    ...     [20, 19, 9, 0],
-    ...     [2, 10, 18, 16, 15],
-    ...     [20, 19, 9, 0, 2, 10],
-    ... ]
     >>> selections = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selections)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1194,11 +1179,6 @@ figures.py examples.
 
     As many acciaccaturas as possible in the middle of every collection:
 
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 8, acciaccatura=baca.lmr(left_length=1)),
-    ...     rmakers.beam(),
-    ... )
-
     >>> collections = [
     ...     [0],
     ...     [2, 10],
@@ -1207,8 +1187,11 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
+    >>> stack = baca.stack(
+    ...     baca.figure([1], 8, acciaccatura=baca.lmr(left_length=1)),
+    ...     rmakers.beam(),
+    ... )
     >>> selections = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selections)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1292,14 +1275,12 @@ figures.py examples.
 
     Without state manifest:
 
+    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> stack = baca.stack(
     ...     baca.figure([1, 1, 2], 16),
     ...     rmakers.beam(),
     ... )
-
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> selections = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selections)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1342,11 +1323,6 @@ figures.py examples.
 
     As many acciaccaturas as possible per collection:
 
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 8, acciaccatura=True),
-    ...     rmakers.beam(),
-    ... )
-
     >>> collections = [
     ...     [0],
     ...     [2, 10],
@@ -1355,8 +1331,11 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
+    >>> stack = baca.stack(
+    ...     baca.figure([1], 8, acciaccatura=True),
+    ...     rmakers.beam(),
+    ... )
     >>> selections = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selections)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1434,11 +1413,6 @@ figures.py examples.
 
     Graced quarters:
 
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 4, acciaccatura=True),
-    ...     rmakers.beam(),
-    ... )
-
     >>> collections = [
     ...     [0],
     ...     [2, 10],
@@ -1447,8 +1421,11 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
+    >>> stack = baca.stack(
+    ...     baca.figure([1], 4, acciaccatura=True),
+    ...     rmakers.beam(),
+    ... )
     >>> selections = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selections)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1527,14 +1504,12 @@ figures.py examples.
     Spells nonassignable durations with monontonically decreasing durations by
     default:
 
+    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> stack = baca.stack(
     ...     baca.figure([4, 4, 5], 32),
     ...     rmakers.beam(),
     ... )
-
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> selections = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selections)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1585,6 +1560,7 @@ figures.py examples.
 
     Spells nonassignable durations with monontonically increasing durations:
 
+    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> stack = baca.stack(
     ...     baca.figure(
     ...         [4, 4, 5],
@@ -1593,10 +1569,7 @@ figures.py examples.
     ...     ),
     ...     rmakers.beam(),
     ... )
-
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> selections = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selections)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1647,14 +1620,12 @@ figures.py examples.
 
     Sixteenths and eighths:
 
+    >>> collections = [[0, 2, 10, 8]]
     >>> stack = baca.stack(
     ...     baca.figure([1, 1, 2], 16),
     ...     rmakers.beam(),
     ... )
-
-    >>> collections = [[0, 2, 10, 8]]
     >>> selections = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selections)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1778,6 +1749,7 @@ figures.py examples.
 
     Works with rests:
 
+    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> stack = baca.stack(
     ...     baca.figure([3, -1, 2, 2], 16),
     ...     rmakers.beam(
@@ -1785,10 +1757,7 @@ figures.py examples.
     ...         stemlet_length=1.5,
     ...     ),
     ... )
-
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> selections = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selections)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1838,15 +1807,13 @@ figures.py examples.
 
     Works with large counts:
 
+    >>> collections = [[0, 2]]
     >>> stack = baca.stack(
     ...     baca.figure([29], 64),
     ...     rmakers.beam(),
     ...     rmakers.force_repeat_tie(),
     ... )
-
-    >>> collections = [[0, 2]]
     >>> selections = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selections)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1876,14 +1843,12 @@ figures.py examples.
 
     One extra count per division:
 
+    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> stack = baca.stack(
     ...     baca.figure([1, 1, 2], 16, treatments=[1]),
     ...     rmakers.beam(),
     ... )
-
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> selections = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selections)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1929,14 +1894,12 @@ figures.py examples.
 
     One missing count per division:
 
+    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> stack = baca.stack(
     ...     baca.figure([1, 1, 2], 16, treatments=[-1]),
     ...     rmakers.beam(),
     ... )
-
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> selections = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selections)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1981,11 +1944,6 @@ figures.py examples.
 
     Accelerandi:
 
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 16, treatments=["accel"]),
-    ...     rmakers.beam(),
-    ... )
-
     >>> collections = [
     ...     [0],
     ...     [2, 10],
@@ -1994,8 +1952,11 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
+    >>> stack = baca.stack(
+    ...     baca.figure([1], 16, treatments=["accel"]),
+    ...     rmakers.beam(),
+    ... )
     >>> selections = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selections)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2257,11 +2218,6 @@ figures.py examples.
 
     Ritardandi:
 
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 16, treatments=["rit"]),
-    ...     rmakers.beam(),
-    ... )
-
     >>> collections = [
     ...     [0],
     ...     [2, 10],
@@ -2270,8 +2226,11 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
+    >>> stack = baca.stack(
+    ...     baca.figure([1], 16, treatments=["rit"]),
+    ...     rmakers.beam(),
+    ... )
     >>> selections = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selections)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2533,21 +2492,19 @@ figures.py examples.
 
     Accelerandi followed by ritardandi:
 
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1], 16, treatments=["accel", "rit"]
-    ...     ),
-    ...     rmakers.beam(),
-    ... )
-
     >>> collections = [
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0, 2],
     ...     [10, 18, 16, 15, 20],
     ...     [19, 9, 0, 2, 10, 18],
     ... ]
+    >>> stack = baca.stack(
+    ...     baca.figure(
+    ...         [1], 16, treatments=["accel", "rit"]
+    ...     ),
+    ...     rmakers.beam(),
+    ... )
     >>> selections = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selections)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2766,11 +2723,6 @@ figures.py examples.
 
     Mixed accelerandi, ritardandi and prolation:
 
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 16, treatments=["accel", -2, "rit"]),
-    ...     rmakers.beam(),
-    ... )
-
     >>> collections = [
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0],
@@ -2779,8 +2731,11 @@ figures.py examples.
     ...     [10, 18, 16, 15, 20],
     ...     [19, 9, 0, 2, 10],
     ... ]
+    >>> stack = baca.stack(
+    ...     baca.figure([1], 16, treatments=["accel", -2, "rit"]),
+    ...     rmakers.beam(),
+    ... )
     >>> selections = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selections)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3023,11 +2978,6 @@ figures.py examples.
 
     Specified by tuplet multiplier:
 
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 8, treatments=["3:2"]),
-    ...     rmakers.beam(),
-    ... )
-
     >>> collections = [
     ...     [0],
     ...     [2, 10],
@@ -3036,8 +2986,11 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
+    >>> stack = baca.stack(
+    ...     baca.figure([1], 8, treatments=["3:2"]),
+    ...     rmakers.beam(),
+    ... )
     >>> selections = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selections)
     >>> staff = lilypond_file["Staff"]
     >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
@@ -3119,12 +3072,6 @@ figures.py examples.
 
     Segment durations equal to a quarter:
 
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 8, treatments=[(1, 4)]),
-    ...     rmakers.denominator((1, 16)),
-    ...     rmakers.beam(),
-    ... )
-
     >>> collections = [
     ...     [0],
     ...     [2, 10],
@@ -3133,8 +3080,12 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
+    >>> stack = baca.stack(
+    ...     baca.figure([1], 8, treatments=[(1, 4)]),
+    ...     rmakers.denominator((1, 16)),
+    ...     rmakers.beam(),
+    ... )
     >>> selections = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selections)
     >>> staff = lilypond_file["Staff"]
     >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
@@ -3212,12 +3163,6 @@ figures.py examples.
 
     Collection durations alternating between a quarter and a dotted quarter:
 
-    >>> stack = baca.stack(
-    ...     baca.figure([1, 1, 2], 8, treatments=[(1, 4), (3, 8)]),
-    ...     rmakers.denominator((1, 16)),
-    ...     rmakers.beam(),
-    ... )
-
     >>> collections = [
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0],
@@ -3226,8 +3171,12 @@ figures.py examples.
     ...     [10, 18, 16, 15, 20],
     ...     [19, 9, 0, 2, 10],
     ... ]
+    >>> stack = baca.stack(
+    ...     baca.figure([1, 1, 2], 8, treatments=[(1, 4), (3, 8)]),
+    ...     rmakers.denominator((1, 16)),
+    ...     rmakers.beam(),
+    ... )
     >>> selections = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selections)
     >>> staff = lilypond_file["Staff"]
     >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
@@ -3334,7 +3283,6 @@ figures.py examples.
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
     >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> staff = lilypond_file["Staff"]
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -3397,19 +3345,17 @@ figures.py examples.
 
     Nest. Augments one sixteenth:
 
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 16),
-    ...     rmakers.beam_groups(),
-    ...     baca.nest("+1/16"),
-    ... )
-
     >>> collections = [
     ...     [0, 2, 10, 18],
     ...     [16, 15, 23],
     ...     [19, 13, 9, 8],
     ... ]
+    >>> stack = baca.stack(
+    ...     baca.figure([1], 16),
+    ...     rmakers.beam_groups(),
+    ...     baca.nest("+1/16"),
+    ... )
     >>> selection = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3478,20 +3424,18 @@ figures.py examples.
 
     With rest affixes:
 
+    >>> collections = [
+    ...     [0, 2, 10, 18],
+    ...     [16, 15, 23],
+    ...     [19, 13, 9, 8],
+    ... ]
     >>> affix = baca.rests_around([2], [3])
     >>> stack = baca.stack(
     ...     baca.figure([1], 16, affix=affix),
     ...     rmakers.beam_groups(),
     ...     baca.nest("+1/16"),
     ... )
-
-    >>> collections = [
-    ...     [0, 2, 10, 18],
-    ...     [16, 15, 23],
-    ...     [19, 13, 9, 8],
-    ... ]
     >>> selection = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3562,6 +3506,7 @@ figures.py examples.
 
     Affixes rests to complete output when pattern is none:
 
+    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> affix = baca.RestAffix(
     ...     prefix=[1],
     ...     suffix=[2],
@@ -3570,10 +3515,7 @@ figures.py examples.
     ...     baca.figure([1], 16, affix=affix, treatments=[1]),
     ...     rmakers.beam(),
     ... )
-
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> selection = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3621,6 +3563,7 @@ figures.py examples.
 
     Affixes rest to complete output when pattern is none:
 
+    >>> collections = [[18, 16, 15, 20, 19]]
     >>> affix = baca.RestAffix(
     ...     prefix=[1],
     ...     suffix=[2],
@@ -3629,10 +3572,7 @@ figures.py examples.
     ...     baca.figure([1], 16, affix=affix, treatments=[1]),
     ...     rmakers.beam(),
     ... )
-
-    >>> collections = [[18, 16, 15, 20, 19]]
     >>> selection = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3666,6 +3606,7 @@ figures.py examples.
 
     Affixes rests to first and last collections only:
 
+    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> affix = baca.RestAffix(
     ...     pattern=abjad.Pattern(indices=[0, -1]),
     ...     prefix=[1],
@@ -3675,10 +3616,7 @@ figures.py examples.
     ...     baca.figure([1], 16, affix=affix, treatments=[1]),
     ...     rmakers.beam(),
     ... )
-
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> selection = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3728,6 +3666,7 @@ figures.py examples.
 
     Affixes rests to every collection:
 
+    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> affix = baca.RestAffix(
     ...     pattern=abjad.index_all(),
     ...     prefix=[1],
@@ -3737,10 +3676,7 @@ figures.py examples.
     ...     baca.figure([1], 16, affix=affix, treatments=[1]),
     ...     rmakers.beam(),
     ... )
-
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> selection = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3790,15 +3726,13 @@ figures.py examples.
 
 ..  container:: example
 
+    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> affix = baca.RestAffix(prefix=[3])
     >>> stack = baca.stack(
     ...     baca.figure([1], 16, affix=affix),
     ...     rmakers.beam(),
     ... )
-
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> selection = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3840,15 +3774,13 @@ figures.py examples.
 
 ..  container:: example
 
+    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> affix = baca.RestAffix(suffix=[3])
     >>> stack = baca.stack(
     ...     baca.figure([1], 16, affix=affix),
     ...     rmakers.beam(),
     ... )
-
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> selection = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3911,7 +3843,6 @@ figures.py examples.
     ...         rmakers.beam_groups(),
     ...     ),
     ... )
-
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
@@ -3923,17 +3854,8 @@ figures.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
     >>> figures.populate_commands(score, accumulator)
-
-    >>> accumulator(
-    ...     "Music.1",
-    ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
-    ... )
-
-    >>> accumulator(
-    ...     "Music.2",
-    ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
-    ... )
-
+    >>> _ = baca.voice_one_function(abjad.select.leaf(score["Music.1"], 0))
+    >>> _ = baca.voice_two_function(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -4067,7 +3989,6 @@ figures.py examples.
     ...         rmakers.beam_groups(beam_rests=True),
     ...     ),
     ... )
-
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
@@ -4079,17 +4000,8 @@ figures.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
     >>> figures.populate_commands(score, accumulator)
-
-    >>> accumulator(
-    ...     "Music.1",
-    ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
-    ... )
-
-    >>> accumulator(
-    ...     "Music.2",
-    ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
-    ... )
-
+    >>> _ = baca.voice_one_function(abjad.select.leaf(score["Music.1"], 0))
+    >>> _ = baca.voice_two_function(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -4252,17 +4164,8 @@ figures.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
     >>> figures.populate_commands(score, accumulator)
-
-    >>> accumulator(
-    ...     "Music.1",
-    ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
-    ... )
-
-    >>> accumulator(
-    ...     "Music.2",
-    ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
-    ... )
-
+    >>> _ = baca.voice_one_function(abjad.select.leaf(score["Music.1"], 0))
+    >>> _ = baca.voice_two_function(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -4640,7 +4543,6 @@ figures.py examples.
 
     >>> score = baca.docs.make_empty_score(2)
     >>> figures = baca.FigureAccumulator(score)
-
     >>> collections = [
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0],
@@ -4659,7 +4561,6 @@ figures.py examples.
     ...     ),
     ...     baca.staccato(selector=lambda _: baca.select.pheads(_)),
     ... )
-
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
@@ -4671,17 +4572,8 @@ figures.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
     >>> figures.populate_commands(score, accumulator)
-
-    >>> accumulator(
-    ...     "Music.1",
-    ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
-    ... )
-
-    >>> accumulator(
-    ...     "Music.2",
-    ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
-    ... )
-
+    >>> _ = baca.voice_one_function(abjad.select.leaf(score["Music.1"], 0))
+    >>> _ = baca.voice_two_function(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -4874,7 +4766,6 @@ figures.py examples.
     ...         rmakers.beam_groups(beam_rests=True),
     ...     ),
     ... )
-
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
@@ -4886,17 +4777,8 @@ figures.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 24))(score)
     >>> figures.populate_commands(score, accumulator)
-
-    >>> accumulator(
-    ...     "Music.1",
-    ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
-    ... )
-
-    >>> accumulator(
-    ...     "Music.2",
-    ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
-    ... )
-
+    >>> _ = baca.voice_one_function(abjad.select.leaf(score["Music.1"], 0))
+    >>> _ = baca.voice_two_function(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -5022,7 +4904,6 @@ figures.py examples.
     ...         rmakers.beam_groups(),
     ...     ),
     ... )
-
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
@@ -5034,17 +4915,8 @@ figures.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
     >>> figures.populate_commands(score, accumulator)
-
-    >>> accumulator(
-    ...     "Music.1",
-    ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
-    ... )
-
-    >>> accumulator(
-    ...     "Music.2",
-    ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
-    ... )
-
+    >>> _ = baca.voice_one_function(abjad.select.leaf(score["Music.1"], 0))
+    >>> _ = baca.voice_two_function(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -5206,17 +5078,8 @@ figures.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
     >>> figures.populate_commands(score, accumulator)
-
-    >>> accumulator(
-    ...     "Music.1",
-    ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
-    ... )
-
-    >>> accumulator(
-    ...     "Music.2",
-    ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
-    ... )
-
+    >>> _ = baca.voice_one_function(abjad.select.leaf(score["Music.1"], 0))
+    >>> _ = baca.voice_two_function(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -5379,7 +5242,6 @@ figures.py examples.
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
     >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5447,7 +5309,6 @@ figures.py examples.
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
     >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5504,6 +5365,7 @@ figures.py examples.
 
     Works together with negative-valued talea:
 
+    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> stack = baca.stack(
     ...     baca.figure(
     ...         [1, -1],
@@ -5513,10 +5375,7 @@ figures.py examples.
     ...     ),
     ...     rmakers.beam(),
     ... )
-
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> selection = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> staff = lilypond_file["Staff"]
     >>> abjad.override(staff).TupletBracket.staff_padding = 4
@@ -5573,6 +5432,7 @@ figures.py examples.
 
 ..  container:: example
 
+    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> stack = baca.stack(
     ...     baca.figure(
     ...         [-1, 1],
@@ -5582,9 +5442,7 @@ figures.py examples.
     ...     ),
     ...     rmakers.beam(),
     ... )
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> selection = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> staff = lilypond_file["Staff"]
     >>> abjad.override(staff).TupletBracket.staff_padding = 4
@@ -5643,6 +5501,7 @@ figures.py examples.
 
     With time treatments:
 
+    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> stack = baca.stack(
     ...     baca.figure(
     ...         [1],
@@ -5652,10 +5511,7 @@ figures.py examples.
     ...     ),
     ...     rmakers.beam(),
     ... )
-
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> selection = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5713,7 +5569,6 @@ figures.py examples.
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
     >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5781,7 +5636,6 @@ figures.py examples.
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
     >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5849,7 +5703,6 @@ figures.py examples.
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
     >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5918,7 +5771,6 @@ figures.py examples.
     ...     baca.tuplet_bracket_staff_padding(2),
     ... )
     >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5974,12 +5826,6 @@ figures.py examples.
 
     Stack examples.
 
-    >>> stack = baca.stack(
-    ...     baca.figure([1, 1, 2], 8, treatments=[(1, 4), (3, 8)]),
-    ...     rmakers.denominator((1, 16)),
-    ...     rmakers.beam(),
-    ... )
-
     >>> collections = [
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0],
@@ -5988,8 +5834,12 @@ figures.py examples.
     ...     [10, 18, 16, 15, 20],
     ...     [19, 9, 0, 2, 10],
     ... ]
+    >>> stack = baca.stack(
+    ...     baca.figure([1, 1, 2], 8, treatments=[(1, 4), (3, 8)]),
+    ...     rmakers.denominator((1, 16)),
+    ...     rmakers.beam(),
+    ... )
     >>> selections = stack(collections)
-
     >>> lilypond_file = abjad.illustrators.selection(selections)
     >>> staff = lilypond_file["Staff"]
     >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
@@ -6082,7 +5932,6 @@ figures.py examples.
 
     >>> score = baca.docs.make_empty_score(2)
     >>> figures = baca.FigureAccumulator(score)
-
     >>> collections = [
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0],
@@ -6101,7 +5950,6 @@ figures.py examples.
     ...     ),
     ...     baca.staccato(selector=lambda _: baca.select.pheads(_)),
     ... )
-
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
@@ -6113,17 +5961,8 @@ figures.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
     >>> figures.populate_commands(score, accumulator)
-
-    >>> accumulator(
-    ...     "Music.1",
-    ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
-    ... )
-
-    >>> accumulator(
-    ...     "Music.2",
-    ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
-    ... )
-
+    >>> _ = baca.voice_one_function(abjad.select.leaf(score["Music.1"], 0))
+    >>> _ = baca.voice_two_function(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -6253,7 +6092,6 @@ figures.py examples.
 
     >>> score = baca.docs.make_empty_score(2)
     >>> figures = baca.FigureAccumulator(score)
-
     >>> collections = [
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0],
@@ -6282,7 +6120,6 @@ figures.py examples.
 
     >>> score = baca.docs.make_empty_score(2)
     >>> figures = baca.FigureAccumulator(score)
-
     >>> collections = [
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0],
@@ -6302,7 +6139,6 @@ figures.py examples.
     ...     ),
     ...     baca.staccato(selector=lambda _: baca.select.pheads(_)),
     ... )
-
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
@@ -6314,17 +6150,8 @@ figures.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
     >>> figures.populate_commands(score, accumulator)
-
-    >>> accumulator(
-    ...     "Music.1",
-    ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
-    ... )
-
-    >>> accumulator(
-    ...     "Music.2",
-    ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
-    ... )
-
+    >>> _ = baca.voice_one_function(abjad.select.leaf(score["Music.1"], 0))
+    >>> _ = baca.voice_two_function(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -6476,7 +6303,6 @@ figures.py examples.
 
     >>> score = baca.docs.make_empty_score(2)
     >>> figures = baca.FigureAccumulator(score)
-
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> figures(
     ...     "Music.2",
@@ -6490,7 +6316,6 @@ figures.py examples.
     ...         truncate_ties=True,
     ...     ),
     ... )
-
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
@@ -6502,17 +6327,8 @@ figures.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
     >>> figures.populate_commands(score, accumulator)
-
-    >>> accumulator(
-    ...     "Music.1",
-    ...     baca.voice_one(selector=lambda _: abjad.select.leaf(_, 0)),
-    ... )
-
-    >>> accumulator(
-    ...     "Music.2",
-    ...     baca.voice_two(selector=lambda _: abjad.select.leaf(_, 0)),
-    ... )
-
+    >>> _ = baca.voice_one_function(abjad.select.leaf(score["Music.1"], 0))
+    >>> _ = baca.voice_two_function(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},

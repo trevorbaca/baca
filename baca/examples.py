@@ -109,20 +109,6 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
             >>
         }
 
-..  container:: example exception
-
-    Raises exception on noncommand input:
-
-    >>> accumulator(
-    ...     "Music",
-    ...     "text",
-    ... )
-    Traceback (most recent call last):
-        ...
-    Exception:
-    Must be command:
-    'text'
-
 ..  container:: example
 
     Colors octaves:
@@ -137,18 +123,11 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ...     accumulator,
     ...     docs=True,
     ... )
-
     >>> music = abjad.Container("d'4 e' f' g' a' b'")[:]
     >>> score["Music.1"].extend(music)
-
     >>> music = abjad.Container("a4 g f e d c")[:]
     >>> score["Music.2"].extend(music)
-
-    >>> accumulator(
-    ...     ("Music.2", 1),
-    ...     baca.clef("bass", selector=lambda _: abjad.select.leaf(_, 0)),
-    ... )
-
+    >>> _ = baca.clef_function(score["Music.2"][0], "bass")
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -218,6 +197,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
 
     >>> instruments = {}
     >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
+    >>> manifests = {"abjad.Instrument": instruments}
     >>> score = baca.docs.make_empty_score(1)
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -228,15 +208,11 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ...     accumulator,
     ...     docs=True,
     ... )
-
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.instrument(instruments["clarinet"]),
-    ...     baca.pitches("E4 F4"),
-    ... )
-
+    >>> voice = score["Music"]
+    >>> _ = baca.instrument_function(voice[0], "clarinet", manifests)
+    >>> _ = baca.pitches_function(voice, "E4 F4")
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -307,6 +283,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
 
     >>> instruments = {}
     >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
+    >>> manifests = {"abjad.Instrument": instruments}
     >>> score = baca.docs.make_empty_score(1)
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -317,15 +294,11 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ...     accumulator,
     ...     docs=True,
     ... )
-
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.instrument(instruments["clarinet"]),
-    ...     baca.pitches("E4 F4"),
-    ... )
-
+    >>> voice = score["Music"]
+    >>> _ = baca.instrument_function(voice[0], "clarinet", manifests)
+    >>> _ = baca.pitches_function(voice, "E4 F4")
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -410,10 +383,9 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ...     figures_.extend(figure)
     ...
     >>> figures = list(figures_)
-
     >>> instruments = {}
     >>> instruments["Violin"] = abjad.Violin()
-
+    >>> manifests = {"abjad.Instrument": instruments}
     >>> score = baca.docs.make_empty_score(1)
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=time_signatures,
@@ -425,11 +397,8 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ...     docs=True,
     ... )
     >>> score["Music"].extend(figures_)
-    >>> accumulator(
-    ...     ("Music", 1),
-    ...     baca.instrument(abjad.Violin()),
-    ... )
-
+    >>> voice = score["Music"]
+    >>> _ = baca.instrument_function(voice[0], "Violin", manifests)
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},

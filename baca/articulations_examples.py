@@ -17,11 +17,9 @@ articulations.py examples.
     ... )
     >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitch("E4"),
-    ...     baca.color_fingerings(numbers=[0, 1, 2, 1]),
-    ... )
+    >>> voice = score["Music"]
+    >>> _ = baca.pitch_function(voice, "E4")
+    >>> _ = baca.color_fingerings_function(voice, numbers=[0, 1, 2, 1])
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -72,21 +70,19 @@ articulations.py examples.
 
     **STOP-ON-STRING.** Attaches stop-on-string to pitched head -1:
 
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
-    ...         treatments=[-1],
-    ...     ),
-    ...     rmakers.beam(),
-    ...     baca.stop_on_string(
-    ...         selector=lambda _: baca.select.pleaf(_, -1),
-    ...     ),
-    ...     baca.tuplet_bracket_staff_padding(2),
+    >>> container = baca.figure_function(
+    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     [1, 1, 5, -1],
+    ...     16,
+    ...     affix=baca.rests_around([2], [4]),
+    ...     restart_talea=True,
+    ...     treatments=[-1],
     ... )
-    >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+    >>> rmakers.beam_function(container)
+    >>> _ = baca.stop_on_string_function(baca.select.pleaf(container, -1))
+    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(
     ...     selection, includes=["baca.ily"]
     ... )

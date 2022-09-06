@@ -348,20 +348,19 @@ commands.py examles
 
     Effort dynamics:
 
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
-    ...         treatments=[-1],
-    ...     ),
-    ...     rmakers.beam(),
-    ...     baca.dynamic('"f"', selector=lambda _: baca.select.pleaf(_, 0)),
-    ...     baca.tuplet_bracket_staff_padding(2),
+    >>> container = baca.figure_function(
+    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     [1, 1, 5, -1],
+    ...     16,
+    ...     affix=baca.rests_around([2], [4]),
+    ...     restart_talea=True,
+    ...     treatments=[-1],
     ... )
-    >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
+    >>> rmakers.beam_function(container)
+    >>> _ = baca.dynamic_function(baca.select.pleaf(container, 0), '"f"')
+    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(
     ...     selection, includes=["baca.ily"]
     ... )
@@ -432,21 +431,15 @@ commands.py examles
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 13))(score)
-
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
-    ...     baca.dynamic("p", selector=lambda _: baca.select.pleaf(_, 0)),
-    ...     baca.dynamic("<", selector=lambda _: baca.select.pleaf(_, 0)),
-    ...     baca.dynamic(
-    ...         "!",
-    ...         selector=lambda _: baca.select.pleaf(_, -1),
-    ...     ),
-    ...     baca.dls_staff_padding(5),
-    ... )
-
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 C5 G4 F5")
+    >>> pleaf = baca.select.pleaf(voice, 0)
+    >>> _ = baca.dynamic_function(pleaf, "p")
+    >>> _ = baca.dynamic_function(pleaf, "<")
+    >>> _ = baca.dynamic_function(baca.select.pleaf(voice, -1), "!")
+    >>> _ = baca.dls_staff_padding_function(voice, 5)
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -534,20 +527,16 @@ commands.py examles
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 C5 G4 F5"),
-    ...     baca.dynamic(
-    ...         "p",
-    ...         abjad.Tweak(r"- \tweak extra-offset #'(-4 . 0)"),
-    ...         selector=lambda _: baca.select.pleaf(_, 0),
-    ...     ),
-    ...     baca.dls_staff_padding(5),
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 C5 G4 F5")
+    >>> _ = baca.dynamic_function(
+    ...     baca.select.pleaf(voice, 0),
+    ...     "p",
+    ...     abjad.Tweak(r"- \tweak extra-offset #'(-4 . 0)"),
     ... )
-
+    >>> _ = baca.dls_staff_padding_function(voice, 5)
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -1302,20 +1291,11 @@ commands.py examles
     ...     accumulator,
     ...     docs=True,
     ... )
-
     >>> music = abjad.Container("e'4 f' g' a'")[:]
     >>> score["Music.1"].extend(music)
-
     >>> music = abjad.Container("c'4 d' e' f'")[:]
     >>> score["Music.2"].extend(music)
-
-    >>> accumulator(
-    ...     ("Music.2", 1),
-    ...     baca.cross_staff(
-    ...         selector=lambda _: baca.select.pleaves(_)[-2:],
-    ...     ),
-    ... )
-
+    >>> _ = baca.cross_staff_function(baca.select.pleaves(score["Music.2"])[-2:])
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
