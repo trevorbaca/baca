@@ -724,14 +724,10 @@ commands.py examles
 
     >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 F4"),
-    ...     baca.not_parts(
-    ...         baca.force_accidental(
-    ...             selector=lambda _: baca.select.pleaves(_)[:2],
-    ...         ),
-    ...     ),
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 F4")
+    >>> baca.force_accidental_function(
+    ...     baca.select.pleaves(voice)[:2], tag=baca.tags.NOT_PARTS
     ... )
 
     >>> _, _ = baca.interpret.section(
@@ -2005,11 +2001,9 @@ commands.py examles
 
     >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.assign_part(baca.parts.PartAssignment("Music")),
-    ...     baca.pitch("E4"),
-    ... )
+    >>> voice = score["Music"]
+    >>> _ = baca.assign_part_function(voice, baca.parts.PartAssignment("Music"))
+    >>> _ = baca.pitch_function(voice, "E4")
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -2070,20 +2064,8 @@ commands.py examles
 
     >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.assign_part(baca.parts.PartAssignment("Flute.Music")),
-    ...     baca.pitches("E4 F4"),
-    ... )
-
-    >>> _, _ = baca.interpret.section(
-    ...     score,
-    ...     {},
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
-    ...     move_global_context=True,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
+    >>> voice = score["Music"]
+    >>> _ = baca.assign_part_function(voice, baca.parts.PartAssignment("Flute.Music"))
     Traceback (most recent call last):
         ...
     Exception: Music does not allow Flute.Music part assignment:

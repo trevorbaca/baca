@@ -73,7 +73,9 @@ def _unpack_scope_pair(scopes, abbreviations):
     voice_names = voice_names_
     for voice_name in voice_names:
         for measure_token in measure_tokens:
-            scope = _command.Scope(measures=measure_token, voice_name=voice_name)
+            if isinstance(measure_token, int):
+                measure_token = (measure_token, measure_token)
+            scope = _command.Scope(voice_name, measures=measure_token)
             scopes_.append(scope)
     assert all(isinstance(_, _command.Scope) for _ in scopes_)
     return scopes_
@@ -89,7 +91,7 @@ def _unpack_scopes(scopes, abbreviations):
             voice_names = result
         scopes__ = []
         for voice_name in voice_names:
-            scope = _command.Scope(voice_name=voice_name)
+            scope = _command.Scope(voice_name)
             scopes__.append(scope)
     elif isinstance(scopes, tuple):
         scopes__ = _unpack_scope_pair(scopes, abbreviations)
@@ -110,7 +112,7 @@ def _unpack_scopes(scopes, abbreviations):
     for scope in scopes__:
         if isinstance(scope, str):
             voice_name = abbreviations.get(scope, scope)
-            scope_ = _command.Scope(voice_name=voice_name)
+            scope_ = _command.Scope(voice_name)
             scopes_.append(scope_)
         elif isinstance(scope, tuple):
             voice_name, measures = scope
@@ -118,12 +120,10 @@ def _unpack_scopes(scopes, abbreviations):
             if isinstance(measures, list):
                 measures = _unpack_measure_token_list(measures)
                 for measure_token in measures:
-                    scope_ = _command.Scope(
-                        measures=measure_token, voice_name=voice_name
-                    )
+                    scope_ = _command.Scope(voice_name, measures=measure_token)
                     scopes_.append(scope_)
             else:
-                scope_ = _command.Scope(measures=measures, voice_name=voice_name)
+                scope_ = _command.Scope(voice_name, measures=measures)
                 scopes_.append(scope_)
         else:
             scope_ = scope
