@@ -787,6 +787,7 @@ commands.py examles
     >>> short_instrument_names = {}
     >>> markup = abjad.Markup(r"\markup Fl.")
     >>> short_instrument_names["Fl."] = abjad.ShortInstrumentName(markup)
+    >>> manifests = {"abjad.ShortInstrumentName": short_instrument_names}
     >>> score = baca.docs.make_empty_score(1)
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -800,14 +801,9 @@ commands.py examles
 
     >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.short_instrument_name(
-    ...         r"\markup Fl.",
-    ...         selector=lambda _: abjad.select.leaf(_, 0),
-    ...     ),
-    ...     baca.pitches("E4 F4"),
-    ... )
+    >>> voice = score["Music"]
+    >>> _ = baca.short_instrument_name_function(voice[0], "Fl.", manifests)
+    >>> _ = baca.pitches_function(voice, "E4 F4")
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -874,12 +870,10 @@ commands.py examles
 
     >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.clef("percussion", selector=lambda _: abjad.select.leaf(_, 0)),
-    ...     baca.staff_lines(1, selector=lambda _: abjad.select.leaf(_, 0)),
-    ...     baca.staff_positions([-2, -1, 0, 1, 2]),
-    ... )
+    >>> voice = score["Music"]
+    >>> _ = baca.clef_function(voice[0], "percussion")
+    >>> _ = baca.staff_lines_function(voice[0], 1)
+    >>> _ = baca.staff_positions_function(voice, [-2, -1, 0, 1, 2])
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -951,12 +945,10 @@ commands.py examles
 
     >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.clef("bass", selector=lambda _: abjad.select.leaf(_, 0)),
-    ...     baca.staff_lines(1, selector=lambda _: abjad.select.leaf(_, 0)),
-    ...     baca.staff_positions([-2, -1, 0, 1, 2]),
-    ... )
+    >>> voice = score["Music"]
+    >>> _ = baca.clef_function(voice[0], "bass")
+    >>> _ = baca.staff_lines_function(voice[0], 1)
+    >>> _ = baca.staff_positions_function(voice, [-2, -1, 0, 1, 2])
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -1029,12 +1021,10 @@ commands.py examles
 
     >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.clef("percussion", selector=lambda _: abjad.select.leaf(_, 0)),
-    ...     baca.staff_lines(2, selector=lambda _: abjad.select.leaf(_, 0)),
-    ...     baca.staff_positions([-2, -1, 0, 1, 2]),
-    ... )
+    >>> voice = score["Music"]
+    >>> _ = baca.clef_function(voice[0], "percussion")
+    >>> _ = baca.staff_lines_function(voice[0], 2)
+    >>> _ = baca.staff_positions_function(voice, [-2, -1, 0, 1, 2])
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -1105,12 +1095,10 @@ commands.py examles
 
     >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.clef("bass", selector=lambda _: abjad.select.leaf(_, 0)),
-    ...     baca.staff_lines(2, selector=lambda _: abjad.select.leaf(_, 0)),
-    ...     baca.staff_positions([-2, -1, 0, 1, 2]),
-    ... )
+    >>> voice = score["Music"]
+    >>> _ = baca.clef_function(voice[0], "bass")
+    >>> _ = baca.staff_lines_function(voice[0], 2)
+    >>> _ = baca.staff_positions_function(voice, [-2, -1, 0, 1, 2])
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -1181,12 +1169,10 @@ commands.py examles
 
     >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.staff_lines(2, selector=lambda _: abjad.select.leaf(_, 0)),
-    ...     baca.staff_positions([-2, -1, 0, 1, 2]),
-    ...     baca.clef("bass", selector=lambda _: abjad.select.leaf(_, 0)),
-    ... )
+    >>> voice = score["Music"]
+    >>> _ = baca.staff_lines_function(voice[0], 2)
+    >>> _ = baca.staff_positions_function(voice, [-2, -1, 0, 1, 2])
+    >>> _ = baca.clef_function(voice[0], "bass")
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -1868,13 +1854,9 @@ commands.py examles
 
     >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitch("C5"),
-    ...     baca.invisible_music(
-    ...         selector=lambda _: baca.select.leaves(_)[1:-1],
-    ...     ),
-    ... )
+    >>> voice = score["Music"]
+    >>> _ = baca.pitch_function(voice, "C5")
+    >>> _ = baca.invisible_music_function(baca.select.leaves(voice)[1:-1])
 
     >>> _, _ = baca.interpret.section(
     ...     score,

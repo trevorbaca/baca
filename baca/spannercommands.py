@@ -254,7 +254,6 @@ def ottava_bassa_function(
 
 def slur(
     *tweaks: abjad.Tweak,
-    map: typing.Callable = None,
     phrasing_slur: bool = False,
     selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
     start_slur: abjad.StartSlur = None,
@@ -267,7 +266,6 @@ def slur(
         start_slur_ = start_slur or abjad.StartSlur()
         stop_slur_ = stop_slur or abjad.StopSlur()
     return SpannerIndicatorCommand(
-        map=map,
         selector=selector,
         start_indicator=start_slur_,
         stop_indicator=stop_slur_,
@@ -339,7 +337,6 @@ def trill_spanner(
     alteration: str = None,
     harmonic: bool = False,
     left_broken: bool = False,
-    map: typing.Callable = None,
     right_broken: bool = False,
     selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
     start_trill_span: abjad.StartTrillSpan = abjad.StartTrillSpan(),
@@ -352,7 +349,6 @@ def trill_spanner(
     )
     return SpannerIndicatorCommand(
         left_broken=left_broken,
-        map=map,
         right_broken=right_broken,
         selector=selector,
         start_indicator=start_trill_span_,

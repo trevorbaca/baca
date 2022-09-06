@@ -574,28 +574,6 @@ def clef_extra_offset_function(
     )
 
 
-def clef_shift(
-    clef: str | abjad.Clef,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> _command.Suite:
-    extra_offset_x: int | float
-    if isinstance(clef, str):
-        clef = abjad.Clef(clef)
-    if isinstance(clef, int | float):
-        extra_offset_x = clef
-    else:
-        assert isinstance(clef, abjad.Clef)
-        width = clef._to_width[clef.name]
-        extra_offset_x = -width
-    suite = _command.suite(
-        clef_x_extent_false(), clef_extra_offset((extra_offset_x, 0))
-    )
-    _command.tag(_tags.function_name(_frame()), suite)
-    _command.tag(_tags.SHIFTED_CLEF, suite, tag_measure_number=True)
-    return suite
-
-
 def clef_shift_function(
     argument,
     clef: str | abjad.Clef,
@@ -1174,24 +1152,6 @@ def hairpin_shorten_pair_function(
         "shorten_pair",
         f"#'({pair[0]} . {pair[1]})",
     )
-
-
-def hairpin_start_shift(
-    dynamic: str | abjad.Dynamic,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> _command.Suite:
-    dynamic = abjad.Dynamic(dynamic)
-    width = dynamic._to_width[str(dynamic.name)]
-    extra_offset_x = -width
-    hairpin_shorten_left = width - 1.25
-    suite = _command.suite(
-        dynamic_text_extra_offset((extra_offset_x, 0)),
-        dynamic_text_x_extent_zero(),
-        hairpin_shorten_pair((hairpin_shorten_left, 0)),
-    )
-    _command.tag(_tags.function_name(_frame()), suite)
-    return suite
 
 
 def hairpin_start_shift_function(

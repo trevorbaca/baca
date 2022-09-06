@@ -1118,9 +1118,6 @@ def spazzolato_spanner_function(
     items: str | list = r"\baca-spazzolato-markup =|",
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-spazz-markup",
-    map=None,
-    match: _typings.Indices = None,
-    measures: _typings.Slice = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:

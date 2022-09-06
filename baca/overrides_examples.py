@@ -1153,25 +1153,24 @@ overrides.py examples.
 
     Overrides repeat tie direction on pitched leaves:
 
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
-    ...         treatments=[-1],
-    ...     ),
-    ...     rmakers.beam(),
-    ...     baca.new(
-    ...         baca.repeat_tie(selector=lambda _: baca.select.pleaves(_)[1:]),
-    ...         map=lambda _: baca.select.qruns(_),
-    ...     ),
-    ...     baca.repeat_tie_down(selector=lambda _: baca.select.pleaves(_)),
-    ...     baca.stem_up(selector=lambda _: baca.select.pleaves(_)),
-    ...     baca.tuplet_bracket_staff_padding(2),
+    >>> container = baca.figure_function(
+    ...     [[11, 11, 12], [11, 11, 11], [11]],
+    ...     [1, 1, 5, -1],
+    ...     16,
+    ...     affix=baca.rests_around([2], [4]),
+    ...     restart_talea=True,
+    ...     treatments=[-1],
     ... )
-    >>> selection = stack([[11, 11, 12], [11, 11, 11], [11]])
+    >>> rmakers.beam_function(container)
+    >>> for qrun in baca.select.qruns(container):
+    ...     _ = baca.repeat_tie_function(qrun[1:])
 
+    >>> pleaves = baca.select.pleaves(container)
+    >>> _ = baca.repeat_tie_down_function(pleaves)
+    >>> _ = baca.stem_up_function(pleaves)
+    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1233,27 +1232,24 @@ overrides.py examples.
 
     Overrides repeat tie direction on all leaves:
 
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
-    ...         treatments=[-1],
-    ...     ),
-    ...     rmakers.beam(),
-    ...     baca.new(
-    ...         baca.repeat_tie(
-    ...             selector=lambda _: baca.select.pleaves(_)[1:],
-    ...         ),
-    ...         map=lambda _: baca.select.qruns(_),
-    ...     ),
-    ...     baca.repeat_tie_up(selector=lambda _: baca.select.pleaves(_)),
-    ...     baca.stem_down(selector=lambda _: baca.select.pleaves(_)),
-    ...     baca.tuplet_bracket_staff_padding(2),
+    >>> container = baca.figure_function(
+    ...     [[11, 11, 12], [11, 11, 11], [11]],
+    ...     [1, 1, 5, -1],
+    ...     16,
+    ...     affix=baca.rests_around([2], [4]),
+    ...     restart_talea=True,
+    ...     treatments=[-1],
     ... )
-    >>> selection = stack([[11, 11, 12], [11, 11, 11], [11]])
+    >>> rmakers.beam_function(container)
+    >>> for qrun in baca.select.qruns(container):
+    ...     _ = baca.repeat_tie_function(qrun[1:])
 
+    >>> pleaves = baca.select.pleaves(container)
+    >>> _ = baca.repeat_tie_up_function(pleaves)
+    >>> _ = baca.stem_down_function(pleaves)
+    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1931,7 +1927,7 @@ overrides.py examples.
 
 ..  container:: example
 
-    Overrides slur direction on leaves:
+    Overrides slur direction:
 
     >>> def selector(argument):
     ...     selection = abjad.select.tuplets(argument)
@@ -1939,21 +1935,22 @@ overrides.py examples.
     ...     selection = abjad.select.nontrivial(items)
     ...     return selection
     ...
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
-    ...         treatments=[-1],
-    ...     ),
-    ...     rmakers.beam(),
-    ...     baca.slur(map=selector),
-    ...     baca.slur_down(),
-    ...     baca.tuplet_bracket_staff_padding(2),
+    >>> container = baca.figure_function(
+    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     [1, 1, 5, -1],
+    ...     16,
+    ...     affix=baca.rests_around([2], [4]),
+    ...     restart_talea=True,
+    ...     treatments=[-1],
     ... )
-    >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+    >>> rmakers.beam_function(container)
+    >>> for item in selector(container):
+    ...     _ = baca.slur_function(item)
 
+    >>> _ = baca.slur_down_function(container)
+    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2022,23 +2019,25 @@ overrides.py examples.
     ...     selection = abjad.select.nontrivial(items)
     ...     return selection
     ...
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
-    ...         treatments=[-1],
-    ...     ),
-    ...     rmakers.beam(),
-    ...     baca.slur(map=selector),
-    ...     baca.slur_up(),
-    ...     baca.stem_down(selector=lambda _: baca.select.pleaves(_)),
-    ...     baca.tuplet_bracket_staff_padding(2),
-    ...     baca.tuplet_bracket_down(),
-    ... )
-    >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
 
+    >>> container = baca.figure_function(
+    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     [1, 1, 5, -1],
+    ...     16,
+    ...     affix=baca.rests_around([2], [4]),
+    ...     restart_talea=True,
+    ...     treatments=[-1],
+    ... )
+    >>> rmakers.beam_function(container)
+    >>> for item in selector(container):
+    ...     _ = baca.slur_function(item)
+
+    >>> _ = baca.slur_up_function(container)
+    >>> _ = baca.stem_down_function(baca.select.pleaves(container))
+    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.tuplet_bracket_down_function(container)
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2319,26 +2318,24 @@ overrides.py examples.
 
 ..  container:: example
 
-    Overrides sustain pedal staff padding on leaves:
+    Overrides sustain pedal staff padding:
 
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
-    ...         treatments=[-1],
-    ...     ),
-    ...     rmakers.beam(),
-    ...     baca.new(
-    ...         baca.sustain_pedal(selector=lambda _: baca.select.rleaves(_)),
-    ...         map=lambda _: abjad.select.tuplets(_),
-    ...     ),
-    ...     baca.sustain_pedal_staff_padding(4),
-    ...     baca.tuplet_bracket_staff_padding(2),
+    >>> container = baca.figure_function(
+    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     [1, 1, 5, -1],
+    ...     16,
+    ...     affix=baca.rests_around([2], [4]),
+    ...     restart_talea=True,
+    ...     treatments=[-1],
     ... )
-    >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+    >>> rmakers.beam_function(container)
+    >>> for tuplet in baca.select.tuplets(container):
+    ...     _ = baca.sustain_pedal_function(tuplet)
 
+    >>> _ = baca.sustain_pedal_staff_padding_function(container, 4)
+    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 

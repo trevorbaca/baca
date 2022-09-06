@@ -40,9 +40,6 @@ class Command:
     """
 
     deactivate: bool = False
-    map: typing.Any = None
-    match: _typings.Indices = None
-    measures: _typings.Slice = None
     scope: Scope | None = None
     selector: typing.Callable = lambda _: abjad.select.leaves(_, exclude=_enums.HIDDEN)
     tag_measure_number: bool = False
@@ -59,38 +56,13 @@ class Command:
 
     def __call__(self, argument=None, runtime: dict = None) -> bool:
         runtime = runtime or {}
-        if self.map is not None:
-            assert callable(self.map)
-            argument = self.map(argument)
-            result = False
-            for subargument in argument:
-                result = self._call(argument=subargument, runtime=runtime)
-            return result
-        else:
-            return self._call(argument=argument, runtime=runtime)
+        return self._call(argument=argument, runtime=runtime)
 
     def __repr__(self):
         return f"{type(self).__name__}(scope={self.scope})"
 
     def _call(self, *, argument=None, runtime=None) -> bool:
         return False
-
-    def _matches_scope_index(self, scope_count, i):
-        if isinstance(self.match, int):
-            if 0 <= self.match and self.match != i:
-                return False
-            if self.match < 0 and -(scope_count - i) != self.match:
-                return False
-        elif isinstance(self.match, tuple):
-            assert len(self.match) == 2
-            triple = slice(*self.match).indices(scope_count)
-            if i not in range(*triple):
-                return False
-        elif isinstance(self.match, list):
-            assert all(isinstance(_, int) for _ in self.match)
-            if i not in self.match:
-                return False
-        return True
 
     # TODO: reimplement as method with leaf argument
     # TODO: supply with all self.get_tag(leaf) functionality
@@ -127,111 +99,42 @@ class Command:
         return None
 
 
-@dataclasses.dataclass(slots=True)
-class Suite:
-
-    commands: typing.Sequence["Command | Suite"] = ()
-    keywords: dict | None = None
-
-    def __post_init__(self):
-        self.commands = self.commands or []
-        assert all(isinstance(_, Command | Suite) for _ in self.commands)
-        keywords = self.keywords or {}
-        commands_ = []
-        for item in self.commands:
-            if isinstance(item, Command):
-                item_ = dataclasses.replace(item, **keywords)
-            else:
-                item_ = Suite([new(_, **keywords) for _ in item.commands])
-            commands_.append(item_)
-        self.commands = tuple(commands_)
-
-    def __call__(self, argument=None, runtime=None) -> None:
-        """
-        Applies each command in ``commands`` to ``argument``.
-        """
-        if argument is None:
-            return
-        if not self.commands:
-            return
-        for command in self.commands:
-            command(argument, runtime=runtime)
-
-    def __iter__(self):
-        """
-        Iterates commands.
-        """
-        return iter(self.commands)
-
-    def __repr__(self):
-        """
-        Gets repr.
-        """
-        return f"{type(self).__name__}(commands={self.commands})"
-
-
-def chunk(*commands: Command | Suite, **keywords) -> Suite:
-    """
-    Chunks commands.
-    """
-    return suite(*commands, **keywords)
-
-
-def new(*commands: Command | Suite, **keywords) -> Command | Suite:
-    """
-    Makes new ``commands`` with ``keywords``.
-    """
-    result = []
-    assert all(isinstance(_, Command | Suite) for _ in commands), repr(commands)
-    for item in commands:
-        item_: Command | Suite
-        if isinstance(item, Command):
-            item_ = dataclasses.replace(item, **keywords)
-        else:
-            item_ = Suite([new(_, **keywords) for _ in item.commands])
-        result.append(item_)
-    if len(result) == 1:
-        return result[0]
-    else:
-        return suite(*result)
-
-
-def not_mol(command: Command | Suite) -> Command | Suite:
+def not_mol(command: Command) -> Command:
     """
     Tags ``command`` with ``NOT_MOL`` (not middle-of-line).
     """
     return tag(_tags.NOT_MOL, command, tag_measure_number=True)
 
 
-def not_parts(command: Command | Suite) -> Command | Suite:
+def not_parts(command: Command) -> Command:
     """
     Tags ``command`` with ``-PARTS``.
     """
     return tag(_tags.NOT_PARTS, command)
 
 
-def not_score(command: Command | Suite) -> Command | Suite:
+def not_score(command: Command) -> Command:
     """
     Tags ``command`` with ``-SCORE``.
     """
     return tag(_tags.NOT_SCORE, command)
 
 
-def not_section(command: Command | Suite) -> Command | Suite:
+def not_section(command: Command) -> Command:
     """
     Tags ``command`` with ``-SECTION``.
     """
     return tag(_tags.NOT_SECTION, command)
 
 
-def only_mol(command: Command | Suite) -> Command | Suite:
+def only_mol(command: Command) -> Command:
     """
     Tags ``command`` with ``ONLY_MOL`` (only middle-of-line).
     """
     return tag(_tags.ONLY_MOL, command, tag_measure_number=True)
 
 
-def only_parts(command: Command | Suite) -> Command | Suite:
+def only_parts(command: Command) -> Command:
     r"""
     Tags ``command`` with ``+PARTS``.
 
@@ -316,60 +219,27 @@ def only_parts(command: Command | Suite) -> Command | Suite:
     return tag(_tags.ONLY_PARTS, command)
 
 
-def only_score(command: Command | Suite) -> Command | Suite:
+def only_score(command: Command) -> Command:
     """
     Tags ``command`` with ``+SCORE``.
     """
     return tag(_tags.ONLY_SCORE, command)
 
 
-def only_section(command: Command | Suite) -> Command | Suite:
+def only_section(command: Command) -> Command:
     """
     Tags ``command`` with ``+SECTION``.
     """
     return tag(_tags.ONLY_SECTION, command)
 
 
-def suite(*commands: Command | Suite, **keywords) -> Suite:
-    """
-    Makes suite.
-
-    ..  container:: example exception
-
-        Raises exception on noncommand:
-
-        >>> baca.suite("Allegro")
-        Traceback (most recent call last):
-            ...
-        Exception:
-            Must contain only commands and suites.
-            Not str:
-            'Allegro'
-
-    """
-    commands_: list[Command | Suite] = []
-    for item in commands:
-        if isinstance(item, list | tuple):
-            commands_.extend(item)
-        else:
-            commands_.append(item)
-    for command in commands_:
-        if isinstance(command, Command | Suite):
-            continue
-        message = "\n  Must contain only commands and suites."
-        message += f"\n  Not {type(command).__name__}:"
-        message += f"\n  {repr(command)}"
-        raise Exception(message)
-    return Suite(commands_, keywords)
-
-
 def tag(
     tags: abjad.Tag | list[abjad.Tag],
-    command: Command | Suite,
+    command: Command,
     *,
     deactivate: bool = False,
     tag_measure_number: bool = False,
-) -> Command | Suite:
+) -> Command:
     """
     Appends each tag in ``tags`` to ``command``.
 
@@ -382,28 +252,19 @@ def tag(
     assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
     assert isinstance(tags, list), repr(tags)
     assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
-    if not isinstance(command, Command | Suite):
+    if not isinstance(command, Command):
         raise Exception("can only tag command or suite.")
-    if isinstance(command, Suite):
-        for command_ in command.commands:
-            tag(
-                tags,
-                command_,
-                deactivate=deactivate,
-                tag_measure_number=tag_measure_number,
-            )
-    else:
-        assert isinstance(command, Command), repr(command)
-        assert command._tags is not None
-        try:
-            tags.sort()
-        except TypeError:
-            pass
-        assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
-        command.tags.extend(tags)
-        command = dataclasses.replace(
-            command,
-            deactivate=deactivate,
-            tag_measure_number=tag_measure_number,
-        )
+    assert isinstance(command, Command), repr(command)
+    assert command._tags is not None
+    try:
+        tags.sort()
+    except TypeError:
+        pass
+    assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
+    command.tags.extend(tags)
+    command = dataclasses.replace(
+        command,
+        deactivate=deactivate,
+        tag_measure_number=tag_measure_number,
+    )
     return command

@@ -159,7 +159,7 @@ class CommandAccumulator:
         self.time_signatures = _initialize_time_signatures(self.time_signatures)
 
     def __call__(self, scopes, *commands):
-        classes = (list, _command.Suite)
+        classes = (list,)
         commands_ = abjad.sequence.flatten(list(commands), classes=classes, depth=-1)
         commands = tuple(commands_)
         assert isinstance(self._voice_abbreviations, dict), repr(
@@ -173,12 +173,11 @@ class CommandAccumulator:
             if command is None:
                 continue
             if isinstance(command, list):
-                raise Exception("use baca.suite().")
+                raise Exception("group commands some other way.")
             if not isinstance(command, _command.Command):
                 message = "\n\nMust be command:"
                 message += f"\n\n{repr(command)}"
                 raise Exception(message)
-        scope_count = len(scopes_)
         for i, current_scope in enumerate(scopes_):
             if self._voice_names and current_scope.voice_name not in self._voice_names:
                 raise Exception(f"unknown voice name {current_scope.voice_name!r}.")
@@ -186,18 +185,12 @@ class CommandAccumulator:
                 if command is None:
                     continue
                 assert isinstance(command, _command.Command), repr(command)
-                if not command._matches_scope_index(scope_count, i):
-                    continue
                 if isinstance(command, _command.Command):
                     commands_ = [command]
                 else:
                     commands_ = command
                 for command_ in commands_:
                     assert isinstance(command_, _command.Command), repr(command_)
-                    measures = command_.measures
-                    if isinstance(measures, int):
-                        measures = (measures, measures)
-                    assert measures is None
                     scope_ = dataclasses.replace(current_scope)
                     command_ = dataclasses.replace(command_, scope=scope_)
                     self.commands.append(command_)

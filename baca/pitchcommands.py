@@ -1485,10 +1485,8 @@ class OctaveDisplacementCommand(_command.Command):
         >>> score["Music"].extend(music)
         >>> accumulator(
         ...     "Music",
-        ...     baca.suite(
-        ...         baca.pitch("G4"),
-        ...         baca.displacement([0, 0, 1, 1, 0, 0, -1, -1, 2, 2]),
-        ...     ),
+        ...     baca.pitch("G4"),
+        ...     baca.displacement([0, 0, 1, 1, 0, 0, -1, -1, 2, 2]),
         ... )
 
         >>> _, _ = baca.interpret.section(
@@ -3041,21 +3039,18 @@ class RegisterInterpolationCommand(_command.Command):
 
         Maps to tuplets:
 
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16),
-        ...     rmakers.beam(),
-        ...     baca.color(
-        ...         selector=lambda _: abjad.select.tuplets(_)
-        ...     ),
-        ...     baca.new(
-        ...         baca.register(0, 24),
-        ...         map=lambda _: abjad.select.tuplets(_),
-        ...     ),
+        >>> container = baca.figure_function(
+        ...     2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]],
+        ...     [1],
+        ...     16,
         ... )
+        >>> rmakers.beam_function(container)
+        >>> baca.color_function(abjad.select.tuplets(container))
+        >>> for tuplet in baca.select.tuplets(container):
+        ...     baca.register_function(tuplet, 0, 24)
 
-        >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-        >>> selection = stack(collections)
-
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3861,17 +3856,18 @@ def bass_to_octave(
         Octave-transposes music such that the lowest pitch in each pitched logical tie
         appears in octave 3:
 
-        >>> stack = baca.stack(
-        ...     baca.figure([5, -3], 32),
-        ...     rmakers.beam(),
-        ...     baca.new(
-        ...         baca.bass_to_octave(3),
-        ...         map=lambda _: baca.select.plts(_),
-        ...     ),
-        ...     baca.color(selector=lambda _: baca.select.plts(_)),
+        >>> container = baca.figure_function(
+        ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
+        ...     [5, -3],
+        ...     32,
         ... )
-        >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
+        >>> rmakers.beam_function(container)
+        >>> for plt in baca.select.plts(container):
+        ...     baca.bass_to_octave_function(plt, 3)
 
+        >>> baca.color_function(baca.select.plts(container))
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4051,17 +4047,18 @@ def center_to_octave(
         Octave-transposes music such that the centroid of each pitched logical tie
         appears in octave 3:
 
-        >>> stack = baca.stack(
-        ...     baca.figure([5, -3], 32),
-        ...     rmakers.beam(),
-        ...     baca.new(
-        ...         baca.center_to_octave(3),
-        ...         map=lambda _: baca.select.plts(_),
-        ...     ),
-        ...     baca.color(selector=lambda _: baca.select.plts(_)),
+        >>> container = baca.figure_function(
+        ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
+        ...     [5, -3],
+        ...     32,
         ... )
-        >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
+        >>> rmakers.beam_function(container)
+        >>> for plt in baca.select.plts(container):
+        ...     baca.center_to_octave_function(plt, 3)
 
+        >>> baca.color_function(baca.select.plts(container))
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4137,6 +4134,10 @@ def center_to_octave(
     return RegisterToOctaveCommand(
         anchor=abjad.CENTER, octave_number=n, selector=selector
     )
+
+
+def center_to_octave_function(argument, n: int) -> None:
+    _do_register_to_octave_command(argument, anchor=abjad.CENTER, octave_number=n)
 
 
 def deviation(
@@ -5287,19 +5288,21 @@ def soprano_to_octave(
         Octave-transposes music that such that the highest note in each pitched logical
         tie appears in octave 3:
 
-        >>> stack = baca.stack(
-        ...     baca.figure([5, -3], 32),
-        ...     rmakers.beam(),
-        ...     baca.new(
-        ...         baca.soprano_to_octave(3),
-        ...         map=lambda _: baca.select.plts(_),
-        ...     ),
-        ...     baca.color(selector=lambda _: baca.select.plts(_)),
+        >>> container = baca.figure_function(
+        ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
+        ...     [5, -3],
+        ...     32,
         ... )
-        >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
+        >>> rmakers.beam_function(container)
+        >>> for plt in baca.select.plts(container):
+        ...     baca.soprano_to_octave_function(plt, 3)
 
+        >>> baca.color_function(baca.select.plts(container))
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
+
 
         ..  docs::
 
@@ -5371,6 +5374,10 @@ def soprano_to_octave(
 
     """
     return RegisterToOctaveCommand(anchor=abjad.UP, octave_number=n, selector=selector)
+
+
+def soprano_to_octave_function(argument, n: int) -> None:
+    _do_register_to_octave_command(argument, anchor=abjad.UP, octave_number=n)
 
 
 def staff_position(

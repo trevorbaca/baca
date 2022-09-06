@@ -600,8 +600,6 @@ def down_bow_function(
 def dynamic(
     dynamic: str | abjad.Dynamic,
     *tweaks: abjad.Tweak,
-    map=None,
-    match: _typings.Indices = None,
     selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
     redundant: bool = False,
 ) -> IndicatorCommand:
@@ -615,8 +613,6 @@ def dynamic(
     return IndicatorCommand(
         context="Voice",
         indicators=[indicator],
-        map=map,
-        match=match,
         redundant=redundant,
         selector=selector,
         tags=[_tags.function_name(_frame())],
@@ -698,27 +694,6 @@ def dynamic_up_function(argument) -> list[abjad.Wrapper]:
         )
         wrappers.append(wrapper)
     return wrappers
-
-
-def edition(
-    not_parts: str | abjad.Markup | IndicatorCommand,
-    only_parts: str | abjad.Markup | IndicatorCommand,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> _command.Suite:
-    if isinstance(not_parts, str):
-        not_parts = markup(rf"\markup {{ {not_parts} }}", selector=selector)
-    elif isinstance(not_parts, abjad.Markup):
-        not_parts = markup(not_parts, selector=selector)
-    assert isinstance(not_parts, IndicatorCommand)
-    not_parts_ = _command.not_parts(not_parts)
-    if isinstance(only_parts, str):
-        only_parts = markup(rf"\markup {{ {only_parts} }}", selector=selector)
-    elif isinstance(only_parts, abjad.Markup):
-        only_parts = markup(only_parts, selector=selector)
-    assert isinstance(only_parts, IndicatorCommand)
-    only_parts_ = _command.only_parts(only_parts)
-    return _command.suite(not_parts_, only_parts_)
 
 
 def edition_function(
@@ -976,31 +951,6 @@ def instrument_name_function(
     return wrappers
 
 
-def invisible_music(
-    *,
-    map: typing.Callable = None,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> _command.Suite:
-    tag = _tags.function_name(_frame(), n=1)
-    tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
-    command_1 = IndicatorCommand(
-        indicators=[abjad.LilyPondLiteral(r"\abjad-invisible-music")],
-        deactivate=True,
-        map=map,
-        selector=selector,
-        tags=[tag],
-    )
-    tag = _tags.function_name(_frame(), n=2)
-    tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
-    command_2 = IndicatorCommand(
-        indicators=[abjad.LilyPondLiteral(r"\abjad-invisible-music-coloring")],
-        map=map,
-        selector=selector,
-        tags=[tag],
-    )
-    return _command.suite(command_1, command_2)
-
-
 def invisible_music_function(argument) -> list[abjad.Wrapper]:
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -1180,8 +1130,6 @@ def markup(
     argument: str | abjad.Markup,
     *tweaks: abjad.Tweak,
     direction=abjad.UP,
-    map=None,
-    match: _typings.Indices = None,
     selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
 ) -> IndicatorCommand:
     if direction not in (abjad.DOWN, abjad.UP):
@@ -1210,8 +1158,6 @@ def markup(
     return IndicatorCommand(
         direction=direction,
         indicators=[indicator],
-        map=map,
-        match=match,
         selector=selector,
         tags=[_tags.function_name(_frame())],
     )
@@ -1433,36 +1379,6 @@ def short_fermata_function(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def short_instrument_name(
-    argument: str,
-    *,
-    alert: IndicatorCommand = None,
-    context: str = "Staff",
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand | _command.Suite:
-    if isinstance(argument, str):
-        markup = abjad.Markup(argument)
-        short_instrument_name = abjad.ShortInstrumentName(markup, context=context)
-    elif isinstance(argument, abjad.Markup):
-        markup = abjad.Markup(argument)
-        short_instrument_name = abjad.ShortInstrumentName(markup, context=context)
-    elif isinstance(argument, abjad.ShortInstrumentName):
-        short_instrument_name = dataclasses.replace(argument, context=context)
-    else:
-        raise TypeError(argument)
-    assert isinstance(short_instrument_name, abjad.ShortInstrumentName)
-    command = IndicatorCommand(
-        indicators=[short_instrument_name],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-    if bool(alert):
-        assert isinstance(alert, IndicatorCommand), repr(alert)
-        return _command.suite(command, alert)
-    else:
-        return command
-
-
 def short_instrument_name_function(
     argument,
     key: str,
@@ -1563,24 +1479,6 @@ def staccato_function(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def staff_lines(
-    n: int,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> _command.Suite:
-    command_1 = IndicatorCommand(
-        indicators=[_indicatorclasses.BarExtent(n)],
-        selector=selector,
-        tags=[_tags.function_name(_frame(), n=1), _tags.NOT_PARTS],
-    )
-    command_2 = IndicatorCommand(
-        indicators=[_indicatorclasses.StaffLines(n)],
-        selector=selector,
-        tags=[_tags.function_name(_frame(), n=2)],
-    )
-    return _command.suite(command_1, command_2)
-
-
 def staff_lines_function(argument, n: int) -> list[abjad.Wrapper]:
     assert isinstance(n, int), repr(n)
     wrappers = []
@@ -1631,13 +1529,10 @@ def stem_tremolo_function(argument, *, tremolo_flags: int = 32) -> list[abjad.Wr
 
 def stop_on_string(
     selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-    *,
-    map=None,
 ) -> IndicatorCommand:
     articulation = abjad.Articulation("baca-stop-on-string")
     return IndicatorCommand(
         indicators=[articulation],
-        map=map,
         selector=selector,
         tags=[_tags.function_name(_frame())],
     )

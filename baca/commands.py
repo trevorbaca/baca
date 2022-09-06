@@ -574,6 +574,10 @@ def color(
     return ColorCommand(selector=selector, lone=lone)
 
 
+def color_function(argument, *, lone: bool = False) -> None:
+    return abjad.label.by_selector(argument, lone=lone)
+
+
 def container(
     identifier: str = None,
     *,
@@ -618,110 +622,6 @@ def finger_pressure_transition_function(argument) -> None:
         allow_repeats=True,
         tag=tag,
     )
-
-
-def flat_glissando(
-    pitch: str
-    | abjad.NamedPitch
-    | abjad.StaffPosition
-    | list[abjad.StaffPosition]
-    | None = None,
-    *tweaks,
-    allow_hidden: bool = False,
-    allow_repitch: bool = False,
-    do_not_hide_middle_note_heads: bool = False,
-    mock: bool = False,
-    hide_middle_stems: bool = False,
-    hide_stem_selector: typing.Callable = None,
-    left_broken: bool = False,
-    right_broken: bool = False,
-    right_broken_show_next: bool = False,
-    # TODO: maybe remove rleak
-    rleak: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-    stop_pitch: str | abjad.NamedPitch | abjad.StaffPosition | None = None,
-) -> _command.Suite:
-    prototype = (list, str, abjad.NamedPitch, abjad.StaffPosition)
-    if pitch is not None:
-        assert isinstance(pitch, prototype), repr(pitch)
-    if stop_pitch is not None:
-        assert type(pitch) is type(stop_pitch), repr((pitch, stop_pitch))
-    if rleak is True:
-
-        def _selector_rleak(argument):
-            result = selector(argument)
-            result = _select.rleak(result)
-            return result
-
-        new_selector = _selector_rleak
-    else:
-        new_selector = selector
-    accumulator: list[_command.Command] = []
-    command = glissando(
-        *tweaks,
-        allow_repeats=True,
-        allow_ties=True,
-        hide_middle_note_heads=not do_not_hide_middle_note_heads,
-        hide_middle_stems=hide_middle_stems,
-        hide_stem_selector=hide_stem_selector,
-        left_broken=left_broken,
-        right_broken=right_broken,
-        right_broken_show_next=right_broken_show_next,
-        selector=new_selector,
-    )
-    accumulator.append(command)
-
-    def _leaves_of_selector(argument):
-        return abjad.select.leaves(new_selector(argument))
-
-    untie_command = untie(_leaves_of_selector)
-    accumulator.append(untie_command)
-    if pitch is not None and stop_pitch is None:
-        # TODO: remove list test from or-clause?
-        if isinstance(pitch, abjad.StaffPosition) or (
-            isinstance(pitch, list) and isinstance(pitch[0], abjad.StaffPosition)
-        ):
-            staff_position_command_object = _pitchcommands._staff_position_command(
-                pitch,
-                allow_hidden=allow_hidden,
-                allow_repitch=allow_repitch,
-                mock=mock,
-                selector=new_selector,
-            )
-            accumulator.append(staff_position_command_object)
-        else:
-            pitch_command_object = _pitchcommands._pitch_command_factory(
-                pitch,
-                allow_hidden=allow_hidden,
-                allow_repitch=allow_repitch,
-                mock=mock,
-                selector=new_selector,
-            )
-            accumulator.append(pitch_command_object)
-    elif pitch is not None and stop_pitch is not None:
-        if isinstance(pitch, abjad.StaffPosition):
-            assert isinstance(stop_pitch, abjad.StaffPosition)
-            interpolation_command = (
-                _pitchcommands._interpolate_staff_positions_function(
-                    pitch,
-                    stop_pitch,
-                    allow_hidden=allow_hidden,
-                    mock=mock,
-                    selector=new_selector,
-                )
-            )
-        else:
-            assert isinstance(pitch, str | abjad.NamedPitch)
-            assert isinstance(stop_pitch, str | abjad.NamedPitch)
-            interpolation_command = _pitchcommands._interpolate_pitches_function(
-                pitch,
-                stop_pitch,
-                allow_hidden=allow_hidden,
-                mock=mock,
-                selector=new_selector,
-            )
-        accumulator.append(interpolation_command)
-    return _command.suite(*accumulator)
 
 
 def flat_glissando_function(
@@ -820,7 +720,6 @@ def glissando(
     hide_middle_stems: bool = False,
     hide_stem_selector: typing.Callable = None,
     left_broken: bool = False,
-    map=None,
     right_broken: bool = False,
     right_broken_show_next: bool = False,
     selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
@@ -834,7 +733,6 @@ def glissando(
         hide_middle_stems=hide_middle_stems,
         hide_stem_selector=hide_stem_selector,
         left_broken=left_broken,
-        map=map,
         right_broken=right_broken,
         right_broken_show_next=right_broken_show_next,
         selector=selector,
