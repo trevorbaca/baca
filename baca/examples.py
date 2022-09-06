@@ -17,10 +17,8 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ... )
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.label(lambda _: abjad.label.with_indices(_)),
-    ... )
+    >>> voice = score["Music"]
+    >>> abjad.label.with_indices(voice)
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},

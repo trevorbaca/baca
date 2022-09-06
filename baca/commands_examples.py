@@ -18,16 +18,15 @@ commands.py examles
     >>> baca.SpacingSpecifier((1, 16))(score)
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.bcps(
-    ...         [(1, 5), (2, 5)],
-    ...         abjad.Tweak(r"- \tweak color #red"),
-    ...         abjad.Tweak(r"- \tweak staff-padding 2.5"),
-    ...     ),
-    ...     baca.pitches("E4 F4"),
-    ...     baca.script_staff_padding(5),
+    >>> voice = score["Music"]
+    >>> _ = baca.bcps_function(
+    ...     voice,
+    ...     [(1, 5), (2, 5)],
+    ...     abjad.Tweak(r"- \tweak color #red"),
+    ...     abjad.Tweak(r"- \tweak staff-padding 2.5"),
     ... )
+    >>> _ = baca.pitches_function(voice, "E4 F4")
+    >>> _ = baca.script_staff_padding_function(voice, 5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -192,20 +191,6 @@ commands.py examles
 
 ..  container:: example
 
-    REGRESSION. Tweaks survive copy:
-
-    >>> command = baca.bcps(
-    ...     [(1, 2), (1, 4)],
-    ...     abjad.Tweak(r"- \tweak color #red"),
-    ... )
-
-    >>> import copy
-    >>> new_command = copy.copy(command)
-    >>> new_command.tweaks
-    (Tweak(string='- \\tweak color #red', tag=None),)
-
-..  container:: example
-
     PATTERN. Define chunkwise spanners like this:
 
     >>> score = baca.docs.make_empty_score(1)
@@ -358,80 +343,6 @@ commands.py examles
                 }
             >>
         }
-
-..  container:: example
-
-    Container commands.
-
-    >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
-    ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
-    ...     docs=True,
-    ... )
-
-    >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
-    >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.container(
-    ...         "ViolinI",
-    ...         selector=lambda _: baca.select.leaves(_)[:2],
-    ...     ),
-    ...     baca.container(
-    ...         "ViolinII",
-    ...         selector=lambda _: baca.select.leaves(_)[2:],
-    ...         ),
-    ...     baca.pitches("E4 F4"),
-    ... )
-
-    >>> _, _ = baca.interpret.section(
-    ...     score,
-    ...     {},
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
-    ...     move_global_context=True,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
-
-    >>> string = abjad.lilypond(score)
-    >>> print(string)
-    \context Score = "Score"
-    {
-        \context Staff = "Staff"
-        <<
-            \context Voice = "Skips"
-            {
-                \time 4/8
-                s1 * 4/8
-                \time 3/8
-                s1 * 3/8
-                \time 4/8
-                s1 * 4/8
-                \time 3/8
-                s1 * 3/8
-            }
-            \context Voice = "Music"
-            {
-                {   %*% ViolinI
-                    e'2
-                    f'4.
-                }   %*% ViolinI
-                {   %*% ViolinII
-                    e'2
-                    f'4.
-                }   %*% ViolinII
-            }
-        >>
-    }
 
 ..  container:: example
 
@@ -1227,21 +1138,20 @@ commands.py examles
 
     Colors leaves:
 
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
-    ...         treatments=[-1],
-    ...     ),
-    ...     rmakers.beam(),
-    ...     baca.color(),
-    ...     rmakers.unbeam(),
-    ...     baca.tuplet_bracket_staff_padding(2),
+    >>> container = baca.figure_function(
+    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     [1, 1, 5, -1],
+    ...     16,
+    ...     affix=baca.rests_around([2], [4]),
+    ...     restart_talea=True,
+    ...     treatments=[-1],
     ... )
-    >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
+    >>> rmakers.beam_function(container)
+    >>> baca.color_function(abjad.select.leaves(container))
+    >>> rmakers.unbeam_function(container)
+    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1311,21 +1221,20 @@ commands.py examles
     ...     result = abjad.select.tuplet(argument, 1)
     ...     result = abjad.select.leaves(result)
     ...     return result
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
-    ...         treatments=[-1],
-    ...     ),
-    ...     rmakers.beam(),
-    ...     baca.color(selector=color_selector),
-    ...     rmakers.unbeam(),
-    ...     baca.tuplet_bracket_staff_padding(2),
+    >>> container = baca.figure_function(
+    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     [1, 1, 5, -1],
+    ...     16,
+    ...     affix=baca.rests_around([2], [4]),
+    ...     restart_talea=True,
+    ...     treatments=[-1],
     ... )
-    >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
+    >>> rmakers.beam_function(container)
+    >>> baca.color_function(color_selector(container))
+    >>> rmakers.unbeam_function(container)
+    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1378,81 +1287,6 @@ commands.py examles
                 }
             }
         >>
-
-..  container:: example
-
-    Container command makes container with ``identifier`` and extends
-    container with ``selector`` output.
-
-    >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
-    ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
-    ...     docs=True,
-    ... )
-
-    >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
-    >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.container(
-    ...         "ViolinI",
-    ...         selector=lambda _: baca.select.leaves(_)[:2],
-    ...     ),
-    ...     baca.container(
-    ...         "ViolinII",
-    ...         selector=lambda _: baca.select.leaves(_)[2:],
-    ...     ),
-    ...     baca.pitches("E4 F4"),
-    ... )
-
-    >>> _, _ = baca.interpret.section(
-    ...     score,
-    ...     {},
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
-    ...     move_global_context=True,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
-
-    >>> string = abjad.lilypond(score)
-    >>> print(string)
-    \context Score = "Score"
-    {
-        \context Staff = "Staff"
-        <<
-            \context Voice = "Skips"
-            {
-                \time 4/8
-                s1 * 4/8
-                \time 3/8
-                s1 * 3/8
-                \time 4/8
-                s1 * 4/8
-                \time 3/8
-                s1 * 3/8
-            }
-            \context Voice = "Music"
-            {
-                {   %*% ViolinI
-                    e'2
-                    f'4.
-                }   %*% ViolinI
-                {   %*% ViolinII
-                    e'2
-                    f'4.
-                }   %*% ViolinII
-            }
-        >>
-    }
 
 ..  container:: example
 
@@ -1552,18 +1386,13 @@ commands.py examles
 
     >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitch("C5"),
-    ...     baca.note_head_style_harmonic(selector=lambda _: abjad.select.note(_, 0)),
-    ...     baca.note_head_style_harmonic(selector=lambda _: abjad.select.note(_, 2)),
-    ...     baca.finger_pressure_transition(
-    ...         selector=lambda _: abjad.select.notes(_)[:2],
-    ...     ),
-    ...     baca.finger_pressure_transition(
-    ...         selector=lambda _: abjad.select.notes(_)[2:],
-    ...     ),
-    ... )
+    >>> voice = score["Music"]
+    >>> _ = baca.pitch_function(voice, "C5")
+    >>> notes = abjad.select.notes(voice)
+    >>> _ = baca.note_head_style_harmonic_function(notes[0])
+    >>> _ = baca.note_head_style_harmonic_function(notes[2])
+    >>> baca.finger_pressure_transition_function(notes[:2])
+    >>> baca.finger_pressure_transition_function(notes[2:])
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -1641,12 +1470,11 @@ commands.py examles
 
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
-    ...     baca.glissando(
-    ...         abjad.Tweak(r"- \tweak color #red"),
-    ...     ),
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 E5 G4 F5")
+    >>> baca.glissando_function(
+    ...     voice,
+    ...     abjad.Tweak(r"- \tweak color #red"),
     ... )
 
     >>> _, _ = baca.interpret.section(
@@ -1750,13 +1578,12 @@ commands.py examles
 
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
-    ...     baca.glissando(
-    ...         (abjad.Tweak(r"- \tweak color #red"), 0),
-    ...         (abjad.Tweak(r"- \tweak color #red"), -1),
-    ...     ),
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 E5 G4 F5")
+    >>> baca.glissando_function(
+    ...     voice,
+    ...     (abjad.Tweak(r"- \tweak color #red"), 0),
+    ...     (abjad.Tweak(r"- \tweak color #red"), -1),
     ... )
 
     >>> _, _ = baca.interpret.section(
@@ -1909,20 +1736,19 @@ commands.py examles
 
     Labels pitch names:
 
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
-    ...         treatments=[-1],
-    ...     ),
-    ...     rmakers.beam(),
-    ...     baca.label(lambda _: abjad.label.with_pitches(_, locale="us")),
-    ...     baca.tuplet_bracket_staff_padding(2),
+    >>> container = baca.figure_function(
+    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     [1, 1, 5, -1],
+    ...     16,
+    ...     affix=baca.rests_around([2], [4]),
+    ...     restart_talea=True,
+    ...     treatments=[-1],
     ... )
-    >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
+    >>> rmakers.beam_function(container)
+    >>> abjad.label.with_pitches(container, locale="us")
+    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 

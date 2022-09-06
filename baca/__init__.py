@@ -23,12 +23,10 @@ from .figures import *
 from .indicatorclasses import *
 from .indicatorcommands import *
 from .interpret import (
-    append_anchor_note,
     append_anchor_note_function,
     label_moment_numbers,
     label_stage_numbers,
     reapply,
-    reapply_persistent_indicators,
     scope,
     update_voice_name_to_parameter_to_state,
 )
@@ -48,7 +46,6 @@ from .pcollections import (
     RegistrationComponent,
 )
 from .piecewisecommands import (
-    PiecewiseCommand,
     bow_speed_spanner_function,
     circle_bow_spanner_function,
     clb_spanner_function,
@@ -71,17 +68,11 @@ from .piecewisecommands import (
 from .pitchcommands import *
 from .rhythmcommands import *
 from .spannercommands import (
-    beam,
     beam_function,
-    ottava,
     ottava_function,
-    ottava_bassa,
     ottava_bassa_function,
-    slur,
     slur_function,
-    sustain_pedal,
     sustain_pedal_function,
-    trill_spanner,
     trill_spanner_function,
 )
 

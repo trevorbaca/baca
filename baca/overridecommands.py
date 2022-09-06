@@ -133,8 +133,6 @@ class OverrideCommand(_command.Command):
         if self.grob is not None:
             assert isinstance(self.grob, str), repr(self.grob)
 
-    __repr__ = _command.Command.__repr__
-
     def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
             return False

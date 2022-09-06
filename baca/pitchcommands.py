@@ -2875,22 +2875,16 @@ class RegisterInterpolationCommand(_command.Command):
 
         Selects tuplet 0:
 
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16),
-        ...     rmakers.beam(),
-        ...     baca.color(
-        ...         lone=True,
-        ...         selector=lambda _: baca.select.tuplet(_, 0),
-        ...     ),
-        ...     baca.register(
-        ...         0, 24,
-        ...         selector=lambda _: baca.select.tuplet(_, 0),
-        ...     ),
+        >>> container = baca.figure_function(
+        ...     2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]],
+        ...     [1],
+        ...     16,
         ... )
-
-        >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-        >>> selection = stack(collections)
-
+        >>> rmakers.beam_function(container)
+        >>> baca.color_function(baca.select.tuplet(container, 0), lone=True)
+        >>> baca.register_function(baca.select.tuplet(container, 0), 0, 24)
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2957,22 +2951,15 @@ class RegisterInterpolationCommand(_command.Command):
 
         Selects tuplet -1:
 
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16),
-        ...     rmakers.beam(),
-        ...     baca.color(
-        ...         lone=True,
-        ...         selector=lambda _: baca.select.tuplet(_, -1),
-        ...     ),
-        ...     baca.register(
-        ...         0, 24,
-        ...         selector=lambda _: baca.select.tuplet(_, -1),
-        ...     ),
+        >>> container = baca.figure_function(
+        ...     2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]], [1], 16
         ... )
-
-        >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-        >>> selection = stack(collections)
-
+        >>> rmakers.beam_function(container)
+        >>> tuplet = baca.select.tuplet(container, -1)
+        >>> baca.color_function(tuplet, lone=True)
+        >>> baca.register_function(tuplet, 0, 24)
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3769,17 +3756,14 @@ def bass_to_octave(
         Octave-transposes music such that the lowest note in the entire selection appears
         in octave 3:
 
-        >>> stack = baca.stack(
-        ...     baca.figure([5, -3], 32),
-        ...     rmakers.beam(),
-        ...     baca.bass_to_octave(3),
-        ...     baca.color(
-        ...         lone=True,
-        ...         selector=lambda _: baca.select.plts(_),
-        ...     ),
+        >>> container = baca.figure_function(
+        ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]], [5, -3], 32
         ... )
-        >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
-
+        >>> rmakers.beam_function(container)
+        >>> baca.bass_to_octave_function(container, 3)
+        >>> baca.color_function(baca.select.plts(container), lone=True)
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3960,17 +3944,14 @@ def center_to_octave(
 
         Octave-transposes music such that the centroid of all PLTs appears in octave 3:
 
-        >>> stack = baca.stack(
-        ...     baca.figure([5, -3], 32),
-        ...     rmakers.beam(),
-        ...     baca.center_to_octave(3),
-        ...     baca.color(
-        ...         lone=True,
-        ...         selector=lambda _: baca.select.plts(_),
-        ...     ),
+        >>> container = baca.figure_function(
+        ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]], [5, -3], 32
         ... )
-        >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
-
+        >>> rmakers.beam_function(container)
+        >>> baca.center_to_octave_function(container, 3)
+        >>> baca.color_function(baca.select.plts(container), lone=True)
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4384,21 +4365,20 @@ def interpolate_pitches(
 
     ..  container:: example
 
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16),
-        ...     rmakers.beam(),
-        ...     baca.clef("treble", selector=lambda _: abjad.select.leaf(_, 0)),
-        ...     baca.interpolate_pitches("Eb4", "F#5"),
-        ...     baca.glissando(
-        ...         allow_repeats=True,
-        ...         hide_middle_note_heads=True,
-        ...     ),
-        ...     baca.glissando_thickness(3),
+        >>> container = baca.figure_function(
+        ...     2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]], [1], 16
         ... )
-
-        >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-        >>> selection = stack(collections)
-
+        >>> rmakers.beam_function(container)
+        >>> _ = baca.clef_function(abjad.select.leaf(container, 0), "treble")
+        >>> baca.interpolate_pitches_function(container, "Eb4", "F#5")
+        >>> baca.glissando_function(
+        ...     container,
+        ...     allow_repeats=True,
+        ...     hide_middle_note_heads=True,
+        ... )
+        >>> _ = baca.glissando_thickness_function(container, 3)
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4885,27 +4865,21 @@ def register(
 
         Octave-transposes PLTs in tuplet 1 to the octave rooted at -6:
 
-        >>> stack = baca.stack(
-        ...     baca.figure(
-        ...         [1, 1, 5, -1],
-        ...         16,
-        ...         affix=baca.rests_around([2], [4]),
-        ...         restart_talea=True,
-        ...         treatments=[-1],
-        ...     ),
-        ...     rmakers.beam(),
-        ...     baca.color(
-        ...         lone=True,
-        ...         selector=lambda _: baca.select.tuplet(_, 1),
-        ...     ),
-        ...     baca.register(
-        ...         -6,
-        ...         selector=lambda _: baca.select.tuplet(_, 1),
-        ...     ),
-        ...     baca.tuplet_bracket_staff_padding(2),
+        >>> container = baca.figure_function(
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     [1, 1, 5, -1],
+        ...     16,
+        ...     affix=baca.rests_around([2], [4]),
+        ...     restart_talea=True,
+        ...     treatments=[-1],
         ... )
-        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
+        >>> rmakers.beam_function(container)
+        >>> tuplet = baca.select.tuplet(container, 1)
+        >>> baca.color_function(tuplet, lone=True)
+        >>> baca.register_function(tuplet, -6)
+        >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5037,27 +5011,21 @@ def register(
 
         Octave-transposes PLTs in tuplet 1 to an octave interpolated from -6 to 18:
 
-        >>> stack = baca.stack(
-        ...     baca.figure(
-        ...         [1, 1, 5, -1],
-        ...         16,
-        ...         affix=baca.rests_around([2], [4]),
-        ...         restart_talea=True,
-        ...         treatments=[-1],
-        ...     ),
-        ...     rmakers.beam(),
-        ...     baca.color(
-        ...         lone=True,
-        ...         selector=lambda _: baca.select.tuplet(_, 1),
-        ...     ),
-        ...     baca.register(
-        ...         -6, 18,
-        ...         selector=lambda _: baca.select.tuplet(_, 1),
-        ...     ),
-        ...     baca.tuplet_bracket_staff_padding(2),
+        >>> container = baca.figure_function(
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     [1, 1, 5, -1],
+        ...     16,
+        ...     affix=baca.rests_around([2], [4]),
+        ...     restart_talea=True,
+        ...     treatments=[-1],
         ... )
-        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
+        >>> rmakers.beam_function(container)
+        >>> tuplet = baca.select.tuplet(container, 1)
+        >>> baca.color_function(tuplet, lone=True)
+        >>> baca.register_function(tuplet, -6, 18)
+        >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5201,17 +5169,14 @@ def soprano_to_octave(
         Octave-transposes music such that the highest note in the collection of all PLTs
         appears in octave 3:
 
-        >>> stack = baca.stack(
-        ...     baca.figure([5, -3], 32),
-        ...     rmakers.beam(),
-        ...     baca.color(
-        ...         lone=True,
-        ...         selector=lambda _: baca.select.plts(_),
-        ...     ),
-        ...     baca.soprano_to_octave(3),
+        >>> container = baca.figure_function(
+        ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]], [5, -3], 32
         ... )
-        >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
-
+        >>> rmakers.beam_function(container)
+        >>> baca.soprano_to_octave_function(container, 3)
+        >>> baca.color_function(baca.select.plts(container), lone=True)
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 

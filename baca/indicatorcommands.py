@@ -98,8 +98,6 @@ class IndicatorCommand(_command.Command):
         assert isinstance(self.context, (str, type(None))), repr(self.context)
         assert isinstance(self.redundant, bool), repr(self.redundant)
 
-    __repr__ = _command.Command.__repr__
-
     def _call(self, *, argument=None, runtime=None) -> bool:
         if argument is None:
             return False

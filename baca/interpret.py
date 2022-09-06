@@ -17,7 +17,6 @@ import abjad
 from . import accumulator as _accumulator
 from . import build as _build
 from . import command as _command
-from . import commands as _commands
 from . import docs as _docs
 from . import indicatorclasses as _indicatorclasses
 from . import layout as _layout
@@ -2553,11 +2552,6 @@ def append_anchor_note_function(argument, *, runtime=None):
     voice.append(note)
 
 
-def append_anchor_note() -> _commands.GenericCommand:
-    command = _commands.GenericCommand(function=append_anchor_note_function)
-    return command
-
-
 def apply_breaks(score, breaks) -> None:
     if breaks is None:
         return
@@ -2973,17 +2967,6 @@ def reapply(voices, manifests, previous_persistent_indicators):
     }
     for voice in voices:
         reapply_persistent_indicators_function(voice, runtime=runtime)
-
-
-def reapply_persistent_indicators(
-    *, selector: typing.Callable = lambda _: _select.leaves(_)
-) -> _commands.GenericCommand:
-    command = _commands.GenericCommand(
-        function=reapply_persistent_indicators_function,
-        name="reapply_persistent_indicators",
-        selector=selector,
-    )
-    return command
 
 
 def reapply_persistent_indicators_function(argument, *, runtime=None):

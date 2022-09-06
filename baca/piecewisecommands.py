@@ -1,14 +1,12 @@
 """
 Piecewise.
 """
-import copy
 import dataclasses
 import typing
 from inspect import currentframe as _frame
 
 import abjad
 
-from . import command as _command
 from . import dynamics as _dynamics
 from . import select as _select
 from . import tags as _tags
@@ -146,6 +144,17 @@ def _do_piecewise_command(
     self_tag,
     self_tweaks: typing.Sequence[_typings.IndexedTweak] = (),
 ) -> list[abjad.Wrapper]:
+    """
+    Attaches indicator to first leaf in each group of selector output when ``bookend``
+    is false.
+
+    Attaches indicator to both first leaf and last leaf in each group of selector output
+    when ``bookend`` is true.
+
+    When ``bookend`` equals integer ``n``, command attaches indicator to first leaf and
+    last leaf in group ``n`` of selector output and attaches indicator to only first leaf
+    in other groups of selector output.
+    """
     cyclic_specifiers = abjad.CyclicTuple(self_specifiers)
     manifests = manifests or {}
     if self_pieces is not None:
@@ -538,79 +547,6 @@ def _unbundle_indicator(argument):
     if isinstance(argument, abjad.Bundle):
         return argument.indicator
     return argument
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class PiecewiseCommand(_command.Command):
-    """
-    Piecewise indicator command.
-
-    Command attaches indicator to first leaf in each group of selector output when
-    ``bookend`` is false.
-
-    Command attaches indicator to both first leaf and last leaf in each group of selector
-    output when ``bookend`` is true.
-
-    When ``bookend`` equals integer ``n``, command attaches indicator to first leaf and
-    last leaf in group ``n`` of selector output and attaches indicator to only first leaf
-    in other groups of selector output.
-    """
-
-    autodetect_right_padding: bool = False
-    bookend: bool | int = False
-    specifiers: typing.Sequence[_Specifier] = ()
-    final_piece_spanner: typing.Any = None
-    leak_spanner_stop: bool = False
-    left_broken: bool = False
-    pieces: typing.Any = lambda _: _select.leaves(_)
-    remove_length_1_spanner_start: bool = False
-    right_broken: typing.Any = None
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-    tweaks: typing.Sequence[_typings.IndexedTweak] = ()
-
-    def __post_init__(self):
-        _command.Command.__post_init__(self)
-        assert isinstance(self.autodetect_right_padding, bool)
-        assert isinstance(self.bookend, bool | int), repr(self.bookend)
-        assert self.specifiers is not None
-        if self.final_piece_spanner not in (None, False):
-            assert getattr(self.final_piece_spanner, "spanner_start", False)
-        assert isinstance(self.leak_spanner_stop, bool), repr(self.leak_spanner_stop)
-        assert isinstance(self.left_broken, bool), repr(self.left_broken)
-        if self.pieces is not None:
-            assert callable(self.pieces), repr(self.pieces)
-        assert isinstance(self.remove_length_1_spanner_start, bool)
-        _tweaks.validate_indexed_tweaks(self.tweaks)
-
-    def __copy__(self, *arguments):
-        result = dataclasses.replace(self)
-        result.specifiers = copy.deepcopy(self.specifiers)
-        return result
-
-    def _call(self, *, argument=None, runtime=None) -> bool:
-        if argument is None:
-            return False
-        if not self.specifiers:
-            return False
-        if self.selector is not None:
-            assert not isinstance(self.selector, str)
-            argument = self.selector(argument)
-        _do_piecewise_command(
-            argument,
-            manifests=runtime.get("manifests", {}),
-            self_autodetect_right_padding=self.autodetect_right_padding,
-            self_bookend=self.bookend,
-            self_final_piece_spanner=self.final_piece_spanner,
-            self_leak_spanner_stop=self.leak_spanner_stop,
-            self_left_broken=self.left_broken,
-            self_pieces=self.pieces,
-            self_remove_length_1_spanner_start=self.remove_length_1_spanner_start,
-            self_right_broken=self.right_broken,
-            self_specifiers=self.specifiers,
-            self_tag=self.tag,
-            self_tweaks=self.tweaks,
-        )
-        return False
 
 
 def bow_speed_spanner_function(
