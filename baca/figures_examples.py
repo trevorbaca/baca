@@ -867,20 +867,20 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1],
-    ...         8,
-    ...         acciaccatura=baca.lmr(
-    ...             left_length=3,
-    ...             right_counts=[1],
-    ...             right_cyclic=True,
-    ...         ),
+    >>> container = baca.figure_function(
+    ...     collections,
+    ...     [1],
+    ...     8,
+    ...     acciaccatura=baca.lmr(
+    ...         left_length=3,
+    ...         right_counts=[1],
+    ...         right_cyclic=True,
     ...     ),
-    ...     rmakers.beam(),
     ... )
-    >>> selections = stack(collections)
-    >>> lilypond_file = abjad.illustrators.selection(selections)
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -971,21 +971,20 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1],
-    ...         8,
-    ...         acciaccatura=baca.lmr(
-    ...             right_length=3,
-    ...             left_counts=[1],
-    ...             left_cyclic=True,
-    ...         ),
+    >>> container = baca.figure_function(
+    ...     collections,
+    ...     [1],
+    ...     8,
+    ...     acciaccatura=baca.lmr(
+    ...         right_length=3,
+    ...         left_counts=[1],
+    ...         left_cyclic=True,
     ...     ),
-    ...     rmakers.beam(),
     ... )
-    >>> selections = stack(collections)
-    >>> lilypond_file = abjad.illustrators.selection(selections)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
 
     ..  docs::
 
@@ -1076,22 +1075,21 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1],
-    ...         8,
-    ...         acciaccatura=baca.lmr(
-    ...             left_length=3,
-    ...             middle_counts=[1],
-    ...             middle_cyclic=True,
-    ...             right_length=3,
-    ...         ),
+    >>> container = baca.figure_function(
+    ...     collections,
+    ...     [1],
+    ...     8,
+    ...     acciaccatura=baca.lmr(
+    ...         left_length=3,
+    ...         middle_counts=[1],
+    ...         middle_cyclic=True,
+    ...         right_length=3,
     ...     ),
-    ...     rmakers.beam(),
     ... )
-    >>> selections = stack(collections)
-    >>> lilypond_file = abjad.illustrators.selection(selections)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
 
     ..  docs::
 
@@ -1187,13 +1185,13 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 8, acciaccatura=baca.lmr(left_length=1)),
-    ...     rmakers.beam(),
+    >>> container = baca.figure_function(
+    ...     collections, [1], 8, acciaccatura=baca.lmr(left_length=1)
     ... )
-    >>> selections = stack(collections)
-    >>> lilypond_file = abjad.illustrators.selection(selections)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
 
     ..  docs::
 
@@ -1276,13 +1274,11 @@ figures.py examples.
     Without state manifest:
 
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> stack = baca.stack(
-    ...     baca.figure([1, 1, 2], 16),
-    ...     rmakers.beam(),
-    ... )
-    >>> selections = stack(collections)
-    >>> lilypond_file = abjad.illustrators.selection(selections)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
+    >>> container = baca.figure_function(collections, [1, 1, 2], 16)
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
 
     ..  docs::
 
@@ -1331,13 +1327,11 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 8, acciaccatura=True),
-    ...     rmakers.beam(),
-    ... )
-    >>> selections = stack(collections)
-    >>> lilypond_file = abjad.illustrators.selection(selections)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
+    >>> container = baca.figure_function(collections, [1], 8, acciaccatura=True)
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
 
     ..  docs::
 
@@ -1421,13 +1415,11 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 4, acciaccatura=True),
-    ...     rmakers.beam(),
-    ... )
-    >>> selections = stack(collections)
-    >>> lilypond_file = abjad.illustrators.selection(selections)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
+    >>> container = baca.figure_function(collections, [1], 4, acciaccatura=True)
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
 
     ..  docs::
 
@@ -1505,13 +1497,11 @@ figures.py examples.
     default:
 
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> stack = baca.stack(
-    ...     baca.figure([4, 4, 5], 32),
-    ...     rmakers.beam(),
-    ... )
-    >>> selections = stack(collections)
-    >>> lilypond_file = abjad.illustrators.selection(selections)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
+    >>> container =  baca.figure_function(collections, [4, 4, 5], 32)
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
 
     ..  docs::
 
@@ -1561,17 +1551,16 @@ figures.py examples.
     Spells nonassignable durations with monontonically increasing durations:
 
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [4, 4, 5],
-    ...         32,
-    ...         spelling=rmakers.Spelling(increase_monotonic=True),
-    ...     ),
-    ...     rmakers.beam(),
+    >>> container = baca.figure_function(
+    ...     collections,
+    ...     [4, 4, 5],
+    ...     32,
+    ...     spelling=rmakers.Spelling(increase_monotonic=True),
     ... )
-    >>> selections = stack(collections)
-    >>> lilypond_file = abjad.illustrators.selection(selections)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
 
     ..  docs::
 
@@ -1621,12 +1610,11 @@ figures.py examples.
     Sixteenths and eighths:
 
     >>> collections = [[0, 2, 10, 8]]
-    >>> stack = baca.stack(
-    ...     baca.figure([1, 1, 2], 16),
-    ...     rmakers.beam(),
-    ... )
-    >>> selections = stack(collections)
-    >>> lilypond_file = abjad.illustrators.selection(selections)
+    >>> container = baca.figure_function(collections, [1, 1, 2], 16)
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1652,9 +1640,11 @@ figures.py examples.
         >>
 
     >>> collections = [[18, 16, 15, 20, 19]]
-    >>> selections = stack(collections)
-
-    >>> lilypond_file = abjad.illustrators.selection(selections)
+    >>> container = baca.figure_function(collections, [1, 1, 2], 16)
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1681,9 +1671,11 @@ figures.py examples.
         >>
 
     >>> collections = [[9]]
-    >>> selections = stack(collections)
-
-    >>> lilypond_file = abjad.illustrators.selection(selections)
+    >>> container = baca.figure_function(collections, [1, 1, 2], 16)
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1704,9 +1696,11 @@ figures.py examples.
         >>
 
     >>> collections = [[0, 2, 10, 8], [18, 16, 15, 20, 19], [9]]
-    >>> selections = stack(collections)
-
-    >>> lilypond_file = abjad.illustrators.selection(selections)
+    >>> container = baca.figure_function(collections, [1, 1, 2], 16)
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1750,15 +1744,15 @@ figures.py examples.
     Works with rests:
 
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> stack = baca.stack(
-    ...     baca.figure([3, -1, 2, 2], 16),
-    ...     rmakers.beam(
-    ...         beam_rests=True,
-    ...         stemlet_length=1.5,
-    ...     ),
+    >>> container = baca.figure_function(collections, [3, -1, 2, 2], 16)
+    >>> rmakers.beam_function(
+    ...     rmakers.nongrace_leaves_in_each_tuplet_function(container),
+    ...     beam_rests=True,
+    ...     stemlet_length=1.5,
     ... )
-    >>> selections = stack(collections)
-    >>> lilypond_file = abjad.illustrators.selection(selections)
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1808,13 +1802,12 @@ figures.py examples.
     Works with large counts:
 
     >>> collections = [[0, 2]]
-    >>> stack = baca.stack(
-    ...     baca.figure([29], 64),
-    ...     rmakers.beam(),
-    ...     rmakers.force_repeat_tie(),
-    ... )
-    >>> selections = stack(collections)
-    >>> lilypond_file = abjad.illustrators.selection(selections)
+    >>> container = baca.figure_function([[0, 2]], [29], 64)
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> rmakers.force_repeat_tie()(container)
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1844,12 +1837,11 @@ figures.py examples.
     One extra count per division:
 
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> stack = baca.stack(
-    ...     baca.figure([1, 1, 2], 16, treatments=[1]),
-    ...     rmakers.beam(),
-    ... )
-    >>> selections = stack(collections)
-    >>> lilypond_file = abjad.illustrators.selection(selections)
+    >>> container = baca.figure_function(collections, [1, 1, 2], 16, treatments=[1])
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1895,12 +1887,11 @@ figures.py examples.
     One missing count per division:
 
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> stack = baca.stack(
-    ...     baca.figure([1, 1, 2], 16, treatments=[-1]),
-    ...     rmakers.beam(),
-    ... )
-    >>> selections = stack(collections)
-    >>> lilypond_file = abjad.illustrators.selection(selections)
+    >>> container = baca.figure_function(collections, [1, 1, 2], 16, treatments=[-1])
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1952,12 +1943,11 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 16, treatments=["accel"]),
-    ...     rmakers.beam(),
-    ... )
-    >>> selections = stack(collections)
-    >>> lilypond_file = abjad.illustrators.selection(selections)
+    >>> container = baca.figure_function(collections, [1], 16, treatments=["accel"])
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -2226,12 +2216,11 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 16, treatments=["rit"]),
-    ...     rmakers.beam(),
-    ... )
-    >>> selections = stack(collections)
-    >>> lilypond_file = abjad.illustrators.selection(selections)
+    >>> container = baca.figure_function(collections, [1], 16, treatments=["rit"])
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -2498,14 +2487,13 @@ figures.py examples.
     ...     [10, 18, 16, 15, 20],
     ...     [19, 9, 0, 2, 10, 18],
     ... ]
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1], 16, treatments=["accel", "rit"]
-    ...     ),
-    ...     rmakers.beam(),
+    >>> container = baca.figure_function(
+    ...     collections, [1], 16, treatments=["accel", "rit"]
     ... )
-    >>> selections = stack(collections)
-    >>> lilypond_file = abjad.illustrators.selection(selections)
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -2731,12 +2719,12 @@ figures.py examples.
     ...     [10, 18, 16, 15, 20],
     ...     [19, 9, 0, 2, 10],
     ... ]
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 16, treatments=["accel", -2, "rit"]),
-    ...     rmakers.beam(),
-    ... )
-    >>> selections = stack(collections)
-    >>> lilypond_file = abjad.illustrators.selection(selections)
+    >>> container = baca.figure_function(
+    ...     collections, [1], 16, treatments=["accel", -2, "rit"])
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -2986,12 +2974,11 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 8, treatments=["3:2"]),
-    ...     rmakers.beam(),
-    ... )
-    >>> selections = stack(collections)
-    >>> lilypond_file = abjad.illustrators.selection(selections)
+    >>> container = baca.figure_function(collections, [1], 8, treatments=["3:2"])
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> staff = lilypond_file["Staff"]
     >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
     >>> abjad.override(staff).Stem.direction = abjad.DOWN
@@ -3080,13 +3067,12 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 8, treatments=[(1, 4)]),
-    ...     rmakers.denominator((1, 16)),
-    ...     rmakers.beam(),
-    ... )
-    >>> selections = stack(collections)
-    >>> lilypond_file = abjad.illustrators.selection(selections)
+    >>> container = baca.figure_function(collections, [1], 8, treatments=[(1, 4)])
+    >>> rmakers.denominator_function(container, (1, 16))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> staff = lilypond_file["Staff"]
     >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
     >>> abjad.override(staff).Stem.direction = abjad.DOWN
@@ -3171,13 +3157,13 @@ figures.py examples.
     ...     [10, 18, 16, 15, 20],
     ...     [19, 9, 0, 2, 10],
     ... ]
-    >>> stack = baca.stack(
-    ...     baca.figure([1, 1, 2], 8, treatments=[(1, 4), (3, 8)]),
-    ...     rmakers.denominator((1, 16)),
-    ...     rmakers.beam(),
-    ... )
-    >>> selections = stack(collections)
-    >>> lilypond_file = abjad.illustrators.selection(selections)
+    >>> container = baca.figure_function(
+    ...     collections, [1, 1, 2], 8, treatments=[(1, 4), (3, 8)])
+    >>> rmakers.denominator_function(container, (1, 16))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> staff = lilypond_file["Staff"]
     >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
     >>> abjad.override(staff).Stem.direction = abjad.DOWN
@@ -3270,21 +3256,20 @@ figures.py examples.
 
     Nest.
 
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
-    ...         treatments=[-1],
-    ...     ),
-    ...     rmakers.beam(),
-    ...     baca.nest("+4/16"),
-    ...     baca.tuplet_bracket_staff_padding(2),
+    >>> container = baca.figure_function(
+    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     [1, 1, 5, -1],
+    ...     16,
+    ...     affix=baca.rests_around([2], [4]),
+    ...     restart_talea=True,
+    ...     treatments=[-1],
     ... )
-    >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> _ = baca.nest_function(container, "+4/16")
+    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
-    >>> staff = lilypond_file["Staff"]
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -3350,12 +3335,12 @@ figures.py examples.
     ...     [16, 15, 23],
     ...     [19, 13, 9, 8],
     ... ]
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 16),
-    ...     rmakers.beam_groups(),
-    ...     baca.nest("+1/16"),
-    ... )
-    >>> selection = stack(collections)
+    >>> container = baca.figure_function(collections, [1], 16)
+    >>> rmakers.beam_groups_function(
+    ...     rmakers.nongrace_leaves_in_each_tuplet_function(container, level=-1))
+    >>> _ = baca.nest_function(container, "+1/16")
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3430,14 +3415,13 @@ figures.py examples.
     ...     [19, 13, 9, 8],
     ... ]
     >>> affix = baca.rests_around([2], [3])
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 16, affix=affix),
-    ...     rmakers.beam_groups(),
-    ...     baca.nest("+1/16"),
-    ... )
-    >>> selection = stack(collections)
+    >>> container = baca.figure_function(collections, [1], 16, affix=affix)
+    >>> rmakers.beam_groups_function(
+    ...     rmakers.nongrace_leaves_in_each_tuplet_function(container, level=-1))
+    >>> _ = baca.nest_function(container, "+1/16")
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
@@ -3511,13 +3495,11 @@ figures.py examples.
     ...     prefix=[1],
     ...     suffix=[2],
     ... )
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 16, affix=affix, treatments=[1]),
-    ...     rmakers.beam(),
-    ... )
-    >>> selection = stack(collections)
+    >>> container = baca.figure_function(collections, [1], 16, affix=affix, treatments=[1])
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
@@ -3568,13 +3550,11 @@ figures.py examples.
     ...     prefix=[1],
     ...     suffix=[2],
     ... )
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 16, affix=affix, treatments=[1]),
-    ...     rmakers.beam(),
-    ... )
-    >>> selection = stack(collections)
+    >>> container = baca.figure_function(collections, [1], 16, affix=affix, treatments=[1])
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
@@ -3612,13 +3592,12 @@ figures.py examples.
     ...     prefix=[1],
     ...     suffix=[2],
     ... )
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 16, affix=affix, treatments=[1]),
-    ...     rmakers.beam(),
-    ... )
-    >>> selection = stack(collections)
+    >>> container = baca.figure_function(
+    ...     collections, [1], 16, affix=affix, treatments=[1])
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
@@ -3672,13 +3651,12 @@ figures.py examples.
     ...     prefix=[1],
     ...     suffix=[2],
     ... )
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 16, affix=affix, treatments=[1]),
-    ...     rmakers.beam(),
-    ... )
-    >>> selection = stack(collections)
+    >>> container = baca.figure_function(
+    ...     collections, [1], 16, affix=affix, treatments=[1])
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
@@ -3728,13 +3706,11 @@ figures.py examples.
 
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> affix = baca.RestAffix(prefix=[3])
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 16, affix=affix),
-    ...     rmakers.beam(),
-    ... )
-    >>> selection = stack(collections)
+    >>> container = baca.figure_function(collections, [1], 16, affix=affix)
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
@@ -3776,13 +3752,11 @@ figures.py examples.
 
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> affix = baca.RestAffix(suffix=[3])
-    >>> stack = baca.stack(
-    ...     baca.figure([1], 16, affix=affix),
-    ...     rmakers.beam(),
-    ... )
-    >>> selection = stack(collections)
+    >>> container = baca.figure_function(collections, [1], 16, affix=affix)
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
@@ -5230,20 +5204,19 @@ figures.py examples.
 
     Rests after.
 
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...         affix=baca.rests_after([2]),
-    ...         restart_talea=True,
-    ...         treatments=[-1],
-    ...     ),
-    ...     rmakers.beam(),
-    ...     baca.tuplet_bracket_staff_padding(2),
+    >>> container = baca.figure_function(
+    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     [1, 1, 5, -1],
+    ...     16,
+    ...     affix=baca.rests_after([2]),
+    ...     restart_talea=True,
+    ...     treatments=[-1],
     ... )
-    >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
@@ -5297,20 +5270,19 @@ figures.py examples.
 
     Rests around.
 
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...         affix=baca.rests_around([2], [2]),
-    ...         restart_talea=True,
-    ...         treatments=[-1],
-    ...     ),
-    ...     rmakers.beam(),
-    ...     baca.tuplet_bracket_staff_padding(2),
+    >>> container = baca.figure_function(
+    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     [1, 1, 5, -1],
+    ...     16,
+    ...     affix=baca.rests_around([2], [2]),
+    ...     restart_talea=True,
+    ...     treatments=[-1],
     ... )
-    >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
@@ -5365,17 +5337,16 @@ figures.py examples.
 
     Works together with negative-valued talea:
 
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1, -1],
-    ...         16,
-    ...         affix=baca.rests_around([2], [3]),
-    ...         treatments=[1],
-    ...     ),
-    ...     rmakers.beam(),
+    >>> container = baca.figure_function(
+    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     [1, -1],
+    ...     16,
+    ...     affix=baca.rests_around([2], [3]),
+    ...     treatments=[1],
     ... )
-    >>> selection = stack(collections)
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> staff = lilypond_file["Staff"]
     >>> abjad.override(staff).TupletBracket.staff_padding = 4
@@ -5432,17 +5403,16 @@ figures.py examples.
 
 ..  container:: example
 
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [-1, 1],
-    ...         16,
-    ...         affix=baca.rests_around([2], [3]),
-    ...         treatments=[1],
-    ...     ),
-    ...     rmakers.beam(),
+    >>> container = baca.figure_function(
+    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     [-1, 1],
+    ...     16,
+    ...     affix=baca.rests_around([2], [3]),
+    ...     treatments=[1],
     ... )
-    >>> selection = stack(collections)
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> staff = lilypond_file["Staff"]
     >>> abjad.override(staff).TupletBracket.staff_padding = 4
@@ -5501,17 +5471,16 @@ figures.py examples.
 
     With time treatments:
 
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1],
-    ...         16,
-    ...         affix=baca.rests_around([1], [1]),
-    ...         treatments=[-1],
-    ...     ),
-    ...     rmakers.beam(),
+    >>> container = baca.figure_function(
+    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     [1],
+    ...     16,
+    ...     affix=baca.rests_around([1], [1]),
+    ...     treatments=[-1],
     ... )
-    >>> selection = stack(collections)
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5557,18 +5526,18 @@ figures.py examples.
 
     Rests before.
 
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...         affix=baca.rests_before([2]),
-    ...         restart_talea=True,
-    ...         treatments=[-1],
-    ...     ),
-    ...     rmakers.beam(),
-    ...     baca.tuplet_bracket_staff_padding(2),
+    >>> container = baca.figure_function(
+    ... [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     [1, 1, 5, -1],
+    ...     16,
+    ...     affix=baca.rests_before([2]),
+    ...     restart_talea=True,
+    ...     treatments=[-1],
     ... )
-    >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5624,18 +5593,18 @@ figures.py examples.
 
     Makes skips after music.
 
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...         affix=baca.skips_after([2]),
-    ...         restart_talea=True,
-    ...         treatments=[-1],
-    ...     ),
-    ...     rmakers.beam(),
-    ...     baca.tuplet_bracket_staff_padding(2),
+    >>> container = baca.figure_function(
+    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     [1, 1, 5, -1],
+    ...     16,
+    ...     affix=baca.skips_after([2]),
+    ...     restart_talea=True,
+    ...     treatments=[-1],
     ... )
-    >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5691,18 +5660,18 @@ figures.py examples.
 
     Makes skips around music.
 
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...         affix=baca.skips_around([2], [2]),
-    ...         restart_talea=True,
-    ...         treatments=[-1],
-    ...     ),
-    ...     rmakers.beam(),
-    ...     baca.tuplet_bracket_staff_padding(2),
+    >>> container = baca.figure_function(
+    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     [1, 1, 5, -1],
+    ...     16,
+    ...     affix=baca.skips_around([2], [2]),
+    ...     restart_talea=True,
+    ...     treatments=[-1],
     ... )
-    >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5759,18 +5728,18 @@ figures.py examples.
 
     Makes skips before music.
 
-    >>> stack = baca.stack(
-    ...     baca.figure(
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...         affix=baca.skips_before([2]),
-    ...         restart_talea=True,
-    ...         treatments=[-1],
-    ...     ),
-    ...     rmakers.beam(),
-    ...     baca.tuplet_bracket_staff_padding(2),
+    >>> container = baca.figure_function(
+    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     [1, 1, 5, -1],
+    ...     16,
+    ...     affix=baca.skips_before([2]),
+    ...     restart_talea=True,
+    ...     treatments=[-1],
     ... )
-    >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> selection = container[:]
+    >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5834,13 +5803,13 @@ figures.py examples.
     ...     [10, 18, 16, 15, 20],
     ...     [19, 9, 0, 2, 10],
     ... ]
-    >>> stack = baca.stack(
-    ...     baca.figure([1, 1, 2], 8, treatments=[(1, 4), (3, 8)]),
-    ...     rmakers.denominator((1, 16)),
-    ...     rmakers.beam(),
-    ... )
-    >>> selections = stack(collections)
-    >>> lilypond_file = abjad.illustrators.selection(selections)
+    >>> container = baca.figure_function(
+    ...     collections, [1, 1, 2], 8, treatments=[(1, 4), (3, 8)])
+    >>> rmakers.denominator_function(container, (1, 16))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
+    >>> selection = container[:]
+    >>> container[:] = []
+    >>> lilypond_file = abjad.illustrators.selection(selection)
     >>> staff = lilypond_file["Staff"]
     >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
     >>> abjad.override(staff).Stem.direction = abjad.DOWN
