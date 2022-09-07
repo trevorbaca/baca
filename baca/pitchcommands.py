@@ -554,15 +554,12 @@ class ClusterCommand(_command.Command):
 
     ..  container:: example
 
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16),
-        ...     rmakers.beam(),
-        ...     baca.replace_with_clusters([3, 4]),
-        ... )
-
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> selection = stack(collections)
-
+        >>> container = baca.figure_function(collections, [1], 16)
+        >>> rmakers.beam_function(container)
+        >>> _ = baca.replace_with_clusters_function(container, [3, 4])
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1862,19 +1859,14 @@ class RegisterCommand(_command.Command):
 
         With music-accumulator:
 
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16),
-        ...     rmakers.beam(),
-        ...     baca.RegisterCommand(
-        ...         registration=baca.Registration(
-        ...             [baca.RegistrationComponent(
-        ...                 abjad.PitchRange("[A0, C8]"), abjad.NumberedPitch(15)
-        ...             )],
-        ...         ),
-        ...     ),
+        >>> container = baca.figure_function(
+        ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
+        ...     [1], 16
         ... )
-        >>> selection = stack([[10, 12, 14], [10, 12, 14], [10, 12, 14]])
-
+        >>> rmakers.beam_function(container)
+        >>> _ = baca.register_function(container, 15)
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1998,19 +1990,14 @@ class RegisterCommand(_command.Command):
 
         Works with chords:
 
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16),
-        ...     rmakers.beam(),
-        ...     baca.RegisterCommand(
-        ...         registration=baca.Registration(
-        ...             [baca.RegistrationComponent(
-        ...                 abjad.PitchRange("[A0, C8]"), abjad.NumberedPitch(-6)
-        ...             )],
-        ...         ),
-        ...     ),
+        >>> container = baca.figure_function(
+        ...     [{10, 12, 14}],
+        ...     [1], 16
         ... )
-        >>> selection = stack([{10, 12, 14}])
-
+        >>> rmakers.beam_function(container)
+        >>> _ = baca.register_function(container, -6)
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2060,15 +2047,12 @@ class RegisterInterpolationCommand(_command.Command):
 
         With music-accumulator:
 
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16),
-        ...     rmakers.beam(),
-        ...     baca.register(0, 24),
-        ... )
-
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-        >>> selection = stack(collections)
-
+        >>> container = baca.figure_function(collections, [1], 16)
+        >>> rmakers.beam_function(container)
+        >>> _ = baca.register_function(container, 0, 24)
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2123,18 +2107,15 @@ class RegisterInterpolationCommand(_command.Command):
 
         With chords:
 
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16),
-        ...     rmakers.beam(),
-        ...     baca.register(0, 24),
-        ... )
-
         >>> collections = [
         ...     [6, 4], [3, 5], [9, 10], [0, 11], [8, 7], [1, 2],
         ... ]
         >>> collections = [set(_) for _ in collections]
-        >>> selection = stack(collections)
-
+        >>> container = baca.figure_function(collections, [1], 16)
+        >>> rmakers.beam_function(container)
+        >>> _ = baca.register_function(container, 0, 24)
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2999,17 +2980,14 @@ class RegisterToOctaveCommand(_command.Command):
 
         Chords:
 
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16),
-        ...     rmakers.beam(),
-        ...     baca.RegisterToOctaveCommand(
-        ...         anchor=abjad.DOWN,
-        ...         octave_number=4,
-        ...     ),
+        >>> container = baca.figure_function(
+        ...     [{0, 14, 28}],
+        ...     [1], 16
         ... )
-
-        >>> selection = stack([{0, 14, 28}])
-
+        >>> rmakers.beam_function(container)
+        >>> _ = baca.bass_to_octave_function(container, 4)
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3030,17 +3008,14 @@ class RegisterToOctaveCommand(_command.Command):
                 }
             >>
 
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16),
-        ...     rmakers.beam(),
-        ...     baca.RegisterToOctaveCommand(
-        ...         anchor=abjad.CENTER,
-        ...         octave_number=4,
-        ...     ),
+        >>> container = baca.figure_function(
+        ...     [{0, 14, 28}],
+        ...     [1], 16
         ... )
-
-        >>> selection = stack([{0, 14, 28}])
-
+        >>> rmakers.beam_function(container)
+        >>> _ = baca.center_to_octave_function(container, 4)
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3061,17 +3036,14 @@ class RegisterToOctaveCommand(_command.Command):
                 }
             >>
 
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16),
-        ...     rmakers.beam(),
-        ...     baca.RegisterToOctaveCommand(
-        ...         anchor=abjad.UP,
-        ...         octave_number=4,
-        ...     ),
+        >>> container = baca.figure_function(
+        ...     [{0, 14, 28}],
+        ...     [1], 16
         ... )
-
-        >>> selection = stack([{0, 14, 28}])
-
+        >>> rmakers.beam_function(container)
+        >>> _ = baca.soprano_to_octave_function(container, 4)
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3096,17 +3068,13 @@ class RegisterToOctaveCommand(_command.Command):
 
         Disjunct notes:
 
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16),
-        ...     rmakers.beam(),
-        ...     baca.RegisterToOctaveCommand(
-        ...         anchor=abjad.DOWN,
-        ...         octave_number=4,
-        ...     ),
+        >>> container = baca.figure_function(
+        ...     [[0, 14, 28]], [1], 16
         ... )
-
-        >>> selection = stack([[0, 14, 28]])
-
+        >>> rmakers.beam_function(container)
+        >>> _ = baca.bass_to_octave_function(container, 4)
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3131,17 +3099,11 @@ class RegisterToOctaveCommand(_command.Command):
                 }
             >>
 
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16),
-        ...     rmakers.beam(),
-        ...     baca.RegisterToOctaveCommand(
-        ...         anchor=abjad.CENTER,
-        ...         octave_number=4,
-        ...     ),
-        ... )
-
-        >>> selection = stack([[0, 14, 28]])
-
+        >>> container = baca.figure_function([[0, 14, 28]], [1], 16)
+        >>> rmakers.beam_function(container)
+        >>> _ = baca.center_to_octave_function(container, 4)
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3166,17 +3128,11 @@ class RegisterToOctaveCommand(_command.Command):
                 }
             >>
 
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16),
-        ...     rmakers.beam(),
-        ...     baca.RegisterToOctaveCommand(
-        ...         anchor=abjad.UP,
-        ...         octave_number=4,
-        ...     ),
-        ... )
-
-        >>> selection = stack([[0, 14, 28]])
-
+        >>> container = baca.figure_function([[0, 14, 28]], [1], 16)
+        >>> rmakers.beam_function(container)
+        >>> _ = baca.soprano_to_octave_function(container, 4)
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3205,17 +3161,11 @@ class RegisterToOctaveCommand(_command.Command):
 
         Conjunct notes:
 
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16),
-        ...     rmakers.beam(),
-        ...     baca.RegisterToOctaveCommand(
-        ...         anchor=abjad.DOWN,
-        ...         octave_number=4,
-        ...     ),
-        ... )
-
-        >>> selection = stack([[10, 12, 14]])
-
+        >>> container = baca.figure_function([[10, 12, 14]], [1], 16)
+        >>> rmakers.beam_function(container)
+        >>> _ = baca.bass_to_octave_function(container, 4)
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3240,17 +3190,11 @@ class RegisterToOctaveCommand(_command.Command):
                 }
             >>
 
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16),
-        ...     rmakers.beam(),
-        ...     baca.RegisterToOctaveCommand(
-        ...         anchor=abjad.CENTER,
-        ...         octave_number=4,
-        ...     ),
-        ... )
-
-        >>> selection = stack([[10, 12, 14]])
-
+        >>> container = baca.figure_function([[10, 12, 14]], [1], 16)
+        >>> rmakers.beam_function(container)
+        >>> _ = baca.center_to_octave_function(container, 4)
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3275,17 +3219,11 @@ class RegisterToOctaveCommand(_command.Command):
                 }
             >>
 
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16),
-        ...     rmakers.beam(),
-        ...     baca.RegisterToOctaveCommand(
-        ...         anchor=abjad.UP,
-        ...         octave_number=4,
-        ...     ),
-        ... )
-
-        >>> selection = stack([[10, 12, 14]])
-
+        >>> container = baca.figure_function([[10, 12, 14]], [1], 16)
+        >>> rmakers.beam_function(container)
+        >>> _ = baca.soprano_to_octave_function(container, 4)
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3315,12 +3253,7 @@ class RegisterToOctaveCommand(_command.Command):
         Bass anchored at octave 5:
 
         >>> chord = abjad.Chord("<c, d e'>1")
-        >>> command = baca.RegisterToOctaveCommand(
-        ...     anchor=abjad.DOWN,
-        ...     octave_number=5,
-        ... )
-        >>> command(chord)
-        False
+        >>> _ = baca.bass_to_octave_function(chord, 5)
 
         ..  docs::
 
@@ -3333,12 +3266,7 @@ class RegisterToOctaveCommand(_command.Command):
         Center anchored at octave 5:
 
         >>> chord = abjad.Chord("<c, d e'>1")
-        >>> command = baca.RegisterToOctaveCommand(
-        ...     anchor=abjad.CENTER,
-        ...     octave_number=5,
-        ... )
-        >>> command(chord)
-        False
+        >>> _ = baca.center_to_octave_function(chord, 5)
 
         ..  docs::
 
@@ -3351,12 +3279,7 @@ class RegisterToOctaveCommand(_command.Command):
         Soprano anchored at octave 5:
 
         >>> chord = abjad.Chord("<c, d e'>1")
-        >>> command = baca.RegisterToOctaveCommand(
-        ...     anchor=abjad.UP,
-        ...     octave_number=5,
-        ... )
-        >>> command(chord)
-        False
+        >>> _ = baca.soprano_to_octave_function(chord, 5)
 
         ..  docs::
 
@@ -3381,9 +3304,7 @@ class RegisterToOctaveCommand(_command.Command):
     ..  container:: example
 
         >>> chord = abjad.Chord("<c, d e'>1")
-        >>> command = baca.RegisterToOctaveCommand(octave_number=1)
-        >>> command(chord)
-        False
+        >>> _ = baca.bass_to_octave_function(chord, 1)
 
         ..  docs::
 
@@ -3394,9 +3315,7 @@ class RegisterToOctaveCommand(_command.Command):
     ..  container:: example
 
         >>> chord = abjad.Chord("<c, d e'>1")
-        >>> command = baca.RegisterToOctaveCommand(octave_number=2)
-        >>> command(chord)
-        False
+        >>> _ = baca.bass_to_octave_function(chord, 2)
 
         ..  docs::
 
@@ -3407,9 +3326,7 @@ class RegisterToOctaveCommand(_command.Command):
     ..  container:: example
 
         >>> chord = abjad.Chord("<c, d e'>1")
-        >>> command = baca.RegisterToOctaveCommand(octave_number=3)
-        >>> command(chord)
-        False
+        >>> _ = baca.bass_to_octave_function(chord, 3)
 
         ..  docs::
 
@@ -3420,9 +3337,7 @@ class RegisterToOctaveCommand(_command.Command):
     ..  container:: example
 
         >>> chord = abjad.Chord("<c, d e'>1")
-        >>> command = baca.RegisterToOctaveCommand(octave_number=4)
-        >>> command(chord)
-        False
+        >>> _ = baca.bass_to_octave_function(chord, 4)
 
         ..  docs::
 
@@ -3433,9 +3348,7 @@ class RegisterToOctaveCommand(_command.Command):
     ..  container:: example
 
         >>> chord = abjad.Chord("<c, d e'>1")
-        >>> command = baca.RegisterToOctaveCommand(octave_number=5)
-        >>> command(chord)
-        False
+        >>> _ = baca.bass_to_octave_function(chord, 5)
 
         ..  docs::
 
@@ -4012,20 +3925,19 @@ def displacement(
 
         Octave-displaces PLTs:
 
-        >>> stack = baca.stack(
-        ...     baca.figure(
+        >>> container = baca.figure_function(
+        ...         3 * [[0, 2, 3]],
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
         ...         restart_talea=True,
         ...         treatments=[-1],
-        ...     ),
-        ...     rmakers.beam(),
-        ...     baca.displacement([0, 0, -1, -1, 1, 1]),
-        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> selection = stack(3 * [[0, 2, 3]])
-
+        >>> rmakers.beam_function(container)
+        >>> baca.displacement_function(container, [0, 0, -1, -1, 1, 1])
+        >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4086,17 +3998,16 @@ def displacement(
 
         Octave-displaces chords:
 
-        >>> stack = baca.stack(
-        ...     baca.figure(
-        ...         [4],
-        ...         16,
-        ...         affix=baca.rests_around([2], [4]),
-        ...     ),
-        ...     rmakers.beam(),
-        ...     baca.displacement([0, 0, -1, -1, 1, 1]),
+        >>> container = baca.figure_function(
+        ...     6 * [{0, 2, 3}],
+        ...     [4],
+        ...     16,
+        ...     affix=baca.rests_around([2], [4]),
         ... )
-        >>> selection = stack(6 * [{0, 2, 3}])
-
+        >>> rmakers.beam_function(container)
+        >>> _ = baca.displacement_function(container, [0, 0, -1, -1, 1, 1])
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4161,16 +4072,13 @@ def interpolate_pitches(
 
     ..  container:: example
 
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16),
-        ...     rmakers.beam(),
-        ...     baca.clef("treble", selector=lambda _: abjad.select.leaf(_, 0)),
-        ...     baca.interpolate_pitches("Eb4", "F#5"),
-        ... )
-
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-        >>> selection = stack(collections)
-
+        >>> container = baca.figure_function(collections, [1], 16)
+        >>> rmakers.beam_function(container)
+        >>> _ = baca.clef_function(abjad.select.leaf(container, 0), "treble")
+        >>> _ = baca.interpolate_pitches_function(container, "Eb4", "F#5")
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4666,20 +4574,19 @@ def register(
 
         Octave-transposes all PLTs to the octave rooted at -6:
 
-        >>> stack = baca.stack(
-        ...     baca.figure(
+        >>> container = baca.figure_function(
+        ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
         ...         restart_talea=True,
         ...         treatments=[-1],
-        ...     ),
-        ...     rmakers.beam(),
-        ...     baca.register(-6),
-        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
+        >>> rmakers.beam_function(container)
+        >>> _ = baca.register_function(container, -6)
+        >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4812,20 +4719,19 @@ def register(
 
         Octave-transposes all PLTs to an octave interpolated from -6 to 18:
 
-        >>> stack = baca.stack(
-        ...     baca.figure(
+        >>> container = baca.figure_function(
+        ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
         ...         restart_talea=True,
         ...         treatments=[-1],
-        ...     ),
-        ...     rmakers.beam(),
-        ...     baca.register(-6, 18),
-        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
-
+        >>> rmakers.beam_function(container)
+        >>> _ = baca.register_function(container, -6, 18)
+        >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+        >>> selection = container[:]
+        >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
