@@ -15,7 +15,6 @@ overrides.py examples.
     ...     accumulator,
     ...     docs=True,
     ... )
-
     >>> stack = rmakers.stack(
     ...     rmakers.talea([1, 1, 1, -1], 8),
     ...     rmakers.beam(),
@@ -23,15 +22,11 @@ overrides.py examples.
     ... )
     >>> music = stack(accumulator.get())
     >>> score["Music"].extend(music)
-
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.pitches("E4 D5 F4 E5 G4 F5"),
-    ...     baca.bar_line_transparent(
-    ...         selector=lambda _: abjad.select.group_by_measure(_)[1]
-    ...     ),
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches_function(voice, "E4 D5 F4 E5 G4 F5")
+    >>> _ = baca.bar_line_transparent_function(
+    ...         abjad.select.group_by_measure(voice)[1]
     ... )
-
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -428,17 +423,13 @@ overrides.py examples.
     ...     accumulator,
     ...     docs=True,
     ... )
-
+    >>> voice = score["Music"]
     >>> music = baca.make_mmrests(accumulator.get(), head="Music")
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.mmrest_color(
-    ...         "#(x11-color 'DarkOrchid)",
-    ...         selector=lambda _: baca.select.mmrests(_)
-    ...     ),
+    >>> _ = baca.mmrest_color_function(
+    ...     baca.select.mmrests(voice)[1:],
+    ...     "#(x11-color 'DarkOrchid)",
     ... )
-
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -515,21 +506,14 @@ overrides.py examples.
     ...     accumulator,
     ...     docs=True,
     ... )
-
+    >>> voice = score["Music"]
     >>> music = baca.make_mmrests(accumulator.get(), head="Music")
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.markup(
-    ...         r"\baca-boxed-markup still",
-    ...         selector=lambda _: baca.select.mmrest(_, 1),
-    ...     ),
-    ...     baca.mmrest_text_color(
-    ...         "#red",
-    ...         selector=lambda _: baca.select.mmrests(_)
-    ...     ),
+    >>> _ = baca.markup_function(
+    ...     baca.select.mmrest(voice, 2),
+    ...     r"\baca-boxed-markup still",
     ... )
-
+    >>> _ = baca.mmrest_text_color_function(baca.select.mmrests(voice)[1:], "#red")
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -595,49 +579,6 @@ overrides.py examples.
             >>
         }
 
-..  container:: example exception
-
-    Raises exception when called on leaves other than multimeasure
-    rests:
-
-    >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
-    ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
-    ...     docs=True,
-    ... )
-
-    >>> music = baca.make_notes(accumulator.get())
-    >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.markup(
-    ...         r"\baca-boxed-markup still",
-    ...         selector=lambda _: abjad.select.leaf(_, 1),
-    ...     ),
-    ...     baca.mmrest_text_color(
-    ...         "#red",
-    ...         selector=lambda _: baca.select.leaves(_),
-    ...     ),
-    ...     baca.pitches([2, 4]),
-    ... )
-
-    >>> _, _ = baca.interpret.section(
-    ...     score,
-    ...     {},
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
-    ...     move_global_context=True,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    Traceback (most recent call last):
-        ...
-    Exception: only MultimeasureRest (not Note) allowed.
-
 ..  container:: example
 
     >>> score = baca.docs.make_empty_score(1)
@@ -650,21 +591,15 @@ overrides.py examples.
     ...     accumulator,
     ...     docs=True,
     ... )
-
+    >>> voice = score["Music"]
     >>> music = baca.make_mmrests(accumulator.get(), head="Music")
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.markup(
-    ...         r"\baca-boxed-markup still",
-    ...         selector=lambda _: baca.select.mmrest(_, 1),
-    ...     ),
-    ...     baca.mmrest_text_extra_offset(
-    ...         (0, 2),
-    ...         selector=lambda _: baca.select.mmrests(_)
-    ...     ),
+    >>> _ = baca.markup_function(
+    ...     baca.select.mmrest(voice, 2),
+    ...     r"\baca-boxed-markup still",
     ... )
-
+    >>> _ = baca.mmrest_text_extra_offset_function(
+    ...     baca.select.mmrests(voice)[1:], (0, 2))
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -742,21 +677,14 @@ overrides.py examples.
     ...     accumulator,
     ...     docs=True,
     ... )
-
+    >>> voice = score["Music"]
     >>> music = baca.make_mmrests(accumulator.get(), head="Music")
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.markup(
-    ...         r"\baca-boxed-markup still",
-    ...         selector=lambda _: baca.select.mmrest(_, 1),
-    ...     ),
-    ...     baca.mmrest_text_padding(
-    ...         2,
-    ...         selector=lambda _: baca.select.mmrests(_)
-    ...     ),
+    >>> _ = baca.markup_function(
+    ...     baca.select.mmrest(voice, 2),
+    ...     r"\baca-boxed-markup still",
     ... )
-
+    >>> _ = baca.mmrest_text_padding_function(baca.select.mmrests(voice)[1:], 2)
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -834,20 +762,14 @@ overrides.py examples.
     ...     accumulator,
     ...     docs=True,
     ... )
-
+    >>> voice = score["Music"]
     >>> music = baca.make_mmrests(accumulator.get(), head="Music")
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.markup(
-    ...         r"\baca-boxed-markup still",
-    ...         selector=lambda _: baca.select.mmrest(_, 1),
-    ...     ),
-    ...     baca.mmrest_text_parent_center(
-    ...         selector=lambda _: baca.select.mmrests(_)
-    ...     ),
+    >>> _ = baca.markup_function(
+    ...     baca.select.mmrest(voice, 2),
+    ...     r"\baca-boxed-markup still",
     ... )
-
+    >>> _ = baca.mmrest_text_parent_center_function(baca.select.mmrests(voice)[1:])
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -925,21 +847,14 @@ overrides.py examples.
     ...     accumulator,
     ...     docs=True,
     ... )
-
+    >>> voice = score["Music"]
     >>> music = baca.make_mmrests(accumulator.get(), head="Music")
     >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.markup(
-    ...         r"\baca-boxed-markup still",
-    ...         selector=lambda _: baca.select.mmrest(_, 1),
-    ...     ),
-    ...     baca.mmrest_text_staff_padding(
-    ...         2,
-    ...         selector=lambda _: baca.select.mmrests(_)
-    ...     ),
+    >>> _ = baca.markup_function(
+    ...     baca.select.mmrest(voice, 2),
+    ...     r"\baca-boxed-markup still",
     ... )
-
+    >>> _ = baca.mmrest_text_staff_padding_function(baca.select.mmrests(voice)[1:], 2)
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -2482,45 +2397,6 @@ overrides.py examples.
             }
         >>
 
-..  container:: example exception
-
-    Raises exception when called on multimeasure rests:
-
-    >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
-    ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
-    ...     docs=True,
-    ... )
-
-    >>> music = baca.make_mmrests(accumulator.get(), head="Music")
-    >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.markup(
-    ...         r"\baca-boxed-markup still",
-    ...         selector=lambda _: abjad.select.leaf(_, 1),
-    ...     ),
-    ...     baca.text_script_color("#red"),
-    ... )
-
-    >>> _, _ = baca.interpret.section(
-    ...     score,
-    ...     {},
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
-    ...     move_global_context=True,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    Traceback (most recent call last):
-        ...
-    Exception: MultimeasureRest is forbidden.
-
-
 ..  container:: example
 
     Down-overrides text script direction on leaves:
@@ -2606,82 +2482,6 @@ overrides.py examples.
                 }
             }
         >>
-
-..  container:: example exception
-
-    Raises exception when called on multimeasure rests:
-
-    >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
-    ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
-    ...     docs=True,
-    ... )
-
-    >>> music = baca.make_mmrests(accumulator.get(), head="Music")
-    >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.markup(
-    ...         r"\baca-boxed-markup still",
-    ...         selector=lambda _: abjad.select.leaf(_, 1),
-    ...     ),
-    ...     baca.text_script_down()
-    ... )
-
-    >>> _, _ = baca.interpret.section(
-    ...     score,
-    ...     {},
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
-    ...     move_global_context=True,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    Traceback (most recent call last):
-        ...
-    Exception: MultimeasureRest is forbidden.
-
-..  container:: example exception
-
-    Raises exception when called on multimeasure rests:
-
-    >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
-    ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
-    ...     docs=True,
-    ... )
-
-    >>> music = baca.make_mmrests(accumulator.get(), head="Music")
-    >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.markup(
-    ...         r"\baca-boxed-markup still",
-    ...         selector=lambda _: abjad.select.leaf(_, 1),
-    ...     ),
-    ...     baca.text_script_extra_offset((0, 2)),
-    ... )
-
-    >>> _, _ = baca.interpret.section(
-    ...     score,
-    ...     {},
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
-    ...     move_global_context=True,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    Traceback (most recent call last):
-        ...
-    Exception: MultimeasureRest is forbidden.
 
 ..  container:: example
 
@@ -2769,44 +2569,6 @@ overrides.py examples.
             }
         >>
 
-..  container:: example exception
-
-    Raises exception when called on multimeasure rests:
-
-    >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
-    ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
-    ...     docs=True,
-    ... )
-
-    >>> music = baca.make_mmrests(accumulator.get(), head="Music")
-    >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.markup(
-    ...         r"\baca-boxed-markup still",
-    ...         selector=lambda _: abjad.select.leaf(_, 1),
-    ...     ),
-    ...     baca.text_script_padding(2),
-    ... )
-
-    >>> _, _ = baca.interpret.section(
-    ...     score,
-    ...     {},
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
-    ...     move_global_context=True,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    Traceback (most recent call last):
-        ...
-    Exception: MultimeasureRest is forbidden.
-
 ..  container:: example
 
     Overrides text script staff padding on leaves:
@@ -2893,43 +2655,7 @@ overrides.py examples.
             }
         >>
 
-..  container:: example exception
 
-    Raises exception when called on multimeasure rests:
-
-    >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
-    ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
-    ...     docs=True,
-    ... )
-
-    >>> music = baca.make_mmrests(accumulator.get(), head="Music")
-    >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.markup(
-    ...         r"\baca-boxed-markkup still",
-    ...         selector=lambda _: abjad.select.leaf(_, 1),
-    ...     ),
-    ...     baca.text_script_staff_padding(2)
-    ... )
-
-    >>> _, _ = baca.interpret.section(
-    ...     score,
-    ...     {},
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
-    ...     move_global_context=True,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    Traceback (most recent call last):
-        ...
-    Exception: MultimeasureRest is forbidden.
 
 ..  container:: example
 
@@ -3016,44 +2742,6 @@ overrides.py examples.
                 }
             }
         >>
-
-..  container:: example exception
-
-    Raises exception when called on multimeasure rests:
-
-    >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
-    ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
-    ...     docs=True,
-    ... )
-
-    >>> music = baca.make_mmrests(accumulator.get(), head="Music")
-    >>> score["Music"].extend(music)
-    >>> accumulator(
-    ...     "Music",
-    ...     baca.markup(
-    ...         r"\baca-boxed-markup still",
-    ...         selector=lambda _: abjad.select.leaf(_, 1),
-    ...     ),
-    ...     baca.text_script_up()
-    ... )
-
-    >>> _, _ = baca.interpret.section(
-    ...     score,
-    ...     {},
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
-    ...     move_global_context=True,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    Traceback (most recent call last):
-        ...
-    Exception: MultimeasureRest is forbidden.
 
 ..  container:: example
 
