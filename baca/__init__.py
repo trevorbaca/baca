@@ -14,7 +14,6 @@ from .enums import colors, enums
 from .accumulator import (
     CommandAccumulator,
 )
-from .command import *
 from .commands import *
 from .constellation import *
 from .cursor import Cursor

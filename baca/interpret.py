@@ -16,7 +16,6 @@ import abjad
 
 from . import accumulator as _accumulator
 from . import build as _build
-from . import command as _command
 from . import docs as _docs
 from . import indicatorclasses as _indicatorclasses
 from . import layout as _layout
@@ -604,28 +603,6 @@ def _bracket_metric_modulation(metronome_mark, metric_modulation):
     return command
 
 
-def _bundle_runtime(
-    already_reapplied_contexts=None,
-    instruments=None,
-    manifests=None,
-    metronome_marks=None,
-    offset_to_measure_number=None,
-    previous_persistent_indicators=None,
-    previous_parameter_to_state=None,
-    short_instrument_names=None,
-):
-    runtime = {}
-    runtime["already_reapplied_contexts"] = already_reapplied_contexts
-    runtime["instruments"] = instruments
-    runtime["manifests"] = manifests
-    runtime["metronome_marks"] = metronome_marks
-    runtime["offset_to_measure_number"] = offset_to_measure_number or {}
-    runtime["previous_persistent_indicators"] = previous_persistent_indicators
-    runtime["previous_parameter_to_state"] = previous_parameter_to_state
-    runtime["short_instrument_names"] = short_instrument_names
-    return runtime
-
-
 def _calculate_clock_times(
     score,
     clock_time_override,
@@ -670,67 +647,6 @@ def _calculate_clock_times(
     duration = clock_times[-1] - clock_times[0]
     duration_clock_string = duration.to_clock_string()
     return duration_clock_string, clock_times, start_clock_time, stop_clock_time
-
-
-def _call_all_commands(
-    *,
-    allow_empty_selections,
-    already_reapplied_contexts,
-    always_make_global_rests,
-    cache,
-    commands,
-    manifests,
-    measure_count,
-    offset_to_measure_number,
-    previous_persist,
-    score,
-    time_signatures,
-    voice_name_to_parameter_to_state,
-):
-    voice_name_to_voice = {}
-    for voice in abjad.select.components(score, abjad.Voice):
-        if voice.name in voice_name_to_voice:
-            continue
-        voice_name_to_voice[voice.name] = voice
-    command_count = 0
-    for i, command in enumerate(commands):
-        selection, cache = _scope_to_leaf_selection(
-            score,
-            allow_empty_selections,
-            cache,
-            command,
-            measure_count,
-        )
-        voice_name = command.scope.voice_name
-        previous_parameter_to_state = _get_previous_parameter_to_state(
-            previous_persist, voice_name
-        )
-        previous_persistent_indicators = previous_persist.get("persistent_indicators")
-        runtime = _bundle_runtime(
-            already_reapplied_contexts=already_reapplied_contexts,
-            manifests=manifests,
-            offset_to_measure_number=offset_to_measure_number,
-            previous_persistent_indicators=previous_persistent_indicators,
-            previous_parameter_to_state=previous_parameter_to_state,
-        )
-        try:
-            command_result = command(selection, runtime)
-        except Exception:
-            print(f"Interpreting ...\n\n{command}\n")
-            raise
-        cache = _handle_mutator(score, cache, command_result)
-        if hasattr(command, "parameter") and command.name:
-            assert isinstance(command, _pitchcommands.PitchCommand), repr(command)
-            parameter = command.parameter
-            assert parameter == "PITCH", repr(parameter)
-            state = command.state
-            assert "name" not in state, repr(state)
-            state["name"] = command.name
-            if voice_name not in voice_name_to_parameter_to_state:
-                voice_name_to_parameter_to_state[voice_name] = {}
-            voice_name_to_parameter_to_state[voice_name][parameter] = state
-        command_count += 1
-    return cache, command_count
 
 
 def _check_all_music_in_part_containers(score):
@@ -1257,14 +1173,6 @@ def _extend_beams(score):
 def _find_first_measure_number(previous_metadata):
     if not previous_metadata:
         raise Exception("ASDF")
-    #    previous_first_measure_number = previous_metadata.get("first_measure_number")
-    #    if previous_first_measure_number is None:
-    #        return 1
-    #    previous_time_signatures = previous_metadata.get("time_signatures")
-    #    if previous_time_signatures is None:
-    #        return 1
-    #    first_measure_number = previous_first_measure_number + len(previous_time_signatures)
-    #    return first_measure_number
     previous_final_measure_number = previous_metadata.get("final_measure_number")
     if previous_final_measure_number is None:
         return 1
@@ -1384,25 +1292,6 @@ def _get_measure_timespan(score, measure_number):
         measure_number,
     )
     return abjad.Timespan(start_offset, stop_offset)
-
-
-def _get_previous_parameter_to_state(previous_persist, voice_name):
-    if not previous_persist:
-        return
-    voice_name_to_parameter_to_state = previous_persist.get(
-        "voice_name_to_parameter_to_state"
-    )
-    if not voice_name_to_parameter_to_state:
-        return
-    parameter_to_state = voice_name_to_parameter_to_state.get(voice_name, {})
-    return parameter_to_state
-
-
-def _handle_mutator(score, cache, command_result):
-    if command_result is True:
-        cache = None
-        _update_score_one_time(score)
-    return cache
 
 
 def _label_clock_time(
@@ -1926,62 +1815,6 @@ def _remove_tags(remove_tags, score):
                 if abjad.Tag(word) in remove_tags:
                     abjad.detach(wrapper, leaf)
                     break
-
-
-def _scope_to_leaf_selection(
-    score,
-    allow_empty_selections,
-    cache,
-    command,
-    measure_count,
-):
-    leaves = []
-    selections, cache = _scope_to_leaf_selections(
-        score,
-        cache,
-        measure_count,
-        command.scope,
-    )
-    for selection in selections:
-        leaves.extend(selection)
-    selection = leaves
-    if not selection:
-        message = f"EMPTY SELECTION:\n\n{command}"
-        if allow_empty_selections:
-            print(message)
-        else:
-            raise Exception(message)
-    assert all(isinstance(_, abjad.Leaf) for _ in selection), repr(selection)
-    return selection, cache
-
-
-def _scope_to_leaf_selections(score, cache, measure_count, scope):
-    if cache is None:
-        cache = cache_leaves(score, measure_count)
-    assert isinstance(scope, _command.Scope), repr(scope)
-    scopes = [scope]
-    leaf_selections = []
-    for scope in scopes:
-        leaves = []
-        try:
-            measure_number_to_leaves = cache[scope.voice_name]
-        except KeyError:
-            print(f"Unknown voice {scope.voice_name} ...\n")
-            raise
-        start = scope.measures[0]
-        if scope.measures[1] == -1:
-            stop = measure_count + 1
-        else:
-            stop = scope.measures[1] + 1
-        if start < 0:
-            start = measure_count - abs(start) + 1
-        if stop < 0:
-            stop = measure_count - abs(stop) + 1
-        for measure_number in range(start, stop):
-            leaves_ = measure_number_to_leaves.get(measure_number, [])
-            leaves.extend(leaves_)
-        leaf_selections.append(leaves)
-    return leaf_selections, cache
 
 
 def _set_intermittent_to_staff_position_zero(score):
@@ -3086,28 +2919,13 @@ def section(
     assert isinstance(transpose_score, bool)
     assert isinstance(treat_untreated_persistent_wrappers, bool)
     voice_name_to_parameter_to_state: dict[str, dict] = {}
-    already_reapplied_contexts = {"Score"}
     # set_up_score()
     offset_to_measure_number = _populate_offset_to_measure_number(
         first_measure_number,
         global_skips,
     )
     with abjad.Timer() as timer:
-        cache = None
-        cache, command_count = _call_all_commands(
-            allow_empty_selections=allow_empty_selections,
-            already_reapplied_contexts=already_reapplied_contexts,
-            always_make_global_rests=always_make_global_rests,
-            cache=cache,
-            commands=commands,
-            manifests=manifests,
-            measure_count=measure_count,
-            offset_to_measure_number=offset_to_measure_number,
-            previous_persist=previous_persist,
-            score=score,
-            time_signatures=time_signatures,
-            voice_name_to_parameter_to_state=voice_name_to_parameter_to_state,
-        )
+        command_count = 0
     _print_timing(
         "All commands", timer, print_timing=print_timing, suffix=command_count
     )
@@ -3306,16 +3124,10 @@ def set_up_score(
     assert isinstance(manifests, dict), repr(manifests)
     if docs:
         first_section = True
-    #    elif first_section or layout:
-    #        previous_metadata, previous_persist = {}, {}
-    #    else:
-    #        assert previous_metadata, repr(previous_metadata)
-    #        assert previous_persist, repr(previous_persist)
     skips = score["Skips"]
     _make_global_skips(skips, time_signatures, append_anchor_skip=append_anchor_skip)
     if not first_section:
         _attach_nonfirst_empty_start_bar(skips)
-    # first_measure_number = _find_first_measure_number(previous_metadata)
     _label_measure_numbers(first_measure_number, skips)
     if always_make_global_rests:
         _make_global_rests(score["Rests"], time_signatures)
