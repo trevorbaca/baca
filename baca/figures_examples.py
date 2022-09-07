@@ -6465,6 +6465,204 @@ figures.py examples.
             >>
         }
 
+..  container:: example
+
+    Attaches RIGHT_BROKEN_BEAM to selector output.
+
+    >>> score = baca.docs.make_empty_score(2)
+    >>> figures = baca.FigureAccumulator(score)
+
+    >>> collections = [[0, 2, 10, 18], [16, 15, 23]]
+    >>> container = baca.figure_function(collections, [1], 16)
+    >>> groups = rmakers.nongrace_leaves_in_each_tuplet_function(container)
+    >>> rmakers.beam_groups_function(groups)
+    >>> imbrications = baca.imbricate_function(container, "Music.1", [2, 10])
+    >>> for imbrication in imbrications.values():
+    ...     _ = baca.staccato_function(baca.select.pheads(imbrication))
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_function(imbrication)
+    ...     rmakers.beam_groups_function(groups, beam_rests=True)
+    ...     _ = baca.extend_beam_function(abjad.select.leaf(imbrication, -1))
+
+    >>> baca.make_figures(
+    ...     figures,
+    ...     "Music.2",
+    ...     None,
+    ...     container=container,
+    ...     imbrications=imbrications,
+    ... )
+    >>> container = baca.figure_function([[19, 13, 9, 8]], [1], 16)
+    >>> groups = rmakers.nongrace_leaves_in_each_tuplet_function(container)
+    >>> rmakers.beam_groups_function(groups)
+    >>> imbrications = baca.imbricate_function(container, "Music.1", [13, 9])
+    >>> for imbrication in imbrications.values():
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_function(imbrication)
+    ...     rmakers.beam_groups_function(groups, beam_rests=True)
+    ...     _ = baca.staccato_function(baca.select.pheads(imbrication))
+
+    >>> baca.make_figures(
+    ...     figures,
+    ...     "Music.2",
+    ...     None,
+    ...     container=container,
+    ...     imbrications=imbrications,
+    ... )
+    >>> accumulator = baca.CommandAccumulator(
+    ...     time_signatures=figures.time_signatures,
+    ... )
+    >>> first_measure_number = baca.interpret.set_up_score(
+    ...     score,
+    ...     accumulator.time_signatures,
+    ...     accumulator,
+    ...     docs=True,
+    ... )
+    >>> baca.SpacingSpecifier((1, 32))(score)
+    >>> figures.populate_commands(score, accumulator)
+
+    >>> _ = baca.voice_one_function(abjad.select.leaf(score["Music.1"], 0))
+    >>> _ = baca.voice_two_function(abjad.select.leaf(score["Music.2"], 0))
+    >>> _, _ = baca.interpret.section(
+    ...     score,
+    ...     {},
+    ...     accumulator.time_signatures,
+    ...     commands=accumulator.commands,
+    ...     move_global_context=True,
+    ...     remove_tags=baca.tags.documentation_removal_tags(),
+    ... )
+    >>> lilypond_file = baca.lilypond.file(
+    ...     score,
+    ...     includes=["baca.ily"],
+    ... )
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        {
+            \context Staff = "Staff"
+            <<
+                \context Voice = "Skips"
+                {
+                    \baca-new-spacing-section #1 #32
+                    \time 7/16
+                    s1 * 7/16
+                    \baca-new-spacing-section #1 #32
+                    \time 1/4
+                    s1 * 1/4
+                }
+                \context Voice = "Music.1"
+                {
+                    {
+                        \override TupletBracket.stencil = ##f
+                        \override TupletNumber.stencil = ##f
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \voiceOne
+                            s16
+                            [
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            d'16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            bf'16
+                            - \staccato
+                            s16
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            s16
+                            s16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
+                            s16
+                        }
+                        \revert TupletBracket.stencil
+                        \revert TupletNumber.stencil
+                    }
+                    {
+                        \override TupletBracket.stencil = ##f
+                        \override TupletNumber.stencil = ##f
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
+                            s16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            cs''16
+                            - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            a'16
+                            - \staccato
+                            s16
+                            ]
+                        }
+                        \revert TupletBracket.stencil
+                        \revert TupletNumber.stencil
+                    }
+                }
+                \context Voice = "Music.2"
+                {
+                    {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \set stemLeftBeamCount = 0
+                            \set stemRightBeamCount = 2
+                            \voiceTwo
+                            c'16
+                            [
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            d'16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            bf'16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
+                            fs''16
+                        }
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
+                            e''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            ef''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 0
+                            b''16
+                            ]
+                        }
+                    }
+                    {
+                        \scaleDurations #'(1 . 1)
+                        {
+                            \set stemLeftBeamCount = 0
+                            \set stemRightBeamCount = 2
+                            g''16
+                            [
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            cs''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            a'16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 0
+                            af'16
+                            ]
+                        }
+                    }
+                }
+            >>
+        }
+
 """
 
 
