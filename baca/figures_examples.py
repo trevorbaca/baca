@@ -3800,22 +3800,29 @@ figures.py examples.
 
     >>> score = baca.docs.make_empty_score(2)
     >>> figures = baca.FigureAccumulator(score)
-
-    >>> figures(
-    ...     "Music.2",
+    >>> container = baca.figure_function(
     ...     3 * [[0, 2, 10]],
-    ...     baca.figure(
-    ...         [1],
-    ...         16,
-    ...         affix=baca.rests_around([2], [4]),
-    ...         treatments=[-1],
-    ...     ),
-    ...     rmakers.beam(),
-    ...     baca.imbricate(
-    ...         "Music.1",
-    ...         [baca.coat(0), baca.coat(2), 10, 0, 2],
-    ...         rmakers.beam_groups(),
-    ...     ),
+    ...     [1],
+    ...     16,
+    ...     affix=baca.rests_around([2], [4]),
+    ...     treatments=[-1],
+    ... )
+    >>> rmakers.beam_function(container)
+    >>> imbrications = baca.imbricate_function(
+    ...     container,
+    ...     "Music.1",
+    ...     [baca.coat(0), baca.coat(2), 10, 0, 2],
+    ... )
+    >>> for imbrication in imbrications.values():
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_function(imbrication)
+    ...     rmakers.beam_groups_function(groups)
+
+    >>> baca.make_figures(
+    ...     figures,
+    ...     "Music.2",
+    ...     None,
+    ...     container=container,
+    ...     imbrications=imbrications,
     ... )
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
@@ -3940,7 +3947,6 @@ figures.py examples.
 
     >>> score = baca.docs.make_empty_score(2)
     >>> figures = baca.FigureAccumulator(score)
-
     >>> collections = [
     ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
     ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
@@ -3951,17 +3957,20 @@ figures.py examples.
     ...     baca.coat(18),
     ...     10, 18,
     ... ]
-    >>> figures(
+    >>> container = baca.figure_function(collections, [1], 16)
+    >>> rmakers.beam_function(container)
+    >>> imbrications = baca.imbricate_function(container, "Music.1", segment)
+    >>> for imbrication in imbrications.values():
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_function(imbrication)
+    ...     rmakers.beam_groups_function(groups, beam_rests=True)
+    ...     _ = baca.accent_function(baca.select.pheads(imbrication))
+
+    >>> baca.make_figures(
+    ...     figures,
     ...     "Music.2",
-    ...     collections,
-    ...     baca.figure([1], 16),
-    ...     rmakers.beam(),
-    ...     baca.imbricate(
-    ...         "Music.1",
-    ...         segment,
-    ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
-    ...         rmakers.beam_groups(beam_rests=True),
-    ...     ),
+    ...     None,
+    ...     container=container,
+    ...     imbrications=imbrications,
     ... )
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
@@ -4109,24 +4118,29 @@ figures.py examples.
 
     >>> score = baca.docs.make_empty_score(2)
     >>> figures = baca.FigureAccumulator(score)
-
     >>> collections = [
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0],
     ...     [2, 10, 18, 16, 15],
     ... ]
-    >>> figures(
-    ...     "Music.2",
-    ...     collections,
-    ...     baca.figure([1], 16),
-    ...     rmakers.beam_groups(),
-    ...     baca.imbricate(
-    ...         "Music.1",
-    ...         [2, 19, 9, 18, 16],
-    ...         rmakers.beam_groups(),
-    ...     ),
+    >>> container = baca.figure_function(collections, [1], 16)
+    >>> rmakers.beam_groups_function(container)
+    >>> imbrications = baca.imbricate_function(
+    ...     container,
+    ...     "Music.1",
+    ...     [2, 19, 9, 18, 16],
     ... )
+    >>> for imbrication in imbrications.values():
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_function(imbrication)
+    ...     rmakers.beam_groups_function(groups)
 
+    >>> baca.make_figures(
+    ...     figures,
+    ...     "Music.2",
+    ...     None,
+    ...     container=container,
+    ...     imbrications=imbrications,
+    ... )
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
@@ -4288,33 +4302,35 @@ figures.py examples.
 
     >>> score = baca.docs.make_empty_score(3)
     >>> figures = baca.FigureAccumulator(score)
-
     >>> collections = [
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0],
     ...     [2, 10, 18, 16, 15],
     ... ]
-    >>> figures(
-    ...     "Music.2",
-    ...     collections,
-    ...     baca.figure([1], 16),
-    ...     baca.imbricate(
-    ...         "Music.1",
-    ...         [2, 19, 9],
-    ...         rmakers.beam_groups(beam_rests=True),
-    ...         baca.beam_positions(6),
-    ...         baca.staccato(selector=lambda _: baca.select.pheads(_)),
-    ...         ),
-    ...     baca.imbricate(
-    ...         "Music.3",
-    ...         [16, 10, 18],
-    ...         rmakers.beam_groups(beam_rests=True),
-    ...         baca.beam_positions(8),
-    ...         baca.accent(selector=lambda _: baca.select.pheads(_)),
-    ...         ),
-    ...     rmakers.beam_groups(),
-    ... )
+    >>> container = baca.figure_function(collections, [1], 16)
+    >>> groups = rmakers.nongrace_leaves_in_each_tuplet_function(container)
+    >>> rmakers.beam_groups_function(groups)
+    >>> imbrications_1 = baca.imbricate_function(container, "Music.1", [2, 19, 9])
+    >>> for imbrication in imbrications_1.values():
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_function(imbrication)
+    ...     rmakers.beam_groups_function(groups, beam_rests=True)
+    ...     _ = baca.beam_positions_function(imbrication, 6)
+    ...     _ = baca.staccato_function(baca.select.pheads(imbrication))
 
+    >>> imbrications_3 = baca.imbricate_function(container, "Music.3", [16, 10, 18])
+    >>> for imbrication in imbrications_3.values():
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_function(imbrication)
+    ...     rmakers.beam_groups_function(groups, beam_rests=True)
+    ...     _ = baca.beam_positions_function(imbrication, 8)
+    ...     _ = baca.accent_function(baca.select.pheads(imbrication))
+
+    >>> baca.make_figures(
+    ...     figures,
+    ...     "Music.2",
+    ...     None,
+    ...     container=container,
+    ...     imbrications=imbrications_1 | imbrications_3,
+    ... )
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
@@ -4720,7 +4736,6 @@ figures.py examples.
 
     >>> score = baca.docs.make_empty_score(2)
     >>> figures = baca.FigureAccumulator(score)
-
     >>> segment = [
     ...     abjad.NumberedPitchClass(10),
     ...     abjad.NumberedPitchClass(6),
@@ -4861,7 +4876,6 @@ figures.py examples.
 
     >>> score = baca.docs.make_empty_score(2)
     >>> figures = baca.FigureAccumulator(score)
-
     >>> collections = [
     ...     {0, 2, 10, 18, 16},
     ...     [15, 20, 19, 9, 0],
@@ -5023,7 +5037,6 @@ figures.py examples.
 
     >>> score = baca.docs.make_empty_score(2)
     >>> figures = baca.FigureAccumulator(score)
-
     >>> collections = [
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0],
@@ -5040,7 +5053,6 @@ figures.py examples.
     ...         rmakers.beam_groups(),
     ...     ),
     ... )
-
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
