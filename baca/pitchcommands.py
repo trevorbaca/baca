@@ -1137,73 +1137,29 @@ class ClusterCommand(_command.Command):
         return bool(chords)
 
 
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class DiatonicClusterCommand(_command.Command):
-    r"""
-    Diatonic cluster command.
+def _do_diatonic_cluster_command(argument, widths):
+    widths = abjad.CyclicTuple(widths)
+    for i, plt in enumerate(_select.plts(argument)):
+        width = widths[i]
+        start = _get_lowest_diatonic_pitch_number(plt)
+        numbers = range(start, start + width)
+        change = abjad.pitch._diatonic_pc_number_to_pitch_class_number
+        numbers_ = [(12 * (_ // 7)) + change[_ % 7] for _ in numbers]
+        pitches = [abjad.NamedPitch(_) for _ in numbers_]
+        for pleaf in plt:
+            chord = abjad.Chord(pleaf)
+            chord.note_heads[:] = pitches
+            abjad.mutate.replace(pleaf, chord)
 
-    ..  container:: example
 
-        >>> staff = abjad.Staff("c' d' e' f'")
-        >>> command = baca.diatonic_clusters([4, 6])
-        >>> command(staff)
-        True
-
-        >>> abjad.show(staff) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> string = abjad.lilypond(staff)
-            >>> print(string)
-            \new Staff
-            {
-                <c' d' e' f'>4
-                <d' e' f' g' a' b'>4
-                <e' f' g' a'>4
-                <f' g' a' b' c'' d''>4
-            }
-
-    """
-
-    widths: typing.Sequence[int] = ()
-    selector: typing.Callable = lambda _: _select.plts(_, exclude=_enums.HIDDEN)
-
-    def __post_init__(self):
-        _command.Command.__post_init__(self)
-        assert abjad.math.all_are_nonnegative_integers(self.widths)
-        assert all(isinstance(_, int) for _ in self.widths), repr(self.widths)
-
-    def _call(self, *, argument=None, runtime=None) -> bool:
-        if argument is None:
-            return False
-        if not self.widths:
-            return False
-        if self.selector:
-            argument = self.selector(argument)
-        if not argument:
-            return False
-        widths = abjad.CyclicTuple(self.widths)
-        for i, plt in enumerate(_select.plts(argument)):
-            width = widths[i]
-            start = self._get_lowest_diatonic_pitch_number(plt)
-            numbers = range(start, start + width)
-            change = abjad.pitch._diatonic_pc_number_to_pitch_class_number
-            numbers_ = [(12 * (_ // 7)) + change[_ % 7] for _ in numbers]
-            pitches = [abjad.NamedPitch(_) for _ in numbers_]
-            for pleaf in plt:
-                chord = abjad.Chord(pleaf)
-                chord.note_heads[:] = pitches
-                abjad.mutate.replace(pleaf, chord)
-        return True
-
-    def _get_lowest_diatonic_pitch_number(self, plt):
-        if isinstance(plt.head, abjad.Note):
-            pitch = plt.head.written_pitch
-        elif isinstance(plt.head, abjad.Chord):
-            pitch = plt.head.written_pitches[0]
-        else:
-            raise TypeError(plt)
-        return pitch._get_diatonic_pitch_number()
+def _get_lowest_diatonic_pitch_number(plt):
+    if isinstance(plt.head, abjad.Note):
+        pitch = plt.head.written_pitch
+    elif isinstance(plt.head, abjad.Chord):
+        pitch = plt.head.written_pitches[0]
+    else:
+        raise TypeError(plt)
+    return pitch._get_diatonic_pitch_number()
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -1715,38 +1671,6 @@ class PitchCommand(_command.Command):
                 >>
             }
 
-    ..  container:: example
-
-        Works with Abjad container:
-
-        >>> command = baca.PitchCommand(
-        ...     cyclic=True,
-        ...     pitches=[19, 13, 15, 16, 17, 23],
-        ... )
-
-        >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
-        >>> command(staff)
-        False
-
-        >>> abjad.show(staff) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> string = abjad.lilypond(staff)
-            >>> print(string)
-            \new Staff
-            {
-                g''8
-                cs''8
-                ef''8
-                e''8
-                f''8
-                b''8
-                g''8
-                cs''8
-            }
-
-
     """
 
     allow_hidden: bool = False
@@ -1833,12 +1757,6 @@ class PitchCommand(_command.Command):
     def parameter(self) -> str:
         """
         Gets persistence parameter.
-
-        ..  container:: example
-
-            >>> baca.PitchCommand().parameter
-            'PITCH'
-
         """
         return _enums.PITCH.name
 
@@ -3387,10 +3305,7 @@ class StaffPositionCommand(_command.Command):
 
         >>> staff = abjad.Staff("c' d' e' f'")
         >>> abjad.attach(abjad.Clef("treble"), staff[0])
-        >>> command = baca.staff_positions([0, 2])
-        >>> command(staff)
-        False
-
+        >>> _ = baca.staff_positions_function(staff, [0, 2])
         >>> abjad.show(staff) # doctest: +SKIP
 
         ..  docs::
@@ -3410,10 +3325,7 @@ class StaffPositionCommand(_command.Command):
 
         >>> staff = abjad.Staff("c' d' e' f'")
         >>> abjad.attach(abjad.Clef("percussion"), staff[0])
-        >>> command = baca.staff_positions([0, 2])
-        >>> command(staff)
-        False
-
+        >>> _ = baca.staff_positions_function(staff, [0, 2])
         >>> abjad.show(staff) # doctest: +SKIP
 
         ..  docs::
@@ -3907,11 +3819,8 @@ def deviation_function(
     _do_microtone_deviation_command(argument, deviations)
 
 
-def diatonic_clusters(
-    widths: list[int],
-    selector: typing.Callable = lambda _: _select.plts(_, exclude=_enums.HIDDEN),
-) -> DiatonicClusterCommand:
-    return DiatonicClusterCommand(selector=selector, widths=widths)
+def diatonic_clusters_function(argument, widths: list[int]) -> None:
+    _do_diatonic_cluster_command(argument, widths)
 
 
 def displacement(
