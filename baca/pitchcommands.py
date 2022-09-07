@@ -678,16 +678,11 @@ class ClusterCommand(_command.Command):
         ...     accumulator,
         ...     docs=True,
         ... )
-
-
+        >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
-        >>> score["Music"].extend(music)
-        >>> accumulator(
-        ...     "Music",
-        ...     baca.pitch("E4"),
-        ...     baca.natural_clusters(widths=[3]),
-        ... )
-
+        >>> voice.extend(music)
+        >>> _ = baca.pitch_function(voice, "E4")
+        >>> _ = baca.natural_clusters_function(voice, widths=[3])
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -772,16 +767,11 @@ class ClusterCommand(_command.Command):
         ...     accumulator,
         ...     docs=True,
         ... )
-
-
+        >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
-        >>> score["Music"].extend(music)
-        >>> accumulator(
-        ...     "Music",
-        ...     baca.pitches("C4 D4 E4 F4"),
-        ...     baca.replace_with_clusters([3]),
-        ... )
-
+        >>> voice.extend(music)
+        >>> _ = baca.pitches_function(voice, "C4 D4 E4 F4")
+        >>> _ = baca.replace_with_clusters_function(voice, [3])
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -866,14 +856,10 @@ class ClusterCommand(_command.Command):
         ...     accumulator,
         ...     docs=True,
         ... )
-
+        >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
-        >>> score["Music"].extend(music)
-        >>> accumulator(
-        ...     "Music",
-        ...     baca.replace_with_clusters([3], start_pitch="G4"),
-        ... )
-
+        >>> voice.extend(music)
+        >>> _ = baca.replace_with_clusters_function(voice, [3], start_pitch="G4")
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -958,14 +944,10 @@ class ClusterCommand(_command.Command):
         ...     accumulator,
         ...     docs=True,
         ... )
-
+        >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
-        >>> score["Music"].extend(music)
-        >>> accumulator(
-        ...     "Music",
-        ...     baca.replace_with_clusters([1, 2, 3, 4], start_pitch="E4"),
-        ... )
-
+        >>> voice.extend(music)
+        >>> _ = baca.replace_with_clusters_function(voice, [1, 2, 3, 4], start_pitch="E4")
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -1050,14 +1032,10 @@ class ClusterCommand(_command.Command):
         ...     accumulator,
         ...     docs=True,
         ... )
-
+        >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
-        >>> score["Music"].extend(music)
-        >>> accumulator(
-        ...     "Music",
-        ...     baca.replace_with_clusters([1, 3], start_pitch="E4"),
-        ... )
-
+        >>> voice.extend(music)
+        >>> _ = baca.replace_with_clusters_function(voice, [1, 3], start_pitch="E4")
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -1127,76 +1105,6 @@ class ClusterCommand(_command.Command):
                     }
                 >>
             }
-
-    ..  container:: example
-
-        Leaves notes and chords unchanged:
-
-        >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ... )
-        >>> first_measure_number = baca.interpret.set_up_score(
-        ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
-        ...     docs=True,
-        ... )
-
-        >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
-        >>> score["Music"].extend(music)
-        >>> accumulator(
-        ...     "Music",
-        ...     baca.pitch("E4"),
-        ...     baca.replace_with_clusters([]),
-        ... )
-
-        >>> _, _ = baca.interpret.section(
-        ...     score,
-        ...     {},
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
-        ...     move_global_context=True,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
-        ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            {
-                \context Staff = "Staff"
-                <<
-                    \context Voice = "Skips"
-                    {
-                        \time 4/8
-                        s1 * 4/8
-                        \time 3/8
-                        s1 * 3/8
-                        \time 4/8
-                        s1 * 4/8
-                        \time 3/8
-                        s1 * 3/8
-                    }
-                    \context Voice = "Music"
-                    {
-                        e'2
-                        e'4.
-                        e'2
-                        e'4.
-                    }
-                >>
-            }
-
-        Inteprets positive integers as widths in thirds.
-
-        Interprets zero to mean input note or chord is left unchanged.
 
     """
 
@@ -1372,15 +1280,11 @@ class MicrotoneDeviationCommand(_command.Command):
         ...     accumulator,
         ...     docs=True,
         ... )
-
+        >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(accumulator.get())
-        >>> score["Music"].extend(music)
-        >>> accumulator(
-        ...     "Music",
-        ...     baca.pitches("E4"),
-        ...     baca.deviation([0, 0.5, 0, -0.5]),
-        ... )
-
+        >>> voice.extend(music)
+        >>> _ = baca.pitches_function(voice, "E4")
+        >>> _ = baca.deviation_function(voice, [0, 0.5, 0, -0.5])
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -1480,15 +1384,11 @@ class OctaveDisplacementCommand(_command.Command):
         ...     accumulator,
         ...     docs=True,
         ... )
-
+        >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(accumulator.get())
-        >>> score["Music"].extend(music)
-        >>> accumulator(
-        ...     "Music",
-        ...     baca.pitch("G4"),
-        ...     baca.displacement([0, 0, 1, 1, 0, 0, -1, -1, 2, 2]),
-        ... )
-
+        >>> voice.extend(music)
+        >>> _ = baca.pitch_function(voice, "G4")
+        >>> _ = baca.displacement_function(voice, [0, 0, 1, 1, 0, 0, -1, -1, 2, 2])
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -1594,14 +1494,10 @@ class PitchCommand(_command.Command):
         ...     accumulator,
         ...     docs=True,
         ... )
-
+        >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(accumulator.get())
-        >>> score["Music"].extend(music)
-        >>> accumulator(
-        ...     "Music",
-        ...     baca.pitches([19, 13, 15, 16, 17, 23]),
-        ... )
-
+        >>> voice.extend(music)
+        >>> _ = baca.pitches_function(voice, [19, 13, 15, 16, 17, 23])
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -1677,14 +1573,10 @@ class PitchCommand(_command.Command):
         ...     accumulator,
         ...     docs=True,
         ... )
-
+        >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(accumulator.get())
-        >>> score["Music"].extend(music)
-        >>> accumulator(
-        ...     "Music",
-        ...     baca.pitches("C4 F4 F#4 <B4 C#5> D5"),
-        ... )
-
+        >>> voice.extend(music)
+        >>> _ = baca.pitches_function(voice, "C4 F4 F#4 <B4 C#5> D5")
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -1760,14 +1652,11 @@ class PitchCommand(_command.Command):
         ...     accumulator,
         ...     docs=True,
         ... )
-
+        >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(accumulator.get())
-        >>> score["Music"].extend(music)
-        >>> accumulator(
-        ...     "Music",
-        ...     baca.pitches("<C4 D4 E4 F4 G4 A4 B4 C4>", allow_repeats=True)
-        ... )
-
+        >>> voice.extend(music)
+        >>> _ = baca.pitches_function(
+        ...     voice, "<C4 D4 E4 F4 G4 A4 B4 C4>", allow_repeats=True)
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -2040,21 +1929,11 @@ class RegisterCommand(_command.Command):
         ...     accumulator,
         ...     docs=True,
         ... )
-
+        >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(accumulator.get())
-        >>> score["Music"].extend(music)
-        >>> accumulator(
-        ...     "Music",
-        ...     baca.pitches("G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4"),
-        ...     baca.RegisterCommand(
-        ...         registration=baca.Registration(
-        ...             [baca.RegistrationComponent(
-        ...                 abjad.PitchRange("[A0, C8]"), abjad.NumberedPitch(15)
-        ...             )],
-        ...         ),
-        ...     ),
-        ... )
-
+        >>> voice.extend(music)
+        >>> _ = baca.pitches_function(voice, "G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4")
+        >>> _ = baca.register_function(voice, 15)
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -2311,16 +2190,12 @@ class RegisterInterpolationCommand(_command.Command):
         ...     accumulator,
         ...     docs=True,
         ... )
-
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
+        >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(accumulator.get())
-        >>> score["Music"].extend(music)
-        >>> accumulator(
-        ...     "Music",
-        ...     baca.pitches(pitches),
-        ...     baca.register(12, 12),
-        ... )
-
+        >>> voice.extend(music)
+        >>> _ = baca.pitches_function(voice, pitches)
+        >>> _ = baca.register_function(voice, 12, 12)
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -2426,16 +2301,12 @@ class RegisterInterpolationCommand(_command.Command):
         ...     accumulator,
         ...     docs=True,
         ... )
-
+        >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(accumulator.get())
-        >>> score["Music"].extend(music)
+        >>> voice.extend(music)
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-        >>> accumulator(
-        ...     "Music",
-        ...     baca.pitches(pitches),
-        ...     baca.register(12, 0),
-        ... )
-
+        >>> _ = baca.pitches_function(voice, pitches)
+        >>> _ = baca.register_function(voice, 12, 0)
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -2541,16 +2412,12 @@ class RegisterInterpolationCommand(_command.Command):
         ...     accumulator,
         ...     docs=True,
         ... )
-
+        >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(accumulator.get())
-        >>> score["Music"].extend(music)
+        >>> voice.extend(music)
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-        >>> accumulator(
-        ...     "Music",
-        ...     baca.pitches(pitches),
-        ...     baca.register(0, 12),
-        ... )
-
+        >>> _ = baca.pitches_function(voice, pitches)
+        >>> _ = baca.register_function(voice, 0, 12)
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -2656,16 +2523,12 @@ class RegisterInterpolationCommand(_command.Command):
         ...     accumulator,
         ...     docs=True,
         ... )
-
+        >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(accumulator.get())
-        >>> score["Music"].extend(music)
+        >>> voice.extend(music)
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-        >>> accumulator(
-        ...     "Music",
-        ...     baca.pitches(pitches),
-        ...     baca.register(12, -12),
-        ... )
-
+        >>> _ = baca.pitches_function(voice, pitches)
+        >>> _ = baca.register_function(voice, 12, -12)
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -2771,16 +2634,12 @@ class RegisterInterpolationCommand(_command.Command):
         ...     accumulator,
         ...     docs=True,
         ... )
-
+        >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(accumulator.get())
-        >>> score["Music"].extend(music)
+        >>> voice.extend(music)
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
-        >>> accumulator(
-        ...     "Music",
-        ...     baca.pitches(pitches),
-        ...     baca.register(-12, 12),
-        ... )
-
+        >>> _ = baca.pitches_function(voice, pitches)
+        >>> _ = baca.register_function(voice, -12, 12)
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -4525,6 +4384,21 @@ def natural_clusters(
     )
 
 
+def natural_clusters_function(
+    argument,
+    widths: typing.Sequence[int],
+    *,
+    start_pitch: int | str | abjad.NamedPitch | None = None,
+) -> list[abjad.Chord]:
+    if start_pitch is not None:
+        start_pitch = abjad.NamedPitch(start_pitch)
+    chords = _do_cluster_command(
+        argument, widths, hide_flat_markup=True, start_pitch=start_pitch
+    )
+    assert all(isinstance(_, abjad.Chord) for _ in chords)
+    return chords
+
+
 def pitch(
     pitch,
     selector: typing.Callable = lambda _: _select.plts(_, exclude=_enums.HIDDEN),
@@ -4554,19 +4428,14 @@ def pitch(
         ...     accumulator,
         ...     docs=True,
         ... )
-
         >>> stack = rmakers.stack(
         ...     rmakers.note(),
         ...     rmakers.written_duration(1),
         ... )
+        >>> voice = score["Music"]
         >>> music = stack(accumulator.get())
-        >>> score["Music"].extend(music)
-
-        >>> accumulator(
-        ...     "Music",
-        ...     baca.pitch("<C4 D4 E4>"),
-        ... )
-
+        >>> voice.extend(music)
+        >>> _ = baca.pitch_function(voice, "<C4 D4 E4>")
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
