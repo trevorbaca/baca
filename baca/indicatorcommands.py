@@ -2,16 +2,13 @@
 Articulations.
 """
 import dataclasses
-import typing
 from inspect import currentframe as _frame
 
 import abjad
 
-from . import command as _command
 from . import dynamics as _dynamics
 from . import indicatorclasses as _indicatorclasses
 from . import overridecommands as _overridecommands
-from . import select as _select
 from . import tags as _tags
 from . import treat as _treat
 from . import tweaks as _tweaks
@@ -85,53 +82,6 @@ def _token_to_indicators(token):
     return result
 
 
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class IndicatorCommand(_command.Command):
-
-    indicators: typing.Sequence = ()
-    context: str | None = None
-    direction: abjad.Vertical | None = None
-    redundant: bool = False
-
-    def __post_init__(self):
-        _command.Command.__post_init__(self)
-        assert isinstance(self.context, (str, type(None))), repr(self.context)
-        assert isinstance(self.redundant, bool), repr(self.redundant)
-
-    def _call(self, *, argument=None, runtime=None) -> bool:
-        if argument is None:
-            return False
-        if not self.indicators:
-            return False
-        if self.redundant is True:
-            return False
-        if self.selector:
-            argument = self.selector(argument)
-        if not argument:
-            return False
-        manifests = runtime.get("manifests", {})
-        _attach_persistent_indicator(
-            argument,
-            self.indicators,
-            context=self.context,
-            deactivate=self.deactivate,
-            direction=self.direction,
-            manifests=manifests,
-            tag=self.tag,
-        )
-        return False
-
-
-def accent(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.Articulation(">")],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def accent_function(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
@@ -145,22 +95,6 @@ def accent_function(argument) -> list[abjad.Wrapper]:
         )
         wrappers.append(wrapper)
     return wrappers
-
-
-def alternate_bow_strokes(
-    *tweaks: abjad.Tweak,
-    downbow_first: bool = True,
-    full: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    indicators = _prepare_alternate_bow_strokes(
-        *tweaks, downbow_first=downbow_first, full=full
-    )
-    return IndicatorCommand(
-        indicators=indicators,
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
 
 
 def alternate_bow_strokes_function(
@@ -188,16 +122,6 @@ def alternate_bow_strokes_function(
     return wrappers
 
 
-def arpeggio(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.Articulation("arpeggio")],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def arpeggio_function(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
@@ -213,18 +137,6 @@ def arpeggio_function(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def articulation(
-    articulation: str,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    articulation_ = abjad.Articulation(articulation)
-    return IndicatorCommand(
-        indicators=[articulation_],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def articulation_function(argument, string: str) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
@@ -238,17 +150,6 @@ def articulation_function(argument, string: str) -> list[abjad.Wrapper]:
         )
         wrappers.append(wrapper)
     return wrappers
-
-
-def articulations(
-    articulations: list,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=articulations,
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
 
 
 def articulations_function(argument, articulations: list) -> list[abjad.Wrapper]:
@@ -282,20 +183,6 @@ def bar_line_function(
     return wrappers
 
 
-def breathe(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-    *tweaks: abjad.Tweak,
-) -> IndicatorCommand:
-    indicator: abjad.LilyPondLiteral | abjad.Bundle
-    indicator = abjad.LilyPondLiteral(r"\breathe", site="after")
-    indicator = _tweaks.bundle_tweaks(indicator, tweaks)
-    return IndicatorCommand(
-        indicators=[indicator],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def breathe_function(argument, *tweaks: abjad.Tweak) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
@@ -311,21 +198,6 @@ def breathe_function(argument, *tweaks: abjad.Tweak) -> list[abjad.Wrapper]:
         )
         wrappers.append(wrapper)
     return wrappers
-
-
-def clef(
-    clef: str = "treble",
-    *,
-    redundant: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    indicator = abjad.Clef(clef)
-    return IndicatorCommand(
-        indicators=[indicator],
-        redundant=redundant,
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
 
 
 def clef_function(argument, clef: str) -> list[abjad.Wrapper]:
@@ -364,27 +236,6 @@ def close_volta_function(
     return wrappers
 
 
-def color_fingerings(
-    numbers: list[int],
-    *tweaks: _typings.IndexedTweak,
-    selector: typing.Callable = lambda _: _select.pheads(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    indicators: list[abjad.Bundle | None] = []
-    for number in numbers:
-        if number == 0:
-            indicators.append(None)
-        else:
-            indicator = abjad.ColorFingering(number)
-            bundle = _tweaks.bundle_tweaks(indicator, tweaks)
-            indicators.append(bundle)
-    return IndicatorCommand(
-        direction=abjad.UP,
-        indicators=indicators,
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def color_fingerings_function(
     argument,
     numbers: list[int],
@@ -404,16 +255,6 @@ def color_fingerings_function(
     return wrappers
 
 
-def cross_staff(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.LilyPondLiteral(r"\crossStaff")],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def cross_staff_function(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
@@ -427,20 +268,6 @@ def cross_staff_function(argument) -> list[abjad.Wrapper]:
         )
         wrappers.append(wrapper)
     return wrappers
-
-
-def damp(
-    *tweaks: abjad.Tweak,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    indicator: abjad.Articulation | abjad.Bundle
-    indicator = abjad.Articulation("baca-damp")
-    indicator = _tweaks.bundle_tweaks(indicator, tweaks)
-    return IndicatorCommand(
-        indicators=[indicator],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
 
 
 def damp_function(argument, *tweaks: abjad.Tweak) -> list[abjad.Wrapper]:
@@ -460,16 +287,6 @@ def damp_function(argument, *tweaks: abjad.Tweak) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def double_flageolet(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.Articulation("baca-double-flageolet")],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def double_flageolet_function(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
@@ -483,16 +300,6 @@ def double_flageolet_function(argument) -> list[abjad.Wrapper]:
         )
         wrappers.append(wrapper)
     return wrappers
-
-
-def double_staccato(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.Articulation("baca-staccati #2")],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
 
 
 def double_staccato_function(argument) -> list[abjad.Wrapper]:
@@ -528,16 +335,6 @@ def double_volta_function(skip, first_measure_number) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def down_arpeggio(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.Arpeggio(direction=abjad.DOWN)],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def down_arpeggio_function(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
@@ -551,24 +348,6 @@ def down_arpeggio_function(argument) -> list[abjad.Wrapper]:
         )
         wrappers.append(wrapper)
     return wrappers
-
-
-def down_bow(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-    *tweaks: abjad.Tweak,
-    full: bool = False,
-) -> IndicatorCommand:
-    indicator: abjad.Articulation | abjad.Bundle
-    if full:
-        indicator = abjad.Articulation("baca-full-downbow")
-    else:
-        indicator = abjad.Articulation("downbow")
-    indicator = _tweaks.bundle_tweaks(indicator, tweaks)
-    return IndicatorCommand(
-        indicators=[indicator],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
 
 
 def down_bow_function(
@@ -593,28 +372,6 @@ def down_bow_function(
         )
         wrappers.append(wrapper)
     return wrappers
-
-
-def dynamic(
-    dynamic: str | abjad.Dynamic,
-    *tweaks: abjad.Tweak,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-    redundant: bool = False,
-) -> IndicatorCommand:
-    if isinstance(dynamic, str):
-        indicator = _dynamics.make_dynamic(dynamic)
-    else:
-        indicator = dynamic
-    prototype = (abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin)
-    assert isinstance(indicator, prototype), repr(indicator)
-    indicator = _tweaks.bundle_tweaks(indicator, tweaks)
-    return IndicatorCommand(
-        context="Voice",
-        indicators=[indicator],
-        redundant=redundant,
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
 
 
 def dynamic_function(
@@ -644,16 +401,6 @@ def dynamic_function(
     return wrappers
 
 
-def dynamic_down(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.LilyPondLiteral(r"\dynamicDown")],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def dynamic_down_function(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
@@ -667,16 +414,6 @@ def dynamic_down_function(argument) -> list[abjad.Wrapper]:
         )
         wrappers.append(wrapper)
     return wrappers
-
-
-def dynamic_up(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.LilyPondLiteral(r"\dynamicUp")],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
 
 
 def dynamic_up_function(argument) -> list[abjad.Wrapper]:
@@ -709,20 +446,6 @@ def edition_function(
     return wrappers
 
 
-def espressivo(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-    *tweaks: abjad.Tweak,
-) -> IndicatorCommand:
-    indicator: abjad.Articulation | abjad.Bundle
-    indicator = abjad.Articulation("espressivo")
-    indicator = _tweaks.bundle_tweaks(indicator, tweaks)
-    return IndicatorCommand(
-        indicators=[indicator],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def espressivo_function(argument, *tweaks: abjad.Tweak) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
@@ -740,13 +463,6 @@ def espressivo_function(argument, *tweaks: abjad.Tweak) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def extend_beam(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    return IndicatorCommand(indicators=[_enums.RIGHT_BROKEN_BEAM], selector=selector)
-
-
 def extend_beam_function(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
@@ -762,16 +478,6 @@ def extend_beam_function(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def fermata(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.Articulation("fermata")],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def fermata_function(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
@@ -785,16 +491,6 @@ def fermata_function(argument) -> list[abjad.Wrapper]:
         )
         wrappers.append(wrapper)
     return wrappers
-
-
-def flageolet(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.Articulation("flageolet")],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
 
 
 def flageolet_function(argument) -> list[abjad.Wrapper]:
@@ -874,19 +570,6 @@ def global_fermata_function(
     return wrappers
 
 
-def instrument(
-    instrument: abjad.Instrument,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    assert isinstance(instrument, abjad.Instrument), repr(instrument)
-    return IndicatorCommand(
-        indicators=[instrument],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def instrument_function(
     argument,
     key: str,
@@ -907,23 +590,6 @@ def instrument_function(
         )
         wrappers.extend(wrappers_)
     return wrappers
-
-
-def instrument_name(
-    string: str,
-    *,
-    context: str = "Staff",
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    assert isinstance(string, str), repr(string)
-    assert string.startswith("\\"), repr(string)
-    indicator = abjad.InstrumentName(string, context=context)
-    command = IndicatorCommand(
-        indicators=[indicator],
-        selector=selector,
-        tags=[_tags.function_name(_frame()), _tags.NOT_PARTS],
-    )
-    return command
 
 
 def instrument_name_function(
@@ -976,17 +642,6 @@ def invisible_music_function(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def laissez_vibrer(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.LaissezVibrer()],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def laissez_vibrer_function(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
@@ -1000,20 +655,6 @@ def laissez_vibrer_function(argument) -> list[abjad.Wrapper]:
         )
         wrappers.append(wrapper)
     return wrappers
-
-
-def literal(
-    string: str | list[str],
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-    site: str = "before",
-) -> IndicatorCommand:
-    literal = abjad.LilyPondLiteral(string, site=site)
-    return IndicatorCommand(
-        indicators=[literal],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
 
 
 def literal_function(
@@ -1036,16 +677,6 @@ def literal_function(
     return wrappers
 
 
-def long_fermata(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.Articulation("longfermata")],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def long_fermata_function(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
@@ -1061,16 +692,6 @@ def long_fermata_function(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def marcato(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.Articulation("marcato")],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def marcato_function(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
@@ -1084,22 +705,6 @@ def marcato_function(argument) -> list[abjad.Wrapper]:
         )
         wrappers.append(wrapper)
     return wrappers
-
-
-# TODO: remove
-def mark(
-    argument: str,
-    *tweaks: abjad.Tweak,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    assert isinstance(argument, abjad.Markup | str), repr(argument)
-    rehearsal_mark = abjad.RehearsalMark(markup=argument)
-    rehearsal_mark = _tweaks.bundle_tweaks(rehearsal_mark, tweaks)
-    return IndicatorCommand(
-        indicators=[rehearsal_mark],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
 
 
 # TODO: remove
@@ -1122,43 +727,6 @@ def mark_function(
         )
         wrappers.append(wrapper)
     return wrappers
-
-
-def markup(
-    argument: str | abjad.Markup,
-    *tweaks: abjad.Tweak,
-    direction=abjad.UP,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    if direction not in (abjad.DOWN, abjad.UP):
-        message = f"direction must be up or down (not {direction!r})."
-        raise Exception(message)
-    indicator: abjad.Markup | abjad.Bundle
-    if isinstance(argument, str):
-        indicator = abjad.Markup(argument)
-    elif isinstance(argument, abjad.Markup):
-        indicator = dataclasses.replace(argument)
-    else:
-        message = "MarkupLibary.__call__():\n"
-        message += "  Value of 'argument' must be str or markup.\n"
-        message += f"  Not {argument!r}."
-        raise Exception(message)
-    if tweaks:
-        indicator = abjad.bundle(indicator, *tweaks)
-    if (
-        selector is not None
-        and not isinstance(selector, str)
-        and not callable(selector)
-    ):
-        message = "selector must be string or callable"
-        message += f" (not {selector!r})."
-        raise Exception(message)
-    return IndicatorCommand(
-        direction=direction,
-        indicators=[indicator],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
 
 
 def markup_function(
@@ -1219,17 +787,6 @@ def metronome_mark_function(
     return wrappers
 
 
-def one_voice(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    literal = abjad.LilyPondLiteral(r"\oneVoice")
-    return IndicatorCommand(
-        indicators=[literal],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def one_voice_function(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
@@ -1278,16 +835,6 @@ def parenthesize_function(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def quadruple_staccato(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.Articulation("baca-staccati #4")],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def quadruple_staccato_function(argument) -> list[abjad.Wrapper]:
     wrappers = []
     tag = _tags.function_name(_frame())
@@ -1329,14 +876,6 @@ def rehearsal_mark_function(
     return wrappers
 
 
-def repeat_tie(selector: typing.Callable) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.RepeatTie()],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def repeat_tie_function(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
@@ -1350,16 +889,6 @@ def repeat_tie_function(argument) -> list[abjad.Wrapper]:
         )
         wrappers.append(wrapper)
     return wrappers
-
-
-def short_fermata(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.Articulation("shortfermata")],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
 
 
 def short_fermata_function(argument) -> list[abjad.Wrapper]:
@@ -1402,16 +931,6 @@ def short_instrument_name_function(
     return wrappers
 
 
-def snap_pizzicato(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.Articulation("snappizzicato")],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def snap_pizzicato_function(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
@@ -1427,16 +946,6 @@ def snap_pizzicato_function(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def staccatissimo(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.Articulation("staccatissimo")],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def staccatissimo_function(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
@@ -1450,16 +959,6 @@ def staccatissimo_function(argument) -> list[abjad.Wrapper]:
         )
         wrappers.append(wrapper)
     return wrappers
-
-
-def staccato(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.Articulation("staccato")],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
 
 
 def staccato_function(argument) -> list[abjad.Wrapper]:
@@ -1498,18 +997,6 @@ def staff_lines_function(argument, n: int) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def stem_tremolo(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-    *,
-    tremolo_flags: int = 32,
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.StemTremolo(tremolo_flags=tremolo_flags)],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def stem_tremolo_function(argument, *, tremolo_flags: int = 32) -> list[abjad.Wrapper]:
     wrappers = []
     tag = _tags.function_name(_frame())
@@ -1523,17 +1010,6 @@ def stem_tremolo_function(argument, *, tremolo_flags: int = 32) -> list[abjad.Wr
         )
         wrappers.append(wrapper)
     return wrappers
-
-
-def stop_on_string(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    articulation = abjad.Articulation("baca-stop-on-string")
-    return IndicatorCommand(
-        indicators=[articulation],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
 
 
 def stop_on_string_function(argument) -> list[abjad.Wrapper]:
@@ -1551,10 +1027,7 @@ def stop_on_string_function(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def stop_trill(
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
+def stop_trill_function(argument) -> list[abjad.Wrapper]:
     r"""
     Attaches stop trill to closing-slot.
 
@@ -1568,10 +1041,6 @@ def stop_trill(
     Eventually it will probably be necessary to model ``\stopTrillSpan`` with a
     dedicated format slot.
     """
-    return literal(r"\stopTrillSpan", site="closing", selector=selector)
-
-
-def stop_trill_function(argument) -> list[abjad.Wrapper]:
     wrappers = literal_function(
         argument,
         r"\stopTrillSpan",
@@ -1580,16 +1049,6 @@ def stop_trill_function(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     _tags.wrappers(wrappers, tag)
     return wrappers
-
-
-def stopped(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.Articulation("stopped")],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
 
 
 def stopped_function(argument) -> list[abjad.Wrapper]:
@@ -1607,16 +1066,6 @@ def stopped_function(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def tenuto(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.Articulation("tenuto")],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def tenuto_function(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
@@ -1630,16 +1079,6 @@ def tenuto_function(argument) -> list[abjad.Wrapper]:
         )
         wrappers.append(wrapper)
     return wrappers
-
-
-def tie(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.Tie()],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
 
 
 def tie_function(argument) -> list[abjad.Wrapper]:
@@ -1657,16 +1096,6 @@ def tie_function(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def triple_staccato(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.Articulation("baca-staccati #3")],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def triple_staccato_function(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
@@ -1682,16 +1111,6 @@ def triple_staccato_function(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def up_arpeggio(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.Arpeggio(direction=abjad.UP)],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def up_arpeggio_function(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
@@ -1705,24 +1124,6 @@ def up_arpeggio_function(argument) -> list[abjad.Wrapper]:
         )
         wrappers.append(wrapper)
     return wrappers
-
-
-def up_bow(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-    *tweaks: abjad.Tweak,
-    full: bool = False,
-) -> IndicatorCommand:
-    indicator: abjad.Articulation | abjad.Bundle
-    if full:
-        indicator = abjad.Articulation("baca-full-upbow")
-    else:
-        indicator = abjad.Articulation("upbow")
-    indicator = _tweaks.bundle_tweaks(indicator, tweaks)
-    return IndicatorCommand(
-        indicators=[indicator],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
 
 
 def up_bow_function(
@@ -1747,16 +1148,6 @@ def up_bow_function(
     return wrappers
 
 
-def very_long_fermata(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    return IndicatorCommand(
-        indicators=[abjad.Articulation("verylongfermata")],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def very_long_fermata_function(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
@@ -1770,17 +1161,6 @@ def very_long_fermata_function(argument) -> list[abjad.Wrapper]:
         )
         wrappers.append(wrapper)
     return wrappers
-
-
-def voice_four(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    literal = abjad.LilyPondLiteral(r"\voiceFour")
-    return IndicatorCommand(
-        indicators=[literal],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
 
 
 def voice_four_function(argument) -> list[abjad.Wrapper]:
@@ -1798,17 +1178,6 @@ def voice_four_function(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def voice_one(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    literal = abjad.LilyPondLiteral(r"\voiceOne")
-    return IndicatorCommand(
-        indicators=[literal],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def voice_one_function(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
@@ -1824,17 +1193,6 @@ def voice_one_function(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def voice_three(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    literal = abjad.LilyPondLiteral(r"\voiceThree")
-    return IndicatorCommand(
-        indicators=[literal],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def voice_three_function(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
@@ -1848,17 +1206,6 @@ def voice_three_function(argument) -> list[abjad.Wrapper]:
         )
         wrappers.append(wrapper)
     return wrappers
-
-
-def voice_two(
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> IndicatorCommand:
-    literal = abjad.LilyPondLiteral(r"\voiceTwo")
-    return IndicatorCommand(
-        indicators=[literal],
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
 
 
 def voice_two_function(argument) -> list[abjad.Wrapper]:

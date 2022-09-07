@@ -1,16 +1,11 @@
 """
 Overrides.
 """
-import dataclasses
-import typing
 from inspect import currentframe as _frame
 
 import abjad
 
-from . import command as _command
-from . import select as _select
 from . import tags as _tags
-from .enums import enums as _enums
 
 
 def _do_override_command(
@@ -105,84 +100,6 @@ def _do_override_function(
     )
 
 
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class OverrideCommand(_command.Command):
-
-    after: bool = False
-    allowlist: tuple[type, ...] = ()
-    attribute: str | None = None
-    blocklist: tuple[type, ...] = ()
-    context: str | None = None
-    grob: str | None = None
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-    value: typing.Any = None
-
-    def __post_init__(self):
-        _command.Command.__post_init__(self)
-        assert isinstance(self.after, bool), repr(self.after)
-        if self.allowlist is not None:
-            assert isinstance(self.allowlist, tuple), repr(self.allowlist)
-            assert all(issubclass(_, abjad.Leaf) for _ in self.allowlist)
-        if self.attribute is not None:
-            assert isinstance(self.attribute, str), repr(self.attribute)
-        if self.blocklist is not None:
-            assert isinstance(self.blocklist, tuple), repr(self.blocklist)
-            assert all(issubclass(_, abjad.Leaf) for _ in self.blocklist)
-        if self.context is not None:
-            assert isinstance(self.context, str), repr(self.context)
-        if self.grob is not None:
-            assert isinstance(self.grob, str), repr(self.grob)
-
-    def _call(self, *, argument=None, runtime=None) -> bool:
-        if argument is None:
-            return False
-        if self.selector:
-            argument = self.selector(argument)
-        if not argument:
-            return False
-        leaves = abjad.select.leaves(argument)
-        first_tag = self.get_tag(leaves[0], runtime=runtime)
-        function_name = _tags.function_name(_frame(), self, n=1)
-        if first_tag:
-            first_tag = first_tag.append(function_name)
-        else:
-            first_tag = function_name
-        final_tag = self.get_tag(leaves[-1], runtime=runtime)
-        function_name = _tags.function_name(_frame(), self, n=2)
-        if final_tag:
-            final_tag = final_tag.append(function_name)
-        else:
-            final_tag = function_name
-        _do_override_command(
-            leaves,
-            self.grob,
-            self.attribute,
-            self.value,
-            first_tag,
-            final_tag,
-            after=self.after,
-            allowlist=self.allowlist,
-            blocklist=self.blocklist,
-            context=self.context,
-            deactivate=self.deactivate,
-        )
-        return False
-
-
-def accidental_extra_offset(
-    pair: tuple[int | float, int | float],
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="extra_offset",
-        grob="Accidental",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=f"#'({pair[0]} . {pair[1]})",
-    )
-
-
 def accidental_extra_offset_function(
     argument,
     pair: tuple[int | float, int | float],
@@ -196,20 +113,6 @@ def accidental_extra_offset_function(
     )
 
 
-def accidental_font_size(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="font_size",
-        grob="Accidental",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=n,
-    )
-
-
 def accidental_font_size_function(argument, n: int | float) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -217,18 +120,6 @@ def accidental_font_size_function(argument, n: int | float) -> list[abjad.Wrappe
         attribute="font_size",
         grob="Accidental",
         value=n,
-    )
-
-
-def accidental_stencil_false(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="stencil",
-        grob="Accidental",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=False,
     )
 
 
@@ -242,18 +133,6 @@ def accidental_stencil_false_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def accidental_transparent(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-):
-    return OverrideCommand(
-        attribute="transparent",
-        value=True,
-        grob="Accidental",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def accidental_transparent_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -261,18 +140,6 @@ def accidental_transparent_function(argument) -> list[abjad.Wrapper]:
         attribute="transparent",
         value=True,
         grob="Accidental",
-    )
-
-
-def accidental_x_extent_false(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="X_extent",
-        grob="Accidental",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=False,
     )
 
 
@@ -286,40 +153,12 @@ def accidental_x_extent_false_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def accidental_x_offset(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="X_offset",
-        grob="Accidental",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=n,
-    )
-
-
 def accidental_x_offset_function(argument, n: int | float) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
         argument,
         attribute="X_offset",
         grob="Accidental",
-        value=n,
-    )
-
-
-def accidental_y_offset(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="Y_offset",
-        grob="Accidental",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
         value=n,
     )
 
@@ -334,24 +173,6 @@ def accidental_y_offset_function(argument, n: int | float) -> list[abjad.Wrapper
     )
 
 
-def bar_line_color(
-    color: str,
-    *,
-    after: bool = False,
-    context: str = "Score",
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        after=after,
-        attribute="color",
-        value=color,
-        context=context,
-        grob="BarLine",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def bar_line_color_function(
     argument, color: str, *, after: bool = False, context: str = "Score"
 ) -> list[abjad.Wrapper]:
@@ -363,24 +184,6 @@ def bar_line_color_function(
         value=color,
         after=after,
         context=context,
-    )
-
-
-def bar_line_extra_offset(
-    pair: tuple[int | float, int | float],
-    *,
-    after: bool = False,
-    context: str = "Score",
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        after=after,
-        attribute="extra_offset",
-        value=f"#'({pair[0]} . {pair[1]})",
-        context=context,
-        grob="BarLine",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -402,19 +205,6 @@ def bar_line_extra_offset_function(
     )
 
 
-def bar_line_transparent(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="transparent",
-        value=True,
-        context="Score",
-        grob="BarLine",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def bar_line_transparent_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -423,25 +213,6 @@ def bar_line_transparent_function(argument) -> list[abjad.Wrapper]:
         "transparent",
         True,
         context="Score",
-    )
-
-
-# TODO: change name to bar_line_x_extent()
-def bar_line_x_extent_command(
-    pair: tuple[int | float, int | float],
-    *,
-    after: bool = False,
-    context: str = "Score",
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        after=after,
-        attribute="X_extent",
-        value=f"#'({pair[0]} . {pair[1]})",
-        context=context,
-        grob="BarLine",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -472,23 +243,6 @@ def bar_line_x_extent(
     )
 
 
-def beam_positions(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    if not isinstance(n, int | float):
-        message = f"beam position must be number (not {n})."
-        raise Exception(message)
-    return OverrideCommand(
-        attribute="positions",
-        value=f"#'({n} . {n})",
-        grob="Beam",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def beam_positions_function(argument, n: int | float) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -496,18 +250,6 @@ def beam_positions_function(argument, n: int | float) -> list[abjad.Wrapper]:
         "Beam",
         "positions",
         f"#'({n} . {n})",
-    )
-
-
-def beam_stencil_false(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="stencil",
-        grob="Beam",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=False,
     )
 
 
@@ -521,18 +263,6 @@ def beam_stencil_false_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def beam_transparent(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="transparent",
-        value=True,
-        grob="Beam",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def beam_transparent_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -540,21 +270,6 @@ def beam_transparent_function(argument) -> list[abjad.Wrapper]:
         grob="Beam",
         attribute="transparent",
         value=True,
-    )
-
-
-def clef_extra_offset(
-    pair: tuple[int | float, int | float],
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="extra_offset",
-        context="Staff",
-        grob="Clef",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=f"#'({pair[0]} . {pair[1]})",
     )
 
 
@@ -601,21 +316,6 @@ def clef_shift_function(
     return wrappers
 
 
-def clef_whiteout(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="whiteout",
-        context="Staff",
-        grob="Clef",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=n,
-    )
-
-
 def clef_whiteout_function(argument, n: int | float) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -624,19 +324,6 @@ def clef_whiteout_function(argument, n: int | float) -> list[abjad.Wrapper]:
         attribute="whiteout",
         value=n,
         context="Staff",
-    )
-
-
-def clef_x_extent_false(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="X_extent",
-        context="Staff",
-        grob="Clef",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=False,
     )
 
 
@@ -651,20 +338,6 @@ def clef_x_extent_false_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def dls_padding(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="padding",
-        value=n,
-        grob="DynamicLineSpanner",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def dls_padding_function(argument, n: int | float) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -672,20 +345,6 @@ def dls_padding_function(argument, n: int | float) -> list[abjad.Wrapper]:
         "DynamicLineSpanner",
         "padding",
         n,
-    )
-
-
-def dls_staff_padding(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="staff_padding",
-        value=n,
-        grob="DynamicLineSpanner",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -699,18 +358,6 @@ def dls_staff_padding_function(argument, n: int | float) -> list[abjad.Wrapper]:
     )
 
 
-def dls_up(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="direction",
-        value=abjad.UP,
-        grob="DynamicLineSpanner",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def dls_up_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -718,20 +365,6 @@ def dls_up_function(argument) -> list[abjad.Wrapper]:
         grob="DynamicLineSpanner",
         attribute="direction",
         value=abjad.UP,
-    )
-
-
-def dots_extra_offset(
-    pair: tuple[int | float, int | float],
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="extra_offset",
-        grob="Dots",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=f"#'({pair[0]} . {pair[1]})",
     )
 
 
@@ -748,18 +381,6 @@ def dots_extra_offset_function(
     )
 
 
-def dots_stencil_false(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="stencil",
-        grob="Dots",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=False,
-    )
-
-
 def dots_stencil_false_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -767,18 +388,6 @@ def dots_stencil_false_function(argument) -> list[abjad.Wrapper]:
         grob="Dots",
         attribute="stencil",
         value=False,
-    )
-
-
-def dots_transparent(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="transparent",
-        value=True,
-        grob="Dots",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -792,18 +401,6 @@ def dots_transparent_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def dots_x_extent_false(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="X_extent",
-        grob="Dots",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=False,
-    )
-
-
 def dots_x_extent_false_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -814,20 +411,6 @@ def dots_x_extent_false_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def dynamic_text_color(
-    color: str = "#red",
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="color",
-        value=color,
-        grob="DynamicText",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def dynamic_text_color_function(argument, color: str = "#red") -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -835,20 +418,6 @@ def dynamic_text_color_function(argument, color: str = "#red") -> list[abjad.Wra
         grob="DynamicText",
         attribute="color",
         value=color,
-    )
-
-
-def dynamic_text_extra_offset(
-    pair: tuple[int | float, int | float],
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="extra_offset",
-        value=f"#'({pair[0]} . {pair[1]})",
-        grob="DynamicText",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -865,20 +434,6 @@ def dynamic_text_extra_offset_function(
     )
 
 
-def dynamic_text_parent_alignment_x(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="parent_alignment_X",
-        value=n,
-        grob="DynamicText",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def dynamic_text_parent_alignment_x_function(
     argument, n: int | float
 ) -> list[abjad.Wrapper]:
@@ -888,20 +443,6 @@ def dynamic_text_parent_alignment_x_function(
         grob="DynamicText",
         attribute="parent_alignment_X",
         value=n,
-    )
-
-
-def dynamic_text_self_alignment_x(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="self_alignment_X",
-        value=n,
-        grob="DynamicText",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -917,18 +458,6 @@ def dynamic_text_self_alignment_x_function(
     )
 
 
-def dynamic_text_stencil_false(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="stencil",
-        value=False,
-        grob="DynamicText",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def dynamic_text_stencil_false_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -936,18 +465,6 @@ def dynamic_text_stencil_false_function(argument) -> list[abjad.Wrapper]:
         grob="DynamicText",
         attribute="stencil",
         value=False,
-    )
-
-
-def dynamic_text_transparent(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="transparent",
-        value=True,
-        grob="DynamicText",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -961,18 +478,6 @@ def dynamic_text_transparent_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def dynamic_text_x_extent_zero(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="X_extent",
-        value=(0, 0),
-        grob="DynamicText",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def dynamic_text_x_extent_zero_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -980,20 +485,6 @@ def dynamic_text_x_extent_zero_function(argument) -> list[abjad.Wrapper]:
         "DynamicText",
         "X_extent",
         (0, 0),
-    )
-
-
-def dynamic_text_x_offset(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="X_offset",
-        value=n,
-        grob="DynamicText",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -1007,20 +498,6 @@ def dynamic_text_x_offset_function(argument, n: int | float) -> list[abjad.Wrapp
     )
 
 
-def dynamic_text_y_offset(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="Y_offset",
-        value=n,
-        grob="DynamicText",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def dynamic_text_y_offset_function(argument, n: int | float) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -1028,20 +505,6 @@ def dynamic_text_y_offset_function(argument, n: int | float) -> list[abjad.Wrapp
         grob="DynamicText",
         attribute="Y_offset",
         value=n,
-    )
-
-
-def flag_extra_offset(
-    pair: tuple[int | float, int | float],
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="extra_offset",
-        grob="Flag",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=f"#'({pair[0]} . {pair[1]})",
     )
 
 
@@ -1057,18 +520,6 @@ def flag_extra_offset_function(
     )
 
 
-def flag_stencil_false(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="stencil",
-        grob="Flag",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=False,
-    )
-
-
 def flag_stencil_false_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -1076,18 +527,6 @@ def flag_stencil_false_function(argument) -> list[abjad.Wrapper]:
         grob="Flag",
         attribute="stencil",
         value=False,
-    )
-
-
-def flag_transparent(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="transparent",
-        value=True,
-        grob="Flag",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -1101,20 +540,6 @@ def flag_transparent_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def glissando_thickness(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="thickness",
-        value=str(n),
-        grob="Glissando",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def glissando_thickness_function(argument, n: int | float) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -1122,20 +547,6 @@ def glissando_thickness_function(argument, n: int | float) -> list[abjad.Wrapper
         grob="Glissando",
         attribute="thickness",
         value=str(n),
-    )
-
-
-def hairpin_shorten_pair(
-    pair: tuple[int | float, int | float],
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="shorten_pair",
-        value=f"#'({pair[0]} . {pair[1]})",
-        grob="Hairpin",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -1169,18 +580,6 @@ def hairpin_start_shift_function(
     return wrappers
 
 
-def hairpin_stencil_false(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="stencil",
-        value=False,
-        grob="Hairpin",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def hairpin_stencil_false_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -1188,18 +587,6 @@ def hairpin_stencil_false_function(argument) -> list[abjad.Wrapper]:
         grob="Hairpin",
         attribute="stencil",
         value=False,
-    )
-
-
-def hairpin_to_barline(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="to_barline",
-        value=True,
-        grob="Hairpin",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -1213,18 +600,6 @@ def hairpin_to_barline_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def hairpin_transparent(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="transparent",
-        value=True,
-        grob="Hairpin",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def hairpin_transparent_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -1232,18 +607,6 @@ def hairpin_transparent_function(argument) -> list[abjad.Wrapper]:
         grob="Hairpin",
         attribute="transparent",
         value=True,
-    )
-
-
-def laissez_vibrer_tie_down(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="direction",
-        value=abjad.DOWN,
-        grob="LaissezVibrerTie",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -1257,18 +620,6 @@ def laissez_vibrer_tie_down_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def laissez_vibrer_tie_up(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="direction",
-        value=abjad.UP,
-        grob="LaissezVibrerTie",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def laissez_vibrer_tie_up_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -1276,21 +627,6 @@ def laissez_vibrer_tie_up_function(argument) -> list[abjad.Wrapper]:
         grob="LaissezVibrerTie",
         attribute="direction",
         value=abjad.UP,
-    )
-
-
-def mmrest_color(
-    color: str = "#red",
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="color",
-        value=color,
-        grob="MultiMeasureRest",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        allowlist=(abjad.MultimeasureRest,),
     )
 
 
@@ -1304,19 +640,6 @@ def mmrest_color_function(argument, color: str = "#red") -> list[abjad.Wrapper]:
     )
 
 
-def mmrest_transparent(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="transparent",
-        value=True,
-        grob="MultiMeasureRest",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        allowlist=(abjad.MultimeasureRest,),
-    )
-
-
 def mmrest_transparent_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -1327,21 +650,6 @@ def mmrest_transparent_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def mmrest_text_color(
-    color: str = "#red",
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="color",
-        value=color,
-        grob="MultiMeasureRestText",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        allowlist=(abjad.MultimeasureRest,),
-    )
-
-
 def mmrest_text_color_function(argument, color: str = "#red") -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -1349,21 +657,6 @@ def mmrest_text_color_function(argument, color: str = "#red") -> list[abjad.Wrap
         grob="MultiMeasureRestText",
         attribute="color",
         value=color,
-    )
-
-
-def mmrest_text_extra_offset(
-    pair: tuple[int | float, int | float],
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="extra_offset",
-        value=f"#'({pair[0]} . {pair[1]})",
-        grob="MultiMeasureRestText",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        allowlist=(abjad.MultimeasureRest,),
     )
 
 
@@ -1380,21 +673,6 @@ def mmrest_text_extra_offset_function(
     )
 
 
-def mmrest_text_padding(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="padding",
-        value=n,
-        grob="MultiMeasureRestText",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        allowlist=(abjad.MultimeasureRest,),
-    )
-
-
 def mmrest_text_padding_function(argument, n: int | float) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -1402,19 +680,6 @@ def mmrest_text_padding_function(argument, n: int | float) -> list[abjad.Wrapper
         grob="MultiMeasureRestText",
         attribute="padding",
         value=n,
-    )
-
-
-def mmrest_text_parent_center(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="parent_alignment_X",
-        value=0,
-        grob="MultiMeasureRestText",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        allowlist=(abjad.MultimeasureRest,),
     )
 
 
@@ -1428,21 +693,6 @@ def mmrest_text_parent_center_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def mmrest_text_staff_padding(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="staff_padding",
-        value=n,
-        grob="MultiMeasureRestText",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        allowlist=(abjad.MultimeasureRest,),
-    )
-
-
 def mmrest_text_staff_padding_function(argument, n: int | float) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -1450,19 +700,6 @@ def mmrest_text_staff_padding_function(argument, n: int | float) -> list[abjad.W
         grob="MultiMeasureRestText",
         attribute="staff_padding",
         value=n,
-    )
-
-
-def mmrest_text_transparent(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="transparent",
-        value=True,
-        grob="MultiMeasureRestText",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        allowlist=(abjad.MultimeasureRest,),
     )
 
 
@@ -1476,20 +713,6 @@ def mmrest_text_transparent_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def note_column_shift(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="force_hshift",
-        value=n,
-        grob="NoteColumn",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def note_column_shift_function(argument, n: int | float) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -1497,20 +720,6 @@ def note_column_shift_function(argument, n: int | float) -> list[abjad.Wrapper]:
         grob="NoteColumn",
         attribute="force_hshift",
         value=n,
-    )
-
-
-def note_head_color(
-    color: str,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="color",
-        grob="NoteHead",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=color,
     )
 
 
@@ -1524,20 +733,6 @@ def note_head_color_function(argument, color: str) -> list[abjad.Wrapper]:
     )
 
 
-def note_head_duration_log(
-    n: int,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="duration_log",
-        grob="NoteHead",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=n,
-    )
-
-
 def note_head_duration_log_function(argument, n: int) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -1545,20 +740,6 @@ def note_head_duration_log_function(argument, n: int) -> list[abjad.Wrapper]:
         "NoteHead",
         "duration_log",
         n,
-    )
-
-
-def note_head_extra_offset(
-    pair: tuple[int | float, int | float],
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="extra_offset",
-        grob="NoteHead",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=f"#'({pair[0]} . {pair[1]})",
     )
 
 
@@ -1574,20 +755,6 @@ def note_head_extra_offset_function(
     )
 
 
-def note_head_font_size(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="font_size",
-        grob="NoteHead",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=n,
-    )
-
-
 def note_head_font_size_function(argument, n: int | float) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -1595,20 +762,6 @@ def note_head_font_size_function(argument, n: int | float) -> list[abjad.Wrapper
         grob="NoteHead",
         attribute="font_size",
         value=n,
-    )
-
-
-def note_head_no_ledgers(
-    value: bool,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="no_ledgers",
-        grob="NoteHead",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=value,
     )
 
 
@@ -1622,18 +775,6 @@ def note_head_no_ledgers_function(argument, value: bool) -> list[abjad.Wrapper]:
     )
 
 
-def note_head_stencil_false(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="stencil",
-        grob="NoteHead",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=False,
-    )
-
-
 def note_head_stencil_false_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -1641,20 +782,6 @@ def note_head_stencil_false_function(argument) -> list[abjad.Wrapper]:
         grob="NoteHead",
         attribute="stencil",
         value=False,
-    )
-
-
-def note_head_style(
-    string: str,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="style",
-        grob="NoteHead",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=string,
     )
 
 
@@ -1668,18 +795,6 @@ def note_head_style_function(argument, string: str) -> list[abjad.Wrapper]:
     )
 
 
-def note_head_style_cross(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="style",
-        value="#'cross",
-        grob="NoteHead",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def note_head_style_cross_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -1687,18 +802,6 @@ def note_head_style_cross_function(argument) -> list[abjad.Wrapper]:
         "NoteHead",
         "style",
         "#'cross",
-    )
-
-
-def note_head_style_harmonic(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="style",
-        value="#'harmonic",
-        grob="NoteHead",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -1712,18 +815,6 @@ def note_head_style_harmonic_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def note_head_style_harmonic_black(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="style",
-        value="#'harmonic-black",
-        grob="NoteHead",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def note_head_style_harmonic_black_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -1731,18 +822,6 @@ def note_head_style_harmonic_black_function(argument) -> list[abjad.Wrapper]:
         grob="NoteHead",
         attribute="style",
         value="#'harmonic-black",
-    )
-
-
-def note_head_transparent(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-):
-    return OverrideCommand(
-        attribute="transparent",
-        value=True,
-        grob="NoteHead",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -1756,18 +835,6 @@ def note_head_transparent_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def note_head_x_extent_zero(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="X_extent",
-        grob="NoteHead",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=(0, 0),
-    )
-
-
 def note_head_x_extent_zero_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -1775,21 +842,6 @@ def note_head_x_extent_zero_function(argument) -> list[abjad.Wrapper]:
         grob="NoteHead",
         attribute="X_extent",
         value=(0, 0),
-    )
-
-
-def ottava_bracket_shorten_pair(
-    pair: tuple[int | float, int | float] = (-0.8, -0.6),
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="shorten_pair",
-        context="Staff",
-        value=f"#'({pair[0]} . {pair[1]})",
-        grob="OttavaBracket",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -1806,21 +858,6 @@ def ottava_bracket_shorten_pair_function(
     )
 
 
-def ottava_bracket_staff_padding(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="staff_padding",
-        context="Staff",
-        value=n,
-        grob="OttavaBracket",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def ottava_bracket_staff_padding_function(
     argument, n: int | float
 ) -> list[abjad.Wrapper]:
@@ -1831,21 +868,6 @@ def ottava_bracket_staff_padding_function(
         "staff_padding",
         n,
         context="Staff",
-    )
-
-
-def rehearsal_mark_down(
-    *,
-    context: str = "Score",
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="direction",
-        value=abjad.DOWN,
-        context=context,
-        grob="RehearsalMark",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -1861,22 +883,6 @@ def rehearsal_mark_down_function(
         "direction",
         abjad.DOWN,
         context=context,
-    )
-
-
-def rehearsal_mark_extra_offset(
-    pair: tuple[int | float, int | float],
-    *,
-    context: str = "Score",
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="extra_offset",
-        value=f"#'({pair[0]} . {pair[1]})",
-        context=context,
-        grob="RehearsalMark",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -1896,22 +902,6 @@ def rehearsal_mark_extra_offset_function(
     )
 
 
-def rehearsal_mark_padding(
-    n: int | float,
-    *,
-    context: str = "Score",
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="padding",
-        value=n,
-        context=context,
-        grob="RehearsalMark",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def rehearsal_mark_padding_function(
     argument,
     n: int | float,
@@ -1925,22 +915,6 @@ def rehearsal_mark_padding_function(
         "padding",
         n,
         context=context,
-    )
-
-
-def rehearsal_mark_self_alignment_x(
-    n: int,
-    *,
-    context: str = "Score",
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="self_alignment_X",
-        value=n,
-        context=context,
-        grob="RehearsalMark",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -1960,22 +934,6 @@ def rehearsal_mark_self_alignment_x_function(
     )
 
 
-def rehearsal_mark_y_offset(
-    n: int | float,
-    *,
-    context: str = "Score",
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="Y_offset",
-        value=n,
-        context=context,
-        grob="RehearsalMark",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def rehearsal_mark_y_offset_function(
     argument,
     n: int | float,
@@ -1992,18 +950,6 @@ def rehearsal_mark_y_offset_function(
     )
 
 
-def repeat_tie_down(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="direction",
-        value=abjad.DOWN,
-        grob="RepeatTie",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def repeat_tie_down_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -2011,20 +957,6 @@ def repeat_tie_down_function(argument) -> list[abjad.Wrapper]:
         grob="RepeatTie",
         attribute="direction",
         value=abjad.DOWN,
-    )
-
-
-def repeat_tie_extra_offset(
-    pair: tuple[int | float, int | float],
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="extra_offset",
-        grob="RepeatTie",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=f"#'({pair[0]} . {pair[1]})",
     )
 
 
@@ -2041,18 +973,6 @@ def repeat_tie_extra_offset_function(
     )
 
 
-def repeat_tie_stencil_false(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="stencil",
-        grob="RepeatTie",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=False,
-    )
-
-
 def repeat_tie_stencil_false_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -2060,18 +980,6 @@ def repeat_tie_stencil_false_function(argument) -> list[abjad.Wrapper]:
         grob="RepeatTie",
         attribute="stencil",
         value=False,
-    )
-
-
-def repeat_tie_transparent(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-):
-    return OverrideCommand(
-        attribute="transparent",
-        value=True,
-        grob="RepeatTie",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -2085,18 +993,6 @@ def repeat_tie_transparent_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def repeat_tie_up(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="direction",
-        value=abjad.UP,
-        grob="RepeatTie",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def repeat_tie_up_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -2104,20 +1000,6 @@ def repeat_tie_up_function(argument) -> list[abjad.Wrapper]:
         grob="RepeatTie",
         attribute="direction",
         value=abjad.UP,
-    )
-
-
-def rest_color(
-    color: str,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="color",
-        value=color,
-        grob="Rest",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -2131,18 +1013,6 @@ def rest_color_function(argument, color: str) -> list[abjad.Wrapper]:
     )
 
 
-def rest_down(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="direction",
-        value=abjad.DOWN,
-        grob="Rest",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def rest_down_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -2150,20 +1020,6 @@ def rest_down_function(argument) -> list[abjad.Wrapper]:
         grob="Rest",
         attribute="direction",
         value=abjad.DOWN,
-    )
-
-
-def rest_extra_offset(
-    pair: tuple[int | float, int | float],
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="extra_offset",
-        value=f"#'({pair[0]} . {pair[1]})",
-        grob="Rest",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -2179,20 +1035,6 @@ def rest_extra_offset_function(
     )
 
 
-def rest_staff_position(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="staff_position",
-        value=n,
-        grob="Rest",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def rest_staff_position_function(argument, n: int | float) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -2200,18 +1042,6 @@ def rest_staff_position_function(argument, n: int | float) -> list[abjad.Wrapper
         "Rest",
         "staff_position",
         n,
-    )
-
-
-def rest_transparent(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="transparent",
-        value=True,
-        grob="Rest",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -2225,18 +1055,6 @@ def rest_transparent_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def rest_up(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="direction",
-        value=abjad.UP,
-        grob="Rest",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def rest_up_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -2244,18 +1062,6 @@ def rest_up_function(argument) -> list[abjad.Wrapper]:
         grob="Rest",
         attribute="direction",
         value=abjad.UP,
-    )
-
-
-def rest_x_extent_zero(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="X_extent",
-        grob="Rest",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=(0, 0),
     )
 
 
@@ -2269,20 +1075,6 @@ def rest_x_extent_zero_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def script_color(
-    color: str = "#red",
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="color",
-        value=color,
-        grob="Script",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def script_color_function(argument, color: str = "#red") -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -2293,18 +1085,6 @@ def script_color_function(argument, color: str = "#red") -> list[abjad.Wrapper]:
     )
 
 
-def script_down(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="direction",
-        value=abjad.DOWN,
-        grob="Script",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def script_down_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -2312,20 +1092,6 @@ def script_down_function(argument) -> list[abjad.Wrapper]:
         grob="Script",
         attribute="direction",
         value=abjad.DOWN,
-    )
-
-
-def script_extra_offset(
-    pair: tuple[int | float, int | float],
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="extra_offset",
-        value=f"#'({pair[0]} . {pair[1]})",
-        grob="Script",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -2341,20 +1107,6 @@ def script_extra_offset_function(
     )
 
 
-def script_padding(
-    number: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="padding",
-        value=number,
-        grob="Script",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def script_padding_function(argument, number: int | float) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -2362,20 +1114,6 @@ def script_padding_function(argument, number: int | float) -> list[abjad.Wrapper
         grob="Script",
         attribute="padding",
         value=number,
-    )
-
-
-def script_staff_padding(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="staff_padding",
-        value=n,
-        grob="Script",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -2389,18 +1127,6 @@ def script_staff_padding_function(argument, n: int | float) -> list[abjad.Wrappe
     )
 
 
-def script_up(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="direction",
-        value=abjad.UP,
-        grob="Script",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def script_up_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -2408,18 +1134,6 @@ def script_up_function(argument) -> list[abjad.Wrapper]:
         grob="Script",
         attribute="direction",
         value=abjad.UP,
-    )
-
-
-def script_x_extent_zero(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="X_extent",
-        value=(0, 0),
-        grob="Script",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -2433,18 +1147,6 @@ def script_x_extent_zero_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def slur_down(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="direction",
-        value=abjad.DOWN,
-        grob="Slur",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def slur_down_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -2455,18 +1157,6 @@ def slur_down_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def slur_up(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="direction",
-        value=abjad.UP,
-        grob="Slur",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def slur_up_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -2474,24 +1164,6 @@ def slur_up_function(argument) -> list[abjad.Wrapper]:
         grob="Slur",
         attribute="direction",
         value=abjad.UP,
-    )
-
-
-def span_bar_color(
-    color: str,
-    *,
-    after: bool = False,
-    context: str = "Score",
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        after=after,
-        attribute="color",
-        value=color,
-        context=context,
-        grob="SpanBar",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -2513,24 +1185,6 @@ def span_bar_color_function(
     )
 
 
-def span_bar_extra_offset(
-    pair: tuple[int | float, int | float],
-    *,
-    after: bool = False,
-    context: str = "Score",
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        after=after,
-        attribute="extra_offset",
-        value=f"#'({pair[0]} . {pair[1]})",
-        context=context,
-        grob="SpanBar",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def span_bar_extra_offset_function(
     argument,
     pair: tuple[int | float, int | float],
@@ -2549,19 +1203,6 @@ def span_bar_extra_offset_function(
     )
 
 
-def span_bar_transparent(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="transparent",
-        value=True,
-        context="Score",
-        grob="SpanBar",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def span_bar_transparent_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -2570,22 +1211,6 @@ def span_bar_transparent_function(argument) -> list[abjad.Wrapper]:
         "transparent",
         True,
         context="Score",
-    )
-
-
-def stem_color(
-    color: str = "#red",
-    *,
-    context: str = None,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="color",
-        value=color,
-        context=context,
-        grob="Stem",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -2605,18 +1230,6 @@ def stem_color_function(
     )
 
 
-def stem_down(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="direction",
-        value=abjad.DOWN,
-        grob="Stem",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def stem_down_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -2624,20 +1237,6 @@ def stem_down_function(argument) -> list[abjad.Wrapper]:
         "Stem",
         "direction",
         abjad.DOWN,
-    )
-
-
-def stem_extra_offset(
-    pair: tuple[int | float, int | float],
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="extra_offset",
-        grob="Stem",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=f"#'({pair[0]} . {pair[1]})",
     )
 
 
@@ -2653,18 +1252,6 @@ def stem_extra_offset_function(
     )
 
 
-def stem_stencil_false(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="stencil",
-        grob="Stem",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=False,
-    )
-
-
 def stem_stencil_false_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -2675,18 +1262,6 @@ def stem_stencil_false_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def stem_transparent(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="transparent",
-        value=True,
-        grob="Stem",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def stem_transparent_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -2694,20 +1269,6 @@ def stem_transparent_function(argument) -> list[abjad.Wrapper]:
         grob="Stem",
         attribute="transparent",
         value=True,
-    )
-
-
-def stem_tremolo_extra_offset(
-    pair: tuple[int | float, int | float],
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="extra_offset",
-        grob="StemTremolo",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=f"#'({pair[0]} . {pair[1]})",
     )
 
 
@@ -2723,18 +1284,6 @@ def stem_tremolo_extra_offset_function(
     )
 
 
-def stem_up(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="direction",
-        value=abjad.UP,
-        grob="Stem",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def stem_up_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -2742,19 +1291,6 @@ def stem_up_function(argument) -> list[abjad.Wrapper]:
         "Stem",
         "direction",
         abjad.UP,
-    )
-
-
-def strict_note_spacing_off(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="strict_note_spacing",
-        value=False,
-        context="Score",
-        grob="SpacingSpanner",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -2766,22 +1302,6 @@ def strict_note_spacing_off_function(argument) -> list[abjad.Wrapper]:
         attribute="strict_note_spacing",
         value=False,
         context="Score",
-    )
-
-
-def sustain_pedal_staff_padding(
-    n: int | float,
-    *,
-    context: str = "Staff",
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="staff_padding",
-        value=n,
-        context=context,
-        grob="SustainPedalLineSpanner",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -2807,25 +1327,6 @@ def tacet_function(argument, color="#green") -> list[abjad.Wrapper]:
     return wrappers
 
 
-def text_script_color(
-    color: str = "#red",
-    *,
-    allow_mmrests: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    blocklist = []
-    if allow_mmrests is not True:
-        blocklist.append(abjad.MultimeasureRest)
-    return OverrideCommand(
-        attribute="color",
-        blocklist=tuple(blocklist),
-        value=color,
-        grob="TextScript",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def text_script_color_function(argument, color: str = "#red") -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -2836,24 +1337,6 @@ def text_script_color_function(argument, color: str = "#red") -> list[abjad.Wrap
     )
 
 
-def text_script_down(
-    *,
-    allow_mmrests: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    blocklist = []
-    if allow_mmrests is not True:
-        blocklist.append(abjad.MultimeasureRest)
-    return OverrideCommand(
-        attribute="direction",
-        blocklist=tuple(blocklist),
-        value=abjad.DOWN,
-        grob="TextScript",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def text_script_down_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -2861,25 +1344,6 @@ def text_script_down_function(argument) -> list[abjad.Wrapper]:
         grob="TextScript",
         attribute="direction",
         value=abjad.DOWN,
-    )
-
-
-def text_script_extra_offset(
-    pair: tuple[int | float, int | float],
-    *,
-    allow_mmrests: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    blocklist = []
-    if allow_mmrests is not True:
-        blocklist.append(abjad.MultimeasureRest)
-    return OverrideCommand(
-        attribute="extra_offset",
-        blocklist=tuple(blocklist),
-        value=f"#'({pair[0]} . {pair[1]})",
-        grob="TextScript",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -2896,25 +1360,6 @@ def text_script_extra_offset_function(
     )
 
 
-def text_script_font_size(
-    n: int | float,
-    *,
-    allow_mmrests: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    blocklist = []
-    if allow_mmrests is not True:
-        blocklist.append(abjad.MultimeasureRest)
-    return OverrideCommand(
-        attribute="font_size",
-        blocklist=tuple(blocklist),
-        value=n,
-        grob="TextScript",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def text_script_font_size_function(argument, n: int | float) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -2925,25 +1370,6 @@ def text_script_font_size_function(argument, n: int | float) -> list[abjad.Wrapp
     )
 
 
-def text_script_padding(
-    n: int | float,
-    *,
-    allow_mmrests: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    blocklist = []
-    if allow_mmrests is not True:
-        blocklist.append(abjad.MultimeasureRest)
-    return OverrideCommand(
-        attribute="padding",
-        blocklist=tuple(blocklist),
-        value=n,
-        grob="TextScript",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-    )
-
-
 def text_script_padding_function(argument, n: int | float) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -2951,25 +1377,6 @@ def text_script_padding_function(argument, n: int | float) -> list[abjad.Wrapper
         "TextScript",
         "padding",
         str(n),
-    )
-
-
-def text_script_parent_alignment_x(
-    n: int | float,
-    *,
-    allow_mmrests: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    blocklist = []
-    if allow_mmrests is not True:
-        blocklist.append(abjad.MultimeasureRest)
-    return OverrideCommand(
-        attribute="parent_alignment_X",
-        blocklist=tuple(blocklist),
-        grob="TextScript",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=n,
     )
 
 
@@ -2986,25 +1393,6 @@ def text_script_parent_alignment_x_function(
     )
 
 
-def text_script_self_alignment_x(
-    n: int | float,
-    *,
-    allow_mmrests: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    blocklist = []
-    if allow_mmrests is not True:
-        blocklist.append(abjad.MultimeasureRest)
-    return OverrideCommand(
-        attribute="self_alignment_X",
-        blocklist=tuple(blocklist),
-        grob="TextScript",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=n,
-    )
-
-
 def text_script_self_alignment_x_function(
     argument,
     n: int | float,
@@ -3015,25 +1403,6 @@ def text_script_self_alignment_x_function(
         "TextScript",
         "self_alignment_X",
         n,
-    )
-
-
-def text_script_staff_padding(
-    n: int | float,
-    *,
-    allow_mmrests: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    blocklist = []
-    if allow_mmrests is not True:
-        blocklist.append(abjad.MultimeasureRest)
-    return OverrideCommand(
-        attribute="staff_padding",
-        blocklist=tuple(blocklist),
-        value=n,
-        grob="TextScript",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -3050,24 +1419,6 @@ def text_script_staff_padding_function(
     )
 
 
-def text_script_up(
-    *,
-    allow_mmrests: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    blocklist = []
-    if allow_mmrests is not True:
-        blocklist.append(abjad.MultimeasureRest)
-    return OverrideCommand(
-        attribute="direction",
-        blocklist=tuple(blocklist),
-        grob="TextScript",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=abjad.UP,
-    )
-
-
 def text_script_up_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -3075,25 +1426,6 @@ def text_script_up_function(argument) -> list[abjad.Wrapper]:
         grob="TextScript",
         attribute="direction",
         value=abjad.UP,
-    )
-
-
-def text_script_x_offset(
-    n: int | float,
-    *,
-    allow_mmrests: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    blocklist = []
-    if allow_mmrests is not True:
-        blocklist.append(abjad.MultimeasureRest)
-    return OverrideCommand(
-        attribute="X_offset",
-        blocklist=tuple(blocklist),
-        grob="TextScript",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=n,
     )
 
 
@@ -3107,45 +1439,12 @@ def text_script_x_offset_function(argument, n: int | float) -> list[abjad.Wrappe
     )
 
 
-def text_script_y_offset(
-    n: int | float,
-    *,
-    allow_mmrests: bool = False,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    blocklist = []
-    if allow_mmrests is not True:
-        blocklist.append(abjad.MultimeasureRest)
-    return OverrideCommand(
-        attribute="Y_offset",
-        blocklist=tuple(blocklist),
-        grob="TextScript",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=n,
-    )
-
-
 def text_script_y_offset_function(argument, n: int | float) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
         argument,
         grob="TextScript",
         attribute="Y_offset",
-        value=n,
-    )
-
-
-def text_spanner_left_padding(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="bound_details__left__padding",
-        grob="TextSpanner",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
         value=n,
     )
 
@@ -3163,20 +1462,6 @@ def text_spanner_left_padding_function(
     )
 
 
-def text_spanner_right_padding(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="bound_details__right__padding",
-        grob="TextSpanner",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=n,
-    )
-
-
 def text_spanner_right_padding_function(
     argument, n: int | float
 ) -> list[abjad.Wrapper]:
@@ -3186,20 +1471,6 @@ def text_spanner_right_padding_function(
         grob="TextSpanner",
         attribute="bound_details__right__padding",
         value=n,
-    )
-
-
-def text_spanner_staff_padding(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="staff_padding",
-        value=n,
-        grob="TextSpanner",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
     )
 
 
@@ -3215,18 +1486,6 @@ def text_spanner_staff_padding_function(
     )
 
 
-def text_spanner_stencil_false(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="stencil",
-        grob="TextSpanner",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=False,
-    )
-
-
 def text_spanner_stencil_false_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -3237,18 +1496,6 @@ def text_spanner_stencil_false_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def text_spanner_transparent(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="transparent",
-        grob="TextSpanner",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=True,
-    )
-
-
 def text_spanner_transparent_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -3256,20 +1503,6 @@ def text_spanner_transparent_function(argument) -> list[abjad.Wrapper]:
         grob="TextSpanner",
         attribute="transparent",
         value=True,
-    )
-
-
-def text_spanner_y_offset(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="Y_offset",
-        grob="TextSpanner",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=n,
     )
 
 
@@ -3286,18 +1519,6 @@ def text_spanner_y_offset_function(
     )
 
 
-def tie_down(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="direction",
-        grob="Tie",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=abjad.DOWN,
-    )
-
-
 def tie_down_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -3308,18 +1529,6 @@ def tie_down_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def tie_up(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="direction",
-        grob="Tie",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=abjad.UP,
-    )
-
-
 def tie_up_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -3327,22 +1536,6 @@ def tie_up_function(argument) -> list[abjad.Wrapper]:
         grob="Tie",
         attribute="direction",
         value=abjad.UP,
-    )
-
-
-def time_signature_extra_offset(
-    pair: tuple[int | float, int | float],
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    assert isinstance(pair, tuple), repr(pair)
-    return OverrideCommand(
-        attribute="extra_offset",
-        context="Score",
-        grob="TimeSignature",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=f"#'({pair[0]} . {pair[1]})",
     )
 
 
@@ -3359,19 +1552,6 @@ def time_signature_extra_offset_function(
     )
 
 
-def time_signature_stencil_false(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="stencil",
-        context="Score",
-        grob="TimeSignature",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=False,
-    )
-
-
 def time_signature_stencil_false_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -3383,19 +1563,6 @@ def time_signature_stencil_false_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def time_signature_transparent(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="transparent",
-        context="Score",
-        grob="TimeSignature",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=True,
-    )
-
-
 def time_signature_transparent_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -3404,20 +1571,6 @@ def time_signature_transparent_function(argument) -> list[abjad.Wrapper]:
         attribute="transparent",
         value=True,
         context="Score",
-    )
-
-
-def trill_spanner_staff_padding(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="staff_padding",
-        grob="TrillSpanner",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=n,
     )
 
 
@@ -3433,18 +1586,6 @@ def trill_spanner_staff_padding_function(
     )
 
 
-def tuplet_bracket_down(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="direction",
-        grob="TupletBracket",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=abjad.DOWN,
-    )
-
-
 def tuplet_bracket_down_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -3452,20 +1593,6 @@ def tuplet_bracket_down_function(argument) -> list[abjad.Wrapper]:
         "TupletBracket",
         "direction",
         abjad.DOWN,
-    )
-
-
-def tuplet_bracket_extra_offset(
-    pair: tuple[int | float, int | float],
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="extra_offset",
-        grob="TupletBracket",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=f"#'({pair[0]} . {pair[1]})",
     )
 
 
@@ -3481,20 +1608,6 @@ def tuplet_bracket_extra_offset_function(
     )
 
 
-def tuplet_bracket_outside_staff_priority(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="outside_staff_priority",
-        grob="TupletBracket",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=n,
-    )
-
-
 def tuplet_bracket_outside_staff_priority_function(
     argument, n: int | float
 ) -> list[abjad.Wrapper]:
@@ -3507,20 +1620,6 @@ def tuplet_bracket_outside_staff_priority_function(
     )
 
 
-def tuplet_bracket_padding(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="padding",
-        grob="TupletBracket",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=n,
-    )
-
-
 def tuplet_bracket_padding_function(argument, n: int | float) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -3528,20 +1627,6 @@ def tuplet_bracket_padding_function(argument, n: int | float) -> list[abjad.Wrap
         "TupletBracket",
         "padding",
         n,
-    )
-
-
-def tuplet_bracket_shorten_pair(
-    pair: tuple[int | float, int | float],
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="shorten_pair",
-        grob="TupletBracket",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=f"#'({pair[0]} . {pair[1]})",
     )
 
 
@@ -3558,20 +1643,6 @@ def tuplet_bracket_shorten_pair_function(
     )
 
 
-def tuplet_bracket_staff_padding(
-    n: int | float,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="staff_padding",
-        grob="TupletBracket",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=n,
-    )
-
-
 def tuplet_bracket_staff_padding_function(
     argument,
     n: int | float,
@@ -3585,18 +1656,6 @@ def tuplet_bracket_staff_padding_function(
     )
 
 
-def tuplet_bracket_transparent(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="transparent",
-        grob="TupletBracket",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=True,
-    )
-
-
 def tuplet_bracket_transparent_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -3604,18 +1663,6 @@ def tuplet_bracket_transparent_function(argument) -> list[abjad.Wrapper]:
         grob="TupletBracket",
         attribute="transparent",
         value=True,
-    )
-
-
-def tuplet_bracket_up(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="direction",
-        grob="TupletBracket",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=abjad.UP,
     )
 
 
@@ -3629,18 +1676,6 @@ def tuplet_bracket_up_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def tuplet_number_denominator(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="text",
-        grob="TupletNumber",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value="#tuplet-number::calc-denominator-text",
-    )
-
-
 def tuplet_number_denominator_function(argument) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -3648,20 +1683,6 @@ def tuplet_number_denominator_function(argument) -> list[abjad.Wrapper]:
         grob="TupletNumber",
         attribute="text",
         value="#tuplet-number::calc-denominator-text",
-    )
-
-
-def tuplet_number_extra_offset(
-    pair: tuple[int | float, int | float],
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="extra_offset",
-        grob="TupletNumber",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=f"#'({pair[0]} . {pair[1]})",
     )
 
 
@@ -3677,21 +1698,6 @@ def tuplet_number_extra_offset_function(
     )
 
 
-def tuplet_number_text(
-    string: str,
-    *,
-    selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN),
-) -> OverrideCommand:
-    assert isinstance(string, str), repr(string)
-    return OverrideCommand(
-        attribute="text",
-        grob="TupletNumber",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=string,
-    )
-
-
 def tuplet_number_text_function(argument, string: str) -> list[abjad.Wrapper]:
     return _do_override_function(
         _frame(),
@@ -3699,18 +1705,6 @@ def tuplet_number_text_function(argument, string: str) -> list[abjad.Wrapper]:
         grob="TupletNumber",
         attribute="text",
         value=string,
-    )
-
-
-def tuplet_number_transparent(
-    *, selector: typing.Callable = lambda _: _select.leaves(_, exclude=_enums.HIDDEN)
-) -> OverrideCommand:
-    return OverrideCommand(
-        attribute="transparent",
-        grob="TupletNumber",
-        selector=selector,
-        tags=[_tags.function_name(_frame())],
-        value=True,
     )
 
 

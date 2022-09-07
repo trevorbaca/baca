@@ -694,7 +694,6 @@ def _call_all_commands(
         voice_name_to_voice[voice.name] = voice
     command_count = 0
     for i, command in enumerate(commands):
-        assert isinstance(command, _command.Command)
         selection, cache = _scope_to_leaf_selection(
             score,
             allow_empty_selections,

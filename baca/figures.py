@@ -10,7 +10,6 @@ from inspect import currentframe as _frame
 import abjad
 from abjadext import rmakers
 
-from . import command as _command
 from . import cursor as _cursor
 from . import select as _select
 from . import tags as _tags
@@ -139,7 +138,7 @@ def _collections_to_container(
     if tsd is None and command:
         tsd = command.assignments[0].maker.tsd
     imbrications = {}
-    command_prototype = (_command.Command, rmakers.Command, Nest)
+    command_prototype = (rmakers.Command, Nest)
     for command in commands:
         if isinstance(command, Imbrication):
             voice_name_to_selection = command(container)
