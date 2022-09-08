@@ -313,11 +313,11 @@ def make_notes(
     return music
 
 
-def make_repeat_tied_notes(
+def make_repeat_tied_notes_function(
     time_signatures,
-    *specifiers,
-    do_not_rewrite_meter=None,
-):
+    *,
+    do_not_rewrite_meter: bool = False,
+) -> list[abjad.Leaf | abjad.Tuplet]:
     r"""
     Makes repeat-tied notes; rewrites meter.
 
@@ -338,7 +338,7 @@ def make_repeat_tied_notes(
         ... )
         >>> baca.SpacingSpecifier((1, 12))(score)
 
-        >>> music = baca.make_repeat_tied_notes(accumulator.get())
+        >>> music = baca.make_repeat_tied_notes_function(accumulator.get())
         >>> score["Music"].extend(music)
 
         >>> _, _ = baca.interpret.section(
@@ -390,46 +390,19 @@ def make_repeat_tied_notes(
             }
 
     """
-    assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
-    specifiers_ = list(specifiers)
-    specifier = rmakers.beam(lambda _: _select.plts(_))
-    specifiers_.append(specifier)
-    specifier = rmakers.repeat_tie(lambda _: _select.pheads(_)[1:])
-    specifiers_.append(specifier)
-    if not do_not_rewrite_meter:
-        command = rmakers.rewrite_meter()
-        specifiers_.append(command)
-    specifier = rmakers.force_repeat_tie()
-    specifiers_.append(specifier)
-    rhythm_maker = rmakers.stack(
-        rmakers.note(),
-        *specifiers_,
-        tag=_tags.function_name(_frame()),
-    )
-    music = rhythm_maker(time_signatures)
-    return music
-
-
-def make_repeat_tied_notes_function(
-    time_signatures,
-    *,
-    do_not_rewrite_meter: bool = False,
-) -> list[abjad.Leaf | abjad.Tuplet]:
     tag = _tags.function_name(_frame())
     nested_music = rmakers.note_function(time_signatures, tag=tag)
     music: list[abjad.Leaf | abjad.Tuplet] = abjad.sequence.flatten(
         nested_music, depth=-1
     )
-    rmakers.beam_function(_select.plts(music))
-    rmakers.repeat_tie_function(_select.pheads(music)[1:], tag=tag)
+    music_voice = rmakers._wrap_music_in_time_signature_staff(music, time_signatures)
+    rmakers.beam_function(_select.plts(music_voice))
+    rmakers.repeat_tie_function(_select.pheads(music_voice)[1:], tag=tag)
     if not do_not_rewrite_meter:
-        music_voice = rmakers._wrap_music_in_time_signature_staff(
-            music, time_signatures
-        )
         rmakers.rewrite_meter_function(music_voice)
-        music = music_voice[:]
-        music_voice[:] = []
-    rmakers.force_repeat_tie_function(music)
+    rmakers.force_repeat_tie_function(music_voice)
+    music = music_voice[:]
+    music_voice[:] = []
     assert all(isinstance(_, abjad.Leaf | abjad.Tuplet) for _ in music)
     return music
 
