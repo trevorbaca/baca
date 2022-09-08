@@ -410,6 +410,30 @@ def make_repeat_tied_notes(
     return music
 
 
+def make_repeat_tied_notes_function(
+    time_signatures,
+    *,
+    do_not_rewrite_meter: bool = False,
+) -> list[abjad.Leaf | abjad.Tuplet]:
+    tag = _tags.function_name(_frame())
+    nested_music = rmakers.note_function(time_signatures, tag=tag)
+    music: list[abjad.Leaf | abjad.Tuplet] = abjad.sequence.flatten(
+        nested_music, depth=-1
+    )
+    rmakers.beam_function(_select.plts(music))
+    rmakers.repeat_tie_function(_select.pheads(music)[1:], tag=tag)
+    if not do_not_rewrite_meter:
+        music_voice = rmakers._wrap_music_in_time_signature_staff(
+            music, time_signatures
+        )
+        rmakers.rewrite_meter_function(music_voice)
+        music = music_voice[:]
+        music_voice[:] = []
+    rmakers.force_repeat_tie_function(music)
+    assert all(isinstance(_, abjad.Leaf | abjad.Tuplet) for _ in music)
+    return music
+
+
 def make_repeated_duration_notes(
     time_signatures,
     durations,
