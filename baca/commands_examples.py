@@ -356,7 +356,7 @@ commands.py examles
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_rfunction(container)
+    >>> rmakers.beam_function(container)
     >>> _ = baca.dynamic(baca.select.pleaf(container, 0), '"f"')
     >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
@@ -1135,9 +1135,9 @@ commands.py examles
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_rfunction(container)
+    >>> rmakers.beam_function(container)
     >>> baca.color(abjad.select.leaves(container))
-    >>> rmakers.unbeam_rfunction(container)
+    >>> rmakers.unbeam_function(container)
     >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
@@ -1218,9 +1218,9 @@ commands.py examles
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_rfunction(container)
+    >>> rmakers.beam_function(container)
     >>> baca.color(color_selector(container))
-    >>> rmakers.unbeam_rfunction(container)
+    >>> rmakers.unbeam_function(container)
     >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
@@ -1724,7 +1724,7 @@ commands.py examles
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_rfunction(container)
+    >>> rmakers.beam_function(container)
     >>> abjad.label.with_pitches(container, locale="us")
     >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]

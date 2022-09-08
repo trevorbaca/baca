@@ -600,7 +600,7 @@ figures.py examples.
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
     >>> container = baca.figure(collections, [1], 8, acciaccatura=True)
-    >>> rmakers.beam_rfunction(abjad.select.leaves(container, grace=False))
+    >>> rmakers.beam_function(abjad.select.leaves(container, grace=False))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -690,7 +690,7 @@ figures.py examples.
     ... ]
     >>> specifier = baca.Acciaccatura([abjad.Duration(1, 8)])
     >>> container = baca.figure(collections, [1], 8, acciaccatura=specifier)
-    >>> rmakers.beam_rfunction(abjad.select.leaves(container, grace=False))
+    >>> rmakers.beam_function(abjad.select.leaves(container, grace=False))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -779,7 +779,7 @@ figures.py examples.
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
     >>> container = baca.figure(collections, [1], 8, acciaccatura=True)
-    >>> rmakers.beam_rfunction(abjad.select.leaves(container, grace=False))
+    >>> rmakers.beam_function(abjad.select.leaves(container, grace=False))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -877,7 +877,7 @@ figures.py examples.
     ...         right_cyclic=True,
     ...     ),
     ... )
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -981,7 +981,7 @@ figures.py examples.
     ...         left_cyclic=True,
     ...     ),
     ... )
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1086,7 +1086,7 @@ figures.py examples.
     ...         right_length=3,
     ...     ),
     ... )
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1188,7 +1188,7 @@ figures.py examples.
     >>> container = baca.figure(
     ...     collections, [1], 8, acciaccatura=baca.lmr(left_length=1)
     ... )
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1275,7 +1275,7 @@ figures.py examples.
 
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> container = baca.figure(collections, [1, 1, 2], 16)
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1328,7 +1328,7 @@ figures.py examples.
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
     >>> container = baca.figure(collections, [1], 8, acciaccatura=True)
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1416,7 +1416,7 @@ figures.py examples.
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
     >>> container = baca.figure(collections, [1], 4, acciaccatura=True)
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1498,7 +1498,7 @@ figures.py examples.
 
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> container =  baca.figure(collections, [4, 4, 5], 32)
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1557,7 +1557,7 @@ figures.py examples.
     ...     32,
     ...     spelling=rmakers.Spelling(increase_monotonic=True),
     ... )
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1611,7 +1611,7 @@ figures.py examples.
 
     >>> collections = [[0, 2, 10, 8]]
     >>> container = baca.figure(collections, [1, 1, 2], 16)
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1641,7 +1641,7 @@ figures.py examples.
 
     >>> collections = [[18, 16, 15, 20, 19]]
     >>> container = baca.figure(collections, [1, 1, 2], 16)
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1672,7 +1672,7 @@ figures.py examples.
 
     >>> collections = [[9]]
     >>> container = baca.figure(collections, [1, 1, 2], 16)
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1697,7 +1697,7 @@ figures.py examples.
 
     >>> collections = [[0, 2, 10, 8], [18, 16, 15, 20, 19], [9]]
     >>> container = baca.figure(collections, [1, 1, 2], 16)
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1745,8 +1745,8 @@ figures.py examples.
 
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> container = baca.figure(collections, [3, -1, 2, 2], 16)
-    >>> rmakers.beam_rfunction(
-    ...     rmakers.nongrace_leaves_in_each_tuplet_rfunction(container),
+    >>> rmakers.beam_function(
+    ...     rmakers.nongrace_leaves_in_each_tuplet_function(container),
     ...     beam_rests=True,
     ...     stemlet_length=1.5,
     ... )
@@ -1803,7 +1803,7 @@ figures.py examples.
 
     >>> collections = [[0, 2]]
     >>> container = baca.figure([[0, 2]], [29], 64)
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> rmakers.force_repeat_tie()(container)
     >>> selection = container[:]
     >>> container[:] = []
@@ -1838,7 +1838,7 @@ figures.py examples.
 
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> container = baca.figure(collections, [1, 1, 2], 16, treatments=[1])
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1888,7 +1888,7 @@ figures.py examples.
 
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> container = baca.figure(collections, [1, 1, 2], 16, treatments=[-1])
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1944,7 +1944,7 @@ figures.py examples.
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
     >>> container = baca.figure(collections, [1], 16, treatments=["accel"])
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -2217,7 +2217,7 @@ figures.py examples.
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
     >>> container = baca.figure(collections, [1], 16, treatments=["rit"])
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -2490,7 +2490,7 @@ figures.py examples.
     >>> container = baca.figure(
     ...     collections, [1], 16, treatments=["accel", "rit"]
     ... )
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -2721,7 +2721,7 @@ figures.py examples.
     ... ]
     >>> container = baca.figure(
     ...     collections, [1], 16, treatments=["accel", -2, "rit"])
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -2975,7 +2975,7 @@ figures.py examples.
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
     >>> container = baca.figure(collections, [1], 8, treatments=["3:2"])
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -3068,8 +3068,8 @@ figures.py examples.
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
     >>> container = baca.figure(collections, [1], 8, treatments=[(1, 4)])
-    >>> rmakers.denominator_rfunction(container, (1, 16))
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.denominator_function(container, (1, 16))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -3159,8 +3159,8 @@ figures.py examples.
     ... ]
     >>> container = baca.figure(
     ...     collections, [1, 1, 2], 8, treatments=[(1, 4), (3, 8)])
-    >>> rmakers.denominator_rfunction(container, (1, 16))
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.denominator_function(container, (1, 16))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -3264,7 +3264,7 @@ figures.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> _ = baca.nest(container, "+4/16")
     >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
@@ -3336,8 +3336,8 @@ figures.py examples.
     ...     [19, 13, 9, 8],
     ... ]
     >>> container = baca.figure(collections, [1], 16)
-    >>> rmakers.beam_groups_rfunction(
-    ...     rmakers.nongrace_leaves_in_each_tuplet_rfunction(container, level=-1))
+    >>> rmakers.beam_groups_function(
+    ...     rmakers.nongrace_leaves_in_each_tuplet_function(container, level=-1))
     >>> _ = baca.nest(container, "+1/16")
     >>> selection = container[:]
     >>> container[:] = []
@@ -3416,8 +3416,8 @@ figures.py examples.
     ... ]
     >>> affix = baca.rests_around([2], [3])
     >>> container = baca.figure(collections, [1], 16, affix=affix)
-    >>> rmakers.beam_groups_rfunction(
-    ...     rmakers.nongrace_leaves_in_each_tuplet_rfunction(container, level=-1))
+    >>> rmakers.beam_groups_function(
+    ...     rmakers.nongrace_leaves_in_each_tuplet_function(container, level=-1))
     >>> _ = baca.nest(container, "+1/16")
     >>> selection = container[:]
     >>> container[:] = []
@@ -3496,7 +3496,7 @@ figures.py examples.
     ...     suffix=[2],
     ... )
     >>> container = baca.figure(collections, [1], 16, affix=affix, treatments=[1])
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -3551,7 +3551,7 @@ figures.py examples.
     ...     suffix=[2],
     ... )
     >>> container = baca.figure(collections, [1], 16, affix=affix, treatments=[1])
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -3594,7 +3594,7 @@ figures.py examples.
     ... )
     >>> container = baca.figure(
     ...     collections, [1], 16, affix=affix, treatments=[1])
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -3653,7 +3653,7 @@ figures.py examples.
     ... )
     >>> container = baca.figure(
     ...     collections, [1], 16, affix=affix, treatments=[1])
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -3707,7 +3707,7 @@ figures.py examples.
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> affix = baca.RestAffix(prefix=[3])
     >>> container = baca.figure(collections, [1], 16, affix=affix)
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -3753,7 +3753,7 @@ figures.py examples.
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> affix = baca.RestAffix(suffix=[3])
     >>> container = baca.figure(collections, [1], 16, affix=affix)
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -3807,15 +3807,15 @@ figures.py examples.
     ...     affix=baca.rests_around([2], [4]),
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_rfunction(container)
+    >>> rmakers.beam_function(container)
     >>> imbrications = baca.imbricate(
     ...     container,
     ...     "Music.1",
     ...     [baca.coat(0), baca.coat(2), 10, 0, 2],
     ... )
     >>> for imbrication in imbrications.values():
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_rfunction(imbrication)
-    ...     rmakers.beam_groups_rfunction(groups)
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_function(imbrication)
+    ...     rmakers.beam_groups_function(groups)
 
     >>> baca.make_figures(
     ...     figures,
@@ -3958,11 +3958,11 @@ figures.py examples.
     ...     10, 18,
     ... ]
     >>> container = baca.figure(collections, [1], 16)
-    >>> rmakers.beam_rfunction(container)
+    >>> rmakers.beam_function(container)
     >>> imbrications = baca.imbricate(container, "Music.1", segment)
     >>> for imbrication in imbrications.values():
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_rfunction(imbrication)
-    ...     rmakers.beam_groups_rfunction(groups, beam_rests=True)
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_function(imbrication)
+    ...     rmakers.beam_groups_function(groups, beam_rests=True)
     ...     _ = baca.accent(baca.select.pheads(imbrication))
 
     >>> baca.make_figures(
@@ -4124,15 +4124,15 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ... ]
     >>> container = baca.figure(collections, [1], 16)
-    >>> rmakers.beam_groups_rfunction(container)
+    >>> rmakers.beam_groups_function(container)
     >>> imbrications = baca.imbricate(
     ...     container,
     ...     "Music.1",
     ...     [2, 19, 9, 18, 16],
     ... )
     >>> for imbrication in imbrications.values():
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_rfunction(imbrication)
-    ...     rmakers.beam_groups_rfunction(groups)
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_function(imbrication)
+    ...     rmakers.beam_groups_function(groups)
 
     >>> baca.make_figures(
     ...     figures,
@@ -4308,19 +4308,19 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ... ]
     >>> container = baca.figure(collections, [1], 16)
-    >>> groups = rmakers.nongrace_leaves_in_each_tuplet_rfunction(container)
-    >>> rmakers.beam_groups_rfunction(groups)
+    >>> groups = rmakers.nongrace_leaves_in_each_tuplet_function(container)
+    >>> rmakers.beam_groups_function(groups)
     >>> imbrications_1 = baca.imbricate(container, "Music.1", [2, 19, 9])
     >>> for imbrication in imbrications_1.values():
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_rfunction(imbrication)
-    ...     rmakers.beam_groups_rfunction(groups, beam_rests=True)
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_function(imbrication)
+    ...     rmakers.beam_groups_function(groups, beam_rests=True)
     ...     _ = baca.beam_positions(imbrication, 6)
     ...     _ = baca.staccato(baca.select.pheads(imbrication))
 
     >>> imbrications_3 = baca.imbricate(container, "Music.3", [16, 10, 18])
     >>> for imbrication in imbrications_3.values():
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_rfunction(imbrication)
-    ...     rmakers.beam_groups_rfunction(groups, beam_rests=True)
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_function(imbrication)
+    ...     rmakers.beam_groups_function(groups, beam_rests=True)
     ...     _ = baca.beam_positions(imbrication, 8)
     ...     _ = baca.accent(baca.select.pheads(imbrication))
 
@@ -4539,16 +4539,16 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ... ]
     >>> container = baca.figure(collections, [1], 16, treatments=[1])
-    >>> groups = rmakers.nongrace_leaves_in_each_tuplet_rfunction(container)
-    >>> rmakers.beam_groups_rfunction(groups, beam_rests=True)
+    >>> groups = rmakers.nongrace_leaves_in_each_tuplet_function(container)
+    >>> rmakers.beam_groups_function(groups, beam_rests=True)
     >>> imbrications = baca.imbricate(
     ...     container,
     ...     "Music.1",
     ...     [2, 19, 9, 18, 16],
     ... )
     >>> for imbrication in imbrications.values():
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_rfunction(imbrication)
-    ...     rmakers.beam_groups_rfunction(groups, beam_rests=True)
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_function(imbrication)
+    ...     rmakers.beam_groups_function(groups, beam_rests=True)
     ...     _ = baca.accent(baca.select.pheads(imbrication))
 
     >>> _ = baca.staccato(baca.select.pheads(container))
@@ -4752,11 +4752,11 @@ figures.py examples.
     ... ]
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> container = baca.figure(collections, [3], 16)
-    >>> rmakers.beam_rfunction(container)
+    >>> rmakers.beam_function(container)
     >>> imbrications = baca.imbricate(container, "Music.1", segment)
     >>> for imbrication in imbrications.values():
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_rfunction(imbrication)
-    ...     rmakers.beam_groups_rfunction(groups, beam_rests=True)
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_function(imbrication)
+    ...     rmakers.beam_groups_function(groups, beam_rests=True)
     ...     _ = baca.accent(baca.select.pheads(imbrication))
 
     >>> baca.make_figures(
@@ -4893,12 +4893,12 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ... ]
     >>> container = baca.figure(collections, [1], 16)
-    >>> groups = rmakers.nongrace_leaves_in_each_tuplet_rfunction(container)
-    >>> rmakers.beam_groups_rfunction(groups)
+    >>> groups = rmakers.nongrace_leaves_in_each_tuplet_function(container)
+    >>> rmakers.beam_groups_function(groups)
     >>> imbrications = baca.imbricate(container, "Music.1", [2, 19, 9, 18, 16])
     >>> for imbrication in imbrications.values():
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_rfunction(imbrication)
-    ...     rmakers.beam_groups_rfunction(groups)
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_function(imbrication)
+    ...     rmakers.beam_groups_function(groups)
 
     >>> baca.make_figures(
     ...     figures,
@@ -5059,12 +5059,12 @@ figures.py examples.
     ... ]
     >>> container = baca.figure(
     ...     collections, [1], 16, affix=baca.rests_around([2], [2]))
-    >>> groups = rmakers.nongrace_leaves_in_each_tuplet_rfunction(container)
-    >>> rmakers.beam_groups_rfunction(groups)
+    >>> groups = rmakers.nongrace_leaves_in_each_tuplet_function(container)
+    >>> rmakers.beam_groups_function(groups)
     >>> imbrications = baca.imbricate(container, "Music.1", [2, 19, 9, 18, 16])
     >>> for imbrication in imbrications.values():
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_rfunction(imbrication)
-    ...     rmakers.beam_groups_rfunction(groups)
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_function(imbrication)
+    ...     rmakers.beam_groups_function(groups)
 
     >>> baca.make_figures(
     ...     figures,
@@ -5244,7 +5244,7 @@ figures.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
@@ -5310,7 +5310,7 @@ figures.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
@@ -5376,7 +5376,7 @@ figures.py examples.
     ...     affix=baca.rests_around([2], [3]),
     ...     treatments=[1],
     ... )
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -5442,7 +5442,7 @@ figures.py examples.
     ...     affix=baca.rests_around([2], [3]),
     ...     treatments=[1],
     ... )
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -5510,7 +5510,7 @@ figures.py examples.
     ...     affix=baca.rests_around([1], [1]),
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -5566,7 +5566,7 @@ figures.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
@@ -5633,7 +5633,7 @@ figures.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
@@ -5700,7 +5700,7 @@ figures.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
@@ -5768,7 +5768,7 @@ figures.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
@@ -5837,8 +5837,8 @@ figures.py examples.
     ... ]
     >>> container = baca.figure(
     ...     collections, [1, 1, 2], 8, treatments=[(1, 4), (3, 8)])
-    >>> rmakers.denominator_rfunction(container, (1, 16))
-    >>> rmakers.beam_rfunction(rmakers.nongrace_leaves_in_each_tuplet_rfunction(container))
+    >>> rmakers.denominator_function(container, (1, 16))
+    >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -5938,13 +5938,13 @@ figures.py examples.
     ...     [15, 20, 19, 9, 0],
     ... ]
     >>> container = baca.figure(collections, [1], 16)
-    >>> groups = rmakers.nongrace_leaves_in_each_tuplet_rfunction(container)
-    >>> rmakers.beam_groups_rfunction(groups)
+    >>> groups = rmakers.nongrace_leaves_in_each_tuplet_function(container)
+    >>> rmakers.beam_groups_function(groups)
     >>> imbrications = baca.imbricate(
     ...     container, "Music.1", [2, 19, 9, 18, 16], allow_unused_pitches=True)
     >>> for imbrication in imbrications.values():
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_rfunction(imbrication)
-    ...     rmakers.beam_groups_rfunction(groups, beam_rests=True)
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_function(imbrication)
+    ...     rmakers.beam_groups_function(groups, beam_rests=True)
     ...     _ = baca.accent(baca.select.pheads(imbrication))
 
     >>> _ = baca.staccato(baca.select.pheads(container))
@@ -6102,8 +6102,8 @@ figures.py examples.
     ...     [15, 20, 19, 9, 0],
     ... ]
     >>> container = baca.figure(collections, [1], 16)
-    >>> groups = rmakers.nongrace_leaves_in_each_tuplet_rfunction(container)
-    >>> rmakers.beam_groups_rfunction(groups)
+    >>> groups = rmakers.nongrace_leaves_in_each_tuplet_function(container)
+    >>> rmakers.beam_groups_function(groups)
     >>> imbrications = baca.imbricate(
     ...     container,
     ...     "Music.1",
@@ -6126,13 +6126,13 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ... ]
     >>> container = baca.figure(collections, [1], 16)
-    >>> groups = rmakers.nongrace_leaves_in_each_tuplet_rfunction(container)
-    >>> rmakers.beam_groups_rfunction(groups, beam_rests=True)
+    >>> groups = rmakers.nongrace_leaves_in_each_tuplet_function(container)
+    >>> rmakers.beam_groups_function(groups, beam_rests=True)
     >>> imbrications = baca.imbricate(container, "Music.1", [2, 19, 9, 18, 16],
     ...     hocket=True)
     >>> for imbrication in imbrications.values():
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_rfunction(imbrication)
-    ...     rmakers.beam_groups_rfunction(groups, beam_rests=True)
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_function(imbrication)
+    ...     rmakers.beam_groups_function(groups, beam_rests=True)
     ...     _ = baca.accent(baca.select.pheads(imbrication))
 
     >>> _ = baca.staccato(baca.select.pheads(container))
@@ -6309,12 +6309,12 @@ figures.py examples.
     >>> figures = baca.FigureAccumulator(score)
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> container = baca.figure(collections, [5], 32)
-    >>> rmakers.beam_rfunction(container)
+    >>> rmakers.beam_function(container)
     >>> imbrications = baca.imbricate(container, "Music.1", [2, 10, 18, 19, 9],
     ...     truncate_ties=True)
     >>> for imbrication in imbrications.values():
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_rfunction(imbrication)
-    ...     rmakers.beam_groups_rfunction(groups, beam_rests=True)
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_function(imbrication)
+    ...     rmakers.beam_groups_function(groups, beam_rests=True)
 
     >>> baca.make_figures(
     ...     figures,
@@ -6474,13 +6474,13 @@ figures.py examples.
 
     >>> collections = [[0, 2, 10, 18], [16, 15, 23]]
     >>> container = baca.figure(collections, [1], 16)
-    >>> groups = rmakers.nongrace_leaves_in_each_tuplet_rfunction(container)
-    >>> rmakers.beam_groups_rfunction(groups)
+    >>> groups = rmakers.nongrace_leaves_in_each_tuplet_function(container)
+    >>> rmakers.beam_groups_function(groups)
     >>> imbrications = baca.imbricate(container, "Music.1", [2, 10])
     >>> for imbrication in imbrications.values():
     ...     _ = baca.staccato(baca.select.pheads(imbrication))
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_rfunction(imbrication)
-    ...     rmakers.beam_groups_rfunction(groups, beam_rests=True)
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_function(imbrication)
+    ...     rmakers.beam_groups_function(groups, beam_rests=True)
     ...     _ = baca.extend_beam(abjad.select.leaf(imbrication, -1))
 
     >>> baca.make_figures(
@@ -6491,12 +6491,12 @@ figures.py examples.
     ...     imbrications=imbrications,
     ... )
     >>> container = baca.figure([[19, 13, 9, 8]], [1], 16)
-    >>> groups = rmakers.nongrace_leaves_in_each_tuplet_rfunction(container)
-    >>> rmakers.beam_groups_rfunction(groups)
+    >>> groups = rmakers.nongrace_leaves_in_each_tuplet_function(container)
+    >>> rmakers.beam_groups_function(groups)
     >>> imbrications = baca.imbricate(container, "Music.1", [13, 9])
     >>> for imbrication in imbrications.values():
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_rfunction(imbrication)
-    ...     rmakers.beam_groups_rfunction(groups, beam_rests=True)
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet_function(imbrication)
+    ...     rmakers.beam_groups_function(groups, beam_rests=True)
     ...     _ = baca.staccato(baca.select.pheads(imbrication))
 
     >>> baca.make_figures(

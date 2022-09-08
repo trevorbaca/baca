@@ -635,7 +635,7 @@ def bass_to_octave(argument, n: int) -> None:
         ...     [{0, 14, 28}],
         ...     [1], 16
         ... )
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> _ = baca.bass_to_octave(container, 4)
         >>> selection = container[:]
         >>> container[:] = []
@@ -663,7 +663,7 @@ def bass_to_octave(argument, n: int) -> None:
         ...     [{0, 14, 28}],
         ...     [1], 16
         ... )
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> _ = baca.center_to_octave(container, 4)
         >>> selection = container[:]
         >>> container[:] = []
@@ -691,7 +691,7 @@ def bass_to_octave(argument, n: int) -> None:
         ...     [{0, 14, 28}],
         ...     [1], 16
         ... )
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> _ = baca.soprano_to_octave(container, 4)
         >>> selection = container[:]
         >>> container[:] = []
@@ -722,7 +722,7 @@ def bass_to_octave(argument, n: int) -> None:
         >>> container = baca.figure(
         ...     [[0, 14, 28]], [1], 16
         ... )
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> _ = baca.bass_to_octave(container, 4)
         >>> selection = container[:]
         >>> container[:] = []
@@ -751,7 +751,7 @@ def bass_to_octave(argument, n: int) -> None:
             >>
 
         >>> container = baca.figure([[0, 14, 28]], [1], 16)
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> _ = baca.center_to_octave(container, 4)
         >>> selection = container[:]
         >>> container[:] = []
@@ -780,7 +780,7 @@ def bass_to_octave(argument, n: int) -> None:
             >>
 
         >>> container = baca.figure([[0, 14, 28]], [1], 16)
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> _ = baca.soprano_to_octave(container, 4)
         >>> selection = container[:]
         >>> container[:] = []
@@ -813,7 +813,7 @@ def bass_to_octave(argument, n: int) -> None:
         Conjunct notes:
 
         >>> container = baca.figure([[10, 12, 14]], [1], 16)
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> _ = baca.bass_to_octave(container, 4)
         >>> selection = container[:]
         >>> container[:] = []
@@ -842,7 +842,7 @@ def bass_to_octave(argument, n: int) -> None:
             >>
 
         >>> container = baca.figure([[10, 12, 14]], [1], 16)
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> _ = baca.center_to_octave(container, 4)
         >>> selection = container[:]
         >>> container[:] = []
@@ -871,7 +871,7 @@ def bass_to_octave(argument, n: int) -> None:
             >>
 
         >>> container = baca.figure([[10, 12, 14]], [1], 16)
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> _ = baca.soprano_to_octave(container, 4)
         >>> selection = container[:]
         >>> container[:] = []
@@ -1015,7 +1015,7 @@ def bass_to_octave(argument, n: int) -> None:
         >>> container = baca.figure(
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]], [5, -3], 32
         ... )
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> baca.bass_to_octave(container, 3)
         >>> baca.color(baca.select.plts(container), lone=True)
         >>> selection = container[:]
@@ -1101,7 +1101,7 @@ def bass_to_octave(argument, n: int) -> None:
         ...     [5, -3],
         ...     32,
         ... )
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> for plt in baca.select.plts(container):
         ...     baca.bass_to_octave(plt, 3)
 
@@ -1195,7 +1195,7 @@ def center_to_octave(argument, n: int) -> None:
         >>> container = baca.figure(
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]], [5, -3], 32
         ... )
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> baca.center_to_octave(container, 3)
         >>> baca.color(baca.select.plts(container), lone=True)
         >>> selection = container[:]
@@ -1281,7 +1281,7 @@ def center_to_octave(argument, n: int) -> None:
         ...     [5, -3],
         ...     32,
         ... )
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> for plt in baca.select.plts(container):
         ...     baca.center_to_octave(plt, 3)
 
@@ -1554,7 +1554,7 @@ def displacement(argument, displacements: list[int]) -> None:
         ...         restart_talea=True,
         ...         treatments=[-1],
         ... )
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> baca.displacement(container, [0, 0, -1, -1, 1, 1])
         >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
         >>> selection = container[:]
@@ -1625,7 +1625,7 @@ def displacement(argument, displacements: list[int]) -> None:
         ...     16,
         ...     affix=baca.rests_around([2], [4]),
         ... )
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> _ = baca.displacement(container, [0, 0, -1, -1, 1, 1])
         >>> selection = container[:]
         >>> container[:] = []
@@ -1691,7 +1691,7 @@ def interpolate_pitches(
 
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
         >>> container = baca.figure(collections, [1], 16)
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> _ = baca.clef(abjad.select.leaf(container, 0), "treble")
         >>> _ = baca.interpolate_pitches(container, "Eb4", "F#5")
         >>> selection = container[:]
@@ -1752,7 +1752,7 @@ def interpolate_pitches(
         >>> container = baca.figure(
         ...     2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]], [1], 16
         ... )
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> _ = baca.clef(abjad.select.leaf(container, 0), "treble")
         >>> baca.interpolate_pitches(container, "Eb4", "F#5")
         >>> baca.glissando(
@@ -2280,7 +2280,7 @@ def register(
         ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
         ...     [1], 16
         ... )
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> _ = baca.register(container, 15)
         >>> selection = container[:]
         >>> container[:] = []
@@ -2411,7 +2411,7 @@ def register(
         ...     [{10, 12, 14}],
         ...     [1], 16
         ... )
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> _ = baca.register(container, -6)
         >>> selection = container[:]
         >>> container[:] = []
@@ -2447,7 +2447,7 @@ def register(
         ...         restart_talea=True,
         ...         treatments=[-1],
         ... )
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> _ = baca.register(container, -6)
         >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
         >>> selection = container[:]
@@ -2514,7 +2514,7 @@ def register(
         ...     restart_talea=True,
         ...     treatments=[-1],
         ... )
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> tuplet = baca.select.tuplet(container, 1)
         >>> baca.color(tuplet, lone=True)
         >>> baca.register(tuplet, -6)
@@ -2592,7 +2592,7 @@ def register(
         ...         restart_talea=True,
         ...         treatments=[-1],
         ... )
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> _ = baca.register(container, -6, 18)
         >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
         >>> selection = container[:]
@@ -2659,7 +2659,7 @@ def register(
         ...     restart_talea=True,
         ...     treatments=[-1],
         ... )
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> tuplet = baca.select.tuplet(container, 1)
         >>> baca.color(tuplet, lone=True)
         >>> baca.register(tuplet, -6, 18)
@@ -2731,7 +2731,7 @@ def register(
 
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
         >>> container = baca.figure(collections, [1], 16)
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> _ = baca.register(container, 0, 24)
         >>> selection = container[:]
         >>> container[:] = []
@@ -2794,7 +2794,7 @@ def register(
         ... ]
         >>> collections = [set(_) for _ in collections]
         >>> container = baca.figure(collections, [1], 16)
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> _ = baca.register(container, 0, 24)
         >>> selection = container[:]
         >>> container[:] = []
@@ -3402,7 +3402,7 @@ def register(
         ...     [1],
         ...     16,
         ... )
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> baca.color(baca.select.tuplet(container, 0), lone=True)
         >>> baca.register(baca.select.tuplet(container, 0), 0, 24)
         >>> selection = container[:]
@@ -3476,7 +3476,7 @@ def register(
         >>> container = baca.figure(
         ...     2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]], [1], 16
         ... )
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> tuplet = baca.select.tuplet(container, -1)
         >>> baca.color(tuplet, lone=True)
         >>> baca.register(tuplet, 0, 24)
@@ -3553,7 +3553,7 @@ def register(
         ...     [1],
         ...     16,
         ... )
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> baca.color(abjad.select.tuplets(container))
         >>> for tuplet in baca.select.tuplets(container):
         ...     baca.register(tuplet, 0, 24)
@@ -3674,7 +3674,7 @@ def replace_with_clusters(
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> container = baca.figure(collections, [1], 16)
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> _ = baca.replace_with_clusters(container, [3, 4])
         >>> selection = container[:]
         >>> container[:] = []
@@ -4242,7 +4242,7 @@ def soprano_to_octave(argument, n: int) -> None:
         >>> container = baca.figure(
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]], [5, -3], 32
         ... )
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> baca.soprano_to_octave(container, 3)
         >>> baca.color(baca.select.plts(container), lone=True)
         >>> selection = container[:]
@@ -4328,7 +4328,7 @@ def soprano_to_octave(argument, n: int) -> None:
         ...     [5, -3],
         ...     32,
         ... )
-        >>> rmakers.beam_rfunction(container)
+        >>> rmakers.beam_function(container)
         >>> for plt in baca.select.plts(container):
         ...     baca.soprano_to_octave(plt, 3)
 
