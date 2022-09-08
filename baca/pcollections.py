@@ -41,7 +41,7 @@ class ArpeggiationSpacingSpecifier:
         >>> collections = [abjad.PitchClassSegment(_) for _ in collections]
         >>> collections = [baca.pcollections.arpeggiate_up(_) for _ in collections]
         >>> container = baca.figure_function(collections, [1], 16)
-        >>> rmakers.beam_function(container)
+        >>> rmakers.beam_rfunction(container)
         >>> baca.bass_to_octave_function(container, 2)
         >>> selection = container[:]
         >>> container[:] = []
@@ -91,7 +91,7 @@ class ArpeggiationSpacingSpecifier:
         >>> collections = [abjad.PitchClassSegment(_) for _ in collections]
         >>> collections = [baca.pcollections.arpeggiate_down(_) for _ in collections]
         >>> container = baca.figure_function(collections, [1], 16)
-        >>> rmakers.beam_function(container)
+        >>> rmakers.beam_rfunction(container)
         >>> baca.bass_to_octave_function(container, 2)
         >>> selection = container[:]
         >>> container[:] = []

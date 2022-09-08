@@ -103,7 +103,7 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> _ = baca.stem_up_function(baca.select.pleaves(container))
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.beam_positions_function(container, 6)
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 4)
     >>> selection = container[:]
@@ -166,7 +166,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.dls_staff_padding_function(container, 4)
     >>> for tuplet in baca.select.tuplets(container):
     ...     _ = baca.hairpin_function(
@@ -251,7 +251,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.dls_up_function(container)
     >>> for tuplet in baca.select.tuplets(container):
     ...     _ = baca.hairpin_function(
@@ -342,7 +342,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.dynamic_function(baca.select.pleaf(container, 0), "p")
     >>> _ = baca.dynamic_function(selector(container), "f")
     >>> _ = baca.dynamic_text_extra_offset_function(
@@ -928,7 +928,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.note_head_style_cross_function(baca.select.pleaves(container))
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
     >>> selection = container[:]
@@ -999,7 +999,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.note_head_style_harmonic_function(baca.select.pleaves(container))
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
     >>> selection = container[:]
@@ -1070,7 +1070,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> for qrun in baca.select.qruns(container):
     ...     _ = baca.repeat_tie_function(qrun[1:])
 
@@ -1149,7 +1149,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> for qrun in baca.select.qruns(container):
     ...     _ = baca.repeat_tie_function(qrun[1:])
 
@@ -1228,7 +1228,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.rest_down_function(abjad.select.rests(container))
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
     >>> selection = container[:]
@@ -1299,7 +1299,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.rest_staff_position_function(container, -6)
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
     >>> selection = container[:]
@@ -1370,7 +1370,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.rest_transparent_function(container)
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
     >>> selection = container[:]
@@ -1441,7 +1441,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.rest_up_function(abjad.select.rests(container))
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
     >>> selection = container[:]
@@ -1512,7 +1512,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.accent_function(baca.select.pheads(container))
     >>> _ = baca.script_color_function(container, "#red")
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
@@ -1593,7 +1593,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.accent_function(baca.select.pheads(container))
     >>> _ = baca.script_down_function(container)
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
@@ -1674,7 +1674,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.accent_function(baca.select.pheads(container))
     >>> _ = baca.script_extra_offset_function(abjad.select.leaf(container, 1), (-1.5, 0))
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
@@ -1754,7 +1754,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.accent_function(baca.select.pheads(container))
     >>> _ = baca.script_up_function(container)
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
@@ -1841,7 +1841,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> for item in selector(container):
     ...     _ = baca.slur_function(item)
 
@@ -1926,7 +1926,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> for item in selector(container):
     ...     _ = baca.slur_function(item)
 
@@ -2010,7 +2010,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.stem_color_function(baca.select.pleaves(container), "#red")
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
     >>> selection = container[:]
@@ -2081,7 +2081,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.stem_down_function(baca.select.pleaves(container))
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
     >>> selection = container[:]
@@ -2152,7 +2152,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.stem_up_function(baca.select.pleaves(container))
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
     >>> selection = container[:]
@@ -2223,7 +2223,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> for tuplet in baca.select.tuplets(container):
     ...     _ = baca.sustain_pedal_function(tuplet)
 
@@ -2307,7 +2307,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.markup_function(baca.select.pleaf(container, 0), r'\markup "più mosso"')
     >>> _ = baca.markup_function(selector(container), r'\markup "lo stesso tempo"')
     >>> _ = baca.text_script_color_function(container, "#red")
@@ -2386,7 +2386,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.markup_function(baca.select.pleaf(container, 0), r'\markup "più mosso"')
     >>> _ = baca.markup_function(selector(container), r'\markup "lo stesso tempo"')
     >>> _ = baca.text_script_down_function(container)
@@ -2465,7 +2465,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.markup_function(baca.select.pleaf(container, 0), r'\markup "più mosso"')
     >>> _ = baca.markup_function(selector(container), r'\markup "lo stesso tempo"')
     >>> _ = baca.text_script_padding_function(container, 4)
@@ -2544,7 +2544,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.markup_function(baca.select.pleaf(container, 0), r'\markup "più mosso"')
     >>> _ = baca.markup_function(selector(container), r'\markup "lo stesso tempo"')
     >>> _ = baca.text_script_staff_padding_function(container, n=4)
@@ -2625,7 +2625,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.markup_function(baca.select.pleaf(container, 0), r'\markup "più mosso"')
     >>> _ = baca.markup_function(selector(container), r'\markup "lo stesso tempo"')
     >>> _ = baca.text_script_up_function(container)
@@ -2700,7 +2700,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.text_spanner_staff_padding_function(container, 6)
     >>> _ = baca.text_script_staff_padding_function(container, 6)
     >>> _ = baca.text_spanner_function(baca.select.tleaves(container), "pont. => ord.")
@@ -2784,7 +2784,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.stem_up_function(baca.select.pleaves(container))
     >>> _ = baca.tie_function(baca.select.pleaf(container, 0))
     >>> _ = baca.tie_down_function(baca.select.pleaves(container))
@@ -2856,7 +2856,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.stem_down_function(baca.select.pleaves(container))
     >>> _ = baca.tie_up_function(baca.select.pleaves(container))
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
@@ -2926,7 +2926,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.time_signature_extra_offset_function(
     ...     abjad.select.rest(container, 0), (-6, 0))
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
@@ -2997,7 +2997,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.time_signature_transparent_function(container)
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
     >>> selection = container[:]
@@ -3068,7 +3068,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
     >>> _ = baca.tuplet_bracket_down_function(container)
     >>> selection = container[:]
@@ -3139,7 +3139,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.tuplet_bracket_extra_offset_function(
     ...     abjad.select.leaf(container, 0), (-1, 0))
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
@@ -3210,7 +3210,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
@@ -3278,7 +3278,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
     >>> _ = baca.tuplet_bracket_up_function(container)
     >>> selection = container[:]
@@ -3349,7 +3349,7 @@ overrides.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
     >>> _ = baca.tuplet_number_extra_offset_function(
     ...     abjad.select.leaf(container, 0), (-1, 0))

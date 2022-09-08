@@ -78,7 +78,7 @@ articulations.py examples.
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.stop_on_string_function(baca.select.pleaf(container, -1))
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
     >>> selection = container[:]

@@ -95,7 +95,7 @@ spanners.py examples
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.ottava_function(baca.select.tleaves(container))
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
     >>> selection = container[:]
@@ -166,7 +166,7 @@ spanners.py examples
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.ottava_bassa_function(baca.select.tleaves(container))
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
     >>> selection = container[:]
@@ -237,7 +237,7 @@ spanners.py examples
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.slur_function(baca.select.tleaves(container))
     >>> _ = baca.slur_down_function(container)
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
@@ -311,7 +311,7 @@ spanners.py examples
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.sustain_pedal_function(container)
     >>> _ = baca.sustain_pedal_staff_padding_function(container, 4)
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
@@ -385,7 +385,7 @@ spanners.py examples
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.trill_spanner_function(baca.select.tleaves(container, rleak=True))
     >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
     >>> selection = container[:]
@@ -457,7 +457,7 @@ spanners.py examples
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> for run in baca.select.runs(container):
     ...     run = baca.select.rleak(run)
     ...     _ = baca.trill_spanner_function(run)
@@ -535,7 +535,7 @@ spanners.py examples
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam_rfunction(container)
     >>> _ = baca.trill_spanner_function(
     ...     baca.select.tleaves(container, rleak=True),
     ...     abjad.Tweak(r"- \tweak color #red"),
