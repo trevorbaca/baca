@@ -85,7 +85,7 @@ def _prepare_start_trill_span(
     return start_trill_span_
 
 
-def beam_function(
+def beam(
     argument,
     *tweaks: abjad.Tweak,
     direction: abjad.Vertical | None = None,
@@ -109,7 +109,7 @@ def beam_function(
     return wrappers
 
 
-def ottava_function(
+def ottava(
     argument,
     *,
     start_ottava: abjad.Ottava = abjad.Ottava(n=1),
@@ -126,7 +126,7 @@ def ottava_function(
     )
 
 
-def ottava_bassa_function(
+def ottava_bassa(
     argument,
     *,
     start_ottava: abjad.Ottava = abjad.Ottava(n=-1),
@@ -146,7 +146,7 @@ def ottava_bassa_function(
     return wrappers
 
 
-def slur_function(
+def slur(
     argument,
     *tweaks: abjad.Tweak,
     phrasing_slur: bool = False,
@@ -170,7 +170,7 @@ def slur_function(
     return wrappers
 
 
-def sustain_pedal_function(
+def sustain_pedal(
     argument,
     *,
     start_piano_pedal: abjad.StartPianoPedal = abjad.StartPianoPedal(),
@@ -188,7 +188,7 @@ def sustain_pedal_function(
     return wrappers
 
 
-def trill_spanner_function(
+def trill_spanner(
     argument,
     *tweaks: abjad.Tweak,
     alteration: str = None,

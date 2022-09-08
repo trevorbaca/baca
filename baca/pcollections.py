@@ -40,9 +40,9 @@ class ArpeggiationSpacingSpecifier:
         >>> collections = [abjad.PitchSegment(_) for _ in collections]
         >>> collections = [abjad.PitchClassSegment(_) for _ in collections]
         >>> collections = [baca.pcollections.arpeggiate_up(_) for _ in collections]
-        >>> container = baca.figure_function(collections, [1], 16)
+        >>> container = baca.figure(collections, [1], 16)
         >>> rmakers.beam_rfunction(container)
-        >>> baca.bass_to_octave_function(container, 2)
+        >>> baca.bass_to_octave(container, 2)
         >>> selection = container[:]
         >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -90,9 +90,9 @@ class ArpeggiationSpacingSpecifier:
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> collections = [abjad.PitchClassSegment(_) for _ in collections]
         >>> collections = [baca.pcollections.arpeggiate_down(_) for _ in collections]
-        >>> container = baca.figure_function(collections, [1], 16)
+        >>> container = baca.figure(collections, [1], 16)
         >>> rmakers.beam_rfunction(container)
-        >>> baca.bass_to_octave_function(container, 2)
+        >>> baca.bass_to_octave(container, 2)
         >>> selection = container[:]
         >>> container[:] = []
         >>> lilypond_file = abjad.illustrators.selection(selection)

@@ -549,7 +549,7 @@ def _unbundle_indicator(argument):
     return argument
 
 
-def bow_speed_spanner_function(
+def bow_speed_spanner(
     argument,
     items: str | list,
     *tweaks: _typings.IndexedTweak,
@@ -563,7 +563,7 @@ def bow_speed_spanner_function(
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.BOW_SPEED_SPANNER)
-    wrappers = text_spanner_function(
+    wrappers = text_spanner(
         argument,
         items,
         *tweaks,
@@ -580,7 +580,7 @@ def bow_speed_spanner_function(
     return wrappers
 
 
-def circle_bow_spanner_function(
+def circle_bow_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
     left_broken: bool = False,
@@ -596,7 +596,7 @@ def circle_bow_spanner_function(
     else:
         assert isinstance(qualifier, str), repr(qualifier)
         string = rf"\baca-circle-{qualifier}-markup =|"
-    wrappers = text_spanner_function(
+    wrappers = text_spanner(
         argument,
         string,
         *tweaks,
@@ -612,7 +612,7 @@ def circle_bow_spanner_function(
     return wrappers
 
 
-def clb_spanner_function(
+def clb_spanner(
     argument,
     string_number: int,
     *tweaks: _typings.IndexedTweak,
@@ -636,7 +636,7 @@ def clb_spanner_function(
         markup = r"\baca-damp-clb-four-markup"
     else:
         raise Exception(string_number)
-    wrappers = text_spanner_function(
+    wrappers = text_spanner(
         argument,
         f"{markup} =|",
         *tweaks,
@@ -652,7 +652,7 @@ def clb_spanner_function(
     return wrappers
 
 
-def covered_spanner_function(
+def covered_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
     # NOTE: autodetect default differs from text_spanner():
@@ -665,7 +665,7 @@ def covered_spanner_function(
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.COVERED_SPANNER)
-    wrappers = text_spanner_function(
+    wrappers = text_spanner(
         argument,
         items,
         *tweaks,
@@ -681,7 +681,7 @@ def covered_spanner_function(
     return wrappers
 
 
-def damp_spanner_function(
+def damp_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
     # NOTE: autodetect default differs from text_spanner():
@@ -693,7 +693,7 @@ def damp_spanner_function(
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.DAMP_SPANNER)
-    wrappers = text_spanner_function(
+    wrappers = text_spanner(
         argument,
         r"\baca-damp-markup =|",
         *tweaks,
@@ -709,7 +709,7 @@ def damp_spanner_function(
     return wrappers
 
 
-def hairpin_function(
+def hairpin(
     argument,
     dynamics: str | list,
     *tweaks: abjad.Tweak,
@@ -752,7 +752,7 @@ def hairpin_function(
     )
 
 
-def half_clt_spanner_function(
+def half_clt_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
     left_broken: bool = False,
@@ -762,7 +762,7 @@ def half_clt_spanner_function(
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.HALF_CLT_SPANNER)
-    wrappers = text_spanner_function(
+    wrappers = text_spanner(
         argument,
         "½ clt =|",
         *tweaks,
@@ -778,7 +778,7 @@ def half_clt_spanner_function(
     return wrappers
 
 
-def material_annotation_spanner_function(
+def material_annotation_spanner(
     argument,
     items: str | list,
     *tweaks: _typings.IndexedTweak,
@@ -788,7 +788,7 @@ def material_annotation_spanner_function(
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.MATERIAL_ANNOTATION_SPANNER)
-    wrappers = text_spanner_function(
+    wrappers = text_spanner(
         argument,
         items,
         *tweaks,
@@ -803,7 +803,7 @@ def material_annotation_spanner_function(
     return wrappers
 
 
-def metric_modulation_spanner_function(
+def metric_modulation_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
     items: str = r"MM =|",
@@ -814,7 +814,7 @@ def metric_modulation_spanner_function(
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.METRIC_MODULATION_SPANNER)
-    wrappers = text_spanner_function(
+    wrappers = text_spanner(
         argument,
         items,
         *tweaks,
@@ -987,7 +987,7 @@ def parse_hairpin_descriptor(
     return specifiers
 
 
-def pizzicato_spanner_function(
+def pizzicato_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
     # NOTE: autodetect default differs from text_spanner():
@@ -999,7 +999,7 @@ def pizzicato_spanner_function(
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.PIZZICATO_SPANNER)
-    wrappers = text_spanner_function(
+    wrappers = text_spanner(
         argument,
         r"\baca-pizz-markup =|",
         *tweaks,
@@ -1015,7 +1015,7 @@ def pizzicato_spanner_function(
     return wrappers
 
 
-def scp_spanner_function(
+def scp_spanner(
     argument,
     items: str | list,
     *tweaks: _typings.IndexedTweak,
@@ -1029,7 +1029,7 @@ def scp_spanner_function(
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.SCP_SPANNER)
-    wrappers = text_spanner_function(
+    wrappers = text_spanner(
         argument,
         items,
         *tweaks,
@@ -1046,7 +1046,7 @@ def scp_spanner_function(
     return wrappers
 
 
-def spazzolato_spanner_function(
+def spazzolato_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
     # NOTE: autodetect default differs from text_spanner():
@@ -1059,7 +1059,7 @@ def spazzolato_spanner_function(
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.SPAZZOLATO_SPANNER)
-    wrappers = text_spanner_function(
+    wrappers = text_spanner(
         argument,
         items,
         *tweaks,
@@ -1075,7 +1075,7 @@ def spazzolato_spanner_function(
     return wrappers
 
 
-def string_number_spanner_function(
+def string_number_spanner(
     argument,
     items: str | list,
     *tweaks: _typings.IndexedTweak,
@@ -1089,7 +1089,7 @@ def string_number_spanner_function(
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.STRING_NUMBER_SPANNER)
-    wrappers = text_spanner_function(
+    wrappers = text_spanner(
         argument,
         items,
         *tweaks,
@@ -1105,7 +1105,7 @@ def string_number_spanner_function(
     return wrappers
 
 
-def tasto_spanner_function(
+def tasto_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
     autodetect_right_padding: bool = True,
@@ -1118,7 +1118,7 @@ def tasto_spanner_function(
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.TASTO_SPANNER)
-    wrappers = text_spanner_function(
+    wrappers = text_spanner(
         argument,
         "T =|",
         *tweaks,
@@ -1135,7 +1135,7 @@ def tasto_spanner_function(
     return wrappers
 
 
-def text_spanner_function(
+def text_spanner(
     argument,
     items: str | list,
     *tweaks: _typings.IndexedTweak,
@@ -1181,7 +1181,7 @@ def text_spanner_function(
     )
 
 
-def vibrato_spanner_function(
+def vibrato_spanner(
     argument,
     items: str | list,
     *tweaks: _typings.IndexedTweak,
@@ -1195,7 +1195,7 @@ def vibrato_spanner_function(
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.VIBRATO_SPANNER)
-    wrappers = text_spanner_function(
+    wrappers = text_spanner(
         argument,
         items,
         *tweaks,
@@ -1211,7 +1211,7 @@ def vibrato_spanner_function(
     return wrappers
 
 
-def xfb_spanner_function(
+def xfb_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
     autodetect_right_padding: bool = True,
@@ -1224,7 +1224,7 @@ def xfb_spanner_function(
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.BOW_SPEED_SPANNER)
-    wrappers = text_spanner_function(
+    wrappers = text_spanner(
         argument,
         "XFB =|",
         *tweaks,

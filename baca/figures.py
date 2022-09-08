@@ -1410,7 +1410,7 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
     return Coat(pitch)
 
 
-def figure_function(
+def figure(
     collections,
     counts: typing.Sequence[int],
     denominator: int,
@@ -1441,7 +1441,7 @@ def figure_function(
     return container
 
 
-def imbricate_function(
+def imbricate(
     container: abjad.Container,
     voice_name: str,
     segment: list,
@@ -1587,7 +1587,7 @@ def make_figures(
         accumulator.figure_number += 1
 
 
-def nest_function(
+def nest(
     argument, treatments: typing.Sequence, *, lmr: LMR = None
 ) -> list[abjad.Tuplet]:
     assert treatments is not None

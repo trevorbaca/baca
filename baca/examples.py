@@ -127,7 +127,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> score["Music.1"].extend(music)
     >>> music = abjad.Container("a4 g f e d c")[:]
     >>> score["Music.2"].extend(music)
-    >>> _ = baca.clef_function(score["Music.2"][0], "bass")
+    >>> _ = baca.clef(score["Music.2"][0], "bass")
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -211,8 +211,8 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
-    >>> _ = baca.instrument_function(voice[0], "clarinet", manifests)
-    >>> _ = baca.pitches_function(voice, "E4 F4")
+    >>> _ = baca.instrument(voice[0], "clarinet", manifests)
+    >>> _ = baca.pitches(voice, "E4 F4")
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -297,8 +297,8 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
-    >>> _ = baca.instrument_function(voice[0], "clarinet", manifests)
-    >>> _ = baca.pitches_function(voice, "E4 F4")
+    >>> _ = baca.instrument(voice[0], "clarinet", manifests)
+    >>> _ = baca.pitches(voice, "E4 F4")
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -372,7 +372,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ... ]
     >>> figures, time_signatures = [], []
     >>> for i, collections in enumerate(collection_lists):
-    ...     container = baca.figure_function(collections, [1], 16)
+    ...     container = baca.figure(collections, [1], 16)
     ...     selection = container[:]
     ...     container[:] = []
     ...     figures.append(selection)
@@ -399,7 +399,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ... )
     >>> score["Music"].extend(figures_)
     >>> voice = score["Music"]
-    >>> _ = baca.instrument_function(voice[0], "Violin", manifests)
+    >>> _ = baca.instrument(voice[0], "Violin", manifests)
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -487,7 +487,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ... ]
     >>> figures, time_signatures = [], []
     >>> for i, collections in enumerate(collection_lists):
-    ...     container = baca.figure_function(collections, [1], 16)
+    ...     container = baca.figure(collections, [1], 16)
     ...     selection = container[:]
     ...     container[:] = []
     ...     figures.append(selection)

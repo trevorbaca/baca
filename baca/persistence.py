@@ -32,7 +32,7 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> voice.extend(music)
-        >>> _ = baca.clef_function(abjad.select.leaf(voice, 0), "treble")
+        >>> _ = baca.clef(abjad.select.leaf(voice, 0), "treble")
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -129,7 +129,7 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> voice.extend(music)
-        >>> _ = baca.clef_function(abjad.select.leaf(voice, 0), "alto")
+        >>> _ = baca.clef(abjad.select.leaf(voice, 0), "alto")
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Staff"] = [
@@ -350,8 +350,8 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> voice.extend(music)
-        >>> _ = baca.clef_function(abjad.select.leaf(voice, 0), "treble")
-        >>> _ = baca.clef_function(abjad.select.leaf(voice, 2), "treble")
+        >>> _ = baca.clef(abjad.select.leaf(voice, 0), "treble")
+        >>> _ = baca.clef(abjad.select.leaf(voice, 2), "treble")
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -469,7 +469,7 @@ r"""
         ...     )
         ... ]
         >>> baca.reapply(voice, {}, persist["persistent_indicators"])
-        >>> _ = baca.clef_function(abjad.select.leaf(voice, 0), "treble")
+        >>> _ = baca.clef(abjad.select.leaf(voice, 0), "treble")
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -567,7 +567,7 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> _ = baca.dynamic_function(baca.select.pleaf(voice, 0), "f")
+        >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -632,7 +632,7 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> _ = baca.dynamic_function(baca.select.pleaf(voice, 0), "p")
+        >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "p")
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Music"] = [
@@ -788,8 +788,8 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> _ = baca.dynamic_function(baca.select.pleaf(voice, 0), "f")
-        >>> _ = baca.dynamic_function(baca.select.pleaf(voice, 1), "f")
+        >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
+        >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), "f")
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -866,7 +866,7 @@ r"""
         ...     )
         ... ]
         >>> baca.reapply(voice, {}, persist["persistent_indicators"])
-        >>> _ = baca.dynamic_function(baca.select.pleaf(voice, 0), "f")
+        >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -933,8 +933,8 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> _ = baca.dynamic_function(baca.select.pleaf(voice, 0), "sfz")
-        >>> _ = baca.dynamic_function(baca.select.pleaf(voice, 1), "sfz")
+        >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "sfz")
+        >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), "sfz")
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -1001,7 +1001,7 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> _ = baca.dynamic_function(baca.select.pleaf(voice, 0), "sfz")
+        >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "sfz")
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Music"] = [
@@ -1079,8 +1079,8 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> _ = baca.dynamic_function(baca.select.pleaf(voice, 0), "mf")
-        >>> _ = baca.dynamic_function(baca.select.pleaf(voice, 1), '"mf"')
+        >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "mf")
+        >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), '"mf"')
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -1170,7 +1170,7 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> _ = baca.instrument_function(abjad.select.leaf(voice, 0), "Flute", manifests)
+        >>> _ = baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -1330,7 +1330,7 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> _ = baca.instrument_function(abjad.select.leaf(voice, 0), "Flute", manifests)
+        >>> _ = baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Staff"] = [
@@ -1683,8 +1683,8 @@ r"""
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> manifests = {"abjad.Instrument": instruments}
-        >>> _ = baca.instrument_function(voice[0], "Flute", manifests)
-        >>> _ = baca.instrument_function(voice[1], "Flute", manifests)
+        >>> _ = baca.instrument(voice[0], "Flute", manifests)
+        >>> _ = baca.instrument(voice[1], "Flute", manifests)
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -1878,7 +1878,7 @@ r"""
         ...     )
         ... ]
         >>> baca.reapply(voice, manifests, persist["persistent_indicators"])
-        >>> _ = baca.instrument_function(abjad.select.leaf(voice, 0), "Flute", manifests)
+        >>> _ = baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -2062,7 +2062,7 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> _ = baca.short_instrument_name_function(voice[0], "I+II", manifests)
+        >>> _ = baca.short_instrument_name(voice[0], "I+II", manifests)
 
         >>> _, _ = baca.interpret.section(
         ...     score,
@@ -2232,7 +2232,7 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> _ = baca.short_instrument_name_function(voice[0], "III+IV", manifests)
+        >>> _ = baca.short_instrument_name(voice[0], "III+IV", manifests)
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
@@ -2609,8 +2609,8 @@ r"""
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> manifests = {"abjad.ShortInstrumentName": short_instrument_names}
-        >>> _ = baca.short_instrument_name_function(voice[0], "I+II", manifests)
-        >>> _ = baca.short_instrument_name_function(voice[1], "I+II", manifests)
+        >>> _ = baca.short_instrument_name(voice[0], "I+II", manifests)
+        >>> _ = baca.short_instrument_name(voice[1], "I+II", manifests)
         >>> _, _ = baca.interpret.section(
         ...     score,
         ...     {},
@@ -2824,7 +2824,7 @@ r"""
         ...     )
         ... ]
         >>> baca.reapply(voice, manifests, persist["persistent_indicators"])
-        >>> _ = baca.short_instrument_name_function(voice[0], "I+II", manifests)
+        >>> _ = baca.short_instrument_name(voice[0], "I+II", manifests)
 
         >>> _, _ = baca.interpret.section(
         ...     score,
@@ -3008,8 +3008,8 @@ r"""
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
 
-        >>> wrappers = baca.short_instrument_name_function(voice[0], "I+II", manifests)
-        >>> wrappers = baca.short_instrument_name_function(voice[0], "III+IV", manifests)
+        >>> wrappers = baca.short_instrument_name(voice[0], "I+II", manifests)
+        >>> wrappers = baca.short_instrument_name(voice[0], "III+IV", manifests)
         >>> for wrapper in wrappers:
         ...     wrapper.deactivate = True
 
@@ -3114,7 +3114,7 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
-        >>> wrappers = baca.metronome_mark_function(
+        >>> wrappers = baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
         ...     {},
@@ -3122,7 +3122,7 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> baca.append_anchor_note_function(voice)
+        >>> baca.append_anchor_note(voice)
 
         >>> _, _ = baca.interpret.section(
         ...     score,
@@ -3214,16 +3214,16 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
-        >>> wrappers = baca.metronome_mark_function(
+        >>> wrappers = baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
         ...     {},
         ... )
-        >>> wrappers = baca.text_spanner_staff_padding_function(score["Skips"][:-1], 4)
+        >>> wrappers = baca.text_spanner_staff_padding(score["Skips"][:-1], 4)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> baca.append_anchor_note_function(voice)
+        >>> baca.append_anchor_note(voice)
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
@@ -3344,7 +3344,7 @@ r"""
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> baca.reapply(voice, manifests, persist["persistent_indicators"])
-        >>> wrappers = baca.text_spanner_staff_padding_function(score["Skips"], 4)
+        >>> wrappers = baca.text_spanner_staff_padding(score["Skips"], 4)
 
         >>> _, _ = baca.interpret.section(
         ...     score,
@@ -3426,12 +3426,12 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
-        >>> wrappers = baca.metronome_mark_function(
+        >>> wrappers = baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
         ...     {},
         ... )
-        >>> wrappers = baca.metronome_mark_function(
+        >>> wrappers = baca.metronome_mark(
         ...     score["Skips"][2 - 1],
         ...     metronome_marks["112"],
         ...     {},
@@ -3439,7 +3439,7 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> baca.append_anchor_note_function(voice)
+        >>> baca.append_anchor_note(voice)
 
         >>> _, _ = baca.interpret.section(
         ...     score,
@@ -3549,16 +3549,16 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
-        >>> wrappers = baca.metronome_mark_function(
+        >>> wrappers = baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
         ...     {},
         ... )
-        >>> wrappers = baca.text_spanner_staff_padding_function(score["Skips"][:-1], 4)
+        >>> wrappers = baca.text_spanner_staff_padding(score["Skips"][:-1], 4)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> baca.append_anchor_note_function(voice)
+        >>> baca.append_anchor_note(voice)
         >>> baca.reapply(voice, {}, persist["persistent_indicators"])
 
         >>> _, _ = baca.interpret.section(
@@ -3671,8 +3671,8 @@ r"""
         >>> voice.extend(music)
         >>> wrapper = abjad.attach(override, voice[0], wrapper=True)
         >>> wrapper.tag = tag
-        >>> _ = baca.staff_lines_function(voice[0], 1)
-        >>> _ = baca.staff_position_function(voice, 0)
+        >>> _ = baca.staff_lines(voice[0], 1)
+        >>> _ = baca.staff_position(voice, 0)
 
         >>> metadata, persist = baca.interpret.section(
         ...     score,
@@ -3928,7 +3928,7 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> _ = baca.staff_lines_function(voice[0], 5)
+        >>> _ = baca.staff_lines(voice[0], 5)
 
         >>> _, _ = baca.interpret.section(
         ...     score,
@@ -3997,7 +3997,7 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> _ = baca.staff_lines_function(voice[0], 1)
+        >>> _ = baca.staff_lines(voice[0], 1)
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
@@ -4159,8 +4159,8 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> _ = baca.staff_lines_function(voice[0], 5)
-        >>> _ = baca.staff_lines_function(voice[1], 5)
+        >>> _ = baca.staff_lines(voice[0], 5)
+        >>> _ = baca.staff_lines(voice[1], 5)
 
         >>> _, _ = baca.interpret.section(
         ...     score,
@@ -4246,7 +4246,7 @@ r"""
         ... ]
 
         >>> baca.reapply(voice, {}, persist["persistent_indicators"])
-        >>> _ = baca.staff_lines_function(voice[0], 5)
+        >>> _ = baca.staff_lines(voice[0], 5)
 
         >>> _, _ = baca.interpret.section(
         ...     score,
@@ -4334,7 +4334,7 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
-        >>> wrappers = baca.metronome_mark_function(
+        >>> wrappers = baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
         ...     {},
@@ -4342,7 +4342,7 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> baca.append_anchor_note_function(voice)
+        >>> baca.append_anchor_note(voice)
 
         >>> _, _ = baca.interpret.section(
         ...     score,
@@ -4433,12 +4433,12 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
-        >>> wrappers = baca.metronome_mark_function(
+        >>> wrappers = baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
         ...     {},
         ... )
-        >>> wrappers = baca.text_spanner_staff_padding_function(score["Skips"], 4)
+        >>> wrappers = baca.text_spanner_staff_padding(score["Skips"], 4)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
@@ -4542,7 +4542,7 @@ r"""
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> baca.reapply(voice, manifests, persist["persistent_indicators"])
-        >>> wrappers = baca.text_spanner_staff_padding_function(score["Skips"], 4)
+        >>> wrappers = baca.text_spanner_staff_padding(score["Skips"], 4)
 
         >>> _, _ = baca.interpret.section(
         ...     score,
@@ -4622,12 +4622,12 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
-        >>> wrappers = baca.metronome_mark_function(
+        >>> wrappers = baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
         ...     {},
         ... )
-        >>> wrappers = baca.metronome_mark_function(
+        >>> wrappers = baca.metronome_mark(
         ...     score["Skips"][2 - 1],
         ...     baca.Accelerando(),
         ...     {},
@@ -4729,12 +4729,12 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
-        >>> wrappers = baca.metronome_mark_function(
+        >>> wrappers = baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
         ...     {},
         ... )
-        >>> wrappers = baca.text_spanner_staff_padding_function(score["Skips"], 4)
+        >>> wrappers = baca.text_spanner_staff_padding(score["Skips"], 4)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)

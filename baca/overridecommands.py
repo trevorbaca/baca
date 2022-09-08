@@ -75,7 +75,7 @@ def _do_override_command(
     return [wrapper_1, wrapper_2]
 
 
-def _do_override_function(
+def _do_override(
     frame,
     argument,
     grob,
@@ -100,11 +100,11 @@ def _do_override_function(
     )
 
 
-def accidental_extra_offset_function(
+def accidental_extra_offset(
     argument,
     pair: tuple[int | float, int | float],
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         attribute="extra_offset",
@@ -113,8 +113,8 @@ def accidental_extra_offset_function(
     )
 
 
-def accidental_font_size_function(argument, n: int | float) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def accidental_font_size(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         attribute="font_size",
@@ -123,8 +123,8 @@ def accidental_font_size_function(argument, n: int | float) -> list[abjad.Wrappe
     )
 
 
-def accidental_stencil_false_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def accidental_stencil_false(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         attribute="stencil",
@@ -133,8 +133,8 @@ def accidental_stencil_false_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def accidental_transparent_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def accidental_transparent(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         attribute="transparent",
@@ -143,8 +143,8 @@ def accidental_transparent_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def accidental_x_extent_false_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def accidental_x_extent_false(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         attribute="X_extent",
@@ -153,8 +153,8 @@ def accidental_x_extent_false_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def accidental_x_offset_function(argument, n: int | float) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def accidental_x_offset(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         attribute="X_offset",
@@ -163,8 +163,8 @@ def accidental_x_offset_function(argument, n: int | float) -> list[abjad.Wrapper
     )
 
 
-def accidental_y_offset_function(argument, n: int | float) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def accidental_y_offset(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         attribute="Y_offset",
@@ -173,10 +173,10 @@ def accidental_y_offset_function(argument, n: int | float) -> list[abjad.Wrapper
     )
 
 
-def bar_line_color_function(
+def bar_line_color(
     argument, color: str, *, after: bool = False, context: str = "Score"
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         grob="BarLine",
@@ -187,14 +187,14 @@ def bar_line_color_function(
     )
 
 
-def bar_line_extra_offset_function(
+def bar_line_extra_offset(
     argument,
     pair: tuple[int | float, int | float],
     *,
     after: bool = False,
     context: str = "Score",
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         grob="BarLine",
@@ -205,8 +205,8 @@ def bar_line_extra_offset_function(
     )
 
 
-def bar_line_transparent_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def bar_line_transparent(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         "BarLine",
@@ -216,7 +216,7 @@ def bar_line_transparent_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-# TODO: change name to bar_line_x_extent_function()
+# TODO: change name to bar_line_x_extent()
 def bar_line_x_extent(
     leaves,
     pair: tuple[int | float, int | float],
@@ -224,7 +224,7 @@ def bar_line_x_extent(
     after: bool = False,
     context: str = "Score",
 ) -> list[abjad.Wrapper]:
-    # TODO: use _do_override_function()
+    # TODO: use _do_override()
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
     first_tag = _tags.function_name(_frame(), n=1)
     final_tag = _tags.function_name(_frame(), n=2)
@@ -243,8 +243,8 @@ def bar_line_x_extent(
     )
 
 
-def beam_positions_function(argument, n: int | float) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def beam_positions(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         "Beam",
@@ -253,8 +253,8 @@ def beam_positions_function(argument, n: int | float) -> list[abjad.Wrapper]:
     )
 
 
-def beam_stencil_false_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def beam_stencil_false(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Beam",
@@ -263,8 +263,8 @@ def beam_stencil_false_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def beam_transparent_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def beam_transparent(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Beam",
@@ -273,11 +273,11 @@ def beam_transparent_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def clef_extra_offset_function(
+def clef_extra_offset(
     argument,
     pair: tuple[int | float, int | float],
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         "Clef",
@@ -287,7 +287,7 @@ def clef_extra_offset_function(
     )
 
 
-def clef_shift_function(
+def clef_shift(
     argument,
     clef: str | abjad.Clef,
     first_measure_number: int,
@@ -297,7 +297,7 @@ def clef_shift_function(
     measure_number += first_measure_number - 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
     wrappers = []
-    wrappers_ = clef_x_extent_false_function(argument)
+    wrappers_ = clef_x_extent_false(argument)
     _tags.wrappers(wrappers_, _tags.SHIFTED_CLEF, measure_number_tag)
     wrappers.extend(wrappers_)
     extra_offset_x: int | float
@@ -310,14 +310,14 @@ def clef_shift_function(
         width = clef._to_width[clef.name]
         extra_offset_x = -width
     pair = (extra_offset_x, 0)
-    wrappers_ = clef_extra_offset_function(argument, pair)
+    wrappers_ = clef_extra_offset(argument, pair)
     _tags.wrappers(wrappers_, _tags.SHIFTED_CLEF, measure_number_tag)
     wrappers.extend(wrappers_)
     return wrappers
 
 
-def clef_whiteout_function(argument, n: int | float) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def clef_whiteout(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Clef",
@@ -327,8 +327,8 @@ def clef_whiteout_function(argument, n: int | float) -> list[abjad.Wrapper]:
     )
 
 
-def clef_x_extent_false_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def clef_x_extent_false(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         "Clef",
@@ -338,8 +338,8 @@ def clef_x_extent_false_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def dls_padding_function(argument, n: int | float) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def dls_padding(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         "DynamicLineSpanner",
@@ -348,8 +348,8 @@ def dls_padding_function(argument, n: int | float) -> list[abjad.Wrapper]:
     )
 
 
-def dls_staff_padding_function(argument, n: int | float) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def dls_staff_padding(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         "DynamicLineSpanner",
@@ -358,8 +358,8 @@ def dls_staff_padding_function(argument, n: int | float) -> list[abjad.Wrapper]:
     )
 
 
-def dls_up_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def dls_up(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="DynamicLineSpanner",
@@ -368,11 +368,11 @@ def dls_up_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def dots_extra_offset_function(
+def dots_extra_offset(
     argument,
     pair: tuple[int | float, int | float],
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         grob="Dots",
@@ -381,8 +381,8 @@ def dots_extra_offset_function(
     )
 
 
-def dots_stencil_false_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def dots_stencil_false(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Dots",
@@ -391,8 +391,8 @@ def dots_stencil_false_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def dots_transparent_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def dots_transparent(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Dots",
@@ -401,8 +401,8 @@ def dots_transparent_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def dots_x_extent_false_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def dots_x_extent_false(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Dots",
@@ -411,8 +411,8 @@ def dots_x_extent_false_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def dynamic_text_color_function(argument, color: str = "#red") -> list[abjad.Wrapper]:
-    return _do_override_function(
+def dynamic_text_color(argument, color: str = "#red") -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="DynamicText",
@@ -421,11 +421,11 @@ def dynamic_text_color_function(argument, color: str = "#red") -> list[abjad.Wra
     )
 
 
-def dynamic_text_extra_offset_function(
+def dynamic_text_extra_offset(
     argument,
     pair: tuple[int | float, int | float],
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         "DynamicText",
@@ -434,10 +434,8 @@ def dynamic_text_extra_offset_function(
     )
 
 
-def dynamic_text_parent_alignment_x_function(
-    argument, n: int | float
-) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def dynamic_text_parent_alignment_x(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="DynamicText",
@@ -446,10 +444,8 @@ def dynamic_text_parent_alignment_x_function(
     )
 
 
-def dynamic_text_self_alignment_x_function(
-    argument, n: int | float
-) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def dynamic_text_self_alignment_x(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         "DynamicText",
@@ -458,8 +454,8 @@ def dynamic_text_self_alignment_x_function(
     )
 
 
-def dynamic_text_stencil_false_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def dynamic_text_stencil_false(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="DynamicText",
@@ -468,8 +464,8 @@ def dynamic_text_stencil_false_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def dynamic_text_transparent_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def dynamic_text_transparent(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="DynamicText",
@@ -478,8 +474,8 @@ def dynamic_text_transparent_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def dynamic_text_x_extent_zero_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def dynamic_text_x_extent_zero(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         "DynamicText",
@@ -488,8 +484,8 @@ def dynamic_text_x_extent_zero_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def dynamic_text_x_offset_function(argument, n: int | float) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def dynamic_text_x_offset(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="DynamicText",
@@ -498,8 +494,8 @@ def dynamic_text_x_offset_function(argument, n: int | float) -> list[abjad.Wrapp
     )
 
 
-def dynamic_text_y_offset_function(argument, n: int | float) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def dynamic_text_y_offset(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="DynamicText",
@@ -508,10 +504,10 @@ def dynamic_text_y_offset_function(argument, n: int | float) -> list[abjad.Wrapp
     )
 
 
-def flag_extra_offset_function(
+def flag_extra_offset(
     argument, pair: tuple[int | float, int | float]
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         grob="Flag",
@@ -520,8 +516,8 @@ def flag_extra_offset_function(
     )
 
 
-def flag_stencil_false_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def flag_stencil_false(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Flag",
@@ -530,8 +526,8 @@ def flag_stencil_false_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def flag_transparent_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def flag_transparent(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Flag",
@@ -540,8 +536,8 @@ def flag_transparent_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def glissando_thickness_function(argument, n: int | float) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def glissando_thickness(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Glissando",
@@ -550,11 +546,11 @@ def glissando_thickness_function(argument, n: int | float) -> list[abjad.Wrapper
     )
 
 
-def hairpin_shorten_pair_function(
+def hairpin_shorten_pair(
     argument,
     pair: tuple[int | float, int | float],
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         "Hairpin",
@@ -563,25 +559,23 @@ def hairpin_shorten_pair_function(
     )
 
 
-def hairpin_start_shift_function(
-    argument, dynamic: str | abjad.Dynamic
-) -> list[abjad.Wrapper]:
+def hairpin_start_shift(argument, dynamic: str | abjad.Dynamic) -> list[abjad.Wrapper]:
     wrappers = []
     dynamic = abjad.Dynamic(dynamic)
     width = dynamic._to_width[str(dynamic.name)]
     extra_offset_x = -width
     hairpin_shorten_left = width - 1.25
-    wrappers_ = dynamic_text_extra_offset_function(argument, (extra_offset_x, 0))
+    wrappers_ = dynamic_text_extra_offset(argument, (extra_offset_x, 0))
     wrappers.extend(wrappers_)
-    wrappers_ = dynamic_text_x_extent_zero_function(argument)
+    wrappers_ = dynamic_text_x_extent_zero(argument)
     wrappers.extend(wrappers_)
-    wrappers_ = hairpin_shorten_pair_function(argument, (hairpin_shorten_left, 0))
+    wrappers_ = hairpin_shorten_pair(argument, (hairpin_shorten_left, 0))
     wrappers.extend(wrappers_)
     return wrappers
 
 
-def hairpin_stencil_false_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def hairpin_stencil_false(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Hairpin",
@@ -590,8 +584,8 @@ def hairpin_stencil_false_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def hairpin_to_barline_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def hairpin_to_barline(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         "Hairpin",
@@ -600,8 +594,8 @@ def hairpin_to_barline_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def hairpin_transparent_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def hairpin_transparent(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Hairpin",
@@ -610,8 +604,8 @@ def hairpin_transparent_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def laissez_vibrer_tie_down_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def laissez_vibrer_tie_down(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="LaissezVibrerTie",
@@ -620,8 +614,8 @@ def laissez_vibrer_tie_down_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def laissez_vibrer_tie_up_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def laissez_vibrer_tie_up(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="LaissezVibrerTie",
@@ -630,8 +624,8 @@ def laissez_vibrer_tie_up_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def mmrest_color_function(argument, color: str = "#red") -> list[abjad.Wrapper]:
-    return _do_override_function(
+def mmrest_color(argument, color: str = "#red") -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="MultiMeasureRest",
@@ -640,8 +634,8 @@ def mmrest_color_function(argument, color: str = "#red") -> list[abjad.Wrapper]:
     )
 
 
-def mmrest_transparent_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def mmrest_transparent(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         "MultiMeasureRest",
@@ -650,8 +644,8 @@ def mmrest_transparent_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def mmrest_text_color_function(argument, color: str = "#red") -> list[abjad.Wrapper]:
-    return _do_override_function(
+def mmrest_text_color(argument, color: str = "#red") -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="MultiMeasureRestText",
@@ -660,11 +654,11 @@ def mmrest_text_color_function(argument, color: str = "#red") -> list[abjad.Wrap
     )
 
 
-def mmrest_text_extra_offset_function(
+def mmrest_text_extra_offset(
     argument,
     pair: tuple[int | float, int | float],
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         "MultiMeasureRestText",
@@ -673,8 +667,8 @@ def mmrest_text_extra_offset_function(
     )
 
 
-def mmrest_text_padding_function(argument, n: int | float) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def mmrest_text_padding(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="MultiMeasureRestText",
@@ -683,8 +677,8 @@ def mmrest_text_padding_function(argument, n: int | float) -> list[abjad.Wrapper
     )
 
 
-def mmrest_text_parent_center_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def mmrest_text_parent_center(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="MultiMeasureRestText",
@@ -693,8 +687,8 @@ def mmrest_text_parent_center_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def mmrest_text_staff_padding_function(argument, n: int | float) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def mmrest_text_staff_padding(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="MultiMeasureRestText",
@@ -703,8 +697,8 @@ def mmrest_text_staff_padding_function(argument, n: int | float) -> list[abjad.W
     )
 
 
-def mmrest_text_transparent_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def mmrest_text_transparent(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="MultiMeasureRestText",
@@ -713,8 +707,8 @@ def mmrest_text_transparent_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def note_column_shift_function(argument, n: int | float) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def note_column_shift(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="NoteColumn",
@@ -723,8 +717,8 @@ def note_column_shift_function(argument, n: int | float) -> list[abjad.Wrapper]:
     )
 
 
-def note_head_color_function(argument, color: str) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def note_head_color(argument, color: str) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="NoteHead",
@@ -733,8 +727,8 @@ def note_head_color_function(argument, color: str) -> list[abjad.Wrapper]:
     )
 
 
-def note_head_duration_log_function(argument, n: int) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def note_head_duration_log(argument, n: int) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         "NoteHead",
@@ -743,10 +737,10 @@ def note_head_duration_log_function(argument, n: int) -> list[abjad.Wrapper]:
     )
 
 
-def note_head_extra_offset_function(
+def note_head_extra_offset(
     argument, pair: tuple[int | float, int | float]
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         grob="NoteHead",
@@ -755,8 +749,8 @@ def note_head_extra_offset_function(
     )
 
 
-def note_head_font_size_function(argument, n: int | float) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def note_head_font_size(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="NoteHead",
@@ -765,8 +759,8 @@ def note_head_font_size_function(argument, n: int | float) -> list[abjad.Wrapper
     )
 
 
-def note_head_no_ledgers_function(argument, value: bool) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def note_head_no_ledgers(argument, value: bool) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         "NoteHead",
@@ -775,8 +769,8 @@ def note_head_no_ledgers_function(argument, value: bool) -> list[abjad.Wrapper]:
     )
 
 
-def note_head_stencil_false_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def note_head_stencil_false(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="NoteHead",
@@ -785,8 +779,8 @@ def note_head_stencil_false_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def note_head_style_function(argument, string: str) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def note_head_style(argument, string: str) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         "NoteHead",
@@ -795,8 +789,8 @@ def note_head_style_function(argument, string: str) -> list[abjad.Wrapper]:
     )
 
 
-def note_head_style_cross_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def note_head_style_cross(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         "NoteHead",
@@ -805,8 +799,8 @@ def note_head_style_cross_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def note_head_style_harmonic_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def note_head_style_harmonic(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         "NoteHead",
@@ -815,8 +809,8 @@ def note_head_style_harmonic_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def note_head_style_harmonic_black_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def note_head_style_harmonic_black(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="NoteHead",
@@ -825,8 +819,8 @@ def note_head_style_harmonic_black_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def note_head_transparent_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def note_head_transparent(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="NoteHead",
@@ -835,8 +829,8 @@ def note_head_transparent_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def note_head_x_extent_zero_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def note_head_x_extent_zero(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="NoteHead",
@@ -845,10 +839,10 @@ def note_head_x_extent_zero_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def ottava_bracket_shorten_pair_function(
+def ottava_bracket_shorten_pair(
     argument, pair: tuple[int | float, int | float] = (-0.8, -0.6)
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         grob="OttavaBracket",
@@ -858,10 +852,8 @@ def ottava_bracket_shorten_pair_function(
     )
 
 
-def ottava_bracket_staff_padding_function(
-    argument, n: int | float
-) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def ottava_bracket_staff_padding(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         "OttavaBracket",
@@ -871,12 +863,12 @@ def ottava_bracket_staff_padding_function(
     )
 
 
-def rehearsal_mark_down_function(
+def rehearsal_mark_down(
     argument,
     *,
     context: str = "Score",
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         "RehearsalMark",
@@ -886,13 +878,13 @@ def rehearsal_mark_down_function(
     )
 
 
-def rehearsal_mark_extra_offset_function(
+def rehearsal_mark_extra_offset(
     argument,
     pair: tuple[int | float, int | float],
     *,
     context: str = "Score",
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         "RehearsalMark",
@@ -902,13 +894,13 @@ def rehearsal_mark_extra_offset_function(
     )
 
 
-def rehearsal_mark_padding_function(
+def rehearsal_mark_padding(
     argument,
     n: int | float,
     *,
     context: str = "Score",
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         "RehearsalMark",
@@ -918,13 +910,13 @@ def rehearsal_mark_padding_function(
     )
 
 
-def rehearsal_mark_self_alignment_x_function(
+def rehearsal_mark_self_alignment_x(
     argument,
     n: int,
     *,
     context: str = "Score",
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         "RehearsalMark",
@@ -934,13 +926,13 @@ def rehearsal_mark_self_alignment_x_function(
     )
 
 
-def rehearsal_mark_y_offset_function(
+def rehearsal_mark_y_offset(
     argument,
     n: int | float,
     *,
     context: str = "Score",
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         grob="RehearsalMark",
@@ -950,8 +942,8 @@ def rehearsal_mark_y_offset_function(
     )
 
 
-def repeat_tie_down_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def repeat_tie_down(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="RepeatTie",
@@ -960,11 +952,11 @@ def repeat_tie_down_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def repeat_tie_extra_offset_function(
+def repeat_tie_extra_offset(
     argument,
     pair: tuple[int | float, int | float],
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         "RepeatTie",
@@ -973,8 +965,8 @@ def repeat_tie_extra_offset_function(
     )
 
 
-def repeat_tie_stencil_false_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def repeat_tie_stencil_false(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="RepeatTie",
@@ -983,8 +975,8 @@ def repeat_tie_stencil_false_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def repeat_tie_transparent_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def repeat_tie_transparent(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="RepeatTie",
@@ -993,8 +985,8 @@ def repeat_tie_transparent_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def repeat_tie_up_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def repeat_tie_up(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="RepeatTie",
@@ -1003,8 +995,8 @@ def repeat_tie_up_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def rest_color_function(argument, color: str) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def rest_color(argument, color: str) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Rest",
@@ -1013,8 +1005,8 @@ def rest_color_function(argument, color: str) -> list[abjad.Wrapper]:
     )
 
 
-def rest_down_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def rest_down(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Rest",
@@ -1023,10 +1015,10 @@ def rest_down_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def rest_extra_offset_function(
+def rest_extra_offset(
     argument, pair: tuple[int | float, int | float]
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         grob="Rest",
@@ -1035,8 +1027,8 @@ def rest_extra_offset_function(
     )
 
 
-def rest_staff_position_function(argument, n: int | float) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def rest_staff_position(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         "Rest",
@@ -1045,8 +1037,8 @@ def rest_staff_position_function(argument, n: int | float) -> list[abjad.Wrapper
     )
 
 
-def rest_transparent_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def rest_transparent(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Rest",
@@ -1055,8 +1047,8 @@ def rest_transparent_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def rest_up_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def rest_up(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Rest",
@@ -1065,8 +1057,8 @@ def rest_up_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def rest_x_extent_zero_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def rest_x_extent_zero(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Rest",
@@ -1075,8 +1067,8 @@ def rest_x_extent_zero_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def script_color_function(argument, color: str = "#red") -> list[abjad.Wrapper]:
-    return _do_override_function(
+def script_color(argument, color: str = "#red") -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Script",
@@ -1085,8 +1077,8 @@ def script_color_function(argument, color: str = "#red") -> list[abjad.Wrapper]:
     )
 
 
-def script_down_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def script_down(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Script",
@@ -1095,10 +1087,10 @@ def script_down_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def script_extra_offset_function(
+def script_extra_offset(
     argument, pair: tuple[int | float, int | float]
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         grob="Script",
@@ -1107,8 +1099,8 @@ def script_extra_offset_function(
     )
 
 
-def script_padding_function(argument, number: int | float) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def script_padding(argument, number: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Script",
@@ -1117,8 +1109,8 @@ def script_padding_function(argument, number: int | float) -> list[abjad.Wrapper
     )
 
 
-def script_staff_padding_function(argument, n: int | float) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def script_staff_padding(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         "Script",
@@ -1127,8 +1119,8 @@ def script_staff_padding_function(argument, n: int | float) -> list[abjad.Wrappe
     )
 
 
-def script_up_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def script_up(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Script",
@@ -1137,8 +1129,8 @@ def script_up_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def script_x_extent_zero_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def script_x_extent_zero(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Script",
@@ -1147,8 +1139,8 @@ def script_x_extent_zero_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def slur_down_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def slur_down(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Slur",
@@ -1157,8 +1149,8 @@ def slur_down_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def slur_up_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def slur_up(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Slur",
@@ -1167,14 +1159,14 @@ def slur_up_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def span_bar_color_function(
+def span_bar_color(
     argument,
     color: str,
     *,
     after: bool = False,
     context: str = "Score",
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         after=after,
@@ -1185,14 +1177,14 @@ def span_bar_color_function(
     )
 
 
-def span_bar_extra_offset_function(
+def span_bar_extra_offset(
     argument,
     pair: tuple[int | float, int | float],
     *,
     after: bool = False,
     context: str = "Score",
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         grob="SpanBar",
@@ -1203,8 +1195,8 @@ def span_bar_extra_offset_function(
     )
 
 
-def span_bar_transparent_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def span_bar_transparent(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         "SpanBar",
@@ -1214,13 +1206,13 @@ def span_bar_transparent_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def stem_color_function(
+def stem_color(
     argument,
     color: str = "#red",
     *,
     context: str = None,
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         grob="Stem",
@@ -1230,8 +1222,8 @@ def stem_color_function(
     )
 
 
-def stem_down_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def stem_down(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         "Stem",
@@ -1240,10 +1232,10 @@ def stem_down_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def stem_extra_offset_function(
+def stem_extra_offset(
     argument, pair: tuple[int | float, int | float]
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         grob="Stem",
@@ -1252,8 +1244,8 @@ def stem_extra_offset_function(
     )
 
 
-def stem_stencil_false_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def stem_stencil_false(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Stem",
@@ -1262,8 +1254,8 @@ def stem_stencil_false_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def stem_transparent_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def stem_transparent(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Stem",
@@ -1272,10 +1264,10 @@ def stem_transparent_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def stem_tremolo_extra_offset_function(
+def stem_tremolo_extra_offset(
     argument, pair: tuple[int | float, int | float]
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         grob="StemTremolo",
@@ -1284,8 +1276,8 @@ def stem_tremolo_extra_offset_function(
     )
 
 
-def stem_up_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def stem_up(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         "Stem",
@@ -1294,8 +1286,8 @@ def stem_up_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def strict_note_spacing_off_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def strict_note_spacing_off(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="SpacingSpanner",
@@ -1305,13 +1297,13 @@ def strict_note_spacing_off_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def sustain_pedal_staff_padding_function(
+def sustain_pedal_staff_padding(
     argument,
     n: int | float,
     *,
     context: str = "Staff",
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         grob="SustainPedalLineSpanner",
@@ -1321,14 +1313,14 @@ def sustain_pedal_staff_padding_function(
     )
 
 
-def tacet_function(argument, color="#green") -> list[abjad.Wrapper]:
-    wrappers = mmrest_color_function(argument, color)
+def tacet(argument, color="#green") -> list[abjad.Wrapper]:
+    wrappers = mmrest_color(argument, color)
     _tags.wrappers(wrappers, _tags.TACET_COLORING, _tags.function_name(_frame()))
     return wrappers
 
 
-def text_script_color_function(argument, color: str = "#red") -> list[abjad.Wrapper]:
-    return _do_override_function(
+def text_script_color(argument, color: str = "#red") -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="TextScript",
@@ -1337,8 +1329,8 @@ def text_script_color_function(argument, color: str = "#red") -> list[abjad.Wrap
     )
 
 
-def text_script_down_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def text_script_down(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="TextScript",
@@ -1347,11 +1339,11 @@ def text_script_down_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def text_script_extra_offset_function(
+def text_script_extra_offset(
     argument,
     pair: tuple[int | float, int | float],
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         "TextScript",
@@ -1360,8 +1352,8 @@ def text_script_extra_offset_function(
     )
 
 
-def text_script_font_size_function(argument, n: int | float) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def text_script_font_size(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="TextScript",
@@ -1370,8 +1362,8 @@ def text_script_font_size_function(argument, n: int | float) -> list[abjad.Wrapp
     )
 
 
-def text_script_padding_function(argument, n: int | float) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def text_script_padding(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         "TextScript",
@@ -1380,11 +1372,11 @@ def text_script_padding_function(argument, n: int | float) -> list[abjad.Wrapper
     )
 
 
-def text_script_parent_alignment_x_function(
+def text_script_parent_alignment_x(
     argument,
     n: int | float,
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         "TextScript",
@@ -1393,11 +1385,11 @@ def text_script_parent_alignment_x_function(
     )
 
 
-def text_script_self_alignment_x_function(
+def text_script_self_alignment_x(
     argument,
     n: int | float,
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         "TextScript",
@@ -1406,11 +1398,11 @@ def text_script_self_alignment_x_function(
     )
 
 
-def text_script_staff_padding_function(
+def text_script_staff_padding(
     argument,
     n: int | float,
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         "TextScript",
@@ -1419,8 +1411,8 @@ def text_script_staff_padding_function(
     )
 
 
-def text_script_up_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def text_script_up(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="TextScript",
@@ -1429,8 +1421,8 @@ def text_script_up_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def text_script_x_offset_function(argument, n: int | float) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def text_script_x_offset(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="TextScript",
@@ -1439,8 +1431,8 @@ def text_script_x_offset_function(argument, n: int | float) -> list[abjad.Wrappe
     )
 
 
-def text_script_y_offset_function(argument, n: int | float) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def text_script_y_offset(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="TextScript",
@@ -1449,11 +1441,11 @@ def text_script_y_offset_function(argument, n: int | float) -> list[abjad.Wrappe
     )
 
 
-def text_spanner_left_padding_function(
+def text_spanner_left_padding(
     argument,
     n: int | float,
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         "TextSpanner",
@@ -1462,10 +1454,8 @@ def text_spanner_left_padding_function(
     )
 
 
-def text_spanner_right_padding_function(
-    argument, n: int | float
-) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def text_spanner_right_padding(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="TextSpanner",
@@ -1474,10 +1464,8 @@ def text_spanner_right_padding_function(
     )
 
 
-def text_spanner_staff_padding_function(
-    argument, n: int | float
-) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def text_spanner_staff_padding(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         "TextSpanner",
@@ -1486,8 +1474,8 @@ def text_spanner_staff_padding_function(
     )
 
 
-def text_spanner_stencil_false_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def text_spanner_stencil_false(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="TextSpanner",
@@ -1496,8 +1484,8 @@ def text_spanner_stencil_false_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def text_spanner_transparent_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def text_spanner_transparent(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="TextSpanner",
@@ -1506,11 +1494,11 @@ def text_spanner_transparent_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def text_spanner_y_offset_function(
+def text_spanner_y_offset(
     argument,
     n: int | float,
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         "TextSpanner",
@@ -1519,8 +1507,8 @@ def text_spanner_y_offset_function(
     )
 
 
-def tie_down_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def tie_down(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Tie",
@@ -1529,8 +1517,8 @@ def tie_down_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def tie_up_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def tie_up(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="Tie",
@@ -1539,10 +1527,10 @@ def tie_up_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def time_signature_extra_offset_function(
+def time_signature_extra_offset(
     argument, pair: tuple[int | float, int | float]
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         grob="TimeSignature",
@@ -1552,8 +1540,8 @@ def time_signature_extra_offset_function(
     )
 
 
-def time_signature_stencil_false_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def time_signature_stencil_false(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         "TimeSignature",
@@ -1563,8 +1551,8 @@ def time_signature_stencil_false_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def time_signature_transparent_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def time_signature_transparent(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="TimeSignature",
@@ -1574,10 +1562,8 @@ def time_signature_transparent_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def trill_spanner_staff_padding_function(
-    argument, n: int | float
-) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def trill_spanner_staff_padding(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="TrillSpanner",
@@ -1586,8 +1572,8 @@ def trill_spanner_staff_padding_function(
     )
 
 
-def tuplet_bracket_down_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def tuplet_bracket_down(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         "TupletBracket",
@@ -1596,10 +1582,10 @@ def tuplet_bracket_down_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def tuplet_bracket_extra_offset_function(
+def tuplet_bracket_extra_offset(
     argument, pair: tuple[int | float, int | float]
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         grob="TupletBracket",
@@ -1608,10 +1594,10 @@ def tuplet_bracket_extra_offset_function(
     )
 
 
-def tuplet_bracket_outside_staff_priority_function(
+def tuplet_bracket_outside_staff_priority(
     argument, n: int | float
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         grob="TupletBracket",
@@ -1620,8 +1606,8 @@ def tuplet_bracket_outside_staff_priority_function(
     )
 
 
-def tuplet_bracket_padding_function(argument, n: int | float) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def tuplet_bracket_padding(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         "TupletBracket",
@@ -1630,11 +1616,11 @@ def tuplet_bracket_padding_function(argument, n: int | float) -> list[abjad.Wrap
     )
 
 
-def tuplet_bracket_shorten_pair_function(
+def tuplet_bracket_shorten_pair(
     argument,
     pair: tuple[int | float, int | float],
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         "TupletBracket",
@@ -1643,11 +1629,11 @@ def tuplet_bracket_shorten_pair_function(
     )
 
 
-def tuplet_bracket_staff_padding_function(
+def tuplet_bracket_staff_padding(
     argument,
     n: int | float,
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         "TupletBracket",
@@ -1656,8 +1642,8 @@ def tuplet_bracket_staff_padding_function(
     )
 
 
-def tuplet_bracket_transparent_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def tuplet_bracket_transparent(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="TupletBracket",
@@ -1666,8 +1652,8 @@ def tuplet_bracket_transparent_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def tuplet_bracket_up_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def tuplet_bracket_up(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="TupletBracket",
@@ -1676,8 +1662,8 @@ def tuplet_bracket_up_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def tuplet_number_denominator_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def tuplet_number_denominator(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="TupletNumber",
@@ -1686,10 +1672,10 @@ def tuplet_number_denominator_function(argument) -> list[abjad.Wrapper]:
     )
 
 
-def tuplet_number_extra_offset_function(
+def tuplet_number_extra_offset(
     argument, pair: tuple[int | float, int | float]
 ) -> list[abjad.Wrapper]:
-    return _do_override_function(
+    return _do_override(
         _frame(),
         argument,
         grob="TupletNumber",
@@ -1698,8 +1684,8 @@ def tuplet_number_extra_offset_function(
     )
 
 
-def tuplet_number_text_function(argument, string: str) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def tuplet_number_text(argument, string: str) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="TupletNumber",
@@ -1708,8 +1694,8 @@ def tuplet_number_text_function(argument, string: str) -> list[abjad.Wrapper]:
     )
 
 
-def tuplet_number_transparent_function(argument) -> list[abjad.Wrapper]:
-    return _do_override_function(
+def tuplet_number_transparent(argument) -> list[abjad.Wrapper]:
+    return _do_override(
         _frame(),
         argument,
         grob="TupletNumber",

@@ -19,14 +19,14 @@ commands.py examles
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
-    >>> _ = baca.bcps_function(
+    >>> _ = baca.bcps(
     ...     voice,
     ...     [(1, 5), (2, 5)],
     ...     abjad.Tweak(r"- \tweak color #red"),
     ...     abjad.Tweak(r"- \tweak staff-padding 2.5"),
     ... )
-    >>> _ = baca.pitches_function(voice, "E4 F4")
-    >>> _ = baca.script_staff_padding_function(voice, 5)
+    >>> _ = baca.pitches(voice, "E4 F4")
+    >>> _ = baca.script_staff_padding(voice, 5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -207,11 +207,11 @@ commands.py examles
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
-    >>> _ = baca.bcps_function(voice[:7], bcps=[(1, 5), (2, 5)])
-    >>> _ = baca.bcps_function(voice[7:], bcps=[(3, 5), (4, 5)])
-    >>> _ = baca.pitches_function(voice, "E4 F4")
-    >>> _ = baca.script_staff_padding_function(voice, 5.5)
-    >>> _ = baca.text_spanner_staff_padding_function(voice, 2.5)
+    >>> _ = baca.bcps(voice[:7], bcps=[(1, 5), (2, 5)])
+    >>> _ = baca.bcps(voice[7:], bcps=[(3, 5), (4, 5)])
+    >>> _ = baca.pitches(voice, "E4 F4")
+    >>> _ = baca.script_staff_padding(voice, 5.5)
+    >>> _ = baca.text_spanner_staff_padding(voice, 2.5)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -348,7 +348,7 @@ commands.py examles
 
     Effort dynamics:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -357,8 +357,8 @@ commands.py examles
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.dynamic_function(baca.select.pleaf(container, 0), '"f"')
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.dynamic(baca.select.pleaf(container, 0), '"f"')
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(
@@ -434,12 +434,12 @@ commands.py examles
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
-    >>> _ = baca.pitches_function(voice, "E4 D5 F4 C5 G4 F5")
+    >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
     >>> pleaf = baca.select.pleaf(voice, 0)
-    >>> _ = baca.dynamic_function(pleaf, "p")
-    >>> _ = baca.dynamic_function(pleaf, "<")
-    >>> _ = baca.dynamic_function(baca.select.pleaf(voice, -1), "!")
-    >>> _ = baca.dls_staff_padding_function(voice, 5)
+    >>> _ = baca.dynamic(pleaf, "p")
+    >>> _ = baca.dynamic(pleaf, "<")
+    >>> _ = baca.dynamic(baca.select.pleaf(voice, -1), "!")
+    >>> _ = baca.dls_staff_padding(voice, 5)
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -530,13 +530,13 @@ commands.py examles
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
-    >>> _ = baca.pitches_function(voice, "E4 D5 F4 C5 G4 F5")
-    >>> _ = baca.dynamic_function(
+    >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
+    >>> _ = baca.dynamic(
     ...     baca.select.pleaf(voice, 0),
     ...     "p",
     ...     abjad.Tweak(r"- \tweak extra-offset #'(-4 . 0)"),
     ... )
-    >>> _ = baca.dls_staff_padding_function(voice, 5)
+    >>> _ = baca.dls_staff_padding(voice, 5)
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -625,8 +625,8 @@ commands.py examles
     >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
-    >>> _ = baca.pitches_function(voice, "E4 F4")
-    >>> baca.force_accidental_function(
+    >>> _ = baca.pitches(voice, "E4 F4")
+    >>> baca.force_accidental(
     ...     baca.select.pleaves(voice)[:2], tag=baca.tags.NOT_PARTS
     ... )
 
@@ -698,8 +698,8 @@ commands.py examles
     >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
-    >>> _ = baca.short_instrument_name_function(voice[0], "Fl.", manifests)
-    >>> _ = baca.pitches_function(voice, "E4 F4")
+    >>> _ = baca.short_instrument_name(voice[0], "Fl.", manifests)
+    >>> _ = baca.pitches(voice, "E4 F4")
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -767,9 +767,9 @@ commands.py examles
     >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
-    >>> _ = baca.clef_function(voice[0], "percussion")
-    >>> _ = baca.staff_lines_function(voice[0], 1)
-    >>> _ = baca.staff_positions_function(voice, [-2, -1, 0, 1, 2])
+    >>> _ = baca.clef(voice[0], "percussion")
+    >>> _ = baca.staff_lines(voice[0], 1)
+    >>> _ = baca.staff_positions(voice, [-2, -1, 0, 1, 2])
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -842,9 +842,9 @@ commands.py examles
     >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
-    >>> _ = baca.clef_function(voice[0], "bass")
-    >>> _ = baca.staff_lines_function(voice[0], 1)
-    >>> _ = baca.staff_positions_function(voice, [-2, -1, 0, 1, 2])
+    >>> _ = baca.clef(voice[0], "bass")
+    >>> _ = baca.staff_lines(voice[0], 1)
+    >>> _ = baca.staff_positions(voice, [-2, -1, 0, 1, 2])
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -918,9 +918,9 @@ commands.py examles
     >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
-    >>> _ = baca.clef_function(voice[0], "percussion")
-    >>> _ = baca.staff_lines_function(voice[0], 2)
-    >>> _ = baca.staff_positions_function(voice, [-2, -1, 0, 1, 2])
+    >>> _ = baca.clef(voice[0], "percussion")
+    >>> _ = baca.staff_lines(voice[0], 2)
+    >>> _ = baca.staff_positions(voice, [-2, -1, 0, 1, 2])
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -992,9 +992,9 @@ commands.py examles
     >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
-    >>> _ = baca.clef_function(voice[0], "bass")
-    >>> _ = baca.staff_lines_function(voice[0], 2)
-    >>> _ = baca.staff_positions_function(voice, [-2, -1, 0, 1, 2])
+    >>> _ = baca.clef(voice[0], "bass")
+    >>> _ = baca.staff_lines(voice[0], 2)
+    >>> _ = baca.staff_positions(voice, [-2, -1, 0, 1, 2])
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -1066,9 +1066,9 @@ commands.py examles
     >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
-    >>> _ = baca.staff_lines_function(voice[0], 2)
-    >>> _ = baca.staff_positions_function(voice, [-2, -1, 0, 1, 2])
-    >>> _ = baca.clef_function(voice[0], "bass")
+    >>> _ = baca.staff_lines(voice[0], 2)
+    >>> _ = baca.staff_positions(voice, [-2, -1, 0, 1, 2])
+    >>> _ = baca.clef(voice[0], "bass")
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -1127,7 +1127,7 @@ commands.py examles
 
     Colors leaves:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -1136,9 +1136,9 @@ commands.py examles
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> baca.color_function(abjad.select.leaves(container))
+    >>> baca.color(abjad.select.leaves(container))
     >>> rmakers.unbeam_rfunction(container)
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1210,7 +1210,7 @@ commands.py examles
     ...     result = abjad.select.tuplet(argument, 1)
     ...     result = abjad.select.leaves(result)
     ...     return result
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -1219,9 +1219,9 @@ commands.py examles
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> baca.color_function(color_selector(container))
+    >>> baca.color(color_selector(container))
     >>> rmakers.unbeam_rfunction(container)
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1295,7 +1295,7 @@ commands.py examles
     >>> score["Music.1"].extend(music)
     >>> music = abjad.Container("c'4 d' e' f'")[:]
     >>> score["Music.2"].extend(music)
-    >>> _ = baca.cross_staff_function(baca.select.pleaves(score["Music.2"])[-2:])
+    >>> _ = baca.cross_staff(baca.select.pleaves(score["Music.2"])[-2:])
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -1367,12 +1367,12 @@ commands.py examles
     >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
-    >>> _ = baca.pitch_function(voice, "C5")
+    >>> _ = baca.pitch(voice, "C5")
     >>> notes = abjad.select.notes(voice)
-    >>> _ = baca.note_head_style_harmonic_function(notes[0])
-    >>> _ = baca.note_head_style_harmonic_function(notes[2])
-    >>> baca.finger_pressure_transition_function(notes[:2])
-    >>> baca.finger_pressure_transition_function(notes[2:])
+    >>> _ = baca.note_head_style_harmonic(notes[0])
+    >>> _ = baca.note_head_style_harmonic(notes[2])
+    >>> baca.finger_pressure_transition(notes[:2])
+    >>> baca.finger_pressure_transition(notes[2:])
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -1451,8 +1451,8 @@ commands.py examles
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
-    >>> _ = baca.pitches_function(voice, "E4 D5 F4 E5 G4 F5")
-    >>> baca.glissando_function(
+    >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
+    >>> baca.glissando(
     ...     voice,
     ...     abjad.Tweak(r"- \tweak color #red"),
     ... )
@@ -1559,8 +1559,8 @@ commands.py examles
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
-    >>> _ = baca.pitches_function(voice, "E4 D5 F4 E5 G4 F5")
-    >>> baca.glissando_function(
+    >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
+    >>> baca.glissando(
     ...     voice,
     ...     (abjad.Tweak(r"- \tweak color #red"), 0),
     ...     (abjad.Tweak(r"- \tweak color #red"), -1),
@@ -1658,8 +1658,8 @@ commands.py examles
     >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
-    >>> _ = baca.pitch_function(voice, "C5")
-    >>> _ = baca.invisible_music_function(baca.select.leaves(voice)[1:-1])
+    >>> _ = baca.pitch(voice, "C5")
+    >>> _ = baca.invisible_music(baca.select.leaves(voice)[1:-1])
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -1716,7 +1716,7 @@ commands.py examles
 
     Labels pitch names:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -1726,7 +1726,7 @@ commands.py examles
     ... )
     >>> rmakers.beam_rfunction(container)
     >>> abjad.label.with_pitches(container, locale="us")
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1808,8 +1808,8 @@ commands.py examles
     >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
-    >>> _ = baca.assign_part_function(voice, baca.parts.PartAssignment("Music"))
-    >>> _ = baca.pitch_function(voice, "E4")
+    >>> _ = baca.assign_part(voice, baca.parts.PartAssignment("Music"))
+    >>> _ = baca.pitch(voice, "E4")
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -1871,7 +1871,7 @@ commands.py examles
     >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
-    >>> _ = baca.assign_part_function(voice, baca.parts.PartAssignment("Flute.Music"))
+    >>> _ = baca.assign_part(voice, baca.parts.PartAssignment("Flute.Music"))
     Traceback (most recent call last):
         ...
     Exception: Music does not allow Flute.Music part assignment:

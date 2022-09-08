@@ -22,7 +22,7 @@ from .figures import *
 from .indicatorclasses import *
 from .indicatorcommands import *
 from .interpret import (
-    append_anchor_note_function,
+    append_anchor_note,
     label_moment_numbers,
     label_stage_numbers,
     reapply,
@@ -33,7 +33,7 @@ from .layout import *
 from .lilypond import file
 from .memento import *
 from .overridecommands import *
-from .othercommands import assign_part_function
+from .othercommands import assign_part
 from .parts import Part, PartAssignment
 from .path import *
 from .pcollections import (
@@ -45,34 +45,34 @@ from .pcollections import (
     RegistrationComponent,
 )
 from .piecewisecommands import (
-    bow_speed_spanner_function,
-    circle_bow_spanner_function,
-    clb_spanner_function,
-    covered_spanner_function,
-    damp_spanner_function,
-    hairpin_function,
-    half_clt_spanner_function,
-    material_annotation_spanner_function,
-    metric_modulation_spanner_function,
+    bow_speed_spanner,
+    circle_bow_spanner,
+    clb_spanner,
+    covered_spanner,
+    damp_spanner,
+    hairpin,
+    half_clt_spanner,
+    material_annotation_spanner,
+    metric_modulation_spanner,
     parse_hairpin_descriptor,
-    pizzicato_spanner_function,
-    scp_spanner_function,
-    spazzolato_spanner_function,
-    string_number_spanner_function,
-    tasto_spanner_function,
-    text_spanner_function,
-    vibrato_spanner_function,
-    xfb_spanner_function,
+    pizzicato_spanner,
+    scp_spanner,
+    spazzolato_spanner,
+    string_number_spanner,
+    tasto_spanner,
+    text_spanner,
+    vibrato_spanner,
+    xfb_spanner,
 )
 from .pitchcommands import *
 from .rhythmcommands import *
 from .spannercommands import (
-    beam_function,
-    ottava_function,
-    ottava_bassa_function,
-    slur_function,
-    sustain_pedal_function,
-    trill_spanner_function,
+    beam,
+    ottava,
+    ottava_bassa,
+    slur,
+    sustain_pedal,
+    trill_spanner,
 )
 
 if sys.version_info[:2] < (3, 10):

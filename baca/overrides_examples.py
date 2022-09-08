@@ -23,8 +23,8 @@ overrides.py examples.
     >>> music = stack(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
-    >>> _ = baca.pitches_function(voice, "E4 D5 F4 E5 G4 F5")
-    >>> _ = baca.bar_line_transparent_function(
+    >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
+    >>> _ = baca.bar_line_transparent(
     ...         abjad.select.group_by_measure(voice)[1]
     ... )
     >>> _, _ = baca.interpret.section(
@@ -95,17 +95,17 @@ overrides.py examples.
 
     Overrides beam positions:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1],
     ...     16,
     ...     affix=baca.rests_around([2], [4]),
     ...     treatments=[-1],
     ... )
-    >>> _ = baca.stem_up_function(baca.select.pleaves(container))
+    >>> _ = baca.stem_up(baca.select.pleaves(container))
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.beam_positions_function(container, 6)
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 4)
+    >>> _ = baca.beam_positions(container, 6)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 4)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -158,7 +158,7 @@ overrides.py examples.
 
     Overrides dynamic line spanner staff padding on all leaves:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -167,15 +167,15 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.dls_staff_padding_function(container, 4)
+    >>> _ = baca.dls_staff_padding(container, 4)
     >>> for tuplet in baca.select.tuplets(container):
-    ...     _ = baca.hairpin_function(
+    ...     _ = baca.hairpin(
     ...         baca.select.tleaves(tuplet),
     ...         "p < f",
     ...         remove_length_1_spanner_start=True,
     ...     )
 
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -243,7 +243,7 @@ overrides.py examples.
 
     Up-overrides dynamic line spanner direction on all leaves:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -252,15 +252,15 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.dls_up_function(container)
+    >>> _ = baca.dls_up(container)
     >>> for tuplet in baca.select.tuplets(container):
-    ...     _ = baca.hairpin_function(
+    ...     _ = baca.hairpin(
     ...         baca.select.tleaves(tuplet),
     ...         "p < f",
     ...         remove_length_1_spanner_start=True,
     ...     )
 
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -334,7 +334,7 @@ overrides.py examples.
     ...     result = baca.select.phead(result, 0)
     ...     return result
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -343,11 +343,11 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.dynamic_function(baca.select.pleaf(container, 0), "p")
-    >>> _ = baca.dynamic_function(selector(container), "f")
-    >>> _ = baca.dynamic_text_extra_offset_function(
+    >>> _ = baca.dynamic(baca.select.pleaf(container, 0), "p")
+    >>> _ = baca.dynamic(selector(container), "f")
+    >>> _ = baca.dynamic_text_extra_offset(
     ...     baca.select.pleaf(container, 0), (-3, 0))
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -422,7 +422,7 @@ overrides.py examples.
     >>> voice = score["Music"]
     >>> music = baca.make_mmrests(accumulator.get(), head="Music")
     >>> score["Music"].extend(music)
-    >>> _ = baca.mmrest_color_function(
+    >>> _ = baca.mmrest_color(
     ...     baca.select.mmrests(voice)[1:],
     ...     "#(x11-color 'DarkOrchid)",
     ... )
@@ -505,11 +505,11 @@ overrides.py examples.
     >>> voice = score["Music"]
     >>> music = baca.make_mmrests(accumulator.get(), head="Music")
     >>> score["Music"].extend(music)
-    >>> _ = baca.markup_function(
+    >>> _ = baca.markup(
     ...     baca.select.mmrest(voice, 2),
     ...     r"\baca-boxed-markup still",
     ... )
-    >>> _ = baca.mmrest_text_color_function(baca.select.mmrests(voice)[1:], "#red")
+    >>> _ = baca.mmrest_text_color(baca.select.mmrests(voice)[1:], "#red")
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -590,11 +590,11 @@ overrides.py examples.
     >>> voice = score["Music"]
     >>> music = baca.make_mmrests(accumulator.get(), head="Music")
     >>> score["Music"].extend(music)
-    >>> _ = baca.markup_function(
+    >>> _ = baca.markup(
     ...     baca.select.mmrest(voice, 2),
     ...     r"\baca-boxed-markup still",
     ... )
-    >>> _ = baca.mmrest_text_extra_offset_function(
+    >>> _ = baca.mmrest_text_extra_offset(
     ...     baca.select.mmrests(voice)[1:], (0, 2))
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -676,11 +676,11 @@ overrides.py examples.
     >>> voice = score["Music"]
     >>> music = baca.make_mmrests(accumulator.get(), head="Music")
     >>> score["Music"].extend(music)
-    >>> _ = baca.markup_function(
+    >>> _ = baca.markup(
     ...     baca.select.mmrest(voice, 2),
     ...     r"\baca-boxed-markup still",
     ... )
-    >>> _ = baca.mmrest_text_padding_function(baca.select.mmrests(voice)[1:], 2)
+    >>> _ = baca.mmrest_text_padding(baca.select.mmrests(voice)[1:], 2)
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -761,11 +761,11 @@ overrides.py examples.
     >>> voice = score["Music"]
     >>> music = baca.make_mmrests(accumulator.get(), head="Music")
     >>> score["Music"].extend(music)
-    >>> _ = baca.markup_function(
+    >>> _ = baca.markup(
     ...     baca.select.mmrest(voice, 2),
     ...     r"\baca-boxed-markup still",
     ... )
-    >>> _ = baca.mmrest_text_parent_center_function(baca.select.mmrests(voice)[1:])
+    >>> _ = baca.mmrest_text_parent_center(baca.select.mmrests(voice)[1:])
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -846,11 +846,11 @@ overrides.py examples.
     >>> voice = score["Music"]
     >>> music = baca.make_mmrests(accumulator.get(), head="Music")
     >>> score["Music"].extend(music)
-    >>> _ = baca.markup_function(
+    >>> _ = baca.markup(
     ...     baca.select.mmrest(voice, 2),
     ...     r"\baca-boxed-markup still",
     ... )
-    >>> _ = baca.mmrest_text_staff_padding_function(baca.select.mmrests(voice)[1:], 2)
+    >>> _ = baca.mmrest_text_staff_padding(baca.select.mmrests(voice)[1:], 2)
     >>> _, _ = baca.interpret.section(
     ...     score,
     ...     {},
@@ -920,7 +920,7 @@ overrides.py examples.
 
     Overrides note-head style on all pitched leaves:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -929,8 +929,8 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.note_head_style_cross_function(baca.select.pleaves(container))
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.note_head_style_cross(baca.select.pleaves(container))
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -991,7 +991,7 @@ overrides.py examples.
 
     Overrides note-head style on all PLTs:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -1000,8 +1000,8 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.note_head_style_harmonic_function(baca.select.pleaves(container))
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.note_head_style_harmonic(baca.select.pleaves(container))
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1062,7 +1062,7 @@ overrides.py examples.
 
     Overrides repeat tie direction on pitched leaves:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[11, 11, 12], [11, 11, 11], [11]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -1072,12 +1072,12 @@ overrides.py examples.
     ... )
     >>> rmakers.beam_rfunction(container)
     >>> for qrun in baca.select.qruns(container):
-    ...     _ = baca.repeat_tie_function(qrun[1:])
+    ...     _ = baca.repeat_tie(qrun[1:])
 
     >>> pleaves = baca.select.pleaves(container)
-    >>> _ = baca.repeat_tie_down_function(pleaves)
-    >>> _ = baca.stem_up_function(pleaves)
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.repeat_tie_down(pleaves)
+    >>> _ = baca.stem_up(pleaves)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1141,7 +1141,7 @@ overrides.py examples.
 
     Overrides repeat tie direction on all leaves:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[11, 11, 12], [11, 11, 11], [11]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -1151,12 +1151,12 @@ overrides.py examples.
     ... )
     >>> rmakers.beam_rfunction(container)
     >>> for qrun in baca.select.qruns(container):
-    ...     _ = baca.repeat_tie_function(qrun[1:])
+    ...     _ = baca.repeat_tie(qrun[1:])
 
     >>> pleaves = baca.select.pleaves(container)
-    >>> _ = baca.repeat_tie_up_function(pleaves)
-    >>> _ = baca.stem_down_function(pleaves)
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.repeat_tie_up(pleaves)
+    >>> _ = baca.stem_down(pleaves)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1220,7 +1220,7 @@ overrides.py examples.
 
     Down-overrides direction of rests:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -1229,8 +1229,8 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.rest_down_function(abjad.select.rests(container))
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.rest_down(abjad.select.rests(container))
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1291,7 +1291,7 @@ overrides.py examples.
 
     Overrides rest position:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -1300,8 +1300,8 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.rest_staff_position_function(container, -6)
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.rest_staff_position(container, -6)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1362,7 +1362,7 @@ overrides.py examples.
 
     Makes rests transparent:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -1371,8 +1371,8 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.rest_transparent_function(container)
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.rest_transparent(container)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1433,7 +1433,7 @@ overrides.py examples.
 
     Up-overrides rest direction:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -1442,8 +1442,8 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.rest_up_function(abjad.select.rests(container))
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.rest_up(abjad.select.rests(container))
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1504,7 +1504,7 @@ overrides.py examples.
 
     Overrides script color on all leaves:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -1513,9 +1513,9 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.accent_function(baca.select.pheads(container))
-    >>> _ = baca.script_color_function(container, "#red")
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.accent(baca.select.pheads(container))
+    >>> _ = baca.script_color(container, "#red")
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1585,7 +1585,7 @@ overrides.py examples.
 
     Down-overrides script direction on all leaves:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -1594,9 +1594,9 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.accent_function(baca.select.pheads(container))
-    >>> _ = baca.script_down_function(container)
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.accent(baca.select.pheads(container))
+    >>> _ = baca.script_down(container)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1666,7 +1666,7 @@ overrides.py examples.
 
     Overrides script extra offset on leaf 1:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -1675,9 +1675,9 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.accent_function(baca.select.pheads(container))
-    >>> _ = baca.script_extra_offset_function(abjad.select.leaf(container, 1), (-1.5, 0))
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.accent(baca.select.pheads(container))
+    >>> _ = baca.script_extra_offset(abjad.select.leaf(container, 1), (-1.5, 0))
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1746,7 +1746,7 @@ overrides.py examples.
 
     Up-overrides script direction on all leaves:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -1755,9 +1755,9 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.accent_function(baca.select.pheads(container))
-    >>> _ = baca.script_up_function(container)
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.accent(baca.select.pheads(container))
+    >>> _ = baca.script_up(container)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1833,7 +1833,7 @@ overrides.py examples.
     ...     selection = abjad.select.nontrivial(items)
     ...     return selection
     ...
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -1843,10 +1843,10 @@ overrides.py examples.
     ... )
     >>> rmakers.beam_rfunction(container)
     >>> for item in selector(container):
-    ...     _ = baca.slur_function(item)
+    ...     _ = baca.slur(item)
 
-    >>> _ = baca.slur_down_function(container)
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.slur_down(container)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -1918,7 +1918,7 @@ overrides.py examples.
     ...     return selection
     ...
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -1928,12 +1928,12 @@ overrides.py examples.
     ... )
     >>> rmakers.beam_rfunction(container)
     >>> for item in selector(container):
-    ...     _ = baca.slur_function(item)
+    ...     _ = baca.slur(item)
 
-    >>> _ = baca.slur_up_function(container)
-    >>> _ = baca.stem_down_function(baca.select.pleaves(container))
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
-    >>> _ = baca.tuplet_bracket_down_function(container)
+    >>> _ = baca.slur_up(container)
+    >>> _ = baca.stem_down(baca.select.pleaves(container))
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
+    >>> _ = baca.tuplet_bracket_down(container)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -2002,7 +2002,7 @@ overrides.py examples.
 
     Overrides stem color on pitched leaves:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -2011,8 +2011,8 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.stem_color_function(baca.select.pleaves(container), "#red")
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.stem_color(baca.select.pleaves(container), "#red")
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -2073,7 +2073,7 @@ overrides.py examples.
 
     Down-overrides stem direction pitched leaves:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -2082,8 +2082,8 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.stem_down_function(baca.select.pleaves(container))
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.stem_down(baca.select.pleaves(container))
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -2144,7 +2144,7 @@ overrides.py examples.
 
     Up-overrides stem direction on pitched leaves:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -2153,8 +2153,8 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.stem_up_function(baca.select.pleaves(container))
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.stem_up(baca.select.pleaves(container))
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -2215,7 +2215,7 @@ overrides.py examples.
 
     Overrides sustain pedal staff padding:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -2225,10 +2225,10 @@ overrides.py examples.
     ... )
     >>> rmakers.beam_rfunction(container)
     >>> for tuplet in baca.select.tuplets(container):
-    ...     _ = baca.sustain_pedal_function(tuplet)
+    ...     _ = baca.sustain_pedal(tuplet)
 
-    >>> _ = baca.sustain_pedal_staff_padding_function(container, 4)
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.sustain_pedal_staff_padding(container, 4)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -2299,7 +2299,7 @@ overrides.py examples.
     ...     result = abjad.select.tuplet(argument, 1)
     ...     result = baca.select.phead(result, 0)
     ...     return result
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -2308,10 +2308,10 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.markup_function(baca.select.pleaf(container, 0), r'\markup "più mosso"')
-    >>> _ = baca.markup_function(selector(container), r'\markup "lo stesso tempo"')
-    >>> _ = baca.text_script_color_function(container, "#red")
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.markup(baca.select.pleaf(container, 0), r'\markup "più mosso"')
+    >>> _ = baca.markup(selector(container), r'\markup "lo stesso tempo"')
+    >>> _ = baca.text_script_color(container, "#red")
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -2378,7 +2378,7 @@ overrides.py examples.
     ...     result = abjad.select.tuplet(argument, 1)
     ...     result = baca.select.phead(result, 0)
     ...     return result
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -2387,10 +2387,10 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.markup_function(baca.select.pleaf(container, 0), r'\markup "più mosso"')
-    >>> _ = baca.markup_function(selector(container), r'\markup "lo stesso tempo"')
-    >>> _ = baca.text_script_down_function(container)
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.markup(baca.select.pleaf(container, 0), r'\markup "più mosso"')
+    >>> _ = baca.markup(selector(container), r'\markup "lo stesso tempo"')
+    >>> _ = baca.text_script_down(container)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -2457,7 +2457,7 @@ overrides.py examples.
     ...     result = abjad.select.tuplet(argument, 1)
     ...     result = baca.select.phead(result, 0)
     ...     return result
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -2466,10 +2466,10 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.markup_function(baca.select.pleaf(container, 0), r'\markup "più mosso"')
-    >>> _ = baca.markup_function(selector(container), r'\markup "lo stesso tempo"')
-    >>> _ = baca.text_script_padding_function(container, 4)
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.markup(baca.select.pleaf(container, 0), r'\markup "più mosso"')
+    >>> _ = baca.markup(selector(container), r'\markup "lo stesso tempo"')
+    >>> _ = baca.text_script_padding(container, 4)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -2536,7 +2536,7 @@ overrides.py examples.
     ...     result = abjad.select.tuplet(argument, 1)
     ...     result = baca.select.phead(result, 0)
     ...     return result
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -2545,10 +2545,10 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.markup_function(baca.select.pleaf(container, 0), r'\markup "più mosso"')
-    >>> _ = baca.markup_function(selector(container), r'\markup "lo stesso tempo"')
-    >>> _ = baca.text_script_staff_padding_function(container, n=4)
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.markup(baca.select.pleaf(container, 0), r'\markup "più mosso"')
+    >>> _ = baca.markup(selector(container), r'\markup "lo stesso tempo"')
+    >>> _ = baca.text_script_staff_padding(container, n=4)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -2617,7 +2617,7 @@ overrides.py examples.
     ...     result = abjad.select.tuplet(argument, 1)
     ...     result = baca.select.phead(result, 0)
     ...     return result
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -2626,10 +2626,10 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.markup_function(baca.select.pleaf(container, 0), r'\markup "più mosso"')
-    >>> _ = baca.markup_function(selector(container), r'\markup "lo stesso tempo"')
-    >>> _ = baca.text_script_up_function(container)
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.markup(baca.select.pleaf(container, 0), r'\markup "più mosso"')
+    >>> _ = baca.markup(selector(container), r'\markup "lo stesso tempo"')
+    >>> _ = baca.text_script_up(container)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -2692,7 +2692,7 @@ overrides.py examples.
 
     Overrides text spanner staff padding on all trimmed leaves:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -2701,10 +2701,10 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.text_spanner_staff_padding_function(container, 6)
-    >>> _ = baca.text_script_staff_padding_function(container, 6)
-    >>> _ = baca.text_spanner_function(baca.select.tleaves(container), "pont. => ord.")
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.text_spanner_staff_padding(container, 6)
+    >>> _ = baca.text_script_staff_padding(container, 6)
+    >>> _ = baca.text_spanner(baca.select.tleaves(container), "pont. => ord.")
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(
@@ -2776,7 +2776,7 @@ overrides.py examples.
 
     Overrides tie direction on pitched leaves:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[11, 11, 12], [11, 11, 11], [11]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -2785,10 +2785,10 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.stem_up_function(baca.select.pleaves(container))
-    >>> _ = baca.tie_function(baca.select.pleaf(container, 0))
-    >>> _ = baca.tie_down_function(baca.select.pleaves(container))
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.stem_up(baca.select.pleaves(container))
+    >>> _ = baca.tie(baca.select.pleaf(container, 0))
+    >>> _ = baca.tie_down(baca.select.pleaves(container))
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -2848,7 +2848,7 @@ overrides.py examples.
 
     Overrides tie direction on pitched leaves:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[11, 11, 12], [11, 11, 11], [11]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -2857,9 +2857,9 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.stem_down_function(baca.select.pleaves(container))
-    >>> _ = baca.tie_up_function(baca.select.pleaves(container))
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.stem_down(baca.select.pleaves(container))
+    >>> _ = baca.tie_up(baca.select.pleaves(container))
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -2918,7 +2918,7 @@ overrides.py examples.
 
     Overrides time signature extra offset on leaf 0:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -2927,9 +2927,9 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.time_signature_extra_offset_function(
+    >>> _ = baca.time_signature_extra_offset(
     ...     abjad.select.rest(container, 0), (-6, 0))
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -2989,7 +2989,7 @@ overrides.py examples.
 
     Makes all time signatures transparent:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -2998,8 +2998,8 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.time_signature_transparent_function(container)
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.time_signature_transparent(container)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -3060,7 +3060,7 @@ overrides.py examples.
 
     Overrides tuplet bracket direction on leaves:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -3069,8 +3069,8 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
-    >>> _ = baca.tuplet_bracket_down_function(container)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
+    >>> _ = baca.tuplet_bracket_down(container)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -3131,7 +3131,7 @@ overrides.py examples.
 
     Overrides tuplet bracket extra offset on leaf 0:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -3140,9 +3140,9 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.tuplet_bracket_extra_offset_function(
+    >>> _ = baca.tuplet_bracket_extra_offset(
     ...     abjad.select.leaf(container, 0), (-1, 0))
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -3202,7 +3202,7 @@ overrides.py examples.
 
     Overrides tuplet bracket staff padding on leaves:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -3211,7 +3211,7 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -3270,7 +3270,7 @@ overrides.py examples.
 
     Override tuplet bracket direction on leaves:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -3279,8 +3279,8 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
-    >>> _ = baca.tuplet_bracket_up_function(container)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
+    >>> _ = baca.tuplet_bracket_up(container)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -3341,7 +3341,7 @@ overrides.py examples.
 
     Overrides tuplet number extra offset on leaf 0:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -3350,8 +3350,8 @@ overrides.py examples.
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
-    >>> _ = baca.tuplet_number_extra_offset_function(
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
+    >>> _ = baca.tuplet_number_extra_offset(
     ...     abjad.select.leaf(container, 0), (-1, 0))
     >>> selection = container[:]
     >>> container[:] = []

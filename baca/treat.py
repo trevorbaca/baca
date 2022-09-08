@@ -139,10 +139,10 @@ def _attach_latent_indicator_alert(
             assert status == "redundant", repr(status)
             tag = _tags.REDUNDANT_INSTRUMENT_ALERT
         left, right = "(", ")"
-        markup_function = _status_to_instrument_markup_function[status]
+        markup = _status_to_instrument_markup[status]
         assert isinstance(tag, abjad.Tag), repr(tag)
         string = f"{left}{key}{right}"
-        string = rf'\{markup_function} "{string}"'
+        string = rf'\{markup} "{string}"'
         markup = abjad.Markup(string)
         tag = tag.append(_tags.function_name(_frame()))
         abjad.attach(
@@ -240,13 +240,13 @@ _status_to_color = {
 }
 
 
-_status_to_instrument_markup_function = {
+_status_to_instrument_markup = {
     "explicit": "baca-explicit-instrument-markup",
     "reapplied": "baca-reapplied-instrument-markup",
     "redundant": "baca-redundant-instrument-markup",
 }
 
-_status_to_short_instrument_name_markup_function = {
+_status_to_short_instrument_name_markup = {
     "explicit": "baca-explicit-short-instrument-name-markup",
     "reapplied": "baca-reapplied-short-instrument-name-markup",
     "redundant": "baca-redundant-short-instrument-name-markup",

@@ -1,6 +1,6 @@
 import sphinx_rtd_theme
 
-add_function_parentheses = True
+add_parentheses = True
 autodoc_member_order = "groupwise"
 
 copyright = "1997-2022, Trevor Bača"

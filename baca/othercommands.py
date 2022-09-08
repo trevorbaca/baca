@@ -6,7 +6,7 @@ import abjad
 from . import parts as _parts
 
 
-def assign_part_function(
+def assign_part(
     argument,
     part_assignment: _parts.PartAssignment,
 ) -> None:

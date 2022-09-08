@@ -51,7 +51,7 @@ def _validate_bcps(bcps):
         assert len(bcp) == 2, repr(bcp)
 
 
-def bcps_function(
+def bcps(
     argument,
     bcps,
     *tweaks: _typings.IndexedTweak,
@@ -230,11 +230,11 @@ def bcps_function(
     return wrappers
 
 
-def color_function(argument, *, lone: bool = False) -> None:
+def color(argument, *, lone: bool = False) -> None:
     return abjad.label.by_selector(argument, lone=lone)
 
 
-def finger_pressure_transition_function(argument) -> None:
+def finger_pressure_transition(argument) -> None:
     tag = _tags.function_name(_frame())
     tweaks = (
         abjad.Tweak(r"- \tweak arrow-length 2"),
@@ -250,7 +250,7 @@ def finger_pressure_transition_function(argument) -> None:
     )
 
 
-def flat_glissando_function(
+def flat_glissando(
     argument,
     pitch: str
     | abjad.NamedPitch
@@ -274,7 +274,7 @@ def flat_glissando_function(
         assert isinstance(pitch, prototype), repr(pitch)
     if stop_pitch is not None:
         assert type(pitch) is type(stop_pitch), repr((pitch, stop_pitch))
-    glissando_function(
+    glissando(
         argument,
         *tweaks,
         allow_repeats=True,
@@ -286,13 +286,13 @@ def flat_glissando_function(
         right_broken=right_broken,
         right_broken_show_next=right_broken_show_next,
     )
-    untie_function(argument)
+    untie(argument)
     if pitch is not None and stop_pitch is None:
         # TODO: remove list test from or-clause?
         if isinstance(pitch, abjad.StaffPosition) or (
             isinstance(pitch, list) and isinstance(pitch[0], abjad.StaffPosition)
         ):
-            _pitchcommands.staff_position_function(
+            _pitchcommands.staff_position(
                 argument,
                 pitch,
                 allow_hidden=allow_hidden,
@@ -300,7 +300,7 @@ def flat_glissando_function(
                 mock=mock,
             )
         else:
-            _pitchcommands.pitch_function(
+            _pitchcommands.pitch(
                 argument,
                 pitch,
                 allow_hidden=allow_hidden,
@@ -310,8 +310,8 @@ def flat_glissando_function(
     elif pitch is not None and stop_pitch is not None:
         if isinstance(pitch, abjad.StaffPosition):
             assert isinstance(stop_pitch, abjad.StaffPosition)
-            raise Exception("port interpolate_staff_positions_function()")
-            _pitchcommands.interpolate_staff_positions_function(
+            raise Exception("port interpolate_staff_positions()")
+            _pitchcommands.interpolate_staff_positions(
                 argument,
                 pitch,
                 stop_pitch,
@@ -321,7 +321,7 @@ def flat_glissando_function(
         else:
             assert isinstance(pitch, str | abjad.NamedPitch)
             assert isinstance(stop_pitch, str | abjad.NamedPitch)
-            _pitchcommands.interpolate_pitches_function(
+            _pitchcommands.interpolate_pitches(
                 argument,
                 pitch,
                 stop_pitch,
@@ -330,7 +330,7 @@ def flat_glissando_function(
             )
 
 
-def force_accidental_function(argument, *, tag: abjad.Tag = abjad.Tag()) -> None:
+def force_accidental(argument, *, tag: abjad.Tag = abjad.Tag()) -> None:
     cautionary = False
     forced = True
     parenthesized = False
@@ -379,7 +379,7 @@ def fractions(items):
     return result
 
 
-def glissando_function(
+def glissando(
     argument,
     *tweaks: abjad.Tweak,
     allow_repeats: bool = False,
@@ -435,7 +435,7 @@ def previous_persist(path: str) -> dict:
     return previous_metadata
 
 
-def untie_function(argument) -> None:
+def untie(argument) -> None:
     indicators = [abjad.Tie, abjad.RepeatTie]
     leaves = abjad.select.leaves(argument)
     assert isinstance(leaves, list)

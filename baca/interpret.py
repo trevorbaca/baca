@@ -1824,7 +1824,7 @@ def _set_intermittent_to_staff_position_zero(score):
             for pleaf in abjad.iterate.leaves(voice, pitched=True):
                 if abjad.get.has_indicator(pleaf, _enums.NOT_YET_PITCHED):
                     pleaves.append(pleaf)
-    _pitchcommands.staff_position_function(
+    _pitchcommands.staff_position(
         pleaves,
         0,
         allow_hidden=True,
@@ -1838,7 +1838,7 @@ def _set_not_yet_pitched_to_staff_position_zero(score):
         if not abjad.get.has_indicator(pleaf, _enums.NOT_YET_PITCHED):
             continue
         pleaves.append(pleaf)
-    _pitchcommands.staff_position_function(
+    _pitchcommands.staff_position(
         pleaves,
         0,
         allow_hidden=True,
@@ -1864,7 +1864,7 @@ def _shift_measure_initial_clefs(
             if measure_number is None:
                 continue
             clef = wrapper.unbundle_indicator()
-            _overridecommands.clef_shift_function(leaf, clef, first_measure_number)
+            _overridecommands.clef_shift(leaf, clef, first_measure_number)
 
 
 def _sort_dictionary(dictionary):
@@ -2327,7 +2327,7 @@ class DynamicScope:
         return _select.tleaves(self.argument, grace=grace)
 
 
-def append_anchor_note_function(argument, *, runtime=None):
+def append_anchor_note(argument, *, runtime=None):
     leaf = abjad.get.leaf(argument, 0)
     parentage = abjad.get.parentage(leaf)
     voice = parentage.get(abjad.Voice, n=-1)
@@ -2798,10 +2798,10 @@ def reapply(voices, manifests, previous_persistent_indicators):
         "previous_persistent_indicators": previous_persistent_indicators,
     }
     for voice in voices:
-        reapply_persistent_indicators_function(voice, runtime=runtime)
+        reapply_persistent_indicators(voice, runtime=runtime)
 
 
-def reapply_persistent_indicators_function(argument, *, runtime=None):
+def reapply_persistent_indicators(argument, *, runtime=None):
     already_reapplied_contexts = runtime["already_reapplied_contexts"]
     manifests = runtime["manifests"]
     previous_persistent_indicators = runtime["previous_persistent_indicators"]

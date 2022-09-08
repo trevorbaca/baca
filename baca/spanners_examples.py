@@ -20,8 +20,8 @@ spanners.py examples
     >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
-    >>> _ = baca.pitch_function(voice, "C4")
-    >>> _ = baca.beam_function(voice, direction=abjad.DOWN)
+    >>> _ = baca.pitch(voice, "C4")
+    >>> _ = baca.beam(voice, direction=abjad.DOWN)
 
     >>> _, _ = baca.interpret.section(
     ...     score,
@@ -87,7 +87,7 @@ spanners.py examples
 
     Attaches ottava indicators to trimmed leaves:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -96,8 +96,8 @@ spanners.py examples
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.ottava_function(baca.select.tleaves(container))
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.ottava(baca.select.tleaves(container))
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -158,7 +158,7 @@ spanners.py examples
 
     Attaches ottava bassa indicators to trimmed leaves:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -167,8 +167,8 @@ spanners.py examples
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.ottava_bassa_function(baca.select.tleaves(container))
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.ottava_bassa(baca.select.tleaves(container))
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -229,7 +229,7 @@ spanners.py examples
 
     Attaches slur to trimmed leaves:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -238,9 +238,9 @@ spanners.py examples
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.slur_function(baca.select.tleaves(container))
-    >>> _ = baca.slur_down_function(container)
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.slur(baca.select.tleaves(container))
+    >>> _ = baca.slur_down(container)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -303,7 +303,7 @@ spanners.py examples
 
     Pedals leaves:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -312,9 +312,9 @@ spanners.py examples
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.sustain_pedal_function(container)
-    >>> _ = baca.sustain_pedal_staff_padding_function(container, 4)
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.sustain_pedal(container)
+    >>> _ = baca.sustain_pedal_staff_padding(container, 4)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -377,7 +377,7 @@ spanners.py examples
 
     Attaches trill spanner to trimmed leaves (leaked to the right):
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -386,8 +386,8 @@ spanners.py examples
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.trill_spanner_function(baca.select.tleaves(container, rleak=True))
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.trill_spanner(baca.select.tleaves(container, rleak=True))
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -449,7 +449,7 @@ spanners.py examples
     Attaches trill to trimmed leaves (leaked to the right) in every
     run:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -460,9 +460,9 @@ spanners.py examples
     >>> rmakers.beam_rfunction(container)
     >>> for run in baca.select.runs(container):
     ...     run = baca.select.rleak(run)
-    ...     _ = baca.trill_spanner_function(run)
+    ...     _ = baca.trill_spanner(run)
 
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
@@ -527,7 +527,7 @@ spanners.py examples
 
     Tweaks trill spanner:
 
-    >>> container = baca.figure_function(
+    >>> container = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -536,12 +536,12 @@ spanners.py examples
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam_rfunction(container)
-    >>> _ = baca.trill_spanner_function(
+    >>> _ = baca.trill_spanner(
     ...     baca.select.tleaves(container, rleak=True),
     ...     abjad.Tweak(r"- \tweak color #red"),
     ...     alteration="M2",
     ... )
-    >>> _ = baca.tuplet_bracket_staff_padding_function(container, 2)
+    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)
