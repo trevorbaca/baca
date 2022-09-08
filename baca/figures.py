@@ -1410,34 +1410,6 @@ def coat(pitch: int | str | abjad.Pitch) -> Coat:
     return Coat(pitch)
 
 
-def figure(
-    counts: typing.Sequence[int],
-    denominator: int,
-    *,
-    acciaccatura: bool | Acciaccatura | LMR | None = None,
-    affix: RestAffix = None,
-    restart_talea: bool = False,
-    tsd: int = None,
-    spelling: rmakers.Spelling = None,
-    treatments: typing.Sequence = (),
-) -> FigureMaker:
-    if acciaccatura is True:
-        acciaccatura = Acciaccatura()
-    elif isinstance(acciaccatura, LMR):
-        acciaccatura = Acciaccatura(lmr=acciaccatura)
-    if acciaccatura is not None:
-        assert isinstance(acciaccatura, Acciaccatura), repr(acciaccatura)
-    return FigureMaker(
-        rmakers.Talea(counts=counts, denominator=denominator),
-        acciaccatura=acciaccatura,
-        affix=affix,
-        restart_talea=restart_talea,
-        tsd=tsd,
-        spelling=spelling,
-        treatments=treatments,
-    )
-
-
 def figure_function(
     collections,
     counts: typing.Sequence[int],
@@ -1467,26 +1439,6 @@ def figure_function(
     )
     container = abjad.Container(tuplets)
     return container
-
-
-def imbricate(
-    voice_name: str,
-    segment: list,
-    *specifiers: typing.Any,
-    allow_unused_pitches: bool = False,
-    by_pitch_class: bool = False,
-    hocket: bool = False,
-    truncate_ties: bool = False,
-):
-    return Imbrication(
-        voice_name,
-        segment,
-        specifiers,
-        allow_unused_pitches=allow_unused_pitches,
-        by_pitch_class=by_pitch_class,
-        hocket=hocket,
-        truncate_ties=truncate_ties,
-    )
 
 
 def imbricate_function(
@@ -1633,13 +1585,6 @@ def make_figures(
             accumulator.time_signatures.append(contribution.time_signature)
     if not do_not_label:
         accumulator.figure_number += 1
-
-
-def nest(treatments: typing.Sequence, *, lmr: LMR = None) -> Nest:
-    assert treatments is not None
-    if not isinstance(treatments, list):
-        treatments = [treatments]
-    return Nest(lmr=lmr, treatments=treatments)
 
 
 def nest_function(

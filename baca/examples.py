@@ -364,7 +364,6 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
 
     Colors out-of-range pitches.
 
-    >>> figure = baca.figure([1], 16)
     >>> collection_lists = [
     ...     [[4]],
     ...     [[-12, 2, 3, 5, 8, 9, 0]],
@@ -373,7 +372,9 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ... ]
     >>> figures, time_signatures = [], []
     >>> for i, collections in enumerate(collection_lists):
-    ...     selection = figure(collections)
+    ...     container = baca.figure_function(collections, [1], 16)
+    ...     selection = container[:]
+    ...     container[:] = []
     ...     figures.append(selection)
     ...     time_signature = abjad.get.duration(selection)
     ...     time_signatures.append(time_signature)
@@ -478,7 +479,6 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
 
     Colors repeat pitch-classes.
 
-    >>> figure = baca.figure([1], 16)
     >>> collection_lists = [
     ...     [[4]],
     ...     [[6, 2, 3, 5, 9, 9, 0]],
@@ -487,7 +487,9 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ... ]
     >>> figures, time_signatures = [], []
     >>> for i, collections in enumerate(collection_lists):
-    ...     selection = figure(collections)
+    ...     container = baca.figure_function(collections, [1], 16)
+    ...     selection = container[:]
+    ...     container[:] = []
     ...     figures.append(selection)
     ...     time_signature = abjad.get.duration(selection)
     ...     time_signatures.append(time_signature)
