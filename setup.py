@@ -21,5 +21,5 @@ if __name__ == "__main__":
         python_requires=">=3.10",
         url="https://github.com/trevorbaca/baca",
         # TODO: add baca/_version.py and retrieve dynamically
-        version="3.10",
+        version="3.11",
     )
