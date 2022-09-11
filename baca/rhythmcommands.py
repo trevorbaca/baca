@@ -313,6 +313,23 @@ def make_notes(
     return music
 
 
+def make_notes_function(
+    time_signatures,
+    *,
+    repeat_ties: bool = False,
+):
+    assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
+    tag = _tags.function_name(_frame())
+    nested_music = rmakers.note_function(time_signatures, tag=tag)
+    music = abjad.sequence.flatten(nested_music, depth=-1)
+    music_voice = rmakers._wrap_music_in_time_signature_staff(music, time_signatures)
+    rmakers.rewrite_meter_function(music_voice)
+    if repeat_ties is True:
+        rmakers.force_repeat_tie_function(music_voice)
+    music = abjad.mutate.eject_contents(music_voice)
+    return music
+
+
 def make_repeat_tied_notes_function(
     time_signatures,
     *,
