@@ -3794,7 +3794,7 @@ def replace_with_clusters(
         ...     docs=True,
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
+        >>> music = baca.make_notes_function(accumulator.get(), repeat_ties=True)
         >>> voice.extend(music)
         >>> _ = baca.pitch(voice, "E4")
         >>> _ = baca.natural_clusters(voice, widths=[3])
@@ -3883,7 +3883,7 @@ def replace_with_clusters(
         ...     docs=True,
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
+        >>> music = baca.make_notes_function(accumulator.get(), repeat_ties=True)
         >>> voice.extend(music)
         >>> _ = baca.pitches(voice, "C4 D4 E4 F4")
         >>> _ = baca.replace_with_clusters(voice, [3])
@@ -3972,7 +3972,7 @@ def replace_with_clusters(
         ...     docs=True,
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
+        >>> music = baca.make_notes_function(accumulator.get(), repeat_ties=True)
         >>> voice.extend(music)
         >>> _ = baca.replace_with_clusters(voice, [3], start_pitch="G4")
         >>> _, _ = baca.interpret.section(
@@ -4060,7 +4060,7 @@ def replace_with_clusters(
         ...     docs=True,
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
+        >>> music = baca.make_notes_function(accumulator.get(), repeat_ties=True)
         >>> voice.extend(music)
         >>> _ = baca.replace_with_clusters(voice, [1, 2, 3, 4], start_pitch="E4")
         >>> _, _ = baca.interpret.section(
@@ -4148,7 +4148,7 @@ def replace_with_clusters(
         ...     docs=True,
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
+        >>> music = baca.make_notes_function(accumulator.get(), repeat_ties=True)
         >>> voice.extend(music)
         >>> _ = baca.replace_with_clusters(voice, [1, 3], start_pitch="E4")
         >>> _, _ = baca.interpret.section(

@@ -15,7 +15,7 @@ articulations.py examples.
     ...     accumulator,
     ...     docs=True,
     ... )
-    >>> music = baca.make_notes(accumulator.get())
+    >>> music = baca.make_notes_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitch(voice, "E4")

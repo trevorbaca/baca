@@ -622,7 +622,7 @@ commands.py examles
     ...     docs=True,
     ... )
 
-    >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
+    >>> music = baca.make_notes_function(accumulator.get(), repeat_ties=True)
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 F4")
@@ -695,7 +695,7 @@ commands.py examles
     ...     docs=True,
     ... )
 
-    >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
+    >>> music = baca.make_notes_function(accumulator.get(), repeat_ties=True)
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.short_instrument_name(voice[0], "Fl.", manifests)
@@ -764,7 +764,7 @@ commands.py examles
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_notes(accumulator.get())
+    >>> music = baca.make_notes_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.clef(voice[0], "percussion")
@@ -839,7 +839,7 @@ commands.py examles
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_notes(accumulator.get())
+    >>> music = baca.make_notes_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.clef(voice[0], "bass")
@@ -915,7 +915,7 @@ commands.py examles
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_notes(accumulator.get())
+    >>> music = baca.make_notes_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.clef(voice[0], "percussion")
@@ -989,7 +989,7 @@ commands.py examles
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_notes(accumulator.get())
+    >>> music = baca.make_notes_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.clef(voice[0], "bass")
@@ -1063,7 +1063,7 @@ commands.py examles
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_notes(accumulator.get())
+    >>> music = baca.make_notes_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.staff_lines(voice[0], 2)
@@ -1364,7 +1364,7 @@ commands.py examles
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_notes(accumulator.get())
+    >>> music = baca.make_notes_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitch(voice, "C5")
@@ -1655,7 +1655,7 @@ commands.py examles
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_notes(accumulator.get())
+    >>> music = baca.make_notes_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitch(voice, "C5")
@@ -1805,7 +1805,7 @@ commands.py examles
     ...     docs=True,
     ... )
 
-    >>> music = baca.make_notes(accumulator.get())
+    >>> music = baca.make_notes_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.assign_part(voice, baca.parts.PartAssignment("Music"))
@@ -1868,7 +1868,7 @@ commands.py examles
 
     >>> part_assignment = baca.parts.PartAssignment("Flute")
 
-    >>> music = baca.make_notes(accumulator.get())
+    >>> music = baca.make_notes_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.assign_part(voice, baca.parts.PartAssignment("Flute.Music"))

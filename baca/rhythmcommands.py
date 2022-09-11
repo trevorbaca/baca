@@ -292,27 +292,6 @@ def make_monads(fractions):
     return components
 
 
-def make_notes(
-    time_signatures,
-    *specifiers,
-    repeat_ties: bool = False,
-):
-    assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
-    if repeat_ties is True:
-        repeat_tie_specifier = [rmakers.force_repeat_tie()]
-    else:
-        repeat_tie_specifier = []
-    rhythm_maker = rmakers.stack(
-        rmakers.note(),
-        *specifiers,
-        rmakers.rewrite_meter(),
-        *repeat_tie_specifier,
-        tag=_tags.function_name(_frame()),
-    )
-    music = rhythm_maker(time_signatures)
-    return music
-
-
 def make_notes_function(
     time_signatures,
     *,

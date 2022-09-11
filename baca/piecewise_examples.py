@@ -2690,7 +2690,7 @@ piecewise.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_notes(accumulator.get())
+    >>> music = baca.make_notes_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "C4 D4 E4 F4 G4 A4")
