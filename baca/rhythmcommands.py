@@ -436,6 +436,37 @@ def make_repeated_duration_notes(
     return music
 
 
+def make_repeated_duration_notes_function(
+    time_signatures,
+    durations,
+    *,
+    do_not_rewrite_meter=None,
+):
+    assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
+    tag = _tags.function_name(_frame())
+    if isinstance(durations, abjad.Duration):
+        durations = [durations]
+    elif isinstance(durations, tuple):
+        assert len(durations) == 2
+        durations = [abjad.Duration(durations)]
+
+    def preprocessor(divisions):
+        divisions = _sequence.fuse(divisions)
+        divisions = _sequence.split_divisions(divisions, durations, cyclic=True)
+        divisions = abjad.sequence.flatten(divisions, depth=-1)
+        return divisions
+
+    divisions = [abjad.NonreducedFraction(_) for _ in time_signatures]
+    divisions = preprocessor(divisions)
+    nested_music = rmakers.note_function(divisions, tag=tag)
+    voice = rmakers._wrap_music_in_time_signature_staff(nested_music, time_signatures)
+    if not do_not_rewrite_meter:
+        rmakers.rewrite_meter_function(voice, tag=tag)
+    rmakers.force_repeat_tie_function(voice)
+    music = abjad.mutate.eject_contents(voice)
+    return music
+
+
 def make_rests(time_signatures):
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     rhythm_maker = rmakers.stack(
