@@ -301,7 +301,7 @@ def make_notes_function(
     tag = _tags.function_name(_frame())
     nested_music = rmakers.note_function(time_signatures, tag=tag)
     music = abjad.sequence.flatten(nested_music, depth=-1)
-    music_voice = rmakers._wrap_music_in_time_signature_staff(music, time_signatures)
+    music_voice = rmakers.wrap_in_time_signature_staff(music, time_signatures)
     rmakers.rewrite_meter_function(music_voice)
     if repeat_ties is True:
         rmakers.force_repeat_tie_function(music_voice)
@@ -391,7 +391,7 @@ def make_repeat_tied_notes_function(
     music: list[abjad.Leaf | abjad.Tuplet] = abjad.sequence.flatten(
         nested_music, depth=-1
     )
-    music_voice = rmakers._wrap_music_in_time_signature_staff(music, time_signatures)
+    music_voice = rmakers.wrap_in_time_signature_staff(music, time_signatures)
     rmakers.beam_function(_select.plts(music_voice))
     rmakers.repeat_tie_function(_select.pheads(music_voice)[1:], tag=tag)
     if not do_not_rewrite_meter:
@@ -459,7 +459,7 @@ def make_repeated_duration_notes_function(
     divisions = [abjad.NonreducedFraction(_) for _ in time_signatures]
     divisions = preprocessor(divisions)
     nested_music = rmakers.note_function(divisions, tag=tag)
-    voice = rmakers._wrap_music_in_time_signature_staff(nested_music, time_signatures)
+    voice = rmakers.wrap_in_time_signature_staff(nested_music, time_signatures)
     if not do_not_rewrite_meter:
         rmakers.rewrite_meter_function(voice, tag=tag)
     rmakers.force_repeat_tie_function(voice)
