@@ -536,6 +536,20 @@ def make_tied_notes(time_signatures):
     return music
 
 
+def make_tied_notes_function(time_signatures):
+    assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
+    tag = _tags.function_name(_frame())
+    nested_music = rmakers.note_function(time_signatures, tag=tag)
+    voice = rmakers.wrap_in_time_signature_staff(nested_music, time_signatures)
+    plts = _select.plts(voice)
+    rmakers.beam_function(plts, tag=tag)
+    ptails = _select.ptails(voice)[:-1]
+    rmakers.tie_function(ptails, tag=tag)
+    rmakers.rewrite_meter_function(voice, tag=tag)
+    music = abjad.mutate.eject_contents(voice)
+    return music
+
+
 def make_tied_repeated_durations(time_signatures, durations):
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     specifiers = []
