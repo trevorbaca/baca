@@ -1804,7 +1804,7 @@ figures.py examples.
     >>> collections = [[0, 2]]
     >>> container = baca.figure([[0, 2]], [29], 64)
     >>> rmakers.beam_function(rmakers.nongrace_leaves_in_each_tuplet_function(container))
-    >>> rmakers.force_repeat_tie()(container)
+    >>> rmakers.force_repeat_tie_function(container)
     >>> selection = container[:]
     >>> container[:] = []
     >>> lilypond_file = abjad.illustrators.selection(selection)

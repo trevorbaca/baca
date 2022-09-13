@@ -17,7 +17,7 @@ spanners.py examples
     ... )
     >>> baca.SpacingSpecifier(fallback_duration=(1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitch(voice, "C4")

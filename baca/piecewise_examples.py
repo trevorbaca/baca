@@ -17,7 +17,7 @@ piecewise.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -112,7 +112,7 @@ piecewise.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
@@ -209,7 +209,7 @@ piecewise.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
@@ -305,7 +305,7 @@ piecewise.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
@@ -401,7 +401,7 @@ piecewise.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
@@ -503,7 +503,7 @@ piecewise.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -601,7 +601,7 @@ piecewise.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -707,7 +707,7 @@ piecewise.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -809,7 +809,7 @@ piecewise.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -923,7 +923,7 @@ piecewise.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
@@ -1015,7 +1015,7 @@ piecewise.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
@@ -1204,7 +1204,7 @@ piecewise.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -1306,7 +1306,7 @@ piecewise.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -1404,7 +1404,7 @@ piecewise.py examples.
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -1500,7 +1500,7 @@ piecewise.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -1596,7 +1596,7 @@ piecewise.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -1692,7 +1692,7 @@ piecewise.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -1788,7 +1788,7 @@ piecewise.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -1886,7 +1886,7 @@ piecewise.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -2001,7 +2001,7 @@ piecewise.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -2116,7 +2116,7 @@ piecewise.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -2241,7 +2241,7 @@ piecewise.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -2471,7 +2471,7 @@ piecewise.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -2573,7 +2573,7 @@ piecewise.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")

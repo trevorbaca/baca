@@ -15,12 +15,15 @@ overrides.py examples.
     ...     accumulator,
     ...     docs=True,
     ... )
-    >>> stack = rmakers.stack(
-    ...     rmakers.talea([1, 1, 1, -1], 8),
-    ...     rmakers.beam(),
-    ...     rmakers.extract_trivial(),
-    ... )
-    >>> music = stack(accumulator.get())
+    >>> def make_music(divisions):
+    ...     nested_music = rmakers.talea_function(divisions, [1, 1, 1, -1], 8)
+    ...     voice = rmakers.wrap_in_time_signature_staff(nested_music, divisions)
+    ...     rmakers.beam_function(voice)
+    ...     rmakers.extract_trivial_function(voice)
+    ...     music = abjad.mutate.eject_contents(voice)
+    ...     return music
+
+    >>> music = make_music(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")

@@ -1385,7 +1385,7 @@ def deviation(
         ...     docs=True,
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_even_divisions(accumulator.get())
+        >>> music = baca.make_even_divisions_function(accumulator.get())
         >>> voice.extend(music)
         >>> _ = baca.pitches(voice, "E4")
         >>> _ = baca.deviation(voice, [0, 0.5, 0, -0.5])
@@ -1477,7 +1477,7 @@ def displacement(argument, displacements: list[int]) -> None:
         ...     docs=True,
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_even_divisions(accumulator.get())
+        >>> music = baca.make_even_divisions_function(accumulator.get())
         >>> voice.extend(music)
         >>> _ = baca.pitch(voice, "G4")
         >>> _ = baca.displacement(voice, [0, 0, 1, 1, 0, 0, -1, -1, 2, 2])
@@ -1882,12 +1882,10 @@ def pitch(
         ...     accumulator,
         ...     docs=True,
         ... )
-        >>> stack = rmakers.stack(
-        ...     rmakers.note(),
-        ...     rmakers.written_duration(1),
-        ... )
         >>> voice = score["Music"]
-        >>> music = stack(accumulator.get())
+        >>> nested_music = rmakers.note_function(accumulator.get())
+        >>> music = abjad.sequence.flatten(nested_music)
+        >>> rmakers.written_duration_function(music, 1)
         >>> voice.extend(music)
         >>> _ = baca.pitch(voice, "<C4 D4 E4>")
         >>> _, _ = baca.interpret.section(
@@ -1994,7 +1992,7 @@ def pitches(
         ...     docs=True,
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_even_divisions(accumulator.get())
+        >>> music = baca.make_even_divisions_function(accumulator.get())
         >>> voice.extend(music)
         >>> _ = baca.pitches(voice, [19, 13, 15, 16, 17, 23])
         >>> _, _ = baca.interpret.section(
@@ -2073,7 +2071,7 @@ def pitches(
         ...     docs=True,
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_even_divisions(accumulator.get())
+        >>> music = baca.make_even_divisions_function(accumulator.get())
         >>> voice.extend(music)
         >>> _ = baca.pitches(voice, "C4 F4 F#4 <B4 C#5> D5")
         >>> _, _ = baca.interpret.section(
@@ -2152,7 +2150,7 @@ def pitches(
         ...     docs=True,
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_even_divisions(accumulator.get())
+        >>> music = baca.make_even_divisions_function(accumulator.get())
         >>> voice.extend(music)
         >>> _ = baca.pitches(
         ...     voice, "<C4 D4 E4 F4 G4 A4 B4 C4>", allow_repeats=True)
@@ -2339,7 +2337,7 @@ def register(
         ...     docs=True,
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_even_divisions(accumulator.get())
+        >>> music = baca.make_even_divisions_function(accumulator.get())
         >>> voice.extend(music)
         >>> _ = baca.pitches(voice, "G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4")
         >>> _ = baca.register(voice, 15)
@@ -2855,7 +2853,7 @@ def register(
         ... )
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> voice = score["Music"]
-        >>> music = baca.make_even_divisions(accumulator.get())
+        >>> music = baca.make_even_divisions_function(accumulator.get())
         >>> voice.extend(music)
         >>> _ = baca.pitches(voice, pitches)
         >>> _ = baca.register(voice, 12, 12)
@@ -2965,7 +2963,7 @@ def register(
         ...     docs=True,
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_even_divisions(accumulator.get())
+        >>> music = baca.make_even_divisions_function(accumulator.get())
         >>> voice.extend(music)
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> _ = baca.pitches(voice, pitches)
@@ -3076,7 +3074,7 @@ def register(
         ...     docs=True,
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_even_divisions(accumulator.get())
+        >>> music = baca.make_even_divisions_function(accumulator.get())
         >>> voice.extend(music)
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> _ = baca.pitches(voice, pitches)
@@ -3187,7 +3185,7 @@ def register(
         ...     docs=True,
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_even_divisions(accumulator.get())
+        >>> music = baca.make_even_divisions_function(accumulator.get())
         >>> voice.extend(music)
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> _ = baca.pitches(voice, pitches)
@@ -3298,7 +3296,7 @@ def register(
         ...     docs=True,
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_even_divisions(accumulator.get())
+        >>> music = baca.make_even_divisions_function(accumulator.get())
         >>> voice.extend(music)
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> _ = baca.pitches(voice, pitches)

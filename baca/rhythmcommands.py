@@ -125,14 +125,13 @@ def get_previous_rhythm_state(
     return previous_rhythm_state
 
 
-def make_even_divisions(time_signatures):
-    rhythm_maker = rmakers.stack(
-        rmakers.even_division([8]),
-        rmakers.beam(),
-        rmakers.extract_trivial(),
-        tag=_tags.function_name(_frame()),
-    )
-    music = rhythm_maker(time_signatures)
+def make_even_divisions_function(time_signatures):
+    tag = _tags.function_name(_frame())
+    nested_music = rmakers.even_division_function(time_signatures, [8], tag=tag)
+    voice = rmakers.wrap_in_time_signature_staff(nested_music, time_signatures)
+    rmakers.beam_function(voice, tag=tag)
+    rmakers.extract_trivial_function(voice)
+    music = abjad.mutate.eject_contents(voice)
     return music
 
 
@@ -403,39 +402,6 @@ def make_repeat_tied_notes_function(
     return music
 
 
-def make_repeated_duration_notes(
-    time_signatures,
-    durations,
-    *specifiers,
-    do_not_rewrite_meter=None,
-):
-    assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
-    if isinstance(durations, abjad.Duration):
-        durations = [durations]
-    elif isinstance(durations, tuple):
-        assert len(durations) == 2
-        durations = [abjad.Duration(durations)]
-
-    def preprocessor(divisions):
-        divisions = _sequence.fuse(divisions)
-        divisions = _sequence.split_divisions(divisions, durations, cyclic=True)
-        return divisions
-
-    rewrite_specifiers = []
-    if not do_not_rewrite_meter:
-        rewrite_specifiers.append(rmakers.rewrite_meter())
-    rhythm_maker = rmakers.stack(
-        rmakers.note(),
-        *specifiers,
-        *rewrite_specifiers,
-        rmakers.force_repeat_tie(),
-        preprocessor=preprocessor,
-        tag=_tags.function_name(_frame()),
-    )
-    music = rhythm_maker(time_signatures)
-    return music
-
-
 def make_repeated_duration_notes_function(
     time_signatures,
     durations,
@@ -467,34 +433,35 @@ def make_repeated_duration_notes_function(
     return music
 
 
-def make_rests(time_signatures):
+def make_rests_function(time_signatures):
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
-    rhythm_maker = rmakers.stack(
-        rmakers.note(),
-        rmakers.force_rest(lambda _: _select.lts(_)),
-        tag=_tags.function_name(_frame()),
-    )
-    music = rhythm_maker(time_signatures)
+    tag = _tags.function_name(_frame())
+    nested_music = rmakers.note_function(time_signatures, tag=tag)
+    voice = rmakers.wrap_in_time_signature_staff(nested_music, time_signatures)
+    lts = _select.lts(voice)
+    rmakers.force_rest_function(lts, tag=tag)
+    music = abjad.mutate.eject_contents(voice)
     return music
 
 
-def make_single_attack(time_signatures, duration):
+def make_single_attack_function(time_signatures, duration):
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
+    tag = _tags.function_name(_frame())
     duration = abjad.Duration(duration)
     numerator, denominator = duration.pair
-    rhythm_maker = rmakers.stack(
-        rmakers.incised(
-            fill_with_rests=True,
-            outer_divisions_only=True,
-            prefix_talea=[numerator],
-            prefix_counts=[1],
-            talea_denominator=denominator,
-        ),
-        rmakers.beam(),
-        rmakers.extract_trivial(),
-        tag=_tags.function_name(_frame()),
+    nested_music = rmakers.incised_function(
+        time_signatures,
+        fill_with_rests=True,
+        outer_divisions_only=True,
+        prefix_talea=[numerator],
+        prefix_counts=[1],
+        talea_denominator=denominator,
+        tag=tag,
     )
-    music = rhythm_maker(time_signatures)
+    voice = rmakers.wrap_in_time_signature_staff(nested_music, time_signatures)
+    rmakers.beam_function(voice)
+    rmakers.extract_trivial_function(voice)
+    music = abjad.mutate.eject_contents(voice)
     return music
 
 
@@ -523,19 +490,6 @@ def make_skeleton(
     return selection
 
 
-def make_tied_notes(time_signatures):
-    assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
-    rhythm_maker = rmakers.stack(
-        rmakers.note(),
-        rmakers.beam(lambda _: _select.plts(_)),
-        rmakers.tie(lambda _: _select.ptails(_)[:-1]),
-        rmakers.rewrite_meter(),
-        tag=_tags.function_name(_frame()),
-    )
-    music = rhythm_maker(time_signatures)
-    return music
-
-
 def make_tied_notes_function(time_signatures):
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     tag = _tags.function_name(_frame())
@@ -550,29 +504,22 @@ def make_tied_notes_function(time_signatures):
     return music
 
 
-def make_tied_repeated_durations(time_signatures, durations):
+def make_tied_repeated_durations_function(time_signatures, durations):
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
-    specifiers = []
+    tag = _tags.function_name(_frame())
+    divisions = [abjad.NonreducedFraction(_) for _ in time_signatures]
+    divisions = _sequence.fuse(divisions)
+    divisions = _sequence.split_divisions(divisions, durations, cyclic=True)
+    divisions = abjad.sequence.flatten(divisions, depth=-1)
     if isinstance(durations, abjad.Duration):
         durations = [durations]
     elif isinstance(durations, tuple):
         assert len(durations) == 2
         durations = [abjad.Duration(durations)]
-    tie_specifier = rmakers.repeat_tie(lambda _: _select.pheads(_)[1:])
-    specifiers.append(tie_specifier)
-    tie_specifier = rmakers.force_repeat_tie()
-    specifiers.append(tie_specifier)
-
-    def preprocessor(divisions):
-        divisions = _sequence.fuse(divisions)
-        divisions = _sequence.split_divisions(divisions, durations, cyclic=True)
-        return divisions
-
-    rhythm_maker = rmakers.stack(
-        rmakers.note(),
-        *specifiers,
-        preprocessor=preprocessor,
-        tag=_tags.function_name(_frame()),
-    )
-    music = rhythm_maker(time_signatures)
+    nested_music = rmakers.note_function(divisions, tag=tag)
+    voice = rmakers.wrap_in_time_signature_staff(nested_music, time_signatures)
+    pheads = _select.pheads(voice)[1:]
+    rmakers.repeat_tie_function(pheads, tag=tag)
+    rmakers.force_repeat_tie_function(voice)
+    music = abjad.mutate.eject_contents(voice)
     return music

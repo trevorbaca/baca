@@ -16,7 +16,7 @@ commands.py examles
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 16))(score)
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.bcps(
@@ -204,7 +204,7 @@ commands.py examles
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 16))(score)
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.bcps(voice[:7], bcps=[(1, 5), (2, 5)])
@@ -431,7 +431,7 @@ commands.py examles
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 13))(score)
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
@@ -527,7 +527,7 @@ commands.py examles
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
@@ -1448,7 +1448,7 @@ commands.py examles
     ...     docs=True,
     ... )
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -1556,7 +1556,7 @@ commands.py examles
     ...     docs=True,
     ... )
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions_function(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
