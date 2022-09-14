@@ -847,10 +847,6 @@ def leaves_in_get_tuplets(argument, pattern, pair):
     return _leaves_in_get_tuplets(argument, pattern, pair)
 
 
-def leaves_in_exclude_tuplets(argument, pattern, pair):
-    return _leaves_in_get_tuplets(argument, pattern, pair, exclude=True)
-
-
 def lleaf(
     argument, n: int = 0, *, count: int = 1, exclude: abjad.typings.Exclude = None
 ) -> abjad.Leaf:
