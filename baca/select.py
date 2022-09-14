@@ -23,24 +23,6 @@ def _handle_pair(selection, pair):
     return selection
 
 
-def _leaves_in_get_tuplets(argument, pattern, pair, exclude=False):
-    start, stop = pair
-    assert isinstance(start, int | type(None)), repr(start)
-    assert isinstance(stop, int | type(None)), repr(stop)
-    result = abjad.select.tuplets(argument)
-    if exclude is True:
-        method = abjad.select.exclude
-    else:
-        method = abjad.select.get
-    if isinstance(pattern, tuple):
-        result = method(result, *pattern)
-    else:
-        assert isinstance(pattern, list)
-        result = method(result, pattern)
-    result = [abjad.select.leaves(_)[start:stop] for _ in result]
-    return result
-
-
 def chead(argument, n: int, *, exclude: abjad.typings.Exclude = None) -> abjad.Chord:
     r"""
     Selects chord head ``n`` in ``argument``.
@@ -841,10 +823,6 @@ def leaves_in_each_tuplet(argument, start=0, stop=None):
     result = abjad.select.tuplets(argument)
     result = [abjad.select.leaves(_)[start:stop] for _ in result]
     return result
-
-
-def leaves_in_get_tuplets(argument, pattern, pair):
-    return _leaves_in_get_tuplets(argument, pattern, pair)
 
 
 def lleaf(
