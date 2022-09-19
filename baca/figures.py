@@ -26,19 +26,21 @@ def _add_rest_affixes(
 ):
     if rest_prefix:
         durations = [(_, talea.denominator) for _ in rest_prefix]
-        maker = abjad.LeafMaker(
+        leaves_ = abjad.makers.make_leaves(
+            [None],
+            durations,
             increase_monotonic=increase_monotonic,
             skips_instead_of_rests=affix_skips_instead_of_rests,
         )
-        leaves_ = maker([None], durations)
         leaves[0:0] = leaves_
     if rest_suffix:
         durations = [(_, talea.denominator) for _ in rest_suffix]
-        maker = abjad.LeafMaker(
+        leaves_ = abjad.makers.make_leaves(
+            [None],
+            durations,
             increase_monotonic=increase_monotonic,
             skips_instead_of_rests=affix_skips_instead_of_rests,
         )
-        leaves_ = maker([None], durations)
         leaves.extend(leaves_)
     return leaves
 
@@ -456,7 +458,7 @@ def _make_accelerando(leaf_selection, accelerando_indicator):
     elif rmakers.FeatherBeamCommand._is_ritardando(leaf_selection):
         abjad.override(leaf_selection[0]).Beam.grow_direction = abjad.LEFT
     duration = abjad.get.duration(tuplet)
-    notes = abjad.LeafMaker()([0], [duration])
+    notes = abjad.makers.make_notes([0], [duration])
     string = abjad.illustrators.selection_to_score_markup_string(notes)
     string = rf"\markup \scale #'(0.75 . 0.75) {string}"
     abjad.override(tuplet).TupletNumber.text = string
@@ -644,8 +646,9 @@ def _make_figure_tuplet(
             this_one = talea[count]
             assert isinstance(this_one, abjad.NonreducedFraction)
             duration = -this_one
-            maker = abjad.LeafMaker(increase_monotonic=spelling.increase_monotonic)
-            leaves_ = maker([None], [duration])
+            leaves_ = abjad.makers.make_leaves(
+                [None], [duration], increase_monotonic=spelling.increase_monotonic
+            )
             leaves.extend(leaves_)
             count = next_attack
         next_attack += 1
@@ -665,14 +668,20 @@ def _make_figure_tuplet(
             if pitch_expression[-1] == "skip":
                 skips_instead_of_rests = True
             pitch_expression = None
-        maker = abjad.LeafMaker(
-            increase_monotonic=spelling.increase_monotonic,
-            skips_instead_of_rests=skips_instead_of_rests,
-        )
         if is_chord:
-            leaves_ = maker([tuple(pitch_expression)], [duration])
+            leaves_ = abjad.makers.make_leaves(
+                [tuple(pitch_expression)],
+                [duration],
+                increase_monotonic=spelling.increase_monotonic,
+                skips_instead_of_rests=skips_instead_of_rests,
+            )
         else:
-            leaves_ = maker([pitch_expression], [duration])
+            leaves_ = abjad.makers.make_leaves(
+                [pitch_expression],
+                [duration],
+                increase_monotonic=spelling.increase_monotonic,
+                skips_instead_of_rests=skips_instead_of_rests,
+            )
         leaves.extend(leaves_)
         count = next_attack
         while (
@@ -683,8 +692,9 @@ def _make_figure_tuplet(
             this_one = talea[count]
             assert isinstance(this_one, abjad.NonreducedFraction)
             duration = -this_one
-            maker = abjad.LeafMaker(increase_monotonic=spelling.increase_monotonic)
-            leaves_ = maker([None], [duration])
+            leaves_ = abjad.makers.make_leaves(
+                [None], [duration], increase_monotonic=spelling.increase_monotonic
+            )
             leaves.extend(leaves_)
             count = next_attack
     leaves = _add_rest_affixes(
@@ -958,13 +968,12 @@ class Acciaccatura:
         collection = [_[-1] for _ in segment_parts]
         durations = self.durations
         acciaccatura_containers: list[abjad.BeforeGraceContainer | None] = []
-        maker = abjad.LeafMaker()
         for segment_part in segment_parts:
             if len(segment_part) <= 1:
                 acciaccatura_containers.append(None)
                 continue
             grace_token = list(segment_part[:-1])
-            grace_leaves = maker(grace_token, durations)
+            grace_leaves = abjad.makers.make_leaves(grace_token, durations)
             acciaccatura_container = abjad.BeforeGraceContainer(
                 grace_leaves, command=r"\acciaccatura"
             )
