@@ -1085,9 +1085,11 @@ def section(
 ):
     _print_main_task("Interpreting section ...")
     if dictionaries.previous_metadata:
-        first_measure_number = (
-            dictionaries.previous_metadata["final_measure_number"] + 1
-        )
+        string = "final_measure_number"
+        if string in dictionaries.previous_metadata:
+            first_measure_number = dictionaries.previous_metadata[string] + 1
+        else:
+            first_measure_number = None
     else:
         first_measure_number = 1
     interpreter = interpreter or baca.interpret.section
