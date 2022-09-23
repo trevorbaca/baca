@@ -341,26 +341,6 @@ def fuse(
         >>> divisions
         [NonreducedFraction(15, 8)]
 
-        >>> rhythm_maker = rmakers.note()
-        >>> music = rhythm_maker(divisions)
-
-        >>> lilypond_file = abjad.illustrators.selection(music, divisions)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \time 15/8
-                    c'1...
-                }
-            >>
-
     ..  container:: example
 
         Fuses first two items and then remaining items:
@@ -371,27 +351,6 @@ def fuse(
         ...     division
         NonreducedFraction(4, 8)
         NonreducedFraction(12, 8)
-
-        >>> rhythm_maker = rmakers.note()
-        >>> music = rhythm_maker(divisions)
-
-        >>> lilypond_file = abjad.illustrators.selection(music)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \time 2/1
-                    c'2
-                    c'1.
-                }
-            >>
 
     ..  container:: example
 
@@ -404,28 +363,6 @@ def fuse(
         NonreducedFraction(4, 8)
         NonreducedFraction(8, 8)
         NonreducedFraction(2, 4)
-
-        >>> rhythm_maker = rmakers.note()
-        >>> music = rhythm_maker(divisions)
-
-        >>> lilypond_file = abjad.illustrators.selection(music)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \time 2/1
-                    c'2
-                    c'1
-                    c'2
-                }
-            >>
 
     ..  container:: example
 
@@ -444,28 +381,6 @@ def fuse(
         NonreducedFraction(6, 8)
         NonreducedFraction(7, 8)
         NonreducedFraction(2, 8)
-
-        >>> rhythm_maker = rmakers.note()
-        >>> music = rhythm_maker(divisions)
-
-        >>> lilypond_file = abjad.illustrators.selection(music)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \time 15/8
-                    c'2.
-                    c'2..
-                    c'4
-                }
-            >>
 
     ..  container:: example
 
@@ -501,49 +416,6 @@ def fuse(
         NonreducedFraction(1, 16)
         NonreducedFraction(1, 16)
         NonreducedFraction(5, 16)
-
-        >>> rhythm_maker = rmakers.note()
-        >>> music = rhythm_maker(divisions)
-
-        >>> lilypond_file = abjad.illustrators.selection(music)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \time 15/8
-                    c'16
-                    c'16
-                    c'16
-                    c'16
-                    c'16
-                    c'4
-                    ~
-                    c'16
-                    c'16
-                    c'16
-                    c'16
-                    c'16
-                    c'16
-                    c'4
-                    ~
-                    c'16
-                    c'16
-                    c'16
-                    c'16
-                    c'16
-                    c'16
-                    c'4
-                    ~
-                    c'16
-                }
-            >>
 
     """
     if indices is not None:
@@ -926,34 +798,6 @@ def quarters(
             [NonreducedFraction(2, 8)]
             [NonreducedFraction(1, 8)]
 
-        >>> rhythm_maker = rmakers.note()
-        >>> music = rhythm_maker(abjad.sequence.flatten(divisions, depth=-1))
-
-        >>> lilypond_file = abjad.illustrators.selection(music)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \time 15/8
-                    c'4
-                    c'4
-                    c'4
-                    c'8
-                    c'4
-                    c'8
-                    c'4
-                    c'4
-                    c'8
-                }
-            >>
-
     """
     assert isinstance(sequence, list), repr(sequence)
     sequence = split_divisions(
@@ -988,41 +832,6 @@ def ratios(
         sequence:
             NonreducedFraction(11, 24)
 
-        >>> rhythm_maker = rmakers.note()
-        >>> music = rhythm_maker(abjad.sequence.flatten(divisions, depth=-1))
-
-        >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \time 5/8
-                    c'2
-                    ~
-                    c'8
-                    \tweak edge-height #'(0.7 . 0)
-                    \times 16/24
-                    {
-                        \time 6/8
-                        c'4..
-                    }
-                    \tweak edge-height #'(0.7 . 0)
-                    \times 16/24
-                    {
-                        c'2
-                        ~
-                        c'8.
-                    }
-                }
-            >>
-
         Splits divisions by rounded ``2:1`` ratio:
 
         >>> time_signatures = baca.fractions([(5, 8), (6, 8)])
@@ -1037,31 +846,6 @@ def ratios(
             NonreducedFraction(2, 8)
         sequence:
             NonreducedFraction(4, 8)
-
-        >>> rhythm_maker = rmakers.note()
-        >>> music = rhythm_maker(abjad.sequence.flatten(divisions, depth=-1))
-
-        >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \time 5/8
-                    c'2
-                    ~
-                    c'8
-                    \time 6/8
-                    c'4
-                    c'2
-                }
-            >>
 
     ..  container:: example
 
@@ -1082,42 +866,6 @@ def ratios(
             [NonreducedFraction(4, 8)]
             [NonreducedFraction(2, 8)]
 
-        >>> rhythm_maker = rmakers.note()
-        >>> music = rhythm_maker(abjad.sequence.flatten(divisions, depth=-1))
-
-        >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \tweak edge-height #'(0.7 . 0)
-                    \times 16/24
-                    {
-                        \time 5/8
-                        c'2
-                        ~
-                        c'8
-                    }
-                    \tweak edge-height #'(0.7 . 0)
-                    \times 16/24
-                    {
-                        c'4
-                        ~
-                        c'16
-                    }
-                    \time 6/8
-                    c'2
-                    c'4
-                }
-            >>
-
         Splits each division by rounded ``2:1`` ratio:
 
         >>> time_signatures = baca.fractions([(5, 8), (6, 8)])
@@ -1135,31 +883,6 @@ def ratios(
         sequence:
             [NonreducedFraction(4, 8)]
             [NonreducedFraction(2, 8)]
-
-        >>> rhythm_maker = rmakers.note()
-        >>> divisions = abjad.sequence.flatten(divisions, depth=-1)
-        >>> music = rhythm_maker(divisions)
-
-        >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \time 5/8
-                    c'4.
-                    c'4
-                    \time 6/8
-                    c'2
-                    c'4
-                }
-            >>
 
     ..  container:: example
 
@@ -1186,43 +909,6 @@ def ratios(
             [NonreducedFraction(2, 8)]
             [NonreducedFraction(2, 8)]
 
-        >>> rhythm_maker = rmakers.note()
-        >>> music = rhythm_maker(abjad.sequence.flatten(divisions, depth=-1))
-
-        >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \tweak edge-height #'(0.7 . 0)
-                    \times 16/24
-                    {
-                        \time 5/8
-                        c'2
-                        ~
-                        c'8
-                    }
-                    \tweak edge-height #'(0.7 . 0)
-                    \times 16/24
-                    {
-                        c'4
-                        ~
-                        c'16
-                    }
-                    \time 6/8
-                    c'4
-                    c'4
-                    c'4
-                }
-            >>
-
         Splits divisions with alternating rounded ``2:1`` and ``1:1:1`` ratios:
 
         >>> ratios = abjad.CyclicTuple([(2, 1), (1, 1, 1)])
@@ -1245,31 +931,6 @@ def ratios(
             [NonreducedFraction(2, 8)]
             [NonreducedFraction(2, 8)]
             [NonreducedFraction(2, 8)]
-
-        >>> rhythm_maker = rmakers.note()
-        >>> music = rhythm_maker(abjad.sequence.flatten(divisions, depth=-1))
-
-        >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \time 5/8
-                    c'4.
-                    c'4
-                    \time 6/8
-                    c'4
-                    c'4
-                    c'4
-                }
-            >>
 
     """
     ratios_ = abjad.CyclicTuple([abjad.Ratio(_) for _ in ratios])
@@ -1576,33 +1237,6 @@ def split_divisions(
         [NonreducedFraction(2, 8)]
         [NonreducedFraction(1, 8)]
 
-        >>> rhythm_maker = rmakers.note()
-        >>> music = rhythm_maker(abjad.sequence.flatten(divisions, depth=-1))
-
-        >>> lilypond_file = abjad.illustrators.selection(music)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \time 15/8
-                    c'4
-                    c'4
-                    c'4
-                    c'4
-                    c'4
-                    c'4
-                    c'4
-                    c'8
-                }
-            >>
-
         Fuses remainder:
 
         >>> divisions = [(7, 8), (3, 8), (5, 8)]
@@ -1623,32 +1257,6 @@ def split_divisions(
         [NonreducedFraction(2, 8)]
         [NonreducedFraction(2, 8)]
         [NonreducedFraction(3, 8)]
-
-        >>> rhythm_maker = rmakers.note()
-        >>> music = rhythm_maker(abjad.sequence.flatten(divisions, depth=-1))
-
-        >>> lilypond_file = abjad.illustrators.selection(music)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \time 15/8
-                    c'4
-                    c'4
-                    c'4
-                    c'4
-                    c'4
-                    c'4
-                    c'4.
-                }
-            >>
 
     ..  container:: example
 
@@ -1674,33 +1282,6 @@ def split_divisions(
         [NonreducedFraction(2, 8)]
         [NonreducedFraction(2, 8)]
 
-        >>> rhythm_maker = rmakers.note()
-        >>> music = rhythm_maker(abjad.sequence.flatten(divisions, depth=-1))
-
-        >>> lilypond_file = abjad.illustrators.selection(music)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \time 15/8
-                    c'8
-                    c'4
-                    c'4
-                    c'4
-                    c'4
-                    c'4
-                    c'4
-                    c'4
-                }
-            >>
-
         Fuses remainder:
 
         >>> divisions = [(7, 8), (3, 8), (5, 8)]
@@ -1722,32 +1303,6 @@ def split_divisions(
         [NonreducedFraction(2, 8)]
         [NonreducedFraction(2, 8)]
         [NonreducedFraction(2, 8)]
-
-        >>> rhythm_maker = rmakers.note()
-        >>> music = rhythm_maker(abjad.sequence.flatten(divisions, depth=-1))
-
-        >>> lilypond_file = abjad.illustrators.selection(music)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \time 15/8
-                    c'4.
-                    c'4
-                    c'4
-                    c'4
-                    c'4
-                    c'4
-                    c'4
-                }
-            >>
 
     ..  container:: example
 
@@ -1780,38 +1335,6 @@ def split_divisions(
             NonreducedFraction(4, 16)
             NonreducedFraction(3, 16)
 
-        >>> rhythm_maker = rmakers.note()
-        >>> divisions = abjad.sequence.flatten(divisions, depth=-1)
-        >>> music = rhythm_maker(divisions)
-
-        >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \time 7/8
-                    c'4
-                    c'4
-                    c'4
-                    c'8
-                    \time 7/8
-                    c'4
-                    c'4
-                    c'4
-                    c'8
-                    \time 7/16
-                    c'4
-                    c'8.
-                }
-            >>
-
     ..  container:: example
 
         Splits each division into quarters and positions remainder at left:
@@ -1843,38 +1366,6 @@ def split_divisions(
             NonreducedFraction(3, 16)
             NonreducedFraction(4, 16)
 
-        >>> rhythm_maker = rmakers.note()
-        >>> divisions = abjad.sequence.flatten(divisions, depth=-1)
-        >>> music = rhythm_maker(divisions)
-
-        >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \time 7/8
-                    c'8
-                    c'4
-                    c'4
-                    c'4
-                    \time 7/8
-                    c'8
-                    c'4
-                    c'4
-                    c'4
-                    \time 7/16
-                    c'8.
-                    c'4
-                }
-            >>
-
     ..  container:: example
 
         Splits each division into quarters and fuses remainder less than or equal to
@@ -1900,28 +1391,6 @@ def split_divisions(
         sequence:
             NonreducedFraction(2, 8)
             NonreducedFraction(3, 8)
-
-        >>> rhythm_maker = rmakers.note()
-        >>> divisions = abjad.sequence.flatten(divisions, depth=-1)
-        >>> music = rhythm_maker(divisions)
-
-        >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \time 5/8
-                    c'4
-                    c'4.
-                }
-            >>
 
     ..  container:: example
 
@@ -1950,28 +1419,6 @@ def split_divisions(
             NonreducedFraction(3, 8)
             NonreducedFraction(2, 8)
 
-        >>> rhythm_maker = rmakers.note()
-        >>> divisions = abjad.sequence.flatten(divisions, depth=-1)
-        >>> music = rhythm_maker(divisions)
-
-        >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \time 5/8
-                    c'4.
-                    c'4
-                }
-            >>
-
     ..  container:: example
 
         Splits each division into compound quarters:
@@ -1996,32 +1443,6 @@ def split_divisions(
         sequence:
             NonreducedFraction(3, 8)
             NonreducedFraction(3, 8)
-
-        >>> rhythm_maker = rmakers.note()
-        >>> divisions = abjad.sequence.flatten(divisions, depth=-1)
-        >>> music = rhythm_maker(divisions)
-
-        >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \time 3/4
-                    c'4
-                    c'4
-                    c'4
-                    \time 6/8
-                    c'4.
-                    c'4.
-                }
-            >>
 
     ..  container:: example
 
@@ -2054,37 +1475,6 @@ def split_divisions(
             NonreducedFraction(4, 16)
             NonreducedFraction(1, 16)
             NonreducedFraction(2, 16)
-
-        >>> rhythm_maker = rmakers.note()
-        >>> divisions = abjad.sequence.flatten(divisions, depth=-1)
-        >>> music = rhythm_maker(divisions)
-
-        >>> lilypond_file = abjad.illustrators.selection(music, time_signatures)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \time 7/16
-                    c'16
-                    c'8
-                    c'4
-                    \time 7/16
-                    c'8
-                    c'4
-                    c'16
-                    \time 7/16
-                    c'4
-                    c'16
-                    c'8
-                }
-            >>
 
     """
     durations = [abjad.Duration(_) for _ in durations]

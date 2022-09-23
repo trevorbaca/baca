@@ -128,10 +128,7 @@ def _collections_to_container(
         tuplets = figure_maker(collections)
         commands = commands[1:]
     else:
-        assert isinstance(commands[0], Bind)
-        command = commands[0]
-        tuplets = command(collections)
-        commands = commands[1:]
+        raise Exception
     assert isinstance(tuplets, list), repr(tuplets)
     assert all(isinstance(_, abjad.Tuplet) for _ in tuplets), repr(tuplets)
     container = abjad.Container(tuplets)
@@ -453,9 +450,9 @@ def _make_accelerando(leaf_selection, accelerando_indicator):
     assert len(leaf_selection) == len(multipliers)
     for multiplier, leaf in zip(multipliers, leaf_selection):
         leaf.multiplier = multiplier
-    if rmakers.FeatherBeamCommand._is_accelerando(leaf_selection):
+    if rmakers.rmakers._is_accelerando(leaf_selection):
         abjad.override(leaf_selection[0]).Beam.grow_direction = abjad.RIGHT
-    elif rmakers.FeatherBeamCommand._is_ritardando(leaf_selection):
+    elif rmakers.rmakers._is_ritardando(leaf_selection):
         abjad.override(leaf_selection[0]).Beam.grow_direction = abjad.LEFT
     duration = abjad.get.duration(tuplet)
     notes = abjad.makers.make_notes([0], [duration])
@@ -522,15 +519,14 @@ def _make_accelerando_multipliers(durations, exponent):
     start_offsets = [_[0] for _ in pairs]
     start_offsets = [_ / total_duration for _ in start_offsets]
     start_offsets_ = []
-    rhythm_maker_class = rmakers.AccelerandoRhythmMaker
     for start_offset in start_offsets:
-        start_offset_ = rhythm_maker_class._interpolate_exponential(
+        start_offset_ = rmakers.rmakers._interpolate_exponential(
             0, total_duration, start_offset, exponent
         )
         start_offsets_.append(start_offset_)
     start_offsets_.append(float(total_duration))
     durations_ = abjad.math.difference_series(start_offsets_)
-    durations_ = rhythm_maker_class._round_durations(durations_, 2**10)
+    durations_ = rmakers.rmakers._round_durations(durations_, 2**10)
     durations_ = _fix_rounding_error(durations_, total_duration)
     multipliers = []
     assert len(durations) == len(durations_)
@@ -1018,57 +1014,6 @@ class Anchor:
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class Assignment:
-
-    maker: "FigureMaker"
-    pattern: abjad.Pattern | None = None
-
-    def __post_init__(self):
-        assert isinstance(self.maker, FigureMaker)
-        if self.pattern is not None:
-            assert isinstance(self.pattern, abjad.Pattern)
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class Bind:
-
-    assignments: typing.Sequence[Assignment] = ()
-
-    def __post_init__(self):
-        for assignment in self.assignments:
-            if not isinstance(assignment, Assignment):
-                raise Exception("must be assignment:\n   {assignment!r}")
-
-    def __call__(self, collections: typing.Sequence) -> list[abjad.Tuplet]:
-        collection_count = len(collections)
-        matches = []
-        for i, collection in enumerate(collections):
-            for assignment in self.assignments:
-                if assignment.pattern is None or assignment.pattern.matches_index(
-                    i, collection_count
-                ):
-                    match = rmakers.Match(assignment, collection)
-                    matches.append(match)
-                    break
-            else:
-                raise Exception(f"no maker match for collection {i}.")
-        assert len(collections) == len(matches)
-        groups = abjad.sequence.group_by(matches, lambda _: _.assignment.maker)
-        tuplets: list[abjad.Tuplet] = []
-        for group in groups:
-            maker = group[0].assignment.maker
-            collections_ = [match.payload for match in group]
-            selection = maker(
-                collections_,
-                collection_index=None,
-                total_collections=None,
-            )
-            tuplets.extend(selection)
-        assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
-        return tuplets
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Coat:
 
     argument: int | str | abjad.Pitch | None = None
@@ -1403,16 +1348,6 @@ def anchor_to_figure(figure_name: str) -> Anchor:
     Anchors music in this figure to start of ``figure_name``.
     """
     return Anchor(figure_name=figure_name)
-
-
-def assign(maker: FigureMaker, pattern: abjad.Pattern = None) -> Assignment:
-    assert isinstance(maker, FigureMaker), repr(maker)
-    return Assignment(maker, pattern=pattern)
-
-
-def bind(assignments):
-    assert isinstance(assignments, tuple | list)
-    return Bind(assignments)
 
 
 def coat(pitch: int | str | abjad.Pitch) -> Coat:
