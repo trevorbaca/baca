@@ -4,12 +4,30 @@ Path.
 import importlib
 import os
 import pathlib
+import types
 
 import black
 
 import abjad
 
 from . import tags as _tags
+
+
+def _get_previous_section(path: str):
+    music_py = pathlib.Path(path)
+    section = pathlib.Path(music_py).parent
+    assert section.parent.name == "sections", repr(section)
+    sections = section.parent
+    assert sections.name == "sections", repr(sections)
+    paths = list(sorted(sections.glob("*")))
+    paths = [_ for _ in paths if not _.name.startswith(".")]
+    paths = [_ for _ in paths if _.is_dir()]
+    index = paths.index(section)
+    if index == 0:
+        return {}
+    previous_index = index - 1
+    previous_section = paths[previous_index]
+    return previous_section
 
 
 def activate(
@@ -118,9 +136,6 @@ def activate(
 
 
 def add_metadatum(path, name, value, *, file_name="__metadata__"):
-    """
-    Adds metadatum.
-    """
     assert " " not in name, repr(name)
     metadata = get_metadata(path, file_name=file_name)
     metadata[name] = value
@@ -137,9 +152,6 @@ def deactivate(
     prepend_empty_chord=None,
     skip_file_name=None,
 ):
-    """
-    Deactivates ``tag`` in path.
-    """
     if isinstance(tag, str):
         raise Exception(f"must be tag or callable: {tag!r}")
     return activate(
@@ -151,6 +163,25 @@ def deactivate(
         prepend_empty_chord=prepend_empty_chord,
         skip_file_name=skip_file_name,
         undo=True,
+    )
+
+
+def dictionaries(music_py):
+    assert music_py.endswith("music.py"), repr(music_py)
+    section_directory = pathlib.Path(music_py).parent
+    metadata = get_metadata(section_directory)
+    persist = get_persist(section_directory)
+    if section_directory.name == "01":
+        previous_metadata_, previous_persist_ = {}, {}
+    else:
+        previous_metadata_ = previous_metadata(str(section_directory / "dummy"))
+        previous_persist_ = previous_persist(str(section_directory / "dummy"))
+    return types.SimpleNamespace(
+        metadata=metadata,
+        persist=persist,
+        previous_metadata=previous_metadata_,
+        previous_persist=previous_persist_,
+        section_number=section_directory.name,
     )
 
 
@@ -292,18 +323,12 @@ def extern(
 
 
 def get_contents_directory(path):
-    """
-    Gets contents directory.
-    """
     wrapper_directory = get_wrapper_directory(path)
     contents_directory = wrapper_directory / wrapper_directory.name
     return contents_directory
 
 
 def get_wrapper_directory(path):
-    """
-    Gets wrapper directory.
-    """
     parts = str(path).split(os.sep)
     while parts:
         string = os.sep.join(parts)
@@ -358,9 +383,6 @@ def get_measure_profile_metadata(path) -> tuple[int, int, list]:
 
 
 def get_metadata(path, file_name="__metadata__"):
-    """
-    Gets metadata.
-    """
     assert file_name in ("__metadata__", "__persist__"), repr(file_name)
     metadata_py_path = path / file_name
     metadata = None
@@ -381,9 +403,6 @@ def get_metadatum(
     *,
     file_name="__metadata__",
 ):
-    """
-    Gets metadatum.
-    """
     metadata = get_metadata(path, file_name=file_name)
     metadatum = metadata.get(metadatum_name)
     if not metadatum:
@@ -391,10 +410,23 @@ def get_metadatum(
     return metadatum
 
 
+def get_persist(path):
+    return get_metadata(path, file_name="__persist__")
+
+
+def previous_metadata(path: str) -> dict:
+    previous_section = _get_previous_section(path)
+    previous_metadata = get_metadata(previous_section, file_name="__metadata__")
+    return previous_metadata
+
+
+def previous_persist(path: str) -> dict:
+    previous_section = _get_previous_section(path)
+    previous_metadata = get_metadata(previous_section, file_name="__persist__")
+    return previous_metadata
+
+
 def remove_metadatum(path, name, *, file_name="__metadata__"):
-    """
-    Removes metadatum.
-    """
     assert " " not in name, repr(name)
     metadata = get_metadata(path, file_name=file_name)
     try:
@@ -404,10 +436,12 @@ def remove_metadatum(path, name, *, file_name="__metadata__"):
     write_metadata_py(path, metadata, file_name=file_name)
 
 
+def section_directory(music_py):
+    assert music_py.endswith("music.py"), repr(music_py)
+    return pathlib.Path(music_py).parent
+
+
 def trim(path):
-    """
-    Trims path.
-    """
     wrapper_directory = get_wrapper_directory(path)
     count = len(wrapper_directory.parts)
     parts = path.parts

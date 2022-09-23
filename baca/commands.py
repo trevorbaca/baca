@@ -2,35 +2,16 @@
 Commands.
 """
 import copy
-import pathlib
 import typing
 from inspect import currentframe as _frame
 
 import abjad
 
-from . import path as _path
 from . import pitchcommands as _pitchcommands
 from . import select as _select
 from . import tags as _tags
 from . import tweaks as _tweaks
 from . import typings as _typings
-
-
-def _get_previous_section(path: str):
-    music_py = pathlib.Path(path)
-    section = pathlib.Path(music_py).parent
-    assert section.parent.name == "sections", repr(section)
-    sections = section.parent
-    assert sections.name == "sections", repr(sections)
-    paths = list(sorted(sections.glob("*")))
-    paths = [_ for _ in paths if not _.name.startswith(".")]
-    paths = [_ for _ in paths if _.is_dir()]
-    index = paths.index(section)
-    if index == 0:
-        return {}
-    previous_index = index - 1
-    previous_section = paths[previous_index]
-    return previous_section
 
 
 def _is_rest(argument):
@@ -421,18 +402,6 @@ def glissando(
 def levine_multiphonic(n: int) -> abjad.Markup:
     assert isinstance(n, int), repr(n)
     return abjad.Markup(rf'\baca-boxed-markup "L.{n}"')
-
-
-def previous_metadata(path: str) -> dict:
-    previous_section = _get_previous_section(path)
-    previous_metadata = _path.get_metadata(previous_section, file_name="__metadata__")
-    return previous_metadata
-
-
-def previous_persist(path: str) -> dict:
-    previous_section = _get_previous_section(path)
-    previous_metadata = _path.get_metadata(previous_section, file_name="__persist__")
-    return previous_metadata
 
 
 def untie(argument) -> None:

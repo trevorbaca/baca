@@ -6,6 +6,7 @@ from . import array
 from . import build
 from . import math
 from . import jobs
+from . import path
 from . import score
 from . import select
 from . import sequence
@@ -35,7 +36,6 @@ from .memento import *
 from .overridecommands import *
 from .othercommands import assign_part
 from .parts import Part, PartAssignment
-from .path import *
 from .pcollections import (
     ArpeggiationSpacingSpecifier,
     ChordalSpacingSpecifier,

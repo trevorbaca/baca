@@ -226,9 +226,6 @@ def _log_timing(section_directory, timing):
         counter = abjad.string.pluralize("second", timing.runtime)
         line = f"Segment interpretation time: {timing.runtime} {counter}\n"
         pointer.write(line)
-        counter = abjad.string.pluralize("second", timing.abjad_format_time)
-        line = f"Abjad format time: {timing.abjad_format_time} {counter}\n"
-        pointer.write(line)
         counter = abjad.string.pluralize("second", timing.lilypond_runtime)
         line = f"LilyPond runtime: {timing.lilypond_runtime} {counter}\n"
         pointer.write(line)
@@ -400,16 +397,12 @@ def _make_section_pdf(
     music_ly = section_directory / "music.ly"
     music_pdf = section_directory / "music.pdf"
     music_ly_mtime = os.path.getmtime(music_ly) if music_ly.is_file() else 0
-    timing.abjad_format_time = _write_music_ly(lilypond_file, music_ly)
+    abjad.persist.as_ly(lilypond_file, music_ly, tags=True)
     if music_ly.is_file() and music_ly_mtime < os.path.getmtime(music_ly):
         _print_file_handling(f"Writing {baca.path.trim(music_ly)} ...")
     _print_file_handling(f"Handling {baca.path.trim(music_ly)} ...")
     _handle_music_ly_tags_in_section(music_ly)
     _externalize_music_ly(music_ly)
-    # _print_file_handling(f"Handling {baca.path.trim(music_ly)} ...")
-    # _handle_music_ly_tags_in_section(music_ly)
-    # _print_file_handling(f"Handling {baca.path.trim(music_ily)} ...")
-    # _handle_music_ly_tags_in_section(music_ily)
     if music_pdf.is_file():
         _print_file_handling(f"Existing {baca.path.trim(music_pdf)} ...")
     timing.lilypond_runtime = _call_lilypond_on_music_ly_in_section(
@@ -419,7 +412,6 @@ def _make_section_pdf(
     if also_untagged is True:
         _also_untagged(section_directory)
     if print_timing:
-        _print_main_task("Printing time ...")
         _print_all_timing(timing)
     if log_timing:
         _log_timing(section_directory, timing)
@@ -427,7 +419,6 @@ def _make_section_pdf(
 
 def _print_all_timing(timing):
     _print_timing("Command interpretation time", int(timing.runtime))
-    _print_timing("Abjad format time", int(timing.abjad_format_time))
     _print_timing("LilyPond runtime", int(timing.lilypond_runtime))
 
 
@@ -526,45 +517,48 @@ def _write_metadata(metadata, persist, section_directory):
     metadata_file = section_directory / "__metadata__"
     _print_file_handling(f"Writing {baca.path.trim(metadata_file)} ...")
     baca.path.write_metadata_py(section_directory, metadata)
-    # TODO: import black here instead
-    os.system("black --target-version=py38 __metadata__ 1>/dev/null 2>&1")
     persist_file = section_directory / "__persist__"
     _print_file_handling(f"Writing {baca.path.trim(persist_file)} ...")
-    baca.path.write_metadata_py(
-        section_directory,
-        persist,
-        file_name="__persist__",
-    )
-    # TODO: import black here instead
-    os.system("black --target-version=py38 __persist__ 1>/dev/null 2>&1")
+    baca.path.write_metadata_py(section_directory, persist, file_name="__persist__")
 
 
 def _write_music_ly(lilypond_file, music_ly):
-    result = abjad.persist.as_ly(lilypond_file, music_ly, tags=True)
-    abjad_format_time = int(result[1])
-    return abjad_format_time
+    abjad.persist.as_ly(lilypond_file, music_ly, tags=True)
 
 
 def arguments(*arguments):
-    result = types.SimpleNamespace()
-    for argument in arguments:
+    # argv = sys.argv
+    arguments = arguments or sys.argv
+    known_arguments = (
+        "--also-untagged",
+        "--clicktrack",
+        "--log-timing",
+        "--midi",
+        "--pdf",
+        "--print-timing",
+    )
+    namespace = types.SimpleNamespace()
+    for argument in known_arguments:
         name = argument.removeprefix("--").replace("-", "_")
-        value = None
-        for string in sys.argv[1:]:
+        value = False
+        for string in arguments[1:]:
             if string.startswith(argument) and "=" in string:
                 value = string.split("=")[-1]
             elif string.startswith(argument) and "=" not in string:
                 value = True
-        setattr(result, name, value)
-    for string in sys.argv[1:]:
+        setattr(namespace, name, value)
+    for string in arguments[1:]:
         name = argument.removeprefix("--").replace("-", "_")
-        if not hasattr(result, name):
+        if not hasattr(namespace, name):
             if string.startswith("--"):
                 role = "option"
             else:
                 role = "argument"
             raise Exception(f"Unrecognized {role} {string} ...")
-    return result
+    if not any([namespace.clicktrack, namespace.midi, namespace.pdf]):
+        _print_always("Missing --clicktrack, --midi, --pdf ...")
+        sys.exit(1)
+    return namespace
 
 
 def build_part(part_directory, debug_sections=False):
@@ -662,10 +656,6 @@ def color_persistent_indicators(directory, *, undo=False):
         job = dataclasses.replace(job, message_zero=True)
         for message in job():
             _print_tags(message)
-
-
-def directory():
-    return pathlib.Path(os.getcwd())
 
 
 def handle_build_tags(_sections_directory):
@@ -1015,30 +1005,22 @@ def interpret_tex_file(tex):
         sys.exit(1)
 
 
-def persist(lilypond_file, metadata, persist, timing):
-    _arguments = arguments(
-        "--also-untagged",
-        "--clicktrack",
-        "--log-timing",
-        "--midi",
-        "--pdf",
-        "--print-timing",
-    )
+def persist(lilypond_file, metadata, persist, timing, arguments):
     section_directory = pathlib.Path(os.getcwd())
     if "voice_name_to_parameter_to_state" in persist:
         persist["voice_name_to_parameter_to_state"] = dict(
             sorted(persist["voice_name_to_parameter_to_state"].items())
         )
     _write_metadata(metadata, persist, section_directory)
-    if _arguments.clicktrack:
+    if arguments.clicktrack:
         path = section_directory / "clicktrack.midi"
         mtime = os.path.getmtime(path) if path.is_file() else None
         _make_section_clicktrack(lilypond_file, mtime, section_directory)
-    if _arguments.midi:
+    if arguments.midi:
         path = section_directory / "music.midi"
         mtime = os.path.getmtime(path) if path.is_file() else None
         _make_section_midi(lilypond_file, mtime, section_directory)
-    if _arguments.pdf:
+    if arguments.pdf:
         path = section_directory / "music.pdf"
         mtime = os.path.getmtime(path) if path.is_file() else None
         _make_section_pdf(
@@ -1046,9 +1028,9 @@ def persist(lilypond_file, metadata, persist, timing):
             mtime,
             section_directory,
             timing,
-            also_untagged=_arguments.also_untagged,
-            log_timing=_arguments.log_timing,
-            print_timing=_arguments.print_timing,
+            also_untagged=arguments.also_untagged,
+            log_timing=arguments.log_timing,
+            print_timing=arguments.print_timing,
         )
 
 
@@ -1096,48 +1078,33 @@ def section(
     score,
     manifests,
     time_signatures,
+    dictionaries,
     *,
-    commands=None,
-    first_section=False,
-    first_measure_number: int = 1,
     interpreter=None,
     **keywords,
 ):
-    # TODO: pass in section_directory; do not read global info here:
-    section_directory = pathlib.Path(os.getcwd())
-    _arguments = arguments("--clicktrack", "--midi", "--pdf")
-    if not any([_arguments.clicktrack, _arguments.midi, _arguments.pdf]):
-        _print_always("Missing --clicktrack, --midi, --pdf ...")
-        sys.exit(1)
-    commands = commands or []
-    _print_main_task("Interpreting commands ...")
-    interpreter = interpreter or baca.interpret.section
-    # TODO: pass in metadata; do not read global info here:
-    metadata = baca.path.get_metadata(section_directory)
-    # TODO: pass in persist; do not read global info here:
-    # TODO: creat baca.path.get_persist() function:
-    persist = baca.path.get_metadata(section_directory, file_name="__persist__")
-    if section_directory.name == "01":
-        previous_metadata, previous_persist = {}, {}
+    _print_main_task("Interpreting section ...")
+    if dictionaries.previous_metadata:
+        first_measure_number = (
+            dictionaries.previous_metadata["final_measure_number"] + 1
+        )
     else:
-        # TODO: pass in previous_metadata; do not read global info here:
-        previous_metadata = baca.previous_metadata(str(section_directory / "dummy"))
-        # TODO: pass in previous_persist; do not read global info here:
-        previous_persist = baca.previous_persist(str(section_directory / "dummy"))
-    first_section = first_section or section_directory.name == "01"
+        first_measure_number = 1
+    interpreter = interpreter or baca.interpret.section
+    if "first_measure_number" in keywords:
+        del keywords["first_measure_number"]
     with abjad.Timer() as timer:
         metadata, persist = interpreter(
             score,
             manifests,
             time_signatures,
             **keywords,
-            commands=commands,
             first_measure_number=first_measure_number,
-            metadata=metadata,
-            persist=persist,
-            previous_metadata=previous_metadata,
-            previous_persist=previous_persist,
-            section_number=section_directory.name,
+            metadata=dictionaries.metadata,
+            persist=dictionaries.persist,
+            previous_metadata=dictionaries.previous_metadata,
+            previous_persist=dictionaries.previous_persist,
+            section_number=dictionaries.section_number,
         )
     timing = types.SimpleNamespace()
     timing.runtime = int(timer.elapsed_time)
