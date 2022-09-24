@@ -16,7 +16,7 @@ commands.py examles
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 16))(score)
-    >>> music = baca.make_even_divisions_function(accumulator.get())
+    >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.bcps(
@@ -204,7 +204,7 @@ commands.py examles
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 16))(score)
-    >>> music = baca.make_even_divisions_function(accumulator.get())
+    >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.bcps(voice[:7], bcps=[(1, 5), (2, 5)])
@@ -356,7 +356,7 @@ commands.py examles
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam(container)
     >>> _ = baca.dynamic(baca.select.pleaf(container, 0), '"f"')
     >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
@@ -431,7 +431,7 @@ commands.py examles
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 13))(score)
-    >>> music = baca.make_even_divisions_function(accumulator.get())
+    >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
@@ -527,7 +527,7 @@ commands.py examles
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions_function(accumulator.get())
+    >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
@@ -622,7 +622,7 @@ commands.py examles
     ...     docs=True,
     ... )
 
-    >>> music = baca.make_notes_function(accumulator.get(), repeat_ties=True)
+    >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 F4")
@@ -695,7 +695,7 @@ commands.py examles
     ...     docs=True,
     ... )
 
-    >>> music = baca.make_notes_function(accumulator.get(), repeat_ties=True)
+    >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.short_instrument_name(voice[0], "Fl.", manifests)
@@ -764,7 +764,7 @@ commands.py examles
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_notes_function(accumulator.get())
+    >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.clef(voice[0], "percussion")
@@ -839,7 +839,7 @@ commands.py examles
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_notes_function(accumulator.get())
+    >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.clef(voice[0], "bass")
@@ -915,7 +915,7 @@ commands.py examles
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_notes_function(accumulator.get())
+    >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.clef(voice[0], "percussion")
@@ -989,7 +989,7 @@ commands.py examles
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_notes_function(accumulator.get())
+    >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.clef(voice[0], "bass")
@@ -1063,7 +1063,7 @@ commands.py examles
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_notes_function(accumulator.get())
+    >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.staff_lines(voice[0], 2)
@@ -1135,9 +1135,9 @@ commands.py examles
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam(container)
     >>> baca.color(abjad.select.leaves(container))
-    >>> rmakers.unbeam_function(container)
+    >>> rmakers.unbeam(container)
     >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
@@ -1218,9 +1218,9 @@ commands.py examles
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam(container)
     >>> baca.color(color_selector(container))
-    >>> rmakers.unbeam_function(container)
+    >>> rmakers.unbeam(container)
     >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
     >>> container[:] = []
@@ -1364,7 +1364,7 @@ commands.py examles
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_notes_function(accumulator.get())
+    >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitch(voice, "C5")
@@ -1448,7 +1448,7 @@ commands.py examles
     ...     docs=True,
     ... )
 
-    >>> music = baca.make_even_divisions_function(accumulator.get())
+    >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -1556,7 +1556,7 @@ commands.py examles
     ...     docs=True,
     ... )
 
-    >>> music = baca.make_even_divisions_function(accumulator.get())
+    >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -1655,7 +1655,7 @@ commands.py examles
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_notes_function(accumulator.get())
+    >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitch(voice, "C5")
@@ -1724,7 +1724,7 @@ commands.py examles
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam_function(container)
+    >>> rmakers.beam(container)
     >>> abjad.label.with_pitches(container, locale="us")
     >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
     >>> selection = container[:]
@@ -1805,7 +1805,7 @@ commands.py examles
     ...     docs=True,
     ... )
 
-    >>> music = baca.make_notes_function(accumulator.get())
+    >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.assign_part(voice, baca.parts.PartAssignment("Music"))
@@ -1868,7 +1868,7 @@ commands.py examles
 
     >>> part_assignment = baca.parts.PartAssignment("Flute")
 
-    >>> music = baca.make_notes_function(accumulator.get())
+    >>> music = baca.make_notes(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.assign_part(voice, baca.parts.PartAssignment("Flute.Music"))

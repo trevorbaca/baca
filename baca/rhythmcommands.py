@@ -125,12 +125,12 @@ def get_previous_rhythm_state(
     return previous_rhythm_state
 
 
-def make_even_divisions_function(time_signatures):
+def make_even_divisions(time_signatures):
     tag = _tags.function_name(_frame())
-    nested_music = rmakers.even_division_function(time_signatures, [8], tag=tag)
+    nested_music = rmakers.even_division(time_signatures, [8], tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(nested_music, time_signatures)
-    rmakers.beam_function(voice, tag=tag)
-    rmakers.extract_trivial_function(voice)
+    rmakers.beam(voice, tag=tag)
+    rmakers.extract_trivial(voice)
     music = abjad.mutate.eject_contents(voice)
     return music
 
@@ -290,24 +290,24 @@ def make_monads(fractions):
     return components
 
 
-def make_notes_function(
+def make_notes(
     time_signatures,
     *,
     repeat_ties: bool = False,
 ):
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     tag = _tags.function_name(_frame())
-    nested_music = rmakers.note_function(time_signatures, tag=tag)
+    nested_music = rmakers.note(time_signatures, tag=tag)
     music = abjad.sequence.flatten(nested_music, depth=-1)
     music_voice = rmakers.wrap_in_time_signature_staff(music, time_signatures)
-    rmakers.rewrite_meter_function(music_voice)
+    rmakers.rewrite_meter(music_voice)
     if repeat_ties is True:
-        rmakers.force_repeat_tie_function(music_voice)
+        rmakers.force_repeat_tie(music_voice)
     music = abjad.mutate.eject_contents(music_voice)
     return music
 
 
-def make_repeat_tied_notes_function(
+def make_repeat_tied_notes(
     time_signatures,
     *,
     do_not_rewrite_meter: bool = False,
@@ -332,7 +332,7 @@ def make_repeat_tied_notes_function(
         ... )
         >>> baca.SpacingSpecifier((1, 12))(score)
 
-        >>> music = baca.make_repeat_tied_notes_function(accumulator.get())
+        >>> music = baca.make_repeat_tied_notes(accumulator.get())
         >>> score["Music"].extend(music)
 
         >>> _, _ = baca.interpret.section(
@@ -385,23 +385,23 @@ def make_repeat_tied_notes_function(
 
     """
     tag = _tags.function_name(_frame())
-    nested_music = rmakers.note_function(time_signatures, tag=tag)
+    nested_music = rmakers.note(time_signatures, tag=tag)
     music: list[abjad.Leaf | abjad.Tuplet] = abjad.sequence.flatten(
         nested_music, depth=-1
     )
     music_voice = rmakers.wrap_in_time_signature_staff(music, time_signatures)
-    rmakers.beam_function(_select.plts(music_voice))
-    rmakers.repeat_tie_function(_select.pheads(music_voice)[1:], tag=tag)
+    rmakers.beam(_select.plts(music_voice))
+    rmakers.repeat_tie(_select.pheads(music_voice)[1:], tag=tag)
     if not do_not_rewrite_meter:
-        rmakers.rewrite_meter_function(music_voice)
-    rmakers.force_repeat_tie_function(music_voice)
+        rmakers.rewrite_meter(music_voice)
+    rmakers.force_repeat_tie(music_voice)
     music = music_voice[:]
     music_voice[:] = []
     assert all(isinstance(_, abjad.Leaf | abjad.Tuplet) for _ in music)
     return music
 
 
-def make_repeated_duration_notes_function(
+def make_repeated_duration_notes(
     time_signatures,
     durations,
     *,
@@ -423,32 +423,32 @@ def make_repeated_duration_notes_function(
 
     divisions = [abjad.NonreducedFraction(_) for _ in time_signatures]
     divisions = preprocessor(divisions)
-    nested_music = rmakers.note_function(divisions, tag=tag)
+    nested_music = rmakers.note(divisions, tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(nested_music, time_signatures)
     if not do_not_rewrite_meter:
-        rmakers.rewrite_meter_function(voice, tag=tag)
-    rmakers.force_repeat_tie_function(voice)
+        rmakers.rewrite_meter(voice, tag=tag)
+    rmakers.force_repeat_tie(voice)
     music = abjad.mutate.eject_contents(voice)
     return music
 
 
-def make_rests_function(time_signatures):
+def make_rests(time_signatures):
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     tag = _tags.function_name(_frame())
-    nested_music = rmakers.note_function(time_signatures, tag=tag)
+    nested_music = rmakers.note(time_signatures, tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(nested_music, time_signatures)
     lts = _select.lts(voice)
-    rmakers.force_rest_function(lts, tag=tag)
+    rmakers.force_rest(lts, tag=tag)
     music = abjad.mutate.eject_contents(voice)
     return music
 
 
-def make_single_attack_function(time_signatures, duration):
+def make_single_attack(time_signatures, duration):
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     tag = _tags.function_name(_frame())
     duration = abjad.Duration(duration)
     numerator, denominator = duration.pair
-    nested_music = rmakers.incised_function(
+    nested_music = rmakers.incised(
         time_signatures,
         fill_with_rests=True,
         outer_divisions_only=True,
@@ -458,8 +458,8 @@ def make_single_attack_function(time_signatures, duration):
         tag=tag,
     )
     voice = rmakers.wrap_in_time_signature_staff(nested_music, time_signatures)
-    rmakers.beam_function(voice)
-    rmakers.extract_trivial_function(voice)
+    rmakers.beam(voice)
+    rmakers.extract_trivial(voice)
     music = abjad.mutate.eject_contents(voice)
     return music
 
@@ -489,21 +489,21 @@ def make_skeleton(
     return selection
 
 
-def make_tied_notes_function(time_signatures):
+def make_tied_notes(time_signatures):
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     tag = _tags.function_name(_frame())
-    nested_music = rmakers.note_function(time_signatures, tag=tag)
+    nested_music = rmakers.note(time_signatures, tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(nested_music, time_signatures)
     plts = _select.plts(voice)
-    rmakers.beam_function(plts, tag=tag)
+    rmakers.beam(plts, tag=tag)
     ptails = _select.ptails(voice)[:-1]
-    rmakers.tie_function(ptails, tag=tag)
-    rmakers.rewrite_meter_function(voice, tag=tag)
+    rmakers.tie(ptails, tag=tag)
+    rmakers.rewrite_meter(voice, tag=tag)
     music = abjad.mutate.eject_contents(voice)
     return music
 
 
-def make_tied_repeated_durations_function(time_signatures, durations):
+def make_tied_repeated_durations(time_signatures, durations):
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     tag = _tags.function_name(_frame())
     divisions = [abjad.NonreducedFraction(_) for _ in time_signatures]
@@ -515,10 +515,10 @@ def make_tied_repeated_durations_function(time_signatures, durations):
     elif isinstance(durations, tuple):
         assert len(durations) == 2
         durations = [abjad.Duration(durations)]
-    nested_music = rmakers.note_function(divisions, tag=tag)
+    nested_music = rmakers.note(divisions, tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(nested_music, time_signatures)
     pheads = _select.pheads(voice)[1:]
-    rmakers.repeat_tie_function(pheads, tag=tag)
-    rmakers.force_repeat_tie_function(voice)
+    rmakers.repeat_tie(pheads, tag=tag)
+    rmakers.force_repeat_tie(voice)
     music = abjad.mutate.eject_contents(voice)
     return music

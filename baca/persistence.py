@@ -565,7 +565,7 @@ r"""
         ... )
         >>> baca.SpacingSpecifier(fallback_duration=(1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
         >>> _, _ = baca.interpret.section(
@@ -630,7 +630,7 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "p")
         >>> metadata, persist = {}, {}
@@ -708,7 +708,7 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
@@ -786,7 +786,7 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), "f")
@@ -854,7 +854,7 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
@@ -931,7 +931,7 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "sfz")
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), "sfz")
@@ -999,7 +999,7 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "sfz")
         >>> metadata, persist = {}, {}
@@ -1077,7 +1077,7 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "mf")
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), '"mf"')
@@ -1168,7 +1168,7 @@ r"""
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> _ = baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
         >>> _, _ = baca.interpret.section(
@@ -1328,7 +1328,7 @@ r"""
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> _ = baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
         >>> metadata, persist = {}, {}
@@ -1500,7 +1500,7 @@ r"""
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
@@ -1680,7 +1680,7 @@ r"""
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> manifests = {"abjad.Instrument": instruments}
         >>> _ = baca.instrument(voice[0], "Flute", manifests)
@@ -1866,7 +1866,7 @@ r"""
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
@@ -2060,7 +2060,7 @@ r"""
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> _ = baca.short_instrument_name(voice[0], "I+II", manifests)
 
@@ -2230,7 +2230,7 @@ r"""
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> _ = baca.short_instrument_name(voice[0], "III+IV", manifests)
 
@@ -2415,7 +2415,7 @@ r"""
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
@@ -2606,7 +2606,7 @@ r"""
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> manifests = {"abjad.ShortInstrumentName": short_instrument_names}
         >>> _ = baca.short_instrument_name(voice[0], "I+II", manifests)
@@ -2811,7 +2811,7 @@ r"""
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
 
         >>> metadata, persist = {}, {}
@@ -3005,7 +3005,7 @@ r"""
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
 
         >>> wrappers = baca.short_instrument_name(voice[0], "I+II", manifests)
@@ -3120,7 +3120,7 @@ r"""
         ...     {},
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> baca.append_anchor_note(voice)
 
@@ -3221,7 +3221,7 @@ r"""
         ... )
         >>> wrappers = baca.text_spanner_staff_padding(score["Skips"][:-1], 4)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> baca.append_anchor_note(voice)
 
@@ -3341,7 +3341,7 @@ r"""
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> baca.reapply(voice, manifests, persist["persistent_indicators"])
         >>> wrappers = baca.text_spanner_staff_padding(score["Skips"], 4)
@@ -3437,7 +3437,7 @@ r"""
         ...     {},
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> baca.append_anchor_note(voice)
 
@@ -3556,7 +3556,7 @@ r"""
         ... )
         >>> wrappers = baca.text_spanner_staff_padding(score["Skips"][:-1], 4)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> baca.append_anchor_note(voice)
         >>> baca.reapply(voice, {}, persist["persistent_indicators"])
@@ -3667,7 +3667,7 @@ r"""
         ... )
         >>> tag = abjad.Tag("baca.bar_extent_persistent")
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> wrapper = abjad.attach(override, voice[0], wrapper=True)
         >>> wrapper.tag = tag
@@ -3746,7 +3746,7 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
 
         >>> metadata, persist = {}, {}
@@ -3828,7 +3828,7 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> override = baca.PersistentOverride(
         ...     attribute="bar_extent",
@@ -3926,7 +3926,7 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> _ = baca.staff_lines(voice[0], 5)
 
@@ -3995,7 +3995,7 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> _ = baca.staff_lines(voice[0], 1)
 
@@ -4077,7 +4077,7 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
@@ -4157,7 +4157,7 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> _ = baca.staff_lines(voice[0], 5)
         >>> _ = baca.staff_lines(voice[1], 5)
@@ -4232,7 +4232,7 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
 
         >>> metadata, persist = {}, {}
@@ -4340,7 +4340,7 @@ r"""
         ...     {},
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> baca.append_anchor_note(voice)
 
@@ -4440,7 +4440,7 @@ r"""
         ... )
         >>> wrappers = baca.text_spanner_staff_padding(score["Skips"], 4)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
 
         >>> metadata, persist = {}, {}
@@ -4539,7 +4539,7 @@ r"""
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.interpret.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> baca.reapply(voice, manifests, persist["persistent_indicators"])
         >>> wrappers = baca.text_spanner_staff_padding(score["Skips"], 4)
@@ -4633,7 +4633,7 @@ r"""
         ...     {},
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
 
         >>> _, _ = baca.interpret.section(
@@ -4736,7 +4736,7 @@ r"""
         ... )
         >>> wrappers = baca.text_spanner_staff_padding(score["Skips"], 4)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes_function(accumulator.get())
+        >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> baca.reapply(voice, manifests, persist["persistent_indicators"])
         >>> _, _ = baca.interpret.section(

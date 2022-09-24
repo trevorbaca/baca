@@ -15,7 +15,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ...     accumulator,
     ...     docs=True,
     ... )
-    >>> music = baca.make_even_divisions_function(accumulator.get())
+    >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> abjad.label.with_indices(voice)
@@ -208,7 +208,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ...     accumulator,
     ...     docs=True,
     ... )
-    >>> music = baca.make_even_divisions_function(accumulator.get())
+    >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.instrument(voice[0], "clarinet", manifests)
@@ -294,7 +294,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ...     accumulator,
     ...     docs=True,
     ... )
-    >>> music = baca.make_even_divisions_function(accumulator.get())
+    >>> music = baca.make_even_divisions(accumulator.get())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.instrument(voice[0], "clarinet", manifests)
