@@ -385,7 +385,7 @@ def get_measure_profile_metadata(path) -> tuple[int, int, list]:
 def get_metadata(path, file_name="__metadata__"):
     assert file_name in ("__metadata__", "__persist__"), repr(file_name)
     metadata_py_path = path / file_name
-    metadata = None
+    metadata = {}
     if metadata_py_path.is_file():
         file_contents_string = metadata_py_path.read_text()
         baca = importlib.import_module("baca")
