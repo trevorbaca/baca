@@ -526,9 +526,19 @@ def _write_music_ly(lilypond_file, music_ly):
     abjad.persist.as_ly(lilypond_file, music_ly, tags=True)
 
 
-def arguments(*arguments):
-    # argv = sys.argv
-    arguments = arguments or sys.argv
+@dataclasses.dataclass(frozen=True, slots=True, order=True, unsafe_hash=True)
+class Environment:
+
+    arguments: tuple[str, ...]
+    first_measure_number: int | None
+    metadata: dict
+    persist: dict
+    previous_metadata: dict
+    previous_persist: dict
+    section_number: str
+
+
+def arguments(arguments):
     known_arguments = (
         "--also-untagged",
         "--clicktrack",
@@ -559,6 +569,10 @@ def arguments(*arguments):
         _print_always("Missing --clicktrack, --midi, --pdf ...")
         sys.exit(1)
     return namespace
+
+
+def argv():
+    return list(sys.argv)
 
 
 def build_part(part_directory, debug_sections=False):
@@ -1039,6 +1053,33 @@ def persist_as_ly(argument, ly_file_path):
     abjad.persist.as_ly(argument, ly_file_path)
 
 
+def read_environment(music_py_path_name, sys_argv) -> Environment:
+    arguments_ = arguments(sys_argv)
+    section_directory = baca.path.section_directory(music_py_path_name)
+    metadata = baca.path.get_metadata(section_directory)
+    persist = baca.path.get_persist(section_directory)
+    previous_metadata = baca.path.previous_metadata(music_py_path_name)
+    previous_persist = baca.path.previous_persist(music_py_path_name)
+    if previous_metadata:
+        string = "final_measure_number"
+        if string in previous_metadata:
+            first_measure_number = previous_metadata[string] + 1
+        else:
+            first_measure_number = None
+    else:
+        first_measure_number = 1
+    environment = Environment(
+        arguments=arguments_,
+        first_measure_number=first_measure_number,
+        metadata=metadata,
+        persist=persist,
+        previous_metadata=previous_metadata,
+        previous_persist=previous_persist,
+        section_number=section_directory.name,
+    )
+    return environment
+
+
 def run_lilypond(ly_file_path, *, pdf_mtime=None, remove=None):
     assert ly_file_path.exists(), repr(ly_file_path)
     string = f"Calling LilyPond (with includes) on {baca.path.trim(ly_file_path)} ..."
@@ -1078,20 +1119,12 @@ def section(
     score,
     manifests,
     time_signatures,
-    dictionaries,
+    environment,
     *,
     interpreter=None,
     **keywords,
 ):
     _print_main_task("Interpreting section ...")
-    if dictionaries.previous_metadata:
-        string = "final_measure_number"
-        if string in dictionaries.previous_metadata:
-            first_measure_number = dictionaries.previous_metadata[string] + 1
-        else:
-            first_measure_number = None
-    else:
-        first_measure_number = 1
     interpreter = interpreter or baca.interpret.section
     if "first_measure_number" in keywords:
         del keywords["first_measure_number"]
@@ -1101,12 +1134,12 @@ def section(
             manifests,
             time_signatures,
             **keywords,
-            first_measure_number=first_measure_number,
-            metadata=dictionaries.metadata,
-            persist=dictionaries.persist,
-            previous_metadata=dictionaries.previous_metadata,
-            previous_persist=dictionaries.previous_persist,
-            section_number=dictionaries.section_number,
+            first_measure_number=environment.first_measure_number,
+            metadata=environment.metadata,
+            persist=environment.persist,
+            previous_metadata=environment.previous_metadata,
+            previous_persist=environment.previous_persist,
+            section_number=environment.section_number,
         )
     timing = types.SimpleNamespace()
     timing.runtime = int(timer.elapsed_time)

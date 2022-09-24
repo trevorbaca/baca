@@ -416,14 +416,20 @@ def get_persist(path):
 
 def previous_metadata(path: str) -> dict:
     previous_section = _get_previous_section(path)
-    previous_metadata = get_metadata(previous_section, file_name="__metadata__")
+    if previous_section:
+        previous_metadata = get_metadata(previous_section, file_name="__metadata__")
+    else:
+        previous_metadata = {}
     return previous_metadata
 
 
 def previous_persist(path: str) -> dict:
     previous_section = _get_previous_section(path)
-    previous_metadata = get_metadata(previous_section, file_name="__persist__")
-    return previous_metadata
+    if previous_section:
+        previous_persist = get_metadata(previous_section, file_name="__persist__")
+    else:
+        previous_persist = {}
+    return previous_persist
 
 
 def remove_metadatum(path, name, *, file_name="__metadata__"):
