@@ -418,6 +418,8 @@ def _make_section_pdf(
 
 
 def _print_all_timing(timing):
+    if hasattr(timing, "make_score"):
+        _print_timing("make_score() time", int(timing.make_score))
     _print_timing("Command interpretation time", int(timing.runtime))
     _print_timing("LilyPond runtime", int(timing.lilypond_runtime))
 
