@@ -1021,7 +1021,12 @@ def interpret_tex_file(tex):
         sys.exit(1)
 
 
-def persist(lilypond_file, metadata, persist, timing, arguments):
+def persist_as_ly(argument, ly_file_path):
+    _print_file_handling(f"Writing {baca.path.trim(ly_file_path)} ...")
+    abjad.persist.as_ly(argument, ly_file_path)
+
+
+def persist_lilypond_file(lilypond_file, metadata, persist, timing, arguments):
     section_directory = pathlib.Path(os.getcwd())
     if "voice_name_to_parameter_to_state" in persist:
         persist["voice_name_to_parameter_to_state"] = dict(
@@ -1050,9 +1055,37 @@ def persist(lilypond_file, metadata, persist, timing, arguments):
         )
 
 
-def persist_as_ly(argument, ly_file_path):
-    _print_file_handling(f"Writing {baca.path.trim(ly_file_path)} ...")
-    abjad.persist.as_ly(argument, ly_file_path)
+def postprocess_score(
+    score,
+    manifests,
+    time_signatures,
+    environment,
+    *,
+    postprocessor=None,
+    **keywords,
+):
+    postprocessor = postprocessor or baca.section.postprocess_score
+    with abjad.Timer() as timer:
+        result = postprocessor(
+            score,
+            manifests,
+            time_signatures,
+            **keywords,
+            first_measure_number=environment.first_measure_number,
+            metadata=environment.metadata,
+            persist=environment.persist,
+            previous_metadata=environment.previous_metadata,
+            previous_persist=environment.previous_persist,
+            section_number=environment.section_number,
+        )
+    if len(result) == 2:
+        metadata, persist = result
+    else:
+        assert len(result) == 3
+        metadata, persist, timing = result
+    timing = types.SimpleNamespace()
+    timing.runtime = int(timer.elapsed_time)
+    return metadata, persist, timing
 
 
 def read_environment(music_py_path_name, sys_argv) -> Environment:
@@ -1115,35 +1148,6 @@ def run_lilypond(ly_file_path, *, pdf_mtime=None, remove=None):
         else:
             _print_error(f"Can not find {baca.path.trim(pdf)} ...")
         assert lilypond_log_file_path.exists()
-
-
-def section(
-    score,
-    manifests,
-    time_signatures,
-    environment,
-    *,
-    interpreter=None,
-    **keywords,
-):
-    interpreter = interpreter or baca.section.section
-    assert "first_measure_number" not in keywords
-    with abjad.Timer() as timer:
-        metadata, persist = interpreter(
-            score,
-            manifests,
-            time_signatures,
-            **keywords,
-            first_measure_number=environment.first_measure_number,
-            metadata=environment.metadata,
-            persist=environment.persist,
-            previous_metadata=environment.previous_metadata,
-            previous_persist=environment.previous_persist,
-            section_number=environment.section_number,
-        )
-    timing = types.SimpleNamespace()
-    timing.runtime = int(timer.elapsed_time)
-    return metadata, persist, timing
 
 
 def show_annotations(directory, *, undo=False):

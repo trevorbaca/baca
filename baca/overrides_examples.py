@@ -30,7 +30,7 @@ overrides.py examples.
     >>> _ = baca.bar_line_transparent(
     ...         abjad.select.group_by_measure(voice)[1]
     ... )
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -429,7 +429,7 @@ overrides.py examples.
     ...     baca.select.mmrests(voice)[1:],
     ...     "#(x11-color 'DarkOrchid)",
     ... )
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -513,7 +513,7 @@ overrides.py examples.
     ...     r"\baca-boxed-markup still",
     ... )
     >>> _ = baca.mmrest_text_color(baca.select.mmrests(voice)[1:], "#red")
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -599,7 +599,7 @@ overrides.py examples.
     ... )
     >>> _ = baca.mmrest_text_extra_offset(
     ...     baca.select.mmrests(voice)[1:], (0, 2))
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -684,7 +684,7 @@ overrides.py examples.
     ...     r"\baca-boxed-markup still",
     ... )
     >>> _ = baca.mmrest_text_padding(baca.select.mmrests(voice)[1:], 2)
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -769,7 +769,7 @@ overrides.py examples.
     ...     r"\baca-boxed-markup still",
     ... )
     >>> _ = baca.mmrest_text_parent_center(baca.select.mmrests(voice)[1:])
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -854,7 +854,7 @@ overrides.py examples.
     ...     r"\baca-boxed-markup still",
     ... )
     >>> _ = baca.mmrest_text_staff_padding(baca.select.mmrests(voice)[1:], 2)
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,

@@ -2012,7 +2012,7 @@ class Constellation:
 
     def __repr__(self):
         """
-        Gets interpreter representation of constellation.
+        Gets repr of constellation.
 
         ..  container:: example
 
@@ -2153,7 +2153,7 @@ class Circuit:
 
     def __repr__(self):
         """
-        Gets interpreter representation of circuit.
+        Gets repr of circuit.
 
         ..  container:: example
 

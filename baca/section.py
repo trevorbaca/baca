@@ -9,6 +9,7 @@ import os
 import pathlib
 import pprint
 import sys
+import types
 import typing
 from inspect import currentframe as _frame
 
@@ -2570,7 +2571,7 @@ def make_layout_ly(
     spacing(score, page_layout_profile, has_anchor_skip=has_anchor_skip)
     # TODO: separate 'breaks' from SpacingSpecifier:
     apply_breaks(score, spacing.breaks)
-    _, _ = section(
+    _, _, _ = postprocess_score(
         score,
         {},
         accumulator.time_signatures,
@@ -2791,45 +2792,7 @@ def label_stage_numbers(global_skips, stage_markup):
     )
 
 
-def reapply(voices, manifests, previous_persistent_indicators):
-    runtime = {
-        "already_reapplied_contexts": {"Score"},
-        "manifests": manifests,
-        "previous_persistent_indicators": previous_persistent_indicators,
-    }
-    for voice in voices:
-        reapply_persistent_indicators(voice, runtime=runtime)
-
-
-def reapply_persistent_indicators(argument, *, runtime=None):
-    already_reapplied_contexts = runtime["already_reapplied_contexts"]
-    manifests = runtime["manifests"]
-    previous_persistent_indicators = runtime["previous_persistent_indicators"]
-    leaf = abjad.select.leaf(argument, 0)
-    parentage = abjad.get.parentage(leaf)
-    contexts = []
-    score = None
-    for component in parentage:
-        if isinstance(component, abjad.Score):
-            score = component
-        elif isinstance(component, abjad.Context):
-            contexts.append(component)
-    assert isinstance(score, abjad.Score)
-    for context in contexts:
-        _reapply_persistent_indicators(
-            manifests,
-            previous_persistent_indicators,
-            score,
-            already_reapplied_contexts=already_reapplied_contexts,
-            do_not_iterate=context,
-        )
-
-
-def scope(cache):
-    return DynamicScope(cache)
-
-
-def section(
+def postprocess_score(
     score,
     manifests,
     time_signatures,
@@ -2881,201 +2844,244 @@ def section(
     treat_untreated_persistent_wrappers=False,
     whitespace_leaves=False,
 ):
-    assert isinstance(score, abjad.Score), repr(score)
-    if activate is not None:
-        assert isinstance(activate, list), repr(activate)
-        assert all(isinstance(_, abjad.Tag) for _ in activate)
-    assert isinstance(all_music_in_part_containers, bool)
-    assert isinstance(allow_empty_selections, bool)
-    if clock_time_override is not None:
-        assert isinstance(clock_time_override, abjad.MetronomeMark)
-    assert isinstance(color_octaves, bool)
-    assert isinstance(do_not_check_wellformedness, bool)
-    if deactivate is not None:
-        assert isinstance(deactivate, list), repr(deactivate)
-        assert all(isinstance(_, abjad.Tag) for _ in deactivate)
-    assert isinstance(do_not_require_short_instrument_names, bool)
-    assert isinstance(empty_fermata_measures, bool)
-    assert all(0 < _ for _ in fermata_measure_empty_overrides)
-    assert isinstance(final_section, bool)
-    assert isinstance(first_measure_number, int)
-    assert isinstance(first_section, bool)
-    assert isinstance(force_nonnatural_accidentals, bool)
-    global_skips = score["Skips"]
-    manifests = manifests or {
-        "abjad.Instrument": instruments,
-        "abjad.MetronomeMark": metronome_marks,
-        "abjad.ShortInstrumentName": short_instrument_names,
-    }
-    measure_count = len(time_signatures)
-    metadata = dict(metadata or {})
-    if parts_metric_modulation_multiplier is not None:
-        assert isinstance(parts_metric_modulation_multiplier, tuple)
-        assert len(parts_metric_modulation_multiplier) == 2
-    persist = dict(persist or {})
-    previous_metadata = dict(previous_metadata or {})
-    previous_persist = dict(previous_persist or {})
-    previous_persistent_indicators = previous_persist.get("persistent_indicators", {})
-    assert isinstance(transpose_score, bool)
-    assert isinstance(treat_untreated_persistent_wrappers, bool)
-    voice_name_to_parameter_to_state: dict[str, dict] = {}
-    with abjad.ForbidUpdate(component=score, update_on_exit=True):
-        offset_to_measure_number = _populate_offset_to_measure_number(
-            first_measure_number,
-            global_skips,
+    with abjad.Timer() as timer:
+        assert isinstance(score, abjad.Score), repr(score)
+        if activate is not None:
+            assert isinstance(activate, list), repr(activate)
+            assert all(isinstance(_, abjad.Tag) for _ in activate)
+        assert isinstance(all_music_in_part_containers, bool)
+        assert isinstance(allow_empty_selections, bool)
+        if clock_time_override is not None:
+            assert isinstance(clock_time_override, abjad.MetronomeMark)
+        assert isinstance(color_octaves, bool)
+        assert isinstance(do_not_check_wellformedness, bool)
+        if deactivate is not None:
+            assert isinstance(deactivate, list), repr(deactivate)
+            assert all(isinstance(_, abjad.Tag) for _ in deactivate)
+        assert isinstance(do_not_require_short_instrument_names, bool)
+        assert isinstance(empty_fermata_measures, bool)
+        assert all(0 < _ for _ in fermata_measure_empty_overrides)
+        assert isinstance(final_section, bool)
+        assert isinstance(first_measure_number, int)
+        assert isinstance(first_section, bool)
+        assert isinstance(force_nonnatural_accidentals, bool)
+        global_skips = score["Skips"]
+        manifests = manifests or {
+            "abjad.Instrument": instruments,
+            "abjad.MetronomeMark": metronome_marks,
+            "abjad.ShortInstrumentName": short_instrument_names,
+        }
+        measure_count = len(time_signatures)
+        metadata = dict(metadata or {})
+        if parts_metric_modulation_multiplier is not None:
+            assert isinstance(parts_metric_modulation_multiplier, tuple)
+            assert len(parts_metric_modulation_multiplier) == 2
+        persist = dict(persist or {})
+        previous_metadata = dict(previous_metadata or {})
+        previous_persist = dict(previous_persist or {})
+        previous_persistent_indicators = previous_persist.get(
+            "persistent_indicators", {}
         )
-        _extend_beams(score)
-        _attach_sounds_during(score)
-        if not first_section:
-            _clone_section_initial_short_instrument_name(score)
-        cached_time_signatures = _remove_redundant_time_signatures(
-            append_anchor_skip,
-            global_skips,
-        )
-        result = _get_fermata_measure_numbers(first_measure_number, score)
-        fermata_start_offsets = result[0]
-        fermata_measure_numbers = result[1]
-        final_measure_is_fermata = result[2]
-        if empty_fermata_measures and not fermata_measure_empty_overrides:
-            fermata_measure_empty_overrides = [
-                _ - first_measure_number + 1 for _ in fermata_measure_numbers
-            ]
-        if treat_untreated_persistent_wrappers:
-            _treat_untreated_persistent_wrappers(manifests, score)
-        _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier)
-        _reanalyze_trending_dynamics(manifests, score)
-        _reanalyze_reapplied_synthetic_wrappers(score)
-        if transpose_score:
-            _transpose_score(score)
-        _color_not_yet_registered(score)
-        _color_mock_pitch(score)
-        _set_intermittent_to_staff_position_zero(score)
-        if color_not_yet_pitched:
-            _color_not_yet_pitched(score)
-        _set_not_yet_pitched_to_staff_position_zero(score)
-        _clean_up_repeat_tie_direction(score)
-        _clean_up_laissez_vibrer_tie_direction(score)
-        if error_on_not_yet_pitched:
-            _error_on_not_yet_pitched(score)
-        _check_doubled_dynamics(score)
-        color_out_of_range_pitches(score)
-        if check_persistent_indicators:
-            _check_persistent_indicators(
-                do_not_require_short_instrument_names,
-                score,
-            )
-        color_repeat_pitch_classes(score)
-        if color_octaves:
-            _color_octaves(score)
-        _attach_shadow_tie_indicators(score)
-        if force_nonnatural_accidentals:
-            _force_nonnatural_accidentals(score)
-        _label_duration_multipliers(score)
-        _magnify_staves(magnify_staves, score)
-        if whitespace_leaves:
-            _whitespace_leaves(score)
-        if comment_measure_numbers:
-            _comment_measure_numbers(
+        assert isinstance(transpose_score, bool)
+        assert isinstance(treat_untreated_persistent_wrappers, bool)
+        voice_name_to_parameter_to_state: dict[str, dict] = {}
+        with abjad.ForbidUpdate(component=score, update_on_exit=True):
+            offset_to_measure_number = _populate_offset_to_measure_number(
                 first_measure_number,
+                global_skips,
+            )
+            _extend_beams(score)
+            _attach_sounds_during(score)
+            if not first_section:
+                _clone_section_initial_short_instrument_name(score)
+            cached_time_signatures = _remove_redundant_time_signatures(
+                append_anchor_skip,
+                global_skips,
+            )
+            result = _get_fermata_measure_numbers(first_measure_number, score)
+            fermata_start_offsets = result[0]
+            fermata_measure_numbers = result[1]
+            final_measure_is_fermata = result[2]
+            if empty_fermata_measures and not fermata_measure_empty_overrides:
+                fermata_measure_empty_overrides = [
+                    _ - first_measure_number + 1 for _ in fermata_measure_numbers
+                ]
+            if treat_untreated_persistent_wrappers:
+                _treat_untreated_persistent_wrappers(manifests, score)
+            _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier)
+            _reanalyze_trending_dynamics(manifests, score)
+            _reanalyze_reapplied_synthetic_wrappers(score)
+            if transpose_score:
+                _transpose_score(score)
+            _color_not_yet_registered(score)
+            _color_mock_pitch(score)
+            _set_intermittent_to_staff_position_zero(score)
+            if color_not_yet_pitched:
+                _color_not_yet_pitched(score)
+            _set_not_yet_pitched_to_staff_position_zero(score)
+            _clean_up_repeat_tie_direction(score)
+            _clean_up_laissez_vibrer_tie_direction(score)
+            if error_on_not_yet_pitched:
+                _error_on_not_yet_pitched(score)
+            _check_doubled_dynamics(score)
+            color_out_of_range_pitches(score)
+            if check_persistent_indicators:
+                _check_persistent_indicators(
+                    do_not_require_short_instrument_names,
+                    score,
+                )
+            color_repeat_pitch_classes(score)
+            if color_octaves:
+                _color_octaves(score)
+            _attach_shadow_tie_indicators(score)
+            if force_nonnatural_accidentals:
+                _force_nonnatural_accidentals(score)
+            _label_duration_multipliers(score)
+            _magnify_staves(magnify_staves, score)
+            if whitespace_leaves:
+                _whitespace_leaves(score)
+            if comment_measure_numbers:
+                _comment_measure_numbers(
+                    first_measure_number,
+                    offset_to_measure_number,
+                    score,
+                )
+            _style_fermata_measures(
+                fermata_extra_offset_y,
+                fermata_measure_empty_overrides,
+                fermata_start_offsets,
+                final_section,
                 offset_to_measure_number,
                 score,
             )
-        _style_fermata_measures(
-            fermata_extra_offset_y,
-            fermata_measure_empty_overrides,
-            fermata_start_offsets,
-            final_section,
-            offset_to_measure_number,
+            if shift_measure_initial_clefs:
+                _shift_measure_initial_clefs(
+                    first_measure_number,
+                    offset_to_measure_number,
+                    previous_persist,
+                    score,
+                )
+            _deactivate_tags(deactivate, score)
+            _remove_tags(remove_tags or [], score)
+            container_to_part_assignment = None
+            if add_container_identifiers:
+                container_to_part_assignment = _add_container_identifiers(
+                    score,
+                    section_number,
+                )
+                if all_music_in_part_containers:
+                    _check_all_music_in_part_containers(score)
+                _check_duplicate_part_assignments(
+                    container_to_part_assignment,
+                    part_manifest,
+                )
+        _move_global_rests(
+            global_rests_in_every_staff,
+            global_rests_in_topmost_staff,
             score,
         )
-        if shift_measure_initial_clefs:
-            _shift_measure_initial_clefs(
+        if move_global_context:
+            _move_global_context(score)
+        _clean_up_on_beat_grace_containers(score)
+        if not do_not_check_wellformedness:
+            count, message = abjad.wf.tabulate_wellformedness(
+                score, check_out_of_range_pitches=False
+            )
+            if count:
+                raise Exception("\n" + message)
+            violators, total = abjad.wf.check_out_of_range_pitches(
+                score, allow_indicators=(_enums.ALLOW_OUT_OF_RANGE, _enums.HIDDEN)
+            )
+            if violators:
+                raise Exception(f"{len(violators)} /    {total} out of range pitches")
+        clock_time_duration = None
+        start_clock_time = None
+        stop_clock_time = None
+        if label_clock_time:
+            result = _label_clock_time(
+                clock_time_override,
+                fermata_measure_numbers,
                 first_measure_number,
-                offset_to_measure_number,
-                previous_persist,
+                previous_metadata,
                 score,
             )
-        _deactivate_tags(deactivate, score)
-        _remove_tags(remove_tags or [], score)
-        container_to_part_assignment = None
-        if add_container_identifiers:
-            container_to_part_assignment = _add_container_identifiers(
-                score,
-                section_number,
-            )
-            if all_music_in_part_containers:
-                _check_all_music_in_part_containers(score)
-            _check_duplicate_part_assignments(
-                container_to_part_assignment,
-                part_manifest,
-            )
-    _move_global_rests(
-        global_rests_in_every_staff,
-        global_rests_in_topmost_staff,
-        score,
-    )
-    if move_global_context:
-        _move_global_context(score)
-    _clean_up_on_beat_grace_containers(score)
-    if not do_not_check_wellformedness:
-        count, message = abjad.wf.tabulate_wellformedness(
-            score, check_out_of_range_pitches=False
+            clock_time_duration = result[0]
+            start_clock_time = result[1]
+            stop_clock_time = result[2]
+        _activate_tags(score, activate)
+        final_measure_number = first_measure_number + measure_count - 1
+        persistent_indicators = _collect_persistent_indicators(
+            manifests,
+            previous_persistent_indicators,
+            score,
         )
-        if count:
-            raise Exception("\n" + message)
-        violators, total = abjad.wf.check_out_of_range_pitches(
-            score, allow_indicators=(_enums.ALLOW_OUT_OF_RANGE, _enums.HIDDEN)
-        )
-        if violators:
-            raise Exception(f"{len(violators)} /    {total} out of range pitches")
-    clock_time_duration = None
-    start_clock_time = None
-    stop_clock_time = None
-    if label_clock_time:
-        result = _label_clock_time(
-            clock_time_override,
+        first_metronome_mark = True
+        skip = abjad.select.leaf(score["Skips"], 0)
+        metronome_mark = abjad.get.effective(skip, abjad.MetronomeMark)
+        if metronome_mark is None:
+            first_metronome_mark = False
+        _collect_metadata(
+            container_to_part_assignment,
+            clock_time_duration,
             fermata_measure_numbers,
+            final_measure_is_fermata,
+            final_measure_number,
             first_measure_number,
-            previous_metadata,
+            first_metronome_mark,
+            append_anchor_skip,
+            metadata,
+            persist,
+            persistent_indicators,
             score,
+            start_clock_time,
+            stop_clock_time,
+            cached_time_signatures,
+            voice_name_to_parameter_to_state,
         )
-        clock_time_duration = result[0]
-        start_clock_time = result[1]
-        stop_clock_time = result[2]
-    _activate_tags(score, activate)
-    final_measure_number = first_measure_number + measure_count - 1
-    persistent_indicators = _collect_persistent_indicators(
-        manifests,
-        previous_persistent_indicators,
-        score,
-    )
-    first_metronome_mark = True
-    skip = abjad.select.leaf(score["Skips"], 0)
-    metronome_mark = abjad.get.effective(skip, abjad.MetronomeMark)
-    if metronome_mark is None:
-        first_metronome_mark = False
-    _collect_metadata(
-        container_to_part_assignment,
-        clock_time_duration,
-        fermata_measure_numbers,
-        final_measure_is_fermata,
-        final_measure_number,
-        first_measure_number,
-        first_metronome_mark,
-        append_anchor_skip,
-        metadata,
-        persist,
-        persistent_indicators,
-        score,
-        start_clock_time,
-        stop_clock_time,
-        cached_time_signatures,
-        voice_name_to_parameter_to_state,
-    )
-    _style_anchor_skip(score)
-    _style_anchor_notes(score)
-    _check_anchors_are_final(score)
-    return metadata, persist
+        _style_anchor_skip(score)
+        _style_anchor_notes(score)
+        _check_anchors_are_final(score)
+    timing = types.SimpleNamespace()
+    timing.runtime = int(timer.elapsed_time)
+    return metadata, persist, timing
+
+
+def reapply(voices, manifests, previous_persistent_indicators):
+    runtime = {
+        "already_reapplied_contexts": {"Score"},
+        "manifests": manifests,
+        "previous_persistent_indicators": previous_persistent_indicators,
+    }
+    for voice in voices:
+        reapply_persistent_indicators(voice, runtime=runtime)
+
+
+def reapply_persistent_indicators(argument, *, runtime=None):
+    already_reapplied_contexts = runtime["already_reapplied_contexts"]
+    manifests = runtime["manifests"]
+    previous_persistent_indicators = runtime["previous_persistent_indicators"]
+    leaf = abjad.select.leaf(argument, 0)
+    parentage = abjad.get.parentage(leaf)
+    contexts = []
+    score = None
+    for component in parentage:
+        if isinstance(component, abjad.Score):
+            score = component
+        elif isinstance(component, abjad.Context):
+            contexts.append(component)
+    assert isinstance(score, abjad.Score)
+    for context in contexts:
+        _reapply_persistent_indicators(
+            manifests,
+            previous_persistent_indicators,
+            score,
+            already_reapplied_contexts=already_reapplied_contexts,
+            do_not_iterate=context,
+        )
+
+
+def scope(cache):
+    return DynamicScope(cache)
 
 
 def section_defaults():

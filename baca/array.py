@@ -1015,7 +1015,7 @@ class PitchArrayCell:
 
     def __repr__(self) -> str:
         """
-        Gets interpreter representation of pitch array cell.
+        Gets repr of pitch array cell.
         """
         if self.pitches:
             pitches = " ".join([_.name for _ in self.pitches or []])

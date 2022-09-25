@@ -3837,7 +3837,7 @@ figures.py examples.
     >>> figures.populate_commands(score, accumulator)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -3985,7 +3985,7 @@ figures.py examples.
     >>> figures.populate_commands(score, accumulator)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -4154,7 +4154,7 @@ figures.py examples.
     >>> figures.populate_commands(score, accumulator)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -4342,7 +4342,7 @@ figures.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
     >>> figures.populate_commands(score, accumulator)
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -4572,7 +4572,7 @@ figures.py examples.
     >>> figures.populate_commands(score, accumulator)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -4779,7 +4779,7 @@ figures.py examples.
     >>> figures.populate_commands(score, accumulator)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -4920,7 +4920,7 @@ figures.py examples.
     >>> figures.populate_commands(score, accumulator)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -5086,7 +5086,7 @@ figures.py examples.
     >>> figures.populate_commands(score, accumulator)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -5968,7 +5968,7 @@ figures.py examples.
     >>> figures.populate_commands(score, accumulator)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -6156,7 +6156,7 @@ figures.py examples.
     >>> figures.populate_commands(score, accumulator)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -6336,7 +6336,7 @@ figures.py examples.
     >>> figures.populate_commands(score, accumulator)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -6520,7 +6520,7 @@ figures.py examples.
 
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,

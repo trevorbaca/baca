@@ -28,7 +28,7 @@ commands.py examles
     >>> _ = baca.pitches(voice, "E4 F4")
     >>> _ = baca.script_staff_padding(voice, 5)
 
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -213,7 +213,7 @@ commands.py examles
     >>> _ = baca.script_staff_padding(voice, 5.5)
     >>> _ = baca.text_spanner_staff_padding(voice, 2.5)
 
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -440,7 +440,7 @@ commands.py examles
     >>> _ = baca.dynamic(pleaf, "<")
     >>> _ = baca.dynamic(baca.select.pleaf(voice, -1), "!")
     >>> _ = baca.dls_staff_padding(voice, 5)
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -537,7 +537,7 @@ commands.py examles
     ...     abjad.Tweak(r"- \tweak extra-offset #'(-4 . 0)"),
     ... )
     >>> _ = baca.dls_staff_padding(voice, 5)
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -630,7 +630,7 @@ commands.py examles
     ...     baca.select.pleaves(voice)[:2], tag=baca.tags.NOT_PARTS
     ... )
 
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -701,7 +701,7 @@ commands.py examles
     >>> _ = baca.short_instrument_name(voice[0], "Fl.", manifests)
     >>> _ = baca.pitches(voice, "E4 F4")
 
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -771,7 +771,7 @@ commands.py examles
     >>> _ = baca.staff_lines(voice[0], 1)
     >>> _ = baca.staff_positions(voice, [-2, -1, 0, 1, 2])
 
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -846,7 +846,7 @@ commands.py examles
     >>> _ = baca.staff_lines(voice[0], 1)
     >>> _ = baca.staff_positions(voice, [-2, -1, 0, 1, 2])
 
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -922,7 +922,7 @@ commands.py examles
     >>> _ = baca.staff_lines(voice[0], 2)
     >>> _ = baca.staff_positions(voice, [-2, -1, 0, 1, 2])
 
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -996,7 +996,7 @@ commands.py examles
     >>> _ = baca.staff_lines(voice[0], 2)
     >>> _ = baca.staff_positions(voice, [-2, -1, 0, 1, 2])
 
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -1070,7 +1070,7 @@ commands.py examles
     >>> _ = baca.staff_positions(voice, [-2, -1, 0, 1, 2])
     >>> _ = baca.clef(voice[0], "bass")
 
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -1296,7 +1296,7 @@ commands.py examles
     >>> music = abjad.Container("c'4 d' e' f'")[:]
     >>> score["Music.2"].extend(music)
     >>> _ = baca.cross_staff(baca.select.pleaves(score["Music.2"])[-2:])
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -1374,7 +1374,7 @@ commands.py examles
     >>> baca.finger_pressure_transition(notes[:2])
     >>> baca.finger_pressure_transition(notes[2:])
 
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -1457,7 +1457,7 @@ commands.py examles
     ...     abjad.Tweak(r"- \tweak color #red"),
     ... )
 
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -1566,7 +1566,7 @@ commands.py examles
     ...     (abjad.Tweak(r"- \tweak color #red"), -1),
     ... )
 
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -1661,7 +1661,7 @@ commands.py examles
     >>> _ = baca.pitch(voice, "C5")
     >>> _ = baca.invisible_music(baca.select.leaves(voice)[1:-1])
 
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -1811,7 +1811,7 @@ commands.py examles
     >>> _ = baca.assign_part(voice, baca.parts.PartAssignment("Music"))
     >>> _ = baca.pitch(voice, "E4")
 
-    >>> _, _ = baca.section.section(
+    >>> _, _, _ = baca.section.postprocess_score(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
