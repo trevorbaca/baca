@@ -22,14 +22,6 @@ from .docs import global_context_string
 from .figures import *
 from .indicatorclasses import *
 from .indicatorcommands import *
-from .interpret import (
-    append_anchor_note,
-    label_moment_numbers,
-    label_stage_numbers,
-    reapply,
-    scope,
-    update_voice_name_to_parameter_to_state,
-)
 from .layout import *
 from .lilypond import file
 from .memento import *
@@ -66,6 +58,14 @@ from .piecewisecommands import (
 )
 from .pitchcommands import *
 from .rhythmcommands import *
+from .section import (
+    append_anchor_note,
+    label_moment_numbers,
+    label_stage_numbers,
+    reapply,
+    scope,
+    update_voice_name_to_parameter_to_state,
+)
 from .spannercommands import (
     beam,
     ottava,

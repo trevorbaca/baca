@@ -9,7 +9,7 @@ articulations.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
@@ -20,7 +20,7 @@ articulations.py examples.
     >>> voice = score["Music"]
     >>> _ = baca.pitch(voice, "E4")
     >>> _ = baca.color_fingerings(voice, numbers=[0, 1, 2, 1])
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,

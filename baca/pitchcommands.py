@@ -1378,7 +1378,7 @@ def deviation(
         >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
-        >>> first_measure_number = baca.interpret.set_up_score(
+        >>> first_measure_number = baca.section.set_up_score(
         ...     score,
         ...     accumulator.time_signatures,
         ...     accumulator,
@@ -1389,7 +1389,7 @@ def deviation(
         >>> voice.extend(music)
         >>> _ = baca.pitches(voice, "E4")
         >>> _ = baca.deviation(voice, [0, 0.5, 0, -0.5])
-        >>> _, _ = baca.interpret.section(
+        >>> _, _ = baca.section.section(
         ...     score,
         ...     {},
         ...     accumulator.time_signatures,
@@ -1470,7 +1470,7 @@ def displacement(argument, displacements: list[int]) -> None:
         >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
-        >>> first_measure_number = baca.interpret.set_up_score(
+        >>> first_measure_number = baca.section.set_up_score(
         ...     score,
         ...     accumulator.time_signatures,
         ...     accumulator,
@@ -1481,7 +1481,7 @@ def displacement(argument, displacements: list[int]) -> None:
         >>> voice.extend(music)
         >>> _ = baca.pitch(voice, "G4")
         >>> _ = baca.displacement(voice, [0, 0, 1, 1, 0, 0, -1, -1, 2, 2])
-        >>> _, _ = baca.interpret.section(
+        >>> _, _ = baca.section.section(
         ...     score,
         ...     {},
         ...     accumulator.time_signatures,
@@ -1876,7 +1876,7 @@ def pitch(
         >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
-        >>> first_measure_number = baca.interpret.set_up_score(
+        >>> first_measure_number = baca.section.set_up_score(
         ...     score,
         ...     accumulator.time_signatures,
         ...     accumulator,
@@ -1888,7 +1888,7 @@ def pitch(
         >>> rmakers.written_duration(music, 1)
         >>> voice.extend(music)
         >>> _ = baca.pitch(voice, "<C4 D4 E4>")
-        >>> _, _ = baca.interpret.section(
+        >>> _, _ = baca.section.section(
         ...     score,
         ...     {},
         ...     accumulator.time_signatures,
@@ -1985,7 +1985,7 @@ def pitches(
         >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
-        >>> first_measure_number = baca.interpret.set_up_score(
+        >>> first_measure_number = baca.section.set_up_score(
         ...     score,
         ...     accumulator.time_signatures,
         ...     accumulator,
@@ -1995,7 +1995,7 @@ def pitches(
         >>> music = baca.make_even_divisions(accumulator.get())
         >>> voice.extend(music)
         >>> _ = baca.pitches(voice, [19, 13, 15, 16, 17, 23])
-        >>> _, _ = baca.interpret.section(
+        >>> _, _ = baca.section.section(
         ...     score,
         ...     {},
         ...     accumulator.time_signatures,
@@ -2064,7 +2064,7 @@ def pitches(
         >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
-        >>> first_measure_number = baca.interpret.set_up_score(
+        >>> first_measure_number = baca.section.set_up_score(
         ...     score,
         ...     accumulator.time_signatures,
         ...     accumulator,
@@ -2074,7 +2074,7 @@ def pitches(
         >>> music = baca.make_even_divisions(accumulator.get())
         >>> voice.extend(music)
         >>> _ = baca.pitches(voice, "C4 F4 F#4 <B4 C#5> D5")
-        >>> _, _ = baca.interpret.section(
+        >>> _, _ = baca.section.section(
         ...     score,
         ...     {},
         ...     accumulator.time_signatures,
@@ -2143,7 +2143,7 @@ def pitches(
         >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
-        >>> first_measure_number = baca.interpret.set_up_score(
+        >>> first_measure_number = baca.section.set_up_score(
         ...     score,
         ...     accumulator.time_signatures,
         ...     accumulator,
@@ -2154,7 +2154,7 @@ def pitches(
         >>> voice.extend(music)
         >>> _ = baca.pitches(
         ...     voice, "<C4 D4 E4 F4 G4 A4 B4 C4>", allow_repeats=True)
-        >>> _, _ = baca.interpret.section(
+        >>> _, _ = baca.section.section(
         ...     score,
         ...     {},
         ...     accumulator.time_signatures,
@@ -2330,7 +2330,7 @@ def register(
         >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
-        >>> first_measure_number = baca.interpret.set_up_score(
+        >>> first_measure_number = baca.section.set_up_score(
         ...     score,
         ...     accumulator.time_signatures,
         ...     accumulator,
@@ -2341,7 +2341,7 @@ def register(
         >>> voice.extend(music)
         >>> _ = baca.pitches(voice, "G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4")
         >>> _ = baca.register(voice, 15)
-        >>> _, _ = baca.interpret.section(
+        >>> _, _ = baca.section.section(
         ...     score,
         ...     {},
         ...     accumulator.time_signatures,
@@ -2845,7 +2845,7 @@ def register(
         >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=time_signatures,
         ... )
-        >>> first_measure_number = baca.interpret.set_up_score(
+        >>> first_measure_number = baca.section.set_up_score(
         ...     score,
         ...     accumulator.time_signatures,
         ...     accumulator,
@@ -2857,7 +2857,7 @@ def register(
         >>> voice.extend(music)
         >>> _ = baca.pitches(voice, pitches)
         >>> _ = baca.register(voice, 12, 12)
-        >>> _, _ = baca.interpret.section(
+        >>> _, _ = baca.section.section(
         ...     score,
         ...     {},
         ...     accumulator.time_signatures,
@@ -2956,7 +2956,7 @@ def register(
         >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=time_signatures,
         ... )
-        >>> first_measure_number = baca.interpret.set_up_score(
+        >>> first_measure_number = baca.section.set_up_score(
         ...     score,
         ...     accumulator.time_signatures,
         ...     accumulator,
@@ -2968,7 +2968,7 @@ def register(
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> _ = baca.pitches(voice, pitches)
         >>> _ = baca.register(voice, 12, 0)
-        >>> _, _ = baca.interpret.section(
+        >>> _, _ = baca.section.section(
         ...     score,
         ...     {},
         ...     accumulator.time_signatures,
@@ -3067,7 +3067,7 @@ def register(
         >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=time_signatures,
         ... )
-        >>> first_measure_number = baca.interpret.set_up_score(
+        >>> first_measure_number = baca.section.set_up_score(
         ...     score,
         ...     accumulator.time_signatures,
         ...     accumulator,
@@ -3079,7 +3079,7 @@ def register(
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> _ = baca.pitches(voice, pitches)
         >>> _ = baca.register(voice, 0, 12)
-        >>> _, _ = baca.interpret.section(
+        >>> _, _ = baca.section.section(
         ...     score,
         ...     {},
         ...     accumulator.time_signatures,
@@ -3178,7 +3178,7 @@ def register(
         >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=time_signatures,
         ... )
-        >>> first_measure_number = baca.interpret.set_up_score(
+        >>> first_measure_number = baca.section.set_up_score(
         ...     score,
         ...     accumulator.time_signatures,
         ...     accumulator,
@@ -3190,7 +3190,7 @@ def register(
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> _ = baca.pitches(voice, pitches)
         >>> _ = baca.register(voice, 12, -12)
-        >>> _, _ = baca.interpret.section(
+        >>> _, _ = baca.section.section(
         ...     score,
         ...     {},
         ...     accumulator.time_signatures,
@@ -3289,7 +3289,7 @@ def register(
         >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=time_signatures,
         ... )
-        >>> first_measure_number = baca.interpret.set_up_score(
+        >>> first_measure_number = baca.section.set_up_score(
         ...     score,
         ...     accumulator.time_signatures,
         ...     accumulator,
@@ -3301,7 +3301,7 @@ def register(
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> _ = baca.pitches(voice, pitches)
         >>> _ = baca.register(voice, -12, 12)
-        >>> _, _ = baca.interpret.section(
+        >>> _, _ = baca.section.section(
         ...     score,
         ...     {},
         ...     accumulator.time_signatures,
@@ -3785,7 +3785,7 @@ def replace_with_clusters(
         >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
-        >>> first_measure_number = baca.interpret.set_up_score(
+        >>> first_measure_number = baca.section.set_up_score(
         ...     score,
         ...     accumulator.time_signatures,
         ...     accumulator,
@@ -3796,7 +3796,7 @@ def replace_with_clusters(
         >>> voice.extend(music)
         >>> _ = baca.pitch(voice, "E4")
         >>> _ = baca.natural_clusters(voice, widths=[3])
-        >>> _, _ = baca.interpret.section(
+        >>> _, _ = baca.section.section(
         ...     score,
         ...     {},
         ...     accumulator.time_signatures,
@@ -3874,7 +3874,7 @@ def replace_with_clusters(
         >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
-        >>> first_measure_number = baca.interpret.set_up_score(
+        >>> first_measure_number = baca.section.set_up_score(
         ...     score,
         ...     accumulator.time_signatures,
         ...     accumulator,
@@ -3885,7 +3885,7 @@ def replace_with_clusters(
         >>> voice.extend(music)
         >>> _ = baca.pitches(voice, "C4 D4 E4 F4")
         >>> _ = baca.replace_with_clusters(voice, [3])
-        >>> _, _ = baca.interpret.section(
+        >>> _, _ = baca.section.section(
         ...     score,
         ...     {},
         ...     accumulator.time_signatures,
@@ -3963,7 +3963,7 @@ def replace_with_clusters(
         >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
-        >>> first_measure_number = baca.interpret.set_up_score(
+        >>> first_measure_number = baca.section.set_up_score(
         ...     score,
         ...     accumulator.time_signatures,
         ...     accumulator,
@@ -3973,7 +3973,7 @@ def replace_with_clusters(
         >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
         >>> voice.extend(music)
         >>> _ = baca.replace_with_clusters(voice, [3], start_pitch="G4")
-        >>> _, _ = baca.interpret.section(
+        >>> _, _ = baca.section.section(
         ...     score,
         ...     {},
         ...     accumulator.time_signatures,
@@ -4051,7 +4051,7 @@ def replace_with_clusters(
         >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
-        >>> first_measure_number = baca.interpret.set_up_score(
+        >>> first_measure_number = baca.section.set_up_score(
         ...     score,
         ...     accumulator.time_signatures,
         ...     accumulator,
@@ -4061,7 +4061,7 @@ def replace_with_clusters(
         >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
         >>> voice.extend(music)
         >>> _ = baca.replace_with_clusters(voice, [1, 2, 3, 4], start_pitch="E4")
-        >>> _, _ = baca.interpret.section(
+        >>> _, _ = baca.section.section(
         ...     score,
         ...     {},
         ...     accumulator.time_signatures,
@@ -4139,7 +4139,7 @@ def replace_with_clusters(
         >>> accumulator = baca.CommandAccumulator(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ... )
-        >>> first_measure_number = baca.interpret.set_up_score(
+        >>> first_measure_number = baca.section.set_up_score(
         ...     score,
         ...     accumulator.time_signatures,
         ...     accumulator,
@@ -4149,7 +4149,7 @@ def replace_with_clusters(
         >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
         >>> voice.extend(music)
         >>> _ = baca.replace_with_clusters(voice, [1, 3], start_pitch="E4")
-        >>> _, _ = baca.interpret.section(
+        >>> _, _ = baca.section.section(
         ...     score,
         ...     {},
         ...     accumulator.time_signatures,

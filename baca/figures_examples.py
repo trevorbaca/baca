@@ -3827,7 +3827,7 @@ figures.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
@@ -3837,7 +3837,7 @@ figures.py examples.
     >>> figures.populate_commands(score, accumulator)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -3975,7 +3975,7 @@ figures.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
@@ -3985,7 +3985,7 @@ figures.py examples.
     >>> figures.populate_commands(score, accumulator)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -4144,7 +4144,7 @@ figures.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
@@ -4154,7 +4154,7 @@ figures.py examples.
     >>> figures.populate_commands(score, accumulator)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -4334,7 +4334,7 @@ figures.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
@@ -4342,7 +4342,7 @@ figures.py examples.
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
     >>> figures.populate_commands(score, accumulator)
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -4562,7 +4562,7 @@ figures.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
@@ -4572,7 +4572,7 @@ figures.py examples.
     >>> figures.populate_commands(score, accumulator)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -4769,7 +4769,7 @@ figures.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
@@ -4779,7 +4779,7 @@ figures.py examples.
     >>> figures.populate_commands(score, accumulator)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -4910,7 +4910,7 @@ figures.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
@@ -4920,7 +4920,7 @@ figures.py examples.
     >>> figures.populate_commands(score, accumulator)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -5076,7 +5076,7 @@ figures.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
@@ -5086,7 +5086,7 @@ figures.py examples.
     >>> figures.populate_commands(score, accumulator)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -5958,7 +5958,7 @@ figures.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
@@ -5968,7 +5968,7 @@ figures.py examples.
     >>> figures.populate_commands(score, accumulator)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -6146,7 +6146,7 @@ figures.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
@@ -6156,7 +6156,7 @@ figures.py examples.
     >>> figures.populate_commands(score, accumulator)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -6326,7 +6326,7 @@ figures.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
@@ -6336,7 +6336,7 @@ figures.py examples.
     >>> figures.populate_commands(score, accumulator)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -6509,7 +6509,7 @@ figures.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=figures.time_signatures,
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
@@ -6520,7 +6520,7 @@ figures.py examples.
 
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,

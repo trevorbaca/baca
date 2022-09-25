@@ -1126,10 +1126,8 @@ def section(
     interpreter=None,
     **keywords,
 ):
-    _print_main_task("Interpreting section ...")
-    interpreter = interpreter or baca.interpret.section
-    if "first_measure_number" in keywords:
-        del keywords["first_measure_number"]
+    interpreter = interpreter or baca.section.section
+    assert "first_measure_number" not in keywords
     with abjad.Timer() as timer:
         metadata, persist = interpreter(
             score,

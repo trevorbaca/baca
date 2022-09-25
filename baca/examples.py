@@ -9,7 +9,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
@@ -19,7 +19,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> abjad.label.with_indices(voice)
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -117,7 +117,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(6, 4)],
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
@@ -128,7 +128,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> music = abjad.Container("a4 g f e d c")[:]
     >>> score["Music.2"].extend(music)
     >>> _ = baca.clef(score["Music.2"][0], "bass")
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -202,7 +202,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
@@ -213,7 +213,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> voice = score["Music"]
     >>> _ = baca.instrument(voice[0], "clarinet", manifests)
     >>> _ = baca.pitches(voice, "E4 F4")
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -288,7 +288,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
@@ -299,7 +299,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> voice = score["Music"]
     >>> _ = baca.instrument(voice[0], "clarinet", manifests)
     >>> _ = baca.pitches(voice, "E4 F4")
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -391,7 +391,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=time_signatures,
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
@@ -400,7 +400,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> score["Music"].extend(figures_)
     >>> voice = score["Music"]
     >>> _ = baca.instrument(voice[0], "Violin", manifests)
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -504,14 +504,14 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=time_signatures,
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
     ...     docs=True,
     ... )
     >>> score["Music"].extend(figures_)
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,

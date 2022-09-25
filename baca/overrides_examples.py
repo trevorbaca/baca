@@ -9,7 +9,7 @@ overrides.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
@@ -30,7 +30,7 @@ overrides.py examples.
     >>> _ = baca.bar_line_transparent(
     ...         abjad.select.group_by_measure(voice)[1]
     ... )
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -416,7 +416,7 @@ overrides.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
@@ -429,7 +429,7 @@ overrides.py examples.
     ...     baca.select.mmrests(voice)[1:],
     ...     "#(x11-color 'DarkOrchid)",
     ... )
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -499,7 +499,7 @@ overrides.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
@@ -513,7 +513,7 @@ overrides.py examples.
     ...     r"\baca-boxed-markup still",
     ... )
     >>> _ = baca.mmrest_text_color(baca.select.mmrests(voice)[1:], "#red")
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -584,7 +584,7 @@ overrides.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
@@ -599,7 +599,7 @@ overrides.py examples.
     ... )
     >>> _ = baca.mmrest_text_extra_offset(
     ...     baca.select.mmrests(voice)[1:], (0, 2))
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -670,7 +670,7 @@ overrides.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
@@ -684,7 +684,7 @@ overrides.py examples.
     ...     r"\baca-boxed-markup still",
     ... )
     >>> _ = baca.mmrest_text_padding(baca.select.mmrests(voice)[1:], 2)
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -755,7 +755,7 @@ overrides.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
@@ -769,7 +769,7 @@ overrides.py examples.
     ...     r"\baca-boxed-markup still",
     ... )
     >>> _ = baca.mmrest_text_parent_center(baca.select.mmrests(voice)[1:])
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
@@ -840,7 +840,7 @@ overrides.py examples.
     >>> accumulator = baca.CommandAccumulator(
     ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
     ... )
-    >>> first_measure_number = baca.interpret.set_up_score(
+    >>> first_measure_number = baca.section.set_up_score(
     ...     score,
     ...     accumulator.time_signatures,
     ...     accumulator,
@@ -854,7 +854,7 @@ overrides.py examples.
     ...     r"\baca-boxed-markup still",
     ... )
     >>> _ = baca.mmrest_text_staff_padding(baca.select.mmrests(voice)[1:], 2)
-    >>> _, _ = baca.interpret.section(
+    >>> _, _ = baca.section.section(
     ...     score,
     ...     {},
     ...     accumulator.time_signatures,
