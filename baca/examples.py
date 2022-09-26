@@ -19,9 +19,8 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> abjad.label.with_indices(voice)
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -128,9 +127,8 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> music = abjad.Container("a4 g f e d c")[:]
     >>> score["Music.2"].extend(music)
     >>> _ = baca.clef(score["Music.2"][0], "bass")
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     color_octaves=True,
@@ -213,9 +211,8 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> voice = score["Music"]
     >>> _ = baca.instrument(voice[0], "clarinet", manifests)
     >>> _ = baca.pitches(voice, "E4 F4")
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     instruments=instruments,
@@ -299,9 +296,8 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> voice = score["Music"]
     >>> _ = baca.instrument(voice[0], "clarinet", manifests)
     >>> _ = baca.pitches(voice, "E4 F4")
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     instruments=instruments,
@@ -400,9 +396,8 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> score["Music"].extend(figures_)
     >>> voice = score["Music"]
     >>> _ = baca.instrument(voice[0], "Violin", manifests)
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     do_not_check_wellformedness=True,
     ...     commands=accumulator.commands,
@@ -511,9 +506,8 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     ...     docs=True,
     ... )
     >>> score["Music"].extend(figures_)
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,

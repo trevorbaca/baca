@@ -23,9 +23,8 @@ spanners.py examples
     >>> _ = baca.pitch(voice, "C4")
     >>> _ = baca.beam(voice, direction=abjad.DOWN)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,

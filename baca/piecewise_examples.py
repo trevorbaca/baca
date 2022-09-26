@@ -24,9 +24,8 @@ piecewise.py examples.
     >>> _ = baca.hairpin(voice, "p < f", bookend=-1)
     >>> _ = baca.dls_staff_padding(voice, 5)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -119,9 +118,8 @@ piecewise.py examples.
     >>> _ = baca.hairpin(voice, '"ff" >o niente')
     >>> _ = baca.dls_staff_padding(voice, 5)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -216,9 +214,8 @@ piecewise.py examples.
     >>> _ = baca.hairpin(voice, 'niente o< "ff"')
     >>> _ = baca.dls_staff_padding(voice, 5)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -312,9 +309,8 @@ piecewise.py examples.
     >>> _ = baca.hairpin(voice, '"p" -- f')
     >>> _ = baca.dls_staff_padding(voice, 5)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -409,9 +405,8 @@ piecewise.py examples.
     >>> _ = baca.hairpin(baca.select.leaves(voice)[7:], '"mf" |> "p"')
     >>> _ = baca.dls_staff_padding(voice, 5)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -514,9 +509,8 @@ piecewise.py examples.
     ...     ),
     >>> _ = baca.dls_staff_padding(voice, 5)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -612,9 +606,8 @@ piecewise.py examples.
     ...     )
     >>> _ = baca.dls_staff_padding(voice, 5)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -719,9 +712,8 @@ piecewise.py examples.
     ...     )
     >>> _ = baca.dls_staff_padding(voice, 5)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -821,9 +813,8 @@ piecewise.py examples.
     ...     )
     >>> _ = baca.dls_staff_padding(voice, 5)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -930,9 +921,8 @@ piecewise.py examples.
     >>> _ = baca.hairpin(voice, "f", bookend=False)
     >>> _ = baca.dls_staff_padding(voice, 5)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -1022,9 +1012,8 @@ piecewise.py examples.
     >>> _ = baca.hairpin(voice, "< !")
     >>> _ = baca.dls_staff_padding(voice, 5)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -1124,9 +1113,8 @@ piecewise.py examples.
     ...     )
     >>> _ = baca.dls_staff_padding(voice, 4)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -1216,9 +1204,8 @@ piecewise.py examples.
     ...     )
     >>> _ = baca.dls_staff_padding(voice, 4)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -1313,9 +1300,8 @@ piecewise.py examples.
     >>> _ = baca.hairpin(voice, "(mp) < mf")
     >>> _ = baca.dls_staff_padding(voice, 4)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -1411,9 +1397,8 @@ piecewise.py examples.
     >>> _ = baca.text_spanner(voice, "pont. => ord.")
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -1507,9 +1492,8 @@ piecewise.py examples.
     >>> _ = baca.text_spanner(voice, "pont. =| ord.")
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -1603,9 +1587,8 @@ piecewise.py examples.
     >>> _ = baca.text_spanner(voice, "pont. -> ord.")
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -1699,9 +1682,8 @@ piecewise.py examples.
     >>> _ = baca.text_spanner(voice, "pont. -| ord.")
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -1795,9 +1777,8 @@ piecewise.py examples.
     >>> _ = baca.text_spanner(voice, "pont. || ord.")
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -1898,9 +1879,8 @@ piecewise.py examples.
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -2013,9 +1993,8 @@ piecewise.py examples.
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -2129,9 +2108,8 @@ piecewise.py examples.
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -2254,9 +2232,8 @@ piecewise.py examples.
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -2385,9 +2362,8 @@ piecewise.py examples.
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -2483,9 +2459,8 @@ piecewise.py examples.
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -2585,9 +2560,8 @@ piecewise.py examples.
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -2701,9 +2675,8 @@ piecewise.py examples.
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,
@@ -2810,9 +2783,8 @@ piecewise.py examples.
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
 
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,

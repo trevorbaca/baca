@@ -33,9 +33,8 @@ r"""
         >>> music = baca.make_mmrests(accumulator.get(), head="Music")
         >>> voice.extend(music)
         >>> _ = baca.clef(abjad.select.leaf(voice, 0), "treble")
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -139,9 +138,8 @@ r"""
         ...         value="treble",
         ...     )
         ... ]
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -248,10 +246,9 @@ r"""
         ...         value="treble",
         ...     )
         ... ]
-        >>> baca.reapply(voice, {}, persist["persistent_indicators"])
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> baca.section.reapply(voice, {}, persist["persistent_indicators"])
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -352,9 +349,8 @@ r"""
         >>> voice.extend(music)
         >>> _ = baca.clef(abjad.select.leaf(voice, 0), "treble")
         >>> _ = baca.clef(abjad.select.leaf(voice, 2), "treble")
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -468,11 +464,10 @@ r"""
         ...         value="treble",
         ...     )
         ... ]
-        >>> baca.reapply(voice, {}, persist["persistent_indicators"])
+        >>> baca.section.reapply(voice, {}, persist["persistent_indicators"])
         >>> _ = baca.clef(abjad.select.leaf(voice, 0), "treble")
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -568,9 +563,8 @@ r"""
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -642,9 +636,8 @@ r"""
         ...         value="f",
         ...     )
         ... ]
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -719,10 +712,9 @@ r"""
         ...         value="f",
         ...     )
         ... ]
-        >>> baca.reapply(voice, {}, persist["persistent_indicators"])
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> baca.section.reapply(voice, {}, persist["persistent_indicators"])
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -790,9 +782,8 @@ r"""
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), "f")
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -865,11 +856,10 @@ r"""
         ...         value="f",
         ...     )
         ... ]
-        >>> baca.reapply(voice, {}, persist["persistent_indicators"])
+        >>> baca.section.reapply(voice, {}, persist["persistent_indicators"])
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -935,9 +925,8 @@ r"""
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "sfz")
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), "sfz")
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -1011,9 +1000,8 @@ r"""
         ...         value="sfz",
         ...     )
         ... ]
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -1081,9 +1069,8 @@ r"""
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "mf")
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), '"mf"')
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -1171,9 +1158,8 @@ r"""
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
         >>> _ = baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     instruments=instruments,
@@ -1340,9 +1326,8 @@ r"""
         ...         value="Piccolo",
         ...     )
         ... ]
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     instruments=instruments,
@@ -1511,10 +1496,9 @@ r"""
         ...         value="Flute",
         ...     )
         ... ]
-        >>> baca.reapply(voice, manifests, persist["persistent_indicators"])
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     instruments=instruments,
@@ -1685,9 +1669,8 @@ r"""
         >>> manifests = {"abjad.Instrument": instruments}
         >>> _ = baca.instrument(voice[0], "Flute", manifests)
         >>> _ = baca.instrument(voice[1], "Flute", manifests)
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     instruments=instruments,
@@ -1877,11 +1860,10 @@ r"""
         ...         value="Flute",
         ...     )
         ... ]
-        >>> baca.reapply(voice, manifests, persist["persistent_indicators"])
+        >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> _ = baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     instruments=instruments,
@@ -2064,9 +2046,8 @@ r"""
         >>> voice.extend(music)
         >>> _ = baca.short_instrument_name(voice[0], "I+II", manifests)
 
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     first_section=True,
@@ -2243,9 +2224,8 @@ r"""
         ...         value="I+II",
         ...     )
         ... ]
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     short_instrument_names=short_instrument_names,
@@ -2426,10 +2406,9 @@ r"""
         ...         value="I+II",
         ...     )
         ... ]
-        >>> baca.reapply(voice, manifests, persist["persistent_indicators"])
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     short_instrument_names=short_instrument_names,
@@ -2611,9 +2590,8 @@ r"""
         >>> manifests = {"abjad.ShortInstrumentName": short_instrument_names}
         >>> _ = baca.short_instrument_name(voice[0], "I+II", manifests)
         >>> _ = baca.short_instrument_name(voice[1], "I+II", manifests)
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     first_section=True,
@@ -2823,12 +2801,11 @@ r"""
         ...         value="I+II",
         ...     )
         ... ]
-        >>> baca.reapply(voice, manifests, persist["persistent_indicators"])
+        >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> _ = baca.short_instrument_name(voice[0], "I+II", manifests)
 
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     short_instrument_names=short_instrument_names,
@@ -3013,9 +2990,8 @@ r"""
         >>> for wrapper in wrappers:
         ...     wrapper.deactivate = True
 
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     first_section=True,
@@ -3122,11 +3098,10 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> baca.append_anchor_note(voice)
+        >>> baca.section.append_anchor_note(voice)
 
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     append_anchor_skip=True,
@@ -3223,7 +3198,7 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> baca.append_anchor_note(voice)
+        >>> baca.section.append_anchor_note(voice)
 
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
@@ -3234,9 +3209,8 @@ r"""
         ...         value="90",
         ...     )
         ... ]
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     append_anchor_skip=True,
@@ -3334,8 +3308,8 @@ r"""
         ...     score,
         ...     accumulator.time_signatures,
         ...     accumulator,
-        ...     {"abjad.MetronomeMark": metronome_marks},
         ...     docs=True,
+        ...     manifests={"abjad.MetronomeMark": metronome_marks},
         ...     previous_persistent_indicators=persist["persistent_indicators"],
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
@@ -3343,12 +3317,11 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> baca.reapply(voice, manifests, persist["persistent_indicators"])
+        >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> wrappers = baca.text_spanner_staff_padding(score["Skips"], 4)
 
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     metronome_marks=metronome_marks,
@@ -3439,11 +3412,10 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> baca.append_anchor_note(voice)
+        >>> baca.section.append_anchor_note(voice)
 
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     append_anchor_skip=True,
@@ -3542,9 +3514,9 @@ r"""
         ...     score,
         ...     accumulator.time_signatures,
         ...     accumulator,
-        ...     {"abjad.MetronomeMark": metronome_marks},
         ...     append_anchor_skip=True,
         ...     docs=True,
+        ...     manifests={"abjad.MetronomeMark": metronome_marks},
         ...     previous_persistent_indicators=persist["persistent_indicators"],
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
@@ -3558,12 +3530,11 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> baca.append_anchor_note(voice)
-        >>> baca.reapply(voice, {}, persist["persistent_indicators"])
+        >>> baca.section.append_anchor_note(voice)
+        >>> baca.section.reapply(voice, {}, persist["persistent_indicators"])
 
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     append_anchor_skip=True,
@@ -3674,9 +3645,8 @@ r"""
         >>> _ = baca.staff_lines(voice[0], 1)
         >>> _ = baca.staff_position(voice, 0)
 
-        >>> metadata, persist, timing = baca.section.postprocess_score(
+        >>> metadata, persist = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -3764,10 +3734,9 @@ r"""
         ...         ),
         ...     )
         ... ]
-        >>> baca.reapply(voice, manifests, persist["persistent_indicators"])
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -3857,9 +3826,8 @@ r"""
         ...         ),
         ...     )
         ... ]
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -3930,9 +3898,8 @@ r"""
         >>> voice.extend(music)
         >>> _ = baca.staff_lines(voice[0], 5)
 
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -4008,9 +3975,8 @@ r"""
         ...         value=5,
         ...     )
         ... ]
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -4088,10 +4054,9 @@ r"""
         ...         value=5,
         ...     )
         ... ]
-        >>> baca.reapply(voice, manifests, persist["persistent_indicators"])
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -4162,9 +4127,8 @@ r"""
         >>> _ = baca.staff_lines(voice[0], 5)
         >>> _ = baca.staff_lines(voice[1], 5)
 
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -4245,12 +4209,11 @@ r"""
         ...     )
         ... ]
 
-        >>> baca.reapply(voice, {}, persist["persistent_indicators"])
+        >>> baca.section.reapply(voice, {}, persist["persistent_indicators"])
         >>> _ = baca.staff_lines(voice[0], 5)
 
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -4342,11 +4305,10 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> baca.append_anchor_note(voice)
+        >>> baca.section.append_anchor_note(voice)
 
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     append_anchor_skip=True,
@@ -4451,9 +4413,8 @@ r"""
         ...         prototype="baca.Ritardando",
         ...     )
         ... ]
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -4541,12 +4502,11 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> baca.reapply(voice, manifests, persist["persistent_indicators"])
+        >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> wrappers = baca.text_spanner_staff_padding(score["Skips"], 4)
 
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -4636,9 +4596,8 @@ r"""
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
 
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,
@@ -4738,10 +4697,9 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(accumulator.get())
         >>> voice.extend(music)
-        >>> baca.reapply(voice, manifests, persist["persistent_indicators"])
-        >>> _, _, _ = baca.section.postprocess_score(
+        >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
+        >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     {},
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     move_global_context=True,

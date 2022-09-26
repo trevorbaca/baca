@@ -9,7 +9,6 @@ import os
 import pathlib
 import pprint
 import sys
-import types
 import typing
 from inspect import currentframe as _frame
 
@@ -2571,9 +2570,8 @@ def make_layout_ly(
     spacing(score, page_layout_profile, has_anchor_skip=has_anchor_skip)
     # TODO: separate 'breaks' from SpacingSpecifier:
     apply_breaks(score, spacing.breaks)
-    _, _, _ = postprocess_score(
+    _, _ = postprocess_score(
         score,
-        {},
         accumulator.time_signatures,
         append_anchor_skip=has_anchor_skip,
         add_container_identifiers=True,
@@ -2794,7 +2792,6 @@ def label_stage_numbers(global_skips, stage_markup):
 
 def postprocess_score(
     score,
-    manifests,
     time_signatures,
     *,
     activate=None,
@@ -2815,6 +2812,7 @@ def postprocess_score(
     do_not_check_wellformedness=False,
     do_not_require_short_instrument_names=False,
     empty_fermata_measures=False,
+    environment=None,
     error_on_not_yet_pitched=False,
     fermata_extra_offset_y=2.5,
     fermata_measure_empty_overrides=(),
@@ -2827,6 +2825,7 @@ def postprocess_score(
     instruments=None,
     label_clock_time=False,
     magnify_staves=None,
+    manifests=None,
     metadata=None,
     metronome_marks=None,
     move_global_context=False,
@@ -2840,6 +2839,7 @@ def postprocess_score(
     section_number=None,
     shift_measure_initial_clefs=False,
     short_instrument_names=None,
+    timing=None,
     transpose_score=False,
     treat_untreated_persistent_wrappers=False,
     whitespace_leaves=False,
@@ -2860,6 +2860,19 @@ def postprocess_score(
             assert all(isinstance(_, abjad.Tag) for _ in deactivate)
         assert isinstance(do_not_require_short_instrument_names, bool)
         assert isinstance(empty_fermata_measures, bool)
+        if environment is not None:
+            assert first_measure_number == 1
+            assert metadata is None
+            assert persist is None
+            assert previous_metadata is None
+            assert previous_persist is None
+            assert section_number is None
+            first_measure_number = environment.first_measure_number
+            metadata = environment.metadata
+            persist = environment.persist
+            previous_metadata = environment.previous_metadata
+            previous_persist = environment.previous_persist
+            section_number = environment.section_number
         assert all(0 < _ for _ in fermata_measure_empty_overrides)
         assert isinstance(final_section, bool)
         assert isinstance(first_measure_number, int)
@@ -3041,9 +3054,9 @@ def postprocess_score(
         _style_anchor_skip(score)
         _style_anchor_notes(score)
         _check_anchors_are_final(score)
-    timing = types.SimpleNamespace()
-    timing.runtime = int(timer.elapsed_time)
-    return metadata, persist, timing
+    if timing is not None:
+        timing.postprocess_score = int(timer.elapsed_time)
+    return metadata, persist
 
 
 def reapply(voices, manifests, previous_persistent_indicators):
@@ -3104,7 +3117,6 @@ def set_up_score(
     score: abjad.Score,
     time_signatures: typing.Sequence[abjad.TimeSignature],
     accumulator: _accumulator.CommandAccumulator = None,
-    manifests: dict = None,
     *,
     always_make_global_rests: bool = False,
     append_anchor_skip: bool = False,
@@ -3113,6 +3125,7 @@ def set_up_score(
     first_measure_number: int = 1,
     first_section: bool = False,
     layout: bool = False,
+    manifests: dict = None,
     previous_persistent_indicators: dict = None,
 ) -> int:
     if accumulator is not None:

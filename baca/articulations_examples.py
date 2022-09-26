@@ -20,9 +20,8 @@ articulations.py examples.
     >>> voice = score["Music"]
     >>> _ = baca.pitch(voice, "E4")
     >>> _ = baca.color_fingerings(voice, numbers=[0, 1, 2, 1])
-    >>> _, _, _ = baca.section.postprocess_score(
+    >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     {},
     ...     accumulator.time_signatures,
     ...     commands=accumulator.commands,
     ...     move_global_context=True,

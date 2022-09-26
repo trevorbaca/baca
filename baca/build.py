@@ -224,11 +224,18 @@ def _log_timing(section_directory, timing):
         pointer.write("\n")
         line = time.strftime("%Y-%m-%d %H:%M:%S") + "\n"
         pointer.write(line)
-        counter = abjad.string.pluralize("second", timing.runtime)
-        line = f"Segment interpretation time: {timing.runtime} {counter}\n"
+        python_runtime = timing.make_score + timing.postprocess_score
+        counter = abjad.string.pluralize("second", python_runtime)
+        line = f"Python runtime: {python_runtime} {counter}\n"
         pointer.write(line)
-        counter = abjad.string.pluralize("second", timing.lilypond_runtime)
-        line = f"LilyPond runtime: {timing.lilypond_runtime} {counter}\n"
+        counter = abjad.string.pluralize("second", timing.make_score)
+        line = f"  make_score(): {timing.make_score} {counter}\n"
+        pointer.write(line)
+        counter = abjad.string.pluralize("second", timing.postprocess_score)
+        line = f"  postprocess_score(): {timing.postprocess_score} {counter}\n"
+        pointer.write(line)
+        counter = abjad.string.pluralize("second", timing.lilypond)
+        line = f"LilyPond runtime: {timing.lilypond} {counter}\n"
         pointer.write(line)
 
 
@@ -406,7 +413,7 @@ def _make_section_pdf(
     _externalize_music_ly(music_ly)
     if music_pdf.is_file():
         _print_file_handling(f"Existing {baca.path.trim(music_pdf)} ...")
-    timing.lilypond_runtime = _call_lilypond_on_music_ly_in_section(
+    timing.lilypond = _call_lilypond_on_music_ly_in_section(
         music_ly,
         music_pdf_mtime,
     )
@@ -420,9 +427,10 @@ def _make_section_pdf(
 
 def _print_all_timing(timing):
     if hasattr(timing, "make_score"):
-        _print_timing("make_score() time", int(timing.make_score))
-    _print_timing("Command interpretation time", int(timing.runtime))
-    _print_timing("LilyPond runtime", int(timing.lilypond_runtime))
+        python_runtime = timing.make_score + timing.postprocess_score
+        string = f"Python runtime {timing.make_score} + {timing.postprocess_score} ="
+        _print_timing(string, python_runtime)
+    _print_timing("LilyPond runtime", int(timing.lilypond))
 
 
 def _print_always(string=""):
@@ -548,7 +556,7 @@ Timer = abjad.Timer
 class Timing:
     lilypond: int | None = None
     make_score: int | None = None
-    program: int | None = None
+    postprocess_score: int | None = None
 
 
 def arguments(arguments):
@@ -1064,39 +1072,6 @@ def persist_lilypond_file(lilypond_file, metadata, persist, timing, arguments):
             log_timing=arguments.log_timing,
             print_timing=arguments.print_timing,
         )
-
-
-def postprocess_score(
-    score,
-    manifests,
-    time_signatures,
-    environment,
-    *,
-    postprocessor=None,
-    **keywords,
-):
-    postprocessor = postprocessor or baca.section.postprocess_score
-    with abjad.Timer() as timer:
-        result = postprocessor(
-            score,
-            manifests,
-            time_signatures,
-            **keywords,
-            first_measure_number=environment.first_measure_number,
-            metadata=environment.metadata,
-            persist=environment.persist,
-            previous_metadata=environment.previous_metadata,
-            previous_persist=environment.previous_persist,
-            section_number=environment.section_number,
-        )
-    if len(result) == 2:
-        metadata, persist = result
-    else:
-        assert len(result) == 3
-        metadata, persist, timing = result
-    timing = types.SimpleNamespace()
-    timing.runtime = int(timer.elapsed_time)
-    return metadata, persist, timing
 
 
 def read_environment(music_py_path_name, sys_argv) -> Environment:
