@@ -2,6 +2,7 @@
 Build.
 """
 import dataclasses
+import functools
 import os
 import pathlib
 import shutil
@@ -538,6 +539,16 @@ class Environment:
     previous_metadata: dict
     previous_persist: dict
     section_number: str
+
+
+Timer = abjad.Timer
+
+
+@dataclasses.dataclass(slots=True, order=True, unsafe_hash=True)
+class Timing:
+    lilypond: int | None = None
+    make_score: int | None = None
+    program: int | None = None
 
 
 def arguments(arguments):
@@ -1168,3 +1179,15 @@ def show_tag(directory, tag, *, undo=False):
     job = dataclasses.replace(job, message_zero=True)
     for message in job():
         _print_tags(message)
+
+
+def timed(make_score):
+    @functools.wraps(make_score)
+    def wrapper(*arguments):
+        timing = arguments[-1]
+        with abjad.Timer() as timer:
+            result = make_score(*arguments[:-1])
+        timing.make_score = int(timer.elapsed_time)
+        return result
+
+    return wrapper
