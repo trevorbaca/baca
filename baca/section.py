@@ -9,6 +9,7 @@ import os
 import pathlib
 import pprint
 import sys
+import types
 import typing
 from inspect import currentframe as _frame
 
@@ -848,7 +849,7 @@ def _collect_metadata(
     stop_clock_time,
     time_signatures,
     voice_name_to_parameter_to_state,
-):
+) -> tuple[types.MappingProxyType, types.MappingProxyType]:
     metadata_, persist_ = {}, {}
     persist_["alive_during_section"] = _collect_alive_during_section(score)
     # make-layout-ly scripts adds bol measure numbers to metadata
@@ -881,24 +882,23 @@ def _collect_metadata(
     metadata_["time_signatures"] = time_signatures
     if voice_name_to_parameter_to_state:
         persist_["voice_name_to_parameter_to_state"] = voice_name_to_parameter_to_state
-    metadata.clear()
-    metadata.update(metadata_)
-    metadata = dict(metadata)
-    _sort_dictionary(metadata)
-    metadata = dict(metadata)
-    for key, value in metadata.items():
+    new_metadata = {}
+    new_metadata.update(metadata_)
+    _sort_dictionary(new_metadata)
+    new_metadata_proxy = types.MappingProxyType(new_metadata)
+    for key, value in new_metadata_proxy.items():
         if value in (True, False):
             continue
         if not bool(value):
             raise Exception(f"{key} metadata should be nonempty (not {value!r}).")
-    persist.clear()
-    persist.update(persist_)
-    persist = dict(persist)
-    _sort_dictionary(persist)
-    persist = dict(persist)
-    for key, value in persist.items():
+    new_persist = {}
+    new_persist.update(persist_)
+    _sort_dictionary(new_persist)
+    new_persist_proxy = types.MappingProxyType(new_persist)
+    for key, value in new_persist_proxy.items():
         if not bool(value):
             raise Exception(f"{key} persist should be nonempty (not {value!r}).")
+    return new_metadata_proxy, new_persist_proxy
 
 
 def _collect_persistent_indicators(
@@ -1171,8 +1171,7 @@ def _extend_beams(score):
 
 
 def _find_first_measure_number(previous_metadata):
-    if not previous_metadata:
-        raise Exception("ASDF")
+    assert previous_metadata, repr(previous_metadata)
     previous_final_measure_number = previous_metadata.get("final_measure_number")
     if previous_final_measure_number is None:
         return 1
@@ -2578,7 +2577,9 @@ def make_layout_ly(
         commands=accumulator.commands,
         comment_measure_numbers=True,
         do_not_check_wellformedness=True,
-        first_measure_number=first_measure_number,
+        environment=_build.Environment(
+            first_measure_number=first_measure_number,
+        ),
         first_section=True,
         remove_tags=_tags.layout_removal_tags(),
         whitespace_leaves=True,
@@ -2794,7 +2795,7 @@ def postprocess_score(
     score,
     time_signatures,
     *,
-    activate=None,
+    activate: list[abjad.Tag] = None,
     add_container_identifiers=False,
     all_music_in_part_containers=False,
     allow_empty_selections=False,
@@ -2806,18 +2807,19 @@ def postprocess_score(
     clock_time_override=None,
     color_not_yet_pitched=False,
     color_octaves=False,
+    # TODO: remove commands
     commands=None,
     comment_measure_numbers=False,
-    deactivate=None,
+    deactivate: list[abjad.Tag] = None,
     do_not_check_wellformedness=False,
     do_not_require_short_instrument_names=False,
     empty_fermata_measures=False,
-    environment=None,
+    environment: _build.Environment = None,
     error_on_not_yet_pitched=False,
     fermata_extra_offset_y=2.5,
     fermata_measure_empty_overrides=(),
     final_section=False,
-    first_measure_number: int = 1,
+    # first_measure_number: int = 1,
     first_section=False,
     force_nonnatural_accidentals=False,
     global_rests_in_every_staff=False,
@@ -2826,16 +2828,16 @@ def postprocess_score(
     label_clock_time=False,
     magnify_staves=None,
     manifests=None,
-    metadata=None,
+    # metadata=None,
     metronome_marks=None,
     move_global_context=False,
     part_manifest=None,
     parts_metric_modulation_multiplier=None,
-    persist=None,
-    previous_metadata=None,
-    previous_persist=None,
+    # persist=None,
+    # previous_metadata=None,
+    # previous_persist=None,
     print_timing=False,
-    remove_tags=None,
+    remove_tags: list[abjad.Tag] = None,
     section_number=None,
     shift_measure_initial_clefs=False,
     short_instrument_names=None,
@@ -2860,19 +2862,13 @@ def postprocess_score(
             assert all(isinstance(_, abjad.Tag) for _ in deactivate)
         assert isinstance(do_not_require_short_instrument_names, bool)
         assert isinstance(empty_fermata_measures, bool)
-        if environment is not None:
-            assert first_measure_number == 1
-            assert metadata is None
-            assert persist is None
-            assert previous_metadata is None
-            assert previous_persist is None
-            assert section_number is None
-            first_measure_number = environment.first_measure_number
-            metadata = environment.metadata
-            persist = environment.persist
-            previous_metadata = environment.previous_metadata
-            previous_persist = environment.previous_persist
-            section_number = environment.section_number
+        environment = environment or _build.Environment()
+        first_measure_number = environment.first_measure_number
+        metadata = environment.metadata
+        persist = environment.persist
+        previous_metadata = environment.previous_metadata
+        previous_persist = environment.previous_persist
+        section_number = environment.section_number
         assert all(0 < _ for _ in fermata_measure_empty_overrides)
         assert isinstance(final_section, bool)
         assert isinstance(first_measure_number, int)
@@ -2885,13 +2881,9 @@ def postprocess_score(
             "abjad.ShortInstrumentName": short_instrument_names,
         }
         measure_count = len(time_signatures)
-        metadata = dict(metadata or {})
         if parts_metric_modulation_multiplier is not None:
             assert isinstance(parts_metric_modulation_multiplier, tuple)
             assert len(parts_metric_modulation_multiplier) == 2
-        persist = dict(persist or {})
-        previous_metadata = dict(previous_metadata or {})
-        previous_persist = dict(previous_persist or {})
         previous_persistent_indicators = previous_persist.get(
             "persistent_indicators", {}
         )
@@ -3033,7 +3025,7 @@ def postprocess_score(
         metronome_mark = abjad.get.effective(skip, abjad.MetronomeMark)
         if metronome_mark is None:
             first_metronome_mark = False
-        _collect_metadata(
+        new_metadata, new_persist = _collect_metadata(
             container_to_part_assignment,
             clock_time_duration,
             fermata_measure_numbers,
@@ -3056,7 +3048,11 @@ def postprocess_score(
         _check_anchors_are_final(score)
     if timing is not None:
         timing.postprocess_score = int(timer.elapsed_time)
-    return metadata, persist
+    return new_metadata, new_persist
+
+
+def proxy(mapping):
+    return types.MappingProxyType(mapping)
 
 
 def reapply(voices, manifests, previous_persistent_indicators):

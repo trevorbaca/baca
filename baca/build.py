@@ -537,16 +537,28 @@ def _write_music_ly(lilypond_file, music_ly):
     abjad.persist.as_ly(lilypond_file, music_ly, tags=True)
 
 
+def _make_empty_mapping_proxy():
+    return types.MappingProxyType({})
+
+
 @dataclasses.dataclass(frozen=True, slots=True, order=True, unsafe_hash=True)
 class Environment:
 
-    arguments: tuple[str, ...]
-    first_measure_number: int | None
-    metadata: dict
-    persist: dict
-    previous_metadata: dict
-    previous_persist: dict
-    section_number: str
+    arguments: tuple[str, ...] = dataclasses.field(default_factory=tuple)
+    first_measure_number: int = 1
+    metadata: types.MappingProxyType = dataclasses.field(
+        default_factory=_make_empty_mapping_proxy
+    )
+    persist: types.MappingProxyType = dataclasses.field(
+        default_factory=_make_empty_mapping_proxy
+    )
+    previous_metadata: types.MappingProxyType = dataclasses.field(
+        default_factory=_make_empty_mapping_proxy
+    )
+    previous_persist: types.MappingProxyType = dataclasses.field(
+        default_factory=_make_empty_mapping_proxy
+    )
+    section_number: str | None = None
 
 
 Timer = abjad.Timer
@@ -1045,12 +1057,19 @@ def persist_as_ly(argument, ly_file_path):
     abjad.persist.as_ly(argument, ly_file_path)
 
 
+# TODO: reorder arguments
+# TODO: add typehints
 def persist_lilypond_file(lilypond_file, metadata, persist, timing, arguments):
+    # TODO: do not read environment here:
     section_directory = pathlib.Path(os.getcwd())
+    assert isinstance(metadata, types.MappingProxyType), repr(metadata)
+    assert isinstance(persist, types.MappingProxyType), repr(persist)
     if "voice_name_to_parameter_to_state" in persist:
-        persist["voice_name_to_parameter_to_state"] = dict(
+        dictionary = dict(persist)
+        dictionary["voice_name_to_parameter_to_state"] = dict(
             sorted(persist["voice_name_to_parameter_to_state"].items())
         )
+        persist = types.MappingProxyType(dictionary)
     _write_metadata(metadata, persist, section_directory)
     if arguments.clicktrack:
         path = section_directory / "clicktrack.midi"
@@ -1076,7 +1095,7 @@ def persist_lilypond_file(lilypond_file, metadata, persist, timing, arguments):
 
 def read_environment(music_py_path_name, sys_argv) -> Environment:
     arguments_ = arguments(sys_argv)
-    section_directory = baca.path.section_directory(music_py_path_name)
+    section_directory = pathlib.Path(music_py_path_name).parent
     metadata = baca.path.get_metadata(section_directory)
     persist = baca.path.get_persist(section_directory)
     previous_metadata = baca.path.previous_metadata(music_py_path_name)

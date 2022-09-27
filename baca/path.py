@@ -135,10 +135,12 @@ def activate(
     return count, skipped, messages_
 
 
-def add_metadatum(path, name, value, *, file_name="__metadata__"):
+def add_metadatum(path, name, value, *, file_name="__metadata__") -> None:
     assert " " not in name, repr(name)
     metadata = get_metadata(path, file_name=file_name)
-    metadata[name] = value
+    dictionary = dict(metadata)
+    dictionary[name] = value
+    metadata = types.MappingProxyType(dictionary)
     write_metadata_py(path, metadata)
 
 
@@ -163,25 +165,6 @@ def deactivate(
         prepend_empty_chord=prepend_empty_chord,
         skip_file_name=skip_file_name,
         undo=True,
-    )
-
-
-def dictionaries(music_py):
-    assert music_py.endswith("music.py"), repr(music_py)
-    section_directory = pathlib.Path(music_py).parent
-    metadata = get_metadata(section_directory)
-    persist = get_persist(section_directory)
-    if section_directory.name == "01":
-        previous_metadata_, previous_persist_ = {}, {}
-    else:
-        previous_metadata_ = previous_metadata(str(section_directory / "dummy"))
-        previous_persist_ = previous_persist(str(section_directory / "dummy"))
-    return types.SimpleNamespace(
-        metadata=metadata,
-        persist=persist,
-        previous_metadata=previous_metadata_,
-        previous_persist=previous_persist_,
-        section_number=section_directory.name,
     )
 
 
@@ -382,20 +365,22 @@ def get_measure_profile_metadata(path) -> tuple[int, int, list]:
     return (first_measure_number, measure_count, fermata_measure_numbers)
 
 
-def get_metadata(path, file_name="__metadata__"):
+def get_metadata(path, file_name="__metadata__") -> types.MappingProxyType:
     assert file_name in ("__metadata__", "__persist__"), repr(file_name)
     metadata_py_path = path / file_name
-    metadata = {}
+    dictionary = {}
     if metadata_py_path.is_file():
         file_contents_string = metadata_py_path.read_text()
         baca = importlib.import_module("baca")
         namespace = {"abjad": abjad, "baca": baca}
         namespace.update(abjad.__dict__)
         namespace.update(baca.__dict__)
-        metadata = eval(file_contents_string, namespace)
-    return dict(metadata)
+        dictionary = eval(file_contents_string, namespace)
+    metadata = types.MappingProxyType(dictionary)
+    return metadata
 
 
+# TODO: remove in favor of metadata.get()
 def get_metadatum(
     path,
     metadatum_name,
@@ -404,9 +389,7 @@ def get_metadatum(
     file_name="__metadata__",
 ):
     metadata = get_metadata(path, file_name=file_name)
-    metadatum = metadata.get(metadatum_name)
-    if not metadatum:
-        metadatum = default
+    metadatum = metadata.get(metadatum_name, default)
     return metadatum
 
 
@@ -414,37 +397,32 @@ def get_persist(path):
     return get_metadata(path, file_name="__persist__")
 
 
-def previous_metadata(path: str) -> dict:
+def previous_metadata(path: str) -> types.MappingProxyType:
     previous_section = _get_previous_section(path)
     if previous_section:
         previous_metadata = get_metadata(previous_section, file_name="__metadata__")
     else:
-        previous_metadata = {}
+        previous_metadata = types.MappingProxyType({})
     return previous_metadata
 
 
-def previous_persist(path: str) -> dict:
+def previous_persist(path: str) -> types.MappingProxyType:
     previous_section = _get_previous_section(path)
     if previous_section:
         previous_persist = get_metadata(previous_section, file_name="__persist__")
     else:
-        previous_persist = {}
+        previous_persist = types.MappingProxyType({})
     return previous_persist
 
 
 def remove_metadatum(path, name, *, file_name="__metadata__"):
     assert " " not in name, repr(name)
     metadata = get_metadata(path, file_name=file_name)
-    try:
-        metadata.pop(name)
-    except KeyError:
-        pass
+    if name in metadata:
+        dictionary = dict(metadata)
+        dictionary.pop(name)
+        metadata = types.MappingProxyType(dictionary)
     write_metadata_py(path, metadata, file_name=file_name)
-
-
-def section_directory(music_py):
-    assert music_py.endswith("music.py"), repr(music_py)
-    return pathlib.Path(music_py).parent
 
 
 def trim(path):
@@ -459,8 +437,8 @@ def trim(path):
 
 
 def write_metadata_py(path, metadata, *, file_name="__metadata__"):
-    assert isinstance(metadata, dict), repr(metadata)
-    metadata = dict(sorted(metadata.items()))
+    assert isinstance(metadata, types.MappingProxyType), repr(metadata)
+    metadata = types.MappingProxyType(dict(sorted(metadata.items())))
     string = str(metadata)
     string = black.format_str(string, mode=black.mode.Mode())
     metadata_py_path = path / file_name

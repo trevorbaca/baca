@@ -142,9 +142,11 @@ r"""
         ...     score,
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
+        ...     environment=baca.build.Environment(
+        ...         previous_metadata=metadata,
+        ...         previous_persist=persist,
+        ...     ),
         ...     move_global_context=True,
-        ...     previous_metadata=metadata,
-        ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -251,9 +253,11 @@ r"""
         ...     score,
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
+        ...     environment=baca.build.Environment(
+        ...         previous_metadata=metadata,
+        ...         previous_persist=persist,
+        ...     ),
         ...     move_global_context=True,
-        ...     previous_metadata=metadata,
-        ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -470,9 +474,11 @@ r"""
         ...     score,
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
+        ...     environment=baca.build.Environment(
+        ...         previous_metadata=metadata,
+        ...         previous_persist=persist,
+        ...     ),
         ...     move_global_context=True,
-        ...     previous_metadata=metadata,
-        ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -640,9 +646,11 @@ r"""
         ...     score,
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
+        ...     environment=baca.build.Environment(
+        ...         previous_metadata=metadata,
+        ...         previous_persist=persist,
+        ...     ),
         ...     move_global_context=True,
-        ...     previous_metadata=metadata,
-        ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -717,9 +725,11 @@ r"""
         ...     score,
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
+        ...     environment=baca.build.Environment(
+        ...         previous_metadata=metadata,
+        ...         previous_persist=persist,
+        ...     ),
         ...     move_global_context=True,
-        ...     previous_metadata=metadata,
-        ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -862,9 +872,11 @@ r"""
         ...     score,
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
+        ...     environment=baca.build.Environment(
+        ...         previous_metadata=metadata,
+        ...         previous_persist=persist,
+        ...     ),
         ...     move_global_context=True,
-        ...     previous_metadata=metadata,
-        ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -1004,9 +1016,11 @@ r"""
         ...     score,
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
+        ...     environment=baca.build.Environment(
+        ...         previous_metadata=metadata,
+        ...         previous_persist=persist,
+        ...     ),
         ...     move_global_context=True,
-        ...     previous_metadata=metadata,
-        ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -1330,10 +1344,12 @@ r"""
         ...     score,
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
+        ...     environment=baca.build.Environment(
+        ...         previous_metadata=metadata,
+        ...         previous_persist=persist,
+        ...     ),
         ...     instruments=instruments,
         ...     move_global_context=True,
-        ...     previous_metadata=metadata,
-        ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -1501,10 +1517,12 @@ r"""
         ...     score,
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
+        ...     environment=baca.build.Environment(
+        ...         previous_metadata=metadata,
+        ...         previous_persist=persist,
+        ...     ),
         ...     instruments=instruments,
         ...     move_global_context=True,
-        ...     previous_metadata=metadata,
-        ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -1866,10 +1884,12 @@ r"""
         ...     score,
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
+        ...     environment=baca.build.Environment(
+        ...         previous_metadata=metadata,
+        ...         previous_persist=persist,
+        ...     ),
         ...     instruments=instruments,
         ...     move_global_context=True,
-        ...     previous_metadata=metadata,
-        ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -2228,10 +2248,12 @@ r"""
         ...     score,
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
+        ...     environment=baca.build.Environment(
+        ...         previous_metadata=metadata,
+        ...         previous_persist=persist,
+        ...     ),
         ...     short_instrument_names=short_instrument_names,
         ...     move_global_context=True,
-        ...     previous_metadata=metadata,
-        ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -2411,10 +2433,12 @@ r"""
         ...     score,
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
+        ...     environment=baca.build.Environment(
+        ...         previous_metadata=metadata,
+        ...         previous_persist=persist,
+        ...     ),
         ...     short_instrument_names=short_instrument_names,
         ...     move_global_context=True,
-        ...     previous_metadata=metadata,
-        ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -2808,10 +2832,12 @@ r"""
         ...     score,
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
+        ...     environment=baca.build.Environment(
+        ...         previous_metadata=metadata,
+        ...         previous_persist=persist,
+        ...     ),
         ...     short_instrument_names=short_instrument_names,
         ...     move_global_context=True,
-        ...     previous_metadata=metadata,
-        ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -3214,10 +3240,12 @@ r"""
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     append_anchor_skip=True,
+        ...     environment=baca.build.Environment(
+        ...         previous_metadata=metadata,
+        ...         previous_persist=persist,
+        ...     ),
         ...     metronome_marks=metronome_marks,
         ...     move_global_context=True,
-        ...     previous_metadata=metadata,
-        ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -3324,10 +3352,12 @@ r"""
         ...     score,
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
+        ...     environment=baca.build.Environment(
+        ...         previous_metadata=metadata,
+        ...         previous_persist=persist,
+        ...     ),
         ...     metronome_marks=metronome_marks,
         ...     move_global_context=True,
-        ...     previous_metadata=metadata,
-        ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -3538,10 +3568,12 @@ r"""
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
         ...     append_anchor_skip=True,
+        ...     environment=baca.build.Environment(
+        ...         previous_metadata=metadata,
+        ...         previous_persist=persist,
+        ...     ),
         ...     metronome_marks=metronome_marks,
         ...     move_global_context=True,
-        ...     previous_metadata=metadata,
-        ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -3739,9 +3771,11 @@ r"""
         ...     score,
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
+        ...     environment=baca.build.Environment(
+        ...         previous_metadata=metadata,
+        ...         previous_persist=persist,
+        ...     ),
         ...     move_global_context=True,
-        ...     previous_metadata=metadata,
-        ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -3830,9 +3864,11 @@ r"""
         ...     score,
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
+        ...     environment=baca.build.Environment(
+        ...         previous_metadata=metadata,
+        ...         previous_persist=persist,
+        ...     ),
         ...     move_global_context=True,
-        ...     previous_metadata=metadata,
-        ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -3979,9 +4015,11 @@ r"""
         ...     score,
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
+        ...     environment=baca.build.Environment(
+        ...         previous_metadata=metadata,
+        ...         previous_persist=persist,
+        ...     ),
         ...     move_global_context=True,
-        ...     previous_metadata=metadata,
-        ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -4059,9 +4097,11 @@ r"""
         ...     score,
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
+        ...     environment=baca.build.Environment(
+        ...         previous_metadata=metadata,
+        ...         previous_persist=persist,
+        ...     ),
         ...     move_global_context=True,
-        ...     previous_metadata=metadata,
-        ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -4216,9 +4256,11 @@ r"""
         ...     score,
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
+        ...     environment=baca.build.Environment(
+        ...         previous_metadata=metadata,
+        ...         previous_persist=persist,
+        ...     ),
         ...     move_global_context=True,
-        ...     previous_metadata=metadata,
-        ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -4417,9 +4459,11 @@ r"""
         ...     score,
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
+        ...     environment=baca.build.Environment(
+        ...         previous_metadata=metadata,
+        ...         previous_persist=persist,
+        ...     ),
         ...     move_global_context=True,
-        ...     previous_metadata=metadata,
-        ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -4509,9 +4553,11 @@ r"""
         ...     score,
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
+        ...     environment=baca.build.Environment(
+        ...         previous_metadata=metadata,
+        ...         previous_persist=persist,
+        ...     ),
         ...     move_global_context=True,
-        ...     previous_metadata=metadata,
-        ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -4702,9 +4748,11 @@ r"""
         ...     score,
         ...     accumulator.time_signatures,
         ...     commands=accumulator.commands,
+        ...     environment=baca.build.Environment(
+        ...         previous_metadata=metadata,
+        ...         previous_persist=persist,
+        ...     ),
         ...     move_global_context=True,
-        ...     previous_metadata=metadata,
-        ...     previous_persist=persist,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
