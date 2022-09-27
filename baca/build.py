@@ -524,15 +524,6 @@ def _trim_music_ly(ly):
     return lines
 
 
-def _write_metadata(metadata, persist, section_directory):
-    metadata_file = section_directory / "__metadata__"
-    _print_file_handling(f"Writing {baca.path.trim(metadata_file)} ...")
-    baca.path.write_metadata_py(section_directory, metadata)
-    persist_file = section_directory / "__persist__"
-    _print_file_handling(f"Writing {baca.path.trim(persist_file)} ...")
-    baca.path.write_metadata_py(section_directory, persist, file_name="__persist__")
-
-
 def _write_music_ly(lilypond_file, music_ly):
     abjad.persist.as_ly(lilypond_file, music_ly, tags=True)
 
@@ -558,6 +549,7 @@ class Environment:
     previous_persist: types.MappingProxyType = dataclasses.field(
         default_factory=_make_empty_mapping_proxy
     )
+    section_directory: pathlib.Path | None = None
     section_number: str | None = None
 
 
@@ -1070,7 +1062,12 @@ def persist_lilypond_file(lilypond_file, metadata, persist, timing, arguments):
             sorted(persist["voice_name_to_parameter_to_state"].items())
         )
         persist = types.MappingProxyType(dictionary)
-    _write_metadata(metadata, persist, section_directory)
+    metadata_file = section_directory / "__metadata__"
+    _print_file_handling(f"Writing {baca.path.trim(metadata_file)} ...")
+    baca.path.write_metadata_py(section_directory, metadata)
+    persist_file = section_directory / "__persist__"
+    _print_file_handling(f"Writing {baca.path.trim(persist_file)} ...")
+    baca.path.write_metadata_py(section_directory, persist, file_name="__persist__")
     if arguments.clicktrack:
         path = section_directory / "clicktrack.midi"
         mtime = os.path.getmtime(path) if path.is_file() else None
@@ -1115,6 +1112,7 @@ def read_environment(music_py_path_name, sys_argv) -> Environment:
         persist=persist,
         previous_metadata=previous_metadata,
         previous_persist=previous_persist,
+        section_directory=section_directory,
         section_number=section_directory.name,
     )
     return environment
