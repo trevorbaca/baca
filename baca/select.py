@@ -4542,11 +4542,6 @@ def tuplets(argument, pair=None, *, level: int = -1):
     return result
 
 
-def voices(argument):
-    voices = abjad.select.components(argument, abjad.Voice)
-    return voices
-
-
 def wleaf(argument, n: int = 0, *, exclude: abjad.typings.Exclude = None) -> abjad.Leaf:
     r"""
     Selects leaf ``n`` from leaves leaked wide.

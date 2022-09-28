@@ -2450,6 +2450,27 @@ def cache_leaves(score, measure_count, voice_abbreviations=None):
     return voice_name_to_leaves_by_measure
 
 
+class VoiceCache:
+    def __init__(self, score, voice_abbreviations):
+        voices = []
+        for abbreviation, voice_name in voice_abbreviations.items():
+            voice = score[voice_name]
+            voices.append(voice)
+            setattr(self, abbreviation, voice)
+        self._voices = voices
+
+    def __call__(self, abbreviation):
+        voice = getattr(self, abbreviation)
+        return voice
+
+    def __iter__(self):
+        return iter(self._voices)
+
+
+def cache_voices(score, voice_abbreviations):
+    return VoiceCache(score, voice_abbreviations)
+
+
 def color_out_of_range_pitches(score):
     indicator = _enums.ALLOW_OUT_OF_RANGE
     tag = _tags.function_name(_frame())
