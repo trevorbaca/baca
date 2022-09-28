@@ -6,18 +6,15 @@ piecewise.py examples.
     Conventional dynamics:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -26,8 +23,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -100,18 +96,15 @@ piecewise.py examples.
     Effort dynamic al niente:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
@@ -120,8 +113,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -196,18 +188,15 @@ piecewise.py examples.
     Effort dynamic dal niente:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
@@ -216,8 +205,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -291,18 +279,15 @@ piecewise.py examples.
     Effort dynamic constante:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
@@ -311,8 +296,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -386,18 +370,15 @@ piecewise.py examples.
     Effort dynamics crescendo subito, decrescendo subito:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
@@ -407,8 +388,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -487,18 +467,15 @@ piecewise.py examples.
     Piece selector groups leaves by measures:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -511,8 +488,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -584,18 +560,15 @@ piecewise.py examples.
     With hairpins:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -608,8 +581,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -689,18 +661,15 @@ piecewise.py examples.
     Bookends each piece:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -714,8 +683,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -790,18 +758,15 @@ piecewise.py examples.
     With hairpins:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -815,8 +780,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -903,18 +867,15 @@ piecewise.py examples.
     REGRESSION. Works with lone dynamic:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
@@ -923,8 +884,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -994,18 +954,15 @@ piecewise.py examples.
     REGRESSION. Works with lone hairpin:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
@@ -1014,8 +971,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -1086,13 +1042,10 @@ piecewise.py examples.
     REGRESSION. Works with to-barline tweak:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
@@ -1115,8 +1068,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -1181,18 +1133,15 @@ piecewise.py examples.
     Works with interposed niente dynamics:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -1206,8 +1155,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -1282,18 +1230,15 @@ piecewise.py examples.
     Works with parenthesized dynamics:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -1302,8 +1247,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -1380,17 +1324,14 @@ piecewise.py examples.
     Dashed line with arrow:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -1399,8 +1340,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -1474,18 +1414,15 @@ piecewise.py examples.
     Dashed line with hook:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -1494,8 +1431,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -1569,18 +1505,15 @@ piecewise.py examples.
     Solid line with arrow:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -1589,8 +1522,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -1664,18 +1596,15 @@ piecewise.py examples.
     Solid line with hook:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -1684,8 +1613,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -1759,18 +1687,15 @@ piecewise.py examples.
     Invisible lines:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -1779,8 +1704,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -1856,18 +1780,15 @@ piecewise.py examples.
     Piece selector groups leaves by measures:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -1881,8 +1802,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -1970,18 +1890,15 @@ piecewise.py examples.
     With spanners:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -1995,8 +1912,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -2084,18 +2000,15 @@ piecewise.py examples.
     Bookends each piece:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -2110,8 +2023,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -2208,18 +2120,15 @@ piecewise.py examples.
     With spanners:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -2234,8 +2143,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -2335,13 +2243,10 @@ piecewise.py examples.
     0, 1, 2 but piece 3 carries only a stop text span:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
@@ -2364,8 +2269,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -2436,18 +2340,15 @@ piecewise.py examples.
     REGRESSION. Handles backslashed markup correctly:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -2461,8 +2362,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -2537,18 +2437,15 @@ piecewise.py examples.
     REGRESSION. Kerns bookended hooks:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -2562,8 +2459,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -2653,18 +2549,15 @@ piecewise.py examples.
     REGRESSION. Backsteals left text from length-1 final piece:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_notes(accumulator.get())
+    >>> music = baca.make_notes(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "C4 D4 E4 F4 G4 A4")
@@ -2677,8 +2570,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -2760,13 +2652,10 @@ piecewise.py examples.
     REGRESSION. Backsteals left text from spannerless final piece:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
@@ -2785,8 +2674,7 @@ piecewise.py examples.
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )

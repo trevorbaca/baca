@@ -1,28 +1,22 @@
 r"""
-Segment-accumulator scope examples.
-
-Wraps each command in ``accumulator`` with each scope in ``scopes``.
+Examples.
 
 ..  container:: example
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> abjad.label.with_indices(voice)
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -113,13 +107,10 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     Colors octaves:
 
     >>> score = baca.docs.make_empty_score(1, 1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(6, 4)],
-    ... )
+    >>> measures = baca.measures([(6, 4)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> music = abjad.Container("d'4 e' f' g' a' b'")[:]
@@ -129,8 +120,7 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> _ = baca.clef(score["Music.2"][0], "bass")
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     color_octaves=True,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -197,24 +187,20 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
     >>> manifests = {"abjad.Instrument": instruments}
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.instrument(voice[0], "clarinet", manifests)
     >>> _ = baca.pitches(voice, "E4 F4")
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     instruments=instruments,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -282,24 +268,20 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
     >>> manifests = {"abjad.Instrument": instruments}
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.instrument(voice[0], "clarinet", manifests)
     >>> _ = baca.pitches(voice, "E4 F4")
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     instruments=instruments,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -384,13 +366,10 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> instruments["Violin"] = abjad.Violin()
     >>> manifests = {"abjad.Instrument": instruments}
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=time_signatures,
-    ... )
+    >>> measures = baca.measures(time_signatures)
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> score["Music"].extend(figures_)
@@ -398,9 +377,8 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> _ = baca.instrument(voice[0], "Violin", manifests)
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
+    ...     measures(),
     ...     do_not_check_wellformedness=True,
-    ...     commands=accumulator.commands,
     ...     instruments=instruments,
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -496,20 +474,16 @@ Wraps each command in ``accumulator`` with each scope in ``scopes``.
     >>> figures = list(figures_)
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=time_signatures,
-    ... )
+    >>> measures = baca.measures(time_signatures)
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> score["Music"].extend(figures_)
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )

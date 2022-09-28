@@ -6,16 +6,13 @@ overrides.py examples.
     Overrides bar line transparency before measure 1:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
-    >>> def make_music(divisions):
+    >>> def make_rhythm(divisions):
     ...     nested_music = rmakers.talea(divisions, [1, 1, 1, -1], 8)
     ...     voice = rmakers.wrap_in_time_signature_staff(nested_music, divisions)
     ...     rmakers.beam(voice)
@@ -23,7 +20,7 @@ overrides.py examples.
     ...     music = abjad.mutate.eject_contents(voice)
     ...     return music
 
-    >>> music = make_music(accumulator.get())
+    >>> music = make_rhythm(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -32,8 +29,7 @@ overrides.py examples.
     ... )
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -412,17 +408,14 @@ overrides.py examples.
     REGRESSION. Coerces X11 color names:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> voice = score["Music"]
-    >>> music = baca.make_mmrests(accumulator.get(), head="Music")
+    >>> music = baca.make_mmrests(measures(), head="Music")
     >>> score["Music"].extend(music)
     >>> _ = baca.mmrest_color(
     ...     baca.select.mmrests(voice)[1:],
@@ -430,8 +423,7 @@ overrides.py examples.
     ... )
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -494,17 +486,14 @@ overrides.py examples.
 ..  container:: example
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> voice = score["Music"]
-    >>> music = baca.make_mmrests(accumulator.get(), head="Music")
+    >>> music = baca.make_mmrests(measures(), head="Music")
     >>> score["Music"].extend(music)
     >>> _ = baca.markup(
     ...     baca.select.mmrest(voice, 2),
@@ -513,8 +502,7 @@ overrides.py examples.
     >>> _ = baca.mmrest_text_color(baca.select.mmrests(voice)[1:], "#red")
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -578,17 +566,14 @@ overrides.py examples.
 ..  container:: example
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> voice = score["Music"]
-    >>> music = baca.make_mmrests(accumulator.get(), head="Music")
+    >>> music = baca.make_mmrests(measures(), head="Music")
     >>> score["Music"].extend(music)
     >>> _ = baca.markup(
     ...     baca.select.mmrest(voice, 2),
@@ -598,8 +583,7 @@ overrides.py examples.
     ...     baca.select.mmrests(voice)[1:], (0, 2))
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -663,17 +647,14 @@ overrides.py examples.
 ..  container:: example
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> voice = score["Music"]
-    >>> music = baca.make_mmrests(accumulator.get(), head="Music")
+    >>> music = baca.make_mmrests(measures(), head="Music")
     >>> score["Music"].extend(music)
     >>> _ = baca.markup(
     ...     baca.select.mmrest(voice, 2),
@@ -682,8 +663,7 @@ overrides.py examples.
     >>> _ = baca.mmrest_text_padding(baca.select.mmrests(voice)[1:], 2)
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -747,17 +727,14 @@ overrides.py examples.
 ..  container:: example
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> voice = score["Music"]
-    >>> music = baca.make_mmrests(accumulator.get(), head="Music")
+    >>> music = baca.make_mmrests(measures(), head="Music")
     >>> score["Music"].extend(music)
     >>> _ = baca.markup(
     ...     baca.select.mmrest(voice, 2),
@@ -766,8 +743,7 @@ overrides.py examples.
     >>> _ = baca.mmrest_text_parent_center(baca.select.mmrests(voice)[1:])
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -831,17 +807,14 @@ overrides.py examples.
 ..  container:: example
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> voice = score["Music"]
-    >>> music = baca.make_mmrests(accumulator.get(), head="Music")
+    >>> music = baca.make_mmrests(measures(), head="Music")
     >>> score["Music"].extend(music)
     >>> _ = baca.markup(
     ...     baca.select.mmrest(voice, 2),
@@ -850,8 +823,7 @@ overrides.py examples.
     >>> _ = baca.mmrest_text_staff_padding(baca.select.mmrests(voice)[1:], 2)
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )

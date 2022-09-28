@@ -1173,13 +1173,24 @@ def show_tag(directory, tag, *, undo=False):
         _print_tags(message)
 
 
-def timed(make_score):
-    @functools.wraps(make_score)
-    def wrapper(*arguments):
-        timing = arguments[-1]
-        with abjad.Timer() as timer:
-            result = make_score(*arguments[:-1])
-        timing.make_score = int(timer.elapsed_time)
-        return result
+def timed(timing_attribute):
+    def decorator(function):
+        @functools.wraps(function)
+        def wrapper(*arguments, **keywords):
+            timing = None
+            if "timing" in keywords:
+                timing = keywords.pop("timing")
+            else:
+                candidate = arguments[-1]
+                if isinstance(candidate, Timing):
+                    timing = candidate
+                    arguments = arguments[:-1]
+            with abjad.Timer() as timer:
+                result = function(*arguments, **keywords)
+            if timing is not None:
+                setattr(timing, timing_attribute, int(timer.elapsed_time))
+            return result
 
-    return wrapper
+        return wrapper
+
+    return decorator

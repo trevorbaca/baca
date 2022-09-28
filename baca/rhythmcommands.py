@@ -214,13 +214,10 @@ def make_monads(fractions):
     ..  container:: example
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(4, 4)],
-        ... )
+        >>> measures = baca.measures([(4, 4)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 12))(score)
@@ -228,8 +225,7 @@ def make_monads(fractions):
         >>> score["Music"].extend(music)
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
@@ -320,24 +316,20 @@ def make_repeat_tied_notes(
         gold), even tied notes resulting from meter rewriting:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(10, 8)],
-        ... )
+        >>> measures = baca.measures([(10, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 12))(score)
 
-        >>> music = baca.make_repeat_tied_notes(accumulator.get())
+        >>> music = baca.make_repeat_tied_notes(measures())
         >>> score["Music"].extend(music)
 
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )

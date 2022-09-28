@@ -968,7 +968,7 @@ def parse_hairpin_descriptor(
         if _is_maybe_bundled(left, abjad.StartHairpin) and _is_maybe_bundled(
             right, abjad.StartHairpin
         ):
-            raise Exception("consecutive start hairpin accumulator.")
+            raise Exception("consecutive start hairpin commands.")
         elif _is_maybe_bundled(left, abjad.Dynamic) and _is_maybe_bundled(
             right, abjad.Dynamic
         ):

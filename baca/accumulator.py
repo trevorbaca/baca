@@ -37,6 +37,11 @@ def get_voice_names(score):
     return tuple(voice_names)
 
 
+def measures(items):
+    time_signatures = [abjad.TimeSignature(_) for _ in items]
+    return MeasureServer(time_signatures)
+
+
 @dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
 class CommandAccumulator:
 

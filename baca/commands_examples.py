@@ -6,17 +6,14 @@ commands.py examles
     Bow contact points. Tweaks LilyPond ``TextSpanner`` grob:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 16))(score)
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.bcps(
@@ -30,8 +27,7 @@ commands.py examles
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -193,17 +189,14 @@ commands.py examles
     PATTERN. Define chunkwise spanners like this:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 16))(score)
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.bcps(voice[:7], bcps=[(1, 5), (2, 5)])
@@ -214,8 +207,7 @@ commands.py examles
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -419,17 +411,14 @@ commands.py examles
     Works with hairpins:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 13))(score)
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
@@ -440,8 +429,7 @@ commands.py examles
     >>> _ = baca.dls_staff_padding(voice, 5)
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -514,17 +502,14 @@ commands.py examles
     Works with tweaks:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
@@ -536,8 +521,7 @@ commands.py examles
     >>> _ = baca.dls_staff_padding(voice, 5)
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -608,17 +592,14 @@ commands.py examles
     Force accidentals. Inverts edition-specific tags:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
 
-    >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
+    >>> music = baca.make_notes(measures(), repeat_ties=True)
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 F4")
@@ -628,8 +609,7 @@ commands.py examles
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -680,17 +660,14 @@ commands.py examles
     >>> short_instrument_names["Fl."] = abjad.ShortInstrumentName(markup)
     >>> manifests = {"abjad.ShortInstrumentName": short_instrument_names}
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
 
-    >>> music = baca.make_notes(accumulator.get(), repeat_ties=True)
+    >>> music = baca.make_notes(measures(), repeat_ties=True)
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.short_instrument_name(voice[0], "Fl.", manifests)
@@ -698,8 +675,7 @@ commands.py examles
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     first_section=True,
     ...     short_instrument_names=short_instrument_names,
     ...     move_global_context=True,
@@ -747,18 +723,15 @@ commands.py examles
     Single-line staff with percussion clef:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_notes(accumulator.get())
+    >>> music = baca.make_notes(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.clef(voice[0], "percussion")
@@ -767,8 +740,7 @@ commands.py examles
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -821,18 +793,15 @@ commands.py examles
     Single-line staff with bass clef:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_notes(accumulator.get())
+    >>> music = baca.make_notes(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.clef(voice[0], "bass")
@@ -841,8 +810,7 @@ commands.py examles
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -896,18 +864,15 @@ commands.py examles
     Two-line staff with percussion clef:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_notes(accumulator.get())
+    >>> music = baca.make_notes(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.clef(voice[0], "percussion")
@@ -916,8 +881,7 @@ commands.py examles
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -969,18 +933,15 @@ commands.py examles
     Two-line staff with bass clef; clef set before staff positions:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_notes(accumulator.get())
+    >>> music = baca.make_notes(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.clef(voice[0], "bass")
@@ -989,8 +950,7 @@ commands.py examles
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -1042,18 +1002,15 @@ commands.py examles
     Two-line staff with bass clef; staff positions set before clef:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(3, 8), (3, 8), (3, 8), (3, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_notes(accumulator.get())
+    >>> music = baca.make_notes(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.staff_lines(voice[0], 2)
@@ -1062,8 +1019,7 @@ commands.py examles
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -1271,13 +1227,10 @@ commands.py examles
     Attaches cross-staff command to last two pitched leaves:
 
     >>> score = baca.docs.make_empty_score(1, 1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 4)],
-    ... )
+    >>> measures = baca.measures([(4, 4)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> music = abjad.Container("e'4 f' g' a'")[:]
@@ -1287,8 +1240,7 @@ commands.py examles
     >>> _ = baca.cross_staff(baca.select.pleaves(score["Music.2"])[-2:])
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -1341,18 +1293,15 @@ commands.py examles
     Makes finger pressure transition glissando.
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_notes(accumulator.get())
+    >>> music = baca.make_notes(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitch(voice, "C5")
@@ -1364,8 +1313,7 @@ commands.py examles
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -1425,17 +1373,14 @@ commands.py examles
     Glissando works with tweaks:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -1446,8 +1391,7 @@ commands.py examles
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -1532,17 +1476,14 @@ commands.py examles
     Glissando works with indexed tweaks:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
 
-    >>> music = baca.make_even_divisions(accumulator.get())
+    >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -1554,8 +1495,7 @@ commands.py examles
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -1629,18 +1569,15 @@ commands.py examles
     Attaches ``\baca-invisible-music`` literal to middle leaves:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 12))(score)
 
-    >>> music = baca.make_notes(accumulator.get())
+    >>> music = baca.make_notes(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitch(voice, "C5")
@@ -1648,8 +1585,7 @@ commands.py examles
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -1779,17 +1715,14 @@ commands.py examles
     Assigns parts.
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
 
-    >>> music = baca.make_notes(accumulator.get())
+    >>> music = baca.make_notes(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.assign_part(voice, baca.parts.PartAssignment("Music"))
@@ -1797,8 +1730,7 @@ commands.py examles
 
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -1839,19 +1771,16 @@ commands.py examles
     Raises exception when voice does not allow part assignment:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-    ... )
+    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
 
     >>> part_assignment = baca.parts.PartAssignment("Flute")
 
-    >>> music = baca.make_notes(accumulator.get())
+    >>> music = baca.make_notes(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.assign_part(voice, baca.parts.PartAssignment("Flute.Music"))

@@ -1028,11 +1028,11 @@ def stop_trill(argument) -> list[abjad.Wrapper]:
     Attaches stop trill to closing-slot.
 
     The closing format slot is important because LilyPond fails to compile when
-    ``\stopTrillSpan`` appears after ``\set instrumentName`` accumulator (and
-    probably other ``\set`` accumulator). Setting format slot to closing here
+    ``\stopTrillSpan`` appears after ``\set instrumentName`` command (and
+    probably other ``\set`` command). Setting format slot to closing here
     positions ``\stopTrillSpan`` after the leaf in question (which is required)
     and also draws ``\stopTrillSpan`` closer to the leaf in question, prior to
-    ``\set instrumentName`` and other accumulator positioned in the after slot.
+    ``\set instrumentName`` and other command positioned in the after slot.
 
     Eventually it will probably be necessary to model ``\stopTrillSpan`` with a
     dedicated format slot.

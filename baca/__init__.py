@@ -12,9 +12,7 @@ from . import select
 from . import sequence
 from . import typings
 from .enums import colors, enums
-from .accumulator import (
-    CommandAccumulator,
-)
+from .accumulator import CommandAccumulator, measures
 from .commands import *
 from .constellation import *
 from .cursor import Cursor
@@ -58,7 +56,7 @@ from .piecewisecommands import (
 )
 from .pitchcommands import *
 from .rhythmcommands import *
-from .section import scope
+from .section import scope, time_signatures
 from .spannercommands import (
     beam,
     ottava,

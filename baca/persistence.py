@@ -18,25 +18,21 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_mmrests(accumulator.get(), head="Music")
+        >>> music = baca.make_mmrests(measures(), head="Music")
         >>> voice.extend(music)
         >>> _ = baca.clef(abjad.select.leaf(voice, 0), "treble")
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -114,19 +110,16 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_mmrests(accumulator.get(), head="Music")
+        >>> music = baca.make_mmrests(measures(), head="Music")
         >>> voice.extend(music)
         >>> _ = baca.clef(abjad.select.leaf(voice, 0), "alto")
         >>> metadata, persist = {}, {}
@@ -140,8 +133,7 @@ r"""
         ... ]
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...         previous_persist=persist,
@@ -225,19 +217,16 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_mmrests(accumulator.get(), head="Music")
+        >>> music = baca.make_mmrests(measures(), head="Music")
         >>> voice.extend(music)
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
@@ -251,8 +240,7 @@ r"""
         >>> baca.section.reapply(voice, {}, persist["persistent_indicators"])
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...         previous_persist=persist,
@@ -337,26 +325,22 @@ r"""
         ...         baca.system(measure=3, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_mmrests(accumulator.get(), head="Music")
+        >>> music = baca.make_mmrests(measures(), head="Music")
         >>> voice.extend(music)
         >>> _ = baca.clef(abjad.select.leaf(voice, 0), "treble")
         >>> _ = baca.clef(abjad.select.leaf(voice, 2), "treble")
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -445,19 +429,16 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_mmrests(accumulator.get(), head="Music")
+        >>> music = baca.make_mmrests(measures(), head="Music")
         >>> voice.extend(music)
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
@@ -472,8 +453,7 @@ r"""
         >>> _ = baca.clef(abjad.select.leaf(voice, 0), "treble")
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...         previous_persist=persist,
@@ -555,24 +535,20 @@ r"""
         Explicit dynamics color blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier(fallback_duration=(1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -619,18 +595,15 @@ r"""
         Even after a previous dynamic:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "p")
         >>> metadata, persist = {}, {}
@@ -644,8 +617,7 @@ r"""
         ... ]
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...         previous_persist=persist,
@@ -698,18 +670,15 @@ r"""
         Reapplied dynamics color green:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
@@ -723,8 +692,7 @@ r"""
         >>> baca.section.reapply(voice, {}, persist["persistent_indicators"])
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...         previous_persist=persist,
@@ -777,25 +745,21 @@ r"""
         Redundant dynamics color pink:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), "f")
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -844,18 +808,15 @@ r"""
         Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
@@ -870,8 +831,7 @@ r"""
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...         previous_persist=persist,
@@ -922,25 +882,21 @@ r"""
         Sforzando dynamics do not count as redundant:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "sfz")
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), "sfz")
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -989,18 +945,15 @@ r"""
         Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "sfz")
         >>> metadata, persist = {}, {}
@@ -1014,8 +967,7 @@ r"""
         ... ]
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...         previous_persist=persist,
@@ -1068,25 +1020,21 @@ r"""
         REGRESSION. Conventional and effort dynamics analyze nonredundantly:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "mf")
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), '"mf"')
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -1157,25 +1105,21 @@ r"""
         Explicit instruments color blue and redraw dull blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> _ = baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     instruments=instruments,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1316,19 +1260,16 @@ r"""
         Even after a previous instrument:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> _ = baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
         >>> metadata, persist = {}, {}
@@ -1342,8 +1283,7 @@ r"""
         ... ]
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...         previous_persist=persist,
@@ -1489,19 +1429,16 @@ r"""
         Reapplied instruments color green and redraw dull green:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
@@ -1515,8 +1452,7 @@ r"""
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...         previous_persist=persist,
@@ -1670,27 +1606,23 @@ r"""
         ...         baca.system(measure=3, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
-        ... )
+        >>> measures = baca.measures([(4, 8), (4, 8), (4, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> manifests = {"abjad.Instrument": instruments}
         >>> _ = baca.instrument(voice[0], "Flute", manifests)
         >>> _ = baca.instrument(voice[1], "Flute", manifests)
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     instruments=instruments,
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
@@ -1855,19 +1787,16 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
@@ -1882,8 +1811,7 @@ r"""
         >>> _ = baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...         previous_persist=persist,
@@ -2050,26 +1978,22 @@ r"""
         Explicit short instrument names color blue and redraw dull blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> _ = baca.short_instrument_name(voice[0], "I+II", manifests)
 
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     first_section=True,
         ...     short_instrument_names=short_instrument_names,
         ...     move_global_context=True,
@@ -2219,19 +2143,16 @@ r"""
         Even after previous short instrument name:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> _ = baca.short_instrument_name(voice[0], "III+IV", manifests)
 
@@ -2246,8 +2167,7 @@ r"""
         ... ]
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...         previous_persist=persist,
@@ -2405,19 +2325,16 @@ r"""
         Reapplied short instrument names color green and redraw dull green:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
@@ -2431,8 +2348,7 @@ r"""
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...         previous_persist=persist,
@@ -2597,27 +2513,23 @@ r"""
         ...         baca.system(measure=3, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
-        ... )
+        >>> measures = baca.measures([(4, 8), (4, 8), (4, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> manifests = {"abjad.ShortInstrumentName": short_instrument_names}
         >>> _ = baca.short_instrument_name(voice[0], "I+II", manifests)
         >>> _ = baca.short_instrument_name(voice[1], "I+II", manifests)
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     first_section=True,
         ...     short_instrument_names=short_instrument_names,
         ...     move_global_context=True,
@@ -2801,19 +2713,16 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
 
         >>> metadata, persist = {}, {}
@@ -2830,8 +2739,7 @@ r"""
 
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...         previous_persist=persist,
@@ -2996,19 +2904,16 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
-        ... )
+        >>> measures = baca.measures([(4, 8), (4, 8), (4, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
 
         >>> wrappers = baca.short_instrument_name(voice[0], "I+II", manifests)
@@ -3018,8 +2923,7 @@ r"""
 
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     first_section=True,
         ...     short_instrument_names=short_instrument_names,
         ...     move_global_context=True,
@@ -3104,13 +3008,10 @@ r"""
         Explicit metronome marks color blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     append_anchor_skip=True,
         ...     docs=True,
         ... )
@@ -3122,14 +3023,13 @@ r"""
         ...     {},
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> baca.section.append_anchor_note(voice)
 
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     append_anchor_skip=True,
         ...     metronome_marks=metronome_marks,
         ...     move_global_context=True,
@@ -3203,13 +3103,10 @@ r"""
         Even after a previous metronome mark:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     append_anchor_skip=True,
         ...     docs=True,
         ... )
@@ -3222,7 +3119,7 @@ r"""
         ... )
         >>> wrappers = baca.text_spanner_staff_padding(score["Skips"][:-1], 4)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> baca.section.append_anchor_note(voice)
 
@@ -3237,8 +3134,7 @@ r"""
         ... ]
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     append_anchor_skip=True,
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
@@ -3329,13 +3225,10 @@ r"""
         ...     )
         ... ]
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ...     manifests={"abjad.MetronomeMark": metronome_marks},
         ...     previous_persistent_indicators=persist["persistent_indicators"],
@@ -3343,15 +3236,14 @@ r"""
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> wrappers = baca.text_spanner_staff_padding(score["Skips"], 4)
 
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...         previous_persist=persist,
@@ -3417,13 +3309,10 @@ r"""
         Redundant metronome marks color pink:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     append_anchor_skip=True,
         ...     docs=True,
         ... )
@@ -3440,14 +3329,13 @@ r"""
         ...     {},
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> baca.section.append_anchor_note(voice)
 
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     append_anchor_skip=True,
         ...     metronome_marks=metronome_marks,
         ...     move_global_context=True,
@@ -3537,13 +3425,10 @@ r"""
         ...     )
         ... ]
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     append_anchor_skip=True,
         ...     docs=True,
         ...     manifests={"abjad.MetronomeMark": metronome_marks},
@@ -3558,15 +3443,14 @@ r"""
         ... )
         >>> wrappers = baca.text_spanner_staff_padding(score["Skips"][:-1], 4)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> baca.section.append_anchor_note(voice)
         >>> baca.section.reapply(voice, {}, persist["persistent_indicators"])
 
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     append_anchor_skip=True,
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
@@ -3652,13 +3536,10 @@ r"""
         Explicit persistent overrides work but do not color:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
@@ -3670,7 +3551,7 @@ r"""
         ... )
         >>> tag = abjad.Tag("baca.bar_extent_persistent")
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> wrapper = abjad.attach(override, voice[0], wrapper=True)
         >>> wrapper.tag = tag
@@ -3679,8 +3560,7 @@ r"""
 
         >>> metadata, persist = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -3737,18 +3617,15 @@ r"""
         Reapplied persistent overrides work but do not color:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
 
         >>> metadata, persist = {}, {}
@@ -3769,8 +3646,7 @@ r"""
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...         previous_persist=persist,
@@ -3820,18 +3696,15 @@ r"""
         Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> override = baca.PersistentOverride(
         ...     attribute="bar_extent",
@@ -3862,8 +3735,7 @@ r"""
         ... ]
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...         previous_persist=persist,
@@ -3919,25 +3791,21 @@ r"""
         Explicit staff lines color blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> _ = baca.staff_lines(voice[0], 5)
 
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -3987,18 +3855,15 @@ r"""
         Even after previous staff lines:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> _ = baca.staff_lines(voice[0], 1)
 
@@ -4013,8 +3878,7 @@ r"""
         ... ]
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...         previous_persist=persist,
@@ -4070,18 +3934,15 @@ r"""
         Reapplied staff lines color green:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
@@ -4095,8 +3956,7 @@ r"""
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...         previous_persist=persist,
@@ -4151,26 +4011,22 @@ r"""
         Redundant staff lines color pink:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> _ = baca.staff_lines(voice[0], 5)
         >>> _ = baca.staff_lines(voice[1], 5)
 
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -4225,18 +4081,15 @@ r"""
         Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
 
         >>> metadata, persist = {}, {}
@@ -4254,8 +4107,7 @@ r"""
 
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...         previous_persist=persist,
@@ -4327,13 +4179,10 @@ r"""
         Explicit tempo trends color blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     append_anchor_skip=True,
         ...     docs=True,
         ... )
@@ -4345,14 +4194,13 @@ r"""
         ...     {},
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> baca.section.append_anchor_note(voice)
 
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     append_anchor_skip=True,
         ...     metronome_marks=metronome_marks,
         ...     move_global_context=True,
@@ -4426,13 +4274,10 @@ r"""
         Even after a previous tempo trend:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ...     )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
@@ -4444,7 +4289,7 @@ r"""
         ... )
         >>> wrappers = baca.text_spanner_staff_padding(score["Skips"], 4)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
 
         >>> metadata, persist = {}, {}
@@ -4457,8 +4302,7 @@ r"""
         ... ]
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...         previous_persist=persist,
@@ -4531,28 +4375,24 @@ r"""
         ...     )
         ... ]
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ...     previous_persistent_indicators=persist["persistent_indicators"],
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> wrappers = baca.text_spanner_staff_padding(score["Skips"], 4)
 
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...         previous_persist=persist,
@@ -4617,13 +4457,10 @@ r"""
         Redundant tempo trends color pink:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
@@ -4639,13 +4476,12 @@ r"""
         ...     {},
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
 
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
@@ -4722,13 +4558,10 @@ r"""
         ...     )
         ... ]
         >>> score = baca.docs.make_empty_score(1)
-        >>> accumulator = baca.CommandAccumulator(
-        ...     time_signatures=[(3, 8), (3, 8)],
-        ... )
+        >>> measures = baca.measures([(3, 8), (3, 8)])
         >>> first_measure_number = baca.section.set_up_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     accumulator,
+        ...     measures(),
         ...     docs=True,
         ...     previous_persistent_indicators=persist["persistent_indicators"],
         ... )
@@ -4741,13 +4574,12 @@ r"""
         ... )
         >>> wrappers = baca.text_spanner_staff_padding(score["Skips"], 4)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(accumulator.get())
+        >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> _, _ = baca.section.postprocess_score(
         ...     score,
-        ...     accumulator.time_signatures,
-        ...     commands=accumulator.commands,
+        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...         previous_persist=persist,

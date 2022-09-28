@@ -3824,23 +3824,19 @@ figures.py examples.
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=figures.time_signatures,
-    ... )
+    >>> measures = baca.measures(figures.time_signatures)
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score, accumulator)
+    >>> figures.populate_commands(score, measures())
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -3971,23 +3967,19 @@ figures.py examples.
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=figures.time_signatures,
-    ... )
+    >>> measures = baca.measures(figures.time_signatures)
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score, accumulator)
+    >>> figures.populate_commands(score, measures())
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -4139,23 +4131,19 @@ figures.py examples.
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=figures.time_signatures,
-    ... )
+    >>> measures = baca.measures(figures.time_signatures)
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score, accumulator)
+    >>> figures.populate_commands(score, measures())
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -4328,21 +4316,17 @@ figures.py examples.
     ...     container=container,
     ...     imbrications=imbrications_1 | imbrications_3,
     ... )
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=figures.time_signatures,
-    ... )
+    >>> measures = baca.measures(figures.time_signatures)
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score, accumulator)
+    >>> figures.populate_commands(score, measures())
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -4555,23 +4539,19 @@ figures.py examples.
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=figures.time_signatures,
-    ... )
+    >>> measures = baca.measures(figures.time_signatures)
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score, accumulator)
+    >>> figures.populate_commands(score, measures())
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -4761,23 +4741,19 @@ figures.py examples.
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=figures.time_signatures,
-    ... )
+    >>> measures = baca.measures(figures.time_signatures)
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 24))(score)
-    >>> figures.populate_commands(score, accumulator)
+    >>> figures.populate_commands(score, measures())
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -4901,23 +4877,19 @@ figures.py examples.
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=figures.time_signatures,
-    ... )
+    >>> measures = baca.measures(figures.time_signatures)
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score, accumulator)
+    >>> figures.populate_commands(score, measures())
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -5066,23 +5038,19 @@ figures.py examples.
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=figures.time_signatures,
-    ... )
+    >>> measures = baca.measures(figures.time_signatures)
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score, accumulator)
+    >>> figures.populate_commands(score, measures())
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -5947,23 +5915,19 @@ figures.py examples.
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=figures.time_signatures,
-    ... )
+    >>> measures = baca.measures(figures.time_signatures)
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score, accumulator)
+    >>> figures.populate_commands(score, measures())
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -6134,23 +6098,19 @@ figures.py examples.
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=figures.time_signatures,
-    ... )
+    >>> measures = baca.measures(figures.time_signatures)
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score, accumulator)
+    >>> figures.populate_commands(score, measures())
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -6313,23 +6273,19 @@ figures.py examples.
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=figures.time_signatures,
-    ... )
+    >>> measures = baca.measures(figures.time_signatures)
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score, accumulator)
+    >>> figures.populate_commands(score, measures())
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
@@ -6495,24 +6451,20 @@ figures.py examples.
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
-    >>> accumulator = baca.CommandAccumulator(
-    ...     time_signatures=figures.time_signatures,
-    ... )
+    >>> measures = baca.measures(figures.time_signatures)
     >>> first_measure_number = baca.section.set_up_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     accumulator,
+    ...     measures(),
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score, accumulator)
+    >>> figures.populate_commands(score, measures())
 
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
-    ...     accumulator.time_signatures,
-    ...     commands=accumulator.commands,
+    ...     measures(),
     ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
