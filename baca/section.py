@@ -2451,16 +2451,17 @@ def cache_leaves(score, measure_count, voice_abbreviations=None):
 
 
 class VoiceCache:
-    def __init__(self, score, voice_abbreviations):
+    def __init__(self, score, voice_abbreviations=None):
         voices = []
         for voice in abjad.select.components(score, abjad.Voice):
             if hasattr(self, voice.name):
                 continue
             voices.append(voice)
             setattr(self, voice.name, voice)
-            for abbreviation, voice_name in voice_abbreviations.items():
-                if voice_name == voice.name:
-                    setattr(self, abbreviation, voice)
+            if voice_abbreviations:
+                for abbreviation, voice_name in voice_abbreviations.items():
+                    if voice_name == voice.name:
+                        setattr(self, abbreviation, voice)
         self._voices = voices
 
     def __call__(self, abbreviation):
@@ -2471,7 +2472,7 @@ class VoiceCache:
         return iter(self._voices)
 
 
-def cache_voices(score, voice_abbreviations):
+def cache_voices(score, voice_abbreviations=None):
     return VoiceCache(score, voice_abbreviations)
 
 
