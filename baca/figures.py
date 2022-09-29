@@ -1145,7 +1145,7 @@ class FigureAccumulator:
                 fused_selection.append(skip)
         return fused_selection
 
-    def populate_commands(self, score, commands):
+    def populate_commands(self, score):
         for voice_name in sorted(self.floating_selections):
             selection = self.assemble(voice_name)
             if not selection:

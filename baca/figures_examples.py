@@ -3831,7 +3831,7 @@ figures.py examples.
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score, measures())
+    >>> figures.populate_commands(score)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
@@ -3974,7 +3974,7 @@ figures.py examples.
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score, measures())
+    >>> figures.populate_commands(score)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
@@ -4138,7 +4138,7 @@ figures.py examples.
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score, measures())
+    >>> figures.populate_commands(score)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
@@ -4323,7 +4323,7 @@ figures.py examples.
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score, measures())
+    >>> figures.populate_commands(score)
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
     ...     measures(),
@@ -4546,7 +4546,7 @@ figures.py examples.
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score, measures())
+    >>> figures.populate_commands(score)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
@@ -4748,7 +4748,7 @@ figures.py examples.
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 24))(score)
-    >>> figures.populate_commands(score, measures())
+    >>> figures.populate_commands(score)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
@@ -4884,7 +4884,7 @@ figures.py examples.
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score, measures())
+    >>> figures.populate_commands(score)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
@@ -5045,7 +5045,7 @@ figures.py examples.
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score, measures())
+    >>> figures.populate_commands(score)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
@@ -5922,7 +5922,7 @@ figures.py examples.
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score, measures())
+    >>> figures.populate_commands(score)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
@@ -6105,7 +6105,7 @@ figures.py examples.
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score, measures())
+    >>> figures.populate_commands(score)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
@@ -6280,7 +6280,7 @@ figures.py examples.
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score, measures())
+    >>> figures.populate_commands(score)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
@@ -6458,8 +6458,7 @@ figures.py examples.
     ...     docs=True,
     ... )
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score, measures())
-
+    >>> figures.populate_commands(score)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
