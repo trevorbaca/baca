@@ -6,12 +6,8 @@ overrides.py examples.
     Overrides bar line transparency before measure 1:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> first_measure_number = baca.section.set_up_score(
-    ...     score,
-    ...     measures(),
-    ...     docs=True,
-    ... )
+    >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> def make_rhythm(divisions):
     ...     nested_music = rmakers.talea(divisions, [1, 1, 1, -1], 8)
     ...     voice = rmakers.wrap_in_time_signature_staff(nested_music, divisions)
@@ -408,12 +404,8 @@ overrides.py examples.
     REGRESSION. Coerces X11 color names:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> first_measure_number = baca.section.set_up_score(
-    ...     score,
-    ...     measures(),
-    ...     docs=True,
-    ... )
+    >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> voice = score["Music"]
     >>> music = baca.make_mmrests(measures(), head="Music")
     >>> score["Music"].extend(music)
@@ -486,12 +478,8 @@ overrides.py examples.
 ..  container:: example
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> first_measure_number = baca.section.set_up_score(
-    ...     score,
-    ...     measures(),
-    ...     docs=True,
-    ... )
+    >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> voice = score["Music"]
     >>> music = baca.make_mmrests(measures(), head="Music")
     >>> score["Music"].extend(music)
@@ -566,12 +554,8 @@ overrides.py examples.
 ..  container:: example
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> first_measure_number = baca.section.set_up_score(
-    ...     score,
-    ...     measures(),
-    ...     docs=True,
-    ... )
+    >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> voice = score["Music"]
     >>> music = baca.make_mmrests(measures(), head="Music")
     >>> score["Music"].extend(music)
@@ -647,12 +631,8 @@ overrides.py examples.
 ..  container:: example
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> first_measure_number = baca.section.set_up_score(
-    ...     score,
-    ...     measures(),
-    ...     docs=True,
-    ... )
+    >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> voice = score["Music"]
     >>> music = baca.make_mmrests(measures(), head="Music")
     >>> score["Music"].extend(music)
@@ -727,12 +707,8 @@ overrides.py examples.
 ..  container:: example
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> first_measure_number = baca.section.set_up_score(
-    ...     score,
-    ...     measures(),
-    ...     docs=True,
-    ... )
+    >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> voice = score["Music"]
     >>> music = baca.make_mmrests(measures(), head="Music")
     >>> score["Music"].extend(music)
@@ -807,12 +783,8 @@ overrides.py examples.
 ..  container:: example
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> first_measure_number = baca.section.set_up_score(
-    ...     score,
-    ...     measures(),
-    ...     docs=True,
-    ... )
+    >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> voice = score["Music"]
     >>> music = baca.make_mmrests(measures(), head="Music")
     >>> score["Music"].extend(music)

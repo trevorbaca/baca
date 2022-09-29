@@ -12,7 +12,6 @@ from . import select
 from . import sequence
 from . import typings
 from .enums import colors, enums
-from .accumulator import CommandAccumulator, measures
 from .commands import *
 from .constellation import *
 from .cursor import Cursor

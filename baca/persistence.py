@@ -18,12 +18,8 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
@@ -110,12 +106,8 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
@@ -217,12 +209,8 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
@@ -325,12 +313,8 @@ r"""
         ...         baca.system(measure=3, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> measures = baca.measures([(3, 8), (3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
@@ -429,12 +413,8 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
@@ -535,12 +515,8 @@ r"""
         Explicit dynamics color blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier(fallback_duration=(1, 24))(score)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
@@ -595,12 +571,8 @@ r"""
         Even after a previous dynamic:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
@@ -670,12 +642,8 @@ r"""
         Reapplied dynamics color green:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
@@ -745,12 +713,8 @@ r"""
         Redundant dynamics color pink:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
@@ -808,12 +772,8 @@ r"""
         Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
@@ -882,12 +842,8 @@ r"""
         Sforzando dynamics do not count as redundant:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
@@ -945,12 +901,8 @@ r"""
         Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
@@ -1020,12 +972,8 @@ r"""
         REGRESSION. Conventional and effort dynamics analyze nonredundantly:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
@@ -1105,12 +1053,8 @@ r"""
         Explicit instruments color blue and redraw dull blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
@@ -1260,12 +1204,8 @@ r"""
         Even after a previous instrument:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
@@ -1429,12 +1369,8 @@ r"""
         Reapplied instruments color green and redraw dull green:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
@@ -1606,12 +1542,8 @@ r"""
         ...         baca.system(measure=3, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> measures = baca.measures([(4, 8), (4, 8), (4, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(4, 8), (4, 8), (4, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
@@ -1787,12 +1719,8 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
@@ -1978,12 +1906,8 @@ r"""
         Explicit short instrument names color blue and redraw dull blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
@@ -2143,12 +2067,8 @@ r"""
         Even after previous short instrument name:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
@@ -2325,12 +2245,8 @@ r"""
         Reapplied short instrument names color green and redraw dull green:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
@@ -2513,12 +2429,8 @@ r"""
         ...         baca.system(measure=3, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> measures = baca.measures([(4, 8), (4, 8), (4, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(4, 8), (4, 8), (4, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
@@ -2713,12 +2625,8 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
@@ -2904,12 +2812,8 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> measures = baca.measures([(4, 8), (4, 8), (4, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(4, 8), (4, 8), (4, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
@@ -3008,8 +2912,8 @@ r"""
         Explicit metronome marks color blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(
         ...     score,
         ...     measures(),
         ...     append_anchor_skip=True,
@@ -3103,8 +3007,8 @@ r"""
         Even after a previous metronome mark:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(
         ...     score,
         ...     measures(),
         ...     append_anchor_skip=True,
@@ -3225,8 +3129,8 @@ r"""
         ...     )
         ... ]
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(
         ...     score,
         ...     measures(),
         ...     docs=True,
@@ -3309,8 +3213,8 @@ r"""
         Redundant metronome marks color pink:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(
         ...     score,
         ...     measures(),
         ...     append_anchor_skip=True,
@@ -3425,8 +3329,8 @@ r"""
         ...     )
         ... ]
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(
         ...     score,
         ...     measures(),
         ...     append_anchor_skip=True,
@@ -3536,12 +3440,8 @@ r"""
         Explicit persistent overrides work but do not color:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> override = baca.PersistentOverride(
         ...     attribute="bar_extent",
@@ -3617,12 +3517,8 @@ r"""
         Reapplied persistent overrides work but do not color:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
@@ -3696,12 +3592,8 @@ r"""
         Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
@@ -3791,12 +3683,8 @@ r"""
         Explicit staff lines color blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
@@ -3855,12 +3743,8 @@ r"""
         Even after previous staff lines:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
@@ -3934,12 +3818,8 @@ r"""
         Reapplied staff lines color green:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
@@ -4011,12 +3891,8 @@ r"""
         Redundant staff lines color pink:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
@@ -4081,12 +3957,8 @@ r"""
         Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
@@ -4179,8 +4051,8 @@ r"""
         Explicit tempo trends color blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(
         ...     score,
         ...     measures(),
         ...     append_anchor_skip=True,
@@ -4274,12 +4146,8 @@ r"""
         Even after a previous tempo trend:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> wrappers = baca.metronome_mark(
@@ -4375,8 +4243,8 @@ r"""
         ...     )
         ... ]
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(
         ...     score,
         ...     measures(),
         ...     docs=True,
@@ -4457,12 +4325,8 @@ r"""
         Redundant tempo trends color pink:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(3, 8), (3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> wrappers = baca.metronome_mark(
@@ -4558,8 +4422,8 @@ r"""
         ...     )
         ... ]
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(3, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
+        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(
         ...     score,
         ...     measures(),
         ...     docs=True,

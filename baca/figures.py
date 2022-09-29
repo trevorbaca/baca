@@ -1048,7 +1048,7 @@ class Contribution:
             assert isinstance(self.time_signature, abjad.TimeSignature)
 
 
-class FigureAccumulator:
+class Accumulator:
 
     __slots__ = (
         "current_offset",
@@ -1439,7 +1439,7 @@ def lmr(
 
 
 def make_figures(
-    accumulator: "FigureAccumulator",
+    accumulator: "Accumulator",
     voice_name: str,
     collections: typing.Sequence | None,
     *commands,

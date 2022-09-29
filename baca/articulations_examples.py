@@ -6,12 +6,8 @@ articulations.py examples.
     **COLOR FINGERINGS.**
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> first_measure_number = baca.section.set_up_score(
-    ...     score,
-    ...     measures(),
-    ...     docs=True,
-    ... )
+    >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> music = baca.make_notes(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]

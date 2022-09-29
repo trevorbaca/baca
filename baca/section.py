@@ -15,7 +15,6 @@ from inspect import currentframe as _frame
 
 import abjad
 
-from . import accumulator as _accumulator
 from . import build as _build
 from . import docs as _docs
 from . import indicatorclasses as _indicatorclasses
@@ -2326,6 +2325,21 @@ class DynamicScope:
         return _select.tleaves(self.argument, grace=grace)
 
 
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class Measures:
+
+    time_signatures: list[abjad.TimeSignature]
+
+    def __call__(self, start=None, stop=None):
+        if start is None and stop is None:
+            return self.time_signatures
+        assert 0 < start, start
+        if stop is None:
+            stop = start
+        assert 0 < stop, stop
+        return self.time_signatures[start - 1 : stop]
+
+
 def append_anchor_note(argument, *, runtime=None):
     leaf = abjad.get.leaf(argument, 0)
     parentage = abjad.get.parentage(leaf)
@@ -2506,6 +2520,134 @@ def color_repeat_pitch_classes(score):
             string = r"\baca-repeat-pitch-class-coloring"
             literal = abjad.LilyPondLiteral(string, site="before")
             abjad.attach(literal, leaf, tag=tag)
+
+
+def get_voice_names(score):
+    voice_names = ["Skips", "Rests"]
+    for voice in abjad.iterate.components(score, abjad.Voice):
+        if voice.name is not None:
+            voice_names.append(voice.name)
+            words = voice.name.split(".")
+            if "Music" in words:
+                rest_voice_name = voice.name.replace("Music", "Rests")
+                voice_names.append(rest_voice_name)
+            elif "Voice" in words:
+                rest_voice_name = f"{voice.name}.Rests"
+                voice_names.append(rest_voice_name)
+    return tuple(voice_names)
+
+
+def label_moment_numbers(global_skips, moment_markup):
+    if not moment_markup:
+        return
+    skips = _select.skips(global_skips)
+    for i, item in enumerate(moment_markup):
+        if len(item) == 2:
+            value, lmn = item
+            color = None
+        elif len(item) == 3:
+            value, lmn, color = item
+        else:
+            raise Exception(item)
+        measure_index = lmn - 1
+        skip = skips[measure_index]
+        tag = _tags.MOMENT_NUMBER
+        tag = tag.append(_tags.MOMENT_ANNOTATION_SPANNER)
+        tag = tag.append(_tags.function_name(_frame()))
+        if color is not None:
+            string = rf'- \baca-start-xnm-colored-left-only "{value}" {color}'
+        else:
+            string = rf'- \baca-start-xnm-left-only "{value}"'
+        start_text_span = abjad.StartTextSpan(
+            command=r"\bacaStartTextSpanXNM", left_text=string
+        )
+        abjad.attach(
+            start_text_span,
+            skip,
+            context="GlobalSkips",
+            deactivate=True,
+            tag=tag,
+        )
+        if 0 < i:
+            tag = _tags.MOMENT_NUMBER
+            tag = tag.append(_tags.MOMENT_ANNOTATION_SPANNER)
+            tag = tag.append(_tags.function_name(_frame()))
+            stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanXNM")
+            abjad.attach(
+                stop_text_span,
+                skip,
+                context="GlobalSkips",
+                deactivate=True,
+                tag=tag,
+            )
+    skip = skips[-1]
+    tag = _tags.MOMENT_NUMBER
+    tag = tag.append(_tags.MOMENT_ANNOTATION_SPANNER)
+    tag = tag.append(_tags.function_name(_frame()))
+    stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanXNM")
+    abjad.attach(
+        stop_text_span,
+        skip,
+        context="GlobalSkips",
+        deactivate=True,
+        tag=tag,
+    )
+
+
+def label_stage_numbers(global_skips, stage_markup):
+    if not stage_markup:
+        return
+    skips = _select.skips(global_skips)
+    for i, item in enumerate(stage_markup):
+        if len(item) == 2:
+            value, lmn = item
+            color = None
+        elif len(item) == 3:
+            value, lmn, color = item
+        else:
+            raise Exception(item)
+        measure_index = lmn - 1
+        skip = skips[measure_index]
+        tag = _tags.STAGE_NUMBER
+        tag = tag.append(_tags.function_name(_frame()))
+        if color is not None:
+            string = r"- \baca-start-snm-colored-left-only"
+            string += f' "{value}" {color}'
+        else:
+            string = r"- \baca-start-snm-left-only"
+            string += f' "{value}"'
+        start_text_span = abjad.StartTextSpan(
+            command=r"\bacaStartTextSpanSNM", left_text=string
+        )
+        abjad.attach(
+            start_text_span,
+            skip,
+            context="GlobalSkips",
+            deactivate=True,
+            tag=tag,
+        )
+        if 0 < i:
+            tag = _tags.STAGE_NUMBER
+            tag = tag.append(_tags.function_name(_frame()))
+            stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanSNM")
+            abjad.attach(
+                stop_text_span,
+                skip,
+                context="GlobalSkips",
+                deactivate=True,
+                tag=tag,
+            )
+    skip = skips[-1]
+    tag = _tags.STAGE_NUMBER
+    tag = tag.append(_tags.function_name(_frame()))
+    stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanSNM")
+    abjad.attach(
+        stop_text_span,
+        skip,
+        context="GlobalSkips",
+        deactivate=True,
+        tag=tag,
+    )
 
 
 def make_layout_ly(
@@ -2700,117 +2842,9 @@ def make_layout_ly(
             )
 
 
-def label_moment_numbers(global_skips, moment_markup):
-    if not moment_markup:
-        return
-    skips = _select.skips(global_skips)
-    for i, item in enumerate(moment_markup):
-        if len(item) == 2:
-            value, lmn = item
-            color = None
-        elif len(item) == 3:
-            value, lmn, color = item
-        else:
-            raise Exception(item)
-        measure_index = lmn - 1
-        skip = skips[measure_index]
-        tag = _tags.MOMENT_NUMBER
-        tag = tag.append(_tags.MOMENT_ANNOTATION_SPANNER)
-        tag = tag.append(_tags.function_name(_frame()))
-        if color is not None:
-            string = rf'- \baca-start-xnm-colored-left-only "{value}" {color}'
-        else:
-            string = rf'- \baca-start-xnm-left-only "{value}"'
-        start_text_span = abjad.StartTextSpan(
-            command=r"\bacaStartTextSpanXNM", left_text=string
-        )
-        abjad.attach(
-            start_text_span,
-            skip,
-            context="GlobalSkips",
-            deactivate=True,
-            tag=tag,
-        )
-        if 0 < i:
-            tag = _tags.MOMENT_NUMBER
-            tag = tag.append(_tags.MOMENT_ANNOTATION_SPANNER)
-            tag = tag.append(_tags.function_name(_frame()))
-            stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanXNM")
-            abjad.attach(
-                stop_text_span,
-                skip,
-                context="GlobalSkips",
-                deactivate=True,
-                tag=tag,
-            )
-    skip = skips[-1]
-    tag = _tags.MOMENT_NUMBER
-    tag = tag.append(_tags.MOMENT_ANNOTATION_SPANNER)
-    tag = tag.append(_tags.function_name(_frame()))
-    stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanXNM")
-    abjad.attach(
-        stop_text_span,
-        skip,
-        context="GlobalSkips",
-        deactivate=True,
-        tag=tag,
-    )
-
-
-def label_stage_numbers(global_skips, stage_markup):
-    if not stage_markup:
-        return
-    skips = _select.skips(global_skips)
-    for i, item in enumerate(stage_markup):
-        if len(item) == 2:
-            value, lmn = item
-            color = None
-        elif len(item) == 3:
-            value, lmn, color = item
-        else:
-            raise Exception(item)
-        measure_index = lmn - 1
-        skip = skips[measure_index]
-        tag = _tags.STAGE_NUMBER
-        tag = tag.append(_tags.function_name(_frame()))
-        if color is not None:
-            string = r"- \baca-start-snm-colored-left-only"
-            string += f' "{value}" {color}'
-        else:
-            string = r"- \baca-start-snm-left-only"
-            string += f' "{value}"'
-        start_text_span = abjad.StartTextSpan(
-            command=r"\bacaStartTextSpanSNM", left_text=string
-        )
-        abjad.attach(
-            start_text_span,
-            skip,
-            context="GlobalSkips",
-            deactivate=True,
-            tag=tag,
-        )
-        if 0 < i:
-            tag = _tags.STAGE_NUMBER
-            tag = tag.append(_tags.function_name(_frame()))
-            stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanSNM")
-            abjad.attach(
-                stop_text_span,
-                skip,
-                context="GlobalSkips",
-                deactivate=True,
-                tag=tag,
-            )
-    skip = skips[-1]
-    tag = _tags.STAGE_NUMBER
-    tag = tag.append(_tags.function_name(_frame()))
-    stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanSNM")
-    abjad.attach(
-        stop_text_span,
-        skip,
-        context="GlobalSkips",
-        deactivate=True,
-        tag=tag,
-    )
+def measures(items):
+    time_signatures = [abjad.TimeSignature(_) for _ in items]
+    return Measures(time_signatures)
 
 
 @_build.timed("postprocess_score")
@@ -3123,7 +3157,6 @@ def section_defaults():
 def set_up_score(
     score: abjad.Score,
     time_signatures: typing.Sequence[abjad.TimeSignature],
-    accumulator: _accumulator.CommandAccumulator = None,
     *,
     always_make_global_rests: bool = False,
     append_anchor_skip: bool = False,
@@ -3134,9 +3167,7 @@ def set_up_score(
     layout: bool = False,
     manifests: dict = None,
     previous_persistent_indicators: dict = None,
-) -> int:
-    if accumulator is not None:
-        assert isinstance(accumulator, _accumulator.CommandAccumulator)
+) -> None:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     manifests = manifests or {}
     assert isinstance(manifests, dict), repr(manifests)
@@ -3158,9 +3189,6 @@ def set_up_score(
             score,
             do_not_iterate=score,
         )
-    if accumulator is not None:
-        accumulator._populate_voice_name_to_voice(score)
-    return first_measure_number
 
 
 def time_signatures(pairs):

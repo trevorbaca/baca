@@ -1375,12 +1375,8 @@ def deviation(
         With alternating up- and down-quatertones:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(measures())
         >>> voice.extend(music)
@@ -1462,12 +1458,8 @@ def displacement(argument, displacements: list[int]) -> None:
         Displaces octaves:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(measures())
         >>> voice.extend(music)
@@ -1863,12 +1855,8 @@ def pitch(
         another (note to chord in this example):
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> voice = score["Music"]
         >>> nested_music = rmakers.note(measures())
         >>> music = abjad.sequence.flatten(nested_music)
@@ -1967,12 +1955,8 @@ def pitches(
         With pitch numbers:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(measures())
         >>> voice.extend(music)
@@ -2041,12 +2025,8 @@ def pitches(
         With pitch numbers:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(measures())
         >>> voice.extend(music)
@@ -2115,12 +2095,8 @@ def pitches(
         Large chord:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(measures())
         >>> voice.extend(music)
@@ -2293,12 +2269,8 @@ def register(
     ..  container:: example
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(measures())
         >>> voice.extend(music)
@@ -2801,12 +2773,8 @@ def register(
 
         >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
-        >>> measures = baca.measures(time_signatures)
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures(time_signatures)
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(measures())
@@ -2907,12 +2875,8 @@ def register(
 
         >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
-        >>> measures = baca.measures(time_signatures)
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures(time_signatures)
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(measures())
         >>> voice.extend(music)
@@ -3013,12 +2977,8 @@ def register(
 
         >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
-        >>> measures = baca.measures(time_signatures)
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures(time_signatures)
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(measures())
         >>> voice.extend(music)
@@ -3119,12 +3079,8 @@ def register(
 
         >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
-        >>> measures = baca.measures(time_signatures)
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures(time_signatures)
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(measures())
         >>> voice.extend(music)
@@ -3225,12 +3181,8 @@ def register(
 
         >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
-        >>> measures = baca.measures(time_signatures)
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures(time_signatures)
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(measures())
         >>> voice.extend(music)
@@ -3716,12 +3668,8 @@ def replace_with_clusters(
         Hides flat markup:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures(), repeat_ties=True)
         >>> voice.extend(music)
@@ -3800,12 +3748,8 @@ def replace_with_clusters(
         Takes start pitch from input notes:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures(), repeat_ties=True)
         >>> voice.extend(music)
@@ -3884,12 +3828,8 @@ def replace_with_clusters(
         Sets start pitch explicitly:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures(), repeat_ties=True)
         >>> voice.extend(music)
@@ -3967,12 +3907,8 @@ def replace_with_clusters(
         Increasing widths:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures(), repeat_ties=True)
         >>> voice.extend(music)
@@ -4050,12 +3986,8 @@ def replace_with_clusters(
         Patterned widths:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-        >>> first_measure_number = baca.section.set_up_score(
-        ...     score,
-        ...     measures(),
-        ...     docs=True,
-        ... )
+        >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures(), repeat_ties=True)
         >>> voice.extend(music)

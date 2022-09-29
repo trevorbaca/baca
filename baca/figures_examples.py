@@ -3799,7 +3799,7 @@ figures.py examples.
     Coats pitches:
 
     >>> score = baca.docs.make_empty_score(2)
-    >>> figures = baca.FigureAccumulator(score)
+    >>> accumulator = baca.figures.Accumulator(score)
     >>> container = baca.figure(
     ...     3 * [[0, 2, 10]],
     ...     [1],
@@ -3818,20 +3818,16 @@ figures.py examples.
     ...     rmakers.beam_groups(groups)
 
     >>> baca.make_figures(
-    ...     figures,
+    ...     accumulator,
     ...     "Music.2",
     ...     None,
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
-    >>> measures = baca.measures(figures.time_signatures)
-    >>> first_measure_number = baca.section.set_up_score(
-    ...     score,
-    ...     measures(),
-    ...     docs=True,
-    ... )
+    >>> measures = baca.section.measures(accumulator.time_signatures)
+    >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score)
+    >>> accumulator.populate_commands(score)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
@@ -3941,7 +3937,7 @@ figures.py examples.
     Skips wrapped pitches:
 
     >>> score = baca.docs.make_empty_score(2)
-    >>> figures = baca.FigureAccumulator(score)
+    >>> accumulator = baca.figures.Accumulator(score)
     >>> collections = [
     ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
     ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
@@ -3961,20 +3957,16 @@ figures.py examples.
     ...     _ = baca.accent(baca.select.pheads(imbrication))
 
     >>> baca.make_figures(
-    ...     figures,
+    ...     accumulator,
     ...     "Music.2",
     ...     None,
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
-    >>> measures = baca.measures(figures.time_signatures)
-    >>> first_measure_number = baca.section.set_up_score(
-    ...     score,
-    ...     measures(),
-    ...     docs=True,
-    ... )
+    >>> measures = baca.section.measures(accumulator.time_signatures)
+    >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score)
+    >>> accumulator.populate_commands(score)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
@@ -4107,7 +4099,7 @@ figures.py examples.
     Imbricates ``segment`` in voice with ``voice_name``.
 
     >>> score = baca.docs.make_empty_score(2)
-    >>> figures = baca.FigureAccumulator(score)
+    >>> accumulator = baca.figures.Accumulator(score)
     >>> collections = [
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0],
@@ -4125,20 +4117,16 @@ figures.py examples.
     ...     rmakers.beam_groups(groups)
 
     >>> baca.make_figures(
-    ...     figures,
+    ...     accumulator,
     ...     "Music.2",
     ...     None,
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
-    >>> measures = baca.measures(figures.time_signatures)
-    >>> first_measure_number = baca.section.set_up_score(
-    ...     score,
-    ...     measures(),
-    ...     docs=True,
-    ... )
+    >>> measures = baca.section.measures(accumulator.time_signatures)
+    >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score)
+    >>> accumulator.populate_commands(score)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
@@ -4286,7 +4274,7 @@ figures.py examples.
     Multiple imbricated voices:
 
     >>> score = baca.docs.make_empty_score(3)
-    >>> figures = baca.FigureAccumulator(score)
+    >>> accumulator = baca.figures.Accumulator(score)
     >>> collections = [
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0],
@@ -4310,20 +4298,16 @@ figures.py examples.
     ...     _ = baca.accent(baca.select.pheads(imbrication))
 
     >>> baca.make_figures(
-    ...     figures,
+    ...     accumulator,
     ...     "Music.2",
     ...     None,
     ...     container=container,
     ...     imbrications=imbrications_1 | imbrications_3,
     ... )
-    >>> measures = baca.measures(figures.time_signatures)
-    >>> first_measure_number = baca.section.set_up_score(
-    ...     score,
-    ...     measures(),
-    ...     docs=True,
-    ... )
+    >>> measures = baca.section.measures(accumulator.time_signatures)
+    >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score)
+    >>> accumulator.populate_commands(score)
     >>> _, _ = baca.section.postprocess_score(
     ...     score,
     ...     measures(),
@@ -4512,7 +4496,7 @@ figures.py examples.
     Hides tuplet brackets above imbricated voice:
 
     >>> score = baca.docs.make_empty_score(2)
-    >>> figures = baca.FigureAccumulator(score)
+    >>> accumulator = baca.figures.Accumulator(score)
     >>> collections = [
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0],
@@ -4533,20 +4517,16 @@ figures.py examples.
 
     >>> _ = baca.staccato(baca.select.pheads(container))
     >>> baca.make_figures(
-    ...     figures,
+    ...     accumulator,
     ...     "Music.2",
     ...     None,
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
-    >>> measures = baca.measures(figures.time_signatures)
-    >>> first_measure_number = baca.section.set_up_score(
-    ...     score,
-    ...     measures(),
-    ...     docs=True,
-    ... )
+    >>> measures = baca.section.measures(accumulator.time_signatures)
+    >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score)
+    >>> accumulator.populate_commands(score)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
@@ -4718,7 +4698,7 @@ figures.py examples.
     Works with pitch-classes:
 
     >>> score = baca.docs.make_empty_score(2)
-    >>> figures = baca.FigureAccumulator(score)
+    >>> accumulator = baca.figures.Accumulator(score)
     >>> segment = [
     ...     abjad.NumberedPitchClass(10),
     ...     abjad.NumberedPitchClass(6),
@@ -4735,20 +4715,16 @@ figures.py examples.
     ...     _ = baca.accent(baca.select.pheads(imbrication))
 
     >>> baca.make_figures(
-    ...     figures,
+    ...     accumulator,
     ...     "Music.2",
     ...     None,
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
-    >>> measures = baca.measures(figures.time_signatures)
-    >>> first_measure_number = baca.section.set_up_score(
-    ...     score,
-    ...     measures(),
-    ...     docs=True,
-    ... )
+    >>> measures = baca.section.measures(accumulator.time_signatures)
+    >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 24))(score)
-    >>> figures.populate_commands(score)
+    >>> accumulator.populate_commands(score)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
@@ -4856,7 +4832,7 @@ figures.py examples.
     Works with chords:
 
     >>> score = baca.docs.make_empty_score(2)
-    >>> figures = baca.FigureAccumulator(score)
+    >>> accumulator = baca.figures.Accumulator(score)
     >>> collections = [
     ...     {0, 2, 10, 18, 16},
     ...     [15, 20, 19, 9, 0],
@@ -4871,20 +4847,16 @@ figures.py examples.
     ...     rmakers.beam_groups(groups)
 
     >>> baca.make_figures(
-    ...     figures,
+    ...     accumulator,
     ...     "Music.2",
     ...     None,
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
-    >>> measures = baca.measures(figures.time_signatures)
-    >>> first_measure_number = baca.section.set_up_score(
-    ...     score,
-    ...     measures(),
-    ...     docs=True,
-    ... )
+    >>> measures = baca.section.measures(accumulator.time_signatures)
+    >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score)
+    >>> accumulator.populate_commands(score)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
@@ -5016,7 +4988,7 @@ figures.py examples.
     Works with rests:
 
     >>> score = baca.docs.make_empty_score(2)
-    >>> figures = baca.FigureAccumulator(score)
+    >>> accumulator = baca.figures.Accumulator(score)
     >>> collections = [
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0],
@@ -5032,20 +5004,16 @@ figures.py examples.
     ...     rmakers.beam_groups(groups)
 
     >>> baca.make_figures(
-    ...     figures,
+    ...     accumulator,
     ...     "Music.2",
     ...     None,
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
-    >>> measures = baca.measures(figures.time_signatures)
-    >>> first_measure_number = baca.section.set_up_score(
-    ...     score,
-    ...     measures(),
-    ...     docs=True,
-    ... )
+    >>> measures = baca.section.measures(accumulator.time_signatures)
+    >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score)
+    >>> accumulator.populate_commands(score)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
@@ -5892,7 +5860,7 @@ figures.py examples.
     Imbrication allows unused pitches:
 
     >>> score = baca.docs.make_empty_score(2)
-    >>> figures = baca.FigureAccumulator(score)
+    >>> accumulator = baca.figures.Accumulator(score)
     >>> collections = [
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0],
@@ -5909,20 +5877,16 @@ figures.py examples.
 
     >>> _ = baca.staccato(baca.select.pheads(container))
     >>> baca.make_figures(
-    ...     figures,
+    ...     accumulator,
     ...     "Music.2",
     ...     None,
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
-    >>> measures = baca.measures(figures.time_signatures)
-    >>> first_measure_number = baca.section.set_up_score(
-    ...     score,
-    ...     measures(),
-    ...     docs=True,
-    ... )
+    >>> measures = baca.section.measures(accumulator.time_signatures)
+    >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score)
+    >>> accumulator.populate_commands(score)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
@@ -6051,7 +6015,7 @@ figures.py examples.
     Raises exception on unused pitches:
 
     >>> score = baca.docs.make_empty_score(2)
-    >>> figures = baca.FigureAccumulator(score)
+    >>> accumulator = baca.figures.Accumulator(score)
     >>> collections = [
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0],
@@ -6074,7 +6038,7 @@ figures.py examples.
     When imbrication hockets voices:
 
     >>> score = baca.docs.make_empty_score(2)
-    >>> figures = baca.FigureAccumulator(score)
+    >>> accumulator = baca.figures.Accumulator(score)
     >>> collections = [
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0],
@@ -6092,20 +6056,16 @@ figures.py examples.
 
     >>> _ = baca.staccato(baca.select.pheads(container))
     >>> baca.make_figures(
-    ...     figures,
+    ...     accumulator,
     ...     "Music.2",
     ...     None,
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
-    >>> measures = baca.measures(figures.time_signatures)
-    >>> first_measure_number = baca.section.set_up_score(
-    ...     score,
-    ...     measures(),
-    ...     docs=True,
-    ... )
+    >>> measures = baca.section.measures(accumulator.time_signatures)
+    >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score)
+    >>> accumulator.populate_commands(score)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
@@ -6256,7 +6216,7 @@ figures.py examples.
     When imbrication truncates ties:
 
     >>> score = baca.docs.make_empty_score(2)
-    >>> figures = baca.FigureAccumulator(score)
+    >>> accumulator = baca.figures.Accumulator(score)
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> container = baca.figure(collections, [5], 32)
     >>> rmakers.beam(container)
@@ -6267,20 +6227,16 @@ figures.py examples.
     ...     rmakers.beam_groups(groups, beam_rests=True)
 
     >>> baca.make_figures(
-    ...     figures,
+    ...     accumulator,
     ...     "Music.2",
     ...     None,
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
-    >>> measures = baca.measures(figures.time_signatures)
-    >>> first_measure_number = baca.section.set_up_score(
-    ...     score,
-    ...     measures(),
-    ...     docs=True,
-    ... )
+    >>> measures = baca.section.measures(accumulator.time_signatures)
+    >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score)
+    >>> accumulator.populate_commands(score)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
@@ -6415,7 +6371,7 @@ figures.py examples.
     Attaches RIGHT_BROKEN_BEAM to selector output.
 
     >>> score = baca.docs.make_empty_score(2)
-    >>> figures = baca.FigureAccumulator(score)
+    >>> accumulator = baca.figures.Accumulator(score)
 
     >>> collections = [[0, 2, 10, 18], [16, 15, 23]]
     >>> container = baca.figure(collections, [1], 16)
@@ -6429,7 +6385,7 @@ figures.py examples.
     ...     _ = baca.extend_beam(abjad.select.leaf(imbrication, -1))
 
     >>> baca.make_figures(
-    ...     figures,
+    ...     accumulator,
     ...     "Music.2",
     ...     None,
     ...     container=container,
@@ -6445,20 +6401,16 @@ figures.py examples.
     ...     _ = baca.staccato(baca.select.pheads(imbrication))
 
     >>> baca.make_figures(
-    ...     figures,
+    ...     accumulator,
     ...     "Music.2",
     ...     None,
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
-    >>> measures = baca.measures(figures.time_signatures)
-    >>> first_measure_number = baca.section.set_up_score(
-    ...     score,
-    ...     measures(),
-    ...     docs=True,
-    ... )
+    >>> measures = baca.section.measures(accumulator.time_signatures)
+    >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> figures.populate_commands(score)
+    >>> accumulator.populate_commands(score)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _, _ = baca.section.postprocess_score(
