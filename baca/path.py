@@ -367,6 +367,7 @@ def get_measure_profile_metadata(path) -> tuple[int, int, list]:
 
 def get_metadata(path, file_name="__metadata__") -> types.MappingProxyType:
     assert file_name in ("__metadata__", "__persist__"), repr(file_name)
+    file_name = "__metadata__"
     metadata_py_path = path / file_name
     dictionary = {}
     if metadata_py_path.is_file():
@@ -441,5 +442,6 @@ def write_metadata_py(path, metadata, *, file_name="__metadata__"):
     metadata = types.MappingProxyType(dict(sorted(metadata.items())))
     string = str(metadata)
     string = black.format_str(string, mode=black.mode.Mode())
+    file_name = "__metadata__"
     metadata_py_path = path / file_name
     metadata_py_path.write_text(string)

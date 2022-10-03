@@ -3089,6 +3089,8 @@ def postprocess_score(
         cached_time_signatures,
         voice_name_to_parameter_to_state,
     )
+    new_metadata = proxy(new_metadata | new_persist)
+    new_persist = proxy(new_metadata)
     _style_anchor_skip(score)
     _style_anchor_notes(score)
     _check_anchors_are_final(score)
