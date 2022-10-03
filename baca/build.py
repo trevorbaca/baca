@@ -532,6 +532,13 @@ def _make_empty_mapping_proxy():
     return types.MappingProxyType({})
 
 
+@dataclasses.dataclass(slots=True, order=True, unsafe_hash=True)
+class Timing:
+    lilypond: int | None = None
+    make_score: int | None = None
+    postprocess_score: int | None = None
+
+
 @dataclasses.dataclass(frozen=True, slots=True, order=True, unsafe_hash=True)
 class Environment:
 
@@ -551,16 +558,10 @@ class Environment:
     )
     section_directory: pathlib.Path | None = None
     section_number: str | None = None
+    timing: Timing | None = None
 
 
 Timer = abjad.Timer
-
-
-@dataclasses.dataclass(slots=True, order=True, unsafe_hash=True)
-class Timing:
-    lilypond: int | None = None
-    make_score: int | None = None
-    postprocess_score: int | None = None
 
 
 def arguments(arguments):
@@ -1114,6 +1115,7 @@ def read_environment(music_py_path_name, sys_argv) -> Environment:
         previous_persist=previous_persist,
         section_directory=section_directory,
         section_number=section_directory.name,
+        timing=Timing(),
     )
     return environment
 
@@ -1178,7 +1180,9 @@ def timed(timing_attribute):
         @functools.wraps(function)
         def wrapper(*arguments, **keywords):
             timing = None
-            if "timing" in keywords:
+            if "environment" in keywords:
+                timing = keywords["environment"].timing
+            elif "timing" in keywords:
                 timing = keywords.pop("timing")
             else:
                 candidate = arguments[-1]

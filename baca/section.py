@@ -2891,7 +2891,6 @@ def postprocess_score(
     section_number=None,
     shift_measure_initial_clefs=False,
     short_instrument_names=None,
-    timing=None,
     transpose_score=False,
     treat_untreated_persistent_wrappers=False,
     whitespace_leaves=False,
