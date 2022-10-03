@@ -10,7 +10,7 @@ Examples.
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> abjad.label.with_indices(voice)
-    >>> _, _ = baca.section.postprocess_score(
+    >>> _ = baca.section.postprocess_score(
     ...     score,
     ...     measures(),
     ...     move_global_context=True,
@@ -110,7 +110,7 @@ Examples.
     >>> music = abjad.Container("a4 g f e d c")[:]
     >>> score["Music.2"].extend(music)
     >>> _ = baca.clef(score["Music.2"][0], "bass")
-    >>> _, _ = baca.section.postprocess_score(
+    >>> _ = baca.section.postprocess_score(
     ...     score,
     ...     measures(),
     ...     color_octaves=True,
@@ -186,7 +186,7 @@ Examples.
     >>> voice = score["Music"]
     >>> _ = baca.instrument(voice[0], "clarinet", manifests)
     >>> _ = baca.pitches(voice, "E4 F4")
-    >>> _, _ = baca.section.postprocess_score(
+    >>> _ = baca.section.postprocess_score(
     ...     score,
     ...     measures(),
     ...     instruments=instruments,
@@ -263,7 +263,7 @@ Examples.
     >>> voice = score["Music"]
     >>> _ = baca.instrument(voice[0], "clarinet", manifests)
     >>> _ = baca.pitches(voice, "E4 F4")
-    >>> _, _ = baca.section.postprocess_score(
+    >>> _ = baca.section.postprocess_score(
     ...     score,
     ...     measures(),
     ...     instruments=instruments,
@@ -355,7 +355,7 @@ Examples.
     >>> score["Music"].extend(figures_)
     >>> voice = score["Music"]
     >>> _ = baca.instrument(voice[0], "Violin", manifests)
-    >>> _, _ = baca.section.postprocess_score(
+    >>> _ = baca.section.postprocess_score(
     ...     score,
     ...     measures(),
     ...     do_not_check_wellformedness=True,
@@ -457,7 +457,7 @@ Examples.
     >>> measures = baca.section.measures(time_signatures)
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> score["Music"].extend(figures_)
-    >>> _, _ = baca.section.postprocess_score(
+    >>> _ = baca.section.postprocess_score(
     ...     score,
     ...     measures(),
     ...     move_global_context=True,

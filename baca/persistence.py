@@ -26,7 +26,7 @@ r"""
         >>> music = baca.make_mmrests(measures(), head="Music")
         >>> voice.extend(music)
         >>> _ = baca.clef(abjad.select.leaf(voice, 0), "treble")
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     move_global_context=True,
@@ -124,7 +124,7 @@ r"""
         ...     )
         ... ]
         >>> metadata = metadata | persist
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     environment=baca.build.Environment(
@@ -227,7 +227,7 @@ r"""
         ... ]
         >>> metadata = metadata | persist
         >>> baca.section.reapply(voice, {}, persist["persistent_indicators"])
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     environment=baca.build.Environment(
@@ -322,7 +322,7 @@ r"""
         >>> voice.extend(music)
         >>> _ = baca.clef(abjad.select.leaf(voice, 0), "treble")
         >>> _ = baca.clef(abjad.select.leaf(voice, 2), "treble")
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     move_global_context=True,
@@ -432,7 +432,7 @@ r"""
         >>> metadata = metadata | persist
         >>> baca.section.reapply(voice, {}, persist["persistent_indicators"])
         >>> _ = baca.clef(abjad.select.leaf(voice, 0), "treble")
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     environment=baca.build.Environment(
@@ -522,7 +522,7 @@ r"""
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     move_global_context=True,
@@ -588,7 +588,7 @@ r"""
         ...     )
         ... ]
         >>> metadata = metadata | persist
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     environment=baca.build.Environment(
@@ -659,7 +659,7 @@ r"""
         ... ]
         >>> metadata = metadata | persist
         >>> baca.section.reapply(voice, {}, persist["persistent_indicators"])
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     environment=baca.build.Environment(
@@ -721,7 +721,7 @@ r"""
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), "f")
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     move_global_context=True,
@@ -790,7 +790,7 @@ r"""
         >>> metadata = metadata | persist
         >>> baca.section.reapply(voice, {}, persist["persistent_indicators"])
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     environment=baca.build.Environment(
@@ -850,7 +850,7 @@ r"""
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "sfz")
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), "sfz")
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     move_global_context=True,
@@ -918,7 +918,7 @@ r"""
         ...     )
         ... ]
         >>> metadata = metadata | persist
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     environment=baca.build.Environment(
@@ -980,7 +980,7 @@ r"""
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "mf")
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), '"mf"')
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     move_global_context=True,
@@ -1061,7 +1061,7 @@ r"""
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> _ = baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     instruments=instruments,
@@ -1222,7 +1222,7 @@ r"""
         ...     )
         ... ]
         >>> metadata = metadata | persist
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     environment=baca.build.Environment(
@@ -1387,7 +1387,7 @@ r"""
         ... ]
         >>> metadata = metadata | persist
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     environment=baca.build.Environment(
@@ -1552,7 +1552,7 @@ r"""
         >>> manifests = {"abjad.Instrument": instruments}
         >>> _ = baca.instrument(voice[0], "Flute", manifests)
         >>> _ = baca.instrument(voice[1], "Flute", manifests)
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     instruments=instruments,
@@ -1738,7 +1738,7 @@ r"""
         >>> metadata = metadata | persist
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> _ = baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     environment=baca.build.Environment(
@@ -1915,7 +1915,7 @@ r"""
         >>> voice.extend(music)
         >>> _ = baca.short_instrument_name(voice[0], "I+II", manifests)
 
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     first_section=True,
@@ -2086,7 +2086,7 @@ r"""
         ...     )
         ... ]
         >>> metadata = metadata | persist
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     environment=baca.build.Environment(
@@ -2263,7 +2263,7 @@ r"""
         ... ]
         >>> metadata = metadata | persist
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     environment=baca.build.Environment(
@@ -2439,7 +2439,7 @@ r"""
         >>> manifests = {"abjad.ShortInstrumentName": short_instrument_names}
         >>> _ = baca.short_instrument_name(voice[0], "I+II", manifests)
         >>> _ = baca.short_instrument_name(voice[1], "I+II", manifests)
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     first_section=True,
@@ -2645,7 +2645,7 @@ r"""
         >>> metadata = metadata | persist
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> _ = baca.short_instrument_name(voice[0], "I+II", manifests)
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     environment=baca.build.Environment(
@@ -2824,7 +2824,7 @@ r"""
         >>> for wrapper in wrappers:
         ...     wrapper.deactivate = True
 
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     first_section=True,
@@ -2930,7 +2930,7 @@ r"""
         >>> voice.extend(music)
         >>> baca.section.append_anchor_note(voice)
 
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     append_anchor_skip=True,
@@ -3036,7 +3036,7 @@ r"""
         ...     )
         ... ]
         >>> metadata = metadata | persist
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     append_anchor_skip=True,
@@ -3144,7 +3144,7 @@ r"""
         >>> voice.extend(music)
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> wrappers = baca.text_spanner_staff_padding(score["Skips"], 4)
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     environment=baca.build.Environment(
@@ -3235,7 +3235,7 @@ r"""
         >>> voice.extend(music)
         >>> baca.section.append_anchor_note(voice)
 
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     append_anchor_skip=True,
@@ -3349,7 +3349,7 @@ r"""
         >>> voice.extend(music)
         >>> baca.section.append_anchor_note(voice)
         >>> baca.section.reapply(voice, {}, persist["persistent_indicators"])
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     append_anchor_skip=True,
@@ -3454,7 +3454,7 @@ r"""
         >>> _ = baca.staff_lines(voice[0], 1)
         >>> _ = baca.staff_position(voice, 0)
 
-        >>> metadata, persist = baca.section.postprocess_score(
+        >>> metadata = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     move_global_context=True,
@@ -3504,8 +3504,7 @@ r"""
 
         Persistent overrides also appear in section metadata:
 
-        >>> dictionary = persist["persistent_indicators"]
-        >>> dictionary
+        >>> metadata["persistent_indicators"]
         {'Score': [baca.Memento(context='Skips', edition=None, manifest=None, prototype='abjad.TimeSignature', synthetic_offset=None, value='3/8')], 'Staff': [baca.Memento(context='Music', edition=None, manifest=None, prototype='baca.PersistentOverride', synthetic_offset=None, value=PersistentOverride(after=False, attribute='bar_extent', context='Staff', grob='BarLine', hide=False, value="#'(0 . 0)")), baca.Memento(context='Music', edition=None, manifest=None, prototype='baca.StaffLines', synthetic_offset=None, value=1), baca.Memento(context='Music', edition=Tag(string='-PARTS'), manifest=None, prototype='baca.BarExtent', synthetic_offset=None, value=1)]}
 
     ..  container:: example
@@ -3536,7 +3535,7 @@ r"""
         ... ]
         >>> metadata = metadata | persist
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     environment=baca.build.Environment(
@@ -3621,7 +3620,7 @@ r"""
         ...     )
         ... ]
         >>> metadata = metadata | persist
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     environment=baca.build.Environment(
@@ -3686,7 +3685,7 @@ r"""
         >>> voice.extend(music)
         >>> _ = baca.staff_lines(voice[0], 5)
 
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     move_global_context=True,
@@ -3755,7 +3754,7 @@ r"""
         ...     )
         ... ]
         >>> metadata = metadata | persist
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     environment=baca.build.Environment(
@@ -3829,7 +3828,7 @@ r"""
         ... ]
         >>> metadata = metadata | persist
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     environment=baca.build.Environment(
@@ -3894,7 +3893,7 @@ r"""
         >>> _ = baca.staff_lines(voice[0], 5)
         >>> _ = baca.staff_lines(voice[1], 5)
 
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     move_global_context=True,
@@ -3970,7 +3969,7 @@ r"""
         >>> metadata = metadata | persist
         >>> baca.section.reapply(voice, {}, persist["persistent_indicators"])
         >>> _ = baca.staff_lines(voice[0], 5)
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     environment=baca.build.Environment(
@@ -4062,7 +4061,7 @@ r"""
         >>> voice.extend(music)
         >>> baca.section.append_anchor_note(voice)
 
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     append_anchor_skip=True,
@@ -4161,7 +4160,7 @@ r"""
         ...     )
         ... ]
         >>> metadata = metadata | persist
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     environment=baca.build.Environment(
@@ -4251,7 +4250,7 @@ r"""
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> wrappers = baca.text_spanner_staff_padding(score["Skips"], 4)
 
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     environment=baca.build.Environment(
@@ -4335,7 +4334,7 @@ r"""
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
 
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     move_global_context=True,
@@ -4434,7 +4433,7 @@ r"""
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
-        >>> _, _ = baca.section.postprocess_score(
+        >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     measures(),
         ...     environment=baca.build.Environment(

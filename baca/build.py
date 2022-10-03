@@ -1049,11 +1049,10 @@ def persist_as_ly(argument, ly_file_path):
 
 # TODO: reorder arguments
 # TODO: add typehints
-def persist_lilypond_file(lilypond_file, metadata, persist, timing, arguments):
+def persist_lilypond_file(lilypond_file, metadata, timing, arguments):
     # TODO: do not read environment here:
     section_directory = pathlib.Path(os.getcwd())
     assert isinstance(metadata, types.MappingProxyType), repr(metadata)
-    assert isinstance(persist, types.MappingProxyType), repr(persist)
     # TODO: remove this and recursively sort metadata instead
     if "voice_name_to_parameter_to_state" in metadata:
         dictionary = dict(metadata)

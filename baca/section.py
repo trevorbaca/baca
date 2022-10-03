@@ -2734,7 +2734,7 @@ def make_layout_ly(
     spacing(score, page_layout_profile, has_anchor_skip=has_anchor_skip)
     # TODO: separate 'breaks' from SpacingSpecifier:
     apply_breaks(score, spacing.breaks)
-    _, _ = postprocess_score(
+    _ = postprocess_score(
         score,
         time_signatures_,
         append_anchor_skip=has_anchor_skip,
@@ -3088,11 +3088,10 @@ def postprocess_score(
         voice_name_to_parameter_to_state,
     )
     new_metadata = proxy(new_metadata | new_persist)
-    new_persist = proxy(new_metadata)
     _style_anchor_skip(score)
     _style_anchor_notes(score)
     _check_anchors_are_final(score)
-    return new_metadata, new_persist
+    return new_metadata
 
 
 def proxy(mapping):

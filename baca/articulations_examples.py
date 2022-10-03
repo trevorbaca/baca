@@ -13,7 +13,7 @@ articulations.py examples.
     >>> voice = score["Music"]
     >>> _ = baca.pitch(voice, "E4")
     >>> _ = baca.color_fingerings(voice, numbers=[0, 1, 2, 1])
-    >>> _, _ = baca.section.postprocess_score(
+    >>> _ = baca.section.postprocess_score(
     ...     score,
     ...     measures(),
     ...     move_global_context=True,
