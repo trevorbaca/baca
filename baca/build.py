@@ -1047,19 +1047,21 @@ def persist_as_ly(argument, ly_file_path):
     abjad.persist.as_ly(argument, ly_file_path)
 
 
-# TODO: reorder arguments
-# TODO: add typehints
-def persist_lilypond_file(lilypond_file, metadata, timing, arguments):
-    # TODO: do not read environment here:
-    section_directory = pathlib.Path(os.getcwd())
+def persist_lilypond_file(
+    arguments: types.SimpleNamespace,
+    section_directory: pathlib.Path,
+    timing: Timing,
+    lilypond_file: abjad.LilyPondFile,
+    metadata: types.MappingProxyType,
+):
+    assert isinstance(arguments, types.SimpleNamespace), repr(arguments)
+    assert isinstance(section_directory, pathlib.PosixPath), repr(section_directory)
+    assert isinstance(timing, Timing), repr(timing)
+    assert isinstance(lilypond_file, abjad.LilyPondFile), repr(lilypond_file)
     assert isinstance(metadata, types.MappingProxyType), repr(metadata)
-    # TODO: remove this and recursively sort metadata instead
-    if "voice_name_to_parameter_to_state" in metadata:
-        dictionary = dict(metadata)
-        dictionary["voice_name_to_parameter_to_state"] = dict(
-            sorted(metadata["voice_name_to_parameter_to_state"].items())
-        )
-        metadata = types.MappingProxyType(dictionary)
+    dictionary = dict(metadata)
+    baca.section._sort_dictionary(dictionary)
+    metadata = types.MappingProxyType(dictionary)
     metadata_file = section_directory / "__metadata__"
     _print_file_handling(f"Writing {baca.path.trim(metadata_file)} ...")
     baca.path.write_metadata_py(section_directory, metadata)
