@@ -123,9 +123,9 @@ def _add_container_identifiers(score, section_number):
     return container_to_part_assignment
 
 
-def _alive_during_previous_section(previous_persist, context):
+def _alive_during_previous_section(previous_metadata, context):
     assert isinstance(context, abjad.Context), repr(context)
-    names = previous_persist.get("alive_during_section", [])
+    names = previous_metadata.get("alive_during_section", [])
     return context.name in names
 
 
@@ -1847,7 +1847,6 @@ def _set_not_yet_pitched_to_staff_position_zero(score):
 def _shift_measure_initial_clefs(
     first_measure_number,
     offset_to_measure_number,
-    previous_persist,
     score,
 ):
     for staff in abjad.iterate.components(score, abjad.Staff):
@@ -1865,6 +1864,7 @@ def _shift_measure_initial_clefs(
             _overridecommands.clef_shift(leaf, clef, first_measure_number)
 
 
+# TODO: make public
 def _sort_dictionary(dictionary):
     items = list(dictionary.items())
     items.sort()
@@ -2915,7 +2915,6 @@ def postprocess_score(
     metadata = environment.metadata
     persist = environment.persist
     previous_metadata = environment.previous_metadata
-    previous_persist = environment.previous_persist
     section_number = environment.section_number
     assert all(0 < _ for _ in fermata_measure_empty_overrides)
     assert isinstance(final_section, bool)
@@ -2932,7 +2931,7 @@ def postprocess_score(
     if parts_metric_modulation_multiplier is not None:
         assert isinstance(parts_metric_modulation_multiplier, tuple)
         assert len(parts_metric_modulation_multiplier) == 2
-    previous_persistent_indicators = previous_persist.get("persistent_indicators", {})
+    previous_persistent_indicators = previous_metadata.get("persistent_indicators", {})
     assert isinstance(transpose_score, bool)
     assert isinstance(treat_untreated_persistent_wrappers, bool)
     voice_name_to_parameter_to_state: dict[str, dict] = {}
@@ -3009,7 +3008,6 @@ def postprocess_score(
             _shift_measure_initial_clefs(
                 first_measure_number,
                 offset_to_measure_number,
-                previous_persist,
                 score,
             )
         _deactivate_tags(deactivate, score)

@@ -553,9 +553,6 @@ class Environment:
     previous_metadata: types.MappingProxyType = dataclasses.field(
         default_factory=_make_empty_mapping_proxy
     )
-    previous_persist: types.MappingProxyType = dataclasses.field(
-        default_factory=_make_empty_mapping_proxy
-    )
     section_directory: pathlib.Path | None = None
     section_number: str | None = None
     timing: Timing | None = None
@@ -1057,18 +1054,16 @@ def persist_lilypond_file(lilypond_file, metadata, persist, timing, arguments):
     section_directory = pathlib.Path(os.getcwd())
     assert isinstance(metadata, types.MappingProxyType), repr(metadata)
     assert isinstance(persist, types.MappingProxyType), repr(persist)
-    if "voice_name_to_parameter_to_state" in persist:
-        dictionary = dict(persist)
+    # TODO: remove this and recursively sort metadata instead
+    if "voice_name_to_parameter_to_state" in metadata:
+        dictionary = dict(metadata)
         dictionary["voice_name_to_parameter_to_state"] = dict(
-            sorted(persist["voice_name_to_parameter_to_state"].items())
+            sorted(metadata["voice_name_to_parameter_to_state"].items())
         )
-        persist = types.MappingProxyType(dictionary)
+        metadata = types.MappingProxyType(dictionary)
     metadata_file = section_directory / "__metadata__"
     _print_file_handling(f"Writing {baca.path.trim(metadata_file)} ...")
     baca.path.write_metadata_py(section_directory, metadata)
-    persist_file = section_directory / "__persist__"
-    _print_file_handling(f"Writing {baca.path.trim(persist_file)} ...")
-    baca.path.write_metadata_py(section_directory, persist, file_name="__persist__")
     if arguments.clicktrack:
         path = section_directory / "clicktrack.midi"
         mtime = os.path.getmtime(path) if path.is_file() else None
@@ -1095,9 +1090,8 @@ def read_environment(music_py_path_name, sys_argv) -> Environment:
     arguments_ = arguments(sys_argv)
     section_directory = pathlib.Path(music_py_path_name).parent
     metadata = baca.path.get_metadata(section_directory)
-    persist = baca.path.get_persist(section_directory)
+    persist = baca.path.get_metadata(section_directory)
     previous_metadata = baca.path.previous_metadata(music_py_path_name)
-    previous_persist = baca.path.previous_persist(music_py_path_name)
     if previous_metadata:
         string = "final_measure_number"
         if string in previous_metadata:
@@ -1112,7 +1106,6 @@ def read_environment(music_py_path_name, sys_argv) -> Environment:
         metadata=metadata,
         persist=persist,
         previous_metadata=previous_metadata,
-        previous_persist=previous_persist,
         section_directory=section_directory,
         section_number=section_directory.name,
         timing=Timing(),

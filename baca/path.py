@@ -135,9 +135,9 @@ def activate(
     return count, skipped, messages_
 
 
-def add_metadatum(path, name, value, *, file_name="__metadata__") -> None:
+def add_metadatum(path, name, value) -> None:
     assert " " not in name, repr(name)
-    metadata = get_metadata(path, file_name=file_name)
+    metadata = get_metadata(path)
     dictionary = dict(metadata)
     dictionary[name] = value
     metadata = types.MappingProxyType(dictionary)
@@ -365,10 +365,8 @@ def get_measure_profile_metadata(path) -> tuple[int, int, list]:
     return (first_measure_number, measure_count, fermata_measure_numbers)
 
 
-def get_metadata(path, file_name="__metadata__") -> types.MappingProxyType:
-    assert file_name in ("__metadata__", "__persist__"), repr(file_name)
-    file_name = "__metadata__"
-    metadata_py_path = path / file_name
+def get_metadata(path) -> types.MappingProxyType:
+    metadata_py_path = path / "__metadata__"
     dictionary = {}
     if metadata_py_path.is_file():
         file_contents_string = metadata_py_path.read_text()
@@ -386,44 +384,29 @@ def get_metadatum(
     path,
     metadatum_name,
     default=None,
-    *,
-    file_name="__metadata__",
 ):
-    metadata = get_metadata(path, file_name=file_name)
+    metadata = get_metadata(path)
     metadatum = metadata.get(metadatum_name, default)
     return metadatum
-
-
-def get_persist(path):
-    return get_metadata(path, file_name="__persist__")
 
 
 def previous_metadata(path: str) -> types.MappingProxyType:
     previous_section = _get_previous_section(path)
     if previous_section:
-        previous_metadata = get_metadata(previous_section, file_name="__metadata__")
+        previous_metadata = get_metadata(previous_section)
     else:
         previous_metadata = types.MappingProxyType({})
     return previous_metadata
 
 
-def previous_persist(path: str) -> types.MappingProxyType:
-    previous_section = _get_previous_section(path)
-    if previous_section:
-        previous_persist = get_metadata(previous_section, file_name="__persist__")
-    else:
-        previous_persist = types.MappingProxyType({})
-    return previous_persist
-
-
-def remove_metadatum(path, name, *, file_name="__metadata__"):
+def remove_metadatum(path, name):
     assert " " not in name, repr(name)
-    metadata = get_metadata(path, file_name=file_name)
+    metadata = get_metadata(path)
     if name in metadata:
         dictionary = dict(metadata)
         dictionary.pop(name)
         metadata = types.MappingProxyType(dictionary)
-    write_metadata_py(path, metadata, file_name=file_name)
+    write_metadata_py(path, metadata)
 
 
 def trim(path):
@@ -437,11 +420,10 @@ def trim(path):
     return str(path)
 
 
-def write_metadata_py(path, metadata, *, file_name="__metadata__"):
+def write_metadata_py(path, metadata):
     assert isinstance(metadata, types.MappingProxyType), repr(metadata)
     metadata = types.MappingProxyType(dict(sorted(metadata.items())))
     string = str(metadata)
     string = black.format_str(string, mode=black.mode.Mode())
-    file_name = "__metadata__"
-    metadata_py_path = path / file_name
+    metadata_py_path = path / "__metadata__"
     metadata_py_path.write_text(string)
