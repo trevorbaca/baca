@@ -1,9 +1,12 @@
 """
 Docs.
 """
+from inspect import currentframe as _frame
+
 import abjad
 
 from . import score as _score
+from . import tags as _tags
 
 _global_context_string = r"""\layout
 {
@@ -200,9 +203,7 @@ def make_empty_score(*counts, do_not_move_global_context=False):
         }
 
     """
-    # TODO: use _tags.function_name()
-    function_name = "baca.make_configuration_empty_score()"
-    tag = abjad.Tag(function_name)
+    tag = _tags.function_name(_frame())
     global_context = _score.make_global_context()
     single_staff = len(counts) == 1
     single_voice = single_staff and counts[0] == 1
