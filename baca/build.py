@@ -1062,7 +1062,7 @@ def persist_lilypond_file(
     dictionary = dict(metadata)
     baca.section._sort_dictionary(dictionary)
     metadata = types.MappingProxyType(dictionary)
-    metadata_file = section_directory / "__metadata__"
+    metadata_file = section_directory / ".metadata"
     _print_file_handling(f"Writing {baca.path.trim(metadata_file)} ...")
     baca.path.write_metadata_py(section_directory, metadata)
     if arguments.clicktrack:
