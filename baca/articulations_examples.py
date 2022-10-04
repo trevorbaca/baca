@@ -13,14 +13,8 @@ articulations.py examples.
     >>> voice = score["Music"]
     >>> _ = baca.pitch(voice, "E4")
     >>> _ = baca.color_fingerings(voice, numbers=[0, 1, 2, 1])
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::

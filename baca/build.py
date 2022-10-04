@@ -76,7 +76,6 @@ def _also_untagged(section_directory):
             lines_.append(line)
         lines = lines_
         string = "".join(lines)
-        # string = abjad.tag.remove_tags(string)
         parts = []
         for part in tagged.parts:
             if part == os.path.sep:

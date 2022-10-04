@@ -28,13 +28,10 @@ r"""
         >>> _ = baca.clef(abjad.select.leaf(voice, 0), "treble")
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -70,26 +67,21 @@ r"""
                         <<
                             \context Voice = "Music"
                             {
-                                %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
                                 \once \override Accidental.stencil = ##f
                                 \once \override NoteColumn.ignore-collision = ##t
                                 \clef "treble"
                                 \once \override Staff.Clef.color = #(x11-color 'blue)
-                                %@% \override Staff.Clef.color = ##f
                                 \set Staff.forceClef = ##t
                                 b'1 * 3/8
-                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             }
                             \context Voice = "Rests"
                             {
                                 R1 * 3/8
-                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             }
                         >>
                         R1 * 3/8
-                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     }
                 >>
             }
@@ -127,13 +119,10 @@ r"""
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -169,26 +158,21 @@ r"""
                         <<
                             \context Voice = "Music"
                             {
-                                %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
                                 \once \override Accidental.stencil = ##f
                                 \once \override NoteColumn.ignore-collision = ##t
                                 \clef "alto"
                                 \once \override Staff.Clef.color = #(x11-color 'blue)
-                                %@% \override Staff.Clef.color = ##f
                                 \set Staff.forceClef = ##t
                                 c'1 * 3/8
-                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             }
                             \context Voice = "Rests"
                             {
                                 R1 * 3/8
-                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             }
                         >>
                         R1 * 3/8
-                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     }
                 >>
             }
@@ -228,13 +212,10 @@ r"""
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -271,26 +252,21 @@ r"""
                         <<
                             \context Voice = "Music"
                             {
-                                %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
                                 \once \override Accidental.stencil = ##f
                                 \once \override NoteColumn.ignore-collision = ##t
                                 \clef "treble"
                                 \once \override Staff.Clef.color = #(x11-color 'green4)
-                                %@% \override Staff.Clef.color = ##f
                                 \set Staff.forceClef = ##t
                                 b'1 * 3/8
-                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                                 \override Staff.Clef.color = #(x11-color 'OliveDrab)
                             }
                             \context Voice = "Rests"
                             {
                                 R1 * 3/8
-                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             }
                         >>
                         R1 * 3/8
-                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     }
                 >>
             }
@@ -318,13 +294,10 @@ r"""
         >>> _ = baca.clef(abjad.select.leaf(voice, 2), "treble")
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -364,33 +337,26 @@ r"""
                         <<
                             \context Voice = "Music"
                             {
-                                %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
                                 \once \override Accidental.stencil = ##f
                                 \once \override NoteColumn.ignore-collision = ##t
                                 \clef "treble"
                                 \once \override Staff.Clef.color = #(x11-color 'blue)
-                                %@% \override Staff.Clef.color = ##f
                                 \set Staff.forceClef = ##t
                                 b'1 * 3/8
-                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             }
                             \context Voice = "Rests"
                             {
                                 R1 * 3/8
-                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             }
                         >>
                         \clef "treble"
                         \once \override Staff.Clef.color = #(x11-color 'DeepPink1)
-                        %@% \override Staff.Clef.color = ##f
                         \set Staff.forceClef = ##t
                         R1 * 3/8
-                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                         \override Staff.Clef.color = #(x11-color 'DeepPink4)
                         R1 * 3/8
-                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     }
                 >>
             }
@@ -429,13 +395,10 @@ r"""
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -472,26 +435,21 @@ r"""
                         <<
                             \context Voice = "Music"
                             {
-                                %@% \abjad-invisible-music
                                 \abjad-invisible-music-coloring
                                 \once \override Accidental.stencil = ##f
                                 \once \override NoteColumn.ignore-collision = ##t
                                 \clef "treble"
                                 \once \override Staff.Clef.color = #(x11-color 'DeepPink1)
-                                %@% \override Staff.Clef.color = ##f
                                 \set Staff.forceClef = ##t
                                 b'1 * 3/8
-                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                                 \override Staff.Clef.color = #(x11-color 'DeepPink4)
                             }
                             \context Voice = "Rests"
                             {
                                 R1 * 3/8
-                                %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                             }
                         >>
                         R1 * 3/8
-                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     }
                 >>
             }
@@ -514,13 +472,10 @@ r"""
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -581,13 +536,10 @@ r"""
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -650,13 +602,10 @@ r"""
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -707,13 +656,10 @@ r"""
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), "f")
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -777,13 +723,10 @@ r"""
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -832,13 +775,10 @@ r"""
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), "sfz")
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -901,13 +841,10 @@ r"""
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -958,13 +895,10 @@ r"""
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), '"mf"')
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -1038,13 +972,10 @@ r"""
         >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     instruments=instruments,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -1200,13 +1131,10 @@ r"""
         ...         previous_metadata=metadata,
         ...     ),
         ...     instruments=instruments,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -1363,13 +1291,10 @@ r"""
         ...         previous_metadata=metadata,
         ...     ),
         ...     instruments=instruments,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -1523,13 +1448,10 @@ r"""
         >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     instruments=instruments,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -1710,13 +1632,10 @@ r"""
         ...         previous_metadata=metadata,
         ...     ),
         ...     instruments=instruments,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -1883,13 +1802,10 @@ r"""
         ...     score,
         ...     first_section=True,
         ...     short_instrument_names=short_instrument_names,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -2054,13 +1970,10 @@ r"""
         ...         previous_metadata=metadata,
         ...     ),
         ...     short_instrument_names=short_instrument_names,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -2229,13 +2142,10 @@ r"""
         ...         previous_metadata=metadata,
         ...     ),
         ...     short_instrument_names=short_instrument_names,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -2401,13 +2311,10 @@ r"""
         ...     score,
         ...     first_section=True,
         ...     short_instrument_names=short_instrument_names,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -2607,13 +2514,10 @@ r"""
         ...         previous_metadata=metadata,
         ...     ),
         ...     short_instrument_names=short_instrument_names,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -2772,7 +2676,6 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
-
         >>> wrappers = baca.short_instrument_name(voice[0], "I+II", manifests)
         >>> wrappers = baca.short_instrument_name(voice[0], "III+IV", manifests)
         >>> for wrapper in wrappers:
@@ -2782,13 +2685,10 @@ r"""
         ...     score,
         ...     first_section=True,
         ...     short_instrument_names=short_instrument_names,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -2826,12 +2726,9 @@ r"""
                     {
                         \baca-repeat-pitch-class-coloring
                         \set Staff.shortInstrumentName = \markup I+II
-                        %@% \set Staff.shortInstrumentName = \markup III+IV
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
-                        %@% \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         c'2
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
-                        %@% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
                         \set Staff.shortInstrumentName = \markup III+IV
                         \baca-repeat-pitch-class-coloring
@@ -2881,18 +2778,14 @@ r"""
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> baca.section.append_anchor_note(voice)
-
         >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     append_anchor_skip=True,
         ...     metronome_marks=metronome_marks,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -2920,9 +2813,6 @@ r"""
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'blue
                         \bacaStartTextSpanMM
-                        %@% - \abjad-invisible-line
-                        %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "112"
-                        %@% \bacaStartTextSpanMM
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
@@ -2941,14 +2831,12 @@ r"""
                         c'4.
                         \baca-repeat-pitch-class-coloring
                         c'4.
-                        %@% \abjad-invisible-music
                         \abjad-invisible-music-coloring
                         \once \override Accidental.stencil = ##f
                         \stopStaff
                         \once \override Staff.StaffSymbol.transparent = ##t
                         \startStaff
                         b'1 * 1/4
-                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                     }
                 >>
             }
@@ -2993,13 +2881,10 @@ r"""
         ...         previous_metadata=metadata,
         ...     ),
         ...     metronome_marks=metronome_marks,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -3028,9 +2913,6 @@ r"""
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'blue
                         \bacaStartTextSpanMM
-                        %@% - \abjad-invisible-line
-                        %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "112"
-                        %@% \bacaStartTextSpanMM
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
@@ -3050,14 +2932,12 @@ r"""
                         c'4.
                         \baca-repeat-pitch-class-coloring
                         c'4.
-                        %@% \abjad-invisible-music
                         \abjad-invisible-music-coloring
                         \once \override Accidental.stencil = ##f
                         \stopStaff
                         \once \override Staff.StaffSymbol.transparent = ##t
                         \startStaff
                         b'1 * 1/4
-                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                     }
                 >>
             }
@@ -3098,13 +2978,10 @@ r"""
         ...         previous_metadata=metadata,
         ...     ),
         ...     metronome_marks=metronome_marks,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -3133,9 +3010,6 @@ r"""
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "90" #'green4
                         \bacaStartTextSpanMM
-                        %@% - \abjad-invisible-line
-                        %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "90"
-                        %@% \bacaStartTextSpanMM
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
@@ -3180,18 +3054,14 @@ r"""
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> baca.section.append_anchor_note(voice)
-
         >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     append_anchor_skip=True,
         ...     metronome_marks=metronome_marks,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -3219,9 +3089,6 @@ r"""
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'blue
                         \bacaStartTextSpanMM
-                        %@% - \abjad-invisible-line
-                        %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "112"
-                        %@% \bacaStartTextSpanMM
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
@@ -3229,9 +3096,6 @@ r"""
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'DeepPink1
                         \bacaStartTextSpanMM
-                        %@% - \abjad-invisible-line
-                        %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "112"
-                        %@% \bacaStartTextSpanMM
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         \baca-time-signature-transparent
@@ -3247,14 +3111,12 @@ r"""
                         c'4.
                         \baca-repeat-pitch-class-coloring
                         c'4.
-                        %@% \abjad-invisible-music
                         \abjad-invisible-music-coloring
                         \once \override Accidental.stencil = ##f
                         \stopStaff
                         \once \override Staff.StaffSymbol.transparent = ##t
                         \startStaff
                         b'1 * 1/4
-                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                     }
                 >>
             }
@@ -3300,13 +3162,10 @@ r"""
         ...         previous_metadata=metadata,
         ...     ),
         ...     metronome_marks=metronome_marks,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -3335,9 +3194,6 @@ r"""
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'DeepPink1
                         \bacaStartTextSpanMM
-                        %@% - \abjad-invisible-line
-                        %@% - \baca-metronome-mark-spanner-left-text 2 0 1 "112"
-                        %@% \bacaStartTextSpanMM
                         \baca-new-spacing-section #1 #24
                         \noBreak
                         s1 * 3/8
@@ -3357,14 +3213,12 @@ r"""
                         c'4.
                         \baca-repeat-pitch-class-coloring
                         c'4.
-                        %@% \abjad-invisible-music
                         \abjad-invisible-music-coloring
                         \once \override Accidental.stencil = ##f
                         \stopStaff
                         \once \override Staff.StaffSymbol.transparent = ##t
                         \startStaff
                         b'1 * 1/4
-                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                     }
                 >>
             }
@@ -3395,16 +3249,12 @@ r"""
         >>> wrapper.tag = tag
         >>> _ = baca.staff_lines(voice[0], 1)
         >>> _ = baca.staff_position(voice, 0)
-
         >>> metadata = baca.section.postprocess_score(
         ...     score,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -3480,13 +3330,10 @@ r"""
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -3563,13 +3410,10 @@ r"""
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -3620,16 +3464,12 @@ r"""
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> _ = baca.staff_lines(voice[0], 5)
-
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -3693,13 +3533,10 @@ r"""
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -3765,13 +3602,10 @@ r"""
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -3822,16 +3656,12 @@ r"""
         >>> voice.extend(music)
         >>> _ = baca.staff_lines(voice[0], 5)
         >>> _ = baca.staff_lines(voice[1], 5)
-
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -3902,13 +3732,10 @@ r"""
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -3986,18 +3813,14 @@ r"""
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> baca.section.append_anchor_note(voice)
-
         >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     append_anchor_skip=True,
         ...     metronome_marks=metronome_marks,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -4022,9 +3845,6 @@ r"""
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        %@% - \abjad-dashed-line-with-arrow
-                        %@% - \tweak bound-details.left.text \markup \concat { \large \upright accel. \hspace #0.5 }
-                        %@% \bacaStartTextSpanMM
                         - \abjad-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'blue) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
@@ -4046,14 +3866,12 @@ r"""
                         c'4.
                         \baca-repeat-pitch-class-coloring
                         c'4.
-                        %@% \abjad-invisible-music
                         \abjad-invisible-music-coloring
                         \once \override Accidental.stencil = ##f
                         \stopStaff
                         \once \override Staff.StaffSymbol.transparent = ##t
                         \startStaff
                         b'1 * 1/4
-                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"
                     }
                 >>
             }
@@ -4089,13 +3907,10 @@ r"""
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -4121,9 +3936,6 @@ r"""
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        %@% - \abjad-dashed-line-with-arrow
-                        %@% - \tweak bound-details.left.text \markup \concat { \large \upright accel. \hspace #0.5 }
-                        %@% \bacaStartTextSpanMM
                         - \abjad-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'blue) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
@@ -4171,19 +3983,15 @@ r"""
         >>> voice.extend(music)
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> wrappers = baca.text_spanner_staff_padding(score["Skips"], 4)
-
         >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -4209,9 +4017,6 @@ r"""
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        %@% - \abjad-dashed-line-with-arrow
-                        %@% - \tweak bound-details.left.text \markup \concat { \large \upright accel. \hspace #0.5 }
-                        %@% \bacaStartTextSpanMM
                         - \abjad-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'green4) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
@@ -4253,16 +4058,12 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
-
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -4287,9 +4088,6 @@ r"""
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        %@% - \abjad-dashed-line-with-arrow
-                        %@% - \tweak bound-details.left.text \markup \concat { \large \upright accel. \hspace #0.5 }
-                        %@% \bacaStartTextSpanMM
                         - \abjad-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'blue) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
@@ -4297,9 +4095,6 @@ r"""
                         \noBreak
                         s1 * 3/8
                         \bacaStopTextSpanMM
-                        %@% - \abjad-dashed-line-with-arrow
-                        %@% - \tweak bound-details.left.text \markup \concat { \large \upright accel. \hspace #0.5 }
-                        %@% \bacaStartTextSpanMM
                         - \abjad-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'DeepPink1) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
@@ -4356,13 +4151,10 @@ r"""
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
-        >>> lilypond_file = baca.lilypond.file(
-        ...     score,
-        ...     includes=["baca.ily"],
-        ... )
+        >>> baca.docs.remove_deactivated_wrappers(score)
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -4388,9 +4180,6 @@ r"""
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        %@% - \abjad-dashed-line-with-arrow
-                        %@% - \tweak bound-details.left.text \markup \concat { \large \upright accel. \hspace #0.5 }
-                        %@% \bacaStartTextSpanMM
                         - \abjad-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'DeepPink1) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM

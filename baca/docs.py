@@ -244,3 +244,12 @@ def make_empty_score(*counts, do_not_move_global_context=False):
     if not do_not_move_global_context:
         _move_global_context(score)
     return score
+
+
+def remove_deactivated_wrappers(score):
+    for leaf in abjad.iterate.leaves(score):
+        for wrapper in abjad.get.wrappers(leaf):
+            if wrapper.tag is None:
+                continue
+            if wrapper.deactivate:
+                abjad.detach(wrapper, leaf)

@@ -337,33 +337,6 @@ def clef_color_tags(path=None):
     return tags
 
 
-def documentation_removal_tags():
-    """
-    Gets documentation removal tags.
-
-    ..  container:: example
-
-        >>> for tag in baca.tags.documentation_removal_tags():
-        ...     tag
-        ...
-        Tag(string='CLOCK_TIME')
-        Tag(string='FIGURE_LABEL')
-        Tag(string='LOCAL_MEASURE_NUMBER')
-        Tag(string='MEASURE_NUMBER')
-        Tag(string='SPACING')
-        Tag(string='STAGE_NUMBER')
-
-    """
-    return [
-        CLOCK_TIME,
-        FIGURE_LABEL,
-        LOCAL_MEASURE_NUMBER,
-        MEASURE_NUMBER,
-        SPACING,
-        STAGE_NUMBER,
-    ]
-
-
 def dynamic_color_tags(path=None):
     """
     Gets dynamic color tags.

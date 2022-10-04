@@ -14,15 +14,9 @@ spanners.py examples
     >>> voice = score["Music"]
     >>> _ = baca.pitch(voice, "C4")
     >>> _ = baca.beam(voice, direction=abjad.DOWN)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::

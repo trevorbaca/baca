@@ -23,14 +23,9 @@ overrides.py examples.
     >>> _ = baca.bar_line_transparent(
     ...         abjad.select.group_by_measure(voice)[1]
     ... )
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -411,14 +406,9 @@ overrides.py examples.
     ...     baca.select.mmrests(voice)[1:],
     ...     "#(x11-color 'DarkOrchid)",
     ... )
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -446,26 +436,20 @@ overrides.py examples.
                     <<
                         \context Voice = "Music"
                         {
-                            %@% \abjad-invisible-music
                             \abjad-invisible-music-coloring
                             \once \override Accidental.stencil = ##f
                             \once \override NoteColumn.ignore-collision = ##t
                             b'1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                         }
                         \context Voice = "Rests"
                         {
                             R1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                         }
                     >>
                     \override MultiMeasureRest.color = #(x11-color 'DarkOrchid)
                     R1 * 3/8
-                    %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     R1 * 4/8
-                    %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                     R1 * 3/8
-                    %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     \revert MultiMeasureRest.color
                 }
             >>
@@ -484,14 +468,9 @@ overrides.py examples.
     ...     r"\baca-boxed-markup still",
     ... )
     >>> _ = baca.mmrest_text_color(baca.select.mmrests(voice)[1:], "#red")
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -519,27 +498,21 @@ overrides.py examples.
                     <<
                         \context Voice = "Music"
                         {
-                            %@% \abjad-invisible-music
                             \abjad-invisible-music-coloring
                             \once \override Accidental.stencil = ##f
                             \once \override NoteColumn.ignore-collision = ##t
                             b'1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                         }
                         \context Voice = "Rests"
                         {
                             R1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                         }
                     >>
                     \override MultiMeasureRestText.color = #red
                     R1 * 3/8
-                    %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     R1 * 4/8
                     ^ \baca-boxed-markup still
-                    %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                     R1 * 3/8
-                    %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     \revert MultiMeasureRestText.color
                 }
             >>
@@ -558,15 +531,11 @@ overrides.py examples.
     ...     r"\baca-boxed-markup still",
     ... )
     >>> _ = baca.mmrest_text_extra_offset(
-    ...     baca.select.mmrests(voice)[1:], (0, 2))
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
+    ...     baca.select.mmrests(voice)[1:], (0, 2)
     ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -594,27 +563,21 @@ overrides.py examples.
                     <<
                         \context Voice = "Music"
                         {
-                            %@% \abjad-invisible-music
                             \abjad-invisible-music-coloring
                             \once \override Accidental.stencil = ##f
                             \once \override NoteColumn.ignore-collision = ##t
                             b'1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                         }
                         \context Voice = "Rests"
                         {
                             R1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                         }
                     >>
                     \override MultiMeasureRestText.extra-offset = #'(0 . 2)
                     R1 * 3/8
-                    %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     R1 * 4/8
                     ^ \baca-boxed-markup still
-                    %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                     R1 * 3/8
-                    %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     \revert MultiMeasureRestText.extra-offset
                 }
             >>
@@ -633,14 +596,9 @@ overrides.py examples.
     ...     r"\baca-boxed-markup still",
     ... )
     >>> _ = baca.mmrest_text_padding(baca.select.mmrests(voice)[1:], 2)
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -668,27 +626,21 @@ overrides.py examples.
                     <<
                         \context Voice = "Music"
                         {
-                            %@% \abjad-invisible-music
                             \abjad-invisible-music-coloring
                             \once \override Accidental.stencil = ##f
                             \once \override NoteColumn.ignore-collision = ##t
                             b'1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                         }
                         \context Voice = "Rests"
                         {
                             R1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                         }
                     >>
                     \override MultiMeasureRestText.padding = 2
                     R1 * 3/8
-                    %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     R1 * 4/8
                     ^ \baca-boxed-markup still
-                    %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                     R1 * 3/8
-                    %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     \revert MultiMeasureRestText.padding
                 }
             >>
@@ -707,14 +659,9 @@ overrides.py examples.
     ...     r"\baca-boxed-markup still",
     ... )
     >>> _ = baca.mmrest_text_parent_center(baca.select.mmrests(voice)[1:])
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -742,27 +689,21 @@ overrides.py examples.
                     <<
                         \context Voice = "Music"
                         {
-                            %@% \abjad-invisible-music
                             \abjad-invisible-music-coloring
                             \once \override Accidental.stencil = ##f
                             \once \override NoteColumn.ignore-collision = ##t
                             b'1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                         }
                         \context Voice = "Rests"
                         {
                             R1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                         }
                     >>
                     \override MultiMeasureRestText.parent-alignment-X = 0
                     R1 * 3/8
-                    %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     R1 * 4/8
                     ^ \baca-boxed-markup still
-                    %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                     R1 * 3/8
-                    %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     \revert MultiMeasureRestText.parent-alignment-X
                 }
             >>
@@ -781,14 +722,9 @@ overrides.py examples.
     ...     r"\baca-boxed-markup still",
     ... )
     >>> _ = baca.mmrest_text_staff_padding(baca.select.mmrests(voice)[1:], 2)
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -816,27 +752,21 @@ overrides.py examples.
                     <<
                         \context Voice = "Music"
                         {
-                            %@% \abjad-invisible-music
                             \abjad-invisible-music-coloring
                             \once \override Accidental.stencil = ##f
                             \once \override NoteColumn.ignore-collision = ##t
                             b'1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                         }
                         \context Voice = "Rests"
                         {
                             R1 * 4/8
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                         }
                     >>
                     \override MultiMeasureRestText.staff-padding = 2
                     R1 * 3/8
-                    %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     R1 * 4/8
                     ^ \baca-boxed-markup still
-                    %@% ^ \baca-duration-multiplier-markup #"4" #"8"
                     R1 * 3/8
-                    %@% ^ \baca-duration-multiplier-markup #"3" #"8"
                     \revert MultiMeasureRestText.staff-padding
                 }
             >>

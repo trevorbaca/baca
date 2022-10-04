@@ -9,22 +9,15 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.hairpin(voice, "p < f", bookend=-1)
     >>> _ = baca.dls_staff_padding(voice, 5)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -93,22 +86,15 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
     >>> _ = baca.hairpin(voice, '"ff" >o niente')
     >>> _ = baca.dls_staff_padding(voice, 5)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -179,22 +165,15 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
     >>> _ = baca.hairpin(voice, 'niente o< "ff"')
     >>> _ = baca.dls_staff_padding(voice, 5)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -264,22 +243,15 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
     >>> _ = baca.hairpin(voice, '"p" -- f')
     >>> _ = baca.dls_staff_padding(voice, 5)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -349,7 +321,6 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
@@ -357,15 +328,9 @@ piecewise.py examples.
     >>> _ = baca.hairpin(baca.select.leaves(voice)[:7], '"mp" <| "f"')
     >>> _ = baca.hairpin(baca.select.leaves(voice)[7:], '"mf" |> "p"')
     >>> _ = baca.dls_staff_padding(voice, 5)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -440,7 +405,6 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
@@ -451,15 +415,9 @@ piecewise.py examples.
     ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
     ...     ),
     >>> _ = baca.dls_staff_padding(voice, 5)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -527,7 +485,6 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
@@ -538,15 +495,9 @@ piecewise.py examples.
     ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
     ...     )
     >>> _ = baca.dls_staff_padding(voice, 5)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -622,7 +573,6 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
@@ -634,15 +584,9 @@ piecewise.py examples.
     ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
     ...     )
     >>> _ = baca.dls_staff_padding(voice, 5)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -713,7 +657,6 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
@@ -725,15 +668,9 @@ piecewise.py examples.
     ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
     ...     )
     >>> _ = baca.dls_staff_padding(voice, 5)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -816,22 +753,15 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
     >>> _ = baca.hairpin(voice, "f", bookend=False)
     >>> _ = baca.dls_staff_padding(voice, 5)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -897,22 +827,15 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
     >>> _ = baca.hairpin(voice, "< !")
     >>> _ = baca.dls_staff_padding(voice, 5)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -979,7 +902,6 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_skeleton("{ c2 r4. c2 r4. }")
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
@@ -995,15 +917,9 @@ piecewise.py examples.
     ...         abjad.Tweak(r"- \tweak to-barline ##t"),
     ...     )
     >>> _ = baca.dls_staff_padding(voice, 4)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1064,7 +980,6 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
@@ -1076,15 +991,9 @@ piecewise.py examples.
     ...         pieces=lambda _: baca.select.mgroups(_, [1, 2, 1]),
     ...     )
     >>> _ = baca.dls_staff_padding(voice, 4)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1155,22 +1064,15 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.hairpin(voice, "(mp) < mf")
     >>> _ = baca.dls_staff_padding(voice, 4)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1249,15 +1151,9 @@ piecewise.py examples.
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.text_spanner(voice, "pont. => ord.")
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1327,22 +1223,15 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.text_spanner(voice, "pont. =| ord.")
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1412,22 +1301,15 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.text_spanner(voice, "pont. -> ord.")
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1497,22 +1379,15 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.text_spanner(voice, "pont. -| ord.")
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1582,22 +1457,15 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.text_spanner(voice, "pont. || ord.")
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1669,7 +1537,6 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
@@ -1681,15 +1548,9 @@ piecewise.py examples.
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1773,7 +1634,6 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
@@ -1785,15 +1645,9 @@ piecewise.py examples.
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1877,7 +1731,6 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
@@ -1890,15 +1743,9 @@ piecewise.py examples.
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1991,7 +1838,6 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
@@ -2004,15 +1850,9 @@ piecewise.py examples.
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -2108,7 +1948,6 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_skeleton("{ c2 c4. c2 c4. }")
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
@@ -2124,15 +1963,9 @@ piecewise.py examples.
     ...         pieces=lambda _: baca.select.plts(_),
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -2199,7 +2032,6 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
@@ -2211,15 +2043,9 @@ piecewise.py examples.
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -2290,7 +2116,6 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_even_divisions(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
@@ -2302,15 +2127,9 @@ piecewise.py examples.
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -2396,7 +2215,6 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_notes(measures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
@@ -2407,15 +2225,9 @@ piecewise.py examples.
     ...         pieces=lambda _: baca.select.plts(_),
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -2493,7 +2305,6 @@ piecewise.py examples.
     >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-
     >>> music = baca.make_skeleton("{ c2 c4. c2 c4 ~ c8 }")
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
@@ -2505,15 +2316,9 @@ piecewise.py examples.
     ...         pieces=lambda _: baca.select.plts(_),
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
-
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::

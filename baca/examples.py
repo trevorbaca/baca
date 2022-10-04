@@ -10,14 +10,9 @@ Examples.
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> abjad.label.with_indices(voice)
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -111,12 +106,9 @@ Examples.
     >>> _ = baca.section.postprocess_score(
     ...     score,
     ...     color_octaves=True,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -185,13 +177,10 @@ Examples.
     >>> _ = baca.section.postprocess_score(
     ...     score,
     ...     instruments=instruments,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
     ...     transpose_score=True,
     ... )
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -260,9 +249,9 @@ Examples.
     >>> _ = baca.section.postprocess_score(
     ...     score,
     ...     instruments=instruments,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
     ...     transpose_score=False,
     ... )
+    >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -351,13 +340,10 @@ Examples.
     ...     score,
     ...     do_not_check_wellformedness=True,
     ...     instruments=instruments,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> abjad.setting(score).autoBeaming = False
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -442,20 +428,14 @@ Examples.
     ...     figures_.extend(figure)
     ...
     >>> figures = list(figures_)
-
     >>> score = baca.docs.make_empty_score(1)
     >>> measures = baca.section.measures(time_signatures)
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> score["Music"].extend(figures_)
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     remove_tags=baca.tags.documentation_removal_tags(),
-    ... )
+    >>> _ = baca.section.postprocess_score(score)
     >>> abjad.setting(score).autoBeaming = False
-    >>> lilypond_file = baca.lilypond.file(
-    ...     score,
-    ...     includes=["baca.ily"],
-    ... )
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
