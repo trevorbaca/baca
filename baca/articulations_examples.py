@@ -15,8 +15,6 @@ articulations.py examples.
     >>> _ = baca.color_fingerings(voice, numbers=[0, 1, 2, 1])
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> lilypond_file = baca.lilypond.file(

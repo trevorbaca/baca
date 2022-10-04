@@ -221,8 +221,6 @@ def make_monads(fractions):
         >>> score["Music"].extend(music)
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> lilypond_file = baca.lilypond.file(
@@ -320,8 +318,6 @@ def make_repeat_tied_notes(
 
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> lilypond_file = baca.lilypond.file(

@@ -30,7 +30,6 @@ from . import pitchcommands as _pitchcommands
 from . import select as _select
 from . import tags as _tags
 from . import treat as _treat
-from .enums import colors as _colors
 from .enums import enums as _enums
 
 
@@ -1570,24 +1569,6 @@ def _memento_to_indicator(dictionary, memento):
     return indicator
 
 
-def _move_global_context(score):
-    global_skips = score["Skips"]
-    global_skips.lilypond_type = "Voice"
-    music_context = score["MusicContext"]
-    for component in abjad.iterate.components(music_context):
-        if isinstance(component, abjad.Staff):
-            first_music_staff = component
-            break
-    first_music_staff.simultaneous = True
-    first_music_staff.insert(0, global_skips)
-    score["GlobalContext"][:] = []
-    del score["GlobalContext"]
-    assert len(score) == 1, repr(score)
-    score[:] = music_context[:]
-    if len(score) == 1:
-        score.simultaneous = False
-
-
 def _move_global_rests(
     global_rests_in_every_staff,
     global_rests_in_topmost_staff,
@@ -1625,21 +1606,6 @@ def _populate_offset_to_measure_number(first_measure_number, global_skips):
         offset_to_measure_number[offset] = measure_number
         measure_number += 1
     return offset_to_measure_number
-
-
-def _print_timing(title, timer, *, print_timing=False, suffix=None):
-    if not print_timing:
-        return
-    count = int(timer.elapsed_time)
-    counter = abjad.string.pluralize("second", count)
-    count = str(count)
-    if suffix is not None:
-        suffix = f" [{suffix}]"
-    else:
-        suffix = ""
-    string = f"{_colors.green_bold}{title}{suffix} {count} {counter}"
-    string += f" ...{_colors.end}"
-    print(string)
 
 
 def _prototype_string(class_):
@@ -2722,7 +2688,7 @@ def make_layout_ly(
         _build._print_file_handling(f"Skipping {_path.trim(layout_py)} ...")
         sys.exit(1)
     assert abjad.string.is_shout_case(document_name)
-    score = _docs.make_empty_score(1)
+    score = _docs.make_empty_score(1, do_not_move_global_context=True)
     time_signatures_ = [abjad.TimeSignature.from_string(_) for _ in time_signatures]
     set_up_score(
         score,
@@ -2736,7 +2702,6 @@ def make_layout_ly(
     apply_breaks(score, spacing.breaks)
     _ = postprocess_score(
         score,
-        time_signatures_,
         append_anchor_skip=has_anchor_skip,
         add_container_identifiers=True,
         comment_measure_numbers=True,
@@ -2850,7 +2815,6 @@ def measures(items):
 @_build.timed("postprocess_score")
 def postprocess_score(
     score,
-    time_signatures,
     *,
     activate: list[abjad.Tag] = None,
     add_container_identifiers=False,
@@ -2883,10 +2847,8 @@ def postprocess_score(
     magnify_staves=None,
     manifests=None,
     metronome_marks=None,
-    move_global_context=False,
     part_manifest=None,
     parts_metric_modulation_multiplier=None,
-    print_timing=False,
     remove_tags: list[abjad.Tag] = None,
     section_number=None,
     shift_measure_initial_clefs=False,
@@ -2895,6 +2857,13 @@ def postprocess_score(
     treat_untreated_persistent_wrappers=False,
     whitespace_leaves=False,
 ):
+    skips = score["Skips"]
+    if append_anchor_skip:
+        skips = skips[:-1]
+    time_signatures = []
+    for skip in skips:
+        time_signature = abjad.get.effective(skip, abjad.TimeSignature)
+        time_signatures.append(time_signature)
     assert isinstance(score, abjad.Score), repr(score)
     if activate is not None:
         assert isinstance(activate, list), repr(activate)
@@ -3029,8 +2998,6 @@ def postprocess_score(
         global_rests_in_topmost_staff,
         score,
     )
-    if move_global_context:
-        _move_global_context(score)
     _clean_up_on_beat_grace_containers(score)
     if not do_not_check_wellformedness:
         count, message = abjad.wf.tabulate_wellformedness(
@@ -3145,7 +3112,6 @@ def section_defaults():
         "comment_measure_numbers": True,
         "force_nonnatural_accidentals": True,
         "label_clock_time": True,
-        "print_timing": True,
         "shift_measure_initial_clefs": True,
         "treat_untreated_persistent_wrappers": True,
         "whitespace_leaves": True,
@@ -3178,7 +3144,7 @@ def set_up_score(
     _label_measure_numbers(first_measure_number, skips)
     if always_make_global_rests:
         _make_global_rests(score["Rests"], time_signatures)
-    else:
+    elif "Rests" in score:
         del score["Rests"]
     if previous_persistent_indicators and not do_not_reapply_persistent_indicators:
         _reapply_persistent_indicators(

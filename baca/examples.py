@@ -12,8 +12,6 @@ Examples.
     >>> abjad.label.with_indices(voice)
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> lilypond_file = baca.lilypond.file(
@@ -112,9 +110,7 @@ Examples.
     >>> _ = baca.clef(score["Music.2"][0], "bass")
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
     ...     color_octaves=True,
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> lilypond_file = baca.lilypond.file(
@@ -188,9 +184,7 @@ Examples.
     >>> _ = baca.pitches(voice, "E4 F4")
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
     ...     instruments=instruments,
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ...     transpose_score=True,
     ... )
@@ -265,9 +259,7 @@ Examples.
     >>> _ = baca.pitches(voice, "E4 F4")
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
     ...     instruments=instruments,
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ...     transpose_score=False,
     ... )
@@ -357,10 +349,8 @@ Examples.
     >>> _ = baca.instrument(voice[0], "Violin", manifests)
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
     ...     do_not_check_wellformedness=True,
     ...     instruments=instruments,
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> abjad.setting(score).autoBeaming = False
@@ -459,8 +449,6 @@ Examples.
     >>> score["Music"].extend(figures_)
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> abjad.setting(score).autoBeaming = False

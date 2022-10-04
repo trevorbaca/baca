@@ -28,8 +28,6 @@ r"""
         >>> _ = baca.clef(abjad.select.leaf(voice, 0), "treble")
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -126,11 +124,9 @@ r"""
         >>> metadata = metadata | persist
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -229,11 +225,9 @@ r"""
         >>> baca.section.reapply(voice, {}, persist["persistent_indicators"])
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -324,8 +318,6 @@ r"""
         >>> _ = baca.clef(abjad.select.leaf(voice, 2), "treble")
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -434,11 +426,9 @@ r"""
         >>> _ = baca.clef(abjad.select.leaf(voice, 0), "treble")
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -524,8 +514,6 @@ r"""
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -590,11 +578,9 @@ r"""
         >>> metadata = metadata | persist
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -661,11 +647,9 @@ r"""
         >>> baca.section.reapply(voice, {}, persist["persistent_indicators"])
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -723,8 +707,6 @@ r"""
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), "f")
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -792,11 +774,9 @@ r"""
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -852,8 +832,6 @@ r"""
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), "sfz")
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -920,11 +898,9 @@ r"""
         >>> metadata = metadata | persist
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -982,8 +958,6 @@ r"""
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), '"mf"')
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -1063,9 +1037,7 @@ r"""
         >>> _ = baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     instruments=instruments,
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -1224,12 +1196,10 @@ r"""
         >>> metadata = metadata | persist
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
         ...     instruments=instruments,
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -1389,12 +1359,10 @@ r"""
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
         ...     instruments=instruments,
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -1554,9 +1522,7 @@ r"""
         >>> _ = baca.instrument(voice[1], "Flute", manifests)
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     instruments=instruments,
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -1740,12 +1706,10 @@ r"""
         >>> _ = baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
         ...     instruments=instruments,
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -1917,10 +1881,8 @@ r"""
 
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     first_section=True,
         ...     short_instrument_names=short_instrument_names,
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -2088,12 +2050,10 @@ r"""
         >>> metadata = metadata | persist
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
         ...     short_instrument_names=short_instrument_names,
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -2265,12 +2225,10 @@ r"""
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
         ...     short_instrument_names=short_instrument_names,
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -2441,10 +2399,8 @@ r"""
         >>> _ = baca.short_instrument_name(voice[1], "I+II", manifests)
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     first_section=True,
         ...     short_instrument_names=short_instrument_names,
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -2647,12 +2603,10 @@ r"""
         >>> _ = baca.short_instrument_name(voice[0], "I+II", manifests)
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
         ...     short_instrument_names=short_instrument_names,
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -2826,10 +2780,8 @@ r"""
 
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     first_section=True,
         ...     short_instrument_names=short_instrument_names,
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -2932,10 +2884,8 @@ r"""
 
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     append_anchor_skip=True,
         ...     metronome_marks=metronome_marks,
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -3038,13 +2988,11 @@ r"""
         >>> metadata = metadata | persist
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     append_anchor_skip=True,
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
         ...     metronome_marks=metronome_marks,
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -3146,12 +3094,10 @@ r"""
         >>> wrappers = baca.text_spanner_staff_padding(score["Skips"], 4)
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
         ...     metronome_marks=metronome_marks,
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -3237,10 +3183,8 @@ r"""
 
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     append_anchor_skip=True,
         ...     metronome_marks=metronome_marks,
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -3351,13 +3295,11 @@ r"""
         >>> baca.section.reapply(voice, {}, persist["persistent_indicators"])
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     append_anchor_skip=True,
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
         ...     metronome_marks=metronome_marks,
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -3456,8 +3398,6 @@ r"""
 
         >>> metadata = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -3537,11 +3477,9 @@ r"""
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -3622,11 +3560,9 @@ r"""
         >>> metadata = metadata | persist
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -3687,8 +3623,6 @@ r"""
 
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -3756,11 +3690,9 @@ r"""
         >>> metadata = metadata | persist
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -3830,11 +3762,9 @@ r"""
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -3895,8 +3825,6 @@ r"""
 
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -3971,11 +3899,9 @@ r"""
         >>> _ = baca.staff_lines(voice[0], 5)
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -4063,10 +3989,8 @@ r"""
 
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     append_anchor_skip=True,
         ...     metronome_marks=metronome_marks,
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -4162,11 +4086,9 @@ r"""
         >>> metadata = metadata | persist
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -4252,11 +4174,9 @@ r"""
 
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -4336,8 +4256,6 @@ r"""
 
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -4435,11 +4353,9 @@ r"""
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ...     treat_untreated_persistent_wrappers=True,
         ... )

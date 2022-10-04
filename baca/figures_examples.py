@@ -3832,8 +3832,6 @@ figures.py examples.
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> lilypond_file = baca.lilypond.file(
@@ -3971,8 +3969,6 @@ figures.py examples.
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> lilypond_file = baca.lilypond.file(
@@ -4131,8 +4127,6 @@ figures.py examples.
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> lilypond_file = baca.lilypond.file(
@@ -4310,8 +4304,6 @@ figures.py examples.
     >>> accumulator.populate_commands(score)
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> lilypond_file = baca.lilypond.file(
@@ -4531,8 +4523,6 @@ figures.py examples.
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> lilypond_file = baca.lilypond.file(
@@ -4729,8 +4719,6 @@ figures.py examples.
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> lilypond_file = baca.lilypond.file(
@@ -4861,8 +4849,6 @@ figures.py examples.
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> lilypond_file = baca.lilypond.file(
@@ -5018,8 +5004,6 @@ figures.py examples.
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> lilypond_file = baca.lilypond.file(
@@ -5891,8 +5875,6 @@ figures.py examples.
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> lilypond_file = baca.lilypond.file(
@@ -6070,8 +6052,6 @@ figures.py examples.
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> lilypond_file = baca.lilypond.file(
@@ -6241,8 +6221,6 @@ figures.py examples.
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> lilypond_file = baca.lilypond.file(
@@ -6415,8 +6393,6 @@ figures.py examples.
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> lilypond_file = baca.lilypond.file(

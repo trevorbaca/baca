@@ -25,8 +25,6 @@ overrides.py examples.
     ... )
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> lilypond_file = baca.lilypond.file(
@@ -415,8 +413,6 @@ overrides.py examples.
     ... )
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> lilypond_file = baca.lilypond.file(
@@ -490,8 +486,6 @@ overrides.py examples.
     >>> _ = baca.mmrest_text_color(baca.select.mmrests(voice)[1:], "#red")
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> lilypond_file = baca.lilypond.file(
@@ -567,8 +561,6 @@ overrides.py examples.
     ...     baca.select.mmrests(voice)[1:], (0, 2))
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> lilypond_file = baca.lilypond.file(
@@ -643,8 +635,6 @@ overrides.py examples.
     >>> _ = baca.mmrest_text_padding(baca.select.mmrests(voice)[1:], 2)
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> lilypond_file = baca.lilypond.file(
@@ -719,8 +709,6 @@ overrides.py examples.
     >>> _ = baca.mmrest_text_parent_center(baca.select.mmrests(voice)[1:])
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> lilypond_file = baca.lilypond.file(
@@ -795,8 +783,6 @@ overrides.py examples.
     >>> _ = baca.mmrest_text_staff_padding(baca.select.mmrests(voice)[1:], 2)
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> lilypond_file = baca.lilypond.file(

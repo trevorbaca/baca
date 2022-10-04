@@ -17,8 +17,6 @@ spanners.py examples
 
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     measures(),
-    ...     move_global_context=True,
     ...     remove_tags=baca.tags.documentation_removal_tags(),
     ... )
     >>> lilypond_file = baca.lilypond.file(

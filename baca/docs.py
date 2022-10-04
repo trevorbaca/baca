@@ -50,6 +50,24 @@ _global_context_string = r"""\layout
 """
 
 
+def _move_global_context(score):
+    global_skips = score["Skips"]
+    global_skips.lilypond_type = "Voice"
+    music_context = score["MusicContext"]
+    for component in abjad.iterate.components(music_context):
+        if isinstance(component, abjad.Staff):
+            first_music_staff = component
+            break
+    first_music_staff.simultaneous = True
+    first_music_staff.insert(0, global_skips)
+    score["GlobalContext"][:] = []
+    del score["GlobalContext"]
+    assert len(score) == 1, repr(score)
+    score[:] = music_context[:]
+    if len(score) == 1:
+        score.simultaneous = False
+
+
 def global_context_string():
     """
     Makes global context string.
@@ -57,7 +75,7 @@ def global_context_string():
     return _global_context_string
 
 
-def make_empty_score(*counts):
+def make_empty_score(*counts, do_not_move_global_context=False):
     r"""
     Makes empty score for doc examples.
 
@@ -67,26 +85,17 @@ def make_empty_score(*counts):
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
-            \context GlobalContext = "GlobalContext"
+        {
+            \context Staff = "Staff"
             <<
-                \context GlobalRests = "Rests"
+                \context Voice = "Skips"
                 {
                 }
-                \context GlobalSkips = "Skips"
+                \context Voice = "Music"
                 {
                 }
             >>
-            \context MusicContext = "MusicContext"
-            {
-                \context Staff = "Staff"
-                {
-                    \context Voice = "Music"
-                    {
-                    }
-                }
-            }
-        >>
+        }
 
     ..  container:: example
 
@@ -94,35 +103,26 @@ def make_empty_score(*counts):
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
-            \context GlobalContext = "GlobalContext"
+        {
+            \context Staff = "Staff"
             <<
-                \context GlobalRests = "Rests"
+                \context Voice = "Skips"
                 {
                 }
-                \context GlobalSkips = "Skips"
+                \context Voice = "Music.1"
+                {
+                }
+                \context Voice = "Music.2"
+                {
+                }
+                \context Voice = "Music.3"
+                {
+                }
+                \context Voice = "Music.4"
                 {
                 }
             >>
-            \context MusicContext = "MusicContext"
-            {
-                \context Staff = "Staff"
-                <<
-                    \context Voice = "Music.1"
-                    {
-                    }
-                    \context Voice = "Music.2"
-                    {
-                    }
-                    \context Voice = "Music.3"
-                    {
-                    }
-                    \context Voice = "Music.4"
-                    {
-                    }
-                >>
-            }
-        >>
+        }
 
     ..  container:: example
 
@@ -130,47 +130,38 @@ def make_empty_score(*counts):
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
-            \context GlobalContext = "GlobalContext"
+        {
+            \context StaffGroup = "StaffGroup"
             <<
-                \context GlobalRests = "Rests"
-                {
-                }
-                \context GlobalSkips = "Skips"
-                {
-                }
-            >>
-            \context MusicContext = "MusicContext"
-            <<
-                \context StaffGroup = "StaffGroup"
+                \context Staff = "Staff.1"
                 <<
-                    \context Staff = "Staff.1"
+                    \context Voice = "Skips"
                     {
-                        \context Voice = "Music.1"
-                        {
-                        }
                     }
-                    \context Staff = "Staff.2"
+                    \context Voice = "Music.1"
                     {
-                        \context Voice = "Music.2"
-                        {
-                        }
-                    }
-                    \context Staff = "Staff.3"
-                    {
-                        \context Voice = "Music.3"
-                        {
-                        }
-                    }
-                    \context Staff = "Staff.4"
-                    {
-                        \context Voice = "Music.4"
-                        {
-                        }
                     }
                 >>
+                \context Staff = "Staff.2"
+                {
+                    \context Voice = "Music.2"
+                    {
+                    }
+                }
+                \context Staff = "Staff.3"
+                {
+                    \context Voice = "Music.3"
+                    {
+                    }
+                }
+                \context Staff = "Staff.4"
+                {
+                    \context Voice = "Music.4"
+                    {
+                    }
+                }
             >>
-        >>
+        }
 
     ..  container:: example
 
@@ -178,44 +169,35 @@ def make_empty_score(*counts):
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
-            \context GlobalContext = "GlobalContext"
+        {
+            \context StaffGroup = "StaffGroup"
             <<
-                \context GlobalRests = "Rests"
-                {
-                }
-                \context GlobalSkips = "Skips"
-                {
-                }
-            >>
-            \context MusicContext = "MusicContext"
-            <<
-                \context StaffGroup = "StaffGroup"
+                \context Staff = "Staff.1"
                 <<
-                    \context Staff = "Staff.1"
+                    \context Voice = "Skips"
                     {
-                        \context Voice = "Music.1"
-                        {
-                        }
                     }
-                    \context Staff = "Staff.2"
-                    <<
-                        \context Voice = "Music.2"
-                        {
-                        }
-                        \context Voice = "Music.3"
-                        {
-                        }
-                    >>
-                    \context Staff = "Staff.3"
+                    \context Voice = "Music.1"
                     {
-                        \context Voice = "Music.4"
-                        {
-                        }
                     }
                 >>
+                \context Staff = "Staff.2"
+                <<
+                    \context Voice = "Music.2"
+                    {
+                    }
+                    \context Voice = "Music.3"
+                    {
+                    }
+                >>
+                \context Staff = "Staff.3"
+                {
+                    \context Voice = "Music.4"
+                    {
+                    }
+                }
             >>
-        >>
+        }
 
     """
     # TODO: use _tags.function_name()
@@ -244,14 +226,12 @@ def make_empty_score(*counts):
             voice_number += 1
         staff.extend(voices)
         staves.append(staff)
-
     if len(staves) == 1:
         music = staves
         simultaneous = False
     else:
         music = [abjad.StaffGroup(staves, name="StaffGroup")]
         simultaneous = True
-
     music_context = abjad.Context(
         music,
         lilypond_type="MusicContext",
@@ -259,6 +239,7 @@ def make_empty_score(*counts):
         name="MusicContext",
         tag=tag,
     )
-
     score = abjad.Score([global_context, music_context], name="Score", tag=tag)
+    if not do_not_move_global_context:
+        _move_global_context(score)
     return score

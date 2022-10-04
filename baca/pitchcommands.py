@@ -1384,8 +1384,6 @@ def deviation(
         >>> _ = baca.deviation(voice, [0, 0.5, 0, -0.5])
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> lilypond_file = baca.lilypond.file(
@@ -1467,8 +1465,6 @@ def displacement(argument, displacements: list[int]) -> None:
         >>> _ = baca.displacement(voice, [0, 0, 1, 1, 0, 0, -1, -1, 2, 2])
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> lilypond_file = baca.lilypond.file(
@@ -1865,8 +1861,6 @@ def pitch(
         >>> _ = baca.pitch(voice, "<C4 D4 E4>")
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> lilypond_file = baca.lilypond.file(
@@ -1963,8 +1957,6 @@ def pitches(
         >>> _ = baca.pitches(voice, [19, 13, 15, 16, 17, 23])
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> lilypond_file = baca.lilypond.file(
@@ -2033,8 +2025,6 @@ def pitches(
         >>> _ = baca.pitches(voice, "C4 F4 F#4 <B4 C#5> D5")
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> lilypond_file = baca.lilypond.file(
@@ -2104,8 +2094,6 @@ def pitches(
         ...     voice, "<C4 D4 E4 F4 G4 A4 B4 C4>", allow_repeats=True)
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> lilypond_file = baca.lilypond.file(
@@ -2278,8 +2266,6 @@ def register(
         >>> _ = baca.register(voice, 15)
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> lilypond_file = baca.lilypond.file(
@@ -2783,8 +2769,6 @@ def register(
         >>> _ = baca.register(voice, 12, 12)
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> lilypond_file = baca.lilypond.file(
@@ -2885,8 +2869,6 @@ def register(
         >>> _ = baca.register(voice, 12, 0)
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> lilypond_file = baca.lilypond.file(
@@ -2987,8 +2969,6 @@ def register(
         >>> _ = baca.register(voice, 0, 12)
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> lilypond_file = baca.lilypond.file(
@@ -3089,8 +3069,6 @@ def register(
         >>> _ = baca.register(voice, 12, -12)
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> lilypond_file = baca.lilypond.file(
@@ -3191,8 +3169,6 @@ def register(
         >>> _ = baca.register(voice, -12, 12)
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> lilypond_file = baca.lilypond.file(
@@ -3677,8 +3653,6 @@ def replace_with_clusters(
         >>> _ = baca.natural_clusters(voice, widths=[3])
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> lilypond_file = baca.lilypond.file(
@@ -3757,8 +3731,6 @@ def replace_with_clusters(
         >>> _ = baca.replace_with_clusters(voice, [3])
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> lilypond_file = baca.lilypond.file(
@@ -3836,8 +3808,6 @@ def replace_with_clusters(
         >>> _ = baca.replace_with_clusters(voice, [3], start_pitch="G4")
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> lilypond_file = baca.lilypond.file(
@@ -3915,8 +3885,6 @@ def replace_with_clusters(
         >>> _ = baca.replace_with_clusters(voice, [1, 2, 3, 4], start_pitch="E4")
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> lilypond_file = baca.lilypond.file(
@@ -3994,8 +3962,6 @@ def replace_with_clusters(
         >>> _ = baca.replace_with_clusters(voice, [1, 3], start_pitch="E4")
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     measures(),
-        ...     move_global_context=True,
         ...     remove_tags=baca.tags.documentation_removal_tags(),
         ... )
         >>> lilypond_file = baca.lilypond.file(
