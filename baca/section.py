@@ -1769,14 +1769,14 @@ def _remove_redundant_time_signatures(append_anchor_skip, global_skips):
     return cached_time_signatures
 
 
-def _remove_tags(remove_tags, score):
-    assert all(isinstance(_, abjad.Tag) for _ in remove_tags), repr(remove_tags)
+def _remove_layout_tags(score):
+    layout_removal_tags = _tags.layout_removal_tags()
     for leaf in abjad.iterate.leaves(score):
         for wrapper in abjad.get.wrappers(leaf):
             if wrapper.tag is None:
                 continue
             for word in wrapper.tag.words():
-                if abjad.Tag(word) in remove_tags:
+                if abjad.Tag(word) in layout_removal_tags:
                     abjad.detach(wrapper, leaf)
                     break
 
@@ -2710,9 +2710,9 @@ def make_layout_ly(
             first_measure_number=first_measure_number,
         ),
         first_section=True,
-        remove_tags=_tags.layout_removal_tags(),
         whitespace_leaves=True,
     )
+    _remove_layout_tags(score)
     lilypond_file = _lilypond.file(score)
     context = lilypond_file["Skips"]
     if curtail_measure_count is not None:
@@ -2816,7 +2816,6 @@ def measures(items):
 def postprocess_score(
     score,
     *,
-    activate: list[abjad.Tag] = None,
     add_container_identifiers=False,
     all_music_in_part_containers=False,
     allow_empty_selections=False,
@@ -2829,7 +2828,6 @@ def postprocess_score(
     color_not_yet_pitched=False,
     color_octaves=False,
     comment_measure_numbers=False,
-    deactivate: list[abjad.Tag] = None,
     do_not_check_wellformedness=False,
     do_not_require_short_instrument_names=False,
     empty_fermata_measures=False,
@@ -2849,10 +2847,10 @@ def postprocess_score(
     metronome_marks=None,
     part_manifest=None,
     parts_metric_modulation_multiplier=None,
-    remove_tags: list[abjad.Tag] = None,
     section_number=None,
     shift_measure_initial_clefs=False,
     short_instrument_names=None,
+    tags: _tags.Tags = None,
     transpose_score=False,
     treat_untreated_persistent_wrappers=False,
     whitespace_leaves=False,
@@ -2865,6 +2863,11 @@ def postprocess_score(
         time_signature = abjad.get.effective(skip, abjad.TimeSignature)
         time_signatures.append(time_signature)
     assert isinstance(score, abjad.Score), repr(score)
+    activate, deactivate = None, None
+    if tags is not None:
+        assert isinstance(tags, _tags.Tags), repr(tags)
+        activate = tags.activate
+        deactivate = tags.deactivate
     if activate is not None:
         assert isinstance(activate, list), repr(activate)
         assert all(isinstance(_, abjad.Tag) for _ in activate)
@@ -2980,7 +2983,6 @@ def postprocess_score(
                 score,
             )
         _deactivate_tags(deactivate, score)
-        _remove_tags(remove_tags or [], score)
         container_to_part_assignment = None
         if add_container_identifiers:
             container_to_part_assignment = _add_container_identifiers(
@@ -3058,6 +3060,7 @@ def postprocess_score(
     _style_anchor_skip(score)
     _style_anchor_notes(score)
     _check_anchors_are_final(score)
+    _activate_tags(score, activate)
     return new_metadata
 
 

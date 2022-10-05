@@ -1,6 +1,7 @@
 """
 Tags.
 """
+import dataclasses
 import os
 
 import abjad
@@ -258,6 +259,13 @@ FERMATA_MEASURE_NEXT_BAR_EXTENT = abjad.Tag("FERMATA_MEASURE_NEXT_BAR_EXTENT")
 FERMATA_MEASURE_RESUME_BAR_EXTENT = abjad.Tag("FERMATA_MEASURE_RESUME_BAR_EXTENT")
 
 NOT_TOPMOST = abjad.Tag("NOT_TOPMOST")
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class Tags:
+
+    activate: list[abjad.Tag] = dataclasses.field(default_factory=list)
+    deactivate: list[abjad.Tag] = dataclasses.field(default_factory=list)
 
 
 def clef_color_tags(path=None):
