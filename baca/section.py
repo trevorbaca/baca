@@ -1100,7 +1100,7 @@ def _comment_measure_numbers(first_measure_number, offset_to_measure_number, sco
         abjad.attach(literal, leaf, tag=_tags.function_name(_frame()))
 
 
-def _deactivate_tags(deactivate, score):
+def _deactivate_tags(score, deactivate):
     if not deactivate:
         return
     tags = deactivate
@@ -2982,7 +2982,6 @@ def postprocess_score(
                 offset_to_measure_number,
                 score,
             )
-        _deactivate_tags(deactivate, score)
         container_to_part_assignment = None
         if add_container_identifiers:
             container_to_part_assignment = _add_container_identifiers(
@@ -3026,7 +3025,6 @@ def postprocess_score(
         clock_time_duration = result[0]
         start_clock_time = result[1]
         stop_clock_time = result[2]
-    _activate_tags(score, activate)
     final_measure_number = first_measure_number + measure_count - 1
     persistent_indicators = _collect_persistent_indicators(
         manifests,
@@ -3060,6 +3058,7 @@ def postprocess_score(
     _style_anchor_skip(score)
     _style_anchor_notes(score)
     _check_anchors_are_final(score)
+    _deactivate_tags(score, deactivate)
     _activate_tags(score, activate)
     return new_metadata
 
