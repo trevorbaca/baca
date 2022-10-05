@@ -3,11 +3,8 @@ overrides.py examples.
 
 ..  container:: example
 
-    Overrides bar line transparency before measure 1:
+    Overrides bar line transparency:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> def make_rhythm(divisions):
     ...     nested_music = rmakers.talea(divisions, [1, 1, 1, -1], 8)
     ...     voice = rmakers.wrap_in_time_signature_staff(nested_music, divisions)
@@ -16,15 +13,22 @@ overrides.py examples.
     ...     music = abjad.mutate.eject_contents(voice)
     ...     return music
 
-    >>> music = make_rhythm(measures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
-    >>> _ = baca.bar_line_transparent(
-    ...         abjad.select.group_by_measure(voice)[1]
-    ... )
-    >>> _ = baca.section.postprocess_score(score)
-    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> def make_score():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, measures(), docs=True)
+    ...     music = make_rhythm(measures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
+    ...     baca.bar_line_transparent(
+    ...             abjad.select.group_by_measure(voice)[1]
+    ...     )
+    ...     baca.section.postprocess_score(score)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     return score
+
+    >>> score = make_score()
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -82,25 +86,29 @@ overrides.py examples.
 
     Overrides beam positions:
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     treatments=[-1],
-    ... )
-    >>> _ = baca.stem_up(baca.select.pleaves(container))
-    >>> rmakers.beam(container)
-    >>> _ = baca.beam_positions(container, 6)
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 4)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         treatments=[-1],
+    ...     )
+    ...     pleaves = baca.select.pleaves(container)
+    ...     baca.stem_up(pleaves)
+    ...     rmakers.beam(container)
+    ...     baca.beam_positions(container, 6)
+    ...     baca.tuplet_bracket_staff_padding(container, 4)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
@@ -143,29 +151,32 @@ overrides.py examples.
 
 ..  container:: example
 
-    Overrides dynamic line spanner staff padding on all leaves:
+    Overrides dynamic line spanner staff padding:
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.dls_staff_padding(container, 4)
-    >>> for tuplet in baca.select.tuplets(container):
-    ...     _ = baca.hairpin(
-    ...         baca.select.tleaves(tuplet),
-    ...         "p < f",
-    ...         remove_length_1_spanner_start=True,
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
     ...     )
+    ...     rmakers.beam(container)
+    ...     baca.dls_staff_padding(container, 4)
+    ...     for tuplet in baca.select.tuplets(container):
+    ...         baca.hairpin(
+    ...             baca.select.tleaves(tuplet),
+    ...             "p < f",
+    ...             remove_length_1_spanner_start=True,
+    ...         )
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
 
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -228,29 +239,32 @@ overrides.py examples.
 
 ..  container:: example
 
-    Up-overrides dynamic line spanner direction on all leaves:
+    Up-overrides dynamic line spanner direction:
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.dls_up(container)
-    >>> for tuplet in baca.select.tuplets(container):
-    ...     _ = baca.hairpin(
-    ...         baca.select.tleaves(tuplet),
-    ...         "p < f",
-    ...         remove_length_1_spanner_start=True,
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
     ...     )
+    ...     rmakers.beam(container)
+    ...     baca.dls_up(container)
+    ...     for tuplet in baca.select.tuplets(container):
+    ...         baca.hairpin(
+    ...             baca.select.tleaves(tuplet),
+    ...             "p < f",
+    ...             remove_length_1_spanner_start=True,
+    ...         )
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
 
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -314,30 +328,35 @@ overrides.py examples.
 
 ..  container:: example
 
-    Overrides dynamic text extra offset on pitched leaf 0:
+    Overrides dynamic text extra offset:
 
     >>> def selector(argument):
     ...     result = abjad.select.tuplet(argument, 1)
     ...     result = baca.select.phead(result, 0)
     ...     return result
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.dynamic(baca.select.pleaf(container, 0), "p")
-    >>> _ = baca.dynamic(selector(container), "f")
-    >>> _ = baca.dynamic_text_extra_offset(
-    ...     baca.select.pleaf(container, 0), (-3, 0))
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.dynamic(baca.select.pleaf(container, 0), "p")
+    ...     baca.dynamic(selector(container), "f")
+    ...     baca.dynamic_text_extra_offset(
+    ...         baca.select.pleaf(container, 0), (-3, 0)
+    ...     )
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -396,18 +415,22 @@ overrides.py examples.
 
     REGRESSION. Coerces X11 color names:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, measures(), docs=True)
-    >>> voice = score["Music"]
-    >>> music = baca.make_mmrests(measures(), head="Music")
-    >>> score["Music"].extend(music)
-    >>> _ = baca.mmrest_color(
-    ...     baca.select.mmrests(voice)[1:],
-    ...     "#(x11-color 'DarkOrchid)",
-    ... )
-    >>> _ = baca.section.postprocess_score(score)
-    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> def make_score():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, measures(), docs=True)
+    ...     voice = score["Music"]
+    ...     music = baca.make_mmrests(measures(), head="Music")
+    ...     score["Music"].extend(music)
+    ...     baca.mmrest_color(
+    ...         baca.select.mmrests(voice)[1:],
+    ...         "#(x11-color 'DarkOrchid)",
+    ...     )
+    ...     baca.section.postprocess_score(score)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     return score
+
+    >>> score = make_score()
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -457,19 +480,23 @@ overrides.py examples.
 
 ..  container:: example
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, measures(), docs=True)
-    >>> voice = score["Music"]
-    >>> music = baca.make_mmrests(measures(), head="Music")
-    >>> score["Music"].extend(music)
-    >>> _ = baca.markup(
-    ...     baca.select.mmrest(voice, 2),
-    ...     r"\baca-boxed-markup still",
-    ... )
-    >>> _ = baca.mmrest_text_color(baca.select.mmrests(voice)[1:], "#red")
-    >>> _ = baca.section.postprocess_score(score)
-    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> def make_score():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, measures(), docs=True)
+    ...     voice = score["Music"]
+    ...     music = baca.make_mmrests(measures(), head="Music")
+    ...     score["Music"].extend(music)
+    ...     baca.markup(
+    ...         baca.select.mmrest(voice, 2),
+    ...         r"\baca-boxed-markup still",
+    ...     )
+    ...     baca.mmrest_text_color(baca.select.mmrests(voice)[1:], "#red")
+    ...     baca.section.postprocess_score(score)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     return score
+
+    >>> score = make_score()
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -520,21 +547,25 @@ overrides.py examples.
 
 ..  container:: example
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, measures(), docs=True)
-    >>> voice = score["Music"]
-    >>> music = baca.make_mmrests(measures(), head="Music")
-    >>> score["Music"].extend(music)
-    >>> _ = baca.markup(
-    ...     baca.select.mmrest(voice, 2),
-    ...     r"\baca-boxed-markup still",
-    ... )
-    >>> _ = baca.mmrest_text_extra_offset(
-    ...     baca.select.mmrests(voice)[1:], (0, 2)
-    ... )
-    >>> _ = baca.section.postprocess_score(score)
-    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> def make_score():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, measures(), docs=True)
+    ...     voice = score["Music"]
+    ...     music = baca.make_mmrests(measures(), head="Music")
+    ...     score["Music"].extend(music)
+    ...     baca.markup(
+    ...         baca.select.mmrest(voice, 2),
+    ...         r"\baca-boxed-markup still",
+    ...     )
+    ...     baca.mmrest_text_extra_offset(
+    ...         baca.select.mmrests(voice)[1:], (0, 2)
+    ...     )
+    ...     baca.section.postprocess_score(score)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     return score
+
+    >>> score = make_score()
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -585,19 +616,23 @@ overrides.py examples.
 
 ..  container:: example
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, measures(), docs=True)
-    >>> voice = score["Music"]
-    >>> music = baca.make_mmrests(measures(), head="Music")
-    >>> score["Music"].extend(music)
-    >>> _ = baca.markup(
-    ...     baca.select.mmrest(voice, 2),
-    ...     r"\baca-boxed-markup still",
-    ... )
-    >>> _ = baca.mmrest_text_padding(baca.select.mmrests(voice)[1:], 2)
-    >>> _ = baca.section.postprocess_score(score)
-    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> def make_score():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, measures(), docs=True)
+    ...     voice = score["Music"]
+    ...     music = baca.make_mmrests(measures(), head="Music")
+    ...     score["Music"].extend(music)
+    ...     baca.markup(
+    ...         baca.select.mmrest(voice, 2),
+    ...         r"\baca-boxed-markup still",
+    ...     )
+    ...     baca.mmrest_text_padding(baca.select.mmrests(voice)[1:], 2)
+    ...     baca.section.postprocess_score(score)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     return score
+
+    >>> score = make_score()
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -648,19 +683,23 @@ overrides.py examples.
 
 ..  container:: example
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, measures(), docs=True)
-    >>> voice = score["Music"]
-    >>> music = baca.make_mmrests(measures(), head="Music")
-    >>> score["Music"].extend(music)
-    >>> _ = baca.markup(
-    ...     baca.select.mmrest(voice, 2),
-    ...     r"\baca-boxed-markup still",
-    ... )
-    >>> _ = baca.mmrest_text_parent_center(baca.select.mmrests(voice)[1:])
-    >>> _ = baca.section.postprocess_score(score)
-    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> def make_score():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, measures(), docs=True)
+    ...     voice = score["Music"]
+    ...     music = baca.make_mmrests(measures(), head="Music")
+    ...     score["Music"].extend(music)
+    ...     baca.markup(
+    ...         baca.select.mmrest(voice, 2),
+    ...         r"\baca-boxed-markup still",
+    ...     )
+    ...     baca.mmrest_text_parent_center(baca.select.mmrests(voice)[1:])
+    ...     baca.section.postprocess_score(score)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     return score
+
+    >>> score = make_score()
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -711,19 +750,23 @@ overrides.py examples.
 
 ..  container:: example
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, measures(), docs=True)
-    >>> voice = score["Music"]
-    >>> music = baca.make_mmrests(measures(), head="Music")
-    >>> score["Music"].extend(music)
-    >>> _ = baca.markup(
-    ...     baca.select.mmrest(voice, 2),
-    ...     r"\baca-boxed-markup still",
-    ... )
-    >>> _ = baca.mmrest_text_staff_padding(baca.select.mmrests(voice)[1:], 2)
-    >>> _ = baca.section.postprocess_score(score)
-    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> def make_score():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, measures(), docs=True)
+    ...     voice = score["Music"]
+    ...     music = baca.make_mmrests(measures(), head="Music")
+    ...     score["Music"].extend(music)
+    ...     baca.markup(
+    ...         baca.select.mmrest(voice, 2),
+    ...         r"\baca-boxed-markup still",
+    ...     )
+    ...     baca.mmrest_text_staff_padding(baca.select.mmrests(voice)[1:], 2)
+    ...     baca.section.postprocess_score(score)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     return score
+
+    >>> score = make_score()
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -774,22 +817,26 @@ overrides.py examples.
 
 ..  container:: example
 
-    Overrides note-head style on all pitched leaves:
+    Overrides note-head style:
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.note_head_style_cross(baca.select.pleaves(container))
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.note_head_style_cross(baca.select.pleaves(container))
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -845,22 +892,26 @@ overrides.py examples.
 
 ..  container:: example
 
-    Overrides note-head style on all PLTs:
+    Overrides note-head style:
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.note_head_style_harmonic(baca.select.pleaves(container))
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.note_head_style_harmonic(baca.select.pleaves(container))
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -916,27 +967,31 @@ overrides.py examples.
 
 ..  container:: example
 
-    Overrides repeat tie direction on pitched leaves:
+    Down-overrides repeat tie direction:
 
-    >>> container = baca.figure(
-    ...     [[11, 11, 12], [11, 11, 11], [11]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> for qrun in baca.select.qruns(container):
-    ...     _ = baca.repeat_tie(qrun[1:])
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[11, 11, 12], [11, 11, 11], [11]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     for qrun in baca.select.qruns(container):
+    ...         baca.repeat_tie(qrun[1:]
+    ...     )
+    ...     pleaves = baca.select.pleaves(container)
+    ...     baca.repeat_tie_down(pleaves)
+    ...     baca.stem_up(pleaves)
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
 
-    >>> pleaves = baca.select.pleaves(container)
-    >>> _ = baca.repeat_tie_down(pleaves)
-    >>> _ = baca.stem_up(pleaves)
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -995,27 +1050,31 @@ overrides.py examples.
 
 ..  container:: example
 
-    Overrides repeat tie direction on all leaves:
+    Up-overrides repeat tie direction:
 
-    >>> container = baca.figure(
-    ...     [[11, 11, 12], [11, 11, 11], [11]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> for qrun in baca.select.qruns(container):
-    ...     _ = baca.repeat_tie(qrun[1:])
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[11, 11, 12], [11, 11, 11], [11]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     for qrun in baca.select.qruns(container):
+    ...         baca.repeat_tie(qrun[1:]
+    ...     )
+    ...     pleaves = baca.select.pleaves(container)
+    ...     baca.repeat_tie_up(pleaves)
+    ...     baca.stem_down(pleaves)
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
 
-    >>> pleaves = baca.select.pleaves(container)
-    >>> _ = baca.repeat_tie_up(pleaves)
-    >>> _ = baca.stem_down(pleaves)
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1076,20 +1135,24 @@ overrides.py examples.
 
     Down-overrides direction of rests:
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.rest_down(abjad.select.rests(container))
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.rest_down(abjad.select.rests(container))
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1147,20 +1210,24 @@ overrides.py examples.
 
     Overrides rest position:
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.rest_staff_position(container, -6)
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.rest_staff_position(container, -6)
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1218,20 +1285,24 @@ overrides.py examples.
 
     Makes rests transparent:
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.rest_transparent(container)
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.rest_transparent(container)
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1289,20 +1360,24 @@ overrides.py examples.
 
     Up-overrides rest direction:
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.rest_up(abjad.select.rests(container))
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.rest_up(abjad.select.rests(container))
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1358,23 +1433,27 @@ overrides.py examples.
 
 ..  container:: example
 
-    Overrides script color on all leaves:
+    Overrides script color:
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.accent(baca.select.pheads(container))
-    >>> _ = baca.script_color(container, "#red")
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.accent(baca.select.pheads(container))
+    ...     baca.script_color(container, "#red")
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1439,23 +1518,27 @@ overrides.py examples.
 
 ..  container:: example
 
-    Down-overrides script direction on all leaves:
+    Down-overrides script direction:
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.accent(baca.select.pheads(container))
-    >>> _ = baca.script_down(container)
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.accent(baca.select.pheads(container))
+    ...     baca.script_down(container)
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1520,23 +1603,27 @@ overrides.py examples.
 
 ..  container:: example
 
-    Overrides script extra offset on leaf 1:
+    Overrides script extra offset:
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.accent(baca.select.pheads(container))
-    >>> _ = baca.script_extra_offset(abjad.select.leaf(container, 1), (-1.5, 0))
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.accent(baca.select.pheads(container))
+    ...     baca.script_extra_offset(abjad.select.leaf(container, 1), (-1.5, 0))
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1600,23 +1687,27 @@ overrides.py examples.
 
 ..  container:: example
 
-    Up-overrides script direction on all leaves:
+    Up-overrides script direction:
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.accent(baca.select.pheads(container))
-    >>> _ = baca.script_up(container)
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.accent(baca.select.pheads(container))
+    ...     baca.script_up(container)
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1684,28 +1775,31 @@ overrides.py examples.
     Overrides slur direction:
 
     >>> def selector(argument):
-    ...     selection = abjad.select.tuplets(argument)
-    ...     items = [baca.select.tleaves(_) for _ in selection]
-    ...     selection = abjad.select.nontrivial(items)
-    ...     return selection
-    ...
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> for item in selector(container):
-    ...     _ = baca.slur(item)
+    ...     tuplets = abjad.select.tuplets(argument)
+    ...     runs = [baca.select.tleaves(_) for _ in tuplets]
+    ...     runs = abjad.select.nontrivial(runs)
+    ...     return runs
 
-    >>> _ = baca.slur_down(container)
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     for item in selector(container):
+    ...         baca.slur(item)
+    ...     baca.slur_down(container)
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1765,34 +1859,36 @@ overrides.py examples.
 
 ..  container:: example
 
-    Up-overrides slur direction on leaves:
+    Up-overrides slur direction:
 
     >>> def selector(argument):
-    ...     selection = abjad.select.tuplets(argument)
-    ...     items = [baca.select.tleaves(_) for _ in selection]
+    ...     tuplets = abjad.select.tuplets(argument)
+    ...     items = [baca.select.tleaves(_) for _ in tuplets]
     ...     selection = abjad.select.nontrivial(items)
     ...     return selection
-    ...
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> for item in selector(container):
-    ...     _ = baca.slur(item)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     for item in selector(container):
+    ...         baca.slur(item)
+    ...     baca.slur_up(container)
+    ...     baca.stem_down(baca.select.pleaves(container))
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     baca.tuplet_bracket_down(container)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
 
-    >>> _ = baca.slur_up(container)
-    >>> _ = baca.stem_down(baca.select.pleaves(container))
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> _ = baca.tuplet_bracket_down(container)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1856,22 +1952,26 @@ overrides.py examples.
 
 ..  container:: example
 
-    Overrides stem color on pitched leaves:
+    Overrides stem color:
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.stem_color(baca.select.pleaves(container), "#red")
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.stem_color(baca.select.pleaves(container), "#red")
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1929,20 +2029,24 @@ overrides.py examples.
 
     Down-overrides stem direction pitched leaves:
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.stem_down(baca.select.pleaves(container))
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.stem_down(baca.select.pleaves(container))
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1998,22 +2102,26 @@ overrides.py examples.
 
 ..  container:: example
 
-    Up-overrides stem direction on pitched leaves:
+    Up-overrides stem direction:
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.stem_up(baca.select.pleaves(container))
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.stem_up(baca.select.pleaves(container))
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -2071,23 +2179,26 @@ overrides.py examples.
 
     Overrides sustain pedal staff padding:
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> for tuplet in baca.select.tuplets(container):
-    ...     _ = baca.sustain_pedal(tuplet)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     for tuplet in baca.select.tuplets(container):
+    ...         baca.sustain_pedal(tuplet)
+    ...     baca.sustain_pedal_staff_padding(container, 4)
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
 
-    >>> _ = baca.sustain_pedal_staff_padding(container, 4)
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -2149,28 +2260,33 @@ overrides.py examples.
 
 ..  container:: example
 
-    Overrides text script color on all leaves:
+    Overrides text script color:
 
     >>> def selector(argument):
     ...     result = abjad.select.tuplet(argument, 1)
     ...     result = baca.select.phead(result, 0)
     ...     return result
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.markup(baca.select.pleaf(container, 0), r'\markup "più mosso"')
-    >>> _ = baca.markup(selector(container), r'\markup "lo stesso tempo"')
-    >>> _ = baca.text_script_color(container, "#red")
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.markup(baca.select.pleaf(container, 0), r'\markup "più mosso"')
+    ...     baca.markup(selector(container), r'\markup "lo stesso tempo"')
+    ...     baca.text_script_color(container, "#red")
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -2228,28 +2344,33 @@ overrides.py examples.
 
 ..  container:: example
 
-    Down-overrides text script direction on leaves:
+    Down-overrides text script direction:
 
     >>> def selector(argument):
     ...     result = abjad.select.tuplet(argument, 1)
     ...     result = baca.select.phead(result, 0)
     ...     return result
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.markup(baca.select.pleaf(container, 0), r'\markup "più mosso"')
-    >>> _ = baca.markup(selector(container), r'\markup "lo stesso tempo"')
-    >>> _ = baca.text_script_down(container)
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.markup(baca.select.pleaf(container, 0), r'\markup "più mosso"')
+    ...     baca.markup(selector(container), r'\markup "lo stesso tempo"')
+    ...     baca.text_script_down(container)
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -2307,28 +2428,33 @@ overrides.py examples.
 
 ..  container:: example
 
-    Overrides text script padding on leaves:
+    Overrides text script padding:
 
     >>> def selector(argument):
     ...     result = abjad.select.tuplet(argument, 1)
     ...     result = baca.select.phead(result, 0)
     ...     return result
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.markup(baca.select.pleaf(container, 0), r'\markup "più mosso"')
-    >>> _ = baca.markup(selector(container), r'\markup "lo stesso tempo"')
-    >>> _ = baca.text_script_padding(container, 4)
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.markup(baca.select.pleaf(container, 0), r'\markup "più mosso"')
+    ...     baca.markup(selector(container), r'\markup "lo stesso tempo"')
+    ...     baca.text_script_padding(container, 4)
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -2386,28 +2512,33 @@ overrides.py examples.
 
 ..  container:: example
 
-    Overrides text script staff padding on leaves:
+    Overrides text script staff padding:
 
     >>> def selector(argument):
     ...     result = abjad.select.tuplet(argument, 1)
     ...     result = baca.select.phead(result, 0)
     ...     return result
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.markup(baca.select.pleaf(container, 0), r'\markup "più mosso"')
-    >>> _ = baca.markup(selector(container), r'\markup "lo stesso tempo"')
-    >>> _ = baca.text_script_staff_padding(container, n=4)
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.markup(baca.select.pleaf(container, 0), r'\markup "più mosso"')
+    ...     baca.markup(selector(container), r'\markup "lo stesso tempo"')
+    ...     baca.text_script_staff_padding(container, n=4)
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -2463,32 +2594,35 @@ overrides.py examples.
             }
         >>
 
-
-
 ..  container:: example
 
-    Up-overrides text script direction on leaves:
+    Up-overrides text script direction:
 
     >>> def selector(argument):
     ...     result = abjad.select.tuplet(argument, 1)
     ...     result = baca.select.phead(result, 0)
     ...     return result
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.markup(baca.select.pleaf(container, 0), r'\markup "più mosso"')
-    >>> _ = baca.markup(selector(container), r'\markup "lo stesso tempo"')
-    >>> _ = baca.text_script_up(container)
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.markup(baca.select.pleaf(container, 0), r'\markup "più mosso"')
+    ...     baca.markup(selector(container), r'\markup "lo stesso tempo"')
+    ...     baca.text_script_up(container)
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -2546,26 +2680,28 @@ overrides.py examples.
 
 ..  container:: example
 
-    Overrides text spanner staff padding on all trimmed leaves:
+    Overrides text spanner staff padding:
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.text_spanner_staff_padding(container, 6)
-    >>> _ = baca.text_script_staff_padding(container, 6)
-    >>> _ = baca.text_spanner(baca.select.tleaves(container), "pont. => ord.")
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(
-    ...     selection, includes=["baca.ily"]
-    ... )
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.text_spanner_staff_padding(container, 6)
+    ...     baca.text_script_staff_padding(container, 6)
+    ...     baca.text_spanner(baca.select.tleaves(container), "pont. => ord.")
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -2630,24 +2766,28 @@ overrides.py examples.
 
 ..  container:: example
 
-    Overrides tie direction on pitched leaves:
+    Down-overrides tie direction:
 
-    >>> container = baca.figure(
-    ...     [[11, 11, 12], [11, 11, 11], [11]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.stem_up(baca.select.pleaves(container))
-    >>> _ = baca.tie(baca.select.pleaf(container, 0))
-    >>> _ = baca.tie_down(baca.select.pleaves(container))
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[11, 11, 12], [11, 11, 11], [11]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.stem_up(baca.select.pleaves(container))
+    ...     baca.tie(baca.select.pleaf(container, 0))
+    ...     baca.tie_down(baca.select.pleaves(container))
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -2702,23 +2842,27 @@ overrides.py examples.
 
 ..  container:: example
 
-    Overrides tie direction on pitched leaves:
+    Up-overrides tie direction:
 
-    >>> container = baca.figure(
-    ...     [[11, 11, 12], [11, 11, 11], [11]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.stem_down(baca.select.pleaves(container))
-    >>> _ = baca.tie_up(baca.select.pleaves(container))
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[11, 11, 12], [11, 11, 11], [11]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.stem_down(baca.select.pleaves(container))
+    ...     baca.tie_up(baca.select.pleaves(container))
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -2772,23 +2916,27 @@ overrides.py examples.
 
 ..  container:: example
 
-    Overrides time signature extra offset on leaf 0:
+    Overrides time signature extra offset:
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.time_signature_extra_offset(
-    ...     abjad.select.rest(container, 0), (-6, 0))
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.time_signature_extra_offset(
+    ...         abjad.select.rest(container, 0), (-6, 0))
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -2845,20 +2993,24 @@ overrides.py examples.
 
     Makes all time signatures transparent:
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.time_signature_transparent(container)
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.time_signature_transparent(container)
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -2914,22 +3066,26 @@ overrides.py examples.
 
 ..  container:: example
 
-    Overrides tuplet bracket direction on leaves:
+    Down-overrides tuplet bracket direction:
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> _ = baca.tuplet_bracket_down(container)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     baca.tuplet_bracket_down(container)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -2985,23 +3141,28 @@ overrides.py examples.
 
 ..  container:: example
 
-    Overrides tuplet bracket extra offset on leaf 0:
+    Overrides tuplet bracket extra offset:
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.tuplet_bracket_extra_offset(
-    ...     abjad.select.leaf(container, 0), (-1, 0))
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.tuplet_bracket_extra_offset(
+    ...         abjad.select.leaf(container, 0), (-1, 0)
+    ...     )
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -3056,21 +3217,25 @@ overrides.py examples.
 
 ..  container:: example
 
-    Overrides tuplet bracket staff padding on leaves:
+    Overrides tuplet bracket staff padding:
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -3124,22 +3289,26 @@ overrides.py examples.
 
 ..  container:: example
 
-    Override tuplet bracket direction on leaves:
+    Up-overrides tuplet bracket direction:
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> _ = baca.tuplet_bracket_up(container)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     baca.tuplet_bracket_up(container)
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -3195,23 +3364,28 @@ overrides.py examples.
 
 ..  container:: example
 
-    Overrides tuplet number extra offset on leaf 0:
+    Overrides tuplet number extra offset:
 
-    >>> container = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> _ = baca.tuplet_number_extra_offset(
-    ...     abjad.select.leaf(container, 0), (-1, 0))
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> def make_score():
+    ...     container = baca.figure(
+    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...         [1, 1, 5, -1],
+    ...         16,
+    ...         affix=baca.rests_around([2], [4]),
+    ...         restart_talea=True,
+    ...         treatments=[-1],
+    ...     )
+    ...     rmakers.beam(container)
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     baca.tuplet_number_extra_offset(
+    ...         abjad.select.leaf(container, 0), (-1, 0)
+    ...     )
+    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.docs.lilypond_file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::

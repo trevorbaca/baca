@@ -78,6 +78,15 @@ def global_context_string():
     return _global_context_string
 
 
+def lilypond_file(score, *, includes=None):
+    lilypond_file = abjad.LilyPondFile()
+    for name in includes or []:
+        lilypond_file.items.append(rf'\include "{name}"')
+    lilypond_file.items.append("")
+    lilypond_file.items.append(score)
+    return lilypond_file
+
+
 def make_empty_score(*counts, do_not_move_global_context=False):
     r"""
     Makes empty score for doc examples.
@@ -243,6 +252,16 @@ def make_empty_score(*counts, do_not_move_global_context=False):
     score = abjad.Score([global_context, music_context], name="Score", tag=tag)
     if not do_not_move_global_context:
         _move_global_context(score)
+    return score
+
+
+def make_single_staff_score(components):
+    duration = abjad.get.duration(components)
+    time_signature = abjad.TimeSignature(duration)
+    leaf = abjad.select.leaf(components, 0)
+    abjad.attach(time_signature, leaf)
+    staff = abjad.Staff(components, name="Staff")
+    score = abjad.Score([staff], name="Score")
     return score
 
 
