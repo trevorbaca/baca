@@ -88,10 +88,7 @@ Examples.
     >>> music = abjad.Container("a4 g f e d c")[:]
     >>> score["Music.2"].extend(music)
     >>> _ = baca.clef(score["Music.2"][0], "bass")
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     color_octaves=True,
-    ... )
+    >>> baca.section.color_octaves(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -159,11 +156,7 @@ Examples.
     >>> voice = score["Music"]
     >>> _ = baca.instrument(voice[0], "clarinet", manifests)
     >>> _ = baca.pitches(voice, "E4 F4")
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     manifests=manifests,
-    ...     transpose_score=True,
-    ... )
+    >>> baca.section.transpose_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -231,11 +224,6 @@ Examples.
     >>> voice = score["Music"]
     >>> _ = baca.instrument(voice[0], "clarinet", manifests)
     >>> _ = baca.pitches(voice, "E4 F4")
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     manifests=manifests,
-    ...     transpose_score=False,
-    ... )
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -321,11 +309,7 @@ Examples.
     >>> score["Music"].extend(figures_)
     >>> voice = score["Music"]
     >>> _ = baca.instrument(voice[0], "Violin", manifests)
-    >>> _ = baca.section.postprocess_score(
-    ...     score,
-    ...     do_not_check_wellformedness=True,
-    ...     manifests=manifests,
-    ... )
+    >>> baca.section.color_out_of_range_pitches(score)
     >>> abjad.setting(score).autoBeaming = False
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
@@ -417,7 +401,7 @@ Examples.
     >>> measures = baca.section.measures(time_signatures)
     >>> baca.section.set_up_score(score, measures(), docs=True)
     >>> score["Music"].extend(figures_)
-    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.section.color_repeat_pitch_classes(score)
     >>> abjad.setting(score).autoBeaming = False
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])

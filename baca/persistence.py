@@ -26,10 +26,8 @@ r"""
         >>> music = baca.make_mmrests(measures(), head="Music")
         >>> voice.extend(music)
         >>> _ = baca.clef(abjad.select.leaf(voice, 0), "treble")
-        >>> _ = baca.section.postprocess_score(
-        ...     score,
-        ...     treat_untreated_persistent_wrappers=True,
-        ... )
+        >>> _ = baca.section.remove_redundant_time_signatures(score["Skips"])
+        >>> baca.section.treat_untreated_persistent_wrappers(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
@@ -73,7 +71,7 @@ r"""
                                 \clef "treble"
                                 \once \override Staff.Clef.color = #(x11-color 'blue)
                                 \set Staff.forceClef = ##t
-                                b'1 * 3/8
+                                c'1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             }
                             \context Voice = "Rests"
@@ -292,10 +290,8 @@ r"""
         >>> voice.extend(music)
         >>> _ = baca.clef(abjad.select.leaf(voice, 0), "treble")
         >>> _ = baca.clef(abjad.select.leaf(voice, 2), "treble")
-        >>> _ = baca.section.postprocess_score(
-        ...     score,
-        ...     treat_untreated_persistent_wrappers=True,
-        ... )
+        >>> _ = baca.section.remove_redundant_time_signatures(score["Skips"])
+        >>> baca.section.treat_untreated_persistent_wrappers(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
@@ -343,7 +339,7 @@ r"""
                                 \clef "treble"
                                 \once \override Staff.Clef.color = #(x11-color 'blue)
                                 \set Staff.forceClef = ##t
-                                b'1 * 3/8
+                                c'1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             }
                             \context Voice = "Rests"
@@ -470,10 +466,8 @@ r"""
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
-        >>> _ = baca.section.postprocess_score(
-        ...     score,
-        ...     treat_untreated_persistent_wrappers=True,
-        ... )
+        >>> _ = baca.section.remove_redundant_time_signatures(score["Skips"])
+        >>> baca.section.treat_untreated_persistent_wrappers(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
@@ -501,11 +495,9 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        \baca-repeat-pitch-class-coloring
                         c'4.
                         - \tweak color #(x11-color 'blue)
                         \f
-                        \baca-repeat-pitch-class-coloring
                         c'4.
                     }
                 >>
@@ -654,10 +646,8 @@ r"""
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), "f")
-        >>> _ = baca.section.postprocess_score(
-        ...     score,
-        ...     treat_untreated_persistent_wrappers=True,
-        ... )
+        >>> _ = baca.section.remove_redundant_time_signatures(score["Skips"])
+        >>> baca.section.treat_untreated_persistent_wrappers(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
@@ -685,11 +675,9 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        \baca-repeat-pitch-class-coloring
                         c'4.
                         - \tweak color #(x11-color 'blue)
                         \f
-                        \baca-repeat-pitch-class-coloring
                         c'4.
                         - \tweak color #(x11-color 'DeepPink1)
                         \f
@@ -773,10 +761,8 @@ r"""
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "sfz")
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), "sfz")
-        >>> _ = baca.section.postprocess_score(
-        ...     score,
-        ...     treat_untreated_persistent_wrappers=True,
-        ... )
+        >>> _ = baca.section.remove_redundant_time_signatures(score["Skips"])
+        >>> baca.section.treat_untreated_persistent_wrappers(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
@@ -804,11 +790,9 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        \baca-repeat-pitch-class-coloring
                         c'4.
                         - \tweak color #(x11-color 'blue)
                         \sfz
-                        \baca-repeat-pitch-class-coloring
                         c'4.
                         - \tweak color #(x11-color 'blue)
                         \sfz
@@ -893,10 +877,8 @@ r"""
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "mf")
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), '"mf"')
-        >>> _ = baca.section.postprocess_score(
-        ...     score,
-        ...     treat_untreated_persistent_wrappers=True,
-        ... )
+        >>> _ = baca.section.remove_redundant_time_signatures(score["Skips"])
+        >>> baca.section.treat_untreated_persistent_wrappers(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
@@ -924,11 +906,9 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        \baca-repeat-pitch-class-coloring
                         c'4.
                         - \tweak color #(x11-color 'blue)
                         \mf
-                        \baca-repeat-pitch-class-coloring
                         c'4.
                         - \tweak color #(x11-color 'blue)
                         \baca-effort-mf
@@ -3250,10 +3230,8 @@ r"""
         >>> wrapper.tag = tag
         >>> _ = baca.staff_lines(voice[0], 1)
         >>> _ = baca.staff_position(voice, 0)
-        >>> metadata = baca.section.postprocess_score(
-        ...     score,
-        ...     treat_untreated_persistent_wrappers=True,
-        ... )
+        >>> _ = baca.section.remove_redundant_time_signatures(score["Skips"])
+        >>> baca.section.treat_untreated_persistent_wrappers(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
@@ -3292,11 +3270,6 @@ r"""
                     }
                 >>
             }
-
-        Persistent overrides also appear in section metadata:
-
-        >>> metadata["persistent_indicators"]
-        {'Score': [baca.Memento(context='Skips', edition=None, manifest=None, prototype='abjad.TimeSignature', synthetic_offset=None, value='3/8')], 'Staff': [baca.Memento(context='Music', edition=None, manifest=None, prototype='baca.PersistentOverride', synthetic_offset=None, value=PersistentOverride(after=False, attribute='bar_extent', context='Staff', grob='BarLine', hide=False, value="#'(0 . 0)")), baca.Memento(context='Music', edition=None, manifest=None, prototype='baca.StaffLines', synthetic_offset=None, value=1), baca.Memento(context='Music', edition=Tag(string='-PARTS'), manifest=None, prototype='baca.BarExtent', synthetic_offset=None, value=1)]}
 
     ..  container:: example
 
@@ -3465,10 +3438,8 @@ r"""
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> _ = baca.staff_lines(voice[0], 5)
-        >>> _ = baca.section.postprocess_score(
-        ...     score,
-        ...     treat_untreated_persistent_wrappers=True,
-        ... )
+        >>> _ = baca.section.remove_redundant_time_signatures(score["Skips"])
+        >>> baca.section.treat_untreated_persistent_wrappers(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
@@ -3496,14 +3467,12 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        \baca-repeat-pitch-class-coloring
                         \override Staff.BarLine.bar-extent = #'(-2 . 2)
                         \stopStaff
                         \once \override Staff.StaffSymbol.line-count = 5
                         \startStaff
                         \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                         c'4.
-                        \baca-repeat-pitch-class-coloring
                         c'4.
                     }
                 >>
@@ -3657,10 +3626,8 @@ r"""
         >>> voice.extend(music)
         >>> _ = baca.staff_lines(voice[0], 5)
         >>> _ = baca.staff_lines(voice[1], 5)
-        >>> _ = baca.section.postprocess_score(
-        ...     score,
-        ...     treat_untreated_persistent_wrappers=True,
-        ... )
+        >>> _ = baca.section.remove_redundant_time_signatures(score["Skips"])
+        >>> baca.section.treat_untreated_persistent_wrappers(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
@@ -3688,14 +3655,12 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        \baca-repeat-pitch-class-coloring
                         \override Staff.BarLine.bar-extent = #'(-2 . 2)
                         \stopStaff
                         \once \override Staff.StaffSymbol.line-count = 5
                         \startStaff
                         \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                         c'4.
-                        \baca-repeat-pitch-class-coloring
                         \override Staff.BarLine.bar-extent = #'(-2 . 2)
                         \stopStaff
                         \once \override Staff.StaffSymbol.line-count = 5

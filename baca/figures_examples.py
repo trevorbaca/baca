@@ -6325,7 +6325,7 @@ figures.py examples.
     >>> accumulator.populate_commands(score)
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
-    >>> _ = baca.section.postprocess_score(score)
+    >>> baca.section.extend_beams(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP

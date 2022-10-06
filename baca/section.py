@@ -1028,42 +1028,6 @@ def _color_not_yet_registered(score):
         abjad.attach(literal, pleaf, tag=tag)
 
 
-def _color_octaves(score):
-    vertical_moments = abjad.iterate_vertical_moments(score)
-    markup = abjad.Markup(r"\markup OCTAVE")
-    bundle = abjad.bundle(markup, r"- \tweak color #red")
-    tag = _tags.function_name(_frame())
-    tag = tag.append(_tags.OCTAVE_COLORING)
-    for vertical_moment in vertical_moments:
-        pleaves, pitches = [], []
-        for leaf in vertical_moment.leaves:
-            if abjad.get.has_indicator(leaf, _enums.HIDDEN):
-                continue
-            if abjad.get.has_indicator(leaf, _enums.STAFF_POSITION):
-                continue
-            if isinstance(leaf, abjad.Note):
-                pleaves.append(leaf)
-                pitches.append(leaf.written_pitch)
-            elif isinstance(leaf, abjad.Chord):
-                pleaves.append(leaf)
-                pitches.extend(leaf.written_pitches)
-        if not pitches:
-            continue
-        pitch_classes = [_.pitch_class for _ in pitches]
-        if _pcollections.has_duplicates([pitch_classes]):
-            color = True
-            for pleaf in pleaves:
-                if abjad.get.has_indicator(pleaf, _enums.ALLOW_OCTAVE):
-                    color = False
-            if not color:
-                continue
-            for pleaf in pleaves:
-                abjad.attach(bundle, pleaf, direction=abjad.UP, tag=tag)
-                string = r"\baca-octave-coloring"
-                literal = abjad.LilyPondLiteral(string, site="before")
-                abjad.attach(literal, pleaf, tag=tag)
-
-
 def _comment_measure_numbers(first_measure_number, offset_to_measure_number, score):
     for leaf in abjad.iterate.leaves(score):
         offset = abjad.get.timespan(leaf).start_offset
@@ -1127,12 +1091,6 @@ def _extend_beam(leaf):
                 abjad.attach(beam_count, next_leaf, "_extend_beam")
             return
         current_leaf = next_leaf
-
-
-def _extend_beams(score):
-    for leaf in abjad.iterate.leaves(score):
-        if abjad.get.indicator(leaf, _enums.RIGHT_BROKEN_BEAM):
-            _extend_beam(leaf)
 
 
 def _find_first_measure_number(previous_metadata):
@@ -1718,24 +1676,6 @@ def _reanalyze_trending_dynamics(manifests, score):
                 _treat.treat_persistent_wrapper(manifests, wrapper, "explicit")
 
 
-def _remove_redundant_time_signatures(append_anchor_skip, global_skips):
-    previous_time_signature = None
-    cached_time_signatures = []
-    skips = _select.skips(global_skips)
-    if append_anchor_skip:
-        assert abjad.get.has_indicator(skips[-1], _enums.ANCHOR_SKIP)
-        skips = skips[:-1]
-    for skip in skips:
-        time_signature = abjad.get.indicator(skip, abjad.TimeSignature)
-        string = f"{time_signature.numerator}/{time_signature.denominator}"
-        cached_time_signatures.append(string)
-        if time_signature == previous_time_signature:
-            abjad.detach(time_signature, skip)
-        else:
-            previous_time_signature = time_signature
-    return cached_time_signatures
-
-
 def _remove_layout_tags(score):
     layout_removal_tags = _tags.layout_removal_tags()
     for leaf in abjad.iterate.leaves(score):
@@ -1999,7 +1939,7 @@ def _style_fermata_measures(
             )
 
 
-def _transpose_score(score):
+def transpose_score(score):
     for pleaf in _select.pleaves(score):
         if abjad.get.has_indicator(pleaf, _enums.DO_NOT_TRANSPOSE):
             continue
@@ -2008,7 +1948,11 @@ def _transpose_score(score):
         abjad.iterpitches.transpose_from_sounding_pitch(pleaf)
 
 
-def _treat_untreated_persistent_wrappers(manifests, score):
+_transpose_score_alias = transpose_score
+
+
+def treat_untreated_persistent_wrappers(score, *, manifests=None):
+    manifests = manifests or {}
     dynamic_prototype = (abjad.Dynamic, abjad.StartHairpin)
     tempo_prototype = (
         _indicatorclasses.Accelerando,
@@ -2038,6 +1982,9 @@ def _treat_untreated_persistent_wrappers(manifests, score):
             else:
                 status = "explicit"
             _treat.treat_persistent_wrapper(manifests, wrapper, status)
+
+
+_treat_untreated_persistent_wrappers_alias = treat_untreated_persistent_wrappers
 
 
 def _update_score_one_time(score):
@@ -2273,6 +2220,28 @@ class Measures:
         return self.time_signatures[start - 1 : stop]
 
 
+class VoiceCache:
+    def __init__(self, score, voice_abbreviations=None):
+        voices = []
+        for voice in abjad.select.components(score, abjad.Voice):
+            if hasattr(self, voice.name):
+                continue
+            voices.append(voice)
+            setattr(self, voice.name, voice)
+            if voice_abbreviations:
+                for abbreviation, voice_name in voice_abbreviations.items():
+                    if voice_name == voice.name:
+                        setattr(self, abbreviation, voice)
+        self._voices = voices
+
+    def __call__(self, abbreviation):
+        voice = getattr(self, abbreviation)
+        return voice
+
+    def __iter__(self):
+        return iter(self._voices)
+
+
 def append_anchor_note(argument, *, runtime=None):
     leaf = abjad.get.leaf(argument, 0)
     parentage = abjad.get.parentage(leaf)
@@ -2397,30 +2366,47 @@ def cache_leaves(score, measure_count, voice_abbreviations=None):
     return voice_name_to_leaves_by_measure
 
 
-class VoiceCache:
-    def __init__(self, score, voice_abbreviations=None):
-        voices = []
-        for voice in abjad.select.components(score, abjad.Voice):
-            if hasattr(self, voice.name):
-                continue
-            voices.append(voice)
-            setattr(self, voice.name, voice)
-            if voice_abbreviations:
-                for abbreviation, voice_name in voice_abbreviations.items():
-                    if voice_name == voice.name:
-                        setattr(self, abbreviation, voice)
-        self._voices = voices
-
-    def __call__(self, abbreviation):
-        voice = getattr(self, abbreviation)
-        return voice
-
-    def __iter__(self):
-        return iter(self._voices)
-
-
 def cache_voices(score, voice_abbreviations=None):
     return VoiceCache(score, voice_abbreviations)
+
+
+def color_octaves(score):
+    vertical_moments = abjad.iterate_vertical_moments(score)
+    markup = abjad.Markup(r"\markup OCTAVE")
+    bundle = abjad.bundle(markup, r"- \tweak color #red")
+    tag = _tags.function_name(_frame())
+    tag = tag.append(_tags.OCTAVE_COLORING)
+    for vertical_moment in vertical_moments:
+        pleaves, pitches = [], []
+        for leaf in vertical_moment.leaves:
+            if abjad.get.has_indicator(leaf, _enums.HIDDEN):
+                continue
+            if abjad.get.has_indicator(leaf, _enums.STAFF_POSITION):
+                continue
+            if isinstance(leaf, abjad.Note):
+                pleaves.append(leaf)
+                pitches.append(leaf.written_pitch)
+            elif isinstance(leaf, abjad.Chord):
+                pleaves.append(leaf)
+                pitches.extend(leaf.written_pitches)
+        if not pitches:
+            continue
+        pitch_classes = [_.pitch_class for _ in pitches]
+        if _pcollections.has_duplicates([pitch_classes]):
+            color = True
+            for pleaf in pleaves:
+                if abjad.get.has_indicator(pleaf, _enums.ALLOW_OCTAVE):
+                    color = False
+            if not color:
+                continue
+            for pleaf in pleaves:
+                abjad.attach(bundle, pleaf, direction=abjad.UP, tag=tag)
+                string = r"\baca-octave-coloring"
+                literal = abjad.LilyPondLiteral(string, site="before")
+                abjad.attach(literal, pleaf, tag=tag)
+
+
+_color_octaves_alias = color_octaves
 
 
 def color_out_of_range_pitches(score):
@@ -2453,6 +2439,12 @@ def color_repeat_pitch_classes(score):
             string = r"\baca-repeat-pitch-class-coloring"
             literal = abjad.LilyPondLiteral(string, site="before")
             abjad.attach(literal, leaf, tag=tag)
+
+
+def extend_beams(score):
+    for leaf in abjad.iterate.leaves(score):
+        if abjad.get.indicator(leaf, _enums.RIGHT_BROKEN_BEAM):
+            _extend_beam(leaf)
 
 
 def get_voice_names(score):
@@ -2872,13 +2864,13 @@ def postprocess_score(
             first_measure_number,
             global_skips,
         )
-        _extend_beams(score)
+        extend_beams(score)
         _attach_sounds_during(score)
         if not first_section:
             _clone_section_initial_short_instrument_name(score)
-        cached_time_signatures = _remove_redundant_time_signatures(
-            append_anchor_skip,
+        cached_time_signatures = remove_redundant_time_signatures(
             global_skips,
+            append_anchor_skip=append_anchor_skip,
         )
         result = _get_fermata_measure_numbers(first_measure_number, score)
         fermata_start_offsets = result[0]
@@ -2889,12 +2881,12 @@ def postprocess_score(
                 _ - first_measure_number + 1 for _ in fermata_measure_numbers
             ]
         if treat_untreated_persistent_wrappers:
-            _treat_untreated_persistent_wrappers(manifests, score)
+            _treat_untreated_persistent_wrappers_alias(score, manifests=manifests)
         _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier)
         _reanalyze_trending_dynamics(manifests, score)
         _reanalyze_reapplied_synthetic_wrappers(score)
         if transpose_score:
-            _transpose_score(score)
+            _transpose_score_alias(score)
         _color_not_yet_registered(score)
         _color_mock_pitch(score)
         _set_intermittent_to_staff_position_zero(score)
@@ -2914,7 +2906,7 @@ def postprocess_score(
             )
         color_repeat_pitch_classes(score)
         if color_octaves:
-            _color_octaves(score)
+            _color_octaves_alias(score)
         _attach_shadow_tie_indicators(score)
         if force_nonnatural_accidentals:
             _force_nonnatural_accidentals(score)
@@ -3057,6 +3049,24 @@ def reapply_persistent_indicators(argument, *, runtime=None):
             already_reapplied_contexts=already_reapplied_contexts,
             do_not_iterate=context,
         )
+
+
+def remove_redundant_time_signatures(global_skips, *, append_anchor_skip=False):
+    previous_time_signature = None
+    cached_time_signatures = []
+    skips = _select.skips(global_skips)
+    if append_anchor_skip:
+        assert abjad.get.has_indicator(skips[-1], _enums.ANCHOR_SKIP)
+        skips = skips[:-1]
+    for skip in skips:
+        time_signature = abjad.get.indicator(skip, abjad.TimeSignature)
+        string = f"{time_signature.numerator}/{time_signature.denominator}"
+        cached_time_signatures.append(string)
+        if time_signature == previous_time_signature:
+            abjad.detach(time_signature, skip)
+        else:
+            previous_time_signature = time_signature
+    return cached_time_signatures
 
 
 def scope(cache):
