@@ -268,6 +268,34 @@ class Tags:
     deactivate: list[abjad.Tag] = dataclasses.field(default_factory=list)
 
 
+def activate(score, *tags):
+    assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
+    for leaf in abjad.iterate.leaves(score):
+        if not isinstance(leaf, abjad.Skip):
+            continue
+        wrappers = abjad.get.wrappers(leaf)
+        for wrapper in wrappers:
+            if wrapper.tag is None:
+                continue
+            for tag in tags:
+                if tag.string in wrapper.tag.words():
+                    wrapper.deactivate = False
+                    break
+
+
+def deactivate(score, *tags):
+    assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
+    for leaf in abjad.iterate.leaves(score):
+        wrappers = abjad.get.wrappers(leaf)
+        for wrapper in wrappers:
+            if wrapper.tag is None:
+                continue
+            for tag in tags:
+                if tag.string in wrapper.tag.words():
+                    wrapper.deactivate = True
+                    break
+
+
 def clef_color_tags(path=None):
     """
     Gets clef color tags.
@@ -395,6 +423,11 @@ def function_name(frame, self=None, *, n=None):
     parts.append(frame.f_code.co_name)
     string = ".".join(parts) + ("()" if n is None else f"({n})")
     return abjad.Tag(string)
+
+
+def handle(score, *, activate_tags=None, deactivate_tags=None):
+    deactivate(score, deactivate_tags)
+    activate(score, activate_tags)
 
 
 def has_persistence_tag(tag):

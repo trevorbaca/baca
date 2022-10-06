@@ -33,23 +33,6 @@ from . import treat as _treat
 from .enums import enums as _enums
 
 
-def _activate_tags(score, tags):
-    if not tags:
-        return
-    assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
-    for leaf in abjad.iterate.leaves(score):
-        if not isinstance(leaf, abjad.Skip):
-            continue
-        wrappers = abjad.get.wrappers(leaf)
-        for wrapper in wrappers:
-            if wrapper.tag is None:
-                continue
-            for tag in tags:
-                if tag.string in wrapper.tag.words():
-                    wrapper.deactivate = False
-                    break
-
-
 def _add_container_identifiers(score, section_number):
     if section_number is not None:
         assert section_number, repr(section_number)
@@ -1098,22 +1081,6 @@ def _comment_measure_numbers(first_measure_number, offset_to_measure_number, sco
             string = f"% [{context.name} measure {local_measure_number}]"
         literal = abjad.LilyPondLiteral(string, site="absolute_before")
         abjad.attach(literal, leaf, tag=_tags.function_name(_frame()))
-
-
-def _deactivate_tags(score, deactivate):
-    if not deactivate:
-        return
-    tags = deactivate
-    assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
-    for leaf in abjad.iterate.leaves(score):
-        wrappers = abjad.get.wrappers(leaf)
-        for wrapper in wrappers:
-            if wrapper.tag is None:
-                continue
-            for tag in tags:
-                if tag.string in wrapper.tag.words():
-                    wrapper.deactivate = True
-                    break
 
 
 def _error_on_not_yet_pitched(score):
@@ -3058,8 +3025,6 @@ def postprocess_score(
     _style_anchor_skip(score)
     _style_anchor_notes(score)
     _check_anchors_are_final(score)
-    _deactivate_tags(score, deactivate)
-    _activate_tags(score, activate)
     return new_metadata
 
 
