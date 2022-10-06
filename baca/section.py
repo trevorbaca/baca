@@ -3017,7 +3017,8 @@ def proxy(mapping):
     return types.MappingProxyType(mapping)
 
 
-def reapply(voices, manifests, previous_persistent_indicators):
+def reapply(voices, previous_persistent_indicators, *, manifests=None):
+    manifests = manifests or {}
     runtime = {
         "already_reapplied_contexts": {"Score"},
         "manifests": manifests,
