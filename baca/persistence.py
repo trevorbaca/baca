@@ -1072,7 +1072,6 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
-        >>> _ = baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Staff"] = [
         ...     baca.Memento(
@@ -1081,7 +1080,12 @@ r"""
         ...         value="Piccolo",
         ...     )
         ... ]
-        >>> # TODO: reapply here
+        >>> baca.section.reapply(
+        ...     voice,
+        ...     previous_persistent_indicators,
+        ...     manifests=manifests,
+        ... )
+        >>> _ = baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
         >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     manifests=manifests,
@@ -1913,7 +1917,11 @@ r"""
         ...         value="I+II",
         ...     )
         ... ]
-        >>> # TODO: reapply here
+        >>> baca.section.reapply(
+        ...     voice,
+        ...     previous_persistent_indicators,
+        ...     manifests=manifests,
+        ... )
         >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     manifests=manifests,
@@ -2817,7 +2825,11 @@ r"""
         ...         value="90",
         ...     )
         ... ]
-        >>> # TODO: reapply here
+        >>> baca.section.reapply(
+        ...     voice,
+        ...     previous_persistent_indicators,
+        ...     manifests=manifests,
+        ... )
         >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     manifests=manifests,
@@ -2901,7 +2913,6 @@ r"""
         ...     measures(),
         ...     docs=True,
         ...     manifests={"abjad.MetronomeMark": metronome_marks},
-        ...     # TODO: use reapply() instead?
         ...     previous_persistent_indicators=previous_persistent_indicators,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
@@ -2909,11 +2920,6 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
-        >>> baca.section.reapply(
-        ...     voice,
-        ...     previous_persistent_indicators,
-        ...     manifests=manifests,
-        ... )
         >>> _ = baca.text_spanner_staff_padding(score["Skips"], 4)
         >>> _ = baca.section.postprocess_score(
         ...     score,
@@ -3096,7 +3102,6 @@ r"""
         >>> baca.section.reapply(voice, previous_persistent_indicators)
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     append_anchor_skip=True,
         ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
