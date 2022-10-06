@@ -509,7 +509,6 @@ r"""
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "p")
-        >>> metadata, persist = {}, {}
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Music"] = [
         ...     baca.Memento(
@@ -518,7 +517,7 @@ r"""
         ...         value="f",
         ...     )
         ... ]
-        >>> # TODO: reapply here
+        >>> baca.section.reapply(score, previous_persistent_indicators)
         >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     treat_untreated_persistent_wrappers=True,
@@ -571,7 +570,6 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
-        >>> metadata, persist = {}, {}
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Music"] = [
         ...     baca.Memento(
@@ -683,7 +681,6 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
-        >>> metadata, persist = {}, {}
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Music"] = [
         ...     baca.Memento(
@@ -795,7 +792,6 @@ r"""
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "sfz")
-        >>> metadata, persist = {}, {}
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Music"] = [
         ...     baca.Memento(
@@ -804,7 +800,7 @@ r"""
         ...         value="sfz",
         ...     )
         ... ]
-        >>> # TODO: reapply here
+        >>> baca.section.reapply(score, previous_persistent_indicators)
         >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     treat_untreated_persistent_wrappers=True,
@@ -1077,7 +1073,6 @@ r"""
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> _ = baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
-        >>> metadata, persist = {}, {}
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Staff"] = [
         ...     baca.Memento(
@@ -1233,7 +1228,6 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
-        >>> metadata, persist = {}, {}
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Staff"] = [
         ...     baca.Memento(
@@ -1573,7 +1567,6 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
-        >>> metadata, persist = {}, {}
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Staff"] = [
         ...     baca.Memento(
@@ -1912,7 +1905,6 @@ r"""
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> _ = baca.short_instrument_name(voice[0], "III+IV", manifests)
-        >>> metadata, persist = {}, {}
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Staff"] = [
         ...     baca.Memento(
@@ -2080,7 +2072,6 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
-        >>> metadata, persist = {}, {}
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Staff"] = [
         ...     baca.Memento(
@@ -2451,7 +2442,6 @@ r"""
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
 
-        >>> metadata, persist = {}, {}
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Staff"] = [
         ...     baca.Memento(
@@ -2819,7 +2809,6 @@ r"""
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> baca.section.append_anchor_note(voice)
-        >>> metadata, persist = {}, {}
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Score"] = [
         ...     baca.Memento(
@@ -2831,7 +2820,6 @@ r"""
         >>> # TODO: reapply here
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     append_anchor_skip=True,
         ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -2898,7 +2886,6 @@ r"""
 
         Reapplied metronome marks color green:
 
-        >>> metadata, persist = {}, {}
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Score"] = [
         ...     baca.Memento(
@@ -3076,7 +3063,6 @@ r"""
 
         Even at the beginning of a section:
 
-        >>> metadata, persist = {}, {}
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Score"] = [
         ...     baca.Memento(
@@ -3251,7 +3237,6 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
-        >>> metadata, persist = {}, {}
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Music"] = [
         ...     baca.Memento(
@@ -3332,7 +3317,6 @@ r"""
         ...     abjad.select.leaf(voice, 0),
         ...     tag=tag,
         ... )
-        >>> metadata, persist = {}, {}
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Music"] = [
         ...     baca.Memento(
@@ -3347,7 +3331,7 @@ r"""
         ...         ),
         ...     )
         ... ]
-        >>> # TODO: reapply here
+        >>> baca.section.reapply(score, previous_persistent_indicators)
         >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     treat_untreated_persistent_wrappers=True,
@@ -3454,7 +3438,6 @@ r"""
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> _ = baca.staff_lines(voice[0], 1)
-        >>> metadata, persist = {}, {}
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Staff"] = [
         ...     baca.Memento(
@@ -3463,7 +3446,7 @@ r"""
         ...         value=5,
         ...     )
         ... ]
-        >>> # TODO: reapply here
+        >>> baca.section.reapply(score, previous_persistent_indicators)
         >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     treat_untreated_persistent_wrappers=True,
@@ -3519,7 +3502,6 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
-        >>> metadata, persist = {}, {}
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Staff"] = [
         ...     baca.Memento(
@@ -3643,8 +3625,6 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
-
-        >>> metadata, persist = {}, {}
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Staff"] = [
         ...     baca.Memento(
@@ -3817,7 +3797,6 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
-        >>> metadata, persist = {}, {}
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Score"] = [
         ...     baca.Memento(
@@ -3825,7 +3804,7 @@ r"""
         ...         prototype="baca.Ritardando",
         ...     )
         ... ]
-        >>> # TODO: reapply here?
+        >>> baca.section.reapply(score, previous_persistent_indicators)
         >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     treat_untreated_persistent_wrappers=True,
