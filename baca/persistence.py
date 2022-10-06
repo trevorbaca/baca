@@ -86,6 +86,19 @@ r"""
 
         Even after a previous clef:
 
+        >>> def make_previous_metadata():
+        ...     previous_metadata = {}
+        ...     persistent_indicators = {}
+        ...     persistent_indicators["Staff"] = [
+        ...         baca.Memento(
+        ...             context="Music",
+        ...             prototype="abjad.Clef",
+        ...             value="treble",
+        ...         )
+        ...     ]
+        ...     previous_metadata["persistent_indicators"] = persistent_indicators
+        ...     return previous_metadata
+
         >>> score = baca.docs.make_empty_score(1)
         >>> breaks = baca.breaks(
         ...     baca.page(
@@ -101,24 +114,11 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_mmrests(measures(), head="Music")
         >>> voice.extend(music)
+        >>> previous_metadata = make_previous_metadata()
+        >>> baca.section.reapply(voice, {}, previous_metadata["persistent_indicators"])
         >>> _ = baca.clef(abjad.select.leaf(voice, 0), "alto")
-        >>> metadata, persist = {}, {}
-        >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]["Staff"] = [
-        ...     baca.Memento(
-        ...         context="Music",
-        ...         prototype="abjad.Clef",
-        ...         value="treble",
-        ...     )
-        ... ]
-        >>> metadata = metadata | persist
-        >>> _ = baca.section.postprocess_score(
-        ...     score,
-        ...     environment=baca.build.Environment(
-        ...         previous_metadata=metadata,
-        ...     ),
-        ...     treat_untreated_persistent_wrappers=True,
-        ... )
+        >>> _ = baca.section.remove_redundant_time_signatures(score["Skips"])
+        >>> baca.section.treat_untreated_persistent_wrappers(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
@@ -194,22 +194,17 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_mmrests(measures(), head="Music")
         >>> voice.extend(music)
-        >>> metadata, persist = {}, {}
-        >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]["Staff"] = [
+        >>> previous_persistent_indicators = {}
+        >>> previous_persistent_indicators["Staff"] = [
         ...     baca.Memento(
         ...         context="Music",
         ...         prototype="abjad.Clef",
         ...         value="treble",
         ...     )
         ... ]
-        >>> metadata = metadata | persist
-        >>> baca.section.reapply(voice, {}, persist["persistent_indicators"])
+        >>> baca.section.reapply(voice, {}, previous_persistent_indicators)
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     environment=baca.build.Environment(
-        ...         previous_metadata=metadata,
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -359,6 +354,19 @@ r"""
 
         Even at the beginning of a section:
 
+        >>> def make_previous_metadata():
+        ...     previous_metadata = {}
+        ...     persistent_indicators = {}
+        ...     persistent_indicators["Staff"] = [
+        ...         baca.Memento(
+        ...             context="Music",
+        ...             prototype="abjad.Clef",
+        ...             value="treble",
+        ...         )
+        ...     ]
+        ...     previous_metadata["persistent_indicators"] = persistent_indicators
+        ...     return baca.section.proxy(previous_metadata)
+
         >>> score = baca.docs.make_empty_score(1)
         >>> breaks = baca.breaks(
         ...     baca.page(
@@ -374,23 +382,11 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_mmrests(measures(), head="Music")
         >>> voice.extend(music)
-        >>> metadata, persist = {}, {}
-        >>> persist["persistent_indicators"] = {}
-        >>> persist["persistent_indicators"]["Staff"] = [
-        ...     baca.Memento(
-        ...         context="Music",
-        ...         prototype="abjad.Clef",
-        ...         value="treble",
-        ...     )
-        ... ]
-        >>> metadata = metadata | persist
-        >>> baca.section.reapply(voice, {}, persist["persistent_indicators"])
+        >>> previous_metadata = make_previous_metadata()
+        >>> baca.section.reapply(voice, {}, previous_metadata["persistent_indicators"])
         >>> _ = baca.clef(abjad.select.leaf(voice, 0), "treble")
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     environment=baca.build.Environment(
-        ...         previous_metadata=metadata,
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -523,11 +519,9 @@ r"""
         ...     )
         ... ]
         >>> metadata = metadata | persist
+        >>> # TODO: reapply here
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     environment=baca.build.Environment(
-        ...         previous_metadata=metadata,
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -591,9 +585,6 @@ r"""
         >>> baca.section.reapply(voice, {}, persist["persistent_indicators"])
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     environment=baca.build.Environment(
-        ...         previous_metadata=metadata,
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -708,9 +699,6 @@ r"""
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     environment=baca.build.Environment(
-        ...         previous_metadata=metadata,
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -820,11 +808,9 @@ r"""
         ...     )
         ... ]
         >>> metadata = metadata | persist
+        >>> # TODO: reapply here
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     environment=baca.build.Environment(
-        ...         previous_metadata=metadata,
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -1105,11 +1091,9 @@ r"""
         ...     )
         ... ]
         >>> metadata = metadata | persist
+        >>> # TODO: reapply here
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     environment=baca.build.Environment(
-        ...         previous_metadata=metadata,
-        ...     ),
         ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -1267,9 +1251,6 @@ r"""
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     environment=baca.build.Environment(
-        ...         previous_metadata=metadata,
-        ...     ),
         ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -1608,9 +1589,6 @@ r"""
         >>> _ = baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     environment=baca.build.Environment(
-        ...         previous_metadata=metadata,
-        ...     ),
         ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -1933,7 +1911,6 @@ r"""
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> _ = baca.short_instrument_name(voice[0], "III+IV", manifests)
-
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Staff"] = [
@@ -1944,11 +1921,9 @@ r"""
         ...     )
         ... ]
         >>> metadata = metadata | persist
+        >>> # TODO: reapply here
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     environment=baca.build.Environment(
-        ...         previous_metadata=metadata,
-        ...     ),
         ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -2118,9 +2093,6 @@ r"""
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     environment=baca.build.Environment(
-        ...         previous_metadata=metadata,
-        ...     ),
         ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -2490,9 +2462,6 @@ r"""
         >>> _ = baca.short_instrument_name(voice[0], "I+II", manifests)
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     environment=baca.build.Environment(
-        ...         previous_metadata=metadata,
-        ...     ),
         ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -2656,7 +2625,7 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
-        >>> wrappers = baca.short_instrument_name(voice[0], "I+II", manifests)
+        >>> _ = baca.short_instrument_name(voice[0], "I+II", manifests)
         >>> wrappers = baca.short_instrument_name(voice[0], "III+IV", manifests)
         >>> for wrapper in wrappers:
         ...     wrapper.deactivate = True
@@ -2750,7 +2719,7 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
-        >>> wrappers = baca.metronome_mark(
+        >>> _ = baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
         ...     {},
@@ -2834,17 +2803,16 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
-        >>> wrappers = baca.metronome_mark(
+        >>> _ = baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
         ...     {},
         ... )
-        >>> wrappers = baca.text_spanner_staff_padding(score["Skips"][:-1], 4)
+        >>> _ = baca.text_spanner_staff_padding(score["Skips"][:-1], 4)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> baca.section.append_anchor_note(voice)
-
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Score"] = [
@@ -2855,12 +2823,10 @@ r"""
         ...     )
         ... ]
         >>> metadata = metadata | persist
+        >>> # TODO: reapply here
         >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     append_anchor_skip=True,
-        ...     environment=baca.build.Environment(
-        ...         previous_metadata=metadata,
-        ...     ),
         ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -2944,6 +2910,7 @@ r"""
         ...     measures(),
         ...     docs=True,
         ...     manifests={"abjad.MetronomeMark": metronome_marks},
+        ...     # TODO: use reapply() instead?
         ...     previous_persistent_indicators=persist["persistent_indicators"],
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
@@ -2952,12 +2919,9 @@ r"""
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
-        >>> wrappers = baca.text_spanner_staff_padding(score["Skips"], 4)
+        >>> _ = baca.text_spanner_staff_padding(score["Skips"], 4)
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     environment=baca.build.Environment(
-        ...         previous_metadata=metadata,
-        ...     ),
         ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -3021,12 +2985,12 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
-        >>> wrappers = baca.metronome_mark(
+        >>> _ = baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
         ...     {},
         ... )
-        >>> wrappers = baca.metronome_mark(
+        >>> _ = baca.metronome_mark(
         ...     score["Skips"][2 - 1],
         ...     metronome_marks["112"],
         ...     {},
@@ -3125,12 +3089,12 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
-        >>> wrappers = baca.metronome_mark(
+        >>> _ = baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
         ...     {},
         ... )
-        >>> wrappers = baca.text_spanner_staff_padding(score["Skips"][:-1], 4)
+        >>> _ = baca.text_spanner_staff_padding(score["Skips"][:-1], 4)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
@@ -3139,9 +3103,6 @@ r"""
         >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     append_anchor_skip=True,
-        ...     environment=baca.build.Environment(
-        ...         previous_metadata=metadata,
-        ...     ),
         ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
@@ -3301,9 +3262,6 @@ r"""
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     environment=baca.build.Environment(
-        ...         previous_metadata=metadata,
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -3379,11 +3337,9 @@ r"""
         ...     )
         ... ]
         >>> metadata = metadata | persist
+        >>> # TODO: reapply here
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     environment=baca.build.Environment(
-        ...         previous_metadata=metadata,
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -3498,11 +3454,9 @@ r"""
         ...     )
         ... ]
         >>> metadata = metadata | persist
+        >>> # TODO: reapply here
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     environment=baca.build.Environment(
-        ...         previous_metadata=metadata,
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -3569,9 +3523,6 @@ r"""
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     environment=baca.build.Environment(
-        ...         previous_metadata=metadata,
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -3695,9 +3646,6 @@ r"""
         >>> _ = baca.staff_lines(voice[0], 5)
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     environment=baca.build.Environment(
-        ...         previous_metadata=metadata,
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -3770,7 +3718,7 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
-        >>> wrappers = baca.metronome_mark(
+        >>> _ = baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
         ...     {},
@@ -3849,16 +3797,15 @@ r"""
         >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
-        >>> wrappers = baca.metronome_mark(
+        >>> _ = baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
         ...     {},
         ... )
-        >>> wrappers = baca.text_spanner_staff_padding(score["Skips"], 4)
+        >>> _ = baca.text_spanner_staff_padding(score["Skips"], 4)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
-
         >>> metadata, persist = {}, {}
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Score"] = [
@@ -3868,11 +3815,9 @@ r"""
         ...     )
         ... ]
         >>> metadata = metadata | persist
+        >>> # TODO: reapply here?
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     environment=baca.build.Environment(
-        ...         previous_metadata=metadata,
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -3925,7 +3870,7 @@ r"""
 
         Reapplied tempo trends color green:
 
-        >>> metadata, persist = {}, {}
+        >>> persist = {}
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Score"] = [
         ...     baca.Memento(
@@ -3933,7 +3878,6 @@ r"""
         ...         prototype="baca.Accelerando",
         ...     )
         ... ]
-        >>> metadata = metadata | persist
         >>> score = baca.docs.make_empty_score(1)
         >>> measures = baca.section.measures([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(
@@ -3948,12 +3892,9 @@ r"""
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
-        >>> wrappers = baca.text_spanner_staff_padding(score["Skips"], 4)
+        >>> _ = baca.text_spanner_staff_padding(score["Skips"], 4)
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     environment=baca.build.Environment(
-        ...         previous_metadata=metadata,
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -4011,12 +3952,12 @@ r"""
         >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
-        >>> wrappers = baca.metronome_mark(
+        >>> _ = baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
         ...     {},
         ... )
-        >>> wrappers = baca.metronome_mark(
+        >>> _ = baca.metronome_mark(
         ...     score["Skips"][2 - 1],
         ...     baca.Accelerando(),
         ...     {},
@@ -4083,7 +4024,7 @@ r"""
 
         Even at the beginning of a section:
 
-        >>> metadata, persist = {}, {}
+        >>> persist = {}
         >>> persist["persistent_indicators"] = {}
         >>> persist["persistent_indicators"]["Score"] = [
         ...     baca.Memento(
@@ -4091,7 +4032,6 @@ r"""
         ...         prototype="baca.Accelerando",
         ...     )
         ... ]
-        >>> metadata = metadata | persist
         >>> score = baca.docs.make_empty_score(1)
         >>> measures = baca.section.measures([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(
@@ -4102,21 +4042,18 @@ r"""
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
-        >>> wrappers = baca.metronome_mark(
+        >>> _ = baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
         ...     {},
         ... )
-        >>> wrappers = baca.text_spanner_staff_padding(score["Skips"], 4)
+        >>> _ = baca.text_spanner_staff_padding(score["Skips"], 4)
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> baca.section.reapply(voice, manifests, persist["persistent_indicators"])
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     environment=baca.build.Environment(
-        ...         previous_metadata=metadata,
-        ...     ),
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
