@@ -757,8 +757,9 @@ def markup(
 def metronome_mark(
     argument,
     indicator,
-    manifests,
+    manifests=None,
 ) -> list[abjad.Wrapper]:
+    manifests = manifests or {}
     if isinstance(indicator, str):
         indicator_ = manifests["abjad.MetronomeMark"][indicator]
     else:

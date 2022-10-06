@@ -2590,7 +2590,6 @@ r"""
         >>> _ = baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
-        ...     {},
         ... )
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
@@ -2673,7 +2672,6 @@ r"""
         >>> _ = baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
-        ...     {},
         ... )
         >>> _ = baca.text_spanner_staff_padding(score["Skips"][:-1], 4)
         >>> voice = score["Music"]
@@ -2852,12 +2850,10 @@ r"""
         >>> _ = baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
-        ...     {},
         ... )
         >>> _ = baca.metronome_mark(
         ...     score["Skips"][2 - 1],
         ...     metronome_marks["112"],
-        ...     {},
         ... )
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
@@ -2955,7 +2951,6 @@ r"""
         >>> _ = baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     metronome_marks["112"],
-        ...     {},
         ... )
         >>> _ = baca.text_spanner_staff_padding(score["Skips"][:-1], 4)
         >>> voice = score["Music"]
@@ -3560,7 +3555,6 @@ r"""
         >>> _ = baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
-        ...     {},
         ... )
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
@@ -3638,7 +3632,6 @@ r"""
         >>> _ = baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
-        ...     {},
         ... )
         >>> _ = baca.text_spanner_staff_padding(score["Skips"], 4)
         >>> voice = score["Music"]
@@ -3795,12 +3788,10 @@ r"""
         >>> _ = baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
-        ...     {},
         ... )
         >>> _ = baca.metronome_mark(
         ...     score["Skips"][2 - 1],
         ...     baca.Accelerando(),
-        ...     {},
         ... )
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
@@ -3885,7 +3876,6 @@ r"""
         >>> _ = baca.metronome_mark(
         ...     score["Skips"][1 - 1],
         ...     baca.Accelerando(),
-        ...     {},
         ... )
         >>> _ = baca.text_spanner_staff_padding(score["Skips"], 4)
         >>> voice = score["Music"]
