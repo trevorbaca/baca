@@ -2807,16 +2807,13 @@ def postprocess_score(
     force_nonnatural_accidentals=False,
     global_rests_in_every_staff=False,
     global_rests_in_topmost_staff=False,
-    instruments=None,
     label_clock_time=False,
     magnify_staves=None,
     manifests=None,
-    metronome_marks=None,
     part_manifest=None,
     parts_metric_modulation_multiplier=None,
     section_number=None,
     shift_measure_initial_clefs=False,
-    short_instrument_names=None,
     tags: _tags.Tags = None,
     transpose_score=False,
     treat_untreated_persistent_wrappers=False,
@@ -2861,11 +2858,7 @@ def postprocess_score(
     assert isinstance(first_section, bool)
     assert isinstance(force_nonnatural_accidentals, bool)
     global_skips = score["Skips"]
-    manifests = manifests or {
-        "abjad.Instrument": instruments,
-        "abjad.MetronomeMark": metronome_marks,
-        "abjad.ShortInstrumentName": short_instrument_names,
-    }
+    manifests = manifests or {}
     measure_count = len(time_signatures)
     if parts_metric_modulation_multiplier is not None:
         assert isinstance(parts_metric_modulation_multiplier, tuple)

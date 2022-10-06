@@ -20,7 +20,6 @@ commands.py examles
     ... )
     >>> _ = baca.pitches(voice, "E4 F4")
     >>> _ = baca.script_staff_padding(voice, 5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -188,7 +187,6 @@ commands.py examles
     >>> _ = baca.pitches(voice, "E4 F4")
     >>> _ = baca.script_staff_padding(voice, 5.5)
     >>> _ = baca.text_spanner_staff_padding(voice, 2.5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -399,7 +397,6 @@ commands.py examles
     >>> _ = baca.dynamic(pleaf, "<")
     >>> _ = baca.dynamic(baca.select.pleaf(voice, -1), "!")
     >>> _ = baca.dls_staff_padding(voice, 5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -432,7 +429,6 @@ commands.py examles
                 {
                     \override DynamicLineSpanner.staff-padding = 5
                     e'8
-                    - \tweak color #(x11-color 'blue)
                     \p
                     [
                     \<
@@ -480,7 +476,6 @@ commands.py examles
     ...     abjad.Tweak(r"- \tweak extra-offset #'(-4 . 0)"),
     ... )
     >>> _ = baca.dls_staff_padding(voice, 5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -555,7 +550,6 @@ commands.py examles
     >>> baca.force_accidental(
     ...     baca.select.pleaves(voice)[:2], tag=baca.tags.NOT_PARTS
     ... )
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -611,7 +605,7 @@ commands.py examles
     >>> _ = baca.section.postprocess_score(
     ...     score,
     ...     first_section=True,
-    ...     short_instrument_names=short_instrument_names,
+    ...     manifests=manifests,
     ... )
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
@@ -1099,7 +1093,6 @@ commands.py examles
     >>> music = abjad.Container("c'4 d' e' f'")[:]
     >>> score["Music.2"].extend(music)
     >>> _ = baca.cross_staff(baca.select.pleaves(score["Music.2"])[-2:])
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1159,7 +1152,6 @@ commands.py examles
     >>> _ = baca.note_head_style_harmonic(notes[2])
     >>> baca.finger_pressure_transition(notes[:2])
     >>> baca.finger_pressure_transition(notes[2:])
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1224,7 +1216,6 @@ commands.py examles
     ...     voice,
     ...     abjad.Tweak(r"- \tweak color #red"),
     ... )
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1318,7 +1309,6 @@ commands.py examles
     ...     (abjad.Tweak(r"- \tweak color #red"), 0),
     ...     (abjad.Tweak(r"- \tweak color #red"), -1),
     ... )
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1398,7 +1388,6 @@ commands.py examles
     >>> voice = score["Music"]
     >>> _ = baca.pitch(voice, "C5")
     >>> _ = baca.invisible_music(baca.select.leaves(voice)[1:-1])
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1528,7 +1517,6 @@ commands.py examles
     >>> voice = score["Music"]
     >>> _ = baca.assign_part(voice, baca.parts.PartAssignment("Music"))
     >>> _ = baca.pitch(voice, "E4")
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score)
     >>> abjad.show(lilypond_file) # doctest: +SKIP

@@ -24,7 +24,6 @@ overrides.py examples.
     ...     baca.bar_line_transparent(
     ...             abjad.select.group_by_measure(voice)[1]
     ...     )
-    ...     baca.section.postprocess_score(score)
     ...     baca.docs.remove_deactivated_wrappers(score)
     ...     return score
 
@@ -426,7 +425,6 @@ overrides.py examples.
     ...         baca.select.mmrests(voice)[1:],
     ...         "#(x11-color 'DarkOrchid)",
     ...     )
-    ...     baca.section.postprocess_score(score)
     ...     baca.docs.remove_deactivated_wrappers(score)
     ...     return score
 
@@ -462,7 +460,7 @@ overrides.py examples.
                             \abjad-invisible-music-coloring
                             \once \override Accidental.stencil = ##f
                             \once \override NoteColumn.ignore-collision = ##t
-                            b'1 * 4/8
+                            c'1 * 4/8
                         }
                         \context Voice = "Rests"
                         {
@@ -492,7 +490,6 @@ overrides.py examples.
     ...         r"\baca-boxed-markup still",
     ...     )
     ...     baca.mmrest_text_color(baca.select.mmrests(voice)[1:], "#red")
-    ...     baca.section.postprocess_score(score)
     ...     baca.docs.remove_deactivated_wrappers(score)
     ...     return score
 
@@ -528,7 +525,7 @@ overrides.py examples.
                             \abjad-invisible-music-coloring
                             \once \override Accidental.stencil = ##f
                             \once \override NoteColumn.ignore-collision = ##t
-                            b'1 * 4/8
+                            c'1 * 4/8
                         }
                         \context Voice = "Rests"
                         {
@@ -561,7 +558,6 @@ overrides.py examples.
     ...     baca.mmrest_text_extra_offset(
     ...         baca.select.mmrests(voice)[1:], (0, 2)
     ...     )
-    ...     baca.section.postprocess_score(score)
     ...     baca.docs.remove_deactivated_wrappers(score)
     ...     return score
 
@@ -597,7 +593,7 @@ overrides.py examples.
                             \abjad-invisible-music-coloring
                             \once \override Accidental.stencil = ##f
                             \once \override NoteColumn.ignore-collision = ##t
-                            b'1 * 4/8
+                            c'1 * 4/8
                         }
                         \context Voice = "Rests"
                         {
@@ -628,7 +624,6 @@ overrides.py examples.
     ...         r"\baca-boxed-markup still",
     ...     )
     ...     baca.mmrest_text_padding(baca.select.mmrests(voice)[1:], 2)
-    ...     baca.section.postprocess_score(score)
     ...     baca.docs.remove_deactivated_wrappers(score)
     ...     return score
 
@@ -664,7 +659,7 @@ overrides.py examples.
                             \abjad-invisible-music-coloring
                             \once \override Accidental.stencil = ##f
                             \once \override NoteColumn.ignore-collision = ##t
-                            b'1 * 4/8
+                            c'1 * 4/8
                         }
                         \context Voice = "Rests"
                         {
@@ -695,7 +690,6 @@ overrides.py examples.
     ...         r"\baca-boxed-markup still",
     ...     )
     ...     baca.mmrest_text_parent_center(baca.select.mmrests(voice)[1:])
-    ...     baca.section.postprocess_score(score)
     ...     baca.docs.remove_deactivated_wrappers(score)
     ...     return score
 
@@ -731,7 +725,7 @@ overrides.py examples.
                             \abjad-invisible-music-coloring
                             \once \override Accidental.stencil = ##f
                             \once \override NoteColumn.ignore-collision = ##t
-                            b'1 * 4/8
+                            c'1 * 4/8
                         }
                         \context Voice = "Rests"
                         {
@@ -762,7 +756,6 @@ overrides.py examples.
     ...         r"\baca-boxed-markup still",
     ...     )
     ...     baca.mmrest_text_staff_padding(baca.select.mmrests(voice)[1:], 2)
-    ...     baca.section.postprocess_score(score)
     ...     baca.docs.remove_deactivated_wrappers(score)
     ...     return score
 
@@ -798,7 +791,7 @@ overrides.py examples.
                             \abjad-invisible-music-coloring
                             \once \override Accidental.stencil = ##f
                             \once \override NoteColumn.ignore-collision = ##t
-                            b'1 * 4/8
+                            c'1 * 4/8
                         }
                         \context Voice = "Rests"
                         {

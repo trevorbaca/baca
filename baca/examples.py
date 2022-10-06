@@ -10,7 +10,6 @@ Examples.
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> abjad.label.with_indices(voice)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -37,53 +36,39 @@ Examples.
                 }
                 \context Voice = "Music"
                 {
-                    \baca-repeat-pitch-class-coloring
                     c'8
                     ^ \markup 0
                     [
-                    \baca-repeat-pitch-class-coloring
                     c'8
                     ^ \markup 1
-                    \baca-repeat-pitch-class-coloring
                     c'8
                     ^ \markup 2
-                    \baca-repeat-pitch-class-coloring
                     c'8
                     ^ \markup 3
                     ]
-                    \baca-repeat-pitch-class-coloring
                     c'8
                     ^ \markup 4
                     [
-                    \baca-repeat-pitch-class-coloring
                     c'8
                     ^ \markup 5
-                    \baca-repeat-pitch-class-coloring
                     c'8
                     ^ \markup 6
                     ]
-                    \baca-repeat-pitch-class-coloring
                     c'8
                     ^ \markup 7
                     [
-                    \baca-repeat-pitch-class-coloring
                     c'8
                     ^ \markup 8
-                    \baca-repeat-pitch-class-coloring
                     c'8
                     ^ \markup 9
-                    \baca-repeat-pitch-class-coloring
                     c'8
                     ^ \markup 10
                     ]
-                    \baca-repeat-pitch-class-coloring
                     c'8
                     ^ \markup 11
                     [
-                    \baca-repeat-pitch-class-coloring
                     c'8
                     ^ \markup 12
-                    \baca-repeat-pitch-class-coloring
                     c'8
                     ^ \markup 13
                     ]
@@ -176,7 +161,7 @@ Examples.
     >>> _ = baca.pitches(voice, "E4 F4")
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     instruments=instruments,
+    ...     manifests=manifests,
     ...     transpose_score=True,
     ... )
     >>> baca.docs.remove_deactivated_wrappers(score)
@@ -248,7 +233,7 @@ Examples.
     >>> _ = baca.pitches(voice, "E4 F4")
     >>> _ = baca.section.postprocess_score(
     ...     score,
-    ...     instruments=instruments,
+    ...     manifests=manifests,
     ...     transpose_score=False,
     ... )
     >>> baca.docs.remove_deactivated_wrappers(score)
@@ -339,7 +324,7 @@ Examples.
     >>> _ = baca.section.postprocess_score(
     ...     score,
     ...     do_not_check_wellformedness=True,
-    ...     instruments=instruments,
+    ...     manifests=manifests,
     ... )
     >>> abjad.setting(score).autoBeaming = False
     >>> baca.docs.remove_deactivated_wrappers(score)

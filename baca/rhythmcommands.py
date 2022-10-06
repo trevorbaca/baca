@@ -219,7 +219,6 @@ def make_monads(fractions):
         >>> baca.SpacingSpecifier((1, 12))(score)
         >>> music = baca.make_monads("2/5 2/5 1/5")
         >>> score["Music"].extend(music)
-        >>> _ = baca.section.postprocess_score(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -244,19 +243,16 @@ def make_monads(fractions):
                         \tweak edge-height #'(0.7 . 0)
                         \times 4/5
                         {
-                            \baca-repeat-pitch-class-coloring
                             c'2
                         }
                         \tweak edge-height #'(0.7 . 0)
                         \times 4/5
                         {
-                            \baca-repeat-pitch-class-coloring
                             c'2
                         }
                         \tweak edge-height #'(0.7 . 0)
                         \times 4/5
                         {
-                            \baca-repeat-pitch-class-coloring
                             c'4
                         }
                     }
@@ -310,7 +306,6 @@ def make_repeat_tied_notes(
         >>> baca.SpacingSpecifier((1, 12))(score)
         >>> music = baca.make_repeat_tied_notes(measures())
         >>> score["Music"].extend(music)
-        >>> _ = baca.section.postprocess_score(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -333,15 +328,9 @@ def make_repeat_tied_notes(
                     \context Voice = "Music"
                     {
                         c'4.
-                        - \tweak stencil ##f
-                        ~
                         c'4
-                        - \tweak stencil ##f
-                        ~
                         \repeatTie
                         c'4.
-                        - \tweak stencil ##f
-                        ~
                         \repeatTie
                         c'4
                         \repeatTie

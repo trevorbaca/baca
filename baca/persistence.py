@@ -971,7 +971,7 @@ r"""
         >>> _ = baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     instruments=instruments,
+        ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -1130,7 +1130,7 @@ r"""
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     instruments=instruments,
+        ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -1290,7 +1290,7 @@ r"""
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     instruments=instruments,
+        ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -1447,7 +1447,7 @@ r"""
         >>> _ = baca.instrument(voice[1], "Flute", manifests)
         >>> _ = baca.section.postprocess_score(
         ...     score,
-        ...     instruments=instruments,
+        ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -1631,7 +1631,7 @@ r"""
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     instruments=instruments,
+        ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -1801,7 +1801,7 @@ r"""
         >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     first_section=True,
-        ...     short_instrument_names=short_instrument_names,
+        ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -1969,7 +1969,7 @@ r"""
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     short_instrument_names=short_instrument_names,
+        ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -2141,7 +2141,7 @@ r"""
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     short_instrument_names=short_instrument_names,
+        ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -2310,7 +2310,7 @@ r"""
         >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     first_section=True,
-        ...     short_instrument_names=short_instrument_names,
+        ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -2513,7 +2513,7 @@ r"""
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     short_instrument_names=short_instrument_names,
+        ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -2684,7 +2684,7 @@ r"""
         >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     first_section=True,
-        ...     short_instrument_names=short_instrument_names,
+        ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -2754,6 +2754,7 @@ r"""
         >>> metronome_marks = {}
         >>> metronome_marks["90"] = abjad.MetronomeMark((1, 4), 90)
         >>> metronome_marks["112"] = abjad.MetronomeMark((1, 4), 112)
+        >>> manifests = {"abjad.MetronomeMark": metronome_marks}
 
     ..  container:: example
 
@@ -2781,7 +2782,7 @@ r"""
         >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     append_anchor_skip=True,
-        ...     metronome_marks=metronome_marks,
+        ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -2880,7 +2881,7 @@ r"""
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     metronome_marks=metronome_marks,
+        ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -2977,7 +2978,7 @@ r"""
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     metronome_marks=metronome_marks,
+        ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -3057,7 +3058,7 @@ r"""
         >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     append_anchor_skip=True,
-        ...     metronome_marks=metronome_marks,
+        ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -3161,7 +3162,7 @@ r"""
         ...     environment=baca.build.Environment(
         ...         previous_metadata=metadata,
         ...     ),
-        ...     metronome_marks=metronome_marks,
+        ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -3816,7 +3817,7 @@ r"""
         >>> _ = baca.section.postprocess_score(
         ...     score,
         ...     append_anchor_skip=True,
-        ...     metronome_marks=metronome_marks,
+        ...     manifests=manifests,
         ...     treat_untreated_persistent_wrappers=True,
         ... )
         >>> baca.docs.remove_deactivated_wrappers(score)

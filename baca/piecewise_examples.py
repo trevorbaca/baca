@@ -15,7 +15,6 @@ piecewise.py examples.
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.hairpin(voice, "p < f", bookend=-1)
     >>> _ = baca.dls_staff_padding(voice, 5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -48,7 +47,6 @@ piecewise.py examples.
                 {
                     \override DynamicLineSpanner.staff-padding = 5
                     e'8
-                    - \tweak color #(x11-color 'blue)
                     \p
                     [
                     \<
@@ -92,7 +90,6 @@ piecewise.py examples.
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
     >>> _ = baca.hairpin(voice, '"ff" >o niente')
     >>> _ = baca.dls_staff_padding(voice, 5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -125,7 +122,6 @@ piecewise.py examples.
                 {
                     \override DynamicLineSpanner.staff-padding = 5
                     e'8
-                    - \tweak color #(x11-color 'blue)
                     \baca-effort-ff
                     [
                     - \tweak to-barline ##t
@@ -171,7 +167,6 @@ piecewise.py examples.
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
     >>> _ = baca.hairpin(voice, 'niente o< "ff"')
     >>> _ = baca.dls_staff_padding(voice, 5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -204,7 +199,6 @@ piecewise.py examples.
                 {
                     \override DynamicLineSpanner.staff-padding = 5
                     e'8
-                    - \tweak color #(x11-color 'blue)
                     \!
                     [
                     - \tweak circled-tip ##t
@@ -249,7 +243,6 @@ piecewise.py examples.
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
     >>> _ = baca.hairpin(voice, '"p" -- f')
     >>> _ = baca.dls_staff_padding(voice, 5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -282,7 +275,6 @@ piecewise.py examples.
                 {
                     \override DynamicLineSpanner.staff-padding = 5
                     e'8
-                    - \tweak color #(x11-color 'blue)
                     \baca-effort-p
                     [
                     - \tweak stencil #constante-hairpin
@@ -328,7 +320,6 @@ piecewise.py examples.
     >>> _ = baca.hairpin(baca.select.leaves(voice)[:7], '"mp" <| "f"')
     >>> _ = baca.hairpin(baca.select.leaves(voice)[7:], '"mf" |> "p"')
     >>> _ = baca.dls_staff_padding(voice, 5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -361,7 +352,6 @@ piecewise.py examples.
                 {
                     \override DynamicLineSpanner.staff-padding = 5
                     e'8
-                    - \tweak color #(x11-color 'blue)
                     \baca-effort-mp
                     [
                     - \tweak stencil #abjad-flared-hairpin
@@ -377,7 +367,6 @@ piecewise.py examples.
                     \baca-effort-f
                     ]
                     d''8
-                    - \tweak color #(x11-color 'blue)
                     \baca-effort-mf
                     [
                     - \tweak stencil #abjad-flared-hairpin
@@ -415,7 +404,6 @@ piecewise.py examples.
     ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
     ...     ),
     >>> _ = baca.dls_staff_padding(voice, 5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -495,7 +483,6 @@ piecewise.py examples.
     ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
     ...     )
     >>> _ = baca.dls_staff_padding(voice, 5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -528,7 +515,6 @@ piecewise.py examples.
                 {
                     \override DynamicLineSpanner.staff-padding = 5
                     e'8
-                    - \tweak color #(x11-color 'blue)
                     \p
                     [
                     \<
@@ -537,7 +523,6 @@ piecewise.py examples.
                     e''8
                     ]
                     g'8
-                    - \tweak color #(x11-color 'blue)
                     \f
                     [
                     \>
@@ -545,7 +530,6 @@ piecewise.py examples.
                     e'8
                     ]
                     d''8
-                    - \tweak color #(x11-color 'blue)
                     \p
                     [
                     \<
@@ -554,7 +538,6 @@ piecewise.py examples.
                     g'8
                     ]
                     f''8
-                    - \tweak color #(x11-color 'blue)
                     \f
                     [
                     \>
@@ -584,7 +567,6 @@ piecewise.py examples.
     ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
     ...     )
     >>> _ = baca.dls_staff_padding(voice, 5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -668,7 +650,6 @@ piecewise.py examples.
     ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
     ...     )
     >>> _ = baca.dls_staff_padding(voice, 5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -701,7 +682,6 @@ piecewise.py examples.
                 {
                     \override DynamicLineSpanner.staff-padding = 5
                     e'8
-                    - \tweak color #(x11-color 'blue)
                     \p
                     [
                     - \tweak stencil #constante-hairpin
@@ -712,7 +692,6 @@ piecewise.py examples.
                     \f
                     ]
                     g'8
-                    - \tweak color #(x11-color 'blue)
                     \f
                     [
                     \>
@@ -721,7 +700,6 @@ piecewise.py examples.
                     \p
                     ]
                     d''8
-                    - \tweak color #(x11-color 'blue)
                     \p
                     [
                     - \tweak stencil #constante-hairpin
@@ -732,7 +710,6 @@ piecewise.py examples.
                     \f
                     ]
                     f''8
-                    - \tweak color #(x11-color 'blue)
                     \f
                     [
                     \>
@@ -759,7 +736,6 @@ piecewise.py examples.
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
     >>> _ = baca.hairpin(voice, "f", bookend=False)
     >>> _ = baca.dls_staff_padding(voice, 5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -833,7 +809,6 @@ piecewise.py examples.
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
     >>> _ = baca.hairpin(voice, "< !")
     >>> _ = baca.dls_staff_padding(voice, 5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -917,7 +892,6 @@ piecewise.py examples.
     ...         abjad.Tweak(r"- \tweak to-barline ##t"),
     ...     )
     >>> _ = baca.dls_staff_padding(voice, 4)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -951,7 +925,6 @@ piecewise.py examples.
                     {
                         \override DynamicLineSpanner.staff-padding = 4
                         c'2
-                        - \tweak color #(x11-color 'blue)
                         \p
                         - \tweak to-barline ##t
                         - \tweak stencil #constante-hairpin
@@ -959,7 +932,6 @@ piecewise.py examples.
                         r4.
                         \!
                         d'2
-                        - \tweak color #(x11-color 'blue)
                         \f
                         - \tweak to-barline ##t
                         - \tweak stencil #constante-hairpin
@@ -991,7 +963,6 @@ piecewise.py examples.
     ...         pieces=lambda _: baca.select.mgroups(_, [1, 2, 1]),
     ...     )
     >>> _ = baca.dls_staff_padding(voice, 4)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1031,7 +1002,6 @@ piecewise.py examples.
                     e''8
                     ]
                     g'8
-                    - \tweak color #(x11-color 'blue)
                     \!
                     [
                     - \tweak circled-tip ##t
@@ -1070,7 +1040,6 @@ piecewise.py examples.
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.hairpin(voice, "(mp) < mf")
     >>> _ = baca.dls_staff_padding(voice, 4)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1103,7 +1072,6 @@ piecewise.py examples.
                 {
                     \override DynamicLineSpanner.staff-padding = 4
                     e'8
-                    - \tweak color #(x11-color 'blue)
                     \baca-mp-parenthesized
                     [
                     \<
@@ -1151,7 +1119,6 @@ piecewise.py examples.
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.text_spanner(voice, "pont. => ord.")
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1229,7 +1196,6 @@ piecewise.py examples.
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.text_spanner(voice, "pont. =| ord.")
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1307,7 +1273,6 @@ piecewise.py examples.
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.text_spanner(voice, "pont. -> ord.")
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1385,7 +1350,6 @@ piecewise.py examples.
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.text_spanner(voice, "pont. -| ord.")
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1463,7 +1427,6 @@ piecewise.py examples.
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.text_spanner(voice, "pont. || ord.")
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1548,7 +1511,6 @@ piecewise.py examples.
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1645,7 +1607,6 @@ piecewise.py examples.
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1743,7 +1704,6 @@ piecewise.py examples.
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1850,7 +1810,6 @@ piecewise.py examples.
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1963,7 +1922,6 @@ piecewise.py examples.
     ...         pieces=lambda _: baca.select.plts(_),
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2043,7 +2001,6 @@ piecewise.py examples.
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2127,7 +2084,6 @@ piecewise.py examples.
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2225,7 +2181,6 @@ piecewise.py examples.
     ...         pieces=lambda _: baca.select.plts(_),
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2316,7 +2271,6 @@ piecewise.py examples.
     ...         pieces=lambda _: baca.select.plts(_),
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
-    >>> _ = baca.section.postprocess_score(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
