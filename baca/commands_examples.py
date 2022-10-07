@@ -651,7 +651,7 @@ commands.py examles
     >>> _ = baca.clef(voice[0], "percussion")
     >>> _ = baca.staff_lines(voice[0], 1)
     >>> _ = baca.staff_positions(voice, [-2, -1, 0, 1, 2])
-    >>> _ = baca.section.remove_redundant_time_signatures(score["Skips"])
+    >>> _ = baca.section.remove_redundant_time_signatures(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -708,7 +708,7 @@ commands.py examles
     >>> _ = baca.clef(voice[0], "bass")
     >>> _ = baca.staff_lines(voice[0], 1)
     >>> _ = baca.staff_positions(voice, [-2, -1, 0, 1, 2])
-    >>> _ = baca.section.remove_redundant_time_signatures(score["Skips"])
+    >>> _ = baca.section.remove_redundant_time_signatures(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -766,7 +766,7 @@ commands.py examles
     >>> _ = baca.clef(voice[0], "percussion")
     >>> _ = baca.staff_lines(voice[0], 2)
     >>> _ = baca.staff_positions(voice, [-2, -1, 0, 1, 2])
-    >>> _ = baca.section.remove_redundant_time_signatures(score["Skips"])
+    >>> _ = baca.section.remove_redundant_time_signatures(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -822,7 +822,7 @@ commands.py examles
     >>> _ = baca.clef(voice[0], "bass")
     >>> _ = baca.staff_lines(voice[0], 2)
     >>> _ = baca.staff_positions(voice, [-2, -1, 0, 1, 2])
-    >>> _ = baca.section.remove_redundant_time_signatures(score["Skips"])
+    >>> _ = baca.section.remove_redundant_time_signatures(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -878,7 +878,7 @@ commands.py examles
     >>> _ = baca.staff_lines(voice[0], 2)
     >>> _ = baca.staff_positions(voice, [-2, -1, 0, 1, 2])
     >>> _ = baca.clef(voice[0], "bass")
-    >>> _ = baca.section.remove_redundant_time_signatures(score["Skips"])
+    >>> _ = baca.section.remove_redundant_time_signatures(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP

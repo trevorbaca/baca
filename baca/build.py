@@ -1177,11 +1177,13 @@ def timed(timing_attribute):
                 timing = keywords["environment"].timing
             elif "timing" in keywords:
                 timing = keywords.pop("timing")
+            elif isinstance(arguments[-1], Timing):
+                timing = arguments[-1]
+                arguments = arguments[:-1]
             else:
-                candidate = arguments[-1]
-                if isinstance(candidate, Timing):
-                    timing = candidate
-                    arguments = arguments[:-1]
+                for argument in arguments:
+                    if isinstance(argument, Environment):
+                        timing = argument.timing
             with abjad.Timer() as timer:
                 result = function(*arguments, **keywords)
             if timing is not None:

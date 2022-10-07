@@ -2459,6 +2459,8 @@ def measures(items):
 @_build.timed("postprocess_score")
 def postprocess_score(
     score,
+    environment: _build.Environment,
+    manifests: dict,
     *,
     all_music_in_part_containers=False,
     allow_empty_selections=False,
@@ -2473,7 +2475,6 @@ def postprocess_score(
     do_not_force_nonnatural_accidentals=False,
     do_not_require_short_instrument_names=False,
     empty_fermata_measures=False,
-    environment: _build.Environment = None,
     error_on_not_yet_pitched=False,
     fermata_extra_offset_y=2.5,
     fermata_measure_empty_overrides=(),
@@ -2482,22 +2483,14 @@ def postprocess_score(
     global_rests_in_every_staff=False,
     global_rests_in_topmost_staff=False,
     magnify_staves=None,
-    manifests=None,
     part_manifest=None,
     parts_metric_modulation_multiplier=None,
     section_number=None,
     transpose_score=False,
 ):
-    assert environment is not None, repr(environment)
-    assert manifests is not None, repr(manifests)
-    skips = score["Skips"]
-    if abjad.get.has_indicator(skips[-1], _enums.ANCHOR_SKIP):
-        skips = skips[:-1]
-    time_signatures = []
-    for skip in skips:
-        time_signature = abjad.get.effective(skip, abjad.TimeSignature)
-        time_signatures.append(time_signature)
     assert isinstance(score, abjad.Score), repr(score)
+    assert isinstance(environment, _build.Environment), repr(environment)
+    assert isinstance(manifests, dict), repr(manifests)
     assert isinstance(all_music_in_part_containers, bool)
     assert isinstance(allow_empty_selections, bool)
     if clock_time_override is not None:
@@ -2507,7 +2500,6 @@ def postprocess_score(
     assert isinstance(do_not_force_nonnatural_accidentals, bool)
     assert isinstance(do_not_require_short_instrument_names, bool)
     assert isinstance(empty_fermata_measures, bool)
-    environment = environment or _build.Environment()
     first_measure_number = environment.first_measure_number
     metadata = environment.metadata
     persist = environment.persist
@@ -2517,25 +2509,30 @@ def postprocess_score(
     assert isinstance(final_section, bool)
     assert isinstance(first_measure_number, int)
     assert isinstance(first_section, bool)
-    global_skips = score["Skips"]
-    manifests = manifests or {}
+    assert isinstance(transpose_score, bool)
+    skips = _select.skips(score["Skips"])
+    if abjad.get.has_indicator(skips[-1], _enums.ANCHOR_SKIP):
+        skips = skips[:-1]
+    time_signatures = []
+    for skip in skips:
+        time_signature = abjad.get.effective(skip, abjad.TimeSignature)
+        time_signatures.append(time_signature)
     measure_count = len(time_signatures)
     if parts_metric_modulation_multiplier is not None:
         assert isinstance(parts_metric_modulation_multiplier, tuple)
         assert len(parts_metric_modulation_multiplier) == 2
     previous_persistent_indicators = previous_metadata.get("persistent_indicators", {})
-    assert isinstance(transpose_score, bool)
     voice_name_to_parameter_to_state: dict[str, dict] = {}
     with abjad.ForbidUpdate(component=score, update_on_exit=True):
         offset_to_measure_number = _populate_offset_to_measure_number(
             first_measure_number,
-            global_skips,
+            score["Skips"],
         )
         extend_beams(score)
         _attach_sounds_during(score)
         if not first_section:
             _clone_section_initial_short_instrument_name(score)
-        cached_time_signatures = remove_redundant_time_signatures(global_skips)
+        cached_time_signatures = remove_redundant_time_signatures(score)
         result = _get_fermata_measure_numbers(first_measure_number, score)
         fermata_start_offsets = result[0]
         fermata_measure_numbers = result[1]
@@ -2708,7 +2705,8 @@ def reapply_persistent_indicators(argument, *, runtime=None):
         )
 
 
-def remove_redundant_time_signatures(global_skips):
+def remove_redundant_time_signatures(score):
+    global_skips = score["Skips"]
     previous_time_signature = None
     cached_time_signatures = []
     skips = _select.skips(global_skips)
