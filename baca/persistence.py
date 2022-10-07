@@ -2595,11 +2595,10 @@ r"""
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> baca.section.append_anchor_note(voice)
-        >>> _ = baca.section.postprocess_score(
-        ...     score,
-        ...     manifests=manifests,
-        ...     treat_untreated_persistent_wrappers=True,
-        ... )
+        >>> _ = baca.section.remove_redundant_time_signatures(score["Skips"])
+        >>> baca.section.treat_untreated_persistent_wrappers(score, manifests=manifests)
+        >>> baca.section.span_metronome_marks(score)
+        >>> baca.section.style_anchor_skip(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
@@ -2643,16 +2642,14 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        \baca-repeat-pitch-class-coloring
                         c'4.
-                        \baca-repeat-pitch-class-coloring
                         c'4.
                         \abjad-invisible-music-coloring
                         \once \override Accidental.stencil = ##f
                         \stopStaff
                         \once \override Staff.StaffSymbol.transparent = ##t
                         \startStaff
-                        b'1 * 1/4
+                        c'1 * 1/4
                     }
                 >>
             }
@@ -2691,11 +2688,10 @@ r"""
         ...     previous_persistent_indicators,
         ...     manifests=manifests,
         ... )
-        >>> _ = baca.section.postprocess_score(
-        ...     score,
-        ...     manifests=manifests,
-        ...     treat_untreated_persistent_wrappers=True,
-        ... )
+        >>> _ = baca.section.remove_redundant_time_signatures(score["Skips"])
+        >>> baca.section.treat_untreated_persistent_wrappers(score, manifests=manifests)
+        >>> baca.section.span_metronome_marks(score)
+        >>> baca.section.style_anchor_skip(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
@@ -2741,16 +2737,14 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        \baca-repeat-pitch-class-coloring
                         c'4.
-                        \baca-repeat-pitch-class-coloring
                         c'4.
                         \abjad-invisible-music-coloring
                         \once \override Accidental.stencil = ##f
                         \stopStaff
                         \once \override Staff.StaffSymbol.transparent = ##t
                         \startStaff
-                        b'1 * 1/4
+                        c'1 * 1/4
                     }
                 >>
             }
@@ -2782,11 +2776,10 @@ r"""
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> _ = baca.text_spanner_staff_padding(score["Skips"], 4)
-        >>> _ = baca.section.postprocess_score(
-        ...     score,
-        ...     manifests=manifests,
-        ...     treat_untreated_persistent_wrappers=True,
-        ... )
+        >>> _ = baca.section.remove_redundant_time_signatures(score["Skips"])
+        >>> baca.section.treat_untreated_persistent_wrappers(score, manifests=manifests)
+        >>> baca.section.span_metronome_marks(score)
+        >>> baca.section.style_anchor_skip(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
@@ -2825,9 +2818,7 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        \baca-repeat-pitch-class-coloring
                         c'4.
-                        \baca-repeat-pitch-class-coloring
                         c'4.
                     }
                 >>
@@ -2859,12 +2850,10 @@ r"""
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> baca.section.append_anchor_note(voice)
-        >>> _ = baca.section.postprocess_score(
-        ...     score,
-        ...     append_anchor_skip=True,
-        ...     manifests=manifests,
-        ...     treat_untreated_persistent_wrappers=True,
-        ... )
+        >>> _ = baca.section.remove_redundant_time_signatures(score["Skips"])
+        >>> baca.section.treat_untreated_persistent_wrappers(score, manifests=manifests)
+        >>> baca.section.span_metronome_marks(score)
+        >>> baca.section.style_anchor_skip(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
@@ -2912,16 +2901,14 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        \baca-repeat-pitch-class-coloring
                         c'4.
-                        \baca-repeat-pitch-class-coloring
                         c'4.
                         \abjad-invisible-music-coloring
                         \once \override Accidental.stencil = ##f
                         \stopStaff
                         \once \override Staff.StaffSymbol.transparent = ##t
                         \startStaff
-                        b'1 * 1/4
+                        c'1 * 1/4
                     }
                 >>
             }
@@ -2958,11 +2945,10 @@ r"""
         >>> voice.extend(music)
         >>> baca.section.append_anchor_note(voice)
         >>> baca.section.reapply(voice, previous_persistent_indicators)
-        >>> _ = baca.section.postprocess_score(
-        ...     score,
-        ...     manifests=manifests,
-        ...     treat_untreated_persistent_wrappers=True,
-        ... )
+        >>> _ = baca.section.remove_redundant_time_signatures(score["Skips"])
+        >>> baca.section.treat_untreated_persistent_wrappers(score, manifests=manifests)
+        >>> baca.section.span_metronome_marks(score)
+        >>> baca.section.style_anchor_skip(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
@@ -3008,16 +2994,14 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        \baca-repeat-pitch-class-coloring
                         c'4.
-                        \baca-repeat-pitch-class-coloring
                         c'4.
                         \abjad-invisible-music-coloring
                         \once \override Accidental.stencil = ##f
                         \stopStaff
                         \once \override Staff.StaffSymbol.transparent = ##t
                         \startStaff
-                        b'1 * 1/4
+                        c'1 * 1/4
                     }
                 >>
             }
@@ -3560,11 +3544,10 @@ r"""
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
         >>> baca.section.append_anchor_note(voice)
-        >>> _ = baca.section.postprocess_score(
-        ...     score,
-        ...     manifests=manifests,
-        ...     treat_untreated_persistent_wrappers=True,
-        ... )
+        >>> _ = baca.section.remove_redundant_time_signatures(score["Skips"])
+        >>> baca.section.treat_untreated_persistent_wrappers(score, manifests=manifests)
+        >>> baca.section.span_metronome_marks(score)
+        >>> baca.section.style_anchor_skip(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
@@ -3608,16 +3591,14 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        \baca-repeat-pitch-class-coloring
                         c'4.
-                        \baca-repeat-pitch-class-coloring
                         c'4.
                         \abjad-invisible-music-coloring
                         \once \override Accidental.stencil = ##f
                         \stopStaff
                         \once \override Staff.StaffSymbol.transparent = ##t
                         \startStaff
-                        b'1 * 1/4
+                        c'1 * 1/4
                     }
                 >>
             }
@@ -3645,10 +3626,10 @@ r"""
         ...     )
         ... ]
         >>> baca.section.reapply(score, previous_persistent_indicators)
-        >>> _ = baca.section.postprocess_score(
-        ...     score,
-        ...     treat_untreated_persistent_wrappers=True,
-        ... )
+        >>> _ = baca.section.remove_redundant_time_signatures(score["Skips"])
+        >>> baca.section.treat_untreated_persistent_wrappers(score)
+        >>> baca.section.span_metronome_marks(score)
+        >>> baca.section.style_anchor_skip(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
@@ -3687,9 +3668,7 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        \baca-repeat-pitch-class-coloring
                         c'4.
-                        \baca-repeat-pitch-class-coloring
                         c'4.
                     }
                 >>
@@ -3726,10 +3705,10 @@ r"""
         ...     manifests=manifests,
         ... )
         >>> _ = baca.text_spanner_staff_padding(score["Skips"], 4)
-        >>> _ = baca.section.postprocess_score(
-        ...     score,
-        ...     treat_untreated_persistent_wrappers=True,
-        ... )
+        >>> _ = baca.section.remove_redundant_time_signatures(score["Skips"])
+        >>> baca.section.treat_untreated_persistent_wrappers(score)
+        >>> baca.section.span_metronome_marks(score)
+        >>> baca.section.style_anchor_skip(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
@@ -3768,9 +3747,7 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        \baca-repeat-pitch-class-coloring
                         c'4.
-                        \baca-repeat-pitch-class-coloring
                         c'4.
                     }
                 >>
@@ -3796,10 +3773,10 @@ r"""
         >>> voice = score["Music"]
         >>> music = baca.make_notes(measures())
         >>> voice.extend(music)
-        >>> _ = baca.section.postprocess_score(
-        ...     score,
-        ...     treat_untreated_persistent_wrappers=True,
-        ... )
+        >>> _ = baca.section.remove_redundant_time_signatures(score["Skips"])
+        >>> baca.section.treat_untreated_persistent_wrappers(score)
+        >>> baca.section.span_metronome_marks(score)
+        >>> baca.section.style_anchor_skip(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
@@ -3843,11 +3820,8 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        \baca-repeat-pitch-class-coloring
                         c'4.
-                        \baca-repeat-pitch-class-coloring
                         c'4.
-                        \baca-repeat-pitch-class-coloring
                         c'4.
                     }
                 >>
@@ -3886,10 +3860,10 @@ r"""
         ...     previous_persistent_indicators,
         ...     manifests=manifests,
         ... )
-        >>> _ = baca.section.postprocess_score(
-        ...     score,
-        ...     treat_untreated_persistent_wrappers=True,
-        ... )
+        >>> _ = baca.section.remove_redundant_time_signatures(score["Skips"])
+        >>> baca.section.treat_untreated_persistent_wrappers(score)
+        >>> baca.section.span_metronome_marks(score)
+        >>> baca.section.style_anchor_skip(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> block = abjad.Block(name="layout")
@@ -3928,9 +3902,7 @@ r"""
                     }
                     \context Voice = "Music"
                     {
-                        \baca-repeat-pitch-class-coloring
                         c'4.
-                        \baca-repeat-pitch-class-coloring
                         c'4.
                     }
                 >>

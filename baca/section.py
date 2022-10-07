@@ -184,284 +184,6 @@ def _attach_nonfirst_empty_start_bar(global_skips):
     )
 
 
-def _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier):
-    indicator_count = 0
-    skips = _select.skips(global_skips)
-    final_leaf_metronome_mark = abjad.get.indicator(skips[-1], abjad.MetronomeMark)
-    add_right_text_to_me = None
-    if final_leaf_metronome_mark:
-        tempo_prototype = (
-            abjad.MetronomeMark,
-            _indicatorclasses.Accelerando,
-            _indicatorclasses.Ritardando,
-        )
-        for skip in reversed(skips[:-1]):
-            if abjad.get.has_indicator(skip, tempo_prototype):
-                add_right_text_to_me = skip
-                break
-    for i, skip in enumerate(skips):
-        metronome_mark = abjad.get.indicator(skip, abjad.MetronomeMark)
-        metric_modulation = abjad.get.indicator(skip, abjad.MetricModulation)
-        accelerando = abjad.get.indicator(skip, _indicatorclasses.Accelerando)
-        ritardando = abjad.get.indicator(skip, _indicatorclasses.Ritardando)
-        if (
-            metronome_mark is None
-            and metric_modulation is None
-            and accelerando is None
-            and ritardando is None
-        ):
-            continue
-        if metronome_mark is not None:
-            # metronome_mark._hide = True
-            metronome_mark.hide = True
-            wrapper = abjad.get.wrapper(skip, abjad.MetronomeMark)
-        if metric_modulation is not None:
-            # TODO: public hide:
-            # TODO: detach / reattach frozen object:
-            metric_modulation._hide = True
-        if accelerando is not None:
-            # TODO: detach / reattach frozen object:
-            accelerando.hide = True
-        if ritardando is not None:
-            # TODO: detach / reattach frozen object:
-            ritardando.hide = True
-        if skip is skips[-1]:
-            break
-        if metronome_mark is None and metric_modulation is not None:
-            wrapper = abjad.get.wrapper(skip, abjad.MetricModulation)
-        if metronome_mark is None and accelerando is not None:
-            wrapper = abjad.get.wrapper(skip, _indicatorclasses.Accelerando)
-        if metronome_mark is None and ritardando is not None:
-            wrapper = abjad.get.wrapper(skip, _indicatorclasses.Ritardando)
-        has_trend = accelerando is not None or ritardando is not None
-        indicator_count += 1
-        tag = wrapper.tag
-        stripped_left_text = None
-        if metronome_mark is not None:
-            if metric_modulation is not None:
-                if metronome_mark.custom_markup is not None:
-                    left_text = metronome_mark._get_markup().string
-                    left_text = left_text.removeprefix(r"\markup").strip()
-                    modulation = metric_modulation._get_markup().string
-                    modulation = modulation.removeprefix(r"\markup").strip()
-                    string = rf"\concat {{ {left_text} \hspace #2 \upright ["
-                    string += rf" \line {{ {modulation} }} \hspace #0.5"
-                    string += r" \upright ] }"
-                    left_text = abjad.Markup(string)
-                else:
-                    left_text = _bracket_metric_modulation(
-                        metronome_mark, metric_modulation
-                    )
-                if metronome_mark.custom_markup is not None:
-                    stripped_left_text = r"- \baca-metronome-mark-spanner-left-markup"
-                    string = abjad.lilypond(metronome_mark.custom_markup)
-                    assert string.startswith("\\")
-                    stripped_left_text += f" {string}"
-                # mixed number
-                elif metronome_mark.decimal is True:
-                    arguments = metronome_mark._get_markup_arguments()
-                    log, dots, stem, base, n, d = arguments
-                    stripped_left_text = (
-                        r"- \baca-metronome-mark-spanner-left-text-mixed-number"
-                    )
-                    stripped_left_text += f' {log} {dots} {stem} "{base}" "{n}" "{d}"'
-                else:
-                    arguments = metronome_mark._get_markup_arguments()
-                    log, dots, stem, value = arguments
-                    stripped_left_text = r"- \baca-metronome-mark-spanner-left-text"
-                    stripped_left_text += f' {log} {dots} {stem} "{value}"'
-            elif metronome_mark.custom_markup is not None:
-                left_text = r"- \baca-metronome-mark-spanner-left-markup"
-                string = abjad.lilypond(metronome_mark.custom_markup)
-                assert string.startswith("\\")
-                left_text += f" {string}"
-            # mixed number
-            elif metronome_mark.decimal is True:
-                arguments = metronome_mark._get_markup_arguments()
-                log, dots, stem, base, n, d = arguments
-                left_text = r"- \baca-metronome-mark-spanner-left-text-mixed-number"
-                left_text += f' {log} {dots} {stem} "{base}" "{n}" "{d}"'
-            else:
-                arguments = metronome_mark._get_markup_arguments()
-                log, dots, stem, value = arguments
-                left_text = r"- \baca-metronome-mark-spanner-left-text"
-                left_text += f' {log} {dots} {stem} "{value}"'
-        elif accelerando is not None:
-            left_text = accelerando._get_markup()
-            string = left_text.string.removeprefix(r"\markup").strip()
-            left_text = abjad.Markup(string)
-        elif ritardando is not None:
-            left_text = ritardando._get_markup()
-            string = left_text.string.removeprefix(r"\markup").strip()
-            left_text = abjad.Markup(string)
-        if has_trend:
-            style = "dashed-line-with-arrow"
-        else:
-            style = "invisible-line"
-        if 0 < i:
-            stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanMM")
-            abjad.attach(
-                stop_text_span,
-                skip,
-                tag=_tags.function_name(_frame(), n=1),
-            )
-        if add_right_text_to_me is skip:
-            right_text = final_leaf_metronome_mark._get_markup()
-        else:
-            right_text = None
-        start_text_span = abjad.StartTextSpan(
-            command=r"\bacaStartTextSpanMM",
-            left_text=left_text,
-            right_text=right_text,
-            style=style,
-        )
-        if not tag:
-            continue
-        assert "METRONOME_MARK" in tag.string, repr(tag)
-        if (
-            isinstance(wrapper.unbundle_indicator(), abjad.MetronomeMark)
-            and has_trend
-            and "EXPLICIT" not in tag.string
-        ):
-            words = []
-            for word in tag.string.split(":"):
-                if "METRONOME_MARK" in word:
-                    word = word.replace("REAPPLIED", "EXPLICIT")
-                    word = word.replace("REDUNDANT", "EXPLICIT")
-                words.append(word)
-            string = ":".join(words)
-            new_tag = abjad.Tag(string)
-            indicator = wrapper.unbundle_indicator()
-            abjad.detach(wrapper, skip)
-            abjad.attach(
-                indicator,
-                skip,
-                tag=new_tag.append(_tags.function_name(_frame(), n=5)),
-            )
-            tag = new_tag
-        if not (
-            isinstance(start_text_span.left_text, str)
-            and start_text_span.left_text.endswith("(1 . 1)")
-            and parts_metric_modulation_multiplier is not None
-        ):
-            abjad.attach(
-                start_text_span,
-                skip,
-                deactivate=True,
-                tag=tag.append(_tags.function_name(_frame(), n=2)),
-            )
-        else:
-            abjad.attach(
-                start_text_span,
-                skip,
-                deactivate=True,
-                tag=tag.append(_tags.function_name(_frame(), n=2.1)).append(
-                    _tags.METRIC_MODULATION_IS_NOT_SCALED,
-                ),
-            )
-            left_text_ = start_text_span.left_text
-            assert left_text_.endswith("(1 . 1)")
-            n, d = parts_metric_modulation_multiplier
-            left_text_ = left_text_[:-7] + f"({n} . {d})"
-            start_text_span_ = dataclasses.replace(
-                start_text_span, left_text=left_text_
-            )
-            abjad.attach(
-                start_text_span_,
-                skip,
-                deactivate=True,
-                tag=tag.append(_tags.function_name(_frame(), n=2.2)).append(
-                    _tags.METRIC_MODULATION_IS_SCALED,
-                ),
-            )
-        if stripped_left_text is not None:
-            start_text_span_ = dataclasses.replace(
-                start_text_span, left_text=stripped_left_text
-            )
-            abjad.attach(
-                start_text_span_,
-                skip,
-                deactivate=True,
-                tag=tag.append(_tags.function_name(_frame(), n=2.2)).append(
-                    _tags.METRIC_MODULATION_IS_STRIPPED,
-                ),
-            )
-        string = tag.string
-        if "EXPLICIT" in string:
-            status = "explicit"
-        elif "REAPPLIED" in string:
-            status = "reapplied"
-        elif "REDUNDANT" in string:
-            status = "redundant"
-        else:
-            status = None
-        assert status is not None
-        color = _treat._status_to_color[status]
-        string = f"{status.upper()}_METRONOME_MARK_WITH_COLOR"
-        tag = abjad.Tag(string)
-        if isinstance(left_text, str):
-            string = left_text.replace(
-                "baca-metronome-mark-spanner-left-markup",
-                "baca-metronome-mark-spanner-colored-left-markup",
-            )
-            string = string.replace(
-                "baca-metronome-mark-spanner-left-text",
-                "baca-metronome-mark-spanner-colored-left-text",
-            )
-            string = string.replace(
-                "baca-bracketed-metric-modulation",
-                "baca-colored-bracketed-metric-modulation",
-            )
-            string = string.replace(
-                "baca-bracketed-mixed-number-metric-modulation",
-                "baca-colored-bracketed-mixed-number-metric-modulation",
-            )
-            left_text_with_color = f"{string} #'{color}"
-        else:
-            color = f"(x11-color '{color})"
-            left_text_with_color = abjad.Markup(
-                rf"\with-color #{color} {left_text.string}"
-            )
-        if right_text:
-            wrapper = abjad.get.wrapper(skips[-1], abjad.MetronomeMark)
-            tag = wrapper.tag
-            string = tag.string
-            if "EXPLICIT" in string:
-                status = "explicit"
-            elif "REAPPLIED" in tag.string:
-                status = "reapplied"
-            elif "REDUNDANT" in tag.string:
-                status = "redundant"
-            else:
-                status = None
-            assert status is not None
-            color = _treat._status_to_color[status]
-            color = f"(x11-color '{color})"
-            right_text_with_color = abjad.Markup(
-                rf"\with-color #{color} {right_text.string}"
-            )
-        else:
-            right_text_with_color = None
-        start_text_span = abjad.StartTextSpan(
-            command=r"\bacaStartTextSpanMM",
-            left_text=left_text_with_color,
-            right_text=right_text_with_color,
-            style=style,
-        )
-        abjad.attach(
-            start_text_span,
-            skip,
-            deactivate=False,
-            tag=tag.append(_tags.function_name(_frame(), n=3)),
-        )
-    if indicator_count:
-        final_skip = skip
-        stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanMM")
-        tag_ = _tags.EOS_STOP_MM_SPANNER
-        tag_ = tag_.append(_tags.function_name(_frame(), n=4))
-        abjad.attach(stop_text_span, final_skip, tag=tag_)
-
-
 def _attach_rhythm_annotation_spanner(command, selection):
     if selection is None:
         return
@@ -1756,38 +1478,6 @@ def _style_anchor_notes(score):
         _append_tag_to_wrappers(note, _tags.ANCHOR_NOTE)
 
 
-def _style_anchor_skip(score):
-    global_skips = score["Skips"]
-    skip = abjad.get.leaf(global_skips, -1)
-    if not abjad.get.has_indicator(skip, _enums.ANCHOR_SKIP):
-        return
-    for literal in abjad.get.indicators(skip, abjad.LilyPondLiteral):
-        if r"\baca-time-signature-color" in literal.argument:
-            abjad.detach(literal, skip)
-    tag = _tags.function_name(_frame(), n=1)
-    tag = tag.append(_tags.ANCHOR_SKIP)
-    _append_tag_to_wrappers(skip, tag)
-    if abjad.get.has_indicator(skip, abjad.TimeSignature):
-        tag = _tags.function_name(_frame(), n=2)
-        tag = tag.append(_tags.ANCHOR_SKIP)
-        abjad.attach(
-            abjad.LilyPondLiteral(r"\baca-time-signature-transparent"), skip, tag=tag
-        )
-    tag = _tags.function_name(_frame(), n=3)
-    tag = tag.append(_tags.ANCHOR_SKIP)
-    abjad.attach(
-        abjad.LilyPondLiteral(
-            [
-                r"\once \override Score.BarLine.transparent = ##t",
-                r"\once \override Score.SpanBar.transparent = ##t",
-            ],
-            site="after",
-        ),
-        skip,
-        tag=tag,
-    )
-
-
 def _style_fermata_measures(
     fermata_extra_offset_y,
     fermata_measure_empty_overrides,
@@ -2662,7 +2352,7 @@ def make_layout_ly(
     _ = postprocess_score(
         score,
         append_anchor_skip=has_anchor_skip,
-        add_container_identifiers=True,
+        # add_container_identifiers=True,
         comment_measure_numbers=True,
         do_not_check_wellformedness=True,
         environment=_build.Environment(
@@ -2788,6 +2478,7 @@ def postprocess_score(
     color_octaves=False,
     comment_measure_numbers=False,
     do_not_check_wellformedness=False,
+    # do_not_force_nonnatural_accidentals=False,
     do_not_require_short_instrument_names=False,
     empty_fermata_measures=False,
     environment: _build.Environment = None,
@@ -2836,6 +2527,7 @@ def postprocess_score(
     if deactivate is not None:
         assert isinstance(deactivate, list), repr(deactivate)
         assert all(isinstance(_, abjad.Tag) for _ in deactivate)
+    # assert isinstance(do_not_force_nonnatural_accidentals, bool)
     assert isinstance(do_not_require_short_instrument_names, bool)
     assert isinstance(empty_fermata_measures, bool)
     environment = environment or _build.Environment()
@@ -2848,7 +2540,6 @@ def postprocess_score(
     assert isinstance(final_section, bool)
     assert isinstance(first_measure_number, int)
     assert isinstance(first_section, bool)
-    assert isinstance(force_nonnatural_accidentals, bool)
     global_skips = score["Skips"]
     manifests = manifests or {}
     measure_count = len(time_signatures)
@@ -2882,7 +2573,9 @@ def postprocess_score(
             ]
         if treat_untreated_persistent_wrappers:
             _treat_untreated_persistent_wrappers_alias(score, manifests=manifests)
-        _attach_metronome_marks(global_skips, parts_metric_modulation_multiplier)
+        span_metronome_marks(
+            score, parts_metric_modulation_multiplier=parts_metric_modulation_multiplier
+        )
         _reanalyze_trending_dynamics(manifests, score)
         _reanalyze_reapplied_synthetic_wrappers(score)
         if transpose_score:
@@ -2891,6 +2584,7 @@ def postprocess_score(
         _color_mock_pitch(score)
         _set_intermittent_to_staff_position_zero(score)
         if color_not_yet_pitched:
+            # if True:
             _color_not_yet_pitched(score)
         _set_not_yet_pitched_to_staff_position_zero(score)
         _clean_up_repeat_tie_direction(score)
@@ -2909,12 +2603,14 @@ def postprocess_score(
             _color_octaves_alias(score)
         _attach_shadow_tie_indicators(score)
         if force_nonnatural_accidentals:
+            # if not do_not_force_nonnatural_accidentals:
             _force_nonnatural_accidentals(score)
         _label_duration_multipliers(score)
         _magnify_staves(magnify_staves, score)
         if whitespace_leaves:
             _whitespace_leaves(score)
         if comment_measure_numbers:
+            # if True:
             _comment_measure_numbers(
                 first_measure_number,
                 offset_to_measure_number,
@@ -2935,7 +2631,8 @@ def postprocess_score(
                 score,
             )
         container_to_part_assignment = None
-        if add_container_identifiers:
+        # if add_container_identifiers:
+        if True:
             container_to_part_assignment = _add_container_identifiers(
                 score,
                 section_number,
@@ -3007,7 +2704,7 @@ def postprocess_score(
         voice_name_to_parameter_to_state,
     )
     new_metadata = proxy(new_metadata | new_persist)
-    _style_anchor_skip(score)
+    style_anchor_skip(score)
     _style_anchor_notes(score)
     _check_anchors_are_final(score)
     return new_metadata
@@ -3124,6 +2821,317 @@ def set_up_score(
             score,
             do_not_iterate=score,
         )
+
+
+def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
+    global_skips = score["Skips"]
+    indicator_count = 0
+    skips = _select.skips(global_skips)
+    final_leaf_metronome_mark = abjad.get.indicator(skips[-1], abjad.MetronomeMark)
+    add_right_text_to_me = None
+    if final_leaf_metronome_mark:
+        tempo_prototype = (
+            abjad.MetronomeMark,
+            _indicatorclasses.Accelerando,
+            _indicatorclasses.Ritardando,
+        )
+        for skip in reversed(skips[:-1]):
+            if abjad.get.has_indicator(skip, tempo_prototype):
+                add_right_text_to_me = skip
+                break
+    for i, skip in enumerate(skips):
+        metronome_mark = abjad.get.indicator(skip, abjad.MetronomeMark)
+        metric_modulation = abjad.get.indicator(skip, abjad.MetricModulation)
+        accelerando = abjad.get.indicator(skip, _indicatorclasses.Accelerando)
+        ritardando = abjad.get.indicator(skip, _indicatorclasses.Ritardando)
+        if (
+            metronome_mark is None
+            and metric_modulation is None
+            and accelerando is None
+            and ritardando is None
+        ):
+            continue
+        if metronome_mark is not None:
+            # metronome_mark._hide = True
+            metronome_mark.hide = True
+            wrapper = abjad.get.wrapper(skip, abjad.MetronomeMark)
+        if metric_modulation is not None:
+            # TODO: public hide:
+            # TODO: detach / reattach frozen object:
+            metric_modulation._hide = True
+        if accelerando is not None:
+            # TODO: detach / reattach frozen object:
+            accelerando.hide = True
+        if ritardando is not None:
+            # TODO: detach / reattach frozen object:
+            ritardando.hide = True
+        if skip is skips[-1]:
+            break
+        if metronome_mark is None and metric_modulation is not None:
+            wrapper = abjad.get.wrapper(skip, abjad.MetricModulation)
+        if metronome_mark is None and accelerando is not None:
+            wrapper = abjad.get.wrapper(skip, _indicatorclasses.Accelerando)
+        if metronome_mark is None and ritardando is not None:
+            wrapper = abjad.get.wrapper(skip, _indicatorclasses.Ritardando)
+        has_trend = accelerando is not None or ritardando is not None
+        indicator_count += 1
+        tag = wrapper.tag
+        stripped_left_text = None
+        if metronome_mark is not None:
+            if metric_modulation is not None:
+                if metronome_mark.custom_markup is not None:
+                    left_text = metronome_mark._get_markup().string
+                    left_text = left_text.removeprefix(r"\markup").strip()
+                    modulation = metric_modulation._get_markup().string
+                    modulation = modulation.removeprefix(r"\markup").strip()
+                    string = rf"\concat {{ {left_text} \hspace #2 \upright ["
+                    string += rf" \line {{ {modulation} }} \hspace #0.5"
+                    string += r" \upright ] }"
+                    left_text = abjad.Markup(string)
+                else:
+                    left_text = _bracket_metric_modulation(
+                        metronome_mark, metric_modulation
+                    )
+                if metronome_mark.custom_markup is not None:
+                    stripped_left_text = r"- \baca-metronome-mark-spanner-left-markup"
+                    string = abjad.lilypond(metronome_mark.custom_markup)
+                    assert string.startswith("\\")
+                    stripped_left_text += f" {string}"
+                # mixed number
+                elif metronome_mark.decimal is True:
+                    arguments = metronome_mark._get_markup_arguments()
+                    log, dots, stem, base, n, d = arguments
+                    stripped_left_text = (
+                        r"- \baca-metronome-mark-spanner-left-text-mixed-number"
+                    )
+                    stripped_left_text += f' {log} {dots} {stem} "{base}" "{n}" "{d}"'
+                else:
+                    arguments = metronome_mark._get_markup_arguments()
+                    log, dots, stem, value = arguments
+                    stripped_left_text = r"- \baca-metronome-mark-spanner-left-text"
+                    stripped_left_text += f' {log} {dots} {stem} "{value}"'
+            elif metronome_mark.custom_markup is not None:
+                left_text = r"- \baca-metronome-mark-spanner-left-markup"
+                string = abjad.lilypond(metronome_mark.custom_markup)
+                assert string.startswith("\\")
+                left_text += f" {string}"
+            # mixed number
+            elif metronome_mark.decimal is True:
+                arguments = metronome_mark._get_markup_arguments()
+                log, dots, stem, base, n, d = arguments
+                left_text = r"- \baca-metronome-mark-spanner-left-text-mixed-number"
+                left_text += f' {log} {dots} {stem} "{base}" "{n}" "{d}"'
+            else:
+                arguments = metronome_mark._get_markup_arguments()
+                log, dots, stem, value = arguments
+                left_text = r"- \baca-metronome-mark-spanner-left-text"
+                left_text += f' {log} {dots} {stem} "{value}"'
+        elif accelerando is not None:
+            left_text = accelerando._get_markup()
+            string = left_text.string.removeprefix(r"\markup").strip()
+            left_text = abjad.Markup(string)
+        elif ritardando is not None:
+            left_text = ritardando._get_markup()
+            string = left_text.string.removeprefix(r"\markup").strip()
+            left_text = abjad.Markup(string)
+        if has_trend:
+            style = "dashed-line-with-arrow"
+        else:
+            style = "invisible-line"
+        if 0 < i:
+            stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanMM")
+            abjad.attach(
+                stop_text_span,
+                skip,
+                tag=_tags.function_name(_frame(), n=1),
+            )
+        if add_right_text_to_me is skip:
+            right_text = final_leaf_metronome_mark._get_markup()
+        else:
+            right_text = None
+        start_text_span = abjad.StartTextSpan(
+            command=r"\bacaStartTextSpanMM",
+            left_text=left_text,
+            right_text=right_text,
+            style=style,
+        )
+        if not tag:
+            continue
+        assert "METRONOME_MARK" in tag.string, repr(tag)
+        if (
+            isinstance(wrapper.unbundle_indicator(), abjad.MetronomeMark)
+            and has_trend
+            and "EXPLICIT" not in tag.string
+        ):
+            words = []
+            for word in tag.string.split(":"):
+                if "METRONOME_MARK" in word:
+                    word = word.replace("REAPPLIED", "EXPLICIT")
+                    word = word.replace("REDUNDANT", "EXPLICIT")
+                words.append(word)
+            string = ":".join(words)
+            new_tag = abjad.Tag(string)
+            indicator = wrapper.unbundle_indicator()
+            abjad.detach(wrapper, skip)
+            abjad.attach(
+                indicator,
+                skip,
+                tag=new_tag.append(_tags.function_name(_frame(), n=5)),
+            )
+            tag = new_tag
+        if not (
+            isinstance(start_text_span.left_text, str)
+            and start_text_span.left_text.endswith("(1 . 1)")
+            and parts_metric_modulation_multiplier is not None
+        ):
+            abjad.attach(
+                start_text_span,
+                skip,
+                deactivate=True,
+                tag=tag.append(_tags.function_name(_frame(), n=2)),
+            )
+        else:
+            abjad.attach(
+                start_text_span,
+                skip,
+                deactivate=True,
+                tag=tag.append(_tags.function_name(_frame(), n=2.1)).append(
+                    _tags.METRIC_MODULATION_IS_NOT_SCALED,
+                ),
+            )
+            left_text_ = start_text_span.left_text
+            assert left_text_.endswith("(1 . 1)")
+            n, d = parts_metric_modulation_multiplier
+            left_text_ = left_text_[:-7] + f"({n} . {d})"
+            start_text_span_ = dataclasses.replace(
+                start_text_span, left_text=left_text_
+            )
+            abjad.attach(
+                start_text_span_,
+                skip,
+                deactivate=True,
+                tag=tag.append(_tags.function_name(_frame(), n=2.2)).append(
+                    _tags.METRIC_MODULATION_IS_SCALED,
+                ),
+            )
+        if stripped_left_text is not None:
+            start_text_span_ = dataclasses.replace(
+                start_text_span, left_text=stripped_left_text
+            )
+            abjad.attach(
+                start_text_span_,
+                skip,
+                deactivate=True,
+                tag=tag.append(_tags.function_name(_frame(), n=2.2)).append(
+                    _tags.METRIC_MODULATION_IS_STRIPPED,
+                ),
+            )
+        string = tag.string
+        if "EXPLICIT" in string:
+            status = "explicit"
+        elif "REAPPLIED" in string:
+            status = "reapplied"
+        elif "REDUNDANT" in string:
+            status = "redundant"
+        else:
+            status = None
+        assert status is not None
+        color = _treat._status_to_color[status]
+        string = f"{status.upper()}_METRONOME_MARK_WITH_COLOR"
+        tag = abjad.Tag(string)
+        if isinstance(left_text, str):
+            string = left_text.replace(
+                "baca-metronome-mark-spanner-left-markup",
+                "baca-metronome-mark-spanner-colored-left-markup",
+            )
+            string = string.replace(
+                "baca-metronome-mark-spanner-left-text",
+                "baca-metronome-mark-spanner-colored-left-text",
+            )
+            string = string.replace(
+                "baca-bracketed-metric-modulation",
+                "baca-colored-bracketed-metric-modulation",
+            )
+            string = string.replace(
+                "baca-bracketed-mixed-number-metric-modulation",
+                "baca-colored-bracketed-mixed-number-metric-modulation",
+            )
+            left_text_with_color = f"{string} #'{color}"
+        else:
+            color = f"(x11-color '{color})"
+            left_text_with_color = abjad.Markup(
+                rf"\with-color #{color} {left_text.string}"
+            )
+        if right_text:
+            wrapper = abjad.get.wrapper(skips[-1], abjad.MetronomeMark)
+            tag = wrapper.tag
+            string = tag.string
+            if "EXPLICIT" in string:
+                status = "explicit"
+            elif "REAPPLIED" in tag.string:
+                status = "reapplied"
+            elif "REDUNDANT" in tag.string:
+                status = "redundant"
+            else:
+                status = None
+            assert status is not None
+            color = _treat._status_to_color[status]
+            color = f"(x11-color '{color})"
+            right_text_with_color = abjad.Markup(
+                rf"\with-color #{color} {right_text.string}"
+            )
+        else:
+            right_text_with_color = None
+        start_text_span = abjad.StartTextSpan(
+            command=r"\bacaStartTextSpanMM",
+            left_text=left_text_with_color,
+            right_text=right_text_with_color,
+            style=style,
+        )
+        abjad.attach(
+            start_text_span,
+            skip,
+            deactivate=False,
+            tag=tag.append(_tags.function_name(_frame(), n=3)),
+        )
+    if indicator_count:
+        final_skip = skip
+        stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanMM")
+        tag_ = _tags.EOS_STOP_MM_SPANNER
+        tag_ = tag_.append(_tags.function_name(_frame(), n=4))
+        abjad.attach(stop_text_span, final_skip, tag=tag_)
+
+
+def style_anchor_skip(score):
+    global_skips = score["Skips"]
+    skip = abjad.get.leaf(global_skips, -1)
+    if not abjad.get.has_indicator(skip, _enums.ANCHOR_SKIP):
+        return
+    for literal in abjad.get.indicators(skip, abjad.LilyPondLiteral):
+        if r"\baca-time-signature-color" in literal.argument:
+            abjad.detach(literal, skip)
+    tag = _tags.function_name(_frame(), n=1)
+    tag = tag.append(_tags.ANCHOR_SKIP)
+    _append_tag_to_wrappers(skip, tag)
+    if abjad.get.has_indicator(skip, abjad.TimeSignature):
+        tag = _tags.function_name(_frame(), n=2)
+        tag = tag.append(_tags.ANCHOR_SKIP)
+        abjad.attach(
+            abjad.LilyPondLiteral(r"\baca-time-signature-transparent"), skip, tag=tag
+        )
+    tag = _tags.function_name(_frame(), n=3)
+    tag = tag.append(_tags.ANCHOR_SKIP)
+    abjad.attach(
+        abjad.LilyPondLiteral(
+            [
+                r"\once \override Score.BarLine.transparent = ##t",
+                r"\once \override Score.SpanBar.transparent = ##t",
+            ],
+            site="after",
+        ),
+        skip,
+        tag=tag,
+    )
 
 
 def time_signatures(pairs):
