@@ -543,7 +543,6 @@ def _collect_metadata(
     final_measure_number,
     first_measure_number,
     first_metronome_mark,
-    has_anchor_skip,
     metadata,
     persist,
     persistent_indicators,
@@ -574,8 +573,12 @@ def _collect_metadata(
         metadata_["final_measure_is_fermata"] = True
     if first_metronome_mark is False:
         metadata_["first_metronome_mark"] = first_metronome_mark
-    if has_anchor_skip is True:
-        metadata_["has_anchor_skip"] = has_anchor_skip
+    skips = score["Skips"]
+    if abjad.get.has_indicator(skips[-1], _enums.ANCHOR_SKIP):
+        has_anchor_skip = True
+    else:
+        has_anchor_skip = False
+    metadata_["has_anchor_skip"] = has_anchor_skip
     if persistent_indicators:
         persist_["persistent_indicators"] = persistent_indicators
     if start_clock_time is not None:
@@ -1183,7 +1186,6 @@ def _make_global_skips(
         global_skips.append(skip)
         if time_signature != abjad.TimeSignature((1, 4)):
             time_signature = abjad.TimeSignature((1, 4))
-            # abjad.attach(time_signature, skip, context="Score", tag=tag)
             abjad.attach(time_signature, skip, context="Score", tag=None)
 
 
@@ -2348,7 +2350,6 @@ def make_layout_ly(
     apply_breaks(score, spacing.breaks)
     _ = postprocess_score(
         score,
-        append_anchor_skip=has_anchor_skip,
         do_not_check_wellformedness=True,
         environment=_build.Environment(
             first_measure_number=first_measure_number,
@@ -2462,7 +2463,6 @@ def postprocess_score(
     all_music_in_part_containers=False,
     allow_empty_selections=False,
     always_make_global_rests=False,
-    append_anchor_skip=False,
     attach_instruments_by_hand=False,
     clock_time_extra_offset=None,
     clock_time_override=None,
@@ -2490,7 +2490,7 @@ def postprocess_score(
     transpose_score=False,
 ):
     skips = score["Skips"]
-    if append_anchor_skip:
+    if abjad.get.has_indicator(skips[-1], _enums.ANCHOR_SKIP):
         skips = skips[:-1]
     time_signatures = []
     for skip in skips:
@@ -2545,10 +2545,7 @@ def postprocess_score(
         _attach_sounds_during(score)
         if not first_section:
             _clone_section_initial_short_instrument_name(score)
-        cached_time_signatures = remove_redundant_time_signatures(
-            global_skips,
-            append_anchor_skip=append_anchor_skip,
-        )
+        cached_time_signatures = remove_redundant_time_signatures(global_skips)
         result = _get_fermata_measure_numbers(first_measure_number, score)
         fermata_start_offsets = result[0]
         fermata_measure_numbers = result[1]
@@ -2666,7 +2663,6 @@ def postprocess_score(
         final_measure_number,
         first_measure_number,
         first_metronome_mark,
-        append_anchor_skip,
         metadata,
         persist,
         persistent_indicators,
@@ -2722,12 +2718,11 @@ def reapply_persistent_indicators(argument, *, runtime=None):
         )
 
 
-def remove_redundant_time_signatures(global_skips, *, append_anchor_skip=False):
+def remove_redundant_time_signatures(global_skips):
     previous_time_signature = None
     cached_time_signatures = []
     skips = _select.skips(global_skips)
-    if append_anchor_skip:
-        assert abjad.get.has_indicator(skips[-1], _enums.ANCHOR_SKIP)
+    if abjad.get.has_indicator(skips[-1], _enums.ANCHOR_SKIP):
         skips = skips[:-1]
     for skip in skips:
         time_signature = abjad.get.indicator(skip, abjad.TimeSignature)
@@ -2745,9 +2740,7 @@ def scope(cache):
 
 
 def section_defaults():
-    return {
-        "append_anchor_skip": True,
-    }
+    return {}
 
 
 def set_up_score(
