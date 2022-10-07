@@ -425,11 +425,6 @@ def function_name(frame, self=None, *, n=None):
     return abjad.Tag(string)
 
 
-def handle(score, *, activate_tags=None, deactivate_tags=None):
-    deactivate(score, deactivate_tags)
-    activate(score, activate_tags)
-
-
 def has_persistence_tag(tag):
     """
     Is true when tag has persistence tag.

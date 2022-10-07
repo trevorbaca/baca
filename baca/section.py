@@ -1674,9 +1674,6 @@ def treat_untreated_persistent_wrappers(score, *, manifests=None):
             _treat.treat_persistent_wrapper(manifests, wrapper, status)
 
 
-_treat_untreated_persistent_wrappers_alias = treat_untreated_persistent_wrappers
-
-
 def _update_score_one_time(score):
     is_forbidden_to_update = score._is_forbidden_to_update
     score._is_forbidden_to_update = False
@@ -2352,14 +2349,11 @@ def make_layout_ly(
     _ = postprocess_score(
         score,
         append_anchor_skip=has_anchor_skip,
-        # add_container_identifiers=True,
-        comment_measure_numbers=True,
         do_not_check_wellformedness=True,
         environment=_build.Environment(
             first_measure_number=first_measure_number,
         ),
         first_section=True,
-        whitespace_leaves=True,
     )
     _remove_layout_tags(score)
     lilypond_file = _lilypond.file(score)
@@ -2465,20 +2459,18 @@ def measures(items):
 def postprocess_score(
     score,
     *,
-    add_container_identifiers=False,
     all_music_in_part_containers=False,
     allow_empty_selections=False,
     always_make_global_rests=False,
     append_anchor_skip=False,
     attach_instruments_by_hand=False,
-    check_persistent_indicators=False,
     clock_time_extra_offset=None,
     clock_time_override=None,
     color_not_yet_pitched=False,
     color_octaves=False,
     comment_measure_numbers=False,
     do_not_check_wellformedness=False,
-    # do_not_force_nonnatural_accidentals=False,
+    do_not_force_nonnatural_accidentals=False,
     do_not_require_short_instrument_names=False,
     empty_fermata_measures=False,
     environment: _build.Environment = None,
@@ -2487,20 +2479,15 @@ def postprocess_score(
     fermata_measure_empty_overrides=(),
     final_section=False,
     first_section=False,
-    force_nonnatural_accidentals=False,
     global_rests_in_every_staff=False,
     global_rests_in_topmost_staff=False,
-    label_clock_time=False,
     magnify_staves=None,
     manifests=None,
     part_manifest=None,
     parts_metric_modulation_multiplier=None,
     section_number=None,
-    shift_measure_initial_clefs=False,
     tags: _tags.Tags = None,
     transpose_score=False,
-    treat_untreated_persistent_wrappers=False,
-    whitespace_leaves=False,
 ):
     skips = score["Skips"]
     if append_anchor_skip:
@@ -2527,7 +2514,7 @@ def postprocess_score(
     if deactivate is not None:
         assert isinstance(deactivate, list), repr(deactivate)
         assert all(isinstance(_, abjad.Tag) for _ in deactivate)
-    # assert isinstance(do_not_force_nonnatural_accidentals, bool)
+    assert isinstance(do_not_force_nonnatural_accidentals, bool)
     assert isinstance(do_not_require_short_instrument_names, bool)
     assert isinstance(empty_fermata_measures, bool)
     environment = environment or _build.Environment()
@@ -2548,7 +2535,6 @@ def postprocess_score(
         assert len(parts_metric_modulation_multiplier) == 2
     previous_persistent_indicators = previous_metadata.get("persistent_indicators", {})
     assert isinstance(transpose_score, bool)
-    assert isinstance(treat_untreated_persistent_wrappers, bool)
     voice_name_to_parameter_to_state: dict[str, dict] = {}
     with abjad.ForbidUpdate(component=score, update_on_exit=True):
         offset_to_measure_number = _populate_offset_to_measure_number(
@@ -2571,8 +2557,7 @@ def postprocess_score(
             fermata_measure_empty_overrides = [
                 _ - first_measure_number + 1 for _ in fermata_measure_numbers
             ]
-        if treat_untreated_persistent_wrappers:
-            _treat_untreated_persistent_wrappers_alias(score, manifests=manifests)
+        treat_untreated_persistent_wrappers(score, manifests=manifests)
         span_metronome_marks(
             score, parts_metric_modulation_multiplier=parts_metric_modulation_multiplier
         )
@@ -2583,9 +2568,7 @@ def postprocess_score(
         _color_not_yet_registered(score)
         _color_mock_pitch(score)
         _set_intermittent_to_staff_position_zero(score)
-        if color_not_yet_pitched:
-            # if True:
-            _color_not_yet_pitched(score)
+        _color_not_yet_pitched(score)
         _set_not_yet_pitched_to_staff_position_zero(score)
         _clean_up_repeat_tie_direction(score)
         _clean_up_laissez_vibrer_tie_direction(score)
@@ -2593,29 +2576,24 @@ def postprocess_score(
             _error_on_not_yet_pitched(score)
         _check_doubled_dynamics(score)
         color_out_of_range_pitches(score)
-        if check_persistent_indicators:
-            _check_persistent_indicators(
-                do_not_require_short_instrument_names,
-                score,
-            )
+        _check_persistent_indicators(
+            do_not_require_short_instrument_names,
+            score,
+        )
         color_repeat_pitch_classes(score)
         if color_octaves:
             _color_octaves_alias(score)
         _attach_shadow_tie_indicators(score)
-        if force_nonnatural_accidentals:
-            # if not do_not_force_nonnatural_accidentals:
+        if not do_not_force_nonnatural_accidentals:
             _force_nonnatural_accidentals(score)
         _label_duration_multipliers(score)
         _magnify_staves(magnify_staves, score)
-        if whitespace_leaves:
-            _whitespace_leaves(score)
-        if comment_measure_numbers:
-            # if True:
-            _comment_measure_numbers(
-                first_measure_number,
-                offset_to_measure_number,
-                score,
-            )
+        _whitespace_leaves(score)
+        _comment_measure_numbers(
+            first_measure_number,
+            offset_to_measure_number,
+            score,
+        )
         _style_fermata_measures(
             fermata_extra_offset_y,
             fermata_measure_empty_overrides,
@@ -2624,25 +2602,21 @@ def postprocess_score(
             offset_to_measure_number,
             score,
         )
-        if shift_measure_initial_clefs:
-            _shift_measure_initial_clefs(
-                first_measure_number,
-                offset_to_measure_number,
-                score,
-            )
-        container_to_part_assignment = None
-        # if add_container_identifiers:
-        if True:
-            container_to_part_assignment = _add_container_identifiers(
-                score,
-                section_number,
-            )
-            if all_music_in_part_containers:
-                _check_all_music_in_part_containers(score)
-            _check_duplicate_part_assignments(
-                container_to_part_assignment,
-                part_manifest,
-            )
+        _shift_measure_initial_clefs(
+            first_measure_number,
+            offset_to_measure_number,
+            score,
+        )
+        container_to_part_assignment = _add_container_identifiers(
+            score,
+            section_number,
+        )
+        if all_music_in_part_containers:
+            _check_all_music_in_part_containers(score)
+        _check_duplicate_part_assignments(
+            container_to_part_assignment,
+            part_manifest,
+        )
     _move_global_rests(
         global_rests_in_every_staff,
         global_rests_in_topmost_staff,
@@ -2663,17 +2637,16 @@ def postprocess_score(
     clock_time_duration = None
     start_clock_time = None
     stop_clock_time = None
-    if label_clock_time:
-        result = _label_clock_time(
-            clock_time_override,
-            fermata_measure_numbers,
-            first_measure_number,
-            previous_metadata,
-            score,
-        )
-        clock_time_duration = result[0]
-        start_clock_time = result[1]
-        stop_clock_time = result[2]
+    result = _label_clock_time(
+        clock_time_override,
+        fermata_measure_numbers,
+        first_measure_number,
+        previous_metadata,
+        score,
+    )
+    clock_time_duration = result[0]
+    start_clock_time = result[1]
+    stop_clock_time = result[2]
     final_measure_number = first_measure_number + measure_count - 1
     persistent_indicators = _collect_persistent_indicators(
         manifests,
@@ -2773,16 +2746,7 @@ def scope(cache):
 
 def section_defaults():
     return {
-        "add_container_identifiers": True,
         "append_anchor_skip": True,
-        "check_persistent_indicators": True,
-        "color_not_yet_pitched": True,
-        "comment_measure_numbers": True,
-        "force_nonnatural_accidentals": True,
-        "label_clock_time": True,
-        "shift_measure_initial_clefs": True,
-        "treat_untreated_persistent_wrappers": True,
-        "whitespace_leaves": True,
     }
 
 
