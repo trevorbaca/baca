@@ -2348,14 +2348,14 @@ def make_layout_ly(
     spacing(score, page_layout_profile, has_anchor_skip=has_anchor_skip)
     # TODO: separate 'breaks' from SpacingSpecifier:
     apply_breaks(score, spacing.breaks)
-    _ = postprocess_score(
-        score,
-        do_not_check_wellformedness=True,
-        environment=_build.Environment(
-            first_measure_number=first_measure_number,
-        ),
-        first_section=True,
+    offset_to_measure_number = _populate_offset_to_measure_number(
+        first_measure_number,
+        score["Skips"],
     )
+    _comment_measure_numbers(first_measure_number, offset_to_measure_number, score)
+    _whitespace_leaves(score)
+    _add_container_identifiers(score, None)
+    style_anchor_skip(score)
     _remove_layout_tags(score)
     lilypond_file = _lilypond.file(score)
     context = lilypond_file["Skips"]
@@ -2486,9 +2486,10 @@ def postprocess_score(
     part_manifest=None,
     parts_metric_modulation_multiplier=None,
     section_number=None,
-    tags: _tags.Tags = None,
     transpose_score=False,
 ):
+    assert environment is not None, repr(environment)
+    assert manifests is not None, repr(manifests)
     skips = score["Skips"]
     if abjad.get.has_indicator(skips[-1], _enums.ANCHOR_SKIP):
         skips = skips[:-1]
@@ -2497,23 +2498,12 @@ def postprocess_score(
         time_signature = abjad.get.effective(skip, abjad.TimeSignature)
         time_signatures.append(time_signature)
     assert isinstance(score, abjad.Score), repr(score)
-    activate, deactivate = None, None
-    if tags is not None:
-        assert isinstance(tags, _tags.Tags), repr(tags)
-        activate = tags.activate
-        deactivate = tags.deactivate
-    if activate is not None:
-        assert isinstance(activate, list), repr(activate)
-        assert all(isinstance(_, abjad.Tag) for _ in activate)
     assert isinstance(all_music_in_part_containers, bool)
     assert isinstance(allow_empty_selections, bool)
     if clock_time_override is not None:
         assert isinstance(clock_time_override, abjad.MetronomeMark)
     assert isinstance(color_octaves, bool)
     assert isinstance(do_not_check_wellformedness, bool)
-    if deactivate is not None:
-        assert isinstance(deactivate, list), repr(deactivate)
-        assert all(isinstance(_, abjad.Tag) for _ in deactivate)
     assert isinstance(do_not_force_nonnatural_accidentals, bool)
     assert isinstance(do_not_require_short_instrument_names, bool)
     assert isinstance(empty_fermata_measures, bool)
@@ -2737,10 +2727,6 @@ def remove_redundant_time_signatures(global_skips):
 
 def scope(cache):
     return DynamicScope(cache)
-
-
-def section_defaults():
-    return {}
 
 
 def set_up_score(
