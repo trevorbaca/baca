@@ -1159,7 +1159,8 @@ def show_annotations(directory, *, undo=False):
             _print_tags(message)
 
 
-def show_tag(directory, tag, *, undo=False):
+def show_tag(directory, tag, *, undo: bool = False):
+    assert isinstance(undo, bool), repr(undo)
     directory = pathlib.Path(directory)
     tag = abjad.Tag(tag)
     job = baca.jobs.show_tag(directory, tag, undo=undo)

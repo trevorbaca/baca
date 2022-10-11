@@ -6,8 +6,10 @@ import baca
 
 if __name__ == "__main__":
     directory = os.getcwd()
-    arguments = baca.build.arguments("--tag", "--undo")
-    if not arguments.tag:
-        print("Missing mandatory tag parameter ...")
-        sys.exit(-1)
-    baca.build.show_tag(directory, arguments.tag, undo=arguments.undo)
+#    arguments = baca.build.arguments("--tag", "--undo")
+#    if not arguments.tag:
+#        print("Missing mandatory tag parameter ...")
+#        sys.exit(-1)
+#    baca.build.show_tag(directory, arguments.tag, undo=arguments.undo)
+    # baca.build.show_tag(directory, "MEASURE_NUMBER")
+    baca.build.show_tag(directory, "LOCAL_MEASURE_NUMBER", undo=True)
