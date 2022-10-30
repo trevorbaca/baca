@@ -20,6 +20,8 @@ extensions = [
     "sphinx_toggleprompt",
     "uqbar.sphinx.api",
     "uqbar.sphinx.book",
+    # uqbar.sphinx.inheritance can only be removed by subclassing something in uqbar:
+    "uqbar.sphinx.inheritance",
     "uqbar.sphinx.style",
 ]
 

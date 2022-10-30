@@ -659,7 +659,7 @@ def _make_figure_tuplet(
             and pitch_expression[-1] in (None, "skip")
         ):
             multiplier = pitch_expression[0]
-            duration = abjad.Duration(1, talea.denominator)
+            duration = abjad.NonreducedFraction(1, talea.denominator)
             duration *= multiplier
             if pitch_expression[-1] == "skip":
                 skips_instead_of_rests = True
@@ -1141,7 +1141,8 @@ class Accumulator:
                 fused_selection.extend(selection.annotation)
             else:
                 assert isinstance(selection, abjad.Timespan)
-                skip = abjad.Skip(1, multiplier=selection.duration)
+                multiplier = abjad.NonreducedFraction(selection.duration)
+                skip = abjad.Skip(1, multiplier=multiplier)
                 fused_selection.append(skip)
         return fused_selection
 
@@ -1470,8 +1471,10 @@ def make_figures(
         )
     duration = abjad.get.duration(container)
     if tsd is not None:
-        duration = duration.with_denominator(tsd)
-    time_signature = abjad.TimeSignature(duration)
+        nonreduced_duration = duration.with_denominator(tsd)
+    else:
+        nonreduced_duration = abjad.NonreducedFraction(duration)
+    time_signature = abjad.TimeSignature(nonreduced_duration.pair)
     leaf = abjad.select.leaf(container, 0)
     abjad.annotate(leaf, "figure_name", figure_name)
     if not do_not_label:
