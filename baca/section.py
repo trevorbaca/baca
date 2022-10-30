@@ -2042,7 +2042,10 @@ def cache_leaves(score, measure_count, voice_abbreviations=None):
         # TODO: replace loop with bisection:
         for i, measure_timespan in enumerate(measure_timespans):
             measure_number = i + 1
-            if leaf_timespan.starts_during_timespan(measure_timespan):
+            if (
+                measure_timespan.start_offset <= leaf_timespan.start_offset
+                and leaf_timespan.start_offset < measure_timespan.stop_offset
+            ):
                 cached_leaves = measure_number_to_leaves.setdefault(measure_number, [])
                 cached_leaves.append(leaf)
     if voice_abbreviations:
