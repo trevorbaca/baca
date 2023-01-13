@@ -956,7 +956,7 @@ class Acciaccatura:
         assert isinstance(self.lmr, LMR), repr(self.lmr)
 
     def __call__(
-        self, collection: list = None
+        self, collection: list | None = None
     ) -> tuple[list[abjad.BeforeGraceContainer | None], list]:
         assert isinstance(collection, list), repr(collection)
         segment_parts = self.lmr(collection)
@@ -1083,12 +1083,12 @@ class Accumulator:
         voice_name: str,
         collections: typing.Sequence,
         *commands,
-        anchor: Anchor = None,
+        anchor: Anchor | None = None,
         do_not_label: bool = False,
         figure_name: str = "",
-        figure_label_direction: int = None,
+        figure_label_direction: int | None = None,
         hide_time_signature: bool | None = None,
-        tsd: int = None,
+        tsd: int | None = None,
     ) -> None:
         make_figures(
             self,
@@ -1184,8 +1184,8 @@ class FigureMaker:
     def __call__(
         self,
         collections: typing.Sequence,
-        collection_index: int = None,
-        total_collections: int = None,
+        collection_index: int | None = None,
+        total_collections: int | None = None,
     ) -> list[abjad.Tuplet]:
         return _call_figure_maker(
             self.affix,
@@ -1361,10 +1361,10 @@ def figure(
     denominator: int,
     *,
     acciaccatura: bool | Acciaccatura | LMR | None = None,
-    affix: RestAffix = None,
+    affix: RestAffix | None = None,
     restart_talea: bool = False,
-    tsd: int = None,
-    spelling: rmakers.Spelling = None,
+    tsd: int | None = None,
+    spelling: rmakers.Spelling | None = None,
     treatments: typing.Sequence = (),
 ) -> abjad.Container:
     if acciaccatura is True:
@@ -1444,15 +1444,15 @@ def make_figures(
     voice_name: str,
     collections: typing.Sequence | None,
     *commands,
-    anchor: "Anchor" = None,
-    container: abjad.Container = None,
+    anchor: typing.Optional["Anchor"] = None,
+    container: abjad.Container | None = None,
     do_not_label: bool = False,
     figure_name: str = "",
-    figure_label_direction: int = None,
+    figure_label_direction: int | None = None,
     hide_time_signature: bool | None = None,
-    imbrications: dict[str, list[abjad.Container]] = None,
-    tsd: int = None,
-    tuplets: list[abjad.Tuplet] = None,
+    imbrications: dict[str, list[abjad.Container]] | None = None,
+    tsd: int | None = None,
+    tuplets: list[abjad.Tuplet] | None = None,
 ):
     assert isinstance(figure_name, str), repr(figure_name)
     voice_name = accumulator.voice_abbreviations.get(voice_name, voice_name)
@@ -1535,7 +1535,7 @@ def make_figures(
 
 
 def nest(
-    argument, treatments: typing.Sequence, *, lmr: LMR = None
+    argument, treatments: typing.Sequence, *, lmr: LMR | None = None
 ) -> list[abjad.Tuplet]:
     assert treatments is not None
     if not isinstance(treatments, list):

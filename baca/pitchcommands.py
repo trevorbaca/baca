@@ -1912,7 +1912,7 @@ def pitches(
     allow_octaves: bool = False,
     allow_repeats: bool = False,
     allow_repitch: bool = False,
-    metadata: dict = None,
+    metadata: dict | None = None,
     mock: bool = False,
     do_not_transpose: bool = False,
     exact: bool = False,
@@ -2158,7 +2158,7 @@ def pitches(
 def register(
     argument,
     start: int,
-    stop: int = None,
+    stop: int | None = None,
 ) -> None:
     r"""
 

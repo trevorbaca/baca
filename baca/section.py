@@ -2741,8 +2741,8 @@ def set_up_score(
     first_measure_number: int = 1,
     first_section: bool = False,
     layout: bool = False,
-    manifests: dict = None,
-    previous_persistent_indicators: dict = None,
+    manifests: dict | None = None,
+    previous_persistent_indicators: dict | None = None,
 ) -> None:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     manifests = manifests or {}

@@ -323,10 +323,10 @@ def degree_of_rotational_symmetry(sequence):
 # TODO: generalize ``indices`` to pattern
 def fuse(
     sequence,
-    counts: list[int] = None,
+    counts: list[int] | None = None,
     *,
     cyclic: bool = False,
-    indices: typing.Sequence[int] = None,
+    indices: typing.Sequence[int] | None = None,
 ):
     r"""
     Fuses sequence by ``counts``.
@@ -741,8 +741,8 @@ def partition(sequence, counts=None):
 def quarters(
     sequence,
     *,
-    compound: abjad.typings.Duration = None,
-    remainder: int = None,
+    compound: abjad.typings.Duration | None = None,
+    remainder: int | None = None,
 ):
     r"""
     Splits sequence into quarter-note durations.
@@ -1183,10 +1183,10 @@ def split_divisions(
     sequence,
     durations: list[abjad.typings.Duration],
     *,
-    compound: abjad.typings.Duration = None,
+    compound: abjad.typings.Duration | None = None,
     cyclic: bool = False,
-    remainder: int = None,
-    remainder_fuse_threshold: abjad.typings.Duration = None,
+    remainder: int | None = None,
+    remainder_fuse_threshold: abjad.typings.Duration | None = None,
 ):
     r"""
     Splits sequence divisions by ``durations``.

@@ -150,8 +150,8 @@ def slur(
     argument,
     *tweaks: abjad.Tweak,
     phrasing_slur: bool = False,
-    start_slur: abjad.StartSlur = None,
-    stop_slur: abjad.StopSlur = None,
+    start_slur: abjad.StartSlur | None = None,
+    stop_slur: abjad.StopSlur | None = None,
 ) -> list[abjad.Wrapper]:
     if phrasing_slur is True:
         start_slur_ = start_slur or abjad.StartPhrasingSlur()
@@ -191,7 +191,7 @@ def sustain_pedal(
 def trill_spanner(
     argument,
     *tweaks: abjad.Tweak,
-    alteration: str = None,
+    alteration: str | None = None,
     harmonic: bool = False,
     left_broken: bool = False,
     right_broken: bool = False,

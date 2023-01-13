@@ -139,7 +139,7 @@ def _do_piecewise_command(
     self_left_broken: bool = False,
     self_pieces: typing.Callable = lambda _: _select.leaves(_),
     self_remove_length_1_spanner_start: bool = False,
-    self_right_broken: typing.Any = None,
+    self_right_broken: typing.Any | None = None,
     self_specifiers: typing.Sequence = (),
     self_tag,
     self_tweaks: typing.Sequence[_typings.IndexedTweak] = (),
@@ -557,7 +557,7 @@ def bow_speed_spanner(
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
-    left_broken_text: str = None,
+    left_broken_text: str | None = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
@@ -586,7 +586,7 @@ def circle_bow_spanner(
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-circle-bowing-markup",
     pieces: typing.Callable = lambda _: abjad.select.group(_),
-    qualifier: str = None,
+    qualifier: str | None = None,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
@@ -1023,7 +1023,7 @@ def scp_spanner(
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
-    left_broken_text: str = None,
+    left_broken_text: str | None = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
@@ -1083,7 +1083,7 @@ def string_number_spanner(
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
-    left_broken_text: str = None,
+    left_broken_text: str | None = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
@@ -1142,11 +1142,11 @@ def text_spanner(
     autodetect_right_padding: bool = False,
     bookend: bool | int = -1,
     boxed: bool = False,
-    direction: int = None,
+    direction: int | None = None,
     final_piece_spanner: bool | None = None,
     leak_spanner_stop: bool = False,
     left_broken: bool = False,
-    left_broken_text: str = None,
+    left_broken_text: str | None = None,
     lilypond_id: int | str | None = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
@@ -1189,7 +1189,7 @@ def vibrato_spanner(
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
-    left_broken_text: str = None,
+    left_broken_text: str | None = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:

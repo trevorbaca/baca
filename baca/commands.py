@@ -244,7 +244,7 @@ def flat_glissando(
     do_not_hide_middle_note_heads: bool = False,
     mock: bool = False,
     hide_middle_stems: bool = False,
-    hide_stem_selector: typing.Callable = None,
+    hide_stem_selector: typing.Callable | None = None,
     left_broken: bool = False,
     right_broken: bool = False,
     right_broken_show_next: bool = False,
@@ -367,12 +367,12 @@ def glissando(
     allow_ties: bool = False,
     hide_middle_note_heads: bool = False,
     hide_middle_stems: bool = False,
-    hide_stem_selector: typing.Callable = None,
+    hide_stem_selector: typing.Callable | None = None,
     left_broken: bool = False,
     parenthesize_repeats: bool = False,
     right_broken: bool = False,
     right_broken_show_next: bool = False,
-    style: str = None,
+    style: str | None = None,
     zero_padding: bool = False,
 ) -> None:
     leaves = abjad.select.leaves(argument)

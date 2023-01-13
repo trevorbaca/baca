@@ -1210,7 +1210,7 @@ def stem_color(
     argument,
     color: str = "#red",
     *,
-    context: str = None,
+    context: str | None = None,
 ) -> list[abjad.Wrapper]:
     return _do_override(
         _frame(),
