@@ -8,7 +8,7 @@ if __name__ == "__main__":
         author_email="trevor.baca@gmail.com",
         description="Trevor Bača's Abjad library.",
         install_requires=[
-            "abjad>=3.14",
+            "abjad>=3.15",
             "sphinx",
             "sphinx-rtd-theme",
             "sphinx-toggleprompt",
@@ -21,5 +21,5 @@ if __name__ == "__main__":
         python_requires=">=3.10",
         url="https://github.com/trevorbaca/baca",
         # TODO: add baca/_version.py and retrieve dynamically
-        version="3.14",
+        version="3.15",
     )
