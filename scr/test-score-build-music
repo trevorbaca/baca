@@ -41,9 +41,9 @@ def _test_build(build):
         if layout_py.exists():
             layout_ly = build / "layout.ly"
             if layout_ly.exists():
-                message = _make_pass_string(f"{layout_ly} found")
+                message = _make_pass_string(f"{baca.path.trim(layout_ly)} found")
             else:
-                message = _make_fail_string(f"{layout_ly} missing")
+                message = _make_fail_string(f"{baca.path.trim(layout_ly)} missing")
                 result = 99
             messages.append(message)
             if layout_ly.exists():
@@ -53,21 +53,21 @@ def _test_build(build):
                     lines = pointer.readlines()
                 tmp.unlink()
                 if not lines:
-                    message = _make_pass_string(f"{layout_ly} same")
+                    message = _make_pass_string(f"{baca.path.trim(layout_ly)} same")
                 else:
                     diffs.append(lines[:30])
-                    message = _make_fail_string(f"{layout_ly} different")
+                    message = _make_fail_string(f"{baca.path.trim(layout_ly)} different")
                     result = 99
                 messages.append(message)
         music_pdf = build / "music.pdf"
         if music_pdf.exists():
-            message = _make_pass_string(f"{music_pdf} found")
+            message = _make_pass_string(f"{baca.path.trim(music_pdf)} found")
         else:
-            message = _make_fail_string(f"{music_pdf} missing")
+            message = _make_fail_string(f"{baca.path.trim(music_pdf)} missing")
             result = 99
         messages.append(message)
     else:
-        message = _make_file_handling_string(f"Missing {music_ly}")
+        message = _make_file_handling_string(f"Missing {baca.path.trim(music_ly)}")
         messages.append(message)
     return messages, diffs, result
 
