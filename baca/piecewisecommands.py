@@ -361,11 +361,12 @@ def _prepare_hairpin_arguments(
         specifiers = dynamics
     for item in specifiers:
         assert isinstance(item, _Specifier), repr(dynamics)
-    final_hairpin_: bool | abjad.StartHairpin | None = None
+    final_hairpin_ = None
     if isinstance(final_hairpin, bool):
         final_hairpin_ = final_hairpin
     elif isinstance(final_hairpin, str):
         final_hairpin_ = abjad.StartHairpin(final_hairpin)
+    assert isinstance(final_hairpin_, bool | abjad.StartHairpin | None)
     return final_hairpin_, specifiers
 
 
@@ -403,8 +404,8 @@ def _prepare_text_spanner_arguments(
             "-|": "solid-line-with-hook",
         }
     if isinstance(items, str):
-        items_: list[str | abjad.Markup] = []
-        current_item: list[str] = []
+        items_ = []
+        current_item = []
         for word in items.split():
             if word in shape_to_style:
                 if current_item:
@@ -420,6 +421,7 @@ def _prepare_text_spanner_arguments(
             else:
                 current_item.append(word)
         if current_item:
+            assert all(isinstance(_, str) for _ in current_item), repr(current_item)
             item_ = " ".join(current_item)
             if boxed:
                 string = rf'\baca-boxed-markup "{item_}"'
@@ -427,6 +429,8 @@ def _prepare_text_spanner_arguments(
                 items_.append(markup)
             else:
                 items_.append(item_)
+        for item in items:
+            assert isinstance(item, str | abjad.Markup), repr(item)
         items = items_
     specifiers = []
     if len(items) == 1:
@@ -449,7 +453,6 @@ def _prepare_text_spanner_arguments(
     stop_text_span = abjad.StopTextSpan(command=command)
     cyclic_items = abjad.CyclicTuple(items)
     for i, item in enumerate(cyclic_items):
-        item_markup: str | abjad.Markup
         if item in shape_to_style:
             continue
         if isinstance(item, str) and item.startswith("\\"):
@@ -462,15 +465,13 @@ def _prepare_text_spanner_arguments(
             string = item_markup.string
             item_markup = abjad.Markup(r"\upright {string}")
             assert isinstance(item_markup, abjad.Markup)
-        prototype = (str, abjad.Markup)
-        assert isinstance(item_markup, prototype)
+        assert isinstance(item_markup, str | abjad.Markup)
         style = "invisible-line"
         if cyclic_items[i + 1] in shape_to_style:
             style = shape_to_style[cyclic_items[i + 1]]
             right_text = cyclic_items[i + 2]
         else:
             right_text = cyclic_items[i + 1]
-        right_markup: str | abjad.Markup
         if isinstance(right_text, str):
             if "hook" not in style:
                 if right_text.startswith("\\"):
@@ -515,7 +516,6 @@ def _prepare_text_spanner_arguments(
             string = r"\markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75"
             string += rf" \general-align #Y #1 {content_string} }}"
             right_markup = abjad.Markup(string)
-        bookended_spanner_start: abjad.StartTextSpan | abjad.Bundle
         bookended_spanner_start = dataclasses.replace(
             start_text_span, right_text=right_markup
         )

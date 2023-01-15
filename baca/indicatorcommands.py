@@ -55,7 +55,6 @@ def _attach_persistent_indicator(
 
 
 def _prepare_alternate_bow_strokes(*tweaks, downbow_first, full):
-    indicators: list[abjad.Articulation | abjad.Bundle]
     if downbow_first:
         if full:
             strings = ["baca-full-downbow", "baca-full-upbow"]
@@ -68,6 +67,8 @@ def _prepare_alternate_bow_strokes(*tweaks, downbow_first, full):
             strings = ["upbow", "downbow"]
     indicators = [abjad.Articulation(_) for _ in strings]
     indicators = [_tweaks.bundle_tweaks(_, tweaks) for _ in indicators]
+    for indicator in indicators:
+        assert isinstance(indicator, abjad.Articulation | abjad.Bundle)
     return indicators
 
 

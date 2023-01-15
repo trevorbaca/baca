@@ -71,8 +71,8 @@ def _prepare_start_trill_span(
             interval = abjad.NamedInterval(alteration)
         except Exception:
             pass
-    start_trill_span_: abjad.StartTrillSpan | abjad.Bundle
     start_trill_span_ = start_trill_span
+    assert isinstance(start_trill_span_, (abjad.StartTrillSpan, abjad.Bundle))
     if pitch is not None or interval is not None:
         start_trill_span_ = dataclasses.replace(
             start_trill_span_, interval=interval, pitch=pitch

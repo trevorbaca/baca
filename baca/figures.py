@@ -1063,7 +1063,7 @@ class Accumulator:
         "voice_abbreviations",
     )
 
-    def __init__(self, score, voice_abbreviations=None):
+    def __init__(self, score: abjad.Score, voice_abbreviations=None):
         assert isinstance(score, abjad.Score), repr(score)
         self.score = score
         self.voice_abbreviations = dict(voice_abbreviations or {})
@@ -1074,7 +1074,7 @@ class Accumulator:
         self.current_offset = abjad.Offset(0)
         self.figure_number = 1
         self.figure_names: list[str] = []
-        self.floating_selections = dict([(_, []) for _ in self.voice_names])
+        self.floating_selections: dict = dict([(_, []) for _ in self.voice_names])
         self.score_stop_offset = abjad.Offset(0)
         self.time_signatures: list[abjad.TimeSignature] = []
 
