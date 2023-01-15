@@ -156,7 +156,8 @@ def _externalize_music_ly(music_ly):
     if messages:
         _print_file_handling("Handling not-topmost ...")
         _tags = music_ly.with_name(".tags")
-        # TODO: append?
+        # TODO:
+        raise Exception("should we append tags?")
         _tags.write_text("\n".join(messages))
 
 
@@ -750,9 +751,9 @@ def handle_build_tags(_sections_directory):
         message_zero = not bool(quiet)
         job = dataclasses.replace(job, message_zero=message_zero)
         messages = job()
-        for message in messages:
-            _print_tags(message)
+        return messages
 
+    messages = []
     for job in (
         baca.jobs.handle_edition_tags(_sections_directory),
         baca.jobs.handle_fermata_bar_lines(_sections_directory),
@@ -816,7 +817,12 @@ def handle_build_tags(_sections_directory):
             undo=True,
         ),
     ):
-        _run(job, quiet=False)
+        messages_ = _run(job, quiet=False)
+        messages.extend(messages_)
+    _tags = _sections_directory.with_name(".tags")
+    assert _tags.parent.parent.name == "builds"
+    _print_file_handling(f"Writing {baca.path.trim(_tags)} ...")
+    _tags.write_text("\n".join(messages) + "\n")
 
 
 def handle_part_tags(directory):

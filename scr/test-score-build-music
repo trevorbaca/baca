@@ -82,7 +82,6 @@ def main():
         messages.append("")
         diffs.extend(diffs_)
         result = result or result_
-        print()
     for diff in diffs:
         string = "".join(diff)
         print(string)

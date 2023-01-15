@@ -2427,11 +2427,10 @@ def make_layout_ly(
                 continue
     count = len(bol_measure_numbers)
     numbers = abjad.string.pluralize("number", count)
-    items = ", ".join([str(_) for _ in bol_measure_numbers])
     if not do_not_write_metadata:
         metadata = layout_directory / ".metadata"
         string = _path.trim(metadata)
-        message = f"Writing BOL measure {numbers} {items} to {string} ..."
+        message = f"Writing BOL measure {numbers} to {string} ..."
         _build._print_file_handling(message)
         if layout_directory.name.endswith("-parts"):
             if document_name is not None:
