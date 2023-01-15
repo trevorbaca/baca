@@ -18,6 +18,7 @@ def _also_untagged(section_directory):
     if os.environ.get("GITHUB_WORKSPACE"):
         return
     _print_main_task("Writing untagged ...")
+    printed_message = False
     for name in ("music.ly", "music.ily", "layout.ly"):
         tagged = section_directory / name
         if not tagged.exists():
@@ -45,7 +46,9 @@ def _also_untagged(section_directory):
         untagged = pathlib.Path(untagged)
         if not untagged.parent.is_dir():
             untagged.parent.mkdir(parents=True)
-        _print_file_handling(f"Writing {untagged} ...")
+        if not printed_message:
+            _print_file_handling(f"Populating {untagged.parent} ...")
+            printed_message = True
         untagged.write_text(string)
     for name in ("music.ly", "music.ily", "layout.ly"):
         tagged = section_directory / name
@@ -53,8 +56,9 @@ def _also_untagged(section_directory):
             continue
         safekeeping = section_directory / f"{name}.original"
         shutil.copyfile(tagged, safekeeping)
-    color_persistent_indicators(section_directory, undo=True)
-    show_annotations(section_directory, undo=True)
+    color_persistent_indicators(section_directory, do_not_print_tags=True, undo=True)
+    show_annotations(section_directory, do_not_print_tags=True, undo=True)
+    printed_message = False
     for name in ("music.ly", "music.ily", "layout.ly"):
         tagged = section_directory / name
         if not tagged.exists():
@@ -88,7 +92,9 @@ def _also_untagged(section_directory):
         bw = pathlib.Path(bw)
         if not bw.parent.is_dir():
             bw.parent.mkdir(parents=True)
-        _print_file_handling(f"Writing {bw} ...")
+        if not printed_message:
+            _print_file_handling(f"Populating {bw.parent} ...")
+            printed_message = True
         bw.write_text(string)
     for name in ("music.ly", "music.ily", "layout.ly"):
         tagged = section_directory / name
@@ -149,8 +155,9 @@ def _externalize_music_ly(music_ly):
     messages = not_topmost()
     if messages:
         _print_file_handling("Handling not-topmost ...")
-    for message in messages:
-        _print_tags(message)
+        _tags = music_ly.with_name(".tags")
+        # TODO: append?
+        _tags.write_text("\n".join(messages))
 
 
 def _get_lilypond_include_string():
@@ -205,20 +212,23 @@ def _handle_music_ly_tags_in_section(music_ly):
     text = music_ly.read_text()
     text = abjad.tag.left_shift_tags(text)
     music_ly.write_text(text)
+    _tags = music_ly.with_name(".tags")
+    messages = []
     for job in (
         baca.jobs.handle_edition_tags(music_ly),
         baca.jobs.handle_fermata_bar_lines(music_ly.parent),
         baca.jobs.handle_shifted_clefs(music_ly.parent),
         baca.jobs.handle_mol_tags(music_ly.parent),
     ):
-        for message in job():
-            _print_tags(message)
+        messages_ = job()
+        messages.extend(messages_)
+    _print_file_handling(f"Writing {baca.path.trim(_tags)} ...")
+    _tags.write_text("\n".join(messages))
 
 
 def _log_timing(section_directory, timing):
-    _print_main_task("Logging time ...")
-    _print_all_timing(timing)
     _timing = section_directory / ".timing"
+    _print_file_handling(f"Writing {baca.path.trim(_timing)} ...")
     with _timing.open(mode="a") as pointer:
         pointer.write("\n")
         line = time.strftime("%Y-%m-%d %H:%M:%S") + "\n"
@@ -416,12 +426,12 @@ def _make_section_pdf(
         music_ly,
         music_pdf_mtime,
     )
-    if also_untagged is True:
-        _also_untagged(section_directory)
     if print_timing:
         _print_all_timing(timing)
     if log_timing:
         _log_timing(section_directory, timing)
+    if also_untagged is True:
+        _also_untagged(section_directory)
 
 
 def _print_all_timing(timing):
@@ -673,7 +683,7 @@ def collect_section_lys(_sections_directory):
     handle_build_tags(_sections_directory)
 
 
-def color_persistent_indicators(directory, *, undo=False):
+def color_persistent_indicators(directory, *, do_not_print_tags=False, undo=False):
     directory = pathlib.Path(directory)
     if directory.parent.name != "sections":
         _print_always("Must call in section directory ...")
@@ -691,7 +701,8 @@ def color_persistent_indicators(directory, *, undo=False):
         job = job(directory, undo=undo)
         job = dataclasses.replace(job, message_zero=True)
         for message in job():
-            _print_tags(message)
+            if not do_not_print_tags:
+                _print_tags(message)
 
 
 def handle_build_tags(_sections_directory):
@@ -1053,6 +1064,7 @@ def persist_lilypond_file(
     lilypond_file: abjad.LilyPondFile,
     metadata: types.MappingProxyType,
 ):
+    _print_main_task("Persisting LilyPond file ...")
     assert isinstance(arguments, types.SimpleNamespace), repr(arguments)
     assert isinstance(section_directory, pathlib.PosixPath), repr(section_directory)
     assert isinstance(timing, Timing), repr(timing)
@@ -1148,7 +1160,7 @@ def run_lilypond(ly_file_path, *, pdf_mtime=None, remove=None):
         assert lilypond_log_file_path.exists()
 
 
-def show_annotations(directory, *, undo=False):
+def show_annotations(directory, *, do_not_print_tags=False, undo=False):
     directory = pathlib.Path(directory)
     if directory.parent.name != "sections":
         _print_always("Must call in section directory ...")
@@ -1156,7 +1168,8 @@ def show_annotations(directory, *, undo=False):
     for job in _make_annotation_jobs(directory, undo=undo):
         job = dataclasses.replace(job, message_zero=True)
         for message in job():
-            _print_tags(message)
+            if not do_not_print_tags:
+                _print_tags(message)
 
 
 def show_tag(directory, tag, *, undo: bool = False):
