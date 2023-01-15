@@ -79,9 +79,9 @@ def main():
     for i, build in enumerate(builds):
         messages_, diffs_, result_ = _test_build(build)
         messages.extend(messages_)
-        messages.append("")
         diffs.extend(diffs_)
         result = result or result_
+    messages.append("")
     for diff in diffs:
         string = "".join(diff)
         print(string)

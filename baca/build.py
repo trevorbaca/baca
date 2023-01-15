@@ -678,9 +678,7 @@ def collect_section_lys(_sections_directory):
             target_ily = target_ly.with_suffix(".ily")
             targets.append(f"{target_ily.name}")
             shutil.copyfile(str(source_ily), str(target_ily))
-    targets = ", ".join(targets)
-    message = f"Collecting {baca.path.trim(_sections_directory)}/{targets} ..."
-    _print_file_handling(message)
+    _print_file_handling(f"Populating {baca.path.trim(_sections_directory)} ...")
     handle_build_tags(_sections_directory)
 
 
