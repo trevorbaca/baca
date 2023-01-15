@@ -590,7 +590,7 @@ def _collect_metadata(
         persist_["voice_name_to_parameter_to_state"] = voice_name_to_parameter_to_state
     new_metadata = {}
     new_metadata.update(metadata_)
-    _sort_dictionary(new_metadata)
+    sort_dictionary(new_metadata)
     new_metadata_proxy = types.MappingProxyType(new_metadata)
     for key, value in new_metadata_proxy.items():
         if value in (True, False):
@@ -599,7 +599,7 @@ def _collect_metadata(
             raise Exception(f"{key} metadata should be nonempty (not {value!r}).")
     new_persist = {}
     new_persist.update(persist_)
-    _sort_dictionary(new_persist)
+    sort_dictionary(new_persist)
     new_persist_proxy = types.MappingProxyType(new_persist)
     for key, value in new_persist_proxy.items():
         if not bool(value):
@@ -1461,17 +1461,6 @@ def _shift_measure_initial_clefs(
             _overridecommands.clef_shift(leaf, clef, first_measure_number)
 
 
-# TODO: make public
-def _sort_dictionary(dictionary):
-    items = list(dictionary.items())
-    items.sort()
-    dictionary.clear()
-    for key, value in items:
-        if isinstance(value, dict):
-            _sort_dictionary(value)
-        dictionary[key] = value
-
-
 def _style_anchor_notes(score):
     for note in abjad.select.components(score, abjad.Note):
         if not abjad.get.has_indicator(note, _enums.ANCHOR_NOTE):
@@ -1629,6 +1618,16 @@ def _style_fermata_measures(
                 rest,
                 tag=tag.append(_tags.function_name(_frame(), n=7)),
             )
+
+
+def sort_dictionary(dictionary):
+    items = list(dictionary.items())
+    items.sort()
+    dictionary.clear()
+    for key, value in items:
+        if isinstance(value, dict):
+            sort_dictionary(value)
+        dictionary[key] = value
 
 
 def transpose_score(score):

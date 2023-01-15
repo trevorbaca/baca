@@ -1059,7 +1059,7 @@ def persist_lilypond_file(
     assert isinstance(lilypond_file, abjad.LilyPondFile), repr(lilypond_file)
     assert isinstance(metadata, types.MappingProxyType), repr(metadata)
     dictionary = dict(metadata)
-    baca.section._sort_dictionary(dictionary)
+    baca.section.sort_dictionary(dictionary)
     metadata = types.MappingProxyType(dictionary)
     metadata_file = section_directory / ".metadata"
     _print_file_handling(f"Writing {baca.path.trim(metadata_file)} ...")
