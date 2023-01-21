@@ -1842,7 +1842,8 @@ def pitch(
         >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
         >>> baca.section.set_up_score(score, measures(), docs=True)
         >>> voice = score["Music"]
-        >>> nested_music = rmakers.note(measures())
+        >>> divisions = [_.pair for _ in measures()]
+        >>> nested_music = rmakers.note(divisions)
         >>> music = abjad.sequence.flatten(nested_music)
         >>> rmakers.written_duration(music, 1)
         >>> voice.extend(music)

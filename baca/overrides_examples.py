@@ -5,9 +5,10 @@ overrides.py examples.
 
     Overrides bar line transparency:
 
-    >>> def make_rhythm(divisions):
+    >>> def make_rhythm(time_signatures):
+    ...     divisions = [_.pair for _ in time_signatures]
     ...     nested_music = rmakers.talea(divisions, [1, 1, 1, -1], 8)
-    ...     voice = rmakers.wrap_in_time_signature_staff(nested_music, divisions)
+    ...     voice = rmakers.wrap_in_time_signature_staff(nested_music, time_signatures)
     ...     rmakers.beam(voice)
     ...     rmakers.extract_trivial(voice)
     ...     music = abjad.mutate.eject_contents(voice)

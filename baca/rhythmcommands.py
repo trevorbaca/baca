@@ -127,7 +127,8 @@ def get_previous_rhythm_state(
 
 def make_even_divisions(time_signatures):
     tag = _tags.function_name(_frame())
-    nested_music = rmakers.even_division(time_signatures, [8], tag=tag)
+    divisions = [_.pair for _ in time_signatures]
+    nested_music = rmakers.even_division(divisions, [8], tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(nested_music, time_signatures)
     rmakers.beam(voice, tag=tag)
     rmakers.extract_trivial(voice)
@@ -277,7 +278,8 @@ def make_notes(
 ):
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     tag = _tags.function_name(_frame())
-    nested_music = rmakers.note(time_signatures, tag=tag)
+    divisions = [_.pair for _ in time_signatures]
+    nested_music = rmakers.note(divisions, tag=tag)
     music = abjad.sequence.flatten(nested_music, depth=-1)
     music_voice = rmakers.wrap_in_time_signature_staff(music, time_signatures)
     rmakers.rewrite_meter(music_voice)
@@ -340,7 +342,8 @@ def make_repeat_tied_notes(
 
     """
     tag = _tags.function_name(_frame())
-    nested_music = rmakers.note(time_signatures, tag=tag)
+    divisions = [_.pair for _ in time_signatures]
+    nested_music = rmakers.note(divisions, tag=tag)
     music: list[abjad.Leaf | abjad.Tuplet] = abjad.sequence.flatten(
         nested_music, depth=-1
     )
