@@ -158,7 +158,7 @@ def _externalize_music_ly(music_ly):
         _tags = music_ly.with_name(".tags")
         # TODO:
         raise Exception("should we append tags?")
-        _tags.write_text("\n".join(messages))
+        _tags.write_text("\n".join(messages) + "\n")
 
 
 def _get_lilypond_include_string():
@@ -224,7 +224,7 @@ def _handle_music_ly_tags_in_section(music_ly):
         messages_ = job()
         messages.extend(messages_)
     _print_file_handling(f"Writing {baca.path.trim(_tags)} ...")
-    _tags.write_text("\n".join(messages))
+    _tags.write_text("\n".join(messages) + "\n")
 
 
 def _log_timing(section_directory, timing):
