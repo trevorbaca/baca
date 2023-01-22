@@ -60,11 +60,12 @@ def activate(
 
     Third item in pair is list of canonical string messages that explain what happened.
     """
-    if isinstance(tag, str):
-        raise Exception(f"must be tag or callable: {tag!r}")
+    assert isinstance(indent, int), repr(indent)
     if path.name == skip_file_name:
         return None
-    assert isinstance(indent, int), repr(indent)
+    if isinstance(tag, str):
+        raise Exception(f"must be tag or callable: {tag!r}")
+    triples = []
     if path.is_file():
         assert path.name in ("layout.ly", "music.ily", "music.ly") or (
             path.name[0].isdigit() and path.suffix in (".ily", ".ly")
@@ -80,25 +81,29 @@ def activate(
         else:
             text, count, skipped = abjad.activate(text, tag, skipped=True)
         path.write_text(text)
+        triple = (path, count, skipped)
+        triples.append(triple)
     else:
         assert path.is_dir(), repr(path)
         count, skipped = 0, 0
-        for path in sorted(path.glob("**/*")):
-            if path.suffix not in (".ily", ".ly"):
+        for subpath in sorted(path.glob("**/*")):
+            if subpath.suffix not in (".ily", ".ly"):
                 continue
             if not (
-                path.name.startswith("music")
-                or path.name.startswith("layout")
-                or path.name[0].isdigit()
+                subpath.name.startswith("music")
+                or subpath.name.startswith("layout")
+                or subpath.name[0].isdigit()
             ):
                 continue
-            if path.name == skip_file_name:
+            if subpath.name == skip_file_name:
                 continue
             result = activate(
-                path, tag, prepend_empty_chord=prepend_empty_chord, undo=undo
+                subpath, tag, prepend_empty_chord=prepend_empty_chord, undo=undo
             )
             assert result is not None
             count_, skipped_, _ = result
+            triple = (subpath, count_, skipped_)
+            triples.append(triple)
             count += count_
             skipped += skipped_
     if name is None:
@@ -112,26 +117,31 @@ def activate(
     else:
         adjective = "active"
         gerund = "activating"
-    messages = []
-    total = count + skipped
-    if total == 0 and message_zero:
-        messages.append(f"found no {name} tags")
-    if 0 < total:
-        tags = abjad.string.pluralize("tag", total)
-        messages.append(f"found {total} {name} {tags}")
-        if 0 < count:
-            tags = abjad.string.pluralize("tag", count)
-            message = f"{gerund} {count} {name} {tags}"
-            messages.append(message)
-        if 0 < skipped:
-            tags = abjad.string.pluralize("tag", skipped)
-            message = f"skipping {skipped} ({adjective}) {name} {tags}"
-            messages.append(message)
+    count, skipped, messages = 0, 0, []
+    for path_, count_, skipped_ in triples:
+        total = count_ + skipped_
+        if total == 0 and message_zero:
+            messages.append(f"found no {name} tags ({path_.name})")
+        if 0 < total:
+            tags = abjad.string.pluralize("tag", total)
+            messages.append(f"found {total} {name} {tags} ({path_.name})")
+            if 0 < count_:
+                tags = abjad.string.pluralize("tag", count_)
+                message = f"{gerund} {count_} {name} {tags} ({path_.name})"
+                messages.append(message)
+            if 0 < skipped_:
+                tags = abjad.string.pluralize("tag", skipped_)
+                message = (
+                    f"skipping {skipped_} ({adjective}) {name} {tags} ({path_.name})"
+                )
+                messages.append(message)
+        count += count_
+        skipped += skipped_
     whitespace = indent * " "
-    messages_ = [
+    messages = [
         whitespace + abjad.string.capitalize_start(_) + " ..." for _ in messages
     ]
-    return count, skipped, messages_
+    return count, skipped, messages
 
 
 def add_metadatum(path, name, value) -> None:
