@@ -66,26 +66,25 @@ def activate(
         return None
     assert isinstance(indent, int), repr(indent)
     if path.is_file():
-        if path.suffix not in (".ily", ".ly", ".tagged"):
-            count, skipped = 0, 0
+        assert path.name in ("layout.ly", "music.ily", "music.ly") or (
+            path.name[0].isdigit() and path.suffix in (".ily", ".ly")
+        ), repr(path)
+        text = path.read_text()
+        if undo:
+            text, count, skipped = abjad.deactivate(
+                text,
+                tag,
+                prepend_empty_chord=prepend_empty_chord,
+                skipped=True,
+            )
         else:
-            text = path.read_text()
-            if undo:
-                text, count, skipped = abjad.deactivate(
-                    text,
-                    tag,
-                    prepend_empty_chord=prepend_empty_chord,
-                    skipped=True,
-                )
-            else:
-                text, count, skipped = abjad.activate(text, tag, skipped=True)
-            path.write_text(text)
+            text, count, skipped = abjad.activate(text, tag, skipped=True)
+        path.write_text(text)
     else:
         assert path.is_dir(), repr(path)
         count, skipped = 0, 0
         for path in sorted(path.glob("**/*")):
-            path = type(path)(path)
-            if path.suffix not in (".ily", ".ly", ".tagged"):
+            if path.suffix not in (".ily", ".ly"):
                 continue
             if not (
                 path.name.startswith("music")
