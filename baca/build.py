@@ -156,11 +156,11 @@ def _externalize_music_ly(music_ly):
         )
         messages = not_topmost()
         if messages:
-            _print_file_handling("Handling not-topmost ...")
-            _tags = music_ly.with_name(".tags")
-            # TODO:
-            raise Exception("should we append tags?")
-            _tags.write_text("\n".join(messages) + "\n")
+            messages = "\n".join(messages) + "\n"
+            _print_file_handling("Append not-topmost tags messages ...")
+            _tags_file = file.with_name(f".{file.name}.tags")
+            with _tags_file.open("a") as pointer:
+                pointer.write(messages)
 
 
 def _get_lilypond_include_string():

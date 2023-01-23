@@ -20,7 +20,7 @@ class Job:
     activate: typing.Any = None
     deactivate: typing.Any = None
     deactivate_first: typing.Any = None
-    message_zero: typing.Any = None
+    message_zero: typing.Any = True
     path: typing.Any = None
     prepend_empty_chord: typing.Any = None
     skip_file_name: typing.Any = None
