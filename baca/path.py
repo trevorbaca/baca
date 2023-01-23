@@ -35,7 +35,6 @@ def activate(
     tag,
     *,
     indent=0,
-    message_zero=False,
     name=None,
     prepend_empty_chord=None,
     skip_file_name=None,
@@ -121,7 +120,7 @@ def activate(
     count, skipped, messages = 0, 0, []
     for path_, count_, skipped_ in triples:
         total = count_ + skipped_
-        if total == 0 and message_zero:
+        if total == 0:
             messages.append(f"found no {name} tags ({path_.name})")
         if 0 < total:
             tags = abjad.string.pluralize("tag", total)
@@ -159,7 +158,6 @@ def deactivate(
     tag,
     *,
     indent=0,
-    message_zero=False,
     name=None,
     prepend_empty_chord=None,
     skip_file_name=None,
@@ -171,7 +169,6 @@ def deactivate(
         tag,
         name=name,
         indent=indent,
-        message_zero=message_zero,
         prepend_empty_chord=prepend_empty_chord,
         skip_file_name=skip_file_name,
         undo=True,

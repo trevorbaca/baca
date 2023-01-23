@@ -20,7 +20,6 @@ class Job:
     activate: typing.Any = None
     deactivate: typing.Any = None
     deactivate_first: typing.Any = None
-    message_zero: typing.Any = True
     path: typing.Any = None
     prepend_empty_chord: typing.Any = None
     skip_file_name: typing.Any = None
@@ -45,7 +44,6 @@ class Job:
                         result = _path.deactivate(
                             self.path,
                             match,
-                            message_zero=True,
                             name=name,
                             prepend_empty_chord=self.prepend_empty_chord,
                             skip_file_name=self.skip_file_name,
@@ -73,7 +71,6 @@ class Job:
                     result = _path.activate(
                         self.path,
                         match,
-                        message_zero=True,
                         name=name,
                         skip_file_name=self.skip_file_name,
                     )
@@ -98,7 +95,6 @@ class Job:
                         result = _path.deactivate(
                             self.path,
                             match,
-                            message_zero=True,
                             name=name,
                             prepend_empty_chord=self.prepend_empty_chord,
                             skip_file_name=self.skip_file_name,
@@ -116,8 +112,6 @@ class Job:
                             skip_file_name=self.skip_file_name,
                             skipped=True,
                         )
-        if total_count == 0 and not self.message_zero:
-            messages = []
         if isinstance(self.path, pathlib.Path):
             return messages
         else:

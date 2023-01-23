@@ -730,7 +730,6 @@ def color_persistent_indicators(directory, *, do_not_print_tags=False, undo=Fals
         baca.jobs.color_time_signatures,
     ):
         job = job(directory, undo=undo)
-        job = dataclasses.replace(job, message_zero=True)
         for message in job():
             if not do_not_print_tags:
                 _print_tags(message)
@@ -777,9 +776,7 @@ def handle_build_tags(_sections_directory):
             return True
         return False
 
-    def _run(job, *, quiet=False):
-        message_zero = not bool(quiet)
-        job = dataclasses.replace(job, message_zero=message_zero)
+    def _run(job):
         messages = job()
         return messages
 
@@ -847,7 +844,7 @@ def handle_build_tags(_sections_directory):
             undo=True,
         ),
     ):
-        messages_ = _run(job, quiet=False)
+        messages_ = _run(job)
         messages.extend(messages_)
     _tags = _sections_directory.with_name(".tags")
     assert _tags.parent.parent.name == "builds"
@@ -867,7 +864,6 @@ def handle_part_tags(directory):
         tag,
         *,
         deactivate=False,
-        message_zero=False,
         name=None,
     ):
         if isinstance(tag, str):
@@ -877,15 +873,11 @@ def handle_part_tags(directory):
             tag_ = tag
         assert isinstance(tag_, abjad.Tag) or callable(tag_)
         if deactivate:
-            result = baca.path.deactivate(
-                path, tag_, message_zero=message_zero, name=name
-            )
+            result = baca.path.deactivate(path, tag_, name=name)
             assert result is not None
             count, skipped, messages = result
         else:
-            result = baca.path.activate(
-                path, tag_, message_zero=message_zero, name=name
-            )
+            result = baca.path.activate(path, tag_, name=name)
             assert result is not None
             count, skipped, messages = result
         for message in messages:
@@ -895,7 +887,6 @@ def handle_part_tags(directory):
         path,
         tag,
         *,
-        message_zero=False,
         name=None,
     ):
         _activate(
@@ -903,7 +894,6 @@ def handle_part_tags(directory):
             tag,
             name=name,
             deactivate=True,
-            message_zero=message_zero,
         )
 
     def _parse_part_identifier(path):
@@ -930,17 +920,14 @@ def handle_part_tags(directory):
     _activate(
         parts_directory,
         "+PARTS",
-        message_zero=True,
     )
     _deactivate(
         parts_directory,
         "-PARTS",
-        message_zero=True,
     )
     _deactivate(
         parts_directory,
         "HIDE_IN_PARTS",
-        message_zero=True,
     )
     part_identifier = _parse_part_identifier(music_ly)
     if part_identifier is None:
@@ -952,59 +939,48 @@ def handle_part_tags(directory):
     _activate(
         parts_directory,
         f"+{name}",
-        message_zero=True,
     )
     _deactivate(
         parts_directory,
         f"-{name}",
-        message_zero=True,
     )
     _deactivate(
         parts_directory,
         str(baca.tags.METRIC_MODULATION_IS_SCALED),
-        message_zero=True,
     )
     _deactivate(
         parts_directory,
         str(baca.tags.METRIC_MODULATION_IS_NOT_SCALED),
-        message_zero=True,
     )
     _activate(
         parts_directory,
         str(baca.tags.METRIC_MODULATION_IS_STRIPPED),
-        message_zero=True,
     )
     # HACK TO HIDE ALL POST-FERMATA-MEASURE TRANSPARENT BAR LINES;
     # this only works if parts contain no EOL fermata measure:
     _deactivate(
         parts_directory,
         str(baca.tags.FERMATA_MEASURE),
-        message_zero=True,
     )
     _activate(
         parts_directory,
         str(baca.tags.NOT_TOPMOST),
-        message_zero=True,
     )
     _deactivate(
         parts_directory,
         str(baca.tags.FERMATA_MEASURE_EMPTY_BAR_EXTENT),
-        message_zero=True,
     )
     _deactivate(
         parts_directory,
         str(baca.tags.FERMATA_MEASURE_NEXT_BAR_EXTENT),
-        message_zero=True,
     )
     _deactivate(
         parts_directory,
         str(baca.tags.FERMATA_MEASURE_RESUME_BAR_EXTENT),
-        message_zero=True,
     )
     _deactivate(
         parts_directory,
         str(baca.tags.EXPLICIT_BAR_EXTENT),
-        message_zero=True,
     )
 
 
@@ -1202,7 +1178,6 @@ def show_annotations(directory, *, do_not_print_tags=False, undo=False):
         _print_always("Must call in section directory ...")
         sys.exit(1)
     for job in _make_annotation_jobs(directory, undo=undo):
-        job = dataclasses.replace(job, message_zero=True)
         for message in job():
             if not do_not_print_tags:
                 _print_tags(message)
@@ -1213,7 +1188,6 @@ def show_tag(directory, tag, *, undo: bool = False):
     directory = pathlib.Path(directory)
     tag = abjad.Tag(tag)
     job = baca.jobs.show_tag(directory, tag, undo=undo)
-    job = dataclasses.replace(job, message_zero=True)
     for message in job():
         _print_tags(message)
 
