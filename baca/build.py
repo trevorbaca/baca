@@ -147,18 +147,20 @@ def _externalize_music_ly(music_ly):
     _print_file_handling(f"Externalizing {baca.path.trim(music_ily)} ...")
     baca.path.extern(music_ly, music_ily)
     assert music_ily.is_file()
-    not_topmost = baca.jobs.Job(
-        deactivate=(baca.tags.NOT_TOPMOST, "not topmost"),
-        path=music_ly.parent,
-        title=f"Deactivating {baca.tags.NOT_TOPMOST.string} ...",
-    )
-    messages = not_topmost()
-    if messages:
-        _print_file_handling("Handling not-topmost ...")
-        _tags = music_ly.with_name(".tags")
-        # TODO:
-        raise Exception("should we append tags?")
-        _tags.write_text("\n".join(messages) + "\n")
+    assert music_ily.parent.parent.name == "sections"
+    for file in (music_ly, music_ily):
+        not_topmost = baca.jobs.Job(
+            deactivate=(baca.tags.NOT_TOPMOST, "not topmost"),
+            path=file,
+            title=f"Deactivating {baca.tags.NOT_TOPMOST.string} ...",
+        )
+        messages = not_topmost()
+        if messages:
+            _print_file_handling("Handling not-topmost ...")
+            _tags = music_ly.with_name(".tags")
+            # TODO:
+            raise Exception("should we append tags?")
+            _tags.write_text("\n".join(messages) + "\n")
 
 
 def _get_lilypond_include_string():

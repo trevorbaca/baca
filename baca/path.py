@@ -66,6 +66,7 @@ def activate(
     if isinstance(tag, str):
         raise Exception(f"must be tag or callable: {tag!r}")
     triples = []
+    # assert path.is_file(), repr(path)
     if path.is_file():
         assert path.name in ("layout.ly", "music.ily", "music.ly") or (
             path.name[0].isdigit() and path.suffix in (".ily", ".ly")
