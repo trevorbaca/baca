@@ -404,10 +404,16 @@ def handle_fermata_bar_lines(path):
         return bool(set(tags) & set([_tags.FERMATA_MEASURE]))
 
     # then deactivate non-EOL tags:
-    bol_measure_numbers = _path.get_metadatum(path, "bol_measure_numbers")
+    if path.is_dir():
+        metadata_source = path
+    else:
+        metadata_source = path.parent
+    bol_measure_numbers = _path.get_metadatum(metadata_source, "bol_measure_numbers")
     if bol_measure_numbers:
         eol_measure_numbers = [_ - 1 for _ in bol_measure_numbers[1:]]
-        final_measure_number = _path.get_metadatum(path, "final_measure_number")
+        final_measure_number = _path.get_metadatum(
+            metadata_source, "final_measure_number"
+        )
         if final_measure_number is not None:
             eol_measure_numbers.append(final_measure_number)
         eol_measure_numbers = [abjad.Tag(f"MEASURE_{_}") for _ in eol_measure_numbers]
@@ -441,10 +447,16 @@ def handle_mol_tags(path):
         return bool(set(tags) & tags_)
 
     # then deactivate conflicting middle-of-line tags
-    bol_measure_numbers = _path.get_metadatum(path, "bol_measure_numbers")
+    if path.is_dir():
+        metadata_source = path
+    else:
+        metadata_source = path.parent
+    bol_measure_numbers = _path.get_metadatum(metadata_source, "bol_measure_numbers")
     if bol_measure_numbers:
         nonmol_measure_numbers = bol_measure_numbers[:]
-        final_measure_number = _path.get_metadatum(path, "final_measure_number")
+        final_measure_number = _path.get_metadatum(
+            metadata_source, "final_measure_number"
+        )
         if final_measure_number is not None:
             nonmol_measure_numbers.append(final_measure_number + 1)
         nonmol_measure_numbers = [
@@ -481,8 +493,10 @@ def handle_shifted_clefs(path):
     # then deactivate shifted clefs at BOL:
     if path.name == "_sections":
         metadata_source = path.parent
-    else:
+    elif path.is_dir():
         metadata_source = path
+    else:
+        metadata_source = path.parent
     string = "bol_measure_numbers"
     bol_measure_numbers = _path.get_metadatum(metadata_source, string)
     if bol_measure_numbers:

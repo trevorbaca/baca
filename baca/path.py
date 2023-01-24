@@ -59,7 +59,7 @@ def activate(
 
     Third item in pair is list of canonical string messages that explain what happened.
     """
-    assert path.exists()
+    assert path.exists(), repr(path)
     assert isinstance(indent, int), repr(indent)
     if path.name == skip_file_name:
         return None
@@ -71,19 +71,20 @@ def activate(
         assert path.name in ("layout.ly", "music.ily", "music.ly") or (
             path.name[0].isdigit() and path.suffix in (".ily", ".ly")
         ), repr(path)
-        text = path.read_text()
-        if undo:
-            text, count, skipped = abjad.deactivate(
-                text,
-                tag,
-                prepend_empty_chord=prepend_empty_chord,
-                skipped=True,
-            )
-        else:
-            text, count, skipped = abjad.activate(text, tag, skipped=True)
-        path.write_text(text)
-        triple = (path, count, skipped)
-        triples.append(triple)
+        if path.name != skip_file_name:
+            text = path.read_text()
+            if undo:
+                text, count, skipped = abjad.deactivate(
+                    text,
+                    tag,
+                    prepend_empty_chord=prepend_empty_chord,
+                    skipped=True,
+                )
+            else:
+                text, count, skipped = abjad.activate(text, tag, skipped=True)
+            path.write_text(text)
+            triple = (path, count, skipped)
+            triples.append(triple)
     else:
         assert path.is_dir(), repr(path)
         count, skipped = 0, 0
@@ -373,8 +374,9 @@ def get_measure_profile_metadata(path) -> tuple[int, int, list]:
     return (first_measure_number, measure_count, fermata_measure_numbers)
 
 
-def get_metadata(path) -> types.MappingProxyType:
-    metadata_py_path = path / ".metadata"
+def get_metadata(directory) -> types.MappingProxyType:
+    assert directory.is_dir(), repr(directory)
+    metadata_py_path = directory / ".metadata"
     dictionary = {}
     if metadata_py_path.is_file():
         file_contents_string = metadata_py_path.read_text()
