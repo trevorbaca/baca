@@ -59,6 +59,7 @@ def activate(
 
     Third item in pair is list of canonical string messages that explain what happened.
     """
+    assert path.exists()
     assert isinstance(indent, int), repr(indent)
     if path.name == skip_file_name:
         return None
@@ -86,7 +87,7 @@ def activate(
     else:
         assert path.is_dir(), repr(path)
         count, skipped = 0, 0
-        for subpath in sorted(path.glob("**/*")):
+        for subpath in sorted(path.glob("**/*ly")):
             if subpath.suffix not in (".ily", ".ly"):
                 continue
             if not (

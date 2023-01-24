@@ -212,6 +212,7 @@ def _get_preamble_time_signatures(path):
 
 
 def _handle_music_ly_tags_in_section(music_ly):
+    # music_ily = music_ly.with_name("music.ily")
     text = music_ly.read_text()
     text = abjad.tag.left_shift_tags(text)
     music_ly.write_text(text)
@@ -224,12 +225,6 @@ def _handle_music_ly_tags_in_section(music_ly):
     _music_ily_tags.unlink()
     _music_ly_tags = music_ly.with_name(".music.ly.tags")
     _music_ly_tags.unlink()
-    #    job = baca.jobs.handle_edition_tags(music_ly)
-    #    messages = job()
-    #    if messages:
-    #        text = "\n".join(messages) + "\n"
-    #        with _music_ly_tags.open("a") as pointer:
-    #            pointer.write(text)
     messages = []
     for job in (
         baca.jobs.handle_edition_tags(music_ly.parent),
@@ -256,6 +251,7 @@ def _handle_music_ly_tags_in_section(music_ly):
         text = "\n".join(layout_ly_messages) + "\n"
         with _layout_ly_tags.open("a") as pointer:
             pointer.write(text)
+    # if music_ily.exists() and music_ily_messages:
     if music_ily_messages:
         _print_file_handling(f"Writing {baca.path.trim(_music_ily_tags)} ...")
         text = "\n".join(music_ily_messages) + "\n"
