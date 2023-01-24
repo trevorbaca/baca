@@ -112,6 +112,7 @@ class Job:
                             skip_file_name=self.skip_file_name,
                             skipped=True,
                         )
+        messages.append("")
         if isinstance(self.path, pathlib.Path):
             return messages
         else:
