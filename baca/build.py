@@ -219,14 +219,20 @@ def _handle_music_ly_tags_in_section(music_ly):
     if _tags.exists():
         _tags.unlink()
     _layout_ly_tags = music_ly.with_name(".layout.ly.tags")
-    _layout_ly_tags.write_text("\n")
+    _layout_ly_tags.unlink()
     _music_ily_tags = music_ly.with_name(".music.ily.tags")
-    _music_ily_tags.write_text("\n")
+    _music_ily_tags.unlink()
     _music_ly_tags = music_ly.with_name(".music.ly.tags")
-    _music_ly_tags.write_text("\n")
+    _music_ly_tags.unlink()
+    #    job = baca.jobs.handle_edition_tags(music_ly)
+    #    messages = job()
+    #    if messages:
+    #        text = "\n".join(messages) + "\n"
+    #        with _music_ly_tags.open("a") as pointer:
+    #            pointer.write(text)
     messages = []
     for job in (
-        baca.jobs.handle_edition_tags(music_ly),
+        baca.jobs.handle_edition_tags(music_ly.parent),
         baca.jobs.handle_fermata_bar_lines(music_ly.parent),
         baca.jobs.handle_shifted_clefs(music_ly.parent),
         baca.jobs.handle_mol_tags(music_ly.parent),
@@ -248,15 +254,18 @@ def _handle_music_ly_tags_in_section(music_ly):
     if layout_ly_messages:
         _print_file_handling(f"Writing {baca.path.trim(_layout_ly_tags)} ...")
         text = "\n".join(layout_ly_messages) + "\n"
-        _layout_ly_tags.write_text(text)
+        with _layout_ly_tags.open("a") as pointer:
+            pointer.write(text)
     if music_ily_messages:
         _print_file_handling(f"Writing {baca.path.trim(_music_ily_tags)} ...")
         text = "\n".join(music_ily_messages) + "\n"
-        _music_ily_tags.write_text(text)
+        with _music_ily_tags.open("a") as pointer:
+            pointer.write(text)
     if music_ly_messages:
         _print_file_handling(f"Writing {baca.path.trim(_music_ly_tags)} ...")
         text = "\n".join(music_ly_messages) + "\n"
-        _music_ly_tags.write_text(text)
+        with _music_ly_tags.open("a") as pointer:
+            pointer.write(text)
 
 
 def _log_timing(section_directory, timing):

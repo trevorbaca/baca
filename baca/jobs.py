@@ -346,6 +346,8 @@ def handle_edition_tags(path):
     """
     if path.parent.parent.name == "sections":
         my_name = "SECTION"
+    if path.parent.name == "sections":
+        my_name = "SECTION"
     elif path.name.endswith("-score") or path.parent.name.endswith("-score"):
         my_name = "SCORE"
     elif path.name.endswith("-parts"):
