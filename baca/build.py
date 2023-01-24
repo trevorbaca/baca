@@ -211,18 +211,17 @@ def _get_preamble_time_signatures(path):
     return None
 
 
-def _handle_music_ly_tags_in_section(music_ly):
+def _handle_tags_in_section_directory(section_directory):
+    assert section_directory.is_dir()
+    music_ly = section_directory / "music.ly"
     text = music_ly.read_text()
     text = abjad.tag.left_shift_tags(text)
     music_ly.write_text(text)
-    _layout_ly_tags = music_ly.with_name(".layout.ly.tags")
-    _music_ily_tags = music_ly.with_name(".music.ily.tags")
-    _music_ly_tags = music_ly.with_name(".music.ly.tags")
     for name in ("layout.ly", "music.ily", "music.ly"):
         path = music_ly.with_name(name)
         if not path.exists():
             continue
-        # _tags_file = music_ly.with_name(f".{name}.tags")
+        _tags_file = music_ly.with_name(f".{name}.tags")
         messages = []
         for job in (
             baca.jobs.handle_edition_tags(path),
@@ -232,37 +231,10 @@ def _handle_music_ly_tags_in_section(music_ly):
         ):
             messages_ = job()
             messages.extend(messages_)
-        layout_ly_messages, music_ily_messages, music_ly_messages = [], [], []
-        for message in messages:
-            if "(layout.ly)" in message:
-                layout_ly_messages.append(message)
-            elif "(music.ily)" in message:
-                music_ily_messages.append(message)
-            elif "(music.ly)" in message:
-                music_ly_messages.append(message)
-            else:
-                layout_ly_messages.append(message)
-                music_ily_messages.append(message)
-                music_ly_messages.append(message)
-        if name == "layout.ly" and layout_ly_messages:
-            _print_file_handling(f"Appending {baca.path.trim(_layout_ly_tags)} ...")
-            text = "\n".join(layout_ly_messages) + "\n"
-            with _layout_ly_tags.open("a") as pointer:
-                pointer.write(text)
-        music_ily = music_ly.with_name("music.ily")
-        assert music_ily.exists()
-        # if music_ily.exists() and music_ily_messages:
-        if name == "music.ily" and music_ily_messages:
-            _print_file_handling(f"Appending {baca.path.trim(_music_ily_tags)} ...")
-            text = "\n".join(music_ily_messages) + "\n"
-            with _music_ily_tags.open("a") as pointer:
-                pointer.write(text)
-        # if music_ly_messages:
-        if name == "music.ly" and music_ly_messages:
-            _print_file_handling(f"Appending {baca.path.trim(_music_ly_tags)} ...")
-            text = "\n".join(music_ly_messages) + "\n"
-            with _music_ly_tags.open("a") as pointer:
-                pointer.write(text)
+        _print_file_handling(f"Appending {baca.path.trim(_tags_file)} ...")
+        text = "\n".join(messages) + "\n"
+        with _tags_file.open("a") as pointer:
+            pointer.write(text)
 
 
 def _log_timing(section_directory, timing):
@@ -458,13 +430,16 @@ def _make_section_pdf(
         _print_file_handling(f"Writing {baca.path.trim(music_ly)} ...")
     _print_file_handling(f"Handling {baca.path.trim(music_ly)} ...")
     _layout_ly_tags = music_ly.with_name(".layout.ly.tags")
-    _layout_ly_tags.unlink()
+    if _layout_ly_tags.exists():
+        _layout_ly_tags.unlink()
     _music_ily_tags = music_ly.with_name(".music.ily.tags")
-    _music_ily_tags.unlink()
+    if _music_ily_tags.exists():
+        _music_ily_tags.unlink()
     _music_ly_tags = music_ly.with_name(".music.ly.tags")
-    _music_ly_tags.unlink()
+    if _music_ly_tags.exists():
+        _music_ly_tags.unlink()
     _externalize_music_ly(music_ly)
-    _handle_music_ly_tags_in_section(music_ly)
+    _handle_tags_in_section_directory(music_ly.parent)
     if music_pdf.is_file():
         _print_file_handling(f"Existing {baca.path.trim(music_pdf)} ...")
     timing.lilypond = _call_lilypond_on_music_ly_in_section(
