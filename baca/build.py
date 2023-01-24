@@ -157,7 +157,7 @@ def _externalize_music_ly(music_ly):
         messages = not_topmost()
         if messages:
             messages = "\n".join(messages) + "\n"
-            _print_file_handling("Append not-topmost tags messages ...")
+            _print_file_handling("Appending not-topmost tags messages ...")
             _tags_file = file.with_name(f".{file.name}.tags")
             with _tags_file.open("a") as pointer:
                 pointer.write(messages)
@@ -215,15 +215,9 @@ def _handle_music_ly_tags_in_section(music_ly):
     text = music_ly.read_text()
     text = abjad.tag.left_shift_tags(text)
     music_ly.write_text(text)
-    _tags = music_ly.with_name(".tags")
-    if _tags.exists():
-        _tags.unlink()
     _layout_ly_tags = music_ly.with_name(".layout.ly.tags")
-    _layout_ly_tags.unlink()
     _music_ily_tags = music_ly.with_name(".music.ily.tags")
-    _music_ily_tags.unlink()
     _music_ly_tags = music_ly.with_name(".music.ly.tags")
-    _music_ly_tags.unlink()
     messages = []
     for job in (
         baca.jobs.handle_edition_tags(music_ly.parent),
@@ -455,8 +449,14 @@ def _make_section_pdf(
     if music_ly.is_file() and music_ly_mtime < os.path.getmtime(music_ly):
         _print_file_handling(f"Writing {baca.path.trim(music_ly)} ...")
     _print_file_handling(f"Handling {baca.path.trim(music_ly)} ...")
-    _handle_music_ly_tags_in_section(music_ly)
+    _layout_ly_tags = music_ly.with_name(".layout.ly.tags")
+    _layout_ly_tags.unlink()
+    _music_ily_tags = music_ly.with_name(".music.ily.tags")
+    _music_ily_tags.unlink()
+    _music_ly_tags = music_ly.with_name(".music.ly.tags")
+    _music_ly_tags.unlink()
     _externalize_music_ly(music_ly)
+    _handle_music_ly_tags_in_section(music_ly)
     if music_pdf.is_file():
         _print_file_handling(f"Existing {baca.path.trim(music_pdf)} ...")
     timing.lilypond = _call_lilypond_on_music_ly_in_section(
