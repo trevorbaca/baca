@@ -6,5 +6,5 @@ import baca
 
 if __name__ == "__main__":
     directory = os.getcwd()
-    arguments = baca.build.arguments("--undo")
-    baca.build.color_persistent_indicators(directory, undo=arguments.undo)
+    undo = "--undo" in sys.argv
+    baca.build.color_persistent_indicators(directory, undo=undo)
