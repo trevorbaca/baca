@@ -141,7 +141,7 @@ def color_dynamics(path, undo=False):
     name = "dynamic color"
 
     def match(tags):
-        tags_ = _tags.dynamic_color_tags(path)
+        tags_ = _tags.dynamic_color_tags()
         return bool(set(tags) & set(tags_))
 
     if undo:
@@ -165,7 +165,7 @@ def color_instruments(path, undo=False):
     name = "instrument color"
 
     def match(tags):
-        tags_ = _tags.instrument_color_tags(path)
+        tags_ = _tags.instrument_color_tags()
         return bool(set(tags) & set(tags_))
 
     if undo:
@@ -189,7 +189,7 @@ def color_short_instrument_names(path, undo=False):
     name = "short instrument name color"
 
     def match(tags):
-        tags_ = _tags.short_instrument_name_color_tags(path)
+        tags_ = _tags.short_instrument_name_color_tags()
         return bool(set(tags) & set(tags_))
 
     if undo:
@@ -212,11 +212,11 @@ def color_metronome_marks(path, undo=False):
     """
 
     def activate(tags):
-        tags_ = _tags.metronome_mark_color_expression_tags(path)
+        tags_ = _tags.metronome_mark_color_expression_tags()
         return bool(set(tags) & set(tags_))
 
     def deactivate(tags):
-        tags_ = _tags.metronome_mark_color_suppression_tags(path)
+        tags_ = _tags.metronome_mark_color_suppression_tags()
         return bool(set(tags) & set(tags_))
 
     if undo:
@@ -249,7 +249,7 @@ def color_persistent_indicators(path, undo=False):
     deactivate_name = "persistent indicator color suppression"
 
     def deactivate(tags):
-        tags_ = _tags.persistent_indicator_color_suppression_tags(path)
+        tags_ = _tags.persistent_indicator_color_suppression_tags()
         return bool(set(tags) & set(tags_))
 
     if undo:
