@@ -275,19 +275,6 @@ def activate(score, *tags):
                     break
 
 
-def deactivate(score, *tags):
-    assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
-    for leaf in abjad.iterate.leaves(score):
-        wrappers = abjad.get.wrappers(leaf)
-        for wrapper in wrappers:
-            if wrapper.tag is None:
-                continue
-            for tag in tags:
-                if tag.string in wrapper.tag.words():
-                    wrapper.deactivate = True
-                    break
-
-
 def clef_color_tags(path=None):
     """
     Gets clef color tags.
@@ -363,6 +350,19 @@ def clef_color_tags(path=None):
     if path and "builds" in path.parts:
         tags.append(REAPPLIED_CLEF)
     return tags
+
+
+def deactivate(score, *tags):
+    assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
+    for leaf in abjad.iterate.leaves(score):
+        wrappers = abjad.get.wrappers(leaf)
+        for wrapper in wrappers:
+            if wrapper.tag is None:
+                continue
+            for tag in tags:
+                if tag.string in wrapper.tag.words():
+                    wrapper.deactivate = True
+                    break
 
 
 def dynamic_color_tags():
@@ -719,19 +719,14 @@ def persistent_indicator_color_expression_tags(path=None):
         Tag(string='EXPLICIT_STAFF_LINES_COLOR')
         Tag(string='REAPPLIED_STAFF_LINES_COLOR')
         Tag(string='REDUNDANT_STAFF_LINES_COLOR')
-        Tag(string='REAPPLIED_STAFF_LINES')
         Tag(string='EXPLICIT_TIME_SIGNATURE_COLOR')
         Tag(string='REAPPLIED_TIME_SIGNATURE_COLOR')
         Tag(string='REDUNDANT_TIME_SIGNATURE_COLOR')
-        Tag(string='REAPPLIED_TIME_SIGNATURE')
 
     ..  container:: example
 
-        >>> tags == section_tags
+        >>> tags == section_tags == sections_tags
         True
-
-        >>> tags == sections_tags
-        False
 
     ..  container:: example
 
@@ -1006,9 +1001,7 @@ def staff_lines_color_tags(path=None):
         REAPPLIED_STAFF_LINES_COLOR,
         REDUNDANT_STAFF_LINES_COLOR,
     ]
-    # TODO: change
-    if path and path.parent.name != "sections":
-        # if path and "builds" in path.parts:
+    if path and "builds" in path.parts:
         tags.append(REAPPLIED_STAFF_LINES)
     return tags
 
@@ -1057,9 +1050,7 @@ def time_signature_color_tags(path=None):
         REAPPLIED_TIME_SIGNATURE_COLOR,
         REDUNDANT_TIME_SIGNATURE_COLOR,
     ]
-    # TODO: change:
-    if path and path.parent.name != "sections":
-        # if path and "builds" in path.parts:
+    if path and "builds" in path.parts:
         tags.append(REAPPLIED_TIME_SIGNATURE)
     return tags
 
