@@ -29,6 +29,21 @@ def _capture_diff(path):
     return True
 
 
+def _make_result_strings(path, results):
+    strings = []
+    if results.exists is True:
+        string = baca.colors.green_bold + f"{path.name} found" + baca.colors.end
+    else:
+        string = baca.colors.red_bold + f"{path.name} missing" + baca.colors.end
+    strings.append(string)
+    if results.same is True:
+        string = baca.colors.green_bold + f"{path.name} same" + baca.colors.end
+    elif results.same is False:
+        string = baca.colors.red_bold + f"{path.name} changed ..." + baca.colors.end
+    strings.append(string)
+    return strings
+
+
 def _print_results(path, results):
     if results.exists is True:
         baca.build._print_success(f"PASS: {path.name} found ...")
@@ -79,8 +94,15 @@ def _test_section(section_directory):
                 lines = pointer.readlines()
                 print("".join(lines))
     baca.build._print_main_task("Printing results ...")
+    strings = []
     for path, results in path_to_results.items():
         _print_results(path, results)
+        strings_ = _make_result_strings(path, results)
+        strings.extend(strings_)
+    for part in abjad.sequence.partition_by_counts(
+        strings, [4], cyclic=True, overhang=True):
+        pass
+        # print(", ".join(part))
     result = 0
     for results in path_to_results.values():
         if results.exists is False:

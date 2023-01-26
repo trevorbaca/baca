@@ -17,7 +17,7 @@ import baca
 def _also_untagged(section_directory):
     if os.environ.get("GITHUB_WORKSPACE"):
         return
-    _print_main_task("Writing untagged ...")
+    _print_main_task("Populating untagged ...")
     printed_message = False
     for name in ("music.ly", "music.ily", "layout.ly"):
         tagged = section_directory / name
