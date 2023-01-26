@@ -275,7 +275,7 @@ def activate(score, *tags):
                     break
 
 
-def clef_color_tags(path=None):
+def clef_color_tags(*, build=False):
     """
     Gets clef color tags.
 
@@ -291,43 +291,7 @@ def clef_color_tags(path=None):
         Tag(string='REDUNDANT_CLEF_COLOR')
         Tag(string='REDUNDANT_CLEF_REDRAW_COLOR')
 
-    ..  container:: example
-
-        Section directory:
-
-        >>> import pathlib
-        >>> path = pathlib.Path("etude", "sections", "01")
-        >>> for tag in baca.tags.clef_color_tags(path=path):
-        ...     tag
-        ...
-        Tag(string='EXPLICIT_CLEF_COLOR')
-        Tag(string='EXPLICIT_CLEF_REDRAW_COLOR')
-        Tag(string='REAPPLIED_CLEF_COLOR')
-        Tag(string='REAPPLIED_CLEF_REDRAW_COLOR')
-        Tag(string='REDUNDANT_CLEF_COLOR')
-        Tag(string='REDUNDANT_CLEF_REDRAW_COLOR')
-
-    ..  container:: example
-
-        Sections directory:
-
-        >>> path = pathlib.Path("etude", "sections")
-        >>> for tag in baca.tags.clef_color_tags(path=path):
-        ...     tag
-        ...
-        Tag(string='EXPLICIT_CLEF_COLOR')
-        Tag(string='EXPLICIT_CLEF_REDRAW_COLOR')
-        Tag(string='REAPPLIED_CLEF_COLOR')
-        Tag(string='REAPPLIED_CLEF_REDRAW_COLOR')
-        Tag(string='REDUNDANT_CLEF_COLOR')
-        Tag(string='REDUNDANT_CLEF_REDRAW_COLOR')
-
-    ..  container:: example
-
-        Build directory:
-
-        >>> path = pathlib.Path("etude", "builds", "letter-score")
-        >>> for tag in baca.tags.clef_color_tags(path=path):
+        >>> for tag in baca.tags.clef_color_tags(build=True):
         ...     tag
         ...
         Tag(string='EXPLICIT_CLEF_COLOR')
@@ -347,7 +311,7 @@ def clef_color_tags(path=None):
         REDUNDANT_CLEF_COLOR,
         REDUNDANT_CLEF_REDRAW_COLOR,
     ]
-    if path and "builds" in path.parts:
+    if build is True:
         tags.append(REAPPLIED_CLEF)
     return tags
 
@@ -576,7 +540,7 @@ def music_annotation_tags():
     ]
 
 
-def persistent_indicator_color_expression_tags(path=None):
+def persistent_indicator_color_expression_tags(*, build=False):
     """
     Gets persistent indicator color expression tags.
 
@@ -627,113 +591,9 @@ def persistent_indicator_color_expression_tags(path=None):
         Tag(string='REAPPLIED_TIME_SIGNATURE_COLOR')
         Tag(string='REDUNDANT_TIME_SIGNATURE_COLOR')
 
-    ..  container:: example
-
-        Section directory:
-
-        >>> path = pathlib.Path("etude", "sections", "01")
-        >>> section_tags = baca.tags.persistent_indicator_color_expression_tags(path)
-        >>> for tag in section_tags:
-        ...     tag
-        Tag(string='EXPLICIT_CLEF_COLOR')
-        Tag(string='EXPLICIT_CLEF_REDRAW_COLOR')
-        Tag(string='REAPPLIED_CLEF_COLOR')
-        Tag(string='REAPPLIED_CLEF_REDRAW_COLOR')
-        Tag(string='REDUNDANT_CLEF_COLOR')
-        Tag(string='REDUNDANT_CLEF_REDRAW_COLOR')
-        Tag(string='EXPLICIT_DYNAMIC_COLOR')
-        Tag(string='REAPPLIED_DYNAMIC')
-        Tag(string='REAPPLIED_DYNAMIC_COLOR')
-        Tag(string='REDUNDANT_DYNAMIC_COLOR')
-        Tag(string='EXPLICIT_INSTRUMENT_ALERT')
-        Tag(string='EXPLICIT_INSTRUMENT_COLOR')
-        Tag(string='REAPPLIED_INSTRUMENT_COLOR')
-        Tag(string='REAPPLIED_INSTRUMENT_ALERT')
-        Tag(string='REDRAWN_EXPLICIT_INSTRUMENT_COLOR')
-        Tag(string='REDRAWN_REAPPLIED_INSTRUMENT_COLOR')
-        Tag(string='REDUNDANT_INSTRUMENT_ALERT')
-        Tag(string='REDUNDANT_INSTRUMENT_COLOR')
-        Tag(string='REDRAWN_REDUNDANT_INSTRUMENT_COLOR')
-        Tag(string='EXPLICIT_SHORT_INSTRUMENT_NAME_ALERT')
-        Tag(string='EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='REAPPLIED_SHORT_INSTRUMENT_NAME_ALERT')
-        Tag(string='REAPPLIED_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='REDRAWN_EXPLICIT_SHORT_INSTRUMENT_NAME')
-        Tag(string='REDRAWN_EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='REDRAWN_REAPPLIED_SHORT_INSTRUMENT_NAME')
-        Tag(string='REDRAWN_REAPPLIED_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='REDUNDANT_SHORT_INSTRUMENT_NAME_ALERT')
-        Tag(string='REDUNDANT_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='REDRAWN_REDUNDANT_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='EXPLICIT_METRONOME_MARK_WITH_COLOR')
-        Tag(string='REAPPLIED_METRONOME_MARK_WITH_COLOR')
-        Tag(string='REDUNDANT_METRONOME_MARK_WITH_COLOR')
-        Tag(string='EXPLICIT_STAFF_LINES_COLOR')
-        Tag(string='REAPPLIED_STAFF_LINES_COLOR')
-        Tag(string='REDUNDANT_STAFF_LINES_COLOR')
-        Tag(string='EXPLICIT_TIME_SIGNATURE_COLOR')
-        Tag(string='REAPPLIED_TIME_SIGNATURE_COLOR')
-        Tag(string='REDUNDANT_TIME_SIGNATURE_COLOR')
-
-    ..  container:: example
-
-        Sections directory:
-
-        >>> path = pathlib.Path("etude", "sections")
-        >>> sections_tags = baca.tags.persistent_indicator_color_expression_tags(path)
-        >>> for tag in sections_tags:
-        ...     tag
-        Tag(string='EXPLICIT_CLEF_COLOR')
-        Tag(string='EXPLICIT_CLEF_REDRAW_COLOR')
-        Tag(string='REAPPLIED_CLEF_COLOR')
-        Tag(string='REAPPLIED_CLEF_REDRAW_COLOR')
-        Tag(string='REDUNDANT_CLEF_COLOR')
-        Tag(string='REDUNDANT_CLEF_REDRAW_COLOR')
-        Tag(string='EXPLICIT_DYNAMIC_COLOR')
-        Tag(string='REAPPLIED_DYNAMIC')
-        Tag(string='REAPPLIED_DYNAMIC_COLOR')
-        Tag(string='REDUNDANT_DYNAMIC_COLOR')
-        Tag(string='EXPLICIT_INSTRUMENT_ALERT')
-        Tag(string='EXPLICIT_INSTRUMENT_COLOR')
-        Tag(string='REAPPLIED_INSTRUMENT_COLOR')
-        Tag(string='REAPPLIED_INSTRUMENT_ALERT')
-        Tag(string='REDRAWN_EXPLICIT_INSTRUMENT_COLOR')
-        Tag(string='REDRAWN_REAPPLIED_INSTRUMENT_COLOR')
-        Tag(string='REDUNDANT_INSTRUMENT_ALERT')
-        Tag(string='REDUNDANT_INSTRUMENT_COLOR')
-        Tag(string='REDRAWN_REDUNDANT_INSTRUMENT_COLOR')
-        Tag(string='EXPLICIT_SHORT_INSTRUMENT_NAME_ALERT')
-        Tag(string='EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='REAPPLIED_SHORT_INSTRUMENT_NAME_ALERT')
-        Tag(string='REAPPLIED_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='REDRAWN_EXPLICIT_SHORT_INSTRUMENT_NAME')
-        Tag(string='REDRAWN_EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='REDRAWN_REAPPLIED_SHORT_INSTRUMENT_NAME')
-        Tag(string='REDRAWN_REAPPLIED_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='REDUNDANT_SHORT_INSTRUMENT_NAME_ALERT')
-        Tag(string='REDUNDANT_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='REDRAWN_REDUNDANT_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='EXPLICIT_METRONOME_MARK_WITH_COLOR')
-        Tag(string='REAPPLIED_METRONOME_MARK_WITH_COLOR')
-        Tag(string='REDUNDANT_METRONOME_MARK_WITH_COLOR')
-        Tag(string='EXPLICIT_STAFF_LINES_COLOR')
-        Tag(string='REAPPLIED_STAFF_LINES_COLOR')
-        Tag(string='REDUNDANT_STAFF_LINES_COLOR')
-        Tag(string='EXPLICIT_TIME_SIGNATURE_COLOR')
-        Tag(string='REAPPLIED_TIME_SIGNATURE_COLOR')
-        Tag(string='REDUNDANT_TIME_SIGNATURE_COLOR')
-
-    ..  container:: example
-
-        >>> tags == section_tags == sections_tags
-        True
-
-    ..  container:: example
-
         Build directory:
 
-        >>> path = pathlib.Path("etude", "builds", "letter-score")
-        >>> tags = baca.tags.persistent_indicator_color_expression_tags(path)
+        >>> tags = baca.tags.persistent_indicator_color_expression_tags(build=True)
         >>> for tag in tags:
         ...     tag
         Tag(string='EXPLICIT_CLEF_COLOR')
@@ -781,13 +641,13 @@ def persistent_indicator_color_expression_tags(path=None):
 
     """
     tags = []
-    tags.extend(clef_color_tags(path))
+    tags.extend(clef_color_tags(build=build))
     tags.extend(dynamic_color_tags())
     tags.extend(instrument_color_tags())
     tags.extend(short_instrument_name_color_tags())
     tags.extend(metronome_mark_color_expression_tags())
-    tags.extend(staff_lines_color_tags(path))
-    tags.extend(time_signature_color_tags(path))
+    tags.extend(staff_lines_color_tags(build=build))
+    tags.extend(time_signature_color_tags(build=build))
     return tags
 
 
@@ -956,7 +816,7 @@ def spacing_tags():
     ]
 
 
-def staff_lines_color_tags(path=None):
+def staff_lines_color_tags(*, build=False):
     """
     Gets staff lines color tags.
 
@@ -969,25 +829,9 @@ def staff_lines_color_tags(path=None):
         Tag(string='REAPPLIED_STAFF_LINES_COLOR')
         Tag(string='REDUNDANT_STAFF_LINES_COLOR')
 
-    ..  container:: example
-
-        Section directory:
-
-        >>> import pathlib
-        >>> path = pathlib.Path("etude", "sections", "01")
-        >>> for tag in baca.tags.staff_lines_color_tags(path):
-        ...     tag
-        ...
-        Tag(string='EXPLICIT_STAFF_LINES_COLOR')
-        Tag(string='REAPPLIED_STAFF_LINES_COLOR')
-        Tag(string='REDUNDANT_STAFF_LINES_COLOR')
-
-    ..  container:: example
-
         Build directory:
 
-        >>> path = pathlib.Path("etude", "builds", "letter-score")
-        >>> for tag in baca.tags.staff_lines_color_tags(path):
+        >>> for tag in baca.tags.staff_lines_color_tags(build=True):
         ...     tag
         ...
         Tag(string='EXPLICIT_STAFF_LINES_COLOR')
@@ -1001,12 +845,12 @@ def staff_lines_color_tags(path=None):
         REAPPLIED_STAFF_LINES_COLOR,
         REDUNDANT_STAFF_LINES_COLOR,
     ]
-    if path and "builds" in path.parts:
+    if build is True:
         tags.append(REAPPLIED_STAFF_LINES)
     return tags
 
 
-def time_signature_color_tags(path=None):
+def time_signature_color_tags(*, build=False):
     """
     Gets time signature color tags.
 
@@ -1019,30 +863,15 @@ def time_signature_color_tags(path=None):
         Tag(string='REAPPLIED_TIME_SIGNATURE_COLOR')
         Tag(string='REDUNDANT_TIME_SIGNATURE_COLOR')
 
-    ..  container:: example
-
-        Section directory:
-
-        >>> import pathlib
-        >>> path = pathlib.Path("etude", "sections", "_")
-        >>> for tag in baca.tags.time_signature_color_tags():
-        ...     tag
-        ...
-        Tag(string='EXPLICIT_TIME_SIGNATURE_COLOR')
-        Tag(string='REAPPLIED_TIME_SIGNATURE_COLOR')
-        Tag(string='REDUNDANT_TIME_SIGNATURE_COLOR')
-
-    ..  container:: example
-
         Build directory:
 
-        >>> path = pathlib.Path("etude", "builds", "letter-score")
-        >>> for tag in baca.tags.time_signature_color_tags():
+        >>> for tag in baca.tags.time_signature_color_tags(build=True):
         ...     tag
         ...
         Tag(string='EXPLICIT_TIME_SIGNATURE_COLOR')
         Tag(string='REAPPLIED_TIME_SIGNATURE_COLOR')
         Tag(string='REDUNDANT_TIME_SIGNATURE_COLOR')
+        Tag(string='REAPPLIED_TIME_SIGNATURE')
 
     """
     tags = [
@@ -1050,7 +879,7 @@ def time_signature_color_tags(path=None):
         REAPPLIED_TIME_SIGNATURE_COLOR,
         REDUNDANT_TIME_SIGNATURE_COLOR,
     ]
-    if path and "builds" in path.parts:
+    if build is True:
         tags.append(REAPPLIED_TIME_SIGNATURE)
     return tags
 

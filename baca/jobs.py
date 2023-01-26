@@ -124,7 +124,8 @@ def color_clefs(path, undo=False):
     name = "clef color"
 
     def match(tags):
-        tags_ = _tags.clef_color_tags(path)
+        build = "builds" in path.parts
+        tags_ = _tags.clef_color_tags(build=build)
         return bool(set(tags) & set(tags_))
 
     if undo:
@@ -243,7 +244,8 @@ def color_persistent_indicators(path, undo=False):
     activate_name = "persistent indicator color expression"
 
     def activate(tags):
-        tags_ = _tags.persistent_indicator_color_expression_tags(path)
+        build = "builds" in path.parts
+        tags_ = _tags.persistent_indicator_color_expression_tags(build=build)
         return bool(set(tags) & set(tags_))
 
     deactivate_name = "persistent indicator color suppression"
@@ -275,7 +277,8 @@ def color_staff_lines(path, undo=False):
     name = "staff lines color"
 
     def match(tags):
-        tags_ = _tags.staff_lines_color_tags(path)
+        build = "builds" in path.parts
+        tags_ = _tags.staff_lines_color_tags(build=build)
         return bool(set(tags) & set(tags_))
 
     if undo:
@@ -299,7 +302,8 @@ def color_time_signatures(path, undo=False):
     name = "time signature color"
 
     def match(tags):
-        tags_ = _tags.time_signature_color_tags(path)
+        build = "builds" in path.parts
+        tags_ = _tags.time_signature_color_tags(build=build)
         return bool(set(tags) & set(tags_))
 
     if undo:
