@@ -10,7 +10,7 @@ from . import path as _path
 from . import tags as _tags
 
 
-def _job_function(
+def _run_job(
     *,
     activate: typing.Any = None,
     deactivate: typing.Any = None,
@@ -19,7 +19,14 @@ def _job_function(
     prepend_empty_chord: typing.Any = None,
     skip_file_name: typing.Any = None,
     title: typing.Any = None,
+    undo: bool = False,
 ):
+    if undo is True:
+        assert activate is not None
+        assert deactivate is None
+        deactivate = activate
+        activate = None
+        title = "Un" + title[0].lower() + title[1:]
     assert isinstance(path, pathlib.Path), repr(path)
     messages = []
     if title is not None:
@@ -75,7 +82,7 @@ def _job_function(
     return messages
 
 
-def color_clefs_function(path, *, undo=False):
+def color_clefs(path, *, undo=False):
     name = "clef color"
 
     def match(tags):
@@ -83,86 +90,64 @@ def color_clefs_function(path, *, undo=False):
         tags_ = _tags.clef_color_tags(build=build)
         return bool(set(tags) & set(tags_))
 
-    if undo:
-        messages = _job_function(
-            deactivate=(match, name),
-            path=path,
-            title="Uncoloring clefs ...",
-        )
-    else:
-        messages = _job_function(
-            activate=(match, name), path=path, title="Coloring clefs ..."
-        )
+    messages = _run_job(
+        activate=(match, name),
+        path=path,
+        title="Coloring clefs ...",
+        undo=undo,
+    )
     return messages
 
 
-def color_dynamics_function(path, *, undo=False):
+def color_dynamics(path, *, undo=False):
     name = "dynamic color"
 
     def match(tags):
         tags_ = _tags.dynamic_color_tags()
         return bool(set(tags) & set(tags_))
 
-    if undo:
-        messages = _job_function(
-            deactivate=(match, name),
-            path=path,
-            title="Uncoloring dynamics ...",
-        )
-    else:
-        messages = _job_function(
-            activate=(match, name),
-            path=path,
-            title="Coloring dynamics ...",
-        )
+    messages = _run_job(
+        activate=(match, name),
+        path=path,
+        title="Coloring dynamics ...",
+        undo=undo,
+    )
     return messages
 
 
-def color_instruments_function(path, *, undo=False):
+def color_instruments(path, *, undo=False):
     name = "instrument color"
 
     def match(tags):
         tags_ = _tags.instrument_color_tags()
         return bool(set(tags) & set(tags_))
 
-    if undo:
-        messages = _job_function(
-            deactivate=(match, name),
-            path=path,
-            title="Uncoloring instruments ...",
-        )
-    else:
-        messages = _job_function(
-            activate=(match, name),
-            path=path,
-            title="Coloring instruments ...",
-        )
+    messages = _run_job(
+        activate=(match, name),
+        path=path,
+        title="Coloring instruments ...",
+        undo=undo,
+    )
     return messages
 
 
-def color_short_instrument_names_function(path, *, undo=False):
+def color_short_instrument_names(path, *, undo=False):
     name = "short instrument name color"
 
     def match(tags):
         tags_ = _tags.short_instrument_name_color_tags()
         return bool(set(tags) & set(tags_))
 
-    if undo:
-        messages = _job_function(
-            deactivate=(match, name),
-            path=path,
-            title="Uncoloring short instrument names ...",
-        )
-    else:
-        messages = _job_function(
-            activate=(match, name),
-            path=path,
-            title="Coloring short instrument names ...",
-        )
+    messages = _run_job(
+        activate=(match, name),
+        path=path,
+        title="Coloring short instrument names ...",
+        undo=undo,
+    )
     return messages
 
 
-def color_metronome_marks_function(path, undo=False):
+def color_metronome_marks(path, undo=False):
     def activate(tags):
         tags_ = _tags.metronome_mark_color_expression_tags()
         return bool(set(tags) & set(tags_))
@@ -172,14 +157,14 @@ def color_metronome_marks_function(path, undo=False):
         return bool(set(tags) & set(tags_))
 
     if undo:
-        messages = _job_function(
+        messages = _run_job(
             activate=(deactivate, "metronome mark color suppression"),
             deactivate=(activate, "metronome mark color expression"),
             path=path,
             title="Uncoloring metronome marks ...",
         )
     else:
-        messages = _job_function(
+        messages = _run_job(
             activate=(activate, "metronome mark color expression"),
             deactivate=(deactivate, "metronome mark color suppression"),
             path=path,
@@ -188,7 +173,7 @@ def color_metronome_marks_function(path, undo=False):
     return messages
 
 
-def color_persistent_indicators_function(path, *, undo=False):
+def color_persistent_indicators(path, *, undo=False):
     name = "persistent indicator"
     activate_name = "persistent indicator color expression"
 
@@ -204,14 +189,14 @@ def color_persistent_indicators_function(path, *, undo=False):
         return bool(set(tags) & set(tags_))
 
     if undo:
-        messages = _job_function(
+        messages = _run_job(
             activate=(deactivate, deactivate_name),
             deactivate=(activate, activate_name),
             path=path,
             title=f"Uncoloring {name}s ...",
         )
     else:
-        messages = _job_function(
+        messages = _run_job(
             activate=(activate, activate_name),
             deactivate=(deactivate, deactivate_name),
             path=path,
@@ -220,7 +205,7 @@ def color_persistent_indicators_function(path, *, undo=False):
     return messages
 
 
-def color_staff_lines_function(path, *, undo=False):
+def color_staff_lines(path, *, undo=False):
     name = "staff lines color"
 
     def match(tags):
@@ -228,22 +213,16 @@ def color_staff_lines_function(path, *, undo=False):
         tags_ = _tags.staff_lines_color_tags(build=build)
         return bool(set(tags) & set(tags_))
 
-    if undo:
-        messages = _job_function(
-            deactivate=(match, name),
-            path=path,
-            title="Uncoloring staff lines ...",
-        )
-    else:
-        messages = _job_function(
-            activate=(match, name),
-            path=path,
-            title="Coloring staff lines ...",
-        )
+    messages = _run_job(
+        activate=(match, name),
+        path=path,
+        title="Coloring staff lines ...",
+        undo=undo,
+    )
     return messages
 
 
-def color_time_signatures_function(path, *, undo=False):
+def color_time_signatures(path, *, undo=False):
     name = "time signature color"
 
     def match(tags):
@@ -251,22 +230,16 @@ def color_time_signatures_function(path, *, undo=False):
         tags_ = _tags.time_signature_color_tags(build=build)
         return bool(set(tags) & set(tags_))
 
-    if undo:
-        messages = _job_function(
-            deactivate=(match, name),
-            path=path,
-            title="Uncoloring time signatures ...",
-        )
-    else:
-        messages = _job_function(
-            activate=(match, name),
-            path=path,
-            title="Coloring time signatures ...",
-        )
+    messages = _run_job(
+        activate=(match, name),
+        path=path,
+        title="Coloring time signatures ...",
+        undo=undo,
+    )
     return messages
 
 
-def handle_edition_tags_function(path):
+def handle_edition_tags(path):
     """
     Handles edition tags.
 
@@ -328,7 +301,7 @@ def handle_edition_tags_function(path):
                 return True
         return bool(set(tags) & set([this_edition, this_directory]))
 
-    messages = _job_function(
+    messages = _run_job(
         activate=(activate, "this-edition"),
         deactivate=(deactivate, "other-edition"),
         deactivate_first=True,
@@ -338,7 +311,7 @@ def handle_edition_tags_function(path):
     return messages
 
 
-def handle_fermata_bar_lines_function(path):
+def handle_fermata_bar_lines(path):
     """
     Handles fermata bar lines.
     """
@@ -371,7 +344,7 @@ def handle_fermata_bar_lines_function(path):
 
     else:
         deactivate = None
-    messages = _job_function(
+    messages = _run_job(
         activate=(activate, "bar line adjustment"),
         deactivate=(deactivate, "EOL fermata bar line"),
         path=path,
@@ -380,7 +353,7 @@ def handle_fermata_bar_lines_function(path):
     return messages
 
 
-def handle_mol_tags_function(path):
+def handle_mol_tags(path):
     if path.name == "_sections":
         path = path.parent
 
@@ -417,7 +390,7 @@ def handle_mol_tags_function(path):
 
     else:
         deactivate = None
-    messages = _job_function(
+    messages = _run_job(
         activate=(activate, "MOL"),
         deactivate=(deactivate, "conflicting MOL"),
         path=path,
@@ -426,7 +399,7 @@ def handle_mol_tags_function(path):
     return messages
 
 
-def handle_shifted_clefs_function(path):
+def handle_shifted_clefs(path):
     def activate(tags):
         return _tags.SHIFTED_CLEF in tags
 
@@ -451,7 +424,7 @@ def handle_shifted_clefs_function(path):
 
     else:
         deactivate = None
-    messages = _job_function(
+    messages = _run_job(
         activate=(activate, "shifted clef"),
         deactivate=(deactivate, "BOL clef"),
         path=path,
@@ -460,7 +433,7 @@ def handle_shifted_clefs_function(path):
     return messages
 
 
-def join_broken_spanners_function(path):
+def join_broken_spanners(path):
     def activate(tags):
         tags_ = [_tags.SHOW_TO_JOIN_BROKEN_SPANNERS]
         return bool(set(tags) & set(tags_))
@@ -469,7 +442,7 @@ def join_broken_spanners_function(path):
         tags_ = [_tags.HIDE_TO_JOIN_BROKEN_SPANNERS]
         return bool(set(tags) & set(tags_))
 
-    messages = _job_function(
+    messages = _run_job(
         activate=(activate, "broken spanner expression"),
         deactivate=(deactivate, "broken spanner suppression"),
         path=path,
@@ -478,7 +451,16 @@ def join_broken_spanners_function(path):
     return messages
 
 
-def show_music_annotations_function(path, *, undo=False):
+def not_topmost(path):
+    messages = _run_job(
+        deactivate=(_tags.NOT_TOPMOST, "not topmost"),
+        path=path,
+        title=f"Deactivating {_tags.NOT_TOPMOST.string} ...",
+    )
+    return messages
+
+
+def show_music_annotations(path, *, undo=False):
     name = "music annotation"
 
     def match(tags):
@@ -490,14 +472,14 @@ def show_music_annotations_function(path, *, undo=False):
         return bool(set(tags) & set(tags_))
 
     if undo:
-        messages = _job_function(
+        messages = _run_job(
             activate=(match_2, name),
             deactivate=(match, name),
             path=path,
             title=f"Hiding {name}s ...",
         )
     else:
-        messages = _job_function(
+        messages = _run_job(
             activate=(match, name),
             deactivate=(match_2, name),
             path=path,
@@ -506,7 +488,7 @@ def show_music_annotations_function(path, *, undo=False):
     return messages
 
 
-def show_tag_function(
+def show_tag(
     path,
     tag,
     *,
@@ -529,7 +511,7 @@ def show_tag_function(
             return bool(set(tags) & set(tags_))
 
     if undo:
-        messages = _job_function(
+        messages = _run_job(
             deactivate=(match, name),
             path=path,
             prepend_empty_chord=prepend_empty_chord,
@@ -537,7 +519,7 @@ def show_tag_function(
             title=f"Hiding {name} tags ...",
         )
     else:
-        messages = _job_function(
+        messages = _run_job(
             activate=(match, name),
             path=path,
             skip_file_name=skip_file_name,
