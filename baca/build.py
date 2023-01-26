@@ -833,9 +833,6 @@ def handle_build_tags(_sections_directory):
         ):
             messages_ = job()
             messages.extend(messages_)
-        _print_file_handling(f"Writing {baca.path.trim(_tags)} ...")
-        with _tags.open("a") as pointer:
-            pointer.write("\n".join(messages) + "\n")
         _tags = _sections_directory / _tags.name
         _print_file_handling(f"Writing {baca.path.trim(_tags)} ...")
         with _tags.open("a") as pointer:
