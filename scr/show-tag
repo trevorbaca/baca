@@ -10,6 +10,7 @@ if __name__ == "__main__":
 #    if not arguments.tag:
 #        print("Missing mandatory tag parameter ...")
 #        sys.exit(-1)
-#    baca.build.show_tag(directory, arguments.tag, undo=arguments.undo)
-    # baca.build.show_tag(directory, "MEASURE_NUMBER")
-    baca.build.show_tag(directory, "LOCAL_MEASURE_NUMBER", undo=True)
+#    messages =baca.build.show_tag_function(directory, arguments.tag, undo=arguments.undo)
+    # messages = baca.build.show_tag_function(directory, "MEASURE_NUMBER")
+    messages = baca.build.show_tag_function(directory, "LOCAL_MEASURE_NUMBER", undo=True)
+    print(messages)

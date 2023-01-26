@@ -1,7 +1,6 @@
 """
 Jobs.
 """
-import dataclasses
 import pathlib
 import typing
 
@@ -74,29 +73,6 @@ def _job_function(
                 total_count += count
     messages.append("")
     return messages
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class Job:
-
-    activate: typing.Any = None
-    deactivate: typing.Any = None
-    deactivate_first: typing.Any = None
-    path: typing.Any = None
-    prepend_empty_chord: typing.Any = None
-    skip_file_name: typing.Any = None
-    title: typing.Any = None
-
-    def __call__(self):
-        return _job_function(
-            activate=self.activate,
-            deactivate=self.deactivate,
-            deactivate_first=self.deactivate_first,
-            path=self.path,
-            prepend_empty_chord=self.prepend_empty_chord,
-            skip_file_name=self.skip_file_name,
-            title=self.title,
-        )
 
 
 def color_clefs_function(path, *, undo=False):
@@ -502,33 +478,6 @@ def join_broken_spanners_function(path):
     return messages
 
 
-def show_music_annotations(path, *, undo=False):
-    name = "music annotation"
-
-    def match(tags):
-        tags_ = _tags.music_annotation_tags()
-        return bool(set(tags) & set(tags_))
-
-    def match_2(tags):
-        tags_ = [_tags.INVISIBLE_MUSIC_COMMAND]
-        return bool(set(tags) & set(tags_))
-
-    if undo:
-        return Job(
-            activate=(match_2, name),
-            deactivate=(match, name),
-            path=path,
-            title=f"Hiding {name}s ...",
-        )
-    else:
-        return Job(
-            activate=(match, name),
-            deactivate=(match_2, name),
-            path=path,
-            title=f"Showing {name}s ...",
-        )
-
-
 def show_music_annotations_function(path, *, undo=False):
     name = "music annotation"
 
@@ -555,48 +504,6 @@ def show_music_annotations_function(path, *, undo=False):
             title=f"Showing {name}s ...",
         )
     return messages
-
-
-def show_tag(
-    path,
-    tag,
-    *,
-    match=None,
-    prepend_empty_chord=None,
-    skip_file_name=None,
-    undo=False,
-):
-    """
-    Shows tag.
-    """
-    if isinstance(tag, str):
-        assert match is not None, repr(match)
-        name = tag
-    else:
-        assert isinstance(tag, abjad.Tag), repr(tag)
-        name = tag.string
-
-    if match is None:
-
-        def match(tags):
-            tags_ = [tag]
-            return bool(set(tags) & set(tags_))
-
-    if undo:
-        return Job(
-            deactivate=(match, name),
-            path=path,
-            prepend_empty_chord=prepend_empty_chord,
-            skip_file_name=skip_file_name,
-            title=f"Hiding {name} tags ...",
-        )
-    else:
-        return Job(
-            activate=(match, name),
-            path=path,
-            skip_file_name=skip_file_name,
-            title=f"Showing {name} tags ...",
-        )
 
 
 def show_tag_function(

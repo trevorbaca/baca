@@ -149,12 +149,11 @@ def _externalize_music_ly(music_ly):
     assert music_ily.is_file()
     assert music_ily.parent.parent.name == "sections"
     for file in (music_ly, music_ily):
-        not_topmost = baca.jobs.Job(
+        messages = baca.jobs._job_function(
             deactivate=(baca.tags.NOT_TOPMOST, "not topmost"),
             path=file,
             title=f"Deactivating {baca.tags.NOT_TOPMOST.string} ...",
         )
-        messages = not_topmost()
         if messages:
             messages = "\n".join(messages) + "\n"
             _print_file_handling("Appending not-topmost tags messages ...")
@@ -260,6 +259,8 @@ def _log_timing(section_directory, timing):
 
 
 def _make_annotation_jobs(file, *, undo=False):
+    messages = []
+
     def _annotation_spanners(tags):
         tags_ = (
             baca.tags.MATERIAL_ANNOTATION_SPANNER,
@@ -269,12 +270,13 @@ def _make_annotation_jobs(file, *, undo=False):
         )
         return bool(set(tags) & set(tags_))
 
-    annotation_spanners = baca.jobs.show_tag(
+    messages_ = baca.jobs.show_tag_function(
         file,
         "annotation spanners",
         match=_annotation_spanners,
         undo=undo,
     )
+    messages.extend(messages_)
 
     def _spacing(tags):
         tags_ = (
@@ -283,25 +285,41 @@ def _make_annotation_jobs(file, *, undo=False):
         )
         return bool(set(tags) & set(tags_))
 
-    spacing = baca.jobs.show_tag(file, "spacing", match=_spacing, undo=undo)
-
-    jobs = [
-        annotation_spanners,
-        baca.jobs.show_tag(file, baca.tags.CLOCK_TIME, undo=undo),
-        baca.jobs.show_tag(file, baca.tags.FIGURE_LABEL, undo=undo),
-        baca.jobs.show_tag(file, baca.tags.INVISIBLE_MUSIC_COMMAND, undo=not undo),
-        baca.jobs.show_tag(file, baca.tags.INVISIBLE_MUSIC_COLORING, undo=undo),
-        baca.jobs.show_tag(file, baca.tags.LOCAL_MEASURE_NUMBER, undo=undo),
-        baca.jobs.show_tag(file, baca.tags.MEASURE_NUMBER, undo=undo),
-        baca.jobs.show_tag(file, baca.tags.MOCK_COLORING, undo=undo),
-        baca.jobs.show_music_annotations(file, undo=undo),
-        baca.jobs.show_tag(file, baca.tags.NOT_YET_PITCHED_COLORING, undo=undo),
-        baca.jobs.show_tag(file, baca.tags.RHYTHM_ANNOTATION_SPANNER, undo=undo),
-        spacing,
-        baca.jobs.show_tag(file, baca.tags.STAGE_NUMBER, undo=undo),
-    ]
-
-    return jobs
+    messages_ = baca.jobs.show_tag_function(file, baca.tags.CLOCK_TIME, undo=undo)
+    messages.extend(messages_)
+    messages_ = baca.jobs.show_tag_function(file, baca.tags.FIGURE_LABEL, undo=undo)
+    messages.extend(messages_)
+    messages_ = baca.jobs.show_tag_function(
+        file, baca.tags.INVISIBLE_MUSIC_COMMAND, undo=not undo
+    )
+    messages.extend(messages_)
+    messages_ = baca.jobs.show_tag_function(
+        file, baca.tags.INVISIBLE_MUSIC_COLORING, undo=undo
+    )
+    messages.extend(messages_)
+    messages_ = baca.jobs.show_tag_function(
+        file, baca.tags.LOCAL_MEASURE_NUMBER, undo=undo
+    )
+    messages.extend(messages_)
+    messages_ = baca.jobs.show_tag_function(file, baca.tags.MEASURE_NUMBER, undo=undo)
+    messages.extend(messages_)
+    messages_ = baca.jobs.show_tag_function(file, baca.tags.MOCK_COLORING, undo=undo)
+    messages.extend(messages_)
+    messages_ = baca.jobs.show_music_annotations_function(file, undo=undo)
+    messages.extend(messages_)
+    messages_ = baca.jobs.show_tag_function(
+        file, baca.tags.NOT_YET_PITCHED_COLORING, undo=undo
+    )
+    messages.extend(messages_)
+    messages_ = baca.jobs.show_tag_function(
+        file, baca.tags.RHYTHM_ANNOTATION_SPANNER, undo=undo
+    )
+    messages.extend(messages_)
+    messages_ = baca.jobs.show_tag_function(file, "spacing", match=_spacing, undo=undo)
+    messages.extend(messages_)
+    messages_ = baca.jobs.show_tag_function(file, baca.tags.STAGE_NUMBER, undo=undo)
+    messages.extend(messages_)
+    return messages
 
 
 def _make_section_clicktrack(lilypond_file, mtime, section_directory):
@@ -1187,10 +1205,7 @@ def show_annotations(file, *, undo=False):
     if "sections" not in file.parts:
         _print_always("Must call on file in section directory ...")
         sys.exit(1)
-    messages = []
-    for job in _make_annotation_jobs(file, undo=undo):
-        messages_ = job()
-        messages.extend(messages_)
+    messages = _make_annotation_jobs(file, undo=undo)
     return messages
 
 
