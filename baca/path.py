@@ -89,17 +89,17 @@ def activate(
     messages = []
     total = count + skipped
     if total == 0:
-        messages.append(f"found no {name} tags ({path.name})")
+        messages.append(f"found no {name} tags")
     if 0 < total:
         tags = abjad.string.pluralize("tag", total)
-        messages.append(f"found {total} {name} {tags} ({path.name})")
+        messages.append(f"found {total} {name} {tags}")
         if 0 < count:
             tags = abjad.string.pluralize("tag", count)
-            message = f"{gerund} {count} {name} {tags} ({path.name})"
+            message = f"{gerund} {count} {name} {tags}"
             messages.append(message)
         if 0 < skipped:
             tags = abjad.string.pluralize("tag", skipped)
-            message = f"skipping {skipped} ({adjective}) {name} {tags} ({path.name})"
+            message = f"skipping {skipped} ({adjective}) {name} {tags}"
             messages.append(message)
     whitespace = indent * " "
     messages = [
