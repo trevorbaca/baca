@@ -56,8 +56,8 @@ def _also_untagged(section_directory):
             continue
         safekeeping = section_directory / f"{name}.original"
         shutil.copyfile(tagged, safekeeping)
-    color_persistent_indicators(section_directory, do_not_print_tags=True, undo=True)
-    show_annotations(section_directory, do_not_print_tags=True, undo=True)
+        color_persistent_indicators(tagged, do_not_print_tags=True, undo=True)
+        show_annotations(tagged, do_not_print_tags=True, undo=True)
     printed_message = False
     for name in ("music.ly", "music.ily", "layout.ly"):
         tagged = section_directory / name
@@ -259,7 +259,7 @@ def _log_timing(section_directory, timing):
         pointer.write(line)
 
 
-def _make_annotation_jobs(directory, *, undo=False):
+def _make_annotation_jobs(file, *, undo=False):
     def _annotation_spanners(tags):
         tags_ = (
             baca.tags.MATERIAL_ANNOTATION_SPANNER,
@@ -270,7 +270,7 @@ def _make_annotation_jobs(directory, *, undo=False):
         return bool(set(tags) & set(tags_))
 
     annotation_spanners = baca.jobs.show_tag(
-        directory,
+        file,
         "annotation spanners",
         match=_annotation_spanners,
         undo=undo,
@@ -283,22 +283,22 @@ def _make_annotation_jobs(directory, *, undo=False):
         )
         return bool(set(tags) & set(tags_))
 
-    spacing = baca.jobs.show_tag(directory, "spacing", match=_spacing, undo=undo)
+    spacing = baca.jobs.show_tag(file, "spacing", match=_spacing, undo=undo)
 
     jobs = [
         annotation_spanners,
-        baca.jobs.show_tag(directory, baca.tags.CLOCK_TIME, undo=undo),
-        baca.jobs.show_tag(directory, baca.tags.FIGURE_LABEL, undo=undo),
-        baca.jobs.show_tag(directory, baca.tags.INVISIBLE_MUSIC_COMMAND, undo=not undo),
-        baca.jobs.show_tag(directory, baca.tags.INVISIBLE_MUSIC_COLORING, undo=undo),
-        baca.jobs.show_tag(directory, baca.tags.LOCAL_MEASURE_NUMBER, undo=undo),
-        baca.jobs.show_tag(directory, baca.tags.MEASURE_NUMBER, undo=undo),
-        baca.jobs.show_tag(directory, baca.tags.MOCK_COLORING, undo=undo),
-        baca.jobs.show_music_annotations(directory, undo=undo),
-        baca.jobs.show_tag(directory, baca.tags.NOT_YET_PITCHED_COLORING, undo=undo),
-        baca.jobs.show_tag(directory, baca.tags.RHYTHM_ANNOTATION_SPANNER, undo=undo),
+        baca.jobs.show_tag(file, baca.tags.CLOCK_TIME, undo=undo),
+        baca.jobs.show_tag(file, baca.tags.FIGURE_LABEL, undo=undo),
+        baca.jobs.show_tag(file, baca.tags.INVISIBLE_MUSIC_COMMAND, undo=not undo),
+        baca.jobs.show_tag(file, baca.tags.INVISIBLE_MUSIC_COLORING, undo=undo),
+        baca.jobs.show_tag(file, baca.tags.LOCAL_MEASURE_NUMBER, undo=undo),
+        baca.jobs.show_tag(file, baca.tags.MEASURE_NUMBER, undo=undo),
+        baca.jobs.show_tag(file, baca.tags.MOCK_COLORING, undo=undo),
+        baca.jobs.show_music_annotations(file, undo=undo),
+        baca.jobs.show_tag(file, baca.tags.NOT_YET_PITCHED_COLORING, undo=undo),
+        baca.jobs.show_tag(file, baca.tags.RHYTHM_ANNOTATION_SPANNER, undo=undo),
         spacing,
-        baca.jobs.show_tag(directory, baca.tags.STAGE_NUMBER, undo=undo),
+        baca.jobs.show_tag(file, baca.tags.STAGE_NUMBER, undo=undo),
     ]
 
     return jobs
@@ -701,10 +701,10 @@ def collect_section_lys(_sections_directory):
     handle_build_tags(_sections_directory)
 
 
-def color_persistent_indicators(directory, *, do_not_print_tags=False, undo=False):
-    directory = pathlib.Path(directory)
-    if directory.parent.name != "sections":
-        _print_always("Must call in section directory ...")
+def color_persistent_indicators(file, *, do_not_print_tags=False, undo=False):
+    assert file.is_file(), repr(file)
+    if "sections" not in file.parts:
+        _print_always("Must call on file in section directory ...")
         sys.exit(1)
     for job in (
         baca.jobs.color_clefs,
@@ -716,7 +716,7 @@ def color_persistent_indicators(directory, *, do_not_print_tags=False, undo=Fals
         baca.jobs.color_staff_lines,
         baca.jobs.color_time_signatures,
     ):
-        job = job(directory, undo=undo)
+        job = job(file, undo=undo)
         for message in job():
             if not do_not_print_tags:
                 _print_tags(message)
@@ -1159,12 +1159,12 @@ def run_lilypond(ly_file_path, *, pdf_mtime=None, remove=None):
         assert lilypond_log_file_path.exists()
 
 
-def show_annotations(directory, *, do_not_print_tags=False, undo=False):
-    directory = pathlib.Path(directory)
-    if directory.parent.name != "sections":
-        _print_always("Must call in section directory ...")
+def show_annotations(file, *, do_not_print_tags=False, undo=False):
+    assert file.is_file(), repr(file)
+    if "sections" not in file.parts:
+        _print_always("Must call on file in section directory ...")
         sys.exit(1)
-    for job in _make_annotation_jobs(directory, undo=undo):
+    for job in _make_annotation_jobs(file, undo=undo):
         for message in job():
             if not do_not_print_tags:
                 _print_tags(message)
