@@ -21,97 +21,59 @@ def _job_function(
     skip_file_name: typing.Any = None,
     title: typing.Any = None,
 ):
+    assert isinstance(path, pathlib.Path), repr(path)
     messages = []
     if title is not None:
         messages.append(title)
     total_count = 0
-    if isinstance(path, str):
-        text = path
     if deactivate_first is True:
         if deactivate is not None:
             assert isinstance(deactivate, tuple)
             match, name = deactivate
             if match is not None:
-                if isinstance(path, pathlib.Path):
-                    result = _path.deactivate(
-                        path,
-                        match,
-                        name=name,
-                        prepend_empty_chord=prepend_empty_chord,
-                        skip_file_name=skip_file_name,
-                    )
-                    assert result is not None
-                    count, skipped, messages_ = result
-                    messages.extend(messages_)
-                    total_count += count
-                else:
-                    assert isinstance(path, str), repr(path)
-                    result = abjad.deactivate(
-                        text,
-                        match,
-                        prepend_empty_chord=prepend_empty_chord,
-                        # skip_file_name=skip_file_name,
-                        skipped=True,
-                    )
-                    assert result is not None
-                    text, count, skipped = result
-    if activate is not None:
-        assert isinstance(activate, tuple)
-        match, name = activate
-        if match is not None:
-            if isinstance(path, pathlib.Path):
-                result = _path.activate(
+                result = _path.deactivate(
                     path,
                     match,
                     name=name,
+                    prepend_empty_chord=prepend_empty_chord,
                     skip_file_name=skip_file_name,
                 )
                 assert result is not None
                 count, skipped, messages_ = result
                 messages.extend(messages_)
                 total_count += count
-            else:
-                assert isinstance(path, str)
-                raise Exception("do we ever get here?")
-    #                text, count, skipped = abjad.activate(
-    #                    text,
-    #                    match,
-    #                    # skip_file_name=skip_file_name,
-    #                    skipped=True,
-    #                )
+    if activate is not None:
+        assert isinstance(activate, tuple)
+        match, name = activate
+        if match is not None:
+            result = _path.activate(
+                path,
+                match,
+                name=name,
+                skip_file_name=skip_file_name,
+            )
+            assert result is not None
+            count, skipped, messages_ = result
+            messages.extend(messages_)
+            total_count += count
     if deactivate_first is not True:
         if deactivate is not None:
             assert isinstance(deactivate, tuple)
             match, name = deactivate
             if match is not None:
-                if isinstance(path, pathlib.Path):
-                    result = _path.deactivate(
-                        path,
-                        match,
-                        name=name,
-                        prepend_empty_chord=prepend_empty_chord,
-                        skip_file_name=skip_file_name,
-                    )
-                    assert result is not None
-                    count, skipped, messages_ = result
-                    messages.extend(messages_)
-                    total_count += count
-                else:
-                    assert isinstance(path, str)
-                    raise Exception("do we ever get here?")
-    #                    text, count, skipped = abjad.deactivate(
-    #                        text,
-    #                        match,
-    #                        prepend_empty_chord=prepend_empty_chord,
-    #                        # skip_file_name=skip_file_name,
-    #                        skipped=True,
-    #                    )
+                result = _path.deactivate(
+                    path,
+                    match,
+                    name=name,
+                    prepend_empty_chord=prepend_empty_chord,
+                    skip_file_name=skip_file_name,
+                )
+                assert result is not None
+                count, skipped, messages_ = result
+                messages.extend(messages_)
+                total_count += count
     messages.append("")
-    if isinstance(path, pathlib.Path):
-        return messages
-    else:
-        assert isinstance(path, str)
-        return text
+    return messages
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
