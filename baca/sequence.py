@@ -741,7 +741,7 @@ def partition(sequence, counts=None):
 def quarters(
     sequence,
     *,
-    compound: abjad.typings.Duration | None = None,
+    compound: bool = False,
     remainder: int | None = None,
 ):
     r"""
@@ -765,7 +765,7 @@ def quarters(
     ..  container:: example
 
         >>> list_ = baca.fractions([(6, 4)])
-        >>> for item in baca.sequence.quarters(list_, compound=(3, 2)):
+        >>> for item in baca.sequence.quarters(list_, compound=True):
         ...     item
         ...
         [Duration(3, 8)]
@@ -800,6 +800,7 @@ def quarters(
 
     """
     assert isinstance(sequence, list), repr(sequence)
+    assert isinstance(compound, bool), repr(compound)
     sequence = split_divisions(
         sequence, [(1, 4)], cyclic=True, compound=compound, remainder=remainder
     )
@@ -1183,7 +1184,7 @@ def split_divisions(
     sequence,
     durations: list[abjad.typings.Duration],
     *,
-    compound: abjad.typings.Duration | None = None,
+    compound: bool = False,
     cyclic: bool = False,
     remainder: int | None = None,
     remainder_fuse_threshold: abjad.typings.Duration | None = None,
@@ -1425,7 +1426,7 @@ def split_divisions(
 
         >>> def quarters(sequence):
         ...     sequence = [sequence]
-        ...     sequence = baca.sequence.quarters(sequence, compound=(3, 2))
+        ...     sequence = baca.sequence.quarters(sequence, compound=True)
         ...     sequence = abjad.sequence.flatten(sequence, depth=-1)
         ...     return sequence
 
@@ -1478,14 +1479,9 @@ def split_divisions(
 
     """
     durations = [abjad.Duration(_) for _ in durations]
-    if compound is not None:
-        compound = abjad.Multiplier(compound)
-    if compound is not None:
-        # divisions = abjad.sequence.flatten(sequence, depth=-1)
-        # meters = [abjad.Meter(_) for _ in divisions]
-        meters = [abjad.Meter(_) for _ in sequence]
-        if all(_.is_compound for _ in meters):
-            durations = [compound * _ for _ in durations]
+    assert isinstance(compound, bool), repr(bool)
+    if compound is True and all([abjad.Meter(_).is_compound for _ in sequence]):
+        durations = [abjad.Multiplier(3, 2) * _ for _ in durations]
     if cyclic is not None:
         cyclic = bool(cyclic)
     if remainder is not None:
