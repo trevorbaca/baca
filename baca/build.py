@@ -984,8 +984,6 @@ def interpret_build_music(
     Interprets music.ly file in build directory.
 
     Collects sections and handles tags.
-
-    Skips section collection when skip_section_collection=True.
     """
     build_type = None
     if build_directory.name.endswith("-score"):
@@ -1012,6 +1010,14 @@ def interpret_build_music(
             _print_tags("Skipping tag handling ...")
         else:
             handle_part_tags(build_directory)
+    if "trevor" in _sections_directory.parts:
+        parts = list(_sections_directory.parts)
+        assert parts[3] == "Scores"
+        parts[3] = "_builds"
+        _builds_sections_directory = os.sep + os.sep.join(parts[1:])
+        shutil.copytree(
+            _sections_directory, _builds_sections_directory, dirs_exist_ok=True
+        )
     remove = None
     if _sections_directory.is_dir() and not debug_sections:
         remove = _sections_directory
