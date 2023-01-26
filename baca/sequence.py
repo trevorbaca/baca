@@ -378,9 +378,9 @@ def fuse(
         >>> divisions = baca.sequence.fuse(divisions, [2, 3, 1])
         >>> for division in divisions:
         ...     division
-        NonreducedFraction(6, 8)
-        NonreducedFraction(7, 8)
-        NonreducedFraction(2, 8)
+        Duration(3, 4)
+        Duration(7, 8)
+        Duration(1, 4)
 
     ..  container:: example
 
@@ -398,24 +398,24 @@ def fuse(
         >>> divisions = abjad.sequence.flatten(divisions, depth=-1)
         >>> for division in divisions:
         ...     division
-        NonreducedFraction(1, 16)
-        NonreducedFraction(1, 16)
-        NonreducedFraction(1, 16)
-        NonreducedFraction(1, 16)
-        NonreducedFraction(1, 16)
-        NonreducedFraction(5, 16)
-        NonreducedFraction(1, 16)
-        NonreducedFraction(1, 16)
-        NonreducedFraction(1, 16)
-        NonreducedFraction(1, 16)
-        NonreducedFraction(1, 16)
-        NonreducedFraction(5, 16)
-        NonreducedFraction(1, 16)
-        NonreducedFraction(1, 16)
-        NonreducedFraction(1, 16)
-        NonreducedFraction(1, 16)
-        NonreducedFraction(1, 16)
-        NonreducedFraction(5, 16)
+        Duration(1, 16)
+        Duration(1, 16)
+        Duration(1, 16)
+        Duration(1, 16)
+        Duration(1, 16)
+        Duration(5, 16)
+        Duration(1, 16)
+        Duration(1, 16)
+        Duration(1, 16)
+        Duration(1, 16)
+        Duration(1, 16)
+        Duration(5, 16)
+        Duration(1, 16)
+        Duration(1, 16)
+        Duration(1, 16)
+        Duration(1, 16)
+        Duration(1, 16)
+        Duration(5, 16)
 
     """
     if indices is not None:
@@ -753,14 +753,14 @@ def quarters(
         >>> for item in baca.sequence.quarters(list_):
         ...     item
         ...
-        [NonreducedFraction(1, 4)]
-        [NonreducedFraction(1, 4)]
-        [NonreducedFraction(1, 4)]
-        [NonreducedFraction(1, 4)]
-        [NonreducedFraction(1, 4)]
-        [NonreducedFraction(1, 4)]
-        [NonreducedFraction(1, 4)]
-        [NonreducedFraction(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
 
     ..  container:: example
 
@@ -768,10 +768,10 @@ def quarters(
         >>> for item in baca.sequence.quarters(list_, compound=(3, 2)):
         ...     item
         ...
-        [NonreducedFraction(3, 8)]
-        [NonreducedFraction(3, 8)]
-        [NonreducedFraction(3, 8)]
-        [NonreducedFraction(3, 8)]
+        [Duration(3, 8)]
+        [Duration(3, 8)]
+        [Duration(3, 8)]
+        [Duration(3, 8)]
 
     ..  container:: example
 
@@ -786,17 +786,17 @@ def quarters(
         ...     for division in sequence:
         ...         print(f"\t{repr(division)}")
         sequence:
-            [NonreducedFraction(2, 8)]
-            [NonreducedFraction(2, 8)]
-            [NonreducedFraction(2, 8)]
-            [NonreducedFraction(1, 8)]
+            [Duration(1, 4)]
+            [Duration(1, 4)]
+            [Duration(1, 4)]
+            [Duration(1, 8)]
         sequence:
-            [NonreducedFraction(2, 8)]
-            [NonreducedFraction(1, 8)]
+            [Duration(1, 4)]
+            [Duration(1, 8)]
         sequence:
-            [NonreducedFraction(2, 8)]
-            [NonreducedFraction(2, 8)]
-            [NonreducedFraction(1, 8)]
+            [Duration(1, 4)]
+            [Duration(1, 4)]
+            [Duration(1, 8)]
 
     """
     assert isinstance(sequence, list), repr(sequence)
@@ -1202,21 +1202,21 @@ def split_divisions(
         ...     for division in sequence_:
         ...         print("\t" + repr(division))
         sequence 0
-            NonreducedFraction(1, 8)
-            NonreducedFraction(1, 8)
-            NonreducedFraction(1, 16)
+            Duration(1, 8)
+            Duration(1, 8)
+            Duration(1, 16)
         sequence 1
-            NonreducedFraction(1, 16)
-            NonreducedFraction(1, 8)
-            NonreducedFraction(1, 8)
+            Duration(1, 16)
+            Duration(1, 8)
+            Duration(1, 8)
         sequence 2
-            NonreducedFraction(1, 8)
-            NonreducedFraction(1, 8)
-            NonreducedFraction(1, 16)
+            Duration(1, 8)
+            Duration(1, 8)
+            Duration(1, 16)
         sequence 3
-            NonreducedFraction(1, 16)
-            NonreducedFraction(1, 8)
-            NonreducedFraction(1, 8)
+            Duration(1, 16)
+            Duration(1, 8)
+            Duration(1, 8)
 
     ..  container:: example
 
@@ -1228,14 +1228,14 @@ def split_divisions(
         >>> divisions = baca.sequence.split_divisions(divisions, [(1, 4)], cyclic=True)
         >>> for item in divisions:
         ...     item
-        [NonreducedFraction(2, 8)]
-        [NonreducedFraction(2, 8)]
-        [NonreducedFraction(2, 8)]
-        [NonreducedFraction(2, 8)]
-        [NonreducedFraction(2, 8)]
-        [NonreducedFraction(2, 8)]
-        [NonreducedFraction(2, 8)]
-        [NonreducedFraction(1, 8)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 8)]
 
         Fuses remainder:
 
@@ -1250,13 +1250,13 @@ def split_divisions(
         ... )
         >>> for item in divisions:
         ...     item
-        [NonreducedFraction(2, 8)]
-        [NonreducedFraction(2, 8)]
-        [NonreducedFraction(2, 8)]
-        [NonreducedFraction(2, 8)]
-        [NonreducedFraction(2, 8)]
-        [NonreducedFraction(2, 8)]
-        [NonreducedFraction(3, 8)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(3, 8)]
 
     ..  container:: example
 
@@ -1273,14 +1273,14 @@ def split_divisions(
         ... )
         >>> for item in divisions:
         ...     item
-        [NonreducedFraction(1, 8)]
-        [NonreducedFraction(2, 8)]
-        [NonreducedFraction(2, 8)]
-        [NonreducedFraction(2, 8)]
-        [NonreducedFraction(2, 8)]
-        [NonreducedFraction(2, 8)]
-        [NonreducedFraction(2, 8)]
-        [NonreducedFraction(2, 8)]
+        [Duration(1, 8)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
 
         Fuses remainder:
 
@@ -1296,13 +1296,13 @@ def split_divisions(
         ... )
         >>> for item in divisions:
         ...     item
-        [NonreducedFraction(3, 8)]
-        [NonreducedFraction(2, 8)]
-        [NonreducedFraction(2, 8)]
-        [NonreducedFraction(2, 8)]
-        [NonreducedFraction(2, 8)]
-        [NonreducedFraction(2, 8)]
-        [NonreducedFraction(2, 8)]
+        [Duration(3, 8)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
+        [Duration(1, 4)]
 
     ..  container:: example
 
@@ -1322,18 +1322,18 @@ def split_divisions(
         ...     for division in item:
         ...         print(f"\t{repr(division)}")
         sequence:
-            NonreducedFraction(2, 8)
-            NonreducedFraction(2, 8)
-            NonreducedFraction(2, 8)
-            NonreducedFraction(1, 8)
+            Duration(1, 4)
+            Duration(1, 4)
+            Duration(1, 4)
+            Duration(1, 8)
         sequence:
-            NonreducedFraction(2, 8)
-            NonreducedFraction(2, 8)
-            NonreducedFraction(2, 8)
-            NonreducedFraction(1, 8)
+            Duration(1, 4)
+            Duration(1, 4)
+            Duration(1, 4)
+            Duration(1, 8)
         sequence:
-            NonreducedFraction(4, 16)
-            NonreducedFraction(3, 16)
+            Duration(1, 4)
+            Duration(3, 16)
 
     ..  container:: example
 
@@ -1353,18 +1353,18 @@ def split_divisions(
         ...     for division in item:
         ...         print(f"\t{repr(division)}")
         sequence:
-            NonreducedFraction(1, 8)
-            NonreducedFraction(2, 8)
-            NonreducedFraction(2, 8)
-            NonreducedFraction(2, 8)
+            Duration(1, 8)
+            Duration(1, 4)
+            Duration(1, 4)
+            Duration(1, 4)
         sequence:
-            NonreducedFraction(1, 8)
-            NonreducedFraction(2, 8)
-            NonreducedFraction(2, 8)
-            NonreducedFraction(2, 8)
+            Duration(1, 8)
+            Duration(1, 4)
+            Duration(1, 4)
+            Duration(1, 4)
         sequence:
-            NonreducedFraction(3, 16)
-            NonreducedFraction(4, 16)
+            Duration(3, 16)
+            Duration(1, 4)
 
     ..  container:: example
 
@@ -1389,8 +1389,8 @@ def split_divisions(
         ...     for division in item:
         ...         print(f"\t{repr(division)}")
         sequence:
-            NonreducedFraction(2, 8)
-            NonreducedFraction(3, 8)
+            Duration(1, 4)
+            Duration(3, 8)
 
     ..  container:: example
 
@@ -1416,8 +1416,8 @@ def split_divisions(
         ...     for division in item:
         ...         print(f"\t{repr(division)}")
         sequence:
-            NonreducedFraction(3, 8)
-            NonreducedFraction(2, 8)
+            Duration(3, 8)
+            Duration(1, 4)
 
     ..  container:: example
 
@@ -1437,12 +1437,12 @@ def split_divisions(
         ...     for division in item:
         ...         print(f"\t{repr(division)}")
         sequence:
-            NonreducedFraction(1, 4)
-            NonreducedFraction(1, 4)
-            NonreducedFraction(1, 4)
+            Duration(1, 4)
+            Duration(1, 4)
+            Duration(1, 4)
         sequence:
-            NonreducedFraction(3, 8)
-            NonreducedFraction(3, 8)
+            Duration(3, 8)
+            Duration(3, 8)
 
     ..  container:: example
 
@@ -1464,25 +1464,26 @@ def split_divisions(
         ...     for division in item:
         ...         print(f"\t{repr(division)}")
         sequence:
-            NonreducedFraction(1, 16)
-            NonreducedFraction(2, 16)
-            NonreducedFraction(4, 16)
+            Duration(1, 16)
+            Duration(1, 8)
+            Duration(1, 4)
         sequence:
-            NonreducedFraction(2, 16)
-            NonreducedFraction(4, 16)
-            NonreducedFraction(1, 16)
+            Duration(1, 8)
+            Duration(1, 4)
+            Duration(1, 16)
         sequence:
-            NonreducedFraction(4, 16)
-            NonreducedFraction(1, 16)
-            NonreducedFraction(2, 16)
+            Duration(1, 4)
+            Duration(1, 16)
+            Duration(1, 8)
 
     """
     durations = [abjad.Duration(_) for _ in durations]
     if compound is not None:
         compound = abjad.Multiplier(compound)
     if compound is not None:
-        divisions = abjad.sequence.flatten(sequence, depth=-1)
-        meters = [abjad.Meter(_) for _ in divisions]
+        # divisions = abjad.sequence.flatten(sequence, depth=-1)
+        # meters = [abjad.Meter(_) for _ in divisions]
+        meters = [abjad.Meter(_) for _ in sequence]
         if all(_.is_compound for _ in meters):
             durations = [compound * _ for _ in durations]
     if cyclic is not None:
@@ -1491,9 +1492,12 @@ def split_divisions(
         assert remainder in (abjad.LEFT, abjad.RIGHT), repr(remainder)
     if remainder_fuse_threshold is not None:
         remainder_fuse_threshold = abjad.Duration(remainder_fuse_threshold)
-    sequence_ = abjad.sequence.split(sequence, durations, cyclic=cyclic, overhang=True)
+
+    sequence_ = abjad.sequence.split(
+        [abjad.Duration(_) for _ in sequence], durations, cyclic=cyclic, overhang=True
+    )
     without_overhang = abjad.sequence.split(
-        sequence, durations, cyclic=cyclic, overhang=False
+        [abjad.Duration(_) for _ in sequence], durations, cyclic=cyclic, overhang=False
     )
     if sequence_ != without_overhang:
         items = list(sequence_)
