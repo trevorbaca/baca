@@ -62,11 +62,13 @@ def activate(
     assert path.exists(), repr(path)
     assert isinstance(indent, int), repr(indent)
     if path.name == skip_file_name:
-        return None
+        triple = (0, 0, [])
+        return triple
+        # return None
     if isinstance(tag, str):
         raise Exception(f"must be tag or callable: {tag!r}")
     triples = []
-    # assert path.is_file(), repr(path)
+    assert path.is_file(), repr(path)
     if path.is_file():
         assert path.name in ("layout.ly", "music.ily", "music.ly") or (
             path.name[0].isdigit() and path.suffix in (".ily", ".ly")

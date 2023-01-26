@@ -348,15 +348,11 @@ def handle_edition_tags(path):
     ..  todo: Tests.
 
     """
-    if path.parent.parent.name == "sections":
+    if "sections" in str(path):
         my_name = "SECTION"
-    elif path.parent.name == "sections":
-        my_name = "SECTION"
-    elif path.name.endswith("-score") or path.parent.name.endswith("-score"):
+    elif "-score" in str(path):
         my_name = "SCORE"
-    elif path.name.endswith("-parts"):
-        my_name = "PARTS"
-    elif path.parent.name.endswith("-parts"):
+    elif "-parts" in str(path):
         my_name = "PARTS"
     else:
         raise Exception(path)

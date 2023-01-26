@@ -763,80 +763,81 @@ def handle_build_tags(_sections_directory):
             return True
         return False
 
-    def _run(job):
-        messages = job()
-        return messages
-
-    messages = []
-    for job in (
-        baca.jobs.handle_edition_tags(_sections_directory),
-        baca.jobs.handle_fermata_bar_lines(_sections_directory),
-        baca.jobs.handle_shifted_clefs(_sections_directory),
-        baca.jobs.handle_mol_tags(_sections_directory),
-        baca.jobs.color_persistent_indicators(_sections_directory, undo=True),
-        baca.jobs.show_music_annotations(_sections_directory, undo=True),
-        baca.jobs.join_broken_spanners(_sections_directory),
-        baca.jobs.show_tag(
-            _sections_directory,
-            "left-broken-should-deactivate",
-            match=match_left_broken_should_deactivate,
-            undo=True,
-        ),
-        baca.jobs.show_tag(
-            _sections_directory, baca.tags.ANCHOR_NOTE, skip_file_name=final_ily_name
-        ),
-        baca.jobs.show_tag(
-            _sections_directory, baca.tags.ANCHOR_SKIP, skip_file_name=final_ily_name
-        ),
-        baca.jobs.show_tag(
-            _sections_directory,
-            baca.tags.ANCHOR_NOTE,
-            prepend_empty_chord=True,
-            skip_file_name=final_ily_name,
-            undo=True,
-        ),
-        baca.jobs.show_tag(
-            _sections_directory,
-            baca.tags.ANCHOR_SKIP,
-            prepend_empty_chord=True,
-            skip_file_name=final_ily_name,
-            undo=True,
-        ),
-        baca.jobs.show_tag(
-            _sections_directory,
-            "anchor-should-activate",
-            match=match_anchor_should_activate,
-            skip_file_name=final_ily_name,
-        ),
-        baca.jobs.show_tag(
-            _sections_directory,
-            "anchor-should-deactivate",
-            match=match_anchor_should_deactivate,
-            skip_file_name=final_ily_name,
-            undo=True,
-        ),
-        baca.jobs.show_tag(
-            _sections_directory,
-            baca.tags.EOS_STOP_MM_SPANNER,
-            skip_file_name=final_ily_name,
-        ),
-        baca.jobs.show_tag(
-            _sections_directory,
-            baca.tags.METRIC_MODULATION_IS_STRIPPED,
-            undo=True,
-        ),
-        baca.jobs.show_tag(
-            _sections_directory,
-            baca.tags.METRIC_MODULATION_IS_SCALED,
-            undo=True,
-        ),
-    ):
-        messages_ = _run(job)
-        messages.extend(messages_)
-    _tags = _sections_directory.with_name(".tags")
-    assert _tags.parent.parent.name == "builds"
-    _print_file_handling(f"Writing {baca.path.trim(_tags)} ...")
-    _tags.write_text("\n".join(messages) + "\n")
+    for file in sorted(_sections_directory.glob("*ly")):
+        _tags = _sections_directory.parent / ".tags"
+        if _tags.exists():
+            _tags.unlink()
+        _tags = _sections_directory.parent / f".{file.name}.tags"
+        if _tags.exists():
+            _tags.unlink()
+        messages = []
+        for job in (
+            baca.jobs.handle_edition_tags(file),
+            baca.jobs.handle_fermata_bar_lines(file),
+            baca.jobs.handle_shifted_clefs(file),
+            baca.jobs.handle_mol_tags(file),
+            baca.jobs.color_persistent_indicators(file, undo=True),
+            baca.jobs.show_music_annotations(file, undo=True),
+            baca.jobs.join_broken_spanners(file),
+            baca.jobs.show_tag(
+                file,
+                "left-broken-should-deactivate",
+                match=match_left_broken_should_deactivate,
+                undo=True,
+            ),
+            baca.jobs.show_tag(
+                file, baca.tags.ANCHOR_NOTE, skip_file_name=final_ily_name
+            ),
+            baca.jobs.show_tag(
+                file, baca.tags.ANCHOR_SKIP, skip_file_name=final_ily_name
+            ),
+            baca.jobs.show_tag(
+                file,
+                baca.tags.ANCHOR_NOTE,
+                prepend_empty_chord=True,
+                skip_file_name=final_ily_name,
+                undo=True,
+            ),
+            baca.jobs.show_tag(
+                file,
+                baca.tags.ANCHOR_SKIP,
+                prepend_empty_chord=True,
+                skip_file_name=final_ily_name,
+                undo=True,
+            ),
+            baca.jobs.show_tag(
+                file,
+                "anchor-should-activate",
+                match=match_anchor_should_activate,
+                skip_file_name=final_ily_name,
+            ),
+            baca.jobs.show_tag(
+                file,
+                "anchor-should-deactivate",
+                match=match_anchor_should_deactivate,
+                skip_file_name=final_ily_name,
+                undo=True,
+            ),
+            baca.jobs.show_tag(
+                file,
+                baca.tags.EOS_STOP_MM_SPANNER,
+                skip_file_name=final_ily_name,
+            ),
+            baca.jobs.show_tag(
+                file,
+                baca.tags.METRIC_MODULATION_IS_STRIPPED,
+                undo=True,
+            ),
+            baca.jobs.show_tag(
+                file,
+                baca.tags.METRIC_MODULATION_IS_SCALED,
+                undo=True,
+            ),
+        ):
+            messages = job()
+            _print_file_handling(f"Appending {baca.path.trim(_tags)} ...")
+            with _tags.open("a") as pointer:
+                pointer.write("\n".join(messages) + "\n")
 
 
 def handle_part_tags(directory):
