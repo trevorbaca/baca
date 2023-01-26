@@ -764,9 +764,6 @@ def handle_build_tags(_sections_directory):
         return False
 
     for file in sorted(_sections_directory.glob("*ly")):
-        _tags = _sections_directory.parent / ".tags"
-        if _tags.exists():
-            _tags.unlink()
         _tags = _sections_directory.parent / f".{file.name}.tags"
         if _tags.exists():
             _tags.unlink()
@@ -834,10 +831,15 @@ def handle_build_tags(_sections_directory):
                 undo=True,
             ),
         ):
-            messages = job()
-            _print_file_handling(f"Appending {baca.path.trim(_tags)} ...")
-            with _tags.open("a") as pointer:
-                pointer.write("\n".join(messages) + "\n")
+            messages_ = job()
+            messages.extend(messages_)
+        _print_file_handling(f"Writing {baca.path.trim(_tags)} ...")
+        with _tags.open("a") as pointer:
+            pointer.write("\n".join(messages) + "\n")
+        _tags = _sections_directory / _tags.name
+        _print_file_handling(f"Writing {baca.path.trim(_tags)} ...")
+        with _tags.open("a") as pointer:
+            pointer.write("\n".join(messages) + "\n")
 
 
 def handle_part_tags(directory):

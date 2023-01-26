@@ -41,15 +41,7 @@ def activate(
     undo=False,
 ):
     """
-    Activates ``tag`` in path.
-
-    Case 0: path is a non-LilyPond file. Method does nothing.
-
-    Case 1: path is a LilyPond (.ily, .ly) file starting with ``music``, ``layout`` or
-    ``section``. Method activates ``tag`` in file.
-
-    Case 2: path is a directory. Method descends directory recursively and activates
-    ``tag`` in LilyPond files given in case 1.
+    Activates ``tag`` in .ily or .ly ``path``.
 
     Returns triple.
 
@@ -57,59 +49,32 @@ def activate(
 
     Second item in pair is count of already-active tags skipped by method.
 
-    Third item in pair is list of canonical string messages that explain what happened.
+    Third item in pair is list of string messages that explain what happened.
     """
-    assert path.exists(), repr(path)
+    assert path.is_file(), repr(path)
+    assert path.suffix in (".ily", ".ly")
+    if path.name not in ("layout.ly", "music.ily", "music.ly"):
+        assert path.name[0].isdigit(), repr(path)
     assert isinstance(indent, int), repr(indent)
     if path.name == skip_file_name:
         triple = (0, 0, [])
         return triple
-        # return None
     if isinstance(tag, str):
         raise Exception(f"must be tag or callable: {tag!r}")
     triples = []
-    assert path.is_file(), repr(path)
-    if path.is_file():
-        assert path.name in ("layout.ly", "music.ily", "music.ly") or (
-            path.name[0].isdigit() and path.suffix in (".ily", ".ly")
-        ), repr(path)
-        if path.name != skip_file_name:
-            text = path.read_text()
-            if undo:
-                text, count, skipped = abjad.deactivate(
-                    text,
-                    tag,
-                    prepend_empty_chord=prepend_empty_chord,
-                    skipped=True,
-                )
-            else:
-                text, count, skipped = abjad.activate(text, tag, skipped=True)
-            path.write_text(text)
-            triple = (path, count, skipped)
-            triples.append(triple)
+    text = path.read_text()
+    if undo:
+        text, count, skipped = abjad.deactivate(
+            text,
+            tag,
+            prepend_empty_chord=prepend_empty_chord,
+            skipped=True,
+        )
     else:
-        assert path.is_dir(), repr(path)
-        count, skipped = 0, 0
-        for subpath in sorted(path.glob("**/*ly")):
-            if subpath.suffix not in (".ily", ".ly"):
-                continue
-            if not (
-                subpath.name.startswith("music")
-                or subpath.name.startswith("layout")
-                or subpath.name[0].isdigit()
-            ):
-                continue
-            if subpath.name == skip_file_name:
-                continue
-            result = activate(
-                subpath, tag, prepend_empty_chord=prepend_empty_chord, undo=undo
-            )
-            assert result is not None
-            count_, skipped_, _ = result
-            triple = (subpath, count_, skipped_)
-            triples.append(triple)
-            count += count_
-            skipped += skipped_
+        text, count, skipped = abjad.activate(text, tag, skipped=True)
+    path.write_text(text)
+    triple = (path, count, skipped)
+    triples.append(triple)
     if name is None:
         if isinstance(tag, abjad.Tag):
             name = tag.string
@@ -121,26 +86,21 @@ def activate(
     else:
         adjective = "active"
         gerund = "activating"
-    count, skipped, messages = 0, 0, []
-    for path_, count_, skipped_ in triples:
-        total = count_ + skipped_
-        if total == 0:
-            messages.append(f"found no {name} tags ({path_.name})")
-        if 0 < total:
-            tags = abjad.string.pluralize("tag", total)
-            messages.append(f"found {total} {name} {tags} ({path_.name})")
-            if 0 < count_:
-                tags = abjad.string.pluralize("tag", count_)
-                message = f"{gerund} {count_} {name} {tags} ({path_.name})"
-                messages.append(message)
-            if 0 < skipped_:
-                tags = abjad.string.pluralize("tag", skipped_)
-                message = (
-                    f"skipping {skipped_} ({adjective}) {name} {tags} ({path_.name})"
-                )
-                messages.append(message)
-        count += count_
-        skipped += skipped_
+    messages = []
+    total = count + skipped
+    if total == 0:
+        messages.append(f"found no {name} tags ({path.name})")
+    if 0 < total:
+        tags = abjad.string.pluralize("tag", total)
+        messages.append(f"found {total} {name} {tags} ({path.name})")
+        if 0 < count:
+            tags = abjad.string.pluralize("tag", count)
+            message = f"{gerund} {count} {name} {tags} ({path.name})"
+            messages.append(message)
+        if 0 < skipped:
+            tags = abjad.string.pluralize("tag", skipped)
+            message = f"skipping {skipped} ({adjective}) {name} {tags} ({path.name})"
+            messages.append(message)
     whitespace = indent * " "
     messages = [
         whitespace + abjad.string.capitalize_start(_) + " ..." for _ in messages
