@@ -56,8 +56,8 @@ def _also_untagged(section_directory):
             continue
         safekeeping = section_directory / f"{name}.original"
         shutil.copyfile(tagged, safekeeping)
-        color_persistent_indicators(tagged, do_not_print_tags=True, undo=True)
-        show_annotations(tagged, do_not_print_tags=True, undo=True)
+        color_persistent_indicators(tagged, undo=True)
+        show_annotations(tagged, undo=True)
     printed_message = False
     for name in ("music.ly", "music.ily", "layout.ly"):
         tagged = section_directory / name
@@ -223,14 +223,14 @@ def _handle_tags_in_section_directory(section_directory):
             continue
         _tags_file = music_ly.with_name(f".{name}.tags")
         messages = []
-        for job in (
-            baca.jobs.handle_edition_tags(path),
-            baca.jobs.handle_fermata_bar_lines(path),
-            baca.jobs.handle_shifted_clefs(path),
-            baca.jobs.handle_mol_tags(path),
-        ):
-            messages_ = job()
-            messages.extend(messages_)
+        messages_ = baca.jobs.handle_edition_tags_function(path)
+        messages.extend(messages_)
+        messages_ = baca.jobs.handle_fermata_bar_lines_function(path)
+        messages.extend(messages_)
+        messages_ = baca.jobs.handle_shifted_clefs_function(path)
+        messages.extend(messages_)
+        messages_ = baca.jobs.handle_mol_tags_function(path)
+        messages.extend(messages_)
         _print_file_handling(f"Appending {baca.path.trim(_tags_file)} ...")
         text = "\n".join(messages) + "\n"
         with _tags_file.open("a") as pointer:
@@ -701,28 +701,33 @@ def collect_section_lys(_sections_directory):
     handle_build_tags(_sections_directory)
 
 
-def color_persistent_indicators(file, *, do_not_print_tags=False, undo=False):
+def color_persistent_indicators(file, *, undo=False):
     assert file.is_file(), repr(file)
     if "sections" not in file.parts:
         _print_always("Must call on file in section directory ...")
         sys.exit(1)
-    for job in (
-        baca.jobs.color_clefs,
-        baca.jobs.color_dynamics,
-        baca.jobs.color_instruments,
-        baca.jobs.color_short_instrument_names,
-        baca.jobs.color_metronome_marks,
-        baca.jobs.color_persistent_indicators,
-        baca.jobs.color_staff_lines,
-        baca.jobs.color_time_signatures,
-    ):
-        job = job(file, undo=undo)
-        for message in job():
-            if not do_not_print_tags:
-                _print_tags(message)
+    messages = []
+    messages_ = baca.jobs.color_clefs_function(file, undo=undo)
+    messages.extend(messages_)
+    messages_ = baca.jobs.color_dynamics_function(file, undo=undo)
+    messages.extend(messages_)
+    messages_ = baca.jobs.color_instruments_function(file, undo=undo)
+    messages.extend(messages_)
+    messages_ = baca.jobs.color_short_instrument_names_function(file, undo=undo)
+    messages.extend(messages_)
+    messages_ = baca.jobs.color_metronome_marks_function(file, undo=undo)
+    messages.extend(messages_)
+    messages_ = baca.jobs.color_persistent_indicators_function(file, undo=undo)
+    messages.extend(messages_)
+    messages_ = baca.jobs.color_staff_lines_function(file, undo=undo)
+    messages.extend(messages_)
+    messages_ = baca.jobs.color_time_signatures_function(file, undo=undo)
+    messages.extend(messages_)
+    return messages
 
 
 def handle_build_tags(_sections_directory):
+    _print_main_task("Handling build tags ...")
     contents_directory = baca.path.get_contents_directory(_sections_directory)
     sections_directory = contents_directory / "sections"
     paths = sorted(sections_directory.glob("*"))
@@ -764,79 +769,90 @@ def handle_build_tags(_sections_directory):
         return False
 
     for file in sorted(_sections_directory.glob("*ly")):
-        _tags = _sections_directory.parent / f".{file.name}.tags"
-        if _tags.exists():
-            _tags.unlink()
         messages = []
-        for job in (
-            baca.jobs.handle_edition_tags(file),
-            baca.jobs.handle_fermata_bar_lines(file),
-            baca.jobs.handle_shifted_clefs(file),
-            baca.jobs.handle_mol_tags(file),
-            baca.jobs.color_persistent_indicators(file, undo=True),
-            baca.jobs.show_music_annotations(file, undo=True),
-            baca.jobs.join_broken_spanners(file),
-            baca.jobs.show_tag(
-                file,
-                "left-broken-should-deactivate",
-                match=match_left_broken_should_deactivate,
-                undo=True,
-            ),
-            baca.jobs.show_tag(
-                file, baca.tags.ANCHOR_NOTE, skip_file_name=final_ily_name
-            ),
-            baca.jobs.show_tag(
-                file, baca.tags.ANCHOR_SKIP, skip_file_name=final_ily_name
-            ),
-            baca.jobs.show_tag(
-                file,
-                baca.tags.ANCHOR_NOTE,
-                prepend_empty_chord=True,
-                skip_file_name=final_ily_name,
-                undo=True,
-            ),
-            baca.jobs.show_tag(
-                file,
-                baca.tags.ANCHOR_SKIP,
-                prepend_empty_chord=True,
-                skip_file_name=final_ily_name,
-                undo=True,
-            ),
-            baca.jobs.show_tag(
-                file,
-                "anchor-should-activate",
-                match=match_anchor_should_activate,
-                skip_file_name=final_ily_name,
-            ),
-            baca.jobs.show_tag(
-                file,
-                "anchor-should-deactivate",
-                match=match_anchor_should_deactivate,
-                skip_file_name=final_ily_name,
-                undo=True,
-            ),
-            baca.jobs.show_tag(
-                file,
-                baca.tags.EOS_STOP_MM_SPANNER,
-                skip_file_name=final_ily_name,
-            ),
-            baca.jobs.show_tag(
-                file,
-                baca.tags.METRIC_MODULATION_IS_STRIPPED,
-                undo=True,
-            ),
-            baca.jobs.show_tag(
-                file,
-                baca.tags.METRIC_MODULATION_IS_SCALED,
-                undo=True,
-            ),
-        ):
-            messages_ = job()
-            messages.extend(messages_)
-        _tags = _sections_directory / _tags.name
+        messages_ = baca.jobs.handle_edition_tags_function(file)
+        messages.extend(messages_)
+        messages_ = baca.jobs.handle_fermata_bar_lines_function(file)
+        messages.extend(messages_)
+        messages_ = baca.jobs.handle_shifted_clefs_function(file)
+        messages.extend(messages_)
+        messages_ = baca.jobs.handle_mol_tags_function(file)
+        messages.extend(messages_)
+        messages_ = baca.jobs.color_persistent_indicators_function(file, undo=True)
+        messages.extend(messages_)
+        messages_ = baca.jobs.show_music_annotations_function(file, undo=True)
+        messages.extend(messages_)
+        messages_ = baca.jobs.join_broken_spanners_function(file)
+        messages.extend(messages_)
+        messages_ = baca.jobs.show_tag_function(
+            file,
+            "left-broken-should-deactivate",
+            match=match_left_broken_should_deactivate,
+            undo=True,
+        )
+        messages.extend(messages_)
+        messages_ = baca.jobs.show_tag_function(
+            file, baca.tags.ANCHOR_NOTE, skip_file_name=final_ily_name
+        )
+        messages.extend(messages_)
+        messages_ = baca.jobs.show_tag_function(
+            file, baca.tags.ANCHOR_SKIP, skip_file_name=final_ily_name
+        )
+        messages.extend(messages_)
+        messages_ = baca.jobs.show_tag_function(
+            file,
+            baca.tags.ANCHOR_NOTE,
+            prepend_empty_chord=True,
+            skip_file_name=final_ily_name,
+            undo=True,
+        )
+        messages.extend(messages_)
+        messages_ = baca.jobs.show_tag_function(
+            file,
+            baca.tags.ANCHOR_SKIP,
+            prepend_empty_chord=True,
+            skip_file_name=final_ily_name,
+            undo=True,
+        )
+        messages.extend(messages_)
+        messages_ = baca.jobs.show_tag_function(
+            file,
+            "anchor-should-activate",
+            match=match_anchor_should_activate,
+            skip_file_name=final_ily_name,
+        )
+        messages.extend(messages_)
+        messages_ = baca.jobs.show_tag_function(
+            file,
+            "anchor-should-deactivate",
+            match=match_anchor_should_deactivate,
+            skip_file_name=final_ily_name,
+            undo=True,
+        )
+        messages.extend(messages_)
+        messages_ = baca.jobs.show_tag_function(
+            file,
+            baca.tags.EOS_STOP_MM_SPANNER,
+            skip_file_name=final_ily_name,
+        )
+        messages.extend(messages_)
+        messages_ = baca.jobs.show_tag_function(
+            file,
+            baca.tags.METRIC_MODULATION_IS_STRIPPED,
+            undo=True,
+        )
+        messages.extend(messages_)
+        messages_ = baca.jobs.show_tag_function(
+            file,
+            baca.tags.METRIC_MODULATION_IS_SCALED,
+            undo=True,
+        )
+        messages.extend(messages_)
+        _tags = _sections_directory / f".{file.name}.tags"
         _print_file_handling(f"Writing {baca.path.trim(_tags)} ...")
+        text = "\n".join(messages) + "\n"
         with _tags.open("a") as pointer:
-            pointer.write("\n".join(messages) + "\n")
+            pointer.write(text)
 
 
 def handle_part_tags(directory):
@@ -1008,6 +1024,7 @@ def interpret_build_music(
         else:
             handle_part_tags(build_directory)
     if "trevor" in _sections_directory.parts:
+        _print_main_task("Populating _builds ...")
         parts = list(_sections_directory.parts)
         assert parts[3] == "Scores"
         parts[3] = "_builds"
@@ -1165,23 +1182,23 @@ def run_lilypond(ly_file_path, *, pdf_mtime=None, remove=None):
         assert lilypond_log_file_path.exists()
 
 
-def show_annotations(file, *, do_not_print_tags=False, undo=False):
+def show_annotations(file, *, undo=False):
     assert file.is_file(), repr(file)
     if "sections" not in file.parts:
         _print_always("Must call on file in section directory ...")
         sys.exit(1)
+    messages = []
     for job in _make_annotation_jobs(file, undo=undo):
-        for message in job():
-            if not do_not_print_tags:
-                _print_tags(message)
+        messages_ = job()
+        messages.extend(messages_)
+    return messages
 
 
 def show_tag(directory, tag, *, undo: bool = False):
     assert isinstance(undo, bool), repr(undo)
     directory = pathlib.Path(directory)
     tag = abjad.Tag(tag)
-    job = baca.jobs.show_tag(directory, tag, undo=undo)
-    for message in job():
+    for message in baca.jobs.show_tag_function(directory, tag, undo=undo):
         _print_tags(message)
 
 

@@ -11,11 +11,111 @@ from . import path as _path
 from . import tags as _tags
 
 
+def _job_function(
+    *,
+    activate: typing.Any = None,
+    deactivate: typing.Any = None,
+    deactivate_first: typing.Any = None,
+    path: typing.Any = None,
+    prepend_empty_chord: typing.Any = None,
+    skip_file_name: typing.Any = None,
+    title: typing.Any = None,
+):
+    messages = []
+    if title is not None:
+        messages.append(title)
+    total_count = 0
+    if isinstance(path, str):
+        text = path
+    if deactivate_first is True:
+        if deactivate is not None:
+            assert isinstance(deactivate, tuple)
+            match, name = deactivate
+            if match is not None:
+                if isinstance(path, pathlib.Path):
+                    result = _path.deactivate(
+                        path,
+                        match,
+                        name=name,
+                        prepend_empty_chord=prepend_empty_chord,
+                        skip_file_name=skip_file_name,
+                    )
+                    assert result is not None
+                    count, skipped, messages_ = result
+                    messages.extend(messages_)
+                    total_count += count
+                else:
+                    assert isinstance(path, str), repr(path)
+                    result = abjad.deactivate(
+                        text,
+                        match,
+                        prepend_empty_chord=prepend_empty_chord,
+                        # skip_file_name=skip_file_name,
+                        skipped=True,
+                    )
+                    assert result is not None
+                    text, count, skipped = result
+    if activate is not None:
+        assert isinstance(activate, tuple)
+        match, name = activate
+        if match is not None:
+            if isinstance(path, pathlib.Path):
+                result = _path.activate(
+                    path,
+                    match,
+                    name=name,
+                    skip_file_name=skip_file_name,
+                )
+                assert result is not None
+                count, skipped, messages_ = result
+                messages.extend(messages_)
+                total_count += count
+            else:
+                assert isinstance(path, str)
+                raise Exception("do we ever get here?")
+    #                text, count, skipped = abjad.activate(
+    #                    text,
+    #                    match,
+    #                    # skip_file_name=skip_file_name,
+    #                    skipped=True,
+    #                )
+    if deactivate_first is not True:
+        if deactivate is not None:
+            assert isinstance(deactivate, tuple)
+            match, name = deactivate
+            if match is not None:
+                if isinstance(path, pathlib.Path):
+                    result = _path.deactivate(
+                        path,
+                        match,
+                        name=name,
+                        prepend_empty_chord=prepend_empty_chord,
+                        skip_file_name=skip_file_name,
+                    )
+                    assert result is not None
+                    count, skipped, messages_ = result
+                    messages.extend(messages_)
+                    total_count += count
+                else:
+                    assert isinstance(path, str)
+                    raise Exception("do we ever get here?")
+    #                    text, count, skipped = abjad.deactivate(
+    #                        text,
+    #                        match,
+    #                        prepend_empty_chord=prepend_empty_chord,
+    #                        # skip_file_name=skip_file_name,
+    #                        skipped=True,
+    #                    )
+    messages.append("")
+    if isinstance(path, pathlib.Path):
+        return messages
+    else:
+        assert isinstance(path, str)
+        return text
+
+
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Job:
-    """
-    Job.
-    """
 
     activate: typing.Any = None
     deactivate: typing.Any = None
@@ -26,101 +126,18 @@ class Job:
     title: typing.Any = None
 
     def __call__(self):
-        """
-        Calls job on job ``path``.
-        """
-        messages = []
-        if self.title is not None:
-            messages.append(self.title)
-        total_count = 0
-        if isinstance(self.path, str):
-            text = self.path
-        if self.deactivate_first is True:
-            if self.deactivate is not None:
-                assert isinstance(self.deactivate, tuple)
-                match, name = self.deactivate
-                if match is not None:
-                    if isinstance(self.path, pathlib.Path):
-                        result = _path.deactivate(
-                            self.path,
-                            match,
-                            name=name,
-                            prepend_empty_chord=self.prepend_empty_chord,
-                            skip_file_name=self.skip_file_name,
-                        )
-                        assert result is not None
-                        count, skipped, messages_ = result
-                        messages.extend(messages_)
-                        total_count += count
-                    else:
-                        assert isinstance(self.path, str), repr(self.path)
-                        result = abjad.deactivate(
-                            text,
-                            match,
-                            prepend_empty_chord=self.prepend_empty_chord,
-                            skip_file_name=self.skip_file_name,
-                            skipped=True,
-                        )
-                        assert result is not None
-                        text, count, skipped = result
-        if self.activate is not None:
-            assert isinstance(self.activate, tuple)
-            match, name = self.activate
-            if match is not None:
-                if isinstance(self.path, pathlib.Path):
-                    result = _path.activate(
-                        self.path,
-                        match,
-                        name=name,
-                        skip_file_name=self.skip_file_name,
-                    )
-                    assert result is not None
-                    count, skipped, messages_ = result
-                    messages.extend(messages_)
-                    total_count += count
-                else:
-                    assert isinstance(self.path, str)
-                    text, count, skipped = abjad.activate(
-                        text,
-                        match,
-                        skip_file_name=self.skip_file_name,
-                        skipped=True,
-                    )
-        if self.deactivate_first is not True:
-            if self.deactivate is not None:
-                assert isinstance(self.deactivate, tuple)
-                match, name = self.deactivate
-                if match is not None:
-                    if isinstance(self.path, pathlib.Path):
-                        result = _path.deactivate(
-                            self.path,
-                            match,
-                            name=name,
-                            prepend_empty_chord=self.prepend_empty_chord,
-                            skip_file_name=self.skip_file_name,
-                        )
-                        assert result is not None
-                        count, skipped, messages_ = result
-                        messages.extend(messages_)
-                        total_count += count
-                    else:
-                        assert isinstance(self.path, str)
-                        text, count, skipped = abjad.deactivate(
-                            text,
-                            match,
-                            prepend_empty_chord=self.prepend_empty_chord,
-                            skip_file_name=self.skip_file_name,
-                            skipped=True,
-                        )
-        messages.append("")
-        if isinstance(self.path, pathlib.Path):
-            return messages
-        else:
-            assert isinstance(self.path, str)
-            return text
+        return _job_function(
+            activate=self.activate,
+            deactivate=self.deactivate,
+            deactivate_first=self.deactivate_first,
+            path=self.path,
+            prepend_empty_chord=self.prepend_empty_chord,
+            skip_file_name=self.skip_file_name,
+            title=self.title,
+        )
 
 
-def color_clefs(path, undo=False):
+def color_clefs_function(path, *, undo=False):
     name = "clef color"
 
     def match(tags):
@@ -129,16 +146,19 @@ def color_clefs(path, undo=False):
         return bool(set(tags) & set(tags_))
 
     if undo:
-        return Job(
+        messages = _job_function(
             deactivate=(match, name),
             path=path,
             title="Uncoloring clefs ...",
         )
     else:
-        return Job(activate=(match, name), path=path, title="Coloring clefs ...")
+        messages = _job_function(
+            activate=(match, name), path=path, title="Coloring clefs ..."
+        )
+    return messages
 
 
-def color_dynamics(path, undo=False):
+def color_dynamics_function(path, *, undo=False):
     name = "dynamic color"
 
     def match(tags):
@@ -146,23 +166,21 @@ def color_dynamics(path, undo=False):
         return bool(set(tags) & set(tags_))
 
     if undo:
-        return Job(
+        messages = _job_function(
             deactivate=(match, name),
             path=path,
             title="Uncoloring dynamics ...",
         )
     else:
-        return Job(
+        messages = _job_function(
             activate=(match, name),
             path=path,
             title="Coloring dynamics ...",
         )
+    return messages
 
 
-def color_instruments(path, undo=False):
-    """
-    Colors instruments.
-    """
+def color_instruments_function(path, *, undo=False):
     name = "instrument color"
 
     def match(tags):
@@ -170,23 +188,21 @@ def color_instruments(path, undo=False):
         return bool(set(tags) & set(tags_))
 
     if undo:
-        return Job(
+        messages = _job_function(
             deactivate=(match, name),
             path=path,
             title="Uncoloring instruments ...",
         )
     else:
-        return Job(
+        messages = _job_function(
             activate=(match, name),
             path=path,
             title="Coloring instruments ...",
         )
+    return messages
 
 
-def color_short_instrument_names(path, undo=False):
-    """
-    Colors short instrument names.
-    """
+def color_short_instrument_names_function(path, *, undo=False):
     name = "short instrument name color"
 
     def match(tags):
@@ -194,24 +210,21 @@ def color_short_instrument_names(path, undo=False):
         return bool(set(tags) & set(tags_))
 
     if undo:
-        return Job(
+        messages = _job_function(
             deactivate=(match, name),
             path=path,
             title="Uncoloring short instrument names ...",
         )
     else:
-        return Job(
+        messages = _job_function(
             activate=(match, name),
             path=path,
             title="Coloring short instrument names ...",
         )
+    return messages
 
 
-def color_metronome_marks(path, undo=False):
-    """
-    Colors metronome marks.
-    """
-
+def color_metronome_marks_function(path, undo=False):
     def activate(tags):
         tags_ = _tags.metronome_mark_color_expression_tags()
         return bool(set(tags) & set(tags_))
@@ -221,25 +234,23 @@ def color_metronome_marks(path, undo=False):
         return bool(set(tags) & set(tags_))
 
     if undo:
-        return Job(
+        messages = _job_function(
             activate=(deactivate, "metronome mark color suppression"),
             deactivate=(activate, "metronome mark color expression"),
             path=path,
             title="Uncoloring metronome marks ...",
         )
     else:
-        return Job(
+        messages = _job_function(
             activate=(activate, "metronome mark color expression"),
             deactivate=(deactivate, "metronome mark color suppression"),
             path=path,
             title="Coloring metronome marks ...",
         )
+    return messages
 
 
-def color_persistent_indicators(path, undo=False):
-    """
-    Color persistent indicators.
-    """
+def color_persistent_indicators_function(path, *, undo=False):
     name = "persistent indicator"
     activate_name = "persistent indicator color expression"
 
@@ -255,25 +266,23 @@ def color_persistent_indicators(path, undo=False):
         return bool(set(tags) & set(tags_))
 
     if undo:
-        return Job(
+        messages = _job_function(
             activate=(deactivate, deactivate_name),
             deactivate=(activate, activate_name),
             path=path,
             title=f"Uncoloring {name}s ...",
         )
     else:
-        return Job(
+        messages = _job_function(
             activate=(activate, activate_name),
             deactivate=(deactivate, deactivate_name),
             path=path,
             title=f"Coloring {name}s ...",
         )
+    return messages
 
 
-def color_staff_lines(path, undo=False):
-    """
-    Colors staff lines.
-    """
+def color_staff_lines_function(path, *, undo=False):
     name = "staff lines color"
 
     def match(tags):
@@ -282,23 +291,21 @@ def color_staff_lines(path, undo=False):
         return bool(set(tags) & set(tags_))
 
     if undo:
-        return Job(
+        messages = _job_function(
             deactivate=(match, name),
             path=path,
             title="Uncoloring staff lines ...",
         )
     else:
-        return Job(
+        messages = _job_function(
             activate=(match, name),
             path=path,
             title="Coloring staff lines ...",
         )
+    return messages
 
 
-def color_time_signatures(path, undo=False):
-    """
-    Colors time signatures.
-    """
+def color_time_signatures_function(path, *, undo=False):
     name = "time signature color"
 
     def match(tags):
@@ -307,20 +314,21 @@ def color_time_signatures(path, undo=False):
         return bool(set(tags) & set(tags_))
 
     if undo:
-        return Job(
+        messages = _job_function(
             deactivate=(match, name),
             path=path,
             title="Uncoloring time signatures ...",
         )
     else:
-        return Job(
+        messages = _job_function(
             activate=(match, name),
             path=path,
             title="Coloring time signatures ...",
         )
+    return messages
 
 
-def handle_edition_tags(path):
+def handle_edition_tags_function(path):
     """
     Handles edition tags.
 
@@ -344,8 +352,6 @@ def handle_edition_tags(path):
         against me OR specifically for another build; then we activate anything that is
         deactivated for editions other than me; then we activate anything is tagged
         specifically for me.
-
-    ..  todo: Tests.
 
     """
     if "sections" in str(path):
@@ -384,16 +390,17 @@ def handle_edition_tags(path):
                 return True
         return bool(set(tags) & set([this_edition, this_directory]))
 
-    return Job(
+    messages = _job_function(
         activate=(activate, "this-edition"),
         deactivate=(deactivate, "other-edition"),
         deactivate_first=True,
         path=path,
         title="Handling edition tags ...",
     )
+    return messages
 
 
-def handle_fermata_bar_lines(path):
+def handle_fermata_bar_lines_function(path):
     """
     Handles fermata bar lines.
     """
@@ -426,18 +433,16 @@ def handle_fermata_bar_lines(path):
 
     else:
         deactivate = None
-    return Job(
+    messages = _job_function(
         activate=(activate, "bar line adjustment"),
         deactivate=(deactivate, "EOL fermata bar line"),
         path=path,
         title="Handling fermata bar lines ...",
     )
+    return messages
 
 
-def handle_mol_tags(path):
-    """
-    Handles MOL (middle-of-line) tags.
-    """
+def handle_mol_tags_function(path):
     if path.name == "_sections":
         path = path.parent
 
@@ -474,19 +479,16 @@ def handle_mol_tags(path):
 
     else:
         deactivate = None
-    return Job(
+    messages = _job_function(
         activate=(activate, "MOL"),
         deactivate=(deactivate, "conflicting MOL"),
         path=path,
         title="Handling MOL tags ...",
     )
+    return messages
 
 
-def handle_shifted_clefs(path):
-    """
-    Handles shifted clefs.
-    """
-
+def handle_shifted_clefs_function(path):
     def activate(tags):
         return _tags.SHIFTED_CLEF in tags
 
@@ -511,19 +513,16 @@ def handle_shifted_clefs(path):
 
     else:
         deactivate = None
-    return Job(
+    messages = _job_function(
         activate=(activate, "shifted clef"),
         deactivate=(deactivate, "BOL clef"),
         path=path,
         title="Handling shifted clefs ...",
     )
+    return messages
 
 
-def join_broken_spanners(path):
-    """
-    Joins broken spanners.
-    """
-
+def join_broken_spanners_function(path):
     def activate(tags):
         tags_ = [_tags.SHOW_TO_JOIN_BROKEN_SPANNERS]
         return bool(set(tags) & set(tags_))
@@ -532,18 +531,16 @@ def join_broken_spanners(path):
         tags_ = [_tags.HIDE_TO_JOIN_BROKEN_SPANNERS]
         return bool(set(tags) & set(tags_))
 
-    return Job(
+    messages = _job_function(
         activate=(activate, "broken spanner expression"),
         deactivate=(deactivate, "broken spanner suppression"),
         path=path,
         title="Joining broken spanners ...",
     )
+    return messages
 
 
-def show_music_annotations(path, undo=False):
-    """
-    Shows music annotations.
-    """
+def show_music_annotations(path, *, undo=False):
     name = "music annotation"
 
     def match(tags):
@@ -568,6 +565,34 @@ def show_music_annotations(path, undo=False):
             path=path,
             title=f"Showing {name}s ...",
         )
+
+
+def show_music_annotations_function(path, *, undo=False):
+    name = "music annotation"
+
+    def match(tags):
+        tags_ = _tags.music_annotation_tags()
+        return bool(set(tags) & set(tags_))
+
+    def match_2(tags):
+        tags_ = [_tags.INVISIBLE_MUSIC_COMMAND]
+        return bool(set(tags) & set(tags_))
+
+    if undo:
+        messages = _job_function(
+            activate=(match_2, name),
+            deactivate=(match, name),
+            path=path,
+            title=f"Hiding {name}s ...",
+        )
+    else:
+        messages = _job_function(
+            activate=(match, name),
+            deactivate=(match_2, name),
+            path=path,
+            title=f"Showing {name}s ...",
+        )
+    return messages
 
 
 def show_tag(
@@ -610,3 +635,43 @@ def show_tag(
             skip_file_name=skip_file_name,
             title=f"Showing {name} tags ...",
         )
+
+
+def show_tag_function(
+    path,
+    tag,
+    *,
+    match=None,
+    prepend_empty_chord=None,
+    skip_file_name=None,
+    undo=False,
+):
+    if isinstance(tag, str):
+        assert match is not None, repr(match)
+        name = tag
+    else:
+        assert isinstance(tag, abjad.Tag), repr(tag)
+        name = tag.string
+
+    if match is None:
+
+        def match(tags):
+            tags_ = [tag]
+            return bool(set(tags) & set(tags_))
+
+    if undo:
+        messages = _job_function(
+            deactivate=(match, name),
+            path=path,
+            prepend_empty_chord=prepend_empty_chord,
+            skip_file_name=skip_file_name,
+            title=f"Hiding {name} tags ...",
+        )
+    else:
+        messages = _job_function(
+            activate=(match, name),
+            path=path,
+            skip_file_name=skip_file_name,
+            title=f"Showing {name} tags ...",
+        )
+    return messages
