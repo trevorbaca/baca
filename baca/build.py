@@ -17,8 +17,7 @@ import baca
 def _also_untagged(section_directory):
     if os.environ.get("GITHUB_WORKSPACE"):
         return
-    _print_main_task("Populating untagged ...")
-    printed_message = False
+    _print_main_task("Populating untagged repository ...")
     for name in ("music.ly", "music.ily", "layout.ly"):
         tagged = section_directory / name
         if not tagged.exists():
@@ -46,9 +45,6 @@ def _also_untagged(section_directory):
         untagged = pathlib.Path(untagged)
         if not untagged.parent.is_dir():
             untagged.parent.mkdir(parents=True)
-        if not printed_message:
-            _print_file_handling(f"Populating {untagged.parent} ...")
-            printed_message = True
         untagged.write_text(string)
     for name in ("music.ly", "music.ily", "layout.ly"):
         tagged = section_directory / name
@@ -58,7 +54,7 @@ def _also_untagged(section_directory):
         shutil.copyfile(tagged, safekeeping)
         color_persistent_indicators(tagged, undo=True)
         show_annotations(tagged, undo=True)
-    printed_message = False
+    _print_main_task("Populating bw repository ...")
     for name in ("music.ly", "music.ily", "layout.ly"):
         tagged = section_directory / name
         if not tagged.exists():
@@ -92,9 +88,6 @@ def _also_untagged(section_directory):
         bw = pathlib.Path(bw)
         if not bw.parent.is_dir():
             bw.parent.mkdir(parents=True)
-        if not printed_message:
-            _print_file_handling(f"Populating {bw.parent} ...")
-            printed_message = True
         bw.write_text(string)
     for name in ("music.ly", "music.ily", "layout.ly"):
         tagged = section_directory / name
@@ -151,7 +144,9 @@ def _externalize_music_ly(music_ly):
         messages = baca.jobs.not_topmost(file)
         if messages:
             messages = "\n".join(messages) + "\n"
-            _print_file_handling("Appending not-topmost tags messages ...")
+            _print_file_handling(
+                "Appending not-topmost tags messages ...", log_only=True
+            )
             _tags_file = file.with_name(f".{file.name}.tags")
             with _tags_file.open("a") as pointer:
                 pointer.write(messages)
@@ -205,8 +200,9 @@ def _get_preamble_time_signatures(path):
     return None
 
 
-def _handle_tags_in_section_directory(section_directory):
+def _handle_section_tags(section_directory):
     assert section_directory.is_dir()
+    _print_file_handling("Writing section tag files ...")
     music_ly = section_directory / "music.ly"
     text = music_ly.read_text()
     text = abjad.tag.left_shift_tags(text)
@@ -225,7 +221,9 @@ def _handle_tags_in_section_directory(section_directory):
         messages.extend(messages_)
         messages_ = baca.jobs.handle_mol_tags(path)
         messages.extend(messages_)
-        _print_file_handling(f"Appending {baca.path.trim(_tags_file)} ...")
+        _print_file_handling(
+            f"Appending {baca.path.trim(_tags_file)} ...", log_only=True
+        )
         text = "\n".join(messages) + "\n"
         with _tags_file.open("a") as pointer:
             pointer.write(text)
@@ -318,7 +316,9 @@ def _make_section_clicktrack(lilypond_file, mtime, section_directory):
     clicktrack_file_name = "clicktrack.midi"
     clicktrack_path = section_directory / clicktrack_file_name
     if clicktrack_path.is_file():
-        _print_file_handling(f"Existing {baca.path.trim(clicktrack_path)} ...")
+        _print_file_handling(
+            f"Existing {baca.path.trim(clicktrack_path)} ...", log_only=True
+        )
     global_skips = lilypond_file["Skips"]
     time_signatures = []
     for skip in global_skips[:-1]:
@@ -394,7 +394,9 @@ def _make_section_midi(lilypond_file, mtime, section_directory):
     _print_main_task("Making MIDI ...")
     music_midi = section_directory / "music.midi"
     if music_midi.exists():
-        _print_file_handling(f"Existing {baca.path.trim(music_midi)} ...")
+        _print_file_handling(
+            f"Existing {baca.path.trim(music_midi)} ...", log_only=True
+        )
     score = lilypond_file["Score"]
     score_block = abjad.Block("score", [score, abjad.Block("midi")])
     lilypond_file = abjad.LilyPondFile([score_block])
@@ -433,7 +435,7 @@ def _make_section_pdf(
     abjad.persist.as_ly(lilypond_file, music_ly, tags=True)
     if music_ly.is_file() and music_ly_mtime < os.path.getmtime(music_ly):
         _print_file_handling(f"Writing {baca.path.trim(music_ly)} ...")
-    _print_file_handling(f"Handling {baca.path.trim(music_ly)} ...")
+    _print_file_remove("Removing section tag files ...")
     _layout_ly_tags = music_ly.with_name(".layout.ly.tags")
     if _layout_ly_tags.exists():
         _layout_ly_tags.unlink()
@@ -444,9 +446,9 @@ def _make_section_pdf(
     if _music_ly_tags.exists():
         _music_ly_tags.unlink()
     _externalize_music_ly(music_ly)
-    _handle_tags_in_section_directory(music_ly.parent)
+    _handle_section_tags(music_ly.parent)
     if music_pdf.is_file():
-        _print_file_handling(f"Existing {baca.path.trim(music_pdf)} ...")
+        _print_file_handling(f"Existing {baca.path.trim(music_pdf)} ...", log_only=True)
     timing.lilypond = _call_lilypond_on_music_ly_in_section(
         music_ly,
         music_pdf_mtime,
@@ -462,8 +464,7 @@ def _make_section_pdf(
 def _print_all_timing(timing):
     if hasattr(timing, "make_score"):
         python_runtime = timing.make_score + timing.postprocess_score
-        string = f"Python runtime {timing.make_score} + {timing.postprocess_score} ="
-        _print_timing(string, python_runtime)
+        _print_timing("Python runtime", python_runtime)
     _print_timing("LilyPond runtime", int(timing.lilypond))
 
 
@@ -475,8 +476,13 @@ def _print_error(string):
     print(baca.colors.red + string + baca.colors.end)
 
 
-def _print_file_handling(string):
-    print(baca.colors.yellow + string + baca.colors.end)
+def _print_file_handling(string, log_only=False):
+    if not log_only:
+        print(baca.colors.yellow + string + baca.colors.end)
+
+
+def _print_file_remove(string):
+    print(baca.colors.cyan + string + baca.colors.end)
 
 
 def _print_layout(string):
@@ -685,7 +691,7 @@ def collect_section_lys(_sections_directory):
         _print_file_handling("Missing section lys ...")
         sys.exit(1)
     if _sections_directory.exists():
-        _print_file_handling(f"Removing {baca.path.trim(_sections_directory)} ...")
+        _print_file_remove(f"Removing {baca.path.trim(_sections_directory)} ...")
         shutil.rmtree(str(_sections_directory))
     _sections_directory.mkdir()
     targets = []
@@ -732,7 +738,7 @@ def color_persistent_indicators(file, *, undo=False):
 
 
 def handle_build_tags(_sections_directory):
-    _print_main_task("Handling build tags ...")
+    _print_file_handling("Writing build tag files ...")
     contents_directory = baca.path.get_contents_directory(_sections_directory)
     sections_directory = contents_directory / "sections"
     paths = sorted(sections_directory.glob("*"))
@@ -854,6 +860,7 @@ def handle_build_tags(_sections_directory):
         )
         messages.extend(messages_)
         _tags = _sections_directory / f".{file.name}.tags"
+        _print_file_handling(f"Writing {baca.path.trim(_tags)} ...", log_only=True)
         text = "\n".join(messages) + "\n"
         with _tags.open("a") as pointer:
             pointer.write(text)
@@ -1028,20 +1035,20 @@ def interpret_build_music(
         else:
             handle_part_tags(build_directory)
     if "trevor" in _sections_directory.parts:
-        _print_main_task("Populating _builds ...")
+        _print_main_task("Populating builds repository ...")
         parts = list(_sections_directory.parts)
         assert parts[3] == "Scores"
-        parts[3] = "_builds"
-        _builds_sections_directory = os.sep + os.sep.join(parts[1:])
+        parts[3] = "builds"
+        builds_sections_directory = os.sep + os.sep.join(parts[1:])
         shutil.copytree(
-            _sections_directory, _builds_sections_directory, dirs_exist_ok=True
+            _sections_directory, builds_sections_directory, dirs_exist_ok=True
         )
     remove = None
     if _sections_directory.is_dir() and not debug_sections:
         remove = _sections_directory
     music_pdf = music_ly.with_name("music.pdf")
     if music_pdf.is_file():
-        _print_file_handling(f"Existing {baca.path.trim(music_pdf)} ...")
+        _print_file_handling(f"Existing {baca.path.trim(music_pdf)} ...", log_only=True)
     run_lilypond(music_ly, remove=remove)
 
 
@@ -1174,7 +1181,7 @@ def run_lilypond(ly_file_path, *, pdf_mtime=None, remove=None):
         )
         _display_lilypond_log_errors(lilypond_log_file_path)
         if remove is not None:
-            _print_file_handling(f"Removing {baca.path.trim(remove)} ...")
+            _print_file_remove(f"Removing {baca.path.trim(remove)} ...")
             shutil.rmtree(str(remove))
         if pdf.is_file():
             if pdf_mtime is not None and pdf_mtime < os.path.getmtime(pdf):
