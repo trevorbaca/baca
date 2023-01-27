@@ -2277,7 +2277,7 @@ def make_layout_ly(
     time_signatures=None,
 ):
     layout_directory = pathlib.Path(os.getcwd())
-    _build._print_main_task("Making layout ...")
+    _build.print_main_task("Making layout ...")
     assert isinstance(spacing, _layout.SpacingSpecifier), repr(spacing)
     layout_py = layout_directory / "layout.py"
     layout_ly = layout_directory / file_name
@@ -2316,7 +2316,7 @@ def make_layout_ly(
         string = "first_measure_number"
         first_measure_number = _path.get_metadatum(layout_directory, string, default=1)
         if not bool(first_measure_number):
-            _build._print_file_handling("Can not find first measure number ...")
+            _build.print_file_handling("Can not find first measure number ...")
             first_measure_number = False
         assert isinstance(first_measure_number, int)
         time_signatures = _path.get_metadatum(layout_directory, "time_signatures")
@@ -2335,7 +2335,7 @@ def make_layout_ly(
             time_signatures.extend(time_signatures_)
     if first_measure_number is False:
         raise Exception("first_measure_number should not be false")
-        _build._print_file_handling(f"Skipping {_path.trim(layout_py)} ...")
+        _build.print_file_handling(f"Skipping {_path.trim(layout_py)} ...")
         sys.exit(1)
     assert abjad.string.is_shout_case(document_name)
     score = _docs.make_empty_score(1, do_not_move_global_context=True)
@@ -2416,7 +2416,7 @@ def make_layout_ly(
     counter = abjad.string.pluralize("measure", measure_count)
     message = f"Writing {measure_count} + 1 {counter} to"
     message += f" {_path.trim(layout_ly)} ..."
-    _build._print_file_handling(message)
+    _build.print_file_handling(message)
     bol_measure_numbers = []
     skips = abjad.iterate.leaves(score["PageLayout"], abjad.Skip)
     for i, skip in enumerate(skips):
@@ -2431,7 +2431,7 @@ def make_layout_ly(
         metadata = layout_directory / ".metadata"
         string = _path.trim(metadata)
         message = f"Writing BOL measure {numbers} to {string} ..."
-        _build._print_file_handling(message)
+        _build.print_file_handling(message)
         if layout_directory.name.endswith("-parts"):
             if document_name is not None:
                 part_dictionary = _path.get_metadatum(

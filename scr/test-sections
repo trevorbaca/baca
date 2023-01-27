@@ -46,13 +46,13 @@ def _make_result_strings(path, results):
 
 def _print_results(path, results):
     if results.exists is True:
-        baca.build._print_success(f"PASS: {path.name} found ...")
+        baca.build.print_success(f"PASS: {path.name} found ...")
     else:
-        baca.build._print_error(f"FAIL: {path.name} missing ...")
+        baca.build.print_error(f"FAIL: {path.name} missing ...")
     if results.same is True:
-        baca.build._print_success(f"PASS: {path.name} same ...")
+        baca.build.print_success(f"PASS: {path.name} same ...")
     elif results.same is False:
-        baca.build._print_error(f"FAIL: {path.name} changed ...")
+        baca.build.print_error(f"FAIL: {path.name} changed ...")
 
 
 def _test_section(section_directory):
@@ -93,16 +93,23 @@ def _test_section(section_directory):
             with open(".music.ly.log") as pointer:
                 lines = pointer.readlines()
                 print("".join(lines))
-    baca.build._print_main_task("Printing results ...")
     strings = []
+    all_true, total_tests = True, 0
     for path, results in path_to_results.items():
-        _print_results(path, results)
-        strings_ = _make_result_strings(path, results)
-        strings.extend(strings_)
-    for part in abjad.sequence.partition_by_counts(
-        strings, [4], cyclic=True, overhang=True):
-        pass
-        # print(", ".join(part))
+        if results.exists is False or results.same is False:
+            all_true = False
+        total_tests += 2
+    if all_true:
+        baca.build.print_success(f"{total_tests}/{total_tests} tests passed ...")
+    else:
+        for path, results in path_to_results.items():
+            _print_results(path, results)
+            strings_ = _make_result_strings(path, results)
+            strings.extend(strings_)
+        for part in abjad.sequence.partition_by_counts(
+            strings, [4], cyclic=True, overhang=True):
+            pass
+            # print(", ".join(part))
     result = 0
     for results in path_to_results.values():
         if results.exists is False:
@@ -117,7 +124,7 @@ def main(current_directory):
     sections_directory = contents_directory / "sections"
     first_section_directory = sections_directory / "01"
     if not first_section_directory.is_dir():
-        baca.build._print_error(f"Score contains no sections ...")
+        baca.build.print_error(f"Score contains no sections ...")
         sys.exit(0)
     result = 0
     for path in sorted(sections_directory.glob("[0-9]*")):
