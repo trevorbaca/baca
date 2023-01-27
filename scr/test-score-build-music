@@ -32,7 +32,7 @@ def _get_builds():
 
 def _test_build(build):
     os.chdir(build)
-    baca.build._print_main_task(f"Building {build} ...")
+    baca.build.print_main_task(f"Building {build} ...")
     messages, diffs, result = [], [], 0
     music_ly = build / "music.ly"
     if music_ly.exists():
