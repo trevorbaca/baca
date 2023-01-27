@@ -824,14 +824,18 @@ def ratios(
         >>> divisions = time_signatures[:]
         >>> divisions = baca.sequence.ratios(divisions, [(2, 1)])
         >>> for item in divisions:
-        ...     print("sequence:")
-        ...     for division in item:
-        ...         print(f"\t{repr(division)}")
-        sequence:
-            NonreducedFraction(5, 8)
-            NonreducedFraction(7, 24)
-        sequence:
-            NonreducedFraction(11, 24)
+        ...     item
+        [NonreducedFraction(5, 8), NonreducedFraction(7, 24)]
+        [NonreducedFraction(11, 24)]
+
+        Works with durations:
+
+        >>> divisions = [abjad.Duration(_) for _ in [(5, 8), (6, 8)]]
+        >>> divisions = baca.sequence.ratios(divisions, [(2, 1)])
+        >>> for item in divisions:
+        ...     item
+        [NonreducedFraction(5, 8), NonreducedFraction(7, 24)]
+        [NonreducedFraction(11, 24)]
 
         Splits divisions by rounded ``2:1`` ratio:
 
@@ -839,14 +843,9 @@ def ratios(
         >>> divisions = time_signatures[:]
         >>> divisions = baca.sequence.ratios(divisions, [(2, 1)], rounded=True)
         >>> for item in divisions:
-        ...     print("sequence:")
-        ...     for division in item:
-        ...         print(f"\t{repr(division)}")
-        sequence:
-            NonreducedFraction(5, 8)
-            NonreducedFraction(2, 8)
-        sequence:
-            NonreducedFraction(4, 8)
+        ...     item
+        [NonreducedFraction(5, 8), NonreducedFraction(2, 8)]
+        [NonreducedFraction(4, 8)]
 
     ..  container:: example
 
@@ -857,15 +856,9 @@ def ratios(
         ...     time_signatures, lambda _: baca.sequence.ratios([_], [(2, 1)])
         ... )
         >>> for item in divisions:
-        ...     print("sequence:")
-        ...     for division in item:
-        ...         print(f"\t{repr(division)}")
-        sequence:
-            [NonreducedFraction(10, 24)]
-            [NonreducedFraction(5, 24)]
-        sequence:
-            [NonreducedFraction(4, 8)]
-            [NonreducedFraction(2, 8)]
+        ...     item
+        [[NonreducedFraction(10, 24)], [NonreducedFraction(5, 24)]]
+        [[NonreducedFraction(4, 8)], [NonreducedFraction(2, 8)]]
 
         Splits each division by rounded ``2:1`` ratio:
 
@@ -875,15 +868,9 @@ def ratios(
         ...     lambda _: baca.sequence.ratios([_], [(2, 1)], rounded=True)
         ... )
         >>> for item in divisions:
-        ...     print("sequence:")
-        ...     for division in item:
-        ...         print(f"\t{repr(division)}")
-        sequence:
-            [NonreducedFraction(3, 8)]
-            [NonreducedFraction(2, 8)]
-        sequence:
-            [NonreducedFraction(4, 8)]
-            [NonreducedFraction(2, 8)]
+        ...     item
+        [[NonreducedFraction(3, 8)], [NonreducedFraction(2, 8)]]
+        [[NonreducedFraction(4, 8)], [NonreducedFraction(2, 8)]]
 
     ..  container:: example
 
@@ -899,16 +886,9 @@ def ratios(
         ...     divisions.append(sequence)
         ...
         >>> for item in divisions:
-        ...     print("sequence:")
-        ...     for division in item:
-        ...         print(f"\t{repr(division)}")
-        sequence:
-            [NonreducedFraction(10, 24)]
-            [NonreducedFraction(5, 24)]
-        sequence:
-            [NonreducedFraction(2, 8)]
-            [NonreducedFraction(2, 8)]
-            [NonreducedFraction(2, 8)]
+        ...     item
+        [[NonreducedFraction(10, 24)], [NonreducedFraction(5, 24)]]
+        [[NonreducedFraction(2, 8)], [NonreducedFraction(2, 8)], [NonreducedFraction(2, 8)]]
 
         Splits divisions with alternating rounded ``2:1`` and ``1:1:1`` ratios:
 
@@ -922,18 +902,12 @@ def ratios(
         ...     divisions.append(sequence)
         ...
         >>> for item in divisions:
-        ...     print("sequence:")
-        ...     for division in item:
-        ...         print(f"\t{repr(division)}")
-        sequence:
-            [NonreducedFraction(3, 8)]
-            [NonreducedFraction(2, 8)]
-        sequence:
-            [NonreducedFraction(2, 8)]
-            [NonreducedFraction(2, 8)]
-            [NonreducedFraction(2, 8)]
+        ...     item
+        [[NonreducedFraction(3, 8)], [NonreducedFraction(2, 8)]]
+        [[NonreducedFraction(2, 8)], [NonreducedFraction(2, 8)], [NonreducedFraction(2, 8)]]
 
     """
+    sequence = [abjad.NonreducedFraction(_) for _ in sequence]
     ratios_ = abjad.CyclicTuple([abjad.Ratio(_) for _ in ratios])
     if rounded is not None:
         rounded = bool(rounded)
