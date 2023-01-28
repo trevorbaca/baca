@@ -352,12 +352,8 @@ def force_accidental(argument, *, tag: abjad.Tag = abjad.Tag()) -> None:
                 )
 
 
-def fractions(items):
-    result = []
-    for item in items:
-        item_ = abjad.NonreducedFraction(item)
-        result.append(item_)
-    return result
+def durations(items):
+    return [abjad.Duration(_) for _ in items]
 
 
 def glissando(

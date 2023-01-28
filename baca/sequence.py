@@ -335,41 +335,41 @@ def fuse(
 
         Fuses items:
 
-        >>> divisions = baca.fractions([(7, 8), (3, 8), (5, 8)])
+        >>> divisions = baca.durations([(7, 8), (3, 8), (5, 8)])
         >>> divisions = baca.sequence.fuse(divisions)
         >>> divisions = abjad.sequence.flatten(divisions, depth=-1)
         >>> divisions
-        [NonreducedFraction(15, 8)]
+        [Duration(15, 8)]
 
     ..  container:: example
 
         Fuses first two items and then remaining items:
 
-        >>> divisions = baca.fractions([(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)])
+        >>> divisions = baca.durations([(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)])
         >>> divisions = baca.sequence.fuse(divisions, [2])
         >>> for division in divisions:
         ...     division
-        NonreducedFraction(4, 8)
-        NonreducedFraction(12, 8)
+        Duration(1, 2)
+        Duration(3, 2)
 
     ..  container:: example
 
         Fuses items two at a time:
 
-        >>> divisions = baca.fractions([(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)])
+        >>> divisions = baca.durations([(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)])
         >>> divisions = baca.sequence.fuse(divisions, [2], cyclic=True)
         >>> for division in divisions:
         ...     division
-        NonreducedFraction(4, 8)
-        NonreducedFraction(8, 8)
-        NonreducedFraction(2, 4)
+        Duration(1, 2)
+        Duration(1, 1)
+        Duration(1, 2)
 
     ..  container:: example
 
         Splits each item by ``3/8``;  then flattens; then fuses into differently sized
         groups:
 
-        >>> divisions = baca.fractions([(7, 8), (3, 8), (5, 8)])
+        >>> divisions = baca.durations([(7, 8), (3, 8), (5, 8)])
         >>> divisions = [
         ...     baca.sequence.split_divisions([_], [(3, 8)], cyclic=True)
         ...     for _ in divisions
@@ -386,14 +386,15 @@ def fuse(
 
         Splits into sixteenths; partitions; then fuses every other part:
 
-        >>> divisions = baca.fractions([(7, 8), (3, 8), (5, 8)])
+        >>> divisions = baca.durations([(7, 8), (3, 8), (5, 8)])
         >>> divisions = baca.sequence.fuse(divisions)
         >>> divisions = [
         ...     baca.sequence.split_divisions([_], [(1, 16)], cyclic=True)
         ...     for _ in divisions
         ... ]
         >>> divisions = abjad.sequence.flatten(divisions, depth=-1)
-        >>> divisions = abjad.sequence.partition_by_ratio_of_lengths(divisions, (1, 1, 1, 1, 1, 1))
+        >>> divisions = abjad.sequence.partition_by_ratio_of_lengths(
+        ...     divisions, (1, 1, 1, 1, 1, 1))
         >>> divisions = baca.sequence.fuse(divisions, indices=[1, 3, 5])
         >>> divisions = abjad.sequence.flatten(divisions, depth=-1)
         >>> for division in divisions:
@@ -749,7 +750,7 @@ def quarters(
 
     ..  container:: example
 
-        >>> list_ = baca.fractions([(2, 4), (6, 4)])
+        >>> list_ = baca.durations([(2, 4), (6, 4)])
         >>> for item in baca.sequence.quarters(list_):
         ...     item
         ...
@@ -764,8 +765,7 @@ def quarters(
 
     ..  container:: example
 
-        >>> list_ = baca.fractions([(6, 4)])
-        >>> for item in baca.sequence.quarters(list_, compound=True):
+        >>> for item in baca.sequence.quarters([(6, 4)], compound=True):
         ...     item
         ...
         [Duration(3, 8)]
@@ -777,7 +777,7 @@ def quarters(
 
         Maps to each division: splits by ``1/4`` with remainder on right:
 
-        >>> divisions = baca.fractions([(7, 8), (3, 8), (5, 8)])
+        >>> divisions = baca.durations([(7, 8), (3, 8), (5, 8)])
         >>> divisions = [baca.sequence.quarters([_]) for _ in divisions]
         >>> for sequence in divisions:
         ...     print("sequence:")
@@ -818,7 +818,7 @@ def ratios(
 
         Splits sequence by exact ``2:1`` ratio:
 
-        >>> time_signatures = baca.fractions([(5, 8), (6, 8)])
+        >>> time_signatures = baca.durations([(5, 8), (6, 8)])
         >>> divisions = time_signatures[:]
         >>> divisions = baca.sequence.ratios(divisions, [(2, 1)])
         >>> for item in divisions:
@@ -837,7 +837,7 @@ def ratios(
 
         Splits divisions by rounded ``2:1`` ratio:
 
-        >>> time_signatures = baca.fractions([(5, 8), (6, 8)])
+        >>> time_signatures = baca.durations([(5, 8), (6, 8)])
         >>> divisions = time_signatures[:]
         >>> divisions = baca.sequence.ratios(divisions, [(2, 1)], rounded=True)
         >>> for item in divisions:
@@ -849,18 +849,18 @@ def ratios(
 
         Splits each division by exact ``2:1`` ratio:
 
-        >>> time_signatures = baca.fractions([(5, 8), (6, 8)])
+        >>> time_signatures = baca.durations([(5, 8), (6, 8)])
         >>> divisions = [
         ...     baca.sequence.ratios([_], [(2, 1)]) for _ in time_signatures
         ... ]
         >>> for item in divisions:
         ...     item
         [[NonreducedFraction(10, 24)], [NonreducedFraction(5, 24)]]
-        [[NonreducedFraction(4, 8)], [NonreducedFraction(2, 8)]]
+        [[NonreducedFraction(2, 4)], [NonreducedFraction(1, 4)]]
 
         Splits each division by rounded ``2:1`` ratio:
 
-        >>> time_signatures = baca.fractions([(5, 8), (6, 8)])
+        >>> time_signatures = baca.durations([(5, 8), (6, 8)])
         >>> divisions = [
         ...     baca.sequence.ratios([_], [(2, 1)], rounded=True)
         ...     for _ in time_signatures
@@ -868,14 +868,14 @@ def ratios(
         >>> for item in divisions:
         ...     item
         [[NonreducedFraction(3, 8)], [NonreducedFraction(2, 8)]]
-        [[NonreducedFraction(4, 8)], [NonreducedFraction(2, 8)]]
+        [[NonreducedFraction(2, 4)], [NonreducedFraction(1, 4)]]
 
     ..  container:: example
 
         Splits divisions with alternating exact ``2:1`` and ``1:1:1`` ratios:
 
         >>> ratios = abjad.CyclicTuple([(2, 1), (1, 1, 1)])
-        >>> time_signatures = baca.fractions([(5, 8), (6, 8)])
+        >>> time_signatures = baca.durations([(5, 8), (6, 8)])
         >>> divisions = []
         >>> for i, time_signature in enumerate(time_signatures):
         ...     ratio = ratios[i]
@@ -886,12 +886,12 @@ def ratios(
         >>> for item in divisions:
         ...     item
         [[NonreducedFraction(10, 24)], [NonreducedFraction(5, 24)]]
-        [[NonreducedFraction(2, 8)], [NonreducedFraction(2, 8)], [NonreducedFraction(2, 8)]]
+        [[NonreducedFraction(1, 4)], [NonreducedFraction(1, 4)], [NonreducedFraction(1, 4)]]
 
         Splits divisions with alternating rounded ``2:1`` and ``1:1:1`` ratios:
 
         >>> ratios = abjad.CyclicTuple([(2, 1), (1, 1, 1)])
-        >>> time_signatures = baca.fractions([(5, 8), (6, 8)])
+        >>> time_signatures = baca.durations([(5, 8), (6, 8)])
         >>> divisions = []
         >>> for i, time_signature in enumerate(time_signatures):
         ...     ratio = ratios[i]
@@ -902,7 +902,7 @@ def ratios(
         >>> for item in divisions:
         ...     item
         [[NonreducedFraction(3, 8)], [NonreducedFraction(2, 8)]]
-        [[NonreducedFraction(2, 8)], [NonreducedFraction(2, 8)], [NonreducedFraction(2, 8)]]
+        [[NonreducedFraction(1, 4)], [NonreducedFraction(1, 4)], [NonreducedFraction(1, 4)]]
 
     """
     sequence = [abjad.NonreducedFraction(_) for _ in sequence]
@@ -1168,7 +1168,7 @@ def split_divisions(
 
         Splits every five sixteenths:
 
-        >>> divisions = baca.fractions(10 * [(1, 8)])
+        >>> divisions = baca.durations(10 * [(1, 8)])
         >>> divisions = baca.sequence.split_divisions(divisions, [(5, 16)], cyclic=True)
         >>> for i, sequence_ in enumerate(divisions):
         ...     print(f"sequence {i}")
@@ -1287,7 +1287,7 @@ def split_divisions(
         ...     sequence = abjad.sequence.flatten(sequence, depth=-1)
         ...     return sequence
 
-        >>> time_signatures = baca.fractions([(7, 8), (7, 8), (7, 16)])
+        >>> time_signatures = baca.durations([(7, 8), (7, 8), (7, 16)])
         >>> time_signatures = [abjad.NonreducedFraction(_) for _ in time_signatures]
         >>> divisions = [quarters(_) for _ in time_signatures]
         >>> for item in divisions:
@@ -1402,7 +1402,7 @@ def split_divisions(
         ...     sequence = abjad.sequence.flatten(sequence, depth=-1)
         ...     return sequence
 
-        >>> time_signatures = baca.fractions([(3, 4), (6, 8)])
+        >>> time_signatures = [(3, 4), (6, 8)]
         >>> divisions = list(time_signatures)
         >>> divisions = [quarters(_) for _ in time_signatures]
         >>> for item in divisions:
@@ -1423,7 +1423,7 @@ def split_divisions(
         each new division:
 
         >>> durations = [(1, 16), (1, 8), (1, 4)]
-        >>> time_signatures = baca.fractions([(7, 16), (7, 16), (7, 16)])
+        >>> time_signatures = baca.durations([(7, 16), (7, 16), (7, 16)])
         >>> divisions = []
         >>> for i, time_signature in enumerate(time_signatures):
         ...     durations_ = abjad.sequence.rotate(durations, n=-i)
