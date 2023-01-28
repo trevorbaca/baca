@@ -842,8 +842,8 @@ def ratios(
         >>> divisions = baca.sequence.ratios(divisions, (2, 1), rounded=True)
         >>> for item in divisions:
         ...     item
-        [(5, 8), (2, 8)]
-        [(4, 8)]
+        [(5, 8), (1, 4)]
+        [(1, 2)]
 
     ..  container:: example
 
@@ -855,8 +855,8 @@ def ratios(
         ... ]
         >>> for item in divisions:
         ...     item
-        [[(10, 24)], [(5, 24)]]
-        [[(2, 4)], [(1, 4)]]
+        [[(5, 12)], [(5, 24)]]
+        [[(1, 2)], [(1, 4)]]
 
         Splits each division by rounded ``2:1`` ratio:
 
@@ -867,8 +867,8 @@ def ratios(
         ... ]
         >>> for item in divisions:
         ...     item
-        [[(3, 8)], [(2, 8)]]
-        [[(2, 4)], [(1, 4)]]
+        [[(3, 8)], [(1, 4)]]
+        [[(1, 2)], [(1, 4)]]
 
     ..  container:: example
 
@@ -885,7 +885,7 @@ def ratios(
         ...
         >>> for item in divisions:
         ...     item
-        [[(10, 24)], [(5, 24)]]
+        [[(5, 12)], [(5, 24)]]
         [[(1, 4)], [(1, 4)], [(1, 4)]]
 
         Splits divisions with alternating rounded ``2:1`` and ``1:1:1`` ratios:
@@ -901,38 +901,33 @@ def ratios(
         ...
         >>> for item in divisions:
         ...     item
-        [[(3, 8)], [(2, 8)]]
+        [[(3, 8)], [(1, 4)]]
         [[(1, 4)], [(1, 4)], [(1, 4)]]
 
     """
-    # sequence = [_.pair for _ in sequence]
-    sequence = [abjad.NonreducedFraction(_) for _ in sequence]
+    pairs = [_.pair for _ in sequence]
     assert isinstance(rounded, bool), repr(rounded)
-    numerator, denominator = 0, 0
-    for item in sequence:
-        numerator += item.pair[0]
-        denominator += item.pair[1]
-    # weight_ = abjad.NonreducedFraction(numerator, denominator)
-    weight = sum(sequence)
-    # assert weight == weight_, repr((weight, weight_))
-    assert isinstance(weight, abjad.NonreducedFraction)
-    numerator, denominator = weight.pair
+    pairs_weight = (0, 1)
+    for pair in pairs:
+        pairs_weight = abjad.duration.add_pairs(pairs_weight, pair)
+    numerator, denominator = pairs_weight
     assert isinstance(ratio, tuple), repr(ratio)
     ratio_ = abjad.Ratio(ratio)
     if rounded is True:
         numerators = ratio_.partition_integer(numerator)
         divisions = [
-            abjad.NonreducedFraction((numerator, denominator))
-            for numerator in numerators
+            abjad.Duration((numerator, denominator)) for numerator in numerators
         ]
     else:
         divisions = []
         ratio_weight = sum(ratio_)
         for number in ratio:
             multiplier = abjad.Fraction(number, ratio_weight)
-            division = multiplier * weight
+            numerator_ = multiplier.numerator * pairs_weight[0]
+            denominator_ = multiplier.denominator * pairs_weight[1]
+            division = abjad.Duration(numerator_, denominator_)
             divisions.append(division)
-    sequence = [abjad.NonreducedFraction(_) for _ in sequence]
+    sequence = [abjad.Duration(_) for _ in sequence]
     sequence = abjad.sequence.split(sequence, divisions)
     assert isinstance(sequence, list)
     assert isinstance(sequence[0], list)
