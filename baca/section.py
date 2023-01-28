@@ -1152,7 +1152,7 @@ def _make_global_rests(global_rests, time_signatures):
     for time_signature in time_signatures:
         rest = abjad.MultimeasureRest(
             abjad.Duration(1),
-            multiplier=abjad.NonreducedFraction(time_signature.pair),
+            multiplier=time_signature.pair,
             tag=_tags.function_name(_frame(), n=1),
         )
         rests.append(rest)
@@ -1168,7 +1168,7 @@ def _make_global_skips(
     for time_signature in time_signatures:
         skip = abjad.Skip(
             1,
-            multiplier=abjad.NonreducedFraction(time_signature.pair),
+            multiplier=time_signature.pair,
             tag=_tags.function_name(_frame(), n=1),
         )
         abjad.attach(

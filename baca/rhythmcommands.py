@@ -142,20 +142,18 @@ def make_mmrests(time_signatures, *, head: str = ""):
     if not head:
         tag = _tags.function_name(_frame(), n=1)
         for time_signature in time_signatures:
-            multiplier = abjad.NonreducedFraction(time_signature.pair)
-            mmrest = abjad.MultimeasureRest(1, multiplier=multiplier, tag=tag)
+            mmrest = abjad.MultimeasureRest(1, multiplier=time_signature.pair, tag=tag)
             mmrests.append(mmrest)
     else:
         assert isinstance(head, str)
         voice_name = head
         for i, time_signature in enumerate(time_signatures):
-            multiplier = abjad.NonreducedFraction(time_signature.pair)
             if i == 0:
                 tag = _tags.function_name(_frame(), n=2)
                 tag = tag.append(_tags.HIDDEN)
                 note_or_rest = _tags.NOTE
                 tag = tag.append(_tags.NOTE)
-                note = abjad.Note("c'1", multiplier=multiplier, tag=tag)
+                note = abjad.Note("c'1", multiplier=time_signature.pair, tag=tag)
                 abjad.override(note).Accidental.stencil = False
                 abjad.override(note).NoteColumn.ignore_collision = True
                 abjad.attach(_enums.NOTE, note)
@@ -183,7 +181,9 @@ def make_mmrests(time_signatures, *, head: str = ""):
                 tag = _tags.function_name(_frame(), n=6)
                 tag = tag.append(_tags.REST_VOICE)
                 tag = tag.append(_tags.MULTIMEASURE_REST)
-                rest = abjad.MultimeasureRest(1, multiplier=multiplier, tag=tag)
+                rest = abjad.MultimeasureRest(
+                    1, multiplier=time_signature.pair, tag=tag
+                )
                 abjad.attach(_enums.MULTIMEASURE_REST, rest)
                 abjad.attach(_enums.REST_VOICE, rest)
                 if "Music" in voice_name:
@@ -203,7 +203,9 @@ def make_mmrests(time_signatures, *, head: str = ""):
                 abjad.attach(_enums.MULTIMEASURE_REST_CONTAINER, container)
                 mmrests.append(container)
             else:
-                mmrest = abjad.MultimeasureRest(1, multiplier=multiplier, tag=tag)
+                mmrest = abjad.MultimeasureRest(
+                    1, multiplier=time_signature.pair, tag=tag
+                )
                 mmrests.append(mmrest)
     return mmrests
 
@@ -379,7 +381,7 @@ def make_repeated_duration_notes(
         divisions = abjad.sequence.flatten(divisions, depth=-1)
         return divisions
 
-    divisions = [abjad.NonreducedFraction(_) for _ in time_signatures]
+    divisions = [_.duration for _ in time_signatures]
     divisions = preprocessor(divisions)
     nested_music = rmakers.note(divisions, tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(nested_music, time_signatures)
@@ -464,7 +466,7 @@ def make_tied_notes(time_signatures):
 def make_tied_repeated_durations(time_signatures, durations):
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     tag = _tags.function_name(_frame())
-    divisions = [abjad.NonreducedFraction(_) for _ in time_signatures]
+    divisions = [_.duration for _ in time_signatures]
     divisions = _sequence.fuse(divisions)
     divisions = _sequence.split_divisions(divisions, durations, cyclic=True)
     divisions = abjad.sequence.flatten(divisions, depth=-1)
