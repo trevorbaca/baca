@@ -265,7 +265,7 @@ def _do_piecewise_command(
             elif (
                 isinstance(stop_leaf, abjad.Note)
                 and stop_leaf.written_duration == 1
-                and stop_leaf.multiplier == abjad.Multiplier(1, 4)
+                and stop_leaf.multiplier == (1, 4)
             ):
                 autodetected_right_padding = 3.25
             # stop leaf on normal measure downbeat

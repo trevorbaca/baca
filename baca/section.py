@@ -1041,7 +1041,7 @@ def _label_duration_multipliers(score):
                 continue
             if leaf in already_labeled:
                 continue
-            n, d = leaf.multiplier.pair
+            n, d = leaf.multiplier
             string = r"\baca-duration-multiplier-markup"
             string += f' #"{n}" #"{d}"'
             markup = abjad.Markup(string)
