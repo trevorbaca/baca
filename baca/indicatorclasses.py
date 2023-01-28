@@ -520,19 +520,19 @@ class SpacingSection:
 
     """
 
-    __slots__ = ("duration",)
+    __slots__ = ("pair",)
 
     _context = "Score"
     _persistent = True
 
-    def __init__(self, duration=None):
-        if duration is not None:
-            duration = abjad.NonreducedFraction(duration)
-        self.duration = duration
+    def __init__(self, pair=None):
+        if pair is not None:
+            assert isinstance(pair, tuple), repr(pair)
+        self.pair = pair
 
-    def __eq__(self, argument):
+    def __eq__(self, argument) -> bool:
         """
-        Is true when ``argument`` is a spacing section with same duration as this spacing
+        Is true when ``argument`` is a spacing section with same pair as this spacing
         section.
 
         ..  container:: example
@@ -562,10 +562,9 @@ class SpacingSection:
             >>> spacing_section_3 == spacing_section_3
             True
 
-        Returns string.
         """
         if isinstance(argument, type(self)):
-            return self.duration == argument.duration
+            return self.pair == argument.pair
         return False
 
     def __hash__(self):
@@ -578,9 +577,9 @@ class SpacingSection:
         """
         Gets repr.
         """
-        return f"{type(self).__name__}(duration={self.duration!r})"
+        return f"{type(self).__name__}(pair={self.pair!r})"
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         Gets string representation of spacing section.
 
@@ -589,28 +588,27 @@ class SpacingSection:
             >>> str(baca.SpacingSection((2, 24)))
             '2/24'
 
-        Returns string.
         """
-        return str(self.duration)
+        return f"{self.pair[0]}/{self.pair[1]}"
 
     def _get_contributions(self, leaf=None):
         contributions = abjad.ContributionsBySite()
-        numerator, denominator = self.duration.pair
+        numerator, denominator = self.pair
         string = rf"\baca-new-spacing-section #{numerator} #{denominator}"
         contributions.before.commands.append(string)
         return contributions
 
     @staticmethod
-    def from_string(string):
+    def from_string(string) -> "SpacingSection":
         """
         Makes spacing section from fraction ``string``.
 
         ..  container:: example
 
             >>> baca.SpacingSection.from_string("2/24")
-            SpacingSection(duration=NonreducedFraction(2, 24))
+            SpacingSection(pair=(2, 24))
 
-        Returns new spacing section.
         """
-        duration = abjad.NonreducedFraction(string)
-        return SpacingSection(duration=duration)
+        strings = string.split("/")
+        pair = int(strings[0]), int(strings[1])
+        return SpacingSection(pair=pair)

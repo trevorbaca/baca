@@ -73,7 +73,6 @@ class SpacingSpecifier:
                 measures[n] = self.fallback_duration
             measures[n + 1] = fermata_measure_duration
         for token, duration in self.overrides or []:
-            duration = abjad.NonreducedFraction(duration)
             measure_numbers = []
             if isinstance(token, int):
                 measure_numbers.append(token)
@@ -98,19 +97,29 @@ class SpacingSpecifier:
         measure_count = len(skips)
         for measure_index, skip in enumerate(skips):
             measure_number = measure_index + 1
+            pair = None
             if has_anchor_skip and measure_number == measure_count:
-                duration = abjad.Duration(1, 4)
+                pair = (1, 4)
             elif measures:
-                duration = measures[measure_number]
-                duration = abjad.NonreducedFraction(duration)
+                item = measures[measure_number]
+                if isinstance(item, tuple):
+                    pair = item
+                else:
+                    assert isinstance(item, abjad.Duration), repr(item)
+                    pair = item.pair
             else:
                 duration = self.fallback_duration
-            eol_adjusted, duration_ = False, None
+                assert isinstance(duration, abjad.Duration), repr(duration)
+                pair = duration.pair
+            assert pair is not None
+            eol_adjusted = False
             if measure_number in eol_measure_numbers:
-                duration_ = duration
-                duration *= magic_lilypond_eol_adjustment
+                pair_ = pair
+                numerator = pair[0] * magic_lilypond_eol_adjustment.numerator
+                denominator = pair[1] * magic_lilypond_eol_adjustment.denominator
+                pair = numerator, denominator
                 eol_adjusted = True
-            spacing_section = _indicatorclasses.SpacingSection(duration=duration)
+            spacing_section = _indicatorclasses.SpacingSection(pair=pair)
             tag = _tags.SPACING_COMMAND
             abjad.attach(
                 spacing_section,
@@ -119,9 +128,9 @@ class SpacingSpecifier:
             )
             if eol_adjusted:
                 multiplier = magic_lilypond_eol_adjustment
-                string_ = f"[[{duration_!s} * {multiplier!s}]]"
+                string_ = f"[[{pair_[0]}/{pair_[1]} * {multiplier!s}]]"
             else:
-                string_ = f"[{duration!s}]"
+                string_ = f"[{pair[0]}/{pair[1]}]"
             if measure_index < measure_count - 1:
                 tag = _tags.SPACING
                 string = r"- \baca-start-spm-left-only"
