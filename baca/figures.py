@@ -474,10 +474,10 @@ def _make_accelerando_multipliers(durations, exponent):
         >>> result = baca.figures._make_accelerando_multipliers(durations, 0.5)
         >>> for multiplier in result: multiplier
         ...
-        NonreducedFraction(2048, 1024)
-        NonreducedFraction(848, 1024)
-        NonreducedFraction(651, 1024)
-        NonreducedFraction(549, 1024)
+        (2048, 1024)
+        (848, 1024)
+        (651, 1024)
+        (549, 1024)
 
     ..  container:: example
 
@@ -487,10 +487,10 @@ def _make_accelerando_multipliers(durations, exponent):
         >>> result = baca.figures._make_accelerando_multipliers(durations, 1)
         >>> for multiplier in result: multiplier
         ...
-        NonreducedFraction(1024, 1024)
-        NonreducedFraction(1024, 1024)
-        NonreducedFraction(1024, 1024)
-        NonreducedFraction(1024, 1024)
+        (1024, 1024)
+        (1024, 1024)
+        (1024, 1024)
+        (1024, 1024)
 
     ..  container:: example
 
@@ -503,10 +503,10 @@ def _make_accelerando_multipliers(durations, exponent):
         ... )
         >>> for multiplier in result: multiplier
         ...
-        NonreducedFraction(2048, 1024)
-        NonreducedFraction(848, 1024)
-        NonreducedFraction(651, 1024)
-        NonreducedFraction(549, 1024)
+        (2048, 1024)
+        (848, 1024)
+        (651, 1024)
+        (549, 1024)
 
     Set exponent greater than 1 for ritardando.
 
@@ -535,6 +535,7 @@ def _make_accelerando_multipliers(durations, exponent):
         multiplier = abjad.Multiplier(multiplier)
         multiplier = multiplier.with_denominator(2**10)
         multipliers.append(multiplier)
+    multipliers = [_.pair for _ in multipliers]
     return multipliers
 
 
@@ -637,10 +638,9 @@ def _make_figure_tuplet(
         if isinstance(pitch_expression, prototype):
             pitch_expression = pitch_expression.number
         count = next_attack
-        while talea[count] < abjad.NonreducedFraction(0, 1):
+        while talea[count] < 0:
             next_attack += 1
             this_one = talea[count]
-            assert isinstance(this_one, abjad.NonreducedFraction)
             duration = -this_one
             leaves_ = abjad.makers.make_leaves(
                 [None], [duration], increase_monotonic=spelling.increase_monotonic
@@ -649,7 +649,6 @@ def _make_figure_tuplet(
             count = next_attack
         next_attack += 1
         this_one = talea[count]
-        assert isinstance(this_one, abjad.NonreducedFraction)
         duration = this_one
         assert 0 < duration, repr(duration)
         skips_instead_of_rests = False
@@ -659,8 +658,10 @@ def _make_figure_tuplet(
             and pitch_expression[-1] in (None, "skip")
         ):
             multiplier = pitch_expression[0]
-            duration = abjad.NonreducedFraction(1, talea.denominator)
-            duration *= multiplier
+            duration = (
+                multiplier.numerator,
+                multiplier.denominator * talea.denominator,
+            )
             if pitch_expression[-1] == "skip":
                 skips_instead_of_rests = True
             pitch_expression = None
@@ -680,13 +681,9 @@ def _make_figure_tuplet(
             )
         leaves.extend(leaves_)
         count = next_attack
-        while (
-            talea[count] < abjad.NonreducedFraction(0, 1)
-            and not count % len(talea) == 0
-        ):
+        while talea[count] < 0 and not count % len(talea) == 0:
             next_attack += 1
             this_one = talea[count]
-            assert isinstance(this_one, abjad.NonreducedFraction)
             duration = -this_one
             leaves_ = abjad.makers.make_leaves(
                 [None], [duration], increase_monotonic=spelling.increase_monotonic
@@ -710,8 +707,7 @@ def _make_figure_tuplet(
         tuplet = _make_accelerando(leaf_selection, treatment)
     elif isinstance(treatment, abjad.Ratio):
         numerator, denominator = treatment.numbers
-        multiplier = abjad.NonreducedFraction((denominator, numerator))
-        tuplet = abjad.Tuplet(multiplier, leaf_selection)
+        tuplet = abjad.Tuplet(f"{denominator}:{numerator}", leaf_selection)
     elif isinstance(treatment, str) and ":" in treatment:
         numerator_str, denominator_str = treatment.split(":")
         numerator, denominator = int(numerator_str), int(denominator_str)
@@ -1141,8 +1137,7 @@ class Accumulator:
                 fused_selection.extend(selection.annotation)
             else:
                 assert isinstance(selection, abjad.Timespan)
-                multiplier = abjad.NonreducedFraction(selection.duration)
-                skip = abjad.Skip(1, multiplier=multiplier)
+                skip = abjad.Skip(1, multiplier=selection.duration.pair)
                 fused_selection.append(skip)
         return fused_selection
 
@@ -1471,10 +1466,10 @@ def make_figures(
         )
     duration = abjad.get.duration(container)
     if tsd is not None:
-        nonreduced_duration = duration.with_denominator(tsd)
+        pair = duration.with_denominator(tsd).pair
     else:
-        nonreduced_duration = abjad.NonreducedFraction(duration)
-    time_signature = abjad.TimeSignature(nonreduced_duration.pair)
+        pair = duration.pair
+    time_signature = abjad.TimeSignature(pair)
     leaf = abjad.select.leaf(container, 0)
     abjad.annotate(leaf, "figure_name", figure_name)
     if not do_not_label:
