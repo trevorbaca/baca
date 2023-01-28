@@ -807,12 +807,12 @@ def quarters(
 
 def ratios(
     sequence,
-    ratios: typing.Sequence[abjad.typings.Ratio],
+    ratio: tuple[int, int],
     *,
     rounded: bool = False,
 ):
     r"""
-    Splits sequence by ``ratios``.
+    Splits sequence by ``ratio``.
 
     ..  container:: example
 
@@ -820,7 +820,7 @@ def ratios(
 
         >>> time_signatures = baca.durations([(5, 8), (6, 8)])
         >>> divisions = time_signatures[:]
-        >>> divisions = baca.sequence.ratios(divisions, [(2, 1)])
+        >>> divisions = baca.sequence.ratios(divisions, (2, 1))
         >>> for item in divisions:
         ...     item
         [(5, 8), (7, 24)]
@@ -829,7 +829,7 @@ def ratios(
         Works with durations:
 
         >>> divisions = [abjad.Duration(_) for _ in [(5, 8), (6, 8)]]
-        >>> divisions = baca.sequence.ratios(divisions, [(2, 1)])
+        >>> divisions = baca.sequence.ratios(divisions, (2, 1))
         >>> for item in divisions:
         ...     item
         [(5, 8), (7, 24)]
@@ -839,7 +839,7 @@ def ratios(
 
         >>> time_signatures = baca.durations([(5, 8), (6, 8)])
         >>> divisions = time_signatures[:]
-        >>> divisions = baca.sequence.ratios(divisions, [(2, 1)], rounded=True)
+        >>> divisions = baca.sequence.ratios(divisions, (2, 1), rounded=True)
         >>> for item in divisions:
         ...     item
         [(5, 8), (2, 8)]
@@ -851,7 +851,7 @@ def ratios(
 
         >>> time_signatures = baca.durations([(5, 8), (6, 8)])
         >>> divisions = [
-        ...     baca.sequence.ratios([_], [(2, 1)]) for _ in time_signatures
+        ...     baca.sequence.ratios([_], (2, 1)) for _ in time_signatures
         ... ]
         >>> for item in divisions:
         ...     item
@@ -862,7 +862,7 @@ def ratios(
 
         >>> time_signatures = baca.durations([(5, 8), (6, 8)])
         >>> divisions = [
-        ...     baca.sequence.ratios([_], [(2, 1)], rounded=True)
+        ...     baca.sequence.ratios([_], (2, 1), rounded=True)
         ...     for _ in time_signatures
         ... ]
         >>> for item in divisions:
@@ -880,7 +880,7 @@ def ratios(
         >>> for i, time_signature in enumerate(time_signatures):
         ...     ratio = ratios[i]
         ...     sequence = [time_signature]
-        ...     sequence = baca.sequence.ratios(sequence, [ratio])
+        ...     sequence = baca.sequence.ratios(sequence, ratio)
         ...     divisions.append(sequence)
         ...
         >>> for item in divisions:
@@ -896,7 +896,7 @@ def ratios(
         >>> for i, time_signature in enumerate(time_signatures):
         ...     ratio = ratios[i]
         ...     sequence = [time_signature]
-        ...     sequence = baca.sequence.ratios(sequence, [ratio], rounded=True)
+        ...     sequence = baca.sequence.ratios(sequence, ratio, rounded=True)
         ...     divisions.append(sequence)
         ...
         >>> for item in divisions:
@@ -905,27 +905,34 @@ def ratios(
         [[(1, 4)], [(1, 4)], [(1, 4)]]
 
     """
+    # sequence = [_.pair for _ in sequence]
     sequence = [abjad.NonreducedFraction(_) for _ in sequence]
-    ratios_ = abjad.CyclicTuple([abjad.Ratio(_) for _ in ratios])
-    if rounded is not None:
-        rounded = bool(rounded)
+    assert isinstance(rounded, bool), repr(rounded)
+    numerator, denominator = 0, 0
+    for item in sequence:
+        numerator += item.pair[0]
+        denominator += item.pair[1]
+    # weight_ = abjad.NonreducedFraction(numerator, denominator)
     weight = sum(sequence)
+    # assert weight == weight_, repr((weight, weight_))
     assert isinstance(weight, abjad.NonreducedFraction)
     numerator, denominator = weight.pair
-    ratio = ratios_[0]
+    assert isinstance(ratio, tuple), repr(ratio)
+    ratio_ = abjad.Ratio(ratio)
     if rounded is True:
-        numerators = ratio.partition_integer(numerator)
+        numerators = ratio_.partition_integer(numerator)
         divisions = [
             abjad.NonreducedFraction((numerator, denominator))
             for numerator in numerators
         ]
     else:
         divisions = []
-        ratio_weight = sum(ratio)
+        ratio_weight = sum(ratio_)
         for number in ratio:
             multiplier = abjad.Fraction(number, ratio_weight)
             division = multiplier * weight
             divisions.append(division)
+    sequence = [abjad.NonreducedFraction(_) for _ in sequence]
     sequence = abjad.sequence.split(sequence, divisions)
     assert isinstance(sequence, list)
     assert isinstance(sequence[0], list)
