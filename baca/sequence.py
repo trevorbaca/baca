@@ -823,8 +823,8 @@ def ratios(
         >>> divisions = baca.sequence.ratios(divisions, [(2, 1)])
         >>> for item in divisions:
         ...     item
-        [NonreducedFraction(5, 8), NonreducedFraction(7, 24)]
-        [NonreducedFraction(11, 24)]
+        [(5, 8), (7, 24)]
+        [(11, 24)]
 
         Works with durations:
 
@@ -832,8 +832,8 @@ def ratios(
         >>> divisions = baca.sequence.ratios(divisions, [(2, 1)])
         >>> for item in divisions:
         ...     item
-        [NonreducedFraction(5, 8), NonreducedFraction(7, 24)]
-        [NonreducedFraction(11, 24)]
+        [(5, 8), (7, 24)]
+        [(11, 24)]
 
         Splits divisions by rounded ``2:1`` ratio:
 
@@ -842,8 +842,8 @@ def ratios(
         >>> divisions = baca.sequence.ratios(divisions, [(2, 1)], rounded=True)
         >>> for item in divisions:
         ...     item
-        [NonreducedFraction(5, 8), NonreducedFraction(2, 8)]
-        [NonreducedFraction(4, 8)]
+        [(5, 8), (2, 8)]
+        [(4, 8)]
 
     ..  container:: example
 
@@ -855,8 +855,8 @@ def ratios(
         ... ]
         >>> for item in divisions:
         ...     item
-        [[NonreducedFraction(10, 24)], [NonreducedFraction(5, 24)]]
-        [[NonreducedFraction(2, 4)], [NonreducedFraction(1, 4)]]
+        [[(10, 24)], [(5, 24)]]
+        [[(2, 4)], [(1, 4)]]
 
         Splits each division by rounded ``2:1`` ratio:
 
@@ -867,8 +867,8 @@ def ratios(
         ... ]
         >>> for item in divisions:
         ...     item
-        [[NonreducedFraction(3, 8)], [NonreducedFraction(2, 8)]]
-        [[NonreducedFraction(2, 4)], [NonreducedFraction(1, 4)]]
+        [[(3, 8)], [(2, 8)]]
+        [[(2, 4)], [(1, 4)]]
 
     ..  container:: example
 
@@ -885,8 +885,8 @@ def ratios(
         ...
         >>> for item in divisions:
         ...     item
-        [[NonreducedFraction(10, 24)], [NonreducedFraction(5, 24)]]
-        [[NonreducedFraction(1, 4)], [NonreducedFraction(1, 4)], [NonreducedFraction(1, 4)]]
+        [[(10, 24)], [(5, 24)]]
+        [[(1, 4)], [(1, 4)], [(1, 4)]]
 
         Splits divisions with alternating rounded ``2:1`` and ``1:1:1`` ratios:
 
@@ -901,8 +901,8 @@ def ratios(
         ...
         >>> for item in divisions:
         ...     item
-        [[NonreducedFraction(3, 8)], [NonreducedFraction(2, 8)]]
-        [[NonreducedFraction(1, 4)], [NonreducedFraction(1, 4)], [NonreducedFraction(1, 4)]]
+        [[(3, 8)], [(2, 8)]]
+        [[(1, 4)], [(1, 4)], [(1, 4)]]
 
     """
     sequence = [abjad.NonreducedFraction(_) for _ in sequence]
@@ -927,7 +927,10 @@ def ratios(
             division = multiplier * weight
             divisions.append(division)
     sequence = abjad.sequence.split(sequence, divisions)
-    return sequence
+    assert isinstance(sequence, list)
+    assert isinstance(sequence[0], list)
+    lists = [[_.pair for _ in list_] for list_ in sequence]
+    return lists
 
 
 def repeat_by(sequence, counts=None, cyclic=None):
