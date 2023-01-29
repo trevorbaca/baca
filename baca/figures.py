@@ -257,16 +257,19 @@ def _do_nest_command(argument, *, lmr=None, treatments=None) -> list[abjad.Tuple
                 contents_duration = abjad.get.duration(tuplet_selection)
                 target_duration = contents_duration + addendum
                 multiplier = target_duration / contents_duration
-                tuplet = abjad.Tuplet(multiplier, [])
+                pair = multiplier.pair
+                tuplet = abjad.Tuplet(pair, [])
                 abjad.mutate.wrap(tuplet_selection, tuplet)
             elif treatment.__class__ is abjad.Multiplier:
-                tuplet = abjad.Tuplet(treatment, [])
+                pair = treatment.pair
+                tuplet = abjad.Tuplet(pair, [])
                 abjad.mutate.wrap(tuplet_selection, tuplet)
             elif treatment.__class__ is abjad.Duration:
                 target_duration = treatment
                 contents_duration = abjad.get.duration(tuplet_selection)
                 multiplier = target_duration / contents_duration
-                tuplet = abjad.Tuplet(multiplier, [])
+                pair = multiplier.pair
+                tuplet = abjad.Tuplet(pair, [])
                 abjad.mutate.wrap(tuplet_selection, tuplet)
             else:
                 raise Exception(f"bad time treatment: {treatment!r}.")
@@ -725,7 +728,8 @@ def _make_figure_tuplet(
         tuplet_duration = abjad.Duration(treatment)
         contents_duration = abjad.get.duration(leaf_selection)
         multiplier = tuplet_duration / contents_duration
-        tuplet = abjad.Tuplet(multiplier, leaf_selection)
+        pair = multiplier.pair
+        tuplet = abjad.Tuplet(pair, leaf_selection)
         if not abjad.Multiplier(tuplet.multiplier).normalized():
             tuplet.normalize_multiplier()
     else:
@@ -761,7 +765,8 @@ def _make_tuplet_with_extra_count(leaf_selection, extra_count, denominator):
         message = f"{leaf_selection!r} gives {tuplet_multiplier}"
         message += " with {contents_count} and {new_contents_count}."
         raise Exception(message)
-    tuplet = abjad.Tuplet(tuplet_multiplier, leaf_selection)
+    pair = tuplet_multiplier.pair
+    tuplet = abjad.Tuplet(pair, leaf_selection)
     return tuplet
 
 

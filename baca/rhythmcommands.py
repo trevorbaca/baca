@@ -268,8 +268,9 @@ def make_monads(fractions):
     for fraction in fractions.split():
         leaves = abjad.makers.make_leaves([pitch], [fraction])
         components.extend(leaves)
+    # TODO: remove 2-line loop?
     for tuplet in abjad.select.tuplets(components):
-        tuplet.multiplier = abjad.Multiplier(tuplet.multiplier)
+        tuplet.multiplier = tuplet.multiplier
     return components
 
 
