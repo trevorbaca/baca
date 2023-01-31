@@ -345,60 +345,48 @@ def fuse(
 
         Fuses first two items and then remaining items:
 
-        >>> divisions = baca.durations([(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)])
-        >>> divisions = baca.sequence.fuse(divisions, [2])
-        >>> for division in divisions:
-        ...     division
-        Duration(1, 2)
-        Duration(3, 2)
+        >>> durations = baca.durations([(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)])
+        >>> baca.sequence.fuse(durations, [2])
+        [Duration(1, 2), Duration(3, 2)]
 
     ..  container:: example
 
         Fuses items two at a time:
 
-        >>> divisions = baca.durations([(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)])
-        >>> divisions = baca.sequence.fuse(divisions, [2], cyclic=True)
-        >>> for division in divisions:
-        ...     division
-        Duration(1, 2)
-        Duration(1, 1)
-        Duration(1, 2)
+        >>> durations = baca.durations([(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)])
+        >>> baca.sequence.fuse(durations, [2], cyclic=True)
+        [Duration(1, 2), Duration(1, 1), Duration(1, 2)]
 
     ..  container:: example
 
         Splits each item by ``3/8``;  then flattens; then fuses into differently sized
         groups:
 
-        >>> divisions = baca.durations([(7, 8), (3, 8), (5, 8)])
-        >>> divisions = [
+        >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
+        >>> durations = [
         ...     baca.sequence.split_divisions([_], [(3, 8)], cyclic=True)
-        ...     for _ in divisions
+        ...     for _ in durations
         ... ]
-        >>> divisions = abjad.sequence.flatten(divisions, depth=-1)
-        >>> divisions = baca.sequence.fuse(divisions, [2, 3, 1])
-        >>> for division in divisions:
-        ...     division
-        Duration(3, 4)
-        Duration(7, 8)
-        Duration(1, 4)
+        >>> durations = abjad.sequence.flatten(durations, depth=-1)
+        >>> baca.sequence.fuse(durations, [2, 3, 1])
+        [Duration(3, 4), Duration(7, 8), Duration(1, 4)]
 
     ..  container:: example
 
         Splits into sixteenths; partitions; then fuses every other part:
 
-        >>> divisions = baca.durations([(7, 8), (3, 8), (5, 8)])
-        >>> divisions = baca.sequence.fuse(divisions)
-        >>> divisions = [
+        >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
+        >>> durations = baca.sequence.fuse(durations)
+        >>> durations = [
         ...     baca.sequence.split_divisions([_], [(1, 16)], cyclic=True)
-        ...     for _ in divisions
+        ...     for _ in durations
         ... ]
-        >>> divisions = abjad.sequence.flatten(divisions, depth=-1)
-        >>> divisions = abjad.sequence.partition_by_ratio_of_lengths(
-        ...     divisions, (1, 1, 1, 1, 1, 1))
-        >>> divisions = baca.sequence.fuse(divisions, indices=[1, 3, 5])
-        >>> divisions = abjad.sequence.flatten(divisions, depth=-1)
-        >>> for division in divisions:
-        ...     division
+        >>> durations = abjad.sequence.flatten(durations, depth=-1)
+        >>> durations = abjad.sequence.partition_by_ratio_of_lengths(
+        ...     durations, (1, 1, 1, 1, 1, 1))
+        >>> durations = baca.sequence.fuse(durations, indices=[1, 3, 5])
+        >>> durations = abjad.sequence.flatten(durations, depth=-1)
+        >>> for duration in durations: duration
         Duration(1, 16)
         Duration(1, 16)
         Duration(1, 16)
@@ -740,13 +728,13 @@ def partition(sequence, counts=None):
 
 
 def quarters(
-    sequence,
+    sequence: typing.Sequence[tuple[int, int] | abjad.Duration],
     *,
     compound: bool = False,
-    remainder: int | None = None,
-):
+    remainder: abjad.enums.Horizontal | None = None,
+) -> list[list[tuple[int, int] | abjad.Duration]]:
     r"""
-    Splits sequence into quarter-note durations.
+    Splits ``sequence`` into quarters.
 
     ..  container:: example
 
@@ -765,44 +753,76 @@ def quarters(
 
     ..  container:: example
 
-        >>> for item in baca.sequence.quarters([(6, 4)], compound=True):
-        ...     item
+        Set ``compound=True`` for compound quarter notes:
+
+        >>> pairs = [(3, 4), (6, 4)]
+        >>> lists = [baca.sequence.quarters([_]) for _ in pairs]
+        >>> for list_ in lists:
+        ...     print("list:")
+        ...     for pair in list_:
+        ...         print(f"\t{repr(pair)}")
         ...
-        [Duration(3, 8)]
-        [Duration(3, 8)]
-        [Duration(3, 8)]
-        [Duration(3, 8)]
+        list:
+            [Duration(1, 4)]
+            [Duration(1, 4)]
+            [Duration(1, 4)]
+        list:
+            [Duration(1, 4)]
+            [Duration(1, 4)]
+            [Duration(1, 4)]
+            [Duration(1, 4)]
+            [Duration(1, 4)]
+            [Duration(1, 4)]
+
+        >>> pairs = [(3, 4), (6, 4)]
+        >>> lists = [baca.sequence.quarters([_], compound=True) for _ in pairs]
+        >>> for list_ in lists:
+        ...     print("list:")
+        ...     for pair in list_:
+        ...         print(f"\t{repr(pair)}")
+        ...
+        list:
+            [Duration(1, 4)]
+            [Duration(1, 4)]
+            [Duration(1, 4)]
+        list:
+            [Duration(3, 8)]
+            [Duration(3, 8)]
+            [Duration(3, 8)]
+            [Duration(3, 8)]
 
     ..  container:: example
 
-        Maps to each division: splits by ``1/4`` with remainder on right:
+        Splits each duration into quarters and positions remainder at right:
 
-        >>> divisions = baca.durations([(7, 8), (3, 8), (5, 8)])
-        >>> divisions = [baca.sequence.quarters([_]) for _ in divisions]
-        >>> for sequence in divisions:
-        ...     print("sequence:")
-        ...     for division in sequence:
-        ...         print(f"\t{repr(division)}")
-        sequence:
-            [Duration(1, 4)]
-            [Duration(1, 4)]
-            [Duration(1, 4)]
-            [Duration(1, 8)]
-        sequence:
-            [Duration(1, 4)]
-            [Duration(1, 8)]
-        sequence:
-            [Duration(1, 4)]
-            [Duration(1, 4)]
-            [Duration(1, 8)]
+        >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
+        >>> lists = [baca.sequence.quarters([_]) for _ in durations]
+        >>> for list_ in lists: list_
+        [[Duration(1, 4)], [Duration(1, 4)], [Duration(1, 4)], [Duration(1, 8)]]
+        [[Duration(1, 4)], [Duration(1, 8)]]
+        [[Duration(1, 4)], [Duration(1, 4)], [Duration(1, 8)]]
+
+        Splits each durations into quarters and positions remainder at left:
+
+        >>> duration = baca.durations([(7, 8), (3, 8), (5, 8)])
+        >>> lists = [
+        ...     baca.sequence.quarters([_], remainder=abjad.LEFT) for _ in durations
+        ... ]
+        >>> for list_ in lists: list_
+        [[Duration(1, 8)], [Duration(1, 4)], [Duration(1, 4)], [Duration(1, 4)]]
+        [[Duration(1, 8)], [Duration(1, 4)]]
+        [[Duration(1, 8)], [Duration(1, 4)], [Duration(1, 4)]]
 
     """
     assert isinstance(sequence, list), repr(sequence)
+    prototype = (tuple, abjad.Duration, abjad.TimeSignature)
+    assert all(isinstance(_, prototype) for _ in sequence), repr(sequence)
     assert isinstance(compound, bool), repr(compound)
-    sequence = split_divisions(
+    assert remainder in (abjad.LEFT, abjad.RIGHT, None), repr(remainder)
+    lists = split_divisions(
         sequence, [(1, 4)], cyclic=True, compound=compound, remainder=remainder
     )
-    return sequence
+    return lists
 
 
 def ratios(
@@ -847,7 +867,7 @@ def ratios(
 
     ..  container:: example
 
-        Splits each division by exact ``2:1`` ratio:
+        Splits each duration by exact ``2:1`` ratio:
 
         >>> time_signatures = baca.durations([(5, 8), (6, 8)])
         >>> divisions = [
@@ -858,7 +878,7 @@ def ratios(
         [[(5, 12)], [(5, 24)]]
         [[(1, 2)], [(1, 4)]]
 
-        Splits each division by rounded ``2:1`` ratio:
+        Splits each duration by rounded ``2:1`` ratio:
 
         >>> time_signatures = baca.durations([(5, 8), (6, 8)])
         >>> divisions = [
@@ -925,8 +945,8 @@ def ratios(
             multiplier = abjad.Fraction(number, ratio_weight)
             numerator_ = multiplier.numerator * pairs_weight[0]
             denominator_ = multiplier.denominator * pairs_weight[1]
-            division = abjad.Duration(numerator_, denominator_)
-            divisions.append(division)
+            duration = abjad.Duration(numerator_, denominator_)
+            divisions.append(duration)
     sequence = [abjad.Duration(_) for _ in sequence]
     sequence = abjad.sequence.split(sequence, divisions)
     assert isinstance(sequence, list)
@@ -1158,53 +1178,37 @@ def reveal(sequence, count=None):
 
 
 def split_divisions(
-    sequence,
-    durations: list[abjad.typings.Duration],
+    sequence: typing.Sequence[tuple[int, int] | abjad.Duration],
+    durations: list[tuple[int, int] | abjad.Duration],
     *,
     compound: bool = False,
     cyclic: bool = False,
-    remainder: int | None = None,
-    remainder_fuse_threshold: abjad.typings.Duration | None = None,
-):
+    remainder: abjad.enums.Horizontal | None = None,
+    remainder_fuse_threshold: tuple[int, int] | abjad.Duration | None = None,
+) -> list[list[tuple[int, int] | abjad.Duration]]:
     r"""
-    Splits sequence divisions by ``durations``.
+    Splits ``sequence`` by ``durations``.
 
     ..  container:: example
 
         Splits every five sixteenths:
 
-        >>> divisions = baca.durations(10 * [(1, 8)])
-        >>> divisions = baca.sequence.split_divisions(divisions, [(5, 16)], cyclic=True)
-        >>> for i, sequence_ in enumerate(divisions):
-        ...     print(f"sequence {i}")
-        ...     for division in sequence_:
-        ...         print("\t" + repr(division))
-        sequence 0
-            Duration(1, 8)
-            Duration(1, 8)
-            Duration(1, 16)
-        sequence 1
-            Duration(1, 16)
-            Duration(1, 8)
-            Duration(1, 8)
-        sequence 2
-            Duration(1, 8)
-            Duration(1, 8)
-            Duration(1, 16)
-        sequence 3
-            Duration(1, 16)
-            Duration(1, 8)
-            Duration(1, 8)
+        >>> durations = baca.durations(10 * [(1, 8)])
+        >>> lists = baca.sequence.split_divisions(durations, [(5, 16)], cyclic=True)
+        >>> for list_ in lists: list_
+        [Duration(1, 8), Duration(1, 8), Duration(1, 16)]
+        [Duration(1, 16), Duration(1, 8), Duration(1, 8)]
+        [Duration(1, 8), Duration(1, 8), Duration(1, 16)]
+        [Duration(1, 16), Duration(1, 8), Duration(1, 8)]
 
     ..  container:: example
 
-        Fuses divisions and then splits by ``1/4`` with remainder on right:
+        Fuses durations and then splits by ``1/4`` with remainder on right:
 
-        >>> divisions = baca.durations([(7, 8), (3, 8), (5, 8)])
-        >>> divisions = baca.sequence.fuse(divisions)
-        >>> divisions = baca.sequence.split_divisions(divisions, [(1, 4)], cyclic=True)
-        >>> for item in divisions:
-        ...     item
+        >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
+        >>> durations = baca.sequence.fuse(durations)
+        >>> lists = baca.sequence.split_divisions(durations, [(1, 4)], cyclic=True)
+        >>> for list_ in lists: list_
         [Duration(1, 4)]
         [Duration(1, 4)]
         [Duration(1, 4)]
@@ -1216,16 +1220,15 @@ def split_divisions(
 
         Fuses remainder:
 
-        >>> divisions = baca.durations([(7, 8), (3, 8), (5, 8)])
-        >>> divisions = baca.sequence.fuse(divisions)
-        >>> divisions = baca.sequence.split_divisions(
-        ...     divisions,
+        >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
+        >>> durations = baca.sequence.fuse(durations)
+        >>> lists = baca.sequence.split_divisions(
+        ...     durations,
         ...     [(1, 4)],
         ...     cyclic=True,
         ...     remainder_fuse_threshold=(1, 8),
         ... )
-        >>> for item in divisions:
-        ...     item
+        >>> for list_ in lists: list_
         [Duration(1, 4)]
         [Duration(1, 4)]
         [Duration(1, 4)]
@@ -1236,18 +1239,17 @@ def split_divisions(
 
     ..  container:: example
 
-        Fuses divisions and then splits by ``1/4`` with remainder on left:
+        Fuses durations and then splits by ``1/4`` with remainder on left:
 
-        >>> divisions = baca.durations([(7, 8), (3, 8), (5, 8)])
-        >>> divisions = baca.sequence.fuse(divisions)
-        >>> divisions = baca.sequence.split_divisions(
-        ...     divisions,
+        >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
+        >>> durations = baca.sequence.fuse(durations)
+        >>> lists = baca.sequence.split_divisions(
+        ...     durations,
         ...     [(1, 4)],
         ...     cyclic=True,
         ...     remainder=abjad.LEFT,
         ... )
-        >>> for item in divisions:
-        ...     item
+        >>> for list_ in lists: list_
         [Duration(1, 8)]
         [Duration(1, 4)]
         [Duration(1, 4)]
@@ -1259,17 +1261,16 @@ def split_divisions(
 
         Fuses remainder:
 
-        >>> divisions = baca.durations([(7, 8), (3, 8), (5, 8)])
-        >>> divisions = baca.sequence.fuse(divisions)
-        >>> divisions = baca.sequence.split_divisions(
-        ...     divisions,
+        >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
+        >>> durations = baca.sequence.fuse(durations)
+        >>> lists = baca.sequence.split_divisions(
+        ...     durations,
         ...     [(1, 4)],
         ...     cyclic=True,
         ...     remainder=abjad.LEFT,
         ...     remainder_fuse_threshold=(1, 8),
         ... )
-        >>> for item in divisions:
-        ...     item
+        >>> for list_ in lists: list_
         [Duration(3, 8)]
         [Duration(1, 4)]
         [Duration(1, 4)]
@@ -1280,173 +1281,21 @@ def split_divisions(
 
     ..  container:: example
 
-        Splits each division into quarters and positions remainder at right:
+        Splits each duration; rotates durations one to the left at each new
+        duration:
 
-        >>> def quarters(sequence):
-        ...     sequence = [sequence]
-        ...     sequence = baca.sequence.quarters(sequence)
-        ...     sequence = abjad.sequence.flatten(sequence, depth=-1)
-        ...     return sequence
-
-        >>> time_signatures = baca.durations([(7, 8), (7, 8), (7, 16)])
-        >>> divisions = [quarters(_) for _ in time_signatures]
-        >>> for item in divisions:
-        ...     print("sequence:")
-        ...     for division in item:
-        ...         print(f"\t{repr(division)}")
-        sequence:
-            Duration(1, 4)
-            Duration(1, 4)
-            Duration(1, 4)
-            Duration(1, 8)
-        sequence:
-            Duration(1, 4)
-            Duration(1, 4)
-            Duration(1, 4)
-            Duration(1, 8)
-        sequence:
-            Duration(1, 4)
-            Duration(3, 16)
-
-    ..  container:: example
-
-        Splits each division into quarters and positions remainder at left:
-
-        >>> def quarters(sequence):
-        ...     sequence = [sequence]
-        ...     sequence = baca.sequence.quarters(sequence, remainder=abjad.LEFT)
-        ...     sequence = abjad.sequence.flatten(sequence, depth=-1)
-        ...     return sequence
-
-        >>> time_signatures = baca.durations([(7, 8), (7, 8), (7, 16)])
-        >>> divisions = [quarters(_) for _ in time_signatures]
-        >>> for item in divisions:
-        ...     print("sequence:")
-        ...     for division in item:
-        ...         print(f"\t{repr(division)}")
-        sequence:
-            Duration(1, 8)
-            Duration(1, 4)
-            Duration(1, 4)
-            Duration(1, 4)
-        sequence:
-            Duration(1, 8)
-            Duration(1, 4)
-            Duration(1, 4)
-            Duration(1, 4)
-        sequence:
-            Duration(3, 16)
-            Duration(1, 4)
-
-    ..  container:: example
-
-        Splits each division into quarters and fuses remainder less than or equal to
-        ``1/8`` to the right:
-
-        >>> def quarters(sequence):
-        ...     sequence = [sequence]
-        ...     sequence = baca.sequence.split_divisions(
-        ...         sequence,
-        ...         [(1, 4)],
-        ...         cyclic=True,
-        ...         remainder_fuse_threshold=(1, 8),
-        ...     )
-        ...     sequence = abjad.sequence.flatten(sequence, depth=-1)
-        ...     return sequence
-
-        >>> time_signatures = [abjad.Duration(5, 8)]
-        >>> divisions = [quarters(_) for _ in time_signatures]
-        >>> for item in divisions:
-        ...     print("sequence:")
-        ...     for division in item:
-        ...         print(f"\t{repr(division)}")
-        sequence:
-            Duration(1, 4)
-            Duration(3, 8)
-
-    ..  container:: example
-
-        Splits each division into quarters and fuses remainder less than or equal to
-        ``1/8`` to the left:
-
-        >>> def quarters(sequence):
-        ...     sequence = [sequence]
-        ...     sequence = baca.sequence.split_divisions(
-        ...         sequence,
-        ...         [(1, 4)],
-        ...         cyclic=True,
-        ...         remainder=abjad.LEFT,
-        ...         remainder_fuse_threshold=(1, 8),
-        ...     )
-        ...     sequence = abjad.sequence.flatten(sequence, depth=-1)
-        ...     return sequence
-
-        >>> time_signatures = [abjad.Duration(5, 8)]
-        >>> divisions = [quarters(_) for _ in time_signatures]
-        >>> for item in divisions:
-        ...     print("sequence:")
-        ...     for division in item:
-        ...         print(f"\t{repr(division)}")
-        sequence:
-            Duration(3, 8)
-            Duration(1, 4)
-
-    ..  container:: example
-
-        Splits each division into compound quarters:
-
-        >>> def quarters(sequence):
-        ...     sequence = [sequence]
-        ...     sequence = baca.sequence.quarters(sequence, compound=True)
-        ...     sequence = abjad.sequence.flatten(sequence, depth=-1)
-        ...     return sequence
-
-        >>> time_signatures = [(3, 4), (6, 8)]
-        >>> divisions = list(time_signatures)
-        >>> divisions = [quarters(_) for _ in time_signatures]
-        >>> for item in divisions:
-        ...     print("sequence:")
-        ...     for division in item:
-        ...         print(f"\t{repr(division)}")
-        sequence:
-            Duration(1, 4)
-            Duration(1, 4)
-            Duration(1, 4)
-        sequence:
-            Duration(3, 8)
-            Duration(3, 8)
-
-    ..  container:: example
-
-        Splits each division by durations and rotates durations one to the left at
-        each new division:
-
-        >>> durations = [(1, 16), (1, 8), (1, 4)]
-        >>> time_signatures = baca.durations([(7, 16), (7, 16), (7, 16)])
-        >>> divisions = []
-        >>> for i, time_signature in enumerate(time_signatures):
-        ...     durations_ = abjad.sequence.rotate(durations, n=-i)
-        ...     sequence = [time_signature]
-        ...     sequence = baca.sequence.split_divisions(sequence, durations_)
-        ...     sequence = abjad.sequence.flatten(sequence, depth=-1)
-        ...     divisions.append(sequence)
+        >>> durations = baca.durations([(7, 16), (7, 16), (7, 16)])
+        >>> lists = []
+        >>> for i, duration in enumerate(durations):
+        ...     durations_ = abjad.sequence.rotate([(1, 16), (1, 8), (1, 4)], n=-i)
+        ...     list_ = baca.sequence.split_divisions([duration], durations_)
+        ...     list_ = abjad.sequence.flatten(list_, depth=-1)
+        ...     lists.append(list_)
         ...
-        >>> for item in divisions:
-        ...     print("sequence:")
-        ...     for division in item:
-        ...         print(f"\t{repr(division)}")
-        sequence:
-            Duration(1, 16)
-            Duration(1, 8)
-            Duration(1, 4)
-        sequence:
-            Duration(1, 8)
-            Duration(1, 4)
-            Duration(1, 16)
-        sequence:
-            Duration(1, 4)
-            Duration(1, 16)
-            Duration(1, 8)
+        >>> for list_ in lists: list_
+        [Duration(1, 16), Duration(1, 8), Duration(1, 4)]
+        [Duration(1, 8), Duration(1, 4), Duration(1, 16)]
+        [Duration(1, 4), Duration(1, 16), Duration(1, 8)]
 
     """
     durations = [abjad.Duration(_) for _ in durations]
@@ -1459,7 +1308,6 @@ def split_divisions(
         assert remainder in (abjad.LEFT, abjad.RIGHT), repr(remainder)
     if remainder_fuse_threshold is not None:
         remainder_fuse_threshold = abjad.Duration(remainder_fuse_threshold)
-
     sequence_ = abjad.sequence.split(
         [abjad.Duration(_) for _ in sequence], durations, cyclic=cyclic, overhang=True
     )
@@ -1490,4 +1338,5 @@ def split_divisions(
             else:
                 items.append(remaining_item)
         sequence_ = items[:]
+    assert isinstance(sequence_, list), repr(sequence_)
     return sequence_

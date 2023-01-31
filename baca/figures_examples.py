@@ -1834,7 +1834,7 @@ figures.py examples.
 
 ..  container:: example
 
-    One extra count per division:
+    One extra count per duration:
 
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> container = baca.figure(collections, [1, 1, 2], 16, treatments=[1])
@@ -1884,7 +1884,7 @@ figures.py examples.
 
 ..  container:: example
 
-    One missing count per division:
+    One missing count per duration:
 
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> container = baca.figure(collections, [1, 1, 2], 16, treatments=[-1])
