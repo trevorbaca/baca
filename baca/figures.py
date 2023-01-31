@@ -642,10 +642,10 @@ def _make_figure_tuplet(
         if isinstance(pitch_expression, prototype):
             pitch_expression = pitch_expression.number
         count = next_attack
-        while talea[count] < 0:
+        while abjad.Fraction(*talea[count]) < 0:
             next_attack += 1
             this_one = talea[count]
-            duration = -this_one
+            duration = -abjad.Duration(*this_one)
             leaves_ = abjad.makers.make_leaves(
                 [None], [duration], increase_monotonic=spelling.increase_monotonic
             )
@@ -654,7 +654,7 @@ def _make_figure_tuplet(
         next_attack += 1
         this_one = talea[count]
         duration = this_one
-        assert 0 < duration, repr(duration)
+        assert 0 < abjad.Duration(duration), repr(duration)
         skips_instead_of_rests = False
         if (
             isinstance(pitch_expression, tuple)
@@ -685,10 +685,10 @@ def _make_figure_tuplet(
             )
         leaves.extend(leaves_)
         count = next_attack
-        while talea[count] < 0 and not count % len(talea) == 0:
+        while abjad.Fraction(*talea[count]) < 0 and not count % len(talea) == 0:
             next_attack += 1
             this_one = talea[count]
-            duration = -this_one
+            duration = -abjad.Duration(*this_one)
             leaves_ = abjad.makers.make_leaves(
                 [None], [duration], increase_monotonic=spelling.increase_monotonic
             )
