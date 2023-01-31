@@ -257,7 +257,7 @@ def _do_nest_command(argument, *, lmr=None, treatments=None) -> list[abjad.Tuple
                 contents_duration = abjad.get.duration(tuplet_selection)
                 target_duration = contents_duration + addendum
                 multiplier = target_duration / contents_duration
-                pair = multiplier.pair
+                pair = abjad.duration.pair(multiplier)
                 tuplet = abjad.Tuplet(pair, [])
                 abjad.mutate.wrap(tuplet_selection, tuplet)
             elif treatment.__class__ is abjad.Fraction:
@@ -268,7 +268,7 @@ def _do_nest_command(argument, *, lmr=None, treatments=None) -> list[abjad.Tuple
                 target_duration = treatment
                 contents_duration = abjad.get.duration(tuplet_selection)
                 multiplier = target_duration / contents_duration
-                pair = multiplier.pair
+                pair = abjad.duration.pair(multiplier)
                 tuplet = abjad.Tuplet(pair, [])
                 abjad.mutate.wrap(tuplet_selection, tuplet)
             else:
@@ -727,7 +727,7 @@ def _make_figure_tuplet(
         tuplet_duration = abjad.Duration(treatment)
         contents_duration = abjad.get.duration(leaf_selection)
         multiplier = tuplet_duration / contents_duration
-        pair = multiplier.pair
+        pair = abjad.duration.pair(multiplier)
         tuplet = abjad.Tuplet(pair, leaf_selection)
         if not abjad.Duration(tuplet.multiplier).normalized():
             tuplet.normalize_multiplier()
