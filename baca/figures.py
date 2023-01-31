@@ -537,9 +537,7 @@ def _make_accelerando_multipliers(durations, exponent):
         multiplier = duration_ / duration
         multiplier = abjad.Multiplier(multiplier)
         pair = abjad.duration.with_denominator(multiplier, 2**10)
-        multiplier = abjad.NonreducedFraction(pair)
-        multipliers.append(multiplier)
-    multipliers = [_.pair for _ in multipliers]
+        multipliers.append(pair)
     return multipliers
 
 
@@ -753,8 +751,8 @@ def _make_figure_tuplet(
 def _make_tuplet_with_extra_count(leaf_selection, extra_count, denominator):
     contents_duration = abjad.get.duration(leaf_selection)
     pair = abjad.duration.with_denominator(contents_duration, denominator)
-    contents_duration = abjad.NonreducedFraction(pair)
-    contents_count = contents_duration.numerator
+    contents_duration_pair = pair
+    contents_count = contents_duration_pair[0]
     if 0 < extra_count:
         extra_count %= contents_count
     elif extra_count < 0:
