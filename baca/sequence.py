@@ -1179,7 +1179,7 @@ def reveal(sequence, count=None):
 
 def split_divisions(
     sequence: typing.Sequence[tuple[int, int] | abjad.Duration],
-    durations: list[tuple[int, int] | abjad.Duration],
+    weights: list[tuple[int, int] | abjad.Duration],
     *,
     compound: bool = False,
     cyclic: bool = False,
@@ -1187,7 +1187,7 @@ def split_divisions(
     remainder_fuse_threshold: tuple[int, int] | abjad.Duration | None = None,
 ) -> list[list[tuple[int, int] | abjad.Duration]]:
     r"""
-    Splits ``sequence`` by ``durations``.
+    Splits ``sequence`` by ``weights``.
 
     ..  container:: example
 
@@ -1298,10 +1298,15 @@ def split_divisions(
         [Duration(1, 4), Duration(1, 16), Duration(1, 8)]
 
     """
-    durations = [abjad.Duration(_) for _ in durations]
+    assert isinstance(sequence, list), repr(sequence)
+    weights = [abjad.Duration(_) for _ in weights]
+    prototype = (tuple, abjad.Duration, abjad.TimeSignature)
+    assert all(isinstance(_, prototype) for _ in sequence), repr(sequence)
+    assert isinstance(compound, bool), repr(compound)
+    assert remainder in (abjad.LEFT, abjad.RIGHT, None), repr(remainder)
     assert isinstance(compound, bool), repr(bool)
     if compound is True and all([abjad.Meter(_).is_compound for _ in sequence]):
-        durations = [abjad.Multiplier(3, 2) * _ for _ in durations]
+        weights = [abjad.Fraction(3, 2) * _ for _ in weights]
     if cyclic is not None:
         cyclic = bool(cyclic)
     if remainder is not None:
@@ -1309,10 +1314,10 @@ def split_divisions(
     if remainder_fuse_threshold is not None:
         remainder_fuse_threshold = abjad.Duration(remainder_fuse_threshold)
     sequence_ = abjad.sequence.split(
-        [abjad.Duration(_) for _ in sequence], durations, cyclic=cyclic, overhang=True
+        [abjad.Duration(_) for _ in sequence], weights, cyclic=cyclic, overhang=True
     )
     without_overhang = abjad.sequence.split(
-        [abjad.Duration(_) for _ in sequence], durations, cyclic=cyclic, overhang=False
+        [abjad.Duration(_) for _ in sequence], weights, cyclic=cyclic, overhang=False
     )
     if sequence_ != without_overhang:
         items = list(sequence_)

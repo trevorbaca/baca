@@ -260,8 +260,8 @@ def _do_nest_command(argument, *, lmr=None, treatments=None) -> list[abjad.Tuple
                 pair = multiplier.pair
                 tuplet = abjad.Tuplet(pair, [])
                 abjad.mutate.wrap(tuplet_selection, tuplet)
-            elif treatment.__class__ is abjad.Multiplier:
-                pair = treatment.pair
+            elif treatment.__class__ is abjad.Fraction:
+                pair = abjad.duration.pair(treatment)
                 tuplet = abjad.Tuplet(pair, [])
                 abjad.mutate.wrap(tuplet_selection, tuplet)
             elif treatment.__class__ is abjad.Duration:
@@ -398,7 +398,7 @@ def _is_treatment(argument):
         return True
     elif isinstance(argument, abjad.Ratio):
         return True
-    elif isinstance(argument, abjad.Multiplier):
+    elif isinstance(argument, abjad.Fraction):
         return True
     elif argument.__class__ is abjad.Duration:
         return True
@@ -535,7 +535,7 @@ def _make_accelerando_multipliers(durations, exponent):
     assert len(durations) == len(durations_)
     for duration_, duration in zip(durations_, durations):
         multiplier = duration_ / duration
-        multiplier = abjad.Multiplier(multiplier)
+        multiplier = abjad.Fraction(multiplier)
         pair = abjad.duration.with_denominator(multiplier, 2**10)
         multipliers.append(pair)
     return multipliers
@@ -714,22 +714,22 @@ def _make_figure_tuplet(
         numerator_str, denominator_str = treatment.split(":")
         numerator, denominator = int(numerator_str), int(denominator_str)
         tuplet = abjad.Tuplet((denominator, numerator), leaf_selection)
-    elif isinstance(treatment, abjad.Multiplier):
-        tuplet = abjad.Tuplet(treatment, leaf_selection)
     elif treatment.__class__ is abjad.Duration:
         tuplet_duration = treatment
         contents_duration = abjad.get.duration(leaf_selection)
         multiplier = tuplet_duration / contents_duration
         tuplet = abjad.Tuplet(multiplier, leaf_selection)
-        if not abjad.Multiplier(tuplet.multiplier).normalized():
+        if not abjad.Duration(tuplet.multiplier).normalized():
             tuplet.normalize_multiplier()
+    elif isinstance(treatment, abjad.Fraction):
+        tuplet = abjad.Tuplet(treatment, leaf_selection)
     elif isinstance(treatment, tuple) and len(treatment) == 2:
         tuplet_duration = abjad.Duration(treatment)
         contents_duration = abjad.get.duration(leaf_selection)
         multiplier = tuplet_duration / contents_duration
         pair = multiplier.pair
         tuplet = abjad.Tuplet(pair, leaf_selection)
-        if not abjad.Multiplier(tuplet.multiplier).normalized():
+        if not abjad.Duration(tuplet.multiplier).normalized():
             tuplet.normalize_multiplier()
     else:
         raise Exception(f"bad time treatment: {treatment!r}.")
@@ -760,12 +760,12 @@ def _make_tuplet_with_extra_count(leaf_selection, extra_count, denominator):
         extra_count %= python_math.ceil(contents_count / 2.0)
         extra_count *= -1
     new_contents_count = contents_count + extra_count
-    tuplet_multiplier = abjad.Multiplier(new_contents_count, contents_count)
-    if not tuplet_multiplier.normalized():
+    tuplet_multiplier = abjad.Fraction(new_contents_count, contents_count)
+    if not abjad.Duration(tuplet_multiplier).normalized():
         message = f"{leaf_selection!r} gives {tuplet_multiplier}"
         message += " with {contents_count} and {new_contents_count}."
         raise Exception(message)
-    pair = tuplet_multiplier.pair
+    pair = abjad.duration.pair(tuplet_multiplier)
     tuplet = abjad.Tuplet(pair, leaf_selection)
     return tuplet
 

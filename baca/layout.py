@@ -32,7 +32,7 @@ from . import select as _select
 from . import tags as _tags
 
 # TODO: apply magic_lilypond_eol_adjustment to last measure in all doc examples
-magic_lilypond_eol_adjustment = abjad.Multiplier(35, 24)
+magic_lilypond_eol_adjustment = abjad.Fraction(35, 24)
 
 fermata_measure_duration = abjad.Duration(1, 4)
 

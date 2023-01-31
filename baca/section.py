@@ -1123,8 +1123,8 @@ def _magnify_staves(magnify_staves, score):
         multiplier, tag = magnify_staves
     else:
         multiplier, tag = magnify_staves, None
-    multiplier = abjad.Multiplier(multiplier)
-    numerator, denominator = multiplier.pair
+    multiplier = abjad.Fraction(multiplier)
+    numerator, denominator = abjad.duration.pair(multiplier)
     string = rf"\magnifyStaff #{numerator}/{denominator}"
     tag = abjad.Tag(tag)
     tag = tag.append(_tags.function_name(_frame()))

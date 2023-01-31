@@ -626,51 +626,51 @@ def list_related_tempos(
         >>> for tempo, ratio in pairs:
         ...     print(f"{tempo}:")
         ...     print(f"    {ratio!r}")
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(29, 1), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(29, 1), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(1, 2))
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(232, 7), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(232, 7), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(4, 7))
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(174, 5), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(174, 5), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(3, 5))
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(145, 4), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(145, 4), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(5, 8))
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(116, 3), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(116, 3), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(2, 3))
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(290, 7), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(290, 7), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(5, 7))
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(87, 2), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(87, 2), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(3, 4))
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(232, 5), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(232, 5), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(4, 5))
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(145, 3), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(145, 3), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(5, 6))
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(348, 7), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(348, 7), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(6, 7))
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(203, 4), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(203, 4), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(7, 8))
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(58, 1), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(58, 1), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(1, 1))
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(464, 7), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(464, 7), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(8, 7))
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(203, 3), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(203, 3), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(7, 6))
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(348, 5), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(348, 5), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(6, 5))
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(145, 2), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(145, 2), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(5, 4))
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(232, 3), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(232, 3), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(4, 3))
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(406, 5), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(406, 5), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(7, 5))
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(87, 1), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(87, 1), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(3, 2))
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(464, 5), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(464, 5), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(8, 5))
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(290, 3), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(290, 3), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(5, 3))
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(203, 2), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(203, 2), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(7, 4))
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(116, 1), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(116, 1), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(2, 1))
 
     ..  container:: example
@@ -687,13 +687,13 @@ def list_related_tempos(
         >>> for tempo, ratio in pairs:
         ...     print(f"{tempo}:")
         ...     print(f"    {ratio!r}")
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(29, 1), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(29, 1), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(1, 2))
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(58, 1), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(58, 1), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(1, 1))
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(87, 1), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(87, 1), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(3, 2))
-        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Multiplier(116, 1), textual_indication=None, custom_markup=None, decimal=False, hide=False):
+        MetronomeMark(reference_duration=Duration(1, 4), units_per_minute=Fraction(116, 1), textual_indication=None, custom_markup=None, decimal=False, hide=False):
             Ratio(numbers=(2, 1))
 
     Constrains ratios such that ``1:2 <= n:d <= 2:1``.
@@ -702,7 +702,7 @@ def list_related_tempos(
     allowable_denominators = range(1, maximum_denominator + 1)
     numbers = [allowable_numerators, allowable_denominators]
     pairs = abjad.enumerate.outer_product(numbers)
-    multipliers = [abjad.Multiplier(_) for _ in pairs]
+    multipliers = [abjad.Fraction(*_) for _ in pairs]
     multipliers = [
         _ for _ in multipliers if abjad.Fraction(1, 2) <= _ <= abjad.Fraction(2)
     ]
@@ -719,7 +719,7 @@ def list_related_tempos(
             reference_duration=metronome_mark.reference_duration,
             units_per_minute=new_units_per_minute,
         )
-        ratio = abjad.Ratio(multiplier.pair)
-        pair = (metronome_mark_, ratio)
-        pairs.append(pair)
+        pair = abjad.duration.pair(multiplier)
+        ratio = abjad.Ratio(pair)
+        pairs.append((metronome_mark_, ratio))
     return pairs
