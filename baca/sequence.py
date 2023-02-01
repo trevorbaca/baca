@@ -333,12 +333,11 @@ def fuse(
 
     ..  container:: example
 
-        Fuses items:
+        Fuses durations:
 
-        >>> divisions = baca.durations([(7, 8), (3, 8), (5, 8)])
-        >>> divisions = baca.sequence.fuse(divisions)
-        >>> divisions = abjad.sequence.flatten(divisions, depth=-1)
-        >>> divisions
+        >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
+        >>> durations = baca.sequence.fuse(durations)
+        >>> abjad.sequence.flatten(durations, depth=-1)
         [Duration(15, 8)]
 
     ..  container:: example
@@ -838,30 +837,25 @@ def ratios(
 
         Splits sequence by exact ``2:1`` ratio:
 
-        >>> time_signatures = baca.durations([(5, 8), (6, 8)])
-        >>> divisions = time_signatures[:]
-        >>> divisions = baca.sequence.ratios(divisions, (2, 1))
-        >>> for item in divisions:
-        ...     item
+        >>> durations = baca.durations([(5, 8), (6, 8)])
+        >>> lists = baca.sequence.ratios(durations, (2, 1))
+        >>> for list_ in lists: list_
         [(5, 8), (7, 24)]
         [(11, 24)]
 
         Works with durations:
 
-        >>> divisions = [abjad.Duration(_) for _ in [(5, 8), (6, 8)]]
-        >>> divisions = baca.sequence.ratios(divisions, (2, 1))
-        >>> for item in divisions:
-        ...     item
+        >>> durations = [abjad.Duration(_) for _ in [(5, 8), (6, 8)]]
+        >>> lists = baca.sequence.ratios(durations, (2, 1))
+        >>> for list_ in lists: list_
         [(5, 8), (7, 24)]
         [(11, 24)]
 
-        Splits divisions by rounded ``2:1`` ratio:
+        Splits durations by rounded ``2:1`` ratio:
 
-        >>> time_signatures = baca.durations([(5, 8), (6, 8)])
-        >>> divisions = time_signatures[:]
-        >>> divisions = baca.sequence.ratios(divisions, (2, 1), rounded=True)
-        >>> for item in divisions:
-        ...     item
+        >>> durations = baca.durations([(5, 8), (6, 8)])
+        >>> lists = baca.sequence.ratios(durations, (2, 1), rounded=True)
+        >>> for list_ in lists: list_
         [(5, 8), (1, 4)]
         [(1, 2)]
 
@@ -869,58 +863,42 @@ def ratios(
 
         Splits each duration by exact ``2:1`` ratio:
 
-        >>> time_signatures = baca.durations([(5, 8), (6, 8)])
-        >>> divisions = [
-        ...     baca.sequence.ratios([_], (2, 1)) for _ in time_signatures
-        ... ]
-        >>> for item in divisions:
-        ...     item
+        >>> durations = baca.durations([(5, 8), (6, 8)])
+        >>> lists = [baca.sequence.ratios([_], (2, 1)) for _ in durations]
+        >>> for list_ in lists: list_
         [[(5, 12)], [(5, 24)]]
         [[(1, 2)], [(1, 4)]]
 
         Splits each duration by rounded ``2:1`` ratio:
 
-        >>> time_signatures = baca.durations([(5, 8), (6, 8)])
-        >>> divisions = [
+        >>> durations = baca.durations([(5, 8), (6, 8)])
+        >>> lists = [
         ...     baca.sequence.ratios([_], (2, 1), rounded=True)
-        ...     for _ in time_signatures
+        ...     for _ in durations
         ... ]
-        >>> for item in divisions:
-        ...     item
+        >>> for list_ in lists: list_
         [[(3, 8)], [(1, 4)]]
         [[(1, 2)], [(1, 4)]]
 
     ..  container:: example
 
-        Splits divisions with alternating exact ``2:1`` and ``1:1:1`` ratios:
+        Splits durations with alternating exact ``2:1`` and ``1:1:1`` ratios:
 
         >>> ratios = abjad.CyclicTuple([(2, 1), (1, 1, 1)])
-        >>> time_signatures = baca.durations([(5, 8), (6, 8)])
-        >>> divisions = []
-        >>> for i, time_signature in enumerate(time_signatures):
+        >>> durations = baca.durations([(5, 8), (6, 8)])
+        >>> for i, duration in enumerate(durations):
         ...     ratio = ratios[i]
-        ...     sequence = [time_signature]
-        ...     sequence = baca.sequence.ratios(sequence, ratio)
-        ...     divisions.append(sequence)
-        ...
-        >>> for item in divisions:
-        ...     item
+        ...     baca.sequence.ratios([duration], ratio)
         [[(5, 12)], [(5, 24)]]
         [[(1, 4)], [(1, 4)], [(1, 4)]]
 
-        Splits divisions with alternating rounded ``2:1`` and ``1:1:1`` ratios:
+        Splits durations with alternating rounded ``2:1`` and ``1:1:1`` ratios:
 
         >>> ratios = abjad.CyclicTuple([(2, 1), (1, 1, 1)])
-        >>> time_signatures = baca.durations([(5, 8), (6, 8)])
-        >>> divisions = []
-        >>> for i, time_signature in enumerate(time_signatures):
+        >>> durations = baca.durations([(5, 8), (6, 8)])
+        >>> for i, duration in enumerate(durations):
         ...     ratio = ratios[i]
-        ...     sequence = [time_signature]
-        ...     sequence = baca.sequence.ratios(sequence, ratio, rounded=True)
-        ...     divisions.append(sequence)
-        ...
-        >>> for item in divisions:
-        ...     item
+        ...     baca.sequence.ratios([duration], ratio, rounded=True)
         [[(3, 8)], [(1, 4)]]
         [[(1, 4)], [(1, 4)], [(1, 4)]]
 
@@ -935,20 +913,20 @@ def ratios(
     ratio_ = tuple(ratio)
     if rounded is True:
         numerators = abjad.math.partition_integer_by_ratio(numerator, ratio_)
-        divisions = [
+        durations = [
             abjad.Duration((numerator, denominator)) for numerator in numerators
         ]
     else:
-        divisions = []
+        durations = []
         ratio_weight = sum(ratio_)
         for number in ratio:
             multiplier = abjad.Fraction(number, ratio_weight)
             numerator_ = multiplier.numerator * pairs_weight[0]
             denominator_ = multiplier.denominator * pairs_weight[1]
             duration = abjad.Duration(numerator_, denominator_)
-            divisions.append(duration)
+            durations.append(duration)
     sequence = [abjad.Duration(_) for _ in sequence]
-    sequence = abjad.sequence.split(sequence, divisions)
+    sequence = abjad.sequence.split(sequence, durations)
     assert isinstance(sequence, list)
     assert isinstance(sequence[0], list)
     lists = [[_.pair for _ in list_] for list_ in sequence]
