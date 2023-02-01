@@ -396,8 +396,6 @@ def _is_treatment(argument):
         return True
     elif isinstance(argument, tuple) and len(argument) == 2:
         return True
-    elif isinstance(argument, abjad.Ratio):
-        return True
     elif isinstance(argument, abjad.Fraction):
         return True
     elif argument.__class__ is abjad.Duration:
@@ -707,9 +705,6 @@ def _make_figure_tuplet(
         )
     elif treatment in ("accel", "rit"):
         tuplet = _make_accelerando(leaf_selection, treatment)
-    elif isinstance(treatment, abjad.Ratio):
-        numerator, denominator = treatment.numbers
-        tuplet = abjad.Tuplet(f"{denominator}:{numerator}", leaf_selection)
     elif isinstance(treatment, str) and ":" in treatment:
         numerator_str, denominator_str = treatment.split(":")
         numerator, denominator = int(numerator_str), int(denominator_str)

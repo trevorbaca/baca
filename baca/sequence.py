@@ -932,9 +932,9 @@ def ratios(
         pairs_weight = abjad.duration.add_pairs(pairs_weight, pair)
     numerator, denominator = pairs_weight
     assert isinstance(ratio, tuple), repr(ratio)
-    ratio_ = abjad.Ratio(ratio)
+    ratio_ = tuple(ratio)
     if rounded is True:
-        numerators = ratio_.partition_integer(numerator)
+        numerators = abjad.math.partition_integer_by_ratio(numerator, ratio_)
         divisions = [
             abjad.Duration((numerator, denominator)) for numerator in numerators
         ]
