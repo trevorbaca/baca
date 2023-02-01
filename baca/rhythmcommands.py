@@ -13,7 +13,6 @@ from .enums import enums as _enums
 
 
 class TimeSignatureMaker:
-
     __slots__ = (
         "_count",
         "_fermata_measures",

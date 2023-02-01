@@ -807,7 +807,6 @@ def _trim_matching_chord(logical_tie, pitch_object):
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class LMR:
-
     left_counts: typing.Sequence[int] = ()
     left_cyclic: bool = False
     left_length: int = 0
@@ -941,7 +940,6 @@ class LMR:
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Acciaccatura:
-
     durations: typing.Sequence[abjad.Duration] = (abjad.Duration(1, 16),)
     lmr: LMR = LMR()
 
@@ -1011,13 +1009,11 @@ class Anchor:
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Coat:
-
     argument: int | str | abjad.Pitch | None = None
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Contribution:
-
     voice_name_to_selection: dict[str, list]
     anchor: Anchor | None = None
     figure_name: str | None = None
@@ -1045,7 +1041,6 @@ class Contribution:
 
 
 class Accumulator:
-
     __slots__ = (
         "current_offset",
         "figure_number",
@@ -1152,7 +1147,6 @@ class Accumulator:
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class FigureMaker:
-
     talea: rmakers.Talea
     acciaccatura: Acciaccatura | None = None
     affix: typing.Optional["RestAffix"] = None
@@ -1195,7 +1189,6 @@ class FigureMaker:
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Imbrication:
-
     voice_name: str
     segment: list[int]
     commands: tuple = ()
@@ -1227,7 +1220,6 @@ class Imbrication:
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Nest:
-
     treatments: typing.Sequence[int | str]
     lmr: LMR | None = None
 
@@ -1244,7 +1236,6 @@ class Nest:
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class RestAffix:
-
     pattern: abjad.Pattern | None = None
     prefix: typing.Sequence[int] = ()
     skips_instead_of_rests: bool = False
@@ -1277,7 +1268,6 @@ class RestAffix:
 
 
 class Stack:
-
     __slots__ = ("commands",)
 
     def __init__(self, *commands) -> None:

@@ -888,7 +888,6 @@ class Partial:
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class RegistrationComponent:
-
     source_pitch_range: abjad.PitchRange = abjad.PitchRange("[A0, C8]")
     target_octave_start_pitch: abjad.NumberedPitch = abjad.NumberedPitch(0)
 
@@ -903,7 +902,6 @@ class RegistrationComponent:
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Registration:
-
     components: typing.Sequence[RegistrationComponent] = ()
 
     def __post_init__(self):

@@ -1895,7 +1895,6 @@ class DynamicScope:
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Measures:
-
     time_signatures: list[abjad.TimeSignature]
 
     def __call__(self, start=None, stop=None):

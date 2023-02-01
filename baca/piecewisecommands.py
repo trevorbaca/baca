@@ -18,7 +18,6 @@ from .enums import enums as _enums
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class _Specifier:
-
     bookended_spanner_start: typing.Any = None
     indicator: typing.Any = None
     spanner_start: typing.Any = None

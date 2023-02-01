@@ -3,7 +3,6 @@ import types
 
 
 class enums(enum.Enum):
-
     ALREADY_PITCHED = enum.auto()
     ALLOW_OCTAVE = enum.auto()
     ALLOW_OUT_OF_RANGE = enum.auto()

@@ -529,7 +529,6 @@ class Timing:
 
 @dataclasses.dataclass(frozen=True, slots=True, order=True, unsafe_hash=True)
 class Environment:
-
     arguments: tuple[str, ...] = dataclasses.field(default_factory=tuple)
     first_measure_number: int = 1
     metadata: types.MappingProxyType = dataclasses.field(
