@@ -6,7 +6,8 @@ overrides.py examples.
     Overrides bar line transparency:
 
     >>> def make_rhythm(time_signatures):
-    ...     nested_music = rmakers.talea(time_signatures, [1, 1, 1, -1], 8)
+    ...     durations = [_.duration for _ in time_signatures]
+    ...     nested_music = rmakers.talea(durations, [1, 1, 1, -1], 8)
     ...     voice = rmakers.wrap_in_time_signature_staff(nested_music, time_signatures)
     ...     rmakers.beam(voice)
     ...     rmakers.extract_trivial(voice)
