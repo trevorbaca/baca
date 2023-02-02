@@ -363,7 +363,7 @@ def fuse(
 
         >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
         >>> durations = [
-        ...     baca.sequence.split_divisions([_], [(3, 8)], cyclic=True)
+        ...     baca.sequence.split([_], [(3, 8)], cyclic=True)
         ...     for _ in durations
         ... ]
         >>> durations = abjad.sequence.flatten(durations, depth=-1)
@@ -377,7 +377,7 @@ def fuse(
         >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
         >>> durations = baca.sequence.fuse(durations)
         >>> durations = [
-        ...     baca.sequence.split_divisions([_], [(1, 16)], cyclic=True)
+        ...     baca.sequence.split([_], [(1, 16)], cyclic=True)
         ...     for _ in durations
         ... ]
         >>> durations = abjad.sequence.flatten(durations, depth=-1)
@@ -818,7 +818,7 @@ def quarters(
     assert all(isinstance(_, prototype) for _ in sequence), repr(sequence)
     assert isinstance(compound, bool), repr(compound)
     assert remainder in (abjad.LEFT, abjad.RIGHT, None), repr(remainder)
-    lists = split_divisions(
+    lists = split(
         sequence, [(1, 4)], cyclic=True, compound=compound, remainder=remainder
     )
     return lists
@@ -1155,7 +1155,7 @@ def reveal(sequence, count=None):
     return type(sequence)(items_)
 
 
-def split_divisions(
+def split(
     sequence: typing.Sequence[tuple[int, int] | abjad.Duration],
     weights: list[tuple[int, int] | abjad.Duration],
     *,
@@ -1172,7 +1172,7 @@ def split_divisions(
         Splits every five sixteenths:
 
         >>> durations = baca.durations(10 * [(1, 8)])
-        >>> lists = baca.sequence.split_divisions(durations, [(5, 16)], cyclic=True)
+        >>> lists = baca.sequence.split(durations, [(5, 16)], cyclic=True)
         >>> for list_ in lists: list_
         [Duration(1, 8), Duration(1, 8), Duration(1, 16)]
         [Duration(1, 16), Duration(1, 8), Duration(1, 8)]
@@ -1185,7 +1185,7 @@ def split_divisions(
 
         >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
         >>> durations = baca.sequence.fuse(durations)
-        >>> lists = baca.sequence.split_divisions(durations, [(1, 4)], cyclic=True)
+        >>> lists = baca.sequence.split(durations, [(1, 4)], cyclic=True)
         >>> for list_ in lists: list_
         [Duration(1, 4)]
         [Duration(1, 4)]
@@ -1200,7 +1200,7 @@ def split_divisions(
 
         >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
         >>> durations = baca.sequence.fuse(durations)
-        >>> lists = baca.sequence.split_divisions(
+        >>> lists = baca.sequence.split(
         ...     durations,
         ...     [(1, 4)],
         ...     cyclic=True,
@@ -1221,7 +1221,7 @@ def split_divisions(
 
         >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
         >>> durations = baca.sequence.fuse(durations)
-        >>> lists = baca.sequence.split_divisions(
+        >>> lists = baca.sequence.split(
         ...     durations,
         ...     [(1, 4)],
         ...     cyclic=True,
@@ -1241,7 +1241,7 @@ def split_divisions(
 
         >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
         >>> durations = baca.sequence.fuse(durations)
-        >>> lists = baca.sequence.split_divisions(
+        >>> lists = baca.sequence.split(
         ...     durations,
         ...     [(1, 4)],
         ...     cyclic=True,
@@ -1266,7 +1266,7 @@ def split_divisions(
         >>> lists = []
         >>> for i, duration in enumerate(durations):
         ...     durations_ = abjad.sequence.rotate([(1, 16), (1, 8), (1, 4)], n=-i)
-        ...     list_ = baca.sequence.split_divisions([duration], durations_)
+        ...     list_ = baca.sequence.split([duration], durations_)
         ...     list_ = abjad.sequence.flatten(list_, depth=-1)
         ...     lists.append(list_)
         ...

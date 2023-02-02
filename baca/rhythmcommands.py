@@ -363,22 +363,22 @@ def make_repeat_tied_notes(
 
 def make_repeated_duration_notes(
     time_signatures,
-    durations,
+    weights,
     *,
     do_not_rewrite_meter=None,
 ):
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     tag = _tags.function_name(_frame())
-    if isinstance(durations, abjad.Duration):
-        durations = [durations]
-    elif isinstance(durations, tuple):
-        assert len(durations) == 2
-        durations = [abjad.Duration(durations)]
-    durations_ = [_.duration for _ in time_signatures]
-    durations_ = _sequence.fuse(durations_)
-    durations_ = _sequence.split_divisions(durations_, durations, cyclic=True)
-    durations_ = abjad.sequence.flatten(durations_, depth=-1)
-    nested_music = rmakers.note(durations_, tag=tag)
+    if isinstance(weights, abjad.Duration):
+        weights = [weights]
+    elif isinstance(weights, tuple):
+        assert len(weights) == 2
+        weights = [abjad.Duration(weights)]
+    durations = [_.duration for _ in time_signatures]
+    durations = _sequence.fuse(durations)
+    durations = _sequence.split(durations, weights, cyclic=True)
+    durations = abjad.sequence.flatten(durations, depth=-1)
+    nested_music = rmakers.note(durations, tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(nested_music, time_signatures)
     if not do_not_rewrite_meter:
         rmakers.rewrite_meter(voice, tag=tag)
@@ -461,19 +461,19 @@ def make_tied_notes(time_signatures):
     return music
 
 
-def make_tied_repeated_durations(time_signatures, durations):
+def make_tied_repeated_durations(time_signatures, weights):
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     tag = _tags.function_name(_frame())
-    durations_ = [_.duration for _ in time_signatures]
-    durations_ = _sequence.fuse(durations_)
-    durations_ = _sequence.split_divisions(durations_, durations, cyclic=True)
-    durations_ = abjad.sequence.flatten(durations_, depth=-1)
-    if isinstance(durations, abjad.Duration):
-        durations = [durations]
-    elif isinstance(durations, tuple):
-        assert len(durations) == 2
-        durations = [abjad.Duration(durations)]
-    nested_music = rmakers.note(durations_, tag=tag)
+    durations = [_.duration for _ in time_signatures]
+    durations = _sequence.fuse(durations)
+    durations = _sequence.split(durations, weights, cyclic=True)
+    durations = abjad.sequence.flatten(durations, depth=-1)
+    if isinstance(weights, abjad.Duration):
+        weights = [weights]
+    elif isinstance(weights, tuple):
+        assert len(weights) == 2
+        weights = [abjad.Duration(weights)]
+    nested_music = rmakers.note(durations, tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(nested_music, time_signatures)
     pheads = _select.pheads(voice)[1:]
     rmakers.repeat_tie(pheads, tag=tag)
