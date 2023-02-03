@@ -62,15 +62,15 @@ def _attach_indicators(
     leaf,
     i,
     manifests,
-    self_tag,
-    self_tweaks,
+    tag,
+    tweaks,
     total_pieces,
     *,
     autodetected_right_padding=None,
     just_bookended_leaf=None,
 ) -> list[abjad.Wrapper]:
     assert isinstance(manifests, dict), repr(manifests)
-    assert isinstance(self_tag, abjad.Tag), repr(self_tag)
+    assert isinstance(tag, abjad.Tag), repr(tag)
     wrappers = []
     for indicator in specifier:
         if (
@@ -87,11 +87,11 @@ def _attach_indicators(
             number = autodetected_right_padding
             tweak = abjad.Tweak(
                 rf"- \tweak bound-details.right.padding {number}",
-                tag=self_tag.append(_tags.AUTODETECT).append(_tags.SPANNER_START),
+                tag=tag.append(_tags.AUTODETECT).append(_tags.SPANNER_START),
             )
             indicator = abjad.bundle(indicator, tweak, overwrite=True)
-        if _is_maybe_bundled(indicator, abjad.StartTextSpan) and self_tweaks:
-            for item in self_tweaks:
+        if _is_maybe_bundled(indicator, abjad.StartTextSpan) and tweaks:
+            for item in tweaks:
                 if isinstance(item, abjad.Tweak):
                     new_tweak = item
                 else:
@@ -99,10 +99,10 @@ def _attach_indicators(
                     new_tweak = item[0]
                 assert isinstance(new_tweak, abjad.Tweak), repr(item)
             indicator = _tweaks.bundle_tweaks(
-                indicator, self_tweaks, i=i, total=total_pieces, overwrite=True
+                indicator, tweaks, i=i, total=total_pieces, overwrite=True
             )
         reapplied = _treat.remove_reapplied_wrappers(leaf, indicator)
-        tag_ = self_tag
+        tag_ = tag
         if getattr(indicator, "spanner_start", None) is True:
             tag_ = tag_.append(_tags.SPANNER_START)
         elif (
@@ -128,18 +128,18 @@ def _do_piecewise_command(
     argument,
     *,
     manifests=None,
-    self_autodetect_right_padding: bool = False,
-    self_bookend: bool | int = False,
-    self_final_piece_spanner=None,
-    self_leak_spanner_stop: bool = False,
-    self_left_broken: bool = False,
-    self_pieces: typing.Callable = lambda _: _select.leaves(_),
-    self_remove_length_1_spanner_start: bool = False,
-    self_right_broken: typing.Any | None = None,
-    self_specifiers: typing.Sequence = (),
-    self_tag,
+    autodetect_right_padding: bool = False,
+    bookend: bool | int = False,
+    final_piece_spanner=None,
+    leak_spanner_stop: bool = False,
+    left_broken: bool = False,
+    pieces_callable: typing.Callable = lambda _: _select.leaves(_),
+    remove_length_1_spanner_start: bool = False,
+    right_broken: typing.Any | None = None,
+    specifiers: typing.Sequence = (),
+    tag,
     the_pieces: list[list[abjad.Leaf]] | None = None,
-    self_tweaks: typing.Sequence[_typings.IndexedTweak] = (),
+    tweaks: typing.Sequence[_typings.IndexedTweak] = (),
 ) -> list[abjad.Wrapper]:
     """
     Attaches indicator to first leaf in each group of selector output when ``bookend``
@@ -152,26 +152,26 @@ def _do_piecewise_command(
     last leaf in group ``n`` of selector output and attaches indicator to only first leaf
     in other groups of selector output.
     """
-    assert self_tag is not None, repr(self_tag)
-    cyclic_specifiers = abjad.CyclicTuple(self_specifiers)
+    assert tag is not None, repr(tag)
+    cyclic_specifiers = abjad.CyclicTuple(specifiers)
     manifests = manifests or {}
     if the_pieces is not None:
         pieces = the_pieces
-    elif self_pieces is not None:
-        assert not isinstance(self_pieces, str)
-        pieces = self_pieces(argument)
+    elif pieces_callable is not None:
+        assert not isinstance(pieces_callable, str)
+        pieces = pieces_callable(argument)
     else:
         pieces = argument
     assert pieces is not None
     piece_count = len(pieces)
     assert 0 < piece_count, repr(piece_count)
-    if self_bookend in (False, None):
+    if bookend in (False, None):
         bookend_pattern = abjad.Pattern()
-    elif self_bookend is True:
+    elif bookend is True:
         bookend_pattern = abjad.index([0], 1)
     else:
-        assert isinstance(self_bookend, int), repr(self_bookend)
-        bookend_pattern = abjad.index([self_bookend], period=piece_count)
+        assert isinstance(bookend, int), repr(bookend)
+        bookend_pattern = abjad.index([bookend], period=piece_count)
     just_backstole_right_text = None
     just_bookended_leaf = None
     previous_had_bookend = None
@@ -183,17 +183,17 @@ def _do_piecewise_command(
         is_first_piece = i == 0
         is_penultimate_piece = i == piece_count - 2
         is_final_piece = i == piece_count - 1
-        if is_final_piece and self_right_broken:
-            specifier = _Specifier(spanner_start=self_right_broken)
-            tag = abjad.Tag("baca.PiecewiseCommand._call(1)")
-            tag = tag.append(_tags.RIGHT_BROKEN)
+        if is_final_piece and right_broken:
+            specifier = _Specifier(spanner_start=right_broken)
+            tag_ = abjad.Tag("baca.PiecewiseCommand._call(1)")
+            tag_ = tag_.append(_tags.RIGHT_BROKEN)
             wrappers_ = _attach_indicators(
                 specifier,
                 stop_leaf,
                 i,
                 manifests,
-                self_tag.append(tag),
-                self_tweaks,
+                tag.append(tag_),
+                tweaks,
                 total_pieces,
             )
             wrappers.extend(wrappers_)
@@ -201,12 +201,12 @@ def _do_piecewise_command(
             should_bookend = True
         else:
             should_bookend = False
-        if is_final_piece and self_final_piece_spanner is False:
+        if is_final_piece and final_piece_spanner is False:
             should_bookend = False
         specifier = cyclic_specifiers[i]
         if (
             is_final_piece
-            and self_right_broken
+            and right_broken
             and not _is_maybe_bundled(specifier.spanner_start, abjad.StartTextSpan)
         ):
             should_bookend = False
@@ -219,42 +219,38 @@ def _do_piecewise_command(
             )
         if (
             is_penultimate_piece
-            and (len(pieces[-1]) == 1 or self_final_piece_spanner is False)
+            and (len(pieces[-1]) == 1 or final_piece_spanner is False)
             and _is_maybe_bundled(next_bundle.spanner_start, abjad.StartTextSpan)
         ):
             specifier = dataclasses.replace(
                 specifier, spanner_start=specifier.bookended_spanner_start
             )
             just_backstole_right_text = True
-        if (
-            len(piece) == 1
-            and specifier.compound()
-            and self_remove_length_1_spanner_start
-        ):
+        if len(piece) == 1 and specifier.compound() and remove_length_1_spanner_start:
             specifier = dataclasses.replace(specifier, spanner_start=None)
         if is_final_piece and specifier.spanner_start:
             if _is_maybe_bundled(specifier.spanner_start, abjad.StartHairpin):
-                if self_final_piece_spanner:
+                if final_piece_spanner:
                     specifier = dataclasses.replace(
-                        specifier, spanner_start=self_final_piece_spanner
+                        specifier, spanner_start=final_piece_spanner
                     )
-                elif self_final_piece_spanner is False:
+                elif final_piece_spanner is False:
                     specifier = dataclasses.replace(specifier, spanner_start=None)
             elif _is_maybe_bundled(specifier.spanner_start, abjad.StartTextSpan):
-                if self_final_piece_spanner is False:
+                if final_piece_spanner is False:
                     specifier = dataclasses.replace(specifier, spanner_start=None)
-        tag = abjad.Tag("baca.PiecewiseCommand._call(2)")
+        tag_ = abjad.Tag("baca.PiecewiseCommand._call(2)")
         if is_first_piece or previous_had_bookend:
             specifier = dataclasses.replace(specifier, spanner_stop=None)
-            if self_left_broken:
-                tag = tag.append(_tags.LEFT_BROKEN)
-        if is_final_piece and self_right_broken:
-            tag = tag.append(_tags.RIGHT_BROKEN)
+            if left_broken:
+                tag_ = tag_.append(_tags.LEFT_BROKEN)
+        if is_final_piece and right_broken:
+            tag_ = tag_.append(_tags.RIGHT_BROKEN)
         autodetected_right_padding = None
         # solution is merely heuristic;
         # TextSpanner.bound-details.right.to-extent = ##t implementation
         # only 100% workable solution
-        if is_final_piece and self_autodetect_right_padding:
+        if is_final_piece and autodetect_right_padding:
             if (
                 abjad.get.annotation(stop_leaf, _enums.ANCHOR_NOTE) is True
                 or abjad.get.annotation(stop_leaf, _enums.ANCHOR_SKIP) is True
@@ -278,17 +274,17 @@ def _do_piecewise_command(
             start_leaf,
             i,
             manifests,
-            self_tag.append(tag),
-            self_tweaks,
+            tag.append(tag_),
+            tweaks,
             total_pieces,
             autodetected_right_padding=autodetected_right_padding,
             just_bookended_leaf=just_bookended_leaf,
         )
         wrappers.extend(wrappers_)
         if should_bookend:
-            tag = abjad.Tag("baca.PiecewiseCommand._call(3)")
-            if is_final_piece and self_right_broken:
-                tag = tag.append(_tags.RIGHT_BROKEN)
+            tag_ = abjad.Tag("baca.PiecewiseCommand._call(3)")
+            if is_final_piece and right_broken:
+                tag_ = tag_.append(_tags.RIGHT_BROKEN)
             if specifier.bookended_spanner_start is not None:
                 next_bundle = dataclasses.replace(next_bundle, spanner_start=None)
             if next_bundle.compound():
@@ -298,8 +294,8 @@ def _do_piecewise_command(
                 stop_leaf,
                 i,
                 manifests,
-                self_tag.append(tag),
-                self_tweaks,
+                tag.append(tag_),
+                tweaks,
                 total_pieces,
             )
             wrappers.extend(wrappers_)
@@ -308,22 +304,22 @@ def _do_piecewise_command(
             is_final_piece
             and not just_backstole_right_text
             and next_bundle.spanner_stop
-            and ((start_leaf is not stop_leaf) or self_leak_spanner_stop)
+            and ((start_leaf is not stop_leaf) or leak_spanner_stop)
         ):
             spanner_stop = dataclasses.replace(next_bundle.spanner_stop)
-            if self_leak_spanner_stop:
+            if leak_spanner_stop:
                 spanner_stop = dataclasses.replace(spanner_stop, leak=True)
             specifier = _Specifier(spanner_stop=spanner_stop)
-            tag = abjad.Tag("baca.PiecewiseCommand._call(4)")
-            if self_right_broken:
-                tag = tag.append(_tags.RIGHT_BROKEN)
+            tag_ = abjad.Tag("baca.PiecewiseCommand._call(4)")
+            if right_broken:
+                tag_ = tag_.append(_tags.RIGHT_BROKEN)
             wrappers_ = _attach_indicators(
                 specifier,
                 stop_leaf,
                 i,
                 manifests,
-                self_tag.append(tag),
-                self_tweaks,
+                tag.append(tag_),
+                tweaks,
                 total_pieces,
             )
             wrappers.extend(wrappers_)
@@ -735,18 +731,15 @@ def hairpin(
     return _do_piecewise_command(
         argument,
         manifests={},
-        # self_autodetect_right_padding,
-        self_bookend=bookend,
-        self_final_piece_spanner=final_hairpin_,
-        # self_leak_spanner_stop,
-        self_left_broken=left_broken,
-        self_pieces=pieces,
-        self_remove_length_1_spanner_start=remove_length_1_spanner_start,
-        self_right_broken=right_broken_,
-        self_specifiers=specifiers,
-        self_tag=_tags.function_name(_frame()),
+        bookend=bookend,
+        final_piece_spanner=final_hairpin_,
+        left_broken=left_broken,
+        pieces_callable=pieces,
+        remove_length_1_spanner_start=remove_length_1_spanner_start,
+        right_broken=right_broken_,
+        specifiers=specifiers,
+        tag=_tags.function_name(_frame()),
         the_pieces=the_pieces,
-        # self_tweaks,
     )
 
 
@@ -1167,17 +1160,17 @@ def text_spanner(
     return _do_piecewise_command(
         argument,
         manifests={},
-        self_autodetect_right_padding=autodetect_right_padding,
-        self_bookend=bookend,
-        self_final_piece_spanner=final_piece_spanner,
-        self_leak_spanner_stop=leak_spanner_stop,
-        self_left_broken=left_broken,
-        self_pieces=pieces,
-        self_right_broken=right_broken,
-        self_specifiers=specifiers,
-        self_tag=_tags.function_name(_frame()),
+        autodetect_right_padding=autodetect_right_padding,
+        bookend=bookend,
+        final_piece_spanner=final_piece_spanner,
+        leak_spanner_stop=leak_spanner_stop,
+        left_broken=left_broken,
+        pieces_callable=pieces,
+        right_broken=right_broken,
+        specifiers=specifiers,
+        tag=_tags.function_name(_frame()),
         the_pieces=the_pieces,
-        self_tweaks=tweaks,
+        tweaks=tweaks,
     )
 
 
