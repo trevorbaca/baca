@@ -375,7 +375,7 @@ def make_repeated_duration_notes(
         assert len(weights) == 2
         weights = [abjad.Duration(weights)]
     durations = [_.duration for _ in time_signatures]
-    durations = _sequence.fuse(durations)
+    durations = [sum(durations)]
     durations = _sequence.split(durations, weights, cyclic=True)
     durations = abjad.sequence.flatten(durations, depth=-1)
     nested_music = rmakers.note(durations, tag=tag)
@@ -465,7 +465,7 @@ def make_tied_repeated_durations(time_signatures, weights):
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     tag = _tags.function_name(_frame())
     durations = [_.duration for _ in time_signatures]
-    durations = _sequence.fuse(durations)
+    durations = [sum(durations)]
     durations = _sequence.split(durations, weights, cyclic=True)
     durations = abjad.sequence.flatten(durations, depth=-1)
     if isinstance(weights, abjad.Duration):

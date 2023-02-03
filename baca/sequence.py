@@ -319,82 +319,6 @@ def degree_of_rotational_symmetry(sequence):
     return degree_of_rotational_symmetry
 
 
-# TODO: remove
-def fuse(
-    sequence,
-    *,
-    cyclic: bool = False,
-    indices: typing.Sequence[int] | None = None,
-):
-    r"""
-    Fuses ``sequence``.
-
-    ..  container:: example
-
-        Fuses everything:
-
-        >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
-        >>> baca.sequence.fuse(durations)
-        [Duration(15, 8)]
-
-        >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
-        >>> baca.sequence.fuse(durations) == [sum(durations)]
-        True
-
-        Splits into sixteenths; partitions; then fuses every other part:
-
-        >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
-        >>> durations = baca.sequence.fuse(durations)
-        >>> lists = [
-        ...     baca.sequence.split([_], [(1, 16)], cyclic=True)
-        ...     for _ in durations
-        ... ]
-        >>> durations = abjad.sequence.flatten(lists, depth=-1)
-        >>> ratio = (1, 1, 1, 1, 1, 1)
-        >>> lists = abjad.sequence.partition_by_ratio_of_lengths(durations, ratio)
-        >>> durations = baca.sequence.fuse(lists, indices=[1, 3, 5])
-        >>> durations = abjad.sequence.flatten(durations, depth=-1)
-        >>> for duration in durations: duration
-        Duration(1, 16)
-        Duration(1, 16)
-        Duration(1, 16)
-        Duration(1, 16)
-        Duration(1, 16)
-        Duration(5, 16)
-        Duration(1, 16)
-        Duration(1, 16)
-        Duration(1, 16)
-        Duration(1, 16)
-        Duration(1, 16)
-        Duration(5, 16)
-        Duration(1, 16)
-        Duration(1, 16)
-        Duration(1, 16)
-        Duration(1, 16)
-        Duration(1, 16)
-        Duration(5, 16)
-
-    """
-    if indices is not None:
-        assert all(isinstance(_, int) for _ in indices), repr(indices)
-    if not indices:
-        sequence_ = abjad.sequence.partition_by_counts(
-            sequence, [], cyclic=cyclic, overhang=True
-        )
-    else:
-        sequence_ = sequence
-    items_ = []
-    for i, item in enumerate(sequence_):
-        if indices and i not in indices:
-            item_ = item
-        else:
-            item_ = sum(item)
-        items_.append(item_)
-    sequence_ = items_
-    sequence_ = abjad.sequence.flatten(sequence_, depth=-1)
-    return sequence_
-
-
 def group_by_sign(sequence, sign=(-1, 0, 1)):
     r"""
     Groups sequence by sign of items.
@@ -1150,7 +1074,7 @@ def split(
         Fuses durations and then splits by ``1/4`` with remainder on right:
 
         >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
-        >>> durations = baca.sequence.fuse(durations)
+        >>> durations = [sum(durations)]
         >>> lists = baca.sequence.split(durations, [(1, 4)], cyclic=True)
         >>> for list_ in lists: list_
         [Duration(1, 4)]
@@ -1165,7 +1089,7 @@ def split(
         Fuses remainder:
 
         >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
-        >>> durations = baca.sequence.fuse(durations)
+        >>> durations = [sum(durations)]
         >>> lists = baca.sequence.split(
         ...     durations,
         ...     [(1, 4)],
@@ -1186,7 +1110,7 @@ def split(
         Fuses durations and then splits by ``1/4`` with remainder on left:
 
         >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
-        >>> durations = baca.sequence.fuse(durations)
+        >>> durations = [sum(durations)]
         >>> lists = baca.sequence.split(
         ...     durations,
         ...     [(1, 4)],
@@ -1206,7 +1130,7 @@ def split(
         Fuses remainder:
 
         >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
-        >>> durations = baca.sequence.fuse(durations)
+        >>> durations = [sum(durations)]
         >>> lists = baca.sequence.split(
         ...     durations,
         ...     [(1, 4)],
@@ -1272,7 +1196,7 @@ def split(
             elif sum(remaining_item) <= remainder_fuse_threshold:
                 fused_value = [remaining_item, items[0]]
                 fused_value_ = abjad.sequence.flatten(fused_value, depth=-1)
-                fused_value = fuse(fused_value_)
+                fused_value = [sum(fused_value_)]
                 items[0] = fused_value
             else:
                 items.insert(0, remaining_item)
@@ -1282,7 +1206,7 @@ def split(
             elif sum(remaining_item) <= remainder_fuse_threshold:
                 fused_value = [items[-1], remaining_item]
                 fused_value_ = abjad.sequence.flatten(fused_value, depth=-1)
-                fused_value = fuse(fused_value_)
+                fused_value = [sum(fused_value_)]
                 items[-1] = fused_value
             else:
                 items.append(remaining_item)
