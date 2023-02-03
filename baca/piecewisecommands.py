@@ -68,10 +68,9 @@ def _attach_indicators(
     *,
     autodetected_right_padding=None,
     just_bookended_leaf=None,
-    tag=None,
 ) -> list[abjad.Wrapper]:
     assert isinstance(manifests, dict), repr(manifests)
-    assert isinstance(tag, abjad.Tag), repr(tag)
+    assert isinstance(self_tag, abjad.Tag), repr(self_tag)
     wrappers = []
     for indicator in specifier:
         if (
@@ -88,9 +87,7 @@ def _attach_indicators(
             number = autodetected_right_padding
             tweak = abjad.Tweak(
                 rf"- \tweak bound-details.right.padding {number}",
-                tag=self_tag.append(tag)
-                .append(_tags.AUTODETECT)
-                .append(_tags.SPANNER_START),
+                tag=self_tag.append(_tags.AUTODETECT).append(_tags.SPANNER_START),
             )
             indicator = abjad.bundle(indicator, tweak, overwrite=True)
         if _is_maybe_bundled(indicator, abjad.StartTextSpan) and self_tweaks:
@@ -105,7 +102,7 @@ def _attach_indicators(
                 indicator, self_tweaks, i=i, total=total_pieces, overwrite=True
             )
         reapplied = _treat.remove_reapplied_wrappers(leaf, indicator)
-        tag_ = self_tag.append(tag)
+        tag_ = self_tag
         if getattr(indicator, "spanner_start", None) is True:
             tag_ = tag_.append(_tags.SPANNER_START)
         elif (
@@ -155,6 +152,7 @@ def _do_piecewise_command(
     last leaf in group ``n`` of selector output and attaches indicator to only first leaf
     in other groups of selector output.
     """
+    assert self_tag is not None, repr(self_tag)
     cyclic_specifiers = abjad.CyclicTuple(self_specifiers)
     manifests = manifests or {}
     if the_pieces is not None:
@@ -194,10 +192,9 @@ def _do_piecewise_command(
                 stop_leaf,
                 i,
                 manifests,
-                self_tag,
+                self_tag.append(tag),
                 self_tweaks,
                 total_pieces,
-                tag=tag,
             )
             wrappers.extend(wrappers_)
         if bookend_pattern.matches_index(i, piece_count) and 1 < len(piece):
@@ -281,12 +278,11 @@ def _do_piecewise_command(
             start_leaf,
             i,
             manifests,
-            self_tag,
+            self_tag.append(tag),
             self_tweaks,
             total_pieces,
             autodetected_right_padding=autodetected_right_padding,
             just_bookended_leaf=just_bookended_leaf,
-            tag=tag,
         )
         wrappers.extend(wrappers_)
         if should_bookend:
@@ -302,10 +298,9 @@ def _do_piecewise_command(
                 stop_leaf,
                 i,
                 manifests,
-                self_tag,
+                self_tag.append(tag),
                 self_tweaks,
                 total_pieces,
-                tag=tag,
             )
             wrappers.extend(wrappers_)
             just_bookended_leaf = stop_leaf
@@ -327,10 +322,9 @@ def _do_piecewise_command(
                 stop_leaf,
                 i,
                 manifests,
-                self_tag,
+                self_tag.append(tag),
                 self_tweaks,
                 total_pieces,
-                tag=tag,
             )
             wrappers.extend(wrappers_)
         previous_had_bookend = should_bookend
