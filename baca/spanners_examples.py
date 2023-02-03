@@ -6,10 +6,10 @@ spanners.py examples
     Beams everything and sets beam direction down:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> measures = baca.section.measures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, measures(), docs=True)
+    >>> signatures = baca.section.signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> baca.section.set_up_score(score, signatures(), docs=True)
     >>> baca.SpacingSpecifier(fallback_duration=(1, 12))(score)
-    >>> music = baca.make_even_divisions(measures())
+    >>> music = baca.make_even_divisions(signatures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitch(voice, "C4")

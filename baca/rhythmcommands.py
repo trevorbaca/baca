@@ -216,8 +216,8 @@ def make_monads(fractions):
     ..  container:: example
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(4, 4)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(4, 4)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 12))(score)
         >>> music = baca.make_monads("2/5 2/5 1/5")
         >>> score["Music"].extend(music)
@@ -305,10 +305,10 @@ def make_repeat_tied_notes(
         gold), even tied notes resulting from meter rewriting:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(10, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(10, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 12))(score)
-        >>> music = baca.make_repeat_tied_notes(measures())
+        >>> music = baca.make_repeat_tied_notes(signatures())
         >>> score["Music"].extend(music)
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])

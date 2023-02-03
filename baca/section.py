@@ -1894,7 +1894,7 @@ class DynamicScope:
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class Measures:
+class TimeSignatureServer:
     time_signatures: list[abjad.TimeSignature]
 
     def __call__(self, start=None, stop=None):
@@ -2451,9 +2451,9 @@ def make_layout_ly(
             )
 
 
-def measures(items):
+def signatures(items):
     time_signatures = [abjad.TimeSignature(_) for _ in items]
-    return Measures(time_signatures)
+    return TimeSignatureServer(time_signatures)
 
 
 @_build.timed("postprocess_score")

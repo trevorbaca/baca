@@ -18,12 +18,12 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_mmrests(measures(), head="Music")
+        >>> music = baca.make_mmrests(signatures(), head="Music")
         >>> voice.extend(music)
         >>> _ = baca.clef(abjad.select.leaf(voice, 0), "treble")
         >>> _ = baca.section.remove_redundant_time_signatures(score)
@@ -107,12 +107,12 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_mmrests(measures(), head="Music")
+        >>> music = baca.make_mmrests(signatures(), head="Music")
         >>> voice.extend(music)
         >>> previous_metadata = make_previous_metadata()
         >>> baca.section.reapply(voice, previous_metadata["persistent_indicators"])
@@ -187,12 +187,12 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_mmrests(measures(), head="Music")
+        >>> music = baca.make_mmrests(signatures(), head="Music")
         >>> voice.extend(music)
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Staff"] = [
@@ -274,12 +274,12 @@ r"""
         ...         baca.system(measure=3, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> measures = baca.section.measures([(3, 8), (3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_mmrests(measures(), head="Music")
+        >>> music = baca.make_mmrests(signatures(), head="Music")
         >>> voice.extend(music)
         >>> _ = baca.clef(abjad.select.leaf(voice, 0), "treble")
         >>> _ = baca.clef(abjad.select.leaf(voice, 2), "treble")
@@ -373,12 +373,12 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_mmrests(measures(), head="Music")
+        >>> music = baca.make_mmrests(signatures(), head="Music")
         >>> voice.extend(music)
         >>> previous_metadata = make_previous_metadata()
         >>> baca.section.reapply(voice, previous_metadata["persistent_indicators"])
@@ -451,11 +451,11 @@ r"""
         Explicit dynamics color blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier(fallback_duration=(1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
         >>> _ = baca.section.remove_redundant_time_signatures(score)
@@ -498,11 +498,11 @@ r"""
         Even after a previous dynamic:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "p")
         >>> previous_persistent_indicators = {}
@@ -556,11 +556,11 @@ r"""
         Reapplied dynamics color green:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Music"] = [
@@ -613,11 +613,11 @@ r"""
         Redundant dynamics color pink:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), "f")
@@ -663,11 +663,11 @@ r"""
         Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Music"] = [
@@ -719,11 +719,11 @@ r"""
         Sforzando dynamics do not count as redundant:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "sfz")
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), "sfz")
@@ -769,11 +769,11 @@ r"""
         Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "sfz")
         >>> previous_persistent_indicators = {}
@@ -827,11 +827,11 @@ r"""
         REGRESSION. Conventional and effort dynamics analyze nonredundantly:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "mf")
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), '"mf"')
@@ -899,12 +899,12 @@ r"""
         Explicit instruments color blue and redraw dull blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> _ = baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
         >>> _ = baca.section.remove_redundant_time_signatures(score)
@@ -1036,12 +1036,12 @@ r"""
         Even after a previous instrument:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Staff"] = [
@@ -1187,12 +1187,12 @@ r"""
         Reapplied instruments color green and redraw dull green:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Staff"] = [
@@ -1345,12 +1345,12 @@ r"""
         ...         baca.system(measure=3, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> measures = baca.section.measures([(4, 8), (4, 8), (4, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(4, 8), (4, 8), (4, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> manifests = {"abjad.Instrument": instruments}
         >>> _ = baca.instrument(voice[0], "Flute", manifests)
@@ -1505,12 +1505,12 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Staff"] = [
@@ -1677,12 +1677,12 @@ r"""
         Explicit short instrument names color blue and redraw dull blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> _ = baca.short_instrument_name(voice[0], "I+II", manifests)
         >>> _ = baca.section.remove_redundant_time_signatures(score)
@@ -1822,12 +1822,12 @@ r"""
         Even after previous short instrument name:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Staff"] = [
@@ -1982,12 +1982,12 @@ r"""
         Reapplied short instrument names color green and redraw dull green:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Staff"] = [
@@ -2148,12 +2148,12 @@ r"""
         ...         baca.system(measure=3, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> measures = baca.section.measures([(4, 8), (4, 8), (4, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(4, 8), (4, 8), (4, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> manifests = {"abjad.ShortInstrumentName": short_instrument_names}
         >>> _ = baca.short_instrument_name(voice[0], "I+II", manifests)
@@ -2326,12 +2326,12 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Staff"] = [
@@ -2493,12 +2493,12 @@ r"""
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> measures = baca.section.measures([(4, 8), (4, 8), (4, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(4, 8), (4, 8), (4, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> _ = baca.short_instrument_name(voice[0], "I+II", manifests)
         >>> wrappers = baca.short_instrument_name(voice[0], "III+IV", manifests)
@@ -2578,10 +2578,10 @@ r"""
         Explicit metronome marks color blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(
         ...     score,
-        ...     measures(),
+        ...     signatures(),
         ...     append_anchor_skip=True,
         ...     docs=True,
         ... )
@@ -2592,7 +2592,7 @@ r"""
         ...     metronome_marks["112"],
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> baca.section.append_anchor_note(voice)
         >>> _ = baca.section.remove_redundant_time_signatures(score)
@@ -2657,10 +2657,10 @@ r"""
         Even after a previous metronome mark:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(
         ...     score,
-        ...     measures(),
+        ...     signatures(),
         ...     append_anchor_skip=True,
         ...     docs=True,
         ... )
@@ -2672,7 +2672,7 @@ r"""
         ... )
         >>> _ = baca.text_spanner_staff_padding(score["Skips"][:-1], 4)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> baca.section.append_anchor_note(voice)
         >>> previous_persistent_indicators = {}
@@ -2762,10 +2762,10 @@ r"""
         ...     )
         ... ]
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(
         ...     score,
-        ...     measures(),
+        ...     signatures(),
         ...     docs=True,
         ...     manifests={"abjad.MetronomeMark": metronome_marks},
         ...     previous_persistent_indicators=previous_persistent_indicators,
@@ -2773,7 +2773,7 @@ r"""
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> _ = baca.text_spanner_staff_padding(score["Skips"], 4)
         >>> _ = baca.section.remove_redundant_time_signatures(score)
@@ -2829,10 +2829,10 @@ r"""
         Redundant metronome marks color pink:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(
         ...     score,
-        ...     measures(),
+        ...     signatures(),
         ...     append_anchor_skip=True,
         ...     docs=True,
         ... )
@@ -2847,7 +2847,7 @@ r"""
         ...     metronome_marks["112"],
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> baca.section.append_anchor_note(voice)
         >>> _ = baca.section.remove_redundant_time_signatures(score)
@@ -2924,10 +2924,10 @@ r"""
         ...     )
         ... ]
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(
         ...     score,
-        ...     measures(),
+        ...     signatures(),
         ...     append_anchor_skip=True,
         ...     docs=True,
         ...     manifests={"abjad.MetronomeMark": metronome_marks},
@@ -2941,7 +2941,7 @@ r"""
         ... )
         >>> _ = baca.text_spanner_staff_padding(score["Skips"][:-1], 4)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> baca.section.append_anchor_note(voice)
         >>> baca.section.reapply(voice, previous_persistent_indicators)
@@ -3015,8 +3015,8 @@ r"""
         Explicit persistent overrides work but do not color:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> override = baca.PersistentOverride(
         ...     attribute="bar_extent",
@@ -3026,7 +3026,7 @@ r"""
         ... )
         >>> tag = abjad.Tag("baca.bar_extent_persistent")
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> wrapper = abjad.attach(override, voice[0], wrapper=True)
         >>> wrapper.tag = tag
@@ -3078,11 +3078,11 @@ r"""
         Reapplied persistent overrides work but do not color:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Music"] = [
@@ -3142,11 +3142,11 @@ r"""
         Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> override = baca.PersistentOverride(
         ...     attribute="bar_extent",
@@ -3220,11 +3220,11 @@ r"""
         Explicit staff lines color blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> _ = baca.staff_lines(voice[0], 5)
         >>> _ = baca.section.remove_redundant_time_signatures(score)
@@ -3270,11 +3270,11 @@ r"""
         Even after previous staff lines:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> _ = baca.staff_lines(voice[0], 1)
         >>> previous_persistent_indicators = {}
@@ -3331,11 +3331,11 @@ r"""
         Reapplied staff lines color green:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Staff"] = [
@@ -3394,11 +3394,11 @@ r"""
         Redundant staff lines color pink:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> _ = baca.staff_lines(voice[0], 5)
         >>> _ = baca.staff_lines(voice[1], 5)
@@ -3450,11 +3450,11 @@ r"""
         Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Staff"] = [
@@ -3527,10 +3527,10 @@ r"""
         Explicit tempo trends color blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(
         ...     score,
-        ...     measures(),
+        ...     signatures(),
         ...     append_anchor_skip=True,
         ...     docs=True,
         ... )
@@ -3541,7 +3541,7 @@ r"""
         ...     baca.Accelerando(),
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> baca.section.append_anchor_note(voice)
         >>> _ = baca.section.remove_redundant_time_signatures(score)
@@ -3606,8 +3606,8 @@ r"""
         Even after a previous tempo trend:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> _ = baca.metronome_mark(
@@ -3616,7 +3616,7 @@ r"""
         ... )
         >>> _ = baca.text_spanner_staff_padding(score["Skips"], 4)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Score"] = [
@@ -3687,17 +3687,17 @@ r"""
         ...     )
         ... ]
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(
         ...     score,
-        ...     measures(),
+        ...     signatures(),
         ...     docs=True,
         ...     previous_persistent_indicators=previous_persistent_indicators,
         ... )
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> baca.section.reapply(
         ...     voice,
@@ -3758,8 +3758,8 @@ r"""
         Redundant tempo trends color pink:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, measures(), docs=True)
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8), (3, 8)])
+        >>> baca.section.set_up_score(score, signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
         >>> _ = baca.metronome_mark(
@@ -3771,7 +3771,7 @@ r"""
         ...     baca.Accelerando(),
         ... )
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> _ = baca.section.remove_redundant_time_signatures(score)
         >>> baca.section.treat_untreated_persistent_wrappers(score)
@@ -3838,10 +3838,10 @@ r"""
         ...     )
         ... ]
         >>> score = baca.docs.make_empty_score(1)
-        >>> measures = baca.section.measures([(3, 8), (3, 8)])
+        >>> signatures = baca.section.signatures([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(
         ...     score,
-        ...     measures(),
+        ...     signatures(),
         ...     docs=True,
         ...     previous_persistent_indicators=previous_persistent_indicators,
         ... )
@@ -3853,7 +3853,7 @@ r"""
         ... )
         >>> _ = baca.text_spanner_staff_padding(score["Skips"], 4)
         >>> voice = score["Music"]
-        >>> music = baca.make_notes(measures())
+        >>> music = baca.make_notes(signatures())
         >>> voice.extend(music)
         >>> baca.section.reapply(
         ...     voice,
