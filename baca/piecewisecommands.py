@@ -1154,6 +1154,7 @@ def text_spanner(
     lilypond_id: int | str | None = None,
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     right_broken: bool = False,
+    the_pieces: list[list[abjad.Leaf]] | None = None,
 ) -> list[abjad.Wrapper]:
     specifiers = _prepare_text_spanner_arguments(
         items,
@@ -1181,6 +1182,7 @@ def text_spanner(
         self_right_broken=right_broken,
         self_specifiers=specifiers,
         self_tag=_tags.function_name(_frame()),
+        the_pieces=the_pieces,
         self_tweaks=tweaks,
     )
 
