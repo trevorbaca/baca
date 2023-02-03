@@ -591,31 +591,6 @@ def period_of_rotation(sequence):
     return len(sequence) // degree_of_rotational_symmetry(sequence)
 
 
-def partition(sequence, counts=None):
-    r"""
-    Partitions sequence cyclically by ``counts`` with overhang.
-
-    ..  container:: example
-
-        >>> sequence = list(range(16))
-        >>> parts = baca.sequence.partition(sequence, [3])
-
-        >>> for part in parts:
-        ...     part
-        [0, 1, 2]
-        [3, 4, 5]
-        [6, 7, 8]
-        [9, 10, 11]
-        [12, 13, 14]
-        [15]
-
-    Returns new sequence.
-    """
-    return abjad.sequence.partition_by_counts(
-        sequence, counts=counts, cyclic=True, overhang=True
-    )
-
-
 def quarters(
     sequence: typing.Sequence[tuple[int, int] | abjad.Duration],
     *,
