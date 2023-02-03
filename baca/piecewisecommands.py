@@ -141,6 +141,7 @@ def _do_piecewise_command(
     self_right_broken: typing.Any | None = None,
     self_specifiers: typing.Sequence = (),
     self_tag,
+    the_pieces: list[list[abjad.Leaf]] | None = None,
     self_tweaks: typing.Sequence[_typings.IndexedTweak] = (),
 ) -> list[abjad.Wrapper]:
     """
@@ -156,7 +157,9 @@ def _do_piecewise_command(
     """
     cyclic_specifiers = abjad.CyclicTuple(self_specifiers)
     manifests = manifests or {}
-    if self_pieces is not None:
+    if the_pieces is not None:
+        pieces = the_pieces
+    elif self_pieces is not None:
         assert not isinstance(self_pieces, str)
         pieces = self_pieces(argument)
     else:
@@ -719,6 +722,7 @@ def hairpin(
     pieces: typing.Callable = lambda _: abjad.select.group(_),
     remove_length_1_spanner_start: bool = False,
     right_broken: bool = False,
+    the_pieces: list[list[abjad.Leaf]] | None = None,
 ) -> list[abjad.Wrapper]:
     final_hairpin_, specifiers = _prepare_hairpin_arguments(
         dynamics=dynamics,
@@ -747,6 +751,7 @@ def hairpin(
         self_right_broken=right_broken_,
         self_specifiers=specifiers,
         self_tag=_tags.function_name(_frame()),
+        the_pieces=the_pieces,
         # self_tweaks,
     )
 
