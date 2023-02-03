@@ -319,71 +319,40 @@ def degree_of_rotational_symmetry(sequence):
     return degree_of_rotational_symmetry
 
 
-# TODO: remove ``counts`` in favor of partition-then-``indices`` recipe
-# TODO: generalize ``indices`` to pattern
+# TODO: remove
 def fuse(
     sequence,
-    counts: list[int] | None = None,
     *,
     cyclic: bool = False,
     indices: typing.Sequence[int] | None = None,
 ):
     r"""
-    Fuses sequence by ``counts``.
+    Fuses ``sequence``.
 
     ..  container:: example
 
-        Fuses durations:
+        Fuses everything:
 
         >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
-        >>> durations = baca.sequence.fuse(durations)
-        >>> abjad.sequence.flatten(durations, depth=-1)
+        >>> baca.sequence.fuse(durations)
         [Duration(15, 8)]
 
-    ..  container:: example
-
-        Fuses first two items and then remaining items:
-
-        >>> durations = baca.durations([(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)])
-        >>> baca.sequence.fuse(durations, [2])
-        [Duration(1, 2), Duration(3, 2)]
-
-    ..  container:: example
-
-        Fuses items two at a time:
-
-        >>> durations = baca.durations([(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)])
-        >>> baca.sequence.fuse(durations, [2], cyclic=True)
-        [Duration(1, 2), Duration(1, 1), Duration(1, 2)]
-
-    ..  container:: example
-
-        Splits each item by ``3/8``;  then flattens; then fuses into differently sized
-        groups:
-
         >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
-        >>> durations = [
-        ...     baca.sequence.split([_], [(3, 8)], cyclic=True)
-        ...     for _ in durations
-        ... ]
-        >>> durations = abjad.sequence.flatten(durations, depth=-1)
-        >>> baca.sequence.fuse(durations, [2, 3, 1])
-        [Duration(3, 4), Duration(7, 8), Duration(1, 4)]
-
-    ..  container:: example
+        >>> baca.sequence.fuse(durations) == [sum(durations)]
+        True
 
         Splits into sixteenths; partitions; then fuses every other part:
 
         >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
         >>> durations = baca.sequence.fuse(durations)
-        >>> durations = [
+        >>> lists = [
         ...     baca.sequence.split([_], [(1, 16)], cyclic=True)
         ...     for _ in durations
         ... ]
-        >>> durations = abjad.sequence.flatten(durations, depth=-1)
-        >>> durations = abjad.sequence.partition_by_ratio_of_lengths(
-        ...     durations, (1, 1, 1, 1, 1, 1))
-        >>> durations = baca.sequence.fuse(durations, indices=[1, 3, 5])
+        >>> durations = abjad.sequence.flatten(lists, depth=-1)
+        >>> ratio = (1, 1, 1, 1, 1, 1)
+        >>> lists = abjad.sequence.partition_by_ratio_of_lengths(durations, ratio)
+        >>> durations = baca.sequence.fuse(lists, indices=[1, 3, 5])
         >>> durations = abjad.sequence.flatten(durations, depth=-1)
         >>> for duration in durations: duration
         Duration(1, 16)
@@ -408,12 +377,9 @@ def fuse(
     """
     if indices is not None:
         assert all(isinstance(_, int) for _ in indices), repr(indices)
-    if indices and counts:
-        raise Exception("do not set indices and counts together.")
     if not indices:
-        counts = counts or []
         sequence_ = abjad.sequence.partition_by_counts(
-            sequence, counts, cyclic=cyclic, overhang=True
+            sequence, [], cyclic=cyclic, overhang=True
         )
     else:
         sequence_ = sequence
