@@ -982,29 +982,23 @@ def split(
         [abjad.Duration(_) for _ in sequence], weights, cyclic=cyclic, overhang=False
     )
     if sequence_ != without_overhang:
-        items = list(sequence_)
-        remaining_item = items.pop()
+        final_list = sequence_.pop()
         if remainder == abjad.LEFT:
-            if remainder_fuse_threshold is None:
-                items.insert(0, remaining_item)
-            elif sum(remaining_item) <= remainder_fuse_threshold:
-                fused_value = [remaining_item, items[0]]
-                fused_value_ = abjad.sequence.flatten(fused_value, depth=-1)
-                fused_value = [sum(fused_value_)]
-                items[0] = fused_value
+            if (
+                remainder_fuse_threshold is None
+                or sum(final_list) > remainder_fuse_threshold
+            ):
+                sequence_.insert(0, final_list)
             else:
-                items.insert(0, remaining_item)
+                sequence_[0] = [sum(sequence_[0] + final_list)]
         else:
-            if remainder_fuse_threshold is None:
-                items.append(remaining_item)
-            elif sum(remaining_item) <= remainder_fuse_threshold:
-                fused_value = [items[-1], remaining_item]
-                fused_value_ = abjad.sequence.flatten(fused_value, depth=-1)
-                fused_value = [sum(fused_value_)]
-                items[-1] = fused_value
-            else:
-                items.append(remaining_item)
-        sequence_ = items[:]
+            if (
+                remainder_fuse_threshold is None
+                or sum(final_list) > remainder_fuse_threshold
+            ):
+                sequence_.append(final_list)
+            elif sum(final_list) <= remainder_fuse_threshold:
+                sequence_[-1] = [sum(sequence_[-1] + final_list)]
     assert isinstance(sequence_, list), repr(sequence_)
     assert all(isinstance(_, list) for _ in sequence_), repr(sequence_)
     for list_ in sequence_:
