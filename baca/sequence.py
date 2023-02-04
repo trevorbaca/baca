@@ -593,10 +593,7 @@ def period_of_rotation(sequence):
 
 def quarters(
     sequence: typing.Sequence[tuple[int, int] | abjad.Duration],
-    *,
-    compound: bool = False,
-    remainder: abjad.enums.Horizontal | None = None,
-) -> list[list[tuple[int, int] | abjad.Duration]]:
+) -> list[list[abjad.Duration]]:
     r"""
     Splits ``sequence`` into quarters.
 
@@ -615,77 +612,13 @@ def quarters(
         [Duration(1, 4)]
         [Duration(1, 4)]
 
-    ..  container:: example
-
-        Set ``compound=True`` for compound quarter notes:
-
-        >>> pairs = [(3, 4), (6, 4)]
-        >>> lists = [baca.sequence.quarters([_]) for _ in pairs]
-        >>> for list_ in lists:
-        ...     print("list:")
-        ...     for pair in list_:
-        ...         print(f"\t{repr(pair)}")
-        ...
-        list:
-            [Duration(1, 4)]
-            [Duration(1, 4)]
-            [Duration(1, 4)]
-        list:
-            [Duration(1, 4)]
-            [Duration(1, 4)]
-            [Duration(1, 4)]
-            [Duration(1, 4)]
-            [Duration(1, 4)]
-            [Duration(1, 4)]
-
-        >>> pairs = [(3, 4), (6, 4)]
-        >>> lists = [baca.sequence.quarters([_], compound=True) for _ in pairs]
-        >>> for list_ in lists:
-        ...     print("list:")
-        ...     for pair in list_:
-        ...         print(f"\t{repr(pair)}")
-        ...
-        list:
-            [Duration(1, 4)]
-            [Duration(1, 4)]
-            [Duration(1, 4)]
-        list:
-            [Duration(3, 8)]
-            [Duration(3, 8)]
-            [Duration(3, 8)]
-            [Duration(3, 8)]
-
-    ..  container:: example
-
-        Splits each duration into quarters and positions remainder at right:
-
-        >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
-        >>> lists = [baca.sequence.quarters([_]) for _ in durations]
-        >>> for list_ in lists: list_
-        [[Duration(1, 4)], [Duration(1, 4)], [Duration(1, 4)], [Duration(1, 8)]]
-        [[Duration(1, 4)], [Duration(1, 8)]]
-        [[Duration(1, 4)], [Duration(1, 4)], [Duration(1, 8)]]
-
-        Splits each durations into quarters and positions remainder at left:
-
-        >>> duration = baca.durations([(7, 8), (3, 8), (5, 8)])
-        >>> lists = [
-        ...     baca.sequence.quarters([_], remainder=abjad.LEFT) for _ in durations
-        ... ]
-        >>> for list_ in lists: list_
-        [[Duration(1, 8)], [Duration(1, 4)], [Duration(1, 4)], [Duration(1, 4)]]
-        [[Duration(1, 8)], [Duration(1, 4)]]
-        [[Duration(1, 8)], [Duration(1, 4)], [Duration(1, 4)]]
-
     """
     assert isinstance(sequence, list), repr(sequence)
-    prototype = (tuple, abjad.Duration, abjad.TimeSignature)
-    assert all(isinstance(_, prototype) for _ in sequence), repr(sequence)
-    assert isinstance(compound, bool), repr(compound)
-    assert remainder in (abjad.LEFT, abjad.RIGHT, None), repr(remainder)
-    lists = split(
-        sequence, [(1, 4)], cyclic=True, compound=compound, remainder=remainder
-    )
+    assert all(isinstance(_, tuple | abjad.Duration) for _ in sequence), repr(sequence)
+    lists = split(sequence, [(1, 4)], cyclic=True)
+    assert isinstance(lists, list)
+    for list_ in lists:
+        assert all(isinstance(_, abjad.Duration) for _ in list_), repr(lists)
     return lists
 
 
@@ -1028,7 +961,7 @@ def split(
     cyclic: bool = False,
     remainder: abjad.enums.Horizontal | None = None,
     remainder_fuse_threshold: tuple[int, int] | abjad.Duration | None = None,
-) -> list[list[tuple[int, int] | abjad.Duration]]:
+) -> list[list[abjad.Duration]]:
     r"""
     Splits ``sequence`` by ``weights``.
 
@@ -1187,4 +1120,7 @@ def split(
                 items.append(remaining_item)
         sequence_ = items[:]
     assert isinstance(sequence_, list), repr(sequence_)
+    assert all(isinstance(_, list) for _ in sequence_), repr(sequence_)
+    for list_ in sequence_:
+        assert all(isinstance(_, abjad.Duration) for _ in list_), repr(sequence_)
     return sequence_
