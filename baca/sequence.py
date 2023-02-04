@@ -622,112 +622,106 @@ def quarters(
     return lists
 
 
-def ratios(
-    sequence,
+def split_by_ratio(
+    pairs,
     ratio: tuple[int, int],
     *,
     rounded: bool = False,
 ):
     r"""
-    Splits sequence by ``ratio``.
+    Splits ``pairs`` by ``ratio``.
 
     ..  container:: example
 
-        Splits sequence by exact ``2:1`` ratio:
+        Splits pairs by exact ``2:1`` ratio:
 
-        >>> durations = baca.durations([(5, 8), (6, 8)])
-        >>> lists = baca.sequence.ratios(durations, (2, 1))
+        >>> pairs = [(5, 8), (6, 8)]
+        >>> lists = baca.sequence.split_by_ratio(pairs, (2, 1))
         >>> for list_ in lists: list_
-        [(5, 8), (7, 24)]
-        [(11, 24)]
+        [Duration(5, 8), Duration(7, 24)]
+        [Duration(11, 24)]
 
         Works with durations:
 
-        >>> durations = [abjad.Duration(_) for _ in [(5, 8), (6, 8)]]
-        >>> lists = baca.sequence.ratios(durations, (2, 1))
+        >>> pairs = [(5, 8), (6, 8)]
+        >>> lists = baca.sequence.split_by_ratio(pairs, (2, 1))
         >>> for list_ in lists: list_
-        [(5, 8), (7, 24)]
-        [(11, 24)]
+        [Duration(5, 8), Duration(7, 24)]
+        [Duration(11, 24)]
 
         Splits durations by rounded ``2:1`` ratio:
 
-        >>> durations = baca.durations([(5, 8), (6, 8)])
-        >>> lists = baca.sequence.ratios(durations, (2, 1), rounded=True)
+        >>> pairs = [(5, 8), (6, 8)]
+        >>> lists = baca.sequence.split_by_ratio(pairs, (2, 1), rounded=True)
         >>> for list_ in lists: list_
-        [(5, 8), (1, 4)]
-        [(1, 2)]
-
-    ..  container:: example
+        [Duration(5, 8), Duration(1, 4)]
+        [Duration(1, 2)]
 
         Splits each duration by exact ``2:1`` ratio:
 
-        >>> durations = baca.durations([(5, 8), (6, 8)])
-        >>> lists = [baca.sequence.ratios([_], (2, 1)) for _ in durations]
+        >>> pairs = [(5, 8), (6, 8)]
+        >>> lists = [baca.sequence.split_by_ratio([_], (2, 1)) for _ in pairs]
         >>> for list_ in lists: list_
-        [[(5, 12)], [(5, 24)]]
-        [[(1, 2)], [(1, 4)]]
+        [[Duration(5, 12)], [Duration(5, 24)]]
+        [[Duration(1, 2)], [Duration(1, 4)]]
 
         Splits each duration by rounded ``2:1`` ratio:
 
-        >>> durations = baca.durations([(5, 8), (6, 8)])
+        >>> pairs = [(5, 8), (6, 8)]
         >>> lists = [
-        ...     baca.sequence.ratios([_], (2, 1), rounded=True)
-        ...     for _ in durations
+        ...     baca.sequence.split_by_ratio([_], (2, 1), rounded=True)
+        ...     for _ in pairs
         ... ]
         >>> for list_ in lists: list_
-        [[(3, 8)], [(1, 4)]]
-        [[(1, 2)], [(1, 4)]]
-
-    ..  container:: example
+        [[Duration(3, 8)], [Duration(1, 4)]]
+        [[Duration(1, 2)], [Duration(1, 4)]]
 
         Splits durations with alternating exact ``2:1`` and ``1:1:1`` ratios:
 
         >>> ratios = abjad.CyclicTuple([(2, 1), (1, 1, 1)])
-        >>> durations = baca.durations([(5, 8), (6, 8)])
-        >>> for i, duration in enumerate(durations):
+        >>> pairs = [(5, 8), (6, 8)]
+        >>> for i, pair in enumerate(pairs):
         ...     ratio = ratios[i]
-        ...     baca.sequence.ratios([duration], ratio)
-        [[(5, 12)], [(5, 24)]]
-        [[(1, 4)], [(1, 4)], [(1, 4)]]
+        ...     baca.sequence.split_by_ratio([pair], ratio)
+        [[Duration(5, 12)], [Duration(5, 24)]]
+        [[Duration(1, 4)], [Duration(1, 4)], [Duration(1, 4)]]
 
         Splits durations with alternating rounded ``2:1`` and ``1:1:1`` ratios:
 
         >>> ratios = abjad.CyclicTuple([(2, 1), (1, 1, 1)])
-        >>> durations = baca.durations([(5, 8), (6, 8)])
-        >>> for i, duration in enumerate(durations):
+        >>> pairs = [(5, 8), (6, 8)]
+        >>> for i, pair in enumerate(pairs):
         ...     ratio = ratios[i]
-        ...     baca.sequence.ratios([duration], ratio, rounded=True)
-        [[(3, 8)], [(1, 4)]]
-        [[(1, 4)], [(1, 4)], [(1, 4)]]
+        ...     baca.sequence.split_by_ratio([pair], ratio, rounded=True)
+        [[Duration(3, 8)], [Duration(1, 4)]]
+        [[Duration(1, 4)], [Duration(1, 4)], [Duration(1, 4)]]
 
     """
-    pairs = [_.pair for _ in sequence]
+    assert isinstance(pairs, list), repr(pairs)
+    assert all(isinstance(_, tuple) for _ in pairs), repr(pairs)
+    assert isinstance(ratio, tuple), repr(ratio)
     assert isinstance(rounded, bool), repr(rounded)
     pairs_weight = (0, 1)
     for pair in pairs:
         pairs_weight = abjad.duration.add_pairs(pairs_weight, pair)
     numerator, denominator = pairs_weight
-    assert isinstance(ratio, tuple), repr(ratio)
-    ratio_ = tuple(ratio)
     if rounded is True:
-        numerators = abjad.math.partition_integer_by_ratio(numerator, ratio_)
-        durations = [
-            abjad.Duration((numerator, denominator)) for numerator in numerators
-        ]
+        numerators = abjad.math.partition_integer_by_ratio(numerator, ratio)
+        weights = [abjad.Duration((numerator, denominator)) for numerator in numerators]
     else:
-        durations = []
-        ratio_weight = sum(ratio_)
+        weights = []
         for number in ratio:
-            multiplier = abjad.Fraction(number, ratio_weight)
+            multiplier = abjad.Fraction(number, sum(ratio))
             numerator_ = multiplier.numerator * pairs_weight[0]
             denominator_ = multiplier.denominator * pairs_weight[1]
-            duration = abjad.Duration(numerator_, denominator_)
-            durations.append(duration)
-    sequence = [abjad.Duration(_) for _ in sequence]
-    sequence = abjad.sequence.split(sequence, durations)
-    assert isinstance(sequence, list)
-    assert isinstance(sequence[0], list)
-    lists = [[_.pair for _ in list_] for list_ in sequence]
+            weight = abjad.Duration(numerator_, denominator_)
+            weights.append(weight)
+    sequence = [abjad.Duration(_) for _ in pairs]
+    lists = abjad.sequence.split(sequence, weights)
+    assert isinstance(lists, list)
+    assert all(isinstance(_, list) for _ in lists)
+    for list_ in lists:
+        assert all(isinstance(_, abjad.Duration) for _ in list_), repr(lists)
     return lists
 
 
