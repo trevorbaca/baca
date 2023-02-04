@@ -848,7 +848,6 @@ def split(
     sequence: typing.Sequence[tuple[int, int] | abjad.Duration],
     weights: list[tuple[int, int] | abjad.Duration],
     *,
-    compound: bool = False,
     cyclic: bool = False,
     remainder: abjad.enums.Horizontal | None = None,
     remainder_fuse_threshold: tuple[int, int] | abjad.Duration | None = None,
@@ -966,16 +965,13 @@ def split(
 
     """
     assert isinstance(sequence, list), repr(sequence)
-    weights = [abjad.Duration(_) for _ in weights]
     prototype = (tuple, abjad.Duration, abjad.TimeSignature)
     assert all(isinstance(_, prototype) for _ in sequence), repr(sequence)
-    assert isinstance(compound, bool), repr(compound)
+    assert isinstance(weights, list), repr(weights)
+    assert all(isinstance(_, tuple | abjad.Duration) for _ in weights), repr(weights)
+    weights = [abjad.Duration(_) for _ in weights]
+    assert isinstance(cyclic, bool), repr(cyclic)
     assert remainder in (abjad.LEFT, abjad.RIGHT, None), repr(remainder)
-    assert isinstance(compound, bool), repr(bool)
-    if compound is True and all([abjad.Meter(_).is_compound for _ in sequence]):
-        weights = [abjad.Fraction(3, 2) * _ for _ in weights]
-    if cyclic is not None:
-        cyclic = bool(cyclic)
     if remainder is not None:
         assert remainder in (abjad.LEFT, abjad.RIGHT), repr(remainder)
     if remainder_fuse_threshold is not None:
