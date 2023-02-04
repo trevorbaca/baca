@@ -845,7 +845,7 @@ def reveal(sequence, count=None):
 
 
 def split(
-    sequence: typing.Sequence[tuple[int, int] | abjad.Duration],
+    sequence: list[abjad.Duration],
     weights: list[tuple[int, int] | abjad.Duration],
     *,
     cyclic: bool = False,
@@ -965,8 +965,7 @@ def split(
 
     """
     assert isinstance(sequence, list), repr(sequence)
-    prototype = (tuple, abjad.Duration, abjad.TimeSignature)
-    assert all(isinstance(_, prototype) for _ in sequence), repr(sequence)
+    assert all(isinstance(_, abjad.Duration) for _ in sequence), repr(sequence)
     assert isinstance(weights, list), repr(weights)
     assert all(isinstance(_, tuple | abjad.Duration) for _ in weights), repr(weights)
     weights = [abjad.Duration(_) for _ in weights]
