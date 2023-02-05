@@ -401,7 +401,7 @@ piecewise.py examples.
     >>> _ = baca.hairpin(
     ...         voice,
     ...         "p f",
-    ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
+    ...         the_pieces=baca.select.cmgroups(voice, [1]),
     ...     ),
     >>> _ = baca.dls_staff_padding(voice, 5)
     >>> baca.docs.remove_deactivated_wrappers(score)
@@ -480,7 +480,7 @@ piecewise.py examples.
     >>> _ = baca.hairpin(
     ...         voice,
     ...         "p < f >",
-    ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
+    ...         the_pieces=baca.select.cmgroups(voice, [1]),
     ...     )
     >>> _ = baca.dls_staff_padding(voice, 5)
     >>> baca.docs.remove_deactivated_wrappers(score)
@@ -564,7 +564,7 @@ piecewise.py examples.
     ...         voice,
     ...         "p f",
     ...         bookend=True,
-    ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
+    ...         the_pieces=baca.select.cmgroups(voice, [1]),
     ...     )
     >>> _ = baca.dls_staff_padding(voice, 5)
     >>> baca.docs.remove_deactivated_wrappers(score)
@@ -647,7 +647,7 @@ piecewise.py examples.
     ...         voice,
     ...         "p -- f >",
     ...         bookend=True,
-    ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
+    ...         the_pieces=baca.select.cmgroups(voice, [1]),
     ...     )
     >>> _ = baca.dls_staff_padding(voice, 5)
     >>> baca.docs.remove_deactivated_wrappers(score)
@@ -960,7 +960,7 @@ piecewise.py examples.
     ...         voice,
     ...         "mf niente o< p",
     ...         bookend=False,
-    ...         pieces=lambda _: baca.select.mgroups(_, [1, 2, 1]),
+    ...         the_pieces=baca.select.mgroups(voice, [1, 2, 1]),
     ...     )
     >>> _ = baca.dls_staff_padding(voice, 4)
     >>> baca.docs.remove_deactivated_wrappers(score)
@@ -1507,7 +1507,7 @@ piecewise.py examples.
     >>> _ = baca.text_spanner(
     ...         voice,
     ...         "A || B",
-    ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
+    ...         the_pieces=baca.select.cmgroups(voice, [1]),
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
@@ -1603,7 +1603,7 @@ piecewise.py examples.
     >>> _ = baca.text_spanner(
     ...         voice,
     ...         "A -> B ->",
-    ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
+    ...         the_pieces=baca.select.cmgroups(voice, [1]),
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
@@ -1700,7 +1700,7 @@ piecewise.py examples.
     ...         voice,
     ...         "A || B",
     ...         bookend=True,
-    ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
+    ...         the_pieces=baca.select.cmgroups(voice, [1]),
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
@@ -1806,7 +1806,7 @@ piecewise.py examples.
     ...         voice,
     ...         "A -> B ->",
     ...         bookend=True,
-    ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
+    ...         the_pieces=baca.select.cmgroups(voice, [1]),
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
@@ -1919,7 +1919,7 @@ piecewise.py examples.
     ...         (abjad.Tweak(r"- \tweak color #green"), 2),
     ...         (abjad.Tweak(r"- \tweak color #purple"), 3),
     ...         final_piece_spanner=False,
-    ...         pieces=lambda _: baca.select.plts(_),
+    ...         the_pieces=baca.select.plts(voice),
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> baca.docs.remove_deactivated_wrappers(score)
@@ -2080,7 +2080,7 @@ piecewise.py examples.
     >>> _ = baca.text_spanner(
     ...         voice,
     ...         "A -| B -|",
-    ...         pieces=lambda _: baca.select.cmgroups(_, [1]),
+    ...         the_pieces=baca.select.cmgroups(voice, [1]),
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
@@ -2178,7 +2178,7 @@ piecewise.py examples.
     >>> _ = baca.text_spanner(
     ...         voice,
     ...         "P -> T -> P",
-    ...         pieces=lambda _: baca.select.plts(_),
+    ...         the_pieces=baca.select.plts(voice),
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> baca.docs.remove_deactivated_wrappers(score)
@@ -2268,7 +2268,7 @@ piecewise.py examples.
     ...         voice,
     ...         "P -> T ->",
     ...         final_piece_spanner=False,
-    ...         pieces=lambda _: baca.select.plts(_),
+    ...         the_pieces=baca.select.plts(voice),
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> baca.docs.remove_deactivated_wrappers(score)
