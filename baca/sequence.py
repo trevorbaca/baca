@@ -849,7 +849,6 @@ def split(
     weights: list[tuple[int, int] | abjad.Duration],
     *,
     cyclic: bool = False,
-    remainder: abjad.enums.Horizontal | None = None,
 ) -> list[list[abjad.Duration]]:
     r"""
     Splits ``sequence`` by ``weights``.
@@ -865,45 +864,6 @@ def split(
         [Duration(1, 16), Duration(1, 8), Duration(1, 8)]
         [Duration(1, 8), Duration(1, 8), Duration(1, 16)]
         [Duration(1, 16), Duration(1, 8), Duration(1, 8)]
-
-    ..  container:: example
-
-        Fuses durations and then splits by ``1/4`` with remainder on right:
-
-        >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
-        >>> durations = [sum(durations)]
-        >>> lists = baca.sequence.split(durations, [(1, 4)], cyclic=True)
-        >>> for list_ in lists: list_
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 8)]
-
-    ..  container:: example
-
-        Fuses durations and then splits by ``1/4`` with remainder on left:
-
-        >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
-        >>> durations = [sum(durations)]
-        >>> lists = baca.sequence.split(
-        ...     durations,
-        ...     [(1, 4)],
-        ...     cyclic=True,
-        ...     remainder=abjad.LEFT,
-        ... )
-        >>> for list_ in lists: list_
-        [Duration(1, 8)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
 
     ..  container:: example
 
@@ -930,21 +890,9 @@ def split(
     assert all(isinstance(_, tuple | abjad.Duration) for _ in weights), repr(weights)
     weights = [abjad.Duration(_) for _ in weights]
     assert isinstance(cyclic, bool), repr(cyclic)
-    assert remainder in (abjad.LEFT, abjad.RIGHT, None), repr(remainder)
-    if remainder is not None:
-        assert remainder in (abjad.LEFT, abjad.RIGHT), repr(remainder)
     sequence_ = abjad.sequence.split(
         [abjad.Duration(_) for _ in sequence], weights, cyclic=cyclic, overhang=True
     )
-    without_overhang = abjad.sequence.split(
-        [abjad.Duration(_) for _ in sequence], weights, cyclic=cyclic, overhang=False
-    )
-    if sequence_ != without_overhang:
-        final_list = sequence_.pop()
-        if remainder == abjad.LEFT:
-            sequence_.insert(0, final_list)
-        else:
-            sequence_.append(final_list)
     assert isinstance(sequence_, list), repr(sequence_)
     assert all(isinstance(_, list) for _ in sequence_), repr(sequence_)
     for list_ in sequence_:
