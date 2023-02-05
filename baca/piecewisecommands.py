@@ -132,11 +132,11 @@ def _do_piecewise_command(
     final_piece_spanner=None,
     leak_spanner_stop: bool = False,
     left_broken: bool = False,
+    pieces: list[list[abjad.Leaf]] | None = None,
     remove_length_1_spanner_start: bool = False,
     right_broken: typing.Any | None = None,
     specifiers: typing.Sequence = (),
     tag,
-    the_pieces: list[list[abjad.Leaf]] | None = None,
     tweaks: typing.Sequence[_typings.IndexedTweak] = (),
 ) -> list[abjad.Wrapper]:
     """
@@ -153,10 +153,7 @@ def _do_piecewise_command(
     assert tag is not None, repr(tag)
     cyclic_specifiers = abjad.CyclicTuple(specifiers)
     manifests = manifests or {}
-    if the_pieces is not None:
-        pieces = the_pieces
-    else:
-        pieces = abjad.select.group(argument)
+    pieces = pieces or abjad.select.group(argument)
     assert pieces is not None
     piece_count = len(pieces)
     assert 0 < piece_count, repr(piece_count)
@@ -545,8 +542,8 @@ def bow_speed_spanner(
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
     left_broken_text: str | None = None,
+    pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
-    the_pieces: list[list[abjad.Leaf]] | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.BOW_SPEED_SPANNER)
@@ -560,8 +557,8 @@ def bow_speed_spanner(
         left_broken=left_broken,
         left_broken_text=left_broken_text,
         lilypond_id="BowSpeed",
+        pieces=pieces,
         right_broken=right_broken,
-        the_pieces=the_pieces,
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
@@ -572,9 +569,9 @@ def circle_bow_spanner(
     *tweaks: _typings.IndexedTweak,
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-circle-bowing-markup",
+    pieces: list[list[abjad.Leaf]] | None = None,
     qualifier: str | None = None,
     right_broken: bool = False,
-    the_pieces: list[list[abjad.Leaf]] | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.CIRCLE_BOW_SPANNER)
@@ -592,8 +589,8 @@ def circle_bow_spanner(
         left_broken=left_broken,
         left_broken_text=left_broken_text,
         lilypond_id="CircleBow",
+        pieces=pieces,
         right_broken=right_broken,
-        the_pieces=the_pieces,
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
@@ -607,8 +604,8 @@ def clb_spanner(
     autodetect_right_padding: bool = True,
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-clb-markup",
+    pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
-    the_pieces: list[list[abjad.Leaf]] | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.CLB_SPANNER)
@@ -632,8 +629,8 @@ def clb_spanner(
         left_broken=left_broken,
         left_broken_text=left_broken_text,
         lilypond_id="CLB",
+        pieces=pieces,
         right_broken=right_broken,
-        the_pieces=the_pieces,
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
@@ -647,8 +644,8 @@ def covered_spanner(
     items: str = r"\baca-covered-markup =|",
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-covered-markup",
+    pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
-    the_pieces: list[list[abjad.Leaf]] | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.COVERED_SPANNER)
@@ -661,8 +658,8 @@ def covered_spanner(
         left_broken=left_broken,
         left_broken_text=left_broken_text,
         lilypond_id="Covered",
+        pieces=pieces,
         right_broken=right_broken,
-        the_pieces=the_pieces,
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
@@ -675,8 +672,8 @@ def damp_spanner(
     autodetect_right_padding: bool = True,
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-damp-markup",
+    pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
-    the_pieces: list[list[abjad.Leaf]] | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.DAMP_SPANNER)
@@ -689,8 +686,8 @@ def damp_spanner(
         left_broken=left_broken,
         left_broken_text=left_broken_text,
         lilypond_id="Damp",
+        pieces=pieces,
         right_broken=right_broken,
-        the_pieces=the_pieces,
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
@@ -704,9 +701,9 @@ def hairpin(
     final_hairpin: bool | str | abjad.StartHairpin | None = None,
     forbid_al_niente_to_bar_line: bool = False,
     left_broken: bool = False,
+    pieces: list[list[abjad.Leaf]] | None = None,
     remove_length_1_spanner_start: bool = False,
     right_broken: bool = False,
-    the_pieces: list[list[abjad.Leaf]] | None = None,
 ) -> list[abjad.Wrapper]:
     final_hairpin_, specifiers = _prepare_hairpin_arguments(
         dynamics=dynamics,
@@ -728,11 +725,11 @@ def hairpin(
         bookend=bookend,
         final_piece_spanner=final_hairpin_,
         left_broken=left_broken,
+        pieces=pieces,
         remove_length_1_spanner_start=remove_length_1_spanner_start,
         right_broken=right_broken_,
         specifiers=specifiers,
         tag=_tags.function_name(_frame()),
-        the_pieces=the_pieces,
     )
 
 
@@ -741,8 +738,8 @@ def half_clt_spanner(
     *tweaks: _typings.IndexedTweak,
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-half-clt-markup",
+    pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
-    the_pieces: list[list[abjad.Leaf]] | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.HALF_CLT_SPANNER)
@@ -755,8 +752,8 @@ def half_clt_spanner(
         left_broken=left_broken,
         left_broken_text=left_broken_text,
         lilypond_id="HalfCLT",
+        pieces=pieces,
         right_broken=right_broken,
-        the_pieces=the_pieces,
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
@@ -767,8 +764,8 @@ def material_annotation_spanner(
     items: str | list,
     *tweaks: _typings.IndexedTweak,
     left_broken: bool = False,
+    pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
-    the_pieces: list[list[abjad.Leaf]] | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.MATERIAL_ANNOTATION_SPANNER)
@@ -780,8 +777,8 @@ def material_annotation_spanner(
         bookend=False,
         left_broken=left_broken,
         lilypond_id="MaterialAnnotation",
+        pieces=pieces,
         right_broken=right_broken,
-        the_pieces=the_pieces,
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
@@ -793,8 +790,8 @@ def metric_modulation_spanner(
     items: str = r"MM =|",
     autodetect_right_padding: bool = True,
     left_broken: bool = False,
+    pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
-    the_pieces: list[list[abjad.Leaf]] | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.METRIC_MODULATION_SPANNER)
@@ -806,8 +803,8 @@ def metric_modulation_spanner(
         bookend=False,
         left_broken=left_broken,
         lilypond_id="MetricModulation",
+        pieces=pieces,
         right_broken=right_broken,
-        the_pieces=the_pieces,
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
@@ -978,8 +975,8 @@ def pizzicato_spanner(
     autodetect_right_padding: bool = True,
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-pizz-markup",
+    pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
-    the_pieces: list[list[abjad.Leaf]] | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.PIZZICATO_SPANNER)
@@ -992,8 +989,8 @@ def pizzicato_spanner(
         left_broken=left_broken,
         left_broken_text=left_broken_text,
         lilypond_id="Pizzicato",
+        pieces=pieces,
         right_broken=right_broken,
-        the_pieces=the_pieces,
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
@@ -1008,8 +1005,8 @@ def scp_spanner(
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
     left_broken_text: str | None = None,
+    pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
-    the_pieces: list[list[abjad.Leaf]] | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.SCP_SPANNER)
@@ -1023,8 +1020,8 @@ def scp_spanner(
         left_broken=left_broken,
         left_broken_text=left_broken_text,
         lilypond_id="SCP",
+        pieces=pieces,
         right_broken=right_broken,
-        the_pieces=the_pieces,
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
@@ -1038,8 +1035,8 @@ def spazzolato_spanner(
     items: str | list = r"\baca-spazzolato-markup =|",
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-spazz-markup",
+    pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
-    the_pieces: list[list[abjad.Leaf]] | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.SPAZZOLATO_SPANNER)
@@ -1052,8 +1049,8 @@ def spazzolato_spanner(
         left_broken=left_broken,
         left_broken_text=left_broken_text,
         lilypond_id="Spazzolato",
+        pieces=pieces,
         right_broken=right_broken,
-        the_pieces=the_pieces,
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
@@ -1068,8 +1065,8 @@ def string_number_spanner(
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
     left_broken_text: str | None = None,
+    pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
-    the_pieces: list[list[abjad.Leaf]] | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.STRING_NUMBER_SPANNER)
@@ -1082,8 +1079,8 @@ def string_number_spanner(
         left_broken=left_broken,
         left_broken_text=left_broken_text,
         lilypond_id="StringNumber",
+        pieces=pieces,
         right_broken=right_broken,
-        the_pieces=the_pieces,
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
@@ -1097,8 +1094,8 @@ def tasto_spanner(
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
     left_broken_text: str = r"\baca-left-broken-t-markup",
+    pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
-    the_pieces: list[list[abjad.Leaf]] | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.TASTO_SPANNER)
@@ -1112,8 +1109,8 @@ def tasto_spanner(
         left_broken=left_broken,
         left_broken_text=left_broken_text,
         lilypond_id="SCP",
+        pieces=pieces,
         right_broken=right_broken,
-        the_pieces=the_pieces,
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
@@ -1132,8 +1129,8 @@ def text_spanner(
     left_broken: bool = False,
     left_broken_text: str | None = None,
     lilypond_id: int | str | None = None,
+    pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
-    the_pieces: list[list[abjad.Leaf]] | None = None,
 ) -> list[abjad.Wrapper]:
     specifiers = _prepare_text_spanner_arguments(
         items,
@@ -1157,10 +1154,10 @@ def text_spanner(
         final_piece_spanner=final_piece_spanner,
         leak_spanner_stop=leak_spanner_stop,
         left_broken=left_broken,
+        pieces=pieces,
         right_broken=right_broken,
         specifiers=specifiers,
         tag=_tags.function_name(_frame()),
-        the_pieces=the_pieces,
         tweaks=tweaks,
     )
 
@@ -1174,8 +1171,8 @@ def vibrato_spanner(
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
     left_broken_text: str | None = None,
+    pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
-    the_pieces: list[list[abjad.Leaf]] | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.VIBRATO_SPANNER)
@@ -1188,8 +1185,8 @@ def vibrato_spanner(
         left_broken=left_broken,
         left_broken_text=left_broken_text,
         lilypond_id="Vibrato",
+        pieces=pieces,
         right_broken=right_broken,
-        the_pieces=the_pieces,
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
@@ -1203,8 +1200,8 @@ def xfb_spanner(
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
     left_broken_text: str = r"\baca-left-broken-xfb-markup",
+    pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
-    the_pieces: list[list[abjad.Leaf]] | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     tag = tag.append(_tags.BOW_SPEED_SPANNER)
@@ -1217,8 +1214,8 @@ def xfb_spanner(
         left_broken=left_broken,
         left_broken_text=left_broken_text,
         lilypond_id="BowSpeed",
+        pieces=pieces,
         right_broken=right_broken,
-        the_pieces=the_pieces,
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
