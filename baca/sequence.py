@@ -4,7 +4,6 @@ Sequence.
 import collections
 import copy
 import itertools
-import typing
 
 import abjad
 
@@ -591,18 +590,14 @@ def period_of_rotation(sequence):
     return len(sequence) // degree_of_rotational_symmetry(sequence)
 
 
-def quarters(
-    sequence: typing.Sequence[tuple[int, int] | abjad.Duration],
-) -> list[list[abjad.Duration]]:
+def quarters(durations: list[abjad.Duration]) -> list[list[abjad.Duration]]:
     r"""
-    Splits ``sequence`` into quarters.
+    Splits ``durations`` into quarters.
 
     ..  container:: example
 
-        >>> list_ = baca.durations([(2, 4), (6, 4)])
-        >>> for item in baca.sequence.quarters(list_):
-        ...     item
-        ...
+        >>> durations = abjad.durations([(2, 4), (6, 4)])
+        >>> for list_ in baca.sequence.quarters(durations): list_
         [Duration(1, 4)]
         [Duration(1, 4)]
         [Duration(1, 4)]
@@ -613,9 +608,10 @@ def quarters(
         [Duration(1, 4)]
 
     """
-    assert isinstance(sequence, list), repr(sequence)
-    assert all(isinstance(_, tuple | abjad.Duration) for _ in sequence), repr(sequence)
-    lists = split(sequence, [(1, 4)], cyclic=True)
+    assert isinstance(durations, list), repr(durations)
+    assert all(isinstance(_, abjad.Duration) for _ in durations), repr(durations)
+    weights = abjad.durations([(1, 4)])
+    lists = abjad.sequence.split(durations, weights, cyclic=True, overhang=True)
     assert isinstance(lists, list)
     for list_ in lists:
         assert all(isinstance(_, abjad.Duration) for _ in list_), repr(lists)
@@ -842,59 +838,3 @@ def reveal(sequence, count=None):
             if current == count:
                 return type(sequence)(items_)
     return type(sequence)(items_)
-
-
-def split(
-    sequence: list[abjad.Duration],
-    weights: list[tuple[int, int] | abjad.Duration],
-    *,
-    cyclic: bool = False,
-) -> list[list[abjad.Duration]]:
-    r"""
-    Splits ``sequence`` by ``weights``.
-
-    ..  container:: example
-
-        Splits every five sixteenths:
-
-        >>> durations = baca.durations(10 * [(1, 8)])
-        >>> lists = baca.sequence.split(durations, [(5, 16)], cyclic=True)
-        >>> for list_ in lists: list_
-        [Duration(1, 8), Duration(1, 8), Duration(1, 16)]
-        [Duration(1, 16), Duration(1, 8), Duration(1, 8)]
-        [Duration(1, 8), Duration(1, 8), Duration(1, 16)]
-        [Duration(1, 16), Duration(1, 8), Duration(1, 8)]
-
-    ..  container:: example
-
-        Splits each duration; rotates durations one to the left at each new
-        duration:
-
-        >>> durations = baca.durations([(7, 16), (7, 16), (7, 16)])
-        >>> lists = []
-        >>> for i, duration in enumerate(durations):
-        ...     durations_ = abjad.sequence.rotate([(1, 16), (1, 8), (1, 4)], n=-i)
-        ...     list_ = baca.sequence.split([duration], durations_)
-        ...     list_ = abjad.sequence.flatten(list_, depth=-1)
-        ...     lists.append(list_)
-        ...
-        >>> for list_ in lists: list_
-        [Duration(1, 16), Duration(1, 8), Duration(1, 4)]
-        [Duration(1, 8), Duration(1, 4), Duration(1, 16)]
-        [Duration(1, 4), Duration(1, 16), Duration(1, 8)]
-
-    """
-    assert isinstance(sequence, list), repr(sequence)
-    assert all(isinstance(_, abjad.Duration) for _ in sequence), repr(sequence)
-    assert isinstance(weights, list), repr(weights)
-    assert all(isinstance(_, tuple | abjad.Duration) for _ in weights), repr(weights)
-    weights = [abjad.Duration(_) for _ in weights]
-    assert isinstance(cyclic, bool), repr(cyclic)
-    sequence_ = abjad.sequence.split(
-        [abjad.Duration(_) for _ in sequence], weights, cyclic=cyclic, overhang=True
-    )
-    assert isinstance(sequence_, list), repr(sequence_)
-    assert all(isinstance(_, list) for _ in sequence_), repr(sequence_)
-    for list_ in sequence_:
-        assert all(isinstance(_, abjad.Duration) for _ in list_), repr(sequence_)
-    return sequence_

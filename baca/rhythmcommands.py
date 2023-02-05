@@ -7,7 +7,6 @@ import abjad
 from abjadext import rmakers
 
 from . import select as _select
-from . import sequence as _sequence
 from . import tags as _tags
 from .enums import enums as _enums
 
@@ -376,7 +375,8 @@ def make_repeated_duration_notes(
         weights = [abjad.Duration(weights)]
     durations = [_.duration for _ in time_signatures]
     durations = [sum(durations)]
-    durations = _sequence.split(durations, weights, cyclic=True)
+    weights = abjad.durations(weights)
+    durations = abjad.sequence.split(durations, weights, cyclic=True, overhang=True)
     durations = abjad.sequence.flatten(durations, depth=-1)
     nested_music = rmakers.note(durations, tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(nested_music, time_signatures)
@@ -466,7 +466,8 @@ def make_tied_repeated_durations(time_signatures, weights):
     tag = _tags.function_name(_frame())
     durations = [_.duration for _ in time_signatures]
     durations = [sum(durations)]
-    durations = _sequence.split(durations, weights, cyclic=True)
+    weights = abjad.durations(weights)
+    durations = abjad.sequence.split(durations, weights, cyclic=True, overhang=True)
     durations = abjad.sequence.flatten(durations, depth=-1)
     if isinstance(weights, abjad.Duration):
         weights = [weights]
