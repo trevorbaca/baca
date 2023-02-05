@@ -850,7 +850,6 @@ def split(
     *,
     cyclic: bool = False,
     remainder: abjad.enums.Horizontal | None = None,
-    remainder_fuse_threshold: tuple[int, int] | abjad.Duration | None = None,
 ) -> list[list[abjad.Duration]]:
     r"""
     Splits ``sequence`` by ``weights``.
@@ -884,25 +883,6 @@ def split(
         [Duration(1, 4)]
         [Duration(1, 8)]
 
-        Fuses remainder:
-
-        >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
-        >>> durations = [sum(durations)]
-        >>> lists = baca.sequence.split(
-        ...     durations,
-        ...     [(1, 4)],
-        ...     cyclic=True,
-        ...     remainder_fuse_threshold=(1, 8),
-        ... )
-        >>> for list_ in lists: list_
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(3, 8)]
-
     ..  container:: example
 
         Fuses durations and then splits by ``1/4`` with remainder on left:
@@ -918,26 +898,6 @@ def split(
         >>> for list_ in lists: list_
         [Duration(1, 8)]
         [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-
-        Fuses remainder:
-
-        >>> durations = baca.durations([(7, 8), (3, 8), (5, 8)])
-        >>> durations = [sum(durations)]
-        >>> lists = baca.sequence.split(
-        ...     durations,
-        ...     [(1, 4)],
-        ...     cyclic=True,
-        ...     remainder=abjad.LEFT,
-        ...     remainder_fuse_threshold=(1, 8),
-        ... )
-        >>> for list_ in lists: list_
-        [Duration(3, 8)]
         [Duration(1, 4)]
         [Duration(1, 4)]
         [Duration(1, 4)]
@@ -973,8 +933,6 @@ def split(
     assert remainder in (abjad.LEFT, abjad.RIGHT, None), repr(remainder)
     if remainder is not None:
         assert remainder in (abjad.LEFT, abjad.RIGHT), repr(remainder)
-    if remainder_fuse_threshold is not None:
-        remainder_fuse_threshold = abjad.Duration(remainder_fuse_threshold)
     sequence_ = abjad.sequence.split(
         [abjad.Duration(_) for _ in sequence], weights, cyclic=cyclic, overhang=True
     )
@@ -984,21 +942,9 @@ def split(
     if sequence_ != without_overhang:
         final_list = sequence_.pop()
         if remainder == abjad.LEFT:
-            if (
-                remainder_fuse_threshold is None
-                or sum(final_list) > remainder_fuse_threshold
-            ):
-                sequence_.insert(0, final_list)
-            else:
-                sequence_[0] = [sum(sequence_[0] + final_list)]
+            sequence_.insert(0, final_list)
         else:
-            if (
-                remainder_fuse_threshold is None
-                or sum(final_list) > remainder_fuse_threshold
-            ):
-                sequence_.append(final_list)
-            elif sum(final_list) <= remainder_fuse_threshold:
-                sequence_[-1] = [sum(sequence_[-1] + final_list)]
+            sequence_.append(final_list)
     assert isinstance(sequence_, list), repr(sequence_)
     assert all(isinstance(_, list) for _ in sequence_), repr(sequence_)
     for list_ in sequence_:
