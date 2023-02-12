@@ -105,13 +105,7 @@ def _add_container_identifiers(score, section_number):
     return container_to_part_assignment
 
 
-def _alive_during_previous_section(previous_metadata, context):
-    assert isinstance(context, abjad.Context), repr(context)
-    names = previous_metadata.get("alive_during_section", [])
-    return context.name in names
-
-
-def _analyze_memento(score, dictionary, context, memento):
+def _analyze_memento(context, dictionary, memento, score):
     previous_indicator = _memento_to_indicator(dictionary, memento)
     if previous_indicator is None:
         return
@@ -240,7 +234,7 @@ def _attach_sounds_during(score):
             abjad.attach(_enums.SOUNDS_DURING_SECTION, voice)
 
 
-def _bracket_metric_modulation(metronome_mark, metric_modulation):
+def _bracket_metric_modulation(metric_modulation, metronome_mark):
     if metronome_mark.decimal is not True:
         # TODO: refactor _get_markup_arguments() to return dict
         arguments = metronome_mark._get_markup_arguments()
@@ -308,19 +302,20 @@ def _bracket_metric_modulation(metronome_mark, metric_modulation):
 
 
 def _calculate_clock_times(
-    score,
     clock_time_override,
     fermata_measure_numbers,
     first_measure_number,
     previous_stop_clock_time,
+    skips,
+    rests,
 ):
-    skips = _select.skips(score["Skips"])
-    if "Rests" not in score:
-        return None, None, None, None
-    for context in abjad.iterate.components(score, abjad.Context):
-        if context.name == "Rests":
-            break
-    rests = abjad.select.rests(context)
+    if rests is None:
+        return types.SimpleNamespace(
+            duration_clock_string=None,
+            clock_times=None,
+            start_clock_time=None,
+            stop_clock_time=None,
+        )
     assert (len(skips) == len(rests)) or (len(skips) == len(rests) + 1)
     start_clock_time = previous_stop_clock_time
     start_clock_time = start_clock_time or "0'00''"
@@ -329,7 +324,12 @@ def _calculate_clock_times(
         metronome_mark = clock_time_override
         abjad.attach(metronome_mark, skips[0])
     if abjad.get.effective(skips[0], abjad.MetronomeMark) is None:
-        return None, None, start_clock_time, None
+        return types.SimpleNamespace(
+            duration_clock_string=None,
+            clock_times=None,
+            start_clock_time=start_clock_time,
+            stop_clock_time=None,
+        )
     clock_times = []
     for local_measure_index, skip in enumerate(skips):
         measure_number = first_measure_number + local_measure_index
@@ -350,7 +350,12 @@ def _calculate_clock_times(
     stop_clock_time = clock_times[-1].to_clock_string()
     duration = clock_times[-1] - clock_times[0]
     duration_clock_string = duration.to_clock_string()
-    return duration_clock_string, clock_times, start_clock_time, stop_clock_time
+    return types.SimpleNamespace(
+        duration_clock_string=duration_clock_string,
+        clock_times=clock_times,
+        start_clock_time=start_clock_time,
+        stop_clock_time=stop_clock_time,
+    )
 
 
 def _check_all_music_in_part_containers(score):
@@ -536,8 +541,8 @@ def _collect_alive_during_section(score):
 
 
 def _collect_metadata(
+    clock_time,
     container_to_part_assignment,
-    duration,
     fermata_measure_numbers,
     final_measure_is_fermata,
     final_measure_number,
@@ -547,8 +552,6 @@ def _collect_metadata(
     persist,
     persistent_indicators,
     score,
-    start_clock_time,
-    stop_clock_time,
     time_signatures,
     voice_name_to_parameter_to_state,
 ) -> tuple[types.MappingProxyType, types.MappingProxyType]:
@@ -560,8 +563,8 @@ def _collect_metadata(
         metadata_["bol_measure_numbers"] = bol_measure_numbers
     if container_to_part_assignment:
         persist_["container_to_part_assignment"] = container_to_part_assignment
-    if duration is not None:
-        metadata_["duration"] = duration
+    if clock_time.duration_clock_string is not None:
+        metadata_["duration"] = clock_time.duration_clock_string
     if fermata_measure_numbers:
         metadata_["fermata_measure_numbers"] = fermata_measure_numbers
     dictionary = metadata.get("first_appearance_short_instrument_names")
@@ -581,10 +584,10 @@ def _collect_metadata(
     metadata_["has_anchor_skip"] = has_anchor_skip
     if persistent_indicators:
         persist_["persistent_indicators"] = persistent_indicators
-    if start_clock_time is not None:
-        metadata_["start_clock_time"] = start_clock_time
-    if stop_clock_time is not None:
-        metadata_["stop_clock_time"] = stop_clock_time
+    if clock_time.start_clock_time is not None:
+        metadata_["start_clock_time"] = clock_time.start_clock_time
+    if clock_time.stop_clock_time is not None:
+        metadata_["stop_clock_time"] = clock_time.stop_clock_time
     metadata_["time_signatures"] = time_signatures
     if voice_name_to_parameter_to_state:
         persist_["voice_name_to_parameter_to_state"] = voice_name_to_parameter_to_state
@@ -912,27 +915,7 @@ def _get_measure_offsets(score, start_measure, stop_measure):
     return start_offset, stop_offset
 
 
-def _get_measure_time_signatures(
-    measure_count,
-    score,
-    time_signatures,
-    start_measure=None,
-    stop_measure=None,
-):
-    assert stop_measure is not None
-    start_index = start_measure - 1
-    if stop_measure is None:
-        time_signatures = [time_signatures[start_index]]
-    else:
-        if stop_measure == -1:
-            stop_measure = measure_count
-        stop_index = stop_measure
-        time_signatures = time_signatures[start_index:stop_index]
-    measure_timespan = _get_measure_timespan(score, start_measure)
-    return measure_timespan.start_offset, time_signatures
-
-
-def _get_measure_timespan(score, measure_number):
+def _get_measure_timespan(measure_number, score):
     start_offset, stop_offset = _get_measure_offsets(
         score,
         measure_number,
@@ -945,26 +928,33 @@ def _label_clock_time(
     clock_time_override,
     fermata_measure_numbers,
     first_measure_number,
-    previous_metadata,
+    previous_stop_clock_time,
     score,
 ):
     skips = _select.skips(score["Skips"])
-    previous_stop_clock_time = previous_metadata.get("stop_clock_time")
-    result = _calculate_clock_times(
-        score,
+    if "Rests" not in score:
+        rests = None
+    else:
+        for context in abjad.iterate.components(score, abjad.Context):
+            if context.name == "Rests":
+                break
+        rests = abjad.select.rests(context)
+    times = _calculate_clock_times(
         clock_time_override,
         fermata_measure_numbers,
         first_measure_number,
         previous_stop_clock_time,
+        skips,
+        rests,
     )
-    duration = result[0]
-    clock_times = result[1]
-    start_clock_time = result[2]
-    stop_clock_time = result[3]
-    if clock_times is None:
-        return None, start_clock_time, None
+    if times.clock_times is None:
+        return types.SimpleNamespace(
+            duration_clock_string=None,
+            start_clock_time=times.start_clock_time,
+            stop_clock_time=None,
+        )
     total = len(skips)
-    clock_times = clock_times[:total]
+    clock_times = times.clock_times[:total]
     final_clock_time = clock_times[-1]
     final_clock_string = final_clock_time.to_clock_string()
     final_seconds = int(final_clock_time)
@@ -1026,7 +1016,11 @@ def _label_clock_time(
                 deactivate=True,
                 tag=tag.append(_tags.function_name(_frame())),
             )
-    return duration, start_clock_time, stop_clock_time
+    return types.SimpleNamespace(
+        duration_clock_string=times.duration_clock_string,
+        start_clock_time=times.start_clock_time,
+        stop_clock_time=times.stop_clock_time,
+    )
 
 
 def _label_duration_multipliers(score):
@@ -1297,7 +1291,7 @@ def _reapply_persistent_indicators(
                     raise Exception(memento.manifest)
             else:
                 dictionary = None
-            result = _analyze_memento(score, dictionary, context, memento)
+            result = _analyze_memento(context, dictionary, memento, score)
             if result is None:
                 continue
             leaf, previous_indicator, status, edition, synthetic_offset = result
@@ -1484,7 +1478,7 @@ def _style_fermata_measures(
     bar_lines_already_styled = []
     empty_fermata_measure_start_offsets = []
     for measure_number in fermata_measure_empty_overrides or []:
-        timespan = _get_measure_timespan(score, measure_number)
+        timespan = _get_measure_timespan(measure_number, score)
         empty_fermata_measure_start_offsets.append(timespan.start_offset)
     for staff in abjad.iterate.components(score, abjad.Staff):
         for leaf in abjad.iterate.leaves(staff):
@@ -2027,7 +2021,7 @@ def cache_leaves(score, measure_count, voice_abbreviations=None):
     measure_timespans = []
     for measure_index in range(measure_count):
         measure_number = measure_index + 1
-        measure_timespan = _get_measure_timespan(score, measure_number)
+        measure_timespan = _get_measure_timespan(measure_number, score)
         measure_timespans.append(measure_timespan)
     voice_name_to_leaves_by_measure = {}
     for leaf in abjad.select.leaves(score):
@@ -2618,19 +2612,14 @@ def postprocess_score(
         )
         if violators:
             raise Exception(f"{len(violators)} /    {total} out of range pitches")
-    clock_time_duration = None
-    start_clock_time = None
-    stop_clock_time = None
-    result = _label_clock_time(
+    previous_stop_clock_time = previous_metadata.get("stop_clock_time")
+    clock_time = _label_clock_time(
         clock_time_override,
         fermata_measure_numbers,
         first_measure_number,
-        previous_metadata,
+        previous_stop_clock_time,
         score,
     )
-    clock_time_duration = result[0]
-    start_clock_time = result[1]
-    stop_clock_time = result[2]
     final_measure_number = first_measure_number + measure_count - 1
     persistent_indicators = _collect_persistent_indicators(
         manifests,
@@ -2643,8 +2632,8 @@ def postprocess_score(
     if metronome_mark is None:
         first_metronome_mark = False
     new_metadata, new_persist = _collect_metadata(
+        clock_time,
         container_to_part_assignment,
-        clock_time_duration,
         fermata_measure_numbers,
         final_measure_is_fermata,
         final_measure_number,
@@ -2654,8 +2643,6 @@ def postprocess_score(
         persist,
         persistent_indicators,
         score,
-        start_clock_time,
-        stop_clock_time,
         cached_time_signatures,
         voice_name_to_parameter_to_state,
     )
@@ -2831,7 +2818,7 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
                     left_text = abjad.Markup(string)
                 else:
                     left_text = _bracket_metric_modulation(
-                        metronome_mark, metric_modulation
+                        metric_modulation, metronome_mark
                     )
                 if metronome_mark.custom_markup is not None:
                     stripped_left_text = r"- \baca-metronome-mark-spanner-left-markup"
