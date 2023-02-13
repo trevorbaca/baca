@@ -332,6 +332,8 @@ def _calculate_clock_times(
         )
     clock_times = []
     for local_measure_index, skip in enumerate(skips):
+        if abjad.get.has_indicator(skip, _enums.CLOCK_TIME_RESTART):
+            start_offset = abjad.Duration(0)
         measure_number = first_measure_number + local_measure_index
         if measure_number not in fermata_measure_numbers:
             clock_times.append(start_offset)

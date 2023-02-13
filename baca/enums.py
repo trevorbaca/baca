@@ -14,6 +14,7 @@ class enums(enum.Enum):
 
     CIRCLE_BOW = enum.auto()
     CLB = enum.auto()
+    CLOCK_TIME_RESTART = enum.auto()
     COVERED = enum.auto()
 
     DAMP = enum.auto()
