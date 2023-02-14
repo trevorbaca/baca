@@ -2619,7 +2619,10 @@ def postprocess_score(
         )
         if violators:
             raise Exception(f"{len(violators)} /    {total} out of range pitches")
-    previous_stop_clock_time = previous_metadata.get("stop_clock_time")
+    if section_not_included_in_score:
+        previous_stop_clock_time = "0'00''"
+    else:
+        previous_stop_clock_time = previous_metadata.get("stop_clock_time")
     clock_time = _label_clock_time(
         clock_time_override,
         fermata_measure_numbers,
