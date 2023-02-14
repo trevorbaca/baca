@@ -1054,7 +1054,9 @@ def _label_duration_multipliers(score):
             already_labeled.add(leaf)
 
 
-def _label_measure_numbers(first_measure_number, global_skips):
+def _label_measure_numbers(
+    first_measure_number, global_skips, section_not_included_in_score
+):
     skips = _select.skips(global_skips)
     total = len(skips)
     for measure_index, skip in enumerate(skips):
@@ -1075,20 +1077,21 @@ def _label_measure_numbers(first_measure_number, global_skips):
                 deactivate=True,
                 tag=tag,
             )
-            tag = _tags.MEASURE_NUMBER
-            tag = tag.append(_tags.function_name(_frame()))
-            string = r"- \baca-start-mn-left-only"
-            string += f' "{measure_number}"'
-            start_text_span = abjad.StartTextSpan(
-                command=r"\bacaStartTextSpanMN", left_text=string
-            )
-            abjad.attach(
-                start_text_span,
-                skip,
-                context="GlobalSkips",
-                deactivate=True,
-                tag=tag,
-            )
+            if not section_not_included_in_score:
+                tag = _tags.MEASURE_NUMBER
+                tag = tag.append(_tags.function_name(_frame()))
+                string = r"- \baca-start-mn-left-only"
+                string += f' "{measure_number}"'
+                start_text_span = abjad.StartTextSpan(
+                    command=r"\bacaStartTextSpanMN", left_text=string
+                )
+                abjad.attach(
+                    start_text_span,
+                    skip,
+                    context="GlobalSkips",
+                    deactivate=True,
+                    tag=tag,
+                )
         if 0 < measure_index:
             tag = _tags.LOCAL_MEASURE_NUMBER
             tag = tag.append(_tags.function_name(_frame()))
@@ -1100,16 +1103,17 @@ def _label_measure_numbers(first_measure_number, global_skips):
                 deactivate=True,
                 tag=tag,
             )
-            tag = _tags.MEASURE_NUMBER
-            tag = tag.append(_tags.function_name(_frame()))
-            stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanMN")
-            abjad.attach(
-                stop_text_span,
-                skip,
-                context="GlobalSkips",
-                deactivate=True,
-                tag=tag,
-            )
+            if not section_not_included_in_score:
+                tag = _tags.MEASURE_NUMBER
+                tag = tag.append(_tags.function_name(_frame()))
+                stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanMN")
+                abjad.attach(
+                    stop_text_span,
+                    skip,
+                    context="GlobalSkips",
+                    deactivate=True,
+                    tag=tag,
+                )
 
 
 def _magnify_staves(magnify_staves, score):
@@ -2479,6 +2483,7 @@ def postprocess_score(
     global_rests_in_every_staff=False,
     global_rests_in_topmost_staff=False,
     magnify_staves=None,
+    section_not_included_in_score=False,
     part_manifest=None,
     parts_metric_modulation_multiplier=None,
     section_number=None,
@@ -2529,6 +2534,7 @@ def postprocess_score(
         if not first_section:
             _clone_section_initial_short_instrument_name(score)
         cached_time_signatures = remove_redundant_time_signatures(score)
+        # TODO: use simple namespace:
         result = _get_fermata_measure_numbers(first_measure_number, score)
         fermata_start_offsets = result[0]
         fermata_measure_numbers = result[1]
@@ -2728,6 +2734,7 @@ def set_up_score(
     first_section: bool = False,
     layout: bool = False,
     manifests: dict | None = None,
+    section_not_included_in_score: bool = False,
     previous_persistent_indicators: dict | None = None,
 ) -> None:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
@@ -2739,7 +2746,7 @@ def set_up_score(
     _make_global_skips(skips, time_signatures, append_anchor_skip=append_anchor_skip)
     if not first_section:
         _attach_nonfirst_empty_start_bar(skips)
-    _label_measure_numbers(first_measure_number, skips)
+    _label_measure_numbers(first_measure_number, skips, section_not_included_in_score)
     if always_make_global_rests:
         _make_global_rests(score["Rests"], time_signatures)
     elif "Rests" in score:
