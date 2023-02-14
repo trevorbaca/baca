@@ -2484,7 +2484,6 @@ def postprocess_score(
     magnify_staves=None,
     part_manifest=None,
     parts_metric_modulation_multiplier=None,
-    section_not_included_in_score=False,
     section_number=None,
     transpose_score=False,
 ):
@@ -2619,10 +2618,13 @@ def postprocess_score(
         )
         if violators:
             raise Exception(f"{len(violators)} /    {total} out of range pitches")
-    if section_not_included_in_score:
+    previous_stop_clock_time: str
+    if environment.section_not_included_in_score:
         previous_stop_clock_time = "0'00''"
     else:
-        previous_stop_clock_time = previous_metadata.get("stop_clock_time")
+        result = previous_metadata.get("stop_clock_time")
+        assert isinstance(result, str)
+        previous_stop_clock_time = result
     clock_time = _label_clock_time(
         clock_time_override,
         fermata_measure_numbers,
@@ -2653,7 +2655,7 @@ def postprocess_score(
         persist,
         persistent_indicators,
         score,
-        section_not_included_in_score,
+        environment.section_not_included_in_score,
         cached_time_signatures,
         voice_name_to_parameter_to_state,
     )

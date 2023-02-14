@@ -608,6 +608,7 @@ class Environment:
         default_factory=_make_empty_mapping_proxy
     )
     section_directory: pathlib.Path | None = None
+    section_not_included_in_score: bool = False
     section_number: str | None = None
     timing: Timing | None = None
 
@@ -1195,13 +1196,15 @@ def print_timing(title, timer):
     print_success(string)
 
 
-def read_environment(music_py_path_name, sys_argv) -> Environment:
+def read_environment(
+    music_py_path_name, sys_argv, *, section_not_included_in_score=False
+) -> Environment:
     arguments_ = arguments(sys_argv)
     section_directory = pathlib.Path(music_py_path_name).parent
     metadata = baca.path.get_metadata(section_directory)
     persist = baca.path.get_metadata(section_directory)
     previous_metadata = baca.path.previous_metadata(music_py_path_name)
-    if previous_metadata:
+    if previous_metadata and not section_not_included_in_score:
         string = "final_measure_number"
         if string in previous_metadata:
             first_measure_number = previous_metadata[string] + 1
@@ -1216,6 +1219,7 @@ def read_environment(music_py_path_name, sys_argv) -> Environment:
         persist=persist,
         previous_metadata=previous_metadata,
         section_directory=section_directory,
+        section_not_included_in_score=section_not_included_in_score,
         section_number=section_directory.name,
         timing=Timing(),
     )
