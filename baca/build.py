@@ -433,7 +433,7 @@ def _make_section_pdf(
     abjad.persist.as_ly(lilypond_file, music_ly, tags=True)
     if music_ly.is_file() and music_ly_mtime < os.path.getmtime(music_ly):
         print_file_handling(f"Writing {baca.path.trim(music_ly)} ...")
-    print_file_remove("Removing section tag files ...")
+    print_file_handling("Removing section tag files ...")
     _layout_ly_tags = music_ly.with_name(".layout.ly.tags")
     if _layout_ly_tags.exists():
         _layout_ly_tags.unlink()
@@ -445,7 +445,9 @@ def _make_section_pdf(
         _music_ly_tags.unlink()
     _externalize_music_ly(music_ly)
     _handle_section_tags(music_ly.parent)
+    _populate_verbose_repository(music_ly.parent)
     _remove_site_comments(music_ly.parent)
+    _remove_function_name_comments(music_ly.parent)
     if music_pdf.is_file():
         print_file_handling(f"Existing {baca.path.trim(music_pdf)} ...", log_only=True)
     timing.lilypond = _call_lilypond_on_music_ly_in_section(
@@ -458,6 +460,51 @@ def _make_section_pdf(
         _log_timing(section_directory, timing)
     if also_untagged is True:
         _also_untagged(section_directory)
+
+
+def _populate_verbose_repository(section_directory):
+    if os.environ.get("GITHUB_WORKSPACE"):
+        return
+    print_file_handling("Populating verbose repository ...")
+    for name in ("music.ly", "music.ily", "layout.ly"):
+        tagged = section_directory / name
+        if not tagged.exists():
+            continue
+        with tagged.open() as pointer:
+            lines = pointer.readlines()
+        string = "".join(lines)
+        parts = []
+        for part in tagged.parts:
+            if part == os.path.sep:
+                pass
+            elif part == "Scores":
+                parts.append("verbose")
+            else:
+                parts.append(part)
+        untagged = "/" + os.path.sep.join(parts)
+        untagged = pathlib.Path(untagged)
+        if not untagged.parent.is_dir():
+            untagged.parent.mkdir(parents=True)
+        untagged.write_text(string)
+
+
+def _remove_function_name_comments(section_directory):
+    print_file_handling("Removing function name comments ...")
+    for name in ("music.ly", "music.ily", "layout.ly"):
+        tagged = section_directory / name
+        if not tagged.exists():
+            continue
+        with tagged.open() as pointer:
+            lines = pointer.readlines()
+        lines_ = []
+        for line in lines:
+            if line.strip().startswith("%! "):
+                if line.strip().endswith(")"):
+                    continue
+            lines_.append(line)
+        lines = lines_
+        string = "".join(lines)
+        tagged.write_text(string)
 
 
 def _remove_lilypond_warnings(
