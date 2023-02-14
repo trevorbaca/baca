@@ -445,6 +445,7 @@ def _make_section_pdf(
         _music_ly_tags.unlink()
     _externalize_music_ly(music_ly)
     _handle_section_tags(music_ly.parent)
+    _remove_site_comments(music_ly.parent)
     if music_pdf.is_file():
         print_file_handling(f"Existing {baca.path.trim(music_pdf)} ...", log_only=True)
     timing.lilypond = _call_lilypond_on_music_ly_in_section(
@@ -486,6 +487,25 @@ def _remove_lilypond_warnings(
             lines.append(line)
     text = "".join(lines)
     path.write_text(text)
+
+
+def _remove_site_comments(section_directory):
+    print_file_handling("Removing site comments ...")
+    for name in ("music.ly", "music.ily", "layout.ly"):
+        tagged = section_directory / name
+        if not tagged.exists():
+            continue
+        with tagged.open() as pointer:
+            lines = pointer.readlines()
+        lines_ = []
+        for line in lines:
+            if line.strip().startswith("% "):
+                if line.strip().endswith(":"):
+                    continue
+            lines_.append(line)
+        lines = lines_
+        string = "".join(lines)
+        tagged.write_text(string)
 
 
 def _trim_music_ly(ly):
