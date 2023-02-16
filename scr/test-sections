@@ -122,10 +122,6 @@ def _test_section(section_directory):
 def main(current_directory):
     contents_directory = baca.path.get_contents_directory(current_directory)
     sections_directory = contents_directory / "sections"
-    first_section_directory = sections_directory / "01"
-    if not first_section_directory.is_dir():
-        baca.build.print_error(f"Score contains no sections ...")
-        sys.exit(0)
     result = 0
     for path in sorted(sections_directory.glob("[0-9]*")):
         if not path.is_dir():
