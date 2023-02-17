@@ -2618,12 +2618,12 @@ def postprocess_score(
         )
         if violators:
             raise Exception(f"{len(violators)} /    {total} out of range pitches")
-    previous_stop_clock_time: str
+    previous_stop_clock_time: typing.Optional[str]
     if environment.section_not_included_in_score:
         previous_stop_clock_time = "0'00''"
     else:
         result = previous_metadata.get("stop_clock_time")
-        assert isinstance(result, str)
+        assert isinstance(result, (str, type(None))), repr(result)
         previous_stop_clock_time = result
     clock_time = _label_clock_time(
         clock_time_override,
