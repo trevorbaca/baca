@@ -199,14 +199,12 @@ def _do_register_command(argument, registration):
 def _do_register_to_octave_command(argument, anchor, octave_number):
     pitches = abjad.iterate.pitches(argument)
     octave_adjustment = _pcollections.pitches_to_octave_adjustment(
-        # pitches, anchor=self.anchor, octave_number=self.octave_number
         pitches,
         anchor=anchor,
         octave_number=octave_number,
     )
     pleaves = _select.pleaves(argument)
     for pleaf in pleaves:
-        # self._set_pitch(pleaf, lambda _: _.transpose(n=12 * octave_adjustment))
         _set_pitch(pleaf, lambda _: _.transpose(n=12 * octave_adjustment))
 
 
@@ -232,38 +230,20 @@ def _do_staff_position_command(
             default=abjad.Clef("treble"),
         )
         number = numbers[i]
-        # TODO: remove branch because never used?
-        if isinstance(number, list):
-            raise Exception("ASDF")
-            positions = [abjad.StaffPosition(_) for _ in number]
-            pitches = [clef.to_pitch(_) for _ in positions]
-            new_lt = _set_lt_pitch(
-                plt,
-                pitches,
-                allow_hidden=allow_hidden,
-                allow_obgc_mutation=allow_obgc_mutation,
-                allow_repitch=allow_repitch,
-                mock=mock,
-                set_chord_pitches_equal=set_chord_pitches_equal,
-            )
-            if new_lt is not None:
-                mutated_score = True
-                plt = new_lt
-        else:
-            position = abjad.StaffPosition(number)
-            pitch = clef.to_pitch(position)
-            new_lt = _set_lt_pitch(
-                plt,
-                pitch,
-                allow_hidden=allow_hidden,
-                allow_obgc_mutation=allow_obgc_mutation,
-                allow_repitch=allow_repitch,
-                mock=mock,
-                set_chord_pitches_equal=set_chord_pitches_equal,
-            )
-            if new_lt is not None:
-                mutated_score = True
-                plt = new_lt
+        position = abjad.StaffPosition(number)
+        pitch = clef.to_pitch(position)
+        new_lt = _set_lt_pitch(
+            plt,
+            pitch,
+            allow_hidden=allow_hidden,
+            allow_obgc_mutation=allow_obgc_mutation,
+            allow_repitch=allow_repitch,
+            mock=mock,
+            set_chord_pitches_equal=set_chord_pitches_equal,
+        )
+        if new_lt is not None:
+            mutated_score = True
+            plt = new_lt
         plt_count += 1
         for pleaf in plt:
             abjad.attach(_enums.STAFF_POSITION, pleaf)
