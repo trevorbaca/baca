@@ -321,6 +321,7 @@ def clparts(
     return lists_
 
 
+# TODO: maybe remove in favor of cyclic=True keyword to baca.select.mgroups()?
 def cmgroups(
     argument, counts: list[int] = [1], *, exclude: abjad.typings.Exclude | None = None
 ) -> list[list[abjad.Leaf]]:
