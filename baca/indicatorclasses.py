@@ -88,9 +88,9 @@ class Accelerando:
         r"""
         Gets string representation of accelerando.
 
-        ..  container:: example
+        String representation of accelerando with default markup:
 
-            String representation of accelerando with default markup:
+        ..  container:: example
 
             >>> print(str(baca.Accelerando()))
             \markup \large \upright accel.
@@ -380,9 +380,9 @@ class Ritardando:
         r"""
         Gets string representation of ritardando.
 
-        ..  container:: example
+        Default ritardando:
 
-            Default ritardando:
+        ..  container:: example
 
             >>> print(str(baca.Ritardando()))
             \markup \large \upright rit.

@@ -6,9 +6,9 @@ articulations.py examples.
     **COLOR FINGERINGS.**
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> signatures = baca.section.signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, signatures(), docs=True)
-    >>> music = baca.make_notes(signatures())
+    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
+    >>> music = baca.make_notes(time_signatures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitch(voice, "E4")

@@ -612,10 +612,10 @@ def list_related_tempos(
     r"""
     Lists related tempos.
 
-    ..  container:: example
+    Rewrites tempo ``4=58`` by ratios ``n:d`` such that ``1 <= n <= 8`` and ``1 <= d
+    <= 8``:
 
-        Rewrites tempo ``4=58`` by ratios ``n:d`` such that ``1 <= n <= 8`` and ``1 <= d
-        <= 8``.
+    ..  container:: example
 
         >>> pairs = baca.math.list_related_tempos(
         ...     abjad.MetronomeMark((1, 4), 58),

@@ -16,9 +16,9 @@ overrides.py examples.
 
     >>> def make_score():
     ...     score = baca.docs.make_empty_score(1)
-    ...     signatures = baca.section.signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    ...     baca.section.set_up_score(score, signatures(), docs=True)
-    ...     music = make_rhythm(signatures())
+    ...     time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     music = make_rhythm(time_signatures())
     ...     score["Music"].extend(music)
     ...     voice = score["Music"]
     ...     baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
@@ -417,10 +417,10 @@ overrides.py examples.
 
     >>> def make_score():
     ...     score = baca.docs.make_empty_score(1)
-    ...     signatures = baca.section.signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    ...     baca.section.set_up_score(score, signatures(), docs=True)
+    ...     time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
     ...     voice = score["Music"]
-    ...     music = baca.make_mmrests(signatures(), head="Music")
+    ...     music = baca.make_mmrests(time_signatures(), head="Music")
     ...     score["Music"].extend(music)
     ...     baca.mmrest_color(
     ...         baca.select.mmrests(voice)[1:],
@@ -481,10 +481,10 @@ overrides.py examples.
 
     >>> def make_score():
     ...     score = baca.docs.make_empty_score(1)
-    ...     signatures = baca.section.signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    ...     baca.section.set_up_score(score, signatures(), docs=True)
+    ...     time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
     ...     voice = score["Music"]
-    ...     music = baca.make_mmrests(signatures(), head="Music")
+    ...     music = baca.make_mmrests(time_signatures(), head="Music")
     ...     score["Music"].extend(music)
     ...     baca.markup(
     ...         baca.select.mmrest(voice, 2),
@@ -547,10 +547,10 @@ overrides.py examples.
 
     >>> def make_score():
     ...     score = baca.docs.make_empty_score(1)
-    ...     signatures = baca.section.signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    ...     baca.section.set_up_score(score, signatures(), docs=True)
+    ...     time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
     ...     voice = score["Music"]
-    ...     music = baca.make_mmrests(signatures(), head="Music")
+    ...     music = baca.make_mmrests(time_signatures(), head="Music")
     ...     score["Music"].extend(music)
     ...     baca.markup(
     ...         baca.select.mmrest(voice, 2),
@@ -615,10 +615,10 @@ overrides.py examples.
 
     >>> def make_score():
     ...     score = baca.docs.make_empty_score(1)
-    ...     signatures = baca.section.signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    ...     baca.section.set_up_score(score, signatures(), docs=True)
+    ...     time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
     ...     voice = score["Music"]
-    ...     music = baca.make_mmrests(signatures(), head="Music")
+    ...     music = baca.make_mmrests(time_signatures(), head="Music")
     ...     score["Music"].extend(music)
     ...     baca.markup(
     ...         baca.select.mmrest(voice, 2),
@@ -681,10 +681,10 @@ overrides.py examples.
 
     >>> def make_score():
     ...     score = baca.docs.make_empty_score(1)
-    ...     signatures = baca.section.signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    ...     baca.section.set_up_score(score, signatures(), docs=True)
+    ...     time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
     ...     voice = score["Music"]
-    ...     music = baca.make_mmrests(signatures(), head="Music")
+    ...     music = baca.make_mmrests(time_signatures(), head="Music")
     ...     score["Music"].extend(music)
     ...     baca.markup(
     ...         baca.select.mmrest(voice, 2),
@@ -747,10 +747,10 @@ overrides.py examples.
 
     >>> def make_score():
     ...     score = baca.docs.make_empty_score(1)
-    ...     signatures = baca.section.signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    ...     baca.section.set_up_score(score, signatures(), docs=True)
+    ...     time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
     ...     voice = score["Music"]
-    ...     music = baca.make_mmrests(signatures(), head="Music")
+    ...     music = baca.make_mmrests(time_signatures(), head="Music")
     ...     score["Music"].extend(music)
     ...     baca.markup(
     ...         baca.select.mmrest(voice, 2),

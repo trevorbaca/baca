@@ -826,9 +826,10 @@ class PitchArray:
         Makes time signatures with numerators equal to row width and denominators equal
         to ``cell_duration_denominator`` for each row in pitch array.
 
+        Changes two-by-three pitch array to measures:
+
         ..  container:: example
 
-            Changes two-by-three pitch array to measures:
 
             >>> array = baca.array.PitchArray([
             ...     [1, (2, 1), ([-2, -1.5], 2)],
@@ -2678,9 +2679,9 @@ class PitchArrayRow:
         Sets time signature numerators equal to pitch array row widths and time signature
         denominators equal to ``cell_duration_denominator``.
 
-        ..  container:: example
+        Changes row to measure:
 
-            Changes row to measure:
+        ..  container:: example
 
             >>> array = baca.array.PitchArray([
             ...     [1, (2, 1), ([-2, -1.5], 2)],

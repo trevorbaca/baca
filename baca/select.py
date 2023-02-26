@@ -29,9 +29,9 @@ def chead(
     r"""
     Selects chord head ``n`` in ``argument``.
 
-    ..  container:: example
+    Selects chord head -1:
 
-        Selects chord head -1:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -112,9 +112,9 @@ def cheads(
     r"""
     Selects chord heads in ``argument``.
 
-    ..  container:: example
+    Selects chord heads:
 
-        Selects chord heads:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -215,9 +215,9 @@ def clparts(
     r"""
     Selects leaves cyclically partitioned by ``counts`` (with overhang).
 
-    ..  container:: example
+    Selects leaves cyclically partitioned 2, 3, 4:
 
-        Selects leaves cyclically partitioned 2, 3, 4:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -328,9 +328,9 @@ def cmgroups(
     r"""
     Partitions measure-grouped leaves (cyclically).
 
-    ..  container:: example
+    Partitions measure-grouped leaves into pairs:
 
-        Partitions measure-grouped leaves into pairs:
+    ..  container:: example
 
         >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r d''")
         >>> abjad.setting(staff).autoBeaming = False
@@ -393,9 +393,9 @@ def enchain(argument, counts: typing.Sequence[int]) -> list[list]:
     r"""
     Enchains items in selection.
 
-    ..  container:: example
+    Enchains leaves in alternating groups of 5:
 
-        Enchains leaves in alternating groups of 5:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -518,9 +518,9 @@ def grace(
     r"""
     Selects grace ``n``.
 
-    ..  container:: example
+    Selects grace -1:
 
-        Selects grace -1:
+    ..  container:: example
 
         >>> staff = abjad.Staff("c'8 d'8 e'8 f'8")
         >>> container = abjad.BeforeGraceContainer("cf''16 bf'16")
@@ -573,9 +573,9 @@ def graces(
     r"""
     Selects graces.
 
-    ..  container:: example
+    Selects graces:
 
-        Selects graces:
+    ..  container:: example
 
         >>> staff = abjad.Staff("c'8 d'8 e'8 f'8")
         >>> container = abjad.BeforeGraceContainer("cf''16 bf'16")
@@ -637,9 +637,9 @@ def hleaf(
     r"""
     Selects haupt leaf ``n``.
 
-    ..  container:: example
+    Selects haupt leaf 1:
 
-        Selects haupt leaf 1:
+    ..  container:: example
 
         >>> staff = abjad.Staff("c'8 d'8 e'8 f'8")
         >>> container = abjad.BeforeGraceContainer("cf''16 bf'16")
@@ -692,9 +692,9 @@ def hleaves(
     r"""
     Selects haupt leaves.
 
-    ..  container:: example
+    Selects haupt leaves:
 
-        Selects haupt leaves:
+    ..  container:: example
 
         >>> staff = abjad.Staff("c'8 d'8 e'8 f'8")
         >>> container = abjad.BeforeGraceContainer("cf''16 bf'16")
@@ -851,9 +851,9 @@ def lleaf(
     r"""
     Selects leaf ``n`` from leaves leaked to the left.
 
-    ..  container:: example
+    Selects leaf 0 from leaves (leaked to the left) in tuplet 1:
 
-        Selects leaf 0 from leaves (leaked to the left) in tuplet 1:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -933,9 +933,9 @@ def lleak(argument, count: int = 1) -> list[abjad.Leaf]:
     r"""
     Leaks to the left.
 
-    ..  container:: example
+    Selects runs (each leaked to the left):
 
-        Selects runs (each leaked to the left):
+    ..  container:: example
 
         >>> staff = abjad.Staff("c'8 r8 d'8 e'8 r8 f'8 g'8 a'8")
         >>> abjad.setting(staff).autoBeaming = False
@@ -993,9 +993,9 @@ def lleaves(
     r"""
     Selects leaves, leaked to the left.
 
-    ..  container:: example
+    Selects leaves (leaked to the left) in tuplet 1:
 
-        Selects leaves (leaked to the left) in tuplet 1:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -1097,9 +1097,9 @@ def lparts(
     r"""
     Selects leaves partitioned by ``counts``.
 
-    ..  container:: example
+    Selects leaves partitioned 2, 3, 4:
 
-        Selects leaves partitioned 2, 3, 4:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -1195,9 +1195,9 @@ def lt(
     r"""
     Selects logical tie ``n``.
 
-    ..  container:: example
+    Selects logical tie -1:
 
-        Selects logical tie -1:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -1279,9 +1279,9 @@ def ltleaf(
     r"""
     Selects left-trimmed leaf ``n``.
 
-    ..  container:: example
+    Selects left-trimmed leaf 0:
 
-        Selects left-trimmed leaf 0:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -1361,9 +1361,9 @@ def ltleaves(
     r"""
     Selects left-trimmed leaves.
 
-    ..  container:: example
+    Selects left-trimmed leaves:
 
-        Selects left-trimmed leaves:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -1478,9 +1478,9 @@ def ltqrun(
     r"""
     Selects logical tie equipitch run ``n``.
 
-    ..  container:: example
+    Selects logical tie equipitch run -1:
 
-        Selects logical tie equipitch run -1:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -1562,9 +1562,9 @@ def ltqruns(
     r"""
     Selects logical tie equipitch runs.
 
-    ..  container:: example
+    Selects logical tie equipitch runs:
 
-        Selects logical tie equipitch runs:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -1672,9 +1672,9 @@ def ltrun(
     r"""
     Selects logical tie run ``n``.
 
-    ..  container:: example
+    Selects logical tie run -1:
 
-        Selects logical tie run -1:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -1759,9 +1759,9 @@ def ltruns(
     r"""
     Selects logical tie runs.
 
-    ..  container:: example
+    Selects logical tie runs:
 
-        Selects logical tie runs:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -1865,9 +1865,9 @@ def lts(
     r"""
     Selects logical ties.
 
-    ..  container:: example
+    Selects logical ties:
 
-        Selects logical ties:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -1984,9 +1984,9 @@ def mgroups(
     r"""
     Partitions measure-grouped leaves.
 
-    ..  container:: example
+    Partitions measure-grouped leaves into one part of length 2:
 
-        Partitions measure-grouped leaves into one part of length 2:
+    ..  container:: example
 
         >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r d''")
         >>> abjad.setting(staff).autoBeaming = False
@@ -2046,9 +2046,9 @@ def mleaves(
     r"""
     Selects all leaves in ``count`` measures.
 
-    ..  container:: example
+    Selects leaves in first three measures:
 
-        Selects leaves in first three measures:
+    ..  container:: example
 
         >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r")
         >>> abjad.setting(staff).autoBeaming = False
@@ -2175,9 +2175,9 @@ def mmrest(
     r"""
     Selects multimeasure rest ``n``.
 
-    ..  container:: example
+    Selects multimeasure rest -1:
 
-        Selects multimeasure rest -1:
+    ..  container:: example
 
         >>> staff = abjad.Staff("R1 R1 R1")
         >>> abjad.setting(staff).autoBeaming = False
@@ -2219,9 +2219,9 @@ def mmrests(
     r"""
     Selects multimeasure rests.
 
-    ..  container:: example
+    Selects multimeasure rests:
 
-        Selects multimeasure rests:
+    ..  container:: example
 
         >>> staff = abjad.Staff("R1 R1 R1")
         >>> abjad.setting(staff).autoBeaming = False
@@ -2270,9 +2270,9 @@ def ntrun(
     r"""
     Selects nontrivial run ``n``.
 
-    ..  container:: example
+    Selects nontrivial run -1:
 
-        Selects nontrivial run -1:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -2357,9 +2357,9 @@ def ntruns(
     r"""
     Selects nontrivial runs.
 
-    ..  container:: example
+    Selects nontrivial runs:
 
-        Selects nontrivial runs:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -2464,10 +2464,10 @@ def omgroups(
     r"""
     Partitions measure-grouped leaves (with overhang).
 
-    ..  container:: example
+    Partitions measure-grouped leaves into one part of length 2 followed by an
+    overhang part of remaining measures:
 
-        Partitions measure-grouped leaves into one part of length 2 followed by an
-        overhang part of remaining measures:
+    ..  container:: example
 
         >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r d''")
         >>> abjad.setting(staff).autoBeaming = False
@@ -2548,9 +2548,9 @@ def phead(
     r"""
     Selects pitched head ``n``.
 
-    ..  container:: example
+    Selects pitched head -1:
 
-        Selects pitched head -1:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -2631,9 +2631,9 @@ def pheads(
     r"""
     Selects pitched heads.
 
-    ..  container:: example
+    Selects pitched heads:
 
-        Selects pitched heads:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -2743,9 +2743,9 @@ def pleaf(
     r"""
     Selects pitched leaf ``n``.
 
-    ..  container:: example
+    Selects pitched leaf -1:
 
-        Selects pitched leaf -1:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -2828,9 +2828,9 @@ def pleaves(
     r"""
     Selects pitched leaves.
 
-    ..  container:: example
+    Selects pitched leaves:
 
-        Selects pitched leaves:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -2946,9 +2946,9 @@ def plt(
     r"""
     Selects pitched logical tie ``n``.
 
-    ..  container:: example
+    Selects pitched logical tie -1:
 
-        Selects pitched logical tie -1:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -3030,9 +3030,9 @@ def plts(
     r"""
     Selects pitched logical ties.
 
-    ..  container:: example
+    Selects pitched logical ties:
 
-        Selects pitched logical ties:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -3142,9 +3142,9 @@ def ptail(
     r"""
     Selects pitched tail ``n``.
 
-    ..  container:: example
+    Selects pitched tail -1:
 
-        Selects pitched tail -1:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -3236,9 +3236,9 @@ def ptails(
     r"""
     Selects pitched tails.
 
-    ..  container:: example
+    Selects pitched tails:
 
-        Selects pitched tails:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -3345,9 +3345,9 @@ def ptlt(
     r"""
     Selects pitched trivial logical tie ``n``.
 
-    ..  container:: example
+    Selects pitched trivial logical tie -1:
 
-        Selects pitched trivial logical tie -1:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -3428,9 +3428,9 @@ def ptlts(
     r"""
     Selects pitched trivial logical ties.
 
-    ..  container:: example
+    Selects pitched trivial logical ties:
 
-        Selects pitched trivial logical ties:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -3531,9 +3531,9 @@ def qrun(
     r"""
     Selects equipitch run ``n``.
 
-    ..  container:: example
+    Selects equipitch run -1:
 
-        Selects equipitch run -1:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -3615,9 +3615,9 @@ def qruns(
     r"""
     Selects equipitch runs.
 
-    ..  container:: example
+    Selects equipitch runs:
 
-        Selects equipitch runs:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -3727,9 +3727,9 @@ def rleaf(
     r"""
     Selects leaf ``n`` from leaves leaked to the right.
 
-    ..  container:: example
+    Selects leaf -1 from leaves (leaked to the right) in tuplet 1:
 
-        Selects leaf -1 from leaves (leaked to the right) in tuplet 1:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -3809,9 +3809,9 @@ def rleak(argument, *, count: int = 1, grace: bool | None = None) -> list[abjad.
     r"""
     Leaks to the right.
 
-    ..  container:: example
+    Selects runs (each leaked to the right):
 
-        Selects runs (each leaked to the right):
+    ..  container:: example
 
         >>> staff = abjad.Staff("c'8 r8 d'8 e'8 r8 f'8 g'8 a'8")
         >>> abjad.setting(staff).autoBeaming = False
@@ -3881,9 +3881,9 @@ def rleaves(
     r"""
     Selects leaves, leaked to the right.
 
-    ..  container:: example
+    Selects leaves (leaked to the right) in tuplet 1:
 
-        Selects leaves (leaked to the right) in tuplet 1:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -3982,9 +3982,9 @@ def rmleaves(
     r"""
     Selects all leaves in ``count`` measures, leaked one leaf to the right.
 
-    ..  container:: example
+    Selects leaves in first two measures, leaked on leaf to the right:
 
-        Selects leaves in first two measures, leaked on leaf to the right:
+    ..  container:: example
 
         >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r")
         >>> abjad.setting(staff).autoBeaming = False
@@ -4047,9 +4047,9 @@ def rrun(
     r"""
     Selects run ``n`` (leaked to the right).
 
-    ..  container:: example
+    Selects run 1 (leaked to the right):
 
-        Selects run 1 (leaked to the right):
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -4135,9 +4135,9 @@ def rruns(
     r"""
     Selects runs (leaked to the right).
 
-    ..  container:: example
+    Selects runs (leaked to the right):
 
-        Selects runs (leaked to the right):
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -4247,9 +4247,9 @@ def skip(
     r"""
     Selects skip ``n``.
 
-    ..  container:: example
+    Selects skip -1:
 
-        Selects skip -1:
+    ..  container:: example
 
         >>> staff = abjad.Staff("c'8 s e' f' g' s b' s")
         >>> abjad.setting(staff).autoBeaming = False
@@ -4301,9 +4301,9 @@ def skips(
     r"""
     Selects skips.
 
-    ..  container:: example
+    Selects skips:
 
-        Selects skips:
+    ..  container:: example
 
         >>> staff = abjad.Staff("c'8 s e' f' g' s b' s")
         >>> abjad.setting(staff).autoBeaming = False
@@ -4385,9 +4385,9 @@ def tleaf(
     r"""
     Selects trimmed leaf ``n``.
 
-    ..  container:: example
+    Selects trimmed leaf 0:
 
-        Selects trimmed leaf 0:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -4472,9 +4472,9 @@ def tleaves(
     r"""
     Selects trimmed leaves.
 
-    ..  container:: example
+    Selects trimmed leaves:
 
-        Selects trimmed leaves:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -4602,9 +4602,9 @@ def wleaf(
     r"""
     Selects leaf ``n`` from leaves leaked wide.
 
-    ..  container:: example
+    Selects leaf 0 from leaves (leaked to both the left and right) in tuplet 1:
 
-        Selects leaf 0 from leaves (leaked to both the left and right) in tuplet 1:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
@@ -4760,9 +4760,9 @@ def wleaves(
     r"""
     Selects leaves, leaked "wide" (to both the left and right).
 
-    ..  container:: example
+    Selects leaves (leaked wide) in tuplet 1:
 
-        Selects leaves (leaked wide) in tuplet 1:
+    ..  container:: example
 
         >>> tuplets = [
         ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",

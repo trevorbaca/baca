@@ -4,9 +4,9 @@ Examples.
 ..  container:: example
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> signatures = baca.section.signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, signatures(), docs=True)
-    >>> music = baca.make_even_divisions(signatures())
+    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
+    >>> music = baca.make_even_divisions(time_signatures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> abjad.label.with_indices(voice)
@@ -81,8 +81,8 @@ Examples.
     Colors octaves:
 
     >>> score = baca.docs.make_empty_score(1, 1)
-    >>> signatures = baca.section.signatures([(6, 4)])
-    >>> baca.section.set_up_score(score, signatures(), docs=True)
+    >>> time_signatures = baca.section.time_signatures([(6, 4)])
+    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> music = abjad.Container("d'4 e' f' g' a' b'")[:]
     >>> score["Music.1"].extend(music)
     >>> music = abjad.Container("a4 g f e d c")[:]
@@ -149,9 +149,9 @@ Examples.
     >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
     >>> manifests = {"abjad.Instrument": instruments}
     >>> score = baca.docs.make_empty_score(1)
-    >>> signatures = baca.section.signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, signatures(), docs=True)
-    >>> music = baca.make_even_divisions(signatures())
+    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
+    >>> music = baca.make_even_divisions(time_signatures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.instrument(voice[0], "clarinet", manifests)
@@ -217,9 +217,9 @@ Examples.
     >>> instruments["clarinet"] = abjad.ClarinetInBFlat()
     >>> manifests = {"abjad.Instrument": instruments}
     >>> score = baca.docs.make_empty_score(1)
-    >>> signatures = baca.section.signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, signatures(), docs=True)
-    >>> music = baca.make_even_divisions(signatures())
+    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
+    >>> music = baca.make_even_divisions(time_signatures())
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.instrument(voice[0], "clarinet", manifests)
@@ -304,8 +304,8 @@ Examples.
     >>> instruments["Violin"] = abjad.Violin()
     >>> manifests = {"abjad.Instrument": instruments}
     >>> score = baca.docs.make_empty_score(1)
-    >>> signatures = baca.section.signatures(time_signatures)
-    >>> baca.section.set_up_score(score, signatures(), docs=True)
+    >>> time_signatures = baca.section.time_signatures(time_signatures)
+    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> score["Music"].extend(figures_)
     >>> voice = score["Music"]
     >>> _ = baca.instrument(voice[0], "Violin", manifests)
@@ -398,8 +398,8 @@ Examples.
     ...
     >>> figures = list(figures_)
     >>> score = baca.docs.make_empty_score(1)
-    >>> signatures = baca.section.signatures(time_signatures)
-    >>> baca.section.set_up_score(score, signatures(), docs=True)
+    >>> time_signatures = baca.section.time_signatures(time_signatures)
+    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> score["Music"].extend(figures_)
     >>> baca.section.color_repeat_pitch_classes(score)
     >>> abjad.setting(score).autoBeaming = False

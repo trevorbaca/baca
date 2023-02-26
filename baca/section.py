@@ -2450,7 +2450,7 @@ def make_layout_ly(
             )
 
 
-def signatures(items):
+def time_signatures(items):
     time_signatures = [abjad.TimeSignature(_) for _ in items]
     return TimeSignatureServer(time_signatures)
 
@@ -3075,8 +3075,8 @@ def style_anchor_skip(score):
     )
 
 
-def time_signatures(pairs):
-    return [abjad.TimeSignature(_) for _ in pairs]
+# def time_signatures(pairs):
+#    return [abjad.TimeSignature(_) for _ in pairs]
 
 
 def update_voice_name_to_parameter_to_state(

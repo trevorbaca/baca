@@ -912,9 +912,9 @@ class Registration:
         r"""
         Calls registration on ``pitches``.
 
-        ..  container:: example
+        Transposes four pitches:
 
-            Transposes four pitches:
+        ..  container:: example
 
             >>> components = [
             ...     baca.RegistrationComponent(
