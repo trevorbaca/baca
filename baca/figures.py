@@ -1124,6 +1124,20 @@ class Accumulator:
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class GraceToken:
+    denominator: int
+    grace_note_numerators: list[int]
+    main_note_numerator: int
+
+    def __post_init__(self):
+        assert isinstance(self.denominator, int), repr(self.denominator)
+        assert isinstance(self.main_note_numerator, int), repr(self.main_note_numerator)
+        assert all(isinstance(_, int) for _ in self.grace_note_numerators), repr(
+            self.grace_note_numerators
+        )
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class RestAffix:
     pattern: abjad.Pattern | None = None
     prefix: typing.Sequence[int] = ()
