@@ -179,13 +179,6 @@ def _do_imbrication(
         elif isinstance(logical_tie.head, abjad.Skip):
             pass
         elif _matches_pitch(logical_tie.head, pitch_number):
-            if isinstance(pitch_number, Coat):
-                for leaf in logical_tie:
-                    duration = leaf.written_duration
-                    skip = abjad.Skip(duration)
-                    abjad.mutate.replace(leaf, [skip])
-                pitch_number = cursor.next()
-                continue
             _trim_matching_chord(logical_tie, pitch_number)
             pitch_number = cursor.next()
             if truncate_ties:
@@ -766,8 +759,6 @@ def _make_tuplet_with_extra_count(leaf_selection, extra_count, denominator):
 
 
 def _matches_pitch(pitched_leaf, pitch_object):
-    if isinstance(pitch_object, Coat):
-        pitch_object = pitch_object.argument
     if pitch_object is None:
         return False
     if isinstance(pitched_leaf, abjad.Note):
@@ -1005,11 +996,6 @@ class Anchor:
         assert isinstance(self.use_remote_stop_offset, bool), repr(
             self.use_remote_stop_offset
         )
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class Coat:
-    argument: int | str | abjad.Pitch | None = None
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -1334,10 +1320,6 @@ def anchor_to_figure(figure_name: str) -> Anchor:
     Anchors music in this figure to start of ``figure_name``.
     """
     return Anchor(figure_name=figure_name)
-
-
-def coat(pitch: int | str | abjad.Pitch) -> Coat:
-    return Coat(pitch)
 
 
 def figure(
