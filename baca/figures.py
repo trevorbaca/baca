@@ -1253,35 +1253,6 @@ class RestAffix:
         return None, None
 
 
-class Stack:
-    __slots__ = ("commands",)
-
-    def __init__(self, *commands) -> None:
-        commands = commands or ()
-        self.commands = tuple(commands)
-
-    def __call__(self, argument: typing.Any, **keywords) -> typing.Any:
-        if not self.commands:
-            return argument
-        try:
-            result: typing.Any = self.commands[0](argument, **keywords)
-        except Exception:
-            message = "exception while calling:\n"
-            message += f"   {self.commands[0]}"
-            raise Exception(message)
-        for command in self.commands[1:]:
-            try:
-                result_ = command(result)
-            except Exception:
-                message = "exception while calling:\n"
-                message += f"   {command}"
-                raise Exception(message)
-            if result_ not in (True, False, None):
-                result = result_
-        if result not in (True, False, None):
-            return result
-
-
 def anchor(
     remote_voice_name: str,
     remote_selector=None,
@@ -1550,7 +1521,3 @@ def skips_around(prefix: list[int], suffix: list[int]) -> RestAffix:
 
 def skips_before(counts: list[int]) -> RestAffix:
     return RestAffix(prefix=counts, skips_instead_of_rests=True)
-
-
-def stack(*commands) -> Stack:
-    return Stack(*commands)
