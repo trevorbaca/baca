@@ -17,7 +17,7 @@ import baca
 def _also_untagged(section_directory):
     if os.environ.get("GITHUB_WORKSPACE"):
         return
-    print_main_task("Populating untagged repository ...")
+    print_main_task("Populating _untagged repository ...")
     for name in ("music.ly", "music.ily", "layout.ly"):
         tagged = section_directory / name
         if not tagged.exists():
@@ -38,14 +38,14 @@ def _also_untagged(section_directory):
             if part == os.path.sep:
                 pass
             elif part == "Scores":
-                parts.append("untagged")
+                parts.append("_untagged")
             else:
                 parts.append(part)
-        untagged = "/" + os.path.sep.join(parts)
-        untagged = pathlib.Path(untagged)
-        if not untagged.parent.is_dir():
-            untagged.parent.mkdir(parents=True)
-        untagged.write_text(string)
+        _untagged = "/" + os.path.sep.join(parts)
+        _untagged = pathlib.Path(_untagged)
+        if not _untagged.parent.is_dir():
+            _untagged.parent.mkdir(parents=True)
+        _untagged.write_text(string)
     for name in ("music.ly", "music.ily", "layout.ly"):
         tagged = section_directory / name
         if not tagged.exists():
@@ -54,7 +54,7 @@ def _also_untagged(section_directory):
         shutil.copyfile(tagged, safekeeping)
         color_persistent_indicators(tagged, undo=True)
         show_annotations(tagged, undo=True)
-    print_main_task("Populating bw repository ...")
+    print_main_task("Populating _bw repository ...")
     for name in ("music.ly", "music.ily", "layout.ly"):
         tagged = section_directory / name
         if not tagged.exists():
@@ -81,14 +81,14 @@ def _also_untagged(section_directory):
             if part == os.path.sep:
                 pass
             elif part == "Scores":
-                parts.append("bw")
+                parts.append("_bw")
             else:
                 parts.append(part)
-        bw = "/" + os.path.sep.join(parts)
-        bw = pathlib.Path(bw)
-        if not bw.parent.is_dir():
-            bw.parent.mkdir(parents=True)
-        bw.write_text(string)
+        _bw = "/" + os.path.sep.join(parts)
+        _bw = pathlib.Path(_bw)
+        if not _bw.parent.is_dir():
+            _bw.parent.mkdir(parents=True)
+        _bw.write_text(string)
     for name in ("music.ly", "music.ily", "layout.ly"):
         tagged = section_directory / name
         if not tagged.exists():
@@ -465,7 +465,7 @@ def _make_section_pdf(
 def _populate_verbose_repository(section_directory):
     if os.environ.get("GITHUB_WORKSPACE"):
         return
-    print_file_handling("Populating verbose repository ...")
+    print_file_handling("Populating _verbose repository ...")
     for name in ("music.ly", "music.ily", "layout.ly"):
         tagged = section_directory / name
         if not tagged.exists():
@@ -478,14 +478,14 @@ def _populate_verbose_repository(section_directory):
             if part == os.path.sep:
                 pass
             elif part == "Scores":
-                parts.append("verbose")
+                parts.append("_verbose")
             else:
                 parts.append(part)
-        untagged = "/" + os.path.sep.join(parts)
-        untagged = pathlib.Path(untagged)
-        if not untagged.parent.is_dir():
-            untagged.parent.mkdir(parents=True)
-        untagged.write_text(string)
+        _untagged = "/" + os.path.sep.join(parts)
+        _untagged = pathlib.Path(_untagged)
+        if not _untagged.parent.is_dir():
+            _untagged.parent.mkdir(parents=True)
+        _untagged.write_text(string)
 
 
 def _remove_function_name_comments(section_directory):
@@ -1050,13 +1050,13 @@ def interpret_build_music(
         else:
             handle_part_tags(build_directory)
     if "trevor" in _sections_directory.parts:
-        print_main_task("Populating builds repository ...")
+        print_main_task("Populating _builds repository ...")
         parts = list(_sections_directory.parts)
         assert parts[3] == "Scores"
-        parts[3] = "builds"
-        builds_sections_directory = os.sep + os.sep.join(parts[1:])
+        parts[3] = "_builds"
+        _builds_sections_directory = os.sep + os.sep.join(parts[1:])
         shutil.copytree(
-            _sections_directory, builds_sections_directory, dirs_exist_ok=True
+            _sections_directory, _builds_sections_directory, dirs_exist_ok=True
         )
     remove = None
     if _sections_directory.is_dir() and not debug_sections:
