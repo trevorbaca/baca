@@ -3,6 +3,7 @@ Figures.
 """
 import copy
 import dataclasses
+import fractions
 import math as python_math
 import typing
 from inspect import currentframe as _frame
@@ -789,6 +790,24 @@ def _trim_matching_chord(logical_tie, pitch_object):
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class Accelerando:
+    denominator: int
+    items: list
+    numerator: int
+    coefficient: fractions.Fraction | None = None
+    ritardando: bool = False
+
+    def __post_init__(self):
+        assert isinstance(self.denominator, int), repr(self.denominator)
+        assert isinstance(self.items, list), repr(self.items)
+        assert isinstance(self.numerator, int), repr(self.numerator)
+        assert isinstance(self.ritardando, bool), repr(self.ritardando)
+
+    def __call__(self):
+        pass
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class LMR:
     left_counts: typing.Sequence[int] = ()
     left_cyclic: bool = False
@@ -1124,7 +1143,7 @@ class Accumulator:
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class GraceToken:
+class Grace:
     denominator: int
     grace_note_numerators: list[int]
     main_note_numerator: int
@@ -1135,6 +1154,45 @@ class GraceToken:
         assert all(isinstance(_, int) for _ in self.grace_note_numerators), repr(
             self.grace_note_numerators
         )
+
+    def __call__(self):
+        main_duration = abjad.Duration(abs(self.main_note_numerator), self.denominator)
+        if 0 < self.main_note_numerator:
+            pitch = 0
+        else:
+            pitch = None
+        main_components = abjad.makers.make_leaves([pitch], main_duration)
+        first_leaf = abjad.get.leaf(main_components, 0)
+        grace_durations = [
+            abjad.Duration(abs(_), self.denominator) for _ in self.grace_note_numerators
+        ]
+        pitches = []
+        for grace_note_numerator in self.grace_note_numerators:
+            if 0 < grace_note_numerator:
+                pitches.append(0)
+            else:
+                pitches.append(None)
+        grace_leaves = abjad.makers.make_leaves(pitches, grace_durations)
+        grace_container = abjad.BeforeGraceContainer(grace_leaves)
+        abjad.attach(grace_container, first_leaf)
+        return main_components
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class OBGC:
+    denominator: int
+    grace_note_numerators: list[int]
+    main_note_numerator: int
+
+    def __post_init__(self):
+        assert isinstance(self.denominator, int), repr(self.denominator)
+        assert all(isinstance(_, int) for _ in self.grace_note_numerators), repr(
+            self.grace_note_numerators
+        )
+        assert isinstance(self.main_note_numerator, int), repr(self.main_note_numerator)
+
+    def __call__(self):
+        pass
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)

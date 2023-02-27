@@ -16,7 +16,26 @@ from .commands import *
 from .constellation import *
 from .cursor import Cursor
 from .docs import global_context_string
-from .figures import *
+from .figures import (
+    Acciaccatura,
+    RestAffix,
+    anchor,
+    anchor_after,
+    anchor_to_figure,
+    figure,
+    imbricate,
+    lmr,
+    make_figures,
+    nest,
+    rests_after,
+    rests_around,
+    rests_before,
+    resume,
+    resume_after,
+    skips_after,
+    skips_around,
+    skips_before,
+)
 from .indicatorclasses import *
 from .indicatorcommands import *
 from .layout import *
