@@ -126,8 +126,8 @@ def get_previous_rhythm_state(
 def make_even_divisions(time_signatures) -> list[abjad.Leaf | abjad.Tuplet]:
     tag = _tags.function_name(_frame())
     durations = [_.duration for _ in time_signatures]
-    nested_music = rmakers.even_division(durations, [8], tag=tag)
-    voice = rmakers.wrap_in_time_signature_staff(nested_music, time_signatures)
+    tuplets = rmakers.even_division(durations, [8], tag=tag)
+    voice = rmakers.wrap_in_time_signature_staff(tuplets, time_signatures)
     rmakers.beam(voice, tag=tag)
     rmakers.extract_trivial(voice)
     components = abjad.mutate.eject_contents(voice)
@@ -285,14 +285,16 @@ def make_notes(
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     tag = _tags.function_name(_frame())
     durations = [_.duration for _ in time_signatures]
-    nested_music = rmakers.note(durations, tag=tag)
-    music = abjad.sequence.flatten(nested_music, depth=-1)
-    voice = rmakers.wrap_in_time_signature_staff(music, time_signatures)
+    lists = rmakers.note(durations, tag=tag)
+    components = abjad.sequence.flatten(lists)
+    voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
     rmakers.rewrite_meter(voice)
     if repeat_ties is True:
         rmakers.force_repeat_tie(voice)
-    music = abjad.mutate.eject_contents(voice)
-    assert all(isinstance(_, abjad.Leaf | abjad.Tuplet) for _ in music)
+    components, music = abjad.mutate.eject_contents(voice), []
+    for component in components:
+        assert isinstance(component, abjad.Leaf | abjad.Tuplet)
+        music.append(component)
     return music
 
 
@@ -350,10 +352,8 @@ def make_repeat_tied_notes(
     """
     tag = _tags.function_name(_frame())
     durations = [_.duration for _ in time_signatures]
-    nested_music = rmakers.note(durations, tag=tag)
-    leaves_and_tuplets: list[abjad.Leaf | abjad.Tuplet] = abjad.sequence.flatten(
-        nested_music, depth=-1
-    )
+    lists = rmakers.note(durations, tag=tag)
+    leaves_and_tuplets: list[abjad.Leaf | abjad.Tuplet] = abjad.sequence.flatten(lists)
     voice = rmakers.wrap_in_time_signature_staff(leaves_and_tuplets, time_signatures)
     rmakers.beam(_select.plts(voice))
     rmakers.repeat_tie(_select.pheads(voice)[1:], tag=tag)
@@ -386,8 +386,9 @@ def make_repeated_duration_notes(
     weights = abjad.durations(weights)
     durations = abjad.sequence.split(durations, weights, cyclic=True, overhang=True)
     durations = abjad.sequence.flatten(durations, depth=-1)
-    nested_music = rmakers.note(durations, tag=tag)
-    voice = rmakers.wrap_in_time_signature_staff(nested_music, time_signatures)
+    lists = rmakers.note(durations, tag=tag)
+    components = abjad.sequence.flatten(lists)
+    voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
     if not do_not_rewrite_meter:
         rmakers.rewrite_meter(voice, tag=tag)
     rmakers.force_repeat_tie(voice)
@@ -403,8 +404,9 @@ def make_rests(time_signatures) -> list[abjad.Rest | abjad.Tuplet]:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     tag = _tags.function_name(_frame())
     durations = [_.duration for _ in time_signatures]
-    nested_music = rmakers.note(durations, tag=tag)
-    voice = rmakers.wrap_in_time_signature_staff(nested_music, time_signatures)
+    lists = rmakers.note(durations, tag=tag)
+    components = abjad.sequence.flatten(lists)
+    voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
     lts = _select.lts(voice)
     rmakers.force_rest(lts, tag=tag)
     components = abjad.mutate.eject_contents(voice)
@@ -421,7 +423,7 @@ def make_single_attack(time_signatures, duration) -> list[abjad.Leaf | abjad.Tup
     tag = _tags.function_name(_frame())
     duration = abjad.Duration(duration)
     numerator, denominator = duration.pair
-    nested_music = rmakers.incised(
+    tuplets = rmakers.incised(
         durations,
         fill_with_rests=True,
         outer_divisions_only=True,
@@ -430,7 +432,7 @@ def make_single_attack(time_signatures, duration) -> list[abjad.Leaf | abjad.Tup
         talea_denominator=denominator,
         tag=tag,
     )
-    voice = rmakers.wrap_in_time_signature_staff(nested_music, time_signatures)
+    voice = rmakers.wrap_in_time_signature_staff(tuplets, time_signatures)
     rmakers.beam(voice)
     rmakers.extract_trivial(voice)
     components = abjad.mutate.eject_contents(voice)
@@ -470,8 +472,9 @@ def make_tied_notes(time_signatures) -> list[abjad.Note | abjad.Tuplet]:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     durations = [_.duration for _ in time_signatures]
     tag = _tags.function_name(_frame())
-    nested_music = rmakers.note(durations, tag=tag)
-    voice = rmakers.wrap_in_time_signature_staff(nested_music, time_signatures)
+    lists = rmakers.note(durations, tag=tag)
+    components = abjad.sequence.flatten(lists)
+    voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
     plts = _select.plts(voice)
     rmakers.beam(plts, tag=tag)
     ptails = _select.ptails(voice)[:-1]
@@ -500,8 +503,9 @@ def make_tied_repeated_durations(
     elif isinstance(weights, tuple):
         assert len(weights) == 2
         weights = [abjad.Duration(weights)]
-    nested_music = rmakers.note(durations, tag=tag)
-    voice = rmakers.wrap_in_time_signature_staff(nested_music, time_signatures)
+    lists = rmakers.note(durations, tag=tag)
+    components = abjad.sequence.flatten(lists)
+    voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
     pheads = _select.pheads(voice)[1:]
     rmakers.repeat_tie(pheads, tag=tag)
     rmakers.force_repeat_tie(voice)
