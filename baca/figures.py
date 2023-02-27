@@ -123,10 +123,6 @@ def _collections_to_container(
     elif all(isinstance(_, abjad.Component) for _ in collections):
         tuplet = abjad.Tuplet((1, 1), collections, hide=True)
         tuplets = [tuplet]
-    elif isinstance(commands[0], FigureMaker):
-        figure_maker = commands[0]
-        tuplets = figure_maker(collections)
-        commands = commands[1:]
     else:
         raise Exception
     assert isinstance(tuplets, list), repr(tuplets)
@@ -137,14 +133,10 @@ def _collections_to_container(
     if tsd is None and command:
         tsd = command.assignments[0].maker.tsd
     imbrications = {}
-    command_prototype = (rmakers.Command, Nest)
+    command_prototype = rmakers.Command
     for command in commands:
-        if isinstance(command, Imbrication):
-            voice_name_to_selection = command(container)
-            imbrications.update(voice_name_to_selection)
-        else:
-            assert isinstance(command, command_prototype), repr(command)
-            command(container)
+        assert isinstance(command, command_prototype), repr(command)
+        command(container)
     return container, imbrications, tsd
 
 
@@ -1129,95 +1121,6 @@ class Accumulator:
                 continue
             voice = score[voice_name]
             voice.extend(selection)
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class FigureMaker:
-    talea: rmakers.Talea
-    acciaccatura: Acciaccatura | None = None
-    affix: typing.Optional["RestAffix"] = None
-    restart_talea: bool = False
-    tsd: int | None = None
-    spelling: rmakers.Spelling | None = None
-    treatments: typing.Sequence = ()
-
-    def __post_init__(self):
-        if self.acciaccatura is not None:
-            assert isinstance(self.acciaccatura, Acciaccatura), repr(self.acciaccatura)
-        if self.affix is not None:
-            assert isinstance(self.affix, RestAffix), repr(self.affix)
-        assert isinstance(self.restart_talea, bool), repr(self.restart_talea)
-        if self.tsd is not None:
-            assert isinstance(self.tsd, int), repr(self.tsd)
-        if self.spelling is not None:
-            assert isinstance(self.spelling, rmakers.Spelling), repr(self.spelling)
-        assert isinstance(self.talea, rmakers.Talea), repr(self.talea)
-        if self.treatments is not None:
-            for treatment in self.treatments:
-                assert _is_treatment(treatment)
-
-    def __call__(
-        self,
-        collections: typing.Sequence,
-        collection_index: int | None = None,
-        total_collections: int | None = None,
-    ) -> list[abjad.Tuplet]:
-        return _call_figure_maker(
-            self.affix,
-            self.talea,
-            self.spelling,
-            self.treatments,
-            self.acciaccatura,
-            collections=collections,
-            restart_talea=self.restart_talea,
-        )
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class Imbrication:
-    voice_name: str
-    segment: list[int]
-    commands: tuple = ()
-    allow_unused_pitches: bool = False
-    by_pitch_class: bool = False
-    hocket: bool = False
-    truncate_ties: bool = False
-
-    def __post_init__(self) -> None:
-        assert isinstance(self.voice_name, str), repr(self.voice_name)
-        assert isinstance(self.segment, list), repr(self.segment)
-        assert isinstance(self.allow_unused_pitches, bool)
-        assert isinstance(self.by_pitch_class, bool), repr(self.by_pitch_class)
-        assert isinstance(self.hocket, bool), repr(self.hocket)
-        assert isinstance(self.truncate_ties, bool), repr(self.truncate_ties)
-
-    def __call__(self, container: abjad.Container) -> dict[str, list]:
-        return _do_imbrication(
-            container,
-            self.segment,
-            self.voice_name,
-            *self.commands,
-            allow_unused_pitches=self.allow_unused_pitches,
-            by_pitch_class=self.by_pitch_class,
-            hocket=self.hocket,
-            truncate_ties=self.truncate_ties,
-        )
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class Nest:
-    treatments: typing.Sequence[int | str]
-    lmr: LMR | None = None
-
-    def __post_init__(self):
-        assert isinstance(self.treatments, list | tuple)
-        for treatment in self.treatments:
-            assert _is_treatment(treatment), repr(treatment)
-        if self.lmr is not None:
-            assert isinstance(self.lmr, LMR), repr(self.lmr)
-
-    def __call__(self, selection) -> list[abjad.Tuplet]:
-        return _do_nest_command(selection, lmr=self.lmr, treatments=self.treatments)
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
