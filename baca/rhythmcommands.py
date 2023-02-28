@@ -422,11 +422,11 @@ def make_single_attack(time_signatures, duration) -> list[abjad.Leaf | abjad.Tup
     tuplets = rmakers.incised(
         durations,
         fill_with_rests=True,
-        outer_divisions_only=True,
+        outer_tuplets_only=True,
         prefix_talea=[numerator],
         prefix_counts=[1],
-        talea_denominator=denominator,
         tag=tag,
+        talea_denominator=denominator,
     )
     voice = rmakers.wrap_in_time_signature_staff(tuplets, time_signatures)
     rmakers.beam(voice)
