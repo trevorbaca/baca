@@ -87,19 +87,18 @@ overrides.py examples.
     Overrides beam positions:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
     ...         treatments=[-1],
     ...     )
-    ...     pleaves = baca.select.pleaves(container)
+    ...     pleaves = baca.select.pleaves(tuplets)
     ...     baca.stem_up(pleaves)
-    ...     rmakers.beam(container)
-    ...     baca.beam_positions(container, 6)
-    ...     baca.tuplet_bracket_staff_padding(container, 4)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.beam_positions(tuplets, 6)
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 4)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -154,7 +153,7 @@ overrides.py examples.
     Overrides dynamic line spanner staff padding:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -162,16 +161,15 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.dls_staff_padding(container, 4)
-    ...     for tuplet in baca.select.tuplets(container):
+    ...     rmakers.beam(tuplets)
+    ...     baca.dls_staff_padding(tuplets, 4)
+    ...     for tuplet in baca.select.tuplets(tuplets):
     ...         baca.hairpin(
     ...             baca.select.tleaves(tuplet),
     ...             "p < f",
     ...             remove_length_1_spanner_start=True,
     ...         )
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -242,7 +240,7 @@ overrides.py examples.
     Up-overrides dynamic line spanner direction:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -250,16 +248,15 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.dls_up(container)
-    ...     for tuplet in baca.select.tuplets(container):
+    ...     rmakers.beam(tuplets)
+    ...     baca.dls_up(tuplets)
+    ...     for tuplet in baca.select.tuplets(tuplets):
     ...         baca.hairpin(
     ...             baca.select.tleaves(tuplet),
     ...             "p < f",
     ...             remove_length_1_spanner_start=True,
     ...         )
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -336,7 +333,7 @@ overrides.py examples.
     ...     return result
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -344,14 +341,13 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.dynamic(baca.select.pleaf(container, 0), "p")
-    ...     baca.dynamic(selector(container), "f")
+    ...     rmakers.beam(tuplets)
+    ...     baca.dynamic(baca.select.pleaf(tuplets, 0), "p")
+    ...     baca.dynamic(selector(tuplets), "f")
     ...     baca.dynamic_text_extra_offset(
-    ...         baca.select.pleaf(container, 0), (-3, 0)
+    ...         baca.select.pleaf(tuplets, 0), (-3, 0)
     ...     )
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -814,7 +810,7 @@ overrides.py examples.
     Overrides note-head style:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -822,10 +818,9 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.note_head_style_cross(baca.select.pleaves(container))
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.note_head_style_cross(baca.select.pleaves(tuplets))
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -889,7 +884,7 @@ overrides.py examples.
     Overrides note-head style:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -897,10 +892,9 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.note_head_style_harmonic(baca.select.pleaves(container))
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.note_head_style_harmonic(baca.select.pleaves(tuplets))
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -964,7 +958,7 @@ overrides.py examples.
     Down-overrides repeat tie direction:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[11, 11, 12], [11, 11, 11], [11]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -972,15 +966,16 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
+    ...     rmakers.beam(tuplets)
+    ...     container = abjad.Container(tuplets)
     ...     for qrun in baca.select.qruns(container):
     ...         baca.repeat_tie(qrun[1:]
     ...     )
-    ...     pleaves = baca.select.pleaves(container)
+    ...     pleaves = baca.select.pleaves(tuplets)
     ...     baca.repeat_tie_down(pleaves)
     ...     baca.stem_up(pleaves)
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
+    ...     container[:] = []
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -1047,7 +1042,7 @@ overrides.py examples.
     Up-overrides repeat tie direction:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[11, 11, 12], [11, 11, 11], [11]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -1055,15 +1050,16 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
+    ...     rmakers.beam(tuplets)
+    ...     container = abjad.Container(tuplets)
     ...     for qrun in baca.select.qruns(container):
     ...         baca.repeat_tie(qrun[1:]
     ...     )
-    ...     pleaves = baca.select.pleaves(container)
+    ...     pleaves = baca.select.pleaves(tuplets)
     ...     baca.repeat_tie_up(pleaves)
     ...     baca.stem_down(pleaves)
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
+    ...     container[:] = []
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -1130,7 +1126,7 @@ overrides.py examples.
     Down-overrides direction of rests:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -1138,10 +1134,9 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.rest_down(abjad.select.rests(container))
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.rest_down(abjad.select.rests(tuplets))
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -1205,7 +1200,7 @@ overrides.py examples.
     Overrides rest position:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -1213,10 +1208,9 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.rest_staff_position(container, -6)
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.rest_staff_position(tuplets, -6)
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -1280,7 +1274,7 @@ overrides.py examples.
     Makes rests transparent:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -1288,10 +1282,9 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.rest_transparent(container)
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.rest_transparent(tuplets)
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -1355,7 +1348,7 @@ overrides.py examples.
     Up-overrides rest direction:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -1363,10 +1356,9 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.rest_up(abjad.select.rests(container))
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.rest_up(abjad.select.rests(tuplets))
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -1430,7 +1422,7 @@ overrides.py examples.
     Overrides script color:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -1438,11 +1430,10 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.accent(baca.select.pheads(container))
-    ...     baca.script_color(container, "#red")
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.accent(baca.select.pheads(tuplets))
+    ...     baca.script_color(tuplets, "#red")
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -1515,7 +1506,7 @@ overrides.py examples.
     Down-overrides script direction:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -1523,11 +1514,10 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.accent(baca.select.pheads(container))
-    ...     baca.script_down(container)
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.accent(baca.select.pheads(tuplets))
+    ...     baca.script_down(tuplets)
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -1600,7 +1590,7 @@ overrides.py examples.
     Overrides script extra offset:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -1608,11 +1598,10 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.accent(baca.select.pheads(container))
-    ...     baca.script_extra_offset(abjad.select.leaf(container, 1), (-1.5, 0))
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.accent(baca.select.pheads(tuplets))
+    ...     baca.script_extra_offset(abjad.select.leaf(tuplets, 1), (-1.5, 0))
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -1684,7 +1673,7 @@ overrides.py examples.
     Up-overrides script direction:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -1692,11 +1681,10 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.accent(baca.select.pheads(container))
-    ...     baca.script_up(container)
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.accent(baca.select.pheads(tuplets))
+    ...     baca.script_up(tuplets)
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -1775,7 +1763,7 @@ overrides.py examples.
     ...     return runs
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -1783,12 +1771,11 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     for item in selector(container):
+    ...     rmakers.beam(tuplets)
+    ...     for item in selector(tuplets):
     ...         baca.slur(item)
-    ...     baca.slur_down(container)
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     baca.slur_down(tuplets)
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -1862,7 +1849,7 @@ overrides.py examples.
     ...     return selection
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -1870,14 +1857,13 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     for item in selector(container):
+    ...     rmakers.beam(tuplets)
+    ...     for item in selector(tuplets):
     ...         baca.slur(item)
-    ...     baca.slur_up(container)
-    ...     baca.stem_down(baca.select.pleaves(container))
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     baca.tuplet_bracket_down(container)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     baca.slur_up(tuplets)
+    ...     baca.stem_down(baca.select.pleaves(tuplets))
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
+    ...     baca.tuplet_bracket_down(tuplets)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -1949,7 +1935,7 @@ overrides.py examples.
     Overrides stem color:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -1957,10 +1943,9 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.stem_color(baca.select.pleaves(container), "#red")
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.stem_color(baca.select.pleaves(tuplets), "#red")
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -2024,7 +2009,7 @@ overrides.py examples.
     Down-overrides stem direction pitched leaves:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -2032,10 +2017,9 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.stem_down(baca.select.pleaves(container))
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.stem_down(baca.select.pleaves(tuplets))
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -2099,7 +2083,7 @@ overrides.py examples.
     Up-overrides stem direction:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -2107,10 +2091,9 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.stem_up(baca.select.pleaves(container))
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.stem_up(baca.select.pleaves(tuplets))
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -2174,7 +2157,7 @@ overrides.py examples.
     Overrides sustain pedal staff padding:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -2182,12 +2165,11 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     for tuplet in baca.select.tuplets(container):
+    ...     rmakers.beam(tuplets)
+    ...     for tuplet in baca.select.tuplets(tuplets):
     ...         baca.sustain_pedal(tuplet)
-    ...     baca.sustain_pedal_staff_padding(container, 4)
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     baca.sustain_pedal_staff_padding(tuplets, 4)
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -2262,7 +2244,7 @@ overrides.py examples.
     ...     return result
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -2270,12 +2252,11 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.markup(baca.select.pleaf(container, 0), r'\markup "più mosso"')
-    ...     baca.markup(selector(container), r'\markup "lo stesso tempo"')
-    ...     baca.text_script_color(container, "#red")
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.markup(baca.select.pleaf(tuplets, 0), r'\markup "più mosso"')
+    ...     baca.markup(selector(tuplets), r'\markup "lo stesso tempo"')
+    ...     baca.text_script_color(tuplets, "#red")
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -2346,7 +2327,7 @@ overrides.py examples.
     ...     return result
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -2354,12 +2335,11 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.markup(baca.select.pleaf(container, 0), r'\markup "più mosso"')
-    ...     baca.markup(selector(container), r'\markup "lo stesso tempo"')
-    ...     baca.text_script_down(container)
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.markup(baca.select.pleaf(tuplets, 0), r'\markup "più mosso"')
+    ...     baca.markup(selector(tuplets), r'\markup "lo stesso tempo"')
+    ...     baca.text_script_down(tuplets)
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -2430,7 +2410,7 @@ overrides.py examples.
     ...     return result
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -2438,12 +2418,11 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.markup(baca.select.pleaf(container, 0), r'\markup "più mosso"')
-    ...     baca.markup(selector(container), r'\markup "lo stesso tempo"')
-    ...     baca.text_script_padding(container, 4)
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.markup(baca.select.pleaf(tuplets, 0), r'\markup "più mosso"')
+    ...     baca.markup(selector(tuplets), r'\markup "lo stesso tempo"')
+    ...     baca.text_script_padding(tuplets, 4)
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -2514,7 +2493,7 @@ overrides.py examples.
     ...     return result
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -2522,12 +2501,11 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.markup(baca.select.pleaf(container, 0), r'\markup "più mosso"')
-    ...     baca.markup(selector(container), r'\markup "lo stesso tempo"')
-    ...     baca.text_script_staff_padding(container, n=4)
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.markup(baca.select.pleaf(tuplets, 0), r'\markup "più mosso"')
+    ...     baca.markup(selector(tuplets), r'\markup "lo stesso tempo"')
+    ...     baca.text_script_staff_padding(tuplets, n=4)
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -2598,7 +2576,7 @@ overrides.py examples.
     ...     return result
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -2606,12 +2584,11 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.markup(baca.select.pleaf(container, 0), r'\markup "più mosso"')
-    ...     baca.markup(selector(container), r'\markup "lo stesso tempo"')
-    ...     baca.text_script_up(container)
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.markup(baca.select.pleaf(tuplets, 0), r'\markup "più mosso"')
+    ...     baca.markup(selector(tuplets), r'\markup "lo stesso tempo"')
+    ...     baca.text_script_up(tuplets)
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -2677,7 +2654,7 @@ overrides.py examples.
     Overrides text spanner staff padding:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -2685,12 +2662,11 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.text_spanner_staff_padding(container, 6)
-    ...     baca.text_script_staff_padding(container, 6)
-    ...     baca.text_spanner(baca.select.tleaves(container), "pont. => ord.")
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.text_spanner_staff_padding(tuplets, 6)
+    ...     baca.text_script_staff_padding(tuplets, 6)
+    ...     baca.text_spanner(baca.select.tleaves(tuplets), "pont. => ord.")
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -2763,7 +2739,7 @@ overrides.py examples.
     Down-overrides tie direction:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[11, 11, 12], [11, 11, 11], [11]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -2771,12 +2747,11 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.stem_up(baca.select.pleaves(container))
-    ...     baca.tie(baca.select.pleaf(container, 0))
-    ...     baca.tie_down(baca.select.pleaves(container))
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.stem_up(baca.select.pleaves(tuplets))
+    ...     baca.tie(baca.select.pleaf(tuplets, 0))
+    ...     baca.tie_down(baca.select.pleaves(tuplets))
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -2839,7 +2814,7 @@ overrides.py examples.
     Up-overrides tie direction:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[11, 11, 12], [11, 11, 11], [11]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -2847,11 +2822,10 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.stem_down(baca.select.pleaves(container))
-    ...     baca.tie_up(baca.select.pleaves(container))
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.stem_down(baca.select.pleaves(tuplets))
+    ...     baca.tie_up(baca.select.pleaves(tuplets))
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -2913,7 +2887,7 @@ overrides.py examples.
     Overrides time signature extra offset:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -2921,11 +2895,10 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
+    ...     rmakers.beam(tuplets)
     ...     baca.time_signature_extra_offset(
-    ...         abjad.select.rest(container, 0), (-6, 0))
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...         abjad.select.rest(tuplets, 0), (-6, 0))
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -2988,7 +2961,7 @@ overrides.py examples.
     Makes all time signatures transparent:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -2996,10 +2969,9 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.time_signature_transparent(container)
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.time_signature_transparent(tuplets)
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -3063,7 +3035,7 @@ overrides.py examples.
     Down-overrides tuplet bracket direction:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -3071,10 +3043,9 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     baca.tuplet_bracket_down(container)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
+    ...     baca.tuplet_bracket_down(tuplets)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -3138,7 +3109,7 @@ overrides.py examples.
     Overrides tuplet bracket extra offset:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -3146,12 +3117,11 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
+    ...     rmakers.beam(tuplets)
     ...     baca.tuplet_bracket_extra_offset(
-    ...         abjad.select.leaf(container, 0), (-1, 0)
+    ...         abjad.select.leaf(tuplets, 0), (-1, 0)
     ...     )
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -3214,7 +3184,7 @@ overrides.py examples.
     Overrides tuplet bracket staff padding:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -3222,9 +3192,8 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -3286,7 +3255,7 @@ overrides.py examples.
     Up-overrides tuplet bracket direction:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -3294,10 +3263,9 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     baca.tuplet_bracket_up(container)
-    ...     tuplets = abjad.mutate.eject_contents(container)
+    ...     rmakers.beam(tuplets)
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
+    ...     baca.tuplet_bracket_up(tuplets)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
@@ -3361,7 +3329,7 @@ overrides.py examples.
     Overrides tuplet number extra offset:
 
     >>> def make_score():
-    ...     container = baca.figure(
+    ...     tuplets = baca.figure(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -3369,12 +3337,11 @@ overrides.py examples.
     ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
-    ...     rmakers.beam(container)
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     rmakers.beam(tuplets)
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     baca.tuplet_number_extra_offset(
-    ...         abjad.select.leaf(container, 0), (-1, 0)
+    ...         abjad.select.leaf(tuplets, 0), (-1, 0)
     ...     )
-    ...     tuplets = abjad.mutate.eject_contents(container)
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 

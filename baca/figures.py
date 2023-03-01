@@ -46,65 +46,6 @@ def _add_rest_affixes(
     return leaves
 
 
-def _call_figure_maker(
-    affix,
-    talea,
-    spelling,
-    treatments,
-    acciaccatura,
-    collections: typing.Sequence,
-    restart_talea: bool = False,
-) -> list[abjad.Tuplet]:
-    collections = _coerce_collections(collections)
-    next_attack = 0
-    next_segment = 0
-    tuplets: list[abjad.Tuplet] = []
-    if restart_talea:
-        total_collections = len(collections)
-        for i, collection in enumerate(collections):
-            next_attack = 0
-            next_segment = 0
-            selection_, next_attack, next_segment = _make_figure_music(
-                affix,
-                talea,
-                spelling,
-                treatments,
-                acciaccatura,
-                [collection],
-                next_attack,
-                next_segment,
-                collection_index=i,
-                total_collections=total_collections,
-            )
-            tuplets.extend(selection_)
-    else:
-        selection_, next_attack, next_segment = _make_figure_music(
-            affix,
-            talea,
-            spelling,
-            treatments,
-            acciaccatura,
-            collections,
-            next_attack,
-            next_segment,
-        )
-        tuplets.extend(selection_)
-    assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
-    return tuplets
-
-
-def _coerce_collections(collections):
-    prototype = (
-        abjad.PitchClassSegment,
-        abjad.PitchSegment,
-        set,
-        frozenset,
-    )
-    if isinstance(collections, prototype):
-        return [collections]
-    return collections
-
-
 def _collections_to_container(
     accumulator, voice_name, collections, *commands, tsd=None
 ):
@@ -1279,24 +1220,70 @@ def figure(
     tsd: int | None = None,
     spelling: rmakers.Spelling | None = None,
     treatments: typing.Sequence = (),
-) -> abjad.Container:
+) -> list[abjad.Tuplet]:
+    prototype = (
+        abjad.PitchClassSegment,
+        abjad.PitchSegment,
+        set,
+        frozenset,
+    )
+    if isinstance(collections, prototype):
+        collections = [collections]
+    collection_prototype = (
+        abjad.PitchClassSegment,
+        abjad.PitchSegment,
+        abjad.PitchSet,
+        list,
+        set,
+    )
+    pitch_prototype = (int, float, str, abjad.NumberedPitch)
+    for collection in collections:
+        assert isinstance(collection, collection_prototype), repr(collection)
+        if isinstance(collection, list | set):
+            assert all(isinstance(_, pitch_prototype) for _ in collection), repr(
+                collection
+            )
+    assert all(isinstance(_, int) for _ in counts), repr(counts)
     if acciaccatura is True:
         acciaccatura = Acciaccatura()
     elif isinstance(acciaccatura, LMR):
         acciaccatura = Acciaccatura(lmr=acciaccatura)
     if acciaccatura is not None:
         assert isinstance(acciaccatura, Acciaccatura), repr(acciaccatura)
-    tuplets = _call_figure_maker(
-        affix,
-        rmakers.Talea(counts=counts, denominator=denominator),
-        spelling,
-        treatments,
-        acciaccatura,
-        collections=collections,
-        restart_talea=restart_talea,
-    )
-    container = abjad.Container(tuplets)
-    return container
+    talea = rmakers.Talea(counts=counts, denominator=denominator)
+    next_attack, next_segment = 0, 0
+    tuplets: list[abjad.Tuplet] = []
+    total_collections = len(collections)
+    if restart_talea:
+        for i, collection in enumerate(collections):
+            next_attack, next_segment = 0, 0
+            selection_, next_attack, next_segment = _make_figure_music(
+                affix,
+                talea,
+                spelling,
+                treatments,
+                acciaccatura,
+                [collection],
+                next_attack,
+                next_segment,
+                collection_index=i,
+                total_collections=total_collections,
+            )
+            tuplets.extend(selection_)
+    else:
+        selection_, next_attack, next_segment = _make_figure_music(
+            affix,
+            talea,
+            spelling,
+            treatments,
+            acciaccatura,
+            collections,
+            next_attack,
+            next_segment,
+        )
+        tuplets.extend(selection_)
+    assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
+    return tuplets
 
 
 def imbricate(
@@ -1309,6 +1296,8 @@ def imbricate(
     hocket: bool = False,
     truncate_ties: bool = False,
 ) -> dict[str, list]:
+    if isinstance(container, list):
+        container = abjad.Container(container)
     return _do_imbrication(
         container,
         segment,

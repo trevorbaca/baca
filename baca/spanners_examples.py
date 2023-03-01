@@ -68,7 +68,7 @@ spanners.py examples
 
     Attaches ottava indicators to trimmed leaves:
 
-    >>> container = baca.figure(
+    >>> tuplets = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -76,12 +76,10 @@ spanners.py examples
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.ottava(baca.select.tleaves(container))
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> rmakers.beam(tuplets)
+    >>> _ = baca.ottava(baca.select.tleaves(tuplets))
+    >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
+    >>> lilypond_file = abjad.illustrators.selection(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -430,7 +428,7 @@ spanners.py examples
     Attaches trill to trimmed leaves (leaked to the right) in every
     run:
 
-    >>> container = baca.figure(
+    >>> tuplets = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -438,15 +436,15 @@ spanners.py examples
     ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam(container)
-    >>> for run in baca.select.runs(container):
+    >>> rmakers.beam(tuplets)
+    >>> container = abjad.Container(tuplets)
+    >>> for run in baca.select.runs(tuplets):
     ...     run = baca.select.rleak(run)
     ...     _ = baca.trill_spanner(run)
 
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
+    >>> components = abjad.mutate.eject_contents(container)
+    >>> lilypond_file = abjad.illustrators.selection(components)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
