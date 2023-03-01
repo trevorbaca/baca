@@ -25,6 +25,8 @@ def _add_rest_affixes(
     affix_skips_instead_of_rests,
     increase_monotonic,
 ):
+    assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
+    assert isinstance(talea, rmakers.Talea), repr(talea)
     if rest_prefix:
         durations = [(_, talea.denominator) for _ in rest_prefix]
         leaves_ = abjad.makers.make_leaves(
@@ -80,6 +82,32 @@ def _collections_to_container(
         assert isinstance(command, command_prototype), repr(command)
         command(container)
     return container, imbrications, tsd
+
+
+def _do_acciaccatura(collection, lmr, durations):
+    assert isinstance(collection, list), repr(collection)
+    segment_parts = lmr(collection)
+    segment_parts = [_ for _ in segment_parts if _]
+    collection = [_[-1] for _ in segment_parts]
+    before_grace_containers = []
+    for segment_part in segment_parts:
+        if len(segment_part) <= 1:
+            before_grace_containers.append(None)
+            continue
+        grace_token = list(segment_part[:-1])
+        grace_leaves = abjad.makers.make_leaves(grace_token, durations)
+        acciaccatura_container = abjad.BeforeGraceContainer(
+            grace_leaves, command=r"\acciaccatura"
+        )
+        if 1 < len(acciaccatura_container):
+            abjad.beam(
+                acciaccatura_container[:],
+                tag=abjad.Tag("baca.Acciaccatura.__call__()"),
+            )
+        before_grace_containers.append(acciaccatura_container)
+    assert len(before_grace_containers) == len(collection)
+    assert isinstance(collection, list), repr(collection)
+    return before_grace_containers, collection
 
 
 def _do_imbrication(
@@ -151,58 +179,28 @@ def _do_imbrication(
     return {voice_name: selection}
 
 
-def _do_nest_command(argument, *, lmr=None, treatments=None) -> list[abjad.Tuplet]:
-    cyclic_treatments = abjad.CyclicTuple(treatments)
-    assert cyclic_treatments is not None
-    tuplets = []
-    for item in argument:
-        if isinstance(item, abjad.Tuplet):
-            tuplets.append(item)
-        else:
-            assert isinstance(item, list), repr(item)
-            assert len(item) == 1, repr(item)
-            assert isinstance(item[0], abjad.Tuplet), repr(item)
-            tuplet = item[0]
-            tuplets.append(tuplet)
-    if lmr is None:
-        tuplet_selections = [tuplets]
+def _do_nest_command(tuplets, treatment) -> list[abjad.Tuplet]:
+    if isinstance(treatment, str):
+        addendum = abjad.Duration(treatment)
+        contents_duration = abjad.get.duration(tuplets)
+        target_duration = contents_duration + addendum
+        multiplier = target_duration / contents_duration
+        pair = abjad.duration.pair(multiplier)
+        nested_tuplet = abjad.Tuplet(pair, [])
+        abjad.mutate.wrap(tuplets, nested_tuplet)
+    elif treatment.__class__ is abjad.Fraction:
+        pair = abjad.duration.pair(treatment)
+        nested_tuplet = abjad.Tuplet(pair, [])
+        abjad.mutate.wrap(tuplets, nested_tuplet)
     else:
-        tuplet_selections = lmr(tuplets)
-        tuplet_selections = [list(_) for _ in tuplet_selections]
-    tuplets = []
-    for i, tuplet_selection in enumerate(tuplet_selections):
-        assert isinstance(tuplet_selection, list)
-        treatment = cyclic_treatments[i]
-        if treatment is None:
-            tuplets.extend(tuplet_selection)
-        else:
-            assert isinstance(tuplet_selection, list)
-            for tuplet in tuplet_selection:
-                assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
-            if isinstance(treatment, str):
-                addendum = abjad.Duration(treatment)
-                contents_duration = abjad.get.duration(tuplet_selection)
-                target_duration = contents_duration + addendum
-                multiplier = target_duration / contents_duration
-                pair = abjad.duration.pair(multiplier)
-                tuplet = abjad.Tuplet(pair, [])
-                abjad.mutate.wrap(tuplet_selection, tuplet)
-            elif treatment.__class__ is abjad.Fraction:
-                pair = abjad.duration.pair(treatment)
-                tuplet = abjad.Tuplet(pair, [])
-                abjad.mutate.wrap(tuplet_selection, tuplet)
-            elif treatment.__class__ is abjad.Duration:
-                target_duration = treatment
-                contents_duration = abjad.get.duration(tuplet_selection)
-                multiplier = target_duration / contents_duration
-                pair = abjad.duration.pair(multiplier)
-                tuplet = abjad.Tuplet(pair, [])
-                abjad.mutate.wrap(tuplet_selection, tuplet)
-            else:
-                raise Exception(f"bad time treatment: {treatment!r}.")
-            nested_tuplet = tuplet
-            tuplets.append(nested_tuplet)
-    return tuplets
+        assert treatment.__class__ is abjad.Duration
+        target_duration = treatment
+        contents_duration = abjad.get.duration(tuplets)
+        multiplier = target_duration / contents_duration
+        pair = abjad.duration.pair(multiplier)
+        nested_tuplet = abjad.Tuplet(pair, [])
+        abjad.mutate.wrap(tuplets, nested_tuplet)
+    return [nested_tuplet]
 
 
 def _fix_rounding_error(durations, total_duration):
@@ -466,7 +464,7 @@ def _make_accelerando_multipliers(durations, exponent):
     return multipliers
 
 
-def _make_figure_music(
+def _make_figure_tuplets(
     affix,
     talea,
     spelling,
@@ -541,6 +539,7 @@ def _make_figure_tuplet(
     rest_suffix=None,
     affix_skips_instead_of_rests=None,
 ) -> tuple[abjad.Tuplet, int, int]:
+    tag = _tags.function_name(_frame())
     spelling = spelling or rmakers.Spelling()
     next_segment += 1
     leaves = []
@@ -617,46 +616,74 @@ def _make_figure_tuplet(
             )
             leaves.extend(leaves_)
             count = next_attack
-    leaves = _add_rest_affixes(
-        leaves,
-        talea,
-        rest_prefix,
-        rest_suffix,
-        affix_skips_instead_of_rests,
-        spelling.increase_monotonic,
-    )
-    leaf_selection = list(leaves)
-    if isinstance(treatment, int):
-        tuplet = _make_tuplet_with_extra_count(
-            leaf_selection, treatment, talea.denominator
+    assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
+    assert isinstance(talea, rmakers.Talea), repr(talea)
+    if rest_prefix:
+        durations = [(_, talea.denominator) for _ in rest_prefix]
+        leaves_ = abjad.makers.make_leaves(
+            [None],
+            durations,
+            increase_monotonic=spelling.increase_monotonic,
+            skips_instead_of_rests=affix_skips_instead_of_rests,
         )
+        leaves[0:0] = leaves_
+    if rest_suffix:
+        durations = [(_, talea.denominator) for _ in rest_suffix]
+        leaves_ = abjad.makers.make_leaves(
+            [None],
+            durations,
+            increase_monotonic=spelling.increase_monotonic,
+            skips_instead_of_rests=affix_skips_instead_of_rests,
+        )
+        leaves.extend(leaves_)
+    leaf_list = leaves
+    if isinstance(treatment, int):
+        extra_count = treatment
+        denominator = talea.denominator
+        contents_duration = abjad.get.duration(leaf_list)
+        pair = abjad.duration.with_denominator(contents_duration, denominator)
+        contents_duration_pair = pair
+        contents_count = contents_duration_pair[0]
+        if 0 < extra_count:
+            extra_count %= contents_count
+        elif extra_count < 0:
+            extra_count = abs(extra_count)
+            extra_count %= python_math.ceil(contents_count / 2.0)
+            extra_count *= -1
+        new_contents_count = contents_count + extra_count
+        tuplet_multiplier = abjad.Fraction(new_contents_count, contents_count)
+        if not abjad.Duration(tuplet_multiplier).normalized():
+            message = f"{leaf_list!r} gives {tuplet_multiplier}"
+            message += " with {contents_count} and {new_contents_count}."
+            raise Exception(message)
+        pair = abjad.duration.pair(tuplet_multiplier)
+        tuplet = abjad.Tuplet(pair, leaf_list)
     elif treatment in ("accel", "rit"):
-        tuplet = _make_accelerando(leaf_selection, treatment)
+        tuplet = _make_accelerando(leaf_list, treatment)
     elif isinstance(treatment, str) and ":" in treatment:
         numerator_str, denominator_str = treatment.split(":")
         numerator, denominator = int(numerator_str), int(denominator_str)
-        tuplet = abjad.Tuplet((denominator, numerator), leaf_selection)
+        tuplet = abjad.Tuplet((denominator, numerator), leaf_list)
     elif treatment.__class__ is abjad.Duration:
         tuplet_duration = treatment
-        contents_duration = abjad.get.duration(leaf_selection)
+        contents_duration = abjad.get.duration(leaf_list)
         multiplier = tuplet_duration / contents_duration
-        tuplet = abjad.Tuplet(multiplier, leaf_selection)
+        tuplet = abjad.Tuplet(multiplier, leaf_list)
         if not abjad.Duration(tuplet.multiplier).normalized():
             tuplet.normalize_multiplier()
     elif isinstance(treatment, abjad.Fraction):
-        tuplet = abjad.Tuplet(treatment, leaf_selection)
+        tuplet = abjad.Tuplet(treatment, leaf_list)
     elif isinstance(treatment, tuple) and len(treatment) == 2:
         tuplet_duration = abjad.Duration(treatment)
-        contents_duration = abjad.get.duration(leaf_selection)
+        contents_duration = abjad.get.duration(leaf_list)
         multiplier = tuplet_duration / contents_duration
         pair = abjad.duration.pair(multiplier)
-        tuplet = abjad.Tuplet(pair, leaf_selection)
+        tuplet = abjad.Tuplet(pair, leaf_list)
         if not abjad.Duration(tuplet.multiplier).normalized():
             tuplet.normalize_multiplier()
     else:
         raise Exception(f"bad time treatment: {treatment!r}.")
     assert isinstance(tuplet, abjad.Tuplet)
-    tag = abjad.Tag("baca._make_figure_tuplet()")
     if before_grace_containers is not None:
         logical_ties = abjad.iterate.logical_ties(tuplet)
         pairs = zip(before_grace_containers, logical_ties)
@@ -668,28 +695,6 @@ def _make_figure_tuplet(
         tuplet.hide = True
     assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
     return tuplet, next_attack, next_segment
-
-
-def _make_tuplet_with_extra_count(leaf_selection, extra_count, denominator):
-    contents_duration = abjad.get.duration(leaf_selection)
-    pair = abjad.duration.with_denominator(contents_duration, denominator)
-    contents_duration_pair = pair
-    contents_count = contents_duration_pair[0]
-    if 0 < extra_count:
-        extra_count %= contents_count
-    elif extra_count < 0:
-        extra_count = abs(extra_count)
-        extra_count %= python_math.ceil(contents_count / 2.0)
-        extra_count *= -1
-    new_contents_count = contents_count + extra_count
-    tuplet_multiplier = abjad.Fraction(new_contents_count, contents_count)
-    if not abjad.Duration(tuplet_multiplier).normalized():
-        message = f"{leaf_selection!r} gives {tuplet_multiplier}"
-        message += " with {contents_count} and {new_contents_count}."
-        raise Exception(message)
-    pair = abjad.duration.pair(tuplet_multiplier)
-    tuplet = abjad.Tuplet(pair, leaf_selection)
-    return tuplet
 
 
 def _matches_pitch(pitched_leaf, pitch_object):
@@ -895,30 +900,7 @@ class Acciaccatura:
     def __call__(
         self, collection: list | None = None
     ) -> tuple[list[abjad.BeforeGraceContainer | None], list]:
-        assert isinstance(collection, list), repr(collection)
-        segment_parts = self.lmr(collection)
-        segment_parts = [_ for _ in segment_parts if _]
-        collection = [_[-1] for _ in segment_parts]
-        durations = self.durations
-        acciaccatura_containers: list[abjad.BeforeGraceContainer | None] = []
-        for segment_part in segment_parts:
-            if len(segment_part) <= 1:
-                acciaccatura_containers.append(None)
-                continue
-            grace_token = list(segment_part[:-1])
-            grace_leaves = abjad.makers.make_leaves(grace_token, durations)
-            acciaccatura_container = abjad.BeforeGraceContainer(
-                grace_leaves, command=r"\acciaccatura"
-            )
-            if 1 < len(acciaccatura_container):
-                abjad.beam(
-                    acciaccatura_container[:],
-                    tag=_tags.function_name(_frame(), self),
-                )
-            acciaccatura_containers.append(acciaccatura_container)
-        assert len(acciaccatura_containers) == len(collection)
-        assert isinstance(collection, list), repr(collection)
-        return acciaccatura_containers, collection
+        return _do_acciaccatura(collection, lmr=self.lmr, durations=self.durations)
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -1257,7 +1239,7 @@ def figure(
     if restart_talea:
         for i, collection in enumerate(collections):
             next_attack, next_segment = 0, 0
-            selection_, next_attack, next_segment = _make_figure_music(
+            tuplets_, next_attack, next_segment = _make_figure_tuplets(
                 affix,
                 talea,
                 spelling,
@@ -1269,9 +1251,9 @@ def figure(
                 collection_index=i,
                 total_collections=total_collections,
             )
-            tuplets.extend(selection_)
+            tuplets.extend(tuplets_)
     else:
-        selection_, next_attack, next_segment = _make_figure_music(
+        tuplets_, next_attack, next_segment = _make_figure_tuplets(
             affix,
             talea,
             spelling,
@@ -1281,7 +1263,7 @@ def figure(
             next_attack,
             next_segment,
         )
-        tuplets.extend(selection_)
+        tuplets.extend(tuplets_)
     assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
     return tuplets
 
@@ -1436,13 +1418,24 @@ def make_figures(
         accumulator.figure_number += 1
 
 
-def nest(
-    argument, treatments: typing.Sequence, *, lmr: LMR | None = None
-) -> list[abjad.Tuplet]:
-    assert treatments is not None
-    if not isinstance(treatments, list):
-        treatments = [treatments]
-    return _do_nest_command(argument, lmr=lmr, treatments=treatments)
+def nest(tuplets: list[abjad.Tuplet], treatment: str) -> abjad.Tuplet:
+    assert isinstance(tuplets, list), repr(tuplets)
+    assert all(isinstance(_, abjad.Tuplet) for _ in tuplets), repr(tuplets)
+    assert isinstance(treatment, str), repr(treatment)
+    if "/" in treatment:
+        assert treatment.startswith("+") or treatment.startswith("-"), repr(treatment)
+        addendum = abjad.Duration(treatment)
+        contents_duration = abjad.get.duration(tuplets)
+        target_duration = contents_duration + addendum
+        multiplier = target_duration / contents_duration
+        pair = abjad.duration.pair(multiplier)
+        nested_tuplet = abjad.Tuplet(pair, [])
+        abjad.mutate.wrap(tuplets, nested_tuplet)
+    else:
+        assert ":" in treatment
+        nested_tuplet = abjad.Tuplet(treatment, [])
+        abjad.mutate.wrap(tuplets, nested_tuplet)
+    return nested_tuplet
 
 
 def rests_after(counts: typing.Sequence[int]) -> RestAffix:

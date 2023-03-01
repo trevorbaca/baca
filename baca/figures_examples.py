@@ -3261,7 +3261,7 @@ figures.py examples.
     ... )
     >>> container = abjad.Container(tuplets)
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
-    >>> _ = baca.nest(container, "+4/16")
+    >>> _ = baca.nest(tuplets, "+4/16")
     >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
     >>> components = abjad.mutate.eject_contents(container)
     >>> lilypond_file = abjad.illustrators.selection(components)
@@ -3334,7 +3334,7 @@ figures.py examples.
     >>> rmakers.beam_groups(
     ...     rmakers.nongrace_leaves_in_each_tuplet(tuplets, level=-1))
     >>> container = abjad.Container(tuplets)
-    >>> _ = baca.nest(container, "+1/16")
+    >>> _ = baca.nest(tuplets, "+1/16")
     >>> components = abjad.mutate.eject_contents(container)
     >>> lilypond_file = abjad.illustrators.selection(components)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
