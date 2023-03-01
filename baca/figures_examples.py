@@ -1542,65 +1542,6 @@ figures.py examples.
 
 ..  container:: example
 
-    Spells nonassignable durations with monontonically increasing durations:
-
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> container = baca.figure(
-    ...     collections,
-    ...     [4, 4, 5],
-    ...     32,
-    ...     spelling=rmakers.Spelling(increase_monotonic=True),
-    ... )
-    >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(container))
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        <<
-            \context Staff = "Staff"
-            {
-                \scaleDurations #'(1 . 1)
-                {
-                    \time 39/32
-                    c'8
-                    [
-                    d'8
-                    bf'32
-                    ~
-                    bf'8
-                    ]
-                }
-                \scaleDurations #'(1 . 1)
-                {
-                    fs''8
-                    [
-                    e''8
-                    ef''32
-                    ~
-                    ef''8
-                    af''8
-                    g''8
-                    ]
-                }
-                \scaleDurations #'(1 . 1)
-                {
-                    a'32
-                    [
-                    ~
-                    a'8
-                    ]
-                }
-            }
-        >>
-
-..  container:: example
-
     Sixteenths and eighths:
 
     >>> collections = [[0, 2, 10, 8]]
@@ -3256,7 +3197,6 @@ figures.py examples.
     ...     [1, 1, 5, -1],
     ...     16,
     ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
     >>> container = abjad.Container(tuplets)
@@ -3277,13 +3217,13 @@ figures.py examples.
             \context Staff = "Staff"
             {
                 \tweak text #tuplet-number::calc-fraction-text
-                \times 13/11
+                \times 31/27
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10
                     {
                         \override TupletBracket.staff-padding = 2
-                        \time 13/8
+                        \time 31/16
                         r8
                         c'16
                         [
@@ -3310,9 +3250,13 @@ figures.py examples.
                         g''16
                         ]
                     }
-                    \times 4/5
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10
                     {
+                        a'4
+                        ~
                         a'16
+                        r16
                         r4
                         \revert TupletBracket.staff-padding
                     }
@@ -4814,7 +4758,6 @@ figures.py examples.
     ...     [1, 1, 5, -1],
     ...     16,
     ...     affix=baca.rests_after([2]),
-    ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(container))
@@ -4836,7 +4779,7 @@ figures.py examples.
                 \times 7/8
                 {
                     \override TupletBracket.staff-padding = 2
-                    \time 9/8
+                    \time 23/16
                     c'16
                     [
                     d'16
@@ -4862,9 +4805,13 @@ figures.py examples.
                     g''16
                     ]
                 }
-                \times 2/3
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 7/8
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     r8
                     \revert TupletBracket.staff-padding
                 }
@@ -4880,7 +4827,6 @@ figures.py examples.
     ...     [1, 1, 5, -1],
     ...     16,
     ...     affix=baca.rests_around([2], [2]),
-    ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(container))
@@ -4902,7 +4848,7 @@ figures.py examples.
                 \times 9/10
                 {
                     \override TupletBracket.staff-padding = 2
-                    \time 5/4
+                    \time 25/16
                     r8
                     c'16
                     [
@@ -4929,9 +4875,13 @@ figures.py examples.
                     g''16
                     ]
                 }
-                \times 2/3
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 7/8
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     r8
                     \revert TupletBracket.staff-padding
                 }
@@ -5136,7 +5086,6 @@ figures.py examples.
     ...     [1, 1, 5, -1],
     ...     16,
     ...     affix=baca.rests_before([2]),
-    ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(container))
@@ -5159,7 +5108,7 @@ figures.py examples.
                 \times 9/10
                 {
                     \override TupletBracket.staff-padding = 2
-                    \time 19/16
+                    \time 23/16
                     r8
                     c'16
                     [
@@ -5186,9 +5135,13 @@ figures.py examples.
                     g''16
                     ]
                 }
-                \scaleDurations #'(1 . 1)
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 5/6
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     \revert TupletBracket.staff-padding
                 }
             }
@@ -5203,7 +5156,6 @@ figures.py examples.
     ...     [1, 1, 5, -1],
     ...     16,
     ...     affix=baca.skips_after([2]),
-    ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(container))
@@ -5226,7 +5178,7 @@ figures.py examples.
                 \times 7/8
                 {
                     \override TupletBracket.staff-padding = 2
-                    \time 9/8
+                    \time 23/16
                     c'16
                     [
                     d'16
@@ -5252,9 +5204,13 @@ figures.py examples.
                     g''16
                     ]
                 }
-                \times 2/3
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 7/8
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     s8
                     \revert TupletBracket.staff-padding
                 }
@@ -5270,7 +5226,6 @@ figures.py examples.
     ...     [1, 1, 5, -1],
     ...     16,
     ...     affix=baca.skips_around([2], [2]),
-    ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(container))
@@ -5293,7 +5248,7 @@ figures.py examples.
                 \times 9/10
                 {
                     \override TupletBracket.staff-padding = 2
-                    \time 5/4
+                    \time 25/16
                     s8
                     c'16
                     [
@@ -5320,9 +5275,13 @@ figures.py examples.
                     g''16
                     ]
                 }
-                \times 2/3
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 7/8
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     s8
                     \revert TupletBracket.staff-padding
                 }
@@ -5338,7 +5297,6 @@ figures.py examples.
     ...     [1, 1, 5, -1],
     ...     16,
     ...     affix=baca.skips_before([2]),
-    ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(container))
@@ -5361,7 +5319,7 @@ figures.py examples.
                 \times 9/10
                 {
                     \override TupletBracket.staff-padding = 2
-                    \time 19/16
+                    \time 23/16
                     s8
                     c'16
                     [
@@ -5388,9 +5346,13 @@ figures.py examples.
                     g''16
                     ]
                 }
-                \scaleDurations #'(1 . 1)
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 5/6
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     \revert TupletBracket.staff-padding
                 }
             }

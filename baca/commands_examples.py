@@ -317,7 +317,6 @@ commands.py examles
     ...     [1, 1, 5, -1],
     ...     16,
     ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam(container)
@@ -343,7 +342,7 @@ commands.py examles
                 \times 9/10
                 {
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     \baca-effort-f
@@ -371,9 +370,13 @@ commands.py examles
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     r4
                     \revert TupletBracket.staff-padding
                 }
@@ -931,7 +934,6 @@ commands.py examles
     ...     [1, 1, 5, -1],
     ...     16,
     ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam(container)
@@ -957,7 +959,7 @@ commands.py examles
                 {
                     \override TupletBracket.staff-padding = 2
                     \abjad-color-music #'red
-                    \time 11/8
+                    \time 27/16
                     r8
                     \abjad-color-music #'blue
                     c'16
@@ -990,10 +992,16 @@ commands.py examles
                     \abjad-color-music #'red
                     g''16
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
                     \abjad-color-music #'blue
+                    a'4
+                    ~
+                    \abjad-color-music #'red
                     a'16
+                    \abjad-color-music #'blue
+                    r16
                     \abjad-color-music #'red
                     r4
                     \revert TupletBracket.staff-padding
@@ -1014,7 +1022,6 @@ commands.py examles
     ...     [1, 1, 5, -1],
     ...     16,
     ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam(container)
@@ -1039,7 +1046,7 @@ commands.py examles
                 \times 9/10
                 {
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     d'16
@@ -1067,9 +1074,13 @@ commands.py examles
                     \abjad-color-music #'red
                     g''16
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     r4
                     \revert TupletBracket.staff-padding
                 }
@@ -1431,7 +1442,6 @@ commands.py examles
     ...     [1, 1, 5, -1],
     ...     16,
     ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam(container)
@@ -1455,7 +1465,7 @@ commands.py examles
                 \times 9/10
                 {
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     ^ \markup { C4 }
@@ -1490,10 +1500,14 @@ commands.py examles
                     ^ \markup { G5 }
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
-                    a'16
+                    a'4
                     ^ \markup { A4 }
+                    ~
+                    a'16
+                    r16
                     r4
                     \revert TupletBracket.staff-padding
                 }

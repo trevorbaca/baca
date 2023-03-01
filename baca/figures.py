@@ -17,37 +17,6 @@ from . import tags as _tags
 from .enums import enums as _enums
 
 
-def _add_rest_affixes(
-    leaves,
-    talea,
-    rest_prefix,
-    rest_suffix,
-    affix_skips_instead_of_rests,
-    increase_monotonic,
-):
-    assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
-    assert isinstance(talea, rmakers.Talea), repr(talea)
-    if rest_prefix:
-        durations = [(_, talea.denominator) for _ in rest_prefix]
-        leaves_ = abjad.makers.make_leaves(
-            [None],
-            durations,
-            increase_monotonic=increase_monotonic,
-            skips_instead_of_rests=affix_skips_instead_of_rests,
-        )
-        leaves[0:0] = leaves_
-    if rest_suffix:
-        durations = [(_, talea.denominator) for _ in rest_suffix]
-        leaves_ = abjad.makers.make_leaves(
-            [None],
-            durations,
-            increase_monotonic=increase_monotonic,
-            skips_instead_of_rests=affix_skips_instead_of_rests,
-        )
-        leaves.extend(leaves_)
-    return leaves
-
-
 def _collections_to_container(
     accumulator, voice_name, collections, *commands, tsd=None
 ):
@@ -467,7 +436,6 @@ def _make_accelerando_multipliers(durations, exponent):
 def _make_figure_tuplets(
     affix,
     talea,
-    spelling,
     treatments,
     acciaccatura,
     collections,
@@ -489,7 +457,6 @@ def _make_figure_tuplets(
                 affix_skips_instead_of_rests = None
             tuplet, next_attack, next_segment = _make_figure_tuplet(
                 talea,
-                spelling,
                 treatments,
                 acciaccatura,
                 segment,
@@ -512,7 +479,6 @@ def _make_figure_tuplets(
             affix_skips_instead_of_rests = None
         tuplet, next_attack, next_segment = _make_figure_tuplet(
             talea,
-            spelling,
             treatments,
             acciaccatura,
             segment,
@@ -529,7 +495,6 @@ def _make_figure_tuplets(
 
 def _make_figure_tuplet(
     talea,
-    spelling,
     treatments,
     acciaccatura,
     segment,
@@ -540,7 +505,6 @@ def _make_figure_tuplet(
     affix_skips_instead_of_rests=None,
 ) -> tuple[abjad.Tuplet, int, int]:
     tag = _tags.function_name(_frame())
-    spelling = spelling or rmakers.Spelling()
     next_segment += 1
     leaves = []
     current_selection = next_segment - 1
@@ -568,9 +532,7 @@ def _make_figure_tuplet(
             next_attack += 1
             this_one = talea[count]
             duration = -abjad.Duration(*this_one)
-            leaves_ = abjad.makers.make_leaves(
-                [None], [duration], increase_monotonic=spelling.increase_monotonic
-            )
+            leaves_ = abjad.makers.make_leaves([None], [duration])
             leaves.extend(leaves_)
             count = next_attack
         next_attack += 1
@@ -595,14 +557,12 @@ def _make_figure_tuplet(
             leaves_ = abjad.makers.make_leaves(
                 [tuple(pitch_expression)],
                 [duration],
-                increase_monotonic=spelling.increase_monotonic,
                 skips_instead_of_rests=skips_instead_of_rests,
             )
         else:
             leaves_ = abjad.makers.make_leaves(
                 [pitch_expression],
                 [duration],
-                increase_monotonic=spelling.increase_monotonic,
                 skips_instead_of_rests=skips_instead_of_rests,
             )
         leaves.extend(leaves_)
@@ -611,9 +571,7 @@ def _make_figure_tuplet(
             next_attack += 1
             this_one = talea[count]
             duration = -abjad.Duration(*this_one)
-            leaves_ = abjad.makers.make_leaves(
-                [None], [duration], increase_monotonic=spelling.increase_monotonic
-            )
+            leaves_ = abjad.makers.make_leaves([None], [duration])
             leaves.extend(leaves_)
             count = next_attack
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
@@ -623,7 +581,6 @@ def _make_figure_tuplet(
         leaves_ = abjad.makers.make_leaves(
             [None],
             durations,
-            increase_monotonic=spelling.increase_monotonic,
             skips_instead_of_rests=affix_skips_instead_of_rests,
         )
         leaves[0:0] = leaves_
@@ -632,7 +589,6 @@ def _make_figure_tuplet(
         leaves_ = abjad.makers.make_leaves(
             [None],
             durations,
-            increase_monotonic=spelling.increase_monotonic,
             skips_instead_of_rests=affix_skips_instead_of_rests,
         )
         leaves.extend(leaves_)
@@ -1198,9 +1154,7 @@ def figure(
     *,
     acciaccatura: bool | Acciaccatura | LMR | None = None,
     affix: RestAffix | None = None,
-    restart_talea: bool = False,
     tsd: int | None = None,
-    spelling: rmakers.Spelling | None = None,
     treatments: typing.Sequence = (),
 ) -> list[abjad.Tuplet]:
     prototype = (
@@ -1236,34 +1190,16 @@ def figure(
     next_attack, next_segment = 0, 0
     tuplets: list[abjad.Tuplet] = []
     total_collections = len(collections)
-    if restart_talea:
-        for i, collection in enumerate(collections):
-            next_attack, next_segment = 0, 0
-            tuplets_, next_attack, next_segment = _make_figure_tuplets(
-                affix,
-                talea,
-                spelling,
-                treatments,
-                acciaccatura,
-                [collection],
-                next_attack,
-                next_segment,
-                collection_index=i,
-                total_collections=total_collections,
-            )
-            tuplets.extend(tuplets_)
-    else:
-        tuplets_, next_attack, next_segment = _make_figure_tuplets(
-            affix,
-            talea,
-            spelling,
-            treatments,
-            acciaccatura,
-            collections,
-            next_attack,
-            next_segment,
-        )
-        tuplets.extend(tuplets_)
+    tuplets_, next_attack, next_segment = _make_figure_tuplets(
+        affix,
+        talea,
+        treatments,
+        acciaccatura,
+        collections,
+        next_attack,
+        next_segment,
+    )
+    tuplets.extend(tuplets_)
     assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
     return tuplets
 

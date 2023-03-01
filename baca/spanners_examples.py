@@ -73,7 +73,6 @@ spanners.py examples
     ...     [1, 1, 5, -1],
     ...     16,
     ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam(tuplets)
@@ -95,7 +94,7 @@ spanners.py examples
                 \times 9/10
                 {
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     \ottava 1
                     c'16
@@ -123,10 +122,14 @@ spanners.py examples
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
                     \ottava 0
+                    r16
                     r4
                     \revert TupletBracket.staff-padding
                 }
@@ -142,7 +145,6 @@ spanners.py examples
     ...     [1, 1, 5, -1],
     ...     16,
     ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam(container)
@@ -166,7 +168,7 @@ spanners.py examples
                 \times 9/10
                 {
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     \ottava -1
                     c'16
@@ -194,10 +196,14 @@ spanners.py examples
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
                     \ottava 0
+                    r16
                     r4
                     \revert TupletBracket.staff-padding
                 }
@@ -213,7 +219,6 @@ spanners.py examples
     ...     [1, 1, 5, -1],
     ...     16,
     ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam(container)
@@ -239,7 +244,7 @@ spanners.py examples
                 {
                     \override Slur.direction = #down
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     [
@@ -267,10 +272,14 @@ spanners.py examples
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
                     )
+                    r16
                     r4
                     \revert Slur.direction
                     \revert TupletBracket.staff-padding
@@ -287,7 +296,6 @@ spanners.py examples
     ...     [1, 1, 5, -1],
     ...     16,
     ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam(container)
@@ -313,7 +321,7 @@ spanners.py examples
                 {
                     \override Staff.SustainPedalLineSpanner.staff-padding = 4
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     \sustainOn
                     c'16
@@ -341,9 +349,13 @@ spanners.py examples
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     r4
                     \sustainOff
                     \revert Staff.SustainPedalLineSpanner.staff-padding
@@ -361,7 +373,6 @@ spanners.py examples
     ...     [1, 1, 5, -1],
     ...     16,
     ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam(container)
@@ -385,7 +396,7 @@ spanners.py examples
                 \times 9/10
                 {
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     [
@@ -413,11 +424,15 @@ spanners.py examples
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
-                    r4
+                    r16
                     \stopTrillSpan
+                    r4
                     \revert TupletBracket.staff-padding
                 }
             }
@@ -433,7 +448,6 @@ spanners.py examples
     ...     [1, 1, 5, -1],
     ...     16,
     ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam(tuplets)
@@ -460,7 +474,7 @@ spanners.py examples
                 \times 9/10
                 {
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     [
@@ -492,11 +506,15 @@ spanners.py examples
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
-                    r4
+                    r16
                     \stopTrillSpan
+                    r4
                     \revert TupletBracket.staff-padding
                 }
             }
@@ -511,7 +529,6 @@ spanners.py examples
     ...     [1, 1, 5, -1],
     ...     16,
     ...     affix=baca.rests_around([2], [4]),
-    ...     restart_talea=True,
     ...     treatments=[-1],
     ... )
     >>> rmakers.beam(container)
@@ -539,7 +556,7 @@ spanners.py examples
                 \times 9/10
                 {
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     \pitchedTrill
                     c'16
@@ -569,11 +586,15 @@ spanners.py examples
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
-                    r4
+                    r16
                     \stopTrillSpan
+                    r4
                     \revert TupletBracket.staff-padding
                 }
             }

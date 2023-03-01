@@ -158,7 +158,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -191,7 +190,7 @@ overrides.py examples.
                 {
                     \override DynamicLineSpanner.staff-padding = 4
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     \p
@@ -224,10 +223,16 @@ overrides.py examples.
                     \f
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
-                    a'16
+                    a'4
                     \p
+                    \<
+                    ~
+                    a'16
+                    \f
+                    r16
                     r4
                     \revert DynamicLineSpanner.staff-padding
                     \revert TupletBracket.staff-padding
@@ -245,7 +250,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -278,7 +282,7 @@ overrides.py examples.
                 {
                     \override DynamicLineSpanner.direction = #up
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     \p
@@ -311,10 +315,16 @@ overrides.py examples.
                     \f
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
-                    a'16
+                    a'4
                     \p
+                    \<
+                    ~
+                    a'16
+                    \f
+                    r16
                     r4
                     \revert DynamicLineSpanner.direction
                     \revert TupletBracket.staff-padding
@@ -338,7 +348,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -368,7 +377,7 @@ overrides.py examples.
                 \times 9/10
                 {
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     \once \override DynamicText.extra-offset = #'(-3 . 0)
                     c'16
@@ -398,9 +407,13 @@ overrides.py examples.
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     r4
                     \revert TupletBracket.staff-padding
                 }
@@ -815,7 +828,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -841,7 +853,7 @@ overrides.py examples.
                 \times 9/10
                 {
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     \override NoteHead.style = #'cross
                     c'16
@@ -869,10 +881,14 @@ overrides.py examples.
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
                     \revert NoteHead.style
+                    r16
                     r4
                     \revert TupletBracket.staff-padding
                 }
@@ -889,7 +905,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -915,7 +930,7 @@ overrides.py examples.
                 \times 9/10
                 {
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     \override NoteHead.style = #'harmonic
                     c'16
@@ -943,10 +958,14 @@ overrides.py examples.
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
                     \revert NoteHead.style
+                    r16
                     r4
                     \revert TupletBracket.staff-padding
                 }
@@ -963,7 +982,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -1047,7 +1065,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -1131,7 +1148,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -1158,7 +1174,7 @@ overrides.py examples.
                 {
                     \override Rest.direction = #down
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     [
@@ -1185,9 +1201,13 @@ overrides.py examples.
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     r4
                     \revert Rest.direction
                     \revert TupletBracket.staff-padding
@@ -1205,7 +1225,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -1232,7 +1251,7 @@ overrides.py examples.
                 {
                     \override Rest.staff-position = -6
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     [
@@ -1259,9 +1278,13 @@ overrides.py examples.
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     r4
                     \revert Rest.staff-position
                     \revert TupletBracket.staff-padding
@@ -1279,7 +1302,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -1306,7 +1328,7 @@ overrides.py examples.
                 {
                     \override Rest.transparent = ##t
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     [
@@ -1333,9 +1355,13 @@ overrides.py examples.
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     r4
                     \revert Rest.transparent
                     \revert TupletBracket.staff-padding
@@ -1353,7 +1379,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -1380,7 +1405,7 @@ overrides.py examples.
                 {
                     \override Rest.direction = #up
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     [
@@ -1407,9 +1432,13 @@ overrides.py examples.
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     r4
                     \revert Rest.direction
                     \revert TupletBracket.staff-padding
@@ -1427,7 +1456,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -1455,7 +1483,7 @@ overrides.py examples.
                 {
                     \override Script.color = #red
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     - \accent
@@ -1490,10 +1518,14 @@ overrides.py examples.
                     - \accent
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
-                    a'16
+                    a'4
                     - \accent
+                    ~
+                    a'16
+                    r16
                     r4
                     \revert Script.color
                     \revert TupletBracket.staff-padding
@@ -1511,7 +1543,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -1539,7 +1570,7 @@ overrides.py examples.
                 {
                     \override Script.direction = #down
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     - \accent
@@ -1574,10 +1605,14 @@ overrides.py examples.
                     - \accent
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
-                    a'16
+                    a'4
                     - \accent
+                    ~
+                    a'16
+                    r16
                     r4
                     \revert Script.direction
                     \revert TupletBracket.staff-padding
@@ -1595,7 +1630,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -1622,7 +1656,7 @@ overrides.py examples.
                 \times 9/10
                 {
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     \once \override Script.extra-offset = #'(-1.5 . 0)
                     c'16
@@ -1658,10 +1692,14 @@ overrides.py examples.
                     - \accent
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
-                    a'16
+                    a'4
                     - \accent
+                    ~
+                    a'16
+                    r16
                     r4
                     \revert TupletBracket.staff-padding
                 }
@@ -1678,7 +1716,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -1706,7 +1743,7 @@ overrides.py examples.
                 {
                     \override Script.direction = #up
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     - \accent
@@ -1741,10 +1778,14 @@ overrides.py examples.
                     - \accent
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
-                    a'16
+                    a'4
                     - \accent
+                    ~
+                    a'16
+                    r16
                     r4
                     \revert Script.direction
                     \revert TupletBracket.staff-padding
@@ -1768,7 +1809,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -1797,7 +1837,7 @@ overrides.py examples.
                 {
                     \override Slur.direction = #down
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     [
@@ -1828,9 +1868,15 @@ overrides.py examples.
                     )
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    (
+                    ~
                     a'16
+                    )
+                    r16
                     r4
                     \revert Slur.direction
                     \revert TupletBracket.staff-padding
@@ -1854,7 +1900,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -1886,7 +1931,7 @@ overrides.py examples.
                     \override Slur.direction = #up
                     \override TupletBracket.direction = #down
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     \override Stem.direction = #down
                     c'16
@@ -1918,10 +1963,16 @@ overrides.py examples.
                     )
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    (
+                    ~
                     a'16
+                    )
                     \revert Stem.direction
+                    r16
                     r4
                     \revert Slur.direction
                     \revert TupletBracket.direction
@@ -1940,7 +1991,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -1966,7 +2016,7 @@ overrides.py examples.
                 \times 9/10
                 {
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     \override Stem.color = #red
                     c'16
@@ -1994,10 +2044,14 @@ overrides.py examples.
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
                     \revert Stem.color
+                    r16
                     r4
                     \revert TupletBracket.staff-padding
                 }
@@ -2014,7 +2068,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -2040,7 +2093,7 @@ overrides.py examples.
                 \times 9/10
                 {
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     \override Stem.direction = #down
                     c'16
@@ -2068,10 +2121,14 @@ overrides.py examples.
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
                     \revert Stem.direction
+                    r16
                     r4
                     \revert TupletBracket.staff-padding
                 }
@@ -2088,7 +2145,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -2114,7 +2170,7 @@ overrides.py examples.
                 \times 9/10
                 {
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     \override Stem.direction = #up
                     c'16
@@ -2142,10 +2198,14 @@ overrides.py examples.
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
                     \revert Stem.direction
+                    r16
                     r4
                     \revert TupletBracket.staff-padding
                 }
@@ -2162,7 +2222,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -2191,7 +2250,7 @@ overrides.py examples.
                 {
                     \override Staff.SustainPedalLineSpanner.staff-padding = 4
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     \sustainOn
                     c'16
@@ -2222,10 +2281,14 @@ overrides.py examples.
                     \sustainOff
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
-                    a'16
+                    a'4
                     \sustainOn
+                    ~
+                    a'16
+                    r16
                     r4
                     \sustainOff
                     \revert Staff.SustainPedalLineSpanner.staff-padding
@@ -2249,7 +2312,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -2278,7 +2340,7 @@ overrides.py examples.
                 {
                     \override TextScript.color = #red
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     ^ \markup "più mosso"
@@ -2307,9 +2369,13 @@ overrides.py examples.
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     r4
                     \revert TextScript.color
                     \revert TupletBracket.staff-padding
@@ -2332,7 +2398,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -2361,7 +2426,7 @@ overrides.py examples.
                 {
                     \override TextScript.direction = #down
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     ^ \markup "più mosso"
@@ -2390,9 +2455,13 @@ overrides.py examples.
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     r4
                     \revert TextScript.direction
                     \revert TupletBracket.staff-padding
@@ -2415,7 +2484,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -2444,7 +2512,7 @@ overrides.py examples.
                 {
                     \override TextScript.padding = 4
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     ^ \markup "più mosso"
@@ -2473,9 +2541,13 @@ overrides.py examples.
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     r4
                     \revert TextScript.padding
                     \revert TupletBracket.staff-padding
@@ -2498,7 +2570,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -2527,7 +2598,7 @@ overrides.py examples.
                 {
                     \override TextScript.staff-padding = 4
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     ^ \markup "più mosso"
@@ -2556,9 +2627,13 @@ overrides.py examples.
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     r4
                     \revert TextScript.staff-padding
                     \revert TupletBracket.staff-padding
@@ -2581,7 +2656,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -2610,7 +2684,7 @@ overrides.py examples.
                 {
                     \override TextScript.direction = #up
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     ^ \markup "più mosso"
@@ -2639,9 +2713,13 @@ overrides.py examples.
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     r4
                     \revert TextScript.direction
                     \revert TupletBracket.staff-padding
@@ -2659,7 +2737,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -2689,7 +2766,7 @@ overrides.py examples.
                     \override TextScript.staff-padding = 6
                     \override TextSpanner.staff-padding = 6
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     [
@@ -2722,10 +2799,14 @@ overrides.py examples.
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
                     \stopTextSpan
+                    r16
                     r4
                     \revert TextScript.staff-padding
                     \revert TextSpanner.staff-padding
@@ -2744,7 +2825,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -2819,7 +2899,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -2892,7 +2971,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -2920,7 +2998,7 @@ overrides.py examples.
                 {
                     \once \override Score.TimeSignature.extra-offset = #'(-6 . 0)
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     [
@@ -2947,9 +3025,13 @@ overrides.py examples.
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     r4
                     \revert TupletBracket.staff-padding
                 }
@@ -2966,7 +3048,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -2993,7 +3074,7 @@ overrides.py examples.
                 {
                     \override Score.TimeSignature.transparent = ##t
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     [
@@ -3020,9 +3101,13 @@ overrides.py examples.
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     r4
                     \revert Score.TimeSignature.transparent
                     \revert TupletBracket.staff-padding
@@ -3040,7 +3125,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -3067,7 +3151,7 @@ overrides.py examples.
                 {
                     \override TupletBracket.direction = #down
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     [
@@ -3094,9 +3178,13 @@ overrides.py examples.
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     r4
                     \revert TupletBracket.direction
                     \revert TupletBracket.staff-padding
@@ -3114,7 +3202,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -3143,7 +3230,7 @@ overrides.py examples.
                 {
                     \once \override TupletBracket.extra-offset = #'(-1 . 0)
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     [
@@ -3170,9 +3257,13 @@ overrides.py examples.
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     r4
                     \revert TupletBracket.staff-padding
                 }
@@ -3189,7 +3280,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -3214,7 +3304,7 @@ overrides.py examples.
                 \times 9/10
                 {
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     [
@@ -3241,9 +3331,13 @@ overrides.py examples.
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     r4
                     \revert TupletBracket.staff-padding
                 }
@@ -3260,7 +3354,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -3287,7 +3380,7 @@ overrides.py examples.
                 {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     [
@@ -3314,9 +3407,13 @@ overrides.py examples.
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     r4
                     \revert TupletBracket.direction
                     \revert TupletBracket.staff-padding
@@ -3334,7 +3431,6 @@ overrides.py examples.
     ...         [1, 1, 5, -1],
     ...         16,
     ...         affix=baca.rests_around([2], [4]),
-    ...         restart_talea=True,
     ...         treatments=[-1],
     ...     )
     ...     rmakers.beam(tuplets)
@@ -3363,7 +3459,7 @@ overrides.py examples.
                 {
                     \once \override TupletNumber.extra-offset = #'(-1 . 0)
                     \override TupletBracket.staff-padding = 2
-                    \time 11/8
+                    \time 27/16
                     r8
                     c'16
                     [
@@ -3390,9 +3486,13 @@ overrides.py examples.
                     g''16
                     ]
                 }
-                \times 4/5
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 9/10
                 {
+                    a'4
+                    ~
                     a'16
+                    r16
                     r4
                     \revert TupletBracket.staff-padding
                 }

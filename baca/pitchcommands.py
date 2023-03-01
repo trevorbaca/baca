@@ -1497,7 +1497,6 @@ def displacement(argument, displacements: list[int]) -> None:
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
-        ...         restart_talea=True,
         ...         treatments=[-1],
         ... )
         >>> rmakers.beam(container)
@@ -2297,7 +2296,6 @@ def register(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
-        ...         restart_talea=True,
         ...         treatments=[-1],
         ... )
         >>> rmakers.beam(container)
@@ -2321,7 +2319,7 @@ def register(
                     \times 9/10
                     {
                         \override TupletBracket.staff-padding = 2
-                        \time 11/8
+                        \time 27/16
                         r8
                         c'16
                         [
@@ -2348,9 +2346,13 @@ def register(
                         g16
                         ]
                     }
-                    \times 4/5
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10
                     {
+                        a4
+                        ~
                         a16
+                        r16
                         r4
                         \revert TupletBracket.staff-padding
                     }
@@ -2364,7 +2366,6 @@ def register(
         ...     [1, 1, 5, -1],
         ...     16,
         ...     affix=baca.rests_around([2], [4]),
-        ...     restart_talea=True,
         ...     treatments=[-1],
         ... )
         >>> rmakers.beam(container)
@@ -2390,7 +2391,7 @@ def register(
                     \times 9/10
                     {
                         \override TupletBracket.staff-padding = 2
-                        \time 11/8
+                        \time 27/16
                         r8
                         c'16
                         [
@@ -2424,9 +2425,13 @@ def register(
                         g16
                         ]
                     }
-                    \times 4/5
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10
                     {
+                        a'4
+                        ~
                         a'16
+                        r16
                         r4
                         \revert TupletBracket.staff-padding
                     }
@@ -2442,7 +2447,6 @@ def register(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
-        ...         restart_talea=True,
         ...         treatments=[-1],
         ... )
         >>> rmakers.beam(container)
@@ -2466,7 +2470,7 @@ def register(
                     \times 9/10
                     {
                         \override TupletBracket.staff-padding = 2
-                        \time 11/8
+                        \time 27/16
                         r8
                         c'16
                         [
@@ -2493,9 +2497,13 @@ def register(
                         g''16
                         ]
                     }
-                    \times 4/5
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10
                     {
+                        a''4
+                        ~
                         a''16
+                        r16
                         r4
                         \revert TupletBracket.staff-padding
                     }
@@ -2509,7 +2517,6 @@ def register(
         ...     [1, 1, 5, -1],
         ...     16,
         ...     affix=baca.rests_around([2], [4]),
-        ...     restart_talea=True,
         ...     treatments=[-1],
         ... )
         >>> rmakers.beam(container)
@@ -2535,7 +2542,7 @@ def register(
                     \times 9/10
                     {
                         \override TupletBracket.staff-padding = 2
-                        \time 11/8
+                        \time 27/16
                         r8
                         c'16
                         [
@@ -2569,9 +2576,13 @@ def register(
                         g''16
                         ]
                     }
-                    \times 4/5
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10
                     {
+                        a'4
+                        ~
                         a'16
+                        r16
                         r4
                         \revert TupletBracket.staff-padding
                     }
