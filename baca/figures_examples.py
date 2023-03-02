@@ -3146,9 +3146,9 @@ figures.py examples.
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     treatments=[-1],
+    ...     treatments=["10:9"],
     ... )
+    >>> baca.rests_around_function(tuplets, [2], [4], 16)
     >>> container = abjad.Container(tuplets)
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> _ = baca.nest(tuplets, "+4/16")
@@ -3304,7 +3304,8 @@ figures.py examples.
     ...     [19, 13, 9, 8],
     ... ]
     >>> affix = baca.rests_around([2], [3])
-    >>> tuplets = baca.figure(collections, [1], 16, affix=affix)
+    >>> tuplets = baca.figure(collections, [1], 16)
+    >>> baca.rests_around_function(tuplets, [2], [3], 16)
     >>> rmakers.beam_groups(
     ...     rmakers.nongrace_leaves_in_each_tuplet(tuplets, level=-1))
     >>> container = abjad.Container(tuplets)
@@ -3380,11 +3381,8 @@ figures.py examples.
     Affixes rests to complete output when pattern is none:
 
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> affix = baca.RestAffix(
-    ...     prefix=[1],
-    ...     suffix=[2],
-    ... )
-    >>> tuplets = baca.figure(collections, [1], 16, affix=affix, treatments=[1])
+    >>> tuplets = baca.figure(collections, [1], 16, treatments=["4:5", "5:6", "3:4"])
+    >>> baca.rests_around_function(tuplets, [1], [2], 16)
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> lilypond_file = abjad.illustrators.selection(tuplets)
 
@@ -3433,11 +3431,8 @@ figures.py examples.
     Affixes rest to complete output when pattern is none:
 
     >>> collections = [[18, 16, 15, 20, 19]]
-    >>> affix = baca.RestAffix(
-    ...     prefix=[1],
-    ...     suffix=[2],
-    ... )
-    >>> tuplets = baca.figure(collections, [1], 16, affix=affix, treatments=[1])
+    >>> tuplets = baca.figure(collections, [1], 16, treatments=["8:9"])
+    >>> baca.rests_around_function(tuplets, [1], [2], 16)
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> lilypond_file = abjad.illustrators.selection(tuplets)
 
@@ -3463,210 +3458,6 @@ figures.py examples.
                     g''16
                     ]
                     r8
-                }
-            }
-        >>
-
-..  container:: example
-
-    Affixes rests to first and last collections only:
-
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> affix = baca.RestAffix(
-    ...     pattern=abjad.Pattern(indices=[0, -1]),
-    ...     prefix=[1],
-    ...     suffix=[2],
-    ... )
-    >>> tuplets = baca.figure(
-    ...     collections, [1], 16, affix=affix, treatments=[1])
-    >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        <<
-            \context Staff = "Staff"
-            {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 7/6
-                {
-                    \time 9/8
-                    r16
-                    c'16
-                    [
-                    d'16
-                    bf'16
-                    ]
-                    r8
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 6/5
-                {
-                    fs''16
-                    [
-                    e''16
-                    ef''16
-                    af''16
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 5/4
-                {
-                    r16
-                    a'16
-                    r8
-                }
-            }
-        >>
-
-..  container:: example
-
-    Affixes rests to every collection:
-
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> affix = baca.RestAffix(
-    ...     pattern=abjad.index_all(),
-    ...     prefix=[1],
-    ...     suffix=[2],
-    ... )
-    >>> tuplets = baca.figure(
-    ...     collections, [1], 16, affix=affix, treatments=[1])
-    >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        <<
-            \context Staff = "Staff"
-            {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 7/6
-                {
-                    \time 21/16
-                    r16
-                    c'16
-                    [
-                    d'16
-                    bf'16
-                    ]
-                    r8
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/8
-                {
-                    r16
-                    fs''16
-                    [
-                    e''16
-                    ef''16
-                    af''16
-                    g''16
-                    ]
-                    r8
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 5/4
-                {
-                    r16
-                    a'16
-                    r8
-                }
-            }
-        >>
-
-..  container:: example
-
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> affix = baca.RestAffix(prefix=[3])
-    >>> tuplets = baca.figure(collections, [1], 16, affix=affix)
-    >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        <<
-            \context Staff = "Staff"
-            {
-                \scaleDurations #'(1 . 1)
-                {
-                    \time 3/4
-                    r8.
-                    c'16
-                    [
-                    d'16
-                    bf'16
-                    ]
-                }
-                \scaleDurations #'(1 . 1)
-                {
-                    fs''16
-                    [
-                    e''16
-                    ef''16
-                    af''16
-                    g''16
-                    ]
-                }
-                \scaleDurations #'(1 . 1)
-                {
-                    a'16
-                }
-            }
-        >>
-
-..  container:: example
-
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> affix = baca.RestAffix(suffix=[3])
-    >>> tuplets = baca.figure(collections, [1], 16, affix=affix)
-    >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        <<
-            \context Staff = "Staff"
-            {
-                \scaleDurations #'(1 . 1)
-                {
-                    \time 3/4
-                    c'16
-                    [
-                    d'16
-                    bf'16
-                    ]
-                }
-                \scaleDurations #'(1 . 1)
-                {
-                    fs''16
-                    [
-                    e''16
-                    ef''16
-                    af''16
-                    g''16
-                    ]
-                }
-                \scaleDurations #'(1 . 1)
-                {
-                    a'16
-                    r8.
                 }
             }
         >>
@@ -4536,8 +4327,8 @@ figures.py examples.
     ...     [15, 20, 19, 9, 0],
     ...     [2, 10, 18, 16, 15],
     ... ]
-    >>> tuplets = baca.figure(
-    ...     collections, [1], 16, affix=baca.rests_around([2], [2]))
+    >>> tuplets = baca.figure(collections, [1], 16)
+    >>> baca.rests_around_function(tuplets, [2], [2], 16)
     >>> groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
     >>> rmakers.beam_groups(groups)
     >>> container = abjad.Container(tuplets)
@@ -4703,9 +4494,9 @@ figures.py examples.
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
-    ...     affix=baca.rests_after([2]),
-    ...     treatments=[-1],
+    ...     treatments=["8:7", "10:9", "8:7"],
     ... )
+    >>> baca.rests_after_function(tuplets, [2], 16)
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
     >>> lilypond_file = abjad.illustrators.selection(tuplets)
@@ -4757,325 +4548,6 @@ figures.py examples.
                     a'16
                     r16
                     r8
-                    \revert TupletBracket.staff-padding
-                }
-            }
-        >>
-
-..  container:: example
-
-    Rests around.
-
-    >>> tuplets = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [2]),
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
-    >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        <<
-            \context Staff = "Staff"
-            {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    \override TupletBracket.staff-padding = 2
-                    \time 25/16
-                    r8
-                    c'16
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 7/8
-                {
-                    a'4
-                    ~
-                    a'16
-                    r16
-                    r8
-                    \revert TupletBracket.staff-padding
-                }
-            }
-        >>
-
-..  container:: example
-
-    Works together with negative-valued talea:
-
-    >>> tuplets = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, -1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [3]),
-    ...     treatments=[1],
-    ... )
-    >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
-    >>> staff = lilypond_file["Staff"]
-    >>> abjad.override(staff).TupletBracket.staff_padding = 4
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        <<
-            \context Staff = "Staff"
-            \with
-            {
-                \override TupletBracket.staff-padding = 4
-            }
-            {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/8
-                {
-                    \time 13/8
-                    r8
-                    c'16
-                    r16
-                    d'16
-                    r16
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 11/10
-                {
-                    fs''16
-                    r16
-                    e''16
-                    r16
-                    ef''16
-                    r16
-                    af''16
-                    r16
-                    g''16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 6/5
-                {
-                    a'16
-                    r16
-                    r8.
-                }
-            }
-        >>
-
-..  container:: example
-
-    >>> tuplets = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [-1, 1],
-    ...     16,
-    ...     affix=baca.rests_around([2], [3]),
-    ...     treatments=[1],
-    ... )
-    >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
-    >>> staff = lilypond_file["Staff"]
-    >>> abjad.override(staff).TupletBracket.staff_padding = 4
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        <<
-            \context Staff = "Staff"
-            \with
-            {
-                \override TupletBracket.staff-padding = 4
-            }
-            {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/8
-                {
-                    \time 13/8
-                    r8
-                    r16
-                    c'16
-                    r16
-                    d'16
-                    r16
-                    bf'16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 11/10
-                {
-                    r16
-                    fs''16
-                    r16
-                    e''16
-                    r16
-                    ef''16
-                    r16
-                    af''16
-                    r16
-                    g''16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 6/5
-                {
-                    r16
-                    a'16
-                    r8.
-                }
-            }
-        >>
-
-..  container:: example
-
-    With time treatments:
-
-    >>> tuplets = baca.figure(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1],
-    ...     16,
-    ...     affix=baca.rests_around([1], [1]),
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        <<
-            \context Staff = "Staff"
-            {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 3/4
-                {
-                    \time 9/16
-                    r16
-                    c'16
-                    [
-                    d'16
-                    bf'16
-                    ]
-                }
-                \times 4/5
-                {
-                    fs''16
-                    [
-                    e''16
-                    ef''16
-                    af''16
-                    g''16
-                    ]
-                }
-                \scaleDurations #'(1 . 1)
-                {
-                    a'16
-                    r16
-                }
-            }
-        >>
-
-..  container:: example
-
-    Rests before.
-
-    >>> tuplets = baca.figure(
-    ... [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     affix=baca.rests_before([2]),
-    ...     treatments=[-1],
-    ... )
-    >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
-    >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        <<
-            \context Staff = "Staff"
-            {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    \override TupletBracket.staff-padding = 2
-                    \time 23/16
-                    r8
-                    c'16
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 5/6
-                {
-                    a'4
-                    ~
-                    a'16
-                    r16
                     \revert TupletBracket.staff-padding
                 }
             }
