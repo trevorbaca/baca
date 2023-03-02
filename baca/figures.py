@@ -434,7 +434,6 @@ def _make_accelerando_multipliers(durations, exponent):
 
 
 def _make_figure_tuplets(
-    affix,
     talea,
     treatments,
     acciaccatura,
@@ -444,17 +443,9 @@ def _make_figure_tuplets(
     collection_index=None,
     total_collections=None,
 ) -> tuple[list[abjad.Tuplet], int, int]:
-    segment_count = len(collections)
     tuplets = []
     if collection_index is None:
         for i, segment in enumerate(collections):
-            if affix is not None:
-                result = affix(i, segment_count)
-                rest_prefix, rest_suffix = result
-                affix_skips_instead_of_rests = affix.skips_instead_of_rests
-            else:
-                rest_prefix, rest_suffix = None, None
-                affix_skips_instead_of_rests = None
             tuplet, next_attack, next_segment = _make_figure_tuplet(
                 talea,
                 treatments,
@@ -462,21 +453,11 @@ def _make_figure_tuplets(
                 segment,
                 next_attack,
                 next_segment,
-                rest_prefix=rest_prefix,
-                rest_suffix=rest_suffix,
-                affix_skips_instead_of_rests=affix_skips_instead_of_rests,
             )
             tuplets.append(tuplet)
     else:
         assert len(collections) == 1, repr(collections)
         segment = collections[0]
-        if affix is not None:
-            result = affix(collection_index, total_collections)
-            rest_prefix, rest_suffix = result
-            affix_skips_instead_of_rests = affix.skips_instead_of_rests
-        else:
-            rest_prefix, rest_suffix = None, None
-            affix_skips_instead_of_rests = None
         tuplet, next_attack, next_segment = _make_figure_tuplet(
             talea,
             treatments,
@@ -484,9 +465,6 @@ def _make_figure_tuplets(
             segment,
             next_attack,
             next_segment,
-            rest_prefix=rest_prefix,
-            rest_suffix=rest_suffix,
-            affix_skips_instead_of_rests=affix_skips_instead_of_rests,
         )
         tuplets.append(tuplet)
     assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
@@ -500,9 +478,6 @@ def _make_figure_tuplet(
     segment,
     next_attack,
     next_segment,
-    rest_prefix=None,
-    rest_suffix=None,
-    affix_skips_instead_of_rests=None,
 ) -> tuple[abjad.Tuplet, int, int]:
     tag = _tags.function_name(_frame())
     next_segment += 1
@@ -539,7 +514,6 @@ def _make_figure_tuplet(
         this_one = talea[count]
         duration = this_one
         assert 0 < abjad.Duration(duration), repr(duration)
-        skips_instead_of_rests = False
         if (
             isinstance(pitch_expression, tuple)
             and len(pitch_expression) == 2
@@ -550,21 +524,11 @@ def _make_figure_tuplet(
                 multiplier.numerator,
                 multiplier.denominator * talea.denominator,
             )
-            if pitch_expression[-1] == "skip":
-                skips_instead_of_rests = True
             pitch_expression = None
         if is_chord:
-            leaves_ = abjad.makers.make_leaves(
-                [tuple(pitch_expression)],
-                [duration],
-                skips_instead_of_rests=skips_instead_of_rests,
-            )
+            leaves_ = abjad.makers.make_leaves([tuple(pitch_expression)], [duration])
         else:
-            leaves_ = abjad.makers.make_leaves(
-                [pitch_expression],
-                [duration],
-                skips_instead_of_rests=skips_instead_of_rests,
-            )
+            leaves_ = abjad.makers.make_leaves([pitch_expression], [duration])
         leaves.extend(leaves_)
         count = next_attack
         while abjad.Fraction(*talea[count]) < 0 and not count % len(talea) == 0:
@@ -576,22 +540,6 @@ def _make_figure_tuplet(
             count = next_attack
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
     assert isinstance(talea, rmakers.Talea), repr(talea)
-    if rest_prefix:
-        durations = [(_, talea.denominator) for _ in rest_prefix]
-        leaves_ = abjad.makers.make_leaves(
-            [None],
-            durations,
-            skips_instead_of_rests=affix_skips_instead_of_rests,
-        )
-        leaves[0:0] = leaves_
-    if rest_suffix:
-        durations = [(_, talea.denominator) for _ in rest_suffix]
-        leaves_ = abjad.makers.make_leaves(
-            [None],
-            durations,
-            skips_instead_of_rests=affix_skips_instead_of_rests,
-        )
-        leaves.extend(leaves_)
     leaf_list = leaves
     if isinstance(treatment, int):
         extra_count = treatment
@@ -1074,39 +1022,6 @@ class OBGC:
         pass
 
 
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class RestAffix:
-    pattern: abjad.Pattern | None = None
-    prefix: typing.Sequence[int] = ()
-    skips_instead_of_rests: bool = False
-    suffix: typing.Sequence[int] = ()
-
-    def __post_init__(self):
-        if self.pattern is not None:
-            assert isinstance(self.pattern, abjad.Pattern)
-        if self.prefix is not None:
-            assert all(isinstance(_, int) for _ in self.prefix)
-        assert isinstance(self.skips_instead_of_rests, bool), repr(
-            self.skips_instead_of_rests
-        )
-        if self.suffix is not None:
-            assert all(isinstance(_, int) for _ in self.suffix)
-
-    def __call__(
-        self, collection_index: int, total_collections: int
-    ) -> tuple[typing.Sequence[int] | None, typing.Sequence[int] | None]:
-        if self.pattern is None:
-            if collection_index == 0 and collection_index == total_collections - 1:
-                return self.prefix, self.suffix
-            if collection_index == 0:
-                return self.prefix, None
-            if collection_index == total_collections - 1:
-                return None, self.suffix
-        elif self.pattern.matches_index(collection_index, total_collections):
-            return self.prefix, self.suffix
-        return None, None
-
-
 def anchor(
     remote_voice_name: str,
     remote_selector=None,
@@ -1153,7 +1068,6 @@ def figure(
     denominator: int,
     *,
     acciaccatura: bool | Acciaccatura | LMR | None = None,
-    affix: RestAffix | None = None,
     tsd: int | None = None,
     treatments: typing.Sequence = (),
 ) -> list[abjad.Tuplet]:
@@ -1190,7 +1104,6 @@ def figure(
     next_attack, next_segment = 0, 0
     tuplets: list[abjad.Tuplet] = []
     tuplets_, next_attack, next_segment = _make_figure_tuplets(
-        affix,
         talea,
         treatments,
         acciaccatura,
