@@ -6,7 +6,6 @@ import dataclasses
 import fractions
 import math as python_math
 import typing
-from inspect import currentframe as _frame
 
 import abjad
 from abjadext import rmakers
@@ -15,6 +14,8 @@ from . import cursor as _cursor
 from . import select as _select
 from . import tags as _tags
 from .enums import enums as _enums
+
+# from inspect import currentframe as _frame
 
 
 def _collections_to_container(
@@ -436,7 +437,6 @@ def _make_accelerando_multipliers(durations, exponent):
 def _make_figure_tuplets(
     talea,
     treatments,
-    acciaccatura,
     collections,
     next_attack,
     next_segment,
@@ -449,7 +449,6 @@ def _make_figure_tuplets(
             tuplet, next_attack, next_segment = _make_figure_tuplet(
                 talea,
                 treatments,
-                acciaccatura,
                 segment,
                 next_attack,
                 next_segment,
@@ -461,7 +460,6 @@ def _make_figure_tuplets(
         tuplet, next_attack, next_segment = _make_figure_tuplet(
             talea,
             treatments,
-            acciaccatura,
             segment,
             next_attack,
             next_segment,
@@ -474,12 +472,12 @@ def _make_figure_tuplets(
 def _make_figure_tuplet(
     talea,
     treatments,
-    acciaccatura,
     segment,
     next_attack,
     next_segment,
 ) -> tuple[abjad.Tuplet, int, int]:
-    tag = _tags.function_name(_frame())
+    # TODO: use tag
+    # tag = _tags.function_name(_frame())
     next_segment += 1
     leaves = []
     current_selection = next_segment - 1
@@ -487,12 +485,6 @@ def _make_figure_tuplet(
         treatment = abjad.CyclicTuple(treatments)[current_selection]
     else:
         treatment = 0
-    before_grace_containers = None
-    if acciaccatura is not None:
-        if isinstance(segment, set | frozenset):
-            raise Exception("decide how to model chords with acciaccatura.")
-        before_grace_containers, segment = acciaccatura(segment)
-        assert len(before_grace_containers) == len(segment)
     if isinstance(segment, set | frozenset):
         segment = [segment]
     for pitch_expression in segment:
@@ -588,7 +580,6 @@ def _make_figure_tuplet(
     else:
         raise Exception(f"bad time treatment: {treatment!r}.")
     assert isinstance(tuplet, abjad.Tuplet)
-    _attach_before_grace_containers(before_grace_containers, tuplet, tag=tag)
     if tuplet.trivial():
         tuplet.hide = True
     assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
@@ -596,6 +587,7 @@ def _make_figure_tuplet(
 
 
 def _attach_before_grace_containers(before_grace_containers, tuplet, tag=None):
+    # TODO: use tag
     if before_grace_containers is None:
         return
     logical_ties = abjad.iterate.logical_ties(tuplet)
@@ -793,23 +785,6 @@ class LMR:
         elif not left_length and not right_length:
             middle_length = total_length
         return left_length, middle_length, right_length
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class Acciaccatura:
-    durations: typing.Sequence[abjad.Duration] = (abjad.Duration(1, 16),)
-    lmr: LMR = LMR()
-
-    def __post_init__(self):
-        assert all(isinstance(_, abjad.Duration) for _ in self.durations), repr(
-            self.durations
-        )
-        assert isinstance(self.lmr, LMR), repr(self.lmr)
-
-    def __call__(
-        self, collection: list | None = None
-    ) -> tuple[list[abjad.BeforeGraceContainer | None], list]:
-        return _do_acciaccatura(collection, lmr=self.lmr, durations=self.durations)
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -1072,7 +1047,6 @@ def figure(
     counts: typing.Sequence[int],
     denominator: int,
     *,
-    acciaccatura: bool | Acciaccatura | LMR | None = None,
     tsd: int | None = None,
     treatments: typing.Sequence = (),
 ) -> list[abjad.Tuplet]:
@@ -1099,19 +1073,12 @@ def figure(
                 collection
             )
     assert all(isinstance(_, int) for _ in counts), repr(counts)
-    if acciaccatura is True:
-        acciaccatura = Acciaccatura()
-    elif isinstance(acciaccatura, LMR):
-        acciaccatura = Acciaccatura(lmr=acciaccatura)
-    if acciaccatura is not None:
-        assert isinstance(acciaccatura, Acciaccatura), repr(acciaccatura)
     talea = rmakers.Talea(counts=counts, denominator=denominator)
     next_attack, next_segment = 0, 0
     tuplets: list[abjad.Tuplet] = []
     tuplets_, next_attack, next_segment = _make_figure_tuplets(
         talea,
         treatments,
-        acciaccatura,
         collections,
         next_attack,
         next_segment,

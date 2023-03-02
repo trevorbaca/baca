@@ -17,7 +17,7 @@ from .constellation import *
 from .cursor import Cursor
 from .docs import global_context_string
 from .figures import (
-    Acciaccatura,
+    LMR,
     anchor,
     anchor_after,
     anchor_to_figure,
