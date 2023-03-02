@@ -74,7 +74,7 @@ spanners.py examples
     ...     16,
     ...     treatments=["10:9"],
     ... )
-    >>> baca.rests_around_function(tuplets, [2], [4], 16)
+    >>> baca.rests_around(tuplets, [2], [4], 16)
     >>> rmakers.beam(tuplets)
     >>> _ = baca.ottava(baca.select.tleaves(tuplets))
     >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
@@ -146,7 +146,7 @@ spanners.py examples
     ...     16,
     ...     treatments=["10:9"],
     ... )
-    >>> baca.rests_around_function(tuplets, [2], [4], 16)
+    >>> baca.rests_around(tuplets, [2], [4], 16)
     >>> rmakers.beam(tuplets)
     >>> _ = baca.ottava_bassa(baca.select.tleaves(tuplets))
     >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
@@ -218,7 +218,7 @@ spanners.py examples
     ...     16,
     ...     treatments=["10:9"],
     ... )
-    >>> baca.rests_around_function(tuplets, [2], [4], 16)
+    >>> baca.rests_around(tuplets, [2], [4], 16)
     >>> rmakers.beam(tuplets)
     >>> _ = baca.slur(baca.select.tleaves(tuplets))
     >>> _ = baca.slur_down(tuplets)
@@ -293,7 +293,7 @@ spanners.py examples
     ...     16,
     ...     treatments=["10:9"],
     ... )
-    >>> baca.rests_around_function(tuplets, [2], [4], 16)
+    >>> baca.rests_around(tuplets, [2], [4], 16)
     >>> rmakers.beam(tuplets)
     >>> _ = baca.sustain_pedal(tuplets)
     >>> _ = baca.sustain_pedal_staff_padding(tuplets, 4)
@@ -368,7 +368,7 @@ spanners.py examples
     ...     16,
     ...     treatments=["10:9"],
     ... )
-    >>> baca.rests_around_function(tuplets, [2], [4], 16)
+    >>> baca.rests_around(tuplets, [2], [4], 16)
     >>> rmakers.beam(tuplets)
     >>> _ = baca.trill_spanner(baca.select.tleaves(tuplets, rleak=True))
     >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
@@ -441,7 +441,7 @@ spanners.py examples
     ...     16,
     ...     treatments=["10:9"],
     ... )
-    >>> baca.rests_around_function(tuplets, [2], [4], 16)
+    >>> baca.rests_around(tuplets, [2], [4], 16)
     >>> rmakers.beam(tuplets)
     >>> container = abjad.Container(tuplets)
     >>> for run in baca.select.runs(tuplets):
@@ -522,7 +522,7 @@ spanners.py examples
     ...     16,
     ...     treatments=["10:9"],
     ... )
-    >>> baca.rests_around_function(tuplets, [2], [4], 16)
+    >>> baca.rests_around(tuplets, [2], [4], 16)
     >>> rmakers.beam(tuplets)
     >>> _ = baca.trill_spanner(
     ...     baca.select.tleaves(tuplets, rleak=True),

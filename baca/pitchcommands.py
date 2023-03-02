@@ -1472,7 +1472,7 @@ def displacement(argument, displacements: list[int]) -> None:
         ...         16,
         ...         treatments=["10:9", "8:7", "12:11"],
         ... )
-        >>> baca.rests_around_function(tuplets, [2], [4], 16)
+        >>> baca.rests_around(tuplets, [2], [4], 16)
         >>> rmakers.beam(tuplets)
         >>> baca.displacement(tuplets, [0, 0, -1, -1, 1, 1])
         >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
@@ -1541,7 +1541,7 @@ def displacement(argument, displacements: list[int]) -> None:
         ...     [4],
         ...     16,
         ... )
-        >>> baca.rests_around_function(tuplets, [2], [4], 16)
+        >>> baca.rests_around(tuplets, [2], [4], 16)
         >>> rmakers.beam(tuplets)
         >>> _ = baca.displacement(tuplets, [0, 0, -1, -1, 1, 1])
         >>> lilypond_file = abjad.illustrators.selection(tuplets)
@@ -2259,7 +2259,7 @@ def register(
         ...         16,
         ...         treatments=["10:9"],
         ... )
-        >>> baca.rests_around_function(tuplets, [2], [4], 16)
+        >>> baca.rests_around(tuplets, [2], [4], 16)
         >>> rmakers.beam(tuplets)
         >>> _ = baca.register(tuplets, -6)
         >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
@@ -2327,7 +2327,7 @@ def register(
         ...     16,
         ...     treatments=["10:9"],
         ... )
-        >>> baca.rests_around_function(tuplets, [2], [4], 16)
+        >>> baca.rests_around(tuplets, [2], [4], 16)
         >>> rmakers.beam(tuplets)
         >>> tuplet = baca.select.tuplet(tuplets, 1)
         >>> baca.color(tuplet, lone=True)
@@ -2406,7 +2406,7 @@ def register(
         ...         16,
         ...         treatments=["10:9"],
         ... )
-        >>> baca.rests_around_function(tuplets, [2], [4], 16)
+        >>> baca.rests_around(tuplets, [2], [4], 16)
         >>> rmakers.beam(tuplets)
         >>> _ = baca.register(tuplets, -6, 18)
         >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
@@ -2474,7 +2474,7 @@ def register(
         ...     16,
         ...     treatments=["10:9"],
         ... )
-        >>> baca.rests_around_function(tuplets, [2], [4], 16)
+        >>> baca.rests_around(tuplets, [2], [4], 16)
         >>> rmakers.beam(tuplets)
         >>> tuplet = baca.select.tuplet(tuplets, 1)
         >>> baca.color(tuplet, lone=True)

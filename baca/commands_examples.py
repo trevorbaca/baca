@@ -318,7 +318,7 @@ commands.py examles
     ...     16,
     ...     treatments=["10:9"],
     ... )
-    >>> baca.rests_around_function(tuplets, [2], [4], 16)
+    >>> baca.rests_around(tuplets, [2], [4], 16)
     >>> rmakers.beam(tuplets)
     >>> _ = baca.dynamic(baca.select.pleaf(tuplets, 0), '"f"')
     >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
@@ -931,7 +931,7 @@ commands.py examles
     ...     16,
     ...     treatments=["10:9"],
     ... )
-    >>> baca.rests_around_function(tuplets, [2], [4], 16)
+    >>> baca.rests_around(tuplets, [2], [4], 16)
     >>> rmakers.beam(tuplets)
     >>> baca.color(abjad.select.leaves(tuplets))
     >>> rmakers.unbeam(tuplets)
@@ -1017,7 +1017,7 @@ commands.py examles
     ...     16,
     ...     treatments=["10:9"],
     ... )
-    >>> baca.rests_around_function(tuplets, [2], [4], 16)
+    >>> baca.rests_around(tuplets, [2], [4], 16)
     >>> rmakers.beam(tuplets)
     >>> baca.color(color_selector(tuplets))
     >>> rmakers.unbeam(tuplets)
@@ -1435,7 +1435,7 @@ commands.py examles
     ...     16,
     ...     treatments=["10:9"],
     ... )
-    >>> baca.rests_around_function(tuplets, [2], [4], 16)
+    >>> baca.rests_around(tuplets, [2], [4], 16)
     >>> rmakers.beam(tuplets)
     >>> abjad.label.with_pitches(tuplets, locale="us")
     >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)

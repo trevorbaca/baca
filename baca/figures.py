@@ -1373,11 +1373,7 @@ def nest(tuplets: list[abjad.Tuplet], treatment: str) -> abjad.Tuplet:
     return nested_tuplet
 
 
-def rests_after(counts: typing.Sequence[int]) -> RestAffix:
-    return RestAffix(suffix=counts)
-
-
-def rests_after_function(
+def rests_after(
     tuplets: list[abjad.Tuplet], counts: list[int], denominator: int
 ) -> None:
     durations = [abjad.Duration(_, denominator) for _ in counts]
@@ -1388,25 +1384,17 @@ def rests_after_function(
     last_tuplet.extend(rests)
 
 
-def rests_around(prefix: list[int], suffix: list[int]) -> RestAffix:
-    return RestAffix(prefix=prefix, suffix=suffix)
-
-
-def rests_around_function(
+def rests_around(
     tuplets: list[abjad.Tuplet],
     before_counts: list[int],
     after_counts: list[int],
     denominator: int,
 ) -> None:
-    rests_before_function(tuplets, before_counts, denominator)
-    rests_after_function(tuplets, after_counts, denominator)
+    rests_before(tuplets, before_counts, denominator)
+    rests_after(tuplets, after_counts, denominator)
 
 
-def rests_before(counts: list[int]) -> RestAffix:
-    return RestAffix(prefix=counts)
-
-
-def rests_before_function(
+def rests_before(
     tuplets: list[abjad.Tuplet], counts: list[int], denominator: int
 ) -> None:
     durations = [abjad.Duration(_, denominator) for _ in counts]

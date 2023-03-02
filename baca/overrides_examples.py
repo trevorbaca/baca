@@ -94,7 +94,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["5:4"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     pleaves = baca.select.pleaves(tuplets)
     ...     baca.stem_up(pleaves)
     ...     rmakers.beam(tuplets)
@@ -160,7 +160,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.dls_staff_padding(tuplets, 4)
     ...     for tuplet in baca.select.tuplets(tuplets):
@@ -252,7 +252,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.dls_up(tuplets)
     ...     for tuplet in baca.select.tuplets(tuplets):
@@ -350,7 +350,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.dynamic(baca.select.pleaf(tuplets, 0), "p")
     ...     baca.dynamic(selector(tuplets), "f")
@@ -836,7 +836,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.note_head_style_cross(baca.select.pleaves(tuplets))
     ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
@@ -913,7 +913,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.note_head_style_harmonic(baca.select.pleaves(tuplets))
     ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
@@ -990,7 +990,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9", "8:7", "5:4"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     container = abjad.Container(tuplets)
     ...     for qrun in baca.select.qruns(container):
@@ -1073,7 +1073,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9", "8:7", "5:4"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     container = abjad.Container(tuplets)
     ...     for qrun in baca.select.qruns(container):
@@ -1156,7 +1156,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.rest_down(abjad.select.rests(tuplets))
     ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
@@ -1233,7 +1233,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.rest_staff_position(tuplets, -6)
     ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
@@ -1310,7 +1310,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.rest_transparent(tuplets)
     ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
@@ -1387,7 +1387,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.rest_up(abjad.select.rests(tuplets))
     ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
@@ -1464,7 +1464,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.accent(baca.select.pheads(tuplets))
     ...     baca.script_color(tuplets, "#red")
@@ -1551,7 +1551,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.accent(baca.select.pheads(tuplets))
     ...     baca.script_down(tuplets)
@@ -1638,7 +1638,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.accent(baca.select.pheads(tuplets))
     ...     baca.script_extra_offset(abjad.select.leaf(tuplets, 1), (-1.5, 0))
@@ -1724,7 +1724,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.accent(baca.select.pheads(tuplets))
     ...     baca.script_up(tuplets)
@@ -1817,7 +1817,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     for item in selector(tuplets):
     ...         baca.slur(item)
@@ -1908,7 +1908,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     for item in selector(tuplets):
     ...         baca.slur(item)
@@ -1999,7 +1999,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.stem_color(baca.select.pleaves(tuplets), "#red")
     ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
@@ -2076,7 +2076,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.stem_down(baca.select.pleaves(tuplets))
     ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
@@ -2153,7 +2153,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.stem_up(baca.select.pleaves(tuplets))
     ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
@@ -2230,7 +2230,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     for tuplet in baca.select.tuplets(tuplets):
     ...         baca.sustain_pedal(tuplet)
@@ -2320,7 +2320,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.markup(baca.select.pleaf(tuplets, 0), r'\markup "più mosso"')
     ...     baca.markup(selector(tuplets), r'\markup "lo stesso tempo"')
@@ -2406,7 +2406,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.markup(baca.select.pleaf(tuplets, 0), r'\markup "più mosso"')
     ...     baca.markup(selector(tuplets), r'\markup "lo stesso tempo"')
@@ -2492,7 +2492,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.markup(baca.select.pleaf(tuplets, 0), r'\markup "più mosso"')
     ...     baca.markup(selector(tuplets), r'\markup "lo stesso tempo"')
@@ -2578,7 +2578,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.markup(baca.select.pleaf(tuplets, 0), r'\markup "più mosso"')
     ...     baca.markup(selector(tuplets), r'\markup "lo stesso tempo"')
@@ -2664,7 +2664,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.markup(baca.select.pleaf(tuplets, 0), r'\markup "più mosso"')
     ...     baca.markup(selector(tuplets), r'\markup "lo stesso tempo"')
@@ -2745,7 +2745,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.text_spanner_staff_padding(tuplets, 6)
     ...     baca.text_script_staff_padding(tuplets, 6)
@@ -2833,7 +2833,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9", "8:7", "5:4"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.stem_up(baca.select.pleaves(tuplets))
     ...     baca.tie(baca.select.pleaf(tuplets, 0))
@@ -2907,7 +2907,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9", "8:7", "5:4"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.stem_down(baca.select.pleaves(tuplets))
     ...     baca.tie_up(baca.select.pleaves(tuplets))
@@ -2979,7 +2979,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.time_signature_extra_offset(
     ...         abjad.select.rest(tuplets, 0), (-6, 0))
@@ -3056,7 +3056,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.time_signature_transparent(tuplets)
     ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
@@ -3133,7 +3133,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     baca.tuplet_bracket_down(tuplets)
@@ -3210,7 +3210,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.tuplet_bracket_extra_offset(
     ...         abjad.select.leaf(tuplets, 0), (-1, 0)
@@ -3288,7 +3288,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     score = baca.docs.make_single_staff_score(tuplets)
@@ -3362,7 +3362,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     baca.tuplet_bracket_up(tuplets)
@@ -3439,7 +3439,7 @@ overrides.py examples.
     ...         16,
     ...         treatments=["10:9"],
     ...     )
-    ...     baca.rests_around_function(tuplets, [2], [4], 16)
+    ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
     ...     baca.tuplet_number_extra_offset(

@@ -59,7 +59,7 @@ articulations.py examples.
     ...     16,
     ...     treatments=["10:9"],
     ... )
-    >>> baca.rests_around_function(tuplets, [2], [4], 16)
+    >>> baca.rests_around(tuplets, [2], [4], 16)
     >>> rmakers.beam(tuplets)
     >>> _ = baca.stop_on_string(baca.select.pleaf(tuplets, -1))
     >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)

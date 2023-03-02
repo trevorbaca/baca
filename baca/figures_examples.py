@@ -3148,7 +3148,7 @@ figures.py examples.
     ...     16,
     ...     treatments=["10:9"],
     ... )
-    >>> baca.rests_around_function(tuplets, [2], [4], 16)
+    >>> baca.rests_around(tuplets, [2], [4], 16)
     >>> container = abjad.Container(tuplets)
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> _ = baca.nest(tuplets, "+4/16")
@@ -3296,93 +3296,11 @@ figures.py examples.
 
 ..  container:: example
 
-    With rest affixes:
-
-    >>> collections = [
-    ...     [0, 2, 10, 18],
-    ...     [16, 15, 23],
-    ...     [19, 13, 9, 8],
-    ... ]
-    >>> affix = baca.rests_around([2], [3])
-    >>> tuplets = baca.figure(collections, [1], 16)
-    >>> baca.rests_around_function(tuplets, [2], [3], 16)
-    >>> rmakers.beam_groups(
-    ...     rmakers.nongrace_leaves_in_each_tuplet(tuplets, level=-1))
-    >>> container = abjad.Container(tuplets)
-    >>> _ = baca.nest(tuplets, "+1/16")
-    >>> components = abjad.mutate.eject_contents(container)
-    >>> lilypond_file = abjad.illustrators.selection(components)
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        <<
-            \context Staff = "Staff"
-            {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 17/16
-                {
-                    \scaleDurations #'(1 . 1)
-                    {
-                        \time 17/16
-                        r8
-                        \set stemLeftBeamCount = 0
-                        \set stemRightBeamCount = 2
-                        c'16
-                        [
-                        \set stemLeftBeamCount = 2
-                        \set stemRightBeamCount = 2
-                        d'16
-                        \set stemLeftBeamCount = 2
-                        \set stemRightBeamCount = 2
-                        bf'16
-                        \set stemLeftBeamCount = 2
-                        \set stemRightBeamCount = 1
-                        fs''16
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
-                        \set stemLeftBeamCount = 1
-                        \set stemRightBeamCount = 2
-                        e''16
-                        \set stemLeftBeamCount = 2
-                        \set stemRightBeamCount = 2
-                        ef''16
-                        \set stemLeftBeamCount = 2
-                        \set stemRightBeamCount = 1
-                        b''16
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
-                        \set stemLeftBeamCount = 1
-                        \set stemRightBeamCount = 2
-                        g''16
-                        \set stemLeftBeamCount = 2
-                        \set stemRightBeamCount = 2
-                        cs''16
-                        \set stemLeftBeamCount = 2
-                        \set stemRightBeamCount = 2
-                        a'16
-                        \set stemLeftBeamCount = 2
-                        \set stemRightBeamCount = 0
-                        af'16
-                        ]
-                        r8.
-                    }
-                }
-            }
-        >>
-
-..  container:: example
-
     Affixes rests to complete output when pattern is none:
 
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> tuplets = baca.figure(collections, [1], 16, treatments=["4:5", "5:6", "3:4"])
-    >>> baca.rests_around_function(tuplets, [1], [2], 16)
+    >>> baca.rests_around(tuplets, [1], [2], 16)
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> lilypond_file = abjad.illustrators.selection(tuplets)
 
@@ -3432,7 +3350,7 @@ figures.py examples.
 
     >>> collections = [[18, 16, 15, 20, 19]]
     >>> tuplets = baca.figure(collections, [1], 16, treatments=["8:9"])
-    >>> baca.rests_around_function(tuplets, [1], [2], 16)
+    >>> baca.rests_around(tuplets, [1], [2], 16)
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> lilypond_file = abjad.illustrators.selection(tuplets)
 
@@ -4328,7 +4246,7 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ... ]
     >>> tuplets = baca.figure(collections, [1], 16)
-    >>> baca.rests_around_function(tuplets, [2], [2], 16)
+    >>> baca.rests_around(tuplets, [2], [2], 16)
     >>> groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
     >>> rmakers.beam_groups(groups)
     >>> container = abjad.Container(tuplets)
@@ -4496,7 +4414,7 @@ figures.py examples.
     ...     16,
     ...     treatments=["8:7", "10:9", "8:7"],
     ... )
-    >>> baca.rests_after_function(tuplets, [2], 16)
+    >>> baca.rests_after(tuplets, [2], 16)
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
     >>> lilypond_file = abjad.illustrators.selection(tuplets)
