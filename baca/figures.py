@@ -6,6 +6,7 @@ import dataclasses
 import fractions
 import math as python_math
 import typing
+from inspect import currentframe as _frame
 
 import abjad
 from abjadext import rmakers
@@ -14,8 +15,6 @@ from . import cursor as _cursor
 from . import select as _select
 from . import tags as _tags
 from .enums import enums as _enums
-
-# from inspect import currentframe as _frame
 
 
 def _collections_to_container(
@@ -52,32 +51,6 @@ def _collections_to_container(
         assert isinstance(command, command_prototype), repr(command)
         command(container)
     return container, imbrications, tsd
-
-
-def _do_acciaccatura(collection, lmr, durations):
-    assert isinstance(collection, list), repr(collection)
-    segment_parts = lmr(collection)
-    segment_parts = [_ for _ in segment_parts if _]
-    collection = [_[-1] for _ in segment_parts]
-    before_grace_containers = []
-    for segment_part in segment_parts:
-        if len(segment_part) <= 1:
-            before_grace_containers.append(None)
-            continue
-        grace_token = list(segment_part[:-1])
-        grace_leaves = abjad.makers.make_leaves(grace_token, durations)
-        acciaccatura_container = abjad.BeforeGraceContainer(
-            grace_leaves, command=r"\acciaccatura"
-        )
-        if 1 < len(acciaccatura_container):
-            abjad.beam(
-                acciaccatura_container[:],
-                tag=abjad.Tag("baca.Acciaccatura.__call__()"),
-            )
-        before_grace_containers.append(acciaccatura_container)
-    assert len(before_grace_containers) == len(collection)
-    assert isinstance(collection, list), repr(collection)
-    return before_grace_containers, collection
 
 
 def _do_imbrication(
@@ -476,8 +449,7 @@ def _make_figure_tuplet(
     next_attack,
     next_segment,
 ) -> tuple[abjad.Tuplet, int, int]:
-    # TODO: use tag
-    # tag = _tags.function_name(_frame())
+    tag = _tags.function_name(_frame())
     next_segment += 1
     leaves = []
     current_selection = next_segment - 1
@@ -499,7 +471,7 @@ def _make_figure_tuplet(
             next_attack += 1
             this_one = talea[count]
             duration = -abjad.Duration(*this_one)
-            leaves_ = abjad.makers.make_leaves([None], [duration])
+            leaves_ = abjad.makers.make_leaves([None], [duration], tag=tag)
             leaves.extend(leaves_)
             count = next_attack
         next_attack += 1
@@ -518,16 +490,18 @@ def _make_figure_tuplet(
             )
             pitch_expression = None
         if is_chord:
-            leaves_ = abjad.makers.make_leaves([tuple(pitch_expression)], [duration])
+            leaves_ = abjad.makers.make_leaves(
+                [tuple(pitch_expression)], [duration], tag=tag
+            )
         else:
-            leaves_ = abjad.makers.make_leaves([pitch_expression], [duration])
+            leaves_ = abjad.makers.make_leaves([pitch_expression], [duration], tag=tag)
         leaves.extend(leaves_)
         count = next_attack
         while abjad.Fraction(*talea[count]) < 0 and not count % len(talea) == 0:
             next_attack += 1
             this_one = talea[count]
             duration = -abjad.Duration(*this_one)
-            leaves_ = abjad.makers.make_leaves([None], [duration])
+            leaves_ = abjad.makers.make_leaves([None], [duration], tag=tag)
             leaves.extend(leaves_)
             count = next_attack
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
@@ -584,18 +558,6 @@ def _make_figure_tuplet(
         tuplet.hide = True
     assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
     return tuplet, next_attack, next_segment
-
-
-def _attach_before_grace_containers(before_grace_containers, tuplet, tag=None):
-    # TODO: use tag
-    if before_grace_containers is None:
-        return
-    logical_ties = abjad.iterate.logical_ties(tuplet)
-    pairs = zip(before_grace_containers, logical_ties)
-    for before_grace_container, logical_tie in pairs:
-        if before_grace_container is None:
-            continue
-        abjad.attach(before_grace_container, logical_tie.head, tag=tag)
 
 
 def _matches_pitch(pitched_leaf, pitch_object):
@@ -1042,6 +1004,18 @@ def anchor_to_figure(figure_name: str) -> Anchor:
     return Anchor(figure_name=figure_name)
 
 
+def attach_before_grace_containers(before_grace_containers, tuplet):
+    tag = _tags.function_name(_frame())
+    if before_grace_containers is None:
+        return
+    logical_ties = abjad.iterate.logical_ties(tuplet)
+    pairs = zip(before_grace_containers, logical_ties)
+    for before_grace_container, logical_tie in pairs:
+        if before_grace_container is None:
+            continue
+        abjad.attach(before_grace_container, logical_tie.head, tag=tag)
+
+
 def figure(
     collections,
     counts: typing.Sequence[int],
@@ -1141,6 +1115,32 @@ def lmr(
         right_length=right_length,
         right_reversed=right_reversed,
     )
+
+
+def make_before_grace_containers(collection, lmr, durations):
+    assert isinstance(collection, list), repr(collection)
+    segment_parts = lmr(collection)
+    segment_parts = [_ for _ in segment_parts if _]
+    collection = [_[-1] for _ in segment_parts]
+    before_grace_containers = []
+    for segment_part in segment_parts:
+        if len(segment_part) <= 1:
+            before_grace_containers.append(None)
+            continue
+        grace_token = list(segment_part[:-1])
+        grace_leaves = abjad.makers.make_leaves(grace_token, durations)
+        acciaccatura_container = abjad.BeforeGraceContainer(
+            grace_leaves, command=r"\acciaccatura"
+        )
+        if 1 < len(acciaccatura_container):
+            abjad.beam(
+                acciaccatura_container[:],
+                tag=abjad.Tag("baca.Acciaccatura.__call__()"),
+            )
+        before_grace_containers.append(acciaccatura_container)
+    assert len(before_grace_containers) == len(collection)
+    assert isinstance(collection, list), repr(collection)
+    return before_grace_containers, collection
 
 
 def make_figures(
