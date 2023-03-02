@@ -588,17 +588,22 @@ def _make_figure_tuplet(
     else:
         raise Exception(f"bad time treatment: {treatment!r}.")
     assert isinstance(tuplet, abjad.Tuplet)
-    if before_grace_containers is not None:
-        logical_ties = abjad.iterate.logical_ties(tuplet)
-        pairs = zip(before_grace_containers, logical_ties)
-        for before_grace_container, logical_tie in pairs:
-            if before_grace_container is None:
-                continue
-            abjad.attach(before_grace_container, logical_tie.head, tag=tag)
+    _attach_before_grace_containers(before_grace_containers, tuplet, tag=tag)
     if tuplet.trivial():
         tuplet.hide = True
     assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
     return tuplet, next_attack, next_segment
+
+
+def _attach_before_grace_containers(before_grace_containers, tuplet, tag=None):
+    if before_grace_containers is None:
+        return
+    logical_ties = abjad.iterate.logical_ties(tuplet)
+    pairs = zip(before_grace_containers, logical_ties)
+    for before_grace_container, logical_tie in pairs:
+        if before_grace_container is None:
+            continue
+        abjad.attach(before_grace_container, logical_tie.head, tag=tag)
 
 
 def _matches_pitch(pitched_leaf, pitch_object):
