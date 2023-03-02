@@ -449,7 +449,6 @@ def _make_figure_tuplet(
     next_attack,
     next_segment,
 ) -> tuple[abjad.Tuplet, int, int]:
-    tag = _tags.function_name(_frame())
     next_segment += 1
     leaves = []
     current_selection = next_segment - 1
@@ -471,7 +470,9 @@ def _make_figure_tuplet(
             next_attack += 1
             this_one = talea[count]
             duration = -abjad.Duration(*this_one)
-            leaves_ = abjad.makers.make_leaves([None], [duration], tag=tag)
+            leaves_ = abjad.makers.make_leaves(
+                [None], [duration], tag=_tags.function_name(_frame(), n=1)
+            )
             leaves.extend(leaves_)
             count = next_attack
         next_attack += 1
@@ -491,17 +492,23 @@ def _make_figure_tuplet(
             pitch_expression = None
         if is_chord:
             leaves_ = abjad.makers.make_leaves(
-                [tuple(pitch_expression)], [duration], tag=tag
+                [tuple(pitch_expression)],
+                [duration],
+                tag=_tags.function_name(_frame(), n=2),
             )
         else:
-            leaves_ = abjad.makers.make_leaves([pitch_expression], [duration], tag=tag)
+            leaves_ = abjad.makers.make_leaves(
+                [pitch_expression], [duration], tag=_tags.function_name(_frame(), n=3)
+            )
         leaves.extend(leaves_)
         count = next_attack
         while abjad.Fraction(*talea[count]) < 0 and not count % len(talea) == 0:
             next_attack += 1
             this_one = talea[count]
             duration = -abjad.Duration(*this_one)
-            leaves_ = abjad.makers.make_leaves([None], [duration], tag=tag)
+            leaves_ = abjad.makers.make_leaves(
+                [None], [duration], tag=_tags.function_name(_frame(), n=4)
+            )
             leaves.extend(leaves_)
             count = next_attack
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
@@ -1128,14 +1135,18 @@ def make_before_grace_containers(collection, lmr, durations):
             before_grace_containers.append(None)
             continue
         grace_token = list(segment_part[:-1])
-        grace_leaves = abjad.makers.make_leaves(grace_token, durations)
+        grace_leaves = abjad.makers.make_leaves(
+            grace_token, durations, tag=_tags.function_name(_frame(), n=1)
+        )
         acciaccatura_container = abjad.BeforeGraceContainer(
-            grace_leaves, command=r"\acciaccatura"
+            grace_leaves,
+            command=r"\acciaccatura",
+            tag=_tags.function_name(_frame(), n=2),
         )
         if 1 < len(acciaccatura_container):
             abjad.beam(
                 acciaccatura_container[:],
-                tag=abjad.Tag("baca.Acciaccatura.__call__()"),
+                tag=_tags.function_name(_frame(), n=3),
             )
         before_grace_containers.append(acciaccatura_container)
     assert len(before_grace_containers) == len(collection)
