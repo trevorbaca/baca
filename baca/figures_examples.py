@@ -609,6 +609,7 @@ figures.py examples.
     ...     tuplets_ = baca.figure([collection], [1], 8)
     ...     baca.figures.attach_before_grace_containers(containers, tuplets_[0])
     ...     tuplets.extend(tuplets_)
+
     >>> rmakers.beam(abjad.select.leaves(tuplets, grace=False))
     >>> lilypond_file = abjad.illustrators.selection(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -705,6 +706,7 @@ figures.py examples.
     ...     tuplets_ = baca.figure([collection], [1], 8)
     ...     baca.figures.attach_before_grace_containers(containers, tuplets_[0])
     ...     tuplets.extend(tuplets_)
+
     >>> rmakers.beam(abjad.select.leaves(tuplets, grace=False))
     >>> lilypond_file = abjad.illustrators.selection(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -805,6 +807,7 @@ figures.py examples.
     ...     tuplets_ = baca.figure([collection], [1], 8)
     ...     baca.figures.attach_before_grace_containers(containers, tuplets_[0])
     ...     tuplets.extend(tuplets_)
+
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> lilypond_file = abjad.illustrators.selection(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -911,8 +914,10 @@ figures.py examples.
     ...     tuplets_ = baca.figure([collection], [1], 8)
     ...     baca.figures.attach_before_grace_containers(containers, tuplets_[0])
     ...     tuplets.extend(tuplets_)
+
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> lilypond_file = abjad.illustrators.selection(tuplets)
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
@@ -990,8 +995,9 @@ figures.py examples.
             }
         >>
 
-..  container:: example
 
+..  container:: example
+    
     At most two acciaccaturas at the beginning of every collection and then at
     most two acciaccaturas at the end of every collection:
 
@@ -1018,8 +1024,10 @@ figures.py examples.
     ...     tuplets_ = baca.figure([collection], [1], 8)
     ...     baca.figures.attach_before_grace_containers(containers, tuplets_[0])
     ...     tuplets.extend(tuplets_)
+
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> lilypond_file = abjad.illustrators.selection(tuplets)
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
@@ -1127,6 +1135,7 @@ figures.py examples.
     ...     tuplets_ = baca.figure([collection], [1], 8)
     ...     baca.figures.attach_before_grace_containers(containers, tuplets_[0])
     ...     tuplets.extend(tuplets_)
+
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> lilypond_file = abjad.illustrators.selection(tuplets)
 
@@ -1208,50 +1217,6 @@ figures.py examples.
 
 ..  container:: example
 
-    Without state manifest:
-
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> tuplets = baca.figure(collections, [1, 1, 2], 16)
-    >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        <<
-            \context Staff = "Staff"
-            {
-                \scaleDurations #'(1 . 1)
-                {
-                    \time 3/4
-                    c'16
-                    [
-                    d'16
-                    bf'8
-                    ]
-                }
-                \scaleDurations #'(1 . 1)
-                {
-                    fs''16
-                    [
-                    e''16
-                    ef''8
-                    af''16
-                    g''16
-                    ]
-                }
-                \scaleDurations #'(1 . 1)
-                {
-                    a'8
-                }
-            }
-        >>
-
-..  container:: example
-
     Graced quarters:
 
     >>> collections = [
@@ -1272,6 +1237,7 @@ figures.py examples.
     ...     tuplets_ = baca.figure([collection], [1], 4)
     ...     baca.figures.attach_before_grace_containers(containers, tuplets_[0])
     ...     tuplets.extend(tuplets_)
+
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> lilypond_file = abjad.illustrators.selection(tuplets)
 
