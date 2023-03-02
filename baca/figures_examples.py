@@ -995,9 +995,8 @@ figures.py examples.
             }
         >>
 
-
 ..  container:: example
-    
+
     At most two acciaccaturas at the beginning of every collection and then at
     most two acciaccaturas at the end of every collection:
 
@@ -1138,6 +1137,7 @@ figures.py examples.
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> lilypond_file = abjad.illustrators.selection(tuplets)
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
@@ -1240,6 +1240,7 @@ figures.py examples.
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> lilypond_file = abjad.illustrators.selection(tuplets)
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
@@ -1320,6 +1321,7 @@ figures.py examples.
     >>> tuplets =  baca.figure(collections, [4, 4, 5], 32)
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> lilypond_file = abjad.illustrators.selection(tuplets)
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
@@ -3145,6 +3147,7 @@ figures.py examples.
     >>> baca.rests_around(tuplets, [1], [2], 16)
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> lilypond_file = abjad.illustrators.selection(tuplets)
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
@@ -3195,6 +3198,7 @@ figures.py examples.
     >>> baca.rests_around(tuplets, [1], [2], 16)
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> lilypond_file = abjad.illustrators.selection(tuplets)
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
@@ -4260,6 +4264,7 @@ figures.py examples.
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
     >>> lilypond_file = abjad.illustrators.selection(tuplets)
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
