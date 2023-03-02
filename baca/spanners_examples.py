@@ -78,7 +78,7 @@ spanners.py examples
     >>> rmakers.beam(tuplets)
     >>> _ = baca.ottava(baca.select.tleaves(tuplets))
     >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
+    >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -150,7 +150,7 @@ spanners.py examples
     >>> rmakers.beam(tuplets)
     >>> _ = baca.ottava_bassa(baca.select.tleaves(tuplets))
     >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
+    >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -223,7 +223,7 @@ spanners.py examples
     >>> _ = baca.slur(baca.select.tleaves(tuplets))
     >>> _ = baca.slur_down(tuplets)
     >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
+    >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -298,7 +298,7 @@ spanners.py examples
     >>> _ = baca.sustain_pedal(tuplets)
     >>> _ = baca.sustain_pedal_staff_padding(tuplets, 4)
     >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
+    >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -372,7 +372,7 @@ spanners.py examples
     >>> rmakers.beam(tuplets)
     >>> _ = baca.trill_spanner(baca.select.tleaves(tuplets, rleak=True))
     >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
+    >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -450,7 +450,7 @@ spanners.py examples
 
     >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
     >>> components = abjad.mutate.eject_contents(container)
-    >>> lilypond_file = abjad.illustrators.selection(components)
+    >>> lilypond_file = abjad.illustrators.components(components)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -530,7 +530,7 @@ spanners.py examples
     ...     alteration="M2",
     ... )
     >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
+    >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::

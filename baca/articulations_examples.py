@@ -63,7 +63,7 @@ articulations.py examples.
     >>> rmakers.beam(tuplets)
     >>> _ = baca.stop_on_string(baca.select.pleaf(tuplets, -1))
     >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-    >>> lilypond_file = abjad.illustrators.selection(tuplets, includes=["baca.ily"])
+    >>> lilypond_file = abjad.illustrators.components(tuplets, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::

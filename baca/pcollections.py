@@ -43,7 +43,7 @@ class ArpeggiationSpacingSpecifier:
         >>> tuplets = baca.figure(collections, [1], 16)
         >>> rmakers.beam(tuplets)
         >>> baca.bass_to_octave(tuplets, 2)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -91,7 +91,7 @@ class ArpeggiationSpacingSpecifier:
         >>> tuplets = baca.figure(collections, [1], 16)
         >>> rmakers.beam(tuplets)
         >>> baca.bass_to_octave(tuplets, 2)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::

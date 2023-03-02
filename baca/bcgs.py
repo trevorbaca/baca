@@ -23,8 +23,8 @@ bcgs.py examples.
     ...     baca.figures.attach_before_grace_containers(containers, tuplets_[0])
     ...     tuplets.extend(tuplets_)
 
-    >>> rmakers.beam(abjad.select.leaves(tuplets, grace=False))
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
+    >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
+    >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -120,8 +120,8 @@ bcgs.py examples.
     ...     baca.figures.attach_before_grace_containers(containers, tuplets_[0])
     ...     tuplets.extend(tuplets_)
 
-    >>> rmakers.beam(abjad.select.leaves(tuplets, grace=False))
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
+    >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
+    >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -221,7 +221,7 @@ bcgs.py examples.
     ...     tuplets.extend(tuplets_)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
+    >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -327,7 +327,7 @@ bcgs.py examples.
     ...     tuplets.extend(tuplets_)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
+    >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -435,7 +435,7 @@ bcgs.py examples.
     ...     tuplets.extend(tuplets_)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
+    >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -543,7 +543,7 @@ bcgs.py examples.
     ...     tuplets.extend(tuplets_)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
+    >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -645,7 +645,7 @@ bcgs.py examples.
     ...     tuplets.extend(tuplets_)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
+    >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::

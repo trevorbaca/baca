@@ -322,7 +322,7 @@ commands.py examles
     >>> rmakers.beam(tuplets)
     >>> _ = baca.dynamic(baca.select.pleaf(tuplets, 0), '"f"')
     >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-    >>> lilypond_file = abjad.illustrators.selection(tuplets, includes=["baca.ily"])
+    >>> lilypond_file = abjad.illustrators.components(tuplets, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -936,7 +936,7 @@ commands.py examles
     >>> baca.color(abjad.select.leaves(tuplets))
     >>> rmakers.unbeam(tuplets)
     >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
+    >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1022,7 +1022,7 @@ commands.py examles
     >>> baca.color(color_selector(tuplets))
     >>> rmakers.unbeam(tuplets)
     >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
+    >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1439,7 +1439,7 @@ commands.py examles
     >>> rmakers.beam(tuplets)
     >>> abjad.label.with_pitches(tuplets, locale="us")
     >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-    >>> lilypond_file = abjad.illustrators.selection(tuplets)
+    >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::

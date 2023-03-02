@@ -617,7 +617,7 @@ def bass_to_octave(argument, n: int) -> None:
         ... )
         >>> rmakers.beam(tuplets)
         >>> _ = baca.bass_to_octave(tuplets, 4)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -643,7 +643,7 @@ def bass_to_octave(argument, n: int) -> None:
         ... )
         >>> rmakers.beam(tuplets)
         >>> _ = baca.center_to_octave(tuplets, 4)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -669,7 +669,7 @@ def bass_to_octave(argument, n: int) -> None:
         ... )
         >>> rmakers.beam(tuplets)
         >>> _ = baca.soprano_to_octave(tuplets, 4)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -698,7 +698,7 @@ def bass_to_octave(argument, n: int) -> None:
         ... )
         >>> rmakers.beam(tuplets)
         >>> _ = baca.bass_to_octave(tuplets, 4)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -725,7 +725,7 @@ def bass_to_octave(argument, n: int) -> None:
         >>> tuplets = baca.figure([[0, 14, 28]], [1], 16)
         >>> rmakers.beam(tuplets)
         >>> _ = baca.center_to_octave(tuplets, 4)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -752,7 +752,7 @@ def bass_to_octave(argument, n: int) -> None:
         >>> tuplets = baca.figure([[0, 14, 28]], [1], 16)
         >>> rmakers.beam(tuplets)
         >>> _ = baca.soprano_to_octave(tuplets, 4)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -783,7 +783,7 @@ def bass_to_octave(argument, n: int) -> None:
         >>> tuplets = baca.figure([[10, 12, 14]], [1], 16)
         >>> rmakers.beam(tuplets)
         >>> _ = baca.bass_to_octave(tuplets, 4)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -810,7 +810,7 @@ def bass_to_octave(argument, n: int) -> None:
         >>> tuplets = baca.figure([[10, 12, 14]], [1], 16)
         >>> rmakers.beam(tuplets)
         >>> _ = baca.center_to_octave(tuplets, 4)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -837,7 +837,7 @@ def bass_to_octave(argument, n: int) -> None:
         >>> tuplets = baca.figure([[10, 12, 14]], [1], 16)
         >>> rmakers.beam(tuplets)
         >>> _ = baca.soprano_to_octave(tuplets, 4)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -980,7 +980,7 @@ def bass_to_octave(argument, n: int) -> None:
         >>> rmakers.beam(tuplets)
         >>> baca.bass_to_octave(tuplets, 3)
         >>> baca.color(baca.select.plts(tuplets), lone=True)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1066,7 +1066,7 @@ def bass_to_octave(argument, n: int) -> None:
         ...     baca.bass_to_octave(plt, 3)
 
         >>> baca.color(baca.select.plts(tuplets))
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1156,7 +1156,7 @@ def center_to_octave(argument, n: int) -> None:
         >>> rmakers.beam(tuplets)
         >>> baca.center_to_octave(tuplets, 3)
         >>> baca.color(baca.select.plts(tuplets), lone=True)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1242,7 +1242,7 @@ def center_to_octave(argument, n: int) -> None:
         ...     baca.center_to_octave(plt, 3)
 
         >>> baca.color(baca.select.plts(tuplets))
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1476,7 +1476,7 @@ def displacement(argument, displacements: list[int]) -> None:
         >>> rmakers.beam(tuplets)
         >>> baca.displacement(tuplets, [0, 0, -1, -1, 1, 1])
         >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1544,7 +1544,7 @@ def displacement(argument, displacements: list[int]) -> None:
         >>> baca.rests_around(tuplets, [2], [4], 16)
         >>> rmakers.beam(tuplets)
         >>> _ = baca.displacement(tuplets, [0, 0, -1, -1, 1, 1])
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1609,7 +1609,7 @@ def interpolate_pitches(
         >>> rmakers.beam(tuplets)
         >>> _ = baca.clef(abjad.select.leaf(tuplets, 0), "treble")
         >>> _ = baca.interpolate_pitches(tuplets, "Eb4", "F#5")
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1674,7 +1674,7 @@ def interpolate_pitches(
         ...     hide_middle_note_heads=True,
         ... )
         >>> _ = baca.glissando_thickness(tuplets, 3)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2119,7 +2119,7 @@ def register(
         ... )
         >>> rmakers.beam(tuplets)
         >>> _ = baca.register(tuplets, 15)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2229,7 +2229,7 @@ def register(
         ... )
         >>> rmakers.beam(tuplets)
         >>> _ = baca.register(tuplets, -6)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2263,7 +2263,7 @@ def register(
         >>> rmakers.beam(tuplets)
         >>> _ = baca.register(tuplets, -6)
         >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2333,7 +2333,7 @@ def register(
         >>> baca.color(tuplet, lone=True)
         >>> baca.register(tuplet, -6)
         >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2410,7 +2410,7 @@ def register(
         >>> rmakers.beam(tuplets)
         >>> _ = baca.register(tuplets, -6, 18)
         >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2480,7 +2480,7 @@ def register(
         >>> baca.color(tuplet, lone=True)
         >>> baca.register(tuplet, -6, 18)
         >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2549,7 +2549,7 @@ def register(
         >>> tuplets = baca.figure(collections, [1], 16)
         >>> rmakers.beam(tuplets)
         >>> _ = baca.register(tuplets, 0, 24)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2610,7 +2610,7 @@ def register(
         >>> tuplets = baca.figure(collections, [1], 16)
         >>> rmakers.beam(tuplets)
         >>> _ = baca.register(tuplets, 0, 24)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3132,7 +3132,7 @@ def register(
         >>> rmakers.beam(tuplets)
         >>> baca.color(baca.select.tuplet(tuplets, 0), lone=True)
         >>> baca.register(baca.select.tuplet(tuplets, 0), 0, 24)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3205,7 +3205,7 @@ def register(
         >>> tuplet = baca.select.tuplet(tuplets, -1)
         >>> baca.color(tuplet, lone=True)
         >>> baca.register(tuplet, 0, 24)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3281,7 +3281,7 @@ def register(
         >>> for tuplet in baca.select.tuplets(tuplets):
         ...     baca.register(tuplet, 0, 24)
 
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3397,7 +3397,7 @@ def replace_with_clusters(
         >>> tuplets = baca.figure(collections, [1], 16)
         >>> rmakers.beam(tuplets)
         >>> _ = baca.replace_with_clusters(tuplets, [3, 4])
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3879,7 +3879,7 @@ def soprano_to_octave(argument, n: int) -> None:
         >>> rmakers.beam(tuplets)
         >>> baca.soprano_to_octave(tuplets, 3)
         >>> baca.color(baca.select.plts(tuplets), lone=True)
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3965,7 +3965,7 @@ def soprano_to_octave(argument, n: int) -> None:
         ...     baca.soprano_to_octave(plt, 3)
 
         >>> baca.color(baca.select.plts(tuplets))
-        >>> lilypond_file = abjad.illustrators.selection(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
 

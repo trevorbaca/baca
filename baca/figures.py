@@ -325,7 +325,7 @@ def _make_accelerando(leaf_selection, accelerando_indicator):
         abjad.override(leaf_selection[0]).Beam.grow_direction = abjad.LEFT
     duration = abjad.get.duration(tuplet)
     notes = abjad.makers.make_notes([0], [duration])
-    string = abjad.illustrators.selection_to_score_markup_string(notes)
+    string = abjad.illustrators.components_to_score_markup_string(notes)
     string = rf"\markup \scale #'(0.75 . 0.75) {string}"
     abjad.override(tuplet).TupletNumber.text = string
     return tuplet
