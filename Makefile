@@ -44,10 +44,10 @@ mypy:
 	mypy baca
 
 pytest:
-	pytest baca
+	pytest .
 
 pytest-x:
-	pytest -x baca
+	pytest -x .
 
 reformat:
 	make black-reformat

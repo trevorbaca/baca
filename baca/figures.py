@@ -1124,19 +1124,23 @@ def lmr(
     )
 
 
-def make_before_grace_containers(collection, lmr, durations):
+def make_before_grace_containers(
+    collection, lmr: LMR, *, duration: abjad.Duration = abjad.Duration(1, 16)
+):
     assert isinstance(collection, list), repr(collection)
+    assert isinstance(duration, abjad.Duration), repr(duration)
+    assert isinstance(lmr, LMR), repr(LMR)
     segment_parts = lmr(collection)
     segment_parts = [_ for _ in segment_parts if _]
     collection = [_[-1] for _ in segment_parts]
-    before_grace_containers = []
+    before_grace_containers: list[abjad.BeforeGraceContainer | None] = []
     for segment_part in segment_parts:
         if len(segment_part) <= 1:
             before_grace_containers.append(None)
             continue
         grace_token = list(segment_part[:-1])
         grace_leaves = abjad.makers.make_leaves(
-            grace_token, durations, tag=_tags.function_name(_frame(), n=1)
+            grace_token, [duration], tag=_tags.function_name(_frame(), n=1)
         )
         acciaccatura_container = abjad.BeforeGraceContainer(
             grace_leaves,
