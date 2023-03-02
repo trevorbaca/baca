@@ -12,5 +12,7 @@ if __name__ == "__main__":
 #        sys.exit(-1)
 #    messages =baca.build.show_tag(directory, arguments.tag, undo=arguments.undo)
     # messages = baca.build.show_tag(directory, "MEASURE_NUMBER")
-    messages = baca.build.show_tag(directory, "LOCAL_MEASURE_NUMBER", undo=True)
+    # messages = baca.build.show_tag(directory, "LOCAL_MEASURE_NUMBER", undo=True)
+    file = f"{directory}/music.ily"
+    messages = baca.build.show_tag(file, "FIGURE_LABEL")
     print(messages)

@@ -1189,7 +1189,6 @@ def figure(
     talea = rmakers.Talea(counts=counts, denominator=denominator)
     next_attack, next_segment = 0, 0
     tuplets: list[abjad.Tuplet] = []
-    total_collections = len(collections)
     tuplets_, next_attack, next_segment = _make_figure_tuplets(
         affix,
         talea,
@@ -1378,12 +1377,44 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffix:
     return RestAffix(suffix=counts)
 
 
+def rests_after_function(
+    tuplets: list[abjad.Tuplet], counts: list[int], denominator: int
+) -> None:
+    durations = [abjad.Duration(_, denominator) for _ in counts]
+    rests = abjad.makers.make_leaves([None], durations)
+    last_leaf = abjad.select.leaf(tuplets, -1)
+    last_tuplet = abjad.get.parentage(last_leaf).parent
+    assert isinstance(last_tuplet, abjad.Tuplet), repr(last_tuplet)
+    last_tuplet.extend(rests)
+
+
 def rests_around(prefix: list[int], suffix: list[int]) -> RestAffix:
     return RestAffix(prefix=prefix, suffix=suffix)
 
 
+def rests_around_function(
+    tuplets: list[abjad.Tuplet],
+    before_counts: list[int],
+    after_counts: list[int],
+    denominator: int,
+) -> None:
+    rests_before_function(tuplets, before_counts, denominator)
+    rests_after_function(tuplets, after_counts, denominator)
+
+
 def rests_before(counts: list[int]) -> RestAffix:
     return RestAffix(prefix=counts)
+
+
+def rests_before_function(
+    tuplets: list[abjad.Tuplet], counts: list[int], denominator: int
+) -> None:
+    durations = [abjad.Duration(_, denominator) for _ in counts]
+    rests = abjad.makers.make_leaves([None], durations)
+    first_leaf = abjad.select.leaf(tuplets, 0)
+    first_tuplet = abjad.get.parentage(first_leaf).parent
+    assert isinstance(first_tuplet, abjad.Tuplet), repr(first_tuplet)
+    first_tuplet[0:0] = rests
 
 
 def resume() -> Anchor:
