@@ -1423,13 +1423,13 @@ def resume_after(remote_voice_name) -> Anchor:
     )
 
 
-def skips_after(counts: list[int]) -> RestAffix:
-    return RestAffix(skips_instead_of_rests=True, suffix=counts)
-
-
-def skips_around(prefix: list[int], suffix: list[int]) -> RestAffix:
-    return RestAffix(prefix=prefix, skips_instead_of_rests=True, suffix=suffix)
-
-
-def skips_before(counts: list[int]) -> RestAffix:
-    return RestAffix(prefix=counts, skips_instead_of_rests=True)
+def skips_before(
+    tuplets: list[abjad.Tuplet], counts: list[int], denominator: int
+) -> None:
+    durations = [abjad.Duration(_, denominator) for _ in counts]
+    rests = abjad.makers.make_leaves([None], durations)
+    skips = [abjad.Skip(_) for _ in rests]
+    first_leaf = abjad.select.leaf(tuplets, 0)
+    first_tuplet = abjad.get.parentage(first_leaf).parent
+    assert isinstance(first_tuplet, abjad.Tuplet), repr(first_tuplet)
+    first_tuplet[0:0] = skips

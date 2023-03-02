@@ -35,8 +35,6 @@ from .figures import (
     rests_before,
     resume,
     resume_after,
-    skips_after,
-    skips_around,
     skips_before,
 )
 from .indicatorclasses import *
