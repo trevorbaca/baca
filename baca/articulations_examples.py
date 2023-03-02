@@ -53,21 +53,17 @@ articulations.py examples.
 
     **STOP-ON-STRING.** Attaches stop-on-string to pitched head -1:
 
-    >>> container = baca.figure(
+    >>> tuplets = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
     ...     affix=baca.rests_around([2], [4]),
     ...     treatments=[-1],
     ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.stop_on_string(baca.select.pleaf(container, -1))
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(
-    ...     selection, includes=["baca.ily"]
-    ... )
+    >>> rmakers.beam(tuplets)
+    >>> _ = baca.stop_on_string(baca.select.pleaf(tuplets, -1))
+    >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
+    >>> lilypond_file = abjad.illustrators.selection(tuplets, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::

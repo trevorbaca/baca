@@ -611,15 +611,13 @@ def bass_to_octave(argument, n: int) -> None:
 
     ..  container:: example
 
-        >>> container = baca.figure(
+        >>> tuplets = baca.figure(
         ...     [{0, 14, 28}],
         ...     [1], 16
         ... )
-        >>> rmakers.beam(container)
-        >>> _ = baca.bass_to_octave(container, 4)
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> rmakers.beam(tuplets)
+        >>> _ = baca.bass_to_octave(tuplets, 4)
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -639,15 +637,13 @@ def bass_to_octave(argument, n: int) -> None:
                 }
             >>
 
-        >>> container = baca.figure(
+        >>> tuplets = baca.figure(
         ...     [{0, 14, 28}],
         ...     [1], 16
         ... )
-        >>> rmakers.beam(container)
-        >>> _ = baca.center_to_octave(container, 4)
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> rmakers.beam(tuplets)
+        >>> _ = baca.center_to_octave(tuplets, 4)
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -667,15 +663,13 @@ def bass_to_octave(argument, n: int) -> None:
                 }
             >>
 
-        >>> container = baca.figure(
+        >>> tuplets = baca.figure(
         ...     [{0, 14, 28}],
         ...     [1], 16
         ... )
-        >>> rmakers.beam(container)
-        >>> _ = baca.soprano_to_octave(container, 4)
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> rmakers.beam(tuplets)
+        >>> _ = baca.soprano_to_octave(tuplets, 4)
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -699,14 +693,12 @@ def bass_to_octave(argument, n: int) -> None:
 
         Disjunct notes:
 
-        >>> container = baca.figure(
+        >>> tuplets = baca.figure(
         ...     [[0, 14, 28]], [1], 16
         ... )
-        >>> rmakers.beam(container)
-        >>> _ = baca.bass_to_octave(container, 4)
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> rmakers.beam(tuplets)
+        >>> _ = baca.bass_to_octave(tuplets, 4)
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -730,12 +722,10 @@ def bass_to_octave(argument, n: int) -> None:
                 }
             >>
 
-        >>> container = baca.figure([[0, 14, 28]], [1], 16)
-        >>> rmakers.beam(container)
-        >>> _ = baca.center_to_octave(container, 4)
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> tuplets = baca.figure([[0, 14, 28]], [1], 16)
+        >>> rmakers.beam(tuplets)
+        >>> _ = baca.center_to_octave(tuplets, 4)
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -759,12 +749,10 @@ def bass_to_octave(argument, n: int) -> None:
                 }
             >>
 
-        >>> container = baca.figure([[0, 14, 28]], [1], 16)
-        >>> rmakers.beam(container)
-        >>> _ = baca.soprano_to_octave(container, 4)
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> tuplets = baca.figure([[0, 14, 28]], [1], 16)
+        >>> rmakers.beam(tuplets)
+        >>> _ = baca.soprano_to_octave(tuplets, 4)
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -792,12 +780,10 @@ def bass_to_octave(argument, n: int) -> None:
 
         Conjunct notes:
 
-        >>> container = baca.figure([[10, 12, 14]], [1], 16)
-        >>> rmakers.beam(container)
-        >>> _ = baca.bass_to_octave(container, 4)
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> tuplets = baca.figure([[10, 12, 14]], [1], 16)
+        >>> rmakers.beam(tuplets)
+        >>> _ = baca.bass_to_octave(tuplets, 4)
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -821,12 +807,10 @@ def bass_to_octave(argument, n: int) -> None:
                 }
             >>
 
-        >>> container = baca.figure([[10, 12, 14]], [1], 16)
-        >>> rmakers.beam(container)
-        >>> _ = baca.center_to_octave(container, 4)
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> tuplets = baca.figure([[10, 12, 14]], [1], 16)
+        >>> rmakers.beam(tuplets)
+        >>> _ = baca.center_to_octave(tuplets, 4)
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -850,12 +834,10 @@ def bass_to_octave(argument, n: int) -> None:
                 }
             >>
 
-        >>> container = baca.figure([[10, 12, 14]], [1], 16)
-        >>> rmakers.beam(container)
-        >>> _ = baca.soprano_to_octave(container, 4)
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> tuplets = baca.figure([[10, 12, 14]], [1], 16)
+        >>> rmakers.beam(tuplets)
+        >>> _ = baca.soprano_to_octave(tuplets, 4)
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -992,15 +974,13 @@ def bass_to_octave(argument, n: int) -> None:
         Octave-transposes music such that the lowest note in the entire selection appears
         in octave 3:
 
-        >>> container = baca.figure(
+        >>> tuplets = baca.figure(
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]], [5, -3], 32
         ... )
-        >>> rmakers.beam(container)
-        >>> baca.bass_to_octave(container, 3)
-        >>> baca.color(baca.select.plts(container), lone=True)
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> rmakers.beam(tuplets)
+        >>> baca.bass_to_octave(tuplets, 3)
+        >>> baca.color(baca.select.plts(tuplets), lone=True)
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1076,19 +1056,17 @@ def bass_to_octave(argument, n: int) -> None:
         Octave-transposes music such that the lowest pitch in each pitched logical tie
         appears in octave 3:
 
-        >>> container = baca.figure(
+        >>> tuplets = baca.figure(
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
         ...     [5, -3],
         ...     32,
         ... )
-        >>> rmakers.beam(container)
-        >>> for plt in baca.select.plts(container):
+        >>> rmakers.beam(tuplets)
+        >>> for plt in baca.select.plts(tuplets):
         ...     baca.bass_to_octave(plt, 3)
 
-        >>> baca.color(baca.select.plts(container))
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> baca.color(baca.select.plts(tuplets))
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1172,15 +1150,13 @@ def center_to_octave(argument, n: int) -> None:
 
     ..  container:: example
 
-        >>> container = baca.figure(
+        >>> tuplets = baca.figure(
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]], [5, -3], 32
         ... )
-        >>> rmakers.beam(container)
-        >>> baca.center_to_octave(container, 3)
-        >>> baca.color(baca.select.plts(container), lone=True)
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> rmakers.beam(tuplets)
+        >>> baca.center_to_octave(tuplets, 3)
+        >>> baca.color(baca.select.plts(tuplets), lone=True)
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1256,19 +1232,17 @@ def center_to_octave(argument, n: int) -> None:
         Octave-transposes music such that the centroid of each pitched logical tie
         appears in octave 3:
 
-        >>> container = baca.figure(
+        >>> tuplets = baca.figure(
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
         ...     [5, -3],
         ...     32,
         ... )
-        >>> rmakers.beam(container)
-        >>> for plt in baca.select.plts(container):
+        >>> rmakers.beam(tuplets)
+        >>> for plt in baca.select.plts(tuplets):
         ...     baca.center_to_octave(plt, 3)
 
-        >>> baca.color(baca.select.plts(container))
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> baca.color(baca.select.plts(tuplets))
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1492,19 +1466,17 @@ def displacement(argument, displacements: list[int]) -> None:
 
         Octave-displaces PLTs:
 
-        >>> container = baca.figure(
+        >>> tuplets = baca.figure(
         ...         3 * [[0, 2, 3]],
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
         ...         treatments=[-1],
         ... )
-        >>> rmakers.beam(container)
-        >>> baca.displacement(container, [0, 0, -1, -1, 1, 1])
-        >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> rmakers.beam(tuplets)
+        >>> baca.displacement(tuplets, [0, 0, -1, -1, 1, 1])
+        >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1564,17 +1536,15 @@ def displacement(argument, displacements: list[int]) -> None:
 
         Octave-displaces chords:
 
-        >>> container = baca.figure(
+        >>> tuplets = baca.figure(
         ...     6 * [{0, 2, 3}],
         ...     [4],
         ...     16,
         ...     affix=baca.rests_around([2], [4]),
         ... )
-        >>> rmakers.beam(container)
-        >>> _ = baca.displacement(container, [0, 0, -1, -1, 1, 1])
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> rmakers.beam(tuplets)
+        >>> _ = baca.displacement(tuplets, [0, 0, -1, -1, 1, 1])
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1635,13 +1605,11 @@ def interpolate_pitches(
     ..  container:: example
 
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-        >>> container = baca.figure(collections, [1], 16)
-        >>> rmakers.beam(container)
-        >>> _ = baca.clef(abjad.select.leaf(container, 0), "treble")
-        >>> _ = baca.interpolate_pitches(container, "Eb4", "F#5")
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> tuplets = baca.figure(collections, [1], 16)
+        >>> rmakers.beam(tuplets)
+        >>> _ = baca.clef(abjad.select.leaf(tuplets, 0), "treble")
+        >>> _ = baca.interpolate_pitches(tuplets, "Eb4", "F#5")
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1694,21 +1662,19 @@ def interpolate_pitches(
 
     ..  container:: example
 
-        >>> container = baca.figure(
+        >>> tuplets = baca.figure(
         ...     2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]], [1], 16
         ... )
-        >>> rmakers.beam(container)
-        >>> _ = baca.clef(abjad.select.leaf(container, 0), "treble")
-        >>> baca.interpolate_pitches(container, "Eb4", "F#5")
+        >>> rmakers.beam(tuplets)
+        >>> _ = baca.clef(abjad.select.leaf(tuplets, 0), "treble")
+        >>> baca.interpolate_pitches(tuplets, "Eb4", "F#5")
         >>> baca.glissando(
-        ...     container,
+        ...     tuplets,
         ...     allow_repeats=True,
         ...     hide_middle_note_heads=True,
         ... )
-        >>> _ = baca.glissando_thickness(container, 3)
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> _ = baca.glissando_thickness(tuplets, 3)
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2147,15 +2113,13 @@ def register(
 
     ..  container:: example
 
-        >>> container = baca.figure(
+        >>> tuplets = baca.figure(
         ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
         ...     [1], 16
         ... )
-        >>> rmakers.beam(container)
-        >>> _ = baca.register(container, 15)
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> rmakers.beam(tuplets)
+        >>> _ = baca.register(tuplets, 15)
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2259,15 +2223,13 @@ def register(
 
         Works with chords:
 
-        >>> container = baca.figure(
+        >>> tuplets = baca.figure(
         ...     [{10, 12, 14}],
         ...     [1], 16
         ... )
-        >>> rmakers.beam(container)
-        >>> _ = baca.register(container, -6)
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> rmakers.beam(tuplets)
+        >>> _ = baca.register(tuplets, -6)
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2291,19 +2253,17 @@ def register(
 
         Octave-transposes all PLTs to the octave rooted at -6:
 
-        >>> container = baca.figure(
+        >>> tuplets = baca.figure(
         ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
         ...         treatments=[-1],
         ... )
-        >>> rmakers.beam(container)
-        >>> _ = baca.register(container, -6)
-        >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> rmakers.beam(tuplets)
+        >>> _ = baca.register(tuplets, -6)
+        >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2361,21 +2321,19 @@ def register(
 
         Octave-transposes PLTs in tuplet 1 to the octave rooted at -6:
 
-        >>> container = baca.figure(
+        >>> tuplets = baca.figure(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     [1, 1, 5, -1],
         ...     16,
         ...     affix=baca.rests_around([2], [4]),
         ...     treatments=[-1],
         ... )
-        >>> rmakers.beam(container)
-        >>> tuplet = baca.select.tuplet(container, 1)
+        >>> rmakers.beam(tuplets)
+        >>> tuplet = baca.select.tuplet(tuplets, 1)
         >>> baca.color(tuplet, lone=True)
         >>> baca.register(tuplet, -6)
-        >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2442,19 +2400,17 @@ def register(
 
         Octave-transposes all PLTs to an octave interpolated from -6 to 18:
 
-        >>> container = baca.figure(
+        >>> tuplets = baca.figure(
         ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
         ...         treatments=[-1],
         ... )
-        >>> rmakers.beam(container)
-        >>> _ = baca.register(container, -6, 18)
-        >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> rmakers.beam(tuplets)
+        >>> _ = baca.register(tuplets, -6, 18)
+        >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2512,21 +2468,19 @@ def register(
 
         Octave-transposes PLTs in tuplet 1 to an octave interpolated from -6 to 18:
 
-        >>> container = baca.figure(
+        >>> tuplets = baca.figure(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     [1, 1, 5, -1],
         ...     16,
         ...     affix=baca.rests_around([2], [4]),
         ...     treatments=[-1],
         ... )
-        >>> rmakers.beam(container)
-        >>> tuplet = baca.select.tuplet(container, 1)
+        >>> rmakers.beam(tuplets)
+        >>> tuplet = baca.select.tuplet(tuplets, 1)
         >>> baca.color(tuplet, lone=True)
         >>> baca.register(tuplet, -6, 18)
-        >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2592,12 +2546,10 @@ def register(
     ..  container:: example
 
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-        >>> container = baca.figure(collections, [1], 16)
-        >>> rmakers.beam(container)
-        >>> _ = baca.register(container, 0, 24)
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> tuplets = baca.figure(collections, [1], 16)
+        >>> rmakers.beam(tuplets)
+        >>> _ = baca.register(tuplets, 0, 24)
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2655,12 +2607,10 @@ def register(
         ...     [6, 4], [3, 5], [9, 10], [0, 11], [8, 7], [1, 2],
         ... ]
         >>> collections = [set(_) for _ in collections]
-        >>> container = baca.figure(collections, [1], 16)
-        >>> rmakers.beam(container)
-        >>> _ = baca.register(container, 0, 24)
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> tuplets = baca.figure(collections, [1], 16)
+        >>> rmakers.beam(tuplets)
+        >>> _ = baca.register(tuplets, 0, 24)
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3174,17 +3124,15 @@ def register(
 
         Selects tuplet 0:
 
-        >>> container = baca.figure(
+        >>> tuplets = baca.figure(
         ...     2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]],
         ...     [1],
         ...     16,
         ... )
-        >>> rmakers.beam(container)
-        >>> baca.color(baca.select.tuplet(container, 0), lone=True)
-        >>> baca.register(baca.select.tuplet(container, 0), 0, 24)
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> rmakers.beam(tuplets)
+        >>> baca.color(baca.select.tuplet(tuplets, 0), lone=True)
+        >>> baca.register(baca.select.tuplet(tuplets, 0), 0, 24)
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3250,16 +3198,14 @@ def register(
 
         Selects tuplet -1:
 
-        >>> container = baca.figure(
+        >>> tuplets = baca.figure(
         ...     2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]], [1], 16
         ... )
-        >>> rmakers.beam(container)
-        >>> tuplet = baca.select.tuplet(container, -1)
+        >>> rmakers.beam(tuplets)
+        >>> tuplet = baca.select.tuplet(tuplets, -1)
         >>> baca.color(tuplet, lone=True)
         >>> baca.register(tuplet, 0, 24)
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3325,19 +3271,17 @@ def register(
 
         Maps to tuplets:
 
-        >>> container = baca.figure(
+        >>> tuplets = baca.figure(
         ...     2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]],
         ...     [1],
         ...     16,
         ... )
-        >>> rmakers.beam(container)
-        >>> baca.color(abjad.select.tuplets(container))
-        >>> for tuplet in baca.select.tuplets(container):
+        >>> rmakers.beam(tuplets)
+        >>> baca.color(abjad.select.tuplets(tuplets))
+        >>> for tuplet in baca.select.tuplets(tuplets):
         ...     baca.register(tuplet, 0, 24)
 
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3450,12 +3394,10 @@ def replace_with_clusters(
     ..  container:: example
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> container = baca.figure(collections, [1], 16)
-        >>> rmakers.beam(container)
-        >>> _ = baca.replace_with_clusters(container, [3, 4])
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> tuplets = baca.figure(collections, [1], 16)
+        >>> rmakers.beam(tuplets)
+        >>> _ = baca.replace_with_clusters(tuplets, [3, 4])
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3931,15 +3873,13 @@ def soprano_to_octave(argument, n: int) -> None:
 
     ..  container:: example
 
-        >>> container = baca.figure(
+        >>> tuplets = baca.figure(
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]], [5, -3], 32
         ... )
-        >>> rmakers.beam(container)
-        >>> baca.soprano_to_octave(container, 3)
-        >>> baca.color(baca.select.plts(container), lone=True)
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> rmakers.beam(tuplets)
+        >>> baca.soprano_to_octave(tuplets, 3)
+        >>> baca.color(baca.select.plts(tuplets), lone=True)
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -4015,19 +3955,17 @@ def soprano_to_octave(argument, n: int) -> None:
         Octave-transposes music that such that the highest note in each pitched logical
         tie appears in octave 3:
 
-        >>> container = baca.figure(
+        >>> tuplets = baca.figure(
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
         ...     [5, -3],
         ...     32,
         ... )
-        >>> rmakers.beam(container)
-        >>> for plt in baca.select.plts(container):
+        >>> rmakers.beam(tuplets)
+        >>> for plt in baca.select.plts(tuplets):
         ...     baca.soprano_to_octave(plt, 3)
 
-        >>> baca.color(baca.select.plts(container))
-        >>> selection = container[:]
-        >>> container[:] = []
-        >>> lilypond_file = abjad.illustrators.selection(selection)
+        >>> baca.color(baca.select.plts(tuplets))
+        >>> lilypond_file = abjad.illustrators.selection(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
 

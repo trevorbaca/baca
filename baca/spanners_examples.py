@@ -72,9 +72,9 @@ spanners.py examples
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     treatments=[-1],
+    ...     treatments=["10:9"],
     ... )
+    >>> baca.rests_around_function(tuplets, [2], [4], 16)
     >>> rmakers.beam(tuplets)
     >>> _ = baca.ottava(baca.select.tleaves(tuplets))
     >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
@@ -140,19 +140,17 @@ spanners.py examples
 
     Attaches ottava bassa indicators to trimmed leaves:
 
-    >>> container = baca.figure(
+    >>> tuplets = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     treatments=[-1],
+    ...     treatments=["10:9"],
     ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.ottava_bassa(baca.select.tleaves(container))
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> baca.rests_around_function(tuplets, [2], [4], 16)
+    >>> rmakers.beam(tuplets)
+    >>> _ = baca.ottava_bassa(baca.select.tleaves(tuplets))
+    >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
+    >>> lilypond_file = abjad.illustrators.selection(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -214,20 +212,18 @@ spanners.py examples
 
     Attaches slur to trimmed leaves:
 
-    >>> container = baca.figure(
+    >>> tuplets = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     treatments=[-1],
+    ...     treatments=["10:9"],
     ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.slur(baca.select.tleaves(container))
-    >>> _ = baca.slur_down(container)
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> baca.rests_around_function(tuplets, [2], [4], 16)
+    >>> rmakers.beam(tuplets)
+    >>> _ = baca.slur(baca.select.tleaves(tuplets))
+    >>> _ = baca.slur_down(tuplets)
+    >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
+    >>> lilypond_file = abjad.illustrators.selection(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -291,20 +287,18 @@ spanners.py examples
 
     Pedals leaves:
 
-    >>> container = baca.figure(
+    >>> tuplets = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     treatments=[-1],
+    ...     treatments=["10:9"],
     ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.sustain_pedal(container)
-    >>> _ = baca.sustain_pedal_staff_padding(container, 4)
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> baca.rests_around_function(tuplets, [2], [4], 16)
+    >>> rmakers.beam(tuplets)
+    >>> _ = baca.sustain_pedal(tuplets)
+    >>> _ = baca.sustain_pedal_staff_padding(tuplets, 4)
+    >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
+    >>> lilypond_file = abjad.illustrators.selection(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -368,19 +362,17 @@ spanners.py examples
 
     Attaches trill spanner to trimmed leaves (leaked to the right):
 
-    >>> container = baca.figure(
+    >>> tuplets = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     treatments=[-1],
+    ...     treatments=["10:9"],
     ... )
-    >>> rmakers.beam(container)
-    >>> _ = baca.trill_spanner(baca.select.tleaves(container, rleak=True))
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> baca.rests_around_function(tuplets, [2], [4], 16)
+    >>> rmakers.beam(tuplets)
+    >>> _ = baca.trill_spanner(baca.select.tleaves(tuplets, rleak=True))
+    >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
+    >>> lilypond_file = abjad.illustrators.selection(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -447,9 +439,9 @@ spanners.py examples
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     treatments=[-1],
+    ...     treatments=["10:9"],
     ... )
+    >>> baca.rests_around_function(tuplets, [2], [4], 16)
     >>> rmakers.beam(tuplets)
     >>> container = abjad.Container(tuplets)
     >>> for run in baca.select.runs(tuplets):
@@ -524,23 +516,21 @@ spanners.py examples
 
     Tweaks trill spanner:
 
-    >>> container = baca.figure(
+    >>> tuplets = baca.figure(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
-    ...     affix=baca.rests_around([2], [4]),
-    ...     treatments=[-1],
+    ...     treatments=["10:9"],
     ... )
-    >>> rmakers.beam(container)
+    >>> baca.rests_around_function(tuplets, [2], [4], 16)
+    >>> rmakers.beam(tuplets)
     >>> _ = baca.trill_spanner(
-    ...     baca.select.tleaves(container, rleak=True),
+    ...     baca.select.tleaves(tuplets, rleak=True),
     ...     abjad.Tweak(r"- \tweak color #red"),
     ...     alteration="M2",
     ... )
-    >>> _ = baca.tuplet_bracket_staff_padding(container, 2)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.selection(selection)
+    >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
+    >>> lilypond_file = abjad.illustrators.selection(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::

@@ -288,11 +288,9 @@ Examples.
     ... ]
     >>> figures, time_signatures = [], []
     >>> for i, collections in enumerate(collection_lists):
-    ...     container = baca.figure(collections, [1], 16)
-    ...     selection = container[:]
-    ...     container[:] = []
-    ...     figures.append(selection)
-    ...     time_signature = abjad.get.duration(selection)
+    ...     tuplets = baca.figure(collections, [1], 16)
+    ...     figures.append(tuplets)
+    ...     time_signature = abjad.get.duration(tuplets)
     ...     time_signatures.append(time_signature)
     ...
     >>> figures_ = []
@@ -385,11 +383,9 @@ Examples.
     ... ]
     >>> figures, time_signatures = [], []
     >>> for i, collections in enumerate(collection_lists):
-    ...     container = baca.figure(collections, [1], 16)
-    ...     selection = container[:]
-    ...     container[:] = []
-    ...     figures.append(selection)
-    ...     time_signature = abjad.get.duration(selection)
+    ...     tuplets = baca.figure(collections, [1], 16)
+    ...     figures.append(tuplets)
+    ...     time_signature = abjad.get.duration(tuplets)
     ...     time_signatures.append(time_signature)
     ...
     >>> figures_ = []
