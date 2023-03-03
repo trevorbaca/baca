@@ -1804,6 +1804,9 @@ class DynamicScope:
     def __enter__(self):
         return self
 
+    def __eq__(self, argument):
+        return self.argument == argument
+
     def __exit__(self, exc_type, exc_value, traceback):
         del self.argument
 
