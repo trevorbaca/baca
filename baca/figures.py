@@ -806,31 +806,6 @@ class Accumulator:
         self.score_stop_offset = abjad.Offset(0)
         self.time_signatures: list[abjad.TimeSignature] = []
 
-    def __call__(
-        self,
-        voice_name: str,
-        collections: typing.Sequence,
-        *commands,
-        anchor: Anchor | None = None,
-        do_not_label: bool = False,
-        figure_name: str = "",
-        figure_label_direction: int | None = None,
-        hide_time_signature: bool | None = None,
-        tsd: int | None = None,
-    ) -> None:
-        make_figures(
-            self,
-            voice_name,
-            collections,
-            *commands,
-            anchor=anchor,
-            do_not_label=do_not_label,
-            figure_name=figure_name,
-            figure_label_direction=figure_label_direction,
-            hide_time_signature=hide_time_signature,
-            tsd=tsd,
-        )
-
     def assemble(self, voice_name) -> list | None:
         floating_selections = self.floating_selections[voice_name]
         total_duration = sum([_.duration for _ in self.time_signatures])
@@ -1106,27 +1081,26 @@ def make_before_grace_containers(
         grace_leaves = abjad.makers.make_leaves(
             grace_token, [duration], tag=_tags.function_name(_frame(), n=1)
         )
-        acciaccatura_container = abjad.BeforeGraceContainer(
+        container = abjad.BeforeGraceContainer(
             grace_leaves,
             command=r"\acciaccatura",
             tag=_tags.function_name(_frame(), n=2),
         )
-        if 1 < len(acciaccatura_container):
+        if 1 < len(container):
             abjad.beam(
-                acciaccatura_container[:],
+                container[:],
                 tag=_tags.function_name(_frame(), n=3),
             )
-        before_grace_containers.append(acciaccatura_container)
+        before_grace_containers.append(container)
     assert len(before_grace_containers) == len(collection)
     assert isinstance(collection, list), repr(collection)
     return before_grace_containers, collection
 
 
 def make_figures(
-    accumulator: "Accumulator",
+    accumulator: Accumulator,
     voice_name: str,
-    *commands,
-    anchor: typing.Optional["Anchor"] = None,
+    anchor: Anchor | None = None,
     container: abjad.Container | None = None,
     do_not_label: bool = False,
     figure_name: str = "",
@@ -1136,6 +1110,8 @@ def make_figures(
     tsd: int | None = None,
     tuplets: list[abjad.Tuplet] | None = None,
 ):
+    assert isinstance(accumulator, Accumulator), repr(accumulator)
+    assert isinstance(voice_name, str), repr(voice_name)
     assert isinstance(figure_name, str), repr(figure_name)
     voice_name = accumulator.voice_abbreviations.get(voice_name, voice_name)
     if container is not None:

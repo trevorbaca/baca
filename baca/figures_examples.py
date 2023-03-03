@@ -1940,7 +1940,6 @@ figures.py examples.
     >>> baca.make_figures(
     ...     accumulator,
     ...     "Music.2",
-    ...     None,
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
@@ -2114,7 +2113,6 @@ figures.py examples.
     >>> baca.make_figures(
     ...     accumulator,
     ...     "Music.2",
-    ...     None,
     ...     container=container,
     ...     imbrications=imbrications_1 | imbrications_3,
     ... )
@@ -2326,7 +2324,6 @@ figures.py examples.
     >>> baca.make_figures(
     ...     accumulator,
     ...     "Music.2",
-    ...     None,
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
@@ -2517,7 +2514,6 @@ figures.py examples.
     >>> baca.make_figures(
     ...     accumulator,
     ...     "Music.2",
-    ...     None,
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
@@ -2642,7 +2638,6 @@ figures.py examples.
     >>> baca.make_figures(
     ...     accumulator,
     ...     "Music.2",
-    ...     None,
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
@@ -2792,7 +2787,6 @@ figures.py examples.
     >>> baca.make_figures(
     ...     accumulator,
     ...     "Music.2",
-    ...     None,
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
@@ -3031,7 +3025,6 @@ figures.py examples.
     >>> baca.make_figures(
     ...     accumulator,
     ...     "Music.2",
-    ...     None,
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
@@ -3180,7 +3173,6 @@ figures.py examples.
     >>> baca.make_figures(
     ...     accumulator,
     ...     "Music.2",
-    ...     None,
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
@@ -3344,7 +3336,6 @@ figures.py examples.
     >>> baca.make_figures(
     ...     accumulator,
     ...     "Music.2",
-    ...     None,
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
@@ -3495,7 +3486,6 @@ figures.py examples.
     >>> baca.make_figures(
     ...     accumulator,
     ...     "Music.2",
-    ...     None,
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
@@ -3512,7 +3502,6 @@ figures.py examples.
     >>> baca.make_figures(
     ...     accumulator,
     ...     "Music.2",
-    ...     None,
     ...     container=container,
     ...     imbrications=imbrications,
     ... )
