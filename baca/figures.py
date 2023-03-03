@@ -77,13 +77,12 @@ def _do_imbrication(
         raise Exception(f"{cursor!r} used only {current} of {total} pitches.")
     for command in commands:
         command(container)
-    selection = [container]
     if not hocket:
         pleaves = _select.pleaves(container)
         assert isinstance(pleaves, list)
         for pleaf in pleaves:
             abjad.attach(_enums.ALLOW_OCTAVE, pleaf)
-    return {voice_name: selection}
+    return {voice_name: [container]}
 
 
 def _do_nest_command(tuplets, treatment) -> list[abjad.Tuplet]:
@@ -130,11 +129,12 @@ def _fix_rounding_error(durations, total_duration):
     return durations
 
 
-def _get_figure_start_offset(figure_name, floating_selections):
-    for voice_name in sorted(floating_selections.keys()):
-        for floating_selection in floating_selections[voice_name]:
-            leaf_start_offset = floating_selection.start_offset
-            leaves = abjad.iterate.leaves(floating_selection.annotation)
+def _get_figure_start_offset(figure_name, voice_name_to_timespans):
+    assert isinstance(figure_name, str)
+    for voice_name in sorted(voice_name_to_timespans.keys()):
+        for timespan in voice_name_to_timespans[voice_name]:
+            leaf_start_offset = timespan.start_offset
+            leaves = abjad.iterate.leaves(timespan.annotation)
             for leaf in leaves:
                 if abjad.get.annotation(leaf, "figure_name") == figure_name:
                     return leaf_start_offset
@@ -143,11 +143,12 @@ def _get_figure_start_offset(figure_name, floating_selections):
     raise Exception(f"can not find figure {figure_name!r}.")
 
 
-def _get_leaf_timespan(leaf, floating_selections):
+def _get_leaf_timespan(leaf, timespans):
+    assert all(isinstance(_, abjad.Timespan) for _ in timespans), repr(timespans)
     found_leaf = False
-    for floating_selection in floating_selections:
+    for timespan in timespans:
         leaf_start_offset = abjad.Offset(0)
-        for leaf_ in abjad.iterate.leaves(floating_selection.annotation):
+        for leaf_ in abjad.iterate.leaves(timespan.annotation):
             leaf_duration = abjad.get.duration(leaf_)
             if leaf_ is leaf:
                 found_leaf = True
@@ -156,21 +157,21 @@ def _get_leaf_timespan(leaf, floating_selections):
         if found_leaf:
             break
     if not found_leaf:
-        raise Exception(f"can not find {leaf!r} in floating selections.")
-    selection_start_offset = floating_selection.start_offset
-    leaf_start_offset = selection_start_offset + leaf_start_offset
+        raise Exception(f"can not find {leaf!r} in timespans.")
+    leaf_start_offset = timespan.start_offset + leaf_start_offset
     leaf_stop_offset = leaf_start_offset + leaf_duration
     return abjad.Timespan(leaf_start_offset, leaf_stop_offset)
 
 
 def _get_start_offset(
-    selection, contribution, floating_selections, current_offset, score_stop_offset
+    containers, contribution, voice_name_to_timespans, current_offset, score_stop_offset
 ):
+    assert all(isinstance(_, abjad.Container) for _ in containers), repr(containers)
     if contribution.anchor is not None and contribution.anchor.figure_name is not None:
         figure_name = contribution.anchor.figure_name
         start_offset = _get_figure_start_offset(
             figure_name,
-            floating_selections,
+            voice_name_to_timespans,
         )
         return start_offset
     anchored = False
@@ -192,12 +193,14 @@ def _get_start_offset(
         def remote_selector(argument):
             return abjad.select.leaf(argument, 0)
 
-    floating_selections_ = floating_selections[remote_voice_name]
-    selections = [_.annotation for _ in floating_selections_]
-    result = remote_selector(selections)
+    timespans = voice_name_to_timespans[remote_voice_name]
+    container_lists = [_.annotation for _ in timespans]
+    for container_list in container_lists:
+        assert all(isinstance(_, abjad.Container) for _ in container_list)
+    result = remote_selector(container_lists)
     selected_leaves = list(abjad.iterate.leaves(result))
     first_selected_leaf = selected_leaves[0]
-    timespan = _get_leaf_timespan(first_selected_leaf, floating_selections_)
+    timespan = _get_leaf_timespan(first_selected_leaf, timespans)
     if use_remote_stop_offset:
         remote_anchor_offset = timespan.stop_offset
     else:
@@ -208,10 +211,10 @@ def _get_start_offset(
     else:
         local_selector = None
     if local_selector is not None:
-        result = local_selector(selection)
+        result = local_selector(containers)
         selected_leaves = list(abjad.iterate.leaves(result))
         first_selected_leaf = selected_leaves[0]
-        dummy_container = abjad.Container(selection)
+        dummy_container = abjad.Container(containers)
         timespan = abjad.get.timespan(first_selected_leaf)
         del dummy_container[:]
         local_anchor_offset = timespan.start_offset
@@ -269,24 +272,25 @@ def _label_figure(container, figure_name, figure_label_direction, figure_number)
     )
 
 
-def _make_accelerando(leaf_selection, accelerando_indicator):
-    assert accelerando_indicator in ("accel", "rit")
-    tuplet = abjad.Tuplet((1, 1), leaf_selection, hide=True)
+def _make_accelerando(leaves, treatment):
+    assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
+    assert treatment in ("accel", "rit")
+    tuplet = abjad.Tuplet((1, 1), leaves, hide=True)
     if len(tuplet) == 1:
         return tuplet
-    durations = [abjad.get.duration(_) for _ in leaf_selection]
-    if accelerando_indicator == "accel":
+    durations = [abjad.get.duration(_) for _ in leaves]
+    if treatment == "accel":
         exponent = 0.625
-    elif accelerando_indicator == "rit":
+    elif treatment == "rit":
         exponent = 1.625
     multipliers = _make_accelerando_multipliers(durations, exponent)
-    assert len(leaf_selection) == len(multipliers)
-    for multiplier, leaf in zip(multipliers, leaf_selection):
+    assert len(leaves) == len(multipliers)
+    for multiplier, leaf in zip(multipliers, leaves):
         leaf.multiplier = multiplier
-    if rmakers.rmakers._is_accelerando(leaf_selection):
-        abjad.override(leaf_selection[0]).Beam.grow_direction = abjad.RIGHT
-    elif rmakers.rmakers._is_ritardando(leaf_selection):
-        abjad.override(leaf_selection[0]).Beam.grow_direction = abjad.LEFT
+    if rmakers.rmakers._is_accelerando(leaves):
+        abjad.override(leaves[0]).Beam.grow_direction = abjad.RIGHT
+    elif rmakers.rmakers._is_ritardando(leaves):
+        abjad.override(leaves[0]).Beam.grow_direction = abjad.LEFT
     duration = abjad.get.duration(tuplet)
     notes = abjad.makers.make_notes([0], [duration])
     string = abjad.illustrators.components_to_score_markup_string(notes)
@@ -415,9 +419,8 @@ def _make_figure_tuplet(
 ) -> tuple[abjad.Tuplet, int, int]:
     next_segment += 1
     leaves = []
-    current_selection = next_segment - 1
     if treatments:
-        treatment = abjad.CyclicTuple(treatments)[current_selection]
+        treatment = abjad.CyclicTuple(treatments)[next_segment - 1]
     else:
         treatment = 0
     if isinstance(segment, set | frozenset):
@@ -725,8 +728,8 @@ class Anchor:
     """
     Anchor.
 
-    ``use_remote_stop_offset`` is true when contribution anchors to remote selection stop
-    offset; otherwise anchors to remote selection start offset.
+    ``use_remote_stop_offset`` is true when contribution anchors to remote components'
+    stop offset; otherwise anchors to remote components' start offset.
     """
 
     figure_name: str | None = None
@@ -751,17 +754,17 @@ class Anchor:
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Contribution:
-    voice_name_to_selection: dict[str, list]
+    voice_name_to_containers: dict[str, list]
     anchor: Anchor | None = None
     figure_name: str | None = None
     hide_time_signature: bool | None = None
     time_signature: abjad.TimeSignature | None = None
 
     def __post_init__(self):
-        assert isinstance(self.voice_name_to_selection, dict), repr(
-            self.voice_name_to_selection
+        assert isinstance(self.voice_name_to_containers, dict), repr(
+            self.voice_name_to_containers
         )
-        for value in self.voice_name_to_selection.values():
+        for value in self.voice_name_to_containers.values():
             assert isinstance(value, list), repr(value)
             assert len(value) == 1, repr(value)
             assert isinstance(value[0], abjad.Container), repr(value)
@@ -782,13 +785,13 @@ class Accumulator:
         "current_offset",
         "figure_number",
         "figure_names",
-        "floating_selections",
         "music_maker",
         "score_stop_offset",
         "voice_names",
         "score",
         "time_signatures",
         "voice_abbreviations",
+        "voice_name_to_timespans",
     )
 
     def __init__(self, score: abjad.Score, voice_abbreviations=None):
@@ -802,59 +805,54 @@ class Accumulator:
         self.current_offset = abjad.Offset(0)
         self.figure_number = 1
         self.figure_names: list[str] = []
-        self.floating_selections: dict = dict([(_, []) for _ in self.voice_names])
         self.score_stop_offset = abjad.Offset(0)
         self.time_signatures: list[abjad.TimeSignature] = []
+        self.voice_name_to_timespans: dict = dict([(_, []) for _ in self.voice_names])
 
     def assemble(self, voice_name) -> list | None:
-        floating_selections = self.floating_selections[voice_name]
+        timespans = self.voice_name_to_timespans[voice_name]
         total_duration = sum([_.duration for _ in self.time_signatures])
-        for floating_selection in floating_selections:
-            assert isinstance(floating_selection, abjad.Timespan)
-        floating_selections = list(floating_selections)
-        floating_selections.sort()
+        for timespan in timespans:
+            assert isinstance(timespan, abjad.Timespan)
+        timespans = list(timespans)
+        timespans.sort()
         try:
-            first_start_offset = floating_selections[0].start_offset
+            first_start_offset = timespans[0].start_offset
         except Exception:
             first_start_offset = abjad.Offset(0)
-        timespans = abjad.TimespanList(floating_selections)
-        if timespans:
-            gaps = ~timespans
+        timespan_list = abjad.TimespanList(timespans)
+        if timespan_list:
+            gaps = ~timespan_list
         else:
             sectionwide_gap = abjad.Timespan(0, total_duration)
             gaps = abjad.TimespanList([sectionwide_gap])
         if 0 < first_start_offset:
             first_gap = abjad.Timespan(0, first_start_offset)
             gaps.append(first_gap)
-        if floating_selections:
-            final_stop_offset = floating_selections[-1].stop_offset
+        if timespans:
+            final_stop_offset = timespans[-1].stop_offset
         else:
             final_stop_offset = total_duration
         if final_stop_offset < total_duration:
             final_gap = abjad.Timespan(final_stop_offset, total_duration)
             gaps.append(final_gap)
-        selections = floating_selections + list(gaps)
-        selections.sort()
-        fused_selection = []
-        for selection in selections:
-            if (
-                isinstance(selection, abjad.Timespan)
-                and selection.annotation is not None
-            ):
-                fused_selection.extend(selection.annotation)
+        timespans = timespans + list(gaps)
+        timespans.sort()
+        components = []
+        for timespan in timespans:
+            if timespan.annotation is not None:
+                components_ = timespan.annotation
             else:
-                assert isinstance(selection, abjad.Timespan)
-                skip = abjad.Skip(1, multiplier=selection.duration.pair)
-                fused_selection.append(skip)
-        return fused_selection
+                components_ = [abjad.Skip(1, multiplier=timespan.duration.pair)]
+            components.extend(components_)
+        return components
 
     def populate_commands(self, score):
-        for voice_name in sorted(self.floating_selections):
-            selection = self.assemble(voice_name)
-            if not selection:
-                continue
-            voice = score[voice_name]
-            voice.extend(selection)
+        for voice_name in sorted(self.voice_name_to_timespans):
+            components = self.assemble(voice_name)
+            if components:
+                voice = score[voice_name]
+                voice.extend(components)
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -1140,18 +1138,18 @@ def make_figures(
         _label_figure(
             container, figure_name, figure_label_direction, accumulator.figure_number
         )
-    selection = [container]
-    voice_name_to_selection = {voice_name: selection}
+    voice_name_to_containers = {voice_name: [container]}
     assert isinstance(imbrications, dict)
-    for voice_name, selection in imbrications.items():
-        voice_name_to_selection[voice_name] = selection
+    for voice_name, containers in imbrications.items():
+        assert all(isinstance(_, abjad.Container) for _ in containers), repr(containers)
+        voice_name_to_containers[voice_name] = containers
     if anchor is not None:
         voice_name_ = accumulator.voice_abbreviations.get(
             anchor.remote_voice_name, anchor.remote_voice_name
         )
         anchor = dataclasses.replace(anchor, remote_voice_name=voice_name_)
     contribution = Contribution(
-        voice_name_to_selection,
+        voice_name_to_containers,
         anchor=anchor,
         figure_name=figure_name,
         hide_time_signature=hide_time_signature,
@@ -1161,24 +1159,24 @@ def make_figures(
         if contribution.figure_name in accumulator.figure_names:
             raise Exception(f"duplicate figure name: {contribution.figure_name!r}.")
         accumulator.figure_names.append(contribution.figure_name)
-    for voice_name, selection in contribution.voice_name_to_selection.items():
+    for voice_name, containers in contribution.voice_name_to_containers.items():
         start_offset = _get_start_offset(
-            selection,
+            containers,
             contribution,
-            accumulator.floating_selections,
+            accumulator.voice_name_to_timespans,
             accumulator.current_offset,
             accumulator.score_stop_offset,
         )
-        stop_offset = start_offset + abjad.get.duration(selection)
+        stop_offset = start_offset + abjad.get.duration(containers)
         timespan = abjad.Timespan(start_offset, stop_offset)
-        floating_selection = abjad.Timespan(
+        timespan = abjad.Timespan(
             timespan.start_offset,
             timespan.stop_offset,
-            annotation=selection,
+            annotation=containers,
         )
-        if voice_name not in accumulator.floating_selections:
+        if voice_name not in accumulator.voice_name_to_timespans:
             voice_name = accumulator.voice_abbreviations.get(voice_name, voice_name)
-        accumulator.floating_selections[voice_name].append(floating_selection)
+        accumulator.voice_name_to_timespans[voice_name].append(timespan)
     accumulator.current_offset = stop_offset
     accumulator.score_stop_offset = max(accumulator.score_stop_offset, stop_offset)
     if not contribution.hide_time_signature:
@@ -1254,7 +1252,7 @@ def resume() -> Anchor:
 
 def resume_after(remote_voice_name) -> Anchor:
     """
-    Resumes music after remote selection.
+    Resumes music after remote components.
     """
     return Anchor(
         remote_selector=lambda _: abjad.select.leaf(_, -1),
