@@ -7,7 +7,18 @@ from abjadext import rmakers
 
 def test_exceptions_01():
     """
-    baca.imbricate() raises exception on unused pitches.
+    Cursor raises exception when exhausted.
+    """
+
+    source = [13, "da capo", abjad.Note("cs'8."), "rit."]
+    cursor = baca.Cursor(source=source)
+    with pytest.raises(Exception):
+        cursor.next(count=99)
+
+
+def test_exceptions_02():
+    """
+    Imbrication raises exception on unused pitches.
     """
 
     collections = [

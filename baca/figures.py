@@ -107,7 +107,7 @@ def _do_imbrication(
                 duration = leaf.written_duration
                 skip = abjad.Skip(duration)
                 abjad.mutate.replace(leaf, [skip])
-    if not allow_unused_pitches and not cursor.is_exhausted:
+    if not allow_unused_pitches and not cursor.exhausted:
         assert cursor.position is not None
         current, total = cursor.position - 1, len(cursor)
         raise Exception(f"{cursor!r} used only {current} of {total} pitches.")

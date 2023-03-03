@@ -1,4 +1,5 @@
 r"""
+Persistence.
 
 >>> import pprint
 
