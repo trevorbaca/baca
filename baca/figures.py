@@ -1098,41 +1098,25 @@ def make_before_grace_containers(
 def make_figures(
     accumulator: Accumulator,
     voice_name: str,
-    the_tuplets: abjad.Container | list[abjad.Tuplet] | None = None,
+    tuplets: abjad.Container | list[abjad.Tuplet] | None = None,
     *,
     anchor: Anchor | None = None,
-    container: abjad.Container | None = None,
     do_not_label: bool = False,
     figure_name: str = "",
     figure_label_direction: int | None = None,
     hide_time_signature: bool | None = None,
     imbrications: dict[str, list[abjad.Container]] | None = None,
     tsd: int | None = None,
-    tuplets: list[abjad.Tuplet] | None = None,
 ):
     assert isinstance(accumulator, Accumulator), repr(accumulator)
     assert isinstance(voice_name, str), repr(voice_name)
-    if container is not None:
-        assert isinstance(container, abjad.Container), repr(container)
-    if tuplets is not None:
-        assert all(isinstance(_, abjad.Tuplet) for _ in tuplets), repr(tuplets)
-        assert the_tuplets is None
     assert isinstance(figure_name, str), repr(figure_name)
     voice_name = accumulator.voice_abbreviations.get(voice_name, voice_name)
-    if container is not None:
-        assert tuplets is None
-        assert the_tuplets is None
-        assert all(isinstance(_, abjad.Tuplet) for _ in container), repr(container)
-    elif the_tuplets is not None:
-        assert container is None
-        assert tuplets is None
-        assert all(isinstance(_, abjad.Tuplet) for _ in the_tuplets), repr(the_tuplets)
-        if isinstance(the_tuplets, abjad.Container):
-            container = the_tuplets
-        else:
-            container = abjad.Container(the_tuplets)
+    assert tuplets is not None
+    assert all(isinstance(_, abjad.Tuplet) for _ in tuplets), repr(tuplets)
+    if isinstance(tuplets, abjad.Container):
+        container = tuplets
     else:
-        assert tuplets is not None
         container = abjad.Container(tuplets)
     assert isinstance(do_not_label, bool), repr(do_not_label)
     assert isinstance(figure_name, str), repr(figure_name)

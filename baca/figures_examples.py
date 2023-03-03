@@ -1940,7 +1940,7 @@ figures.py examples.
     >>> baca.make_figures(
     ...     accumulator,
     ...     "Music.2",
-    ...     container=container,
+    ...     container,
     ...     imbrications=imbrications,
     ... )
     >>> time_signatures = baca.section.time_signatures(accumulator.time_signatures)
@@ -2113,7 +2113,7 @@ figures.py examples.
     >>> baca.make_figures(
     ...     accumulator,
     ...     "Music.2",
-    ...     container=container,
+    ...     container,
     ...     imbrications=imbrications_1 | imbrications_3,
     ... )
     >>> time_signatures = baca.section.time_signatures(accumulator.time_signatures)
@@ -2324,7 +2324,7 @@ figures.py examples.
     >>> baca.make_figures(
     ...     accumulator,
     ...     "Music.2",
-    ...     container=container,
+    ...     container,
     ...     imbrications=imbrications,
     ... )
     >>> time_signatures = baca.section.time_signatures(accumulator.time_signatures)
@@ -2514,7 +2514,7 @@ figures.py examples.
     >>> baca.make_figures(
     ...     accumulator,
     ...     "Music.2",
-    ...     container=container,
+    ...     container,
     ...     imbrications=imbrications,
     ... )
     >>> time_signatures = baca.section.time_signatures(accumulator.time_signatures)
@@ -2638,7 +2638,7 @@ figures.py examples.
     >>> baca.make_figures(
     ...     accumulator,
     ...     "Music.2",
-    ...     container=container,
+    ...     container,
     ...     imbrications=imbrications,
     ... )
     >>> time_signatures = baca.section.time_signatures(accumulator.time_signatures)
@@ -2787,7 +2787,7 @@ figures.py examples.
     >>> baca.make_figures(
     ...     accumulator,
     ...     "Music.2",
-    ...     container=container,
+    ...     container,
     ...     imbrications=imbrications,
     ... )
     >>> time_signatures = baca.section.time_signatures(accumulator.time_signatures)
@@ -3025,7 +3025,7 @@ figures.py examples.
     >>> baca.make_figures(
     ...     accumulator,
     ...     "Music.2",
-    ...     container=container,
+    ...     container,
     ...     imbrications=imbrications,
     ... )
     >>> time_signatures = baca.section.time_signatures(accumulator.time_signatures)
@@ -3173,7 +3173,7 @@ figures.py examples.
     >>> baca.make_figures(
     ...     accumulator,
     ...     "Music.2",
-    ...     container=container,
+    ...     container,
     ...     imbrications=imbrications,
     ... )
     >>> time_signatures = baca.section.time_signatures(accumulator.time_signatures)
@@ -3336,7 +3336,7 @@ figures.py examples.
     >>> baca.make_figures(
     ...     accumulator,
     ...     "Music.2",
-    ...     container=container,
+    ...     container,
     ...     imbrications=imbrications,
     ... )
     >>> time_signatures = baca.section.time_signatures(accumulator.time_signatures)
@@ -3486,7 +3486,7 @@ figures.py examples.
     >>> baca.make_figures(
     ...     accumulator,
     ...     "Music.2",
-    ...     container=container,
+    ...     container,
     ...     imbrications=imbrications,
     ... )
     >>> tuplets = baca.figure([[19, 13, 9, 8]], [1], 16)
@@ -3502,7 +3502,7 @@ figures.py examples.
     >>> baca.make_figures(
     ...     accumulator,
     ...     "Music.2",
-    ...     container=container,
+    ...     container,
     ...     imbrications=imbrications,
     ... )
     >>> time_signatures = baca.section.time_signatures(accumulator.time_signatures)
