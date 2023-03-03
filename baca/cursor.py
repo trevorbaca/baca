@@ -6,6 +6,8 @@ import typing
 
 import abjad
 
+from . import section as _section
+
 
 @dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
 class Cursor:
@@ -30,6 +32,11 @@ class Cursor:
             return abjad.CyclicTuple(self.source)
         else:
             return self.source
+
+    def __call__(self, item, *, n=1):
+        result = self.get(item, n=n)
+        manager = _section.DynamicScope(result)
+        return manager
 
     def __getitem__(self, argument) -> typing.Any:
         """
@@ -62,7 +69,16 @@ class Cursor:
             return True
         return False
 
-    def next(self, count=1, exhausted=False) -> list | None:
+    def get(self, item, *, n: int = 1) -> typing.Any:
+        """
+        Gets next item in cursor and asserts equal to ``item``.
+        """
+        item_ = self.next(n)
+        if item != item_:
+            raise Exception(f"{item_} does not equal {item}.")
+        return item_
+
+    def next(self, count=1, *, exhausted=False) -> list | None:
         """
         Gets next ``count`` elements from cursor.
         """
