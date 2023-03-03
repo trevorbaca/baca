@@ -1127,7 +1127,10 @@ def make_figures(
         assert container is None
         assert tuplets is None
         assert all(isinstance(_, abjad.Tuplet) for _ in the_tuplets), repr(the_tuplets)
-        container = abjad.Container(the_tuplets)
+        if isinstance(the_tuplets, abjad.Container):
+            container = the_tuplets
+        else:
+            container = abjad.Container(the_tuplets)
     else:
         assert tuplets is not None
         container = abjad.Container(tuplets)
