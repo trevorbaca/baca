@@ -1112,15 +1112,22 @@ def make_figures(
 ):
     assert isinstance(accumulator, Accumulator), repr(accumulator)
     assert isinstance(voice_name, str), repr(voice_name)
+    if container is not None:
+        assert isinstance(container, abjad.Container), repr(container)
+    if tuplets is not None:
+        assert all(isinstance(_, abjad.Tuplet) for _ in tuplets), repr(tuplets)
     assert isinstance(figure_name, str), repr(figure_name)
     voice_name = accumulator.voice_abbreviations.get(voice_name, voice_name)
     if container is not None:
         assert tuplets is None
-        imbrications = imbrications or {}
+        assert all(isinstance(_, abjad.Tuplet) for _ in container), repr(container)
     else:
         assert tuplets is not None
         container = abjad.Container(tuplets)
-        imbrications = imbrications or {}
+    assert isinstance(do_not_label, bool), repr(do_not_label)
+    assert isinstance(figure_name, str), repr(figure_name)
+    imbrications = imbrications or {}
+    assert isinstance(imbrications, dict), repr(imbrications)
     duration = abjad.get.duration(container)
     if tsd is not None:
         pair = abjad.duration.with_denominator(duration, tsd)
