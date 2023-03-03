@@ -17,42 +17,6 @@ from . import tags as _tags
 from .enums import enums as _enums
 
 
-def _collections_to_container(
-    accumulator, voice_name, collections, *commands, tsd=None
-):
-    collection_prototype = (
-        list,
-        str,
-        frozenset,
-        set,
-        abjad.PitchClassSegment,
-        abjad.PitchSegment,
-    )
-    assert isinstance(collections, collection_prototype), repr(collections)
-    command, figure_maker = None, None
-    if isinstance(collections, str):
-        tuplet = abjad.Tuplet((1, 1), collections, hide=True)
-        tuplets = [tuplet]
-    elif all(isinstance(_, abjad.Component) for _ in collections):
-        tuplet = abjad.Tuplet((1, 1), collections, hide=True)
-        tuplets = [tuplet]
-    else:
-        raise Exception
-    assert isinstance(tuplets, list), repr(tuplets)
-    assert all(isinstance(_, abjad.Tuplet) for _ in tuplets), repr(tuplets)
-    container = abjad.Container(tuplets)
-    if tsd is None and figure_maker:
-        tsd = figure_maker.tsd
-    if tsd is None and command:
-        tsd = command.assignments[0].maker.tsd
-    imbrications = {}
-    command_prototype = rmakers.Command
-    for command in commands:
-        assert isinstance(command, command_prototype), repr(command)
-        command(container)
-    return container, imbrications, tsd
-
-
 def _do_imbrication(
     container: abjad.Container,
     segment: list,
@@ -1161,7 +1125,6 @@ def make_before_grace_containers(
 def make_figures(
     accumulator: "Accumulator",
     voice_name: str,
-    collections: typing.Sequence | None,
     *commands,
     anchor: typing.Optional["Anchor"] = None,
     container: abjad.Container | None = None,
@@ -1176,18 +1139,12 @@ def make_figures(
     assert isinstance(figure_name, str), repr(figure_name)
     voice_name = accumulator.voice_abbreviations.get(voice_name, voice_name)
     if container is not None:
-        assert collections is None
         assert tuplets is None
         imbrications = imbrications or {}
-    elif tuplets is not None:
-        assert collections is None
+    else:
+        assert tuplets is not None
         container = abjad.Container(tuplets)
         imbrications = imbrications or {}
-    else:
-        assert collections is not None
-        container, imbrications, tsd = _collections_to_container(
-            accumulator, voice_name, collections, *commands, tsd=tsd
-        )
     duration = abjad.get.duration(container)
     if tsd is not None:
         pair = abjad.duration.with_denominator(duration, tsd)
