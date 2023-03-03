@@ -1098,6 +1098,8 @@ def make_before_grace_containers(
 def make_figures(
     accumulator: Accumulator,
     voice_name: str,
+    the_tuplets: abjad.Container | list[abjad.Tuplet] | None = None,
+    *,
     anchor: Anchor | None = None,
     container: abjad.Container | None = None,
     do_not_label: bool = False,
@@ -1114,11 +1116,18 @@ def make_figures(
         assert isinstance(container, abjad.Container), repr(container)
     if tuplets is not None:
         assert all(isinstance(_, abjad.Tuplet) for _ in tuplets), repr(tuplets)
+        assert the_tuplets is None
     assert isinstance(figure_name, str), repr(figure_name)
     voice_name = accumulator.voice_abbreviations.get(voice_name, voice_name)
     if container is not None:
         assert tuplets is None
+        assert the_tuplets is None
         assert all(isinstance(_, abjad.Tuplet) for _ in container), repr(container)
+    elif the_tuplets is not None:
+        assert container is None
+        assert tuplets is None
+        assert all(isinstance(_, abjad.Tuplet) for _ in the_tuplets), repr(the_tuplets)
+        container = abjad.Container(the_tuplets)
     else:
         assert tuplets is not None
         container = abjad.Container(tuplets)
