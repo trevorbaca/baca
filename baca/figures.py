@@ -968,6 +968,8 @@ def figure(
     tsd: int | None = None,
     treatments: typing.Sequence = (),
 ) -> list[abjad.Tuplet]:
+    if hasattr(collections, "argument"):
+        collections = collections.argument
     prototype = (
         abjad.PitchClassSegment,
         abjad.PitchSegment,
