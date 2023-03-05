@@ -85,30 +85,6 @@ def _do_imbrication(
     return {voice_name: [container]}
 
 
-def _do_nest_command(tuplets, treatment) -> list[abjad.Tuplet]:
-    if isinstance(treatment, str):
-        addendum = abjad.Duration(treatment)
-        contents_duration = abjad.get.duration(tuplets)
-        target_duration = contents_duration + addendum
-        multiplier = target_duration / contents_duration
-        pair = abjad.duration.pair(multiplier)
-        nested_tuplet = abjad.Tuplet(pair, [])
-        abjad.mutate.wrap(tuplets, nested_tuplet)
-    elif treatment.__class__ is abjad.Fraction:
-        pair = abjad.duration.pair(treatment)
-        nested_tuplet = abjad.Tuplet(pair, [])
-        abjad.mutate.wrap(tuplets, nested_tuplet)
-    else:
-        assert treatment.__class__ is abjad.Duration
-        target_duration = treatment
-        contents_duration = abjad.get.duration(tuplets)
-        multiplier = target_duration / contents_duration
-        pair = abjad.duration.pair(multiplier)
-        nested_tuplet = abjad.Tuplet(pair, [])
-        abjad.mutate.wrap(tuplets, nested_tuplet)
-    return [nested_tuplet]
-
-
 def _fix_rounding_error(durations, total_duration):
     current_duration = sum(durations)
     if current_duration < total_duration:
