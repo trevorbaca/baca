@@ -704,7 +704,6 @@ class Accumulator:
         tuplets: abjad.Container | list[abjad.Tuplet],
         *,
         anchor: Anchor | None = None,
-        already_labeled: bool = False,
         do_not_increment: bool = False,
         hide_time_signature: bool | None = None,
         imbrications: dict[str, list[abjad.Container]] | None = None,
