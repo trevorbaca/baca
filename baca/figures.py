@@ -770,7 +770,8 @@ class Accumulator:
                 assert isinstance(contribution.time_signature, abjad.TimeSignature)
                 self.time_signatures.append(contribution.time_signature)
 
-    def populate_commands(self, score):
+    def populate(self, score):
+        assert isinstance(score, abjad.Score), repr(score)
         for voice_name in sorted(self.voice_name_to_timespans):
             components = self.assemble(voice_name)
             if components:
