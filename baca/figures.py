@@ -1066,6 +1066,10 @@ def make_figures(
     time_signature = abjad.TimeSignature(pair)
     leaf = abjad.select.leaf(container, 0)
     abjad.annotate(leaf, "figure_name", figure_name)
+    if figure_name:
+        if figure_name in accumulator.figure_names:
+            raise Exception(f"duplicate figure name: {figure_name!r}.")
+        accumulator.figure_names.append(figure_name)
     if not do_not_label:
         _label_figure(
             container, figure_name, figure_label_direction, accumulator.figure_number
@@ -1087,10 +1091,6 @@ def make_figures(
         hide_time_signature=hide_time_signature,
         time_signature=time_signature,
     )
-    if contribution.figure_name:
-        if contribution.figure_name in accumulator.figure_names:
-            raise Exception(f"duplicate figure name: {contribution.figure_name!r}.")
-        accumulator.figure_names.append(contribution.figure_name)
     for voice_name, containers in contribution.voice_name_to_containers.items():
         start_offset = _get_start_offset(
             containers,
