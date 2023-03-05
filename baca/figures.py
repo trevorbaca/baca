@@ -17,74 +17,6 @@ from . import tags as _tags
 from .enums import enums as _enums
 
 
-def _do_imbrication(
-    container: abjad.Container,
-    segment: list,
-    voice_name: str,
-    *commands,
-    allow_unused_pitches: bool = False,
-    by_pitch_class: bool = False,
-    hocket: bool = False,
-    truncate_ties: bool = False,
-) -> dict[str, list]:
-    original_container = container
-    container = copy.deepcopy(container)
-    abjad.override(container).TupletBracket.stencil = False
-    abjad.override(container).TupletNumber.stencil = False
-    segment = abjad.sequence.flatten(segment, depth=-1)
-    if by_pitch_class:
-        segment = [abjad.NumberedPitchClass(_) for _ in segment]
-    cursor = _cursor.Cursor(singletons=True, source=segment, suppress_exception=True)
-    pitch_number = cursor.next()
-    original_logical_ties = abjad.select.logical_ties(original_container)
-    logical_ties = abjad.select.logical_ties(container)
-    pairs = zip(logical_ties, original_logical_ties)
-    for logical_tie, original_logical_tie in pairs:
-        if isinstance(logical_tie.head, abjad.Rest):
-            for leaf in logical_tie:
-                duration = leaf.written_duration
-                skip = abjad.Skip(duration)
-                abjad.mutate.replace(leaf, [skip])
-        elif isinstance(logical_tie.head, abjad.Skip):
-            pass
-        elif _matches_pitch(logical_tie.head, pitch_number):
-            _trim_matching_chord(logical_tie, pitch_number)
-            pitch_number = cursor.next()
-            if truncate_ties:
-                head = logical_tie.head
-                tail = logical_tie.tail
-                for leaf in logical_tie[1:]:
-                    duration = leaf.written_duration
-                    skip = abjad.Skip(duration)
-                    abjad.mutate.replace(leaf, [skip])
-                abjad.detach(abjad.Tie, head)
-                next_leaf = abjad.get.leaf(tail, 1)
-                if next_leaf is not None:
-                    abjad.detach(abjad.RepeatTie, next_leaf)
-            if hocket:
-                for leaf in original_logical_tie:
-                    duration = leaf.written_duration
-                    skip = abjad.Skip(duration)
-                    abjad.mutate.replace(leaf, [skip])
-        else:
-            for leaf in logical_tie:
-                duration = leaf.written_duration
-                skip = abjad.Skip(duration)
-                abjad.mutate.replace(leaf, [skip])
-    if not allow_unused_pitches and not cursor.exhausted:
-        assert cursor.position is not None
-        current, total = cursor.position - 1, len(cursor)
-        raise Exception(f"{cursor!r} used only {current} of {total} pitches.")
-    for command in commands:
-        command(container)
-    if not hocket:
-        pleaves = _select.pleaves(container)
-        assert isinstance(pleaves, list)
-        for pleaf in pleaves:
-            abjad.attach(_enums.ALLOW_OCTAVE, pleaf)
-    return {voice_name: [container]}
-
-
 def _fix_rounding_error(durations, total_duration):
     current_duration = sum(durations)
     if current_duration < total_duration:
@@ -988,7 +920,7 @@ def imbricate(
     container: abjad.Container,
     voice_name: str,
     segment: list,
-    *specifiers: typing.Any,
+    *commands: typing.Any,
     allow_unused_pitches: bool = False,
     by_pitch_class: bool = False,
     hocket: bool = False,
@@ -996,16 +928,62 @@ def imbricate(
 ) -> dict[str, list]:
     if isinstance(container, list):
         container = abjad.Container(container)
-    return _do_imbrication(
-        container,
-        segment,
-        voice_name,
-        *specifiers,
-        allow_unused_pitches=allow_unused_pitches,
-        by_pitch_class=by_pitch_class,
-        hocket=hocket,
-        truncate_ties=truncate_ties,
-    )
+    original_container = container
+    container = copy.deepcopy(container)
+    abjad.override(container).TupletBracket.stencil = False
+    abjad.override(container).TupletNumber.stencil = False
+    segment = abjad.sequence.flatten(segment, depth=-1)
+    if by_pitch_class:
+        segment = [abjad.NumberedPitchClass(_) for _ in segment]
+    cursor = _cursor.Cursor(singletons=True, source=segment, suppress_exception=True)
+    pitch_number = cursor.next()
+    original_logical_ties = abjad.select.logical_ties(original_container)
+    logical_ties = abjad.select.logical_ties(container)
+    pairs = zip(logical_ties, original_logical_ties)
+    for logical_tie, original_logical_tie in pairs:
+        if isinstance(logical_tie.head, abjad.Rest):
+            for leaf in logical_tie:
+                duration = leaf.written_duration
+                skip = abjad.Skip(duration)
+                abjad.mutate.replace(leaf, [skip])
+        elif isinstance(logical_tie.head, abjad.Skip):
+            pass
+        elif _matches_pitch(logical_tie.head, pitch_number):
+            _trim_matching_chord(logical_tie, pitch_number)
+            pitch_number = cursor.next()
+            if truncate_ties:
+                head = logical_tie.head
+                tail = logical_tie.tail
+                for leaf in logical_tie[1:]:
+                    duration = leaf.written_duration
+                    skip = abjad.Skip(duration)
+                    abjad.mutate.replace(leaf, [skip])
+                abjad.detach(abjad.Tie, head)
+                next_leaf = abjad.get.leaf(tail, 1)
+                if next_leaf is not None:
+                    abjad.detach(abjad.RepeatTie, next_leaf)
+            if hocket:
+                for leaf in original_logical_tie:
+                    duration = leaf.written_duration
+                    skip = abjad.Skip(duration)
+                    abjad.mutate.replace(leaf, [skip])
+        else:
+            for leaf in logical_tie:
+                duration = leaf.written_duration
+                skip = abjad.Skip(duration)
+                abjad.mutate.replace(leaf, [skip])
+    if not allow_unused_pitches and not cursor.exhausted:
+        assert cursor.position is not None
+        current, total = cursor.position - 1, len(cursor)
+        raise Exception(f"{cursor!r} used only {current} of {total} pitches.")
+    for command in commands:
+        command(container)
+    if not hocket:
+        pleaves = _select.pleaves(container)
+        assert isinstance(pleaves, list)
+        for pleaf in pleaves:
+            abjad.attach(_enums.ALLOW_OCTAVE, pleaf)
+    return {voice_name: [container]}
 
 
 def lmr(
