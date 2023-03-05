@@ -637,7 +637,6 @@ class Accumulator:
     __slots__ = (
         "current_offset",
         "figure_number",
-        "figure_names",
         "music_maker",
         "score_stop_offset",
         "voice_names",
@@ -646,7 +645,7 @@ class Accumulator:
         "voice_name_to_timespans",
     )
 
-    def __init__(self, score: abjad.Score):
+    def __init__(self, score: abjad.Score) -> None:
         assert isinstance(score, abjad.Score), repr(score)
         self.score = score
         voice_names = []
@@ -655,12 +654,11 @@ class Accumulator:
         self.voice_names = voice_names
         self.current_offset = abjad.Offset(0)
         self.figure_number = 1
-        self.figure_names: list[str] = []
         self.score_stop_offset = abjad.Offset(0)
         self.time_signatures: list[abjad.TimeSignature] = []
         self.voice_name_to_timespans: dict = dict([(_, []) for _ in self.voice_names])
 
-    def assemble(self, voice_name) -> list | None:
+    def assemble(self, voice_name: str) -> list[abjad.Component]:
         timespans = self.voice_name_to_timespans[voice_name]
         total_duration = sum([_.duration for _ in self.time_signatures])
         for timespan in timespans:
