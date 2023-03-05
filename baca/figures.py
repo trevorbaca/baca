@@ -675,14 +675,12 @@ class Accumulator:
         "voice_names",
         "score",
         "time_signatures",
-        "voice_abbreviations",
         "voice_name_to_timespans",
     )
 
-    def __init__(self, score: abjad.Score, voice_abbreviations=None):
+    def __init__(self, score: abjad.Score):
         assert isinstance(score, abjad.Score), repr(score)
         self.score = score
-        self.voice_abbreviations = dict(voice_abbreviations or {})
         voice_names = []
         for voice in abjad.iterate.components(score, abjad.Voice):
             voice_names.append(voice.name)
@@ -1031,7 +1029,7 @@ def make_before_grace_containers(
 def make_figures(
     accumulator: Accumulator,
     voice_name: str,
-    tuplets: abjad.Container | list[abjad.Tuplet] | None = None,
+    tuplets: abjad.Container | list[abjad.Tuplet],
     *,
     anchor: Anchor | None = None,
     do_not_label: bool = False,
@@ -1044,8 +1042,6 @@ def make_figures(
     assert isinstance(accumulator, Accumulator), repr(accumulator)
     assert isinstance(voice_name, str), repr(voice_name)
     assert isinstance(figure_name, str), repr(figure_name)
-    voice_name = accumulator.voice_abbreviations.get(voice_name, voice_name)
-    assert tuplets is not None
     assert all(isinstance(_, abjad.Tuplet) for _ in tuplets), repr(tuplets)
     if isinstance(tuplets, abjad.Container):
         container = tuplets
@@ -1077,10 +1073,7 @@ def make_figures(
         assert all(isinstance(_, abjad.Container) for _ in containers), repr(containers)
         voice_name_to_containers[voice_name] = containers
     if anchor is not None:
-        voice_name_ = accumulator.voice_abbreviations.get(
-            anchor.remote_voice_name, anchor.remote_voice_name
-        )
-        anchor = dataclasses.replace(anchor, remote_voice_name=voice_name_)
+        anchor = dataclasses.replace(anchor, remote_voice_name=anchor.remote_voice_name)
     contribution = Contribution(
         voice_name_to_containers,
         anchor=anchor,
@@ -1102,8 +1095,6 @@ def make_figures(
             timespan.stop_offset,
             annotation=containers,
         )
-        if voice_name not in accumulator.voice_name_to_timespans:
-            voice_name = accumulator.voice_abbreviations.get(voice_name, voice_name)
         accumulator.voice_name_to_timespans[voice_name].append(timespan)
     accumulator.current_offset = stop_offset
     accumulator.score_stop_offset = max(accumulator.score_stop_offset, stop_offset)
