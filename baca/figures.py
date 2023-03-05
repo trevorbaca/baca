@@ -128,24 +128,6 @@ def _get_start_offset(
     return start_offset
 
 
-def _is_treatment(argument):
-    if argument is None:
-        return True
-    elif isinstance(argument, int):
-        return True
-    elif isinstance(argument, str):
-        return True
-    elif isinstance(argument, tuple) and len(argument) == 2:
-        return True
-    elif isinstance(argument, abjad.Fraction):
-        return True
-    elif argument.__class__ is abjad.Duration:
-        return True
-    elif argument in ("accel", "rit"):
-        return True
-    return False
-
-
 def _label_figure(container, figure_name, figure_label_direction, figure_number):
     parts = figure_name.split("_")
     if len(parts) == 1:
