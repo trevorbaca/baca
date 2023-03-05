@@ -707,21 +707,17 @@ class Accumulator:
         already_labeled: bool = False,
         do_not_increment: bool = False,
         do_not_label: bool = False,
-        figure_name: str = "",
-        figure_label_direction: int | None = None,
         hide_time_signature: bool | None = None,
         imbrications: dict[str, list[abjad.Container]] | None = None,
         tsd: int | None = None,
     ):
         assert isinstance(voice_name, str), repr(voice_name)
-        assert isinstance(figure_name, str), repr(figure_name)
         assert all(isinstance(_, abjad.Tuplet) for _ in tuplets), repr(tuplets)
         if isinstance(tuplets, abjad.Container):
             container = tuplets
         else:
             container = abjad.Container(tuplets)
         assert isinstance(do_not_label, bool), repr(do_not_label)
-        assert isinstance(figure_name, str), repr(figure_name)
         imbrications = imbrications or {}
         assert isinstance(imbrications, dict), repr(imbrications)
         duration = abjad.get.duration(container)
@@ -730,17 +726,6 @@ class Accumulator:
         else:
             pair = duration.pair
         time_signature = abjad.TimeSignature(pair)
-        leaf = abjad.select.leaf(container, 0)
-        abjad.annotate(leaf, "figure_name", figure_name)
-        if figure_name:
-            if figure_name in self.figure_names:
-                raise Exception(f"duplicate figure name: {figure_name!r}.")
-            self.figure_names.append(figure_name)
-        # if not do_not_label:
-        if not do_not_label and not already_labeled:
-            label_figure(
-                container, figure_name, self.figure_number, figure_label_direction
-            )
         voice_name_to_containers = {voice_name: [container]}
         assert isinstance(imbrications, dict)
         for voice_name, containers in imbrications.items():
