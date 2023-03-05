@@ -644,7 +644,6 @@ class Anchor:
 class Contribution:
     voice_name_to_containers: dict[str, list]
     anchor: Anchor | None = None
-    figure_name: str | None = None
     hide_time_signature: bool | None = None
     time_signature: abjad.TimeSignature | None = None
 
@@ -658,8 +657,6 @@ class Contribution:
             assert isinstance(value[0], abjad.Container), repr(value)
         if self.anchor is not None:
             assert isinstance(self.anchor, Anchor), repr(self.anchor)
-        if self.figure_name is not None:
-            assert isinstance(self.figure_name, str), repr(self.figure_name)
         if self.hide_time_signature is not None:
             assert isinstance(self.hide_time_signature, bool), repr(
                 self.hide_time_signature
@@ -1087,7 +1084,6 @@ def make_figures(
     contribution = Contribution(
         voice_name_to_containers,
         anchor=anchor,
-        figure_name=figure_name,
         hide_time_signature=hide_time_signature,
         time_signature=time_signature,
     )
