@@ -706,7 +706,6 @@ class Accumulator:
         anchor: Anchor | None = None,
         already_labeled: bool = False,
         do_not_increment: bool = False,
-        do_not_label: bool = False,
         hide_time_signature: bool | None = None,
         imbrications: dict[str, list[abjad.Container]] | None = None,
         tsd: int | None = None,
@@ -717,7 +716,6 @@ class Accumulator:
             container = tuplets
         else:
             container = abjad.Container(tuplets)
-        assert isinstance(do_not_label, bool), repr(do_not_label)
         imbrications = imbrications or {}
         assert isinstance(imbrications, dict), repr(imbrications)
         duration = abjad.get.duration(container)
@@ -772,9 +770,7 @@ class Accumulator:
             ):
                 assert isinstance(contribution.time_signature, abjad.TimeSignature)
                 self.time_signatures.append(contribution.time_signature)
-        if do_not_increment:
-            return
-        if already_labeled or not do_not_label:
+        if not do_not_increment:
             self.figure_number += 1
 
     def populate_commands(self, score):
