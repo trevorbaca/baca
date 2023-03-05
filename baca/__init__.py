@@ -17,6 +17,7 @@ from .constellation import *
 from .cursor import Cursor
 from .docs import global_context_string
 from .figures import (
+    Accumulator,
     LMR,
     anchor,
     anchor_after,

@@ -1919,7 +1919,7 @@ figures.py examples.
     Imbricates ``segment`` in voice with ``voice_name``.
 
     >>> score = baca.docs.make_empty_score(2)
-    >>> accumulator = baca.figures.Accumulator(score)
+    >>> accumulator = baca.Accumulator(score)
     >>> collections = [
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0],
@@ -2086,7 +2086,7 @@ figures.py examples.
     Multiple imbricated voices:
 
     >>> score = baca.docs.make_empty_score(3)
-    >>> accumulator = baca.figures.Accumulator(score)
+    >>> accumulator = baca.Accumulator(score)
     >>> collections = [
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0],
@@ -2300,7 +2300,7 @@ figures.py examples.
     Hides tuplet brackets above imbricated voice:
 
     >>> score = baca.docs.make_empty_score(2)
-    >>> accumulator = baca.figures.Accumulator(score)
+    >>> accumulator = baca.Accumulator(score)
     >>> collections = [
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0],
@@ -2494,7 +2494,7 @@ figures.py examples.
     Works with pitch-classes:
 
     >>> score = baca.docs.make_empty_score(2)
-    >>> accumulator = baca.figures.Accumulator(score)
+    >>> accumulator = baca.Accumulator(score)
     >>> segment = [
     ...     abjad.NumberedPitchClass(10),
     ...     abjad.NumberedPitchClass(6),
@@ -2620,7 +2620,7 @@ figures.py examples.
     Works with chords:
 
     >>> score = baca.docs.make_empty_score(2)
-    >>> accumulator = baca.figures.Accumulator(score)
+    >>> accumulator = baca.Accumulator(score)
     >>> collections = [
     ...     {0, 2, 10, 18, 16},
     ...     [15, 20, 19, 9, 0],
@@ -2768,7 +2768,7 @@ figures.py examples.
     Works with rests:
 
     >>> score = baca.docs.make_empty_score(2)
-    >>> accumulator = baca.figures.Accumulator(score)
+    >>> accumulator = baca.Accumulator(score)
     >>> collections = [
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0],
@@ -3005,7 +3005,7 @@ figures.py examples.
     Imbrication allows unused pitches:
 
     >>> score = baca.docs.make_empty_score(2)
-    >>> accumulator = baca.figures.Accumulator(score)
+    >>> accumulator = baca.Accumulator(score)
     >>> collections = [
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0],
@@ -3152,7 +3152,7 @@ figures.py examples.
     When imbrication hockets voices:
 
     >>> score = baca.docs.make_empty_score(2)
-    >>> accumulator = baca.figures.Accumulator(score)
+    >>> accumulator = baca.Accumulator(score)
     >>> collections = [
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0],
@@ -3322,7 +3322,7 @@ figures.py examples.
     When imbrication truncates ties:
 
     >>> score = baca.docs.make_empty_score(2)
-    >>> accumulator = baca.figures.Accumulator(score)
+    >>> accumulator = baca.Accumulator(score)
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> tuplets = baca.figure(collections, [5], 32)
     >>> rmakers.beam(tuplets)
@@ -3469,7 +3469,7 @@ figures.py examples.
     Attaches RIGHT_BROKEN_BEAM to selector output.
 
     >>> score = baca.docs.make_empty_score(2)
-    >>> accumulator = baca.figures.Accumulator(score)
+    >>> accumulator = baca.Accumulator(score)
 
     >>> collections = [[0, 2, 10, 18], [16, 15, 23]]
     >>> tuplets = baca.figure(collections, [1], 16)
