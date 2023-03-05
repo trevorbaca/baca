@@ -96,16 +96,14 @@ def _get_start_offset(
         return current_offset
     if anchored and remote_voice_name is None:
         return score_stop_offset
-    if remote_selector is None:
-
-        def remote_selector(argument):
-            return abjad.select.leaf(argument, 0)
-
     timespans = voice_name_to_timespans[remote_voice_name]
     container_lists = [_.annotation for _ in timespans]
     for container_list in container_lists:
         assert all(isinstance(_, abjad.Container) for _ in container_list)
-    result = remote_selector(container_lists)
+    if remote_selector is None:
+        result = abjad.select.leaf(container_lists, 0)
+    else:
+        result = remote_selector(container_lists)
     selected_leaves = list(abjad.iterate.leaves(result))
     first_selected_leaf = selected_leaves[0]
     timespan = _get_leaf_timespan(first_selected_leaf, timespans)
