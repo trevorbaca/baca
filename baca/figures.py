@@ -769,8 +769,6 @@ class Accumulator:
             ):
                 assert isinstance(contribution.time_signature, abjad.TimeSignature)
                 self.time_signatures.append(contribution.time_signature)
-        if not do_not_increment:
-            self.figure_number += 1
 
     def populate_commands(self, score):
         for voice_name in sorted(self.voice_name_to_timespans):
@@ -1003,7 +1001,12 @@ def imbricate(
     return {voice_name: [container]}
 
 
-def label_figure(tuplets, figure_name, figure_number, direction=None, only=False):
+def label_figure(
+    tuplets, figure_name, accumulator, direction=None, do_not_increment=False
+):
+    figure_number = accumulator.figure_number
+    if not do_not_increment:
+        accumulator.figure_number += 1
     parts = figure_name.split("_")
     if len(parts) == 1:
         body = parts[0]
@@ -1023,7 +1026,7 @@ def label_figure(tuplets, figure_name, figure_number, direction=None, only=False
     bundle = abjad.bundle(figure_label_markup, r"- \tweak color #blue")
     leaf = abjad.select.leaf(tuplets, 0)
     abjad.annotate(leaf, "figure_name", figure_name)
-    if not only:
+    if not do_not_increment:
         pleaves = _select.pleaves(tuplets)
         if pleaves:
             leaf = pleaves[0]
