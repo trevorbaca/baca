@@ -730,6 +730,95 @@ class Accumulator:
             components.extend(components_)
         return components
 
+    def cache(
+        self,
+        voice_name: str,
+        tuplets: abjad.Container | list[abjad.Tuplet],
+        *,
+        anchor: Anchor | None = None,
+        do_not_label: bool = False,
+        figure_name: str = "",
+        figure_label_direction: int | None = None,
+        hide_time_signature: bool | None = None,
+        imbrications: dict[str, list[abjad.Container]] | None = None,
+        tsd: int | None = None,
+    ):
+        assert isinstance(voice_name, str), repr(voice_name)
+        assert isinstance(figure_name, str), repr(figure_name)
+        assert all(isinstance(_, abjad.Tuplet) for _ in tuplets), repr(tuplets)
+        if isinstance(tuplets, abjad.Container):
+            container = tuplets
+        else:
+            container = abjad.Container(tuplets)
+        assert isinstance(do_not_label, bool), repr(do_not_label)
+        assert isinstance(figure_name, str), repr(figure_name)
+        imbrications = imbrications or {}
+        assert isinstance(imbrications, dict), repr(imbrications)
+        duration = abjad.get.duration(container)
+        if tsd is not None:
+            pair = abjad.duration.with_denominator(duration, tsd)
+        else:
+            pair = duration.pair
+        time_signature = abjad.TimeSignature(pair)
+        leaf = abjad.select.leaf(container, 0)
+        abjad.annotate(leaf, "figure_name", figure_name)
+        if figure_name:
+            if figure_name in self.figure_names:
+                raise Exception(f"duplicate figure name: {figure_name!r}.")
+            self.figure_names.append(figure_name)
+        if not do_not_label:
+            _label_figure(
+                container, figure_name, figure_label_direction, self.figure_number
+            )
+        voice_name_to_containers = {voice_name: [container]}
+        assert isinstance(imbrications, dict)
+        for voice_name, containers in imbrications.items():
+            assert all(isinstance(_, abjad.Container) for _ in containers), repr(
+                containers
+            )
+            voice_name_to_containers[voice_name] = containers
+        if anchor is not None:
+            anchor = dataclasses.replace(
+                anchor, remote_voice_name=anchor.remote_voice_name
+            )
+        contribution = Contribution(
+            voice_name_to_containers,
+            anchor=anchor,
+            hide_time_signature=hide_time_signature,
+            time_signature=time_signature,
+        )
+        for voice_name, containers in contribution.voice_name_to_containers.items():
+            start_offset = _get_start_offset(
+                containers,
+                contribution,
+                self.voice_name_to_timespans,
+                self.current_offset,
+                self.score_stop_offset,
+            )
+            stop_offset = start_offset + abjad.get.duration(containers)
+            timespan = abjad.Timespan(start_offset, stop_offset)
+            timespan = abjad.Timespan(
+                timespan.start_offset,
+                timespan.stop_offset,
+                annotation=containers,
+            )
+            self.voice_name_to_timespans[voice_name].append(timespan)
+        self.current_offset = stop_offset
+        self.score_stop_offset = max(self.score_stop_offset, stop_offset)
+        if not contribution.hide_time_signature:
+            if (
+                contribution.anchor is None
+                or contribution.hide_time_signature is False
+                or (
+                    contribution.anchor
+                    and contribution.anchor.remote_voice_name is None
+                )
+            ):
+                assert isinstance(contribution.time_signature, abjad.TimeSignature)
+                self.time_signatures.append(contribution.time_signature)
+        if not do_not_label:
+            self.figure_number += 1
+
     def populate_commands(self, score):
         for voice_name in sorted(self.voice_name_to_timespans):
             components = self.assemble(voice_name)
@@ -1024,90 +1113,6 @@ def make_before_grace_containers(
     assert len(before_grace_containers) == len(collection)
     assert isinstance(collection, list), repr(collection)
     return before_grace_containers, collection
-
-
-def make_figures(
-    accumulator: Accumulator,
-    voice_name: str,
-    tuplets: abjad.Container | list[abjad.Tuplet],
-    *,
-    anchor: Anchor | None = None,
-    do_not_label: bool = False,
-    figure_name: str = "",
-    figure_label_direction: int | None = None,
-    hide_time_signature: bool | None = None,
-    imbrications: dict[str, list[abjad.Container]] | None = None,
-    tsd: int | None = None,
-):
-    assert isinstance(accumulator, Accumulator), repr(accumulator)
-    assert isinstance(voice_name, str), repr(voice_name)
-    assert isinstance(figure_name, str), repr(figure_name)
-    assert all(isinstance(_, abjad.Tuplet) for _ in tuplets), repr(tuplets)
-    if isinstance(tuplets, abjad.Container):
-        container = tuplets
-    else:
-        container = abjad.Container(tuplets)
-    assert isinstance(do_not_label, bool), repr(do_not_label)
-    assert isinstance(figure_name, str), repr(figure_name)
-    imbrications = imbrications or {}
-    assert isinstance(imbrications, dict), repr(imbrications)
-    duration = abjad.get.duration(container)
-    if tsd is not None:
-        pair = abjad.duration.with_denominator(duration, tsd)
-    else:
-        pair = duration.pair
-    time_signature = abjad.TimeSignature(pair)
-    leaf = abjad.select.leaf(container, 0)
-    abjad.annotate(leaf, "figure_name", figure_name)
-    if figure_name:
-        if figure_name in accumulator.figure_names:
-            raise Exception(f"duplicate figure name: {figure_name!r}.")
-        accumulator.figure_names.append(figure_name)
-    if not do_not_label:
-        _label_figure(
-            container, figure_name, figure_label_direction, accumulator.figure_number
-        )
-    voice_name_to_containers = {voice_name: [container]}
-    assert isinstance(imbrications, dict)
-    for voice_name, containers in imbrications.items():
-        assert all(isinstance(_, abjad.Container) for _ in containers), repr(containers)
-        voice_name_to_containers[voice_name] = containers
-    if anchor is not None:
-        anchor = dataclasses.replace(anchor, remote_voice_name=anchor.remote_voice_name)
-    contribution = Contribution(
-        voice_name_to_containers,
-        anchor=anchor,
-        hide_time_signature=hide_time_signature,
-        time_signature=time_signature,
-    )
-    for voice_name, containers in contribution.voice_name_to_containers.items():
-        start_offset = _get_start_offset(
-            containers,
-            contribution,
-            accumulator.voice_name_to_timespans,
-            accumulator.current_offset,
-            accumulator.score_stop_offset,
-        )
-        stop_offset = start_offset + abjad.get.duration(containers)
-        timespan = abjad.Timespan(start_offset, stop_offset)
-        timespan = abjad.Timespan(
-            timespan.start_offset,
-            timespan.stop_offset,
-            annotation=containers,
-        )
-        accumulator.voice_name_to_timespans[voice_name].append(timespan)
-    accumulator.current_offset = stop_offset
-    accumulator.score_stop_offset = max(accumulator.score_stop_offset, stop_offset)
-    if not contribution.hide_time_signature:
-        if (
-            contribution.anchor is None
-            or contribution.hide_time_signature is False
-            or (contribution.anchor and contribution.anchor.remote_voice_name is None)
-        ):
-            assert isinstance(contribution.time_signature, abjad.TimeSignature)
-            accumulator.time_signatures.append(contribution.time_signature)
-    if not do_not_label:
-        accumulator.figure_number += 1
 
 
 def nest(tuplets: list[abjad.Tuplet], treatment: str) -> abjad.Tuplet:

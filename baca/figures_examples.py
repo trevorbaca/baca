@@ -1937,8 +1937,7 @@ figures.py examples.
     ...     groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
     ...     rmakers.beam_groups(groups)
 
-    >>> baca.make_figures(
-    ...     accumulator,
+    >>> accumulator.cache(
     ...     "Music.2",
     ...     container,
     ...     imbrications=imbrications,
@@ -2110,8 +2109,7 @@ figures.py examples.
     ...     _ = baca.beam_positions(imbrication, 8)
     ...     _ = baca.accent(baca.select.pheads(imbrication))
 
-    >>> baca.make_figures(
-    ...     accumulator,
+    >>> accumulator.cache(
     ...     "Music.2",
     ...     container,
     ...     imbrications=imbrications_1 | imbrications_3,
@@ -2321,8 +2319,7 @@ figures.py examples.
     ...     _ = baca.accent(baca.select.pheads(imbrication))
 
     >>> _ = baca.staccato(baca.select.pheads(container))
-    >>> baca.make_figures(
-    ...     accumulator,
+    >>> accumulator.cache(
     ...     "Music.2",
     ...     container,
     ...     imbrications=imbrications,
@@ -2511,8 +2508,7 @@ figures.py examples.
     ...     rmakers.beam_groups(groups, beam_rests=True)
     ...     _ = baca.accent(baca.select.pheads(imbrication))
 
-    >>> baca.make_figures(
-    ...     accumulator,
+    >>> accumulator.cache(
     ...     "Music.2",
     ...     container,
     ...     imbrications=imbrications,
@@ -2635,8 +2631,7 @@ figures.py examples.
     ...     groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
     ...     rmakers.beam_groups(groups)
 
-    >>> baca.make_figures(
-    ...     accumulator,
+    >>> accumulator.cache(
     ...     "Music.2",
     ...     container,
     ...     imbrications=imbrications,
@@ -2784,8 +2779,7 @@ figures.py examples.
     ...     groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
     ...     rmakers.beam_groups(groups)
 
-    >>> baca.make_figures(
-    ...     accumulator,
+    >>> accumulator.cache(
     ...     "Music.2",
     ...     container,
     ...     imbrications=imbrications,
@@ -3022,8 +3016,7 @@ figures.py examples.
     ...     _ = baca.accent(baca.select.pheads(imbrication))
 
     >>> _ = baca.staccato(baca.select.pheads(container))
-    >>> baca.make_figures(
-    ...     accumulator,
+    >>> accumulator.cache(
     ...     "Music.2",
     ...     container,
     ...     imbrications=imbrications,
@@ -3170,8 +3163,7 @@ figures.py examples.
     ...     _ = baca.accent(baca.select.pheads(imbrication))
 
     >>> _ = baca.staccato(baca.select.pheads(container))
-    >>> baca.make_figures(
-    ...     accumulator,
+    >>> accumulator.cache(
     ...     "Music.2",
     ...     container,
     ...     imbrications=imbrications,
@@ -3333,8 +3325,7 @@ figures.py examples.
     ...     groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
     ...     rmakers.beam_groups(groups, beam_rests=True)
 
-    >>> baca.make_figures(
-    ...     accumulator,
+    >>> accumulator.cache(
     ...     "Music.2",
     ...     container,
     ...     imbrications=imbrications,
@@ -3483,8 +3474,7 @@ figures.py examples.
     ...     rmakers.beam_groups(groups, beam_rests=True)
     ...     _ = baca.extend_beam(abjad.select.leaf(imbrication, -1))
 
-    >>> baca.make_figures(
-    ...     accumulator,
+    >>> accumulator.cache(
     ...     "Music.2",
     ...     container,
     ...     imbrications=imbrications,
@@ -3499,8 +3489,7 @@ figures.py examples.
     ...     rmakers.beam_groups(groups, beam_rests=True)
     ...     _ = baca.staccato(baca.select.pheads(imbrication))
 
-    >>> baca.make_figures(
-    ...     accumulator,
+    >>> accumulator.cache(
     ...     "Music.2",
     ...     container,
     ...     imbrications=imbrications,

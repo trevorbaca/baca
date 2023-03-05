@@ -25,7 +25,6 @@ from .figures import (
     figure,
     imbricate,
     lmr,
-    make_figures,
     nest,
     rests_after,
     rests_after,
