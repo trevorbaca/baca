@@ -24,6 +24,7 @@ from .figures import (
     anchor_to_figure,
     figure,
     imbricate,
+    label_figure,
     lmr,
     nest,
     rests_after,

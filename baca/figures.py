@@ -128,38 +128,6 @@ def _get_start_offset(
     return start_offset
 
 
-def _label_figure(container, figure_name, figure_label_direction, figure_number):
-    parts = figure_name.split("_")
-    if len(parts) == 1:
-        body = parts[0]
-        figure_label_string = f'"{body}"'
-    elif len(parts) == 2:
-        body, subscript = parts
-        figure_label_string = rf'\concat {{ "{body}" \sub {subscript} }}'
-    else:
-        raise Exception(f"unrecognized figure name: {figure_name!r}.")
-    string = r"\markup"
-    string += rf" \concat {{ [ \raise #0.25 \fontsize #-2 ({figure_number})"
-    if figure_name:
-        string += rf" \hspace #1 {figure_label_string} ] }}"
-    else:
-        string += r" ] }"
-    figure_label_markup = abjad.Markup(string)
-    bundle = abjad.bundle(figure_label_markup, r"- \tweak color #blue")
-    pleaves = _select.pleaves(container)
-    if pleaves:
-        leaf = pleaves[0]
-    else:
-        leaf = abjad.select.leaf(container, 0)
-    abjad.attach(
-        bundle,
-        leaf,
-        deactivate=True,
-        direction=figure_label_direction,
-        tag=_tags.FIGURE_LABEL,
-    )
-
-
 def _make_accelerando(leaves, treatment):
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
     assert treatment in ("accel", "rit")
@@ -736,6 +704,7 @@ class Accumulator:
         tuplets: abjad.Container | list[abjad.Tuplet],
         *,
         anchor: Anchor | None = None,
+        already_labeled: bool = False,
         do_not_label: bool = False,
         figure_name: str = "",
         figure_label_direction: int | None = None,
@@ -766,9 +735,10 @@ class Accumulator:
             if figure_name in self.figure_names:
                 raise Exception(f"duplicate figure name: {figure_name!r}.")
             self.figure_names.append(figure_name)
-        if not do_not_label:
-            _label_figure(
-                container, figure_name, figure_label_direction, self.figure_number
+        # if not do_not_label:
+        if not do_not_label and not already_labeled:
+            label_figure(
+                container, figure_name, self.figure_number, figure_label_direction
             )
         voice_name_to_containers = {voice_name: [container]}
         assert isinstance(imbrications, dict)
@@ -816,7 +786,7 @@ class Accumulator:
             ):
                 assert isinstance(contribution.time_signature, abjad.TimeSignature)
                 self.time_signatures.append(contribution.time_signature)
-        if not do_not_label:
+        if already_labeled or not do_not_label:
             self.figure_number += 1
 
     def populate_commands(self, score):
@@ -1048,6 +1018,38 @@ def imbricate(
         for pleaf in pleaves:
             abjad.attach(_enums.ALLOW_OCTAVE, pleaf)
     return {voice_name: [container]}
+
+
+def label_figure(tuplets, figure_name, figure_number, direction=None):
+    parts = figure_name.split("_")
+    if len(parts) == 1:
+        body = parts[0]
+        figure_label_string = f'"{body}"'
+    elif len(parts) == 2:
+        body, subscript = parts
+        figure_label_string = rf'\concat {{ "{body}" \sub {subscript} }}'
+    else:
+        raise Exception(f"unrecognized figure name: {figure_name!r}.")
+    string = r"\markup"
+    string += rf" \concat {{ [ \raise #0.25 \fontsize #-2 ({figure_number})"
+    if figure_name:
+        string += rf" \hspace #1 {figure_label_string} ] }}"
+    else:
+        string += r" ] }"
+    figure_label_markup = abjad.Markup(string)
+    bundle = abjad.bundle(figure_label_markup, r"- \tweak color #blue")
+    pleaves = _select.pleaves(tuplets)
+    if pleaves:
+        leaf = pleaves[0]
+    else:
+        leaf = abjad.select.leaf(tuplets, 0)
+    abjad.attach(
+        bundle,
+        leaf,
+        deactivate=True,
+        direction=direction,
+        tag=_tags.FIGURE_LABEL,
+    )
 
 
 def lmr(
