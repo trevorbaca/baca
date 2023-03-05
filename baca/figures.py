@@ -705,6 +705,7 @@ class Accumulator:
         *,
         anchor: Anchor | None = None,
         already_labeled: bool = False,
+        do_not_increment: bool = False,
         do_not_label: bool = False,
         figure_name: str = "",
         figure_label_direction: int | None = None,
@@ -786,6 +787,8 @@ class Accumulator:
             ):
                 assert isinstance(contribution.time_signature, abjad.TimeSignature)
                 self.time_signatures.append(contribution.time_signature)
+        if do_not_increment:
+            return
         if already_labeled or not do_not_label:
             self.figure_number += 1
 
@@ -1020,7 +1023,7 @@ def imbricate(
     return {voice_name: [container]}
 
 
-def label_figure(tuplets, figure_name, figure_number, direction=None):
+def label_figure(tuplets, figure_name, figure_number, direction=None, only=False):
     parts = figure_name.split("_")
     if len(parts) == 1:
         body = parts[0]
@@ -1038,18 +1041,21 @@ def label_figure(tuplets, figure_name, figure_number, direction=None):
         string += r" ] }"
     figure_label_markup = abjad.Markup(string)
     bundle = abjad.bundle(figure_label_markup, r"- \tweak color #blue")
-    pleaves = _select.pleaves(tuplets)
-    if pleaves:
-        leaf = pleaves[0]
-    else:
-        leaf = abjad.select.leaf(tuplets, 0)
-    abjad.attach(
-        bundle,
-        leaf,
-        deactivate=True,
-        direction=direction,
-        tag=_tags.FIGURE_LABEL,
-    )
+    leaf = abjad.select.leaf(tuplets, 0)
+    abjad.annotate(leaf, "figure_name", figure_name)
+    if not only:
+        pleaves = _select.pleaves(tuplets)
+        if pleaves:
+            leaf = pleaves[0]
+        else:
+            leaf = abjad.select.leaf(tuplets, 0)
+        abjad.attach(
+            bundle,
+            leaf,
+            deactivate=True,
+            direction=direction,
+            tag=_tags.FIGURE_LABEL,
+        )
 
 
 def lmr(
