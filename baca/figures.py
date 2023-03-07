@@ -20,26 +20,6 @@ from .enums import enums as _enums
 SimpleNamespace = types.SimpleNamespace
 
 
-def _fix_rounding_error(durations, total_duration):
-    current_duration = sum(durations)
-    if current_duration < total_duration:
-        missing_duration = total_duration - current_duration
-        if durations[0] < durations[-1]:
-            durations[-1] += missing_duration
-        else:
-            durations[0] += missing_duration
-    elif sum(durations) == total_duration:
-        return durations
-    elif total_duration < current_duration:
-        extra_duration = current_duration - total_duration
-        if durations[0] < durations[-1]:
-            durations[-1] -= extra_duration
-        else:
-            durations[0] -= extra_duration
-    assert sum(durations) == total_duration
-    return durations
-
-
 def _get_figure_start_offset(figure_name, voice_name_to_timespans):
     assert isinstance(figure_name, str)
     for voice_name in sorted(voice_name_to_timespans.keys()):
@@ -131,79 +111,26 @@ def _get_start_offset(
     return start_offset
 
 
-def _make_accelerando(leaves, treatment):
+def _make_accelerando(leaves, *, ritardando=False):
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
-    assert treatment in ("accel", "rit")
     tuplet = abjad.Tuplet("1:1", leaves, hide=False)
     if len(tuplet) == 1:
         return tuplet
-    durations = [abjad.get.duration(_) for _ in leaves]
-    if treatment == "accel":
-        exponent = 0.625
-    elif treatment == "rit":
+    if ritardando:
         exponent = 1.625
+    else:
+        exponent = 0.625
+    durations = [abjad.get.duration(_) for _ in leaves]
     multipliers = _make_accelerando_multipliers(durations, exponent)
     assert len(leaves) == len(multipliers)
     for multiplier, leaf in zip(multipliers, leaves):
         leaf.multiplier = multiplier
-    if rmakers.rmakers._is_accelerando(leaves):
-        abjad.override(leaves[0]).Beam.grow_direction = abjad.RIGHT
-    elif rmakers.rmakers._is_ritardando(leaves):
-        abjad.override(leaves[0]).Beam.grow_direction = abjad.LEFT
+    rmakers.feather_beam([tuplet])
     rmakers.duration_bracket(tuplet)
     return tuplet
 
 
-def _make_accelerando_multipliers(durations, exponent):
-    r"""
-    Makes accelerando multipliers.
-
-    ..  container:: example
-
-        Set exponent less than 1 for decreasing durations:
-
-        >>> durations = 4 * [abjad.Duration(1)]
-        >>> result = baca.figures._make_accelerando_multipliers(durations, 0.5)
-        >>> for multiplier in result: multiplier
-        ...
-        (2048, 1024)
-        (848, 1024)
-        (651, 1024)
-        (549, 1024)
-
-    ..  container:: example
-
-        Set exponent to 1 for trivial multipliers:
-
-        >>> durations = 4 * [abjad.Duration(1)]
-        >>> result = baca.figures._make_accelerando_multipliers(durations, 1)
-        >>> for multiplier in result: multiplier
-        ...
-        (1024, 1024)
-        (1024, 1024)
-        (1024, 1024)
-        (1024, 1024)
-
-    ..  container:: example
-
-        Set exponent greater than 1 for increasing durations:
-
-        >>> durations = 4 * [abjad.Duration(1)]
-        >>> result = baca.figures._make_accelerando_multipliers(
-        ...     durations,
-        ...     0.5,
-        ... )
-        >>> for multiplier in result: multiplier
-        ...
-        (2048, 1024)
-        (848, 1024)
-        (651, 1024)
-        (549, 1024)
-
-    Set exponent greater than 1 for ritardando.
-
-    Set exponent less than 1 for accelerando.
-    """
+def _make_accelerando_multipliers(durations, exponent) -> list[tuple[int, int]]:
     sums = abjad.math.cumulative_sums(durations)
     generator = abjad.sequence.nwise(sums, n=2)
     pairs = list(generator)
@@ -219,15 +146,27 @@ def _make_accelerando_multipliers(durations, exponent):
     start_offsets_.append(float(total_duration))
     durations_ = abjad.math.difference_series(start_offsets_)
     durations_ = rmakers.rmakers._round_durations(durations_, 2**10)
-    durations_ = _fix_rounding_error(durations_, total_duration)
-    multipliers = []
+    current_duration = sum(durations_)
+    if current_duration < total_duration:
+        missing_duration = total_duration - current_duration
+        if durations_[0] < durations_[-1]:
+            durations_[-1] += missing_duration
+        else:
+            durations_[0] += missing_duration
+    elif total_duration < current_duration:
+        extra_duration = current_duration - total_duration
+        if durations_[0] < durations_[-1]:
+            durations_[-1] -= extra_duration
+        else:
+            durations_[0] -= extra_duration
+    assert sum(durations_) == total_duration
+    pairs = []
     assert len(durations) == len(durations_)
     for duration_, duration in zip(durations_, durations):
-        multiplier = duration_ / duration
-        multiplier = abjad.Fraction(multiplier)
-        pair = abjad.duration.with_denominator(multiplier, 2**10)
-        multipliers.append(pair)
-    return multipliers
+        fraction = duration_ / duration
+        pair = abjad.duration.with_denominator(fraction, 2**10)
+        pairs.append(pair)
+    return pairs
 
 
 def _make_figure_tuplets(
@@ -358,7 +297,7 @@ def _make_figure_tuplet(
         pair = abjad.duration.pair(tuplet_multiplier)
         tuplet = abjad.Tuplet(pair, leaf_list)
     elif treatment in ("accel", "rit"):
-        tuplet = _make_accelerando(leaf_list, treatment)
+        tuplet = _make_accelerando(leaf_list, ritardando=treatment == "rit")
     elif isinstance(treatment, str) and ":" in treatment:
         numerator_str, denominator_str = treatment.split(":")
         numerator, denominator = int(numerator_str), int(denominator_str)
