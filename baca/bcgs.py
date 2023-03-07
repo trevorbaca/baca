@@ -15,12 +15,12 @@ bcgs.py examples.
     ... ]
     >>> tuplets = []
     >>> for collection in collections:
-    ...     containers, collection = baca.figures.make_before_grace_containers(
+    ...     containers, collection = baca.make_before_grace_containers(
     ...         collection,
     ...         baca.LMR(),
     ...     )
     ...     tuplets_ = baca.figure([collection], [1], 8)
-    ...     baca.figures.attach_before_grace_containers(containers, tuplets_[0])
+    ...     baca.attach_before_grace_containers(containers, tuplets_[0])
     ...     tuplets.extend(tuplets_)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
@@ -111,13 +111,13 @@ bcgs.py examples.
     ... ]
     >>> tuplets = []
     >>> for collection in collections:
-    ...     containers, collection = baca.figures.make_before_grace_containers(
+    ...     containers, collection = baca.make_before_grace_containers(
     ...         collection,
     ...         baca.LMR(),
     ...         duration=abjad.Duration(1, 8),
     ...     )
     ...     tuplets_ = baca.figure([collection], [1], 8)
-    ...     baca.figures.attach_before_grace_containers(containers, tuplets_[0])
+    ...     baca.attach_before_grace_containers(containers, tuplets_[0])
     ...     tuplets.extend(tuplets_)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
@@ -208,7 +208,7 @@ bcgs.py examples.
     ... ]
     >>> tuplets = []
     >>> for collection in collections:
-    ...     containers, collection = baca.figures.make_before_grace_containers(
+    ...     containers, collection = baca.make_before_grace_containers(
     ...         collection,
     ...         baca.lmr(
     ...             left_length=3,
@@ -217,7 +217,7 @@ bcgs.py examples.
     ...         ),
     ...     )
     ...     tuplets_ = baca.figure([collection], [1], 8)
-    ...     baca.figures.attach_before_grace_containers(containers, tuplets_[0])
+    ...     baca.attach_before_grace_containers(containers, tuplets_[0])
     ...     tuplets.extend(tuplets_)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
@@ -314,7 +314,7 @@ bcgs.py examples.
     ... ]
     >>> tuplets = []
     >>> for collection in collections:
-    ...     containers, collection = baca.figures.make_before_grace_containers(
+    ...     containers, collection = baca.make_before_grace_containers(
     ...         collection,
     ...         baca.lmr(
     ...             right_length=3,
@@ -323,7 +323,7 @@ bcgs.py examples.
     ...         ),
     ...     )
     ...     tuplets_ = baca.figure([collection], [1], 8)
-    ...     baca.figures.attach_before_grace_containers(containers, tuplets_[0])
+    ...     baca.attach_before_grace_containers(containers, tuplets_[0])
     ...     tuplets.extend(tuplets_)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
@@ -421,7 +421,7 @@ bcgs.py examples.
     ... ]
     >>> tuplets = []
     >>> for collection in collections:
-    ...     containers, collection = baca.figures.make_before_grace_containers(
+    ...     containers, collection = baca.make_before_grace_containers(
     ...         collection,
     ...         baca.lmr(
     ...             left_length=3,
@@ -431,7 +431,7 @@ bcgs.py examples.
     ...         ),
     ...     )
     ...     tuplets_ = baca.figure([collection], [1], 8)
-    ...     baca.figures.attach_before_grace_containers(containers, tuplets_[0])
+    ...     baca.attach_before_grace_containers(containers, tuplets_[0])
     ...     tuplets.extend(tuplets_)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
@@ -534,12 +534,12 @@ bcgs.py examples.
     ... ]
     >>> tuplets = []
     >>> for collection in collections:
-    ...     containers, collection = baca.figures.make_before_grace_containers(
+    ...     containers, collection = baca.make_before_grace_containers(
     ...         collection,
     ...         baca.lmr(left_length=1),
     ...     )
     ...     tuplets_ = baca.figure([collection], [1], 8)
-    ...     baca.figures.attach_before_grace_containers(containers, tuplets_[0])
+    ...     baca.attach_before_grace_containers(containers, tuplets_[0])
     ...     tuplets.extend(tuplets_)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
@@ -636,12 +636,12 @@ bcgs.py examples.
     ... ]
     >>> tuplets = []
     >>> for collection in collections:
-    ...     containers, collection = baca.figures.make_before_grace_containers(
+    ...     containers, collection = baca.make_before_grace_containers(
     ...         collection,
     ...         baca.LMR(),
     ...     )
     ...     tuplets_ = baca.figure([collection], [1], 4)
-    ...     baca.figures.attach_before_grace_containers(containers, tuplets_[0])
+    ...     baca.attach_before_grace_containers(containers, tuplets_[0])
     ...     tuplets.extend(tuplets_)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))

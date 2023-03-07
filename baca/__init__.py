@@ -1,4 +1,7 @@
 import sys
+import types
+
+SimpleNamespace = types.SimpleNamespace
 
 import abjad
 
@@ -18,26 +21,14 @@ from .cursor import Cursor
 from .docs import global_context_string
 from .figures import (
     Accumulator,
-    LMR,
-    SimpleNamespace,
     anchor,
     anchor_after,
     anchor_to_figure,
-    figure,
-    imbricate,
     label_figure,
-    lmr,
-    nest,
-    rests_after,
-    rests_after,
-    rests_around,
-    rests_around,
-    rests_before,
-    rests_before,
     resume,
     resume_after,
-    skips_before,
 )
+from .imbricate import imbricate
 from .indicatorclasses import *
 from .indicatorcommands import *
 from .layout import *
