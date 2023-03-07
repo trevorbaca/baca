@@ -17,7 +17,6 @@ from . import select as _select
 from . import tags as _tags
 from .enums import enums as _enums
 
-
 SimpleNamespace = types.SimpleNamespace
 
 
