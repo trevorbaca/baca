@@ -150,11 +150,7 @@ def _make_accelerando(leaves, treatment):
         abjad.override(leaves[0]).Beam.grow_direction = abjad.RIGHT
     elif rmakers.rmakers._is_ritardando(leaves):
         abjad.override(leaves[0]).Beam.grow_direction = abjad.LEFT
-    duration = abjad.get.duration(tuplet)
-    notes = abjad.makers.make_notes([0], [duration])
-    string = abjad.illustrators.components_to_score_markup_string(notes)
-    string = rf"\markup \scale #'(0.75 . 0.75) {string}"
-    abjad.override(tuplet).TupletNumber.text = string
+    rmakers.duration_bracket(tuplet)
     return tuplet
 
 
