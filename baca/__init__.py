@@ -19,6 +19,7 @@ from .docs import global_context_string
 from .figures import (
     Accumulator,
     LMR,
+    SimpleNamespace,
     anchor,
     anchor_after,
     anchor_to_figure,

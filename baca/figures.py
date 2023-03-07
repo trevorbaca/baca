@@ -5,6 +5,7 @@ import copy
 import dataclasses
 import fractions
 import math as python_math
+import types
 import typing
 from inspect import currentframe as _frame
 
@@ -15,6 +16,9 @@ from . import cursor as _cursor
 from . import select as _select
 from . import tags as _tags
 from .enums import enums as _enums
+
+
+SimpleNamespace = types.SimpleNamespace
 
 
 def _fix_rounding_error(durations, total_duration):
