@@ -448,20 +448,20 @@ def make_skeleton(
     if isinstance(argument, str):
         string = f"{{ {argument} }}"
         container = abjad.parse(string)
-        selection = abjad.mutate.eject_contents(container)
+        components = abjad.mutate.eject_contents(container)
     elif isinstance(argument, list):
-        selection = argument
+        components = argument
     else:
-        message = "baca.make_skeleton() accepts string or selection,"
+        message = "baca.make_skeleton() accepts string or components,"
         message += " not {repr(argument)}."
         raise TypeError(message)
     if tag is not None:
         assert isinstance(tag, abjad.Tag), repr(tag)
         # TODO: tag attachments
-        for component in abjad.iterate.components(selection):
+        for component in abjad.iterate.components(components):
             # TODO: do not set private attribute
             component._tag = tag
-    return selection
+    return components
 
 
 def make_tied_notes(time_signatures) -> list[abjad.Note | abjad.Tuplet]:

@@ -971,8 +971,7 @@ def bass_to_octave(argument, n: int) -> None:
 
     ..  container:: example
 
-        Octave-transposes music such that the lowest note in the entire selection appears
-        in octave 3:
+        Octave-transposes music such that the lowest note appears in octave 3:
 
         >>> tuplets = baca.figure(
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]], [5, -3], 32

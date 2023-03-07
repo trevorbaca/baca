@@ -7,20 +7,20 @@ import typing
 import abjad
 
 
-def _handle_pair(selection, pair):
+def _handle_pair(components, pair):
     if isinstance(pair, tuple):
         if isinstance(pair[0], list):
             assert len(pair) == 2, repr(pair)
             indices, period = pair
-            selection = abjad.select.get(selection, indices, period)
+            components = abjad.select.get(components, indices, period)
         else:
             start, stop = pair
-            selection = selection[start:stop]
+            components = components[start:stop]
     elif isinstance(pair, list):
-        selection = abjad.select.get(selection, pair)
+        components = abjad.select.get(components, pair)
     elif isinstance(pair, abjad.Pattern):
-        selection = abjad.select.get(selection, pair)
-    return selection
+        components = abjad.select.get(components, pair)
+    return components
 
 
 def chead(
@@ -314,10 +314,11 @@ def clparts(
 
     """
     leaves = abjad.select.leaves(argument, exclude=exclude)
-    selections = abjad.select.partition_by_counts(
+    lists = abjad.select.partition_by_counts(
         leaves, counts=counts, cyclic=True, overhang=True
     )
-    lists_ = [list(_) for _ in selections]
+    # TODO: no longer needed?
+    lists_ = [list(_) for _ in lists]
     return lists_
 
 
@@ -391,7 +392,7 @@ def cmgroups(
 
 def enchain(argument, counts: typing.Sequence[int]) -> list[list]:
     r"""
-    Enchains items in selection.
+    Enchains items in argument.
 
     Enchains leaves in alternating groups of 5:
 
@@ -421,13 +422,13 @@ def enchain(argument, counts: typing.Sequence[int]) -> list[list]:
         [Rest('r16'), Note("bf'16"), Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4")]
         [Chord("<fs' gs'>4"), Chord("<fs' gs'>16")]
 
-        >>> for i, selection in enumerate(result):
+        >>> for i, leaves in enumerate(result):
         ...     if i % 2 == 0:
         ...         color, direction = "#red", abjad.UP
         ...     else:
         ...         color, direction = "#blue", abjad.DOWN
         ...     string = rf'\markup {{ \bold \with-color {color} * }}'
-        ...     for leaf in selection:
+        ...     for leaf in leaves:
         ...         markup = abjad.Markup(string)
         ...         abjad.attach(markup, leaf, direction=direction)
 
@@ -505,10 +506,11 @@ def enchain(argument, counts: typing.Sequence[int]) -> list[list]:
             }
 
     """
-    selections = abjad.select.partition_by_counts(
+    lists = abjad.select.partition_by_counts(
         argument, counts=counts, cyclic=True, enchain=True, overhang=True
     )
-    lists_ = [list(_) for _ in selections]
+    # TODO: no longer necessary?
+    lists_ = [list(_) for _ in lists]
     return lists_
 
 
@@ -790,7 +792,7 @@ def leaves(
     tail: bool | None = None,
     trim: bool | abjad.enums.Horizontal | None = None,
 ):
-    selection = abjad.select.leaves(
+    leaves = abjad.select.leaves(
         argument,
         prototype=prototype,
         exclude=exclude,
@@ -801,12 +803,12 @@ def leaves(
         tail=tail,
         trim=trim,
     )
-    selection = _handle_pair(selection, pair)
+    leaves = _handle_pair(leaves, pair)
     if lleak is True:
-        selection = abjad.select.with_previous_leaf(selection)
+        leaves = abjad.select.with_previous_leaf(leaves)
     if rleak is True:
-        selection = abjad.select.with_next_leaf(selection)
-    return selection
+        leaves = abjad.select.with_next_leaf(leaves)
+    return leaves
 
 
 def leaves_in_each_lt(argument, start=0, stop=None):
@@ -1184,8 +1186,9 @@ def lparts(
 
     """
     leaves = abjad.select.leaves(argument, exclude=exclude)
-    selections = abjad.select.partition_by_counts(leaves, counts=counts)
-    lists_ = [list(_) for _ in selections]
+    lists = abjad.select.partition_by_counts(leaves, counts=counts)
+    # TODO: no longer necessary?
+    lists_ = [list(_) for _ in lists]
     return lists_
 
 
@@ -3225,8 +3228,8 @@ def ptail_in_each_tuplet(argument, n, pair=None):
         start, stop = None, None
     else:
         start, stop = pair
-    selection = abjad.select.tuplets(argument)[start:stop]
-    result = [ptail(_, n) for _ in selection]
+    tuplets = abjad.select.tuplets(argument)[start:stop]
+    result = [ptail(_, n) for _ in tuplets]
     return result
 
 
@@ -3864,10 +3867,10 @@ def rleak(argument, *, count: int = 1, grace: bool | None = None) -> list[abjad.
 
 
 def rleak_runs(argument, start=0, stop=None):
-    selection = abjad.select.runs(argument)
+    runs = abjad.select.runs(argument)
     if start != 0 or stop is not None:
-        selection = selection[start:stop]
-    runs = [rleaves(_) for _ in selection]
+        runs = runs[start:stop]
+    runs = [rleaves(_) for _ in runs]
     return runs
 
 

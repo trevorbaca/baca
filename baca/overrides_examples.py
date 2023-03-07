@@ -1897,9 +1897,9 @@ overrides.py examples.
 
     >>> def selector(argument):
     ...     tuplets = abjad.select.tuplets(argument)
-    ...     items = [baca.select.tleaves(_) for _ in tuplets]
-    ...     selection = abjad.select.nontrivial(items)
-    ...     return selection
+    ...     lists = [baca.select.tleaves(_) for _ in tuplets]
+    ...     lists = abjad.select.nontrivial(lists)
+    ...     return lists
 
     >>> def make_score():
     ...     tuplets = baca.figure(

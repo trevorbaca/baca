@@ -25,7 +25,6 @@ from . import overridecommands as _overridecommands
 from . import parts as _parts
 from . import path as _path
 from . import pcollections as _pcollections
-from . import piecewisecommands as _piecewisecommands
 from . import pitchcommands as _pitchcommands
 from . import select as _select
 from . import tags as _tags
@@ -176,38 +175,6 @@ def _attach_nonfirst_empty_start_bar(global_skips):
         first_skip,
         tag=tag.append(_tags.function_name(_frame())),
     )
-
-
-def _attach_rhythm_annotation_spanner(command, selection):
-    if selection is None:
-        return
-    if not command.annotation_spanner_text:
-        return
-    leaves = []
-    for leaf in abjad.iterate.leaves(selection):
-        if abjad.get.parentage(leaf).get(abjad.OnBeatGraceContainer):
-            continue
-        leaves.append(leaf)
-    container = abjad.get.before_grace_container(leaves[0])
-    if container is not None:
-        leaves_ = abjad.select.leaves(container)
-        leaves[0:0] = leaves_
-    container = abjad.get.after_grace_container(leaves[-1])
-    if container is not None:
-        leaves_ = abjad.select.leaves(container)
-        leaves.extend(leaves_)
-    string = command.annotation_spanner_text
-    if string is None:
-        string = command._make_rhythm_annotation_string()
-    color = command.annotation_spanner_color or "#darkyellow"
-    command_ = _piecewisecommands.rhythm_annotation_spanner(
-        string,
-        abjad.Tweak(rf"- \tweak color {color}"),
-        abjad.Tweak(r"- \tweak staff-padding 8"),
-        leak_spanner_stop=True,
-        selector=lambda _: _select.leaves(_),
-    )
-    command_(leaves)
 
 
 # This exists because of an incompletely implemented behavior in LilyPond;
@@ -2465,7 +2432,6 @@ def postprocess_score(
     manifests: dict,
     *,
     all_music_in_part_containers=False,
-    allow_empty_selections=False,
     always_make_global_rests=False,
     attach_instruments_by_hand=False,
     clock_time_extra_offset=None,
@@ -2494,7 +2460,6 @@ def postprocess_score(
     assert isinstance(environment, _build.Environment), repr(environment)
     assert isinstance(manifests, dict), repr(manifests)
     assert isinstance(all_music_in_part_containers, bool)
-    assert isinstance(allow_empty_selections, bool)
     if clock_time_override is not None:
         assert isinstance(clock_time_override, abjad.MetronomeMark)
     assert isinstance(color_octaves, bool)

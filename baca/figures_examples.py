@@ -246,9 +246,8 @@ figures.py examples.
     >>> container = abjad.Container(tuplets)
     >>> rmakers.beam(tuplets)
     >>> rmakers.force_repeat_tie(container)
-    >>> selection = container[:]
-    >>> container[:] = []
-    >>> lilypond_file = abjad.illustrators.components(selection)
+    >>> components = abjad.mutate.eject_contents(container)
+    >>> lilypond_file = abjad.illustrators.components(components)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
