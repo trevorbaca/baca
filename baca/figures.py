@@ -134,7 +134,7 @@ def _get_start_offset(
 def _make_accelerando(leaves, treatment):
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
     assert treatment in ("accel", "rit")
-    tuplet = abjad.Tuplet((1, 1), leaves, hide=True)
+    tuplet = abjad.Tuplet("1:1", leaves, hide=False)
     if len(tuplet) == 1:
         return tuplet
     durations = [abjad.get.duration(_) for _ in leaves]

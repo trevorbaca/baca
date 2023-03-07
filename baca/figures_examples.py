@@ -435,7 +435,7 @@ figures.py examples.
                             ragged-right = ##t
                         }
                     }
-                \scaleDurations #'(1 . 1)
+                \times 1/1
                 {
                     \once \override Beam.grow-direction = #right
                     d'16 * 1328/1024
@@ -480,7 +480,7 @@ figures.py examples.
                             ragged-right = ##t
                         }
                     }
-                \scaleDurations #'(1 . 1)
+                \times 1/1
                 {
                     \once \override Beam.grow-direction = #right
                     fs''16 * 1552/1024
@@ -526,7 +526,7 @@ figures.py examples.
                             ragged-right = ##t
                         }
                     }
-                \scaleDurations #'(1 . 1)
+                \times 1/1
                 {
                     \once \override Beam.grow-direction = #right
                     af''16 * 1728/1024
@@ -575,7 +575,7 @@ figures.py examples.
                             ragged-right = ##t
                         }
                     }
-                \scaleDurations #'(1 . 1)
+                \times 1/1
                 {
                     \once \override Beam.grow-direction = #right
                     d'16 * 1872/1024
@@ -623,7 +623,7 @@ figures.py examples.
                             ragged-right = ##t
                         }
                     }
-                \scaleDurations #'(1 . 1)
+                \times 1/1
                 {
                     \once \override Beam.grow-direction = #right
                     af''16 * 2000/1024
@@ -706,7 +706,7 @@ figures.py examples.
                             ragged-right = ##t
                         }
                     }
-                \scaleDurations #'(1 . 1)
+                \times 1/1
                 {
                     \once \override Beam.grow-direction = #left
                     d'16 * 656/1024
@@ -751,7 +751,7 @@ figures.py examples.
                             ragged-right = ##t
                         }
                     }
-                \scaleDurations #'(1 . 1)
+                \times 1/1
                 {
                     \once \override Beam.grow-direction = #left
                     fs''16 * 512/1024
@@ -797,7 +797,7 @@ figures.py examples.
                             ragged-right = ##t
                         }
                     }
-                \scaleDurations #'(1 . 1)
+                \times 1/1
                 {
                     \once \override Beam.grow-direction = #left
                     af''16 * 432/1024
@@ -846,7 +846,7 @@ figures.py examples.
                             ragged-right = ##t
                         }
                     }
-                \scaleDurations #'(1 . 1)
+                \times 1/1
                 {
                     \once \override Beam.grow-direction = #left
                     d'16 * 368/1024
@@ -894,7 +894,7 @@ figures.py examples.
                             ragged-right = ##t
                         }
                     }
-                \scaleDurations #'(1 . 1)
+                \times 1/1
                 {
                     \once \override Beam.grow-direction = #left
                     af''16 * 336/1024
@@ -972,7 +972,7 @@ figures.py examples.
                             ragged-right = ##t
                         }
                     }
-                \scaleDurations #'(1 . 1)
+                \times 1/1
                 {
                     \once \override Beam.grow-direction = #right
                     \time 11/8
@@ -1021,7 +1021,7 @@ figures.py examples.
                             ragged-right = ##t
                         }
                     }
-                \scaleDurations #'(1 . 1)
+                \times 1/1
                 {
                     \once \override Beam.grow-direction = #left
                     ef''16 * 336/1024
@@ -1072,7 +1072,7 @@ figures.py examples.
                             ragged-right = ##t
                         }
                     }
-                \scaleDurations #'(1 . 1)
+                \times 1/1
                 {
                     \once \override Beam.grow-direction = #right
                     bf'16 * 1872/1024
@@ -1120,7 +1120,7 @@ figures.py examples.
                             ragged-right = ##t
                         }
                     }
-                \scaleDurations #'(1 . 1)
+                \times 1/1
                 {
                     \once \override Beam.grow-direction = #left
                     g''16 * 336/1024
@@ -1200,7 +1200,7 @@ figures.py examples.
                             ragged-right = ##t
                         }
                     }
-                \scaleDurations #'(1 . 1)
+                \times 1/1
                 {
                     \once \override Beam.grow-direction = #right
                     \time 13/8
@@ -1262,7 +1262,7 @@ figures.py examples.
                             ragged-right = ##t
                         }
                     }
-                \scaleDurations #'(1 . 1)
+                \times 1/1
                 {
                     \once \override Beam.grow-direction = #left
                     d'16 * 368/1024
@@ -1312,7 +1312,7 @@ figures.py examples.
                             ragged-right = ##t
                         }
                     }
-                \scaleDurations #'(1 . 1)
+                \times 1/1
                 {
                     \once \override Beam.grow-direction = #right
                     af''16 * 1872/1024
@@ -1373,7 +1373,7 @@ figures.py examples.
                             ragged-right = ##t
                         }
                     }
-                \scaleDurations #'(1 . 1)
+                \times 1/1
                 {
                     \once \override Beam.grow-direction = #left
                     g''16 * 368/1024
