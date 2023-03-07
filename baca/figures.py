@@ -169,74 +169,33 @@ def _make_accelerando_multipliers(durations, exponent) -> list[tuple[int, int]]:
     return pairs
 
 
-def _make_figure_tuplets(
-    talea,
-    treatments,
-    collections,
-    next_attack,
-    next_segment,
-    collection_index=None,
-    total_collections=None,
-) -> tuple[list[abjad.Tuplet], int, int]:
-    tuplets = []
-    if collection_index is None:
-        for i, segment in enumerate(collections):
-            tuplet, next_attack, next_segment = _make_figure_tuplet(
-                talea,
-                treatments,
-                segment,
-                next_attack,
-                next_segment,
-            )
-            tuplets.append(tuplet)
-    else:
-        assert len(collections) == 1, repr(collections)
-        segment = collections[0]
-        tuplet, next_attack, next_segment = _make_figure_tuplet(
-            talea,
-            treatments,
-            segment,
-            next_attack,
-            next_segment,
-        )
-        tuplets.append(tuplet)
-    assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
-    return tuplets, next_attack, next_segment
-
-
-def _make_figure_tuplet(
-    talea,
-    treatments,
-    segment,
-    next_attack,
-    next_segment,
-) -> tuple[abjad.Tuplet, int, int]:
-    next_segment += 1
+def _make_tuplet(
+    collection,
+    talea: rmakers.Talea,
+    treatment: int | str,
+    next_attack_index: int,
+) -> tuple[abjad.Tuplet, int]:
     leaves = []
-    if treatments:
-        treatment = abjad.CyclicTuple(treatments)[next_segment - 1]
-    else:
-        treatment = 0
-    if isinstance(segment, set | frozenset):
-        segment = [segment]
-    for pitch_expression in segment:
+    if isinstance(collection, set | frozenset):
+        collection = [collection]
+    for pitch_expression in collection:
         is_chord = False
         if isinstance(pitch_expression, set | frozenset):
             is_chord = True
         prototype = abjad.NumberedPitchClass
         if isinstance(pitch_expression, prototype):
             pitch_expression = pitch_expression.number
-        count = next_attack
+        count = next_attack_index
         while abjad.Fraction(*talea[count]) < 0:
-            next_attack += 1
+            next_attack_index += 1
             this_one = talea[count]
             duration = -abjad.Duration(*this_one)
             leaves_ = abjad.makers.make_leaves(
                 [None], [duration], tag=_tags.function_name(_frame(), n=1)
             )
             leaves.extend(leaves_)
-            count = next_attack
-        next_attack += 1
+            count = next_attack_index
+        next_attack_index += 1
         this_one = talea[count]
         duration = this_one
         assert 0 < abjad.Duration(duration), repr(duration)
@@ -262,23 +221,22 @@ def _make_figure_tuplet(
                 [pitch_expression], [duration], tag=_tags.function_name(_frame(), n=3)
             )
         leaves.extend(leaves_)
-        count = next_attack
+        count = next_attack_index
         while abjad.Fraction(*talea[count]) < 0 and not count % len(talea) == 0:
-            next_attack += 1
+            next_attack_index += 1
             this_one = talea[count]
             duration = -abjad.Duration(*this_one)
             leaves_ = abjad.makers.make_leaves(
                 [None], [duration], tag=_tags.function_name(_frame(), n=4)
             )
             leaves.extend(leaves_)
-            count = next_attack
+            count = next_attack_index
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
-    assert isinstance(talea, rmakers.Talea), repr(talea)
-    leaf_list = leaves
     if isinstance(treatment, int):
         extra_count = treatment
+        assert isinstance(talea, rmakers.Talea), repr(talea)
         denominator = talea.denominator
-        contents_duration = abjad.get.duration(leaf_list)
+        contents_duration = abjad.get.duration(leaves)
         pair = abjad.duration.with_denominator(contents_duration, denominator)
         contents_duration_pair = pair
         contents_count = contents_duration_pair[0]
@@ -291,41 +249,41 @@ def _make_figure_tuplet(
         new_contents_count = contents_count + extra_count
         tuplet_multiplier = abjad.Fraction(new_contents_count, contents_count)
         if not abjad.Duration(tuplet_multiplier).normalized():
-            message = f"{leaf_list!r} gives {tuplet_multiplier}"
+            message = f"{leaves!r} gives {tuplet_multiplier}"
             message += " with {contents_count} and {new_contents_count}."
             raise Exception(message)
         pair = abjad.duration.pair(tuplet_multiplier)
-        tuplet = abjad.Tuplet(pair, leaf_list)
+        tuplet = abjad.Tuplet(pair, leaves)
     elif treatment in ("accel", "rit"):
-        tuplet = _make_accelerando(leaf_list, ritardando=treatment == "rit")
+        tuplet = _make_accelerando(leaves, ritardando=treatment == "rit")
     elif isinstance(treatment, str) and ":" in treatment:
         numerator_str, denominator_str = treatment.split(":")
         numerator, denominator = int(numerator_str), int(denominator_str)
-        tuplet = abjad.Tuplet((denominator, numerator), leaf_list)
+        tuplet = abjad.Tuplet((denominator, numerator), leaves)
     elif treatment.__class__ is abjad.Duration:
         tuplet_duration = treatment
-        contents_duration = abjad.get.duration(leaf_list)
+        contents_duration = abjad.get.duration(leaves)
         multiplier = tuplet_duration / contents_duration
-        tuplet = abjad.Tuplet(multiplier, leaf_list)
+        tuplet = abjad.Tuplet(multiplier, leaves)
         if not abjad.Duration(tuplet.multiplier).normalized():
             tuplet.normalize_multiplier()
     elif isinstance(treatment, abjad.Fraction):
-        tuplet = abjad.Tuplet(treatment, leaf_list)
+        tuplet = abjad.Tuplet(treatment, leaves)
     elif isinstance(treatment, tuple) and len(treatment) == 2:
         tuplet_duration = abjad.Duration(treatment)
-        contents_duration = abjad.get.duration(leaf_list)
+        contents_duration = abjad.get.duration(leaves)
         multiplier = tuplet_duration / contents_duration
         pair = abjad.duration.pair(multiplier)
-        tuplet = abjad.Tuplet(pair, leaf_list)
+        tuplet = abjad.Tuplet(pair, leaves)
         if not abjad.Duration(tuplet.multiplier).normalized():
             tuplet.normalize_multiplier()
     else:
-        raise Exception(f"bad time treatment: {treatment!r}.")
+        raise Exception(f"bad treatment: {treatment!r}.")
     assert isinstance(tuplet, abjad.Tuplet)
     if tuplet.trivial():
         tuplet.hide = True
     assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
-    return tuplet, next_attack, next_segment
+    return tuplet, next_attack_index
 
 
 def _matches_pitch(pitched_leaf, pitch_object):
@@ -825,9 +783,9 @@ def figure(
     counts: typing.Sequence[int],
     denominator: int,
     *,
-    tsd: int | None = None,
-    treatments: typing.Sequence = (),
+    treatments: list[int | str] | None = None,
 ) -> list[abjad.Tuplet]:
+    treatments = treatments or []
     if hasattr(collections, "argument"):
         collections = collections.argument
     prototype = (
@@ -854,16 +812,20 @@ def figure(
             )
     assert all(isinstance(_, int) for _ in counts), repr(counts)
     talea = rmakers.Talea(counts=counts, denominator=denominator)
-    next_attack, next_segment = 0, 0
-    tuplets: list[abjad.Tuplet] = []
-    tuplets_, next_attack, next_segment = _make_figure_tuplets(
-        talea,
-        treatments,
-        collections,
-        next_attack,
-        next_segment,
-    )
-    tuplets.extend(tuplets_)
+    next_attack_index, next_segment_index, tuplets = 0, 0, []
+    for collection in collections:
+        next_segment_index += 1
+        if treatments:
+            treatment = abjad.CyclicTuple(treatments)[next_segment_index - 1]
+        else:
+            treatment = 0
+        tuplet, next_attack_index = _make_tuplet(
+            collection,
+            talea,
+            treatment,
+            next_attack_index,
+        )
+        tuplets.append(tuplet)
     assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
     return tuplets
 
@@ -872,7 +834,7 @@ def imbricate(
     container: abjad.Container,
     voice_name: str,
     segment: list,
-    *commands: typing.Any,
+    *,
     allow_unused_pitches: bool = False,
     by_pitch_class: bool = False,
     hocket: bool = False,
@@ -928,8 +890,6 @@ def imbricate(
         assert cursor.position is not None
         current, total = cursor.position - 1, len(cursor)
         raise Exception(f"{cursor!r} used only {current} of {total} pitches.")
-    for command in commands:
-        command(container)
     if not hocket:
         pleaves = _select.pleaves(container)
         assert isinstance(pleaves, list)
