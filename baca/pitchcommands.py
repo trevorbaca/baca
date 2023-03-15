@@ -611,10 +611,7 @@ def bass_to_octave(argument, n: int) -> None:
 
     ..  container:: example
 
-        >>> tuplets = baca.make_tuplets(
-        ...     [{0, 14, 28}],
-        ...     [1], 16
-        ... )
+        >>> tuplets = baca.make_tuplets([{0, 14, 28}], [1], 16)
         >>> rmakers.beam(tuplets)
         >>> _ = baca.bass_to_octave(tuplets, 4)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -637,10 +634,7 @@ def bass_to_octave(argument, n: int) -> None:
                 }
             >>
 
-        >>> tuplets = baca.make_tuplets(
-        ...     [{0, 14, 28}],
-        ...     [1], 16
-        ... )
+        >>> tuplets = baca.make_tuplets([{0, 14, 28}], [1], 16)
         >>> rmakers.beam(tuplets)
         >>> _ = baca.center_to_octave(tuplets, 4)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -663,10 +657,7 @@ def bass_to_octave(argument, n: int) -> None:
                 }
             >>
 
-        >>> tuplets = baca.make_tuplets(
-        ...     [{0, 14, 28}],
-        ...     [1], 16
-        ... )
+        >>> tuplets = baca.make_tuplets([{0, 14, 28}], [1], 16)
         >>> rmakers.beam(tuplets)
         >>> _ = baca.soprano_to_octave(tuplets, 4)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -693,9 +684,7 @@ def bass_to_octave(argument, n: int) -> None:
 
         Disjunct notes:
 
-        >>> tuplets = baca.make_tuplets(
-        ...     [[0, 14, 28]], [1], 16
-        ... )
+        >>> tuplets = baca.make_tuplets([[0, 14, 28]], [1], 16)
         >>> rmakers.beam(tuplets)
         >>> _ = baca.bass_to_octave(tuplets, 4)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -974,7 +963,9 @@ def bass_to_octave(argument, n: int) -> None:
         Octave-transposes music such that the lowest note appears in octave 3:
 
         >>> tuplets = baca.make_tuplets(
-        ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]], [5, -3], 32
+        ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
+        ...     [5, -3],
+        ...     32,
         ... )
         >>> rmakers.beam(tuplets)
         >>> baca.bass_to_octave(tuplets, 3)
@@ -1150,7 +1141,9 @@ def center_to_octave(argument, n: int) -> None:
     ..  container:: example
 
         >>> tuplets = baca.make_tuplets(
-        ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]], [5, -3], 32
+        ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
+        ...     [5, -3],
+        ...     32,
         ... )
         >>> rmakers.beam(tuplets)
         >>> baca.center_to_octave(tuplets, 3)
@@ -1466,10 +1459,10 @@ def displacement(argument, displacements: list[int]) -> None:
         Octave-displaces PLTs:
 
         >>> tuplets = baca.make_tuplets(
-        ...         3 * [[0, 2, 3]],
-        ...         [1, 1, 5, -1],
-        ...         16,
-        ...         treatments=["10:9", "8:7", "12:11"],
+        ...     3 * [[0, 2, 3]],
+        ...     [1, 1, 5, -1],
+        ...     16,
+        ...     treatments=["10:9", "8:7", "12:11"],
         ... )
         >>> baca.rests_around(tuplets, [2], [4], 16)
         >>> rmakers.beam(tuplets)
@@ -1535,11 +1528,7 @@ def displacement(argument, displacements: list[int]) -> None:
 
         Octave-displaces chords:
 
-        >>> tuplets = baca.make_tuplets(
-        ...     6 * [{0, 2, 3}],
-        ...     [4],
-        ...     16,
-        ... )
+        >>> tuplets = baca.make_tuplets(6 * [{0, 2, 3}], [4], 16)
         >>> baca.rests_around(tuplets, [2], [4], 16)
         >>> rmakers.beam(tuplets)
         >>> _ = baca.displacement(tuplets, [0, 0, -1, -1, 1, 1])
@@ -2114,7 +2103,8 @@ def register(
 
         >>> tuplets = baca.make_tuplets(
         ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
-        ...     [1], 16
+        ...     [1],
+        ...     16,
         ... )
         >>> rmakers.beam(tuplets)
         >>> _ = baca.register(tuplets, 15)
@@ -2222,10 +2212,7 @@ def register(
 
         Works with chords:
 
-        >>> tuplets = baca.make_tuplets(
-        ...     [{10, 12, 14}],
-        ...     [1], 16
-        ... )
+        >>> tuplets = baca.make_tuplets([{10, 12, 14}], [1], 16)
         >>> rmakers.beam(tuplets)
         >>> _ = baca.register(tuplets, -6)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -2253,10 +2240,10 @@ def register(
         Octave-transposes all PLTs to the octave rooted at -6:
 
         >>> tuplets = baca.make_tuplets(
-        ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...         [1, 1, 5, -1],
-        ...         16,
-        ...         treatments=["10:9"],
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     [1, 1, 5, -1],
+        ...     16,
+        ...     treatments=["10:9"],
         ... )
         >>> baca.rests_around(tuplets, [2], [4], 16)
         >>> rmakers.beam(tuplets)
@@ -2400,10 +2387,10 @@ def register(
         Octave-transposes all PLTs to an octave interpolated from -6 to 18:
 
         >>> tuplets = baca.make_tuplets(
-        ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...         [1, 1, 5, -1],
-        ...         16,
-        ...         treatments=["10:9"],
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     [1, 1, 5, -1],
+        ...     16,
+        ...     treatments=["10:9"],
         ... )
         >>> baca.rests_around(tuplets, [2], [4], 16)
         >>> rmakers.beam(tuplets)
@@ -3198,7 +3185,9 @@ def register(
         Selects tuplet -1:
 
         >>> tuplets = baca.make_tuplets(
-        ...     2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]], [1], 16
+        ...     2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]],
+        ...     [1],
+        ...     16,
         ... )
         >>> rmakers.beam(tuplets)
         >>> tuplet = baca.select.tuplet(tuplets, -1)
@@ -3873,7 +3862,9 @@ def soprano_to_octave(argument, n: int) -> None:
     ..  container:: example
 
         >>> tuplets = baca.make_tuplets(
-        ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]], [5, -3], 32
+        ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
+        ...     [5, -3],
+        ...     32,
         ... )
         >>> rmakers.beam(tuplets)
         >>> baca.soprano_to_octave(tuplets, 3)

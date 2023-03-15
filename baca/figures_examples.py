@@ -932,7 +932,12 @@ figures.py examples.
     ...     [10, 18, 16, 15, 20],
     ...     [19, 9, 0, 2, 10],
     ... ]
-    >>> tuplets = baca.make_tuplets(collections, [1, 1, 2], 8, treatments=[(1, 4), (3, 8)])
+    >>> tuplets = baca.make_tuplets(
+    ...     collections,
+    ...     [1, 1, 2],
+    ...     8,
+    ...     treatments=[(1, 4), (3, 8)],
+    ... )
     >>> rmakers.denominator(tuplets, (1, 16))
     >>> rmakers.beam(tuplets)
     >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -1184,7 +1189,12 @@ figures.py examples.
     Affixes rests to complete output when pattern is none:
 
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> tuplets = baca.make_tuplets(collections, [1], 16, treatments=["4:5", "5:6", "3:4"])
+    >>> tuplets = baca.make_tuplets(
+    ...     collections,
+    ...     [1],
+    ...     16,
+    ...     treatments=["4:5", "5:6", "3:4"],
+    ... )
     >>> baca.rests_around(tuplets, [1], [2], 16)
     >>> rmakers.beam(tuplets)
     >>> lilypond_file = abjad.illustrators.components(tuplets)

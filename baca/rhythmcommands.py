@@ -979,24 +979,17 @@ def make_tuplets(
     counts: list[int],
     denominator: int,
     *,
-    treatments: list[int | str] | None = None,
+    treatments: list[int | str | tuple] | None = None,
 ) -> list[abjad.Tuplet]:
-    assert isinstance(counts, list), repr(counts)
-    assert isinstance(denominator, int), repr(denominator)
-    treatments = treatments or []
-    if hasattr(collections, "argument"):
-        assert isinstance(collections, _section.DynamicScope), repr(collections)
+    if isinstance(collections, _section.DynamicScope):
         collections = collections.argument
     assert isinstance(collections, list), repr(collections)
-    prototype = (
-        abjad.PitchClassSegment,
-        abjad.PitchSegment,
-        set,
-        frozenset,
-    )
-    if isinstance(collections, prototype):
-        collections = [collections]
-    assert isinstance(collections, list), repr(collections)
+    assert isinstance(counts, list), repr(counts)
+    assert all(isinstance(_, int) for _ in counts), repr(counts)
+    assert isinstance(denominator, int), repr(denominator)
+    treatments = treatments or []
+    assert isinstance(treatments, list), repr(treatments)
+    assert all(isinstance(_, int | str | tuple) for _ in treatments), repr(treatments)
     collection_prototype = (
         abjad.PitchClassSegment,
         abjad.PitchSegment,
@@ -1011,7 +1004,6 @@ def make_tuplets(
             assert all(isinstance(_, pitch_prototype) for _ in collection), repr(
                 collection
             )
-    assert all(isinstance(_, int) for _ in counts), repr(counts)
     talea = rmakers.Talea(counts=counts, denominator=denominator)
     next_attack_index, next_segment_index, tuplets = 0, 0, []
     for collection in collections:
