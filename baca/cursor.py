@@ -105,9 +105,10 @@ class Cursor:
                         raise Exception(f"cursor only {len(self.source)}.")
         if self.singletons:
             if len(result) == 0:
-                return None
+                return []
             elif len(result) == 1:
                 result = result[0]
         if exhausted and not self.exhausted:
             raise Exception(f"cusor not exhausted: {self!r}.")
+        # assert isinstance(result, list), repr(result)
         return result

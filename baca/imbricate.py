@@ -10,6 +10,8 @@ from .enums import enums as _enums
 def _matches_pitch(pitched_leaf, pitch_object):
     if pitch_object is None:
         return False
+    if pitch_object == []:
+        return False
     if isinstance(pitched_leaf, abjad.Note):
         written_pitches = [pitched_leaf.written_pitch]
     elif isinstance(pitched_leaf, abjad.Chord):

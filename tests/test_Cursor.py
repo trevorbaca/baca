@@ -210,5 +210,5 @@ def test_Cursor_next_06():
     assert cursor.next() == "da capo"
     assert cursor.next() == "cs'8."
     assert cursor.next() == "rit."
-    assert cursor.next() is None
-    assert cursor.next() is None
+    assert cursor.next() == []
+    assert cursor.next() == []
