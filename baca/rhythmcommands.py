@@ -10,6 +10,7 @@ from inspect import currentframe as _frame
 import abjad
 from abjadext import rmakers
 
+from . import section as _section
 from . import select as _select
 from . import tags as _tags
 from .enums import enums as _enums
@@ -981,9 +982,12 @@ def make_tuplets(
     treatments: list[int | str] | None = None,
 ) -> list[abjad.Tuplet]:
     assert isinstance(counts, list), repr(counts)
+    assert isinstance(denominator, int), repr(denominator)
     treatments = treatments or []
     if hasattr(collections, "argument"):
+        assert isinstance(collections, _section.DynamicScope), repr(collections)
         collections = collections.argument
+    # assert isinstance(collections, list), repr(collections)
     prototype = (
         abjad.PitchClassSegment,
         abjad.PitchSegment,
@@ -992,6 +996,7 @@ def make_tuplets(
     )
     if isinstance(collections, prototype):
         collections = [collections]
+    assert isinstance(collections, list), repr(collections)
     collection_prototype = (
         abjad.PitchClassSegment,
         abjad.PitchSegment,
