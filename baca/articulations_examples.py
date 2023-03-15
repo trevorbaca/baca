@@ -53,7 +53,7 @@ articulations.py examples.
 
     **STOP-ON-STRING.** Attaches stop-on-string to pitched head -1:
 
-    >>> tuplets = baca.figure(
+    >>> tuplets = baca.make_tuplets(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,

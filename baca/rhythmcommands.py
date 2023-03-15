@@ -82,6 +82,7 @@ def _make_tuplet(
     leaves = []
     if isinstance(collection, set | frozenset):
         collection = [collection]
+    # assert isinstance(collection, list), repr(collection)
     for pitch_expression in collection:
         is_chord = False
         if isinstance(pitch_expression, set | frozenset):
@@ -499,58 +500,6 @@ def attach_before_grace_containers(before_grace_containers, tuplet):
         if before_grace_container is None:
             continue
         abjad.attach(before_grace_container, logical_tie.head, tag=tag)
-
-
-def figure(
-    collections,
-    counts: typing.Sequence[int],
-    denominator: int,
-    *,
-    treatments: list[int | str] | None = None,
-) -> list[abjad.Tuplet]:
-    treatments = treatments or []
-    if hasattr(collections, "argument"):
-        collections = collections.argument
-    prototype = (
-        abjad.PitchClassSegment,
-        abjad.PitchSegment,
-        set,
-        frozenset,
-    )
-    if isinstance(collections, prototype):
-        collections = [collections]
-    collection_prototype = (
-        abjad.PitchClassSegment,
-        abjad.PitchSegment,
-        abjad.PitchSet,
-        list,
-        set,
-    )
-    pitch_prototype = (int, float, str, abjad.NumberedPitch)
-    for collection in collections:
-        assert isinstance(collection, collection_prototype), repr(collection)
-        if isinstance(collection, list | set):
-            assert all(isinstance(_, pitch_prototype) for _ in collection), repr(
-                collection
-            )
-    assert all(isinstance(_, int) for _ in counts), repr(counts)
-    talea = rmakers.Talea(counts=counts, denominator=denominator)
-    next_attack_index, next_segment_index, tuplets = 0, 0, []
-    for collection in collections:
-        next_segment_index += 1
-        if treatments:
-            treatment = abjad.CyclicTuple(treatments)[next_segment_index - 1]
-        else:
-            treatment = 0
-        tuplet, next_attack_index = _make_tuplet(
-            collection,
-            talea,
-            treatment,
-            next_attack_index,
-        )
-        tuplets.append(tuplet)
-    assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
-    return tuplets
 
 
 def get_previous_rhythm_state(
@@ -1022,6 +971,59 @@ def make_tied_repeated_durations(
         assert isinstance(component, abjad.Leaf | abjad.Tuplet)
         music.append(component)
     return music
+
+
+def make_tuplets(
+    collections,
+    counts: list[int],
+    denominator: int,
+    *,
+    treatments: list[int | str] | None = None,
+) -> list[abjad.Tuplet]:
+    assert isinstance(counts, list), repr(counts)
+    treatments = treatments or []
+    if hasattr(collections, "argument"):
+        collections = collections.argument
+    prototype = (
+        abjad.PitchClassSegment,
+        abjad.PitchSegment,
+        set,
+        frozenset,
+    )
+    if isinstance(collections, prototype):
+        collections = [collections]
+    collection_prototype = (
+        abjad.PitchClassSegment,
+        abjad.PitchSegment,
+        abjad.PitchSet,
+        list,
+        set,
+    )
+    pitch_prototype = (int, float, str, abjad.NumberedPitch)
+    for collection in collections:
+        assert isinstance(collection, collection_prototype), repr(collection)
+        if isinstance(collection, list | set):
+            assert all(isinstance(_, pitch_prototype) for _ in collection), repr(
+                collection
+            )
+    assert all(isinstance(_, int) for _ in counts), repr(counts)
+    talea = rmakers.Talea(counts=counts, denominator=denominator)
+    next_attack_index, next_segment_index, tuplets = 0, 0, []
+    for collection in collections:
+        next_segment_index += 1
+        if treatments:
+            treatment = abjad.CyclicTuple(treatments)[next_segment_index - 1]
+        else:
+            treatment = 0
+        tuplet, next_attack_index = _make_tuplet(
+            collection,
+            talea,
+            treatment,
+            next_attack_index,
+        )
+        tuplets.append(tuplet)
+    assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
+    return tuplets
 
 
 def nest(tuplets: list[abjad.Tuplet], treatment: str) -> abjad.Tuplet:

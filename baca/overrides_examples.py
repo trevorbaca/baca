@@ -88,7 +88,7 @@ overrides.py examples.
     Overrides beam positions:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1],
     ...         16,
@@ -154,7 +154,7 @@ overrides.py examples.
     Overrides dynamic line spanner staff padding:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -246,7 +246,7 @@ overrides.py examples.
     Up-overrides dynamic line spanner direction:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -344,7 +344,7 @@ overrides.py examples.
     ...     return result
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -830,7 +830,7 @@ overrides.py examples.
     Overrides note-head style:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -907,7 +907,7 @@ overrides.py examples.
     Overrides note-head style:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -984,7 +984,7 @@ overrides.py examples.
     Down-overrides repeat tie direction:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[11, 11, 12], [11, 11, 11], [11]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -1067,7 +1067,7 @@ overrides.py examples.
     Up-overrides repeat tie direction:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[11, 11, 12], [11, 11, 11], [11]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -1150,7 +1150,7 @@ overrides.py examples.
     Down-overrides direction of rests:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -1227,7 +1227,7 @@ overrides.py examples.
     Overrides rest position:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -1304,7 +1304,7 @@ overrides.py examples.
     Makes rests transparent:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -1381,7 +1381,7 @@ overrides.py examples.
     Up-overrides rest direction:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -1458,7 +1458,7 @@ overrides.py examples.
     Overrides script color:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -1545,7 +1545,7 @@ overrides.py examples.
     Down-overrides script direction:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -1632,7 +1632,7 @@ overrides.py examples.
     Overrides script extra offset:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -1718,7 +1718,7 @@ overrides.py examples.
     Up-overrides script direction:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -1811,7 +1811,7 @@ overrides.py examples.
     ...     return runs
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -1902,7 +1902,7 @@ overrides.py examples.
     ...     return lists
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -1993,7 +1993,7 @@ overrides.py examples.
     Overrides stem color:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -2070,7 +2070,7 @@ overrides.py examples.
     Down-overrides stem direction pitched leaves:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -2147,7 +2147,7 @@ overrides.py examples.
     Up-overrides stem direction:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -2224,7 +2224,7 @@ overrides.py examples.
     Overrides sustain pedal staff padding:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -2314,7 +2314,7 @@ overrides.py examples.
     ...     return result
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -2400,7 +2400,7 @@ overrides.py examples.
     ...     return result
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -2486,7 +2486,7 @@ overrides.py examples.
     ...     return result
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -2572,7 +2572,7 @@ overrides.py examples.
     ...     return result
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -2658,7 +2658,7 @@ overrides.py examples.
     ...     return result
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -2739,7 +2739,7 @@ overrides.py examples.
     Overrides text spanner staff padding:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -2827,7 +2827,7 @@ overrides.py examples.
     Down-overrides tie direction:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[11, 11, 12], [11, 11, 11], [11]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -2901,7 +2901,7 @@ overrides.py examples.
     Up-overrides tie direction:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[11, 11, 12], [11, 11, 11], [11]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -2973,7 +2973,7 @@ overrides.py examples.
     Overrides time signature extra offset:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -3050,7 +3050,7 @@ overrides.py examples.
     Makes all time signatures transparent:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -3127,7 +3127,7 @@ overrides.py examples.
     Down-overrides tuplet bracket direction:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -3204,7 +3204,7 @@ overrides.py examples.
     Overrides tuplet bracket extra offset:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -3282,7 +3282,7 @@ overrides.py examples.
     Overrides tuplet bracket staff padding:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -3356,7 +3356,7 @@ overrides.py examples.
     Up-overrides tuplet bracket direction:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
@@ -3433,7 +3433,7 @@ overrides.py examples.
     Overrides tuplet number extra offset:
 
     >>> def make_score():
-    ...     tuplets = baca.figure(
+    ...     tuplets = baca.make_tuplets(
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,

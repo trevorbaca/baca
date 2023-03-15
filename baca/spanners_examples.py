@@ -68,7 +68,7 @@ spanners.py examples
 
     Attaches ottava indicators to trimmed leaves:
 
-    >>> tuplets = baca.figure(
+    >>> tuplets = baca.make_tuplets(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -140,7 +140,7 @@ spanners.py examples
 
     Attaches ottava bassa indicators to trimmed leaves:
 
-    >>> tuplets = baca.figure(
+    >>> tuplets = baca.make_tuplets(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -212,7 +212,7 @@ spanners.py examples
 
     Attaches slur to trimmed leaves:
 
-    >>> tuplets = baca.figure(
+    >>> tuplets = baca.make_tuplets(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -287,7 +287,7 @@ spanners.py examples
 
     Pedals leaves:
 
-    >>> tuplets = baca.figure(
+    >>> tuplets = baca.make_tuplets(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -362,7 +362,7 @@ spanners.py examples
 
     Attaches trill spanner to trimmed leaves (leaked to the right):
 
-    >>> tuplets = baca.figure(
+    >>> tuplets = baca.make_tuplets(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -435,7 +435,7 @@ spanners.py examples
     Attaches trill to trimmed leaves (leaked to the right) in every
     run:
 
-    >>> tuplets = baca.figure(
+    >>> tuplets = baca.make_tuplets(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -516,7 +516,7 @@ spanners.py examples
 
     Tweaks trill spanner:
 
-    >>> tuplets = baca.figure(
+    >>> tuplets = baca.make_tuplets(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
