@@ -66,8 +66,11 @@ def imbricate(
     segment = abjad.sequence.flatten(segment, depth=-1)
     if by_pitch_class:
         segment = [abjad.NumberedPitchClass(_) for _ in segment]
-    cursor = _cursor.Cursor(singletons=True, source=segment, suppress_exception=True)
+    cursor = _cursor.Cursor(source=segment, suppress_exception=True)
     pitch_number = cursor.next()
+    if isinstance(pitch_number, list):
+        assert len(pitch_number) == 1
+        pitch_number = pitch_number[0]
     original_logical_ties = abjad.select.logical_ties(original_container)
     logical_ties = abjad.select.logical_ties(container)
     pairs = zip(logical_ties, original_logical_ties)
@@ -82,6 +85,12 @@ def imbricate(
         elif _matches_pitch(logical_tie.head, pitch_number):
             _trim_matching_chord(logical_tie, pitch_number)
             pitch_number = cursor.next()
+            if isinstance(pitch_number, list):
+                if pitch_number == []:
+                    pass
+                else:
+                    assert len(pitch_number) == 1, repr(pitch_number)
+                    pitch_number = pitch_number[0]
             if truncate_ties:
                 head = logical_tie.head
                 tail = logical_tie.tail

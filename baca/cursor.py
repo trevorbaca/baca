@@ -18,13 +18,11 @@ class Cursor:
     source: typing.Sequence = ()
     cyclic: bool = False
     position: int | None = None
-    singletons: bool = False
     suppress_exception: bool = False
 
     def __post_init__(self):
         assert isinstance(self.cyclic, bool), repr(self.cyclic)
         assert isinstance(self.position, int | type(None)), repr(self.position)
-        assert isinstance(self.singletons, bool), repr(self.singletons)
         assert isinstance(self.suppress_exception, bool), repr(self.suppress_exception)
 
     def _source(self):
@@ -103,12 +101,7 @@ class Cursor:
                 except IndexError:
                     if not self.suppress_exception:
                         raise Exception(f"cursor only {len(self.source)}.")
-        if self.singletons:
-            if len(result) == 0:
-                return []
-            elif len(result) == 1:
-                result = result[0]
         if exhausted and not self.exhausted:
             raise Exception(f"cusor not exhausted: {self!r}.")
-        # assert isinstance(result, list), repr(result)
+        assert isinstance(result, list), repr(result)
         return result
