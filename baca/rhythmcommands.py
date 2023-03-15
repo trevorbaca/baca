@@ -987,7 +987,7 @@ def make_tuplets(
     if hasattr(collections, "argument"):
         assert isinstance(collections, _section.DynamicScope), repr(collections)
         collections = collections.argument
-    # assert isinstance(collections, list), repr(collections)
+    assert isinstance(collections, list), repr(collections)
     prototype = (
         abjad.PitchClassSegment,
         abjad.PitchSegment,
