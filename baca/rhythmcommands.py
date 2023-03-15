@@ -80,17 +80,25 @@ def _make_tuplet(
     treatment: int | str,
     next_attack_index: int,
 ) -> tuple[abjad.Tuplet, int]:
+    collection_prototype = (
+        abjad.PitchClassSegment,
+        abjad.PitchSegment,
+        abjad.PitchSet,
+        list,
+        set,
+    )
+    assert isinstance(collection, collection_prototype), repr(collection)
     leaves = []
     if isinstance(collection, set | frozenset):
         collection = [collection]
-    # assert isinstance(collection, list), repr(collection)
     for pitch_expression in collection:
         is_chord = False
         if isinstance(pitch_expression, set | frozenset):
             is_chord = True
-        prototype = abjad.NumberedPitchClass
-        if isinstance(pitch_expression, prototype):
+        if isinstance(pitch_expression, abjad.NumberedPitchClass | abjad.NumberedPitch):
             pitch_expression = pitch_expression.number
+        # print(pitch_expression)
+        # assert isinstance(pitch_expression, int), repr(pitch_expression)
         count = next_attack_index
         while abjad.Fraction(*talea[count]) < 0:
             next_attack_index += 1
@@ -175,7 +183,8 @@ def _make_tuplet(
             tuplet.normalize_multiplier()
     elif isinstance(treatment, abjad.Fraction):
         tuplet = abjad.Tuplet(treatment, leaves)
-    elif isinstance(treatment, tuple) and len(treatment) == 2:
+    elif isinstance(treatment, tuple):
+        assert len(treatment) == 2, repr(treatment)
         tuplet_duration = abjad.Duration(treatment)
         contents_duration = abjad.get.duration(leaves)
         multiplier = tuplet_duration / contents_duration
@@ -997,19 +1006,17 @@ def make_tuplets(
         list,
         set,
     )
-    pitch_prototype = (int, float, str, abjad.NumberedPitch)
+    prototype = (int, float, str, abjad.NumberedPitch)
     for collection in collections:
         assert isinstance(collection, collection_prototype), repr(collection)
         if isinstance(collection, list | set):
-            assert all(isinstance(_, pitch_prototype) for _ in collection), repr(
-                collection
-            )
+            assert all(isinstance(_, prototype) for _ in collection), repr(collection)
     talea = rmakers.Talea(counts=counts, denominator=denominator)
-    next_attack_index, next_segment_index, tuplets = 0, 0, []
-    for collection in collections:
-        next_segment_index += 1
+    next_attack_index, tuplets = 0, []
+    for i, collection in enumerate(collections):
+        assert isinstance(collection, collection_prototype)
         if treatments:
-            treatment = abjad.CyclicTuple(treatments)[next_segment_index - 1]
+            treatment = abjad.CyclicTuple(treatments)[i]
         else:
             treatment = 0
         tuplet, next_attack_index = _make_tuplet(
