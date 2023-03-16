@@ -312,7 +312,7 @@ commands.py examles
 
     Effort dynamics:
 
-    >>> tuplets = baca.make_tuplets(
+    >>> tuplets = baca.from_collections(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -925,7 +925,7 @@ commands.py examles
 
     Colors leaves:
 
-    >>> tuplets = baca.make_tuplets(
+    >>> tuplets = baca.from_collections(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -1011,7 +1011,7 @@ commands.py examles
     ...     result = abjad.select.tuplet(argument, 1)
     ...     result = abjad.select.leaves(result)
     ...     return result
-    >>> tuplets = baca.make_tuplets(
+    >>> tuplets = baca.from_collections(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
@@ -1429,7 +1429,7 @@ commands.py examles
 
     Labels pitch names:
 
-    >>> tuplets = baca.make_tuplets(
+    >>> tuplets = baca.from_collections(
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,

@@ -19,7 +19,7 @@ bcgs.py examples.
     ...         collection,
     ...         baca.LMR(),
     ...     )
-    ...     tuplets_ = baca.make_tuplets([collection], [1], 8)
+    ...     tuplets_ = baca.from_collections([collection], [1], 8)
     ...     baca.attach_before_grace_containers(containers, tuplets_[0])
     ...     tuplets.extend(tuplets_)
 
@@ -116,7 +116,7 @@ bcgs.py examples.
     ...         baca.LMR(),
     ...         duration=abjad.Duration(1, 8),
     ...     )
-    ...     tuplets_ = baca.make_tuplets([collection], [1], 8)
+    ...     tuplets_ = baca.from_collections([collection], [1], 8)
     ...     baca.attach_before_grace_containers(containers, tuplets_[0])
     ...     tuplets.extend(tuplets_)
 
@@ -216,7 +216,7 @@ bcgs.py examples.
     ...             right_cyclic=True,
     ...         ),
     ...     )
-    ...     tuplets_ = baca.make_tuplets([collection], [1], 8)
+    ...     tuplets_ = baca.from_collections([collection], [1], 8)
     ...     baca.attach_before_grace_containers(containers, tuplets_[0])
     ...     tuplets.extend(tuplets_)
 
@@ -322,7 +322,7 @@ bcgs.py examples.
     ...             left_cyclic=True,
     ...         ),
     ...     )
-    ...     tuplets_ = baca.make_tuplets([collection], [1], 8)
+    ...     tuplets_ = baca.from_collections([collection], [1], 8)
     ...     baca.attach_before_grace_containers(containers, tuplets_[0])
     ...     tuplets.extend(tuplets_)
 
@@ -430,7 +430,7 @@ bcgs.py examples.
     ...             right_length=3,
     ...         ),
     ...     )
-    ...     tuplets_ = baca.make_tuplets([collection], [1], 8)
+    ...     tuplets_ = baca.from_collections([collection], [1], 8)
     ...     baca.attach_before_grace_containers(containers, tuplets_[0])
     ...     tuplets.extend(tuplets_)
 
@@ -538,7 +538,7 @@ bcgs.py examples.
     ...         collection,
     ...         baca.lmr(left_length=1),
     ...     )
-    ...     tuplets_ = baca.make_tuplets([collection], [1], 8)
+    ...     tuplets_ = baca.from_collections([collection], [1], 8)
     ...     baca.attach_before_grace_containers(containers, tuplets_[0])
     ...     tuplets.extend(tuplets_)
 
@@ -640,7 +640,7 @@ bcgs.py examples.
     ...         collection,
     ...         baca.LMR(),
     ...     )
-    ...     tuplets_ = baca.make_tuplets([collection], [1], 4)
+    ...     tuplets_ = baca.from_collections([collection], [1], 4)
     ...     baca.attach_before_grace_containers(containers, tuplets_[0])
     ...     tuplets.extend(tuplets_)
 

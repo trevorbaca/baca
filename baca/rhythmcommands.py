@@ -918,7 +918,7 @@ def make_tied_repeated_durations(
     return music
 
 
-def make_tuplets(
+def from_collections(
     collections,
     counts: list[int],
     denominator: int,
