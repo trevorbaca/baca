@@ -16,65 +16,7 @@ from . import tags as _tags
 from .enums import enums as _enums
 
 
-def _make_accelerando(leaves, *, ritardando=False):
-    assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
-    tuplet = abjad.Tuplet("1:1", leaves, hide=False)
-    if len(tuplet) == 1:
-        return tuplet
-    if ritardando:
-        exponent = 1.625
-    else:
-        exponent = 0.625
-    durations = [abjad.get.duration(_) for _ in leaves]
-    multipliers = _make_accelerando_multipliers(durations, exponent)
-    assert len(leaves) == len(multipliers)
-    for multiplier, leaf in zip(multipliers, leaves):
-        leaf.multiplier = multiplier
-    rmakers.feather_beam([tuplet])
-    rmakers.duration_bracket(tuplet)
-    return tuplet
-
-
-def _make_accelerando_multipliers(durations, exponent) -> list[tuple[int, int]]:
-    sums = abjad.math.cumulative_sums(durations)
-    generator = abjad.sequence.nwise(sums, n=2)
-    pairs = list(generator)
-    total_duration = pairs[-1][-1]
-    start_offsets = [_[0] for _ in pairs]
-    start_offsets = [_ / total_duration for _ in start_offsets]
-    start_offsets_ = []
-    for start_offset in start_offsets:
-        start_offset_ = rmakers.rmakers._interpolate_exponential(
-            0, total_duration, start_offset, exponent
-        )
-        start_offsets_.append(start_offset_)
-    start_offsets_.append(float(total_duration))
-    durations_ = abjad.math.difference_series(start_offsets_)
-    durations_ = rmakers.rmakers._round_durations(durations_, 2**10)
-    current_duration = sum(durations_)
-    if current_duration < total_duration:
-        missing_duration = total_duration - current_duration
-        if durations_[0] < durations_[-1]:
-            durations_[-1] += missing_duration
-        else:
-            durations_[0] += missing_duration
-    elif total_duration < current_duration:
-        extra_duration = current_duration - total_duration
-        if durations_[0] < durations_[-1]:
-            durations_[-1] -= extra_duration
-        else:
-            durations_[0] -= extra_duration
-    assert sum(durations_) == total_duration
-    pairs = []
-    assert len(durations) == len(durations_)
-    for duration_, duration in zip(durations_, durations):
-        fraction = duration_ / duration
-        pair = abjad.duration.with_denominator(fraction, 2**10)
-        pairs.append(pair)
-    return pairs
-
-
-def _make_tuplet(
+def _from_collection(
     collection,
     talea: rmakers.Talea,
     treatment: int | str | abjad.Duration,
@@ -125,15 +67,73 @@ def _make_tuplet(
             leaves.extend(leaves_)
             count = next_attack_index
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
+    tuplet = abjad.Tuplet("1:1", leaves)
     if treatment in ("accel", "rit"):
-        tuplet = _make_accelerando(leaves, ritardando=treatment == "rit")
+        _make_accelerando(tuplet, ritardando=treatment == "rit")
     else:
-        tuplet = abjad.Tuplet("1:1", leaves)
         prolate(tuplet, treatment, denominator=talea.denominator)
     if tuplet.trivial():
         tuplet.hide = True
     assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
     return tuplet, next_attack_index
+
+
+def _make_accelerando(tuplet, *, ritardando=False):
+    if len(tuplet) == 1:
+        return tuplet
+    tuplet.hide = False
+    if ritardando:
+        exponent = 1.625
+    else:
+        exponent = 0.625
+    leaves = abjad.select.leaves(tuplet)
+    durations = [abjad.get.duration(_) for _ in leaves]
+    multipliers = _make_accelerando_multipliers(durations, exponent)
+    assert len(leaves) == len(multipliers)
+    for multiplier, leaf in zip(multipliers, leaves):
+        leaf.multiplier = multiplier
+    rmakers.feather_beam([tuplet])
+    rmakers.duration_bracket(tuplet)
+    return tuplet
+
+
+def _make_accelerando_multipliers(durations, exponent) -> list[tuple[int, int]]:
+    sums = abjad.math.cumulative_sums(durations)
+    generator = abjad.sequence.nwise(sums, n=2)
+    pairs = list(generator)
+    total_duration = pairs[-1][-1]
+    start_offsets = [_[0] for _ in pairs]
+    start_offsets = [_ / total_duration for _ in start_offsets]
+    start_offsets_ = []
+    for start_offset in start_offsets:
+        start_offset_ = rmakers.rmakers._interpolate_exponential(
+            0, total_duration, start_offset, exponent
+        )
+        start_offsets_.append(start_offset_)
+    start_offsets_.append(float(total_duration))
+    durations_ = abjad.math.difference_series(start_offsets_)
+    durations_ = rmakers.rmakers._round_durations(durations_, 2**10)
+    current_duration = sum(durations_)
+    if current_duration < total_duration:
+        missing_duration = total_duration - current_duration
+        if durations_[0] < durations_[-1]:
+            durations_[-1] += missing_duration
+        else:
+            durations_[0] += missing_duration
+    elif total_duration < current_duration:
+        extra_duration = current_duration - total_duration
+        if durations_[0] < durations_[-1]:
+            durations_[-1] -= extra_duration
+        else:
+            durations_[0] -= extra_duration
+    assert sum(durations_) == total_duration
+    pairs = []
+    assert len(durations) == len(durations_)
+    for duration_, duration in zip(durations_, durations):
+        fraction = duration_ / duration
+        pair = abjad.duration.with_denominator(fraction, 2**10)
+        pairs.append(pair)
+    return pairs
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -445,6 +445,54 @@ def attach_before_grace_containers(before_grace_containers, tuplet):
         if before_grace_container is None:
             continue
         abjad.attach(before_grace_container, logical_tie.head, tag=tag)
+
+
+def from_collections(
+    collections,
+    counts: list[int],
+    denominator: int,
+    *,
+    treatments: list[int | str | tuple] | None = None,
+) -> list[abjad.Tuplet]:
+    if isinstance(collections, _section.DynamicScope):
+        collections = collections.argument
+    assert isinstance(collections, list), repr(collections)
+    assert isinstance(counts, list), repr(counts)
+    assert all(isinstance(_, int) for _ in counts), repr(counts)
+    assert isinstance(denominator, int), repr(denominator)
+    treatments = treatments or []
+    assert isinstance(treatments, list), repr(treatments)
+    tt = (int, str, abjad.Duration)
+    assert all(isinstance(_, tt) for _ in treatments), repr(treatments)
+    collection_prototype = (
+        abjad.PitchClassSegment,
+        abjad.PitchSegment,
+        abjad.PitchSet,
+        list,
+        set,
+    )
+    prototype = (int, float, str, abjad.NumberedPitch)
+    for collection in collections:
+        assert isinstance(collection, collection_prototype), repr(collection)
+        if isinstance(collection, list | set):
+            assert all(isinstance(_, prototype) for _ in collection), repr(collection)
+    talea = rmakers.Talea(counts=counts, denominator=denominator)
+    next_attack_index, tuplets = 0, []
+    for i, collection in enumerate(collections):
+        assert isinstance(collection, collection_prototype)
+        if treatments:
+            treatment = abjad.CyclicTuple(treatments)[i]
+        else:
+            treatment = 0
+        tuplet, next_attack_index = _from_collection(
+            collection,
+            talea,
+            treatment,
+            next_attack_index,
+        )
+        tuplets.append(tuplet)
+    assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
+    return tuplets
 
 
 def get_previous_rhythm_state(
@@ -918,54 +966,6 @@ def make_tied_repeated_durations(
     return music
 
 
-def from_collections(
-    collections,
-    counts: list[int],
-    denominator: int,
-    *,
-    treatments: list[int | str | tuple] | None = None,
-) -> list[abjad.Tuplet]:
-    if isinstance(collections, _section.DynamicScope):
-        collections = collections.argument
-    assert isinstance(collections, list), repr(collections)
-    assert isinstance(counts, list), repr(counts)
-    assert all(isinstance(_, int) for _ in counts), repr(counts)
-    assert isinstance(denominator, int), repr(denominator)
-    treatments = treatments or []
-    assert isinstance(treatments, list), repr(treatments)
-    tt = (int, str, abjad.Duration)
-    assert all(isinstance(_, tt) for _ in treatments), repr(treatments)
-    collection_prototype = (
-        abjad.PitchClassSegment,
-        abjad.PitchSegment,
-        abjad.PitchSet,
-        list,
-        set,
-    )
-    prototype = (int, float, str, abjad.NumberedPitch)
-    for collection in collections:
-        assert isinstance(collection, collection_prototype), repr(collection)
-        if isinstance(collection, list | set):
-            assert all(isinstance(_, prototype) for _ in collection), repr(collection)
-    talea = rmakers.Talea(counts=counts, denominator=denominator)
-    next_attack_index, tuplets = 0, []
-    for i, collection in enumerate(collections):
-        assert isinstance(collection, collection_prototype)
-        if treatments:
-            treatment = abjad.CyclicTuple(treatments)[i]
-        else:
-            treatment = 0
-        tuplet, next_attack_index = _make_tuplet(
-            collection,
-            talea,
-            treatment,
-            next_attack_index,
-        )
-        tuplets.append(tuplet)
-    assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
-    return tuplets
-
-
 def nest(tuplets: list[abjad.Tuplet], treatment: str) -> abjad.Tuplet:
     assert isinstance(tuplets, list), repr(tuplets)
     assert all(isinstance(_, abjad.Tuplet) for _ in tuplets), repr(tuplets)
@@ -1016,6 +1016,10 @@ def prolate(tuplet, treatment, denominator=None):
         multiplier = tuplet_duration / contents_duration
         pair = abjad.duration.pair(multiplier)
         multiplier = pair
+    elif treatment in ("accel", "rit"):
+        multiplier = (1, 1)
+        ritardando = treatment == "rit"
+        _make_accelerando(tuplet, ritardando=ritardando)
     else:
         raise Exception(f"bad treatment: {treatment!r}.")
     tuplet.multiplier = multiplier
