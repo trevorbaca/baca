@@ -66,7 +66,7 @@ from .piecewisecommands import (
     xfb_spanner,
 )
 from .pitchcommands import *
-from .rhythmcommands import *
+from .rhythm import *
 from .section import scope, time_signatures
 from .spannercommands import (
     beam,
