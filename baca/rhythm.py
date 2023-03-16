@@ -16,60 +16,6 @@ from . import tags as _tags
 from .enums import enums as _enums
 
 
-def _from_collection(
-    collection,
-    talea: rmakers.Talea,
-    next_attack_index: int,
-) -> tuple[abjad.Tuplet, int]:
-    collection_prototype = (
-        abjad.PitchClassSegment,
-        abjad.PitchSegment,
-        abjad.PitchSet,
-        list,
-        set,
-    )
-    assert isinstance(collection, collection_prototype), repr(collection)
-    leaves = []
-    if isinstance(collection, set | frozenset):
-        collection = [tuple(collection)]
-    for pitch_expression in collection:
-        pitch_expression = getattr(pitch_expression, "number", pitch_expression)
-        prototype = (int, float, str, tuple)
-        assert isinstance(pitch_expression, prototype), repr(pitch_expression)
-        count = next_attack_index
-        while abjad.Fraction(*talea[count]) < 0:
-            next_attack_index += 1
-            this_one = talea[count]
-            duration = -abjad.Duration(*this_one)
-            leaves_ = abjad.makers.make_leaves(
-                [None], [duration], tag=_tags.function_name(_frame(), n=1)
-            )
-            leaves.extend(leaves_)
-            count = next_attack_index
-        next_attack_index += 1
-        this_one = talea[count]
-        duration = this_one
-        assert 0 < abjad.Duration(duration), repr(duration)
-        leaves_ = abjad.makers.make_leaves(
-            [pitch_expression], [duration], tag=_tags.function_name(_frame(), n=3)
-        )
-        leaves.extend(leaves_)
-        count = next_attack_index
-        while abjad.Fraction(*talea[count]) < 0 and not count % len(talea) == 0:
-            next_attack_index += 1
-            this_one = talea[count]
-            duration = -abjad.Duration(*this_one)
-            leaves_ = abjad.makers.make_leaves(
-                [None], [duration], tag=_tags.function_name(_frame(), n=4)
-            )
-            leaves.extend(leaves_)
-            count = next_attack_index
-    assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
-    tuplet = abjad.Tuplet("1:1", leaves)
-    tuplet.hide = True
-    return tuplet, next_attack_index
-
-
 def _make_accelerando(tuplet, *, ritardando=False):
     if len(tuplet) == 1:
         return tuplet
@@ -439,6 +385,70 @@ def attach_before_grace_containers(before_grace_containers, tuplet):
         abjad.attach(before_grace_container, logical_tie.head, tag=tag)
 
 
+def from_collection(
+    collection,
+    counts,
+    denominator,
+    next_attack_index: int | None = None,
+) -> tuple[abjad.Tuplet, int] | abjad.Tuplet:
+    if next_attack_index is None:
+        next_attack_index_was_none = True
+        next_attack_index = 0
+    else:
+        next_attack_index_was_none = False
+    collection_prototype = (
+        abjad.PitchClassSegment,
+        abjad.PitchSegment,
+        abjad.PitchSet,
+        list,
+        set,
+    )
+    assert isinstance(collection, collection_prototype), repr(collection)
+    leaves = []
+    if isinstance(collection, set | frozenset):
+        collection = [tuple(collection)]
+    talea = rmakers.Talea(counts, denominator)
+    for item in collection:
+        item = getattr(item, "number", item)
+        prototype = (int, float, str, tuple)
+        assert isinstance(item, prototype), repr(item)
+        count = next_attack_index
+        while abjad.Fraction(*talea[count]) < 0:
+            next_attack_index += 1
+            this_one = talea[count]
+            duration = -abjad.Duration(*this_one)
+            leaves_ = abjad.makers.make_leaves(
+                [None], [duration], tag=_tags.function_name(_frame(), n=1)
+            )
+            leaves.extend(leaves_)
+            count = next_attack_index
+        next_attack_index += 1
+        this_one = talea[count]
+        duration = this_one
+        assert 0 < abjad.Duration(duration), repr(duration)
+        leaves_ = abjad.makers.make_leaves(
+            [item], [duration], tag=_tags.function_name(_frame(), n=3)
+        )
+        leaves.extend(leaves_)
+        count = next_attack_index
+        while abjad.Fraction(*talea[count]) < 0 and not count % len(talea) == 0:
+            next_attack_index += 1
+            this_one = talea[count]
+            duration = -abjad.Duration(*this_one)
+            leaves_ = abjad.makers.make_leaves(
+                [None], [duration], tag=_tags.function_name(_frame(), n=4)
+            )
+            leaves.extend(leaves_)
+            count = next_attack_index
+    assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
+    tuplet = abjad.Tuplet("1:1", leaves)
+    tuplet.hide = True
+    if next_attack_index_was_none is True:
+        return tuplet
+    else:
+        return tuplet, next_attack_index
+
+
 def from_collections(
     collections,
     counts: list[int],
@@ -462,17 +472,20 @@ def from_collections(
         assert isinstance(collection, collection_prototype), repr(collection)
         if isinstance(collection, list | set):
             assert all(isinstance(_, prototype) for _ in collection), repr(collection)
-    talea = rmakers.Talea(counts=counts, denominator=denominator)
     next_attack_index, tuplets = 0, []
     for collection in collections:
         assert isinstance(collection, collection_prototype)
-        tuplet, next_attack_index = _from_collection(
+        tuplet, next_attack_index = from_collection(
             collection,
-            talea,
+            counts,
+            denominator,
             next_attack_index,
         )
         tuplets.append(tuplet)
     assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
+    # print(len(tuplets))
+    # if 1 < len(tuplets):
+    #     breakpoint()
     return tuplets
 
 
