@@ -1039,8 +1039,8 @@ figures.py examples.
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
-    ...     treatments=["10:9"],
     ... )
+    >>> tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
     >>> baca.rests_around(tuplets, [2], [4], 16)
     >>> container = abjad.Container(tuplets)
     >>> rmakers.beam(tuplets)
@@ -1247,7 +1247,8 @@ figures.py examples.
     Affixes rest to complete output when pattern is none:
 
     >>> collections = [[18, 16, 15, 20, 19]]
-    >>> tuplets = baca.from_collections(collections, [1], 16, treatments=["8:9"])
+    >>> tuplets = baca.from_collections(collections, [1], 16)
+    >>> tuplets = [baca.prolate(_, "8:9") for _ in tuplets]
     >>> baca.rests_around(tuplets, [1], [2], 16)
     >>> rmakers.beam(tuplets)
     >>> lilypond_file = abjad.illustrators.components(tuplets)

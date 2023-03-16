@@ -318,6 +318,7 @@ commands.py examles
     ...     16,
     ...     treatments=["10:9"],
     ... )
+    >>> tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
     >>> baca.rests_around(tuplets, [2], [4], 16)
     >>> rmakers.beam(tuplets)
     >>> _ = baca.dynamic(baca.select.pleaf(tuplets, 0), '"f"')
@@ -929,8 +930,8 @@ commands.py examles
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
-    ...     treatments=["10:9"],
     ... )
+    >>> tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
     >>> baca.rests_around(tuplets, [2], [4], 16)
     >>> rmakers.beam(tuplets)
     >>> baca.color(abjad.select.leaves(tuplets))
@@ -1015,8 +1016,8 @@ commands.py examles
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
-    ...     treatments=["10:9"],
     ... )
+    >>> tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
     >>> baca.rests_around(tuplets, [2], [4], 16)
     >>> rmakers.beam(tuplets)
     >>> baca.color(color_selector(tuplets))
@@ -1433,8 +1434,8 @@ commands.py examles
     ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...     [1, 1, 5, -1],
     ...     16,
-    ...     treatments=["10:9"],
     ... )
+    >>> tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
     >>> baca.rests_around(tuplets, [2], [4], 16)
     >>> rmakers.beam(tuplets)
     >>> abjad.label.with_pitches(tuplets, locale="us")
