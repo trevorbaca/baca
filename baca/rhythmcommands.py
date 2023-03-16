@@ -88,6 +88,7 @@ def _make_tuplet(
         set,
     )
     assert isinstance(collection, collection_prototype), repr(collection)
+    assert isinstance(treatment, int | str | tuple), repr(treatment)
     leaves = []
     if isinstance(collection, set | frozenset):
         collection = [collection]
@@ -97,8 +98,8 @@ def _make_tuplet(
             is_chord = True
         if isinstance(pitch_expression, abjad.NumberedPitchClass | abjad.NumberedPitch):
             pitch_expression = pitch_expression.number
-        # print(pitch_expression)
-        # assert isinstance(pitch_expression, int), repr(pitch_expression)
+        pp = (int, float, str, set, abjad.PitchSet)
+        assert isinstance(pitch_expression, pp), repr(pitch_expression)
         count = next_attack_index
         while abjad.Fraction(*talea[count]) < 0:
             next_attack_index += 1
@@ -113,27 +114,12 @@ def _make_tuplet(
         this_one = talea[count]
         duration = this_one
         assert 0 < abjad.Duration(duration), repr(duration)
-        if (
-            isinstance(pitch_expression, tuple)
-            and len(pitch_expression) == 2
-            and pitch_expression[-1] in (None, "skip")
-        ):
-            multiplier = pitch_expression[0]
-            duration = (
-                multiplier.numerator,
-                multiplier.denominator * talea.denominator,
-            )
-            pitch_expression = None
         if is_chord:
-            leaves_ = abjad.makers.make_leaves(
-                [tuple(pitch_expression)],
-                [duration],
-                tag=_tags.function_name(_frame(), n=2),
-            )
-        else:
-            leaves_ = abjad.makers.make_leaves(
-                [pitch_expression], [duration], tag=_tags.function_name(_frame(), n=3)
-            )
+            assert isinstance(pitch_expression, set | abjad.PitchSet)
+            pitch_expression = tuple(pitch_expression)
+        leaves_ = abjad.makers.make_leaves(
+            [pitch_expression], [duration], tag=_tags.function_name(_frame(), n=3)
+        )
         leaves.extend(leaves_)
         count = next_attack_index
         while abjad.Fraction(*talea[count]) < 0 and not count % len(talea) == 0:
@@ -146,6 +132,9 @@ def _make_tuplet(
             leaves.extend(leaves_)
             count = next_attack_index
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
+    if isinstance(treatment, tuple):
+        assert len(treatment) == 2
+        treatment = abjad.Duration(treatment)
     if isinstance(treatment, int):
         extra_count = treatment
         assert isinstance(talea, rmakers.Talea), repr(talea)
@@ -171,21 +160,9 @@ def _make_tuplet(
     elif treatment in ("accel", "rit"):
         tuplet = _make_accelerando(leaves, ritardando=treatment == "rit")
     elif isinstance(treatment, str) and ":" in treatment:
-        numerator_str, denominator_str = treatment.split(":")
-        numerator, denominator = int(numerator_str), int(denominator_str)
-        tuplet = abjad.Tuplet((denominator, numerator), leaves)
-    elif treatment.__class__ is abjad.Duration:
-        tuplet_duration = treatment
-        contents_duration = abjad.get.duration(leaves)
-        multiplier = tuplet_duration / contents_duration
-        tuplet = abjad.Tuplet(multiplier, leaves)
-        if not abjad.Duration(tuplet.multiplier).normalized():
-            tuplet.normalize_multiplier()
-    elif isinstance(treatment, abjad.Fraction):
         tuplet = abjad.Tuplet(treatment, leaves)
-    elif isinstance(treatment, tuple):
-        assert len(treatment) == 2, repr(treatment)
-        tuplet_duration = abjad.Duration(treatment)
+    elif isinstance(treatment, abjad.Duration):
+        tuplet_duration = treatment
         contents_duration = abjad.get.duration(leaves)
         multiplier = tuplet_duration / contents_duration
         pair = abjad.duration.pair(multiplier)
