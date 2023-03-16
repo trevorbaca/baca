@@ -92,7 +92,6 @@ overrides.py examples.
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1],
     ...         16,
-    ...         treatments=["5:4"],
     ...     )
     ...     tuplets = [baca.prolate(_, "5:4") for _ in tuplets]
     ...     baca.rests_around(tuplets, [2], [4], 16)
@@ -159,7 +158,6 @@ overrides.py examples.
     ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
     ...         [1, 1, 5, -1],
     ...         16,
-    ...         treatments=["10:9"],
     ...     )
     ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
     ...     baca.rests_around(tuplets, [2], [4], 16)
@@ -990,8 +988,10 @@ overrides.py examples.
     ...         [[11, 11, 12], [11, 11, 11], [11]],
     ...         [1, 1, 5, -1],
     ...         16,
-    ...         treatments=["10:9", "8:7", "5:4"],
     ...     )
+    ...     _ = baca.prolate(tuplets[0], "10:9")
+    ...     _ = baca.prolate(tuplets[1], "8:7")
+    ...     _ = baca.prolate(tuplets[2], "5:4")
     ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     container = abjad.Container(tuplets)
@@ -1073,8 +1073,10 @@ overrides.py examples.
     ...         [[11, 11, 12], [11, 11, 11], [11]],
     ...         [1, 1, 5, -1],
     ...         16,
-    ...         treatments=["10:9", "8:7", "5:4"],
     ...     )
+    ...     _ = baca.prolate(tuplets[0], "10:9")
+    ...     _ = baca.prolate(tuplets[1], "8:7")
+    ...     _ = baca.prolate(tuplets[2], "5:4")
     ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     container = abjad.Container(tuplets)
@@ -2833,8 +2835,10 @@ overrides.py examples.
     ...         [[11, 11, 12], [11, 11, 11], [11]],
     ...         [1, 1, 5, -1],
     ...         16,
-    ...         treatments=["10:9", "8:7", "5:4"],
     ...     )
+    ...     _ = baca.prolate(tuplets[0], "10:9")
+    ...     _ = baca.prolate(tuplets[1], "8:7")
+    ...     _ = baca.prolate(tuplets[2], "5:4")
     ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.stem_up(baca.select.pleaves(tuplets))
@@ -2907,8 +2911,10 @@ overrides.py examples.
     ...         [[11, 11, 12], [11, 11, 11], [11]],
     ...         [1, 1, 5, -1],
     ...         16,
-    ...         treatments=["10:9", "8:7", "5:4"],
     ...     )
+    ...     _ = baca.prolate(tuplets[0], "10:9")
+    ...     _ = baca.prolate(tuplets[1], "8:7")
+    ...     _ = baca.prolate(tuplets[2], "5:4")
     ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     rmakers.beam(tuplets)
     ...     baca.stem_down(baca.select.pleaves(tuplets))

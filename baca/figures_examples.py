@@ -277,7 +277,8 @@ figures.py examples.
     One extra count per duration:
 
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> tuplets = baca.from_collections(collections, [1, 1, 2], 16, treatments=[1])
+    >>> tuplets = baca.from_collections(collections, [1, 1, 2], 16)
+    >>> tuplets = [baca.prolate(_, 1, 16) for _ in tuplets]
     >>> rmakers.beam(tuplets)
     >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -325,7 +326,8 @@ figures.py examples.
     One missing count per duration:
 
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> tuplets = baca.from_collections(collections, [1, 1, 2], 16, treatments=[-1])
+    >>> tuplets = baca.from_collections(collections, [1, 1, 2], 16)
+    >>> tuplets = [baca.prolate(_, -1, 16) for _ in tuplets]
     >>> rmakers.beam(tuplets)
     >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -379,7 +381,8 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
-    >>> tuplets = baca.from_collections(collections, [1], 16, treatments=["accel"])
+    >>> tuplets = baca.from_collections(collections, [1], 16)
+    >>> tuplets = [baca.prolate(_, "accel") for _ in tuplets]
     >>> rmakers.beam(tuplets)
     >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -473,7 +476,8 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
-    >>> tuplets = baca.from_collections(collections, [1], 16, treatments=["rit"])
+    >>> tuplets = baca.from_collections(collections, [1], 16)
+    >>> tuplets = [baca.prolate(_, "rit") for _ in tuplets]
     >>> rmakers.beam(tuplets)
     >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -565,7 +569,11 @@ figures.py examples.
     ...     [10, 18, 16, 15, 20],
     ...     [19, 9, 0, 2, 10, 18],
     ... ]
-    >>> tuplets = baca.from_collections(collections, [1], 16, treatments=["accel", "rit"])
+    >>> tuplets = baca.from_collections(collections, [1], 16)
+    >>> _ = baca.prolate(tuplets[0], "accel")
+    >>> _ = baca.prolate(tuplets[1], "rit")
+    >>> _ = baca.prolate(tuplets[2], "accel")
+    >>> _ = baca.prolate(tuplets[3], "rit")
     >>> rmakers.beam(tuplets)
     >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -649,7 +657,13 @@ figures.py examples.
     ...     [10, 18, 16, 15, 20],
     ...     [19, 9, 0, 2, 10],
     ... ]
-    >>> tuplets = baca.from_collections(collections, [1], 16, treatments=["accel", -2, "rit"])
+    >>> tuplets = baca.from_collections(collections, [1], 16)
+    >>> _ = baca.prolate(tuplets[0], "accel")
+    >>> _ = baca.prolate(tuplets[1], -2, 16)
+    >>> _ = baca.prolate(tuplets[2], "rit")
+    >>> _ = baca.prolate(tuplets[3], "accel")
+    >>> _ = baca.prolate(tuplets[4], -2, 16)
+    >>> _ = baca.prolate(tuplets[5], "rit")
     >>> rmakers.beam(tuplets)
     >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -753,7 +767,8 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
-    >>> tuplets = baca.from_collections(collections, [1], 8, treatments=["3:2"])
+    >>> tuplets = baca.from_collections(collections, [1], 8)
+    >>> tuplets = [baca.prolate(_, "3:2") for _ in tuplets]
     >>> rmakers.beam(tuplets)
     >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> staff = lilypond_file["Staff"]
@@ -844,8 +859,9 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
+    >>> tuplets = baca.from_collections(collections, [1], 8)
     >>> duration = abjad.Duration(1, 4)
-    >>> tuplets = baca.from_collections(collections, [1], 8, treatments=[duration])
+    >>> tuplets = [baca.prolate(_, duration) for _ in tuplets]
     >>> rmakers.denominator(tuplets, (1, 16))
     >>> rmakers.beam(tuplets)
     >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -933,13 +949,13 @@ figures.py examples.
     ...     [10, 18, 16, 15, 20],
     ...     [19, 9, 0, 2, 10],
     ... ]
-    >>> durations = [abjad.Duration(1, 4), abjad.Duration(3, 8)]
-    >>> tuplets = baca.from_collections(
-    ...     collections,
-    ...     [1, 1, 2],
-    ...     8,
-    ...     treatments=durations,
-    ... )
+    >>> tuplets = baca.from_collections(collections, [1, 1, 2], 8)
+    >>> for i, tuplet in enumerate(tuplets):
+    ...     if i % 2 == 0:
+    ...         duration = abjad.Duration(1, 4)
+    ...     else:
+    ...         duration = abjad.Duration(3, 8)
+    ...     _ = baca.prolate(tuplet, duration)
     >>> rmakers.denominator(tuplets, (1, 16))
     >>> rmakers.beam(tuplets)
     >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -1191,12 +1207,10 @@ figures.py examples.
     Affixes rests to complete output when pattern is none:
 
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> tuplets = baca.from_collections(
-    ...     collections,
-    ...     [1],
-    ...     16,
-    ...     treatments=["4:5", "5:6", "3:4"],
-    ... )
+    >>> tuplets = baca.from_collections(collections, [1], 16)
+    >>> _ = baca.prolate(tuplets[0], "4:5")
+    >>> _ = baca.prolate(tuplets[1], "5:6")
+    >>> _ = baca.prolate(tuplets[2], "3:4")
     >>> baca.rests_around(tuplets, [1], [2], 16)
     >>> rmakers.beam(tuplets)
     >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -1670,7 +1684,8 @@ figures.py examples.
     ...     [15, 20, 19, 9, 0],
     ...     [2, 10, 18, 16, 15],
     ... ]
-    >>> tuplets = baca.from_collections(collections, [1], 16, treatments=[1])
+    >>> tuplets = baca.from_collections(collections, [1], 16)
+    >>> tuplets = [baca.prolate(_, 1, 16) for _ in tuplets]
     >>> groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
     >>> rmakers.beam_groups(groups, beam_rests=True)
     >>> container = abjad.Container(tuplets)
@@ -2296,12 +2311,11 @@ figures.py examples.
 
     Rests after.
 
-    >>> tuplets = baca.from_collections(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ...     treatments=["8:7", "10:9", "8:7"],
-    ... )
+    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+    >>> tuplets = baca.from_collections(collections, [1, 1, 5, -1], 16)
+    >>> _ = baca.prolate(tuplets[0], "8:7")
+    >>> _ = baca.prolate(tuplets[1], "10:9")
+    >>> _ = baca.prolate(tuplets[2], "8:7")
     >>> baca.rests_after(tuplets, [2], 16)
     >>> rmakers.beam(tuplets)
     >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)

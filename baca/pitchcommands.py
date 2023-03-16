@@ -1458,12 +1458,10 @@ def displacement(argument, displacements: list[int]) -> None:
 
         Octave-displaces PLTs:
 
-        >>> tuplets = baca.from_collections(
-        ...     3 * [[0, 2, 3]],
-        ...     [1, 1, 5, -1],
-        ...     16,
-        ...     treatments=["10:9", "8:7", "12:11"],
-        ... )
+        >>> tuplets = baca.from_collections(3 * [[0, 2, 3]], [1, 1, 5, -1], 16)
+        >>> _ = baca.prolate(tuplets[0], "10:9")
+        >>> _ = baca.prolate(tuplets[1], "8:7")
+        >>> _ = baca.prolate(tuplets[2], "12:11")
         >>> baca.rests_around(tuplets, [2], [4], 16)
         >>> rmakers.beam(tuplets)
         >>> baca.displacement(tuplets, [0, 0, -1, -1, 1, 1])
