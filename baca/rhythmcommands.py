@@ -77,7 +77,7 @@ def _make_accelerando_multipliers(durations, exponent) -> list[tuple[int, int]]:
 def _make_tuplet(
     collection,
     talea: rmakers.Talea,
-    treatment: int | str,
+    treatment: int | str | abjad.Duration,
     next_attack_index: int,
 ) -> tuple[abjad.Tuplet, int]:
     collection_prototype = (
@@ -88,18 +88,14 @@ def _make_tuplet(
         set,
     )
     assert isinstance(collection, collection_prototype), repr(collection)
-    assert isinstance(treatment, int | str | tuple), repr(treatment)
+    assert isinstance(treatment, int | str | abjad.Duration), repr(treatment)
     leaves = []
     if isinstance(collection, set | frozenset):
-        collection = [collection]
+        collection = [tuple(collection)]
     for pitch_expression in collection:
-        is_chord = False
-        if isinstance(pitch_expression, set | frozenset):
-            is_chord = True
-        if isinstance(pitch_expression, abjad.NumberedPitchClass | abjad.NumberedPitch):
-            pitch_expression = pitch_expression.number
-        pp = (int, float, str, set, abjad.PitchSet)
-        assert isinstance(pitch_expression, pp), repr(pitch_expression)
+        pitch_expression = getattr(pitch_expression, "number", pitch_expression)
+        prototype = (int, float, str, tuple)
+        assert isinstance(pitch_expression, prototype), repr(pitch_expression)
         count = next_attack_index
         while abjad.Fraction(*talea[count]) < 0:
             next_attack_index += 1
@@ -114,9 +110,6 @@ def _make_tuplet(
         this_one = talea[count]
         duration = this_one
         assert 0 < abjad.Duration(duration), repr(duration)
-        if is_chord:
-            assert isinstance(pitch_expression, set | abjad.PitchSet)
-            pitch_expression = tuple(pitch_expression)
         leaves_ = abjad.makers.make_leaves(
             [pitch_expression], [duration], tag=_tags.function_name(_frame(), n=3)
         )
@@ -133,6 +126,7 @@ def _make_tuplet(
             count = next_attack_index
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
     if isinstance(treatment, tuple):
+        raise Exception(treatment)
         assert len(treatment) == 2
         treatment = abjad.Duration(treatment)
     if isinstance(treatment, int):
@@ -975,7 +969,8 @@ def make_tuplets(
     assert isinstance(denominator, int), repr(denominator)
     treatments = treatments or []
     assert isinstance(treatments, list), repr(treatments)
-    assert all(isinstance(_, int | str | tuple) for _ in treatments), repr(treatments)
+    tt = (int, str, abjad.Duration)
+    assert all(isinstance(_, tt) for _ in treatments), repr(treatments)
     collection_prototype = (
         abjad.PitchClassSegment,
         abjad.PitchSegment,

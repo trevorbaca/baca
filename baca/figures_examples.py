@@ -844,7 +844,8 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
-    >>> tuplets = baca.make_tuplets(collections, [1], 8, treatments=[(1, 4)])
+    >>> duration = abjad.Duration(1, 4)
+    >>> tuplets = baca.make_tuplets(collections, [1], 8, treatments=[duration])
     >>> rmakers.denominator(tuplets, (1, 16))
     >>> rmakers.beam(tuplets)
     >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -932,11 +933,12 @@ figures.py examples.
     ...     [10, 18, 16, 15, 20],
     ...     [19, 9, 0, 2, 10],
     ... ]
+    >>> durations = [abjad.Duration(1, 4), abjad.Duration(3, 8)]
     >>> tuplets = baca.make_tuplets(
     ...     collections,
     ...     [1, 1, 2],
     ...     8,
-    ...     treatments=[(1, 4), (3, 8)],
+    ...     treatments=durations,
     ... )
     >>> rmakers.denominator(tuplets, (1, 16))
     >>> rmakers.beam(tuplets)
