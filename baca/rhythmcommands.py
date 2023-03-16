@@ -125,47 +125,11 @@ def _make_tuplet(
             leaves.extend(leaves_)
             count = next_attack_index
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
-    if isinstance(treatment, tuple):
-        raise Exception(treatment)
-        assert len(treatment) == 2
-        treatment = abjad.Duration(treatment)
-    if isinstance(treatment, int):
-        extra_count = treatment
-        assert isinstance(talea, rmakers.Talea), repr(talea)
-        denominator = talea.denominator
-        contents_duration = abjad.get.duration(leaves)
-        pair = abjad.duration.with_denominator(contents_duration, denominator)
-        contents_duration_pair = pair
-        contents_count = contents_duration_pair[0]
-        if 0 < extra_count:
-            extra_count %= contents_count
-        elif extra_count < 0:
-            extra_count = abs(extra_count)
-            extra_count %= python_math.ceil(contents_count / 2.0)
-            extra_count *= -1
-        new_contents_count = contents_count + extra_count
-        tuplet_multiplier = abjad.Fraction(new_contents_count, contents_count)
-        if not abjad.Duration(tuplet_multiplier).normalized():
-            message = f"{leaves!r} gives {tuplet_multiplier}"
-            message += " with {contents_count} and {new_contents_count}."
-            raise Exception(message)
-        pair = abjad.duration.pair(tuplet_multiplier)
-        tuplet = abjad.Tuplet(pair, leaves)
-    elif treatment in ("accel", "rit"):
+    if treatment in ("accel", "rit"):
         tuplet = _make_accelerando(leaves, ritardando=treatment == "rit")
-    elif isinstance(treatment, str) and ":" in treatment:
-        tuplet = abjad.Tuplet(treatment, leaves)
-    elif isinstance(treatment, abjad.Duration):
-        tuplet_duration = treatment
-        contents_duration = abjad.get.duration(leaves)
-        multiplier = tuplet_duration / contents_duration
-        pair = abjad.duration.pair(multiplier)
-        tuplet = abjad.Tuplet(pair, leaves)
-        if not abjad.Duration(tuplet.multiplier).normalized():
-            tuplet.normalize_multiplier()
     else:
-        raise Exception(f"bad treatment: {treatment!r}.")
-    assert isinstance(tuplet, abjad.Tuplet)
+        tuplet = abjad.Tuplet("1:1", leaves)
+        prolate(tuplet, treatment, denominator=talea.denominator)
     if tuplet.trivial():
         tuplet.hide = True
     assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
@@ -1020,6 +984,48 @@ def nest(tuplets: list[abjad.Tuplet], treatment: str) -> abjad.Tuplet:
         nested_tuplet = abjad.Tuplet(treatment, [])
         abjad.mutate.wrap(tuplets, nested_tuplet)
     return nested_tuplet
+
+
+def prolate(tuplet, treatment, denominator=None):
+    if isinstance(treatment, int):
+        extra_count = treatment
+        contents_duration = abjad.get.duration(tuplet)
+        pair = abjad.duration.with_denominator(contents_duration, denominator)
+        contents_duration_pair = pair
+        contents_count = contents_duration_pair[0]
+        if 0 < extra_count:
+            extra_count %= contents_count
+        elif extra_count < 0:
+            extra_count = abs(extra_count)
+            extra_count %= python_math.ceil(contents_count / 2.0)
+            extra_count *= -1
+        new_contents_count = contents_count + extra_count
+        tuplet_multiplier = abjad.Fraction(new_contents_count, contents_count)
+        if not abjad.Duration(tuplet_multiplier).normalized():
+            message = f"{tuplet!r} gives {tuplet_multiplier}"
+            message += " with {contents_count} and {new_contents_count}."
+            raise Exception(message)
+        pair = abjad.duration.pair(tuplet_multiplier)
+        multiplier = pair
+    elif isinstance(treatment, str) and ":" in treatment:
+        n, d = treatment.split(":")
+        multiplier = (int(d), int(n))
+    elif isinstance(treatment, abjad.Duration):
+        tuplet_duration = treatment
+        contents_duration = abjad.get.duration(tuplet)
+        multiplier = tuplet_duration / contents_duration
+        pair = abjad.duration.pair(multiplier)
+        multiplier = pair
+    else:
+        raise Exception(f"bad treatment: {treatment!r}.")
+    tuplet.multiplier = multiplier
+    if not abjad.Duration(tuplet.multiplier).normalized():
+        tuplet.normalize_multiplier()
+    if tuplet.trivial():
+        tuplet.hide = True
+    else:
+        tuplet.hide = False
+    return tuplet
 
 
 def rests_after(
