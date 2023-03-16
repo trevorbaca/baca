@@ -956,6 +956,7 @@ figures.py examples.
     ...     else:
     ...         duration = abjad.Duration(3, 8)
     ...     _ = baca.prolate(tuplet, duration)
+
     >>> rmakers.denominator(tuplets, (1, 16))
     >>> rmakers.beam(tuplets)
     >>> lilypond_file = abjad.illustrators.components(tuplets)

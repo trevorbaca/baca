@@ -19,7 +19,6 @@ from .enums import enums as _enums
 def _from_collection(
     collection,
     talea: rmakers.Talea,
-    treatment: int | str | abjad.Duration,
     next_attack_index: int,
 ) -> tuple[abjad.Tuplet, int]:
     collection_prototype = (
@@ -30,7 +29,6 @@ def _from_collection(
         set,
     )
     assert isinstance(collection, collection_prototype), repr(collection)
-    assert isinstance(treatment, int | str | abjad.Duration), repr(treatment)
     leaves = []
     if isinstance(collection, set | frozenset):
         collection = [tuple(collection)]
@@ -68,13 +66,7 @@ def _from_collection(
             count = next_attack_index
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
     tuplet = abjad.Tuplet("1:1", leaves)
-    if treatment in ("accel", "rit"):
-        _make_accelerando(tuplet, ritardando=treatment == "rit")
-    else:
-        prolate(tuplet, treatment, denominator=talea.denominator)
-    if tuplet.trivial():
-        tuplet.hide = True
-    assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
+    tuplet.hide = True
     return tuplet, next_attack_index
 
 
@@ -451,8 +443,6 @@ def from_collections(
     collections,
     counts: list[int],
     denominator: int,
-    *,
-    treatments: list[int | str | tuple] | None = None,
 ) -> list[abjad.Tuplet]:
     if isinstance(collections, _section.DynamicScope):
         collections = collections.argument
@@ -460,10 +450,6 @@ def from_collections(
     assert isinstance(counts, list), repr(counts)
     assert all(isinstance(_, int) for _ in counts), repr(counts)
     assert isinstance(denominator, int), repr(denominator)
-    treatments = treatments or []
-    assert isinstance(treatments, list), repr(treatments)
-    tt = (int, str, abjad.Duration)
-    assert all(isinstance(_, tt) for _ in treatments), repr(treatments)
     collection_prototype = (
         abjad.PitchClassSegment,
         abjad.PitchSegment,
@@ -478,16 +464,11 @@ def from_collections(
             assert all(isinstance(_, prototype) for _ in collection), repr(collection)
     talea = rmakers.Talea(counts=counts, denominator=denominator)
     next_attack_index, tuplets = 0, []
-    for i, collection in enumerate(collections):
+    for collection in collections:
         assert isinstance(collection, collection_prototype)
-        if treatments:
-            treatment = abjad.CyclicTuple(treatments)[i]
-        else:
-            treatment = 0
         tuplet, next_attack_index = _from_collection(
             collection,
             talea,
-            treatment,
             next_attack_index,
         )
         tuplets.append(tuplet)
