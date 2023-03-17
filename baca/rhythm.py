@@ -10,7 +10,6 @@ from inspect import currentframe as _frame
 import abjad
 from abjadext import rmakers
 
-from . import section as _section
 from . import select as _select
 from . import tags as _tags
 from .enums import enums as _enums
@@ -447,46 +446,6 @@ def from_collection(
         return tuplet
     else:
         return tuplet, next_attack_index
-
-
-def from_collections(
-    collections,
-    counts: list[int],
-    denominator: int,
-) -> list[abjad.Tuplet]:
-    if isinstance(collections, _section.DynamicScope):
-        collections = collections.argument
-    assert isinstance(collections, list), repr(collections)
-    assert isinstance(counts, list), repr(counts)
-    assert all(isinstance(_, int) for _ in counts), repr(counts)
-    assert isinstance(denominator, int), repr(denominator)
-    collection_prototype = (
-        abjad.PitchClassSegment,
-        abjad.PitchSegment,
-        abjad.PitchSet,
-        list,
-        set,
-    )
-    prototype = (int, float, str, abjad.NumberedPitch)
-    for collection in collections:
-        assert isinstance(collection, collection_prototype), repr(collection)
-        if isinstance(collection, list | set):
-            assert all(isinstance(_, prototype) for _ in collection), repr(collection)
-    next_attack_index, tuplets = 0, []
-    for collection in collections:
-        assert isinstance(collection, collection_prototype)
-        tuplet, next_attack_index = from_collection(
-            collection,
-            counts,
-            denominator,
-            next_attack_index,
-        )
-        tuplets.append(tuplet)
-    assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
-    # print(len(tuplets))
-    # if 1 < len(tuplets):
-    #     breakpoint()
-    return tuplets
 
 
 def get_previous_rhythm_state(
