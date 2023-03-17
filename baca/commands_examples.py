@@ -312,14 +312,9 @@ commands.py examles
 
     Effort dynamics:
 
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> tuplets = baca.from_collections(collections, [1, 1, 5, -1], 16)
-    >>> tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    >>> baca.rests_around(tuplets, [2], [4], 16)
-    >>> rmakers.beam(tuplets)
-    >>> _ = baca.dynamic(baca.select.pleaf(tuplets, 0), '"f"')
-    >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-    >>> lilypond_file = abjad.illustrators.components(tuplets, includes=["baca.ily"])
+    >>> note = abjad.Note("c'4")
+    >>> _ = baca.dynamic(note, '"f"')
+    >>> lilypond_file = abjad.illustrators.components([note], includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -331,48 +326,9 @@ commands.py examles
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    c'16
-                    \baca-effort-f
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
-                    r16
-                    r4
-                    \revert TupletBracket.staff-padding
-                }
+                \time 1/4
+                c'4
+                \baca-effort-f
             }
         >>
 
@@ -922,18 +878,9 @@ commands.py examles
 
     Colors leaves:
 
-    >>> tuplets = baca.from_collections(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ... )
-    >>> tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    >>> baca.rests_around(tuplets, [2], [4], 16)
-    >>> rmakers.beam(tuplets)
-    >>> baca.color(abjad.select.leaves(tuplets))
-    >>> rmakers.unbeam(tuplets)
-    >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-    >>> lilypond_file = abjad.illustrators.components(tuplets)
+    >>> container = abjad.Container("c'4 d' e'")
+    >>> baca.color(container)
+    >>> lilypond_file = abjad.illustrators.components([container])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -945,133 +892,14 @@ commands.py examles
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    \override TupletBracket.staff-padding = 2
-                    \abjad-color-music #'red
-                    \time 27/16
-                    r8
-                    \abjad-color-music #'blue
-                    c'16
-                    \abjad-color-music #'red
-                    d'16
-                    \abjad-color-music #'blue
-                    bf'4
-                    ~
-                    \abjad-color-music #'red
-                    bf'16
-                    \abjad-color-music #'blue
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
                     \abjad-color-music #'red
-                    fs''16
+                    \time 3/4
+                    c'4
                     \abjad-color-music #'blue
-                    e''16
+                    d'4
                     \abjad-color-music #'red
-                    ef''4
-                    ~
-                    \abjad-color-music #'blue
-                    ef''16
-                    \abjad-color-music #'red
-                    r16
-                    \abjad-color-music #'blue
-                    af''16
-                    \abjad-color-music #'red
-                    g''16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    \abjad-color-music #'blue
-                    a'4
-                    ~
-                    \abjad-color-music #'red
-                    a'16
-                    \abjad-color-music #'blue
-                    r16
-                    \abjad-color-music #'red
-                    r4
-                    \revert TupletBracket.staff-padding
-                }
-            }
-        >>
-
-..  container:: example
-
-    Colors leaves in tuplet 1:
-
-    >>> def color_selector(argument):
-    ...     result = abjad.select.tuplet(argument, 1)
-    ...     result = abjad.select.leaves(result)
-    ...     return result
-    >>> tuplets = baca.from_collections(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ... )
-    >>> tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    >>> baca.rests_around(tuplets, [2], [4], 16)
-    >>> rmakers.beam(tuplets)
-    >>> baca.color(color_selector(tuplets))
-    >>> rmakers.unbeam(tuplets)
-    >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-    >>> lilypond_file = abjad.illustrators.components(tuplets)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        <<
-            \context Staff = "Staff"
-            {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    c'16
-                    d'16
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    \abjad-color-music #'red
-                    fs''16
-                    \abjad-color-music #'blue
-                    e''16
-                    \abjad-color-music #'red
-                    ef''4
-                    ~
-                    \abjad-color-music #'blue
-                    ef''16
-                    \abjad-color-music #'red
-                    r16
-                    \abjad-color-music #'blue
-                    af''16
-                    \abjad-color-music #'red
-                    g''16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
-                    r16
-                    r4
-                    \revert TupletBracket.staff-padding
+                    e'4
                 }
             }
         >>
@@ -1426,17 +1254,9 @@ commands.py examles
 
     Labels pitch names:
 
-    >>> tuplets = baca.from_collections(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ... )
-    >>> tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    >>> baca.rests_around(tuplets, [2], [4], 16)
-    >>> rmakers.beam(tuplets)
-    >>> abjad.label.with_pitches(tuplets, locale="us")
-    >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-    >>> lilypond_file = abjad.illustrators.components(tuplets)
+    >>> container = abjad.Container("c'4 d' e'")
+    >>> abjad.label.with_pitches(container, locale="us")
+    >>> lilypond_file = abjad.illustrators.components([container])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1448,55 +1268,14 @@ commands.py examles
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    c'16
+                    \time 3/4
+                    c'4
                     ^ \markup { C4 }
-                    [
-                    d'16
+                    d'4
                     ^ \markup { D4 }
-                    ]
-                    bf'4
-                    ^ \markup { Bb4 }
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    ^ \markup { "F#5" }
-                    [
-                    e''16
-                    ^ \markup { E5 }
-                    ]
-                    ef''4
-                    ^ \markup { Eb5 }
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    ^ \markup { Ab5 }
-                    [
-                    g''16
-                    ^ \markup { G5 }
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ^ \markup { A4 }
-                    ~
-                    a'16
-                    r16
-                    r4
-                    \revert TupletBracket.staff-padding
+                    e'4
+                    ^ \markup { E4 }
                 }
             }
         >>

@@ -51,19 +51,11 @@ articulations.py examples.
 
 ..  container:: example
 
-    **STOP-ON-STRING.** Attaches stop-on-string to pitched head -1:
+    **STOP-ON-STRING.**
 
-    >>> tuplets = baca.from_collections(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...     [1, 1, 5, -1],
-    ...     16,
-    ... )
-    >>> tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    >>> baca.rests_around(tuplets, [2], [4], 16)
-    >>> rmakers.beam(tuplets)
-    >>> _ = baca.stop_on_string(baca.select.pleaf(tuplets, -1))
-    >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-    >>> lilypond_file = abjad.illustrators.components(tuplets, includes=["baca.ily"])
+    >>> container = abjad.Container("c'4 d' e'")
+    >>> _ = baca.stop_on_string(container[0])
+    >>> lilypond_file = abjad.illustrators.components([container], includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -75,47 +67,12 @@ articulations.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    c'16
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
+                    \time 3/4
+                    c'4
                     - \baca-stop-on-string
-                    r16
-                    r4
-                    \revert TupletBracket.staff-padding
+                    d'4
+                    e'4
                 }
             }
         >>
