@@ -963,14 +963,8 @@ def bass_to_octave(argument, n: int) -> None:
         Octave-transposes music such that the lowest note appears in octave 3:
 
         >>> collections = [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]]
-        >>> tuplets = baca.from_collections(
-        ...     collections,
-        ...     [5, -3],
-        ...     32,
-        ... )
-        >>> rmakers.beam(tuplets)
+        >>> tuplets = [baca.from_collection(_, [4], 16) for _ in collections]
         >>> baca.bass_to_octave(tuplets, 3)
-        >>> baca.color(baca.select.plts(tuplets), lone=True)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -985,59 +979,24 @@ def bass_to_octave(argument, n: int) -> None:
                 {
                     \scaleDurations #'(1 . 1)
                     {
-                        \abjad-color-music #'green
                         \time 5/4
-                        <c d bf>8
-                        [
-                        ~
-                        \abjad-color-music #'green
-                        <c d bf>32
-                        ]
-                        r16.
+                        <c d bf>4
                     }
                     \scaleDurations #'(1 . 1)
                     {
-                        \abjad-color-music #'green
-                        f'8
-                        [
-                        ~
-                        \abjad-color-music #'green
-                        f'32
-                        ]
-                        r16.
+                        f'4
                     }
                     \scaleDurations #'(1 . 1)
                     {
-                        \abjad-color-music #'green
-                        <ef' e' fs''>8
-                        [
-                        ~
-                        \abjad-color-music #'green
-                        <ef' e' fs''>32
-                        ]
-                        r16.
+                        <ef' e' fs''>4
                     }
                     \scaleDurations #'(1 . 1)
                     {
-                        \abjad-color-music #'green
-                        <g af'>8
-                        [
-                        ~
-                        \abjad-color-music #'green
-                        <g af'>32
-                        ]
-                        r16.
+                        <g af'>4
                     }
                     \scaleDurations #'(1 . 1)
                     {
-                        \abjad-color-music #'green
-                        a8
-                        [
-                        ~
-                        \abjad-color-music #'green
-                        a32
-                        ]
-                        r16.
+                        a4
                     }
                 }
             >>
@@ -1048,16 +1007,10 @@ def bass_to_octave(argument, n: int) -> None:
         appears in octave 3:
 
         >>> collections = [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]]
-        >>> tuplets = baca.from_collections(
-        ...     collections,
-        ...     [5, -3],
-        ...     32,
-        ... )
-        >>> rmakers.beam(tuplets)
+        >>> tuplets = [baca.from_collection(_, [4], 16) for _ in collections]
         >>> for plt in baca.select.plts(tuplets):
         ...     baca.bass_to_octave(plt, 3)
 
-        >>> baca.color(baca.select.plts(tuplets))
         >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1072,63 +1025,27 @@ def bass_to_octave(argument, n: int) -> None:
                 {
                     \scaleDurations #'(1 . 1)
                     {
-                        \abjad-color-music #'red
                         \time 5/4
-                        <c d bf>8
-                        [
-                        ~
-                        \abjad-color-music #'red
-                        <c d bf>32
-                        ]
-                        r16.
+                        <c d bf>4
                     }
                     \scaleDurations #'(1 . 1)
                     {
-                        \abjad-color-music #'blue
-                        f8
-                        [
-                        ~
-                        \abjad-color-music #'blue
-                        f32
-                        ]
-                        r16.
+                        f4
                     }
                     \scaleDurations #'(1 . 1)
                     {
-                        \abjad-color-music #'red
-                        <ef e fs'>8
-                        [
-                        ~
-                        \abjad-color-music #'red
-                        <ef e fs'>32
-                        ]
-                        r16.
+                        <ef e fs'>4
                     }
                     \scaleDurations #'(1 . 1)
                     {
-                        \abjad-color-music #'blue
-                        <g af'>8
-                        [
-                        ~
-                        \abjad-color-music #'blue
-                        <g af'>32
-                        ]
-                        r16.
+                        <g af'>4
                     }
                     \scaleDurations #'(1 . 1)
                     {
-                        \abjad-color-music #'red
-                        a8
-                        [
-                        ~
-                        \abjad-color-music #'red
-                        a32
-                        ]
-                        r16.
+                        a4
                     }
                 }
             >>
-
 
     """
     _do_register_to_octave_command(argument, anchor=abjad.DOWN, octave_number=n)
@@ -1142,16 +1059,11 @@ def center_to_octave(argument, n: int) -> None:
 
     ..  container:: example
 
-        >>> collections = [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]]
-        >>> tuplets = baca.from_collections(
-        ...     collections,
-        ...     [5, -3],
-        ...     32,
-        ... )
-        >>> rmakers.beam(tuplets)
-        >>> baca.center_to_octave(tuplets, 3)
-        >>> baca.color(baca.select.plts(tuplets), lone=True)
-        >>> lilypond_file = abjad.illustrators.components(tuplets)
+        >>> collections = [(0, 2, 10), 17, (15, 16, 30), (7, 20), 9]
+        >>> leaves = abjad.makers.make_leaves(collections, [(1, 4)])
+        >>> container = abjad.Container(leaves)
+        >>> baca.center_to_octave(container, 3)
+        >>> lilypond_file = abjad.illustrators.components([container])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1163,61 +1075,13 @@ def center_to_octave(argument, n: int) -> None:
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
-                        \abjad-color-music #'green
                         \time 5/4
-                        <c, d, bf,>8
-                        [
-                        ~
-                        \abjad-color-music #'green
-                        <c, d, bf,>32
-                        ]
-                        r16.
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
-                        \abjad-color-music #'green
-                        f8
-                        [
-                        ~
-                        \abjad-color-music #'green
-                        f32
-                        ]
-                        r16.
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
-                        \abjad-color-music #'green
-                        <ef e fs'>8
-                        [
-                        ~
-                        \abjad-color-music #'green
-                        <ef e fs'>32
-                        ]
-                        r16.
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
-                        \abjad-color-music #'green
-                        <g, af>8
-                        [
-                        ~
-                        \abjad-color-music #'green
-                        <g, af>32
-                        ]
-                        r16.
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
-                        \abjad-color-music #'green
-                        a,8
-                        [
-                        ~
-                        \abjad-color-music #'green
-                        a,32
-                        ]
-                        r16.
+                        <c, d, bf,>4
+                        f4
+                        <ef e fs'>4
+                        <g, af>4
+                        a,4
                     }
                 }
             >>
@@ -1227,18 +1091,13 @@ def center_to_octave(argument, n: int) -> None:
         Octave-transposes music such that the centroid of each pitched logical tie
         appears in octave 3:
 
-        >>> collections = [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]]
-        >>> tuplets = baca.from_collections(
-        ...     collections,
-        ...     [5, -3],
-        ...     32,
-        ... )
-        >>> rmakers.beam(tuplets)
-        >>> for plt in baca.select.plts(tuplets):
+        >>> collections = [(0, 2, 10), 17, (15, 16, 30), (7, 20), 9]
+        >>> leaves = abjad.makers.make_leaves(collections, [(1, 4)])
+        >>> container = abjad.Container(leaves)
+        >>> for plt in baca.select.plts(container):
         ...     baca.center_to_octave(plt, 3)
 
-        >>> baca.color(baca.select.plts(tuplets))
-        >>> lilypond_file = abjad.illustrators.components(tuplets)
+        >>> lilypond_file = abjad.illustrators.components([container])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1250,61 +1109,13 @@ def center_to_octave(argument, n: int) -> None:
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
-                        \abjad-color-music #'red
                         \time 5/4
-                        <c d bf>8
-                        [
-                        ~
-                        \abjad-color-music #'red
-                        <c d bf>32
-                        ]
-                        r16.
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
-                        \abjad-color-music #'blue
-                        f8
-                        [
-                        ~
-                        \abjad-color-music #'blue
-                        f32
-                        ]
-                        r16.
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
-                        \abjad-color-music #'red
-                        <ef e fs'>8
-                        [
-                        ~
-                        \abjad-color-music #'red
-                        <ef e fs'>32
-                        ]
-                        r16.
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
-                        \abjad-color-music #'blue
-                        <g, af>8
-                        [
-                        ~
-                        \abjad-color-music #'blue
-                        <g, af>32
-                        ]
-                        r16.
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
-                        \abjad-color-music #'red
-                        a8
-                        [
-                        ~
-                        \abjad-color-music #'red
-                        a32
-                        ]
-                        r16.
+                        <c d bf>4
+                        f4
+                        <ef e fs'>4
+                        <g, af>4
+                        a4
                     }
                 }
             >>
@@ -1462,16 +1273,11 @@ def displacement(argument, displacements: list[int]) -> None:
 
         Octave-displaces PLTs:
 
-        >>> collections = 3 * [[0, 2, 3]]
-        >>> tuplets = baca.from_collections(collections, [1, 1, 5, -1], 16)
-        >>> _ = baca.prolate(tuplets[0], "10:9")
-        >>> _ = baca.prolate(tuplets[1], "8:7")
-        >>> _ = baca.prolate(tuplets[2], "12:11")
-        >>> baca.rests_around(tuplets, [2], [4], 16)
-        >>> rmakers.beam(tuplets)
-        >>> baca.displacement(tuplets, [0, 0, -1, -1, 1, 1])
-        >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-        >>> lilypond_file = abjad.illustrators.components(tuplets)
+        >>> pitches = 3 * [0, 2, 3]
+        >>> leaves = abjad.makers.make_leaves(pitches, [(1, 4)])
+        >>> container = abjad.Container(leaves)
+        >>> baca.displacement(container, [0, 0, -1, -1, 1, 1])
+        >>> lilypond_file = abjad.illustrators.components([container])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1483,46 +1289,17 @@ def displacement(argument, displacements: list[int]) -> None:
             <<
                 \context Staff = "Staff"
                 {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
                     {
-                        \override TupletBracket.staff-padding = 2
-                        \time 27/16
-                        r8
-                        c'16
-                        [
-                        d'16
-                        ]
+                        \time 9/4
+                        c'4
+                        d'4
                         ef4
-                        ~
-                        ef16
-                        r16
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 7/8
-                    {
-                        c16
-                        [
-                        d''16
-                        ]
+                        c4
+                        d''4
                         ef''4
-                        ~
-                        ef''16
-                        r16
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 11/12
-                    {
-                        c'16
-                        [
-                        d'16
-                        ]
+                        c'4
+                        d'4
                         ef4
-                        ~
-                        ef16
-                        r16
-                        r4
-                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -1531,12 +1308,11 @@ def displacement(argument, displacements: list[int]) -> None:
 
         Octave-displaces chords:
 
-        >>> collections = 6 * [{0, 2, 3}]
-        >>> tuplets = [baca.from_collection(_, [4], 16) for _ in collections]
-        >>> baca.rests_around(tuplets, [2], [4], 16)
-        >>> rmakers.beam(tuplets)
-        >>> _ = baca.displacement(tuplets, [0, 0, -1, -1, 1, 1])
-        >>> lilypond_file = abjad.illustrators.components(tuplets)
+        >>> pitches = 6 * [(0, 2, 3)]
+        >>> leaves = abjad.makers.make_leaves(pitches, [(1, 4)])
+        >>> container = abjad.Container(leaves)
+        >>> baca.displacement(container, [0, 0, -1, -1, 1, 1])
+        >>> lilypond_file = abjad.illustrators.components([container])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1548,32 +1324,14 @@ def displacement(argument, displacements: list[int]) -> None:
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
-                        \time 15/8
-                        r8
+                        \time 3/2
                         <c' d' ef'>4
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
                         <c' d' ef'>4
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
                         <c d ef>4
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
                         <c d ef>4
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
                         <c'' d'' ef''>4
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
                         <c'' d'' ef''>4
-                        r4
                     }
                 }
             >>
@@ -2239,18 +1997,11 @@ def register(
 
         Octave-transposes all PLTs to the octave rooted at -6:
 
-        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> tuplets = baca.from_collections(
-        ...     collections,
-        ...     [1, 1, 5, -1],
-        ...     16,
-        ... )
-        >>> tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-        >>> baca.rests_around(tuplets, [2], [4], 16)
-        >>> rmakers.beam(tuplets)
-        >>> _ = baca.register(tuplets, -6)
-        >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-        >>> lilypond_file = abjad.illustrators.components(tuplets)
+        >>> pitches = [0, 2, 10, 18, 16, 15, 20, 19, 9]
+        >>> leaves = abjad.makers.make_leaves(pitches, [(1, 4)])
+        >>> container = abjad.Container(leaves)
+        >>> _ = baca.register(container, -6)
+        >>> lilypond_file = abjad.illustrators.components([container])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2262,124 +2013,17 @@ def register(
             <<
                 \context Staff = "Staff"
                 {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
                     {
-                        \override TupletBracket.staff-padding = 2
-                        \time 27/16
-                        r8
-                        c'16
-                        [
-                        d'16
-                        ]
+                        \time 9/4
+                        c'4
+                        d'4
                         bf4
-                        ~
-                        bf16
-                        r16
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        fs16
-                        [
-                        e'16
-                        ]
+                        fs4
+                        e'4
                         ef'4
-                        ~
-                        ef'16
-                        r16
-                        af16
-                        [
-                        g16
-                        ]
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
+                        af4
+                        g4
                         a4
-                        ~
-                        a16
-                        r16
-                        r4
-                        \revert TupletBracket.staff-padding
-                    }
-                }
-            >>
-
-        Octave-transposes PLTs in tuplet 1 to the octave rooted at -6:
-
-        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> tuplets = baca.from_collections(
-        ...     collections,
-        ...     [1, 1, 5, -1],
-        ...     16,
-        ... )
-        >>> tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-        >>> baca.rests_around(tuplets, [2], [4], 16)
-        >>> rmakers.beam(tuplets)
-        >>> tuplet = baca.select.tuplet(tuplets, 1)
-        >>> baca.color(tuplet, lone=True)
-        >>> baca.register(tuplet, -6)
-        >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-        >>> lilypond_file = abjad.illustrators.components(tuplets)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        \override TupletBracket.staff-padding = 2
-                        \time 27/16
-                        r8
-                        c'16
-                        [
-                        d'16
-                        ]
-                        bf'4
-                        ~
-                        bf'16
-                        r16
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        \abjad-color-music #'green
-                        fs16
-                        [
-                        \abjad-color-music #'green
-                        e'16
-                        ]
-                        \abjad-color-music #'green
-                        ef'4
-                        ~
-                        \abjad-color-music #'green
-                        ef'16
-                        \abjad-color-music #'green
-                        r16
-                        \abjad-color-music #'green
-                        af16
-                        [
-                        \abjad-color-music #'green
-                        g16
-                        ]
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        a'4
-                        ~
-                        a'16
-                        r16
-                        r4
-                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -2388,18 +2032,11 @@ def register(
 
         Octave-transposes all PLTs to an octave interpolated from -6 to 18:
 
-        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> tuplets = baca.from_collections(
-        ...     collections,
-        ...     [1, 1, 5, -1],
-        ...     16,
-        ... )
-        >>> tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-        >>> baca.rests_around(tuplets, [2], [4], 16)
-        >>> rmakers.beam(tuplets)
-        >>> _ = baca.register(tuplets, -6, 18)
-        >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-        >>> lilypond_file = abjad.illustrators.components(tuplets)
+        >>> pitches = [0, 2, 10, 18, 16, 15, 20, 19, 9]
+        >>> leaves = abjad.makers.make_leaves(pitches, [(1, 4)])
+        >>> container = abjad.Container(leaves)
+        >>> _ = baca.register(container, -6, 18)
+        >>> lilypond_file = abjad.illustrators.components([container])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2411,124 +2048,17 @@ def register(
             <<
                 \context Staff = "Staff"
                 {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
                     {
-                        \override TupletBracket.staff-padding = 2
-                        \time 27/16
-                        r8
-                        c'16
-                        [
-                        d'16
-                        ]
+                        \time 9/4
+                        c'4
+                        d'4
                         bf'4
-                        ~
-                        bf'16
-                        r16
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        fs'16
-                        [
-                        e'16
-                        ]
+                        fs'4
+                        e'4
                         ef''4
-                        ~
-                        ef''16
-                        r16
-                        af''16
-                        [
-                        g''16
-                        ]
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
+                        af''4
+                        g''4
                         a''4
-                        ~
-                        a''16
-                        r16
-                        r4
-                        \revert TupletBracket.staff-padding
-                    }
-                }
-            >>
-
-        Octave-transposes PLTs in tuplet 1 to an octave interpolated from -6 to 18:
-
-        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> tuplets = baca.from_collections(
-        ...     collections,
-        ...     [1, 1, 5, -1],
-        ...     16,
-        ... )
-        >>> tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-        >>> baca.rests_around(tuplets, [2], [4], 16)
-        >>> rmakers.beam(tuplets)
-        >>> tuplet = baca.select.tuplet(tuplets, 1)
-        >>> baca.color(tuplet, lone=True)
-        >>> baca.register(tuplet, -6, 18)
-        >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-        >>> lilypond_file = abjad.illustrators.components(tuplets)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        \override TupletBracket.staff-padding = 2
-                        \time 27/16
-                        r8
-                        c'16
-                        [
-                        d'16
-                        ]
-                        bf'4
-                        ~
-                        bf'16
-                        r16
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        \abjad-color-music #'green
-                        fs16
-                        [
-                        \abjad-color-music #'green
-                        e'16
-                        ]
-                        \abjad-color-music #'green
-                        ef'4
-                        ~
-                        \abjad-color-music #'green
-                        ef'16
-                        \abjad-color-music #'green
-                        r16
-                        \abjad-color-music #'green
-                        af'16
-                        [
-                        \abjad-color-music #'green
-                        g''16
-                        ]
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/10
-                    {
-                        a'4
-                        ~
-                        a'16
-                        r16
-                        r4
-                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -3854,16 +3384,11 @@ def soprano_to_octave(argument, n: int) -> None:
 
     ..  container:: example
 
-        >>> collections = [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]]
-        >>> tuplets = baca.from_collections(
-        ...     collections,
-        ...     [5, -3],
-        ...     32,
-        ... )
-        >>> rmakers.beam(tuplets)
-        >>> baca.soprano_to_octave(tuplets, 3)
-        >>> baca.color(baca.select.plts(tuplets), lone=True)
-        >>> lilypond_file = abjad.illustrators.components(tuplets)
+        >>> collections = [(0, 2, 10), 17, (15, 16, 30), (7, 20), 9]
+        >>> leaves = abjad.makers.make_leaves(collections, [(1, 4)])
+        >>> container = abjad.Container(leaves)
+        >>> baca.soprano_to_octave(container, 3)
+        >>> lilypond_file = abjad.illustrators.components([container])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3875,61 +3400,13 @@ def soprano_to_octave(argument, n: int) -> None:
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
-                        \abjad-color-music #'green
                         \time 5/4
-                        <c,, d,, bf,,>8
-                        [
-                        ~
-                        \abjad-color-music #'green
-                        <c,, d,, bf,,>32
-                        ]
-                        r16.
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
-                        \abjad-color-music #'green
-                        f,8
-                        [
-                        ~
-                        \abjad-color-music #'green
-                        f,32
-                        ]
-                        r16.
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
-                        \abjad-color-music #'green
-                        <ef, e, fs>8
-                        [
-                        ~
-                        \abjad-color-music #'green
-                        <ef, e, fs>32
-                        ]
-                        r16.
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
-                        \abjad-color-music #'green
-                        <g,, af,>8
-                        [
-                        ~
-                        \abjad-color-music #'green
-                        <g,, af,>32
-                        ]
-                        r16.
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
-                        \abjad-color-music #'green
-                        a,,8
-                        [
-                        ~
-                        \abjad-color-music #'green
-                        a,,32
-                        ]
-                        r16.
+                        <c,, d,, bf,,>4
+                        f,4
+                        <ef, e, fs>4
+                        <g,, af,>4
+                        a,,4
                     }
                 }
             >>
@@ -3939,20 +3416,14 @@ def soprano_to_octave(argument, n: int) -> None:
         Octave-transposes music that such that the highest note in each pitched logical
         tie appears in octave 3:
 
-        >>> collections = [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]]
-        >>> tuplets = baca.from_collections(
-        ...     collections,
-        ...     [5, -3],
-        ...     32,
-        ... )
-        >>> rmakers.beam(tuplets)
-        >>> for plt in baca.select.plts(tuplets):
+        >>> collections = [(0, 2, 10), 17, (15, 16, 30), (7, 20), 9]
+        >>> leaves = abjad.makers.make_leaves(collections, [(1, 4)])
+        >>> container = abjad.Container(leaves)
+        >>> for plt in baca.select.plts(container):
         ...     baca.soprano_to_octave(plt, 3)
 
-        >>> baca.color(baca.select.plts(tuplets))
-        >>> lilypond_file = abjad.illustrators.components(tuplets)
+        >>> lilypond_file = abjad.illustrators.components([container])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
-
 
         ..  docs::
 
@@ -3963,61 +3434,13 @@ def soprano_to_octave(argument, n: int) -> None:
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
-                        \abjad-color-music #'red
                         \time 5/4
-                        <c d bf>8
-                        [
-                        ~
-                        \abjad-color-music #'red
-                        <c d bf>32
-                        ]
-                        r16.
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
-                        \abjad-color-music #'blue
-                        f8
-                        [
-                        ~
-                        \abjad-color-music #'blue
-                        f32
-                        ]
-                        r16.
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
-                        \abjad-color-music #'red
-                        <ef, e, fs>8
-                        [
-                        ~
-                        \abjad-color-music #'red
-                        <ef, e, fs>32
-                        ]
-                        r16.
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
-                        \abjad-color-music #'blue
-                        <g, af>8
-                        [
-                        ~
-                        \abjad-color-music #'blue
-                        <g, af>32
-                        ]
-                        r16.
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
-                        \abjad-color-music #'red
-                        a8
-                        [
-                        ~
-                        \abjad-color-music #'red
-                        a32
-                        ]
-                        r16.
+                        <c d bf>4
+                        f4
+                        <ef, e, fs>4
+                        <g, af>4
+                        a4
                     }
                 }
             >>

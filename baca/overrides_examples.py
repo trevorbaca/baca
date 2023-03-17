@@ -151,23 +151,10 @@ overrides.py examples.
     Overrides dynamic line spanner staff padding:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.dls_staff_padding(tuplets, 4)
-    ...     for tuplet in baca.select.tuplets(tuplets):
-    ...         baca.hairpin(
-    ...             baca.select.tleaves(tuplet),
-    ...             "p < f",
-    ...             remove_length_1_spanner_start=True,
-    ...         )
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("c'4 d' e'")
+    ...     baca.dls_staff_padding(container, 4)
+    ...     baca.hairpin(container, "p < f")
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -183,57 +170,16 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
                     \override DynamicLineSpanner.staff-padding = 4
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    c'16
-                    \p
-                    [
-                    \<
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    \f
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    \p
-                    [
-                    \<
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    \f
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
+                    \time 3/4
+                    c'4
                     \p
                     \<
-                    ~
-                    a'16
+                    d'4
+                    e'4
                     \f
-                    r16
-                    r4
                     \revert DynamicLineSpanner.staff-padding
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
@@ -243,23 +189,11 @@ overrides.py examples.
     Up-overrides dynamic line spanner direction:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.dls_up(tuplets)
-    ...     for tuplet in baca.select.tuplets(tuplets):
-    ...         baca.hairpin(
-    ...             baca.select.tleaves(tuplet),
-    ...             "p < f",
-    ...             remove_length_1_spanner_start=True,
-    ...         )
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("c'4 d' e'")
+    ...     baca.dls_staff_padding(container, 4)
+    ...     baca.hairpin(container, "p < f")
+    ...     baca.dls_up(container)
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -275,87 +209,32 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
                     \override DynamicLineSpanner.direction = #up
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    c'16
-                    \p
-                    [
-                    \<
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    \f
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    \p
-                    [
-                    \<
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    \f
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
+                    \override DynamicLineSpanner.staff-padding = 4
+                    \time 3/4
+                    c'4
                     \p
                     \<
-                    ~
-                    a'16
+                    d'4
+                    e'4
                     \f
-                    r16
-                    r4
                     \revert DynamicLineSpanner.direction
-                    \revert TupletBracket.staff-padding
+                    \revert DynamicLineSpanner.staff-padding
                 }
             }
         >>
-
 
 ..  container:: example
 
     Overrides dynamic text extra offset:
 
-    >>> def selector(argument):
-    ...     result = abjad.select.tuplet(argument, 1)
-    ...     result = baca.select.phead(result, 0)
-    ...     return result
-
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.dynamic(baca.select.pleaf(tuplets, 0), "p")
-    ...     baca.dynamic(selector(tuplets), "f")
-    ...     baca.dynamic_text_extra_offset(
-    ...         baca.select.pleaf(tuplets, 0), (-3, 0)
-    ...     )
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("c'4 d' e'")
+    ...     baca.dls_staff_padding(container, 4)
+    ...     baca.dynamic(container[0], "f")
+    ...     baca.dynamic_text_extra_offset(container[0], (3, 0))
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -371,49 +250,15 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    \once \override DynamicText.extra-offset = #'(-3 . 0)
-                    c'16
-                    \p
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
+                    \once \override DynamicText.extra-offset = #'(3 . 0)
+                    \override DynamicLineSpanner.staff-padding = 4
+                    \time 3/4
+                    c'4
                     \f
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
-                    r16
-                    r4
-                    \revert TupletBracket.staff-padding
+                    d'4
+                    e'4
+                    \revert DynamicLineSpanner.staff-padding
                 }
             }
         >>
@@ -827,17 +672,9 @@ overrides.py examples.
     Overrides note-head style:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.note_head_style_cross(baca.select.pleaves(tuplets))
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("c'4 d' e'")
+    ...     baca.note_head_style_cross(container)
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -853,125 +690,13 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
                     \override NoteHead.style = #'cross
-                    c'16
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
+                    \time 3/4
+                    c'4
+                    d'4
+                    e'4
                     \revert NoteHead.style
-                    r16
-                    r4
-                    \revert TupletBracket.staff-padding
-                }
-            }
-        >>
-
-..  container:: example
-
-    Overrides note-head style:
-
-    >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.note_head_style_harmonic(baca.select.pleaves(tuplets))
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
-    ...     return score
-
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        <<
-            \context Staff = "Staff"
-            {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    \override NoteHead.style = #'harmonic
-                    c'16
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
-                    \revert NoteHead.style
-                    r16
-                    r4
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
@@ -981,26 +706,11 @@ overrides.py examples.
     Down-overrides repeat tie direction:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[11, 11, 12], [11, 11, 11], [11]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     _ = baca.prolate(tuplets[0], "10:9")
-    ...     _ = baca.prolate(tuplets[1], "8:7")
-    ...     _ = baca.prolate(tuplets[2], "5:4")
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     container = abjad.Container(tuplets)
-    ...     for qrun in baca.select.qruns(container):
-    ...         baca.repeat_tie(qrun[1:]
-    ...     )
-    ...     pleaves = baca.select.pleaves(tuplets)
-    ...     baca.repeat_tie_down(pleaves)
-    ...     baca.stem_up(pleaves)
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     container[:] = []
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container(r"c'4 c' c'")
+    ...     baca.repeat_tie(container[1:])
+    ...     baca.repeat_tie_down(container)
+    ...     baca.stem_up(container)
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -1016,47 +726,17 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
-                    \override TupletBracket.staff-padding = 2
-                    \time 5/4
-                    r8
                     \override RepeatTie.direction = #down
                     \override Stem.direction = #up
-                    b'16
-                    [
-                    b'16
-                    ]
+                    \time 3/4
+                    c'4
+                    c'4
                     \repeatTie
-                    c''4
-                    ~
-                    c''16
+                    c'4
                     \repeatTie
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 7/8
-                {
-                    b'16
-                    [
-                    b'16
-                    ]
-                    \repeatTie
-                    b'4
-                    \repeatTie
-                    ~
-                    b'16
-                    \repeatTie
-                    r16
-                }
-                \times 4/5
-                {
-                    b'16
                     \revert RepeatTie.direction
                     \revert Stem.direction
-                    r4
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
@@ -1066,26 +746,11 @@ overrides.py examples.
     Up-overrides repeat tie direction:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[11, 11, 12], [11, 11, 11], [11]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     _ = baca.prolate(tuplets[0], "10:9")
-    ...     _ = baca.prolate(tuplets[1], "8:7")
-    ...     _ = baca.prolate(tuplets[2], "5:4")
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     container = abjad.Container(tuplets)
-    ...     for qrun in baca.select.qruns(container):
-    ...         baca.repeat_tie(qrun[1:]
-    ...     )
-    ...     pleaves = baca.select.pleaves(tuplets)
-    ...     baca.repeat_tie_up(pleaves)
-    ...     baca.stem_down(pleaves)
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     container[:] = []
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container(r"c'4 c' c'")
+    ...     baca.repeat_tie(container[1:])
+    ...     baca.repeat_tie_down(container)
+    ...     baca.stem_down(container)
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -1101,47 +766,17 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
-                    \override TupletBracket.staff-padding = 2
-                    \time 5/4
-                    r8
-                    \override RepeatTie.direction = #up
+                    \override RepeatTie.direction = #down
                     \override Stem.direction = #down
-                    b'16
-                    [
-                    b'16
-                    ]
+                    \time 3/4
+                    c'4
+                    c'4
                     \repeatTie
-                    c''4
-                    ~
-                    c''16
+                    c'4
                     \repeatTie
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 7/8
-                {
-                    b'16
-                    [
-                    b'16
-                    ]
-                    \repeatTie
-                    b'4
-                    \repeatTie
-                    ~
-                    b'16
-                    \repeatTie
-                    r16
-                }
-                \times 4/5
-                {
-                    b'16
                     \revert RepeatTie.direction
                     \revert Stem.direction
-                    r4
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
@@ -1151,17 +786,9 @@ overrides.py examples.
     Down-overrides direction of rests:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.rest_down(abjad.select.rests(tuplets))
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("r8 d'4 e' r8")
+    ...     baca.rest_down(container)
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -1177,48 +804,14 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
                     \override Rest.direction = #down
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
+                    \time 3/4
                     r8
-                    c'16
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
-                    r16
-                    r4
+                    d'4
+                    e'4
+                    r8
                     \revert Rest.direction
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
@@ -1228,17 +821,9 @@ overrides.py examples.
     Overrides rest position:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.rest_staff_position(tuplets, -6)
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("r8 d'4 e' r8")
+    ...     baca.rest_staff_position(container, -6)
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -1254,48 +839,14 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
                     \override Rest.staff-position = -6
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
+                    \time 3/4
                     r8
-                    c'16
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
-                    r16
-                    r4
+                    d'4
+                    e'4
+                    r8
                     \revert Rest.staff-position
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
@@ -1305,17 +856,9 @@ overrides.py examples.
     Makes rests transparent:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.rest_transparent(tuplets)
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("r8 d'4 e' r8")
+    ...     baca.rest_transparent(container)
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -1331,48 +874,14 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
                     \override Rest.transparent = ##t
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
+                    \time 3/4
                     r8
-                    c'16
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
-                    r16
-                    r4
+                    d'4
+                    e'4
+                    r8
                     \revert Rest.transparent
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
@@ -1382,17 +891,9 @@ overrides.py examples.
     Up-overrides rest direction:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.rest_up(abjad.select.rests(tuplets))
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("r8 d'4 e' r8")
+    ...     baca.rest_up(container)
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -1408,48 +909,14 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
                     \override Rest.direction = #up
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
+                    \time 3/4
                     r8
-                    c'16
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
-                    r16
-                    r4
+                    d'4
+                    e'4
+                    r8
                     \revert Rest.direction
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
@@ -1459,18 +926,10 @@ overrides.py examples.
     Overrides script color:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.accent(baca.select.pheads(tuplets))
-    ...     baca.script_color(tuplets, "#red")
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("c'4 d' e'")
+    ...     baca.accent(container)
+    ...     baca.script_color(container, "#red")
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -1486,57 +945,16 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
                     \override Script.color = #red
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    c'16
+                    \time 3/4
+                    c'4
                     - \accent
-                    [
-                    d'16
+                    d'4
                     - \accent
-                    ]
-                    bf'4
+                    e'4
                     - \accent
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    - \accent
-                    [
-                    e''16
-                    - \accent
-                    ]
-                    ef''4
-                    - \accent
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    - \accent
-                    [
-                    g''16
-                    - \accent
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    - \accent
-                    ~
-                    a'16
-                    r16
-                    r4
                     \revert Script.color
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
@@ -1546,18 +964,10 @@ overrides.py examples.
     Down-overrides script direction:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.accent(baca.select.pheads(tuplets))
-    ...     baca.script_down(tuplets)
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("c'4 d' e'")
+    ...     baca.accent(container)
+    ...     baca.script_down(container)
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -1573,57 +983,16 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
                     \override Script.direction = #down
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    c'16
+                    \time 3/4
+                    c'4
                     - \accent
-                    [
-                    d'16
+                    d'4
                     - \accent
-                    ]
-                    bf'4
+                    e'4
                     - \accent
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    - \accent
-                    [
-                    e''16
-                    - \accent
-                    ]
-                    ef''4
-                    - \accent
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    - \accent
-                    [
-                    g''16
-                    - \accent
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    - \accent
-                    ~
-                    a'16
-                    r16
-                    r4
                     \revert Script.direction
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
@@ -1633,18 +1002,10 @@ overrides.py examples.
     Overrides script extra offset:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.accent(baca.select.pheads(tuplets))
-    ...     baca.script_extra_offset(abjad.select.leaf(tuplets, 1), (-1.5, 0))
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("c'4 d' e'")
+    ...     baca.accent(container)
+    ...     baca.script_extra_offset(container, (-1.5, 0))
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -1660,56 +1021,16 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    \once \override Script.extra-offset = #'(-1.5 . 0)
-                    c'16
+                    \override Script.extra-offset = #'(-1.5 . 0)
+                    \time 3/4
+                    c'4
                     - \accent
-                    [
-                    d'16
+                    d'4
                     - \accent
-                    ]
-                    bf'4
+                    e'4
                     - \accent
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    - \accent
-                    [
-                    e''16
-                    - \accent
-                    ]
-                    ef''4
-                    - \accent
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    - \accent
-                    [
-                    g''16
-                    - \accent
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    - \accent
-                    ~
-                    a'16
-                    r16
-                    r4
-                    \revert TupletBracket.staff-padding
+                    \revert Script.extra-offset
                 }
             }
         >>
@@ -1719,18 +1040,10 @@ overrides.py examples.
     Up-overrides script direction:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.accent(baca.select.pheads(tuplets))
-    ...     baca.script_up(tuplets)
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("c'4 d' e'")
+    ...     baca.accent(container)
+    ...     baca.script_up(container)
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -1746,85 +1059,29 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
                     \override Script.direction = #up
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    c'16
+                    \time 3/4
+                    c'4
                     - \accent
-                    [
-                    d'16
+                    d'4
                     - \accent
-                    ]
-                    bf'4
+                    e'4
                     - \accent
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    - \accent
-                    [
-                    e''16
-                    - \accent
-                    ]
-                    ef''4
-                    - \accent
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    - \accent
-                    [
-                    g''16
-                    - \accent
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    - \accent
-                    ~
-                    a'16
-                    r16
-                    r4
                     \revert Script.direction
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
 
 ..  container:: example
 
-    Overrides slur direction:
-
-    >>> def selector(argument):
-    ...     tuplets = abjad.select.tuplets(argument)
-    ...     runs = [baca.select.tleaves(_) for _ in tuplets]
-    ...     runs = abjad.select.nontrivial(runs)
-    ...     return runs
+    Down-overrides slur direction:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     for item in selector(tuplets):
-    ...         baca.slur(item)
-    ...     baca.slur_down(tuplets)
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("c'4 d' e'")
+    ...     baca.slur(container)
+    ...     baca.slur_down([container])
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -1840,54 +1097,15 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
                     \override Slur.direction = #down
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    c'16
-                    [
+                    \time 3/4
+                    c'4
                     (
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
+                    d'4
+                    e'4
                     )
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    [
-                    (
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    )
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    (
-                    ~
-                    a'16
-                    )
-                    r16
-                    r4
                     \revert Slur.direction
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
@@ -1896,28 +1114,11 @@ overrides.py examples.
 
     Up-overrides slur direction:
 
-    >>> def selector(argument):
-    ...     tuplets = abjad.select.tuplets(argument)
-    ...     lists = [baca.select.tleaves(_) for _ in tuplets]
-    ...     lists = abjad.select.nontrivial(lists)
-    ...     return lists
-
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     for item in selector(tuplets):
-    ...         baca.slur(item)
-    ...     baca.slur_up(tuplets)
-    ...     baca.stem_down(baca.select.pleaves(tuplets))
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     baca.tuplet_bracket_down(tuplets)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("c'4 d' e'")
+    ...     baca.slur(container)
+    ...     baca.slur_up([container])
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -1933,58 +1134,15 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
                     \override Slur.direction = #up
-                    \override TupletBracket.direction = #down
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    \override Stem.direction = #down
-                    c'16
-                    [
+                    \time 3/4
+                    c'4
                     (
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
+                    d'4
+                    e'4
                     )
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    [
-                    (
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    )
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    (
-                    ~
-                    a'16
-                    )
-                    \revert Stem.direction
-                    r16
-                    r4
                     \revert Slur.direction
-                    \revert TupletBracket.direction
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
@@ -1994,17 +1152,9 @@ overrides.py examples.
     Overrides stem color:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.stem_color(baca.select.pleaves(tuplets), "#red")
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("c'4 d' e'")
+    ...     baca.stem_color(container, "#red")
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -2020,68 +1170,25 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
                     \override Stem.color = #red
-                    c'16
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
+                    \time 3/4
+                    c'4
+                    d'4
+                    e'4
                     \revert Stem.color
-                    r16
-                    r4
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
 
 ..  container:: example
 
-    Down-overrides stem direction pitched leaves:
+    Down-overrides stem direction:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.stem_down(baca.select.pleaves(tuplets))
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("c'4 d' e'")
+    ...     baca.stem_down(container)
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -2097,48 +1204,13 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
                     \override Stem.direction = #down
-                    c'16
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
+                    \time 3/4
+                    c'4
+                    d'4
+                    e'4
                     \revert Stem.direction
-                    r16
-                    r4
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
@@ -2148,17 +1220,9 @@ overrides.py examples.
     Up-overrides stem direction:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.stem_up(baca.select.pleaves(tuplets))
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("c'4 d' e'")
+    ...     baca.stem_up(container)
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -2174,48 +1238,13 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
                     \override Stem.direction = #up
-                    c'16
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
+                    \time 3/4
+                    c'4
+                    d'4
+                    e'4
                     \revert Stem.direction
-                    r16
-                    r4
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
@@ -2225,19 +1254,10 @@ overrides.py examples.
     Overrides sustain pedal staff padding:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     for tuplet in baca.select.tuplets(tuplets):
-    ...         baca.sustain_pedal(tuplet)
-    ...     baca.sustain_pedal_staff_padding(tuplets, 4)
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("c'4 d' e'")
+    ...     baca.sustain_pedal(container)
+    ...     baca.sustain_pedal_staff_padding(container, 5)
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -2253,54 +1273,15 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
-                    \override Staff.SustainPedalLineSpanner.staff-padding = 4
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
+                    \override Staff.SustainPedalLineSpanner.staff-padding = 5
+                    \time 3/4
+                    c'4
                     \sustainOn
-                    c'16
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                    \sustainOff
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    [
-                    \sustainOn
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    \sustainOff
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    \sustainOn
-                    ~
-                    a'16
-                    r16
-                    r4
+                    d'4
+                    e'4
                     \sustainOff
                     \revert Staff.SustainPedalLineSpanner.staff-padding
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
@@ -2309,25 +1290,11 @@ overrides.py examples.
 
     Overrides text script color:
 
-    >>> def selector(argument):
-    ...     result = abjad.select.tuplet(argument, 1)
-    ...     result = baca.select.phead(result, 0)
-    ...     return result
-
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.markup(baca.select.pleaf(tuplets, 0), r'\markup "più mosso"')
-    ...     baca.markup(selector(tuplets), r'\markup "lo stesso tempo"')
-    ...     baca.text_script_color(tuplets, "#red")
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("c'4 d' e'")
+    ...     baca.markup(container[0], r'\markup "più mosso"')
+    ...     baca.text_script_color(container, "#red")
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -2343,50 +1310,14 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
                     \override TextScript.color = #red
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    c'16
+                    \time 3/4
+                    c'4
                     ^ \markup "più mosso"
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    ^ \markup "lo stesso tempo"
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
-                    r16
-                    r4
+                    d'4
+                    e'4
                     \revert TextScript.color
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
@@ -2395,25 +1326,11 @@ overrides.py examples.
 
     Down-overrides text script direction:
 
-    >>> def selector(argument):
-    ...     result = abjad.select.tuplet(argument, 1)
-    ...     result = baca.select.phead(result, 0)
-    ...     return result
-
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.markup(baca.select.pleaf(tuplets, 0), r'\markup "più mosso"')
-    ...     baca.markup(selector(tuplets), r'\markup "lo stesso tempo"')
-    ...     baca.text_script_down(tuplets)
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("c'4 d' e'")
+    ...     baca.markup(container[0], r'\markup "più mosso"')
+    ...     baca.text_script_down(container)
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -2429,50 +1346,14 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
                     \override TextScript.direction = #down
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    c'16
+                    \time 3/4
+                    c'4
                     ^ \markup "più mosso"
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    ^ \markup "lo stesso tempo"
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
-                    r16
-                    r4
+                    d'4
+                    e'4
                     \revert TextScript.direction
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
@@ -2481,25 +1362,11 @@ overrides.py examples.
 
     Overrides text script padding:
 
-    >>> def selector(argument):
-    ...     result = abjad.select.tuplet(argument, 1)
-    ...     result = baca.select.phead(result, 0)
-    ...     return result
-
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.markup(baca.select.pleaf(tuplets, 0), r'\markup "più mosso"')
-    ...     baca.markup(selector(tuplets), r'\markup "lo stesso tempo"')
-    ...     baca.text_script_padding(tuplets, 4)
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("c'4 d' e'")
+    ...     baca.markup(container[0], r'\markup "più mosso"')
+    ...     baca.text_script_padding(container, 4)
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -2515,50 +1382,14 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
                     \override TextScript.padding = 4
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    c'16
+                    \time 3/4
+                    c'4
                     ^ \markup "più mosso"
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    ^ \markup "lo stesso tempo"
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
-                    r16
-                    r4
+                    d'4
+                    e'4
                     \revert TextScript.padding
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
@@ -2567,25 +1398,11 @@ overrides.py examples.
 
     Overrides text script staff padding:
 
-    >>> def selector(argument):
-    ...     result = abjad.select.tuplet(argument, 1)
-    ...     result = baca.select.phead(result, 0)
-    ...     return result
-
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.markup(baca.select.pleaf(tuplets, 0), r'\markup "più mosso"')
-    ...     baca.markup(selector(tuplets), r'\markup "lo stesso tempo"')
-    ...     baca.text_script_staff_padding(tuplets, n=4)
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("c'4 d' e'")
+    ...     baca.markup(container[0], r'\markup "più mosso"')
+    ...     baca.text_script_staff_padding(container, n=4)
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -2601,50 +1418,14 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
                     \override TextScript.staff-padding = 4
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    c'16
+                    \time 3/4
+                    c'4
                     ^ \markup "più mosso"
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    ^ \markup "lo stesso tempo"
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
-                    r16
-                    r4
+                    d'4
+                    e'4
                     \revert TextScript.staff-padding
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
@@ -2653,25 +1434,11 @@ overrides.py examples.
 
     Up-overrides text script direction:
 
-    >>> def selector(argument):
-    ...     result = abjad.select.tuplet(argument, 1)
-    ...     result = baca.select.phead(result, 0)
-    ...     return result
-
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.markup(baca.select.pleaf(tuplets, 0), r'\markup "più mosso"')
-    ...     baca.markup(selector(tuplets), r'\markup "lo stesso tempo"')
-    ...     baca.text_script_up(tuplets)
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("c'4 d' e'")
+    ...     baca.markup(container[0], r'\markup "più mosso"')
+    ...     baca.text_script_up(container)
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -2687,50 +1454,14 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
                     \override TextScript.direction = #up
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    c'16
+                    \time 3/4
+                    c'4
                     ^ \markup "più mosso"
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    ^ \markup "lo stesso tempo"
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
-                    r16
-                    r4
+                    d'4
+                    e'4
                     \revert TextScript.direction
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
@@ -2740,19 +1471,11 @@ overrides.py examples.
     Overrides text spanner staff padding:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.text_spanner_staff_padding(tuplets, 6)
-    ...     baca.text_script_staff_padding(tuplets, 6)
-    ...     baca.text_spanner(baca.select.tleaves(tuplets), "pont. => ord.")
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("c'4 d' e'")
+    ...     baca.text_spanner_staff_padding(container, 6)
+    ...     baca.text_script_staff_padding(container, 6)
+    ...     baca.text_spanner(container, "pont. => ord.")
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -2768,57 +1491,22 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
                     \override TextScript.staff-padding = 6
                     \override TextSpanner.staff-padding = 6
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    c'16
-                    [
+                    \time 3/4
+                    c'4
                     - \tweak bound-details.right.padding 0.5
                     - \tweak bound-details.right.stencil-align-dir-y #center
                     - \abjad-dashed-line-with-arrow
                     - \baca-text-spanner-left-text "pont."
                     - \baca-text-spanner-right-text "ord."
                     \startTextSpan
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
+                    d'4
+                    e'4
                     \stopTextSpan
-                    r16
-                    r4
                     \revert TextScript.staff-padding
                     \revert TextSpanner.staff-padding
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
@@ -2828,21 +1516,10 @@ overrides.py examples.
     Down-overrides tie direction:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[11, 11, 12], [11, 11, 11], [11]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     _ = baca.prolate(tuplets[0], "10:9")
-    ...     _ = baca.prolate(tuplets[1], "8:7")
-    ...     _ = baca.prolate(tuplets[2], "5:4")
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.stem_up(baca.select.pleaves(tuplets))
-    ...     baca.tie(baca.select.pleaf(tuplets, 0))
-    ...     baca.tie_down(baca.select.pleaves(tuplets))
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("c''4 ~ c'' ~ c''")
+    ...     baca.stem_up(container)
+    ...     baca.tie_down(container)
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -2858,43 +1535,17 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
-                    \override TupletBracket.staff-padding = 2
-                    \time 5/4
-                    r8
                     \override Stem.direction = #up
                     \override Tie.direction = #down
-                    b'16
-                    [
-                    ~
-                    b'16
-                    ]
+                    \time 3/4
                     c''4
                     ~
-                    c''16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 7/8
-                {
-                    b'16
-                    [
-                    b'16
-                    ]
-                    b'4
+                    c''4
                     ~
-                    b'16
-                    r16
-                }
-                \times 4/5
-                {
-                    b'16
+                    c''4
                     \revert Stem.direction
                     \revert Tie.direction
-                    r4
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
@@ -2904,20 +1555,10 @@ overrides.py examples.
     Up-overrides tie direction:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[11, 11, 12], [11, 11, 11], [11]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     _ = baca.prolate(tuplets[0], "10:9")
-    ...     _ = baca.prolate(tuplets[1], "8:7")
-    ...     _ = baca.prolate(tuplets[2], "5:4")
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.stem_down(baca.select.pleaves(tuplets))
-    ...     baca.tie_up(baca.select.pleaves(tuplets))
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("c'4 ~ c' ~ c'")
+    ...     baca.stem_down(container)
+    ...     baca.tie_up(container)
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -2933,42 +1574,17 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
-                    \override TupletBracket.staff-padding = 2
-                    \time 5/4
-                    r8
                     \override Stem.direction = #down
                     \override Tie.direction = #up
-                    b'16
-                    [
-                    b'16
-                    ]
-                    c''4
+                    \time 3/4
+                    c'4
                     ~
-                    c''16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 7/8
-                {
-                    b'16
-                    [
-                    b'16
-                    ]
-                    b'4
+                    c'4
                     ~
-                    b'16
-                    r16
-                }
-                \times 4/5
-                {
-                    b'16
+                    c'4
                     \revert Stem.direction
                     \revert Tie.direction
-                    r4
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
@@ -2978,18 +1594,9 @@ overrides.py examples.
     Overrides time signature extra offset:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.time_signature_extra_offset(
-    ...         abjad.select.rest(tuplets, 0), (-6, 0))
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("c'4 d' e'")
+    ...     baca.time_signature_extra_offset(container[0], (-6, 0))
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -3005,47 +1612,12 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
                     \once \override Score.TimeSignature.extra-offset = #'(-6 . 0)
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    c'16
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
-                    r16
-                    r4
-                    \revert TupletBracket.staff-padding
+                    \time 3/4
+                    c'4
+                    d'4
+                    e'4
                 }
             }
         >>
@@ -3055,17 +1627,9 @@ overrides.py examples.
     Makes all time signatures transparent:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.time_signature_transparent(tuplets)
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container("c'4 d' e'")
+    ...     baca.time_signature_transparent(container)
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -3081,48 +1645,13 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
                     \override Score.TimeSignature.transparent = ##t
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    c'16
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
-                    r16
-                    r4
+                    \time 3/4
+                    c'4
+                    d'4
+                    e'4
                     \revert Score.TimeSignature.transparent
-                    \revert TupletBracket.staff-padding
                 }
             }
         >>
@@ -3132,17 +1661,10 @@ overrides.py examples.
     Down-overrides tuplet bracket direction:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     baca.tuplet_bracket_down(tuplets)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container(r"\times 2/3 { c'4 d' e' }")
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     baca.tuplet_bracket_down(container)
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -3158,200 +1680,18 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
-                    \override TupletBracket.direction = #down
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    c'16
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
-                    r16
-                    r4
-                    \revert TupletBracket.direction
-                    \revert TupletBracket.staff-padding
-                }
-            }
-        >>
-
-..  container:: example
-
-    Overrides tuplet bracket extra offset:
-
-    >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.tuplet_bracket_extra_offset(
-    ...         abjad.select.leaf(tuplets, 0), (-1, 0)
-    ...     )
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
-    ...     return score
-
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        <<
-            \context Staff = "Staff"
-            {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    \once \override TupletBracket.extra-offset = #'(-1 . 0)
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    c'16
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
-                    r16
-                    r4
-                    \revert TupletBracket.staff-padding
-                }
-            }
-        >>
-
-..  container:: example
-
-    Overrides tuplet bracket staff padding:
-
-    >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
-    ...     return score
-
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        <<
-            \context Staff = "Staff"
-            {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    c'16
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
-                    r16
-                    r4
-                    \revert TupletBracket.staff-padding
+                    \times 2/3
+                    {
+                        \override TupletBracket.direction = #down
+                        \override TupletBracket.staff-padding = 2
+                        \time 1/2
+                        c'4
+                        d'4
+                        e'4
+                        \revert TupletBracket.direction
+                        \revert TupletBracket.staff-padding
+                    }
                 }
             }
         >>
@@ -3361,17 +1701,10 @@ overrides.py examples.
     Up-overrides tuplet bracket direction:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     baca.tuplet_bracket_up(tuplets)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container(r"\times 2/3 { c'4 d' e' }")
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     baca.tuplet_bracket_up(container)
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -3387,48 +1720,18 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
-                    \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    c'16
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
-                    r16
-                    r4
-                    \revert TupletBracket.direction
-                    \revert TupletBracket.staff-padding
+                    \times 2/3
+                    {
+                        \override TupletBracket.direction = #up
+                        \override TupletBracket.staff-padding = 2
+                        \time 1/2
+                        c'4
+                        d'4
+                        e'4
+                        \revert TupletBracket.direction
+                        \revert TupletBracket.staff-padding
+                    }
                 }
             }
         >>
@@ -3438,19 +1741,10 @@ overrides.py examples.
     Overrides tuplet number extra offset:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1, 1, 5, -1],
-    ...         16,
-    ...     )
-    ...     tuplets = [baca.prolate(_, "10:9") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
-    ...     rmakers.beam(tuplets)
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
-    ...     baca.tuplet_number_extra_offset(
-    ...         abjad.select.leaf(tuplets, 0), (-1, 0)
-    ...     )
-    ...     score = baca.docs.make_single_staff_score(tuplets)
+    ...     container = abjad.Container(r"\times 2/3 { c'4 d' e' }")
+    ...     baca.tuplet_bracket_staff_padding(container, 2)
+    ...     baca.tuplet_number_extra_offset(container, (-1, 0))
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -3466,47 +1760,18 @@ overrides.py examples.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
                 {
-                    \once \override TupletNumber.extra-offset = #'(-1 . 0)
-                    \override TupletBracket.staff-padding = 2
-                    \time 27/16
-                    r8
-                    c'16
-                    [
-                    d'16
-                    ]
-                    bf'4
-                    ~
-                    bf'16
-                    r16
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    fs''16
-                    [
-                    e''16
-                    ]
-                    ef''4
-                    ~
-                    ef''16
-                    r16
-                    af''16
-                    [
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/10
-                {
-                    a'4
-                    ~
-                    a'16
-                    r16
-                    r4
-                    \revert TupletBracket.staff-padding
+                    \times 2/3
+                    {
+                        \override TupletBracket.staff-padding = 2
+                        \override TupletNumber.extra-offset = #'(-1 . 0)
+                        \time 1/2
+                        c'4
+                        d'4
+                        e'4
+                        \revert TupletBracket.staff-padding
+                        \revert TupletNumber.extra-offset
+                    }
                 }
             }
         >>
