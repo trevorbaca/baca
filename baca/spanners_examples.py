@@ -68,8 +68,9 @@ spanners.py examples
 
     Attaches ottava indicators to trimmed leaves:
 
+    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> tuplets = baca.from_collections(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     collections,
     ...     [1, 1, 5, -1],
     ...     16,
     ... )
@@ -140,8 +141,9 @@ spanners.py examples
 
     Attaches ottava bassa indicators to trimmed leaves:
 
+    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> tuplets = baca.from_collections(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     collections,
     ...     [1, 1, 5, -1],
     ...     16,
     ... )
@@ -212,8 +214,9 @@ spanners.py examples
 
     Attaches slur to trimmed leaves:
 
+    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> tuplets = baca.from_collections(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     collections,
     ...     [1, 1, 5, -1],
     ...     16,
     ... )
@@ -287,8 +290,9 @@ spanners.py examples
 
     Pedals leaves:
 
+    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> tuplets = baca.from_collections(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     collections,
     ...     [1, 1, 5, -1],
     ...     16,
     ... )
@@ -362,8 +366,9 @@ spanners.py examples
 
     Attaches trill spanner to trimmed leaves (leaked to the right):
 
+    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> tuplets = baca.from_collections(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     collections,
     ...     [1, 1, 5, -1],
     ...     16,
     ... )
@@ -435,8 +440,9 @@ spanners.py examples
     Attaches trill to trimmed leaves (leaked to the right) in every
     run:
 
+    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> tuplets = baca.from_collections(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     collections,
     ...     [1, 1, 5, -1],
     ...     16,
     ... )
@@ -516,8 +522,9 @@ spanners.py examples
 
     Tweaks trill spanner:
 
+    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     >>> tuplets = baca.from_collections(
-    ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+    ...     collections,
     ...     [1, 1, 5, -1],
     ...     16,
     ... )

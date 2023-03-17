@@ -280,17 +280,17 @@ Examples.
 
     Colors out-of-range pitches.
 
-    >>> collection_lists = [
-    ...     [[4]],
-    ...     [[-12, 2, 3, 5, 8, 9, 0]],
-    ...     [[11]],
-    ...     [[10, 7, 9, 10, 0, 5]],
+    >>> collections = [
+    ...     [4],
+    ...     [-12, 2, 3, 5, 8, 9, 0],
+    ...     [11],
+    ...     [10, 7, 9, 10, 0, 5],
     ... ]
     >>> figures, time_signatures = [], []
-    >>> for i, collections in enumerate(collection_lists):
-    ...     tuplets = baca.from_collections(collections, [1], 16)
-    ...     figures.append(tuplets)
-    ...     time_signature = abjad.get.duration(tuplets)
+    >>> for i, collection in enumerate(collections):
+    ...     tuplet = baca.from_collection(collection, [1], 16)
+    ...     figures.append([tuplet])
+    ...     time_signature = abjad.get.duration(tuplet)
     ...     time_signatures.append(time_signature)
     ...
     >>> figures_ = []
@@ -375,17 +375,17 @@ Examples.
 
     Colors repeat pitch-classes.
 
-    >>> collection_lists = [
-    ...     [[4]],
-    ...     [[6, 2, 3, 5, 9, 9, 0]],
-    ...     [[11]],
-    ...     [[10, 7, 9, 12, 0, 5]],
+    >>> collections = [
+    ...     [4],
+    ...     [6, 2, 3, 5, 9, 9, 0],
+    ...     [11],
+    ...     [10, 7, 9, 12, 0, 5],
     ... ]
     >>> figures, time_signatures = [], []
-    >>> for i, collections in enumerate(collection_lists):
-    ...     tuplets = baca.from_collections(collections, [1], 16)
-    ...     figures.append(tuplets)
-    ...     time_signature = abjad.get.duration(tuplets)
+    >>> for i, collection in enumerate(collections):
+    ...     tuplet = baca.from_collection(collection, [1], 16)
+    ...     figures.append([tuplet])
+    ...     time_signature = abjad.get.duration(tuplet)
     ...     time_signatures.append(time_signature)
     ...
     >>> figures_ = []

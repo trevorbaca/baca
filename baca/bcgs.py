@@ -19,9 +19,9 @@ bcgs.py examples.
     ...         collection,
     ...         baca.LMR(),
     ...     )
-    ...     tuplets_ = baca.from_collections([collection], [1], 8)
-    ...     baca.attach_before_grace_containers(containers, tuplets_[0])
-    ...     tuplets.extend(tuplets_)
+    ...     tuplet = baca.from_collection(collection, [1], 8)
+    ...     baca.attach_before_grace_containers(containers, tuplet)
+    ...     tuplets.append(tuplet)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -116,9 +116,9 @@ bcgs.py examples.
     ...         baca.LMR(),
     ...         duration=abjad.Duration(1, 8),
     ...     )
-    ...     tuplets_ = baca.from_collections([collection], [1], 8)
-    ...     baca.attach_before_grace_containers(containers, tuplets_[0])
-    ...     tuplets.extend(tuplets_)
+    ...     tuplet = baca.from_collection(collection, [1], 8)
+    ...     baca.attach_before_grace_containers(containers, tuplet)
+    ...     tuplets.append(tuplet)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -216,9 +216,9 @@ bcgs.py examples.
     ...             right_cyclic=True,
     ...         ),
     ...     )
-    ...     tuplets_ = baca.from_collections([collection], [1], 8)
-    ...     baca.attach_before_grace_containers(containers, tuplets_[0])
-    ...     tuplets.extend(tuplets_)
+    ...     tuplet = baca.from_collection(collection, [1], 8)
+    ...     baca.attach_before_grace_containers(containers, tuplet)
+    ...     tuplets.append(tuplet)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -322,9 +322,9 @@ bcgs.py examples.
     ...             left_cyclic=True,
     ...         ),
     ...     )
-    ...     tuplets_ = baca.from_collections([collection], [1], 8)
-    ...     baca.attach_before_grace_containers(containers, tuplets_[0])
-    ...     tuplets.extend(tuplets_)
+    ...     tuplet = baca.from_collection(collection, [1], 8)
+    ...     baca.attach_before_grace_containers(containers, tuplet)
+    ...     tuplets.append(tuplet)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -430,9 +430,9 @@ bcgs.py examples.
     ...             right_length=3,
     ...         ),
     ...     )
-    ...     tuplets_ = baca.from_collections([collection], [1], 8)
-    ...     baca.attach_before_grace_containers(containers, tuplets_[0])
-    ...     tuplets.extend(tuplets_)
+    ...     tuplet = baca.from_collection(collection, [1], 8)
+    ...     baca.attach_before_grace_containers(containers, tuplet)
+    ...     tuplets.append(tuplet)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -538,9 +538,9 @@ bcgs.py examples.
     ...         collection,
     ...         baca.lmr(left_length=1),
     ...     )
-    ...     tuplets_ = baca.from_collections([collection], [1], 8)
-    ...     baca.attach_before_grace_containers(containers, tuplets_[0])
-    ...     tuplets.extend(tuplets_)
+    ...     tuplet = baca.from_collection(collection, [1], 8)
+    ...     baca.attach_before_grace_containers(containers, tuplet)
+    ...     tuplets.append(tuplet)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -640,9 +640,9 @@ bcgs.py examples.
     ...         collection,
     ...         baca.LMR(),
     ...     )
-    ...     tuplets_ = baca.from_collections([collection], [1], 4)
-    ...     baca.attach_before_grace_containers(containers, tuplets_[0])
-    ...     tuplets.extend(tuplets_)
+    ...     tuplet = baca.from_collection(collection, [1], 4)
+    ...     baca.attach_before_grace_containers(containers, tuplet)
+    ...     tuplets.append(tuplet)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> lilypond_file = abjad.illustrators.components(tuplets)

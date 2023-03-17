@@ -88,11 +88,8 @@ overrides.py examples.
     Overrides beam positions:
 
     >>> def make_score():
-    ...     tuplets = baca.from_collections(
-    ...         [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-    ...         [1],
-    ...         16,
-    ...     )
+    ...     collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+    ...     tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
     ...     tuplets = [baca.prolate(_, "5:4") for _ in tuplets]
     ...     baca.rests_around(tuplets, [2], [4], 16)
     ...     pleaves = baca.select.pleaves(tuplets)
