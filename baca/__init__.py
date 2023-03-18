@@ -15,11 +15,7 @@ from . import select
 from . import sequence
 from . import typings
 from .enums import colors, enums
-from .commands import *
-from .constellation import *
-from .cursor import Cursor
-from .docs import global_context_string
-from .figures import (
+from .accumulator import (
     Accumulator,
     anchor,
     anchor_after,
@@ -28,6 +24,10 @@ from .figures import (
     resume,
     resume_after,
 )
+from .commands import *
+from .constellation import *
+from .cursor import Cursor
+from .docs import global_context_string
 from .imbricate import imbricate
 from .indicatorclasses import *
 from .indicatorcommands import *
