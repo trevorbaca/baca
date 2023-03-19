@@ -40,10 +40,10 @@ class ArpeggiationSpacingSpecifier:
         >>> collections = [abjad.PitchSegment(_) for _ in collections]
         >>> collections = [abjad.PitchClassSegment(_) for _ in collections]
         >>> collections = [baca.pcollections.arpeggiate_up(_) for _ in collections]
-        >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
-        >>> rmakers.beam(tuplets)
-        >>> baca.bass_to_octave(tuplets, 2)
-        >>> lilypond_file = abjad.illustrators.components(tuplets)
+        >>> containers = [baca.container_from_collection(_, [1], 16) for _ in collections]
+        >>> rmakers.beam(containers)
+        >>> baca.bass_to_octave(containers, 2)
+        >>> lilypond_file = abjad.illustrators.components(containers)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -55,7 +55,6 @@ class ArpeggiationSpacingSpecifier:
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
                         \time 9/16
                         c,16
@@ -64,7 +63,6 @@ class ArpeggiationSpacingSpecifier:
                         bf,16
                         ]
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         fs,16
                         [
@@ -74,7 +72,6 @@ class ArpeggiationSpacingSpecifier:
                         g''16
                         ]
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         a,16
                     }
@@ -88,10 +85,10 @@ class ArpeggiationSpacingSpecifier:
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> collections = [abjad.PitchClassSegment(_) for _ in collections]
         >>> collections = [baca.pcollections.arpeggiate_down(_) for _ in collections]
-        >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
-        >>> rmakers.beam(tuplets)
-        >>> baca.bass_to_octave(tuplets, 2)
-        >>> lilypond_file = abjad.illustrators.components(tuplets)
+        >>> containers = [baca.container_from_collection(_, [1], 16) for _ in collections]
+        >>> rmakers.beam(containers)
+        >>> baca.bass_to_octave(containers, 2)
+        >>> lilypond_file = abjad.illustrators.components(containers)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -103,7 +100,6 @@ class ArpeggiationSpacingSpecifier:
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
                         \time 9/16
                         c'16
@@ -112,7 +108,6 @@ class ArpeggiationSpacingSpecifier:
                         bf,16
                         ]
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         fs16
                         [
@@ -122,7 +117,6 @@ class ArpeggiationSpacingSpecifier:
                         g,16
                         ]
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         a,16
                     }

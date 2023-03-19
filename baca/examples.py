@@ -288,9 +288,9 @@ Examples.
     ... ]
     >>> figures, time_signatures = [], []
     >>> for i, collection in enumerate(collections):
-    ...     tuplet = baca.from_collection(collection, [1], 16)
-    ...     figures.append([tuplet])
-    ...     time_signature = abjad.get.duration(tuplet)
+    ...     container = baca.container_from_collection(collection, [1], 16)
+    ...     figures.append([container])
+    ...     time_signature = abjad.get.duration(container)
     ...     time_signatures.append(time_signature)
     ...
     >>> figures_ = []
@@ -339,11 +339,9 @@ Examples.
                 }
                 \context Voice = "Music"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
                         e'16
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         \baca-out-of-range-coloring
                         c16
@@ -354,11 +352,9 @@ Examples.
                         a'16
                         c'16
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         b'16
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         bf'16
                         g'16
@@ -383,9 +379,9 @@ Examples.
     ... ]
     >>> figures, time_signatures = [], []
     >>> for i, collection in enumerate(collections):
-    ...     tuplet = baca.from_collection(collection, [1], 16)
-    ...     figures.append([tuplet])
-    ...     time_signature = abjad.get.duration(tuplet)
+    ...     container = baca.container_from_collection(collection, [1], 16)
+    ...     figures.append([container])
+    ...     time_signature = abjad.get.duration(container)
     ...     time_signatures.append(time_signature)
     ...
     >>> figures_ = []
@@ -428,11 +424,9 @@ Examples.
                 }
                 \context Voice = "Music"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
                         e'16
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         fs'16
                         d'16
@@ -444,11 +438,9 @@ Examples.
                         a'16
                         c'16
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         b'16
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         bf'16
                         g'16

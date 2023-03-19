@@ -611,7 +611,7 @@ def bass_to_octave(argument, n: int) -> None:
 
     ..  container:: example
 
-        >>> tuplet = baca.from_collection({0, 14, 28}, [1], 16)
+        >>> tuplet = baca.container_from_collection({0, 14, 28}, [1], 16)
         >>> rmakers.beam([tuplet])
         >>> _ = baca.bass_to_octave(tuplet, 4)
         >>> lilypond_file = abjad.illustrators.components([tuplet])
@@ -626,7 +626,6 @@ def bass_to_octave(argument, n: int) -> None:
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
                         \time 1/16
                         <c' d'' e'''>16
@@ -634,7 +633,7 @@ def bass_to_octave(argument, n: int) -> None:
                 }
             >>
 
-        >>> tuplet = baca.from_collection({0, 14, 28}, [1], 16)
+        >>> tuplet = baca.container_from_collection({0, 14, 28}, [1], 16)
         >>> rmakers.beam([tuplet])
         >>> _ = baca.center_to_octave(tuplet, 4)
         >>> lilypond_file = abjad.illustrators.components([tuplet])
@@ -649,7 +648,6 @@ def bass_to_octave(argument, n: int) -> None:
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
                         \time 1/16
                         <c d' e''>16
@@ -657,7 +655,7 @@ def bass_to_octave(argument, n: int) -> None:
                 }
             >>
 
-        >>> tuplet = baca.from_collection({0, 14, 28}, [1], 16)
+        >>> tuplet = baca.container_from_collection({0, 14, 28}, [1], 16)
         >>> rmakers.beam([tuplet])
         >>> _ = baca.soprano_to_octave(tuplet, 4)
         >>> lilypond_file = abjad.illustrators.components([tuplet])
@@ -672,7 +670,6 @@ def bass_to_octave(argument, n: int) -> None:
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
                         \time 1/16
                         <c, d e'>16
@@ -684,7 +681,7 @@ def bass_to_octave(argument, n: int) -> None:
 
         Disjunct notes:
 
-        >>> tuplet = baca.from_collection([0, 14, 28], [1], 16)
+        >>> tuplet = baca.container_from_collection([0, 14, 28], [1], 16)
         >>> rmakers.beam([tuplet])
         >>> _ = baca.bass_to_octave(tuplet, 4)
         >>> lilypond_file = abjad.illustrators.components([tuplet])
@@ -699,7 +696,6 @@ def bass_to_octave(argument, n: int) -> None:
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
                         \time 3/16
                         c'16
@@ -711,7 +707,7 @@ def bass_to_octave(argument, n: int) -> None:
                 }
             >>
 
-        >>> tuplet = baca.from_collection([0, 14, 28], [1], 16)
+        >>> tuplet = baca.container_from_collection([0, 14, 28], [1], 16)
         >>> rmakers.beam([tuplet])
         >>> _ = baca.center_to_octave(tuplet, 4)
         >>> lilypond_file = abjad.illustrators.components([tuplet])
@@ -726,7 +722,6 @@ def bass_to_octave(argument, n: int) -> None:
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
                         \time 3/16
                         c16
@@ -738,7 +733,7 @@ def bass_to_octave(argument, n: int) -> None:
                 }
             >>
 
-        >>> tuplet = baca.from_collection([0, 14, 28], [1], 16)
+        >>> tuplet = baca.container_from_collection([0, 14, 28], [1], 16)
         >>> rmakers.beam([tuplet])
         >>> _ = baca.soprano_to_octave(tuplet, 4)
         >>> lilypond_file = abjad.illustrators.components([tuplet])
@@ -753,7 +748,6 @@ def bass_to_octave(argument, n: int) -> None:
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
                         \time 3/16
                         c,16
@@ -769,7 +763,7 @@ def bass_to_octave(argument, n: int) -> None:
 
         Conjunct notes:
 
-        >>> tuplet = baca.from_collection([10, 12, 14], [1], 16)
+        >>> tuplet = baca.container_from_collection([10, 12, 14], [1], 16)
         >>> rmakers.beam([tuplet])
         >>> _ = baca.bass_to_octave(tuplet, 4)
         >>> lilypond_file = abjad.illustrators.components([tuplet])
@@ -784,7 +778,6 @@ def bass_to_octave(argument, n: int) -> None:
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
                         \time 3/16
                         bf'16
@@ -796,7 +789,7 @@ def bass_to_octave(argument, n: int) -> None:
                 }
             >>
 
-        >>> tuplet = baca.from_collection([10, 12, 14], [1], 16)
+        >>> tuplet = baca.container_from_collection([10, 12, 14], [1], 16)
         >>> rmakers.beam([tuplet])
         >>> _ = baca.center_to_octave(tuplet, 4)
         >>> lilypond_file = abjad.illustrators.components([tuplet])
@@ -811,7 +804,6 @@ def bass_to_octave(argument, n: int) -> None:
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
                         \time 3/16
                         bf16
@@ -823,7 +815,7 @@ def bass_to_octave(argument, n: int) -> None:
                 }
             >>
 
-        >>> tuplet = baca.from_collection([10, 12, 14], [1], 16)
+        >>> tuplet = baca.container_from_collection([10, 12, 14], [1], 16)
         >>> rmakers.beam([tuplet])
         >>> _ = baca.soprano_to_octave(tuplet, 4)
         >>> lilypond_file = abjad.illustrators.components([tuplet])
@@ -838,7 +830,6 @@ def bass_to_octave(argument, n: int) -> None:
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
                         \time 3/16
                         bf16
@@ -963,7 +954,7 @@ def bass_to_octave(argument, n: int) -> None:
         Octave-transposes music such that the lowest note appears in octave 3:
 
         >>> collections = [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]]
-        >>> tuplets = [baca.from_collection(_, [4], 16) for _ in collections]
+        >>> tuplets = [baca.container_from_collection(_, [4], 16) for _ in collections]
         >>> baca.bass_to_octave(tuplets, 3)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -977,24 +968,19 @@ def bass_to_octave(argument, n: int) -> None:
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
                         \time 5/4
                         <c d bf>4
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         f'4
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         <ef' e' fs''>4
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         <g af'>4
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         a4
                     }
@@ -1007,7 +993,7 @@ def bass_to_octave(argument, n: int) -> None:
         appears in octave 3:
 
         >>> collections = [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]]
-        >>> tuplets = [baca.from_collection(_, [4], 16) for _ in collections]
+        >>> tuplets = [baca.container_from_collection(_, [4], 16) for _ in collections]
         >>> for plt in baca.select.plts(tuplets):
         ...     baca.bass_to_octave(plt, 3)
 
@@ -1023,24 +1009,19 @@ def bass_to_octave(argument, n: int) -> None:
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
                         \time 5/4
                         <c d bf>4
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         f4
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         <ef e fs'>4
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         <g af'>4
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         a4
                     }
@@ -1355,7 +1336,7 @@ def interpolate_pitches(
     ..  container:: example
 
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-        >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+        >>> tuplets = [baca.container_from_collection(_, [1], 16) for _ in collections]
         >>> rmakers.beam(tuplets)
         >>> _ = baca.clef(abjad.select.leaf(tuplets, 0), "treble")
         >>> _ = baca.interpolate_pitches(tuplets, "Eb4", "F#5")
@@ -1371,7 +1352,6 @@ def interpolate_pitches(
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
                         \clef "treble"
                         \time 3/2
@@ -1390,7 +1370,6 @@ def interpolate_pitches(
                         b'16
                         ]
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         b'16
                         [
@@ -1413,7 +1392,7 @@ def interpolate_pitches(
     ..  container:: example
 
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-        >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+        >>> tuplets = [baca.container_from_collection(_, [1], 16) for _ in collections]
         >>> rmakers.beam(tuplets)
         >>> _ = baca.clef(abjad.select.leaf(tuplets, 0), "treble")
         >>> baca.interpolate_pitches(tuplets, "Eb4", "F#5")
@@ -1435,7 +1414,6 @@ def interpolate_pitches(
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
                         \override Glissando.thickness = 3
                         \clef "treble"
@@ -1460,7 +1438,6 @@ def interpolate_pitches(
                         b'16
                         ]
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         b'16
                         [
@@ -1863,7 +1840,7 @@ def register(
     ..  container:: example
 
         >>> collections = [[10, 12, 14], [10, 12, 14], [10, 12, 14]]
-        >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+        >>> tuplets = [baca.container_from_collection(_, [1], 16) for _ in collections]
         >>> rmakers.beam(tuplets)
         >>> _ = baca.register(tuplets, 15)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -1878,7 +1855,6 @@ def register(
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
                         \time 9/16
                         bf''16
@@ -1887,7 +1863,6 @@ def register(
                         d'''16
                         ]
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         bf''16
                         [
@@ -1895,7 +1870,6 @@ def register(
                         d'''16
                         ]
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         bf''16
                         [
@@ -1970,7 +1944,7 @@ def register(
 
         Works with chords:
 
-        >>> tuplet = baca.from_collection({10, 12, 14}, [1], 16)
+        >>> tuplet = baca.container_from_collection({10, 12, 14}, [1], 16)
         >>> rmakers.beam([tuplet])
         >>> _ = baca.register(tuplet, -6)
         >>> lilypond_file = abjad.illustrators.components([tuplet])
@@ -1985,7 +1959,6 @@ def register(
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
                         \time 1/16
                         <bf c' d'>16
@@ -2066,7 +2039,7 @@ def register(
     ..  container:: example
 
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-        >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+        >>> tuplets = [baca.container_from_collection(_, [1], 16) for _ in collections]
         >>> rmakers.beam(tuplets)
         >>> _ = baca.register(tuplets, 0, 24)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -2081,7 +2054,6 @@ def register(
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
                         \time 3/2
                         fs'16
@@ -2099,7 +2071,6 @@ def register(
                         d''16
                         ]
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         fs''16
                         [
@@ -2125,7 +2096,7 @@ def register(
 
         >>> collections = [[6, 4], [3, 5], [9, 10], [0, 11], [8, 7], [1, 2]]
         >>> collections = [set(_) for _ in collections]
-        >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+        >>> tuplets = [baca.container_from_collection(_, [1], 16) for _ in collections]
         >>> rmakers.beam(tuplets)
         >>> _ = baca.register(tuplets, 0, 24)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -2140,28 +2111,22 @@ def register(
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
                         \time 3/8
                         <e' fs'>16
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         <f' ef''>16
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         <a' bf'>16
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         <c'' b''>16
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         <g'' af''>16
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         <cs''' d'''>16
                     }
@@ -2640,156 +2605,13 @@ def register(
 
     ..  container:: example
 
-        Selects tuplet 0:
+        Registers each tuplet:
 
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-        >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
-        >>> rmakers.beam(tuplets)
-        >>> baca.color(baca.select.tuplet(tuplets, 0), lone=True)
-        >>> baca.register(baca.select.tuplet(tuplets, 0), 0, 24)
-        >>> lilypond_file = abjad.illustrators.components(tuplets)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \scaleDurations #'(1 . 1)
-                    {
-                        \abjad-color-music #'green
-                        \time 3/2
-                        fs'16
-                        [
-                        \abjad-color-music #'green
-                        e'16
-                        \abjad-color-music #'green
-                        ef''16
-                        \abjad-color-music #'green
-                        f''16
-                        \abjad-color-music #'green
-                        a'16
-                        \abjad-color-music #'green
-                        bf'16
-                        \abjad-color-music #'green
-                        c''16
-                        \abjad-color-music #'green
-                        b''16
-                        \abjad-color-music #'green
-                        af''16
-                        \abjad-color-music #'green
-                        g''16
-                        \abjad-color-music #'green
-                        cs'''16
-                        \abjad-color-music #'green
-                        d'''16
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
-                        fs'16
-                        [
-                        e'16
-                        ef'16
-                        f'16
-                        a'16
-                        bf'16
-                        c'16
-                        b'16
-                        af'16
-                        g'16
-                        cs'16
-                        d'16
-                        ]
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Selects tuplet -1:
-
-        >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-        >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
-        >>> rmakers.beam(tuplets)
-        >>> tuplet = baca.select.tuplet(tuplets, -1)
-        >>> baca.color(tuplet, lone=True)
-        >>> baca.register(tuplet, 0, 24)
-        >>> lilypond_file = abjad.illustrators.components(tuplets)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    \scaleDurations #'(1 . 1)
-                    {
-                        \time 3/2
-                        fs'16
-                        [
-                        e'16
-                        ef'16
-                        f'16
-                        a'16
-                        bf'16
-                        c'16
-                        b'16
-                        af'16
-                        g'16
-                        cs'16
-                        d'16
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1)
-                    {
-                        \abjad-color-music #'green
-                        fs'16
-                        [
-                        \abjad-color-music #'green
-                        e'16
-                        \abjad-color-music #'green
-                        ef''16
-                        \abjad-color-music #'green
-                        f''16
-                        \abjad-color-music #'green
-                        a'16
-                        \abjad-color-music #'green
-                        bf'16
-                        \abjad-color-music #'green
-                        c''16
-                        \abjad-color-music #'green
-                        b''16
-                        \abjad-color-music #'green
-                        af''16
-                        \abjad-color-music #'green
-                        g''16
-                        \abjad-color-music #'green
-                        cs'''16
-                        \abjad-color-music #'green
-                        d'''16
-                        ]
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Maps to tuplets:
-
-        >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-        >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+        >>> tuplets = [baca.container_from_collection(_, [1], 16) for _ in collections]
         >>> rmakers.beam(tuplets)
         >>> baca.color(abjad.select.tuplets(tuplets))
-        >>> for tuplet in baca.select.tuplets(tuplets):
+        >>> for tuplet in tuplets:
         ...     baca.register(tuplet, 0, 24)
 
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -2804,62 +2626,36 @@ def register(
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
-                        \abjad-color-music #'red
                         \time 3/2
                         fs'16
                         [
-                        \abjad-color-music #'red
                         e'16
-                        \abjad-color-music #'red
                         ef''16
-                        \abjad-color-music #'red
                         f''16
-                        \abjad-color-music #'red
                         a'16
-                        \abjad-color-music #'red
                         bf'16
-                        \abjad-color-music #'red
                         c''16
-                        \abjad-color-music #'red
                         b''16
-                        \abjad-color-music #'red
                         af''16
-                        \abjad-color-music #'red
                         g''16
-                        \abjad-color-music #'red
                         cs'''16
-                        \abjad-color-music #'red
                         d'''16
                         ]
                     }
-                    \scaleDurations #'(1 . 1)
                     {
-                        \abjad-color-music #'blue
                         fs'16
                         [
-                        \abjad-color-music #'blue
                         e'16
-                        \abjad-color-music #'blue
                         ef''16
-                        \abjad-color-music #'blue
                         f''16
-                        \abjad-color-music #'blue
                         a'16
-                        \abjad-color-music #'blue
                         bf'16
-                        \abjad-color-music #'blue
                         c''16
-                        \abjad-color-music #'blue
                         b''16
-                        \abjad-color-music #'blue
                         af''16
-                        \abjad-color-music #'blue
                         g''16
-                        \abjad-color-music #'blue
                         cs'''16
-                        \abjad-color-music #'blue
                         d'''16
                         ]
                     }
@@ -2905,7 +2701,7 @@ def replace_with_clusters(
     ..  container:: example
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+        >>> tuplets = [baca.container_from_collection(_, [1], 16) for _ in collections]
         >>> rmakers.beam(tuplets)
         >>> _ = baca.replace_with_clusters(tuplets, [3, 4])
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -2920,7 +2716,6 @@ def replace_with_clusters(
             <<
                 \context Staff = "Staff"
                 {
-                    \scaleDurations #'(1 . 1)
                     {
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
@@ -2950,7 +2745,6 @@ def replace_with_clusters(
                         ^ \markup \center-align \concat { \natural \flat }
                         ]
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
@@ -2995,7 +2789,6 @@ def replace_with_clusters(
                         ^ \markup \center-align \concat { \natural \flat }
                         ]
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f

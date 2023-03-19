@@ -6,7 +6,7 @@ figures.py examples.
     Spells nonassignable durations with monontonically decreasing durations by
     default:
 
-    >>> tuplet = baca.from_collection([0, 2, 10], [5], 32)
+    >>> tuplet = baca.container_from_collection([0, 2, 10], [5], 32)
     >>> rmakers.beam([tuplet])
     >>> lilypond_file = abjad.illustrators.components([tuplet])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -20,7 +20,6 @@ figures.py examples.
         <<
             \context Staff = "Staff"
             {
-                \scaleDurations #'(1 . 1)
                 {
                     \time 15/32
                     c'8
@@ -43,7 +42,7 @@ figures.py examples.
     Sixteenths and eighths:
 
     >>> collection = [0, 2, 10, 8]
-    >>> tuplet = baca.from_collection(collection, [1, 1, 2], 16)
+    >>> tuplet = baca.container_from_collection(collection, [1, 1, 2], 16)
     >>> rmakers.beam([tuplet])
     >>> lilypond_file = abjad.illustrators.components([tuplet])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -57,7 +56,6 @@ figures.py examples.
         <<
             \context Staff = "Staff"
             {
-                \scaleDurations #'(1 . 1)
                 {
                     \time 5/16
                     c'16
@@ -71,7 +69,7 @@ figures.py examples.
         >>
 
     >>> collection = [18, 16, 15, 20, 19]
-    >>> tuplet = baca.from_collection(collection, [1, 1, 2], 16)
+    >>> tuplet = baca.container_from_collection(collection, [1, 1, 2], 16)
     >>> rmakers.beam([tuplet])
     >>> lilypond_file = abjad.illustrators.components([tuplet])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -85,7 +83,6 @@ figures.py examples.
         <<
             \context Staff = "Staff"
             {
-                \scaleDurations #'(1 . 1)
                 {
                     \time 3/8
                     fs''16
@@ -99,7 +96,7 @@ figures.py examples.
             }
         >>
 
-    >>> tuplet = baca.from_collection([9], [1, 1, 2], 16)
+    >>> tuplet = baca.container_from_collection([9], [1, 1, 2], 16)
     >>> rmakers.beam([tuplet])
     >>> lilypond_file = abjad.illustrators.components([tuplet])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -113,7 +110,6 @@ figures.py examples.
         <<
             \context Staff = "Staff"
             {
-                \scaleDurations #'(1 . 1)
                 {
                     \time 1/16
                     a'16
@@ -125,7 +121,7 @@ figures.py examples.
 
     Works with large counts:
 
-    >>> tuplet = baca.from_collection([0, 2], [29], 64)
+    >>> tuplet = baca.container_from_collection([0, 2], [29], 64)
     >>> container = abjad.Container([tuplet])
     >>> rmakers.beam([tuplet])
     >>> rmakers.force_repeat_tie(container)
@@ -142,7 +138,6 @@ figures.py examples.
         <<
             \context Staff = "Staff"
             {
-                \scaleDurations #'(1 . 1)
                 {
                     \time 29/32
                     c'4..
