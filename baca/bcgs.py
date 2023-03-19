@@ -15,13 +15,13 @@ bcgs.py examples.
     ... ]
     >>> tuplets = []
     >>> for collection in collections:
-    ...     containers, collection = baca.make_before_grace_containers(
+    ...     bgcs, collection = baca.make_before_grace_containers(
     ...         collection,
     ...         baca.LMR(),
     ...     )
-    ...     tuplet = baca.from_collection(collection, [1], 8)
-    ...     baca.attach_before_grace_containers(containers, tuplet)
-    ...     tuplets.append(tuplet)
+    ...     container = baca.container_from_collection(collection, [1], 8)
+    ...     baca.attach_before_grace_containers(bgcs, container)
+    ...     tuplets.append(container)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
     >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -36,19 +36,16 @@ bcgs.py examples.
         <<
             \context Staff = "Staff"
             {
-                \scaleDurations #'(1 . 1)
                 {
                     \time 3/4
                     c'8
                 }
-                \scaleDurations #'(1 . 1)
                 {
                     \acciaccatura {
                         d'16
                     }
                     bf'8
                 }
-                \scaleDurations #'(1 . 1)
                 {
                     \acciaccatura {
                         fs''16
@@ -58,7 +55,6 @@ bcgs.py examples.
                     }
                     ef''8
                 }
-                \scaleDurations #'(1 . 1)
                 {
                     \acciaccatura {
                         af''16
@@ -69,7 +65,6 @@ bcgs.py examples.
                     }
                     c'8
                 }
-                \scaleDurations #'(1 . 1)
                 {
                     \acciaccatura {
                         d'16
@@ -81,7 +76,6 @@ bcgs.py examples.
                     }
                     ef''8
                 }
-                \scaleDurations #'(1 . 1)
                 {
                     \acciaccatura {
                         af''16
@@ -111,13 +105,13 @@ bcgs.py examples.
     ... ]
     >>> tuplets = []
     >>> for collection in collections:
-    ...     containers, collection = baca.make_before_grace_containers(
+    ...     bgcs, collection = baca.make_before_grace_containers(
     ...         collection,
     ...         baca.LMR(),
     ...         duration=abjad.Duration(1, 8),
     ...     )
     ...     tuplet = baca.from_collection(collection, [1], 8)
-    ...     baca.attach_before_grace_containers(containers, tuplet)
+    ...     baca.attach_before_grace_containers(bgcs, tuplet)
     ...     tuplets.append(tuplet)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
@@ -208,7 +202,7 @@ bcgs.py examples.
     ... ]
     >>> tuplets = []
     >>> for collection in collections:
-    ...     containers, collection = baca.make_before_grace_containers(
+    ...     bgcs, collection = baca.make_before_grace_containers(
     ...         collection,
     ...         baca.lmr(
     ...             left_length=3,
@@ -217,7 +211,7 @@ bcgs.py examples.
     ...         ),
     ...     )
     ...     tuplet = baca.from_collection(collection, [1], 8)
-    ...     baca.attach_before_grace_containers(containers, tuplet)
+    ...     baca.attach_before_grace_containers(bgcs, tuplet)
     ...     tuplets.append(tuplet)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
@@ -314,7 +308,7 @@ bcgs.py examples.
     ... ]
     >>> tuplets = []
     >>> for collection in collections:
-    ...     containers, collection = baca.make_before_grace_containers(
+    ...     bgcs, collection = baca.make_before_grace_containers(
     ...         collection,
     ...         baca.lmr(
     ...             right_length=3,
@@ -323,7 +317,7 @@ bcgs.py examples.
     ...         ),
     ...     )
     ...     tuplet = baca.from_collection(collection, [1], 8)
-    ...     baca.attach_before_grace_containers(containers, tuplet)
+    ...     baca.attach_before_grace_containers(bgcs, tuplet)
     ...     tuplets.append(tuplet)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
@@ -421,7 +415,7 @@ bcgs.py examples.
     ... ]
     >>> tuplets = []
     >>> for collection in collections:
-    ...     containers, collection = baca.make_before_grace_containers(
+    ...     bgcs, collection = baca.make_before_grace_containers(
     ...         collection,
     ...         baca.lmr(
     ...             left_length=3,
@@ -431,7 +425,7 @@ bcgs.py examples.
     ...         ),
     ...     )
     ...     tuplet = baca.from_collection(collection, [1], 8)
-    ...     baca.attach_before_grace_containers(containers, tuplet)
+    ...     baca.attach_before_grace_containers(bgcs, tuplet)
     ...     tuplets.append(tuplet)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
@@ -534,12 +528,12 @@ bcgs.py examples.
     ... ]
     >>> tuplets = []
     >>> for collection in collections:
-    ...     containers, collection = baca.make_before_grace_containers(
+    ...     bgcs, collection = baca.make_before_grace_containers(
     ...         collection,
     ...         baca.lmr(left_length=1),
     ...     )
     ...     tuplet = baca.from_collection(collection, [1], 8)
-    ...     baca.attach_before_grace_containers(containers, tuplet)
+    ...     baca.attach_before_grace_containers(bgcs, tuplet)
     ...     tuplets.append(tuplet)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
@@ -636,12 +630,12 @@ bcgs.py examples.
     ... ]
     >>> tuplets = []
     >>> for collection in collections:
-    ...     containers, collection = baca.make_before_grace_containers(
+    ...     bgcs, collection = baca.make_before_grace_containers(
     ...         collection,
     ...         baca.LMR(),
     ...     )
     ...     tuplet = baca.from_collection(collection, [1], 4)
-    ...     baca.attach_before_grace_containers(containers, tuplet)
+    ...     baca.attach_before_grace_containers(bgcs, tuplet)
     ...     tuplets.append(tuplet)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(tuplets))
