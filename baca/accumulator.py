@@ -232,7 +232,8 @@ class Accumulator:
         if hide_time_signature is True:
             assert tsd is None
         assert isinstance(voice_name, str), repr(voice_name)
-        assert all(isinstance(_, abjad.Tuplet) for _ in tuplets), repr(tuplets)
+        prototype = (abjad.Container, abjad.Tuplet)
+        assert all(isinstance(_, prototype) for _ in tuplets), repr(tuplets)
         if isinstance(tuplets, abjad.Container):
             container = tuplets
         else:

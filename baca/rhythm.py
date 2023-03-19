@@ -981,6 +981,7 @@ def prolate(tuplet, treatment, denominator=None):
     return tuplet
 
 
+# TODO: change argument name from "tuplets" to "containers"
 def rests_after(
     tuplets: list[abjad.Tuplet], counts: list[int], denominator: int
 ) -> None:
@@ -988,10 +989,11 @@ def rests_after(
     rests = abjad.makers.make_leaves([None], durations)
     last_leaf = abjad.select.leaf(tuplets, -1)
     last_tuplet = abjad.get.parentage(last_leaf).parent
-    assert isinstance(last_tuplet, abjad.Tuplet), repr(last_tuplet)
+    assert isinstance(last_tuplet, abjad.Container), repr(last_tuplet)
     last_tuplet.extend(rests)
 
 
+# TODO: change argument name from "tuplets" to "containers"
 def rests_around(
     tuplets: list[abjad.Tuplet],
     before_counts: list[int],
@@ -1002,6 +1004,7 @@ def rests_around(
     rests_after(tuplets, after_counts, denominator)
 
 
+# TODO: change argument name from "tuplets" to "containers"
 def rests_before(
     tuplets: list[abjad.Tuplet], counts: list[int], denominator: int
 ) -> None:
@@ -1009,10 +1012,11 @@ def rests_before(
     rests = abjad.makers.make_leaves([None], durations)
     first_leaf = abjad.select.leaf(tuplets, 0)
     first_tuplet = abjad.get.parentage(first_leaf).parent
-    assert isinstance(first_tuplet, abjad.Tuplet), repr(first_tuplet)
+    assert isinstance(first_tuplet, abjad.Container), repr(first_tuplet)
     first_tuplet[0:0] = rests
 
 
+# TODO: change argument name from "tuplets" to "containers"
 def skips_before(
     tuplets: list[abjad.Tuplet], counts: list[int], denominator: int
 ) -> None:
@@ -1021,5 +1025,5 @@ def skips_before(
     skips = [abjad.Skip(_) for _ in rests]
     first_leaf = abjad.select.leaf(tuplets, 0)
     first_tuplet = abjad.get.parentage(first_leaf).parent
-    assert isinstance(first_tuplet, abjad.Tuplet), repr(first_tuplet)
+    assert isinstance(first_tuplet, abjad.Container), repr(first_tuplet)
     first_tuplet[0:0] = skips

@@ -879,7 +879,7 @@ figures.py examples.
     ...     [15, 20, 19, 9, 0],
     ...     [2, 10, 18, 16, 15],
     ... ]
-    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+    >>> tuplets = [baca.container_from_collection(_, [1], 16) for _ in collections]
     >>> rmakers.beam_groups(tuplets)
     >>> container = abjad.Container(tuplets)
     >>> imbrications = baca.imbricate(
@@ -926,7 +926,6 @@ figures.py examples.
                     {
                         \override TupletBracket.stencil = ##f
                         \override TupletNumber.stencil = ##f
-                        \scaleDurations #'(1 . 1)
                         {
                             \voiceOne
                             s16
@@ -937,32 +936,26 @@ figures.py examples.
                             s16
                             s16
                         }
-                        \scaleDurations #'(1 . 1)
                         {
                             s16
                             s16
-                            \set stemLeftBeamCount = 0
+                            \set stemLeftBeamCount = 2
                             \set stemRightBeamCount = 2
                             g''16
-                            [
                             \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 0
+                            \set stemRightBeamCount = 2
                             a'16
-                            ]
                             s16
                         }
-                        \scaleDurations #'(1 . 1)
                         {
                             s16
                             s16
-                            \set stemLeftBeamCount = 0
+                            \set stemLeftBeamCount = 2
                             \set stemRightBeamCount = 2
                             fs''16
-                            [
                             \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 0
+                            \set stemRightBeamCount = 2
                             e''16
-                            ]
                             s16
                         }
                         \revert TupletBracket.stencil
@@ -972,7 +965,6 @@ figures.py examples.
                 \context Voice = "Music.2"
                 {
                     {
-                        \scaleDurations #'(1 . 1)
                         {
                             \set stemLeftBeamCount = 0
                             \set stemRightBeamCount = 2
@@ -992,7 +984,6 @@ figures.py examples.
                             \set stemRightBeamCount = 1
                             e''16
                         }
-                        \scaleDurations #'(1 . 1)
                         {
                             \set stemLeftBeamCount = 1
                             \set stemRightBeamCount = 2
@@ -1010,7 +1001,6 @@ figures.py examples.
                             \set stemRightBeamCount = 1
                             c'16
                         }
-                        \scaleDurations #'(1 . 1)
                         {
                             \set stemLeftBeamCount = 1
                             \set stemRightBeamCount = 2
@@ -1045,7 +1035,7 @@ figures.py examples.
     ...     [15, 20, 19, 9, 0],
     ...     [2, 10, 18, 16, 15],
     ... ]
-    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+    >>> tuplets = [baca.container_from_collection(_, [1], 16) for _ in collections]
     >>> groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
     >>> rmakers.beam_groups(groups)
     >>> container = abjad.Container(tuplets)
@@ -1096,41 +1086,30 @@ figures.py examples.
                     {
                         \override TupletBracket.stencil = ##f
                         \override TupletNumber.stencil = ##f
-                        \scaleDurations #'(1 . 1)
                         {
                             \override Beam.positions = #'(6 . 6)
                             s16
-                            [
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             d'16
                             - \staccato
                             s16
                             s16
                             s16
                         }
-                        \scaleDurations #'(1 . 1)
                         {
                             s16
                             s16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             g''16
                             - \staccato
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             a'16
                             - \staccato
                             s16
                         }
-                        \scaleDurations #'(1 . 1)
                         {
                             s16
                             s16
                             s16
                             s16
                             s16
-                            ]
                             \revert Beam.positions
                         }
                         \revert TupletBracket.stencil
@@ -1140,61 +1119,26 @@ figures.py examples.
                 \context Voice = "Music.2"
                 {
                     {
-                        \scaleDurations #'(1 . 1)
                         {
-                            \set stemLeftBeamCount = 0
-                            \set stemRightBeamCount = 2
                             c'16
-                            [
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             d'16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             bf'16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             fs''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 1
                             e''16
                         }
-                        \scaleDurations #'(1 . 1)
                         {
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 2
                             ef''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             af''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             g''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             a'16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 1
                             c'16
                         }
-                        \scaleDurations #'(1 . 1)
                         {
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 2
                             d'16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             bf'16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             fs''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             e''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 0
                             ef''16
-                            ]
                         }
                     }
                 }
@@ -1203,20 +1147,15 @@ figures.py examples.
                     {
                         \override TupletBracket.stencil = ##f
                         \override TupletNumber.stencil = ##f
-                        \scaleDurations #'(1 . 1)
                         {
                             \override Beam.positions = #'(8 . 8)
                             s16
-                            [
                             s16
                             s16
                             s16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 1
                             e''16
                             - \accent
                         }
-                        \scaleDurations #'(1 . 1)
                         {
                             s16
                             s16
@@ -1224,20 +1163,14 @@ figures.py examples.
                             s16
                             s16
                         }
-                        \scaleDurations #'(1 . 1)
                         {
                             s16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             bf'16
                             - \accent
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             fs''16
                             - \accent
                             s16
                             s16
-                            ]
                             \revert Beam.positions
                         }
                         \revert TupletBracket.stencil
@@ -1454,7 +1387,7 @@ figures.py examples.
     ...     abjad.NumberedPitchClass(3),
     ... ]
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> tuplets = [baca.from_collection(_, [3], 16) for _ in collections]
+    >>> tuplets = [baca.container_from_collection(_, [3], 16) for _ in collections]
     >>> rmakers.beam(tuplets)
     >>> container = abjad.Container(tuplets)
     >>> imbrications = baca.imbricate(container, "Music.1", segment)
@@ -1498,38 +1431,27 @@ figures.py examples.
                     {
                         \override TupletBracket.stencil = ##f
                         \override TupletNumber.stencil = ##f
-                        \scaleDurations #'(1 . 1)
                         {
                             \voiceOne
                             s8.
-                            [
                             s8.
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 1
                             bf'8.
                             - \accent
+                            ]
                         }
-                        \scaleDurations #'(1 . 1)
                         {
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 1
                             fs''8.
                             - \accent
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 1
+                            [
                             e''8.
                             - \accent
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 1
                             ef''8.
                             - \accent
                             s8.
                             s8.
                         }
-                        \scaleDurations #'(1 . 1)
                         {
                             s8.
-                            ]
                         }
                         \revert TupletBracket.stencil
                         \revert TupletNumber.stencil
@@ -1538,7 +1460,6 @@ figures.py examples.
                 \context Voice = "Music.2"
                 {
                     {
-                        \scaleDurations #'(1 . 1)
                         {
                             \voiceTwo
                             c'8.
@@ -1547,7 +1468,6 @@ figures.py examples.
                             bf'8.
                             ]
                         }
-                        \scaleDurations #'(1 . 1)
                         {
                             fs''8.
                             [
@@ -1557,7 +1477,6 @@ figures.py examples.
                             g''8.
                             ]
                         }
-                        \scaleDurations #'(1 . 1)
                         {
                             a'8.
                         }
@@ -1577,7 +1496,7 @@ figures.py examples.
     ...     [15, 20, 19, 9, 0],
     ...     [2, 10, 18, 16, 15],
     ... ]
-    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+    >>> tuplets = [baca.container_from_collection(_, [1], 16) for _ in collections]
     >>> groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
     >>> rmakers.beam_groups(groups)
     >>> container = abjad.Container(tuplets)
@@ -1621,39 +1540,22 @@ figures.py examples.
                     {
                         \override TupletBracket.stencil = ##f
                         \override TupletNumber.stencil = ##f
-                        \scaleDurations #'(1 . 1)
                         {
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             \voiceOne
                             d'16
                         }
-                        \scaleDurations #'(1 . 1)
                         {
                             s16
                             s16
-                            \set stemLeftBeamCount = 0
-                            \set stemRightBeamCount = 2
                             g''16
-                            [
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 0
                             a'16
-                            ]
                             s16
                         }
-                        \scaleDurations #'(1 . 1)
                         {
                             s16
                             s16
-                            \set stemLeftBeamCount = 0
-                            \set stemRightBeamCount = 2
                             fs''16
-                            [
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 0
                             e''16
-                            ]
                             s16
                         }
                         \revert TupletBracket.stencil
@@ -1663,50 +1565,23 @@ figures.py examples.
                 \context Voice = "Music.2"
                 {
                     {
-                        \scaleDurations #'(1 . 1)
                         {
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             \voiceTwo
                             <c' d' bf' e'' fs''>16
-                            [
                         }
-                        \scaleDurations #'(1 . 1)
                         {
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 2
                             ef''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             af''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             g''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             a'16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 1
                             c'16
                         }
-                        \scaleDurations #'(1 . 1)
                         {
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 2
                             d'16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             bf'16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             fs''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             e''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 0
                             ef''16
-                            ]
                         }
                     }
                 }
@@ -1724,7 +1599,7 @@ figures.py examples.
     ...     [15, 20, 19, 9, 0],
     ...     [2, 10, 18, 16, 15],
     ... ]
-    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+    >>> tuplets = [baca.container_from_collection(_, [1], 16) for _ in collections]
     >>> baca.rests_around(tuplets, [2], [2], 16)
     >>> groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
     >>> rmakers.beam_groups(groups)
@@ -1769,44 +1644,27 @@ figures.py examples.
                     {
                         \override TupletBracket.stencil = ##f
                         \override TupletNumber.stencil = ##f
-                        \scaleDurations #'(1 . 1)
                         {
                             \voiceOne
                             s8
                             s16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             d'16
                             s16
                             s16
                             s16
                         }
-                        \scaleDurations #'(1 . 1)
                         {
                             s16
                             s16
-                            \set stemLeftBeamCount = 0
-                            \set stemRightBeamCount = 2
                             g''16
-                            [
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 0
                             a'16
-                            ]
                             s16
                         }
-                        \scaleDurations #'(1 . 1)
                         {
                             s16
                             s16
-                            \set stemLeftBeamCount = 0
-                            \set stemRightBeamCount = 2
                             fs''16
-                            [
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 0
                             e''16
-                            ]
                             s16
                             s8
                         }
@@ -1817,63 +1675,28 @@ figures.py examples.
                 \context Voice = "Music.2"
                 {
                     {
-                        \scaleDurations #'(1 . 1)
                         {
                             \voiceTwo
                             r8
-                            \set stemLeftBeamCount = 0
-                            \set stemRightBeamCount = 2
                             c'16
-                            [
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             d'16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             bf'16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             fs''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 1
                             e''16
                         }
-                        \scaleDurations #'(1 . 1)
                         {
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 2
                             ef''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             af''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             g''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             a'16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 1
                             c'16
                         }
-                        \scaleDurations #'(1 . 1)
                         {
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 2
                             d'16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             bf'16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             fs''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             e''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 0
                             ef''16
-                            ]
                             r8
                         }
                     }
@@ -1924,7 +1747,7 @@ figures.py examples.
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0],
     ... ]
-    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+    >>> tuplets = [baca.container_from_collection(_, [1], 16) for _ in collections]
     >>> groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
     >>> rmakers.beam_groups(groups)
     >>> container = abjad.Container(tuplets)
@@ -1971,33 +1794,23 @@ figures.py examples.
                     {
                         \override TupletBracket.stencil = ##f
                         \override TupletNumber.stencil = ##f
-                        \scaleDurations #'(1 . 1)
                         {
                             \voiceOne
                             s16
-                            [
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             d'16
                             - \accent
                             s16
                             s16
                             s16
                         }
-                        \scaleDurations #'(1 . 1)
                         {
                             s16
                             s16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             g''16
                             - \accent
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             a'16
                             - \accent
                             s16
-                            ]
                         }
                         \revert TupletBracket.stencil
                         \revert TupletNumber.stencil
@@ -2006,54 +1819,30 @@ figures.py examples.
                 \context Voice = "Music.2"
                 {
                     {
-                        \scaleDurations #'(1 . 1)
                         {
-                            \set stemLeftBeamCount = 0
-                            \set stemRightBeamCount = 2
                             \voiceTwo
                             c'16
                             - \staccato
-                            [
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             d'16
                             - \staccato
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             bf'16
                             - \staccato
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             fs''16
                             - \staccato
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 1
                             e''16
                             - \staccato
                         }
-                        \scaleDurations #'(1 . 1)
                         {
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 2
                             ef''16
                             - \staccato
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             af''16
                             - \staccato
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             g''16
                             - \staccato
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             a'16
                             - \staccato
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 0
                             c'16
                             - \staccato
-                            ]
                         }
                     }
                 }
@@ -2071,7 +1860,7 @@ figures.py examples.
     ...     [15, 20, 19, 9, 0],
     ...     [2, 10, 18, 16, 15],
     ... ]
-    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+    >>> tuplets = [baca.container_from_collection(_, [1], 16) for _ in collections]
     >>> groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
     >>> rmakers.beam_groups(groups, beam_rests=True)
     >>> container = abjad.Container(tuplets)
@@ -2118,47 +1907,32 @@ figures.py examples.
                     {
                         \override TupletBracket.stencil = ##f
                         \override TupletNumber.stencil = ##f
-                        \scaleDurations #'(1 . 1)
                         {
                             \voiceOne
                             s16
-                            [
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             d'16
                             - \accent
                             s16
                             s16
                             s16
                         }
-                        \scaleDurations #'(1 . 1)
                         {
                             s16
                             s16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             g''16
                             - \accent
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             a'16
                             - \accent
                             s16
                         }
-                        \scaleDurations #'(1 . 1)
                         {
                             s16
                             s16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             fs''16
                             - \accent
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             e''16
                             - \accent
                             s16
-                            ]
                         }
                         \revert TupletBracket.stencil
                         \revert TupletNumber.stencil
@@ -2167,62 +1941,37 @@ figures.py examples.
                 \context Voice = "Music.2"
                 {
                     {
-                        \scaleDurations #'(1 . 1)
                         {
-                            \set stemLeftBeamCount = 0
-                            \set stemRightBeamCount = 2
                             \voiceTwo
                             c'16
                             - \staccato
-                            [
                             s16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             bf'16
                             - \staccato
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             fs''16
                             - \staccato
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 1
                             e''16
                             - \staccato
                         }
-                        \scaleDurations #'(1 . 1)
                         {
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 2
                             ef''16
                             - \staccato
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             af''16
                             - \staccato
                             s16
                             s16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 1
                             c'16
                             - \staccato
                         }
-                        \scaleDurations #'(1 . 1)
                         {
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 2
                             d'16
                             - \staccato
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
                             bf'16
                             - \staccato
                             s16
                             s16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 0
                             ef''16
                             - \staccato
-                            ]
                         }
                     }
                 }
@@ -2236,7 +1985,7 @@ figures.py examples.
     >>> score = baca.docs.make_empty_score(2)
     >>> accumulator = baca.Accumulator(score)
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> tuplets = [baca.from_collection(_, [5], 32) for _ in collections]
+    >>> tuplets = [baca.container_from_collection(_, [5], 32) for _ in collections]
     >>> rmakers.beam(tuplets)
     >>> container = abjad.Container(tuplets)
     >>> imbrications = baca.imbricate(container, "Music.1", [2, 10, 18, 19, 9],
@@ -2280,26 +2029,18 @@ figures.py examples.
                     {
                         \override TupletBracket.stencil = ##f
                         \override TupletNumber.stencil = ##f
-                        \scaleDurations #'(1 . 1)
                         {
                             \voiceOne
                             s8
-                            [
                             s32
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 1
                             d'8
                             s32
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 1
                             bf'8
                             s32
                         }
-                        \scaleDurations #'(1 . 1)
                         {
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 1
                             fs''8
+                            [
                             s32
                             s8
                             s32
@@ -2307,18 +2048,13 @@ figures.py examples.
                             s32
                             s8
                             s32
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 1
                             g''8
                             s32
                         }
-                        \scaleDurations #'(1 . 1)
                         {
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 1
                             a'8
+                            [
                             s32
-                            ]
                         }
                         \revert TupletBracket.stencil
                         \revert TupletNumber.stencil
@@ -2327,7 +2063,6 @@ figures.py examples.
                 \context Voice = "Music.2"
                 {
                     {
-                        \scaleDurations #'(1 . 1)
                         {
                             \voiceTwo
                             c'8
@@ -2342,7 +2077,6 @@ figures.py examples.
                             bf'32
                             ]
                         }
-                        \scaleDurations #'(1 . 1)
                         {
                             fs''8
                             [
@@ -2362,7 +2096,6 @@ figures.py examples.
                             g''32
                             ]
                         }
-                        \scaleDurations #'(1 . 1)
                         {
                             a'8
                             [
