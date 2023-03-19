@@ -435,11 +435,14 @@ def from_collection(
     collection,
     counts,
     denominator,
+    prolation=None,
 ) -> abjad.Tuplet:
     container = container_from_collection(collection, counts, denominator)
     leaves = abjad.mutate.eject_contents(container)
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
     tuplet = abjad.Tuplet("1:1", leaves)
+    if prolation is not None:
+        prolate(tuplet, prolation, denominator=denominator)
     return tuplet
 
 
