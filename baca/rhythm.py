@@ -915,23 +915,23 @@ def make_tied_repeated_durations(
     return music
 
 
-def nest(tuplets: list[abjad.Tuplet], treatment: str) -> abjad.Tuplet:
-    assert isinstance(tuplets, list), repr(tuplets)
-    assert all(isinstance(_, abjad.Tuplet) for _ in tuplets), repr(tuplets)
+def nest(containers: list[abjad.Tuplet], treatment: str) -> abjad.Tuplet:
+    assert isinstance(containers, list), repr(containers)
+    assert all(isinstance(_, abjad.Container) for _ in containers), repr(containers)
     assert isinstance(treatment, str), repr(treatment)
     if "/" in treatment:
         assert treatment.startswith("+") or treatment.startswith("-"), repr(treatment)
         addendum = abjad.Duration(treatment)
-        contents_duration = abjad.get.duration(tuplets)
+        contents_duration = abjad.get.duration(containers)
         target_duration = contents_duration + addendum
         multiplier = target_duration / contents_duration
         pair = abjad.duration.pair(multiplier)
         nested_tuplet = abjad.Tuplet(pair, [])
-        abjad.mutate.wrap(tuplets, nested_tuplet)
+        abjad.mutate.wrap(containers, nested_tuplet)
     else:
         assert ":" in treatment
         nested_tuplet = abjad.Tuplet(treatment, [])
-        abjad.mutate.wrap(tuplets, nested_tuplet)
+        abjad.mutate.wrap(containers, nested_tuplet)
     return nested_tuplet
 
 
