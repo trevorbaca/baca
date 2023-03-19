@@ -2181,7 +2181,8 @@ figures.py examples.
                     {
                         \override TupletBracket.stencil = ##f
                         \override TupletNumber.stencil = ##f
-                        \scaleDurations #'(1 . 1)
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 1/1
                         {
                             \voiceOne
                             s16
@@ -2196,7 +2197,8 @@ figures.py examples.
                             - \staccato
                             s16
                         }
-                        \scaleDurations #'(1 . 1)
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 1/1
                         {
                             s16
                             s16
@@ -2210,7 +2212,8 @@ figures.py examples.
                     {
                         \override TupletBracket.stencil = ##f
                         \override TupletNumber.stencil = ##f
-                        \scaleDurations #'(1 . 1)
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 1/1
                         {
                             \set stemLeftBeamCount = 1
                             \set stemRightBeamCount = 2
@@ -2233,7 +2236,8 @@ figures.py examples.
                 \context Voice = "Music.2"
                 {
                     {
-                        \scaleDurations #'(1 . 1)
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 1/1
                         {
                             \set stemLeftBeamCount = 0
                             \set stemRightBeamCount = 2
@@ -2250,7 +2254,8 @@ figures.py examples.
                             \set stemRightBeamCount = 1
                             fs''16
                         }
-                        \scaleDurations #'(1 . 1)
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 1/1
                         {
                             \set stemLeftBeamCount = 1
                             \set stemRightBeamCount = 2
@@ -2265,7 +2270,8 @@ figures.py examples.
                         }
                     }
                     {
-                        \scaleDurations #'(1 . 1)
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 1/1
                         {
                             \set stemLeftBeamCount = 0
                             \set stemRightBeamCount = 2

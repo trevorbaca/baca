@@ -440,7 +440,6 @@ def from_collection(
     leaves = abjad.mutate.eject_contents(container)
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
     tuplet = abjad.Tuplet("1:1", leaves)
-    tuplet.hide = True
     return tuplet
 
 
