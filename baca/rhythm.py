@@ -388,64 +388,48 @@ def from_collection(
     collection,
     counts,
     denominator,
-    next_attack_index: int | None = None,
 ) -> tuple[abjad.Tuplet, int] | abjad.Tuplet:
-    if next_attack_index is None:
-        next_attack_index_was_none = True
-        next_attack_index = 0
-    else:
-        next_attack_index_was_none = False
-    collection_prototype = (
+    collection = getattr(collection, "argument", collection)
+    prototype = (
         abjad.PitchClassSegment,
         abjad.PitchSegment,
         abjad.PitchSet,
         list,
         set,
     )
-    assert isinstance(collection, collection_prototype), repr(collection)
-    leaves = []
+    assert isinstance(collection, prototype), repr(collection)
     if isinstance(collection, set | frozenset):
         collection = [tuple(collection)]
     talea = rmakers.Talea(counts, denominator)
+    leaves, i = [], 0
     for item in collection:
         item = getattr(item, "number", item)
-        prototype = (int, float, str, tuple)
-        assert isinstance(item, prototype), repr(item)
-        count = next_attack_index
-        while abjad.Fraction(*talea[count]) < 0:
-            next_attack_index += 1
-            this_one = talea[count]
-            duration = -abjad.Duration(*this_one)
-            leaves_ = abjad.makers.make_leaves(
-                [None], [duration], tag=_tags.function_name(_frame(), n=1)
-            )
-            leaves.extend(leaves_)
-            count = next_attack_index
-        next_attack_index += 1
-        this_one = talea[count]
-        duration = this_one
-        assert 0 < abjad.Duration(duration), repr(duration)
-        leaves_ = abjad.makers.make_leaves(
-            [item], [duration], tag=_tags.function_name(_frame(), n=3)
-        )
-        leaves.extend(leaves_)
-        count = next_attack_index
-        while abjad.Fraction(*talea[count]) < 0 and not count % len(talea) == 0:
-            next_attack_index += 1
-            this_one = talea[count]
-            duration = -abjad.Duration(*this_one)
-            leaves_ = abjad.makers.make_leaves(
-                [None], [duration], tag=_tags.function_name(_frame(), n=4)
-            )
-            leaves.extend(leaves_)
-            count = next_attack_index
+        assert isinstance(item, int | float | str | tuple), repr(item)
+        while abjad.Fraction(*talea[i]) < 0:
+            pair = talea[i]
+            duration = -abjad.Duration(*pair)
+            tag = _tags.function_name(_frame(), n=1)
+            rests = abjad.makers.make_leaves([None], [duration], tag=tag)
+            leaves.extend(rests)
+            i += 1
+        pair = talea[i]
+        duration = abjad.Duration(*pair)
+        assert 0 < duration, repr(duration)
+        tag = _tags.function_name(_frame(), n=3)
+        pleaves = abjad.makers.make_leaves([item], [duration], tag=tag)
+        leaves.extend(pleaves)
+        i += 1
+        while abjad.Fraction(*talea[i]) < 0 and not i % len(talea) == 0:
+            pair = talea[i]
+            duration = -abjad.Duration(*pair)
+            tag = _tags.function_name(_frame(), n=4)
+            rests = abjad.makers.make_leaves([None], [duration], tag=tag)
+            leaves.extend(rests)
+            i += 1
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
     tuplet = abjad.Tuplet("1:1", leaves)
     tuplet.hide = True
-    if next_attack_index_was_none is True:
-        return tuplet
-    else:
-        return tuplet, next_attack_index
+    return tuplet
 
 
 def get_previous_rhythm_state(
