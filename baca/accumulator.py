@@ -229,6 +229,8 @@ class Accumulator:
         imbrications: dict[str, list[abjad.Container]] | None = None,
         tsd: int | None = None,
     ):
+        if hide_time_signature is True:
+            assert tsd is None
         assert isinstance(voice_name, str), repr(voice_name)
         assert all(isinstance(_, abjad.Tuplet) for _ in tuplets), repr(tuplets)
         if isinstance(tuplets, abjad.Container):
