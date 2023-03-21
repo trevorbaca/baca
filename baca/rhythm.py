@@ -461,38 +461,6 @@ def get_previous_rhythm_state(
     return previous_rhythm_state
 
 
-# TODO: remove in favor of LMR
-def lmr(
-    *,
-    left_counts: typing.Sequence[int] = (),
-    left_cyclic: bool = False,
-    left_length: int = 0,
-    left_reversed: bool = False,
-    middle_counts: typing.Sequence[int] = (),
-    middle_cyclic: bool = False,
-    middle_reversed: bool = False,
-    priority: int | None = None,
-    right_counts: typing.Sequence[int] = (),
-    right_cyclic: bool = False,
-    right_length: int = 0,
-    right_reversed: bool = False,
-) -> LMR:
-    return LMR(
-        left_counts=left_counts,
-        left_cyclic=left_cyclic,
-        left_length=left_length,
-        left_reversed=left_reversed,
-        middle_counts=middle_counts,
-        middle_cyclic=middle_cyclic,
-        middle_reversed=middle_reversed,
-        priority=priority,
-        right_counts=right_counts,
-        right_cyclic=right_cyclic,
-        right_length=right_length,
-        right_reversed=right_reversed,
-    )
-
-
 def make_before_grace_containers(
     collection, lmr: LMR, *, duration: abjad.Duration = abjad.Duration(1, 16)
 ):

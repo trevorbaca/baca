@@ -198,7 +198,7 @@ bcgs.py examples.
     >>> for collection in collections:
     ...     bgcs, collection = baca.make_before_grace_containers(
     ...         collection,
-    ...         baca.lmr(
+    ...         baca.LMR(
     ...             left_length=3,
     ...             right_counts=[1],
     ...             right_cyclic=True,
@@ -292,7 +292,7 @@ bcgs.py examples.
     >>> for collection in collections:
     ...     bgcs, collection = baca.make_before_grace_containers(
     ...         collection,
-    ...         baca.lmr(
+    ...         baca.LMR(
     ...             right_length=3,
     ...             left_counts=[1],
     ...             left_cyclic=True,
@@ -387,7 +387,7 @@ bcgs.py examples.
     >>> for collection in collections:
     ...     bgcs, collection = baca.make_before_grace_containers(
     ...         collection,
-    ...         baca.lmr(
+    ...         baca.LMR(
     ...             left_length=3,
     ...             middle_counts=[1],
     ...             middle_cyclic=True,
@@ -488,7 +488,7 @@ bcgs.py examples.
     >>> for collection in collections:
     ...     bgcs, collection = baca.make_before_grace_containers(
     ...         collection,
-    ...         baca.lmr(left_length=1),
+    ...         baca.LMR(left_length=1),
     ...     )
     ...     container = baca.container_from_collection(collection, [1], 8)
     ...     baca.attach_before_grace_containers(bgcs, container)

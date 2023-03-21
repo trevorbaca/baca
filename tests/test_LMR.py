@@ -7,7 +7,7 @@ def test_LMR_01():
     Left counts equal to a single 1.
     """
 
-    lmr = baca.lmr(
+    lmr = baca.LMR(
         left_counts=[1],
         left_cyclic=False,
         left_length=3,
@@ -47,7 +47,7 @@ def test_LMR_02():
     Left counts all equal to 1.
     """
 
-    lmr = baca.lmr(
+    lmr = baca.LMR(
         left_counts=[1],
         left_cyclic=True,
         left_length=3,
@@ -87,7 +87,7 @@ def test_LMR_03():
     Left length equal to 2.
     """
 
-    lmr = baca.lmr(
+    lmr = baca.LMR(
         left_length=2,
     )
 
@@ -126,7 +126,7 @@ def test_LMR_04():
     Odd parity produces length-1 part at right.
     """
 
-    lmr = baca.lmr(
+    lmr = baca.LMR(
         middle_counts=[2],
         middle_cyclic=True,
     )
@@ -166,7 +166,7 @@ def test_LMR_05():
     Odd parity produces length-1 part at left.
     """
 
-    lmr = baca.lmr(
+    lmr = baca.LMR(
         middle_counts=[2],
         middle_cyclic=True,
         middle_reversed=True,
@@ -205,7 +205,7 @@ def test_LMR_06():
     Priority to the left.
     """
 
-    lmr = baca.lmr(
+    lmr = baca.LMR(
         left_length=2,
         right_length=1,
     )
@@ -243,7 +243,7 @@ def test_LMR_07():
     Priority to the right.
     """
 
-    lmr = baca.lmr(
+    lmr = baca.LMR(
         left_length=2,
         priority=abjad.RIGHT,
         right_length=1,
@@ -282,7 +282,7 @@ def test_LMR_08():
     Right length equal to 2.
     """
 
-    lmr = baca.lmr(
+    lmr = baca.LMR(
         right_length=2,
     )
 
@@ -319,7 +319,7 @@ def test_LMR_09():
     Right length equal to 2 and left counts equal to [1].
     """
 
-    lmr = baca.lmr(
+    lmr = baca.LMR(
         left_counts=[1],
         left_cyclic=False,
         right_length=2,
@@ -358,7 +358,7 @@ def test_LMR_10():
     Default LMR.
     """
 
-    lmr = baca.lmr()
+    lmr = baca.LMR()
 
     parts = lmr([1])
     assert parts == [[1]]
