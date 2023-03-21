@@ -12,15 +12,24 @@ from . import tags as _tags
 
 def _run_job(
     *,
-    activate: typing.Any = None,
-    deactivate: typing.Any = None,
-    deactivate_first: typing.Any = None,
-    path: typing.Any = None,
-    prepend_empty_chord: typing.Any = None,
-    skip_file_name: typing.Any = None,
-    title: typing.Any = None,
+    activate: tuple[typing.Callable | None, str] | None = None,
+    deactivate: tuple[typing.Callable | abjad.Tag | None, str] | None = None,
+    deactivate_first: bool = False,
+    path: pathlib.Path | None = None,
+    prepend_empty_chord: bool = False,
+    skip_file_name: str = "",
+    title: str = "",
     undo: bool = False,
 ):
+    assert isinstance(activate, tuple | type(None)), repr(activate)
+    if deactivate is not None:
+        assert isinstance(deactivate, tuple), repr(deactivate)
+        assert len(deactivate) == 2, repr(deactivate)
+        if deactivate[0] is not None:
+            assert callable(deactivate[0]) or isinstance(deactivate[0], abjad.Tag)
+    assert isinstance(deactivate_first, bool), repr(deactivate_first)
+    assert isinstance(path, pathlib.Path), repr(path)
+    assert isinstance(title, str), repr(title)
     if undo is True:
         assert activate is not None
         assert deactivate is None
@@ -82,7 +91,7 @@ def _run_job(
     return messages
 
 
-def color_clefs(path, *, undo=False):
+def color_clefs(path: pathlib.Path, *, undo: bool = False):
     name = "clef color"
 
     def match(tags):
@@ -99,7 +108,7 @@ def color_clefs(path, *, undo=False):
     return messages
 
 
-def color_dynamics(path, *, undo=False):
+def color_dynamics(path: pathlib.Path, *, undo: bool = False):
     name = "dynamic color"
 
     def match(tags):
@@ -115,7 +124,7 @@ def color_dynamics(path, *, undo=False):
     return messages
 
 
-def color_instruments(path, *, undo=False):
+def color_instruments(path: pathlib.Path, *, undo: bool = False):
     name = "instrument color"
 
     def match(tags):
@@ -131,7 +140,7 @@ def color_instruments(path, *, undo=False):
     return messages
 
 
-def color_short_instrument_names(path, *, undo=False):
+def color_short_instrument_names(path: pathlib.Path, *, undo: bool = False):
     name = "short instrument name color"
 
     def match(tags):
@@ -147,7 +156,7 @@ def color_short_instrument_names(path, *, undo=False):
     return messages
 
 
-def color_metronome_marks(path, undo=False):
+def color_metronome_marks(path: pathlib.Path, undo: bool = False):
     def activate(tags):
         tags_ = _tags.metronome_mark_color_expression_tags()
         return bool(set(tags) & set(tags_))
@@ -173,7 +182,7 @@ def color_metronome_marks(path, undo=False):
     return messages
 
 
-def color_persistent_indicators(path, *, undo=False):
+def color_persistent_indicators(path: pathlib.Path, *, undo: bool = False):
     name = "persistent indicator"
     activate_name = "persistent indicator color expression"
 
@@ -205,7 +214,7 @@ def color_persistent_indicators(path, *, undo=False):
     return messages
 
 
-def color_staff_lines(path, *, undo=False):
+def color_staff_lines(path: pathlib.Path, *, undo: bool = False):
     name = "staff lines color"
 
     def match(tags):
@@ -222,7 +231,7 @@ def color_staff_lines(path, *, undo=False):
     return messages
 
 
-def color_time_signatures(path, *, undo=False):
+def color_time_signatures(path: pathlib.Path, *, undo: bool = False):
     name = "time signature color"
 
     def match(tags):
@@ -239,7 +248,7 @@ def color_time_signatures(path, *, undo=False):
     return messages
 
 
-def handle_edition_tags(path):
+def handle_edition_tags(path: pathlib.Path):
     """
     Handles edition tags.
 
@@ -311,7 +320,7 @@ def handle_edition_tags(path):
     return messages
 
 
-def handle_fermata_bar_lines(path):
+def handle_fermata_bar_lines(path: pathlib.Path):
     """
     Handles fermata bar lines.
     """
@@ -327,6 +336,7 @@ def handle_fermata_bar_lines(path):
     else:
         metadata_source = path.parent
     bol_measure_numbers = _path.get_metadatum(metadata_source, "bol_measure_numbers")
+    deactivate_function: typing.Callable | None = None
     if bol_measure_numbers:
         eol_measure_numbers = [_ - 1 for _ in bol_measure_numbers[1:]]
         final_measure_number = _path.get_metadatum(
@@ -336,24 +346,22 @@ def handle_fermata_bar_lines(path):
             eol_measure_numbers.append(final_measure_number)
         eol_measure_numbers = [abjad.Tag(f"MEASURE_{_}") for _ in eol_measure_numbers]
 
-        def deactivate(tags):
+        def deactivate_function(tags):
             if _tags.FERMATA_MEASURE in tags:
                 if not bool(set(tags) & set(eol_measure_numbers)):
                     return True
             return False
 
-    else:
-        deactivate = None
     messages = _run_job(
         activate=(activate, "bar line adjustment"),
-        deactivate=(deactivate, "EOL fermata bar line"),
+        deactivate=(deactivate_function, "EOL fermata bar line"),
         path=path,
         title="Handling fermata bar lines ...",
     )
     return messages
 
 
-def handle_mol_tags(path):
+def handle_mol_tags(path: pathlib.Path):
     if path.name == "_sections":
         path = path.parent
 
@@ -368,6 +376,7 @@ def handle_mol_tags(path):
     else:
         metadata_source = path.parent
     bol_measure_numbers = _path.get_metadatum(metadata_source, "bol_measure_numbers")
+    deactivate_function: typing.Callable | None = None
     if bol_measure_numbers:
         nonmol_measure_numbers = bol_measure_numbers[:]
         final_measure_number = _path.get_metadatum(
@@ -379,7 +388,7 @@ def handle_mol_tags(path):
             abjad.Tag(f"MEASURE_{_}") for _ in nonmol_measure_numbers
         ]
 
-        def deactivate(tags):
+        def deactivate_function(tags):
             if _tags.NOT_MOL in tags:
                 if not bool(set(tags) & set(nonmol_measure_numbers)):
                     return True
@@ -388,18 +397,16 @@ def handle_mol_tags(path):
                     return True
             return False
 
-    else:
-        deactivate = None
     messages = _run_job(
         activate=(activate, "MOL"),
-        deactivate=(deactivate, "conflicting MOL"),
+        deactivate=(deactivate_function, "conflicting MOL"),
         path=path,
         title="Handling MOL tags ...",
     )
     return messages
 
 
-def handle_shifted_clefs(path):
+def handle_shifted_clefs(path: pathlib.Path):
     def activate(tags):
         return _tags.SHIFTED_CLEF in tags
 
@@ -412,28 +419,27 @@ def handle_shifted_clefs(path):
         metadata_source = path.parent
     string = "bol_measure_numbers"
     bol_measure_numbers = _path.get_metadatum(metadata_source, string)
+    deactivate_function: typing.Callable | None = None
     if bol_measure_numbers:
         bol_measure_numbers = [abjad.Tag(f"MEASURE_{_}") for _ in bol_measure_numbers]
 
-        def deactivate(tags):
+        def deactivate_function(tags):
             if _tags.SHIFTED_CLEF not in tags:
                 return False
             if any(_ in tags for _ in bol_measure_numbers):
                 return True
             return False
 
-    else:
-        deactivate = None
     messages = _run_job(
         activate=(activate, "shifted clef"),
-        deactivate=(deactivate, "BOL clef"),
+        deactivate=(deactivate_function, "BOL clef"),
         path=path,
         title="Handling shifted clefs ...",
     )
     return messages
 
 
-def join_broken_spanners(path):
+def join_broken_spanners(path: pathlib.Path):
     def activate(tags):
         tags_ = [_tags.SHOW_TO_JOIN_BROKEN_SPANNERS]
         return bool(set(tags) & set(tags_))
@@ -451,7 +457,7 @@ def join_broken_spanners(path):
     return messages
 
 
-def not_topmost(path):
+def not_topmost(path: pathlib.Path):
     messages = _run_job(
         deactivate=(_tags.NOT_TOPMOST, "not topmost"),
         path=path,
@@ -460,7 +466,7 @@ def not_topmost(path):
     return messages
 
 
-def show_music_annotations(path, *, undo=False):
+def show_music_annotations(path: pathlib.Path, *, undo: bool = False):
     name = "music annotation"
 
     def match(tags):
@@ -492,11 +498,13 @@ def show_tag(
     path: pathlib.Path,
     tag: abjad.Tag | str,
     *,
-    match=None,
-    prepend_empty_chord=None,
-    skip_file_name=None,
+    match: typing.Callable | None = None,
+    prepend_empty_chord: bool = False,
+    skip_file_name: str = "",
     undo: bool = False,
 ):
+    if match is not None:
+        assert callable(match)
     if isinstance(tag, str):
         assert match is not None, repr(match)
         name = tag

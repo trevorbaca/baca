@@ -41,7 +41,7 @@ def activate(
     prepend_empty_chord: bool = False,
     skip_file_name: str = "",
     undo: bool = False,
-):
+) -> tuple[int, int, list[str]]:
     """
     Activates ``tag`` in .ily or .ly ``path``.
 
