@@ -15,23 +15,21 @@ from . import tags as _tags
 from .enums import enums as _enums
 
 
-def _make_accelerando(tuplet, *, ritardando=False):
-    if len(tuplet) == 1:
-        return tuplet
-    tuplet.hide = False
-    if ritardando:
-        exponent = 1.625
-    else:
-        exponent = 0.625
-    leaves = abjad.select.leaves(tuplet)
-    durations = [abjad.get.duration(_) for _ in leaves]
-    multipliers = _make_accelerando_multipliers(durations, exponent)
-    assert len(leaves) == len(multipliers)
-    for multiplier, leaf in zip(multipliers, leaves):
-        leaf.multiplier = multiplier
-    rmakers.feather_beam([tuplet])
-    rmakers.duration_bracket(tuplet)
-    return tuplet
+def _style_accelerando(
+    container: abjad.Container | abjad.Tuplet, exponent: float
+) -> abjad.Container | abjad.Tuplet:
+    assert isinstance(container, abjad.Container), repr(container)
+    if 1 < len(container):
+        assert isinstance(container, abjad.Tuplet), repr(container)
+        leaves = abjad.select.leaves(container)
+        durations = [abjad.get.duration(_) for _ in leaves]
+        multipliers = _make_accelerando_multipliers(durations, exponent)
+        assert len(leaves) == len(multipliers)
+        for multiplier, leaf in zip(multipliers, leaves):
+            leaf.multiplier = multiplier
+        rmakers.feather_beam([container])
+        rmakers.duration_bracket(container)
+    return container
 
 
 def _make_accelerando_multipliers(durations, exponent) -> list[tuple[int, int]]:
@@ -967,15 +965,12 @@ def prolate(tuplet, treatment, denominator=None):
         multiplier = tuplet_duration / contents_duration
         pair = abjad.duration.pair(multiplier)
         multiplier = pair
-    elif treatment in ("accel", "rit"):
-        multiplier = (1, 1)
-        ritardando = treatment == "rit"
-        _make_accelerando(tuplet, ritardando=ritardando)
     else:
         raise Exception(f"bad treatment: {treatment!r}.")
     tuplet.multiplier = multiplier
     if not abjad.Duration(tuplet.multiplier).normalized():
         tuplet.normalize_multiplier()
+    # TODO: do not set hide here
     if tuplet.trivial():
         tuplet.hide = True
     else:
@@ -983,49 +978,65 @@ def prolate(tuplet, treatment, denominator=None):
     return tuplet
 
 
-# TODO: change argument name from "tuplets" to "containers"
+# TODO: remove?
 def rests_after(
-    tuplets: list[abjad.Tuplet], counts: list[int], denominator: int
+    containers: list[abjad.Container], counts: list[int], denominator: int
 ) -> None:
     durations = [abjad.Duration(_, denominator) for _ in counts]
     rests = abjad.makers.make_leaves([None], durations)
-    last_leaf = abjad.select.leaf(tuplets, -1)
+    last_leaf = abjad.select.leaf(containers, -1)
     last_tuplet = abjad.get.parentage(last_leaf).parent
     assert isinstance(last_tuplet, abjad.Container), repr(last_tuplet)
     last_tuplet.extend(rests)
 
 
-# TODO: change argument name from "tuplets" to "containers"
+# TODO: remove?
 def rests_around(
-    tuplets: list[abjad.Tuplet],
+    containers: list[abjad.Container],
     before_counts: list[int],
     after_counts: list[int],
     denominator: int,
 ) -> None:
-    rests_before(tuplets, before_counts, denominator)
-    rests_after(tuplets, after_counts, denominator)
+    rests_before(containers, before_counts, denominator)
+    rests_after(containers, after_counts, denominator)
 
 
-# TODO: change argument name from "tuplets" to "containers"
+# TODO: remove?
 def rests_before(
-    tuplets: list[abjad.Tuplet], counts: list[int], denominator: int
+    containers: list[abjad.Container], counts: list[int], denominator: int
 ) -> None:
     durations = [abjad.Duration(_, denominator) for _ in counts]
     rests = abjad.makers.make_leaves([None], durations)
-    first_leaf = abjad.select.leaf(tuplets, 0)
+    first_leaf = abjad.select.leaf(containers, 0)
     first_tuplet = abjad.get.parentage(first_leaf).parent
     assert isinstance(first_tuplet, abjad.Container), repr(first_tuplet)
     first_tuplet[0:0] = rests
 
 
-# TODO: change argument name from "tuplets" to "containers"
+# TODO: remove?
 def skips_before(
-    tuplets: list[abjad.Tuplet], counts: list[int], denominator: int
+    containers: list[abjad.Container], counts: list[int], denominator: int
 ) -> None:
     durations = [abjad.Duration(_, denominator) for _ in counts]
     rests = abjad.makers.make_leaves([None], durations)
     skips = [abjad.Skip(_) for _ in rests]
-    first_leaf = abjad.select.leaf(tuplets, 0)
+    first_leaf = abjad.select.leaf(containers, 0)
     first_tuplet = abjad.get.parentage(first_leaf).parent
     assert isinstance(first_tuplet, abjad.Container), repr(first_tuplet)
     first_tuplet[0:0] = skips
+
+
+def style_accelerando(
+    container: abjad.Container | abjad.Tuplet, exponent: float = 0.625
+) -> abjad.Container | abjad.Tuplet:
+    assert isinstance(container, abjad.Container), repr(container)
+    assert isinstance(exponent, float), repr(exponent)
+    return _style_accelerando(container, exponent)
+
+
+def style_ritardando(
+    container: abjad.Container | abjad.Tuplet, exponent: float = 1.625
+) -> abjad.Container | abjad.Tuplet:
+    assert isinstance(container, abjad.Container), repr(container)
+    assert isinstance(exponent, float), repr(exponent)
+    return _style_accelerando(container, exponent)

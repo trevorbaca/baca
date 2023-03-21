@@ -163,7 +163,7 @@ figures.py examples.
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
     >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
-    >>> tuplets = [baca.prolate(_, "accel") for _ in tuplets]
+    >>> tuplets = [baca.style_accelerando(_) for _ in tuplets]
     >>> rmakers.beam(tuplets)
     >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -177,7 +177,8 @@ figures.py examples.
         <<
             \context Staff = "Staff"
             {
-                \scaleDurations #'(1 . 1)
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 1/1
                 {
                     \time 21/16
                     c'16
@@ -258,7 +259,7 @@ figures.py examples.
     ...     [20, 19, 9, 0, 2, 10],
     ... ]
     >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
-    >>> tuplets = [baca.prolate(_, "rit") for _ in tuplets]
+    >>> tuplets = [baca.style_ritardando(_) for _ in tuplets]
     >>> rmakers.beam(tuplets)
     >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -272,7 +273,8 @@ figures.py examples.
         <<
             \context Staff = "Staff"
             {
-                \scaleDurations #'(1 . 1)
+                \tweak text #tuplet-number::calc-fraction-text
+                \times 1/1
                 {
                     \time 21/16
                     c'16
@@ -351,10 +353,10 @@ figures.py examples.
     ...     [19, 9, 0, 2, 10, 18],
     ... ]
     >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
-    >>> _ = baca.prolate(tuplets[0], "accel")
-    >>> _ = baca.prolate(tuplets[1], "rit")
-    >>> _ = baca.prolate(tuplets[2], "accel")
-    >>> _ = baca.prolate(tuplets[3], "rit")
+    >>> _ = baca.style_accelerando(tuplets[0])
+    >>> _ = baca.style_ritardando(tuplets[1])
+    >>> _ = baca.style_accelerando(tuplets[2])
+    >>> _ = baca.style_ritardando(tuplets[3])
     >>> rmakers.beam(tuplets)
     >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -439,12 +441,12 @@ figures.py examples.
     ...     [19, 9, 0, 2, 10],
     ... ]
     >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
-    >>> _ = baca.prolate(tuplets[0], "accel")
+    >>> _ = baca.style_accelerando(tuplets[0])
     >>> _ = baca.prolate(tuplets[1], -2, 16)
-    >>> _ = baca.prolate(tuplets[2], "rit")
-    >>> _ = baca.prolate(tuplets[3], "accel")
+    >>> _ = baca.style_ritardando(tuplets[2])
+    >>> _ = baca.style_accelerando(tuplets[3])
     >>> _ = baca.prolate(tuplets[4], -2, 16)
-    >>> _ = baca.prolate(tuplets[5], "rit")
+    >>> _ = baca.style_ritardando(tuplets[5])
     >>> rmakers.beam(tuplets)
     >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
