@@ -15,23 +15,6 @@ from . import tags as _tags
 from .enums import enums as _enums
 
 
-def _style_accelerando(
-    container: abjad.Container | abjad.Tuplet, exponent: float
-) -> abjad.Container | abjad.Tuplet:
-    assert isinstance(container, abjad.Container), repr(container)
-    if 1 < len(container):
-        assert isinstance(container, abjad.Tuplet), repr(container)
-        leaves = abjad.select.leaves(container)
-        durations = [abjad.get.duration(_) for _ in leaves]
-        multipliers = _make_accelerando_multipliers(durations, exponent)
-        assert len(leaves) == len(multipliers)
-        for multiplier, leaf in zip(multipliers, leaves):
-            leaf.multiplier = multiplier
-        rmakers.feather_beam([container])
-        rmakers.duration_bracket(container)
-    return container
-
-
 def _make_accelerando_multipliers(durations, exponent) -> list[tuple[int, int]]:
     sums = abjad.math.cumulative_sums(durations)
     generator = abjad.sequence.nwise(sums, n=2)
@@ -69,6 +52,23 @@ def _make_accelerando_multipliers(durations, exponent) -> list[tuple[int, int]]:
         pair = abjad.duration.with_denominator(fraction, 2**10)
         pairs.append(pair)
     return pairs
+
+
+def _style_accelerando(
+    container: abjad.Container | abjad.Tuplet, exponent: float
+) -> abjad.Container | abjad.Tuplet:
+    assert isinstance(container, abjad.Container), repr(container)
+    if 1 < len(container):
+        assert isinstance(container, abjad.Tuplet), repr(container)
+        leaves = abjad.select.leaves(container)
+        durations = [abjad.get.duration(_) for _ in leaves]
+        multipliers = _make_accelerando_multipliers(durations, exponent)
+        assert len(leaves) == len(multipliers)
+        for multiplier, leaf in zip(multipliers, leaves):
+            leaf.multiplier = multiplier
+        rmakers.feather_beam([container])
+        rmakers.duration_bracket(container)
+    return container
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -549,8 +549,6 @@ def make_mmrests(
                     r"\abjad-invisible-music", site="before"
                 )
                 abjad.attach(literal, note, deactivate=True, tag=tag)
-                # TODO: remove 1 line below?
-                abjad.attach(_enums.HIDDEN, note)
                 tag = _tags.function_name(_frame(), n=5)
                 hidden_note_voice = abjad.Voice([note], name=voice_name, tag=tag)
                 abjad.attach(_enums.INTERMITTENT, hidden_note_voice)
