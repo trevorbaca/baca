@@ -956,7 +956,7 @@ Persistence.
         >>> text = abjad.tag.left_shift_tags(text)
         >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count = abjad.deactivate(text, match)
+        >>> text, count, skipped = abjad.deactivate(text, match)
         >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
@@ -996,7 +996,7 @@ Persistence.
 
         >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count = abjad.activate(text, match)
+        >>> text, count, skipped = abjad.activate(text, match)
         >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
@@ -1106,7 +1106,7 @@ Persistence.
         >>> text = abjad.tag.left_shift_tags(text)
         >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count = abjad.deactivate(text, match)
+        >>> text, count, skipped = abjad.deactivate(text, match)
         >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
@@ -1146,7 +1146,7 @@ Persistence.
 
         >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count = abjad.activate(text, match)
+        >>> text, count, skipped = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1256,7 +1256,7 @@ Persistence.
         >>> text = abjad.tag.left_shift_tags(text)
         >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count = abjad.deactivate(text, match)
+        >>> text, count, skipped = abjad.deactivate(text, match)
         >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
@@ -1296,7 +1296,7 @@ Persistence.
 
         >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count = abjad.activate(text, match)
+        >>> text, count, skipped = abjad.activate(text, match)
         >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
@@ -1409,7 +1409,7 @@ Persistence.
         >>> text = abjad.tag.left_shift_tags(text)
         >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count = abjad.deactivate(text, match)
+        >>> text, count, skipped = abjad.deactivate(text, match)
         >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
@@ -1454,7 +1454,7 @@ Persistence.
 
         >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count = abjad.activate(text, match)
+        >>> text, count, skipped = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1575,7 +1575,7 @@ Persistence.
         >>> text = abjad.tag.left_shift_tags(text)
         >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count = abjad.deactivate(text, match)
+        >>> text, count, skipped = abjad.deactivate(text, match)
         >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
@@ -1615,7 +1615,7 @@ Persistence.
 
         >>> tags_ = baca.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count = abjad.activate(text, match)
+        >>> text, count, skipped = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1737,7 +1737,7 @@ Persistence.
         >>> text = abjad.tag.left_shift_tags(text)
         >>> tags_ = baca.tags.short_instrument_name_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count = abjad.deactivate(text, match)
+        >>> text, count, skipped = abjad.deactivate(text, match)
         >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
@@ -1780,7 +1780,7 @@ Persistence.
 
         >>> tags_ = baca.tags.short_instrument_name_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count = abjad.activate(text, match)
+        >>> text, count, skipped = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1895,7 +1895,7 @@ Persistence.
         >>> text = abjad.tag.left_shift_tags(text)
         >>> tags_ = baca.tags.short_instrument_name_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count = abjad.deactivate(text, match)
+        >>> text, count, skipped = abjad.deactivate(text, match)
         >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
@@ -1938,7 +1938,7 @@ Persistence.
 
         >>> tags_ = baca.tags.short_instrument_name_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count = abjad.activate(text, match)
+        >>> text, count, skipped = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2054,7 +2054,7 @@ Persistence.
         >>> text = abjad.tag.left_shift_tags(text)
         >>> tags_ = baca.tags.short_instrument_name_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count = abjad.deactivate(text, match)
+        >>> text, count, skipped = abjad.deactivate(text, match)
         >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
@@ -2097,7 +2097,7 @@ Persistence.
 
         >>> tags_ = baca.tags.short_instrument_name_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count = abjad.activate(text, match)
+        >>> text, count, skipped = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2218,7 +2218,7 @@ Persistence.
         >>> text = abjad.tag.left_shift_tags(text)
         >>> tags_ = baca.tags.short_instrument_name_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count = abjad.deactivate(text, match)
+        >>> text, count, skipped = abjad.deactivate(text, match)
         >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
@@ -2269,7 +2269,7 @@ Persistence.
 
         >>> tags_ = baca.tags.short_instrument_name_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count = abjad.activate(text, match)
+        >>> text, count, skipped = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2399,7 +2399,7 @@ Persistence.
         >>> text = abjad.tag.left_shift_tags(text)
         >>> tags_ = baca.tags.short_instrument_name_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count = abjad.deactivate(text, match)
+        >>> text, count, skipped = abjad.deactivate(text, match)
         >>> text = abjad.tag.left_shift_tags(text)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
@@ -2442,7 +2442,7 @@ Persistence.
 
         >>> tags_ = baca.tags.short_instrument_name_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count = abjad.activate(text, match)
+        >>> text, count, skipped = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file["score"].items[:] = lines
         >>> abjad.show(lilypond_file) # doctest: +SKIP

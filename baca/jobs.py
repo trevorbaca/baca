@@ -489,14 +489,15 @@ def show_music_annotations(path, *, undo=False):
 
 
 def show_tag(
-    path,
-    tag,
+    path: pathlib.Path,
+    tag: abjad.Tag | str,
     *,
     match=None,
     prepend_empty_chord=None,
     skip_file_name=None,
-    undo=False,
+    undo: bool = False,
 ):
+    breakpoint()
     if isinstance(tag, str):
         assert match is not None, repr(match)
         name = tag
