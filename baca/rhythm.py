@@ -809,28 +809,20 @@ def make_single_attack(time_signatures, duration) -> list[abjad.Leaf | abjad.Tup
     return music
 
 
+# TODO: allow only string input
 def make_skeleton(
     argument: str | list,
     *,
     tag: abjad.Tag = abjad.Tag(),
 ):
     tag = _tags.function_name(_frame())
-    if isinstance(argument, str):
-        string = f"{{ {argument} }}"
-        container = abjad.parse(string)
-        components = abjad.mutate.eject_contents(container)
-    elif isinstance(argument, list):
-        components = argument
-    else:
-        message = "baca.make_skeleton() accepts string or components,"
-        message += " not {repr(argument)}."
-        raise TypeError(message)
-    if tag is not None:
-        assert isinstance(tag, abjad.Tag), repr(tag)
-        # TODO: tag attachments
-        for component in abjad.iterate.components(components):
-            # TODO: do not set private attribute
-            component._tag = tag
+    if isinstance(argument, list):
+        if all(isinstance(_, str) for _ in argument):
+            argument = "".join(argument)
+    assert isinstance(argument, str), repr(argument)
+    string = f"{{ {argument} }}"
+    container = abjad.parse(string, tag=tag)
+    components = abjad.mutate.eject_contents(container)
     return components
 
 
