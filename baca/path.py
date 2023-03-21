@@ -5,6 +5,7 @@ import importlib
 import os
 import pathlib
 import types
+import typing
 
 import black
 
@@ -13,7 +14,8 @@ import abjad
 from . import tags as _tags
 
 
-def _get_previous_section(path: str):
+def _get_previous_section(path: pathlib.Path):
+    assert isinstance(path, pathlib.Path), repr(path)
     music_py = pathlib.Path(path)
     section = pathlib.Path(music_py).parent
     assert section.parent.name == "sections", repr(section)
@@ -31,14 +33,14 @@ def _get_previous_section(path: str):
 
 
 def activate(
-    path,
-    tag,
+    path: pathlib.Path,
+    tag: abjad.Tag | typing.Callable,
     *,
-    indent=0,
-    name=None,
-    prepend_empty_chord=None,
-    skip_file_name=None,
-    undo=False,
+    indent: int = 0,
+    name: str = "",
+    prepend_empty_chord: bool = False,
+    skip_file_name: str = "",
+    undo: bool = False,
 ):
     """
     Activates ``tag`` in .ily or .ly ``path``.
@@ -51,30 +53,26 @@ def activate(
 
     Third item in pair is list of string messages that explain what happened.
     """
+    assert isinstance(path, pathlib.Path), repr(path)
     assert path.is_file(), repr(path)
     assert path.suffix in (".ily", ".ly")
     if path.name not in ("layout.ly", "music.ily", "music.ly"):
         assert path.name[0].isdigit(), repr(path)
     assert isinstance(indent, int), repr(indent)
     if path.name == skip_file_name:
-        triple = (0, 0, [])
-        return triple
+        return 0, 0, []
     if isinstance(tag, str):
         raise Exception(f"must be tag or callable: {tag!r}")
-    triples = []
     text = path.read_text()
     if undo:
         text, count, skipped = abjad.deactivate(
             text,
             tag,
             prepend_empty_chord=prepend_empty_chord,
-            skipped=True,
         )
     else:
-        text, count, skipped = abjad.activate(text, tag, skipped=True)
+        text, count, skipped = abjad.activate(text, tag)
     path.write_text(text)
-    triple = (path, count, skipped)
-    triples.append(triple)
     if name is None:
         if isinstance(tag, abjad.Tag):
             name = tag.string
@@ -108,7 +106,8 @@ def activate(
     return count, skipped, messages
 
 
-def add_metadatum(path, name, value) -> None:
+def add_metadatum(path: pathlib.Path, name: str, value) -> None:
+    assert isinstance(path, pathlib.Path), repr(path)
     assert " " not in name, repr(name)
     metadata = get_metadata(path)
     dictionary = dict(metadata)
@@ -118,16 +117,14 @@ def add_metadatum(path, name, value) -> None:
 
 
 def deactivate(
-    path,
-    tag,
+    path: pathlib.Path,
+    tag: abjad.Tag | typing.Callable,
     *,
-    indent=0,
-    name=None,
-    prepend_empty_chord=None,
-    skip_file_name=None,
+    indent: int = 0,
+    name: str = "",
+    prepend_empty_chord: bool = False,
+    skip_file_name: str = "",
 ):
-    if isinstance(tag, str):
-        raise Exception(f"must be tag or callable: {tag!r}")
     return activate(
         path,
         tag,
@@ -140,8 +137,8 @@ def deactivate(
 
 
 def extern(
-    path,
-    include_path,
+    path: pathlib.Path,
+    include_path: pathlib.Path,
 ):
     """
     Externalizes LilyPond file parsable chunks.
@@ -152,10 +149,14 @@ def extern(
 
     Writes ``.ily`` to ``include_path``.
     """
+    assert isinstance(path, pathlib.Path), repr(path)
+    assert isinstance(include_path, pathlib.Path), repr(include_path)
     tag = abjad.Tag("baca.path.extern()")
     assert isinstance(include_path, type(path)), repr(include_path)
-    preamble_lines, score_lines = [], []
-    stack, finished_variables = {}, {}
+    preamble_lines: list[str] = []
+    score_lines: list[str] = []
+    stack: dict[str, list[str]] = {}
+    finished_variables = {}
     found_score = False
     with open(path) as pointer:
         readlines = pointer.readlines()
@@ -183,9 +184,9 @@ def extern(
                 del stack[name]
                 count = len(line) - len(line.lstrip())
                 indent = count * " "
-                dereference = indent + rf"{{ \{name} }}"
+                dereference_string = indent + rf"{{ \{name} }}"
                 first_line = finished_variables[name][0]
-                result = abjad.tag.double_tag([dereference], tag)
+                result = abjad.tag.double_tag([dereference_string], tag)
                 dereference = []
                 for tag_line in result[:1]:
                     dereference.append(indent + tag_line)
@@ -271,13 +272,15 @@ def extern(
     include_path.write_text(text)
 
 
-def get_contents_directory(path):
+def get_contents_directory(path: pathlib.Path):
+    assert isinstance(path, pathlib.Path), repr(path)
     wrapper_directory = get_wrapper_directory(path)
     contents_directory = wrapper_directory / wrapper_directory.name
     return contents_directory
 
 
-def get_wrapper_directory(path):
+def get_wrapper_directory(path: pathlib.Path):
+    assert isinstance(path, pathlib.Path), repr(path)
     parts = str(path).split(os.sep)
     while parts:
         string = os.sep.join(parts)
@@ -289,7 +292,7 @@ def get_wrapper_directory(path):
     raise Exception(path)
 
 
-def get_measure_profile_metadata(path) -> tuple[int, int, list]:
+def get_measure_profile_metadata(path: pathlib.Path) -> tuple[int, int, list]:
     """
     Gets measure profile metadata.
 
@@ -300,6 +303,7 @@ def get_measure_profile_metadata(path) -> tuple[int, int, list]:
     Returns tuple of three metadata: first measure number; measure count; list of fermata
     measure numbers.
     """
+    assert isinstance(path, pathlib.Path), repr(path)
     if path.parent.parent.name == "sections":
         string = "first_measure_number"
         first_measure_number = get_metadatum(path.parent, string)
@@ -331,7 +335,8 @@ def get_measure_profile_metadata(path) -> tuple[int, int, list]:
     return (first_measure_number, measure_count, fermata_measure_numbers)
 
 
-def get_metadata(directory) -> types.MappingProxyType:
+def get_metadata(directory: pathlib.Path) -> types.MappingProxyType:
+    assert isinstance(directory, pathlib.Path), repr(directory)
     assert directory.is_dir(), repr(directory)
     metadata_py_path = directory / ".metadata"
     dictionary = {}
@@ -348,16 +353,18 @@ def get_metadata(directory) -> types.MappingProxyType:
 
 # TODO: remove in favor of metadata.get()
 def get_metadatum(
-    path,
-    metadatum_name,
+    path: pathlib.Path,
+    metadatum_name: str,
     default=None,
 ):
+    assert isinstance(path, pathlib.Path), repr(path)
     metadata = get_metadata(path)
     metadatum = metadata.get(metadatum_name, default)
     return metadatum
 
 
-def previous_metadata(path: str) -> types.MappingProxyType:
+def previous_metadata(path: pathlib.Path) -> types.MappingProxyType:
+    assert isinstance(path, pathlib.Path), repr(path)
     previous_section = _get_previous_section(path)
     if previous_section:
         previous_metadata = get_metadata(previous_section)
@@ -366,7 +373,8 @@ def previous_metadata(path: str) -> types.MappingProxyType:
     return previous_metadata
 
 
-def remove_metadatum(path, name):
+def remove_metadatum(path: pathlib.Path, name: str):
+    assert isinstance(path, pathlib.Path), repr(path)
     assert " " not in name, repr(name)
     metadata = get_metadata(path)
     if name in metadata:
@@ -376,7 +384,8 @@ def remove_metadatum(path, name):
     write_metadata_py(path, metadata)
 
 
-def trim(path):
+def trim(path: pathlib.Path):
+    assert isinstance(path, pathlib.Path), repr(path)
     wrapper_directory = get_wrapper_directory(path)
     count = len(wrapper_directory.parts)
     parts = path.parts
@@ -387,7 +396,8 @@ def trim(path):
     return str(path)
 
 
-def write_metadata_py(path, metadata):
+def write_metadata_py(path: pathlib.Path, metadata: types.MappingProxyType):
+    assert isinstance(path, pathlib.Path), repr(path)
     assert isinstance(metadata, types.MappingProxyType), repr(metadata)
     metadata = types.MappingProxyType(dict(sorted(metadata.items())))
     string = str(metadata)

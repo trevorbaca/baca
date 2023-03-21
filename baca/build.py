@@ -1203,7 +1203,7 @@ def read_environment(
     section_directory = pathlib.Path(music_py_path_name).parent
     metadata = baca.path.get_metadata(section_directory)
     persist = baca.path.get_metadata(section_directory)
-    previous_metadata = baca.path.previous_metadata(music_py_path_name)
+    previous_metadata = baca.path.previous_metadata(pathlib.Path(music_py_path_name))
     if previous_metadata and not section_not_included_in_score:
         string = "final_measure_number"
         if string in previous_metadata:

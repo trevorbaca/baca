@@ -497,7 +497,6 @@ def show_tag(
     skip_file_name=None,
     undo: bool = False,
 ):
-    breakpoint()
     if isinstance(tag, str):
         assert match is not None, repr(match)
         name = tag

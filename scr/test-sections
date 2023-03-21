@@ -135,6 +135,6 @@ def main(current_directory):
 
 
 if __name__ == "__main__":
-    current_directory = os.getcwd()
+    current_directory = pathlib.Path(os.getcwd())
     result = main(current_directory)
     sys.exit(result)
