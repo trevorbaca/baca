@@ -809,18 +809,10 @@ def make_single_attack(time_signatures, duration) -> list[abjad.Leaf | abjad.Tup
     return music
 
 
-# TODO: allow only string input
-def make_skeleton(
-    argument: str | list,
-    *,
-    tag: abjad.Tag = abjad.Tag(),
-):
+def make_skeleton(string: str) -> list[abjad.Component]:
     tag = _tags.function_name(_frame())
-    if isinstance(argument, list):
-        if all(isinstance(_, str) for _ in argument):
-            argument = "".join(argument)
-    assert isinstance(argument, str), repr(argument)
-    string = f"{{ {argument} }}"
+    assert isinstance(string, str), repr(string)
+    string = f"{{ {string} }}"
     container = abjad.parse(string, tag=tag)
     components = abjad.mutate.eject_contents(container)
     return components
