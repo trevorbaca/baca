@@ -1,5 +1,5 @@
 """
-Rhythm commands.
+Rhythm.
 """
 import dataclasses
 import fractions
@@ -920,11 +920,6 @@ def prolate(tuplet, treatment, denominator=None):
     tuplet.multiplier = multiplier
     if not abjad.Duration(tuplet.multiplier).normalized():
         tuplet.normalize_multiplier()
-    # TODO: do not set hide here
-    if tuplet.trivial():
-        tuplet.hide = True
-    else:
-        tuplet.hide = False
     return tuplet
 
 

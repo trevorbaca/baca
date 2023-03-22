@@ -649,6 +649,7 @@ figures.py examples.
     >>> rmakers.beam(tuplets)
     >>> lilypond_file = abjad.illustrators.components(tuplets)
     >>> staff = lilypond_file["Staff"]
+    >>> rmakers.swap_trivial(staff)
     >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
     >>> abjad.override(staff).Stem.direction = abjad.DOWN
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -667,12 +668,10 @@ figures.py examples.
                 \override Stem.direction = #down
             }
             {
-                \scaleDurations #'(1 . 1)
                 {
                     \time 3/2
                     c'4
                 }
-                \scaleDurations #'(1 . 1)
                 {
                     d'8
                     [
@@ -687,7 +686,6 @@ figures.py examples.
                     ef''8
                     ]
                 }
-                \scaleDurations #'(1 . 1)
                 {
                     af''16
                     [
@@ -733,6 +731,7 @@ figures.py examples.
     >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
     >>> components = abjad.mutate.eject_contents(container)
     >>> lilypond_file = abjad.illustrators.components(components)
+    >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -769,7 +768,6 @@ figures.py examples.
                         g''16
                         ]
                     }
-                    \scaleDurations #'(1 . 1)
                     {
                         a'16
                         \revert TupletBracket.staff-padding
