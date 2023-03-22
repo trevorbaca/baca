@@ -91,7 +91,8 @@ overrides.py examples.
     ...     collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     ...     tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
     ...     tuplets = [baca.prolate(_, "5:4") for _ in tuplets]
-    ...     baca.rests_around(tuplets, [2], [4], 16)
+    ...     tuplets[0].insert(0, "r8")
+    ...     tuplets[-1].append("r4")
     ...     pleaves = baca.select.pleaves(tuplets)
     ...     baca.stem_up(pleaves)
     ...     rmakers.beam(tuplets)

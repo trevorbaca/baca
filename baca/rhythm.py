@@ -923,52 +923,39 @@ def prolate(tuplet, treatment, denominator=None):
     return tuplet
 
 
-# TODO: remove?
-def rests_after(
-    containers: list[abjad.Container], counts: list[int], denominator: int
-) -> None:
-    durations = [abjad.Duration(_, denominator) for _ in counts]
-    rests = abjad.makers.make_leaves([None], durations)
-    last_leaf = abjad.select.leaf(containers, -1)
-    last_tuplet = abjad.get.parentage(last_leaf).parent
-    assert isinstance(last_tuplet, abjad.Container), repr(last_tuplet)
-    last_tuplet.extend(rests)
-
-
-# TODO: remove?
-def rests_around(
-    containers: list[abjad.Container],
-    before_counts: list[int],
-    after_counts: list[int],
-    denominator: int,
-) -> None:
-    rests_before(containers, before_counts, denominator)
-    rests_after(containers, after_counts, denominator)
-
-
-# TODO: remove?
-def rests_before(
-    containers: list[abjad.Container], counts: list[int], denominator: int
-) -> None:
-    durations = [abjad.Duration(_, denominator) for _ in counts]
-    rests = abjad.makers.make_leaves([None], durations)
-    first_leaf = abjad.select.leaf(containers, 0)
-    first_tuplet = abjad.get.parentage(first_leaf).parent
-    assert isinstance(first_tuplet, abjad.Container), repr(first_tuplet)
-    first_tuplet[0:0] = rests
-
-
-# TODO: remove?
-def skips_before(
-    containers: list[abjad.Container], counts: list[int], denominator: int
-) -> None:
-    durations = [abjad.Duration(_, denominator) for _ in counts]
-    rests = abjad.makers.make_leaves([None], durations)
-    skips = [abjad.Skip(_) for _ in rests]
-    first_leaf = abjad.select.leaf(containers, 0)
-    first_tuplet = abjad.get.parentage(first_leaf).parent
-    assert isinstance(first_tuplet, abjad.Container), repr(first_tuplet)
-    first_tuplet[0:0] = skips
+## TODO: remove?
+#def rests_after(
+#    containers: list[abjad.Container], counts: list[int], denominator: int
+#) -> None:
+#    durations = [abjad.Duration(_, denominator) for _ in counts]
+#    rests = abjad.makers.make_leaves([None], durations)
+#    last_leaf = abjad.select.leaf(containers, -1)
+#    last_tuplet = abjad.get.parentage(last_leaf).parent
+#    assert isinstance(last_tuplet, abjad.Container), repr(last_tuplet)
+#    last_tuplet.extend(rests)
+#
+#
+## TODO: remove?
+#def rests_around(
+#    containers: list[abjad.Container],
+#    before_counts: list[int],
+#    after_counts: list[int],
+#    denominator: int,
+#) -> None:
+#    rests_before(containers, before_counts, denominator)
+#    rests_after(containers, after_counts, denominator)
+#
+#
+## TODO: remove?
+#def rests_before(
+#    containers: list[abjad.Container], counts: list[int], denominator: int
+#) -> None:
+#    durations = [abjad.Duration(_, denominator) for _ in counts]
+#    rests = abjad.makers.make_leaves([None], durations)
+#    first_leaf = abjad.select.leaf(containers, 0)
+#    first_tuplet = abjad.get.parentage(first_leaf).parent
+#    assert isinstance(first_tuplet, abjad.Container), repr(first_tuplet)
+#    first_tuplet[0:0] = rests
 
 
 def style_accelerando(

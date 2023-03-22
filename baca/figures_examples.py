@@ -778,98 +778,6 @@ figures.py examples.
 
 ..  container:: example
 
-    Affixes rests to complete output when pattern is none:
-
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
-    >>> _ = baca.prolate(tuplets[0], "4:5")
-    >>> _ = baca.prolate(tuplets[1], "5:6")
-    >>> _ = baca.prolate(tuplets[2], "3:4")
-    >>> baca.rests_around(tuplets, [1], [2], 16)
-    >>> rmakers.beam(tuplets)
-    >>> lilypond_file = abjad.illustrators.components(tuplets)
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        <<
-            \context Staff = "Staff"
-            {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 5/4
-                {
-                    \time 15/16
-                    r16
-                    c'16
-                    [
-                    d'16
-                    bf'16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 6/5
-                {
-                    fs''16
-                    [
-                    e''16
-                    ef''16
-                    af''16
-                    g''16
-                    ]
-                }
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 4/3
-                {
-                    a'16
-                    r8
-                }
-            }
-        >>
-
-..  container:: example
-
-    Affixes rest to complete output when pattern is none:
-
-    >>> collection = [18, 16, 15, 20, 19]
-    >>> tuplet = baca.from_collection(collection, [1], 16)
-    >>> _ = baca.prolate(tuplet, "8:9")
-    >>> baca.rests_around(tuplet, [1], [2], 16)
-    >>> rmakers.beam([tuplet])
-    >>> lilypond_file = abjad.illustrators.components([tuplet])
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        <<
-            \context Staff = "Staff"
-            {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 9/8
-                {
-                    \time 9/16
-                    r16
-                    fs''16
-                    [
-                    e''16
-                    ef''16
-                    af''16
-                    g''16
-                    ]
-                    r8
-                }
-            }
-        >>
-
-..  container:: example
-
     Imbricates ``segment`` in voice with ``voice_name``.
 
     >>> score = baca.docs.make_empty_score(2)
@@ -1600,7 +1508,8 @@ figures.py examples.
     ...     [2, 10, 18, 16, 15],
     ... ]
     >>> tuplets = [baca.container_from_collection(_, [1], 16) for _ in collections]
-    >>> baca.rests_around(tuplets, [2], [2], 16)
+    >>> tuplets[0].insert(0, "r8")
+    >>> tuplets[-1].append("r8")
     >>> groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
     >>> rmakers.beam_groups(groups)
     >>> container = abjad.Container(tuplets)
@@ -1703,39 +1612,6 @@ figures.py examples.
                 }
             >>
         }
-
-..  container:: example
-
-    Use ``baca.rests_after()`` like this:
-
-    >>> tuplet = baca.from_collection([0, 2, 10], [1], 16)
-    >>> _ = baca.prolate(tuplet, 1, 16)
-    >>> baca.rests_after([tuplet], [2], 16)
-    >>> lilypond_file = abjad.illustrators.components([tuplet])
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        <<
-            \context Staff = "Staff"
-            {
-                \tweak text #tuplet-number::calc-fraction-text
-                \tweak edge-height #'(0.7 . 0)
-                \times 4/3
-                {
-                    #(ly:expect-warning "strange time signature found")
-                    \time 5/12
-                    c'16
-                    d'16
-                    bf'16
-                    r8
-                }
-            }
-        >>
 
 ..  container:: example
 
