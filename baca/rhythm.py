@@ -15,7 +15,9 @@ from . import tags as _tags
 from .enums import enums as _enums
 
 
-def _make_accelerando_multipliers(durations, exponent) -> list[tuple[int, int]]:
+def _make_accelerando_multipliers(
+    durations: list[abjad.Duration], exponent: float
+) -> list[tuple[int, int]]:
     sums = abjad.math.cumulative_sums(durations)
     generator = abjad.sequence.nwise(sums, n=2)
     pairs = list(generator)
@@ -55,17 +57,32 @@ def _make_accelerando_multipliers(durations, exponent) -> list[tuple[int, int]]:
 
 
 def _style_accelerando(
-    container: abjad.Container | abjad.Tuplet, exponent: float
+    container: abjad.Container | abjad.Tuplet,
+    exponent: float,
+    total_duration: abjad.Duration | None = None,
 ) -> abjad.Container | abjad.Tuplet:
     assert isinstance(container, abjad.Container), repr(container)
     if 1 < len(container):
         assert isinstance(container, abjad.Tuplet), repr(container)
+        assert isinstance(exponent, float), repr(exponent)
+        if total_duration is not None:
+            assert isinstance(total_duration, abjad.Duration), repr(total_duration)
         leaves = abjad.select.leaves(container)
-        durations = [abjad.get.duration(_) for _ in leaves]
-        multipliers = _make_accelerando_multipliers(durations, exponent)
-        assert len(leaves) == len(multipliers)
-        for multiplier, leaf in zip(multipliers, leaves):
-            leaf.multiplier = multiplier
+        leaf_durations = [abjad.get.duration(_) for _ in leaves]
+        pairs = _make_accelerando_multipliers(leaf_durations, exponent)
+        if total_duration is not None:
+            multiplier = total_duration / sum(leaf_durations)
+            scaled_pairs = []
+            for pair in pairs:
+                numerator, denominator = pair
+                numerator *= multiplier.numerator
+                denominator *= multiplier.denominator
+                scaled_pair = (numerator, denominator)
+                scaled_pairs.append(scaled_pair)
+            pairs = scaled_pairs
+        assert len(leaves) == len(pairs)
+        for pair, leaf in zip(pairs, leaves):
+            leaf.multiplier = pair
         rmakers.feather_beam([container])
         rmakers.duration_bracket(container)
     return container
@@ -460,6 +477,52 @@ def get_previous_rhythm_state(
         assert len(previous_rhythm_state) in (4, 5), repr(previous_rhythm_state)
         assert previous_rhythm_state["name"] == name, repr(previous_rhythm_state)
     return previous_rhythm_state
+
+
+def make_accelerando(
+    vector: list, denominator: int, duration: abjad.Duration, *, exponent: float = 0.625
+) -> abjad.Tuplet:
+    r"""
+    Makes accelerando.
+
+    ..  container:: example
+
+        >>> duration = abjad.Duration(1, 4)
+        >>> tuplet = baca.make_accelerando([1, 1, 1], 16, duration)
+        >>> string = abjad.lilypond(tuplet)
+        >>> print(string)
+        \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
+        \times 1/1
+        {
+            \once \override Beam.grow-direction = #right
+            c'16 * 6208/3072
+            [
+            c'16 * 3328/3072
+            c'16 * 2752/3072
+            ]
+        }
+        \revert TupletNumber.text
+
+    """
+    tag = _tags.function_name(_frame())
+    leaves = []
+    assert isinstance(denominator, int), repr(denominator)
+    assert isinstance(duration, abjad.Duration), repr(duration)
+    assert isinstance(exponent, float), repr(exponent)
+    for item in vector:
+        if isinstance(item, int) and 0 < item:
+            leaf_duration = abjad.Duration(item, denominator)
+            notes = abjad.makers.make_leaves([0], [leaf_duration], tag=tag)
+            leaves.extend(notes)
+        elif isinstance(item, int) and item < 0:
+            leaf_duration = abjad.Duration(-item, denominator)
+            rests = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
+            leaves.extend(rests)
+        else:
+            raise Exception(item)
+    tuplet = abjad.Tuplet("1:1", leaves, tag=tag)
+    _style_accelerando(tuplet, exponent, total_duration=duration)
+    return tuplet
 
 
 def make_before_grace_containers(
