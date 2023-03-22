@@ -275,6 +275,7 @@ class OBGC:
         pass
 
 
+# TODO: remove
 class TimeSignatureMaker:
     __slots__ = (
         "_count",
@@ -586,58 +587,6 @@ def make_mmrests(
 
 
 def make_monads(fractions) -> list[abjad.Leaf | abjad.Tuplet]:
-    r"""
-    Makes monads.
-
-    ..  container:: example
-
-        >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(4, 4)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-        >>> baca.SpacingSpecifier((1, 12))(score)
-        >>> music = baca.make_monads("2/5 2/5 1/5")
-        >>> score["Music"].extend(music)
-        >>> baca.docs.remove_deactivated_wrappers(score)
-        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            {
-                \context Staff = "Staff"
-                <<
-                    \context Voice = "Skips"
-                    {
-                        \baca-new-spacing-section #1 #12
-                        \time 4/4
-                        s1 * 4/4
-                    }
-                    \context Voice = "Music"
-                    {
-                        \tweak edge-height #'(0.7 . 0)
-                        \times 4/5
-                        {
-                            c'2
-                        }
-                        \tweak edge-height #'(0.7 . 0)
-                        \times 4/5
-                        {
-                            c'2
-                        }
-                        \tweak edge-height #'(0.7 . 0)
-                        \times 4/5
-                        {
-                            c'4
-                        }
-                    }
-                >>
-            }
-
-    """
     music: list[abjad.Leaf | abjad.Tuplet] = []
     pitch = 0
     for fraction in fractions.split():
@@ -672,53 +621,6 @@ def make_repeat_tied_notes(
     *,
     do_not_rewrite_meter: bool = False,
 ) -> list[abjad.Leaf | abjad.Tuplet]:
-    r"""
-    Makes repeat-tied notes; rewrites meter.
-
-    REGRESSION. All notes below are tagged NOT_YET_PITCHED_COLORING (and colored
-    gold), even tied notes resulting from meter rewriting:
-
-    ..  container:: example
-
-        >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(10, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-        >>> baca.SpacingSpecifier((1, 12))(score)
-        >>> music = baca.make_repeat_tied_notes(time_signatures())
-        >>> score["Music"].extend(music)
-        >>> baca.docs.remove_deactivated_wrappers(score)
-        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            {
-                \context Staff = "Staff"
-                <<
-                    \context Voice = "Skips"
-                    {
-                        \baca-new-spacing-section #1 #12
-                        \time 10/8
-                        s1 * 10/8
-                    }
-                    \context Voice = "Music"
-                    {
-                        c'4.
-                        c'4
-                        \repeatTie
-                        c'4.
-                        \repeatTie
-                        c'4
-                        \repeatTie
-                    }
-                >>
-            }
-
-    """
     tag = _tags.function_name(_frame())
     durations = [_.duration for _ in time_signatures]
     leaves_and_tuplets = rmakers.note(durations, tag=tag)
@@ -921,41 +823,6 @@ def prolate(tuplet, treatment, denominator=None):
     if not abjad.Duration(tuplet.multiplier).normalized():
         tuplet.normalize_multiplier()
     return tuplet
-
-
-## TODO: remove?
-#def rests_after(
-#    containers: list[abjad.Container], counts: list[int], denominator: int
-#) -> None:
-#    durations = [abjad.Duration(_, denominator) for _ in counts]
-#    rests = abjad.makers.make_leaves([None], durations)
-#    last_leaf = abjad.select.leaf(containers, -1)
-#    last_tuplet = abjad.get.parentage(last_leaf).parent
-#    assert isinstance(last_tuplet, abjad.Container), repr(last_tuplet)
-#    last_tuplet.extend(rests)
-#
-#
-## TODO: remove?
-#def rests_around(
-#    containers: list[abjad.Container],
-#    before_counts: list[int],
-#    after_counts: list[int],
-#    denominator: int,
-#) -> None:
-#    rests_before(containers, before_counts, denominator)
-#    rests_after(containers, after_counts, denominator)
-#
-#
-## TODO: remove?
-#def rests_before(
-#    containers: list[abjad.Container], counts: list[int], denominator: int
-#) -> None:
-#    durations = [abjad.Duration(_, denominator) for _ in counts]
-#    rests = abjad.makers.make_leaves([None], durations)
-#    first_leaf = abjad.select.leaf(containers, 0)
-#    first_tuplet = abjad.get.parentage(first_leaf).parent
-#    assert isinstance(first_tuplet, abjad.Container), repr(first_tuplet)
-#    first_tuplet[0:0] = rests
 
 
 def style_accelerando(
