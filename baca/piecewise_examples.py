@@ -877,7 +877,7 @@ piecewise.py examples.
     >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_skeleton("{ c2 r4. c2 r4. }")
+    >>> music = baca.parse("{ c2 r4. c2 r4. }")
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "C4 D4")
@@ -1907,7 +1907,7 @@ piecewise.py examples.
     >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_skeleton("{ c2 c4. c2 c4. }")
+    >>> music = baca.parse("{ c2 c4. c2 c4. }")
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "C4 D4 E4 F4")
@@ -2260,7 +2260,7 @@ piecewise.py examples.
     >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_skeleton("{ c2 c4. c2 c4 ~ c8 }")
+    >>> music = baca.parse("{ c2 c4. c2 c4 ~ c8 }")
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "C4 D4 E4 F4")

@@ -809,15 +809,6 @@ def make_single_attack(time_signatures, duration) -> list[abjad.Leaf | abjad.Tup
     return music
 
 
-def make_skeleton(string: str) -> list[abjad.Component]:
-    tag = _tags.function_name(_frame())
-    assert isinstance(string, str), repr(string)
-    string = f"{{ {string} }}"
-    container = abjad.parse(string, tag=tag)
-    components = abjad.mutate.eject_contents(container)
-    return components
-
-
 def make_tied_notes(time_signatures) -> list[abjad.Note | abjad.Tuplet]:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     durations = [_.duration for _ in time_signatures]
@@ -883,6 +874,15 @@ def nest(containers: list[abjad.Tuplet], treatment: str) -> abjad.Tuplet:
         nested_tuplet = abjad.Tuplet(treatment, [])
         abjad.mutate.wrap(containers, nested_tuplet)
     return nested_tuplet
+
+
+def parse(string: str) -> list[abjad.Component]:
+    tag = _tags.function_name(_frame())
+    assert isinstance(string, str), repr(string)
+    string = f"{{ {string} }}"
+    container = abjad.parse(string, tag=tag)
+    components = abjad.mutate.eject_contents(container)
+    return components
 
 
 def prolate(tuplet, treatment, denominator=None):
