@@ -14,6 +14,22 @@ from . import select as _select
 from . import tags as _tags
 from .enums import enums as _enums
 
+_collection_classes = (
+    abjad.PitchClassSegment,
+    abjad.PitchSegment,
+    abjad.PitchSet,
+    list,
+    tuple,
+)
+
+_collection_typing = typing.Union[
+    abjad.PitchClassSegment,
+    abjad.PitchSegment,
+    abjad.PitchSet,
+    list,
+    tuple,
+]
+
 
 def _make_accelerando_multipliers(
     durations: list[abjad.Duration], exponent: float
@@ -305,23 +321,20 @@ def attach_before_grace_containers(before_grace_containers, tuplet):
 
 
 def container_from_collection(
-    collection,
-    counts,
-    denominator,
+    collection: _collection_typing,
+    counts: list[int],
+    denominator: int,
 ) -> abjad.Container:
     collection = getattr(collection, "argument", collection)
-    # if isinstance(collection, set | frozenset):
-    #     raise Exception(collection)
     prototype = (
         abjad.PitchClassSegment,
         abjad.PitchSegment,
         abjad.PitchSet,
         list,
-        set,
         tuple,
     )
     assert isinstance(collection, prototype), repr(collection)
-    if isinstance(collection, set | frozenset | tuple):
+    if isinstance(collection, tuple | abjad.PitchSet):
         collection = [tuple(collection)]
     talea = rmakers.Talea(counts, denominator)
     leaves, i = [], 0
@@ -355,10 +368,10 @@ def container_from_collection(
 
 
 def from_collection(
-    collection,
-    counts,
-    denominator,
-    prolation=None,
+    collection: _collection_typing,
+    counts: list[int],
+    denominator: int,
+    prolation: int | str | abjad.Duration | None = None,
 ) -> abjad.Tuplet:
     container = container_from_collection(collection, counts, denominator)
     leaves = abjad.mutate.eject_contents(container)
@@ -794,7 +807,11 @@ def parse(string: str) -> list[abjad.Component]:
     return components
 
 
-def prolate(tuplet, treatment, denominator=None):
+def prolate(
+    tuplet: abjad.Tuplet,
+    treatment: int | str | abjad.Duration,
+    denominator: int | None = None,
+):
     if isinstance(treatment, int):
         extra_count = treatment
         contents_duration = abjad.get.duration(tuplet)
