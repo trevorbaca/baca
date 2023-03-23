@@ -310,15 +310,18 @@ def container_from_collection(
     denominator,
 ) -> abjad.Container:
     collection = getattr(collection, "argument", collection)
+    # if isinstance(collection, set | frozenset):
+    #     raise Exception(collection)
     prototype = (
         abjad.PitchClassSegment,
         abjad.PitchSegment,
         abjad.PitchSet,
         list,
         set,
+        tuple,
     )
     assert isinstance(collection, prototype), repr(collection)
-    if isinstance(collection, set | frozenset):
+    if isinstance(collection, set | frozenset | tuple):
         collection = [tuple(collection)]
     talea = rmakers.Talea(counts, denominator)
     leaves, i = [], 0

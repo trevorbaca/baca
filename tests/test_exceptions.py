@@ -25,9 +25,9 @@ def test_exceptions_02():
         [0, 2, 10, 18, 16],
         [15, 20, 19, 9, 0],
     ]
-    containers = [baca.container_from_collection(_, [1], 16) for _ in collections]
-    container = abjad.Container(containers)
-    groups = rmakers.nongrace_leaves_in_each_tuplet(containers)
+    tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+    container = abjad.Container(tuplets)
+    groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
     rmakers.beam_groups(groups)
 
     with pytest.raises(Exception):

@@ -1400,7 +1400,7 @@ figures.py examples.
     >>> score = baca.docs.make_empty_score(2)
     >>> accumulator = baca.Accumulator(score)
     >>> collections = [
-    ...     {0, 2, 10, 18, 16},
+    ...     (0, 2, 10, 18, 16),
     ...     [15, 20, 19, 9, 0],
     ...     [2, 10, 18, 16, 15],
     ... ]

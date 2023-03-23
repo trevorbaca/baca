@@ -611,349 +611,148 @@ def bass_to_octave(argument, n: int) -> None:
 
     ..  container:: example
 
-        >>> tuplet = baca.container_from_collection({0, 14, 28}, [1], 16)
-        >>> rmakers.beam([tuplet])
-        >>> _ = baca.bass_to_octave(tuplet, 4)
-        >>> lilypond_file = abjad.illustrators.components([tuplet])
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> staff = abjad.Staff("<c' d'' e'''>4")
+        >>> _ = baca.bass_to_octave(staff, 4)
+        >>> abjad.show(staff) # doctest: +SKIP
 
         ..  docs::
 
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
+            >>> string = abjad.lilypond(staff)
             >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    {
-                        \time 1/16
-                        <c' d'' e'''>16
-                    }
-                }
-            >>
+            \new Staff
+            {
+                <c' d'' e'''>4
+            }
 
-        >>> tuplet = baca.container_from_collection({0, 14, 28}, [1], 16)
-        >>> rmakers.beam([tuplet])
-        >>> _ = baca.center_to_octave(tuplet, 4)
-        >>> lilypond_file = abjad.illustrators.components([tuplet])
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> staff = abjad.Staff("<c' d'' e'''>4")
+        >>> _ = baca.center_to_octave(staff, 4)
+        >>> abjad.show(staff) # doctest: +SKIP
 
         ..  docs::
 
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
+            >>> string = abjad.lilypond(staff)
             >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    {
-                        \time 1/16
-                        <c d' e''>16
-                    }
-                }
-            >>
+            \new Staff
+            {
+                <c d' e''>4
+            }
 
-        >>> tuplet = baca.container_from_collection({0, 14, 28}, [1], 16)
-        >>> rmakers.beam([tuplet])
-        >>> _ = baca.soprano_to_octave(tuplet, 4)
-        >>> lilypond_file = abjad.illustrators.components([tuplet])
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> staff = abjad.Staff("<c' d'' e'''>4")
+        >>> _ = baca.soprano_to_octave(staff, 4)
+        >>> abjad.show(staff) # doctest: +SKIP
 
         ..  docs::
 
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
+            >>> string = abjad.lilypond(staff)
             >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    {
-                        \time 1/16
-                        <c, d e'>16
-                    }
-                }
-            >>
+            \new Staff
+            {
+                <c, d e'>4
+            }
 
     ..  container:: example
 
         Disjunct notes:
 
-        >>> tuplet = baca.container_from_collection([0, 14, 28], [1], 16)
-        >>> rmakers.beam([tuplet])
-        >>> _ = baca.bass_to_octave(tuplet, 4)
-        >>> lilypond_file = abjad.illustrators.components([tuplet])
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> staff = abjad.Staff("c'4 d'' e'''")
+        >>> _ = baca.bass_to_octave(staff, 4)
+        >>> abjad.show(staff) # doctest: +SKIP
 
         ..  docs::
 
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
+            >>> string = abjad.lilypond(staff)
             >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    {
-                        \time 3/16
-                        c'16
-                        [
-                        d''16
-                        e'''16
-                        ]
-                    }
-                }
-            >>
+            \new Staff
+            {
+                c'4
+                d''4
+                e'''4
+            }
 
-        >>> tuplet = baca.container_from_collection([0, 14, 28], [1], 16)
-        >>> rmakers.beam([tuplet])
-        >>> _ = baca.center_to_octave(tuplet, 4)
-        >>> lilypond_file = abjad.illustrators.components([tuplet])
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> staff = abjad.Staff("c'4 d'' e'''")
+        >>> _ = baca.center_to_octave(staff, 4)
+        >>> abjad.show(staff) # doctest: +SKIP
 
         ..  docs::
 
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
+            >>> string = abjad.lilypond(staff)
             >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    {
-                        \time 3/16
-                        c16
-                        [
-                        d'16
-                        e''16
-                        ]
-                    }
-                }
-            >>
+            \new Staff
+            {
+                c4
+                d'4
+                e''4
+            }
 
-        >>> tuplet = baca.container_from_collection([0, 14, 28], [1], 16)
-        >>> rmakers.beam([tuplet])
-        >>> _ = baca.soprano_to_octave(tuplet, 4)
-        >>> lilypond_file = abjad.illustrators.components([tuplet])
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> staff = abjad.Staff("c'4 d'' e'''")
+        >>> _ = baca.soprano_to_octave(staff, 4)
+        >>> abjad.show(staff) # doctest: +SKIP
 
         ..  docs::
 
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
+            >>> string = abjad.lilypond(staff)
             >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    {
-                        \time 3/16
-                        c,16
-                        [
-                        d16
-                        e'16
-                        ]
-                    }
-                }
-            >>
+            \new Staff
+            {
+                c,4
+                d4
+                e'4
+            }
 
     ..  container:: example
 
         Conjunct notes:
 
-        >>> tuplet = baca.container_from_collection([10, 12, 14], [1], 16)
-        >>> rmakers.beam([tuplet])
-        >>> _ = baca.bass_to_octave(tuplet, 4)
-        >>> lilypond_file = abjad.illustrators.components([tuplet])
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    {
-                        \time 3/16
-                        bf'16
-                        [
-                        c''16
-                        d''16
-                        ]
-                    }
-                }
-            >>
-
-        >>> tuplet = baca.container_from_collection([10, 12, 14], [1], 16)
-        >>> rmakers.beam([tuplet])
-        >>> _ = baca.center_to_octave(tuplet, 4)
-        >>> lilypond_file = abjad.illustrators.components([tuplet])
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    {
-                        \time 3/16
-                        bf16
-                        [
-                        c'16
-                        d'16
-                        ]
-                    }
-                }
-            >>
-
-        >>> tuplet = baca.container_from_collection([10, 12, 14], [1], 16)
-        >>> rmakers.beam([tuplet])
-        >>> _ = baca.soprano_to_octave(tuplet, 4)
-        >>> lilypond_file = abjad.illustrators.components([tuplet])
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> score = lilypond_file["Score"]
-            >>> string = abjad.lilypond(score)
-            >>> print(string)
-            \context Score = "Score"
-            <<
-                \context Staff = "Staff"
-                {
-                    {
-                        \time 3/16
-                        bf16
-                        [
-                        c'16
-                        d'16
-                        ]
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Bass anchored at octave 5:
-
-        >>> chord = abjad.Chord("<c, d e'>1")
-        >>> _ = baca.bass_to_octave(chord, 5)
-
-        ..  docs::
-
-            >>> string = abjad.lilypond(chord)
-            >>> print(string)
-            <c'' d''' e''''>1
-
-    ..  container:: example
-
-        Center anchored at octave 5:
-
-        >>> chord = abjad.Chord("<c, d e'>1")
-        >>> _ = baca.center_to_octave(chord, 5)
-
-        ..  docs::
-
-            >>> string = abjad.lilypond(chord)
-            >>> print(string)
-            <c' d'' e'''>1
-
-    ..  container:: example
-
-        Soprano anchored at octave 5:
-
-        >>> chord = abjad.Chord("<c, d e'>1")
-        >>> _ = baca.soprano_to_octave(chord, 5)
-
-        ..  docs::
-
-            >>> string = abjad.lilypond(chord)
-            >>> print(string)
-            <c d' e''>1
-
-    ..  container:: example
-
-        >>> chord = abjad.Chord("<c, d e'>1")
-        >>> staff = abjad.Staff([chord])
-        >>> abjad.attach(abjad.Clef("bass"), staff[0])
+        >>> staff = abjad.Staff("c''4 d'' e''")
+        >>> _ = baca.bass_to_octave(staff, 4)
         >>> abjad.show(staff) # doctest: +SKIP
 
         ..  docs::
 
-            >>> string = abjad.lilypond(chord)
+            >>> string = abjad.lilypond(staff)
             >>> print(string)
-            \clef "bass"
-            <c, d e'>1
+            \new Staff
+            {
+                c'4
+                d'4
+                e'4
+            }
 
-    ..  container:: example
-
-        >>> chord = abjad.Chord("<c, d e'>1")
-        >>> _ = baca.bass_to_octave(chord, 1)
+        >>> staff = abjad.Staff("c''4 d'' e''")
+        >>> _ = baca.center_to_octave(staff, 4)
+        >>> abjad.show(staff) # doctest: +SKIP
 
         ..  docs::
 
-            >>> string = abjad.lilypond(chord)
+            >>> string = abjad.lilypond(staff)
             >>> print(string)
-            <c,, d, e>1
+            \new Staff
+            {
+                c'4
+                d'4
+                e'4
+            }
 
-    ..  container:: example
-
-        >>> chord = abjad.Chord("<c, d e'>1")
-        >>> _ = baca.bass_to_octave(chord, 2)
+        >>> staff = abjad.Staff("c''4 d'' e''")
+        >>> _ = baca.soprano_to_octave(staff, 4)
+        >>> abjad.show(staff) # doctest: +SKIP
 
         ..  docs::
 
-            >>> string = abjad.lilypond(chord)
+            >>> string = abjad.lilypond(staff)
             >>> print(string)
-            <c, d e'>1
-
-    ..  container:: example
-
-        >>> chord = abjad.Chord("<c, d e'>1")
-        >>> _ = baca.bass_to_octave(chord, 3)
-
-        ..  docs::
-
-            >>> string = abjad.lilypond(chord)
-            >>> print(string)
-            <c d' e''>1
-
-    ..  container:: example
-
-        >>> chord = abjad.Chord("<c, d e'>1")
-        >>> _ = baca.bass_to_octave(chord, 4)
-
-        ..  docs::
-
-            >>> string = abjad.lilypond(chord)
-            >>> print(string)
-            <c' d'' e'''>1
-
-    ..  container:: example
-
-        >>> chord = abjad.Chord("<c, d e'>1")
-        >>> _ = baca.bass_to_octave(chord, 5)
-
-        ..  docs::
-
-            >>> string = abjad.lilypond(chord)
-            >>> print(string)
-            <c'' d''' e''''>1
+            \new Staff
+            {
+                c'4
+                d'4
+                e'4
+            }
 
     ..  container:: example
 
         Octave-transposes music such that the lowest note appears in octave 3:
 
-        >>> collections = [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]]
+        >>> collections = [(0, 2, 10), [17], (15, 16, 30), (7, 20), [9]]
         >>> tuplets = [baca.container_from_collection(_, [4], 16) for _ in collections]
         >>> baca.bass_to_octave(tuplets, 3)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -992,7 +791,7 @@ def bass_to_octave(argument, n: int) -> None:
         Octave-transposes music such that the lowest pitch in each pitched logical tie
         appears in octave 3:
 
-        >>> collections = [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]]
+        >>> collections = [(0, 2, 10), [17], (15, 16, 30), (7, 20), [9]]
         >>> tuplets = [baca.container_from_collection(_, [4], 16) for _ in collections]
         >>> for plt in baca.select.plts(tuplets):
         ...     baca.bass_to_octave(plt, 3)
@@ -1944,7 +1743,7 @@ def register(
 
         Works with chords:
 
-        >>> tuplet = baca.container_from_collection({10, 12, 14}, [1], 16)
+        >>> tuplet = baca.container_from_collection((10, 12, 14), [1], 16)
         >>> rmakers.beam([tuplet])
         >>> _ = baca.register(tuplet, -6)
         >>> lilypond_file = abjad.illustrators.components([tuplet])
@@ -2095,7 +1894,7 @@ def register(
         With chords:
 
         >>> collections = [[6, 4], [3, 5], [9, 10], [0, 11], [8, 7], [1, 2]]
-        >>> collections = [set(_) for _ in collections]
+        >>> collections = [tuple(_) for _ in collections]
         >>> tuplets = [baca.container_from_collection(_, [1], 16) for _ in collections]
         >>> rmakers.beam(tuplets)
         >>> _ = baca.register(tuplets, 0, 24)
