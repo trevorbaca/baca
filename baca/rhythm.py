@@ -703,6 +703,98 @@ def make_rhythm(
                 r8.
             }
 
+    ..  container:: example
+
+        >>> time_signatures = 5 * [abjad.TimeSignature((1, 4))]
+        >>> duration = abjad.Duration(1, 4)
+        >>> container = baca.make_rhythm([
+        ...     -1,
+        ...     baca.make_accelerando([1, 1, 1, 1, 1], 16, duration),
+        ...     baca.make_accelerando([1, 1, 1, 1, 1], 16, duration, exponent=1.625),
+        ...     4,
+        ...     baca.make_accelerando([1, 1, 1, 1, 1], 16, duration, exponent=1.625),
+        ...     -3
+        ...     ],
+        ...     16,
+        ...     time_signatures
+        ... )
+        >>> components = abjad.mutate.eject_contents(container)
+        >>> staff = abjad.Staff(components, lilypond_type="RhythmicStaff")
+        >>> leaf = abjad.select.leaf(staff, 0)
+        >>> abjad.attach(time_signatures[0], leaf)
+        >>> score = abjad.Score([staff])
+        >>> abjad.override(score).TupletBracket.bracket_visibility = True
+        >>> abjad.override(score).TupletBracket.padding = 2
+        >>> abjad.setting(score).autoBeaming = False
+        >>> abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 24)"
+        >>> abjad.setting(score).tupletFullLength = True
+        >>> abjad.show(score) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \new Score
+            \with
+            {
+                \override TupletBracket.bracket-visibility = ##t
+                \override TupletBracket.padding = 2
+                autoBeaming = ##f
+                proportionalNotationDuration = #(ly:make-moment 1 24)
+                tupletFullLength = ##t
+            }
+            <<
+                \new RhythmicStaff
+                {
+                    \time 1/4
+                    r16
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #right
+                        c'16 * 7488/5120
+                        [
+                        c'16 * 4032/5120
+                        c'16 * 3328/5120
+                        c'16 * 2944/5120
+                        c'16 * 2688/5120
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #left
+                        c'16 * 1472/5120
+                        [
+                        c'16 * 3136/5120
+                        c'16 * 4288/5120
+                        c'16 * 5312/5120
+                        c'16 * 6272/5120
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    c'8.
+                    ]
+                    ~
+                    c'16
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #left
+                        c'16 * 1472/5120
+                        [
+                        c'16 * 3136/5120
+                        c'16 * 4288/5120
+                        c'16 * 5312/5120
+                        c'16 * 6272/5120
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    r8.
+                }
+            >>
+
     """
     assert isinstance(vector, list), repr(vector)
     assert isinstance(denominator, int), repr(denominator)
@@ -710,25 +802,50 @@ def make_rhythm(
         assert isinstance(time_signatures, list), repr(time_signatures)
         assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     tag = _tags.function_name(_frame())
-    components = []
-    for item in vector:
+    index_to_original_item: dict[int, abjad.Tuplet | None] = {}
+    components, item_durations = [], []
+    for i, item in enumerate(vector):
+        index_to_original_item[i], duration = None, None
         if isinstance(item, int) and 0 < item:
             leaf_duration = abjad.Duration(item, denominator)
             notes = abjad.makers.make_leaves([0], [leaf_duration], tag=tag)
+            duration = abjad.get.duration(notes)
             components.extend(notes)
         elif isinstance(item, int) and item < 0:
             leaf_duration = abjad.Duration(-item, denominator)
             rests = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
+            duration = abjad.get.duration(rests)
             components.extend(rests)
-        elif isinstance(item, abjad.Component):
-            components.append(item)
+        elif isinstance(item, abjad.Tuplet):
+            duration = abjad.get.duration(item)
+            dummy_notes = abjad.makers.make_leaves([99], [duration], tag=tag)
+            components.extend(dummy_notes)
+            index_to_original_item[i] = item
         else:
             raise Exception(item)
+        item_durations.append(duration)
     if time_signatures:
         voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
         rmakers.rewrite_meter(voice, tag=tag)
         components = abjad.mutate.eject_contents(voice)
     container = abjad.Container(components)
+    assert abjad.get.duration(container) == sum(item_durations)
+    components = container[:]
+    component_durations = [abjad.get.duration(_) for _ in components]
+    duration_lists = abjad.sequence.partition_by_weights(
+        component_durations, item_durations, allow_part_weights=abjad.EXACT
+    )
+    counts = [len(_) for _ in duration_lists]
+    assert len(components) == sum(counts)
+    component_lists = abjad.sequence.partition_by_counts(components, counts)
+    for i, component_list in enumerate(component_lists):
+        original_item = index_to_original_item[i]
+        if original_item is not None:
+            abjad.mutate.replace(component_list, original_item)
+            leaf = abjad.select.leaf(original_item, 0)
+            previous_leaf = abjad.get.leaf(leaf, -1)
+            if previous_leaf is not None:
+                abjad.detach(abjad.StartBeam, previous_leaf)
     return container
 
 
