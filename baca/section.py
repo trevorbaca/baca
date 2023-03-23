@@ -1902,7 +1902,7 @@ def append_anchor_note(argument, *, runtime=None):
     leaf = abjad.get.leaf(argument, 0)
     parentage = abjad.get.parentage(leaf)
     voice = parentage.get(abjad.Voice, n=-1)
-    tag = abjad.Tag("baca.append_anchor_note(1)")
+    tag = _tags.function_name(_frame(), n=1)
     tag = tag.append(_tags.ANCHOR_NOTE)
     tag = tag.append(_tags.HIDDEN)
     tag = tag.append(_tags.NOTE)
@@ -1912,7 +1912,7 @@ def append_anchor_note(argument, *, runtime=None):
     abjad.attach(_enums.NOT_YET_PITCHED, note)
     abjad.attach(_enums.NOTE, note)
     #
-    tag = abjad.Tag("baca.append_anchor_note(2)")
+    tag = _tags.function_name(_frame(), n=2)
     tag = tag.append(_tags.ANCHOR_NOTE)
     tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
     tag = tag.append(_tags.NOTE)
@@ -1922,7 +1922,7 @@ def append_anchor_note(argument, *, runtime=None):
         tag=tag,
     )
     #
-    tag = abjad.Tag("baca.append_anchor_note(3)")
+    tag = _tags.function_name(_frame(), n=3)
     tag = tag.append(_tags.ANCHOR_NOTE)
     tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
     tag = tag.append(_tags.NOTE)
