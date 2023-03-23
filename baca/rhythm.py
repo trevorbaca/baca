@@ -292,102 +292,6 @@ class OBGC:
         pass
 
 
-# TODO: remove
-class TimeSignatureMaker:
-    __slots__ = (
-        "_count",
-        "_fermata_measures",
-        "_rotation",
-        "_time_signatures",
-    )
-
-    def __init__(
-        self,
-        time_signatures,
-        *,
-        count=None,
-        fermata_measures=None,
-        rotation=None,
-    ):
-        self._time_signatures = time_signatures
-        if count is not None:
-            assert isinstance(count, int), repr(count)
-        self._count = count
-        if fermata_measures is not None:
-            assert all(isinstance(_, int) for _ in fermata_measures)
-            fermata_measures = list(fermata_measures)
-        self._fermata_measures = fermata_measures
-        self._rotation = rotation
-
-    def _normalize_fermata_measures(self):
-        fermata_measures = []
-        if self.fermata_measures is None:
-            return fermata_measures
-        for n in self.fermata_measures:
-            if 0 < n:
-                fermata_measures.append(n)
-            elif n == 0:
-                raise ValueError(n)
-            else:
-                fermata_measures.append(self.count - abs(n) + 1)
-        fermata_measures.sort()
-        return fermata_measures
-
-    @property
-    def count(self):
-        """
-        Gets count.
-        """
-        return self._count
-
-    @property
-    def fermata_measures(self):
-        """
-        Gets fermata measures.
-        """
-        return self._fermata_measures
-
-    @property
-    def rotation(self):
-        """
-        Gets rotation.
-        """
-        return self._rotation
-
-    @property
-    def time_signatures(self):
-        """
-        Gets time signatures.
-        """
-        return self._time_signatures
-
-    def run(self):
-        """
-        Makes time signatures.
-
-        Accounts for fermata measures.
-
-        Does not account for stages.
-        """
-        if not self.count:
-            raise Exception("must specify count with run().")
-        result = []
-        time_signatures = abjad.sequence.rotate(self.time_signatures, self.rotation)
-        time_signatures = abjad.sequence.flatten(time_signatures, depth=1)
-        time_signatures_ = abjad.CyclicTuple(time_signatures)
-        i = 0
-        fermata_measures = self._normalize_fermata_measures()
-        for j in range(self.count):
-            measure_number = j + 1
-            if measure_number in fermata_measures:
-                result.append(abjad.TimeSignature((1, 4)))
-            else:
-                time_signature = time_signatures_[i]
-                result.append(time_signature)
-                i += 1
-        return result
-
-
 def attach_before_grace_containers(before_grace_containers, tuplet):
     tag = _tags.function_name(_frame())
     if before_grace_containers is None:
@@ -819,6 +723,43 @@ def make_tied_repeated_durations(
         assert isinstance(component, abjad.Leaf | abjad.Tuplet)
         music.append(component)
     return music
+
+
+def make_time_signatures(
+    time_signatures,
+    count: int,
+    *,
+    fermata_measures: list[int] | None = None,
+    rotation: int = 0,
+):
+    assert isinstance(count, int), repr(count)
+    if fermata_measures is not None:
+        assert all(isinstance(_, int) for _ in fermata_measures)
+        fermata_measures = list(fermata_measures)
+    result = []
+    time_signatures = abjad.sequence.rotate(time_signatures, rotation)
+    time_signatures = abjad.sequence.flatten(time_signatures, depth=1)
+    time_signatures_ = abjad.CyclicTuple(time_signatures)
+    fermata_measures = fermata_measures or []
+    nfms = []
+    for n in fermata_measures:
+        if 0 < n:
+            nfms.append(n)
+        elif n == 0:
+            raise ValueError(n)
+        else:
+            nfms.append(count - abs(n) + 1)
+    nfms.sort()
+    i = 0
+    for j in range(count):
+        measure_number = j + 1
+        if measure_number in nfms:
+            result.append(abjad.TimeSignature((1, 4)))
+        else:
+            time_signature = time_signatures_[i]
+            result.append(time_signature)
+            i += 1
+    return result
 
 
 def nest(containers: list[abjad.Tuplet], treatment: str) -> abjad.Tuplet:

@@ -69,7 +69,6 @@ from .pitchcommands import *
 from .rhythm import (
     Grace,
     LMR,
-    TimeSignatureMaker,
     attach_before_grace_containers,
     container_from_collection,
     from_collection,
@@ -86,6 +85,7 @@ from .rhythm import (
     make_single_attack,
     make_tied_notes,
     make_tied_repeated_durations,
+    make_time_signatures,
     nest,
     parse,
     prolate,
