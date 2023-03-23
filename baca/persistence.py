@@ -3025,12 +3025,10 @@ Persistence.
         ...     grob="BarLine",
         ...     value="#'(0 . 0)",
         ... )
-        >>> tag = abjad.Tag("baca.bar_extent_persistent")
         >>> voice = score["Music"]
         >>> music = baca.make_notes(time_signatures())
         >>> voice.extend(music)
         >>> wrapper = abjad.attach(override, voice[0], wrapper=True)
-        >>> wrapper.tag = tag
         >>> _ = baca.staff_lines(voice[0], 1)
         >>> _ = baca.staff_position(voice, 0)
         >>> _ = baca.section.remove_redundant_time_signatures(score)
@@ -3155,12 +3153,7 @@ Persistence.
         ...     grob="BarLine",
         ...     value="#'(0 . 0)",
         ... )
-        >>> tag = abjad.Tag("baca.bar_extent_persistent")
-        >>> abjad.attach(
-        ...     override,
-        ...     abjad.select.leaf(voice, 0),
-        ...     tag=tag,
-        ... )
+        >>> abjad.attach(override, abjad.select.leaf(voice, 0))
         >>> previous_persistent_indicators = {}
         >>> previous_persistent_indicators["Music"] = [
         ...     baca.Memento(

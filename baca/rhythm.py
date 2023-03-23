@@ -720,6 +720,8 @@ def make_rhythm(
             leaf_duration = abjad.Duration(-item, denominator)
             rests = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
             components.extend(rests)
+        elif isinstance(item, abjad.Component):
+            components.append(item)
         else:
             raise Exception(item)
     if time_signatures:

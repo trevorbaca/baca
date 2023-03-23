@@ -6,6 +6,7 @@ import os
 import pathlib
 import types
 import typing
+from inspect import currentframe as _frame
 
 import black
 
@@ -151,7 +152,7 @@ def extern(
     """
     assert isinstance(path, pathlib.Path), repr(path)
     assert isinstance(include_path, pathlib.Path), repr(include_path)
-    tag = abjad.Tag("baca.path.extern()")
+    tag = _tags.function_name(_frame())
     assert isinstance(include_path, type(path)), repr(include_path)
     preamble_lines: list[str] = []
     score_lines: list[str] = []
