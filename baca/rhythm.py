@@ -656,6 +656,80 @@ def make_rests(time_signatures) -> list[abjad.Rest | abjad.Tuplet]:
     return music
 
 
+def make_rhythm(
+    vector: list,
+    denominator: int,
+    time_signatures: list[abjad.TimeSignature] | None = None,
+) -> abjad.Container:
+    r"""
+    Makes rhythm from ``vector`` and ``denominator``.
+
+    ..  container:: example
+
+        >>> time_signatures = 5 * [abjad.TimeSignature((1, 4))]
+        >>> container = baca.make_rhythm([-1, 4, 4, 4, 4, -3], 16, time_signatures)
+        >>> components = abjad.mutate.eject_contents(container)
+        >>> staff = abjad.Staff(components)
+        >>> leaf = abjad.select.leaf(staff, 0)
+        >>> abjad.attach(time_signatures[0], leaf)
+        >>> abjad.show(staff) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(staff)
+            >>> print(string)
+            \new Staff
+            {
+                \time 1/4
+                r16
+                c'8.
+                ~
+                c'16
+                [
+                c'8.
+                ]
+                ~
+                c'16
+                [
+                c'8.
+                ]
+                ~
+                c'16
+                [
+                c'8.
+                ]
+                ~
+                c'16
+                r8.
+            }
+
+    """
+    assert isinstance(vector, list), repr(vector)
+    assert isinstance(denominator, int), repr(denominator)
+    if time_signatures is not None:
+        assert isinstance(time_signatures, list), repr(time_signatures)
+        assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
+    tag = _tags.function_name(_frame())
+    components = []
+    for item in vector:
+        if isinstance(item, int) and 0 < item:
+            leaf_duration = abjad.Duration(item, denominator)
+            notes = abjad.makers.make_leaves([0], [leaf_duration], tag=tag)
+            components.extend(notes)
+        elif isinstance(item, int) and item < 0:
+            leaf_duration = abjad.Duration(-item, denominator)
+            rests = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
+            components.extend(rests)
+        else:
+            raise Exception(item)
+    if time_signatures:
+        voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
+        rmakers.rewrite_meter(voice, tag=tag)
+        components = abjad.mutate.eject_contents(voice)
+    container = abjad.Container(components)
+    return container
+
+
 def make_single_attack(time_signatures, duration) -> list[abjad.Leaf | abjad.Tuplet]:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     durations = [_.duration for _ in time_signatures]

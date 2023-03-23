@@ -81,6 +81,7 @@ from .rhythm import (
     make_repeat_tied_notes,
     make_repeated_duration_notes,
     make_rests,
+    make_rhythm,
     make_single_attack,
     make_tied_notes,
     make_tied_repeated_durations,
