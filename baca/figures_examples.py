@@ -6,9 +6,10 @@ figures.py examples.
     Spells nonassignable durations with monontonically decreasing durations by
     default:
 
-    >>> tuplet = baca.container_from_collection([0, 2, 10], [5], 32)
+    >>> tuplet = baca.from_collection([0, 2, 10], [5], 32)
     >>> rmakers.beam([tuplet])
     >>> lilypond_file = abjad.illustrators.components([tuplet])
+    >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -42,9 +43,10 @@ figures.py examples.
     Sixteenths and eighths:
 
     >>> collection = [0, 2, 10, 8]
-    >>> tuplet = baca.container_from_collection(collection, [1, 1, 2], 16)
+    >>> tuplet = baca.from_collection(collection, [1, 1, 2], 16)
     >>> rmakers.beam([tuplet])
     >>> lilypond_file = abjad.illustrators.components([tuplet])
+    >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -69,9 +71,10 @@ figures.py examples.
         >>
 
     >>> collection = [18, 16, 15, 20, 19]
-    >>> tuplet = baca.container_from_collection(collection, [1, 1, 2], 16)
+    >>> tuplet = baca.from_collection(collection, [1, 1, 2], 16)
     >>> rmakers.beam([tuplet])
     >>> lilypond_file = abjad.illustrators.components([tuplet])
+    >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -96,9 +99,10 @@ figures.py examples.
             }
         >>
 
-    >>> tuplet = baca.container_from_collection([9], [1, 1, 2], 16)
+    >>> tuplet = baca.from_collection([9], [1, 1, 2], 16)
     >>> rmakers.beam([tuplet])
     >>> lilypond_file = abjad.illustrators.components([tuplet])
+    >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -121,12 +125,13 @@ figures.py examples.
 
     Works with large counts:
 
-    >>> tuplet = baca.container_from_collection([0, 2], [29], 64)
+    >>> tuplet = baca.from_collection([0, 2], [29], 64)
     >>> container = abjad.Container([tuplet])
     >>> rmakers.beam([tuplet])
     >>> rmakers.force_repeat_tie(container)
     >>> components = abjad.mutate.eject_contents(container)
     >>> lilypond_file = abjad.illustrators.components(components)
+    >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -787,7 +792,7 @@ figures.py examples.
     ...     [15, 20, 19, 9, 0],
     ...     [2, 10, 18, 16, 15],
     ... ]
-    >>> tuplets = [baca.container_from_collection(_, [1], 16) for _ in collections]
+    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
     >>> rmakers.beam_groups(tuplets)
     >>> container = abjad.Container(tuplets)
     >>> imbrications = baca.imbricate(
@@ -812,6 +817,7 @@ figures.py examples.
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -847,23 +853,27 @@ figures.py examples.
                         {
                             s16
                             s16
-                            \set stemLeftBeamCount = 2
+                            \set stemLeftBeamCount = 0
                             \set stemRightBeamCount = 2
                             g''16
+                            [
                             \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
+                            \set stemRightBeamCount = 0
                             a'16
+                            ]
                             s16
                         }
                         {
                             s16
                             s16
-                            \set stemLeftBeamCount = 2
+                            \set stemLeftBeamCount = 0
                             \set stemRightBeamCount = 2
                             fs''16
+                            [
                             \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
+                            \set stemRightBeamCount = 0
                             e''16
+                            ]
                             s16
                         }
                         \revert TupletBracket.stencil
@@ -943,7 +953,7 @@ figures.py examples.
     ...     [15, 20, 19, 9, 0],
     ...     [2, 10, 18, 16, 15],
     ... ]
-    >>> tuplets = [baca.container_from_collection(_, [1], 16) for _ in collections]
+    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
     >>> groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
     >>> rmakers.beam_groups(groups)
     >>> container = abjad.Container(tuplets)
@@ -972,6 +982,7 @@ figures.py examples.
     >>> accumulator.populate(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -997,6 +1008,9 @@ figures.py examples.
                         {
                             \override Beam.positions = #'(6 . 6)
                             s16
+                            [
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             d'16
                             - \staccato
                             s16
@@ -1006,8 +1020,12 @@ figures.py examples.
                         {
                             s16
                             s16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             g''16
                             - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             a'16
                             - \staccato
                             s16
@@ -1018,6 +1036,7 @@ figures.py examples.
                             s16
                             s16
                             s16
+                            ]
                             \revert Beam.positions
                         }
                         \revert TupletBracket.stencil
@@ -1028,25 +1047,57 @@ figures.py examples.
                 {
                     {
                         {
+                            \set stemLeftBeamCount = 0
+                            \set stemRightBeamCount = 2
                             c'16
+                            [
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             d'16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             bf'16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             fs''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
                             e''16
                         }
                         {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
                             ef''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             af''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             g''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             a'16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
                             c'16
                         }
                         {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
                             d'16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             bf'16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             fs''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             e''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 0
                             ef''16
+                            ]
                         }
                     }
                 }
@@ -1058,9 +1109,12 @@ figures.py examples.
                         {
                             \override Beam.positions = #'(8 . 8)
                             s16
+                            [
                             s16
                             s16
                             s16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
                             e''16
                             - \accent
                         }
@@ -1073,12 +1127,17 @@ figures.py examples.
                         }
                         {
                             s16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             bf'16
                             - \accent
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             fs''16
                             - \accent
                             s16
                             s16
+                            ]
                             \revert Beam.positions
                         }
                         \revert TupletBracket.stencil
@@ -1295,7 +1354,7 @@ figures.py examples.
     ...     abjad.NumberedPitchClass(3),
     ... ]
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> tuplets = [baca.container_from_collection(_, [3], 16) for _ in collections]
+    >>> tuplets = [baca.from_collection(_, [3], 16) for _ in collections]
     >>> rmakers.beam(tuplets)
     >>> container = abjad.Container(tuplets)
     >>> imbrications = baca.imbricate(container, "Music.1", segment)
@@ -1317,6 +1376,7 @@ figures.py examples.
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1342,17 +1402,24 @@ figures.py examples.
                         {
                             \voiceOne
                             s8.
+                            [
                             s8.
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 1
                             bf'8.
                             - \accent
-                            ]
                         }
                         {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 1
                             fs''8.
                             - \accent
-                            [
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 1
                             e''8.
                             - \accent
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 1
                             ef''8.
                             - \accent
                             s8.
@@ -1360,6 +1427,7 @@ figures.py examples.
                         }
                         {
                             s8.
+                            ]
                         }
                         \revert TupletBracket.stencil
                         \revert TupletNumber.stencil
@@ -1404,7 +1472,7 @@ figures.py examples.
     ...     [15, 20, 19, 9, 0],
     ...     [2, 10, 18, 16, 15],
     ... ]
-    >>> tuplets = [baca.container_from_collection(_, [1], 16) for _ in collections]
+    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
     >>> groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
     >>> rmakers.beam_groups(groups)
     >>> container = abjad.Container(tuplets)
@@ -1426,6 +1494,7 @@ figures.py examples.
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1449,21 +1518,35 @@ figures.py examples.
                         \override TupletBracket.stencil = ##f
                         \override TupletNumber.stencil = ##f
                         {
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             \voiceOne
                             d'16
                         }
                         {
                             s16
                             s16
+                            \set stemLeftBeamCount = 0
+                            \set stemRightBeamCount = 2
                             g''16
+                            [
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 0
                             a'16
+                            ]
                             s16
                         }
                         {
                             s16
                             s16
+                            \set stemLeftBeamCount = 0
+                            \set stemRightBeamCount = 2
                             fs''16
+                            [
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 0
                             e''16
+                            ]
                             s16
                         }
                         \revert TupletBracket.stencil
@@ -1474,22 +1557,46 @@ figures.py examples.
                 {
                     {
                         {
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             \voiceTwo
                             <c' d' bf' e'' fs''>16
+                            [
                         }
                         {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
                             ef''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             af''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             g''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             a'16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
                             c'16
                         }
                         {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
                             d'16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             bf'16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             fs''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             e''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 0
                             ef''16
+                            ]
                         }
                     }
                 }
@@ -1507,7 +1614,7 @@ figures.py examples.
     ...     [15, 20, 19, 9, 0],
     ...     [2, 10, 18, 16, 15],
     ... ]
-    >>> tuplets = [baca.container_from_collection(_, [1], 16) for _ in collections]
+    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
     >>> tuplets[0].insert(0, "r8")
     >>> tuplets[-1].append("r8")
     >>> groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
@@ -1531,6 +1638,7 @@ figures.py examples.
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1557,6 +1665,8 @@ figures.py examples.
                             \voiceOne
                             s8
                             s16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             d'16
                             s16
                             s16
@@ -1565,15 +1675,27 @@ figures.py examples.
                         {
                             s16
                             s16
+                            \set stemLeftBeamCount = 0
+                            \set stemRightBeamCount = 2
                             g''16
+                            [
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 0
                             a'16
+                            ]
                             s16
                         }
                         {
                             s16
                             s16
+                            \set stemLeftBeamCount = 0
+                            \set stemRightBeamCount = 2
                             fs''16
+                            [
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 0
                             e''16
+                            ]
                             s16
                             s8
                         }
@@ -1587,25 +1709,57 @@ figures.py examples.
                         {
                             \voiceTwo
                             r8
+                            \set stemLeftBeamCount = 0
+                            \set stemRightBeamCount = 2
                             c'16
+                            [
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             d'16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             bf'16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             fs''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
                             e''16
                         }
                         {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
                             ef''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             af''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             g''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             a'16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
                             c'16
                         }
                         {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
                             d'16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             bf'16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             fs''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             e''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 0
                             ef''16
+                            ]
                             r8
                         }
                     }
@@ -1623,7 +1777,7 @@ figures.py examples.
     ...     [0, 2, 10, 18, 16],
     ...     [15, 20, 19, 9, 0],
     ... ]
-    >>> tuplets = [baca.container_from_collection(_, [1], 16) for _ in collections]
+    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
     >>> groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
     >>> rmakers.beam_groups(groups)
     >>> container = abjad.Container(tuplets)
@@ -1648,6 +1802,7 @@ figures.py examples.
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1673,6 +1828,9 @@ figures.py examples.
                         {
                             \voiceOne
                             s16
+                            [
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             d'16
                             - \accent
                             s16
@@ -1682,11 +1840,16 @@ figures.py examples.
                         {
                             s16
                             s16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             g''16
                             - \accent
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             a'16
                             - \accent
                             s16
+                            ]
                         }
                         \revert TupletBracket.stencil
                         \revert TupletNumber.stencil
@@ -1696,29 +1859,51 @@ figures.py examples.
                 {
                     {
                         {
+                            \set stemLeftBeamCount = 0
+                            \set stemRightBeamCount = 2
                             \voiceTwo
                             c'16
                             - \staccato
+                            [
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             d'16
                             - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             bf'16
                             - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             fs''16
                             - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
                             e''16
                             - \staccato
                         }
                         {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
                             ef''16
                             - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             af''16
                             - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             g''16
                             - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             a'16
                             - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 0
                             c'16
                             - \staccato
+                            ]
                         }
                     }
                 }
@@ -1736,7 +1921,7 @@ figures.py examples.
     ...     [15, 20, 19, 9, 0],
     ...     [2, 10, 18, 16, 15],
     ... ]
-    >>> tuplets = [baca.container_from_collection(_, [1], 16) for _ in collections]
+    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
     >>> groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
     >>> rmakers.beam_groups(groups, beam_rests=True)
     >>> container = abjad.Container(tuplets)
@@ -1761,6 +1946,7 @@ figures.py examples.
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1786,6 +1972,9 @@ figures.py examples.
                         {
                             \voiceOne
                             s16
+                            [
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             d'16
                             - \accent
                             s16
@@ -1795,8 +1984,12 @@ figures.py examples.
                         {
                             s16
                             s16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             g''16
                             - \accent
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             a'16
                             - \accent
                             s16
@@ -1804,11 +1997,16 @@ figures.py examples.
                         {
                             s16
                             s16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             fs''16
                             - \accent
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             e''16
                             - \accent
                             s16
+                            ]
                         }
                         \revert TupletBracket.stencil
                         \revert TupletNumber.stencil
@@ -1818,36 +2016,58 @@ figures.py examples.
                 {
                     {
                         {
+                            \set stemLeftBeamCount = 0
+                            \set stemRightBeamCount = 2
                             \voiceTwo
                             c'16
                             - \staccato
+                            [
                             s16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             bf'16
                             - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             fs''16
                             - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
                             e''16
                             - \staccato
                         }
                         {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
                             ef''16
                             - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             af''16
                             - \staccato
                             s16
                             s16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
                             c'16
                             - \staccato
                         }
                         {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
                             d'16
                             - \staccato
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
                             bf'16
                             - \staccato
                             s16
                             s16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 0
                             ef''16
                             - \staccato
+                            ]
                         }
                     }
                 }
@@ -1861,7 +2081,7 @@ figures.py examples.
     >>> score = baca.docs.make_empty_score(2)
     >>> accumulator = baca.Accumulator(score)
     >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> tuplets = [baca.container_from_collection(_, [5], 32) for _ in collections]
+    >>> tuplets = [baca.from_collection(_, [5], 32) for _ in collections]
     >>> rmakers.beam(tuplets)
     >>> container = abjad.Container(tuplets)
     >>> imbrications = baca.imbricate(container, "Music.1", [2, 10, 18, 19, 9],
@@ -1883,6 +2103,7 @@ figures.py examples.
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1908,15 +2129,21 @@ figures.py examples.
                         {
                             \voiceOne
                             s8
+                            [
                             s32
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 1
                             d'8
                             s32
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 1
                             bf'8
                             s32
                         }
                         {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 1
                             fs''8
-                            [
                             s32
                             s8
                             s32
@@ -1924,13 +2151,17 @@ figures.py examples.
                             s32
                             s8
                             s32
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 1
                             g''8
                             s32
                         }
                         {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 1
                             a'8
-                            [
                             s32
+                            ]
                         }
                         \revert TupletBracket.stencil
                         \revert TupletNumber.stencil

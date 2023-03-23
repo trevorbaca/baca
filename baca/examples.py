@@ -288,7 +288,7 @@ Examples.
     ... ]
     >>> figures, time_signatures = [], []
     >>> for i, collection in enumerate(collections):
-    ...     container = baca.container_from_collection(collection, [1], 16)
+    ...     container = baca.from_collection(collection, [1], 16)
     ...     figures.append([container])
     ...     time_signature = abjad.get.duration(container)
     ...     time_signatures.append(time_signature)
@@ -311,6 +311,7 @@ Examples.
     >>> abjad.setting(score).autoBeaming = False
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -379,7 +380,7 @@ Examples.
     ... ]
     >>> figures, time_signatures = [], []
     >>> for i, collection in enumerate(collections):
-    ...     container = baca.container_from_collection(collection, [1], 16)
+    ...     container = baca.from_collection(collection, [1], 16)
     ...     figures.append([container])
     ...     time_signature = abjad.get.duration(container)
     ...     time_signatures.append(time_signature)
@@ -397,6 +398,7 @@ Examples.
     >>> abjad.setting(score).autoBeaming = False
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::

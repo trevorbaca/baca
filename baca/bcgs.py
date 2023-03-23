@@ -19,12 +19,13 @@ bcgs.py examples.
     ...         collection,
     ...         baca.LMR(),
     ...     )
-    ...     container = baca.container_from_collection(collection, [1], 8)
+    ...     container = baca.from_collection(collection, [1], 8)
     ...     baca.attach_before_grace_containers(bgcs, container)
     ...     containers.append(container)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
     >>> lilypond_file = abjad.illustrators.components(containers)
+    >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -110,12 +111,13 @@ bcgs.py examples.
     ...         baca.LMR(),
     ...         duration=abjad.Duration(1, 8),
     ...     )
-    ...     container = baca.container_from_collection(collection, [1], 8)
+    ...     container = baca.from_collection(collection, [1], 8)
     ...     baca.attach_before_grace_containers(bgcs, container)
     ...     containers.append(container)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
     >>> lilypond_file = abjad.illustrators.components(containers)
+    >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -204,12 +206,13 @@ bcgs.py examples.
     ...             right_cyclic=True,
     ...         ),
     ...     )
-    ...     container = baca.container_from_collection(collection, [1], 8)
+    ...     container = baca.from_collection(collection, [1], 8)
     ...     baca.attach_before_grace_containers(bgcs, container)
     ...     containers.append(container)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
     >>> lilypond_file = abjad.illustrators.components(containers)
+    >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -248,7 +251,9 @@ bcgs.py examples.
                         ]
                     }
                     a'8
+                    [
                     c'8
+                    ]
                 }
                 {
                     \acciaccatura {
@@ -258,8 +263,10 @@ bcgs.py examples.
                         ]
                     }
                     fs''8
+                    [
                     e''8
                     ef''8
+                    ]
                 }
                 {
                     \acciaccatura {
@@ -269,9 +276,11 @@ bcgs.py examples.
                         ]
                     }
                     a'8
+                    [
                     c'8
                     d'8
                     bf'8
+                    ]
                 }
             }
         >>
@@ -298,12 +307,13 @@ bcgs.py examples.
     ...             left_cyclic=True,
     ...         ),
     ...     )
-    ...     container = baca.container_from_collection(collection, [1], 8)
+    ...     container = baca.from_collection(collection, [1], 8)
     ...     baca.attach_before_grace_containers(bgcs, container)
     ...     containers.append(container)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
     >>> lilypond_file = abjad.illustrators.components(containers)
+    >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -336,6 +346,7 @@ bcgs.py examples.
                 }
                 {
                     af''8
+                    [
                     \acciaccatura {
                         g''16
                         [
@@ -343,9 +354,11 @@ bcgs.py examples.
                         ]
                     }
                     c'8
+                    ]
                 }
                 {
                     d'8
+                    [
                     bf'8
                     \acciaccatura {
                         fs''16
@@ -354,9 +367,11 @@ bcgs.py examples.
                         ]
                     }
                     ef''8
+                    ]
                 }
                 {
                     af''8
+                    [
                     g''8
                     a'8
                     \acciaccatura {
@@ -366,6 +381,7 @@ bcgs.py examples.
                         ]
                     }
                     bf'8
+                    ]
                 }
             }
         >>
@@ -394,12 +410,13 @@ bcgs.py examples.
     ...             right_length=3,
     ...         ),
     ...     )
-    ...     container = baca.container_from_collection(collection, [1], 8)
+    ...     container = baca.from_collection(collection, [1], 8)
     ...     baca.attach_before_grace_containers(bgcs, container)
     ...     containers.append(container)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
     >>> lilypond_file = abjad.illustrators.components(containers)
+    >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -438,7 +455,9 @@ bcgs.py examples.
                         ]
                     }
                     a'8
+                    [
                     c'8
+                    ]
                 }
                 {
                     \acciaccatura {
@@ -448,10 +467,12 @@ bcgs.py examples.
                         ]
                     }
                     fs''8
+                    [
                     \acciaccatura {
                         e''16
                     }
                     ef''8
+                    ]
                 }
                 {
                     \acciaccatura {
@@ -461,6 +482,7 @@ bcgs.py examples.
                         ]
                     }
                     a'8
+                    [
                     \acciaccatura {
                         c'16
                         [
@@ -468,6 +490,7 @@ bcgs.py examples.
                         ]
                     }
                     bf'8
+                    ]
                 }
             }
         >>
@@ -490,12 +513,13 @@ bcgs.py examples.
     ...         collection,
     ...         baca.LMR(left_length=1),
     ...     )
-    ...     container = baca.container_from_collection(collection, [1], 8)
+    ...     container = baca.from_collection(collection, [1], 8)
     ...     baca.attach_before_grace_containers(bgcs, container)
     ...     containers.append(container)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
     >>> lilypond_file = abjad.illustrators.components(containers)
+    >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -513,17 +537,22 @@ bcgs.py examples.
                 }
                 {
                     d'8
+                    [
                     bf'8
+                    ]
                 }
                 {
                     fs''8
+                    [
                     \acciaccatura {
                         e''16
                     }
                     ef''8
+                    ]
                 }
                 {
                     af''8
+                    [
                     \acciaccatura {
                         g''16
                         [
@@ -531,9 +560,11 @@ bcgs.py examples.
                         ]
                     }
                     c'8
+                    ]
                 }
                 {
                     d'8
+                    [
                     \acciaccatura {
                         bf'16
                         [
@@ -542,9 +573,11 @@ bcgs.py examples.
                         ]
                     }
                     ef''8
+                    ]
                 }
                 {
                     af''8
+                    [
                     \acciaccatura {
                         g''16
                         [
@@ -554,6 +587,7 @@ bcgs.py examples.
                         ]
                     }
                     bf'8
+                    ]
                 }
             }
         >>
@@ -576,12 +610,13 @@ bcgs.py examples.
     ...         collection,
     ...         baca.LMR(),
     ...     )
-    ...     container = baca.container_from_collection(collection, [1], 4)
+    ...     container = baca.from_collection(collection, [1], 4)
     ...     baca.attach_before_grace_containers(bgcs, container)
     ...     containers.append(container)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
     >>> lilypond_file = abjad.illustrators.components(containers)
+    >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
