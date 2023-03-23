@@ -70,7 +70,6 @@ from .rhythm import (
     Grace,
     LMR,
     attach_before_grace_containers,
-    container_from_collection,
     from_collection,
     get_previous_rhythm_state,
     make_accelerando,

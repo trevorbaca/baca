@@ -320,11 +320,12 @@ def attach_before_grace_containers(before_grace_containers, tuplet):
         abjad.attach(before_grace_container, logical_tie.head, tag=tag)
 
 
-def container_from_collection(
+def from_collection(
     collection: _collection_typing,
     counts: list[int],
     denominator: int,
-) -> abjad.Container:
+    prolation: int | str | abjad.Duration | None = None,
+) -> abjad.Tuplet:
     collection = getattr(collection, "argument", collection)
     prototype = (
         abjad.PitchClassSegment,
@@ -362,19 +363,6 @@ def container_from_collection(
             rests = abjad.makers.make_leaves([None], [duration], tag=tag)
             leaves.extend(rests)
             i += 1
-    assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
-    container = abjad.Container(leaves)
-    return container
-
-
-def from_collection(
-    collection: _collection_typing,
-    counts: list[int],
-    denominator: int,
-    prolation: int | str | abjad.Duration | None = None,
-) -> abjad.Tuplet:
-    container = container_from_collection(collection, counts, denominator)
-    leaves = abjad.mutate.eject_contents(container)
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
     tuplet = abjad.Tuplet("1:1", leaves)
     if prolation is not None:
