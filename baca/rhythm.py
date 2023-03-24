@@ -775,7 +775,6 @@ def make_rhythm(
                     }
                     \revert TupletNumber.text
                     c'8.
-                    ]
                     ~
                     c'16
                     \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
@@ -841,11 +840,8 @@ def make_rhythm(
     for i, component_list in enumerate(component_lists):
         original_item = index_to_original_item[i]
         if original_item is not None:
+            rmakers.unbeam(component_list, smart=True)
             abjad.mutate.replace(component_list, original_item)
-            leaf = abjad.select.leaf(original_item, 0)
-            previous_leaf = abjad.get.leaf(leaf, -1)
-            if previous_leaf is not None:
-                abjad.detach(abjad.StartBeam, previous_leaf)
     return container
 
 
