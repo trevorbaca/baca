@@ -2578,8 +2578,6 @@ def postprocess_score(
     if not do_not_check_wellformedness:
         count, message = abjad.wf.tabulate_wellformedness(
             score,
-            # TODO: check overlapping beams
-            check_overlapping_beams=False,
             check_out_of_range_pitches=False,
         )
         if count:
