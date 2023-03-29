@@ -68,6 +68,7 @@ from .piecewisecommands import (
 from .pitchcommands import *
 from .rhythm import (
     Grace,
+    GraceSpecifier,
     LMR,
     attach_before_grace_containers,
     from_collection,

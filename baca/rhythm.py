@@ -11,6 +11,7 @@ import abjad
 from abjadext import rmakers
 
 from . import select as _select
+from . import spannercommands as _spannercommands
 from . import tags as _tags
 from .enums import enums as _enums
 
@@ -83,8 +84,8 @@ def _style_accelerando(
         assert isinstance(exponent, float), repr(exponent)
         if total_duration is not None:
             assert isinstance(total_duration, abjad.Duration), repr(total_duration)
-        leaves = abjad.select.leaves(container)
-        leaf_durations = [abjad.get.duration(_) for _ in leaves]
+        hleaves = _select.hleaves(container)
+        leaf_durations = [abjad.get.duration(_) for _ in hleaves]
         pairs = _make_accelerando_multipliers(leaf_durations, exponent)
         if total_duration is not None:
             multiplier = total_duration / sum(leaf_durations)
@@ -96,10 +97,10 @@ def _style_accelerando(
                 scaled_pair = (numerator, denominator)
                 scaled_pairs.append(scaled_pair)
             pairs = scaled_pairs
-        assert len(leaves) == len(pairs)
-        for pair, leaf in zip(pairs, leaves):
+        assert len(hleaves) == len(pairs)
+        for pair, leaf in zip(pairs, hleaves):
             leaf.multiplier = pair
-        rmakers.feather_beam([container])
+        rmakers.feather_beam([hleaves])
         rmakers.duration_bracket(container)
     return container
 
@@ -155,6 +156,51 @@ class Grace:
         grace_leaves = abjad.makers.make_leaves(pitches, grace_durations)
         grace_container = abjad.BeforeGraceContainer(grace_leaves)
         abjad.attach(grace_container, first_leaf)
+        return main_components
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class GraceSpecifier:
+    grace_note_numerators: list[int]
+    main_note_numerator: int
+
+    def __post_init__(self):
+        assert isinstance(self.main_note_numerator, int), repr(self.main_note_numerator)
+        assert all(isinstance(_, int) for _ in self.grace_note_numerators), repr(
+            self.grace_note_numerators
+        )
+
+    def __call__(self, denominator):
+        main_duration = abjad.Duration(abs(self.main_note_numerator), denominator)
+        if 0 < self.main_note_numerator:
+            pitch = 0
+        else:
+            pitch = None
+        main_components = abjad.makers.make_leaves([pitch], main_duration)
+        first_leaf = abjad.get.leaf(main_components, 0)
+        grace_durations = [
+            abjad.Duration(abs(_), denominator) for _ in self.grace_note_numerators
+        ]
+        pitches = []
+        for grace_note_numerator in self.grace_note_numerators:
+            if 0 < grace_note_numerator:
+                pitches.append(0)
+            else:
+                pitches.append(None)
+        grace_leaves = abjad.makers.make_leaves(pitches, grace_durations)
+        if len(grace_leaves) == 1:
+            command = r"\slashedGrace"
+            grace_container = abjad.BeforeGraceContainer(grace_leaves, command=command)
+        else:
+            command = r"\grace"
+            grace_container = abjad.BeforeGraceContainer(grace_leaves, command=command)
+            rmakers.beam([grace_container])
+            leaf = abjad.select.leaf(grace_container, 0)
+            literal = abjad.LilyPondLiteral(r"\slash")
+            abjad.attach(literal, leaf)
+        abjad.attach(grace_container, first_leaf)
+        leaves = grace_leaves + [first_leaf]
+        _spannercommands.slur(leaves)
         return main_components
 
 
@@ -397,19 +443,104 @@ def make_accelerando(
 
         >>> duration = abjad.Duration(1, 4)
         >>> tuplet = baca.make_accelerando([1, 1, 1], 16, duration)
-        >>> string = abjad.lilypond(tuplet)
-        >>> print(string)
-        \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
-        \times 1/1
-        {
-            \once \override Beam.grow-direction = #right
-            c'16 * 6208/3072
-            [
-            c'16 * 3328/3072
-            c'16 * 2752/3072
-            ]
-        }
-        \revert TupletNumber.text
+        >>> staff = abjad.Staff([tuplet], lilypond_type="RhythmicStaff")
+        >>> abjad.override(staff).TupletBracket.padding = 2
+        >>> abjad.show(staff) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(staff)
+            >>> print(string)
+            \new RhythmicStaff
+            \with
+            {
+                \override TupletBracket.padding = 2
+            }
+            {
+                \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
+                \times 1/1
+                {
+                    \once \override Beam.grow-direction = #right
+                    c'16 * 6208/3072
+                    [
+                    c'16 * 3328/3072
+                    c'16 * 2752/3072
+                    ]
+                }
+                \revert TupletNumber.text
+            }
+
+    ..  container:: example
+
+        Ritardando with grace notes:
+
+        >>> duration = abjad.Duration(1, 4)
+        >>> tuplet = baca.make_accelerando(
+        ...     [
+        ...         1, 1,
+        ...         baca.GraceSpecifier([1], 1),
+        ...         baca.GraceSpecifier([1, 1], 1),
+        ...         baca.GraceSpecifier([1, 1, 1], 1),
+        ...     ],
+        ...     16, duration, exponent=1.625
+        ... )
+        >>> staff = abjad.Staff([tuplet], lilypond_type="RhythmicStaff")
+        >>> abjad.override(staff).TupletBracket.padding = 2
+        >>> score = abjad.Score([staff])
+        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> string = abjad.lilypond(score)
+            >>> print(string)
+            \new Score
+            <<
+                \new RhythmicStaff
+                \with
+                {
+                    \override TupletBracket.padding = 2
+                }
+                {
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #left
+                        c'16 * 1472/5120
+                        [
+                        c'16 * 3136/5120
+                        \slashedGrace {
+                            c'16
+                            (
+                        }
+                        c'16 * 4288/5120
+                        )
+                        \grace {
+                            \slash
+                            c'16
+                            [
+                            (
+                            c'16
+                            ]
+                        }
+                        c'16 * 5312/5120
+                        )
+                        \grace {
+                            \slash
+                            c'16
+                            [
+                            (
+                            c'16
+                            c'16
+                            ]
+                        }
+                        c'16 * 6272/5120
+                        )
+                        ]
+                    }
+                    \revert TupletNumber.text
+                }
+            >>
 
     """
     tag = _tags.function_name(_frame())
@@ -426,10 +557,16 @@ def make_accelerando(
             leaf_duration = abjad.Duration(-item, denominator)
             rests = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
             leaves.extend(rests)
+        elif isinstance(item, GraceSpecifier):
+            leaves_ = item(denominator)
+            leaves.extend(leaves_)
         else:
             raise Exception(item)
     tuplet = abjad.Tuplet("1:1", leaves, tag=tag)
     _style_accelerando(tuplet, exponent, total_duration=duration)
+    # string = abjad.lilypond(tuplet)
+    # print(string)
+    # breakpoint()
     return tuplet
 
 
