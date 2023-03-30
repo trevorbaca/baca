@@ -11,7 +11,6 @@ import abjad
 from abjadext import rmakers
 
 from . import select as _select
-from . import spannercommands as _spannercommands
 from . import tags as _tags
 from .enums import enums as _enums
 
