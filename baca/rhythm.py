@@ -152,19 +152,13 @@ class Grace:
             else:
                 pitches.append(None)
         grace_leaves = abjad.makers.make_leaves(pitches, grace_durations)
-        if len(grace_leaves) == 1:
-            command = r"\slashedGrace"
-            grace_container = abjad.BeforeGraceContainer(grace_leaves, command=command)
-        else:
-            command = r"\grace"
-            grace_container = abjad.BeforeGraceContainer(grace_leaves, command=command)
-            rmakers.beam([grace_container])
-            leaf = abjad.select.leaf(grace_container, 0)
+        bgc = abjad.BeforeGraceContainer(grace_leaves, command=r"\acciaccatura")
+        if 1 < len(bgc):
+            rmakers.beam([bgc])
+            leaf = abjad.select.leaf(bgc, 0)
             literal = abjad.LilyPondLiteral(r"\slash")
             abjad.attach(literal, leaf)
-        abjad.attach(grace_container, first_leaf)
-        leaves = grace_leaves + [first_leaf]
-        _spannercommands.slur(leaves)
+        abjad.attach(bgc, first_leaf)
         return main_components
 
 
@@ -683,8 +677,13 @@ def make_rhythm(
             dummy_notes = abjad.makers.make_leaves([99], [duration], tag=tag)
             components.extend(dummy_notes)
             index_to_original_item[i] = item
+        elif isinstance(item, Grace):
+            components_ = item(denominator)
+            duration = abjad.get.duration(components_)
+            components.extend(components_)
         else:
             raise Exception(item)
+        assert isinstance(duration, abjad.Duration), repr(duration)
         item_durations.append(duration)
     if time_signatures:
         voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
