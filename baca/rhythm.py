@@ -134,6 +134,9 @@ class Grace:
         )
 
     def __call__(self, denominator):
+        beam, slash, slur = True, True, True
+        if slash is True:
+            assert beam is True, repr(beam)
         main_duration = abjad.Duration(abs(self.main_note_numerator), denominator)
         if 0 < self.main_note_numerator:
             pitch = 0
@@ -151,12 +154,34 @@ class Grace:
             else:
                 pitches.append(None)
         grace_leaves = abjad.makers.make_leaves(pitches, grace_durations)
-        bgc = abjad.BeforeGraceContainer(grace_leaves, command=r"\acciaccatura")
-        if 1 < len(bgc):
-            rmakers.beam([bgc])
-            leaf = abjad.select.leaf(bgc, 0)
-            literal = abjad.LilyPondLiteral(r"\slash")
-            abjad.attach(literal, leaf)
+        if len(grace_leaves) == 1:
+            if slash is False and slur is False:
+                command = r"\grace"
+            elif slash is False and slur is True:
+                command = r"\appoggiatura"
+            elif slash is True and slur is False:
+                command = r"\slashedGrace"
+            elif slash is True and slur is True:
+                command = r"\acciaccatura"
+            else:
+                raise Exception
+        elif 1 < len(grace_leaves):
+            if beam is True:
+                abjad.beam(grace_leaves)
+            if slash is True:
+                literal = abjad.LilyPondLiteral(r"\slash")
+                abjad.attach(literal, grace_leaves[0])
+            if slash is False and slur is False:
+                command = r"\grace"
+            elif slash is False and slur is True:
+                command = r"\appoggiatura"
+            elif slash is True and slur is False:
+                command = r"\slashedGrace"
+            elif slash is True and slur is True:
+                command = r"\acciaccatura"
+            else:
+                raise Exception
+        bgc = abjad.BeforeGraceContainer(grace_leaves, command=command)
         abjad.attach(bgc, first_leaf)
         return main_components
 
