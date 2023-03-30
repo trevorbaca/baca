@@ -68,13 +68,12 @@ from .piecewisecommands import (
 from .pitchcommands import *
 from .rhythm import (
     Grace,
-    GraceSpecifier,
     LMR,
-    attach_before_grace_containers,
+    attach_bgcs,
     from_collection,
     get_previous_rhythm_state,
     make_accelerando,
-    make_before_grace_containers,
+    make_bgcs,
     make_even_divisions,
     make_mmrests,
     make_monads,

@@ -125,42 +125,6 @@ class AccelerandoSpecifier:
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Grace:
-    denominator: int
-    grace_note_numerators: list[int]
-    main_note_numerator: int
-
-    def __post_init__(self):
-        assert isinstance(self.denominator, int), repr(self.denominator)
-        assert isinstance(self.main_note_numerator, int), repr(self.main_note_numerator)
-        assert all(isinstance(_, int) for _ in self.grace_note_numerators), repr(
-            self.grace_note_numerators
-        )
-
-    def __call__(self):
-        main_duration = abjad.Duration(abs(self.main_note_numerator), self.denominator)
-        if 0 < self.main_note_numerator:
-            pitch = 0
-        else:
-            pitch = None
-        main_components = abjad.makers.make_leaves([pitch], main_duration)
-        first_leaf = abjad.get.leaf(main_components, 0)
-        grace_durations = [
-            abjad.Duration(abs(_), self.denominator) for _ in self.grace_note_numerators
-        ]
-        pitches = []
-        for grace_note_numerator in self.grace_note_numerators:
-            if 0 < grace_note_numerator:
-                pitches.append(0)
-            else:
-                pitches.append(None)
-        grace_leaves = abjad.makers.make_leaves(pitches, grace_durations)
-        grace_container = abjad.BeforeGraceContainer(grace_leaves)
-        abjad.attach(grace_container, first_leaf)
-        return main_components
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class GraceSpecifier:
     grace_note_numerators: list[int]
     main_note_numerator: int
 
@@ -354,16 +318,18 @@ class OBGC:
         pass
 
 
-def attach_before_grace_containers(before_grace_containers, tuplet):
+def attach_bgcs(
+    bgcs: list[abjad.BeforeGraceContainer],
+    argument: abjad.Component | list[abjad.Component],
+) -> None:
     tag = _tags.function_name(_frame())
-    if before_grace_containers is None:
-        return
-    logical_ties = abjad.iterate.logical_ties(tuplet)
-    pairs = zip(before_grace_containers, logical_ties)
-    for before_grace_container, logical_tie in pairs:
-        if before_grace_container is None:
-            continue
-        abjad.attach(before_grace_container, logical_tie.head, tag=tag)
+    bgcs = bgcs or []
+    lts = abjad.select.logical_ties(argument)
+    assert len(bgcs) == len(lts)
+    pairs = zip(bgcs, lts)
+    for bgc, lt in pairs:
+        if bgc is not None:
+            abjad.attach(bgc, lt.head, tag=tag)
 
 
 def from_collection(
@@ -436,9 +402,6 @@ def get_previous_rhythm_state(
 def make_accelerando(
     vector: list, denominator: int, duration: abjad.Duration, *, exponent: float = 0.625
 ) -> abjad.Tuplet:
-    """
-    Makes accelerando.
-    """
     tag = _tags.function_name(_frame())
     leaves = []
     assert isinstance(denominator, int), repr(denominator)
@@ -453,32 +416,33 @@ def make_accelerando(
             leaf_duration = abjad.Duration(-item, denominator)
             rests = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
             leaves.extend(rests)
-        elif isinstance(item, GraceSpecifier):
+        elif isinstance(item, Grace):
             leaves_ = item(denominator)
             leaves.extend(leaves_)
         else:
             raise Exception(item)
     tuplet = abjad.Tuplet("1:1", leaves, tag=tag)
     _style_accelerando(tuplet, exponent, total_duration=duration)
-    # string = abjad.lilypond(tuplet)
-    # print(string)
-    # breakpoint()
     return tuplet
 
 
-def make_before_grace_containers(
-    collection, lmr: LMR, *, duration: abjad.Duration = abjad.Duration(1, 16)
-):
+def make_bgcs(
+    collection: list[int | float],
+    lmr: LMR,
+    *,
+    duration: abjad.Duration = abjad.Duration(1, 16),
+) -> tuple[list[abjad.BeforeGraceContainer | None], list[int | float]]:
     assert isinstance(collection, list), repr(collection)
+    assert all(isinstance(_, int | float) for _ in collection), repr(collection)
     assert isinstance(duration, abjad.Duration), repr(duration)
     assert isinstance(lmr, LMR), repr(LMR)
     segment_parts = lmr(collection)
     segment_parts = [_ for _ in segment_parts if _]
     collection = [_[-1] for _ in segment_parts]
-    before_grace_containers: list[abjad.BeforeGraceContainer | None] = []
+    bgcs: list[abjad.BeforeGraceContainer | None] = []
     for segment_part in segment_parts:
         if len(segment_part) <= 1:
-            before_grace_containers.append(None)
+            bgcs.append(None)
             continue
         grace_token = list(segment_part[:-1])
         grace_leaves = abjad.makers.make_leaves(
@@ -494,10 +458,10 @@ def make_before_grace_containers(
                 container[:],
                 tag=_tags.function_name(_frame(), n=3),
             )
-        before_grace_containers.append(container)
-    assert len(before_grace_containers) == len(collection)
+        bgcs.append(container)
+    assert len(bgcs) == len(collection)
     assert isinstance(collection, list), repr(collection)
-    return before_grace_containers, collection
+    return bgcs, collection
 
 
 def make_even_divisions(time_signatures) -> list[abjad.Leaf | abjad.Tuplet]:
@@ -694,9 +658,6 @@ def make_rhythm(
     denominator: int,
     time_signatures: list[abjad.TimeSignature] | None = None,
 ) -> abjad.Container:
-    """
-    Makes rhythm from ``vector`` and ``denominator``.
-    """
     assert isinstance(vector, list), repr(vector)
     assert isinstance(denominator, int), repr(denominator)
     if time_signatures is not None:
@@ -821,21 +782,24 @@ def make_tied_repeated_durations(
 
 
 def make_time_signatures(
-    time_signatures,
+    time_signatures: list[list[abjad.TimeSignature]],
     count: int,
     *,
     fermata_measures: list[int] | None = None,
     rotation: int = 0,
-):
+) -> list[abjad.TimeSignature]:
+    assert isinstance(time_signatures, list), repr(time_signatures)
+    for item in time_signatures:
+        assert isinstance(item, list), repr(item)
+        assert all(isinstance(_, abjad.TimeSignature) for _ in item), repr(item)
     assert isinstance(count, int), repr(count)
-    if fermata_measures is not None:
-        assert all(isinstance(_, int) for _ in fermata_measures)
-        fermata_measures = list(fermata_measures)
+    fermata_measures = fermata_measures or []
+    assert isinstance(fermata_measures, list), repr(fermata_measures)
+    assert all(isinstance(_, int) for _ in fermata_measures)
     result = []
     time_signatures = abjad.sequence.rotate(time_signatures, rotation)
     time_signatures = abjad.sequence.flatten(time_signatures, depth=1)
     time_signatures_ = abjad.CyclicTuple(time_signatures)
-    fermata_measures = fermata_measures or []
     nfms = []
     for n in fermata_measures:
         if 0 < n:
@@ -890,7 +854,7 @@ def prolate(
     tuplet: abjad.Tuplet,
     treatment: int | str | abjad.Duration,
     denominator: int | None = None,
-):
+) -> abjad.Tuplet:
     if isinstance(treatment, int):
         extra_count = treatment
         contents_duration = abjad.get.duration(tuplet)

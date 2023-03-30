@@ -144,9 +144,9 @@ rhythm.py examples.
     >>> tuplet = baca.make_accelerando(
     ...     [
     ...         1, 1,
-    ...         baca.GraceSpecifier([1], 1),
-    ...         baca.GraceSpecifier([1, 1], 1),
-    ...         baca.GraceSpecifier([1, 1, 1], 1),
+    ...         baca.Grace([1], 1),
+    ...         baca.Grace([1, 1], 1),
+    ...         baca.Grace([1, 1, 1], 1),
     ...     ],
     ...     16, duration, exponent=1.625
     ... )

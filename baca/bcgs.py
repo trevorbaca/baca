@@ -15,12 +15,12 @@ bcgs.py examples.
     ... ]
     >>> containers = []
     >>> for collection in collections:
-    ...     bgcs, collection = baca.make_before_grace_containers(
+    ...     bgcs, collection = baca.make_bgcs(
     ...         collection,
     ...         baca.LMR(),
     ...     )
     ...     container = baca.from_collection(collection, [1], 8)
-    ...     baca.attach_before_grace_containers(bgcs, container)
+    ...     baca.attach_bgcs(bgcs, container)
     ...     containers.append(container)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
@@ -106,13 +106,13 @@ bcgs.py examples.
     ... ]
     >>> containers = []
     >>> for collection in collections:
-    ...     bgcs, collection = baca.make_before_grace_containers(
+    ...     bgcs, collection = baca.make_bgcs(
     ...         collection,
     ...         baca.LMR(),
     ...         duration=abjad.Duration(1, 8),
     ...     )
     ...     container = baca.from_collection(collection, [1], 8)
-    ...     baca.attach_before_grace_containers(bgcs, container)
+    ...     baca.attach_bgcs(bgcs, container)
     ...     containers.append(container)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
@@ -198,7 +198,7 @@ bcgs.py examples.
     ... ]
     >>> containers = []
     >>> for collection in collections:
-    ...     bgcs, collection = baca.make_before_grace_containers(
+    ...     bgcs, collection = baca.make_bgcs(
     ...         collection,
     ...         baca.LMR(
     ...             left_length=3,
@@ -207,7 +207,7 @@ bcgs.py examples.
     ...         ),
     ...     )
     ...     container = baca.from_collection(collection, [1], 8)
-    ...     baca.attach_before_grace_containers(bgcs, container)
+    ...     baca.attach_bgcs(bgcs, container)
     ...     containers.append(container)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
@@ -299,7 +299,7 @@ bcgs.py examples.
     ... ]
     >>> containers = []
     >>> for collection in collections:
-    ...     bgcs, collection = baca.make_before_grace_containers(
+    ...     bgcs, collection = baca.make_bgcs(
     ...         collection,
     ...         baca.LMR(
     ...             right_length=3,
@@ -308,7 +308,7 @@ bcgs.py examples.
     ...         ),
     ...     )
     ...     container = baca.from_collection(collection, [1], 8)
-    ...     baca.attach_before_grace_containers(bgcs, container)
+    ...     baca.attach_bgcs(bgcs, container)
     ...     containers.append(container)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
@@ -401,7 +401,7 @@ bcgs.py examples.
     ... ]
     >>> containers = []
     >>> for collection in collections:
-    ...     bgcs, collection = baca.make_before_grace_containers(
+    ...     bgcs, collection = baca.make_bgcs(
     ...         collection,
     ...         baca.LMR(
     ...             left_length=3,
@@ -411,7 +411,7 @@ bcgs.py examples.
     ...         ),
     ...     )
     ...     container = baca.from_collection(collection, [1], 8)
-    ...     baca.attach_before_grace_containers(bgcs, container)
+    ...     baca.attach_bgcs(bgcs, container)
     ...     containers.append(container)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
@@ -509,12 +509,12 @@ bcgs.py examples.
     ... ]
     >>> containers = []
     >>> for collection in collections:
-    ...     bgcs, collection = baca.make_before_grace_containers(
+    ...     bgcs, collection = baca.make_bgcs(
     ...         collection,
     ...         baca.LMR(left_length=1),
     ...     )
     ...     container = baca.from_collection(collection, [1], 8)
-    ...     baca.attach_before_grace_containers(bgcs, container)
+    ...     baca.attach_bgcs(bgcs, container)
     ...     containers.append(container)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
@@ -606,12 +606,12 @@ bcgs.py examples.
     ... ]
     >>> containers = []
     >>> for collection in collections:
-    ...     bgcs, collection = baca.make_before_grace_containers(
+    ...     bgcs, collection = baca.make_bgcs(
     ...         collection,
     ...         baca.LMR(),
     ...     )
     ...     container = baca.from_collection(collection, [1], 4)
-    ...     baca.attach_before_grace_containers(bgcs, container)
+    ...     baca.attach_bgcs(bgcs, container)
     ...     containers.append(container)
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
