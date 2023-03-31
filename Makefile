@@ -1,8 +1,13 @@
+.PHONY: docs
+
 black-check:
 	black --check --diff .
 
 black-reformat:
 	black .
+
+docs:
+	make -C docs/ html
 
 flake_exclude = --exclude=baca/__init__.py
 flake_ignore = --ignore=E203,E266,E501,W503

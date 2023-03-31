@@ -69,6 +69,7 @@ from .pitchcommands import *
 from .rhythm import (
     Grace,
     LMR,
+    OBGC,
     attach_bgcs,
     from_collection,
     get_previous_rhythm_state,

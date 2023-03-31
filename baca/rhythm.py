@@ -321,18 +321,16 @@ class LMR:
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class OBGC:
-    denominator: int
     grace_note_numerators: list[int]
     main_note_numerator: int
 
     def __post_init__(self):
-        assert isinstance(self.denominator, int), repr(self.denominator)
         assert all(isinstance(_, int) for _ in self.grace_note_numerators), repr(
             self.grace_note_numerators
         )
         assert isinstance(self.main_note_numerator, int), repr(self.main_note_numerator)
 
-    def __call__(self):
+    def __call__(self, denominator):
         pass
 
 
@@ -702,6 +700,10 @@ def make_rhythm(
             components.extend(dummy_notes)
             index_to_original_item[i] = item
         elif isinstance(item, Grace):
+            components_ = item(denominator)
+            duration = abjad.get.duration(components_)
+            components.extend(components_)
+        elif isinstance(item, OBGC):
             components_ = item(denominator)
             duration = abjad.get.duration(components_)
             components.extend(components_)
