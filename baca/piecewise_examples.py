@@ -6,7 +6,7 @@ piecewise.py examples.
     Conventional dynamics:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.make_even_divisions(time_signatures())
@@ -81,7 +81,7 @@ piecewise.py examples.
     Effort dynamic al niente:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.make_even_divisions(time_signatures())
@@ -158,7 +158,7 @@ piecewise.py examples.
     Effort dynamic dal niente:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.make_even_divisions(time_signatures())
@@ -234,7 +234,7 @@ piecewise.py examples.
     Effort dynamic constante:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.make_even_divisions(time_signatures())
@@ -310,7 +310,7 @@ piecewise.py examples.
     Effort dynamics crescendo subito, decrescendo subito:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.make_even_divisions(time_signatures())
@@ -391,7 +391,7 @@ piecewise.py examples.
     Piece selector groups leaves by time_signatures:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.make_even_divisions(time_signatures())
@@ -470,7 +470,7 @@ piecewise.py examples.
     With hairpins:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.make_even_divisions(time_signatures())
@@ -553,7 +553,7 @@ piecewise.py examples.
     Bookends each piece:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.make_even_divisions(time_signatures())
@@ -636,7 +636,7 @@ piecewise.py examples.
     With hairpins:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.make_even_divisions(time_signatures())
@@ -727,7 +727,7 @@ piecewise.py examples.
     REGRESSION. Works with lone dynamic:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.make_even_divisions(time_signatures())
@@ -800,7 +800,7 @@ piecewise.py examples.
     REGRESSION. Works with lone hairpin:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.make_even_divisions(time_signatures())
@@ -874,7 +874,7 @@ piecewise.py examples.
     REGRESSION. Works with to-barline tweak:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.parse("{ c2 r4. c2 r4. }")
@@ -949,7 +949,7 @@ piecewise.py examples.
     Works with interposed niente dynamics:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.make_even_divisions(time_signatures())
@@ -1031,7 +1031,7 @@ piecewise.py examples.
     Works with parenthesized dynamics:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.make_even_divisions(time_signatures())
@@ -1110,7 +1110,7 @@ piecewise.py examples.
     Dashed line with arrow:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.make_even_divisions(time_signatures())
@@ -1187,7 +1187,7 @@ piecewise.py examples.
     Dashed line with hook:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.make_even_divisions(time_signatures())
@@ -1264,7 +1264,7 @@ piecewise.py examples.
     Solid line with arrow:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.make_even_divisions(time_signatures())
@@ -1341,7 +1341,7 @@ piecewise.py examples.
     Solid line with hook:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.make_even_divisions(time_signatures())
@@ -1418,7 +1418,7 @@ piecewise.py examples.
     Invisible lines:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.make_even_divisions(time_signatures())
@@ -1497,7 +1497,7 @@ piecewise.py examples.
     Piece selector groups leaves by time_signatures:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.make_even_divisions(time_signatures())
@@ -1593,7 +1593,7 @@ piecewise.py examples.
     With spanners:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.make_even_divisions(time_signatures())
@@ -1689,7 +1689,7 @@ piecewise.py examples.
     Bookends each piece:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.make_even_divisions(time_signatures())
@@ -1795,7 +1795,7 @@ piecewise.py examples.
     With spanners:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.make_even_divisions(time_signatures())
@@ -1904,7 +1904,7 @@ piecewise.py examples.
     0, 1, 2 but piece 3 carries only a stop text span:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.parse("{ c2 c4. c2 c4. }")
@@ -1987,7 +1987,7 @@ piecewise.py examples.
     REGRESSION. Handles backslashed markup correctly:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.make_even_divisions(time_signatures())
@@ -2070,7 +2070,7 @@ piecewise.py examples.
     REGRESSION. Kerns bookended hooks:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.make_even_divisions(time_signatures())
@@ -2168,7 +2168,7 @@ piecewise.py examples.
     REGRESSION. Backsteals left text from length-1 final piece:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.make_notes(time_signatures())
@@ -2257,7 +2257,7 @@ piecewise.py examples.
     REGRESSION. Backsteals left text from spannerless final piece:
 
     >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.time_signatures([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
     >>> music = baca.parse("{ c2 c4. c2 c4 ~ c8 }")

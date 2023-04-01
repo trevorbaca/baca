@@ -93,7 +93,7 @@ from .rhythm import (
     style_accelerando,
     style_ritardando,
 )
-from .section import scope, time_signatures
+from .scope import scope
 from .spannercommands import (
     beam,
     ottava,

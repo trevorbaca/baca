@@ -809,7 +809,7 @@ figures.py examples.
     ...     container,
     ...     imbrications=imbrications,
     ... )
-    >>> time_signatures = baca.section.time_signatures(accumulator.time_signatures)
+    >>> time_signatures = baca.section.wrap(accumulator.time_signatures)
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 32))(score)
     >>> accumulator.populate(score)
@@ -976,7 +976,7 @@ figures.py examples.
     ...     container,
     ...     imbrications=imbrications_1 | imbrications_3,
     ... )
-    >>> time_signatures = baca.section.time_signatures(accumulator.time_signatures)
+    >>> time_signatures = baca.section.wrap(accumulator.time_signatures)
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 32))(score)
     >>> accumulator.populate(score)
@@ -1179,7 +1179,7 @@ figures.py examples.
     ...     container,
     ...     imbrications=imbrications,
     ... )
-    >>> time_signatures = baca.section.time_signatures(accumulator.time_signatures)
+    >>> time_signatures = baca.section.wrap(accumulator.time_signatures)
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 32))(score)
     >>> accumulator.populate(score)
@@ -1368,7 +1368,7 @@ figures.py examples.
     ...     container,
     ...     imbrications=imbrications,
     ... )
-    >>> time_signatures = baca.section.time_signatures(accumulator.time_signatures)
+    >>> time_signatures = baca.section.wrap(accumulator.time_signatures)
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 24))(score)
     >>> accumulator.populate(score)
@@ -1486,7 +1486,7 @@ figures.py examples.
     ...     container,
     ...     imbrications=imbrications,
     ... )
-    >>> time_signatures = baca.section.time_signatures(accumulator.time_signatures)
+    >>> time_signatures = baca.section.wrap(accumulator.time_signatures)
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 32))(score)
     >>> accumulator.populate(score)
@@ -1630,7 +1630,7 @@ figures.py examples.
     ...     container,
     ...     imbrications=imbrications,
     ... )
-    >>> time_signatures = baca.section.time_signatures(accumulator.time_signatures)
+    >>> time_signatures = baca.section.wrap(accumulator.time_signatures)
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 32))(score)
     >>> accumulator.populate(score)
@@ -1794,7 +1794,7 @@ figures.py examples.
     ...     container,
     ...     imbrications=imbrications,
     ... )
-    >>> time_signatures = baca.section.time_signatures(accumulator.time_signatures)
+    >>> time_signatures = baca.section.wrap(accumulator.time_signatures)
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 32))(score)
     >>> accumulator.populate(score)
@@ -1938,7 +1938,7 @@ figures.py examples.
     ...     container,
     ...     imbrications=imbrications,
     ... )
-    >>> time_signatures = baca.section.time_signatures(accumulator.time_signatures)
+    >>> time_signatures = baca.section.wrap(accumulator.time_signatures)
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 32))(score)
     >>> accumulator.populate(score)
@@ -2095,7 +2095,7 @@ figures.py examples.
     ...     container,
     ...     imbrications=imbrications,
     ... )
-    >>> time_signatures = baca.section.time_signatures(accumulator.time_signatures)
+    >>> time_signatures = baca.section.wrap(accumulator.time_signatures)
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 32))(score)
     >>> accumulator.populate(score)
@@ -2254,7 +2254,7 @@ figures.py examples.
     ...     container,
     ...     imbrications=imbrications,
     ... )
-    >>> time_signatures = baca.section.time_signatures(accumulator.time_signatures)
+    >>> time_signatures = baca.section.wrap(accumulator.time_signatures)
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 32))(score)
     >>> accumulator.populate(score)

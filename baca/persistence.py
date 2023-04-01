@@ -19,7 +19,7 @@ Persistence.
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
@@ -108,7 +108,7 @@ Persistence.
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
@@ -188,7 +188,7 @@ Persistence.
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
@@ -275,7 +275,7 @@ Persistence.
         ...         baca.system(measure=3, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
@@ -374,7 +374,7 @@ Persistence.
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
@@ -452,7 +452,7 @@ Persistence.
         Explicit dynamics color blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier(fallback_duration=(1, 24))(score)
         >>> voice = score["Music"]
@@ -499,7 +499,7 @@ Persistence.
         Even after a previous dynamic:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
@@ -557,7 +557,7 @@ Persistence.
         Reapplied dynamics color green:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
@@ -614,7 +614,7 @@ Persistence.
         Redundant dynamics color pink:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
@@ -664,7 +664,7 @@ Persistence.
         Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
@@ -720,7 +720,7 @@ Persistence.
         Sforzando dynamics do not count as redundant:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
@@ -770,7 +770,7 @@ Persistence.
         Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
@@ -828,7 +828,7 @@ Persistence.
         REGRESSION. Conventional and effort dynamics analyze nonredundantly:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
@@ -900,7 +900,7 @@ Persistence.
         Explicit instruments color blue and redraw dull blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
@@ -1037,7 +1037,7 @@ Persistence.
         Even after a previous instrument:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
@@ -1188,7 +1188,7 @@ Persistence.
         Reapplied instruments color green and redraw dull green:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
@@ -1346,7 +1346,7 @@ Persistence.
         ...         baca.system(measure=3, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> time_signatures = baca.section.time_signatures([(4, 8), (4, 8), (4, 8)])
+        >>> time_signatures = baca.section.wrap([(4, 8), (4, 8), (4, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
@@ -1506,7 +1506,7 @@ Persistence.
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
@@ -1678,7 +1678,7 @@ Persistence.
         Explicit short instrument names color blue and redraw dull blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
@@ -1823,7 +1823,7 @@ Persistence.
         Even after previous short instrument name:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
@@ -1983,7 +1983,7 @@ Persistence.
         Reapplied short instrument names color green and redraw dull green:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
@@ -2149,7 +2149,7 @@ Persistence.
         ...         baca.system(measure=3, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> time_signatures = baca.section.time_signatures([(4, 8), (4, 8), (4, 8)])
+        >>> time_signatures = baca.section.wrap([(4, 8), (4, 8), (4, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
@@ -2327,7 +2327,7 @@ Persistence.
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
@@ -2494,7 +2494,7 @@ Persistence.
         ...         baca.system(measure=2, y_offset=15, distances=(11,)),
         ...     ),
         ... )
-        >>> time_signatures = baca.section.time_signatures([(4, 8), (4, 8), (4, 8)])
+        >>> time_signatures = baca.section.wrap([(4, 8), (4, 8), (4, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
@@ -2579,7 +2579,7 @@ Persistence.
         Explicit metronome marks color blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(
         ...     score,
         ...     time_signatures(),
@@ -2658,7 +2658,7 @@ Persistence.
         Even after a previous metronome mark:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(
         ...     score,
         ...     time_signatures(),
@@ -2763,7 +2763,7 @@ Persistence.
         ...     )
         ... ]
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(
         ...     score,
         ...     time_signatures(),
@@ -2830,7 +2830,7 @@ Persistence.
         Redundant metronome marks color pink:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(
         ...     score,
         ...     time_signatures(),
@@ -2925,7 +2925,7 @@ Persistence.
         ...     )
         ... ]
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(
         ...     score,
         ...     time_signatures(),
@@ -3016,7 +3016,7 @@ Persistence.
         Explicit persistent overrides work but do not color:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> override = baca.PersistentOverride(
@@ -3077,7 +3077,7 @@ Persistence.
         Reapplied persistent overrides work but do not color:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
@@ -3141,7 +3141,7 @@ Persistence.
         Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
@@ -3214,7 +3214,7 @@ Persistence.
         Explicit staff lines color blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
@@ -3264,7 +3264,7 @@ Persistence.
         Even after previous staff lines:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
@@ -3325,7 +3325,7 @@ Persistence.
         Reapplied staff lines color green:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
@@ -3388,7 +3388,7 @@ Persistence.
         Redundant staff lines color pink:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
@@ -3444,7 +3444,7 @@ Persistence.
         Even at the beginning of a section:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> voice = score["Music"]
@@ -3521,7 +3521,7 @@ Persistence.
         Explicit tempo trends color blue:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(
         ...     score,
         ...     time_signatures(),
@@ -3600,7 +3600,7 @@ Persistence.
         Even after a previous tempo trend:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
@@ -3681,7 +3681,7 @@ Persistence.
         ...     )
         ... ]
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(
         ...     score,
         ...     time_signatures(),
@@ -3752,7 +3752,7 @@ Persistence.
         Redundant tempo trends color pink:
 
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8), (3, 8)])
         >>> baca.section.set_up_score(score, time_signatures(), docs=True)
         >>> baca.SpacingSpecifier((1, 24))(score)
         >>> baca.section.apply_breaks(score, breaks)
@@ -3832,7 +3832,7 @@ Persistence.
         ...     )
         ... ]
         >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.time_signatures([(3, 8), (3, 8)])
+        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         >>> baca.section.set_up_score(
         ...     score,
         ...     time_signatures(),
