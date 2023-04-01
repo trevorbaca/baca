@@ -7,13 +7,12 @@ rhythm.py examples.
 
     >>> def make_score():
     ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
-    ...     container = baca.make_rhythm(
+    ...     voice = baca.make_rhythm(
     ...         [-2, baca.Grace([1], 4), baca.Grace([1], 4), -2],
     ...         16,
     ...         time_signatures,
     ...     )
-    ...     components = abjad.mutate.eject_contents(container)
-    ...     staff = abjad.Staff(components, lilypond_type="RhythmicStaff")
+    ...     staff = abjad.Staff([voice], lilypond_type="RhythmicStaff")
     ...     leaf = abjad.select.leaf(staff, 0)
     ...     abjad.attach(time_signatures[0], leaf)
     ...     score = abjad.Score([staff])
@@ -36,23 +35,26 @@ rhythm.py examples.
         <<
             \new RhythmicStaff
             {
-                \time 1/4
-                r8
-                \acciaccatura {
-                    c'16
+                \new Voice
+                {
+                    \time 1/4
+                    r8
+                    \acciaccatura {
+                        c'16
+                    }
+                    c'8
+                    ~
+                    c'8
+                    [
+                    \acciaccatura {
+                        c'16
+                    }
+                    c'8
+                    ]
+                    ~
+                    c'8
+                    r8
                 }
-                c'8
-                ~
-                c'8
-                [
-                \acciaccatura {
-                    c'16
-                }
-                c'8
-                ]
-                ~
-                c'8
-                r8
             }
         >>
 
@@ -63,7 +65,7 @@ rhythm.py examples.
     >>> def make_score():
     ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
     ...     duration = abjad.Duration(1, 4)
-    ...     container = baca.make_rhythm(
+    ...     voice = baca.make_rhythm(
     ...         [
     ...             -1,
     ...             baca.make_accelerando([1, 1, 1, 1, 1], 16, duration),
@@ -73,8 +75,7 @@ rhythm.py examples.
     ...         16,
     ...         time_signatures,
     ...     )
-    ...     components = abjad.mutate.eject_contents(container)
-    ...     staff = abjad.Staff(components, lilypond_type="RhythmicStaff")
+    ...     staff = abjad.Staff([voice], lilypond_type="RhythmicStaff")
     ...     leaf = abjad.select.leaf(staff, 0)
     ...     abjad.attach(time_signatures[0], leaf)
     ...     score = abjad.Score([staff])
@@ -104,35 +105,38 @@ rhythm.py examples.
         <<
             \new RhythmicStaff
             {
-                \time 1/4
-                r16
-                \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
-                \times 1/1
+                \new Voice
                 {
-                    \once \override Beam.grow-direction = #right
-                    c'16 * 7488/5120
-                    [
-                    c'16 * 4032/5120
-                    c'16 * 3328/5120
-                    c'16 * 2944/5120
-                    c'16 * 2688/5120
-                    ]
+                    \time 1/4
+                    r16
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #right
+                        c'16 * 7488/5120
+                        [
+                        c'16 * 4032/5120
+                        c'16 * 3328/5120
+                        c'16 * 2944/5120
+                        c'16 * 2688/5120
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #left
+                        c'16 * 1472/5120
+                        [
+                        c'16 * 3136/5120
+                        c'16 * 4288/5120
+                        c'16 * 5312/5120
+                        c'16 * 6272/5120
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    r8.
                 }
-                \revert TupletNumber.text
-                \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
-                \times 1/1
-                {
-                    \once \override Beam.grow-direction = #left
-                    c'16 * 1472/5120
-                    [
-                    c'16 * 3136/5120
-                    c'16 * 4288/5120
-                    c'16 * 5312/5120
-                    c'16 * 6272/5120
-                    ]
-                }
-                \revert TupletNumber.text
-                r8.
             }
         >>
 
@@ -143,7 +147,7 @@ rhythm.py examples.
     >>> def make_score():
     ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
     ...     duration = abjad.Duration(1, 4)
-    ...     container = baca.make_rhythm(
+    ...     voice = baca.make_rhythm(
     ...         [
     ...             -1,
     ...             baca.make_accelerando(
@@ -168,8 +172,7 @@ rhythm.py examples.
     ...         16,
     ...         time_signatures,
     ...     )
-    ...     components = abjad.mutate.eject_contents(container)
-    ...     staff = abjad.Staff(components, lilypond_type="RhythmicStaff")
+    ...     staff = abjad.Staff([voice], lilypond_type="RhythmicStaff")
     ...     leaf = abjad.select.leaf(staff, 0)
     ...     abjad.attach(time_signatures[0], leaf)
     ...     score = abjad.Score([staff])
@@ -200,71 +203,74 @@ rhythm.py examples.
         <<
             \new RhythmicStaff
             {
-                \time 1/4
-                r16
-                \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
-                \times 1/1
+                \new Voice
                 {
-                    \acciaccatura {
-                        \slash
-                        c'16
+                    \time 1/4
+                    r16
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
+                    \times 1/1
+                    {
+                        \acciaccatura {
+                            \slash
+                            c'16
+                            [
+                            c'16
+                            c'16
+                            ]
+                        }
+                        \once \override Beam.grow-direction = #right
+                        c'16 * 7488/5120
                         [
-                        c'16
-                        c'16
+                        \acciaccatura {
+                            \slash
+                            c'16
+                            [
+                            c'16
+                            ]
+                        }
+                        c'16 * 4032/5120
+                        \acciaccatura {
+                            c'16
+                        }
+                        c'16 * 3328/5120
+                        c'16 * 2944/5120
+                        c'16 * 2688/5120
                         ]
                     }
-                    \once \override Beam.grow-direction = #right
-                    c'16 * 7488/5120
-                    [
-                    \acciaccatura {
-                        \slash
-                        c'16
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #left
+                        c'16 * 1472/5120
                         [
-                        c'16
+                        c'16 * 3136/5120
+                        \acciaccatura {
+                            c'16
+                        }
+                        c'16 * 4288/5120
+                        \acciaccatura {
+                            \slash
+                            c'16
+                            [
+                            c'16
+                            ]
+                        }
+                        c'16 * 5312/5120
+                        \acciaccatura {
+                            \slash
+                            c'16
+                            [
+                            c'16
+                            c'16
+                            ]
+                        }
+                        c'16 * 6272/5120
                         ]
                     }
-                    c'16 * 4032/5120
-                    \acciaccatura {
-                        c'16
-                    }
-                    c'16 * 3328/5120
-                    c'16 * 2944/5120
-                    c'16 * 2688/5120
-                    ]
+                    \revert TupletNumber.text
+                    r8.
                 }
-                \revert TupletNumber.text
-                \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
-                \times 1/1
-                {
-                    \once \override Beam.grow-direction = #left
-                    c'16 * 1472/5120
-                    [
-                    c'16 * 3136/5120
-                    \acciaccatura {
-                        c'16
-                    }
-                    c'16 * 4288/5120
-                    \acciaccatura {
-                        \slash
-                        c'16
-                        [
-                        c'16
-                        ]
-                    }
-                    c'16 * 5312/5120
-                    \acciaccatura {
-                        \slash
-                        c'16
-                        [
-                        c'16
-                        c'16
-                        ]
-                    }
-                    c'16 * 6272/5120
-                    ]
-                }
-                \revert TupletNumber.text
-                r8.
             }
         >>
 
