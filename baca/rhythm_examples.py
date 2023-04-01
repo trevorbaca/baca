@@ -5,7 +5,7 @@ rhythm.py examples.
 
     Displaced quarter notes with grace music:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
     ...     voice = baca.make_rhythm(
     ...         [-2, baca.Grace([1], 4), baca.Grace([1], 4), -2],
@@ -15,19 +15,20 @@ rhythm.py examples.
     ...     staff = abjad.Staff([voice], lilypond_type="RhythmicStaff")
     ...     leaf = abjad.select.leaf(staff, 0)
     ...     abjad.attach(time_signatures[0], leaf)
-    ...     score = abjad.Score([staff])
+    ...     score = abjad.Score([staff], name="Score")
     ...     abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 36)"
-    ...     return score
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
+        >>> score = lilypond_file["Score"]
         >>> string = abjad.lilypond(score)
         >>> print(string)
-        \new Score
+        \context Score = "Score"
         \with
         {
             proportionalNotationDuration = #(ly:make-moment 1 36)
@@ -62,7 +63,7 @@ rhythm.py examples.
 
     Displaced accelerandi, ritardandi:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
     ...     duration = abjad.Duration(1, 4)
     ...     voice = baca.make_rhythm(
@@ -78,22 +79,24 @@ rhythm.py examples.
     ...     staff = abjad.Staff([voice], lilypond_type="RhythmicStaff")
     ...     leaf = abjad.select.leaf(staff, 0)
     ...     abjad.attach(time_signatures[0], leaf)
-    ...     score = abjad.Score([staff])
+    ...     score = abjad.Score([staff], name="Score")
     ...     abjad.override(score).TupletBracket.bracket_visibility = True
     ...     abjad.override(score).TupletBracket.padding = 2
     ...     abjad.setting(score).autoBeaming = False
     ...     abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 36)"
     ...     abjad.setting(score).tupletFullLength = True
-    ...     return score
+    ...     lilypond_file = abjad.LilyPondFile([score])
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> abjad.show(score) # doctest: +SKIP
+    >>> lilypond_file = make_lilypond_file()
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
+        >>> score = lilypond_file["Score"]
         >>> string = abjad.lilypond(score)
         >>> print(string)
-        \new Score
+        \context Score = "Score"
         \with
         {
             \override TupletBracket.bracket-visibility = ##t
@@ -144,7 +147,7 @@ rhythm.py examples.
 
     Displaced accelerandi, ritardandi with grace notes:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
     ...     duration = abjad.Duration(1, 4)
     ...     voice = baca.make_rhythm(
@@ -175,23 +178,24 @@ rhythm.py examples.
     ...     staff = abjad.Staff([voice], lilypond_type="RhythmicStaff")
     ...     leaf = abjad.select.leaf(staff, 0)
     ...     abjad.attach(time_signatures[0], leaf)
-    ...     score = abjad.Score([staff])
+    ...     score = abjad.Score([staff], name="Score")
     ...     abjad.override(score).TupletBracket.bracket_visibility = True
     ...     abjad.override(score).TupletBracket.padding = 2
     ...     abjad.setting(score).autoBeaming = False
     ...     abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 36)"
     ...     abjad.setting(score).tupletFullLength = True
-    ...     return score
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
+        >>> score = lilypond_file["Score"]
         >>> string = abjad.lilypond(score)
         >>> print(string)
-        \new Score
+        \context Score = "Score"
         \with
         {
             \override TupletBracket.bracket-visibility = ##t
@@ -278,7 +282,7 @@ rhythm.py examples.
 
     Displaced on-beat grace containers:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
     ...     voice = baca.make_rhythm(
     ...         [
@@ -294,23 +298,24 @@ rhythm.py examples.
     ...     staff = abjad.Staff([voice], lilypond_type="RhythmicStaff")
     ...     leaf = abjad.select.leaf(staff, 0)
     ...     abjad.attach(time_signatures[0], leaf)
-    ...     score = abjad.Score([staff])
+    ...     score = abjad.Score([staff], name="Score")
     ...     abjad.override(score).TupletBracket.bracket_visibility = True
     ...     abjad.override(score).TupletBracket.padding = 2
     ...     abjad.setting(score).autoBeaming = False
     ...     abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 36)"
     ...     abjad.setting(score).tupletFullLength = True
-    ...     return score
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
+        >>> score = lilypond_file["Score"]
         >>> string = abjad.lilypond(score)
         >>> print(string)
-        \new Score
+        \context Score = "Score"
         \with
         {
             \override TupletBracket.bracket-visibility = ##t
