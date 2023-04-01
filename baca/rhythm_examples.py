@@ -274,6 +274,126 @@ rhythm.py examples.
             }
         >>
 
+..  container:: example
+
+    Displaced on-beat grace containers:
+
+    >>> def make_score():
+    ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
+    ...     voice = baca.make_rhythm(
+    ...         [
+    ...             -2,
+    ...             baca.OBGC([1, 1, 1, 1], 4, grace_leaf_duration=abjad.Duration(1, 36)),
+    ...             baca.OBGC([1, 1, 1, 1], 4, grace_leaf_duration=abjad.Duration(1, 36)),
+    ...             -2,
+    ...         ],
+    ...         16,
+    ...         time_signatures,
+    ...         voice_name="Example.Voice",
+    ...     )
+    ...     staff = abjad.Staff([voice], lilypond_type="RhythmicStaff")
+    ...     leaf = abjad.select.leaf(staff, 0)
+    ...     abjad.attach(time_signatures[0], leaf)
+    ...     score = abjad.Score([staff])
+    ...     abjad.override(score).TupletBracket.bracket_visibility = True
+    ...     abjad.override(score).TupletBracket.padding = 2
+    ...     abjad.setting(score).autoBeaming = False
+    ...     abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 36)"
+    ...     abjad.setting(score).tupletFullLength = True
+    ...     return score
+
+    >>> score = make_score()
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \new Score
+        \with
+        {
+            \override TupletBracket.bracket-visibility = ##t
+            \override TupletBracket.padding = 2
+            autoBeaming = ##f
+            proportionalNotationDuration = #(ly:make-moment 1 36)
+            tupletFullLength = ##t
+        }
+        <<
+            \new RhythmicStaff
+            {
+                \context Voice = "Example.Voice"
+                {
+                    \time 1/4
+                    r8
+                    \context Voice = "Example.Voice"
+                    {
+                        <<
+                            \context Voice = "On_Beat_Grace_Container"
+                            {
+                                \set fontSize = #-3
+                                \slash
+                                \voiceOne
+                                <
+                                    \tweak font-size 0
+                                    \tweak transparent ##t
+                                    c'
+                                >16 * 4/9
+                                [
+                                (
+                                c'16 * 4/9
+                                c'16 * 4/9
+                                c'16 * 4/9
+                                )
+                                ]
+                            }
+                            \context Voice = "Example.Voice"
+                            {
+                                \voiceTwo
+                                c'8
+                                ~
+                                c'8
+                                [
+                            }
+                        >>
+                    }
+                    \context Voice = "Example.Voice"
+                    {
+                        <<
+                            \context Voice = "On_Beat_Grace_Container"
+                            {
+                                \set fontSize = #-3
+                                \slash
+                                \voiceOne
+                                <
+                                    \tweak font-size 0
+                                    \tweak transparent ##t
+                                    c'
+                                >16 * 4/9
+                                [
+                                (
+                                c'16 * 4/9
+                                c'16 * 4/9
+                                c'16 * 4/9
+                                )
+                                ]
+                            }
+                            \context Voice = "Example.Voice"
+                            {
+                                \voiceTwo
+                                c'8
+                                ]
+                                ~
+                                c'8
+                            }
+                        >>
+                    }
+                    \oneVoice
+                    r8
+                }
+            }
+        >>
+
 """
 
 

@@ -337,7 +337,7 @@ class OBGC:
                 self.grace_leaf_duration
             )
 
-    def __call__(self, denominator):
+    def __call__(self, denominator, voice_name):
         tag = abjad.Tag("baca.OBGC.__call__()")
         if 0 < self.nongrace_note_numerator:
             pitch = 0
@@ -345,7 +345,7 @@ class OBGC:
             pitch = None
         duration = abjad.Duration(self.nongrace_note_numerator, denominator)
         nongrace_leaves = abjad.makers.make_leaves([pitch], [duration])
-        anchor_voice = abjad.Voice(nongrace_leaves, name="OBGCAnchorVoice", tag=tag)
+        anchor_voice = abjad.Voice(nongrace_leaves, name=voice_name, tag=tag)
         grace_note_durations = [
             abjad.Duration(_, denominator) for _ in self.grace_note_numerators
         ]
@@ -732,7 +732,7 @@ def make_rhythm(
             duration = abjad.get.duration(components_)
             components.extend(components_)
         elif isinstance(item, OBGC):
-            anchor_voice = item(denominator)
+            anchor_voice = item(denominator, voice_name)
             anchor_leaves = abjad.mutate.eject_contents(anchor_voice[0][1])
             duration = abjad.get.duration(anchor_leaves)
             components.extend(anchor_leaves)
@@ -745,9 +745,9 @@ def make_rhythm(
         voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
         rmakers.rewrite_meter(voice, tag=tag)
         components = abjad.mutate.eject_contents(voice)
-    container = abjad.Voice(components, name=voice_name)
-    assert abjad.get.duration(container) == sum(item_durations)
-    components = container[:]
+    voice = abjad.Voice(components, name=voice_name)
+    assert abjad.get.duration(voice) == sum(item_durations)
+    components = voice[:]
     component_durations = [abjad.get.duration(_) for _ in components]
     duration_lists = abjad.sequence.partition_by_weights(
         component_durations, item_durations, allow_part_weights=abjad.EXACT
@@ -770,7 +770,10 @@ def make_rhythm(
             assert len(obgc_nongrace_voice) == 0
             abjad.mutate.replace(component_list, obgc_anchor_voice)
             obgc_nongrace_voice.extend(component_list)
-    return container
+    for obgc in abjad.select.components(voice, abjad.OnBeatGraceContainer):
+        assert isinstance(obgc, abjad.OnBeatGraceContainer)
+        obgc._attach_lilypond_one_voice()
+    return voice
 
 
 def make_single_attack(time_signatures, duration) -> list[abjad.Leaf | abjad.Tuplet]:
