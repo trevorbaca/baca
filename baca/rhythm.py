@@ -323,6 +323,7 @@ class LMR:
 class OBGC:
     grace_note_numerators: list[int]
     nongrace_note_numerator: int
+    do_not_stop_polyphony: bool = False
     grace_leaf_duration: abjad.Duration | None = None
 
     def __post_init__(self):
@@ -331,6 +332,9 @@ class OBGC:
         )
         assert isinstance(self.nongrace_note_numerator, int), repr(
             self.nongrace_note_numerator
+        )
+        assert isinstance(self.do_not_stop_polyphony, bool), repr(
+            self.do_not_stop_polyphony
         )
         if self.grace_leaf_duration is not None:
             assert isinstance(self.grace_leaf_duration, abjad.Duration), repr(
@@ -353,6 +357,7 @@ class OBGC:
         abjad.on_beat_grace_container(
             grace_leaves,
             nongrace_leaves,
+            do_not_stop_polyphony=self.do_not_stop_polyphony,
             grace_leaf_duration=self.grace_leaf_duration,
             tag=tag,
         )
@@ -441,7 +446,12 @@ def get_previous_rhythm_state(
 
 
 def make_accelerando(
-    vector: list, denominator: int, duration: abjad.Duration, *, exponent: float = 0.625
+    vector: list,
+    denominator: int,
+    duration: abjad.Duration,
+    *,
+    exponent: float = 0.625,
+    voice_name: str | None = None,
 ) -> abjad.Tuplet:
     tag = _tags.function_name(_frame())
     leaves = []
@@ -460,6 +470,9 @@ def make_accelerando(
         elif isinstance(item, Grace):
             leaves_ = item(denominator)
             leaves.extend(leaves_)
+        elif isinstance(item, OBGC):
+            anchor_voice = item(denominator, voice_name)
+            leaves.append(anchor_voice)
         else:
             raise Exception(item)
     tuplet = abjad.Tuplet("1:1", leaves, tag=tag)
@@ -770,9 +783,6 @@ def make_rhythm(
             assert len(obgc_nongrace_voice) == 0
             abjad.mutate.replace(component_list, obgc_anchor_voice)
             obgc_nongrace_voice.extend(component_list)
-    for obgc in abjad.select.components(voice, abjad.OnBeatGraceContainer):
-        assert isinstance(obgc, abjad.OnBeatGraceContainer)
-        obgc._attach_lilypond_one_voice()
     return voice
 
 
