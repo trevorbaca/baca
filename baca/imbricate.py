@@ -2,7 +2,6 @@ import copy
 
 import abjad
 
-from . import cursor as _cursor
 from . import select as _select
 from .enums import enums as _enums
 
@@ -66,8 +65,8 @@ def imbricate(
     segment = abjad.sequence.flatten(segment, depth=-1)
     if by_pitch_class:
         segment = [abjad.NumberedPitchClass(_) for _ in segment]
-    cursor = _cursor.Cursor(source=segment, suppress_exception=True)
-    pitch_number = cursor.next()
+    i = 0
+    pitch_number = [segment[i]]
     if isinstance(pitch_number, list):
         assert len(pitch_number) == 1
         pitch_number = pitch_number[0]
@@ -84,7 +83,11 @@ def imbricate(
             pass
         elif _matches_pitch(logical_tie.head, pitch_number):
             _trim_matching_chord(logical_tie, pitch_number)
-            pitch_number = cursor.next()
+            i += 1
+            if i < len(segment):
+                pitch_number = [segment[i]]
+            else:
+                pitch_number = []
             if isinstance(pitch_number, list):
                 if pitch_number == []:
                     pass
@@ -112,10 +115,9 @@ def imbricate(
                 duration = leaf.written_duration
                 skip = abjad.Skip(duration)
                 abjad.mutate.replace(leaf, [skip])
-    if not allow_unused_pitches and not cursor.exhausted:
-        assert cursor.position is not None
-        current, total = cursor.position - 1, len(cursor)
-        raise Exception(f"{cursor!r} used only {current} of {total} pitches.")
+    if not allow_unused_pitches and i < len(segment):
+        current, total = i, len(segment)
+        raise Exception(f"{segment!r} used only {current} of {total} pitches.")
     if not hocket:
         pleaves = _select.pleaves(container)
         assert isinstance(pleaves, list)
