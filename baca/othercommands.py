@@ -34,5 +34,5 @@ def assign_part(
     abjad.mutate.wrap(components, container)
 
 
-def block(argument):
+def call(argument):
     argument()

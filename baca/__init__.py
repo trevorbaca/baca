@@ -35,7 +35,7 @@ from .layout import *
 from .lilypond import file
 from .memento import *
 from .overridecommands import *
-from .othercommands import assign_part, block
+from .othercommands import assign_part, call
 from .parts import Part, PartAssignment
 from .pcollections import (
     ArpeggiationSpacingSpecifier,
