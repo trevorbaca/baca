@@ -2,7 +2,6 @@
 Rhythm.
 """
 import dataclasses
-import fractions
 import math as python_math
 import typing
 from inspect import currentframe as _frame
@@ -105,21 +104,30 @@ def _style_accelerando(
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class AccelerandoSpecifier:
-    denominator: int
+class Feather:
     items: list
+    denominator: int
     numerator: int
-    coefficient: fractions.Fraction | None = None
-    ritardando: bool = False
+    exponent: float = dataclasses.field(default=0.625, kw_only=True)
 
     def __post_init__(self):
-        assert isinstance(self.denominator, int), repr(self.denominator)
         assert isinstance(self.items, list), repr(self.items)
+        assert isinstance(self.denominator, int), repr(self.denominator)
         assert isinstance(self.numerator, int), repr(self.numerator)
-        assert isinstance(self.ritardando, bool), repr(self.ritardando)
+        assert isinstance(self.exponent, float), repr(self.exponent)
 
-    def __call__(self):
-        pass
+    def __call__(self, denominator: int, voice_name: str | None = None):
+        assert isinstance(denominator, int), repr(denominator)
+        feather_duration = abjad.Duration(self.numerator, denominator)
+        tuplet = make_accelerando(
+            self.items,
+            denominator,
+            feather_duration,
+            exponent=self.exponent,
+            voice_name=voice_name,
+            tag=_tags.function_name(_frame()),
+        )
+        return tuplet
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -446,19 +454,21 @@ def get_previous_rhythm_state(
 
 
 def make_accelerando(
-    vector: list,
+    items: list,
     denominator: int,
     duration: abjad.Duration,
     *,
     exponent: float = 0.625,
     voice_name: str | None = None,
+    tag: abjad.Tag | None = None,
 ) -> abjad.Tuplet:
-    tag = _tags.function_name(_frame())
+    tag = tag or abjad.Tag()
+    tag = tag.append(_tags.function_name(_frame()))
     leaves = []
     assert isinstance(denominator, int), repr(denominator)
     assert isinstance(duration, abjad.Duration), repr(duration)
     assert isinstance(exponent, float), repr(exponent)
-    for item in vector:
+    for item in items:
         if isinstance(item, int) and 0 < item:
             leaf_duration = abjad.Duration(item, denominator)
             notes = abjad.makers.make_leaves([0], [leaf_duration], tag=tag)
@@ -708,13 +718,13 @@ def make_rests(time_signatures) -> list[abjad.Rest | abjad.Tuplet]:
 
 
 def make_rhythm(
-    vector: list,
+    items: list,
     denominator: int,
     time_signatures: list[abjad.TimeSignature] | None = None,
     *,
     voice_name: str | None = None,
 ) -> abjad.Voice:
-    assert isinstance(vector, list), repr(vector)
+    assert isinstance(items, list), repr(items)
     assert isinstance(denominator, int), repr(denominator)
     if time_signatures is not None:
         assert isinstance(time_signatures, list), repr(time_signatures)
@@ -723,7 +733,7 @@ def make_rhythm(
     index_to_original_item: dict[int, abjad.Tuplet | None] = {}
     index_to_obgc_anchor_voice: dict[int, abjad.Voice | None] = {}
     components, item_durations = [], []
-    for i, item in enumerate(vector):
+    for i, item in enumerate(items):
         index_to_original_item[i], duration = None, None
         if isinstance(item, int) and 0 < item:
             leaf_duration = abjad.Duration(item, denominator)
@@ -740,6 +750,12 @@ def make_rhythm(
             dummy_notes = abjad.makers.make_leaves([99], [duration], tag=tag)
             components.extend(dummy_notes)
             index_to_original_item[i] = item
+        elif isinstance(item, Feather):
+            tuplet = item(denominator, voice_name)
+            duration = abjad.get.duration(tuplet)
+            dummy_notes = abjad.makers.make_leaves([98], [duration], tag=tag)
+            components.extend(dummy_notes)
+            index_to_original_item[i] = tuplet
         elif isinstance(item, Grace):
             components_ = item(denominator)
             duration = abjad.get.duration(components_)

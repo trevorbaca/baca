@@ -65,12 +65,11 @@ rhythm.py examples.
 
     >>> def make_lilypond_file():
     ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
-    ...     duration = abjad.Duration(1, 4)
     ...     voice = baca.make_rhythm(
     ...         [
     ...             -1,
-    ...             baca.make_accelerando([1, 1, 1, 1, 1], 16, duration),
-    ...             baca.make_accelerando([1, 1, 1, 1, 1], 16, duration, exponent=1.625),
+    ...             baca.Feather([1, 1, 1, 1, 1], 16, 4, exponent=0.625),
+    ...             baca.Feather([1, 1, 1, 1, 1], 16, 4, exponent=1.625),
     ...             -3
     ...         ],
     ...         16,
@@ -149,26 +148,32 @@ rhythm.py examples.
 
     >>> def make_lilypond_file():
     ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
-    ...     duration = abjad.Duration(1, 4)
     ...     voice = baca.make_rhythm(
     ...         [
     ...             -1,
-    ...             baca.make_accelerando(
+    ...             baca.Feather(
     ...                 [
     ...                     baca.Grace([1, 1, 1], 1),
     ...                     baca.Grace([1, 1], 1),
-    ...                     baca.Grace([1], 1), 1, 1
+    ...                     baca.Grace([1], 1),
+    ...                     1,
+    ...                     1,
     ...                 ],
-    ...                 16, duration
+    ...                 16,
+    ...                 4,
+    ...                 exponent=0.625,
     ...             ),
-    ...             baca.make_accelerando(
+    ...             baca.Feather(
     ...                 [
-    ...                     1, 1,
+    ...                     1,
+    ...                     1,
     ...                     baca.Grace([1], 1),
     ...                     baca.Grace([1, 1], 1),
     ...                     baca.Grace([1, 1, 1], 1),
     ...                 ],
-    ...                 16, duration, exponent=1.625
+    ...                 16,
+    ...                 4,
+    ...                 exponent=1.625,
     ...             ),
     ...             -3,
     ...         ],
@@ -288,7 +293,7 @@ rhythm.py examples.
     ...     voice = baca.make_rhythm(
     ...         [
     ...             -1,
-    ...             baca.make_accelerando(
+    ...             baca.Feather(
     ...                 [
     ...                     1,
     ...                     1,
@@ -301,11 +306,10 @@ rhythm.py examples.
     ...                     ),
     ...                 ],
     ...                 16,
-    ...                 duration,
+    ...                 4,
     ...                 exponent=1.625,
-    ...                 voice_name="Foo",
     ...             ),
-    ...             baca.make_accelerando(
+    ...             baca.Feather(
     ...                 [
     ...                     1,
     ...                     baca.OBGC(
@@ -319,15 +323,14 @@ rhythm.py examples.
     ...                     1,
     ...                 ],
     ...                 16,
-    ...                 duration,
+    ...                 4,
     ...                 exponent=0.625,
-    ...                 voice_name="Foo",
     ...             ),
     ...             -3,
     ...         ],
     ...         16,
     ...         time_signatures,
-    ...         voice_name="Foo",
+    ...         voice_name="Example.Voice",
     ...     )
     ...     leaf = abjad.select.leaf(voice, 0)
     ...     literal = abjad.LilyPondLiteral(r"\voiceTwo")
@@ -364,7 +367,7 @@ rhythm.py examples.
         <<
             \new RhythmicStaff
             {
-                \context Voice = "Foo"
+                \context Voice = "Example.Voice"
                 {
                     \time 1/4
                     \voiceTwo
@@ -378,7 +381,7 @@ rhythm.py examples.
                         c'16 * 3136/5120
                         c'16 * 4288/5120
                         c'16 * 5312/5120
-                        \context Voice = "Foo"
+                        \context Voice = "Example.Voice"
                         {
                             <<
                                 \context Voice = "On_Beat_Grace_Container"
@@ -399,7 +402,7 @@ rhythm.py examples.
                                     )
                                     ]
                                 }
-                                \context Voice = "Foo"
+                                \context Voice = "Example.Voice"
                                 {
                                     \voiceTwo
                                     c'16 * 6272/5120
@@ -415,7 +418,7 @@ rhythm.py examples.
                         \once \override Beam.grow-direction = #right
                         c'16 * 7488/5120
                         [
-                        \context Voice = "Foo"
+                        \context Voice = "Example.Voice"
                         {
                             <<
                                 \context Voice = "On_Beat_Grace_Container"
@@ -435,7 +438,7 @@ rhythm.py examples.
                                     )
                                     ]
                                 }
-                                \context Voice = "Foo"
+                                \context Voice = "Example.Voice"
                                 {
                                     \voiceTwo
                                     c'16 * 4032/5120

@@ -67,6 +67,7 @@ from .piecewisecommands import (
 )
 from .pitchcommands import *
 from .rhythm import (
+    Feather,
     Grace,
     LMR,
     OBGC,
