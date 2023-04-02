@@ -1231,19 +1231,23 @@ def _prototype_string(class_):
 
 
 def _reapply_persistent_indicators(
-    manifests,
-    previous_persistent_indicators,
-    score,
+    manifests: dict,
+    previous_persistent_indicators: dict,
+    score: abjad.Score,
     *,
-    already_reapplied_contexts=None,
-    do_not_iterate=None,
+    already_reapplied_contexts: set | None = None,
+    do_not_iterate: abjad.Context | None = None,
 ):
     if already_reapplied_contexts is None:
         already_reapplied_contexts = set()
+    contexts: list[abjad.Context] = []
     if do_not_iterate is not None:
-        contexts = [do_not_iterate]
+        assert isinstance(do_not_iterate, abjad.Context), repr(do_not_iterate)
+        contexts.append(do_not_iterate)
     else:
-        contexts = abjad.select.components(score, abjad.Context)
+        for context in abjad.select.components(score, abjad.Context):
+            assert isinstance(context, abjad.Context)
+            contexts.append(context)
     for context in contexts:
         if context.name in already_reapplied_contexts:
             continue
@@ -1278,12 +1282,12 @@ def _reapply_persistent_indicators(
                 _treat.treat_persistent_wrapper(manifests, wrapper, status)
                 continue
             # TODO: change to parameter comparison
-            prototype = (
+            tempo_prototype = (
                 _indicatorclasses.Accelerando,
                 abjad.MetronomeMark,
                 _indicatorclasses.Ritardando,
             )
-            if isinstance(previous_indicator, prototype):
+            if isinstance(previous_indicator, tempo_prototype):
                 function_name = _tags.function_name(_frame(), n=2)
                 if status == "reapplied":
                     wrapper = abjad.attach(
@@ -1298,15 +1302,14 @@ def _reapply_persistent_indicators(
                     assert status in ("redundant", None), repr(status)
                     if status is None:
                         status = "explicit"
-                    wrappers = abjad.get.wrappers(leaf, prototype)
+                    wrappers = abjad.get.wrappers(leaf, tempo_prototype)
                     # lone metronome mark or lone tempo trend:
                     if len(wrappers) == 1:
                         wrapper = wrappers[0]
                     # metronome mark + tempo trend:
                     else:
                         assert 1 < len(wrappers), repr(wrappers)
-                        prototype = abjad.MetronomeMark
-                        wrapper = abjad.get.wrapper(leaf, prototype)
+                        wrapper = abjad.get.wrapper(leaf, abjad.MetronomeMark)
                     wrapper.tag = wrapper.tag.append(edition)
                     _treat.treat_persistent_wrapper(manifests, wrapper, status)
                 continue
@@ -2536,39 +2539,33 @@ def proxy(mapping):
     return types.MappingProxyType(mapping)
 
 
-def reapply(voices, previous_persistent_indicators, *, manifests=None):
+def reapply_persistent_indicators(
+    voices: VoiceCache,
+    previous_persistent_indicators: dict,
+    *,
+    manifests: dict | None = None,
+):
     manifests = manifests or {}
-    runtime = {
-        "already_reapplied_contexts": {"Score"},
-        "manifests": manifests,
-        "previous_persistent_indicators": previous_persistent_indicators,
-    }
+    already_reapplied_contexts = {"Score"}
     for voice in voices:
-        reapply_persistent_indicators(voice, runtime=runtime)
-
-
-def reapply_persistent_indicators(argument, *, runtime=None):
-    already_reapplied_contexts = runtime["already_reapplied_contexts"]
-    manifests = runtime["manifests"]
-    previous_persistent_indicators = runtime["previous_persistent_indicators"]
-    leaf = abjad.select.leaf(argument, 0)
-    parentage = abjad.get.parentage(leaf)
-    contexts = []
-    score = None
-    for component in parentage:
-        if isinstance(component, abjad.Score):
-            score = component
-        elif isinstance(component, abjad.Context):
-            contexts.append(component)
-    assert isinstance(score, abjad.Score)
-    for context in contexts:
-        _reapply_persistent_indicators(
-            manifests,
-            previous_persistent_indicators,
-            score,
-            already_reapplied_contexts=already_reapplied_contexts,
-            do_not_iterate=context,
-        )
+        leaf = abjad.select.leaf(voice, 0)
+        parentage = abjad.get.parentage(leaf)
+        contexts = []
+        score = None
+        for component in parentage:
+            if isinstance(component, abjad.Score):
+                score = component
+            elif isinstance(component, abjad.Context):
+                contexts.append(component)
+        assert isinstance(score, abjad.Score)
+        for context in contexts:
+            _reapply_persistent_indicators(
+                manifests,
+                previous_persistent_indicators,
+                score,
+                already_reapplied_contexts=already_reapplied_contexts,
+                do_not_iterate=context,
+            )
 
 
 def remove_redundant_time_signatures(score):

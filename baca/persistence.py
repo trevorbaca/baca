@@ -116,7 +116,9 @@ Persistence.
         >>> music = baca.make_mmrests(time_signatures(), head="Music")
         >>> voice.extend(music)
         >>> previous_metadata = make_previous_metadata()
-        >>> baca.section.reapply(voice, previous_metadata["persistent_indicators"])
+        >>> baca.section.reapply_persistent_indicators(
+        ...     voice, previous_metadata["persistent_indicators"]
+        ... )
         >>> _ = baca.clef(abjad.select.leaf(voice, 0), "alto")
         >>> _ = baca.section.remove_redundant_time_signatures(score)
         >>> baca.section.treat_untreated_persistent_wrappers(score)
@@ -203,7 +205,9 @@ Persistence.
         ...         value="treble",
         ...     )
         ... ]
-        >>> baca.section.reapply(voice, previous_persistent_indicators)
+        >>> baca.section.reapply_persistent_indicators(
+        ...     voice, previous_persistent_indicators
+        ... )
         >>> _ = baca.section.remove_redundant_time_signatures(score)
         >>> baca.section.treat_untreated_persistent_wrappers(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -382,7 +386,9 @@ Persistence.
         >>> music = baca.make_mmrests(time_signatures(), head="Music")
         >>> voice.extend(music)
         >>> previous_metadata = make_previous_metadata()
-        >>> baca.section.reapply(voice, previous_metadata["persistent_indicators"])
+        >>> baca.section.reapply_persistent_indicators(
+        ...     voice, previous_metadata["persistent_indicators"]
+        ... )
         >>> _ = baca.clef(abjad.select.leaf(voice, 0), "treble")
         >>> _ = baca.section.remove_redundant_time_signatures(score)
         >>> baca.section.treat_untreated_persistent_wrappers(score)
@@ -514,7 +520,9 @@ Persistence.
         ...         value="f",
         ...     )
         ... ]
-        >>> baca.section.reapply(score, previous_persistent_indicators)
+        >>> baca.section.reapply_persistent_indicators(
+        ...     score, previous_persistent_indicators
+        ... )
         >>> _ = baca.section.remove_redundant_time_signatures(score)
         >>> baca.section.treat_untreated_persistent_wrappers(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -571,7 +579,9 @@ Persistence.
         ...         value="f",
         ...     )
         ... ]
-        >>> baca.section.reapply(voice, previous_persistent_indicators)
+        >>> baca.section.reapply_persistent_indicators(
+        ...     voice, previous_persistent_indicators
+        ... )
         >>> _ = baca.section.remove_redundant_time_signatures(score)
         >>> baca.section.treat_untreated_persistent_wrappers(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -678,7 +688,9 @@ Persistence.
         ...         value="f",
         ...     )
         ... ]
-        >>> baca.section.reapply(voice, previous_persistent_indicators)
+        >>> baca.section.reapply_persistent_indicators(
+        ...     voice, previous_persistent_indicators
+        ... )
         >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
         >>> _ = baca.section.remove_redundant_time_signatures(score)
         >>> baca.section.treat_untreated_persistent_wrappers(score)
@@ -785,7 +797,9 @@ Persistence.
         ...         value="sfz",
         ...     )
         ... ]
-        >>> baca.section.reapply(score, previous_persistent_indicators)
+        >>> baca.section.reapply_persistent_indicators(
+        ...     score, previous_persistent_indicators
+        ... )
         >>> _ = baca.section.remove_redundant_time_signatures(score)
         >>> baca.section.treat_untreated_persistent_wrappers(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -1052,7 +1066,7 @@ Persistence.
         ...         value="Piccolo",
         ...     )
         ... ]
-        >>> baca.section.reapply(
+        >>> baca.section.reapply_persistent_indicators(
         ...     voice,
         ...     previous_persistent_indicators,
         ...     manifests=manifests,
@@ -1203,7 +1217,7 @@ Persistence.
         ...         value="Flute",
         ...     )
         ... ]
-        >>> baca.section.reapply(
+        >>> baca.section.reapply_persistent_indicators(
         ...     voice,
         ...     previous_persistent_indicators,
         ...     manifests=manifests,
@@ -1521,7 +1535,7 @@ Persistence.
         ...         value="Flute",
         ...     )
         ... ]
-        >>> baca.section.reapply(
+        >>> baca.section.reapply_persistent_indicators(
         ...     voice,
         ...     previous_persistent_indicators,
         ...     manifests=manifests,
@@ -1838,7 +1852,7 @@ Persistence.
         ...         value="I+II",
         ...     )
         ... ]
-        >>> baca.section.reapply(
+        >>> baca.section.reapply_persistent_indicators(
         ...     voice,
         ...     previous_persistent_indicators,
         ...     manifests=manifests,
@@ -1998,7 +2012,7 @@ Persistence.
         ...         value="I+II",
         ...     )
         ... ]
-        >>> baca.section.reapply(
+        >>> baca.section.reapply_persistent_indicators(
         ...     voice,
         ...     previous_persistent_indicators,
         ...     manifests=manifests,
@@ -2342,7 +2356,7 @@ Persistence.
         ...         value="I+II",
         ...     )
         ... ]
-        >>> baca.section.reapply(
+        >>> baca.section.reapply_persistent_indicators(
         ...     voice,
         ...     previous_persistent_indicators,
         ...     manifests=manifests,
@@ -2684,7 +2698,7 @@ Persistence.
         ...         value="90",
         ...     )
         ... ]
-        >>> baca.section.reapply(
+        >>> baca.section.reapply_persistent_indicators(
         ...     voice,
         ...     previous_persistent_indicators,
         ...     manifests=manifests,
@@ -2945,7 +2959,9 @@ Persistence.
         >>> music = baca.make_notes(time_signatures())
         >>> voice.extend(music)
         >>> baca.section.append_anchor_note(voice)
-        >>> baca.section.reapply(voice, previous_persistent_indicators)
+        >>> baca.section.reapply_persistent_indicators(
+        ...     voice, previous_persistent_indicators
+        ... )
         >>> _ = baca.section.remove_redundant_time_signatures(score)
         >>> baca.section.treat_untreated_persistent_wrappers(score, manifests=manifests)
         >>> baca.section.span_metronome_marks(score)
@@ -3097,7 +3113,7 @@ Persistence.
         ...         ),
         ...     )
         ... ]
-        >>> baca.section.reapply(
+        >>> baca.section.reapply_persistent_indicators(
         ...     voice,
         ...     previous_persistent_indicators,
         ...     manifests=manifests,
@@ -3168,7 +3184,9 @@ Persistence.
         ...         ),
         ...     )
         ... ]
-        >>> baca.section.reapply(score, previous_persistent_indicators)
+        >>> baca.section.reapply_persistent_indicators(
+        ...     score, previous_persistent_indicators
+        ... )
         >>> _ = baca.section.remove_redundant_time_signatures(score)
         >>> baca.section.treat_untreated_persistent_wrappers(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -3279,7 +3297,9 @@ Persistence.
         ...         value=5,
         ...     )
         ... ]
-        >>> baca.section.reapply(score, previous_persistent_indicators)
+        >>> baca.section.reapply_persistent_indicators(
+        ...     score, previous_persistent_indicators
+        ... )
         >>> _ = baca.section.remove_redundant_time_signatures(score)
         >>> baca.section.treat_untreated_persistent_wrappers(score)
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -3339,7 +3359,7 @@ Persistence.
         ...         value=5,
         ...     )
         ... ]
-        >>> baca.section.reapply(
+        >>> baca.section.reapply_persistent_indicators(
         ...     voice,
         ...     previous_persistent_indicators,
         ...     manifests=manifests,
@@ -3458,7 +3478,9 @@ Persistence.
         ...         value=5,
         ...     )
         ... ]
-        >>> baca.section.reapply(voice, previous_persistent_indicators)
+        >>> baca.section.reapply_persistent_indicators(
+        ...     voice, previous_persistent_indicators
+        ... )
         >>> _ = baca.staff_lines(voice[0], 5)
         >>> _ = baca.section.remove_redundant_time_signatures(score)
         >>> baca.section.treat_untreated_persistent_wrappers(score)
@@ -3619,7 +3641,9 @@ Persistence.
         ...         prototype="baca.Ritardando",
         ...     )
         ... ]
-        >>> baca.section.reapply(score, previous_persistent_indicators)
+        >>> baca.section.reapply_persistent_indicators(
+        ...     score, previous_persistent_indicators
+        ... )
         >>> _ = baca.section.remove_redundant_time_signatures(score)
         >>> baca.section.treat_untreated_persistent_wrappers(score)
         >>> baca.section.span_metronome_marks(score)
@@ -3693,7 +3717,7 @@ Persistence.
         >>> voice = score["Music"]
         >>> music = baca.make_notes(time_signatures())
         >>> voice.extend(music)
-        >>> baca.section.reapply(
+        >>> baca.section.reapply_persistent_indicators(
         ...     voice,
         ...     previous_persistent_indicators,
         ...     manifests=manifests,
@@ -3849,7 +3873,7 @@ Persistence.
         >>> voice = score["Music"]
         >>> music = baca.make_notes(time_signatures())
         >>> voice.extend(music)
-        >>> baca.section.reapply(
+        >>> baca.section.reapply_persistent_indicators(
         ...     voice,
         ...     previous_persistent_indicators,
         ...     manifests=manifests,
