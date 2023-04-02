@@ -372,6 +372,50 @@ class OBGC:
         return anchor_voice
 
 
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class Tuplet:
+    items: list
+    extra_counts: int
+
+    def __post_init__(self):
+        assert isinstance(self.items, list), repr(self.items)
+        assert isinstance(self.extra_counts, int), repr(self.extra_counts)
+
+    def __call__(self, denominator: int, voice_name: str | None = None) -> abjad.Tuplet:
+        assert isinstance(denominator, int), repr(denominator)
+        tag = _tags.function_name(_frame())
+        components = []
+        for item in self.items:
+            if isinstance(item, int) and 0 < item:
+                leaf_duration = abjad.Duration(item, denominator)
+                notes = abjad.makers.make_leaves([0], [leaf_duration], tag=tag)
+                components.extend(notes)
+            elif isinstance(item, int) and item < 0:
+                leaf_duration = abjad.Duration(-item, denominator)
+                rests = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
+                components.extend(rests)
+            elif isinstance(item, abjad.Tuplet):
+                components.append(item)
+            elif isinstance(item, Feather):
+                tuplet = item(denominator, voice_name)
+                components.append(tuplet)
+            elif isinstance(item, Grace):
+                components_ = item(denominator)
+                components.extend(components_)
+            elif isinstance(item, OBGC):
+                anchor_voice = item(denominator, voice_name)
+                components.append(anchor_voice)
+            else:
+                raise Exception(item)
+        contents_duration = sum([abjad.get.duration(_) for _ in components])
+        extra_duration = abjad.Duration(self.extra_counts, denominator)
+        prolated_duration = contents_duration + extra_duration
+        multiplier = prolated_duration / contents_duration
+        pair = multiplier.numerator, multiplier.denominator
+        tuplet = abjad.Tuplet(pair, components)
+        return tuplet
+
+
 def attach_bgcs(
     bgcs: list[abjad.BeforeGraceContainer],
     argument: abjad.Component | list[abjad.Component],
@@ -766,6 +810,12 @@ def make_rhythm(
             duration = abjad.get.duration(anchor_leaves)
             components.extend(anchor_leaves)
             index_to_obgc_anchor_voice[i] = anchor_voice
+        elif isinstance(item, Tuplet):
+            tuplet = item(denominator, voice_name)
+            duration = abjad.get.duration(tuplet)
+            dummy_notes = abjad.makers.make_leaves([97], [duration], tag=tag)
+            components.extend(dummy_notes)
+            index_to_original_item[i] = tuplet
         else:
             raise Exception(item)
         assert isinstance(duration, abjad.Duration), repr(duration)

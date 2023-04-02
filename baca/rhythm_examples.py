@@ -557,6 +557,74 @@ rhythm.py examples.
             }
         >>
 
+..  container:: example
+
+    Displaced tuplets:
+
+    >>> def make_lilypond_foo():
+    ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
+    ...     voice = baca.make_rhythm(
+    ...         [
+    ...             -2,
+    ...             baca.Tuplet([1, 1, 1, 1, 1], -1),
+    ...             baca.Tuplet([2, 2, 2], -2),
+    ...             -2,
+    ...         ],
+    ...         16,
+    ...         time_signatures,
+    ...     )
+    ...     rmakers.beam(voice)
+    ...     score = make_score(voice, time_signatures)
+    ...     result = abjad.LilyPondFile([score])
+    ...     return result
+
+    >>> lilypond_file = make_lilypond_foo()
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        \with
+        {
+            \override TupletBracket.bracket-visibility = ##t
+            \override TupletBracket.padding = 2
+            autoBeaming = ##f
+            proportionalNotationDuration = #(ly:make-moment 1 36)
+            tupletFullLength = ##t
+        }
+        <<
+            \new RhythmicStaff
+            {
+                \new Voice
+                {
+                    \time 1/4
+                    r8
+                    \times 4/5
+                    {
+                        c'16
+                        [
+                        c'16
+                        c'16
+                        c'16
+                        c'16
+                        ]
+                    }
+                    \times 2/3
+                    {
+                        c'8
+                        [
+                        c'8
+                        c'8
+                        ]
+                    }
+                    r8
+                }
+            }
+        >>
+
 """
 
 

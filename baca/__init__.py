@@ -71,6 +71,7 @@ from .rhythm import (
     Grace,
     LMR,
     OBGC,
+    Tuplet,
     attach_bgcs,
     from_collection,
     get_previous_rhythm_state,
