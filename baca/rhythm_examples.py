@@ -562,7 +562,7 @@ rhythm.py examples.
 
     Displaced tuplets:
 
-    >>> def make_lilypond_foo():
+    >>> def make_lilypond_file():
     ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
     ...     voice = baca.make_rhythm(
     ...         [
@@ -579,7 +579,7 @@ rhythm.py examples.
     ...     result = abjad.LilyPondFile([score])
     ...     return result
 
-    >>> lilypond_file = make_lilypond_foo()
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -728,6 +728,143 @@ rhythm.py examples.
                         c'16
                         \acciaccatura {
                             c'16
+                        }
+                        c'16
+                        ]
+                    }
+                    r8
+                }
+            }
+        >>
+
+..  container:: example
+
+    Displaced, graced tuplets with graced feathers:
+
+    >>> def make_lilypond_foo():
+    ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
+    ...     voice = baca.make_rhythm(
+    ...         [
+    ...             -2,
+    ...             baca.Tuplet(
+    ...                 [
+    ...                     baca.Grace([1, 1], 2),
+    ...                     baca.Feather(
+    ...                         [1, baca.Grace([1], 1), 1, 1], 16, 4, exponent=0.625
+    ...                     ),
+    ...                 ],
+    ...                 -2,
+    ...             ),
+    ...             baca.Tuplet(
+    ...                 [
+    ...                     baca.Feather(
+    ...                         [1, 1, 1, baca.Grace([1], 1)], 16, 3, exponent=1.625
+    ...                     ),
+    ...                     1,
+    ...                     baca.Grace([1, 1], 1),
+    ...                 ],
+    ...                 -1,
+    ...             ),
+    ...             -2,
+    ...         ],
+    ...         16,
+    ...         time_signatures,
+    ...     )
+    ...     for tuplet in abjad.select.tuplets(voice, level=1):
+    ...         hleaves = []
+    ...         for leaf in abjad.select.leaves(tuplet):
+    ...             if abjad.get.parentage(leaf).parent is tuplet:
+    ...                 hleaves.append(leaf)
+    ...         rmakers.beam([hleaves])
+    ...     for tuplet in abjad.select.tuplets(voice):
+    ...         hleaves = baca.select.hleaves(tuplet)
+    ...         pleaf = baca.select.pleaf(hleaves, 0)
+    ...         if pleaf is not None:
+    ...             abjad.override(pleaf).Beam.positions = (4, 4)
+    ...     score = make_score(voice, time_signatures)
+    ...     result = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return result
+
+    >>> lilypond_file = make_lilypond_foo()
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        \with
+        {
+            \override TupletBracket.bracket-visibility = ##t
+            \override TupletBracket.padding = 2
+            autoBeaming = ##f
+            proportionalNotationDuration = #(ly:make-moment 1 36)
+            tupletFullLength = ##t
+        }
+        <<
+            \new RhythmicStaff
+            {
+                \new Voice
+                {
+                    \time 1/4
+                    r8
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 2/3
+                    {
+                        \acciaccatura {
+                            \slash
+                            c'16
+                            [
+                            c'16
+                            ]
+                        }
+                        \once \override Beam.positions = #'(4 . 4)
+                        c'8
+                        \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
+                        \times 1/1
+                        {
+                            \once \override Beam.grow-direction = #right
+                            \once \override Beam.positions = #'(4 . 4)
+                            c'16 * 1728/1024
+                            [
+                            \acciaccatura {
+                                c'16
+                            }
+                            c'16 * 928/1024
+                            c'16 * 768/1024
+                            c'16 * 672/1024
+                            ]
+                        }
+                        \revert TupletNumber.text
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 4/5
+                    {
+                        \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 8. }
+                        \times 1/1
+                        {
+                            \once \override Beam.grow-direction = #left
+                            \once \override Beam.positions = #'(4 . 4)
+                            c'16 * 1296/4096
+                            [
+                            c'16 * 2688/4096
+                            c'16 * 3696/4096
+                            \acciaccatura {
+                                c'16
+                            }
+                            c'16 * 4608/4096
+                            ]
+                        }
+                        \revert TupletNumber.text
+                        c'16
+                        [
+                        \acciaccatura {
+                            \slash
+                            c'16
+                            [
+                            c'16
+                            ]
                         }
                         c'16
                         ]
