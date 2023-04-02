@@ -32,3 +32,7 @@ def assign_part(
     leaves = abjad.select.leaves(argument)
     components = abjad.select.top(leaves)
     abjad.mutate.wrap(components, container)
+
+
+def block(argument):
+    argument()
