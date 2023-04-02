@@ -13,11 +13,12 @@ rhythm.py examples.
     ...     abjad.setting(score).autoBeaming = False
     ...     abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 36)"
     ...     abjad.setting(score).tupletFullLength = True
+    ...     rmakers.force_fraction(score)
     ...     return score
 
 ..  container:: example
 
-    Displaced quarter notes with grace music:
+    Displaced, graced quarter notes:
 
     >>> def make_lilypond_file():
     ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
@@ -27,8 +28,8 @@ rhythm.py examples.
     ...         time_signatures,
     ...     )
     ...     score = make_score(voice, time_signatures)
-    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-    ...     return lilypond_file
+    ...     result = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return result
 
     >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -90,8 +91,8 @@ rhythm.py examples.
     ...         time_signatures,
     ...     )
     ...     score = make_score(voice, time_signatures)
-    ...     lilypond_file = abjad.LilyPondFile([score])
-    ...     return lilypond_file
+    ...     result = abjad.LilyPondFile([score])
+    ...     return result
 
     >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -150,7 +151,7 @@ rhythm.py examples.
 
 ..  container:: example
 
-    Displaced accelerandi, ritardandi with grace notes:
+    Displaced, graced accelerandi and ritardandi:
 
     >>> def make_lilypond_file():
     ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
@@ -187,8 +188,8 @@ rhythm.py examples.
     ...         time_signatures,
     ...     )
     ...     score = make_score(voice, time_signatures)
-    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-    ...     return lilypond_file
+    ...     result = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return result
 
     >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -333,8 +334,8 @@ rhythm.py examples.
     ...     literal = abjad.LilyPondLiteral(r"\voiceTwo")
     ...     abjad.attach(literal, leaf)
     ...     score = make_score(voice, time_signatures)
-    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-    ...     return lilypond_file
+    ...     result = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return result
 
     >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -463,8 +464,8 @@ rhythm.py examples.
     ...         voice_name="Example.Voice",
     ...     )
     ...     score = make_score(voice, time_signatures)
-    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-    ...     return lilypond_file
+    ...     result = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return result
 
     >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -602,6 +603,7 @@ rhythm.py examples.
                 {
                     \time 1/4
                     r8
+                    \tweak text #tuplet-number::calc-fraction-text
                     \times 4/5
                     {
                         c'16
@@ -612,12 +614,122 @@ rhythm.py examples.
                         c'16
                         ]
                     }
+                    \tweak text #tuplet-number::calc-fraction-text
                     \times 2/3
                     {
                         c'8
                         [
                         c'8
                         c'8
+                        ]
+                    }
+                    r8
+                }
+            }
+        >>
+
+..  container:: example
+
+    Displaced, graced tuplets:
+
+    >>> def make_lilypond_foo():
+    ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
+    ...     voice = baca.make_rhythm(
+    ...         [
+    ...             -2,
+    ...             baca.Tuplet(
+    ...                 [
+    ...                     2,
+    ...                     baca.Grace([1, 1], 2),
+    ...                     baca.Grace([1], 2),
+    ...                 ],
+    ...                 -2,
+    ...             ),
+    ...             baca.Tuplet(
+    ...                 [
+    ...                     1,
+    ...                     1,
+    ...                     1,
+    ...                     baca.Grace([1], 1),
+    ...                     baca.Grace([1], 1),
+    ...                 ],
+    ...                 -1,
+    ...             ),
+    ...             -2,
+    ...         ],
+    ...         16,
+    ...         time_signatures,
+    ...     )
+    ...     for tuplet in abjad.select.tuplets(voice):
+    ...         hleaves = baca.select.hleaves(tuplet)
+    ...         rmakers.beam([hleaves])
+    ...         pleaf = baca.select.pleaf(hleaves, 0)
+    ...         if pleaf is not None:
+    ...             abjad.override(pleaf).Beam.positions = (4, 4)
+    ...     score = make_score(voice, time_signatures)
+    ...     result = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return result
+
+    >>> lilypond_file = make_lilypond_foo()
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        \with
+        {
+            \override TupletBracket.bracket-visibility = ##t
+            \override TupletBracket.padding = 2
+            autoBeaming = ##f
+            proportionalNotationDuration = #(ly:make-moment 1 36)
+            tupletFullLength = ##t
+        }
+        <<
+            \new RhythmicStaff
+            {
+                \new Voice
+                {
+                    \time 1/4
+                    r8
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 2/3
+                    {
+                        \once \override Beam.positions = #'(4 . 4)
+                        c'8
+                        [
+                        \acciaccatura {
+                            \slash
+                            c'16
+                            [
+                            c'16
+                            ]
+                        }
+                        c'8
+                        \acciaccatura {
+                            c'16
+                        }
+                        c'8
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 4/5
+                    {
+                        \once \override Beam.positions = #'(4 . 4)
+                        c'16
+                        [
+                        c'16
+                        c'16
+                        \acciaccatura {
+                            c'16
+                        }
+                        c'16
+                        \acciaccatura {
+                            c'16
+                        }
+                        c'16
                         ]
                     }
                     r8
