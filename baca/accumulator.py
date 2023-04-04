@@ -345,6 +345,7 @@ def anchor_to_figure(figure_name: str) -> Anchor:
 def label_figure(
     tuplets, figure_name, accumulator, direction=None, do_not_increment=False
 ):
+    figure_name = figure_name or ""
     figure_number = accumulator.figure_number
     if not do_not_increment:
         accumulator.figure_number += 1
