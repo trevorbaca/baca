@@ -350,7 +350,7 @@ class OBGC:
             )
 
     def __call__(self, denominator, voice_name):
-        tag = abjad.Tag("baca.OBGC.__call__()")
+        tag = _tags.function_name(_frame())
         if 0 < self.nongrace_note_numerator:
             pitch = 0
         else:

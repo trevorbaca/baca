@@ -76,7 +76,7 @@ rhythm.py examples.
 
 ..  container:: example
 
-    Displaced accelerandi, ritardandi:
+    Displaced feathers:
 
     >>> def make_lilypond_file():
     ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
@@ -151,7 +151,7 @@ rhythm.py examples.
 
 ..  container:: example
 
-    Displaced, graced accelerandi and ritardandi:
+    Displaced, graced feathers:
 
     >>> def make_lilypond_file():
     ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
@@ -284,7 +284,7 @@ rhythm.py examples.
 
 ..  container:: example
 
-    Displaced accelerandi, ritardandi with on-beat grace notes:
+    Displaced, graced feathers with on-beat grace notes:
 
     >>> def make_lilypond_file():
     ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
@@ -296,7 +296,7 @@ rhythm.py examples.
     ...                     1,
     ...                     1,
     ...                     1,
-    ...                     1,
+    ...                     baca.Grace([1], 1),
     ...                     baca.OBGC(
     ...                         [1, 1, 1, 1],
     ...                         1,
@@ -318,7 +318,7 @@ rhythm.py examples.
     ...                     ),
     ...                     1,
     ...                     1,
-    ...                     1,
+    ...                     baca.Grace([1, 1], 1),
     ...                 ],
     ...                 16,
     ...                 4,
@@ -370,6 +370,9 @@ rhythm.py examples.
                         [
                         c'16 * 3136/5120
                         c'16 * 4288/5120
+                        \acciaccatura {
+                            c'16
+                        }
                         c'16 * 5312/5120
                         \context Voice = "Example.Voice"
                         {
@@ -437,6 +440,13 @@ rhythm.py examples.
                         }
                         c'16 * 3328/5120
                         c'16 * 2944/5120
+                        \acciaccatura {
+                            \slash
+                            c'16
+                            [
+                            c'16
+                            ]
+                        }
                         c'16 * 2688/5120
                         ]
                     }
@@ -552,76 +562,6 @@ rhythm.py examples.
                                 c'8
                             }
                         >>
-                    }
-                    r8
-                }
-            }
-        >>
-
-..  container:: example
-
-    Displaced tuplets:
-
-    >>> def make_lilypond_file():
-    ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
-    ...     voice = baca.make_rhythm(
-    ...         [
-    ...             -2,
-    ...             baca.Tuplet([1, 1, 1, 1, 1], -1),
-    ...             baca.Tuplet([2, 2, 2], -2),
-    ...             -2,
-    ...         ],
-    ...         16,
-    ...         time_signatures,
-    ...     )
-    ...     rmakers.beam(voice)
-    ...     score = make_score(voice, time_signatures)
-    ...     result = abjad.LilyPondFile([score])
-    ...     return result
-
-    >>> lilypond_file = make_lilypond_file()
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        \with
-        {
-            \override TupletBracket.bracket-visibility = ##t
-            \override TupletBracket.padding = 2
-            autoBeaming = ##f
-            proportionalNotationDuration = #(ly:make-moment 1 36)
-            tupletFullLength = ##t
-        }
-        <<
-            \new RhythmicStaff
-            {
-                \new Voice
-                {
-                    \time 1/4
-                    r8
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 4/5
-                    {
-                        c'16
-                        [
-                        c'16
-                        c'16
-                        c'16
-                        c'16
-                        ]
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 2/3
-                    {
-                        c'8
-                        [
-                        c'8
-                        c'8
-                        ]
                     }
                     r8
                 }

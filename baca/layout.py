@@ -124,7 +124,7 @@ class SpacingSpecifier:
             abjad.attach(
                 spacing_section,
                 skip,
-                tag=tag.append(_tags.function_name(_frame(), self, n=1)),
+                tag=tag.append(_tags.function_name(_frame(), n=1)),
             )
             if eol_adjusted:
                 multiplier = magic_lilypond_eol_adjustment
@@ -143,7 +143,7 @@ class SpacingSpecifier:
                     skip,
                     context="GlobalSkips",
                     deactivate=True,
-                    tag=tag.append(_tags.function_name(_frame(), self, n=2)),
+                    tag=tag.append(_tags.function_name(_frame(), n=2)),
                 )
             if 0 < measure_index:
                 tag = _tags.SPACING
@@ -153,7 +153,7 @@ class SpacingSpecifier:
                     skip,
                     context="GlobalSkips",
                     deactivate=True,
-                    tag=tag.append(_tags.function_name(_frame(), self, n=3)),
+                    tag=tag.append(_tags.function_name(_frame(), n=3)),
                 )
 
 

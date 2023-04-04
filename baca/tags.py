@@ -347,9 +347,9 @@ def dynamic_color_tags():
     ]
 
 
-def function_name(frame, self=None, *, n=None):
+def function_name(frame, *, n=None):
     """
-    Gets function name from ``frame``.
+    Gets function (and class) name from ``frame``.
     """
     parts = []
     path = frame.f_code.co_filename.removesuffix(".py")
@@ -366,10 +366,9 @@ def function_name(frame, self=None, *, n=None):
     parts.reverse()
     if parts[0] == "baca":
         parts.pop()
-    if isinstance(self, str):
-        parts.append(self)
-    elif self is not None:
-        parts.append(type(self).__name__)
+    if "self" in frame.f_locals:
+        class_name = frame.f_locals["self"].__class__.__name__
+        parts.append(class_name)
     parts.append(frame.f_code.co_name)
     string = ".".join(parts) + ("()" if n is None else f"({n})")
     return abjad.Tag(string)
