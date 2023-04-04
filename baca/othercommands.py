@@ -35,4 +35,11 @@ def assign_part(
 
 
 def call(argument):
-    argument()
+    if callable(argument):
+        argument()
+    else:
+
+        def composite(function):
+            function(argument)
+
+        return composite
