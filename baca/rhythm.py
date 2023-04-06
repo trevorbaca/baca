@@ -331,7 +331,7 @@ class LMR:
 class OBGC:
     grace_note_numerators: list[int]
     nongrace_note_numerator: int
-    do_not_stop_polyphony: bool = False
+    do_not_attach_one_voice_command: bool = False
     grace_leaf_duration: abjad.Duration | None = None
     grace_polyphony_command: abjad.VoiceNumber = abjad.VoiceNumber(1)
     nongrace_polyphony_command: abjad.VoiceNumber = abjad.VoiceNumber(2)
@@ -343,8 +343,8 @@ class OBGC:
         assert isinstance(self.nongrace_note_numerator, int), repr(
             self.nongrace_note_numerator
         )
-        assert isinstance(self.do_not_stop_polyphony, bool), repr(
-            self.do_not_stop_polyphony
+        assert isinstance(self.do_not_attach_one_voice_command, bool), repr(
+            self.do_not_attach_one_voice_command
         )
         if self.grace_leaf_duration is not None:
             assert isinstance(self.grace_leaf_duration, abjad.Duration), repr(
@@ -367,7 +367,7 @@ class OBGC:
         abjad.on_beat_grace_container(
             grace_leaves,
             nongrace_leaves,
-            do_not_stop_polyphony=self.do_not_stop_polyphony,
+            do_not_attach_one_voice_command=self.do_not_attach_one_voice_command,
             grace_leaf_duration=self.grace_leaf_duration,
             grace_polyphony_command=self.grace_polyphony_command,
             nongrace_polyphony_command=self.nongrace_polyphony_command,
