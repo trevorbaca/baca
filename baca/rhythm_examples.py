@@ -313,7 +313,6 @@ rhythm.py examples.
     ...                     baca.OBGC(
     ...                         [1, 1, 1],
     ...                         1,
-    ...                         do_not_stop_polyphony=True,
     ...                         grace_leaf_duration=abjad.Duration(1, 64),
     ...                     ),
     ...                     1,
