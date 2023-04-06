@@ -814,6 +814,187 @@ rhythm.py examples.
             }
         >>
 
+..  container:: example
+
+    Feathers with before-grace music and on-beat grace music:
+
+    >>> def make_lilypond_file():
+    ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
+    ...     voice = baca.make_rhythm(
+    ...         [
+    ...             -1,
+    ...             baca.Feather(
+    ...                 [
+    ...                     1,
+    ...                     1,
+    ...                     1,
+    ...                     baca.Grace([1, 1], 1),
+    ...                     baca.OBGC(
+    ...                         [1, 1, 1, 1],
+    ...                         1,
+    ...                         grace_leaf_duration=abjad.Duration(1, 64),
+    ...                         grace_polyphony_command=r"\voiceTwo",
+    ...                         nongrace_polyphony_command=r"\voiceOne",
+    ...                     ),
+    ...                 ],
+    ...                 16,
+    ...                 4,
+    ...                 exponent=1.625,
+    ...             ),
+    ...             baca.Feather(
+    ...                 [
+    ...                     1,
+    ...                     baca.OBGC(
+    ...                         [1, 1, 1],
+    ...                         1,
+    ...                         grace_leaf_duration=abjad.Duration(1, 64),
+    ...                         grace_polyphony_command=r"\voiceTwo",
+    ...                         nongrace_polyphony_command=r"\voiceOne",
+    ...                     ),
+    ...                     1,
+    ...                     1,
+    ...                     baca.Grace([1, 1], 1),
+    ...                 ],
+    ...                 16,
+    ...                 4,
+    ...                 exponent=0.625,
+    ...             ),
+    ...             -3,
+    ...         ],
+    ...         16,
+    ...         time_signatures,
+    ...         voice_name="Example.Voice",
+    ...     )
+    ...     leaf = voice[2][2]
+    ...     literal = abjad.LilyPondLiteral(r"\oneVoice")
+    ...     abjad.attach(literal, leaf)
+    ...     score = make_score(voice, time_signatures)
+    ...     result = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return result
+
+    >>> lilypond_file = make_lilypond_file()
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        \with
+        {
+            \override TupletBracket.bracket-visibility = ##t
+            \override TupletBracket.padding = 2
+            autoBeaming = ##f
+            proportionalNotationDuration = #(ly:make-moment 1 36)
+            tupletFullLength = ##t
+        }
+        <<
+            \new RhythmicStaff
+            {
+                \context Voice = "Example.Voice"
+                {
+                    \time 1/4
+                    r16
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #left
+                        c'16 * 1472/5120
+                        [
+                        c'16 * 3136/5120
+                        c'16 * 4288/5120
+                        \acciaccatura {
+                            \slash
+                            c'16
+                            [
+                            c'16
+                            ]
+                        }
+                        c'16 * 5312/5120
+                        \context Voice = "Example.Voice"
+                        {
+                            <<
+                                \context Voice = "On_Beat_Grace_Container"
+                                {
+                                    \set fontSize = #-3
+                                    \slash
+                                    \voiceTwo
+                                    <
+                                        \tweak font-size 0
+                                        \tweak transparent ##t
+                                        c'
+                                    >16 * 1/4
+                                    [
+                                    (
+                                    c'16 * 1/4
+                                    c'16 * 1/4
+                                    c'16 * 1/4
+                                    )
+                                    ]
+                                }
+                                \context Voice = "Example.Voice"
+                                {
+                                    \voiceOne
+                                    c'16 * 6272/5120
+                                    ]
+                                }
+                            >>
+                        }
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #right
+                        c'16 * 7488/5120
+                        [
+                        \context Voice = "Example.Voice"
+                        {
+                            <<
+                                \context Voice = "On_Beat_Grace_Container"
+                                {
+                                    \set fontSize = #-3
+                                    \slash
+                                    \voiceTwo
+                                    <
+                                        \tweak font-size 0
+                                        \tweak transparent ##t
+                                        c'
+                                    >16 * 1/4
+                                    [
+                                    (
+                                    c'16 * 1/4
+                                    c'16 * 1/4
+                                    )
+                                    ]
+                                }
+                                \context Voice = "Example.Voice"
+                                {
+                                    \voiceOne
+                                    c'16 * 4032/5120
+                                }
+                            >>
+                        }
+                        \oneVoice
+                        c'16 * 3328/5120
+                        c'16 * 2944/5120
+                        \acciaccatura {
+                            \slash
+                            c'16
+                            [
+                            c'16
+                            ]
+                        }
+                        c'16 * 2688/5120
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    r8.
+                }
+            }
+        >>
+
 """
 
 

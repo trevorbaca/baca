@@ -333,6 +333,8 @@ class OBGC:
     nongrace_note_numerator: int
     do_not_stop_polyphony: bool = False
     grace_leaf_duration: abjad.Duration | None = None
+    grace_polyphony_command: str = r"\voiceOne"
+    nongrace_polyphony_command: str = r"\voiceTwo"
 
     def __post_init__(self):
         assert all(isinstance(_, int) for _ in self.grace_note_numerators), repr(
@@ -367,6 +369,8 @@ class OBGC:
             nongrace_leaves,
             do_not_stop_polyphony=self.do_not_stop_polyphony,
             grace_leaf_duration=self.grace_leaf_duration,
+            grace_polyphony_command=self.grace_polyphony_command,
+            nongrace_polyphony_command=self.nongrace_polyphony_command,
             tag=tag,
         )
         return anchor_voice
