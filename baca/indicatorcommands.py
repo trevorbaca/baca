@@ -789,9 +789,9 @@ def one_voice(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
-        indicator = abjad.LilyPondLiteral(r"\oneVoice")
+        command = abjad.VoiceNumber()
         wrapper = abjad.attach(
-            indicator,
+            command,
             leaf,
             tag=tag,
             wrapper=True,
@@ -1163,9 +1163,9 @@ def voice_four(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
-        indicator = abjad.LilyPondLiteral(r"\voiceFour")
+        command = abjad.VoiceNumber(4)
         wrapper = abjad.attach(
-            indicator,
+            command,
             leaf,
             tag=tag,
             wrapper=True,
@@ -1178,9 +1178,9 @@ def voice_one(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
-        indicator = abjad.LilyPondLiteral(r"\voiceOne")
+        command = abjad.VoiceNumber(1)
         wrapper = abjad.attach(
-            indicator,
+            command,
             leaf,
             tag=tag,
             wrapper=True,
@@ -1193,9 +1193,9 @@ def voice_three(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
-        indicator = abjad.LilyPondLiteral(r"\voiceThree")
+        command = abjad.VoiceNumber(3)
         wrapper = abjad.attach(
-            indicator,
+            command,
             leaf,
             tag=tag,
             wrapper=True,
@@ -1208,9 +1208,9 @@ def voice_two(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
-        indicator = abjad.LilyPondLiteral(r"\voiceTwo")
+        command = abjad.VoiceNumber(2)
         wrapper = abjad.attach(
-            indicator,
+            command,
             leaf,
             tag=tag,
             wrapper=True,

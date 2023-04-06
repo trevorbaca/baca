@@ -655,7 +655,7 @@ def _collect_persistent_indicators(
                 prototype = type(indicator)
                 prototype = _prototype_string(prototype)
             value = _treat._indicator_to_key(indicator, manifests)
-            if value is None:
+            if value is None and prototype != "abjad.VoiceNumber":
                 raise Exception(f"can not find in manifest:\n\n  {indicator}")
             editions = wrapper.tag.editions()
             if editions:

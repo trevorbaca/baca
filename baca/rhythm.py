@@ -333,8 +333,8 @@ class OBGC:
     nongrace_note_numerator: int
     do_not_stop_polyphony: bool = False
     grace_leaf_duration: abjad.Duration | None = None
-    grace_polyphony_command: str = r"\voiceOne"
-    nongrace_polyphony_command: str = r"\voiceTwo"
+    grace_polyphony_command: abjad.VoiceNumber = abjad.VoiceNumber(1)
+    nongrace_polyphony_command: abjad.VoiceNumber = abjad.VoiceNumber(2)
 
     def __post_init__(self):
         assert all(isinstance(_, int) for _ in self.grace_note_numerators), repr(

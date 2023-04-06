@@ -331,8 +331,8 @@ rhythm.py examples.
     ...         voice_name="Example.Voice",
     ...     )
     ...     leaf = abjad.select.leaf(voice, 0)
-    ...     literal = abjad.LilyPondLiteral(r"\voiceTwo")
-    ...     abjad.attach(literal, leaf)
+    ...     command = abjad.VoiceNumber(2)
+    ...     abjad.attach(command, leaf)
     ...     score = make_score(voice, time_signatures)
     ...     result = baca.lilypond.file(score, includes=["baca.ily"])
     ...     return result
@@ -359,8 +359,8 @@ rhythm.py examples.
             {
                 \context Voice = "Example.Voice"
                 {
-                    \time 1/4
                     \voiceTwo
+                    \time 1/4
                     r16
                     \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
                     \times 1/1
@@ -379,9 +379,9 @@ rhythm.py examples.
                             <<
                                 \context Voice = "On_Beat_Grace_Container"
                                 {
+                                    \voiceOne
                                     \set fontSize = #-3
                                     \slash
-                                    \voiceOne
                                     <
                                         \tweak font-size 0
                                         \tweak transparent ##t
@@ -416,9 +416,9 @@ rhythm.py examples.
                             <<
                                 \context Voice = "On_Beat_Grace_Container"
                                 {
+                                    \voiceOne
                                     \set fontSize = #-3
                                     \slash
-                                    \voiceOne
                                     <
                                         \tweak font-size 0
                                         \tweak transparent ##t
@@ -506,9 +506,9 @@ rhythm.py examples.
                         <<
                             \context Voice = "On_Beat_Grace_Container"
                             {
+                                \voiceOne
                                 \set fontSize = #-3
                                 \slash
-                                \voiceOne
                                 <
                                     \tweak font-size 0
                                     \tweak transparent ##t
@@ -537,9 +537,9 @@ rhythm.py examples.
                         <<
                             \context Voice = "On_Beat_Grace_Container"
                             {
+                                \voiceOne
                                 \set fontSize = #-3
                                 \slash
-                                \voiceOne
                                 <
                                     \tweak font-size 0
                                     \tweak transparent ##t
@@ -833,8 +833,8 @@ rhythm.py examples.
     ...                         [1, 1, 1, 1],
     ...                         1,
     ...                         grace_leaf_duration=abjad.Duration(1, 64),
-    ...                         grace_polyphony_command=r"\voiceTwo",
-    ...                         nongrace_polyphony_command=r"\voiceOne",
+    ...                         grace_polyphony_command=abjad.VoiceNumber(2),
+    ...                         nongrace_polyphony_command=abjad.VoiceNumber(1),
     ...                     ),
     ...                 ],
     ...                 16,
@@ -848,8 +848,8 @@ rhythm.py examples.
     ...                         [1, 1, 1],
     ...                         1,
     ...                         grace_leaf_duration=abjad.Duration(1, 64),
-    ...                         grace_polyphony_command=r"\voiceTwo",
-    ...                         nongrace_polyphony_command=r"\voiceOne",
+    ...                         grace_polyphony_command=abjad.VoiceNumber(2),
+    ...                         nongrace_polyphony_command=abjad.VoiceNumber(1),
     ...                     ),
     ...                     1,
     ...                     1,
@@ -866,8 +866,8 @@ rhythm.py examples.
     ...         voice_name="Example.Voice",
     ...     )
     ...     leaf = voice[2][2]
-    ...     literal = abjad.LilyPondLiteral(r"\oneVoice")
-    ...     abjad.attach(literal, leaf)
+    ...     command = abjad.VoiceNumber()
+    ...     abjad.attach(command, leaf)
     ...     score = make_score(voice, time_signatures)
     ...     result = baca.lilypond.file(score, includes=["baca.ily"])
     ...     return result
@@ -917,9 +917,9 @@ rhythm.py examples.
                             <<
                                 \context Voice = "On_Beat_Grace_Container"
                                 {
+                                    \voiceTwo
                                     \set fontSize = #-3
                                     \slash
-                                    \voiceTwo
                                     <
                                         \tweak font-size 0
                                         \tweak transparent ##t
@@ -954,9 +954,9 @@ rhythm.py examples.
                             <<
                                 \context Voice = "On_Beat_Grace_Container"
                                 {
+                                    \voiceTwo
                                     \set fontSize = #-3
                                     \slash
-                                    \voiceTwo
                                     <
                                         \tweak font-size 0
                                         \tweak transparent ##t

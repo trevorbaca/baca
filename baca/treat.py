@@ -202,6 +202,8 @@ def _indicator_to_key(indicator, manifests):
         key = _get_key(manifests["abjad.ShortInstrumentName"], indicator)
     elif isinstance(indicator, abjad.TimeSignature):
         key = f"{indicator.numerator}/{indicator.denominator}"
+    elif isinstance(indicator, abjad.VoiceNumber):
+        key = indicator.n
     elif isinstance(indicator, _memento.PersistentOverride):
         key = indicator
     elif isinstance(indicator, _indicatorclasses.BarExtent):
@@ -423,6 +425,7 @@ def treat_persistent_wrapper(manifests, wrapper, status):
         abjad.StopTextSpan,
         abjad.StopTrillSpan,
         abjad.Tie,
+        abjad.VoiceNumber,
     )
     if isinstance(wrapper.unbundle_indicator(), prototype):
         return
