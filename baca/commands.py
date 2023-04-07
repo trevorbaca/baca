@@ -7,7 +7,7 @@ from inspect import currentframe as _frame
 
 import abjad
 
-from . import pitchcommands as _pitchcommands
+from . import pitchtools as _pitchtools
 from . import select as _select
 from . import tags as _tags
 from . import tweaks as _tweaks
@@ -273,7 +273,7 @@ def flat_glissando(
         if isinstance(pitch, abjad.StaffPosition) or (
             isinstance(pitch, list) and isinstance(pitch[0], abjad.StaffPosition)
         ):
-            _pitchcommands.staff_position(
+            _pitchtools.staff_position(
                 argument,
                 pitch,
                 allow_hidden=allow_hidden,
@@ -281,7 +281,7 @@ def flat_glissando(
                 mock=mock,
             )
         else:
-            _pitchcommands.pitch(
+            _pitchtools.pitch(
                 argument,
                 pitch,
                 allow_hidden=allow_hidden,
@@ -292,7 +292,7 @@ def flat_glissando(
         if isinstance(pitch, abjad.StaffPosition):
             assert isinstance(stop_pitch, abjad.StaffPosition)
             raise Exception("port interpolate_staff_positions()")
-            _pitchcommands.interpolate_staff_positions(
+            _pitchtools.interpolate_staff_positions(
                 argument,
                 pitch,
                 stop_pitch,
@@ -302,7 +302,7 @@ def flat_glissando(
         else:
             assert isinstance(pitch, str | abjad.NamedPitch)
             assert isinstance(stop_pitch, str | abjad.NamedPitch)
-            _pitchcommands.interpolate_pitches(
+            _pitchtools.interpolate_pitches(
                 argument,
                 pitch,
                 stop_pitch,

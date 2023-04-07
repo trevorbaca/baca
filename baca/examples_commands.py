@@ -1,5 +1,5 @@
 r"""
-commands.py examles
+Examples: commands.
 
 ..  container:: example
 

@@ -1,5 +1,5 @@
 r"""
-overrides.py examples.
+Examples: overrides.
 
 ..  container:: example
 
@@ -1780,7 +1780,8 @@ overrides.py examples.
 """
 
 
-def dummy():
+def sphinx():
     """
-    Read module-level examples.
+    Makes Sphinx read this module.
     """
+    pass

@@ -1,5 +1,5 @@
 r"""
-figures.py examples.
+Examples: ``baca.from_collection()``.
 
 ..  container:: example
 
@@ -2403,7 +2403,8 @@ figures.py examples.
 """
 
 
-def dummy():
+def sphinx():
     """
-    Read module-level examples.
+    Makes Sphinx read this module.
     """
+    pass

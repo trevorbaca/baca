@@ -1,3 +1,6 @@
+"""
+Imbricate.
+"""
 import copy
 
 import abjad
@@ -56,6 +59,9 @@ def imbricate(
     hocket: bool = False,
     truncate_ties: bool = False,
 ) -> dict[str, list]:
+    """
+    Imbricates ``segment`` in ``container``.
+    """
     if isinstance(container, list):
         container = abjad.Container(container)
     original_container = container

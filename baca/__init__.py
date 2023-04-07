@@ -29,14 +29,14 @@ from .constellation import *
 from .cursor import Cursor
 from .docs import global_context_string
 from .imbricate import imbricate
-from .indicatorclasses import *
-from .indicatorcommands import *
+from .classes import *
+from .indicators import *
 from .layout import *
 from .lilypond import file
 from .memento import *
-from .overridecommands import *
-from .othercommands import assign_part, call
-from .parts import Part, PartAssignment
+from .overrides import *
+from .other import call
+from .parts import Part, PartAssignment, assign_part
 from .pcollections import (
     ArpeggiationSpacingSpecifier,
     ChordalSpacingSpecifier,
@@ -45,7 +45,7 @@ from .pcollections import (
     Registration,
     RegistrationComponent,
 )
-from .piecewisecommands import (
+from .piecewise import (
     bow_speed_spanner,
     circle_bow_spanner,
     clb_spanner,
@@ -65,7 +65,7 @@ from .piecewisecommands import (
     vibrato_spanner,
     xfb_spanner,
 )
-from .pitchcommands import *
+from .pitchtools import *
 from .rhythm import (
     Feather,
     Grace,
@@ -96,7 +96,7 @@ from .rhythm import (
     style_ritardando,
 )
 from .scope import scope
-from .spannercommands import (
+from .spanners import (
     beam,
     ottava,
     ottava_bassa,

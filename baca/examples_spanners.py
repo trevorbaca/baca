@@ -1,5 +1,5 @@
 r"""
-spanners.py examples
+Examples: spanners.
 
 ..  container:: example
 
@@ -258,5 +258,6 @@ spanners.py examples
 
 def dummy():
     """
-    Read module-level examples.
+    Makes Sphinx read this module.
     """
+    pass

@@ -1,5 +1,5 @@
 r"""
-piecewise.py examples.
+Examples: piecewise.
 
 ..  container:: example
 

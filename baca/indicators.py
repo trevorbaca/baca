@@ -1,14 +1,91 @@
-"""
-Articulations.
+r"""
+Indicators.
+
+..  container:: example
+
+    **COLOR FINGERINGS.**
+
+    >>> score = baca.docs.make_empty_score(1)
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
+    >>> music = baca.make_notes(time_signatures())
+    >>> score["Music"].extend(music)
+    >>> voice = score["Music"]
+    >>> _ = baca.pitch(voice, "E4")
+    >>> _ = baca.color_fingerings(voice, numbers=[0, 1, 2, 1])
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        {
+            \context Staff = "Staff"
+            <<
+                \context Voice = "Skips"
+                {
+                    \time 4/8
+                    s1 * 4/8
+                    \time 3/8
+                    s1 * 3/8
+                    \time 4/8
+                    s1 * 4/8
+                    \time 3/8
+                    s1 * 3/8
+                }
+                \context Voice = "Music"
+                {
+                    e'2
+                    e'4.
+                    ^ \markup { \override #'(circle-padding . 0.25) \circle \finger 1 }
+                    e'2
+                    ^ \markup { \override #'(circle-padding . 0.25) \circle \finger 2 }
+                    e'4.
+                    ^ \markup { \override #'(circle-padding . 0.25) \circle \finger 1 }
+                }
+            >>
+        }
+
+..  container:: example
+
+    **STOP-ON-STRING.**
+
+    >>> container = abjad.Container("c'4 d' e'")
+    >>> _ = baca.stop_on_string(container[0])
+    >>> lilypond_file = abjad.illustrators.components([container], includes=["baca.ily"])
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        <<
+            \context Staff = "Staff"
+            {
+                {
+                    \time 3/4
+                    c'4
+                    - \baca-stop-on-string
+                    d'4
+                    e'4
+                }
+            }
+        >>
+
 """
 import dataclasses
 from inspect import currentframe as _frame
 
 import abjad
 
+from . import classes as _classes
 from . import dynamics as _dynamics
-from . import indicatorclasses as _indicatorclasses
-from . import overridecommands as _overridecommands
+from . import overrides as _overrides
 from . import tags as _tags
 from . import treat as _treat
 from . import tweaks as _tweaks
@@ -231,7 +308,7 @@ def close_volta(
     if after is True:
         measure_number += 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
-    wrappers_ = _overridecommands.bar_line_x_extent([skip], (0, 1.5), after=after)
+    wrappers_ = _overrides.bar_line_x_extent([skip], (0, 1.5), after=after)
     _tags.wrappers(wrappers_, tag, measure_number_tag, _tags.ONLY_MOL)
     wrappers.extend(wrappers_)
     return wrappers
@@ -327,10 +404,10 @@ def double_volta(skip, first_measure_number) -> list[abjad.Wrapper]:
     measure_number = abjad.get.measure_number(skip)
     measure_number += first_measure_number - 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
-    wrappers_ = _overridecommands.bar_line_x_extent([skip], (0, 3))
+    wrappers_ = _overrides.bar_line_x_extent([skip], (0, 3))
     _tags.wrappers(wrappers_, tag, _tags.NOT_MOL, measure_number_tag)
     wrappers.extend(wrappers_)
-    wrappers_ = _overridecommands.bar_line_x_extent([skip], (0, 4))
+    wrappers_ = _overrides.bar_line_x_extent([skip], (0, 4))
     _tags.wrappers(wrappers_, tag, _tags.ONLY_MOL, measure_number_tag)
     wrappers.extend(wrappers_)
     return wrappers
@@ -768,8 +845,8 @@ def metronome_mark(
     prototype = (
         abjad.MetricModulation,
         abjad.MetronomeMark,
-        _indicatorclasses.Accelerando,
-        _indicatorclasses.Ritardando,
+        _classes.Accelerando,
+        _classes.Ritardando,
     )
     assert isinstance(indicator_, prototype), repr(indicator_)
     tag = _tags.function_name(_frame())
@@ -809,10 +886,10 @@ def open_volta(skip, first_measure_number) -> list[abjad.Wrapper]:
     measure_number = abjad.get.measure_number(skip)
     measure_number += first_measure_number - 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
-    wrappers_ = _overridecommands.bar_line_x_extent([skip], (0, 2))
+    wrappers_ = _overrides.bar_line_x_extent([skip], (0, 2))
     _tags.wrappers(wrappers_, tag, _tags.NOT_MOL, measure_number_tag)
     wrappers.extend(wrappers_)
-    wrappers_ = _overridecommands.bar_line_x_extent([skip], (0, 3))
+    wrappers_ = _overrides.bar_line_x_extent([skip], (0, 3))
     _tags.wrappers(wrappers_, tag, _tags.ONLY_MOL, measure_number_tag)
     wrappers.extend(wrappers_)
     return wrappers
@@ -978,14 +1055,14 @@ def staff_lines(argument, n: int) -> list[abjad.Wrapper]:
     assert isinstance(n, int), repr(n)
     wrappers = []
     for leaf in abjad.select.leaves(argument):
-        bar_extent = _indicatorclasses.BarExtent(n)
+        bar_extent = _classes.BarExtent(n)
         wrappers_ = _attach_persistent_indicator(
             leaf,
             [bar_extent],
             tag=abjad.Tag("baca.staff_lines(1)").append(_tags.NOT_PARTS),
         )
         wrappers.extend(wrappers_)
-        staff_lines = _indicatorclasses.StaffLines(n)
+        staff_lines = _classes.StaffLines(n)
         wrappers_ = _attach_persistent_indicator(
             leaf,
             [staff_lines],

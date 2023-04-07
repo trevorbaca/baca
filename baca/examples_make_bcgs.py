@@ -1,5 +1,5 @@
 r"""
-bcgs.py examples.
+Examples: ``baca.make_bcgs()``.
 
 ..  container:: example
 
@@ -686,7 +686,8 @@ bcgs.py examples.
 """
 
 
-def dummy():
+def sphinx():
     """
-    Read module-level examples.
+    Makes Sphinx read this module.
     """
+    pass

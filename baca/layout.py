@@ -27,7 +27,7 @@ from inspect import currentframe as _frame
 
 import abjad
 
-from . import indicatorclasses as _indicatorclasses
+from . import classes as _classes
 from . import select as _select
 from . import tags as _tags
 
@@ -119,7 +119,7 @@ class SpacingSpecifier:
                 denominator = pair[1] * magic_lilypond_eol_adjustment.denominator
                 pair = numerator, denominator
                 eol_adjusted = True
-            spacing_section = _indicatorclasses.SpacingSection(pair=pair)
+            spacing_section = _classes.SpacingSection(pair=pair)
             tag = _tags.SPACING_COMMAND
             abjad.attach(
                 spacing_section,

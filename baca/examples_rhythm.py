@@ -1,5 +1,5 @@
 r"""
-rhythm.py examples.
+Examples: rhythm.
 
 ..  container:: example
 
