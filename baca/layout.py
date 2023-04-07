@@ -216,9 +216,9 @@ def breaks(*page_specifiers):
             alignment_distances = system.distances
             assert 0 <= skip_index
             if j == 0:
-                literal = abjad.LilyPondLiteral(r"\pageBreak")
+                literal = abjad.LilyPondLiteral(r"\pageBreak", site="before")
             else:
-                literal = abjad.LilyPondLiteral(r"\break")
+                literal = abjad.LilyPondLiteral(r"\break", site="before")
             alignment_distances = abjad.sequence.flatten(alignment_distances, depth=-1)
             lbsd = LBSD(alignment_distances=alignment_distances, y_offset=y_offset)
             skip_index_to_indicators[skip_index] = (literal, lbsd)

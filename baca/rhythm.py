@@ -177,7 +177,7 @@ class Grace:
             if beam is True:
                 abjad.beam(grace_leaves)
             if slash is True:
-                literal = abjad.LilyPondLiteral(r"\slash")
+                literal = abjad.LilyPondLiteral(r"\slash", site="before")
                 abjad.attach(literal, grace_leaves[0])
             if slash is False and slur is False:
                 command = r"\grace"

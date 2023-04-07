@@ -47,7 +47,7 @@ def _attach_color_literal(
     if redraw:
         literal = abjad.LilyPondLiteral(string, site="absolute_after")
     else:
-        literal = abjad.LilyPondLiteral(string)
+        literal = abjad.LilyPondLiteral(string, site="before")
     if getattr(wrapper.unbundle_indicator(), "latent", False):
         if redraw:
             prefix = "redrawn"
@@ -68,7 +68,7 @@ def _attach_color_literal(
     status_tag = _get_tag(status, stem, prefix=prefix, suffix=suffix)
     if isinstance(wrapper.unbundle_indicator(), abjad.TimeSignature):
         string = rf"\baca-time-signature-color #'{color}"
-        literal = abjad.LilyPondLiteral(string)
+        literal = abjad.LilyPondLiteral(string, site="before")
     if cancelation is True:
         tag = _tags.function_name(_frame(), n=1)
         tag = tag.append(status_tag)
@@ -483,7 +483,7 @@ def treat_persistent_wrapper(manifests, wrapper, status):
     )
     if isinstance(wrapper.unbundle_indicator(), abjad.Clef):
         string = rf"\set {context.lilypond_type}.forceClef = ##t"
-        literal = abjad.LilyPondLiteral(string)
+        literal = abjad.LilyPondLiteral(string, site="before")
         wrapper_ = abjad.attach(
             literal,
             wrapper.component,

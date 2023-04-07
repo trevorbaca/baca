@@ -50,15 +50,15 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -67,11 +67,11 @@ Persistence.
                             \context Voice = "Music"
                             {
                                 \abjad-invisible-music-coloring
+                                \once \override Staff.Clef.color = #(x11-color 'blue)
+                                \set Staff.forceClef = ##t
                                 \once \override Accidental.stencil = ##f
                                 \once \override NoteColumn.ignore-collision = ##t
                                 \clef "treble"
-                                \once \override Staff.Clef.color = #(x11-color 'blue)
-                                \set Staff.forceClef = ##t
                                 c'1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             }
@@ -143,15 +143,15 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -160,11 +160,11 @@ Persistence.
                             \context Voice = "Music"
                             {
                                 \abjad-invisible-music-coloring
+                                \once \override Staff.Clef.color = #(x11-color 'blue)
+                                \set Staff.forceClef = ##t
                                 \once \override Accidental.stencil = ##f
                                 \once \override NoteColumn.ignore-collision = ##t
                                 \clef "alto"
-                                \once \override Staff.Clef.color = #(x11-color 'blue)
-                                \set Staff.forceClef = ##t
                                 c'1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             }
@@ -232,15 +232,15 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -249,11 +249,11 @@ Persistence.
                             \context Voice = "Music"
                             {
                                 \abjad-invisible-music-coloring
+                                \once \override Staff.Clef.color = #(x11-color 'green4)
+                                \set Staff.forceClef = ##t
                                 \once \override Accidental.stencil = ##f
                                 \once \override NoteColumn.ignore-collision = ##t
                                 \clef "treble"
-                                \once \override Staff.Clef.color = #(x11-color 'green4)
-                                \set Staff.forceClef = ##t
                                 c'1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'OliveDrab)
                             }
@@ -312,8 +312,8 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
@@ -322,8 +322,8 @@ Persistence.
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -332,11 +332,11 @@ Persistence.
                             \context Voice = "Music"
                             {
                                 \abjad-invisible-music-coloring
+                                \once \override Staff.Clef.color = #(x11-color 'blue)
+                                \set Staff.forceClef = ##t
                                 \once \override Accidental.stencil = ##f
                                 \once \override NoteColumn.ignore-collision = ##t
                                 \clef "treble"
-                                \once \override Staff.Clef.color = #(x11-color 'blue)
-                                \set Staff.forceClef = ##t
                                 c'1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             }
@@ -345,9 +345,9 @@ Persistence.
                                 R1 * 3/8
                             }
                         >>
-                        \clef "treble"
                         \once \override Staff.Clef.color = #(x11-color 'DeepPink1)
                         \set Staff.forceClef = ##t
+                        \clef "treble"
                         R1 * 3/8
                         \override Staff.Clef.color = #(x11-color 'DeepPink4)
                         R1 * 3/8
@@ -414,15 +414,15 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -431,11 +431,11 @@ Persistence.
                             \context Voice = "Music"
                             {
                                 \abjad-invisible-music-coloring
+                                \once \override Staff.Clef.color = #(x11-color 'DeepPink1)
+                                \set Staff.forceClef = ##t
                                 \once \override Accidental.stencil = ##f
                                 \once \override NoteColumn.ignore-collision = ##t
                                 \clef "treble"
-                                \once \override Staff.Clef.color = #(x11-color 'DeepPink1)
-                                \set Staff.forceClef = ##t
                                 c'1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepPink4)
                             }
@@ -945,15 +945,15 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -988,15 +988,15 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1028,15 +1028,15 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1095,15 +1095,15 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1138,15 +1138,15 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1177,15 +1177,15 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1245,15 +1245,15 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1288,15 +1288,15 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1328,15 +1328,15 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1393,8 +1393,8 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 4/8
                         s1 * 4/8
@@ -1403,8 +1403,8 @@ Persistence.
                         s1 * 4/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 4/8
                     }
                     \context Voice = "Music"
@@ -1441,8 +1441,8 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 4/8
                         s1 * 4/8
@@ -1451,8 +1451,8 @@ Persistence.
                         s1 * 4/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 4/8
                     }
                     \context Voice = "Music"
@@ -1485,8 +1485,8 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 4/8
                         s1 * 4/8
@@ -1495,8 +1495,8 @@ Persistence.
                         s1 * 4/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 4/8
                     }
                     \context Voice = "Music"
@@ -1564,15 +1564,15 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1607,15 +1607,15 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1646,15 +1646,15 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1723,21 +1723,21 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
-                        \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        \set Staff.shortInstrumentName = \markup I+II
                         c'4.
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
@@ -1769,21 +1769,21 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
-                        \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        \set Staff.shortInstrumentName = \markup I+II
                         c'4.
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
@@ -1811,21 +1811,21 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
-                        \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        \set Staff.shortInstrumentName = \markup I+II
                         c'4.
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
@@ -1881,21 +1881,21 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
-                        \set Staff.shortInstrumentName = \markup III+IV
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        \set Staff.shortInstrumentName = \markup III+IV
                         c'4.
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup III+IV
@@ -1927,21 +1927,21 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
-                        \set Staff.shortInstrumentName = \markup III+IV
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        \set Staff.shortInstrumentName = \markup III+IV
                         c'4.
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup III+IV
@@ -1969,21 +1969,21 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
-                        \set Staff.shortInstrumentName = \markup III+IV
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        \set Staff.shortInstrumentName = \markup III+IV
                         c'4.
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup III+IV
@@ -2040,21 +2040,21 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
-                        \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'green4)
+                        \set Staff.shortInstrumentName = \markup I+II
                         c'4.
                         \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                         \set Staff.shortInstrumentName = \markup I+II
@@ -2086,21 +2086,21 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
-                        \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'green4)
+                        \set Staff.shortInstrumentName = \markup I+II
                         c'4.
                         \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                         \set Staff.shortInstrumentName = \markup I+II
@@ -2128,21 +2128,21 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
-                        \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'green4)
+                        \set Staff.shortInstrumentName = \markup I+II
                         c'4.
                         \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                         \set Staff.shortInstrumentName = \markup I+II
@@ -2196,8 +2196,8 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 4/8
                         s1 * 4/8
@@ -2206,19 +2206,19 @@ Persistence.
                         s1 * 4/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 4/8
                     }
                     \context Voice = "Music"
                     {
-                        \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        \set Staff.shortInstrumentName = \markup I+II
                         c'2
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
-                        \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
+                        \set Staff.shortInstrumentName = \markup I+II
                         c'2
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName = \markup I+II
@@ -2250,8 +2250,8 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 4/8
                         s1 * 4/8
@@ -2260,19 +2260,19 @@ Persistence.
                         s1 * 4/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 4/8
                     }
                     \context Voice = "Music"
                     {
-                        \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        \set Staff.shortInstrumentName = \markup I+II
                         c'2
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
-                        \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
+                        \set Staff.shortInstrumentName = \markup I+II
                         c'2
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName = \markup I+II
@@ -2300,8 +2300,8 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 4/8
                         s1 * 4/8
@@ -2310,19 +2310,19 @@ Persistence.
                         s1 * 4/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 4/8
                     }
                     \context Voice = "Music"
                     {
-                        \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        \set Staff.shortInstrumentName = \markup I+II
                         c'2
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
-                        \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
+                        \set Staff.shortInstrumentName = \markup I+II
                         c'2
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName = \markup I+II
@@ -2385,21 +2385,21 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
-                        \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
+                        \set Staff.shortInstrumentName = \markup I+II
                         c'4.
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName = \markup I+II
@@ -2431,21 +2431,21 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
-                        \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
+                        \set Staff.shortInstrumentName = \markup I+II
                         c'4.
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName = \markup I+II
@@ -2473,21 +2473,21 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
-                        \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
+                        \set Staff.shortInstrumentName = \markup I+II
                         c'4.
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName = \markup I+II
@@ -2543,15 +2543,15 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 4/8
                         s1 * 4/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \break
+                        \noBreak
                         s1 * 4/8
                         \baca-new-spacing-section #1 #24
                         \noBreak
@@ -2559,8 +2559,8 @@ Persistence.
                     }
                     \context Voice = "Music"
                     {
-                        \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        \set Staff.shortInstrumentName = \markup I+II
                         c'2
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
@@ -2635,8 +2635,8 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
@@ -2647,8 +2647,8 @@ Persistence.
                         \noBreak
                         s1 * 3/8
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-transparent
+                        \noBreak
                         \time 1/4
                         s1 * 1/4
                         \bacaStopTextSpanMM
@@ -2728,9 +2728,9 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
+                        \baca-time-signature-color #'blue
                         \noBreak
                         \override TextSpanner.staff-padding = 4
-                        \baca-time-signature-color #'blue
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
@@ -2742,8 +2742,8 @@ Persistence.
                         s1 * 3/8
                         \revert TextSpanner.staff-padding
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-transparent
+                        \noBreak
                         \time 1/4
                         s1 * 1/4
                         \bacaStopTextSpanMM
@@ -2816,9 +2816,9 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
+                        \baca-time-signature-color #'blue
                         \noBreak
                         \override TextSpanner.staff-padding = 4
-                        \baca-time-signature-color #'blue
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
@@ -2890,8 +2890,8 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
@@ -2906,8 +2906,8 @@ Persistence.
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'DeepPink1
                         \bacaStartTextSpanMM
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-transparent
+                        \noBreak
                         \time 1/4
                         s1 * 1/4
                         \bacaStopTextSpanMM
@@ -2987,9 +2987,9 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
+                        \baca-time-signature-color #'blue
                         \noBreak
                         \override TextSpanner.staff-padding = 4
-                        \baca-time-signature-color #'blue
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
@@ -3001,8 +3001,8 @@ Persistence.
                         s1 * 3/8
                         \revert TextSpanner.staff-padding
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-transparent
+                        \noBreak
                         \time 1/4
                         s1 * 1/4
                         \bacaStopTextSpanMM
@@ -3076,12 +3076,12 @@ Persistence.
                     }
                     \context Voice = "Music"
                     {
+                        \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                         \override Staff.BarLine.bar-extent = #'(0 . 0)
                         \override Staff.BarLine.bar-extent = #'(0 . 0)
                         \stopStaff
                         \once \override Staff.StaffSymbol.line-count = 1
                         \startStaff
-                        \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                         b'4.
                         b'4.
                     }
@@ -3268,11 +3268,11 @@ Persistence.
                     }
                     \context Voice = "Music"
                     {
+                        \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                         \override Staff.BarLine.bar-extent = #'(-2 . 2)
                         \stopStaff
                         \once \override Staff.StaffSymbol.line-count = 5
                         \startStaff
-                        \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                         c'4.
                         c'4.
                     }
@@ -3329,11 +3329,11 @@ Persistence.
                     }
                     \context Voice = "Music"
                     {
+                        \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                         \override Staff.BarLine.bar-extent = #'(0 . 0)
                         \stopStaff
                         \once \override Staff.StaffSymbol.line-count = 1
                         \startStaff
-                        \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
                         c'4.
                         c'4.
                     }
@@ -3393,10 +3393,10 @@ Persistence.
                     }
                     \context Voice = "Music"
                     {
+                        \once \override Staff.StaffSymbol.color = #(x11-color 'green4)
                         \stopStaff
                         \once \override Staff.StaffSymbol.line-count = 5
                         \startStaff
-                        \once \override Staff.StaffSymbol.color = #(x11-color 'green4)
                         c'4.
                         c'4.
                     }
@@ -3445,17 +3445,17 @@ Persistence.
                     }
                     \context Voice = "Music"
                     {
-                        \override Staff.BarLine.bar-extent = #'(-2 . 2)
-                        \stopStaff
-                        \once \override Staff.StaffSymbol.line-count = 5
-                        \startStaff
                         \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
-                        c'4.
                         \override Staff.BarLine.bar-extent = #'(-2 . 2)
                         \stopStaff
                         \once \override Staff.StaffSymbol.line-count = 5
                         \startStaff
+                        c'4.
                         \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)
+                        \override Staff.BarLine.bar-extent = #'(-2 . 2)
+                        \stopStaff
+                        \once \override Staff.StaffSymbol.line-count = 5
+                        \startStaff
                         c'4.
                     }
                 >>
@@ -3511,11 +3511,11 @@ Persistence.
                     }
                     \context Voice = "Music"
                     {
+                        \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)
                         \override Staff.BarLine.bar-extent = #'(-2 . 2)
                         \stopStaff
                         \once \override Staff.StaffSymbol.line-count = 5
                         \startStaff
-                        \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)
                         c'4.
                         c'4.
                     }
@@ -3585,8 +3585,8 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
@@ -3597,8 +3597,8 @@ Persistence.
                         \noBreak
                         s1 * 3/8
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-transparent
+                        \noBreak
                         \time 1/4
                         s1 * 1/4
                         \bacaStopTextSpanMM
@@ -3669,9 +3669,9 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
+                        \baca-time-signature-color #'blue
                         \noBreak
                         \override TextSpanner.staff-padding = 4
-                        \baca-time-signature-color #'blue
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
@@ -3748,9 +3748,9 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
+                        \baca-time-signature-color #'blue
                         \noBreak
                         \override TextSpanner.staff-padding = 4
-                        \baca-time-signature-color #'blue
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
@@ -3816,8 +3816,8 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
-                        \noBreak
                         \baca-time-signature-color #'blue
+                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
@@ -3903,9 +3903,9 @@ Persistence.
                         \autoPageBreaksOff
                         \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
+                        \baca-time-signature-color #'blue
                         \noBreak
                         \override TextSpanner.staff-padding = 4
-                        \baca-time-signature-color #'blue
                         \pageBreak
                         \time 3/8
                         s1 * 3/8

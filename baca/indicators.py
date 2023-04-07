@@ -337,7 +337,7 @@ def cross_staff(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
-        indicator = abjad.LilyPondLiteral(r"\crossStaff")
+        indicator = abjad.LilyPondLiteral(r"\crossStaff", site="before")
         wrapper = abjad.attach(
             indicator,
             leaf,
@@ -483,7 +483,7 @@ def dynamic_down(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
-        indicator = abjad.LilyPondLiteral(r"\dynamicDown")
+        indicator = abjad.LilyPondLiteral(r"\dynamicDown", site="before")
         wrapper = abjad.attach(
             indicator,
             leaf,
@@ -498,7 +498,7 @@ def dynamic_up(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
-        indicator = abjad.LilyPondLiteral(r"\dynamicUp")
+        indicator = abjad.LilyPondLiteral(r"\dynamicUp", site="before")
         wrapper = abjad.attach(
             indicator,
             leaf,
@@ -624,7 +624,7 @@ def global_fermata(argument, description: str = "fermata") -> list[abjad.Wrapper
             wrapper=True,
         )
         wrappers.append(wrapper)
-        literal = abjad.LilyPondLiteral(r"\baca-fermata-measure")
+        literal = abjad.LilyPondLiteral(r"\baca-fermata-measure", site="before")
         abjad.attach(
             literal,
             leaf,
@@ -694,7 +694,7 @@ def invisible_music(argument) -> list[abjad.Wrapper]:
     for leaf in abjad.iterate.leaves(argument):
         tag = _tags.function_name(_frame(), n=1)
         tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
-        indicator = abjad.LilyPondLiteral(r"\abjad-invisible-music")
+        indicator = abjad.LilyPondLiteral(r"\abjad-invisible-music", site="before")
         wrapper = abjad.attach(
             indicator,
             leaf,
@@ -705,7 +705,9 @@ def invisible_music(argument) -> list[abjad.Wrapper]:
         wrappers.append(wrapper)
         tag = _tags.function_name(_frame(), n=2)
         tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
-        indicator = abjad.LilyPondLiteral(r"\abjad-invisible-music-coloring")
+        indicator = abjad.LilyPondLiteral(
+            r"\abjad-invisible-music-coloring", site="before"
+        )
         wrapper = abjad.attach(
             indicator,
             leaf,
@@ -899,7 +901,7 @@ def parenthesize(argument) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
     wrappers = []
     for leaf in abjad.select.leaves(argument):
-        indicator = abjad.LilyPondLiteral(r"\parenthesize")
+        indicator = abjad.LilyPondLiteral(r"\parenthesize", site="before")
         wrapper = abjad.attach(
             indicator,
             leaf,

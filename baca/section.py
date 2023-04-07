@@ -167,7 +167,7 @@ def _assert_nonoverlapping_rhythms(rhythms, voice):
 def _attach_nonfirst_empty_start_bar(global_skips):
     # empty start bar allows LilyPond to print bar numbers at start of nonfirst sections
     first_skip = _select.skip(global_skips, 0)
-    literal = abjad.LilyPondLiteral(r'\bar ""')
+    literal = abjad.LilyPondLiteral(r'\bar ""', site="before")
     tag = _tags.EMPTY_START_BAR
     tag = tag.append(_tags.ONLY_SECTION)
     abjad.attach(
@@ -1097,7 +1097,7 @@ def _magnify_staves(magnify_staves, score):
     for staff in abjad.iterate.components(score, abjad.Staff):
         first_leaf = abjad.get.leaf(staff, 0)
         assert first_leaf is not None
-        literal = abjad.LilyPondLiteral(string)
+        literal = abjad.LilyPondLiteral(string, site="before")
         abjad.attach(literal, first_leaf, tag=tag)
 
 
@@ -1832,7 +1832,8 @@ def append_anchor_note(argument, *, runtime=None):
                 r"\stopStaff",
                 r"\once \override Staff.StaffSymbol.transparent = ##t",
                 r"\startStaff",
-            ]
+            ],
+            site="before",
         ),
         note,
         tag=abjad.Tag("baca.append_anchor_note(4)"),
@@ -1840,7 +1841,9 @@ def append_anchor_note(argument, *, runtime=None):
     #
     abjad.attach(
         # TODO: use override object once they exist and can be tagged
-        abjad.LilyPondLiteral(r"\once \override Accidental.stencil = ##f"),
+        abjad.LilyPondLiteral(
+            r"\once \override Accidental.stencil = ##f", site="before"
+        ),
         note,
         tag=abjad.Tag("baca.append_anchor_note(5)"),
     )
@@ -1854,7 +1857,7 @@ def apply_breaks(score, breaks) -> None:
     global_skips = score["Skips"]
     skips = _select.skips(global_skips)
     measure_count = len(skips)
-    literal = abjad.LilyPondLiteral(r"\autoPageBreaksOff", "before")
+    literal = abjad.LilyPondLiteral(r"\autoPageBreaksOff", site="before")
     abjad.attach(
         literal,
         skips[0],
@@ -1862,7 +1865,7 @@ def apply_breaks(score, breaks) -> None:
     )
     for skip in skips[:measure_count]:
         if not abjad.get.has_indicator(skip, _layout.LBSD):
-            literal = abjad.LilyPondLiteral(r"\noBreak", "before")
+            literal = abjad.LilyPondLiteral(r"\noBreak", site="before")
             abjad.attach(
                 literal,
                 skip,
@@ -2905,7 +2908,9 @@ def style_anchor_skip(score):
         tag = _tags.function_name(_frame(), n=2)
         tag = tag.append(_tags.ANCHOR_SKIP)
         abjad.attach(
-            abjad.LilyPondLiteral(r"\baca-time-signature-transparent"), skip, tag=tag
+            abjad.LilyPondLiteral(r"\baca-time-signature-transparent", site="before"),
+            skip,
+            tag=tag,
         )
     tag = _tags.function_name(_frame(), n=3)
     tag = tag.append(_tags.ANCHOR_SKIP)
