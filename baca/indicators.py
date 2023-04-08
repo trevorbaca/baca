@@ -1105,26 +1105,17 @@ def stop_on_string(argument) -> list[abjad.Wrapper]:
 
 
 def stop_trill(argument) -> list[abjad.Wrapper]:
-    r"""
-    Attaches stop trill to closing-slot.
-
-    The closing format slot is important because LilyPond fails to compile when
-    ``\stopTrillSpan`` appears after ``\set instrumentName`` command (and
-    probably other ``\set`` command). Setting format slot to closing here
-    positions ``\stopTrillSpan`` after the leaf in question (which is required)
-    and also draws ``\stopTrillSpan`` closer to the leaf in question, prior to
-    ``\set instrumentName`` and other command positioned in the after slot.
-
-    Eventually it will probably be necessary to model ``\stopTrillSpan`` with a
-    dedicated format slot.
-    """
-    wrappers = literal(
-        argument,
-        r"\stopTrillSpan",
-        site="closing",
-    )
     tag = _tags.function_name(_frame())
-    _tags.wrappers(wrappers, tag)
+    wrappers = []
+    for leaf in abjad.iterate.leaves(argument):
+        indicator = abjad.StopTrillSpan()
+        wrapper = abjad.attach(
+            indicator,
+            leaf,
+            tag=tag,
+            wrapper=True,
+        )
+        wrappers.append(wrapper)
     return wrappers
 
 

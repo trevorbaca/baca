@@ -1644,10 +1644,10 @@ def _whitespace_leaves(score):
         abjad.attach(literal, leaf, tag=None)
     for container in abjad.iterate.components(score, abjad.Container):
         if hasattr(container, "_main_leaf"):
-            literal = abjad.LilyPondLiteral("", site="absolute_after")
+            literal = abjad.LilyPondLiteral("", site="after")
             abjad.attach(literal, container, tag=None)
         else:
-            literal = abjad.LilyPondLiteral("", site="absolute_before")
+            literal = abjad.LilyPondLiteral("", site="before")
             abjad.attach(literal, container, tag=None)
         literal = abjad.LilyPondLiteral("", site="closing")
         abjad.attach(literal, container, tag=None)
