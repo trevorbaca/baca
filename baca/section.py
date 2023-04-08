@@ -1864,7 +1864,9 @@ def apply_breaks(score, breaks) -> None:
         tag=_tags.BREAK.append(_tags.function_name(_frame(), n=1)),
     )
     for skip in skips[:measure_count]:
-        if not abjad.get.has_indicator(skip, _layout.LBSD):
+        if abjad.get.has_indicator(skip, _layout.LBSD):
+            raise Exception("ASDF")
+        else:
             literal = abjad.LilyPondLiteral(r"\noBreak", site="before")
             abjad.attach(
                 literal,
