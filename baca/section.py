@@ -4,7 +4,6 @@ Interpret.
 import copy
 import dataclasses
 import importlib
-import inspect
 import os
 import pathlib
 import pprint
@@ -1851,9 +1850,11 @@ def append_anchor_note(argument, *, runtime=None):
     voice.append(note)
 
 
-def apply_breaks(score, breaks) -> None:
+def apply_breaks(score: abjad.Score, breaks: _layout.BreakMeasureMap) -> None:
     if breaks is None:
         return
+    assert isinstance(score, abjad.Score), repr(score)
+    assert isinstance(breaks, _layout.BreakMeasureMap), repr(breaks)
     global_skips = score["Skips"]
     skips = _select.skips(global_skips)
     measure_count = len(skips)
@@ -1863,30 +1864,17 @@ def apply_breaks(score, breaks) -> None:
         skips[0],
         tag=_tags.BREAK.append(_tags.function_name(_frame(), n=1)),
     )
-    for skip in skips[:measure_count]:
-        if abjad.get.has_indicator(skip, _layout.LBSD):
-            raise Exception("ASDF")
-        else:
-            literal = abjad.LilyPondLiteral(r"\noBreak", site="before")
-            abjad.attach(
-                literal,
-                skip,
-                tag=_tags.BREAK.append(_tags.function_name(_frame(), n=2)),
-            )
-    tag = _tags.function_name(inspect.currentframe())
-    tag = tag.append(_tags.BREAK)
-    for skip_index, indicators in breaks.skip_index_to_indicators.items():
-        measure_number = skip_index + 1
-        if measure_count < measure_number:
-            message = f"score ends at measure {measure_count}"
-            message += f" (not {measure_number})."
-            raise Exception(message)
-        skip = global_skips[skip_index]
+    for skip_index in range(measure_count):
+        skip = skips[skip_index]
+        indicators = breaks.skip_index_to_indicators.get(
+            skip_index,
+            [abjad.LilyPondLiteral(r"\noBreak", site="before")],
+        )
         for indicator in indicators:
             abjad.attach(
                 indicator,
                 skip,
-                tag=tag,
+                tag=_tags.BREAK.append(_tags.function_name(_frame(), n=2)),
             )
 
 

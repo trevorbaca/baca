@@ -238,18 +238,21 @@ def page(number, *systems):
     return PageSpecifier(number=number, systems=systems_)
 
 
+# TODO: use dataclass
 space = collections.namedtuple(
     "space",
     ["measures", "duration"],
 )
 
 
+# TODO: use dataclass
 BreakMeasureMap = collections.namedtuple(
     "BreakMeasureMap",
     ["bol_measure_numbers", "page_count", "skip_index_to_indicators"],
 )
 
 
+# TODO: use dataclass
 system = collections.namedtuple(
     "system",
     ["measure", "y_offset", "distances"],

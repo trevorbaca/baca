@@ -51,14 +51,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -144,14 +142,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -233,14 +229,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -313,7 +307,6 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
@@ -323,7 +316,6 @@ Persistence.
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -415,14 +407,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -946,14 +936,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -989,14 +977,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1029,14 +1015,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1096,14 +1080,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1139,14 +1121,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1178,14 +1158,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1246,14 +1224,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1289,14 +1265,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1329,14 +1303,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1394,7 +1366,6 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 4/8
                         s1 * 4/8
@@ -1404,7 +1375,6 @@ Persistence.
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 4/8
                     }
                     \context Voice = "Music"
@@ -1442,7 +1412,6 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 4/8
                         s1 * 4/8
@@ -1452,7 +1421,6 @@ Persistence.
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 4/8
                     }
                     \context Voice = "Music"
@@ -1486,7 +1454,6 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 4/8
                         s1 * 4/8
@@ -1496,7 +1463,6 @@ Persistence.
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 4/8
                     }
                     \context Voice = "Music"
@@ -1565,14 +1531,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1608,14 +1572,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1647,14 +1609,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1724,14 +1684,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1770,14 +1728,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1812,14 +1768,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1882,14 +1836,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1928,14 +1880,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1970,14 +1920,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -2041,14 +1989,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -2087,14 +2033,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -2129,14 +2073,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -2197,7 +2139,6 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 4/8
                         s1 * 4/8
@@ -2207,7 +2148,6 @@ Persistence.
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 4/8
                     }
                     \context Voice = "Music"
@@ -2251,7 +2191,6 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 4/8
                         s1 * 4/8
@@ -2261,7 +2200,6 @@ Persistence.
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 4/8
                     }
                     \context Voice = "Music"
@@ -2301,7 +2239,6 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 4/8
                         s1 * 4/8
@@ -2311,7 +2248,6 @@ Persistence.
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 4/8
                     }
                     \context Voice = "Music"
@@ -2386,14 +2322,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -2432,14 +2366,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -2474,14 +2406,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -2544,14 +2474,12 @@ Persistence.
                         \baca-lbsd #0 #'(11)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 4/8
                         s1 * 4/8
                         \baca-lbsd #15 #'(11)
                         \baca-new-spacing-section #1 #24
                         \break
-                        \noBreak
                         s1 * 4/8
                         \baca-new-spacing-section #1 #24
                         \noBreak
@@ -2636,7 +2564,6 @@ Persistence.
                         \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
@@ -2729,7 +2656,6 @@ Persistence.
                         \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \override TextSpanner.staff-padding = 4
                         \pageBreak
                         \time 3/8
@@ -2817,7 +2743,6 @@ Persistence.
                         \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \override TextSpanner.staff-padding = 4
                         \pageBreak
                         \time 3/8
@@ -2891,7 +2816,6 @@ Persistence.
                         \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
@@ -2988,7 +2912,6 @@ Persistence.
                         \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \override TextSpanner.staff-padding = 4
                         \pageBreak
                         \time 3/8
@@ -3586,7 +3509,6 @@ Persistence.
                         \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
@@ -3670,7 +3592,6 @@ Persistence.
                         \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \override TextSpanner.staff-padding = 4
                         \pageBreak
                         \time 3/8
@@ -3749,7 +3670,6 @@ Persistence.
                         \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \override TextSpanner.staff-padding = 4
                         \pageBreak
                         \time 3/8
@@ -3817,7 +3737,6 @@ Persistence.
                         \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \pageBreak
                         \time 3/8
                         s1 * 3/8
@@ -3904,7 +3823,6 @@ Persistence.
                         \baca-lbsd #4 #'(8)
                         \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \noBreak
                         \override TextSpanner.staff-padding = 4
                         \pageBreak
                         \time 3/8
