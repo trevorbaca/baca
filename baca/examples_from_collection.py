@@ -2261,6 +2261,7 @@ Examples: ``baca.from_collection()``.
     >>> _ = baca.voice_one(abjad.select.leaf(score["Music.1"], 0))
     >>> _ = baca.voice_two(abjad.select.leaf(score["Music.2"], 0))
     >>> baca.section.extend_beams(score)
+    >>> rmakers.swap_skip_filled(score)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2304,8 +2305,6 @@ Examples: ``baca.from_collection()``.
                             - \staccato
                             s16
                         }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 1/1
                         {
                             s16
                             s16
