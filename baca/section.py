@@ -770,7 +770,9 @@ def _extend_beam(leaf):
         abjad.detach(abjad.BeamCount, leaf)
         left = leaf.written_duration.flag_count
         beam_count = abjad.BeamCount(left, 1)
-        abjad.attach(beam_count, leaf, "_extend_beam")
+        # TODO: fix below:
+        # abjad.attach(beam_count, leaf, "_extend_beam")
+        abjad.attach(beam_count, leaf, check_duplicate_indicator="_extend_beam")
     current_leaf = leaf
     while True:
         next_leaf = abjad.get.leaf(current_leaf, 1)
@@ -787,7 +789,11 @@ def _extend_beam(leaf):
                 abjad.detach(abjad.BeamCount, next_leaf)
                 right = next_leaf.written_duration.flag_count
                 beam_count = abjad.BeamCount(1, right)
-                abjad.attach(beam_count, next_leaf, "_extend_beam")
+                # TODO: fix below:
+                # abjad.attach(beam_count, next_leaf, "_extend_beam")
+                abjad.attach(
+                    beam_count, next_leaf, check_duplicate_indicator="_extend_beam"
+                )
             return
         current_leaf = next_leaf
 
