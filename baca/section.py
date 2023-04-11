@@ -770,9 +770,7 @@ def _extend_beam(leaf):
         abjad.detach(abjad.BeamCount, leaf)
         left = leaf.written_duration.flag_count
         beam_count = abjad.BeamCount(left, 1)
-        # TODO: fix below:
-        # abjad.attach(beam_count, leaf, "_extend_beam")
-        abjad.attach(beam_count, leaf, check_duplicate_indicator="_extend_beam")
+        abjad.attach(beam_count, leaf, check_duplicate_indicator=True)
     current_leaf = leaf
     while True:
         next_leaf = abjad.get.leaf(current_leaf, 1)
@@ -789,11 +787,7 @@ def _extend_beam(leaf):
                 abjad.detach(abjad.BeamCount, next_leaf)
                 right = next_leaf.written_duration.flag_count
                 beam_count = abjad.BeamCount(1, right)
-                # TODO: fix below:
-                # abjad.attach(beam_count, next_leaf, "_extend_beam")
-                abjad.attach(
-                    beam_count, next_leaf, check_duplicate_indicator="_extend_beam"
-                )
+                abjad.attach(beam_count, next_leaf, check_duplicate_indicator=True)
             return
         current_leaf = next_leaf
 
@@ -1533,7 +1527,7 @@ def _style_fermata_measures(
                 abjad.attach(
                     resume_staff_lines,
                     leaf,
-                    synthetic_offset=99,
+                    synthetic_offset=abjad.Offset(99),
                     tag=_tags.function_name(_frame(), n=5),
                 )
                 previous_line_count = 5
@@ -1543,7 +1537,7 @@ def _style_fermata_measures(
                 abjad.attach(
                     resume_bar_extent,
                     leaf,
-                    synthetic_offset=99,
+                    synthetic_offset=abjad.Offset(99),
                     tag=_tags.function_name(_frame(), n=6).append(
                         _tags.FERMATA_MEASURE_RESUME_BAR_EXTENT
                     ),
