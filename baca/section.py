@@ -202,9 +202,11 @@ def _attach_sounds_during(score):
 
 def _bracket_metric_modulation(metric_modulation, metronome_mark):
     if metronome_mark.decimal is not True:
-        # TODO: refactor _get_markup_arguments() to return dict
         arguments = metronome_mark._get_markup_arguments()
-        mm_length, mm_dots, mm_stem, mm_value = arguments
+        mm_length = arguments["duration_log"]
+        mm_dots = arguments["dot_count"]
+        mm_stem = arguments["stem_height"]
+        mm_value = arguments["base"]
         arguments = metric_modulation._get_markup_arguments()
         if metric_modulation._note_to_note():
             command = r"- \baca-bracketed-metric-modulation"
@@ -232,7 +234,12 @@ def _bracket_metric_modulation(metric_modulation, metronome_mark):
             raise Exception("implement tied note values in metric modulation.")
     else:
         arguments = metronome_mark._get_markup_arguments()
-        mm_length, mm_dots, mm_stem, mm_base, mm_n, mm_d = arguments
+        mm_length = arguments["duration_log"]
+        mm_dots = arguments["dot_count"]
+        mm_stem = arguments["stem_height"]
+        mm_base = arguments["base"]
+        mm_n = arguments["n"]
+        mm_d = arguments["d"]
         # TODO: refactor _get_markup_arguments() to return dict
         arguments = metric_modulation._get_markup_arguments()
         if metric_modulation._note_to_note():
@@ -2681,14 +2688,22 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
                 # mixed number
                 elif metronome_mark.decimal is True:
                     arguments = metronome_mark._get_markup_arguments()
-                    log, dots, stem, base, n, d = arguments
+                    log = arguments["duration_log"]
+                    dots = arguments["dot_count"]
+                    stem = arguments["stem_height"]
+                    base = arguments["base"]
+                    n = arguments["n"]
+                    d = arguments["d"]
                     stripped_left_text = (
                         r"- \baca-metronome-mark-spanner-left-text-mixed-number"
                     )
                     stripped_left_text += f' {log} {dots} {stem} "{base}" "{n}" "{d}"'
                 else:
                     arguments = metronome_mark._get_markup_arguments()
-                    log, dots, stem, value = arguments
+                    log = arguments["duration_log"]
+                    dots = arguments["dot_count"]
+                    stem = arguments["stem_height"]
+                    value = arguments["base"]
                     stripped_left_text = r"- \baca-metronome-mark-spanner-left-text"
                     stripped_left_text += f' {log} {dots} {stem} "{value}"'
             elif metronome_mark.custom_markup is not None:
@@ -2699,12 +2714,20 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
             # mixed number
             elif metronome_mark.decimal is True:
                 arguments = metronome_mark._get_markup_arguments()
-                log, dots, stem, base, n, d = arguments
+                log = arguments["duration_log"]
+                dots = arguments["dot_count"]
+                stem = arguments["stem_height"]
+                base = arguments["base"]
+                n = arguments["n"]
+                d = arguments["d"]
                 left_text = r"- \baca-metronome-mark-spanner-left-text-mixed-number"
                 left_text += f' {log} {dots} {stem} "{base}" "{n}" "{d}"'
             else:
                 arguments = metronome_mark._get_markup_arguments()
-                log, dots, stem, value = arguments
+                log = arguments["duration_log"]
+                dots = arguments["dot_count"]
+                stem = arguments["stem_height"]
+                value = arguments["base"]
                 left_text = r"- \baca-metronome-mark-spanner-left-text"
                 left_text += f' {log} {dots} {stem} "{value}"'
         elif accelerando is not None:
