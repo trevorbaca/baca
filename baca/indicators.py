@@ -989,6 +989,7 @@ def short_instrument_name(
     manifests: dict,
     *,
     context: str = "Staff",
+    deactivate: bool = False,
 ) -> list[abjad.Wrapper]:
     assert isinstance(key, str), repr(key)
     assert isinstance(manifests, dict), repr(manifests)
@@ -1001,6 +1002,7 @@ def short_instrument_name(
         wrappers_ = _attach_persistent_indicator(
             leaf,
             [short_instrument_name],
+            deactivate=deactivate,
             manifests=manifests,
             tag=tag,
         )

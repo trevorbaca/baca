@@ -2446,10 +2446,9 @@ Persistence.
         >>> music = baca.make_notes(time_signatures())
         >>> voice.extend(music)
         >>> _ = baca.short_instrument_name(voice[0], "I+II", manifests)
-        >>> wrappers = baca.short_instrument_name(voice[0], "III+IV", manifests)
-        >>> for wrapper in wrappers:
-        ...     wrapper.deactivate = True
-
+        >>> wrappers = baca.short_instrument_name(
+        ...     voice[0], "III+IV", manifests, deactivate=True
+        ... )
         >>> _ = baca.section.remove_redundant_time_signatures(score)
         >>> baca.section.treat_untreated_persistent_wrappers(score, manifests=manifests)
         >>> baca.docs.remove_deactivated_wrappers(score)
