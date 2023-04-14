@@ -5,9 +5,9 @@ Examples: rhythm.
 
     >>> def make_score(voice, time_signatures):
     ...     staff = abjad.Staff([voice], lilypond_type="RhythmicStaff")
+    ...     score = abjad.Score([staff], name="Score")
     ...     leaf = abjad.select.leaf(staff, 0)
     ...     abjad.attach(time_signatures[0], leaf)
-    ...     score = abjad.Score([staff], name="Score")
     ...     abjad.override(score).TupletBracket.bracket_visibility = True
     ...     abjad.override(score).TupletBracket.padding = 2
     ...     abjad.setting(score).autoBeaming = False

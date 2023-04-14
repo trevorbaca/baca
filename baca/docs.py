@@ -256,12 +256,12 @@ def make_empty_score(*counts, do_not_move_global_context=False):
 
 
 def make_single_staff_score(components):
+    staff = abjad.Staff(components, name="Staff")
+    score = abjad.Score([staff], name="Score")
     duration = abjad.get.duration(components)
     time_signature = abjad.TimeSignature(duration)
     leaf = abjad.select.leaf(components, 0)
     abjad.attach(time_signature, leaf)
-    staff = abjad.Staff(components, name="Staff")
-    score = abjad.Score([staff], name="Score")
     return score
 
 

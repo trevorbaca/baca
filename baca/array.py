@@ -819,7 +819,7 @@ class PitchArray:
         self._rows.remove(row)
         row._parent_array = None
 
-    def to_measures(self, cell_duration_denominator=8) -> list[abjad.Container]:
+    def to_measures(self, cell_duration_denominator=8) -> abjad.Score:
         r"""
         Changes pitch array  to measures.
 
@@ -840,36 +840,41 @@ class PitchArray:
             [  ] [d'] [bf bqf    ]
             [g'     ] [fs'   ] [ ]
 
-            >>> measures = array.to_measures()
-            >>> staff = abjad.Staff(measures)
-            >>> abjad.show(staff) # doctest: +SKIP
+            >>> score = array.to_measures()
+            >>> abjad.show(score) # doctest: +SKIP
 
             ..  docs::
 
-                >>> string = abjad.lilypond(staff)
+                >>> string = abjad.lilypond(score)
                 >>> print(string)
-                \new Staff
-                {
+                \context Score = "Score"
+                <<
+                    \context Staff = "Staff"
                     {
-                        \time 4/8
-                        r8
-                        d'8
-                        <bf bqf>4
+                        {
+                            \time 4/8
+                            r8
+                            d'8
+                            <bf bqf>4
+                        }
+                        {
+                            \time 4/8
+                            g'4
+                            fs'8
+                            r8
+                        }
                     }
-                    {
-                        \time 4/8
-                        g'4
-                        fs'8
-                        r8
-                    }
-                }
+                >>
 
         """
-        containers = []
+        staff, score = abjad.Staff(name="Staff"), abjad.Score(name="Score")
+        score.append(staff)
         for row in self.rows:
-            container = row.to_measure(cell_duration_denominator)
-            containers.append(container)
-        return containers
+            container, time_signature = row.to_measure(cell_duration_denominator)
+            staff.append(container)
+            leaf = abjad.select.leaf(container, 0)
+            abjad.attach(time_signature, leaf)
+        return score
 
 
 class PitchArrayCell:
@@ -2692,8 +2697,11 @@ class PitchArrayRow:
             [  ] [d'] [bf bqf    ]
             [g'     ] [fs'   ] [ ]
 
-            >>> measure = array.rows[0].to_measure()
+            >>> measure, time_signature = array.rows[0].to_measure()
             >>> staff = abjad.Staff([measure])
+            >>> score = abjad.Score([staff], name="Score")
+            >>> leaf = abjad.select.leaf(score, 0)
+            >>> abjad.attach(time_signature, leaf)
             >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
@@ -2727,9 +2735,8 @@ class PitchArrayRow:
             measure_duration = cell.width * basic_cell_duration
             measure_durations.append(measure_duration)
         leaves = abjad.makers.make_leaves(measure_pitches, measure_durations)
-        abjad.attach(time_signature, leaves[0])
         container = abjad.Container(leaves)
-        return container
+        return container, time_signature
 
     def withdraw(self):
         """
@@ -2813,7 +2820,8 @@ def pitch_arrays_to_score(pitch_arrays) -> abjad.Score:
         staves.append(staff)
     staff_group.extend(staves)
     for pitch_array in pitch_arrays:
-        measures = pitch_array.to_measures()
+        score_ = pitch_array.to_measures()
+        measures = abjad.mutate.eject_contents(score_["Staff"])
         for staff, measure in zip(staves, measures):
             staff.append(measure)
     return score

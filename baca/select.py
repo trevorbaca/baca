@@ -334,6 +334,7 @@ def cmgroups(
     ..  container:: example
 
         >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r d''")
+        >>> score = abjad.Score([staff])
         >>> abjad.setting(staff).autoBeaming = False
         >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
         >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
@@ -1992,6 +1993,7 @@ def mgroups(
     ..  container:: example
 
         >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r d''")
+        >>> score = abjad.Score([staff])
         >>> abjad.setting(staff).autoBeaming = False
         >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
         >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
@@ -2054,6 +2056,7 @@ def mleaves(
     ..  container:: example
 
         >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r")
+        >>> score = abjad.Score([staff])
         >>> abjad.setting(staff).autoBeaming = False
         >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
         >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
@@ -2110,6 +2113,7 @@ def mleaves(
         Selects leaves in last three measures:
 
         >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r")
+        >>> score = abjad.Score([staff])
         >>> abjad.setting(staff).autoBeaming = False
         >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
         >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
@@ -2473,6 +2477,7 @@ def omgroups(
     ..  container:: example
 
         >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r d''")
+        >>> score = abjad.Score([staff])
         >>> abjad.setting(staff).autoBeaming = False
         >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
         >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
@@ -3990,6 +3995,7 @@ def rmleaves(
     ..  container:: example
 
         >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r")
+        >>> score = abjad.Score([staff], name="Score")
         >>> abjad.setting(staff).autoBeaming = False
         >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
         >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
@@ -4255,6 +4261,7 @@ def skip(
     ..  container:: example
 
         >>> staff = abjad.Staff("c'8 s e' f' g' s b' s")
+        >>> score = abjad.Score([staff], name="Score")
         >>> abjad.setting(staff).autoBeaming = False
         >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
         >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
@@ -4309,6 +4316,7 @@ def skips(
     ..  container:: example
 
         >>> staff = abjad.Staff("c'8 s e' f' g' s b' s")
+        >>> score = abjad.Score([staff], name="Score")
         >>> abjad.setting(staff).autoBeaming = False
         >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
         >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])

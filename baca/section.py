@@ -1143,13 +1143,13 @@ def _make_global_skips(
             multiplier=time_signature.pair,
             tag=_tags.function_name(_frame(), n=1),
         )
+        global_skips.append(skip)
         abjad.attach(
             time_signature,
             skip,
             context="Score",
             tag=_tags.function_name(_frame(), n=2),
         )
-        global_skips.append(skip)
     if append_anchor_skip:
         tag = _tags.function_name(_frame(), n=3)
         tag = tag.append(_tags.ANCHOR_SKIP)
