@@ -317,9 +317,7 @@ def clparts(
     lists = abjad.select.partition_by_counts(
         leaves, counts=counts, cyclic=True, overhang=True
     )
-    # TODO: no longer needed?
-    lists_ = [list(_) for _ in lists]
-    return lists_
+    return lists
 
 
 # TODO: maybe remove in favor of cyclic=True keyword to baca.select.mgroups()?
@@ -510,9 +508,7 @@ def enchain(argument, counts: typing.Sequence[int]) -> list[list]:
     lists = abjad.select.partition_by_counts(
         argument, counts=counts, cyclic=True, enchain=True, overhang=True
     )
-    # TODO: no longer necessary?
-    lists_ = [list(_) for _ in lists]
-    return lists_
+    return lists
 
 
 def grace(
@@ -1188,9 +1184,7 @@ def lparts(
     """
     leaves = abjad.select.leaves(argument, exclude=exclude)
     lists = abjad.select.partition_by_counts(leaves, counts=counts)
-    # TODO: no longer necessary?
-    lists_ = [list(_) for _ in lists]
-    return lists_
+    return lists
 
 
 def lt(
