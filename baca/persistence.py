@@ -2511,8 +2511,8 @@ Persistence.
         ...     ),
         ... )
         >>> metronome_marks = {}
-        >>> metronome_marks["90"] = abjad.MetronomeMark((1, 4), 90)
-        >>> metronome_marks["112"] = abjad.MetronomeMark((1, 4), 112)
+        >>> metronome_marks["90"] = abjad.MetronomeMark(abjad.Duration(1, 4), 90)
+        >>> metronome_marks["112"] = abjad.MetronomeMark(abjad.Duration(1, 4), 112)
         >>> manifests = {"abjad.MetronomeMark": metronome_marks}
 
     ..  container:: example
@@ -3457,8 +3457,8 @@ Persistence.
         ...     ),
         ... )
         >>> metronome_marks = {}
-        >>> metronome_marks["90"] = abjad.MetronomeMark((1, 4), 90)
-        >>> metronome_marks["112"] = abjad.MetronomeMark((1, 4), 112)
+        >>> metronome_marks["90"] = abjad.MetronomeMark(abjad.Duration(1, 4), 90)
+        >>> metronome_marks["112"] = abjad.MetronomeMark(abjad.Duration(1, 4), 112)
 
     ..  container:: example
 

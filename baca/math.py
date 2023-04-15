@@ -618,7 +618,7 @@ def list_related_tempos(
     ..  container:: example
 
         >>> pairs = baca.math.list_related_tempos(
-        ...     abjad.MetronomeMark((1, 4), 58),
+        ...     abjad.MetronomeMark(abjad.Duration(1, 4), 58),
         ...     maximum_numerator=8,
         ...     maximum_denominator=8,
         ...  )
@@ -678,7 +678,7 @@ def list_related_tempos(
         Integer-valued tempos only:
 
         >>> pairs = baca.math.list_related_tempos(
-        ...     abjad.MetronomeMark((1, 4), 58),
+        ...     abjad.MetronomeMark(abjad.Duration(1, 4), 58),
         ...     maximum_numerator=16,
         ...     maximum_denominator=16,
         ...     integer_tempos_only=True,
