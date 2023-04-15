@@ -1,5 +1,16 @@
 #!/usr/bin/env python
+import os
 import setuptools
+
+
+def read_version():
+    version_file_path = os.path.join(os.path.dirname(__file__), "baca", "_version.py")
+    with open(version_file_path, "r") as file_pointer:
+        file_contents_string = file_pointer.read()
+    local_dict: dict = {}
+    exec(file_contents_string, None, local_dict)
+    __version__ = local_dict["__version__"]
+    return __version__
 
 
 if __name__ == "__main__":
@@ -20,6 +31,5 @@ if __name__ == "__main__":
         platforms="Any",
         python_requires=">=3.10",
         url="https://github.com/trevorbaca/baca",
-        # TODO: add baca/_version.py and retrieve dynamically
-        version="3.16",
+        version=read_version(),
     )
