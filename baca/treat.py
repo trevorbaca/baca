@@ -18,17 +18,20 @@ def _attach_color_literal(
     cancelation=False,
 ):
     assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
-    if getattr(wrapper.unbundle_indicator(), "hide", False) is True:
+    unbundled_indicator = wrapper.unbundle_indicator()
+    if getattr(unbundled_indicator, "hide", False) is True:
         return
-    if isinstance(wrapper.unbundle_indicator(), abjad.Instrument):
+    if isinstance(unbundled_indicator, abjad.Instrument):
         return
-    if not getattr(wrapper.unbundle_indicator(), "persistent", False):
+    if not getattr(unbundled_indicator, "persistent", False):
         return
-    if getattr(wrapper.unbundle_indicator(), "parameter", None) == "METRONOME_MARK":
+    if getattr(unbundled_indicator, "parameter", None) == "METRONOME_MARK":
         return
-    if isinstance(wrapper.unbundle_indicator(), _memento.PersistentOverride):
+    if isinstance(unbundled_indicator, _memento.PersistentOverride):
         return
-    if isinstance(wrapper.unbundle_indicator(), _classes.BarExtent):
+    if isinstance(unbundled_indicator, _classes.BarExtent):
+        return
+    if isinstance(unbundled_indicator, _classes.SpacingSection):
         return
     stem = _to_indicator_stem(wrapper.unbundle_indicator())
     grob = _indicator_to_grob(wrapper.unbundle_indicator())

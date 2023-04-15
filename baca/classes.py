@@ -492,10 +492,8 @@ class SpacingSection:
 
     pair: tuple[int, int]
 
-    # TODO: make public
-    _context: typing.ClassVar[str] = "Score"
-    # TODO: make public
-    _persistent: typing.ClassVar[bool] = True
+    context: typing.ClassVar[str] = "Score"
+    persistent: typing.ClassVar[bool] = True
 
     def __post_init__(self):
         assert isinstance(self.pair, tuple), repr(self.pair)
