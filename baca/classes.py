@@ -1,5 +1,5 @@
 """
-Indicators.
+Classes.
 """
 import dataclasses
 import typing
@@ -82,39 +82,11 @@ class Accelerando:
         if self.markup is not None:
             assert isinstance(self.markup, abjad.Markup), repr(self.markup)
 
-    # TODO: remove
-    def __str__(self) -> str:
-        r"""
-        Gets string representation of accelerando.
-
-        String representation of accelerando with default markup:
-
-        ..  container:: example
-
-            >>> print(str(baca.Accelerando()))
-            \markup \large \upright accel.
-
-        ..  container:: example
-
-            String representation of accelerando with custom markup:
-
-            >>> markup = abjad.Markup(r"\markup \bold \italic accelerando")
-            >>> accelerando = baca.Accelerando(markup=markup)
-            >>> print(str(accelerando))
-            \markup \bold \italic accelerando
-
-        """
-        return self._get_markup().string
-
-    @property
-    def _contents_repr_string(self):
-        return str(self)
-
     def _default_markup(self):
         return abjad.Markup(r"\markup \large \upright accel.")
 
     def _get_lilypond_format(self):
-        return str(self)
+        return self._get_markup().string
 
     def _get_contributions(self, *, component=None, wrapper=None):
         contributions = abjad.ContributionsBySite()
@@ -373,40 +345,12 @@ class Ritardando:
         if self.markup is not None:
             assert isinstance(self.markup, abjad.Markup), repr(self.markup)
 
-    # TODO: remove
-    def __str__(self) -> str:
-        r"""
-        Gets string representation of ritardando.
-
-        Default ritardando:
-
-        ..  container:: example
-
-            >>> print(str(baca.Ritardando()))
-            \markup \large \upright rit.
-
-        ..  container:: example
-
-            Custom ritardando:
-
-            >>> markup = abjad.Markup(r"\markup \bold \italic ritardando")
-            >>> ritardando = baca.Ritardando(markup=markup)
-            >>> print(str(ritardando))
-            \markup \bold \italic ritardando
-
-        """
-        return self._get_markup().string
-
-    @property
-    def _contents_repr_string(self):
-        return str(self)
-
     def _default_markup(self):
         contents = r"\large \upright rit."
         return abjad.Markup(rf"\markup {contents}")
 
     def _get_lilypond_format(self):
-        return str(self)
+        return self._get_markup().string
 
     def _get_contributions(self, *, component=None, wrapper=None):
         contributions = abjad.ContributionsBySite()
@@ -492,6 +436,7 @@ class StaffLines:
         return contributions
 
 
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class SpacingSection:
     r"""
     Spacing section.
@@ -516,78 +461,44 @@ class SpacingSection:
                 f'4
             }
 
+    ..  container:: example
+
+        >>> spacing_section_1 = baca.SpacingSection((2, 24))
+        >>> spacing_section_2 = baca.SpacingSection((2, 24))
+        >>> spacing_section_3 = baca.SpacingSection((3, 24))
+
+        >>> spacing_section_1 == spacing_section_1
+        True
+        >>> spacing_section_1 == spacing_section_2
+        True
+        >>> spacing_section_1 == spacing_section_3
+        False
+
+        >>> spacing_section_2 == spacing_section_1
+        True
+        >>> spacing_section_2 == spacing_section_2
+        True
+        >>> spacing_section_2 == spacing_section_3
+        False
+
+        >>> spacing_section_3 == spacing_section_1
+        False
+        >>> spacing_section_3 == spacing_section_2
+        False
+        >>> spacing_section_3 == spacing_section_3
+        True
+
     """
 
-    __slots__ = ("pair",)
+    pair: tuple[int, int]
 
-    _context = "Score"
-    _persistent = True
+    # TODO: make public
+    _context: typing.ClassVar[str] = "Score"
+    # TODO: make public
+    _persistent: typing.ClassVar[bool] = True
 
-    def __init__(self, pair=None):
-        if pair is not None:
-            assert isinstance(pair, tuple), repr(pair)
-        self.pair = pair
-
-    def __eq__(self, argument) -> bool:
-        """
-        Is true when ``argument`` is a spacing section with same pair as this spacing
-        section.
-
-        ..  container:: example
-
-            >>> spacing_section_1 = baca.SpacingSection((2, 24))
-            >>> spacing_section_2 = baca.SpacingSection((2, 24))
-            >>> spacing_section_3 = baca.SpacingSection((3, 24))
-
-            >>> spacing_section_1 == spacing_section_1
-            True
-            >>> spacing_section_1 == spacing_section_2
-            True
-            >>> spacing_section_1 == spacing_section_3
-            False
-
-            >>> spacing_section_2 == spacing_section_1
-            True
-            >>> spacing_section_2 == spacing_section_2
-            True
-            >>> spacing_section_2 == spacing_section_3
-            False
-
-            >>> spacing_section_3 == spacing_section_1
-            False
-            >>> spacing_section_3 == spacing_section_2
-            False
-            >>> spacing_section_3 == spacing_section_3
-            True
-
-        """
-        if isinstance(argument, type(self)):
-            return self.pair == argument.pair
-        return False
-
-    def __hash__(self):
-        """
-        Hashes spacing section.
-        """
-        return super().__hash__()
-
-    def __repr__(self) -> str:
-        """
-        Gets repr.
-        """
-        return f"{type(self).__name__}(pair={self.pair!r})"
-
-    def __str__(self) -> str:
-        """
-        Gets string representation of spacing section.
-
-        ..  container:: example
-
-            >>> str(baca.SpacingSection((2, 24)))
-            '2/24'
-
-        """
-        return f"{self.pair[0]}/{self.pair[1]}"
+    def __post_init__(self):
+        assert isinstance(self.pair, tuple), repr(self.pair)
 
     def _get_contributions(self, leaf=None):
         contributions = abjad.ContributionsBySite()
