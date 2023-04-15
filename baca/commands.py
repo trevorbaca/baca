@@ -233,11 +233,7 @@ def finger_pressure_transition(argument) -> None:
 
 def flat_glissando(
     argument,
-    pitch: str
-    | abjad.NamedPitch
-    | abjad.StaffPosition
-    | list[abjad.StaffPosition]
-    | None = None,
+    pitch: str | abjad.NamedPitch | abjad.StaffPosition | None = None,
     *tweaks,
     allow_hidden: bool = False,
     allow_repitch: bool = False,
@@ -250,7 +246,7 @@ def flat_glissando(
     right_broken_show_next: bool = False,
     stop_pitch: str | abjad.NamedPitch | abjad.StaffPosition | None = None,
 ) -> None:
-    prototype = (list, str, abjad.NamedPitch, abjad.StaffPosition)
+    prototype = (str, abjad.NamedPitch, abjad.StaffPosition)
     if pitch is not None:
         assert isinstance(pitch, prototype), repr(pitch)
     if stop_pitch is not None:
@@ -268,47 +264,45 @@ def flat_glissando(
         right_broken_show_next=right_broken_show_next,
     )
     untie(argument)
-    if pitch is not None and stop_pitch is None:
-        # TODO: remove list test from or-clause?
-        if isinstance(pitch, abjad.StaffPosition) or (
-            isinstance(pitch, list) and isinstance(pitch[0], abjad.StaffPosition)
-        ):
-            _pitchtools.staff_position(
-                argument,
-                pitch,
-                allow_hidden=allow_hidden,
-                allow_repitch=allow_repitch,
-                mock=mock,
-            )
+    if pitch is not None:
+        if stop_pitch is None:
+            if isinstance(pitch, abjad.StaffPosition):
+                _pitchtools.staff_position(
+                    argument,
+                    pitch,
+                    allow_hidden=allow_hidden,
+                    allow_repitch=allow_repitch,
+                    mock=mock,
+                )
+            else:
+                _pitchtools.pitch(
+                    argument,
+                    pitch,
+                    allow_hidden=allow_hidden,
+                    allow_repitch=allow_repitch,
+                    mock=mock,
+                )
         else:
-            _pitchtools.pitch(
-                argument,
-                pitch,
-                allow_hidden=allow_hidden,
-                allow_repitch=allow_repitch,
-                mock=mock,
-            )
-    elif pitch is not None and stop_pitch is not None:
-        if isinstance(pitch, abjad.StaffPosition):
-            assert isinstance(stop_pitch, abjad.StaffPosition)
-            raise Exception("port interpolate_staff_positions()")
-            _pitchtools.interpolate_staff_positions(
-                argument,
-                pitch,
-                stop_pitch,
-                allow_hidden=allow_hidden,
-                mock=mock,
-            )
-        else:
-            assert isinstance(pitch, str | abjad.NamedPitch)
-            assert isinstance(stop_pitch, str | abjad.NamedPitch)
-            _pitchtools.interpolate_pitches(
-                argument,
-                pitch,
-                stop_pitch,
-                allow_hidden=allow_hidden,
-                mock=mock,
-            )
+            if isinstance(pitch, abjad.StaffPosition):
+                assert isinstance(stop_pitch, abjad.StaffPosition)
+                raise Exception("port interpolate_staff_positions()")
+                _pitchtools.interpolate_staff_positions(
+                    argument,
+                    pitch,
+                    stop_pitch,
+                    allow_hidden=allow_hidden,
+                    mock=mock,
+                )
+            else:
+                assert isinstance(pitch, str | abjad.NamedPitch)
+                assert isinstance(stop_pitch, str | abjad.NamedPitch)
+                _pitchtools.interpolate_pitches(
+                    argument,
+                    pitch,
+                    stop_pitch,
+                    allow_hidden=allow_hidden,
+                    mock=mock,
+                )
 
 
 def force_accidental(argument, *, tag: abjad.Tag = abjad.Tag()) -> None:
