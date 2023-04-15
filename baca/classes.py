@@ -9,8 +9,7 @@ import abjad
 from .enums import enums as _enums
 
 
-# TODO: frozen=True
-@dataclasses.dataclass(slots=True, order=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Accelerando:
     r"""
     Accelerando.
@@ -273,8 +272,7 @@ class BarExtent:
         return False
 
 
-# TODO: frozen=True
-@dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Ritardando:
     r"""
     Ritardando.
