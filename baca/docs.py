@@ -259,7 +259,7 @@ def make_single_staff_score(components):
     staff = abjad.Staff(components, name="Staff")
     score = abjad.Score([staff], name="Score")
     duration = abjad.get.duration(components)
-    time_signature = abjad.TimeSignature(duration)
+    time_signature = abjad.TimeSignature(duration.pair)
     leaf = abjad.select.leaf(components, 0)
     abjad.attach(time_signature, leaf)
     return score

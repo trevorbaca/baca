@@ -2965,5 +2965,14 @@ def update_voice_name_to_parameter_to_state(
 
 
 def wrap(items):
-    time_signatures = [abjad.TimeSignature(_) for _ in items]
+    time_signatures = []
+    for item in items:
+        if isinstance(item, tuple):
+            time_signature = abjad.TimeSignature(item)
+        elif hasattr(item, "pair"):
+            pair = getattr(item, "pair")
+            time_signature = abjad.TimeSignature(pair)
+        else:
+            raise Exception(item)
+        time_signatures.append(time_signature)
     return TimeSignatureServer(time_signatures)
