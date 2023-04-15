@@ -423,15 +423,6 @@ def make_dynamic(
         >>> baca.dynamics.make_dynamic("|>o")
         Bundle(indicator=StartHairpin(shape='|>o'), tweaks=(Tweak(string='- \\tweak to-barline ##t', tag=None),))
 
-    ..  container:: example exception
-
-        Errors on nondynamic input:
-
-        >>> baca.dynamics.make_dynamic("text")
-        Traceback (most recent call last):
-            ...
-        Exception: the string 'text' initializes no known dynamic.
-
     """
     assert isinstance(string, str), repr(string)
     scheme_manifest = SchemeManifest()

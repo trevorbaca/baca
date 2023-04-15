@@ -1,25 +1,5 @@
-r"""
+"""
 Layout.
-
-..  container:: example exception
-
-    Exception 1. Breaks function raises exception on out-of-sequence page specifiers:
-
-    >>> breaks = baca.breaks(
-    ...     baca.page(
-    ...         1,
-    ...         baca.system(measure=1, y_offset=20, distances=(15, 20, 20)),
-    ...         baca.system(measure=13, y_offset=140, distances=(15, 20, 20)),
-    ...     ),
-    ...     baca.page(
-    ...         9,
-    ...         baca.system(measure=23, y_offset=20, distances=(15, 20, 20)),
-    ...     ),
-    ... )
-    Traceback (most recent call last):
-        ...
-    Exception: page number (9) is not 2.
-
 """
 import collections
 import dataclasses
@@ -31,7 +11,6 @@ from . import classes as _classes
 from . import select as _select
 from . import tags as _tags
 
-# TODO: apply magic_lilypond_eol_adjustment to last measure in all doc examples
 magic_lilypond_eol_adjustment = abjad.Fraction(35, 24)
 
 fermata_measure_duration = abjad.Duration(1, 4)

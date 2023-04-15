@@ -11,29 +11,25 @@ Persistence.
 
         Explicit clefs color blue and redraw dull blue:
 
-        >>> score = baca.docs.make_empty_score(1)
-        >>> breaks = baca.breaks(
-        ...     baca.page(
-        ...         1,
-        ...         baca.system(measure=1, y_offset=0, distances=(11,)),
-        ...         baca.system(measure=2, y_offset=15, distances=(11,)),
-        ...     ),
-        ... )
-        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-        >>> baca.SpacingSpecifier((1, 24))(score)
-        >>> baca.section.apply_breaks(score, breaks)
-        >>> voice = score["Music"]
-        >>> music = baca.make_mmrests(time_signatures(), head="Music")
-        >>> voice.extend(music)
-        >>> _ = baca.clef(abjad.select.leaf(voice, 0), "treble")
-        >>> _ = baca.section.remove_redundant_time_signatures(score)
-        >>> baca.section.treat_untreated_persistent_wrappers(score)
-        >>> baca.docs.remove_deactivated_wrappers(score)
-        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        >>> block = abjad.Block(name="layout")
-        >>> block.indent = 0
-        >>> lilypond_file.items.insert(0, block)
+        >>> def make_lilypond_file():
+        ...     score = baca.docs.make_empty_score(1)
+        ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
+        ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+        ...     voice = score["Music"]
+        ...     music = baca.make_mmrests(time_signatures(), head="Music")
+        ...     voice.extend(music)
+        ...     leaf = abjad.select.leaf(voice, 0)
+        ...     baca.clef(leaf, "treble")
+        ...     baca.literal(leaf, r"\break", site="after")
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(score)
+        ...     baca.docs.remove_deactivated_wrappers(score)
+        ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
+        ...     return lilypond_file
+
+        >>> lilypond_file = make_lilypond_file()
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -47,16 +43,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -71,6 +60,7 @@ Persistence.
                                 \once \override NoteColumn.ignore-collision = ##t
                                 \clef "treble"
                                 c'1 * 3/8
+                                \break
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             }
                             \context Voice = "Rests"

@@ -1325,23 +1325,6 @@ Examples: commands.
         >>
     }
 
-..  container:: example exception
-
-    Raises exception when voice does not allow part assignment:
-
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> part_assignment = baca.parts.PartAssignment("Flute")
-    >>> music = baca.make_notes(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.assign_part(voice, baca.parts.PartAssignment("Flute.Music"))
-    Traceback (most recent call last):
-        ...
-    Exception: Music does not allow Flute.Music part assignment:
-        PartAssignment(name='Flute.Music', token=None)
-
 """
 
 

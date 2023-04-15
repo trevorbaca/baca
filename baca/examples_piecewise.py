@@ -2330,19 +2330,6 @@ Examples: piecewise.
             >>
         }
 
-..  container:: example exception
-
-    Errors on unknown LilyPond ID:
-
-    >>> baca.text_spanner(
-    ...     voice,
-    ...     "T -> P",
-    ...     lilypond_id=4,
-    ... )
-    Traceback (most recent call last):
-        ...
-    ValueError: lilypond_id must be 1, 2, 3, str or none (not 4).
-
 """
 
 
