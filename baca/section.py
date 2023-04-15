@@ -2640,9 +2640,10 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
         ):
             continue
         if metronome_mark is not None:
-            # metronome_mark._hide = True
-            metronome_mark.hide = True
             wrapper = abjad.get.wrapper(skip, abjad.MetronomeMark)
+            metronome_mark = dataclasses.replace(metronome_mark, hide=True)
+            abjad.detach(abjad.MetronomeMark, skip)
+            wrapper = abjad.attach(metronome_mark, skip, tag=wrapper.tag, wrapper=True)
         if metric_modulation is not None:
             # TODO: public hide:
             # TODO: detach / reattach frozen object:
