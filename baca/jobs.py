@@ -335,12 +335,12 @@ def handle_fermata_bar_lines(path: pathlib.Path):
         metadata_source = path
     else:
         metadata_source = path.parent
-    bol_measure_numbers = _path.get_metadatum(metadata_source, "bol_measure_numbers")
+    bol_measure_numbers = _path.get_metadata(metadata_source).get("bol_measure_numbers")
     deactivate_function: typing.Callable | None = None
     if bol_measure_numbers:
         eol_measure_numbers = [_ - 1 for _ in bol_measure_numbers[1:]]
-        final_measure_number = _path.get_metadatum(
-            metadata_source, "final_measure_number"
+        final_measure_number = _path.get_metadata(metadata_source).get(
+            "final_measure_number"
         )
         if final_measure_number is not None:
             eol_measure_numbers.append(final_measure_number)
@@ -375,12 +375,12 @@ def handle_mol_tags(path: pathlib.Path):
         metadata_source = path
     else:
         metadata_source = path.parent
-    bol_measure_numbers = _path.get_metadatum(metadata_source, "bol_measure_numbers")
+    bol_measure_numbers = _path.get_metadata(metadata_source).get("bol_measure_numbers")
     deactivate_function: typing.Callable | None = None
     if bol_measure_numbers:
         nonmol_measure_numbers = bol_measure_numbers[:]
-        final_measure_number = _path.get_metadatum(
-            metadata_source, "final_measure_number"
+        final_measure_number = _path.get_metadata(metadata_source).get(
+            "final_measure_number"
         )
         if final_measure_number is not None:
             nonmol_measure_numbers.append(final_measure_number + 1)
@@ -418,7 +418,7 @@ def handle_shifted_clefs(path: pathlib.Path):
     else:
         metadata_source = path.parent
     string = "bol_measure_numbers"
-    bol_measure_numbers = _path.get_metadatum(metadata_source, string)
+    bol_measure_numbers = _path.get_metadata(metadata_source).get(string)
     deactivate_function: typing.Callable | None = None
     if bol_measure_numbers:
         bol_measure_numbers = [abjad.Tag(f"MEASURE_{_}") for _ in bol_measure_numbers]

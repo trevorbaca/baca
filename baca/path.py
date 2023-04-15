@@ -307,14 +307,16 @@ def get_measure_profile_metadata(path: pathlib.Path) -> tuple[int, int, list]:
     assert isinstance(path, pathlib.Path), repr(path)
     if path.parent.parent.name == "sections":
         string = "first_measure_number"
-        first_measure_number = get_metadatum(path.parent, string)
-        time_signatures = get_metadatum(path.parent, "time_signatures")
+        first_measure_number = get_metadata(path.parent).get(string)
+        assert isinstance(first_measure_number, int)
+        time_signatures = get_metadata(path.parent).get("time_signatures")
+        assert isinstance(time_signatures, list)
         if bool(time_signatures):
             measure_count = len(time_signatures)
         else:
             measure_count = 0
         string = "fermata_measure_numbers"
-        fermata_measure_numbers = get_metadatum(path.parent, string)
+        fermata_measure_numbers = get_metadata(path.parent).get(string, [])
     else:
         first_measure_number = 1
         measure_count = 0
@@ -325,14 +327,15 @@ def get_measure_profile_metadata(path: pathlib.Path) -> tuple[int, int, list]:
         for section_directory in section_directories:
             if not section_directory.is_dir():
                 continue
-            time_signatures = get_metadatum(section_directory, "time_signatures")
+            time_signatures = get_metadata(section_directory).get("time_signatures")
+            assert isinstance(time_signatures, list)
             measure_count += len(time_signatures)
-            fermata_measure_numbers_ = get_metadatum(
-                section_directory,
+            fermata_measure_numbers_ = get_metadata(section_directory).get(
                 "fermata_measure_numbers",
                 [],
             )
             fermata_measure_numbers.extend(fermata_measure_numbers_)
+    assert isinstance(fermata_measure_numbers, list), repr(fermata_measure_numbers)
     return (first_measure_number, measure_count, fermata_measure_numbers)
 
 
@@ -350,18 +353,6 @@ def get_metadata(directory: pathlib.Path) -> types.MappingProxyType:
         dictionary = eval(file_contents_string, namespace)
     metadata = types.MappingProxyType(dictionary)
     return metadata
-
-
-# TODO: remove in favor of metadata.get()
-def get_metadatum(
-    path: pathlib.Path,
-    metadatum_name: str,
-    default=None,
-):
-    assert isinstance(path, pathlib.Path), repr(path)
-    metadata = get_metadata(path)
-    metadatum = metadata.get(metadatum_name, default)
-    return metadatum
 
 
 def previous_metadata(path: pathlib.Path) -> types.MappingProxyType:

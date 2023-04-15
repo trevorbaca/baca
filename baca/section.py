@@ -2166,21 +2166,18 @@ def make_layout_ly(
         "fermata_measure_numbers": fermata_measure_numbers,
         "measure_count": measure_count,
     }
-    has_anchor_skip = _path.get_metadatum(
-        layout_directory,
-        "has_anchor_skip",
-    )
+    has_anchor_skip = _path.get_metadata(layout_directory).get("has_anchor_skip")
     document_name = abjad.string.to_shout_case(layout_directory.name)
     if time_signatures is not None:
         first_measure_number = 1
     elif layout_directory.parent.name == "sections":
         string = "first_measure_number"
-        first_measure_number = _path.get_metadatum(layout_directory, string, default=1)
+        first_measure_number = _path.get_metadata(layout_directory).get(string, 1)
         if not bool(first_measure_number):
             _build.print_file_handling("Can not find first measure number ...")
             first_measure_number = False
         assert isinstance(first_measure_number, int)
-        time_signatures = _path.get_metadatum(layout_directory, "time_signatures")
+        time_signatures = _path.get_metadata(layout_directory).get("time_signatures")
     else:
         first_measure_number = 1
         time_signatures = []
@@ -2189,8 +2186,7 @@ def make_layout_ly(
         for section_directory in sorted(sections_directory.glob("*")):
             if not section_directory.is_dir():
                 continue
-            time_signatures_ = _path.get_metadatum(
-                section_directory,
+            time_signatures_ = _path.get_metadata(section_directory).get(
                 "time_signatures",
             )
             time_signatures.extend(time_signatures_)
@@ -2295,8 +2291,7 @@ def make_layout_ly(
         _build.print_file_handling(message)
         if layout_directory.name.endswith("-parts"):
             if document_name is not None:
-                part_dictionary = _path.get_metadatum(
-                    layout_directory,
+                part_dictionary = _path.get_metadata(layout_directory).get(
                     document_name,
                     {},
                 )
