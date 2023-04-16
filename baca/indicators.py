@@ -1,82 +1,5 @@
-r"""
+"""
 Indicators.
-
-..  container:: example
-
-    **COLOR FINGERINGS.**
-
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> music = baca.make_notes(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitch(voice, "E4")
-    >>> _ = baca.color_fingerings(voice, numbers=[0, 1, 2, 1])
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-    ..  docs::
-
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        {
-            \context Staff = "Staff"
-            <<
-                \context Voice = "Skips"
-                {
-                    \time 4/8
-                    s1 * 4/8
-                    \time 3/8
-                    s1 * 3/8
-                    \time 4/8
-                    s1 * 4/8
-                    \time 3/8
-                    s1 * 3/8
-                }
-                \context Voice = "Music"
-                {
-                    e'2
-                    e'4.
-                    ^ \markup { \override #'(circle-padding . 0.25) \circle \finger 1 }
-                    e'2
-                    ^ \markup { \override #'(circle-padding . 0.25) \circle \finger 2 }
-                    e'4.
-                    ^ \markup { \override #'(circle-padding . 0.25) \circle \finger 1 }
-                }
-            >>
-        }
-
-..  container:: example
-
-    **STOP-ON-STRING.**
-
-    >>> container = abjad.Container("c'4 d' e'")
-    >>> _ = baca.stop_on_string(container[0])
-    >>> lilypond_file = abjad.illustrators.components([container], includes=["baca.ily"])
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        <<
-            \context Staff = "Staff"
-            {
-                {
-                    \time 3/4
-                    c'4
-                    - \baca-stop-on-string
-                    d'4
-                    e'4
-                }
-            }
-        >>
-
 """
 import dataclasses
 from inspect import currentframe as _frame
@@ -1231,53 +1154,13 @@ def very_long_fermata(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def voice_four(argument) -> list[abjad.Wrapper]:
+def voice_number(argument, n: int | None = None) -> list[abjad.Wrapper]:
     tag = _tags.function_name(_frame())
+    if n is not None:
+        assert isinstance(n, int), repr(n)
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
-        command = abjad.VoiceNumber(4)
-        wrappers_ = _attach_persistent_indicator(
-            leaf,
-            [command],
-            tag=tag,
-        )
-        wrappers.extend(wrappers_)
-    return wrappers
-
-
-def voice_one(argument) -> list[abjad.Wrapper]:
-    tag = _tags.function_name(_frame())
-    wrappers = []
-    for leaf in abjad.iterate.leaves(argument):
-        command = abjad.VoiceNumber(1)
-        wrappers_ = _attach_persistent_indicator(
-            leaf,
-            [command],
-            tag=tag,
-        )
-        wrappers.extend(wrappers_)
-    return wrappers
-
-
-def voice_three(argument) -> list[abjad.Wrapper]:
-    tag = _tags.function_name(_frame())
-    wrappers = []
-    for leaf in abjad.iterate.leaves(argument):
-        command = abjad.VoiceNumber(3)
-        wrappers_ = _attach_persistent_indicator(
-            leaf,
-            [command],
-            tag=tag,
-        )
-        wrappers.extend(wrappers_)
-    return wrappers
-
-
-def voice_two(argument) -> list[abjad.Wrapper]:
-    tag = _tags.function_name(_frame())
-    wrappers = []
-    for leaf in abjad.iterate.leaves(argument):
-        command = abjad.VoiceNumber(2)
+        command = abjad.VoiceNumber(n)
         wrappers_ = _attach_persistent_indicator(
             leaf,
             [command],
