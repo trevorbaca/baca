@@ -2640,9 +2640,10 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
             abjad.detach(abjad.MetronomeMark, skip)
             wrapper = abjad.attach(metronome_mark, skip, tag=wrapper.tag, wrapper=True)
         if metric_modulation is not None:
-            # TODO: public hide:
-            # TODO: detach / reattach frozen object:
-            metric_modulation._hide = True
+            wrapper_ = abjad.get.wrapper(skip, abjad.MetricModulation)
+            metric_modulation = dataclasses.replace(metric_modulation, hide=True)
+            abjad.detach(abjad.MetricModulation, skip)
+            abjad.attach(metric_modulation, skip, tag=wrapper_.tag)
         if accelerando is not None:
             wrapper = abjad.get.wrapper(skip, _classes.Accelerando)
             hidden_accelerando = dataclasses.replace(accelerando, hide=True)
