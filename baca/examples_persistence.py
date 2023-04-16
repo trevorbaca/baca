@@ -113,9 +113,8 @@ Persistence.
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -203,9 +202,8 @@ Persistence.
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -284,9 +282,8 @@ Persistence.
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -387,9 +384,8 @@ Persistence.
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -463,9 +459,8 @@ Persistence.
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -525,9 +520,8 @@ Persistence.
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -588,9 +582,8 @@ Persistence.
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -642,9 +635,8 @@ Persistence.
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -706,9 +698,8 @@ Persistence.
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -758,9 +749,8 @@ Persistence.
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -822,9 +812,8 @@ Persistence.
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -876,9 +865,8 @@ Persistence.
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -954,9 +942,8 @@ Persistence.
         ...     )
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -1112,9 +1099,8 @@ Persistence.
         ...     )
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -1270,9 +1256,8 @@ Persistence.
         ...     )
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -1426,9 +1411,8 @@ Persistence.
         ...     )
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -1605,9 +1589,8 @@ Persistence.
         ...     )
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -1772,9 +1755,8 @@ Persistence.
         ...     )
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -1938,9 +1920,8 @@ Persistence.
         ...     )
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -2105,9 +2086,8 @@ Persistence.
         ...     )
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -2269,9 +2249,8 @@ Persistence.
         ...     )
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -2466,9 +2445,8 @@ Persistence.
         ...     )
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -2631,9 +2609,8 @@ Persistence.
         ...     )
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -2727,9 +2704,8 @@ Persistence.
         ...     baca.section.style_anchor_skip(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -2825,9 +2801,8 @@ Persistence.
         ...     baca.section.style_anchor_skip(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -2919,9 +2894,8 @@ Persistence.
         ...     baca.section.style_anchor_skip(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -2998,9 +2972,8 @@ Persistence.
         ...     baca.section.style_anchor_skip(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -3101,9 +3074,8 @@ Persistence.
         ...     baca.section.style_anchor_skip(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -3187,9 +3159,8 @@ Persistence.
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -3262,9 +3233,8 @@ Persistence.
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -3335,9 +3305,8 @@ Persistence.
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -3391,9 +3360,8 @@ Persistence.
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -3456,9 +3424,8 @@ Persistence.
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -3524,9 +3491,8 @@ Persistence.
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -3580,9 +3546,8 @@ Persistence.
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -3650,9 +3615,8 @@ Persistence.
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -3736,9 +3700,8 @@ Persistence.
         ...     baca.section.style_anchor_skip(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -3823,9 +3786,8 @@ Persistence.
         ...     baca.section.style_anchor_skip(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -3906,9 +3868,8 @@ Persistence.
         ...     baca.section.style_anchor_skip(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -3977,9 +3938,8 @@ Persistence.
         ...     baca.section.style_anchor_skip(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
@@ -4068,9 +4028,8 @@ Persistence.
         ...     baca.section.style_anchor_skip(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        ...     block = abjad.Block(name="layout")
-        ...     block.indent = 0
-        ...     lilypond_file.items.insert(0, block)
+        ...     string = r"\layout { indent = 0 ragged-right = ##t }"
+        ...     lilypond_file.items.insert(1, string)
         ...     return lilypond_file
 
         >>> lilypond_file = make_lilypond_file()
