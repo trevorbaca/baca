@@ -556,7 +556,6 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
@@ -584,11 +583,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -609,7 +606,6 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
@@ -647,11 +643,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -670,7 +664,6 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
@@ -698,11 +691,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -723,7 +714,6 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
@@ -761,11 +751,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -786,7 +774,6 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
@@ -814,11 +801,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -845,13 +830,6 @@ Persistence.
         >>> instruments["Flute"] = abjad.Flute()
         >>> instruments["Piccolo"] = abjad.Piccolo()
         >>> manifests = {"abjad.Instrument": instruments}
-        >>> breaks = baca.breaks(
-        ...     baca.page(
-        ...         1,
-        ...         baca.system(measure=1, y_offset=0, distances=(11,)),
-        ...         baca.system(measure=2, y_offset=15, distances=(11,)),
-        ...     ),
-        ... )
 
     ..  container:: example
 
@@ -861,11 +839,10 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
-        ...     baca.section.apply_breaks(score, breaks)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
+        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
         ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(
@@ -891,22 +868,16 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
                         c'4.
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
+                        \break
                         c'4.
                     }
                 >>
@@ -936,22 +907,16 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
                         c'4.
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
+                        \break
                         c'4.
                     }
                 >>
@@ -978,22 +943,16 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
                         c'4.
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
+                        \break
                         c'4.
                     }
                 >>
@@ -1005,11 +964,10 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
-        ...     baca.section.apply_breaks(score, breaks)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
+        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     previous_persistent_indicators = {}
         ...     previous_persistent_indicators["Staff"] = [
         ...         baca.Memento(
@@ -1048,22 +1006,16 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
                         c'4.
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
+                        \break
                         c'4.
                     }
                 >>
@@ -1093,22 +1045,16 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
                         c'4.
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
+                        \break
                         c'4.
                     }
                 >>
@@ -1134,22 +1080,16 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
                         c'4.
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
+                        \break
                         c'4.
                     }
                 >>
@@ -1163,11 +1103,10 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
-        ...     baca.section.apply_breaks(score, breaks)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
+        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     previous_persistent_indicators = {}
         ...     previous_persistent_indicators["Staff"] = [
         ...         baca.Memento(
@@ -1205,22 +1144,16 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
                         c'4.
                         ^ \baca-reapplied-instrument-markup "(“Flute”)"
+                        \break
                         c'4.
                     }
                 >>
@@ -1250,22 +1183,16 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
                         c'4.
                         ^ \baca-reapplied-instrument-markup "(“Flute”)"
+                        \break
                         c'4.
                     }
                 >>
@@ -1292,22 +1219,16 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
                         c'4.
                         ^ \baca-reapplied-instrument-markup "(“Flute”)"
+                        \break
                         c'4.
                     }
                 >>
@@ -1319,20 +1240,12 @@ Persistence.
 
         >>> def make_lilypond_file():
         ...     score = baca.docs.make_empty_score(1)
-        ...     breaks = baca.breaks(
-        ...         baca.page(
-        ...             1,
-        ...             baca.system(measure=1, y_offset=0, distances=(11,)),
-        ...             baca.system(measure=3, y_offset=15, distances=(11,)),
-        ...         ),
-        ...     )
         ...     time_signatures = baca.section.wrap([(4, 8), (4, 8), (4, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
-        ...     baca.section.apply_breaks(score, breaks)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
+        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     manifests = {"abjad.Instrument": instruments}
         ...     baca.instrument(voice[0], "Flute", manifests)
         ...     baca.instrument(voice[1], "Flute", manifests)
@@ -1360,25 +1273,17 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 4/8
                         s1 * 4/8
-                        \baca-new-spacing-section #1 #24
-                        \noBreak
                         s1 * 4/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 4/8
                     }
                     \context Voice = "Music"
                     {
                         c'2
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
+                        \break
                         c'2
                         ^ \baca-redundant-instrument-markup "(“Flute”)"
                         c'2
@@ -1410,25 +1315,17 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 4/8
                         s1 * 4/8
-                        \baca-new-spacing-section #1 #24
-                        \noBreak
                         s1 * 4/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 4/8
                     }
                     \context Voice = "Music"
                     {
                         c'2
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
+                        \break
                         c'2
                         ^ \baca-redundant-instrument-markup "(“Flute”)"
                         c'2
@@ -1456,25 +1353,17 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 4/8
                         s1 * 4/8
-                        \baca-new-spacing-section #1 #24
-                        \noBreak
                         s1 * 4/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 4/8
                     }
                     \context Voice = "Music"
                     {
                         c'2
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
+                        \break
                         c'2
                         ^ \baca-redundant-instrument-markup "(“Flute”)"
                         c'2
@@ -1486,20 +1375,12 @@ Persistence.
 
         >>> def make_lilypond_file():
         ...     score = baca.docs.make_empty_score(1)
-        ...     breaks = baca.breaks(
-        ...         baca.page(
-        ...             1,
-        ...             baca.system(measure=1, y_offset=0, distances=(11,)),
-        ...             baca.system(measure=2, y_offset=15, distances=(11,)),
-        ...         ),
-        ...     )
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
-        ...     baca.section.apply_breaks(score, breaks)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
+        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     previous_persistent_indicators = {}
         ...     previous_persistent_indicators["Staff"] = [
         ...         baca.Memento(
@@ -1538,22 +1419,16 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
                         c'4.
                         ^ \baca-redundant-instrument-markup "(“Flute”)"
+                        \break
                         c'4.
                     }
                 >>
@@ -1583,22 +1458,16 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
                         c'4.
                         ^ \baca-redundant-instrument-markup "(“Flute”)"
+                        \break
                         c'4.
                     }
                 >>
@@ -1624,22 +1493,16 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
                         c'4.
                         ^ \baca-redundant-instrument-markup "(“Flute”)"
+                        \break
                         c'4.
                     }
                 >>
@@ -1658,13 +1521,6 @@ Persistence.
         >>> short_instrument_names["III+IV"] = abjad.ShortInstrumentName(
         ...     r"\markup III+IV")
         >>> manifests = {"abjad.ShortInstrumentName": short_instrument_names}
-        >>> breaks = baca.breaks(
-        ...     baca.page(
-        ...         1,
-        ...         baca.system(measure=1, y_offset=0, distances=(11,)),
-        ...         baca.system(measure=2, y_offset=15, distances=(11,)),
-        ...     ),
-        ... )
 
     ..  container:: example
 
@@ -1674,11 +1530,10 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
-        ...     baca.section.apply_breaks(score, breaks)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
+        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     baca.short_instrument_name(voice[0], "I+II", manifests)
         ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(
@@ -1704,16 +1559,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1721,6 +1569,7 @@ Persistence.
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         \set Staff.shortInstrumentName = \markup I+II
                         c'4.
+                        \break
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
                         c'4.
@@ -1752,16 +1601,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1769,6 +1611,7 @@ Persistence.
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         \set Staff.shortInstrumentName = \markup I+II
                         c'4.
+                        \break
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
                         c'4.
@@ -1796,16 +1639,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1813,6 +1649,7 @@ Persistence.
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         \set Staff.shortInstrumentName = \markup I+II
                         c'4.
+                        \break
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
                         c'4.
@@ -1826,11 +1663,10 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
-        ...     baca.section.apply_breaks(score, breaks)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
+        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     previous_persistent_indicators = {}
         ...     previous_persistent_indicators["Staff"] = [
         ...         baca.Memento(
@@ -1869,16 +1705,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1886,6 +1715,7 @@ Persistence.
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         \set Staff.shortInstrumentName = \markup III+IV
                         c'4.
+                        \break
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup III+IV
                         c'4.
@@ -1917,16 +1747,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1934,6 +1757,7 @@ Persistence.
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         \set Staff.shortInstrumentName = \markup III+IV
                         c'4.
+                        \break
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup III+IV
                         c'4.
@@ -1961,16 +1785,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -1978,6 +1795,7 @@ Persistence.
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         \set Staff.shortInstrumentName = \markup III+IV
                         c'4.
+                        \break
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup III+IV
                         c'4.
@@ -1993,11 +1811,10 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
-        ...     baca.section.apply_breaks(score, breaks)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
+        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     previous_persistent_indicators = {}
         ...     previous_persistent_indicators["Staff"] = [
         ...         baca.Memento(
@@ -2035,16 +1852,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -2052,6 +1862,7 @@ Persistence.
                         \once \override Staff.InstrumentName.color = #(x11-color 'green4)
                         \set Staff.shortInstrumentName = \markup I+II
                         c'4.
+                        \break
                         \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                         \set Staff.shortInstrumentName = \markup I+II
                         c'4.
@@ -2083,16 +1894,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -2100,6 +1904,7 @@ Persistence.
                         \once \override Staff.InstrumentName.color = #(x11-color 'green4)
                         \set Staff.shortInstrumentName = \markup I+II
                         c'4.
+                        \break
                         \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                         \set Staff.shortInstrumentName = \markup I+II
                         c'4.
@@ -2127,16 +1932,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -2144,6 +1942,7 @@ Persistence.
                         \once \override Staff.InstrumentName.color = #(x11-color 'green4)
                         \set Staff.shortInstrumentName = \markup I+II
                         c'4.
+                        \break
                         \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                         \set Staff.shortInstrumentName = \markup I+II
                         c'4.
@@ -2166,11 +1965,10 @@ Persistence.
         ...     )
         ...     time_signatures = baca.section.wrap([(4, 8), (4, 8), (4, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
-        ...     baca.section.apply_breaks(score, breaks)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
+        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     manifests = {"abjad.ShortInstrumentName": short_instrument_names}
         ...     baca.short_instrument_name(voice[0], "I+II", manifests)
         ...     baca.short_instrument_name(voice[1], "I+II", manifests)
@@ -2198,19 +1996,10 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 4/8
                         s1 * 4/8
-                        \baca-new-spacing-section #1 #24
-                        \noBreak
                         s1 * 4/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 4/8
                     }
                     \context Voice = "Music"
@@ -2218,6 +2007,7 @@ Persistence.
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         \set Staff.shortInstrumentName = \markup I+II
                         c'2
+                        \break
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
@@ -2254,19 +2044,10 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 4/8
                         s1 * 4/8
-                        \baca-new-spacing-section #1 #24
-                        \noBreak
                         s1 * 4/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 4/8
                     }
                     \context Voice = "Music"
@@ -2274,6 +2055,7 @@ Persistence.
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         \set Staff.shortInstrumentName = \markup I+II
                         c'2
+                        \break
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
@@ -2306,19 +2088,10 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 4/8
                         s1 * 4/8
-                        \baca-new-spacing-section #1 #24
-                        \noBreak
                         s1 * 4/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 4/8
                     }
                     \context Voice = "Music"
@@ -2326,6 +2099,7 @@ Persistence.
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         \set Staff.shortInstrumentName = \markup I+II
                         c'2
+                        \break
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
@@ -2342,20 +2116,12 @@ Persistence.
 
         >>> def make_lilypond_file():
         ...     score = baca.docs.make_empty_score(1)
-        ...     breaks = baca.breaks(
-        ...         baca.page(
-        ...             1,
-        ...             baca.system(measure=1, y_offset=0, distances=(11,)),
-        ...             baca.system(measure=2, y_offset=15, distances=(11,)),
-        ...         ),
-        ...     )
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
-        ...     baca.section.apply_breaks(score, breaks)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
+        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     previous_persistent_indicators = {}
         ...     previous_persistent_indicators["Staff"] = [
         ...         baca.Memento(
@@ -2394,16 +2160,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -2411,6 +2170,7 @@ Persistence.
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                         \set Staff.shortInstrumentName = \markup I+II
                         c'4.
+                        \break
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName = \markup I+II
                         c'4.
@@ -2442,16 +2202,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -2459,6 +2212,7 @@ Persistence.
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                         \set Staff.shortInstrumentName = \markup I+II
                         c'4.
+                        \break
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName = \markup I+II
                         c'4.
@@ -2486,16 +2240,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -2503,6 +2250,7 @@ Persistence.
                         \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)
                         \set Staff.shortInstrumentName = \markup I+II
                         c'4.
+                        \break
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName = \markup I+II
                         c'4.
@@ -2516,20 +2264,12 @@ Persistence.
 
         >>> def make_lilypond_file():
         ...     score = baca.docs.make_empty_score(1)
-        ...     breaks = baca.breaks(
-        ...         baca.page(
-        ...             1,
-        ...             baca.system(measure=1, y_offset=0, distances=(11,)),
-        ...             baca.system(measure=2, y_offset=15, distances=(11,)),
-        ...         ),
-        ...     )
         ...     time_signatures = baca.section.wrap([(4, 8), (4, 8), (4, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
-        ...     baca.section.apply_breaks(score, breaks)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
+        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     baca.short_instrument_name(voice[0], "I+II", manifests)
         ...     wrappers = baca.short_instrument_name(
         ...         voice[0], "III+IV", manifests, deactivate=True
@@ -2558,19 +2298,10 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 4/8
                         s1 * 4/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 4/8
-                        \baca-new-spacing-section #1 #24
-                        \noBreak
                         s1 * 4/8
                     }
                     \context Voice = "Music"
@@ -2578,6 +2309,7 @@ Persistence.
                         \once \override Staff.InstrumentName.color = #(x11-color 'blue)
                         \set Staff.shortInstrumentName = \markup I+II
                         c'2
+                        \break
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
                         \set Staff.shortInstrumentName = \markup III+IV
@@ -2593,12 +2325,6 @@ Persistence.
 
     ..  container:: example
 
-        >>> breaks = baca.breaks(
-        ...     baca.page(
-        ...         1,
-        ...         baca.system(measure=1, y_offset=4, distances=(8,)),
-        ...     ),
-        ... )
         >>> metronome_marks = {}
         >>> metronome_marks["90"] = abjad.MetronomeMark(abjad.Duration(1, 4), 90)
         >>> metronome_marks["112"] = abjad.MetronomeMark(abjad.Duration(1, 4), 112)
@@ -2617,8 +2343,6 @@ Persistence.
         ...         append_anchor_skip=True,
         ...         docs=True,
         ...     )
-        ...     baca.SpacingSpecifier((1, 24))(score)
-        ...     baca.section.apply_breaks(score, breaks)
         ...     baca.metronome_mark(
         ...         score["Skips"][1 - 1],
         ...         metronome_marks["112"],
@@ -2626,6 +2350,7 @@ Persistence.
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
+        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     baca.section.append_anchor_note(voice)
         ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(
@@ -2653,22 +2378,14 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #4 #'(8)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'blue
                         \bacaStartTextSpanMM
-                        \baca-new-spacing-section #1 #24
-                        \noBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-transparent
-                        \noBreak
                         \time 1/4
                         s1 * 1/4
                         \bacaStopTextSpanMM
@@ -2678,6 +2395,7 @@ Persistence.
                     \context Voice = "Music"
                     {
                         c'4.
+                        \break
                         c'4.
                         \abjad-invisible-music-coloring
                         \once \override Accidental.stencil = ##f
@@ -2700,8 +2418,6 @@ Persistence.
         ...         append_anchor_skip=True,
         ...         docs=True,
         ...     )
-        ...     baca.SpacingSpecifier((1, 24))(score)
-        ...     baca.section.apply_breaks(score, breaks)
         ...     baca.metronome_mark(
         ...         score["Skips"][1 - 1],
         ...         metronome_marks["112"],
@@ -2710,6 +2426,7 @@ Persistence.
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
+        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     baca.section.append_anchor_note(voice)
         ...     previous_persistent_indicators = {}
         ...     previous_persistent_indicators["Score"] = [
@@ -2750,24 +2467,16 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #4 #'(8)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
                         \override TextSpanner.staff-padding = 4
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'blue
                         \bacaStartTextSpanMM
-                        \baca-new-spacing-section #1 #24
-                        \noBreak
                         s1 * 3/8
                         \revert TextSpanner.staff-padding
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-transparent
-                        \noBreak
                         \time 1/4
                         s1 * 1/4
                         \bacaStopTextSpanMM
@@ -2777,6 +2486,7 @@ Persistence.
                     \context Voice = "Music"
                     {
                         c'4.
+                        \break
                         c'4.
                         \abjad-invisible-music-coloring
                         \once \override Accidental.stencil = ##f
@@ -2811,11 +2521,10 @@ Persistence.
         ...         manifests={"abjad.MetronomeMark": metronome_marks},
         ...         previous_persistent_indicators=previous_persistent_indicators,
         ...     )
-        ...     baca.SpacingSpecifier((1, 24))(score)
-        ...     baca.section.apply_breaks(score, breaks)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
+        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     baca.text_spanner_staff_padding(score["Skips"], 4)
         ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(
@@ -2843,19 +2552,13 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #4 #'(8)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
                         \override TextSpanner.staff-padding = 4
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "90" #'green4
                         \bacaStartTextSpanMM
-                        \baca-new-spacing-section #1 #24
-                        \noBreak
                         s1 * 3/8
                         \bacaStopTextSpanMM
                         \revert TextSpanner.staff-padding
@@ -2863,6 +2566,7 @@ Persistence.
                     \context Voice = "Music"
                     {
                         c'4.
+                        \break
                         c'4.
                     }
                 >>
@@ -2881,8 +2585,6 @@ Persistence.
         ...         append_anchor_skip=True,
         ...         docs=True,
         ...     )
-        ...     baca.SpacingSpecifier((1, 24))(score)
-        ...     baca.section.apply_breaks(score, breaks)
         ...     baca.metronome_mark(
         ...         score["Skips"][1 - 1],
         ...         metronome_marks["112"],
@@ -2894,6 +2596,7 @@ Persistence.
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
+        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     baca.section.append_anchor_note(voice)
         ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(
@@ -2921,26 +2624,18 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #4 #'(8)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'blue
                         \bacaStartTextSpanMM
-                        \baca-new-spacing-section #1 #24
-                        \noBreak
                         s1 * 3/8
                         \bacaStopTextSpanMM
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'DeepPink1
                         \bacaStartTextSpanMM
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-transparent
-                        \noBreak
                         \time 1/4
                         s1 * 1/4
                         \bacaStopTextSpanMM
@@ -2950,6 +2645,7 @@ Persistence.
                     \context Voice = "Music"
                     {
                         c'4.
+                        \break
                         c'4.
                         \abjad-invisible-music-coloring
                         \once \override Accidental.stencil = ##f
@@ -2983,8 +2679,6 @@ Persistence.
         ...         manifests={"abjad.MetronomeMark": metronome_marks},
         ...         previous_persistent_indicators=previous_persistent_indicators,
         ...     )
-        ...     baca.SpacingSpecifier((1, 24))(score)
-        ...     baca.section.apply_breaks(score, breaks)
         ...     baca.metronome_mark(
         ...         score["Skips"][1 - 1],
         ...         metronome_marks["112"],
@@ -2993,6 +2687,7 @@ Persistence.
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
+        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     baca.section.append_anchor_note(voice)
         ...     baca.section.reapply_persistent_indicators(
         ...         voice, previous_persistent_indicators
@@ -3023,24 +2718,16 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #4 #'(8)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
                         \override TextSpanner.staff-padding = 4
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
                         - \abjad-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'DeepPink1
                         \bacaStartTextSpanMM
-                        \baca-new-spacing-section #1 #24
-                        \noBreak
                         s1 * 3/8
                         \revert TextSpanner.staff-padding
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-transparent
-                        \noBreak
                         \time 1/4
                         s1 * 1/4
                         \bacaStopTextSpanMM
@@ -3050,6 +2737,7 @@ Persistence.
                     \context Voice = "Music"
                     {
                         c'4.
+                        \break
                         c'4.
                         \abjad-invisible-music-coloring
                         \once \override Accidental.stencil = ##f
@@ -3073,7 +2761,6 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
         ...     override = baca.PersistentOverride(
         ...         attribute="bar_extent",
         ...         context="Staff",
@@ -3108,11 +2795,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -3137,7 +2822,6 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
@@ -3182,11 +2866,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -3204,7 +2886,6 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
@@ -3254,11 +2935,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -3282,7 +2961,6 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
@@ -3309,11 +2987,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -3335,7 +3011,6 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
@@ -3373,11 +3048,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -3401,7 +3074,6 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
@@ -3440,11 +3112,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -3467,7 +3137,6 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
@@ -3495,11 +3164,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -3526,7 +3193,6 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
@@ -3564,11 +3230,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -3590,12 +3254,6 @@ Persistence.
 
     ..  container:: example
 
-        >>> breaks = baca.breaks(
-        ...     baca.page(
-        ...         1,
-        ...         baca.system(measure=1, y_offset=4, distances=(8,)),
-        ...     ),
-        ... )
         >>> metronome_marks = {}
         >>> metronome_marks["90"] = abjad.MetronomeMark(abjad.Duration(1, 4), 90)
         >>> metronome_marks["112"] = abjad.MetronomeMark(abjad.Duration(1, 4), 112)
@@ -3613,8 +3271,6 @@ Persistence.
         ...         append_anchor_skip=True,
         ...         docs=True,
         ...     )
-        ...     baca.SpacingSpecifier((1, 24))(score)
-        ...     baca.section.apply_breaks(score, breaks)
         ...     baca.metronome_mark(
         ...         score["Skips"][1 - 1],
         ...         baca.Accelerando(),
@@ -3622,6 +3278,7 @@ Persistence.
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
+        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     baca.section.append_anchor_note(voice)
         ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(
@@ -3649,22 +3306,14 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #4 #'(8)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
                         - \abjad-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'blue) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        \baca-new-spacing-section #1 #24
-                        \noBreak
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-transparent
-                        \noBreak
                         \time 1/4
                         s1 * 1/4
                         \bacaStopTextSpanMM
@@ -3674,6 +3323,7 @@ Persistence.
                     \context Voice = "Music"
                     {
                         c'4.
+                        \break
                         c'4.
                         \abjad-invisible-music-coloring
                         \once \override Accidental.stencil = ##f
@@ -3691,8 +3341,6 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
-        ...     baca.section.apply_breaks(score, breaks)
         ...     baca.metronome_mark(
         ...         score["Skips"][1 - 1],
         ...         baca.Accelerando(),
@@ -3701,6 +3349,7 @@ Persistence.
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
+        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     previous_persistent_indicators = {}
         ...     previous_persistent_indicators["Score"] = [
         ...         baca.Memento(
@@ -3735,19 +3384,13 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #4 #'(8)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
                         \override TextSpanner.staff-padding = 4
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
                         - \abjad-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'blue) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        \baca-new-spacing-section #1 #24
-                        \noBreak
                         s1 * 3/8
                         \bacaStopTextSpanMM
                         \revert TextSpanner.staff-padding
@@ -3755,6 +3398,7 @@ Persistence.
                     \context Voice = "Music"
                     {
                         c'4.
+                        \break
                         c'4.
                     }
                 >>
@@ -3782,11 +3426,10 @@ Persistence.
         ...         docs=True,
         ...         previous_persistent_indicators=previous_persistent_indicators,
         ...     )
-        ...     baca.SpacingSpecifier((1, 24))(score)
-        ...     baca.section.apply_breaks(score, breaks)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
+        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     baca.section.reapply_persistent_indicators(
         ...         voice,
         ...         previous_persistent_indicators,
@@ -3817,19 +3460,13 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #4 #'(8)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
                         \override TextSpanner.staff-padding = 4
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
                         - \abjad-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'green4) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        \baca-new-spacing-section #1 #24
-                        \noBreak
                         s1 * 3/8
                         \bacaStopTextSpanMM
                         \revert TextSpanner.staff-padding
@@ -3837,6 +3474,7 @@ Persistence.
                     \context Voice = "Music"
                     {
                         c'4.
+                        \break
                         c'4.
                     }
                 >>
@@ -3850,8 +3488,6 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
-        ...     baca.section.apply_breaks(score, breaks)
         ...     baca.metronome_mark(
         ...         score["Skips"][1 - 1],
         ...         baca.Accelerando(),
@@ -3863,6 +3499,7 @@ Persistence.
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
+        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.section.span_metronome_marks(score)
@@ -3887,31 +3524,24 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #4 #'(8)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
                         - \abjad-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'blue) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        \baca-new-spacing-section #1 #24
-                        \noBreak
                         s1 * 3/8
                         \bacaStopTextSpanMM
                         - \abjad-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'DeepPink1) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        \baca-new-spacing-section #1 #24
-                        \noBreak
                         s1 * 3/8
                         \bacaStopTextSpanMM
                     }
                     \context Voice = "Music"
                     {
                         c'4.
+                        \break
                         c'4.
                         c'4.
                     }
@@ -3938,8 +3568,6 @@ Persistence.
         ...         docs=True,
         ...         previous_persistent_indicators=previous_persistent_indicators,
         ...     )
-        ...     baca.SpacingSpecifier((1, 24))(score)
-        ...     baca.section.apply_breaks(score, breaks)
         ...     baca.metronome_mark(
         ...         score["Skips"][1 - 1],
         ...         baca.Accelerando(),
@@ -3948,6 +3576,7 @@ Persistence.
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
+        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     baca.section.reapply_persistent_indicators(
         ...         voice,
         ...         previous_persistent_indicators,
@@ -3977,19 +3606,13 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #4 #'(8)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
                         \override TextSpanner.staff-padding = 4
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
                         - \abjad-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'DeepPink1) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
-                        \baca-new-spacing-section #1 #24
-                        \noBreak
                         s1 * 3/8
                         \bacaStopTextSpanMM
                         \revert TextSpanner.staff-padding
@@ -3997,6 +3620,7 @@ Persistence.
                     \context Voice = "Music"
                     {
                         c'4.
+                        \break
                         c'4.
                     }
                 >>
