@@ -634,6 +634,8 @@ def _collect_persistent_indicators(
             indicator = wrapper.unbundle_indicator()
             if isinstance(indicator, abjad.Glissando):
                 continue
+            if isinstance(indicator, abjad.Ottava) and indicator.n == 0:
+                continue
             if isinstance(indicator, abjad.RepeatTie):
                 continue
             if isinstance(indicator, abjad.StopBeam):
