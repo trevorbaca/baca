@@ -833,16 +833,15 @@ Persistence.
 
     ..  container:: example
 
-        Explicit instruments color blue and redraw dull blue:
+        Explicit instruments color blue:
 
         >>> def make_lilypond_file():
         ...     score = baca.docs.make_empty_score(1)
-        ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
+        ...     time_signatures = baca.section.wrap([(3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
-        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
         ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(
@@ -871,14 +870,11 @@ Persistence.
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
                         c'4.
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
-                        \break
-                        c'4.
                     }
                 >>
             }
@@ -910,14 +906,11 @@ Persistence.
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
                         c'4.
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
-                        \break
-                        c'4.
                     }
                 >>
             }
@@ -946,14 +939,11 @@ Persistence.
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
                         c'4.
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
-                        \break
-                        c'4.
                     }
                 >>
             }
@@ -962,12 +952,11 @@ Persistence.
 
         >>> def make_lilypond_file():
         ...     score = baca.docs.make_empty_score(1)
-        ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
+        ...     time_signatures = baca.section.wrap([(3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
-        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     previous_persistent_indicators = {}
         ...     previous_persistent_indicators["Staff"] = [
         ...         baca.Memento(
@@ -1009,14 +998,11 @@ Persistence.
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
                         c'4.
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
-                        \break
-                        c'4.
                     }
                 >>
             }
@@ -1048,14 +1034,11 @@ Persistence.
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
                         c'4.
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
-                        \break
-                        c'4.
                     }
                 >>
             }
@@ -1083,30 +1066,26 @@ Persistence.
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
                         c'4.
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
-                        \break
-                        c'4.
                     }
                 >>
             }
 
     ..  container:: example
 
-        Reapplied instruments color green and redraw dull green:
+        Reapplied instruments color green:
 
         >>> def make_lilypond_file():
         ...     score = baca.docs.make_empty_score(1)
-        ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
+        ...     time_signatures = baca.section.wrap([(3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
-        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     previous_persistent_indicators = {}
         ...     previous_persistent_indicators["Staff"] = [
         ...         baca.Memento(
@@ -1147,14 +1126,11 @@ Persistence.
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
                         c'4.
                         ^ \baca-reapplied-instrument-markup "(“Flute”)"
-                        \break
-                        c'4.
                     }
                 >>
             }
@@ -1186,14 +1162,11 @@ Persistence.
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
                         c'4.
                         ^ \baca-reapplied-instrument-markup "(“Flute”)"
-                        \break
-                        c'4.
                     }
                 >>
             }
@@ -1222,30 +1195,26 @@ Persistence.
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
                         c'4.
                         ^ \baca-reapplied-instrument-markup "(“Flute”)"
-                        \break
-                        c'4.
                     }
                 >>
             }
 
     ..  container:: example
 
-        Redundant instruments color pink and redraw dull pink:
+        Redundant instruments color pink:
 
         >>> def make_lilypond_file():
         ...     score = baca.docs.make_empty_score(1)
-        ...     time_signatures = baca.section.wrap([(4, 8), (4, 8), (4, 8)])
+        ...     time_signatures = baca.section.wrap([(4, 8), (4, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
-        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     manifests = {"abjad.Instrument": instruments}
         ...     baca.instrument(voice[0], "Flute", manifests)
         ...     baca.instrument(voice[1], "Flute", manifests)
@@ -1277,16 +1246,13 @@ Persistence.
                         \time 4/8
                         s1 * 4/8
                         s1 * 4/8
-                        s1 * 4/8
                     }
                     \context Voice = "Music"
                     {
                         c'2
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
-                        \break
                         c'2
                         ^ \baca-redundant-instrument-markup "(“Flute”)"
-                        c'2
                     }
                 >>
             }
@@ -1319,16 +1285,13 @@ Persistence.
                         \time 4/8
                         s1 * 4/8
                         s1 * 4/8
-                        s1 * 4/8
                     }
                     \context Voice = "Music"
                     {
                         c'2
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
-                        \break
                         c'2
                         ^ \baca-redundant-instrument-markup "(“Flute”)"
-                        c'2
                     }
                 >>
             }
@@ -1357,16 +1320,13 @@ Persistence.
                         \time 4/8
                         s1 * 4/8
                         s1 * 4/8
-                        s1 * 4/8
                     }
                     \context Voice = "Music"
                     {
                         c'2
                         ^ \baca-explicit-instrument-markup "(“Flute”)"
-                        \break
                         c'2
                         ^ \baca-redundant-instrument-markup "(“Flute”)"
-                        c'2
                     }
                 >>
             }
@@ -1375,12 +1335,11 @@ Persistence.
 
         >>> def make_lilypond_file():
         ...     score = baca.docs.make_empty_score(1)
-        ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
+        ...     time_signatures = baca.section.wrap([(3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
-        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     previous_persistent_indicators = {}
         ...     previous_persistent_indicators["Staff"] = [
         ...         baca.Memento(
@@ -1422,14 +1381,11 @@ Persistence.
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
                         c'4.
                         ^ \baca-redundant-instrument-markup "(“Flute”)"
-                        \break
-                        c'4.
                     }
                 >>
             }
@@ -1461,14 +1417,11 @@ Persistence.
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
                         c'4.
                         ^ \baca-redundant-instrument-markup "(“Flute”)"
-                        \break
-                        c'4.
                     }
                 >>
             }
@@ -1496,14 +1449,11 @@ Persistence.
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        s1 * 3/8
                     }
                     \context Voice = "Music"
                     {
                         c'4.
                         ^ \baca-redundant-instrument-markup "(“Flute”)"
-                        \break
-                        c'4.
                     }
                 >>
             }
@@ -1524,7 +1474,7 @@ Persistence.
 
     ..  container:: example
 
-        Explicit short instrument names color blue and redraw dull blue:
+        Explicit short instrument names redraw dull blue:
 
         >>> def make_lilypond_file():
         ...     score = baca.docs.make_empty_score(1)
@@ -1805,7 +1755,7 @@ Persistence.
 
     ..  container:: example
 
-        Reapplied short instrument names color green and redraw dull green:
+        Reapplied short instrument names redraw dull green:
 
         >>> def make_lilypond_file():
         ...     score = baca.docs.make_empty_score(1)
@@ -1952,18 +1902,11 @@ Persistence.
 
     ..  container:: example
 
-        Redundant short instrument names color pink and redraw dull pink:
+        Redundant short instrument names redraw dull pink:
 
         >>> def make_lilypond_file():
         ...     score = baca.docs.make_empty_score(1)
-        ...     breaks = baca.breaks(
-        ...         baca.page(
-        ...             1,
-        ...             baca.system(measure=1, y_offset=0, distances=(11,)),
-        ...             baca.system(measure=3, y_offset=15, distances=(11,)),
-        ...         ),
-        ...     )
-        ...     time_signatures = baca.section.wrap([(4, 8), (4, 8), (4, 8)])
+        ...     time_signatures = baca.section.wrap([(4, 8), (4, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
@@ -2000,7 +1943,6 @@ Persistence.
                         \time 4/8
                         s1 * 4/8
                         s1 * 4/8
-                        s1 * 4/8
                     }
                     \context Voice = "Music"
                     {
@@ -2015,7 +1957,6 @@ Persistence.
                         c'2
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName = \markup I+II
-                        c'2
                     }
                 >>
             }
@@ -2048,7 +1989,6 @@ Persistence.
                         \time 4/8
                         s1 * 4/8
                         s1 * 4/8
-                        s1 * 4/8
                     }
                     \context Voice = "Music"
                     {
@@ -2063,7 +2003,6 @@ Persistence.
                         c'2
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName = \markup I+II
-                        c'2
                     }
                 >>
             }
@@ -2092,7 +2031,6 @@ Persistence.
                         \time 4/8
                         s1 * 4/8
                         s1 * 4/8
-                        s1 * 4/8
                     }
                     \context Voice = "Music"
                     {
@@ -2107,7 +2045,6 @@ Persistence.
                         c'2
                         \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                         \set Staff.shortInstrumentName = \markup I+II
-                        c'2
                     }
                 >>
             }
@@ -2264,7 +2201,7 @@ Persistence.
 
         >>> def make_lilypond_file():
         ...     score = baca.docs.make_empty_score(1)
-        ...     time_signatures = baca.section.wrap([(4, 8), (4, 8), (4, 8)])
+        ...     time_signatures = baca.section.wrap([(4, 8), (4, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
@@ -2302,7 +2239,6 @@ Persistence.
                         \time 4/8
                         s1 * 4/8
                         s1 * 4/8
-                        s1 * 4/8
                     }
                     \context Voice = "Music"
                     {
@@ -2313,7 +2249,6 @@ Persistence.
                         \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                         \set Staff.shortInstrumentName = \markup I+II
                         \set Staff.shortInstrumentName = \markup III+IV
-                        c'2
                         c'2
                     }
                 >>
@@ -2350,7 +2285,11 @@ Persistence.
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
-        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
+        ...     markup = abjad.Markup(r"\markup STRUT")
+        ...     bundle = abjad.bundle(
+        ...         markup, r"- \tweak staff-padding 10", r"- \tweak transparent ##t"
+        ...     )
+        ...     abjad.attach(bundle, abjad.select.leaf(voice, 0), direction=abjad.UP)
         ...     baca.section.append_anchor_note(voice)
         ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(
@@ -2395,7 +2334,9 @@ Persistence.
                     \context Voice = "Music"
                     {
                         c'4.
-                        \break
+                        - \tweak staff-padding 10
+                        - \tweak transparent ##t
+                        ^ \markup STRUT
                         c'4.
                         \abjad-invisible-music-coloring
                         \once \override Accidental.stencil = ##f
@@ -2426,7 +2367,11 @@ Persistence.
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
-        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
+        ...     markup = abjad.Markup(r"\markup STRUT")
+        ...     bundle = abjad.bundle(
+        ...         markup, r"- \tweak staff-padding 10", r"- \tweak transparent ##t"
+        ...     )
+        ...     abjad.attach(bundle, abjad.select.leaf(voice, 0), direction=abjad.UP)
         ...     baca.section.append_anchor_note(voice)
         ...     previous_persistent_indicators = {}
         ...     previous_persistent_indicators["Score"] = [
@@ -2486,7 +2431,9 @@ Persistence.
                     \context Voice = "Music"
                     {
                         c'4.
-                        \break
+                        - \tweak staff-padding 10
+                        - \tweak transparent ##t
+                        ^ \markup STRUT
                         c'4.
                         \abjad-invisible-music-coloring
                         \once \override Accidental.stencil = ##f
@@ -2524,7 +2471,11 @@ Persistence.
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
-        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
+        ...     markup = abjad.Markup(r"\markup STRUT")
+        ...     bundle = abjad.bundle(
+        ...         markup, r"- \tweak staff-padding 10", r"- \tweak transparent ##t"
+        ...     )
+        ...     abjad.attach(bundle, abjad.select.leaf(voice, 0), direction=abjad.UP)
         ...     baca.text_spanner_staff_padding(score["Skips"], 4)
         ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(
@@ -2566,7 +2517,9 @@ Persistence.
                     \context Voice = "Music"
                     {
                         c'4.
-                        \break
+                        - \tweak staff-padding 10
+                        - \tweak transparent ##t
+                        ^ \markup STRUT
                         c'4.
                     }
                 >>
@@ -2596,7 +2549,17 @@ Persistence.
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
+        ...     markup = abjad.Markup(r"\markup STRUT")
+        ...     bundle = abjad.bundle(
+        ...         markup, r"- \tweak staff-padding 10", r"- \tweak transparent ##t"
+        ...     )
+        ...     abjad.attach(bundle, abjad.select.leaf(voice, 0), direction=abjad.UP)
         ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
+        ...     markup = abjad.Markup(r"\markup STRUT")
+        ...     bundle = abjad.bundle(
+        ...         markup, r"- \tweak staff-padding 10", r"- \tweak transparent ##t"
+        ...     )
+        ...     abjad.attach(bundle, abjad.select.leaf(voice, 1), direction=abjad.UP)
         ...     baca.section.append_anchor_note(voice)
         ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(
@@ -2645,8 +2608,14 @@ Persistence.
                     \context Voice = "Music"
                     {
                         c'4.
+                        - \tweak staff-padding 10
+                        - \tweak transparent ##t
+                        ^ \markup STRUT
                         \break
                         c'4.
+                        - \tweak staff-padding 10
+                        - \tweak transparent ##t
+                        ^ \markup STRUT
                         \abjad-invisible-music-coloring
                         \once \override Accidental.stencil = ##f
                         \stopStaff
@@ -2687,7 +2656,11 @@ Persistence.
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
-        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
+        ...     markup = abjad.Markup(r"\markup STRUT")
+        ...     bundle = abjad.bundle(
+        ...         markup, r"- \tweak staff-padding 10", r"- \tweak transparent ##t"
+        ...     )
+        ...     abjad.attach(bundle, abjad.select.leaf(voice, 0), direction=abjad.UP)
         ...     baca.section.append_anchor_note(voice)
         ...     baca.section.reapply_persistent_indicators(
         ...         voice, previous_persistent_indicators
@@ -2737,7 +2710,9 @@ Persistence.
                     \context Voice = "Music"
                     {
                         c'4.
-                        \break
+                        - \tweak staff-padding 10
+                        - \tweak transparent ##t
+                        ^ \markup STRUT
                         c'4.
                         \abjad-invisible-music-coloring
                         \once \override Accidental.stencil = ##f
@@ -3576,7 +3551,11 @@ Persistence.
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
-        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
+        ...     markup = abjad.Markup(r"\markup STRUT")
+        ...     bundle = abjad.bundle(
+        ...         markup, r"- \tweak staff-padding 10", r"- \tweak transparent ##t"
+        ...     )
+        ...     abjad.attach(bundle, abjad.select.leaf(voice, 0), direction=abjad.UP)
         ...     baca.section.reapply_persistent_indicators(
         ...         voice,
         ...         previous_persistent_indicators,
@@ -3620,7 +3599,9 @@ Persistence.
                     \context Voice = "Music"
                     {
                         c'4.
-                        \break
+                        - \tweak staff-padding 10
+                        - \tweak transparent ##t
+                        ^ \markup STRUT
                         c'4.
                     }
                 >>
