@@ -35,7 +35,9 @@ def _attach_color_literal(
         return
     stem = _to_indicator_stem(wrapper.unbundle_indicator())
     grob = _indicator_to_grob(wrapper.unbundle_indicator())
-    context = wrapper._find_correct_effective_context()
+    context = wrapper._find_correct_effective_context(
+        wrapper.component, wrapper.context
+    )
     assert isinstance(context, abjad.Context), repr(context)
     string = rf"\override {context.lilypond_type}.{grob}.color ="
     if cancelation is True:
@@ -430,7 +432,9 @@ def treat_persistent_wrapper(manifests, wrapper, status):
     )
     if isinstance(wrapper.unbundle_indicator(), prototype):
         return
-    context = wrapper._find_correct_effective_context()
+    context = wrapper._find_correct_effective_context(
+        wrapper.component, wrapper.context
+    )
     assert isinstance(context, abjad.Context), repr(wrapper)
     leaf = wrapper.component
     assert isinstance(leaf, abjad.Leaf), repr(wrapper)
