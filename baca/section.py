@@ -498,7 +498,6 @@ def _clone_section_initial_short_instrument_name(score):
         instrument_name = abjad.InstrumentName(
             markup,
             context=short_instrument_name.context,
-            site=short_instrument_name.site,
         )
         abjad.attach(
             instrument_name,

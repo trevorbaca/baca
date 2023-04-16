@@ -68,7 +68,7 @@ def _do_override_command(
         property_path=attribute,
     )
     string = override.revert_string
-    literal = abjad.LilyPondLiteral(string, "after")
+    literal = abjad.LilyPondLiteral(string, site="after")
     wrapper_2 = abjad.attach(
         literal, leaves[-1], deactivate=deactivate, tag=final_tag, wrapper=True
     )
