@@ -369,6 +369,7 @@ def remove_reapplied_wrappers(leaf, item):
         "STAFF_LINES",
         "TIE",
         "TRILL",
+        "VOICE_NUMBER",
     ), repr(stem)
     reapplied_wrappers = []
     reapplied_indicators = []

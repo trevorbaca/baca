@@ -1236,13 +1236,12 @@ def voice_four(argument) -> list[abjad.Wrapper]:
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
         command = abjad.VoiceNumber(4)
-        wrapper = abjad.attach(
-            command,
+        wrappers_ = _attach_persistent_indicator(
             leaf,
+            [command],
             tag=tag,
-            wrapper=True,
         )
-        wrappers.append(wrapper)
+        wrappers.extend(wrappers_)
     return wrappers
 
 
@@ -1251,13 +1250,12 @@ def voice_one(argument) -> list[abjad.Wrapper]:
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
         command = abjad.VoiceNumber(1)
-        wrapper = abjad.attach(
-            command,
+        wrappers_ = _attach_persistent_indicator(
             leaf,
+            [command],
             tag=tag,
-            wrapper=True,
         )
-        wrappers.append(wrapper)
+        wrappers.extend(wrappers_)
     return wrappers
 
 
@@ -1266,13 +1264,12 @@ def voice_three(argument) -> list[abjad.Wrapper]:
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
         command = abjad.VoiceNumber(3)
-        wrapper = abjad.attach(
-            command,
+        wrappers_ = _attach_persistent_indicator(
             leaf,
+            [command],
             tag=tag,
-            wrapper=True,
         )
-        wrappers.append(wrapper)
+        wrappers.extend(wrappers_)
     return wrappers
 
 
@@ -1281,11 +1278,10 @@ def voice_two(argument) -> list[abjad.Wrapper]:
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
         command = abjad.VoiceNumber(2)
-        wrapper = abjad.attach(
-            command,
+        wrappers_ = _attach_persistent_indicator(
             leaf,
+            [command],
             tag=tag,
-            wrapper=True,
         )
-        wrappers.append(wrapper)
+        wrappers.extend(wrappers_)
     return wrappers

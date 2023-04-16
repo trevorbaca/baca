@@ -307,8 +307,8 @@ def get_measure_profile_metadata(path: pathlib.Path) -> tuple[int, int, list]:
     assert isinstance(path, pathlib.Path), repr(path)
     if path.parent.parent.name == "sections":
         string = "first_measure_number"
-        first_measure_number = get_metadata(path.parent).get(string)
-        assert isinstance(first_measure_number, int)
+        first_measure_number = get_metadata(path.parent).get(string, 1)
+        assert isinstance(first_measure_number, int), repr(first_measure_number)
         time_signatures = get_metadata(path.parent).get("time_signatures")
         assert isinstance(time_signatures, list)
         if bool(time_signatures):
