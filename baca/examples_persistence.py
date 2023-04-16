@@ -90,17 +90,8 @@ Persistence.
 
         >>> def make_lilypond_file():
         ...     score = baca.docs.make_empty_score(1)
-        ...     breaks = baca.breaks(
-        ...         baca.page(
-        ...             1,
-        ...             baca.system(measure=1, y_offset=0, distances=(11,)),
-        ...             baca.system(measure=2, y_offset=15, distances=(11,)),
-        ...         ),
-        ...     )
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
-        ...     baca.section.apply_breaks(score, breaks)
         ...     voice = score["Music"]
         ...     music = baca.make_mmrests(time_signatures(), head="Music")
         ...     voice.extend(music)
@@ -109,6 +100,7 @@ Persistence.
         ...         voice, previous_metadata["persistent_indicators"]
         ...     )
         ...     baca.clef(abjad.select.leaf(voice, 0), "alto")
+        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
@@ -131,16 +123,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -155,6 +140,7 @@ Persistence.
                                 \once \override NoteColumn.ignore-collision = ##t
                                 \clef "alto"
                                 c'1 * 3/8
+                                \break
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             }
                             \context Voice = "Rests"
@@ -173,20 +159,12 @@ Persistence.
 
         >>> def make_lilypond_file():
         ...     score = baca.docs.make_empty_score(1)
-        ...     breaks = baca.breaks(
-        ...         baca.page(
-        ...             1,
-        ...             baca.system(measure=1, y_offset=0, distances=(11,)),
-        ...             baca.system(measure=2, y_offset=15, distances=(11,)),
-        ...         ),
-        ...     )
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
-        ...     baca.section.apply_breaks(score, breaks)
         ...     voice = score["Music"]
         ...     music = baca.make_mmrests(time_signatures(), head="Music")
         ...     voice.extend(music)
+        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     previous_persistent_indicators = {}
         ...     previous_persistent_indicators["Staff"] = [
         ...         baca.Memento(
@@ -220,16 +198,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -244,6 +215,7 @@ Persistence.
                                 \once \override NoteColumn.ignore-collision = ##t
                                 \clef "treble"
                                 c'1 * 3/8
+                                \break
                                 \override Staff.Clef.color = #(x11-color 'OliveDrab)
                             }
                             \context Voice = "Rests"
@@ -262,20 +234,12 @@ Persistence.
 
         >>> def make_lilypond_file():
         ...     score = baca.docs.make_empty_score(1)
-        ...     breaks = baca.breaks(
-        ...         baca.page(
-        ...             1,
-        ...             baca.system(measure=1, y_offset=0, distances=(11,)),
-        ...             baca.system(measure=3, y_offset=15, distances=(11,)),
-        ...         ),
-        ...     )
-        ...     time_signatures = baca.section.wrap([(3, 8), (3, 8), (3, 8)])
+        ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
-        ...     baca.section.apply_breaks(score, breaks)
         ...     voice = score["Music"]
         ...     music = baca.make_mmrests(time_signatures(), head="Music")
         ...     voice.extend(music)
+        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     baca.clef(abjad.select.leaf(voice, 0), "treble")
         ...     baca.clef(abjad.select.leaf(voice, 2), "treble")
         ...     baca.section.remove_redundant_time_signatures(score)
@@ -300,19 +264,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
-                        \noBreak
-                        s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -327,6 +281,7 @@ Persistence.
                                 \once \override NoteColumn.ignore-collision = ##t
                                 \clef "treble"
                                 c'1 * 3/8
+                                \break
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
                             }
                             \context Voice = "Rests"
@@ -339,7 +294,6 @@ Persistence.
                         \clef "treble"
                         R1 * 3/8
                         \override Staff.Clef.color = #(x11-color 'DeepPink4)
-                        R1 * 3/8
                     }
                 >>
             }
@@ -361,20 +315,12 @@ Persistence.
 
         >>> def make_lilypond_file():
         ...     score = baca.docs.make_empty_score(1)
-        ...     breaks = baca.breaks(
-        ...         baca.page(
-        ...             1,
-        ...             baca.system(measure=1, y_offset=0, distances=(11,)),
-        ...             baca.system(measure=2, y_offset=15, distances=(11,)),
-        ...         ),
-        ...     )
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
-        ...     baca.section.apply_breaks(score, breaks)
         ...     voice = score["Music"]
         ...     music = baca.make_mmrests(time_signatures(), head="Music")
         ...     voice.extend(music)
+        ...     baca.literal(abjad.select.leaf(voice, 0), r"\break", site="after")
         ...     previous_metadata = make_previous_metadata()
         ...     baca.section.reapply_persistent_indicators(
         ...         voice, previous_metadata["persistent_indicators"]
@@ -402,16 +348,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \autoPageBreaksOff
-                        \baca-lbsd #0 #'(11)
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
-                        \pageBreak
                         \time 3/8
                         s1 * 3/8
-                        \baca-lbsd #15 #'(11)
-                        \baca-new-spacing-section #1 #24
-                        \break
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -426,6 +365,7 @@ Persistence.
                                 \once \override NoteColumn.ignore-collision = ##t
                                 \clef "treble"
                                 c'1 * 3/8
+                                \break
                                 \override Staff.Clef.color = #(x11-color 'DeepPink4)
                             }
                             \context Voice = "Rests"
@@ -450,7 +390,6 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier(fallback_duration=(1, 24))(score)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
@@ -477,11 +416,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -500,7 +437,6 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
@@ -538,11 +474,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "Music"
@@ -563,7 +497,6 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
-        ...     baca.SpacingSpecifier((1, 24))(score)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
@@ -600,11 +533,9 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-new-spacing-section #1 #24
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        \baca-new-spacing-section #1 #24
                         s1 * 3/8
                     }
                     \context Voice = "Music"
