@@ -88,33 +88,37 @@ Persistence.
         ...     previous_metadata["persistent_indicators"] = persistent_indicators
         ...     return previous_metadata
 
-        >>> score = baca.docs.make_empty_score(1)
-        >>> breaks = baca.breaks(
-        ...     baca.page(
-        ...         1,
-        ...         baca.system(measure=1, y_offset=0, distances=(11,)),
-        ...         baca.system(measure=2, y_offset=15, distances=(11,)),
-        ...     ),
-        ... )
-        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-        >>> baca.SpacingSpecifier((1, 24))(score)
-        >>> baca.section.apply_breaks(score, breaks)
-        >>> voice = score["Music"]
-        >>> music = baca.make_mmrests(time_signatures(), head="Music")
-        >>> voice.extend(music)
-        >>> previous_metadata = make_previous_metadata()
-        >>> baca.section.reapply_persistent_indicators(
-        ...     voice, previous_metadata["persistent_indicators"]
-        ... )
-        >>> _ = baca.clef(abjad.select.leaf(voice, 0), "alto")
-        >>> _ = baca.section.remove_redundant_time_signatures(score)
-        >>> baca.section.treat_untreated_persistent_wrappers(score)
-        >>> baca.docs.remove_deactivated_wrappers(score)
-        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        >>> block = abjad.Block(name="layout")
-        >>> block.indent = 0
-        >>> lilypond_file.items.insert(0, block)
+        >>> def make_lilypond_file():
+        ...     score = baca.docs.make_empty_score(1)
+        ...     breaks = baca.breaks(
+        ...         baca.page(
+        ...             1,
+        ...             baca.system(measure=1, y_offset=0, distances=(11,)),
+        ...             baca.system(measure=2, y_offset=15, distances=(11,)),
+        ...         ),
+        ...     )
+        ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
+        ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+        ...     baca.SpacingSpecifier((1, 24))(score)
+        ...     baca.section.apply_breaks(score, breaks)
+        ...     voice = score["Music"]
+        ...     music = baca.make_mmrests(time_signatures(), head="Music")
+        ...     voice.extend(music)
+        ...     previous_metadata = make_previous_metadata()
+        ...     baca.section.reapply_persistent_indicators(
+        ...         voice, previous_metadata["persistent_indicators"]
+        ...     )
+        ...     baca.clef(abjad.select.leaf(voice, 0), "alto")
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(score)
+        ...     baca.docs.remove_deactivated_wrappers(score)
+        ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+        ...     block = abjad.Block(name="layout")
+        ...     block.indent = 0
+        ...     lilypond_file.items.insert(0, block)
+        ...     return lilypond_file
+
+        >>> lilypond_file = make_lilypond_file()
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -171,12 +175,12 @@ Persistence.
         >>> def make_lilypond_file():
         ...     score = baca.docs.make_empty_score(1)
         ...     breaks = baca.breaks(
-        ...     baca.page(
-        ...         1,
-        ...         baca.system(measure=1, y_offset=0, distances=(11,)),
-        ...         baca.system(measure=2, y_offset=15, distances=(11,)),
-        ...     ),
-        ... )
+        ...         baca.page(
+        ...             1,
+        ...             baca.system(measure=1, y_offset=0, distances=(11,)),
+        ...             baca.system(measure=2, y_offset=15, distances=(11,)),
+        ...         ),
+        ...     )
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
         ...     baca.SpacingSpecifier((1, 24))(score)
@@ -186,16 +190,16 @@ Persistence.
         ...     voice.extend(music)
         ...     previous_persistent_indicators = {}
         ...     previous_persistent_indicators["Staff"] = [
-        ...     baca.Memento(
-        ...         context="Music",
-        ...         prototype="abjad.Clef",
-        ...         value="treble",
-        ...     )
-        ... ]
+        ...         baca.Memento(
+        ...             context="Music",
+        ...             prototype="abjad.Clef",
+        ...             value="treble",
+        ...         )
+        ...     ]
         ...     baca.section.reapply_persistent_indicators(
-        ...     voice, previous_persistent_indicators
-        ... )
-        ...     _ = baca.section.remove_redundant_time_signatures(score)
+        ...         voice, previous_persistent_indicators
+        ...     )
+        ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
@@ -261,12 +265,12 @@ Persistence.
         >>> def make_lilypond_file():
         ...     score = baca.docs.make_empty_score(1)
         ...     breaks = baca.breaks(
-        ...     baca.page(
-        ...         1,
-        ...         baca.system(measure=1, y_offset=0, distances=(11,)),
-        ...         baca.system(measure=3, y_offset=15, distances=(11,)),
-        ...     ),
-        ... )
+        ...         baca.page(
+        ...             1,
+        ...             baca.system(measure=1, y_offset=0, distances=(11,)),
+        ...             baca.system(measure=3, y_offset=15, distances=(11,)),
+        ...         ),
+        ...     )
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8), (3, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
         ...     baca.SpacingSpecifier((1, 24))(score)
@@ -274,9 +278,9 @@ Persistence.
         ...     voice = score["Music"]
         ...     music = baca.make_mmrests(time_signatures(), head="Music")
         ...     voice.extend(music)
-        ...     _ = baca.clef(abjad.select.leaf(voice, 0), "treble")
-        ...     _ = baca.clef(abjad.select.leaf(voice, 2), "treble")
-        ...     _ = baca.section.remove_redundant_time_signatures(score)
+        ...     baca.clef(abjad.select.leaf(voice, 0), "treble")
+        ...     baca.clef(abjad.select.leaf(voice, 2), "treble")
+        ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
@@ -358,34 +362,37 @@ Persistence.
         ...     previous_metadata["persistent_indicators"] = persistent_indicators
         ...     return baca.section.proxy(previous_metadata)
 
-        >>> score = baca.docs.make_empty_score(1)
-        >>> breaks = baca.breaks(
-        ...     baca.page(
-        ...         1,
-        ...         baca.system(measure=1, y_offset=0, distances=(11,)),
-        ...         baca.system(measure=2, y_offset=15, distances=(11,)),
-        ...     ),
-        ... )
-        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-        >>> baca.SpacingSpecifier((1, 24))(score)
-        >>> baca.section.apply_breaks(score, breaks)
-        >>> voice = score["Music"]
-        >>> music = baca.make_mmrests(time_signatures(), head="Music")
-        >>> voice.extend(music)
-        >>> previous_metadata = make_previous_metadata()
-        >>> baca.section.reapply_persistent_indicators(
-        ...     voice, previous_metadata["persistent_indicators"]
-        ... )
-        >>> _ = baca.clef(abjad.select.leaf(voice, 0), "treble")
-        >>> _ = baca.section.remove_redundant_time_signatures(score)
-        >>> baca.section.treat_untreated_persistent_wrappers(score)
-        >>> baca.docs.remove_deactivated_wrappers(score)
-        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        >>> block = abjad.Block(name="layout")
-        >>> block.indent = 0
-        >>> lilypond_file.items.insert(0, block)
+        >>> def make_lilypond_file():
+        ...     score = baca.docs.make_empty_score(1)
+        ...     breaks = baca.breaks(
+        ...         baca.page(
+        ...             1,
+        ...             baca.system(measure=1, y_offset=0, distances=(11,)),
+        ...             baca.system(measure=2, y_offset=15, distances=(11,)),
+        ...         ),
+        ...     )
+        ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
+        ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+        ...     baca.SpacingSpecifier((1, 24))(score)
+        ...     baca.section.apply_breaks(score, breaks)
+        ...     voice = score["Music"]
+        ...     music = baca.make_mmrests(time_signatures(), head="Music")
+        ...     voice.extend(music)
+        ...     previous_metadata = make_previous_metadata()
+        ...     baca.section.reapply_persistent_indicators(
+        ...         voice, previous_metadata["persistent_indicators"]
+        ...     )
+        ...     baca.clef(abjad.select.leaf(voice, 0), "treble")
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(score)
+        ...     baca.docs.remove_deactivated_wrappers(score)
+        ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+        ...     block = abjad.Block(name="layout")
+        ...     block.indent = 0
+        ...     lilypond_file.items.insert(0, block)
+        ...     return lilypond_file
 
+        >>> lilypond_file = make_lilypond_file()
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -451,8 +458,8 @@ Persistence.
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
-        ...     _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
-        ...     _ = baca.section.remove_redundant_time_signatures(score)
+        ...     baca.dynamic(baca.select.pleaf(voice, 0), "f")
+        ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
@@ -494,32 +501,36 @@ Persistence.
 
         Even after a previous dynamic:
 
-        >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-        >>> baca.SpacingSpecifier((1, 24))(score)
-        >>> voice = score["Music"]
-        >>> music = baca.make_notes(time_signatures())
-        >>> voice.extend(music)
-        >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "p")
-        >>> previous_persistent_indicators = {}
-        >>> previous_persistent_indicators["Music"] = [
-        ...     baca.Memento(
-        ...         context="Music",
-        ...         prototype="abjad.Dynamic",
-        ...         value="f",
+        >>> def make_lilypond_file():
+        ...     score = baca.docs.make_empty_score(1)
+        ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
+        ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+        ...     baca.SpacingSpecifier((1, 24))(score)
+        ...     voice = score["Music"]
+        ...     music = baca.make_notes(time_signatures())
+        ...     voice.extend(music)
+        ...     baca.dynamic(baca.select.pleaf(voice, 0), "p")
+        ...     previous_persistent_indicators = {}
+        ...     previous_persistent_indicators["Music"] = [
+        ...         baca.Memento(
+        ...             context="Music",
+        ...             prototype="abjad.Dynamic",
+        ...             value="f",
+        ...         )
+        ...     ]
+        ...     baca.section.reapply_persistent_indicators(
+        ...         score, previous_persistent_indicators
         ...     )
-        ... ]
-        >>> baca.section.reapply_persistent_indicators(
-        ...     score, previous_persistent_indicators
-        ... )
-        >>> _ = baca.section.remove_redundant_time_signatures(score)
-        >>> baca.section.treat_untreated_persistent_wrappers(score)
-        >>> baca.docs.remove_deactivated_wrappers(score)
-        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        >>> block = abjad.Block(name="layout")
-        >>> block.indent = 0
-        >>> lilypond_file.items.insert(0, block)
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(score)
+        ...     baca.docs.remove_deactivated_wrappers(score)
+        ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+        ...     block = abjad.Block(name="layout")
+        ...     block.indent = 0
+        ...     lilypond_file.items.insert(0, block)
+        ...     return lilypond_file
+
+        >>> lilypond_file = make_lilypond_file()
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -564,16 +575,16 @@ Persistence.
         ...     voice.extend(music)
         ...     previous_persistent_indicators = {}
         ...     previous_persistent_indicators["Music"] = [
-        ...     baca.Memento(
-        ...         context="Music",
-        ...         prototype="abjad.Dynamic",
-        ...         value="f",
-        ...     )
-        ... ]
+        ...         baca.Memento(
+        ...             context="Music",
+        ...             prototype="abjad.Dynamic",
+        ...             value="f",
+        ...         )
+        ...     ]
         ...     baca.section.reapply_persistent_indicators(
-        ...     voice, previous_persistent_indicators
-        ... )
-        ...     _ = baca.section.remove_redundant_time_signatures(score)
+        ...         voice, previous_persistent_indicators
+        ...     )
+        ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
@@ -625,9 +636,9 @@ Persistence.
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
-        ...     _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
-        ...     _ = baca.dynamic(baca.select.pleaf(voice, 1), "f")
-        ...     _ = baca.section.remove_redundant_time_signatures(score)
+        ...     baca.dynamic(baca.select.pleaf(voice, 0), "f")
+        ...     baca.dynamic(baca.select.pleaf(voice, 1), "f")
+        ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
@@ -671,32 +682,36 @@ Persistence.
 
         Even at the beginning of a section:
 
-        >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-        >>> baca.SpacingSpecifier((1, 24))(score)
-        >>> voice = score["Music"]
-        >>> music = baca.make_notes(time_signatures())
-        >>> voice.extend(music)
-        >>> previous_persistent_indicators = {}
-        >>> previous_persistent_indicators["Music"] = [
-        ...     baca.Memento(
-        ...         context="Music",
-        ...         prototype="abjad.Dynamic",
-        ...         value="f",
+        >>> def make_lilypond_file():
+        ...     score = baca.docs.make_empty_score(1)
+        ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
+        ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+        ...     baca.SpacingSpecifier((1, 24))(score)
+        ...     voice = score["Music"]
+        ...     music = baca.make_notes(time_signatures())
+        ...     voice.extend(music)
+        ...     previous_persistent_indicators = {}
+        ...     previous_persistent_indicators["Music"] = [
+        ...         baca.Memento(
+        ...             context="Music",
+        ...             prototype="abjad.Dynamic",
+        ...             value="f",
+        ...         )
+        ...     ]
+        ...     baca.section.reapply_persistent_indicators(
+        ...         voice, previous_persistent_indicators
         ...     )
-        ... ]
-        >>> baca.section.reapply_persistent_indicators(
-        ...     voice, previous_persistent_indicators
-        ... )
-        >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "f")
-        >>> _ = baca.section.remove_redundant_time_signatures(score)
-        >>> baca.section.treat_untreated_persistent_wrappers(score)
-        >>> baca.docs.remove_deactivated_wrappers(score)
-        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        >>> block = abjad.Block(name="layout")
-        >>> block.indent = 0
-        >>> lilypond_file.items.insert(0, block)
+        ...     baca.dynamic(baca.select.pleaf(voice, 0), "f")
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(score)
+        ...     baca.docs.remove_deactivated_wrappers(score)
+        ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+        ...     block = abjad.Block(name="layout")
+        ...     block.indent = 0
+        ...     lilypond_file.items.insert(0, block)
+        ...     return lilypond_file
+
+        >>> lilypond_file = make_lilypond_file()
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -729,22 +744,26 @@ Persistence.
 
         Sforzando dynamics do not count as redundant:
 
-        >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-        >>> baca.SpacingSpecifier((1, 24))(score)
-        >>> voice = score["Music"]
-        >>> music = baca.make_notes(time_signatures())
-        >>> voice.extend(music)
-        >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "sfz")
-        >>> _ = baca.dynamic(baca.select.pleaf(voice, 1), "sfz")
-        >>> _ = baca.section.remove_redundant_time_signatures(score)
-        >>> baca.section.treat_untreated_persistent_wrappers(score)
-        >>> baca.docs.remove_deactivated_wrappers(score)
-        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        >>> block = abjad.Block(name="layout")
-        >>> block.indent = 0
-        >>> lilypond_file.items.insert(0, block)
+        >>> def make_lilypond_file():
+        ...     score = baca.docs.make_empty_score(1)
+        ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
+        ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+        ...     baca.SpacingSpecifier((1, 24))(score)
+        ...     voice = score["Music"]
+        ...     music = baca.make_notes(time_signatures())
+        ...     voice.extend(music)
+        ...     baca.dynamic(baca.select.pleaf(voice, 0), "sfz")
+        ...     baca.dynamic(baca.select.pleaf(voice, 1), "sfz")
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(score)
+        ...     baca.docs.remove_deactivated_wrappers(score)
+        ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+        ...     block = abjad.Block(name="layout")
+        ...     block.indent = 0
+        ...     lilypond_file.items.insert(0, block)
+        ...     return lilypond_file
+
+        >>> lilypond_file = make_lilypond_file()
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -779,32 +798,36 @@ Persistence.
 
         Even at the beginning of a section:
 
-        >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-        >>> baca.SpacingSpecifier((1, 24))(score)
-        >>> voice = score["Music"]
-        >>> music = baca.make_notes(time_signatures())
-        >>> voice.extend(music)
-        >>> _ = baca.dynamic(baca.select.pleaf(voice, 0), "sfz")
-        >>> previous_persistent_indicators = {}
-        >>> previous_persistent_indicators["Music"] = [
-        ...     baca.Memento(
-        ...         context="Music",
-        ...         prototype="abjad.Dynamic",
-        ...         value="sfz",
+        >>> def make_lilypond_file():
+        ...     score = baca.docs.make_empty_score(1)
+        ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
+        ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+        ...     baca.SpacingSpecifier((1, 24))(score)
+        ...     voice = score["Music"]
+        ...     music = baca.make_notes(time_signatures())
+        ...     voice.extend(music)
+        ...     baca.dynamic(baca.select.pleaf(voice, 0), "sfz")
+        ...     previous_persistent_indicators = {}
+        ...     previous_persistent_indicators["Music"] = [
+        ...         baca.Memento(
+        ...             context="Music",
+        ...             prototype="abjad.Dynamic",
+        ...             value="sfz",
+        ...         )
+        ...     ]
+        ...     baca.section.reapply_persistent_indicators(
+        ...         score, previous_persistent_indicators
         ...     )
-        ... ]
-        >>> baca.section.reapply_persistent_indicators(
-        ...     score, previous_persistent_indicators
-        ... )
-        >>> _ = baca.section.remove_redundant_time_signatures(score)
-        >>> baca.section.treat_untreated_persistent_wrappers(score)
-        >>> baca.docs.remove_deactivated_wrappers(score)
-        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        >>> block = abjad.Block(name="layout")
-        >>> block.indent = 0
-        >>> lilypond_file.items.insert(0, block)
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(score)
+        ...     baca.docs.remove_deactivated_wrappers(score)
+        ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+        ...     block = abjad.Block(name="layout")
+        ...     block.indent = 0
+        ...     lilypond_file.items.insert(0, block)
+        ...     return lilypond_file
+
+        >>> lilypond_file = make_lilypond_file()
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -847,9 +870,9 @@ Persistence.
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
-        ...     _ = baca.dynamic(baca.select.pleaf(voice, 0), "mf")
-        ...     _ = baca.dynamic(baca.select.pleaf(voice, 1), '"mf"')
-        ...     _ = baca.section.remove_redundant_time_signatures(score)
+        ...     baca.dynamic(baca.select.pleaf(voice, 0), "mf")
+        ...     baca.dynamic(baca.select.pleaf(voice, 1), '"mf"')
+        ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
@@ -924,9 +947,11 @@ Persistence.
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
-        ...     _ = baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
-        ...     _ = baca.section.remove_redundant_time_signatures(score)
-        ...     baca.section.treat_untreated_persistent_wrappers(score, manifests=manifests)
+        ...     baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(
+        ...         score, manifests=manifests
+        ...     )
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         ...     block = abjad.Block(name="layout")
@@ -969,15 +994,19 @@ Persistence.
                 >>
             }
 
-        >>> score = lilypond_file["Score"]
-        >>> text = abjad.lilypond(score)
-        >>> text = abjad.tag.left_shift_tags(text)
-        >>> tags_ = baca.tags.instrument_color_tags()
-        >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count, skipped = abjad.deactivate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text)
-        >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file["score"].items[:] = lines
+        >>> def tag_lilypond_file(lilypond_file):
+        ...     score = lilypond_file["Score"]
+        ...     text = abjad.lilypond(score)
+        ...     text = abjad.tag.left_shift_tags(text)
+        ...     tags_ = baca.tags.instrument_color_tags()
+        ...     match = lambda tags: bool(set(tags) & set(tags_))
+        ...     text, count, skipped = abjad.deactivate(text, match)
+        ...     text = abjad.tag.left_shift_tags(text)
+        ...     lines = [_.strip('\n') for _ in text.split('\n')]
+        ...     lilypond_file["score"].items[:] = lines
+        ...     return text
+
+        >>> text = tag_lilypond_file(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1010,12 +1039,16 @@ Persistence.
                 >>
             }
 
-        >>> tags_ = baca.tags.instrument_color_tags()
-        >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count, skipped = abjad.activate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text)
-        >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file["score"].items[:] = lines
+        >>> def tag_lilypond_file(lilypond_file, text):
+        ...     tags_ = baca.tags.instrument_color_tags()
+        ...     match = lambda tags: bool(set(tags) & set(tags_))
+        ...     text, count, skipped = abjad.activate(text, match)
+        ...     text = abjad.tag.left_shift_tags(text)
+        ...     lines = [_.strip('\n') for _ in text.split('\n')]
+        ...     lilypond_file["score"].items[:] = lines
+        ...     return text
+
+        >>> text = tag_lilypond_file(lilypond_file, text)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1050,35 +1083,41 @@ Persistence.
 
         Even after a previous instrument:
 
-        >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-        >>> baca.SpacingSpecifier((1, 24))(score)
-        >>> baca.section.apply_breaks(score, breaks)
-        >>> voice = score["Music"]
-        >>> music = baca.make_notes(time_signatures())
-        >>> voice.extend(music)
-        >>> previous_persistent_indicators = {}
-        >>> previous_persistent_indicators["Staff"] = [
-        ...     baca.Memento(
-        ...         context="Music",
-        ...         manifest="instruments",
-        ...         value="Piccolo",
+        >>> def make_lilypond_file():
+        ...     score = baca.docs.make_empty_score(1)
+        ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
+        ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+        ...     baca.SpacingSpecifier((1, 24))(score)
+        ...     baca.section.apply_breaks(score, breaks)
+        ...     voice = score["Music"]
+        ...     music = baca.make_notes(time_signatures())
+        ...     voice.extend(music)
+        ...     previous_persistent_indicators = {}
+        ...     previous_persistent_indicators["Staff"] = [
+        ...         baca.Memento(
+        ...             context="Music",
+        ...             manifest="instruments",
+        ...             value="Piccolo",
+        ...         )
+        ...     ]
+        ...     baca.section.reapply_persistent_indicators(
+        ...         voice,
+        ...         previous_persistent_indicators,
+        ...         manifests=manifests,
         ...     )
-        ... ]
-        >>> baca.section.reapply_persistent_indicators(
-        ...     voice,
-        ...     previous_persistent_indicators,
-        ...     manifests=manifests,
-        ... )
-        >>> _ = baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
-        >>> _ = baca.section.remove_redundant_time_signatures(score)
-        >>> baca.section.treat_untreated_persistent_wrappers(score, manifests=manifests)
-        >>> baca.docs.remove_deactivated_wrappers(score)
-        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        >>> block = abjad.Block(name="layout")
-        >>> block.indent = 0
-        >>> lilypond_file.items.insert(0, block)
+        ...     baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(
+        ...         score, manifests=manifests
+        ...     )
+        ...     baca.docs.remove_deactivated_wrappers(score)
+        ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+        ...     block = abjad.Block(name="layout")
+        ...     block.indent = 0
+        ...     lilypond_file.items.insert(0, block)
+        ...     return lilypond_file
+
+        >>> lilypond_file = make_lilypond_file()
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1113,15 +1152,19 @@ Persistence.
                 >>
             }
 
-        >>> score = lilypond_file["Score"]
-        >>> text = abjad.lilypond(score)
-        >>> text = abjad.tag.left_shift_tags(text)
-        >>> tags_ = baca.tags.instrument_color_tags()
-        >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count, skipped = abjad.deactivate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text)
-        >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file["score"].items[:] = lines
+        >>> def tag_lilypond_file(lilypond_file):
+        ...     score = lilypond_file["Score"]
+        ...     text = abjad.lilypond(score)
+        ...     text = abjad.tag.left_shift_tags(text)
+        ...     tags_ = baca.tags.instrument_color_tags()
+        ...     match = lambda tags: bool(set(tags) & set(tags_))
+        ...     text, count, skipped = abjad.deactivate(text, match)
+        ...     text = abjad.tag.left_shift_tags(text)
+        ...     lines = [_.strip('\n') for _ in text.split('\n')]
+        ...     lilypond_file["score"].items[:] = lines
+        ...     return text
+
+        >>> text = tag_lilypond_file(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1154,11 +1197,15 @@ Persistence.
                 >>
             }
 
-        >>> tags_ = baca.tags.instrument_color_tags()
-        >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count, skipped = abjad.activate(text, match)
-        >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file["score"].items[:] = lines
+        >>> def tag_lilypond_file(lilypond_file, text):
+        ...     tags_ = baca.tags.instrument_color_tags()
+        ...     match = lambda tags: bool(set(tags) & set(tags_))
+        ...     text, count, skipped = abjad.activate(text, match)
+        ...     lines = [_.strip('\n') for _ in text.split('\n')]
+        ...     lilypond_file["score"].items[:] = lines
+        ...     return text
+
+        >>> text = tag_lilypond_file(lilypond_file, text)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1206,19 +1253,21 @@ Persistence.
         ...     voice.extend(music)
         ...     previous_persistent_indicators = {}
         ...     previous_persistent_indicators["Staff"] = [
-        ...     baca.Memento(
-        ...         context="Music",
-        ...         manifest="instruments",
-        ...         value="Flute",
-        ...     )
-        ... ]
+        ...         baca.Memento(
+        ...             context="Music",
+        ...             manifest="instruments",
+        ...             value="Flute",
+        ...         )
+        ...     ]
         ...     baca.section.reapply_persistent_indicators(
-        ...     voice,
-        ...     previous_persistent_indicators,
-        ...     manifests=manifests,
-        ... )
-        ...     _ = baca.section.remove_redundant_time_signatures(score)
-        ...     baca.section.treat_untreated_persistent_wrappers(score, manifests=manifests)
+        ...         voice,
+        ...         previous_persistent_indicators,
+        ...         manifests=manifests,
+        ...     )
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(
+        ...         score, manifests=manifests
+        ...     )
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         ...     block = abjad.Block(name="layout")
@@ -1261,15 +1310,19 @@ Persistence.
                 >>
             }
 
-        >>> score = lilypond_file["Score"]
-        >>> text = abjad.lilypond(score)
-        >>> text = abjad.tag.left_shift_tags(text)
-        >>> tags_ = baca.tags.instrument_color_tags()
-        >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count, skipped = abjad.deactivate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text)
-        >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file["score"].items[:] = lines
+        >>> def tag_lilypond_file(lilypond_file):
+        ...     score = lilypond_file["Score"]
+        ...     text = abjad.lilypond(score)
+        ...     text = abjad.tag.left_shift_tags(text)
+        ...     tags_ = baca.tags.instrument_color_tags()
+        ...     match = lambda tags: bool(set(tags) & set(tags_))
+        ...     text, count, skipped = abjad.deactivate(text, match)
+        ...     text = abjad.tag.left_shift_tags(text)
+        ...     lines = [_.strip('\n') for _ in text.split('\n')]
+        ...     lilypond_file["score"].items[:] = lines
+        ...     return text
+
+        >>> text = tag_lilypond_file(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1302,12 +1355,16 @@ Persistence.
                 >>
             }
 
-        >>> tags_ = baca.tags.instrument_color_tags()
-        >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count, skipped = abjad.activate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text)
-        >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file["score"].items[:] = lines
+        >>> def tag_lilypond_file(lilypond_file, text):
+        ...     tags_ = baca.tags.instrument_color_tags()
+        ...     match = lambda tags: bool(set(tags) & set(tags_))
+        ...     text, count, skipped = abjad.activate(text, match)
+        ...     text = abjad.tag.left_shift_tags(text)
+        ...     lines = [_.strip('\n') for _ in text.split('\n')]
+        ...     lilypond_file["score"].items[:] = lines
+        ...     return text
+
+        >>> text = tag_lilypond_file(lilypond_file, text)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1347,12 +1404,12 @@ Persistence.
         >>> def make_lilypond_file():
         ...     score = baca.docs.make_empty_score(1)
         ...     breaks = baca.breaks(
-        ...     baca.page(
-        ...         1,
-        ...         baca.system(measure=1, y_offset=0, distances=(11,)),
-        ...         baca.system(measure=3, y_offset=15, distances=(11,)),
-        ...     ),
-        ... )
+        ...         baca.page(
+        ...             1,
+        ...             baca.system(measure=1, y_offset=0, distances=(11,)),
+        ...             baca.system(measure=3, y_offset=15, distances=(11,)),
+        ...         ),
+        ...     )
         ...     time_signatures = baca.section.wrap([(4, 8), (4, 8), (4, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
         ...     baca.SpacingSpecifier((1, 24))(score)
@@ -1361,10 +1418,12 @@ Persistence.
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
         ...     manifests = {"abjad.Instrument": instruments}
-        ...     _ = baca.instrument(voice[0], "Flute", manifests)
-        ...     _ = baca.instrument(voice[1], "Flute", manifests)
-        ...     _ = baca.section.remove_redundant_time_signatures(score)
-        ...     baca.section.treat_untreated_persistent_wrappers(score, manifests=manifests)
+        ...     baca.instrument(voice[0], "Flute", manifests)
+        ...     baca.instrument(voice[1], "Flute", manifests)
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(
+        ...         score, manifests=manifests
+        ...     )
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         ...     block = abjad.Block(name="layout")
@@ -1412,15 +1471,19 @@ Persistence.
                 >>
             }
 
-        >>> score = lilypond_file["Score"]
-        >>> text = abjad.lilypond(score)
-        >>> text = abjad.tag.left_shift_tags(text)
-        >>> tags_ = baca.tags.instrument_color_tags()
-        >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count, skipped = abjad.deactivate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text)
-        >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file["score"].items[:] = lines
+        >>> def tag_lilypond_file(lilypond_file):
+        ...     score = lilypond_file["Score"]
+        ...     text = abjad.lilypond(score)
+        ...     text = abjad.tag.left_shift_tags(text)
+        ...     tags_ = baca.tags.instrument_color_tags()
+        ...     match = lambda tags: bool(set(tags) & set(tags_))
+        ...     text, count, skipped = abjad.deactivate(text, match)
+        ...     text = abjad.tag.left_shift_tags(text)
+        ...     lines = [_.strip('\n') for _ in text.split('\n')]
+        ...     lilypond_file["score"].items[:] = lines
+        ...     return text
+
+        >>> text = tag_lilypond_file(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1458,11 +1521,15 @@ Persistence.
                 >>
             }
 
-        >>> tags_ = baca.tags.instrument_color_tags()
-        >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count, skipped = abjad.activate(text, match)
-        >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file["score"].items[:] = lines
+        >>> def tag_lilypond_file(lilypond_file, text):
+        ...     tags_ = baca.tags.instrument_color_tags()
+        ...     match = lambda tags: bool(set(tags) & set(tags_))
+        ...     text, count, skipped = abjad.activate(text, match)
+        ...     lines = [_.strip('\n') for _ in text.split('\n')]
+        ...     lilypond_file["score"].items[:] = lines
+        ...     return text
+
+        >>> text = tag_lilypond_file(lilypond_file, text)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1502,42 +1569,48 @@ Persistence.
 
         Even at the beginning of a section:
 
-        >>> score = baca.docs.make_empty_score(1)
-        >>> breaks = baca.breaks(
-        ...     baca.page(
-        ...         1,
-        ...         baca.system(measure=1, y_offset=0, distances=(11,)),
-        ...         baca.system(measure=2, y_offset=15, distances=(11,)),
-        ...     ),
-        ... )
-        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-        >>> baca.SpacingSpecifier((1, 24))(score)
-        >>> baca.section.apply_breaks(score, breaks)
-        >>> voice = score["Music"]
-        >>> music = baca.make_notes(time_signatures())
-        >>> voice.extend(music)
-        >>> previous_persistent_indicators = {}
-        >>> previous_persistent_indicators["Staff"] = [
-        ...     baca.Memento(
-        ...         context="Music",
-        ...         manifest="instruments",
-        ...         value="Flute",
+        >>> def make_lilypond_file():
+        ...     score = baca.docs.make_empty_score(1)
+        ...     breaks = baca.breaks(
+        ...         baca.page(
+        ...             1,
+        ...             baca.system(measure=1, y_offset=0, distances=(11,)),
+        ...             baca.system(measure=2, y_offset=15, distances=(11,)),
+        ...         ),
         ...     )
-        ... ]
-        >>> baca.section.reapply_persistent_indicators(
-        ...     voice,
-        ...     previous_persistent_indicators,
-        ...     manifests=manifests,
-        ... )
-        >>> _ = baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
-        >>> _ = baca.section.remove_redundant_time_signatures(score)
-        >>> baca.section.treat_untreated_persistent_wrappers(score, manifests=manifests)
-        >>> baca.docs.remove_deactivated_wrappers(score)
-        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        >>> block = abjad.Block(name="layout")
-        >>> block.indent = 0
-        >>> lilypond_file.items.insert(0, block)
+        ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
+        ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+        ...     baca.SpacingSpecifier((1, 24))(score)
+        ...     baca.section.apply_breaks(score, breaks)
+        ...     voice = score["Music"]
+        ...     music = baca.make_notes(time_signatures())
+        ...     voice.extend(music)
+        ...     previous_persistent_indicators = {}
+        ...     previous_persistent_indicators["Staff"] = [
+        ...         baca.Memento(
+        ...             context="Music",
+        ...             manifest="instruments",
+        ...             value="Flute",
+        ...         )
+        ...     ]
+        ...     baca.section.reapply_persistent_indicators(
+        ...         voice,
+        ...         previous_persistent_indicators,
+        ...         manifests=manifests,
+        ...     )
+        ...     baca.instrument(abjad.select.leaf(voice, 0), "Flute", manifests)
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(
+        ...         score, manifests=manifests
+        ...     )
+        ...     baca.docs.remove_deactivated_wrappers(score)
+        ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+        ...     block = abjad.Block(name="layout")
+        ...     block.indent = 0
+        ...     lilypond_file.items.insert(0, block)
+        ...     return lilypond_file
+
+        >>> lilypond_file = make_lilypond_file()
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1572,15 +1645,19 @@ Persistence.
                 >>
             }
 
-        >>> score = lilypond_file["Score"]
-        >>> text = abjad.lilypond(score)
-        >>> text = abjad.tag.left_shift_tags(text)
-        >>> tags_ = baca.tags.instrument_color_tags()
-        >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count, skipped = abjad.deactivate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text)
-        >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file["score"].items[:] = lines
+        >>> def tag_lilypond_file(lilypond_file):
+        ...     score = lilypond_file["Score"]
+        ...     text = abjad.lilypond(score)
+        ...     text = abjad.tag.left_shift_tags(text)
+        ...     tags_ = baca.tags.instrument_color_tags()
+        ...     match = lambda tags: bool(set(tags) & set(tags_))
+        ...     text, count, skipped = abjad.deactivate(text, match)
+        ...     text = abjad.tag.left_shift_tags(text)
+        ...     lines = [_.strip('\n') for _ in text.split('\n')]
+        ...     lilypond_file["score"].items[:] = lines
+        ...     return text
+
+        >>> text = tag_lilypond_file(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1613,11 +1690,15 @@ Persistence.
                 >>
             }
 
-        >>> tags_ = baca.tags.instrument_color_tags()
-        >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count, skipped = abjad.activate(text, match)
-        >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file["score"].items[:] = lines
+        >>> def tag_lilypond_file(lilypond_file, text):
+        ...     tags_ = baca.tags.instrument_color_tags()
+        ...     match = lambda tags: bool(set(tags) & set(tags_))
+        ...     text, count, skipped = abjad.activate(text, match)
+        ...     lines = [_.strip('\n') for _ in text.split('\n')]
+        ...     lilypond_file["score"].items[:] = lines
+        ...     return text
+
+        >>> text = tag_lilypond_file(lilypond_file, text)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1684,9 +1765,11 @@ Persistence.
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
-        ...     _ = baca.short_instrument_name(voice[0], "I+II", manifests)
-        ...     _ = baca.section.remove_redundant_time_signatures(score)
-        ...     baca.section.treat_untreated_persistent_wrappers(score, manifests=manifests)
+        ...     baca.short_instrument_name(voice[0], "I+II", manifests)
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(
+        ...         score, manifests=manifests
+        ...     )
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         ...     block = abjad.Block(name="layout")
@@ -1732,15 +1815,19 @@ Persistence.
                 >>
             }
 
-        >>> score = lilypond_file["Score"]
-        >>> text = abjad.lilypond(score)
-        >>> text = abjad.tag.left_shift_tags(text)
-        >>> tags_ = baca.tags.short_instrument_name_color_tags()
-        >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count, skipped = abjad.deactivate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text)
-        >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file["score"].items[:] = lines
+        >>> def tag_lilypond_file(lilypond_file):
+        ...     score = lilypond_file["Score"]
+        ...     text = abjad.lilypond(score)
+        ...     text = abjad.tag.left_shift_tags(text)
+        ...     tags_ = baca.tags.short_instrument_name_color_tags()
+        ...     match = lambda tags: bool(set(tags) & set(tags_))
+        ...     text, count, skipped = abjad.deactivate(text, match)
+        ...     text = abjad.tag.left_shift_tags(text)
+        ...     lines = [_.strip('\n') for _ in text.split('\n')]
+        ...     lilypond_file["score"].items[:] = lines
+        ...     return text
+
+        >>> text = tag_lilypond_file(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1776,11 +1863,15 @@ Persistence.
                 >>
             }
 
-        >>> tags_ = baca.tags.short_instrument_name_color_tags()
-        >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count, skipped = abjad.activate(text, match)
-        >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file["score"].items[:] = lines
+        >>> def tag_lilypond_file(lilypond_file, text):
+        ...     tags_ = baca.tags.short_instrument_name_color_tags()
+        ...     match = lambda tags: bool(set(tags) & set(tags_))
+        ...     text, count, skipped = abjad.activate(text, match)
+        ...     lines = [_.strip('\n') for _ in text.split('\n')]
+        ...     lilypond_file["score"].items[:] = lines
+        ...     return text
+
+        >>> text = tag_lilypond_file(lilypond_file, text)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1818,35 +1909,41 @@ Persistence.
 
         Even after previous short instrument name:
 
-        >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-        >>> baca.SpacingSpecifier((1, 24))(score)
-        >>> baca.section.apply_breaks(score, breaks)
-        >>> voice = score["Music"]
-        >>> music = baca.make_notes(time_signatures())
-        >>> voice.extend(music)
-        >>> previous_persistent_indicators = {}
-        >>> previous_persistent_indicators["Staff"] = [
-        ...     baca.Memento(
-        ...         context="Music",
-        ...         manifest="short_instrument_names",
-        ...         value="I+II",
+        >>> def make_lilypond_file():
+        ...     score = baca.docs.make_empty_score(1)
+        ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
+        ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+        ...     baca.SpacingSpecifier((1, 24))(score)
+        ...     baca.section.apply_breaks(score, breaks)
+        ...     voice = score["Music"]
+        ...     music = baca.make_notes(time_signatures())
+        ...     voice.extend(music)
+        ...     previous_persistent_indicators = {}
+        ...     previous_persistent_indicators["Staff"] = [
+        ...         baca.Memento(
+        ...             context="Music",
+        ...             manifest="short_instrument_names",
+        ...             value="I+II",
+        ...         )
+        ...     ]
+        ...     baca.section.reapply_persistent_indicators(
+        ...         voice,
+        ...         previous_persistent_indicators,
+        ...         manifests=manifests,
         ...     )
-        ... ]
-        >>> baca.section.reapply_persistent_indicators(
-        ...     voice,
-        ...     previous_persistent_indicators,
-        ...     manifests=manifests,
-        ... )
-        >>> _ = baca.short_instrument_name(voice[0], "III+IV", manifests)
-        >>> _ = baca.section.remove_redundant_time_signatures(score)
-        >>> baca.section.treat_untreated_persistent_wrappers(score, manifests=manifests)
-        >>> baca.docs.remove_deactivated_wrappers(score)
-        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        >>> block = abjad.Block(name="layout")
-        >>> block.indent = 0
-        >>> lilypond_file.items.insert(0, block)
+        ...     baca.short_instrument_name(voice[0], "III+IV", manifests)
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(
+        ...         score, manifests=manifests
+        ...     )
+        ...     baca.docs.remove_deactivated_wrappers(score)
+        ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+        ...     block = abjad.Block(name="layout")
+        ...     block.indent = 0
+        ...     lilypond_file.items.insert(0, block)
+        ...     return lilypond_file
+
+        >>> lilypond_file = make_lilypond_file()
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1884,15 +1981,19 @@ Persistence.
                 >>
             }
 
-        >>> score = lilypond_file["Score"]
-        >>> text = abjad.lilypond(score)
-        >>> text = abjad.tag.left_shift_tags(text)
-        >>> tags_ = baca.tags.short_instrument_name_color_tags()
-        >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count, skipped = abjad.deactivate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text)
-        >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file["score"].items[:] = lines
+        >>> def tag_lilypond_file(lilypond_file):
+        ...     score = lilypond_file["Score"]
+        ...     text = abjad.lilypond(score)
+        ...     text = abjad.tag.left_shift_tags(text)
+        ...     tags_ = baca.tags.short_instrument_name_color_tags()
+        ...     match = lambda tags: bool(set(tags) & set(tags_))
+        ...     text, count, skipped = abjad.deactivate(text, match)
+        ...     text = abjad.tag.left_shift_tags(text)
+        ...     lines = [_.strip('\n') for _ in text.split('\n')]
+        ...     lilypond_file["score"].items[:] = lines
+        ...     return text
+
+        >>> text = tag_lilypond_file(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1928,11 +2029,15 @@ Persistence.
                 >>
             }
 
-        >>> tags_ = baca.tags.short_instrument_name_color_tags()
-        >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count, skipped = abjad.activate(text, match)
-        >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file["score"].items[:] = lines
+        >>> def tag_lilypond_file(lilypond_file, text):
+        ...     tags_ = baca.tags.short_instrument_name_color_tags()
+        ...     match = lambda tags: bool(set(tags) & set(tags_))
+        ...     text, count, skipped = abjad.activate(text, match)
+        ...     lines = [_.strip('\n') for _ in text.split('\n')]
+        ...     lilypond_file["score"].items[:] = lines
+        ...     return text
+
+        >>> text = tag_lilypond_file(lilypond_file, text)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1983,19 +2088,21 @@ Persistence.
         ...     voice.extend(music)
         ...     previous_persistent_indicators = {}
         ...     previous_persistent_indicators["Staff"] = [
-        ...     baca.Memento(
-        ...         context="Music",
-        ...         manifest="short_instrument_names",
-        ...         value="I+II",
-        ...     )
-        ... ]
+        ...         baca.Memento(
+        ...             context="Music",
+        ...             manifest="short_instrument_names",
+        ...             value="I+II",
+        ...         )
+        ...     ]
         ...     baca.section.reapply_persistent_indicators(
-        ...     voice,
-        ...     previous_persistent_indicators,
-        ...     manifests=manifests,
-        ... )
-        ...     _ = baca.section.remove_redundant_time_signatures(score)
-        ...     baca.section.treat_untreated_persistent_wrappers(score, manifests=manifests)
+        ...         voice,
+        ...         previous_persistent_indicators,
+        ...         manifests=manifests,
+        ...     )
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(
+        ...         score, manifests=manifests
+        ...     )
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         ...     block = abjad.Block(name="layout")
@@ -2041,15 +2148,19 @@ Persistence.
                 >>
             }
 
-        >>> score = lilypond_file["Score"]
-        >>> text = abjad.lilypond(score)
-        >>> text = abjad.tag.left_shift_tags(text)
-        >>> tags_ = baca.tags.short_instrument_name_color_tags()
-        >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count, skipped = abjad.deactivate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text)
-        >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file["score"].items[:] = lines
+        >>> def tag_lilypond_file(lilypond_file):
+        ...     score = lilypond_file["Score"]
+        ...     text = abjad.lilypond(score)
+        ...     text = abjad.tag.left_shift_tags(text)
+        ...     tags_ = baca.tags.short_instrument_name_color_tags()
+        ...     match = lambda tags: bool(set(tags) & set(tags_))
+        ...     text, count, skipped = abjad.deactivate(text, match)
+        ...     text = abjad.tag.left_shift_tags(text)
+        ...     lines = [_.strip('\n') for _ in text.split('\n')]
+        ...     lilypond_file["score"].items[:] = lines
+        ...     return text
+
+        >>> text = tag_lilypond_file(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2085,11 +2196,15 @@ Persistence.
                 >>
             }
 
-        >>> tags_ = baca.tags.short_instrument_name_color_tags()
-        >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count, skipped = abjad.activate(text, match)
-        >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file["score"].items[:] = lines
+        >>> def tag_lilypond_file(lilypond_file, text):
+        ...     tags_ = baca.tags.short_instrument_name_color_tags()
+        ...     match = lambda tags: bool(set(tags) & set(tags_))
+        ...     text, count, skipped = abjad.activate(text, match)
+        ...     lines = [_.strip('\n') for _ in text.split('\n')]
+        ...     lilypond_file["score"].items[:] = lines
+        ...     return text
+
+        >>> text = tag_lilypond_file(lilypond_file, text)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2132,12 +2247,12 @@ Persistence.
         >>> def make_lilypond_file():
         ...     score = baca.docs.make_empty_score(1)
         ...     breaks = baca.breaks(
-        ...     baca.page(
-        ...         1,
-        ...         baca.system(measure=1, y_offset=0, distances=(11,)),
-        ...         baca.system(measure=3, y_offset=15, distances=(11,)),
-        ...     ),
-        ... )
+        ...         baca.page(
+        ...             1,
+        ...             baca.system(measure=1, y_offset=0, distances=(11,)),
+        ...             baca.system(measure=3, y_offset=15, distances=(11,)),
+        ...         ),
+        ...     )
         ...     time_signatures = baca.section.wrap([(4, 8), (4, 8), (4, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
         ...     baca.SpacingSpecifier((1, 24))(score)
@@ -2146,10 +2261,12 @@ Persistence.
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
         ...     manifests = {"abjad.ShortInstrumentName": short_instrument_names}
-        ...     _ = baca.short_instrument_name(voice[0], "I+II", manifests)
-        ...     _ = baca.short_instrument_name(voice[1], "I+II", manifests)
-        ...     _ = baca.section.remove_redundant_time_signatures(score)
-        ...     baca.section.treat_untreated_persistent_wrappers(score, manifests=manifests)
+        ...     baca.short_instrument_name(voice[0], "I+II", manifests)
+        ...     baca.short_instrument_name(voice[1], "I+II", manifests)
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(
+        ...         score, manifests=manifests
+        ...     )
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         ...     block = abjad.Block(name="layout")
@@ -2203,15 +2320,19 @@ Persistence.
                 >>
             }
 
-        >>> score = lilypond_file["Score"]
-        >>> text = abjad.lilypond(score)
-        >>> text = abjad.tag.left_shift_tags(text)
-        >>> tags_ = baca.tags.short_instrument_name_color_tags()
-        >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count, skipped = abjad.deactivate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text)
-        >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file["score"].items[:] = lines
+        >>> def tag_lilypond_file(lilypond_file):
+        ...     score = lilypond_file["Score"]
+        ...     text = abjad.lilypond(score)
+        ...     text = abjad.tag.left_shift_tags(text)
+        ...     tags_ = baca.tags.short_instrument_name_color_tags()
+        ...     match = lambda tags: bool(set(tags) & set(tags_))
+        ...     text, count, skipped = abjad.deactivate(text, match)
+        ...     text = abjad.tag.left_shift_tags(text)
+        ...     lines = [_.strip('\n') for _ in text.split('\n')]
+        ...     lilypond_file["score"].items[:] = lines
+        ...     return text
+
+        >>> text = tag_lilypond_file(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2255,11 +2376,15 @@ Persistence.
                 >>
             }
 
-        >>> tags_ = baca.tags.short_instrument_name_color_tags()
-        >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count, skipped = abjad.activate(text, match)
-        >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file["score"].items[:] = lines
+        >>> def tag_lilypond_file(lilypond_file, text):
+        ...     tags_ = baca.tags.short_instrument_name_color_tags()
+        ...     match = lambda tags: bool(set(tags) & set(tags_))
+        ...     text, count, skipped = abjad.activate(text, match)
+        ...     lines = [_.strip('\n') for _ in text.split('\n')]
+        ...     lilypond_file["score"].items[:] = lines
+        ...     return text
+
+        >>> text = tag_lilypond_file(lilypond_file, text)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2305,42 +2430,48 @@ Persistence.
 
         Even at the beginning of a section:
 
-        >>> score = baca.docs.make_empty_score(1)
-        >>> breaks = baca.breaks(
-        ...     baca.page(
-        ...         1,
-        ...         baca.system(measure=1, y_offset=0, distances=(11,)),
-        ...         baca.system(measure=2, y_offset=15, distances=(11,)),
-        ...     ),
-        ... )
-        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-        >>> baca.SpacingSpecifier((1, 24))(score)
-        >>> baca.section.apply_breaks(score, breaks)
-        >>> voice = score["Music"]
-        >>> music = baca.make_notes(time_signatures())
-        >>> voice.extend(music)
-        >>> previous_persistent_indicators = {}
-        >>> previous_persistent_indicators["Staff"] = [
-        ...     baca.Memento(
-        ...         context="Music",
-        ...         manifest="short_instrument_names",
-        ...         value="I+II",
+        >>> def make_lilypond_file():
+        ...     score = baca.docs.make_empty_score(1)
+        ...     breaks = baca.breaks(
+        ...         baca.page(
+        ...             1,
+        ...             baca.system(measure=1, y_offset=0, distances=(11,)),
+        ...             baca.system(measure=2, y_offset=15, distances=(11,)),
+        ...         ),
         ...     )
-        ... ]
-        >>> baca.section.reapply_persistent_indicators(
-        ...     voice,
-        ...     previous_persistent_indicators,
-        ...     manifests=manifests,
-        ... )
-        >>> _ = baca.short_instrument_name(voice[0], "I+II", manifests)
-        >>> _ = baca.section.remove_redundant_time_signatures(score)
-        >>> baca.section.treat_untreated_persistent_wrappers(score, manifests=manifests)
-        >>> baca.docs.remove_deactivated_wrappers(score)
-        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        >>> block = abjad.Block(name="layout")
-        >>> block.indent = 0
-        >>> lilypond_file.items.insert(0, block)
+        ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
+        ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+        ...     baca.SpacingSpecifier((1, 24))(score)
+        ...     baca.section.apply_breaks(score, breaks)
+        ...     voice = score["Music"]
+        ...     music = baca.make_notes(time_signatures())
+        ...     voice.extend(music)
+        ...     previous_persistent_indicators = {}
+        ...     previous_persistent_indicators["Staff"] = [
+        ...         baca.Memento(
+        ...             context="Music",
+        ...             manifest="short_instrument_names",
+        ...             value="I+II",
+        ...         )
+        ...     ]
+        ...     baca.section.reapply_persistent_indicators(
+        ...         voice,
+        ...         previous_persistent_indicators,
+        ...         manifests=manifests,
+        ...     )
+        ...     baca.short_instrument_name(voice[0], "I+II", manifests)
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(
+        ...         score, manifests=manifests
+        ...     )
+        ...     baca.docs.remove_deactivated_wrappers(score)
+        ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+        ...     block = abjad.Block(name="layout")
+        ...     block.indent = 0
+        ...     lilypond_file.items.insert(0, block)
+        ...     return lilypond_file
+
+        >>> lilypond_file = make_lilypond_file()
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2378,15 +2509,19 @@ Persistence.
                 >>
             }
 
-        >>> score = lilypond_file["Score"]
-        >>> text = abjad.lilypond(score)
-        >>> text = abjad.tag.left_shift_tags(text)
-        >>> tags_ = baca.tags.short_instrument_name_color_tags()
-        >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count, skipped = abjad.deactivate(text, match)
-        >>> text = abjad.tag.left_shift_tags(text)
-        >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file["score"].items[:] = lines
+        >>> def tag_lilypond_file(lilypond_file):
+        ...     score = lilypond_file["Score"]
+        ...     text = abjad.lilypond(score)
+        ...     text = abjad.tag.left_shift_tags(text)
+        ...     tags_ = baca.tags.short_instrument_name_color_tags()
+        ...     match = lambda tags: bool(set(tags) & set(tags_))
+        ...     text, count, skipped = abjad.deactivate(text, match)
+        ...     text = abjad.tag.left_shift_tags(text)
+        ...     lines = [_.strip('\n') for _ in text.split('\n')]
+        ...     lilypond_file["score"].items[:] = lines
+        ...     return text
+
+        >>> text = tag_lilypond_file(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2422,11 +2557,15 @@ Persistence.
                 >>
             }
 
-        >>> tags_ = baca.tags.short_instrument_name_color_tags()
-        >>> match = lambda tags: bool(set(tags) & set(tags_))
-        >>> text, count, skipped = abjad.activate(text, match)
-        >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file["score"].items[:] = lines
+        >>> def tag_lilypond_file(lilypond_file, text):
+        ...     tags_ = baca.tags.short_instrument_name_color_tags()
+        ...     match = lambda tags: bool(set(tags) & set(tags_))
+        ...     text, count, skipped = abjad.activate(text, match)
+        ...     lines = [_.strip('\n') for _ in text.split('\n')]
+        ...     lilypond_file["score"].items[:] = lines
+        ...     return text
+
+        >>> text = tag_lilypond_file(lilypond_file, text)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2469,12 +2608,12 @@ Persistence.
         >>> def make_lilypond_file():
         ...     score = baca.docs.make_empty_score(1)
         ...     breaks = baca.breaks(
-        ...     baca.page(
-        ...         1,
-        ...         baca.system(measure=1, y_offset=0, distances=(11,)),
-        ...         baca.system(measure=2, y_offset=15, distances=(11,)),
-        ...     ),
-        ... )
+        ...         baca.page(
+        ...             1,
+        ...             baca.system(measure=1, y_offset=0, distances=(11,)),
+        ...             baca.system(measure=2, y_offset=15, distances=(11,)),
+        ...         ),
+        ...     )
         ...     time_signatures = baca.section.wrap([(4, 8), (4, 8), (4, 8)])
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
         ...     baca.SpacingSpecifier((1, 24))(score)
@@ -2482,12 +2621,14 @@ Persistence.
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
-        ...     _ = baca.short_instrument_name(voice[0], "I+II", manifests)
+        ...     baca.short_instrument_name(voice[0], "I+II", manifests)
         ...     wrappers = baca.short_instrument_name(
-        ...     voice[0], "III+IV", manifests, deactivate=True
-        ... )
-        ...     _ = baca.section.remove_redundant_time_signatures(score)
-        ...     baca.section.treat_untreated_persistent_wrappers(score, manifests=manifests)
+        ...         voice[0], "III+IV", manifests, deactivate=True
+        ...     )
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(
+        ...         score, manifests=manifests
+        ...     )
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         ...     block = abjad.Block(name="layout")
@@ -2563,23 +2704,25 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(
-        ...     score,
-        ...     time_signatures(),
-        ...     append_anchor_skip=True,
-        ...     docs=True,
-        ... )
+        ...         score,
+        ...         time_signatures(),
+        ...         append_anchor_skip=True,
+        ...         docs=True,
+        ...     )
         ...     baca.SpacingSpecifier((1, 24))(score)
         ...     baca.section.apply_breaks(score, breaks)
-        ...     _ = baca.metronome_mark(
-        ...     score["Skips"][1 - 1],
-        ...     metronome_marks["112"],
-        ... )
+        ...     baca.metronome_mark(
+        ...         score["Skips"][1 - 1],
+        ...         metronome_marks["112"],
+        ...     )
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
         ...     baca.section.append_anchor_note(voice)
-        ...     _ = baca.section.remove_redundant_time_signatures(score)
-        ...     baca.section.treat_untreated_persistent_wrappers(score, manifests=manifests)
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(
+        ...         score, manifests=manifests
+        ...     )
         ...     baca.section.span_metronome_marks(score)
         ...     baca.section.style_anchor_skip(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
@@ -2641,47 +2784,53 @@ Persistence.
 
         Even after a previous metronome mark:
 
-        >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(
-        ...     score,
-        ...     time_signatures(),
-        ...     append_anchor_skip=True,
-        ...     docs=True,
-        ... )
-        >>> baca.SpacingSpecifier((1, 24))(score)
-        >>> baca.section.apply_breaks(score, breaks)
-        >>> _ = baca.metronome_mark(
-        ...     score["Skips"][1 - 1],
-        ...     metronome_marks["112"],
-        ... )
-        >>> _ = baca.text_spanner_staff_padding(score["Skips"][:-1], 4)
-        >>> voice = score["Music"]
-        >>> music = baca.make_notes(time_signatures())
-        >>> voice.extend(music)
-        >>> baca.section.append_anchor_note(voice)
-        >>> previous_persistent_indicators = {}
-        >>> previous_persistent_indicators["Score"] = [
-        ...     baca.Memento(
-        ...         context="Skips",
-        ...         manifest="metronome_marks",
-        ...         value="90",
+        >>> def make_lilypond_file():
+        ...     score = baca.docs.make_empty_score(1)
+        ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
+        ...     baca.section.set_up_score(
+        ...         score,
+        ...         time_signatures(),
+        ...         append_anchor_skip=True,
+        ...         docs=True,
         ...     )
-        ... ]
-        >>> baca.section.reapply_persistent_indicators(
-        ...     voice,
-        ...     previous_persistent_indicators,
-        ...     manifests=manifests,
-        ... )
-        >>> _ = baca.section.remove_redundant_time_signatures(score)
-        >>> baca.section.treat_untreated_persistent_wrappers(score, manifests=manifests)
-        >>> baca.section.span_metronome_marks(score)
-        >>> baca.section.style_anchor_skip(score)
-        >>> baca.docs.remove_deactivated_wrappers(score)
-        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        >>> block = abjad.Block(name="layout")
-        >>> block.indent = 0
-        >>> lilypond_file.items.insert(0, block)
+        ...     baca.SpacingSpecifier((1, 24))(score)
+        ...     baca.section.apply_breaks(score, breaks)
+        ...     baca.metronome_mark(
+        ...         score["Skips"][1 - 1],
+        ...         metronome_marks["112"],
+        ...     )
+        ...     baca.text_spanner_staff_padding(score["Skips"][:-1], 4)
+        ...     voice = score["Music"]
+        ...     music = baca.make_notes(time_signatures())
+        ...     voice.extend(music)
+        ...     baca.section.append_anchor_note(voice)
+        ...     previous_persistent_indicators = {}
+        ...     previous_persistent_indicators["Score"] = [
+        ...         baca.Memento(
+        ...             context="Skips",
+        ...             manifest="metronome_marks",
+        ...             value="90",
+        ...         )
+        ...     ]
+        ...     baca.section.reapply_persistent_indicators(
+        ...         voice,
+        ...         previous_persistent_indicators,
+        ...         manifests=manifests,
+        ...     )
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(
+        ...         score, manifests=manifests
+        ...     )
+        ...     baca.section.span_metronome_marks(score)
+        ...     baca.section.style_anchor_skip(score)
+        ...     baca.docs.remove_deactivated_wrappers(score)
+        ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+        ...     block = abjad.Block(name="layout")
+        ...     block.indent = 0
+        ...     lilypond_file.items.insert(0, block)
+        ...     return lilypond_file
+
+        >>> lilypond_file = make_lilypond_file()
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2750,20 +2899,22 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(
-        ...     score,
-        ...     time_signatures(),
-        ...     docs=True,
-        ...     manifests={"abjad.MetronomeMark": metronome_marks},
-        ...     previous_persistent_indicators=previous_persistent_indicators,
-        ... )
+        ...         score,
+        ...         time_signatures(),
+        ...         docs=True,
+        ...         manifests={"abjad.MetronomeMark": metronome_marks},
+        ...         previous_persistent_indicators=previous_persistent_indicators,
+        ...     )
         ...     baca.SpacingSpecifier((1, 24))(score)
         ...     baca.section.apply_breaks(score, breaks)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
-        ...     _ = baca.text_spanner_staff_padding(score["Skips"], 4)
-        ...     _ = baca.section.remove_redundant_time_signatures(score)
-        ...     baca.section.treat_untreated_persistent_wrappers(score, manifests=manifests)
+        ...     baca.text_spanner_staff_padding(score["Skips"], 4)
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(
+        ...         score, manifests=manifests
+        ...     )
         ...     baca.section.span_metronome_marks(score)
         ...     baca.section.style_anchor_skip(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
@@ -2820,27 +2971,29 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(
-        ...     score,
-        ...     time_signatures(),
-        ...     append_anchor_skip=True,
-        ...     docs=True,
-        ... )
+        ...         score,
+        ...         time_signatures(),
+        ...         append_anchor_skip=True,
+        ...         docs=True,
+        ...     )
         ...     baca.SpacingSpecifier((1, 24))(score)
         ...     baca.section.apply_breaks(score, breaks)
-        ...     _ = baca.metronome_mark(
-        ...     score["Skips"][1 - 1],
-        ...     metronome_marks["112"],
-        ... )
-        ...     _ = baca.metronome_mark(
-        ...     score["Skips"][2 - 1],
-        ...     metronome_marks["112"],
-        ... )
+        ...     baca.metronome_mark(
+        ...         score["Skips"][1 - 1],
+        ...         metronome_marks["112"],
+        ...     )
+        ...     baca.metronome_mark(
+        ...         score["Skips"][2 - 1],
+        ...         metronome_marks["112"],
+        ...     )
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
         ...     baca.section.append_anchor_note(voice)
-        ...     _ = baca.section.remove_redundant_time_signatures(score)
-        ...     baca.section.treat_untreated_persistent_wrappers(score, manifests=manifests)
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(
+        ...         score, manifests=manifests
+        ...     )
         ...     baca.section.span_metronome_marks(score)
         ...     baca.section.style_anchor_skip(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
@@ -2914,39 +3067,46 @@ Persistence.
         ...         value="112",
         ...     )
         ... ]
-        >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(
-        ...     score,
-        ...     time_signatures(),
-        ...     append_anchor_skip=True,
-        ...     docs=True,
-        ...     manifests={"abjad.MetronomeMark": metronome_marks},
-        ...     previous_persistent_indicators=previous_persistent_indicators,
-        ... )
-        >>> baca.SpacingSpecifier((1, 24))(score)
-        >>> baca.section.apply_breaks(score, breaks)
-        >>> _ = baca.metronome_mark(
-        ...     score["Skips"][1 - 1],
-        ...     metronome_marks["112"],
-        ... )
-        >>> _ = baca.text_spanner_staff_padding(score["Skips"][:-1], 4)
-        >>> voice = score["Music"]
-        >>> music = baca.make_notes(time_signatures())
-        >>> voice.extend(music)
-        >>> baca.section.append_anchor_note(voice)
-        >>> baca.section.reapply_persistent_indicators(
-        ...     voice, previous_persistent_indicators
-        ... )
-        >>> _ = baca.section.remove_redundant_time_signatures(score)
-        >>> baca.section.treat_untreated_persistent_wrappers(score, manifests=manifests)
-        >>> baca.section.span_metronome_marks(score)
-        >>> baca.section.style_anchor_skip(score)
-        >>> baca.docs.remove_deactivated_wrappers(score)
-        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        >>> block = abjad.Block(name="layout")
-        >>> block.indent = 0
-        >>> lilypond_file.items.insert(0, block)
+
+        >>> def make_lilypond_file():
+        ...     score = baca.docs.make_empty_score(1)
+        ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
+        ...     baca.section.set_up_score(
+        ...         score,
+        ...         time_signatures(),
+        ...         append_anchor_skip=True,
+        ...         docs=True,
+        ...         manifests={"abjad.MetronomeMark": metronome_marks},
+        ...         previous_persistent_indicators=previous_persistent_indicators,
+        ...     )
+        ...     baca.SpacingSpecifier((1, 24))(score)
+        ...     baca.section.apply_breaks(score, breaks)
+        ...     baca.metronome_mark(
+        ...         score["Skips"][1 - 1],
+        ...         metronome_marks["112"],
+        ...     )
+        ...     baca.text_spanner_staff_padding(score["Skips"][:-1], 4)
+        ...     voice = score["Music"]
+        ...     music = baca.make_notes(time_signatures())
+        ...     voice.extend(music)
+        ...     baca.section.append_anchor_note(voice)
+        ...     baca.section.reapply_persistent_indicators(
+        ...         voice, previous_persistent_indicators
+        ...     )
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(
+        ...         score, manifests=manifests
+        ...     )
+        ...     baca.section.span_metronome_marks(score)
+        ...     baca.section.style_anchor_skip(score)
+        ...     baca.docs.remove_deactivated_wrappers(score)
+        ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+        ...     block = abjad.Block(name="layout")
+        ...     block.indent = 0
+        ...     lilypond_file.items.insert(0, block)
+        ...     return lilypond_file
+
+        >>> lilypond_file = make_lilypond_file()
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3012,18 +3172,18 @@ Persistence.
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
         ...     baca.SpacingSpecifier((1, 24))(score)
         ...     override = baca.PersistentOverride(
-        ...     attribute="bar_extent",
-        ...     context="Staff",
-        ...     grob="BarLine",
-        ...     value="#'(0 . 0)",
-        ... )
+        ...         attribute="bar_extent",
+        ...         context="Staff",
+        ...         grob="BarLine",
+        ...         value="#'(0 . 0)",
+        ...     )
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
         ...     wrapper = abjad.attach(override, voice[0], wrapper=True)
-        ...     _ = baca.staff_lines(voice[0], 1)
-        ...     _ = baca.staff_position(voice, 0)
-        ...     _ = baca.section.remove_redundant_time_signatures(score)
+        ...     baca.staff_lines(voice[0], 1)
+        ...     baca.staff_position(voice, 0)
+        ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
@@ -3081,24 +3241,24 @@ Persistence.
         ...     voice.extend(music)
         ...     previous_persistent_indicators = {}
         ...     previous_persistent_indicators["Music"] = [
-        ...     baca.Memento(
-        ...         context="Music",
-        ...         prototype='baca.PersistentOverride',
-        ...         value=baca.PersistentOverride(
-        ...             after=True,
-        ...             attribute="bar_extent",
-        ...             context="Staff",
-        ...             grob="BarLine",
-        ...             value="#'(0 . 0)",
-        ...         ),
-        ...     )
-        ... ]
+        ...         baca.Memento(
+        ...             context="Music",
+        ...             prototype='baca.PersistentOverride',
+        ...             value=baca.PersistentOverride(
+        ...                 after=True,
+        ...                 attribute="bar_extent",
+        ...                 context="Staff",
+        ...                 grob="BarLine",
+        ...                 value="#'(0 . 0)",
+        ...             ),
+        ...         )
+        ...     ]
         ...     baca.section.reapply_persistent_indicators(
-        ...     voice,
-        ...     previous_persistent_indicators,
-        ...     manifests=manifests,
-        ... )
-        ...     _ = baca.section.remove_redundant_time_signatures(score)
+        ...         voice,
+        ...         previous_persistent_indicators,
+        ...         manifests=manifests,
+        ...     )
+        ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
@@ -3139,44 +3299,48 @@ Persistence.
 
         Even at the beginning of a section:
 
-        >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-        >>> baca.SpacingSpecifier((1, 24))(score)
-        >>> voice = score["Music"]
-        >>> music = baca.make_notes(time_signatures())
-        >>> voice.extend(music)
-        >>> override = baca.PersistentOverride(
-        ...     attribute="bar_extent",
-        ...     context="Staff",
-        ...     grob="BarLine",
-        ...     value="#'(0 . 0)",
-        ... )
-        >>> abjad.attach(override, abjad.select.leaf(voice, 0))
-        >>> previous_persistent_indicators = {}
-        >>> previous_persistent_indicators["Music"] = [
-        ...     baca.Memento(
-        ...         context="Music",
-        ...         prototype="baca.PersistentOverride",
-        ...         value=baca.PersistentOverride(
-        ...             after=True,
-        ...             attribute="bar_extent",
-        ...             context="Staff",
-        ...             grob='BarLine',
-        ...             value="#'(0 . 0)",
-        ...         ),
+        >>> def make_lilypond_file():
+        ...     score = baca.docs.make_empty_score(1)
+        ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
+        ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+        ...     baca.SpacingSpecifier((1, 24))(score)
+        ...     voice = score["Music"]
+        ...     music = baca.make_notes(time_signatures())
+        ...     voice.extend(music)
+        ...     override = baca.PersistentOverride(
+        ...         attribute="bar_extent",
+        ...         context="Staff",
+        ...         grob="BarLine",
+        ...         value="#'(0 . 0)",
         ...     )
-        ... ]
-        >>> baca.section.reapply_persistent_indicators(
-        ...     score, previous_persistent_indicators
-        ... )
-        >>> _ = baca.section.remove_redundant_time_signatures(score)
-        >>> baca.section.treat_untreated_persistent_wrappers(score)
-        >>> baca.docs.remove_deactivated_wrappers(score)
-        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        >>> block = abjad.Block(name="layout")
-        >>> block.indent = 0
-        >>> lilypond_file.items.insert(0, block)
+        ...     abjad.attach(override, abjad.select.leaf(voice, 0))
+        ...     previous_persistent_indicators = {}
+        ...     previous_persistent_indicators["Music"] = [
+        ...         baca.Memento(
+        ...             context="Music",
+        ...             prototype="baca.PersistentOverride",
+        ...             value=baca.PersistentOverride(
+        ...                 after=True,
+        ...                 attribute="bar_extent",
+        ...                 context="Staff",
+        ...                 grob='BarLine',
+        ...                 value="#'(0 . 0)",
+        ...             ),
+        ...         )
+        ...     ]
+        ...     baca.section.reapply_persistent_indicators(
+        ...         score, previous_persistent_indicators
+        ...     )
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(score)
+        ...     baca.docs.remove_deactivated_wrappers(score)
+        ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+        ...     block = abjad.Block(name="layout")
+        ...     block.indent = 0
+        ...     lilypond_file.items.insert(0, block)
+        ...     return lilypond_file
+
+        >>> lilypond_file = make_lilypond_file()
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3222,8 +3386,8 @@ Persistence.
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
-        ...     _ = baca.staff_lines(voice[0], 5)
-        ...     _ = baca.section.remove_redundant_time_signatures(score)
+        ...     baca.staff_lines(voice[0], 5)
+        ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
@@ -3268,32 +3432,36 @@ Persistence.
 
         Even after previous staff lines:
 
-        >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-        >>> baca.SpacingSpecifier((1, 24))(score)
-        >>> voice = score["Music"]
-        >>> music = baca.make_notes(time_signatures())
-        >>> voice.extend(music)
-        >>> _ = baca.staff_lines(voice[0], 1)
-        >>> previous_persistent_indicators = {}
-        >>> previous_persistent_indicators["Staff"] = [
-        ...     baca.Memento(
-        ...         context="Music",
-        ...         prototype='baca.StaffLines',
-        ...         value=5,
+        >>> def make_lilypond_file():
+        ...     score = baca.docs.make_empty_score(1)
+        ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
+        ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+        ...     baca.SpacingSpecifier((1, 24))(score)
+        ...     voice = score["Music"]
+        ...     music = baca.make_notes(time_signatures())
+        ...     voice.extend(music)
+        ...     baca.staff_lines(voice[0], 1)
+        ...     previous_persistent_indicators = {}
+        ...     previous_persistent_indicators["Staff"] = [
+        ...         baca.Memento(
+        ...             context="Music",
+        ...             prototype='baca.StaffLines',
+        ...             value=5,
+        ...         )
+        ...     ]
+        ...     baca.section.reapply_persistent_indicators(
+        ...         score, previous_persistent_indicators
         ...     )
-        ... ]
-        >>> baca.section.reapply_persistent_indicators(
-        ...     score, previous_persistent_indicators
-        ... )
-        >>> _ = baca.section.remove_redundant_time_signatures(score)
-        >>> baca.section.treat_untreated_persistent_wrappers(score)
-        >>> baca.docs.remove_deactivated_wrappers(score)
-        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        >>> block = abjad.Block(name="layout")
-        >>> block.indent = 0
-        >>> lilypond_file.items.insert(0, block)
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(score)
+        ...     baca.docs.remove_deactivated_wrappers(score)
+        ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+        ...     block = abjad.Block(name="layout")
+        ...     block.indent = 0
+        ...     lilypond_file.items.insert(0, block)
+        ...     return lilypond_file
+
+        >>> lilypond_file = make_lilypond_file()
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3341,18 +3509,18 @@ Persistence.
         ...     voice.extend(music)
         ...     previous_persistent_indicators = {}
         ...     previous_persistent_indicators["Staff"] = [
-        ...     baca.Memento(
-        ...         context="Music",
-        ...         prototype="baca.StaffLines",
-        ...         value=5,
-        ...     )
-        ... ]
+        ...         baca.Memento(
+        ...             context="Music",
+        ...             prototype="baca.StaffLines",
+        ...             value=5,
+        ...         )
+        ...     ]
         ...     baca.section.reapply_persistent_indicators(
-        ...     voice,
-        ...     previous_persistent_indicators,
-        ...     manifests=manifests,
-        ... )
-        ...     _ = baca.section.remove_redundant_time_signatures(score)
+        ...         voice,
+        ...         previous_persistent_indicators,
+        ...         manifests=manifests,
+        ...     )
+        ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
@@ -3406,9 +3574,9 @@ Persistence.
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
-        ...     _ = baca.staff_lines(voice[0], 5)
-        ...     _ = baca.staff_lines(voice[1], 5)
-        ...     _ = baca.section.remove_redundant_time_signatures(score)
+        ...     baca.staff_lines(voice[0], 5)
+        ...     baca.staff_lines(voice[1], 5)
+        ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
         ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
@@ -3458,32 +3626,36 @@ Persistence.
 
         Even at the beginning of a section:
 
-        >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-        >>> baca.SpacingSpecifier((1, 24))(score)
-        >>> voice = score["Music"]
-        >>> music = baca.make_notes(time_signatures())
-        >>> voice.extend(music)
-        >>> previous_persistent_indicators = {}
-        >>> previous_persistent_indicators["Staff"] = [
-        ...     baca.Memento(
-        ...         context="Music",
-        ...         prototype="baca.StaffLines",
-        ...         value=5,
+        >>> def make_lilypond_file():
+        ...     score = baca.docs.make_empty_score(1)
+        ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
+        ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+        ...     baca.SpacingSpecifier((1, 24))(score)
+        ...     voice = score["Music"]
+        ...     music = baca.make_notes(time_signatures())
+        ...     voice.extend(music)
+        ...     previous_persistent_indicators = {}
+        ...     previous_persistent_indicators["Staff"] = [
+        ...         baca.Memento(
+        ...             context="Music",
+        ...             prototype="baca.StaffLines",
+        ...             value=5,
+        ...         )
+        ...     ]
+        ...     baca.section.reapply_persistent_indicators(
+        ...         voice, previous_persistent_indicators
         ...     )
-        ... ]
-        >>> baca.section.reapply_persistent_indicators(
-        ...     voice, previous_persistent_indicators
-        ... )
-        >>> _ = baca.staff_lines(voice[0], 5)
-        >>> _ = baca.section.remove_redundant_time_signatures(score)
-        >>> baca.section.treat_untreated_persistent_wrappers(score)
-        >>> baca.docs.remove_deactivated_wrappers(score)
-        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        >>> block = abjad.Block(name="layout")
-        >>> block.indent = 0
-        >>> lilypond_file.items.insert(0, block)
+        ...     baca.staff_lines(voice[0], 5)
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(score)
+        ...     baca.docs.remove_deactivated_wrappers(score)
+        ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+        ...     block = abjad.Block(name="layout")
+        ...     block.indent = 0
+        ...     lilypond_file.items.insert(0, block)
+        ...     return lilypond_file
+
+        >>> lilypond_file = make_lilypond_file()
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3541,23 +3713,25 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(
-        ...     score,
-        ...     time_signatures(),
-        ...     append_anchor_skip=True,
-        ...     docs=True,
-        ... )
+        ...         score,
+        ...         time_signatures(),
+        ...         append_anchor_skip=True,
+        ...         docs=True,
+        ...     )
         ...     baca.SpacingSpecifier((1, 24))(score)
         ...     baca.section.apply_breaks(score, breaks)
-        ...     _ = baca.metronome_mark(
-        ...     score["Skips"][1 - 1],
-        ...     baca.Accelerando(),
-        ... )
+        ...     baca.metronome_mark(
+        ...         score["Skips"][1 - 1],
+        ...         baca.Accelerando(),
+        ...     )
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
         ...     baca.section.append_anchor_note(voice)
-        ...     _ = baca.section.remove_redundant_time_signatures(score)
-        ...     baca.section.treat_untreated_persistent_wrappers(score, manifests=manifests)
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(
+        ...         score, manifests=manifests
+        ...     )
         ...     baca.section.span_metronome_marks(score)
         ...     baca.section.style_anchor_skip(score)
         ...     baca.docs.remove_deactivated_wrappers(score)
@@ -3619,38 +3793,42 @@ Persistence.
 
         Even after a previous tempo trend:
 
-        >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-        >>> baca.SpacingSpecifier((1, 24))(score)
-        >>> baca.section.apply_breaks(score, breaks)
-        >>> _ = baca.metronome_mark(
-        ...     score["Skips"][1 - 1],
-        ...     baca.Accelerando(),
-        ... )
-        >>> _ = baca.text_spanner_staff_padding(score["Skips"], 4)
-        >>> voice = score["Music"]
-        >>> music = baca.make_notes(time_signatures())
-        >>> voice.extend(music)
-        >>> previous_persistent_indicators = {}
-        >>> previous_persistent_indicators["Score"] = [
-        ...     baca.Memento(
-        ...         context="Skips",
-        ...         prototype="baca.Ritardando",
+        >>> def make_lilypond_file():
+        ...     score = baca.docs.make_empty_score(1)
+        ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
+        ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+        ...     baca.SpacingSpecifier((1, 24))(score)
+        ...     baca.section.apply_breaks(score, breaks)
+        ...     baca.metronome_mark(
+        ...         score["Skips"][1 - 1],
+        ...         baca.Accelerando(),
         ...     )
-        ... ]
-        >>> baca.section.reapply_persistent_indicators(
-        ...     score, previous_persistent_indicators
-        ... )
-        >>> _ = baca.section.remove_redundant_time_signatures(score)
-        >>> baca.section.treat_untreated_persistent_wrappers(score)
-        >>> baca.section.span_metronome_marks(score)
-        >>> baca.section.style_anchor_skip(score)
-        >>> baca.docs.remove_deactivated_wrappers(score)
-        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        >>> block = abjad.Block(name="layout")
-        >>> block.indent = 0
-        >>> lilypond_file.items.insert(0, block)
+        ...     baca.text_spanner_staff_padding(score["Skips"], 4)
+        ...     voice = score["Music"]
+        ...     music = baca.make_notes(time_signatures())
+        ...     voice.extend(music)
+        ...     previous_persistent_indicators = {}
+        ...     previous_persistent_indicators["Score"] = [
+        ...         baca.Memento(
+        ...             context="Skips",
+        ...             prototype="baca.Ritardando",
+        ...         )
+        ...     ]
+        ...     baca.section.reapply_persistent_indicators(
+        ...         score, previous_persistent_indicators
+        ...     )
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(score)
+        ...     baca.section.span_metronome_marks(score)
+        ...     baca.section.style_anchor_skip(score)
+        ...     baca.docs.remove_deactivated_wrappers(score)
+        ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+        ...     block = abjad.Block(name="layout")
+        ...     block.indent = 0
+        ...     lilypond_file.items.insert(0, block)
+        ...     return lilypond_file
+
+        >>> lilypond_file = make_lilypond_file()
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3706,23 +3884,23 @@ Persistence.
         ...     score = baca.docs.make_empty_score(1)
         ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
         ...     baca.section.set_up_score(
-        ...     score,
-        ...     time_signatures(),
-        ...     docs=True,
-        ...     previous_persistent_indicators=previous_persistent_indicators,
-        ... )
+        ...         score,
+        ...         time_signatures(),
+        ...         docs=True,
+        ...         previous_persistent_indicators=previous_persistent_indicators,
+        ...     )
         ...     baca.SpacingSpecifier((1, 24))(score)
         ...     baca.section.apply_breaks(score, breaks)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
         ...     baca.section.reapply_persistent_indicators(
-        ...     voice,
-        ...     previous_persistent_indicators,
-        ...     manifests=manifests,
-        ... )
-        ...     _ = baca.text_spanner_staff_padding(score["Skips"], 4)
-        ...     _ = baca.section.remove_redundant_time_signatures(score)
+        ...         voice,
+        ...         previous_persistent_indicators,
+        ...         manifests=manifests,
+        ...     )
+        ...     baca.text_spanner_staff_padding(score["Skips"], 4)
+        ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.section.span_metronome_marks(score)
         ...     baca.section.style_anchor_skip(score)
@@ -3782,18 +3960,18 @@ Persistence.
         ...     baca.section.set_up_score(score, time_signatures(), docs=True)
         ...     baca.SpacingSpecifier((1, 24))(score)
         ...     baca.section.apply_breaks(score, breaks)
-        ...     _ = baca.metronome_mark(
-        ...     score["Skips"][1 - 1],
-        ...     baca.Accelerando(),
-        ... )
-        ...     _ = baca.metronome_mark(
-        ...     score["Skips"][2 - 1],
-        ...     baca.Accelerando(),
-        ... )
+        ...     baca.metronome_mark(
+        ...         score["Skips"][1 - 1],
+        ...         baca.Accelerando(),
+        ...     )
+        ...     baca.metronome_mark(
+        ...         score["Skips"][2 - 1],
+        ...         baca.Accelerando(),
+        ...     )
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
-        ...     _ = baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.section.span_metronome_marks(score)
         ...     baca.section.style_anchor_skip(score)
@@ -3859,38 +4037,43 @@ Persistence.
         ...         prototype="baca.Accelerando",
         ...     )
         ... ]
-        >>> score = baca.docs.make_empty_score(1)
-        >>> time_signatures = baca.section.wrap([(3, 8), (3, 8)])
-        >>> baca.section.set_up_score(
-        ...     score,
-        ...     time_signatures(),
-        ...     docs=True,
-        ...     previous_persistent_indicators=previous_persistent_indicators,
-        ... )
-        >>> baca.SpacingSpecifier((1, 24))(score)
-        >>> baca.section.apply_breaks(score, breaks)
-        >>> _ = baca.metronome_mark(
-        ...     score["Skips"][1 - 1],
-        ...     baca.Accelerando(),
-        ... )
-        >>> _ = baca.text_spanner_staff_padding(score["Skips"], 4)
-        >>> voice = score["Music"]
-        >>> music = baca.make_notes(time_signatures())
-        >>> voice.extend(music)
-        >>> baca.section.reapply_persistent_indicators(
-        ...     voice,
-        ...     previous_persistent_indicators,
-        ...     manifests=manifests,
-        ... )
-        >>> _ = baca.section.remove_redundant_time_signatures(score)
-        >>> baca.section.treat_untreated_persistent_wrappers(score)
-        >>> baca.section.span_metronome_marks(score)
-        >>> baca.section.style_anchor_skip(score)
-        >>> baca.docs.remove_deactivated_wrappers(score)
-        >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-        >>> block = abjad.Block(name="layout")
-        >>> block.indent = 0
-        >>> lilypond_file.items.insert(0, block)
+
+        >>> def make_lilypond_file():
+        ...     score = baca.docs.make_empty_score(1)
+        ...     time_signatures = baca.section.wrap([(3, 8), (3, 8)])
+        ...     baca.section.set_up_score(
+        ...         score,
+        ...         time_signatures(),
+        ...         docs=True,
+        ...         previous_persistent_indicators=previous_persistent_indicators,
+        ...     )
+        ...     baca.SpacingSpecifier((1, 24))(score)
+        ...     baca.section.apply_breaks(score, breaks)
+        ...     baca.metronome_mark(
+        ...         score["Skips"][1 - 1],
+        ...         baca.Accelerando(),
+        ...     )
+        ...     baca.text_spanner_staff_padding(score["Skips"], 4)
+        ...     voice = score["Music"]
+        ...     music = baca.make_notes(time_signatures())
+        ...     voice.extend(music)
+        ...     baca.section.reapply_persistent_indicators(
+        ...         voice,
+        ...         previous_persistent_indicators,
+        ...         manifests=manifests,
+        ...     )
+        ...     baca.section.remove_redundant_time_signatures(score)
+        ...     baca.section.treat_untreated_persistent_wrappers(score)
+        ...     baca.section.span_metronome_marks(score)
+        ...     baca.section.style_anchor_skip(score)
+        ...     baca.docs.remove_deactivated_wrappers(score)
+        ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+        ...     block = abjad.Block(name="layout")
+        ...     block.indent = 0
+        ...     lilypond_file.items.insert(0, block)
+        ...     return lilypond_file
+
+        >>> lilypond_file = make_lilypond_file()
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
