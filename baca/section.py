@@ -651,6 +651,8 @@ def _collect_persistent_indicators(
                 continue
             if isinstance(indicator, abjad.Tie):
                 continue
+            if isinstance(indicator, abjad.VoiceNumber) and indicator.n is None:
+                continue
             prototype, manifest = None, None
             if isinstance(indicator, abjad.Instrument):
                 manifest = "instruments"
