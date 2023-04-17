@@ -350,7 +350,7 @@ def _make_section_clicktrack(lilypond_file, mtime, section_directory):
     for i, time_signature in enumerate(time_signatures):
         measure_number = i + 1
         if measure_number in fermata_measure_numbers:
-            metronome_mark = abjad.MetronomeMark((1, 4), 60)
+            metronome_mark = abjad.MetronomeMark(abjad.Duration(1, 4), 60)
             time_signature = abjad.TimeSignature((3, 4))
             notes = [abjad.Rest("r2.")]
         else:
@@ -375,7 +375,10 @@ def _make_section_clicktrack(lilypond_file, mtime, section_directory):
     score_block = abjad.Block("score", [score, abjad.Block("midi")])
     lilypond_file = abjad.LilyPondFile([score_block])
     print_file_handling(f"Writing {baca.path.trim(clicktrack_path)} ...")
-    abjad.persist.as_midi(lilypond_file, clicktrack_file_name, remove_ly=True)
+    abjad.persist.as_midi(lilypond_file, clicktrack_file_name)
+    ly_path = section_directory / "clicktrack.ly"
+    if ly_path.exists():
+        ly_path.unlink()
     if clicktrack_path.is_file():
         mtime_ = os.path.getmtime(clicktrack_path)
         if mtime is not None and mtime < mtime_:
