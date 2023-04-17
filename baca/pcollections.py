@@ -1126,21 +1126,27 @@ def arpeggiate_down(collection):
             <<
                 \context Staff = "Treble_Staff"
                 {
-                    \clef "treble"
-                    fs''''1 * 1/8
-                    c''''1 * 1/8
-                    e'''1 * 1/8
-                    f''1 * 1/8
-                    af'1 * 1/8
+                    \context Voice = "Treble_Voice"
+                    {
+                        \clef "treble"
+                        fs''''1 * 1/8
+                        c''''1 * 1/8
+                        e'''1 * 1/8
+                        f''1 * 1/8
+                        af'1 * 1/8
+                    }
                 }
                 \context Staff = "Bass_Staff"
                 {
-                    \clef "bass"
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
+                    \context Voice = "Bass_Voice"
+                    {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
                 }
             >>
 
@@ -1177,21 +1183,27 @@ def arpeggiate_up(collection):
             <<
                 \context Staff = "Treble_Staff"
                 {
-                    \clef "treble"
-                    fs'1 * 1/8
-                    c''1 * 1/8
-                    e''1 * 1/8
-                    f''1 * 1/8
-                    af''1 * 1/8
+                    \context Voice = "Treble_Voice"
+                    {
+                        \clef "treble"
+                        fs'1 * 1/8
+                        c''1 * 1/8
+                        e''1 * 1/8
+                        f''1 * 1/8
+                        af''1 * 1/8
+                    }
                 }
                 \context Staff = "Bass_Staff"
                 {
-                    \clef "bass"
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
+                    \context Voice = "Bass_Voice"
+                    {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
                 }
             >>
 
@@ -1224,23 +1236,29 @@ def bass_to_octave(collection, n=4):
             <<
                 \context Staff = "Treble_Staff"
                 {
-                    \clef "treble"
-                    r1 * 1/8
-                    r1 * 1/8
-                    fs'1 * 1/8
-                    g'1 * 1/8
-                    r1 * 1/8
-                    g'1 * 1/8
+                    \context Voice = "Treble_Voice"
+                    {
+                        \clef "treble"
+                        r1 * 1/8
+                        r1 * 1/8
+                        fs'1 * 1/8
+                        g'1 * 1/8
+                        r1 * 1/8
+                        g'1 * 1/8
+                    }
                 }
                 \context Staff = "Bass_Staff"
                 {
-                    \clef "bass"
-                    bf1 * 1/8
-                    bqf1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
-                    bqf1 * 1/8
-                    r1 * 1/8
+                    \context Voice = "Bass_Voice"
+                    {
+                        \clef "bass"
+                        bf1 * 1/8
+                        bqf1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        bqf1 * 1/8
+                        r1 * 1/8
+                    }
                 }
             >>
 
@@ -1260,23 +1278,29 @@ def bass_to_octave(collection, n=4):
             <<
                 \context Staff = "Treble_Staff"
                 {
-                    \clef "treble"
-                    bf'1 * 1/8
-                    bqf'1 * 1/8
-                    fs''1 * 1/8
-                    g''1 * 1/8
-                    bqf'1 * 1/8
-                    g''1 * 1/8
+                    \context Voice = "Treble_Voice"
+                    {
+                        \clef "treble"
+                        bf'1 * 1/8
+                        bqf'1 * 1/8
+                        fs''1 * 1/8
+                        g''1 * 1/8
+                        bqf'1 * 1/8
+                        g''1 * 1/8
+                    }
                 }
                 \context Staff = "Bass_Staff"
                 {
-                    \clef "bass"
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
+                    \context Voice = "Bass_Voice"
+                    {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
                 }
             >>
 
@@ -1308,23 +1332,29 @@ def center_to_octave(collection, n=4):
             <<
                 \context Staff = "Treble_Staff"
                 {
-                    \clef "treble"
-                    r1 * 1/8
-                    r1 * 1/8
-                    fs'1 * 1/8
-                    g'1 * 1/8
-                    r1 * 1/8
-                    g'1 * 1/8
+                    \context Voice = "Treble_Voice"
+                    {
+                        \clef "treble"
+                        r1 * 1/8
+                        r1 * 1/8
+                        fs'1 * 1/8
+                        g'1 * 1/8
+                        r1 * 1/8
+                        g'1 * 1/8
+                    }
                 }
                 \context Staff = "Bass_Staff"
                 {
-                    \clef "bass"
-                    bf1 * 1/8
-                    bqf1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
-                    bqf1 * 1/8
-                    r1 * 1/8
+                    \context Voice = "Bass_Voice"
+                    {
+                        \clef "bass"
+                        bf1 * 1/8
+                        bqf1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        bqf1 * 1/8
+                        r1 * 1/8
+                    }
                 }
             >>
 
@@ -1344,23 +1374,29 @@ def center_to_octave(collection, n=4):
             <<
                 \context Staff = "Treble_Staff"
                 {
-                    \clef "treble"
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
+                    \context Voice = "Treble_Voice"
+                    {
+                        \clef "treble"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
                 }
                 \context Staff = "Bass_Staff"
                 {
-                    \clef "bass"
-                    bf,1 * 1/8
-                    bqf,1 * 1/8
-                    fs1 * 1/8
-                    g1 * 1/8
-                    bqf,1 * 1/8
-                    g1 * 1/8
+                    \context Voice = "Bass_Voice"
+                    {
+                        \clef "bass"
+                        bf,1 * 1/8
+                        bqf,1 * 1/8
+                        fs1 * 1/8
+                        g1 * 1/8
+                        bqf,1 * 1/8
+                        g1 * 1/8
+                    }
                 }
             >>
 
@@ -2428,23 +2464,29 @@ def soprano_to_octave(collection, n=4):
             <<
                 \context Staff = "Treble_Staff"
                 {
-                    \clef "treble"
-                    r1 * 1/8
-                    r1 * 1/8
-                    fs'1 * 1/8
-                    g'1 * 1/8
-                    r1 * 1/8
-                    g'1 * 1/8
+                    \context Voice = "Treble_Voice"
+                    {
+                        \clef "treble"
+                        r1 * 1/8
+                        r1 * 1/8
+                        fs'1 * 1/8
+                        g'1 * 1/8
+                        r1 * 1/8
+                        g'1 * 1/8
+                    }
                 }
                 \context Staff = "Bass_Staff"
                 {
-                    \clef "bass"
-                    bf1 * 1/8
-                    bqf1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
-                    bqf1 * 1/8
-                    r1 * 1/8
+                    \context Voice = "Bass_Voice"
+                    {
+                        \clef "bass"
+                        bf1 * 1/8
+                        bqf1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        bqf1 * 1/8
+                        r1 * 1/8
+                    }
                 }
             >>
 
@@ -2464,23 +2506,29 @@ def soprano_to_octave(collection, n=4):
             <<
                 \context Staff = "Treble_Staff"
                 {
-                    \clef "treble"
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
+                    \context Voice = "Treble_Voice"
+                    {
+                        \clef "treble"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
                 }
                 \context Staff = "Bass_Staff"
                 {
-                    \clef "bass"
-                    bf,1 * 1/8
-                    bqf,1 * 1/8
-                    fs1 * 1/8
-                    g1 * 1/8
-                    bqf,1 * 1/8
-                    g1 * 1/8
+                    \context Voice = "Bass_Voice"
+                    {
+                        \clef "bass"
+                        bf,1 * 1/8
+                        bqf,1 * 1/8
+                        fs1 * 1/8
+                        g1 * 1/8
+                        bqf,1 * 1/8
+                        g1 * 1/8
+                    }
                 }
             >>
 
@@ -2544,21 +2592,27 @@ def space_down(collection, bass=None, semitones=None, soprano=None):
                 <<
                     \context Staff = "Treble_Staff"
                     {
-                        \clef "treble"
-                        g''1 * 1/8
-                        f''1 * 1/8
-                        b'1 * 1/8
-                        bf'1 * 1/8
-                        fs'1 * 1/8
+                        \context Voice = "Treble_Voice"
+                        {
+                            \clef "treble"
+                            g''1 * 1/8
+                            f''1 * 1/8
+                            b'1 * 1/8
+                            bf'1 * 1/8
+                            fs'1 * 1/8
+                        }
                     }
                     \context Staff = "Bass_Staff"
                     {
-                        \clef "bass"
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
+                        \context Voice = "Bass_Voice"
+                        {
+                            \clef "bass"
+                            r1 * 1/8
+                            r1 * 1/8
+                            r1 * 1/8
+                            r1 * 1/8
+                            r1 * 1/8
+                        }
                     }
                 >>
             >>
@@ -2578,19 +2632,25 @@ def space_down(collection, bass=None, semitones=None, soprano=None):
             <<
                 \context Staff = "Treble_Staff"
                 {
-                    \clef "treble"
-                    c''1 * 1/8
-                    d''1 * 1/8
-                    a''1 * 1/8
-                    bf''1 * 1/8
+                    \context Voice = "Treble_Voice"
+                    {
+                        \clef "treble"
+                        c''1 * 1/8
+                        d''1 * 1/8
+                        a''1 * 1/8
+                        bf''1 * 1/8
+                    }
                 }
                 \context Staff = "Bass_Staff"
                 {
-                    \clef "bass"
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
+                    \context Voice = "Bass_Voice"
+                    {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
                 }
             >>
 
@@ -2610,19 +2670,25 @@ def space_down(collection, bass=None, semitones=None, soprano=None):
             <<
                 \context Staff = "Treble_Staff"
                 {
-                    \clef "treble"
-                    d''1 * 1/8
-                    bf'1 * 1/8
-                    a'1 * 1/8
-                    c'1 * 1/8
+                    \context Voice = "Treble_Voice"
+                    {
+                        \clef "treble"
+                        d''1 * 1/8
+                        bf'1 * 1/8
+                        a'1 * 1/8
+                        c'1 * 1/8
+                    }
                 }
                 \context Staff = "Bass_Staff"
                 {
-                    \clef "bass"
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
+                    \context Voice = "Bass_Voice"
+                    {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
                 }
             >>
 
@@ -2643,19 +2709,25 @@ def space_down(collection, bass=None, semitones=None, soprano=None):
             <<
                 \context Staff = "Treble_Staff"
                 {
-                    \clef "treble"
-                    c''1 * 1/8
-                    d''1 * 1/8
-                    a''1 * 1/8
-                    bf''1 * 1/8
+                    \context Voice = "Treble_Voice"
+                    {
+                        \clef "treble"
+                        c''1 * 1/8
+                        d''1 * 1/8
+                        a''1 * 1/8
+                        bf''1 * 1/8
+                    }
                 }
                 \context Staff = "Bass_Staff"
                 {
-                    \clef "bass"
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
+                    \context Voice = "Bass_Voice"
+                    {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
                 }
             >>
 
@@ -2675,19 +2747,25 @@ def space_down(collection, bass=None, semitones=None, soprano=None):
             <<
                 \context Staff = "Treble_Staff"
                 {
-                    \clef "treble"
-                    c''1 * 1/8
-                    bf'1 * 1/8
-                    a'1 * 1/8
-                    d'1 * 1/8
+                    \context Voice = "Treble_Voice"
+                    {
+                        \clef "treble"
+                        c''1 * 1/8
+                        bf'1 * 1/8
+                        a'1 * 1/8
+                        d'1 * 1/8
+                    }
                 }
                 \context Staff = "Bass_Staff"
                 {
-                    \clef "bass"
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
+                    \context Voice = "Bass_Voice"
+                    {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
                 }
             >>
 
@@ -2877,21 +2955,27 @@ def space_up(collection, bass=None, semitones=None, soprano=None):
                 <<
                     \context Staff = "Treble_Staff"
                     {
-                        \clef "treble"
-                        fs'1 * 1/8
-                        bf'1 * 1/8
-                        b'1 * 1/8
-                        f''1 * 1/8
-                        g''1 * 1/8
+                        \context Voice = "Treble_Voice"
+                        {
+                            \clef "treble"
+                            fs'1 * 1/8
+                            bf'1 * 1/8
+                            b'1 * 1/8
+                            f''1 * 1/8
+                            g''1 * 1/8
+                        }
                     }
                     \context Staff = "Bass_Staff"
                     {
-                        \clef "bass"
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
-                        r1 * 1/8
+                        \context Voice = "Bass_Voice"
+                        {
+                            \clef "bass"
+                            r1 * 1/8
+                            r1 * 1/8
+                            r1 * 1/8
+                            r1 * 1/8
+                            r1 * 1/8
+                        }
                     }
                 >>
             >>
@@ -2911,19 +2995,25 @@ def space_up(collection, bass=None, semitones=None, soprano=None):
             <<
                 \context Staff = "Treble_Staff"
                 {
-                    \clef "treble"
-                    c''1 * 1/8
-                    d''1 * 1/8
-                    a''1 * 1/8
-                    bf''1 * 1/8
+                    \context Voice = "Treble_Voice"
+                    {
+                        \clef "treble"
+                        c''1 * 1/8
+                        d''1 * 1/8
+                        a''1 * 1/8
+                        bf''1 * 1/8
+                    }
                 }
                 \context Staff = "Bass_Staff"
                 {
-                    \clef "bass"
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
+                    \context Voice = "Bass_Voice"
+                    {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
                 }
             >>
 
@@ -2943,19 +3033,25 @@ def space_up(collection, bass=None, semitones=None, soprano=None):
             <<
                 \context Staff = "Treble_Staff"
                 {
-                    \clef "treble"
-                    c'1 * 1/8
-                    d'1 * 1/8
-                    a'1 * 1/8
-                    bf'1 * 1/8
+                    \context Voice = "Treble_Voice"
+                    {
+                        \clef "treble"
+                        c'1 * 1/8
+                        d'1 * 1/8
+                        a'1 * 1/8
+                        bf'1 * 1/8
+                    }
                 }
                 \context Staff = "Bass_Staff"
                 {
-                    \clef "bass"
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
+                    \context Voice = "Bass_Voice"
+                    {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
                 }
             >>
 
@@ -2976,19 +3072,25 @@ def space_up(collection, bass=None, semitones=None, soprano=None):
             <<
                 \context Staff = "Treble_Staff"
                 {
-                    \clef "treble"
-                    c''1 * 1/8
-                    d''1 * 1/8
-                    a''1 * 1/8
-                    bf''1 * 1/8
+                    \context Voice = "Treble_Voice"
+                    {
+                        \clef "treble"
+                        c''1 * 1/8
+                        d''1 * 1/8
+                        a''1 * 1/8
+                        bf''1 * 1/8
+                    }
                 }
                 \context Staff = "Bass_Staff"
                 {
-                    \clef "bass"
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
+                    \context Voice = "Bass_Voice"
+                    {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
                 }
             >>
 
@@ -3008,19 +3110,25 @@ def space_up(collection, bass=None, semitones=None, soprano=None):
             <<
                 \context Staff = "Treble_Staff"
                 {
-                    \clef "treble"
-                    d'1 * 1/8
-                    a'1 * 1/8
-                    bf'1 * 1/8
-                    c''1 * 1/8
+                    \context Voice = "Treble_Voice"
+                    {
+                        \clef "treble"
+                        d'1 * 1/8
+                        a'1 * 1/8
+                        bf'1 * 1/8
+                        c''1 * 1/8
+                    }
                 }
                 \context Staff = "Bass_Staff"
                 {
-                    \clef "bass"
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
+                    \context Voice = "Bass_Voice"
+                    {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
                 }
             >>
 
@@ -3179,23 +3287,29 @@ def split(collection, pitch=0):
             <<
                 \context Staff = "Treble_Staff"
                 {
-                    \clef "treble"
-                    r1 * 1/8
-                    r1 * 1/8
-                    fs'1 * 1/8
-                    g'1 * 1/8
-                    r1 * 1/8
-                    g'1 * 1/8
+                    \context Voice = "Treble_Voice"
+                    {
+                        \clef "treble"
+                        r1 * 1/8
+                        r1 * 1/8
+                        fs'1 * 1/8
+                        g'1 * 1/8
+                        r1 * 1/8
+                        g'1 * 1/8
+                    }
                 }
                 \context Staff = "Bass_Staff"
                 {
-                    \clef "bass"
-                    bf1 * 1/8
-                    bqf1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
-                    bqf1 * 1/8
-                    r1 * 1/8
+                    \context Voice = "Bass_Voice"
+                    {
+                        \clef "bass"
+                        bf1 * 1/8
+                        bqf1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                        bqf1 * 1/8
+                        r1 * 1/8
+                    }
                 }
             >>
 
@@ -3216,17 +3330,23 @@ def split(collection, pitch=0):
             <<
                 \context Staff = "Treble_Staff"
                 {
-                    \clef "treble"
-                    fs'1 * 1/8
-                    g'1 * 1/8
-                    g'1 * 1/8
+                    \context Voice = "Treble_Voice"
+                    {
+                        \clef "treble"
+                        fs'1 * 1/8
+                        g'1 * 1/8
+                        g'1 * 1/8
+                    }
                 }
                 \context Staff = "Bass_Staff"
                 {
-                    \clef "bass"
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
+                    \context Voice = "Bass_Voice"
+                    {
+                        \clef "bass"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
                 }
             >>
 
@@ -3245,17 +3365,23 @@ def split(collection, pitch=0):
             <<
                 \context Staff = "Treble_Staff"
                 {
-                    \clef "treble"
-                    r1 * 1/8
-                    r1 * 1/8
-                    r1 * 1/8
+                    \context Voice = "Treble_Voice"
+                    {
+                        \clef "treble"
+                        r1 * 1/8
+                        r1 * 1/8
+                        r1 * 1/8
+                    }
                 }
                 \context Staff = "Bass_Staff"
                 {
-                    \clef "bass"
-                    bf1 * 1/8
-                    bqf1 * 1/8
-                    bqf1 * 1/8
+                    \context Voice = "Bass_Voice"
+                    {
+                        \clef "bass"
+                        bf1 * 1/8
+                        bqf1 * 1/8
+                        bqf1 * 1/8
+                    }
                 }
             >>
 
