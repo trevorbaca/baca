@@ -1107,9 +1107,9 @@ def interpolate_pitches(
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
         >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
         >>> rmakers.beam(tuplets)
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> _ = baca.clef(abjad.select.leaf(tuplets, 0), "treble")
         >>> _ = baca.interpolate_pitches(tuplets, "Eb4", "F#5")
-        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> rmakers.swap_trivial(lilypond_file["Staff"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -1163,6 +1163,7 @@ def interpolate_pitches(
 
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
         >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> rmakers.beam(tuplets)
         >>> _ = baca.clef(abjad.select.leaf(tuplets, 0), "treble")
         >>> baca.interpolate_pitches(tuplets, "Eb4", "F#5")
@@ -1172,7 +1173,6 @@ def interpolate_pitches(
         ...     hide_middle_note_heads=True,
         ... )
         >>> _ = baca.glissando_thickness(tuplets, 3)
-        >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> rmakers.swap_trivial(lilypond_file["Staff"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
