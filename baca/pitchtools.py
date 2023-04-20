@@ -767,12 +767,15 @@ def bass_to_octave(argument, n: int) -> None:
             <<
                 \context Staff = "Staff"
                 {
-                    \time 5/4
-                    <c d bf>4
-                    f'4
-                    <ef' e' fs''>4
-                    <g af'>4
-                    a4
+                    \context Voice = "Voice"
+                    {
+                        \time 5/4
+                        <c d bf>4
+                        f'4
+                        <ef' e' fs''>4
+                        <g af'>4
+                        a4
+                    }
                 }
             >>
 
@@ -796,12 +799,15 @@ def bass_to_octave(argument, n: int) -> None:
             <<
                 \context Staff = "Staff"
                 {
-                    \time 5/4
-                    <c d bf>4
-                    f4
-                    <ef e fs'>4
-                    <g af'>4
-                    a4
+                    \context Voice = "Voice"
+                    {
+                        \time 5/4
+                        <c d bf>4
+                        f4
+                        <ef e fs'>4
+                        <g af'>4
+                        a4
+                    }
                 }
             >>
 
@@ -832,12 +838,15 @@ def center_to_octave(argument, n: int) -> None:
             <<
                 \context Staff = "Staff"
                 {
-                    \time 5/4
-                    <c, d, bf,>4
-                    f4
-                    <ef e fs'>4
-                    <g, af>4
-                    a,4
+                    \context Voice = "Voice"
+                    {
+                        \time 5/4
+                        <c, d, bf,>4
+                        f4
+                        <ef e fs'>4
+                        <g, af>4
+                        a,4
+                    }
                 }
             >>
 
@@ -861,12 +870,15 @@ def center_to_octave(argument, n: int) -> None:
             <<
                 \context Staff = "Staff"
                 {
-                    \time 5/4
-                    <c d bf>4
-                    f4
-                    <ef e fs'>4
-                    <g, af>4
-                    a4
+                    \context Voice = "Voice"
+                    {
+                        \time 5/4
+                        <c d bf>4
+                        f4
+                        <ef e fs'>4
+                        <g, af>4
+                        a4
+                    }
                 }
             >>
 
@@ -1039,17 +1051,20 @@ def displacement(argument, displacements: list[int]) -> None:
             <<
                 \context Staff = "Staff"
                 {
+                    \context Voice = "Voice"
                     {
-                        \time 9/4
-                        c'4
-                        d'4
-                        ef4
-                        c4
-                        d''4
-                        ef''4
-                        c'4
-                        d'4
-                        ef4
+                        {
+                            \time 9/4
+                            c'4
+                            d'4
+                            ef4
+                            c4
+                            d''4
+                            ef''4
+                            c'4
+                            d'4
+                            ef4
+                        }
                     }
                 }
             >>
@@ -1074,14 +1089,17 @@ def displacement(argument, displacements: list[int]) -> None:
             <<
                 \context Staff = "Staff"
                 {
+                    \context Voice = "Voice"
                     {
-                        \time 3/2
-                        <c' d' ef'>4
-                        <c' d' ef'>4
-                        <c d ef>4
-                        <c d ef>4
-                        <c'' d'' ef''>4
-                        <c'' d'' ef''>4
+                        {
+                            \time 3/2
+                            <c' d' ef'>4
+                            <c' d' ef'>4
+                            <c d ef>4
+                            <c d ef>4
+                            <c'' d'' ef''>4
+                            <c'' d'' ef''>4
+                        }
                     }
                 }
             >>
@@ -1122,39 +1140,42 @@ def interpolate_pitches(
             <<
                 \context Staff = "Staff"
                 {
+                    \context Voice = "Voice"
                     {
-                        \clef "treble"
-                        \time 3/2
-                        ef'16
-                        [
-                        e'16
-                        f'16
-                        f'16
-                        f'16
-                        g'16
-                        g'16
-                        g'16
-                        a'16
-                        a'16
-                        a'16
-                        b'16
-                        ]
-                    }
-                    {
-                        b'16
-                        [
-                        c''16
-                        c''16
-                        c''16
-                        d''16
-                        d''16
-                        d''16
-                        e''16
-                        e''16
-                        e''16
-                        f''16
-                        fs''16
-                        ]
+                        {
+                            \clef "treble"
+                            \time 3/2
+                            ef'16
+                            [
+                            e'16
+                            f'16
+                            f'16
+                            f'16
+                            g'16
+                            g'16
+                            g'16
+                            a'16
+                            a'16
+                            a'16
+                            b'16
+                            ]
+                        }
+                        {
+                            b'16
+                            [
+                            c''16
+                            c''16
+                            c''16
+                            d''16
+                            d''16
+                            d''16
+                            e''16
+                            e''16
+                            e''16
+                            f''16
+                            fs''16
+                            ]
+                        }
                     }
                 }
             >>
@@ -1185,50 +1206,53 @@ def interpolate_pitches(
             <<
                 \context Staff = "Staff"
                 {
+                    \context Voice = "Voice"
                     {
-                        \override Glissando.thickness = 3
-                        \clef "treble"
-                        \time 3/2
-                        ef'16
-                        [
-                        \glissando
-                        \hide NoteHead
-                        \override Accidental.stencil = ##f
-                        \override NoteColumn.glissando-skip = ##t
-                        \override NoteHead.no-ledgers = ##t
-                        e'16
-                        f'16
-                        f'16
-                        f'16
-                        g'16
-                        g'16
-                        g'16
-                        a'16
-                        a'16
-                        a'16
-                        b'16
-                        ]
-                    }
-                    {
-                        b'16
-                        [
-                        c''16
-                        c''16
-                        c''16
-                        d''16
-                        d''16
-                        d''16
-                        e''16
-                        e''16
-                        e''16
-                        f''16
-                        \revert Accidental.stencil
-                        \revert NoteColumn.glissando-skip
-                        \revert NoteHead.no-ledgers
-                        \undo \hide NoteHead
-                        fs''16
-                        ]
-                        \revert Glissando.thickness
+                        {
+                            \override Glissando.thickness = 3
+                            \clef "treble"
+                            \time 3/2
+                            ef'16
+                            [
+                            \glissando
+                            \hide NoteHead
+                            \override Accidental.stencil = ##f
+                            \override NoteColumn.glissando-skip = ##t
+                            \override NoteHead.no-ledgers = ##t
+                            e'16
+                            f'16
+                            f'16
+                            f'16
+                            g'16
+                            g'16
+                            g'16
+                            a'16
+                            a'16
+                            a'16
+                            b'16
+                            ]
+                        }
+                        {
+                            b'16
+                            [
+                            c''16
+                            c''16
+                            c''16
+                            d''16
+                            d''16
+                            d''16
+                            e''16
+                            e''16
+                            e''16
+                            f''16
+                            \revert Accidental.stencil
+                            \revert NoteColumn.glissando-skip
+                            \revert NoteHead.no-ledgers
+                            \undo \hide NoteHead
+                            fs''16
+                            ]
+                            \revert Glissando.thickness
+                        }
                     }
                 }
             >>
@@ -1627,27 +1651,30 @@ def register(
             <<
                 \context Staff = "Staff"
                 {
+                    \context Voice = "Voice"
                     {
-                        \time 9/16
-                        bf''16
-                        [
-                        c'''16
-                        d'''16
-                        ]
-                    }
-                    {
-                        bf''16
-                        [
-                        c'''16
-                        d'''16
-                        ]
-                    }
-                    {
-                        bf''16
-                        [
-                        c'''16
-                        d'''16
-                        ]
+                        {
+                            \time 9/16
+                            bf''16
+                            [
+                            c'''16
+                            d'''16
+                            ]
+                        }
+                        {
+                            bf''16
+                            [
+                            c'''16
+                            d'''16
+                            ]
+                        }
+                        {
+                            bf''16
+                            [
+                            c'''16
+                            d'''16
+                            ]
+                        }
                     }
                 }
             >>
@@ -1732,9 +1759,12 @@ def register(
             <<
                 \context Staff = "Staff"
                 {
+                    \context Voice = "Voice"
                     {
-                        \time 1/16
-                        <bf c' d'>16
+                        {
+                            \time 1/16
+                            <bf c' d'>16
+                        }
                     }
                 }
             >>
@@ -1759,17 +1789,20 @@ def register(
             <<
                 \context Staff = "Staff"
                 {
+                    \context Voice = "Voice"
                     {
-                        \time 9/4
-                        c'4
-                        d'4
-                        bf4
-                        fs4
-                        e'4
-                        ef'4
-                        af4
-                        g4
-                        a4
+                        {
+                            \time 9/4
+                            c'4
+                            d'4
+                            bf4
+                            fs4
+                            e'4
+                            ef'4
+                            af4
+                            g4
+                            a4
+                        }
                     }
                 }
             >>
@@ -1794,17 +1827,20 @@ def register(
             <<
                 \context Staff = "Staff"
                 {
+                    \context Voice = "Voice"
                     {
-                        \time 9/4
-                        c'4
-                        d'4
-                        bf'4
-                        fs'4
-                        e'4
-                        ef''4
-                        af''4
-                        g''4
-                        a''4
+                        {
+                            \time 9/4
+                            c'4
+                            d'4
+                            bf'4
+                            fs'4
+                            e'4
+                            ef''4
+                            af''4
+                            g''4
+                            a''4
+                        }
                     }
                 }
             >>
@@ -1828,38 +1864,41 @@ def register(
             <<
                 \context Staff = "Staff"
                 {
+                    \context Voice = "Voice"
                     {
-                        \time 3/2
-                        fs'16
-                        [
-                        e'16
-                        ef'16
-                        f'16
-                        a'16
-                        bf'16
-                        c''16
-                        b'16
-                        af'16
-                        g''16
-                        cs''16
-                        d''16
-                        ]
-                    }
-                    {
-                        fs''16
-                        [
-                        e''16
-                        ef''16
-                        f''16
-                        a''16
-                        bf''16
-                        c'''16
-                        b''16
-                        af''16
-                        g'''16
-                        cs'''16
-                        d'''16
-                        ]
+                        {
+                            \time 3/2
+                            fs'16
+                            [
+                            e'16
+                            ef'16
+                            f'16
+                            a'16
+                            bf'16
+                            c''16
+                            b'16
+                            af'16
+                            g''16
+                            cs''16
+                            d''16
+                            ]
+                        }
+                        {
+                            fs''16
+                            [
+                            e''16
+                            ef''16
+                            f''16
+                            a''16
+                            bf''16
+                            c'''16
+                            b''16
+                            af''16
+                            g'''16
+                            cs'''16
+                            d'''16
+                            ]
+                        }
                     }
                 }
             >>
@@ -1886,24 +1925,27 @@ def register(
             <<
                 \context Staff = "Staff"
                 {
+                    \context Voice = "Voice"
                     {
-                        \time 3/8
-                        <e' fs'>16
-                    }
-                    {
-                        <f' ef''>16
-                    }
-                    {
-                        <a' bf'>16
-                    }
-                    {
-                        <c'' b''>16
-                    }
-                    {
-                        <g'' af''>16
-                    }
-                    {
-                        <cs''' d'''>16
+                        {
+                            \time 3/8
+                            <e' fs'>16
+                        }
+                        {
+                            <f' ef''>16
+                        }
+                        {
+                            <a' bf'>16
+                        }
+                        {
+                            <c'' b''>16
+                        }
+                        {
+                            <g'' af''>16
+                        }
+                        {
+                            <cs''' d'''>16
+                        }
                     }
                 }
             >>
@@ -2399,38 +2441,41 @@ def register(
             <<
                 \context Staff = "Staff"
                 {
+                    \context Voice = "Voice"
                     {
-                        \time 3/2
-                        fs'16
-                        [
-                        e'16
-                        ef''16
-                        f''16
-                        a'16
-                        bf'16
-                        c''16
-                        b''16
-                        af''16
-                        g''16
-                        cs'''16
-                        d'''16
-                        ]
-                    }
-                    {
-                        fs'16
-                        [
-                        e'16
-                        ef''16
-                        f''16
-                        a'16
-                        bf'16
-                        c''16
-                        b''16
-                        af''16
-                        g''16
-                        cs'''16
-                        d'''16
-                        ]
+                        {
+                            \time 3/2
+                            fs'16
+                            [
+                            e'16
+                            ef''16
+                            f''16
+                            a'16
+                            bf'16
+                            c''16
+                            b''16
+                            af''16
+                            g''16
+                            cs'''16
+                            d'''16
+                            ]
+                        }
+                        {
+                            fs'16
+                            [
+                            e'16
+                            ef''16
+                            f''16
+                            a'16
+                            bf'16
+                            c''16
+                            b''16
+                            af''16
+                            g''16
+                            cs'''16
+                            d'''16
+                            ]
+                        }
                     }
                 }
             >>
@@ -2490,88 +2535,91 @@ def replace_with_clusters(
             <<
                 \context Staff = "Staff"
                 {
+                    \context Voice = "Voice"
                     {
-                        \once \override Accidental.stencil = ##f
-                        \once \override AccidentalCautionary.stencil = ##f
-                        \once \override Arpeggio.X-offset = #-2
-                        \once \override NoteHead.stencil = #ly:text-interface::print
-                        \once \override NoteHead.text =
-                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                        \time 9/16
-                        <c' e' g'>16
-                        ^ \markup \center-align \concat { \natural \flat }
-                        [
-                        \once \override Accidental.stencil = ##f
-                        \once \override AccidentalCautionary.stencil = ##f
-                        \once \override Arpeggio.X-offset = #-2
-                        \once \override NoteHead.stencil = #ly:text-interface::print
-                        \once \override NoteHead.text =
-                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                        <d' f' a' c''>16
-                        ^ \markup \center-align \concat { \natural \flat }
-                        \once \override Accidental.stencil = ##f
-                        \once \override AccidentalCautionary.stencil = ##f
-                        \once \override Arpeggio.X-offset = #-2
-                        \once \override NoteHead.stencil = #ly:text-interface::print
-                        \once \override NoteHead.text =
-                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                        <bf' d'' f''>16
-                        ^ \markup \center-align \concat { \natural \flat }
-                        ]
-                    }
-                    {
-                        \once \override Accidental.stencil = ##f
-                        \once \override AccidentalCautionary.stencil = ##f
-                        \once \override Arpeggio.X-offset = #-2
-                        \once \override NoteHead.stencil = #ly:text-interface::print
-                        \once \override NoteHead.text =
-                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                        <fs'' a'' c''' e'''>16
-                        ^ \markup \center-align \concat { \natural \flat }
-                        [
-                        \once \override Accidental.stencil = ##f
-                        \once \override AccidentalCautionary.stencil = ##f
-                        \once \override Arpeggio.X-offset = #-2
-                        \once \override NoteHead.stencil = #ly:text-interface::print
-                        \once \override NoteHead.text =
-                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                        <e'' g'' b''>16
-                        ^ \markup \center-align \concat { \natural \flat }
-                        \once \override Accidental.stencil = ##f
-                        \once \override AccidentalCautionary.stencil = ##f
-                        \once \override Arpeggio.X-offset = #-2
-                        \once \override NoteHead.stencil = #ly:text-interface::print
-                        \once \override NoteHead.text =
-                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                        <ef'' g'' b'' d'''>16
-                        ^ \markup \center-align \concat { \natural \flat }
-                        \once \override Accidental.stencil = ##f
-                        \once \override AccidentalCautionary.stencil = ##f
-                        \once \override Arpeggio.X-offset = #-2
-                        \once \override NoteHead.stencil = #ly:text-interface::print
-                        \once \override NoteHead.text =
-                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                        <af'' c''' e'''>16
-                        ^ \markup \center-align \concat { \natural \flat }
-                        \once \override Accidental.stencil = ##f
-                        \once \override AccidentalCautionary.stencil = ##f
-                        \once \override Arpeggio.X-offset = #-2
-                        \once \override NoteHead.stencil = #ly:text-interface::print
-                        \once \override NoteHead.text =
-                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                        <g'' b'' d''' f'''>16
-                        ^ \markup \center-align \concat { \natural \flat }
-                        ]
-                    }
-                    {
-                        \once \override Accidental.stencil = ##f
-                        \once \override AccidentalCautionary.stencil = ##f
-                        \once \override Arpeggio.X-offset = #-2
-                        \once \override NoteHead.stencil = #ly:text-interface::print
-                        \once \override NoteHead.text =
-                        \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                        <a' c'' e''>16
-                        ^ \markup \center-align \concat { \natural \flat }
+                        {
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            \time 9/16
+                            <c' e' g'>16
+                            ^ \markup \center-align \concat { \natural \flat }
+                            [
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            <d' f' a' c''>16
+                            ^ \markup \center-align \concat { \natural \flat }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            <bf' d'' f''>16
+                            ^ \markup \center-align \concat { \natural \flat }
+                            ]
+                        }
+                        {
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            <fs'' a'' c''' e'''>16
+                            ^ \markup \center-align \concat { \natural \flat }
+                            [
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            <e'' g'' b''>16
+                            ^ \markup \center-align \concat { \natural \flat }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            <ef'' g'' b'' d'''>16
+                            ^ \markup \center-align \concat { \natural \flat }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            <af'' c''' e'''>16
+                            ^ \markup \center-align \concat { \natural \flat }
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            <g'' b'' d''' f'''>16
+                            ^ \markup \center-align \concat { \natural \flat }
+                            ]
+                        }
+                        {
+                            \once \override Accidental.stencil = ##f
+                            \once \override AccidentalCautionary.stencil = ##f
+                            \once \override Arpeggio.X-offset = #-2
+                            \once \override NoteHead.stencil = #ly:text-interface::print
+                            \once \override NoteHead.text =
+                            \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            <a' c'' e''>16
+                            ^ \markup \center-align \concat { \natural \flat }
+                        }
                     }
                 }
             >>
@@ -2967,13 +3015,16 @@ def soprano_to_octave(argument, n: int) -> None:
             <<
                 \context Staff = "Staff"
                 {
+                    \context Voice = "Voice"
                     {
-                        \time 5/4
-                        <c,, d,, bf,,>4
-                        f,4
-                        <ef, e, fs>4
-                        <g,, af,>4
-                        a,,4
+                        {
+                            \time 5/4
+                            <c,, d,, bf,,>4
+                            f,4
+                            <ef, e, fs>4
+                            <g,, af,>4
+                            a,,4
+                        }
                     }
                 }
             >>
@@ -3001,13 +3052,16 @@ def soprano_to_octave(argument, n: int) -> None:
             <<
                 \context Staff = "Staff"
                 {
+                    \context Voice = "Voice"
                     {
-                        \time 5/4
-                        <c d bf>4
-                        f4
-                        <ef, e, fs>4
-                        <g, af>4
-                        a4
+                        {
+                            \time 5/4
+                            <c d bf>4
+                            f4
+                            <ef, e, fs>4
+                            <g, af>4
+                            a4
+                        }
                     }
                 }
             >>

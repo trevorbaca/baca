@@ -82,14 +82,17 @@ Examples: spanners.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \time 3/4
-                    r8
-                    \ottava 1
-                    d'4
-                    e'4
-                    \ottava 0
-                    r8
+                    {
+                        \time 3/4
+                        r8
+                        \ottava 1
+                        d'4
+                        e'4
+                        \ottava 0
+                        r8
+                    }
                 }
             }
         >>
@@ -112,14 +115,17 @@ Examples: spanners.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \time 3/4
-                    r8
-                    \ottava -1
-                    d'4
-                    e'4
-                    \ottava 0
-                    r8
+                    {
+                        \time 3/4
+                        r8
+                        \ottava -1
+                        d'4
+                        e'4
+                        \ottava 0
+                        r8
+                    }
                 }
             }
         >>
@@ -142,14 +148,17 @@ Examples: spanners.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \time 3/4
-                    r8
-                    d'4
-                    (
-                    e'4
-                    )
-                    r8
+                    {
+                        \time 3/4
+                        r8
+                        d'4
+                        (
+                        e'4
+                        )
+                        r8
+                    }
                 }
             }
         >>
@@ -173,16 +182,19 @@ Examples: spanners.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override Staff.SustainPedalLineSpanner.staff-padding = 6
-                    \time 3/4
-                    r8
-                    \sustainOn
-                    d'4
-                    e'4
-                    r8
-                    \sustainOff
-                    \revert Staff.SustainPedalLineSpanner.staff-padding
+                    {
+                        \override Staff.SustainPedalLineSpanner.staff-padding = 6
+                        \time 3/4
+                        r8
+                        \sustainOn
+                        d'4
+                        e'4
+                        r8
+                        \sustainOff
+                        \revert Staff.SustainPedalLineSpanner.staff-padding
+                    }
                 }
             }
         >>
@@ -205,14 +217,17 @@ Examples: spanners.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \time 3/4
-                    r8
-                    d'4
-                    \startTrillSpan
-                    e'4
-                    r8
-                    \stopTrillSpan
+                    {
+                        \time 3/4
+                        r8
+                        d'4
+                        \startTrillSpan
+                        e'4
+                        r8
+                        \stopTrillSpan
+                    }
                 }
             }
         >>
@@ -239,16 +254,19 @@ Examples: spanners.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \time 3/4
-                    r8
-                    \pitchedTrill
-                    d'4
-                    - \tweak color #red
-                    \startTrillSpan e'
-                    e'4
-                    r8
-                    \stopTrillSpan
+                    {
+                        \time 3/4
+                        r8
+                        \pitchedTrill
+                        d'4
+                        - \tweak color #red
+                        \startTrillSpan e'
+                        e'4
+                        r8
+                        \stopTrillSpan
+                    }
                 }
             }
         >>

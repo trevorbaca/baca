@@ -21,19 +21,22 @@ Examples: ``baca.from_collection()``.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \time 15/32
-                    c'8
-                    [
-                    ~
-                    c'32
-                    d'8
-                    ~
-                    d'32
-                    bf'8
-                    ~
-                    bf'32
-                    ]
+                    {
+                        \time 15/32
+                        c'8
+                        [
+                        ~
+                        c'32
+                        d'8
+                        ~
+                        d'32
+                        bf'8
+                        ~
+                        bf'32
+                        ]
+                    }
                 }
             }
         >>
@@ -58,14 +61,17 @@ Examples: ``baca.from_collection()``.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \time 5/16
-                    c'16
-                    [
-                    d'16
-                    bf'8
-                    af'16
-                    ]
+                    {
+                        \time 5/16
+                        c'16
+                        [
+                        d'16
+                        bf'8
+                        af'16
+                        ]
+                    }
                 }
             }
         >>
@@ -86,15 +92,18 @@ Examples: ``baca.from_collection()``.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \time 3/8
-                    fs''16
-                    [
-                    e''16
-                    ef''8
-                    af''16
-                    g''16
-                    ]
+                    {
+                        \time 3/8
+                        fs''16
+                        [
+                        e''16
+                        ef''8
+                        af''16
+                        g''16
+                        ]
+                    }
                 }
             }
         >>
@@ -114,9 +123,12 @@ Examples: ``baca.from_collection()``.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \time 1/16
-                    a'16
+                    {
+                        \time 1/16
+                        a'16
+                    }
                 }
             }
         >>
@@ -143,14 +155,17 @@ Examples: ``baca.from_collection()``.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \time 29/32
-                    c'4..
-                    c'64
-                    \repeatTie
-                    d'4..
-                    d'64
-                    \repeatTie
+                    {
+                        \time 29/32
+                        c'4..
+                        c'64
+                        \repeatTie
+                        d'4..
+                        d'64
+                        \repeatTie
+                    }
                 }
             }
         >>
@@ -182,72 +197,75 @@ Examples: ``baca.from_collection()``.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 1/1
+                \context Voice = "Voice"
                 {
-                    \time 21/16
-                    c'16
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 1/1
+                    {
+                        \time 21/16
+                        c'16
+                    }
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 8 }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #right
+                        d'16 * 1328/1024
+                        [
+                        bf'16 * 720/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 8. }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #right
+                        fs''16 * 1552/1024
+                        [
+                        e''16 * 832/1024
+                        ef''16 * 688/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #right
+                        af''16 * 1728/1024
+                        [
+                        g''16 * 928/1024
+                        a'16 * 768/1024
+                        c'16 * 672/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 ~ 16 }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #right
+                        d'16 * 1872/1024
+                        [
+                        bf'16 * 1008/1024
+                        fs''16 * 832/1024
+                        e''16 * 736/1024
+                        ef''16 * 672/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4. }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #right
+                        af''16 * 2000/1024
+                        [
+                        g''16 * 1088/1024
+                        a'16 * 896/1024
+                        c'16 * 784/1024
+                        d'16 * 720/1024
+                        bf'16 * 656/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
                 }
-                \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 8 }
-                \times 1/1
-                {
-                    \once \override Beam.grow-direction = #right
-                    d'16 * 1328/1024
-                    [
-                    bf'16 * 720/1024
-                    ]
-                }
-                \revert TupletNumber.text
-                \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 8. }
-                \times 1/1
-                {
-                    \once \override Beam.grow-direction = #right
-                    fs''16 * 1552/1024
-                    [
-                    e''16 * 832/1024
-                    ef''16 * 688/1024
-                    ]
-                }
-                \revert TupletNumber.text
-                \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
-                \times 1/1
-                {
-                    \once \override Beam.grow-direction = #right
-                    af''16 * 1728/1024
-                    [
-                    g''16 * 928/1024
-                    a'16 * 768/1024
-                    c'16 * 672/1024
-                    ]
-                }
-                \revert TupletNumber.text
-                \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 ~ 16 }
-                \times 1/1
-                {
-                    \once \override Beam.grow-direction = #right
-                    d'16 * 1872/1024
-                    [
-                    bf'16 * 1008/1024
-                    fs''16 * 832/1024
-                    e''16 * 736/1024
-                    ef''16 * 672/1024
-                    ]
-                }
-                \revert TupletNumber.text
-                \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4. }
-                \times 1/1
-                {
-                    \once \override Beam.grow-direction = #right
-                    af''16 * 2000/1024
-                    [
-                    g''16 * 1088/1024
-                    a'16 * 896/1024
-                    c'16 * 784/1024
-                    d'16 * 720/1024
-                    bf'16 * 656/1024
-                    ]
-                }
-                \revert TupletNumber.text
             }
         >>
 
@@ -278,72 +296,75 @@ Examples: ``baca.from_collection()``.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 1/1
+                \context Voice = "Voice"
                 {
-                    \time 21/16
-                    c'16
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 1/1
+                    {
+                        \time 21/16
+                        c'16
+                    }
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 8 }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #left
+                        d'16 * 656/1024
+                        [
+                        bf'16 * 1392/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 8. }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #left
+                        fs''16 * 512/1024
+                        [
+                        e''16 * 1072/1024
+                        ef''16 * 1488/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #left
+                        af''16 * 432/1024
+                        [
+                        g''16 * 896/1024
+                        a'16 * 1232/1024
+                        c'16 * 1536/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 ~ 16 }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #left
+                        d'16 * 368/1024
+                        [
+                        bf'16 * 784/1024
+                        fs''16 * 1072/1024
+                        e''16 * 1328/1024
+                        ef''16 * 1568/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4. }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #left
+                        af''16 * 336/1024
+                        [
+                        g''16 * 704/1024
+                        a'16 * 960/1024
+                        c'16 * 1184/1024
+                        d'16 * 1392/1024
+                        bf'16 * 1568/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
                 }
-                \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 8 }
-                \times 1/1
-                {
-                    \once \override Beam.grow-direction = #left
-                    d'16 * 656/1024
-                    [
-                    bf'16 * 1392/1024
-                    ]
-                }
-                \revert TupletNumber.text
-                \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 8. }
-                \times 1/1
-                {
-                    \once \override Beam.grow-direction = #left
-                    fs''16 * 512/1024
-                    [
-                    e''16 * 1072/1024
-                    ef''16 * 1488/1024
-                    ]
-                }
-                \revert TupletNumber.text
-                \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
-                \times 1/1
-                {
-                    \once \override Beam.grow-direction = #left
-                    af''16 * 432/1024
-                    [
-                    g''16 * 896/1024
-                    a'16 * 1232/1024
-                    c'16 * 1536/1024
-                    ]
-                }
-                \revert TupletNumber.text
-                \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 ~ 16 }
-                \times 1/1
-                {
-                    \once \override Beam.grow-direction = #left
-                    d'16 * 368/1024
-                    [
-                    bf'16 * 784/1024
-                    fs''16 * 1072/1024
-                    e''16 * 1328/1024
-                    ef''16 * 1568/1024
-                    ]
-                }
-                \revert TupletNumber.text
-                \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4. }
-                \times 1/1
-                {
-                    \once \override Beam.grow-direction = #left
-                    af''16 * 336/1024
-                    [
-                    g''16 * 704/1024
-                    a'16 * 960/1024
-                    c'16 * 1184/1024
-                    d'16 * 1392/1024
-                    bf'16 * 1568/1024
-                    ]
-                }
-                \revert TupletNumber.text
             }
         >>
 
@@ -375,61 +396,64 @@ Examples: ``baca.from_collection()``.
         <<
             \context Staff = "Staff"
             {
-                \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 ~ 16 }
-                \times 1/1
+                \context Voice = "Voice"
                 {
-                    \once \override Beam.grow-direction = #right
-                    \time 11/8
-                    c'16 * 1872/1024
-                    [
-                    d'16 * 1008/1024
-                    bf'16 * 832/1024
-                    fs''16 * 736/1024
-                    e''16 * 672/1024
-                    ]
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 ~ 16 }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #right
+                        \time 11/8
+                        c'16 * 1872/1024
+                        [
+                        d'16 * 1008/1024
+                        bf'16 * 832/1024
+                        fs''16 * 736/1024
+                        e''16 * 672/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4. }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #left
+                        ef''16 * 336/1024
+                        [
+                        af''16 * 704/1024
+                        g''16 * 960/1024
+                        a'16 * 1184/1024
+                        c'16 * 1392/1024
+                        d'16 * 1568/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 ~ 16 }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #right
+                        bf'16 * 1872/1024
+                        [
+                        fs''16 * 1008/1024
+                        e''16 * 832/1024
+                        ef''16 * 736/1024
+                        af''16 * 672/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4. }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #left
+                        g''16 * 336/1024
+                        [
+                        a'16 * 704/1024
+                        c'16 * 960/1024
+                        d'16 * 1184/1024
+                        bf'16 * 1392/1024
+                        fs''16 * 1568/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
                 }
-                \revert TupletNumber.text
-                \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4. }
-                \times 1/1
-                {
-                    \once \override Beam.grow-direction = #left
-                    ef''16 * 336/1024
-                    [
-                    af''16 * 704/1024
-                    g''16 * 960/1024
-                    a'16 * 1184/1024
-                    c'16 * 1392/1024
-                    d'16 * 1568/1024
-                    ]
-                }
-                \revert TupletNumber.text
-                \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 ~ 16 }
-                \times 1/1
-                {
-                    \once \override Beam.grow-direction = #right
-                    bf'16 * 1872/1024
-                    [
-                    fs''16 * 1008/1024
-                    e''16 * 832/1024
-                    ef''16 * 736/1024
-                    af''16 * 672/1024
-                    ]
-                }
-                \revert TupletNumber.text
-                \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4. }
-                \times 1/1
-                {
-                    \once \override Beam.grow-direction = #left
-                    g''16 * 336/1024
-                    [
-                    a'16 * 704/1024
-                    c'16 * 960/1024
-                    d'16 * 1184/1024
-                    bf'16 * 1392/1024
-                    fs''16 * 1568/1024
-                    ]
-                }
-                \revert TupletNumber.text
             }
         >>
 
@@ -465,81 +489,84 @@ Examples: ``baca.from_collection()``.
         <<
             \context Staff = "Staff"
             {
-                \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 ~ 16 }
-                \times 1/1
+                \context Voice = "Voice"
                 {
-                    \once \override Beam.grow-direction = #right
-                    \time 13/8
-                    c'16 * 1872/1024
-                    [
-                    d'16 * 1008/1024
-                    bf'16 * 832/1024
-                    fs''16 * 736/1024
-                    e''16 * 672/1024
-                    ]
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 ~ 16 }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #right
+                        \time 13/8
+                        c'16 * 1872/1024
+                        [
+                        d'16 * 1008/1024
+                        bf'16 * 832/1024
+                        fs''16 * 736/1024
+                        e''16 * 672/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 3/5
+                    {
+                        ef''16
+                        [
+                        af''16
+                        g''16
+                        a'16
+                        c'16
+                        ]
+                    }
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 ~ 16 }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #left
+                        d'16 * 368/1024
+                        [
+                        bf'16 * 784/1024
+                        fs''16 * 1072/1024
+                        e''16 * 1328/1024
+                        ef''16 * 1568/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 ~ 16 }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #right
+                        af''16 * 1872/1024
+                        [
+                        g''16 * 1008/1024
+                        a'16 * 832/1024
+                        c'16 * 736/1024
+                        d'16 * 672/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 3/5
+                    {
+                        bf'16
+                        [
+                        fs''16
+                        e''16
+                        ef''16
+                        af''16
+                        ]
+                    }
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 ~ 16 }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #left
+                        g''16 * 368/1024
+                        [
+                        a'16 * 784/1024
+                        c'16 * 1072/1024
+                        d'16 * 1328/1024
+                        bf'16 * 1568/1024
+                        ]
+                    }
+                    \revert TupletNumber.text
                 }
-                \revert TupletNumber.text
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 3/5
-                {
-                    ef''16
-                    [
-                    af''16
-                    g''16
-                    a'16
-                    c'16
-                    ]
-                }
-                \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 ~ 16 }
-                \times 1/1
-                {
-                    \once \override Beam.grow-direction = #left
-                    d'16 * 368/1024
-                    [
-                    bf'16 * 784/1024
-                    fs''16 * 1072/1024
-                    e''16 * 1328/1024
-                    ef''16 * 1568/1024
-                    ]
-                }
-                \revert TupletNumber.text
-                \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 ~ 16 }
-                \times 1/1
-                {
-                    \once \override Beam.grow-direction = #right
-                    af''16 * 1872/1024
-                    [
-                    g''16 * 1008/1024
-                    a'16 * 832/1024
-                    c'16 * 736/1024
-                    d'16 * 672/1024
-                    ]
-                }
-                \revert TupletNumber.text
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 3/5
-                {
-                    bf'16
-                    [
-                    fs''16
-                    e''16
-                    ef''16
-                    af''16
-                    ]
-                }
-                \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 ~ 16 }
-                \times 1/1
-                {
-                    \once \override Beam.grow-direction = #left
-                    g''16 * 368/1024
-                    [
-                    a'16 * 784/1024
-                    c'16 * 1072/1024
-                    d'16 * 1328/1024
-                    bf'16 * 1568/1024
-                    ]
-                }
-                \revert TupletNumber.text
             }
         >>
 
@@ -578,59 +605,62 @@ Examples: ``baca.from_collection()``.
                 \override Stem.direction = #down
             }
             {
-                \tweak edge-height #'(0.7 . 0)
-                \times 2/3
+                \context Voice = "Voice"
                 {
-                    \time 7/4
-                    c'8
-                }
-                \tweak edge-height #'(0.7 . 0)
-                \times 2/3
-                {
-                    d'8
-                    [
-                    bf'8
-                    ]
-                }
-                \times 2/3
-                {
-                    fs''8
-                    [
-                    e''8
-                    ef''8
-                    ]
-                }
-                \tweak edge-height #'(0.7 . 0)
-                \times 2/3
-                {
-                    af''8
-                    [
-                    g''8
-                    a'8
-                    c'8
-                    ]
-                }
-                \tweak edge-height #'(0.7 . 0)
-                \times 2/3
-                {
-                    d'8
-                    [
-                    bf'8
-                    fs''8
-                    e''8
-                    ef''8
-                    ]
-                }
-                \times 2/3
-                {
-                    af''8
-                    [
-                    g''8
-                    a'8
-                    c'8
-                    d'8
-                    bf'8
-                    ]
+                    \tweak edge-height #'(0.7 . 0)
+                    \times 2/3
+                    {
+                        \time 7/4
+                        c'8
+                    }
+                    \tweak edge-height #'(0.7 . 0)
+                    \times 2/3
+                    {
+                        d'8
+                        [
+                        bf'8
+                        ]
+                    }
+                    \times 2/3
+                    {
+                        fs''8
+                        [
+                        e''8
+                        ef''8
+                        ]
+                    }
+                    \tweak edge-height #'(0.7 . 0)
+                    \times 2/3
+                    {
+                        af''8
+                        [
+                        g''8
+                        a'8
+                        c'8
+                        ]
+                    }
+                    \tweak edge-height #'(0.7 . 0)
+                    \times 2/3
+                    {
+                        d'8
+                        [
+                        bf'8
+                        fs''8
+                        e''8
+                        ef''8
+                        ]
+                    }
+                    \times 2/3
+                    {
+                        af''8
+                        [
+                        g''8
+                        a'8
+                        c'8
+                        d'8
+                        bf'8
+                        ]
+                    }
                 }
             }
         >>
@@ -673,52 +703,55 @@ Examples: ``baca.from_collection()``.
                 \override Stem.direction = #down
             }
             {
+                \context Voice = "Voice"
                 {
-                    \time 3/2
-                    c'4
-                }
-                {
-                    d'8
-                    [
-                    bf'8
-                    ]
-                }
-                \times 4/6
-                {
-                    fs''8
-                    [
-                    e''8
-                    ef''8
-                    ]
-                }
-                {
-                    af''16
-                    [
-                    g''16
-                    a'16
-                    c'16
-                    ]
-                }
-                \times 4/5
-                {
-                    d'16
-                    [
-                    bf'16
-                    fs''16
-                    e''16
-                    ef''16
-                    ]
-                }
-                \times 4/6
-                {
-                    af''16
-                    [
-                    g''16
-                    a'16
-                    c'16
-                    d'16
-                    bf'16
-                    ]
+                    {
+                        \time 3/2
+                        c'4
+                    }
+                    {
+                        d'8
+                        [
+                        bf'8
+                        ]
+                    }
+                    \times 4/6
+                    {
+                        fs''8
+                        [
+                        e''8
+                        ef''8
+                        ]
+                    }
+                    {
+                        af''16
+                        [
+                        g''16
+                        a'16
+                        c'16
+                        ]
+                    }
+                    \times 4/5
+                    {
+                        d'16
+                        [
+                        bf'16
+                        fs''16
+                        e''16
+                        ef''16
+                        ]
+                    }
+                    \times 4/6
+                    {
+                        af''16
+                        [
+                        g''16
+                        a'16
+                        c'16
+                        d'16
+                        bf'16
+                        ]
+                    }
                 }
             }
         >>
@@ -748,34 +781,37 @@ Examples: ``baca.from_collection()``.
         <<
             \context Staff = "Staff"
             {
-                \tweak text #tuplet-number::calc-fraction-text
-                \times 15/11
+                \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 4/3
+                    \times 15/11
                     {
-                        \override TupletBracket.staff-padding = 2
-                        \time 15/16
-                        c'16
-                        [
-                        d'16
-                        bf'16
-                        ]
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 6/5
-                    {
-                        fs''16
-                        [
-                        e''16
-                        ef''16
-                        af''16
-                        g''16
-                        ]
-                    }
-                    {
-                        a'16
-                        \revert TupletBracket.staff-padding
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 4/3
+                        {
+                            \override TupletBracket.staff-padding = 2
+                            \time 15/16
+                            c'16
+                            [
+                            d'16
+                            bf'16
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 6/5
+                        {
+                            fs''16
+                            [
+                            e''16
+                            ef''16
+                            af''16
+                            g''16
+                            ]
+                        }
+                        {
+                            a'16
+                            \revert TupletBracket.staff-padding
+                        }
                     }
                 }
             }

@@ -374,9 +374,12 @@ Examples: commands.
         <<
             \context Staff = "Staff"
             {
-                \time 1/4
-                c'4
-                \baca-effort-f
+                \context Voice = "Voice"
+                {
+                    \time 1/4
+                    c'4
+                    \baca-effort-f
+                }
             }
         >>
 
@@ -940,14 +943,17 @@ Examples: commands.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \abjad-color-music #'red
-                    \time 3/4
-                    c'4
-                    \abjad-color-music #'blue
-                    d'4
-                    \abjad-color-music #'red
-                    e'4
+                    {
+                        \abjad-color-music #'red
+                        \time 3/4
+                        c'4
+                        \abjad-color-music #'blue
+                        d'4
+                        \abjad-color-music #'red
+                        e'4
+                    }
                 }
             }
         >>
@@ -1316,14 +1322,17 @@ Examples: commands.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \time 3/4
-                    c'4
-                    ^ \markup { C4 }
-                    d'4
-                    ^ \markup { D4 }
-                    e'4
-                    ^ \markup { E4 }
+                    {
+                        \time 3/4
+                        c'4
+                        ^ \markup { C4 }
+                        d'4
+                        ^ \markup { D4 }
+                        e'4
+                        ^ \markup { E4 }
+                    }
                 }
             }
         >>
@@ -1391,12 +1400,15 @@ Examples: commands.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \time 3/4
-                    c'4
-                    - \baca-stop-on-string
-                    d'4
-                    e'4
+                    {
+                        \time 3/4
+                        c'4
+                        - \baca-stop-on-string
+                        d'4
+                        e'4
+                    }
                 }
             }
         >>

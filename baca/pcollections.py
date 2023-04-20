@@ -56,25 +56,28 @@ class ArpeggiationSpacingSpecifier:
             <<
                 \context Staff = "Staff"
                 {
+                    \context Voice = "Voice"
                     {
-                        \time 9/16
-                        c,16
-                        [
-                        d,16
-                        bf,16
-                        ]
-                    }
-                    {
-                        fs,16
-                        [
-                        e16
-                        ef'16
-                        af'16
-                        g''16
-                        ]
-                    }
-                    {
-                        a,16
+                        {
+                            \time 9/16
+                            c,16
+                            [
+                            d,16
+                            bf,16
+                            ]
+                        }
+                        {
+                            fs,16
+                            [
+                            e16
+                            ef'16
+                            af'16
+                            g''16
+                            ]
+                        }
+                        {
+                            a,16
+                        }
                     }
                 }
             >>
@@ -102,25 +105,28 @@ class ArpeggiationSpacingSpecifier:
             <<
                 \context Staff = "Staff"
                 {
+                    \context Voice = "Voice"
                     {
-                        \time 9/16
-                        c'16
-                        [
-                        d16
-                        bf,16
-                        ]
-                    }
-                    {
-                        fs16
-                        [
-                        e16
-                        ef16
-                        af,16
-                        g,16
-                        ]
-                    }
-                    {
-                        a,16
+                        {
+                            \time 9/16
+                            c'16
+                            [
+                            d16
+                            bf,16
+                            ]
+                        }
+                        {
+                            fs16
+                            [
+                            e16
+                            ef16
+                            af,16
+                            g,16
+                            ]
+                        }
+                        {
+                            a,16
+                        }
                     }
                 }
             >>

@@ -37,57 +37,60 @@ Examples: ``baca.make_bcgs()``.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \time 3/4
-                    c'8
-                }
-                {
-                    \acciaccatura {
-                        d'16
+                    {
+                        \time 3/4
+                        c'8
                     }
-                    bf'8
-                }
-                {
-                    \acciaccatura {
-                        fs''16
-                        [
-                        e''16
-                        ]
+                    {
+                        \acciaccatura {
+                            d'16
+                        }
+                        bf'8
                     }
-                    ef''8
-                }
-                {
-                    \acciaccatura {
-                        af''16
-                        [
-                        g''16
-                        a'16
-                        ]
+                    {
+                        \acciaccatura {
+                            fs''16
+                            [
+                            e''16
+                            ]
+                        }
+                        ef''8
                     }
-                    c'8
-                }
-                {
-                    \acciaccatura {
-                        d'16
-                        [
-                        bf'16
-                        fs''16
-                        e''16
-                        ]
+                    {
+                        \acciaccatura {
+                            af''16
+                            [
+                            g''16
+                            a'16
+                            ]
+                        }
+                        c'8
                     }
-                    ef''8
-                }
-                {
-                    \acciaccatura {
-                        af''16
-                        [
-                        g''16
-                        a'16
-                        c'16
-                        d'16
-                        ]
+                    {
+                        \acciaccatura {
+                            d'16
+                            [
+                            bf'16
+                            fs''16
+                            e''16
+                            ]
+                        }
+                        ef''8
                     }
-                    bf'8
+                    {
+                        \acciaccatura {
+                            af''16
+                            [
+                            g''16
+                            a'16
+                            c'16
+                            d'16
+                            ]
+                        }
+                        bf'8
+                    }
                 }
             }
         >>
@@ -129,57 +132,60 @@ Examples: ``baca.make_bcgs()``.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \time 3/4
-                    c'8
-                }
-                {
-                    \acciaccatura {
-                        d'8
-                    }
-                    bf'8
-                }
-                {
-                    \acciaccatura {
-                        fs''8
-                        [
-                        e''8
-                        ]
-                    }
-                    ef''8
-                }
-                {
-                    \acciaccatura {
-                        af''8
-                        [
-                        g''8
-                        a'8
-                        ]
-                    }
-                    c'8
-                }
-                {
-                    \acciaccatura {
-                        d'8
-                        [
-                        bf'8
-                        fs''8
-                        e''8
-                        ]
-                    }
-                    ef''8
-                }
-                {
-                    \acciaccatura {
-                        af''8
-                        [
-                        g''8
-                        a'8
+                    {
+                        \time 3/4
                         c'8
-                        d'8
-                        ]
                     }
-                    bf'8
+                    {
+                        \acciaccatura {
+                            d'8
+                        }
+                        bf'8
+                    }
+                    {
+                        \acciaccatura {
+                            fs''8
+                            [
+                            e''8
+                            ]
+                        }
+                        ef''8
+                    }
+                    {
+                        \acciaccatura {
+                            af''8
+                            [
+                            g''8
+                            a'8
+                            ]
+                        }
+                        c'8
+                    }
+                    {
+                        \acciaccatura {
+                            d'8
+                            [
+                            bf'8
+                            fs''8
+                            e''8
+                            ]
+                        }
+                        ef''8
+                    }
+                    {
+                        \acciaccatura {
+                            af''8
+                            [
+                            g''8
+                            a'8
+                            c'8
+                            d'8
+                            ]
+                        }
+                        bf'8
+                    }
                 }
             }
         >>
@@ -224,63 +230,66 @@ Examples: ``baca.make_bcgs()``.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \time 3/2
-                    c'8
-                }
-                {
-                    \acciaccatura {
-                        d'16
+                    {
+                        \time 3/2
+                        c'8
                     }
-                    bf'8
-                }
-                {
-                    \acciaccatura {
-                        fs''16
+                    {
+                        \acciaccatura {
+                            d'16
+                        }
+                        bf'8
+                    }
+                    {
+                        \acciaccatura {
+                            fs''16
+                            [
+                            e''16
+                            ]
+                        }
+                        ef''8
+                    }
+                    {
+                        \acciaccatura {
+                            af''16
+                            [
+                            g''16
+                            ]
+                        }
+                        a'8
                         [
-                        e''16
+                        c'8
                         ]
                     }
-                    ef''8
-                }
-                {
-                    \acciaccatura {
-                        af''16
+                    {
+                        \acciaccatura {
+                            d'16
+                            [
+                            bf'16
+                            ]
+                        }
+                        fs''8
                         [
-                        g''16
+                        e''8
+                        ef''8
                         ]
                     }
-                    a'8
-                    [
-                    c'8
-                    ]
-                }
-                {
-                    \acciaccatura {
-                        d'16
+                    {
+                        \acciaccatura {
+                            af''16
+                            [
+                            g''16
+                            ]
+                        }
+                        a'8
                         [
-                        bf'16
+                        c'8
+                        d'8
+                        bf'8
                         ]
                     }
-                    fs''8
-                    [
-                    e''8
-                    ef''8
-                    ]
-                }
-                {
-                    \acciaccatura {
-                        af''16
-                        [
-                        g''16
-                        ]
-                    }
-                    a'8
-                    [
-                    c'8
-                    d'8
-                    bf'8
-                    ]
                 }
             }
         >>
@@ -325,63 +334,66 @@ Examples: ``baca.make_bcgs()``.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \time 3/2
-                    c'8
-                }
-                {
-                    \acciaccatura {
-                        d'16
+                    {
+                        \time 3/2
+                        c'8
                     }
-                    bf'8
-                }
-                {
-                    \acciaccatura {
-                        fs''16
+                    {
+                        \acciaccatura {
+                            d'16
+                        }
+                        bf'8
+                    }
+                    {
+                        \acciaccatura {
+                            fs''16
+                            [
+                            e''16
+                            ]
+                        }
+                        ef''8
+                    }
+                    {
+                        af''8
                         [
-                        e''16
+                        \acciaccatura {
+                            g''16
+                            [
+                            a'16
+                            ]
+                        }
+                        c'8
                         ]
                     }
-                    ef''8
-                }
-                {
-                    af''8
-                    [
-                    \acciaccatura {
-                        g''16
+                    {
+                        d'8
                         [
-                        a'16
+                        bf'8
+                        \acciaccatura {
+                            fs''16
+                            [
+                            e''16
+                            ]
+                        }
+                        ef''8
                         ]
                     }
-                    c'8
-                    ]
-                }
-                {
-                    d'8
-                    [
-                    bf'8
-                    \acciaccatura {
-                        fs''16
+                    {
+                        af''8
                         [
-                        e''16
+                        g''8
+                        a'8
+                        \acciaccatura {
+                            c'16
+                            [
+                            d'16
+                            ]
+                        }
+                        bf'8
                         ]
                     }
-                    ef''8
-                    ]
-                }
-                {
-                    af''8
-                    [
-                    g''8
-                    a'8
-                    \acciaccatura {
-                        c'16
-                        [
-                        d'16
-                        ]
-                    }
-                    bf'8
-                    ]
                 }
             }
         >>
@@ -428,69 +440,72 @@ Examples: ``baca.make_bcgs()``.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \time 9/8
-                    c'8
-                }
-                {
-                    \acciaccatura {
-                        d'16
+                    {
+                        \time 9/8
+                        c'8
                     }
-                    bf'8
-                }
-                {
-                    \acciaccatura {
-                        fs''16
+                    {
+                        \acciaccatura {
+                            d'16
+                        }
+                        bf'8
+                    }
+                    {
+                        \acciaccatura {
+                            fs''16
+                            [
+                            e''16
+                            ]
+                        }
+                        ef''8
+                    }
+                    {
+                        \acciaccatura {
+                            af''16
+                            [
+                            g''16
+                            ]
+                        }
+                        a'8
                         [
-                        e''16
+                        c'8
                         ]
                     }
-                    ef''8
-                }
-                {
-                    \acciaccatura {
-                        af''16
+                    {
+                        \acciaccatura {
+                            d'16
+                            [
+                            bf'16
+                            ]
+                        }
+                        fs''8
                         [
-                        g''16
+                        \acciaccatura {
+                            e''16
+                        }
+                        ef''8
                         ]
                     }
-                    a'8
-                    [
-                    c'8
-                    ]
-                }
-                {
-                    \acciaccatura {
-                        d'16
+                    {
+                        \acciaccatura {
+                            af''16
+                            [
+                            g''16
+                            ]
+                        }
+                        a'8
                         [
-                        bf'16
+                        \acciaccatura {
+                            c'16
+                            [
+                            d'16
+                            ]
+                        }
+                        bf'8
                         ]
                     }
-                    fs''8
-                    [
-                    \acciaccatura {
-                        e''16
-                    }
-                    ef''8
-                    ]
-                }
-                {
-                    \acciaccatura {
-                        af''16
-                        [
-                        g''16
-                        ]
-                    }
-                    a'8
-                    [
-                    \acciaccatura {
-                        c'16
-                        [
-                        d'16
-                        ]
-                    }
-                    bf'8
-                    ]
                 }
             }
         >>
@@ -531,63 +546,66 @@ Examples: ``baca.make_bcgs()``.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \time 11/8
-                    c'8
-                }
-                {
-                    d'8
-                    [
-                    bf'8
-                    ]
-                }
-                {
-                    fs''8
-                    [
-                    \acciaccatura {
-                        e''16
+                    {
+                        \time 11/8
+                        c'8
                     }
-                    ef''8
-                    ]
-                }
-                {
-                    af''8
-                    [
-                    \acciaccatura {
-                        g''16
+                    {
+                        d'8
                         [
-                        a'16
+                        bf'8
                         ]
                     }
-                    c'8
-                    ]
-                }
-                {
-                    d'8
-                    [
-                    \acciaccatura {
-                        bf'16
+                    {
+                        fs''8
                         [
-                        fs''16
-                        e''16
+                        \acciaccatura {
+                            e''16
+                        }
+                        ef''8
                         ]
                     }
-                    ef''8
-                    ]
-                }
-                {
-                    af''8
-                    [
-                    \acciaccatura {
-                        g''16
+                    {
+                        af''8
                         [
-                        a'16
-                        c'16
-                        d'16
+                        \acciaccatura {
+                            g''16
+                            [
+                            a'16
+                            ]
+                        }
+                        c'8
                         ]
                     }
-                    bf'8
-                    ]
+                    {
+                        d'8
+                        [
+                        \acciaccatura {
+                            bf'16
+                            [
+                            fs''16
+                            e''16
+                            ]
+                        }
+                        ef''8
+                        ]
+                    }
+                    {
+                        af''8
+                        [
+                        \acciaccatura {
+                            g''16
+                            [
+                            a'16
+                            c'16
+                            d'16
+                            ]
+                        }
+                        bf'8
+                        ]
+                    }
                 }
             }
         >>
@@ -628,57 +646,60 @@ Examples: ``baca.make_bcgs()``.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \time 3/2
-                    c'4
-                }
-                {
-                    \acciaccatura {
-                        d'16
+                    {
+                        \time 3/2
+                        c'4
                     }
-                    bf'4
-                }
-                {
-                    \acciaccatura {
-                        fs''16
-                        [
-                        e''16
-                        ]
+                    {
+                        \acciaccatura {
+                            d'16
+                        }
+                        bf'4
                     }
-                    ef''4
-                }
-                {
-                    \acciaccatura {
-                        af''16
-                        [
-                        g''16
-                        a'16
-                        ]
+                    {
+                        \acciaccatura {
+                            fs''16
+                            [
+                            e''16
+                            ]
+                        }
+                        ef''4
                     }
-                    c'4
-                }
-                {
-                    \acciaccatura {
-                        d'16
-                        [
-                        bf'16
-                        fs''16
-                        e''16
-                        ]
+                    {
+                        \acciaccatura {
+                            af''16
+                            [
+                            g''16
+                            a'16
+                            ]
+                        }
+                        c'4
                     }
-                    ef''4
-                }
-                {
-                    \acciaccatura {
-                        af''16
-                        [
-                        g''16
-                        a'16
-                        c'16
-                        d'16
-                        ]
+                    {
+                        \acciaccatura {
+                            d'16
+                            [
+                            bf'16
+                            fs''16
+                            e''16
+                            ]
+                        }
+                        ef''4
                     }
-                    bf'4
+                    {
+                        \acciaccatura {
+                            af''16
+                            [
+                            g''16
+                            a'16
+                            c'16
+                            d'16
+                            ]
+                        }
+                        bf'4
+                    }
                 }
             }
         >>
