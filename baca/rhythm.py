@@ -47,7 +47,7 @@ def _make_accelerando_multipliers(
         start_offsets_.append(start_offset_)
     start_offsets_.append(float(total_duration))
     durations_ = abjad.math.difference_series(start_offsets_)
-    durations_ = rmakers.rmakers._round_durations(durations_, 2**10)
+    durations_ = rmakers.makers._round_durations(durations_, 2**10)
     current_duration = sum(durations_)
     if current_duration < total_duration:
         missing_duration = total_duration - current_duration
