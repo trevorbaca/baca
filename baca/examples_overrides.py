@@ -707,11 +707,11 @@ Examples: overrides.
     Down-overrides repeat tie direction:
 
     >>> def make_score():
-    ...     container = abjad.Container(r"c'4 c' c'")
-    ...     baca.repeat_tie(container[1:])
-    ...     baca.repeat_tie_down(container)
-    ...     baca.stem_up(container)
-    ...     score = baca.docs.make_single_staff_score([container])
+    ...     voice = abjad.Voice(r"c'4 c' c'", name="Voice")
+    ...     baca.repeat_tie(voice[1:])
+    ...     baca.repeat_tie_down(voice)
+    ...     baca.stem_up(voice)
+    ...     score = baca.docs.make_single_staff_score([voice])
     ...     return score
 
     >>> score = make_score()
@@ -727,6 +727,7 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
                     \override RepeatTie.direction = #down
                     \override Stem.direction = #up
@@ -747,11 +748,11 @@ Examples: overrides.
     Up-overrides repeat tie direction:
 
     >>> def make_score():
-    ...     container = abjad.Container(r"c'4 c' c'")
-    ...     baca.repeat_tie(container[1:])
-    ...     baca.repeat_tie_down(container)
-    ...     baca.stem_down(container)
-    ...     score = baca.docs.make_single_staff_score([container])
+    ...     voice = abjad.Voice(r"c'4 c' c'", name="Voice")
+    ...     baca.repeat_tie(voice[1:])
+    ...     baca.repeat_tie_down(voice)
+    ...     baca.stem_down(voice)
+    ...     score = baca.docs.make_single_staff_score([voice])
     ...     return score
 
     >>> score = make_score()
@@ -767,6 +768,7 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
                     \override RepeatTie.direction = #down
                     \override Stem.direction = #down

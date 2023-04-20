@@ -138,11 +138,9 @@ Examples: ``baca.from_collection()``.
     Works with large counts:
 
     >>> tuplet = baca.from_collection([0, 2], [29], 64)
-    >>> container = abjad.Container([tuplet])
+    >>> lilypond_file = abjad.illustrators.components([tuplet])
     >>> rmakers.beam([tuplet])
-    >>> rmakers.force_repeat_tie(container)
-    >>> components = abjad.mutate.eject_contents(container)
-    >>> lilypond_file = abjad.illustrators.components(components)
+    >>> rmakers.force_repeat_tie(tuplet)
     >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 

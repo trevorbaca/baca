@@ -69,8 +69,8 @@ Examples: spanners.
     Attaches ottava indicators to trimmed leaves:
 
     >>> container = abjad.Container("r8 d'4 e' r8")
-    >>> _ = baca.ottava(baca.select.tleaves(container))
     >>> lilypond_file = abjad.illustrators.components([container])
+    >>> _ = baca.ottava(baca.select.tleaves(container))
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -102,8 +102,8 @@ Examples: spanners.
     Attaches ottava bassa indicators to trimmed leaves:
 
     >>> container = abjad.Container("r8 d'4 e' r8")
-    >>> _ = baca.ottava_bassa(baca.select.tleaves(container))
     >>> lilypond_file = abjad.illustrators.components([container])
+    >>> _ = baca.ottava_bassa(baca.select.tleaves(container))
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
