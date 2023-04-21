@@ -11,6 +11,7 @@ from . import math
 from . import jobs
 from . import path
 from . import score
+from . import section
 from . import select
 from . import sequence
 from . import typings
@@ -26,7 +27,6 @@ from .accumulator import (
 )
 from .commands import *
 from .constellation import *
-from .cursor import Cursor
 from .docs import global_context_string
 from .imbricate import imbricate
 from .classes import *
