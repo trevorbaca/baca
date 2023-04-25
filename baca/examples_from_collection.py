@@ -3,145 +3,17 @@ Examples: ``baca.from_collection()``.
 
 ..  container:: example
 
-    Spells nonassignable durations with monontonically decreasing durations by
-    default:
-
-    >>> tuplet = baca.from_collection([0, 2, 10], [5], 32)
-    >>> rmakers.beam([tuplet])
-    >>> lilypond_file = abjad.illustrators.components([tuplet])
-    >>> rmakers.swap_trivial(lilypond_file["Staff"])
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        <<
-            \context Staff = "Staff"
-            {
-                \context Voice = "Voice"
-                {
-                    {
-                        \time 15/32
-                        c'8
-                        [
-                        ~
-                        c'32
-                        d'8
-                        ~
-                        d'32
-                        bf'8
-                        ~
-                        bf'32
-                        ]
-                    }
-                }
-            }
-        >>
-
-..  container:: example
-
-    Sixteenths and eighths:
-
-    >>> collection = [0, 2, 10, 8]
-    >>> tuplet = baca.from_collection(collection, [1, 1, 2], 16)
-    >>> rmakers.beam([tuplet])
-    >>> lilypond_file = abjad.illustrators.components([tuplet])
-    >>> rmakers.swap_trivial(lilypond_file["Staff"])
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        <<
-            \context Staff = "Staff"
-            {
-                \context Voice = "Voice"
-                {
-                    {
-                        \time 5/16
-                        c'16
-                        [
-                        d'16
-                        bf'8
-                        af'16
-                        ]
-                    }
-                }
-            }
-        >>
-
-    >>> collection = [18, 16, 15, 20, 19]
-    >>> tuplet = baca.from_collection(collection, [1, 1, 2], 16)
-    >>> rmakers.beam([tuplet])
-    >>> lilypond_file = abjad.illustrators.components([tuplet])
-    >>> rmakers.swap_trivial(lilypond_file["Staff"])
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        <<
-            \context Staff = "Staff"
-            {
-                \context Voice = "Voice"
-                {
-                    {
-                        \time 3/8
-                        fs''16
-                        [
-                        e''16
-                        ef''8
-                        af''16
-                        g''16
-                        ]
-                    }
-                }
-            }
-        >>
-
-    >>> tuplet = baca.from_collection([9], [1, 1, 2], 16)
-    >>> rmakers.beam([tuplet])
-    >>> lilypond_file = abjad.illustrators.components([tuplet])
-    >>> rmakers.swap_trivial(lilypond_file["Staff"])
-    >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-    ..  docs::
-
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
-        >>> print(string)
-        \context Score = "Score"
-        <<
-            \context Staff = "Staff"
-            {
-                \context Voice = "Voice"
-                {
-                    {
-                        \time 1/16
-                        a'16
-                    }
-                }
-            }
-        >>
-
-..  container:: example
-
     Works with large counts:
 
-    >>> tuplet = baca.from_collection([0, 2], [29], 64)
-    >>> lilypond_file = abjad.illustrators.components([tuplet])
-    >>> rmakers.beam([tuplet])
-    >>> rmakers.force_repeat_tie(tuplet)
-    >>> rmakers.swap_trivial(lilypond_file["Staff"])
+    >>> def make_lilypond_file():
+    ...     tuplet = baca.from_collection([0, 2], [29], 64)
+    ...     lilypond_file = abjad.illustrators.components([tuplet])
+    ...     rmakers.beam([tuplet])
+    ...     rmakers.force_repeat_tie(tuplet)
+    ...     rmakers.swap_trivial(lilypond_file["Staff"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
