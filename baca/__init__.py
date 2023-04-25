@@ -17,7 +17,6 @@ from . import sequence
 from . import typings
 from .enums import colors, enums
 from .accumulator import (
-    Accumulator,
     anchor,
     anchor_after,
     anchor_to_figure,
