@@ -172,18 +172,22 @@ Examples: ``baca.from_collection()``.
 
     Accelerandi:
 
-    >>> collections = [
-    ...     [0],
-    ...     [2, 10],
-    ...     [18, 16, 15],
-    ...     [20, 19, 9, 0],
-    ...     [2, 10, 18, 16, 15],
-    ...     [20, 19, 9, 0, 2, 10],
-    ... ]
-    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
-    >>> tuplets = [baca.style_accelerando(_) for _ in tuplets]
-    >>> rmakers.beam(tuplets)
-    >>> lilypond_file = abjad.illustrators.components(tuplets)
+    >>> def make_lilypond_file():
+    ...     collections = [
+    ...         [0],
+    ...         [2, 10],
+    ...         [18, 16, 15],
+    ...         [20, 19, 9, 0],
+    ...         [2, 10, 18, 16, 15],
+    ...         [20, 19, 9, 0, 2, 10],
+    ...     ]
+    ...     tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+    ...     tuplets = [baca.style_accelerando(_) for _ in tuplets]
+    ...     rmakers.beam(tuplets)
+    ...     lilypond_file = abjad.illustrators.components(tuplets)
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -271,18 +275,22 @@ Examples: ``baca.from_collection()``.
 
     Ritardandi:
 
-    >>> collections = [
-    ...     [0],
-    ...     [2, 10],
-    ...     [18, 16, 15],
-    ...     [20, 19, 9, 0],
-    ...     [2, 10, 18, 16, 15],
-    ...     [20, 19, 9, 0, 2, 10],
-    ... ]
-    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
-    >>> tuplets = [baca.style_ritardando(_) for _ in tuplets]
-    >>> rmakers.beam(tuplets)
-    >>> lilypond_file = abjad.illustrators.components(tuplets)
+    >>> def make_lilypond_file():
+    ...     collections = [
+    ...         [0],
+    ...         [2, 10],
+    ...         [18, 16, 15],
+    ...         [20, 19, 9, 0],
+    ...         [2, 10, 18, 16, 15],
+    ...         [20, 19, 9, 0, 2, 10],
+    ...     ]
+    ...     tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+    ...     tuplets = [baca.style_ritardando(_) for _ in tuplets]
+    ...     rmakers.beam(tuplets)
+    ...     lilypond_file = abjad.illustrators.components(tuplets)
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -370,19 +378,23 @@ Examples: ``baca.from_collection()``.
 
     Accelerandi followed by ritardandi:
 
-    >>> collections = [
-    ...     [0, 2, 10, 18, 16],
-    ...     [15, 20, 19, 9, 0, 2],
-    ...     [10, 18, 16, 15, 20],
-    ...     [19, 9, 0, 2, 10, 18],
-    ... ]
-    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
-    >>> _ = baca.style_accelerando(tuplets[0])
-    >>> _ = baca.style_ritardando(tuplets[1])
-    >>> _ = baca.style_accelerando(tuplets[2])
-    >>> _ = baca.style_ritardando(tuplets[3])
-    >>> rmakers.beam(tuplets)
-    >>> lilypond_file = abjad.illustrators.components(tuplets)
+    >>> def make_lilypond_file():
+    ...     collections = [
+    ...         [0, 2, 10, 18, 16],
+    ...         [15, 20, 19, 9, 0, 2],
+    ...         [10, 18, 16, 15, 20],
+    ...         [19, 9, 0, 2, 10, 18],
+    ...     ]
+    ...     tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+    ...     baca.style_accelerando(tuplets[0])
+    ...     baca.style_ritardando(tuplets[1])
+    ...     baca.style_accelerando(tuplets[2])
+    ...     baca.style_ritardando(tuplets[3])
+    ...     rmakers.beam(tuplets)
+    ...     lilypond_file = abjad.illustrators.components(tuplets)
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -459,23 +471,27 @@ Examples: ``baca.from_collection()``.
 
     Mixed accelerandi, ritardandi and prolation:
 
-    >>> collections = [
-    ...     [0, 2, 10, 18, 16],
-    ...     [15, 20, 19, 9, 0],
-    ...     [2, 10, 18, 16, 15],
-    ...     [20, 19, 9, 0, 2],
-    ...     [10, 18, 16, 15, 20],
-    ...     [19, 9, 0, 2, 10],
-    ... ]
-    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
-    >>> _ = baca.style_accelerando(tuplets[0])
-    >>> _ = baca.prolate(tuplets[1], -2, 16)
-    >>> _ = baca.style_ritardando(tuplets[2])
-    >>> _ = baca.style_accelerando(tuplets[3])
-    >>> _ = baca.prolate(tuplets[4], -2, 16)
-    >>> _ = baca.style_ritardando(tuplets[5])
-    >>> rmakers.beam(tuplets)
-    >>> lilypond_file = abjad.illustrators.components(tuplets)
+    >>> def make_lilypond_file():
+    ...     collections = [
+    ...         [0, 2, 10, 18, 16],
+    ...         [15, 20, 19, 9, 0],
+    ...         [2, 10, 18, 16, 15],
+    ...         [20, 19, 9, 0, 2],
+    ...         [10, 18, 16, 15, 20],
+    ...         [19, 9, 0, 2, 10],
+    ...     ]
+    ...     tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+    ...     baca.style_accelerando(tuplets[0])
+    ...     baca.prolate(tuplets[1], -2, 16)
+    ...     baca.style_ritardando(tuplets[2])
+    ...     baca.style_accelerando(tuplets[3])
+    ...     baca.prolate(tuplets[4], -2, 16)
+    ...     baca.style_ritardando(tuplets[5])
+    ...     rmakers.beam(tuplets)
+    ...     lilypond_file = abjad.illustrators.components(tuplets)
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -572,21 +588,25 @@ Examples: ``baca.from_collection()``.
 
     Specified by tuplet multiplier:
 
-    >>> collections = [
-    ...     [0],
-    ...     [2, 10],
-    ...     [18, 16, 15],
-    ...     [20, 19, 9, 0],
-    ...     [2, 10, 18, 16, 15],
-    ...     [20, 19, 9, 0, 2, 10],
-    ... ]
-    >>> tuplets = [baca.from_collection(_, [1], 8) for _ in collections]
-    >>> tuplets = [baca.prolate(_, "3:2") for _ in tuplets]
-    >>> rmakers.beam(tuplets)
-    >>> lilypond_file = abjad.illustrators.components(tuplets)
-    >>> staff = lilypond_file["Staff"]
-    >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
-    >>> abjad.override(staff).Stem.direction = abjad.DOWN
+    >>> def make_lilypond_file():
+    ...     collections = [
+    ...         [0],
+    ...         [2, 10],
+    ...         [18, 16, 15],
+    ...         [20, 19, 9, 0],
+    ...         [2, 10, 18, 16, 15],
+    ...         [20, 19, 9, 0, 2, 10],
+    ...     ]
+    ...     tuplets = [baca.from_collection(_, [1], 8) for _ in collections]
+    ...     tuplets = [baca.prolate(_, "3:2") for _ in tuplets]
+    ...     rmakers.beam(tuplets)
+    ...     lilypond_file = abjad.illustrators.components(tuplets)
+    ...     staff = lilypond_file["Staff"]
+    ...     abjad.override(staff).Beam.positions = "#'(-6 . -6)"
+    ...     abjad.override(staff).Stem.direction = abjad.DOWN
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -667,24 +687,28 @@ Examples: ``baca.from_collection()``.
 
     Segment durations equal to a quarter:
 
-    >>> collections = [
-    ...     [0],
-    ...     [2, 10],
-    ...     [18, 16, 15],
-    ...     [20, 19, 9, 0],
-    ...     [2, 10, 18, 16, 15],
-    ...     [20, 19, 9, 0, 2, 10],
-    ... ]
-    >>> tuplets = [baca.from_collection(_, [1], 8) for _ in collections]
-    >>> duration = abjad.Duration(1, 4)
-    >>> tuplets = [baca.prolate(_, duration) for _ in tuplets]
-    >>> rmakers.denominator(tuplets, (1, 16))
-    >>> rmakers.beam(tuplets)
-    >>> lilypond_file = abjad.illustrators.components(tuplets)
-    >>> staff = lilypond_file["Staff"]
-    >>> rmakers.swap_trivial(staff)
-    >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
-    >>> abjad.override(staff).Stem.direction = abjad.DOWN
+    >>> def make_lilypond_file():
+    ...     collections = [
+    ...         [0],
+    ...         [2, 10],
+    ...         [18, 16, 15],
+    ...         [20, 19, 9, 0],
+    ...         [2, 10, 18, 16, 15],
+    ...         [20, 19, 9, 0, 2, 10],
+    ...     ]
+    ...     tuplets = [baca.from_collection(_, [1], 8) for _ in collections]
+    ...     duration = abjad.Duration(1, 4)
+    ...     tuplets = [baca.prolate(_, duration) for _ in tuplets]
+    ...     rmakers.denominator(tuplets, (1, 16))
+    ...     rmakers.beam(tuplets)
+    ...     lilypond_file = abjad.illustrators.components(tuplets)
+    ...     staff = lilypond_file["Staff"]
+    ...     rmakers.swap_trivial(staff)
+    ...     abjad.override(staff).Beam.positions = "#'(-6 . -6)"
+    ...     abjad.override(staff).Stem.direction = abjad.DOWN
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -758,16 +782,20 @@ Examples: ``baca.from_collection()``.
 
     Nest works like this:
 
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
-    >>> tuplets = [baca.prolate(_, 1, 16) for _ in tuplets]
-    >>> container = abjad.Container(tuplets)
-    >>> rmakers.beam(tuplets)
-    >>> _ = baca.nest(tuplets, "+4/16")
-    >>> _ = baca.tuplet_bracket_staff_padding(tuplets, 2)
-    >>> components = abjad.mutate.eject_contents(container)
-    >>> lilypond_file = abjad.illustrators.components(components)
-    >>> rmakers.swap_trivial(lilypond_file["Staff"])
+    >>> def make_lilypond_file():
+    ...     collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+    ...     tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+    ...     tuplets = [baca.prolate(_, 1, 16) for _ in tuplets]
+    ...     container = abjad.Container(tuplets)
+    ...     rmakers.beam(tuplets)
+    ...     baca.nest(tuplets, "+4/16")
+    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
+    ...     components = abjad.mutate.eject_contents(container)
+    ...     lilypond_file = abjad.illustrators.components(components)
+    ...     rmakers.swap_trivial(lilypond_file["Staff"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -819,39 +847,42 @@ Examples: ``baca.from_collection()``.
 
     Imbricates ``segment`` in voice with ``voice_name``.
 
-    >>> score = baca.docs.make_empty_score(2)
-    >>> accumulator = baca.Accumulator(score)
-    >>> collections = [
-    ...     [0, 2, 10, 18, 16],
-    ...     [15, 20, 19, 9, 0],
-    ...     [2, 10, 18, 16, 15],
-    ... ]
-    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
-    >>> rmakers.beam_groups(tuplets)
-    >>> container = abjad.Container(tuplets)
-    >>> imbrications = baca.imbricate(
-    ...     container,
-    ...     "Music.1",
-    ...     [2, 19, 9, 18, 16],
-    ... )
-    >>> for imbrication in imbrications.values():
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
-    ...     rmakers.beam_groups(groups)
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(2)
+    ...     accumulator = baca.Accumulator(score)
+    ...     collections = [
+    ...         [0, 2, 10, 18, 16],
+    ...         [15, 20, 19, 9, 0],
+    ...         [2, 10, 18, 16, 15],
+    ...     ]
+    ...     tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+    ...     rmakers.beam_groups(tuplets)
+    ...     container = abjad.Container(tuplets)
+    ...     imbrications = baca.imbricate(
+    ...         container,
+    ...         "Music.1",
+    ...         [2, 19, 9, 18, 16],
+    ...     )
+    ...     for imbrication in imbrications.values():
+    ...         groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
+    ...         rmakers.beam_groups(groups)
+    ...     accumulator.cache(
+    ...         "Music.2",
+    ...         container,
+    ...         imbrications=imbrications,
+    ...     )
+    ...     time_signatures = baca.section.wrap(accumulator.time_signatures)
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 32))(score)
+    ...     accumulator.populate(score)
+    ...     baca.voice_number(abjad.select.leaf(score["Music.1"], 0), 1)
+    ...     baca.voice_number(abjad.select.leaf(score["Music.2"], 0), 2)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     rmakers.swap_trivial(lilypond_file["Staff"])
+    ...     return lilypond_file
 
-    >>> accumulator.cache(
-    ...     "Music.2",
-    ...     container,
-    ...     imbrications=imbrications,
-    ... )
-    >>> time_signatures = baca.section.wrap(accumulator.time_signatures)
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> accumulator.populate(score)
-    >>> _ = baca.voice_number(abjad.select.leaf(score["Music.1"], 0), 1)
-    >>> _ = baca.voice_number(abjad.select.leaf(score["Music.2"], 0), 2)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-    >>> rmakers.swap_trivial(lilypond_file["Staff"])
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -980,43 +1011,45 @@ Examples: ``baca.from_collection()``.
 
     Multiple imbricated voices:
 
-    >>> score = baca.docs.make_empty_score(3)
-    >>> accumulator = baca.Accumulator(score)
-    >>> collections = [
-    ...     [0, 2, 10, 18, 16],
-    ...     [15, 20, 19, 9, 0],
-    ...     [2, 10, 18, 16, 15],
-    ... ]
-    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
-    >>> groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
-    >>> rmakers.beam_groups(groups)
-    >>> container = abjad.Container(tuplets)
-    >>> imbrications_1 = baca.imbricate(container, "Music.1", [2, 19, 9])
-    >>> for imbrication in imbrications_1.values():
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
-    ...     rmakers.beam_groups(groups, beam_rests=True)
-    ...     _ = baca.beam_positions(imbrication, 6)
-    ...     _ = baca.staccato(baca.select.pheads(imbrication))
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(3)
+    ...     accumulator = baca.Accumulator(score)
+    ...     collections = [
+    ...         [0, 2, 10, 18, 16],
+    ...         [15, 20, 19, 9, 0],
+    ...         [2, 10, 18, 16, 15],
+    ...     ]
+    ...     tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
+    ...     rmakers.beam_groups(groups)
+    ...     container = abjad.Container(tuplets)
+    ...     imbrications_1 = baca.imbricate(container, "Music.1", [2, 19, 9])
+    ...     for imbrication in imbrications_1.values():
+    ...         groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
+    ...         rmakers.beam_groups(groups, beam_rests=True)
+    ...         baca.beam_positions(imbrication, 6)
+    ...         baca.staccato(baca.select.pheads(imbrication))
+    ...     imbrications_3 = baca.imbricate(container, "Music.3", [16, 10, 18])
+    ...     for imbrication in imbrications_3.values():
+    ...         groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
+    ...         rmakers.beam_groups(groups, beam_rests=True)
+    ...         baca.beam_positions(imbrication, 8)
+    ...         baca.accent(baca.select.pheads(imbrication))
+    ...     accumulator.cache(
+    ...         "Music.2",
+    ...         container,
+    ...         imbrications=imbrications_1 | imbrications_3,
+    ...     )
+    ...     time_signatures = baca.section.wrap(accumulator.time_signatures)
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 32))(score)
+    ...     accumulator.populate(score)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     rmakers.swap_trivial(lilypond_file["Staff"])
+    ...     return lilypond_file
 
-    >>> imbrications_3 = baca.imbricate(container, "Music.3", [16, 10, 18])
-    >>> for imbrication in imbrications_3.values():
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
-    ...     rmakers.beam_groups(groups, beam_rests=True)
-    ...     _ = baca.beam_positions(imbrication, 8)
-    ...     _ = baca.accent(baca.select.pheads(imbrication))
-
-    >>> accumulator.cache(
-    ...     "Music.2",
-    ...     container,
-    ...     imbrications=imbrications_1 | imbrications_3,
-    ... )
-    >>> time_signatures = baca.section.wrap(accumulator.time_signatures)
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> accumulator.populate(score)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-    >>> rmakers.swap_trivial(lilypond_file["Staff"])
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1185,42 +1218,45 @@ Examples: ``baca.from_collection()``.
 
     Hides tuplet brackets above imbricated voice:
 
-    >>> score = baca.docs.make_empty_score(2)
-    >>> accumulator = baca.Accumulator(score)
-    >>> collections = [
-    ...     [0, 2, 10, 18, 16],
-    ...     [15, 20, 19, 9, 0],
-    ...     [2, 10, 18, 16, 15],
-    ... ]
-    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
-    >>> tuplets = [baca.prolate(_, 1, 16) for _ in tuplets]
-    >>> groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
-    >>> rmakers.beam_groups(groups, beam_rests=True)
-    >>> container = abjad.Container(tuplets)
-    >>> imbrications = baca.imbricate(
-    ...     container,
-    ...     "Music.1",
-    ...     [2, 19, 9, 18, 16],
-    ... )
-    >>> for imbrication in imbrications.values():
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(2)
+    ...     accumulator = baca.Accumulator(score)
+    ...     collections = [
+    ...         [0, 2, 10, 18, 16],
+    ...         [15, 20, 19, 9, 0],
+    ...         [2, 10, 18, 16, 15],
+    ...     ]
+    ...     tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+    ...     tuplets = [baca.prolate(_, 1, 16) for _ in tuplets]
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
     ...     rmakers.beam_groups(groups, beam_rests=True)
-    ...     _ = baca.accent(baca.select.pheads(imbrication))
+    ...     container = abjad.Container(tuplets)
+    ...     imbrications = baca.imbricate(
+    ...         container,
+    ...         "Music.1",
+    ...         [2, 19, 9, 18, 16],
+    ...     )
+    ...     for imbrication in imbrications.values():
+    ...         groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
+    ...         rmakers.beam_groups(groups, beam_rests=True)
+    ...         baca.accent(baca.select.pheads(imbrication))
+    ...     baca.staccato(baca.select.pheads(container))
+    ...     accumulator.cache(
+    ...         "Music.2",
+    ...         container,
+    ...         imbrications=imbrications,
+    ...     )
+    ...     time_signatures = baca.section.wrap(accumulator.time_signatures)
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 32))(score)
+    ...     accumulator.populate(score)
+    ...     baca.voice_number(abjad.select.leaf(score["Music.1"], 0), 1)
+    ...     baca.voice_number(abjad.select.leaf(score["Music.2"], 0), 2)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
 
-    >>> _ = baca.staccato(baca.select.pheads(container))
-    >>> accumulator.cache(
-    ...     "Music.2",
-    ...     container,
-    ...     imbrications=imbrications,
-    ... )
-    >>> time_signatures = baca.section.wrap(accumulator.time_signatures)
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> accumulator.populate(score)
-    >>> _ = baca.voice_number(abjad.select.leaf(score["Music.1"], 0), 1)
-    >>> _ = baca.voice_number(abjad.select.leaf(score["Music.2"], 0), 2)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1379,38 +1415,41 @@ Examples: ``baca.from_collection()``.
 
     Works with pitch-classes:
 
-    >>> score = baca.docs.make_empty_score(2)
-    >>> accumulator = baca.Accumulator(score)
-    >>> segment = [
-    ...     abjad.NumberedPitchClass(10),
-    ...     abjad.NumberedPitchClass(6),
-    ...     abjad.NumberedPitchClass(4),
-    ...     abjad.NumberedPitchClass(3),
-    ... ]
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> tuplets = [baca.from_collection(_, [3], 16) for _ in collections]
-    >>> rmakers.beam(tuplets)
-    >>> container = abjad.Container(tuplets)
-    >>> imbrications = baca.imbricate(container, "Music.1", segment)
-    >>> for imbrication in imbrications.values():
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
-    ...     rmakers.beam_groups(groups, beam_rests=True)
-    ...     _ = baca.accent(baca.select.pheads(imbrication))
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(2)
+    ...     accumulator = baca.Accumulator(score)
+    ...     segment = [
+    ...         abjad.NumberedPitchClass(10),
+    ...         abjad.NumberedPitchClass(6),
+    ...         abjad.NumberedPitchClass(4),
+    ...         abjad.NumberedPitchClass(3),
+    ...     ]
+    ...     collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+    ...     tuplets = [baca.from_collection(_, [3], 16) for _ in collections]
+    ...     rmakers.beam(tuplets)
+    ...     container = abjad.Container(tuplets)
+    ...     imbrications = baca.imbricate(container, "Music.1", segment)
+    ...     for imbrication in imbrications.values():
+    ...         groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
+    ...         rmakers.beam_groups(groups, beam_rests=True)
+    ...         baca.accent(baca.select.pheads(imbrication))
+    ...     accumulator.cache(
+    ...         "Music.2",
+    ...         container,
+    ...         imbrications=imbrications,
+    ...     )
+    ...     time_signatures = baca.section.wrap(accumulator.time_signatures)
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 24))(score)
+    ...     accumulator.populate(score)
+    ...     baca.voice_number(abjad.select.leaf(score["Music.1"], 0), 1)
+    ...     baca.voice_number(abjad.select.leaf(score["Music.2"], 0), 2)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     rmakers.swap_trivial(lilypond_file["Staff"])
+    ...     return lilypond_file
 
-    >>> accumulator.cache(
-    ...     "Music.2",
-    ...     container,
-    ...     imbrications=imbrications,
-    ... )
-    >>> time_signatures = baca.section.wrap(accumulator.time_signatures)
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 24))(score)
-    >>> accumulator.populate(score)
-    >>> _ = baca.voice_number(abjad.select.leaf(score["Music.1"], 0), 1)
-    >>> _ = baca.voice_number(abjad.select.leaf(score["Music.2"], 0), 2)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-    >>> rmakers.swap_trivial(lilypond_file["Staff"])
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1499,36 +1538,39 @@ Examples: ``baca.from_collection()``.
 
     Works with chords:
 
-    >>> score = baca.docs.make_empty_score(2)
-    >>> accumulator = baca.Accumulator(score)
-    >>> collections = [
-    ...     (0, 2, 10, 18, 16),
-    ...     [15, 20, 19, 9, 0],
-    ...     [2, 10, 18, 16, 15],
-    ... ]
-    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
-    >>> groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
-    >>> rmakers.beam_groups(groups)
-    >>> container = abjad.Container(tuplets)
-    >>> imbrications = baca.imbricate(container, "Music.1", [2, 19, 9, 18, 16])
-    >>> for imbrication in imbrications.values():
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(2)
+    ...     accumulator = baca.Accumulator(score)
+    ...     collections = [
+    ...         (0, 2, 10, 18, 16),
+    ...         [15, 20, 19, 9, 0],
+    ...         [2, 10, 18, 16, 15],
+    ...     ]
+    ...     tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
     ...     rmakers.beam_groups(groups)
+    ...     container = abjad.Container(tuplets)
+    ...     imbrications = baca.imbricate(container, "Music.1", [2, 19, 9, 18, 16])
+    ...     for imbrication in imbrications.values():
+    ...         groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
+    ...         rmakers.beam_groups(groups)
+    ...     accumulator.cache(
+    ...         "Music.2",
+    ...         container,
+    ...         imbrications=imbrications,
+    ...     )
+    ...     time_signatures = baca.section.wrap(accumulator.time_signatures)
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 32))(score)
+    ...     accumulator.populate(score)
+    ...     baca.voice_number(abjad.select.leaf(score["Music.1"], 0), 1)
+    ...     baca.voice_number(abjad.select.leaf(score["Music.2"], 0), 2)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     rmakers.swap_trivial(lilypond_file["Staff"])
+    ...     return lilypond_file
 
-    >>> accumulator.cache(
-    ...     "Music.2",
-    ...     container,
-    ...     imbrications=imbrications,
-    ... )
-    >>> time_signatures = baca.section.wrap(accumulator.time_signatures)
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> accumulator.populate(score)
-    >>> _ = baca.voice_number(abjad.select.leaf(score["Music.1"], 0), 1)
-    >>> _ = baca.voice_number(abjad.select.leaf(score["Music.2"], 0), 2)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-    >>> rmakers.swap_trivial(lilypond_file["Staff"])
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1641,38 +1683,41 @@ Examples: ``baca.from_collection()``.
 
     Works with rests:
 
-    >>> score = baca.docs.make_empty_score(2)
-    >>> accumulator = baca.Accumulator(score)
-    >>> collections = [
-    ...     [0, 2, 10, 18, 16],
-    ...     [15, 20, 19, 9, 0],
-    ...     [2, 10, 18, 16, 15],
-    ... ]
-    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
-    >>> tuplets[0].insert(0, "r8")
-    >>> tuplets[-1].append("r8")
-    >>> groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
-    >>> rmakers.beam_groups(groups)
-    >>> container = abjad.Container(tuplets)
-    >>> imbrications = baca.imbricate(container, "Music.1", [2, 19, 9, 18, 16])
-    >>> for imbrication in imbrications.values():
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(2)
+    ...     accumulator = baca.Accumulator(score)
+    ...     collections = [
+    ...         [0, 2, 10, 18, 16],
+    ...         [15, 20, 19, 9, 0],
+    ...         [2, 10, 18, 16, 15],
+    ...     ]
+    ...     tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+    ...     tuplets[0].insert(0, "r8")
+    ...     tuplets[-1].append("r8")
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
     ...     rmakers.beam_groups(groups)
+    ...     container = abjad.Container(tuplets)
+    ...     imbrications = baca.imbricate(container, "Music.1", [2, 19, 9, 18, 16])
+    ...     for imbrication in imbrications.values():
+    ...         groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
+    ...         rmakers.beam_groups(groups)
+    ...     accumulator.cache(
+    ...         "Music.2",
+    ...         container,
+    ...         imbrications=imbrications,
+    ...     )
+    ...     time_signatures = baca.section.wrap(accumulator.time_signatures)
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 32))(score)
+    ...     accumulator.populate(score)
+    ...     baca.voice_number(abjad.select.leaf(score["Music.1"], 0), 1)
+    ...     baca.voice_number(abjad.select.leaf(score["Music.2"], 0), 2)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     rmakers.swap_trivial(lilypond_file["Staff"])
+    ...     return lilypond_file
 
-    >>> accumulator.cache(
-    ...     "Music.2",
-    ...     container,
-    ...     imbrications=imbrications,
-    ... )
-    >>> time_signatures = baca.section.wrap(accumulator.time_signatures)
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> accumulator.populate(score)
-    >>> _ = baca.voice_number(abjad.select.leaf(score["Music.1"], 0), 1)
-    >>> _ = baca.voice_number(abjad.select.leaf(score["Music.2"], 0), 2)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-    >>> rmakers.swap_trivial(lilypond_file["Staff"])
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1805,38 +1850,41 @@ Examples: ``baca.from_collection()``.
 
     Imbrication allows unused pitches:
 
-    >>> score = baca.docs.make_empty_score(2)
-    >>> accumulator = baca.Accumulator(score)
-    >>> collections = [
-    ...     [0, 2, 10, 18, 16],
-    ...     [15, 20, 19, 9, 0],
-    ... ]
-    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
-    >>> groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
-    >>> rmakers.beam_groups(groups)
-    >>> container = abjad.Container(tuplets)
-    >>> imbrications = baca.imbricate(
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(2)
+    ...     accumulator = baca.Accumulator(score)
+    ...     collections = [
+    ...         [0, 2, 10, 18, 16],
+    ...         [15, 20, 19, 9, 0],
+    ...     ]
+    ...     tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
+    ...     rmakers.beam_groups(groups)
+    ...     container = abjad.Container(tuplets)
+    ...     imbrications = baca.imbricate(
     ...     container, "Music.1", [2, 19, 9, 18, 16], allow_unused_pitches=True)
-    >>> for imbrication in imbrications.values():
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
-    ...     rmakers.beam_groups(groups, beam_rests=True)
-    ...     _ = baca.accent(baca.select.pheads(imbrication))
+    ...     for imbrication in imbrications.values():
+    ...         groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
+    ...         rmakers.beam_groups(groups, beam_rests=True)
+    ...         baca.accent(baca.select.pheads(imbrication))
+    ...     baca.staccato(baca.select.pheads(container))
+    ...     accumulator.cache(
+    ...         "Music.2",
+    ...         container,
+    ...         imbrications=imbrications,
+    ...     )
+    ...     time_signatures = baca.section.wrap(accumulator.time_signatures)
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 32))(score)
+    ...     accumulator.populate(score)
+    ...     baca.voice_number(abjad.select.leaf(score["Music.1"], 0), 1)
+    ...     baca.voice_number(abjad.select.leaf(score["Music.2"], 0), 2)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     rmakers.swap_trivial(lilypond_file["Staff"])
+    ...     return lilypond_file
 
-    >>> _ = baca.staccato(baca.select.pheads(container))
-    >>> accumulator.cache(
-    ...     "Music.2",
-    ...     container,
-    ...     imbrications=imbrications,
-    ... )
-    >>> time_signatures = baca.section.wrap(accumulator.time_signatures)
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> accumulator.populate(score)
-    >>> _ = baca.voice_number(abjad.select.leaf(score["Music.1"], 0), 1)
-    >>> _ = baca.voice_number(abjad.select.leaf(score["Music.2"], 0), 2)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-    >>> rmakers.swap_trivial(lilypond_file["Staff"])
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1948,39 +1996,42 @@ Examples: ``baca.from_collection()``.
 
     When imbrication hockets voices:
 
-    >>> score = baca.docs.make_empty_score(2)
-    >>> accumulator = baca.Accumulator(score)
-    >>> collections = [
-    ...     [0, 2, 10, 18, 16],
-    ...     [15, 20, 19, 9, 0],
-    ...     [2, 10, 18, 16, 15],
-    ... ]
-    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
-    >>> groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
-    >>> rmakers.beam_groups(groups, beam_rests=True)
-    >>> container = abjad.Container(tuplets)
-    >>> imbrications = baca.imbricate(container, "Music.1", [2, 19, 9, 18, 16],
-    ...     hocket=True)
-    >>> for imbrication in imbrications.values():
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(2)
+    ...     accumulator = baca.Accumulator(score)
+    ...     collections = [
+    ...         [0, 2, 10, 18, 16],
+    ...         [15, 20, 19, 9, 0],
+    ...         [2, 10, 18, 16, 15],
+    ...     ]
+    ...     tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
     ...     rmakers.beam_groups(groups, beam_rests=True)
-    ...     _ = baca.accent(baca.select.pheads(imbrication))
+    ...     container = abjad.Container(tuplets)
+    ...     imbrications = baca.imbricate(container, "Music.1", [2, 19, 9, 18, 16],
+    ...         hocket=True)
+    ...     for imbrication in imbrications.values():
+    ...         groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
+    ...         rmakers.beam_groups(groups, beam_rests=True)
+    ...         baca.accent(baca.select.pheads(imbrication))
+    ...     baca.staccato(baca.select.pheads(container))
+    ...     accumulator.cache(
+    ...         "Music.2",
+    ...         container,
+    ...         imbrications=imbrications,
+    ...     )
+    ...     time_signatures = baca.section.wrap(accumulator.time_signatures)
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 32))(score)
+    ...     accumulator.populate(score)
+    ...     baca.voice_number(abjad.select.leaf(score["Music.1"], 0), 1)
+    ...     baca.voice_number(abjad.select.leaf(score["Music.2"], 0), 2)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     rmakers.swap_trivial(lilypond_file["Staff"])
+    ...     return lilypond_file
 
-    >>> _ = baca.staccato(baca.select.pheads(container))
-    >>> accumulator.cache(
-    ...     "Music.2",
-    ...     container,
-    ...     imbrications=imbrications,
-    ... )
-    >>> time_signatures = baca.section.wrap(accumulator.time_signatures)
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> accumulator.populate(score)
-    >>> _ = baca.voice_number(abjad.select.leaf(score["Music.1"], 0), 1)
-    >>> _ = baca.voice_number(abjad.select.leaf(score["Music.2"], 0), 2)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-    >>> rmakers.swap_trivial(lilypond_file["Staff"])
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -2112,32 +2163,35 @@ Examples: ``baca.from_collection()``.
 
     When imbrication truncates ties:
 
-    >>> score = baca.docs.make_empty_score(2)
-    >>> accumulator = baca.Accumulator(score)
-    >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-    >>> tuplets = [baca.from_collection(_, [5], 32) for _ in collections]
-    >>> rmakers.beam(tuplets)
-    >>> container = abjad.Container(tuplets)
-    >>> imbrications = baca.imbricate(container, "Music.1", [2, 10, 18, 19, 9],
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(2)
+    ...     accumulator = baca.Accumulator(score)
+    ...     collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+    ...     tuplets = [baca.from_collection(_, [5], 32) for _ in collections]
+    ...     rmakers.beam(tuplets)
+    ...     container = abjad.Container(tuplets)
+    ...     imbrications = baca.imbricate(container, "Music.1", [2, 10, 18, 19, 9],
     ...     truncate_ties=True)
-    >>> for imbrication in imbrications.values():
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
-    ...     rmakers.beam_groups(groups, beam_rests=True)
+    ...     for imbrication in imbrications.values():
+    ...         groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
+    ...         rmakers.beam_groups(groups, beam_rests=True)
+    ...     accumulator.cache(
+    ...         "Music.2",
+    ...         container,
+    ...         imbrications=imbrications,
+    ...     )
+    ...     time_signatures = baca.section.wrap(accumulator.time_signatures)
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 32))(score)
+    ...     accumulator.populate(score)
+    ...     baca.voice_number(abjad.select.leaf(score["Music.1"], 0), 1)
+    ...     baca.voice_number(abjad.select.leaf(score["Music.2"], 0), 2)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     rmakers.swap_trivial(lilypond_file["Staff"])
+    ...     return lilypond_file
 
-    >>> accumulator.cache(
-    ...     "Music.2",
-    ...     container,
-    ...     imbrications=imbrications,
-    ... )
-    >>> time_signatures = baca.section.wrap(accumulator.time_signatures)
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> accumulator.populate(score)
-    >>> _ = baca.voice_number(abjad.select.leaf(score["Music.1"], 0), 1)
-    >>> _ = baca.voice_number(abjad.select.leaf(score["Music.2"], 0), 2)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
-    >>> rmakers.swap_trivial(lilypond_file["Staff"])
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -2253,51 +2307,52 @@ Examples: ``baca.from_collection()``.
 
     Attaches RIGHT_BROKEN_BEAM to selector output.
 
-    >>> score = baca.docs.make_empty_score(2)
-    >>> accumulator = baca.Accumulator(score)
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(2)
+    ...     accumulator = baca.Accumulator(score)
+    ...     collections = [[0, 2, 10, 18], [16, 15, 23]]
+    ...     tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
+    ...     rmakers.beam_groups(groups)
+    ...     container = abjad.Container(tuplets)
+    ...     imbrications = baca.imbricate(container, "Music.1", [2, 10])
+    ...     for imbrication in imbrications.values():
+    ...         baca.staccato(baca.select.pheads(imbrication))
+    ...         groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
+    ...         rmakers.beam_groups(groups, beam_rests=True)
+    ...         baca.extend_beam(abjad.select.leaf(imbrication, -1))
+    ...     accumulator.cache(
+    ...         "Music.2",
+    ...         container,
+    ...         imbrications=imbrications,
+    ...     )
+    ...     tuplet = baca.from_collection([19, 13, 9, 8], [1], 16)
+    ...     groups = rmakers.nongrace_leaves_in_each_tuplet(tuplet)
+    ...     rmakers.beam_groups(groups)
+    ...     container = abjad.Container([tuplet])
+    ...     imbrications = baca.imbricate(container, "Music.1", [13, 9])
+    ...     for imbrication in imbrications.values():
+    ...         groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
+    ...         rmakers.beam_groups(groups, beam_rests=True)
+    ...         baca.staccato(baca.select.pheads(imbrication))
+    ...     accumulator.cache(
+    ...         "Music.2",
+    ...         container,
+    ...         imbrications=imbrications,
+    ...     )
+    ...     time_signatures = baca.section.wrap(accumulator.time_signatures)
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 32))(score)
+    ...     accumulator.populate(score)
+    ...     baca.voice_number(abjad.select.leaf(score["Music.1"], 0), 1)
+    ...     baca.voice_number(abjad.select.leaf(score["Music.2"], 0), 2)
+    ...     baca.section.extend_beams(score)
+    ...     rmakers.swap_skip_filled(score)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
 
-    >>> collections = [[0, 2, 10, 18], [16, 15, 23]]
-    >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
-    >>> groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
-    >>> rmakers.beam_groups(groups)
-    >>> container = abjad.Container(tuplets)
-    >>> imbrications = baca.imbricate(container, "Music.1", [2, 10])
-    >>> for imbrication in imbrications.values():
-    ...     _ = baca.staccato(baca.select.pheads(imbrication))
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
-    ...     rmakers.beam_groups(groups, beam_rests=True)
-    ...     _ = baca.extend_beam(abjad.select.leaf(imbrication, -1))
-
-    >>> accumulator.cache(
-    ...     "Music.2",
-    ...     container,
-    ...     imbrications=imbrications,
-    ... )
-    >>> tuplet = baca.from_collection([19, 13, 9, 8], [1], 16)
-    >>> groups = rmakers.nongrace_leaves_in_each_tuplet(tuplet)
-    >>> rmakers.beam_groups(groups)
-    >>> container = abjad.Container([tuplet])
-    >>> imbrications = baca.imbricate(container, "Music.1", [13, 9])
-    >>> for imbrication in imbrications.values():
-    ...     groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
-    ...     rmakers.beam_groups(groups, beam_rests=True)
-    ...     _ = baca.staccato(baca.select.pheads(imbrication))
-
-    >>> accumulator.cache(
-    ...     "Music.2",
-    ...     container,
-    ...     imbrications=imbrications,
-    ... )
-    >>> time_signatures = baca.section.wrap(accumulator.time_signatures)
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 32))(score)
-    >>> accumulator.populate(score)
-    >>> _ = baca.voice_number(abjad.select.leaf(score["Music.1"], 0), 1)
-    >>> _ = baca.voice_number(abjad.select.leaf(score["Music.2"], 0), 2)
-    >>> baca.section.extend_beams(score)
-    >>> rmakers.swap_skip_filled(score)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
