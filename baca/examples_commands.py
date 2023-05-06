@@ -361,8 +361,8 @@ Examples: commands.
     Effort dynamics:
 
     >>> note = abjad.Note("c'4")
-    >>> _ = baca.dynamic(note, '"f"')
     >>> lilypond_file = abjad.illustrators.components([note], includes=["baca.ily"])
+    >>> _ = baca.dynamic(note, '"f"')
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::

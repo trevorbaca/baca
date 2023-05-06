@@ -153,9 +153,9 @@ Examples: overrides.
 
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
-    ...     baca.dls_staff_padding(container, 4)
+    ...     score = baca.docs.make_single_staff_score([container], voice=True)
     ...     baca.hairpin(container, "p < f")
-    ...     score = baca.docs.make_single_staff_score([container])
+    ...     baca.dls_staff_padding(container, 4)
     ...     return score
 
     >>> score = make_score()
@@ -171,16 +171,19 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override DynamicLineSpanner.staff-padding = 4
-                    \time 3/4
-                    c'4
-                    \p
-                    \<
-                    d'4
-                    e'4
-                    \f
-                    \revert DynamicLineSpanner.staff-padding
+                    {
+                        \override DynamicLineSpanner.staff-padding = 4
+                        \time 3/4
+                        c'4
+                        \p
+                        \<
+                        d'4
+                        e'4
+                        \f
+                        \revert DynamicLineSpanner.staff-padding
+                    }
                 }
             }
         >>
@@ -191,10 +194,10 @@ Examples: overrides.
 
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
-    ...     baca.dls_staff_padding(container, 4)
+    ...     score = baca.docs.make_single_staff_score([container], voice=True)
     ...     baca.hairpin(container, "p < f")
+    ...     baca.dls_staff_padding(container, 4)
     ...     baca.dls_up(container)
-    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -210,18 +213,21 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override DynamicLineSpanner.direction = #up
-                    \override DynamicLineSpanner.staff-padding = 4
-                    \time 3/4
-                    c'4
-                    \p
-                    \<
-                    d'4
-                    e'4
-                    \f
-                    \revert DynamicLineSpanner.direction
-                    \revert DynamicLineSpanner.staff-padding
+                    {
+                        \override DynamicLineSpanner.direction = #up
+                        \override DynamicLineSpanner.staff-padding = 4
+                        \time 3/4
+                        c'4
+                        \p
+                        \<
+                        d'4
+                        e'4
+                        \f
+                        \revert DynamicLineSpanner.direction
+                        \revert DynamicLineSpanner.staff-padding
+                    }
                 }
             }
         >>
@@ -232,10 +238,10 @@ Examples: overrides.
 
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
-    ...     baca.dls_staff_padding(container, 4)
+    ...     score = baca.docs.make_single_staff_score([container], voice=True)
     ...     baca.dynamic(container[0], "f")
+    ...     baca.dls_staff_padding(container, 4)
     ...     baca.dynamic_text_extra_offset(container[0], (3, 0))
-    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -251,15 +257,18 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \once \override DynamicText.extra-offset = #'(3 . 0)
-                    \override DynamicLineSpanner.staff-padding = 4
-                    \time 3/4
-                    c'4
-                    \f
-                    d'4
-                    e'4
-                    \revert DynamicLineSpanner.staff-padding
+                    {
+                        \once \override DynamicText.extra-offset = #'(3 . 0)
+                        \override DynamicLineSpanner.staff-padding = 4
+                        \time 3/4
+                        c'4
+                        \f
+                        d'4
+                        e'4
+                        \revert DynamicLineSpanner.staff-padding
+                    }
                 }
             }
         >>
