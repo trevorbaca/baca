@@ -15,6 +15,7 @@ def _do_spanner_indicator_command(
     start_indicator,
     stop_indicator,
     *tweaks,
+    context: str | None = None,
     direction: abjad.Vertical | None = None,
     left_broken: bool = False,
     right_broken: bool = False,
@@ -30,6 +31,7 @@ def _do_spanner_indicator_command(
         wrapper = abjad.attach(
             start_indicator,
             first_leaf,
+            context=context,
             direction=direction,
             tag=tag,
             wrapper=True,
@@ -44,6 +46,7 @@ def _do_spanner_indicator_command(
         wrapper = abjad.attach(
             stop_indicator,
             final_leaf,
+            context=context,
             direction=direction,
             tag=tag,
             wrapper=True,
@@ -173,6 +176,7 @@ def slur(
 def sustain_pedal(
     argument,
     *,
+    context: str | None = None,
     start_piano_pedal: abjad.StartPianoPedal = abjad.StartPianoPedal(),
     stop_piano_pedal: abjad.StopPianoPedal = abjad.StopPianoPedal(),
 ) -> list[abjad.Wrapper]:
@@ -182,6 +186,7 @@ def sustain_pedal(
         argument,
         start_piano_pedal,
         stop_piano_pedal,
+        context=context,
     )
     tag = _tags.function_name(_frame())
     _tags.wrappers(wrappers, tag)

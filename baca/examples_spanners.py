@@ -135,8 +135,8 @@ Examples: spanners.
     Attaches slur to trimmed leaves:
 
     >>> container = abjad.Container("r8 d'4 e' r8")
-    >>> _ = baca.slur(baca.select.tleaves(container))
     >>> lilypond_file = abjad.illustrators.components([container])
+    >>> _ = baca.slur(baca.select.tleaves(container))
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -168,9 +168,9 @@ Examples: spanners.
     Pedals leaves:
 
     >>> container = abjad.Container("r8 d'4 e' r8")
-    >>> _ = baca.sustain_pedal(container)
-    >>> _ = baca.sustain_pedal_staff_padding(container, 6)
     >>> lilypond_file = abjad.illustrators.components([container])
+    >>> _ = baca.sustain_pedal(container, context="Staff")
+    >>> _ = baca.sustain_pedal_staff_padding(container, 6)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -204,8 +204,8 @@ Examples: spanners.
     Attaches trill spanner to trimmed leaves (leaked to the right):
 
     >>> container = abjad.Container("r8 d'4 e' r8")
-    >>> _ = baca.trill_spanner(baca.select.tleaves(container, rleak=True))
     >>> lilypond_file = abjad.illustrators.components([container])
+    >>> _ = baca.trill_spanner(baca.select.tleaves(container, rleak=True))
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -237,12 +237,12 @@ Examples: spanners.
     Tweaks trill spanner:
 
     >>> container = abjad.Container("r8 d'4 e' r8")
+    >>> lilypond_file = abjad.illustrators.components([container])
     >>> _ = baca.trill_spanner(
     ...     baca.select.tleaves(container, rleak=True),
     ...     abjad.Tweak(r"- \tweak color #red"),
     ...     alteration="M2",
     ... )
-    >>> lilypond_file = abjad.illustrators.components([container])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::

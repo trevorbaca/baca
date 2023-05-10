@@ -40,7 +40,8 @@ class SpacingSpecifier:
         if self.fallback_duration is None:
             return
         page_layout_profile = page_layout_profile or {}
-        skips = _select.skips(score["Skips"])
+        skips_context = score["Skips"]
+        skips = _select.skips(skips_context)
         measure_count = page_layout_profile.get("measure_count") or len(skips)
         fermata_measure_numbers = page_layout_profile.get("fermata_measure_numbers", [])
         eol_measure_numbers = page_layout_profile.get("eol_measure_numbers", [])
@@ -120,7 +121,7 @@ class SpacingSpecifier:
                 abjad.attach(
                     start_text_span,
                     skip,
-                    context="GlobalSkips",
+                    context=skips_context.name,
                     deactivate=True,
                     tag=tag.append(_tags.function_name(_frame(), n=2)),
                 )
@@ -130,7 +131,7 @@ class SpacingSpecifier:
                 abjad.attach(
                     stop_text_span,
                     skip,
-                    context="GlobalSkips",
+                    context=skips_context.name,
                     deactivate=True,
                     tag=tag.append(_tags.function_name(_frame(), n=3)),
                 )
