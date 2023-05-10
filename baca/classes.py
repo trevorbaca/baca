@@ -40,24 +40,35 @@ class Accelerando:
 
     ..  container:: example
 
-        >>> note = abjad.Note("c'4")
+        >>> score = baca.docs.make_empty_score(1, no_skips=True)
+        >>> voice = score["Music"]
+        >>> voice.append("c'4")
         >>> accelerando = baca.Accelerando()
         >>> bundle = abjad.bundle(
         ...     accelerando,
         ...     r"- \tweak color #blue",
         ...     r"- \tweak extra-offset #'(0 . 2)",
         ... )
-        >>> abjad.attach(bundle, note, direction=abjad.UP)
-        >>> abjad.show(note) # doctest: +SKIP
+        >>> abjad.attach(bundle, voice[0], direction=abjad.UP)
+        >>> abjad.show(score) # doctest: +SKIP
 
         ..  docs::
 
-            >>> string = abjad.lilypond(note)
+            >>> string = abjad.lilypond(score)
             >>> print(string)
-            c'4
-            - \tweak color #blue
-            - \tweak extra-offset #'(0 . 2)
-            ^ \markup \large \upright accel.
+            \context Score = "Score"
+            {
+                \context Staff = "Staff"
+                {
+                    \context Voice = "Music"
+                    {
+                        c'4
+                        - \tweak color #blue
+                        - \tweak extra-offset #'(0 . 2)
+                        ^ \markup \large \upright accel.
+                    }
+                }
+            }
 
     Tweak extra-offset to align accelerando markup with other metronome mark spanner
     pieces.

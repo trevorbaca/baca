@@ -15,13 +15,13 @@ def test_exceptions_01():
         [15, 20, 19, 9, 0],
     ]
     tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
-    container = abjad.Container(tuplets)
+    voice = abjad.Voice(tuplets)
     groups = rmakers.nongrace_leaves_in_each_tuplet(tuplets)
     rmakers.beam_groups(groups)
 
     with pytest.raises(Exception):
         baca.imbricate(
-            container,
+            voice,
             "Music.1",
             [2, 19, 9, 18, 16],
             allow_unused_pitches=False,
