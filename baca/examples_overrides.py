@@ -110,7 +110,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -148,7 +148,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -156,7 +156,7 @@ Examples: overrides.
 
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
-    ...     score = baca.docs.make_single_staff_score([container], voice=True)
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     baca.hairpin(container, "p < f")
     ...     baca.dls_staff_padding(container, 4)
     ...     return score
@@ -171,7 +171,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -189,7 +189,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -197,7 +197,7 @@ Examples: overrides.
 
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
-    ...     score = baca.docs.make_single_staff_score([container], voice=True)
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     baca.hairpin(container, "p < f")
     ...     baca.dls_staff_padding(container, 4)
     ...     baca.dls_up(container)
@@ -213,7 +213,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -233,7 +233,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -241,7 +241,7 @@ Examples: overrides.
 
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
-    ...     score = baca.docs.make_single_staff_score([container], voice=True)
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     baca.dynamic(container[0], "f")
     ...     baca.dls_staff_padding(container, 4)
     ...     baca.dynamic_text_extra_offset(container[0], (3, 0))
@@ -257,7 +257,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -274,7 +274,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -700,7 +700,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -715,7 +715,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -739,7 +739,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -759,7 +759,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -783,7 +783,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -803,7 +803,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -825,7 +825,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -841,7 +841,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -863,7 +863,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -879,7 +879,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -901,7 +901,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -917,7 +917,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -939,7 +939,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -955,7 +955,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -978,7 +978,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -996,7 +996,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -1019,7 +1019,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -1037,7 +1037,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -1060,7 +1060,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -1078,7 +1078,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -1101,7 +1101,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -1119,7 +1119,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -1142,7 +1142,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -1159,7 +1159,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -1182,7 +1182,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -1199,7 +1199,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -1221,7 +1221,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -1236,7 +1236,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -1258,7 +1258,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -1273,7 +1273,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -1295,7 +1295,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -1310,7 +1310,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -1333,7 +1333,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -1350,7 +1350,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -1373,7 +1373,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -1389,7 +1389,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -1412,7 +1412,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -1428,7 +1428,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -1451,7 +1451,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -1467,7 +1467,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -1490,7 +1490,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -1506,7 +1506,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -1529,7 +1529,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -1545,7 +1545,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -1569,7 +1569,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -1593,7 +1593,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -1616,7 +1616,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -1635,7 +1635,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -1658,7 +1658,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -1677,7 +1677,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -1699,7 +1699,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -1713,7 +1713,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -1735,7 +1735,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -1750,7 +1750,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -1773,7 +1773,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -1793,7 +1793,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -1816,7 +1816,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -1836,7 +1836,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -1859,7 +1859,7 @@ Examples: overrides.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -1879,7 +1879,7 @@ Examples: overrides.
                     }
                 }
             }
-        >>
+        }
 
 """
 
