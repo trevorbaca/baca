@@ -113,36 +113,39 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
-                \times 4/5
+                \context Voice = "Voice"
                 {
-                    \override Beam.positions = #'(6 . 6)
-                    \override TupletBracket.staff-padding = 4
-                    \time 3/4
-                    r8
-                    \override Stem.direction = #up
-                    c'16
-                    [
-                    d'16
-                    bf'16
-                    ]
-                }
-                \times 4/5
-                {
-                    fs''16
-                    [
-                    e''16
-                    ef''16
-                    af''16
-                    g''16
-                    ]
-                }
-                \times 4/5
-                {
-                    a'16
-                    \revert Stem.direction
-                    r4
-                    \revert Beam.positions
-                    \revert TupletBracket.staff-padding
+                    \times 4/5
+                    {
+                        \override Beam.positions = #'(6 . 6)
+                        \override TupletBracket.staff-padding = 4
+                        \time 3/4
+                        r8
+                        \override Stem.direction = #up
+                        c'16
+                        [
+                        d'16
+                        bf'16
+                        ]
+                    }
+                    \times 4/5
+                    {
+                        fs''16
+                        [
+                        e''16
+                        ef''16
+                        af''16
+                        g''16
+                        ]
+                    }
+                    \times 4/5
+                    {
+                        a'16
+                        \revert Stem.direction
+                        r4
+                        \revert Beam.positions
+                        \revert TupletBracket.staff-padding
+                    }
                 }
             }
         >>
@@ -700,13 +703,16 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override NoteHead.style = #'cross
-                    \time 3/4
-                    c'4
-                    d'4
-                    e'4
-                    \revert NoteHead.style
+                    {
+                        \override NoteHead.style = #'cross
+                        \time 3/4
+                        c'4
+                        d'4
+                        e'4
+                        \revert NoteHead.style
+                    }
                 }
             }
         >>
@@ -738,16 +744,19 @@ Examples: overrides.
             {
                 \context Voice = "Voice"
                 {
-                    \override RepeatTie.direction = #down
-                    \override Stem.direction = #up
-                    \time 3/4
-                    c'4
-                    c'4
-                    \repeatTie
-                    c'4
-                    \repeatTie
-                    \revert RepeatTie.direction
-                    \revert Stem.direction
+                    \context Voice = "Voice"
+                    {
+                        \override RepeatTie.direction = #down
+                        \override Stem.direction = #up
+                        \time 3/4
+                        c'4
+                        c'4
+                        \repeatTie
+                        c'4
+                        \repeatTie
+                        \revert RepeatTie.direction
+                        \revert Stem.direction
+                    }
                 }
             }
         >>
@@ -779,16 +788,19 @@ Examples: overrides.
             {
                 \context Voice = "Voice"
                 {
-                    \override RepeatTie.direction = #down
-                    \override Stem.direction = #down
-                    \time 3/4
-                    c'4
-                    c'4
-                    \repeatTie
-                    c'4
-                    \repeatTie
-                    \revert RepeatTie.direction
-                    \revert Stem.direction
+                    \context Voice = "Voice"
+                    {
+                        \override RepeatTie.direction = #down
+                        \override Stem.direction = #down
+                        \time 3/4
+                        c'4
+                        c'4
+                        \repeatTie
+                        c'4
+                        \repeatTie
+                        \revert RepeatTie.direction
+                        \revert Stem.direction
+                    }
                 }
             }
         >>
@@ -816,14 +828,17 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override Rest.direction = #down
-                    \time 3/4
-                    r8
-                    d'4
-                    e'4
-                    r8
-                    \revert Rest.direction
+                    {
+                        \override Rest.direction = #down
+                        \time 3/4
+                        r8
+                        d'4
+                        e'4
+                        r8
+                        \revert Rest.direction
+                    }
                 }
             }
         >>
@@ -851,14 +866,17 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override Rest.staff-position = -6
-                    \time 3/4
-                    r8
-                    d'4
-                    e'4
-                    r8
-                    \revert Rest.staff-position
+                    {
+                        \override Rest.staff-position = -6
+                        \time 3/4
+                        r8
+                        d'4
+                        e'4
+                        r8
+                        \revert Rest.staff-position
+                    }
                 }
             }
         >>
@@ -886,14 +904,17 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override Rest.transparent = ##t
-                    \time 3/4
-                    r8
-                    d'4
-                    e'4
-                    r8
-                    \revert Rest.transparent
+                    {
+                        \override Rest.transparent = ##t
+                        \time 3/4
+                        r8
+                        d'4
+                        e'4
+                        r8
+                        \revert Rest.transparent
+                    }
                 }
             }
         >>
@@ -921,14 +942,17 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override Rest.direction = #up
-                    \time 3/4
-                    r8
-                    d'4
-                    e'4
-                    r8
-                    \revert Rest.direction
+                    {
+                        \override Rest.direction = #up
+                        \time 3/4
+                        r8
+                        d'4
+                        e'4
+                        r8
+                        \revert Rest.direction
+                    }
                 }
             }
         >>
@@ -957,16 +981,19 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override Script.color = #red
-                    \time 3/4
-                    c'4
-                    - \accent
-                    d'4
-                    - \accent
-                    e'4
-                    - \accent
-                    \revert Script.color
+                    {
+                        \override Script.color = #red
+                        \time 3/4
+                        c'4
+                        - \accent
+                        d'4
+                        - \accent
+                        e'4
+                        - \accent
+                        \revert Script.color
+                    }
                 }
             }
         >>
@@ -995,16 +1022,19 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override Script.direction = #down
-                    \time 3/4
-                    c'4
-                    - \accent
-                    d'4
-                    - \accent
-                    e'4
-                    - \accent
-                    \revert Script.direction
+                    {
+                        \override Script.direction = #down
+                        \time 3/4
+                        c'4
+                        - \accent
+                        d'4
+                        - \accent
+                        e'4
+                        - \accent
+                        \revert Script.direction
+                    }
                 }
             }
         >>
@@ -1033,16 +1063,19 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override Script.extra-offset = #'(-1.5 . 0)
-                    \time 3/4
-                    c'4
-                    - \accent
-                    d'4
-                    - \accent
-                    e'4
-                    - \accent
-                    \revert Script.extra-offset
+                    {
+                        \override Script.extra-offset = #'(-1.5 . 0)
+                        \time 3/4
+                        c'4
+                        - \accent
+                        d'4
+                        - \accent
+                        e'4
+                        - \accent
+                        \revert Script.extra-offset
+                    }
                 }
             }
         >>
@@ -1071,16 +1104,19 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override Script.direction = #up
-                    \time 3/4
-                    c'4
-                    - \accent
-                    d'4
-                    - \accent
-                    e'4
-                    - \accent
-                    \revert Script.direction
+                    {
+                        \override Script.direction = #up
+                        \time 3/4
+                        c'4
+                        - \accent
+                        d'4
+                        - \accent
+                        e'4
+                        - \accent
+                        \revert Script.direction
+                    }
                 }
             }
         >>
@@ -1109,15 +1145,18 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override Slur.direction = #down
-                    \time 3/4
-                    c'4
-                    (
-                    d'4
-                    e'4
-                    )
-                    \revert Slur.direction
+                    {
+                        \override Slur.direction = #down
+                        \time 3/4
+                        c'4
+                        (
+                        d'4
+                        e'4
+                        )
+                        \revert Slur.direction
+                    }
                 }
             }
         >>
@@ -1146,15 +1185,18 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override Slur.direction = #up
-                    \time 3/4
-                    c'4
-                    (
-                    d'4
-                    e'4
-                    )
-                    \revert Slur.direction
+                    {
+                        \override Slur.direction = #up
+                        \time 3/4
+                        c'4
+                        (
+                        d'4
+                        e'4
+                        )
+                        \revert Slur.direction
+                    }
                 }
             }
         >>
@@ -1182,13 +1224,16 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override Stem.color = #red
-                    \time 3/4
-                    c'4
-                    d'4
-                    e'4
-                    \revert Stem.color
+                    {
+                        \override Stem.color = #red
+                        \time 3/4
+                        c'4
+                        d'4
+                        e'4
+                        \revert Stem.color
+                    }
                 }
             }
         >>
@@ -1216,13 +1261,16 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override Stem.direction = #down
-                    \time 3/4
-                    c'4
-                    d'4
-                    e'4
-                    \revert Stem.direction
+                    {
+                        \override Stem.direction = #down
+                        \time 3/4
+                        c'4
+                        d'4
+                        e'4
+                        \revert Stem.direction
+                    }
                 }
             }
         >>
@@ -1250,13 +1298,16 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override Stem.direction = #up
-                    \time 3/4
-                    c'4
-                    d'4
-                    e'4
-                    \revert Stem.direction
+                    {
+                        \override Stem.direction = #up
+                        \time 3/4
+                        c'4
+                        d'4
+                        e'4
+                        \revert Stem.direction
+                    }
                 }
             }
         >>
@@ -1285,15 +1336,18 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override Staff.SustainPedalLineSpanner.staff-padding = 5
-                    \time 3/4
-                    c'4
-                    \sustainOn
-                    d'4
-                    e'4
-                    \sustainOff
-                    \revert Staff.SustainPedalLineSpanner.staff-padding
+                    {
+                        \override Staff.SustainPedalLineSpanner.staff-padding = 5
+                        \time 3/4
+                        c'4
+                        \sustainOn
+                        d'4
+                        e'4
+                        \sustainOff
+                        \revert Staff.SustainPedalLineSpanner.staff-padding
+                    }
                 }
             }
         >>
@@ -1322,14 +1376,17 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override TextScript.color = #red
-                    \time 3/4
-                    c'4
-                    ^ \markup "più mosso"
-                    d'4
-                    e'4
-                    \revert TextScript.color
+                    {
+                        \override TextScript.color = #red
+                        \time 3/4
+                        c'4
+                        ^ \markup "più mosso"
+                        d'4
+                        e'4
+                        \revert TextScript.color
+                    }
                 }
             }
         >>
@@ -1358,14 +1415,17 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override TextScript.direction = #down
-                    \time 3/4
-                    c'4
-                    ^ \markup "più mosso"
-                    d'4
-                    e'4
-                    \revert TextScript.direction
+                    {
+                        \override TextScript.direction = #down
+                        \time 3/4
+                        c'4
+                        ^ \markup "più mosso"
+                        d'4
+                        e'4
+                        \revert TextScript.direction
+                    }
                 }
             }
         >>
@@ -1394,14 +1454,17 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override TextScript.padding = 4
-                    \time 3/4
-                    c'4
-                    ^ \markup "più mosso"
-                    d'4
-                    e'4
-                    \revert TextScript.padding
+                    {
+                        \override TextScript.padding = 4
+                        \time 3/4
+                        c'4
+                        ^ \markup "più mosso"
+                        d'4
+                        e'4
+                        \revert TextScript.padding
+                    }
                 }
             }
         >>
@@ -1430,14 +1493,17 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override TextScript.staff-padding = 4
-                    \time 3/4
-                    c'4
-                    ^ \markup "più mosso"
-                    d'4
-                    e'4
-                    \revert TextScript.staff-padding
+                    {
+                        \override TextScript.staff-padding = 4
+                        \time 3/4
+                        c'4
+                        ^ \markup "più mosso"
+                        d'4
+                        e'4
+                        \revert TextScript.staff-padding
+                    }
                 }
             }
         >>
@@ -1466,14 +1532,17 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override TextScript.direction = #up
-                    \time 3/4
-                    c'4
-                    ^ \markup "più mosso"
-                    d'4
-                    e'4
-                    \revert TextScript.direction
+                    {
+                        \override TextScript.direction = #up
+                        \time 3/4
+                        c'4
+                        ^ \markup "più mosso"
+                        d'4
+                        e'4
+                        \revert TextScript.direction
+                    }
                 }
             }
         >>
@@ -1503,22 +1572,25 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override TextScript.staff-padding = 6
-                    \override TextSpanner.staff-padding = 6
-                    \time 3/4
-                    c'4
-                    - \tweak bound-details.right.padding 0.5
-                    - \tweak bound-details.right.stencil-align-dir-y #center
-                    - \abjad-dashed-line-with-arrow
-                    - \baca-text-spanner-left-text "pont."
-                    - \baca-text-spanner-right-text "ord."
-                    \startTextSpan
-                    d'4
-                    e'4
-                    \stopTextSpan
-                    \revert TextScript.staff-padding
-                    \revert TextSpanner.staff-padding
+                    {
+                        \override TextScript.staff-padding = 6
+                        \override TextSpanner.staff-padding = 6
+                        \time 3/4
+                        c'4
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
+                        - \abjad-dashed-line-with-arrow
+                        - \baca-text-spanner-left-text "pont."
+                        - \baca-text-spanner-right-text "ord."
+                        \startTextSpan
+                        d'4
+                        e'4
+                        \stopTextSpan
+                        \revert TextScript.staff-padding
+                        \revert TextSpanner.staff-padding
+                    }
                 }
             }
         >>
@@ -1547,17 +1619,20 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override Stem.direction = #up
-                    \override Tie.direction = #down
-                    \time 3/4
-                    c''4
-                    ~
-                    c''4
-                    ~
-                    c''4
-                    \revert Stem.direction
-                    \revert Tie.direction
+                    {
+                        \override Stem.direction = #up
+                        \override Tie.direction = #down
+                        \time 3/4
+                        c''4
+                        ~
+                        c''4
+                        ~
+                        c''4
+                        \revert Stem.direction
+                        \revert Tie.direction
+                    }
                 }
             }
         >>
@@ -1586,17 +1661,20 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override Stem.direction = #down
-                    \override Tie.direction = #up
-                    \time 3/4
-                    c'4
-                    ~
-                    c'4
-                    ~
-                    c'4
-                    \revert Stem.direction
-                    \revert Tie.direction
+                    {
+                        \override Stem.direction = #down
+                        \override Tie.direction = #up
+                        \time 3/4
+                        c'4
+                        ~
+                        c'4
+                        ~
+                        c'4
+                        \revert Stem.direction
+                        \revert Tie.direction
+                    }
                 }
             }
         >>
@@ -1624,12 +1702,15 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \once \override Score.TimeSignature.extra-offset = #'(-6 . 0)
-                    \time 3/4
-                    c'4
-                    d'4
-                    e'4
+                    {
+                        \once \override Score.TimeSignature.extra-offset = #'(-6 . 0)
+                        \time 3/4
+                        c'4
+                        d'4
+                        e'4
+                    }
                 }
             }
         >>
@@ -1657,13 +1738,16 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \override Score.TimeSignature.transparent = ##t
-                    \time 3/4
-                    c'4
-                    d'4
-                    e'4
-                    \revert Score.TimeSignature.transparent
+                    {
+                        \override Score.TimeSignature.transparent = ##t
+                        \time 3/4
+                        c'4
+                        d'4
+                        e'4
+                        \revert Score.TimeSignature.transparent
+                    }
                 }
             }
         >>
@@ -1692,17 +1776,20 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \times 2/3
                     {
-                        \override TupletBracket.direction = #down
-                        \override TupletBracket.staff-padding = 2
-                        \time 1/2
-                        c'4
-                        d'4
-                        e'4
-                        \revert TupletBracket.direction
-                        \revert TupletBracket.staff-padding
+                        \times 2/3
+                        {
+                            \override TupletBracket.direction = #down
+                            \override TupletBracket.staff-padding = 2
+                            \time 1/2
+                            c'4
+                            d'4
+                            e'4
+                            \revert TupletBracket.direction
+                            \revert TupletBracket.staff-padding
+                        }
                     }
                 }
             }
@@ -1732,17 +1819,20 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \times 2/3
                     {
-                        \override TupletBracket.direction = #up
-                        \override TupletBracket.staff-padding = 2
-                        \time 1/2
-                        c'4
-                        d'4
-                        e'4
-                        \revert TupletBracket.direction
-                        \revert TupletBracket.staff-padding
+                        \times 2/3
+                        {
+                            \override TupletBracket.direction = #up
+                            \override TupletBracket.staff-padding = 2
+                            \time 1/2
+                            c'4
+                            d'4
+                            e'4
+                            \revert TupletBracket.direction
+                            \revert TupletBracket.staff-padding
+                        }
                     }
                 }
             }
@@ -1772,17 +1862,20 @@ Examples: overrides.
         <<
             \context Staff = "Staff"
             {
+                \context Voice = "Voice"
                 {
-                    \times 2/3
                     {
-                        \override TupletBracket.staff-padding = 2
-                        \override TupletNumber.extra-offset = #'(-1 . 0)
-                        \time 1/2
-                        c'4
-                        d'4
-                        e'4
-                        \revert TupletBracket.staff-padding
-                        \revert TupletNumber.extra-offset
+                        \times 2/3
+                        {
+                            \override TupletBracket.staff-padding = 2
+                            \override TupletNumber.extra-offset = #'(-1 . 0)
+                            \time 1/2
+                            c'4
+                            d'4
+                            e'4
+                            \revert TupletBracket.staff-padding
+                            \revert TupletNumber.extra-offset
+                        }
                     }
                 }
             }

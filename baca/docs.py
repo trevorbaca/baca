@@ -269,13 +269,10 @@ def make_empty_score(*counts, do_not_move_global_context=False, no_skips=False):
     return score
 
 
-# TODO: always add voice
 def make_single_staff_score(components, voice=False):
-    if voice is True:
-        voice = abjad.Voice(components, name="Voice")
-        staff = abjad.Staff([voice], name="Staff")
-    else:
-        staff = abjad.Staff(components, name="Staff")
+    voice = abjad.Voice(components, name="Voice")
+    staff = abjad.Staff([voice], name="Staff")
+    # TODO: make score sequential intead of simultaneous:
     score = abjad.Score([staff], name="Score")
     duration = abjad.get.duration(components)
     time_signature = abjad.TimeSignature(duration.pair)
