@@ -79,7 +79,7 @@ Examples: spanners.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -95,7 +95,7 @@ Examples: spanners.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -112,7 +112,7 @@ Examples: spanners.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -128,7 +128,7 @@ Examples: spanners.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -145,7 +145,7 @@ Examples: spanners.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -161,7 +161,7 @@ Examples: spanners.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -179,7 +179,7 @@ Examples: spanners.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -197,7 +197,7 @@ Examples: spanners.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -214,7 +214,7 @@ Examples: spanners.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -230,7 +230,7 @@ Examples: spanners.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -251,7 +251,7 @@ Examples: spanners.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -269,7 +269,7 @@ Examples: spanners.
                     }
                 }
             }
-        >>
+        }
 
 """
 

@@ -53,7 +53,7 @@ class ArpeggiationSpacingSpecifier:
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
+            {
                 \context Staff = "Staff"
                 {
                     \context Voice = "Voice"
@@ -80,7 +80,7 @@ class ArpeggiationSpacingSpecifier:
                         }
                     }
                 }
-            >>
+            }
 
     ..  container:: example
 
@@ -102,7 +102,7 @@ class ArpeggiationSpacingSpecifier:
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
+            {
                 \context Staff = "Staff"
                 {
                     \context Voice = "Voice"
@@ -129,7 +129,7 @@ class ArpeggiationSpacingSpecifier:
                         }
                     }
                 }
-            >>
+            }
 
     """
 

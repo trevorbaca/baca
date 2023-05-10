@@ -764,7 +764,7 @@ def bass_to_octave(argument, n: int) -> None:
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
+            {
                 \context Staff = "Staff"
                 {
                     \context Voice = "Voice"
@@ -777,7 +777,7 @@ def bass_to_octave(argument, n: int) -> None:
                         a4
                     }
                 }
-            >>
+            }
 
     ..  container:: example
 
@@ -796,7 +796,7 @@ def bass_to_octave(argument, n: int) -> None:
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
+            {
                 \context Staff = "Staff"
                 {
                     \context Voice = "Voice"
@@ -809,7 +809,7 @@ def bass_to_octave(argument, n: int) -> None:
                         a4
                     }
                 }
-            >>
+            }
 
     """
     _do_register_to_octave_command(argument, anchor=abjad.DOWN, octave_number=n)
@@ -835,7 +835,7 @@ def center_to_octave(argument, n: int) -> None:
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
+            {
                 \context Staff = "Staff"
                 {
                     \context Voice = "Voice"
@@ -848,7 +848,7 @@ def center_to_octave(argument, n: int) -> None:
                         a,4
                     }
                 }
-            >>
+            }
 
     ..  container:: example
 
@@ -867,7 +867,7 @@ def center_to_octave(argument, n: int) -> None:
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
+            {
                 \context Staff = "Staff"
                 {
                     \context Voice = "Voice"
@@ -880,7 +880,7 @@ def center_to_octave(argument, n: int) -> None:
                         a4
                     }
                 }
-            >>
+            }
 
     """
     _do_register_to_octave_command(argument, anchor=abjad.CENTER, octave_number=n)
@@ -1048,7 +1048,7 @@ def displacement(argument, displacements: list[int]) -> None:
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
+            {
                 \context Staff = "Staff"
                 {
                     \context Voice = "Voice"
@@ -1067,7 +1067,7 @@ def displacement(argument, displacements: list[int]) -> None:
                         }
                     }
                 }
-            >>
+            }
 
     ..  container:: example
 
@@ -1086,7 +1086,7 @@ def displacement(argument, displacements: list[int]) -> None:
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
+            {
                 \context Staff = "Staff"
                 {
                     \context Voice = "Voice"
@@ -1102,7 +1102,7 @@ def displacement(argument, displacements: list[int]) -> None:
                         }
                     }
                 }
-            >>
+            }
 
     """
     _do_octave_displacement_command(argument, displacements)
@@ -1137,7 +1137,7 @@ def interpolate_pitches(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
+            {
                 \context Staff = "Staff"
                 {
                     \context Voice = "Voice"
@@ -1178,7 +1178,7 @@ def interpolate_pitches(
                         }
                     }
                 }
-            >>
+            }
 
     ..  container:: example
 
@@ -1203,7 +1203,7 @@ def interpolate_pitches(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
+            {
                 \context Staff = "Staff"
                 {
                     \context Voice = "Voice"
@@ -1255,7 +1255,7 @@ def interpolate_pitches(
                         }
                     }
                 }
-            >>
+            }
 
     """
     start_ = abjad.NamedPitch(start)
@@ -1648,7 +1648,7 @@ def register(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
+            {
                 \context Staff = "Staff"
                 {
                     \context Voice = "Voice"
@@ -1677,7 +1677,7 @@ def register(
                         }
                     }
                 }
-            >>
+            }
 
     ..  container:: example
 
@@ -1756,7 +1756,7 @@ def register(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
+            {
                 \context Staff = "Staff"
                 {
                     \context Voice = "Voice"
@@ -1767,7 +1767,7 @@ def register(
                         }
                     }
                 }
-            >>
+            }
 
     ..  container:: example
 
@@ -1786,7 +1786,7 @@ def register(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
+            {
                 \context Staff = "Staff"
                 {
                     \context Voice = "Voice"
@@ -1805,7 +1805,7 @@ def register(
                         }
                     }
                 }
-            >>
+            }
 
     ..  container:: example
 
@@ -1824,7 +1824,7 @@ def register(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
+            {
                 \context Staff = "Staff"
                 {
                     \context Voice = "Voice"
@@ -1843,7 +1843,7 @@ def register(
                         }
                     }
                 }
-            >>
+            }
 
     ..  container:: example
 
@@ -1861,7 +1861,7 @@ def register(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
+            {
                 \context Staff = "Staff"
                 {
                     \context Voice = "Voice"
@@ -1901,7 +1901,7 @@ def register(
                         }
                     }
                 }
-            >>
+            }
 
     ..  container:: example
 
@@ -1922,7 +1922,7 @@ def register(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
+            {
                 \context Staff = "Staff"
                 {
                     \context Voice = "Voice"
@@ -1948,7 +1948,7 @@ def register(
                         }
                     }
                 }
-            >>
+            }
 
     ..  container:: example
 
@@ -2438,7 +2438,7 @@ def register(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
+            {
                 \context Staff = "Staff"
                 {
                     \context Voice = "Voice"
@@ -2478,7 +2478,7 @@ def register(
                         }
                     }
                 }
-            >>
+            }
 
     """
     assert not isinstance(argument, int), repr(argument)
@@ -2532,7 +2532,7 @@ def replace_with_clusters(
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
+            {
                 \context Staff = "Staff"
                 {
                     \context Voice = "Voice"
@@ -2622,7 +2622,7 @@ def replace_with_clusters(
                         }
                     }
                 }
-            >>
+            }
 
     ..  container:: example
 
@@ -3012,7 +3012,7 @@ def soprano_to_octave(argument, n: int) -> None:
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
+            {
                 \context Staff = "Staff"
                 {
                     \context Voice = "Voice"
@@ -3027,7 +3027,7 @@ def soprano_to_octave(argument, n: int) -> None:
                         }
                     }
                 }
-            >>
+            }
 
     ..  container:: example
 
@@ -3049,7 +3049,7 @@ def soprano_to_octave(argument, n: int) -> None:
             >>> string = abjad.lilypond(score)
             >>> print(string)
             \context Score = "Score"
-            <<
+            {
                 \context Staff = "Staff"
                 {
                     \context Voice = "Voice"
@@ -3064,7 +3064,7 @@ def soprano_to_octave(argument, n: int) -> None:
                         }
                     }
                 }
-            >>
+            }
 
     """
     _do_register_to_octave_command(argument, anchor=abjad.UP, octave_number=n)

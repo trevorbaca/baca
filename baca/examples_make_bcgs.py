@@ -34,7 +34,7 @@ Examples: ``baca.make_bcgs()``.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -93,7 +93,7 @@ Examples: ``baca.make_bcgs()``.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -129,7 +129,7 @@ Examples: ``baca.make_bcgs()``.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -188,7 +188,7 @@ Examples: ``baca.make_bcgs()``.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -227,7 +227,7 @@ Examples: ``baca.make_bcgs()``.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -292,7 +292,7 @@ Examples: ``baca.make_bcgs()``.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -331,7 +331,7 @@ Examples: ``baca.make_bcgs()``.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -396,7 +396,7 @@ Examples: ``baca.make_bcgs()``.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -437,7 +437,7 @@ Examples: ``baca.make_bcgs()``.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -508,7 +508,7 @@ Examples: ``baca.make_bcgs()``.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -543,7 +543,7 @@ Examples: ``baca.make_bcgs()``.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -608,7 +608,7 @@ Examples: ``baca.make_bcgs()``.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -643,7 +643,7 @@ Examples: ``baca.make_bcgs()``.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -702,7 +702,7 @@ Examples: ``baca.make_bcgs()``.
                     }
                 }
             }
-        >>
+        }
 
 """
 

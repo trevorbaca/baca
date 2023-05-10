@@ -22,7 +22,7 @@ Examples: ``baca.from_collection()``.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -38,7 +38,7 @@ Examples: ``baca.from_collection()``.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -68,7 +68,7 @@ Examples: ``baca.from_collection()``.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -141,7 +141,7 @@ Examples: ``baca.from_collection()``.
                     \revert TupletNumber.text
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -171,7 +171,7 @@ Examples: ``baca.from_collection()``.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -244,7 +244,7 @@ Examples: ``baca.from_collection()``.
                     \revert TupletNumber.text
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -275,7 +275,7 @@ Examples: ``baca.from_collection()``.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -337,7 +337,7 @@ Examples: ``baca.from_collection()``.
                     \revert TupletNumber.text
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -493,7 +493,7 @@ Examples: ``baca.from_collection()``.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             \with
             {
@@ -559,7 +559,7 @@ Examples: ``baca.from_collection()``.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -595,7 +595,7 @@ Examples: ``baca.from_collection()``.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             \with
             {
@@ -654,7 +654,7 @@ Examples: ``baca.from_collection()``.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -682,7 +682,7 @@ Examples: ``baca.from_collection()``.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -719,7 +719,7 @@ Examples: ``baca.from_collection()``.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 

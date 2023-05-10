@@ -371,7 +371,7 @@ Examples: commands.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -381,7 +381,7 @@ Examples: commands.
                     \baca-effort-f
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -940,7 +940,7 @@ Examples: commands.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -956,7 +956,7 @@ Examples: commands.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -1319,7 +1319,7 @@ Examples: commands.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -1335,7 +1335,7 @@ Examples: commands.
                     }
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
@@ -1397,7 +1397,7 @@ Examples: commands.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
                 \context Voice = "Voice"
@@ -1411,7 +1411,7 @@ Examples: commands.
                     }
                 }
             }
-        >>
+        }
 
 """
 
