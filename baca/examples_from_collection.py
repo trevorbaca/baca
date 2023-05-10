@@ -54,9 +54,9 @@ Examples: ``baca.from_collection()``.
     ...         [20, 19, 9, 0, 2, 10],
     ...     ]
     ...     tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+    ...     lilypond_file = abjad.illustrators.components(tuplets)
     ...     tuplets = [baca.style_accelerando(_) for _ in tuplets]
     ...     rmakers.beam(tuplets)
-    ...     lilypond_file = abjad.illustrators.components(tuplets)
     ...     return lilypond_file
 
     >>> lilypond_file = make_lilypond_file()
@@ -157,9 +157,9 @@ Examples: ``baca.from_collection()``.
     ...         [20, 19, 9, 0, 2, 10],
     ...     ]
     ...     tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+    ...     lilypond_file = abjad.illustrators.components(tuplets)
     ...     tuplets = [baca.style_ritardando(_) for _ in tuplets]
     ...     rmakers.beam(tuplets)
-    ...     lilypond_file = abjad.illustrators.components(tuplets)
     ...     return lilypond_file
 
     >>> lilypond_file = make_lilypond_file()
@@ -258,12 +258,12 @@ Examples: ``baca.from_collection()``.
     ...         [19, 9, 0, 2, 10, 18],
     ...     ]
     ...     tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+    ...     lilypond_file = abjad.illustrators.components(tuplets)
     ...     baca.style_accelerando(tuplets[0])
     ...     baca.style_ritardando(tuplets[1])
     ...     baca.style_accelerando(tuplets[2])
     ...     baca.style_ritardando(tuplets[3])
     ...     rmakers.beam(tuplets)
-    ...     lilypond_file = abjad.illustrators.components(tuplets)
     ...     return lilypond_file
 
     >>> lilypond_file = make_lilypond_file()
@@ -344,6 +344,8 @@ Examples: ``baca.from_collection()``.
     Mixed accelerandi, ritardandi and prolation:
 
     >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1, no_skips=True)
+    ...     voice = score["Music"]
     ...     collections = [
     ...         [0, 2, 10, 18, 16],
     ...         [15, 20, 19, 9, 0],
@@ -353,6 +355,7 @@ Examples: ``baca.from_collection()``.
     ...         [19, 9, 0, 2, 10],
     ...     ]
     ...     tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
+    ...     voice.extend(tuplets)
     ...     baca.style_accelerando(tuplets[0])
     ...     baca.prolate(tuplets[1], -2, 16)
     ...     baca.style_ritardando(tuplets[2])
@@ -360,7 +363,10 @@ Examples: ``baca.from_collection()``.
     ...     baca.prolate(tuplets[4], -2, 16)
     ...     baca.style_ritardando(tuplets[5])
     ...     rmakers.beam(tuplets)
-    ...     lilypond_file = abjad.illustrators.components(tuplets)
+    ...     duration = abjad.get.duration(voice)
+    ...     time_signature = abjad.TimeSignature(duration.pair)
+    ...     abjad.attach(time_signature, abjad.select.leaf(voice, 0))
+    ...     lilypond_file = abjad.LilyPondFile([score])
     ...     return lilypond_file
 
     >>> lilypond_file = make_lilypond_file()
@@ -372,10 +378,10 @@ Examples: ``baca.from_collection()``.
         >>> string = abjad.lilypond(score)
         >>> print(string)
         \context Score = "Score"
-        <<
+        {
             \context Staff = "Staff"
             {
-                \context Voice = "Voice"
+                \context Voice = "Music"
                 {
                     \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 ~ 16 }
                     \times 1/1
@@ -454,7 +460,7 @@ Examples: ``baca.from_collection()``.
                     \revert TupletNumber.text
                 }
             }
-        >>
+        }
 
 ..  container:: example
 
