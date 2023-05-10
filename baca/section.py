@@ -1050,7 +1050,7 @@ def _label_measure_numbers(first_measure_number, global_skips):
             abjad.attach(
                 start_text_span,
                 skip,
-                context="GlobalSkips",
+                context=global_skips.name,
                 deactivate=True,
                 tag=tag,
             )
@@ -1064,7 +1064,7 @@ def _label_measure_numbers(first_measure_number, global_skips):
             abjad.attach(
                 start_text_span,
                 skip,
-                context="GlobalSkips",
+                context=global_skips.name,
                 deactivate=True,
                 tag=tag,
             )
@@ -1075,7 +1075,7 @@ def _label_measure_numbers(first_measure_number, global_skips):
             abjad.attach(
                 stop_text_span,
                 skip,
-                context="GlobalSkips",
+                context=global_skips.name,
                 deactivate=True,
                 tag=tag,
             )
@@ -1085,7 +1085,7 @@ def _label_measure_numbers(first_measure_number, global_skips):
             abjad.attach(
                 stop_text_span,
                 skip,
-                context="GlobalSkips",
+                context=global_skips.name,
                 deactivate=True,
                 tag=tag,
             )

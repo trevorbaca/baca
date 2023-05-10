@@ -315,24 +315,35 @@ class Ritardando:
 
     ..  container:: example
 
-        >>> note = abjad.Note("c'4")
+        >>> score = baca.docs.make_empty_score(1, no_skips=True)
+        >>> voice = score["Music"]
+        >>> voice.append("c'4")
         >>> ritardando = baca.Ritardando()
         >>> bundle = abjad.bundle(
         ...     ritardando,
         ...     r"- \tweak color #blue",
         ...     r"- \tweak extra-offset #'(0 . 2)",
         ... )
-        >>> abjad.attach(bundle, note, direction=abjad.UP)
-        >>> abjad.show(note) # doctest: +SKIP
+        >>> abjad.attach(bundle, voice[0], direction=abjad.UP)
+        >>> abjad.show(score) # doctest: +SKIP
 
         ..  docs::
 
-            >>> string = abjad.lilypond(note)
+            >>> string = abjad.lilypond(score)
             >>> print(string)
-            c'4
-            - \tweak color #blue
-            - \tweak extra-offset #'(0 . 2)
-            ^ \markup \large \upright rit.
+            \context Score = "Score"
+            {
+                \context Staff = "Staff"
+                {
+                    \context Voice = "Music"
+                    {
+                        c'4
+                        - \tweak color #blue
+                        - \tweak extra-offset #'(0 . 2)
+                        ^ \markup \large \upright rit.
+                    }
+                }
+            }
 
     Tweak extra-offset to align ritardando markup with other metronome mark spanner
     pieces.
@@ -454,22 +465,30 @@ class SpacingSection:
 
     ..  container:: example
 
-        >>> staff = abjad.Staff("c'4 d' e' f'")
-        >>> abjad.attach(baca.SpacingSection((2, 24)), staff[0])
-        >>> lilypond_file = abjad.LilyPondFile([r'\include "baca.ily"', staff])
+        >>> score = baca.docs.make_empty_score(1, no_skips=True)
+        >>> voice = score["Music"]
+        >>> voice.extend("c'4 d' e' f'")
+        >>> abjad.attach(baca.SpacingSection((2, 24)), voice[0])
+        >>> lilypond_file = abjad.LilyPondFile([r'\include "baca.ily"', score])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> string = abjad.lilypond(staff)
+            >>> string = abjad.lilypond(score)
             >>> print(string)
-            \new Staff
+            \context Score = "Score"
             {
-                \baca-new-spacing-section #2 #24
-                c'4
-                d'4
-                e'4
-                f'4
+                \context Staff = "Staff"
+                {
+                    \context Voice = "Music"
+                    {
+                        \baca-new-spacing-section #2 #24
+                        c'4
+                        d'4
+                        e'4
+                        f'4
+                    }
+                }
             }
 
     ..  container:: example
