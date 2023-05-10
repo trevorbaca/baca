@@ -77,6 +77,9 @@ def _style_accelerando(
     total_duration: abjad.Duration | None = None,
 ) -> abjad.Container | abjad.Tuplet:
     assert isinstance(container, abjad.Container), repr(container)
+    temporary_voice = None
+    if container._parent is None:
+        temporary_voice = abjad.Voice([container], name="TemporaryVoice")
     if 1 < len(container):
         assert isinstance(container, abjad.Tuplet), repr(container)
         assert isinstance(exponent, float), repr(exponent)
@@ -100,6 +103,8 @@ def _style_accelerando(
             leaf.multiplier = pair
         rmakers.feather_beam([hleaves])
         rmakers.duration_bracket(container)
+    if temporary_voice is not None:
+        temporary_voice[:] = []
     return container
 
 
@@ -175,7 +180,9 @@ class Grace:
                 raise Exception
         elif 1 < len(grace_leaves):
             if beam is True:
+                temporary_voice = abjad.Voice(grace_leaves, name="TemporaryVoice")
                 abjad.beam(grace_leaves)
+                temporary_voice[:] = []
             if slash is True:
                 literal = abjad.LilyPondLiteral(r"\slash", site="before")
                 abjad.attach(literal, grace_leaves[0])
@@ -565,11 +572,6 @@ def make_bgcs(
             command=r"\acciaccatura",
             tag=_tags.function_name(_frame(), n=2),
         )
-        # if 1 < len(container):
-        #     abjad.beam(
-        #         container[:],
-        #         tag=_tags.function_name(_frame(), n=3),
-        #     )
         bgcs.append(container)
     assert len(bgcs) == len(collection)
     assert isinstance(collection, list), repr(collection)

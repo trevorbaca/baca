@@ -222,8 +222,8 @@ Examples: ``baca.make_bgcs()``.
     ...     baca.attach_bgcs(bgcs, container)
     ...     containers.append(container)
 
-    >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
     >>> lilypond_file = abjad.illustrators.components(containers)
+    >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
     >>> voice = lilypond_file["Voice"]
     >>> containers = abjad.select.components(voice, abjad.BeforeGraceContainer)
     >>> rmakers.beam(containers)
@@ -329,8 +329,8 @@ Examples: ``baca.make_bgcs()``.
     ...     baca.attach_bgcs(bgcs, container)
     ...     containers.append(container)
 
-    >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
     >>> lilypond_file = abjad.illustrators.components(containers)
+    >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
     >>> voice = lilypond_file["Voice"]
     >>> containers = abjad.select.components(voice, abjad.BeforeGraceContainer)
     >>> rmakers.beam(containers)
@@ -438,8 +438,8 @@ Examples: ``baca.make_bgcs()``.
     ...     baca.attach_bgcs(bgcs, container)
     ...     containers.append(container)
 
-    >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
     >>> lilypond_file = abjad.illustrators.components(containers)
+    >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
     >>> voice = lilypond_file["Voice"]
     >>> containers = abjad.select.components(voice, abjad.BeforeGraceContainer)
     >>> rmakers.beam(containers)
@@ -547,8 +547,8 @@ Examples: ``baca.make_bgcs()``.
     ...     baca.attach_bgcs(bgcs, container)
     ...     containers.append(container)
 
-    >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
     >>> lilypond_file = abjad.illustrators.components(containers)
+    >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
     >>> voice = lilypond_file["Voice"]
     >>> containers = abjad.select.components(voice, abjad.BeforeGraceContainer)
     >>> rmakers.beam(containers)
