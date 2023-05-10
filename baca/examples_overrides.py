@@ -93,12 +93,12 @@ Examples: overrides.
     ...     tuplets = [baca.prolate(_, "5:4") for _ in tuplets]
     ...     tuplets[0].insert(0, "r8")
     ...     tuplets[-1].append("r4")
+    ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     pleaves = baca.select.pleaves(tuplets)
     ...     baca.stem_up(pleaves)
     ...     rmakers.beam(tuplets)
     ...     baca.beam_positions(tuplets, 6)
     ...     baca.tuplet_bracket_staff_padding(tuplets, 4)
-    ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     return score
 
     >>> score = make_score()
@@ -1127,9 +1127,9 @@ Examples: overrides.
 
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     baca.slur(container)
     ...     baca.slur_down([container])
-    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -1167,9 +1167,9 @@ Examples: overrides.
 
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     baca.slur(container)
     ...     baca.slur_up([container])
-    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
@@ -1318,9 +1318,9 @@ Examples: overrides.
 
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
-    ...     baca.sustain_pedal(container)
-    ...     baca.sustain_pedal_staff_padding(container, 5)
     ...     score = baca.docs.make_single_staff_score([container])
+    ...     baca.sustain_pedal(container, context="Staff")
+    ...     baca.sustain_pedal_staff_padding(container, 5)
     ...     return score
 
     >>> score = make_score()
@@ -1553,10 +1553,10 @@ Examples: overrides.
 
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
+    ...     score = baca.docs.make_single_staff_score([container])
     ...     baca.text_spanner_staff_padding(container, 6)
     ...     baca.text_script_staff_padding(container, 6)
     ...     baca.text_spanner(container, "pont. => ord.")
-    ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
     >>> score = make_score()
