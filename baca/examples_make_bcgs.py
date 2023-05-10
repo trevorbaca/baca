@@ -1,5 +1,5 @@
 r"""
-Examples: ``baca.make_bcgs()``.
+Examples: ``baca.make_bgcs()``.
 
 ..  container:: example
 
@@ -23,8 +23,11 @@ Examples: ``baca.make_bcgs()``.
     ...     baca.attach_bgcs(bgcs, container)
     ...     containers.append(container)
 
-    >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
     >>> lilypond_file = abjad.illustrators.components(containers)
+    >>> voice = lilypond_file["Voice"]
+    >>> containers = abjad.select.components(voice, abjad.BeforeGraceContainer)
+    >>> rmakers.beam(containers)
+    >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
     >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -120,6 +123,9 @@ Examples: ``baca.make_bcgs()``.
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
     >>> lilypond_file = abjad.illustrators.components(containers)
+    >>> voice = lilypond_file["Voice"]
+    >>> containers = abjad.select.components(voice, abjad.BeforeGraceContainer)
+    >>> rmakers.beam(containers)
     >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -218,6 +224,9 @@ Examples: ``baca.make_bcgs()``.
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
     >>> lilypond_file = abjad.illustrators.components(containers)
+    >>> voice = lilypond_file["Voice"]
+    >>> containers = abjad.select.components(voice, abjad.BeforeGraceContainer)
+    >>> rmakers.beam(containers)
     >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -322,6 +331,9 @@ Examples: ``baca.make_bcgs()``.
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
     >>> lilypond_file = abjad.illustrators.components(containers)
+    >>> voice = lilypond_file["Voice"]
+    >>> containers = abjad.select.components(voice, abjad.BeforeGraceContainer)
+    >>> rmakers.beam(containers)
     >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -428,6 +440,9 @@ Examples: ``baca.make_bcgs()``.
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
     >>> lilypond_file = abjad.illustrators.components(containers)
+    >>> voice = lilypond_file["Voice"]
+    >>> containers = abjad.select.components(voice, abjad.BeforeGraceContainer)
+    >>> rmakers.beam(containers)
     >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -534,6 +549,9 @@ Examples: ``baca.make_bcgs()``.
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
     >>> lilypond_file = abjad.illustrators.components(containers)
+    >>> voice = lilypond_file["Voice"]
+    >>> containers = abjad.select.components(voice, abjad.BeforeGraceContainer)
+    >>> rmakers.beam(containers)
     >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -634,6 +652,9 @@ Examples: ``baca.make_bcgs()``.
 
     >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
     >>> lilypond_file = abjad.illustrators.components(containers)
+    >>> voice = lilypond_file["Voice"]
+    >>> containers = abjad.select.components(voice, abjad.BeforeGraceContainer)
+    >>> rmakers.beam(containers)
     >>> rmakers.swap_trivial(lilypond_file["Staff"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 

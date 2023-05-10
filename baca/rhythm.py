@@ -565,11 +565,11 @@ def make_bgcs(
             command=r"\acciaccatura",
             tag=_tags.function_name(_frame(), n=2),
         )
-        if 1 < len(container):
-            abjad.beam(
-                container[:],
-                tag=_tags.function_name(_frame(), n=3),
-            )
+        # if 1 < len(container):
+        #     abjad.beam(
+        #         container[:],
+        #         tag=_tags.function_name(_frame(), n=3),
+        #     )
         bgcs.append(container)
     assert len(bgcs) == len(collection)
     assert isinstance(collection, list), repr(collection)

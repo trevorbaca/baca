@@ -71,6 +71,15 @@ def _move_global_context(score):
         score.simultaneous = False
 
 
+def attach_time_signature(voice: abjad.Voice) -> None:
+    assert isinstance(voice, abjad.Voice), repr(voice)
+    duration = abjad.get.duration(voice)
+    time_signature = abjad.TimeSignature(duration.pair)
+    leaf = abjad.select.leaf(voice, 0)
+    abjad.detach(abjad.TimeSignature, leaf)
+    abjad.attach(time_signature, leaf)
+
+
 def global_context_string():
     """
     Makes global context string.
