@@ -2641,22 +2641,39 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
             wrapper = abjad.get.wrapper(skip, abjad.MetronomeMark)
             metronome_mark = dataclasses.replace(metronome_mark, hide=True)
             abjad.detach(abjad.MetronomeMark, skip)
-            wrapper = abjad.attach(metronome_mark, skip, tag=wrapper.tag, wrapper=True)
+            wrapper = abjad.attach(
+                metronome_mark,
+                skip,
+                tag=wrapper.tag,
+                wrapper=True,
+            )
         if metric_modulation is not None:
             wrapper_ = abjad.get.wrapper(skip, abjad.MetricModulation)
             metric_modulation = dataclasses.replace(metric_modulation, hide=True)
             abjad.detach(abjad.MetricModulation, skip)
-            abjad.attach(metric_modulation, skip, tag=wrapper_.tag)
+            abjad.attach(
+                metric_modulation,
+                skip,
+                tag=wrapper_.tag,
+            )
         if accelerando is not None:
             wrapper = abjad.get.wrapper(skip, _classes.Accelerando)
             hidden_accelerando = dataclasses.replace(accelerando, hide=True)
             abjad.detach(_classes.Accelerando, skip)
-            abjad.attach(hidden_accelerando, skip, tag=wrapper.tag)
+            abjad.attach(
+                hidden_accelerando,
+                skip,
+                tag=wrapper.tag,
+            )
         if ritardando is not None:
             wrapper = abjad.get.wrapper(skip, _classes.Ritardando)
             hidden_ritardando = dataclasses.replace(ritardando, hide=True)
             abjad.detach(_classes.Ritardando, skip)
-            abjad.attach(hidden_ritardando, skip, tag=wrapper.tag)
+            abjad.attach(
+                hidden_ritardando,
+                skip,
+                tag=wrapper.tag,
+            )
         if skip is skips[-1]:
             break
         if metronome_mark is None and metric_modulation is not None:
@@ -2751,6 +2768,7 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
             abjad.attach(
                 stop_text_span,
                 skip,
+                context=global_skips.name,
                 tag=_tags.function_name(_frame(), n=1),
             )
         if add_right_text_to_me is skip:
@@ -2795,6 +2813,7 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
             abjad.attach(
                 start_text_span,
                 skip,
+                context=global_skips.name,
                 deactivate=True,
                 tag=tag.append(_tags.function_name(_frame(), n=2)),
             )
@@ -2802,6 +2821,7 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
             abjad.attach(
                 start_text_span,
                 skip,
+                context=global_skips.name,
                 deactivate=True,
                 tag=tag.append(_tags.function_name(_frame(), n=2.1)).append(
                     _tags.METRIC_MODULATION_IS_NOT_SCALED,
@@ -2817,6 +2837,7 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
             abjad.attach(
                 start_text_span_,
                 skip,
+                context=global_skips.name,
                 deactivate=True,
                 tag=tag.append(_tags.function_name(_frame(), n=2.2)).append(
                     _tags.METRIC_MODULATION_IS_SCALED,
@@ -2829,6 +2850,7 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
             abjad.attach(
                 start_text_span_,
                 skip,
+                context=global_skips.name,
                 deactivate=True,
                 tag=tag.append(_tags.function_name(_frame(), n=2.2)).append(
                     _tags.METRIC_MODULATION_IS_STRIPPED,
@@ -2899,6 +2921,7 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
         abjad.attach(
             start_text_span,
             skip,
+            context=global_skips.name,
             deactivate=False,
             tag=tag.append(_tags.function_name(_frame(), n=3)),
         )
@@ -2907,7 +2930,12 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
         stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanMM")
         tag_ = _tags.EOS_STOP_MM_SPANNER
         tag_ = tag_.append(_tags.function_name(_frame(), n=4))
-        abjad.attach(stop_text_span, final_skip, tag=tag_)
+        abjad.attach(
+            stop_text_span,
+            final_skip,
+            context=global_skips.name,
+            tag=tag_,
+        )
 
 
 def style_anchor_skip(score):
