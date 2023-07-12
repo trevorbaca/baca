@@ -736,6 +736,7 @@ def hairpin(
 def half_clt_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
+    autodetect_right_padding: bool = True,
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-half-clt-markup",
     pieces: list[list[abjad.Leaf]] | None = None,
@@ -747,7 +748,7 @@ def half_clt_spanner(
         argument,
         "½ clt =|",
         *tweaks,
-        autodetect_right_padding=True,
+        autodetect_right_padding=autodetect_right_padding,
         bookend=False,
         left_broken=left_broken,
         left_broken_text=left_broken_text,
