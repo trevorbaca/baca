@@ -236,6 +236,19 @@ baca-left-broken-half-clt-markup =
         \hspace #0.5
     }
 
+baca-left-broken-legno-markup =
+    \markup
+    \upright
+    \line {
+        (
+        \hspace #-0.5
+        "legno"
+        \hspace #-0.5
+        )
+        \hspace #0.5
+    }
+
+
 %%% COVERED MARKUP %%%
 
 baca-cov-markup =

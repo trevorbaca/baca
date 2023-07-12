@@ -737,6 +737,7 @@ def half_clt_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
     autodetect_right_padding: bool = True,
+    items: str = "½ clt =|",
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-half-clt-markup",
     pieces: list[list[abjad.Leaf]] | None = None,
@@ -746,7 +747,7 @@ def half_clt_spanner(
     tag = tag.append(_tags.HALF_CLT_SPANNER)
     wrappers = text_spanner(
         argument,
-        "½ clt =|",
+        items,
         *tweaks,
         autodetect_right_padding=autodetect_right_padding,
         bookend=False,
