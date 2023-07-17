@@ -93,7 +93,11 @@ class SpacingSpecifier:
                 pair = duration.pair
             assert pair is not None
             eol_adjusted = False
-            if measure_number in eol_measure_numbers:
+            if (measure_number in eol_measure_numbers) or (
+                self.breaks is not None
+                and measure_number == measure_count
+                and not has_anchor_skip
+            ):
                 pair_ = pair
                 numerator = pair[0] * magic_lilypond_eol_adjustment.numerator
                 denominator = pair[1] * magic_lilypond_eol_adjustment.denominator
@@ -193,6 +197,7 @@ def breaks(*page_specifiers):
             bol_measure_numbers.append(measure_number)
             skip_index = measure_number - 1
             y_offset = system.y_offset
+            assert isinstance(system.distances, tuple | list), repr(system.distances)
             alignment_distances = system.distances
             assert 0 <= skip_index
             if j == 0:

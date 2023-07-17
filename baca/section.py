@@ -2263,7 +2263,10 @@ def make_layout_ly(
     lines.append(f"% page_count = {page_count}")
     time_signatures = [str(_) for _ in time_signatures]
     measure_count = len(time_signatures)
-    lines.append(f"% measure_count = {measure_count} + 1")
+    if has_anchor_skip:
+        lines.append(f"% measure_count = {measure_count} + 1")
+    else:
+        lines.append(f"% measure_count = {measure_count}")
     string = pprint.pformat(time_signatures, compact=True, width=80 - 3)
     lines_ = string.split("\n")
     lines_ = [_.strip("[").strip("]") for _ in lines_]
