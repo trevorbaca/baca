@@ -65,7 +65,7 @@ def _attach_indicators(
     tweaks,
     total_pieces,
     *,
-    autodetected_right_padding=None,
+    autodetected_right_padding=False,
     just_bookended_leaf=None,
 ) -> list[abjad.Wrapper]:
     assert isinstance(manifests, dict), repr(manifests)
@@ -81,7 +81,7 @@ def _attach_indicators(
             indicator = dataclasses.replace(indicator)
         if (
             _is_maybe_bundled(indicator, abjad.StartTextSpan)
-            and autodetected_right_padding is not None
+            and autodetected_right_padding
         ):
             number = autodetected_right_padding
             tweak = abjad.Tweak(
@@ -150,6 +150,7 @@ def _do_piecewise_command(
     last leaf in group ``n`` of selector output and attaches indicator to only first leaf
     in other groups of selector output.
     """
+    # assert autodetect_right_padding is False, repr(autodetect_right_padding)
     assert tag is not None, repr(tag)
     cyclic_specifiers = abjad.CyclicTuple(specifiers)
     manifests = manifests or {}
@@ -238,7 +239,7 @@ def _do_piecewise_command(
                 tag_ = tag_.append(_tags.LEFT_BROKEN)
         if is_final_piece and right_broken:
             tag_ = tag_.append(_tags.RIGHT_BROKEN)
-        autodetected_right_padding = None
+        autodetected_right_padding: bool | int | float = False
         # solution is merely heuristic;
         # TextSpanner.bound-details.right.to-extent = ##t implementation
         # only 100% workable solution
@@ -258,9 +259,6 @@ def _do_piecewise_command(
             # stop leaf on normal measure downbeat
             else:
                 autodetected_right_padding = 2.75
-            # there's probably a third case for normal midmeasure leaf
-            # else:
-            #    autodetected_right_padding = 1.25
         wrappers_ = _attach_indicators(
             specifier,
             start_leaf,
@@ -369,10 +367,7 @@ def _prepare_text_spanner_arguments(
     right_broken,
 ):
     original_items = items
-    if autodetect_right_padding is not None:
-        assert isinstance(autodetect_right_padding, bool), repr(
-            autodetect_right_padding
-        )
+    assert isinstance(autodetect_right_padding, bool), repr(autodetect_right_padding)
     if direction == abjad.DOWN:
         shape_to_style = {
             "=>": "dashed-line-with-arrow",
