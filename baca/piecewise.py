@@ -12,7 +12,6 @@ from . import tags as _tags
 from . import treat as _treat
 from . import tweaks as _tweaks
 from . import typings as _typings
-from .enums import enums as _enums
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -65,7 +64,6 @@ def _attach_indicators(
     tweaks,
     total_pieces,
     *,
-    autodetected_right_padding=False,
     just_bookended_leaf=None,
 ) -> list[abjad.Wrapper]:
     assert isinstance(manifests, dict), repr(manifests)
@@ -79,16 +77,6 @@ def _attach_indicators(
             continue
         if not isinstance(indicator, bool | abjad.Bundle):
             indicator = dataclasses.replace(indicator)
-        if (
-            _is_maybe_bundled(indicator, abjad.StartTextSpan)
-            and autodetected_right_padding
-        ):
-            number = autodetected_right_padding
-            tweak = abjad.Tweak(
-                rf"- \tweak bound-details.right.padding {number}",
-                tag=tag.append(_tags.AUTODETECT).append(_tags.SPANNER_START),
-            )
-            indicator = abjad.bundle(indicator, tweak, overwrite=True)
         if _is_maybe_bundled(indicator, abjad.StartTextSpan) and tweaks:
             for item in tweaks:
                 if isinstance(item, abjad.Tweak):
@@ -127,7 +115,6 @@ def _do_piecewise_command(
     argument,
     *,
     manifests=None,
-    autodetect_right_padding: bool = False,
     bookend: bool | int = False,
     final_piece_spanner=None,
     leak_spanner_stop: bool = False,
@@ -150,7 +137,6 @@ def _do_piecewise_command(
     last leaf in group ``n`` of selector output and attaches indicator to only first leaf
     in other groups of selector output.
     """
-    # assert autodetect_right_padding is False, repr(autodetect_right_padding)
     assert tag is not None, repr(tag)
     cyclic_specifiers = abjad.CyclicTuple(specifiers)
     manifests = manifests or {}
@@ -239,26 +225,6 @@ def _do_piecewise_command(
                 tag_ = tag_.append(_tags.LEFT_BROKEN)
         if is_final_piece and right_broken:
             tag_ = tag_.append(_tags.RIGHT_BROKEN)
-        autodetected_right_padding: bool | int | float = False
-        # solution is merely heuristic;
-        # TextSpanner.bound-details.right.to-extent = ##t implementation
-        # only 100% workable solution
-        if is_final_piece and autodetect_right_padding:
-            if (
-                abjad.get.annotation(stop_leaf, _enums.ANCHOR_NOTE) is True
-                or abjad.get.annotation(stop_leaf, _enums.ANCHOR_SKIP) is True
-            ):
-                autodetected_right_padding = 2.5
-            # stop leaf multiplied whole note on fermata measure downbeat
-            elif (
-                isinstance(stop_leaf, abjad.Note)
-                and stop_leaf.written_duration == 1
-                and stop_leaf.multiplier == (1, 4)
-            ):
-                autodetected_right_padding = 3.25
-            # stop leaf on normal measure downbeat
-            else:
-                autodetected_right_padding = 2.75
         wrappers_ = _attach_indicators(
             specifier,
             start_leaf,
@@ -267,7 +233,6 @@ def _do_piecewise_command(
             tag.append(tag_),
             tweaks,
             total_pieces,
-            autodetected_right_padding=autodetected_right_padding,
             just_bookended_leaf=just_bookended_leaf,
         )
         wrappers.extend(wrappers_)
@@ -355,7 +320,6 @@ def _prepare_hairpin_arguments(
 def _prepare_text_spanner_arguments(
     items,
     *tweaks,
-    autodetect_right_padding,
     bookend,
     boxed,
     direction,
@@ -367,7 +331,6 @@ def _prepare_text_spanner_arguments(
     right_broken,
 ):
     original_items = items
-    assert isinstance(autodetect_right_padding, bool), repr(autodetect_right_padding)
     if direction == abjad.DOWN:
         shape_to_style = {
             "=>": "dashed-line-with-arrow",
@@ -534,7 +497,6 @@ def bow_speed_spanner(
     argument,
     items: str | list,
     *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = False,
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
@@ -548,7 +510,6 @@ def bow_speed_spanner(
         argument,
         items,
         *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
         bookend=bookend,
         final_piece_spanner=final_piece_spanner,
         left_broken=left_broken,
@@ -596,7 +557,6 @@ def clb_spanner(
     argument,
     string_number: int,
     *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = False,
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-clb-markup",
     pieces: list[list[abjad.Leaf]] | None = None,
@@ -619,7 +579,6 @@ def clb_spanner(
         argument,
         f"{markup} =|",
         *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
         bookend=False,
         left_broken=left_broken,
         left_broken_text=left_broken_text,
@@ -634,7 +593,6 @@ def clb_spanner(
 def covered_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = False,
     items: str = r"\baca-covered-markup =|",
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-covered-markup",
@@ -647,7 +605,6 @@ def covered_spanner(
         argument,
         items,
         *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
         bookend=False,
         left_broken=left_broken,
         left_broken_text=left_broken_text,
@@ -662,7 +619,6 @@ def covered_spanner(
 def damp_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = False,
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-damp-markup",
     pieces: list[list[abjad.Leaf]] | None = None,
@@ -674,7 +630,6 @@ def damp_spanner(
         argument,
         r"\baca-damp-markup =|",
         *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
         bookend=False,
         left_broken=left_broken,
         left_broken_text=left_broken_text,
@@ -729,7 +684,6 @@ def hairpin(
 def half_clt_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = False,
     items: str = "½ clt =|",
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-half-clt-markup",
@@ -742,7 +696,6 @@ def half_clt_spanner(
         argument,
         items,
         *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
         bookend=False,
         left_broken=left_broken,
         left_broken_text=left_broken_text,
@@ -782,7 +735,6 @@ def metric_modulation_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
     items: str = r"MM =|",
-    autodetect_right_padding: bool = False,
     left_broken: bool = False,
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
@@ -793,7 +745,6 @@ def metric_modulation_spanner(
         argument,
         items,
         *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
         bookend=False,
         left_broken=left_broken,
         lilypond_id="MetricModulation",
@@ -965,7 +916,6 @@ def parse_hairpin_descriptor(
 def pizzicato_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = False,
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-pizz-markup",
     pieces: list[list[abjad.Leaf]] | None = None,
@@ -977,7 +927,6 @@ def pizzicato_spanner(
         argument,
         r"\baca-pizz-markup =|",
         *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
         bookend=False,
         left_broken=left_broken,
         left_broken_text=left_broken_text,
@@ -993,7 +942,6 @@ def scp_spanner(
     argument,
     items: str | list,
     *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = False,
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
@@ -1007,7 +955,6 @@ def scp_spanner(
         argument,
         items,
         *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
         bookend=bookend,
         final_piece_spanner=final_piece_spanner,
         left_broken=left_broken,
@@ -1023,7 +970,6 @@ def scp_spanner(
 def spazzolato_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = False,
     items: str | list = r"\baca-spazzolato-markup =|",
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-spazz-markup",
@@ -1036,7 +982,6 @@ def spazzolato_spanner(
         argument,
         items,
         *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
         bookend=False,
         left_broken=left_broken,
         left_broken_text=left_broken_text,
@@ -1052,7 +997,6 @@ def string_number_spanner(
     argument,
     items: str | list,
     *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = False,
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
@@ -1066,7 +1010,6 @@ def string_number_spanner(
         argument,
         items,
         *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
         bookend=bookend,
         left_broken=left_broken,
         left_broken_text=left_broken_text,
@@ -1081,7 +1024,6 @@ def string_number_spanner(
 def tasto_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = False,
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
@@ -1095,7 +1037,6 @@ def tasto_spanner(
         argument,
         "T =|",
         *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
         bookend=bookend,
         final_piece_spanner=final_piece_spanner,
         left_broken=left_broken,
@@ -1112,7 +1053,6 @@ def text_spanner(
     argument,
     items: str | list,
     *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = False,
     bookend: bool | int = -1,
     boxed: bool = False,
     direction: int | None = None,
@@ -1127,7 +1067,6 @@ def text_spanner(
     specifiers = _prepare_text_spanner_arguments(
         items,
         *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
         bookend=bookend,
         boxed=boxed,
         direction=direction,
@@ -1141,7 +1080,6 @@ def text_spanner(
     return _do_piecewise_command(
         argument,
         manifests={},
-        autodetect_right_padding=autodetect_right_padding,
         bookend=bookend,
         final_piece_spanner=final_piece_spanner,
         leak_spanner_stop=leak_spanner_stop,
@@ -1158,7 +1096,6 @@ def vibrato_spanner(
     argument,
     items: str | list,
     *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = False,
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
@@ -1172,7 +1109,6 @@ def vibrato_spanner(
         argument,
         items,
         *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
         bookend=bookend,
         left_broken=left_broken,
         left_broken_text=left_broken_text,
@@ -1187,7 +1123,6 @@ def vibrato_spanner(
 def xfb_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = False,
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
@@ -1201,7 +1136,6 @@ def xfb_spanner(
         argument,
         "XFB =|",
         *tweaks,
-        autodetect_right_padding=autodetect_right_padding,
         bookend=bookend,
         left_broken=left_broken,
         left_broken_text=left_broken_text,
