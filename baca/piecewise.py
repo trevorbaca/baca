@@ -601,8 +601,7 @@ def clb_spanner(
     argument,
     string_number: int,
     *tweaks: _typings.IndexedTweak,
-    # NOTE: autodetect default differs from text_spanner():
-    autodetect_right_padding: bool = True,
+    autodetect_right_padding: bool = False,
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-clb-markup",
     pieces: list[list[abjad.Leaf]] | None = None,
