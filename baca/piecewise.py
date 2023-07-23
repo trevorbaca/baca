@@ -1197,7 +1197,7 @@ def vibrato_spanner(
 def xfb_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = True,
+    autodetect_right_padding: bool = False,
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
