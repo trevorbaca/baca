@@ -639,8 +639,7 @@ def clb_spanner(
 def covered_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
-    # NOTE: autodetect default differs from text_spanner():
-    autodetect_right_padding: bool = True,
+    autodetect_right_padding: bool = False,
     items: str = r"\baca-covered-markup =|",
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-covered-markup",
@@ -668,8 +667,7 @@ def covered_spanner(
 def damp_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
-    # NOTE: autodetect default differs from text_spanner():
-    autodetect_right_padding: bool = True,
+    autodetect_right_padding: bool = False,
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-damp-markup",
     pieces: list[list[abjad.Leaf]] | None = None,
@@ -736,7 +734,7 @@ def hairpin(
 def half_clt_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = True,
+    autodetect_right_padding: bool = False,
     items: str = "½ clt =|",
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-half-clt-markup",
@@ -775,7 +773,6 @@ def material_annotation_spanner(
         argument,
         items,
         *tweaks,
-        autodetect_right_padding=True,
         bookend=False,
         left_broken=left_broken,
         lilypond_id="MaterialAnnotation",
@@ -790,7 +787,7 @@ def metric_modulation_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
     items: str = r"MM =|",
-    autodetect_right_padding: bool = True,
+    autodetect_right_padding: bool = False,
     left_broken: bool = False,
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
@@ -973,8 +970,7 @@ def parse_hairpin_descriptor(
 def pizzicato_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
-    # NOTE: autodetect default differs from text_spanner():
-    autodetect_right_padding: bool = True,
+    autodetect_right_padding: bool = False,
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-pizz-markup",
     pieces: list[list[abjad.Leaf]] | None = None,
@@ -1002,7 +998,7 @@ def scp_spanner(
     argument,
     items: str | list,
     *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = True,
+    autodetect_right_padding: bool = False,
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
@@ -1032,8 +1028,7 @@ def scp_spanner(
 def spazzolato_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
-    # NOTE: autodetect default differs from text_spanner():
-    autodetect_right_padding: bool = True,
+    autodetect_right_padding: bool = False,
     items: str | list = r"\baca-spazzolato-markup =|",
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-spazz-markup",
@@ -1062,7 +1057,7 @@ def string_number_spanner(
     argument,
     items: str | list,
     *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = True,
+    autodetect_right_padding: bool = False,
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
@@ -1091,7 +1086,7 @@ def string_number_spanner(
 def tasto_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = True,
+    autodetect_right_padding: bool = False,
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
@@ -1168,7 +1163,7 @@ def vibrato_spanner(
     argument,
     items: str | list,
     *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = True,
+    autodetect_right_padding: bool = False,
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
