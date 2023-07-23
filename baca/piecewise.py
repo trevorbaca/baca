@@ -370,7 +370,9 @@ def _prepare_text_spanner_arguments(
 ):
     original_items = items
     if autodetect_right_padding is not None:
-        autodetect_right_padding = bool(autodetect_right_padding)
+        assert isinstance(autodetect_right_padding, bool), repr(
+            autodetect_right_padding
+        )
     if direction == abjad.DOWN:
         shape_to_style = {
             "=>": "dashed-line-with-arrow",
@@ -537,7 +539,7 @@ def bow_speed_spanner(
     argument,
     items: str | list,
     *tweaks: _typings.IndexedTweak,
-    autodetect_right_padding: bool = True,
+    autodetect_right_padding: bool = False,
     bookend: bool | int = False,
     final_piece_spanner: bool | None = None,
     left_broken: bool = False,
