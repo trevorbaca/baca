@@ -586,7 +586,6 @@ def circle_bow_spanner(
         argument,
         string,
         *tweaks,
-        autodetect_right_padding=True,
         bookend=False,
         left_broken=left_broken,
         left_broken_text=left_broken_text,
