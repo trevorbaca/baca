@@ -1,9 +1,8 @@
 \include "baca-markups.ily"
 
-%%% BOWSTROKE ARTICULATIONS %%%
 
-#(append! default-script-alist
- (list
+#(define my-script-alist
+  (cons*
   `(bacafulldownbow
     . (
       (stencil . ,ly:text-interface::print)
@@ -14,12 +13,7 @@
       (script-priority . 150)
       (skyline-horizontal-padding . 0.20)
       (toward-stem-shift . 0.5)
-      ))))
-
-baca-full-downbow = #(make-articulation 'bacafulldownbow)
-
-#(append! default-script-alist
- (list
+      ))
   `(bacastoponstringfulldownbow
     . (
       (stencil . ,ly:text-interface::print)
@@ -30,13 +24,7 @@ baca-full-downbow = #(make-articulation 'bacafulldownbow)
       (script-priority . 150)
       (skyline-horizontal-padding . 0.20)
       (toward-stem-shift . 0.6)
-      ))))
-
-baca-stop-on-string-full-downbow = #(
-    make-articulation 'bacastoponstringfulldownbow)
-
-#(append! default-script-alist
- (list
+      ))
   `(bacafullupbow
     . (
       (stencil . ,ly:text-interface::print)
@@ -47,12 +35,7 @@ baca-stop-on-string-full-downbow = #(
       (script-priority . 150)
       (skyline-horizontal-padding . 0.20)
       (toward-stem-shift . 0.5)
-      ))))
-
-baca-full-upbow = #(make-articulation 'bacafullupbow)
-
-#(append! default-script-alist
- (list
+      ))
   `(bacastoponstringfullupbow
     . (
       (stencil . ,ly:text-interface::print)
@@ -63,13 +46,7 @@ baca-full-upbow = #(make-articulation 'bacafullupbow)
       (script-priority . 150)
       (skyline-horizontal-padding . 0.20)
       (toward-stem-shift . 0.6)
-      ))))
-
-baca-stop-on-string-full-upbow = #(
-    make-articulation 'bacastoponstringfullupbow)
-
-#(append! default-script-alist
- (list
+      ))
   `(bacastoponstring
     . (
       (stencil . ,ly:text-interface::print)
@@ -80,14 +57,7 @@ baca-stop-on-string-full-upbow = #(
       (side-relative-direction . ,DOWN)
       (skyline-horizontal-padding . 0.20)
       (toward-stem-shift . 0.4)
-      ))))
-
-baca-stop-on-string = #(make-articulation 'bacastoponstring)
-
-%%% CIRCLE BOWING ARTICULATIONS %%%
-
-#(append! default-script-alist
- (list
+      ))
   `(bacacirclebowing
     . (
       (stencil . ,ly:text-interface::print)
@@ -98,14 +68,7 @@ baca-stop-on-string = #(make-articulation 'bacastoponstring)
       (script-priority . 125)
       (skyline-horizontal-padding . 0.20)
       (toward-stem-shift . -0.75)
-      ))))
-
-baca-circle-bowing = #(make-articulation 'bacacirclebowing)
-
-%%% DAMP ARTICULATIONS %%%
-
-#(append! default-script-alist
- (list
+      ))
   `(bacadamp
     . (
       (stencil . ,ly:text-interface::print)
@@ -116,14 +79,7 @@ baca-circle-bowing = #(make-articulation 'bacacirclebowing)
       (side-relative-direction . ,DOWN)
       (skyline-horizontal-padding . 0.20)
       ;;(toward-stem-shift . 0.5)
-      ))))
-
-baca-damp = #(make-articulation 'bacadamp)
-
-%%% DIAMOND ARTICULATIONS %%%
-
-#(append! default-script-alist
- (list
+      ))
   `(bacadoublediamond
     . (
       (stencil . ,ly:text-interface::print)
@@ -134,14 +90,7 @@ baca-damp = #(make-articulation 'bacadamp)
       (side-relative-direction . ,DOWN)
       (skyline-horizontal-padding . 0.20)
       ;;(toward-stem-shift . 0.5)
-      ))))
-
-baca-double-diamond = #(make-articulation 'bacadoublediamond)
-
-%%% DOUBLE FLAGEOLET ARTICULATION %%%
-
-#(append! default-script-alist
- (list
+      ))
   `(bacadoubleflageolet
     . (
       (stencil . ,ly:text-interface::print)
@@ -152,8 +101,17 @@ baca-double-diamond = #(make-articulation 'bacadoublediamond)
       (side-relative-direction . ,DOWN)
       (skyline-horizontal-padding . 0.20)
       ;;(toward-stem-shift . 0.5)
-      ))))
+      ))
+  default-script-alist))
 
+baca-full-downbow = #(make-articulation 'bacafulldownbow)
+baca-stop-on-string-full-downbow = #(make-articulation 'bacastoponstringfulldownbow)
+baca-full-upbow = #(make-articulation 'bacafullupbow)
+baca-stop-on-string-full-upbow = #(make-articulation 'bacastoponstringfullupbow)
+baca-stop-on-string = #(make-articulation 'bacastoponstring)
+baca-circle-bowing = #(make-articulation 'bacacirclebowing)
+baca-damp = #(make-articulation 'bacadamp)
+baca-double-diamond = #(make-articulation 'bacadoublediamond)
 baca-double-flageolet = #(make-articulation 'bacadoubleflageolet)
 
 %%% STACCATO ARTICULATIONS (MULTIPLE) %%%
@@ -180,6 +138,6 @@ baca-staccati = #(define-music-function (parser location dots) (integer?)
   \context
   {
     \Score
-    scriptDefinitions = #default-script-alist
+    scriptDefinitions = #my-script-alist
   }
 }
