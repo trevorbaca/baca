@@ -28,7 +28,7 @@ as first argument while calling the function:
 the first number of the pair is the width, the second the spacing
 "
 #{
- \override Staff.StaffSymbol #'after-line-breaking =
+ \override Staff.StaffSymbol.after-line-breaking =
    #(lambda (grob)
      (let* ((staff-stencil (ly:grob-property grob 'stencil))
             (staff-line-positions (ly:grob-property grob 'line-positions))
@@ -120,7 +120,7 @@ the first number of the pair is the width, the second the spacing
 %     \context
 %     {
 %         \Staff
-%         \override StaffSymbol #'line-positions = #'(-4  0  4)
+%         \override StaffSymbol.line-positions = #'(-4  0  4)
 %         \morleyDashedStaffSymbolLines #'(#f #t #f)
 %         %\morleyDashedStaffSymbolLines #'(1 . 0.7) #'(#f #t #f)
 %         %\morleyDashedStaffSymbolLines #'(0.05 . 0.3) #'(#f #t #f)
