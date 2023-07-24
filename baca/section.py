@@ -103,6 +103,15 @@ def _add_container_identifiers(score, section_number):
     return container_to_part_assignment
 
 
+@dataclasses.dataclass
+class Analysis:
+    leaf: abjad.Leaf
+    previous_indicator: typing.Any
+    status: typing.Any
+    edition: typing.Any
+    synthetic_offset: typing.Any
+
+
 def _analyze_memento(context, dictionary, memento, score):
     previous_indicator = _memento_to_indicator(dictionary, memento)
     if previous_indicator is None:
@@ -138,7 +147,14 @@ def _analyze_memento(context, dictionary, memento, score):
     else:
         assert 0 < memento.synthetic_offset, repr(memento)
         synthetic_offset = -memento.synthetic_offset
-    return leaf, previous_indicator, status, edition, synthetic_offset
+    # return leaf, previous_indicator, status, edition, synthetic_offset
+    return Analysis(
+        leaf=leaf,
+        previous_indicator=previous_indicator,
+        status=status,
+        edition=edition,
+        synthetic_offset=synthetic_offset,
+    )
 
 
 def _append_tag_to_wrappers(leaf, tag):
@@ -1279,16 +1295,15 @@ def _reapply_persistent_indicators(
             result = _analyze_memento(context, dictionary, memento, score)
             if result is None:
                 continue
-            leaf, previous_indicator, status, edition, synthetic_offset = result
-            if isinstance(previous_indicator, abjad.TimeSignature):
-                if status in (None, "explicit"):
+            if isinstance(result.previous_indicator, abjad.TimeSignature):
+                if result.status in (None, "explicit"):
                     continue
-                assert status == "reapplied", repr(status)
-                wrapper = abjad.get.wrapper(leaf, abjad.TimeSignature)
+                assert result.status == "reapplied", repr(result.status)
+                wrapper = abjad.get.wrapper(result.leaf, abjad.TimeSignature)
                 function_name = _tags.function_name(_frame(), n=1)
-                edition = edition.append(function_name)
-                wrapper.tag = wrapper.tag.append(edition)
-                _treat.treat_persistent_wrapper(manifests, wrapper, status)
+                result.edition = result.edition.append(function_name)
+                wrapper.tag = wrapper.tag.append(result.edition)
+                _treat.treat_persistent_wrapper(manifests, wrapper, result.status)
                 continue
             # TODO: change to parameter comparison
             tempo_prototype = (
@@ -1296,52 +1311,56 @@ def _reapply_persistent_indicators(
                 abjad.MetronomeMark,
                 _classes.Ritardando,
             )
-            if isinstance(previous_indicator, tempo_prototype):
+            if isinstance(result.previous_indicator, tempo_prototype):
                 function_name = _tags.function_name(_frame(), n=2)
-                if status == "reapplied":
+                if result.status == "reapplied":
                     wrapper = abjad.attach(
-                        previous_indicator,
-                        leaf,
-                        synthetic_offset=synthetic_offset,
-                        tag=edition.append(function_name),
+                        result.previous_indicator,
+                        result.leaf,
+                        synthetic_offset=result.synthetic_offset,
+                        tag=result.edition.append(function_name),
                         wrapper=True,
                     )
-                    _treat.treat_persistent_wrapper(manifests, wrapper, status)
+                    _treat.treat_persistent_wrapper(manifests, wrapper, result.status)
                 else:
-                    assert status in ("redundant", None), repr(status)
-                    if status is None:
-                        status = "explicit"
-                    wrappers = abjad.get.wrappers(leaf, tempo_prototype)
+                    assert result.status in ("redundant", None), repr(result.status)
+                    if result.status is None:
+                        result.status = "explicit"
+                    wrappers = abjad.get.wrappers(result.leaf, tempo_prototype)
                     # lone metronome mark or lone tempo trend:
                     if len(wrappers) == 1:
                         wrapper = wrappers[0]
                     # metronome mark + tempo trend:
                     else:
                         assert 1 < len(wrappers), repr(wrappers)
-                        wrapper = abjad.get.wrapper(leaf, abjad.MetronomeMark)
-                    wrapper.tag = wrapper.tag.append(edition)
-                    _treat.treat_persistent_wrapper(manifests, wrapper, status)
+                        wrapper = abjad.get.wrapper(result.leaf, abjad.MetronomeMark)
+                    wrapper.tag = wrapper.tag.append(result.edition)
+                    _treat.treat_persistent_wrapper(manifests, wrapper, result.status)
                 continue
             attached = False
             function_name = _tags.function_name(_frame(), n=3)
-            tag = edition.append(function_name)
-            if isinstance(previous_indicator, abjad.ShortInstrumentName):
+            tag = result.edition.append(function_name)
+            if isinstance(result.previous_indicator, abjad.ShortInstrumentName):
                 if _tags.NOT_PARTS.string not in tag.string:
                     tag = tag.append(_tags.NOT_PARTS)
             try:
                 wrapper = abjad.attach(
-                    previous_indicator,
-                    leaf,
+                    result.previous_indicator,
+                    result.leaf,
                     check_duplicate_indicator=True,
-                    synthetic_offset=synthetic_offset,
+                    synthetic_offset=result.synthetic_offset,
                     tag=tag,
                     wrapper=True,
                 )
                 attached = True
             except abjad.PersistentIndicatorError:
+                # print(result.previous_indicator)
+                # print(result.synthetic_offset)
+                # print(attached)
+                # print()
                 pass
             if attached:
-                _treat.treat_persistent_wrapper(manifests, wrapper, status)
+                _treat.treat_persistent_wrapper(manifests, wrapper, result.status)
 
 
 def _reanalyze_reapplied_synthetic_wrappers(score):
