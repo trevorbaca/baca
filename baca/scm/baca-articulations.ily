@@ -4,7 +4,7 @@
 
 #(append! default-script-alist
    (list
-    `("bacafulldownbow"
+    `(bacafulldownbow
        . (
            (stencil . ,ly:text-interface::print)
            (text . ,baca-full-downbow-markup)
@@ -20,7 +20,7 @@ baca-full-downbow = #(make-articulation 'bacafulldownbow)
 
 #(append! default-script-alist
    (list
-    `("bacastoponstringfulldownbow"
+    `(bacastoponstringfulldownbow
        . (
            (stencil . ,ly:text-interface::print)
            (text . ,baca-stop-on-string-full-downbow-markup)
@@ -37,7 +37,7 @@ baca-stop-on-string-full-downbow = #(
 
 #(append! default-script-alist
    (list
-    `("bacafullupbow"
+    `(bacafullupbow
        . (
            (stencil . ,ly:text-interface::print)
            (text . ,baca-full-upbow-markup)
@@ -53,7 +53,7 @@ baca-full-upbow = #(make-articulation 'bacafullupbow)
 
 #(append! default-script-alist
    (list
-    `("bacastoponstringfullupbow"
+    `(bacastoponstringfullupbow
        . (
            (stencil . ,ly:text-interface::print)
            (text . ,baca-stop-on-string-full-upbow-markup)
@@ -70,7 +70,7 @@ baca-stop-on-string-full-upbow = #(
 
 #(append! default-script-alist
    (list
-    `("bacastoponstring"
+    `(bacastoponstring
        . (
            (stencil . ,ly:text-interface::print)
            (text . ,baca-stop-on-string-markup)
@@ -88,7 +88,7 @@ baca-stop-on-string = #(make-articulation 'bacastoponstring)
 
 #(append! default-script-alist
    (list
-    `("bacacirclebowing"
+    `(bacacirclebowing
        . (
            (stencil . ,ly:text-interface::print)
            (text . ,baca-circle-bowing-markup)
@@ -106,7 +106,7 @@ baca-circle-bowing = #(make-articulation 'bacacirclebowing)
 
 #(append! default-script-alist
    (list
-    `("bacadamp"
+    `(bacadamp
        . (
            (stencil . ,ly:text-interface::print)
            (text . ,baca-damp-markup)
@@ -124,7 +124,7 @@ baca-damp = #(make-articulation 'bacadamp)
 
 #(append! default-script-alist
    (list
-    `("bacadoublediamond"
+    `(bacadoublediamond
        . (
            (stencil . ,ly:text-interface::print)
            (text . ,baca-double-diamond-markup)
@@ -142,7 +142,7 @@ baca-double-diamond = #(make-articulation 'bacadoublediamond)
 
 #(append! default-script-alist
    (list
-    `("bacadoubleflageolet"
+    `(bacadoubleflageolet
        . (
            (stencil . ,ly:text-interface::print)
            (text . ,baca-double-flageolet-markup)
