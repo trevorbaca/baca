@@ -760,6 +760,7 @@ def markup(
 def metronome_mark(
     argument,
     indicator,
+    *tweaks: abjad.Tweak,
     manifests=None,
 ) -> list[abjad.Wrapper]:
     manifests = manifests or {}
@@ -774,6 +775,7 @@ def metronome_mark(
         _classes.Ritardando,
     )
     assert isinstance(indicator_, prototype), repr(indicator_)
+    indicator_ = _tweaks.bundle_tweaks(indicator_, tweaks)
     tag = _tags.function_name(_frame())
     wrappers = []
     for leaf in abjad.select.leaves(argument):

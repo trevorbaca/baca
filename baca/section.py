@@ -2648,7 +2648,11 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
                 add_right_text_to_me = skip
                 break
     for i, skip in enumerate(skips):
-        metronome_mark = abjad.get.indicator(skip, abjad.MetronomeMark)
+        metronome_mark, metronome_mark_tweaks = None, ()
+        wrapper = abjad.get.wrapper(skip, abjad.MetronomeMark)
+        if wrapper is not None:
+            metronome_mark = wrapper.unbundle_indicator()
+            metronome_mark_tweaks = getattr(wrapper.indicator, "tweaks", ())
         metric_modulation = abjad.get.indicator(skip, abjad.MetricModulation)
         accelerando = abjad.get.indicator(skip, _classes.Accelerando)
         ritardando = abjad.get.indicator(skip, _classes.Ritardando)
@@ -2833,7 +2837,7 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
             and parts_metric_modulation_multiplier is not None
         ):
             abjad.attach(
-                start_text_span,
+                abjad.bundle(start_text_span, *metronome_mark_tweaks),
                 skip,
                 context=global_skips.name,
                 deactivate=True,
@@ -2841,7 +2845,7 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
             )
         else:
             abjad.attach(
-                start_text_span,
+                abjad.bundle(start_text_span, *metronome_mark_tweaks),
                 skip,
                 context=global_skips.name,
                 deactivate=True,
@@ -2857,7 +2861,7 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
                 start_text_span, left_text=left_text_
             )
             abjad.attach(
-                start_text_span_,
+                abjad.bundle(start_text_span_, *metronome_mark_tweaks),
                 skip,
                 context=global_skips.name,
                 deactivate=True,
@@ -2870,7 +2874,7 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
                 start_text_span, left_text=stripped_left_text
             )
             abjad.attach(
-                start_text_span_,
+                abjad.bundle(start_text_span_, *metronome_mark_tweaks),
                 skip,
                 context=global_skips.name,
                 deactivate=True,
@@ -2941,7 +2945,7 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
             style=style,
         )
         abjad.attach(
-            start_text_span,
+            abjad.bundle(start_text_span, *metronome_mark_tweaks),
             skip,
             context=global_skips.name,
             deactivate=False,
