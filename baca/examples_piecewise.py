@@ -124,8 +124,8 @@ Examples: piecewise.
                     e'8
                     \baca-effort-ff
                     [
-                    - \tweak to-barline ##t
                     - \tweak circled-tip ##t
+                    - \tweak to-barline ##t
                     \>
                     d''8
                     f'8
@@ -926,15 +926,15 @@ Examples: piecewise.
                         \override DynamicLineSpanner.staff-padding = 4
                         c'2
                         \p
-                        - \tweak to-barline ##t
                         - \tweak stencil #constante-hairpin
+                        - \tweak to-barline ##t
                         \<
                         r4.
                         \!
                         d'2
                         \f
-                        - \tweak to-barline ##t
                         - \tweak stencil #constante-hairpin
+                        - \tweak to-barline ##t
                         \<
                         r4.
                         \!
@@ -1152,11 +1152,11 @@ Examples: piecewise.
                     \override TextSpanner.staff-padding = 4.5
                     e'8
                     [
-                    - \tweak bound-details.right.padding 0.5
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \abjad-dashed-line-with-arrow
                     - \baca-text-spanner-left-text "pont."
                     - \baca-text-spanner-right-text "ord."
+                    - \tweak bound-details.right.padding 0.5
+                    - \tweak bound-details.right.stencil-align-dir-y #center
                     \startTextSpan
                     d''8
                     f'8
@@ -1229,11 +1229,11 @@ Examples: piecewise.
                     \override TextSpanner.staff-padding = 4.5
                     e'8
                     [
-                    - \tweak bound-details.right.padding 1.25
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \abjad-dashed-line-with-hook
                     - \baca-text-spanner-left-text "pont."
                     - \tweak bound-details.right.text \markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75 \general-align #Y #1 \upright ord. }
+                    - \tweak bound-details.right.padding 1.25
+                    - \tweak bound-details.right.stencil-align-dir-y #center
                     \startTextSpan
                     d''8
                     f'8
@@ -1306,11 +1306,11 @@ Examples: piecewise.
                     \override TextSpanner.staff-padding = 4.5
                     e'8
                     [
-                    - \tweak bound-details.right.padding 0.5
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \abjad-solid-line-with-arrow
                     - \baca-text-spanner-left-text "pont."
                     - \baca-text-spanner-right-text "ord."
+                    - \tweak bound-details.right.padding 0.5
+                    - \tweak bound-details.right.stencil-align-dir-y #center
                     \startTextSpan
                     d''8
                     f'8
@@ -1383,11 +1383,11 @@ Examples: piecewise.
                     \override TextSpanner.staff-padding = 4.5
                     e'8
                     [
-                    - \tweak bound-details.right.padding 1.25
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \abjad-solid-line-with-hook
                     - \baca-text-spanner-left-text "pont."
                     - \tweak bound-details.right.text \markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75 \general-align #Y #1 \upright ord. }
+                    - \tweak bound-details.right.padding 1.25
+                    - \tweak bound-details.right.stencil-align-dir-y #center
                     \startTextSpan
                     d''8
                     f'8
@@ -1460,11 +1460,11 @@ Examples: piecewise.
                     \override TextSpanner.staff-padding = 4.5
                     e'8
                     [
-                    - \tweak bound-details.right.padding 0.5
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \abjad-invisible-line
                     - \baca-text-spanner-left-text "pont."
                     - \baca-text-spanner-right-text "ord."
+                    - \tweak bound-details.right.padding 0.5
+                    - \tweak bound-details.right.stencil-align-dir-y #center
                     \startTextSpan
                     d''8
                     f'8
@@ -1574,11 +1574,11 @@ Examples: piecewise.
                     f''8
                     \stopTextSpan
                     [
-                    - \tweak bound-details.right.padding 0.5
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \abjad-invisible-line
                     - \baca-text-spanner-left-text "B"
                     - \baca-text-spanner-right-text "A"
+                    - \tweak bound-details.right.padding 0.5
+                    - \tweak bound-details.right.stencil-align-dir-y #center
                     \startTextSpan
                     e'8
                     d''8
@@ -1670,11 +1670,11 @@ Examples: piecewise.
                     f''8
                     \stopTextSpan
                     [
-                    - \tweak bound-details.right.padding 0.5
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \abjad-solid-line-with-arrow
                     - \baca-text-spanner-left-text "B"
                     - \baca-text-spanner-right-text "A"
+                    - \tweak bound-details.right.padding 0.5
+                    - \tweak bound-details.right.stencil-align-dir-y #center
                     \startTextSpan
                     e'8
                     d''8
@@ -1738,11 +1738,11 @@ Examples: piecewise.
                     \override TextSpanner.staff-padding = 4.5
                     e'8
                     [
-                    - \tweak bound-details.right.padding 0.5
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \abjad-invisible-line
                     - \baca-text-spanner-left-text "A"
                     - \baca-text-spanner-right-text "B"
+                    - \tweak bound-details.right.padding 0.5
+                    - \tweak bound-details.right.stencil-align-dir-y #center
                     \startTextSpan
                     d''8
                     f'8
@@ -1751,11 +1751,11 @@ Examples: piecewise.
                     ]
                     g'8
                     [
-                    - \tweak bound-details.right.padding 0.5
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \abjad-invisible-line
                     - \baca-text-spanner-left-text "B"
                     - \baca-text-spanner-right-text "A"
+                    - \tweak bound-details.right.padding 0.5
+                    - \tweak bound-details.right.stencil-align-dir-y #center
                     \startTextSpan
                     f''8
                     e'8
@@ -1763,11 +1763,11 @@ Examples: piecewise.
                     ]
                     d''8
                     [
-                    - \tweak bound-details.right.padding 0.5
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \abjad-invisible-line
                     - \baca-text-spanner-left-text "A"
                     - \baca-text-spanner-right-text "B"
+                    - \tweak bound-details.right.padding 0.5
+                    - \tweak bound-details.right.stencil-align-dir-y #center
                     \startTextSpan
                     f'8
                     e''8
@@ -1776,11 +1776,11 @@ Examples: piecewise.
                     ]
                     f''8
                     [
-                    - \tweak bound-details.right.padding 0.5
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \abjad-invisible-line
                     - \baca-text-spanner-left-text "B"
                     - \baca-text-spanner-right-text "A"
+                    - \tweak bound-details.right.padding 0.5
+                    - \tweak bound-details.right.stencil-align-dir-y #center
                     \startTextSpan
                     e'8
                     d''8
@@ -1844,11 +1844,11 @@ Examples: piecewise.
                     \override TextSpanner.staff-padding = 4.5
                     e'8
                     [
-                    - \tweak bound-details.right.padding 0.5
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \abjad-solid-line-with-arrow
                     - \baca-text-spanner-left-text "A"
                     - \baca-text-spanner-right-text "B"
+                    - \tweak bound-details.right.padding 0.5
+                    - \tweak bound-details.right.stencil-align-dir-y #center
                     \startTextSpan
                     d''8
                     f'8
@@ -1857,11 +1857,11 @@ Examples: piecewise.
                     ]
                     g'8
                     [
-                    - \tweak bound-details.right.padding 0.5
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \abjad-solid-line-with-arrow
                     - \baca-text-spanner-left-text "B"
                     - \baca-text-spanner-right-text "A"
+                    - \tweak bound-details.right.padding 0.5
+                    - \tweak bound-details.right.stencil-align-dir-y #center
                     \startTextSpan
                     f''8
                     e'8
@@ -1869,11 +1869,11 @@ Examples: piecewise.
                     ]
                     d''8
                     [
-                    - \tweak bound-details.right.padding 0.5
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \abjad-solid-line-with-arrow
                     - \baca-text-spanner-left-text "A"
                     - \baca-text-spanner-right-text "B"
+                    - \tweak bound-details.right.padding 0.5
+                    - \tweak bound-details.right.stencil-align-dir-y #center
                     \startTextSpan
                     f'8
                     e''8
@@ -1882,11 +1882,11 @@ Examples: piecewise.
                     ]
                     f''8
                     [
-                    - \tweak bound-details.right.padding 0.5
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \abjad-solid-line-with-arrow
                     - \baca-text-spanner-left-text "B"
                     - \baca-text-spanner-right-text "A"
+                    - \tweak bound-details.right.padding 0.5
+                    - \tweak bound-details.right.stencil-align-dir-y #center
                     \startTextSpan
                     e'8
                     d''8
@@ -1955,24 +1955,24 @@ Examples: piecewise.
                     {
                         \override TextSpanner.staff-padding = 4.5
                         c'2
-                        - \tweak color #red
                         - \abjad-solid-line-with-arrow
                         - \baca-text-spanner-left-text "P"
+                        - \tweak color #red
                         \startTextSpan
                         d'4.
                         \stopTextSpan
-                        - \tweak color #blue
                         - \abjad-solid-line-with-arrow
                         - \baca-text-spanner-left-text "T"
+                        - \tweak color #blue
                         \startTextSpan
                         e'2
                         \stopTextSpan
-                        - \tweak bound-details.right.padding 0.5
-                        - \tweak bound-details.right.stencil-align-dir-y #center
-                        - \tweak color #green
                         - \abjad-solid-line-with-arrow
                         - \baca-text-spanner-left-text "P"
                         - \baca-text-spanner-right-text "T"
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
+                        - \tweak color #green
                         \startTextSpan
                         f'4.
                         \stopTextSpan
@@ -2147,11 +2147,11 @@ Examples: piecewise.
                     f''8
                     \stopTextSpan
                     [
-                    - \tweak bound-details.right.padding 1.25
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \abjad-solid-line-with-hook
                     - \baca-text-spanner-left-text "B"
                     - \tweak bound-details.right.text \markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75 \general-align #Y #1 \upright A }
+                    - \tweak bound-details.right.padding 1.25
+                    - \tweak bound-details.right.stencil-align-dir-y #center
                     \startTextSpan
                     e'8
                     d''8
@@ -2239,11 +2239,11 @@ Examples: piecewise.
                     \startTextSpan
                     g'2
                     \stopTextSpan
-                    - \tweak bound-details.right.padding 0.5
-                    - \tweak bound-details.right.stencil-align-dir-y #center
                     - \abjad-solid-line-with-arrow
                     - \baca-text-spanner-left-text "T"
                     - \baca-text-spanner-right-text "P"
+                    - \tweak bound-details.right.padding 0.5
+                    - \tweak bound-details.right.stencil-align-dir-y #center
                     \startTextSpan
                     a'4.
                     \stopTextSpan
@@ -2314,11 +2314,11 @@ Examples: piecewise.
                         \startTextSpan
                         e'2
                         \stopTextSpan
-                        - \tweak bound-details.right.padding 0.5
-                        - \tweak bound-details.right.stencil-align-dir-y #center
                         - \abjad-solid-line-with-arrow
                         - \baca-text-spanner-left-text "P"
                         - \baca-text-spanner-right-text "T"
+                        - \tweak bound-details.right.padding 0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         f'4
                         \stopTextSpan
