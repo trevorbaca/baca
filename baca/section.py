@@ -2786,9 +2786,9 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
             string = left_text.string.removeprefix(r"\markup").strip()
             left_text = abjad.Markup(string)
         if has_trend:
-            style = "dashed-line-with-arrow"
+            style = r"\baca-dashed-line-with-arrow"
         else:
-            style = "invisible-line"
+            style = r"\baca-invisible-line"
         if 0 < i:
             stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanMM")
             abjad.attach(

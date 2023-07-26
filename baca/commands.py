@@ -98,13 +98,13 @@ def bcps(
         left_text += rf" #{numerator} #{denominator}"
         if lt is lts[-1]:
             if final_spanner:
-                style = "solid-line-with-arrow"
+                style = r"\baca-solid-line-with-arrow"
             else:
-                style = "invisible-line"
+                style = r"\baca-invisible-line"
         elif not _is_rest(lt.head):
-            style = "solid-line-with-arrow"
+            style = r"\baca-solid-line-with-arrow"
         else:
-            style = "invisible-line"
+            style = r"\baca-invisible-line"
         right_text = None
         if lt.head is add_right_text_to_me:
             numerator, denominator = next_bcp

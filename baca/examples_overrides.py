@@ -1579,7 +1579,7 @@ Examples: overrides.
                         \override TextSpanner.staff-padding = 6
                         \time 3/4
                         c'4
-                        - \abjad-dashed-line-with-arrow
+                        - \baca-dashed-line-with-arrow
                         - \baca-text-spanner-left-text "pont."
                         - \baca-text-spanner-right-text "ord."
                         - \tweak bound-details.right.padding 0.5

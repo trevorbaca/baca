@@ -1152,7 +1152,7 @@ Examples: piecewise.
                     \override TextSpanner.staff-padding = 4.5
                     e'8
                     [
-                    - \abjad-dashed-line-with-arrow
+                    - \baca-dashed-line-with-arrow
                     - \baca-text-spanner-left-text "pont."
                     - \baca-text-spanner-right-text "ord."
                     - \tweak bound-details.right.padding 0.5
@@ -1229,7 +1229,7 @@ Examples: piecewise.
                     \override TextSpanner.staff-padding = 4.5
                     e'8
                     [
-                    - \abjad-dashed-line-with-hook
+                    - \baca-dashed-line-with-hook
                     - \baca-text-spanner-left-text "pont."
                     - \tweak bound-details.right.text \markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75 \general-align #Y #1 \upright ord. }
                     - \tweak bound-details.right.padding 1.25
@@ -1306,7 +1306,7 @@ Examples: piecewise.
                     \override TextSpanner.staff-padding = 4.5
                     e'8
                     [
-                    - \abjad-solid-line-with-arrow
+                    - \baca-solid-line-with-arrow
                     - \baca-text-spanner-left-text "pont."
                     - \baca-text-spanner-right-text "ord."
                     - \tweak bound-details.right.padding 0.5
@@ -1383,7 +1383,7 @@ Examples: piecewise.
                     \override TextSpanner.staff-padding = 4.5
                     e'8
                     [
-                    - \abjad-solid-line-with-hook
+                    - \baca-solid-line-with-hook
                     - \baca-text-spanner-left-text "pont."
                     - \tweak bound-details.right.text \markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75 \general-align #Y #1 \upright ord. }
                     - \tweak bound-details.right.padding 1.25
@@ -1460,7 +1460,7 @@ Examples: piecewise.
                     \override TextSpanner.staff-padding = 4.5
                     e'8
                     [
-                    - \abjad-invisible-line
+                    - \baca-invisible-line
                     - \baca-text-spanner-left-text "pont."
                     - \baca-text-spanner-right-text "ord."
                     - \tweak bound-details.right.padding 0.5
@@ -1545,7 +1545,7 @@ Examples: piecewise.
                     \override TextSpanner.staff-padding = 4.5
                     e'8
                     [
-                    - \abjad-invisible-line
+                    - \baca-invisible-line
                     - \baca-text-spanner-left-text "A"
                     \startTextSpan
                     d''8
@@ -1555,7 +1555,7 @@ Examples: piecewise.
                     g'8
                     \stopTextSpan
                     [
-                    - \abjad-invisible-line
+                    - invisible-line
                     - \baca-text-spanner-left-text "B"
                     \startTextSpan
                     f''8
@@ -1564,7 +1564,7 @@ Examples: piecewise.
                     d''8
                     \stopTextSpan
                     [
-                    - \abjad-invisible-line
+                    - \baca-invisible-line
                     - \baca-text-spanner-left-text "A"
                     \startTextSpan
                     f'8
@@ -1574,7 +1574,7 @@ Examples: piecewise.
                     f''8
                     \stopTextSpan
                     [
-                    - \abjad-invisible-line
+                    - invisible-line
                     - \baca-text-spanner-left-text "B"
                     - \baca-text-spanner-right-text "A"
                     - \tweak bound-details.right.padding 0.5
@@ -1641,7 +1641,7 @@ Examples: piecewise.
                     \override TextSpanner.staff-padding = 4.5
                     e'8
                     [
-                    - \abjad-solid-line-with-arrow
+                    - \baca-solid-line-with-arrow
                     - \baca-text-spanner-left-text "A"
                     \startTextSpan
                     d''8
@@ -1651,7 +1651,7 @@ Examples: piecewise.
                     g'8
                     \stopTextSpan
                     [
-                    - \abjad-solid-line-with-arrow
+                    - \baca-solid-line-with-arrow
                     - \baca-text-spanner-left-text "B"
                     \startTextSpan
                     f''8
@@ -1660,7 +1660,7 @@ Examples: piecewise.
                     d''8
                     \stopTextSpan
                     [
-                    - \abjad-solid-line-with-arrow
+                    - \baca-solid-line-with-arrow
                     - \baca-text-spanner-left-text "A"
                     \startTextSpan
                     f'8
@@ -1670,7 +1670,7 @@ Examples: piecewise.
                     f''8
                     \stopTextSpan
                     [
-                    - \abjad-solid-line-with-arrow
+                    - \baca-solid-line-with-arrow
                     - \baca-text-spanner-left-text "B"
                     - \baca-text-spanner-right-text "A"
                     - \tweak bound-details.right.padding 0.5
@@ -1738,7 +1738,7 @@ Examples: piecewise.
                     \override TextSpanner.staff-padding = 4.5
                     e'8
                     [
-                    - \abjad-invisible-line
+                    - \baca-invisible-line
                     - \baca-text-spanner-left-text "A"
                     - \baca-text-spanner-right-text "B"
                     - \tweak bound-details.right.padding 0.5
@@ -1751,7 +1751,7 @@ Examples: piecewise.
                     ]
                     g'8
                     [
-                    - \abjad-invisible-line
+                    - invisible-line
                     - \baca-text-spanner-left-text "B"
                     - \baca-text-spanner-right-text "A"
                     - \tweak bound-details.right.padding 0.5
@@ -1763,7 +1763,7 @@ Examples: piecewise.
                     ]
                     d''8
                     [
-                    - \abjad-invisible-line
+                    - \baca-invisible-line
                     - \baca-text-spanner-left-text "A"
                     - \baca-text-spanner-right-text "B"
                     - \tweak bound-details.right.padding 0.5
@@ -1776,7 +1776,7 @@ Examples: piecewise.
                     ]
                     f''8
                     [
-                    - \abjad-invisible-line
+                    - invisible-line
                     - \baca-text-spanner-left-text "B"
                     - \baca-text-spanner-right-text "A"
                     - \tweak bound-details.right.padding 0.5
@@ -1844,7 +1844,7 @@ Examples: piecewise.
                     \override TextSpanner.staff-padding = 4.5
                     e'8
                     [
-                    - \abjad-solid-line-with-arrow
+                    - \baca-solid-line-with-arrow
                     - \baca-text-spanner-left-text "A"
                     - \baca-text-spanner-right-text "B"
                     - \tweak bound-details.right.padding 0.5
@@ -1857,7 +1857,7 @@ Examples: piecewise.
                     ]
                     g'8
                     [
-                    - \abjad-solid-line-with-arrow
+                    - \baca-solid-line-with-arrow
                     - \baca-text-spanner-left-text "B"
                     - \baca-text-spanner-right-text "A"
                     - \tweak bound-details.right.padding 0.5
@@ -1869,7 +1869,7 @@ Examples: piecewise.
                     ]
                     d''8
                     [
-                    - \abjad-solid-line-with-arrow
+                    - \baca-solid-line-with-arrow
                     - \baca-text-spanner-left-text "A"
                     - \baca-text-spanner-right-text "B"
                     - \tweak bound-details.right.padding 0.5
@@ -1882,7 +1882,7 @@ Examples: piecewise.
                     ]
                     f''8
                     [
-                    - \abjad-solid-line-with-arrow
+                    - \baca-solid-line-with-arrow
                     - \baca-text-spanner-left-text "B"
                     - \baca-text-spanner-right-text "A"
                     - \tweak bound-details.right.padding 0.5
@@ -1955,19 +1955,19 @@ Examples: piecewise.
                     {
                         \override TextSpanner.staff-padding = 4.5
                         c'2
-                        - \abjad-solid-line-with-arrow
+                        - \baca-solid-line-with-arrow
                         - \baca-text-spanner-left-text "P"
                         - \tweak color #red
                         \startTextSpan
                         d'4.
                         \stopTextSpan
-                        - \abjad-solid-line-with-arrow
+                        - \baca-solid-line-with-arrow
                         - \baca-text-spanner-left-text "T"
                         - \tweak color #blue
                         \startTextSpan
                         e'2
                         \stopTextSpan
-                        - \abjad-solid-line-with-arrow
+                        - \baca-solid-line-with-arrow
                         - \baca-text-spanner-left-text "P"
                         - \baca-text-spanner-right-text "T"
                         - \tweak bound-details.right.padding 0.5
@@ -2035,7 +2035,7 @@ Examples: piecewise.
                     \override TextSpanner.staff-padding = 4.5
                     e'8
                     [
-                    - \abjad-dashed-line-with-hook
+                    - \baca-dashed-line-with-hook
                     - \baca-text-spanner-left-markup \baca-damp-markup
                     \startTextSpan
                     d''8
@@ -2118,7 +2118,7 @@ Examples: piecewise.
                     \override TextSpanner.staff-padding = 4.5
                     e'8
                     [
-                    - \abjad-solid-line-with-hook
+                    - \baca-solid-line-with-hook
                     - \baca-text-spanner-left-text "A"
                     \startTextSpan
                     d''8
@@ -2128,7 +2128,7 @@ Examples: piecewise.
                     g'8
                     \stopTextSpan
                     [
-                    - \abjad-solid-line-with-hook
+                    - \baca-solid-line-with-hook
                     - \baca-text-spanner-left-text "B"
                     \startTextSpan
                     f''8
@@ -2137,7 +2137,7 @@ Examples: piecewise.
                     d''8
                     \stopTextSpan
                     [
-                    - \abjad-solid-line-with-hook
+                    - \baca-solid-line-with-hook
                     - \baca-text-spanner-left-text "A"
                     \startTextSpan
                     f'8
@@ -2147,7 +2147,7 @@ Examples: piecewise.
                     f''8
                     \stopTextSpan
                     [
-                    - \abjad-solid-line-with-hook
+                    - \baca-solid-line-with-hook
                     - \baca-text-spanner-left-text "B"
                     - \tweak bound-details.right.text \markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75 \general-align #Y #1 \upright A }
                     - \tweak bound-details.right.padding 1.25
@@ -2219,27 +2219,27 @@ Examples: piecewise.
                 {
                     \override TextSpanner.staff-padding = 4.5
                     c'2
-                    - \abjad-solid-line-with-arrow
+                    - \baca-solid-line-with-arrow
                     - \baca-text-spanner-left-text "P"
                     \startTextSpan
                     d'4.
                     \stopTextSpan
-                    - \abjad-solid-line-with-arrow
+                    - \baca-solid-line-with-arrow
                     - \baca-text-spanner-left-text "T"
                     \startTextSpan
                     e'2
                     \stopTextSpan
-                    - \abjad-invisible-line
+                    - invisible-line
                     - \baca-text-spanner-left-text "P"
                     \startTextSpan
                     f'4.
                     \stopTextSpan
-                    - \abjad-solid-line-with-arrow
+                    - \baca-solid-line-with-arrow
                     - \baca-text-spanner-left-text "P"
                     \startTextSpan
                     g'2
                     \stopTextSpan
-                    - \abjad-solid-line-with-arrow
+                    - \baca-solid-line-with-arrow
                     - \baca-text-spanner-left-text "T"
                     - \baca-text-spanner-right-text "P"
                     - \tweak bound-details.right.padding 0.5
@@ -2304,17 +2304,17 @@ Examples: piecewise.
                     {
                         \override TextSpanner.staff-padding = 4.5
                         c'2
-                        - \abjad-solid-line-with-arrow
+                        - \baca-solid-line-with-arrow
                         - \baca-text-spanner-left-text "P"
                         \startTextSpan
                         d'4.
                         \stopTextSpan
-                        - \abjad-solid-line-with-arrow
+                        - \baca-solid-line-with-arrow
                         - \baca-text-spanner-left-text "T"
                         \startTextSpan
                         e'2
                         \stopTextSpan
-                        - \abjad-solid-line-with-arrow
+                        - \baca-solid-line-with-arrow
                         - \baca-text-spanner-left-text "P"
                         - \baca-text-spanner-right-text "T"
                         - \tweak bound-details.right.padding 0.5

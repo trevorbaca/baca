@@ -15,5 +15,6 @@
 \include "baca-shared-instrument-markups.ily"
 \include "baca-spanners.ily"
 \include "baca-string-markups.ily"
+\include "baca-text-spanner-line-styles.ily"
 \include "baca-wind-markups.ily"
 \include "morley-dashed-staff-lines.ily"

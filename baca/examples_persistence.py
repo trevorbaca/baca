@@ -2320,7 +2320,7 @@ Persistence.
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        - \abjad-invisible-line
+                        - \baca-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'blue
                         \bacaStartTextSpanMM
                         s1 * 3/8
@@ -2416,7 +2416,7 @@ Persistence.
                         \override TextSpanner.staff-padding = 4
                         \time 3/8
                         s1 * 3/8
-                        - \abjad-invisible-line
+                        - \baca-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'blue
                         \bacaStartTextSpanMM
                         s1 * 3/8
@@ -2507,7 +2507,7 @@ Persistence.
                         \override TextSpanner.staff-padding = 4
                         \time 3/8
                         s1 * 3/8
-                        - \abjad-invisible-line
+                        - \baca-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "90" #'green4
                         \bacaStartTextSpanMM
                         s1 * 3/8
@@ -2590,12 +2590,12 @@ Persistence.
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        - \abjad-invisible-line
+                        - \baca-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'blue
                         \bacaStartTextSpanMM
                         s1 * 3/8
                         \bacaStopTextSpanMM
-                        - \abjad-invisible-line
+                        - \baca-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'DeepPink1
                         \bacaStartTextSpanMM
                         \baca-time-signature-transparent
@@ -2695,7 +2695,7 @@ Persistence.
                         \override TextSpanner.staff-padding = 4
                         \time 3/8
                         s1 * 3/8
-                        - \abjad-invisible-line
+                        - \baca-invisible-line
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'DeepPink1
                         \bacaStartTextSpanMM
                         s1 * 3/8
@@ -3284,7 +3284,7 @@ Persistence.
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        - \abjad-dashed-line-with-arrow
+                        - \baca-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'blue) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
                         s1 * 3/8
@@ -3363,7 +3363,7 @@ Persistence.
                         \override TextSpanner.staff-padding = 4
                         \time 3/8
                         s1 * 3/8
-                        - \abjad-dashed-line-with-arrow
+                        - \baca-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'blue) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
                         s1 * 3/8
@@ -3439,7 +3439,7 @@ Persistence.
                         \override TextSpanner.staff-padding = 4
                         \time 3/8
                         s1 * 3/8
-                        - \abjad-dashed-line-with-arrow
+                        - \baca-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'green4) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
                         s1 * 3/8
@@ -3502,12 +3502,12 @@ Persistence.
                         \baca-time-signature-color #'blue
                         \time 3/8
                         s1 * 3/8
-                        - \abjad-dashed-line-with-arrow
+                        - \baca-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'blue) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
                         s1 * 3/8
                         \bacaStopTextSpanMM
-                        - \abjad-dashed-line-with-arrow
+                        - \baca-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'DeepPink1) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
                         s1 * 3/8
@@ -3589,7 +3589,7 @@ Persistence.
                         \override TextSpanner.staff-padding = 4
                         \time 3/8
                         s1 * 3/8
-                        - \abjad-dashed-line-with-arrow
+                        - \baca-dashed-line-with-arrow
                         - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'DeepPink1) \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
                         s1 * 3/8

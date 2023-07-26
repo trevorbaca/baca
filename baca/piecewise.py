@@ -333,19 +333,19 @@ def _prepare_text_spanner_arguments(
     original_items = items
     if direction == abjad.DOWN:
         shape_to_style = {
-            "=>": "dashed-line-with-arrow",
-            "=|": "dashed-line-with-up-hook",
-            "||": "invisible-line",
-            "->": "solid-line-with-arrow",
-            "-|": "solid-line-with-up-hook",
+            "=>": r"\baca-dashed-line-with-arrow",
+            "=|": r"\baca-dashed-line-with-up-hook",
+            "||": r"\baca-invisible-line",
+            "->": r"\baca-solid-line-with-arrow",
+            "-|": r"\baca-solid-line-with-up-hook",
         }
     else:
         shape_to_style = {
-            "=>": "dashed-line-with-arrow",
-            "=|": "dashed-line-with-hook",
-            "||": "invisible-line",
-            "->": "solid-line-with-arrow",
-            "-|": "solid-line-with-hook",
+            "=>": r"\baca-dashed-line-with-arrow",
+            "=|": r"\baca-dashed-line-with-hook",
+            "||": r"\baca-invisible-line",
+            "->": r"\baca-solid-line-with-arrow",
+            "-|": r"\baca-solid-line-with-hook",
         }
     if isinstance(items, str):
         items_ = []
