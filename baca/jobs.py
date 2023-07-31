@@ -11,87 +11,6 @@ from . import path as _path
 from . import tags as _tags
 
 
-def _run_job(
-    path: pathlib.Path,
-    title: str,
-    *,
-    activate: tuple[typing.Callable | None, str] | None = None,
-    deactivate: tuple[typing.Callable | abjad.Tag | None, str] | None = None,
-    deactivate_first: bool = False,
-    prepend_empty_chord: bool = False,
-    skip_file_name: str = "",
-    undo: bool = False,
-) -> list[str]:
-    assert isinstance(path, pathlib.Path), repr(path)
-    assert isinstance(title, str), repr(title)
-    assert isinstance(activate, tuple | type(None)), repr(activate)
-    if deactivate is not None:
-        assert isinstance(deactivate, tuple), repr(deactivate)
-        assert len(deactivate) == 2, repr(deactivate)
-        if deactivate[0] is not None:
-            assert callable(deactivate[0]) or isinstance(deactivate[0], abjad.Tag)
-    assert isinstance(deactivate_first, bool), repr(deactivate_first)
-    if undo is True:
-        assert activate is not None
-        assert deactivate is None
-        deactivate = activate
-        activate = None
-        title = "Un" + title[0].lower() + title[1:]
-    assert isinstance(path, pathlib.Path), repr(path)
-    messages = []
-    if title is not None:
-        messages.append(title)
-    total_count = 0
-    if deactivate_first is True:
-        if deactivate is not None:
-            assert isinstance(deactivate, tuple)
-            match, name = deactivate
-            if match is not None:
-                result = _path.deactivate(
-                    path,
-                    match,
-                    name=name,
-                    prepend_empty_chord=prepend_empty_chord,
-                    skip_file_name=skip_file_name,
-                )
-                assert result is not None
-                count, skipped, messages_ = result
-                messages.extend(messages_)
-                total_count += count
-    if activate is not None:
-        assert isinstance(activate, tuple)
-        match, name = activate
-        if match is not None:
-            result = _path.activate(
-                path,
-                match,
-                name=name,
-                skip_file_name=skip_file_name,
-            )
-            assert result is not None
-            count, skipped, messages_ = result
-            messages.extend(messages_)
-            total_count += count
-    if deactivate_first is not True:
-        if deactivate is not None:
-            assert isinstance(deactivate, tuple)
-            match, name = deactivate
-            if match is not None:
-                result = _path.deactivate(
-                    path,
-                    match,
-                    name=name,
-                    prepend_empty_chord=prepend_empty_chord,
-                    skip_file_name=skip_file_name,
-                )
-                assert result is not None
-                count, skipped, messages_ = result
-                messages.extend(messages_)
-                total_count += count
-    messages.append("")
-    return messages
-
-
 def color_clefs(path: pathlib.Path, *, undo: bool = False) -> list[str]:
     assert isinstance(path, pathlib.Path)
     messages, name = ["Coloring clefs ..."], "clef color"
@@ -112,35 +31,35 @@ def color_clefs(path: pathlib.Path, *, undo: bool = False) -> list[str]:
 
 def color_dynamics(path: pathlib.Path, *, undo: bool = False) -> list[str]:
     assert isinstance(path, pathlib.Path)
-    name = "dynamic color"
+    messages, name = ["Coloring dynamics ..."], "dynamic color"
 
     def match(tags):
         tags_ = _tags.dynamic_color_tags()
         return bool(set(tags) & set(tags_))
 
-    messages = _run_job(
-        path,
-        "Coloring dynamics ...",
-        activate=(match, name),
-        undo=undo,
-    )
+    if not undo:
+        _, _, messages_ = _path.activate(path, match, name=name)
+    else:
+        _, _, messages_ = _path.deactivate(path, match, name=name)
+    messages.extend(messages_)
+    messages.append("")
     return messages
 
 
 def color_instruments(path: pathlib.Path, *, undo: bool = False) -> list[str]:
     assert isinstance(path, pathlib.Path)
-    name = "instrument color"
+    messages, name = ["Coloring instruments ..."], "instrument color"
 
     def match(tags):
         tags_ = _tags.instrument_color_tags()
         return bool(set(tags) & set(tags_))
 
-    messages = _run_job(
-        path,
-        "Coloring instruments ...",
-        activate=(match, name),
-        undo=undo,
-    )
+    if not undo:
+        _, _, messages_ = _path.activate(path, match, name=name)
+    else:
+        _, _, messages_ = _path.deactivate(path, match, name=name)
+    messages.extend(messages_)
+    messages.append("")
     return messages
 
 
@@ -148,18 +67,20 @@ def color_short_instrument_names(
     path: pathlib.Path, *, undo: bool = False
 ) -> list[str]:
     assert isinstance(path, pathlib.Path)
-    name = "short instrument name color"
+    messages, name = [
+        "Coloring short instrument names ..."
+    ], "short instrument name color"
 
     def match(tags):
         tags_ = _tags.short_instrument_name_color_tags()
         return bool(set(tags) & set(tags_))
 
-    messages = _run_job(
-        path,
-        "Coloring short instrument names ...",
-        activate=(match, name),
-        undo=undo,
-    )
+    if not undo:
+        _, _, messages_ = _path.activate(path, match, name=name)
+    else:
+        _, _, messages_ = _path.deactivate(path, match, name=name)
+    messages.extend(messages_)
+    messages.append("")
     return messages
 
 
@@ -175,88 +96,99 @@ def color_metronome_marks(path: pathlib.Path, undo: bool = False) -> list[str]:
         return bool(set(tags) & set(tags_))
 
     if undo:
-        messages = _run_job(
-            path,
-            "Uncoloring metronome marks ...",
-            activate=(deactivate, "metronome mark color suppression"),
-            deactivate=(activate, "metronome mark color expression"),
+        messages = ["Uncoloring metronome marks ..."]
+        _, _, messages_ = _path.activate(
+            path, deactivate, name="metronome mark color suppression"
         )
+        messages.extend(messages_)
+        _, _, messages_ = _path.deactivate(
+            path, activate, name="metronome mark color expression"
+        )
+        messages.extend(messages_)
     else:
-        messages = _run_job(
-            path,
-            "Coloring metronome marks ...",
-            activate=(activate, "metronome mark color expression"),
-            deactivate=(deactivate, "metronome mark color suppression"),
+        messages = ["Coloring metronome marks ..."]
+        _, _, messages_ = _path.activate(
+            path, activate, name="metronome mark color experssion"
         )
+        messages.extend(messages_)
+        _, _, messages_ = _path.deactivate(
+            path, deactivate, name="metronome mark color suppression"
+        )
+        messages.extend(messages_)
+    messages.append("")
     return messages
 
 
 def color_persistent_indicators(path: pathlib.Path, *, undo: bool = False) -> list[str]:
     assert isinstance(path, pathlib.Path)
     name = "persistent indicator"
-    activate_name = "persistent indicator color expression"
 
     def activate(tags):
         build = "builds" in path.parts
         tags_ = _tags.persistent_indicator_color_expression_tags(build=build)
         return bool(set(tags) & set(tags_))
 
-    deactivate_name = "persistent indicator color suppression"
-
     def deactivate(tags):
         tags_ = _tags.persistent_indicator_color_suppression_tags()
         return bool(set(tags) & set(tags_))
 
     if undo:
-        messages = _run_job(
-            path,
-            f"Uncoloring {name}s ...",
-            activate=(deactivate, deactivate_name),
-            deactivate=(activate, activate_name),
+        messages = [f"Uncoloring {name}s ..."]
+        _, _, messages_ = _path.activate(
+            path, deactivate, name="persistent indicator color suppression"
         )
+        messages.extend(messages_)
+        _, _, messages_ = _path.deactivate(
+            path, activate, name="persistent indicator color expression"
+        )
+        messages.extend(messages_)
     else:
-        messages = _run_job(
-            path,
-            f"Coloring {name}s ...",
-            activate=(activate, activate_name),
-            deactivate=(deactivate, deactivate_name),
+        messages = [f"Coloring {name}s ..."]
+        _, _, messages_ = _path.activate(
+            path, activate, name="persistent indicator color expression"
         )
+        messages.extend(messages_)
+        _, _, messages_ = _path.deactivate(
+            path, deactivate, name="persistent indicator color suppression"
+        )
+        messages.extend(messages_)
+    messages.append("")
     return messages
 
 
 def color_staff_lines(path: pathlib.Path, *, undo: bool = False) -> list[str]:
     assert isinstance(path, pathlib.Path)
-    name = "staff lines color"
+    messages, name = ["Coloring staff lines ..."], "staff lines color"
 
     def match(tags):
         build = "builds" in path.parts
         tags_ = _tags.staff_lines_color_tags(build=build)
         return bool(set(tags) & set(tags_))
 
-    messages = _run_job(
-        path,
-        "Coloring staff lines ...",
-        activate=(match, name),
-        undo=undo,
-    )
+    if not undo:
+        _, _, messages_ = _path.activate(path, match, name=name)
+    else:
+        _, _, messages_ = _path.deactivate(path, match, name=name)
+    messages.extend(messages_)
+    messages.append("")
     return messages
 
 
 def color_time_signatures(path: pathlib.Path, *, undo: bool = False) -> list[str]:
     assert isinstance(path, pathlib.Path)
-    name = "time signature color"
+    messages, name = ["Coloring time signatures ..."], "time signature color"
 
     def match(tags):
         build = "builds" in path.parts
         tags_ = _tags.time_signature_color_tags(build=build)
         return bool(set(tags) & set(tags_))
 
-    messages = _run_job(
-        path,
-        "Coloring time signatures ...",
-        activate=(match, name),
-        undo=undo,
-    )
+    if not undo:
+        _, _, messages_ = _path.activate(path, match, name=name)
+    else:
+        _, _, messages_ = _path.deactivate(path, match, name=name)
+    messages.extend(messages_)
+    messages.append("")
     return messages
 
 
