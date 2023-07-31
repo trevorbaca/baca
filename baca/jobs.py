@@ -1,6 +1,7 @@
 """
 Jobs.
 """
+import os
 import pathlib
 import typing
 
@@ -411,14 +412,20 @@ def handle_shifted_clefs(path: pathlib.Path):
         return _tags.SHIFTED_CLEF in tags
 
     # then deactivate shifted clefs at BOL:
-    if path.name == "_sections":
-        metadata_source = path.parent
+    if "builds" in path.parts:
+        index = path.parts.index("builds")
+        build_parts = path.parts[: index + 2]
+        build_directory = pathlib.Path(os.path.sep.join(build_parts))
+        metadata_source = build_directory
     elif path.is_dir():
         metadata_source = path
     else:
         metadata_source = path.parent
     string = "bol_measure_numbers"
     bol_measure_numbers = _path.get_metadata(metadata_source).get(string)
+    if not bol_measure_numbers:
+        print("WARNING: no BOL metadata found!")
+        print(metadata_source)
     deactivate_function: typing.Callable | None = None
     if bol_measure_numbers:
         bol_measure_numbers = [abjad.Tag(f"MEASURE_{_}") for _ in bol_measure_numbers]
