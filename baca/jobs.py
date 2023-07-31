@@ -94,19 +94,19 @@ def _run_job(
 
 def color_clefs(path: pathlib.Path, *, undo: bool = False) -> list[str]:
     assert isinstance(path, pathlib.Path)
-    name = "clef color"
+    messages, name = ["Coloring clefs ..."], "clef color"
 
     def match(tags):
         build = "builds" in path.parts
         tags_ = _tags.clef_color_tags(build=build)
         return bool(set(tags) & set(tags_))
 
-    messages = _run_job(
-        path,
-        "Coloring clefs ...",
-        activate=(match, name),
-        undo=undo,
-    )
+    if not undo:
+        _, _, messages_ = _path.activate(path, match, name=name)
+    else:
+        _, _, messages_ = _path.deactivate(path, match, name=name)
+    messages.extend(messages_)
+    messages.append("")
     return messages
 
 
@@ -536,6 +536,7 @@ def show_tag(
     undo: bool = False,
 ) -> list[str]:
     assert isinstance(path, pathlib.Path)
+    messages = []
     if match is not None:
         assert callable(match)
     if isinstance(tag, str):
@@ -552,18 +553,20 @@ def show_tag(
             return bool(set(tags) & set(tags_))
 
     if not undo:
-        messages = _run_job(
-            path,
-            f"Showing {name} tags ...",
-            activate=(match, name),
-            skip_file_name=skip_file_name,
+        messages.append(f"Showing {name} tags ...")
+        _, _, messages_ = _path.activate(
+            path, match, name=name, skip_file_name=skip_file_name
         )
+        messages.extend(messages_)
     else:
-        messages = _run_job(
+        messages.append(f"Hiding {name} tags ...")
+        _, _, messages_ = _path.deactivate(
             path,
-            f"Hiding {name} tags ...",
-            deactivate=(match, name),
+            match,
+            name=name,
             prepend_empty_chord=prepend_empty_chord,
             skip_file_name=skip_file_name,
         )
+        messages.extend(messages_)
+    messages.append("")
     return messages
