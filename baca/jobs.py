@@ -287,6 +287,7 @@ def handle_edition_tags(path: pathlib.Path) -> list[str]:
 
     """
     assert isinstance(path, pathlib.Path)
+    messages = ["Handling edition tags ..."]
     if "sections" in str(path):
         my_name = "SECTION"
     elif "-score" in str(path):
@@ -314,6 +315,9 @@ def handle_edition_tags(path: pathlib.Path) -> list[str]:
                 return True
         return False
 
+    _, _, messages_ = _path.deactivate(path, deactivate, name="other-edition")
+    messages.extend(messages_)
+
     def activate(tags):
         for tag in tags:
             if tag in [not_this_edition, not_this_directory]:
@@ -323,13 +327,9 @@ def handle_edition_tags(path: pathlib.Path) -> list[str]:
                 return True
         return bool(set(tags) & set([this_edition, this_directory]))
 
-    messages = _run_job(
-        path,
-        "Handling edition tags ...",
-        activate=(activate, "this-edition"),
-        deactivate=(deactivate, "other-edition"),
-        deactivate_first=True,
-    )
+    _, _, messages_ = _path.activate(path, activate, name="this-edition")
+    messages.extend(messages_)
+    messages.append("")
     return messages
 
 
@@ -338,19 +338,22 @@ def handle_fermata_bar_lines(path: pathlib.Path) -> list[str]:
     Handles fermata bar lines.
     """
     assert isinstance(path, pathlib.Path)
+    messages = ["Handling fermata bar lines ..."]
     if path.name == "_sections":
         path = path.parent
 
     def activate(tags):
         return bool(set(tags) & set([_tags.FERMATA_MEASURE]))
 
-    # then deactivate non-EOL tags:
+    # activate fermata measure bar line adjustment tags ...
+    _, _, messages_ = _path.activate(path, activate, name="bar line adjustment")
+    messages.extend(messages_)
+    # ... then deactivate non-EOL tags
     if path.is_dir():
         metadata_source = path
     else:
         metadata_source = path.parent
     bol_measure_numbers = _path.get_metadata(metadata_source).get("bol_measure_numbers")
-    deactivate_function: typing.Callable | None = None
     if bol_measure_numbers:
         eol_measure_numbers = [_ - 1 for _ in bol_measure_numbers[1:]]
         final_measure_number = _path.get_metadata(metadata_source).get(
@@ -360,38 +363,39 @@ def handle_fermata_bar_lines(path: pathlib.Path) -> list[str]:
             eol_measure_numbers.append(final_measure_number)
         eol_measure_numbers = [abjad.Tag(f"MEASURE_{_}") for _ in eol_measure_numbers]
 
-        def deactivate_function(tags):
+        def deactivate(tags):
             if _tags.FERMATA_MEASURE in tags:
                 if not bool(set(tags) & set(eol_measure_numbers)):
                     return True
             return False
 
-    messages = _run_job(
-        path,
-        "Handling fermata bar lines ...",
-        activate=(activate, "bar line adjustment"),
-        deactivate=(deactivate_function, "EOL fermata bar line"),
-    )
+        _, _, messages_ = _path.deactivate(
+            path, deactivate, name="EOL fermata bar line"
+        )
+        messages.extend(messages_)
+    messages.append("")
     return messages
 
 
 def handle_mol_tags(path: pathlib.Path) -> list[str]:
     assert isinstance(path, pathlib.Path)
+    messages = ["Handling MOL tags ..."]
     if path.name == "_sections":
         path = path.parent
 
-    # activate all middle-of-line tags
+    # activate all middle-of-line tags ...
     def activate(tags):
         tags_ = set([_tags.NOT_MOL, _tags.ONLY_MOL])
         return bool(set(tags) & tags_)
 
-    # then deactivate conflicting middle-of-line tags
+    _, _, messages_ = _path.activate(path, activate, name="MOL")
+    messages.extend(messages_)
+    # ... then deactivate conflicting middle-of-line tags
     if path.is_dir():
         metadata_source = path
     else:
         metadata_source = path.parent
     bol_measure_numbers = _path.get_metadata(metadata_source).get("bol_measure_numbers")
-    deactivate_function: typing.Callable | None = None
     if bol_measure_numbers:
         nonmol_measure_numbers = bol_measure_numbers[:]
         final_measure_number = _path.get_metadata(metadata_source).get(
@@ -403,7 +407,7 @@ def handle_mol_tags(path: pathlib.Path) -> list[str]:
             abjad.Tag(f"MEASURE_{_}") for _ in nonmol_measure_numbers
         ]
 
-        def deactivate_function(tags):
+        def deactivate(tags):
             if _tags.NOT_MOL in tags:
                 if not bool(set(tags) & set(nonmol_measure_numbers)):
                     return True
@@ -412,22 +416,23 @@ def handle_mol_tags(path: pathlib.Path) -> list[str]:
                     return True
             return False
 
-    messages = _run_job(
-        path,
-        "Handling MOL tags ...",
-        activate=(activate, "MOL"),
-        deactivate=(deactivate_function, "conflicting MOL"),
-    )
+        _, _, messages_ = _path.deactivate(path, deactivate, name="conflicting MOL")
+        messages.extend(messages_)
+    messages.append("")
     return messages
 
 
 def handle_shifted_clefs(path: pathlib.Path) -> list[str]:
     assert isinstance(path, pathlib.Path)
+    messages = ["Handling shifted clefs ..."]
 
     def activate(tags):
         return _tags.SHIFTED_CLEF in tags
 
-    # then deactivate shifted clefs at BOL:
+    # set X-extent to false and left-shift measure-initial clefs ...
+    _, _, messages_ = _path.activate(path, activate, name="shifted clef")
+    messages.extend(messages_)
+    # ... then unshift clefs at beginning-of-line
     if "builds" in path.parts:
         index = path.parts.index("builds")
         build_parts = path.parts[: index + 2]
@@ -442,28 +447,25 @@ def handle_shifted_clefs(path: pathlib.Path) -> list[str]:
     if not bol_measure_numbers:
         print("WARNING: no BOL metadata found!")
         print(metadata_source)
-    deactivate_function: typing.Callable | None = None
     if bol_measure_numbers:
         bol_measure_numbers = [abjad.Tag(f"MEASURE_{_}") for _ in bol_measure_numbers]
 
-        def deactivate_function(tags):
+        def deactivate(tags):
             if _tags.SHIFTED_CLEF not in tags:
                 return False
             if any(_ in tags for _ in bol_measure_numbers):
                 return True
             return False
 
-    messages = _run_job(
-        path,
-        "Handling shifted clefs ...",
-        activate=(activate, "shifted clef"),
-        deactivate=(deactivate_function, "BOL clef"),
-    )
+        _, _, messages_ = _path.deactivate(path, deactivate, name="BOL clef")
+        messages.extend(messages_)
+    messages.append("")
     return messages
 
 
 def join_broken_spanners(path: pathlib.Path) -> list[str]:
     assert isinstance(path, pathlib.Path)
+    messages = ["Joining broken spanners ..."]
 
     def activate(tags):
         tags_ = [_tags.SHOW_TO_JOIN_BROKEN_SPANNERS]
@@ -473,12 +475,13 @@ def join_broken_spanners(path: pathlib.Path) -> list[str]:
         tags_ = [_tags.HIDE_TO_JOIN_BROKEN_SPANNERS]
         return bool(set(tags) & set(tags_))
 
-    messages = _run_job(
-        path,
-        "Joining broken spanners ...",
-        activate=(activate, "broken spanner expression"),
-        deactivate=(deactivate, "broken spanner suppression"),
+    _, _, messages_ = _path.activate(path, activate, name="broken spanner expression")
+    messages.extend(messages_)
+    _, _, messages_ = _path.deactivate(
+        path, deactivate, name="broken spanner suppression"
     )
+    messages.extend(messages_)
+    messages.append("")
     return messages
 
 
@@ -497,7 +500,7 @@ def not_topmost(path: pathlib.Path) -> list[str]:
 
 def show_music_annotations(path: pathlib.Path, *, undo: bool = False) -> list[str]:
     assert isinstance(path, pathlib.Path)
-    name = "music annotation"
+    messages, name = [], "music annotation"
 
     def match(tags):
         tags_ = _tags.music_annotation_tags()
@@ -507,20 +510,19 @@ def show_music_annotations(path: pathlib.Path, *, undo: bool = False) -> list[st
         tags_ = [_tags.INVISIBLE_MUSIC_COMMAND]
         return bool(set(tags) & set(tags_))
 
-    if undo:
-        messages = _run_job(
-            path,
-            f"Hiding {name}s ...",
-            activate=(match_2, name),
-            deactivate=(match, name),
-        )
+    if not undo:
+        messages.append(f"Showing {name}s ...")
+        _, _, messages_ = _path.activate(path, match, name=name)
+        messages.extend(messages_)
+        _, _, messages_ = _path.deactivate(path, match_2, name=name)
+        messages.extend(messages_)
     else:
-        messages = _run_job(
-            path,
-            f"Showing {name}s ...",
-            activate=(match, name),
-            deactivate=(match_2, name),
-        )
+        messages.append(f"Hiding {name}s ...")
+        _, _, messages_ = _path.activate(path, match_2, name=name)
+        messages.extend(messages_)
+        _, _, messages_ = _path.deactivate(path, match, name=name)
+        messages.extend(messages_)
+    messages.append("")
     return messages
 
 
@@ -549,19 +551,19 @@ def show_tag(
             tags_ = [tag]
             return bool(set(tags) & set(tags_))
 
-    if undo:
+    if not undo:
         messages = _run_job(
             path,
-            f"Hiding {name} tags ...",
-            deactivate=(match, name),
-            prepend_empty_chord=prepend_empty_chord,
+            f"Showing {name} tags ...",
+            activate=(match, name),
             skip_file_name=skip_file_name,
         )
     else:
         messages = _run_job(
             path,
-            f"Showing {name} tags ...",
-            activate=(match, name),
+            f"Hiding {name} tags ...",
+            deactivate=(match, name),
+            prepend_empty_chord=prepend_empty_chord,
             skip_file_name=skip_file_name,
         )
     return messages
