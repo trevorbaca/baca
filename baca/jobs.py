@@ -484,17 +484,14 @@ def join_broken_spanners(path: pathlib.Path) -> list[str]:
 
 def not_topmost(path: pathlib.Path) -> list[str]:
     assert isinstance(path, pathlib.Path)
-    messages = _run_job(
+    messages = [f"Deactivating {_tags.NOT_TOPMOST.string} ..."]
+    count, skipped, messages_ = _path.deactivate(
         path,
-        f"Deactivating {_tags.NOT_TOPMOST.string} ...",
-        deactivate=(_tags.NOT_TOPMOST, "not topmost"),
+        _tags.NOT_TOPMOST,
+        name="not topmost",
     )
-    """
-    messages = _run_job_new(
-        "Deactivating {_tags.NOT_TOPMOST.string} ...",
-        deactivate=(_tags.NOT_TOPMOST, "not topmost"),
-    )
-    """
+    messages.extend(messages_)
+    messages.append("")
     return messages
 
 
