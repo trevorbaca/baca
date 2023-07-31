@@ -10,7 +10,7 @@ docs:
 	make -C docs/ html
 
 flake_exclude = --exclude=baca/__init__.py
-flake_ignore = --ignore=E203,E266,E501,W503
+flake_ignore = --ignore=E203,E266,E501,F811,W503
 flake_options = --isolated --max-line-length=88
 
 flake8:
