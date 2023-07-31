@@ -12,16 +12,18 @@ from . import tags as _tags
 
 
 def _run_job(
+    path: pathlib.Path,
+    title: str,
     *,
     activate: tuple[typing.Callable | None, str] | None = None,
     deactivate: tuple[typing.Callable | abjad.Tag | None, str] | None = None,
     deactivate_first: bool = False,
-    path: pathlib.Path | None = None,
     prepend_empty_chord: bool = False,
     skip_file_name: str = "",
-    title: str = "",
     undo: bool = False,
 ) -> list[str]:
+    assert isinstance(path, pathlib.Path), repr(path)
+    assert isinstance(title, str), repr(title)
     assert isinstance(activate, tuple | type(None)), repr(activate)
     if deactivate is not None:
         assert isinstance(deactivate, tuple), repr(deactivate)
@@ -29,8 +31,6 @@ def _run_job(
         if deactivate[0] is not None:
             assert callable(deactivate[0]) or isinstance(deactivate[0], abjad.Tag)
     assert isinstance(deactivate_first, bool), repr(deactivate_first)
-    assert isinstance(path, pathlib.Path), repr(path)
-    assert isinstance(title, str), repr(title)
     if undo is True:
         assert activate is not None
         assert deactivate is None
@@ -102,9 +102,9 @@ def color_clefs(path: pathlib.Path, *, undo: bool = False) -> list[str]:
         return bool(set(tags) & set(tags_))
 
     messages = _run_job(
+        path,
+        "Coloring clefs ...",
         activate=(match, name),
-        path=path,
-        title="Coloring clefs ...",
         undo=undo,
     )
     return messages
@@ -119,9 +119,9 @@ def color_dynamics(path: pathlib.Path, *, undo: bool = False) -> list[str]:
         return bool(set(tags) & set(tags_))
 
     messages = _run_job(
+        path,
+        "Coloring dynamics ...",
         activate=(match, name),
-        path=path,
-        title="Coloring dynamics ...",
         undo=undo,
     )
     return messages
@@ -136,9 +136,9 @@ def color_instruments(path: pathlib.Path, *, undo: bool = False) -> list[str]:
         return bool(set(tags) & set(tags_))
 
     messages = _run_job(
+        path,
+        "Coloring instruments ...",
         activate=(match, name),
-        path=path,
-        title="Coloring instruments ...",
         undo=undo,
     )
     return messages
@@ -155,9 +155,9 @@ def color_short_instrument_names(
         return bool(set(tags) & set(tags_))
 
     messages = _run_job(
+        path,
+        "Coloring short instrument names ...",
         activate=(match, name),
-        path=path,
-        title="Coloring short instrument names ...",
         undo=undo,
     )
     return messages
@@ -176,17 +176,17 @@ def color_metronome_marks(path: pathlib.Path, undo: bool = False) -> list[str]:
 
     if undo:
         messages = _run_job(
+            path,
+            "Uncoloring metronome marks ...",
             activate=(deactivate, "metronome mark color suppression"),
             deactivate=(activate, "metronome mark color expression"),
-            path=path,
-            title="Uncoloring metronome marks ...",
         )
     else:
         messages = _run_job(
+            path,
+            "Coloring metronome marks ...",
             activate=(activate, "metronome mark color expression"),
             deactivate=(deactivate, "metronome mark color suppression"),
-            path=path,
-            title="Coloring metronome marks ...",
         )
     return messages
 
@@ -209,17 +209,17 @@ def color_persistent_indicators(path: pathlib.Path, *, undo: bool = False) -> li
 
     if undo:
         messages = _run_job(
+            path,
+            f"Uncoloring {name}s ...",
             activate=(deactivate, deactivate_name),
             deactivate=(activate, activate_name),
-            path=path,
-            title=f"Uncoloring {name}s ...",
         )
     else:
         messages = _run_job(
+            path,
+            f"Coloring {name}s ...",
             activate=(activate, activate_name),
             deactivate=(deactivate, deactivate_name),
-            path=path,
-            title=f"Coloring {name}s ...",
         )
     return messages
 
@@ -234,9 +234,9 @@ def color_staff_lines(path: pathlib.Path, *, undo: bool = False) -> list[str]:
         return bool(set(tags) & set(tags_))
 
     messages = _run_job(
+        path,
+        "Coloring staff lines ...",
         activate=(match, name),
-        path=path,
-        title="Coloring staff lines ...",
         undo=undo,
     )
     return messages
@@ -252,9 +252,9 @@ def color_time_signatures(path: pathlib.Path, *, undo: bool = False) -> list[str
         return bool(set(tags) & set(tags_))
 
     messages = _run_job(
+        path,
+        "Coloring time signatures ...",
         activate=(match, name),
-        path=path,
-        title="Coloring time signatures ...",
         undo=undo,
     )
     return messages
@@ -324,11 +324,11 @@ def handle_edition_tags(path: pathlib.Path) -> list[str]:
         return bool(set(tags) & set([this_edition, this_directory]))
 
     messages = _run_job(
+        path,
+        "Handling edition tags ...",
         activate=(activate, "this-edition"),
         deactivate=(deactivate, "other-edition"),
         deactivate_first=True,
-        path=path,
-        title="Handling edition tags ...",
     )
     return messages
 
@@ -367,10 +367,10 @@ def handle_fermata_bar_lines(path: pathlib.Path) -> list[str]:
             return False
 
     messages = _run_job(
+        path,
+        "Handling fermata bar lines ...",
         activate=(activate, "bar line adjustment"),
         deactivate=(deactivate_function, "EOL fermata bar line"),
-        path=path,
-        title="Handling fermata bar lines ...",
     )
     return messages
 
@@ -413,10 +413,10 @@ def handle_mol_tags(path: pathlib.Path) -> list[str]:
             return False
 
     messages = _run_job(
+        path,
+        "Handling MOL tags ...",
         activate=(activate, "MOL"),
         deactivate=(deactivate_function, "conflicting MOL"),
-        path=path,
-        title="Handling MOL tags ...",
     )
     return messages
 
@@ -454,10 +454,10 @@ def handle_shifted_clefs(path: pathlib.Path) -> list[str]:
             return False
 
     messages = _run_job(
+        path,
+        "Handling shifted clefs ...",
         activate=(activate, "shifted clef"),
         deactivate=(deactivate_function, "BOL clef"),
-        path=path,
-        title="Handling shifted clefs ...",
     )
     return messages
 
@@ -474,10 +474,10 @@ def join_broken_spanners(path: pathlib.Path) -> list[str]:
         return bool(set(tags) & set(tags_))
 
     messages = _run_job(
+        path,
+        "Joining broken spanners ...",
         activate=(activate, "broken spanner expression"),
         deactivate=(deactivate, "broken spanner suppression"),
-        path=path,
-        title="Joining broken spanners ...",
     )
     return messages
 
@@ -485,10 +485,16 @@ def join_broken_spanners(path: pathlib.Path) -> list[str]:
 def not_topmost(path: pathlib.Path) -> list[str]:
     assert isinstance(path, pathlib.Path)
     messages = _run_job(
+        path,
+        f"Deactivating {_tags.NOT_TOPMOST.string} ...",
         deactivate=(_tags.NOT_TOPMOST, "not topmost"),
-        path=path,
-        title=f"Deactivating {_tags.NOT_TOPMOST.string} ...",
     )
+    """
+    messages = _run_job_new(
+        "Deactivating {_tags.NOT_TOPMOST.string} ...",
+        deactivate=(_tags.NOT_TOPMOST, "not topmost"),
+    )
+    """
     return messages
 
 
@@ -506,17 +512,17 @@ def show_music_annotations(path: pathlib.Path, *, undo: bool = False) -> list[st
 
     if undo:
         messages = _run_job(
+            path,
+            f"Hiding {name}s ...",
             activate=(match_2, name),
             deactivate=(match, name),
-            path=path,
-            title=f"Hiding {name}s ...",
         )
     else:
         messages = _run_job(
+            path,
+            f"Showing {name}s ...",
             activate=(match, name),
             deactivate=(match_2, name),
-            path=path,
-            title=f"Showing {name}s ...",
         )
     return messages
 
@@ -548,17 +554,17 @@ def show_tag(
 
     if undo:
         messages = _run_job(
+            path,
+            f"Hiding {name} tags ...",
             deactivate=(match, name),
-            path=path,
             prepend_empty_chord=prepend_empty_chord,
             skip_file_name=skip_file_name,
-            title=f"Hiding {name} tags ...",
         )
     else:
         messages = _run_job(
+            path,
+            f"Showing {name} tags ...",
             activate=(match, name),
-            path=path,
             skip_file_name=skip_file_name,
-            title=f"Showing {name} tags ...",
         )
     return messages
