@@ -21,7 +21,7 @@ def _run_job(
     skip_file_name: str = "",
     title: str = "",
     undo: bool = False,
-):
+) -> list[str]:
     assert isinstance(activate, tuple | type(None)), repr(activate)
     if deactivate is not None:
         assert isinstance(deactivate, tuple), repr(deactivate)
@@ -92,7 +92,8 @@ def _run_job(
     return messages
 
 
-def color_clefs(path: pathlib.Path, *, undo: bool = False):
+def color_clefs(path: pathlib.Path, *, undo: bool = False) -> list[str]:
+    assert isinstance(path, pathlib.Path)
     name = "clef color"
 
     def match(tags):
@@ -109,7 +110,8 @@ def color_clefs(path: pathlib.Path, *, undo: bool = False):
     return messages
 
 
-def color_dynamics(path: pathlib.Path, *, undo: bool = False):
+def color_dynamics(path: pathlib.Path, *, undo: bool = False) -> list[str]:
+    assert isinstance(path, pathlib.Path)
     name = "dynamic color"
 
     def match(tags):
@@ -125,7 +127,8 @@ def color_dynamics(path: pathlib.Path, *, undo: bool = False):
     return messages
 
 
-def color_instruments(path: pathlib.Path, *, undo: bool = False):
+def color_instruments(path: pathlib.Path, *, undo: bool = False) -> list[str]:
+    assert isinstance(path, pathlib.Path)
     name = "instrument color"
 
     def match(tags):
@@ -141,7 +144,10 @@ def color_instruments(path: pathlib.Path, *, undo: bool = False):
     return messages
 
 
-def color_short_instrument_names(path: pathlib.Path, *, undo: bool = False):
+def color_short_instrument_names(
+    path: pathlib.Path, *, undo: bool = False
+) -> list[str]:
+    assert isinstance(path, pathlib.Path)
     name = "short instrument name color"
 
     def match(tags):
@@ -157,7 +163,9 @@ def color_short_instrument_names(path: pathlib.Path, *, undo: bool = False):
     return messages
 
 
-def color_metronome_marks(path: pathlib.Path, undo: bool = False):
+def color_metronome_marks(path: pathlib.Path, undo: bool = False) -> list[str]:
+    assert isinstance(path, pathlib.Path)
+
     def activate(tags):
         tags_ = _tags.metronome_mark_color_expression_tags()
         return bool(set(tags) & set(tags_))
@@ -183,7 +191,8 @@ def color_metronome_marks(path: pathlib.Path, undo: bool = False):
     return messages
 
 
-def color_persistent_indicators(path: pathlib.Path, *, undo: bool = False):
+def color_persistent_indicators(path: pathlib.Path, *, undo: bool = False) -> list[str]:
+    assert isinstance(path, pathlib.Path)
     name = "persistent indicator"
     activate_name = "persistent indicator color expression"
 
@@ -215,7 +224,8 @@ def color_persistent_indicators(path: pathlib.Path, *, undo: bool = False):
     return messages
 
 
-def color_staff_lines(path: pathlib.Path, *, undo: bool = False):
+def color_staff_lines(path: pathlib.Path, *, undo: bool = False) -> list[str]:
+    assert isinstance(path, pathlib.Path)
     name = "staff lines color"
 
     def match(tags):
@@ -232,7 +242,8 @@ def color_staff_lines(path: pathlib.Path, *, undo: bool = False):
     return messages
 
 
-def color_time_signatures(path: pathlib.Path, *, undo: bool = False):
+def color_time_signatures(path: pathlib.Path, *, undo: bool = False) -> list[str]:
+    assert isinstance(path, pathlib.Path)
     name = "time signature color"
 
     def match(tags):
@@ -249,7 +260,7 @@ def color_time_signatures(path: pathlib.Path, *, undo: bool = False):
     return messages
 
 
-def handle_edition_tags(path: pathlib.Path):
+def handle_edition_tags(path: pathlib.Path) -> list[str]:
     """
     Handles edition tags.
 
@@ -275,6 +286,7 @@ def handle_edition_tags(path: pathlib.Path):
         specifically for me.
 
     """
+    assert isinstance(path, pathlib.Path)
     if "sections" in str(path):
         my_name = "SECTION"
     elif "-score" in str(path):
@@ -321,10 +333,11 @@ def handle_edition_tags(path: pathlib.Path):
     return messages
 
 
-def handle_fermata_bar_lines(path: pathlib.Path):
+def handle_fermata_bar_lines(path: pathlib.Path) -> list[str]:
     """
     Handles fermata bar lines.
     """
+    assert isinstance(path, pathlib.Path)
     if path.name == "_sections":
         path = path.parent
 
@@ -362,7 +375,8 @@ def handle_fermata_bar_lines(path: pathlib.Path):
     return messages
 
 
-def handle_mol_tags(path: pathlib.Path):
+def handle_mol_tags(path: pathlib.Path) -> list[str]:
+    assert isinstance(path, pathlib.Path)
     if path.name == "_sections":
         path = path.parent
 
@@ -407,7 +421,9 @@ def handle_mol_tags(path: pathlib.Path):
     return messages
 
 
-def handle_shifted_clefs(path: pathlib.Path):
+def handle_shifted_clefs(path: pathlib.Path) -> list[str]:
+    assert isinstance(path, pathlib.Path)
+
     def activate(tags):
         return _tags.SHIFTED_CLEF in tags
 
@@ -446,7 +462,9 @@ def handle_shifted_clefs(path: pathlib.Path):
     return messages
 
 
-def join_broken_spanners(path: pathlib.Path):
+def join_broken_spanners(path: pathlib.Path) -> list[str]:
+    assert isinstance(path, pathlib.Path)
+
     def activate(tags):
         tags_ = [_tags.SHOW_TO_JOIN_BROKEN_SPANNERS]
         return bool(set(tags) & set(tags_))
@@ -464,7 +482,8 @@ def join_broken_spanners(path: pathlib.Path):
     return messages
 
 
-def not_topmost(path: pathlib.Path):
+def not_topmost(path: pathlib.Path) -> list[str]:
+    assert isinstance(path, pathlib.Path)
     messages = _run_job(
         deactivate=(_tags.NOT_TOPMOST, "not topmost"),
         path=path,
@@ -473,7 +492,8 @@ def not_topmost(path: pathlib.Path):
     return messages
 
 
-def show_music_annotations(path: pathlib.Path, *, undo: bool = False):
+def show_music_annotations(path: pathlib.Path, *, undo: bool = False) -> list[str]:
+    assert isinstance(path, pathlib.Path)
     name = "music annotation"
 
     def match(tags):
@@ -509,7 +529,8 @@ def show_tag(
     prepend_empty_chord: bool = False,
     skip_file_name: str = "",
     undo: bool = False,
-):
+) -> list[str]:
+    assert isinstance(path, pathlib.Path)
     if match is not None:
         assert callable(match)
     if isinstance(tag, str):
