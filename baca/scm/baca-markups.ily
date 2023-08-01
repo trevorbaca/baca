@@ -87,9 +87,7 @@ baca-stop-on-string-full-upbow-markup =
 %%% BOXED ABBREVIATION %%%
 
 baca-boxed-markup = #(
-    define-music-function
-    (text)
-    (markup?)
+    define-music-function (text) (markup?)
     #{
     - \markup
     \override #'(box-padding . 0.5)
@@ -415,15 +413,12 @@ baca-double-flageolet-markup =
 %%% DURATION MULTIPLIER MARKUP %%%
 
 baca-duration-multiplier-markup = #(
-    define-music-function
-    (n d)
-    (string? string?)
+    define-music-function (n d) (string? string?)
     #{
     - \tweak color #(x11-color 'sienna)
     - \tweak extra-offset #'(0 . 3)
     - \markup
-    \with-dimensions-from \null
-    \fraction #n #d
+    \with-dimensions-from \null \fraction #n #d
     #}
     )
 
@@ -458,9 +453,7 @@ baca-null-markup = \markup \null
 %            markup attach direction of up (^) negatively impacts global
 %            skips context vertical spacing
 baca-rehearsal-mark-markup = #(
-    define-music-function
-    (string font-size)
-    (string? number?)
+    define-music-function (string font-size) (string? number?)
     #{
     - \tweak font-size #font-size
     - \markup

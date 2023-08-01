@@ -1,9 +1,7 @@
 %%% SHAPE NOTE-HEADS %%%
 
 baca-black-diamond-note-head = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
+    define-music-function (parser location music) (ly:music?)
     #{
     \once \override NoteHead.style = #'harmonic-black
     $music
@@ -11,9 +9,7 @@ baca-black-diamond-note-head = #(
     )
 
 baca-diamond-note-head = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
+    define-music-function (parser location music) (ly:music?)
     #{
     \once \override NoteHead.style = #'harmonic
     $music
@@ -21,9 +17,7 @@ baca-diamond-note-head = #(
     )
 
 baca-semicircle-note-head = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
+    define-music-function (parser location music) (ly:music?)
     #{
     \once \set shapeNoteStyles = ##(re re re re re re re)
     $music
@@ -31,9 +25,7 @@ baca-semicircle-note-head = #(
     )
 
 baca-square-note-head = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
+    define-music-function (parser location music) (ly:music?)
     #{
     \once \set shapeNoteStyles = ##(la la la la la la la)
     $music
@@ -41,9 +33,7 @@ baca-square-note-head = #(
     )
 
 baca-triangle-note-head = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
+    define-music-function (parser location music) (ly:music?)
     #{
     \once \set shapeNoteStyles = ##(do do do do do do do)
     $music
@@ -53,9 +43,7 @@ baca-triangle-note-head = #(
 %%% SLAP-TONGUE NOTE-HEAD %%%
 
 baca-slap-tongue-note-head = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
+    define-music-function (parser location music) (ly:music?)
     #{
     \override NoteHead #'stencil = #(
         lambda

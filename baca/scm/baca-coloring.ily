@@ -1,9 +1,7 @@
 %%% COLORED MUSIC %%%
 
 baca-mock-coloring = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
+    define-music-function (parser location music) (ly:music?)
     #{
     \abjad-color-music #'firebrick
     $music
@@ -11,9 +9,7 @@ baca-mock-coloring = #(
     )
 
 baca-not-yet-pitched-coloring = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
+    define-music-function (parser location music) (ly:music?)
     #{
     \abjad-color-music #'goldenrod
     $music
@@ -21,9 +17,7 @@ baca-not-yet-pitched-coloring = #(
     )
 
 baca-not-yet-registered-pitch-coloring = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
+    define-music-function (parser location music) (ly:music?)
     #{
     \abjad-color-music #'magenta
     $music
@@ -31,9 +25,7 @@ baca-not-yet-registered-pitch-coloring = #(
     )
 
 baca-octave-coloring = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
+    define-music-function (parser location music) (ly:music?)
     #{
     \abjad-color-music #'red
     $music
@@ -41,9 +33,7 @@ baca-octave-coloring = #(
     )
 
 baca-out-of-range-coloring = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
+    define-music-function (parser location music) (ly:music?)
     #{
     \abjad-color-music #'red
     $music
@@ -51,9 +41,7 @@ baca-out-of-range-coloring = #(
     )
 
 baca-repeat-pitch-class-coloring = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
+    define-music-function (parser location music) (ly:music?)
     #{
     \abjad-color-music #'red
     $music
@@ -63,9 +51,7 @@ baca-repeat-pitch-class-coloring = #(
 %%% COLORED TIME SIGNATURES %%%
 
 baca-time-signature-color = #(
-    define-music-function
-    (parser location color music)
-    (symbol? ly:music?)
+    define-music-function (parser location color music) (symbol? ly:music?)
     #{
     \once \override Score.TimeSignature.color = #(x11-color color)
     $music
@@ -73,9 +59,7 @@ baca-time-signature-color = #(
     )
 
 baca-time-signature-transparent = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
+    define-music-function (parser location music) (ly:music?)
     #{
     \once \override Score.TimeSignature.transparent = ##t
     $music
@@ -85,9 +69,7 @@ baca-time-signature-transparent = #(
 %%% INSTRUMENT COLORING %%%
 
 baca-explicit-instrument-markup = #(
-    define-music-function
-    string
-    (string?)
+    define-music-function string (string?)
     #{
     - \markup
     \with-color #(x11-color 'blue)
@@ -96,9 +78,7 @@ baca-explicit-instrument-markup = #(
     )
 
 baca-reapplied-instrument-markup = #(
-    define-music-function
-    string
-    (string?)
+    define-music-function string (string?)
     #{
     - \markup
     \with-color #(x11-color 'green4)
@@ -107,9 +87,7 @@ baca-reapplied-instrument-markup = #(
     )
 
 baca-redundant-instrument-markup = #(
-    define-music-function
-    string
-    (string?)
+    define-music-function string (string?)
     #{
     - \markup
     \with-color #(x11-color 'DeepPink1)
@@ -120,9 +98,7 @@ baca-redundant-instrument-markup = #(
 %%% SHORT INSTRUMENT NAME COLORING %%%
 
 baca-explicit-short-instrument-name-markup = #(
-    define-music-function
-    string
-    (string?)
+    define-music-function string (string?)
     #{
     - \markup
     \with-color #(x11-color 'blue)
@@ -131,9 +107,7 @@ baca-explicit-short-instrument-name-markup = #(
     )
 
 baca-reapplied-short-instrument-name-markup = #(
-    define-music-function
-    string
-    (string?)
+    define-music-function string (string?)
     #{
     - \markup
     \with-color #(x11-color 'green4)
@@ -142,9 +116,7 @@ baca-reapplied-short-instrument-name-markup = #(
     )
 
 baca-redundant-short-instrument-name-markup = #(
-    define-music-function
-    string
-    (string?)
+    define-music-function string (string?)
     #{
     - \markup
     \with-color #(x11-color 'DeepPink1)

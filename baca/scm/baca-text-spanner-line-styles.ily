@@ -1,7 +1,5 @@
 baca-dashed-line-with-arrow = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
+    define-music-function (parser location music) (ly:music?)
     #{
     - \abjad-dashed-line-with-arrow
     - \tweak Y-extent ##f
@@ -10,9 +8,7 @@ baca-dashed-line-with-arrow = #(
     )
 
 baca-dashed-line-with-hook = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
+    define-music-function (parser location music) (ly:music?)
     #{
     - \abjad-dashed-line-with-hook
     - \tweak Y-extent ##f
@@ -21,9 +17,7 @@ baca-dashed-line-with-hook = #(
     )
 
 baca-dashed-line-with-up-hook = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
+    define-music-function (parser location music) (ly:music?)
     #{
     - \abjad-dashed-line-with-up-hook
     - \tweak Y-extent ##f
@@ -32,9 +26,7 @@ baca-dashed-line-with-up-hook = #(
     )
 
 baca-solid-line-with-arrow = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
+    define-music-function (parser location music) (ly:music?)
     #{
     - \abjad-solid-line-with-arrow
     - \tweak Y-extent ##f
@@ -43,9 +35,7 @@ baca-solid-line-with-arrow = #(
     )
 
 baca-solid-line-with-hook = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
+    define-music-function (parser location music) (ly:music?)
     #{
     - \abjad-solid-line-with-hook
     - \tweak Y-extent ##f
@@ -54,9 +44,7 @@ baca-solid-line-with-hook = #(
     )
 
 baca-solid-line-with-up-hook = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
+    define-music-function (parser location music) (ly:music?)
     #{
     - \abjad-solid-line-with-up-hook
     - \tweak Y-extent ##f
@@ -65,9 +53,7 @@ baca-solid-line-with-up-hook = #(
     )
 
 baca-invisible-line = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
+    define-music-function (parser location music) (ly:music?)
     #{
     - \abjad-invisible-line
     - \tweak Y-extent ##f

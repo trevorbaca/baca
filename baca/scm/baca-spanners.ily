@@ -21,9 +21,7 @@ bacaStopTextSpanBCP = #(
     )
 
 baca-bcp-spanner-left-text = #(
-    define-music-function
-    (parser location n d music)
-    (number? number? ly:music?)
+    define-music-function (parser location n d music) (number? number? ly:music?)
     #{
     \tweak bound-details.left.text \markup \baca-bcp-left #n #d
     $music
@@ -40,9 +38,7 @@ baca-bcp-spanner-left-text = #(
     )
 
 baca-bcp-spanner-right-text = #(
-    define-music-function
-    (parser location n d music)
-    (number? number? ly:music?)
+    define-music-function (parser location n d music) (number? number? ly:music?)
     #{
     \tweak bound-details.right.text \markup \baca-bcp-right #n #d
     $music
@@ -110,9 +106,7 @@ bacaStopTextSpanCT = #(
     )
 
 baca-ct-left-text-tweak = #(
-    define-music-function
-    (parser location left music)
-    (string? ly:music?)
+    define-music-function (parser location left music) (string? ly:music?)
     #{
     \tweak bound-details.left.text \markup \baca-ct-left-markup #left
     $music
@@ -120,9 +114,7 @@ baca-ct-left-text-tweak = #(
     )
 
 baca-fermata-ct-fermata-left-text-tweak = #(
-    define-music-function
-    (parser location left music)
-    (string? ly:music?)
+    define-music-function (parser location left music) (string? ly:music?)
     #{
     \tweak bound-details.left.text \markup \baca-ct-fermata-left-markup #left
     $music
@@ -131,9 +123,7 @@ baca-fermata-ct-fermata-left-text-tweak = #(
 
 
 baca-ct-fermata-left-text-tweak = #(
-    define-music-function
-    (parser location left music)
-    (string? ly:music?)
+    define-music-function (parser location left music) (string? ly:music?)
     #{
     \tweak bound-details.left.text \markup \baca-ct-fermata-left-markup #left
     $music
@@ -169,9 +159,7 @@ baca-ct-fermata-left-text-tweak = #(
     )
 
 baca-ct-right-text-tweak = #(
-    define-music-function
-    (parser location right music)
-    (string? ly:music?)
+    define-music-function (parser location right music) (string? ly:music?)
     #{
     \tweak bound-details.right.text \markup \baca-ct-right-markup #right
     $music
@@ -179,9 +167,7 @@ baca-ct-right-text-tweak = #(
     ) 
 
 baca-fermata-ct-right-text-tweak = #(
-    define-music-function
-    (parser location right music)
-    (string? ly:music?)
+    define-music-function (parser location right music) (string? ly:music?)
     #{
     \tweak bound-details.right.text \markup \baca-fermata-ct-right-markup #right
     $music
@@ -189,9 +175,7 @@ baca-fermata-ct-right-text-tweak = #(
     )
 
 baca-start-ct-left-only = #(
-    define-music-function
-    (parser location left music)
-    (string? ly:music?)
+    define-music-function (parser location left music) (string? ly:music?)
     #{
     - \abjad-invisible-line
     - \baca-ct-left-text-tweak #left
@@ -201,9 +185,7 @@ baca-start-ct-left-only = #(
     )
 
 baca-start-ct-left-only-fermata = #(
-    define-music-function
-    (parser location left music)
-    (string? ly:music?)
+    define-music-function (parser location left music) (string? ly:music?)
     #{
     - \abjad-invisible-line
     - \baca-ct-fermata-left-text-tweak #left
@@ -213,9 +195,7 @@ baca-start-ct-left-only-fermata = #(
     )
 
 baca-start-ct-both = #(
-    define-music-function
-    (parser location left right music)
-    (string? string? ly:music?)
+    define-music-function (parser location left right music) (string? string? ly:music?)
     #{
     - \abjad-invisible-line
     - \baca-ct-left-text-tweak #left
@@ -226,9 +206,7 @@ baca-start-ct-both = #(
     )
 
 baca-start-ct-both-left-fermata = #(
-    define-music-function
-    (parser location left right music)
-    (string? string? ly:music?)
+    define-music-function (parser location left right music) (string? string? ly:music?)
     #{
     - \abjad-invisible-line
     - \baca-ct-fermata-left-text-tweak #left
@@ -239,9 +217,7 @@ baca-start-ct-both-left-fermata = #(
     )
 
 baca-start-ct-both-right-fermata = #(
-    define-music-function
-    (parser location left right music)
-    (string? string? ly:music?)
+    define-music-function (parser location left right music) (string? string? ly:music?)
     #{
     - \abjad-invisible-line
     - \baca-ct-left-text-tweak #left
@@ -318,9 +294,7 @@ bacaStopTextSpanLMN = #(
     )
 
 baca-lmn-left-text-tweak = #(
-    define-music-function
-    (parser location left music)
-    (string? ly:music?)
+    define-music-function (parser location left music) (string? ly:music?)
     #{
     \tweak bound-details.left.text \markup \baca-lmn-left-markup #left
     $music
@@ -342,9 +316,7 @@ baca-lmn-left-text-tweak = #(
     )
 
 baca-lmn-right-text-tweak = #(
-    define-music-function
-    (parser location right music)
-    (string? ly:music?)
+    define-music-function (parser location right music) (string? ly:music?)
     #{
     \tweak bound-details.right.text \markup \baca-lmn-right-markup #right
     $music
@@ -352,9 +324,7 @@ baca-lmn-right-text-tweak = #(
     ) 
 
 baca-start-lmn-left-only = #(
-    define-music-function
-    (parser location left music)
-    (string? ly:music?)
+    define-music-function (parser location left music) (string? ly:music?)
     #{
     - \abjad-invisible-line
     - \baca-lmn-left-text-tweak #left
@@ -364,9 +334,7 @@ baca-start-lmn-left-only = #(
     )
 
 baca-start-lmn-both = #(
-    define-music-function
-    (parser location left right music)
-    (string? string? ly:music?)
+    define-music-function (parser location left right music) (string? string? ly:music?)
     #{
     - \abjad-invisible-line
     - \baca-lmn-left-text-tweak #left
@@ -413,9 +381,7 @@ bacaStopTextSpanMN = #(
     )
 
 baca-mn-left-text-tweak = #(
-    define-music-function
-    (parser location left music)
-    (string? ly:music?)
+    define-music-function (parser location left music) (string? ly:music?)
     #{
     \tweak bound-details.left.text \markup \baca-mn-left-markup #left
     $music
@@ -437,9 +403,7 @@ baca-mn-left-text-tweak = #(
     )
 
 baca-mn-right-text-tweak = #(
-    define-music-function
-    (parser location right music)
-    (string? ly:music?)
+    define-music-function (parser location right music) (string? ly:music?)
     #{
     \tweak bound-details.right.text \markup \baca-mn-right-markup #right
     $music
@@ -447,9 +411,7 @@ baca-mn-right-text-tweak = #(
     ) 
 
 baca-start-mn-left-only = #(
-    define-music-function
-    (parser location left music)
-    (string? ly:music?)
+    define-music-function (parser location left music) (string? ly:music?)
     #{
     - \abjad-invisible-line
     - \baca-mn-left-text-tweak #left
@@ -459,9 +421,7 @@ baca-start-mn-left-only = #(
     )
 
 baca-start-mn-both = #(
-    define-music-function
-    (parser location left right music)
-    (string? string? ly:music?)
+    define-music-function (parser location left right music) (string? string? ly:music?)
     #{
     - \abjad-invisible-line
     - \baca-mn-left-text-tweak #left
@@ -492,9 +452,7 @@ bacaStopTextSpanMM = #(
     )
 
 baca-metronome-mark-spanner-layer = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
+    define-music-function (parser location music) (ly:music?)
     #{
     \tweak extra-offset #'(0 . 6)
     $music
@@ -547,9 +505,7 @@ baca-metronome-mark-spanner-colored-left-text-mixed-number = #(
     )
 
 baca-metronome-mark-spanner-left-markup = #(
-    define-music-function
-    (parser location markup music)
-    (markup? ly:music?)
+    define-music-function (parser location markup music) (markup? ly:music?)
     #{
     \baca-metronome-mark-spanner-layer
     \tweak bound-details.left.text \markup \concat {
@@ -920,9 +876,7 @@ bacaStopTextSpanXNM = #(
     )
 
 baca-xnm-left-text-tweak = #(
-    define-music-function
-    (parser location left music)
-    (string? ly:music?)
+    define-music-function (parser location left music) (string? ly:music?)
     #{
     \tweak bound-details.left.text \markup \baca-xnm-left-markup #left
     $music
@@ -930,9 +884,7 @@ baca-xnm-left-text-tweak = #(
     )
 
 baca-xnm-colored-left-text-tweak = #(
-    define-music-function
-    (parser location left color music)
-    (string? color? ly:music?)
+    define-music-function (parser location left color music) (string? color? ly:music?)
     #{
     \tweak bound-details.left.text \markup
         \baca-xnm-colored-left-markup #left #color
@@ -955,9 +907,7 @@ baca-xnm-colored-left-text-tweak = #(
     )
 
 baca-xnm-right-text-tweak = #(
-    define-music-function
-    (parser location right music)
-    (string? ly:music?)
+    define-music-function (parser location right music) (string? ly:music?)
     #{
     \tweak bound-details.right.text \markup \baca-xnm-right-markup #right
     $music
@@ -965,9 +915,7 @@ baca-xnm-right-text-tweak = #(
     ) 
 
 baca-start-xnm-left-only = #(
-    define-music-function
-    (parser location left music)
-    (string? ly:music?)
+    define-music-function (parser location left music) (string? ly:music?)
     #{
     - \abjad-solid-line-with-hook
     - \baca-xnm-left-text-tweak #left
@@ -978,9 +926,7 @@ baca-start-xnm-left-only = #(
     )
 
 baca-start-xnm-colored-left-only = #(
-    define-music-function
-    (parser location left color music)
-    (string? color? ly:music?)
+    define-music-function (parser location left color music) (string? color? ly:music?)
     #{
     - \abjad-solid-line-with-hook
     - \baca-xnm-colored-left-text-tweak #left #color
@@ -992,9 +938,7 @@ baca-start-xnm-colored-left-only = #(
     )
 
 baca-start-xnm-both = #(
-    define-music-function
-    (parser location left right music)
-    (string? string? ly:music?)
+    define-music-function (parser location left right music) (string? string? ly:music?)
     #{
     - \abjad-solid-line-with-hook
     - \baca-xnm-left-text-tweak #left
@@ -1073,9 +1017,7 @@ bacaStopTextSpanSPM = #(
     )
 
 baca-spm-left-text-tweak = #(
-    define-music-function
-    (parser location left music)
-    (string? ly:music?)
+    define-music-function (parser location left music) (string? ly:music?)
     #{
     \tweak bound-details.left.text \markup \baca-spm-left-markup #left
     $music
@@ -1097,9 +1039,7 @@ baca-spm-left-text-tweak = #(
     )
 
 baca-spm-right-text-tweak = #(
-    define-music-function
-    (parser location right music)
-    (string? ly:music?)
+    define-music-function (parser location right music) (string? ly:music?)
     #{
     \tweak bound-details.right.text \markup \baca-spm-right-markup #right
     $music
@@ -1107,9 +1047,7 @@ baca-spm-right-text-tweak = #(
     ) 
 
 baca-start-spm-left-only = #(
-    define-music-function
-    (parser location left music)
-    (string? ly:music?)
+    define-music-function (parser location left music) (string? ly:music?)
     #{
     - \abjad-invisible-line
     - \baca-spm-left-text-tweak #left
@@ -1119,9 +1057,7 @@ baca-start-spm-left-only = #(
     )
 
 baca-start-spm-both = #(
-    define-music-function
-    (parser location left right music)
-    (string? string? ly:music?)
+    define-music-function (parser location left right music) (string? string? ly:music?)
     #{
     - \abjad-invisible-line
     - \baca-spm-left-text-tweak #left
@@ -1181,9 +1117,7 @@ bacaStopTextSpanSNM = #(
     )
 
 baca-snm-left-text-tweak = #(
-    define-music-function
-    (parser location left music)
-    (string? ly:music?)
+    define-music-function (parser location left music) (string? ly:music?)
     #{
     \tweak bound-details.left.text \markup \baca-snm-left-markup #left
     $music
@@ -1191,9 +1125,7 @@ baca-snm-left-text-tweak = #(
     )
 
 baca-snm-colored-left-text-tweak = #(
-    define-music-function
-    (parser location left color music)
-    (string? color? ly:music?)
+    define-music-function (parser location left color music) (string? color? ly:music?)
     #{
     \tweak bound-details.left.text \markup
         \baca-snm-colored-left-markup #left #color
@@ -1216,9 +1148,7 @@ baca-snm-colored-left-text-tweak = #(
     )
 
 baca-snm-right-text-tweak = #(
-    define-music-function
-    (parser location right music)
-    (string? ly:music?)
+    define-music-function (parser location right music) (string? ly:music?)
     #{
     \tweak bound-details.right.text \markup \baca-snm-right-markup #right
     $music
@@ -1226,9 +1156,7 @@ baca-snm-right-text-tweak = #(
     ) 
 
 baca-start-snm-left-only = #(
-    define-music-function
-    (parser location left music)
-    (string? ly:music?)
+    define-music-function (parser location left music) (string? ly:music?)
     #{
     - \abjad-solid-line-with-hook
     - \baca-snm-left-text-tweak #left
@@ -1239,9 +1167,7 @@ baca-start-snm-left-only = #(
     )
 
 baca-start-snm-colored-left-only = #(
-    define-music-function
-    (parser location left color music)
-    (string? color? ly:music?)
+    define-music-function (parser location left color music) (string? color? ly:music?)
     #{
     - \abjad-solid-line-with-hook
     - \baca-snm-colored-left-text-tweak #left #color
@@ -1253,9 +1179,7 @@ baca-start-snm-colored-left-only = #(
     )
 
 baca-start-snm-both = #(
-    define-music-function
-    (parser location left right music)
-    (string? string? ly:music?)
+    define-music-function (parser location left right music) (string? string? ly:music?)
     #{
     - \abjad-solid-line-with-hook
     - \baca-snm-left-text-tweak #left
@@ -1280,9 +1204,7 @@ bacaStopTextSpanStringNumber = #(
 %%% TEXT SPANNER %%%
 
 baca-text-spanner-left-markup = #(
-    define-music-function
-    (parser location markup music)
-    (markup? ly:music?)
+    define-music-function (parser location markup music) (markup? ly:music?)
     #{
     \tweak bound-details.left.text \markup \concat {
         \upright #markup \hspace #0.5
@@ -1292,9 +1214,7 @@ baca-text-spanner-left-markup = #(
     )
 
 baca-text-spanner-left-text = #(
-    define-music-function
-    (parser location string music)
-    (string? ly:music?)
+    define-music-function (parser location string music) (string? ly:music?)
     #{
     \tweak bound-details.left.text \markup \concat {
         \upright #string \hspace #0.5
@@ -1304,9 +1224,7 @@ baca-text-spanner-left-text = #(
     )
 
 baca-text-spanner-right-markup = #(
-    define-music-function
-    (parser location markup music)
-    (markup? ly:music?)
+    define-music-function (parser location markup music) (markup? ly:music?)
     #{
     \tweak bound-details.right.text \markup \upright #markup
     $music
@@ -1314,9 +1232,7 @@ baca-text-spanner-right-markup = #(
     )
 
 baca-text-spanner-right-text = #(
-    define-music-function
-    (parser location string music)
-    (string? ly:music?)
+    define-music-function (parser location string music) (string? ly:music?)
     #{
     \tweak bound-details.right.text \markup \upright #string
     $music
