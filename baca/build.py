@@ -223,14 +223,14 @@ def _handle_section_tags(section_directory):
         text = baca.tags.handle_edition_tags(
             text, messages, section_directory.name, "SECTION"
         )
+        text = baca.tags.handle_fermata_bar_lines(
+            text, messages, bol_measure_numbers, final_measure_number
+        )
+        text = baca.tags.handle_shifted_clefs(text, messages, bol_measure_numbers)
+        text = baca.tags.handle_mol_tags(
+            text, messages, bol_measure_numbers, final_measure_number
+        )
         path.write_text(text)
-        baca.tags.handle_fermata_bar_lines(
-            path, messages, bol_measure_numbers, final_measure_number
-        )
-        baca.tags.handle_shifted_clefs(path, messages, bol_measure_numbers)
-        baca.tags.handle_mol_tags(
-            path, messages, bol_measure_numbers, final_measure_number
-        )
         print_file_handling(
             f"Appending {baca.path.trim(_tags_file)} ...", log_only=True
         )
@@ -695,7 +695,10 @@ def color_persistent_indicators(file, *, undo=False):
     baca.tags.color_instruments(file, messages, undo=undo)
     baca.tags.color_short_instrument_names(file, messages, undo=undo)
     baca.tags.color_metronome_marks(file, messages, undo=undo)
-    baca.tags.color_persistent_indicators(file, messages, undo=undo)
+    text = file.read_text()
+    build = "builds" in file.parts
+    text = baca.tags.color_persistent_indicators(text, messages, build, undo=undo)
+    file.write_text(text)
     baca.tags.color_staff_lines(file, messages, undo=undo)
     baca.tags.color_time_signatures(file, messages, undo=undo)
     return messages
@@ -762,17 +765,18 @@ def handle_build_tags(_sections_directory):
             my_name = "PARTS"
         text = file.read_text()
         text = baca.tags.handle_edition_tags(text, messages, "_sections", my_name)
+        text = baca.tags.handle_fermata_bar_lines(
+            text, messages, bol_measure_numbers, final_measure_number
+        )
+        text = baca.tags.handle_shifted_clefs(text, messages, bol_measure_numbers)
+        text = baca.tags.handle_mol_tags(
+            text, messages, bol_measure_numbers, final_measure_number
+        )
+        build = "builds" in file.parts
+        text = baca.tags.color_persistent_indicators(text, messages, build, undo=True)
+        text = baca.tags.show_music_annotations(text, messages, undo=True)
+        text = baca.tags.join_broken_spanners(text, messages)
         file.write_text(text)
-        baca.tags.handle_fermata_bar_lines(
-            file, messages, bol_measure_numbers, final_measure_number
-        )
-        baca.tags.handle_shifted_clefs(file, messages, bol_measure_numbers)
-        baca.tags.handle_mol_tags(
-            file, messages, bol_measure_numbers, final_measure_number
-        )
-        baca.tags.color_persistent_indicators(file, messages, undo=True)
-        baca.tags.show_music_annotations(file, messages, undo=True)
-        baca.tags.join_broken_spanners(file, messages)
         baca.tags.show_tag(
             file,
             "left-broken-should-deactivate",
@@ -1252,7 +1256,9 @@ def show_annotations(file, *, undo=False):
     baca.tags.show_tag(file, baca.tags.LOCAL_MEASURE_NUMBER, messages, undo=undo)
     baca.tags.show_tag(file, baca.tags.MEASURE_NUMBER, messages, undo=undo)
     baca.tags.show_tag(file, baca.tags.MOCK_COLORING, messages, undo=undo)
-    baca.tags.show_music_annotations(file, messages, undo=undo)
+    text = file.read_text()
+    text = baca.tags.show_music_annotations(text, messages, undo=undo)
+    file.write_text(text)
     baca.tags.show_tag(file, baca.tags.NOT_YET_PITCHED_COLORING, messages, undo=undo)
     baca.tags.show_tag(file, baca.tags.RHYTHM_ANNOTATION_SPANNER, messages, undo=undo)
     baca.tags.show_tag(file, "spacing", messages, match=_spacing, undo=undo)

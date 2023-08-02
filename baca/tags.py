@@ -1,7 +1,6 @@
 """
 Tags.
 """
-import os
 import pathlib
 import typing
 
@@ -1035,13 +1034,12 @@ def color_metronome_marks(
 
 
 def color_persistent_indicators(
-    path: pathlib.Path, messages: list[str], *, undo: bool = False
-) -> None:
-    assert isinstance(path, pathlib.Path)
+    text: str, messages: list[str], build: bool, *, undo: bool = False
+) -> str:
+    assert isinstance(text, str), repr(text)
     name = "persistent indicator"
 
     def _activate(tags):
-        build = "builds" in path.parts
         tags_ = persistent_indicator_color_expression_tags(build=build)
         return bool(set(tags) & set(tags_))
 
@@ -1051,21 +1049,22 @@ def color_persistent_indicators(
 
     if undo:
         messages.append(f"Uncoloring {name}s ...")
-        _activate_tags(
-            path, _deactivate, "persistent indicator color suppression", messages
+        text = _activate_tags(
+            text, _deactivate, "persistent indicator color suppression", messages
         )
-        _deactivate_tags(
-            path, _activate, "persistent indicator color expression", messages
+        text = _deactivate_tags(
+            text, _activate, "persistent indicator color expression", messages
         )
     else:
         messages.append(f"Coloring {name}s ...")
-        _activate_tags(
-            path, _activate, "persistent indicator color expression", messages
+        text = _activate_tags(
+            text, _activate, "persistent indicator color expression", messages
         )
-        _deactivate_tags(
-            path, _deactivate, "persistent indicator color suppression", messages
+        text = _deactivate_tags(
+            text, _deactivate, "persistent indicator color suppression", messages
         )
     messages.append("")
+    return text
 
 
 def color_staff_lines(
@@ -1171,19 +1170,18 @@ def handle_edition_tags(
 
 
 def handle_fermata_bar_lines(
-    path: pathlib.Path,
+    text: str,
     messages: list[str],
     bol_measure_numbers: list | None,
     final_measure_number: int | None,
-) -> None:
-    assert isinstance(path, pathlib.Path)
+) -> str:
     messages.append("Handling fermata bar lines ...")
 
     def _activate(tags):
         return bool(set(tags) & set([FERMATA_MEASURE]))
 
     # activate fermata measure bar line adjustment tags ...
-    _activate_tags(path, _activate, "bar line adjustment", messages)
+    text = _activate_tags(text, _activate, "bar line adjustment", messages)
     # ... then deactivate non-EOL tags
     if bol_measure_numbers:
         eol_measure_numbers = [_ - 1 for _ in bol_measure_numbers[1:]]
@@ -1197,17 +1195,17 @@ def handle_fermata_bar_lines(
                     return True
             return False
 
-        _deactivate_tags(path, _deactivate, "EOL fermata bar line", messages)
+        text = _deactivate_tags(text, _deactivate, "EOL fermata bar line", messages)
     messages.append("")
+    return text
 
 
 def handle_mol_tags(
-    path: pathlib.Path,
+    text: str,
     messages: list[str],
     bol_measure_numbers: list | None,
     final_measure_number: int | None,
-) -> None:
-    assert isinstance(path, pathlib.Path)
+) -> str:
     messages.append("Handling MOL tags ...")
 
     # activate all middle-of-line tags ...
@@ -1215,7 +1213,7 @@ def handle_mol_tags(
         tags_ = set([NOT_MOL, ONLY_MOL])
         return bool(set(tags) & tags_)
 
-    _activate_tags(path, _activate, "MOL", messages)
+    text = _activate_tags(text, _activate, "MOL", messages)
     # ... then deactivate conflicting middle-of-line tags
     if bol_measure_numbers:
         nonmol_measure_numbers = bol_measure_numbers[:]
@@ -1234,34 +1232,22 @@ def handle_mol_tags(
                     return True
             return False
 
-        _deactivate_tags(path, _deactivate, "conflicting MOL", messages)
+        text = _deactivate_tags(text, _deactivate, "conflicting MOL", messages)
     messages.append("")
+    return text
 
 
 def handle_shifted_clefs(
-    path: pathlib.Path, messages: list[str], bol_measure_numbers: list | None
-) -> None:
-    assert isinstance(path, pathlib.Path)
+    text: str, messages: list[str], bol_measure_numbers: list | None
+) -> str:
     messages.append("Handling shifted clefs ...")
 
     def _activate(tags):
         return SHIFTED_CLEF in tags
 
     # set X-extent to false and left-shift measure-initial clefs ...
-    _activate_tags(path, _activate, "shifted clef", messages)
+    text = _activate_tags(text, _activate, "shifted clef", messages)
     # ... then unshift clefs at beginning-of-line
-    if "builds" in path.parts:
-        index = path.parts.index("builds")
-        build_parts = path.parts[: index + 2]
-        build_directory = pathlib.Path(os.path.sep.join(build_parts))
-        metadata_source = build_directory
-    elif path.is_dir():
-        metadata_source = path
-    else:
-        metadata_source = path.parent
-    if not bol_measure_numbers:
-        print("WARNING: no BOL metadata found!")
-        print(metadata_source)
     if bol_measure_numbers:
         bol_measure_numbers = [abjad.Tag(f"MEASURE_{_}") for _ in bol_measure_numbers]
 
@@ -1272,12 +1258,12 @@ def handle_shifted_clefs(
                 return True
             return False
 
-        _deactivate_tags(path, _deactivate, "BOL clef", messages)
+        text = _deactivate_tags(text, _deactivate, "BOL clef", messages)
     messages.append("")
+    return text
 
 
-def join_broken_spanners(path: pathlib.Path, messages: list[str]) -> None:
-    assert isinstance(path, pathlib.Path)
+def join_broken_spanners(text: str, messages: list[str]) -> str:
     messages.append("Joining broken spanners ...")
 
     def _activate(tags):
@@ -1288,9 +1274,10 @@ def join_broken_spanners(path: pathlib.Path, messages: list[str]) -> None:
         tags_ = [HIDE_TO_JOIN_BROKEN_SPANNERS]
         return bool(set(tags) & set(tags_))
 
-    _activate_tags(path, _activate, "broken spanner expression", messages)
-    _deactivate_tags(path, _deactivate, "broken spanner suppression", messages)
+    text = _activate_tags(text, _activate, "broken spanner expression", messages)
+    text = _deactivate_tags(text, _deactivate, "broken spanner suppression", messages)
     messages.append("")
+    return text
 
 
 def not_topmost(path: pathlib.Path) -> list[str]:
@@ -1307,9 +1294,8 @@ def not_topmost(path: pathlib.Path) -> list[str]:
 
 
 def show_music_annotations(
-    path: pathlib.Path, messages: list[str], *, undo: bool = False
-) -> None:
-    assert isinstance(path, pathlib.Path)
+    text: str, messages: list[str], *, undo: bool = False
+) -> str:
     name = "music annotation"
 
     def match(tags):
@@ -1322,13 +1308,14 @@ def show_music_annotations(
 
     if not undo:
         messages.append(f"Showing {name}s ...")
-        _activate_tags(path, match, name, messages)
-        _deactivate_tags(path, match_2, name, messages)
+        text = _activate_tags(text, match, name, messages)
+        text = _deactivate_tags(text, match_2, name, messages)
     else:
         messages.append(f"Hiding {name}s ...")
-        _activate_tags(path, match_2, name, messages)
-        _deactivate_tags(path, match, name, messages)
+        text = _activate_tags(text, match_2, name, messages)
+        text = _deactivate_tags(text, match, name, messages)
     messages.append("")
+    return text
 
 
 def show_tag(
