@@ -1,7 +1,6 @@
 """
 Tags.
 """
-import pathlib
 import typing
 
 import abjad
@@ -862,7 +861,7 @@ def wrappers(wrappers: list[abjad.Wrapper], *tags: abjad.Tag):
 
 
 def _activate_tags(
-    path: pathlib.Path | str,
+    text: str,
     match: typing.Callable,
     name: str,
     messages: list,
@@ -870,14 +869,10 @@ def _activate_tags(
     prepend_empty_chord: bool = False,
     undo: bool = False,
 ):
-    assert isinstance(path, pathlib.Path | str), repr(path)
+    assert isinstance(text, str), repr(text)
     assert callable(match), repr(match)
     assert isinstance(messages, list), repr(messages)
     assert isinstance(name, str), repr(name)
-    if isinstance(path, pathlib.Path):
-        text = path.read_text()
-    else:
-        text = path
     if undo:
         text, count, skipped = abjad.deactivate(
             text,
@@ -910,16 +905,11 @@ def _activate_tags(
     new_messages = [abjad.string.capitalize_start(_) + " ..." for _ in new_messages]
     if messages is not None:
         messages.extend(new_messages)
-    if isinstance(path, pathlib.Path):
-        path.write_text(text)
-        return new_messages
-    else:
-        assert isinstance(path, str)
-        return text
+    return text
 
 
 def _deactivate_tags(
-    path: str | pathlib.Path,
+    text: str,
     match: typing.Callable,
     name: str,
     messages: list,
@@ -927,7 +917,7 @@ def _deactivate_tags(
     prepend_empty_chord: bool = False,
 ):
     return _activate_tags(
-        path,
+        text,
         match,
         name,
         messages=messages,
@@ -943,7 +933,6 @@ def color_clefs(
     name = "clef color"
 
     def match(tags):
-        # build = "builds" in path.parts
         tags_ = clef_color_tags(build=build)
         return bool(set(tags) & set(tags_))
 
@@ -1075,7 +1064,6 @@ def color_staff_lines(
     name = "staff lines color"
 
     def match(tags):
-        # build = "builds" in path.parts
         tags_ = staff_lines_color_tags(build=build)
         return bool(set(tags) & set(tags_))
 
@@ -1094,7 +1082,6 @@ def color_time_signatures(
     name = "time signature color"
 
     def match(tags):
-        # build = "builds" in path.parts
         tags_ = time_signature_color_tags(build=build)
         return bool(set(tags) & set(tags_))
 
