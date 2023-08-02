@@ -16,7 +16,7 @@ from . import select
 from . import sequence
 from . import typings
 from .enums import colors, enums
-from .accumulator import (
+from .anchor import (
     anchor,
     anchor_after,
     anchor_to_figure,
