@@ -8,7 +8,6 @@ import abjad
 from . import array
 from . import build
 from . import math
-from . import jobs
 from . import path
 from . import score
 from . import section
