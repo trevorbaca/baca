@@ -17,6 +17,7 @@ import abjad
 from . import build as _build
 from . import classes as _classes
 from . import docs as _docs
+from . import helpers as _helpers
 from . import layout as _layout
 from . import lilypond as _lilypond
 from . import memento as _memento
@@ -188,7 +189,7 @@ def _attach_nonfirst_empty_start_bar(global_skips):
     abjad.attach(
         literal,
         first_skip,
-        tag=tag.append(_tags.function_name(_frame())),
+        tag=tag.append(_helpers.function_name(_frame())),
     )
 
 
@@ -197,7 +198,7 @@ def _attach_nonfirst_empty_start_bar(global_skips):
 # because of this LilyPond incorrectly prints accidentals in front of some
 # repeat-tied notes; this function works around LilyPond's behavior
 def _attach_shadow_tie_indicators(score):
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     for plt in _select.plts(score):
         if len(plt) == 1:
             continue
@@ -518,7 +519,7 @@ def _clone_section_initial_short_instrument_name(score):
         abjad.attach(
             instrument_name,
             first_leaf,
-            tag=_tags.function_name(_frame()),
+            tag=_helpers.function_name(_frame()),
         )
 
 
@@ -710,7 +711,7 @@ def _collect_persistent_indicators(
 
 def _color_mock_pitch(score):
     indicator = _enums.MOCK
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.MOCK_COLORING)
     leaves = []
     for pleaf in abjad.iterate.leaves(score, pitched=True):
@@ -724,7 +725,7 @@ def _color_mock_pitch(score):
 
 def _color_not_yet_pitched(score):
     indicator = _enums.NOT_YET_PITCHED
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.NOT_YET_PITCHED_COLORING)
     leaves = []
     for pleaf in abjad.iterate.leaves(score, pitched=True):
@@ -743,7 +744,7 @@ def _color_not_yet_pitched(score):
 
 def _color_not_yet_registered(score):
     indicator = _enums.NOT_YET_REGISTERED
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.NOT_YET_REGISTERED_COLORING)
     for pleaf in abjad.iterate.leaves(score, pitched=True):
         if not abjad.get.has_indicator(pleaf, indicator):
@@ -769,7 +770,7 @@ def _comment_measure_numbers(first_measure_number, offset_to_measure_number, sco
             local_measure_number += 1
             string = f"% [{context.name} measure {local_measure_number}]"
         literal = abjad.LilyPondLiteral(string, site="absolute_before")
-        abjad.attach(literal, leaf, tag=_tags.function_name(_frame()))
+        abjad.attach(literal, leaf, tag=_helpers.function_name(_frame()))
 
 
 def _error_on_not_yet_pitched(score):
@@ -1001,7 +1002,7 @@ def _label_clock_time(
                 skip,
                 context="GlobalSkips",
                 deactivate=True,
-                tag=tag.append(_tags.function_name(_frame())),
+                tag=tag.append(_helpers.function_name(_frame())),
             )
         if 0 < measure_index:
             tag = _tags.CLOCK_TIME
@@ -1011,7 +1012,7 @@ def _label_clock_time(
                 skip,
                 context="GlobalSkips",
                 deactivate=True,
-                tag=tag.append(_tags.function_name(_frame())),
+                tag=tag.append(_helpers.function_name(_frame())),
             )
     return types.SimpleNamespace(
         duration_clock_string=times.duration_clock_string,
@@ -1021,7 +1022,7 @@ def _label_clock_time(
 
 
 def _label_duration_multipliers(score):
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.DURATION_MULTIPLIER)
     already_labeled = set()
     for voice in abjad.iterate.components(score, abjad.Voice):
@@ -1057,7 +1058,7 @@ def _label_measure_numbers(first_measure_number, global_skips):
         measure_number = first_measure_number + measure_index
         if measure_index < total - 1:
             tag = _tags.LOCAL_MEASURE_NUMBER
-            tag = tag.append(_tags.function_name(_frame()))
+            tag = tag.append(_helpers.function_name(_frame()))
             string = r"- \baca-start-lmn-left-only"
             string += f' "{local_measure_number}"'
             start_text_span = abjad.StartTextSpan(
@@ -1071,7 +1072,7 @@ def _label_measure_numbers(first_measure_number, global_skips):
                 tag=tag,
             )
             tag = _tags.MEASURE_NUMBER
-            tag = tag.append(_tags.function_name(_frame()))
+            tag = tag.append(_helpers.function_name(_frame()))
             string = r"- \baca-start-mn-left-only"
             string += f' "{measure_number}"'
             start_text_span = abjad.StartTextSpan(
@@ -1086,7 +1087,7 @@ def _label_measure_numbers(first_measure_number, global_skips):
             )
         if 0 < measure_index:
             tag = _tags.LOCAL_MEASURE_NUMBER
-            tag = tag.append(_tags.function_name(_frame()))
+            tag = tag.append(_helpers.function_name(_frame()))
             stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanLMN")
             abjad.attach(
                 stop_text_span,
@@ -1096,7 +1097,7 @@ def _label_measure_numbers(first_measure_number, global_skips):
                 tag=tag,
             )
             tag = _tags.MEASURE_NUMBER
-            tag = tag.append(_tags.function_name(_frame()))
+            tag = tag.append(_helpers.function_name(_frame()))
             stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanMN")
             abjad.attach(
                 stop_text_span,
@@ -1118,7 +1119,7 @@ def _magnify_staves(magnify_staves, score):
     numerator, denominator = abjad.duration.pair(multiplier)
     string = rf"\magnifyStaff #{numerator}/{denominator}"
     tag = abjad.Tag(tag)
-    tag = tag.append(_tags.function_name(_frame()))
+    tag = tag.append(_helpers.function_name(_frame()))
     for staff in abjad.iterate.components(score, abjad.Staff):
         first_leaf = abjad.get.leaf(staff, 0)
         assert first_leaf is not None
@@ -1144,7 +1145,7 @@ def _make_global_rests(global_rests, time_signatures):
         rest = abjad.MultimeasureRest(
             abjad.Duration(1),
             multiplier=time_signature.pair,
-            tag=_tags.function_name(_frame(), n=1),
+            tag=_helpers.function_name(_frame(), n=1),
         )
         rests.append(rest)
     global_rests.extend(rests)
@@ -1160,17 +1161,17 @@ def _make_global_skips(
         skip = abjad.Skip(
             1,
             multiplier=time_signature.pair,
-            tag=_tags.function_name(_frame(), n=1),
+            tag=_helpers.function_name(_frame(), n=1),
         )
         global_skips.append(skip)
         abjad.attach(
             time_signature,
             skip,
             context="Score",
-            tag=_tags.function_name(_frame(), n=2),
+            tag=_helpers.function_name(_frame(), n=2),
         )
     if append_anchor_skip:
-        tag = _tags.function_name(_frame(), n=3)
+        tag = _helpers.function_name(_frame(), n=3)
         tag = tag.append(_tags.ANCHOR_SKIP)
         skip = abjad.Skip(1, multiplier=(1, 4), tag=tag)
         abjad.attach(_enums.ANCHOR_SKIP, skip)
@@ -1300,7 +1301,7 @@ def _reapply_persistent_indicators(
                     continue
                 assert result.status == "reapplied", repr(result.status)
                 wrapper = abjad.get.wrapper(result.leaf, abjad.TimeSignature)
-                function_name = _tags.function_name(_frame(), n=1)
+                function_name = _helpers.function_name(_frame(), n=1)
                 result.edition = result.edition.append(function_name)
                 wrapper.tag = wrapper.tag.append(result.edition)
                 _treat.treat_persistent_wrapper(manifests, wrapper, result.status)
@@ -1312,7 +1313,7 @@ def _reapply_persistent_indicators(
                 _classes.Ritardando,
             )
             if isinstance(result.previous_indicator, tempo_prototype):
-                function_name = _tags.function_name(_frame(), n=2)
+                function_name = _helpers.function_name(_frame(), n=2)
                 if result.status == "reapplied":
                     wrapper = abjad.attach(
                         result.previous_indicator,
@@ -1338,7 +1339,7 @@ def _reapply_persistent_indicators(
                     _treat.treat_persistent_wrapper(manifests, wrapper, result.status)
                 continue
             attached = False
-            function_name = _tags.function_name(_frame(), n=3)
+            function_name = _helpers.function_name(_frame(), n=3)
             tag = result.edition.append(function_name)
             if isinstance(result.previous_indicator, abjad.ShortInstrumentName):
                 if _tags.NOT_PARTS.string not in tag.string:
@@ -1364,7 +1365,7 @@ def _reapply_persistent_indicators(
 
 
 def _reanalyze_reapplied_synthetic_wrappers(score):
-    function_name = _tags.function_name(_frame())
+    function_name = _helpers.function_name(_frame())
     for leaf in abjad.iterate.leaves(score):
         for wrapper in abjad.get.wrappers(leaf):
             if wrapper.synthetic_offset is None:
@@ -1462,7 +1463,7 @@ def _style_anchor_notes(score):
     for note in abjad.select.components(score, abjad.Note):
         if not abjad.get.has_indicator(note, _enums.ANCHOR_NOTE):
             continue
-        _append_tag_to_wrappers(note, _tags.function_name(_frame()))
+        _append_tag_to_wrappers(note, _helpers.function_name(_frame()))
         _append_tag_to_wrappers(note, _tags.ANCHOR_NOTE)
 
 
@@ -1514,13 +1515,13 @@ def _style_fermata_measures(
                 abjad.attach(
                     empty_staff_lines,
                     leaf,
-                    tag=_tags.function_name(_frame(), n=1),
+                    tag=_helpers.function_name(_frame(), n=1),
                 )
                 if not final_section:
                     abjad.attach(
                         empty_bar_extent,
                         leaf,
-                        tag=_tags.function_name(_frame(), n=2).append(
+                        tag=_helpers.function_name(_frame(), n=2).append(
                             _tags.FERMATA_MEASURE_EMPTY_BAR_EXTENT
                         ),
                     )
@@ -1539,12 +1540,12 @@ def _style_fermata_measures(
                     abjad.attach(
                         next_staff_lines_,
                         next_leaf,
-                        tag=_tags.function_name(_frame(), n=3),
+                        tag=_helpers.function_name(_frame(), n=3),
                     )
                     abjad.attach(
                         next_bar_extent_,
                         next_leaf,
-                        tag=_tags.function_name(_frame(), n=4).append(
+                        tag=_helpers.function_name(_frame(), n=4).append(
                             _tags.FERMATA_MEASURE_NEXT_BAR_EXTENT
                         ),
                     )
@@ -1557,7 +1558,7 @@ def _style_fermata_measures(
                     resume_staff_lines,
                     leaf,
                     synthetic_offset=abjad.Offset(99),
-                    tag=_tags.function_name(_frame(), n=5),
+                    tag=_helpers.function_name(_frame(), n=5),
                 )
                 previous_line_count = 5
                 if previous_bar_extent is not None:
@@ -1567,7 +1568,7 @@ def _style_fermata_measures(
                     resume_bar_extent,
                     leaf,
                     synthetic_offset=abjad.Offset(99),
-                    tag=_tags.function_name(_frame(), n=6).append(
+                    tag=_helpers.function_name(_frame(), n=6).append(
                         _tags.FERMATA_MEASURE_RESUME_BAR_EXTENT
                     ),
                 )
@@ -1601,7 +1602,7 @@ def _style_fermata_measures(
             abjad.attach(
                 literal,
                 rest,
-                tag=tag.append(_tags.function_name(_frame(), n=7)),
+                tag=tag.append(_helpers.function_name(_frame(), n=7)),
             )
 
 
@@ -1823,7 +1824,7 @@ def append_anchor_note(argument, *, runtime=None):
     leaf = abjad.get.leaf(argument, 0)
     parentage = abjad.get.parentage(leaf)
     voice = parentage.get(abjad.Voice, n=-1)
-    tag = _tags.function_name(_frame(), n=1)
+    tag = _helpers.function_name(_frame(), n=1)
     tag = tag.append(_tags.ANCHOR_NOTE)
     tag = tag.append(_tags.HIDDEN)
     tag = tag.append(_tags.NOTE)
@@ -1833,7 +1834,7 @@ def append_anchor_note(argument, *, runtime=None):
     abjad.attach(_enums.NOT_YET_PITCHED, note)
     abjad.attach(_enums.NOTE, note)
     #
-    tag = _tags.function_name(_frame(), n=2)
+    tag = _helpers.function_name(_frame(), n=2)
     tag = tag.append(_tags.ANCHOR_NOTE)
     tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
     tag = tag.append(_tags.NOTE)
@@ -1843,7 +1844,7 @@ def append_anchor_note(argument, *, runtime=None):
         tag=tag,
     )
     #
-    tag = _tags.function_name(_frame(), n=3)
+    tag = _helpers.function_name(_frame(), n=3)
     tag = tag.append(_tags.ANCHOR_NOTE)
     tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
     tag = tag.append(_tags.NOTE)
@@ -1891,7 +1892,7 @@ def apply_breaks(score: abjad.Score, breaks: _layout.BreakMeasureMap) -> None:
     abjad.attach(
         literal,
         skips[0],
-        tag=_tags.BREAK.append(_tags.function_name(_frame(), n=1)),
+        tag=_tags.BREAK.append(_helpers.function_name(_frame(), n=1)),
     )
     for skip_index in range(measure_count):
         skip = skips[skip_index]
@@ -1903,7 +1904,7 @@ def apply_breaks(score: abjad.Score, breaks: _layout.BreakMeasureMap) -> None:
             abjad.attach(
                 indicator,
                 skip,
-                tag=_tags.BREAK.append(_tags.function_name(_frame(), n=2)),
+                tag=_tags.BREAK.append(_helpers.function_name(_frame(), n=2)),
             )
 
 
@@ -1948,7 +1949,7 @@ def color_octaves(score):
     vertical_moments = abjad.iterate_vertical_moments(score)
     markup = abjad.Markup(r"\markup OCTAVE")
     bundle = abjad.bundle(markup, r"- \tweak color #red")
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.OCTAVE_COLORING)
     for vertical_moment in vertical_moments:
         pleaves, pitches = [], []
@@ -1985,7 +1986,7 @@ _color_octaves_alias = color_octaves
 
 def color_out_of_range_pitches(score):
     indicator = _enums.ALLOW_OUT_OF_RANGE
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.OUT_OF_RANGE_COLORING)
     for voice in abjad.iterate.components(score, abjad.Voice):
         for pleaf in abjad.iterate.leaves(voice, pitched=True):
@@ -2005,7 +2006,7 @@ def color_out_of_range_pitches(score):
 
 
 def color_repeat_pitch_classes(score):
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.REPEAT_PITCH_CLASS_COLORING)
     lts = _find_repeat_pitch_classes(score)
     for lt in lts:
@@ -2052,7 +2053,7 @@ def label_moment_numbers(global_skips, moment_markup):
         skip = skips[measure_index]
         tag = _tags.MOMENT_NUMBER
         tag = tag.append(_tags.MOMENT_ANNOTATION_SPANNER)
-        tag = tag.append(_tags.function_name(_frame()))
+        tag = tag.append(_helpers.function_name(_frame()))
         if color is not None:
             string = rf'- \baca-start-xnm-colored-left-only "{value}" {color}'
         else:
@@ -2070,7 +2071,7 @@ def label_moment_numbers(global_skips, moment_markup):
         if 0 < i:
             tag = _tags.MOMENT_NUMBER
             tag = tag.append(_tags.MOMENT_ANNOTATION_SPANNER)
-            tag = tag.append(_tags.function_name(_frame()))
+            tag = tag.append(_helpers.function_name(_frame()))
             stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanXNM")
             abjad.attach(
                 stop_text_span,
@@ -2082,7 +2083,7 @@ def label_moment_numbers(global_skips, moment_markup):
     skip = skips[-1]
     tag = _tags.MOMENT_NUMBER
     tag = tag.append(_tags.MOMENT_ANNOTATION_SPANNER)
-    tag = tag.append(_tags.function_name(_frame()))
+    tag = tag.append(_helpers.function_name(_frame()))
     stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanXNM")
     abjad.attach(
         stop_text_span,
@@ -2108,7 +2109,7 @@ def label_stage_numbers(global_skips, stage_markup):
         measure_index = lmn - 1
         skip = skips[measure_index]
         tag = _tags.STAGE_NUMBER
-        tag = tag.append(_tags.function_name(_frame()))
+        tag = tag.append(_helpers.function_name(_frame()))
         if color is not None:
             string = r"- \baca-start-snm-colored-left-only"
             string += f' "{value}" {color}'
@@ -2127,7 +2128,7 @@ def label_stage_numbers(global_skips, stage_markup):
         )
         if 0 < i:
             tag = _tags.STAGE_NUMBER
-            tag = tag.append(_tags.function_name(_frame()))
+            tag = tag.append(_helpers.function_name(_frame()))
             stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanSNM")
             abjad.attach(
                 stop_text_span,
@@ -2138,7 +2139,7 @@ def label_stage_numbers(global_skips, stage_markup):
             )
     skip = skips[-1]
     tag = _tags.STAGE_NUMBER
-    tag = tag.append(_tags.function_name(_frame()))
+    tag = tag.append(_helpers.function_name(_frame()))
     stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanSNM")
     abjad.attach(
         stop_text_span,
@@ -2795,7 +2796,7 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
                 stop_text_span,
                 skip,
                 context=global_skips.name,
-                tag=_tags.function_name(_frame(), n=1),
+                tag=_helpers.function_name(_frame(), n=1),
             )
         if add_right_text_to_me is skip:
             right_text = final_leaf_metronome_mark._get_markup()
@@ -2828,7 +2829,7 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
             abjad.attach(
                 indicator,
                 skip,
-                tag=new_tag.append(_tags.function_name(_frame(), n=5)),
+                tag=new_tag.append(_helpers.function_name(_frame(), n=5)),
             )
             tag = new_tag
         if not (
@@ -2841,7 +2842,7 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
                 skip,
                 context=global_skips.name,
                 deactivate=True,
-                tag=tag.append(_tags.function_name(_frame(), n=2)),
+                tag=tag.append(_helpers.function_name(_frame(), n=2)),
             )
         else:
             abjad.attach(
@@ -2849,7 +2850,7 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
                 skip,
                 context=global_skips.name,
                 deactivate=True,
-                tag=tag.append(_tags.function_name(_frame(), n=2.1)).append(
+                tag=tag.append(_helpers.function_name(_frame(), n=2.1)).append(
                     _tags.METRIC_MODULATION_IS_NOT_SCALED,
                 ),
             )
@@ -2865,7 +2866,7 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
                 skip,
                 context=global_skips.name,
                 deactivate=True,
-                tag=tag.append(_tags.function_name(_frame(), n=2.2)).append(
+                tag=tag.append(_helpers.function_name(_frame(), n=2.2)).append(
                     _tags.METRIC_MODULATION_IS_SCALED,
                 ),
             )
@@ -2878,7 +2879,7 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
                 skip,
                 context=global_skips.name,
                 deactivate=True,
-                tag=tag.append(_tags.function_name(_frame(), n=2.2)).append(
+                tag=tag.append(_helpers.function_name(_frame(), n=2.2)).append(
                     _tags.METRIC_MODULATION_IS_STRIPPED,
                 ),
             )
@@ -2949,13 +2950,13 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
             skip,
             context=global_skips.name,
             deactivate=False,
-            tag=tag.append(_tags.function_name(_frame(), n=3)),
+            tag=tag.append(_helpers.function_name(_frame(), n=3)),
         )
     if indicator_count:
         final_skip = skip
         stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanMM")
         tag_ = _tags.EOS_STOP_MM_SPANNER
-        tag_ = tag_.append(_tags.function_name(_frame(), n=4))
+        tag_ = tag_.append(_helpers.function_name(_frame(), n=4))
         abjad.attach(
             stop_text_span,
             final_skip,
@@ -2972,18 +2973,18 @@ def style_anchor_skip(score):
     for literal in abjad.get.indicators(skip, abjad.LilyPondLiteral):
         if r"\baca-time-signature-color" in literal.argument:
             abjad.detach(literal, skip)
-    tag = _tags.function_name(_frame(), n=1)
+    tag = _helpers.function_name(_frame(), n=1)
     tag = tag.append(_tags.ANCHOR_SKIP)
     _append_tag_to_wrappers(skip, tag)
     if abjad.get.has_indicator(skip, abjad.TimeSignature):
-        tag = _tags.function_name(_frame(), n=2)
+        tag = _helpers.function_name(_frame(), n=2)
         tag = tag.append(_tags.ANCHOR_SKIP)
         abjad.attach(
             abjad.LilyPondLiteral(r"\baca-time-signature-transparent", site="before"),
             skip,
             tag=tag,
         )
-    tag = _tags.function_name(_frame(), n=3)
+    tag = _helpers.function_name(_frame(), n=3)
     tag = tag.append(_tags.ANCHOR_SKIP)
     abjad.attach(
         abjad.LilyPondLiteral(

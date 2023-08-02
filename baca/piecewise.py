@@ -8,6 +8,7 @@ from inspect import currentframe as _frame
 import abjad
 
 from . import dynamics as _dynamics
+from . import helpers as _helpers
 from . import tags as _tags
 from . import treat as _treat
 from . import tweaks as _tweaks
@@ -504,7 +505,7 @@ def bow_speed_spanner(
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.BOW_SPEED_SPANNER)
     wrappers = text_spanner(
         argument,
@@ -531,7 +532,7 @@ def circle_bow_spanner(
     qualifier: str | None = None,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.CIRCLE_BOW_SPANNER)
     if qualifier is None:
         string = r"\baca-circle-markup =|"
@@ -562,7 +563,7 @@ def clb_spanner(
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.CLB_SPANNER)
     assert string_number in (1, 2, 3, 4), repr(string_number)
     if string_number == 1:
@@ -599,7 +600,7 @@ def covered_spanner(
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.COVERED_SPANNER)
     wrappers = text_spanner(
         argument,
@@ -624,7 +625,7 @@ def damp_spanner(
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.DAMP_SPANNER)
     wrappers = text_spanner(
         argument,
@@ -677,7 +678,7 @@ def hairpin(
         remove_length_1_spanner_start=remove_length_1_spanner_start,
         right_broken=right_broken_,
         specifiers=specifiers,
-        tag=_tags.function_name(_frame()),
+        tag=_helpers.function_name(_frame()),
     )
 
 
@@ -690,7 +691,7 @@ def half_clt_spanner(
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.HALF_CLT_SPANNER)
     wrappers = text_spanner(
         argument,
@@ -715,7 +716,7 @@ def material_annotation_spanner(
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.MATERIAL_ANNOTATION_SPANNER)
     wrappers = text_spanner(
         argument,
@@ -739,7 +740,7 @@ def metric_modulation_spanner(
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.METRIC_MODULATION_SPANNER)
     wrappers = text_spanner(
         argument,
@@ -921,7 +922,7 @@ def pizzicato_spanner(
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.PIZZICATO_SPANNER)
     wrappers = text_spanner(
         argument,
@@ -949,7 +950,7 @@ def scp_spanner(
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.SCP_SPANNER)
     wrappers = text_spanner(
         argument,
@@ -976,7 +977,7 @@ def spazzolato_spanner(
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.SPAZZOLATO_SPANNER)
     wrappers = text_spanner(
         argument,
@@ -1004,7 +1005,7 @@ def string_number_spanner(
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.STRING_NUMBER_SPANNER)
     wrappers = text_spanner(
         argument,
@@ -1031,7 +1032,7 @@ def tasto_spanner(
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.TASTO_SPANNER)
     wrappers = text_spanner(
         argument,
@@ -1087,7 +1088,7 @@ def text_spanner(
         pieces=pieces,
         right_broken=right_broken,
         specifiers=specifiers,
-        tag=_tags.function_name(_frame()),
+        tag=_helpers.function_name(_frame()),
         tweaks=tweaks,
     )
 
@@ -1103,7 +1104,7 @@ def vibrato_spanner(
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.VIBRATO_SPANNER)
     wrappers = text_spanner(
         argument,
@@ -1130,7 +1131,7 @@ def xfb_spanner(
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.BOW_SPEED_SPANNER)
     wrappers = text_spanner(
         argument,

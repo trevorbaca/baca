@@ -7,6 +7,7 @@ from inspect import currentframe as _frame
 
 import abjad
 
+from . import helpers as _helpers
 from . import pitchtools as _pitchtools
 from . import select as _select
 from . import tags as _tags
@@ -41,7 +42,7 @@ def bcps(
     helper: typing.Callable = lambda x, y: x,
 ) -> list[abjad.Wrapper]:
     wrappers: list[abjad.Wrapper] = []
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     _tags.wrappers(wrappers, tag)
     bcps_ = list(bcps)
     bcps_ = helper(bcps_, argument)
@@ -74,7 +75,7 @@ def bcps(
             wrapper = abjad.attach(
                 stop_text_span,
                 lt.head,
-                tag=_tags.function_name(_frame(), n=1),
+                tag=_helpers.function_name(_frame(), n=1),
                 wrapper=True,
             )
             wrappers.append(wrapper)
@@ -124,7 +125,7 @@ def bcps(
             wrapper = abjad.attach(
                 start_text_span,
                 lt.head,
-                tag=_tags.function_name(_frame(), n=2),
+                tag=_helpers.function_name(_frame(), n=2),
                 wrapper=True,
             )
             wrappers.append(wrapper)
@@ -132,7 +133,7 @@ def bcps(
             wrapper = abjad.attach(
                 stop_text_span,
                 lt.head,
-                tag=_tags.function_name(_frame(), n=3),
+                tag=_helpers.function_name(_frame(), n=3),
                 wrapper=True,
             )
             wrappers.append(wrapper)
@@ -140,7 +141,7 @@ def bcps(
             wrapper = abjad.attach(
                 stop_text_span,
                 next_leaf_after_argument,
-                tag=_tags.function_name(_frame(), n=4),
+                tag=_helpers.function_name(_frame(), n=4),
                 wrapper=True,
             )
             wrappers.append(wrapper)
@@ -159,7 +160,7 @@ def bcps(
                 wrapper = abjad.attach(
                     articulation,
                     lt.head,
-                    tag=_tags.function_name(_frame(), n=5),
+                    tag=_helpers.function_name(_frame(), n=5),
                     wrapper=True,
                 )
                 wrappers.append(wrapper)
@@ -173,7 +174,7 @@ def bcps(
                 wrapper = abjad.attach(
                     articulation,
                     lt.head,
-                    tag=_tags.function_name(_frame(), n=6),
+                    tag=_helpers.function_name(_frame(), n=6),
                     wrapper=True,
                 )
                 wrappers.append(wrapper)
@@ -189,7 +190,7 @@ def bcps(
                 wrapper = abjad.attach(
                     articulation,
                     lt.head,
-                    tag=_tags.function_name(_frame(), n=7),
+                    tag=_helpers.function_name(_frame(), n=7),
                     wrapper=True,
                 )
                 wrappers.append(wrapper)
@@ -203,7 +204,7 @@ def bcps(
                 wrapper = abjad.attach(
                     articulation,
                     lt.head,
-                    tag=_tags.function_name(_frame(), n=8),
+                    tag=_helpers.function_name(_frame(), n=8),
                     wrapper=True,
                 )
                 wrappers.append(wrapper)
@@ -216,7 +217,7 @@ def color(argument, *, lone: bool = False) -> None:
 
 
 def finger_pressure_transition(argument) -> None:
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     tweaks = (
         abjad.Tweak(r"- \tweak arrow-length 2"),
         abjad.Tweak(r"- \tweak arrow-width 0.5"),
@@ -312,7 +313,7 @@ def force_accidental(argument, *, tag: abjad.Tag = abjad.Tag()) -> None:
     if tag.string:
         if not tag.only_edition() and not tag.not_editions():
             raise Exception(f"tag must have edition: {tag!r}.")
-        here_tag = _tags.function_name(_frame())
+        here_tag = _helpers.function_name(_frame())
         alternative_tag = tag.append(here_tag)
         primary_tag = alternative_tag.invert_edition_tags()
     pleaves = _select.pleaves(argument)
@@ -371,7 +372,7 @@ def glissando(
     for tweak in tweaks or []:
         assert isinstance(tweak, prototype), repr(tweak)
         tweaks_.append(tweak)
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     abjad.glissando(
         leaves,
         *tweaks_,

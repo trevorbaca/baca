@@ -5,8 +5,8 @@ from inspect import currentframe as _frame
 
 import abjad
 
+from . import helpers as _helpers
 from . import score as _score
-from . import tags as _tags
 
 _global_context_string = r"""\layout
 {
@@ -221,7 +221,7 @@ def make_empty_score(*counts, do_not_move_global_context=False, no_skips=False):
         }
 
     """
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     global_context = _score.make_global_context()
     single_staff = len(counts) == 1
     single_voice = single_staff and counts[0] == 1

@@ -8,6 +8,7 @@ from inspect import currentframe as _frame
 import abjad
 
 from . import classes as _classes
+from . import helpers as _helpers
 from . import select as _select
 from . import tags as _tags
 
@@ -108,7 +109,7 @@ class SpacingSpecifier:
             abjad.attach(
                 spacing_section,
                 skip,
-                tag=tag.append(_tags.function_name(_frame(), n=1)),
+                tag=tag.append(_helpers.function_name(_frame(), n=1)),
             )
             if eol_adjusted:
                 multiplier = magic_lilypond_eol_adjustment
@@ -127,7 +128,7 @@ class SpacingSpecifier:
                     skip,
                     context=skips_context.name,
                     deactivate=True,
-                    tag=tag.append(_tags.function_name(_frame(), n=2)),
+                    tag=tag.append(_helpers.function_name(_frame(), n=2)),
                 )
             if 0 < measure_index:
                 tag = _tags.SPACING
@@ -137,7 +138,7 @@ class SpacingSpecifier:
                     skip,
                     context=skips_context.name,
                     deactivate=True,
-                    tag=tag.append(_tags.function_name(_frame(), n=3)),
+                    tag=tag.append(_helpers.function_name(_frame(), n=3)),
                 )
 
 

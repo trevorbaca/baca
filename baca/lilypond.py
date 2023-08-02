@@ -5,7 +5,7 @@ from inspect import currentframe as _frame
 
 import abjad
 
-from . import tags as _tags
+from . import helpers as _helpers
 
 
 def _get_global_spanner_extra_offsets(
@@ -55,7 +55,7 @@ def _make_lilypond_file(
     preamble,
     score,
 ):
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     items = []
     items.extend(includes)
     items.append("")

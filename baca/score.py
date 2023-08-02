@@ -5,7 +5,7 @@ from inspect import currentframe as _frame
 
 import abjad
 
-from . import tags as _tags
+from . import helpers as _helpers
 
 
 def assert_lilypond_identifiers(score):
@@ -30,12 +30,12 @@ def attach_lilypond_tag(tag, context, *, part_manifest=None):
     if part_names and tag not in part_names:
         raise Exception(f"not listed in parts manifest: {tag!r}.")
     literal = abjad.LilyPondLiteral(rf"\tag #'{tag}", site="before")
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     abjad.attach(literal, context, tag=tag)
 
 
 def make_global_context():
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     global_rests = abjad.Context(
         lilypond_type="GlobalRests",
         name="Rests",
@@ -58,7 +58,7 @@ def make_global_context():
 
 def make_music_context(*contexts):
     contexts = tuple(_ for _ in contexts if _ is not None)
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     return abjad.Context(
         contexts,
         lilypond_type="MusicContext",
@@ -71,7 +71,7 @@ def make_music_context(*contexts):
 def make_staff_group(stem, *contexts):
     if not isinstance(stem, str):
         raise Exception(f"stem must be string: {stem!r}.")
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     contexts = tuple(_ for _ in contexts if _ is not None)
     if contexts:
         return abjad.StaffGroup(contexts, name=f"{stem}StaffGroup", tag=tag)

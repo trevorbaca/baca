@@ -29,12 +29,12 @@ from .constellation import *
 from .docs import global_context_string
 from .imbricate import imbricate
 from .classes import *
+from .helpers import call
 from .indicators import *
 from .layout import *
 from .lilypond import file
 from .memento import *
 from .overrides import *
-from .other import call
 from .parts import Part, PartAssignment, assign_part
 from .pcollections import (
     ArpeggiationSpacingSpecifier,

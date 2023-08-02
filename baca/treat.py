@@ -6,6 +6,7 @@ from inspect import currentframe as _frame
 import abjad
 
 from . import classes as _classes
+from . import helpers as _helpers
 from . import memento as _memento
 from . import tags as _tags
 
@@ -75,11 +76,11 @@ def _attach_color_literal(
         string = rf"\baca-time-signature-color #'{color}"
         literal = abjad.LilyPondLiteral(string, site="before")
     if cancelation is True:
-        tag = _tags.function_name(_frame(), n=1)
+        tag = _helpers.function_name(_frame(), n=1)
         tag = tag.append(status_tag)
         abjad.attach(literal, wrapper.component, deactivate=True, tag=tag)
     else:
-        tag = _tags.function_name(_frame(), n=2)
+        tag = _helpers.function_name(_frame(), n=2)
         tag = tag.append(status_tag)
         abjad.attach(
             literal,
@@ -149,7 +150,7 @@ def _attach_latent_indicator_alert(
         string = f"{left}{key}{right}"
         string = rf'\{markup} "{string}"'
         markup = abjad.Markup(string)
-        tag = tag.append(_tags.function_name(_frame()))
+        tag = tag.append(_helpers.function_name(_frame()))
         abjad.attach(
             markup, leaf, deactivate=existing_deactivate, direction=abjad.UP, tag=tag
         )
@@ -229,7 +230,7 @@ def _set_status_tag(wrapper, status, redraw=None, stem=None):
     if redraw is True:
         prefix = "redrawn"
     tag = wrapper.tag
-    tag_ = _tags.function_name(_frame())
+    tag_ = _helpers.function_name(_frame())
     if tag_.string not in tag.string:
         tag = tag.append(tag_)
     status_tag = _get_tag(status, stem, prefix=prefix)
@@ -453,7 +454,7 @@ def treat_persistent_wrapper(manifests, wrapper, status):
         color = _status_to_color[status]
         words = [
             f"{status.upper()}_DYNAMIC_COLOR",
-            _tags.function_name(_frame()).string,
+            _helpers.function_name(_frame()).string,
         ]
         words.extend(existing_tag.editions())
         words = [_ if isinstance(_, str) else _.string for _ in words]
@@ -495,7 +496,7 @@ def treat_persistent_wrapper(manifests, wrapper, status):
         wrapper_ = abjad.attach(
             literal,
             wrapper.component,
-            tag=wrapper.tag.append(_tags.function_name(_frame(), n=2)),
+            tag=wrapper.tag.append(_helpers.function_name(_frame(), n=2)),
             wrapper=True,
         )
         _set_status_tag(wrapper_, status, stem="CLEF")
@@ -515,7 +516,7 @@ def treat_persistent_wrapper(manifests, wrapper, status):
         wrapper_ = abjad.attach(
             literal,
             leaf,
-            tag=existing_tag.append(_tags.function_name(_frame(), n=3)),
+            tag=existing_tag.append(_helpers.function_name(_frame(), n=3)),
             wrapper=True,
         )
         _set_status_tag(wrapper_, status, redraw=True, stem=stem)

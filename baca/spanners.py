@@ -6,6 +6,7 @@ from inspect import currentframe as _frame
 
 import abjad
 
+from . import helpers as _helpers
 from . import tags as _tags
 from . import tweaks as _tweaks
 
@@ -23,7 +24,7 @@ def _do_spanner_indicator_command(
     wrappers = []
     if start_indicator is not None:
         start_indicator = _tweaks.bundle_tweaks(start_indicator, tweaks)
-        tag = _tags.function_name(_frame(), n=1)
+        tag = _helpers.function_name(_frame(), n=1)
         tag = tag.append(_tags.SPANNER_START)
         if left_broken:
             tag = tag.append(_tags.LEFT_BROKEN)
@@ -38,7 +39,7 @@ def _do_spanner_indicator_command(
         )
         wrappers.append(wrapper)
     if stop_indicator is not None:
-        tag = _tags.function_name(_frame(), n=2)
+        tag = _helpers.function_name(_frame(), n=2)
         tag = tag.append(_tags.SPANNER_STOP)
         if right_broken:
             tag = tag.append(_tags.RIGHT_BROKEN)
@@ -107,7 +108,7 @@ def beam(
         *tweaks,
         direction=direction,
     )
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     _tags.wrappers(wrappers, tag)
     return wrappers
 
@@ -144,7 +145,7 @@ def ottava_bassa(
         stop_ottava,
         right_broken=right_broken,
     )
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     _tags.wrappers(wrappers, tag)
     return wrappers
 
@@ -168,7 +169,7 @@ def slur(
         stop_slur_,
         *tweaks,
     )
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     _tags.wrappers(wrappers, tag)
     return wrappers
 
@@ -188,7 +189,7 @@ def sustain_pedal(
         stop_piano_pedal,
         context=context,
     )
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     _tags.wrappers(wrappers, tag)
     return wrappers
 
@@ -216,6 +217,6 @@ def trill_spanner(
         left_broken=left_broken,
         right_broken=right_broken,
     )
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     _tags.wrappers(wrappers, tag)
     return wrappers

@@ -5,6 +5,7 @@ from inspect import currentframe as _frame
 
 import abjad
 
+from . import helpers as _helpers
 from . import tags as _tags
 
 
@@ -86,8 +87,8 @@ def _do_override(
     context=None,
 ) -> list[abjad.Wrapper]:
     leaves = abjad.select.leaves(argument)
-    first_tag = _tags.function_name(frame, n=1)
-    final_tag = _tags.function_name(frame, n=2)
+    first_tag = _helpers.function_name(frame, n=1)
+    final_tag = _helpers.function_name(frame, n=2)
     return _do_override_command(
         leaves,
         grob,
@@ -226,8 +227,8 @@ def bar_line_x_extent(
 ) -> list[abjad.Wrapper]:
     # TODO: use _do_override()
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
-    first_tag = _tags.function_name(_frame(), n=1)
-    final_tag = _tags.function_name(_frame(), n=2)
+    first_tag = _helpers.function_name(_frame(), n=1)
+    final_tag = _helpers.function_name(_frame(), n=2)
     return _do_override_command(
         leaves,
         "BarLine",
@@ -1315,7 +1316,7 @@ def sustain_pedal_staff_padding(
 
 def tacet(argument, color="#green") -> list[abjad.Wrapper]:
     wrappers = mmrest_color(argument, color)
-    _tags.wrappers(wrappers, _tags.TACET_COLORING, _tags.function_name(_frame()))
+    _tags.wrappers(wrappers, _tags.TACET_COLORING, _helpers.function_name(_frame()))
     return wrappers
 
 

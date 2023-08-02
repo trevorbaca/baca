@@ -9,6 +9,7 @@ from inspect import currentframe as _frame
 import abjad
 from abjadext import rmakers
 
+from . import helpers as _helpers
 from . import select as _select
 from . import tags as _tags
 from .enums import enums as _enums
@@ -130,7 +131,7 @@ class Feather:
             feather_duration,
             exponent=self.exponent,
             voice_name=voice_name,
-            tag=_tags.function_name(_frame()),
+            tag=_helpers.function_name(_frame()),
         )
         return tuplet
 
@@ -359,7 +360,7 @@ class OBGC:
             )
 
     def __call__(self, denominator, voice_name):
-        tag = _tags.function_name(_frame())
+        tag = _helpers.function_name(_frame())
         if 0 < self.nongrace_note_numerator:
             pitch = 0
         else:
@@ -394,7 +395,7 @@ class Tuplet:
 
     def __call__(self, denominator: int, voice_name: str | None = None) -> abjad.Tuplet:
         assert isinstance(denominator, int), repr(denominator)
-        tag = _tags.function_name(_frame())
+        tag = _helpers.function_name(_frame())
         components = []
         for item in self.items:
             if isinstance(item, int) and 0 < item:
@@ -431,7 +432,7 @@ def attach_bgcs(
     bgcs: list[abjad.BeforeGraceContainer],
     argument: abjad.Component | list[abjad.Component],
 ) -> None:
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     bgcs = bgcs or []
     lts = abjad.select.logical_ties(argument)
     assert len(bgcs) == len(lts)
@@ -466,21 +467,21 @@ def from_collection(
         while abjad.Fraction(*talea[i]) < 0:
             pair = talea[i]
             duration = -abjad.Duration(*pair)
-            tag = _tags.function_name(_frame(), n=1)
+            tag = _helpers.function_name(_frame(), n=1)
             rests = abjad.makers.make_leaves([None], [duration], tag=tag)
             leaves.extend(rests)
             i += 1
         pair = talea[i]
         duration = abjad.Duration(*pair)
         assert 0 < duration, repr(duration)
-        tag = _tags.function_name(_frame(), n=3)
+        tag = _helpers.function_name(_frame(), n=3)
         pleaves = abjad.makers.make_leaves([item], [duration], tag=tag)
         leaves.extend(pleaves)
         i += 1
         while abjad.Fraction(*talea[i]) < 0 and not i % len(talea) == 0:
             pair = talea[i]
             duration = -abjad.Duration(*pair)
-            tag = _tags.function_name(_frame(), n=4)
+            tag = _helpers.function_name(_frame(), n=4)
             rests = abjad.makers.make_leaves([None], [duration], tag=tag)
             leaves.extend(rests)
             i += 1
@@ -518,7 +519,7 @@ def make_accelerando(
     tag: abjad.Tag | None = None,
 ) -> abjad.Tuplet:
     tag = tag or abjad.Tag()
-    tag = tag.append(_tags.function_name(_frame()))
+    tag = tag.append(_helpers.function_name(_frame()))
     leaves = []
     assert isinstance(denominator, int), repr(denominator)
     assert isinstance(duration, abjad.Duration), repr(duration)
@@ -565,12 +566,12 @@ def make_bgcs(
             continue
         grace_token = list(segment_part[:-1])
         grace_leaves = abjad.makers.make_leaves(
-            grace_token, [duration], tag=_tags.function_name(_frame(), n=1)
+            grace_token, [duration], tag=_helpers.function_name(_frame(), n=1)
         )
         container = abjad.BeforeGraceContainer(
             grace_leaves,
             command=r"\acciaccatura",
-            tag=_tags.function_name(_frame(), n=2),
+            tag=_helpers.function_name(_frame(), n=2),
         )
         bgcs.append(container)
     assert len(bgcs) == len(collection)
@@ -579,7 +580,7 @@ def make_bgcs(
 
 
 def make_even_divisions(time_signatures) -> list[abjad.Leaf | abjad.Tuplet]:
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     durations = [_.duration for _ in time_signatures]
     tuplets = rmakers.even_division(durations, [8], tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(tuplets, time_signatures)
@@ -599,7 +600,7 @@ def make_mmrests(
     assert isinstance(head, str), repr(head)
     mmrests: list[abjad.MultimeasureRest | abjad.Container] = []
     if not head:
-        tag = _tags.function_name(_frame(), n=1)
+        tag = _helpers.function_name(_frame(), n=1)
         for time_signature in time_signatures:
             mmrest = abjad.MultimeasureRest(1, multiplier=time_signature.pair, tag=tag)
             mmrests.append(mmrest)
@@ -608,7 +609,7 @@ def make_mmrests(
         voice_name = head
         for i, time_signature in enumerate(time_signatures):
             if i == 0:
-                tag = _tags.function_name(_frame(), n=2)
+                tag = _helpers.function_name(_frame(), n=2)
                 tag = tag.append(_tags.HIDDEN)
                 note_or_rest = _tags.NOTE
                 tag = tag.append(_tags.NOTE)
@@ -618,24 +619,24 @@ def make_mmrests(
                 abjad.attach(_enums.NOTE, note)
                 abjad.attach(_enums.NOT_YET_PITCHED, note)
                 abjad.attach(_enums.HIDDEN, note)
-                tag = _tags.function_name(_frame(), n=3)
+                tag = _helpers.function_name(_frame(), n=3)
                 tag = tag.append(note_or_rest)
                 tag = tag.append(_tags.INVISIBLE_MUSIC_COLORING)
                 literal = abjad.LilyPondLiteral(
                     r"\abjad-invisible-music-coloring", site="before"
                 )
                 abjad.attach(literal, note, tag=tag)
-                tag = _tags.function_name(_frame(), n=4)
+                tag = _helpers.function_name(_frame(), n=4)
                 tag = tag.append(note_or_rest)
                 tag = tag.append(_tags.INVISIBLE_MUSIC_COMMAND)
                 literal = abjad.LilyPondLiteral(
                     r"\abjad-invisible-music", site="before"
                 )
                 abjad.attach(literal, note, deactivate=True, tag=tag)
-                tag = _tags.function_name(_frame(), n=5)
+                tag = _helpers.function_name(_frame(), n=5)
                 hidden_note_voice = abjad.Voice([note], name=voice_name, tag=tag)
                 abjad.attach(_enums.INTERMITTENT, hidden_note_voice)
-                tag = _tags.function_name(_frame(), n=6)
+                tag = _helpers.function_name(_frame(), n=6)
                 tag = tag.append(_tags.REST_VOICE)
                 tag = tag.append(_tags.MULTIMEASURE_REST)
                 rest = abjad.MultimeasureRest(
@@ -648,10 +649,10 @@ def make_mmrests(
                 else:
                     assert "Voice" in voice_name
                     name = f"{voice_name}.Rests"
-                tag = _tags.function_name(_frame(), n=7)
+                tag = _helpers.function_name(_frame(), n=7)
                 multimeasure_rest_voice = abjad.Voice([rest], name=name, tag=tag)
                 abjad.attach(_enums.INTERMITTENT, multimeasure_rest_voice)
-                tag = _tags.function_name(_frame(), n=8)
+                tag = _helpers.function_name(_frame(), n=8)
                 container = abjad.Container(
                     [hidden_note_voice, multimeasure_rest_voice],
                     simultaneous=True,
@@ -684,7 +685,7 @@ def make_notes(
     repeat_ties: bool = False,
 ) -> list[abjad.Leaf | abjad.Tuplet]:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     durations = [_.duration for _ in time_signatures]
     components = rmakers.note(durations, tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
@@ -703,7 +704,7 @@ def make_repeat_tied_notes(
     *,
     do_not_rewrite_meter: bool = False,
 ) -> list[abjad.Leaf | abjad.Tuplet]:
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     durations = [_.duration for _ in time_signatures]
     leaves_and_tuplets = rmakers.note(durations, tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(leaves_and_tuplets, time_signatures)
@@ -727,7 +728,7 @@ def make_repeated_duration_notes(
     do_not_rewrite_meter=None,
 ) -> list[abjad.Leaf | abjad.Tuplet]:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     if isinstance(weights, abjad.Duration):
         weights = [weights]
     elif isinstance(weights, tuple):
@@ -753,7 +754,7 @@ def make_repeated_duration_notes(
 
 def make_rests(time_signatures) -> list[abjad.Rest | abjad.Tuplet]:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     durations = [_.duration for _ in time_signatures]
     components = rmakers.note(durations, tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
@@ -779,7 +780,7 @@ def make_rhythm(
     if time_signatures is not None:
         assert isinstance(time_signatures, list), repr(time_signatures)
         assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     index_to_original_item: dict[int, abjad.Tuplet | None] = {}
     index_to_obgc_anchor_voice: dict[int, abjad.Voice | None] = {}
     components, item_durations = [], []
@@ -861,7 +862,7 @@ def make_rhythm(
 def make_single_attack(time_signatures, duration) -> list[abjad.Leaf | abjad.Tuplet]:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     durations = [_.duration for _ in time_signatures]
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     duration = abjad.Duration(duration)
     numerator, denominator = duration.pair
     tuplets = rmakers.incised(
@@ -887,7 +888,7 @@ def make_single_attack(time_signatures, duration) -> list[abjad.Leaf | abjad.Tup
 def make_tied_notes(time_signatures) -> list[abjad.Note | abjad.Tuplet]:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     durations = [_.duration for _ in time_signatures]
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     components = rmakers.note(durations, tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
     plts = _select.plts(voice)
@@ -907,7 +908,7 @@ def make_tied_repeated_durations(
     time_signatures, weights
 ) -> list[abjad.Leaf | abjad.Tuplet]:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     durations = [_.duration for _ in time_signatures]
     durations = [sum(durations)]
     weights = abjad.durations(weights)
@@ -992,7 +993,7 @@ def nest(containers: list[abjad.Tuplet], treatment: str) -> abjad.Tuplet:
 
 
 def parse(string: str) -> list[abjad.Component]:
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     assert isinstance(string, str), repr(string)
     string = f"{{ {string} }}"
     container = abjad.parse(string, tag=tag)

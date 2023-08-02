@@ -11,6 +11,7 @@ import black
 
 import abjad
 
+from . import helpers as _helpers
 from . import tags as _tags
 
 
@@ -57,7 +58,7 @@ def extern(
     """
     assert isinstance(path, pathlib.Path), repr(path)
     assert isinstance(include_path, pathlib.Path), repr(include_path)
-    tag = _tags.function_name(_frame())
+    tag = _helpers.function_name(_frame())
     assert isinstance(include_path, type(path)), repr(include_path)
     preamble_lines: list[str] = []
     score_lines: list[str] = []
