@@ -1280,17 +1280,16 @@ def join_broken_spanners(text: str, messages: list[str]) -> str:
     return text
 
 
-def not_topmost(path: pathlib.Path) -> list[str]:
-    assert isinstance(path, pathlib.Path)
-    messages = [f"Deactivating {NOT_TOPMOST.string} ..."]
+def not_topmost(text: str, messages: list[str]) -> str:
+    messages.append(f"Deactivating {NOT_TOPMOST.string} ...")
 
     def _deactivate(tags):
         tags_ = [NOT_TOPMOST]
         return bool(set(tags) & set(tags_))
 
-    _deactivate_tags(path, _deactivate, "not topmost", messages)
+    text = _deactivate_tags(text, _deactivate, "not topmost", messages)
     messages.append("")
-    return messages
+    return text
 
 
 def show_music_annotations(
@@ -1319,15 +1318,14 @@ def show_music_annotations(
 
 
 def show_tag(
-    path: pathlib.Path,
+    text: str,
     tag: abjad.Tag | str,
     messages: list[str],
     *,
     match: typing.Callable | None = None,
     prepend_empty_chord: bool = False,
     undo: bool = False,
-) -> None:
-    assert isinstance(path, pathlib.Path)
+) -> str:
     if match is not None:
         assert callable(match)
     if isinstance(tag, str):
@@ -1345,14 +1343,15 @@ def show_tag(
 
     if not undo:
         messages.append(f"Showing {name} tags ...")
-        _activate_tags(path, match, name, messages)
+        text = _activate_tags(text, match, name, messages)
     else:
         messages.append(f"Hiding {name} tags ...")
-        _deactivate_tags(
-            path,
+        text = _deactivate_tags(
+            text,
             match,
             name,
             messages,
             prepend_empty_chord=prepend_empty_chord,
         )
     messages.append("")
+    return text

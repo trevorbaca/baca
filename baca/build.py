@@ -141,7 +141,10 @@ def _externalize_music_ly(music_ly):
     assert music_ily.is_file()
     assert music_ily.parent.parent.name == "sections"
     for file in (music_ly, music_ily):
-        messages = baca.tags.not_topmost(file)
+        text = file.read_text()
+        messages = []
+        text = baca.tags.not_topmost(text, messages)
+        file.write_text(text)
         if messages:
             messages = "\n".join(messages) + "\n"
             print_file_handling(
@@ -776,61 +779,61 @@ def handle_build_tags(_sections_directory):
         text = baca.tags.color_persistent_indicators(text, messages, build, undo=True)
         text = baca.tags.show_music_annotations(text, messages, undo=True)
         text = baca.tags.join_broken_spanners(text, messages)
-        file.write_text(text)
-        baca.tags.show_tag(
-            file,
+        text = baca.tags.show_tag(
+            text,
             "left-broken-should-deactivate",
             messages,
             match=match_left_broken_should_deactivate,
             undo=True,
         )
         if file.name != final_ily_name:
-            baca.tags.show_tag(file, baca.tags.ANCHOR_NOTE, messages)
-            baca.tags.show_tag(file, baca.tags.ANCHOR_SKIP, messages)
-            baca.tags.show_tag(
-                file,
+            text = baca.tags.show_tag(text, baca.tags.ANCHOR_NOTE, messages)
+            text = baca.tags.show_tag(text, baca.tags.ANCHOR_SKIP, messages)
+            text = baca.tags.show_tag(
+                text,
                 baca.tags.ANCHOR_NOTE,
                 messages,
                 prepend_empty_chord=True,
                 undo=True,
             )
-            baca.tags.show_tag(
-                file,
+            text = baca.tags.show_tag(
+                text,
                 baca.tags.ANCHOR_SKIP,
                 messages,
                 prepend_empty_chord=True,
                 undo=True,
             )
-            baca.tags.show_tag(
-                file,
+            text = baca.tags.show_tag(
+                text,
                 "anchor-should-activate",
                 messages,
                 match=match_anchor_should_activate,
             )
-            baca.tags.show_tag(
-                file,
+            text = baca.tags.show_tag(
+                text,
                 "anchor-should-deactivate",
                 messages,
                 match=match_anchor_should_deactivate,
                 undo=True,
             )
-            baca.tags.show_tag(
-                file,
+            text = baca.tags.show_tag(
+                text,
                 baca.tags.EOS_STOP_MM_SPANNER,
                 messages,
             )
-        baca.tags.show_tag(
-            file,
+        text = baca.tags.show_tag(
+            text,
             baca.tags.METRIC_MODULATION_IS_STRIPPED,
             messages,
             undo=True,
         )
-        baca.tags.show_tag(
-            file,
+        text = baca.tags.show_tag(
+            text,
             baca.tags.METRIC_MODULATION_IS_SCALED,
             messages,
             undo=True,
         )
+        file.write_text(text)
         _tags = _sections_directory / f".{file.name}.tags"
         print_file_handling(f"Writing {baca.path.trim(_tags)} ...", log_only=True)
         text = "\n".join(messages) + "\n"
@@ -1234,8 +1237,9 @@ def show_annotations(file, *, undo=False):
         )
         return bool(set(tags) & set(tags_))
 
-    baca.tags.show_tag(
-        file,
+    text = file.read_text()
+    text = baca.tags.show_tag(
+        text,
         "annotation spanners",
         messages,
         match=_annotation_spanners,
@@ -1249,23 +1253,31 @@ def show_annotations(file, *, undo=False):
         )
         return bool(set(tags) & set(tags_))
 
-    baca.tags.show_tag(file, baca.tags.CLOCK_TIME, messages, undo=undo)
-    baca.tags.show_tag(file, baca.tags.FIGURE_LABEL, messages, undo=undo)
-    baca.tags.show_tag(file, baca.tags.INVISIBLE_MUSIC_COMMAND, messages, undo=not undo)
-    baca.tags.show_tag(file, baca.tags.INVISIBLE_MUSIC_COLORING, messages, undo=undo)
-    baca.tags.show_tag(file, baca.tags.LOCAL_MEASURE_NUMBER, messages, undo=undo)
-    baca.tags.show_tag(file, baca.tags.MEASURE_NUMBER, messages, undo=undo)
-    baca.tags.show_tag(file, baca.tags.MOCK_COLORING, messages, undo=undo)
-    text = file.read_text()
-    text = baca.tags.show_music_annotations(text, messages, undo=undo)
+    text = baca.tags.show_tag(text, baca.tags.CLOCK_TIME, messages, undo=undo)
+    text = baca.tags.show_tag(text, baca.tags.FIGURE_LABEL, messages, undo=undo)
+    text = baca.tags.show_tag(
+        text, baca.tags.INVISIBLE_MUSIC_COMMAND, messages, undo=not undo
+    )
+    text = baca.tags.show_tag(
+        text, baca.tags.INVISIBLE_MUSIC_COLORING, messages, undo=undo
+    )
+    text = baca.tags.show_tag(text, baca.tags.LOCAL_MEASURE_NUMBER, messages, undo=undo)
+    text = baca.tags.show_tag(text, baca.tags.MEASURE_NUMBER, messages, undo=undo)
+    text = baca.tags.show_tag(text, baca.tags.MOCK_COLORING, messages, undo=undo)
+    text = text = baca.tags.show_music_annotations(text, messages, undo=undo)
+    text = baca.tags.show_tag(
+        text, baca.tags.NOT_YET_PITCHED_COLORING, messages, undo=undo
+    )
+    text = baca.tags.show_tag(
+        text, baca.tags.RHYTHM_ANNOTATION_SPANNER, messages, undo=undo
+    )
+    text = baca.tags.show_tag(text, "spacing", messages, match=_spacing, undo=undo)
+    text = baca.tags.show_tag(text, baca.tags.STAGE_NUMBER, messages, undo=undo)
     file.write_text(text)
-    baca.tags.show_tag(file, baca.tags.NOT_YET_PITCHED_COLORING, messages, undo=undo)
-    baca.tags.show_tag(file, baca.tags.RHYTHM_ANNOTATION_SPANNER, messages, undo=undo)
-    baca.tags.show_tag(file, "spacing", messages, match=_spacing, undo=undo)
-    baca.tags.show_tag(file, baca.tags.STAGE_NUMBER, messages, undo=undo)
     return messages
 
 
+# TODO: remove?
 def show_tag(directory, tag, *, undo: bool = False):
     assert isinstance(undo, bool), repr(undo)
     directory = pathlib.Path(directory)
