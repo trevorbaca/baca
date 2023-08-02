@@ -693,17 +693,17 @@ def color_persistent_indicators(file, *, undo=False):
         print_always("Must call on file in section directory ...")
         sys.exit(1)
     messages = []
-    baca.tags.color_clefs(file, messages, undo=undo)
-    baca.tags.color_dynamics(file, messages, undo=undo)
-    baca.tags.color_instruments(file, messages, undo=undo)
-    baca.tags.color_short_instrument_names(file, messages, undo=undo)
-    baca.tags.color_metronome_marks(file, messages, undo=undo)
     text = file.read_text()
     build = "builds" in file.parts
+    text = baca.tags.color_clefs(text, messages, build, undo=undo)
+    text = baca.tags.color_dynamics(text, messages, undo=undo)
+    text = baca.tags.color_instruments(text, messages, undo=undo)
+    text = baca.tags.color_short_instrument_names(text, messages, undo=undo)
+    text = baca.tags.color_metronome_marks(text, messages, undo=undo)
     text = baca.tags.color_persistent_indicators(text, messages, build, undo=undo)
+    text = baca.tags.color_staff_lines(text, messages, build, undo=undo)
+    text = baca.tags.color_time_signatures(text, messages, build, undo=undo)
     file.write_text(text)
-    baca.tags.color_staff_lines(file, messages, undo=undo)
-    baca.tags.color_time_signatures(file, messages, undo=undo)
     return messages
 
 

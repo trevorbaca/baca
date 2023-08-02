@@ -936,27 +936,26 @@ def _deactivate_tags(
     )
 
 
-def color_clefs(path: pathlib.Path, messages: list[str], *, undo: bool = False) -> None:
-    assert isinstance(path, pathlib.Path)
+def color_clefs(
+    text: str, messages: list[str], build: bool, *, undo: bool = False
+) -> str:
     messages.append("Coloring clefs ...")
     name = "clef color"
 
     def match(tags):
-        build = "builds" in path.parts
+        # build = "builds" in path.parts
         tags_ = clef_color_tags(build=build)
         return bool(set(tags) & set(tags_))
 
     if not undo:
-        _activate_tags(path, match, name, messages)
+        text = _activate_tags(text, match, name, messages)
     else:
-        _deactivate_tags(path, match, name, messages)
+        text = _deactivate_tags(text, match, name, messages)
     messages.append("")
+    return text
 
 
-def color_dynamics(
-    path: pathlib.Path, messages: list[str], *, undo: bool = False
-) -> None:
-    assert isinstance(path, pathlib.Path)
+def color_dynamics(text: str, messages: list[str], *, undo: bool = False) -> str:
     messages.append("Coloring dynamics ...")
     name = "dynamic color"
 
@@ -965,16 +964,14 @@ def color_dynamics(
         return bool(set(tags) & set(tags_))
 
     if not undo:
-        _activate_tags(path, match, name, messages)
+        text = _activate_tags(text, match, name, messages)
     else:
-        _deactivate_tags(path, match, name, messages)
+        text = _deactivate_tags(text, match, name, messages)
     messages.append("")
+    return text
 
 
-def color_instruments(
-    path: pathlib.Path, messages: list[str], *, undo: bool = False
-) -> None:
-    assert isinstance(path, pathlib.Path)
+def color_instruments(text: str, messages: list[str], *, undo: bool = False) -> str:
     messages.append("Coloring instruments ...")
     name = "instrument color"
 
@@ -983,16 +980,16 @@ def color_instruments(
         return bool(set(tags) & set(tags_))
 
     if not undo:
-        _activate_tags(path, match, name, messages)
+        text = _activate_tags(text, match, name, messages)
     else:
-        _deactivate_tags(path, match, name, messages)
+        text = _deactivate_tags(text, match, name, messages)
     messages.append("")
+    return text
 
 
 def color_short_instrument_names(
-    path: pathlib.Path, messages: list[str], *, undo: bool = False
-) -> None:
-    assert isinstance(path, pathlib.Path)
+    text: str, messages: list[str], *, undo: bool = False
+) -> str:
     messages.append("Coloring short instrument names ...")
     name = "short instrument name color"
 
@@ -1001,17 +998,14 @@ def color_short_instrument_names(
         return bool(set(tags) & set(tags_))
 
     if not undo:
-        _activate_tags(path, match, name, messages)
+        text = _activate_tags(text, match, name, messages)
     else:
-        _deactivate_tags(path, match, name, messages)
+        text = _deactivate_tags(text, match, name, messages)
     messages.append("")
+    return text
 
 
-def color_metronome_marks(
-    path: pathlib.Path, messages: list[str], *, undo: bool = False
-) -> None:
-    assert isinstance(path, pathlib.Path)
-
+def color_metronome_marks(text: str, messages: list[str], *, undo: bool = False) -> str:
     def _activate(tags):
         tags_ = metronome_mark_color_expression_tags()
         return bool(set(tags) & set(tags_))
@@ -1022,15 +1016,22 @@ def color_metronome_marks(
 
     if undo:
         messages.append("Uncoloring metronome marks ...")
-        _activate_tags(path, _deactivate, "metronome mark color suppression", messages)
-        _deactivate_tags(path, _activate, "metronome mark color expression", messages)
+        text = _activate_tags(
+            text, _deactivate, "metronome mark color suppression", messages
+        )
+        text = _deactivate_tags(
+            text, _activate, "metronome mark color expression", messages
+        )
     else:
         messages.append("Coloring metronome marks ...")
-        _activate_tags(path, _activate, "metronome mark color experssion", messages)
-        _deactivate_tags(
-            path, _deactivate, "metronome mark color suppression", messages
+        text = _activate_tags(
+            text, _activate, "metronome mark color experssion", messages
+        )
+        text = _deactivate_tags(
+            text, _deactivate, "metronome mark color suppression", messages
         )
     messages.append("")
+    return text
 
 
 def color_persistent_indicators(
@@ -1068,41 +1069,41 @@ def color_persistent_indicators(
 
 
 def color_staff_lines(
-    path: pathlib.Path, messages: list[str], *, undo: bool = False
-) -> None:
-    assert isinstance(path, pathlib.Path)
+    text: str, messages: list[str], build: bool, *, undo: bool = False
+) -> str:
     messages.append("Coloring staff lines ...")
     name = "staff lines color"
 
     def match(tags):
-        build = "builds" in path.parts
+        # build = "builds" in path.parts
         tags_ = staff_lines_color_tags(build=build)
         return bool(set(tags) & set(tags_))
 
     if not undo:
-        _activate_tags(path, match, name, messages)
+        text = _activate_tags(text, match, name, messages)
     else:
-        _deactivate_tags(path, match, name, messages)
+        text = _deactivate_tags(text, match, name, messages)
     messages.append("")
+    return text
 
 
 def color_time_signatures(
-    path: pathlib.Path, messages: list[str], *, undo: bool = False
-) -> None:
-    assert isinstance(path, pathlib.Path)
+    text: str, messages: list[str], build: bool, *, undo: bool = False
+) -> str:
     messages.append("Coloring time signatures ...")
     name = "time signature color"
 
     def match(tags):
-        build = "builds" in path.parts
+        # build = "builds" in path.parts
         tags_ = time_signature_color_tags(build=build)
         return bool(set(tags) & set(tags_))
 
     if not undo:
-        _activate_tags(path, match, name, messages)
+        text = _activate_tags(text, match, name, messages)
     else:
-        _deactivate_tags(path, match, name, messages)
+        text = _deactivate_tags(text, match, name, messages)
     messages.append("")
+    return text
 
 
 def handle_edition_tags(
