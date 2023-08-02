@@ -786,51 +786,43 @@ def handle_build_tags(_sections_directory):
             undo=True,
         )
         messages.extend(messages_)
-        messages_ = baca.tags.show_tag(
-            file, baca.tags.ANCHOR_NOTE, skip_file_name=final_ily_name
-        )
-        messages.extend(messages_)
-        messages_ = baca.tags.show_tag(
-            file, baca.tags.ANCHOR_SKIP, skip_file_name=final_ily_name
-        )
-        messages.extend(messages_)
-        messages_ = baca.tags.show_tag(
-            file,
-            baca.tags.ANCHOR_NOTE,
-            prepend_empty_chord=True,
-            skip_file_name=final_ily_name,
-            undo=True,
-        )
-        messages.extend(messages_)
-        messages_ = baca.tags.show_tag(
-            file,
-            baca.tags.ANCHOR_SKIP,
-            prepend_empty_chord=True,
-            skip_file_name=final_ily_name,
-            undo=True,
-        )
-        messages.extend(messages_)
-        messages_ = baca.tags.show_tag(
-            file,
-            "anchor-should-activate",
-            match=match_anchor_should_activate,
-            skip_file_name=final_ily_name,
-        )
-        messages.extend(messages_)
-        messages_ = baca.tags.show_tag(
-            file,
-            "anchor-should-deactivate",
-            match=match_anchor_should_deactivate,
-            skip_file_name=final_ily_name,
-            undo=True,
-        )
-        messages.extend(messages_)
-        messages_ = baca.tags.show_tag(
-            file,
-            baca.tags.EOS_STOP_MM_SPANNER,
-            skip_file_name=final_ily_name,
-        )
-        messages.extend(messages_)
+        if file.name != final_ily_name:
+            messages_ = baca.tags.show_tag(file, baca.tags.ANCHOR_NOTE)
+            messages.extend(messages_)
+            messages_ = baca.tags.show_tag(file, baca.tags.ANCHOR_SKIP)
+            messages.extend(messages_)
+            messages_ = baca.tags.show_tag(
+                file,
+                baca.tags.ANCHOR_NOTE,
+                prepend_empty_chord=True,
+                undo=True,
+            )
+            messages.extend(messages_)
+            messages_ = baca.tags.show_tag(
+                file,
+                baca.tags.ANCHOR_SKIP,
+                prepend_empty_chord=True,
+                undo=True,
+            )
+            messages.extend(messages_)
+            messages_ = baca.tags.show_tag(
+                file,
+                "anchor-should-activate",
+                match=match_anchor_should_activate,
+            )
+            messages.extend(messages_)
+            messages_ = baca.tags.show_tag(
+                file,
+                "anchor-should-deactivate",
+                match=match_anchor_should_deactivate,
+                undo=True,
+            )
+            messages.extend(messages_)
+            messages_ = baca.tags.show_tag(
+                file,
+                baca.tags.EOS_STOP_MM_SPANNER,
+            )
+            messages.extend(messages_)
         messages_ = baca.tags.show_tag(
             file,
             baca.tags.METRIC_MODULATION_IS_STRIPPED,
