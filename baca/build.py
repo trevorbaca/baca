@@ -251,62 +251,6 @@ def _log_timing(section_directory, timing):
         pointer.write(line)
 
 
-def _make_annotation_jobs(file, *, undo=False):
-    messages = []
-
-    def _annotation_spanners(tags):
-        tags_ = (
-            baca.tags.MATERIAL_ANNOTATION_SPANNER,
-            baca.tags.MOMENT_ANNOTATION_SPANNER,
-            baca.tags.PITCH_ANNOTATION_SPANNER,
-            baca.tags.RHYTHM_ANNOTATION_SPANNER,
-        )
-        return bool(set(tags) & set(tags_))
-
-    messages_ = baca.jobs.show_tag(
-        file,
-        "annotation spanners",
-        match=_annotation_spanners,
-        undo=undo,
-    )
-    messages.extend(messages_)
-
-    def _spacing(tags):
-        tags_ = (
-            baca.tags.SPACING,
-            baca.tags.SPACING_OVERRIDE,
-        )
-        return bool(set(tags) & set(tags_))
-
-    messages_ = baca.jobs.show_tag(file, baca.tags.CLOCK_TIME, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.jobs.show_tag(file, baca.tags.FIGURE_LABEL, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.jobs.show_tag(
-        file, baca.tags.INVISIBLE_MUSIC_COMMAND, undo=not undo
-    )
-    messages.extend(messages_)
-    messages_ = baca.jobs.show_tag(file, baca.tags.INVISIBLE_MUSIC_COLORING, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.jobs.show_tag(file, baca.tags.LOCAL_MEASURE_NUMBER, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.jobs.show_tag(file, baca.tags.MEASURE_NUMBER, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.jobs.show_tag(file, baca.tags.MOCK_COLORING, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.jobs.show_music_annotations(file, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.jobs.show_tag(file, baca.tags.NOT_YET_PITCHED_COLORING, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.jobs.show_tag(file, baca.tags.RHYTHM_ANNOTATION_SPANNER, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.jobs.show_tag(file, "spacing", match=_spacing, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.jobs.show_tag(file, baca.tags.STAGE_NUMBER, undo=undo)
-    messages.extend(messages_)
-    return messages
-
-
 def _make_section_clicktrack(lilypond_file, mtime, section_directory):
     metadata = baca.path.get_metadata(section_directory)
     if metadata.get("first_metronome_mark") is False:
@@ -1269,7 +1213,58 @@ def show_annotations(file, *, undo=False):
     if "sections" not in file.parts:
         print_always("Must call on file in section directory ...")
         sys.exit(1)
-    messages = _make_annotation_jobs(file, undo=undo)
+    messages = []
+
+    def _annotation_spanners(tags):
+        tags_ = (
+            baca.tags.MATERIAL_ANNOTATION_SPANNER,
+            baca.tags.MOMENT_ANNOTATION_SPANNER,
+            baca.tags.PITCH_ANNOTATION_SPANNER,
+            baca.tags.RHYTHM_ANNOTATION_SPANNER,
+        )
+        return bool(set(tags) & set(tags_))
+
+    messages_ = baca.jobs.show_tag(
+        file,
+        "annotation spanners",
+        match=_annotation_spanners,
+        undo=undo,
+    )
+    messages.extend(messages_)
+
+    def _spacing(tags):
+        tags_ = (
+            baca.tags.SPACING,
+            baca.tags.SPACING_OVERRIDE,
+        )
+        return bool(set(tags) & set(tags_))
+
+    messages_ = baca.jobs.show_tag(file, baca.tags.CLOCK_TIME, undo=undo)
+    messages.extend(messages_)
+    messages_ = baca.jobs.show_tag(file, baca.tags.FIGURE_LABEL, undo=undo)
+    messages.extend(messages_)
+    messages_ = baca.jobs.show_tag(
+        file, baca.tags.INVISIBLE_MUSIC_COMMAND, undo=not undo
+    )
+    messages.extend(messages_)
+    messages_ = baca.jobs.show_tag(file, baca.tags.INVISIBLE_MUSIC_COLORING, undo=undo)
+    messages.extend(messages_)
+    messages_ = baca.jobs.show_tag(file, baca.tags.LOCAL_MEASURE_NUMBER, undo=undo)
+    messages.extend(messages_)
+    messages_ = baca.jobs.show_tag(file, baca.tags.MEASURE_NUMBER, undo=undo)
+    messages.extend(messages_)
+    messages_ = baca.jobs.show_tag(file, baca.tags.MOCK_COLORING, undo=undo)
+    messages.extend(messages_)
+    messages_ = baca.jobs.show_music_annotations(file, undo=undo)
+    messages.extend(messages_)
+    messages_ = baca.jobs.show_tag(file, baca.tags.NOT_YET_PITCHED_COLORING, undo=undo)
+    messages.extend(messages_)
+    messages_ = baca.jobs.show_tag(file, baca.tags.RHYTHM_ANNOTATION_SPANNER, undo=undo)
+    messages.extend(messages_)
+    messages_ = baca.jobs.show_tag(file, "spacing", match=_spacing, undo=undo)
+    messages.extend(messages_)
+    messages_ = baca.jobs.show_tag(file, baca.tags.STAGE_NUMBER, undo=undo)
+    messages.extend(messages_)
     return messages
 
 
