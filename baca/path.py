@@ -5,7 +5,6 @@ import importlib
 import os
 import pathlib
 import types
-import typing
 from inspect import currentframe as _frame
 
 import black
@@ -33,80 +32,6 @@ def _get_previous_section(path: pathlib.Path):
     return previous_section
 
 
-def activate(
-    path: pathlib.Path,
-    tag: abjad.Tag | typing.Callable,
-    *,
-    indent: int = 0,
-    name: str = "",
-    prepend_empty_chord: bool = False,
-    skip_file_name: str = "",
-    undo: bool = False,
-) -> tuple[int, int, list[str]]:
-    """
-    Activates ``tag`` in .ily or .ly ``path``.
-
-    Returns triple.
-
-    First item in triple is count of deactivated tags activated by method.
-
-    Second item in pair is count of already-active tags skipped by method.
-
-    Third item in pair is list of string messages that explain what happened.
-    """
-    assert isinstance(path, pathlib.Path), repr(path)
-    assert path.is_file(), repr(path)
-    assert path.suffix in (".ily", ".ly")
-    if path.name not in ("layout.ly", "music.ily", "music.ly"):
-        assert path.name[0].isdigit(), repr(path)
-    assert isinstance(indent, int), repr(indent)
-    if path.name == skip_file_name:
-        return 0, 0, []
-    if isinstance(tag, str):
-        raise Exception(f"must be tag or callable: {tag!r}")
-    text = path.read_text()
-    if undo:
-        text, count, skipped = abjad.deactivate(
-            text,
-            tag,
-            prepend_empty_chord=prepend_empty_chord,
-        )
-    else:
-        text, count, skipped = abjad.activate(text, tag)
-    path.write_text(text)
-    if name is None:
-        if isinstance(tag, abjad.Tag):
-            name = tag.string
-        else:
-            name = str(tag)
-    if undo:
-        adjective = "inactive"
-        gerund = "deactivating"
-    else:
-        adjective = "active"
-        gerund = "activating"
-    messages = []
-    total = count + skipped
-    if total == 0:
-        messages.append(f"found no {name} tags")
-    if 0 < total:
-        tags = abjad.string.pluralize("tag", total)
-        messages.append(f"found {total} {name} {tags}")
-        if 0 < count:
-            tags = abjad.string.pluralize("tag", count)
-            message = f"{gerund} {count} {name} {tags}"
-            messages.append(message)
-        if 0 < skipped:
-            tags = abjad.string.pluralize("tag", skipped)
-            message = f"skipping {skipped} ({adjective}) {name} {tags}"
-            messages.append(message)
-    whitespace = indent * " "
-    messages = [
-        whitespace + abjad.string.capitalize_start(_) + " ..." for _ in messages
-    ]
-    return count, skipped, messages
-
-
 def add_metadatum(path: pathlib.Path, name: str, value) -> None:
     assert isinstance(path, pathlib.Path), repr(path)
     assert " " not in name, repr(name)
@@ -115,26 +40,6 @@ def add_metadatum(path: pathlib.Path, name: str, value) -> None:
     dictionary[name] = value
     metadata = types.MappingProxyType(dictionary)
     write_metadata_py(path, metadata)
-
-
-def deactivate(
-    path: pathlib.Path,
-    tag: abjad.Tag | typing.Callable,
-    *,
-    indent: int = 0,
-    name: str = "",
-    prepend_empty_chord: bool = False,
-    skip_file_name: str = "",
-):
-    return activate(
-        path,
-        tag,
-        name=name,
-        indent=indent,
-        prepend_empty_chord=prepend_empty_chord,
-        skip_file_name=skip_file_name,
-        undo=True,
-    )
 
 
 def extern(

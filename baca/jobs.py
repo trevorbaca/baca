@@ -11,6 +11,100 @@ from . import path as _path
 from . import tags as _tags
 
 
+def _activate(
+    path: pathlib.Path,
+    tag: abjad.Tag | typing.Callable,
+    *,
+    indent: int = 0,
+    name: str = "",
+    prepend_empty_chord: bool = False,
+    skip_file_name: str = "",
+    undo: bool = False,
+) -> tuple[int, int, list[str]]:
+    """
+    Activates ``tag`` in .ily or .ly ``path``.
+
+    Returns triple.
+
+    First item in triple is count of deactivated tags activated by method.
+
+    Second item in pair is count of already-active tags skipped by method.
+
+    Third item in pair is list of string messages that explain what happened.
+    """
+    assert isinstance(path, pathlib.Path), repr(path)
+    assert path.is_file(), repr(path)
+    assert path.suffix in (".ily", ".ly")
+    if path.name not in ("layout.ly", "music.ily", "music.ly"):
+        assert path.name[0].isdigit(), repr(path)
+    assert isinstance(indent, int), repr(indent)
+    if path.name == skip_file_name:
+        return 0, 0, []
+    if isinstance(tag, str):
+        raise Exception(f"must be tag or callable: {tag!r}")
+    text = path.read_text()
+    if undo:
+        text, count, skipped = abjad.deactivate(
+            text,
+            tag,
+            prepend_empty_chord=prepend_empty_chord,
+        )
+    else:
+        text, count, skipped = abjad.activate(text, tag)
+    path.write_text(text)
+    if name is None:
+        if isinstance(tag, abjad.Tag):
+            name = tag.string
+        else:
+            name = str(tag)
+    if undo:
+        adjective = "inactive"
+        gerund = "deactivating"
+    else:
+        adjective = "active"
+        gerund = "activating"
+    messages = []
+    total = count + skipped
+    if total == 0:
+        messages.append(f"found no {name} tags")
+    if 0 < total:
+        tags = abjad.string.pluralize("tag", total)
+        messages.append(f"found {total} {name} {tags}")
+        if 0 < count:
+            tags = abjad.string.pluralize("tag", count)
+            message = f"{gerund} {count} {name} {tags}"
+            messages.append(message)
+        if 0 < skipped:
+            tags = abjad.string.pluralize("tag", skipped)
+            message = f"skipping {skipped} ({adjective}) {name} {tags}"
+            messages.append(message)
+    whitespace = indent * " "
+    messages = [
+        whitespace + abjad.string.capitalize_start(_) + " ..." for _ in messages
+    ]
+    return count, skipped, messages
+
+
+def _deactivate(
+    path: pathlib.Path,
+    tag: abjad.Tag | typing.Callable,
+    *,
+    indent: int = 0,
+    name: str = "",
+    prepend_empty_chord: bool = False,
+    skip_file_name: str = "",
+):
+    return _activate(
+        path,
+        tag,
+        name=name,
+        indent=indent,
+        prepend_empty_chord=prepend_empty_chord,
+        skip_file_name=skip_file_name,
+        undo=True,
+    )
+
+
 def color_clefs(path: pathlib.Path, *, undo: bool = False) -> list[str]:
     assert isinstance(path, pathlib.Path)
     messages, name = ["Coloring clefs ..."], "clef color"
@@ -21,9 +115,9 @@ def color_clefs(path: pathlib.Path, *, undo: bool = False) -> list[str]:
         return bool(set(tags) & set(tags_))
 
     if not undo:
-        _, _, messages_ = _path.activate(path, match, name=name)
+        _, _, messages_ = _activate(path, match, name=name)
     else:
-        _, _, messages_ = _path.deactivate(path, match, name=name)
+        _, _, messages_ = _deactivate(path, match, name=name)
     messages.extend(messages_)
     messages.append("")
     return messages
@@ -38,9 +132,9 @@ def color_dynamics(path: pathlib.Path, *, undo: bool = False) -> list[str]:
         return bool(set(tags) & set(tags_))
 
     if not undo:
-        _, _, messages_ = _path.activate(path, match, name=name)
+        _, _, messages_ = _activate(path, match, name=name)
     else:
-        _, _, messages_ = _path.deactivate(path, match, name=name)
+        _, _, messages_ = _deactivate(path, match, name=name)
     messages.extend(messages_)
     messages.append("")
     return messages
@@ -55,9 +149,9 @@ def color_instruments(path: pathlib.Path, *, undo: bool = False) -> list[str]:
         return bool(set(tags) & set(tags_))
 
     if not undo:
-        _, _, messages_ = _path.activate(path, match, name=name)
+        _, _, messages_ = _activate(path, match, name=name)
     else:
-        _, _, messages_ = _path.deactivate(path, match, name=name)
+        _, _, messages_ = _deactivate(path, match, name=name)
     messages.extend(messages_)
     messages.append("")
     return messages
@@ -76,9 +170,9 @@ def color_short_instrument_names(
         return bool(set(tags) & set(tags_))
 
     if not undo:
-        _, _, messages_ = _path.activate(path, match, name=name)
+        _, _, messages_ = _activate(path, match, name=name)
     else:
-        _, _, messages_ = _path.deactivate(path, match, name=name)
+        _, _, messages_ = _deactivate(path, match, name=name)
     messages.extend(messages_)
     messages.append("")
     return messages
@@ -97,21 +191,21 @@ def color_metronome_marks(path: pathlib.Path, undo: bool = False) -> list[str]:
 
     if undo:
         messages = ["Uncoloring metronome marks ..."]
-        _, _, messages_ = _path.activate(
+        _, _, messages_ = _activate(
             path, deactivate, name="metronome mark color suppression"
         )
         messages.extend(messages_)
-        _, _, messages_ = _path.deactivate(
+        _, _, messages_ = _deactivate(
             path, activate, name="metronome mark color expression"
         )
         messages.extend(messages_)
     else:
         messages = ["Coloring metronome marks ..."]
-        _, _, messages_ = _path.activate(
+        _, _, messages_ = _activate(
             path, activate, name="metronome mark color experssion"
         )
         messages.extend(messages_)
-        _, _, messages_ = _path.deactivate(
+        _, _, messages_ = _deactivate(
             path, deactivate, name="metronome mark color suppression"
         )
         messages.extend(messages_)
@@ -134,21 +228,21 @@ def color_persistent_indicators(path: pathlib.Path, *, undo: bool = False) -> li
 
     if undo:
         messages = [f"Uncoloring {name}s ..."]
-        _, _, messages_ = _path.activate(
+        _, _, messages_ = _activate(
             path, deactivate, name="persistent indicator color suppression"
         )
         messages.extend(messages_)
-        _, _, messages_ = _path.deactivate(
+        _, _, messages_ = _deactivate(
             path, activate, name="persistent indicator color expression"
         )
         messages.extend(messages_)
     else:
         messages = [f"Coloring {name}s ..."]
-        _, _, messages_ = _path.activate(
+        _, _, messages_ = _activate(
             path, activate, name="persistent indicator color expression"
         )
         messages.extend(messages_)
-        _, _, messages_ = _path.deactivate(
+        _, _, messages_ = _deactivate(
             path, deactivate, name="persistent indicator color suppression"
         )
         messages.extend(messages_)
@@ -166,9 +260,9 @@ def color_staff_lines(path: pathlib.Path, *, undo: bool = False) -> list[str]:
         return bool(set(tags) & set(tags_))
 
     if not undo:
-        _, _, messages_ = _path.activate(path, match, name=name)
+        _, _, messages_ = _activate(path, match, name=name)
     else:
-        _, _, messages_ = _path.deactivate(path, match, name=name)
+        _, _, messages_ = _deactivate(path, match, name=name)
     messages.extend(messages_)
     messages.append("")
     return messages
@@ -184,9 +278,9 @@ def color_time_signatures(path: pathlib.Path, *, undo: bool = False) -> list[str
         return bool(set(tags) & set(tags_))
 
     if not undo:
-        _, _, messages_ = _path.activate(path, match, name=name)
+        _, _, messages_ = _activate(path, match, name=name)
     else:
-        _, _, messages_ = _path.deactivate(path, match, name=name)
+        _, _, messages_ = _deactivate(path, match, name=name)
     messages.extend(messages_)
     messages.append("")
     return messages
@@ -250,7 +344,7 @@ def handle_edition_tags(path: pathlib.Path) -> list[str]:
                 return True
         return False
 
-    _, _, messages_ = _path.deactivate(path, deactivate, name="other-edition")
+    _, _, messages_ = _deactivate(path, deactivate, name="other-edition")
     messages.extend(messages_)
 
     def activate(tags):
@@ -262,7 +356,7 @@ def handle_edition_tags(path: pathlib.Path) -> list[str]:
                 return True
         return bool(set(tags) & set([this_edition, this_directory]))
 
-    _, _, messages_ = _path.activate(path, activate, name="this-edition")
+    _, _, messages_ = _activate(path, activate, name="this-edition")
     messages.extend(messages_)
     messages.append("")
     return messages
@@ -281,7 +375,7 @@ def handle_fermata_bar_lines(path: pathlib.Path) -> list[str]:
         return bool(set(tags) & set([_tags.FERMATA_MEASURE]))
 
     # activate fermata measure bar line adjustment tags ...
-    _, _, messages_ = _path.activate(path, activate, name="bar line adjustment")
+    _, _, messages_ = _activate(path, activate, name="bar line adjustment")
     messages.extend(messages_)
     # ... then deactivate non-EOL tags
     if path.is_dir():
@@ -304,9 +398,7 @@ def handle_fermata_bar_lines(path: pathlib.Path) -> list[str]:
                     return True
             return False
 
-        _, _, messages_ = _path.deactivate(
-            path, deactivate, name="EOL fermata bar line"
-        )
+        _, _, messages_ = _deactivate(path, deactivate, name="EOL fermata bar line")
         messages.extend(messages_)
     messages.append("")
     return messages
@@ -323,7 +415,7 @@ def handle_mol_tags(path: pathlib.Path) -> list[str]:
         tags_ = set([_tags.NOT_MOL, _tags.ONLY_MOL])
         return bool(set(tags) & tags_)
 
-    _, _, messages_ = _path.activate(path, activate, name="MOL")
+    _, _, messages_ = _activate(path, activate, name="MOL")
     messages.extend(messages_)
     # ... then deactivate conflicting middle-of-line tags
     if path.is_dir():
@@ -351,7 +443,7 @@ def handle_mol_tags(path: pathlib.Path) -> list[str]:
                     return True
             return False
 
-        _, _, messages_ = _path.deactivate(path, deactivate, name="conflicting MOL")
+        _, _, messages_ = _deactivate(path, deactivate, name="conflicting MOL")
         messages.extend(messages_)
     messages.append("")
     return messages
@@ -365,7 +457,7 @@ def handle_shifted_clefs(path: pathlib.Path) -> list[str]:
         return _tags.SHIFTED_CLEF in tags
 
     # set X-extent to false and left-shift measure-initial clefs ...
-    _, _, messages_ = _path.activate(path, activate, name="shifted clef")
+    _, _, messages_ = _activate(path, activate, name="shifted clef")
     messages.extend(messages_)
     # ... then unshift clefs at beginning-of-line
     if "builds" in path.parts:
@@ -392,7 +484,7 @@ def handle_shifted_clefs(path: pathlib.Path) -> list[str]:
                 return True
             return False
 
-        _, _, messages_ = _path.deactivate(path, deactivate, name="BOL clef")
+        _, _, messages_ = _deactivate(path, deactivate, name="BOL clef")
         messages.extend(messages_)
     messages.append("")
     return messages
@@ -410,11 +502,9 @@ def join_broken_spanners(path: pathlib.Path) -> list[str]:
         tags_ = [_tags.HIDE_TO_JOIN_BROKEN_SPANNERS]
         return bool(set(tags) & set(tags_))
 
-    _, _, messages_ = _path.activate(path, activate, name="broken spanner expression")
+    _, _, messages_ = _activate(path, activate, name="broken spanner expression")
     messages.extend(messages_)
-    _, _, messages_ = _path.deactivate(
-        path, deactivate, name="broken spanner suppression"
-    )
+    _, _, messages_ = _deactivate(path, deactivate, name="broken spanner suppression")
     messages.extend(messages_)
     messages.append("")
     return messages
@@ -423,7 +513,7 @@ def join_broken_spanners(path: pathlib.Path) -> list[str]:
 def not_topmost(path: pathlib.Path) -> list[str]:
     assert isinstance(path, pathlib.Path)
     messages = [f"Deactivating {_tags.NOT_TOPMOST.string} ..."]
-    count, skipped, messages_ = _path.deactivate(
+    count, skipped, messages_ = _deactivate(
         path,
         _tags.NOT_TOPMOST,
         name="not topmost",
@@ -447,15 +537,15 @@ def show_music_annotations(path: pathlib.Path, *, undo: bool = False) -> list[st
 
     if not undo:
         messages.append(f"Showing {name}s ...")
-        _, _, messages_ = _path.activate(path, match, name=name)
+        _, _, messages_ = _activate(path, match, name=name)
         messages.extend(messages_)
-        _, _, messages_ = _path.deactivate(path, match_2, name=name)
+        _, _, messages_ = _deactivate(path, match_2, name=name)
         messages.extend(messages_)
     else:
         messages.append(f"Hiding {name}s ...")
-        _, _, messages_ = _path.activate(path, match_2, name=name)
+        _, _, messages_ = _activate(path, match_2, name=name)
         messages.extend(messages_)
-        _, _, messages_ = _path.deactivate(path, match, name=name)
+        _, _, messages_ = _deactivate(path, match, name=name)
         messages.extend(messages_)
     messages.append("")
     return messages
@@ -489,13 +579,13 @@ def show_tag(
 
     if not undo:
         messages.append(f"Showing {name} tags ...")
-        _, _, messages_ = _path.activate(
+        _, _, messages_ = _activate(
             path, match, name=name, skip_file_name=skip_file_name
         )
         messages.extend(messages_)
     else:
         messages.append(f"Hiding {name} tags ...")
-        _, _, messages_ = _path.deactivate(
+        _, _, messages_ = _deactivate(
             path,
             match,
             name=name,
