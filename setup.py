@@ -19,7 +19,7 @@ if __name__ == "__main__":
         author_email="trevor.baca@gmail.com",
         description="Trevor Bača's Abjad library.",
         install_requires=[
-            "abjad>=3.18",
+            "abjad>=3.19",
             "sphinx",
             "sphinx-rtd-theme",
             "sphinx-toggleprompt",
