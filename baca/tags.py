@@ -862,7 +862,7 @@ def wrappers(wrappers: list[abjad.Wrapper], *tags: abjad.Tag):
 # BUILD FUNCTIONS
 
 
-def _activate(
+def _activate_tags(
     path: pathlib.Path,
     tag: abjad.Tag | typing.Callable,
     *,
@@ -871,7 +871,7 @@ def _activate(
     prepend_empty_chord: bool = False,
     skip_file_name: str = "",
     undo: bool = False,
-) -> tuple[int, int, list[str]]:
+) -> list[str]:
     """
     Activates ``tag`` in .ily or .ly ``path``.
 
@@ -890,7 +890,7 @@ def _activate(
         assert path.name[0].isdigit(), repr(path)
     assert isinstance(indent, int), repr(indent)
     if path.name == skip_file_name:
-        return 0, 0, []
+        []
     if isinstance(tag, str):
         raise Exception(f"must be tag or callable: {tag!r}")
     text = path.read_text()
@@ -933,10 +933,10 @@ def _activate(
     messages = [
         whitespace + abjad.string.capitalize_start(_) + " ..." for _ in messages
     ]
-    return count, skipped, messages
+    return messages
 
 
-def _deactivate(
+def _deactivate_tags(
     path: pathlib.Path,
     tag: abjad.Tag | typing.Callable,
     *,
@@ -944,8 +944,8 @@ def _deactivate(
     name: str = "",
     prepend_empty_chord: bool = False,
     skip_file_name: str = "",
-):
-    return _activate(
+) -> list[str]:
+    return _activate_tags(
         path,
         tag,
         name=name,
@@ -966,9 +966,9 @@ def color_clefs(path: pathlib.Path, *, undo: bool = False) -> list[str]:
         return bool(set(tags) & set(tags_))
 
     if not undo:
-        _, _, messages_ = _activate(path, match, name=name)
+        messages_ = _activate_tags(path, match, name=name)
     else:
-        _, _, messages_ = _deactivate(path, match, name=name)
+        messages_ = _deactivate_tags(path, match, name=name)
     messages.extend(messages_)
     messages.append("")
     return messages
@@ -983,9 +983,9 @@ def color_dynamics(path: pathlib.Path, *, undo: bool = False) -> list[str]:
         return bool(set(tags) & set(tags_))
 
     if not undo:
-        _, _, messages_ = _activate(path, match, name=name)
+        messages_ = _activate_tags(path, match, name=name)
     else:
-        _, _, messages_ = _deactivate(path, match, name=name)
+        messages_ = _deactivate_tags(path, match, name=name)
     messages.extend(messages_)
     messages.append("")
     return messages
@@ -1000,9 +1000,9 @@ def color_instruments(path: pathlib.Path, *, undo: bool = False) -> list[str]:
         return bool(set(tags) & set(tags_))
 
     if not undo:
-        _, _, messages_ = _activate(path, match, name=name)
+        messages_ = _activate_tags(path, match, name=name)
     else:
-        _, _, messages_ = _deactivate(path, match, name=name)
+        messages_ = _deactivate_tags(path, match, name=name)
     messages.extend(messages_)
     messages.append("")
     return messages
@@ -1021,9 +1021,9 @@ def color_short_instrument_names(
         return bool(set(tags) & set(tags_))
 
     if not undo:
-        _, _, messages_ = _activate(path, match, name=name)
+        messages_ = _activate_tags(path, match, name=name)
     else:
-        _, _, messages_ = _deactivate(path, match, name=name)
+        messages_ = _deactivate_tags(path, match, name=name)
     messages.extend(messages_)
     messages.append("")
     return messages
@@ -1032,32 +1032,32 @@ def color_short_instrument_names(
 def color_metronome_marks(path: pathlib.Path, undo: bool = False) -> list[str]:
     assert isinstance(path, pathlib.Path)
 
-    def activate(tags):
+    def _activate(tags):
         tags_ = metronome_mark_color_expression_tags()
         return bool(set(tags) & set(tags_))
 
-    def deactivate(tags):
+    def _deactivate(tags):
         tags_ = metronome_mark_color_suppression_tags()
         return bool(set(tags) & set(tags_))
 
     if undo:
         messages = ["Uncoloring metronome marks ..."]
-        _, _, messages_ = _activate(
-            path, deactivate, name="metronome mark color suppression"
+        messages_ = _activate_tags(
+            path, _deactivate, name="metronome mark color suppression"
         )
         messages.extend(messages_)
-        _, _, messages_ = _deactivate(
-            path, activate, name="metronome mark color expression"
+        messages_ = _deactivate_tags(
+            path, _activate, name="metronome mark color expression"
         )
         messages.extend(messages_)
     else:
         messages = ["Coloring metronome marks ..."]
-        _, _, messages_ = _activate(
-            path, activate, name="metronome mark color experssion"
+        messages_ = _activate_tags(
+            path, _activate, name="metronome mark color experssion"
         )
         messages.extend(messages_)
-        _, _, messages_ = _deactivate(
-            path, deactivate, name="metronome mark color suppression"
+        messages_ = _deactivate_tags(
+            path, _deactivate, name="metronome mark color suppression"
         )
         messages.extend(messages_)
     messages.append("")
@@ -1068,33 +1068,33 @@ def color_persistent_indicators(path: pathlib.Path, *, undo: bool = False) -> li
     assert isinstance(path, pathlib.Path)
     name = "persistent indicator"
 
-    def activate(tags):
+    def _activate(tags):
         build = "builds" in path.parts
         tags_ = persistent_indicator_color_expression_tags(build=build)
         return bool(set(tags) & set(tags_))
 
-    def deactivate(tags):
+    def _deactivate(tags):
         tags_ = persistent_indicator_color_suppression_tags()
         return bool(set(tags) & set(tags_))
 
     if undo:
         messages = [f"Uncoloring {name}s ..."]
-        _, _, messages_ = _activate(
-            path, deactivate, name="persistent indicator color suppression"
+        messages_ = _activate_tags(
+            path, _deactivate, name="persistent indicator color suppression"
         )
         messages.extend(messages_)
-        _, _, messages_ = _deactivate(
-            path, activate, name="persistent indicator color expression"
+        messages_ = _deactivate_tags(
+            path, _activate, name="persistent indicator color expression"
         )
         messages.extend(messages_)
     else:
         messages = [f"Coloring {name}s ..."]
-        _, _, messages_ = _activate(
-            path, activate, name="persistent indicator color expression"
+        messages_ = _activate_tags(
+            path, _activate, name="persistent indicator color expression"
         )
         messages.extend(messages_)
-        _, _, messages_ = _deactivate(
-            path, deactivate, name="persistent indicator color suppression"
+        messages_ = _deactivate_tags(
+            path, _deactivate, name="persistent indicator color suppression"
         )
         messages.extend(messages_)
     messages.append("")
@@ -1111,9 +1111,9 @@ def color_staff_lines(path: pathlib.Path, *, undo: bool = False) -> list[str]:
         return bool(set(tags) & set(tags_))
 
     if not undo:
-        _, _, messages_ = _activate(path, match, name=name)
+        messages_ = _activate_tags(path, match, name=name)
     else:
-        _, _, messages_ = _deactivate(path, match, name=name)
+        messages_ = _deactivate_tags(path, match, name=name)
     messages.extend(messages_)
     messages.append("")
     return messages
@@ -1129,9 +1129,9 @@ def color_time_signatures(path: pathlib.Path, *, undo: bool = False) -> list[str
         return bool(set(tags) & set(tags_))
 
     if not undo:
-        _, _, messages_ = _activate(path, match, name=name)
+        messages_ = _activate_tags(path, match, name=name)
     else:
-        _, _, messages_ = _deactivate(path, match, name=name)
+        messages_ = _deactivate_tags(path, match, name=name)
     messages.extend(messages_)
     messages.append("")
     return messages
@@ -1185,7 +1185,7 @@ def handle_edition_tags(path: pathlib.Path) -> list[str]:
     this_directory = abjad.Tag(f"+{abjad.string.to_shout_case(directory_name)}")
     not_this_directory = abjad.Tag(f"-{abjad.string.to_shout_case(directory_name)}")
 
-    def deactivate(tags):
+    def _deactivate(tags):
         if not_this_edition in tags:
             return True
         if not_this_directory in tags:
@@ -1195,10 +1195,10 @@ def handle_edition_tags(path: pathlib.Path) -> list[str]:
                 return True
         return False
 
-    _, _, messages_ = _deactivate(path, deactivate, name="other-edition")
+    messages_ = _deactivate_tags(path, _deactivate, name="other-edition")
     messages.extend(messages_)
 
-    def activate(tags):
+    def _activate(tags):
         for tag in tags:
             if tag in [not_this_edition, not_this_directory]:
                 return False
@@ -1207,7 +1207,7 @@ def handle_edition_tags(path: pathlib.Path) -> list[str]:
                 return True
         return bool(set(tags) & set([this_edition, this_directory]))
 
-    _, _, messages_ = _activate(path, activate, name="this-edition")
+    messages_ = _activate_tags(path, _activate, name="this-edition")
     messages.extend(messages_)
     messages.append("")
     return messages
@@ -1223,11 +1223,11 @@ def handle_fermata_bar_lines(
     if path.name == "_sections":
         path = path.parent
 
-    def activate(tags):
+    def _activate(tags):
         return bool(set(tags) & set([FERMATA_MEASURE]))
 
     # activate fermata measure bar line adjustment tags ...
-    _, _, messages_ = _activate(path, activate, name="bar line adjustment")
+    messages_ = _activate_tags(path, _activate, name="bar line adjustment")
     messages.extend(messages_)
     # ... then deactivate non-EOL tags
     if bol_measure_numbers:
@@ -1236,13 +1236,13 @@ def handle_fermata_bar_lines(
             eol_measure_numbers.append(final_measure_number)
         eol_measure_numbers = [abjad.Tag(f"MEASURE_{_}") for _ in eol_measure_numbers]
 
-        def deactivate(tags):
+        def _deactivate(tags):
             if FERMATA_MEASURE in tags:
                 if not bool(set(tags) & set(eol_measure_numbers)):
                     return True
             return False
 
-        _, _, messages_ = _deactivate(path, deactivate, name="EOL fermata bar line")
+        messages_ = _deactivate_tags(path, _deactivate, name="EOL fermata bar line")
         messages.extend(messages_)
     messages.append("")
     return messages
@@ -1259,11 +1259,11 @@ def handle_mol_tags(
         path = path.parent
 
     # activate all middle-of-line tags ...
-    def activate(tags):
+    def _activate(tags):
         tags_ = set([NOT_MOL, ONLY_MOL])
         return bool(set(tags) & tags_)
 
-    _, _, messages_ = _activate(path, activate, name="MOL")
+    messages_ = _activate_tags(path, _activate, name="MOL")
     messages.extend(messages_)
     # ... then deactivate conflicting middle-of-line tags
     if bol_measure_numbers:
@@ -1274,7 +1274,7 @@ def handle_mol_tags(
             abjad.Tag(f"MEASURE_{_}") for _ in nonmol_measure_numbers
         ]
 
-        def deactivate(tags):
+        def _deactivate(tags):
             if NOT_MOL in tags:
                 if not bool(set(tags) & set(nonmol_measure_numbers)):
                     return True
@@ -1283,7 +1283,7 @@ def handle_mol_tags(
                     return True
             return False
 
-        _, _, messages_ = _deactivate(path, deactivate, name="conflicting MOL")
+        messages_ = _deactivate_tags(path, _deactivate, name="conflicting MOL")
         messages.extend(messages_)
     messages.append("")
     return messages
@@ -1295,11 +1295,11 @@ def handle_shifted_clefs(
     assert isinstance(path, pathlib.Path)
     messages = ["Handling shifted clefs ..."]
 
-    def activate(tags):
+    def _activate(tags):
         return SHIFTED_CLEF in tags
 
     # set X-extent to false and left-shift measure-initial clefs ...
-    _, _, messages_ = _activate(path, activate, name="shifted clef")
+    messages_ = _activate_tags(path, _activate, name="shifted clef")
     messages.extend(messages_)
     # ... then unshift clefs at beginning-of-line
     if "builds" in path.parts:
@@ -1317,14 +1317,14 @@ def handle_shifted_clefs(
     if bol_measure_numbers:
         bol_measure_numbers = [abjad.Tag(f"MEASURE_{_}") for _ in bol_measure_numbers]
 
-        def deactivate(tags):
+        def _deactivate(tags):
             if SHIFTED_CLEF not in tags:
                 return False
             if any(_ in tags for _ in bol_measure_numbers):
                 return True
             return False
 
-        _, _, messages_ = _deactivate(path, deactivate, name="BOL clef")
+        messages_ = _deactivate_tags(path, _deactivate, name="BOL clef")
         messages.extend(messages_)
     messages.append("")
     return messages
@@ -1334,17 +1334,17 @@ def join_broken_spanners(path: pathlib.Path) -> list[str]:
     assert isinstance(path, pathlib.Path)
     messages = ["Joining broken spanners ..."]
 
-    def activate(tags):
+    def _activate(tags):
         tags_ = [SHOW_TO_JOIN_BROKEN_SPANNERS]
         return bool(set(tags) & set(tags_))
 
-    def deactivate(tags):
+    def _deactivate(tags):
         tags_ = [HIDE_TO_JOIN_BROKEN_SPANNERS]
         return bool(set(tags) & set(tags_))
 
-    _, _, messages_ = _activate(path, activate, name="broken spanner expression")
+    messages_ = _activate_tags(path, _activate, name="broken spanner expression")
     messages.extend(messages_)
-    _, _, messages_ = _deactivate(path, deactivate, name="broken spanner suppression")
+    messages_ = _deactivate_tags(path, _deactivate, name="broken spanner suppression")
     messages.extend(messages_)
     messages.append("")
     return messages
@@ -1353,7 +1353,7 @@ def join_broken_spanners(path: pathlib.Path) -> list[str]:
 def not_topmost(path: pathlib.Path) -> list[str]:
     assert isinstance(path, pathlib.Path)
     messages = [f"Deactivating {NOT_TOPMOST.string} ..."]
-    count, skipped, messages_ = _deactivate(
+    messages_ = _deactivate_tags(
         path,
         NOT_TOPMOST,
         name="not topmost",
@@ -1377,15 +1377,15 @@ def show_music_annotations(path: pathlib.Path, *, undo: bool = False) -> list[st
 
     if not undo:
         messages.append(f"Showing {name}s ...")
-        _, _, messages_ = _activate(path, match, name=name)
+        messages_ = _activate_tags(path, match, name=name)
         messages.extend(messages_)
-        _, _, messages_ = _deactivate(path, match_2, name=name)
+        messages_ = _deactivate_tags(path, match_2, name=name)
         messages.extend(messages_)
     else:
         messages.append(f"Hiding {name}s ...")
-        _, _, messages_ = _activate(path, match_2, name=name)
+        messages_ = _activate_tags(path, match_2, name=name)
         messages.extend(messages_)
-        _, _, messages_ = _deactivate(path, match, name=name)
+        messages_ = _deactivate_tags(path, match, name=name)
         messages.extend(messages_)
     messages.append("")
     return messages
@@ -1419,13 +1419,13 @@ def show_tag(
 
     if not undo:
         messages.append(f"Showing {name} tags ...")
-        _, _, messages_ = _activate(
+        messages_ = _activate_tags(
             path, match, name=name, skip_file_name=skip_file_name
         )
         messages.extend(messages_)
     else:
         messages.append(f"Hiding {name} tags ...")
-        _, _, messages_ = _deactivate(
+        messages_ = _deactivate_tags(
             path,
             match,
             name=name,
