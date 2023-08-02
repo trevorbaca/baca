@@ -211,15 +211,25 @@ def _handle_section_tags(section_directory):
         path = music_ly.with_name(name)
         if not path.exists():
             continue
+        bol_measure_numbers = baca.path.get_metadata(section_directory).get(
+            "bol_measure_numbers"
+        )
+        final_measure_number = baca.path.get_metadata(section_directory).get(
+            "final_measure_number"
+        )
         _tags_file = music_ly.with_name(f".{name}.tags")
         messages = []
         messages_ = baca.jobs.handle_edition_tags(path)
         messages.extend(messages_)
-        messages_ = baca.jobs.handle_fermata_bar_lines(path)
+        messages_ = baca.jobs.handle_fermata_bar_lines(
+            path, bol_measure_numbers, final_measure_number
+        )
         messages.extend(messages_)
-        messages_ = baca.jobs.handle_shifted_clefs(path)
+        messages_ = baca.jobs.handle_shifted_clefs(path, bol_measure_numbers)
         messages.extend(messages_)
-        messages_ = baca.jobs.handle_mol_tags(path)
+        messages_ = baca.jobs.handle_mol_tags(
+            path, bol_measure_numbers, final_measure_number
+        )
         messages.extend(messages_)
         print_file_handling(
             f"Appending {baca.path.trim(_tags_file)} ...", log_only=True
@@ -741,15 +751,27 @@ def handle_build_tags(_sections_directory):
             return True
         return False
 
+    build_directory = _sections_directory.parent
+    assert build_directory.parent.name == "builds", repr(build_directory)
     for file in sorted(_sections_directory.glob("*ly")):
+        bol_measure_numbers = baca.path.get_metadata(build_directory).get(
+            "bol_measure_numbers"
+        )
+        final_measure_number = baca.path.get_metadata(build_directory).get(
+            "final_measure_number"
+        )
         messages = []
         messages_ = baca.jobs.handle_edition_tags(file)
         messages.extend(messages_)
-        messages_ = baca.jobs.handle_fermata_bar_lines(file)
+        messages_ = baca.jobs.handle_fermata_bar_lines(
+            file, bol_measure_numbers, final_measure_number
+        )
         messages.extend(messages_)
-        messages_ = baca.jobs.handle_shifted_clefs(file)
+        messages_ = baca.jobs.handle_shifted_clefs(file, bol_measure_numbers)
         messages.extend(messages_)
-        messages_ = baca.jobs.handle_mol_tags(file)
+        messages_ = baca.jobs.handle_mol_tags(
+            file, bol_measure_numbers, final_measure_number
+        )
         messages.extend(messages_)
         messages_ = baca.jobs.color_persistent_indicators(file, undo=True)
         messages.extend(messages_)

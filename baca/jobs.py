@@ -7,7 +7,6 @@ import typing
 
 import abjad
 
-from . import path as _path
 from . import tags as _tags
 
 
@@ -362,10 +361,11 @@ def handle_edition_tags(path: pathlib.Path) -> list[str]:
     return messages
 
 
-def handle_fermata_bar_lines(path: pathlib.Path) -> list[str]:
-    """
-    Handles fermata bar lines.
-    """
+def handle_fermata_bar_lines(
+    path: pathlib.Path,
+    bol_measure_numbers: list | None,
+    final_measure_number: int | None,
+) -> list[str]:
     assert isinstance(path, pathlib.Path)
     messages = ["Handling fermata bar lines ..."]
     if path.name == "_sections":
@@ -378,16 +378,8 @@ def handle_fermata_bar_lines(path: pathlib.Path) -> list[str]:
     _, _, messages_ = _activate(path, activate, name="bar line adjustment")
     messages.extend(messages_)
     # ... then deactivate non-EOL tags
-    if path.is_dir():
-        metadata_source = path
-    else:
-        metadata_source = path.parent
-    bol_measure_numbers = _path.get_metadata(metadata_source).get("bol_measure_numbers")
     if bol_measure_numbers:
         eol_measure_numbers = [_ - 1 for _ in bol_measure_numbers[1:]]
-        final_measure_number = _path.get_metadata(metadata_source).get(
-            "final_measure_number"
-        )
         if final_measure_number is not None:
             eol_measure_numbers.append(final_measure_number)
         eol_measure_numbers = [abjad.Tag(f"MEASURE_{_}") for _ in eol_measure_numbers]
@@ -404,7 +396,11 @@ def handle_fermata_bar_lines(path: pathlib.Path) -> list[str]:
     return messages
 
 
-def handle_mol_tags(path: pathlib.Path) -> list[str]:
+def handle_mol_tags(
+    path: pathlib.Path,
+    bol_measure_numbers: list | None,
+    final_measure_number: int | None,
+) -> list[str]:
     assert isinstance(path, pathlib.Path)
     messages = ["Handling MOL tags ..."]
     if path.name == "_sections":
@@ -418,16 +414,8 @@ def handle_mol_tags(path: pathlib.Path) -> list[str]:
     _, _, messages_ = _activate(path, activate, name="MOL")
     messages.extend(messages_)
     # ... then deactivate conflicting middle-of-line tags
-    if path.is_dir():
-        metadata_source = path
-    else:
-        metadata_source = path.parent
-    bol_measure_numbers = _path.get_metadata(metadata_source).get("bol_measure_numbers")
     if bol_measure_numbers:
         nonmol_measure_numbers = bol_measure_numbers[:]
-        final_measure_number = _path.get_metadata(metadata_source).get(
-            "final_measure_number"
-        )
         if final_measure_number is not None:
             nonmol_measure_numbers.append(final_measure_number + 1)
         nonmol_measure_numbers = [
@@ -449,7 +437,9 @@ def handle_mol_tags(path: pathlib.Path) -> list[str]:
     return messages
 
 
-def handle_shifted_clefs(path: pathlib.Path) -> list[str]:
+def handle_shifted_clefs(
+    path: pathlib.Path, bol_measure_numbers: list | None
+) -> list[str]:
     assert isinstance(path, pathlib.Path)
     messages = ["Handling shifted clefs ..."]
 
@@ -469,8 +459,6 @@ def handle_shifted_clefs(path: pathlib.Path) -> list[str]:
         metadata_source = path
     else:
         metadata_source = path.parent
-    string = "bol_measure_numbers"
-    bol_measure_numbers = _path.get_metadata(metadata_source).get(string)
     if not bol_measure_numbers:
         print("WARNING: no BOL metadata found!")
         print(metadata_source)
