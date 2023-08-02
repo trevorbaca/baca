@@ -690,22 +690,14 @@ def color_persistent_indicators(file, *, undo=False):
         print_always("Must call on file in section directory ...")
         sys.exit(1)
     messages = []
-    messages_ = baca.tags.color_clefs(file, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.tags.color_dynamics(file, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.tags.color_instruments(file, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.tags.color_short_instrument_names(file, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.tags.color_metronome_marks(file, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.tags.color_persistent_indicators(file, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.tags.color_staff_lines(file, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.tags.color_time_signatures(file, undo=undo)
-    messages.extend(messages_)
+    baca.tags.color_clefs(file, messages, undo=undo)
+    baca.tags.color_dynamics(file, messages, undo=undo)
+    baca.tags.color_instruments(file, messages, undo=undo)
+    baca.tags.color_short_instrument_names(file, messages, undo=undo)
+    baca.tags.color_metronome_marks(file, messages, undo=undo)
+    baca.tags.color_persistent_indicators(file, messages, undo=undo)
+    baca.tags.color_staff_lines(file, messages, undo=undo)
+    baca.tags.color_time_signatures(file, messages, undo=undo)
     return messages
 
 
@@ -778,68 +770,63 @@ def handle_build_tags(_sections_directory):
         baca.tags.handle_mol_tags(
             file, messages, bol_measure_numbers, final_measure_number
         )
-        messages_ = baca.tags.color_persistent_indicators(file, undo=True)
-        messages.extend(messages_)
-        messages_ = baca.tags.show_music_annotations(file, undo=True)
-        messages.extend(messages_)
-        messages_ = baca.tags.join_broken_spanners(file)
-        messages.extend(messages_)
-        messages_ = baca.tags.show_tag(
+        baca.tags.color_persistent_indicators(file, messages, undo=True)
+        baca.tags.show_music_annotations(file, messages, undo=True)
+        baca.tags.join_broken_spanners(file, messages)
+        baca.tags.show_tag(
             file,
             "left-broken-should-deactivate",
+            messages,
             match=match_left_broken_should_deactivate,
             undo=True,
         )
-        messages.extend(messages_)
         if file.name != final_ily_name:
-            messages_ = baca.tags.show_tag(file, baca.tags.ANCHOR_NOTE)
-            messages.extend(messages_)
-            messages_ = baca.tags.show_tag(file, baca.tags.ANCHOR_SKIP)
-            messages.extend(messages_)
-            messages_ = baca.tags.show_tag(
+            baca.tags.show_tag(file, baca.tags.ANCHOR_NOTE, messages)
+            baca.tags.show_tag(file, baca.tags.ANCHOR_SKIP, messages)
+            baca.tags.show_tag(
                 file,
                 baca.tags.ANCHOR_NOTE,
+                messages,
                 prepend_empty_chord=True,
                 undo=True,
             )
-            messages.extend(messages_)
-            messages_ = baca.tags.show_tag(
+            baca.tags.show_tag(
                 file,
                 baca.tags.ANCHOR_SKIP,
+                messages,
                 prepend_empty_chord=True,
                 undo=True,
             )
-            messages.extend(messages_)
-            messages_ = baca.tags.show_tag(
+            baca.tags.show_tag(
                 file,
                 "anchor-should-activate",
+                messages,
                 match=match_anchor_should_activate,
             )
-            messages.extend(messages_)
-            messages_ = baca.tags.show_tag(
+            baca.tags.show_tag(
                 file,
                 "anchor-should-deactivate",
+                messages,
                 match=match_anchor_should_deactivate,
                 undo=True,
             )
-            messages.extend(messages_)
-            messages_ = baca.tags.show_tag(
+            baca.tags.show_tag(
                 file,
                 baca.tags.EOS_STOP_MM_SPANNER,
+                messages,
             )
-            messages.extend(messages_)
-        messages_ = baca.tags.show_tag(
+        baca.tags.show_tag(
             file,
             baca.tags.METRIC_MODULATION_IS_STRIPPED,
+            messages,
             undo=True,
         )
-        messages.extend(messages_)
-        messages_ = baca.tags.show_tag(
+        baca.tags.show_tag(
             file,
             baca.tags.METRIC_MODULATION_IS_SCALED,
+            messages,
             undo=True,
         )
-        messages.extend(messages_)
         _tags = _sections_directory / f".{file.name}.tags"
         print_file_handling(f"Writing {baca.path.trim(_tags)} ...", log_only=True)
         text = "\n".join(messages) + "\n"
@@ -1243,13 +1230,13 @@ def show_annotations(file, *, undo=False):
         )
         return bool(set(tags) & set(tags_))
 
-    messages_ = baca.tags.show_tag(
+    baca.tags.show_tag(
         file,
         "annotation spanners",
+        messages,
         match=_annotation_spanners,
         undo=undo,
     )
-    messages.extend(messages_)
 
     def _spacing(tags):
         tags_ = (
@@ -1258,32 +1245,18 @@ def show_annotations(file, *, undo=False):
         )
         return bool(set(tags) & set(tags_))
 
-    messages_ = baca.tags.show_tag(file, baca.tags.CLOCK_TIME, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.tags.show_tag(file, baca.tags.FIGURE_LABEL, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.tags.show_tag(
-        file, baca.tags.INVISIBLE_MUSIC_COMMAND, undo=not undo
-    )
-    messages.extend(messages_)
-    messages_ = baca.tags.show_tag(file, baca.tags.INVISIBLE_MUSIC_COLORING, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.tags.show_tag(file, baca.tags.LOCAL_MEASURE_NUMBER, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.tags.show_tag(file, baca.tags.MEASURE_NUMBER, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.tags.show_tag(file, baca.tags.MOCK_COLORING, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.tags.show_music_annotations(file, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.tags.show_tag(file, baca.tags.NOT_YET_PITCHED_COLORING, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.tags.show_tag(file, baca.tags.RHYTHM_ANNOTATION_SPANNER, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.tags.show_tag(file, "spacing", match=_spacing, undo=undo)
-    messages.extend(messages_)
-    messages_ = baca.tags.show_tag(file, baca.tags.STAGE_NUMBER, undo=undo)
-    messages.extend(messages_)
+    baca.tags.show_tag(file, baca.tags.CLOCK_TIME, messages, undo=undo)
+    baca.tags.show_tag(file, baca.tags.FIGURE_LABEL, messages, undo=undo)
+    baca.tags.show_tag(file, baca.tags.INVISIBLE_MUSIC_COMMAND, messages, undo=not undo)
+    baca.tags.show_tag(file, baca.tags.INVISIBLE_MUSIC_COLORING, messages, undo=undo)
+    baca.tags.show_tag(file, baca.tags.LOCAL_MEASURE_NUMBER, messages, undo=undo)
+    baca.tags.show_tag(file, baca.tags.MEASURE_NUMBER, messages, undo=undo)
+    baca.tags.show_tag(file, baca.tags.MOCK_COLORING, messages, undo=undo)
+    baca.tags.show_music_annotations(file, messages, undo=undo)
+    baca.tags.show_tag(file, baca.tags.NOT_YET_PITCHED_COLORING, messages, undo=undo)
+    baca.tags.show_tag(file, baca.tags.RHYTHM_ANNOTATION_SPANNER, messages, undo=undo)
+    baca.tags.show_tag(file, "spacing", messages, match=_spacing, undo=undo)
+    baca.tags.show_tag(file, baca.tags.STAGE_NUMBER, messages, undo=undo)
     return messages
 
 
@@ -1291,7 +1264,9 @@ def show_tag(directory, tag, *, undo: bool = False):
     assert isinstance(undo, bool), repr(undo)
     directory = pathlib.Path(directory)
     tag = abjad.Tag(tag)
-    for message in baca.tags.show_tag(directory, tag, undo=undo):
+    messages: list[str] = []
+    baca.tags.show_tag(directory, tag, messages, undo=undo)
+    for message in messages:
         print_tags(message)
 
 

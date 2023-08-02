@@ -937,9 +937,10 @@ def _deactivate_tags(
     )
 
 
-def color_clefs(path: pathlib.Path, *, undo: bool = False) -> list[str]:
+def color_clefs(path: pathlib.Path, messages: list[str], *, undo: bool = False) -> None:
     assert isinstance(path, pathlib.Path)
-    messages, name = ["Coloring clefs ..."], "clef color"
+    messages.append("Coloring clefs ...")
+    name = "clef color"
 
     def match(tags):
         build = "builds" in path.parts
@@ -951,12 +952,14 @@ def color_clefs(path: pathlib.Path, *, undo: bool = False) -> list[str]:
     else:
         _deactivate_tags(path, match, name, messages)
     messages.append("")
-    return messages
 
 
-def color_dynamics(path: pathlib.Path, *, undo: bool = False) -> list[str]:
+def color_dynamics(
+    path: pathlib.Path, messages: list[str], *, undo: bool = False
+) -> None:
     assert isinstance(path, pathlib.Path)
-    messages, name = ["Coloring dynamics ..."], "dynamic color"
+    messages.append("Coloring dynamics ...")
+    name = "dynamic color"
 
     def match(tags):
         tags_ = dynamic_color_tags()
@@ -967,12 +970,14 @@ def color_dynamics(path: pathlib.Path, *, undo: bool = False) -> list[str]:
     else:
         _deactivate_tags(path, match, name, messages)
     messages.append("")
-    return messages
 
 
-def color_instruments(path: pathlib.Path, *, undo: bool = False) -> list[str]:
+def color_instruments(
+    path: pathlib.Path, messages: list[str], *, undo: bool = False
+) -> None:
     assert isinstance(path, pathlib.Path)
-    messages, name = ["Coloring instruments ..."], "instrument color"
+    messages.append("Coloring instruments ...")
+    name = "instrument color"
 
     def match(tags):
         tags_ = instrument_color_tags()
@@ -983,16 +988,14 @@ def color_instruments(path: pathlib.Path, *, undo: bool = False) -> list[str]:
     else:
         _deactivate_tags(path, match, name, messages)
     messages.append("")
-    return messages
 
 
 def color_short_instrument_names(
-    path: pathlib.Path, *, undo: bool = False
-) -> list[str]:
+    path: pathlib.Path, messages: list[str], *, undo: bool = False
+) -> None:
     assert isinstance(path, pathlib.Path)
-    messages, name = [
-        "Coloring short instrument names ..."
-    ], "short instrument name color"
+    messages.append("Coloring short instrument names ...")
+    name = "short instrument name color"
 
     def match(tags):
         tags_ = short_instrument_name_color_tags()
@@ -1003,10 +1006,11 @@ def color_short_instrument_names(
     else:
         _deactivate_tags(path, match, name, messages)
     messages.append("")
-    return messages
 
 
-def color_metronome_marks(path: pathlib.Path, undo: bool = False) -> list[str]:
+def color_metronome_marks(
+    path: pathlib.Path, messages: list[str], *, undo: bool = False
+) -> None:
     assert isinstance(path, pathlib.Path)
 
     def _activate(tags):
@@ -1018,20 +1022,21 @@ def color_metronome_marks(path: pathlib.Path, undo: bool = False) -> list[str]:
         return bool(set(tags) & set(tags_))
 
     if undo:
-        messages = ["Uncoloring metronome marks ..."]
+        messages.append("Uncoloring metronome marks ...")
         _activate_tags(path, _deactivate, "metronome mark color suppression", messages)
         _deactivate_tags(path, _activate, "metronome mark color expression", messages)
     else:
-        messages = ["Coloring metronome marks ..."]
+        messages.append("Coloring metronome marks ...")
         _activate_tags(path, _activate, "metronome mark color experssion", messages)
         _deactivate_tags(
             path, _deactivate, "metronome mark color suppression", messages
         )
     messages.append("")
-    return messages
 
 
-def color_persistent_indicators(path: pathlib.Path, *, undo: bool = False) -> list[str]:
+def color_persistent_indicators(
+    path: pathlib.Path, messages: list[str], *, undo: bool = False
+) -> None:
     assert isinstance(path, pathlib.Path)
     name = "persistent indicator"
 
@@ -1045,7 +1050,7 @@ def color_persistent_indicators(path: pathlib.Path, *, undo: bool = False) -> li
         return bool(set(tags) & set(tags_))
 
     if undo:
-        messages = [f"Uncoloring {name}s ..."]
+        messages.append(f"Uncoloring {name}s ...")
         _activate_tags(
             path, _deactivate, "persistent indicator color suppression", messages
         )
@@ -1053,7 +1058,7 @@ def color_persistent_indicators(path: pathlib.Path, *, undo: bool = False) -> li
             path, _activate, "persistent indicator color expression", messages
         )
     else:
-        messages = [f"Coloring {name}s ..."]
+        messages.append(f"Coloring {name}s ...")
         _activate_tags(
             path, _activate, "persistent indicator color expression", messages
         )
@@ -1061,12 +1066,14 @@ def color_persistent_indicators(path: pathlib.Path, *, undo: bool = False) -> li
             path, _deactivate, "persistent indicator color suppression", messages
         )
     messages.append("")
-    return messages
 
 
-def color_staff_lines(path: pathlib.Path, *, undo: bool = False) -> list[str]:
+def color_staff_lines(
+    path: pathlib.Path, messages: list[str], *, undo: bool = False
+) -> None:
     assert isinstance(path, pathlib.Path)
-    messages, name = ["Coloring staff lines ..."], "staff lines color"
+    messages.append("Coloring staff lines ...")
+    name = "staff lines color"
 
     def match(tags):
         build = "builds" in path.parts
@@ -1078,12 +1085,14 @@ def color_staff_lines(path: pathlib.Path, *, undo: bool = False) -> list[str]:
     else:
         _deactivate_tags(path, match, name, messages)
     messages.append("")
-    return messages
 
 
-def color_time_signatures(path: pathlib.Path, *, undo: bool = False) -> list[str]:
+def color_time_signatures(
+    path: pathlib.Path, messages: list[str], *, undo: bool = False
+) -> None:
     assert isinstance(path, pathlib.Path)
-    messages, name = ["Coloring time signatures ..."], "time signature color"
+    messages.append("Coloring time signatures ...")
+    name = "time signature color"
 
     def match(tags):
         build = "builds" in path.parts
@@ -1095,7 +1104,6 @@ def color_time_signatures(path: pathlib.Path, *, undo: bool = False) -> list[str
     else:
         _deactivate_tags(path, match, name, messages)
     messages.append("")
-    return messages
 
 
 def handle_edition_tags(
@@ -1268,9 +1276,9 @@ def handle_shifted_clefs(
     messages.append("")
 
 
-def join_broken_spanners(path: pathlib.Path) -> list[str]:
+def join_broken_spanners(path: pathlib.Path, messages: list[str]) -> None:
     assert isinstance(path, pathlib.Path)
-    messages = ["Joining broken spanners ..."]
+    messages.append("Joining broken spanners ...")
 
     def _activate(tags):
         tags_ = [SHOW_TO_JOIN_BROKEN_SPANNERS]
@@ -1283,7 +1291,6 @@ def join_broken_spanners(path: pathlib.Path) -> list[str]:
     _activate_tags(path, _activate, "broken spanner expression", messages)
     _deactivate_tags(path, _deactivate, "broken spanner suppression", messages)
     messages.append("")
-    return messages
 
 
 def not_topmost(path: pathlib.Path) -> list[str]:
@@ -1299,9 +1306,11 @@ def not_topmost(path: pathlib.Path) -> list[str]:
     return messages
 
 
-def show_music_annotations(path: pathlib.Path, *, undo: bool = False) -> list[str]:
+def show_music_annotations(
+    path: pathlib.Path, messages: list[str], *, undo: bool = False
+) -> None:
     assert isinstance(path, pathlib.Path)
-    messages, name = [], "music annotation"
+    name = "music annotation"
 
     def match(tags):
         tags_ = music_annotation_tags()
@@ -1320,19 +1329,18 @@ def show_music_annotations(path: pathlib.Path, *, undo: bool = False) -> list[st
         _activate_tags(path, match_2, name, messages)
         _deactivate_tags(path, match, name, messages)
     messages.append("")
-    return messages
 
 
 def show_tag(
     path: pathlib.Path,
     tag: abjad.Tag | str,
+    messages: list[str],
     *,
     match: typing.Callable | None = None,
     prepend_empty_chord: bool = False,
     undo: bool = False,
-) -> list[str]:
+) -> None:
     assert isinstance(path, pathlib.Path)
-    messages = []
     if match is not None:
         assert callable(match)
     if isinstance(tag, str):
@@ -1361,4 +1369,3 @@ def show_tag(
             prepend_empty_chord=prepend_empty_chord,
         )
     messages.append("")
-    return messages
