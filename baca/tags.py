@@ -863,25 +863,20 @@ def wrappers(wrappers: list[abjad.Wrapper], *tags: abjad.Tag):
 
 
 def _activate_tags(
-    path: pathlib.Path,
+    path: pathlib.Path | str,
     match: typing.Callable,
     name: str,
     *,
     prepend_empty_chord: bool = False,
     undo: bool = False,
-) -> list[str]:
-    """
-    Activates lines in .ily or .ly ``path`` that match ``match``.
-    """
-    assert isinstance(path, pathlib.Path), repr(path)
-    assert path.is_file(), repr(path)
-    assert path.suffix in (".ily", ".ly")
-    if path.name not in ("layout.ly", "music.ily", "music.ly"):
-        assert path.name[0].isdigit(), repr(path)
+):
+    assert isinstance(path, pathlib.Path | str), repr(path)
     assert callable(match), repr(match)
-    assert name, repr(name)
-    assert name != "", repr(name)
-    text = path.read_text()
+    assert isinstance(name, str), repr(name)
+    if isinstance(path, pathlib.Path):
+        text = path.read_text()
+    else:
+        text = path
     if undo:
         text, count, skipped = abjad.deactivate(
             text,
@@ -890,7 +885,6 @@ def _activate_tags(
         )
     else:
         text, count, skipped = abjad.activate(text, match)
-    path.write_text(text)
     if undo:
         adjective = "inactive"
         gerund = "deactivating"
@@ -913,16 +907,21 @@ def _activate_tags(
             message = f"skipping {skipped} ({adjective}) {name} {tags}"
             messages.append(message)
     messages = [abjad.string.capitalize_start(_) + " ..." for _ in messages]
-    return messages
+    if isinstance(path, pathlib.Path):
+        path.write_text(text)
+        return messages
+    else:
+        assert isinstance(path, str)
+        return text, messages
 
 
 def _deactivate_tags(
-    path: pathlib.Path,
+    path: str | pathlib.Path,
     match: typing.Callable,
     name: str,
     *,
     prepend_empty_chord: bool = False,
-) -> list[str]:
+):
     return _activate_tags(
         path,
         match,
@@ -1109,7 +1108,9 @@ def color_time_signatures(path: pathlib.Path, *, undo: bool = False) -> list[str
     return messages
 
 
-def handle_edition_tags(path: pathlib.Path) -> list[str]:
+def handle_edition_tags(
+    text: str, directory_name: str, my_name: str
+) -> tuple[str, list[str]]:
     """
     Handles edition tags.
 
@@ -1135,27 +1136,15 @@ def handle_edition_tags(path: pathlib.Path) -> list[str]:
         specifically for me.
 
     """
-    assert isinstance(path, pathlib.Path)
+    assert isinstance(text, str), repr(text)
+    assert isinstance(directory_name, str), repr(directory_name)
+    assert my_name in ("SECTION", "SCORE", "PARTS"), repr(my_name)
     messages = ["Handling edition tags ..."]
-    if "sections" in path.parts:
-        my_name = "SECTION"
-    elif "builds" in path.parts:
-        if "-score" in str(path):
-            my_name = "SCORE"
-        elif "-parts" in str(path):
-            my_name = "PARTS"
-        else:
-            raise Exception(path)
-    else:
-        raise Exception(path)
-    this_edition = abjad.Tag(f"+{abjad.string.to_shout_case(my_name)}")
-    not_this_edition = abjad.Tag(f"-{abjad.string.to_shout_case(my_name)}")
-    if path.is_dir():
-        directory_name = path.name
-    else:
-        directory_name = path.parent.name
-    this_directory = abjad.Tag(f"+{abjad.string.to_shout_case(directory_name)}")
-    not_this_directory = abjad.Tag(f"-{abjad.string.to_shout_case(directory_name)}")
+    this_edition = abjad.Tag(f"+{my_name}")
+    not_this_edition = abjad.Tag(f"-{my_name}")
+    directory_name = abjad.string.to_shout_case(directory_name)
+    this_directory = abjad.Tag(f"+{directory_name}")
+    not_this_directory = abjad.Tag(f"-{directory_name}")
 
     def _deactivate(tags):
         if not_this_edition in tags:
@@ -1167,7 +1156,7 @@ def handle_edition_tags(path: pathlib.Path) -> list[str]:
                 return True
         return False
 
-    messages_ = _deactivate_tags(path, _deactivate, "other-edition")
+    text, messages_ = _deactivate_tags(text, _deactivate, "other-edition")
     messages.extend(messages_)
 
     def _activate(tags):
@@ -1179,10 +1168,10 @@ def handle_edition_tags(path: pathlib.Path) -> list[str]:
                 return True
         return bool(set(tags) & set([this_edition, this_directory]))
 
-    messages_ = _activate_tags(path, _activate, "this-edition")
+    text, messages_ = _activate_tags(text, _activate, "this-edition")
     messages.extend(messages_)
     messages.append("")
-    return messages
+    return text, messages
 
 
 def handle_fermata_bar_lines(

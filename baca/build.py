@@ -219,8 +219,12 @@ def _handle_section_tags(section_directory):
         )
         _tags_file = music_ly.with_name(f".{name}.tags")
         messages = []
-        messages_ = baca.tags.handle_edition_tags(path)
+        text = path.read_text()
+        text, messages_ = baca.tags.handle_edition_tags(
+            text, section_directory.name, "SECTION"
+        )
         messages.extend(messages_)
+        path.write_text(text)
         messages_ = baca.tags.handle_fermata_bar_lines(
             path, bol_measure_numbers, final_measure_number
         )
@@ -761,8 +765,17 @@ def handle_build_tags(_sections_directory):
             "final_measure_number"
         )
         messages = []
-        messages_ = baca.tags.handle_edition_tags(file)
+        assert "sections" not in file.parts
+        assert "builds" in file.parts
+        if "-score" in str(file):
+            my_name = "SCORE"
+        else:
+            assert "-parts" in str(file)
+            my_name = "PARTS"
+        text = file.read_text()
+        text, messages_ = baca.tags.handle_edition_tags(text, "_sections", my_name)
         messages.extend(messages_)
+        file.write_text(text)
         messages_ = baca.tags.handle_fermata_bar_lines(
             file, bol_measure_numbers, final_measure_number
         )
