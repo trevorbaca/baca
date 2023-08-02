@@ -220,21 +220,17 @@ def _handle_section_tags(section_directory):
         _tags_file = music_ly.with_name(f".{name}.tags")
         messages = []
         text = path.read_text()
-        text, messages_ = baca.tags.handle_edition_tags(
-            text, section_directory.name, "SECTION"
+        text = baca.tags.handle_edition_tags(
+            text, messages, section_directory.name, "SECTION"
         )
-        messages.extend(messages_)
         path.write_text(text)
-        messages_ = baca.tags.handle_fermata_bar_lines(
-            path, bol_measure_numbers, final_measure_number
+        baca.tags.handle_fermata_bar_lines(
+            path, messages, bol_measure_numbers, final_measure_number
         )
-        messages.extend(messages_)
-        messages_ = baca.tags.handle_shifted_clefs(path, bol_measure_numbers)
-        messages.extend(messages_)
-        messages_ = baca.tags.handle_mol_tags(
-            path, bol_measure_numbers, final_measure_number
+        baca.tags.handle_shifted_clefs(path, messages, bol_measure_numbers)
+        baca.tags.handle_mol_tags(
+            path, messages, bol_measure_numbers, final_measure_number
         )
-        messages.extend(messages_)
         print_file_handling(
             f"Appending {baca.path.trim(_tags_file)} ...", log_only=True
         )
@@ -773,19 +769,15 @@ def handle_build_tags(_sections_directory):
             assert "-parts" in str(file)
             my_name = "PARTS"
         text = file.read_text()
-        text, messages_ = baca.tags.handle_edition_tags(text, "_sections", my_name)
-        messages.extend(messages_)
+        text = baca.tags.handle_edition_tags(text, messages, "_sections", my_name)
         file.write_text(text)
-        messages_ = baca.tags.handle_fermata_bar_lines(
-            file, bol_measure_numbers, final_measure_number
+        baca.tags.handle_fermata_bar_lines(
+            file, messages, bol_measure_numbers, final_measure_number
         )
-        messages.extend(messages_)
-        messages_ = baca.tags.handle_shifted_clefs(file, bol_measure_numbers)
-        messages.extend(messages_)
-        messages_ = baca.tags.handle_mol_tags(
-            file, bol_measure_numbers, final_measure_number
+        baca.tags.handle_shifted_clefs(file, messages, bol_measure_numbers)
+        baca.tags.handle_mol_tags(
+            file, messages, bol_measure_numbers, final_measure_number
         )
-        messages.extend(messages_)
         messages_ = baca.tags.color_persistent_indicators(file, undo=True)
         messages.extend(messages_)
         messages_ = baca.tags.show_music_annotations(file, undo=True)
