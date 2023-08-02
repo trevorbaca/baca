@@ -220,12 +220,15 @@ def handle_edition_tags(path: pathlib.Path) -> list[str]:
     """
     assert isinstance(path, pathlib.Path)
     messages = ["Handling edition tags ..."]
-    if "sections" in str(path):
+    if "sections" in path.parts:
         my_name = "SECTION"
-    elif "-score" in str(path):
-        my_name = "SCORE"
-    elif "-parts" in str(path):
-        my_name = "PARTS"
+    elif "builds" in path.parts:
+        if "-score" in str(path):
+            my_name = "SCORE"
+        elif "-parts" in str(path):
+            my_name = "PARTS"
+        else:
+            raise Exception(path)
     else:
         raise Exception(path)
     this_edition = abjad.Tag(f"+{abjad.string.to_shout_case(my_name)}")
