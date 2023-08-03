@@ -148,7 +148,6 @@ def _analyze_memento(context, dictionary, memento, score):
     else:
         assert 0 < memento.synthetic_offset, repr(memento)
         synthetic_offset = -memento.synthetic_offset
-    # return leaf, previous_indicator, status, edition, synthetic_offset
     return Analysis(
         leaf=leaf,
         previous_indicator=previous_indicator,
@@ -1257,111 +1256,95 @@ def _prototype_string(class_):
 
 
 def _reapply_persistent_indicators(
+    context: abjad.Context,
     manifests: dict,
-    previous_persistent_indicators: dict,
+    mementos: list[_memento.Memento],
     score: abjad.Score,
     *,
     already_reapplied_contexts: set | None = None,
-    do_not_iterate: abjad.Context | None = None,
 ):
     if already_reapplied_contexts is None:
         already_reapplied_contexts = set()
-    contexts: list[abjad.Context] = []
-    if do_not_iterate is not None:
-        assert isinstance(do_not_iterate, abjad.Context), repr(do_not_iterate)
-        contexts.append(do_not_iterate)
-    else:
-        for context in abjad.select.components(score, abjad.Context):
-            assert isinstance(context, abjad.Context)
-            contexts.append(context)
-    for context in contexts:
-        if context.name in already_reapplied_contexts:
-            continue
-        already_reapplied_contexts.add(context.name)
-        mementos = previous_persistent_indicators.get(context.name)
-        if not mementos:
-            continue
-        for memento in mementos:
-            if memento.manifest is not None:
-                if memento.manifest == "instruments":
-                    dictionary = manifests["abjad.Instrument"]
-                elif memento.manifest == "metronome_marks":
-                    dictionary = manifests.get("abjad.MetronomeMark")
-                elif memento.manifest == "short_instrument_names":
-                    dictionary = manifests["abjad.ShortInstrumentName"]
-                else:
-                    raise Exception(memento.manifest)
+    if context.name in already_reapplied_contexts:
+        return
+    already_reapplied_contexts.add(context.name)
+    for memento in mementos:
+        if memento.manifest is not None:
+            if memento.manifest == "instruments":
+                dictionary = manifests["abjad.Instrument"]
+            elif memento.manifest == "metronome_marks":
+                dictionary = manifests.get("abjad.MetronomeMark")
+            elif memento.manifest == "short_instrument_names":
+                dictionary = manifests["abjad.ShortInstrumentName"]
             else:
-                dictionary = None
-            result = _analyze_memento(context, dictionary, memento, score)
-            if result is None:
+                raise Exception(memento.manifest)
+        else:
+            dictionary = None
+        result = _analyze_memento(context, dictionary, memento, score)
+        if result is None:
+            continue
+        if isinstance(result.previous_indicator, abjad.TimeSignature):
+            if result.status in (None, "explicit"):
                 continue
-            if isinstance(result.previous_indicator, abjad.TimeSignature):
-                if result.status in (None, "explicit"):
-                    continue
-                assert result.status == "reapplied", repr(result.status)
-                wrapper = abjad.get.wrapper(result.leaf, abjad.TimeSignature)
-                function_name = _helpers.function_name(_frame(), n=1)
-                result.edition = result.edition.append(function_name)
-                wrapper.tag = wrapper.tag.append(result.edition)
-                _treat.treat_persistent_wrapper(manifests, wrapper, result.status)
-                continue
-            # TODO: change to parameter comparison
-            tempo_prototype = (
-                _classes.Accelerando,
-                abjad.MetronomeMark,
-                _classes.Ritardando,
-            )
-            if isinstance(result.previous_indicator, tempo_prototype):
-                function_name = _helpers.function_name(_frame(), n=2)
-                if result.status == "reapplied":
-                    wrapper = abjad.attach(
-                        result.previous_indicator,
-                        result.leaf,
-                        synthetic_offset=result.synthetic_offset,
-                        tag=result.edition.append(function_name),
-                        wrapper=True,
-                    )
-                    _treat.treat_persistent_wrapper(manifests, wrapper, result.status)
-                else:
-                    assert result.status in ("redundant", None), repr(result.status)
-                    if result.status is None:
-                        result.status = "explicit"
-                    wrappers = abjad.get.wrappers(result.leaf, tempo_prototype)
-                    # lone metronome mark or lone tempo trend:
-                    if len(wrappers) == 1:
-                        wrapper = wrappers[0]
-                    # metronome mark + tempo trend:
-                    else:
-                        assert 1 < len(wrappers), repr(wrappers)
-                        wrapper = abjad.get.wrapper(result.leaf, abjad.MetronomeMark)
-                    wrapper.tag = wrapper.tag.append(result.edition)
-                    _treat.treat_persistent_wrapper(manifests, wrapper, result.status)
-                continue
-            attached = False
-            function_name = _helpers.function_name(_frame(), n=3)
-            tag = result.edition.append(function_name)
-            if isinstance(result.previous_indicator, abjad.ShortInstrumentName):
-                if _tags.NOT_PARTS.string not in tag.string:
-                    tag = tag.append(_tags.NOT_PARTS)
-            try:
+            assert result.status == "reapplied", repr(result.status)
+            wrapper = abjad.get.wrapper(result.leaf, abjad.TimeSignature)
+            function_name = _helpers.function_name(_frame(), n=1)
+            result.edition = result.edition.append(function_name)
+            wrapper.tag = wrapper.tag.append(result.edition)
+            _treat.treat_persistent_wrapper(manifests, wrapper, result.status)
+            continue
+        # TODO: change to parameter comparison
+        tempo_prototype = (
+            _classes.Accelerando,
+            abjad.MetronomeMark,
+            _classes.Ritardando,
+        )
+        if isinstance(result.previous_indicator, tempo_prototype):
+            function_name = _helpers.function_name(_frame(), n=2)
+            if result.status == "reapplied":
                 wrapper = abjad.attach(
                     result.previous_indicator,
                     result.leaf,
-                    check_duplicate_indicator=True,
                     synthetic_offset=result.synthetic_offset,
-                    tag=tag,
+                    tag=result.edition.append(function_name),
                     wrapper=True,
                 )
-                attached = True
-            except abjad.PersistentIndicatorError:
-                # print(result.previous_indicator)
-                # print(result.synthetic_offset)
-                # print(attached)
-                # print()
-                pass
-            if attached:
                 _treat.treat_persistent_wrapper(manifests, wrapper, result.status)
+            else:
+                assert result.status in ("redundant", None), repr(result.status)
+                if result.status is None:
+                    result.status = "explicit"
+                wrappers = abjad.get.wrappers(result.leaf, tempo_prototype)
+                # lone metronome mark or lone tempo trend:
+                if len(wrappers) == 1:
+                    wrapper = wrappers[0]
+                # metronome mark + tempo trend:
+                else:
+                    assert 1 < len(wrappers), repr(wrappers)
+                    wrapper = abjad.get.wrapper(result.leaf, abjad.MetronomeMark)
+                wrapper.tag = wrapper.tag.append(result.edition)
+                _treat.treat_persistent_wrapper(manifests, wrapper, result.status)
+            continue
+        attached = False
+        function_name = _helpers.function_name(_frame(), n=3)
+        tag = result.edition.append(function_name)
+        if isinstance(result.previous_indicator, abjad.ShortInstrumentName):
+            if _tags.NOT_PARTS.string not in tag.string:
+                tag = tag.append(_tags.NOT_PARTS)
+        try:
+            wrapper = abjad.attach(
+                result.previous_indicator,
+                result.leaf,
+                check_duplicate_indicator=True,
+                synthetic_offset=result.synthetic_offset,
+                tag=tag,
+                wrapper=True,
+            )
+            attached = True
+        except abjad.PersistentIndicatorError:
+            pass
+        if attached:
+            _treat.treat_persistent_wrapper(manifests, wrapper, result.status)
 
 
 def _reanalyze_reapplied_synthetic_wrappers(score):
@@ -2555,6 +2538,9 @@ def reapply_persistent_indicators(
 ):
     manifests = manifests or {}
     already_reapplied_contexts = {"Score"}
+    previous_persistent_indicators = dict(previous_persistent_indicators)
+    if "Score" in previous_persistent_indicators:
+        del previous_persistent_indicators["Score"]
     for voice in voices:
         leaf = abjad.select.leaf(voice, 0)
         parentage = abjad.get.parentage(leaf)
@@ -2567,12 +2553,13 @@ def reapply_persistent_indicators(
                 contexts.append(component)
         assert isinstance(score, abjad.Score)
         for context in contexts:
+            mementos = previous_persistent_indicators.get(context.name, [])
             _reapply_persistent_indicators(
+                context,
                 manifests,
-                previous_persistent_indicators,
+                mementos,
                 score,
                 already_reapplied_contexts=already_reapplied_contexts,
-                do_not_iterate=context,
             )
 
 
@@ -2605,7 +2592,7 @@ def set_up_score(
     first_section: bool = False,
     layout: bool = False,
     manifests: dict | None = None,
-    score_persistent_indicators: dict | None = None,
+    score_persistent_indicators: list[_memento.Memento] | None = None,
 ) -> None:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     manifests = manifests or {}
@@ -2623,10 +2610,10 @@ def set_up_score(
         del score["Rests"]
     if score_persistent_indicators:
         _reapply_persistent_indicators(
-            manifests,
-            {"Score": score_persistent_indicators},
             score,
-            do_not_iterate=score,
+            manifests,
+            score_persistent_indicators,
+            score,
         )
 
 
