@@ -3,6 +3,7 @@ import os
 import pathlib
 import sys
 
+import abjad
 import baca
 
 if __name__ == "__main__":
@@ -16,7 +17,10 @@ if __name__ == "__main__":
     if tag_name is None:
         print("Missing mandatory --tag= parameter ...")
         sys.exit(-1)
+    tag = abjad.Tag(tag_name)
     file = pathlib.Path(directory) / "music.ily"
-    messages = baca.build.show_tag(file, "FIGURE_LABEL", undo=undo)
-    if messages:
-        print(messages)
+    text, messages = file.read_text(), []
+    text = baca.tags.show_tag(text, tag, messages, undo=undo)
+    file.write_text(text)
+    for message in messages:
+        baca.build.print_tags(message)

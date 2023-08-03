@@ -1277,17 +1277,6 @@ def show_annotations(file, *, undo=False):
     return messages
 
 
-# TODO: remove?
-def show_tag(directory, tag, *, undo: bool = False):
-    assert isinstance(undo, bool), repr(undo)
-    directory = pathlib.Path(directory)
-    tag = abjad.Tag(tag)
-    messages: list[str] = []
-    baca.tags.show_tag(directory, tag, messages, undo=undo)
-    for message in messages:
-        print_tags(message)
-
-
 def timed(timing_attribute):
     def decorator(function):
         @functools.wraps(function)

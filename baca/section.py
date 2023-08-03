@@ -2224,7 +2224,6 @@ def make_layout_ly(
         score,
         time_signatures_,
         append_anchor_skip=has_anchor_skip,
-        do_not_reapply_persistent_indicators=True,
         layout=True,
     )
     spacing(score, page_layout_profile, has_anchor_skip=has_anchor_skip)
@@ -2601,13 +2600,12 @@ def set_up_score(
     *,
     always_make_global_rests: bool = False,
     append_anchor_skip: bool = False,
-    do_not_reapply_persistent_indicators: bool = False,
     docs: bool = False,
     first_measure_number: int = 1,
     first_section: bool = False,
     layout: bool = False,
     manifests: dict | None = None,
-    previous_persistent_indicators: dict | None = None,
+    score_persistent_indicators: dict | None = None,
 ) -> None:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     manifests = manifests or {}
@@ -2623,10 +2621,10 @@ def set_up_score(
         _make_global_rests(score["Rests"], time_signatures)
     elif "Rests" in score:
         del score["Rests"]
-    if previous_persistent_indicators and not do_not_reapply_persistent_indicators:
+    if score_persistent_indicators:
         _reapply_persistent_indicators(
             manifests,
-            previous_persistent_indicators,
+            {"Score": score_persistent_indicators},
             score,
             do_not_iterate=score,
         )

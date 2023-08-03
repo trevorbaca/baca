@@ -2466,7 +2466,7 @@ Persistence.
         ...         time_signatures(),
         ...         docs=True,
         ...         manifests={"abjad.MetronomeMark": metronome_marks},
-        ...         previous_persistent_indicators=previous_persistent_indicators,
+        ...         score_persistent_indicators=previous_persistent_indicators["Score"],
         ...     )
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
@@ -2646,7 +2646,7 @@ Persistence.
         ...         append_anchor_skip=True,
         ...         docs=True,
         ...         manifests={"abjad.MetronomeMark": metronome_marks},
-        ...         previous_persistent_indicators=previous_persistent_indicators,
+        ...         score_persistent_indicators=previous_persistent_indicators["Score"],
         ...     )
         ...     baca.metronome_mark(
         ...         score["Skips"][1 - 1],
@@ -3399,7 +3399,7 @@ Persistence.
         ...         score,
         ...         time_signatures(),
         ...         docs=True,
-        ...         previous_persistent_indicators=previous_persistent_indicators,
+        ...         score_persistent_indicators=previous_persistent_indicators["Score"],
         ...     )
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
@@ -3541,7 +3541,7 @@ Persistence.
         ...         score,
         ...         time_signatures(),
         ...         docs=True,
-        ...         previous_persistent_indicators=previous_persistent_indicators,
+        ...         score_persistent_indicators=previous_persistent_indicators["Score"],
         ...     )
         ...     baca.metronome_mark(
         ...         score["Skips"][1 - 1],
