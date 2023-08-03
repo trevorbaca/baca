@@ -113,17 +113,16 @@ class Analysis:
     synthetic_offset: typing.Any
 
 
-def _analyze_memento(context, dictionary, memento, score):
+def _analyze_memento(contexts, dictionary, memento):
     previous_indicator = _memento_to_indicator(dictionary, memento)
     if previous_indicator is None:
         return
     if isinstance(previous_indicator, _classes.SpacingSection):
         return
-    if memento.context in score:
-        for context in abjad.iterate.components(score, abjad.Context):
-            if context.name == memento.context:
-                memento_context = context
-                break
+    for context in contexts:
+        if context.name == memento.context:
+            memento_context = context
+            break
     else:
         # context alive in previous section doesn't exist in this section
         return
@@ -1256,18 +1255,10 @@ def _prototype_string(class_):
 
 
 def _reapply_persistent_indicators(
-    context: abjad.Context,
+    contexts: list[abjad.Component],
     manifests: dict,
     mementos: list[_memento.Memento],
-    score: abjad.Score,
-    *,
-    already_reapplied_contexts: set | None = None,
 ):
-    if already_reapplied_contexts is None:
-        already_reapplied_contexts = set()
-    if context.name in already_reapplied_contexts:
-        return
-    already_reapplied_contexts.add(context.name)
     for memento in mementos:
         if memento.manifest is not None:
             if memento.manifest == "instruments":
@@ -1280,7 +1271,7 @@ def _reapply_persistent_indicators(
                 raise Exception(memento.manifest)
         else:
             dictionary = None
-        result = _analyze_memento(context, dictionary, memento, score)
+        result = _analyze_memento(contexts, dictionary, memento)
         if result is None:
             continue
         if isinstance(result.previous_indicator, abjad.TimeSignature):
@@ -2543,24 +2534,19 @@ def reapply_persistent_indicators(
         del previous_persistent_indicators["Score"]
     for voice in voices:
         leaf = abjad.select.leaf(voice, 0)
-        parentage = abjad.get.parentage(leaf)
-        contexts = []
-        score = None
-        for component in parentage:
-            if isinstance(component, abjad.Score):
-                score = component
-            elif isinstance(component, abjad.Context):
-                contexts.append(component)
-        assert isinstance(score, abjad.Score)
-        for context in contexts:
-            mementos = previous_persistent_indicators.get(context.name, [])
-            _reapply_persistent_indicators(
-                context,
-                manifests,
-                mementos,
-                score,
-                already_reapplied_contexts=already_reapplied_contexts,
-            )
+        break
+    score = abjad.get.parentage(leaf).get(abjad.Score)
+    assert score is not None
+    contexts = abjad.select.components(score, abjad.Context)
+    for voice in voices:
+        leaf = abjad.select.leaf(voice, 0)
+        for component in abjad.get.parentage(leaf):
+            if isinstance(component, abjad.Context):
+                assert isinstance(component.name, str), repr(component.name)
+                if component.name not in already_reapplied_contexts:
+                    mementos = previous_persistent_indicators.get(component.name, [])
+                    _reapply_persistent_indicators(contexts, manifests, mementos)
+                    already_reapplied_contexts.add(component.name)
 
 
 def remove_redundant_time_signatures(score):
@@ -2609,12 +2595,8 @@ def set_up_score(
     elif "Rests" in score:
         del score["Rests"]
     if score_persistent_indicators:
-        _reapply_persistent_indicators(
-            score,
-            manifests,
-            score_persistent_indicators,
-            score,
-        )
+        contexts = abjad.select.components(score, abjad.Context)
+        _reapply_persistent_indicators(contexts, manifests, score_persistent_indicators)
 
 
 def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
