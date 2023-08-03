@@ -1643,6 +1643,16 @@ def tuplet_bracket_staff_padding(
     )
 
 
+def tuplet_bracket_stencil_false(argument) -> list[abjad.Wrapper]:
+    return _do_override(
+        _frame(),
+        argument,
+        attribute="stencil",
+        grob="TupletBracket",
+        value=False,
+    )
+
+
 def tuplet_bracket_transparent(argument) -> list[abjad.Wrapper]:
     return _do_override(
         _frame(),
@@ -1682,6 +1692,16 @@ def tuplet_number_extra_offset(
         grob="TupletNumber",
         attribute="extra_offset",
         value=f"#'({pair[0]} . {pair[1]})",
+    )
+
+
+def tuplet_number_stencil_false(argument) -> list[abjad.Wrapper]:
+    return _do_override(
+        _frame(),
+        argument,
+        attribute="stencil",
+        grob="TupletNumber",
+        value=False,
     )
 
 

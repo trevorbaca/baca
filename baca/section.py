@@ -2128,7 +2128,6 @@ def make_layout_ly(
     spacing,
     *,
     curtail_measure_count=None,
-    do_not_tag=False,
     do_not_write_metadata=False,
     file_name="layout.ly",
     page_layout_context_only=False,
@@ -2224,12 +2223,15 @@ def make_layout_ly(
     score = lilypond_file["Score"]
     del score["MusicContext"]
     score = lilypond_file["Score"]
-    tags = not do_not_tag
     if page_layout_context_only:
-        page_layout_context = score["PageLayout"]
-        text = abjad.lilypond(page_layout_context, tags=tags)
+        context = score["PageLayout"]
     else:
-        text = abjad.lilypond(score, tags=tags)
+        context = score
+    for component in abjad.iterate.components(context):
+        component.tag = component.tag.retain_shoutcase()
+        for wrapper in abjad.get.wrappers(component):
+            wrapper.tag = wrapper.tag.retain_shoutcase()
+    text = abjad.lilypond(context, tags=True)
     text = text.replace("Skips", "PageLayout")
     text = text.replace("GlobalSkips", "PageLayout")
     # TODO: remove following line?
