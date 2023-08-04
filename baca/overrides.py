@@ -830,6 +830,16 @@ def note_head_transparent(argument) -> list[abjad.Wrapper]:
     )
 
 
+def note_head_transparent_false(argument) -> list[abjad.Wrapper]:
+    return _do_override(
+        _frame(),
+        argument,
+        grob="NoteHead",
+        attribute="transparent",
+        value=False,
+    )
+
+
 def note_head_x_extent_zero(argument) -> list[abjad.Wrapper]:
     return _do_override(
         _frame(),
