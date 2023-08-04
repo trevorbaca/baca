@@ -4,8 +4,6 @@
 % Modifications: Paul Morris
 % http://lists.gnu.org/archive/html/lilypond-user/2012-12/msg00733.html
 
-%%%% start snippet %%%%%%%%%%%%%%%%%%
-
 morleyDashedStaffSymbolLines =
 #(define-music-function (parser location dash-space bool-list)
  ((number-pair? '(0.5 . 0.5)) list?)
@@ -113,18 +111,20 @@ the first number of the pair is the width, the second the spacing
 #})
 
 
-%%% USAGE %%%
-% 
-% \layout
-% {
-%     \context
-%     {
-%         \Staff
-%         \override StaffSymbol.line-positions = #'(-4  0  4)
-%         \morleyDashedStaffSymbolLines #'(#f #t #f)
-%         %\morleyDashedStaffSymbolLines #'(1 . 0.7) #'(#f #t #f)
-%         %\morleyDashedStaffSymbolLines #'(0.05 . 0.3) #'(#f #t #f)
-%     }
-% }
-% 
-%%% END %%%
+%{
+
+  USAGE:
+
+  \layout
+  {
+      \context
+      {
+          \Staff
+          \override StaffSymbol.line-positions = #'(-4  0  4)
+          \morleyDashedStaffSymbolLines #'(#f #t #f)
+          %\morleyDashedStaffSymbolLines #'(1 . 0.7) #'(#f #t #f)
+          %\morleyDashedStaffSymbolLines #'(0.05 . 0.3) #'(#f #t #f)
+      }
+  }
+
+%}

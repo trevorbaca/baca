@@ -5,6 +5,7 @@
 \include "baca-coloring.ily"
 \include "baca-dynamics.ily"
 \include "baca-harp-markups.ily"
+\include "baca-line-breaking.ily"
 \include "baca-markups.ily"
 \include "baca-note-heads.ily"
 \include "baca-page-layout.ily"

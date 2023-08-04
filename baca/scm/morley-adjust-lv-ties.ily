@@ -104,36 +104,41 @@ morley-adjust-lv-ties =
 
 
 
+%{
 
-{
-  <fs' cs'' a''>2
-  \laissezVibrer
+  EXAMPLE:
 
-  \morley-adjust-lv-ties #2
-  <fs' cs'' a''>2
-  \laissezVibrer
+  {
+    <fs' cs'' a''>2
+    \laissezVibrer
 
-  \morley-adjust-lv-ties #'(#f 1 #f) #2
-  <fs' cs'' a''>2
-  \laissezVibrer
+    \morley-adjust-lv-ties #2
+    <fs' cs'' a''>2
+    \laissezVibrer
 
-  <fs' cs'' a''>2
-  \laissezVibrer
+    \morley-adjust-lv-ties #'(#f 1 #f) #2
+    <fs' cs'' a''>2
+    \laissezVibrer
 
-  \morley-adjust-lv-ties #'(#f #f #f) #2
-  <fs' cs'' a''>2
-  \laissezVibrer
+    <fs' cs'' a''>2
+    \laissezVibrer
 
-  \morley-adjust-lv-ties #6
-  <fs' cs'' a''>2
-  \laissezVibrer
+    \morley-adjust-lv-ties #'(#f #f #f) #2
+    <fs' cs'' a''>2
+    \laissezVibrer
 
-  \morley-adjust-lv-ties #'(#f 1.35 #f) #6
-  <fs' cs'' a''>2
-  \laissezVibrer
+    \morley-adjust-lv-ties #6
+    <fs' cs'' a''>2
+    \laissezVibrer
 
-  \morley-adjust-lv-ties #'(#f 1.35 0.1) #6
-  <fs' cs'' a''>2
-  \laissezVibrer
+    \morley-adjust-lv-ties #'(#f 1.35 #f) #6
+    <fs' cs'' a''>2
+    \laissezVibrer
 
-}
+    \morley-adjust-lv-ties #'(#f 1.35 0.1) #6
+    <fs' cs'' a''>2
+    \laissezVibrer
+
+  }
+
+%}
