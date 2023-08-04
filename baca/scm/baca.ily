@@ -17,4 +17,5 @@
 \include "baca-string-markups.ily"
 \include "baca-text-spanner-line-styles.ily"
 \include "baca-wind-markups.ily"
+\include "morley-adjust-lv-ties.ily"
 \include "morley-dashed-staff-lines.ily"

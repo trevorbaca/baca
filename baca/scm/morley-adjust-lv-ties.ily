@@ -1,7 +1,7 @@
 % Author: Thomas Morley
 % Date: 2019-05-14
 
-adjust-lv-ties =
+morley-adjust-lv-ties =
 #(define-music-function (x-start amount)
    ((list? (circular-list #f)) number?)
    "
@@ -10,7 +10,7 @@ adjust-lv-ties =
 
   @verbatim
     {
-     \\adjust-lv-ties #2
+     \\morley-adjust-lv-ties #2
      <fis' cis'' a''>2\\laissezVibrer
     }
   @end verbatim
@@ -24,7 +24,7 @@ adjust-lv-ties =
 
   @verbatim
     {
-     \\adjust-lv-ties #'(#f 1 #f) #2
+     \\morley-adjust-lv-ties #'(#f 1 #f) #2
      <fis' cis'' a''>2\\laissezVibrer
     }
   @end verbatim
@@ -109,30 +109,30 @@ adjust-lv-ties =
   <fs' cs'' a''>2
   \laissezVibrer
 
-  \adjust-lv-ties #2
+  \morley-adjust-lv-ties #2
   <fs' cs'' a''>2
   \laissezVibrer
 
-  \adjust-lv-ties #'(#f 1 #f) #2
+  \morley-adjust-lv-ties #'(#f 1 #f) #2
   <fs' cs'' a''>2
   \laissezVibrer
 
   <fs' cs'' a''>2
   \laissezVibrer
 
-  \adjust-lv-ties #'(#f #f #f) #2
+  \morley-adjust-lv-ties #'(#f #f #f) #2
   <fs' cs'' a''>2
   \laissezVibrer
 
-  \adjust-lv-ties #6
+  \morley-adjust-lv-ties #6
   <fs' cs'' a''>2
   \laissezVibrer
 
-  \adjust-lv-ties #'(#f 1.35 #f) #6
+  \morley-adjust-lv-ties #'(#f 1.35 #f) #6
   <fs' cs'' a''>2
   \laissezVibrer
 
-  \adjust-lv-ties #'(#f 1.35 0.1) #6
+  \morley-adjust-lv-ties #'(#f 1.35 0.1) #6
   <fs' cs'' a''>2
   \laissezVibrer
 
