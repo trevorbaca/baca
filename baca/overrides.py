@@ -1583,6 +1583,16 @@ def trill_spanner_staff_padding(argument, n: int | float) -> list[abjad.Wrapper]
     )
 
 
+def tuplet_bracket_after_line_breaking_false(argument) -> list[abjad.Wrapper]:
+    return _do_override(
+        _frame(),
+        argument,
+        "TupletBracket",
+        "after-line-breaking",
+        False,
+    )
+
+
 def tuplet_bracket_down(argument) -> list[abjad.Wrapper]:
     return _do_override(
         _frame(),
