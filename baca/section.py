@@ -1576,6 +1576,20 @@ def _style_first_measure(global_skips, section_number):
         deactivate=True,
         tag=_helpers.function_name(_frame()).append(_tags.RED_START_BAR),
     )
+    string = f'"{str(section_number).zfill(2)}"'
+    string = rf"\markup \with-dimensions-from \null {string}"
+    mark = abjad.RehearsalMark(markup=string)
+    bundle = abjad.bundle(
+        mark,
+        abjad.Tweak(r"\tweak break-visibility ##(#t #t #f)"),
+        abjad.Tweak(r"\tweak color #red"),
+    )
+    abjad.attach(
+        bundle,
+        skip,
+        deactivate=True,
+        tag=_helpers.function_name(_frame()).append(_tags.RED_START_BAR),
+    )
 
 
 def _update_score_one_time(score):
