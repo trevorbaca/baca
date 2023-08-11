@@ -54,7 +54,7 @@ Persistence.
                             \context Voice = "Music"
                             {
                                 \abjad-invisible-music-coloring
-                                \once \override Staff.Clef.color = #(x11-color 'blue)
+                                \once \override Staff.Clef.color = #blue
                                 \set Staff.forceClef = ##t
                                 \once \override Accidental.stencil = ##f
                                 \once \override NoteColumn.ignore-collision = ##t
@@ -134,7 +134,7 @@ Persistence.
                             \context Voice = "Music"
                             {
                                 \abjad-invisible-music-coloring
-                                \once \override Staff.Clef.color = #(x11-color 'blue)
+                                \once \override Staff.Clef.color = #blue
                                 \set Staff.forceClef = ##t
                                 \once \override Accidental.stencil = ##f
                                 \once \override NoteColumn.ignore-collision = ##t
@@ -275,7 +275,7 @@ Persistence.
                             \context Voice = "Music"
                             {
                                 \abjad-invisible-music-coloring
-                                \once \override Staff.Clef.color = #(x11-color 'blue)
+                                \once \override Staff.Clef.color = #blue
                                 \set Staff.forceClef = ##t
                                 \once \override Accidental.stencil = ##f
                                 \once \override NoteColumn.ignore-collision = ##t
@@ -424,7 +424,7 @@ Persistence.
                     \context Voice = "Music"
                     {
                         c'4.
-                        - \tweak color #(x11-color 'blue)
+                        - \tweak color #blue
                         \f
                         c'4.
                     }
@@ -482,7 +482,7 @@ Persistence.
                     \context Voice = "Music"
                     {
                         c'4.
-                        - \tweak color #(x11-color 'blue)
+                        - \tweak color #blue
                         \p
                         c'4.
                     }
@@ -591,7 +591,7 @@ Persistence.
                     \context Voice = "Music"
                     {
                         c'4.
-                        - \tweak color #(x11-color 'blue)
+                        - \tweak color #blue
                         \f
                         c'4.
                         - \tweak color #(x11-color 'DeepPink1)
@@ -699,10 +699,10 @@ Persistence.
                     \context Voice = "Music"
                     {
                         c'4.
-                        - \tweak color #(x11-color 'blue)
+                        - \tweak color #blue
                         \sfz
                         c'4.
-                        - \tweak color #(x11-color 'blue)
+                        - \tweak color #blue
                         \sfz
                     }
                 >>
@@ -759,7 +759,7 @@ Persistence.
                     \context Voice = "Music"
                     {
                         c'4.
-                        - \tweak color #(x11-color 'blue)
+                        - \tweak color #blue
                         \sfz
                         c'4.
                     }
@@ -809,10 +809,10 @@ Persistence.
                     \context Voice = "Music"
                     {
                         c'4.
-                        - \tweak color #(x11-color 'blue)
+                        - \tweak color #blue
                         \mf
                         c'4.
-                        - \tweak color #(x11-color 'blue)
+                        - \tweak color #blue
                         \baca-effort-mf
                     }
                 >>
@@ -1516,7 +1516,7 @@ Persistence.
                     }
                     \context Voice = "Music"
                     {
-                        \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        \once \override Staff.InstrumentName.color = #blue
                         \set Staff.shortInstrumentName = \markup I+II
                         c'4.
                         \break
@@ -1558,7 +1558,7 @@ Persistence.
                     }
                     \context Voice = "Music"
                     {
-                        \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        \once \override Staff.InstrumentName.color = #blue
                         \set Staff.shortInstrumentName = \markup I+II
                         c'4.
                         \break
@@ -1596,7 +1596,7 @@ Persistence.
                     }
                     \context Voice = "Music"
                     {
-                        \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        \once \override Staff.InstrumentName.color = #blue
                         \set Staff.shortInstrumentName = \markup I+II
                         c'4.
                         \break
@@ -1662,7 +1662,7 @@ Persistence.
                     }
                     \context Voice = "Music"
                     {
-                        \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        \once \override Staff.InstrumentName.color = #blue
                         \set Staff.shortInstrumentName = \markup III+IV
                         c'4.
                         \break
@@ -1704,7 +1704,7 @@ Persistence.
                     }
                     \context Voice = "Music"
                     {
-                        \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        \once \override Staff.InstrumentName.color = #blue
                         \set Staff.shortInstrumentName = \markup III+IV
                         c'4.
                         \break
@@ -1742,7 +1742,7 @@ Persistence.
                     }
                     \context Voice = "Music"
                     {
-                        \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        \once \override Staff.InstrumentName.color = #blue
                         \set Staff.shortInstrumentName = \markup III+IV
                         c'4.
                         \break
@@ -1946,7 +1946,7 @@ Persistence.
                     }
                     \context Voice = "Music"
                     {
-                        \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        \once \override Staff.InstrumentName.color = #blue
                         \set Staff.shortInstrumentName = \markup I+II
                         c'2
                         \break
@@ -1992,7 +1992,7 @@ Persistence.
                     }
                     \context Voice = "Music"
                     {
-                        \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        \once \override Staff.InstrumentName.color = #blue
                         \set Staff.shortInstrumentName = \markup I+II
                         c'2
                         \break
@@ -2034,7 +2034,7 @@ Persistence.
                     }
                     \context Voice = "Music"
                     {
-                        \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        \once \override Staff.InstrumentName.color = #blue
                         \set Staff.shortInstrumentName = \markup I+II
                         c'2
                         \break
@@ -2242,7 +2242,7 @@ Persistence.
                     }
                     \context Voice = "Music"
                     {
-                        \once \override Staff.InstrumentName.color = #(x11-color 'blue)
+                        \once \override Staff.InstrumentName.color = #blue
                         \set Staff.shortInstrumentName = \markup I+II
                         c'2
                         \break
@@ -2321,7 +2321,7 @@ Persistence.
                         \time 3/8
                         s1 * 3/8
                         - \baca-invisible-line
-                        - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'blue
+                        - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #blue
                         \bacaStartTextSpanMM
                         s1 * 3/8
                         \baca-time-signature-transparent
@@ -2417,7 +2417,7 @@ Persistence.
                         \time 3/8
                         s1 * 3/8
                         - \baca-invisible-line
-                        - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'blue
+                        - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #blue
                         \bacaStartTextSpanMM
                         s1 * 3/8
                         \revert TextSpanner.staff-padding
@@ -2508,7 +2508,7 @@ Persistence.
                         \time 3/8
                         s1 * 3/8
                         - \baca-invisible-line
-                        - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "90" #'green4
+                        - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "90" #(x11-color 'green4)
                         \bacaStartTextSpanMM
                         s1 * 3/8
                         \bacaStopTextSpanMM
@@ -2591,12 +2591,12 @@ Persistence.
                         \time 3/8
                         s1 * 3/8
                         - \baca-invisible-line
-                        - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'blue
+                        - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #blue
                         \bacaStartTextSpanMM
                         s1 * 3/8
                         \bacaStopTextSpanMM
                         - \baca-invisible-line
-                        - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'DeepPink1
+                        - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #(x11-color 'DeepPink1)
                         \bacaStartTextSpanMM
                         \baca-time-signature-transparent
                         \time 1/4
@@ -2696,7 +2696,7 @@ Persistence.
                         \time 3/8
                         s1 * 3/8
                         - \baca-invisible-line
-                        - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'DeepPink1
+                        - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #(x11-color 'DeepPink1)
                         \bacaStartTextSpanMM
                         s1 * 3/8
                         \revert TextSpanner.staff-padding
@@ -2777,7 +2777,7 @@ Persistence.
                     }
                     \context Voice = "Music"
                     {
-                        \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
+                        \once \override Staff.StaffSymbol.color = #blue
                         \override Staff.BarLine.bar-extent = #'(0 . 0)
                         \override Staff.BarLine.bar-extent = #'(0 . 0)
                         \stopStaff
@@ -2969,7 +2969,7 @@ Persistence.
                     }
                     \context Voice = "Music"
                     {
-                        \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
+                        \once \override Staff.StaffSymbol.color = #blue
                         \override Staff.BarLine.bar-extent = #'(-2 . 2)
                         \stopStaff
                         \once \override Staff.StaffSymbol.line-count = 5
@@ -3030,7 +3030,7 @@ Persistence.
                     }
                     \context Voice = "Music"
                     {
-                        \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
+                        \once \override Staff.StaffSymbol.color = #blue
                         \override Staff.BarLine.bar-extent = #'(0 . 0)
                         \stopStaff
                         \once \override Staff.StaffSymbol.line-count = 1
@@ -3146,7 +3146,7 @@ Persistence.
                     }
                     \context Voice = "Music"
                     {
-                        \once \override Staff.StaffSymbol.color = #(x11-color 'blue)
+                        \once \override Staff.StaffSymbol.color = #blue
                         \override Staff.BarLine.bar-extent = #'(-2 . 2)
                         \stopStaff
                         \once \override Staff.StaffSymbol.line-count = 5
@@ -3285,7 +3285,7 @@ Persistence.
                         \time 3/8
                         s1 * 3/8
                         - \baca-dashed-line-with-arrow
-                        - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'blue) \large \upright accel. \hspace #0.5 }
+                        - \tweak bound-details.left.text \markup \concat { \with-color #blue \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
                         s1 * 3/8
                         \baca-time-signature-transparent
@@ -3364,7 +3364,7 @@ Persistence.
                         \time 3/8
                         s1 * 3/8
                         - \baca-dashed-line-with-arrow
-                        - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'blue) \large \upright accel. \hspace #0.5 }
+                        - \tweak bound-details.left.text \markup \concat { \with-color #blue \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
                         s1 * 3/8
                         \bacaStopTextSpanMM
@@ -3503,7 +3503,7 @@ Persistence.
                         \time 3/8
                         s1 * 3/8
                         - \baca-dashed-line-with-arrow
-                        - \tweak bound-details.left.text \markup \concat { \with-color #(x11-color 'blue) \large \upright accel. \hspace #0.5 }
+                        - \tweak bound-details.left.text \markup \concat { \with-color #blue \large \upright accel. \hspace #0.5 }
                         \bacaStartTextSpanMM
                         s1 * 3/8
                         \bacaStopTextSpanMM

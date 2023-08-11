@@ -45,11 +45,11 @@ def _attach_color_literal(
         string += " ##f"
     elif redraw is True:
         color = _status_to_redraw_color[status]
-        string += f" #(x11-color '{color})"
+        string += f" #{color}"
     else:
         string = rf"\once {string}"
         color = _status_to_color[status]
-        string += f" #(x11-color '{color})"
+        string += f" #{color}"
     if redraw:
         literal = abjad.LilyPondLiteral(string, site="absolute_after")
     else:
@@ -76,7 +76,7 @@ def _attach_color_literal(
         if color == "blue":
             string = "#blue"
         else:
-            string = f"#(x11-color '{color})"
+            string = f" #{color}"
         string = rf"\baca-time-signature-color {string}"
         literal = abjad.LilyPondLiteral(string, site="before")
     if cancelation is True:
@@ -245,8 +245,8 @@ def _set_status_tag(wrapper, status, redraw=None, stem=None):
 
 _status_to_color = {
     "explicit": "blue",
-    "reapplied": "green4",
-    "redundant": "DeepPink1",
+    "reapplied": "(x11-color 'green4)",
+    "redundant": "(x11-color 'DeepPink1)",
 }
 
 
@@ -263,9 +263,9 @@ _status_to_short_instrument_name_markup = {
 }
 
 _status_to_redraw_color = {
-    "explicit": "DeepSkyBlue2",
-    "reapplied": "OliveDrab",
-    "redundant": "DeepPink4",
+    "explicit": "(x11-color 'DeepSkyBlue2)",
+    "reapplied": "(x11-color 'OliveDrab)",
+    "redundant": "(x11-color 'DeepPink4)",
 }
 
 
@@ -464,7 +464,7 @@ def treat_persistent_wrapper(manifests, wrapper, status):
         words = [_ if isinstance(_, str) else _.string for _ in words]
         string = ":".join(words)
         tag_ = abjad.Tag(string)
-        string = f"#(x11-color '{color})"
+        string = f"#{color}"
         bundle = abjad.bundle(
             wrapper.indicator,
             rf"- \tweak color {string}",

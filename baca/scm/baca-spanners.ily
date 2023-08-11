@@ -462,11 +462,11 @@ baca-metronome-mark-spanner-layer = #(
 baca-metronome-mark-spanner-colored-left-markup = #(
     define-music-function
     (parser location markup color music)
-    (markup? symbol? ly:music?)
+    (markup? color? ly:music?)
     #{
     \baca-metronome-mark-spanner-layer
     \tweak bound-details.left.text \markup \concat {
-        \with-color #(x11-color color)
+        \with-color #color
         #markup
         \hspace #0.5
         }
@@ -477,11 +477,11 @@ baca-metronome-mark-spanner-colored-left-markup = #(
 baca-metronome-mark-spanner-colored-left-text = #(
     define-music-function
     (parser location log dots stem string color music)
-    (number? number? number? string? symbol? ly:music?)
+    (number? number? number? string? color? ly:music?)
     #{
     \baca-metronome-mark-spanner-layer
     \tweak bound-details.left.text \markup \concat {
-        \with-color #(x11-color color)
+        \with-color #color
         \abjad-metronome-mark-markup #log #dots #stem #string
         \hspace #0.5
         }
@@ -492,11 +492,11 @@ baca-metronome-mark-spanner-colored-left-text = #(
 baca-metronome-mark-spanner-colored-left-text-mixed-number = #(
     define-music-function
     (parser location log dots stem base n d color music)
-    (number? number? number? string? string? string? symbol? ly:music?)
+    (number? number? number? string? string? string? color? ly:music?)
     #{
     \baca-metronome-mark-spanner-layer
     \tweak bound-details.left.text \markup \concat {
-        \with-color #(x11-color color)
+        \with-color #color
         \abjad-metronome-mark-fraction-markup #log #dots #stem #base #n #d
         \hspace #0.5
         }
@@ -596,11 +596,11 @@ baca-colored-bracketed-metric-modulation = #(
         modulation-scale color music)
     (number? number? number? string?
         number? number? number? number?
-        pair? symbol? ly:music?)
+        pair? color? ly:music?)
     #{
     \baca-metronome-mark-spanner-layer
     \tweak bound-details.left.text \markup \concat {
-        \with-color #(x11-color color)
+        \with-color #color
         \abjad-bracketed-metric-modulation
             #mm-length #mm-dots #mm-stem #mm-value
             #lhs-length #lhs-dots #rhs-length #rhs-dots
@@ -619,11 +619,11 @@ baca-colored-bracketed-mixed-number-metric-modulation = #(
         modulation-scale color music)
     (number? number? number? string? string? string?
         number? number? number? number?
-        pair? symbol? ly:music?)
+        pair? color? ly:music?)
     #{
     \baca-metronome-mark-spanner-layer
     \tweak bound-details.left.text \markup \concat {
-        \with-color #(x11-color color)
+        \with-color #color
         \abjad-bracketed-mixed-number-metric-modulation
             #mm-length #mm-dots #mm-stem #mm-base #mm-n #mm-d
             #lhs-length #lhs-dots #rhs-length #rhs-dots
@@ -694,7 +694,7 @@ baca-colored-bracketed-metric-modulation-tuplet-lhs = #(
     (number? number? number? string?
         number? number? number? number?
         number? number?
-        pair? symbol? ly:music?)
+        pair? color? ly:music?)
     #{
     \baca-metronome-mark-spanner-layer
     \tweak bound-details.left.text \markup \concat {
@@ -719,7 +719,7 @@ baca-colored-bracketed-mixed-number-metric-modulation-tuplet-lhs = #(
     (number? number? number? string? string? string?
         number? number? number? number?
         number? number?
-        pair? symbol? ly:music?)
+        pair? color? ly:music?)
     #{
     \baca-metronome-mark-spanner-layer
     \tweak bound-details.left.text \markup \concat {
@@ -794,11 +794,11 @@ baca-colored-bracketed-metric-modulation-tuplet-rhs = #(
     (number? number? number? string?
         number? number?
         number? number? number? number?
-        pair? symbol? ly:music?)
+        pair? color? ly:music?)
     #{
     \baca-metronome-mark-spanner-layer
     \tweak bound-details.left.text \markup \concat {
-        \with-color #(x11-color color)
+        \with-color #color
         \abjad-bracketed-metric-modulation-tuplet-rhs
             #mm-length #mm-dots #mm-stem #mm-value
             #note-length #note-dots
@@ -820,11 +820,11 @@ baca-colored-bracketed-mixed-number-metric-modulation-tuplet-rhs = #(
     (number? number? number? string? string? string?
         number? number?
         number? number? number? number?
-        pair? symbol? ly:music?)
+        pair? color? ly:music?)
     #{
     \baca-metronome-mark-spanner-layer
     \tweak bound-details.left.text \markup \concat {
-        \with-color #(x11-color color)
+        \with-color #color
         \abjad-bracketed-mixed-number-metric-modulation-tuplet-rhs
             #mm-length #mm-dots #mm-stem #mm-base #mm-n #mm-d
             #note-length #note-dots
@@ -1139,7 +1139,7 @@ baca-snm-colored-left-text-tweak = #(
     (interpret-markup layout props
         #{
         \markup 
-        \with-color #(x11-color 'red)
+        \with-color #red
         \fontsize #-3
         \upright
         #snm

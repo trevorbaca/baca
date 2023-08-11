@@ -2858,9 +2858,9 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
                 "baca-bracketed-mixed-number-metric-modulation",
                 "baca-colored-bracketed-mixed-number-metric-modulation",
             )
-            left_text_with_color = f"{string} #'{color}"
+            left_text_with_color = f"{string} #{color}"
         else:
-            color = f"(x11-color '{color})"
+            # color = f"(x11-color '{color})"
             left_text_with_color = abjad.Markup(
                 rf"\with-color #{color} {left_text.string}"
             )
@@ -2878,7 +2878,7 @@ def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
                 status = None
             assert status is not None
             color = _treat._status_to_color[status]
-            color = f"(x11-color '{color})"
+            # color = f"(x11-color '{color})"
             right_text_with_color = abjad.Markup(
                 rf"\with-color #{color} {right_text.string}"
             )
