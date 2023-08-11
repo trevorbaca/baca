@@ -121,9 +121,9 @@ baca-redundant-short-instrument-name-markup = #(
 %%% TIME SIGNATURE COLORING %%%
 
 baca-time-signature-color = #(
-    define-music-function (parser location color music) (symbol? ly:music?)
+    define-music-function (parser location color music) (color? ly:music?)
     #{
-    \once \override Score.TimeSignature.color = #(x11-color color)
+    \once \override Score.TimeSignature.color = #color
     $music
     #}
     )

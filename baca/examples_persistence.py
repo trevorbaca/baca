@@ -43,7 +43,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -123,7 +123,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -198,7 +198,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -264,7 +264,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -348,7 +348,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -416,7 +416,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -474,7 +474,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -533,7 +533,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -583,7 +583,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -643,7 +643,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -691,7 +691,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -751,7 +751,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -801,7 +801,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -867,7 +867,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                     }
@@ -903,7 +903,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                     }
@@ -936,7 +936,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                     }
@@ -995,7 +995,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1031,7 +1031,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1063,7 +1063,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1123,7 +1123,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1159,7 +1159,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1192,7 +1192,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1242,7 +1242,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 4/8
                         s1 * 4/8
                         s1 * 4/8
@@ -1281,7 +1281,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 4/8
                         s1 * 4/8
                         s1 * 4/8
@@ -1316,7 +1316,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 4/8
                         s1 * 4/8
                         s1 * 4/8
@@ -1378,7 +1378,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1414,7 +1414,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1446,7 +1446,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                     }
@@ -1509,7 +1509,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -1551,7 +1551,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -1589,7 +1589,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -1655,7 +1655,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -1697,7 +1697,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -1735,7 +1735,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -1802,7 +1802,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -1844,7 +1844,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -1882,7 +1882,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -1939,7 +1939,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 4/8
                         s1 * 4/8
                         s1 * 4/8
@@ -1985,7 +1985,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 4/8
                         s1 * 4/8
                         s1 * 4/8
@@ -2027,7 +2027,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 4/8
                         s1 * 4/8
                         s1 * 4/8
@@ -2097,7 +2097,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -2139,7 +2139,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -2177,7 +2177,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -2235,7 +2235,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 4/8
                         s1 * 4/8
                         s1 * 4/8
@@ -2317,7 +2317,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         - \baca-invisible-line
@@ -2412,7 +2412,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \override TextSpanner.staff-padding = 4
                         \time 3/8
                         s1 * 3/8
@@ -2503,7 +2503,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \override TextSpanner.staff-padding = 4
                         \time 3/8
                         s1 * 3/8
@@ -2587,7 +2587,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         - \baca-invisible-line
@@ -2691,7 +2691,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \override TextSpanner.staff-padding = 4
                         \time 3/8
                         s1 * 3/8
@@ -2770,7 +2770,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -2841,7 +2841,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -2910,7 +2910,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -2962,7 +2962,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -3023,7 +3023,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -3087,7 +3087,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -3139,7 +3139,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -3205,7 +3205,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         s1 * 3/8
@@ -3281,7 +3281,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         - \baca-dashed-line-with-arrow
@@ -3359,7 +3359,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \override TextSpanner.staff-padding = 4
                         \time 3/8
                         s1 * 3/8
@@ -3435,7 +3435,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \override TextSpanner.staff-padding = 4
                         \time 3/8
                         s1 * 3/8
@@ -3499,7 +3499,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \time 3/8
                         s1 * 3/8
                         - \baca-dashed-line-with-arrow
@@ -3585,7 +3585,7 @@ Persistence.
                 <<
                     \context Voice = "Skips"
                     {
-                        \baca-time-signature-color #'blue
+                        \baca-time-signature-color #blue
                         \override TextSpanner.staff-padding = 4
                         \time 3/8
                         s1 * 3/8

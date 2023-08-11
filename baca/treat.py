@@ -73,7 +73,11 @@ def _attach_color_literal(
             suffix = "color"
     status_tag = _get_tag(status, stem, prefix=prefix, suffix=suffix)
     if isinstance(wrapper.unbundle_indicator(), abjad.TimeSignature):
-        string = rf"\baca-time-signature-color #'{color}"
+        if color == "blue":
+            string = "#blue"
+        else:
+            string = f"#(x11-color '{color})"
+        string = rf"\baca-time-signature-color {string}"
         literal = abjad.LilyPondLiteral(string, site="before")
     if cancelation is True:
         tag = _helpers.function_name(_frame(), n=1)
