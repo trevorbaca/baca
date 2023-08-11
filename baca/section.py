@@ -2200,8 +2200,6 @@ def make_layout_ly(
     text = abjad.lilypond(context, tags=True)
     text = text.replace("Skips", "PageLayout")
     text = text.replace("GlobalSkips", "PageLayout")
-    # TODO: remove following line?
-    text = text.replace("Global.Skips", "Page.Layout")
     text = abjad.tag.left_shift_tags(text)
     layout_ly = layout_directory / file_name
     lines = []

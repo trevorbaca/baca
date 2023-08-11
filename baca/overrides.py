@@ -231,7 +231,6 @@ def bar_line_transparent(argument) -> list[abjad.Wrapper]:
     )
 
 
-# TODO: change name to bar_line_x_extent()
 def bar_line_x_extent(
     leaves,
     pair: tuple[int | float, int | float],

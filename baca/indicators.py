@@ -707,7 +707,6 @@ def marcato(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-# TODO: remove
 def mark(
     argument,
     string: str,
