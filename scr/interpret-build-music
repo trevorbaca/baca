@@ -1,17 +1,28 @@
 #! /usr/bin/env python
+import argparse
 import os
 import pathlib
 import sys
 
 import baca
 
-if __name__ == "__main__":
+
+def main():
     directory = os.getcwd()
     directory = pathlib.Path(directory)
-    debug_sections = "--debug-sections" in sys.argv
-    skip_section_collection = "--skip-section-collection" in sys.argv
+    parser = argparse.ArgumentParser(description="Activate tags in LilyPond files.")
+    parser.add_argument(
+        "--debug-sections", help="preserve _sections directory", action="store_true"
+    )
+    parser.add_argument(
+        "--skip-collection", help="do not collect .ily files", action="store_true"
+    )
+    arguments = parser.parse_args()
     baca.build.interpret_build_music(
         directory,
-        debug_sections=debug_sections,
-        skip_section_collection=skip_section_collection,
+        debug_sections=arguments.debug_sections,
+        skip_section_collection=arguments.skip_collection,
     )
+
+if __name__ == "__main__":
+    main()

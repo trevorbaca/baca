@@ -178,8 +178,8 @@ def _assert_nonoverlapping_rhythms(rhythms, voice):
         previous_stop_offset = stop_offset
 
 
+# no longer required after LilyPond 2.23.7
 def _attach_nonfirst_empty_start_bar(global_skips):
-    # empty start bar allows LilyPond to print bar numbers at start of nonfirst sections
     first_skip = _select.skip(global_skips, 0)
     literal = abjad.LilyPondLiteral(r'\bar ""', site="before")
     tag = _tags.EMPTY_START_BAR
@@ -2590,7 +2590,8 @@ def set_up_score(
     skips = score["Skips"]
     _make_global_skips(skips, time_signatures, append_anchor_skip=append_anchor_skip)
     if not first_section:
-        _attach_nonfirst_empty_start_bar(skips)
+        # _attach_nonfirst_empty_start_bar(skips)
+        pass
     _label_measure_numbers(first_measure_number, skips)
     if always_make_global_rests:
         _make_global_rests(score["Rests"], time_signatures)

@@ -36,7 +36,7 @@ ANCHOR_NOTE = abjad.Tag("ANCHOR_NOTE")
 ANCHOR_SKIP = abjad.Tag("ANCHOR_SKIP")
 BREAK = abjad.Tag("BREAK")
 CLOCK_TIME = abjad.Tag("CLOCK_TIME")
-EMPTY_START_BAR = abjad.Tag("EMPTY_START_BAR")
+FERMATA_MEASURE = abjad.Tag("FERMATA_MEASURE")
 FERMATA_MEASURE = abjad.Tag("FERMATA_MEASURE")
 FERMATA_MEASURE_EMPTY_BAR_EXTENT = abjad.Tag("FERMATA_MEASURE_EMPTY_BAR_EXTENT")
 FERMATA_MEASURE_NEXT_BAR_EXTENT = abjad.Tag("FERMATA_MEASURE_NEXT_BAR_EXTENT")
@@ -53,6 +53,7 @@ MULTIMEASURE_REST = abjad.Tag("MULTIMEASURE_REST")
 NOT_MOL = abjad.Tag("NOT_MOL")
 NOTE = abjad.Tag("NOTE")
 ONLY_MOL = abjad.Tag("ONLY_MOL")
+RED_START_BAR = abjad.Tag("RED_START_BAR")
 REST_VOICE = abjad.Tag("REST_VOICE")
 SHIFTED_CLEF = abjad.Tag("SHIFTED_CLEF")
 SHOW_IN_PARTS = abjad.Tag("SHOW_IN_PARTS")
@@ -406,7 +407,6 @@ def layout_removal_tags():
         >>> for tag in baca.tags.layout_removal_tags():
         ...     tag
         ...
-        Tag(string='EMPTY_START_BAR')
         Tag(string='EXPLICIT_TIME_SIGNATURE_COLOR')
         Tag(string='LOCAL_MEASURE_NUMBER')
         Tag(string='MEASURE_NUMBER')
@@ -415,7 +415,6 @@ def layout_removal_tags():
 
     """
     return [
-        EMPTY_START_BAR,
         EXPLICIT_TIME_SIGNATURE_COLOR,
         LOCAL_MEASURE_NUMBER,
         MEASURE_NUMBER,
