@@ -104,15 +104,6 @@ def _add_container_identifiers(score, section_number):
     return container_to_part_assignment
 
 
-@dataclasses.dataclass
-class Analysis:
-    leaf: abjad.Leaf
-    previous_indicator: typing.Any
-    status: typing.Any
-    edition: typing.Any
-    synthetic_offset: typing.Any
-
-
 def _analyze_memento(contexts, dictionary, memento):
     previous_indicator = _memento_to_indicator(dictionary, memento)
     if previous_indicator is None:
@@ -176,19 +167,6 @@ def _assert_nonoverlapping_rhythms(rhythms, voice):
         duration = abjad.get.duration(rhythm.annotation)
         stop_offset = start_offset + duration
         previous_stop_offset = stop_offset
-
-
-# no longer required after LilyPond 2.23.7
-def _attach_nonfirst_empty_start_bar(global_skips):
-    first_skip = _select.skip(global_skips, 0)
-    literal = abjad.LilyPondLiteral(r'\bar ""', site="before")
-    tag = _tags.EMPTY_START_BAR
-    tag = tag.append(_tags.ONLY_SECTION)
-    abjad.attach(
-        literal,
-        first_skip,
-        tag=tag.append(_helpers.function_name(_frame())),
-    )
 
 
 # This exists because of an incompletely implemented behavior in LilyPond;
@@ -1580,59 +1558,14 @@ def _style_fermata_measures(
             )
 
 
-def sort_dictionary(dictionary):
-    items = list(dictionary.items())
-    items.sort()
-    dictionary.clear()
-    for key, value in items:
-        if isinstance(value, dict):
-            sort_dictionary(value)
-        dictionary[key] = value
-
-
-def transpose_score(score):
-    for pleaf in _select.pleaves(score):
-        if abjad.get.has_indicator(pleaf, _enums.DO_NOT_TRANSPOSE):
-            continue
-        if abjad.get.has_indicator(pleaf, _enums.STAFF_POSITION):
-            continue
-        abjad.iterpitches.transpose_from_sounding_pitch(pleaf)
-
-
-_transpose_score_alias = transpose_score
-
-
-def treat_untreated_persistent_wrappers(score, *, manifests=None):
-    manifests = manifests or {}
-    dynamic_prototype = (abjad.Dynamic, abjad.StartHairpin)
-    tempo_prototype = (
-        _classes.Accelerando,
-        abjad.MetronomeMark,
-        _classes.Ritardando,
+def _style_nonfirst_start_bar(global_skips):
+    skip = _select.skip(global_skips, 0)
+    abjad.attach(
+        abjad.LilyPondLiteral(r"\baca-thick-red-bar-line"),
+        skip,
+        deactivate=True,
+        tag=_helpers.function_name(_frame()).append(_tags.RED_START_BAR),
     )
-    for leaf in abjad.iterate.leaves(score):
-        for wrapper in abjad.get.wrappers(leaf):
-            if not getattr(wrapper.unbundle_indicator(), "persistent", False):
-                continue
-            if wrapper.tag and _tags.has_persistence_tag(wrapper.tag):
-                continue
-            if isinstance(wrapper.unbundle_indicator(), abjad.Instrument):
-                prototype = abjad.Instrument
-            elif isinstance(wrapper.unbundle_indicator(), dynamic_prototype):
-                prototype = dynamic_prototype
-            elif isinstance(wrapper.unbundle_indicator(), tempo_prototype):
-                prototype = tempo_prototype
-            else:
-                prototype = type(wrapper.unbundle_indicator())
-            # TODO: optimize
-            previous_indicator = abjad.get.effective(leaf, prototype, n=-1)
-            if _treat.compare_persistent_indicators(
-                previous_indicator, wrapper.unbundle_indicator()
-            ):
-                status = "redundant"
-            else:
-                status = "explicit"
-            _treat.treat_persistent_wrapper(manifests, wrapper, status)
 
 
 def _update_score_one_time(score):
@@ -1655,6 +1588,15 @@ def _whitespace_leaves(score):
             abjad.attach(literal, container, tag=None)
         literal = abjad.LilyPondLiteral("", site="closing")
         abjad.attach(literal, container, tag=None)
+
+
+@dataclasses.dataclass
+class Analysis:
+    leaf: abjad.Leaf
+    previous_indicator: typing.Any
+    status: typing.Any
+    edition: typing.Any
+    synthetic_offset: typing.Any
 
 
 class CacheGetItemWrapper:
@@ -2590,7 +2532,7 @@ def set_up_score(
     skips = score["Skips"]
     _make_global_skips(skips, time_signatures, append_anchor_skip=append_anchor_skip)
     if not first_section:
-        # _attach_nonfirst_empty_start_bar(skips)
+        _style_nonfirst_start_bar(skips)
         pass
     _label_measure_numbers(first_measure_number, skips)
     if always_make_global_rests:
@@ -2600,6 +2542,16 @@ def set_up_score(
     if score_persistent_indicators:
         contexts = abjad.select.components(score, abjad.Context)
         _reapply_persistent_indicators(contexts, manifests, score_persistent_indicators)
+
+
+def sort_dictionary(dictionary):
+    items = list(dictionary.items())
+    items.sort()
+    dictionary.clear()
+    for key, value in items:
+        if isinstance(value, dict):
+            sort_dictionary(value)
+        dictionary[key] = value
 
 
 def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
@@ -2967,6 +2919,51 @@ def style_anchor_skip(score):
         skip,
         tag=tag,
     )
+
+
+def transpose_score(score):
+    for pleaf in _select.pleaves(score):
+        if abjad.get.has_indicator(pleaf, _enums.DO_NOT_TRANSPOSE):
+            continue
+        if abjad.get.has_indicator(pleaf, _enums.STAFF_POSITION):
+            continue
+        abjad.iterpitches.transpose_from_sounding_pitch(pleaf)
+
+
+_transpose_score_alias = transpose_score
+
+
+def treat_untreated_persistent_wrappers(score, *, manifests=None):
+    manifests = manifests or {}
+    dynamic_prototype = (abjad.Dynamic, abjad.StartHairpin)
+    tempo_prototype = (
+        _classes.Accelerando,
+        abjad.MetronomeMark,
+        _classes.Ritardando,
+    )
+    for leaf in abjad.iterate.leaves(score):
+        for wrapper in abjad.get.wrappers(leaf):
+            if not getattr(wrapper.unbundle_indicator(), "persistent", False):
+                continue
+            if wrapper.tag and _tags.has_persistence_tag(wrapper.tag):
+                continue
+            if isinstance(wrapper.unbundle_indicator(), abjad.Instrument):
+                prototype = abjad.Instrument
+            elif isinstance(wrapper.unbundle_indicator(), dynamic_prototype):
+                prototype = dynamic_prototype
+            elif isinstance(wrapper.unbundle_indicator(), tempo_prototype):
+                prototype = tempo_prototype
+            else:
+                prototype = type(wrapper.unbundle_indicator())
+            # TODO: optimize
+            previous_indicator = abjad.get.effective(leaf, prototype, n=-1)
+            if _treat.compare_persistent_indicators(
+                previous_indicator, wrapper.unbundle_indicator()
+            ):
+                status = "redundant"
+            else:
+                status = "explicit"
+            _treat.treat_persistent_wrapper(manifests, wrapper, status)
 
 
 def update_voice_name_to_parameter_to_state(

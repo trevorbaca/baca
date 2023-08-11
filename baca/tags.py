@@ -410,6 +410,7 @@ def layout_removal_tags():
         Tag(string='EXPLICIT_TIME_SIGNATURE_COLOR')
         Tag(string='LOCAL_MEASURE_NUMBER')
         Tag(string='MEASURE_NUMBER')
+        Tag(string='RED_START_BAR')
         Tag(string='REDUNDANT_TIME_SIGNATURE_COLOR')
         Tag(string='STAGE_NUMBER')
 
@@ -418,6 +419,7 @@ def layout_removal_tags():
         EXPLICIT_TIME_SIGNATURE_COLOR,
         LOCAL_MEASURE_NUMBER,
         MEASURE_NUMBER,
+        RED_START_BAR,
         REDUNDANT_TIME_SIGNATURE_COLOR,
         STAGE_NUMBER,
     ]

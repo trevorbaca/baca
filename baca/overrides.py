@@ -206,6 +206,20 @@ def bar_line_extra_offset(
     )
 
 
+def bar_line_hair_thickness(
+    argument, number: int | float, *, after: bool = False, context: str = "Score"
+) -> list[abjad.Wrapper]:
+    return _do_override(
+        _frame(),
+        argument,
+        grob="BarLine",
+        attribute="hair_thickness",
+        value=number,
+        after=after,
+        context=context,
+    )
+
+
 def bar_line_transparent(argument) -> list[abjad.Wrapper]:
     return _do_override(
         _frame(),
