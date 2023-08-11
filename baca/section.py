@@ -1157,6 +1157,16 @@ def _make_global_skips(
             abjad.attach(time_signature, skip, context="Score", tag=None)
 
 
+def _mark_section_number(global_skips, section_number):
+    skip = _select.skip(global_skips, 0)
+    abjad.attach(
+        abjad.LilyPondLiteral(r"\baca-thick-red-bar-line"),
+        skip,
+        deactivate=True,
+        tag=_helpers.function_name(_frame()).append(_tags.RED_START_BAR),
+    )
+
+
 def _memento_to_indicator(dictionary, memento):
     if memento.manifest is not None:
         if dictionary is None:
@@ -1558,7 +1568,7 @@ def _style_fermata_measures(
             )
 
 
-def _style_nonfirst_start_bar(global_skips):
+def _style_first_measure(global_skips, section_number):
     skip = _select.skip(global_skips, 0)
     abjad.attach(
         abjad.LilyPondLiteral(r"\baca-thick-red-bar-line"),
@@ -2372,6 +2382,11 @@ def postprocess_score(
             offset_to_measure_number,
             score,
         )
+        if not first_section:
+            _style_first_measure(
+                score["Skips"],
+                section_number,
+            )
         _style_fermata_measures(
             fermata_extra_offset_y,
             fermata_measure_empty_overrides,
@@ -2519,7 +2534,6 @@ def set_up_score(
     append_anchor_skip: bool = False,
     docs: bool = False,
     first_measure_number: int = 1,
-    first_section: bool = False,
     layout: bool = False,
     manifests: dict | None = None,
     score_persistent_indicators: list[_memento.Memento] | None = None,
@@ -2527,13 +2541,8 @@ def set_up_score(
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     manifests = manifests or {}
     assert isinstance(manifests, dict), repr(manifests)
-    if docs:
-        first_section = True
     skips = score["Skips"]
     _make_global_skips(skips, time_signatures, append_anchor_skip=append_anchor_skip)
-    if not first_section:
-        _style_nonfirst_start_bar(skips)
-        pass
     _label_measure_numbers(first_measure_number, skips)
     if always_make_global_rests:
         _make_global_rests(score["Rests"], time_signatures)
