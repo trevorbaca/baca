@@ -1,7 +1,7 @@
 %%% BAR LINE COLORING %%%
 
 baca-thick-red-bar-line = #(
-    define-music-function (parser location music) (ly:music?)
+    define-music-function (music) (ly:music?)
     #{
     \once \override Score.BarLine.color = #red
     \once \override Score.BarLine.hair-thickness = 3
@@ -42,7 +42,7 @@ baca-redundant-instrument-markup = #(
 %%% MUSIC COLORING %%%
 
 baca-mock-coloring = #(
-    define-music-function (parser location music) (ly:music?)
+    define-music-function (music) (ly:music?)
     #{
     \abjad-color-music #'firebrick
     $music
@@ -50,7 +50,7 @@ baca-mock-coloring = #(
     )
 
 baca-not-yet-pitched-coloring = #(
-    define-music-function (parser location music) (ly:music?)
+    define-music-function (music) (ly:music?)
     #{
     \abjad-color-music #'goldenrod
     $music
@@ -58,7 +58,7 @@ baca-not-yet-pitched-coloring = #(
     )
 
 baca-not-yet-registered-pitch-coloring = #(
-    define-music-function (parser location music) (ly:music?)
+    define-music-function (music) (ly:music?)
     #{
     \abjad-color-music #'magenta
     $music
@@ -66,7 +66,7 @@ baca-not-yet-registered-pitch-coloring = #(
     )
 
 baca-octave-coloring = #(
-    define-music-function (parser location music) (ly:music?)
+    define-music-function (music) (ly:music?)
     #{
     \abjad-color-music #'red
     $music
@@ -74,7 +74,7 @@ baca-octave-coloring = #(
     )
 
 baca-out-of-range-coloring = #(
-    define-music-function (parser location music) (ly:music?)
+    define-music-function (music) (ly:music?)
     #{
     \abjad-color-music #'red
     $music
@@ -82,7 +82,7 @@ baca-out-of-range-coloring = #(
     )
 
 baca-repeat-pitch-class-coloring = #(
-    define-music-function (parser location music) (ly:music?)
+    define-music-function (music) (ly:music?)
     #{
     \abjad-color-music #'red
     $music
@@ -121,7 +121,7 @@ baca-redundant-short-instrument-name-markup = #(
 %%% TIME SIGNATURE COLORING %%%
 
 baca-time-signature-color = #(
-    define-music-function (parser location color music) (color? ly:music?)
+    define-music-function (color music) (color? ly:music?)
     #{
     \once \override Score.TimeSignature.color = #color
     $music
@@ -129,7 +129,7 @@ baca-time-signature-color = #(
     )
 
 baca-time-signature-transparent = #(
-    define-music-function (parser location music) (ly:music?)
+    define-music-function (music) (ly:music?)
     #{
     \once \override Score.TimeSignature.transparent = ##t
     $music

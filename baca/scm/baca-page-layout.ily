@@ -1,7 +1,7 @@
 %%% BAR LINES %%%
 
 baca-bar-line-visible = #(
-    define-music-function (parser location music) (ly:music?)
+    define-music-function (music) (ly:music?)
     #{
     \once \override Score.BarLine.transparent = ##f
     $music
@@ -28,7 +28,7 @@ baca-bar-line-visible = #(
 %%% BREAKS %%%
 
 baca-lbsd = #(
-    define-music-function (parser location y-offset distances) (number? list?)
+    define-music-function (y-offset distances) (number? list?)
     #{
     \overrideProperty
     Score.NonMusicalPaperColumn.line-break-system-details.Y-offset #y-offset
@@ -40,7 +40,7 @@ baca-lbsd = #(
 %%% FERMATA MEASURES %%%
 
 baca-fermata-measure = #(
-    define-music-function (parser location music) (ly:music?)
+    define-music-function (music) (ly:music?)
     #{
     \once \override Score.MultiMeasureRest.transparent = ##t
     \once \override Score.TimeSignature.stencil = ##f
@@ -51,7 +51,7 @@ baca-fermata-measure = #(
 %%% SPACING SECTIONS %%%
 
 baca-new-spacing-section = #(
-    define-music-function (parser location n d music) (number? number? ly:music?)
+    define-music-function (n d music) (number? number? ly:music?)
     #{
     \set Score.proportionalNotationDuration = #(ly:make-moment n d)
     \newSpacingSection

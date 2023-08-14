@@ -5,7 +5,7 @@
 % http://lists.gnu.org/archive/html/lilypond-user/2012-12/msg00733.html
 
 morleyDashedStaffSymbolLines =
-#(define-music-function (parser location dash-space bool-list)
+#(define-music-function (dash-space bool-list)
  ((number-pair? '(0.5 . 0.5)) list?)
 "
 Replaces specified lines of a StaffSymbol with dashed lines.

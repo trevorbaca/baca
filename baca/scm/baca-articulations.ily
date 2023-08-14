@@ -116,7 +116,7 @@ baca-double-flageolet = #(make-articulation 'bacadoubleflageolet)
 
 %%% STACCATO ARTICULATIONS (MULTIPLE) %%%
 
-baca-staccati = #(define-music-function (parser location dots) (integer?)
+baca-staccati = #(define-music-function (dots) (integer?)
     (let ((script (make-music 'ArticulationEvent
                    'articulation-type 'staccato)))
      (set! (ly:music-property script 'tweaks)
