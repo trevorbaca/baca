@@ -8,7 +8,7 @@ import itertools
 import abjad
 
 
-def accumulate(sequence, operands=None, count=None):
+def accumulate(sequence: list, operands=None, count=None):
     r"""
     Accumulates ``operands`` calls against sequence to identity.
 
