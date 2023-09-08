@@ -3,9 +3,12 @@ Constellation.
 
 ..  container:: example
 
-    Here are the 8 constellations in CC1:
+    Initialize CC1 like this:
 
     >>> circuit = baca.CC1()
+
+    Here are the 8 constellations in CC1:
+
     >>> for constellation in circuit:
     ...     constellation
     Constellation(180)
@@ -701,7 +704,6 @@ Constellation.
 
     Here's the generator of constellation 1:
 
-    >>> circuit = baca.CC1()
     >>> constellation = circuit[1 - 1]
     >>> generator = abjad.sequence.flatten(constellation.generator)
     >>> generator = abjad.Chord(generator, (1, 4))
@@ -780,7 +782,6 @@ Constellation.
 
     Here're the generator and pivot for constellation 1:
 
-    >>> circuit = baca.CC1()
     >>> constellation = circuit[1 - 1]
     >>> generator = abjad.sequence.flatten(constellation.generator)
     >>> generator = abjad.Chord(generator, (1, 4))
@@ -866,7 +867,6 @@ Constellation.
 
     Here's the generator of constellation 1:
 
-    >>> circuit = baca.CC1()
     >>> constellation = circuit[1 - 1]
     >>> generator = abjad.sequence.flatten(constellation.generator)
     >>> generator = abjad.Chord(generator, (1, 4))
@@ -907,7 +907,6 @@ Constellation.
 
     Here's the generator and pivot of constellation 1:
 
-    >>> circuit = baca.CC1()
     >>> constellation = circuit[1 - 1]
     >>> generator = abjad.sequence.flatten(constellation.generator)
     >>> generator = abjad.Chord(generator, (1, 4))
@@ -954,7 +953,6 @@ Constellation.
 
     Here's the pivot of constellation 1:
 
-    >>> circuit = baca.CC1()
     >>> constellation = circuit[1 - 1]
     >>> pivot = baca.constellation.find_pivot(constellation, circuit[1])
     >>> pivot = abjad.Chord(pivot, (1, 4))
@@ -995,7 +993,6 @@ Constellation.
 
     Here's the colored generator chord for each constellation in CC1:
 
-    >>> circuit = baca.CC1()
     >>> generators = []
     >>> for constellation in circuit:
     ...     generator = abjad.sequence.flatten(constellation.generator)
@@ -1349,7 +1346,6 @@ Constellation.
 
     Here's the colored generator and pivot for each constellation in CC1:
 
-    >>> circuit = baca.CC1()
     >>> generators, pivots = [], []
     >>> length = len(circuit)
     >>> for i, constellation in enumerate(circuit):
@@ -1726,7 +1722,6 @@ Constellation.
 
     Here's the generator for each constellation in CC1:
 
-    >>> circuit = baca.CC1()
     >>> generators = []
     >>> for constellation in circuit:
     ...     generator = abjad.sequence.flatten(constellation.generator)
@@ -1781,7 +1776,6 @@ Constellation.
 
     Here's the generator chord and pivot chord for each constellation in CC1:
 
-    >>> circuit = baca.CC1()
     >>> generators = []
     >>> length = len(circuit)
     >>> for i, constellation in enumerate(circuit):
@@ -1859,7 +1853,6 @@ Constellation.
 
     Here's the pivot chord for each constellation in CC1:
 
-    >>> circuit = baca.CC1()
     >>> pivots = []
     >>> for i, constellation in enumerate(circuit):
     ...     next_constellation = circuit[(i + 1) % length]
@@ -2079,14 +2072,6 @@ class Constellation:
     def __repr__(self):
         """
         Gets repr of constellation.
-
-        ..  container:: example
-
-            >>> circuit = baca.CC1()
-            >>> constellation = circuit[1 - 1]
-            >>> constellation
-            Constellation(180)
-
         """
         return f"{type(self).__name__}({len(self)})"
 
@@ -2096,17 +2081,6 @@ class Constellation:
     def circuit(self):
         """
         Gets circuit to which constellation belongs.
-
-        ..  container:: example
-
-            >>> circuit = baca.CC1()
-            >>> constellation = circuit[1 - 1]
-            >>> constellation.circuit
-            Circuit(8)
-
-            >>> constellation.circuit is circuit
-            True
-
         """
         return self._circuit
 
@@ -2114,14 +2088,6 @@ class Constellation:
     def generator(self):
         """
         Gets constellation generator.
-
-        ..  container:: example
-
-            >>> circuit = baca.CC1()
-            >>> constellation = circuit[1 - 1]
-            >>> constellation.generator
-            [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]]
-
         """
         return self._generator
 
@@ -2154,21 +2120,6 @@ class Constellation:
 class Circuit:
     """
     Circuit.
-
-    ..  container:: example
-
-        >>> circuit = baca.CC1()
-        >>> for constellation in circuit:
-        ...     constellation
-        Constellation(180)
-        Constellation(140)
-        Constellation(80)
-        Constellation(100)
-        Constellation(180)
-        Constellation(150)
-        Constellation(120)
-        Constellation(108)
-
     """
 
     __slots__ = (
@@ -2194,26 +2145,12 @@ class Circuit:
     def __getitem__(self, argument):
         """
         Gets ``argument`` in circuit.
-
-        ..  container:: example
-
-            >>> circuit = baca.CC1()
-            >>> circuit[-1]
-            Constellation(108)
-
         """
         return self._constellations.__getitem__(argument)
 
     def __len__(self):
         """
         Gets length of circuit.
-
-        ..  container:: example
-
-            >>> circuit = baca.CC1()
-            >>> len(circuit)
-            8
-
         """
         return len(self._constellations)
 
@@ -2235,12 +2172,6 @@ class Circuit:
     def range_(self):
         """
         Gets pitch range.
-
-        ..  container:: example
-
-            >>> baca.CC1().range_
-            PitchRange(range_string='[A0, C8]')
-
         """
         return self._range
 
@@ -2248,21 +2179,6 @@ class Circuit:
 def CC1():
     """
     Makes constellation circuit 1.
-
-    ..  container:: example
-
-        >>> circuit = baca.CC1()
-        >>> for constellation in circuit:
-        ...     constellation
-        Constellation(180)
-        Constellation(140)
-        Constellation(80)
-        Constellation(100)
-        Constellation(180)
-        Constellation(150)
-        Constellation(120)
-        Constellation(108)
-
     """
     generators = [
         [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]],
