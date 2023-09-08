@@ -1119,6 +1119,10 @@ Examples: piecewise.
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.text_spanner(voice, "pont. => ord.")
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
+    >>> strut = abjad.Markup(r"\markup \transparent A")
+    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    >>> leaf = abjad.select.leaf(voice, 0)
+    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1151,6 +1155,8 @@ Examples: piecewise.
                 {
                     \override TextSpanner.staff-padding = 4.5
                     e'8
+                    - \tweak staff-padding 8
+                    ^ \markup \transparent A
                     [
                     - \baca-dashed-line-with-arrow
                     - \baca-text-spanner-left-text "pont."
@@ -1196,6 +1202,10 @@ Examples: piecewise.
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.text_spanner(voice, "pont. =| ord.")
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
+    >>> strut = abjad.Markup(r"\markup \transparent A")
+    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    >>> leaf = abjad.select.leaf(voice, 0)
+    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1228,6 +1238,8 @@ Examples: piecewise.
                 {
                     \override TextSpanner.staff-padding = 4.5
                     e'8
+                    - \tweak staff-padding 8
+                    ^ \markup \transparent A
                     [
                     - \baca-dashed-line-with-hook
                     - \baca-text-spanner-left-text "pont."
@@ -1273,6 +1285,10 @@ Examples: piecewise.
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.text_spanner(voice, "pont. -> ord.")
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
+    >>> strut = abjad.Markup(r"\markup \transparent A")
+    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    >>> leaf = abjad.select.leaf(voice, 0)
+    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1305,6 +1321,8 @@ Examples: piecewise.
                 {
                     \override TextSpanner.staff-padding = 4.5
                     e'8
+                    - \tweak staff-padding 8
+                    ^ \markup \transparent A
                     [
                     - \baca-solid-line-with-arrow
                     - \baca-text-spanner-left-text "pont."
@@ -1350,6 +1368,10 @@ Examples: piecewise.
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.text_spanner(voice, "pont. -| ord.")
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
+    >>> strut = abjad.Markup(r"\markup \transparent A")
+    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    >>> leaf = abjad.select.leaf(voice, 0)
+    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1382,6 +1404,8 @@ Examples: piecewise.
                 {
                     \override TextSpanner.staff-padding = 4.5
                     e'8
+                    - \tweak staff-padding 8
+                    ^ \markup \transparent A
                     [
                     - \baca-solid-line-with-hook
                     - \baca-text-spanner-left-text "pont."
@@ -1427,6 +1451,10 @@ Examples: piecewise.
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.text_spanner(voice, "pont. || ord.")
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
+    >>> strut = abjad.Markup(r"\markup \transparent A")
+    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    >>> leaf = abjad.select.leaf(voice, 0)
+    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1459,6 +1487,8 @@ Examples: piecewise.
                 {
                     \override TextSpanner.staff-padding = 4.5
                     e'8
+                    - \tweak staff-padding 8
+                    ^ \markup \transparent A
                     [
                     - \baca-invisible-line
                     - \baca-text-spanner-left-text "pont."
@@ -1511,6 +1541,10 @@ Examples: piecewise.
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
+    >>> strut = abjad.Markup(r"\markup \transparent A")
+    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    >>> leaf = abjad.select.leaf(voice, 0)
+    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1544,6 +1578,8 @@ Examples: piecewise.
                     \override DynamicLineSpanner.staff-padding = 5
                     \override TextSpanner.staff-padding = 4.5
                     e'8
+                    - \tweak staff-padding 8
+                    ^ \markup \transparent A
                     [
                     - \baca-invisible-line
                     - \baca-text-spanner-left-text "A"
@@ -1607,6 +1643,10 @@ Examples: piecewise.
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
+    >>> strut = abjad.Markup(r"\markup \transparent A")
+    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    >>> leaf = abjad.select.leaf(voice, 0)
+    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1640,6 +1680,8 @@ Examples: piecewise.
                     \override DynamicLineSpanner.staff-padding = 5
                     \override TextSpanner.staff-padding = 4.5
                     e'8
+                    - \tweak staff-padding 8
+                    ^ \markup \transparent A
                     [
                     - \baca-solid-line-with-arrow
                     - \baca-text-spanner-left-text "A"
@@ -1704,6 +1746,10 @@ Examples: piecewise.
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
+    >>> strut = abjad.Markup(r"\markup \transparent A")
+    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    >>> leaf = abjad.select.leaf(voice, 0)
+    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1737,6 +1783,8 @@ Examples: piecewise.
                     \override DynamicLineSpanner.staff-padding = 5
                     \override TextSpanner.staff-padding = 4.5
                     e'8
+                    - \tweak staff-padding 8
+                    ^ \markup \transparent A
                     [
                     - \baca-invisible-line
                     - \baca-text-spanner-left-text "A"
@@ -1810,6 +1858,10 @@ Examples: piecewise.
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
+    >>> strut = abjad.Markup(r"\markup \transparent A")
+    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    >>> leaf = abjad.select.leaf(voice, 0)
+    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1843,6 +1895,8 @@ Examples: piecewise.
                     \override DynamicLineSpanner.staff-padding = 5
                     \override TextSpanner.staff-padding = 4.5
                     e'8
+                    - \tweak staff-padding 8
+                    ^ \markup \transparent A
                     [
                     - \baca-solid-line-with-arrow
                     - \baca-text-spanner-left-text "A"
@@ -1922,6 +1976,10 @@ Examples: piecewise.
     ...         pieces=baca.select.plts(voice),
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
+    >>> strut = abjad.Markup(r"\markup \transparent A")
+    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    >>> leaf = abjad.select.leaf(voice, 0)
+    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1955,6 +2013,8 @@ Examples: piecewise.
                     {
                         \override TextSpanner.staff-padding = 4.5
                         c'2
+                        - \tweak staff-padding 8
+                        ^ \markup \transparent A
                         - \baca-solid-line-with-arrow
                         - \baca-text-spanner-left-text "P"
                         - \tweak color #red
@@ -2001,6 +2061,10 @@ Examples: piecewise.
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
+    >>> strut = abjad.Markup(r"\markup \transparent A")
+    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    >>> leaf = abjad.select.leaf(voice, 0)
+    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2034,6 +2098,8 @@ Examples: piecewise.
                     \override DynamicLineSpanner.staff-padding = 5
                     \override TextSpanner.staff-padding = 4.5
                     e'8
+                    - \tweak staff-padding 8
+                    ^ \markup \transparent A
                     [
                     - \baca-dashed-line-with-hook
                     - \baca-text-spanner-left-markup \baca-damp-markup
@@ -2084,6 +2150,10 @@ Examples: piecewise.
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
     >>> _ = baca.dls_staff_padding(voice, 5)
+    >>> strut = abjad.Markup(r"\markup \transparent A")
+    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    >>> leaf = abjad.select.leaf(voice, 0)
+    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2117,6 +2187,8 @@ Examples: piecewise.
                     \override DynamicLineSpanner.staff-padding = 5
                     \override TextSpanner.staff-padding = 4.5
                     e'8
+                    - \tweak staff-padding 8
+                    ^ \markup \transparent A
                     [
                     - \baca-solid-line-with-hook
                     - \baca-text-spanner-left-text "A"
@@ -2181,6 +2253,10 @@ Examples: piecewise.
     ...         pieces=baca.select.plts(voice),
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
+    >>> strut = abjad.Markup(r"\markup \transparent A")
+    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    >>> leaf = abjad.select.leaf(voice, 0)
+    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2219,6 +2295,8 @@ Examples: piecewise.
                 {
                     \override TextSpanner.staff-padding = 4.5
                     c'2
+                    - \tweak staff-padding 8
+                    ^ \markup \transparent A
                     - \baca-solid-line-with-arrow
                     - \baca-text-spanner-left-text "P"
                     \startTextSpan
@@ -2271,6 +2349,10 @@ Examples: piecewise.
     ...         pieces=baca.select.plts(voice),
     ...     )
     >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
+    >>> strut = abjad.Markup(r"\markup \transparent A")
+    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    >>> leaf = abjad.select.leaf(voice, 0)
+    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2304,6 +2386,8 @@ Examples: piecewise.
                     {
                         \override TextSpanner.staff-padding = 4.5
                         c'2
+                        - \tweak staff-padding 8
+                        ^ \markup \transparent A
                         - \baca-solid-line-with-arrow
                         - \baca-text-spanner-left-text "P"
                         \startTextSpan
