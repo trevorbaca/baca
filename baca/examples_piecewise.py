@@ -1555,7 +1555,7 @@ Examples: piecewise.
                     g'8
                     \stopTextSpan
                     [
-                    - invisible-line
+                    - \baca-invisible-line
                     - \baca-text-spanner-left-text "B"
                     \startTextSpan
                     f''8
@@ -1574,7 +1574,7 @@ Examples: piecewise.
                     f''8
                     \stopTextSpan
                     [
-                    - invisible-line
+                    - \baca-invisible-line
                     - \baca-text-spanner-left-text "B"
                     - \baca-text-spanner-right-text "A"
                     - \tweak bound-details.right.padding 0.5
@@ -1751,7 +1751,7 @@ Examples: piecewise.
                     ]
                     g'8
                     [
-                    - invisible-line
+                    - \baca-invisible-line
                     - \baca-text-spanner-left-text "B"
                     - \baca-text-spanner-right-text "A"
                     - \tweak bound-details.right.padding 0.5
@@ -1776,7 +1776,7 @@ Examples: piecewise.
                     ]
                     f''8
                     [
-                    - invisible-line
+                    - \baca-invisible-line
                     - \baca-text-spanner-left-text "B"
                     - \baca-text-spanner-right-text "A"
                     - \tweak bound-details.right.padding 0.5
@@ -2229,7 +2229,7 @@ Examples: piecewise.
                     \startTextSpan
                     e'2
                     \stopTextSpan
-                    - invisible-line
+                    - \baca-invisible-line
                     - \baca-text-spanner-left-text "P"
                     \startTextSpan
                     f'4.

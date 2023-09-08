@@ -411,7 +411,7 @@ def _prepare_text_spanner_arguments(
             item_markup = abjad.Markup(r"\upright {string}")
             assert isinstance(item_markup, abjad.Markup)
         assert isinstance(item_markup, str | abjad.Markup)
-        style = "invisible-line"
+        style = r"\baca-invisible-line"
         if cyclic_items[i + 1] in shape_to_style:
             style = shape_to_style[cyclic_items[i + 1]]
             right_text = cyclic_items[i + 2]
