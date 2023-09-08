@@ -388,7 +388,7 @@ Examples: hairpins.
 
 ..  container:: example
 
-    Piece selector groups leaves by time_signatures:
+    Piece selector groups leaves by time signatures:
 
     >>> score = baca.docs.make_empty_score(1)
     >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])

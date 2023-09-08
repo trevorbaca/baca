@@ -420,9 +420,92 @@ Examples: text spanners.
             >>
         }
 
+    Invisible line with null markup:
+
+    >>> score = baca.docs.make_empty_score(1)
+    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
+    >>> baca.SpacingSpecifier((1, 12))(score)
+    >>> music = baca.make_even_divisions(time_signatures())
+    >>> score["Music"].extend(music)
+    >>> voice = score["Music"]
+    >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
+    >>> _ = baca.text_spanner(voice, r"pont. || \markup \null")
+    >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
+    >>> strut = abjad.Markup(r"\markup \transparent A")
+    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    >>> leaf = abjad.select.leaf(voice, 0)
+    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
+    >>> baca.docs.remove_deactivated_wrappers(score)
+    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        {
+            \context Staff = "Staff"
+            <<
+                \context Voice = "Skips"
+                {
+                    \baca-new-spacing-section #1 #12
+                    \time 4/8
+                    s1 * 4/8
+                    \baca-new-spacing-section #1 #12
+                    \time 3/8
+                    s1 * 3/8
+                    \baca-new-spacing-section #1 #12
+                    \time 4/8
+                    s1 * 4/8
+                    \baca-new-spacing-section #1 #12
+                    \time 3/8
+                    s1 * 3/8
+                }
+                \context Voice = "Music"
+                {
+                    \override TextSpanner.staff-padding = 4.5
+                    e'8
+                    - \tweak staff-padding 8
+                    ^ \markup \transparent A
+                    [
+                    - \baca-invisible-line
+                    - \baca-text-spanner-left-text "pont."
+                    - \baca-text-spanner-right-markup \markup \null
+                    - \tweak bound-details.right.padding 0.5
+                    - \tweak bound-details.right.stencil-align-dir-y #center
+                    \startTextSpan
+                    d''8
+                    f'8
+                    e''8
+                    ]
+                    g'8
+                    [
+                    f''8
+                    e'8
+                    ]
+                    d''8
+                    [
+                    f'8
+                    e''8
+                    g'8
+                    ]
+                    f''8
+                    [
+                    e'8
+                    d''8
+                    \stopTextSpan
+                    ]
+                    \revert TextSpanner.staff-padding
+                }
+            >>
+        }
+
 ..  container:: example
 
-    Piece selector groups leaves by time_signatures:
+    Piece selector groups leaves by time signatures:
 
     >>> score = baca.docs.make_empty_score(1)
     >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
