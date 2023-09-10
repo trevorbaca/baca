@@ -1110,6 +1110,7 @@ def lparts(
     counts: typing.Sequence[int],
     *,
     exclude: abjad.typings.Exclude | None = None,
+    overhang: bool | abjad.enums.Comparison = False,
 ) -> list[list[abjad.Leaf]]:
     r"""
     Selects leaves partitioned by ``counts``.
@@ -1204,7 +1205,7 @@ def lparts(
 
     """
     leaves = abjad.select.leaves(argument, exclude=exclude)
-    lists = abjad.select.partition_by_counts(leaves, counts=counts)
+    lists = abjad.select.partition_by_counts(leaves, counts, overhang=overhang)
     return lists
 
 
