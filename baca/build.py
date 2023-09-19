@@ -665,6 +665,7 @@ def build_score(score_directory, debug_sections=False):
     score_pdf = score_directory / "score.pdf"
     if not score_pdf.is_file():
         print_error(f"Can not find {baca.path.trim(score_pdf)} ...")
+        print_error("PDF MISSING IN build_score()")
         os.system("cat .music.ly.log")
         sys.exit(1)
 
@@ -1229,6 +1230,8 @@ def run_lilypond(ly_file_path, *, pdf_mtime=None, remove=None):
                 print_success(f"Found {baca.path.trim(pdf)} ...")
         else:
             print_error(f"Can not find {baca.path.trim(pdf)} ...")
+            print_error("PDF MISSING IN run_lilypond()")
+            os.system("cat .music.ly.log")
         assert lilypond_log_file_path.exists()
 
 
