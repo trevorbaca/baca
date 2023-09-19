@@ -665,6 +665,7 @@ def build_score(score_directory, debug_sections=False):
     score_pdf = score_directory / "score.pdf"
     if not score_pdf.is_file():
         print_error(f"Can not find {baca.path.trim(score_pdf)} ...")
+        os.system("cat .music.ly.log")
         sys.exit(1)
 
 
