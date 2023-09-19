@@ -572,6 +572,15 @@ class Environment:
     section_number: str | None = None
     timing: Timing | None = None
 
+    def score(self):
+        if self.arguments.clicktrack is True:
+            return True
+        if self.arguments.midi is True:
+            return True
+        if self.arguments.pdf is True:
+            return True
+        return False
+
 
 Timer = abjad.Timer
 
@@ -580,6 +589,7 @@ def arguments(arguments):
     known_arguments = (
         "--also-untagged",
         "--clicktrack",
+        "--layout",
         "--log-timing",
         "--midi",
         "--pdf",
@@ -603,8 +613,8 @@ def arguments(arguments):
             else:
                 role = "argument"
             raise Exception(f"Unrecognized {role} {string} ...")
-    if not any([namespace.clicktrack, namespace.midi, namespace.pdf]):
-        print_always("Missing --clicktrack, --midi, --pdf ...")
+    if not any([namespace.clicktrack, namespace.layout, namespace.midi, namespace.pdf]):
+        print_always("Missing --clicktrack, --layout, --midi, --pdf ...")
         sys.exit(1)
     return namespace
 
