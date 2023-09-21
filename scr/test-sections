@@ -63,9 +63,9 @@ def _test_section(section_directory):
         # names.extend(["clicktrack.midi", "music.midi"])
         pass
     names.sort()
-    layout_py = section_directory / "layout.py"
-    if layout_py.exists():
-        names.append("layout.ly")
+    layout_ly = section_directory / "layout.ly"
+    if layout_ly.exists():
+         names.append("layout.ly")
     names.sort()
     path_to_results = {}
     for name in names:
@@ -78,10 +78,8 @@ def _test_section(section_directory):
     music_ily = section_directory / "music.ily"
     if music_ily.exists():
         music_ily.unlink()
-    if layout_py.exists():
-        os.system("python layout.py")
     # command = "python music.py --also-untagged --clicktrack --log-timing --midi --pdf"
-    command = "python music.py --also-untagged --log-timing --pdf"
+    command = "python music.py --also-untagged --layout --log-timing --pdf"
     os.system(command)
     for path, results in path_to_results.items():
         results.exists = path.is_file()
