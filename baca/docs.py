@@ -223,6 +223,8 @@ def make_empty_score(*counts, do_not_move_global_context=False, no_skips=False):
     """
     tag = _helpers.function_name(_frame())
     global_context = _score.make_global_context()
+    # TODO: cleaner to just make global skips instead of deleting global rests:
+    del global_context["Rests"]
     single_staff = len(counts) == 1
     single_voice = single_staff and counts[0] == 1
     staves, voice_number = [], 1

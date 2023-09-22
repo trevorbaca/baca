@@ -2542,6 +2542,7 @@ def set_up_score(
     score: abjad.Score,
     time_signatures: typing.Sequence[abjad.TimeSignature],
     *,
+    # TODO: remove:
     always_make_global_rests: bool = False,
     append_anchor_skip: bool = False,
     docs: bool = False,
@@ -2556,10 +2557,8 @@ def set_up_score(
     skips = score["Skips"]
     _make_global_skips(skips, time_signatures, append_anchor_skip=append_anchor_skip)
     _label_measure_numbers(first_measure_number, skips)
-    if always_make_global_rests:
+    if "Rests" in score:
         _make_global_rests(score["Rests"], time_signatures)
-    elif "Rests" in score:
-        del score["Rests"]
     if score_persistent_indicators:
         contexts = abjad.select.components(score, abjad.Context)
         _reapply_persistent_indicators(contexts, manifests, score_persistent_indicators)
