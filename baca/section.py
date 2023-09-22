@@ -2280,7 +2280,6 @@ def postprocess_score(
     manifests: dict,
     *,
     all_music_in_part_containers=False,
-    always_make_global_rests=False,
     attach_instruments_by_hand=False,
     clock_time_extra_offset=None,
     clock_time_override=None,
@@ -2542,8 +2541,6 @@ def set_up_score(
     score: abjad.Score,
     time_signatures: typing.Sequence[abjad.TimeSignature],
     *,
-    # TODO: remove:
-    always_make_global_rests: bool = False,
     append_anchor_skip: bool = False,
     docs: bool = False,
     first_measure_number: int = 1,
