@@ -760,32 +760,6 @@ def hleaves(
     return abjad.select.leaves(argument, exclude=exclude, grace=False)
 
 
-def leaf_after_each_ptail(argument):
-    result = ptails(argument)
-    result = [rleak(_)[-1] for _ in result]
-    return result
-
-
-def leaf_in_each_rleak_run(argument, n):
-    result = abjad.select.runs(argument)
-    result = [rleaf(_, n) for _ in result]
-    return result
-
-
-def leaf_in_each_run(argument, n):
-    assert isinstance(n, int), repr(n)
-    result = abjad.select.runs(argument)
-    result = [abjad.select.leaf(_, n) for _ in result]
-    return result
-
-
-def leaf_in_each_tuplet(argument, n):
-    assert isinstance(n, int), repr(n)
-    result = abjad.select.tuplets(argument)
-    result = [abjad.select.leaf(_, n) for _ in result]
-    return result
-
-
 def leaves(
     argument,
     pair=None,
@@ -818,38 +792,6 @@ def leaves(
     if rleak is True:
         leaves = abjad.select.with_next_leaf(leaves)
     return leaves
-
-
-def leaves_in_each_lt(argument, start=0, stop=None):
-    assert isinstance(start, int | type(None)), repr(start)
-    assert isinstance(stop, int | type(None)), repr(stop)
-    result = lts(argument)
-    result = [abjad.select.leaves(_)[start:stop] for _ in result]
-    return result
-
-
-def leaves_in_each_plt(argument, start=0, stop=None):
-    assert isinstance(start, int | type(None)), repr(start)
-    assert isinstance(stop, int | type(None)), repr(stop)
-    result = plts(argument)
-    result = [abjad.select.leaves(_)[start:stop] for _ in result]
-    return result
-
-
-def leaves_in_each_run(argument, start=0, stop=None):
-    assert isinstance(start, int | type(None)), repr(start)
-    assert isinstance(stop, int | type(None)), repr(stop)
-    result = abjad.select.runs(argument)
-    result = [abjad.select.leaves(_)[start:stop] for _ in result]
-    return result
-
-
-def leaves_in_each_tuplet(argument, start=0, stop=None):
-    assert isinstance(start, int | type(None)), repr(start)
-    assert isinstance(stop, int | type(None)), repr(stop)
-    result = abjad.select.tuplets(argument)
-    result = [abjad.select.leaves(_)[start:stop] for _ in result]
-    return result
 
 
 def lleaf(
@@ -3292,17 +3234,6 @@ def ptail(
 
     """
     return ptails(argument, exclude=exclude)[n]
-
-
-def ptail_in_each_tuplet(argument, n, pair=None):
-    assert isinstance(n, int), repr(n)
-    if pair is None:
-        start, stop = None, None
-    else:
-        start, stop = pair
-    tuplets = abjad.select.tuplets(argument)[start:stop]
-    result = [ptail(_, n) for _ in tuplets]
-    return result
 
 
 def ptails(
