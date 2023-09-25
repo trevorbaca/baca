@@ -70,6 +70,7 @@ from .rhythm import (
     InvisibleMusic,
     LMR,
     OBGC,
+    RepeatTie,
     Tuplet,
     WrittenDuration,
     attach_bgcs,
