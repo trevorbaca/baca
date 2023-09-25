@@ -70,6 +70,7 @@ from .rhythm import (
     LMR,
     OBGC,
     Tuplet,
+    WrittenDuration,
     attach_bgcs,
     from_collection,
     get_previous_rhythm_state,

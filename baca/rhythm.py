@@ -428,6 +428,29 @@ class Tuplet:
         return tuplet
 
 
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class WrittenDuration:
+    real_n: int
+    written_n: int
+
+    def __post_init__(self):
+        assert isinstance(self.real_n, int), repr(self.real_n)
+        assert isinstance(self.written_n, int), repr(self.written_n)
+
+    def __call__(self, denominator: int) -> abjad.Leaf:
+        assert isinstance(denominator, int), repr(denominator)
+        tag = _helpers.function_name(_frame())
+        real_duration = abjad.Duration(abs(self.real_n), denominator)
+        leaf: abjad.Leaf
+        if 0 < self.real_n:
+            leaf = abjad.Note(0, real_duration, tag=tag)
+        else:
+            leaf = abjad.Rest(real_duration, tag=tag)
+        written_duration = abjad.Duration(self.written_n, denominator)
+        rmakers.written_duration([leaf], written_duration)
+        return leaf
+
+
 def attach_bgcs(
     bgcs: list[abjad.BeforeGraceContainer],
     argument: abjad.Component | list[abjad.Component],
@@ -823,6 +846,10 @@ def make_rhythm(
             dummy_notes = abjad.makers.make_leaves([97], [duration], tag=tag)
             components.extend(dummy_notes)
             index_to_original_item[i] = tuplet
+        elif isinstance(item, WrittenDuration):
+            leaf = item(denominator)
+            duration = abjad.get.duration(leaf)
+            components.append(leaf)
         else:
             raise Exception(item)
         assert isinstance(duration, abjad.Duration), repr(duration)

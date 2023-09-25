@@ -37,6 +37,9 @@ Examples: rhythm.
     >>> def t(items, extra_counts):
     ...     return baca.Tuplet(items, extra_counts)
 
+    >>> def w(real_n, written_n):
+    ...     return baca.WrittenDuration(real_n, written_n)
+
 ..  container:: example
 
     Displaced, graced quarter notes:
@@ -284,16 +287,14 @@ Examples: rhythm.
 
 
     >>> def make_lilypond_file():
-    ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
-    ...     voice = baca.make_rhythm(
+    ...     voice, time_signatures = sixteenths(
+    ...         3 * [(1, 4)],
     ...         [
     ...             -1,
     ...             r([1, 1, 1, g([1], 1), obgc([1, 1, 1, 1], 1)], 4),
     ...             a([1, obgc([1, 1, 1], 1), 1, 1, g([1, 1], 1)], 4),
     ...             -3,
     ...         ],
-    ...         16,
-    ...         time_signatures,
     ...         voice_name="Example.Voice",
     ...     )
     ...     leaf = abjad.select.leaf(voice, 0)
@@ -893,6 +894,49 @@ Examples: rhythm.
                     }
                     \revert TupletNumber.text
                     r8.
+                }
+            }
+        >>
+
+..  container:: example
+
+    Written durations different than real durations:
+
+    >>> def make_lilypond_file():
+    ...     voice, time_signatures = sixteenths(
+    ...         3 * [(1, 4)],
+    ...         [w(4, 16), w(4, 16), w(4, 16)],
+    ...     )
+    ...     score = make_score(voice, time_signatures)
+    ...     result = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return result
+
+    >>> lilypond_file = make_lilypond_file()
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        \with
+        {
+            \override TupletBracket.bracket-visibility = ##t
+            \override TupletBracket.padding = 2
+            autoBeaming = ##f
+            proportionalNotationDuration = #(ly:make-moment 1 36)
+            tupletFullLength = ##t
+        }
+        <<
+            \new RhythmicStaff
+            {
+                \new Voice
+                {
+                    \time 1/4
+                    c'1 * 1/4
+                    c'1 * 1/4
+                    c'1 * 1/4
                 }
             }
         >>
