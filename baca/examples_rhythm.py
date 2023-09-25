@@ -3,6 +3,8 @@ Examples: rhythm.
 
 ..  container:: example
 
+    Helper functions for this file:
+
     >>> def make_score(voice, time_signatures):
     ...     staff = abjad.Staff([voice], lilypond_type="RhythmicStaff")
     ...     score = abjad.Score([staff], name="Score")
@@ -16,16 +18,33 @@ Examples: rhythm.
     ...     rmakers.force_fraction(score)
     ...     return score
 
+    >>> def sixteenths(pairs, items, voice_name=None):
+    ...     time_signatures = [abjad.TimeSignature(_) for _ in pairs]
+    ...     voice = baca.make_rhythm(items, 16, time_signatures, voice_name=voice_name)
+    ...     return voice, time_signatures
+
+    >>> def a(items, numerator):
+    ...     denominator = 16
+    ...     return baca.Feather(items, denominator, numerator, exponent=0.625)
+
+    >>> def g(*arguments):
+    ...     return baca.Grace(*arguments)
+
+    >>> def r(items, numerator):
+    ...     denominator = 16
+    ...     return baca.Feather(items, denominator, numerator, exponent=1.625)
+
+    >>> def t(items, extra_counts):
+    ...     return baca.Tuplet(items, extra_counts)
+
 ..  container:: example
 
     Displaced, graced quarter notes:
 
     >>> def make_lilypond_file():
-    ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
-    ...     voice = baca.make_rhythm(
-    ...         [-2, baca.Grace([1], 4), baca.Grace([1], 4), -2],
-    ...         16,
-    ...         time_signatures,
+    ...     voice, time_signatures = sixteenths(
+    ...         3 * [(1, 4)],
+    ...         [-2, g([1], 4), g([1], 4), -2],
     ...     )
     ...     score = make_score(voice, time_signatures)
     ...     result = baca.lilypond.file(score, includes=["baca.ily"])
@@ -79,16 +98,9 @@ Examples: rhythm.
     Displaced feathers:
 
     >>> def make_lilypond_file():
-    ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
-    ...     voice = baca.make_rhythm(
-    ...         [
-    ...             -1,
-    ...             baca.Feather([1, 1, 1, 1, 1], 16, 4, exponent=0.625),
-    ...             baca.Feather([1, 1, 1, 1, 1], 16, 4, exponent=1.625),
-    ...             -3
-    ...         ],
-    ...         16,
-    ...         time_signatures,
+    ...     voice, time_signatures = sixteenths(
+    ...         3 * [(1, 4)],
+    ...         [-1, a([1, 1, 1, 1, 1], 4), r([1, 1, 1, 1, 1], 4), -3],
     ...     )
     ...     score = make_score(voice, time_signatures)
     ...     result = abjad.LilyPondFile([score])
@@ -154,38 +166,14 @@ Examples: rhythm.
     Displaced, graced feathers:
 
     >>> def make_lilypond_file():
-    ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
-    ...     voice = baca.make_rhythm(
+    ...     voice, time_signatures = sixteenths(
+    ...         3 * [(1, 4)],
     ...         [
     ...             -1,
-    ...             baca.Feather(
-    ...                 [
-    ...                     baca.Grace([1, 1, 1], 1),
-    ...                     baca.Grace([1, 1], 1),
-    ...                     baca.Grace([1], 1),
-    ...                     1,
-    ...                     1,
-    ...                 ],
-    ...                 16,
-    ...                 4,
-    ...                 exponent=0.625,
-    ...             ),
-    ...             baca.Feather(
-    ...                 [
-    ...                     1,
-    ...                     1,
-    ...                     baca.Grace([1], 1),
-    ...                     baca.Grace([1, 1], 1),
-    ...                     baca.Grace([1, 1, 1], 1),
-    ...                 ],
-    ...                 16,
-    ...                 4,
-    ...                 exponent=1.625,
-    ...             ),
+    ...             a([g([1, 1, 1], 1), g([1, 1], 1), g([1], 1), 1, 1], 4),
+    ...             r([1, 1, g([1], 1), g([1, 1], 1), g([1, 1, 1], 1)], 4),
     ...             -3,
     ...         ],
-    ...         16,
-    ...         time_signatures,
     ...     )
     ...     score = make_score(voice, time_signatures)
     ...     result = baca.lilypond.file(score, includes=["baca.ily"])
@@ -286,43 +274,22 @@ Examples: rhythm.
 
     Displaced, graced feathers with on-beat grace notes:
 
+
+    >>> def obgc(grace_note_numerators, nongrace_note_numerator):
+    ...     return baca.OBGC(
+    ...         grace_note_numerators,
+    ...         nongrace_note_numerator,
+    ...         grace_leaf_duration=abjad.Duration(1, 64),
+    ...     )
+
+
     >>> def make_lilypond_file():
     ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
     ...     voice = baca.make_rhythm(
     ...         [
     ...             -1,
-    ...             baca.Feather(
-    ...                 [
-    ...                     1,
-    ...                     1,
-    ...                     1,
-    ...                     baca.Grace([1], 1),
-    ...                     baca.OBGC(
-    ...                         [1, 1, 1, 1],
-    ...                         1,
-    ...                         grace_leaf_duration=abjad.Duration(1, 64),
-    ...                     ),
-    ...                 ],
-    ...                 16,
-    ...                 4,
-    ...                 exponent=1.625,
-    ...             ),
-    ...             baca.Feather(
-    ...                 [
-    ...                     1,
-    ...                     baca.OBGC(
-    ...                         [1, 1, 1],
-    ...                         1,
-    ...                         grace_leaf_duration=abjad.Duration(1, 64),
-    ...                     ),
-    ...                     1,
-    ...                     1,
-    ...                     baca.Grace([1, 1], 1),
-    ...                 ],
-    ...                 16,
-    ...                 4,
-    ...                 exponent=0.625,
-    ...             ),
+    ...             r([1, 1, 1, g([1], 1), obgc([1, 1, 1, 1], 1)], 4),
+    ...             a([1, obgc([1, 1, 1], 1), 1, 1, g([1, 1], 1)], 4),
     ...             -3,
     ...         ],
     ...         16,
@@ -459,17 +426,17 @@ Examples: rhythm.
 
     Displaced on-beat grace containers:
 
+    >>> def obgc(grace_note_numerators, nongrace_note_numerator):
+    ...     return baca.OBGC(
+    ...         grace_note_numerators,
+    ...         nongrace_note_numerator,
+    ...         grace_leaf_duration=abjad.Duration(1, 36),
+    ...     )
+
     >>> def make_lilypond_file():
-    ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
-    ...     voice = baca.make_rhythm(
-    ...         [
-    ...             -2,
-    ...             baca.OBGC([1, 1, 1, 1], 4, grace_leaf_duration=abjad.Duration(1, 36)),
-    ...             baca.OBGC([1, 1, 1, 1], 4, grace_leaf_duration=abjad.Duration(1, 36)),
-    ...             -2,
-    ...         ],
-    ...         16,
-    ...         time_signatures,
+    ...     voice, time_signatures = sixteenths(
+    ...         3 * [(1, 4)],
+    ...         [-2, obgc([1, 1, 1, 1], 4), obgc([1, 1, 1, 1], 4), -2],
     ...         voice_name="Example.Voice",
     ...     )
     ...     score = make_score(voice, time_signatures)
@@ -571,33 +538,15 @@ Examples: rhythm.
 
     Displaced, graced tuplets:
 
-    >>> def make_lilypond_foo():
-    ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
-    ...     voice = baca.make_rhythm(
+    >>> def make_lilypond_file():
+    ...     voice, time_signatures = sixteenths(
+    ...         3 * [(1, 4)],
     ...         [
     ...             -2,
-    ...             baca.Tuplet(
-    ...                 [
-    ...                     2,
-    ...                     baca.Grace([1, 1], 2),
-    ...                     baca.Grace([1], 2),
-    ...                 ],
-    ...                 -2,
-    ...             ),
-    ...             baca.Tuplet(
-    ...                 [
-    ...                     1,
-    ...                     1,
-    ...                     1,
-    ...                     baca.Grace([1], 1),
-    ...                     baca.Grace([1], 1),
-    ...                 ],
-    ...                 -1,
-    ...             ),
+    ...             t([2, g([1, 1], 2), g([1], 2)], -2),
+    ...             t([1, 1, 1, g([1], 1), g([1], 1)], -1),
     ...             -2,
     ...         ],
-    ...         16,
-    ...         time_signatures,
     ...     )
     ...     for tuplet in abjad.select.tuplets(voice):
     ...         hleaves = baca.select.hleaves(tuplet)
@@ -609,7 +558,7 @@ Examples: rhythm.
     ...     result = baca.lilypond.file(score, includes=["baca.ily"])
     ...     return result
 
-    >>> lilypond_file = make_lilypond_foo()
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -680,34 +629,15 @@ Examples: rhythm.
 
     Displaced, graced tuplets with graced feathers:
 
-    >>> def make_lilypond_foo():
-    ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
-    ...     voice = baca.make_rhythm(
+    >>> def make_lilypond_file():
+    ...     voice, time_signatures = sixteenths(
+    ...         3 * [(1, 4)],
     ...         [
     ...             -2,
-    ...             baca.Tuplet(
-    ...                 [
-    ...                     baca.Grace([1, 1], 2),
-    ...                     baca.Feather(
-    ...                         [1, baca.Grace([1], 1), 1, 1], 16, 4, exponent=0.625
-    ...                     ),
-    ...                 ],
-    ...                 -2,
-    ...             ),
-    ...             baca.Tuplet(
-    ...                 [
-    ...                     baca.Feather(
-    ...                         [1, 1, 1, baca.Grace([1], 1)], 16, 3, exponent=1.625
-    ...                     ),
-    ...                     1,
-    ...                     baca.Grace([1, 1], 1),
-    ...                 ],
-    ...                 -1,
-    ...             ),
+    ...             t([g([1, 1], 2), a([1, g([1], 1), 1, 1], 4)], -2),
+    ...             t([r([1, 1, 1, g([1], 1)], 3), 1, g([1, 1], 1)], -1),
     ...             -2,
     ...         ],
-    ...         16,
-    ...         time_signatures,
     ...     )
     ...     for tuplet in abjad.select.tuplets(voice, level=1):
     ...         hleaves = []
@@ -724,7 +654,7 @@ Examples: rhythm.
     ...     result = baca.lilypond.file(score, includes=["baca.ily"])
     ...     return result
 
-    >>> lilypond_file = make_lilypond_foo()
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -817,51 +747,24 @@ Examples: rhythm.
 
     Feathers with before-grace music and on-beat grace music:
 
+    >>> def obgc(grace_note_numerators, nongrace_note_numerator):
+    ...     return baca.OBGC(
+    ...         grace_note_numerators,
+    ...         nongrace_note_numerator,
+    ...         grace_leaf_duration=abjad.Duration(1, 64),
+    ...         grace_polyphony_command=abjad.VoiceNumber(2),
+    ...         nongrace_polyphony_command=abjad.VoiceNumber(1),
+    ...     )
+
     >>> def make_lilypond_file():
-    ...     time_signatures = 3 * [abjad.TimeSignature((1, 4))]
-    ...     voice = baca.make_rhythm(
+    ...     voice, time_signatures = sixteenths(
+    ...         3 * [(1, 4)],
     ...         [
     ...             -1,
-    ...             baca.Feather(
-    ...                 [
-    ...                     1,
-    ...                     1,
-    ...                     1,
-    ...                     baca.Grace([1, 1], 1),
-    ...                     baca.OBGC(
-    ...                         [1, 1, 1, 1],
-    ...                         1,
-    ...                         grace_leaf_duration=abjad.Duration(1, 64),
-    ...                         grace_polyphony_command=abjad.VoiceNumber(2),
-    ...                         nongrace_polyphony_command=abjad.VoiceNumber(1),
-    ...                     ),
-    ...                 ],
-    ...                 16,
-    ...                 4,
-    ...                 exponent=1.625,
-    ...             ),
-    ...             baca.Feather(
-    ...                 [
-    ...                     1,
-    ...                     baca.OBGC(
-    ...                         [1, 1, 1],
-    ...                         1,
-    ...                         grace_leaf_duration=abjad.Duration(1, 64),
-    ...                         grace_polyphony_command=abjad.VoiceNumber(2),
-    ...                         nongrace_polyphony_command=abjad.VoiceNumber(1),
-    ...                     ),
-    ...                     1,
-    ...                     1,
-    ...                     baca.Grace([1, 1], 1),
-    ...                 ],
-    ...                 16,
-    ...                 4,
-    ...                 exponent=0.625,
-    ...             ),
+    ...             r([1, 1, 1, g([1, 1], 1), obgc([1, 1, 1, 1], 1)], 4),
+    ...             a([1, obgc([1, 1, 1], 1), 1, 1, g([1, 1], 1)], 4),
     ...             -3,
     ...         ],
-    ...         16,
-    ...         time_signatures,
     ...         voice_name="Example.Voice",
     ...     )
     ...     leaf = voice[2][2]
