@@ -67,6 +67,7 @@ from .pitchtools import *
 from .rhythm import (
     Feather,
     Grace,
+    InvisibleMusic,
     LMR,
     OBGC,
     Tuplet,

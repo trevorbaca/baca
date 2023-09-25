@@ -203,6 +203,18 @@ class Grace:
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class InvisibleMusic:
+    argument: typing.Any
+
+    def __call__(self, denominator: int):
+        assert isinstance(denominator, int), repr(denominator)
+        tag = _helpers.function_name(_frame())
+        result = self.argument(denominator)
+        rmakers.invisible_music(result, tag=tag)
+        return result
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class LMR:
     left_counts: typing.Sequence[int] = ()
     left_cyclic: bool = False
@@ -791,6 +803,66 @@ def make_rests(time_signatures) -> list[abjad.Rest | abjad.Tuplet]:
     return music
 
 
+def _evaluate_item(
+    item,
+    components,
+    denominator,
+    i,
+    index_to_obgc_anchor_voice,
+    index_to_original_item,
+    tag,
+    voice_name,
+):
+    result = None
+    if isinstance(item, int) and 0 < item:
+        leaf_duration = abjad.Duration(item, denominator)
+        notes = abjad.makers.make_leaves([0], [leaf_duration], tag=tag)
+        duration = abjad.get.duration(notes)
+        result = notes
+        components.extend(notes)
+    elif isinstance(item, int) and item < 0:
+        leaf_duration = abjad.Duration(-item, denominator)
+        rests = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
+        duration = abjad.get.duration(rests)
+        result = rests
+        components.extend(rests)
+    elif isinstance(item, abjad.Tuplet):
+        duration = abjad.get.duration(item)
+        dummy_notes = abjad.makers.make_leaves([99], [duration], tag=tag)
+        components.extend(dummy_notes)
+        index_to_original_item[i] = item
+    elif isinstance(item, Feather):
+        tuplet = item(denominator, voice_name)
+        duration = abjad.get.duration(tuplet)
+        dummy_notes = abjad.makers.make_leaves([98], [duration], tag=tag)
+        components.extend(dummy_notes)
+        index_to_original_item[i] = tuplet
+    elif isinstance(item, Grace):
+        components_ = item(denominator)
+        duration = abjad.get.duration(components_)
+        components.extend(components_)
+    elif isinstance(item, OBGC):
+        anchor_voice = item(denominator, voice_name)
+        anchor_leaves = abjad.mutate.eject_contents(anchor_voice[0][1])
+        duration = abjad.get.duration(anchor_leaves)
+        components.extend(anchor_leaves)
+        index_to_obgc_anchor_voice[i] = anchor_voice
+    elif isinstance(item, Tuplet):
+        tuplet = item(denominator, voice_name)
+        duration = abjad.get.duration(tuplet)
+        dummy_notes = abjad.makers.make_leaves([97], [duration], tag=tag)
+        components.extend(dummy_notes)
+        index_to_original_item[i] = tuplet
+    elif isinstance(item, WrittenDuration):
+        leaf = item(denominator)
+        duration = abjad.get.duration(leaf)
+        result = leaf
+        components.append(leaf)
+    else:
+        raise Exception(item)
+    return duration, result
+
+
 def make_rhythm(
     items: list,
     denominator: int,
@@ -806,52 +878,26 @@ def make_rhythm(
     tag = _helpers.function_name(_frame())
     index_to_original_item: dict[int, abjad.Tuplet | None] = {}
     index_to_obgc_anchor_voice: dict[int, abjad.Voice | None] = {}
-    components, item_durations = [], []
+    components: list[abjad.Component] = []
+    item_durations = []
     for i, item in enumerate(items):
         index_to_original_item[i], duration = None, None
-        if isinstance(item, int) and 0 < item:
-            leaf_duration = abjad.Duration(item, denominator)
-            notes = abjad.makers.make_leaves([0], [leaf_duration], tag=tag)
-            duration = abjad.get.duration(notes)
-            components.extend(notes)
-        elif isinstance(item, int) and item < 0:
-            leaf_duration = abjad.Duration(-item, denominator)
-            rests = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
-            duration = abjad.get.duration(rests)
-            components.extend(rests)
-        elif isinstance(item, abjad.Tuplet):
-            duration = abjad.get.duration(item)
-            dummy_notes = abjad.makers.make_leaves([99], [duration], tag=tag)
-            components.extend(dummy_notes)
-            index_to_original_item[i] = item
-        elif isinstance(item, Feather):
-            tuplet = item(denominator, voice_name)
-            duration = abjad.get.duration(tuplet)
-            dummy_notes = abjad.makers.make_leaves([98], [duration], tag=tag)
-            components.extend(dummy_notes)
-            index_to_original_item[i] = tuplet
-        elif isinstance(item, Grace):
-            components_ = item(denominator)
-            duration = abjad.get.duration(components_)
-            components.extend(components_)
-        elif isinstance(item, OBGC):
-            anchor_voice = item(denominator, voice_name)
-            anchor_leaves = abjad.mutate.eject_contents(anchor_voice[0][1])
-            duration = abjad.get.duration(anchor_leaves)
-            components.extend(anchor_leaves)
-            index_to_obgc_anchor_voice[i] = anchor_voice
-        elif isinstance(item, Tuplet):
-            tuplet = item(denominator, voice_name)
-            duration = abjad.get.duration(tuplet)
-            dummy_notes = abjad.makers.make_leaves([97], [duration], tag=tag)
-            components.extend(dummy_notes)
-            index_to_original_item[i] = tuplet
-        elif isinstance(item, WrittenDuration):
-            leaf = item(denominator)
-            duration = abjad.get.duration(leaf)
-            components.append(leaf)
+        if isinstance(item, InvisibleMusic):
+            to_evaluate = item.argument
         else:
-            raise Exception(item)
+            to_evaluate = item
+        duration, result = _evaluate_item(
+            to_evaluate,
+            components,
+            denominator,
+            i,
+            index_to_obgc_anchor_voice,
+            index_to_original_item,
+            tag,
+            voice_name,
+        )
+        if isinstance(item, InvisibleMusic):
+            rmakers.invisible_music(result, tag=tag)
         assert isinstance(duration, abjad.Duration), repr(duration)
         item_durations.append(duration)
     if time_signatures:

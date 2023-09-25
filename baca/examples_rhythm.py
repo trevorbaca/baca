@@ -30,6 +30,9 @@ Examples: rhythm.
     >>> def g(*arguments):
     ...     return baca.Grace(*arguments)
 
+    >>> def i(argument):
+    ...     return baca.InvisibleMusic(argument)
+
     >>> def r(items, numerator):
     ...     denominator = 16
     ...     return baca.Feather(items, denominator, numerator, exponent=1.625)
@@ -935,6 +938,96 @@ Examples: rhythm.
                 {
                     \time 1/4
                     c'1 * 1/4
+                    c'1 * 1/4
+                    c'1 * 1/4
+                }
+            }
+        >>
+
+..  container:: example
+
+    Invisible music:
+
+    >>> def make_lilypond_file():
+    ...     voice, time_signatures = sixteenths(
+    ...         3 * [(1, 4)],
+    ...         [4, i(4), 4],
+    ...     )
+    ...     score = make_score(voice, time_signatures)
+    ...     result = baca.lilypond.file(score, includes=["abjad.ily"])
+    ...     return result
+
+    >>> lilypond_file = make_lilypond_file()
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        \with
+        {
+            \override TupletBracket.bracket-visibility = ##t
+            \override TupletBracket.padding = 2
+            autoBeaming = ##f
+            proportionalNotationDuration = #(ly:make-moment 1 36)
+            tupletFullLength = ##t
+        }
+        <<
+            \new RhythmicStaff
+            {
+                \new Voice
+                {
+                    \time 1/4
+                    c'4
+                    %@% \abjad-invisible-music
+                    \abjad-invisible-music-coloring
+                    c'4
+                    c'4
+                }
+            }
+        >>
+
+..  container:: example
+
+    Invisible music with written durations different than real durations:
+
+    >>> def make_lilypond_file():
+    ...     voice, time_signatures = sixteenths(
+    ...         3 * [(1, 4)],
+    ...         [w(4, 16), i(w(4, 16)), w(4, 16)],
+    ...     )
+    ...     score = make_score(voice, time_signatures)
+    ...     result = baca.lilypond.file(score, includes=["abjad.ily"])
+    ...     return result
+
+    >>> lilypond_file = make_lilypond_file()
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        \with
+        {
+            \override TupletBracket.bracket-visibility = ##t
+            \override TupletBracket.padding = 2
+            autoBeaming = ##f
+            proportionalNotationDuration = #(ly:make-moment 1 36)
+            tupletFullLength = ##t
+        }
+        <<
+            \new RhythmicStaff
+            {
+                \new Voice
+                {
+                    \time 1/4
+                    c'1 * 1/4
+                    %@% \abjad-invisible-music
+                    \abjad-invisible-music-coloring
                     c'1 * 1/4
                     c'1 * 1/4
                 }
