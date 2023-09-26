@@ -395,6 +395,11 @@ class RepeatTie:
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class Tie:
+    argument: typing.Any
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Tuplet:
     items: list
     extra_counts: int
@@ -880,7 +885,7 @@ def make_rhythm(
     item_durations = []
     for i, item in enumerate(items):
         index_to_original_item[i], duration = None, None
-        if isinstance(item, InvisibleMusic | RepeatTie):
+        if isinstance(item, InvisibleMusic | RepeatTie | Tie):
             to_evaluate = item.argument
         else:
             to_evaluate = item
@@ -898,6 +903,8 @@ def make_rhythm(
             rmakers.invisible_music(result, tag=tag)
         elif isinstance(item, RepeatTie):
             rmakers.repeat_tie(result, tag=tag)
+        elif isinstance(item, Tie):
+            rmakers.tie(result, tag=tag)
         assert isinstance(duration, abjad.Duration), repr(duration)
         item_durations.append(duration)
     if time_signatures:

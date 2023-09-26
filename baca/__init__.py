@@ -71,6 +71,7 @@ from .rhythm import (
     LMR,
     OBGC,
     RepeatTie,
+    Tie,
     Tuplet,
     WrittenDuration,
     attach_bgcs,

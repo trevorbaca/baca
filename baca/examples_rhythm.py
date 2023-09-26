@@ -23,27 +23,30 @@ Examples: rhythm.
     ...     voice = baca.make_rhythm(items, 16, time_signatures, voice_name=voice_name)
     ...     return voice, time_signatures
 
-    >>> def a(items, numerator):
+    >>> def A(items, numerator):
     ...     denominator = 16
     ...     return baca.Feather(items, denominator, numerator, exponent=0.625)
 
-    >>> def g(*arguments):
+    >>> def G(*arguments):
     ...     return baca.Grace(*arguments)
 
-    >>> def im(argument):
-    ...     return baca.InvisibleMusic(argument)
-
-    >>> def r(items, numerator):
+    >>> def R(items, numerator):
     ...     denominator = 16
     ...     return baca.Feather(items, denominator, numerator, exponent=1.625)
 
-    >>> def rt(argument):
-    ...     return baca.RepeatTie(argument)
-
-    >>> def t(items, extra_counts):
+    >>> def T(items, extra_counts):
     ...     return baca.Tuplet(items, extra_counts)
 
-    >>> def wd(real_n, written_n):
+    >>> def h(argument):
+    ...     return baca.InvisibleMusic(argument)
+
+    >>> def r(argument):
+    ...     return baca.RepeatTie(argument)
+
+    >>> def t(argument):
+    ...     return baca.Tie(argument)
+
+    >>> def w(real_n, written_n):
     ...     return baca.WrittenDuration(real_n, written_n)
 
 ..  container:: example
@@ -53,7 +56,7 @@ Examples: rhythm.
     >>> def make_lilypond_file():
     ...     voice, time_signatures = sixteenths(
     ...         3 * [(1, 4)],
-    ...         [-2, g([1], 4), g([1], 4), -2],
+    ...         [-2, G([1], 4), G([1], 4), -2],
     ...     )
     ...     score = make_score(voice, time_signatures)
     ...     result = baca.lilypond.file(score, includes=["baca.ily"])
@@ -109,7 +112,7 @@ Examples: rhythm.
     >>> def make_lilypond_file():
     ...     voice, time_signatures = sixteenths(
     ...         3 * [(1, 4)],
-    ...         [-1, a([1, 1, 1, 1, 1], 4), r([1, 1, 1, 1, 1], 4), -3],
+    ...         [-1, A([1, 1, 1, 1, 1], 4), R([1, 1, 1, 1, 1], 4), -3],
     ...     )
     ...     score = make_score(voice, time_signatures)
     ...     result = abjad.LilyPondFile([score])
@@ -179,8 +182,8 @@ Examples: rhythm.
     ...         3 * [(1, 4)],
     ...         [
     ...             -1,
-    ...             a([g([1, 1, 1], 1), g([1, 1], 1), g([1], 1), 1, 1], 4),
-    ...             r([1, 1, g([1], 1), g([1, 1], 1), g([1, 1, 1], 1)], 4),
+    ...             A([G([1, 1, 1], 1), G([1, 1], 1), G([1], 1), 1, 1], 4),
+    ...             R([1, 1, G([1], 1), G([1, 1], 1), G([1, 1, 1], 1)], 4),
     ...             -3,
     ...         ],
     ...     )
@@ -297,8 +300,8 @@ Examples: rhythm.
     ...         3 * [(1, 4)],
     ...         [
     ...             -1,
-    ...             r([1, 1, 1, g([1], 1), obgc([1, 1, 1, 1], 1)], 4),
-    ...             a([1, obgc([1, 1, 1], 1), 1, 1, g([1, 1], 1)], 4),
+    ...             R([1, 1, 1, G([1], 1), obgc([1, 1, 1, 1], 1)], 4),
+    ...             A([1, obgc([1, 1, 1], 1), 1, 1, G([1, 1], 1)], 4),
     ...             -3,
     ...         ],
     ...         voice_name="Example.Voice",
@@ -550,8 +553,8 @@ Examples: rhythm.
     ...         3 * [(1, 4)],
     ...         [
     ...             -2,
-    ...             t([2, g([1, 1], 2), g([1], 2)], -2),
-    ...             t([1, 1, 1, g([1], 1), g([1], 1)], -1),
+    ...             T([2, G([1, 1], 2), G([1], 2)], -2),
+    ...             T([1, 1, 1, G([1], 1), G([1], 1)], -1),
     ...             -2,
     ...         ],
     ...     )
@@ -641,8 +644,8 @@ Examples: rhythm.
     ...         3 * [(1, 4)],
     ...         [
     ...             -2,
-    ...             t([g([1, 1], 2), a([1, g([1], 1), 1, 1], 4)], -2),
-    ...             t([r([1, 1, 1, g([1], 1)], 3), 1, g([1, 1], 1)], -1),
+    ...             T([G([1, 1], 2), A([1, G([1], 1), 1, 1], 4)], -2),
+    ...             T([R([1, 1, 1, G([1], 1)], 3), 1, G([1, 1], 1)], -1),
     ...             -2,
     ...         ],
     ...     )
@@ -768,8 +771,8 @@ Examples: rhythm.
     ...         3 * [(1, 4)],
     ...         [
     ...             -1,
-    ...             r([1, 1, 1, g([1, 1], 1), obgc([1, 1, 1, 1], 1)], 4),
-    ...             a([1, obgc([1, 1, 1], 1), 1, 1, g([1, 1], 1)], 4),
+    ...             R([1, 1, 1, G([1, 1], 1), obgc([1, 1, 1, 1], 1)], 4),
+    ...             A([1, obgc([1, 1, 1], 1), 1, 1, G([1, 1], 1)], 4),
     ...             -3,
     ...         ],
     ...         voice_name="Example.Voice",
@@ -911,7 +914,7 @@ Examples: rhythm.
     >>> def make_lilypond_file():
     ...     voice, time_signatures = sixteenths(
     ...         3 * [(1, 4)],
-    ...         [wd(4, 16), wd(4, 16), wd(4, 16)],
+    ...         [w(4, 16), w(4, 16), w(4, 16)],
     ...     )
     ...     score = make_score(voice, time_signatures)
     ...     result = baca.lilypond.file(score, includes=["baca.ily"])
@@ -954,7 +957,7 @@ Examples: rhythm.
     >>> def make_lilypond_file():
     ...     voice, time_signatures = sixteenths(
     ...         3 * [(1, 4)],
-    ...         [4, im(4), 4],
+    ...         [4, h(4), 4],
     ...     )
     ...     score = make_score(voice, time_signatures)
     ...     result = baca.lilypond.file(score, includes=["abjad.ily"])
@@ -999,7 +1002,7 @@ Examples: rhythm.
     >>> def make_lilypond_file():
     ...     voice, time_signatures = sixteenths(
     ...         3 * [(1, 4)],
-    ...         [wd(4, 16), im(wd(4, 16)), wd(4, 16)],
+    ...         [w(4, 16), h(w(4, 16)), w(4, 16)],
     ...     )
     ...     score = make_score(voice, time_signatures)
     ...     result = baca.lilypond.file(score, includes=["abjad.ily"])
@@ -1040,10 +1043,53 @@ Examples: rhythm.
 
 ..  container:: example
 
+    Ties:
+
+    >>> def make_lilypond_file():
+    ...     voice, time_signatures = sixteenths(3 * [(1, 4)], [t(4), t(4), 4])
+    ...     score = make_score(voice, time_signatures)
+    ...     result = baca.lilypond.file(score, includes=["abjad.ily"])
+    ...     return result
+
+    >>> lilypond_file = make_lilypond_file()
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        \with
+        {
+            \override TupletBracket.bracket-visibility = ##t
+            \override TupletBracket.padding = 2
+            autoBeaming = ##f
+            proportionalNotationDuration = #(ly:make-moment 1 36)
+            tupletFullLength = ##t
+        }
+        <<
+            \new RhythmicStaff
+            {
+                \new Voice
+                {
+                    \time 1/4
+                    c'4
+                    ~
+                    c'4
+                    ~
+                    c'4
+                }
+            }
+        >>
+
+
+..  container:: example
+
     Repeat ties:
 
     >>> def make_lilypond_file():
-    ...     voice, time_signatures = sixteenths(3 * [(1, 4)], [4, rt(4), rt(4)])
+    ...     voice, time_signatures = sixteenths(3 * [(1, 4)], [4, r(4), r(4)])
     ...     score = make_score(voice, time_signatures)
     ...     result = baca.lilypond.file(score, includes=["abjad.ily"])
     ...     return result
@@ -1087,7 +1133,7 @@ Examples: rhythm.
     >>> def make_lilypond_file():
     ...     voice, time_signatures = sixteenths(
     ...         3 * [(1, 4)],
-    ...         [wd(2, 4), im(wd(2, 4)), rt(wd(2, 4)), im(wd(2, 4)), rt(4)],
+    ...         [w(2, 4), h(w(2, 4)), r(w(2, 4)), h(w(2, 4)), r(4)],
     ...     )
     ...     baca.hairpin(voice, "p < f >", pieces=baca.select.clparts(voice[:-1], [1])),
     ...     baca.dynamic(voice[-1], "p")
