@@ -31,6 +31,69 @@ _collection_typing = typing.Union[
 ]
 
 
+def _evaluate_item(
+    item,
+    components,
+    denominator,
+    i,
+    index_to_obgc_anchor_voice,
+    index_to_original_item,
+    tag,
+    voice_name,
+):
+    result = None
+    if isinstance(item, int) and 0 < item:
+        leaf_duration = abjad.Duration(item, denominator)
+        notes = abjad.makers.make_leaves([0], [leaf_duration], tag=tag)
+        duration = abjad.get.duration(notes)
+        result = notes
+        components.extend(notes)
+    elif isinstance(item, int) and item < 0:
+        leaf_duration = abjad.Duration(-item, denominator)
+        rests = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
+        duration = abjad.get.duration(rests)
+        result = rests
+        components.extend(rests)
+    elif isinstance(item, abjad.Tuplet):
+        duration = abjad.get.duration(item)
+        dummy_notes = abjad.makers.make_leaves([99], [duration], tag=tag)
+        components.extend(dummy_notes)
+        index_to_original_item[i] = item
+    elif isinstance(item, Feather):
+        tuplet = item(denominator, voice_name)
+        duration = abjad.get.duration(tuplet)
+        dummy_notes = abjad.makers.make_leaves([98], [duration], tag=tag)
+        components.extend(dummy_notes)
+        index_to_original_item[i] = tuplet
+    elif isinstance(item, Grace):
+        components_ = item(denominator)
+        duration = abjad.get.duration(components_)
+        components.extend(components_)
+    elif isinstance(item, OBGC):
+        anchor_voice = item(denominator, voice_name)
+        anchor_leaves = abjad.mutate.eject_contents(anchor_voice[0][1])
+        duration = abjad.get.duration(anchor_leaves)
+        components.extend(anchor_leaves)
+        index_to_obgc_anchor_voice[i] = anchor_voice
+    elif isinstance(item, Tuplet):
+        tuplet = item(denominator, voice_name)
+        duration = abjad.get.duration(tuplet)
+        dummy_notes = abjad.makers.make_leaves([97], [duration], tag=tag)
+        components.extend(dummy_notes)
+        index_to_original_item[i] = tuplet
+    elif isinstance(item, WrittenDuration):
+        leaf = item(denominator, tag=tag)
+        duration = abjad.get.duration(leaf)
+        result = leaf
+        components.append(leaf)
+    elif item in ("+", "-"):
+        duration = "evaluate-last"
+        components.append(item)
+    else:
+        raise Exception(item)
+    return duration, result
+
+
 def _make_accelerando_multipliers(
     durations: list[abjad.Duration], exponent: float
 ) -> list[tuple[int, int]]:
@@ -807,66 +870,6 @@ def make_rests(time_signatures) -> list[abjad.Rest | abjad.Tuplet]:
     return music
 
 
-def _evaluate_item(
-    item,
-    components,
-    denominator,
-    i,
-    index_to_obgc_anchor_voice,
-    index_to_original_item,
-    tag,
-    voice_name,
-):
-    result = None
-    if isinstance(item, int) and 0 < item:
-        leaf_duration = abjad.Duration(item, denominator)
-        notes = abjad.makers.make_leaves([0], [leaf_duration], tag=tag)
-        duration = abjad.get.duration(notes)
-        result = notes
-        components.extend(notes)
-    elif isinstance(item, int) and item < 0:
-        leaf_duration = abjad.Duration(-item, denominator)
-        rests = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
-        duration = abjad.get.duration(rests)
-        result = rests
-        components.extend(rests)
-    elif isinstance(item, abjad.Tuplet):
-        duration = abjad.get.duration(item)
-        dummy_notes = abjad.makers.make_leaves([99], [duration], tag=tag)
-        components.extend(dummy_notes)
-        index_to_original_item[i] = item
-    elif isinstance(item, Feather):
-        tuplet = item(denominator, voice_name)
-        duration = abjad.get.duration(tuplet)
-        dummy_notes = abjad.makers.make_leaves([98], [duration], tag=tag)
-        components.extend(dummy_notes)
-        index_to_original_item[i] = tuplet
-    elif isinstance(item, Grace):
-        components_ = item(denominator)
-        duration = abjad.get.duration(components_)
-        components.extend(components_)
-    elif isinstance(item, OBGC):
-        anchor_voice = item(denominator, voice_name)
-        anchor_leaves = abjad.mutate.eject_contents(anchor_voice[0][1])
-        duration = abjad.get.duration(anchor_leaves)
-        components.extend(anchor_leaves)
-        index_to_obgc_anchor_voice[i] = anchor_voice
-    elif isinstance(item, Tuplet):
-        tuplet = item(denominator, voice_name)
-        duration = abjad.get.duration(tuplet)
-        dummy_notes = abjad.makers.make_leaves([97], [duration], tag=tag)
-        components.extend(dummy_notes)
-        index_to_original_item[i] = tuplet
-    elif isinstance(item, WrittenDuration):
-        leaf = item(denominator, tag=tag)
-        duration = abjad.get.duration(leaf)
-        result = leaf
-        components.append(leaf)
-    else:
-        raise Exception(item)
-    return duration, result
-
-
 def make_rhythm(
     items: list,
     denominator: int,
@@ -889,7 +892,7 @@ def make_rhythm(
     tag = tag.append(_helpers.function_name(_frame()))
     index_to_original_item: dict[int, abjad.Tuplet | None] = {}
     index_to_obgc_anchor_voice: dict[int, abjad.Voice | None] = {}
-    components: list[abjad.Component] = []
+    tokens: list[abjad.Component | str] = []
     item_durations = []
     for i, item in enumerate(items):
         index_to_original_item[i], duration = None, None
@@ -899,7 +902,7 @@ def make_rhythm(
             to_evaluate = item
         duration, result = _evaluate_item(
             to_evaluate,
-            components,
+            tokens,
             denominator,
             i,
             index_to_obgc_anchor_voice,
@@ -913,11 +916,38 @@ def make_rhythm(
             rmakers.repeat_tie(result, tag=tag)
         elif isinstance(item, Tie):
             rmakers.tie(result, tag=tag)
-        assert isinstance(duration, abjad.Duration), repr(duration)
+        assert isinstance(duration, abjad.Duration | str), repr(duration)
         item_durations.append(duration)
+    if "+" in tokens or "-" in tokens:
+        assert "evaluate-last" in item_durations
+        assert time_signatures is not None
+        total_duration = sum(_.duration for _ in time_signatures)
+        existing_duration = sum(
+            [abjad.get.duration(_) for _ in tokens if not isinstance(_, str)]
+        )
+        needed_duration = total_duration - existing_duration
+        if "+" in tokens:
+            index = tokens.index("+")
+            pitch = 0
+        else:
+            index = tokens.index("-")
+            pitch = None
+        leaves = abjad.makers.make_leaves([pitch], [needed_duration], tag=tag)
+        assert abjad.get.duration(leaves) == needed_duration
+        tokens[index : index + 1] = leaves
+        index = item_durations.index("evaluate-last")
+        item_durations[index] = needed_duration
+    components: list[abjad.Component] = []
+    for token in tokens:
+        assert isinstance(token, abjad.Component)
+        components.append(token)
+    real_item_durations: list[abjad.Duration] = []
+    for item_duration in item_durations:
+        assert isinstance(item_duration, abjad.Duration)
+        real_item_durations.append(item_duration)
     if do_not_rewrite_meter is False:
         assert time_signatures is not None
-        voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
+        voice = rmakers.wrap_in_time_signature_staff(tokens, time_signatures)
         rmakers.rewrite_meter(
             voice,
             boundary_depth=boundary_depth,
@@ -926,11 +956,11 @@ def make_rhythm(
         )
         components = abjad.mutate.eject_contents(voice)
     voice = abjad.Voice(components, name=voice_name)
-    assert abjad.get.duration(voice) == sum(item_durations)
+    assert abjad.get.duration(voice) == sum(real_item_durations)
     components = voice[:]
     component_durations = [abjad.get.duration(_) for _ in components]
     duration_lists = abjad.sequence.partition_by_weights(
-        component_durations, item_durations, allow_part_weights=abjad.EXACT
+        component_durations, real_item_durations, allow_part_weights=abjad.EXACT
     )
     counts = [len(_) for _ in duration_lists]
     assert len(components) == sum(counts)
