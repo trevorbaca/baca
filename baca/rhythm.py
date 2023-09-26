@@ -871,6 +871,7 @@ def make_rhythm(
     denominator: int,
     time_signatures: list[abjad.TimeSignature] | None = None,
     *,
+    tag: abjad.Tag | None = None,
     voice_name: str | None = None,
 ) -> abjad.Voice:
     assert isinstance(items, list), repr(items)
@@ -878,7 +879,8 @@ def make_rhythm(
     if time_signatures is not None:
         assert isinstance(time_signatures, list), repr(time_signatures)
         assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
-    tag = _helpers.function_name(_frame())
+    tag = tag or abjad.Tag()
+    tag = tag.append(_helpers.function_name(_frame()))
     index_to_original_item: dict[int, abjad.Tuplet | None] = {}
     index_to_obgc_anchor_voice: dict[int, abjad.Voice | None] = {}
     components: list[abjad.Component] = []
