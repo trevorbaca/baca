@@ -872,7 +872,9 @@ def make_rhythm(
     denominator: int,
     time_signatures: list[abjad.TimeSignature] | None = None,
     *,
+    boundary_depth: int | None = None,
     do_not_rewrite_meter: bool = False,
+    reference_meters: typing.Sequence[abjad.Meter] = (),
     tag: abjad.Tag | None = None,
     voice_name: str | None = None,
 ) -> abjad.Voice:
@@ -916,7 +918,12 @@ def make_rhythm(
     if do_not_rewrite_meter is False:
         assert time_signatures is not None
         voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
-        rmakers.rewrite_meter(voice, tag=tag)
+        rmakers.rewrite_meter(
+            voice,
+            boundary_depth=boundary_depth,
+            reference_meters=reference_meters,
+            tag=tag,
+        )
         components = abjad.mutate.eject_contents(voice)
     voice = abjad.Voice(components, name=voice_name)
     assert abjad.get.duration(voice) == sum(item_durations)
