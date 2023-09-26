@@ -5,15 +5,17 @@ Examples: rhythm.
 
     Helper functions for this file:
 
-    >>> def make_score(voice, time_signatures):
+    >>> def make_score(voice, time_signatures, pnd=(1, 36)):
     ...     staff = abjad.Staff([voice], lilypond_type="RhythmicStaff")
     ...     score = abjad.Score([staff], name="Score")
     ...     leaf = abjad.select.leaf(staff, 0)
     ...     abjad.attach(time_signatures[0], leaf)
+    ...     abjad.override(score).TimeSignature.style = "#'numbered"
     ...     abjad.override(score).TupletBracket.bracket_visibility = True
     ...     abjad.override(score).TupletBracket.padding = 2
     ...     abjad.setting(score).autoBeaming = False
-    ...     abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 36)"
+    ...     string = f"#(ly:make-moment {pnd[0]} {pnd[1]})"
+    ...     abjad.setting(score).proportionalNotationDuration = string
     ...     abjad.setting(score).tupletFullLength = True
     ...     rmakers.force_fraction(score)
     ...     return score
@@ -73,6 +75,7 @@ Examples: rhythm.
         \context Score = "Score"
         \with
         {
+            \override TimeSignature.style = #'numbered
             \override TupletBracket.bracket-visibility = ##t
             \override TupletBracket.padding = 2
             autoBeaming = ##f
@@ -129,6 +132,7 @@ Examples: rhythm.
         \context Score = "Score"
         \with
         {
+            \override TimeSignature.style = #'numbered
             \override TupletBracket.bracket-visibility = ##t
             \override TupletBracket.padding = 2
             autoBeaming = ##f
@@ -202,6 +206,7 @@ Examples: rhythm.
         \context Score = "Score"
         \with
         {
+            \override TimeSignature.style = #'numbered
             \override TupletBracket.bracket-visibility = ##t
             \override TupletBracket.padding = 2
             autoBeaming = ##f
@@ -324,6 +329,7 @@ Examples: rhythm.
         \context Score = "Score"
         \with
         {
+            \override TimeSignature.style = #'numbered
             \override TupletBracket.bracket-visibility = ##t
             \override TupletBracket.padding = 2
             autoBeaming = ##f
@@ -464,6 +470,7 @@ Examples: rhythm.
         \context Score = "Score"
         \with
         {
+            \override TimeSignature.style = #'numbered
             \override TupletBracket.bracket-visibility = ##t
             \override TupletBracket.padding = 2
             autoBeaming = ##f
@@ -579,6 +586,7 @@ Examples: rhythm.
         \context Score = "Score"
         \with
         {
+            \override TimeSignature.style = #'numbered
             \override TupletBracket.bracket-visibility = ##t
             \override TupletBracket.padding = 2
             autoBeaming = ##f
@@ -675,6 +683,7 @@ Examples: rhythm.
         \context Score = "Score"
         \with
         {
+            \override TimeSignature.style = #'numbered
             \override TupletBracket.bracket-visibility = ##t
             \override TupletBracket.padding = 2
             autoBeaming = ##f
@@ -795,6 +804,7 @@ Examples: rhythm.
         \context Score = "Score"
         \with
         {
+            \override TimeSignature.style = #'numbered
             \override TupletBracket.bracket-visibility = ##t
             \override TupletBracket.padding = 2
             autoBeaming = ##f
@@ -931,6 +941,7 @@ Examples: rhythm.
         \context Score = "Score"
         \with
         {
+            \override TimeSignature.style = #'numbered
             \override TupletBracket.bracket-visibility = ##t
             \override TupletBracket.padding = 2
             autoBeaming = ##f
@@ -974,6 +985,7 @@ Examples: rhythm.
         \context Score = "Score"
         \with
         {
+            \override TimeSignature.style = #'numbered
             \override TupletBracket.bracket-visibility = ##t
             \override TupletBracket.padding = 2
             autoBeaming = ##f
@@ -1019,6 +1031,7 @@ Examples: rhythm.
         \context Score = "Score"
         \with
         {
+            \override TimeSignature.style = #'numbered
             \override TupletBracket.bracket-visibility = ##t
             \override TupletBracket.padding = 2
             autoBeaming = ##f
@@ -1062,6 +1075,7 @@ Examples: rhythm.
         \context Score = "Score"
         \with
         {
+            \override TimeSignature.style = #'numbered
             \override TupletBracket.bracket-visibility = ##t
             \override TupletBracket.padding = 2
             autoBeaming = ##f
@@ -1105,6 +1119,7 @@ Examples: rhythm.
         \context Score = "Score"
         \with
         {
+            \override TimeSignature.style = #'numbered
             \override TupletBracket.bracket-visibility = ##t
             \override TupletBracket.padding = 2
             autoBeaming = ##f
@@ -1153,6 +1168,7 @@ Examples: rhythm.
         \context Score = "Score"
         \with
         {
+            \override TimeSignature.style = #'numbered
             \override TupletBracket.bracket-visibility = ##t
             \override TupletBracket.padding = 2
             autoBeaming = ##f
@@ -1187,6 +1203,55 @@ Examples: rhythm.
                     \p
                     \repeatTie
                     \revert DynamicLineSpanner.staff-padding
+                }
+            }
+        >>
+
+
+..  container:: example
+
+    Rewrites meter:
+
+    >>> def make_lilypond_file():
+    ...     voice, time_signatures = sixteenths(
+    ...         2 * [(4, 4)],
+    ...         [4, 8, 8, 8, 4]
+    ...     )
+    ...     score = make_score(voice, time_signatures, pnd=(1, 16))
+    ...     result = baca.lilypond.file(score)
+    ...     return result
+
+    >>> lilypond_file = make_lilypond_file()
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        \with
+        {
+            \override TimeSignature.style = #'numbered
+            \override TupletBracket.bracket-visibility = ##t
+            \override TupletBracket.padding = 2
+            autoBeaming = ##f
+            proportionalNotationDuration = #(ly:make-moment 1 16)
+            tupletFullLength = ##t
+        }
+        <<
+            \new RhythmicStaff
+            {
+                \new Voice
+                {
+                    \time 4/4
+                    c'4
+                    c'2
+                    c'4
+                    ~
+                    c'4
+                    c'2
+                    c'4
                 }
             }
         >>
