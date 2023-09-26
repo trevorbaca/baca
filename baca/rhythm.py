@@ -1072,15 +1072,6 @@ def nest(containers: list[abjad.Tuplet], treatment: str) -> abjad.Tuplet:
     return nested_tuplet
 
 
-def parse(string: str) -> list[abjad.Component]:
-    tag = _helpers.function_name(_frame())
-    assert isinstance(string, str), repr(string)
-    string = f"{{ {string} }}"
-    container = abjad.parse(string, tag=tag)
-    components = abjad.mutate.eject_contents(container)
-    return components
-
-
 def prolate(
     tuplet: abjad.Tuplet,
     treatment: int | str | abjad.Duration,

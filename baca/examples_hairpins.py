@@ -877,8 +877,7 @@ Examples: hairpins.
     >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
     >>> baca.section.set_up_score(score, time_signatures(), docs=True)
     >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.parse("{ c2 r4. c2 r4. }")
-    >>> score["Music"].extend(music)
+    >>> score["Music"].extend("{ c2 r4. c2 r4. }")
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "C4 D4")
     >>> _ = baca.hairpin(

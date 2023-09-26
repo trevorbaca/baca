@@ -92,7 +92,6 @@ from .rhythm import (
     make_tied_repeated_durations,
     make_time_signatures,
     nest,
-    parse,
     prolate,
     style_accelerando,
     style_ritardando,
