@@ -452,9 +452,10 @@ class WrittenDuration:
         assert isinstance(self.real_n, int), repr(self.real_n)
         assert isinstance(self.written_n, int), repr(self.written_n)
 
-    def __call__(self, denominator: int) -> abjad.Leaf:
+    def __call__(self, denominator: int, tag: abjad.Tag) -> abjad.Leaf:
         assert isinstance(denominator, int), repr(denominator)
-        tag = _helpers.function_name(_frame())
+        tag = tag or abjad.Tag()
+        tag = tag.append(_helpers.function_name(_frame()))
         real_duration = abjad.Duration(abs(self.real_n), denominator)
         leaf: abjad.Leaf
         if 0 < self.real_n:
@@ -857,7 +858,7 @@ def _evaluate_item(
         components.extend(dummy_notes)
         index_to_original_item[i] = tuplet
     elif isinstance(item, WrittenDuration):
-        leaf = item(denominator)
+        leaf = item(denominator, tag=tag)
         duration = abjad.get.duration(leaf)
         result = leaf
         components.append(leaf)
@@ -913,6 +914,7 @@ def make_rhythm(
         assert isinstance(duration, abjad.Duration), repr(duration)
         item_durations.append(duration)
     if do_not_rewrite_meter is False:
+        assert time_signatures is not None
         voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
         rmakers.rewrite_meter(voice, tag=tag)
         components = abjad.mutate.eject_contents(voice)
