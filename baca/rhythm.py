@@ -871,6 +871,7 @@ def make_rhythm(
     denominator: int,
     time_signatures: list[abjad.TimeSignature] | None = None,
     *,
+    do_not_rewrite_meter: bool = False,
     tag: abjad.Tag | None = None,
     voice_name: str | None = None,
 ) -> abjad.Voice:
@@ -879,6 +880,8 @@ def make_rhythm(
     if time_signatures is not None:
         assert isinstance(time_signatures, list), repr(time_signatures)
         assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
+    if do_not_rewrite_meter is False:
+        assert time_signatures is not None, repr(time_signatures)
     tag = tag or abjad.Tag()
     tag = tag.append(_helpers.function_name(_frame()))
     index_to_original_item: dict[int, abjad.Tuplet | None] = {}
@@ -909,7 +912,7 @@ def make_rhythm(
             rmakers.tie(result, tag=tag)
         assert isinstance(duration, abjad.Duration), repr(duration)
         item_durations.append(duration)
-    if time_signatures:
+    if do_not_rewrite_meter is False:
         voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
         rmakers.rewrite_meter(voice, tag=tag)
         components = abjad.mutate.eject_contents(voice)
