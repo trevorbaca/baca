@@ -1322,7 +1322,7 @@ Examples: rhythm.
     >>> def make_lilypond_file():
     ...     voice, time_signatures = sixteenths(
     ...         2 * [(4, 4)],
-    ...         [C([4, 4, 4, 4]), 4, 4, 4, 4],
+    ...         [C([4, 4, 4, 4]), C([4, 4, T([4, 4, 4], -4)])],
     ...     )
     ...     score = make_score(voice, time_signatures, pnd=(1, 16))
     ...     result = baca.lilypond.file(score)
@@ -1358,10 +1358,17 @@ Examples: rhythm.
                         c'4
                         c'4
                     }
-                    c'4
-                    c'4
-                    c'4
-                    c'4
+                    {
+                        c'4
+                        c'4
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 2/3
+                        {
+                            c'4
+                            c'4
+                            c'4
+                        }
+                    }
                 }
             }
         >>
