@@ -42,6 +42,12 @@ Examples: rhythm.
     >>> def T(items, extra_counts):
     ...     return baca.Tuplet(items, extra_counts)
 
+    >>> def bl(argument):
+    ...     return baca.BeamLeft(argument)
+
+    >>> def br(argument):
+    ...     return baca.BeamRight(argument)
+
     >>> def h(argument):
     ...     return baca.InvisibleMusic(argument)
 
@@ -1434,6 +1440,119 @@ Examples: rhythm.
             }
         >>
 
+
+..  container:: example
+
+    Tupletted ties:
+
+    >>> def make_lilypond_file():
+    ...     voice, time_signatures = sixteenths(
+    ...         [(1, 4)],
+    ...         [T([t(1), t(1), 1, 1, 1, r(1), r(1)], -3)],
+    ...     )
+    ...     score = make_score(voice, time_signatures)
+    ...     result = baca.lilypond.file(score)
+    ...     return result
+
+    >>> lilypond_file = make_lilypond_file()
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        \with
+        {
+            \override TimeSignature.style = #'numbered
+            \override TupletBracket.bracket-visibility = ##t
+            \override TupletBracket.padding = 2
+            autoBeaming = ##f
+            proportionalNotationDuration = #(ly:make-moment 1 36)
+            tupletFullLength = ##t
+        }
+        <<
+            \new RhythmicStaff
+            {
+                \new Voice
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 4/7
+                    {
+                        \time 1/4
+                        c'16
+                        ~
+                        c'16
+                        ~
+                        c'16
+                        c'16
+                        c'16
+                        c'16
+                        \repeatTie
+                        c'16
+                        \repeatTie
+                    }
+                }
+            }
+        >>
+
+
+..  container:: example
+
+    Beams:
+
+    >>> def make_lilypond_file():
+    ...     voice, time_signatures = sixteenths(
+    ...         [(1, 4)],
+    ...         [T([bl(1), 1, br(1), bl(1), 1, br(1), 1], -3)],
+    ...     )
+    ...     score = make_score(voice, time_signatures)
+    ...     result = baca.lilypond.file(score)
+    ...     return result
+
+    >>> lilypond_file = make_lilypond_file()
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        \with
+        {
+            \override TimeSignature.style = #'numbered
+            \override TupletBracket.bracket-visibility = ##t
+            \override TupletBracket.padding = 2
+            autoBeaming = ##f
+            proportionalNotationDuration = #(ly:make-moment 1 36)
+            tupletFullLength = ##t
+        }
+        <<
+            \new RhythmicStaff
+            {
+                \new Voice
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 4/7
+                    {
+                        \time 1/4
+                        c'16
+                        [
+                        c'16
+                        c'16
+                        ]
+                        c'16
+                        [
+                        c'16
+                        c'16
+                        ]
+                        c'16
+                    }
+                }
+            }
+        >>
 
 """
 

@@ -65,6 +65,8 @@ from .piecewise import (
 )
 from .pitchtools import *
 from .rhythm import (
+    BeamLeft,
+    BeamRight,
     Container,
     Feather,
     Grace,
