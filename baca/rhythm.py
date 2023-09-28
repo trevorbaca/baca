@@ -517,7 +517,7 @@ class Tuplet:
 
     def __post_init__(self):
         assert isinstance(self.items, list), repr(self.items)
-        assert isinstance(self.extra_counts, int), repr(self.extra_counts)
+        assert isinstance(self.extra_counts, int | str), repr(self.extra_counts)
 
     def __call__(self, denominator: int, voice_name: str | None = None) -> abjad.Tuplet:
         assert isinstance(denominator, int), repr(denominator)
@@ -549,11 +549,15 @@ class Tuplet:
             else:
                 raise Exception(item)
         contents_duration = sum([abjad.get.duration(_) for _ in components])
-        extra_duration = abjad.Duration(self.extra_counts, denominator)
-        prolated_duration = contents_duration + extra_duration
-        multiplier = prolated_duration / contents_duration
-        pair = multiplier.numerator, multiplier.denominator
-        tuplet = abjad.Tuplet(pair, components, tag=tag)
+        if isinstance(self.extra_counts, int):
+            extra_duration = abjad.Duration(self.extra_counts, denominator)
+            prolated_duration = contents_duration + extra_duration
+            multiplier = prolated_duration / contents_duration
+            pair = multiplier.numerator, multiplier.denominator
+            tuplet = abjad.Tuplet(pair, components, tag=tag)
+        else:
+            assert isinstance(self.extra_counts, str)
+            tuplet = abjad.Tuplet(self.extra_counts, components, tag=tag)
         return tuplet
 
 
