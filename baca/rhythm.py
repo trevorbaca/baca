@@ -553,7 +553,7 @@ class Tuplet:
         prolated_duration = contents_duration + extra_duration
         multiplier = prolated_duration / contents_duration
         pair = multiplier.numerator, multiplier.denominator
-        tuplet = abjad.Tuplet(pair, components)
+        tuplet = abjad.Tuplet(pair, components, tag=tag)
         return tuplet
 
 
