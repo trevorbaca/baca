@@ -486,6 +486,9 @@ class Tuplet:
                 components.extend(rests)
             elif isinstance(item, abjad.Tuplet):
                 components.append(item)
+            elif isinstance(item, Tuplet):
+                tuplet = item(denominator, voice_name)
+                components.append(tuplet)
             elif isinstance(item, Feather):
                 tuplet = item(denominator, voice_name)
                 components.append(tuplet)
