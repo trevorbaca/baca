@@ -29,6 +29,9 @@ Examples: rhythm.
     ...     denominator = 16
     ...     return baca.Feather(items, denominator, numerator, exponent=0.625)
 
+    >>> def C(items):
+    ...     return baca.Container(items)
+
     >>> def G(*arguments):
     ...     return baca.Grace(*arguments)
 
@@ -1308,6 +1311,57 @@ Examples: rhythm.
                         }
                     }
                     c'1
+                }
+            }
+        >>
+
+..  container:: example
+
+    Containers:
+
+    >>> def make_lilypond_file():
+    ...     voice, time_signatures = sixteenths(
+    ...         2 * [(4, 4)],
+    ...         [C([4, 4, 4, 4]), 4, 4, 4, 4],
+    ...     )
+    ...     score = make_score(voice, time_signatures, pnd=(1, 16))
+    ...     result = baca.lilypond.file(score)
+    ...     return result
+
+    >>> lilypond_file = make_lilypond_file()
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        \with
+        {
+            \override TimeSignature.style = #'numbered
+            \override TupletBracket.bracket-visibility = ##t
+            \override TupletBracket.padding = 2
+            autoBeaming = ##f
+            proportionalNotationDuration = #(ly:make-moment 1 16)
+            tupletFullLength = ##t
+        }
+        <<
+            \new RhythmicStaff
+            {
+                \new Voice
+                {
+                    {
+                        \time 4/4
+                        c'4
+                        c'4
+                        c'4
+                        c'4
+                    }
+                    c'4
+                    c'4
+                    c'4
+                    c'4
                 }
             }
         >>

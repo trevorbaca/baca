@@ -54,6 +54,22 @@ def _evaluate_item(
         duration = abjad.get.duration(rests)
         result = rests
         components.extend(rests)
+    elif isinstance(item, Container):
+        container_components = []
+        for container_item in item.items:
+            _evaluate_item(
+                container_item,
+                container_components,
+                denominator,
+                i,
+                index_to_obgc_anchor_voice,
+                index_to_original_item,
+                tag,
+                voice_name,
+            )
+        container = abjad.Container(container_components, tag=tag)
+        duration = abjad.get.duration(container)
+        components.append(container)
     elif isinstance(item, abjad.Tuplet):
         duration = abjad.get.duration(item)
         dummy_notes = abjad.makers.make_leaves([99], [duration], tag=tag)
@@ -170,6 +186,11 @@ def _style_accelerando(
     if temporary_voice is not None:
         temporary_voice[:] = []
     return container
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class Container:
+    items: list
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
