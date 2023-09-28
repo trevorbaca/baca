@@ -47,6 +47,9 @@ def _evaluate_basic_item(item, denominator, voice_name, tag):
     elif isinstance(to_evaluate, Tuplet):
         tuplet = to_evaluate(denominator, voice_name)
         components = [tuplet]
+    elif isinstance(to_evaluate, Container):
+        container = to_evaluate(denominator, voice_name)
+        components = [container]
     elif isinstance(to_evaluate, Feather):
         tuplet = to_evaluate(denominator, voice_name)
         components = [tuplet]

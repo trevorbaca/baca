@@ -1443,12 +1443,12 @@ Examples: rhythm.
 
 ..  container:: example
 
-    Tupletted ties:
+    Tupletted ties, tupletted containers:
 
     >>> def make_lilypond_file():
     ...     voice, time_signatures = sixteenths(
     ...         [(1, 4)],
-    ...         [T([t(1), t(1), 1, 1, 1, r(1), r(1)], -3)],
+    ...         [T([t(1), t(1), C([1, 1, 1]), r(1), r(1)], -3)],
     ...     )
     ...     score = make_score(voice, time_signatures)
     ...     result = baca.lilypond.file(score)
@@ -1485,9 +1485,11 @@ Examples: rhythm.
                         ~
                         c'16
                         ~
-                        c'16
-                        c'16
-                        c'16
+                        {
+                            c'16
+                            c'16
+                            c'16
+                        }
                         c'16
                         \repeatTie
                         c'16
