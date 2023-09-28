@@ -31,6 +31,31 @@ _collection_typing = typing.Union[
 ]
 
 
+def _evaluate_basic_item(item, denominator, voice_name, tag):
+    if isinstance(item, int) and 0 < item:
+        leaf_duration = abjad.Duration(item, denominator)
+        components = abjad.makers.make_leaves([0], [leaf_duration], tag=tag)
+    elif isinstance(item, int) and item < 0:
+        leaf_duration = abjad.Duration(-item, denominator)
+        components = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
+    elif isinstance(item, abjad.Tuplet):
+        components = [item]
+    elif isinstance(item, Tuplet):
+        tuplet = item(denominator, voice_name)
+        components = [tuplet]
+    elif isinstance(item, Feather):
+        tuplet = item(denominator, voice_name)
+        components = [tuplet]
+    elif isinstance(item, Grace):
+        components = item(denominator)
+    elif isinstance(item, OBGC):
+        anchor_voice = item(denominator, voice_name)
+        components = [anchor_voice]
+    else:
+        raise Exception(item)
+    return components
+
+
 def _evaluate_item(
     item,
     components,
@@ -189,33 +214,8 @@ class Container:
         tag = _helpers.function_name(_frame())
         components = []
         for item in self.items:
-            if isinstance(item, int) and 0 < item:
-                leaf_duration = abjad.Duration(item, denominator)
-                notes = abjad.makers.make_leaves([0], [leaf_duration], tag=tag)
-                components.extend(notes)
-            elif isinstance(item, int) and item < 0:
-                leaf_duration = abjad.Duration(-item, denominator)
-                rests = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
-                components.extend(rests)
-            elif isinstance(item, Container):
-                container = item(denominator, voice_name)
-                components.append(container)
-            elif isinstance(item, abjad.Tuplet):
-                components.append(item)
-            elif isinstance(item, Tuplet):
-                tuplet = item(denominator, voice_name)
-                components.append(tuplet)
-            elif isinstance(item, Feather):
-                tuplet = item(denominator, voice_name)
-                components.append(tuplet)
-            elif isinstance(item, Grace):
-                components_ = item(denominator)
-                components.extend(components_)
-            elif isinstance(item, OBGC):
-                anchor_voice = item(denominator, voice_name)
-                components.append(anchor_voice)
-            else:
-                raise Exception(item)
+            components_ = _evaluate_basic_item(item, denominator, voice_name, tag)
+            components.extend(components_)
         container = abjad.Container(components, tag=tag)
         return container
 
@@ -524,30 +524,8 @@ class Tuplet:
         tag = _helpers.function_name(_frame())
         components = []
         for item in self.items:
-            if isinstance(item, int) and 0 < item:
-                leaf_duration = abjad.Duration(item, denominator)
-                notes = abjad.makers.make_leaves([0], [leaf_duration], tag=tag)
-                components.extend(notes)
-            elif isinstance(item, int) and item < 0:
-                leaf_duration = abjad.Duration(-item, denominator)
-                rests = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
-                components.extend(rests)
-            elif isinstance(item, abjad.Tuplet):
-                components.append(item)
-            elif isinstance(item, Tuplet):
-                tuplet = item(denominator, voice_name)
-                components.append(tuplet)
-            elif isinstance(item, Feather):
-                tuplet = item(denominator, voice_name)
-                components.append(tuplet)
-            elif isinstance(item, Grace):
-                components_ = item(denominator)
-                components.extend(components_)
-            elif isinstance(item, OBGC):
-                anchor_voice = item(denominator, voice_name)
-                components.append(anchor_voice)
-            else:
-                raise Exception(item)
+            components_ = _evaluate_basic_item(item, denominator, voice_name, tag)
+            components.extend(components_)
         contents_duration = sum([abjad.get.duration(_) for _ in components])
         if isinstance(self.extra_counts, int):
             extra_duration = abjad.Duration(self.extra_counts, denominator)
