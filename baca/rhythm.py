@@ -990,13 +990,23 @@ def make_rhythm(
             rmakers.tie(result, tag=tag)
         assert isinstance(duration, abjad.Duration | str), repr(duration)
         item_durations.append(duration)
-    if "+" in tokens or "-" in tokens:
-        assert "evaluate-last" in item_durations
-        assert time_signatures is not None
+    if time_signatures is not None:
         total_duration = sum(_.duration for _ in time_signatures)
         existing_duration = sum(
             [abjad.get.duration(_) for _ in tokens if not isinstance(_, str)]
         )
+        if total_duration < existing_duration:
+            tokens = [_ for _ in tokens if not isinstance(_, str)]
+            lists = abjad.mutate.split(tokens, [total_duration], tag=tag)
+            tokens[:] = []
+            for component in lists[0]:
+                tokens.append(component)
+            last_leaf = abjad.select.leaf(tokens, -1)
+            rmakers.untie(last_leaf)
+            item_durations = [abjad.get.duration(_) for _ in tokens]
+    if "+" in tokens or "-" in tokens:
+        assert "evaluate-last" in item_durations
+        assert time_signatures is not None
         needed_duration = total_duration - existing_duration
         if "+" in tokens:
             index = tokens.index("+")
@@ -1004,7 +1014,10 @@ def make_rhythm(
         else:
             index = tokens.index("-")
             pitch = None
-        leaves = abjad.makers.make_leaves([pitch], [needed_duration], tag=tag)
+        try:
+            leaves = abjad.makers.make_leaves([pitch], [needed_duration], tag=tag)
+        except Exception:
+            breakpoint()
         assert abjad.get.duration(leaves) == needed_duration
         tokens[index : index + 1] = leaves
         index = item_durations.index("evaluate-last")
@@ -1028,7 +1041,10 @@ def make_rhythm(
         )
         components = abjad.mutate.eject_contents(voice)
     voice = abjad.Voice(components, name=voice_name)
-    assert abjad.get.duration(voice) == sum(real_item_durations)
+    try:
+        assert abjad.get.duration(voice) == sum(real_item_durations)
+    except AssertionError:
+        breakpoint()
     components = voice[:]
     component_durations = [abjad.get.duration(_) for _ in components]
     duration_lists = abjad.sequence.partition_by_weights(
