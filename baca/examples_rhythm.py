@@ -51,7 +51,7 @@ Examples: rhythm.
     >>> def h(argument):
     ...     return baca.InvisibleMusic(argument)
 
-    >>> def r(argument):
+    >>> def rt(argument):
     ...     return baca.RepeatTie(argument)
 
     >>> def t(argument):
@@ -1112,7 +1112,7 @@ Examples: rhythm.
     Repeat ties:
 
     >>> def make_lilypond_file():
-    ...     voice, time_signatures = sixteenths(3 * [(1, 4)], [4, r(4), r(4)])
+    ...     voice, time_signatures = sixteenths(3 * [(1, 4)], [4, rt(4), rt(4)])
     ...     score = make_score(voice, time_signatures)
     ...     result = baca.lilypond.file(score, includes=["abjad.ily"])
     ...     return result
@@ -1157,7 +1157,7 @@ Examples: rhythm.
     >>> def make_lilypond_file():
     ...     voice, time_signatures = sixteenths(
     ...         3 * [(1, 4)],
-    ...         [w(2, 4), h(w(2, 4)), r(w(2, 4)), h(w(2, 4)), r(4)],
+    ...         [w(2, 4), h(w(2, 4)), rt(w(2, 4)), h(w(2, 4)), rt(4)],
     ...     )
     ...     baca.hairpin(voice, "p < f >", pieces=baca.select.clparts(voice[:-1], [1])),
     ...     baca.dynamic(voice[-1], "p")
@@ -1448,7 +1448,7 @@ Examples: rhythm.
     >>> def make_lilypond_file():
     ...     voice, time_signatures = sixteenths(
     ...         [(1, 4)],
-    ...         [T([t(1), t(1), C([1, 1, 1]), r(1), r(1)], -3)],
+    ...         [T([t(1), t(1), C([1, 1, 1]), rt(1), rt(1)], -3)],
     ...     )
     ...     score = make_score(voice, time_signatures)
     ...     result = baca.lilypond.file(score)

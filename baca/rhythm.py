@@ -127,6 +127,31 @@ def _evaluate_item(
         duration = abjad.get.duration(anchor_leaves)
         components.extend(anchor_leaves)
         index_to_obgc_anchor_voice[i] = anchor_voice
+    elif isinstance(item, BeamLeft | BeamRight | InvisibleMusic | RepeatTie | Tie):
+        duration, result = _evaluate_item(
+            item.argument,
+            components,
+            denominator,
+            i,
+            index_to_obgc_anchor_voice,
+            index_to_original_item,
+            tag,
+            voice_name,
+        )
+        if isinstance(item, BeamLeft):
+            for leaf in abjad.select.leaves(result):
+                start_beam = abjad.StartBeam()
+                abjad.attach(start_beam, leaf)
+        elif isinstance(item, BeamRight):
+            for leaf in abjad.select.leaves(result):
+                stop_beam = abjad.StopBeam()
+                abjad.attach(stop_beam, leaf)
+        elif isinstance(item, InvisibleMusic):
+            rmakers.invisible_music(result, tag=tag)
+        elif isinstance(item, RepeatTie):
+            rmakers.repeat_tie(result, tag=tag)
+        elif isinstance(item, Tie):
+            rmakers.tie(result, tag=tag)
     elif isinstance(item, Tuplet):
         tuplet = item(denominator, voice_name)
         duration = abjad.get.duration(tuplet)
@@ -960,12 +985,8 @@ def make_rhythm(
     item_durations = []
     for i, item in enumerate(items):
         index_to_original_item[i], duration = None, None
-        if isinstance(item, BeamLeft | BeamRight | InvisibleMusic | RepeatTie | Tie):
-            to_evaluate = item.argument
-        else:
-            to_evaluate = item
         duration, result = _evaluate_item(
-            to_evaluate,
+            item,
             tokens,
             denominator,
             i,
@@ -974,20 +995,6 @@ def make_rhythm(
             tag,
             voice_name,
         )
-        if isinstance(item, BeamLeft):
-            for leaf in abjad.select.leaves(result):
-                start_beam = abjad.StartBeam()
-                abjad.attach(start_beam, leaf)
-        elif isinstance(item, BeamRight):
-            for leaf in abjad.select.leaves(result):
-                stop_beam = abjad.StopBeam()
-                abjad.attach(stop_beam, leaf)
-        elif isinstance(item, InvisibleMusic):
-            rmakers.invisible_music(result, tag=tag)
-        elif isinstance(item, RepeatTie):
-            rmakers.repeat_tie(result, tag=tag)
-        elif isinstance(item, Tie):
-            rmakers.tie(result, tag=tag)
         assert isinstance(duration, abjad.Duration | str), repr(duration)
         item_durations.append(duration)
     if time_signatures is not None:
