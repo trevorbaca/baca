@@ -1662,6 +1662,57 @@ Examples: rhythm.
             }
         >>
 
+..  container:: example
+
+    Tupletted written durations:
+
+    >>> def make_lilypond_file():
+    ...     voice, time_signatures = sixteenths(
+    ...         [(1, 4)],
+    ...         [T([2, w(2, 16), 2], -2)],
+    ...     )
+    ...     score = make_score(voice, time_signatures)
+    ...     baca.dls_staff_padding(voice, 4)
+    ...     result = baca.lilypond.file(score, includes=["abjad.ily"])
+    ...     return result
+
+    >>> lilypond_file = make_lilypond_file()
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        \with
+        {
+            \override TimeSignature.style = #'numbered
+            \override TupletBracket.bracket-visibility = ##t
+            \override TupletBracket.padding = 2
+            autoBeaming = ##f
+            proportionalNotationDuration = #(ly:make-moment 1 36)
+            tupletFullLength = ##t
+        }
+        <<
+            \new RhythmicStaff
+            {
+                \new Voice
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 2/3
+                    {
+                        \override DynamicLineSpanner.staff-padding = 4
+                        \time 1/4
+                        c'8
+                        c'1 * 1/8
+                        c'8
+                        \revert DynamicLineSpanner.staff-padding
+                    }
+                }
+            }
+        >>
+
 """
 
 

@@ -33,47 +33,48 @@ _collection_typing = typing.Union[
 
 def _evaluate_basic_item(item, denominator, voice_name, tag):
     if isinstance(item, BeamLeft | BeamRight | InvisibleMusic | RepeatTie | Tie):
-        to_evaluate = item.argument
-    else:
-        to_evaluate = item
-    if isinstance(to_evaluate, int) and 0 < to_evaluate:
-        leaf_duration = abjad.Duration(to_evaluate, denominator)
+        components = _evaluate_basic_item(item.argument, denominator, voice_name, tag)
+        if isinstance(item, BeamLeft):
+            for leaf in abjad.select.leaves(components):
+                start_beam = abjad.StartBeam()
+                abjad.attach(start_beam, leaf)
+        elif isinstance(item, BeamRight):
+            for leaf in abjad.select.leaves(components):
+                stop_beam = abjad.StopBeam()
+                abjad.attach(stop_beam, leaf)
+        elif isinstance(item, InvisibleMusic):
+            rmakers.invisible_music(components, tag=tag)
+        elif isinstance(item, RepeatTie):
+            rmakers.repeat_tie(components, tag=tag)
+        elif isinstance(item, Tie):
+            rmakers.tie(components, tag=tag)
+    elif isinstance(item, int) and 0 < item:
+        leaf_duration = abjad.Duration(item, denominator)
         components = abjad.makers.make_leaves([0], [leaf_duration], tag=tag)
-    elif isinstance(to_evaluate, int) and to_evaluate < 0:
-        leaf_duration = abjad.Duration(-to_evaluate, denominator)
+    elif isinstance(item, int) and item < 0:
+        leaf_duration = abjad.Duration(-item, denominator)
         components = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
-    elif isinstance(to_evaluate, abjad.Tuplet):
-        components = [to_evaluate]
-    elif isinstance(to_evaluate, Tuplet):
-        tuplet = to_evaluate(denominator, voice_name)
+    elif isinstance(item, abjad.Tuplet):
+        components = [item]
+    elif isinstance(item, Tuplet):
+        tuplet = item(denominator, voice_name)
         components = [tuplet]
-    elif isinstance(to_evaluate, Container):
-        container = to_evaluate(denominator, voice_name)
+    elif isinstance(item, Container):
+        container = item(denominator, voice_name)
         components = [container]
-    elif isinstance(to_evaluate, Feather):
-        tuplet = to_evaluate(denominator, voice_name)
+    elif isinstance(item, Feather):
+        tuplet = item(denominator, voice_name)
         components = [tuplet]
-    elif isinstance(to_evaluate, Grace):
-        components = to_evaluate(denominator)
-    elif isinstance(to_evaluate, OBGC):
-        anchor_voice = to_evaluate(denominator, voice_name)
+    elif isinstance(item, Grace):
+        components = item(denominator)
+    elif isinstance(item, OBGC):
+        anchor_voice = item(denominator, voice_name)
         components = [anchor_voice]
+    elif isinstance(item, WrittenDuration):
+        leaf = item(denominator, tag=tag)
+        components = [leaf]
     else:
         raise Exception(item)
-    if isinstance(item, BeamLeft):
-        for leaf in abjad.select.leaves(components):
-            start_beam = abjad.StartBeam()
-            abjad.attach(start_beam, leaf)
-    elif isinstance(item, BeamRight):
-        for leaf in abjad.select.leaves(components):
-            stop_beam = abjad.StopBeam()
-            abjad.attach(stop_beam, leaf)
-    elif isinstance(item, InvisibleMusic):
-        rmakers.invisible_music(components, tag=tag)
-    elif isinstance(item, RepeatTie):
-        rmakers.repeat_tie(components, tag=tag)
-    elif isinstance(item, Tie):
-        rmakers.tie(components, tag=tag)
     return components
 
 
