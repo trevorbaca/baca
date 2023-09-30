@@ -20,9 +20,15 @@ Examples: rhythm.
     ...     rmakers.force_fraction(score)
     ...     return score
 
-    >>> def sixteenths(pairs, items, voice_name=None):
+    >>> def sixteenths(pairs, items, voice_name=None, *, do_not_rewrite_meter=False):
     ...     time_signatures = [abjad.TimeSignature(_) for _ in pairs]
-    ...     voice = baca.make_rhythm(items, 16, time_signatures, voice_name=voice_name)
+    ...     voice = baca.make_rhythm(
+    ...         items,
+    ...         16,
+    ...         time_signatures,
+    ...         voice_name=voice_name,
+    ...         do_not_rewrite_meter=do_not_rewrite_meter
+    ...     )
     ...     return voice, time_signatures
 
     >>> def A(items, numerator):
@@ -1597,6 +1603,61 @@ Examples: rhythm.
                     [
                     c'16
                     ]
+                }
+            }
+        >>
+
+..  container:: example
+
+    Tied invisible music:
+
+    >>> def make_lilypond_file():
+    ...     voice, time_signatures = sixteenths(
+    ...         [(1, 4)],
+    ...         [1, rt(h(1)), h(rt(1)), 1],
+    ...         do_not_rewrite_meter=True
+    ...     )
+    ...     score = make_score(voice, time_signatures)
+    ...     baca.dls_staff_padding(voice, 4)
+    ...     result = baca.lilypond.file(score, includes=["abjad.ily"])
+    ...     return result
+
+    >>> lilypond_file = make_lilypond_file()
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        \with
+        {
+            \override TimeSignature.style = #'numbered
+            \override TupletBracket.bracket-visibility = ##t
+            \override TupletBracket.padding = 2
+            autoBeaming = ##f
+            proportionalNotationDuration = #(ly:make-moment 1 36)
+            tupletFullLength = ##t
+        }
+        <<
+            \new RhythmicStaff
+            {
+                \new Voice
+                {
+                    \override DynamicLineSpanner.staff-padding = 4
+                    \time 1/4
+                    c'16
+                    %@% \abjad-invisible-music
+                    \abjad-invisible-music-coloring
+                    c'16
+                    \repeatTie
+                    %@% \abjad-invisible-music
+                    \abjad-invisible-music-coloring
+                    c'16
+                    \repeatTie
+                    c'16
+                    \revert DynamicLineSpanner.staff-padding
                 }
             }
         >>
