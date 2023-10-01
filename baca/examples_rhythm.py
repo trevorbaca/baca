@@ -35,6 +35,9 @@ Examples: rhythm.
     ...     denominator = 16
     ...     return baca.Feather(items, denominator, numerator, exponent=0.625)
 
+    >>> def AG(*arguments):
+    ...     return baca.AfterGrace(*arguments)
+
     >>> def C(items):
     ...     return baca.Container(items)
 
@@ -122,6 +125,66 @@ Examples: rhythm.
                 }
             }
         >>
+
+..  container:: example
+
+    Displaced, after-graced quarter notes:
+
+    >>> def make_lilypond_file():
+    ...     voice, time_signatures = sixteenths(
+    ...         3 * [(1, 4)],
+    ...         [-2, AG([1], 4), AG([1], 4), -2],
+    ...     )
+    ...     score = make_score(voice, time_signatures)
+    ...     result = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return result
+
+    >>> lilypond_file = make_lilypond_file()
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        \with
+        {
+            \override TimeSignature.style = #'numbered
+            \override TupletBracket.bracket-visibility = ##t
+            \override TupletBracket.padding = 2
+            autoBeaming = ##f
+            proportionalNotationDuration = #(ly:make-moment 1 36)
+            tupletFullLength = ##t
+        }
+        <<
+            \new RhythmicStaff
+            {
+                \new Voice
+                {
+                    \time 1/4
+                    r8
+                    c'8
+                    ~
+                    \afterGrace
+                    c'8
+                    [
+                    {
+                        c'16
+                    }
+                    c'8
+                    ]
+                    ~
+                    \afterGrace
+                    c'8
+                    {
+                        c'16
+                    }
+                    r8
+                }
+            }
+        >>
+
 
 ..  container:: example
 

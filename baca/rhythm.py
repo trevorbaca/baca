@@ -54,6 +54,8 @@ def _evaluate_basic_item(item, denominator, voice_name, tag):
     elif isinstance(item, int) and item < 0:
         leaf_duration = abjad.Duration(-item, denominator)
         components = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
+    elif isinstance(item, AfterGrace):
+        components = item(denominator)
     elif isinstance(item, abjad.Tuplet):
         components = [item]
     elif isinstance(item, Tuplet):
@@ -106,6 +108,10 @@ def _evaluate_item(
         dummy_notes = abjad.makers.make_leaves([99], [duration], tag=tag)
         components.extend(dummy_notes)
         index_to_original_item[i] = item
+    elif isinstance(item, AfterGrace):
+        components_ = item(denominator)
+        duration = abjad.get.duration(components_)
+        components.extend(components_)
     elif isinstance(item, Container):
         container = item(denominator, voice_name)
         duration = abjad.get.duration(container)
@@ -248,6 +254,44 @@ def _style_accelerando(
     if temporary_voice is not None:
         temporary_voice[:] = []
     return container
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class AfterGrace:
+    grace_note_numerators: list[int]
+    main_note_numerator: int
+
+    def __post_init__(self):
+        assert isinstance(self.main_note_numerator, int), repr(self.main_note_numerator)
+        assert all(isinstance(_, int) for _ in self.grace_note_numerators), repr(
+            self.grace_note_numerators
+        )
+
+    def __call__(self, denominator):
+        main_duration = abjad.Duration(abs(self.main_note_numerator), denominator)
+        if 0 < self.main_note_numerator:
+            pitch = 0
+        else:
+            pitch = None
+        main_components = abjad.makers.make_leaves([pitch], main_duration)
+        grace_durations = [
+            abjad.Duration(abs(_), denominator) for _ in self.grace_note_numerators
+        ]
+        pitches = []
+        for grace_note_numerator in self.grace_note_numerators:
+            if 0 < grace_note_numerator:
+                pitches.append(0)
+            else:
+                pitches.append(None)
+        grace_leaves = abjad.makers.make_leaves(pitches, grace_durations)
+        if 1 < len(grace_leaves):
+            temporary_voice = abjad.Voice(grace_leaves, name="TemporaryVoice")
+            abjad.beam(grace_leaves)
+            temporary_voice[:] = []
+        agc = abjad.AfterGraceContainer(grace_leaves)
+        last_leaf = abjad.get.leaf(main_components, -1)
+        abjad.attach(agc, last_leaf)
+        return main_components
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
