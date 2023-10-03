@@ -1093,33 +1093,31 @@ def make_rhythm(
         )
         components = abjad.mutate.eject_contents(voice)
     voice = abjad.Voice(components, name=voice_name)
-    try:
-        assert abjad.get.duration(voice) == sum(real_item_durations)
-    except AssertionError:
-        breakpoint()
-    components = voice[:]
-    component_durations = [abjad.get.duration(_) for _ in components]
-    duration_lists = abjad.sequence.partition_by_weights(
-        component_durations, real_item_durations, allow_part_weights=abjad.EXACT
-    )
-    counts = [len(_) for _ in duration_lists]
-    assert len(components) == sum(counts)
-    component_lists = abjad.sequence.partition_by_counts(components, counts)
-    for i, component_list in enumerate(component_lists):
-        original_item = index_to_original_item[i]
-        if original_item is not None:
-            rmakers.unbeam(component_list, smart=True)
-            abjad.mutate.replace(component_list, original_item)
-        if i in index_to_obgc_anchor_voice:
-            obgc_anchor_voice = index_to_obgc_anchor_voice[i]
-            assert isinstance(obgc_anchor_voice, abjad.Voice)
-            obgc_container = obgc_anchor_voice[0]
-            assert isinstance(obgc_container, abjad.Container)
-            obgc_nongrace_voice = obgc_container[1]
-            assert isinstance(obgc_nongrace_voice, abjad.Voice)
-            assert len(obgc_nongrace_voice) == 0
-            abjad.mutate.replace(component_list, obgc_anchor_voice)
-            obgc_nongrace_voice.extend(component_list)
+    assert abjad.get.duration(voice) == sum(real_item_durations)
+    if index_to_obgc_anchor_voice or any(index_to_original_item.values()):
+        components = voice[:]
+        component_durations = [abjad.get.duration(_) for _ in components]
+        duration_lists = abjad.sequence.partition_by_weights(
+            component_durations, real_item_durations, allow_part_weights=abjad.EXACT
+        )
+        counts = [len(_) for _ in duration_lists]
+        assert len(components) == sum(counts)
+        component_lists = abjad.sequence.partition_by_counts(components, counts)
+        for i, component_list in enumerate(component_lists):
+            original_item = index_to_original_item[i]
+            if original_item is not None:
+                rmakers.unbeam(component_list, smart=True)
+                abjad.mutate.replace(component_list, original_item)
+            if i in index_to_obgc_anchor_voice:
+                obgc_anchor_voice = index_to_obgc_anchor_voice[i]
+                assert isinstance(obgc_anchor_voice, abjad.Voice)
+                obgc_container = obgc_anchor_voice[0]
+                assert isinstance(obgc_container, abjad.Container)
+                obgc_nongrace_voice = obgc_container[1]
+                assert isinstance(obgc_nongrace_voice, abjad.Voice)
+                assert len(obgc_nongrace_voice) == 0
+                abjad.mutate.replace(component_list, obgc_anchor_voice)
+                obgc_nongrace_voice.extend(component_list)
     return voice
 
 
