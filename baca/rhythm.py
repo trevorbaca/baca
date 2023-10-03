@@ -267,7 +267,8 @@ class AfterGrace:
         )
 
     def __call__(self, denominator):
-        voice_name, tag = None, None
+        tag = _helpers.function_name(_frame())
+        voice_name = None
         main_components = _evaluate_basic_item(
             self.main_note_numerator,
             denominator,
@@ -283,12 +284,12 @@ class AfterGrace:
                 pitches.append(0)
             else:
                 pitches.append(None)
-        grace_leaves = abjad.makers.make_leaves(pitches, grace_durations)
+        grace_leaves = abjad.makers.make_leaves(pitches, grace_durations, tag=tag)
         if 1 < len(grace_leaves):
             temporary_voice = abjad.Voice(grace_leaves, name="TemporaryVoice")
             abjad.beam(grace_leaves)
             temporary_voice[:] = []
-        agc = abjad.AfterGraceContainer(grace_leaves)
+        agc = abjad.AfterGraceContainer(grace_leaves, tag=tag)
         last_leaf = abjad.get.leaf(main_components, -1)
         abjad.attach(agc, last_leaf)
         return main_components
