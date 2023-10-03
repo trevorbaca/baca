@@ -1776,6 +1776,60 @@ Examples: rhythm.
             }
         >>
 
+..  container:: example
+
+    After-grace main note with repeat-tie and beam-right:
+
+    >>> def make_lilypond_file():
+    ...     voice, time_signatures = sixteenths(
+    ...         [(1, 4)],
+    ...         [bl(1), AG([2], br(rt(3)))],
+    ...         do_not_rewrite_meter=True,
+    ...     )
+    ...     score = make_score(voice, time_signatures)
+    ...     baca.dls_staff_padding(voice, 4)
+    ...     result = baca.lilypond.file(score)
+    ...     return result
+
+    >>> lilypond_file = make_lilypond_file()
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        \with
+        {
+            \override TimeSignature.style = #'numbered
+            \override TupletBracket.bracket-visibility = ##t
+            \override TupletBracket.padding = 2
+            autoBeaming = ##f
+            proportionalNotationDuration = #(ly:make-moment 1 36)
+            tupletFullLength = ##t
+        }
+        <<
+            \new RhythmicStaff
+            {
+                \new Voice
+                {
+                    \override DynamicLineSpanner.staff-padding = 4
+                    \time 1/4
+                    c'16
+                    [
+                    \afterGrace
+                    c'8.
+                    ]
+                    \repeatTie
+                    {
+                        c'8
+                        \revert DynamicLineSpanner.staff-padding
+                    }
+                }
+            }
+        >>
+
 """
 
 

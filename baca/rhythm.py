@@ -258,22 +258,22 @@ def _style_accelerando(
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class AfterGrace:
-    grace_note_numerators: list[int]
+    grace_note_numerators: list
     main_note_numerator: int
 
     def __post_init__(self):
-        assert isinstance(self.main_note_numerator, int), repr(self.main_note_numerator)
         assert all(isinstance(_, int) for _ in self.grace_note_numerators), repr(
             self.grace_note_numerators
         )
 
     def __call__(self, denominator):
-        main_duration = abjad.Duration(abs(self.main_note_numerator), denominator)
-        if 0 < self.main_note_numerator:
-            pitch = 0
-        else:
-            pitch = None
-        main_components = abjad.makers.make_leaves([pitch], main_duration)
+        voice_name, tag = None, None
+        main_components = _evaluate_basic_item(
+            self.main_note_numerator,
+            denominator,
+            voice_name,
+            tag,
+        )
         grace_durations = [
             abjad.Duration(abs(_), denominator) for _ in self.grace_note_numerators
         ]
