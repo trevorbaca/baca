@@ -67,7 +67,7 @@ def _evaluate_basic_item(item, denominator, voice_name, tag):
     elif isinstance(item, Feather):
         tuplet = item(denominator, voice_name)
         components = [tuplet]
-    elif isinstance(item, Grace):
+    elif isinstance(item, BeforeGrace):
         components = item(denominator)
     elif isinstance(item, OBGC):
         anchor_voice = item(denominator, voice_name)
@@ -124,7 +124,7 @@ def _evaluate_item(
         dummy_notes = abjad.makers.make_leaves([98], [duration], tag=tag)
         components.extend(dummy_notes)
         index_to_original_item[i] = tuplet
-    elif isinstance(item, Grace):
+    elif isinstance(item, BeforeGrace):
         components_ = item(denominator)
         duration = abjad.get.duration(components_)
         components.extend(components_)
@@ -306,51 +306,7 @@ class BeamRight:
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class Container:
-    items: list
-
-    def __call__(
-        self, denominator: int, voice_name: str | None = None
-    ) -> abjad.Container:
-        assert isinstance(denominator, int), repr(denominator)
-        tag = _helpers.function_name(_frame())
-        components = []
-        for item in self.items:
-            components_ = _evaluate_basic_item(item, denominator, voice_name, tag)
-            components.extend(components_)
-        container = abjad.Container(components, tag=tag)
-        return container
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class Feather:
-    items: list
-    denominator: int
-    numerator: int
-    exponent: float = dataclasses.field(default=0.625, kw_only=True)
-
-    def __post_init__(self):
-        assert isinstance(self.items, list), repr(self.items)
-        assert isinstance(self.denominator, int), repr(self.denominator)
-        assert isinstance(self.numerator, int), repr(self.numerator)
-        assert isinstance(self.exponent, float), repr(self.exponent)
-
-    def __call__(self, denominator: int, voice_name: str | None = None):
-        assert isinstance(denominator, int), repr(denominator)
-        feather_duration = abjad.Duration(self.numerator, denominator)
-        tuplet = make_accelerando(
-            self.items,
-            denominator,
-            feather_duration,
-            exponent=self.exponent,
-            voice_name=voice_name,
-            tag=_helpers.function_name(_frame()),
-        )
-        return tuplet
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class Grace:
+class BeforeGrace:
     grace_note_numerators: list[int]
     main_note_numerator: int
 
@@ -413,6 +369,50 @@ class Grace:
         bgc = abjad.BeforeGraceContainer(grace_leaves, command=command)
         abjad.attach(bgc, first_leaf)
         return main_components
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class Container:
+    items: list
+
+    def __call__(
+        self, denominator: int, voice_name: str | None = None
+    ) -> abjad.Container:
+        assert isinstance(denominator, int), repr(denominator)
+        tag = _helpers.function_name(_frame())
+        components = []
+        for item in self.items:
+            components_ = _evaluate_basic_item(item, denominator, voice_name, tag)
+            components.extend(components_)
+        container = abjad.Container(components, tag=tag)
+        return container
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class Feather:
+    items: list
+    denominator: int
+    numerator: int
+    exponent: float = dataclasses.field(default=0.625, kw_only=True)
+
+    def __post_init__(self):
+        assert isinstance(self.items, list), repr(self.items)
+        assert isinstance(self.denominator, int), repr(self.denominator)
+        assert isinstance(self.numerator, int), repr(self.numerator)
+        assert isinstance(self.exponent, float), repr(self.exponent)
+
+    def __call__(self, denominator: int, voice_name: str | None = None):
+        assert isinstance(denominator, int), repr(denominator)
+        feather_duration = abjad.Duration(self.numerator, denominator)
+        tuplet = make_accelerando(
+            self.items,
+            denominator,
+            feather_duration,
+            exponent=self.exponent,
+            voice_name=voice_name,
+            tag=_helpers.function_name(_frame()),
+        )
+        return tuplet
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -770,7 +770,7 @@ def make_accelerando(
             leaf_duration = abjad.Duration(-item, denominator)
             rests = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
             leaves.extend(rests)
-        elif isinstance(item, Grace):
+        elif isinstance(item, BeforeGrace):
             leaves_ = item(denominator)
             leaves.extend(leaves_)
         elif isinstance(item, OBGC):

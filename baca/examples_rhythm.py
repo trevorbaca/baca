@@ -38,11 +38,11 @@ Examples: rhythm.
     >>> def AG(*arguments):
     ...     return baca.AfterGrace(*arguments)
 
+    >>> def BG(*arguments):
+    ...     return baca.BeforeGrace(*arguments)
+
     >>> def C(items):
     ...     return baca.Container(items)
-
-    >>> def G(*arguments):
-    ...     return baca.Grace(*arguments)
 
     >>> def R(items, numerator):
     ...     denominator = 16
@@ -76,7 +76,7 @@ Examples: rhythm.
     >>> def make_lilypond_file():
     ...     voice, time_signatures = sixteenths(
     ...         3 * [(1, 4)],
-    ...         [-2, G([1], 4), G([1], 4), -2],
+    ...         [-2, BG([1], 4), BG([1], 4), -2],
     ...     )
     ...     score = make_score(voice, time_signatures)
     ...     result = baca.lilypond.file(score, includes=["baca.ily"])
@@ -264,8 +264,8 @@ Examples: rhythm.
     ...         3 * [(1, 4)],
     ...         [
     ...             -1,
-    ...             A([G([1, 1, 1], 1), G([1, 1], 1), G([1], 1), 1, 1], 4),
-    ...             R([1, 1, G([1], 1), G([1, 1], 1), G([1, 1, 1], 1)], 4),
+    ...             A([BG([1, 1, 1], 1), BG([1, 1], 1), BG([1], 1), 1, 1], 4),
+    ...             R([1, 1, BG([1], 1), BG([1, 1], 1), BG([1, 1, 1], 1)], 4),
     ...             -3,
     ...         ],
     ...     )
@@ -370,7 +370,7 @@ Examples: rhythm.
     Displaced, graced feathers with on-beat grace notes:
 
 
-    >>> def obgc(grace_note_numerators, nongrace_note_numerator):
+    >>> def OBGC(grace_note_numerators, nongrace_note_numerator):
     ...     return baca.OBGC(
     ...         grace_note_numerators,
     ...         nongrace_note_numerator,
@@ -383,8 +383,8 @@ Examples: rhythm.
     ...         3 * [(1, 4)],
     ...         [
     ...             -1,
-    ...             R([1, 1, 1, G([1], 1), obgc([1, 1, 1, 1], 1)], 4),
-    ...             A([1, obgc([1, 1, 1], 1), 1, 1, G([1, 1], 1)], 4),
+    ...             R([1, 1, 1, BG([1], 1), OBGC([1, 1, 1, 1], 1)], 4),
+    ...             A([1, OBGC([1, 1, 1], 1), 1, 1, BG([1, 1], 1)], 4),
     ...             -3,
     ...         ],
     ...         voice_name="Example.Voice",
@@ -520,7 +520,7 @@ Examples: rhythm.
 
     Displaced on-beat grace containers:
 
-    >>> def obgc(grace_note_numerators, nongrace_note_numerator):
+    >>> def OBGC(grace_note_numerators, nongrace_note_numerator):
     ...     return baca.OBGC(
     ...         grace_note_numerators,
     ...         nongrace_note_numerator,
@@ -530,7 +530,7 @@ Examples: rhythm.
     >>> def make_lilypond_file():
     ...     voice, time_signatures = sixteenths(
     ...         3 * [(1, 4)],
-    ...         [-2, obgc([1, 1, 1, 1], 4), obgc([1, 1, 1, 1], 4), -2],
+    ...         [-2, OBGC([1, 1, 1, 1], 4), OBGC([1, 1, 1, 1], 4), -2],
     ...         voice_name="Example.Voice",
     ...     )
     ...     score = make_score(voice, time_signatures)
@@ -638,8 +638,8 @@ Examples: rhythm.
     ...         3 * [(1, 4)],
     ...         [
     ...             -2,
-    ...             T([2, G([1, 1], 2), G([1], 2)], -2),
-    ...             T([1, 1, 1, G([1], 1), G([1], 1)], -1),
+    ...             T([2, BG([1, 1], 2), BG([1], 2)], -2),
+    ...             T([1, 1, 1, BG([1], 1), BG([1], 1)], -1),
     ...             -2,
     ...         ],
     ...     )
@@ -730,8 +730,8 @@ Examples: rhythm.
     ...         3 * [(1, 4)],
     ...         [
     ...             -2,
-    ...             T([G([1, 1], 2), A([1, G([1], 1), 1, 1], 4)], -2),
-    ...             T([R([1, 1, 1, G([1], 1)], 3), 1, G([1, 1], 1)], -1),
+    ...             T([BG([1, 1], 2), A([1, BG([1], 1), 1, 1], 4)], -2),
+    ...             T([R([1, 1, 1, BG([1], 1)], 3), 1, BG([1, 1], 1)], -1),
     ...             -2,
     ...         ],
     ...     )
@@ -844,7 +844,7 @@ Examples: rhythm.
 
     Feathers with before-grace music and on-beat grace music:
 
-    >>> def obgc(grace_note_numerators, nongrace_note_numerator):
+    >>> def OBGC(grace_note_numerators, nongrace_note_numerator):
     ...     return baca.OBGC(
     ...         grace_note_numerators,
     ...         nongrace_note_numerator,
@@ -858,8 +858,8 @@ Examples: rhythm.
     ...         3 * [(1, 4)],
     ...         [
     ...             -1,
-    ...             R([1, 1, 1, G([1, 1], 1), obgc([1, 1, 1, 1], 1)], 4),
-    ...             A([1, obgc([1, 1, 1], 1), 1, 1, G([1, 1], 1)], 4),
+    ...             R([1, 1, 1, BG([1, 1], 1), OBGC([1, 1, 1, 1], 1)], 4),
+    ...             A([1, OBGC([1, 1, 1], 1), 1, 1, BG([1, 1], 1)], 4),
     ...             -3,
     ...         ],
     ...         voice_name="Example.Voice",
