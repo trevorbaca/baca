@@ -577,7 +577,9 @@ class OBGC:
                 self.grace_leaf_duration
             )
 
-    def __call__(self, denominator, voice_name):
+    def __call__(self, denominator: int, voice_name: str):
+        assert isinstance(denominator, int), repr(denominator)
+        assert isinstance(voice_name, str), repr(voice_name)
         tag = _helpers.function_name(_frame())
         if 0 < self.nongrace_note_numerator:
             pitch = 0
@@ -599,6 +601,16 @@ class OBGC:
             nongrace_polyphony_command=self.nongrace_polyphony_command,
             tag=tag,
         )
+        #        rmakers.on_beat_grace_container(
+        #            anchor_voice,
+        #            anchor_voice.name,
+        #            _select.plts(anchor_voice),
+        #            self.grace_note_numerators,
+        #            grace_leaf_duration=self.grace_leaf_duration,
+        #            grace_polyphony_command=self.grace_polyphony_command,
+        #            nongrace_polyphony_command=self.nongrace_polyphony_command,
+        #            tag=tag,
+        #        )
         return anchor_voice
 
 
@@ -774,6 +786,7 @@ def make_accelerando(
             leaves_ = item(denominator)
             leaves.extend(leaves_)
         elif isinstance(item, OBGC):
+            assert isinstance(voice_name, str), repr(voice_name)
             anchor_voice = item(denominator, voice_name)
             leaves.append(anchor_voice)
         else:
