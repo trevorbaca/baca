@@ -583,7 +583,7 @@ class OBGC:
             pitch = 0
         else:
             pitch = None
-        duration = abjad.Duration(self.nongrace_note_numerator, denominator)
+        duration = abjad.Duration(abs(self.nongrace_note_numerator), denominator)
         nongrace_leaves = abjad.makers.make_leaves([pitch], [duration])
         anchor_voice = abjad.Voice(nongrace_leaves, name=voice_name, tag=tag)
         grace_note_durations = [
