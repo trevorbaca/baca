@@ -85,7 +85,7 @@ def _evaluate_item(
     components,
     denominator,
     i,
-    index_to_obgc_anchor_voice,
+    index_to_obgc_polyphony_container,
     index_to_original_item,
     tag,
     voice_name,
@@ -129,29 +129,23 @@ def _evaluate_item(
         duration = abjad.get.duration(components_)
         components.extend(components_)
     elif isinstance(item, OBGC):
-        # anchor_voice = item(denominator, voice_name)
-        # anchor_leaves = abjad.mutate.eject_contents(anchor_voice[0][1])
-        # duration = abjad.get.duration(anchor_leaves)
-        # components.extend(anchor_leaves)
-        # index_to_obgc_anchor_voice[i] = anchor_voice
-        simultaneous_container = item(denominator, voice_name)
-        assert len(simultaneous_container) == 2
-        assert isinstance(simultaneous_container[0], abjad.OnBeatGraceContainer)
-        assert simultaneous_container[1].name == voice_name
-        duration = abjad.get.duration(simultaneous_container[1])
-        # components.append(simultaneous_container)
-        main_voice = simultaneous_container[1]
+        polyphony_container = item(denominator, voice_name)
+        assert len(polyphony_container) == 2
+        assert isinstance(polyphony_container[0], abjad.OnBeatGraceContainer)
+        assert polyphony_container[1].name == voice_name
+        duration = abjad.get.duration(polyphony_container[1])
+        main_voice = polyphony_container[1]
         assert isinstance(main_voice, abjad.Voice)
         nongrace_leaves = abjad.mutate.eject_contents(main_voice)
         components.extend(nongrace_leaves)
-        index_to_obgc_anchor_voice[i] = simultaneous_container
+        index_to_obgc_polyphony_container[i] = polyphony_container
     elif isinstance(item, BeamLeft | BeamRight | InvisibleMusic | RepeatTie | Tie):
         duration, result = _evaluate_item(
             item.argument,
             components,
             denominator,
             i,
-            index_to_obgc_anchor_voice,
+            index_to_obgc_polyphony_container,
             index_to_original_item,
             tag,
             voice_name,
@@ -625,13 +619,12 @@ class OBGC:
         assert len(anchor_voice) == 1
         components = abjad.mutate.eject_contents(anchor_voice)
         assert len(components) == 1
-        simultaneous_container = components[0]
-        assert isinstance(simultaneous_container, abjad.Container)
-        assert len(simultaneous_container) == 2
-        assert isinstance(simultaneous_container[1], abjad.Voice)
-        assert simultaneous_container[1].name == voice_name
-        # return anchor_voice
-        return simultaneous_container
+        polyphony_container = components[0]
+        assert isinstance(polyphony_container, abjad.Container)
+        assert len(polyphony_container) == 2
+        assert isinstance(polyphony_container[1], abjad.Voice)
+        assert polyphony_container[1].name == voice_name
+        return polyphony_container
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -1059,7 +1052,7 @@ def make_rhythm(
     tag = tag or abjad.Tag()
     tag = tag.append(_helpers.function_name(_frame()))
     index_to_original_item: dict[int, abjad.Tuplet | None] = {}
-    index_to_obgc_anchor_voice: dict[int, abjad.Voice | None] = {}
+    index_to_obgc_polyphony_container: dict[int, abjad.Container | None] = {}
     tokens: list[abjad.Component | str] = []
     item_durations = []
     for i, item in enumerate(items):
@@ -1069,14 +1062,13 @@ def make_rhythm(
             tokens,
             denominator,
             i,
-            index_to_obgc_anchor_voice,
+            index_to_obgc_polyphony_container,
             index_to_original_item,
             tag,
             voice_name,
         )
         assert isinstance(duration, abjad.Duration | str), repr(duration)
         item_durations.append(duration)
-    # breakpoint()
     if time_signatures is not None:
         total_duration = sum(_.duration for _ in time_signatures)
         existing_duration = sum(
@@ -1129,7 +1121,7 @@ def make_rhythm(
         components = abjad.mutate.eject_contents(voice)
     voice = abjad.Voice(components, name=voice_name)
     assert abjad.get.duration(voice) == sum(real_item_durations)
-    if index_to_obgc_anchor_voice or any(index_to_original_item.values()):
+    if index_to_obgc_polyphony_container or any(index_to_original_item.values()):
         components = voice[:]
         component_durations = [abjad.get.duration(_) for _ in components]
         duration_lists = abjad.sequence.partition_by_weights(
@@ -1143,25 +1135,15 @@ def make_rhythm(
             if original_item is not None:
                 rmakers.unbeam(component_list, smart=True)
                 abjad.mutate.replace(component_list, original_item)
-            #            if i in index_to_obgc_anchor_voice:
-            #                obgc_anchor_voice = index_to_obgc_anchor_voice[i]
-            #                assert isinstance(obgc_anchor_voice, abjad.Voice)
-            #                obgc_container = obgc_anchor_voice[0]
-            #                assert isinstance(obgc_container, abjad.Container)
-            #                obgc_nongrace_voice = obgc_container[1]
-            #                assert isinstance(obgc_nongrace_voice, abjad.Voice)
-            #                assert len(obgc_nongrace_voice) == 0
-            #                abjad.mutate.replace(component_list, obgc_anchor_voice)
-            #                obgc_nongrace_voice.extend(component_list)
-            if i in index_to_obgc_anchor_voice:
-                simultaneous_container = index_to_obgc_anchor_voice[i]
-                assert isinstance(simultaneous_container, abjad.Container)
-                obgc_container = simultaneous_container[0]
+            if i in index_to_obgc_polyphony_container:
+                polyphony_container = index_to_obgc_polyphony_container[i]
+                assert isinstance(polyphony_container, abjad.Container)
+                obgc_container = polyphony_container[0]
                 assert isinstance(obgc_container, abjad.OnBeatGraceContainer)
-                main_voice = simultaneous_container[1]
+                main_voice = polyphony_container[1]
                 assert isinstance(main_voice, abjad.Voice)
                 assert len(main_voice) == 0
-                abjad.mutate.replace(component_list, simultaneous_container)
+                abjad.mutate.replace(component_list, polyphony_container)
                 main_voice.extend(component_list)
     return voice
 
