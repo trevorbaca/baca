@@ -369,10 +369,10 @@ Examples: rhythm.
 
     Displaced, graced feathers with on-beat grace notes:
 
-    >>> def OBGC(grace_note_numerators, nongrace_note_numerator):
+    >>> def OBGC(grace_note_numerators, nongrace_note_numerators):
     ...     return baca.OBGC(
     ...         grace_note_numerators,
-    ...         nongrace_note_numerator,
+    ...         nongrace_note_numerators,
     ...         grace_leaf_duration=abjad.Duration(1, 64),
     ...     )
 
@@ -381,8 +381,8 @@ Examples: rhythm.
     ...         3 * [(1, 4)],
     ...         [
     ...             -1,
-    ...             R([1, 1, 1, BG([1], 1), OBGC([1, 1, 1, 1], 1)], 4),
-    ...             A([1, OBGC([1, 1, 1], 1), 1, 1, BG([1, 1], 1)], 4),
+    ...             R([1, 1, 1, BG([1], 1), OBGC([1, 1, 1, 1], [1])], 4),
+    ...             A([1, OBGC([1, 1, 1], [1]), 1, 1, BG([1, 1], 1)], 4),
     ...             -3,
     ...         ],
     ...         voice_name="Example.Voice",
@@ -512,17 +512,17 @@ Examples: rhythm.
 
     Displaced on-beat grace containers:
 
-    >>> def OBGC(grace_note_numerators, nongrace_note_numerator):
+    >>> def OBGC(grace_note_numerators, nongrace_note_numerators):
     ...     return baca.OBGC(
     ...         grace_note_numerators,
-    ...         nongrace_note_numerator,
+    ...         nongrace_note_numerators,
     ...         grace_leaf_duration=abjad.Duration(1, 36),
     ...     )
 
     >>> def make_lilypond_file():
     ...     voice, time_signatures = sixteenths(
     ...         3 * [(1, 4)],
-    ...         [-2, OBGC([1, 1, 1, 1], 4), OBGC([1, 1, 1, 1], 4), -2],
+    ...         [-2, OBGC([1, 1, 1, 1], [4]), OBGC([1, 1, 1, 1], [4]), -2],
     ...         voice_name="Example.Voice",
     ...     )
     ...     score = make_score(voice, time_signatures)
@@ -830,10 +830,10 @@ Examples: rhythm.
 
     Feathers with before-grace music and on-beat grace music:
 
-    >>> def OBGC(grace_note_numerators, nongrace_note_numerator):
+    >>> def OBGC(grace_note_numerators, nongrace_note_numerators):
     ...     return baca.OBGC(
     ...         grace_note_numerators,
-    ...         nongrace_note_numerator,
+    ...         nongrace_note_numerators,
     ...         grace_leaf_duration=abjad.Duration(1, 64),
     ...         grace_polyphony_command=abjad.VoiceNumber(2),
     ...         nongrace_polyphony_command=abjad.VoiceNumber(1),
@@ -844,8 +844,8 @@ Examples: rhythm.
     ...         3 * [(1, 4)],
     ...         [
     ...             -1,
-    ...             R([1, 1, 1, BG([1, 1], 1), OBGC([1, 1, 1, 1], 1)], 4),
-    ...             A([1, OBGC([1, 1, 1], 1), 1, 1, BG([1, 1], 1)], 4),
+    ...             R([1, 1, 1, BG([1, 1], 1), OBGC([1, 1, 1, 1], [1])], 4),
+    ...             A([1, OBGC([1, 1, 1], [1]), 1, 1, BG([1, 1], 1)], 4),
     ...             -3,
     ...         ],
     ...         voice_name="Example.Voice",
@@ -1814,17 +1814,17 @@ Examples: rhythm.
 
     Basic on-beat grace container example:
 
-    >>> def OBGC(grace_note_numerators, nongrace_note_numerator):
+    >>> def OBGC(grace_note_numerators, nongrace_note_numerators):
     ...     return baca.OBGC(
     ...         grace_note_numerators,
-    ...         nongrace_note_numerator,
+    ...         nongrace_note_numerators,
     ...         grace_leaf_duration=abjad.Duration(1, 24),
     ...     )
 
     >>> def make_lilypond_file():
     ...     voice, time_signatures = sixteenths(
     ...         [(4, 4)],
-    ...         [4, OBGC(11 * [2], 8), 4],
+    ...         [4, OBGC(11 * [2], [8]), 4],
     ...         voice_name="Music.Voice",
     ...     )
     ...     score = make_score(voice, time_signatures)

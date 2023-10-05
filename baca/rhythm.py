@@ -37,11 +37,11 @@ def _evaluate_basic_item(item, denominator, voice_name, tag):
         if isinstance(item, BeamLeft):
             for leaf in abjad.select.leaves(components):
                 start_beam = abjad.StartBeam()
-                abjad.attach(start_beam, leaf)
+                abjad.attach(start_beam, leaf, tag=tag)
         elif isinstance(item, BeamRight):
             for leaf in abjad.select.leaves(components):
                 stop_beam = abjad.StopBeam()
-                abjad.attach(stop_beam, leaf)
+                abjad.attach(stop_beam, leaf, tag=tag)
         elif isinstance(item, InvisibleMusic):
             rmakers.invisible_music(components, tag=tag)
         elif isinstance(item, RepeatTie):
@@ -55,22 +55,22 @@ def _evaluate_basic_item(item, denominator, voice_name, tag):
         leaf_duration = abjad.Duration(-item, denominator)
         components = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
     elif isinstance(item, AfterGrace):
-        components = item(denominator)
+        components = item(denominator, tag)
     elif isinstance(item, abjad.Tuplet):
         components = [item]
     elif isinstance(item, Tuplet):
-        tuplet = item(denominator, voice_name)
+        tuplet = item(denominator, voice_name, tag)
         components = [tuplet]
     elif isinstance(item, Container):
-        container = item(denominator, voice_name)
+        container = item(denominator, voice_name, tag)
         components = [container]
     elif isinstance(item, Feather):
-        tuplet = item(denominator, voice_name)
+        tuplet = item(denominator, voice_name, tag)
         components = [tuplet]
     elif isinstance(item, BeforeGrace):
-        components = item(denominator)
+        components = item(denominator, tag)
     elif isinstance(item, OBGC):
-        anchor_voice = item(denominator, voice_name)
+        anchor_voice = item(denominator, voice_name, tag)
         components = [anchor_voice]
     elif isinstance(item, WrittenDuration):
         leaf = item(denominator, tag=tag)
@@ -109,27 +109,27 @@ def _evaluate_item(
         components.extend(dummy_notes)
         index_to_original_item[i] = item
     elif isinstance(item, AfterGrace):
-        components_ = item(denominator)
+        components_ = item(denominator, tag)
         duration = abjad.get.duration(components_)
         components.extend(components_)
     elif isinstance(item, Container):
-        container = item(denominator, voice_name)
+        container = item(denominator, voice_name, tag)
         duration = abjad.get.duration(container)
         dummy_notes = abjad.makers.make_leaves([100], [duration], tag=tag)
         components.extend(dummy_notes)
         index_to_original_item[i] = container
     elif isinstance(item, Feather):
-        tuplet = item(denominator, voice_name)
+        tuplet = item(denominator, voice_name, tag)
         duration = abjad.get.duration(tuplet)
         dummy_notes = abjad.makers.make_leaves([98], [duration], tag=tag)
         components.extend(dummy_notes)
         index_to_original_item[i] = tuplet
     elif isinstance(item, BeforeGrace):
-        components_ = item(denominator)
+        components_ = item(denominator, tag)
         duration = abjad.get.duration(components_)
         components.extend(components_)
     elif isinstance(item, OBGC):
-        polyphony_container = item(denominator, voice_name)
+        polyphony_container = item(denominator, voice_name, tag)
         assert len(polyphony_container) == 2
         assert isinstance(polyphony_container[0], abjad.OnBeatGraceContainer)
         assert polyphony_container[1].name == voice_name
@@ -153,11 +153,11 @@ def _evaluate_item(
         if isinstance(item, BeamLeft):
             for leaf in abjad.select.leaves(result):
                 start_beam = abjad.StartBeam()
-                abjad.attach(start_beam, leaf)
+                abjad.attach(start_beam, leaf, tag=tag)
         elif isinstance(item, BeamRight):
             for leaf in abjad.select.leaves(result):
                 stop_beam = abjad.StopBeam()
-                abjad.attach(stop_beam, leaf)
+                abjad.attach(stop_beam, leaf, tag=tag)
         elif isinstance(item, InvisibleMusic):
             rmakers.invisible_music(result, tag=tag)
         elif isinstance(item, RepeatTie):
@@ -165,7 +165,7 @@ def _evaluate_item(
         elif isinstance(item, Tie):
             rmakers.tie(result, tag=tag)
     elif isinstance(item, Tuplet):
-        tuplet = item(denominator, voice_name)
+        tuplet = item(denominator, voice_name, tag)
         duration = abjad.get.duration(tuplet)
         dummy_notes = abjad.makers.make_leaves([97], [duration], tag=tag)
         components.extend(dummy_notes)
@@ -271,8 +271,8 @@ class AfterGrace:
             self.grace_note_numerators
         )
 
-    def __call__(self, denominator):
-        tag = _helpers.function_name(_frame())
+    def __call__(self, denominator, tag: abjad.Tag):
+        tag = tag.append(_helpers.function_name(_frame()))
         voice_name = None
         main_components = _evaluate_basic_item(
             self.main_note_numerator,
@@ -283,7 +283,7 @@ class AfterGrace:
         grace_durations = [
             abjad.Duration(abs(_), denominator) for _ in self.grace_note_numerators
         ]
-        pitches = []
+        pitches: list[int | None] = []
         for grace_note_numerator in self.grace_note_numerators:
             if 0 < grace_note_numerator:
                 pitches.append(0)
@@ -321,7 +321,8 @@ class BeforeGrace:
             self.grace_note_numerators
         )
 
-    def __call__(self, denominator):
+    def __call__(self, denominator, tag: abjad.Tag):
+        tag = tag.append(_helpers.function_name(_frame()))
         beam, slash, slur = True, True, True
         if slash is True:
             assert beam is True, repr(beam)
@@ -330,12 +331,12 @@ class BeforeGrace:
             pitch = 0
         else:
             pitch = None
-        main_components = abjad.makers.make_leaves([pitch], main_duration)
+        main_components = abjad.makers.make_leaves([pitch], main_duration, tag=tag)
         first_leaf = abjad.get.leaf(main_components, 0)
         grace_durations = [
             abjad.Duration(abs(_), denominator) for _ in self.grace_note_numerators
         ]
-        pitches = []
+        pitches: list[int | None] = []
         for grace_note_numerator in self.grace_note_numerators:
             if 0 < grace_note_numerator:
                 pitches.append(0)
@@ -356,11 +357,11 @@ class BeforeGrace:
         elif 1 < len(grace_leaves):
             if beam is True:
                 temporary_voice = abjad.Voice(grace_leaves, name="TemporaryVoice")
-                abjad.beam(grace_leaves)
+                abjad.beam(grace_leaves, tag=tag)
                 temporary_voice[:] = []
             if slash is True:
                 literal = abjad.LilyPondLiteral(r"\slash", site="before")
-                abjad.attach(literal, grace_leaves[0])
+                abjad.attach(literal, grace_leaves[0], tag=tag)
             if slash is False and slur is False:
                 command = r"\grace"
             elif slash is False and slur is True:
@@ -371,8 +372,8 @@ class BeforeGrace:
                 command = r"\acciaccatura"
             else:
                 raise Exception
-        bgc = abjad.BeforeGraceContainer(grace_leaves, command=command)
-        abjad.attach(bgc, first_leaf)
+        bgc = abjad.BeforeGraceContainer(grace_leaves, command=command, tag=tag)
+        abjad.attach(bgc, first_leaf, tag=tag)
         return main_components
 
 
@@ -381,10 +382,10 @@ class Container:
     items: list
 
     def __call__(
-        self, denominator: int, voice_name: str | None = None
+        self, denominator: int, voice_name: str, tag: abjad.Tag
     ) -> abjad.Container:
         assert isinstance(denominator, int), repr(denominator)
-        tag = _helpers.function_name(_frame())
+        tag = tag.append(_helpers.function_name(_frame()))
         components = []
         for item in self.items:
             components_ = _evaluate_basic_item(item, denominator, voice_name, tag)
@@ -406,8 +407,9 @@ class Feather:
         assert isinstance(self.numerator, int), repr(self.numerator)
         assert isinstance(self.exponent, float), repr(self.exponent)
 
-    def __call__(self, denominator: int, voice_name: str | None = None):
+    def __call__(self, denominator: int, voice_name: str, tag: abjad.Tag):
         assert isinstance(denominator, int), repr(denominator)
+        tag = tag.append(_helpers.function_name(_frame()))
         feather_duration = abjad.Duration(self.numerator, denominator)
         tuplet = make_accelerando(
             self.items,
@@ -415,7 +417,7 @@ class Feather:
             feather_duration,
             exponent=self.exponent,
             voice_name=voice_name,
-            tag=_helpers.function_name(_frame()),
+            tag=tag,
         )
         return tuplet
 
@@ -561,7 +563,7 @@ class LMR:
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class OBGC:
     grace_note_numerators: list[int]
-    nongrace_note_numerator: int
+    nongrace_note_numerators: list
     do_not_attach_one_voice_command: bool = False
     grace_leaf_duration: abjad.Duration | None = None
     grace_polyphony_command: abjad.VoiceNumber = abjad.VoiceNumber(1)
@@ -571,8 +573,8 @@ class OBGC:
         assert all(isinstance(_, int) for _ in self.grace_note_numerators), repr(
             self.grace_note_numerators
         )
-        assert isinstance(self.nongrace_note_numerator, int), repr(
-            self.nongrace_note_numerator
+        assert isinstance(self.nongrace_note_numerators, list), repr(
+            self.nongrace_note_numerators
         )
         assert isinstance(self.do_not_attach_one_voice_command, bool), repr(
             self.do_not_attach_one_voice_command
@@ -582,21 +584,19 @@ class OBGC:
                 self.grace_leaf_duration
             )
 
-    def __call__(self, denominator: int, voice_name: str):
+    def __call__(self, denominator: int, voice_name: str, tag: abjad.Tag):
         assert isinstance(denominator, int), repr(denominator)
         assert isinstance(voice_name, str), repr(voice_name)
-        tag = _helpers.function_name(_frame())
-        if 0 < self.nongrace_note_numerator:
-            pitch = 0
-        else:
-            pitch = None
-        duration = abjad.Duration(abs(self.nongrace_note_numerator), denominator)
-        nongrace_leaves = abjad.makers.make_leaves([pitch], [duration])
+        tag = tag.append(_helpers.function_name(_frame()))
+        nongrace_leaves = []
+        for item in self.nongrace_note_numerators:
+            components = _evaluate_basic_item(item, denominator, voice_name, tag)
+            nongrace_leaves.extend(components)
         anchor_voice = abjad.Voice(nongrace_leaves, name=voice_name, tag=tag)
         grace_note_durations = [
             abjad.Duration(_, denominator) for _ in self.grace_note_numerators
         ]
-        grace_leaves = abjad.makers.make_leaves([0], grace_note_durations)
+        grace_leaves = abjad.makers.make_leaves([0], grace_note_durations, tag=tag)
         abjad.on_beat_grace_container(
             grace_leaves,
             nongrace_leaves,
@@ -646,8 +646,11 @@ class Tuplet:
         assert isinstance(self.items, list), repr(self.items)
         assert isinstance(self.extra_counts, int | str), repr(self.extra_counts)
 
-    def __call__(self, denominator: int, voice_name: str | None = None) -> abjad.Tuplet:
+    def __call__(
+        self, denominator: int, voice_name: str, tag: abjad.Tag
+    ) -> abjad.Tuplet:
         assert isinstance(denominator, int), repr(denominator)
+        # tag = tag.append(_helpers.function_name(_frame()))
         tag = _helpers.function_name(_frame())
         components = []
         for item in self.items:
@@ -796,11 +799,11 @@ def make_accelerando(
             rests = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
             leaves.extend(rests)
         elif isinstance(item, BeforeGrace):
-            leaves_ = item(denominator)
+            leaves_ = item(denominator, tag)
             leaves.extend(leaves_)
         elif isinstance(item, OBGC):
             assert isinstance(voice_name, str), repr(voice_name)
-            anchor_voice = item(denominator, voice_name)
+            anchor_voice = item(denominator, voice_name, tag)
             leaves.append(anchor_voice)
         else:
             raise Exception(item)
