@@ -317,8 +317,8 @@ Examples: hairpins.
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
-    >>> _ = baca.hairpin(baca.select.leaves(voice)[:7], '"mp" <| "f"')
-    >>> _ = baca.hairpin(baca.select.leaves(voice)[7:], '"mf" |> "p"')
+    >>> _ = baca.hairpin(abjad.select.leaves(voice)[:7], '"mp" <| "f"')
+    >>> _ = baca.hairpin(abjad.select.leaves(voice)[7:], '"mf" |> "p"')
     >>> _ = baca.dls_staff_padding(voice, 5)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
@@ -881,12 +881,12 @@ Examples: hairpins.
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "C4 D4")
     >>> _ = baca.hairpin(
-    ...         baca.select.leaves(voice)[:2],
+    ...         abjad.select.leaves(voice)[:2],
     ...         "p -- niente",
     ...         abjad.Tweak(r"- \tweak to-barline ##t"),
     ...     )
     >>> _ = baca.hairpin(
-    ...         baca.select.leaves(voice)[2:],
+    ...         abjad.select.leaves(voice)[2:],
     ...         "f -- niente",
     ...         abjad.Tweak(r"- \tweak to-barline ##t"),
     ...     )

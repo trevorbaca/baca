@@ -7,22 +7,6 @@ import typing
 import abjad
 
 
-def _handle_pair(components, pair):
-    if isinstance(pair, tuple):
-        if isinstance(pair[0], list):
-            assert len(pair) == 2, repr(pair)
-            indices, period = pair
-            components = abjad.select.get(components, indices, period)
-        else:
-            start, stop = pair
-            components = components[start:stop]
-    elif isinstance(pair, list):
-        components = abjad.select.get(components, pair)
-    elif isinstance(pair, abjad.Pattern):
-        components = abjad.select.get(components, pair)
-    return components
-
-
 def chead(
     argument, n: int, *, exclude: abjad.typings.Exclude | None = None
 ) -> abjad.Chord:
@@ -758,40 +742,6 @@ def hleaves(
 
     """
     return abjad.select.leaves(argument, exclude=exclude, grace=False)
-
-
-def leaves(
-    argument,
-    pair=None,
-    *,
-    exclude: abjad.typings.Exclude | None = None,
-    grace: bool | None = None,
-    head: bool | None = None,
-    lleak: bool | None = None,
-    pitched: bool | None = None,
-    prototype=None,
-    reverse: bool | None = None,
-    rleak: bool = False,
-    tail: bool | None = None,
-    trim: bool | abjad.enums.Horizontal | None = None,
-):
-    leaves = abjad.select.leaves(
-        argument,
-        prototype=prototype,
-        exclude=exclude,
-        grace=grace,
-        head=head,
-        pitched=pitched,
-        reverse=reverse,
-        tail=tail,
-        trim=trim,
-    )
-    leaves = _handle_pair(leaves, pair)
-    if lleak is True:
-        leaves = abjad.select.with_previous_leaf(leaves)
-    if rleak is True:
-        leaves = abjad.select.with_next_leaf(leaves)
-    return leaves
 
 
 def lleaf(

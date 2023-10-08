@@ -1264,7 +1264,7 @@ Examples: commands.
     >>> score["Music"].extend(music)
     >>> voice = score["Music"]
     >>> _ = baca.pitch(voice, "C5")
-    >>> _ = baca.invisible_music(baca.select.leaves(voice)[1:-1])
+    >>> _ = baca.invisible_music(abjad.select.leaves(voice)[1:-1])
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
