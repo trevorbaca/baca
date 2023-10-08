@@ -1371,3 +1371,50 @@ def style_ritardando(
     assert isinstance(container, abjad.Container), repr(container)
     assert isinstance(exponent, float), repr(exponent)
     return _style_accelerando(container, exponent)
+
+
+# ALIASES
+
+
+def AG(*arguments):
+    return AfterGrace(*arguments)
+
+
+def BG(*arguments):
+    return BeforeGrace(*arguments)
+
+
+def C(*arguments):
+    return Container(*arguments)
+
+
+def T(items, extra_counts):
+    return Tuplet(items, extra_counts)
+
+
+def TC(items, extra_counts):
+    return TremoloContainer(items, extra_counts)
+
+
+def bl(argument):
+    return BeamLeft(argument)
+
+
+def br(argument):
+    return BeamRight(argument)
+
+
+def h(argument):
+    return InvisibleMusic(argument)
+
+
+def rt(argument):
+    return RepeatTie(argument)
+
+
+def t(argument):
+    return Tie(argument)
+
+
+def w(real_n, written_n):
+    return WrittenDuration(real_n, written_n)

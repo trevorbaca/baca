@@ -35,42 +35,21 @@ Examples: rhythm.
     ...     denominator = 16
     ...     return baca.Feather(items, denominator, numerator, exponent=0.625)
 
-    >>> def AG(*arguments):
-    ...     return baca.AfterGrace(*arguments)
-
-    >>> def BG(*arguments):
-    ...     return baca.BeforeGrace(*arguments)
-
-    >>> def C(items):
-    ...     return baca.Container(items)
-
     >>> def R(items, numerator):
     ...     denominator = 16
     ...     return baca.Feather(items, denominator, numerator, exponent=1.625)
 
-    >>> def T(items, extra_counts):
-    ...     return baca.Tuplet(items, extra_counts)
-
-    >>> def TC(count, items):
-    ...     return baca.TremoloContainer(count, items)
-
-    >>> def bl(argument):
-    ...     return baca.BeamLeft(argument)
-
-    >>> def br(argument):
-    ...     return baca.BeamRight(argument)
-
-    >>> def h(argument):
-    ...     return baca.InvisibleMusic(argument)
-
-    >>> def rt(argument):
-    ...     return baca.RepeatTie(argument)
-
-    >>> def t(argument):
-    ...     return baca.Tie(argument)
-
-    >>> def w(real_n, written_n):
-    ...     return baca.WrittenDuration(real_n, written_n)
+    >>> AG = baca.rhythm.AG
+    >>> BG = baca.rhythm.BG
+    >>> C = baca.rhythm.C
+    >>> T = baca.rhythm.T
+    >>> TC = baca.rhythm.TC
+    >>> bl = baca.rhythm.bl
+    >>> br = baca.rhythm.br
+    >>> h = baca.rhythm.h
+    >>> rt = baca.rhythm.rt
+    >>> t = baca.rhythm.t
+    >>> w = baca.rhythm.w
 
 ..  container:: example
 
