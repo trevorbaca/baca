@@ -76,6 +76,7 @@ from .rhythm import (
     OBGC,
     RepeatTie,
     Tie,
+    TremoloContainer,
     Tuplet,
     WrittenDuration,
     attach_bgcs,

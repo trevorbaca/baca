@@ -58,6 +58,9 @@ def _evaluate_basic_item(item, denominator, voice_name, tag):
         components = item(denominator, tag)
     elif isinstance(item, abjad.Tuplet):
         components = [item]
+    elif isinstance(item, TremoloContainer):
+        container = item(denominator, voice_name, tag)
+        components = [container]
     elif isinstance(item, Tuplet):
         tuplet = item(denominator, voice_name, tag)
         components = [tuplet]
@@ -164,6 +167,12 @@ def _evaluate_item(
             rmakers.repeat_tie(result, tag=tag)
         elif isinstance(item, Tie):
             rmakers.tie(result, tag=tag)
+    elif isinstance(item, TremoloContainer):
+        container = item(denominator, voice_name, tag)
+        duration = abjad.get.duration(container)
+        dummy_notes = abjad.makers.make_leaves([101], [duration], tag=tag)
+        components.extend(dummy_notes)
+        index_to_original_item[i] = container
     elif isinstance(item, Tuplet):
         tuplet = item(denominator, voice_name, tag)
         duration = abjad.get.duration(tuplet)
@@ -638,6 +647,29 @@ class Tie:
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class TremoloContainer:
+    count: int
+    items: list[int]
+
+    def __post_init__(self):
+        assert isinstance(self.count, int), repr(self.count)
+        assert isinstance(self.items, list), repr(self.items)
+        assert len(self.items) == 2, repr(self.items)
+
+    def __call__(
+        self, denominator: int, voice_name: str, tag: abjad.Tag
+    ) -> abjad.TremoloContainer:
+        assert isinstance(denominator, int), repr(denominator)
+        tag = _helpers.function_name(_frame())
+        components = []
+        for item in self.items:
+            components_ = _evaluate_basic_item(item, denominator, voice_name, tag)
+            components.extend(components_)
+        container = abjad.TremoloContainer(self.count, components, tag=tag)
+        return container
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Tuplet:
     items: list
     extra_counts: int
@@ -650,7 +682,6 @@ class Tuplet:
         self, denominator: int, voice_name: str, tag: abjad.Tag
     ) -> abjad.Tuplet:
         assert isinstance(denominator, int), repr(denominator)
-        # tag = tag.append(_helpers.function_name(_frame()))
         tag = _helpers.function_name(_frame())
         components = []
         for item in self.items:
