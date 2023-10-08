@@ -4628,16 +4628,6 @@ def tleaves(
     return items
 
 
-def tuplet(argument, n, *, level: int = -1):
-    return abjad.select.tuplet(argument, n, level=level)
-
-
-def tuplets(argument, pair=None, *, level: int = -1):
-    result = abjad.select.tuplets(argument, level=level)
-    result = _handle_pair(result, pair)
-    return result
-
-
 def wleaf(
     argument, n: int = 0, *, exclude: abjad.typings.Exclude | None = None
 ) -> abjad.Leaf:
