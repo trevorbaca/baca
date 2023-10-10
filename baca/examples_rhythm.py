@@ -1928,6 +1928,57 @@ Examples: rhythm.
             }
         >>
 
+..  container:: example
+
+    Before-grace with explicit tie:
+
+    >>> def make_lilypond_file():
+    ...     voice, time_signatures = sixteenths(
+    ...         [(1, 4)],
+    ...         [-1, BG([1], t(1)), t(1), 1],
+    ...         do_not_rewrite_meter=True,
+    ...     )
+    ...     score = make_score(voice, time_signatures)
+    ...     result = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return result
+
+    >>> lilypond_file = make_lilypond_file()
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        \with
+        {
+            \override TimeSignature.style = #'numbered
+            \override TupletBracket.bracket-visibility = ##t
+            \override TupletBracket.padding = 2
+            autoBeaming = ##f
+            proportionalNotationDuration = #(ly:make-moment 1 36)
+            tupletFullLength = ##t
+        }
+        <<
+            \new RhythmicStaff
+            {
+                \new Voice
+                {
+                    \time 1/4
+                    r16
+                    \acciaccatura {
+                        c'16
+                    }
+                    c'16
+                    ~
+                    c'16
+                    ~
+                    c'16
+                }
+            }
+        >>
+
 """
 
 

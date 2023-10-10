@@ -321,12 +321,11 @@ class BeamRight:
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class BeforeGrace:
-    grace_note_numerators: list[int]
-    main_note_numerator: int
+    grace_note_numerators: list
+    main_note_numerator: typing.Any
 
     def __post_init__(self):
-        assert isinstance(self.main_note_numerator, int), repr(self.main_note_numerator)
-        assert all(isinstance(_, int) for _ in self.grace_note_numerators), repr(
+        assert isinstance(self.grace_note_numerators, list), repr(
             self.grace_note_numerators
         )
 
@@ -335,12 +334,9 @@ class BeforeGrace:
         beam, slash, slur = True, True, True
         if slash is True:
             assert beam is True, repr(beam)
-        main_duration = abjad.Duration(abs(self.main_note_numerator), denominator)
-        if 0 < self.main_note_numerator:
-            pitch = 0
-        else:
-            pitch = None
-        main_components = abjad.makers.make_leaves([pitch], main_duration, tag=tag)
+        main_components = _evaluate_basic_item(
+            self.main_note_numerator, denominator, "", tag
+        )
         first_leaf = abjad.get.leaf(main_components, 0)
         grace_durations = [
             abjad.Duration(abs(_), denominator) for _ in self.grace_note_numerators
