@@ -14,89 +14,6 @@ import abjad
 import baca
 
 
-def _also_untagged(section_directory):
-    if os.environ.get("GITHUB_WORKSPACE"):
-        return
-    print_main_task("Populating _untagged repository ...")
-    for name in ("music.ly", "music.ily", "layout.ly"):
-        tagged = section_directory / name
-        if not tagged.exists():
-            continue
-        with tagged.open() as pointer:
-            lines = pointer.readlines()
-        lines_ = []
-        for line in lines:
-            if line.strip().startswith("% "):
-                if line.strip().endswith(":"):
-                    continue
-            lines_.append(line)
-        lines = lines_
-        string = "".join(lines)
-        string = abjad.tag.remove_tags(string)
-        parts = []
-        for part in tagged.parts:
-            if part == os.path.sep:
-                pass
-            elif part == "Scores":
-                parts.append("_untagged")
-            else:
-                parts.append(part)
-        _untagged = "/" + os.path.sep.join(parts)
-        _untagged = pathlib.Path(_untagged)
-        if not _untagged.parent.is_dir():
-            _untagged.parent.mkdir(parents=True)
-        _untagged.write_text(string)
-    for name in ("music.ly", "music.ily", "layout.ly"):
-        tagged = section_directory / name
-        if not tagged.exists():
-            continue
-        safekeeping = section_directory / f"{name}.original"
-        shutil.copyfile(tagged, safekeeping)
-        color_persistent_indicators(tagged, undo=True)
-        show_annotations(tagged, undo=True)
-    print_main_task("Populating _bw repository ...")
-    for name in ("music.ly", "music.ily", "layout.ly"):
-        tagged = section_directory / name
-        if not tagged.exists():
-            continue
-        with tagged.open() as pointer:
-            lines = pointer.readlines()
-        lines_ = []
-        for line in lines:
-            if line.strip().startswith("%! "):
-                continue
-            if line.strip().startswith("%%% "):
-                continue
-            if line.strip().startswith("%@% "):
-                continue
-            if line.strip().startswith("% ") and line.strip().endswith(":"):
-                continue
-            if line.endswith(" %@%\n"):
-                line = line.replace(" %@%", "")
-            lines_.append(line)
-        lines = lines_
-        string = "".join(lines)
-        parts = []
-        for part in tagged.parts:
-            if part == os.path.sep:
-                pass
-            elif part == "Scores":
-                parts.append("_bw")
-            else:
-                parts.append(part)
-        _bw = "/" + os.path.sep.join(parts)
-        _bw = pathlib.Path(_bw)
-        if not _bw.parent.is_dir():
-            _bw.parent.mkdir(parents=True)
-        _bw.write_text(string)
-    for name in ("music.ly", "music.ily", "layout.ly"):
-        tagged = section_directory / name
-        if not tagged.exists():
-            continue
-        safekeeping = section_directory / f"{name}.original"
-        shutil.move(safekeeping, tagged)
-
-
 def _call_lilypond_on_music_ly_in_section(music_ly, music_pdf_mtime):
     music_pdf = music_ly.with_name("music.pdf")
     with abjad.Timer() as timer:
@@ -404,10 +321,14 @@ def _make_section_pdf(
     if _music_ly_tags.exists():
         _music_ly_tags.unlink()
     _externalize_music_ly(music_ly)
-    _handle_section_tags(music_ly.parent)
-    _populate_verbose_repository(music_ly.parent)
-    _remove_site_comments(music_ly.parent)
-    _remove_function_name_comments(music_ly.parent)
+    _handle_section_tags(section_directory)
+    contents_directory = baca.path.get_contents_directory(section_directory)
+    metadata = baca.path.get_metadata(contents_directory)
+    do_not_populate_remote_repos = metadata.get("do_not_populate_remote_repos")
+    if not do_not_populate_remote_repos:
+        _populate_verbose_repository(section_directory)
+    _remove_site_comments(section_directory)
+    _remove_function_name_comments(section_directory)
     if music_pdf.is_file():
         print_file_handling(f"Existing {baca.path.trim(music_pdf)} ...", log_only=True)
     timing.lilypond = _call_lilypond_on_music_ly_in_section(
@@ -418,8 +339,8 @@ def _make_section_pdf(
         print_all_timing(timing)
     if log_timing:
         _log_timing(section_directory, timing)
-    if also_untagged is True:
-        _also_untagged(section_directory)
+    if also_untagged is True and not do_not_populate_remote_repos:
+        _populate_untagged_repository(section_directory)
 
 
 def _populate_verbose_repository(section_directory):
@@ -446,6 +367,89 @@ def _populate_verbose_repository(section_directory):
         if not _untagged.parent.is_dir():
             _untagged.parent.mkdir(parents=True)
         _untagged.write_text(string)
+
+
+def _populate_untagged_repository(section_directory):
+    if os.environ.get("GITHUB_WORKSPACE"):
+        return
+    print_main_task("Populating _untagged repository ...")
+    for name in ("music.ly", "music.ily", "layout.ly"):
+        tagged = section_directory / name
+        if not tagged.exists():
+            continue
+        with tagged.open() as pointer:
+            lines = pointer.readlines()
+        lines_ = []
+        for line in lines:
+            if line.strip().startswith("% "):
+                if line.strip().endswith(":"):
+                    continue
+            lines_.append(line)
+        lines = lines_
+        string = "".join(lines)
+        string = abjad.tag.remove_tags(string)
+        parts = []
+        for part in tagged.parts:
+            if part == os.path.sep:
+                pass
+            elif part == "Scores":
+                parts.append("_untagged")
+            else:
+                parts.append(part)
+        _untagged = "/" + os.path.sep.join(parts)
+        _untagged = pathlib.Path(_untagged)
+        if not _untagged.parent.is_dir():
+            _untagged.parent.mkdir(parents=True)
+        _untagged.write_text(string)
+    for name in ("music.ly", "music.ily", "layout.ly"):
+        tagged = section_directory / name
+        if not tagged.exists():
+            continue
+        safekeeping = section_directory / f"{name}.original"
+        shutil.copyfile(tagged, safekeeping)
+        color_persistent_indicators(tagged, undo=True)
+        show_annotations(tagged, undo=True)
+    print_main_task("Populating _bw repository ...")
+    for name in ("music.ly", "music.ily", "layout.ly"):
+        tagged = section_directory / name
+        if not tagged.exists():
+            continue
+        with tagged.open() as pointer:
+            lines = pointer.readlines()
+        lines_ = []
+        for line in lines:
+            if line.strip().startswith("%! "):
+                continue
+            if line.strip().startswith("%%% "):
+                continue
+            if line.strip().startswith("%@% "):
+                continue
+            if line.strip().startswith("% ") and line.strip().endswith(":"):
+                continue
+            if line.endswith(" %@%\n"):
+                line = line.replace(" %@%", "")
+            lines_.append(line)
+        lines = lines_
+        string = "".join(lines)
+        parts = []
+        for part in tagged.parts:
+            if part == os.path.sep:
+                pass
+            elif part == "Scores":
+                parts.append("_bw")
+            else:
+                parts.append(part)
+        _bw = "/" + os.path.sep.join(parts)
+        _bw = pathlib.Path(_bw)
+        if not _bw.parent.is_dir():
+            _bw.parent.mkdir(parents=True)
+        _bw.write_text(string)
+    for name in ("music.ly", "music.ily", "layout.ly"):
+        tagged = section_directory / name
+        if not tagged.exists():
+            continue
+        safekeeping = section_directory / f"{name}.original"
+        shutil.move(safekeeping, tagged)
 
 
 def _remove_function_name_comments(section_directory):
@@ -1021,7 +1025,10 @@ def interpret_build_music(
             print_tags("Skipping tag handling ...")
         else:
             handle_part_tags(build_directory)
-    if "trevor" in _sections_directory.parts:
+    contents_directory = baca.path.get_contents_directory(build_directory)
+    metadata = baca.path.get_metadata(contents_directory)
+    do_not_populate_remote_repos = metadata.get("do_not_populate_remote_repos")
+    if "trevor" in _sections_directory.parts and not do_not_populate_remote_repos:
         print_main_task("Populating _builds repository ...")
         parts = list(_sections_directory.parts)
         assert parts[3] == "Scores"
