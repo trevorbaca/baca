@@ -1,5 +1,5 @@
 r"""
-Examples.
+Examples: ``baca.section.postprocess()``.
 
 Colors octaves:
 

@@ -2282,6 +2282,7 @@ def postprocess_score(
     do_not_check_wellformedness=False,
     do_not_color_not_yet_pitched=False,
     do_not_color_not_yet_registered=False,
+    do_not_color_repeat_pitch_classes=False,
     do_not_force_nonnatural_accidentals=False,
     do_not_require_short_instrument_names=False,
     empty_fermata_measures=False,
@@ -2376,7 +2377,8 @@ def postprocess_score(
             do_not_require_short_instrument_names,
             score,
         )
-        color_repeat_pitch_classes(score)
+        if not do_not_color_repeat_pitch_classes:
+            color_repeat_pitch_classes(score)
         if color_octaves:
             _color_octaves_alias(score)
         _attach_shadow_tie_indicators(score)
