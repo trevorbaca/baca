@@ -864,10 +864,10 @@ def _get_fermata_measure_numbers(first_measure_number, score):
             timespan = abjad.get.timespan(rest)
             fermata_start_offsets.append(timespan.start_offset)
             fermata_measure_numbers.append(measure_number)
-    return (
-        fermata_start_offsets,
-        fermata_measure_numbers,
-        final_measure_is_fermata,
+    return types.SimpleNamespace(
+        fermata_start_offsets=fermata_start_offsets,
+        fermata_measure_numbers=fermata_measure_numbers,
+        final_measure_is_fermata=final_measure_is_fermata,
     )
 
 
@@ -2343,14 +2343,10 @@ def postprocess_score(
         if not first_section:
             _clone_section_initial_short_instrument_name(score)
         cached_time_signatures = remove_redundant_time_signatures(score)
-        # TODO: use simple namespace:
-        result = _get_fermata_measure_numbers(first_measure_number, score)
-        fermata_start_offsets = result[0]
-        fermata_measure_numbers = result[1]
-        final_measure_is_fermata = result[2]
+        fmns = _get_fermata_measure_numbers(first_measure_number, score)
         if empty_fermata_measures and not fermata_measure_empty_overrides:
             fermata_measure_empty_overrides = [
-                _ - first_measure_number + 1 for _ in fermata_measure_numbers
+                _ - first_measure_number + 1 for _ in fmns.fermata_measure_numbers
             ]
         treat_untreated_persistent_wrappers(score, manifests=manifests)
         span_metronome_marks(
@@ -2400,7 +2396,7 @@ def postprocess_score(
         _style_fermata_measures(
             fermata_extra_offset_y,
             fermata_measure_empty_overrides,
-            fermata_start_offsets,
+            fmns.fermata_start_offsets,
             final_section,
             offset_to_measure_number,
             score,
@@ -2447,7 +2443,7 @@ def postprocess_score(
         previous_stop_clock_time = result
     clock_time = _label_clock_time(
         clock_time_override,
-        fermata_measure_numbers,
+        fmns.fermata_measure_numbers,
         first_measure_number,
         previous_stop_clock_time,
         score,
@@ -2466,8 +2462,8 @@ def postprocess_score(
     new_metadata, new_persist = _collect_metadata(
         clock_time,
         container_to_part_assignment,
-        fermata_measure_numbers,
-        final_measure_is_fermata,
+        fmns.fermata_measure_numbers,
+        fmns.final_measure_is_fermata,
         final_measure_number,
         first_measure_number,
         first_metronome_mark,
