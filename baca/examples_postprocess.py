@@ -1,7 +1,7 @@
 r"""
 Examples: ``baca.section.postprocess()``.
 
-Colors octaves:
+Colors octaves when ``color_octaves=True``:
 
 ..  container:: example
 
@@ -13,7 +13,9 @@ Colors octaves:
     ...     score["Music.2"].extend("a4 g f e d c")
     ...     abjad.attach(abjad.TimeSignature((6, 4)), score["Music.1"][0])
     ...     baca.clef(score["Music.2"][0], "bass")
-    ...     baca.section.color_octaves(score)
+    ...     baca.section.postprocess_score(
+    ...         score, None, None, color_octaves=True, doctest=True
+    ...     )
     ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     ...     return lilypond_file
 
@@ -66,14 +68,16 @@ Colors octaves:
 
 ..  container:: example
 
-    Colors out-of-range pitches:
+    By default, colors out-of-range pitches:
 
     >>> def make_lilypond_file():
     ...     score = baca.docs.make_empty_score(1, no_skips=True)
     ...     score["Music"].extend("c4 d' e' f'")
     ...     violin = abjad.Violin()
     ...     abjad.attach(violin, score["Music"][0])
-    ...     baca.section.color_out_of_range_pitches(score)
+    ...     baca.section.postprocess_score(
+    ...         score, None, None, do_not_check_wellformedness=True, doctest=True
+    ...     )
     ...     baca.docs.remove_deactivated_wrappers(score)
     ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     ...     return lilypond_file
@@ -103,13 +107,13 @@ Colors octaves:
 
 ..  container:: example
 
-    Colors repeat pitch-classes.
+    By default, colors repeat pitch-classes:
 
     >>> def make_lilypond_file():
     ...     score = baca.docs.make_empty_score(1, no_skips=True)
     ...     voice = score["Music"]
     ...     voice.extend("c'4 d' d' e' f' f'' g'2")
-    ...     baca.section.color_repeat_pitch_classes(score)
+    ...     baca.section.postprocess_score(score, None, None, doctest=True)
     ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     ...     return lilypond_file
 
@@ -144,7 +148,7 @@ Colors octaves:
 
 ..  container:: example
 
-    Transposes score:
+    By default, transposes score:
 
     >>> def make_lilypond_file():
     ...     clarinet = abjad.ClarinetInBFlat()
@@ -152,7 +156,7 @@ Colors octaves:
     ...     voice = score["Music"]
     ...     voice.extend("c'4 d' e' f'")
     ...     abjad.attach(clarinet, voice[0])
-    ...     baca.section.transpose_score(score)
+    ...     baca.section.postprocess_score(score, None, None, doctest=True)
     ...     lilypond_file = baca.lilypond.file(score)
     ...     lilypond_file.items.insert(0, r'\language "english"')
     ...     return lilypond_file
@@ -173,7 +177,7 @@ Colors octaves:
                 {
                     d'4
                     e'4
-                    fs'4
+                    fs'!4
                     g'4
                 }
             }

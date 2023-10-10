@@ -2279,6 +2279,7 @@ def postprocess_score(
     clock_time_override=None,
     color_octaves=False,
     comment_measure_numbers=False,
+    doctest=False,
     do_not_check_wellformedness=False,
     do_not_color_not_yet_pitched=False,
     do_not_color_not_yet_registered=False,
@@ -2300,8 +2301,9 @@ def postprocess_score(
     section_number=None,
 ):
     assert isinstance(score, abjad.Score), repr(score)
-    assert isinstance(environment, _build.Environment), repr(environment)
-    assert isinstance(manifests, dict), repr(manifests)
+    if not doctest:
+        assert isinstance(environment, _build.Environment), repr(environment)
+        assert isinstance(manifests, dict), repr(manifests)
     assert isinstance(all_music_in_part_containers, bool)
     if clock_time_override is not None:
         assert isinstance(clock_time_override, abjad.MetronomeMark)
@@ -2311,47 +2313,58 @@ def postprocess_score(
     assert isinstance(do_not_require_short_instrument_names, bool)
     assert isinstance(do_not_transpose_score, bool)
     assert isinstance(empty_fermata_measures, bool)
-    first_measure_number = environment.first_measure_number
-    metadata = environment.metadata
-    persist = environment.persist
-    previous_metadata = environment.previous_metadata
-    section_number = environment.section_number
+    if doctest:
+        first_measure_number = 1
+    else:
+        first_measure_number = environment.first_measure_number
+        assert isinstance(first_measure_number, int)
+        metadata = environment.metadata
+        persist = environment.persist
+        previous_metadata = environment.previous_metadata
+        section_number = environment.section_number
     assert all(0 < _ for _ in fermata_measure_empty_overrides)
     assert isinstance(final_section, bool)
-    assert isinstance(first_measure_number, int)
     assert isinstance(first_section, bool)
-    skips = _select.skips(score["Skips"])
-    if abjad.get.has_indicator(skips[-1], _enums.ANCHOR_SKIP):
-        skips = skips[:-1]
-    time_signatures = []
-    for skip in skips:
-        time_signature = abjad.get.effective(skip, abjad.TimeSignature)
-        time_signatures.append(time_signature)
-    measure_count = len(time_signatures)
+    if not doctest:
+        skips = _select.skips(score["Skips"])
+        if abjad.get.has_indicator(skips[-1], _enums.ANCHOR_SKIP):
+            skips = skips[:-1]
+        time_signatures = []
+        for skip in skips:
+            time_signature = abjad.get.effective(skip, abjad.TimeSignature)
+            time_signatures.append(time_signature)
+        measure_count = len(time_signatures)
     if parts_metric_modulation_multiplier is not None:
         assert isinstance(parts_metric_modulation_multiplier, tuple)
         assert len(parts_metric_modulation_multiplier) == 2
-    previous_persistent_indicators = previous_metadata.get("persistent_indicators", {})
+    if not doctest:
+        previous_persistent_indicators = previous_metadata.get(
+            "persistent_indicators", {}
+        )
     voice_name_to_parameter_to_state: dict[str, dict] = {}
     with abjad.ForbidUpdate(component=score, update_on_exit=True):
-        offset_to_measure_number = _populate_offset_to_measure_number(
-            first_measure_number,
-            score["Skips"],
-        )
+        if not doctest:
+            offset_to_measure_number = _populate_offset_to_measure_number(
+                first_measure_number,
+                score["Skips"],
+            )
         extend_beams(score)
         _attach_sounds_during(score)
         if not first_section:
             _clone_section_initial_short_instrument_name(score)
-        cached_time_signatures = remove_redundant_time_signatures(score)
+        if not doctest:
+            cached_time_signatures = remove_redundant_time_signatures(score["Skips"])
         fmns = _get_fermata_measure_numbers(first_measure_number, score)
         if empty_fermata_measures and not fermata_measure_empty_overrides:
             fermata_measure_empty_overrides = [
                 _ - first_measure_number + 1 for _ in fmns.fermata_measure_numbers
             ]
-        treat_untreated_persistent_wrappers(score, manifests=manifests)
-        span_metronome_marks(
-            score, parts_metric_modulation_multiplier=parts_metric_modulation_multiplier
-        )
+        if not doctest:
+            treat_untreated_persistent_wrappers(score, manifests=manifests)
+            span_metronome_marks(
+                score["Skips"],
+                parts_metric_modulation_multiplier=parts_metric_modulation_multiplier,
+            )
         _reanalyze_trending_dynamics(manifests, score)
         _reanalyze_reapplied_synthetic_wrappers(score)
         if not do_not_transpose_score:
@@ -2369,10 +2382,11 @@ def postprocess_score(
             _error_on_not_yet_pitched(score)
         _check_doubled_dynamics(score)
         color_out_of_range_pitches(score)
-        _check_persistent_indicators(
-            do_not_require_short_instrument_names,
-            score,
-        )
+        if not doctest:
+            _check_persistent_indicators(
+                do_not_require_short_instrument_names,
+                score,
+            )
         if not do_not_color_repeat_pitch_classes:
             color_repeat_pitch_classes(score)
         if color_octaves:
@@ -2382,40 +2396,41 @@ def postprocess_score(
             _force_nonnatural_accidentals(score)
         _label_duration_multipliers(score)
         _magnify_staves(magnify_staves, score)
-        _whitespace_leaves(score)
-        _comment_measure_numbers(
-            first_measure_number,
-            offset_to_measure_number,
-            score,
-        )
-        if not first_section:
-            _style_first_measure(
-                score["Skips"],
+        if not doctest:
+            _whitespace_leaves(score)
+            _comment_measure_numbers(
+                first_measure_number,
+                offset_to_measure_number,
+                score,
+            )
+            if not first_section:
+                _style_first_measure(
+                    score["Skips"],
+                    section_number,
+                )
+            _style_fermata_measures(
+                fermata_extra_offset_y,
+                fermata_measure_empty_overrides,
+                fmns.fermata_start_offsets,
+                final_section,
+                offset_to_measure_number,
+                score,
+            )
+            _shift_measure_initial_clefs(
+                first_measure_number,
+                offset_to_measure_number,
+                score,
+            )
+            container_to_part_assignment = _add_container_identifiers(
+                score,
                 section_number,
             )
-        _style_fermata_measures(
-            fermata_extra_offset_y,
-            fermata_measure_empty_overrides,
-            fmns.fermata_start_offsets,
-            final_section,
-            offset_to_measure_number,
-            score,
-        )
-        _shift_measure_initial_clefs(
-            first_measure_number,
-            offset_to_measure_number,
-            score,
-        )
-        container_to_part_assignment = _add_container_identifiers(
-            score,
-            section_number,
-        )
-        if all_music_in_part_containers:
-            _check_all_music_in_part_containers(score)
-        _check_duplicate_part_assignments(
-            container_to_part_assignment,
-            part_manifest,
-        )
+            if all_music_in_part_containers:
+                _check_all_music_in_part_containers(score)
+            _check_duplicate_part_assignments(
+                container_to_part_assignment,
+                part_manifest,
+            )
     _move_global_rests(
         global_rests_in_every_staff,
         global_rests_in_topmost_staff,
@@ -2434,52 +2449,53 @@ def postprocess_score(
         )
         if violators:
             raise Exception(f"{len(violators)} /    {total} out of range pitches")
-    previous_stop_clock_time: typing.Optional[str]
-    if environment.section_not_included_in_score:
-        previous_stop_clock_time = "0'00''"
-    else:
-        result = previous_metadata.get("stop_clock_time")
-        assert isinstance(result, (str, type(None))), repr(result)
-        previous_stop_clock_time = result
-    clock_time = _label_clock_time(
-        clock_time_override,
-        fmns.fermata_measure_numbers,
-        first_measure_number,
-        previous_stop_clock_time,
-        score,
-    )
-    final_measure_number = first_measure_number + measure_count - 1
-    persistent_indicators = _collect_persistent_indicators(
-        manifests,
-        previous_persistent_indicators,
-        score,
-    )
-    first_metronome_mark = True
-    skip = abjad.select.leaf(score["Skips"], 0)
-    metronome_mark = abjad.get.effective(skip, abjad.MetronomeMark)
-    if metronome_mark is None:
-        first_metronome_mark = False
-    new_metadata, new_persist = _collect_metadata(
-        clock_time,
-        container_to_part_assignment,
-        fmns.fermata_measure_numbers,
-        fmns.final_measure_is_fermata,
-        final_measure_number,
-        first_measure_number,
-        first_metronome_mark,
-        metadata,
-        persist,
-        persistent_indicators,
-        score,
-        environment.section_not_included_in_score,
-        cached_time_signatures,
-        voice_name_to_parameter_to_state,
-    )
-    new_metadata = proxy(new_metadata | new_persist)
-    style_anchor_skip(score)
-    _style_anchor_notes(score)
-    _check_anchors_are_final(score)
-    return new_metadata
+    if not doctest:
+        previous_stop_clock_time: typing.Optional[str]
+        if environment.section_not_included_in_score:
+            previous_stop_clock_time = "0'00''"
+        else:
+            result = previous_metadata.get("stop_clock_time")
+            assert isinstance(result, (str, type(None))), repr(result)
+            previous_stop_clock_time = result
+        clock_time = _label_clock_time(
+            clock_time_override,
+            fmns.fermata_measure_numbers,
+            first_measure_number,
+            previous_stop_clock_time,
+            score,
+        )
+        final_measure_number = first_measure_number + measure_count - 1
+        persistent_indicators = _collect_persistent_indicators(
+            manifests,
+            previous_persistent_indicators,
+            score,
+        )
+        first_metronome_mark = True
+        skip = abjad.select.leaf(score["Skips"], 0)
+        metronome_mark = abjad.get.effective(skip, abjad.MetronomeMark)
+        if metronome_mark is None:
+            first_metronome_mark = False
+        new_metadata, new_persist = _collect_metadata(
+            clock_time,
+            container_to_part_assignment,
+            fmns.fermata_measure_numbers,
+            fmns.final_measure_is_fermata,
+            final_measure_number,
+            first_measure_number,
+            first_metronome_mark,
+            metadata,
+            persist,
+            persistent_indicators,
+            score,
+            environment.section_not_included_in_score,
+            cached_time_signatures,
+            voice_name_to_parameter_to_state,
+        )
+        new_metadata = proxy(new_metadata | new_persist)
+        style_anchor_skip(score)
+        _style_anchor_notes(score)
+        _check_anchors_are_final(score)
+        return new_metadata
 
 
 def proxy(mapping):
@@ -2514,8 +2530,7 @@ def reapply_persistent_indicators(
                     already_reapplied_contexts.add(component.name)
 
 
-def remove_redundant_time_signatures(score):
-    global_skips = score["Skips"]
+def remove_redundant_time_signatures(global_skips):
     previous_time_signature = None
     cached_time_signatures = []
     skips = _select.skips(global_skips)
@@ -2566,8 +2581,7 @@ def sort_dictionary(dictionary):
         dictionary[key] = value
 
 
-def span_metronome_marks(score, *, parts_metric_modulation_multiplier=None):
-    global_skips = score["Skips"]
+def span_metronome_marks(global_skips, *, parts_metric_modulation_multiplier=None):
     indicator_count = 0
     skips = _select.skips(global_skips)
     final_leaf_metronome_mark = abjad.get.indicator(skips[-1], abjad.MetronomeMark)
