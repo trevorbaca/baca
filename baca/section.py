@@ -2277,10 +2277,11 @@ def postprocess_score(
     attach_instruments_by_hand=False,
     clock_time_extra_offset=None,
     clock_time_override=None,
-    color_not_yet_pitched=False,
     color_octaves=False,
     comment_measure_numbers=False,
     do_not_check_wellformedness=False,
+    do_not_color_not_yet_pitched=False,
+    do_not_color_not_yet_registered=False,
     do_not_force_nonnatural_accidentals=False,
     do_not_require_short_instrument_names=False,
     empty_fermata_measures=False,
@@ -2358,10 +2359,12 @@ def postprocess_score(
         _reanalyze_reapplied_synthetic_wrappers(score)
         if transpose_score:
             _transpose_score_alias(score)
-        _color_not_yet_registered(score)
+        if not do_not_color_not_yet_registered:
+            _color_not_yet_registered(score)
         _color_mock_pitch(score)
         _set_intermittent_to_staff_position_zero(score)
-        _color_not_yet_pitched(score)
+        if not do_not_color_not_yet_pitched:
+            _color_not_yet_pitched(score)
         _set_not_yet_pitched_to_staff_position_zero(score)
         _clean_up_repeat_tie_direction(score)
         _clean_up_laissez_vibrer_tie_direction(score)
