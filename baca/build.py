@@ -346,7 +346,7 @@ def _make_section_pdf(
 def _populate_verbose_repository(section_directory):
     if os.environ.get("GITHUB_WORKSPACE"):
         return
-    print_file_handling("Populating _verbose repository ...")
+    print_main_task("Populating _verbose repository ...")
     for name in ("music.ly", "music.ily", "layout.ly"):
         tagged = section_directory / name
         if not tagged.exists():

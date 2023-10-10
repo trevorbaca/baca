@@ -2285,6 +2285,7 @@ def postprocess_score(
     do_not_color_repeat_pitch_classes=False,
     do_not_force_nonnatural_accidentals=False,
     do_not_require_short_instrument_names=False,
+    do_not_transpose_score=False,
     empty_fermata_measures=False,
     error_on_not_yet_pitched=False,
     fermata_extra_offset_y=2.5,
@@ -2297,7 +2298,6 @@ def postprocess_score(
     part_manifest=None,
     parts_metric_modulation_multiplier=None,
     section_number=None,
-    transpose_score=False,
 ):
     assert isinstance(score, abjad.Score), repr(score)
     assert isinstance(environment, _build.Environment), repr(environment)
@@ -2309,6 +2309,7 @@ def postprocess_score(
     assert isinstance(do_not_check_wellformedness, bool)
     assert isinstance(do_not_force_nonnatural_accidentals, bool)
     assert isinstance(do_not_require_short_instrument_names, bool)
+    assert isinstance(do_not_transpose_score, bool)
     assert isinstance(empty_fermata_measures, bool)
     first_measure_number = environment.first_measure_number
     metadata = environment.metadata
@@ -2319,7 +2320,6 @@ def postprocess_score(
     assert isinstance(final_section, bool)
     assert isinstance(first_measure_number, int)
     assert isinstance(first_section, bool)
-    assert isinstance(transpose_score, bool)
     skips = _select.skips(score["Skips"])
     if abjad.get.has_indicator(skips[-1], _enums.ANCHOR_SKIP):
         skips = skips[:-1]
@@ -2358,8 +2358,8 @@ def postprocess_score(
         )
         _reanalyze_trending_dynamics(manifests, score)
         _reanalyze_reapplied_synthetic_wrappers(score)
-        if transpose_score:
-            _transpose_score_alias(score)
+        if not do_not_transpose_score:
+            transpose_score(score)
         if not do_not_color_not_yet_registered:
             _color_not_yet_registered(score)
         _color_mock_pitch(score)
@@ -2944,9 +2944,6 @@ def transpose_score(score):
         if abjad.get.has_indicator(pleaf, _enums.STAFF_POSITION):
             continue
         abjad.iterpitches.transpose_from_sounding_pitch(pleaf)
-
-
-_transpose_score_alias = transpose_score
 
 
 def treat_untreated_persistent_wrappers(score, *, manifests=None):
