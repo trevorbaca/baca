@@ -5,30 +5,37 @@ Examples: ``baca.make_bgcs()``.
 
     Sixteenth-note BGCs by default:
 
-    >>> collections = [
-    ...     [0],
-    ...     [2, 10],
-    ...     [18, 16, 15],
-    ...     [20, 19, 9, 0],
-    ...     [2, 10, 18, 16, 15],
-    ...     [20, 19, 9, 0, 2, 10],
-    ... ]
-    >>> containers = []
-    >>> for collection in collections:
-    ...     bgcs, collection = baca.make_bgcs(
-    ...         collection,
-    ...         baca.LMR(),
-    ...     )
-    ...     container = baca.from_collection(collection, [1], 8)
-    ...     baca.attach_bgcs(bgcs, container)
-    ...     containers.append(container)
+    >>> def make_containers():
+    ...     collections = [
+    ...         [0],
+    ...         [2, 10],
+    ...         [18, 16, 15],
+    ...         [20, 19, 9, 0],
+    ...         [2, 10, 18, 16, 15],
+    ...         [20, 19, 9, 0, 2, 10],
+    ...     ]
+    ...     containers = []
+    ...     for collection in collections:
+    ...         bgcs, collection = baca.make_bgcs(
+    ...             collection,
+    ...             baca.LMR(),
+    ...         )
+    ...         container = baca.from_collection(collection, [1], 8)
+    ...         baca.attach_bgcs(bgcs, container)
+    ...         containers.append(container)
+    ...     return containers
 
-    >>> lilypond_file = abjad.illustrators.components(containers)
-    >>> voice = lilypond_file["Voice"]
-    >>> containers = abjad.select.components(voice, abjad.BeforeGraceContainer)
-    >>> rmakers.beam(containers)
-    >>> rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
-    >>> rmakers.swap_trivial(lilypond_file["Staff"])
+    >>> def make_lilypond_file(containers):
+    ...     lilypond_file = abjad.illustrators.components(containers)
+    ...     voice = lilypond_file["Voice"]
+    ...     containers = abjad.select.components(voice, abjad.BeforeGraceContainer)
+    ...     rmakers.beam(containers)
+    ...     rmakers.beam(rmakers.nongrace_leaves_in_each_tuplet(containers))
+    ...     rmakers.swap_trivial(lilypond_file["Staff"])
+    ...     return lilypond_file
+
+    >>> containers = make_containers()
+    >>> lilypond_file = make_lilypond_file(containers)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
