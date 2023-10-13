@@ -33,7 +33,7 @@ from .indicators import *
 from .layout import *
 from .lilypond import file
 from .memento import *
-from .overrides import *
+from .override import *
 from .parts import Part, PartAssignment, assign_part
 from .pcollections import (
     ArpeggiationSpacingSpecifier,

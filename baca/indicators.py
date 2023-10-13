@@ -9,7 +9,7 @@ import abjad
 from . import classes as _classes
 from . import dynamics as _dynamics
 from . import helpers as _helpers
-from . import overrides as _overrides
+from . import override as _override
 from . import tags as _tags
 from . import treat as _treat
 from . import tweaks as _tweaks
@@ -232,7 +232,7 @@ def close_volta(
     if after is True:
         measure_number += 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
-    wrappers_ = _overrides.bar_line_x_extent([skip], (0, 1.5), after=after)
+    wrappers_ = _override.bar_line_x_extent([skip], (0, 1.5), after=after)
     _tags.wrappers(wrappers_, tag, measure_number_tag, _tags.ONLY_MOL)
     wrappers.extend(wrappers_)
     return wrappers
@@ -328,10 +328,10 @@ def double_volta(skip, first_measure_number) -> list[abjad.Wrapper]:
     measure_number = abjad.get.measure_number(skip)
     measure_number += first_measure_number - 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
-    wrappers_ = _overrides.bar_line_x_extent([skip], (0, 3))
+    wrappers_ = _override.bar_line_x_extent([skip], (0, 3))
     _tags.wrappers(wrappers_, tag, _tags.NOT_MOL, measure_number_tag)
     wrappers.extend(wrappers_)
-    wrappers_ = _overrides.bar_line_x_extent([skip], (0, 4))
+    wrappers_ = _override.bar_line_x_extent([skip], (0, 4))
     _tags.wrappers(wrappers_, tag, _tags.ONLY_MOL, measure_number_tag)
     wrappers.extend(wrappers_)
     return wrappers
@@ -813,10 +813,10 @@ def open_volta(skip, first_measure_number) -> list[abjad.Wrapper]:
     measure_number = abjad.get.measure_number(skip)
     measure_number += first_measure_number - 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
-    wrappers_ = _overrides.bar_line_x_extent([skip], (0, 2))
+    wrappers_ = _override.bar_line_x_extent([skip], (0, 2))
     _tags.wrappers(wrappers_, tag, _tags.NOT_MOL, measure_number_tag)
     wrappers.extend(wrappers_)
-    wrappers_ = _overrides.bar_line_x_extent([skip], (0, 3))
+    wrappers_ = _override.bar_line_x_extent([skip], (0, 3))
     _tags.wrappers(wrappers_, tag, _tags.ONLY_MOL, measure_number_tag)
     wrappers.extend(wrappers_)
     return wrappers

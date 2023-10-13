@@ -21,7 +21,7 @@ from . import helpers as _helpers
 from . import layout as _layout
 from . import lilypond as _lilypond
 from . import memento as _memento
-from . import overrides as _overrides
+from . import override as _override
 from . import parts as _parts
 from . import path as _path
 from . import pcollections as _pcollections
@@ -1418,7 +1418,7 @@ def _shift_measure_initial_clefs(
             if measure_number is None:
                 continue
             clef = wrapper.unbundle_indicator()
-            _overrides.clef_shift(leaf, clef, first_measure_number)
+            _override.clef_shift(leaf, clef, first_measure_number)
 
 
 def _style_anchor_notes(score):
