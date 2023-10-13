@@ -5,18 +5,22 @@ Examples: hairpins.
 
     Conventional dynamics:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
-    >>> _ = baca.hairpin(voice, "p < f", bookend=-1)
-    >>> _ = baca.override.dls_staff_padding(voice, 5)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_even_divisions(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
+    ...     baca.hairpin(voice, "p < f", bookend=-1)
+    ...     baca.override.dls_staff_padding(voice, 5)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -80,18 +84,22 @@ Examples: hairpins.
 
     Effort dynamic al niente:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
-    >>> _ = baca.hairpin(voice, '"ff" >o niente')
-    >>> _ = baca.override.dls_staff_padding(voice, 5)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_even_divisions(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
+    ...     baca.hairpin(voice, '"ff" >o niente')
+    ...     baca.override.dls_staff_padding(voice, 5)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -157,18 +165,22 @@ Examples: hairpins.
 
     Effort dynamic dal niente:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
-    >>> _ = baca.hairpin(voice, 'niente o< "ff"')
-    >>> _ = baca.override.dls_staff_padding(voice, 5)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_even_divisions(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
+    ...     baca.hairpin(voice, 'niente o< "ff"')
+    ...     baca.override.dls_staff_padding(voice, 5)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -233,18 +245,22 @@ Examples: hairpins.
 
     Effort dynamic constante:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
-    >>> _ = baca.hairpin(voice, '"p" -- f')
-    >>> _ = baca.override.dls_staff_padding(voice, 5)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_even_divisions(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
+    ...     baca.hairpin(voice, '"p" -- f')
+    ...     baca.override.dls_staff_padding(voice, 5)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -309,19 +325,23 @@ Examples: hairpins.
 
     Effort dynamics crescendo subito, decrescendo subito:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
-    >>> _ = baca.hairpin(abjad.select.leaves(voice)[:7], '"mp" <| "f"')
-    >>> _ = baca.hairpin(abjad.select.leaves(voice)[7:], '"mf" |> "p"')
-    >>> _ = baca.override.dls_staff_padding(voice, 5)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_even_divisions(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
+    ...     baca.hairpin(abjad.select.leaves(voice)[:7], '"mp" <| "f"')
+    ...     baca.hairpin(abjad.select.leaves(voice)[7:], '"mf" |> "p"')
+    ...     baca.override.dls_staff_padding(voice, 5)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -390,22 +410,26 @@ Examples: hairpins.
 
     Piece selector groups leaves by time signatures:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
-    >>> _ = baca.hairpin(
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_even_divisions(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
+    ...     baca.hairpin(
     ...         voice,
     ...         "p f",
     ...         pieces=baca.select.cmgroups(voice, [1]),
     ...     ),
-    >>> _ = baca.override.dls_staff_padding(voice, 5)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     baca.override.dls_staff_padding(voice, 5)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -469,22 +493,26 @@ Examples: hairpins.
 
     With hairpins:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
-    >>> _ = baca.hairpin(
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_even_divisions(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
+    ...     baca.hairpin(
     ...         voice,
     ...         "p < f >",
     ...         pieces=baca.select.cmgroups(voice, [1]),
     ...     )
-    >>> _ = baca.override.dls_staff_padding(voice, 5)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     baca.override.dls_staff_padding(voice, 5)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -552,23 +580,27 @@ Examples: hairpins.
 
     Bookends each piece:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
-    >>> _ = baca.hairpin(
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_even_divisions(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
+    ...     baca.hairpin(
     ...         voice,
     ...         "p f",
     ...         bookend=True,
     ...         pieces=baca.select.cmgroups(voice, [1]),
     ...     )
-    >>> _ = baca.override.dls_staff_padding(voice, 5)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     baca.override.dls_staff_padding(voice, 5)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -635,23 +667,27 @@ Examples: hairpins.
 
     With hairpins:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
-    >>> _ = baca.hairpin(
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_even_divisions(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
+    ...     baca.hairpin(
     ...         voice,
     ...         "p -- f >",
     ...         bookend=True,
     ...         pieces=baca.select.cmgroups(voice, [1]),
     ...     )
-    >>> _ = baca.override.dls_staff_padding(voice, 5)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     baca.override.dls_staff_padding(voice, 5)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -726,18 +762,22 @@ Examples: hairpins.
 
     REGRESSION. Works with lone dynamic:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
-    >>> _ = baca.hairpin(voice, "f", bookend=False)
-    >>> _ = baca.override.dls_staff_padding(voice, 5)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_even_divisions(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
+    ...     baca.hairpin(voice, "f", bookend=False)
+    ...     baca.override.dls_staff_padding(voice, 5)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -799,18 +839,22 @@ Examples: hairpins.
 
     REGRESSION. Works with lone hairpin:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
-    >>> _ = baca.hairpin(voice, "< !")
-    >>> _ = baca.override.dls_staff_padding(voice, 5)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_even_divisions(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
+    ...     baca.hairpin(voice, "< !")
+    ...     baca.override.dls_staff_padding(voice, 5)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -873,26 +917,30 @@ Examples: hairpins.
 
     REGRESSION. Works with to-barline tweak:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> score["Music"].extend("{ c2 r4. c2 r4. }")
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "C4 D4")
-    >>> _ = baca.hairpin(
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     score["Music"].extend("{ c2 r4. c2 r4. }")
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "C4 D4")
+    ...     baca.hairpin(
     ...         abjad.select.leaves(voice)[:2],
     ...         "p -- niente",
     ...         abjad.Tweak(r"- \tweak to-barline ##t"),
     ...     )
-    >>> _ = baca.hairpin(
+    ...     baca.hairpin(
     ...         abjad.select.leaves(voice)[2:],
     ...         "f -- niente",
     ...         abjad.Tweak(r"- \tweak to-barline ##t"),
     ...     )
-    >>> _ = baca.override.dls_staff_padding(voice, 4)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     baca.override.dls_staff_padding(voice, 4)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -947,23 +995,27 @@ Examples: hairpins.
 
     Works with interposed niente dynamics:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
-    >>> _ = baca.hairpin(
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_even_divisions(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
+    ...     baca.hairpin(
     ...         voice,
     ...         "mf niente o< p",
     ...         bookend=False,
     ...         pieces=baca.select.mgroups(voice, [1, 2, 1]),
     ...     )
-    >>> _ = baca.override.dls_staff_padding(voice, 4)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     baca.override.dls_staff_padding(voice, 4)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1029,18 +1081,22 @@ Examples: hairpins.
 
     Works with parenthesized dynamics:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
-    >>> _ = baca.hairpin(voice, "(mp) < mf")
-    >>> _ = baca.override.dls_staff_padding(voice, 4)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_even_divisions(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
+    ...     baca.hairpin(voice, "(mp) < mf")
+    ...     baca.override.dls_staff_padding(voice, 4)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
