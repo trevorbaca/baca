@@ -160,9 +160,23 @@ def _handle_section_tags(section_directory):
 
 
 def _log_timing(section_directory, timing):
+    if "trevor" not in str(section_directory):
+        return
     _timing = section_directory / ".timing"
-    print_file_handling(f"Writing {baca.path.trim(_timing)} ...", log_only=True)
-    with _timing.open(mode="a") as pointer:
+    parts = []
+    for part in _timing.parts:
+        if part == os.path.sep:
+            pass
+        elif part == "Scores":
+            parts.append("_timing")
+        else:
+            parts.append(part)
+    _timing_repo = "/" + os.path.sep.join(parts)
+    _timing_repo = pathlib.Path(_timing_repo)
+    if not _timing_repo.parent.is_dir():
+        _timing_repo.parent.mkdir(parents=True)
+    print_file_handling(f"Writing {baca.path.trim(_timing_repo)} ...", log_only=True)
+    with _timing_repo.open(mode="a") as pointer:
         pointer.write("\n")
         line = time.strftime("%Y-%m-%d %H:%M:%S") + "\n"
         pointer.write(line)
