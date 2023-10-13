@@ -170,7 +170,7 @@ Examples: spanners.
     >>> container = abjad.Container("r8 d'4 e' r8")
     >>> lilypond_file = abjad.illustrators.components([container])
     >>> _ = baca.sustain_pedal(container, context="Staff")
-    >>> _ = baca.sustain_pedal_staff_padding(container, 6)
+    >>> _ = baca.override.sustain_pedal_staff_padding(container, 6)
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::

@@ -14,7 +14,7 @@ Examples: hairpins.
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.hairpin(voice, "p < f", bookend=-1)
-    >>> _ = baca.dls_staff_padding(voice, 5)
+    >>> _ = baca.override.dls_staff_padding(voice, 5)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -89,7 +89,7 @@ Examples: hairpins.
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
     >>> _ = baca.hairpin(voice, '"ff" >o niente')
-    >>> _ = baca.dls_staff_padding(voice, 5)
+    >>> _ = baca.override.dls_staff_padding(voice, 5)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -166,7 +166,7 @@ Examples: hairpins.
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
     >>> _ = baca.hairpin(voice, 'niente o< "ff"')
-    >>> _ = baca.dls_staff_padding(voice, 5)
+    >>> _ = baca.override.dls_staff_padding(voice, 5)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -242,7 +242,7 @@ Examples: hairpins.
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
     >>> _ = baca.hairpin(voice, '"p" -- f')
-    >>> _ = baca.dls_staff_padding(voice, 5)
+    >>> _ = baca.override.dls_staff_padding(voice, 5)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -319,7 +319,7 @@ Examples: hairpins.
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
     >>> _ = baca.hairpin(abjad.select.leaves(voice)[:7], '"mp" <| "f"')
     >>> _ = baca.hairpin(abjad.select.leaves(voice)[7:], '"mf" |> "p"')
-    >>> _ = baca.dls_staff_padding(voice, 5)
+    >>> _ = baca.override.dls_staff_padding(voice, 5)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -403,7 +403,7 @@ Examples: hairpins.
     ...         "p f",
     ...         pieces=baca.select.cmgroups(voice, [1]),
     ...     ),
-    >>> _ = baca.dls_staff_padding(voice, 5)
+    >>> _ = baca.override.dls_staff_padding(voice, 5)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -482,7 +482,7 @@ Examples: hairpins.
     ...         "p < f >",
     ...         pieces=baca.select.cmgroups(voice, [1]),
     ...     )
-    >>> _ = baca.dls_staff_padding(voice, 5)
+    >>> _ = baca.override.dls_staff_padding(voice, 5)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -566,7 +566,7 @@ Examples: hairpins.
     ...         bookend=True,
     ...         pieces=baca.select.cmgroups(voice, [1]),
     ...     )
-    >>> _ = baca.dls_staff_padding(voice, 5)
+    >>> _ = baca.override.dls_staff_padding(voice, 5)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -649,7 +649,7 @@ Examples: hairpins.
     ...         bookend=True,
     ...         pieces=baca.select.cmgroups(voice, [1]),
     ...     )
-    >>> _ = baca.dls_staff_padding(voice, 5)
+    >>> _ = baca.override.dls_staff_padding(voice, 5)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -735,7 +735,7 @@ Examples: hairpins.
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
     >>> _ = baca.hairpin(voice, "f", bookend=False)
-    >>> _ = baca.dls_staff_padding(voice, 5)
+    >>> _ = baca.override.dls_staff_padding(voice, 5)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -808,7 +808,7 @@ Examples: hairpins.
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 C5 G4 F5")
     >>> _ = baca.hairpin(voice, "< !")
-    >>> _ = baca.dls_staff_padding(voice, 5)
+    >>> _ = baca.override.dls_staff_padding(voice, 5)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -890,7 +890,7 @@ Examples: hairpins.
     ...         "f -- niente",
     ...         abjad.Tweak(r"- \tweak to-barline ##t"),
     ...     )
-    >>> _ = baca.dls_staff_padding(voice, 4)
+    >>> _ = baca.override.dls_staff_padding(voice, 4)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -961,7 +961,7 @@ Examples: hairpins.
     ...         bookend=False,
     ...         pieces=baca.select.mgroups(voice, [1, 2, 1]),
     ...     )
-    >>> _ = baca.dls_staff_padding(voice, 4)
+    >>> _ = baca.override.dls_staff_padding(voice, 4)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1038,7 +1038,7 @@ Examples: hairpins.
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.hairpin(voice, "(mp) < mf")
-    >>> _ = baca.dls_staff_padding(voice, 4)
+    >>> _ = baca.override.dls_staff_padding(voice, 4)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP

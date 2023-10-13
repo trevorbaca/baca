@@ -666,7 +666,7 @@ Examples: ``baca.from_collection()``.
     ...     voice = lilypond_file["Voice"]
     ...     rmakers.beam(voice)
     ...     baca.nest(tuplets, "+4/16")
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 2)
+    ...     baca.override.tuplet_bracket_staff_padding(tuplets, 2)
     ...     rmakers.swap_trivial(voice)
     ...     baca.docs.attach_time_signature(voice)
     ...     return lilypond_file
@@ -902,14 +902,14 @@ Examples: ``baca.from_collection()``.
     ...     for imbrication in imbrications_1.values():
     ...         groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
     ...         rmakers.beam_groups(groups, beam_rests=True)
-    ...         baca.beam_positions(imbrication, 6)
+    ...         baca.override.beam_positions(imbrication, 6)
     ...         baca.staccato(baca.select.pheads(imbrication))
     ...     imbrications_3 = baca.imbricate(container, "Music.3", [16, 10, 18])
     ...     score["Music.3"].extend(imbrications_3["Music.3"])
     ...     for imbrication in imbrications_3.values():
     ...         groups = rmakers.nongrace_leaves_in_each_tuplet(imbrication)
     ...         rmakers.beam_groups(groups, beam_rests=True)
-    ...         baca.beam_positions(imbrication, 8)
+    ...         baca.override.beam_positions(imbrication, 8)
     ...         baca.accent(baca.select.pheads(imbrication))
     ...     duration = abjad.get.duration(container)
     ...     time_signature = abjad.TimeSignature(duration.pair)

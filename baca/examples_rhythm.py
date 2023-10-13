@@ -1193,7 +1193,7 @@ Examples: rhythm.
     ...     baca.hairpin(voice, "p < f >", pieces=baca.select.clparts(voice[:-1], [1])),
     ...     baca.dynamic(voice[-1], "p")
     ...     score = make_score(voice, time_signatures)
-    ...     baca.dls_staff_padding(voice, 4)
+    ...     baca.override.dls_staff_padding(voice, 4)
     ...     result = baca.lilypond.file(score, includes=["abjad.ily"])
     ...     return result
 
@@ -1643,7 +1643,7 @@ Examples: rhythm.
     ...         do_not_rewrite_meter=True
     ...     )
     ...     score = make_score(voice, time_signatures)
-    ...     baca.dls_staff_padding(voice, 4)
+    ...     baca.override.dls_staff_padding(voice, 4)
     ...     result = baca.lilypond.file(score, includes=["abjad.ily"])
     ...     return result
 
@@ -1697,7 +1697,7 @@ Examples: rhythm.
     ...         [T([2, w(2, 16), 2], -2)],
     ...     )
     ...     score = make_score(voice, time_signatures)
-    ...     baca.dls_staff_padding(voice, 4)
+    ...     baca.override.dls_staff_padding(voice, 4)
     ...     result = baca.lilypond.file(score, includes=["abjad.ily"])
     ...     return result
 
@@ -1749,7 +1749,7 @@ Examples: rhythm.
     ...         do_not_rewrite_meter=True,
     ...     )
     ...     score = make_score(voice, time_signatures)
-    ...     baca.dls_staff_padding(voice, 4)
+    ...     baca.override.dls_staff_padding(voice, 4)
     ...     result = baca.lilypond.file(score)
     ...     return result
 
@@ -1810,7 +1810,7 @@ Examples: rhythm.
     ...         voice_name="Music.Voice",
     ...     )
     ...     score = make_score(voice, time_signatures)
-    ...     baca.dls_staff_padding(voice, 4)
+    ...     baca.override.dls_staff_padding(voice, 4)
     ...     result = baca.lilypond.file(score, includes=["abjad.ily"])
     ...     return result
 
@@ -1888,7 +1888,7 @@ Examples: rhythm.
     ...         [4, TC(4, [1, 1]), 4, 4],
     ...     )
     ...     score = make_score(voice, time_signatures)
-    ...     baca.dls_staff_padding(voice, 4)
+    ...     baca.override.dls_staff_padding(voice, 4)
     ...     result = baca.lilypond.file(score)
     ...     return result
 

@@ -23,7 +23,7 @@ Examples: overrides.
     ...     score["Music"].extend(music)
     ...     voice = score["Music"]
     ...     baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
-    ...     baca.bar_line_transparent(
+    ...     baca.override.bar_line_transparent(
     ...             abjad.select.group_by_measure(voice)[1]
     ...     )
     ...     baca.docs.remove_deactivated_wrappers(score)
@@ -95,10 +95,10 @@ Examples: overrides.
     ...     tuplets[-1].append("r4")
     ...     score = baca.docs.make_single_staff_score(tuplets)
     ...     pleaves = baca.select.pleaves(tuplets)
-    ...     baca.stem_up(pleaves)
+    ...     baca.override.stem_up(pleaves)
     ...     rmakers.beam(tuplets)
-    ...     baca.beam_positions(tuplets, 6)
-    ...     baca.tuplet_bracket_staff_padding(tuplets, 4)
+    ...     baca.override.beam_positions(tuplets, 6)
+    ...     baca.override.tuplet_bracket_staff_padding(tuplets, 4)
     ...     return score
 
     >>> score = make_score()
@@ -158,7 +158,7 @@ Examples: overrides.
     ...     container = abjad.Container("c'4 d' e'")
     ...     score = baca.docs.make_single_staff_score([container])
     ...     baca.hairpin(container, "p < f")
-    ...     baca.dls_staff_padding(container, 4)
+    ...     baca.override.dls_staff_padding(container, 4)
     ...     return score
 
     >>> score = make_score()
@@ -199,8 +199,8 @@ Examples: overrides.
     ...     container = abjad.Container("c'4 d' e'")
     ...     score = baca.docs.make_single_staff_score([container])
     ...     baca.hairpin(container, "p < f")
-    ...     baca.dls_staff_padding(container, 4)
-    ...     baca.dls_up(container)
+    ...     baca.override.dls_staff_padding(container, 4)
+    ...     baca.override.dls_up(container)
     ...     return score
 
     >>> score = make_score()
@@ -243,8 +243,8 @@ Examples: overrides.
     ...     container = abjad.Container("c'4 d' e'")
     ...     score = baca.docs.make_single_staff_score([container])
     ...     baca.dynamic(container[0], "f")
-    ...     baca.dls_staff_padding(container, 4)
-    ...     baca.dynamic_text_extra_offset(container[0], (3, 0))
+    ...     baca.override.dls_staff_padding(container, 4)
+    ...     baca.override.dynamic_text_extra_offset(container[0], (3, 0))
     ...     return score
 
     >>> score = make_score()
@@ -288,7 +288,7 @@ Examples: overrides.
     ...     voice = score["Music"]
     ...     music = baca.make_mmrests(time_signatures(), head="Music")
     ...     score["Music"].extend(music)
-    ...     baca.mmrest_color(
+    ...     baca.override.mmrest_color(
     ...         baca.select.mmrests(voice)[1:],
     ...         "#(x11-color 'DarkOrchid)",
     ...     )
@@ -357,7 +357,7 @@ Examples: overrides.
     ...         baca.select.mmrest(voice, 2),
     ...         r"\baca-boxed-markup still",
     ...     )
-    ...     baca.mmrest_text_color(baca.select.mmrests(voice)[1:], "#red")
+    ...     baca.override.mmrest_text_color(baca.select.mmrests(voice)[1:], "#red")
     ...     baca.docs.remove_deactivated_wrappers(score)
     ...     return score
 
@@ -424,7 +424,7 @@ Examples: overrides.
     ...         baca.select.mmrest(voice, 2),
     ...         r"\baca-boxed-markup still",
     ...     )
-    ...     baca.mmrest_text_extra_offset(
+    ...     baca.override.mmrest_text_extra_offset(
     ...         baca.select.mmrests(voice)[1:], (0, 2)
     ...     )
     ...     baca.docs.remove_deactivated_wrappers(score)
@@ -493,7 +493,7 @@ Examples: overrides.
     ...         baca.select.mmrest(voice, 2),
     ...         r"\baca-boxed-markup still",
     ...     )
-    ...     baca.mmrest_text_padding(baca.select.mmrests(voice)[1:], 2)
+    ...     baca.override.mmrest_text_padding(baca.select.mmrests(voice)[1:], 2)
     ...     baca.docs.remove_deactivated_wrappers(score)
     ...     return score
 
@@ -560,7 +560,7 @@ Examples: overrides.
     ...         baca.select.mmrest(voice, 2),
     ...         r"\baca-boxed-markup still",
     ...     )
-    ...     baca.mmrest_text_parent_center(baca.select.mmrests(voice)[1:])
+    ...     baca.override.mmrest_text_parent_center(baca.select.mmrests(voice)[1:])
     ...     baca.docs.remove_deactivated_wrappers(score)
     ...     return score
 
@@ -627,7 +627,7 @@ Examples: overrides.
     ...         baca.select.mmrest(voice, 2),
     ...         r"\baca-boxed-markup still",
     ...     )
-    ...     baca.mmrest_text_staff_padding(baca.select.mmrests(voice)[1:], 2)
+    ...     baca.override.mmrest_text_staff_padding(baca.select.mmrests(voice)[1:], 2)
     ...     baca.docs.remove_deactivated_wrappers(score)
     ...     return score
 
@@ -686,7 +686,7 @@ Examples: overrides.
 
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
-    ...     baca.note_head_style_cross(container)
+    ...     baca.override.note_head_style_cross(container)
     ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
@@ -724,8 +724,8 @@ Examples: overrides.
     >>> def make_score():
     ...     voice = abjad.Voice(r"c'4 c' c'", name="Voice")
     ...     baca.repeat_tie(voice[1:])
-    ...     baca.repeat_tie_down(voice)
-    ...     baca.stem_up(voice)
+    ...     baca.override.repeat_tie_down(voice)
+    ...     baca.override.stem_up(voice)
     ...     score = baca.docs.make_single_staff_score([voice])
     ...     return score
 
@@ -768,8 +768,8 @@ Examples: overrides.
     >>> def make_score():
     ...     voice = abjad.Voice(r"c'4 c' c'", name="Voice")
     ...     baca.repeat_tie(voice[1:])
-    ...     baca.repeat_tie_down(voice)
-    ...     baca.stem_down(voice)
+    ...     baca.override.repeat_tie_down(voice)
+    ...     baca.override.stem_down(voice)
     ...     score = baca.docs.make_single_staff_score([voice])
     ...     return score
 
@@ -811,7 +811,7 @@ Examples: overrides.
 
     >>> def make_score():
     ...     container = abjad.Container("r8 d'4 e' r8")
-    ...     baca.rest_down(container)
+    ...     baca.override.rest_down(container)
     ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
@@ -849,7 +849,7 @@ Examples: overrides.
 
     >>> def make_score():
     ...     container = abjad.Container("r8 d'4 e' r8")
-    ...     baca.rest_staff_position(container, -6)
+    ...     baca.override.rest_staff_position(container, -6)
     ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
@@ -887,7 +887,7 @@ Examples: overrides.
 
     >>> def make_score():
     ...     container = abjad.Container("r8 d'4 e' r8")
-    ...     baca.rest_transparent(container)
+    ...     baca.override.rest_transparent(container)
     ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
@@ -925,7 +925,7 @@ Examples: overrides.
 
     >>> def make_score():
     ...     container = abjad.Container("r8 d'4 e' r8")
-    ...     baca.rest_up(container)
+    ...     baca.override.rest_up(container)
     ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
@@ -964,7 +964,7 @@ Examples: overrides.
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
     ...     baca.accent(container)
-    ...     baca.script_color(container, "#red")
+    ...     baca.override.script_color(container, "#red")
     ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
@@ -1005,7 +1005,7 @@ Examples: overrides.
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
     ...     baca.accent(container)
-    ...     baca.script_down(container)
+    ...     baca.override.script_down(container)
     ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
@@ -1046,7 +1046,7 @@ Examples: overrides.
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
     ...     baca.accent(container)
-    ...     baca.script_extra_offset(container, (-1.5, 0))
+    ...     baca.override.script_extra_offset(container, (-1.5, 0))
     ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
@@ -1087,7 +1087,7 @@ Examples: overrides.
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
     ...     baca.accent(container)
-    ...     baca.script_up(container)
+    ...     baca.override.script_up(container)
     ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
@@ -1129,7 +1129,7 @@ Examples: overrides.
     ...     container = abjad.Container("c'4 d' e'")
     ...     score = baca.docs.make_single_staff_score([container])
     ...     baca.slur(container)
-    ...     baca.slur_down([container])
+    ...     baca.override.slur_down([container])
     ...     return score
 
     >>> score = make_score()
@@ -1169,7 +1169,7 @@ Examples: overrides.
     ...     container = abjad.Container("c'4 d' e'")
     ...     score = baca.docs.make_single_staff_score([container])
     ...     baca.slur(container)
-    ...     baca.slur_up([container])
+    ...     baca.override.slur_up([container])
     ...     return score
 
     >>> score = make_score()
@@ -1207,7 +1207,7 @@ Examples: overrides.
 
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
-    ...     baca.stem_color(container, "#red")
+    ...     baca.override.stem_color(container, "#red")
     ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
@@ -1244,7 +1244,7 @@ Examples: overrides.
 
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
-    ...     baca.stem_down(container)
+    ...     baca.override.stem_down(container)
     ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
@@ -1281,7 +1281,7 @@ Examples: overrides.
 
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
-    ...     baca.stem_up(container)
+    ...     baca.override.stem_up(container)
     ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
@@ -1320,7 +1320,7 @@ Examples: overrides.
     ...     container = abjad.Container("c'4 d' e'")
     ...     score = baca.docs.make_single_staff_score([container])
     ...     baca.sustain_pedal(container, context="Staff")
-    ...     baca.sustain_pedal_staff_padding(container, 5)
+    ...     baca.override.sustain_pedal_staff_padding(container, 5)
     ...     return score
 
     >>> score = make_score()
@@ -1359,7 +1359,7 @@ Examples: overrides.
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
     ...     baca.markup(container[0], r'\markup "più mosso"')
-    ...     baca.text_script_color(container, "#red")
+    ...     baca.override.text_script_color(container, "#red")
     ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
@@ -1398,7 +1398,7 @@ Examples: overrides.
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
     ...     baca.markup(container[0], r'\markup "più mosso"')
-    ...     baca.text_script_down(container)
+    ...     baca.override.text_script_down(container)
     ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
@@ -1437,7 +1437,7 @@ Examples: overrides.
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
     ...     baca.markup(container[0], r'\markup "più mosso"')
-    ...     baca.text_script_padding(container, 4)
+    ...     baca.override.text_script_padding(container, 4)
     ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
@@ -1476,7 +1476,7 @@ Examples: overrides.
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
     ...     baca.markup(container[0], r'\markup "più mosso"')
-    ...     baca.text_script_staff_padding(container, n=4)
+    ...     baca.override.text_script_staff_padding(container, n=4)
     ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
@@ -1515,7 +1515,7 @@ Examples: overrides.
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
     ...     baca.markup(container[0], r'\markup "più mosso"')
-    ...     baca.text_script_up(container)
+    ...     baca.override.text_script_up(container)
     ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
@@ -1554,8 +1554,8 @@ Examples: overrides.
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
     ...     score = baca.docs.make_single_staff_score([container])
-    ...     baca.text_spanner_staff_padding(container, 6)
-    ...     baca.text_script_staff_padding(container, 6)
+    ...     baca.override.text_spanner_staff_padding(container, 6)
+    ...     baca.override.text_script_staff_padding(container, 6)
     ...     baca.text_spanner(container, "pont. => ord.")
     ...     return score
 
@@ -1601,8 +1601,8 @@ Examples: overrides.
 
     >>> def make_score():
     ...     container = abjad.Container("c''4 ~ c'' ~ c''")
-    ...     baca.stem_up(container)
-    ...     baca.tie_down(container)
+    ...     baca.override.stem_up(container)
+    ...     baca.override.tie_down(container)
     ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
@@ -1643,8 +1643,8 @@ Examples: overrides.
 
     >>> def make_score():
     ...     container = abjad.Container("c'4 ~ c' ~ c'")
-    ...     baca.stem_down(container)
-    ...     baca.tie_up(container)
+    ...     baca.override.stem_down(container)
+    ...     baca.override.tie_up(container)
     ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
@@ -1685,7 +1685,7 @@ Examples: overrides.
 
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
-    ...     baca.time_signature_extra_offset(container[0], (-6, 0))
+    ...     baca.override.time_signature_extra_offset(container[0], (-6, 0))
     ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
@@ -1721,7 +1721,7 @@ Examples: overrides.
 
     >>> def make_score():
     ...     container = abjad.Container("c'4 d' e'")
-    ...     baca.time_signature_transparent(container)
+    ...     baca.override.time_signature_transparent(container)
     ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
@@ -1758,8 +1758,8 @@ Examples: overrides.
 
     >>> def make_score():
     ...     container = abjad.Container(r"\times 2/3 { c'4 d' e' }")
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     baca.tuplet_bracket_down(container)
+    ...     baca.override.tuplet_bracket_staff_padding(container, 2)
+    ...     baca.override.tuplet_bracket_down(container)
     ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
@@ -1801,8 +1801,8 @@ Examples: overrides.
 
     >>> def make_score():
     ...     container = abjad.Container(r"\times 2/3 { c'4 d' e' }")
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     baca.tuplet_bracket_up(container)
+    ...     baca.override.tuplet_bracket_staff_padding(container, 2)
+    ...     baca.override.tuplet_bracket_up(container)
     ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 
@@ -1844,8 +1844,8 @@ Examples: overrides.
 
     >>> def make_score():
     ...     container = abjad.Container(r"\times 2/3 { c'4 d' e' }")
-    ...     baca.tuplet_bracket_staff_padding(container, 2)
-    ...     baca.tuplet_number_extra_offset(container, (-1, 0))
+    ...     baca.override.tuplet_bracket_staff_padding(container, 2)
+    ...     baca.override.tuplet_number_extra_offset(container, (-1, 0))
     ...     score = baca.docs.make_single_staff_score([container])
     ...     return score
 

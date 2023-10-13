@@ -1193,7 +1193,7 @@ def interpolate_pitches(
         ...     allow_repeats=True,
         ...     hide_middle_note_heads=True,
         ... )
-        >>> _ = baca.glissando_thickness(tuplets, 3)
+        >>> _ = baca.override.glissando_thickness(tuplets, 3)
         >>> rmakers.swap_trivial(lilypond_file["Staff"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 

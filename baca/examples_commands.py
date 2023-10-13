@@ -19,7 +19,7 @@ Examples: commands.
     ...     abjad.Tweak(r"- \tweak staff-padding 2.5"),
     ... )
     >>> _ = baca.pitches(voice, "E4 F4")
-    >>> _ = baca.script_staff_padding(voice, 5)
+    >>> _ = baca.override.script_staff_padding(voice, 5)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -185,8 +185,8 @@ Examples: commands.
     >>> _ = baca.bcps(voice[:7], bcps=[(1, 5), (2, 5)])
     >>> _ = baca.bcps(voice[7:], bcps=[(3, 5), (4, 5)])
     >>> _ = baca.pitches(voice, "E4 F4")
-    >>> _ = baca.script_staff_padding(voice, 5.5)
-    >>> _ = baca.text_spanner_staff_padding(voice, 2.5)
+    >>> _ = baca.override.script_staff_padding(voice, 5.5)
+    >>> _ = baca.override.text_spanner_staff_padding(voice, 2.5)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -399,7 +399,7 @@ Examples: commands.
     >>> _ = baca.dynamic(pleaf, "p")
     >>> _ = baca.dynamic(pleaf, "<")
     >>> _ = baca.dynamic(baca.select.pleaf(voice, -1), "!")
-    >>> _ = baca.dls_staff_padding(voice, 5)
+    >>> _ = baca.override.dls_staff_padding(voice, 5)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -478,7 +478,7 @@ Examples: commands.
     ...     "p",
     ...     abjad.Tweak(r"- \tweak extra-offset #'(-4 . 0)"),
     ... )
-    >>> _ = baca.dls_staff_padding(voice, 5)
+    >>> _ = baca.override.dls_staff_padding(voice, 5)
     >>> baca.docs.remove_deactivated_wrappers(score)
     >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
     >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1025,8 +1025,8 @@ Examples: commands.
     >>> voice = score["Music"]
     >>> _ = baca.pitch(voice, "C5")
     >>> notes = abjad.select.notes(voice)
-    >>> _ = baca.note_head_style_harmonic(notes[0])
-    >>> _ = baca.note_head_style_harmonic(notes[2])
+    >>> _ = baca.override.note_head_style_harmonic(notes[0])
+    >>> _ = baca.override.note_head_style_harmonic(notes[2])
     >>> baca.finger_pressure_transition(notes[:2])
     >>> baca.finger_pressure_transition(notes[2:])
     >>> baca.docs.remove_deactivated_wrappers(score)

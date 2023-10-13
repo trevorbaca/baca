@@ -2363,7 +2363,7 @@ Persistence.
         ...         score["Skips"][1 - 1],
         ...         metronome_marks["112"],
         ...     )
-        ...     baca.text_spanner_staff_padding(score["Skips"][:-1], 4)
+        ...     baca.override.text_spanner_staff_padding(score["Skips"][:-1], 4)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
@@ -2476,7 +2476,7 @@ Persistence.
         ...         markup, r"- \tweak staff-padding 10", r"- \tweak transparent ##t"
         ...     )
         ...     abjad.attach(bundle, abjad.select.leaf(voice, 0), direction=abjad.UP)
-        ...     baca.text_spanner_staff_padding(score["Skips"], 4)
+        ...     baca.override.text_spanner_staff_padding(score["Skips"], 4)
         ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(
         ...         score, manifests=manifests
@@ -2652,7 +2652,7 @@ Persistence.
         ...         score["Skips"][1 - 1],
         ...         metronome_marks["112"],
         ...     )
-        ...     baca.text_spanner_staff_padding(score["Skips"][:-1], 4)
+        ...     baca.override.text_spanner_staff_padding(score["Skips"][:-1], 4)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
@@ -3320,7 +3320,7 @@ Persistence.
         ...         score["Skips"][1 - 1],
         ...         baca.Accelerando(),
         ...     )
-        ...     baca.text_spanner_staff_padding(score["Skips"], 4)
+        ...     baca.override.text_spanner_staff_padding(score["Skips"], 4)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)
@@ -3410,7 +3410,7 @@ Persistence.
         ...         previous_persistent_indicators,
         ...         manifests=manifests,
         ...     )
-        ...     baca.text_spanner_staff_padding(score["Skips"], 4)
+        ...     baca.override.text_spanner_staff_padding(score["Skips"], 4)
         ...     baca.section.remove_redundant_time_signatures(score)
         ...     baca.section.treat_untreated_persistent_wrappers(score)
         ...     baca.section.span_metronome_marks(score)
@@ -3547,7 +3547,7 @@ Persistence.
         ...         score["Skips"][1 - 1],
         ...         baca.Accelerando(),
         ...     )
-        ...     baca.text_spanner_staff_padding(score["Skips"], 4)
+        ...     baca.override.text_spanner_staff_padding(score["Skips"], 4)
         ...     voice = score["Music"]
         ...     music = baca.make_notes(time_signatures())
         ...     voice.extend(music)

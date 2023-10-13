@@ -8,6 +8,7 @@ import abjad
 from . import array
 from . import build
 from . import math
+from . import override
 from . import path
 from . import score
 from . import section
@@ -33,7 +34,6 @@ from .indicators import *
 from .layout import *
 from .lilypond import file
 from .memento import *
-from .override import *
 from .parts import Part, PartAssignment, assign_part
 from .pcollections import (
     ArpeggiationSpacingSpecifier,

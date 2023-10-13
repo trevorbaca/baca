@@ -16,7 +16,7 @@ Examples: text spanners.
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.text_spanner(voice, "pont. => ord.")
-    >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
+    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
     >>> strut = abjad.Markup(r"\markup \transparent A")
     >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
     >>> leaf = abjad.select.leaf(voice, 0)
@@ -99,7 +99,7 @@ Examples: text spanners.
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.text_spanner(voice, "pont. =| ord.")
-    >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
+    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
     >>> strut = abjad.Markup(r"\markup \transparent A")
     >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
     >>> leaf = abjad.select.leaf(voice, 0)
@@ -182,7 +182,7 @@ Examples: text spanners.
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.text_spanner(voice, "pont. -> ord.")
-    >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
+    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
     >>> strut = abjad.Markup(r"\markup \transparent A")
     >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
     >>> leaf = abjad.select.leaf(voice, 0)
@@ -265,7 +265,7 @@ Examples: text spanners.
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.text_spanner(voice, "pont. -| ord.")
-    >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
+    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
     >>> strut = abjad.Markup(r"\markup \transparent A")
     >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
     >>> leaf = abjad.select.leaf(voice, 0)
@@ -348,7 +348,7 @@ Examples: text spanners.
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.text_spanner(voice, "pont. || ord.")
-    >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
+    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
     >>> strut = abjad.Markup(r"\markup \transparent A")
     >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
     >>> leaf = abjad.select.leaf(voice, 0)
@@ -431,7 +431,7 @@ Examples: text spanners.
     >>> voice = score["Music"]
     >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
     >>> _ = baca.text_spanner(voice, r"pont. || \markup \null")
-    >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
+    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
     >>> strut = abjad.Markup(r"\markup \transparent A")
     >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
     >>> leaf = abjad.select.leaf(voice, 0)
@@ -520,8 +520,8 @@ Examples: text spanners.
     ...         "A || B",
     ...         pieces=baca.select.cmgroups(voice, [1]),
     ...     )
-    >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
-    >>> _ = baca.dls_staff_padding(voice, 5)
+    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
+    >>> _ = baca.override.dls_staff_padding(voice, 5)
     >>> strut = abjad.Markup(r"\markup \transparent A")
     >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
     >>> leaf = abjad.select.leaf(voice, 0)
@@ -622,8 +622,8 @@ Examples: text spanners.
     ...         "A -> B ->",
     ...         pieces=baca.select.cmgroups(voice, [1]),
     ...     )
-    >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
-    >>> _ = baca.dls_staff_padding(voice, 5)
+    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
+    >>> _ = baca.override.dls_staff_padding(voice, 5)
     >>> strut = abjad.Markup(r"\markup \transparent A")
     >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
     >>> leaf = abjad.select.leaf(voice, 0)
@@ -725,8 +725,8 @@ Examples: text spanners.
     ...         bookend=True,
     ...         pieces=baca.select.cmgroups(voice, [1]),
     ...     )
-    >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
-    >>> _ = baca.dls_staff_padding(voice, 5)
+    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
+    >>> _ = baca.override.dls_staff_padding(voice, 5)
     >>> strut = abjad.Markup(r"\markup \transparent A")
     >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
     >>> leaf = abjad.select.leaf(voice, 0)
@@ -837,8 +837,8 @@ Examples: text spanners.
     ...         bookend=True,
     ...         pieces=baca.select.cmgroups(voice, [1]),
     ...     )
-    >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
-    >>> _ = baca.dls_staff_padding(voice, 5)
+    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
+    >>> _ = baca.override.dls_staff_padding(voice, 5)
     >>> strut = abjad.Markup(r"\markup \transparent A")
     >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
     >>> leaf = abjad.select.leaf(voice, 0)
@@ -955,7 +955,7 @@ Examples: text spanners.
     ...         final_piece_spanner=False,
     ...         pieces=baca.select.plts(voice),
     ...     )
-    >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
+    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
     >>> strut = abjad.Markup(r"\markup \transparent A")
     >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
     >>> leaf = abjad.select.leaf(voice, 0)
@@ -1039,8 +1039,8 @@ Examples: text spanners.
     ...         r"\baca-damp-markup =|",
     ...         bookend=False,
     ...     )
-    >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
-    >>> _ = baca.dls_staff_padding(voice, 5)
+    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
+    >>> _ = baca.override.dls_staff_padding(voice, 5)
     >>> strut = abjad.Markup(r"\markup \transparent A")
     >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
     >>> leaf = abjad.select.leaf(voice, 0)
@@ -1128,8 +1128,8 @@ Examples: text spanners.
     ...         "A -| B -|",
     ...         pieces=baca.select.cmgroups(voice, [1]),
     ...     )
-    >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
-    >>> _ = baca.dls_staff_padding(voice, 5)
+    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
+    >>> _ = baca.override.dls_staff_padding(voice, 5)
     >>> strut = abjad.Markup(r"\markup \transparent A")
     >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
     >>> leaf = abjad.select.leaf(voice, 0)
@@ -1232,7 +1232,7 @@ Examples: text spanners.
     ...         "P -> T -> P",
     ...         pieces=baca.select.plts(voice),
     ...     )
-    >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
+    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
     >>> strut = abjad.Markup(r"\markup \transparent A")
     >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
     >>> leaf = abjad.select.leaf(voice, 0)
@@ -1327,7 +1327,7 @@ Examples: text spanners.
     ...         final_piece_spanner=False,
     ...         pieces=baca.select.plts(voice),
     ...     )
-    >>> _ = baca.text_spanner_staff_padding(voice, 4.5)
+    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
     >>> strut = abjad.Markup(r"\markup \transparent A")
     >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
     >>> leaf = abjad.select.leaf(voice, 0)
