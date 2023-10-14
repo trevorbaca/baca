@@ -7,28 +7,31 @@ Examples: text spanners.
 
     Dashed line with arrow:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
-    >>> _ = baca.text_spanner(voice, "pont. => ord.")
-    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
-    >>> strut = abjad.Markup(r"\markup \transparent A")
-    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
-    >>> leaf = abjad.select.leaf(voice, 0)
-    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_even_divisions(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
+    ...     baca.text_spanner(voice, "pont. => ord.")
+    ...     baca.override.text_spanner_staff_padding(voice, 4.5)
+    ...     strut = abjad.Markup(r"\markup \transparent A")
+    ...     bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    ...     leaf = abjad.select.leaf(voice, 0)
+    ...     abjad.attach(bundle, leaf, direction=abjad.UP)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -90,28 +93,31 @@ Examples: text spanners.
 
     Dashed line with hook:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
-    >>> _ = baca.text_spanner(voice, "pont. =| ord.")
-    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
-    >>> strut = abjad.Markup(r"\markup \transparent A")
-    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
-    >>> leaf = abjad.select.leaf(voice, 0)
-    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_even_divisions(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
+    ...     baca.text_spanner(voice, "pont. =| ord.")
+    ...     baca.override.text_spanner_staff_padding(voice, 4.5)
+    ...     strut = abjad.Markup(r"\markup \transparent A")
+    ...     bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    ...     leaf = abjad.select.leaf(voice, 0)
+    ...     abjad.attach(bundle, leaf, direction=abjad.UP)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -173,28 +179,31 @@ Examples: text spanners.
 
     Solid line with arrow:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
-    >>> _ = baca.text_spanner(voice, "pont. -> ord.")
-    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
-    >>> strut = abjad.Markup(r"\markup \transparent A")
-    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
-    >>> leaf = abjad.select.leaf(voice, 0)
-    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_even_divisions(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
+    ...     baca.text_spanner(voice, "pont. -> ord.")
+    ...     baca.override.text_spanner_staff_padding(voice, 4.5)
+    ...     strut = abjad.Markup(r"\markup \transparent A")
+    ...     bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    ...     leaf = abjad.select.leaf(voice, 0)
+    ...     abjad.attach(bundle, leaf, direction=abjad.UP)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -256,28 +265,31 @@ Examples: text spanners.
 
     Solid line with hook:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
-    >>> _ = baca.text_spanner(voice, "pont. -| ord.")
-    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
-    >>> strut = abjad.Markup(r"\markup \transparent A")
-    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
-    >>> leaf = abjad.select.leaf(voice, 0)
-    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_even_divisions(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
+    ...     baca.text_spanner(voice, "pont. -| ord.")
+    ...     baca.override.text_spanner_staff_padding(voice, 4.5)
+    ...     strut = abjad.Markup(r"\markup \transparent A")
+    ...     bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    ...     leaf = abjad.select.leaf(voice, 0)
+    ...     abjad.attach(bundle, leaf, direction=abjad.UP)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -339,28 +351,31 @@ Examples: text spanners.
 
     Invisible lines:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
-    >>> _ = baca.text_spanner(voice, "pont. || ord.")
-    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
-    >>> strut = abjad.Markup(r"\markup \transparent A")
-    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
-    >>> leaf = abjad.select.leaf(voice, 0)
-    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_even_divisions(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
+    ...     baca.text_spanner(voice, "pont. || ord.")
+    ...     baca.override.text_spanner_staff_padding(voice, 4.5)
+    ...     strut = abjad.Markup(r"\markup \transparent A")
+    ...     bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    ...     leaf = abjad.select.leaf(voice, 0)
+    ...     abjad.attach(bundle, leaf, direction=abjad.UP)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -422,28 +437,31 @@ Examples: text spanners.
 
     Invisible line with null markup:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
-    >>> _ = baca.text_spanner(voice, r"pont. || \markup \null")
-    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
-    >>> strut = abjad.Markup(r"\markup \transparent A")
-    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
-    >>> leaf = abjad.select.leaf(voice, 0)
-    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_even_divisions(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
+    ...     baca.text_spanner(voice, r"pont. || \markup \null")
+    ...     baca.override.text_spanner_staff_padding(voice, 4.5)
+    ...     strut = abjad.Markup(r"\markup \transparent A")
+    ...     bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    ...     leaf = abjad.select.leaf(voice, 0)
+    ...     abjad.attach(bundle, leaf, direction=abjad.UP)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -507,33 +525,36 @@ Examples: text spanners.
 
     Piece selector groups leaves by time signatures:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
-    >>> _ = baca.text_spanner(
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_even_divisions(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
+    ...     baca.text_spanner(
     ...         voice,
     ...         "A || B",
     ...         pieces=baca.select.cmgroups(voice, [1]),
     ...     )
-    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
-    >>> _ = baca.override.dls_staff_padding(voice, 5)
-    >>> strut = abjad.Markup(r"\markup \transparent A")
-    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
-    >>> leaf = abjad.select.leaf(voice, 0)
-    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     baca.override.text_spanner_staff_padding(voice, 4.5)
+    ...     baca.override.dls_staff_padding(voice, 5)
+    ...     strut = abjad.Markup(r"\markup \transparent A")
+    ...     bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    ...     leaf = abjad.select.leaf(voice, 0)
+    ...     abjad.attach(bundle, leaf, direction=abjad.UP)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -609,33 +630,36 @@ Examples: text spanners.
 
     With spanners:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
-    >>> _ = baca.text_spanner(
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_even_divisions(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
+    ...     baca.text_spanner(
     ...         voice,
     ...         "A -> B ->",
     ...         pieces=baca.select.cmgroups(voice, [1]),
     ...     )
-    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
-    >>> _ = baca.override.dls_staff_padding(voice, 5)
-    >>> strut = abjad.Markup(r"\markup \transparent A")
-    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
-    >>> leaf = abjad.select.leaf(voice, 0)
-    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     baca.override.text_spanner_staff_padding(voice, 4.5)
+    ...     baca.override.dls_staff_padding(voice, 5)
+    ...     strut = abjad.Markup(r"\markup \transparent A")
+    ...     bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    ...     leaf = abjad.select.leaf(voice, 0)
+    ...     abjad.attach(bundle, leaf, direction=abjad.UP)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -711,34 +735,37 @@ Examples: text spanners.
 
     Bookends each piece:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
-    >>> _ = baca.text_spanner(
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_even_divisions(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
+    ...     baca.text_spanner(
     ...         voice,
     ...         "A || B",
     ...         bookend=True,
     ...         pieces=baca.select.cmgroups(voice, [1]),
     ...     )
-    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
-    >>> _ = baca.override.dls_staff_padding(voice, 5)
-    >>> strut = abjad.Markup(r"\markup \transparent A")
-    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
-    >>> leaf = abjad.select.leaf(voice, 0)
-    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     baca.override.text_spanner_staff_padding(voice, 4.5)
+    ...     baca.override.dls_staff_padding(voice, 5)
+    ...     strut = abjad.Markup(r"\markup \transparent A")
+    ...     bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    ...     leaf = abjad.select.leaf(voice, 0)
+    ...     abjad.attach(bundle, leaf, direction=abjad.UP)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -823,34 +850,37 @@ Examples: text spanners.
 
     With spanners:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
-    >>> _ = baca.text_spanner(
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_even_divisions(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
+    ...     baca.text_spanner(
     ...         voice,
     ...         "A -> B ->",
     ...         bookend=True,
     ...         pieces=baca.select.cmgroups(voice, [1]),
     ...     )
-    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
-    >>> _ = baca.override.dls_staff_padding(voice, 5)
-    >>> strut = abjad.Markup(r"\markup \transparent A")
-    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
-    >>> leaf = abjad.select.leaf(voice, 0)
-    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     baca.override.text_spanner_staff_padding(voice, 4.5)
+    ...     baca.override.dls_staff_padding(voice, 5)
+    ...     strut = abjad.Markup(r"\markup \transparent A")
+    ...     bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    ...     leaf = abjad.select.leaf(voice, 0)
+    ...     abjad.attach(bundle, leaf, direction=abjad.UP)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -938,14 +968,15 @@ Examples: text spanners.
     Indexes tweaks. No purple appears because tweakable indicators appear on pieces
     0, 1, 2 but piece 3 carries only a stop text span:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> score["Music"].extend("{ c2 c4. c2 c4. }")
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "C4 D4 E4 F4")
-    >>> _ = baca.text_spanner(
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     score["Music"].extend("{ c2 c4. c2 c4. }")
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "C4 D4 E4 F4")
+    ...     baca.text_spanner(
     ...         voice,
     ...         "P -> T ->",
     ...         (abjad.Tweak(r"- \tweak color #red"), 0),
@@ -955,19 +986,21 @@ Examples: text spanners.
     ...         final_piece_spanner=False,
     ...         pieces=baca.select.plts(voice),
     ...     )
-    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
-    >>> strut = abjad.Markup(r"\markup \transparent A")
-    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
-    >>> leaf = abjad.select.leaf(voice, 0)
-    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     baca.override.text_spanner_staff_padding(voice, 4.5)
+    ...     strut = abjad.Markup(r"\markup \transparent A")
+    ...     bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    ...     leaf = abjad.select.leaf(voice, 0)
+    ...     abjad.attach(bundle, leaf, direction=abjad.UP)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -1026,33 +1059,36 @@ Examples: text spanners.
 
     REGRESSION. Handles backslashed markup correctly:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
-    >>> _ = baca.text_spanner(
-    ...         baca.select.rmleaves(voice, 2),
-    ...         r"\baca-damp-markup =|",
-    ...         bookend=False,
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_even_divisions(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
+    ...     baca.text_spanner(
+    ...             baca.select.rmleaves(voice, 2),
+    ...             r"\baca-damp-markup =|",
+    ...             bookend=False,
     ...     )
-    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
-    >>> _ = baca.override.dls_staff_padding(voice, 5)
-    >>> strut = abjad.Markup(r"\markup \transparent A")
-    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
-    >>> leaf = abjad.select.leaf(voice, 0)
-    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     baca.override.text_spanner_staff_padding(voice, 4.5)
+    ...     baca.override.dls_staff_padding(voice, 5)
+    ...     strut = abjad.Markup(r"\markup \transparent A")
+    ...     bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    ...     leaf = abjad.select.leaf(voice, 0)
+    ...     abjad.attach(bundle, leaf, direction=abjad.UP)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -1115,33 +1151,36 @@ Examples: text spanners.
 
     REGRESSION. Kerns bookended hooks:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_even_divisions(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
-    >>> _ = baca.text_spanner(
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_even_divisions(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
+    ...     baca.text_spanner(
     ...         voice,
     ...         "A -| B -|",
     ...         pieces=baca.select.cmgroups(voice, [1]),
     ...     )
-    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
-    >>> _ = baca.override.dls_staff_padding(voice, 5)
-    >>> strut = abjad.Markup(r"\markup \transparent A")
-    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
-    >>> leaf = abjad.select.leaf(voice, 0)
-    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     baca.override.text_spanner_staff_padding(voice, 4.5)
+    ...     baca.override.dls_staff_padding(voice, 5)
+    ...     strut = abjad.Markup(r"\markup \transparent A")
+    ...     bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    ...     leaf = abjad.select.leaf(voice, 0)
+    ...     abjad.attach(bundle, leaf, direction=abjad.UP)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -1219,26 +1258,30 @@ Examples: text spanners.
 
     REGRESSION. Backsteals left text from length-1 final piece:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> music = baca.make_notes(time_signatures())
-    >>> score["Music"].extend(music)
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "C4 D4 E4 F4 G4 A4")
-    >>> _ = baca.text_spanner(
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     music = baca.make_notes(time_signatures())
+    ...     score["Music"].extend(music)
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "C4 D4 E4 F4 G4 A4")
+    ...     baca.text_spanner(
     ...         voice,
     ...         "P -> T -> P",
     ...         pieces=baca.select.plts(voice),
     ...     )
-    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
-    >>> strut = abjad.Markup(r"\markup \transparent A")
-    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
-    >>> leaf = abjad.select.leaf(voice, 0)
-    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     baca.override.text_spanner_staff_padding(voice, 4.5)
+    ...     strut = abjad.Markup(r"\markup \transparent A")
+    ...     bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    ...     leaf = abjad.select.leaf(voice, 0)
+    ...     abjad.attach(bundle, leaf, direction=abjad.UP)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
@@ -1314,32 +1357,35 @@ Examples: text spanners.
 
     REGRESSION. Backsteals left text from spannerless final piece:
 
-    >>> score = baca.docs.make_empty_score(1)
-    >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-    >>> baca.section.set_up_score(score, time_signatures(), docs=True)
-    >>> baca.SpacingSpecifier((1, 12))(score)
-    >>> score["Music"].extend("{ c2 c4. c2 c4 ~ c8 }")
-    >>> voice = score["Music"]
-    >>> _ = baca.pitches(voice, "C4 D4 E4 F4")
-    >>> _ = baca.text_spanner(
+    >>> def make_lilypond_file():
+    ...     score = baca.docs.make_empty_score(1)
+    ...     time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
+    ...     baca.section.set_up_score(score, time_signatures(), docs=True)
+    ...     baca.SpacingSpecifier((1, 12))(score)
+    ...     score["Music"].extend("{ c2 c4. c2 c4 ~ c8 }")
+    ...     voice = score["Music"]
+    ...     baca.pitches(voice, "C4 D4 E4 F4")
+    ...     baca.text_spanner(
     ...         voice,
     ...         "P -> T ->",
     ...         final_piece_spanner=False,
     ...         pieces=baca.select.plts(voice),
     ...     )
-    >>> _ = baca.override.text_spanner_staff_padding(voice, 4.5)
-    >>> strut = abjad.Markup(r"\markup \transparent A")
-    >>> bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
-    >>> leaf = abjad.select.leaf(voice, 0)
-    >>> abjad.attach(bundle, leaf, direction=abjad.UP)
-    >>> baca.docs.remove_deactivated_wrappers(score)
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     baca.override.text_spanner_staff_padding(voice, 4.5)
+    ...     strut = abjad.Markup(r"\markup \transparent A")
+    ...     bundle = abjad.bundle(strut, r"- \tweak staff-padding 8")
+    ...     leaf = abjad.select.leaf(voice, 0)
+    ...     abjad.attach(bundle, leaf, direction=abjad.UP)
+    ...     baca.docs.remove_deactivated_wrappers(score)
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
+
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
