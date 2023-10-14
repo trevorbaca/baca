@@ -14,7 +14,7 @@ Examples: overrides.
     ...     music = abjad.mutate.eject_contents(voice)
     ...     return music
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     score = baca.docs.make_empty_score(1)
     ...     pairs = [(4, 8), (3, 8), (4, 8), (3, 8)]
     ...     time_signatures = baca.section.wrap(pairs)
@@ -23,20 +23,18 @@ Examples: overrides.
     ...     score["Music"].extend(music)
     ...     voice = score["Music"]
     ...     baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
-    ...     baca.override.bar_line_transparent(
-    ...             abjad.select.group_by_measure(voice)[1]
-    ...     )
+    ...     group = abjad.select.group_by_measure(voice)[1]
+    ...     baca.override.bar_line_transparent(group)
     ...     baca.docs.remove_deactivated_wrappers(score)
-    ...     return score
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -87,7 +85,7 @@ Examples: overrides.
 
     Overrides beam positions:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
     ...     tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
     ...     tuplets = [baca.prolate(_, "5:4") for _ in tuplets]
@@ -99,15 +97,15 @@ Examples: overrides.
     ...     rmakers.beam(tuplets)
     ...     baca.override.beam_positions(tuplets, 6)
     ...     baca.override.tuplet_bracket_staff_padding(tuplets, 4)
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -154,21 +152,20 @@ Examples: overrides.
 
     Overrides dynamic line spanner staff padding:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("c'4 d' e'")
     ...     score = baca.docs.make_single_staff_score([container])
     ...     baca.hairpin(container, "p < f")
     ...     baca.override.dls_staff_padding(container, 4)
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -195,22 +192,21 @@ Examples: overrides.
 
     Up-overrides dynamic line spanner direction:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("c'4 d' e'")
     ...     score = baca.docs.make_single_staff_score([container])
     ...     baca.hairpin(container, "p < f")
     ...     baca.override.dls_staff_padding(container, 4)
     ...     baca.override.dls_up(container)
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -239,22 +235,21 @@ Examples: overrides.
 
     Overrides dynamic text extra offset:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("c'4 d' e'")
     ...     score = baca.docs.make_single_staff_score([container])
     ...     baca.dynamic(container[0], "f")
     ...     baca.override.dls_staff_padding(container, 4)
     ...     baca.override.dynamic_text_extra_offset(container[0], (3, 0))
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -280,7 +275,7 @@ Examples: overrides.
 
     REGRESSION. Coerces X11 color names:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     score = baca.docs.make_empty_score(1)
     ...     pairs = [(4, 8), (3, 8), (4, 8), (3, 8)]
     ...     time_signatures = baca.section.wrap(pairs)
@@ -293,16 +288,15 @@ Examples: overrides.
     ...         "#(x11-color 'DarkOrchid)",
     ...     )
     ...     baca.docs.remove_deactivated_wrappers(score)
-    ...     return score
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -345,7 +339,7 @@ Examples: overrides.
 
 ..  container:: example
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     score = baca.docs.make_empty_score(1)
     ...     pairs = [(4, 8), (3, 8), (4, 8), (3, 8)]
     ...     time_signatures = baca.section.wrap(pairs)
@@ -359,16 +353,15 @@ Examples: overrides.
     ...     )
     ...     baca.override.mmrest_text_color(baca.select.mmrests(voice)[1:], "#red")
     ...     baca.docs.remove_deactivated_wrappers(score)
-    ...     return score
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -412,7 +405,7 @@ Examples: overrides.
 
 ..  container:: example
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     score = baca.docs.make_empty_score(1)
     ...     pairs = [(4, 8), (3, 8), (4, 8), (3, 8)]
     ...     time_signatures = baca.section.wrap(pairs)
@@ -428,16 +421,15 @@ Examples: overrides.
     ...         baca.select.mmrests(voice)[1:], (0, 2)
     ...     )
     ...     baca.docs.remove_deactivated_wrappers(score)
-    ...     return score
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -481,7 +473,7 @@ Examples: overrides.
 
 ..  container:: example
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     score = baca.docs.make_empty_score(1)
     ...     pairs = [(4, 8), (3, 8), (4, 8), (3, 8)]
     ...     time_signatures = baca.section.wrap(pairs)
@@ -495,16 +487,15 @@ Examples: overrides.
     ...     )
     ...     baca.override.mmrest_text_padding(baca.select.mmrests(voice)[1:], 2)
     ...     baca.docs.remove_deactivated_wrappers(score)
-    ...     return score
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -548,7 +539,7 @@ Examples: overrides.
 
 ..  container:: example
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     score = baca.docs.make_empty_score(1)
     ...     pairs = [(4, 8), (3, 8), (4, 8), (3, 8)]
     ...     time_signatures = baca.section.wrap(pairs)
@@ -562,16 +553,15 @@ Examples: overrides.
     ...     )
     ...     baca.override.mmrest_text_parent_center(baca.select.mmrests(voice)[1:])
     ...     baca.docs.remove_deactivated_wrappers(score)
-    ...     return score
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -615,7 +605,7 @@ Examples: overrides.
 
 ..  container:: example
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     score = baca.docs.make_empty_score(1)
     ...     pairs = [(4, 8), (3, 8), (4, 8), (3, 8)]
     ...     time_signatures = baca.section.wrap(pairs)
@@ -629,16 +619,15 @@ Examples: overrides.
     ...     )
     ...     baca.override.mmrest_text_staff_padding(baca.select.mmrests(voice)[1:], 2)
     ...     baca.docs.remove_deactivated_wrappers(score)
-    ...     return score
+    ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -684,20 +673,19 @@ Examples: overrides.
 
     Overrides note-head style:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("c'4 d' e'")
     ...     baca.override.note_head_style_cross(container)
     ...     score = baca.docs.make_single_staff_score([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -721,22 +709,21 @@ Examples: overrides.
 
     Down-overrides repeat tie direction:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     voice = abjad.Voice(r"c'4 c' c'", name="Voice")
     ...     baca.repeat_tie(voice[1:])
     ...     baca.override.repeat_tie_down(voice)
     ...     baca.override.stem_up(voice)
     ...     score = baca.docs.make_single_staff_score([voice])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -765,22 +752,21 @@ Examples: overrides.
 
     Up-overrides repeat tie direction:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     voice = abjad.Voice(r"c'4 c' c'", name="Voice")
     ...     baca.repeat_tie(voice[1:])
     ...     baca.override.repeat_tie_down(voice)
     ...     baca.override.stem_down(voice)
     ...     score = baca.docs.make_single_staff_score([voice])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -809,20 +795,19 @@ Examples: overrides.
 
     Down-overrides direction of rests:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("r8 d'4 e' r8")
     ...     baca.override.rest_down(container)
     ...     score = baca.docs.make_single_staff_score([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -847,20 +832,19 @@ Examples: overrides.
 
     Overrides rest position:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("r8 d'4 e' r8")
     ...     baca.override.rest_staff_position(container, -6)
     ...     score = baca.docs.make_single_staff_score([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -885,20 +869,19 @@ Examples: overrides.
 
     Makes rests transparent:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("r8 d'4 e' r8")
     ...     baca.override.rest_transparent(container)
     ...     score = baca.docs.make_single_staff_score([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -923,20 +906,19 @@ Examples: overrides.
 
     Up-overrides rest direction:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("r8 d'4 e' r8")
     ...     baca.override.rest_up(container)
     ...     score = baca.docs.make_single_staff_score([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -961,21 +943,20 @@ Examples: overrides.
 
     Overrides script color:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("c'4 d' e'")
     ...     baca.accent(container)
     ...     baca.override.script_color(container, "#red")
     ...     score = baca.docs.make_single_staff_score([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -1002,21 +983,20 @@ Examples: overrides.
 
     Down-overrides script direction:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("c'4 d' e'")
     ...     baca.accent(container)
     ...     baca.override.script_down(container)
     ...     score = baca.docs.make_single_staff_score([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -1043,21 +1023,20 @@ Examples: overrides.
 
     Overrides script extra offset:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("c'4 d' e'")
     ...     baca.accent(container)
     ...     baca.override.script_extra_offset(container, (-1.5, 0))
     ...     score = baca.docs.make_single_staff_score([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -1084,21 +1063,20 @@ Examples: overrides.
 
     Up-overrides script direction:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("c'4 d' e'")
     ...     baca.accent(container)
     ...     baca.override.script_up(container)
     ...     score = baca.docs.make_single_staff_score([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -1125,21 +1103,20 @@ Examples: overrides.
 
     Down-overrides slur direction:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("c'4 d' e'")
     ...     score = baca.docs.make_single_staff_score([container])
     ...     baca.slur(container)
     ...     baca.override.slur_down([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -1165,21 +1142,20 @@ Examples: overrides.
 
     Up-overrides slur direction:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("c'4 d' e'")
     ...     score = baca.docs.make_single_staff_score([container])
     ...     baca.slur(container)
     ...     baca.override.slur_up([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -1205,20 +1181,19 @@ Examples: overrides.
 
     Overrides stem color:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("c'4 d' e'")
     ...     baca.override.stem_color(container, "#red")
     ...     score = baca.docs.make_single_staff_score([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -1242,20 +1217,19 @@ Examples: overrides.
 
     Down-overrides stem direction:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("c'4 d' e'")
     ...     baca.override.stem_down(container)
     ...     score = baca.docs.make_single_staff_score([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -1279,20 +1253,19 @@ Examples: overrides.
 
     Up-overrides stem direction:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("c'4 d' e'")
     ...     baca.override.stem_up(container)
     ...     score = baca.docs.make_single_staff_score([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -1316,21 +1289,20 @@ Examples: overrides.
 
     Overrides sustain pedal staff padding:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("c'4 d' e'")
     ...     score = baca.docs.make_single_staff_score([container])
     ...     baca.sustain_pedal(container, context="Staff")
     ...     baca.override.sustain_pedal_staff_padding(container, 5)
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -1356,21 +1328,20 @@ Examples: overrides.
 
     Overrides text script color:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("c'4 d' e'")
     ...     baca.markup(container[0], r'\markup "più mosso"')
     ...     baca.override.text_script_color(container, "#red")
     ...     score = baca.docs.make_single_staff_score([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -1395,21 +1366,20 @@ Examples: overrides.
 
     Down-overrides text script direction:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("c'4 d' e'")
     ...     baca.markup(container[0], r'\markup "più mosso"')
     ...     baca.override.text_script_down(container)
     ...     score = baca.docs.make_single_staff_score([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -1434,21 +1404,20 @@ Examples: overrides.
 
     Overrides text script padding:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("c'4 d' e'")
     ...     baca.markup(container[0], r'\markup "più mosso"')
     ...     baca.override.text_script_padding(container, 4)
     ...     score = baca.docs.make_single_staff_score([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -1473,21 +1442,20 @@ Examples: overrides.
 
     Overrides text script staff padding:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("c'4 d' e'")
     ...     baca.markup(container[0], r'\markup "più mosso"')
     ...     baca.override.text_script_staff_padding(container, n=4)
     ...     score = baca.docs.make_single_staff_score([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -1512,21 +1480,20 @@ Examples: overrides.
 
     Up-overrides text script direction:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("c'4 d' e'")
     ...     baca.markup(container[0], r'\markup "più mosso"')
     ...     baca.override.text_script_up(container)
     ...     score = baca.docs.make_single_staff_score([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -1551,22 +1518,21 @@ Examples: overrides.
 
     Overrides text spanner staff padding:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("c'4 d' e'")
     ...     score = baca.docs.make_single_staff_score([container])
     ...     baca.override.text_spanner_staff_padding(container, 6)
     ...     baca.override.text_script_staff_padding(container, 6)
     ...     baca.text_spanner(container, "pont. => ord.")
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score, includes=["baca.ily"])
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score, includes=["baca.ily"])
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -1599,21 +1565,20 @@ Examples: overrides.
 
     Down-overrides tie direction:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("c''4 ~ c'' ~ c''")
     ...     baca.override.stem_up(container)
     ...     baca.override.tie_down(container)
     ...     score = baca.docs.make_single_staff_score([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -1641,21 +1606,20 @@ Examples: overrides.
 
     Up-overrides tie direction:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("c'4 ~ c' ~ c'")
     ...     baca.override.stem_down(container)
     ...     baca.override.tie_up(container)
     ...     score = baca.docs.make_single_staff_score([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -1683,20 +1647,19 @@ Examples: overrides.
 
     Overrides time signature extra offset:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("c'4 d' e'")
     ...     baca.override.time_signature_extra_offset(container[0], (-6, 0))
     ...     score = baca.docs.make_single_staff_score([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -1719,20 +1682,19 @@ Examples: overrides.
 
     Makes all time signatures transparent:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container("c'4 d' e'")
     ...     baca.override.time_signature_transparent(container)
     ...     score = baca.docs.make_single_staff_score([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -1756,21 +1718,20 @@ Examples: overrides.
 
     Down-overrides tuplet bracket direction:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container(r"\times 2/3 { c'4 d' e' }")
     ...     baca.override.tuplet_bracket_staff_padding(container, 2)
     ...     baca.override.tuplet_bracket_down(container)
     ...     score = baca.docs.make_single_staff_score([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -1799,21 +1760,20 @@ Examples: overrides.
 
     Up-overrides tuplet bracket direction:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container(r"\times 2/3 { c'4 d' e' }")
     ...     baca.override.tuplet_bracket_staff_padding(container, 2)
     ...     baca.override.tuplet_bracket_up(container)
     ...     score = baca.docs.make_single_staff_score([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
@@ -1842,21 +1802,20 @@ Examples: overrides.
 
     Overrides tuplet number extra offset:
 
-    >>> def make_score():
+    >>> def make_lilypond_file():
     ...     container = abjad.Container(r"\times 2/3 { c'4 d' e' }")
     ...     baca.override.tuplet_bracket_staff_padding(container, 2)
     ...     baca.override.tuplet_number_extra_offset(container, (-1, 0))
     ...     score = baca.docs.make_single_staff_score([container])
-    ...     return score
+    ...     lilypond_file = baca.docs.lilypond_file(score)
+    ...     return lilypond_file
 
-    >>> score = make_score()
-    >>> lilypond_file = baca.docs.lilypond_file(score)
+    >>> lilypond_file = make_lilypond_file()
     >>> abjad.show(lilypond_file) # doctest: +SKIP
 
     ..  docs::
 
-        >>> score = lilypond_file["Score"]
-        >>> string = abjad.lilypond(score)
+        >>> string = abjad.lilypond(lilypond_file["Score"])
         >>> print(string)
         \context Score = "Score"
         {
