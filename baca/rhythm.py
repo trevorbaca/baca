@@ -323,16 +323,20 @@ class BeamRight:
 class BeforeGrace:
     grace_note_numerators: list
     main_note_numerator: typing.Any
+    slash: bool = True
+    slur: bool = True
 
     def __post_init__(self):
         assert isinstance(self.grace_note_numerators, list), repr(
             self.grace_note_numerators
         )
+        assert isinstance(self.slash, bool), repr(self.slash)
+        assert isinstance(self.slur, bool), repr(self.slur)
 
     def __call__(self, denominator, tag: abjad.Tag):
         tag = tag.append(_helpers.function_name(_frame()))
-        beam, slash, slur = True, True, True
-        if slash is True:
+        beam = True
+        if self.slash is True:
             assert beam is True, repr(beam)
         main_components = _evaluate_basic_item(
             self.main_note_numerator, denominator, "", tag
@@ -349,13 +353,13 @@ class BeforeGrace:
                 pitches.append(None)
         grace_leaves = abjad.makers.make_leaves(pitches, grace_durations)
         if len(grace_leaves) == 1:
-            if slash is False and slur is False:
+            if self.slash is False and self.slur is False:
                 command = r"\grace"
-            elif slash is False and slur is True:
+            elif self.slash is False and self.slur is True:
                 command = r"\appoggiatura"
-            elif slash is True and slur is False:
+            elif self.slash is True and self.slur is False:
                 command = r"\slashedGrace"
-            elif slash is True and slur is True:
+            elif self.slash is True and self.slur is True:
                 command = r"\acciaccatura"
             else:
                 raise Exception
@@ -364,16 +368,16 @@ class BeforeGrace:
                 temporary_voice = abjad.Voice(grace_leaves, name="TemporaryVoice")
                 abjad.beam(grace_leaves, tag=tag)
                 temporary_voice[:] = []
-            if slash is True:
+            if self.slash is True:
                 literal = abjad.LilyPondLiteral(r"\slash", site="before")
                 abjad.attach(literal, grace_leaves[0], tag=tag)
-            if slash is False and slur is False:
+            if self.slash is False and self.slur is False:
                 command = r"\grace"
-            elif slash is False and slur is True:
+            elif self.slash is False and self.slur is True:
                 command = r"\appoggiatura"
-            elif slash is True and slur is False:
+            elif self.slash is True and self.slur is False:
                 command = r"\slashedGrace"
-            elif slash is True and slur is True:
+            elif self.slash is True and self.slur is True:
                 command = r"\acciaccatura"
             else:
                 raise Exception
@@ -1376,8 +1380,8 @@ def AG(*arguments):
     return AfterGrace(*arguments)
 
 
-def BG(*arguments):
-    return BeforeGrace(*arguments)
+def BG(*arguments, **keywords):
+    return BeforeGrace(*arguments, **keywords)
 
 
 def C(*arguments):
