@@ -6,6 +6,7 @@ import math
 import abjad
 
 
+# TODO: move to baca/sequence.py
 def increase_elements(sequence, addenda, indices=None):
     """
     Increases ``sequence`` cyclically by ``addenda``.
@@ -188,6 +189,7 @@ def _make_new_notes(anchor_pitch, anchor_written_duration, subrun_intervals):
     return new_notes
 
 
+# TODO: move to baca/sequence.py
 def negate_elements(sequence, absolute=False, indices=None, period=None):
     """
     Negates ``sequence`` elements.
@@ -275,6 +277,7 @@ def negate_elements(sequence, absolute=False, indices=None, period=None):
     return result
 
 
+# TODO: move to baca/sequence.py
 def overwrite_elements(sequence, pairs):
     """
     Overwrites ``sequence`` elements at indices according to ``pairs``.
@@ -394,6 +397,7 @@ def partition_integer_into_halves(n, bigger=abjad.LEFT, allow_even=True):
         return (smaller_half, bigger_half)
 
 
+# TODO: move to baca/sequence.py
 def partition_nested_into_inward_pointing_parts(sequence, target="negative"):
     """
     Partitions integers in subsequences of ``sequence`` into inward-pointing parts.
@@ -458,6 +462,7 @@ def partition_nested_into_inward_pointing_parts(sequence, target="negative"):
     return result
 
 
+# TODO: move to baca/sequence.py
 def partition_to_avoid_octave_adjacencies(sequence, bigger=abjad.LEFT):
     """
     Partitions ``sequence`` to avoid octave adjacencies.
@@ -549,6 +554,7 @@ def partition_to_avoid_octave_adjacencies(sequence, bigger=abjad.LEFT):
     return result
 
 
+# TODO: move to baca/sequence.py
 def repeat_subruns_to_length(notes, pairs, history=False):
     """
     Repeats ``notes`` according to ``pairs``.
