@@ -1376,6 +1376,11 @@ def style_ritardando(
 # ALIASES
 
 
+def A(items, numerator):
+    denominator = 16
+    return Feather(items, denominator, numerator, exponent=0.625)
+
+
 def AG(*arguments):
     return AfterGrace(*arguments)
 
@@ -1386,6 +1391,11 @@ def BG(*arguments, **keywords):
 
 def C(*arguments):
     return Container(*arguments)
+
+
+def R(items, numerator):
+    denominator = 16
+    return Feather(items, denominator, numerator, exponent=1.625)
 
 
 def T(items, extra_counts):
