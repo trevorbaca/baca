@@ -821,23 +821,8 @@ def make_accelerando(
     assert isinstance(duration, abjad.Duration), repr(duration)
     assert isinstance(exponent, float), repr(exponent)
     for item in items:
-        if isinstance(item, int) and 0 < item:
-            leaf_duration = abjad.Duration(item, denominator)
-            notes = abjad.makers.make_leaves([0], [leaf_duration], tag=tag)
-            leaves.extend(notes)
-        elif isinstance(item, int) and item < 0:
-            leaf_duration = abjad.Duration(-item, denominator)
-            rests = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
-            leaves.extend(rests)
-        elif isinstance(item, BeforeGrace):
-            leaves_ = item(denominator, tag)
-            leaves.extend(leaves_)
-        elif isinstance(item, OBGC):
-            assert isinstance(voice_name, str), repr(voice_name)
-            anchor_voice = item(denominator, voice_name, tag)
-            leaves.append(anchor_voice)
-        else:
-            raise Exception(item)
+        components = _evaluate_basic_item(item, denominator, voice_name, tag)
+        leaves.extend(components)
     tuplet = abjad.Tuplet("1:1", leaves, tag=tag)
     _style_accelerando(tuplet, exponent, total_duration=duration)
     return tuplet
