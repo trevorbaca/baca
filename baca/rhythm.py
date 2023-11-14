@@ -1100,13 +1100,13 @@ def make_rhythm(
     timespan_to_obgc_polyphony_container: list[
         tuple[abjad.Timespan, abjad.Container]
     ] = []
-    tokens: list[abjad.Component | str] = []
+    components: list[abjad.Component] = []
     item_durations = []
     for i, item in enumerate(items):
         index_to_original_item[i], duration = None, None
         duration, result = _evaluate_item(
             item,
-            tokens,
+            components,
             denominator,
             i,
             timespan_to_obgc_polyphony_container,
@@ -1117,27 +1117,27 @@ def make_rhythm(
         )
         assert isinstance(duration, abjad.Duration | str), repr(duration)
         item_durations.append(duration)
-    assert all(isinstance(_, abjad.Component) for _ in tokens), repr(tokens)
+    assert all(isinstance(_, abjad.Component) for _ in components), repr(components)
     if time_signatures is not None:
         total_duration = sum(_.duration for _ in time_signatures)
         existing_duration = sum(
-            [abjad.get.duration(_) for _ in tokens if not isinstance(_, abjad.Skip)]
+            [abjad.get.duration(_) for _ in components if not isinstance(_, abjad.Skip)]
         )
         if total_duration < existing_duration:
-            tokens = [_ for _ in tokens if not isinstance(_, abjad.Skip)]
-            lists = abjad.mutate.split(tokens, [total_duration], tag=tag)
-            tokens[:] = []
+            components = [_ for _ in components if not isinstance(_, abjad.Skip)]
+            lists = abjad.mutate.split(components, [total_duration], tag=tag)
+            components[:] = []
             for component in lists[0]:
-                tokens.append(component)
-            last_leaf = abjad.select.leaf(tokens, -1)
+                components.append(component)
+            last_leaf = abjad.select.leaf(components, -1)
             rmakers.untie(last_leaf)
-            item_durations = [abjad.get.duration(_) for _ in tokens]
+            item_durations = [abjad.get.duration(_) for _ in components]
     spacer_skip = None
-    for token in tokens:
-        if isinstance(token, abjad.Skip):
-            strings = abjad.get.indicators(token, str)
+    for component in components:
+        if isinstance(component, abjad.Skip):
+            strings = abjad.get.indicators(component, str)
             if "SPACER" in strings:
-                spacer_skip = token
+                spacer_skip = component
                 if "+" in strings:
                     spacer_pitch = 0
                 else:
@@ -1148,7 +1148,7 @@ def make_rhythm(
         assert "evaluate-last" in item_durations
         assert time_signatures is not None
         needed_duration = total_duration - existing_duration
-        index = tokens.index(spacer_skip)
+        index = components.index(spacer_skip)
         try:
             leaves = abjad.makers.make_leaves(
                 [spacer_pitch], [needed_duration], tag=tag
@@ -1156,20 +1156,16 @@ def make_rhythm(
         except Exception:
             breakpoint()
         assert abjad.get.duration(leaves) == needed_duration
-        tokens[index : index + 1] = leaves
+        components[index : index + 1] = leaves
         index = item_durations.index("evaluate-last")
         item_durations[index] = needed_duration
-    components: list[abjad.Component] = []
-    for token in tokens:
-        assert isinstance(token, abjad.Component)
-        components.append(token)
     real_item_durations: list[abjad.Duration] = []
     for item_duration in item_durations:
         assert isinstance(item_duration, abjad.Duration)
         real_item_durations.append(item_duration)
     if do_not_rewrite_meter is False:
         assert time_signatures is not None
-        voice = rmakers.wrap_in_time_signature_staff(tokens, time_signatures)
+        voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
         rmakers.rewrite_meter(
             voice,
             boundary_depth=boundary_depth,
