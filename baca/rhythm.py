@@ -1140,7 +1140,7 @@ def make_rhythm(
         components = abjad.mutate.eject_contents(voice)
     voice = abjad.Voice(components, name=voice_name)
     assert abjad.get.duration(voice) == sum(real_item_durations)
-    if index_to_obgc_polyphony_container or any(index_to_original_item.values()):
+    if any(index_to_original_item.values()):
         components = voice[:]
         component_durations = [abjad.get.duration(_) for _ in components]
         duration_lists = abjad.sequence.partition_by_weights(
@@ -1154,6 +1154,16 @@ def make_rhythm(
             if original_item is not None:
                 rmakers.unbeam(component_list, smart=True)
                 abjad.mutate.replace(component_list, original_item)
+    if index_to_obgc_polyphony_container:
+        components = voice[:]
+        component_durations = [abjad.get.duration(_) for _ in components]
+        duration_lists = abjad.sequence.partition_by_weights(
+            component_durations, real_item_durations, allow_part_weights=abjad.EXACT
+        )
+        counts = [len(_) for _ in duration_lists]
+        assert len(components) == sum(counts)
+        component_lists = abjad.sequence.partition_by_counts(components, counts)
+        for i, component_list in enumerate(component_lists):
             if i in index_to_obgc_polyphony_container:
                 polyphony_container = index_to_obgc_polyphony_container[i]
                 assert isinstance(polyphony_container, abjad.Container)
