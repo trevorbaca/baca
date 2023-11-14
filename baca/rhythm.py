@@ -93,36 +93,39 @@ def _evaluate_item(
     timespan_to_original_item,
     tag,
     voice_name,
-):
-    result = None
-    capture_original_item = False
+) -> tuple[abjad.Duration | str, abjad.Component | list[abjad.Component]]:
+    capture_original_item: bool | abjad.Component = False
+    duration: abjad.Duration | str
     if isinstance(item, int) and 0 < item:
         leaf_duration = abjad.Duration(item, denominator)
         notes = abjad.makers.make_leaves([0], [leaf_duration], tag=tag)
         duration = abjad.get.duration(notes)
-        result = notes
         components.extend(notes)
+        result = notes
     elif isinstance(item, int) and item < 0:
         leaf_duration = abjad.Duration(-item, denominator)
         rests = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
         duration = abjad.get.duration(rests)
-        result = rests
         components.extend(rests)
+        result = rests
     elif isinstance(item, abjad.Tuplet):
         duration = abjad.get.duration(item)
         dummy_notes = abjad.makers.make_leaves([99], [duration], tag=tag)
         components.extend(dummy_notes)
+        result = dummy_notes
         index_to_original_item[i] = item
         capture_original_item = item
     elif isinstance(item, AfterGrace):
         components_ = item(denominator, tag)
         duration = abjad.get.duration(components_)
         components.extend(components_)
+        result = components_
     elif isinstance(item, Container):
         container = item(denominator, voice_name, tag)
         duration = abjad.get.duration(container)
         dummy_notes = abjad.makers.make_leaves([100], [duration], tag=tag)
         components.extend(dummy_notes)
+        result = dummy_notes
         index_to_original_item[i] = container
         capture_original_item = container
     elif isinstance(item, Feather):
@@ -130,12 +133,14 @@ def _evaluate_item(
         duration = abjad.get.duration(tuplet)
         dummy_notes = abjad.makers.make_leaves([98], [duration], tag=tag)
         components.extend(dummy_notes)
+        result = dummy_notes
         index_to_original_item[i] = tuplet
         capture_original_item = tuplet
     elif isinstance(item, BeforeGrace):
         components_ = item(denominator, tag)
         duration = abjad.get.duration(components_)
         components.extend(components_)
+        result = components_
     elif isinstance(item, OBGC):
         polyphony_container = item(denominator, voice_name, tag)
         assert len(polyphony_container) == 2
@@ -148,6 +153,7 @@ def _evaluate_item(
         previous_duration = abjad.get.duration(components)
         start_offset = abjad.Offset(previous_duration)
         components.extend(nongrace_leaves)
+        result = nongrace_leaves
         stop_duration = abjad.get.duration(components)
         stop_offset = abjad.Offset(stop_duration)
         timespan = abjad.Timespan(start_offset, stop_offset)
@@ -183,6 +189,7 @@ def _evaluate_item(
         duration = abjad.get.duration(container)
         dummy_notes = abjad.makers.make_leaves([101], [duration], tag=tag)
         components.extend(dummy_notes)
+        result = dummy_notes
         index_to_original_item[i] = container
         capture_original_item = container
     elif isinstance(item, Tuplet):
@@ -190,19 +197,21 @@ def _evaluate_item(
         duration = abjad.get.duration(tuplet)
         dummy_notes = abjad.makers.make_leaves([97], [duration], tag=tag)
         components.extend(dummy_notes)
+        result = dummy_notes
         index_to_original_item[i] = tuplet
         capture_original_item = tuplet
     elif isinstance(item, WrittenDuration):
         leaf = item(denominator, tag=tag)
         duration = abjad.get.duration(leaf)
-        result = leaf
         components.append(leaf)
+        result = leaf
     elif item in ("+", "-"):
-        duration = "evaluate-last"
         skip = abjad.Skip(1, multiplier=(99, 1))
         abjad.attach("SPACER", skip)
         abjad.attach(item, skip)
+        duration = "evaluate-last"
         components.append(skip)
+        result = skip
     else:
         raise Exception(item)
     if capture_original_item is not False:
@@ -214,6 +223,7 @@ def _evaluate_item(
             timespan = abjad.Timespan(start_offset, stop_offset)
             pair = (timespan, capture_original_item)
             timespan_to_original_item.append(pair)
+    assert isinstance(result, abjad.Component | list), repr(result)
     return duration, result
 
 
@@ -1115,8 +1125,18 @@ def make_rhythm(
             tag,
             voice_name,
         )
+        assert isinstance(result, abjad.Component | list), repr(result)
         assert isinstance(duration, abjad.Duration | str), repr(duration)
         item_durations.append(duration)
+        """
+        if isinstance(result, abjad.Skip) and "SPACER" in abjad.get.indicators(
+            result, str
+        ):
+            item_durations.append("evaluate-later")
+        else:
+            duration = abjad.get.duration(result)
+            item_durations.append(duration)
+        """
     assert all(isinstance(_, abjad.Component) for _ in components), repr(components)
     if time_signatures is not None:
         total_duration = sum(_.duration for _ in time_signatures)
