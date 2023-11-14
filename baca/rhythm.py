@@ -93,19 +93,16 @@ def _evaluate_item(
     timespan_to_original_item,
     tag,
     voice_name,
-) -> tuple[abjad.Duration | str, abjad.Component | list[abjad.Component]]:
+) -> abjad.Component | list[abjad.Component]:
     capture_original_item: bool | abjad.Component = False
-    duration: abjad.Duration | str
     if isinstance(item, int) and 0 < item:
         leaf_duration = abjad.Duration(item, denominator)
         notes = abjad.makers.make_leaves([0], [leaf_duration], tag=tag)
-        duration = abjad.get.duration(notes)
         components.extend(notes)
         result = notes
     elif isinstance(item, int) and item < 0:
         leaf_duration = abjad.Duration(-item, denominator)
         rests = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
-        duration = abjad.get.duration(rests)
         components.extend(rests)
         result = rests
     elif isinstance(item, abjad.Tuplet):
@@ -117,7 +114,6 @@ def _evaluate_item(
         capture_original_item = item
     elif isinstance(item, AfterGrace):
         components_ = item(denominator, tag)
-        duration = abjad.get.duration(components_)
         components.extend(components_)
         result = components_
     elif isinstance(item, Container):
@@ -138,7 +134,6 @@ def _evaluate_item(
         capture_original_item = tuplet
     elif isinstance(item, BeforeGrace):
         components_ = item(denominator, tag)
-        duration = abjad.get.duration(components_)
         components.extend(components_)
         result = components_
     elif isinstance(item, OBGC):
@@ -159,7 +154,7 @@ def _evaluate_item(
         timespan = abjad.Timespan(start_offset, stop_offset)
         timespan_to_obgc_polyphony_container.append((timespan, polyphony_container))
     elif isinstance(item, BeamLeft | BeamRight | InvisibleMusic | RepeatTie | Tie):
-        duration, result = _evaluate_item(
+        result = _evaluate_item(
             item.argument,
             components,
             denominator,
@@ -202,14 +197,12 @@ def _evaluate_item(
         capture_original_item = tuplet
     elif isinstance(item, WrittenDuration):
         leaf = item(denominator, tag=tag)
-        duration = abjad.get.duration(leaf)
         components.append(leaf)
         result = leaf
     elif item in ("+", "-"):
         skip = abjad.Skip(1, multiplier=(99, 1))
         abjad.attach("SPACER", skip)
         abjad.attach(item, skip)
-        duration = "evaluate-last"
         components.append(skip)
         result = skip
     else:
@@ -224,7 +217,7 @@ def _evaluate_item(
             pair = (timespan, capture_original_item)
             timespan_to_original_item.append(pair)
     assert isinstance(result, abjad.Component | list), repr(result)
-    return duration, result
+    return result
 
 
 def _make_accelerando_multipliers(
@@ -1111,10 +1104,10 @@ def make_rhythm(
         tuple[abjad.Timespan, abjad.Container]
     ] = []
     components: list[abjad.Component] = []
-    item_durations = []
+    item_durations: list[abjad.Duration | str] = []
     for i, item in enumerate(items):
         index_to_original_item[i], duration = None, None
-        duration, result = _evaluate_item(
+        result = _evaluate_item(
             item,
             components,
             denominator,
@@ -1126,17 +1119,13 @@ def make_rhythm(
             voice_name,
         )
         assert isinstance(result, abjad.Component | list), repr(result)
-        assert isinstance(duration, abjad.Duration | str), repr(duration)
-        item_durations.append(duration)
-        """
         if isinstance(result, abjad.Skip) and "SPACER" in abjad.get.indicators(
             result, str
         ):
-            item_durations.append("evaluate-later")
+            item_durations.append("evaluate-last")
         else:
             duration = abjad.get.duration(result)
             item_durations.append(duration)
-        """
     assert all(isinstance(_, abjad.Component) for _ in components), repr(components)
     if time_signatures is not None:
         total_duration = sum(_.duration for _ in time_signatures)
