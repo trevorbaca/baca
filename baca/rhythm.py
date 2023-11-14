@@ -199,7 +199,10 @@ def _evaluate_item(
         components.append(leaf)
     elif item in ("+", "-"):
         duration = "evaluate-last"
-        components.append(item)
+        skip = abjad.Skip(1, multiplier=(99, 1))
+        abjad.attach("SPACER", skip)
+        abjad.attach(item, skip)
+        components.append(skip)
     else:
         raise Exception(item)
     if capture_original_item is not False:
@@ -1114,13 +1117,14 @@ def make_rhythm(
         )
         assert isinstance(duration, abjad.Duration | str), repr(duration)
         item_durations.append(duration)
+    assert all(isinstance(_, abjad.Component) for _ in tokens), repr(tokens)
     if time_signatures is not None:
         total_duration = sum(_.duration for _ in time_signatures)
         existing_duration = sum(
-            [abjad.get.duration(_) for _ in tokens if not isinstance(_, str)]
+            [abjad.get.duration(_) for _ in tokens if not isinstance(_, abjad.Skip)]
         )
         if total_duration < existing_duration:
-            tokens = [_ for _ in tokens if not isinstance(_, str)]
+            tokens = [_ for _ in tokens if not isinstance(_, abjad.Skip)]
             lists = abjad.mutate.split(tokens, [total_duration], tag=tag)
             tokens[:] = []
             for component in lists[0]:
@@ -1128,18 +1132,27 @@ def make_rhythm(
             last_leaf = abjad.select.leaf(tokens, -1)
             rmakers.untie(last_leaf)
             item_durations = [abjad.get.duration(_) for _ in tokens]
-    if "+" in tokens or "-" in tokens:
+    spacer_skip = None
+    for token in tokens:
+        if isinstance(token, abjad.Skip):
+            strings = abjad.get.indicators(token, str)
+            if "SPACER" in strings:
+                spacer_skip = token
+                if "+" in strings:
+                    spacer_pitch = 0
+                else:
+                    assert "-" in strings
+                    spacer_pitch = None
+                break
+    if spacer_skip is not None:
         assert "evaluate-last" in item_durations
         assert time_signatures is not None
         needed_duration = total_duration - existing_duration
-        if "+" in tokens:
-            index = tokens.index("+")
-            pitch = 0
-        else:
-            index = tokens.index("-")
-            pitch = None
+        index = tokens.index(spacer_skip)
         try:
-            leaves = abjad.makers.make_leaves([pitch], [needed_duration], tag=tag)
+            leaves = abjad.makers.make_leaves(
+                [spacer_pitch], [needed_duration], tag=tag
+            )
         except Exception:
             breakpoint()
         assert abjad.get.duration(leaves) == needed_duration
