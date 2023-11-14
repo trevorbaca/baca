@@ -90,10 +90,12 @@ def _evaluate_item(
     i,
     timespan_to_obgc_polyphony_container,
     index_to_original_item,
+    timespan_to_original_item,
     tag,
     voice_name,
 ):
     result = None
+    capture_original_item = False
     if isinstance(item, int) and 0 < item:
         leaf_duration = abjad.Duration(item, denominator)
         notes = abjad.makers.make_leaves([0], [leaf_duration], tag=tag)
@@ -111,6 +113,7 @@ def _evaluate_item(
         dummy_notes = abjad.makers.make_leaves([99], [duration], tag=tag)
         components.extend(dummy_notes)
         index_to_original_item[i] = item
+        capture_original_item = item
     elif isinstance(item, AfterGrace):
         components_ = item(denominator, tag)
         duration = abjad.get.duration(components_)
@@ -121,12 +124,14 @@ def _evaluate_item(
         dummy_notes = abjad.makers.make_leaves([100], [duration], tag=tag)
         components.extend(dummy_notes)
         index_to_original_item[i] = container
+        capture_original_item = container
     elif isinstance(item, Feather):
         tuplet = item(denominator, voice_name, tag)
         duration = abjad.get.duration(tuplet)
         dummy_notes = abjad.makers.make_leaves([98], [duration], tag=tag)
         components.extend(dummy_notes)
         index_to_original_item[i] = tuplet
+        capture_original_item = tuplet
     elif isinstance(item, BeforeGrace):
         components_ = item(denominator, tag)
         duration = abjad.get.duration(components_)
@@ -155,6 +160,7 @@ def _evaluate_item(
             i,
             timespan_to_obgc_polyphony_container,
             index_to_original_item,
+            timespan_to_original_item,
             tag,
             voice_name,
         )
@@ -178,12 +184,14 @@ def _evaluate_item(
         dummy_notes = abjad.makers.make_leaves([101], [duration], tag=tag)
         components.extend(dummy_notes)
         index_to_original_item[i] = container
+        capture_original_item = container
     elif isinstance(item, Tuplet):
         tuplet = item(denominator, voice_name, tag)
         duration = abjad.get.duration(tuplet)
         dummy_notes = abjad.makers.make_leaves([97], [duration], tag=tag)
         components.extend(dummy_notes)
         index_to_original_item[i] = tuplet
+        capture_original_item = tuplet
     elif isinstance(item, WrittenDuration):
         leaf = item(denominator, tag=tag)
         duration = abjad.get.duration(leaf)
@@ -194,6 +202,15 @@ def _evaluate_item(
         components.append(item)
     else:
         raise Exception(item)
+    if capture_original_item is not False:
+        if False:
+            total_duration = abjad.get.duration(components)
+            stop_offset = abjad.Offset(total_duration)
+            item_duration = abjad.get.duration(capture_original_item)
+            start_offset = stop_offset - item_duration
+            timespan = abjad.Timespan(start_offset, stop_offset)
+            pair = (timespan, capture_original_item)
+            timespan_to_original_item.append(pair)
     return duration, result
 
 
@@ -1076,6 +1093,7 @@ def make_rhythm(
     tag = tag or abjad.Tag()
     tag = tag.append(_helpers.function_name(_frame()))
     index_to_original_item: dict[int, abjad.Tuplet | None] = {}
+    timespan_to_original_item: list[tuple[abjad.Timespan, typing.Any]] = []
     timespan_to_obgc_polyphony_container: list[
         tuple[abjad.Timespan, abjad.Container]
     ] = []
@@ -1090,6 +1108,7 @@ def make_rhythm(
             i,
             timespan_to_obgc_polyphony_container,
             index_to_original_item,
+            timespan_to_original_item,
             tag,
             voice_name,
         )
@@ -1161,6 +1180,20 @@ def make_rhythm(
             if original_item is not None:
                 rmakers.unbeam(component_list, smart=True)
                 abjad.mutate.replace(component_list, original_item)
+    """
+    if timespan_to_original_item:
+        for timespan, original_item in timespan_to_original_item:
+            timespan_components = []
+            for component in voice:
+                timespan_ = abjad.get.timespan(component)
+                if timespan_ in timespan:
+                    timespan_components.append(component)
+                elif timespan_components:
+                    break
+            assert timespan_components, repr(timespan_components)
+            rmakers.unbeam(timespan_components, smart=True)
+            abjad.mutate.replace(timespan_components, original_item)
+    """
     if timespan_to_obgc_polyphony_container:
         for timespan, polyphony_container in timespan_to_obgc_polyphony_container:
             assert isinstance(polyphony_container, abjad.Container)
