@@ -88,7 +88,6 @@ def _evaluate_item(
     components,
     denominator,
     i,
-    timespan_to_obgc_polyphony_container,
     timespan_to_original_item,
     tag,
     voice_name,
@@ -150,7 +149,6 @@ def _evaluate_item(
             components,
             denominator,
             i,
-            timespan_to_obgc_polyphony_container,
             timespan_to_original_item,
             tag,
             voice_name,
@@ -206,10 +204,7 @@ def _evaluate_item(
         start_offset = stop_offset - item_duration
         timespan = abjad.Timespan(start_offset, stop_offset)
         pair = (timespan, capture_original_item)
-        if isinstance(item, OBGC):
-            timespan_to_obgc_polyphony_container.append(pair)
-        else:
-            timespan_to_original_item.append(pair)
+        timespan_to_original_item.append(pair)
     assert isinstance(result, abjad.Component | list), repr(result)
     return result
 
@@ -1093,9 +1088,6 @@ def make_rhythm(
     tag = tag or abjad.Tag()
     tag = tag.append(_helpers.function_name(_frame()))
     timespan_to_original_item: list[tuple[abjad.Timespan, typing.Any]] = []
-    timespan_to_obgc_polyphony_container: list[
-        tuple[abjad.Timespan, abjad.Container]
-    ] = []
     components: list[abjad.Component] = []
     for i, item in enumerate(items):
         result = _evaluate_item(
@@ -1103,7 +1095,6 @@ def make_rhythm(
             components,
             denominator,
             i,
-            timespan_to_obgc_polyphony_container,
             timespan_to_original_item,
             tag,
             voice_name,
@@ -1141,14 +1132,6 @@ def make_rhythm(
                                 pair = (timespan, original_item)
                             pairs.append(pair)
                         timespan_to_original_item = pairs
-                        pairs = []
-                        for pair in timespan_to_obgc_polyphony_container:
-                            timespan, polyphony_container = pair
-                            if unchanged_duration <= timespan.start_offset:
-                                timespan = timespan.translate(needed_duration)
-                                pair = (timespan, polyphony_container)
-                            pairs.append(pair)
-                        timespan_to_obgc_polyphony_container = pairs
                         index = components.index(spacer_skip)
                         components[index : index + 1] = leaves
                         break
@@ -1172,6 +1155,13 @@ def make_rhythm(
     voice = abjad.Voice(components, name=voice_name)
     if timespan_to_original_item:
         for timespan, original_item in timespan_to_original_item:
+            is_obgc_polyphony_container = False
+            if (
+                type(original_item) is abjad.Container
+                and len(original_item) == 2
+                and isinstance(original_item[0], abjad.OnBeatGraceContainer)
+            ):
+                is_obgc_polyphony_container = True
             timespan_components = []
             for component in voice:
                 timespan_ = abjad.get.timespan(component)
@@ -1180,28 +1170,14 @@ def make_rhythm(
                 elif timespan_components:
                     break
             assert timespan_components, repr(timespan_components)
-            rmakers.unbeam(timespan_components, smart=True)
+            if not is_obgc_polyphony_container:
+                rmakers.unbeam(timespan_components, smart=True)
             abjad.mutate.replace(timespan_components, original_item)
-    if timespan_to_obgc_polyphony_container:
-        for timespan, polyphony_container in timespan_to_obgc_polyphony_container:
-            assert isinstance(polyphony_container, abjad.Container)
-            obgc_container = polyphony_container[0]
-            assert isinstance(obgc_container, abjad.OnBeatGraceContainer)
-            main_voice = polyphony_container[1]
-            assert isinstance(main_voice, abjad.Voice)
-            assert len(main_voice) == 0
-            timespan_components = []
-            for component in voice:
-                timespan_ = abjad.get.timespan(component)
-                if timespan_ in timespan:
-                    timespan_components.append(component)
-                elif timespan_components:
-                    break
-            assert timespan_components, repr(timespan_components)
-            # TODO:
-            # rmakers.unbeam(timespan_components, smart=True)
-            abjad.mutate.replace(timespan_components, polyphony_container)
-            main_voice.extend(timespan_components)
+            if is_obgc_polyphony_container:
+                main_voice = original_item[1]
+                assert isinstance(main_voice, abjad.Voice)
+                assert len(main_voice) == 0
+                main_voice.extend(timespan_components)
     return voice
 
 
