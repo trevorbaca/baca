@@ -145,14 +145,9 @@ def _evaluate_item(
         main_voice = polyphony_container[1]
         assert isinstance(main_voice, abjad.Voice)
         nongrace_leaves = abjad.mutate.eject_contents(main_voice)
-        previous_duration = abjad.get.duration(components)
-        start_offset = abjad.Offset(previous_duration)
         components.extend(nongrace_leaves)
         result = nongrace_leaves
-        stop_duration = abjad.get.duration(components)
-        stop_offset = abjad.Offset(stop_duration)
-        timespan = abjad.Timespan(start_offset, stop_offset)
-        timespan_to_obgc_polyphony_container.append((timespan, polyphony_container))
+        capture_original_item = polyphony_container
     elif isinstance(item, BeamLeft | BeamRight | InvisibleMusic | RepeatTie | Tie):
         result = _evaluate_item(
             item.argument,
@@ -207,15 +202,21 @@ def _evaluate_item(
         result = skip
     else:
         raise Exception(item)
-    if capture_original_item is not False:
+    if capture_original_item is not False or isinstance(item, OBGC):
         components = [_ for _ in components if not isinstance(_, abjad.Skip)]
         total_duration = abjad.get.duration(components)
         stop_offset = abjad.Offset(total_duration)
-        item_duration = abjad.get.duration(capture_original_item)
+        if isinstance(item, OBGC):
+            item_duration = abjad.get.duration(result)
+        else:
+            item_duration = abjad.get.duration(capture_original_item)
         start_offset = stop_offset - item_duration
         timespan = abjad.Timespan(start_offset, stop_offset)
         pair = (timespan, capture_original_item)
-        timespan_to_original_item.append(pair)
+        if isinstance(item, OBGC):
+            timespan_to_obgc_polyphony_container.append(pair)
+        else:
+            timespan_to_original_item.append(pair)
     assert isinstance(result, abjad.Component | list), repr(result)
     return result
 
@@ -1146,17 +1147,36 @@ def make_rhythm(
                             spacer_pitch = None
                         assert "evaluate-last" in item_durations
                         needed_duration = total_duration - existing_duration
-                        index = components.index(spacer_skip)
-                        try:
-                            leaves = abjad.makers.make_leaves(
-                                [spacer_pitch], [needed_duration], tag=tag
-                            )
-                        except Exception:
-                            breakpoint()
+                        # REMOVE?:
+                        # index = components.index(spacer_skip)
+                        leaves = abjad.makers.make_leaves(
+                            [spacer_pitch], [needed_duration], tag=tag
+                        )
                         assert abjad.get.duration(leaves) == needed_duration
-                        components[index : index + 1] = leaves
                         index = item_durations.index("evaluate-last")
+                        unchanged_duration = abjad.Duration(0)
+                        for item_duration in item_durations[:index]:
+                            assert isinstance(item_duration, abjad.Duration)
+                            unchanged_duration += item_duration
+                        pairs = []
+                        for pair in timespan_to_original_item:
+                            timespan, original_item = pair
+                            if unchanged_duration <= timespan.start_offset:
+                                timespan = timespan.translate(needed_duration)
+                                pair = (timespan, original_item)
+                            pairs.append(pair)
+                        timespan_to_original_item = pairs
+                        pairs = []
+                        for pair in timespan_to_obgc_polyphony_container:
+                            timespan, polyphony_container = pair
+                            if unchanged_duration <= timespan.start_offset:
+                                timespan = timespan.translate(needed_duration)
+                                pair = (timespan, polyphony_container)
+                            pairs.append(pair)
+                        timespan_to_obgc_polyphony_container = pairs
                         item_durations[index] = needed_duration
+                        index = components.index(spacer_skip)
+                        components[index : index + 1] = leaves
                         break
         elif total_duration < existing_duration:
             components = [_ for _ in components if not isinstance(_, abjad.Skip)]
@@ -1168,7 +1188,6 @@ def make_rhythm(
             rmakers.untie(last_leaf)
             item_durations = [abjad.get.duration(_) for _ in components]
         if do_not_rewrite_meter is False:
-            assert time_signatures is not None
             voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
             rmakers.rewrite_meter(
                 voice,
@@ -1184,6 +1203,7 @@ def make_rhythm(
         assert isinstance(item_duration, abjad.Duration)
         real_item_durations.append(item_duration)
     assert abjad.get.duration(voice) == sum(real_item_durations)
+    """
     if any(index_to_original_item.values()):
         components = voice[:]
         component_durations = [abjad.get.duration(_) for _ in components]
@@ -1211,7 +1231,6 @@ def make_rhythm(
             assert timespan_components, repr(timespan_components)
             rmakers.unbeam(timespan_components, smart=True)
             abjad.mutate.replace(timespan_components, original_item)
-    """
     if timespan_to_obgc_polyphony_container:
         for timespan, polyphony_container in timespan_to_obgc_polyphony_container:
             assert isinstance(polyphony_container, abjad.Container)
@@ -1220,16 +1239,18 @@ def make_rhythm(
             main_voice = polyphony_container[1]
             assert isinstance(main_voice, abjad.Voice)
             assert len(main_voice) == 0
-            components = []
+            timespan_components = []
             for component in voice:
                 timespan_ = abjad.get.timespan(component)
                 if timespan_ in timespan:
-                    components.append(component)
-                elif components:
+                    timespan_components.append(component)
+                elif timespan_components:
                     break
-            assert components, repr(components)
-            abjad.mutate.replace(components, polyphony_container)
-            main_voice.extend(components)
+            assert timespan_components, repr(timespan_components)
+            # TODO:
+            # rmakers.unbeam(timespan_components, smart=True)
+            abjad.mutate.replace(timespan_components, polyphony_container)
+            main_voice.extend(timespan_components)
     return voice
 
 
