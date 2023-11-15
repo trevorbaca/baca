@@ -89,7 +89,6 @@ def _evaluate_item(
     denominator,
     i,
     timespan_to_obgc_polyphony_container,
-    index_to_original_item,
     timespan_to_original_item,
     tag,
     voice_name,
@@ -110,7 +109,6 @@ def _evaluate_item(
         dummy_notes = abjad.makers.make_leaves([99], [duration], tag=tag)
         components.extend(dummy_notes)
         result = dummy_notes
-        index_to_original_item[i] = item
         capture_original_item = item
     elif isinstance(item, AfterGrace):
         components_ = item(denominator, tag)
@@ -122,7 +120,6 @@ def _evaluate_item(
         dummy_notes = abjad.makers.make_leaves([100], [duration], tag=tag)
         components.extend(dummy_notes)
         result = dummy_notes
-        index_to_original_item[i] = container
         capture_original_item = container
     elif isinstance(item, Feather):
         tuplet = item(denominator, voice_name, tag)
@@ -130,7 +127,6 @@ def _evaluate_item(
         dummy_notes = abjad.makers.make_leaves([98], [duration], tag=tag)
         components.extend(dummy_notes)
         result = dummy_notes
-        index_to_original_item[i] = tuplet
         capture_original_item = tuplet
     elif isinstance(item, BeforeGrace):
         components_ = item(denominator, tag)
@@ -155,7 +151,6 @@ def _evaluate_item(
             denominator,
             i,
             timespan_to_obgc_polyphony_container,
-            index_to_original_item,
             timespan_to_original_item,
             tag,
             voice_name,
@@ -180,7 +175,6 @@ def _evaluate_item(
         dummy_notes = abjad.makers.make_leaves([101], [duration], tag=tag)
         components.extend(dummy_notes)
         result = dummy_notes
-        index_to_original_item[i] = container
         capture_original_item = container
     elif isinstance(item, Tuplet):
         tuplet = item(denominator, voice_name, tag)
@@ -188,7 +182,6 @@ def _evaluate_item(
         dummy_notes = abjad.makers.make_leaves([97], [duration], tag=tag)
         components.extend(dummy_notes)
         result = dummy_notes
-        index_to_original_item[i] = tuplet
         capture_original_item = tuplet
     elif isinstance(item, WrittenDuration):
         leaf = item(denominator, tag=tag)
@@ -1099,34 +1092,23 @@ def make_rhythm(
         assert time_signatures is not None, repr(time_signatures)
     tag = tag or abjad.Tag()
     tag = tag.append(_helpers.function_name(_frame()))
-    index_to_original_item: dict[int, abjad.Tuplet | None] = {}
     timespan_to_original_item: list[tuple[abjad.Timespan, typing.Any]] = []
     timespan_to_obgc_polyphony_container: list[
         tuple[abjad.Timespan, abjad.Container]
     ] = []
     components: list[abjad.Component] = []
-    item_durations: list[abjad.Duration | str] = []
     for i, item in enumerate(items):
-        index_to_original_item[i], duration = None, None
         result = _evaluate_item(
             item,
             components,
             denominator,
             i,
             timespan_to_obgc_polyphony_container,
-            index_to_original_item,
             timespan_to_original_item,
             tag,
             voice_name,
         )
         assert isinstance(result, abjad.Component | list), repr(result)
-        if isinstance(result, abjad.Skip) and "SPACER" in abjad.get.indicators(
-            result, str
-        ):
-            item_durations.append("evaluate-last")
-        else:
-            duration = abjad.get.duration(result)
-            item_durations.append(duration)
     assert all(isinstance(_, abjad.Component) for _ in components), repr(components)
     if time_signatures is not None:
         total_duration = sum(_.duration for _ in time_signatures)
@@ -1135,7 +1117,7 @@ def make_rhythm(
         )
         if existing_duration < total_duration:
             spacer_skip = None
-            for component in components:
+            for i, component in enumerate(components):
                 if isinstance(component, abjad.Skip):
                     strings = abjad.get.indicators(component, str)
                     if "SPACER" in strings:
@@ -1145,19 +1127,12 @@ def make_rhythm(
                         else:
                             assert "-" in strings
                             spacer_pitch = None
-                        assert "evaluate-last" in item_durations
                         needed_duration = total_duration - existing_duration
-                        # REMOVE?:
-                        # index = components.index(spacer_skip)
                         leaves = abjad.makers.make_leaves(
                             [spacer_pitch], [needed_duration], tag=tag
                         )
                         assert abjad.get.duration(leaves) == needed_duration
-                        index = item_durations.index("evaluate-last")
-                        unchanged_duration = abjad.Duration(0)
-                        for item_duration in item_durations[:index]:
-                            assert isinstance(item_duration, abjad.Duration)
-                            unchanged_duration += item_duration
+                        unchanged_duration = abjad.get.duration(components[:i])
                         pairs = []
                         for pair in timespan_to_original_item:
                             timespan, original_item = pair
@@ -1174,7 +1149,6 @@ def make_rhythm(
                                 pair = (timespan, polyphony_container)
                             pairs.append(pair)
                         timespan_to_obgc_polyphony_container = pairs
-                        item_durations[index] = needed_duration
                         index = components.index(spacer_skip)
                         components[index : index + 1] = leaves
                         break
@@ -1186,7 +1160,6 @@ def make_rhythm(
                 components.append(component)
             last_leaf = abjad.select.leaf(components, -1)
             rmakers.untie(last_leaf)
-            item_durations = [abjad.get.duration(_) for _ in components]
         if do_not_rewrite_meter is False:
             voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
             rmakers.rewrite_meter(
@@ -1196,29 +1169,7 @@ def make_rhythm(
                 tag=tag,
             )
             components = abjad.mutate.eject_contents(voice)
-    assert all(isinstance(_, abjad.Duration) for _ in item_durations)
     voice = abjad.Voice(components, name=voice_name)
-    real_item_durations: list[abjad.Duration] = []
-    for item_duration in item_durations:
-        assert isinstance(item_duration, abjad.Duration)
-        real_item_durations.append(item_duration)
-    assert abjad.get.duration(voice) == sum(real_item_durations)
-    """
-    if any(index_to_original_item.values()):
-        components = voice[:]
-        component_durations = [abjad.get.duration(_) for _ in components]
-        duration_lists = abjad.sequence.partition_by_weights(
-            component_durations, real_item_durations, allow_part_weights=abjad.EXACT
-        )
-        counts = [len(_) for _ in duration_lists]
-        assert len(components) == sum(counts)
-        component_lists = abjad.sequence.partition_by_counts(components, counts)
-        for i, component_list in enumerate(component_lists):
-            original_item = index_to_original_item[i]
-            if original_item is not None:
-                rmakers.unbeam(component_list, smart=True)
-                abjad.mutate.replace(component_list, original_item)
-    """
     if timespan_to_original_item:
         for timespan, original_item in timespan_to_original_item:
             timespan_components = []
