@@ -73,8 +73,9 @@ def _evaluate_basic_item(item, denominator, voice_name, tag):
     elif isinstance(item, BeforeGrace):
         components = item(denominator, tag)
     elif isinstance(item, OBGC):
-        anchor_voice = item(denominator, voice_name, tag)
-        components = [anchor_voice]
+        polyphony_container = item(denominator, voice_name, tag)
+        assert type(polyphony_container) is abjad.Container
+        components = [polyphony_container]
     elif isinstance(item, WrittenDuration):
         leaf = item(denominator, tag=tag)
         components = [leaf]
@@ -133,13 +134,13 @@ def _evaluate_item(
         result = components_
     elif isinstance(item, OBGC):
         polyphony_container = item(denominator, voice_name, tag)
+        assert type(polyphony_container) is abjad.Container
         assert len(polyphony_container) == 2
-        assert isinstance(polyphony_container[0], abjad.OnBeatGraceContainer)
-        assert polyphony_container[1].name == voice_name
-        duration = abjad.get.duration(polyphony_container[1])
-        main_voice = polyphony_container[1]
-        assert isinstance(main_voice, abjad.Voice)
-        nongrace_leaves = abjad.mutate.eject_contents(main_voice)
+        obgc, nongrace_voice = polyphony_container
+        assert isinstance(obgc, abjad.OnBeatGraceContainer)
+        assert isinstance(nongrace_voice, abjad.Voice)
+        assert nongrace_voice.name == voice_name
+        nongrace_leaves = abjad.mutate.eject_contents(nongrace_voice)
         components.extend(nongrace_leaves)
         result = nongrace_leaves
         capture_original_item = polyphony_container
@@ -618,7 +619,7 @@ class OBGC:
         for item in self.nongrace_note_numerators:
             components = _evaluate_basic_item(item, denominator, voice_name, tag)
             nongrace_leaves.extend(components)
-        anchor_voice = abjad.Voice(nongrace_leaves, name=voice_name, tag=tag)
+        dummy_voice = abjad.Voice(nongrace_leaves, name=voice_name, tag=tag)
         grace_note_durations = [
             abjad.Duration(_, denominator) for _ in self.grace_note_numerators
         ]
@@ -632,24 +633,14 @@ class OBGC:
             nongrace_polyphony_command=self.nongrace_polyphony_command,
             tag=tag,
         )
-        #        rmakers.on_beat_grace_container(
-        #            anchor_voice,
-        #            anchor_voice.name,
-        #            _select.plts(anchor_voice),
-        #            self.grace_note_numerators,
-        #            grace_leaf_duration=self.grace_leaf_duration,
-        #            grace_polyphony_command=self.grace_polyphony_command,
-        #            nongrace_polyphony_command=self.nongrace_polyphony_command,
-        #            tag=tag,
-        #        )
-        assert len(anchor_voice) == 1
-        components = abjad.mutate.eject_contents(anchor_voice)
-        assert len(components) == 1
-        polyphony_container = components[0]
-        assert isinstance(polyphony_container, abjad.Container)
+        assert len(dummy_voice) == 1
+        polyphony_container = abjad.mutate.eject_contents(dummy_voice)[0]
+        assert type(polyphony_container) is abjad.Container
         assert len(polyphony_container) == 2
-        assert isinstance(polyphony_container[1], abjad.Voice)
-        assert polyphony_container[1].name == voice_name
+        obgc, nongrace_voice = polyphony_container
+        assert isinstance(obgc, abjad.OnBeatGraceContainer)
+        assert isinstance(nongrace_voice, abjad.Voice)
+        assert nongrace_voice.name == voice_name
         return polyphony_container
 
 
@@ -1174,10 +1165,10 @@ def make_rhythm(
                 rmakers.unbeam(timespan_components, smart=True)
             abjad.mutate.replace(timespan_components, original_item)
             if is_obgc_polyphony_container:
-                main_voice = original_item[1]
-                assert isinstance(main_voice, abjad.Voice)
-                assert len(main_voice) == 0
-                main_voice.extend(timespan_components)
+                nongrace_voice = original_item[1]
+                assert isinstance(nongrace_voice, abjad.Voice)
+                assert len(nongrace_voice) == 0
+                nongrace_voice.extend(timespan_components)
     return voice
 
 

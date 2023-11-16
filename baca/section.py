@@ -446,11 +446,11 @@ def _clean_up_laissez_vibrer_tie_direction(score):
             abjad.override(note).LaissezVibrerTie.direction = abjad.UP
 
 
-def _clean_up_on_beat_grace_containers(score):
-    for container in abjad.select.components(score, abjad.OnBeatGraceContainer):
-        container._match_anchor_leaf()
-        container._set_leaf_durations()
-        container._attach_lilypond_one_voice()
+def _clean_up_obgcs(score):
+    for obgc in abjad.select.components(score, abjad.OnBeatGraceContainer):
+        obgc._match_anchor_leaf()
+        obgc.set_grace_leaf_multipliers()
+        obgc._attach_lilypond_one_voice()
 
 
 def _clean_up_repeat_tie_direction(score):
@@ -2436,7 +2436,7 @@ def postprocess_score(
         global_rests_in_topmost_staff,
         score,
     )
-    _clean_up_on_beat_grace_containers(score)
+    _clean_up_obgcs(score)
     if not do_not_check_wellformedness:
         count, message = abjad.wf.tabulate_wellformedness(
             score,
