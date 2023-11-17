@@ -592,7 +592,7 @@ class OBGC:
     grace_note_numerators: list[int]
     nongrace_note_numerators: list
     do_not_attach_one_voice_command: bool = False
-    grace_leaf_duration: abjad.Duration | None = None
+    grace_leaf_duration: abjad.Duration | bool | None = None
     grace_polyphony_command: abjad.VoiceNumber = abjad.VoiceNumber(1)
     nongrace_polyphony_command: abjad.VoiceNumber = abjad.VoiceNumber(2)
 
@@ -607,11 +607,13 @@ class OBGC:
             self.do_not_attach_one_voice_command
         )
         if self.grace_leaf_duration is not None:
-            assert isinstance(self.grace_leaf_duration, abjad.Duration), repr(
+            assert isinstance(self.grace_leaf_duration, abjad.Duration | bool), repr(
                 self.grace_leaf_duration
             )
 
-    def __call__(self, denominator: int, voice_name: str, tag: abjad.Tag):
+    def __call__(
+        self, denominator: int, voice_name: str, tag: abjad.Tag
+    ) -> abjad.Container:
         assert isinstance(denominator, int), repr(denominator)
         assert isinstance(voice_name, str), repr(voice_name)
         tag = tag.append(_helpers.function_name(_frame()))
@@ -624,11 +626,16 @@ class OBGC:
             abjad.Duration(_, denominator) for _ in self.grace_note_numerators
         ]
         grace_leaves = abjad.makers.make_leaves([0], grace_note_durations, tag=tag)
+        if self.grace_leaf_duration is True:
+            nongrace_duration = abjad.get.duration(nongrace_leaves)
+            grace_leaf_duration = nongrace_duration / len(grace_leaves)
+        else:
+            grace_leaf_duration = self.grace_leaf_duration
         abjad.on_beat_grace_container(
             grace_leaves,
             nongrace_leaves,
             do_not_attach_one_voice_command=self.do_not_attach_one_voice_command,
-            grace_leaf_duration=self.grace_leaf_duration,
+            grace_leaf_duration=grace_leaf_duration,
             grace_polyphony_command=self.grace_polyphony_command,
             nongrace_polyphony_command=self.nongrace_polyphony_command,
             tag=tag,

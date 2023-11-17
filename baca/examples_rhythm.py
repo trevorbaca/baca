@@ -1880,6 +1880,165 @@ Examples: rhythm.
 
 ..  container:: example
 
+    Set ``grace_leaf_duration=True`` to scale grace leaves to fit withing the duration
+    of nongrace leaves:
+
+    >>> def OBGC(grace_note_count, nongrace_note_numerators):
+    ...     return baca.OBGC(
+    ...         grace_note_count * [1],
+    ...         nongrace_note_numerators,
+    ...         grace_leaf_duration=True,
+    ...     )
+
+    >>> def make_lilypond_file():
+    ...     voice, time_signatures = sixteenths(
+    ...         [(4, 4)],
+    ...         [OBGC(4, [4]), OBGC(5, [4]), OBGC(6, [4]), OBGC(7, [4])],
+    ...         voice_name="Music.Voice",
+    ...     )
+    ...     score = make_score(voice, time_signatures)
+    ...     baca.override.dls_staff_padding(voice, 4)
+    ...     result = baca.lilypond.file(score, includes=["abjad.ily"])
+    ...     return result
+
+    >>> lilypond_file = make_lilypond_file()
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        \with
+        {
+            \override TimeSignature.style = #'numbered
+            \override TupletBracket.bracket-visibility = ##t
+            \override TupletBracket.padding = 2
+            autoBeaming = ##f
+            proportionalNotationDuration = #(ly:make-moment 1 36)
+            tupletFullLength = ##t
+        }
+        <<
+            \new RhythmicStaff
+            {
+                \context Voice = "Music.Voice"
+                {
+                    <<
+                        \context Voice = "On_Beat_Grace_Container"
+                        {
+                            \override DynamicLineSpanner.staff-padding = 4
+                            \set fontSize = #-3
+                            \slash
+                            \voiceOne
+                            \time 4/4
+                            <
+                                \tweak font-size 0
+                                \tweak transparent ##t
+                                c'
+                            >16
+                            [
+                            (
+                            c'16
+                            c'16
+                            c'16
+                            )
+                            ]
+                        }
+                        \context Voice = "Music.Voice"
+                        {
+                            \voiceTwo
+                            c'4
+                        }
+                    >>
+                    <<
+                        \context Voice = "On_Beat_Grace_Container"
+                        {
+                            \set fontSize = #-3
+                            \slash
+                            \voiceOne
+                            <
+                                \tweak font-size 0
+                                \tweak transparent ##t
+                                c'
+                            >16 * 4/5
+                            [
+                            (
+                            c'16 * 4/5
+                            c'16 * 4/5
+                            c'16 * 4/5
+                            c'16 * 4/5
+                            )
+                            ]
+                        }
+                        \context Voice = "Music.Voice"
+                        {
+                            \voiceTwo
+                            c'4
+                        }
+                    >>
+                    <<
+                        \context Voice = "On_Beat_Grace_Container"
+                        {
+                            \set fontSize = #-3
+                            \slash
+                            \voiceOne
+                            <
+                                \tweak font-size 0
+                                \tweak transparent ##t
+                                c'
+                            >16 * 2/3
+                            [
+                            (
+                            c'16 * 2/3
+                            c'16 * 2/3
+                            c'16 * 2/3
+                            c'16 * 2/3
+                            c'16 * 2/3
+                            )
+                            ]
+                        }
+                        \context Voice = "Music.Voice"
+                        {
+                            \voiceTwo
+                            c'4
+                        }
+                    >>
+                    <<
+                        \context Voice = "On_Beat_Grace_Container"
+                        {
+                            \set fontSize = #-3
+                            \slash
+                            \voiceOne
+                            <
+                                \tweak font-size 0
+                                \tweak transparent ##t
+                                c'
+                            >16 * 4/7
+                            [
+                            (
+                            c'16 * 4/7
+                            c'16 * 4/7
+                            c'16 * 4/7
+                            c'16 * 4/7
+                            c'16 * 4/7
+                            c'16 * 4/7
+                            )
+                            ]
+                        }
+                        \context Voice = "Music.Voice"
+                        {
+                            \voiceTwo
+                            c'4
+                            \revert DynamicLineSpanner.staff-padding
+                        }
+                    >>
+                }
+            }
+        >>
+
+..  container:: example
+
     Tremolo container:
 
     >>> def make_lilypond_file():
