@@ -448,9 +448,9 @@ def _clean_up_laissez_vibrer_tie_direction(score):
 
 def _clean_up_obgcs(score):
     for obgc in abjad.select.components(score, abjad.OnBeatGraceContainer):
-        obgc._match_anchor_leaf()
+        obgc.match_first_nongrace_leaf()
         obgc.set_grace_leaf_multipliers()
-        obgc._attach_lilypond_one_voice()
+        obgc.attach_lilypond_one_voice()
 
 
 def _clean_up_repeat_tie_direction(score):
