@@ -381,7 +381,7 @@ def _make_cluster(
         chord = abjad.Chord(pitches, pleaf.written_duration)
         wrappers = abjad.get.wrappers(pleaf)
         abjad.detach(object, pleaf)
-        abjad.mutate.replace(pleaf, chord)
+        abjad.mutate.replace(pleaf, chord, wrappers=True)
         for wrapper in wrappers:
             abjad.attach(wrapper, chord, direction=wrapper.direction)
         abjad.attach(key_cluster, chord, direction=direction)
@@ -501,7 +501,6 @@ def _set_lt_pitch(
                     note_head.written_pitch = pitch
         else:
             assert isinstance(lt.head, abjad.Chord | abjad.Rest)
-            # zebra
             if not allow_obgc_mutation:
                 raise Exception("set allow_obgc_mutation=True")
                 pass
@@ -538,7 +537,7 @@ def _do_diatonic_cluster_command(argument, widths):
         for pleaf in plt:
             chord = abjad.Chord(pleaf)
             chord.note_heads[:] = pitches
-            abjad.mutate.replace(pleaf, chord)
+            abjad.mutate.replace(pleaf, chord, wrappers=True)
 
 
 def _get_lowest_diatonic_pitch_number(plt):
