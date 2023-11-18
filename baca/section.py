@@ -2966,23 +2966,22 @@ def treat_untreated_persistent_wrappers(score, *, manifests=None):
     )
     for leaf in abjad.iterate.leaves(score):
         for wrapper in abjad.get.wrappers(leaf):
-            if not getattr(wrapper.unbundle_indicator(), "persistent", False):
+            indicator = wrapper.unbundle_indicator()
+            if not getattr(indicator, "persistent", False):
                 continue
             if wrapper.tag and _tags.has_persistence_tag(wrapper.tag):
                 continue
-            if isinstance(wrapper.unbundle_indicator(), abjad.Instrument):
+            if isinstance(indicator, abjad.Instrument):
                 prototype = abjad.Instrument
-            elif isinstance(wrapper.unbundle_indicator(), dynamic_prototype):
+            elif isinstance(indicator, dynamic_prototype):
                 prototype = dynamic_prototype
-            elif isinstance(wrapper.unbundle_indicator(), tempo_prototype):
+            elif isinstance(indicator, tempo_prototype):
                 prototype = tempo_prototype
             else:
-                prototype = type(wrapper.unbundle_indicator())
+                prototype = type(indicator)
             # TODO: optimize
             previous_indicator = abjad.get.effective(leaf, prototype, n=-1)
-            if _treat.compare_persistent_indicators(
-                previous_indicator, wrapper.unbundle_indicator()
-            ):
+            if _treat.compare_persistent_indicators(previous_indicator, indicator):
                 status = "redundant"
             else:
                 status = "explicit"
