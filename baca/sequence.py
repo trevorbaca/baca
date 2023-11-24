@@ -1,14 +1,13 @@
 """
 Sequence.
 """
-import collections
 import copy
 import itertools
 
 import abjad
 
 
-def accumulate(sequence: list, operands=None, count=None):
+def accumulate(sequence: list, operands=(), count=None):
     r"""
     Accumulates ``operands`` calls against sequence to identity.
 
@@ -180,7 +179,7 @@ def accumulate(sequence: list, operands=None, count=None):
     return type(sequence)(items)
 
 
-def boustrophedon(sequence, count=2):
+def boustrophedon(sequence, *, count: int = 2):
     r"""
     Iterates sequence boustrophedon.
 
@@ -259,26 +258,27 @@ def boustrophedon(sequence, count=2):
 
     Returns new sequence.
     """
+    assert isinstance(count, int), repr(count)
     result = []
     for i in range(count):
         if i == 0:
             for item in sequence:
                 result.append(copy.copy(item))
         elif i % 2 == 0:
-            if isinstance(sequence[0], collections.abc.Iterable):
+            if hasattr(sequence[0], "__len__"):
                 result.append(sequence[0][1:])
             else:
                 pass
             for item in sequence[1:]:
                 result.append(copy.copy(item))
         else:
-            if isinstance(sequence[-1], collections.abc.Iterable):
+            if hasattr(sequence[-1], "__len__"):
                 item = type(sequence[-1])(list(reversed(sequence[-1]))[1:])
                 result.append(item)
             else:
                 pass
             for item in reversed(sequence[:-1]):
-                if isinstance(item, collections.abc.Iterable):
+                if hasattr(item, "__len__"):
                     item = type(item)(list(reversed(item)))
                     result.append(item)
                 else:
@@ -286,7 +286,7 @@ def boustrophedon(sequence, count=2):
     return type(sequence)(result)
 
 
-def degree_of_rotational_symmetry(sequence):
+def degree_of_rotational_symmetry(sequence) -> int:
     """
     Gets degree of rotational symmetry.
 
@@ -307,7 +307,6 @@ def degree_of_rotational_symmetry(sequence):
         >>> baca.sequence.degree_of_rotational_symmetry([])
         1
 
-    Returns positive integer.
     """
     degree_of_rotational_symmetry = 0
     for index in range(len(sequence)):
@@ -318,7 +317,7 @@ def degree_of_rotational_symmetry(sequence):
     return degree_of_rotational_symmetry
 
 
-def group_by_sign(sequence, sign=(-1, 0, 1)):
+def group_by_sign(sequence, *, sign=(-1, 0, 1)) -> list:
     r"""
     Groups sequence by sign of items.
 
@@ -338,7 +337,7 @@ def group_by_sign(sequence, sign=(-1, 0, 1)):
 
     ..  container:: example
 
-        >>> for item in baca.sequence.group_by_sign(sequence, [-1]):
+        >>> for item in baca.sequence.group_by_sign(sequence, sign=[-1]):
         ...     item
         ...
         [0]
@@ -354,7 +353,7 @@ def group_by_sign(sequence, sign=(-1, 0, 1)):
 
     ..  container:: example
 
-        >>> for item in baca.sequence.group_by_sign(sequence, [0]):
+        >>> for item in baca.sequence.group_by_sign(sequence, sign=[0]):
         ...     item
         ...
         [0, 0]
@@ -371,7 +370,7 @@ def group_by_sign(sequence, sign=(-1, 0, 1)):
 
     ..  container:: example
 
-        >>> for item in baca.sequence.group_by_sign(sequence, [1]):
+        >>> for item in baca.sequence.group_by_sign(sequence, sign=[1]):
         ...     item
         ...
         [0]
@@ -386,7 +385,7 @@ def group_by_sign(sequence, sign=(-1, 0, 1)):
 
     ..  container:: example
 
-        >>> for item in baca.sequence.group_by_sign(sequence, [-1, 0]):
+        >>> for item in baca.sequence.group_by_sign(sequence, sign=[-1, 0]):
         ...     item
         ...
         [0, 0]
@@ -401,7 +400,7 @@ def group_by_sign(sequence, sign=(-1, 0, 1)):
 
     ..  container:: example
 
-        >>> for item in baca.sequence.group_by_sign(sequence, [-1, 1]):
+        >>> for item in baca.sequence.group_by_sign(sequence, sign=[-1, 1]):
         ...     item
         ...
         [0]
@@ -414,7 +413,7 @@ def group_by_sign(sequence, sign=(-1, 0, 1)):
 
     ..  container:: example
 
-        >>> for item in baca.sequence.group_by_sign(sequence, [0, 1]):
+        >>> for item in baca.sequence.group_by_sign(sequence, sign=[0, 1]):
         ...     item
         ...
         [0, 0]
@@ -428,7 +427,7 @@ def group_by_sign(sequence, sign=(-1, 0, 1)):
 
     ..  container:: example
 
-        >>> for item in baca.sequence.group_by_sign(sequence, [-1, 0, 1]):
+        >>> for item in baca.sequence.group_by_sign(sequence, sign=[-1, 0, 1]):
         ...     item
         ...
         [0, 0]
@@ -444,7 +443,7 @@ def group_by_sign(sequence, sign=(-1, 0, 1)):
 
     Groups positive elements when ``1`` in ``sign``.
 
-    Returns nested sequence.
+    Returns list of ``sequence`` types.
     """
     items = []
     pairs = itertools.groupby(sequence, abjad.math.sign)
@@ -561,7 +560,7 @@ def helianthate(sequence, n=0, m=0):
     return type(sequence)(result)
 
 
-def period_of_rotation(sequence):
+def period_of_rotation(sequence) -> int:
     """
     Gets period of rotation of ``sequence``.
 
@@ -584,8 +583,6 @@ def period_of_rotation(sequence):
 
     Defined equal to length of sequence divided by degree of rotational symmetry of
     sequence.
-
-    Returns positive integer.
     """
     return len(sequence) // degree_of_rotational_symmetry(sequence)
 
@@ -618,18 +615,16 @@ def quarters(durations: list[abjad.Duration]) -> list[list[abjad.Duration]]:
     return lists
 
 
-def repeat_by(sequence, counts=None, cyclic=None):
+def repeat_by(sequence, counts: list[int], *, cyclic: bool = False):
     r"""
     Repeat sequence elements at ``counts``.
 
     ..  container:: example
 
-        With no counts:
+        With empty counts:
 
-        ..  container:: example
-
-            >>> baca.sequence.repeat_by([[1, 2, 3], 4, [5, 6]])
-            [[1, 2, 3], 4, [5, 6]]
+        >>> baca.sequence.repeat_by([[1, 2, 3], 4, [5, 6]], [])
+        [[1, 2, 3], 4, [5, 6]]
 
     ..  container:: example
 
@@ -715,16 +710,20 @@ def repeat_by(sequence, counts=None, cyclic=None):
 
     Returns new sequence.
     """
-    if counts is None:
+    assert isinstance(cyclic, bool), repr(cyclic)
+    if not counts:
         return type(sequence)(sequence)
-    counts = counts or [1]
-    assert isinstance(counts, collections.abc.Iterable)
+    assert isinstance(counts, list), repr(counts)
+    assert all(isinstance(_, int) for _ in counts), repr(counts)
     if cyclic is True:
-        counts = abjad.CyclicTuple(counts)
+        cyclic_counts = abjad.CyclicTuple(counts)
     items = []
     for i, item in enumerate(sequence):
         try:
-            count = counts[i]
+            if cyclic is True:
+                count = cyclic_counts[i]
+            else:
+                count = counts[i]
         except IndexError:
             count = 1
         items.extend(count * [item])
