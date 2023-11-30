@@ -847,32 +847,32 @@ Examples: rhythm.
                     \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
                     \times 1/1
                     {
+                        \override Staff.Stem.stemlet-length = 0.75
                         \once \override Beam.grow-direction = #right
                         \time 1/4
                         c'16 * 7488/5120
                         [
                         c'16 * 4032/5120
-                        ]
                         r16 * 3328/5120
                         c'16 * 2944/5120
-                        [
                         c'16 * 2688/5120
                         ]
+                        \revert Staff.Stem.stemlet-length
                     }
                     \revert TupletNumber.text
                     \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
                     \times 1/1
                     {
+                        \override Staff.Stem.stemlet-length = 0.75
                         \once \override Beam.grow-direction = #left
                         c'16 * 1472/5120
                         [
                         c'16 * 3136/5120
-                        ]
                         r16 * 4288/5120
                         c'16 * 5312/5120
-                        [
                         c'16 * 6272/5120
                         ]
+                        \revert Staff.Stem.stemlet-length
                     }
                     \revert TupletNumber.text
                 }
