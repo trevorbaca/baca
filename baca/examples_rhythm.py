@@ -810,6 +810,77 @@ Examples: rhythm.
 
 ..  container:: example
 
+    Feathers with rests:
+
+    >>> def make_lilypond_file():
+    ...     voice, time_signatures = sixteenths(
+    ...         2 * [(1, 4)],
+    ...         [A([1, 1, -1, 1, 1], 4), R([1, 1, -1, 1, 1], 4)],
+    ...     )
+    ...     score = make_score(voice, time_signatures)
+    ...     result = abjad.LilyPondFile([score])
+    ...     return result
+
+    >>> lilypond_file = make_lilypond_file()
+    >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+    ..  docs::
+
+        >>> score = lilypond_file["Score"]
+        >>> string = abjad.lilypond(score)
+        >>> print(string)
+        \context Score = "Score"
+        \with
+        {
+            \override TimeSignature.style = #'numbered
+            \override TupletBracket.bracket-visibility = ##t
+            \override TupletBracket.padding = 2
+            autoBeaming = ##f
+            proportionalNotationDuration = #(ly:make-moment 1 36)
+            tupletFullLength = ##t
+        }
+        <<
+            \new RhythmicStaff
+            {
+                \new Voice
+                {
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #right
+                        \time 1/4
+                        c'16 * 7488/5120
+                        [
+                        c'16 * 4032/5120
+                        ]
+                        r16 * 3328/5120
+                        c'16 * 2944/5120
+                        [
+                        c'16 * 2688/5120
+                        ]
+                    }
+                    \revert TupletNumber.text
+                    \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
+                    \times 1/1
+                    {
+                        \once \override Beam.grow-direction = #left
+                        c'16 * 1472/5120
+                        [
+                        c'16 * 3136/5120
+                        ]
+                        r16 * 4288/5120
+                        c'16 * 5312/5120
+                        [
+                        c'16 * 6272/5120
+                        ]
+                    }
+                    \revert TupletNumber.text
+                }
+            }
+        >>
+
+..  container:: example
+
     Feathers with before-grace music and on-beat grace music:
 
     >>> def OBGC(grace_note_numerators, nongrace_note_numerators):
