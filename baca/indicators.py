@@ -711,12 +711,13 @@ def mark(
     argument,
     string: str,
     *tweaks: abjad.Tweak,
+    site: str = "before",
 ) -> list[abjad.Wrapper]:
     assert isinstance(string, abjad.Markup | str), repr(string)
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.select.leaves(argument):
-        rehearsal_mark = abjad.RehearsalMark(markup=string)
+        rehearsal_mark = abjad.RehearsalMark(markup=string, site=site)
         rehearsal_mark = _tweaks.bundle_tweaks(rehearsal_mark, tweaks)
         wrapper = abjad.attach(
             rehearsal_mark,
