@@ -719,11 +719,11 @@ Examples: commands.
                 }
                 \context Voice = "Music"
                 {
+                    \clef "percussion"
                     \override Staff.BarLine.bar-extent = #'(0 . 0)
                     \stopStaff
                     \once \override Staff.StaffSymbol.line-count = 1
                     \startStaff
-                    \clef "percussion"
                     a4.
                     b4.
                     c'4.
@@ -780,11 +780,11 @@ Examples: commands.
                 }
                 \context Voice = "Music"
                 {
+                    \clef "bass"
                     \override Staff.BarLine.bar-extent = #'(0 . 0)
                     \stopStaff
                     \once \override Staff.StaffSymbol.line-count = 1
                     \startStaff
-                    \clef "bass"
                     b,4.
                     c4.
                     d4.
@@ -842,11 +842,11 @@ Examples: commands.
                 }
                 \context Voice = "Music"
                 {
+                    \clef "percussion"
                     \override Staff.BarLine.bar-extent = #'(-0.5 . 0.5)
                     \stopStaff
                     \once \override Staff.StaffSymbol.line-count = 2
                     \startStaff
-                    \clef "percussion"
                     a4.
                     b4.
                     c'4.
@@ -902,11 +902,11 @@ Examples: commands.
                 }
                 \context Voice = "Music"
                 {
+                    \clef "bass"
                     \override Staff.BarLine.bar-extent = #'(-0.5 . 0.5)
                     \stopStaff
                     \once \override Staff.StaffSymbol.line-count = 2
                     \startStaff
-                    \clef "bass"
                     b,4.
                     c4.
                     d4.
@@ -962,11 +962,11 @@ Examples: commands.
                 }
                 \context Voice = "Music"
                 {
+                    \clef "bass"
                     \override Staff.BarLine.bar-extent = #'(-0.5 . 0.5)
                     \stopStaff
                     \once \override Staff.StaffSymbol.line-count = 2
                     \startStaff
-                    \clef "bass"
                     g'4.
                     a'4.
                     b'4.

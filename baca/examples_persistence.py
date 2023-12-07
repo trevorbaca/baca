@@ -54,11 +54,11 @@ Persistence.
                             \context Voice = "Music"
                             {
                                 \abjad-invisible-music-coloring
+                                \clef "treble"
                                 \once \override Staff.Clef.color = #blue
                                 \set Staff.forceClef = ##t
                                 \once \override Accidental.stencil = ##f
                                 \once \override NoteColumn.ignore-collision = ##t
-                                \clef "treble"
                                 c'1 * 3/8
                                 \break
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
@@ -134,11 +134,11 @@ Persistence.
                             \context Voice = "Music"
                             {
                                 \abjad-invisible-music-coloring
+                                \clef "alto"
                                 \once \override Staff.Clef.color = #blue
                                 \set Staff.forceClef = ##t
                                 \once \override Accidental.stencil = ##f
                                 \once \override NoteColumn.ignore-collision = ##t
-                                \clef "alto"
                                 c'1 * 3/8
                                 \break
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
@@ -209,11 +209,11 @@ Persistence.
                             \context Voice = "Music"
                             {
                                 \abjad-invisible-music-coloring
+                                \clef "treble"
                                 \once \override Staff.Clef.color = #(x11-color 'green4)
                                 \set Staff.forceClef = ##t
                                 \once \override Accidental.stencil = ##f
                                 \once \override NoteColumn.ignore-collision = ##t
-                                \clef "treble"
                                 c'1 * 3/8
                                 \break
                                 \override Staff.Clef.color = #(x11-color 'OliveDrab)
@@ -275,11 +275,11 @@ Persistence.
                             \context Voice = "Music"
                             {
                                 \abjad-invisible-music-coloring
+                                \clef "treble"
                                 \once \override Staff.Clef.color = #blue
                                 \set Staff.forceClef = ##t
                                 \once \override Accidental.stencil = ##f
                                 \once \override NoteColumn.ignore-collision = ##t
-                                \clef "treble"
                                 c'1 * 3/8
                                 \break
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
@@ -289,9 +289,9 @@ Persistence.
                                 R1 * 3/8
                             }
                         >>
+                        \clef "treble"
                         \once \override Staff.Clef.color = #(x11-color 'DeepPink1)
                         \set Staff.forceClef = ##t
-                        \clef "treble"
                         R1 * 3/8
                         \override Staff.Clef.color = #(x11-color 'DeepPink4)
                     }
@@ -359,11 +359,11 @@ Persistence.
                             \context Voice = "Music"
                             {
                                 \abjad-invisible-music-coloring
+                                \clef "treble"
                                 \once \override Staff.Clef.color = #(x11-color 'DeepPink1)
                                 \set Staff.forceClef = ##t
                                 \once \override Accidental.stencil = ##f
                                 \once \override NoteColumn.ignore-collision = ##t
-                                \clef "treble"
                                 c'1 * 3/8
                                 \break
                                 \override Staff.Clef.color = #(x11-color 'DeepPink4)

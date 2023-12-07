@@ -1208,8 +1208,8 @@ def interpolate_pitches(
                     \context Voice = "Voice"
                     {
                         {
-                            \override Glissando.thickness = 3
                             \clef "treble"
+                            \override Glissando.thickness = 3
                             \time 3/2
                             ef'16
                             [
