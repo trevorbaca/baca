@@ -399,8 +399,8 @@ Examples: rhythm.
             {
                 \context Voice = "Example.Voice"
                 {
-                    \voiceTwo
                     \time 1/4
+                    \voiceTwo
                     r16
                     \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 }
                     \times 1/1
@@ -848,8 +848,8 @@ Examples: rhythm.
                     \times 1/1
                     {
                         \override Staff.Stem.stemlet-length = 0.75
-                        \once \override Beam.grow-direction = #right
                         \time 1/4
+                        \once \override Beam.grow-direction = #right
                         c'16 * 7488/5120
                         [
                         c'16 * 4032/5120
@@ -2001,8 +2001,8 @@ Examples: rhythm.
                             \override DynamicLineSpanner.staff-padding = 4
                             \set fontSize = #-3
                             \slash
-                            \voiceOne
                             \time 4/4
+                            \voiceOne
                             <
                                 \tweak font-size 0
                                 \tweak transparent ##t

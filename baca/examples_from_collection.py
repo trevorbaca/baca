@@ -283,8 +283,8 @@ Examples: ``baca.from_collection()``.
                     \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 ~ 16 }
                     \times 1/1
                     {
-                        \once \override Beam.grow-direction = #right
                         \time 11/8
+                        \once \override Beam.grow-direction = #right
                         c'16 * 1872/1024
                         [
                         d'16 * 1008/1024
@@ -384,8 +384,8 @@ Examples: ``baca.from_collection()``.
                     \override TupletNumber.text = \markup \scale #'(0.75 . 0.75) \rhythm { 4 ~ 16 }
                     \times 1/1
                     {
-                        \once \override Beam.grow-direction = #right
                         \time 13/8
+                        \once \override Beam.grow-direction = #right
                         c'16 * 1872/1024
                         [
                         d'16 * 1008/1024
