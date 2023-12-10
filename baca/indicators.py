@@ -1077,6 +1077,28 @@ def tenuto(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
+def text_mark(
+    argument,
+    string: str,
+    *tweaks: abjad.Tweak,
+    site: str = "before",
+) -> list[abjad.Wrapper]:
+    assert isinstance(string, str), repr(string)
+    tag = _helpers.function_name(_frame())
+    wrappers = []
+    for leaf in abjad.select.leaves(argument):
+        mark = abjad.TextMark(string=string, site=site)
+        result = _tweaks.bundle_tweaks(mark, tweaks)
+        wrapper = abjad.attach(
+            result,
+            leaf,
+            tag=tag,
+            wrapper=True,
+        )
+        wrappers.append(wrapper)
+    return wrappers
+
+
 def tie(argument) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
