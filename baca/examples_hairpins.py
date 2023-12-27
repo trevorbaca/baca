@@ -14,7 +14,7 @@ Examples: hairpins.
     ...     score["Music"].extend(music)
     ...     voice = score["Music"]
     ...     baca.pitches(voice, "E4 D5 F4 E5 G4 F5")
-    ...     baca.hairpin(voice, "p < f", bookend=-1)
+    ...     baca.hairpin(voice, "p < f")
     ...     baca.override.dls_staff_padding(voice, 5)
     ...     baca.docs.remove_deactivated_wrappers(score)
     ...     lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
@@ -323,7 +323,7 @@ Examples: hairpins.
 
 ..  container:: example
 
-    Effort dynamics crescendo subito, decrescendo subito:
+    Effort dynamics crescendo subito, diminuendo subito:
 
     >>> def make_lilypond_file():
     ...     score = baca.docs.make_empty_score(1)
