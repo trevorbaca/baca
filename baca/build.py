@@ -72,14 +72,6 @@ def _externalize_music_ly(music_ly):
                 pointer.write(messages)
 
 
-def _get_lilypond_include_string():
-    abjad_contents = pathlib.Path(abjad.__file__).parent
-    baca_contents = pathlib.Path(baca.__file__).parent
-    string = f"--include={abjad_contents}/scm"
-    string += f" --include={baca_contents}/scm"
-    return string
-
-
 def _get_preamble_page_count_overview(path):
     assert path.is_file(), repr(path)
     first_page_number, page_count = 1, None
@@ -737,6 +729,16 @@ def color_persistent_indicators(file, *, undo=False):
     return messages
 
 
+def get_includes():
+    strings = []
+    abjad_contents = pathlib.Path(abjad.__file__).parent
+    strings.append(f"--include={abjad_contents}/scm")
+    baca_contents = pathlib.Path(baca.__file__).parent
+    strings.append(f" --include={baca_contents}/scm")
+    string = " ".join(strings)
+    return string
+
+
 def handle_build_tags(_sections_directory):
     print_file_handling("Writing build tag files ...")
     contents_directory = baca.path.get_contents_directory(_sections_directory)
@@ -1228,7 +1230,7 @@ def run_lilypond(ly_file_path, *, pdf_mtime=None, remove=None):
     lilypond_log_file_name = "." + ly_file_path.name + ".log"
     lilypond_log_file_path = directory / lilypond_log_file_name
     with abjad.TemporaryDirectoryChange(directory=directory):
-        flags = _get_lilypond_include_string()
+        flags = get_includes()
         abjad.io.run_lilypond(
             str(ly_file_path),
             flags=flags,
