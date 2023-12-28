@@ -512,17 +512,7 @@ def _remove_site_comments(section_directory):
         tagged = section_directory / name
         if not tagged.exists():
             continue
-        with tagged.open() as pointer:
-            lines = pointer.readlines()
-        lines_ = []
-        for line in lines:
-            if line.strip().startswith("% "):
-                if line.strip().endswith(":"):
-                    continue
-            lines_.append(line)
-        lines = lines_
-        string = "".join(lines)
-        tagged.write_text(string)
+        remove_site_comments(tagged)
 
 
 def _trim_music_ly(ly):
@@ -1219,6 +1209,14 @@ def read_environment(
         timing=Timing(),
     )
     return environment
+
+
+def remove_site_comments(path: pathlib.Path) -> None:
+    with path.open() as pointer:
+        lines = pointer.readlines()
+    string = "".join(lines)
+    string = abjad.format.remove_site_comments(string)
+    path.write_text(string)
 
 
 def run_lilypond(ly_file_path, *, pdf_mtime=None, remove=None):
