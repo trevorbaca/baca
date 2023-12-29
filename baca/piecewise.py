@@ -67,6 +67,7 @@ def _attach_indicators(
     *,
     just_bookended_leaf=None,
 ) -> list[abjad.Wrapper]:
+    assert isinstance(specifier, _Specifier), repr(specifier)
     assert isinstance(manifests, dict), repr(manifests)
     assert isinstance(tag, abjad.Tag), repr(tag)
     wrappers = []
@@ -78,7 +79,12 @@ def _attach_indicators(
             continue
         if not isinstance(indicator, bool | abjad.Bundle):
             indicator = dataclasses.replace(indicator)
-        if _is_maybe_bundled(indicator, abjad.StartTextSpan) and tweaks:
+        if (
+            # TODO: activate abjad.StartHairpin
+            # _is_maybe_bundled(indicator, abjad.StartTextSpan | abjad.StartHairpin)
+            _is_maybe_bundled(indicator, abjad.StartTextSpan)
+            and tweaks
+        ):
             for item in tweaks:
                 if isinstance(item, abjad.Tweak):
                     new_tweak = item
@@ -115,7 +121,7 @@ def _attach_indicators(
 def _do_piecewise_command(
     argument,
     *,
-    manifests=None,
+    manifests: dict | None = None,
     bookend: bool | int = False,
     final_piece_spanner=None,
     leak_spanner_stop: bool = False,
@@ -124,7 +130,7 @@ def _do_piecewise_command(
     remove_length_1_spanner_start: bool = False,
     right_broken: typing.Any | None = None,
     specifiers: typing.Sequence = (),
-    tag,
+    tag: abjad.Tag,
     tweaks: typing.Sequence[_typings.IndexedTweak] = (),
 ) -> list[abjad.Wrapper]:
     """
@@ -165,6 +171,7 @@ def _do_piecewise_command(
         is_final_piece = i == piece_count - 1
         if is_final_piece and right_broken:
             specifier = _Specifier(spanner_start=right_broken)
+            # TODO: use _helpers.function_name(_frame(), n=1)
             tag_ = abjad.Tag("baca.PiecewiseCommand._call(1)")
             tag_ = tag_.append(_tags.RIGHT_BROKEN)
             wrappers_ = _attach_indicators(
@@ -219,6 +226,7 @@ def _do_piecewise_command(
             elif _is_maybe_bundled(specifier.spanner_start, abjad.StartTextSpan):
                 if final_piece_spanner is False:
                     specifier = dataclasses.replace(specifier, spanner_start=None)
+        # TODO: use _helpers.function_name(_frame(), n=2)
         tag_ = abjad.Tag("baca.PiecewiseCommand._call(2)")
         if is_first_piece or previous_had_bookend:
             specifier = dataclasses.replace(specifier, spanner_stop=None)
@@ -238,6 +246,7 @@ def _do_piecewise_command(
         )
         wrappers.extend(wrappers_)
         if should_bookend:
+            # TODO: use _helpers.function_name(_frame(), n=3)
             tag_ = abjad.Tag("baca.PiecewiseCommand._call(3)")
             if is_final_piece and right_broken:
                 tag_ = tag_.append(_tags.RIGHT_BROKEN)
@@ -266,6 +275,7 @@ def _do_piecewise_command(
             if leak_spanner_stop:
                 spanner_stop = dataclasses.replace(spanner_stop, leak=True)
             specifier = _Specifier(spanner_stop=spanner_stop)
+            # TODO: use _helpers.function_name(_frame(), n=4)
             tag_ = abjad.Tag("baca.PiecewiseCommand._call(4)")
             if right_broken:
                 tag_ = tag_.append(_tags.RIGHT_BROKEN)
@@ -297,11 +307,13 @@ def _prepare_hairpin_arguments(
     dynamics,
     final_hairpin,
     forbid_al_niente_to_bar_line,
+    # TODO: remove tweaks
     tweaks,
 ):
     if isinstance(dynamics, str):
         specifiers = parse_hairpin_descriptor(
             dynamics,
+            # TODO: remove tweaks
             *tweaks,
             forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
         )
@@ -320,7 +332,7 @@ def _prepare_hairpin_arguments(
 
 def _prepare_text_spanner_arguments(
     items,
-    *tweaks,
+    *,
     bookend,
     boxed,
     direction,
@@ -645,7 +657,7 @@ def damp_spanner(
 def hairpin(
     argument,
     dynamics: str | list,
-    *tweaks: abjad.Tweak,
+    *tweaks: _typings.IndexedTweak,
     bookend: bool | int = -1,
     final_hairpin: bool | str | abjad.StartHairpin | None = None,
     forbid_al_niente_to_bar_line: bool = False,
@@ -658,6 +670,7 @@ def hairpin(
         dynamics=dynamics,
         final_hairpin=final_hairpin,
         forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
+        # TODO: remove tweaks
         tweaks=tweaks,
     )
     assert isinstance(bookend, bool | int), repr(bookend)
@@ -679,6 +692,7 @@ def hairpin(
         right_broken=right_broken_,
         specifiers=specifiers,
         tag=_helpers.function_name(_frame()),
+        tweaks=tweaks,
     )
 
 
@@ -756,6 +770,7 @@ def metric_modulation_spanner(
     return wrappers
 
 
+# TODO: move tests to tests/test_dynamics.py
 def parse_hairpin_descriptor(
     descriptor: str,
     *tweaks: abjad.Tweak,
@@ -1067,7 +1082,6 @@ def text_spanner(
 ) -> list[abjad.Wrapper]:
     specifiers = _prepare_text_spanner_arguments(
         items,
-        *tweaks,
         bookend=bookend,
         boxed=boxed,
         direction=direction,
