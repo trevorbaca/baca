@@ -80,9 +80,7 @@ def _attach_indicators(
         if not isinstance(indicator, bool | abjad.Bundle):
             indicator = dataclasses.replace(indicator)
         if (
-            # TODO: activate abjad.StartHairpin
-            # _is_maybe_bundled(indicator, abjad.StartTextSpan | abjad.StartHairpin)
-            _is_maybe_bundled(indicator, abjad.StartTextSpan)
+            _is_maybe_bundled(indicator, abjad.StartTextSpan | abjad.StartHairpin)
             and tweaks
         ):
             for item in tweaks:
