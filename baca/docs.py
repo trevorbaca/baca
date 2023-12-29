@@ -271,14 +271,24 @@ def make_empty_score(*counts, do_not_move_global_context=False, no_skips=False):
     return score
 
 
-def make_single_staff_score(components):
+def make_single_staff_score(
+    components, tsfs: str | None = None, pndfs: str | None = None
+) -> abjad.Score:
     voice = abjad.Voice(components, name="Voice")
     staff = abjad.Staff([voice], name="Staff")
     score = abjad.Score([staff], name="Score", simultaneous=False)
-    duration = abjad.get.duration(components)
-    time_signature = abjad.TimeSignature(duration.pair)
-    leaf = abjad.select.leaf(components, 0)
+    if tsfs is not None:
+        n, d = tsfs.split("/")
+        pair = int(n), int(d)
+        time_signature = abjad.TimeSignature(pair)
+    else:
+        duration = abjad.get.duration(voice)
+        time_signature = abjad.TimeSignature(duration.pair)
+    leaf = abjad.select.leaf(voice, 0)
     abjad.attach(time_signature, leaf)
+    if pndfs is not None:
+        string = f"#(ly:make-moment {pndfs})"
+        abjad.setting(score).proportionalNotationDuration = string
     return score
 
 
