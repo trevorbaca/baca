@@ -233,6 +233,7 @@ class SchemeManifest:
         raise KeyError(dynamic)
 
 
+# TODO: move tests to tests/test_dynamics.py
 def make_dynamic(
     string: str, *, forbid_al_niente_to_bar_line: bool = False
 ) -> abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin | abjad.Bundle:
@@ -426,7 +427,6 @@ def make_dynamic(
     """
     assert isinstance(string, str), repr(string)
     scheme_manifest = SchemeManifest()
-    known_shapes = abjad.StartHairpin("<").known_shapes
     indicator: abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin | abjad.Bundle
     if "_" in string:
         raise Exception(f"use hyphens instead of underscores ({string!r}).")
@@ -500,7 +500,7 @@ def make_dynamic(
         stripped_string = string.strip('"')
         command = rf"\baca-effort-{stripped_string}"
         indicator = abjad.Dynamic(f"{string}", command=command)
-    elif string in known_shapes:
+    elif string in abjad.StartHairpin.known_shapes:
         indicator = abjad.StartHairpin(string)
         if string.endswith(">o") and not forbid_al_niente_to_bar_line:
             indicator = abjad.bundle(indicator, r"- \tweak to-barline ##t")
