@@ -171,8 +171,7 @@ def _do_piecewise_command(
         is_final_piece = i == piece_count - 1
         if is_final_piece and right_broken:
             specifier = _Specifier(spanner_start=right_broken)
-            # TODO: use _helpers.function_name(_frame(), n=1)
-            tag_ = abjad.Tag("baca.PiecewiseCommand._call(1)")
+            tag_ = _helpers.function_name(_frame(), n=1)
             tag_ = tag_.append(_tags.RIGHT_BROKEN)
             wrappers_ = _attach_indicators(
                 specifier,
@@ -226,8 +225,7 @@ def _do_piecewise_command(
             elif _is_maybe_bundled(specifier.spanner_start, abjad.StartTextSpan):
                 if final_piece_spanner is False:
                     specifier = dataclasses.replace(specifier, spanner_start=None)
-        # TODO: use _helpers.function_name(_frame(), n=2)
-        tag_ = abjad.Tag("baca.PiecewiseCommand._call(2)")
+        tag_ = _helpers.function_name(_frame(), n=2)
         if is_first_piece or previous_had_bookend:
             specifier = dataclasses.replace(specifier, spanner_stop=None)
             if left_broken:
@@ -246,8 +244,7 @@ def _do_piecewise_command(
         )
         wrappers.extend(wrappers_)
         if should_bookend:
-            # TODO: use _helpers.function_name(_frame(), n=3)
-            tag_ = abjad.Tag("baca.PiecewiseCommand._call(3)")
+            tag_ = _helpers.function_name(_frame(), n=3)
             if is_final_piece and right_broken:
                 tag_ = tag_.append(_tags.RIGHT_BROKEN)
             if specifier.bookended_spanner_start is not None:
@@ -275,8 +272,7 @@ def _do_piecewise_command(
             if leak_spanner_stop:
                 spanner_stop = dataclasses.replace(spanner_stop, leak=True)
             specifier = _Specifier(spanner_stop=spanner_stop)
-            # TODO: use _helpers.function_name(_frame(), n=4)
-            tag_ = abjad.Tag("baca.PiecewiseCommand._call(4)")
+            tag_ = _helpers.function_name(_frame(), n=4)
             if right_broken:
                 tag_ = tag_.append(_tags.RIGHT_BROKEN)
             wrappers_ = _attach_indicators(
