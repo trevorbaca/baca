@@ -297,18 +297,13 @@ def _is_maybe_bundled(argument, prototype):
 
 
 def _prepare_hairpin_arguments(
-    *,
     dynamics,
     final_hairpin,
     forbid_al_niente_to_bar_line,
-    # TODO: remove tweaks
-    tweaks,
 ):
     if isinstance(dynamics, str):
         specifiers = parse_hairpin_descriptor(
             dynamics,
-            # TODO: remove tweaks
-            *tweaks,
             forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
         )
     else:
@@ -661,11 +656,9 @@ def hairpin(
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
     final_hairpin_, specifiers = _prepare_hairpin_arguments(
-        dynamics=dynamics,
-        final_hairpin=final_hairpin,
-        forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
-        # TODO: remove tweaks
-        tweaks=tweaks,
+        dynamics,
+        final_hairpin,
+        forbid_al_niente_to_bar_line,
     )
     assert isinstance(bookend, bool | int), repr(bookend)
     assert isinstance(left_broken, bool), repr(left_broken)
