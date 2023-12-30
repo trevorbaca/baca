@@ -3,9 +3,7 @@ import abjad
 
 class SchemeManifest:
     """
-    Scheme manifest.
-
-    New functions defined in ``~/baca/lilypond/baca.ily`` must be added here.
+    Dynamics defined in ``~/baca/scm/baca-dynamics.ily`` must be added here.
     """
 
     _dynamics = (
