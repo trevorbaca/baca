@@ -216,6 +216,10 @@ def color(argument, *, lone: bool = False) -> None:
     return abjad.label.by_selector(argument, lone=lone)
 
 
+def durations(items):
+    return [abjad.Duration(_) for _ in items]
+
+
 def finger_pressure_transition(argument) -> None:
     tag = _helpers.function_name(_frame())
     tweaks = (
@@ -347,10 +351,6 @@ def force_accidental(argument, *, tag: abjad.Tag = abjad.Tag()) -> None:
                 )
 
 
-def durations(items):
-    return [abjad.Duration(_) for _ in items]
-
-
 def glissando(
     argument,
     *tweaks: abjad.Tweak,
@@ -393,6 +393,82 @@ def glissando(
 def levine_multiphonic(n: int) -> abjad.Markup:
     assert isinstance(n, int), repr(n)
     return abjad.Markup(rf'\baca-boxed-markup "L.{n}"')
+
+
+def multistage_leaf_glissando(
+    argument,
+    pairs,
+    final_pitch,
+    *,
+    rleak_final_stage=False,
+    use_pleaves_lleak=False,
+):
+    assert isinstance(pairs, list), repr(pairs)
+    assert all(isinstance(_, tuple) for _ in pairs), repr(pairs)
+    if rleak_final_stage:
+        leaves = _select.pleaves(argument)
+        if use_pleaves_lleak is True:
+            leaves = _select.lleak(leaves)
+        leaves = _select.rleak(leaves)
+        untie(leaves)
+    else:
+        leaves = _select.pleaves(argument)
+        if use_pleaves_lleak is True:
+            leaves = _select.lleak(leaves)
+        untie(leaves)
+    start, stop = 0, None
+    for pair_1, pair_2 in abjad.sequence.nwise(pairs):
+        start_pitch, leaf_count = pair_1
+        stop_pitch = pair_2[0]
+        assert isinstance(start_pitch, str), repr(start_pitch)
+        assert isinstance(stop_pitch, str), repr(stop_pitch)
+        assert isinstance(leaf_count, int), repr(leaf_count)
+        stop = start + leaf_count
+        leaves = _select.pleaves(argument)
+        if use_pleaves_lleak is True:
+            leaves = _select.lleak(leaves)
+        leaves = leaves[start:stop]
+        glissando(
+            leaves,
+            allow_repeats=True,
+            hide_middle_note_heads=True,
+        )
+        _pitchtools.interpolate_pitches(
+            leaves,
+            start_pitch,
+            stop_pitch,
+        )
+        start = stop - 1
+    pair = pairs[-1]
+    start_pitch, leaf_count = pair
+    assert isinstance(start_pitch, str), repr(start_pitch)
+    assert isinstance(leaf_count, (int, type(None))), repr(leaf_count)
+    stop = None
+    if leaf_count is not None:
+        stop = start + leaf_count
+
+    if rleak_final_stage:
+
+        def _final_selector(argument):
+            result = _select.rleaves(argument)
+            result = result[start:stop]
+            return result
+
+    else:
+
+        def _final_selector(argument):
+            return abjad.select.leaves(argument)[start:stop]
+
+    glissando(
+        _final_selector(argument),
+        allow_repeats=True,
+        hide_middle_note_heads=True,
+    )
+    _pitchtools.interpolate_pitches(
+        _final_selector(argument),
+        start_pitch,
+        final_pitch,
+    )
 
 
 def untie(argument) -> None:

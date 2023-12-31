@@ -24,7 +24,18 @@ from .anchor import (
     resume,
     resume_after,
 )
-from .commands import *
+from .commands import (
+    bcps,
+    color,
+    durations,
+    finger_pressure_transition,
+    flat_glissando,
+    force_accidental,
+    glissando,
+    levine_multiphonic,
+    multistage_leaf_glissando,
+    untie,
+)
 from .constellation import *
 from .docs import global_context_string
 from .imbricate import imbricate
