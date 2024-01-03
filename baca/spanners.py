@@ -20,7 +20,10 @@ def _do_spanner_indicator_command(
     direction: abjad.Vertical | None = None,
     left_broken: bool = False,
     right_broken: bool = False,
+    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
+    if staff_padding is not None:
+        tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
     wrappers = []
     if start_indicator is not None:
         start_indicator = _tweaks.bundle_tweaks(start_indicator, tweaks)
@@ -201,6 +204,7 @@ def trill_spanner(
     harmonic: bool = False,
     left_broken: bool = False,
     right_broken: bool = False,
+    staff_padding: int | float | None = None,
     start_trill_span: abjad.StartTrillSpan = abjad.StartTrillSpan(),
     stop_trill_span: abjad.StopTrillSpan = abjad.StopTrillSpan(),
 ) -> list[abjad.Wrapper]:
@@ -216,6 +220,7 @@ def trill_spanner(
         *tweaks,
         left_broken=left_broken,
         right_broken=right_broken,
+        staff_padding=staff_padding,
     )
     tag = _helpers.function_name(_frame())
     _tags.wrappers(wrappers, tag)

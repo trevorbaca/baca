@@ -606,6 +606,7 @@ def covered_spanner(
     left_broken_text: str | None = r"\baca-left-broken-covered-markup",
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
+    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.COVERED_SPANNER)
@@ -619,6 +620,7 @@ def covered_spanner(
         lilypond_id="Covered",
         pieces=pieces,
         right_broken=right_broken,
+        staff_padding=staff_padding,
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
