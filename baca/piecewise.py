@@ -128,8 +128,9 @@ def _do_piecewise_command(
     remove_length_1_spanner_start: bool = False,
     right_broken: typing.Any | None = None,
     specifiers: typing.Sequence = (),
+    staff_padding: int | float | None = None,
     tag: abjad.Tag,
-    tweaks: typing.Sequence[_typings.IndexedTweak] = (),
+    tweaks: tuple[_typings.IndexedTweak, ...] = (),
 ) -> list[abjad.Wrapper]:
     """
     Attaches indicator to first leaf in each group of selector output when ``bookend``
@@ -144,6 +145,9 @@ def _do_piecewise_command(
     """
     assert tag is not None, repr(tag)
     cyclic_specifiers = abjad.CyclicTuple(specifiers)
+    assert isinstance(tweaks, tuple), repr(tweaks)
+    if staff_padding is not None:
+        tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
     manifests = manifests or {}
     pieces = pieces or abjad.select.group(argument)
     assert pieces is not None
@@ -532,6 +536,7 @@ def circle_bow_spanner(
     pieces: list[list[abjad.Leaf]] | None = None,
     qualifier: str | None = None,
     right_broken: bool = False,
+    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.CIRCLE_BOW_SPANNER)
@@ -550,6 +555,7 @@ def circle_bow_spanner(
         lilypond_id="CircleBow",
         pieces=pieces,
         right_broken=right_broken,
+        staff_padding=staff_padding,
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
@@ -852,6 +858,7 @@ def scp_spanner(
     left_broken_text: str | None = None,
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
+    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.SCP_SPANNER)
@@ -866,6 +873,7 @@ def scp_spanner(
         lilypond_id="SCP",
         pieces=pieces,
         right_broken=right_broken,
+        staff_padding=staff_padding,
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
@@ -907,6 +915,7 @@ def string_number_spanner(
     left_broken_text: str | None = None,
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
+    staff_padding: int | float | None,
 ) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.STRING_NUMBER_SPANNER)
@@ -920,6 +929,7 @@ def string_number_spanner(
         lilypond_id="StringNumber",
         pieces=pieces,
         right_broken=right_broken,
+        staff_padding=staff_padding,
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
@@ -967,6 +977,7 @@ def text_spanner(
     lilypond_id: int | str | None = None,
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
+    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     specifiers = _prepare_text_spanner_arguments(
         items,
@@ -990,6 +1001,7 @@ def text_spanner(
         pieces=pieces,
         right_broken=right_broken,
         specifiers=specifiers,
+        staff_padding=staff_padding,
         tag=_helpers.function_name(_frame()),
         tweaks=tweaks,
     )

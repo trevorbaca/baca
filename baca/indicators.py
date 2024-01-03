@@ -139,11 +139,12 @@ def arpeggio(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def articulation(argument, string: str) -> list[abjad.Wrapper]:
+def articulation(argument, string: str, *tweaks: abjad.Tweak) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
         indicator = abjad.Articulation(string)
+        indicator = _tweaks.bundle_tweaks(indicator, tweaks)
         wrapper = abjad.attach(
             indicator,
             leaf,
