@@ -115,7 +115,7 @@ def _do_octave_displacement_command(argument, displacements):
 
 def _do_pitch_command(
     argument,
-    cyclic,
+    cyclic: bool,
     pitches,
     *,
     allow_hidden: bool = False,
@@ -125,6 +125,7 @@ def _do_pitch_command(
     allow_repeats: bool = False,
     allow_repitch: bool = False,
     do_not_transpose: bool = False,
+    exact: bool = False,
     mock: bool = False,
     previous_pitches_consumed: int = 0,
 ) -> tuple[int, bool]:
@@ -140,10 +141,9 @@ def _do_pitch_command(
         if plt.head is pleaf:
             plts.append(plt)
     if not cyclic:
-        if len(pitches) < len(plts):
-            message = f"only {len(pitches)} pitches"
-            message += f" for {len(plts)} logical ties:\n\n"
-            message += f"{pitches!r} and {plts!r}."
+        if len(pitches) != len(plts):
+            message = f"PLT count ({len(plts)}) does not match"
+            message += f" pitch count ({len(pitches)})."
             raise Exception(message)
     if cyclic and not isinstance(pitches, abjad.CyclicTuple | Loop):
         pitches = abjad.CyclicTuple(pitches)
@@ -3104,8 +3104,8 @@ def staff_positions(
     allow_obgc_mutation: bool = False,
     allow_out_of_range: bool = False,
     allow_repeats: bool = False,
-    mock: bool = False,
     exact: bool = False,
+    mock: bool = False,
 ) -> None:
     r"""
     Sets staff positions of plts in ``argument`` to ``numbers``.
