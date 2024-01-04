@@ -1805,7 +1805,7 @@ def append_anchor_note(argument, *, runtime=None):
             site="before",
         ),
         note,
-        tag=abjad.Tag("baca.append_anchor_note(4)"),
+        tag=_helpers.function_name(_frame(), n=4),
     )
     #
     abjad.attach(
@@ -1814,7 +1814,7 @@ def append_anchor_note(argument, *, runtime=None):
             r"\once \override Accidental.stencil = ##f", site="before"
         ),
         note,
-        tag=abjad.Tag("baca.append_anchor_note(5)"),
+        tag=_helpers.function_name(_frame(), n=5),
     )
     #
     voice.append(note)

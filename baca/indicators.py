@@ -553,7 +553,7 @@ def global_fermata(argument, description: str = "fermata") -> list[abjad.Wrapper
             markup,
             leaf,
             direction=abjad.UP,
-            tag=abjad.Tag("baca.global_fermata(1)"),
+            tag=_helpers.function_name(_frame(), n=1),
             wrapper=True,
         )
         wrappers.append(wrapper)
@@ -561,7 +561,7 @@ def global_fermata(argument, description: str = "fermata") -> list[abjad.Wrapper
         abjad.attach(
             literal,
             leaf,
-            tag=abjad.Tag("baca.global_fermata(2)"),
+            tag=_helpers.function_name(_frame(), n=2),
             wrapper=True,
         )
         wrappers.append(wrapper)
@@ -998,18 +998,14 @@ def staff_lines(argument, n: int) -> list[abjad.Wrapper]:
         wrappers_ = _attach_persistent_indicator(
             leaf,
             [bar_extent],
-            # TODO:
-            # tag=_helpers.function_name(_frame(), n=1).append(_tags.NOT_PARTS),
-            tag=abjad.Tag("baca.staff_lines(1)").append(_tags.NOT_PARTS),
+            tag=_helpers.function_name(_frame(), n=1).append(_tags.NOT_PARTS),
         )
         wrappers.extend(wrappers_)
         staff_lines = _classes.StaffLines(n)
         wrappers_ = _attach_persistent_indicator(
             leaf,
             [staff_lines],
-            # TODO:
-            # tag=_helpers.function_name(_frame(), n=2)
-            tag=abjad.Tag("baca.staff_lines(2)"),
+            tag=_helpers.function_name(_frame(), n=2),
         )
         wrappers.extend(wrappers_)
     return wrappers
