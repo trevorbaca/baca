@@ -998,6 +998,8 @@ def staff_lines(argument, n: int) -> list[abjad.Wrapper]:
         wrappers_ = _attach_persistent_indicator(
             leaf,
             [bar_extent],
+            # TODO:
+            # tag=_helpers.function_name(_frame(), n=1).append(_tags.NOT_PARTS),
             tag=abjad.Tag("baca.staff_lines(1)").append(_tags.NOT_PARTS),
         )
         wrappers.extend(wrappers_)
@@ -1005,6 +1007,8 @@ def staff_lines(argument, n: int) -> list[abjad.Wrapper]:
         wrappers_ = _attach_persistent_indicator(
             leaf,
             [staff_lines],
+            # TODO:
+            # tag=_helpers.function_name(_frame(), n=2)
             tag=abjad.Tag("baca.staff_lines(2)"),
         )
         wrappers.extend(wrappers_)
