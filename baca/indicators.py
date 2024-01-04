@@ -357,7 +357,15 @@ def down_bow(
     argument,
     *tweaks: abjad.Tweak,
     full: bool = False,
+    padding: int | float | None = None,
+    parent_alignment_x: int | float | None = None,
 ) -> list[abjad.Wrapper]:
+    if padding is not None:
+        tweaks = tweaks + (abjad.Tweak(rf"- \tweak padding {padding}"),)
+    if parent_alignment_x is not None:
+        tweaks = tweaks + (
+            abjad.Tweak(rf"- \tweak parent-alignment-X {parent_alignment_x}"),
+        )
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.select.leaves(argument):
