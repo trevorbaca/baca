@@ -917,7 +917,7 @@ def string_number_spanner(
     left_broken_text: str | None = None,
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
-    staff_padding: int | float | None,
+    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.STRING_NUMBER_SPANNER)

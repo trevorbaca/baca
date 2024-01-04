@@ -1379,12 +1379,12 @@ def pitches(
     allow_octaves: bool = False,
     allow_repeats: bool = False,
     allow_repitch: bool = False,
+    do_not_transpose: bool = False,
+    ignore_incomplete: bool = False,
     metadata: dict | None = None,
     mock: bool = False,
-    do_not_transpose: bool = False,
-    exact: bool = False,
-    ignore_incomplete: bool = False,
     name: str = "",
+    noncyclic: bool = False,
 ) -> bool:
     r"""
     Treats plts in ``argument`` according to ``pitches``.
@@ -1579,7 +1579,7 @@ def pitches(
     """
     if do_not_transpose not in (None, True, False):
         raise Exception(f"do_not_transpose must be boolean (not {do_not_transpose!r}).")
-    if bool(exact):
+    if bool(noncyclic):
         cyclic = False
     else:
         cyclic = True
