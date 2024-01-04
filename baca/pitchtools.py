@@ -115,7 +115,6 @@ def _do_octave_displacement_command(argument, displacements):
 
 def _do_pitch_command(
     argument,
-    cyclic: bool,
     pitches,
     *,
     allow_hidden: bool = False,
@@ -140,12 +139,11 @@ def _do_pitch_command(
         plt = abjad.get.logical_tie(pleaf)
         if plt.head is pleaf:
             plts.append(plt)
-    if not cyclic:
-        if len(pitches) != len(plts):
-            message = f"PLT count ({len(plts)}) does not match"
-            message += f" pitch count ({len(pitches)})."
-            raise Exception(message)
-    if cyclic and not isinstance(pitches, abjad.CyclicTuple | Loop):
+    if exact is True and len(pitches) != len(plts):
+        message = f"PLT count ({len(plts)}) does not match"
+        message += f" pitch count ({len(pitches)})."
+        raise Exception(message)
+    if exact is False and not isinstance(pitches, abjad.CyclicTuple | Loop):
         pitches = abjad.CyclicTuple(pitches)
     pitches_consumed = 0
     mutated_score = False
@@ -1354,10 +1352,8 @@ def pitch(
         raise Exception(f"one-note chord {pitch!r}?")
     assert isinstance(allow_out_of_range, bool), repr(allow_out_of_range)
     assert isinstance(do_not_transpose, bool), repr(do_not_transpose)
-    cyclic = True
     result = _do_pitch_command(
         argument,
-        cyclic,
         [pitch],
         allow_hidden=allow_hidden,
         allow_obgc_mutation=allow_obgc_mutation,
@@ -1380,11 +1376,11 @@ def pitches(
     allow_repeats: bool = False,
     allow_repitch: bool = False,
     do_not_transpose: bool = False,
+    exact: bool = False,
     ignore_incomplete: bool = False,
     metadata: dict | None = None,
     mock: bool = False,
     name: str = "",
-    noncyclic: bool = False,
 ) -> bool:
     r"""
     Treats plts in ``argument`` according to ``pitches``.
@@ -1579,10 +1575,10 @@ def pitches(
     """
     if do_not_transpose not in (None, True, False):
         raise Exception(f"do_not_transpose must be boolean (not {do_not_transpose!r}).")
-    if bool(noncyclic):
-        cyclic = False
-    else:
-        cyclic = True
+    #    if bool(noncyclic):
+    #        cyclic = False
+    #    else:
+    #        cyclic = True
     if ignore_incomplete not in (None, True, False):
         raise Exception(
             f"ignore_incomplete must be boolean (not {ignore_incomplete!r})."
@@ -1601,7 +1597,6 @@ def pitches(
         )
     result = _do_pitch_command(
         argument,
-        cyclic,
         pitches,
         allow_hidden=allow_hidden,
         allow_octaves=allow_octaves,
@@ -1609,6 +1604,7 @@ def pitches(
         allow_repeats=allow_repeats,
         allow_repitch=allow_repitch,
         do_not_transpose=do_not_transpose,
+        exact=exact,
         mock=mock,
         previous_pitches_consumed=previous_pitches_consumed,
     )
