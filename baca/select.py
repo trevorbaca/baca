@@ -382,7 +382,22 @@ def cmgroups(
     return items
 
 
-def duration_ge(argument, duration, *, preprolated: bool = False):
+def duration_ge(argument, duration, *, preprolated: bool = False) -> list:
+    """
+    Selects items in ``argument`` with duration greater than or equal to ``duration``.
+
+        >>> voice = abjad.Voice("c'4 d'8 e' f'4 g'8 a'16 b'")
+
+        >>> baca.select.duration_ge(voice, "1/2")
+        []
+
+        >>> baca.select.duration_ge(voice, "1/4")
+        [Note("c'4"), Note("f'4")]
+
+        >>> baca.select.duration_ge(voice, "1/8")
+        [Note("c'4"), Note("d'8"), Note("e'8"), Note("f'4"), Note("g'8")]
+
+    """
     result = []
     duration_ = abjad.Duration(duration)
     for item in argument:
@@ -4585,6 +4600,28 @@ def tleaves(
     if rleak is True:
         items = abjad.select.with_next_leaf(items)
     return items
+
+
+def tupletted(argument) -> list:
+    r"""
+    Selects tupletted items in ``argument``.
+
+        >>> voice = abjad.Voice(r"c'4 d' \times 2/3 { e' f' g' }")
+
+        >>> leaves = abjad.select.leaves(voice)
+        >>> baca.select.tupletted(leaves)
+        [Note("e'4"), Note("f'4"), Note("g'4")]
+
+        >>> baca.select.tupletted(voice)
+        []
+
+    """
+    result = []
+    for item in argument:
+        parentage = abjad.get.parentage(item).components[1:]
+        if any(isinstance(_, abjad.Tuplet) for _ in parentage):
+            result.append(item)
+    return result
 
 
 def wleaf(
