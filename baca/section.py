@@ -1881,6 +1881,18 @@ def cache_leaves(score, measure_count, voice_abbreviations=None):
     return voice_name_to_leaves_by_measure
 
 
+def cache_leaves_in_voice(voice, measure_count):
+    assert isinstance(voice, abjad.Voice)
+    measure_number_to_leaves = {}
+    for measure_index in range(measure_count):
+        measure_number = measure_index + 1
+        measure_number_to_leaves[measure_number] = []
+    for leaf in abjad.select.leaves(voice):
+        measure_number = abjad.get.measure_number(leaf)
+        measure_number_to_leaves[measure_number].append(leaf)
+    return DictionaryGetItemWrapper(measure_number_to_leaves)
+
+
 def cache_voices(score, voice_abbreviations=None):
     return VoiceCache(score, voice_abbreviations)
 
