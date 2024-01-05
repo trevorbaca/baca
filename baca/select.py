@@ -382,6 +382,33 @@ def cmgroups(
     return items
 
 
+def _parse_duration_inequality_string(string):
+    for operator in ("<=", "<", ">=", ">", "=="):
+        if string.startswith(operator):
+            fraction_string = string.removeprefix(operator)
+            duration = abjad.Duration(fraction_string)
+    else:
+        fraction_string = "=="
+        duration = abjad.Duration(string)
+    return operator, duration
+
+
+def duration(argument, string, *, preprolated: bool = False) -> list:
+    result = []
+    operator, duration = _parse_duration_inequality_string(string)
+    for item in argument:
+        item_duration = abjad.get.duration(item, preprolated=preprolated)
+        if (
+            (operator == "==" and item_duration == duration)
+            or (operator == "<=" and item_duration <= duration)
+            or (operator == "<" and item_duration < duration)
+            or (operator == ">=" and item_duration >= duration)
+            or (operator == ">" and item_duration > duration)
+        ):
+            result.append(item)
+    return result
+
+
 def duration_ge(argument, duration, *, preprolated: bool = False) -> list:
     """
     Selects items in ``argument`` with duration greater than or equal to ``duration``.
@@ -4620,6 +4647,38 @@ def tupletted(argument) -> list:
     for item in argument:
         parentage = abjad.get.parentage(item).components[1:]
         if any(isinstance(_, abjad.Tuplet) for _ in parentage):
+            result.append(item)
+    return result
+
+
+def tupletted_first_leaf(argument) -> list:
+    result = []
+    for item in argument:
+        first_leaf = abjad.select.leaf(item, 0)
+        parentage = abjad.get.parentage(first_leaf).components[1:]
+        if any(isinstance(_, abjad.Tuplet) for _ in parentage):
+            result.append(item)
+    return result
+
+
+def untupletted(argument) -> list:
+    r"""
+    Selects tupletted items in ``argument``.
+
+        >>> voice = abjad.Voice(r"c'4 d' \times 2/3 { e' f' g' }")
+
+        >>> leaves = abjad.select.leaves(voice)
+        >>> baca.select.untupletted(leaves)
+        [Note("c'4"), Note("d'4")]
+
+        >>> baca.select.untupletted(voice)
+        [Note("c'4"), Note("d'4"), Tuplet('3:2', "e'4 f'4 g'4")]
+
+    """
+    result = []
+    for item in argument:
+        parentage = abjad.get.parentage(item).components[1:]
+        if not any(isinstance(_, abjad.Tuplet) for _ in parentage):
             result.append(item)
     return result
 
