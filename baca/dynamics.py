@@ -328,3 +328,30 @@ def make_dynamic(
     prototype = (abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin, abjad.Bundle)
     assert isinstance(indicator, prototype), repr(indicator)
     return indicator
+
+
+def niente_swells(dynamic_peaks: str, *, final_dynamic: str | None = "niente") -> str:
+    r"""
+    Makes niente swells.
+
+        >>> baca.dynamics.niente_swells("p")
+        'niente o< p >o niente'
+
+        >>> baca.dynamics.niente_swells("p", final_dynamic="!")
+        'niente o< p >o !'
+
+        >>> baca.dynamics.niente_swells("p", final_dynamic=None)
+        'niente o< p >o'
+
+        >>> baca.dynamics.niente_swells("p f p")
+        'niente o< p >o niente o< f >o niente o< p >o niente'
+
+    """
+    parts = dynamic_peaks.split()
+    result = []
+    for part in parts:
+        result.append(f"niente o< {part} >o")
+    string = " ".join(result)
+    if final_dynamic is not None:
+        string = f"{string} {final_dynamic}"
+    return string

@@ -382,6 +382,15 @@ def cmgroups(
     return items
 
 
+def duration_ge(argument, duration, *, preprolated: bool = False):
+    result = []
+    duration_ = abjad.Duration(duration)
+    for item in argument:
+        if abjad.get.duration(item, preprolated=preprolated) >= duration_:
+            result.append(item)
+    return result
+
+
 def enchain(argument, counts: typing.Sequence[int]) -> list[list]:
     r"""
     Enchains items in argument.
