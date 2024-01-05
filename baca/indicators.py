@@ -1153,9 +1153,21 @@ def up_arpeggio(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def up_bow(argument, *tweaks: abjad.Tweak, full: bool = False) -> list[abjad.Wrapper]:
+def up_bow(
+    argument,
+    *tweaks: abjad.Tweak,
+    full: bool = False,
+    padding: int | float | None = None,
+    parent_alignment_x: int | float | None = None,
+) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
+    if padding is not None:
+        tweaks = tweaks + (abjad.Tweak(rf"- \tweak padding {padding}"),)
+    if parent_alignment_x is not None:
+        tweaks = tweaks + (
+            abjad.Tweak(rf"- \tweak parent-alignment-X {parent_alignment_x}"),
+        )
     for leaf in abjad.iterate.leaves(argument):
         indicator: abjad.Articulation | abjad.Bundle
         if full:
