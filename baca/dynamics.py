@@ -231,6 +231,49 @@ class SchemeManifest:
         raise KeyError(dynamic)
 
 
+def linear(bounds: str, *, effort: bool = False) -> str:
+    r"""
+    Makes niente swells.
+
+        >>> baca.dynamics.linear("p f")
+        'p mp mf f'
+
+        >>> baca.dynamics.linear("f p")
+        'f mf mp p'
+
+        >>> baca.dynamics.linear("f p", effort=True)
+        '"f" "mf" "mp" "p"'
+
+        >>> baca.dynamics.linear("f f")
+        'f'
+
+    """
+    start, stop = bounds.split()
+    start_dynamic = abjad.Dynamic(start)
+    stop_dynamic = abjad.Dynamic(stop)
+    assert isinstance(start_dynamic.ordinal, int)
+    assert isinstance(stop_dynamic.ordinal, int)
+    if start_dynamic.ordinal <= stop_dynamic.ordinal:
+        start_ordinal = start_dynamic.ordinal
+        stop_ordinal = stop_dynamic.ordinal
+        reverse = False
+    else:
+        start_ordinal = stop_dynamic.ordinal
+        stop_ordinal = start_dynamic.ordinal
+        reverse = True
+    names = []
+    for ordinal in range(start_ordinal, stop_ordinal + 1):
+        if ordinal != 0:
+            name = abjad.Dynamic.dynamic_ordinal_to_dynamic_name(ordinal)
+            if effort is True:
+                name = f'"{name}"'
+            names.append(name)
+    if reverse is True:
+        names.reverse()
+    string = " ".join(names)
+    return string
+
+
 def make_dynamic(
     string: str, *, forbid_al_niente_to_bar_line: bool = False
 ) -> abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin | abjad.Bundle:
