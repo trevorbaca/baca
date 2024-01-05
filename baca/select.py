@@ -382,20 +382,34 @@ def cmgroups(
     return items
 
 
-def _parse_duration_inequality_string(string):
-    for operator in ("<=", "<", ">=", ">", "=="):
+def parse_duration_inequality_string(string) -> tuple[str, abjad.Duration]:
+    """
+    Parses duration inequality ``string``.
+
+        >>> baca.select.parse_duration_inequality_string("3/16")
+        ('==', Duration(3, 16))
+
+        >>> baca.select.parse_duration_inequality_string("<=3/16")
+        ('<=', Duration(3, 16))
+
+        >>> baca.select.parse_duration_inequality_string("<3/16")
+        ('<', Duration(3, 16))
+
+    """
+    for operator in ("<=", "<", ">=", ">"):
         if string.startswith(operator):
             fraction_string = string.removeprefix(operator)
             duration = abjad.Duration(fraction_string)
+            break
     else:
-        fraction_string = "=="
+        operator = "=="
         duration = abjad.Duration(string)
     return operator, duration
 
 
 def duration(argument, string, *, preprolated: bool = False) -> list:
     result = []
-    operator, duration = _parse_duration_inequality_string(string)
+    operator, duration = parse_duration_inequality_string(string)
     for item in argument:
         item_duration = abjad.get.duration(item, preprolated=preprolated)
         if (
@@ -675,6 +689,20 @@ def graces(
     """
     items = abjad.select.leaves(argument, exclude=exclude, grace=True)
     return items
+
+
+def group_consecutive(components) -> list[list]:
+    assert all(isinstance(_, abjad.Component) for _ in components), repr(components)
+    groups = [components[:1]]
+    previous_stop_offset = abjad.get.timespan(groups[-1][-1]).stop_offset
+    for component in components[1:]:
+        component_timespan = abjad.get.timespan(component)
+        if component_timespan.start_offset == previous_stop_offset:
+            groups[-1].append(component)
+        else:
+            groups.append([component])
+        previous_stop_offset = component_timespan.stop_offset
+    return groups
 
 
 def hleaf(
