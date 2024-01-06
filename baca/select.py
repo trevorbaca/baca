@@ -423,30 +423,6 @@ def duration(argument, string, *, preprolated: bool = False) -> list:
     return result
 
 
-def duration_ge(argument, duration, *, preprolated: bool = False) -> list:
-    """
-    Selects items in ``argument`` with duration greater than or equal to ``duration``.
-
-        >>> voice = abjad.Voice("c'4 d'8 e' f'4 g'8 a'16 b'")
-
-        >>> baca.select.duration_ge(voice, "1/2")
-        []
-
-        >>> baca.select.duration_ge(voice, "1/4")
-        [Note("c'4"), Note("f'4")]
-
-        >>> baca.select.duration_ge(voice, "1/8")
-        [Note("c'4"), Note("d'8"), Note("e'8"), Note("f'4"), Note("g'8")]
-
-    """
-    result = []
-    duration_ = abjad.Duration(duration)
-    for item in argument:
-        if abjad.get.duration(item, preprolated=preprolated) >= duration_:
-            result.append(item)
-    return result
-
-
 def enchain(argument, counts: typing.Sequence[int]) -> list[list]:
     r"""
     Enchains items in argument.
