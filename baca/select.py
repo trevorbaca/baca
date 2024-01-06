@@ -705,6 +705,18 @@ def group_consecutive(components) -> list[list]:
     return groups
 
 
+def has_grace_container(argument):
+    result = []
+    for item in argument:
+        if (
+            abjad.get.after_grace_container(item) is not None
+            or abjad.get.before_grace_container(item) is not None
+        ):
+            result.append(item)
+    return result
+
+
+# TODO: change name to baca.select.nongrace_leaf()
 def hleaf(
     argument, n: int = 0, *, exclude: abjad.typings.Exclude | None = None
 ) -> abjad.Leaf:
@@ -760,6 +772,7 @@ def hleaf(
     return hleaves(argument, exclude=exclude)[n]
 
 
+# TODO: change name to baca.select.nongrace_leaves()
 def hleaves(
     argument, *, exclude: abjad.typings.Exclude | None = None
 ) -> list[abjad.Leaf]:
