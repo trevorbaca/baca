@@ -4711,6 +4711,16 @@ def untupletted(argument) -> list:
     return result
 
 
+def untupletted_first_leaf(argument) -> list:
+    result = []
+    for item in argument:
+        first_leaf = abjad.select.leaf(item, 0)
+        parentage = abjad.get.parentage(first_leaf).components[1:]
+        if not any(isinstance(_, abjad.Tuplet) for _ in parentage):
+            result.append(item)
+    return result
+
+
 def wleaf(
     argument, n: int = 0, *, exclude: abjad.typings.Exclude | None = None
 ) -> abjad.Leaf:
