@@ -195,6 +195,17 @@ def _evaluate_item(
         abjad.attach(item, skip)
         components.append(skip)
         result = skip
+    elif getattr(item, "custom", False) is True:
+        result = _evaluate_item(
+            item.argument,
+            components,
+            denominator,
+            i,
+            timespan_to_original_item,
+            tag,
+            voice_name,
+        )
+        result = item(result)
     else:
         raise Exception(item)
     if capture_original_item is not False or isinstance(item, OBGC):
