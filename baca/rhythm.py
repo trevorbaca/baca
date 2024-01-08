@@ -79,6 +79,9 @@ def _evaluate_basic_item(item, denominator, voice_name, tag):
     elif isinstance(item, WrittenDuration):
         leaf = item(denominator, tag=tag)
         components = [leaf]
+    elif getattr(item, "custom") is True:
+        components = _evaluate_basic_item(item.argument, denominator, voice_name, tag)
+        components = item(components)
     else:
         raise Exception(item)
     return components
