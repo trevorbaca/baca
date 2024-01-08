@@ -843,6 +843,7 @@ def make_accelerando(
         components = _evaluate_basic_item(item, denominator, voice_name, tag)
         leaves.extend(components)
     tuplet = abjad.Tuplet("1:1", leaves, tag=tag)
+    abjad.attach("FEATHER_BEAM_CONTAINER", tuplet)
     _style_accelerando(tuplet, exponent, total_duration=duration)
     return tuplet
 
