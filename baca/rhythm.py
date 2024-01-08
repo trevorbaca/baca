@@ -196,6 +196,7 @@ def _evaluate_item(
         components.append(skip)
         result = skip
     elif getattr(item, "custom", False) is True:
+        old_dummy_count = len(timespan_to_original_item)
         result = _evaluate_item(
             item.argument,
             components,
@@ -205,7 +206,15 @@ def _evaluate_item(
             tag,
             voice_name,
         )
-        result = item(result)
+        new_dummy_count = len(timespan_to_original_item)
+        if old_dummy_count == new_dummy_count:
+            result = item(result)
+        else:
+            assert old_dummy_count < new_dummy_count
+            timespan, original_item = timespan_to_original_item[-1]
+            modified_original_item = item(original_item)
+            modified_pair = timespan, modified_original_item
+            timespan_to_original_item[-1] = modified_pair
     else:
         raise Exception(item)
     if capture_original_item is not False or isinstance(item, OBGC):
