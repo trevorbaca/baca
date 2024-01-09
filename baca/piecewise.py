@@ -633,6 +633,7 @@ def damp_spanner(
     left_broken_text: str | None = r"\baca-left-broken-damp-markup",
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
+    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.DAMP_SPANNER)
@@ -646,6 +647,7 @@ def damp_spanner(
         lilypond_id="Damp",
         pieces=pieces,
         right_broken=right_broken,
+        staff_padding=staff_padding,
     )
     _tags.wrappers(wrappers, tag)
     return wrappers

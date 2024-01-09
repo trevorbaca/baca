@@ -139,8 +139,15 @@ def arpeggio(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def articulation(argument, string: str, *tweaks: abjad.Tweak) -> list[abjad.Wrapper]:
+def articulation(
+    argument,
+    string: str,
+    *tweaks: abjad.Tweak,
+    staff_padding: int | float | None = None,
+) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
+    if staff_padding is not None:
+        tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
         indicator = abjad.Articulation(string)
@@ -720,10 +727,13 @@ def mark(
     argument,
     string: str,
     *tweaks: abjad.Tweak,
+    padding: int | float | None = None,
     site: str = "before",
 ) -> list[abjad.Wrapper]:
     assert isinstance(string, abjad.Markup | str), repr(string)
     tag = _helpers.function_name(_frame())
+    if padding is not None:
+        tweaks = tweaks + (abjad.Tweak(rf"\tweak padding {padding}"),)
     wrappers = []
     for leaf in abjad.select.leaves(argument):
         rehearsal_mark = abjad.RehearsalMark(markup=string, site=site)
@@ -867,10 +877,13 @@ def rehearsal_mark(
     string: str,
     *tweaks: abjad.Tweak,
     font_size: int = 10,
+    padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     assert isinstance(string, str), repr(string)
     assert isinstance(font_size, int | float), repr(font_size)
     string = rf'\baca-rehearsal-mark-markup "{string}" #{font_size}'
+    if padding is not None:
+        tweaks = tweaks + (abjad.Tweak(rf"\tweak padding {padding}"),)
     wrappers = []
     for leaf in abjad.select.leaves(argument):
         indicator: abjad.Markup | abjad.Bundle
