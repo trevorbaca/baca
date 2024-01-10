@@ -1204,8 +1204,6 @@ def make_rhythm(
                 assert isinstance(nongrace_voice, abjad.Voice)
                 assert len(nongrace_voice) == 0
                 nongrace_voice.extend(timespan_components)
-    for pleaf in _select.pleaves(voice):
-        abjad.attach(_enums.NOT_YET_PITCHED, pleaf)
     return voice
 
 
