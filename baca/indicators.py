@@ -143,9 +143,12 @@ def articulation(
     argument,
     string: str,
     *tweaks: abjad.Tweak,
+    padding: int | float | None = None,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
+    if padding is not None:
+        tweaks = tweaks + (abjad.Tweak(rf"- \tweak padding {padding}"),)
     if staff_padding is not None:
         tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
     wrappers = []
