@@ -81,6 +81,7 @@ from .rhythm import (
     BeamLeft,
     BeamRight,
     BeforeGrace,
+    Chord,
     Container,
     Feather,
     InvisibleMusic,

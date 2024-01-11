@@ -54,6 +54,10 @@ def _evaluate_basic_item(item, denominator, voice_name, tag):
     elif isinstance(item, int) and item < 0:
         leaf_duration = abjad.Duration(-item, denominator)
         components = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
+    elif isinstance(item, Chord):
+        chord_duration = abjad.Duration(item.numerator, denominator)
+        pitch_tuple = tuple(range(item.note_head_count))
+        components = abjad.makers.make_leaves([pitch_tuple], [chord_duration], tag=tag)
     elif isinstance(item, AfterGrace):
         components = item(denominator, tag)
     elif isinstance(item, abjad.Tuplet):
@@ -79,7 +83,7 @@ def _evaluate_basic_item(item, denominator, voice_name, tag):
     elif isinstance(item, WrittenDuration):
         leaf = item(denominator, tag=tag)
         components = [leaf]
-    elif getattr(item, "custom") is True:
+    elif getattr(item, "custom", False) is True:
         components = _evaluate_basic_item(item.argument, denominator, voice_name, tag)
         components = item(components)
     else:
@@ -429,6 +433,18 @@ class BeforeGrace:
         bgc = abjad.BeforeGraceContainer(grace_leaves, command=command, tag=tag)
         abjad.attach(bgc, first_leaf, tag=tag)
         return main_components
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class Chord:
+    numerator: int
+    note_head_count: int
+
+    def __post_init__(self):
+        assert isinstance(self.numerator, int), repr(self.numerator)
+        assert 1 <= self.numerator, repr(self.numerator)
+        assert isinstance(self.note_head_count, int), repr(self.note_head_count)
+        assert 1 <= self.note_head_count, repr(self.note_head_count)
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -1437,6 +1453,10 @@ def bl(argument):
 
 def br(argument):
     return BeamRight(argument)
+
+
+def c(numerator, note_head_count):
+    return Chord(numerator, note_head_count)
 
 
 def h(argument):
