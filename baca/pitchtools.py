@@ -25,6 +25,7 @@ def _adjust_microtone_deviation_pitch(plt, deviation):
         abjad.attach(annotation, pleaf)
 
 
+# TODO: accept only string input for `pitches`
 def _coerce_pitches(pitches):
     if isinstance(pitches, Loop):
         return pitches
@@ -1577,10 +1578,6 @@ def pitches(
     """
     if do_not_transpose not in (None, True, False):
         raise Exception(f"do_not_transpose must be boolean (not {do_not_transpose!r}).")
-    #    if bool(noncyclic):
-    #        cyclic = False
-    #    else:
-    #        cyclic = True
     if ignore_incomplete not in (None, True, False):
         raise Exception(
             f"ignore_incomplete must be boolean (not {ignore_incomplete!r})."
