@@ -391,16 +391,10 @@ class BeforeGrace:
             self.main_note_numerator, denominator, "", tag
         )
         first_leaf = abjad.get.leaf(main_components, 0)
-        grace_durations = [
-            abjad.Duration(abs(_), denominator) for _ in self.grace_note_numerators
-        ]
-        pitches: list[int | None] = []
-        for grace_note_numerator in self.grace_note_numerators:
-            if 0 < grace_note_numerator:
-                pitches.append(0)
-            else:
-                pitches.append(None)
-        grace_leaves = abjad.makers.make_leaves(pitches, grace_durations)
+        grace_leaves = []
+        for item in self.grace_note_numerators:
+            components = _evaluate_basic_item(item, denominator, "", tag)
+            grace_leaves.extend(components)
         if len(grace_leaves) == 1:
             if self.slash is False and self.slur is False:
                 command = r"\grace"
