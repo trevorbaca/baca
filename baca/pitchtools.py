@@ -136,6 +136,7 @@ def _do_pitch_command(
     else:
         pleaves = _select.pleaves(argument, exclude=_enums.HIDDEN)
     for pleaf in pleaves:
+        # TOOD: let <c' d'>8 ~ c' work
         plt = abjad.get.logical_tie(pleaf)
         if plt.head is pleaf:
             plts.append(plt)
@@ -149,6 +150,7 @@ def _do_pitch_command(
     mutated_score = False
     for i, plt in enumerate(plts):
         pitch = pitches[i + previous_pitches_consumed]
+        # TOOD: let <c' d'>8 ~ c' work
         new_plt = _set_lt_pitch(
             plt,
             pitch,
