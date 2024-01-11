@@ -1586,6 +1586,16 @@ def time_signature_transparent(argument) -> list[abjad.Wrapper]:
     )
 
 
+def trill_spanner_dash_period(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
+        _frame(),
+        argument,
+        grob="TrillSpanner",
+        attribute="dash_period",
+        value=n,
+    )
+
+
 def trill_spanner_staff_padding(argument, n: int | float) -> list[abjad.Wrapper]:
     return _do_override(
         _frame(),
@@ -1593,6 +1603,16 @@ def trill_spanner_staff_padding(argument, n: int | float) -> list[abjad.Wrapper]
         grob="TrillSpanner",
         attribute="staff_padding",
         value=n,
+    )
+
+
+def trill_spanner_style(argument, style: str) -> list[abjad.Wrapper]:
+    return _do_override(
+        _frame(),
+        argument,
+        grob="TrillSpanner",
+        attribute="style",
+        value=style,
     )
 
 
