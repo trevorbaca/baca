@@ -31,6 +31,18 @@ baca-estr-sul-pont-markup = \markup "estr. sul pont."
 
 baca-half-clt-markup = \baca-boxed-markup "1/2 clt"
 
+baca-left-broken-pizz-markup =
+    \markup
+    \upright
+    \line {
+        (
+        \hspace #-0.5
+        "pizz."
+        \hspace #-0.5
+        )
+        \hspace #0.5
+    }
+
 baca-leggieriss-markup = \markup leggieriss.
 
 baca-leggierissimo-markup = \markup leggierissimo

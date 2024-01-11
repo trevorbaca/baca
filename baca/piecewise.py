@@ -832,7 +832,7 @@ def pizzicato_spanner(
     *tweaks: _typings.IndexedTweak,
     items: str = r"\baca-pizz-markup =|",
     left_broken: bool = False,
-    left_broken_text: str | None = r"\baca-pizz-markup",
+    left_broken_text: str | None = r"\baca-left-broken-pizz-markup",
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
