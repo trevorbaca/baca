@@ -62,6 +62,7 @@ def _do_spanner_indicator_command(
 def _prepare_start_trill_span(
     *,
     alteration,
+    force_trill_pitch_head_accidental,
     harmonic,
     start_trill_span,
 ):
@@ -83,6 +84,11 @@ def _prepare_start_trill_span(
     if pitch is not None or interval is not None:
         start_trill_span_ = dataclasses.replace(
             start_trill_span_, interval=interval, pitch=pitch
+        )
+    if force_trill_pitch_head_accidental is True:
+        start_trill_span_ = dataclasses.replace(
+            start_trill_span_,
+            force_trill_pitch_head_accidental=force_trill_pitch_head_accidental,
         )
     if harmonic is True:
         # TODO: replace this with a (one-word) predefined function
@@ -202,6 +208,7 @@ def trill_spanner(
     argument,
     *tweaks: abjad.Tweak,
     alteration: str | None = None,
+    force_trill_pitch_head_accidental: bool = False,
     harmonic: bool = False,
     left_broken: bool = False,
     right_broken: bool = False,
@@ -211,6 +218,7 @@ def trill_spanner(
 ) -> list[abjad.Wrapper]:
     start_trill_span_ = _prepare_start_trill_span(
         alteration=alteration,
+        force_trill_pitch_head_accidental=force_trill_pitch_head_accidental,
         harmonic=harmonic,
         start_trill_span=start_trill_span,
     )
