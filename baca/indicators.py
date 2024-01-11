@@ -1139,11 +1139,18 @@ def tie(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def triple_staccato(argument) -> list[abjad.Wrapper]:
+def triple_staccato(
+    argument,
+    *tweaks: abjad.Tweak,
+    padding: int | float | None = None,
+) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
+    if padding is not None:
+        tweaks = tweaks + (abjad.Tweak(rf"- \tweak padding {padding}"),)
     for leaf in abjad.iterate.leaves(argument):
         indicator = abjad.Articulation("baca-staccati #3")
+        indicator = _tweaks.bundle_tweaks(indicator, tweaks)
         wrapper = abjad.attach(
             indicator,
             leaf,
