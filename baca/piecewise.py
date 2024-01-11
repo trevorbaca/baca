@@ -830,16 +830,18 @@ def parse_hairpin_descriptor(
 def pizzicato_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
+    items: str = r"\baca-pizz-markup =|",
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-pizz-markup",
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
+    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.PIZZICATO_SPANNER)
     wrappers = text_spanner(
         argument,
-        r"\baca-pizz-markup =|",
+        items,
         *tweaks,
         bookend=False,
         left_broken=left_broken,
@@ -847,6 +849,7 @@ def pizzicato_spanner(
         lilypond_id="Pizzicato",
         pieces=pieces,
         right_broken=right_broken,
+        staff_padding=staff_padding,
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
