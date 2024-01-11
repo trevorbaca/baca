@@ -85,6 +85,7 @@ def _prepare_start_trill_span(
             start_trill_span_, interval=interval, pitch=pitch
         )
     if harmonic is True:
+        # TODO: replace this with a (one-word) predefined function
         string = "#(lambda (grob) (grob-interpret-markup grob"
         string += r' #{ \markup \musicglyph #"noteheads.s0harmonic" #}))'
         string = rf"- \tweak TrillPitchHead.stencil {string}"
