@@ -111,6 +111,12 @@ def _evaluate_item(
         rests = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
         components.extend(rests)
         result = rests
+    elif isinstance(item, Chord):
+        chord_duration = abjad.Duration(item.numerator, denominator)
+        pitch_tuple = tuple(range(item.note_head_count))
+        chords = abjad.makers.make_leaves([pitch_tuple], [chord_duration], tag=tag)
+        components.extend(chords)
+        result = chords
     elif isinstance(item, abjad.Tuplet):
         duration = abjad.get.duration(item)
         dummy_notes = abjad.makers.make_leaves([99], [duration], tag=tag)
