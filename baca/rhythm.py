@@ -754,23 +754,20 @@ class Tuplet:
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class WrittenDuration:
-    real_n: int
+    real_n: typing.Any
     written_n: int
 
     def __post_init__(self):
-        assert isinstance(self.real_n, int), repr(self.real_n)
         assert isinstance(self.written_n, int), repr(self.written_n)
 
     def __call__(self, denominator: int, tag: abjad.Tag) -> abjad.Leaf:
         assert isinstance(denominator, int), repr(denominator)
         tag = tag or abjad.Tag()
         tag = tag.append(_helpers.function_name(_frame()))
-        real_duration = abjad.Duration(abs(self.real_n), denominator)
-        leaf: abjad.Leaf
-        if 0 < self.real_n:
-            leaf = abjad.Note(0, real_duration, tag=tag)
-        else:
-            leaf = abjad.Rest(real_duration, tag=tag)
+        components = _evaluate_basic_item(self.real_n, denominator, "", tag)
+        if 1 < len(components):
+            raise NotImplementedError(f"multiple leaves: {components}")
+        leaf = components[0]
         written_duration = abjad.Duration(self.written_n, denominator)
         rmakers.written_duration([leaf], written_duration)
         return leaf
