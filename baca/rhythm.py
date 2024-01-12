@@ -331,7 +331,7 @@ class AfterGrace:
     main_note_numerator: int
 
     def __post_init__(self):
-        assert all(isinstance(_, int) for _ in self.grace_note_numerators), repr(
+        assert isinstance(self.grace_note_numerators, list), repr(
             self.grace_note_numerators
         )
 
@@ -344,16 +344,10 @@ class AfterGrace:
             voice_name,
             tag,
         )
-        grace_durations = [
-            abjad.Duration(abs(_), denominator) for _ in self.grace_note_numerators
-        ]
-        pitches: list[int | None] = []
-        for grace_note_numerator in self.grace_note_numerators:
-            if 0 < grace_note_numerator:
-                pitches.append(0)
-            else:
-                pitches.append(None)
-        grace_leaves = abjad.makers.make_leaves(pitches, grace_durations, tag=tag)
+        grace_leaves = []
+        for item in self.grace_note_numerators:
+            components = _evaluate_basic_item(item, denominator, "", tag)
+            grace_leaves.extend(components)
         if 1 < len(grace_leaves):
             temporary_voice = abjad.Voice(grace_leaves, name="TemporaryVoice")
             abjad.beam(grace_leaves)
