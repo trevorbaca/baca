@@ -1051,6 +1051,7 @@ def xfb_spanner(
     left_broken_text: str = r"\baca-left-broken-xfb-markup",
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
+    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.BOW_SPEED_SPANNER)
@@ -1064,6 +1065,7 @@ def xfb_spanner(
         lilypond_id="BowSpeed",
         pieces=pieces,
         right_broken=right_broken,
+        staff_padding=staff_padding,
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
