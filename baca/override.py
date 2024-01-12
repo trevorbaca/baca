@@ -395,6 +395,16 @@ def dots_extra_offset(
     )
 
 
+def dots_font_size(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
+        _frame(),
+        argument,
+        grob="Dots",
+        attribute="font_size",
+        value=n,
+    )
+
+
 def dots_stencil_false(argument) -> list[abjad.Wrapper]:
     return _do_override(
         _frame(),
@@ -884,6 +894,16 @@ def ottava_bracket_staff_padding(argument, n: int | float) -> list[abjad.Wrapper
         "staff_padding",
         n,
         context="Staff",
+    )
+
+
+def parentheses_font_size(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
+        _frame(),
+        argument,
+        attribute="font_size",
+        grob="Parentheses",
+        value=n,
     )
 
 
