@@ -1670,6 +1670,19 @@ def tuplet_bracket_padding(argument, n: int | float) -> list[abjad.Wrapper]:
     )
 
 
+def tuplet_bracket_positions(
+    argument,
+    pair: tuple[int | float, int | float],
+) -> list[abjad.Wrapper]:
+    return _do_override(
+        _frame(),
+        argument,
+        "TupletBracket",
+        "positions",
+        f"#'({pair[0]} . {pair[1]})",
+    )
+
+
 def tuplet_bracket_shorten_pair(
     argument,
     pair: tuple[int | float, int | float],
