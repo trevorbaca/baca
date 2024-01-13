@@ -665,6 +665,8 @@ def hairpin(
     remove_length_1_spanner_start: bool = False,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
+    if pieces is not None:
+        assert argument == (), repr(argument)
     final_hairpin_, specifiers = _prepare_hairpin_arguments(
         dynamics,
         final_hairpin,
