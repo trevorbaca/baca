@@ -540,6 +540,16 @@ def flag_extra_offset(
     )
 
 
+def flag_font_size(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
+        _frame(),
+        argument,
+        attribute="font_size",
+        grob="Flag",
+        value=n,
+    )
+
+
 def flag_stencil_false(argument) -> list[abjad.Wrapper]:
     return _do_override(
         _frame(),
