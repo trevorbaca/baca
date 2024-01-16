@@ -86,6 +86,7 @@ from .rhythm import (
     Feather,
     InvisibleMusic,
     LMR,
+    MultipliedDuration,
     OBGC,
     RepeatTie,
     Tie,
