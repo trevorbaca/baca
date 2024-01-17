@@ -570,6 +570,16 @@ def flag_stencil_false(argument) -> list[abjad.Wrapper]:
     )
 
 
+def flag_stencil(argument, stencil: str) -> list[abjad.Wrapper]:
+    return _do_override(
+        _frame(),
+        argument,
+        grob="Flag",
+        attribute="stencil",
+        value=stencil,
+    )
+
+
 def flag_transparent(argument) -> list[abjad.Wrapper]:
     return _do_override(
         _frame(),
@@ -1305,6 +1315,16 @@ def stem_extra_offset(
         grob="Stem",
         attribute="extra_offset",
         value=f"#'({pair[0]} . {pair[1]})",
+    )
+
+
+def stem_length(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
+        _frame(),
+        argument,
+        grob="Stem",
+        attribute="length",
+        value=n,
     )
 
 
