@@ -124,6 +124,16 @@ def accidental_font_size(argument, n: int | float) -> list[abjad.Wrapper]:
     )
 
 
+def accidental_outside_staff_priority(argument, n: int | float) -> list[abjad.Wrapper]:
+    return _do_override(
+        _frame(),
+        argument,
+        grob="Accidental",
+        attribute="outside_staff_priority",
+        value=n,
+    )
+
+
 def accidental_stencil_false(argument) -> list[abjad.Wrapper]:
     return _do_override(
         _frame(),

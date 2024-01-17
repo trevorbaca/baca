@@ -512,11 +512,12 @@ def fermata(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def flageolet(argument) -> list[abjad.Wrapper]:
+def flageolet(argument, *tweaks: abjad.Tweak) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
         indicator = abjad.Articulation("flageolet")
+        indicator = _tweaks.bundle_tweaks(indicator, tweaks)
         wrapper = abjad.attach(
             indicator,
             leaf,
