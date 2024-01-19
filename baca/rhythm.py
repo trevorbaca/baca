@@ -86,6 +86,9 @@ def _evaluate_basic_item(item, denominator, voice_name, tag):
     elif isinstance(item, MultipliedDuration):
         note = item(tag=tag)
         components = [note]
+    elif isinstance(item, MultipliedDurationImproved):
+        note = item(denominator, tag=tag)
+        components = [note]
     elif getattr(item, "custom", False) is True:
         components = _evaluate_basic_item(item.argument, denominator, voice_name, tag)
         components = item(components)
@@ -204,6 +207,10 @@ def _evaluate_item(
         result = leaf
     elif isinstance(item, MultipliedDuration):
         note = item(tag=tag)
+        components.append(note)
+        result = note
+    elif isinstance(item, MultipliedDurationImproved):
+        note = item(denominator, tag=tag)
         components.append(note)
         result = note
     elif item in ("+", "-"):
@@ -646,6 +653,27 @@ class MultipliedDuration:
         n, d = multiplier_string.split("/")
         pair = int(n), int(d)
         note = abjad.Note(0, written_duration, multiplier=pair, tag=tag)
+        return note
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class MultipliedDurationImproved:
+    written_n: int
+    multiplier: tuple[int, int]
+
+    def __post_init__(self):
+        assert isinstance(self.written_n, int), repr(self.written_n)
+        assert isinstance(self.multiplier, tuple), repr(self.multiplier)
+
+    def __call__(self, denominator: int, tag: abjad.Tag) -> abjad.Note:
+        tag = tag or abjad.Tag()
+        tag = tag.append(_helpers.function_name(_frame()))
+        # written_duration, star, multiplier_string = self.string.split()
+        # n, d = multiplier_string.split("/")
+        # pair = int(n), int(d)
+        # note = abjad.Note(0, written_duration, multiplier=pair, tag=tag)
+        written_duration = abjad.Duration(self.written_n, denominator)
+        note = abjad.Note(0, written_duration, multiplier=self.multiplier, tag=tag)
         return note
 
 
@@ -1481,6 +1509,10 @@ def h(argument):
 
 def md(argument):
     return MultipliedDuration(argument)
+
+
+def mdi(written_n, multiplier):
+    return MultipliedDurationImproved(written_n, multiplier)
 
 
 def rt(argument):
