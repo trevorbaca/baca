@@ -638,13 +638,13 @@ def hairpin_stencil_false(argument) -> list[abjad.Wrapper]:
     )
 
 
-def hairpin_to_barline(argument) -> list[abjad.Wrapper]:
+def hairpin_to_bar_line(argument, flag: bool) -> list[abjad.Wrapper]:
     return _do_override(
         _frame(),
         argument,
         "Hairpin",
         "to_barline",
-        True,
+        flag,
     )
 
 
