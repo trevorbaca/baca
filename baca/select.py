@@ -382,31 +382,6 @@ def cmgroups(
     return items
 
 
-def parse_duration_inequality_string(string) -> tuple[str, abjad.Duration]:
-    """
-    Parses duration inequality ``string``.
-
-        >>> baca.select.parse_duration_inequality_string("3/16")
-        ('==', Duration(3, 16))
-
-        >>> baca.select.parse_duration_inequality_string("<=3/16")
-        ('<=', Duration(3, 16))
-
-        >>> baca.select.parse_duration_inequality_string("<3/16")
-        ('<', Duration(3, 16))
-
-    """
-    for operator in ("<=", "<", ">=", ">"):
-        if string.startswith(operator):
-            fraction_string = string.removeprefix(operator)
-            duration = abjad.Duration(fraction_string)
-            break
-    else:
-        operator = "=="
-        duration = abjad.Duration(string)
-    return operator, duration
-
-
 def duration(argument, string, *, preprolated: bool = False) -> list:
     result = []
     operator, duration = parse_duration_inequality_string(string)
@@ -2554,6 +2529,44 @@ def ompltgroups(
     result_3 = abjad.select.partition_by_counts(result_2, counts, overhang=True)
     result_4 = [abjad.select.flatten(_) for _ in result_3]
     return result_4
+
+
+def parse_duration_inequality_string(string) -> tuple[str, abjad.Duration]:
+    """
+    Parses duration inequality ``string``.
+
+        >>> baca.select.parse_duration_inequality_string("3/16")
+        ('==', Duration(3, 16))
+
+        >>> baca.select.parse_duration_inequality_string("<=3/16")
+        ('<=', Duration(3, 16))
+
+        >>> baca.select.parse_duration_inequality_string("<3/16")
+        ('<', Duration(3, 16))
+
+    """
+    for operator in ("<=", "<", ">=", ">"):
+        if string.startswith(operator):
+            fraction_string = string.removeprefix(operator)
+            duration = abjad.Duration(fraction_string)
+            break
+    else:
+        operator = "=="
+        duration = abjad.Duration(string)
+    return operator, duration
+
+
+def partition_by_ratio_of_durations(
+    argument, ratio: tuple[int, ...], *, in_seconds: bool = False
+) -> list[list]:
+    durations = [abjad.get.duration(_, in_seconds=in_seconds) for _ in argument]
+    maximum_denominator = max([_.denominator for _ in durations])
+    pairs = [abjad.duration.with_denominator(_, maximum_denominator) for _ in durations]
+    numerators = [_[0] for _ in pairs]
+    lists = abjad.sequence.partition_by_ratio_of_weights(numerators, ratio)
+    counts = [len(_) for _ in lists]
+    lists = abjad.select.partition_by_counts(argument, counts)
+    return lists
 
 
 def phead(
