@@ -196,6 +196,30 @@ def bar_line(
     return wrappers
 
 
+def bend_after(
+    argument,
+    numbers: list,
+    *tweaks: abjad.Tweak,
+) -> list[abjad.Wrapper]:
+    tag = _helpers.function_name(_frame())
+    wrappers = []
+    leaves = abjad.iterate.leaves(argument)
+    cyclic_numbers = abjad.CyclicTuple(numbers)
+    for i, leaf in enumerate(leaves):
+        number = cyclic_numbers[i]
+        indicator = abjad.BendAfter(number)
+        indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+        if indicator is not None:
+            wrapper = abjad.attach(
+                indicator,
+                leaf,
+                tag=tag,
+                wrapper=True,
+            )
+            wrappers.append(wrapper)
+    return wrappers
+
+
 def breathe(argument, *tweaks: abjad.Tweak) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
