@@ -143,6 +143,8 @@ def _do_piecewise_command(
     last leaf in group ``n`` of selector output and attaches indicator to only first leaf
     in other groups of selector output.
     """
+    # if pieces:
+    #     assert not argument, repr(argument)
     assert tag is not None, repr(tag)
     cyclic_specifiers = abjad.CyclicTuple(specifiers)
     assert isinstance(tweaks, tuple), repr(tweaks)
