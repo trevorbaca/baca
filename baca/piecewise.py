@@ -949,12 +949,9 @@ def string_number_spanner(
 def tasto_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
-    bookend: bool | int = False,
-    final_piece_spanner: bool | None = None,
     left_broken: bool = False,
-    left_broken_text: str = r"\baca-left-broken-t-markup",
-    pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
+    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.TASTO_SPANNER)
@@ -962,13 +959,12 @@ def tasto_spanner(
         argument,
         "T =|",
         *tweaks,
-        bookend=bookend,
-        final_piece_spanner=final_piece_spanner,
+        bookend=False,
         left_broken=left_broken,
-        left_broken_text=left_broken_text,
+        left_broken_text=r"\baca-left-broken-t-markup",
         lilypond_id="SCP",
-        pieces=pieces,
         right_broken=right_broken,
+        staff_padding=staff_padding,
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
