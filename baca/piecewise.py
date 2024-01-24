@@ -127,17 +127,6 @@ def _do_piecewise_command(
     staff_padding: int | float | None = None,
     tag: abjad.Tag,
 ) -> list[abjad.Wrapper]:
-    """
-    Attaches indicator to first leaf in each group of selector output when ``bookend``
-    is false.
-
-    Attaches indicator to both first leaf and last leaf in each group of selector output
-    when ``bookend`` is true.
-
-    When ``bookend`` equals integer ``n``, command attaches indicator to first leaf and
-    last leaf in group ``n`` of selector output and attaches indicator to only first leaf
-    in other groups of selector output.
-    """
     if pieces:
         assert not argument, repr(argument)
     assert tag is not None, repr(tag)
@@ -149,12 +138,13 @@ def _do_piecewise_command(
     assert pieces is not None
     piece_count = len(pieces)
     assert 0 < piece_count, repr(piece_count)
-    if bookend in (False, None):
+    assert bookend in (True, False, -1), repr(bookend)
+    if bookend is False:
         bookend_pattern = abjad.Pattern()
     elif bookend is True:
         bookend_pattern = abjad.index([0], 1)
     else:
-        assert isinstance(bookend, int), repr(bookend)
+        assert bookend == -1
         bookend_pattern = abjad.index([bookend], period=piece_count)
     just_backstole_right_text = None
     just_bookended_leaf = None
