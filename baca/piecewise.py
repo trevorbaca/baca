@@ -151,7 +151,7 @@ def _do_piecewise_command(
     if staff_padding is not None:
         tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
     manifests = manifests or {}
-    pieces = pieces or abjad.select.group(argument)
+    pieces = pieces or [argument]
     assert pieces is not None
     piece_count = len(pieces)
     assert 0 < piece_count, repr(piece_count)
