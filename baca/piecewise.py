@@ -122,7 +122,6 @@ def _do_piecewise_command(
     leak_spanner_stop: bool = False,
     left_broken: bool = False,
     pieces: list[list[abjad.Leaf]] | None = None,
-    remove_length_1_spanner_start: bool = False,
     right_broken: typing.Any | None = None,
     specifiers: typing.Sequence = (),
     staff_padding: int | float | None = None,
@@ -210,8 +209,6 @@ def _do_piecewise_command(
                 specifier, spanner_start=specifier.bookended_spanner_start
             )
             just_backstole_right_text = True
-        if len(piece) == 1 and specifier.compound() and remove_length_1_spanner_start:
-            specifier = dataclasses.replace(specifier, spanner_start=None)
         if is_final_piece and specifier.spanner_start:
             if _is_maybe_bundled(specifier.spanner_start, abjad.StartHairpin):
                 if do_not_start_spanner_on_final_piece is True:
@@ -641,7 +638,6 @@ def hairpin(
     forbid_al_niente_to_bar_line: bool = False,
     left_broken: bool = False,
     pieces: list[list[abjad.Leaf]] | None = None,
-    remove_length_1_spanner_start: bool = False,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
     assert isinstance(do_not_start_spanner_on_final_piece, bool)
@@ -651,9 +647,6 @@ def hairpin(
     )
     assert isinstance(bookend, bool | int), repr(bookend)
     assert isinstance(left_broken, bool), repr(left_broken)
-    assert isinstance(remove_length_1_spanner_start, bool), repr(
-        remove_length_1_spanner_start
-    )
     right_broken_: typing.Any = False
     if bool(right_broken) is True:
         right_broken_ = abjad.LilyPondLiteral(r"\!", site="after")
@@ -664,7 +657,6 @@ def hairpin(
         do_not_start_spanner_on_final_piece=do_not_start_spanner_on_final_piece,
         left_broken=left_broken,
         pieces=pieces,
-        remove_length_1_spanner_start=remove_length_1_spanner_start,
         right_broken=right_broken_,
         specifiers=specifiers,
         tag=_helpers.function_name(_frame()),
