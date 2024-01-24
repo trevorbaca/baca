@@ -60,7 +60,6 @@ def _attach_indicators(
     specifier,
     leaf,
     i,
-    manifests,
     tag,
     tweaks,
     total_pieces,
@@ -68,7 +67,6 @@ def _attach_indicators(
     just_bookended_leaf=None,
 ) -> list[abjad.Wrapper]:
     assert isinstance(specifier, _Specifier), repr(specifier)
-    assert isinstance(manifests, dict), repr(manifests)
     assert isinstance(tag, abjad.Tag), repr(tag)
     wrappers = []
     for indicator in specifier:
@@ -111,7 +109,7 @@ def _attach_indicators(
             tag_ = tag_.append(_tags.SPANNER_STOP)
         wrapper = abjad.attach(indicator, leaf, tag=tag_, wrapper=True)
         if _treat.compare_persistent_indicators(indicator, reapplied):
-            _treat.treat_persistent_wrapper(manifests, wrapper, "redundant")
+            _treat.treat_persistent_wrapper({}, wrapper, "redundant")
         wrappers.append(wrapper)
     return wrappers
 
@@ -119,7 +117,6 @@ def _attach_indicators(
 def _do_piecewise_command(
     argument,
     *,
-    manifests: dict | None = None,
     bookend: bool | int = False,
     final_piece_spanner=None,
     leak_spanner_stop: bool = False,
@@ -150,7 +147,6 @@ def _do_piecewise_command(
     assert isinstance(tweaks, tuple), repr(tweaks)
     if staff_padding is not None:
         tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
-    manifests = manifests or {}
     pieces = pieces or [argument]
     assert pieces is not None
     piece_count = len(pieces)
@@ -181,7 +177,6 @@ def _do_piecewise_command(
                 specifier,
                 stop_leaf,
                 i,
-                manifests,
                 tag.append(tag_),
                 tweaks,
                 total_pieces,
@@ -240,7 +235,6 @@ def _do_piecewise_command(
             specifier,
             start_leaf,
             i,
-            manifests,
             tag.append(tag_),
             tweaks,
             total_pieces,
@@ -259,7 +253,6 @@ def _do_piecewise_command(
                 next_bundle,
                 stop_leaf,
                 i,
-                manifests,
                 tag.append(tag_),
                 tweaks,
                 total_pieces,
@@ -283,7 +276,6 @@ def _do_piecewise_command(
                 specifier,
                 stop_leaf,
                 i,
-                manifests,
                 tag.append(tag_),
                 tweaks,
                 total_pieces,
@@ -684,7 +676,6 @@ def hairpin(
         right_broken_ = abjad.LilyPondLiteral(r"\!", site="after")
     return _do_piecewise_command(
         argument,
-        manifests={},
         bookend=bookend,
         final_piece_spanner=final_hairpin_,
         left_broken=left_broken,
@@ -1000,7 +991,6 @@ def text_spanner(
     )
     return _do_piecewise_command(
         argument,
-        manifests={},
         bookend=bookend,
         final_piece_spanner=final_piece_spanner,
         leak_spanner_stop=leak_spanner_stop,
