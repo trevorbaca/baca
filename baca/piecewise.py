@@ -116,9 +116,9 @@ def _attach_indicators(
 
 def _do_piecewise_command(
     argument,
-    *,
+    *tweaks: _typings.IndexedTweak,
     bookend: bool | int = False,
-    final_piece_spanner=None,
+    final_piece_spanner: bool | None = None,
     leak_spanner_stop: bool = False,
     left_broken: bool = False,
     pieces: list[list[abjad.Leaf]] | None = None,
@@ -127,7 +127,6 @@ def _do_piecewise_command(
     specifiers: typing.Sequence = (),
     staff_padding: int | float | None = None,
     tag: abjad.Tag,
-    tweaks: tuple[_typings.IndexedTweak, ...] = (),
 ) -> list[abjad.Wrapper]:
     """
     Attaches indicator to first leaf in each group of selector output when ``bookend``
@@ -140,6 +139,7 @@ def _do_piecewise_command(
     last leaf in group ``n`` of selector output and attaches indicator to only first leaf
     in other groups of selector output.
     """
+    assert final_piece_spanner in (False, None), repr(final_piece_spanner)
     if pieces:
         assert not argument, repr(argument)
     assert tag is not None, repr(tag)
@@ -216,6 +216,7 @@ def _do_piecewise_command(
         if is_final_piece and specifier.spanner_start:
             if _is_maybe_bundled(specifier.spanner_start, abjad.StartHairpin):
                 if final_piece_spanner:
+                    raise Exception("ASDF")
                     specifier = dataclasses.replace(
                         specifier, spanner_start=final_piece_spanner
                     )
@@ -652,15 +653,14 @@ def hairpin(
     dynamics: str | list,
     *tweaks: _typings.IndexedTweak,
     bookend: bool | int = -1,
-    final_hairpin: bool | str | abjad.StartHairpin | None = None,
+    final_hairpin: bool | None = None,
     forbid_al_niente_to_bar_line: bool = False,
     left_broken: bool = False,
     pieces: list[list[abjad.Leaf]] | None = None,
     remove_length_1_spanner_start: bool = False,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
-    if pieces is not None:
-        assert argument == (), repr(argument)
+    assert final_hairpin in (False, None), repr(final_hairpin)
     final_hairpin_, specifiers = _prepare_hairpin_arguments(
         dynamics,
         final_hairpin,
@@ -676,6 +676,7 @@ def hairpin(
         right_broken_ = abjad.LilyPondLiteral(r"\!", site="after")
     return _do_piecewise_command(
         argument,
+        *tweaks,
         bookend=bookend,
         final_piece_spanner=final_hairpin_,
         left_broken=left_broken,
@@ -684,7 +685,6 @@ def hairpin(
         right_broken=right_broken_,
         specifiers=specifiers,
         tag=_helpers.function_name(_frame()),
-        tweaks=tweaks,
     )
 
 
@@ -991,6 +991,7 @@ def text_spanner(
     )
     return _do_piecewise_command(
         argument,
+        *tweaks,
         bookend=bookend,
         final_piece_spanner=final_piece_spanner,
         leak_spanner_stop=leak_spanner_stop,
@@ -1000,7 +1001,6 @@ def text_spanner(
         specifiers=specifiers,
         staff_padding=staff_padding,
         tag=_helpers.function_name(_frame()),
-        tweaks=tweaks,
     )
 
 
