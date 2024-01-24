@@ -118,7 +118,7 @@ def _do_piecewise_command(
     argument,
     *tweaks: _typings.IndexedTweak,
     bookend: bool | int = False,
-    final_piece_spanner: bool | None = None,
+    do_not_start_spanner_on_final_piece: bool = False,
     leak_spanner_stop: bool = False,
     left_broken: bool = False,
     pieces: list[list[abjad.Leaf]] | None = None,
@@ -139,7 +139,6 @@ def _do_piecewise_command(
     last leaf in group ``n`` of selector output and attaches indicator to only first leaf
     in other groups of selector output.
     """
-    assert final_piece_spanner in (False, None), repr(final_piece_spanner)
     if pieces:
         assert not argument, repr(argument)
     assert tag is not None, repr(tag)
@@ -186,7 +185,7 @@ def _do_piecewise_command(
             should_bookend = True
         else:
             should_bookend = False
-        if is_final_piece and final_piece_spanner is False:
+        if is_final_piece and do_not_start_spanner_on_final_piece is True:
             should_bookend = False
         specifier = cyclic_specifiers[i]
         if (
@@ -204,7 +203,7 @@ def _do_piecewise_command(
             )
         if (
             is_penultimate_piece
-            and (len(pieces[-1]) == 1 or final_piece_spanner is False)
+            and (len(pieces[-1]) == 1 or do_not_start_spanner_on_final_piece is True)
             and _is_maybe_bundled(next_bundle.spanner_start, abjad.StartTextSpan)
         ):
             specifier = dataclasses.replace(
@@ -215,15 +214,10 @@ def _do_piecewise_command(
             specifier = dataclasses.replace(specifier, spanner_start=None)
         if is_final_piece and specifier.spanner_start:
             if _is_maybe_bundled(specifier.spanner_start, abjad.StartHairpin):
-                if final_piece_spanner:
-                    raise Exception("ASDF")
-                    specifier = dataclasses.replace(
-                        specifier, spanner_start=final_piece_spanner
-                    )
-                elif final_piece_spanner is False:
+                if do_not_start_spanner_on_final_piece is True:
                     specifier = dataclasses.replace(specifier, spanner_start=None)
             elif _is_maybe_bundled(specifier.spanner_start, abjad.StartTextSpan):
-                if final_piece_spanner is False:
+                if do_not_start_spanner_on_final_piece is True:
                     specifier = dataclasses.replace(specifier, spanner_start=None)
         tag_ = _helpers.function_name(_frame(), n=2)
         if is_first_piece or previous_had_bookend:
@@ -297,7 +291,6 @@ def _is_maybe_bundled(argument, prototype):
 
 def _prepare_hairpin_arguments(
     dynamics,
-    final_hairpin,
     forbid_al_niente_to_bar_line,
 ):
     if isinstance(dynamics, str):
@@ -309,13 +302,7 @@ def _prepare_hairpin_arguments(
         specifiers = dynamics
     for item in specifiers:
         assert isinstance(item, _Specifier), repr(dynamics)
-    final_hairpin_ = None
-    if isinstance(final_hairpin, bool):
-        final_hairpin_ = final_hairpin
-    elif isinstance(final_hairpin, str):
-        final_hairpin_ = abjad.StartHairpin(final_hairpin)
-    assert isinstance(final_hairpin_, bool | abjad.StartHairpin | None)
-    return final_hairpin_, specifiers
+    return specifiers
 
 
 def _prepare_text_spanner_arguments(
@@ -324,7 +311,6 @@ def _prepare_text_spanner_arguments(
     bookend,
     boxed,
     direction,
-    final_piece_spanner,
     leak_spanner_stop,
     left_broken,
     left_broken_text,
@@ -499,7 +485,6 @@ def bow_speed_spanner(
     items: str | list,
     *tweaks: _typings.IndexedTweak,
     bookend: bool | int = False,
-    final_piece_spanner: bool | None = None,
     left_broken: bool = False,
     left_broken_text: str | None = None,
     pieces: list[list[abjad.Leaf]] | None = None,
@@ -512,7 +497,6 @@ def bow_speed_spanner(
         items,
         *tweaks,
         bookend=bookend,
-        final_piece_spanner=final_piece_spanner,
         left_broken=left_broken,
         left_broken_text=left_broken_text,
         lilypond_id="BowSpeed",
@@ -653,17 +637,16 @@ def hairpin(
     dynamics: str | list,
     *tweaks: _typings.IndexedTweak,
     bookend: bool | int = -1,
-    final_hairpin: bool | None = None,
+    do_not_start_spanner_on_final_piece: bool = False,
     forbid_al_niente_to_bar_line: bool = False,
     left_broken: bool = False,
     pieces: list[list[abjad.Leaf]] | None = None,
     remove_length_1_spanner_start: bool = False,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
-    assert final_hairpin in (False, None), repr(final_hairpin)
-    final_hairpin_, specifiers = _prepare_hairpin_arguments(
+    assert isinstance(do_not_start_spanner_on_final_piece, bool)
+    specifiers = _prepare_hairpin_arguments(
         dynamics,
-        final_hairpin,
         forbid_al_niente_to_bar_line,
     )
     assert isinstance(bookend, bool | int), repr(bookend)
@@ -678,7 +661,7 @@ def hairpin(
         argument,
         *tweaks,
         bookend=bookend,
-        final_piece_spanner=final_hairpin_,
+        do_not_start_spanner_on_final_piece=do_not_start_spanner_on_final_piece,
         left_broken=left_broken,
         pieces=pieces,
         remove_length_1_spanner_start=remove_length_1_spanner_start,
@@ -855,7 +838,7 @@ def scp_spanner(
     items: str | list,
     *tweaks: _typings.IndexedTweak,
     bookend: bool | int = False,
-    final_piece_spanner: bool | None = None,
+    do_not_start_spanner_on_final_piece: bool = False,
     left_broken: bool = False,
     left_broken_text: str | None = None,
     pieces: list[list[abjad.Leaf]] | None = None,
@@ -869,7 +852,7 @@ def scp_spanner(
         items,
         *tweaks,
         bookend=bookend,
-        final_piece_spanner=final_piece_spanner,
+        do_not_start_spanner_on_final_piece=do_not_start_spanner_on_final_piece,
         left_broken=left_broken,
         left_broken_text=left_broken_text,
         lilypond_id="SCP",
@@ -912,7 +895,6 @@ def string_number_spanner(
     items: str | list,
     *tweaks: _typings.IndexedTweak,
     bookend: bool | int = False,
-    final_piece_spanner: bool | None = None,
     left_broken: bool = False,
     left_broken_text: str | None = None,
     pieces: list[list[abjad.Leaf]] | None = None,
@@ -968,7 +950,7 @@ def text_spanner(
     bookend: bool | int = -1,
     boxed: bool = False,
     direction: int | None = None,
-    final_piece_spanner: bool | None = None,
+    do_not_start_spanner_on_final_piece: bool = False,
     leak_spanner_stop: bool = False,
     left_broken: bool = False,
     left_broken_text: str | None = None,
@@ -982,7 +964,6 @@ def text_spanner(
         bookend=bookend,
         boxed=boxed,
         direction=direction,
-        final_piece_spanner=final_piece_spanner,
         leak_spanner_stop=leak_spanner_stop,
         left_broken=left_broken,
         left_broken_text=left_broken_text,
@@ -993,7 +974,7 @@ def text_spanner(
         argument,
         *tweaks,
         bookend=bookend,
-        final_piece_spanner=final_piece_spanner,
+        do_not_start_spanner_on_final_piece=do_not_start_spanner_on_final_piece,
         leak_spanner_stop=leak_spanner_stop,
         left_broken=left_broken,
         pieces=pieces,
@@ -1009,7 +990,6 @@ def vibrato_spanner(
     items: str | list,
     *tweaks: _typings.IndexedTweak,
     bookend: bool | int = False,
-    final_piece_spanner: bool | None = None,
     left_broken: bool = False,
     left_broken_text: str | None = None,
     pieces: list[list[abjad.Leaf]] | None = None,
@@ -1036,7 +1016,6 @@ def xfb_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
     bookend: bool | int = False,
-    final_piece_spanner: bool | None = None,
     left_broken: bool = False,
     left_broken_text: str = r"\baca-left-broken-xfb-markup",
     pieces: list[list[abjad.Leaf]] | None = None,
