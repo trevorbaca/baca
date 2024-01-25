@@ -138,11 +138,9 @@ def _do_piecewise_command(
     assert pieces is not None
     piece_count = len(pieces)
     assert 0 < piece_count, repr(piece_count)
-    assert bookend in (True, False, -1), repr(bookend)
+    assert bookend in (False, -1), repr(bookend)
     if bookend is False:
         bookend_pattern = abjad.Pattern()
-    elif bookend is True:
-        bookend_pattern = abjad.index([0], 1)
     else:
         assert bookend == -1
         bookend_pattern = abjad.index([bookend], period=piece_count)
