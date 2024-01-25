@@ -59,11 +59,7 @@ from .pcollections import (
 from .piecewise import (
     bow_speed_spanner,
     circle_bow_spanner,
-    covered_spanner,
-    damp_spanner,
     hairpin,
-    half_clt_spanner,
-    material_annotation_spanner,
     parse_hairpin_descriptor,
     scp_spanner,
     text_spanner,

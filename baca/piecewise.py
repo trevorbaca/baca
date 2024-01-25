@@ -507,61 +507,6 @@ def circle_bow_spanner(
     return wrappers
 
 
-def covered_spanner(
-    argument,
-    *tweaks: _typings.IndexedTweak,
-    items: str = r"\baca-covered-markup =|",
-    left_broken: bool = False,
-    left_broken_text: str | None = r"\baca-left-broken-covered-markup",
-    pieces: list[list[abjad.Leaf]] | None = None,
-    right_broken: bool = False,
-    staff_padding: int | float | None = None,
-) -> list[abjad.Wrapper]:
-    tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.COVERED_SPANNER)
-    wrappers = text_spanner(
-        argument,
-        items,
-        *tweaks,
-        bookend=False,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id="Covered",
-        pieces=pieces,
-        right_broken=right_broken,
-        staff_padding=staff_padding,
-    )
-    _tags.wrappers(wrappers, tag)
-    return wrappers
-
-
-def damp_spanner(
-    argument,
-    *tweaks: _typings.IndexedTweak,
-    left_broken: bool = False,
-    left_broken_text: str | None = r"\baca-left-broken-damp-markup",
-    pieces: list[list[abjad.Leaf]] | None = None,
-    right_broken: bool = False,
-    staff_padding: int | float | None = None,
-) -> list[abjad.Wrapper]:
-    tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.DAMP_SPANNER)
-    wrappers = text_spanner(
-        argument,
-        r"\baca-damp-markup =|",
-        *tweaks,
-        bookend=False,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id="Damp",
-        pieces=pieces,
-        right_broken=right_broken,
-        staff_padding=staff_padding,
-    )
-    _tags.wrappers(wrappers, tag)
-    return wrappers
-
-
 def hairpin(
     argument,
     dynamics: str,
@@ -599,56 +544,6 @@ def hairpin(
         specifiers=specifiers,
         tag=_helpers.function_name(_frame()),
     )
-
-
-def half_clt_spanner(
-    argument,
-    *tweaks: _typings.IndexedTweak,
-    items: str = "½ clt =|",
-    left_broken: bool = False,
-    left_broken_text: str | None = r"\baca-left-broken-half-clt-markup",
-    pieces: list[list[abjad.Leaf]] | None = None,
-    right_broken: bool = False,
-) -> list[abjad.Wrapper]:
-    tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.HALF_CLT_SPANNER)
-    wrappers = text_spanner(
-        argument,
-        items,
-        *tweaks,
-        bookend=False,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id="HalfCLT",
-        pieces=pieces,
-        right_broken=right_broken,
-    )
-    _tags.wrappers(wrappers, tag)
-    return wrappers
-
-
-def material_annotation_spanner(
-    argument,
-    items: str | list,
-    *tweaks: _typings.IndexedTweak,
-    left_broken: bool = False,
-    pieces: list[list[abjad.Leaf]] | None = None,
-    right_broken: bool = False,
-) -> list[abjad.Wrapper]:
-    tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.MATERIAL_ANNOTATION_SPANNER)
-    wrappers = text_spanner(
-        argument,
-        items,
-        *tweaks,
-        bookend=False,
-        left_broken=left_broken,
-        lilypond_id="MaterialAnnotation",
-        pieces=pieces,
-        right_broken=right_broken,
-    )
-    _tags.wrappers(wrappers, tag)
-    return wrappers
 
 
 def parse_hairpin_descriptor(

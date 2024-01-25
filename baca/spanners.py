@@ -169,6 +169,135 @@ def clb(
     return wrappers
 
 
+def covered(
+    argument,
+    *tweaks: abjad.Tweak,
+    items: str = r"\baca-covered-markup =|",
+    left_broken: bool = False,
+    left_broken_text: str = r"\baca-left-broken-covered-markup",
+    right_broken: bool = False,
+    staff_padding: int | float | None = None,
+) -> list[abjad.Wrapper]:
+    specifiers = _piecewise._prepare_text_spanner_arguments(
+        items,
+        boxed=False,
+        direction=None,
+        left_broken_text=left_broken_text,
+        lilypond_id="Covered",
+    )
+    assert len(specifiers) == 1
+    specifier = specifiers[0]
+    wrappers = _do_spanner_indicator_command(
+        argument,
+        specifier.spanner_start,
+        specifier.spanner_stop,
+        *tweaks,
+        left_broken=left_broken,
+        right_broken=right_broken,
+        staff_padding=staff_padding,
+    )
+    tag = _helpers.function_name(_frame())
+    tag = tag.append(_tags.COVERED_SPANNER)
+    _tags.wrappers(wrappers, tag)
+    return wrappers
+
+
+def damp(
+    argument,
+    *tweaks: abjad.Tweak,
+    left_broken: bool = False,
+    right_broken: bool = False,
+    staff_padding: int | float | None = None,
+) -> list[abjad.Wrapper]:
+    specifiers = _piecewise._prepare_text_spanner_arguments(
+        r"\baca-damp-markup =|",
+        boxed=False,
+        direction=None,
+        left_broken_text=r"\baca-left-broken-damp-markup",
+        lilypond_id="Damp",
+    )
+    assert len(specifiers) == 1
+    specifier = specifiers[0]
+    wrappers = _do_spanner_indicator_command(
+        argument,
+        specifier.spanner_start,
+        specifier.spanner_stop,
+        *tweaks,
+        left_broken=left_broken,
+        right_broken=right_broken,
+        staff_padding=staff_padding,
+    )
+    tag = _helpers.function_name(_frame())
+    tag = tag.append(_tags.DAMP_SPANNER)
+    _tags.wrappers(wrappers, tag)
+    return wrappers
+
+
+def half_clt(
+    argument,
+    *tweaks: abjad.Tweak,
+    items: str = "½ clt =|",
+    left_broken: bool = False,
+    left_broken_text: str = r"\baca-left-broken-half-clt-markup",
+    right_broken: bool = False,
+    staff_padding: int | float | None = None,
+) -> list[abjad.Wrapper]:
+    specifiers = _piecewise._prepare_text_spanner_arguments(
+        items,
+        boxed=False,
+        direction=None,
+        left_broken_text=left_broken_text,
+        lilypond_id="HalfCLT",
+    )
+    assert len(specifiers) == 1
+    specifier = specifiers[0]
+    wrappers = _do_spanner_indicator_command(
+        argument,
+        specifier.spanner_start,
+        specifier.spanner_stop,
+        *tweaks,
+        left_broken=left_broken,
+        right_broken=right_broken,
+        staff_padding=staff_padding,
+    )
+    tag = _helpers.function_name(_frame())
+    tag = tag.append(_tags.HALF_CLT_SPANNER)
+    _tags.wrappers(wrappers, tag)
+    return wrappers
+
+
+def material_annotation(
+    argument,
+    items: str | list,
+    *tweaks: abjad.Tweak,
+    left_broken: bool = False,
+    right_broken: bool = False,
+    staff_padding: int | float | None = None,
+) -> list[abjad.Wrapper]:
+    specifiers = _piecewise._prepare_text_spanner_arguments(
+        items,
+        boxed=False,
+        direction=None,
+        left_broken_text=None,
+        lilypond_id="MaterialAnnotation",
+    )
+    assert len(specifiers) == 1
+    specifier = specifiers[0]
+    wrappers = _do_spanner_indicator_command(
+        argument,
+        specifier.spanner_start,
+        specifier.spanner_stop,
+        *tweaks,
+        left_broken=left_broken,
+        right_broken=right_broken,
+        staff_padding=staff_padding,
+    )
+    tag = _helpers.function_name(_frame())
+    tag = tag.append(_tags.MATERIAL_ANNOTATION_SPANNER)
+    _tags.wrappers(wrappers, tag)
+    return wrappers
+
+
 def metric_modulation(
     argument,
     *tweaks: abjad.Tweak,
