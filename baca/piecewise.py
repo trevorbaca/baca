@@ -274,30 +274,11 @@ def _is_maybe_bundled(argument, prototype):
     return False
 
 
-# TODO: merge into baca.hairpin()
-def _prepare_hairpin_arguments(
-    dynamics,
-    forbid_al_niente_to_bar_line,
-):
-    if isinstance(dynamics, str):
-        specifiers = parse_hairpin_descriptor(
-            dynamics,
-            forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
-        )
-    else:
-        specifiers = dynamics
-    for item in specifiers:
-        assert isinstance(item, _Specifier), repr(dynamics)
-    return specifiers
-
-
 def _prepare_text_spanner_arguments(
     items,
+    boxed: bool = False,
+    direction: int | None = None,
     *,
-    # TODO: make boxed keyword-optional
-    boxed,
-    # TODO: make direction keyword-optional
-    direction,
     left_broken_text,
     lilypond_id,
 ):
@@ -319,8 +300,8 @@ def _prepare_text_spanner_arguments(
             "-|": r"\baca-solid-line-with-hook",
         }
     if isinstance(items, str):
-        items_ = []
-        current_item = []
+        items_: list[str | abjad.Markup] = []
+        current_item: list[str] = []
         for word in items.split():
             if word in shape_to_style:
                 if current_item:
@@ -387,6 +368,7 @@ def _prepare_text_spanner_arguments(
             right_text = cyclic_items[i + 2]
         else:
             right_text = cyclic_items[i + 1]
+        right_markup: str | abjad.Markup
         if isinstance(right_text, str):
             if "hook" not in style:
                 if right_text.startswith("\\"):
@@ -431,6 +413,7 @@ def _prepare_text_spanner_arguments(
             string = r"\markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75"
             string += rf" \general-align #Y #1 {content_string} }}"
             right_markup = abjad.Markup(string)
+        bookended_spanner_start: abjad.StartTextSpan | abjad.Bundle
         bookended_spanner_start = dataclasses.replace(
             start_text_span, right_text=right_markup
         )
@@ -618,7 +601,7 @@ def damp_spanner(
 
 def hairpin(
     argument,
-    dynamics: str | list,
+    dynamics: str,
     *tweaks: _typings.IndexedTweak,
     bookend: bool | int = -1,
     do_not_start_spanner_on_final_piece: bool = False,
@@ -627,15 +610,20 @@ def hairpin(
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
+    assert isinstance(dynamics, str), repr(dynamics)
+    assert bookend in (-1, False), repr(bookend)
     assert isinstance(do_not_start_spanner_on_final_piece, bool)
-    specifiers = _prepare_hairpin_arguments(
-        dynamics,
-        forbid_al_niente_to_bar_line,
-    )
-    assert isinstance(bookend, bool | int), repr(bookend)
     assert isinstance(left_broken, bool), repr(left_broken)
-    right_broken_: typing.Any = False
+    if pieces is not None:
+        assert isinstance(pieces, list), repr(pieces)
+    assert isinstance(right_broken, bool), repr(right_broken)
+    specifiers = parse_hairpin_descriptor(
+        dynamics,
+        forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
+    )
+    right_broken_: bool | abjad.LilyPondLiteral = False
     if bool(right_broken) is True:
+        # TODO: can this be replaced by an abjad.Dynamic?
         right_broken_ = abjad.LilyPondLiteral(r"\!", site="after")
     return _do_piecewise_command(
         argument,
