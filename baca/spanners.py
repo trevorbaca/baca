@@ -9,19 +9,21 @@ import abjad
 from . import helpers as _helpers
 from . import piecewise as _piecewise
 from . import tags as _tags
+from . import treat as _treat
 from . import tweaks as _tweaks
 
 
 def _do_spanner_indicator_command(
     argument,
-    start_indicator,
-    stop_indicator,
+    start_indicator=None,
+    stop_indicator=None,
     *tweaks,
     context: str | None = None,
     direction: abjad.Vertical | None = None,
     left_broken: bool = False,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
+    tag_start_dynamic_as_spanner_stop: bool = False,
 ) -> list[abjad.Wrapper]:
     if staff_padding is not None:
         tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
@@ -29,10 +31,14 @@ def _do_spanner_indicator_command(
     if start_indicator is not None:
         start_indicator = _tweaks.bundle_tweaks(start_indicator, tweaks)
         tag = _helpers.function_name(_frame(), n=1)
-        tag = tag.append(_tags.SPANNER_START)
+        if tag_start_dynamic_as_spanner_stop:
+            tag = tag.append(_tags.SPANNER_STOP)
+        else:
+            tag = tag.append(_tags.SPANNER_START)
         if left_broken:
             tag = tag.append(_tags.LEFT_BROKEN)
         first_leaf = abjad.select.leaf(argument, 0)
+        reapplied = _treat.remove_reapplied_wrappers(first_leaf, start_indicator)
         wrapper = abjad.attach(
             start_indicator,
             first_leaf,
@@ -41,6 +47,8 @@ def _do_spanner_indicator_command(
             tag=tag,
             wrapper=True,
         )
+        if _treat.compare_persistent_indicators(start_indicator, reapplied):
+            _treat.treat_persistent_wrapper({}, wrapper, "redundant")
         wrappers.append(wrapper)
     if stop_indicator is not None:
         tag = _helpers.function_name(_frame(), n=2)
@@ -48,6 +56,7 @@ def _do_spanner_indicator_command(
         if right_broken:
             tag = tag.append(_tags.RIGHT_BROKEN)
         final_leaf = abjad.select.leaf(argument, -1)
+        reapplied = _treat.remove_reapplied_wrappers(final_leaf, stop_indicator)
         wrapper = abjad.attach(
             stop_indicator,
             final_leaf,
@@ -56,6 +65,8 @@ def _do_spanner_indicator_command(
             tag=tag,
             wrapper=True,
         )
+        if _treat.compare_persistent_indicators(stop_indicator, reapplied):
+            _treat.treat_persistent_wrapper({}, wrapper, "redundant")
         wrappers.append(wrapper)
     return wrappers
 
@@ -262,6 +273,61 @@ def half_clt(
     )
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.HALF_CLT_SPANNER)
+    _tags.wrappers(wrappers, tag)
+    return wrappers
+
+
+def hairpin(
+    argument,
+    dynamics: str,
+    *tweaks: abjad.Tweak,
+    forbid_al_niente_to_bar_line: bool = False,
+    left_broken: bool = False,
+    right_broken: bool = False,
+) -> list[abjad.Wrapper]:
+    specifiers = _piecewise.parse_hairpin_descriptor(
+        dynamics,
+        forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
+    )
+    wrappers = []
+    start_dynamic, hairpin_start, stop_dynamic = None, None, None
+    if len(specifiers) == 1:
+        specifier = specifiers[0]
+        if specifier.spanner_start is not None:
+            raise NotImplementedError(dynamics)
+        assert specifier.indicator is not None
+        start_dynamic = specifier.indicator
+    elif len(specifiers) == 2:
+        first, second = specifiers
+        start_dynamic = first.indicator
+        hairpin_start = first.spanner_start
+        stop_dynamic = second.indicator
+        if second.spanner_start:
+            raise Exception(dynamics)
+        if second.spanner_stop:
+            raise Exception(dynamics)
+    else:
+        raise NotImplementedError(dynamics)
+    if start_dynamic is not None:
+        wrappers_ = _do_spanner_indicator_command(
+            argument,
+            # first.indicator,
+            start_dynamic,
+            tag_start_dynamic_as_spanner_stop=True,
+        )
+        wrappers.extend(wrappers_)
+    wrappers_ = _do_spanner_indicator_command(
+        argument,
+        # first.spanner_start,
+        # second.indicator,
+        hairpin_start,
+        stop_dynamic,
+        *tweaks,
+        left_broken=left_broken,
+        right_broken=right_broken,
+    )
+    wrappers.extend(wrappers_)
+    tag = _helpers.function_name(_frame())
     _tags.wrappers(wrappers, tag)
     return wrappers
 
