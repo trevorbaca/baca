@@ -23,6 +23,7 @@ def function_name(frame, *, n=None):
     """
     parts = []
     path = frame.f_code.co_filename.removesuffix(".py")
+    file_name = path.split(os.sep)[-1]
     found_library = False
     for part in reversed(path.split(os.sep)):
         parts.append(part)
@@ -36,6 +37,10 @@ def function_name(frame, *, n=None):
     parts.reverse()
     if parts[0] == "baca":
         parts.pop()
+    modules = ("array", "build", "dynamics", "math", "override", "path", "score")
+    modules += ("section", "select", "sequence", "spanners", "typings")
+    if file_name in modules:
+        parts.append(file_name)
     if "self" in frame.f_locals:
         class_name = frame.f_locals["self"].__class__.__name__
         parts.append(class_name)
