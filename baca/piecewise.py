@@ -295,14 +295,10 @@ def _prepare_hairpin_arguments(
 def _prepare_text_spanner_arguments(
     items,
     *,
-    bookend,
     boxed,
     direction,
-    leak_spanner_stop,
-    left_broken,
     left_broken_text,
     lilypond_id,
-    right_broken,
 ):
     original_items = items
     if direction == abjad.DOWN:
@@ -943,14 +939,10 @@ def text_spanner(
 ) -> list[abjad.Wrapper]:
     specifiers = _prepare_text_spanner_arguments(
         items,
-        bookend=bookend,
         boxed=boxed,
         direction=direction,
-        leak_spanner_stop=leak_spanner_stop,
-        left_broken=left_broken,
         left_broken_text=left_broken_text,
         lilypond_id=lilypond_id,
-        right_broken=right_broken,
     )
     return _do_piecewise_command(
         argument,
