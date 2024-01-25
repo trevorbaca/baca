@@ -64,15 +64,10 @@ from .piecewise import (
     hairpin,
     half_clt_spanner,
     material_annotation_spanner,
-    metric_modulation_spanner,
     parse_hairpin_descriptor,
-    pizzicato_spanner,
     scp_spanner,
-    spazzolato_spanner,
-    string_number_spanner,
     text_spanner,
     vibrato_spanner,
-    xfb_spanner,
 )
 from .pitchtools import *
 from .rhythm import (

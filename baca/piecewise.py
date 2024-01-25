@@ -651,30 +651,6 @@ def material_annotation_spanner(
     return wrappers
 
 
-def metric_modulation_spanner(
-    argument,
-    *tweaks: _typings.IndexedTweak,
-    items: str = r"MM =|",
-    left_broken: bool = False,
-    pieces: list[list[abjad.Leaf]] | None = None,
-    right_broken: bool = False,
-) -> list[abjad.Wrapper]:
-    tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.METRIC_MODULATION_SPANNER)
-    wrappers = text_spanner(
-        argument,
-        items,
-        *tweaks,
-        bookend=False,
-        left_broken=left_broken,
-        lilypond_id="MetricModulation",
-        pieces=pieces,
-        right_broken=right_broken,
-    )
-    _tags.wrappers(wrappers, tag)
-    return wrappers
-
-
 def parse_hairpin_descriptor(
     descriptor: str,
     *tweaks: abjad.Tweak,
@@ -735,34 +711,6 @@ def parse_hairpin_descriptor(
     return specifiers
 
 
-def pizzicato_spanner(
-    argument,
-    *tweaks: _typings.IndexedTweak,
-    items: str = r"\baca-pizz-markup =|",
-    left_broken: bool = False,
-    left_broken_text: str | None = r"\baca-left-broken-pizz-markup",
-    pieces: list[list[abjad.Leaf]] | None = None,
-    right_broken: bool = False,
-    staff_padding: int | float | None = None,
-) -> list[abjad.Wrapper]:
-    tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.PIZZICATO_SPANNER)
-    wrappers = text_spanner(
-        argument,
-        items,
-        *tweaks,
-        bookend=False,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id="Pizzicato",
-        pieces=pieces,
-        right_broken=right_broken,
-        staff_padding=staff_padding,
-    )
-    _tags.wrappers(wrappers, tag)
-    return wrappers
-
-
 def scp_spanner(
     argument,
     items: str | list,
@@ -786,61 +734,6 @@ def scp_spanner(
         left_broken=left_broken,
         left_broken_text=left_broken_text,
         lilypond_id="SCP",
-        pieces=pieces,
-        right_broken=right_broken,
-        staff_padding=staff_padding,
-    )
-    _tags.wrappers(wrappers, tag)
-    return wrappers
-
-
-def spazzolato_spanner(
-    argument,
-    *tweaks: _typings.IndexedTweak,
-    items: str | list = r"\baca-spazzolato-markup =|",
-    left_broken: bool = False,
-    left_broken_text: str | None = r"\baca-left-broken-spazz-markup",
-    pieces: list[list[abjad.Leaf]] | None = None,
-    right_broken: bool = False,
-) -> list[abjad.Wrapper]:
-    tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.SPAZZOLATO_SPANNER)
-    wrappers = text_spanner(
-        argument,
-        items,
-        *tweaks,
-        bookend=False,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id="Spazzolato",
-        pieces=pieces,
-        right_broken=right_broken,
-    )
-    _tags.wrappers(wrappers, tag)
-    return wrappers
-
-
-def string_number_spanner(
-    argument,
-    items: str | list,
-    *tweaks: _typings.IndexedTweak,
-    bookend: bool | int = False,
-    left_broken: bool = False,
-    left_broken_text: str | None = None,
-    pieces: list[list[abjad.Leaf]] | None = None,
-    right_broken: bool = False,
-    staff_padding: int | float | None = None,
-) -> list[abjad.Wrapper]:
-    tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.STRING_NUMBER_SPANNER)
-    wrappers = text_spanner(
-        argument,
-        items,
-        *tweaks,
-        bookend=bookend,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id="StringNumber",
         pieces=pieces,
         right_broken=right_broken,
         staff_padding=staff_padding,
@@ -909,34 +802,6 @@ def vibrato_spanner(
         lilypond_id="Vibrato",
         pieces=pieces,
         right_broken=right_broken,
-    )
-    _tags.wrappers(wrappers, tag)
-    return wrappers
-
-
-def xfb_spanner(
-    argument,
-    *tweaks: _typings.IndexedTweak,
-    bookend: bool | int = False,
-    left_broken: bool = False,
-    left_broken_text: str = r"\baca-left-broken-xfb-markup",
-    pieces: list[list[abjad.Leaf]] | None = None,
-    right_broken: bool = False,
-    staff_padding: int | float | None = None,
-) -> list[abjad.Wrapper]:
-    tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.BOW_SPEED_SPANNER)
-    wrappers = text_spanner(
-        argument,
-        "XFB =|",
-        *tweaks,
-        bookend=bookend,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id="BowSpeed",
-        pieces=pieces,
-        right_broken=right_broken,
-        staff_padding=staff_padding,
     )
     _tags.wrappers(wrappers, tag)
     return wrappers

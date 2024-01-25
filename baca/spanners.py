@@ -169,6 +169,37 @@ def clb(
     return wrappers
 
 
+def metric_modulation(
+    argument,
+    *tweaks: abjad.Tweak,
+    left_broken: bool = False,
+    right_broken: bool = False,
+    staff_padding: int | float | None = None,
+) -> list[abjad.Wrapper]:
+    specifiers = _piecewise._prepare_text_spanner_arguments(
+        "MM =|",
+        boxed=False,
+        direction=None,
+        left_broken_text=None,
+        lilypond_id="MetricModulation",
+    )
+    assert len(specifiers) == 1
+    specifier = specifiers[0]
+    wrappers = _do_spanner_indicator_command(
+        argument,
+        specifier.spanner_start,
+        specifier.spanner_stop,
+        *tweaks,
+        left_broken=left_broken,
+        right_broken=right_broken,
+        staff_padding=staff_padding,
+    )
+    tag = _helpers.function_name(_frame())
+    tag = tag.append(_tags.METRIC_MODULATION_SPANNER)
+    _tags.wrappers(wrappers, tag)
+    return wrappers
+
+
 def ottava(
     argument,
     *,
@@ -206,6 +237,38 @@ def ottava_bassa(
     return wrappers
 
 
+def pizzicato(
+    argument,
+    *tweaks: abjad.Tweak,
+    items: str = r"\baca-pizz-markup =|",
+    left_broken: bool = False,
+    right_broken: bool = False,
+    staff_padding: int | float | None = None,
+) -> list[abjad.Wrapper]:
+    specifiers = _piecewise._prepare_text_spanner_arguments(
+        items,
+        boxed=False,
+        direction=None,
+        left_broken_text=r"\baca-left-broken-pizz-markup",
+        lilypond_id="Pizzicato",
+    )
+    assert len(specifiers) == 1
+    specifier = specifiers[0]
+    wrappers = _do_spanner_indicator_command(
+        argument,
+        specifier.spanner_start,
+        specifier.spanner_stop,
+        *tweaks,
+        left_broken=left_broken,
+        right_broken=right_broken,
+        staff_padding=staff_padding,
+    )
+    tag = _helpers.function_name(_frame())
+    tag = tag.append(_tags.PIZZICATO_SPANNER)
+    _tags.wrappers(wrappers, tag)
+    return wrappers
+
+
 def slur(
     argument,
     *tweaks: abjad.Tweak,
@@ -226,6 +289,71 @@ def slur(
         *tweaks,
     )
     tag = _helpers.function_name(_frame())
+    _tags.wrappers(wrappers, tag)
+    return wrappers
+
+
+def spazzolato(
+    argument,
+    *tweaks: abjad.Tweak,
+    items: str | list = r"\baca-spazzolato-markup =|",
+    left_broken: bool = False,
+    right_broken: bool = False,
+    staff_padding: int | float | None = None,
+) -> list[abjad.Wrapper]:
+    specifiers = _piecewise._prepare_text_spanner_arguments(
+        items,
+        boxed=False,
+        direction=None,
+        left_broken_text=r"\baca-left-broken-spazz-markup",
+        lilypond_id="Spazzolato",
+    )
+    assert len(specifiers) == 1
+    specifier = specifiers[0]
+    wrappers = _do_spanner_indicator_command(
+        argument,
+        specifier.spanner_start,
+        specifier.spanner_stop,
+        *tweaks,
+        left_broken=left_broken,
+        right_broken=right_broken,
+        staff_padding=staff_padding,
+    )
+    tag = _helpers.function_name(_frame())
+    tag = tag.append(_tags.SPAZZOLATO_SPANNER)
+    _tags.wrappers(wrappers, tag)
+    return wrappers
+
+
+def string_number(
+    argument,
+    items: str | list,
+    *tweaks: abjad.Tweak,
+    left_broken: bool = False,
+    left_broken_text: str | None = None,
+    right_broken: bool = False,
+    staff_padding: int | float | None = None,
+) -> list[abjad.Wrapper]:
+    specifiers = _piecewise._prepare_text_spanner_arguments(
+        items,
+        boxed=False,
+        direction=None,
+        left_broken_text=left_broken_text,
+        lilypond_id="StringNumber",
+    )
+    assert len(specifiers) == 1
+    specifier = specifiers[0]
+    wrappers = _do_spanner_indicator_command(
+        argument,
+        specifier.spanner_start,
+        specifier.spanner_stop,
+        *tweaks,
+        left_broken=left_broken,
+        right_broken=right_broken,
+        staff_padding=staff_padding,
+    )
+    tag = _helpers.function_name(_frame())
+    tag = tag.append(_tags.STRING_NUMBER_SPANNER)
     _tags.wrappers(wrappers, tag)
     return wrappers
 
@@ -309,5 +437,36 @@ def trill(
         staff_padding=staff_padding,
     )
     tag = _helpers.function_name(_frame())
+    _tags.wrappers(wrappers, tag)
+    return wrappers
+
+
+def xfb(
+    argument,
+    *tweaks: abjad.Tweak,
+    left_broken: bool = False,
+    right_broken: bool = False,
+    staff_padding: int | float | None = None,
+) -> list[abjad.Wrapper]:
+    specifiers = _piecewise._prepare_text_spanner_arguments(
+        "XFB =|",
+        boxed=False,
+        direction=None,
+        left_broken_text=r"\baca-left-broken-xfb-markup",
+        lilypond_id="BowSpeed",
+    )
+    assert len(specifiers) == 1
+    specifier = specifiers[0]
+    wrappers = _do_spanner_indicator_command(
+        argument,
+        specifier.spanner_start,
+        specifier.spanner_stop,
+        *tweaks,
+        left_broken=left_broken,
+        right_broken=right_broken,
+        staff_padding=staff_padding,
+    )
+    tag = _helpers.function_name(_frame())
+    tag = tag.append(_tags.BOW_SPEED_SPANNER)
     _tags.wrappers(wrappers, tag)
     return wrappers
