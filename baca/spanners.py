@@ -236,7 +236,7 @@ def tasto(
     return wrappers
 
 
-def trill_spanner(
+def trill(
     argument,
     *tweaks: abjad.Tweak,
     alteration: str | None = None,

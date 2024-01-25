@@ -15,6 +15,7 @@ from . import score
 from . import section
 from . import select
 from . import sequence
+from . import spanners
 from . import typings
 from .enums import colors, enums
 from .anchor import (
@@ -115,14 +116,6 @@ from .rhythm import (
     style_ritardando,
 )
 from .scope import scope
-from .spanners import (
-    beam,
-    ottava,
-    ottava_bassa,
-    slur,
-    sustain_pedal,
-    trill_spanner,
-)
 
 if sys.version_info[:2] < (3, 10):
     raise ImportError("Requires Python 3.10 or later")
