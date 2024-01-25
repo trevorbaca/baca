@@ -124,6 +124,51 @@ def beam(
     return wrappers
 
 
+def clb(
+    argument,
+    string_number: int,
+    *tweaks: abjad.Tweak,
+    left_broken: bool = False,
+    right_broken: bool = False,
+    staff_padding: int | float | None = None,
+) -> list[abjad.Wrapper]:
+    tag = _helpers.function_name(_frame())
+    tag = tag.append(_tags.CLB_SPANNER)
+    assert string_number in (1, 2, 3, 4), repr(string_number)
+    if string_number == 1:
+        markup = r"\baca-damp-clb-one-markup"
+    elif string_number == 2:
+        markup = r"\baca-damp-clb-two-markup"
+    elif string_number == 3:
+        markup = r"\baca-damp-clb-three-markup"
+    elif string_number == 4:
+        markup = r"\baca-damp-clb-four-markup"
+    else:
+        raise Exception(string_number)
+    specifiers = _piecewise._prepare_text_spanner_arguments(
+        f"{markup} =|",
+        boxed=False,
+        direction=None,
+        left_broken_text=r"\baca-left-broken-clb-markup",
+        lilypond_id="CLB",
+    )
+    assert len(specifiers) == 1
+    specifier = specifiers[0]
+    wrappers = _do_spanner_indicator_command(
+        argument,
+        specifier.spanner_start,
+        specifier.spanner_stop,
+        *tweaks,
+        left_broken=left_broken,
+        right_broken=right_broken,
+        staff_padding=staff_padding,
+    )
+    tag = _helpers.function_name(_frame())
+    tag = tag.append(_tags.CLB_SPANNER)
+    _tags.wrappers(wrappers, tag)
+    return wrappers
+
+
 def ottava(
     argument,
     *,

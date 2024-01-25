@@ -59,7 +59,6 @@ from .pcollections import (
 from .piecewise import (
     bow_speed_spanner,
     circle_bow_spanner,
-    clb_spanner,
     covered_spanner,
     damp_spanner,
     hairpin,

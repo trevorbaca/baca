@@ -507,43 +507,6 @@ def circle_bow_spanner(
     return wrappers
 
 
-def clb_spanner(
-    argument,
-    string_number: int,
-    *tweaks: _typings.IndexedTweak,
-    left_broken: bool = False,
-    left_broken_text: str | None = r"\baca-left-broken-clb-markup",
-    pieces: list[list[abjad.Leaf]] | None = None,
-    right_broken: bool = False,
-) -> list[abjad.Wrapper]:
-    tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.CLB_SPANNER)
-    assert string_number in (1, 2, 3, 4), repr(string_number)
-    if string_number == 1:
-        markup = r"\baca-damp-clb-one-markup"
-    elif string_number == 2:
-        markup = r"\baca-damp-clb-two-markup"
-    elif string_number == 3:
-        markup = r"\baca-damp-clb-three-markup"
-    elif string_number == 4:
-        markup = r"\baca-damp-clb-four-markup"
-    else:
-        raise Exception(string_number)
-    wrappers = text_spanner(
-        argument,
-        f"{markup} =|",
-        *tweaks,
-        bookend=False,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id="CLB",
-        pieces=pieces,
-        right_broken=right_broken,
-    )
-    _tags.wrappers(wrappers, tag)
-    return wrappers
-
-
 def covered_spanner(
     argument,
     *tweaks: _typings.IndexedTweak,
