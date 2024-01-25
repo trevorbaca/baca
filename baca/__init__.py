@@ -70,7 +70,6 @@ from .piecewise import (
     scp_spanner,
     spazzolato_spanner,
     string_number_spanner,
-    tasto_spanner,
     text_spanner,
     vibrato_spanner,
     xfb_spanner,

@@ -274,6 +274,7 @@ def _is_maybe_bundled(argument, prototype):
     return False
 
 
+# TODO: merge into baca.hairpin()
 def _prepare_hairpin_arguments(
     dynamics,
     forbid_al_niente_to_bar_line,
@@ -293,7 +294,9 @@ def _prepare_hairpin_arguments(
 def _prepare_text_spanner_arguments(
     items,
     *,
+    # TODO: make boxed keyword-optional
     boxed,
+    # TODO: make direction keyword-optional
     direction,
     left_broken_text,
     lilypond_id,
@@ -888,30 +891,6 @@ def string_number_spanner(
         left_broken_text=left_broken_text,
         lilypond_id="StringNumber",
         pieces=pieces,
-        right_broken=right_broken,
-        staff_padding=staff_padding,
-    )
-    _tags.wrappers(wrappers, tag)
-    return wrappers
-
-
-def tasto_spanner(
-    argument,
-    *tweaks: _typings.IndexedTweak,
-    left_broken: bool = False,
-    right_broken: bool = False,
-    staff_padding: int | float | None = None,
-) -> list[abjad.Wrapper]:
-    tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.TASTO_SPANNER)
-    wrappers = text_spanner(
-        argument,
-        "T =|",
-        *tweaks,
-        bookend=False,
-        left_broken=left_broken,
-        left_broken_text=r"\baca-left-broken-t-markup",
-        lilypond_id="SCP",
         right_broken=right_broken,
         staff_padding=staff_padding,
     )
