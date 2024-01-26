@@ -122,6 +122,7 @@ def _do_piecewise_command(
     leak_spanner_stop: bool = False,
     left_broken: bool = False,
     pieces: list[list[abjad.Leaf]] | None = None,
+    # TODO: change to right_broken: abjad.LilyPondLiteral | bool = False
     right_broken: typing.Any | None = None,
     specifiers: typing.Sequence = (),
     staff_padding: int | float | None = None,

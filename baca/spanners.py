@@ -18,12 +18,14 @@ def _do_spanner_indicator_command(
     start_indicator=None,
     stop_indicator=None,
     *tweaks,
+    attach_right_broken_hairpin_stop_literal: bool = False,
     context: str | None = None,
     direction: abjad.Vertical | None = None,
     left_broken: bool = False,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
     tag_start_dynamic_as_spanner_stop: bool = False,
+    tag_start_indicator_as_right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
     if staff_padding is not None:
         tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
@@ -37,6 +39,8 @@ def _do_spanner_indicator_command(
             tag = tag.append(_tags.SPANNER_START)
         if left_broken:
             tag = tag.append(_tags.LEFT_BROKEN)
+        if right_broken and tag_start_indicator_as_right_broken:
+            tag = tag.append(_tags.RIGHT_BROKEN)
         first_leaf = abjad.select.leaf(argument, 0)
         reapplied = _treat.remove_reapplied_wrappers(first_leaf, start_indicator)
         wrapper = abjad.attach(
@@ -68,6 +72,23 @@ def _do_spanner_indicator_command(
         if _treat.compare_persistent_indicators(stop_indicator, reapplied):
             _treat.treat_persistent_wrapper({}, wrapper, "redundant")
         wrappers.append(wrapper)
+    if start_indicator is not None:
+        if right_broken is True:
+            if attach_right_broken_hairpin_stop_literal is True:
+                tag = _helpers.function_name(_frame(), n=3)
+                tag = tag.append(_tags.RIGHT_BROKEN)
+                # TODO: can this be replaced by an abjad.Dynamic?
+                literal = abjad.LilyPondLiteral(r"\!", site="after")
+                final_leaf = abjad.select.leaf(argument, -1)
+                wrapper = abjad.attach(
+                    literal,
+                    final_leaf,
+                    context=context,
+                    direction=direction,
+                    tag=tag,
+                    wrapper=True,
+                )
+                wrappers.append(wrapper)
     return wrappers
 
 
@@ -279,52 +300,53 @@ def half_clt(
 
 def hairpin(
     argument,
-    dynamics: str,
+    descriptor: str,
     *tweaks: abjad.Tweak,
+    debug: bool = False,
     forbid_al_niente_to_bar_line: bool = False,
     left_broken: bool = False,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
     specifiers = _piecewise.parse_hairpin_descriptor(
-        dynamics,
+        descriptor,
         forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
     )
     wrappers = []
     start_dynamic, hairpin_start, stop_dynamic = None, None, None
     if len(specifiers) == 1:
         specifier = specifiers[0]
-        if specifier.spanner_start is not None:
-            raise NotImplementedError(dynamics)
-        assert specifier.indicator is not None
         start_dynamic = specifier.indicator
+        hairpin_start = specifier.spanner_start
     elif len(specifiers) == 2:
         first, second = specifiers
         start_dynamic = first.indicator
         hairpin_start = first.spanner_start
         stop_dynamic = second.indicator
         if second.spanner_start:
-            raise Exception(dynamics)
+            raise Exception(descriptor)
         if second.spanner_stop:
-            raise Exception(dynamics)
+            raise Exception(descriptor)
     else:
-        raise NotImplementedError(dynamics)
+        raise NotImplementedError(descriptor)
     if start_dynamic is not None:
         wrappers_ = _do_spanner_indicator_command(
             argument,
-            # first.indicator,
             start_dynamic,
+            left_broken=left_broken,
+            right_broken=right_broken,
             tag_start_dynamic_as_spanner_stop=True,
+            tag_start_indicator_as_right_broken=True,
         )
         wrappers.extend(wrappers_)
     wrappers_ = _do_spanner_indicator_command(
         argument,
-        # first.spanner_start,
-        # second.indicator,
         hairpin_start,
         stop_dynamic,
         *tweaks,
+        attach_right_broken_hairpin_stop_literal=True,
         left_broken=left_broken,
         right_broken=right_broken,
+        tag_start_indicator_as_right_broken=True,
     )
     wrappers.extend(wrappers_)
     tag = _helpers.function_name(_frame())
