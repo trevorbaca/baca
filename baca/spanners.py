@@ -1,6 +1,7 @@
 """
 Spanners.
 """
+
 import dataclasses
 from inspect import currentframe as _frame
 

@@ -1,6 +1,7 @@
 """
 Piecewise.
 """
+
 import dataclasses
 import typing
 from inspect import currentframe as _frame

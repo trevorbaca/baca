@@ -1,6 +1,7 @@
 """
 Classes.
 """
+
 import dataclasses
 import typing
 

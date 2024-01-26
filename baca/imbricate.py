@@ -1,6 +1,7 @@
 """
 Imbricate.
 """
+
 import copy
 
 import abjad

@@ -1,6 +1,7 @@
 """
 Sequence.
 """
+
 import copy
 import itertools
 

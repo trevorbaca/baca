@@ -1,6 +1,7 @@
 """
 Pitch functions.
 """
+
 import collections
 import dataclasses
 import typing

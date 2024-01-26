@@ -1,6 +1,7 @@
 """
 Rhythm.
 """
+
 import dataclasses
 import math as python_math
 import typing

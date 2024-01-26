@@ -1,6 +1,7 @@
 """
 Other functions.
 """
+
 import os
 
 import abjad

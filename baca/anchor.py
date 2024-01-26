@@ -1,6 +1,7 @@
 """
 Figures.
 """
+
 import dataclasses
 import typing
 

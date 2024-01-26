@@ -1,6 +1,7 @@
 """
 Memento.
 """
+
 import dataclasses
 import typing
 

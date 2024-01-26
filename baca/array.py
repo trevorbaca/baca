@@ -1,6 +1,7 @@
 """
 Array.
 """
+
 import copy
 import numbers
 import typing

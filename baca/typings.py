@@ -1,6 +1,7 @@
 """
 Typings library.
 """
+
 import typing
 
 import abjad

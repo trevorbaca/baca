@@ -1,6 +1,7 @@
 """
 Tags.
 """
+
 import typing
 
 import abjad

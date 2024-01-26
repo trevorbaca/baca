@@ -1,6 +1,7 @@
 """
 Math.
 """
+
 import math
 
 import abjad
