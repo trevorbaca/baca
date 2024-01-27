@@ -520,6 +520,8 @@ def hairpin(
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
+    assert pieces, repr(pieces)
+    assert not argument, repr(argument)
     assert isinstance(dynamics, str), repr(dynamics)
     assert bookend in (-1, False), repr(bookend)
     assert isinstance(do_not_start_spanner_on_final_piece, bool)
