@@ -517,17 +517,12 @@ def hairpin(
     do_not_start_spanner_on_final_piece: bool = False,
     forbid_al_niente_to_bar_line: bool = False,
     left_broken: bool = False,
-    pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
-    assert pieces, repr(pieces)
-    assert not argument, repr(argument)
     assert isinstance(dynamics, str), repr(dynamics)
     assert bookend in (-1, False), repr(bookend)
     assert isinstance(do_not_start_spanner_on_final_piece, bool)
     assert isinstance(left_broken, bool), repr(left_broken)
-    if pieces is not None:
-        assert isinstance(pieces, list), repr(pieces)
     assert isinstance(right_broken, bool), repr(right_broken)
     specifiers = parse_hairpin_descriptor(
         dynamics,
@@ -538,12 +533,12 @@ def hairpin(
         # TODO: can this be replaced by an abjad.Dynamic?
         right_broken_ = abjad.LilyPondLiteral(r"\!", site="after")
     return _do_piecewise_command(
-        argument,
+        (),
         *tweaks,
         bookend=bookend,
         do_not_start_spanner_on_final_piece=do_not_start_spanner_on_final_piece,
         left_broken=left_broken,
-        pieces=pieces,
+        pieces=argument,
         right_broken=right_broken_,
         specifiers=specifiers,
         tag=_helpers.function_name(_frame()),
