@@ -449,7 +449,7 @@ def _unbundle_indicator(argument):
     return argument
 
 
-def bow_speed_spanner(
+def bow_speed(
     argument,
     items: str | list,
     *tweaks: _typings.IndexedTweak,
@@ -461,7 +461,7 @@ def bow_speed_spanner(
 ) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.BOW_SPEED_SPANNER)
-    wrappers = text_spanner(
+    wrappers = text(
         argument,
         items,
         *tweaks,
@@ -476,7 +476,7 @@ def bow_speed_spanner(
     return wrappers
 
 
-def circle_bow_spanner(
+def circle_bow(
     argument,
     *tweaks: _typings.IndexedTweak,
     left_broken: bool = False,
@@ -493,7 +493,7 @@ def circle_bow_spanner(
     else:
         assert isinstance(qualifier, str), repr(qualifier)
         string = rf"\baca-circle-{qualifier}-markup =|"
-    wrappers = text_spanner(
+    wrappers = text(
         argument,
         string,
         *tweaks,
@@ -605,7 +605,7 @@ def parse_hairpin_descriptor(
     return specifiers
 
 
-def scp_spanner(
+def scp(
     argument,
     items: str | list,
     *tweaks: _typings.IndexedTweak,
@@ -619,7 +619,7 @@ def scp_spanner(
 ) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.SCP_SPANNER)
-    wrappers = text_spanner(
+    wrappers = text(
         argument,
         items,
         *tweaks,
@@ -636,7 +636,7 @@ def scp_spanner(
     return wrappers
 
 
-def text_spanner(
+def text(
     argument,
     items: str | list,
     *tweaks: _typings.IndexedTweak,
@@ -674,7 +674,7 @@ def text_spanner(
     )
 
 
-def vibrato_spanner(
+def vibrato(
     argument,
     items: str | list,
     *tweaks: _typings.IndexedTweak,
@@ -686,7 +686,7 @@ def vibrato_spanner(
 ) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.VIBRATO_SPANNER)
-    wrappers = text_spanner(
+    wrappers = text(
         argument,
         items,
         *tweaks,

@@ -11,6 +11,7 @@ from . import dynamics
 from . import math
 from . import override
 from . import path
+from . import piecewise
 from . import score
 from . import section
 from . import select
@@ -55,15 +56,6 @@ from .pcollections import (
     Partial,
     Registration,
     RegistrationComponent,
-)
-from .piecewise import (
-    bow_speed_spanner,
-    circle_bow_spanner,
-    hairpin,
-    parse_hairpin_descriptor,
-    scp_spanner,
-    text_spanner,
-    vibrato_spanner,
 )
 from .pitchtools import *
 from .rhythm import (

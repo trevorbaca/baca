@@ -3,13 +3,13 @@ import baca
 
 
 def test_dynamics():
-    specifiers = baca.parse_hairpin_descriptor("f")
+    specifiers = baca.piecewise.parse_hairpin_descriptor("f")
     assert len(specifiers) == 1
     assert specifiers[0] == baca.piecewise._Specifier(
         indicator=abjad.Dynamic("f"),
     )
 
-    specifiers = baca.parse_hairpin_descriptor('"f"')
+    specifiers = baca.piecewise.parse_hairpin_descriptor('"f"')
     assert len(specifiers) == 1
     assert specifiers[0] == baca.piecewise._Specifier(
         indicator=abjad.Dynamic(
@@ -18,7 +18,7 @@ def test_dynamics():
         ),
     )
 
-    specifiers = baca.parse_hairpin_descriptor("niente")
+    specifiers = baca.piecewise.parse_hairpin_descriptor("niente")
     assert len(specifiers) == 1
     assert specifiers[0] == baca.piecewise._Specifier(
         indicator=abjad.Dynamic("niente"),
@@ -26,19 +26,19 @@ def test_dynamics():
 
 
 def test_start_hairpin():
-    specifiers = baca.parse_hairpin_descriptor("<")
+    specifiers = baca.piecewise.parse_hairpin_descriptor("<")
     assert len(specifiers) == 1
     assert specifiers[0] == baca.piecewise._Specifier(
         spanner_start=abjad.StartHairpin("<"),
     )
 
-    specifiers = baca.parse_hairpin_descriptor("o<|")
+    specifiers = baca.piecewise.parse_hairpin_descriptor("o<|")
     assert len(specifiers) == 1
     assert specifiers[0] == baca.piecewise._Specifier(
         spanner_start=abjad.StartHairpin("o<|"),
     )
 
-    specifiers = baca.parse_hairpin_descriptor("--")
+    specifiers = baca.piecewise.parse_hairpin_descriptor("--")
     assert len(specifiers) == 1
     assert specifiers[0] == baca.piecewise._Specifier(
         spanner_start=abjad.StartHairpin("--"),
@@ -46,7 +46,7 @@ def test_start_hairpin():
 
 
 def test_single_hairpin_01():
-    specifiers = baca.parse_hairpin_descriptor("< !")
+    specifiers = baca.piecewise.parse_hairpin_descriptor("< !")
     assert len(specifiers) == 2
     assert specifiers[0] == baca.piecewise._Specifier(
         spanner_start=abjad.StartHairpin("<"),
@@ -57,7 +57,7 @@ def test_single_hairpin_01():
 
 
 def test_single_hairpin_02():
-    specifiers = baca.parse_hairpin_descriptor("p < f")
+    specifiers = baca.piecewise.parse_hairpin_descriptor("p < f")
     assert len(specifiers) == 2
     assert specifiers[0] == baca.piecewise._Specifier(
         indicator=abjad.Dynamic("p"),
@@ -69,7 +69,7 @@ def test_single_hairpin_02():
 
 
 def test_single_hairpin_03():
-    specifiers = baca.parse_hairpin_descriptor("p <")
+    specifiers = baca.piecewise.parse_hairpin_descriptor("p <")
     assert len(specifiers) == 1
     assert specifiers[0] == baca.piecewise._Specifier(
         indicator=abjad.Dynamic("p"),
@@ -78,7 +78,7 @@ def test_single_hairpin_03():
 
 
 def test_single_hairpin_04():
-    specifiers = baca.parse_hairpin_descriptor("p < !")
+    specifiers = baca.piecewise.parse_hairpin_descriptor("p < !")
     assert len(specifiers) == 2
     assert specifiers[0] == baca.piecewise._Specifier(
         indicator=abjad.Dynamic("p"),
@@ -90,7 +90,7 @@ def test_single_hairpin_04():
 
 
 def test_single_hairpin_05():
-    specifiers = baca.parse_hairpin_descriptor("< f")
+    specifiers = baca.piecewise.parse_hairpin_descriptor("< f")
     assert len(specifiers) == 2
     baca.piecewise._Specifier(
         spanner_start=abjad.StartHairpin("<"),
@@ -101,7 +101,7 @@ def test_single_hairpin_05():
 
 
 def test_single_hairpin_06():
-    specifiers = baca.parse_hairpin_descriptor("o< f")
+    specifiers = baca.piecewise.parse_hairpin_descriptor("o< f")
     assert len(specifiers) == 2
     assert specifiers[0] == baca.piecewise._Specifier(
         spanner_start=abjad.StartHairpin("o<"),
@@ -112,7 +112,7 @@ def test_single_hairpin_06():
 
 
 def test_single_hairpin_07():
-    specifiers = baca.parse_hairpin_descriptor("niente o<| f")
+    specifiers = baca.piecewise.parse_hairpin_descriptor("niente o<| f")
     assert len(specifiers) == 2
     assert specifiers[0] == baca.piecewise._Specifier(
         indicator=abjad.Dynamic("niente"),
@@ -122,7 +122,7 @@ def test_single_hairpin_07():
 
 
 def test_single_hairpin_08():
-    specifiers = baca.parse_hairpin_descriptor("f >")
+    specifiers = baca.piecewise.parse_hairpin_descriptor("f >")
     assert len(specifiers) == 1
     assert specifiers[0] == baca.piecewise._Specifier(
         indicator=abjad.Dynamic("f"),
@@ -131,7 +131,7 @@ def test_single_hairpin_08():
 
 
 def test_single_hairpin_09():
-    specifiers = baca.parse_hairpin_descriptor("f >o")
+    specifiers = baca.piecewise.parse_hairpin_descriptor("f >o")
     assert len(specifiers) == 1
     assert specifiers[0] == baca.piecewise._Specifier(
         indicator=abjad.Dynamic("f"),
@@ -143,7 +143,7 @@ def test_single_hairpin_09():
 
 
 def test_multiple_hairpins_01():
-    specifiers = baca.parse_hairpin_descriptor("p mp mf f")
+    specifiers = baca.piecewise.parse_hairpin_descriptor("p mp mf f")
     assert len(specifiers) == 4
     assert specifiers[0] == baca.piecewise._Specifier(
         indicator=abjad.Dynamic("p"),
@@ -160,7 +160,7 @@ def test_multiple_hairpins_01():
 
 
 def test_multiple_hairpins_02():
-    specifiers = baca.parse_hairpin_descriptor("p < f f > p")
+    specifiers = baca.piecewise.parse_hairpin_descriptor("p < f f > p")
     assert len(specifiers) == 4
     assert specifiers[0] == baca.piecewise._Specifier(
         indicator=abjad.Dynamic("p"),
@@ -179,7 +179,7 @@ def test_multiple_hairpins_02():
 
 
 def test_multiple_hairpins_03():
-    specifiers = baca.parse_hairpin_descriptor("f -- ! > p")
+    specifiers = baca.piecewise.parse_hairpin_descriptor("f -- ! > p")
     assert len(specifiers) == 3
     assert specifiers[0] == baca.piecewise._Specifier(
         indicator=abjad.Dynamic("f"),
@@ -195,7 +195,7 @@ def test_multiple_hairpins_03():
 
 
 def test_multiple_hairpins_04():
-    specifiers = baca.parse_hairpin_descriptor("mf niente o< p")
+    specifiers = baca.piecewise.parse_hairpin_descriptor("mf niente o< p")
     assert len(specifiers) == 3
     assert specifiers[0] == baca.piecewise._Specifier(
         indicator=abjad.Dynamic("mf"),
