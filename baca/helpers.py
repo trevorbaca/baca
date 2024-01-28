@@ -38,6 +38,7 @@ def function_name(frame, *, n=None):
     parts.reverse()
     if parts[0] == "baca":
         parts.pop()
+    # TODO: add "treat"
     modules = ("array", "build", "dynamics", "math", "override", "path", "piecewise")
     modules += ("score", "section", "select", "sequence", "spanners", "typings")
     if file_name in modules:

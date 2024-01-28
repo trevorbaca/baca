@@ -423,6 +423,7 @@ def treat_persistent_wrapper(manifests, wrapper, status):
         abjad.Ottava,
         abjad.RepeatTie,
         abjad.StartBeam,
+        abjad.StopHairpin,
         abjad.StartPhrasingSlur,
         abjad.StartPianoPedal,
         abjad.StartSlur,

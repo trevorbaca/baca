@@ -620,6 +620,8 @@ def _collect_persistent_indicators(
                 wrapper.unbundle_indicator(), do_not_persist_on_anchor_leaf
             ):
                 wrappers.append(wrapper)
+        if wrappers:
+            result[name] = []
         for wrapper in wrappers:
             leaf = wrapper.component
             parentage = abjad.get.parentage(leaf)
@@ -632,6 +634,8 @@ def _collect_persistent_indicators(
             if isinstance(indicator, abjad.RepeatTie):
                 continue
             if isinstance(indicator, abjad.StopBeam):
+                continue
+            if isinstance(indicator, abjad.StopHairpin):
                 continue
             if isinstance(indicator, abjad.StopPhrasingSlur):
                 continue
@@ -683,6 +687,12 @@ def _collect_persistent_indicators(
         for context_name, mementos in previous_persistent_indicators.items():
             if context_name not in result:
                 result[context_name] = mementos
+    empty_contexts = []
+    for context_name, mementos in result.items():
+        if mementos == []:
+            empty_contexts.append(context_name)
+    for empty_context in empty_contexts:
+        del result[empty_context]
     return result
 
 
