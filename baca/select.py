@@ -7,6 +7,8 @@ import typing
 
 import abjad
 
+from . import sequence as _sequence
+
 
 def chead(
     argument, n: int, *, exclude: abjad.typings.Exclude | None = None
@@ -2557,14 +2559,12 @@ def parse_duration_inequality_string(string) -> tuple[str, abjad.Duration]:
     return operator, duration
 
 
-def partition_by_ratio_of_durations(
-    argument, ratio: tuple[int, ...], *, in_seconds: bool = False
-) -> list[list]:
-    durations = [abjad.get.duration(_, in_seconds=in_seconds) for _ in argument]
+def partition_in_halves(argument) -> list[list]:
+    durations = [abjad.get.duration(_) for _ in argument]
     maximum_denominator = max([_.denominator for _ in durations])
     pairs = [abjad.duration.with_denominator(_, maximum_denominator) for _ in durations]
     numerators = [_[0] for _ in pairs]
-    lists = abjad.sequence.partition_by_ratio_of_weights(numerators, ratio)
+    lists = _sequence.partition_in_halves(numerators)
     counts = [len(_) for _ in lists]
     lists = abjad.select.partition_by_counts(argument, counts)
     return lists

@@ -767,6 +767,24 @@ def overwrite_elements(sequence, pairs):
     return result
 
 
+def partition_in_halves(sequence) -> list:
+    best_candidate, minimum_distance = [], None
+    for i in range(1, len(sequence)):
+        candidate = [sequence[:-i], sequence[-i:]]
+        weights = [abjad.sequence.weight(_) for _ in candidate]
+        maximum, minimum = max(weights), min(weights)
+        if maximum == minimum:
+            return candidate
+        distance = maximum / minimum
+        if minimum_distance is None:
+            minimum_distance = distance
+            best_candidate = candidate
+        if distance < minimum_distance:
+            minimum_distance = distance
+            best_candidate = candidate
+    return best_candidate
+
+
 def partition_nested_into_inward_pointing_parts(sequence, target="negative"):
     """
     Partitions integers in subsequences of ``sequence`` into inward-pointing parts.
