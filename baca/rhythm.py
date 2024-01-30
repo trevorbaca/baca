@@ -84,9 +84,8 @@ def _evaluate_basic_item(item, denominator, voice_name, tag):
     elif isinstance(item, WrittenDuration):
         leaf = item(denominator, tag=tag)
         components = [leaf]
-    elif isinstance(item, MultipliedDurationImproved):
-        note = item(denominator, tag=tag)
-        components = [note]
+    elif isinstance(item, Multiplier):
+        components = item(denominator, voice_name, tag)
     elif getattr(item, "custom", False) is True:
         components = _evaluate_basic_item(item.argument, denominator, voice_name, tag)
         components = item(components)
@@ -203,10 +202,6 @@ def _evaluate_item(
         leaf = item(denominator, tag=tag)
         components.append(leaf)
         result = leaf
-    elif isinstance(item, MultipliedDurationImproved):
-        note = item(denominator, tag=tag)
-        components.append(note)
-        result = note
     elif isinstance(item, Multiplier):
         components_ = item(denominator, voice_name, tag)
         components.extend(components_)
@@ -634,23 +629,6 @@ class LMR:
         elif not left_length and not right_length:
             middle_length = total_length
         return left_length, middle_length, right_length
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class MultipliedDurationImproved:
-    written_n: int
-    multiplier: tuple[int, int]
-
-    def __post_init__(self):
-        assert isinstance(self.written_n, int), repr(self.written_n)
-        assert isinstance(self.multiplier, tuple), repr(self.multiplier)
-
-    def __call__(self, denominator: int, tag: abjad.Tag) -> abjad.Note:
-        tag = tag or abjad.Tag()
-        tag = tag.append(_helpers.function_name(_frame()))
-        written_duration = abjad.Duration(self.written_n, denominator)
-        note = abjad.Note(0, written_duration, multiplier=self.multiplier, tag=tag)
-        return note
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -1504,10 +1482,6 @@ def h(argument):
 
 def m(argument, multiplier):
     return Multiplier(argument, multiplier)
-
-
-def mdi(written_n, multiplier):
-    return MultipliedDurationImproved(written_n, multiplier)
 
 
 def rt(argument):
