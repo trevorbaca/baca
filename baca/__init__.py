@@ -58,6 +58,8 @@ from .pcollections import (
     RegistrationComponent,
 )
 from .pitchtools import *
+
+# TODO: import only module:
 from .rhythm import (
     AfterGrace,
     BeamLeft,
@@ -68,7 +70,6 @@ from .rhythm import (
     Feather,
     InvisibleMusic,
     LMR,
-    MultipliedDuration,
     OBGC,
     RepeatTie,
     Tie,

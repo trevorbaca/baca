@@ -84,9 +84,6 @@ def _evaluate_basic_item(item, denominator, voice_name, tag):
     elif isinstance(item, WrittenDuration):
         leaf = item(denominator, tag=tag)
         components = [leaf]
-    elif isinstance(item, MultipliedDuration):
-        note = item(tag=tag)
-        components = [note]
     elif isinstance(item, MultipliedDurationImproved):
         note = item(denominator, tag=tag)
         components = [note]
@@ -206,10 +203,6 @@ def _evaluate_item(
         leaf = item(denominator, tag=tag)
         components.append(leaf)
         result = leaf
-    elif isinstance(item, MultipliedDuration):
-        note = item(tag=tag)
-        components.append(note)
-        result = note
     elif isinstance(item, MultipliedDurationImproved):
         note = item(denominator, tag=tag)
         components.append(note)
@@ -637,24 +630,6 @@ class LMR:
         elif not left_length and not right_length:
             middle_length = total_length
         return left_length, middle_length, right_length
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class MultipliedDuration:
-    string: str
-
-    def __post_init__(self):
-        assert isinstance(self.string, str), repr(self.string)
-        assert " * " in self.string, repr(self.string)
-
-    def __call__(self, tag: abjad.Tag) -> abjad.Note:
-        tag = tag or abjad.Tag()
-        tag = tag.append(_helpers.function_name(_frame()))
-        written_duration, star, multiplier_string = self.string.split()
-        n, d = multiplier_string.split("/")
-        pair = int(n), int(d)
-        note = abjad.Note(0, written_duration, multiplier=pair, tag=tag)
-        return note
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -1506,10 +1481,6 @@ def c(numerator, note_head_count):
 
 def h(argument):
     return InvisibleMusic(argument)
-
-
-def md(argument):
-    return MultipliedDuration(argument)
 
 
 def mdi(written_n, multiplier):
