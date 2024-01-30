@@ -57,7 +57,7 @@ def _evaluate_basic_item(item, denominator, voice_name, tag):
         components = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
     elif isinstance(item, Chord):
         chord_duration = abjad.Duration(item.numerator, denominator)
-        pitch_tuple = tuple(range(item.note_head_count))
+        pitch_tuple = item.note_head_count * (0,)
         components = abjad.makers.make_leaves([pitch_tuple], [chord_duration], tag=tag)
     elif isinstance(item, AfterGrace):
         components = item(denominator, tag)
@@ -117,7 +117,7 @@ def _evaluate_item(
         result = rests
     elif isinstance(item, Chord):
         chord_duration = abjad.Duration(item.numerator, denominator)
-        pitch_tuple = tuple(range(item.note_head_count))
+        pitch_tuple = item.note_head_count * (0,)
         chords = abjad.makers.make_leaves([pitch_tuple], [chord_duration], tag=tag)
         components.extend(chords)
         result = chords
@@ -207,6 +207,10 @@ def _evaluate_item(
         note = item(denominator, tag=tag)
         components.append(note)
         result = note
+    elif isinstance(item, Multiplier):
+        components_ = item(denominator, voice_name, tag)
+        components.extend(components_)
+        result = components_
     elif item in ("+", "-"):
         skip = abjad.Skip(1, multiplier=(99, 1))
         abjad.attach("SPACER", skip)
@@ -647,6 +651,25 @@ class MultipliedDurationImproved:
         written_duration = abjad.Duration(self.written_n, denominator)
         note = abjad.Note(0, written_duration, multiplier=self.multiplier, tag=tag)
         return note
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class Multiplier:
+    argument: typing.Any
+    multiplier: tuple[int, int]
+
+    def __post_init__(self):
+        assert isinstance(self.multiplier, tuple), repr(self.multiplier)
+
+    def __call__(
+        self, denominator: int, voice_name: str, tag: abjad.Tag
+    ) -> list[abjad.Component]:
+        assert isinstance(denominator, int), repr(denominator)
+        tag = _helpers.function_name(_frame())
+        components = _evaluate_basic_item(self.argument, denominator, voice_name, tag)
+        for leaf in abjad.select.leaves(components):
+            leaf.multiplier = self.multiplier
+        return components
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -1477,6 +1500,10 @@ def c(numerator, note_head_count):
 
 def h(argument):
     return InvisibleMusic(argument)
+
+
+def m(argument, multiplier):
+    return Multiplier(argument, multiplier)
 
 
 def mdi(written_n, multiplier):
