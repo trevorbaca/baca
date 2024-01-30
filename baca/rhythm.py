@@ -644,10 +644,6 @@ class MultipliedDurationImproved:
     def __call__(self, denominator: int, tag: abjad.Tag) -> abjad.Note:
         tag = tag or abjad.Tag()
         tag = tag.append(_helpers.function_name(_frame()))
-        # written_duration, star, multiplier_string = self.string.split()
-        # n, d = multiplier_string.split("/")
-        # pair = int(n), int(d)
-        # note = abjad.Note(0, written_duration, multiplier=pair, tag=tag)
         written_duration = abjad.Duration(self.written_n, denominator)
         note = abjad.Note(0, written_duration, multiplier=self.multiplier, tag=tag)
         return note

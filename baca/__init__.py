@@ -59,26 +59,9 @@ from .pcollections import (
 )
 from .pitchtools import *
 
-# TODO: import only module:
 from .rhythm import (
-    AfterGrace,
-    BeamLeft,
-    BeamRight,
-    BeforeGrace,
-    Chord,
-    Container,
-    Feather,
-    InvisibleMusic,
-    LMR,
-    OBGC,
-    RepeatTie,
-    Tie,
-    TremoloContainer,
-    Tuplet,
-    WrittenDuration,
-    attach_bgcs,
     from_collection,
-    get_previous_rhythm_state,
+    LMR,
     make_accelerando,
     make_bgcs,
     make_even_divisions,
