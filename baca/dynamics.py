@@ -373,6 +373,8 @@ def make_dynamic(
     return indicator
 
 
+# TODO: change name to swells()
+# TODO: always end of "!"
 def niente_swells(dynamic_peaks: str, *, final_dynamic: str | None = "niente") -> str:
     r"""
     Makes niente swells.
