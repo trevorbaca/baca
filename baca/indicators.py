@@ -268,6 +268,7 @@ def close_volta(
     if after is True:
         measure_number += 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
+    # TODO: make this override visible to the composer:
     wrappers_ = _override.bar_line_x_extent([skip], (0, 1.5), after=after)
     _tags.wrappers(wrappers_, tag, measure_number_tag, _tags.ONLY_MOL)
     wrappers.extend(wrappers_)
@@ -364,9 +365,11 @@ def double_volta(skip, first_measure_number) -> list[abjad.Wrapper]:
     measure_number = abjad.get.measure_number(skip)
     measure_number += first_measure_number - 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
+    # TODO: make this override visible to the composer:
     wrappers_ = _override.bar_line_x_extent([skip], (0, 3))
     _tags.wrappers(wrappers_, tag, _tags.NOT_MOL, measure_number_tag)
     wrappers.extend(wrappers_)
+    # TODO: make this override visible to the composer:
     wrappers_ = _override.bar_line_x_extent([skip], (0, 4))
     _tags.wrappers(wrappers_, tag, _tags.ONLY_MOL, measure_number_tag)
     wrappers.extend(wrappers_)
@@ -862,9 +865,11 @@ def open_volta(skip, first_measure_number) -> list[abjad.Wrapper]:
     measure_number = abjad.get.measure_number(skip)
     measure_number += first_measure_number - 1
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
+    # TODO: make this override visible to the composer:
     wrappers_ = _override.bar_line_x_extent([skip], (0, 2))
     _tags.wrappers(wrappers_, tag, _tags.NOT_MOL, measure_number_tag)
     wrappers.extend(wrappers_)
+    # TODO: make this override visible to the composer:
     wrappers_ = _override.bar_line_x_extent([skip], (0, 3))
     _tags.wrappers(wrappers_, tag, _tags.ONLY_MOL, measure_number_tag)
     wrappers.extend(wrappers_)
