@@ -251,15 +251,17 @@ def linear(bounds: str, *, effort: bool = False) -> str:
     start, stop = bounds.split()
     start_dynamic = abjad.Dynamic(start)
     stop_dynamic = abjad.Dynamic(stop)
-    assert isinstance(start_dynamic.ordinal, int)
-    assert isinstance(stop_dynamic.ordinal, int)
-    if start_dynamic.ordinal <= stop_dynamic.ordinal:
-        start_ordinal = start_dynamic.ordinal
-        stop_ordinal = stop_dynamic.ordinal
+    start_dynamic_ordinal = start_dynamic.get_ordinal()
+    stop_dynamic_ordinal = stop_dynamic.get_ordinal()
+    assert isinstance(start_dynamic_ordinal, int)
+    assert isinstance(stop_dynamic_ordinal, int)
+    if start_dynamic_ordinal < stop_dynamic_ordinal:
+        start_ordinal = start_dynamic_ordinal
+        stop_ordinal = stop_dynamic_ordinal
         reverse = False
     else:
-        start_ordinal = stop_dynamic.ordinal
-        stop_ordinal = start_dynamic.ordinal
+        start_ordinal = stop_dynamic_ordinal
+        stop_ordinal = start_dynamic_ordinal
         reverse = True
     names = []
     for ordinal in range(start_ordinal, stop_ordinal + 1):
