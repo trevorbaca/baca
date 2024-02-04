@@ -211,7 +211,10 @@ def covered(
     left_broken_text: str = r"\baca-left-broken-covered-markup",
     right_broken: bool = False,
     staff_padding: int | float | None = None,
+    with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
+    if with_next_leaf is True:
+        argument = _select.rleak(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         items,
         boxed=False,
@@ -308,7 +311,10 @@ def hairpin(
     forbid_al_niente_to_bar_line: bool = False,
     left_broken: bool = False,
     right_broken: bool = False,
+    with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
+    if with_next_leaf is True:
+        argument = _select.rleak(argument)
     specifiers = _piecewise.parse_hairpin_descriptor(
         descriptor,
         forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
@@ -394,7 +400,10 @@ def metric_modulation(
     left_broken: bool = False,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
+    with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
+    if with_next_leaf is True:
+        argument = _select.rleak(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         "MM =|",
         boxed=False,
@@ -463,7 +472,10 @@ def pizzicato(
     left_broken: bool = False,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
+    with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
+    if with_next_leaf is True:
+        argument = _select.rleak(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         items,
         boxed=False,
@@ -649,7 +661,10 @@ def trill(
     staff_padding: int | float | None = None,
     start_trill_span: abjad.StartTrillSpan = abjad.StartTrillSpan(),
     stop_trill_span: abjad.StopTrillSpan = abjad.StopTrillSpan(),
+    with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
+    if with_next_leaf is True:
+        argument = _select.rleak(argument)
     start_trill_span_ = _prepare_start_trill_span(
         alteration=alteration,
         force_trill_pitch_head_accidental=force_trill_pitch_head_accidental,
