@@ -9,6 +9,7 @@ import abjad
 
 from . import helpers as _helpers
 from . import piecewise as _piecewise
+from . import select as _select
 from . import tags as _tags
 from . import treat as _treat
 from . import tweaks as _tweaks
@@ -551,7 +552,9 @@ def string_number(
     left_broken_text: str | None = None,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
+    with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
+    assert with_next_leaf is True, repr(with_next_leaf)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         items,
         boxed=False,
@@ -561,6 +564,8 @@ def string_number(
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
+    if with_next_leaf:
+        argument = _select.next(argument)
     wrappers = _do_spanner_indicator_command(
         argument,
         specifier.spanner_start,
