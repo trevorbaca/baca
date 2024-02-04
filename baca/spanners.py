@@ -546,34 +546,32 @@ def spazzolato(
 
 def string_number(
     argument,
-    items: str | list,
+    string_number: str,
     *tweaks: abjad.Tweak,
     invisible_line: bool = False,
     left_broken: bool = False,
-    left_broken_text: str | None = None,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
     with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
     assert with_next_leaf is True, repr(with_next_leaf)
-    assert isinstance(items, str), repr(items)
-    assert left_broken_text is None, repr(left_broken_text)
+    argument = _select.next(argument)
+    assert isinstance(string_number, str), repr(string_number)
+    assert string_number in ("I", "II", "III", "IV"), repr(string_number)
     if invisible_line is True:
-        string = f"{items} ||"
+        items = f"{string_number} ||"
     else:
-        string = f"{items} =|"
+        items = f"{string_number} =|"
     specifiers = _piecewise._prepare_text_spanner_arguments(
-        string,
+        items,
+        # TODO: remove boxed=False, direction=None
         boxed=False,
         direction=None,
-        # left_broken_text=f"{(items)}",
-        left_broken_text=None,
+        left_broken_text=f"{(string_number)}",
         lilypond_id="StringNumber",
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    if with_next_leaf:
-        argument = _select.next(argument)
     wrappers = _do_spanner_indicator_command(
         argument,
         specifier.spanner_start,
