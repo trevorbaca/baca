@@ -548,6 +548,7 @@ def string_number(
     argument,
     items: str | list,
     *tweaks: abjad.Tweak,
+    invisible_line: bool = False,
     left_broken: bool = False,
     left_broken_text: str | None = None,
     right_broken: bool = False,
@@ -555,11 +556,18 @@ def string_number(
     with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
     assert with_next_leaf is True, repr(with_next_leaf)
+    assert isinstance(items, str), repr(items)
+    assert left_broken_text is None, repr(left_broken_text)
+    if invisible_line is True:
+        string = f"{items} ||"
+    else:
+        string = f"{items} =|"
     specifiers = _piecewise._prepare_text_spanner_arguments(
-        items,
+        string,
         boxed=False,
         direction=None,
-        left_broken_text=left_broken_text,
+        # left_broken_text=f"{(items)}",
+        left_broken_text=None,
         lilypond_id="StringNumber",
     )
     assert len(specifiers) == 1
