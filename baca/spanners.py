@@ -572,10 +572,8 @@ def string_number(
     left_broken: bool = False,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
-    with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
-    assert with_next_leaf is True, repr(with_next_leaf)
-    argument = _select.next(argument)
+    argument = _with_next_nonobgc_leaf(argument)
     assert isinstance(string_number, str), repr(string_number)
     assert string_number in ("I", "II", "III", "IV"), repr(string_number)
     if invisible_line is True:
