@@ -165,7 +165,10 @@ def clb(
     left_broken: bool = False,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
+    with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
+    if with_next_leaf is True:
+        argument = _select.rleak(argument)
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.CLB_SPANNER)
     assert string_number in (1, 2, 3, 4), repr(string_number)
@@ -369,7 +372,10 @@ def material_annotation(
     left_broken: bool = False,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
+    with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
+    if with_next_leaf is True:
+        argument = _select.rleak(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         items,
         boxed=False,
@@ -531,7 +537,10 @@ def spazzolato(
     left_broken: bool = False,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
+    with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
+    if with_next_leaf is True:
+        argument = _select.rleak(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         items,
         boxed=False,
