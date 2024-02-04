@@ -409,10 +409,8 @@ def metric_modulation(
     left_broken: bool = False,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
-    with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
-    if with_next_leaf is True:
-        argument = _with_next_nonobgc_leaf(argument)
+    argument = _with_next_nonobgc_leaf(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         "MM =|",
         boxed=False,
