@@ -678,6 +678,7 @@ def trill(
     stop_trill_span: abjad.StopTrillSpan = abjad.StopTrillSpan(),
     with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
+    assert with_next_leaf is True, repr(with_next_leaf)
     if with_next_leaf is True:
         argument = _select.rleak(argument)
     start_trill_span_ = _prepare_start_trill_span(
