@@ -693,10 +693,8 @@ def xfb(
     left_broken: bool = False,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
-    with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
-    assert with_next_leaf is True, repr(with_next_leaf)
-    argument = _select.next(argument)
+    argument = _with_next_nonobgc_leaf(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         "XFB =|",
         left_broken_text=r"\baca-left-broken-xfb-markup",
