@@ -134,6 +134,13 @@ def _prepare_start_trill_span(
     return start_trill_span_
 
 
+def _with_next_nonobgc_leaf(argument):
+    result = _select.rleak(argument)
+    if abjad.get.parentage(result[-1]).get(abjad.OnBeatGraceContainer):
+        result = _select.rleak(argument, grace=False)
+    return result
+
+
 def beam(
     argument,
     *tweaks: abjad.Tweak,
@@ -166,7 +173,7 @@ def clb(
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    argument = _select.rleak(argument)
+    argument = _with_next_nonobgc_leaf(argument)
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.CLB_SPANNER)
     assert string_number in (1, 2, 3, 4), repr(string_number)
@@ -213,7 +220,7 @@ def covered(
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    argument = _select.rleak(argument)
+    argument = _with_next_nonobgc_leaf(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         items,
         boxed=False,
@@ -247,7 +254,7 @@ def damp(
     with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
     if with_next_leaf is True:
-        argument = _select.rleak(argument)
+        argument = _with_next_nonobgc_leaf(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         r"\baca-damp-markup =|",
         boxed=False,
@@ -283,7 +290,7 @@ def half_clt(
     with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
     if with_next_leaf is True:
-        argument = _select.rleak(argument)
+        argument = _with_next_nonobgc_leaf(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         items,
         boxed=False,
@@ -319,7 +326,7 @@ def hairpin(
     with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
     if with_next_leaf is True:
-        argument = _select.rleak(argument)
+        argument = _with_next_nonobgc_leaf(argument)
     specifiers = _piecewise.parse_hairpin_descriptor(
         descriptor,
         forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
@@ -377,7 +384,7 @@ def material_annotation(
     with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
     if with_next_leaf is True:
-        argument = _select.rleak(argument)
+        argument = _with_next_nonobgc_leaf(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         items,
         boxed=False,
@@ -411,7 +418,7 @@ def metric_modulation(
     with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
     if with_next_leaf is True:
-        argument = _select.rleak(argument)
+        argument = _with_next_nonobgc_leaf(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         "MM =|",
         boxed=False,
@@ -483,7 +490,7 @@ def pizzicato(
     with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
     if with_next_leaf is True:
-        argument = _select.rleak(argument)
+        argument = _with_next_nonobgc_leaf(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         items,
         boxed=False,
@@ -540,7 +547,7 @@ def spazzolato(
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    argument = _select.rleak(argument)
+    argument = _with_next_nonobgc_leaf(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         items,
         boxed=False,
@@ -631,10 +638,8 @@ def tasto(
     left_broken: bool = False,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
-    without_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
-    if without_next_leaf is False:
-        argument = _select.rleak(argument)
+    argument = _with_next_nonobgc_leaf(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         "T =|",
         boxed=False,
@@ -670,11 +675,12 @@ def trill(
     staff_padding: int | float | None = None,
     start_trill_span: abjad.StartTrillSpan = abjad.StartTrillSpan(),
     stop_trill_span: abjad.StopTrillSpan = abjad.StopTrillSpan(),
+    # TODO: remove:
     with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
     assert with_next_leaf is True, repr(with_next_leaf)
     if with_next_leaf is True:
-        argument = _select.rleak(argument)
+        argument = _with_next_nonobgc_leaf(argument)
     start_trill_span_ = _prepare_start_trill_span(
         alteration=alteration,
         force_trill_pitch_head_accidental=force_trill_pitch_head_accidental,
