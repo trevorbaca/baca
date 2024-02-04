@@ -676,11 +676,12 @@ def xfb(
     left_broken: bool = False,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
+    with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
+    if with_next_leaf is True:
+        argument = _select.next(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         "XFB =|",
-        boxed=False,
-        direction=None,
         left_broken_text=r"\baca-left-broken-xfb-markup",
         lilypond_id="BowSpeed",
     )

@@ -4538,6 +4538,7 @@ def tleaves(
     *,
     exclude: abjad.typings.Exclude | None = None,
     grace: bool | None = None,
+    # TODO: remove all rleak keywords from select functions:
     rleak: bool = False,
 ) -> list[abjad.Leaf]:
     r"""
