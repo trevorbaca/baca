@@ -248,7 +248,10 @@ def damp(
     left_broken: bool = False,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
+    with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
+    if with_next_leaf is True:
+        argument = _select.rleak(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         r"\baca-damp-markup =|",
         boxed=False,
@@ -281,7 +284,10 @@ def half_clt(
     left_broken_text: str = r"\baca-left-broken-half-clt-markup",
     right_broken: bool = False,
     staff_padding: int | float | None = None,
+    with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
+    if with_next_leaf is True:
+        argument = _select.rleak(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         items,
         boxed=False,
@@ -585,9 +591,6 @@ def string_number(
         items = f"{string_number} =|"
     specifiers = _piecewise._prepare_text_spanner_arguments(
         items,
-        # TODO: remove boxed=False, direction=None
-        boxed=False,
-        direction=None,
         left_broken_text=f"{(string_number)}",
         lilypond_id="StringNumber",
     )
@@ -634,7 +637,10 @@ def tasto(
     left_broken: bool = False,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
+    without_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
+    if without_next_leaf is False:
+        argument = _select.rleak(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         "T =|",
         boxed=False,
