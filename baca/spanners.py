@@ -15,7 +15,7 @@ from . import treat as _treat
 from . import tweaks as _tweaks
 
 
-def _do_spanner_indicator_command(
+def _attach_spanner_indicators(
     argument,
     start_indicator=None,
     stop_indicator=None,
@@ -146,7 +146,7 @@ def beam(
     for leaf in abjad.iterate.leaves(argument, grace=False):
         abjad.detach(abjad.StartBeam, leaf)
         abjad.detach(abjad.StopBeam, leaf)
-    wrappers = _do_spanner_indicator_command(
+    wrappers = _attach_spanner_indicators(
         argument,
         start_beam,
         stop_beam,
@@ -191,7 +191,7 @@ def clb(
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    wrappers = _do_spanner_indicator_command(
+    wrappers = _attach_spanner_indicators(
         argument,
         specifier.spanner_start,
         specifier.spanner_stop,
@@ -227,7 +227,7 @@ def covered(
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    wrappers = _do_spanner_indicator_command(
+    wrappers = _attach_spanner_indicators(
         argument,
         specifier.spanner_start,
         specifier.spanner_stop,
@@ -261,7 +261,7 @@ def damp(
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    wrappers = _do_spanner_indicator_command(
+    wrappers = _attach_spanner_indicators(
         argument,
         specifier.spanner_start,
         specifier.spanner_stop,
@@ -297,7 +297,7 @@ def half_clt(
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    wrappers = _do_spanner_indicator_command(
+    wrappers = _attach_spanner_indicators(
         argument,
         specifier.spanner_start,
         specifier.spanner_stop,
@@ -346,7 +346,7 @@ def hairpin(
     else:
         raise NotImplementedError(descriptor)
     if start_dynamic is not None:
-        wrappers_ = _do_spanner_indicator_command(
+        wrappers_ = _attach_spanner_indicators(
             argument,
             start_dynamic,
             left_broken=left_broken,
@@ -355,7 +355,7 @@ def hairpin(
             tag_start_indicator_as_right_broken=True,
         )
         wrappers.extend(wrappers_)
-    wrappers_ = _do_spanner_indicator_command(
+    wrappers_ = _attach_spanner_indicators(
         argument,
         hairpin_start,
         stop_dynamic,
@@ -391,7 +391,7 @@ def material_annotation(
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    wrappers = _do_spanner_indicator_command(
+    wrappers = _attach_spanner_indicators(
         argument,
         specifier.spanner_start,
         specifier.spanner_stop,
@@ -425,7 +425,7 @@ def metric_modulation(
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    wrappers = _do_spanner_indicator_command(
+    wrappers = _attach_spanner_indicators(
         argument,
         specifier.spanner_start,
         specifier.spanner_stop,
@@ -449,7 +449,7 @@ def ottava(
 ) -> list[abjad.Wrapper]:
     assert isinstance(start_ottava, abjad.Ottava), repr(start_ottava)
     assert isinstance(stop_ottava, abjad.Ottava), repr(stop_ottava)
-    return _do_spanner_indicator_command(
+    return _attach_spanner_indicators(
         argument,
         start_ottava,
         stop_ottava,
@@ -466,7 +466,7 @@ def ottava_bassa(
 ) -> list[abjad.Wrapper]:
     assert isinstance(start_ottava, abjad.Ottava), repr(start_ottava)
     assert isinstance(stop_ottava, abjad.Ottava), repr(stop_ottava)
-    wrappers = _do_spanner_indicator_command(
+    wrappers = _attach_spanner_indicators(
         argument,
         start_ottava,
         stop_ottava,
@@ -497,7 +497,7 @@ def pizzicato(
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    wrappers = _do_spanner_indicator_command(
+    wrappers = _attach_spanner_indicators(
         argument,
         specifier.spanner_start,
         specifier.spanner_stop,
@@ -525,7 +525,7 @@ def slur(
     else:
         start_slur_ = start_slur or abjad.StartSlur()
         stop_slur_ = stop_slur or abjad.StopSlur()
-    wrappers = _do_spanner_indicator_command(
+    wrappers = _attach_spanner_indicators(
         argument,
         start_slur_,
         stop_slur_,
@@ -554,7 +554,7 @@ def spazzolato(
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    wrappers = _do_spanner_indicator_command(
+    wrappers = _attach_spanner_indicators(
         argument,
         specifier.spanner_start,
         specifier.spanner_stop,
@@ -594,7 +594,7 @@ def string_number(
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    wrappers = _do_spanner_indicator_command(
+    wrappers = _attach_spanner_indicators(
         argument,
         specifier.spanner_start,
         specifier.spanner_stop,
@@ -618,7 +618,7 @@ def sustain_pedal(
 ) -> list[abjad.Wrapper]:
     assert isinstance(start_piano_pedal, abjad.StartPianoPedal), repr(start_piano_pedal)
     assert isinstance(stop_piano_pedal, abjad.StopPianoPedal), repr(stop_piano_pedal)
-    wrappers = _do_spanner_indicator_command(
+    wrappers = _attach_spanner_indicators(
         argument,
         start_piano_pedal,
         stop_piano_pedal,
@@ -648,7 +648,7 @@ def tasto(
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    wrappers = _do_spanner_indicator_command(
+    wrappers = _attach_spanner_indicators(
         argument,
         specifier.spanner_start,
         specifier.spanner_stop,
@@ -685,7 +685,7 @@ def trill(
         harmonic=harmonic,
         start_trill_span=start_trill_span,
     )
-    wrappers = _do_spanner_indicator_command(
+    wrappers = _attach_spanner_indicators(
         argument,
         start_trill_span_,
         stop_trill_span,
@@ -716,7 +716,7 @@ def xfb(
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    wrappers = _do_spanner_indicator_command(
+    wrappers = _attach_spanner_indicators(
         argument,
         specifier.spanner_start,
         specifier.spanner_stop,
