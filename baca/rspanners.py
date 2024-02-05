@@ -267,35 +267,13 @@ def metric_modulation(
 
 def ottava(
     argument,
-    *,
-    start_ottava: abjad.Ottava = abjad.Ottava(n=1),
-    stop_ottava: abjad.Ottava = abjad.Ottava(n=0),
+    n: int = 1,
 ) -> list[abjad.Wrapper]:
     argument = _spanners._with_next_nonobgc_leaf(argument)
-    assert isinstance(start_ottava, abjad.Ottava), repr(start_ottava)
-    assert isinstance(stop_ottava, abjad.Ottava), repr(stop_ottava)
+    assert isinstance(n, int), repr(n)
     wrappers = []
     leaf = abjad.select.leaf(argument, 0)
-    wrappers_ = _indicators.ottava(leaf, 1)
-    wrappers.extend(wrappers_)
-    leaf = abjad.select.leaf(argument, -1)
-    wrappers_ = _indicators.ottava(leaf, 0)
-    wrappers.extend(wrappers_)
-    return wrappers
-
-
-def ottava_bassa(
-    argument,
-    *,
-    start_ottava: abjad.Ottava = abjad.Ottava(n=-1),
-    stop_ottava: abjad.Ottava = abjad.Ottava(n=0),
-) -> list[abjad.Wrapper]:
-    argument = _spanners._with_next_nonobgc_leaf(argument)
-    assert isinstance(start_ottava, abjad.Ottava), repr(start_ottava)
-    assert isinstance(stop_ottava, abjad.Ottava), repr(stop_ottava)
-    wrappers = []
-    leaf = abjad.select.leaf(argument, 0)
-    wrappers_ = _indicators.ottava(leaf, -1)
+    wrappers_ = _indicators.ottava(leaf, n)
     wrappers.extend(wrappers_)
     leaf = abjad.select.leaf(argument, -1)
     wrappers_ = _indicators.ottava(leaf, 0)
