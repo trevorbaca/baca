@@ -110,7 +110,6 @@ def hairpin(
     argument,
     descriptor: str,
     *tweaks: abjad.Tweak,
-    debug: bool = False,
     forbid_al_niente_to_bar_line: bool = False,
     left_broken: bool = False,
     right_broken: bool = False,
@@ -123,26 +122,38 @@ def hairpin(
         forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
     )
     wrappers = []
-    start_dynamic, hairpin_start, stop_dynamic = None, None, None
+    start_dynamic, start_hairpin, stop_indicator = None, None, None
     if len(specifiers) == 1:
         specifier = specifiers[0]
         start_dynamic = specifier.indicator
-        hairpin_start = specifier.spanner_start
+        start_hairpin = specifier.spanner_start
     elif len(specifiers) == 2:
         first, second = specifiers
         start_dynamic = first.indicator
-        hairpin_start = first.spanner_start
-        stop_dynamic = second.indicator
+        start_hairpin = first.spanner_start
+        stop_indicator = second.indicator
         if second.spanner_start:
             raise Exception(descriptor)
         if second.spanner_stop:
             raise Exception(descriptor)
     else:
         raise NotImplementedError(descriptor)
+    if start_dynamic is not None:
+        assert _piecewise._is_maybe_bundled(start_dynamic, abjad.Dynamic), repr(
+            start_dynamic
+        )
+    if start_hairpin is not None:
+        assert _piecewise._is_maybe_bundled(start_hairpin, abjad.StartHairpin), repr(
+            start_hairpin
+        )
+    if stop_indicator is not None:
+        assert _piecewise._is_maybe_bundled(
+            stop_indicator, abjad.Dynamic | abjad.StopHairpin
+        ), repr(stop_indicator)
     if right_broken is True:
-        assert hairpin_start is not None, repr(hairpin_start)
-        assert stop_dynamic is None, repr(stop_dynamic)
-        stop_dynamic = abjad.StopHairpin()
+        assert start_hairpin is not None, repr(start_hairpin)
+        assert stop_indicator is None, repr(stop_indicator)
+        stop_indicator = abjad.StopHairpin()
     if start_dynamic is not None:
         wrappers_ = _attach_spanner_indicators(
             argument,
@@ -155,8 +166,8 @@ def hairpin(
         wrappers.extend(wrappers_)
     wrappers_ = _attach_spanner_indicators(
         argument,
-        hairpin_start,
-        stop_dynamic,
+        start_hairpin,
+        stop_indicator,
         *tweaks,
         left_broken=left_broken,
         right_broken=right_broken,
