@@ -8,6 +8,7 @@ from inspect import currentframe as _frame
 import abjad
 
 from . import helpers as _helpers
+from . import indicators as _indicators
 from . import piecewise as _piecewise
 from . import spanners as _spanners
 from . import tags as _tags
@@ -273,12 +274,14 @@ def ottava(
     argument = _spanners._with_next_nonobgc_leaf(argument)
     assert isinstance(start_ottava, abjad.Ottava), repr(start_ottava)
     assert isinstance(stop_ottava, abjad.Ottava), repr(stop_ottava)
-    # TODO: tag wrappers
-    return _spanners._attach_spanner_indicators(
-        argument,
-        start_ottava,
-        stop_ottava,
-    )
+    wrappers = []
+    leaf = abjad.select.leaf(argument, 0)
+    wrappers_ = _indicators.ottava(leaf, 1)
+    wrappers.extend(wrappers_)
+    leaf = abjad.select.leaf(argument, -1)
+    wrappers_ = _indicators.ottava(leaf, 0)
+    wrappers.extend(wrappers_)
+    return wrappers
 
 
 def ottava_bassa(
@@ -290,13 +293,13 @@ def ottava_bassa(
     argument = _spanners._with_next_nonobgc_leaf(argument)
     assert isinstance(start_ottava, abjad.Ottava), repr(start_ottava)
     assert isinstance(stop_ottava, abjad.Ottava), repr(stop_ottava)
-    wrappers = _spanners._attach_spanner_indicators(
-        argument,
-        start_ottava,
-        stop_ottava,
-    )
-    tag = _helpers.function_name(_frame())
-    _tags.wrappers(wrappers, tag)
+    wrappers = []
+    leaf = abjad.select.leaf(argument, 0)
+    wrappers_ = _indicators.ottava(leaf, -1)
+    wrappers.extend(wrappers_)
+    leaf = abjad.select.leaf(argument, -1)
+    wrappers_ = _indicators.ottava(leaf, 0)
+    wrappers.extend(wrappers_)
     return wrappers
 
 

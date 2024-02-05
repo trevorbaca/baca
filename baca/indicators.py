@@ -879,7 +879,7 @@ def open_volta(skip, first_measure_number) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def ottava(argument, n: str) -> list[abjad.Wrapper]:
+def ottava(argument, n: int) -> list[abjad.Wrapper]:
     assert isinstance(n, int), repr(n)
     tag = _helpers.function_name(_frame())
     wrappers = []
