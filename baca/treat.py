@@ -188,6 +188,8 @@ def _indicator_to_grob(indicator):
         return "InstrumentName"
     elif isinstance(indicator, abjad.MetronomeMark):
         return "TextScript"
+    elif isinstance(indicator, abjad.Ottava):
+        return "OttavaBracket"
     elif isinstance(indicator, abjad.ShortInstrumentName):
         return "InstrumentName"
     elif isinstance(indicator, _classes.StaffLines):
@@ -214,6 +216,8 @@ def _indicator_to_key(indicator, manifests):
     elif isinstance(indicator, abjad.TimeSignature):
         key = f"{indicator.numerator}/{indicator.denominator}"
     elif isinstance(indicator, abjad.VoiceNumber):
+        key = indicator.n
+    elif isinstance(indicator, abjad.Ottava):
         key = indicator.n
     elif isinstance(indicator, _memento.PersistentOverride):
         key = indicator
@@ -420,7 +424,6 @@ def treat_persistent_wrapper(manifests, wrapper, status):
     assert isinstance(status, str), repr(status)
     prototype = (
         abjad.Glissando,
-        abjad.Ottava,
         abjad.RepeatTie,
         abjad.StartBeam,
         abjad.StopHairpin,

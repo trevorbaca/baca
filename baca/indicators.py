@@ -23,13 +23,14 @@ def _attach_persistent_indicator(
     indicators,
     *,
     context: str | None = None,
-    deactivate=False,
+    deactivate: bool = False,
     direction: abjad.Vertical | None = None,
     manifests=None,
     tag: abjad.Tag | None = None,
 ) -> list[abjad.Wrapper]:
     if context is not None:
         assert isinstance(context, str), repr(context)
+    assert isinstance(deactivate, bool), repr(deactivate)
     manifests = manifests or {}
     assert isinstance(manifests, dict), repr(manifests)
     cyclic_indicators = abjad.CyclicTuple(indicators)
@@ -875,6 +876,21 @@ def open_volta(skip, first_measure_number) -> list[abjad.Wrapper]:
     wrappers_ = _override.bar_line_x_extent([skip], (0, 3))
     _tags.wrappers(wrappers_, tag, _tags.ONLY_MOL, measure_number_tag)
     wrappers.extend(wrappers_)
+    return wrappers
+
+
+def ottava(argument, n: str) -> list[abjad.Wrapper]:
+    assert isinstance(n, int), repr(n)
+    tag = _helpers.function_name(_frame())
+    wrappers = []
+    for leaf in abjad.select.leaves(argument):
+        indicator = abjad.Ottava(n=n)
+        wrappers_ = _attach_persistent_indicator(
+            leaf,
+            [indicator],
+            tag=tag,
+        )
+        wrappers.extend(wrappers_)
     return wrappers
 
 
