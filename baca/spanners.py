@@ -180,43 +180,6 @@ def hairpin(
     return wrappers
 
 
-def ottava(
-    argument,
-    *,
-    start_ottava: abjad.Ottava = abjad.Ottava(n=1),
-    stop_ottava: abjad.Ottava = abjad.Ottava(n=0, site="after"),
-    right_broken: bool = False,
-) -> list[abjad.Wrapper]:
-    assert isinstance(start_ottava, abjad.Ottava), repr(start_ottava)
-    assert isinstance(stop_ottava, abjad.Ottava), repr(stop_ottava)
-    return _attach_spanner_indicators(
-        argument,
-        start_ottava,
-        stop_ottava,
-        right_broken=right_broken,
-    )
-
-
-def ottava_bassa(
-    argument,
-    *,
-    start_ottava: abjad.Ottava = abjad.Ottava(n=-1),
-    stop_ottava: abjad.Ottava = abjad.Ottava(n=0, site="after"),
-    right_broken: bool = False,
-) -> list[abjad.Wrapper]:
-    assert isinstance(start_ottava, abjad.Ottava), repr(start_ottava)
-    assert isinstance(stop_ottava, abjad.Ottava), repr(stop_ottava)
-    wrappers = _attach_spanner_indicators(
-        argument,
-        start_ottava,
-        stop_ottava,
-        right_broken=right_broken,
-    )
-    tag = _helpers.function_name(_frame())
-    _tags.wrappers(wrappers, tag)
-    return wrappers
-
-
 def slur(
     argument,
     *tweaks: abjad.Tweak,

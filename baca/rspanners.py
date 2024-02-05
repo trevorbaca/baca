@@ -264,6 +264,45 @@ def metric_modulation(
     return wrappers
 
 
+def ottava(
+    argument,
+    *,
+    start_ottava: abjad.Ottava = abjad.Ottava(n=1),
+    stop_ottava: abjad.Ottava = abjad.Ottava(n=0),
+    right_broken: bool = False,
+) -> list[abjad.Wrapper]:
+    argument = _spanners._with_next_nonobgc_leaf(argument)
+    assert isinstance(start_ottava, abjad.Ottava), repr(start_ottava)
+    assert isinstance(stop_ottava, abjad.Ottava), repr(stop_ottava)
+    return _spanners._attach_spanner_indicators(
+        argument,
+        start_ottava,
+        stop_ottava,
+        right_broken=right_broken,
+    )
+
+
+def ottava_bassa(
+    argument,
+    *,
+    start_ottava: abjad.Ottava = abjad.Ottava(n=-1),
+    stop_ottava: abjad.Ottava = abjad.Ottava(n=0),
+    right_broken: bool = False,
+) -> list[abjad.Wrapper]:
+    argument = _spanners._with_next_nonobgc_leaf(argument)
+    assert isinstance(start_ottava, abjad.Ottava), repr(start_ottava)
+    assert isinstance(stop_ottava, abjad.Ottava), repr(stop_ottava)
+    wrappers = _spanners._attach_spanner_indicators(
+        argument,
+        start_ottava,
+        stop_ottava,
+        right_broken=right_broken,
+    )
+    tag = _helpers.function_name(_frame())
+    _tags.wrappers(wrappers, tag)
+    return wrappers
+
+
 def pizzicato(
     argument,
     *tweaks: abjad.Tweak,
