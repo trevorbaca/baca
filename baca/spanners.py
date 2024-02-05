@@ -24,24 +24,20 @@ def _attach_spanner_indicators(
     left_broken: bool = False,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
-    tag_start_dynamic_as_spanner_stop: bool = False,
     tag_start_indicator_as_right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
     if staff_padding is not None:
         tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
     wrappers = []
     if start_indicator is not None:
-        if not _piecewise._is_maybe_bundled(start_indicator, abjad.Dynamic):
-            indicator = _piecewise._unbundle_indicator(start_indicator)
-            assert hasattr(indicator, "spanner_start"), repr(indicator)
-            assert indicator.spanner_start is True, repr(indicator)
+        unbundled_indicator = _piecewise._unbundle_indicator(start_indicator)
         start_indicator = _tweaks.bundle_tweaks(start_indicator, tweaks)
         tag = _helpers.function_name(_frame(), n=1)
-        if tag_start_dynamic_as_spanner_stop:
-            assert isinstance(start_indicator, abjad.Dynamic), repr(start_indicator)
-            tag = tag.append(_tags.SPANNER_STOP)
-        else:
+        if getattr(unbundled_indicator, "spanner_start", False) is True:
             tag = tag.append(_tags.SPANNER_START)
+        else:
+            assert getattr(unbundled_indicator, "spanner_stop", False) is True
+            tag = tag.append(_tags.SPANNER_STOP)
         if left_broken:
             tag = tag.append(_tags.LEFT_BROKEN)
         if right_broken and tag_start_indicator_as_right_broken:
@@ -166,7 +162,6 @@ def hairpin(
             start_dynamic,
             left_broken=left_broken,
             right_broken=right_broken,
-            tag_start_dynamic_as_spanner_stop=True,
             tag_start_indicator_as_right_broken=True,
         )
         wrappers.extend(wrappers_)
