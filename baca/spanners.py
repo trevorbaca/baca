@@ -55,6 +55,7 @@ def _attach_spanner_indicators(
             _treat.treat_persistent_wrapper({}, wrapper, "redundant")
         wrappers.append(wrapper)
     if stop_indicator is not None:
+        assert stop_indicator.spanner_stop is True, repr(stop_indicator)
         tag = _helpers.function_name(_frame(), n=2)
         tag = tag.append(_tags.SPANNER_STOP)
         if right_broken:

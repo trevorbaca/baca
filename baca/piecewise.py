@@ -94,6 +94,7 @@ def _attach_indicators(
             )
         reapplied = _treat.remove_reapplied_wrappers(leaf, indicator)
         tag_ = tag
+        # TODO: compress to single conditional with _is_maybe_bundled()
         if getattr(indicator, "spanner_start", None) is True:
             tag_ = tag_.append(_tags.SPANNER_START)
         elif (
@@ -101,6 +102,7 @@ def _attach_indicators(
             and getattr(indicator.indicator, "spanner_start", None) is True
         ):
             tag_ = tag_.append(_tags.SPANNER_START)
+        # TODO: compress to single conditional with _is_maybe_bundled()
         if getattr(indicator, "spanner_stop", None) is True:
             tag_ = tag_.append(_tags.SPANNER_STOP)
         elif (
