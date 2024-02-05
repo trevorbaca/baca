@@ -33,11 +33,11 @@ def _attach_spanner_indicators(
         unbundled_indicator = _piecewise._unbundle_indicator(start_indicator)
         start_indicator = _tweaks.bundle_tweaks(start_indicator, tweaks)
         tag = _helpers.function_name(_frame(), n=1)
-        if getattr(unbundled_indicator, "spanner_start", False) is True:
-            tag = tag.append(_tags.SPANNER_START)
-        else:
-            assert getattr(unbundled_indicator, "spanner_stop", False) is True
+        if getattr(unbundled_indicator, "spanner_stop", False) is True:
             tag = tag.append(_tags.SPANNER_STOP)
+        else:
+            assert getattr(unbundled_indicator, "spanner_start", False) is True
+            tag = tag.append(_tags.SPANNER_START)
         if left_broken:
             tag = tag.append(_tags.LEFT_BROKEN)
         if right_broken and tag_start_indicator_as_right_broken:
