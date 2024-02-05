@@ -17,6 +17,7 @@ from . import section
 from . import select
 from . import sequence
 from . import spanners
+from . import rspanners
 from . import typings
 from .enums import colors, enums
 from .anchor import (
