@@ -22,12 +22,14 @@ def _attach_persistent_indicator(
     argument,
     indicators,
     *,
-    context=None,
+    context: str | None = None,
     deactivate=False,
-    direction=None,
+    direction: abjad.Vertical | None = None,
     manifests=None,
-    tag=None,
+    tag: abjad.Tag | None = None,
 ) -> list[abjad.Wrapper]:
+    if context is not None:
+        assert isinstance(context, str), repr(context)
     manifests = manifests or {}
     assert isinstance(manifests, dict), repr(manifests)
     cyclic_indicators = abjad.CyclicTuple(indicators)

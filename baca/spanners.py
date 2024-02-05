@@ -31,9 +31,14 @@ def _attach_spanner_indicators(
         tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
     wrappers = []
     if start_indicator is not None:
+        if not _piecewise._is_maybe_bundled(start_indicator, abjad.Dynamic):
+            indicator = _piecewise._unbundle_indicator(start_indicator)
+            assert hasattr(indicator, "spanner_start"), repr(indicator)
+            assert indicator.spanner_start is True, repr(indicator)
         start_indicator = _tweaks.bundle_tweaks(start_indicator, tweaks)
         tag = _helpers.function_name(_frame(), n=1)
         if tag_start_dynamic_as_spanner_stop:
+            assert isinstance(start_indicator, abjad.Dynamic), repr(start_indicator)
             tag = tag.append(_tags.SPANNER_STOP)
         else:
             tag = tag.append(_tags.SPANNER_START)
