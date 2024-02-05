@@ -19,7 +19,7 @@ def _attach_spanner_indicators(
     start_indicator=None,
     stop_indicator=None,
     *tweaks,
-    attach_right_broken_hairpin_stop_literal: bool = False,
+    attach_right_broken_stop_hairpin: bool = False,
     context: str | None = None,
     direction: abjad.Vertical | None = None,
     left_broken: bool = False,
@@ -73,23 +73,24 @@ def _attach_spanner_indicators(
         if _treat.compare_persistent_indicators(stop_indicator, reapplied):
             _treat.treat_persistent_wrapper({}, wrapper, "redundant")
         wrappers.append(wrapper)
-    if start_indicator is not None:
-        if right_broken is True:
-            if attach_right_broken_hairpin_stop_literal is True:
-                tag = _helpers.function_name(_frame(), n=3)
-                tag = tag.append(_tags.RIGHT_BROKEN)
-                # TODO: can this be replaced by an abjad.Dynamic?
-                literal = abjad.LilyPondLiteral(r"\!", site="after")
-                final_leaf = abjad.select.leaf(argument, -1)
-                wrapper = abjad.attach(
-                    literal,
-                    final_leaf,
-                    context=context,
-                    direction=direction,
-                    tag=tag,
-                    wrapper=True,
-                )
-                wrappers.append(wrapper)
+    if (
+        start_indicator is not None
+        and right_broken is True
+        and attach_right_broken_stop_hairpin is True
+    ):
+        assert stop_indicator is None, repr(stop_indicator)
+        tag = _helpers.function_name(_frame(), n=3)
+        tag = tag.append(_tags.RIGHT_BROKEN)
+        final_leaf = abjad.select.leaf(argument, -1)
+        wrapper = abjad.attach(
+            abjad.StopHairpin(),
+            final_leaf,
+            context=context,
+            direction=direction,
+            tag=tag,
+            wrapper=True,
+        )
+        wrappers.append(wrapper)
     return wrappers
 
 
@@ -172,7 +173,7 @@ def hairpin(
         hairpin_start,
         stop_dynamic,
         *tweaks,
-        attach_right_broken_hairpin_stop_literal=True,
+        attach_right_broken_stop_hairpin=True,
         left_broken=left_broken,
         right_broken=right_broken,
         tag_start_indicator_as_right_broken=True,

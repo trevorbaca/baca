@@ -511,7 +511,7 @@ def circle_bow(
 
 def hairpin(
     argument,
-    dynamics: str,
+    descriptor: str,
     *tweaks: _typings.IndexedTweak,
     bookend: bool | int = -1,
     do_not_start_spanner_on_final_piece: bool = False,
@@ -519,13 +519,13 @@ def hairpin(
     left_broken: bool = False,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
-    assert isinstance(dynamics, str), repr(dynamics)
+    assert isinstance(descriptor, str), repr(descriptor)
     assert bookend in (-1, False), repr(bookend)
     assert isinstance(do_not_start_spanner_on_final_piece, bool)
     assert isinstance(left_broken, bool), repr(left_broken)
     assert isinstance(right_broken, bool), repr(right_broken)
     specifiers = parse_hairpin_descriptor(
-        dynamics,
+        descriptor,
         forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
     )
     right_broken_: bool | abjad.LilyPondLiteral = False
@@ -547,7 +547,6 @@ def hairpin(
 
 def parse_hairpin_descriptor(
     descriptor: str,
-    *tweaks: abjad.Tweak,
     forbid_al_niente_to_bar_line: bool = False,
 ) -> list[_Specifier]:
     assert isinstance(descriptor, str), repr(descriptor)
@@ -559,8 +558,6 @@ def parse_hairpin_descriptor(
         indicator = _dynamics.make_dynamic(
             string, forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line
         )
-        if _is_maybe_bundled(indicator, abjad.StartHairpin):
-            indicator = _tweaks.bundle_tweaks(indicator, tweaks, overwrite=True)
         indicators.append(indicator)
     if len(indicators) == 1:
         if _is_maybe_bundled(indicators[0], abjad.StartHairpin):
