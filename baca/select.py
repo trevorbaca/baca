@@ -4989,9 +4989,3 @@ def wleaves(
     items = abjad.select.with_previous_leaf(items)
     items = abjad.select.with_next_leaf(items)
     return items
-
-
-### ALIASES ###
-
-# TODO: remove
-next = rleak
