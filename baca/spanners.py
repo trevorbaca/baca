@@ -30,14 +30,10 @@ def _attach_spanner_indicators(
     wrappers = []
     if start_indicator is not None:
         unbundled_indicator = _piecewise._unbundle_indicator(start_indicator)
+        assert getattr(unbundled_indicator, "spanner_start", False) is True
         start_indicator = _tweaks.bundle_tweaks(start_indicator, tweaks)
         tag = _helpers.function_name(_frame(), n=1)
-        if getattr(unbundled_indicator, "spanner_stop", False) is True:
-            # raise Exception(f"not a start indicator: {start_indicator}")
-            tag = tag.append(_tags.SPANNER_STOP)
-        else:
-            assert getattr(unbundled_indicator, "spanner_start", False) is True
-            tag = tag.append(_tags.SPANNER_START)
+        tag = tag.append(_tags.SPANNER_START)
         if left_broken:
             tag = tag.append(_tags.LEFT_BROKEN)
         first_leaf = abjad.select.leaf(argument, 0)
