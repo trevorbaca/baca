@@ -24,7 +24,6 @@ def _attach_spanner_indicators(
     left_broken: bool = False,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
-    tag_start_indicator_as_right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
     if staff_padding is not None:
         tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
@@ -40,8 +39,6 @@ def _attach_spanner_indicators(
             tag = tag.append(_tags.SPANNER_START)
         if left_broken:
             tag = tag.append(_tags.LEFT_BROKEN)
-        if right_broken and tag_start_indicator_as_right_broken:
-            tag = tag.append(_tags.RIGHT_BROKEN)
         first_leaf = abjad.select.leaf(argument, 0)
         reapplied = _treat.remove_reapplied_wrappers(first_leaf, start_indicator)
         wrapper = abjad.attach(
@@ -162,7 +159,6 @@ def hairpin(
             start_dynamic,
             left_broken=left_broken,
             right_broken=right_broken,
-            tag_start_indicator_as_right_broken=True,
         )
         wrappers.extend(wrappers_)
     wrappers_ = _attach_spanner_indicators(
@@ -172,7 +168,6 @@ def hairpin(
         *tweaks,
         left_broken=left_broken,
         right_broken=right_broken,
-        tag_start_indicator_as_right_broken=True,
     )
     wrappers.extend(wrappers_)
     tag = _helpers.function_name(_frame())
