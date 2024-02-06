@@ -564,6 +564,8 @@ def parse_hairpin_descriptor(
     if len(indicators) == 1:
         if _is_maybe_bundled(indicators[0], abjad.StartHairpin):
             specifier = _Specifier(spanner_start=indicators[0])
+        elif _is_maybe_bundled(indicators[0], abjad.StopHairpin):
+            specifier = _Specifier(spanner_stop=indicators[0])
         else:
             assert _is_maybe_bundled(indicators[0], abjad.Dynamic)
             specifier = _Specifier(indicator=indicators[0])

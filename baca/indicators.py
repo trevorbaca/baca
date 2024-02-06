@@ -598,30 +598,6 @@ def global_fermata(argument, description: str = "fermata") -> list[abjad.Wrapper
     return wrappers
 
 
-def hairpin(
-    argument,
-    hairpin: str | abjad.StartHairpin | abjad.StopHairpin,
-    *tweaks: abjad.Tweak,
-) -> list[abjad.Wrapper]:
-    wrappers = []
-    tag = _helpers.function_name(_frame())
-    prototype = (abjad.StartHairpin, abjad.StopHairpin)
-    for leaf in abjad.select.leaves(argument):
-        if isinstance(hairpin, str):
-            indicator = _dynamics.make_dynamic(hairpin)
-        else:
-            indicator = hairpin
-        assert isinstance(indicator, prototype), repr(indicator)
-        indicator = _tweaks.bundle_tweaks(indicator, tweaks)
-        wrapper = _attach_persistent_indicator(
-            leaf,
-            indicator,
-            tag=tag,
-        )
-        wrappers.append(wrapper)
-    return wrappers
-
-
 def instrument(
     argument,
     key: str,

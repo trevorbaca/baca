@@ -120,6 +120,7 @@ def hairpin(
         specifier = specifiers[0]
         start_dynamic = specifier.indicator
         start_hairpin = specifier.spanner_start
+        stop_hairpin = specifier.spanner_stop
     elif len(specifiers) == 2:
         first, second = specifiers
         start_dynamic = first.indicator
