@@ -58,7 +58,7 @@ class _Specifier:
 
 
 # TODO: reimplement around _spanners._attach_persistent_indicator()?
-def _attach_indicators(
+def _attach_specifier(
     specifier,
     leaf,
     i,
@@ -72,9 +72,6 @@ def _attach_indicators(
     assert isinstance(tag, abjad.Tag), repr(tag)
     wrappers = []
     for indicator in specifier:
-        if indicator is True:
-            breakpoint()
-            raise Exception("ASDF")
         if (
             not getattr(_unbundle_indicator(indicator), "trend", False)
             and leaf is just_bookended_leaf
@@ -109,7 +106,16 @@ def _attach_indicators(
     return wrappers
 
 
-def _do_piecewise_command(
+def _is_maybe_bundled(argument, prototype):
+    if isinstance(argument, prototype):
+        return True
+    if isinstance(argument, abjad.Bundle):
+        if isinstance(argument.indicator, prototype):
+            return True
+    return False
+
+
+def _iterate_pieces(
     argument,
     *tweaks: _typings.IndexedTweak,
     attach_stop_hairpin_on_right_broken_final_piece: bool = False,
@@ -159,7 +165,7 @@ def _do_piecewise_command(
             specifier = _Specifier(spanner_start=abjad.StopHairpin())
             tag_ = _helpers.function_name(_frame(), n=1)
             tag_ = tag_.append(_tags.RIGHT_BROKEN)
-            wrappers_ = _attach_indicators(
+            wrappers_ = _attach_specifier(
                 specifier,
                 stop_leaf,
                 i,
@@ -211,7 +217,7 @@ def _do_piecewise_command(
                 tag_ = tag_.append(_tags.LEFT_BROKEN)
         if is_final_piece and right_broken:
             tag_ = tag_.append(_tags.RIGHT_BROKEN)
-        wrappers_ = _attach_indicators(
+        wrappers_ = _attach_specifier(
             specifier,
             start_leaf,
             i,
@@ -229,7 +235,7 @@ def _do_piecewise_command(
                 next_bundle = dataclasses.replace(next_bundle, spanner_start=None)
             if next_bundle.compound():
                 next_bundle = dataclasses.replace(next_bundle, spanner_start=None)
-            wrappers_ = _attach_indicators(
+            wrappers_ = _attach_specifier(
                 next_bundle,
                 stop_leaf,
                 i,
@@ -252,7 +258,7 @@ def _do_piecewise_command(
             tag_ = _helpers.function_name(_frame(), n=4)
             if right_broken:
                 tag_ = tag_.append(_tags.RIGHT_BROKEN)
-            wrappers_ = _attach_indicators(
+            wrappers_ = _attach_specifier(
                 specifier,
                 stop_leaf,
                 i,
@@ -263,15 +269,6 @@ def _do_piecewise_command(
             wrappers.extend(wrappers_)
         previous_had_bookend = should_bookend
     return wrappers
-
-
-def _is_maybe_bundled(argument, prototype):
-    if isinstance(argument, prototype):
-        return True
-    if isinstance(argument, abjad.Bundle):
-        if isinstance(argument.indicator, prototype):
-            return True
-    return False
 
 
 def _prepare_text_spanner_arguments(
@@ -526,7 +523,7 @@ def hairpin(
         descriptor,
         forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
     )
-    return _do_piecewise_command(
+    return _iterate_pieces(
         (),
         *tweaks,
         attach_stop_hairpin_on_right_broken_final_piece=True,
@@ -653,7 +650,7 @@ def text(
         left_broken_text=left_broken_text,
         lilypond_id=lilypond_id,
     )
-    return _do_piecewise_command(
+    return _iterate_pieces(
         argument,
         *tweaks,
         bookend=bookend,
