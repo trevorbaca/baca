@@ -415,16 +415,13 @@ def dynamic(
     wrappers = []
     tag = _helpers.function_name(_frame())
     for leaf in abjad.select.leaves(argument):
-        # assert isinstance(dynamic, str), repr(dynamic)
         if isinstance(dynamic, str):
             indicator = _dynamics.make_dynamic(dynamic)
         else:
             indicator = dynamic
-        # TODO: add baca.indicators.hairpin()
-        # TODO: disallow abjad.StartHairpin, abjad.StopHairpin here
-        # TODO: allow only abjad.Dynamic here
-        prototype = (abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin)
-        assert isinstance(indicator, prototype), repr(indicator)
+        if isinstance(indicator, abjad.StartHairpin | abjad.StopHairpin):
+            raise Exception(f"use baca.hairpin() instead: {indicator!r}")
+        assert isinstance(indicator, abjad.Dynamic), repr(indicator)
         indicator = _tweaks.bundle_tweaks(indicator, tweaks)
         wrapper = _attach_persistent_indicator(
             leaf,
@@ -598,6 +595,30 @@ def global_fermata(argument, description: str = "fermata") -> list[abjad.Wrapper
         )
         wrappers.append(wrapper)
         abjad.annotate(leaf, _enums.FERMATA_DURATION, fermata_duration)
+    return wrappers
+
+
+def hairpin(
+    argument,
+    hairpin: str | abjad.StartHairpin | abjad.StopHairpin,
+    *tweaks: abjad.Tweak,
+) -> list[abjad.Wrapper]:
+    wrappers = []
+    tag = _helpers.function_name(_frame())
+    prototype = (abjad.StartHairpin, abjad.StopHairpin)
+    for leaf in abjad.select.leaves(argument):
+        if isinstance(hairpin, str):
+            indicator = _dynamics.make_dynamic(hairpin)
+        else:
+            indicator = hairpin
+        assert isinstance(indicator, prototype), repr(indicator)
+        indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+        wrapper = _attach_persistent_indicator(
+            leaf,
+            indicator,
+            tag=tag,
+        )
+        wrappers.append(wrapper)
     return wrappers
 
 
