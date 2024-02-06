@@ -163,6 +163,8 @@ def hairpin(
     first_leaf = abjad.select.leaf(argument, 0)
     final_leaf = abjad.select.leaf(argument, -1)
     if start_dynamic is not None:
+        # TODO: remove after typehinting:
+        assert isinstance(start_dynamic, abjad.Dynamic), repr(start_dynamic)
         wrappers_ = _indicators.dynamic(
             first_leaf,
             start_dynamic,

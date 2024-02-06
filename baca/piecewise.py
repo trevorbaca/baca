@@ -19,11 +19,10 @@ from . import typings as _typings
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class _Specifier:
     bookended_spanner_start: typing.Any = None
-    indicator: typing.Any = None
+    # TODO: should only be abjad.Dynamic:
+    indicator: abjad.Dynamic | abjad.StopHairpin | None = None
     spanner_start: abjad.StartHairpin | abjad.StartTextSpan | abjad.Bundle | None = None
-    # spanner_stop: abjad.StopHairpin | abjad.StopTextSpan | None = None
-    # spanner_start: typing.Any = None
-    spanner_stop: typing.Any = None
+    spanner_stop: abjad.StopHairpin | abjad.StopTextSpan | None = None
 
     def __iter__(self) -> typing.Iterator:
         return iter(self.indicators)
@@ -579,9 +578,11 @@ def parse_hairpin_descriptor(
             assert isinstance(indicator, abjad.StartHairpin | abjad.Bundle)
             specifier = _Specifier(spanner_start=indicator)
         elif _is_maybe_bundled(indicator, abjad.StopHairpin):
+            assert isinstance(indicator, abjad.StopHairpin), repr(indicator)
             specifier = _Specifier(spanner_stop=indicator)
         else:
             assert _is_maybe_bundled(indicator, abjad.Dynamic)
+            assert isinstance(indicator, abjad.Dynamic), repr(indicator)
             specifier = _Specifier(indicator=indicator)
         specifiers.append(specifier)
         return specifiers
@@ -597,6 +598,10 @@ def parse_hairpin_descriptor(
             assert isinstance(indicator, abjad.StartHairpin)
             specifier = _Specifier(spanner_start=indicator)
         else:
+            # TODO: stop-hairpin should be spanner_stop=stop_hairpin
+            assert isinstance(indicator, abjad.Dynamic | abjad.StopHairpin), repr(
+                indicator
+            )
             specifier = _Specifier(indicator=indicator)
         specifiers.append(specifier)
         return specifiers
@@ -618,7 +623,10 @@ def parse_hairpin_descriptor(
     if indicators and _is_maybe_bundled(
         indicators[-1], abjad.Dynamic | abjad.StopHairpin
     ):
-        specifier = _Specifier(indicator=indicators[-1])
+        indicator = indicators[-1]
+        # TODO: stop-hairpin should be spanner_stop=stop_hairpin
+        assert isinstance(indicator, abjad.Dynamic | abjad.StopHairpin), repr(indicator)
+        specifier = _Specifier(indicator=indicator)
         specifiers.append(specifier)
     return specifiers
 
