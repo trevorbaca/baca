@@ -562,6 +562,8 @@ def hairpin(
     assert isinstance(right_broken, bool), repr(right_broken)
     if left_broken is True:
         assert descriptor[0] in ("o", "<", ">"), repr(descriptor)
+    if right_broken is True:
+        assert descriptor[-1] == "!", repr(descriptor)
     specifiers = parse_hairpin_descriptor(
         descriptor,
         forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
