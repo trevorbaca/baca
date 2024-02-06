@@ -102,6 +102,7 @@ def hairpin(
     argument,
     descriptor: str,
     *tweaks: abjad.Tweak,
+    debug=False,
     forbid_al_niente_to_bar_line: bool = False,
     left_broken: bool = False,
     right_broken: bool = False,
@@ -150,17 +151,12 @@ def hairpin(
         if not isinstance(stop_indicator, abjad.StopHairpin):
             message = f"right-broken must have stop-hairpin: {descriptor!r}"
             raise Exception(message)
+    first_leaf = abjad.select.leaf(argument, 0)
     if start_dynamic is not None:
-        wrappers_ = _attach_spanner_indicators(
-            argument,
-            start_dynamic,
-        )
-        """
         wrappers_ = _indicators.dynamic(
-            argument,
+            first_leaf,
             start_dynamic,
         )
-        """
         wrappers.extend(wrappers_)
     wrappers_ = _attach_spanner_indicators(
         argument,

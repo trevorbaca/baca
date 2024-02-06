@@ -409,17 +409,20 @@ def down_bow(
 
 def dynamic(
     argument,
-    dynamic: str,
+    dynamic: str | abjad.Dynamic,
     *tweaks: abjad.Tweak,
-    redundant: bool = False,
 ) -> list[abjad.Wrapper]:
-    wrappers: list[abjad.Wrapper] = []
-    if redundant:
-        return wrappers
+    wrappers = []
     tag = _helpers.function_name(_frame())
     for leaf in abjad.select.leaves(argument):
-        assert isinstance(dynamic, str), repr(dynamic)
-        indicator = _dynamics.make_dynamic(dynamic)
+        # assert isinstance(dynamic, str), repr(dynamic)
+        if isinstance(dynamic, str):
+            indicator = _dynamics.make_dynamic(dynamic)
+        else:
+            indicator = dynamic
+        # TODO: add baca.indicators.hairpin()
+        # TODO: disallow abjad.StartHairpin, abjad.StopHairpin here
+        # TODO: allow only abjad.Dynamic here
         prototype = (abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin)
         assert isinstance(indicator, prototype), repr(indicator)
         indicator = _tweaks.bundle_tweaks(indicator, tweaks)
