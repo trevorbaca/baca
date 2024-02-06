@@ -156,7 +156,7 @@ def hairpin(
             message = f"right-broken must have stop-hairpin: {descriptor!r}"
             raise Exception(message)
     first_leaf = abjad.select.leaf(argument, 0)
-    # final_leaf = abjad.select.leaf(argument, -1)
+    final_leaf = abjad.select.leaf(argument, -1)
     if start_dynamic is not None:
         wrappers_ = _indicators.dynamic(
             first_leaf,
@@ -164,11 +164,9 @@ def hairpin(
         )
         wrappers.extend(wrappers_)
     if stop_dynamic is not None:
-        wrappers_ = _attach_spanner_indicators(
-            argument,
-            None,
+        wrappers_ = _indicators.dynamic(
+            final_leaf,
             stop_dynamic,
-            *tweaks,
         )
         wrappers.extend(wrappers_)
     wrappers_ = _attach_spanner_indicators(
