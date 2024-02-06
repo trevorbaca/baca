@@ -1,4 +1,5 @@
 #! /usr/bin/env python
+import argparse
 import os
 import pathlib
 import sys
@@ -55,7 +56,7 @@ def _print_results(path, results):
         baca.build.print_error(f"FAIL: {path.name} changed ...")
 
 
-def _test_section(section_directory):
+def _test_section(section_directory, *, do_not_call_lilypond=False):
     assert section_directory.parent.name == "sections", repr(section_directory)
     metadata = baca.path.get_metadata(section_directory)
     names = ["music.ily", "music.ly", "music.pdf"]
@@ -79,7 +80,11 @@ def _test_section(section_directory):
     if music_ily.exists():
         music_ily.unlink()
     # command = "python music.py --also-untagged --clicktrack --log-timing --midi --pdf"
-    command = "python music.py --also-untagged --layout --log-timing --pdf"
+    if do_not_call_lilypond is True:
+        command = "python music.py --also-untagged --layout --log-timing --pdf"
+        command += " --do-not-call-lilypond"
+    else:
+        command = "python music.py --also-untagged --layout --log-timing --pdf"
     os.system(command)
     for path, results in path_to_results.items():
         results.exists = path.is_file()
@@ -118,6 +123,11 @@ def _test_section(section_directory):
 
 
 def main(current_directory):
+    parser = argparse.ArgumentParser(description="Test sections in score.")
+    parser.add_argument(
+        "--do-not-call-lilypond", help="Python only", action="store_true"
+    )
+    arguments = parser.parse_args()
     contents_directory = baca.path.get_contents_directory(current_directory)
     sections_directory = contents_directory / "sections"
     result = 0
@@ -125,7 +135,9 @@ def main(current_directory):
         if not path.is_dir():
             continue
         os.chdir(path)
-        result_ = _test_section(path)
+        result_ = _test_section(
+            path, do_not_call_lilypond=arguments.do_not_call_lilypond
+        )
         if result_ != 0:
             result = result_
         print()

@@ -183,8 +183,11 @@ def _log_timing(section_directory, timing):
         counter = abjad.string.pluralize("second", timing.postprocess_score)
         line = f"  postprocess_score(): {timing.postprocess_score} {counter}\n"
         pointer.write(line)
-        counter = abjad.string.pluralize("second", timing.lilypond)
-        line = f"LilyPond runtime: {timing.lilypond} {counter}\n"
+        if timing.lilypond == "SKIPPED":
+            line = f"LilyPond runtime: {timing.lilypond}\n"
+        else:
+            counter = abjad.string.pluralize("second", timing.lilypond)
+            line = f"LilyPond runtime: {timing.lilypond} {counter}\n"
         pointer.write(line)
 
 
@@ -307,6 +310,7 @@ def _make_section_pdf(
     timing,
     *,
     also_untagged=False,
+    do_not_call_lilypond=False,
     log_timing=False,
     print_timing=False,
 ):
@@ -338,10 +342,13 @@ def _make_section_pdf(
     _remove_function_name_comments(section_directory)
     if music_pdf.is_file():
         print_file_handling(f"Existing {baca.path.trim(music_pdf)} ...", log_only=True)
-    timing.lilypond = _call_lilypond_on_music_ly_in_section(
-        music_ly,
-        music_pdf_mtime,
-    )
+    if do_not_call_lilypond is True:
+        timing.lilypond = "SKIPPED"
+    else:
+        timing.lilypond = _call_lilypond_on_music_ly_in_section(
+            music_ly,
+            music_pdf_mtime,
+        )
     if print_timing:
         print_all_timing(timing)
     if log_timing:
@@ -586,10 +593,12 @@ class Environment:
 Timer = abjad.Timer
 
 
+# TODO: integrate argparse
 def arguments(arguments):
     known_arguments = (
         "--also-untagged",
         "--clicktrack",
+        "--do-not-call-lilypond",
         "--layout",
         "--log-timing",
         "--midi",
@@ -1127,6 +1136,7 @@ def persist_lilypond_file(
             section_directory,
             timing,
             also_untagged=arguments.also_untagged,
+            do_not_call_lilypond=arguments.do_not_call_lilypond,
             log_timing=arguments.log_timing,
             print_timing=arguments.print_timing,
         )
