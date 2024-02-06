@@ -114,7 +114,7 @@ def _do_piecewise_command(
     left_broken: bool = False,
     pieces: list[list[abjad.Leaf]] | None = None,
     # TODO: change to right_broken: bool = False
-    right_broken: typing.Any | None = None,
+    right_broken: bool | abjad.StopHairpin = False,
     specifiers: typing.Sequence = (),
     staff_padding: int | float | None = None,
     tag: abjad.Tag,
@@ -518,10 +518,10 @@ def hairpin(
         descriptor,
         forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
     )
-    right_broken_: bool | abjad.LilyPondLiteral = False
+    # TODO: right_broken strictly boolean
+    right_broken_: bool | abjad.StopHairpin = False
     if bool(right_broken) is True:
-        # TODO: replace with abjad.StopHairpin()
-        right_broken_ = abjad.LilyPondLiteral(r"\!", site="after")
+        right_broken_ = abjad.StopHairpin()
     return _do_piecewise_command(
         (),
         *tweaks,
