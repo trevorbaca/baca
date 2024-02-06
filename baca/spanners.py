@@ -25,9 +25,12 @@ def _attach_spanner_indicators(
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
+    """
     if staff_padding is not None:
         tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
+    """
     wrappers = []
+    """
     if start_indicator is not None:
         unbundled_indicator = _piecewise._unbundle_indicator(start_indicator)
         assert getattr(unbundled_indicator, "spanner_start", False) is True
@@ -60,7 +63,75 @@ def _attach_spanner_indicators(
             tag=tag,
         )
         wrappers.append(wrapper)
+    """
+    if start_indicator is not None:
+        wrapper = _attach_spanner_start(
+            argument,
+            start_indicator,
+            *tweaks,
+            context=context,
+            direction=direction,
+            left_broken=left_broken,
+            staff_padding=staff_padding,
+        )
+        wrappers.append(wrapper)
+    if stop_indicator is not None:
+        wrapper = _attach_spanner_stop(
+            argument,
+            stop_indicator,
+            right_broken=right_broken,
+        )
+        wrappers.append(wrapper)
     return wrappers
+
+
+def _attach_spanner_start(
+    argument,
+    spanner_start,
+    *tweaks: abjad.Tweak,
+    # TODO: remove context?
+    context: str | None = None,
+    direction: abjad.Vertical | None = None,
+    left_broken: bool = False,
+    staff_padding: int | float | None = None,
+) -> abjad.Wrapper:
+    if staff_padding is not None:
+        tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
+    unbundled_indicator = _piecewise._unbundle_indicator(spanner_start)
+    assert unbundled_indicator.spanner_start is True
+    spanner_start = _tweaks.bundle_tweaks(spanner_start, tweaks)
+    tag = _helpers.function_name(_frame())
+    tag = tag.append(_tags.SPANNER_START)
+    if left_broken:
+        tag = tag.append(_tags.LEFT_BROKEN)
+    first_leaf = abjad.select.leaf(argument, 0)
+    return _indicators._attach_persistent_indicator(
+        first_leaf,
+        spanner_start,
+        # TODO: remove context?
+        context=context,
+        direction=direction,
+        tag=tag,
+    )
+
+
+def _attach_spanner_stop(
+    argument,
+    spanner_stop,
+    *,
+    right_broken: bool = False,
+) -> abjad.Wrapper:
+    assert spanner_stop.spanner_stop is True, repr(spanner_stop)
+    tag = _helpers.function_name(_frame())
+    tag = tag.append(_tags.SPANNER_STOP)
+    if right_broken:
+        tag = tag.append(_tags.RIGHT_BROKEN)
+    final_leaf = abjad.select.leaf(argument, -1)
+    return _indicators._attach_persistent_indicator(
+        final_leaf,
+        spanner_stop,
+        tag=tag,
+    )
 
 
 def _with_next_nonobgc_leaf(argument):
