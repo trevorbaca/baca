@@ -20,6 +20,8 @@ from . import typings as _typings
 class _Specifier:
     bookended_spanner_start: typing.Any = None
     indicator: typing.Any = None
+    # spanner_start: abjad.StartHairpin | abjad.StartTextSpan | None = None
+    # spanner_stop: abjad.StopHairpin | abjad.StopTextSpan | None = None
     spanner_start: typing.Any = None
     spanner_stop: typing.Any = None
 
@@ -28,6 +30,18 @@ class _Specifier:
 
     def __len__(self) -> int:
         return len(self.indicators)
+
+    def __post_init__(self):
+        if self.spanner_start is not None:
+            unbundled = _unbundle_indicator(self.spanner_start)
+            assert unbundled.spanner_start is True, repr(self.spanner_start)
+            prototype = (abjad.StartHairpin, abjad.StartTextSpan)
+            assert isinstance(unbundled, prototype), repr(self.spanner_start)
+        if self.spanner_stop is not None:
+            unbundled = _unbundle_indicator(self.spanner_stop)
+            assert unbundled.spanner_stop is True, repr(self.spanner_stop)
+            prototype = (abjad.StopHairpin, abjad.StopTextSpan)
+            assert isinstance(unbundled, prototype), repr(self.spanner_stop)
 
     @property
     def indicators(self) -> list:
@@ -162,7 +176,8 @@ def _iterate_pieces(
             and right_broken is True
             and attach_stop_hairpin_on_right_broken_final_piece is True
         ):
-            specifier = _Specifier(spanner_start=abjad.StopHairpin())
+            # specifier = _Specifier(spanner_start=abjad.StopHairpin())
+            specifier = _Specifier(spanner_stop=abjad.StopHairpin())
             tag_ = _helpers.function_name(_frame(), n=1)
             tag_ = tag_.append(_tags.RIGHT_BROKEN)
             wrappers_ = _attach_specifier(
