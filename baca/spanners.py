@@ -115,7 +115,7 @@ def hairpin(
         forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
     )
     wrappers = []
-    start_dynamic, start_hairpin, stop_indicator = None, None, None
+    start_dynamic, start_hairpin, stop_dynamic, stop_hairpin = None, None, None, None
     if len(specifiers) == 1:
         specifier = specifiers[0]
         start_dynamic = specifier.indicator
@@ -124,7 +124,11 @@ def hairpin(
         first, second = specifiers
         start_dynamic = first.indicator
         start_hairpin = first.spanner_start
-        stop_indicator = second.indicator
+        if isinstance(second.indicator, abjad.Dynamic):
+            stop_dynamic = second.indicator
+        else:
+            assert isinstance(second.indicator, abjad.StopHairpin)
+            stop_hairpin = second.indicator
         if second.spanner_start:
             raise Exception(descriptor)
         if second.spanner_stop:
@@ -142,13 +146,13 @@ def hairpin(
         assert _piecewise._is_maybe_bundled(start_hairpin, abjad.StartHairpin), repr(
             start_hairpin
         )
-    if stop_indicator is not None:
-        assert _piecewise._is_maybe_bundled(
-            stop_indicator, abjad.Dynamic | abjad.StopHairpin
-        ), repr(stop_indicator)
+    if stop_dynamic is not None:
+        assert isinstance(stop_dynamic, abjad.Dynamic), repr(stop_dynamic)
+    if stop_hairpin is not None:
+        assert isinstance(stop_hairpin, abjad.StopHairpin), repr(stop_hairpin)
     if right_broken is True:
         assert start_hairpin is not None, repr(start_hairpin)
-        if not isinstance(stop_indicator, abjad.StopHairpin):
+        if not isinstance(stop_hairpin, abjad.StopHairpin):
             message = f"right-broken must have stop-hairpin: {descriptor!r}"
             raise Exception(message)
     first_leaf = abjad.select.leaf(argument, 0)
@@ -161,12 +165,22 @@ def hairpin(
     wrappers_ = _attach_spanner_indicators(
         argument,
         start_hairpin,
-        stop_indicator,
+        stop_hairpin,
         *tweaks,
         left_broken=left_broken,
         right_broken=right_broken,
     )
     wrappers.extend(wrappers_)
+    if stop_dynamic is not None:
+        wrappers_ = _attach_spanner_indicators(
+            argument,
+            None,
+            stop_dynamic,
+            *tweaks,
+            left_broken=left_broken,
+            right_broken=right_broken,
+        )
+        wrappers.extend(wrappers_)
     tag = _helpers.function_name(_frame())
     _tags.wrappers(wrappers, tag)
     return wrappers
