@@ -29,6 +29,7 @@ def _attach_spanner_start(
         tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
     spanner_start = _tweaks.bundle_tweaks(spanner_start, tweaks)
     tag = tag.append(_helpers.function_name(_frame()))
+    # TODO: maybe move into _indicators._attach_persistent_indicator()?
     tag = tag.append(_tags.SPANNER_START)
     if left_broken:
         tag = tag.append(_tags.LEFT_BROKEN)
@@ -50,6 +51,7 @@ def _attach_spanner_stop(
 ) -> abjad.Wrapper:
     assert spanner_stop.spanner_stop is True, repr(spanner_stop)
     tag = tag.append(_helpers.function_name(_frame()))
+    # TODO: maybe move into _indicators._attach_persistent_indicator()?
     tag = tag.append(_tags.SPANNER_STOP)
     if right_broken:
         tag = tag.append(_tags.RIGHT_BROKEN)

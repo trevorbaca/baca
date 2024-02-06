@@ -130,11 +130,13 @@ def _attach_specifier(
                 indicator, tweaks, i=i, total=total_pieces, overwrite=True
             )
         tag_ = tag
+        # TODO: maybe move into _indicators._attach_persistent_indicator()?
         if (
             getattr(_indicators._unbundle_indicator(indicator), "spanner_start", False)
             is True
         ):
             tag_ = tag_.append(_tags.SPANNER_START)
+        # TODO: maybe move into _indicators._attach_persistent_indicator()?
         if (
             getattr(_indicators._unbundle_indicator(indicator), "spanner_stop", False)
             is True
@@ -153,7 +155,7 @@ def _iterate_pieces(
     argument,
     *tweaks: _typings.IndexedTweak,
     attach_stop_hairpin_on_right_broken_final_piece: bool = False,
-    bookend: bool | int = False,
+    bookend: bool = False,
     do_not_start_spanner_on_final_piece: bool = False,
     leak_spanner_stop: bool = False,
     left_broken: bool = False,
@@ -174,12 +176,14 @@ def _iterate_pieces(
     assert pieces is not None
     piece_count = len(pieces)
     assert 0 < piece_count, repr(piece_count)
-    assert bookend in (False, -1), repr(bookend)
+    assert isinstance(bookend, bool), repr(bookend)
+    """
     if bookend is False:
         bookend_pattern = abjad.Pattern()
     else:
         assert bookend == -1
         bookend_pattern = abjad.index([bookend], period=piece_count)
+    """
     just_backstole_right_text = None
     just_bookended_leaf = None
     previous_had_bookend = None
@@ -208,7 +212,8 @@ def _iterate_pieces(
                 total_pieces,
             )
             wrappers.extend(wrappers_)
-        if bookend_pattern.matches_index(i, piece_count) and 1 < len(piece):
+        # if bookend_pattern.matches_index(i, piece_count) and 1 < len(piece):
+        if bookend is True and i == total_pieces - 1 and 1 < len(piece):
             should_bookend = True
         else:
             should_bookend = False
@@ -484,7 +489,7 @@ def bow_speed(
     argument,
     items: str | list,
     *tweaks: _typings.IndexedTweak,
-    bookend: bool | int = False,
+    bookend: bool = False,
     left_broken: bool = False,
     left_broken_text: str | None = None,
     pieces: list[list[abjad.Leaf]] | None = None,
@@ -544,14 +549,14 @@ def hairpin(
     argument,
     descriptor: str,
     *tweaks: _typings.IndexedTweak,
-    bookend: bool | int = -1,
+    bookend: bool = True,
     do_not_start_spanner_on_final_piece: bool = False,
     forbid_al_niente_to_bar_line: bool = False,
     left_broken: bool = False,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
     assert isinstance(descriptor, str), repr(descriptor)
-    assert bookend in (-1, False), repr(bookend)
+    assert isinstance(bookend, bool), repr(bookend)
     assert isinstance(do_not_start_spanner_on_final_piece, bool)
     assert isinstance(left_broken, bool), repr(left_broken)
     assert isinstance(right_broken, bool), repr(right_broken)
@@ -650,7 +655,7 @@ def scp(
     argument,
     items: str | list,
     *tweaks: _typings.IndexedTweak,
-    bookend: bool | int = False,
+    bookend: bool = False,
     do_not_start_spanner_on_final_piece: bool = False,
     left_broken: bool = False,
     left_broken_text: str | None = None,
@@ -681,7 +686,7 @@ def text(
     argument,
     items: str | list,
     *tweaks: _typings.IndexedTweak,
-    bookend: bool | int = -1,
+    bookend: bool = True,
     boxed: bool = False,
     direction: int | None = None,
     do_not_start_spanner_on_final_piece: bool = False,
@@ -719,7 +724,7 @@ def vibrato(
     argument,
     items: str | list,
     *tweaks: _typings.IndexedTweak,
-    bookend: bool | int = False,
+    bookend: bool = False,
     left_broken: bool = False,
     left_broken_text: str | None = None,
     pieces: list[list[abjad.Leaf]] | None = None,
