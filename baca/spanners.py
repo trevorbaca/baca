@@ -153,11 +153,11 @@ def hairpin(
         assert _piecewise._is_maybe_bundled(
             stop_indicator, abjad.Dynamic | abjad.StopHairpin
         ), repr(stop_indicator)
-    # TODO: force user to specify ! and then remove this branch:
     if right_broken is True:
         assert start_hairpin is not None, repr(start_hairpin)
-        assert stop_indicator is None, repr(stop_indicator)
-        stop_indicator = abjad.StopHairpin()
+        if not isinstance(stop_indicator, abjad.StopHairpin):
+            message = f"right-broken must have stop-hairpin: {descriptor!r}"
+            raise Exception(message)
     if start_dynamic is not None:
         wrappers_ = _attach_spanner_indicators(
             argument,
