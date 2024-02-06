@@ -18,7 +18,7 @@ from . import typings as _typings
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class _Specifier:
-    bookended_spanner_start: typing.Any = None
+    bookended_spanner_start: abjad.StartTextSpan | abjad.Bundle | None = None
     # TODO: should only be abjad.Dynamic:
     indicator: abjad.Dynamic | abjad.StopHairpin | None = None
     spanner_start: abjad.StartHairpin | abjad.StartTextSpan | abjad.Bundle | None = None
@@ -33,8 +33,7 @@ class _Specifier:
     def __post_init__(self):
         if self.bookended_spanner_start is not None:
             unbundled = _unbundle_indicator(self.bookended_spanner_start)
-            prototype = (abjad.StartHairpin, abjad.StartTextSpan)
-            assert isinstance(unbundled, prototype), repr(self.spanner_start)
+            assert isinstance(unbundled, abjad.StartTextSpan), repr(self.spanner_start)
         if self.indicator is not None:
             unbundled = _unbundle_indicator(self.indicator)
             # TODO: this should be abjad.Dynamic only:
