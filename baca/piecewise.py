@@ -20,9 +20,9 @@ from . import typings as _typings
 class _Specifier:
     bookended_spanner_start: typing.Any = None
     indicator: typing.Any = None
-    # spanner_start: abjad.StartHairpin | abjad.StartTextSpan | None = None
+    spanner_start: abjad.StartHairpin | abjad.StartTextSpan | abjad.Bundle | None = None
     # spanner_stop: abjad.StopHairpin | abjad.StopTextSpan | None = None
-    spanner_start: typing.Any = None
+    # spanner_start: typing.Any = None
     spanner_stop: typing.Any = None
 
     def __iter__(self) -> typing.Iterator:
@@ -574,25 +574,30 @@ def parse_hairpin_descriptor(
         )
         indicators.append(indicator)
     if len(indicators) == 1:
-        if _is_maybe_bundled(indicators[0], abjad.StartHairpin):
-            specifier = _Specifier(spanner_start=indicators[0])
-        elif _is_maybe_bundled(indicators[0], abjad.StopHairpin):
-            specifier = _Specifier(spanner_stop=indicators[0])
+        indicator = indicators[0]
+        if _is_maybe_bundled(indicator, abjad.StartHairpin):
+            assert isinstance(indicator, abjad.StartHairpin | abjad.Bundle)
+            specifier = _Specifier(spanner_start=indicator)
+        elif _is_maybe_bundled(indicator, abjad.StopHairpin):
+            specifier = _Specifier(spanner_stop=indicator)
         else:
-            assert _is_maybe_bundled(indicators[0], abjad.Dynamic)
-            specifier = _Specifier(indicator=indicators[0])
+            assert _is_maybe_bundled(indicator, abjad.Dynamic)
+            specifier = _Specifier(indicator=indicator)
         specifiers.append(specifier)
         return specifiers
     if _is_maybe_bundled(indicators[0], abjad.StartHairpin):
         result = indicators.pop(0)
         assert _is_maybe_bundled(result, abjad.StartHairpin)
+        assert isinstance(result, abjad.StartHairpin | abjad.Bundle)
         specifier = _Specifier(spanner_start=result)
         specifiers.append(specifier)
     if len(indicators) == 1:
-        if _is_maybe_bundled(indicators[0], abjad.StartHairpin):
-            specifier = _Specifier(spanner_start=indicators[0])
+        indicator = indicators[0]
+        if _is_maybe_bundled(indicator, abjad.StartHairpin):
+            assert isinstance(indicator, abjad.StartHairpin)
+            specifier = _Specifier(spanner_start=indicator)
         else:
-            specifier = _Specifier(indicator=indicators[0])
+            specifier = _Specifier(indicator=indicator)
         specifiers.append(specifier)
         return specifiers
     for left, right in abjad.sequence.nwise(indicators):
