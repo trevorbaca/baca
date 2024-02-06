@@ -57,6 +57,7 @@ class _Specifier:
         return False
 
 
+# TODO: reimplement around _spanners._attach_persistent_indicator()?
 def _attach_indicators(
     specifier,
     leaf,
@@ -71,6 +72,9 @@ def _attach_indicators(
     assert isinstance(tag, abjad.Tag), repr(tag)
     wrappers = []
     for indicator in specifier:
+        if indicator is True:
+            breakpoint()
+            raise Exception("ASDF")
         if (
             not getattr(_unbundle_indicator(indicator), "trend", False)
             and leaf is just_bookended_leaf
@@ -147,7 +151,7 @@ def _do_piecewise_command(
         is_first_piece = i == 0
         is_penultimate_piece = i == piece_count - 2
         is_final_piece = i == piece_count - 1
-        if is_final_piece and right_broken:
+        if is_final_piece and isinstance(right_broken, abjad.StopHairpin):
             specifier = _Specifier(spanner_start=right_broken)
             tag_ = _helpers.function_name(_frame(), n=1)
             tag_ = tag_.append(_tags.RIGHT_BROKEN)
@@ -518,9 +522,9 @@ def hairpin(
         descriptor,
         forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
     )
-    # TODO: right_broken strictly boolean
+    # TODO: make right_broken strictly boolean
     right_broken_: bool | abjad.StopHairpin = False
-    if bool(right_broken) is True:
+    if right_broken is True:
         right_broken_ = abjad.StopHairpin()
     return _do_piecewise_command(
         (),
