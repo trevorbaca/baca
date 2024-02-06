@@ -162,7 +162,6 @@ def hairpin(
         wrappers_ = _attach_spanner_indicators(
             argument,
             start_dynamic,
-            left_broken=left_broken,
         )
         """
         wrappers_ = _indicators.dynamic(
