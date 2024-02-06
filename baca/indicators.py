@@ -409,8 +409,7 @@ def down_bow(
 
 def dynamic(
     argument,
-    # TODO: limit to str only:
-    dynamic: str | abjad.Dynamic,
+    dynamic: str,
     *tweaks: abjad.Tweak,
     redundant: bool = False,
 ) -> list[abjad.Wrapper]:
@@ -419,10 +418,8 @@ def dynamic(
         return wrappers
     tag = _helpers.function_name(_frame())
     for leaf in abjad.select.leaves(argument):
-        if isinstance(dynamic, str):
-            indicator = _dynamics.make_dynamic(dynamic)
-        else:
-            indicator = dynamic
+        assert isinstance(dynamic, str), repr(dynamic)
+        indicator = _dynamics.make_dynamic(dynamic)
         prototype = (abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin)
         assert isinstance(indicator, prototype), repr(indicator)
         indicator = _tweaks.bundle_tweaks(indicator, tweaks)
