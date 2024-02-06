@@ -7,10 +7,10 @@ from inspect import currentframe as _frame
 import abjad
 
 from . import helpers as _helpers
+from . import indicators as _indicators
 from . import piecewise as _piecewise
 from . import select as _select
 from . import tags as _tags
-from . import treat as _treat
 from . import tweaks as _tweaks
 
 
@@ -41,18 +41,14 @@ def _attach_spanner_indicators(
         if left_broken:
             tag = tag.append(_tags.LEFT_BROKEN)
         first_leaf = abjad.select.leaf(argument, 0)
-        reapplied = _treat.remove_reapplied_wrappers(first_leaf, start_indicator)
-        wrapper = abjad.attach(
-            start_indicator,
+        wrappers_ = _indicators._attach_persistent_indicator(
             first_leaf,
+            [start_indicator],
             context=context,
             direction=direction,
             tag=tag,
-            wrapper=True,
         )
-        if _treat.compare_persistent_indicators(start_indicator, reapplied):
-            _treat.treat_persistent_wrapper({}, wrapper, "redundant")
-        wrappers.append(wrapper)
+        wrappers.extend(wrappers_)
     if stop_indicator is not None:
         assert stop_indicator.spanner_stop is True, repr(stop_indicator)
         tag = _helpers.function_name(_frame(), n=2)
@@ -60,18 +56,14 @@ def _attach_spanner_indicators(
         if right_broken:
             tag = tag.append(_tags.RIGHT_BROKEN)
         final_leaf = abjad.select.leaf(argument, -1)
-        reapplied = _treat.remove_reapplied_wrappers(final_leaf, stop_indicator)
-        wrapper = abjad.attach(
-            stop_indicator,
+        wrappers_ = _indicators._attach_persistent_indicator(
             final_leaf,
+            [stop_indicator],
             context=context,
             direction=direction,
             tag=tag,
-            wrapper=True,
         )
-        if _treat.compare_persistent_indicators(stop_indicator, reapplied):
-            _treat.treat_persistent_wrapper({}, wrapper, "redundant")
-        wrappers.append(wrapper)
+        wrappers.extend(wrappers_)
     return wrappers
 
 

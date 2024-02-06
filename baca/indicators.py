@@ -18,6 +18,7 @@ from . import typings as _typings
 from .enums import enums as _enums
 
 
+# TODO: add -s to end of function name:
 def _attach_persistent_indicator(
     argument,
     indicators,
