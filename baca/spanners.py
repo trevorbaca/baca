@@ -115,14 +115,23 @@ def beam(
         abjad.detach(abjad.StartBeam, leaf)
         abjad.detach(abjad.StopBeam, leaf)
     tag = _helpers.function_name(_frame())
-    wrappers = _attach_spanner_indicators(
-        argument,
-        start_beam,
-        stop_beam,
-        *tweaks,
-        direction=direction,
-        tag=tag,
-    )
+    wrappers = []
+    if start_beam is not None:
+        wrapper = _attach_spanner_start(
+            argument,
+            start_beam,
+            *tweaks,
+            direction=direction,
+            tag=tag,
+        )
+        wrappers.append(wrapper)
+    if stop_beam is not None:
+        wrapper = _attach_spanner_stop(
+            argument,
+            stop_beam,
+            tag=tag,
+        )
+        wrappers.append(wrapper)
     return wrappers
 
 
@@ -142,7 +151,6 @@ def hairpin(
         descriptor,
         forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
     )
-    wrappers = []
     start_dynamic, start_hairpin, stop_dynamic, stop_hairpin = None, None, None, None
     if len(specifiers) == 1:
         specifier = specifiers[0]
@@ -184,9 +192,10 @@ def hairpin(
         if not isinstance(stop_hairpin, abjad.StopHairpin):
             message = f"right-broken must have stop-hairpin: {descriptor!r}"
             raise Exception(message)
+    tag = _helpers.function_name(_frame())
+    wrappers = []
     first_leaf = abjad.select.leaf(argument, 0)
     final_leaf = abjad.select.leaf(argument, -1)
-    tag = _helpers.function_name(_frame())
     if start_dynamic is not None:
         wrappers_ = _indicators.dynamic(
             first_leaf,
@@ -201,16 +210,23 @@ def hairpin(
             tag=tag,
         )
         wrappers.extend(wrappers_)
-    wrappers_ = _attach_spanner_indicators(
-        argument,
-        start_hairpin,
-        stop_hairpin,
-        *tweaks,
-        left_broken=left_broken,
-        right_broken=right_broken,
-        tag=tag,
-    )
-    wrappers.extend(wrappers_)
+    if start_hairpin is not None:
+        wrapper = _attach_spanner_start(
+            argument,
+            start_hairpin,
+            *tweaks,
+            left_broken=left_broken,
+            tag=tag,
+        )
+        wrappers.append(wrapper)
+    if stop_hairpin is not None:
+        wrapper = _attach_spanner_stop(
+            argument,
+            stop_hairpin,
+            right_broken=right_broken,
+            tag=tag,
+        )
+        wrappers.append(wrapper)
     return wrappers
 
 
@@ -228,29 +244,48 @@ def slur(
         start_slur_ = start_slur or abjad.StartSlur()
         stop_slur_ = stop_slur or abjad.StopSlur()
     tag = _helpers.function_name(_frame())
-    wrappers = _attach_spanner_indicators(
-        argument,
-        start_slur_,
-        stop_slur_,
-        *tweaks,
-        tag=tag,
-    )
+    wrappers = []
+    if start_slur_ is not None:
+        wrapper = _attach_spanner_start(
+            argument,
+            start_slur_,
+            *tweaks,
+            tag=tag,
+        )
+        wrappers.append(wrapper)
+    if stop_slur_ is not None:
+        wrapper = _attach_spanner_stop(
+            argument,
+            stop_slur_,
+            tag=tag,
+        )
+        wrappers.append(wrapper)
     return wrappers
 
 
 def sustain_pedal(
     argument,
-    *,
+    *tweaks: abjad.Tweak,
     start_piano_pedal: abjad.StartPianoPedal = abjad.StartPianoPedal(),
     stop_piano_pedal: abjad.StopPianoPedal = abjad.StopPianoPedal(),
 ) -> list[abjad.Wrapper]:
     assert isinstance(start_piano_pedal, abjad.StartPianoPedal), repr(start_piano_pedal)
     assert isinstance(stop_piano_pedal, abjad.StopPianoPedal), repr(stop_piano_pedal)
     tag = _helpers.function_name(_frame())
-    wrappers = _attach_spanner_indicators(
-        argument,
-        start_piano_pedal,
-        stop_piano_pedal,
-        tag=tag,
-    )
+    wrappers = []
+    if start_piano_pedal is not None:
+        wrapper = _attach_spanner_start(
+            argument,
+            start_piano_pedal,
+            *tweaks,
+            tag=tag,
+        )
+        wrappers.append(wrapper)
+    if stop_piano_pedal is not None:
+        wrapper = _attach_spanner_stop(
+            argument,
+            stop_piano_pedal,
+            tag=tag,
+        )
+        wrappers.append(wrapper)
     return wrappers
