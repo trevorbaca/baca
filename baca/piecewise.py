@@ -32,14 +32,21 @@ class _Specifier:
         return len(self.indicators)
 
     def __post_init__(self):
+        if self.bookended_spanner_start is not None:
+            unbundled = _unbundle_indicator(self.bookended_spanner_start)
+            prototype = (abjad.StartHairpin, abjad.StartTextSpan)
+            assert isinstance(unbundled, prototype), repr(self.spanner_start)
+        if self.indicator is not None:
+            unbundled = _unbundle_indicator(self.indicator)
+            # TODO: this should be abjad.Dynamic only:
+            prototype = (abjad.StopHairpin, abjad.Dynamic)
+            assert isinstance(unbundled, prototype), repr(self.indicator)
         if self.spanner_start is not None:
             unbundled = _unbundle_indicator(self.spanner_start)
-            assert unbundled.spanner_start is True, repr(self.spanner_start)
             prototype = (abjad.StartHairpin, abjad.StartTextSpan)
             assert isinstance(unbundled, prototype), repr(self.spanner_start)
         if self.spanner_stop is not None:
             unbundled = _unbundle_indicator(self.spanner_stop)
-            assert unbundled.spanner_stop is True, repr(self.spanner_stop)
             prototype = (abjad.StopHairpin, abjad.StopTextSpan)
             assert isinstance(unbundled, prototype), repr(self.spanner_stop)
 
