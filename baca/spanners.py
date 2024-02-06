@@ -33,6 +33,7 @@ def _attach_spanner_indicators(
         start_indicator = _tweaks.bundle_tweaks(start_indicator, tweaks)
         tag = _helpers.function_name(_frame(), n=1)
         if getattr(unbundled_indicator, "spanner_stop", False) is True:
+            # raise Exception(f"not a start indicator: {start_indicator}")
             tag = tag.append(_tags.SPANNER_STOP)
         else:
             assert getattr(unbundled_indicator, "spanner_start", False) is True
@@ -149,6 +150,7 @@ def hairpin(
         assert _piecewise._is_maybe_bundled(
             stop_indicator, abjad.Dynamic | abjad.StopHairpin
         ), repr(stop_indicator)
+    # TODO: force user to specify ! and then remove this branch:
     if right_broken is True:
         assert start_hairpin is not None, repr(start_hairpin)
         assert stop_indicator is None, repr(stop_indicator)
@@ -158,8 +160,14 @@ def hairpin(
             argument,
             start_dynamic,
             left_broken=left_broken,
-            right_broken=right_broken,
+            # right_broken=right_broken,
         )
+        """
+        wrappers_ = _indicators.dynamic(
+            argument,
+            start_dynamic,
+        )
+        """
         wrappers.extend(wrappers_)
     wrappers_ = _attach_spanner_indicators(
         argument,

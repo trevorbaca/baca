@@ -428,6 +428,7 @@ def down_bow(
 
 def dynamic(
     argument,
+    # TODO: limit to str only:
     dynamic: str | abjad.Dynamic,
     *tweaks: abjad.Tweak,
     redundant: bool = False,
