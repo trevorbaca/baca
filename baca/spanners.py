@@ -23,6 +23,7 @@ def _attach_spanner_indicators(
     left_broken: bool = False,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
+    tag: abjad.Tag = abjad.Tag(),
 ) -> list[abjad.Wrapper]:
     wrappers = []
     if spanner_start is not None:
@@ -33,6 +34,7 @@ def _attach_spanner_indicators(
             direction=direction,
             left_broken=left_broken,
             staff_padding=staff_padding,
+            tag=tag,
         )
         wrappers.append(wrapper)
     if spanner_stop is not None:
@@ -40,6 +42,7 @@ def _attach_spanner_indicators(
             argument,
             spanner_stop,
             right_broken=right_broken,
+            tag=tag,
         )
         wrappers.append(wrapper)
     return wrappers
@@ -111,15 +114,15 @@ def beam(
     for leaf in abjad.iterate.leaves(argument, grace=False):
         abjad.detach(abjad.StartBeam, leaf)
         abjad.detach(abjad.StopBeam, leaf)
+    tag = _helpers.function_name(_frame())
     wrappers = _attach_spanner_indicators(
         argument,
         start_beam,
         stop_beam,
         *tweaks,
         direction=direction,
+        tag=tag,
     )
-    tag = _helpers.function_name(_frame())
-    _tags.wrappers(wrappers, tag)
     return wrappers
 
 
@@ -183,16 +186,19 @@ def hairpin(
             raise Exception(message)
     first_leaf = abjad.select.leaf(argument, 0)
     final_leaf = abjad.select.leaf(argument, -1)
+    tag = _helpers.function_name(_frame())
     if start_dynamic is not None:
         wrappers_ = _indicators.dynamic(
             first_leaf,
             start_dynamic,
+            tag=tag,
         )
         wrappers.extend(wrappers_)
     if stop_dynamic is not None:
         wrappers_ = _indicators.dynamic(
             final_leaf,
             stop_dynamic,
+            tag=tag,
         )
         wrappers.extend(wrappers_)
     wrappers_ = _attach_spanner_indicators(
@@ -202,10 +208,9 @@ def hairpin(
         *tweaks,
         left_broken=left_broken,
         right_broken=right_broken,
+        tag=tag,
     )
     wrappers.extend(wrappers_)
-    tag = _helpers.function_name(_frame())
-    _tags.wrappers(wrappers, tag)
     return wrappers
 
 
@@ -222,14 +227,14 @@ def slur(
     else:
         start_slur_ = start_slur or abjad.StartSlur()
         stop_slur_ = stop_slur or abjad.StopSlur()
+    tag = _helpers.function_name(_frame())
     wrappers = _attach_spanner_indicators(
         argument,
         start_slur_,
         stop_slur_,
         *tweaks,
+        tag=tag,
     )
-    tag = _helpers.function_name(_frame())
-    _tags.wrappers(wrappers, tag)
     return wrappers
 
 
@@ -241,11 +246,11 @@ def sustain_pedal(
 ) -> list[abjad.Wrapper]:
     assert isinstance(start_piano_pedal, abjad.StartPianoPedal), repr(start_piano_pedal)
     assert isinstance(stop_piano_pedal, abjad.StopPianoPedal), repr(stop_piano_pedal)
+    tag = _helpers.function_name(_frame())
     wrappers = _attach_spanner_indicators(
         argument,
         start_piano_pedal,
         stop_piano_pedal,
+        tag=tag,
     )
-    tag = _helpers.function_name(_frame())
-    _tags.wrappers(wrappers, tag)
     return wrappers
