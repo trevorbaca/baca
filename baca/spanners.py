@@ -14,40 +14,6 @@ from . import tags as _tags
 from . import tweaks as _tweaks
 
 
-def _attach_spanner_indicators(
-    argument,
-    spanner_start=None,
-    spanner_stop=None,
-    *tweaks,
-    direction: abjad.Vertical | None = None,
-    left_broken: bool = False,
-    right_broken: bool = False,
-    staff_padding: int | float | None = None,
-    tag: abjad.Tag = abjad.Tag(),
-) -> list[abjad.Wrapper]:
-    wrappers = []
-    if spanner_start is not None:
-        wrapper = _attach_spanner_start(
-            argument,
-            spanner_start,
-            *tweaks,
-            direction=direction,
-            left_broken=left_broken,
-            staff_padding=staff_padding,
-            tag=tag,
-        )
-        wrappers.append(wrapper)
-    if spanner_stop is not None:
-        wrapper = _attach_spanner_stop(
-            argument,
-            spanner_stop,
-            right_broken=right_broken,
-            tag=tag,
-        )
-        wrappers.append(wrapper)
-    return wrappers
-
-
 def _attach_spanner_start(
     argument,
     spanner_start,

@@ -85,16 +85,24 @@ def clb(
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    return _spanners._attach_spanner_indicators(
+    wrappers = []
+    wrapper = _spanners._attach_spanner_start(
         argument,
         specifier.spanner_start,
-        specifier.spanner_stop,
         *tweaks,
         left_broken=left_broken,
-        right_broken=right_broken,
         staff_padding=staff_padding,
         tag=tag,
     )
+    wrappers.append(wrapper)
+    wrapper = _spanners._attach_spanner_stop(
+        argument,
+        specifier.spanner_stop,
+        right_broken=right_broken,
+        tag=tag,
+    )
+    wrappers.append(wrapper)
+    return wrappers
 
 
 def covered(
@@ -118,16 +126,24 @@ def covered(
     specifier = specifiers[0]
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.COVERED_SPANNER)
-    return _spanners._attach_spanner_indicators(
+    wrappers = []
+    wrapper = _spanners._attach_spanner_start(
         argument,
         specifier.spanner_start,
-        specifier.spanner_stop,
         *tweaks,
         left_broken=left_broken,
-        right_broken=right_broken,
         staff_padding=staff_padding,
         tag=tag,
     )
+    wrappers.append(wrapper)
+    wrapper = _spanners._attach_spanner_stop(
+        argument,
+        specifier.spanner_stop,
+        right_broken=right_broken,
+        tag=tag,
+    )
+    wrappers.append(wrapper)
+    return wrappers
 
 
 def damp(
@@ -149,16 +165,24 @@ def damp(
     specifier = specifiers[0]
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.DAMP_SPANNER)
-    return _spanners._attach_spanner_indicators(
+    wrappers = []
+    wrapper = _spanners._attach_spanner_start(
         argument,
         specifier.spanner_start,
-        specifier.spanner_stop,
         *tweaks,
         left_broken=left_broken,
-        right_broken=right_broken,
         staff_padding=staff_padding,
         tag=tag,
     )
+    wrappers.append(wrapper)
+    wrapper = _spanners._attach_spanner_stop(
+        argument,
+        specifier.spanner_stop,
+        right_broken=right_broken,
+        tag=tag,
+    )
+    wrappers.append(wrapper)
+    return wrappers
 
 
 def half_clt(
@@ -182,16 +206,24 @@ def half_clt(
     specifier = specifiers[0]
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.HALF_CLT_SPANNER)
-    return _spanners._attach_spanner_indicators(
+    wrappers = []
+    wrapper = _spanners._attach_spanner_start(
         argument,
         specifier.spanner_start,
-        specifier.spanner_stop,
         *tweaks,
         left_broken=left_broken,
-        right_broken=right_broken,
         staff_padding=staff_padding,
         tag=tag,
     )
+    wrappers.append(wrapper)
+    wrapper = _spanners._attach_spanner_stop(
+        argument,
+        specifier.spanner_stop,
+        right_broken=right_broken,
+        tag=tag,
+    )
+    wrappers.append(wrapper)
+    return wrappers
 
 
 def material_annotation(
@@ -214,16 +246,24 @@ def material_annotation(
     specifier = specifiers[0]
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.MATERIAL_ANNOTATION_SPANNER)
-    return _spanners._attach_spanner_indicators(
+    wrappers = []
+    wrapper = _spanners._attach_spanner_start(
         argument,
         specifier.spanner_start,
-        specifier.spanner_stop,
         *tweaks,
         left_broken=left_broken,
-        right_broken=right_broken,
         staff_padding=staff_padding,
         tag=tag,
     )
+    wrappers.append(wrapper)
+    wrapper = _spanners._attach_spanner_stop(
+        argument,
+        specifier.spanner_stop,
+        right_broken=right_broken,
+        tag=tag,
+    )
+    wrappers.append(wrapper)
+    return wrappers
 
 
 def metric_modulation(
@@ -245,16 +285,24 @@ def metric_modulation(
     specifier = specifiers[0]
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.METRIC_MODULATION_SPANNER)
-    return _spanners._attach_spanner_indicators(
+    wrappers = []
+    wrapper = _spanners._attach_spanner_start(
         argument,
         specifier.spanner_start,
-        specifier.spanner_stop,
         *tweaks,
         left_broken=left_broken,
-        right_broken=right_broken,
         staff_padding=staff_padding,
         tag=tag,
     )
+    wrappers.append(wrapper)
+    wrapper = _spanners._attach_spanner_stop(
+        argument,
+        specifier.spanner_stop,
+        right_broken=right_broken,
+        tag=tag,
+    )
+    wrappers.append(wrapper)
+    return wrappers
 
 
 def ottava(
@@ -295,16 +343,24 @@ def pizzicato(
     specifier = specifiers[0]
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.PIZZICATO_SPANNER)
-    return _spanners._attach_spanner_indicators(
+    wrappers = []
+    wrapper = _spanners._attach_spanner_start(
         argument,
         specifier.spanner_start,
-        specifier.spanner_stop,
         *tweaks,
         left_broken=left_broken,
-        right_broken=right_broken,
         staff_padding=staff_padding,
         tag=tag,
     )
+    wrappers.append(wrapper)
+    wrapper = _spanners._attach_spanner_stop(
+        argument,
+        specifier.spanner_stop,
+        right_broken=right_broken,
+        tag=tag,
+    )
+    wrappers.append(wrapper)
+    return wrappers
 
 
 def spazzolato(
@@ -327,16 +383,24 @@ def spazzolato(
     specifier = specifiers[0]
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.SPAZZOLATO_SPANNER)
-    return _spanners._attach_spanner_indicators(
+    wrappers = []
+    wrapper = _spanners._attach_spanner_start(
         argument,
         specifier.spanner_start,
-        specifier.spanner_stop,
         *tweaks,
         left_broken=left_broken,
-        right_broken=right_broken,
         staff_padding=staff_padding,
         tag=tag,
     )
+    wrappers.append(wrapper)
+    wrapper = _spanners._attach_spanner_stop(
+        argument,
+        specifier.spanner_stop,
+        right_broken=right_broken,
+        tag=tag,
+    )
+    wrappers.append(wrapper)
+    return wrappers
 
 
 def string_number(
@@ -364,16 +428,24 @@ def string_number(
     specifier = specifiers[0]
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.STRING_NUMBER_SPANNER)
-    return _spanners._attach_spanner_indicators(
+    wrappers = []
+    wrapper = _spanners._attach_spanner_start(
         argument,
         specifier.spanner_start,
-        specifier.spanner_stop,
         *tweaks,
         left_broken=left_broken,
-        right_broken=right_broken,
         staff_padding=staff_padding,
         tag=tag,
     )
+    wrappers.append(wrapper)
+    wrapper = _spanners._attach_spanner_stop(
+        argument,
+        specifier.spanner_stop,
+        right_broken=right_broken,
+        tag=tag,
+    )
+    wrappers.append(wrapper)
+    return wrappers
 
 
 def tasto(
@@ -395,16 +467,24 @@ def tasto(
     specifier = specifiers[0]
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.TASTO_SPANNER)
-    return _spanners._attach_spanner_indicators(
+    wrappers = []
+    wrapper = _spanners._attach_spanner_start(
         argument,
         specifier.spanner_start,
-        specifier.spanner_stop,
         *tweaks,
         left_broken=left_broken,
-        right_broken=right_broken,
         staff_padding=staff_padding,
         tag=tag,
     )
+    wrappers.append(wrapper)
+    wrapper = _spanners._attach_spanner_stop(
+        argument,
+        specifier.spanner_stop,
+        right_broken=right_broken,
+        tag=tag,
+    )
+    wrappers.append(wrapper)
+    return wrappers
 
 
 def trill(
@@ -427,16 +507,24 @@ def trill(
         start_trill_span=start_trill_span,
     )
     tag = _helpers.function_name(_frame())
-    return _spanners._attach_spanner_indicators(
+    wrappers = []
+    wrapper = _spanners._attach_spanner_start(
         argument,
         start_trill_span_,
-        stop_trill_span,
         *tweaks,
         left_broken=left_broken,
-        right_broken=right_broken,
         staff_padding=staff_padding,
         tag=tag,
     )
+    wrappers.append(wrapper)
+    wrapper = _spanners._attach_spanner_stop(
+        argument,
+        stop_trill_span,
+        right_broken=right_broken,
+        tag=tag,
+    )
+    wrappers.append(wrapper)
+    return wrappers
 
 
 def xfb(
@@ -456,13 +544,21 @@ def xfb(
     specifier = specifiers[0]
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.BOW_SPEED_SPANNER)
-    return _spanners._attach_spanner_indicators(
+    wrappers = []
+    wrapper = _spanners._attach_spanner_start(
         argument,
         specifier.spanner_start,
-        specifier.spanner_stop,
         *tweaks,
         left_broken=left_broken,
-        right_broken=right_broken,
         staff_padding=staff_padding,
         tag=tag,
     )
+    wrappers.append(wrapper)
+    wrapper = _spanners._attach_spanner_stop(
+        argument,
+        specifier.spanner_stop,
+        right_broken=right_broken,
+        tag=tag,
+    )
+    wrappers.append(wrapper)
+    return wrappers
