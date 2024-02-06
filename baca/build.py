@@ -748,6 +748,8 @@ def handle_build_tags(_sections_directory):
     final_section_directory_name = section_directories[-1].name
     final_ily_name = f"{final_section_directory_name}.ily"
 
+    # TODO: can't this be simplified to just baca.tags.LEFT_BROKEN?
+    #       Because left-broken things should always deactivate?
     def match_left_broken_should_deactivate(tags):
         if baca.tags.LEFT_BROKEN in tags and baca.tags.SPANNER_START in tags:
             return True
@@ -773,8 +775,12 @@ def handle_build_tags(_sections_directory):
     def match_anchor_should_deactivate(tags):
         if baca.tags.ANCHOR_NOTE not in tags and baca.tags.ANCHOR_SKIP not in tags:
             return False
+        # TODO: can't this be simplified to just baca.tags.LEFT_BROKEN?
+        #       Because left-broken things should always deactivate?
         if baca.tags.SPANNER_START in tags and baca.tags.LEFT_BROKEN in tags:
             return True
+        # TODO: can't this be simplified to just baca.tags.RIGHT_BROKEN?
+        #       Because right-broken things should always deactivate?
         if baca.tags.SPANNER_STOP in tags and baca.tags.RIGHT_BROKEN in tags:
             return True
         if baca.tags.HIDE_TO_JOIN_BROKEN_SPANNERS in tags:
