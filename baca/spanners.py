@@ -16,69 +16,29 @@ from . import tweaks as _tweaks
 
 def _attach_spanner_indicators(
     argument,
-    start_indicator=None,
-    stop_indicator=None,
+    spanner_start=None,
+    spanner_stop=None,
     *tweaks,
-    context: str | None = None,
     direction: abjad.Vertical | None = None,
     left_broken: bool = False,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    """
-    if staff_padding is not None:
-        tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
-    """
     wrappers = []
-    """
-    if start_indicator is not None:
-        unbundled_indicator = _piecewise._unbundle_indicator(start_indicator)
-        assert getattr(unbundled_indicator, "spanner_start", False) is True
-        start_indicator = _tweaks.bundle_tweaks(start_indicator, tweaks)
-        tag = _helpers.function_name(_frame(), n=1)
-        tag = tag.append(_tags.SPANNER_START)
-        if left_broken:
-            tag = tag.append(_tags.LEFT_BROKEN)
-        first_leaf = abjad.select.leaf(argument, 0)
-        wrapper = _indicators._attach_persistent_indicator(
-            first_leaf,
-            start_indicator,
-            context=context,
-            direction=direction,
-            tag=tag,
-        )
-        wrappers.append(wrapper)
-    if stop_indicator is not None:
-        assert stop_indicator.spanner_stop is True, repr(stop_indicator)
-        tag = _helpers.function_name(_frame(), n=2)
-        tag = tag.append(_tags.SPANNER_STOP)
-        if right_broken:
-            tag = tag.append(_tags.RIGHT_BROKEN)
-        final_leaf = abjad.select.leaf(argument, -1)
-        wrapper = _indicators._attach_persistent_indicator(
-            final_leaf,
-            stop_indicator,
-            context=context,
-            direction=direction,
-            tag=tag,
-        )
-        wrappers.append(wrapper)
-    """
-    if start_indicator is not None:
+    if spanner_start is not None:
         wrapper = _attach_spanner_start(
             argument,
-            start_indicator,
+            spanner_start,
             *tweaks,
-            context=context,
             direction=direction,
             left_broken=left_broken,
             staff_padding=staff_padding,
         )
         wrappers.append(wrapper)
-    if stop_indicator is not None:
+    if spanner_stop is not None:
         wrapper = _attach_spanner_stop(
             argument,
-            stop_indicator,
+            spanner_stop,
             right_broken=right_broken,
         )
         wrappers.append(wrapper)
@@ -89,18 +49,17 @@ def _attach_spanner_start(
     argument,
     spanner_start,
     *tweaks: abjad.Tweak,
-    # TODO: remove context?
-    context: str | None = None,
     direction: abjad.Vertical | None = None,
     left_broken: bool = False,
     staff_padding: int | float | None = None,
+    tag: abjad.Tag = abjad.Tag(),
 ) -> abjad.Wrapper:
-    if staff_padding is not None:
-        tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
     unbundled_indicator = _piecewise._unbundle_indicator(spanner_start)
     assert unbundled_indicator.spanner_start is True
+    if staff_padding is not None:
+        tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
     spanner_start = _tweaks.bundle_tweaks(spanner_start, tweaks)
-    tag = _helpers.function_name(_frame())
+    tag = tag.append(_helpers.function_name(_frame()))
     tag = tag.append(_tags.SPANNER_START)
     if left_broken:
         tag = tag.append(_tags.LEFT_BROKEN)
@@ -108,8 +67,6 @@ def _attach_spanner_start(
     return _indicators._attach_persistent_indicator(
         first_leaf,
         spanner_start,
-        # TODO: remove context?
-        context=context,
         direction=direction,
         tag=tag,
     )
@@ -120,9 +77,10 @@ def _attach_spanner_stop(
     spanner_stop,
     *,
     right_broken: bool = False,
+    tag: abjad.Tag = abjad.Tag(),
 ) -> abjad.Wrapper:
     assert spanner_stop.spanner_stop is True, repr(spanner_stop)
-    tag = _helpers.function_name(_frame())
+    tag = tag.append(_helpers.function_name(_frame()))
     tag = tag.append(_tags.SPANNER_STOP)
     if right_broken:
         tag = tag.append(_tags.RIGHT_BROKEN)
@@ -278,7 +236,6 @@ def slur(
 def sustain_pedal(
     argument,
     *,
-    context: str | None = None,
     start_piano_pedal: abjad.StartPianoPedal = abjad.StartPianoPedal(),
     stop_piano_pedal: abjad.StopPianoPedal = abjad.StopPianoPedal(),
 ) -> list[abjad.Wrapper]:
@@ -288,7 +245,6 @@ def sustain_pedal(
         argument,
         start_piano_pedal,
         stop_piano_pedal,
-        context=context,
     )
     tag = _helpers.function_name(_frame())
     _tags.wrappers(wrappers, tag)
