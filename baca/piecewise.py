@@ -76,10 +76,9 @@ class _Specifier:
         return False
 
 
-# TODO: reimplement around _spanners._attach_persistent_indicator()?
 def _attach_specifier(
-    specifier,
     leaf,
+    specifier,
     i,
     tag,
     tweaks,
@@ -87,16 +86,32 @@ def _attach_specifier(
     *,
     just_bookended_leaf=None,
 ) -> list[abjad.Wrapper]:
+    assert isinstance(leaf, abjad.Leaf), repr(leaf)
     assert isinstance(specifier, _Specifier), repr(specifier)
+    assert isinstance(i, int), repr(i)
     assert isinstance(tag, abjad.Tag), repr(tag)
+    for tweak in tweaks:
+        assert isinstance(tweak, abjad.Tweak | tuple), repr(tweak)
+    assert isinstance(total_pieces, int), repr(total_pieces)
+    if just_bookended_leaf is not None:
+        assert isinstance(just_bookended_leaf, abjad.Leaf), repr(just_bookended_leaf)
     wrappers = []
+    prototype = (
+        abjad.Bundle,
+        abjad.Dynamic,
+        abjad.StartHairpin,
+        abjad.StopHairpin,
+        abjad.StartTextSpan,
+        abjad.StopTextSpan,
+    )
     for indicator in specifier:
+        assert isinstance(indicator, prototype), repr(indicator)
         if (
             not getattr(_unbundle_indicator(indicator), "trend", False)
             and leaf is just_bookended_leaf
         ):
             continue
-        if not isinstance(indicator, bool | abjad.Bundle):
+        if not isinstance(indicator, abjad.Bundle):
             indicator = dataclasses.replace(indicator)
         if (
             _is_maybe_bundled(indicator, abjad.StartTextSpan | abjad.StartHairpin)
@@ -112,12 +127,13 @@ def _attach_specifier(
             indicator = _tweaks.bundle_tweaks(
                 indicator, tweaks, i=i, total=total_pieces, overwrite=True
             )
-        reapplied = _treat.remove_reapplied_wrappers(leaf, indicator)
         tag_ = tag
         if getattr(_unbundle_indicator(indicator), "spanner_start", False) is True:
             tag_ = tag_.append(_tags.SPANNER_START)
         if getattr(_unbundle_indicator(indicator), "spanner_stop", False) is True:
             tag_ = tag_.append(_tags.SPANNER_STOP)
+        # TODO: replace with _spanners._attach_persistent_indicator()?
+        reapplied = _treat.remove_reapplied_wrappers(leaf, indicator)
         wrapper = abjad.attach(indicator, leaf, tag=tag_, wrapper=True)
         if _treat.compare_persistent_indicators(indicator, reapplied):
             _treat.treat_persistent_wrapper({}, wrapper, "redundant")
@@ -181,13 +197,12 @@ def _iterate_pieces(
             and right_broken is True
             and attach_stop_hairpin_on_right_broken_final_piece is True
         ):
-            # specifier = _Specifier(spanner_start=abjad.StopHairpin())
             specifier = _Specifier(spanner_stop=abjad.StopHairpin())
             tag_ = _helpers.function_name(_frame(), n=1)
             tag_ = tag_.append(_tags.RIGHT_BROKEN)
             wrappers_ = _attach_specifier(
-                specifier,
                 stop_leaf,
+                specifier,
                 i,
                 tag.append(tag_),
                 tweaks,
@@ -238,8 +253,8 @@ def _iterate_pieces(
         if is_final_piece and right_broken:
             tag_ = tag_.append(_tags.RIGHT_BROKEN)
         wrappers_ = _attach_specifier(
-            specifier,
             start_leaf,
+            specifier,
             i,
             tag.append(tag_),
             tweaks,
@@ -256,8 +271,8 @@ def _iterate_pieces(
             if next_bundle.compound():
                 next_bundle = dataclasses.replace(next_bundle, spanner_start=None)
             wrappers_ = _attach_specifier(
-                next_bundle,
                 stop_leaf,
+                next_bundle,
                 i,
                 tag.append(tag_),
                 tweaks,
@@ -279,8 +294,8 @@ def _iterate_pieces(
             if right_broken:
                 tag_ = tag_.append(_tags.RIGHT_BROKEN)
             wrappers_ = _attach_specifier(
-                specifier,
                 stop_leaf,
+                specifier,
                 i,
                 tag.append(tag_),
                 tweaks,
