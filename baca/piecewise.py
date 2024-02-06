@@ -94,21 +94,9 @@ def _attach_indicators(
             )
         reapplied = _treat.remove_reapplied_wrappers(leaf, indicator)
         tag_ = tag
-        # TODO: compress to single conditional with _is_maybe_bundled()
-        if getattr(indicator, "spanner_start", None) is True:
+        if getattr(_unbundle_indicator(indicator), "spanner_start", False) is True:
             tag_ = tag_.append(_tags.SPANNER_START)
-        elif (
-            isinstance(indicator, abjad.Bundle)
-            and getattr(indicator.indicator, "spanner_start", None) is True
-        ):
-            tag_ = tag_.append(_tags.SPANNER_START)
-        # TODO: compress to single conditional with _is_maybe_bundled()
-        if getattr(indicator, "spanner_stop", None) is True:
-            tag_ = tag_.append(_tags.SPANNER_STOP)
-        elif (
-            isinstance(indicator, abjad.Bundle)
-            and getattr(indicator.indicator, "spanner_stop", None) is True
-        ):
+        if getattr(_unbundle_indicator(indicator), "spanner_stop", False) is True:
             tag_ = tag_.append(_tags.SPANNER_STOP)
         wrapper = abjad.attach(indicator, leaf, tag=tag_, wrapper=True)
         if _treat.compare_persistent_indicators(indicator, reapplied):
@@ -125,7 +113,7 @@ def _do_piecewise_command(
     leak_spanner_stop: bool = False,
     left_broken: bool = False,
     pieces: list[list[abjad.Leaf]] | None = None,
-    # TODO: change to right_broken: abjad.LilyPondLiteral | bool = False
+    # TODO: change to right_broken: bool = False
     right_broken: typing.Any | None = None,
     specifiers: typing.Sequence = (),
     staff_padding: int | float | None = None,
@@ -532,7 +520,7 @@ def hairpin(
     )
     right_broken_: bool | abjad.LilyPondLiteral = False
     if bool(right_broken) is True:
-        # TODO: can this be replaced by an abjad.Dynamic?
+        # TODO: replace with abjad.StopHairpin()
         right_broken_ = abjad.LilyPondLiteral(r"\!", site="after")
     return _do_piecewise_command(
         (),
