@@ -41,14 +41,14 @@ def _attach_spanner_indicators(
         if left_broken:
             tag = tag.append(_tags.LEFT_BROKEN)
         first_leaf = abjad.select.leaf(argument, 0)
-        wrappers_ = _indicators._attach_persistent_indicator(
+        wrapper = _indicators._attach_persistent_indicator(
             first_leaf,
-            [start_indicator],
+            start_indicator,
             context=context,
             direction=direction,
             tag=tag,
         )
-        wrappers.extend(wrappers_)
+        wrappers.append(wrapper)
     if stop_indicator is not None:
         assert stop_indicator.spanner_stop is True, repr(stop_indicator)
         tag = _helpers.function_name(_frame(), n=2)
@@ -56,14 +56,14 @@ def _attach_spanner_indicators(
         if right_broken:
             tag = tag.append(_tags.RIGHT_BROKEN)
         final_leaf = abjad.select.leaf(argument, -1)
-        wrappers_ = _indicators._attach_persistent_indicator(
+        wrapper = _indicators._attach_persistent_indicator(
             final_leaf,
-            [stop_indicator],
+            stop_indicator,
             context=context,
             direction=direction,
             tag=tag,
         )
-        wrappers.extend(wrappers_)
+        wrappers.append(wrapper)
     return wrappers
 
 
