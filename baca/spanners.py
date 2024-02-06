@@ -23,7 +23,7 @@ def _attach_spanner_start(
     staff_padding: int | float | None = None,
     tag: abjad.Tag = abjad.Tag(),
 ) -> abjad.Wrapper:
-    unbundled_indicator = _piecewise._unbundle_indicator(spanner_start)
+    unbundled_indicator = _indicators._unbundle_indicator(spanner_start)
     assert unbundled_indicator.spanner_start is True
     if staff_padding is not None:
         tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
@@ -139,14 +139,14 @@ def hairpin(
     else:
         raise NotImplementedError(descriptor)
     if start_dynamic is not None:
-        assert _piecewise._is_maybe_bundled(start_dynamic, abjad.Dynamic), repr(
+        assert _indicators._is_maybe_bundled(start_dynamic, abjad.Dynamic), repr(
             start_dynamic
         )
         if left_broken is True:
             message = f"left-broken must begin with hairpin: {descriptor!r}"
             raise Exception(message)
     if start_hairpin is not None:
-        assert _piecewise._is_maybe_bundled(start_hairpin, abjad.StartHairpin), repr(
+        assert _indicators._is_maybe_bundled(start_hairpin, abjad.StartHairpin), repr(
             start_hairpin
         )
     if stop_dynamic is not None:

@@ -17,9 +17,11 @@ from . import tweaks as _tweaks
 from . import typings as _typings
 from .enums import enums as _enums
 
+_should_be_declared_persistent = (abjad.MetricModulation,)
+
 
 def _attach_persistent_indicator(
-    leaf,
+    leaf: abjad.Leaf,
     indicator,
     *,
     context: str | None = None,
@@ -28,6 +30,9 @@ def _attach_persistent_indicator(
     manifests=None,
     tag: abjad.Tag | None = None,
 ) -> abjad.Wrapper:
+    unbundled = _unbundle_indicator(indicator)
+    if not isinstance(unbundled, _should_be_declared_persistent):
+        assert unbundled.persistent is True, repr(indicator)
     if context is not None:
         assert isinstance(context, str), repr(context)
     assert isinstance(deactivate, bool), repr(deactivate)
@@ -51,6 +56,15 @@ def _attach_persistent_indicator(
     return wrapper
 
 
+def _is_maybe_bundled(argument, prototype):
+    if isinstance(argument, prototype):
+        return True
+    if isinstance(argument, abjad.Bundle):
+        if isinstance(argument.indicator, prototype):
+            return True
+    return False
+
+
 def _prepare_alternate_bow_strokes(*tweaks, downbow_first, full):
     if downbow_first:
         if full:
@@ -67,6 +81,12 @@ def _prepare_alternate_bow_strokes(*tweaks, downbow_first, full):
     for indicator in indicators:
         assert isinstance(indicator, abjad.Articulation | abjad.Bundle)
     return indicators
+
+
+def _unbundle_indicator(argument):
+    if isinstance(argument, abjad.Bundle):
+        return argument.indicator
+    return argument
 
 
 def accent(argument) -> list[abjad.Wrapper]:
