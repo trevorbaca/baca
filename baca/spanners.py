@@ -142,6 +142,9 @@ def hairpin(
         assert _piecewise._is_maybe_bundled(start_dynamic, abjad.Dynamic), repr(
             start_dynamic
         )
+        if left_broken is True:
+            message = f"left-broken must begin with hairpin: {descriptor!r}"
+            raise Exception(message)
     if start_hairpin is not None:
         assert _piecewise._is_maybe_bundled(start_hairpin, abjad.StartHairpin), repr(
             start_hairpin
@@ -160,7 +163,6 @@ def hairpin(
             argument,
             start_dynamic,
             left_broken=left_broken,
-            # right_broken=right_broken,
         )
         """
         wrappers_ = _indicators.dynamic(
