@@ -112,13 +112,13 @@ def _attach_indicators(
 def _do_piecewise_command(
     argument,
     *tweaks: _typings.IndexedTweak,
+    attach_stop_hairpin_on_right_broken_final_piece: bool = False,
     bookend: bool | int = False,
     do_not_start_spanner_on_final_piece: bool = False,
     leak_spanner_stop: bool = False,
     left_broken: bool = False,
     pieces: list[list[abjad.Leaf]] | None = None,
-    # TODO: change to right_broken: bool = False
-    right_broken: bool | abjad.StopHairpin = False,
+    right_broken: bool = False,
     specifiers: typing.Sequence = (),
     staff_padding: int | float | None = None,
     tag: abjad.Tag,
@@ -151,8 +151,12 @@ def _do_piecewise_command(
         is_first_piece = i == 0
         is_penultimate_piece = i == piece_count - 2
         is_final_piece = i == piece_count - 1
-        if is_final_piece and isinstance(right_broken, abjad.StopHairpin):
-            specifier = _Specifier(spanner_start=right_broken)
+        if (
+            is_final_piece
+            and right_broken is True
+            and attach_stop_hairpin_on_right_broken_final_piece is True
+        ):
+            specifier = _Specifier(spanner_start=abjad.StopHairpin())
             tag_ = _helpers.function_name(_frame(), n=1)
             tag_ = tag_.append(_tags.RIGHT_BROKEN)
             wrappers_ = _attach_indicators(
@@ -522,18 +526,15 @@ def hairpin(
         descriptor,
         forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
     )
-    # TODO: make right_broken strictly boolean
-    right_broken_: bool | abjad.StopHairpin = False
-    if right_broken is True:
-        right_broken_ = abjad.StopHairpin()
     return _do_piecewise_command(
         (),
         *tweaks,
+        attach_stop_hairpin_on_right_broken_final_piece=True,
         bookend=bookend,
         do_not_start_spanner_on_final_piece=do_not_start_spanner_on_final_piece,
         left_broken=left_broken,
         pieces=argument,
-        right_broken=right_broken_,
+        right_broken=right_broken,
         specifiers=specifiers,
         tag=_helpers.function_name(_frame()),
     )
