@@ -560,6 +560,8 @@ def hairpin(
     assert isinstance(do_not_start_spanner_on_final_piece, bool)
     assert isinstance(left_broken, bool), repr(left_broken)
     assert isinstance(right_broken, bool), repr(right_broken)
+    if left_broken is True:
+        assert descriptor[0] in ("o", "<", ">"), repr(descriptor)
     specifiers = parse_hairpin_descriptor(
         descriptor,
         forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
