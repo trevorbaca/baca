@@ -11,6 +11,7 @@ import abjad
 from . import dynamics as _dynamics
 from . import helpers as _helpers
 from . import indicators as _indicators
+from . import scope as _scope
 from . import tags as _tags
 from . import tweaks as _tweaks
 from . import typings as _typings
@@ -159,7 +160,7 @@ def _iterate_pieces(
     do_not_start_spanner_on_final_piece: bool = False,
     leak_spanner_stop: bool = False,
     left_broken: bool = False,
-    pieces: list[list[abjad.Leaf]] | None = None,
+    pieces: list | None = None,
     right_broken: bool = False,
     specifiers: typing.Sequence = (),
     staff_padding: int | float | None = None,
@@ -167,34 +168,41 @@ def _iterate_pieces(
 ) -> list[abjad.Wrapper]:
     if pieces:
         assert not argument, repr(argument)
+    pieces = pieces or [argument]
+    assert isinstance(tweaks, tuple), repr(tweaks)
+    for tweak in tweaks:
+        assert isinstance(tweak, abjad.Tweak | tuple), repr(tweak)
+    assert pieces is not None
+    assert isinstance(bookend, bool), repr(bookend)
+    assert isinstance(do_not_start_spanner_on_final_piece, bool)
+    assert isinstance(leak_spanner_stop, bool), repr(leak_spanner_stop)
+    assert isinstance(left_broken, bool), repr(left_broken)
+    assert isinstance(pieces, list), repr(pieces)
+    piece_prototype = (list, abjad.LogicalTie, _scope.DynamicScope)
+    contents_prototype = (abjad.Leaf, abjad.LogicalTie, abjad.Tuplet)
+    for piece in pieces:
+        assert isinstance(piece, piece_prototype), repr(piece)
+        assert all(isinstance(_, contents_prototype) for _ in piece), repr(piece)
+    assert isinstance(right_broken, bool), repr(right_broken)
+    assert isinstance(specifiers, list), repr(specifiers)
+    assert all(isinstance(_, _Specifier) for _ in specifiers), repr(specifiers)
+    assert isinstance(staff_padding, int | float | type(None)), repr(staff_padding)
     assert tag is not None, repr(tag)
     cyclic_specifiers = abjad.CyclicTuple(specifiers)
-    assert isinstance(tweaks, tuple), repr(tweaks)
     if staff_padding is not None:
         tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
-    pieces = pieces or [argument]
-    assert pieces is not None
-    piece_count = len(pieces)
-    assert 0 < piece_count, repr(piece_count)
-    assert isinstance(bookend, bool), repr(bookend)
-    """
-    if bookend is False:
-        bookend_pattern = abjad.Pattern()
-    else:
-        assert bookend == -1
-        bookend_pattern = abjad.index([bookend], period=piece_count)
-    """
+    total_pieces = len(pieces)
+    assert 0 < total_pieces, repr(total_pieces)
     just_backstole_right_text = None
     just_bookended_leaf = None
     previous_had_bookend = None
-    total_pieces = len(pieces)
     wrappers = []
     for i, piece in enumerate(pieces):
         start_leaf = abjad.select.leaf(piece, 0)
         stop_leaf = abjad.select.leaf(piece, -1)
         is_first_piece = i == 0
-        is_penultimate_piece = i == piece_count - 2
-        is_final_piece = i == piece_count - 1
+        is_penultimate_piece = i == total_pieces - 2
+        is_final_piece = i == total_pieces - 1
         if (
             is_final_piece
             and right_broken is True
@@ -212,7 +220,6 @@ def _iterate_pieces(
                 total_pieces,
             )
             wrappers.extend(wrappers_)
-        # if bookend_pattern.matches_index(i, piece_count) and 1 < len(piece):
         if bookend is True and i == total_pieces - 1 and 1 < len(piece):
             should_bookend = True
         else:
