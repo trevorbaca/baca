@@ -178,7 +178,7 @@ def _iterate_pieces(
     assert isinstance(leak_spanner_stop, bool), repr(leak_spanner_stop)
     assert isinstance(left_broken, bool), repr(left_broken)
     assert isinstance(pieces, list), repr(pieces)
-    piece_prototype = (list, abjad.LogicalTie, _scope.DynamicScope)
+    piece_prototype = (list, abjad.Container, abjad.LogicalTie, _scope.DynamicScope)
     contents_prototype = (abjad.Leaf, abjad.LogicalTie, abjad.Tuplet)
     for piece in pieces:
         assert isinstance(piece, piece_prototype), repr(piece)
