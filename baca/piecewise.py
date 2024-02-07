@@ -12,6 +12,7 @@ from . import dynamics as _dynamics
 from . import helpers as _helpers
 from . import indicators as _indicators
 from . import scope as _scope
+from . import select as _select
 from . import tags as _tags
 from . import tweaks as _tweaks
 from . import typings as _typings
@@ -561,6 +562,7 @@ def hairpin(
     forbid_al_niente_to_bar_line: bool = False,
     left_broken: bool = False,
     right_broken: bool = False,
+    with_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
     assert isinstance(descriptor, str), repr(descriptor)
     assert isinstance(bookend, bool), repr(bookend)
@@ -575,6 +577,9 @@ def hairpin(
         descriptor,
         forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
     )
+    if with_next_leaf is True:
+        next_leaf = _select.rleaf(argument, -1)
+        argument[-1].append(next_leaf)
     return _iterate_pieces(
         (),
         *tweaks,
