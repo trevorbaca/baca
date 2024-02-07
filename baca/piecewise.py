@@ -21,7 +21,7 @@ from . import typings as _typings
 class _Specifier:
     bookended_spanner_start: abjad.StartTextSpan | abjad.Bundle | None = None
     # TODO: should only be abjad.Dynamic:
-    indicator: abjad.Dynamic | abjad.StopHairpin | None = None
+    indicator: abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin | None = None
     spanner_start: abjad.StartHairpin | abjad.StartTextSpan | abjad.Bundle | None = None
     spanner_stop: abjad.StopHairpin | abjad.StopTextSpan | None = None
 
@@ -38,7 +38,7 @@ class _Specifier:
         if self.indicator is not None:
             unbundled = _indicators._unbundle_indicator(self.indicator)
             # TODO: this should be abjad.Dynamic only:
-            prototype = (abjad.StopHairpin, abjad.Dynamic)
+            prototype = (abjad.StartHairpin, abjad.StopHairpin, abjad.Dynamic)
             assert isinstance(unbundled, prototype), repr(self.indicator)
         if self.spanner_start is not None:
             unbundled = _indicators._unbundle_indicator(self.spanner_start)
@@ -594,15 +594,20 @@ def parse_hairpin_descriptor(
     forbid_al_niente_to_bar_line: bool = False,
 ) -> list[_Specifier]:
     assert isinstance(descriptor, str), repr(descriptor)
-    indicators: list[
-        abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin | abjad.Bundle
-    ] = []
-    specifiers: list[_Specifier] = []
+    indicators = []
+    specifiers = []
+    indicator: (
+        str | abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin | abjad.Bundle
+    )
     for string in descriptor.split():
-        indicator = _dynamics.make_dynamic(
-            string, forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line
-        )
+        if string == "?":
+            indicator = "?"
+        else:
+            indicator = _dynamics.make_dynamic(
+                string, forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line
+            )
         indicators.append(indicator)
+    # TODO: does this duplicate len(indicators) == 1 branch below?
     if len(indicators) == 1:
         indicator = indicators[0]
         if _indicators._is_maybe_bundled(indicator, abjad.StartHairpin):
@@ -623,6 +628,7 @@ def parse_hairpin_descriptor(
         assert isinstance(result, abjad.StartHairpin | abjad.Bundle)
         specifier = _Specifier(spanner_start=result)
         specifiers.append(specifier)
+    # TODO: does this duplicate len(indicators) == 1 branch above?
     if len(indicators) == 1:
         indicator = indicators[0]
         if _indicators._is_maybe_bundled(indicator, abjad.StartHairpin):
@@ -645,6 +651,14 @@ def parse_hairpin_descriptor(
             left, abjad.Dynamic
         ) and _indicators._is_maybe_bundled(right, abjad.Dynamic):
             specifier = _Specifier(indicator=left)
+            specifiers.append(specifier)
+        elif _indicators._is_maybe_bundled(left, abjad.Dynamic) and right == "?":
+            specifier = _Specifier(indicator=left)
+            specifiers.append(specifier)
+        elif left == "?" and _indicators._is_maybe_bundled(
+            right, abjad.StartHairpin | abjad.StopHairpin
+        ):
+            specifier = _Specifier(indicator=right)
             specifiers.append(specifier)
         elif _indicators._is_maybe_bundled(
             left, abjad.Dynamic | abjad.StopHairpin

@@ -360,6 +360,8 @@ def make_dynamic(
             indicator = abjad.bundle(indicator, r"- \tweak to-barline ##t")
     elif string == "!":
         indicator = abjad.StopHairpin()
+    elif string == "?":
+        pass
     elif string == "m":
         indicator = abjad.Dynamic("m", command=r"\baca-m")
     else:

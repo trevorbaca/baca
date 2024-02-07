@@ -207,3 +207,17 @@ def test_multiple_hairpins_04():
     assert specifiers[2] == baca.piecewise._Specifier(
         indicator=abjad.Dynamic("p"),
     )
+
+
+def test_multiple_hairpins_05():
+    specifiers = baca.piecewise.parse_hairpin_descriptor("mf ? o< p")
+    assert len(specifiers) == 3
+    assert specifiers[0] == baca.piecewise._Specifier(
+        indicator=abjad.Dynamic("mf"),
+    )
+    assert specifiers[1] == baca.piecewise._Specifier(
+        indicator=abjad.StartHairpin("o<"),
+    )
+    assert specifiers[2] == baca.piecewise._Specifier(
+        indicator=abjad.Dynamic("p"),
+    )
