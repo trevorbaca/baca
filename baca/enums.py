@@ -22,6 +22,7 @@ class enums(enum.Enum):
 
     FERMATA_MEASURE = enum.auto()
     FERMATA_DURATION = enum.auto()
+    FRAMED_LEAF = enum.auto()
 
     HALF_CLT = enum.auto()
     HIDDEN = enum.auto()

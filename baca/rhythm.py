@@ -33,7 +33,9 @@ _collection_typing = typing.Union[
 
 
 def _evaluate_basic_item(item, denominator, voice_name, tag):
-    if isinstance(item, BeamLeft | BeamRight | InvisibleMusic | RepeatTie | Tie):
+    if isinstance(
+        item, BeamLeft | BeamRight | FramedNote | InvisibleMusic | RepeatTie | Tie
+    ):
         components = _evaluate_basic_item(item.argument, denominator, voice_name, tag)
         if isinstance(item, BeamLeft):
             for leaf in abjad.select.leaves(components):
@@ -43,6 +45,9 @@ def _evaluate_basic_item(item, denominator, voice_name, tag):
             for leaf in abjad.select.leaves(components):
                 stop_beam = abjad.StopBeam()
                 abjad.attach(stop_beam, leaf, tag=tag)
+        elif isinstance(item, FramedNote):
+            for component in components:
+                abjad.attach(_enums.FRAMED_LEAF, component)
         elif isinstance(item, InvisibleMusic):
             rmakers.invisible_music(components, tag=tag)
         elif isinstance(item, RepeatTie):
@@ -160,7 +165,9 @@ def _evaluate_item(
         components.extend(nongrace_leaves)
         result = nongrace_leaves
         capture_original_item = polyphony_container
-    elif isinstance(item, BeamLeft | BeamRight | InvisibleMusic | RepeatTie | Tie):
+    elif isinstance(
+        item, BeamLeft | BeamRight | FramedNote | InvisibleMusic | RepeatTie | Tie
+    ):
         result = _evaluate_item(
             item.argument,
             components,
@@ -178,6 +185,9 @@ def _evaluate_item(
             for leaf in abjad.select.leaves(result):
                 stop_beam = abjad.StopBeam()
                 abjad.attach(stop_beam, leaf, tag=tag)
+        elif isinstance(item, FramedNote):
+            for component in components:
+                abjad.attach(_enums.FRAMED_LEAF, component)
         elif isinstance(item, InvisibleMusic):
             rmakers.invisible_music(result, tag=tag)
         elif isinstance(item, RepeatTie):
@@ -491,6 +501,11 @@ class Feather:
             tag=tag,
         )
         return tuplet
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class FramedNote:
+    argument: typing.Any
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)

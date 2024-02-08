@@ -1603,6 +1603,23 @@ def _style_first_measure(global_skips, section_number):
     )
 
 
+def _style_framed_notes(score):
+    tag = _helpers.function_name(_frame())
+    tag = tag.append(_tags.FRAMED_LEAF)
+    for leaf in abjad.iterate.leaves(score):
+        if abjad.get.indicator(leaf, _enums.FRAMED_LEAF):
+            duration = abjad.get.duration(leaf)
+            leaf.written_duration = abjad.Duration(1, 4)
+            multiplier = 4 * duration
+            leaf.multiplier = multiplier.pair
+            literal = abjad.LilyPondLiteral(r"\once \override Accidental.stencil = ##f")
+            abjad.attach(literal, leaf, tag=tag)
+            literal = abjad.LilyPondLiteral(r"\once \override NoteHead.stencil = ##f")
+            abjad.attach(literal, leaf, tag=tag)
+            literal = abjad.LilyPondLiteral(r"\once \override Stem.thickness = 6")
+            abjad.attach(literal, leaf, tag=tag)
+
+
 def _update_score_one_time(score):
     is_forbidden_to_update = score._is_forbidden_to_update
     score._is_forbidden_to_update = False
@@ -2418,6 +2435,7 @@ def postprocess_score(
         if not do_not_force_nonnatural_accidentals:
             _force_nonnatural_accidentals(score)
         _label_duration_multipliers(score)
+        _style_framed_notes(score)
         _magnify_staves(magnify_staves, score)
         if not doctest:
             _whitespace_leaves(score)
