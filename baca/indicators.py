@@ -17,8 +17,6 @@ from . import tweaks as _tweaks
 from . import typings as _typings
 from .enums import enums as _enums
 
-_should_be_declared_persistent = (abjad.MetricModulation,)
-
 
 def _attach_persistent_indicator(
     leaf: abjad.Leaf,
@@ -31,8 +29,7 @@ def _attach_persistent_indicator(
     tag: abjad.Tag | None = None,
 ) -> abjad.Wrapper:
     unbundled = _unbundle_indicator(indicator)
-    if not isinstance(unbundled, _should_be_declared_persistent):
-        assert unbundled.persistent is True, repr(indicator)
+    assert unbundled.persistent is True, repr(indicator)
     if context is not None:
         assert isinstance(context, str), repr(context)
     assert isinstance(deactivate, bool), repr(deactivate)
@@ -834,12 +831,20 @@ def metronome_mark(
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.select.leaves(argument):
-        wrapper = _attach_persistent_indicator(
-            leaf,
-            indicator_,
-            manifests=manifests,
-            tag=tag,
-        )
+        if isinstance(indicator_, abjad.MetricModulation):
+            wrapper = abjad.attach(
+                indicator_,
+                leaf,
+                tag=tag,
+                wrapper=True,
+            )
+        else:
+            wrapper = _attach_persistent_indicator(
+                leaf,
+                indicator_,
+                manifests=manifests,
+                tag=tag,
+            )
         wrappers.append(wrapper)
     return wrappers
 
