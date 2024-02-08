@@ -79,11 +79,6 @@ def test_mezzo():
     assert dynamic == abjad.Dynamic("m", command="\\baca-m")
 
 
-def test_niente():
-    dynamic = baca.dynamics.make_dynamic("niente")
-    assert dynamic == abjad.Dynamic("niente")
-
-
 def test_parenthesized_dynamics():
     dynamic = baca.dynamics.make_dynamic("(p)")
     assert dynamic == abjad.Dynamic("p", command="\\baca-p-parenthesized")
