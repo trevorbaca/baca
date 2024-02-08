@@ -66,6 +66,8 @@ def _evaluate_basic_item(item, denominator, voice_name, tag):
         components = abjad.makers.make_leaves([pitch_tuple], [chord_duration], tag=tag)
     elif isinstance(item, AfterGrace):
         components = item(denominator, tag)
+    elif isinstance(item, IndependentAfterGrace):
+        components = item(denominator, tag)
     elif isinstance(item, abjad.Tuplet):
         components = [item]
     elif isinstance(item, TremoloContainer):
@@ -132,6 +134,10 @@ def _evaluate_item(
         result = dummy_notes
         capture_original_item = item
     elif isinstance(item, AfterGrace):
+        components_ = item(denominator, tag)
+        components.extend(components_)
+        result = components_
+    elif isinstance(item, IndependentAfterGrace):
         components_ = item(denominator, tag)
         components.extend(components_)
         result = components_
@@ -506,6 +512,38 @@ class Feather:
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class FramedNote:
     argument: typing.Any
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class IndependentAfterGrace:
+    grace_note_numerators: list
+    main_note_numerator: int
+
+    def __post_init__(self):
+        assert isinstance(self.grace_note_numerators, list), repr(
+            self.grace_note_numerators
+        )
+
+    def __call__(self, denominator, tag: abjad.Tag):
+        tag = tag.append(_helpers.function_name(_frame()))
+        voice_name = None
+        main_components = _evaluate_basic_item(
+            self.main_note_numerator,
+            denominator,
+            voice_name,
+            tag,
+        )
+        grace_leaves = []
+        for item in self.grace_note_numerators:
+            components = _evaluate_basic_item(item, denominator, "", tag)
+            grace_leaves.extend(components)
+        if 1 < len(grace_leaves):
+            temporary_voice = abjad.Voice(grace_leaves, name="TemporaryVoice")
+            abjad.beam(grace_leaves)
+            temporary_voice[:] = []
+        iagc = abjad.IndependentAfterGraceContainer(grace_leaves, tag=tag)
+        main_components.append(iagc)
+        return main_components
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -1464,6 +1502,10 @@ def BG(*arguments, **keywords):
 
 def C(*arguments):
     return Container(*arguments)
+
+
+def IAG(*arguments):
+    return IndependentAfterGrace(*arguments)
 
 
 def R(items, numerator):
