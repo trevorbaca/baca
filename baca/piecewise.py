@@ -605,8 +605,8 @@ def parse_hairpin_descriptor(
         str | abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin | abjad.Bundle
     )
     for string in descriptor.split():
-        if string == "?":
-            indicator = "?"
+        if string == "-":
+            indicator = "-"
         else:
             indicator = _dynamics.make_dynamic(
                 string, forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line
@@ -657,10 +657,10 @@ def parse_hairpin_descriptor(
         ) and _indicators._is_maybe_bundled(right, abjad.Dynamic):
             specifier = _Specifier(indicator=left)
             specifiers.append(specifier)
-        elif _indicators._is_maybe_bundled(left, abjad.Dynamic) and right == "?":
+        elif _indicators._is_maybe_bundled(left, abjad.Dynamic) and right == "-":
             specifier = _Specifier(indicator=left)
             specifiers.append(specifier)
-        elif left == "?" and _indicators._is_maybe_bundled(
+        elif left == "-" and _indicators._is_maybe_bundled(
             right, abjad.StartHairpin | abjad.StopHairpin
         ):
             specifier = _Specifier(indicator=right)
