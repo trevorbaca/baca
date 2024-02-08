@@ -428,10 +428,20 @@ def dynamic(
     argument,
     dynamic: str | abjad.Dynamic,
     *tweaks: abjad.Tweak,
+    parent_alignment_x: int | float | None = None,
+    self_alignment_x: int | float | None = None,
     tag: abjad.Tag = abjad.Tag(),
 ) -> list[abjad.Wrapper]:
     wrappers = []
     tag = tag.append(_helpers.function_name(_frame()))
+    if parent_alignment_x is not None:
+        tweaks = tweaks + (
+            abjad.Tweak(rf"- \tweak parent-alignment-X {parent_alignment_x}"),
+        )
+    if self_alignment_x is not None:
+        tweaks = tweaks + (
+            abjad.Tweak(rf"- \tweak self-alignment-X {self_alignment_x}"),
+        )
     for leaf in abjad.select.leaves(argument):
         if isinstance(dynamic, str):
             indicator = _dynamics.make_dynamic(dynamic)
