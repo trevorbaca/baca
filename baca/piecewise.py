@@ -344,7 +344,6 @@ def _iterate_pieces(
 
 def _prepare_text_spanner_arguments(
     items,
-    boxed: bool = False,
     direction: int | None = None,
     *,
     left_broken_text,
@@ -374,12 +373,7 @@ def _prepare_text_spanner_arguments(
             if word in shape_to_style:
                 if current_item:
                     item_ = " ".join(current_item)
-                    if boxed:
-                        string = rf'\baca-boxed-markup "{item_}"'
-                        markup = abjad.Markup(string)
-                        items_.append(markup)
-                    else:
-                        items_.append(item_)
+                    items_.append(item_)
                     current_item = []
                 items_.append(word)
             else:
@@ -387,12 +381,7 @@ def _prepare_text_spanner_arguments(
         if current_item:
             assert all(isinstance(_, str) for _ in current_item), repr(current_item)
             item_ = " ".join(current_item)
-            if boxed:
-                string = rf'\baca-boxed-markup "{item_}"'
-                markup = abjad.Markup(string)
-                items_.append(markup)
-            else:
-                items_.append(item_)
+            items_.append(item_)
         for item in items:
             assert isinstance(item, str | abjad.Markup), repr(item)
         items = items_
@@ -706,7 +695,6 @@ def text(
     items: str | list,
     *tweaks: _typings.IndexedTweak,
     bookend: bool = True,
-    boxed: bool = False,
     direction: int | None = None,
     do_not_start_spanner_on_final_piece: bool = False,
     iterate_argument_when_multiple_specifiers: bool = False,
@@ -724,7 +712,6 @@ def text(
         assert argument, repr(argument)
     specifiers = _prepare_text_spanner_arguments(
         items,
-        boxed=boxed,
         direction=direction,
         left_broken_text=left_broken_text,
         lilypond_id=lilypond_id,
