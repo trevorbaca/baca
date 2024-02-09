@@ -728,6 +728,10 @@ def text(
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
+    if not argument:
+        assert pieces, repr(pieces)
+    if not pieces:
+        assert argument, repr(argument)
     specifiers = _prepare_text_spanner_arguments(
         items,
         boxed=boxed,
