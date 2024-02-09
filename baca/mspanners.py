@@ -8,6 +8,7 @@ import abjad
 
 from . import helpers as _helpers
 from . import piecewise as _piecewise
+from . import spanners as _spanners
 from . import tags as _tags
 from . import typings as _typings
 
@@ -24,17 +25,43 @@ def bow_speed(
 ) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.BOW_SPEED_SPANNER)
-    wrappers = _piecewise.text(
-        argument,
+    lilypond_id = "BowSpeed"
+    specifiers = _piecewise._prepare_text_spanner_arguments(
         items,
-        *tweaks,
-        bookend=bookend,
-        iterate_argument_when_multiple_specifiers=True,
-        left_broken=left_broken,
         left_broken_text=left_broken_text,
-        lilypond_id="BowSpeed",
-        right_broken=right_broken,
-        staff_padding=staff_padding,
+        lilypond_id=lilypond_id,
     )
+    if len(specifiers) == 1:
+        specifier = specifiers[0]
+        wrappers = []
+        wrapper = _spanners._attach_spanner_start(
+            argument,
+            specifier.spanner_start,
+            *tweaks,
+            left_broken=left_broken,
+            staff_padding=staff_padding,
+            # tag=_helpers.function_name(_frame()),
+        )
+        wrappers.append(wrapper)
+        wrapper = _spanners._attach_spanner_stop(
+            argument,
+            specifier.spanner_stop,
+            right_broken=right_broken,
+            # tag=_helpers.function_name(_frame()),
+        )
+        wrappers.append(wrapper)
+    else:
+        wrappers = _piecewise._iterate_pieces(
+            (),
+            *tweaks,
+            bookend=bookend,
+            left_broken=left_broken,
+            pieces=argument,
+            right_broken=right_broken,
+            specifiers=specifiers,
+            staff_padding=staff_padding,
+            # tag=_helpers.function_name(_frame()),
+            tag=abjad.Tag(),
+        )
     _tags.wrappers(wrappers, tag)
     return wrappers

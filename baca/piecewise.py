@@ -13,7 +13,6 @@ from . import helpers as _helpers
 from . import indicators as _indicators
 from . import scope as _scope
 from . import select as _select
-from . import spanners as _spanners
 from . import tags as _tags
 from . import tweaks as _tweaks
 from . import typings as _typings
@@ -51,6 +50,7 @@ class _Specifier:
             prototype = (abjad.StopHairpin, abjad.StopTextSpan)
             assert isinstance(unbundled, prototype), repr(self.spanner_stop)
 
+    # TODO: why ordered this way?
     @property
     def indicators(self) -> list:
         result: list = []
@@ -162,10 +162,12 @@ def _iterate_pieces(
     do_not_start_spanner_on_final_piece: bool = False,
     leak_spanner_stop: bool = False,
     left_broken: bool = False,
+    # TODO: eliminate pieces=None keyword
     pieces: list | None = None,
     right_broken: bool = False,
     specifiers: typing.Sequence = (),
     staff_padding: int | float | None = None,
+    # TODO: clean up tag-handling:
     tag: abjad.Tag,
 ) -> list[abjad.Wrapper]:
     if pieces:
@@ -697,7 +699,6 @@ def text(
     bookend: bool = True,
     direction: int | None = None,
     do_not_start_spanner_on_final_piece: bool = False,
-    iterate_argument_when_multiple_specifiers: bool = False,
     leak_spanner_stop: bool = False,
     left_broken: bool = False,
     left_broken_text: str | None = None,
@@ -716,56 +717,19 @@ def text(
         left_broken_text=left_broken_text,
         lilypond_id=lilypond_id,
     )
-    if iterate_argument_when_multiple_specifiers:
-        assert argument
-        assert not pieces
-        if len(specifiers) == 1:
-            specifier = specifiers[0]
-            wrappers = []
-            wrapper = _spanners._attach_spanner_start(
-                argument,
-                specifier.spanner_start,
-                *tweaks,
-                left_broken=left_broken,
-                staff_padding=staff_padding,
-                tag=_helpers.function_name(_frame()),
-            )
-            wrappers.append(wrapper)
-            wrapper = _spanners._attach_spanner_stop(
-                argument,
-                specifier.spanner_stop,
-                right_broken=right_broken,
-                tag=_helpers.function_name(_frame()),
-            )
-            wrappers.append(wrapper)
-        else:
-            wrappers = _iterate_pieces(
-                (),
-                *tweaks,
-                bookend=bookend,
-                do_not_start_spanner_on_final_piece=do_not_start_spanner_on_final_piece,
-                leak_spanner_stop=leak_spanner_stop,
-                left_broken=left_broken,
-                pieces=argument,
-                right_broken=right_broken,
-                specifiers=specifiers,
-                staff_padding=staff_padding,
-                tag=_helpers.function_name(_frame()),
-            )
-    else:
-        wrappers = _iterate_pieces(
-            argument,
-            *tweaks,
-            bookend=bookend,
-            do_not_start_spanner_on_final_piece=do_not_start_spanner_on_final_piece,
-            leak_spanner_stop=leak_spanner_stop,
-            left_broken=left_broken,
-            pieces=pieces,
-            right_broken=right_broken,
-            specifiers=specifiers,
-            staff_padding=staff_padding,
-            tag=_helpers.function_name(_frame()),
-        )
+    wrappers = _iterate_pieces(
+        argument,
+        *tweaks,
+        bookend=bookend,
+        do_not_start_spanner_on_final_piece=do_not_start_spanner_on_final_piece,
+        leak_spanner_stop=leak_spanner_stop,
+        left_broken=left_broken,
+        pieces=pieces,
+        right_broken=right_broken,
+        specifiers=specifiers,
+        staff_padding=staff_padding,
+        tag=_helpers.function_name(_frame()),
+    )
     return wrappers
 
 
