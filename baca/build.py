@@ -1285,7 +1285,6 @@ def show_annotations(file, *, undo=False):
             baca.tags.MATERIAL_ANNOTATION_SPANNER,
             baca.tags.MOMENT_ANNOTATION_SPANNER,
             baca.tags.PITCH_ANNOTATION_SPANNER,
-            baca.tags.RHYTHM_ANNOTATION_SPANNER,
         )
         return bool(set(tags) & set(tags_))
 
@@ -1319,9 +1318,6 @@ def show_annotations(file, *, undo=False):
     text = text = baca.tags.show_music_annotations(text, messages, undo=undo)
     text = baca.tags.show_tag(
         text, baca.tags.NOT_YET_PITCHED_COLORING, messages, undo=undo
-    )
-    text = baca.tags.show_tag(
-        text, baca.tags.RHYTHM_ANNOTATION_SPANNER, messages, undo=undo
     )
     text = baca.tags.show_tag(text, "spacing", messages, match=_spacing, undo=undo)
     text = baca.tags.show_tag(text, baca.tags.STAGE_NUMBER, messages, undo=undo)

@@ -954,14 +954,18 @@ def rehearsal_mark(
     argument,
     string: str,
     *tweaks: abjad.Tweak,
+    extra_offset: tuple | None = None,
     font_size: int = 10,
     padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     assert isinstance(string, str), repr(string)
     assert isinstance(font_size, int | float), repr(font_size)
     string = rf'\baca-rehearsal-mark-markup "{string}" #{font_size}'
+    if extra_offset is not None:
+        x, y = extra_offset
+        tweaks = tweaks + (abjad.Tweak(rf"- \tweak extra-offset #'({x} . {y})"),)
     if padding is not None:
-        tweaks = tweaks + (abjad.Tweak(rf"\tweak padding {padding}"),)
+        tweaks = tweaks + (abjad.Tweak(rf"- \tweak padding {padding}"),)
     wrappers = []
     for leaf in abjad.select.leaves(argument):
         indicator: abjad.Markup | abjad.Bundle
