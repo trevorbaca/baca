@@ -503,6 +503,7 @@ def bow_speed(
     left_broken: bool = False,
     left_broken_text: str | None = None,
     right_broken: bool = False,
+    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.BOW_SPEED_SPANNER)
@@ -516,6 +517,7 @@ def bow_speed(
         lilypond_id="BowSpeed",
         pieces=argument,
         right_broken=right_broken,
+        staff_padding=staff_padding,
     )
     _tags.wrappers(wrappers, tag)
     return wrappers
