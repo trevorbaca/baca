@@ -181,7 +181,7 @@ def _iterate_pieces(
     assert isinstance(do_not_start_spanner_on_final_piece, bool)
     assert isinstance(leak_spanner_stop, bool), repr(leak_spanner_stop)
     assert isinstance(left_broken, bool), repr(left_broken)
-    assert isinstance(pieces, list), repr(pieces)
+    assert isinstance(pieces, list | _scope.DynamicScope), repr(pieces)
     piece_prototype = (
         list,
         abjad.Container,
@@ -189,10 +189,8 @@ def _iterate_pieces(
         abjad.Note,
         _scope.DynamicScope,
     )
-    # contents_prototype = (abjad.Leaf, abjad.LogicalTie, abjad.Tuplet)
     for piece in pieces:
         assert isinstance(piece, piece_prototype), repr(piece)
-        # assert all(isinstance(_, contents_prototype) for _ in piece), repr(piece)
     assert isinstance(right_broken, bool), repr(right_broken)
     assert isinstance(specifiers, list), repr(specifiers)
     assert all(isinstance(_, _Specifier) for _ in specifiers), repr(specifiers)
