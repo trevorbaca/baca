@@ -792,12 +792,23 @@ def mark(
 
 def markup(
     argument,
+    # TODO: limit to str only:
     markup: str | abjad.Markup,
     *tweaks: abjad.Tweak,
     direction: abjad.Vertical = abjad.UP,
+    parent_alignment_x: int | float | None = None,
+    self_alignment_x: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     assert direction in (abjad.DOWN, abjad.UP), repr(direction)
     tag = _helpers.function_name(_frame())
+    if parent_alignment_x is not None:
+        tweaks = tweaks + (
+            abjad.Tweak(rf"- \tweak parent-alignment-X {parent_alignment_x}"),
+        )
+    if self_alignment_x is not None:
+        tweaks = tweaks + (
+            abjad.Tweak(rf"- \tweak self-alignment-X {self_alignment_x}"),
+        )
     wrappers = []
     for leaf in abjad.select.leaves(argument):
         indicator: abjad.Markup | abjad.Bundle
