@@ -90,6 +90,7 @@ def clb(
         *tweaks,
         left_broken=left_broken,
         staff_padding=staff_padding,
+        # TODO: remove
         tag=tag,
     )
     wrappers.append(wrapper)
@@ -97,9 +98,11 @@ def clb(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
+        # TODO: remove
         tag=tag,
     )
     wrappers.append(wrapper)
+    # TODO: tag wrappers here
     return wrappers
 
 
@@ -129,6 +132,7 @@ def covered(
         *tweaks,
         left_broken=left_broken,
         staff_padding=staff_padding,
+        # TODO: remove
         tag=tag,
     )
     wrappers.append(wrapper)
@@ -136,9 +140,11 @@ def covered(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
+        # TODO: remove
         tag=tag,
     )
     wrappers.append(wrapper)
+    # TODO: tag wrappers here
     return wrappers
 
 
@@ -166,6 +172,7 @@ def damp(
         *tweaks,
         left_broken=left_broken,
         staff_padding=staff_padding,
+        # TODO: remove
         tag=tag,
     )
     wrappers.append(wrapper)
@@ -173,9 +180,11 @@ def damp(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
+        # TODO: remove
         tag=tag,
     )
     wrappers.append(wrapper)
+    # TODO: tag wrappers here
     return wrappers
 
 
@@ -205,6 +214,7 @@ def half_clt(
         *tweaks,
         left_broken=left_broken,
         staff_padding=staff_padding,
+        # TODO: remove
         tag=tag,
     )
     wrappers.append(wrapper)
@@ -212,9 +222,11 @@ def half_clt(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
+        # TODO: remove
         tag=tag,
     )
     wrappers.append(wrapper)
+    # TODO: tag wrappers here
     return wrappers
 
 
@@ -243,6 +255,7 @@ def material_annotation(
         *tweaks,
         left_broken=left_broken,
         staff_padding=staff_padding,
+        # TODO: remove
         tag=tag,
     )
     wrappers.append(wrapper)
@@ -250,9 +263,11 @@ def material_annotation(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
+        # TODO: remove
         tag=tag,
     )
     wrappers.append(wrapper)
+    # TODO: tag wrappers here
     return wrappers
 
 
@@ -280,6 +295,7 @@ def metric_modulation(
         *tweaks,
         left_broken=left_broken,
         staff_padding=staff_padding,
+        # TODO: remove
         tag=tag,
     )
     wrappers.append(wrapper)
@@ -287,9 +303,11 @@ def metric_modulation(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
+        # TODO: remove
         tag=tag,
     )
     wrappers.append(wrapper)
+    # TODO: tag wrappers here
     return wrappers
 
 
@@ -306,6 +324,7 @@ def ottava(
     leaf = abjad.select.leaf(argument, -1)
     wrappers_ = _indicators.ottava(leaf, 0)
     wrappers.extend(wrappers_)
+    # TODO: tag wrappers here
     return wrappers
 
 
@@ -336,6 +355,7 @@ def pizzicato(
         *tweaks,
         left_broken=left_broken,
         staff_padding=staff_padding,
+        # TODO: remove
         tag=tag,
     )
     wrappers.append(wrapper)
@@ -343,9 +363,11 @@ def pizzicato(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
+        # TODO: remove
         tag=tag,
     )
     wrappers.append(wrapper)
+    # TODO: tag wrappers here
     return wrappers
 
 
@@ -374,6 +396,7 @@ def spazzolato(
         *tweaks,
         left_broken=left_broken,
         staff_padding=staff_padding,
+        # TODO: remove
         tag=tag,
     )
     wrappers.append(wrapper)
@@ -381,9 +404,11 @@ def spazzolato(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
+        # TODO: remove
         tag=tag,
     )
     wrappers.append(wrapper)
+    # TODO: tag wrappers here
     return wrappers
 
 
@@ -419,6 +444,7 @@ def string_number(
         *tweaks,
         left_broken=left_broken,
         staff_padding=staff_padding,
+        # TODO: remove
         tag=tag,
     )
     wrappers.append(wrapper)
@@ -426,9 +452,11 @@ def string_number(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
+        # TODO: remove
         tag=tag,
     )
     wrappers.append(wrapper)
+    # TODO: tag wrappers here
     return wrappers
 
 
@@ -457,6 +485,7 @@ def tasto(
         *tweaks,
         left_broken=left_broken,
         staff_padding=staff_padding,
+        # TODO: remove
         tag=tag,
     )
     wrappers.append(wrapper)
@@ -464,9 +493,11 @@ def tasto(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
+        # TODO: remove
         tag=tag,
     )
     wrappers.append(wrapper)
+    # TODO: tag wrappers here
     return wrappers
 
 
@@ -497,6 +528,7 @@ def trill(
         *tweaks,
         left_broken=left_broken,
         staff_padding=staff_padding,
+        # TODO: remove
         tag=tag,
     )
     wrappers.append(wrapper)
@@ -504,9 +536,11 @@ def trill(
         argument,
         stop_trill_span,
         right_broken=right_broken,
+        # TODO: remove
         tag=tag,
     )
     wrappers.append(wrapper)
+    # TODO: tag wrappers here
     return wrappers
 
 
@@ -534,6 +568,7 @@ def xfb(
         *tweaks,
         left_broken=left_broken,
         staff_padding=staff_padding,
+        # TODO: remove
         tag=tag,
     )
     wrappers.append(wrapper)
@@ -541,7 +576,9 @@ def xfb(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
+        # TODO: remove
         tag=tag,
     )
     wrappers.append(wrapper)
+    # TODO: tag wrappers here
     return wrappers

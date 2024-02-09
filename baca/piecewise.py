@@ -167,8 +167,7 @@ def _iterate_pieces(
     right_broken: bool = False,
     specifiers: typing.Sequence = (),
     staff_padding: int | float | None = None,
-    # TODO: clean up tag-handling:
-    tag: abjad.Tag,
+    tag: abjad.Tag | None = None,
 ) -> list[abjad.Wrapper]:
     if pieces:
         assert not argument, repr(argument)
@@ -197,7 +196,8 @@ def _iterate_pieces(
     assert isinstance(specifiers, list), repr(specifiers)
     assert all(isinstance(_, _Specifier) for _ in specifiers), repr(specifiers)
     assert isinstance(staff_padding, int | float | type(None)), repr(staff_padding)
-    assert tag is not None, repr(tag)
+    tag = tag or abjad.Tag()
+    tag = tag.append(_helpers.function_name(_frame()))
     cyclic_specifiers = abjad.CyclicTuple(specifiers)
     if staff_padding is not None:
         tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)

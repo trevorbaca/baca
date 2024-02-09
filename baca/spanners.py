@@ -18,7 +18,6 @@ from . import typings as _typings
 def _attach_spanner_start(
     argument,
     spanner_start,
-    # *tweaks: abjad.Tweak,
     *tweaks: _typings.IndexedTweak,
     direction: abjad.Vertical | None = None,
     left_broken: bool = False,
@@ -40,6 +39,7 @@ def _attach_spanner_start(
         first_leaf,
         spanner_start,
         direction=direction,
+        # TODO: remove
         tag=tag,
     )
 
@@ -61,6 +61,7 @@ def _attach_spanner_stop(
     return _indicators._attach_persistent_indicator(
         final_leaf,
         spanner_stop,
+        # TODO: remove
         tag=tag,
     )
 
@@ -92,6 +93,7 @@ def beam(
             start_beam,
             *tweaks,
             direction=direction,
+            # TODO: remove
             tag=tag,
         )
         wrappers.append(wrapper)
@@ -99,9 +101,11 @@ def beam(
         wrapper = _attach_spanner_stop(
             argument,
             stop_beam,
+            # TODO: remove
             tag=tag,
         )
         wrappers.append(wrapper)
+    # TODO: tag wrappers here
     return wrappers
 
 
@@ -172,6 +176,7 @@ def hairpin(
         wrappers_ = _indicators.dynamic(
             first_leaf,
             start_dynamic,
+            # TODO: remove
             tag=tag,
         )
         wrappers.extend(wrappers_)
@@ -179,6 +184,7 @@ def hairpin(
         wrappers_ = _indicators.dynamic(
             final_leaf,
             stop_dynamic,
+            # TODO: remove
             tag=tag,
         )
         wrappers.extend(wrappers_)
@@ -188,6 +194,7 @@ def hairpin(
             start_hairpin,
             *tweaks,
             left_broken=left_broken,
+            # TODO: remove
             tag=tag,
         )
         wrappers.append(wrapper)
@@ -196,9 +203,11 @@ def hairpin(
             argument,
             stop_hairpin,
             right_broken=right_broken,
+            # TODO: remove
             tag=tag,
         )
         wrappers.append(wrapper)
+    # TODO: tag wrappers here
     return wrappers
 
 
@@ -222,6 +231,7 @@ def slur(
             argument,
             start_slur_,
             *tweaks,
+            # TODO: remove
             tag=tag,
         )
         wrappers.append(wrapper)
@@ -229,9 +239,11 @@ def slur(
         wrapper = _attach_spanner_stop(
             argument,
             stop_slur_,
+            # TODO: remove
             tag=tag,
         )
         wrappers.append(wrapper)
+    # TODO: tag wrappers here
     return wrappers
 
 
@@ -250,6 +262,7 @@ def sustain_pedal(
             argument,
             start_piano_pedal,
             *tweaks,
+            # TODO: remove
             tag=tag,
         )
         wrappers.append(wrapper)
@@ -257,7 +270,9 @@ def sustain_pedal(
         wrapper = _attach_spanner_stop(
             argument,
             stop_piano_pedal,
+            # TODO: remove
             tag=tag,
         )
         wrappers.append(wrapper)
+    # TODO: tag wrappers here
     return wrappers
