@@ -503,6 +503,7 @@ def bow_speed(
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
+    assert argument == (), repr(argument)
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.BOW_SPEED_SPANNER)
     wrappers = text(
@@ -530,6 +531,7 @@ def circle_bow(
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
+    assert pieces is None, repr(pieces)
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.CIRCLE_BOW_SPANNER)
     if qualifier is None:
@@ -693,6 +695,7 @@ def scp(
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
+    assert argument == (), repr(argument)
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.SCP_SPANNER)
     wrappers = text(
@@ -764,6 +767,7 @@ def vibrato(
     pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
+    assert argument == (), repr(argument)
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.VIBRATO_SPANNER)
     wrappers = text(
