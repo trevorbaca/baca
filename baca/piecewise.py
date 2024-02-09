@@ -509,36 +509,6 @@ def _prepare_text_spanner_arguments(
     return specifiers
 
 
-def bow_speed(
-    argument,
-    items: str | list,
-    *tweaks: _typings.IndexedTweak,
-    bookend: bool = False,
-    left_broken: bool = False,
-    left_broken_text: str | None = None,
-    right_broken: bool = False,
-    staff_padding: int | float | None = None,
-) -> list[abjad.Wrapper]:
-    tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.BOW_SPEED_SPANNER)
-    wrappers = text(
-        # (),
-        argument,
-        items,
-        *tweaks,
-        bookend=bookend,
-        iterate_argument_when_multiple_specifiers=True,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id="BowSpeed",
-        # pieces=argument,
-        right_broken=right_broken,
-        staff_padding=staff_padding,
-    )
-    _tags.wrappers(wrappers, tag)
-    return wrappers
-
-
 def circle_bow(
     argument,
     *tweaks: _typings.IndexedTweak,

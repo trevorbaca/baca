@@ -38,9 +38,9 @@ def function_name(frame, *, n=None):
     parts.reverse()
     if parts[0] == "baca":
         parts.pop()
-    modules = ("array", "build", "dynamics", "math", "override", "path", "piecewise")
-    modules += ("score", "section", "select", "sequence", "spanners", "treat")
-    modules += ("typings",)
+    modules = ("array", "build", "dynamics", "math", "mspanners", "override", "path")
+    modules += ("piecewise", "score", "section", "select", "sequence", "spanners")
+    modules += ("treat", "typings")
     if file_name in modules:
         parts.append(file_name)
     if "self" in frame.f_locals:
