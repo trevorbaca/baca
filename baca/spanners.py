@@ -22,13 +22,15 @@ def _attach_spanner_start(
     direction: abjad.Vertical | None = None,
     left_broken: bool = False,
     staff_padding: int | float | None = None,
-    tag: abjad.Tag = abjad.Tag(),
+    # TODO: remove tag=None keyword
+    tag: abjad.Tag | None = None,
 ) -> abjad.Wrapper:
     unbundled_indicator = _indicators._unbundle_indicator(spanner_start)
     assert unbundled_indicator.spanner_start is True
     if staff_padding is not None:
         tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
     spanner_start = _tweaks.bundle_tweaks(spanner_start, tweaks)
+    tag = tag or abjad.Tag()
     tag = tag.append(_helpers.function_name(_frame()))
     # TODO: maybe move into _indicators._attach_persistent_indicator()?
     tag = tag.append(_tags.SPANNER_START)
@@ -39,7 +41,6 @@ def _attach_spanner_start(
         first_leaf,
         spanner_start,
         direction=direction,
-        # TODO: remove
         tag=tag,
     )
 
@@ -49,11 +50,13 @@ def _attach_spanner_stop(
     spanner_stop,
     *,
     right_broken: bool = False,
-    tag: abjad.Tag = abjad.Tag(),
+    # TODO: remove tag=None keyword
+    tag: abjad.Tag | None = None,
 ) -> abjad.Wrapper:
     assert spanner_stop.spanner_stop is True, repr(spanner_stop)
-    tag = tag.append(_helpers.function_name(_frame()))
     # TODO: maybe move into _indicators._attach_persistent_indicator()?
+    tag = tag or abjad.Tag()
+    tag = tag.append(_helpers.function_name(_frame()))
     tag = tag.append(_tags.SPANNER_STOP)
     if right_broken:
         tag = tag.append(_tags.RIGHT_BROKEN)
@@ -61,7 +64,6 @@ def _attach_spanner_stop(
     return _indicators._attach_persistent_indicator(
         final_leaf,
         spanner_stop,
-        # TODO: remove
         tag=tag,
     )
 
@@ -85,7 +87,6 @@ def beam(
     for leaf in abjad.iterate.leaves(argument, grace=False):
         abjad.detach(abjad.StartBeam, leaf)
         abjad.detach(abjad.StopBeam, leaf)
-    tag = _helpers.function_name(_frame())
     wrappers = []
     if start_beam is not None:
         wrapper = _attach_spanner_start(
@@ -93,19 +94,16 @@ def beam(
             start_beam,
             *tweaks,
             direction=direction,
-            # TODO: remove
-            tag=tag,
         )
         wrappers.append(wrapper)
     if stop_beam is not None:
         wrapper = _attach_spanner_stop(
             argument,
             stop_beam,
-            # TODO: remove
-            tag=tag,
         )
         wrappers.append(wrapper)
-    # TODO: tag wrappers here
+    tag = _helpers.function_name(_frame())
+    _tags.wrappers(wrappers, tag)
     return wrappers
 
 

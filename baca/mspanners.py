@@ -40,14 +40,12 @@ def bow_speed(
             *tweaks,
             left_broken=left_broken,
             staff_padding=staff_padding,
-            # tag=_helpers.function_name(_frame()),
         )
         wrappers.append(wrapper)
         wrapper = _spanners._attach_spanner_stop(
             argument,
             specifier.spanner_stop,
             right_broken=right_broken,
-            # tag=_helpers.function_name(_frame()),
         )
         wrappers.append(wrapper)
     else:
@@ -60,8 +58,6 @@ def bow_speed(
             right_broken=right_broken,
             specifiers=specifiers,
             staff_padding=staff_padding,
-            # tag=_helpers.function_name(_frame()),
-            tag=abjad.Tag(),
         )
     _tags.wrappers(wrappers, tag)
     return wrappers
