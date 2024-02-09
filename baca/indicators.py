@@ -1121,11 +1121,15 @@ def stem_tremolo(argument, *, tremolo_flags: int = 32) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def stop_on_string(argument) -> list[abjad.Wrapper]:
+def stop_on_string(
+    argument,
+    *tweaks: abjad.Tweak,
+) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
         indicator = abjad.Articulation("baca-stop-on-string")
+        indicator = _tweaks.bundle_tweaks(indicator, tweaks)
         wrapper = abjad.attach(
             indicator,
             leaf,

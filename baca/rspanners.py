@@ -78,8 +78,6 @@ def clb(
         raise Exception(string_number)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         f"{markup} =|",
-        boxed=False,
-        direction=None,
         left_broken_text=r"\baca-left-broken-clb-markup",
         lilypond_id="CLB",
     )
@@ -117,8 +115,6 @@ def covered(
     argument = _spanners._with_next_nonobgc_leaf(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         items,
-        boxed=False,
-        direction=None,
         left_broken_text=left_broken_text,
         lilypond_id="Covered",
     )
@@ -156,8 +152,6 @@ def damp(
     argument = _spanners._with_next_nonobgc_leaf(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         r"\baca-damp-markup =|",
-        boxed=False,
-        direction=None,
         left_broken_text=r"\baca-left-broken-damp-markup",
         lilypond_id="Damp",
     )
@@ -197,8 +191,6 @@ def half_clt(
     argument = _spanners._with_next_nonobgc_leaf(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         items,
-        boxed=False,
-        direction=None,
         left_broken_text=left_broken_text,
         lilypond_id="HalfCLT",
     )
@@ -237,8 +229,6 @@ def material_annotation(
     argument = _spanners._with_next_nonobgc_leaf(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         items,
-        boxed=False,
-        direction=None,
         left_broken_text=None,
         lilypond_id="MaterialAnnotation",
     )
@@ -276,8 +266,6 @@ def metric_modulation(
     argument = _spanners._with_next_nonobgc_leaf(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         "MM =|",
-        boxed=False,
-        direction=None,
         left_broken_text=None,
         lilypond_id="MetricModulation",
     )
@@ -334,8 +322,6 @@ def pizzicato(
         argument = _spanners._with_next_nonobgc_leaf(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         items,
-        boxed=False,
-        direction=None,
         left_broken_text=r"\baca-left-broken-pizz-markup",
         lilypond_id="Pizzicato",
     )
@@ -374,8 +360,6 @@ def spazzolato(
     argument = _spanners._with_next_nonobgc_leaf(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
         items,
-        boxed=False,
-        direction=None,
         left_broken_text=r"\baca-left-broken-spazz-markup",
         lilypond_id="Spazzolato",
     )
@@ -451,15 +435,14 @@ def string_number(
 def tasto(
     argument,
     *tweaks: abjad.Tweak,
+    items: str = "T =|",
     left_broken: bool = False,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners._with_next_nonobgc_leaf(argument)
     specifiers = _piecewise._prepare_text_spanner_arguments(
-        "T =|",
-        boxed=False,
-        direction=None,
+        items,
         left_broken_text=r"\baca-left-broken-t-markup",
         lilypond_id="SCP",
     )
