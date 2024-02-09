@@ -169,6 +169,8 @@ def _iterate_pieces(
 ) -> list[abjad.Wrapper]:
     if pieces:
         assert not argument, repr(argument)
+    if argument:
+        assert not pieces, repr(pieces)
     pieces = pieces or [argument]
     assert isinstance(tweaks, tuple), repr(tweaks)
     for tweak in tweaks:
