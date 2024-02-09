@@ -502,21 +502,19 @@ def bow_speed(
     bookend: bool = False,
     left_broken: bool = False,
     left_broken_text: str | None = None,
-    pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
-    assert argument == (), repr(argument)
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.BOW_SPEED_SPANNER)
     wrappers = text(
-        argument,
+        (),
         items,
         *tweaks,
         bookend=bookend,
         left_broken=left_broken,
         left_broken_text=left_broken_text,
         lilypond_id="BowSpeed",
-        pieces=pieces,
+        pieces=argument,
         right_broken=right_broken,
     )
     _tags.wrappers(wrappers, tag)
@@ -528,12 +526,10 @@ def circle_bow(
     *tweaks: _typings.IndexedTweak,
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-circle-bowing-markup",
-    pieces: list[list[abjad.Leaf]] | None = None,
     qualifier: str | None = None,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    assert pieces is None, repr(pieces)
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.CIRCLE_BOW_SPANNER)
     if qualifier is None:
@@ -542,14 +538,14 @@ def circle_bow(
         assert isinstance(qualifier, str), repr(qualifier)
         string = rf"\baca-circle-{qualifier}-markup =|"
     wrappers = text(
-        argument,
+        (),
         string,
         *tweaks,
         bookend=False,
         left_broken=left_broken,
         left_broken_text=left_broken_text,
         lilypond_id="CircleBow",
-        pieces=pieces,
+        pieces=[argument],
         right_broken=right_broken,
         staff_padding=staff_padding,
     )
@@ -701,7 +697,7 @@ def scp(
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.SCP_SPANNER)
     wrappers = text(
-        argument,
+        (),
         items,
         *tweaks,
         bookend=bookend,
@@ -773,7 +769,7 @@ def vibrato(
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.VIBRATO_SPANNER)
     wrappers = text(
-        argument,
+        (),
         items,
         *tweaks,
         bookend=bookend,
