@@ -12,12 +12,14 @@ from . import piecewise as _piecewise
 from . import select as _select
 from . import tags as _tags
 from . import tweaks as _tweaks
+from . import typings as _typings
 
 
 def _attach_spanner_start(
     argument,
     spanner_start,
-    *tweaks: abjad.Tweak,
+    # *tweaks: abjad.Tweak,
+    *tweaks: _typings.IndexedTweak,
     direction: abjad.Vertical | None = None,
     left_broken: bool = False,
     staff_padding: int | float | None = None,

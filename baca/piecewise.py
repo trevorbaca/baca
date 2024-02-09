@@ -13,6 +13,7 @@ from . import helpers as _helpers
 from . import indicators as _indicators
 from . import scope as _scope
 from . import select as _select
+from . import spanners as _spanners
 from . import tags as _tags
 from . import tweaks as _tweaks
 from . import typings as _typings
@@ -181,11 +182,17 @@ def _iterate_pieces(
     assert isinstance(leak_spanner_stop, bool), repr(leak_spanner_stop)
     assert isinstance(left_broken, bool), repr(left_broken)
     assert isinstance(pieces, list), repr(pieces)
-    piece_prototype = (list, abjad.Container, abjad.LogicalTie, _scope.DynamicScope)
-    contents_prototype = (abjad.Leaf, abjad.LogicalTie, abjad.Tuplet)
+    piece_prototype = (
+        list,
+        abjad.Container,
+        abjad.LogicalTie,
+        abjad.Note,
+        _scope.DynamicScope,
+    )
+    # contents_prototype = (abjad.Leaf, abjad.LogicalTie, abjad.Tuplet)
     for piece in pieces:
         assert isinstance(piece, piece_prototype), repr(piece)
-        assert all(isinstance(_, contents_prototype) for _ in piece), repr(piece)
+        # assert all(isinstance(_, contents_prototype) for _ in piece), repr(piece)
     assert isinstance(right_broken, bool), repr(right_broken)
     assert isinstance(specifiers, list), repr(specifiers)
     assert all(isinstance(_, _Specifier) for _ in specifiers), repr(specifiers)
@@ -223,7 +230,13 @@ def _iterate_pieces(
                 total_pieces,
             )
             wrappers.extend(wrappers_)
-        if bookend is True and i == total_pieces - 1 and 1 < len(piece):
+        # if bookend is True and i == total_pieces - 1 and 1 < len(piece):
+        if (
+            bookend is True
+            and i == total_pieces - 1
+            and not isinstance(piece, abjad.Leaf)
+            and 1 < len(piece)
+        ):
             should_bookend = True
         else:
             should_bookend = False
@@ -247,7 +260,10 @@ def _iterate_pieces(
             )
         if (
             is_penultimate_piece
-            and (len(pieces[-1]) == 1 or do_not_start_spanner_on_final_piece is True)
+            and (
+                (isinstance(pieces[-1], abjad.Leaf) or len(pieces[-1]) == 1)
+                or do_not_start_spanner_on_final_piece is True
+            )
             and _indicators._is_maybe_bundled(
                 next_bundle.spanner_start, abjad.StartTextSpan
             )
@@ -508,14 +524,16 @@ def bow_speed(
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.BOW_SPEED_SPANNER)
     wrappers = text(
-        (),
+        # (),
+        argument,
         items,
         *tweaks,
         bookend=bookend,
+        iterate_argument_when_multiple_specifiers=True,
         left_broken=left_broken,
         left_broken_text=left_broken_text,
         lilypond_id="BowSpeed",
-        pieces=argument,
+        # pieces=argument,
         right_broken=right_broken,
         staff_padding=staff_padding,
     )
@@ -723,6 +741,7 @@ def text(
     boxed: bool = False,
     direction: int | None = None,
     do_not_start_spanner_on_final_piece: bool = False,
+    iterate_argument_when_multiple_specifiers: bool = False,
     leak_spanner_stop: bool = False,
     left_broken: bool = False,
     left_broken_text: str | None = None,
@@ -742,19 +761,57 @@ def text(
         left_broken_text=left_broken_text,
         lilypond_id=lilypond_id,
     )
-    return _iterate_pieces(
-        argument,
-        *tweaks,
-        bookend=bookend,
-        do_not_start_spanner_on_final_piece=do_not_start_spanner_on_final_piece,
-        leak_spanner_stop=leak_spanner_stop,
-        left_broken=left_broken,
-        pieces=pieces,
-        right_broken=right_broken,
-        specifiers=specifiers,
-        staff_padding=staff_padding,
-        tag=_helpers.function_name(_frame()),
-    )
+    if iterate_argument_when_multiple_specifiers:
+        assert argument
+        assert not pieces
+        if len(specifiers) == 1:
+            specifier = specifiers[0]
+            wrappers = []
+            wrapper = _spanners._attach_spanner_start(
+                argument,
+                specifier.spanner_start,
+                *tweaks,
+                left_broken=left_broken,
+                staff_padding=staff_padding,
+                tag=_helpers.function_name(_frame()),
+            )
+            wrappers.append(wrapper)
+            wrapper = _spanners._attach_spanner_stop(
+                argument,
+                specifier.spanner_stop,
+                right_broken=right_broken,
+                tag=_helpers.function_name(_frame()),
+            )
+            wrappers.append(wrapper)
+        else:
+            wrappers = _iterate_pieces(
+                (),
+                *tweaks,
+                bookend=bookend,
+                do_not_start_spanner_on_final_piece=do_not_start_spanner_on_final_piece,
+                leak_spanner_stop=leak_spanner_stop,
+                left_broken=left_broken,
+                pieces=argument,
+                right_broken=right_broken,
+                specifiers=specifiers,
+                staff_padding=staff_padding,
+                tag=_helpers.function_name(_frame()),
+            )
+    else:
+        wrappers = _iterate_pieces(
+            argument,
+            *tweaks,
+            bookend=bookend,
+            do_not_start_spanner_on_final_piece=do_not_start_spanner_on_final_piece,
+            leak_spanner_stop=leak_spanner_stop,
+            left_broken=left_broken,
+            pieces=pieces,
+            right_broken=right_broken,
+            specifiers=specifiers,
+            staff_padding=staff_padding,
+            tag=_helpers.function_name(_frame()),
+        )
+    return wrappers
 
 
 def vibrato(
