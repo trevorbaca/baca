@@ -35,9 +35,8 @@ def _attach_persistent_indicator(
     assert isinstance(deactivate, bool), repr(deactivate)
     manifests = manifests or {}
     assert isinstance(manifests, dict), repr(manifests)
-    tag_ = _helpers.function_name(_frame())
-    if tag is not None:
-        tag_ = tag_.append(tag)
+    tag = tag or abjad.Tag()
+    tag = tag.append(_helpers.function_name(_frame()))
     reapplied = _treat.remove_reapplied_wrappers(leaf, indicator)
     wrapper = abjad.attach(
         indicator,
@@ -45,10 +44,11 @@ def _attach_persistent_indicator(
         context=context,
         deactivate=deactivate,
         direction=direction,
-        tag=tag_,
+        tag=tag,
         wrapper=True,
     )
     if _treat.compare_persistent_indicators(indicator, reapplied):
+        # TODO: catch returned wrapper
         _treat.treat_persistent_wrapper(manifests, wrapper, "redundant")
     return wrapper
 

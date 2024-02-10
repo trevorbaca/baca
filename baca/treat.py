@@ -418,6 +418,7 @@ def remove_reapplied_wrappers(leaf, item):
         return reapplied_indicators[0]
 
 
+# TODO: return wrapper
 def treat_persistent_wrapper(manifests, wrapper, status):
     assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
     assert bool(wrapper.unbundle_indicator().persistent), repr(wrapper)
