@@ -424,15 +424,16 @@ def remove_reapplied_wrappers(leaf, item):
         return reapplied_indicators[0]
 
 
-# TODO: return wrapper
-def treat_persistent_wrapper(manifests: dict, wrapper: abjad.Wrapper, status: str):
+def treat_persistent_wrapper(
+    manifests: dict, wrapper: abjad.Wrapper, status: str
+) -> abjad.Wrapper | None:
     assert isinstance(manifests, dict), repr(manifests)
     assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
     assert isinstance(status, str), repr(status)
     unbundled_indicator = wrapper.unbundle_indicator()
     unbundled_indicator.persistent is True, repr(wrapper)
     if getattr(unbundled_indicator, "spanner_stop", False) is True:
-        return
+        return None
     prototype = (
         abjad.Glissando,
         abjad.RepeatTie,
@@ -446,7 +447,7 @@ def treat_persistent_wrapper(manifests: dict, wrapper: abjad.Wrapper, status: st
         abjad.VoiceNumber,
     )
     if isinstance(unbundled_indicator, prototype):
-        return
+        return None
     context = wrapper._find_correct_effective_context(
         wrapper.component, wrapper.context
     )
@@ -478,7 +479,6 @@ def treat_persistent_wrapper(manifests: dict, wrapper: abjad.Wrapper, status: st
             overwrite=True,
             tag=abjad.Tag(string),
         )
-        # TODO: either modify wrapper (ie, do not detach) or else return new wrapper
         abjad.detach(wrapper, leaf)
         wrapper = abjad.attach(
             bundle,
@@ -491,45 +491,46 @@ def treat_persistent_wrapper(manifests: dict, wrapper: abjad.Wrapper, status: st
             wrapper=True,
         )
         _set_status_tag(wrapper, status)
-        # TODO: return wrapper, or modify wrapper above instead of detach
-        return
-    _attach_color_literal(wrapper, status, existing_deactivate=wrapper.deactivate)
-    _attach_latent_indicator_alert(
-        manifests, wrapper, status, existing_deactivate=wrapper.deactivate
-    )
-    _attach_color_cancelation_literal(
-        wrapper,
-        status,
-        existing_deactivate=wrapper.deactivate,
-        existing_tag=existing_tag,
-    )
-    if isinstance(unbundled_indicator, abjad.Clef):
-        string = rf"\set {context.lilypond_type}.forceClef = ##t"
-        literal = abjad.LilyPondLiteral(string, site="before")
-        wrapper_ = abjad.attach(
-            literal,
-            wrapper.component,
-            tag=wrapper.tag.append(_helpers.function_name(_frame(), n=2)),
-            wrapper=True,
+        return wrapper
+    else:
+        _attach_color_literal(wrapper, status, existing_deactivate=wrapper.deactivate)
+        _attach_latent_indicator_alert(
+            manifests, wrapper, status, existing_deactivate=wrapper.deactivate
         )
-        _set_status_tag(wrapper_, status, stem="CLEF")
-    _set_status_tag(wrapper, status)
-    _attach_color_redraw_literal(
-        wrapper,
-        status,
-        existing_deactivate=wrapper.deactivate,
-        existing_tag=existing_tag,
-    )
-    if isinstance(
-        unbundled_indicator, abjad.Instrument | abjad.ShortInstrumentName
-    ) and not getattr(unbundled_indicator, "hide", False):
-        strings = unbundled_indicator._get_lilypond_format(context=context)
-        literal = abjad.LilyPondLiteral(strings, site="absolute_after")
-        stem = _to_indicator_stem(unbundled_indicator)
-        wrapper_ = abjad.attach(
-            literal,
-            leaf,
-            tag=existing_tag.append(_helpers.function_name(_frame(), n=3)),
-            wrapper=True,
+        _attach_color_cancelation_literal(
+            wrapper,
+            status,
+            existing_deactivate=wrapper.deactivate,
+            existing_tag=existing_tag,
         )
-        _set_status_tag(wrapper_, status, redraw=True, stem=stem)
+        if isinstance(unbundled_indicator, abjad.Clef):
+            string = rf"\set {context.lilypond_type}.forceClef = ##t"
+            literal = abjad.LilyPondLiteral(string, site="before")
+            wrapper_ = abjad.attach(
+                literal,
+                wrapper.component,
+                tag=wrapper.tag.append(_helpers.function_name(_frame(), n=2)),
+                wrapper=True,
+            )
+            _set_status_tag(wrapper_, status, stem="CLEF")
+        _set_status_tag(wrapper, status)
+        _attach_color_redraw_literal(
+            wrapper,
+            status,
+            existing_deactivate=wrapper.deactivate,
+            existing_tag=existing_tag,
+        )
+        if isinstance(
+            unbundled_indicator, abjad.Instrument | abjad.ShortInstrumentName
+        ) and not getattr(unbundled_indicator, "hide", False):
+            strings = unbundled_indicator._get_lilypond_format(context=context)
+            literal = abjad.LilyPondLiteral(strings, site="absolute_after")
+            stem = _to_indicator_stem(unbundled_indicator)
+            wrapper_ = abjad.attach(
+                literal,
+                leaf,
+                tag=existing_tag.append(_helpers.function_name(_frame(), n=3)),
+                wrapper=True,
+            )
+            _set_status_tag(wrapper_, status, redraw=True, stem=stem)
+        return None

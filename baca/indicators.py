@@ -48,8 +48,10 @@ def _attach_persistent_indicator(
         wrapper=True,
     )
     if _treat.compare_persistent_indicators(indicator, reapplied):
-        # TODO: catch returned wrapper
-        _treat.treat_persistent_wrapper(manifests, wrapper, "redundant")
+        result = _treat.treat_persistent_wrapper(manifests, wrapper, "redundant")
+        if result is not None:
+            assert isinstance(result, abjad.Wrapper)
+            wrapper = result
     return wrapper
 
 
