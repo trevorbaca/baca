@@ -1998,7 +1998,7 @@ def color_repeat_pitch_classes(score):
 
 def extend_beams(score):
     for leaf in abjad.iterate.leaves(score):
-        if abjad.get.indicator(leaf, _enums.RIGHT_BROKEN_BEAM):
+        if abjad.get.indicator(leaf, _enums.RIGHT_OPEN_BEAM):
             _extend_beam(leaf)
 
 

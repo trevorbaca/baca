@@ -45,7 +45,7 @@ class enums(enum.Enum):
     REMOVE_ALL_EMPTY_STAVES = enum.auto()
     REPEAT_PITCH_CLASS = enum.auto()
     REST_VOICE = enum.auto()
-    RIGHT_BROKEN_BEAM = enum.auto()
+    RIGHT_OPEN_BEAM = enum.auto()
 
     SCP = enum.auto()
     SKIP = enum.auto()

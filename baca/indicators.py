@@ -524,7 +524,7 @@ def extend_beam(argument) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
-        indicator = _enums.RIGHT_BROKEN_BEAM
+        indicator = _enums.RIGHT_OPEN_BEAM
         wrapper = abjad.attach(
             indicator,
             leaf,
