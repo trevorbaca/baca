@@ -230,7 +230,6 @@ def _iterate_pieces(
                 total_pieces,
             )
             wrappers.extend(wrappers_)
-        # if bookend is True and i == total_pieces - 1 and 1 < len(piece):
         if (
             bookend is True
             and i == total_pieces - 1
@@ -662,7 +661,7 @@ def parse_hairpin_descriptor(
 
 def scp(
     argument,
-    items: str | list,
+    items: str,
     *tweaks: _typings.IndexedTweak,
     bookend: bool = False,
     do_not_start_spanner_on_final_piece: bool = False,
@@ -694,7 +693,7 @@ def scp(
 
 def text(
     argument,
-    items: str | list,
+    items: str,
     *tweaks: _typings.IndexedTweak,
     bookend: bool = True,
     direction: int | None = None,
@@ -711,6 +710,7 @@ def text(
         assert pieces, repr(pieces)
     if not pieces:
         assert argument, repr(argument)
+    assert isinstance(items, str), repr(items)
     specifiers = _prepare_text_spanner_arguments(
         items,
         direction=direction,
@@ -735,7 +735,7 @@ def text(
 
 def vibrato(
     argument,
-    items: str | list,
+    items: str,
     *tweaks: _typings.IndexedTweak,
     bookend: bool = False,
     left_broken: bool = False,
