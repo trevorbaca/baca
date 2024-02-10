@@ -57,6 +57,5 @@ def bow_speed(
             specifiers=specifiers,
             staff_padding=staff_padding,
         )
-    tag = _helpers.function_name(_frame())
-    _tags.wrappers(wrappers, tag)
+    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers

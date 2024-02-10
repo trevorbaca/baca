@@ -167,7 +167,6 @@ def _iterate_pieces(
     right_broken: bool = False,
     specifiers: typing.Sequence = (),
     staff_padding: int | float | None = None,
-    tag: abjad.Tag | None = None,
 ) -> list[abjad.Wrapper]:
     if pieces:
         assert not argument, repr(argument)
@@ -196,8 +195,6 @@ def _iterate_pieces(
     assert isinstance(specifiers, list), repr(specifiers)
     assert all(isinstance(_, _Specifier) for _ in specifiers), repr(specifiers)
     assert isinstance(staff_padding, int | float | type(None)), repr(staff_padding)
-    tag = tag or abjad.Tag()
-    tag = tag.append(_helpers.function_name(_frame()))
     cyclic_specifiers = abjad.CyclicTuple(specifiers)
     if staff_padding is not None:
         tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
@@ -225,7 +222,7 @@ def _iterate_pieces(
                 stop_leaf,
                 specifier,
                 i,
-                tag.append(tag_),
+                tag_,
                 tweaks,
                 total_pieces,
             )
@@ -293,7 +290,7 @@ def _iterate_pieces(
             start_leaf,
             specifier,
             i,
-            tag.append(tag_),
+            tag_,
             tweaks,
             total_pieces,
             just_bookended_leaf=just_bookended_leaf,
@@ -311,7 +308,7 @@ def _iterate_pieces(
                 stop_leaf,
                 next_bundle,
                 i,
-                tag.append(tag_),
+                tag_,
                 tweaks,
                 total_pieces,
             )
@@ -334,7 +331,7 @@ def _iterate_pieces(
                 stop_leaf,
                 specifier,
                 i,
-                tag.append(tag_),
+                tag_,
                 tweaks,
                 total_pieces,
             )
@@ -400,7 +397,7 @@ def hairpin(
     if with_next_leaf is True:
         next_leaf = _select.rleaf(argument, -1)
         argument[-1].append(next_leaf)
-    return _iterate_pieces(
+    wrappers = _iterate_pieces(
         (),
         *tweaks,
         attach_stop_hairpin_on_right_broken_final_piece=True,
@@ -410,8 +407,9 @@ def hairpin(
         pieces=argument,
         right_broken=right_broken,
         specifiers=specifiers,
-        tag=_helpers.function_name(_frame()),
     )
+    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
+    return wrappers
 
 
 def parse_hairpin_descriptor(
@@ -717,8 +715,8 @@ def text(
         right_broken=right_broken,
         specifiers=specifiers,
         staff_padding=staff_padding,
-        tag=_helpers.function_name(_frame()),
     )
+    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 
