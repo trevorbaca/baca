@@ -796,13 +796,13 @@ def mark(
 
 def markup(
     argument,
-    # TODO: limit to str only:
-    markup: str | abjad.Markup,
+    markup: str,
     *tweaks: abjad.Tweak,
     direction: abjad.Vertical = abjad.UP,
     parent_alignment_x: int | float | None = None,
     self_alignment_x: int | float | None = None,
 ) -> list[abjad.Wrapper]:
+    assert isinstance(markup, str), repr(markup)
     assert direction in (abjad.DOWN, abjad.UP), repr(direction)
     tag = _helpers.function_name(_frame())
     if parent_alignment_x is not None:

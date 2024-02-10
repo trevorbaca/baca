@@ -35,10 +35,6 @@ def _attach_spanner_start(
         direction=direction,
     )
     tag = _helpers.function_name(_frame())
-    """
-    # TODO: maybe move into _indicators._attach_persistent_indicator()?
-    tag = tag.append(_tags.SPANNER_START)
-    """
     if left_broken:
         tag = tag.append(_tags.LEFT_BROKEN)
     _tags.wrappers([wrapper], tag)
@@ -58,10 +54,6 @@ def _attach_spanner_stop(
         spanner_stop,
     )
     tag = _helpers.function_name(_frame())
-    """
-    # TODO: maybe move into _indicators._attach_persistent_indicator()?
-    tag = tag.append(_tags.SPANNER_STOP)
-    """
     if right_broken:
         tag = tag.append(_tags.RIGHT_BROKEN)
     _tags.wrappers([wrapper], tag)

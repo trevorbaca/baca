@@ -391,9 +391,9 @@ def glissando(
     )
 
 
-def levine_multiphonic(n: int) -> abjad.Markup:
+def levine_multiphonic(n: int) -> str:
     assert isinstance(n, int), repr(n)
-    return abjad.Markup(rf'\baca-boxed-markup "L.{n}"')
+    return rf'\baca-boxed-markup "L.{n}"'
 
 
 def multistage_leaf_glissando(
