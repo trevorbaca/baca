@@ -63,8 +63,6 @@ def clb(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners._with_next_nonobgc_leaf(argument)
-    tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.CLB_SPANNER)
     assert string_number in (1, 2, 3, 4), repr(string_number)
     if string_number == 1:
         markup = r"\baca-damp-clb-one-markup"
@@ -76,7 +74,7 @@ def clb(
         markup = r"\baca-damp-clb-four-markup"
     else:
         raise Exception(string_number)
-    specifiers = _piecewise._prepare_text_spanner_arguments(
+    specifiers = _piecewise.parse_text_spanner_descriptor(
         f"{markup} =|",
         left_broken_text=r"\baca-left-broken-clb-markup",
         lilypond_id="CLB",
@@ -90,19 +88,18 @@ def clb(
         *tweaks,
         left_broken=left_broken,
         staff_padding=staff_padding,
-        # TODO: remove
-        tag=tag,
     )
     wrappers.append(wrapper)
     wrapper = _spanners._attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
-        # TODO: remove
-        tag=tag,
     )
     wrappers.append(wrapper)
-    # TODO: tag wrappers here
+    tag = _helpers.function_name(_frame())
+    # TODO: remove *SPANNER tags?
+    tag = tag.append(_tags.CLB_SPANNER)
+    _tags.wrappers(wrappers, tag)
     return wrappers
 
 
@@ -116,15 +113,13 @@ def covered(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners._with_next_nonobgc_leaf(argument)
-    specifiers = _piecewise._prepare_text_spanner_arguments(
+    specifiers = _piecewise.parse_text_spanner_descriptor(
         items,
         left_broken_text=left_broken_text,
         lilypond_id="Covered",
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.COVERED_SPANNER)
     wrappers = []
     wrapper = _spanners._attach_spanner_start(
         argument,
@@ -132,19 +127,18 @@ def covered(
         *tweaks,
         left_broken=left_broken,
         staff_padding=staff_padding,
-        # TODO: remove
-        tag=tag,
     )
     wrappers.append(wrapper)
     wrapper = _spanners._attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
-        # TODO: remove
-        tag=tag,
     )
     wrappers.append(wrapper)
-    # TODO: tag wrappers here
+    tag = _helpers.function_name(_frame())
+    # TODO: remove *SPANNER tags?
+    tag = tag.append(_tags.COVERED_SPANNER)
+    _tags.wrappers(wrappers, tag)
     return wrappers
 
 
@@ -156,15 +150,13 @@ def damp(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners._with_next_nonobgc_leaf(argument)
-    specifiers = _piecewise._prepare_text_spanner_arguments(
+    specifiers = _piecewise.parse_text_spanner_descriptor(
         r"\baca-damp-markup =|",
         left_broken_text=r"\baca-left-broken-damp-markup",
         lilypond_id="Damp",
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.DAMP_SPANNER)
     wrappers = []
     wrapper = _spanners._attach_spanner_start(
         argument,
@@ -172,19 +164,18 @@ def damp(
         *tweaks,
         left_broken=left_broken,
         staff_padding=staff_padding,
-        # TODO: remove
-        tag=tag,
     )
     wrappers.append(wrapper)
     wrapper = _spanners._attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
-        # TODO: remove
-        tag=tag,
     )
     wrappers.append(wrapper)
-    # TODO: tag wrappers here
+    tag = _helpers.function_name(_frame())
+    # TODO: remove *SPANNER tags?
+    tag = tag.append(_tags.DAMP_SPANNER)
+    _tags.wrappers(wrappers, tag)
     return wrappers
 
 
@@ -198,15 +189,13 @@ def half_clt(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners._with_next_nonobgc_leaf(argument)
-    specifiers = _piecewise._prepare_text_spanner_arguments(
+    specifiers = _piecewise.parse_text_spanner_descriptor(
         items,
         left_broken_text=left_broken_text,
         lilypond_id="HalfCLT",
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.HALF_CLT_SPANNER)
     wrappers = []
     wrapper = _spanners._attach_spanner_start(
         argument,
@@ -214,19 +203,18 @@ def half_clt(
         *tweaks,
         left_broken=left_broken,
         staff_padding=staff_padding,
-        # TODO: remove
-        tag=tag,
     )
     wrappers.append(wrapper)
     wrapper = _spanners._attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
-        # TODO: remove
-        tag=tag,
     )
     wrappers.append(wrapper)
-    # TODO: tag wrappers here
+    tag = _helpers.function_name(_frame())
+    # TODO: remove *SPANNER tags?
+    tag = tag.append(_tags.HALF_CLT_SPANNER)
+    _tags.wrappers(wrappers, tag)
     return wrappers
 
 
@@ -239,15 +227,13 @@ def material_annotation(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners._with_next_nonobgc_leaf(argument)
-    specifiers = _piecewise._prepare_text_spanner_arguments(
+    specifiers = _piecewise.parse_text_spanner_descriptor(
         items,
         left_broken_text=None,
         lilypond_id="MaterialAnnotation",
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.MATERIAL_ANNOTATION_SPANNER)
     wrappers = []
     wrapper = _spanners._attach_spanner_start(
         argument,
@@ -255,19 +241,18 @@ def material_annotation(
         *tweaks,
         left_broken=left_broken,
         staff_padding=staff_padding,
-        # TODO: remove
-        tag=tag,
     )
     wrappers.append(wrapper)
     wrapper = _spanners._attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
-        # TODO: remove
-        tag=tag,
     )
     wrappers.append(wrapper)
-    # TODO: tag wrappers here
+    tag = _helpers.function_name(_frame())
+    # TODO: remove *SPANNER tags?
+    tag = tag.append(_tags.MATERIAL_ANNOTATION_SPANNER)
+    _tags.wrappers(wrappers, tag)
     return wrappers
 
 
@@ -279,15 +264,13 @@ def metric_modulation(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners._with_next_nonobgc_leaf(argument)
-    specifiers = _piecewise._prepare_text_spanner_arguments(
+    specifiers = _piecewise.parse_text_spanner_descriptor(
         "MM =|",
         left_broken_text=None,
         lilypond_id="MetricModulation",
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.METRIC_MODULATION_SPANNER)
     wrappers = []
     wrapper = _spanners._attach_spanner_start(
         argument,
@@ -295,19 +278,18 @@ def metric_modulation(
         *tweaks,
         left_broken=left_broken,
         staff_padding=staff_padding,
-        # TODO: remove
-        tag=tag,
     )
     wrappers.append(wrapper)
     wrapper = _spanners._attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
-        # TODO: remove
-        tag=tag,
     )
     wrappers.append(wrapper)
-    # TODO: tag wrappers here
+    tag = _helpers.function_name(_frame())
+    # TODO: remove *SPANNER tags?
+    tag = tag.append(_tags.METRIC_MODULATION_SPANNER)
+    _tags.wrappers(wrappers, tag)
     return wrappers
 
 
@@ -339,15 +321,13 @@ def pizzicato(
 ) -> list[abjad.Wrapper]:
     if without_next_leaf is False:
         argument = _spanners._with_next_nonobgc_leaf(argument)
-    specifiers = _piecewise._prepare_text_spanner_arguments(
+    specifiers = _piecewise.parse_text_spanner_descriptor(
         items,
         left_broken_text=r"\baca-left-broken-pizz-markup",
         lilypond_id="Pizzicato",
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.PIZZICATO_SPANNER)
     wrappers = []
     wrapper = _spanners._attach_spanner_start(
         argument,
@@ -355,19 +335,18 @@ def pizzicato(
         *tweaks,
         left_broken=left_broken,
         staff_padding=staff_padding,
-        # TODO: remove
-        tag=tag,
     )
     wrappers.append(wrapper)
     wrapper = _spanners._attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
-        # TODO: remove
-        tag=tag,
     )
     wrappers.append(wrapper)
-    # TODO: tag wrappers here
+    tag = _helpers.function_name(_frame())
+    # TODO: remove *SPANNER tags?
+    tag = tag.append(_tags.PIZZICATO_SPANNER)
+    _tags.wrappers(wrappers, tag)
     return wrappers
 
 
@@ -380,15 +359,13 @@ def spazzolato(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners._with_next_nonobgc_leaf(argument)
-    specifiers = _piecewise._prepare_text_spanner_arguments(
+    specifiers = _piecewise.parse_text_spanner_descriptor(
         items,
         left_broken_text=r"\baca-left-broken-spazz-markup",
         lilypond_id="Spazzolato",
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.SPAZZOLATO_SPANNER)
     wrappers = []
     wrapper = _spanners._attach_spanner_start(
         argument,
@@ -396,19 +373,18 @@ def spazzolato(
         *tweaks,
         left_broken=left_broken,
         staff_padding=staff_padding,
-        # TODO: remove
-        tag=tag,
     )
     wrappers.append(wrapper)
     wrapper = _spanners._attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
-        # TODO: remove
-        tag=tag,
     )
     wrappers.append(wrapper)
-    # TODO: tag wrappers here
+    tag = _helpers.function_name(_frame())
+    # TODO: remove *SPANNER tags?
+    tag = tag.append(_tags.SPAZZOLATO_SPANNER)
+    _tags.wrappers(wrappers, tag)
     return wrappers
 
 
@@ -428,15 +404,13 @@ def string_number(
         items = f"{string_number} ||"
     else:
         items = f"{string_number} =|"
-    specifiers = _piecewise._prepare_text_spanner_arguments(
+    specifiers = _piecewise.parse_text_spanner_descriptor(
         items,
         left_broken_text=f"{(string_number)}",
         lilypond_id="StringNumber",
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.STRING_NUMBER_SPANNER)
     wrappers = []
     wrapper = _spanners._attach_spanner_start(
         argument,
@@ -444,19 +418,18 @@ def string_number(
         *tweaks,
         left_broken=left_broken,
         staff_padding=staff_padding,
-        # TODO: remove
-        tag=tag,
     )
     wrappers.append(wrapper)
     wrapper = _spanners._attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
-        # TODO: remove
-        tag=tag,
     )
     wrappers.append(wrapper)
-    # TODO: tag wrappers here
+    tag = _helpers.function_name(_frame())
+    # TODO: remove *SPANNER tags?
+    tag = tag.append(_tags.STRING_NUMBER_SPANNER)
+    _tags.wrappers(wrappers, tag)
     return wrappers
 
 
@@ -469,15 +442,13 @@ def tasto(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners._with_next_nonobgc_leaf(argument)
-    specifiers = _piecewise._prepare_text_spanner_arguments(
+    specifiers = _piecewise.parse_text_spanner_descriptor(
         items,
         left_broken_text=r"\baca-left-broken-t-markup",
         lilypond_id="SCP",
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.TASTO_SPANNER)
     wrappers = []
     wrapper = _spanners._attach_spanner_start(
         argument,
@@ -485,19 +456,18 @@ def tasto(
         *tweaks,
         left_broken=left_broken,
         staff_padding=staff_padding,
-        # TODO: remove
-        tag=tag,
     )
     wrappers.append(wrapper)
     wrapper = _spanners._attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
-        # TODO: remove
-        tag=tag,
     )
     wrappers.append(wrapper)
-    # TODO: tag wrappers here
+    tag = _helpers.function_name(_frame())
+    # TODO: remove *SPANNER tags?
+    tag = tag.append(_tags.TASTO_SPANNER)
+    _tags.wrappers(wrappers, tag)
     return wrappers
 
 
@@ -520,7 +490,6 @@ def trill(
         harmonic=harmonic,
         start_trill_span=start_trill_span,
     )
-    tag = _helpers.function_name(_frame())
     wrappers = []
     wrapper = _spanners._attach_spanner_start(
         argument,
@@ -528,19 +497,16 @@ def trill(
         *tweaks,
         left_broken=left_broken,
         staff_padding=staff_padding,
-        # TODO: remove
-        tag=tag,
     )
     wrappers.append(wrapper)
     wrapper = _spanners._attach_spanner_stop(
         argument,
         stop_trill_span,
         right_broken=right_broken,
-        # TODO: remove
-        tag=tag,
     )
     wrappers.append(wrapper)
-    # TODO: tag wrappers here
+    tag = _helpers.function_name(_frame())
+    _tags.wrappers(wrappers, tag)
     return wrappers
 
 
@@ -552,15 +518,13 @@ def xfb(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners._with_next_nonobgc_leaf(argument)
-    specifiers = _piecewise._prepare_text_spanner_arguments(
+    specifiers = _piecewise.parse_text_spanner_descriptor(
         "XFB =|",
         left_broken_text=r"\baca-left-broken-xfb-markup",
         lilypond_id="BowSpeed",
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.BOW_SPEED_SPANNER)
     wrappers = []
     wrapper = _spanners._attach_spanner_start(
         argument,
@@ -568,17 +532,16 @@ def xfb(
         *tweaks,
         left_broken=left_broken,
         staff_padding=staff_padding,
-        # TODO: remove
-        tag=tag,
     )
     wrappers.append(wrapper)
     wrapper = _spanners._attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
-        # TODO: remove
-        tag=tag,
     )
     wrappers.append(wrapper)
-    # TODO: tag wrappers here
+    tag = _helpers.function_name(_frame())
+    # TODO: remove *SPANNER tags?
+    tag = tag.append(_tags.BOW_SPEED_SPANNER)
+    _tags.wrappers(wrappers, tag)
     return wrappers

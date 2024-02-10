@@ -26,7 +26,7 @@ def bow_speed(
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.BOW_SPEED_SPANNER)
     lilypond_id = "BowSpeed"
-    specifiers = _piecewise._prepare_text_spanner_arguments(
+    specifiers = _piecewise.parse_text_spanner_descriptor(
         items,
         left_broken_text=left_broken_text,
         lilypond_id=lilypond_id,
