@@ -33,11 +33,12 @@ def _attach_spanner_start(
         first_leaf,
         spanner_start,
         direction=direction,
-        # tag=tag,
     )
     tag = _helpers.function_name(_frame())
+    """
     # TODO: maybe move into _indicators._attach_persistent_indicator()?
     tag = tag.append(_tags.SPANNER_START)
+    """
     if left_broken:
         tag = tag.append(_tags.LEFT_BROKEN)
     _tags.wrappers([wrapper], tag)
@@ -55,11 +56,12 @@ def _attach_spanner_stop(
     wrapper = _indicators._attach_persistent_indicator(
         final_leaf,
         spanner_stop,
-        # tag=tag,
     )
     tag = _helpers.function_name(_frame())
+    """
     # TODO: maybe move into _indicators._attach_persistent_indicator()?
     tag = tag.append(_tags.SPANNER_STOP)
+    """
     if right_broken:
         tag = tag.append(_tags.RIGHT_BROKEN)
     _tags.wrappers([wrapper], tag)

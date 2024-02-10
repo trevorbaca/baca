@@ -38,6 +38,11 @@ def _attach_persistent_indicator(
     assert isinstance(manifests, dict), repr(manifests)
     tag = tag or abjad.Tag()
     tag = tag.append(_helpers.function_name(_frame()))
+    unbundled_indicator = _unbundle_indicator(indicator)
+    if getattr(unbundled_indicator, "spanner_start", False) is True:
+        tag = tag.append(_tags.SPANNER_START)
+    if getattr(unbundled_indicator, "spanner_stop", False) is True:
+        tag = tag.append(_tags.SPANNER_STOP)
     reapplied = _treat.remove_reapplied_wrappers(leaf, indicator)
     wrapper = abjad.attach(
         indicator,

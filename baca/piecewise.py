@@ -133,6 +133,7 @@ def _attach_specifier(
                 indicator, tweaks, i=i, total=total_pieces, overwrite=True
             )
         tag_ = tag
+        """
         # TODO: maybe move into _indicators._attach_persistent_indicator()?
         if (
             getattr(_indicators._unbundle_indicator(indicator), "spanner_start", False)
@@ -145,6 +146,7 @@ def _attach_specifier(
             is True
         ):
             tag_ = tag_.append(_tags.SPANNER_STOP)
+        """
         wrapper = _indicators._attach_persistent_indicator(
             leaf,
             indicator,
