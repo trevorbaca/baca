@@ -252,6 +252,7 @@ def ottava(
     leaf = abjad.select.leaf(argument, -1)
     wrappers_ = _indicators.ottava(leaf, 0)
     wrappers.extend(wrappers_)
+    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 
