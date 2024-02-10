@@ -3,6 +3,7 @@ Indicators.
 """
 
 import dataclasses
+import typing
 from inspect import currentframe as _frame
 
 import abjad
@@ -20,7 +21,7 @@ from .enums import enums as _enums
 
 def _attach_persistent_indicator(
     leaf: abjad.Leaf,
-    indicator,
+    indicator: typing.Any,
     *,
     context: str | None = None,
     deactivate: bool = False,

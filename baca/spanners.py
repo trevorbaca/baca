@@ -28,18 +28,20 @@ def _attach_spanner_start(
     if staff_padding is not None:
         tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
     spanner_start = _tweaks.bundle_tweaks(spanner_start, tweaks)
+    first_leaf = abjad.select.leaf(argument, 0)
+    wrapper = _indicators._attach_persistent_indicator(
+        first_leaf,
+        spanner_start,
+        direction=direction,
+        # tag=tag,
+    )
     tag = _helpers.function_name(_frame())
     # TODO: maybe move into _indicators._attach_persistent_indicator()?
     tag = tag.append(_tags.SPANNER_START)
     if left_broken:
         tag = tag.append(_tags.LEFT_BROKEN)
-    first_leaf = abjad.select.leaf(argument, 0)
-    return _indicators._attach_persistent_indicator(
-        first_leaf,
-        spanner_start,
-        direction=direction,
-        tag=tag,
-    )
+    _tags.wrappers([wrapper], tag)
+    return wrapper
 
 
 def _attach_spanner_stop(
@@ -49,17 +51,19 @@ def _attach_spanner_stop(
     right_broken: bool = False,
 ) -> abjad.Wrapper:
     assert spanner_stop.spanner_stop is True, repr(spanner_stop)
+    final_leaf = abjad.select.leaf(argument, -1)
+    wrapper = _indicators._attach_persistent_indicator(
+        final_leaf,
+        spanner_stop,
+        # tag=tag,
+    )
     tag = _helpers.function_name(_frame())
     # TODO: maybe move into _indicators._attach_persistent_indicator()?
     tag = tag.append(_tags.SPANNER_STOP)
     if right_broken:
         tag = tag.append(_tags.RIGHT_BROKEN)
-    final_leaf = abjad.select.leaf(argument, -1)
-    return _indicators._attach_persistent_indicator(
-        final_leaf,
-        spanner_stop,
-        tag=tag,
-    )
+    _tags.wrappers([wrapper], tag)
+    return wrapper
 
 
 def _with_next_nonobgc_leaf(argument):
