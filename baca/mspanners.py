@@ -31,7 +31,6 @@ def bow_speed(
     )
     if len(specifiers) == 1:
         specifier = specifiers[0]
-        assert specifier.indicator is None, repr(specifier)
         wrappers = []
         wrapper = _spanners._attach_spanner_start(
             argument,

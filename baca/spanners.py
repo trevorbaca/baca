@@ -102,8 +102,7 @@ def beam(
             stop_beam,
         )
         wrappers.append(wrapper)
-    tag = _helpers.function_name(_frame())
-    _tags.wrappers(wrappers, tag)
+    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 

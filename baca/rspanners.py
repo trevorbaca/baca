@@ -96,8 +96,7 @@ def clb(
         right_broken=right_broken,
     )
     wrappers.append(wrapper)
-    tag = _helpers.function_name(_frame())
-    _tags.wrappers(wrappers, tag)
+    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 
@@ -133,8 +132,7 @@ def covered(
         right_broken=right_broken,
     )
     wrappers.append(wrapper)
-    tag = _helpers.function_name(_frame())
-    _tags.wrappers(wrappers, tag)
+    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 
@@ -168,8 +166,7 @@ def damp(
         right_broken=right_broken,
     )
     wrappers.append(wrapper)
-    tag = _helpers.function_name(_frame())
-    _tags.wrappers(wrappers, tag)
+    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 
@@ -205,8 +202,7 @@ def half_clt(
         right_broken=right_broken,
     )
     wrappers.append(wrapper)
-    tag = _helpers.function_name(_frame())
-    _tags.wrappers(wrappers, tag)
+    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 
@@ -333,8 +329,7 @@ def pizzicato(
         right_broken=right_broken,
     )
     wrappers.append(wrapper)
-    tag = _helpers.function_name(_frame())
-    _tags.wrappers(wrappers, tag)
+    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 
@@ -369,8 +364,7 @@ def spazzolato(
         right_broken=right_broken,
     )
     wrappers.append(wrapper)
-    tag = _helpers.function_name(_frame())
-    _tags.wrappers(wrappers, tag)
+    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 
@@ -412,8 +406,7 @@ def string_number(
         right_broken=right_broken,
     )
     wrappers.append(wrapper)
-    tag = _helpers.function_name(_frame())
-    _tags.wrappers(wrappers, tag)
+    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 
@@ -448,8 +441,7 @@ def tasto(
         right_broken=right_broken,
     )
     wrappers.append(wrapper)
-    tag = _helpers.function_name(_frame())
-    _tags.wrappers(wrappers, tag)
+    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 
@@ -487,8 +479,7 @@ def trill(
         right_broken=right_broken,
     )
     wrappers.append(wrapper)
-    tag = _helpers.function_name(_frame())
-    _tags.wrappers(wrappers, tag)
+    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 
@@ -522,6 +513,5 @@ def xfb(
         right_broken=right_broken,
     )
     wrappers.append(wrapper)
-    tag = _helpers.function_name(_frame())
-    _tags.wrappers(wrappers, tag)
+    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers

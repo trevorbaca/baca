@@ -352,7 +352,6 @@ def circle_bow(
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    tag = _helpers.function_name(_frame())
     if qualifier is None:
         string = r"\baca-circle-markup =|"
     else:
@@ -370,7 +369,7 @@ def circle_bow(
         right_broken=right_broken,
         staff_padding=staff_padding,
     )
-    _tags.wrappers(wrappers, tag)
+    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 
@@ -506,9 +505,13 @@ def parse_text_spanner_descriptor(
     descriptor: str,
     direction: int | None = None,
     *,
-    left_broken_text,
-    lilypond_id,
-):
+    left_broken_text: str | None = None,
+    lilypond_id: str | int | None = None,
+) -> list[_Specifier]:
+    if left_broken_text is not None:
+        assert isinstance(left_broken_text, str), repr(left_broken_text)
+    if lilypond_id is not None:
+        assert isinstance(lilypond_id, str | int), repr(lilypond_id)
     original_descriptor = descriptor
     if direction == abjad.DOWN:
         shape_to_style = {
@@ -642,6 +645,8 @@ def parse_text_spanner_descriptor(
             spanner_stop=stop_text_span,
         )
         specifiers.append(specifier)
+    for specifier in specifiers:
+        assert specifier.indicator is None, repr(specifier)
     return specifiers
 
 
@@ -658,7 +663,6 @@ def scp(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     assert argument == (), repr(argument)
-    tag = _helpers.function_name(_frame())
     wrappers = text(
         (),
         descriptor,
@@ -672,7 +676,7 @@ def scp(
         right_broken=right_broken,
         staff_padding=staff_padding,
     )
-    _tags.wrappers(wrappers, tag)
+    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 
@@ -729,7 +733,6 @@ def vibrato(
     right_broken: bool = False,
 ) -> list[abjad.Wrapper]:
     assert argument == (), repr(argument)
-    tag = _helpers.function_name(_frame())
     wrappers = text(
         (),
         descriptor,
@@ -741,5 +744,5 @@ def vibrato(
         pieces=pieces,
         right_broken=right_broken,
     )
-    _tags.wrappers(wrappers, tag)
+    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers
