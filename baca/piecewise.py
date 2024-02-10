@@ -328,36 +328,6 @@ def _iterate_pieces(
     return wrappers
 
 
-def circle_bow(
-    argument,
-    *tweaks: _typings.IndexedTweak,
-    left_broken: bool = False,
-    left_broken_text: str | None = r"\baca-left-broken-circle-bowing-markup",
-    qualifier: str | None = None,
-    right_broken: bool = False,
-    staff_padding: int | float | None = None,
-) -> list[abjad.Wrapper]:
-    if qualifier is None:
-        string = r"\baca-circle-markup =|"
-    else:
-        assert isinstance(qualifier, str), repr(qualifier)
-        string = rf"\baca-circle-{qualifier}-markup =|"
-    wrappers = text(
-        (),
-        string,
-        *tweaks,
-        bookend=False,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id="CircleBow",
-        pieces=[argument],
-        right_broken=right_broken,
-        staff_padding=staff_padding,
-    )
-    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
-    return wrappers
-
-
 def hairpin(
     argument,
     descriptor: str,
