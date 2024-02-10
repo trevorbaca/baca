@@ -129,6 +129,7 @@ def _attach_color_cancelation_literal(
     )
 
 
+# TODO: pass in leaf and unbundled_indicator instead of wrapper
 def _attach_latent_indicator_alert(
     manifests, wrapper, status, existing_deactivate=None
 ):
@@ -430,22 +431,17 @@ def treat_persistent_wrapper(manifests: dict, wrapper: abjad.Wrapper, status: st
     assert isinstance(status, str), repr(status)
     unbundled_indicator = wrapper.unbundle_indicator()
     unbundled_indicator.persistent is True, repr(wrapper)
+    if getattr(unbundled_indicator, "spanner_stop", False) is True:
+        return
     prototype = (
         abjad.Glissando,
         abjad.RepeatTie,
         abjad.StartBeam,
-        abjad.StopHairpin,
         abjad.StartPhrasingSlur,
         abjad.StartPianoPedal,
         abjad.StartSlur,
         abjad.StartTextSpan,
         abjad.StartTrillSpan,
-        abjad.StopBeam,
-        abjad.StopPhrasingSlur,
-        abjad.StopPianoPedal,
-        abjad.StopSlur,
-        abjad.StopTextSpan,
-        abjad.StopTrillSpan,
         abjad.Tie,
         abjad.VoiceNumber,
     )
@@ -476,14 +472,13 @@ def treat_persistent_wrapper(manifests: dict, wrapper: abjad.Wrapper, status: st
         words.extend(existing_tag.editions())
         words = [_ if isinstance(_, str) else _.string for _ in words]
         string = ":".join(words)
-        tag_ = abjad.Tag(string)
-        string = f"#{color}"
         bundle = abjad.bundle(
             wrapper.indicator,
-            rf"- \tweak color {string}",
+            rf"- \tweak color #{color}",
             overwrite=True,
-            tag=tag_,
+            tag=abjad.Tag(string),
         )
+        # TODO: either modify wrapper (ie, do not detach) or else return new wrapper
         abjad.detach(wrapper, leaf)
         wrapper = abjad.attach(
             bundle,
@@ -496,6 +491,7 @@ def treat_persistent_wrapper(manifests: dict, wrapper: abjad.Wrapper, status: st
             wrapper=True,
         )
         _set_status_tag(wrapper, status)
+        # TODO: return wrapper, or modify wrapper above instead of detach
         return
     _attach_color_literal(wrapper, status, existing_deactivate=wrapper.deactivate)
     _attach_latent_indicator_alert(
