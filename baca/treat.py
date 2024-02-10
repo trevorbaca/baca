@@ -129,23 +129,20 @@ def _attach_color_cancelation_literal(
     )
 
 
-# TODO: pass in leaf and unbundled_indicator instead of wrapper
 def _attach_latent_indicator_alert(
-    manifests, wrapper, status, existing_deactivate=None
+    manifests, leaf, indicator, status, existing_deactivate=None
 ):
-    unbundled_indicator = wrapper.unbundle_indicator()
-    if not getattr(unbundled_indicator, "latent", False):
+    if not getattr(indicator, "latent", False):
         return
-    leaf = wrapper.component
-    assert unbundled_indicator.latent, repr(unbundled_indicator)
-    if isinstance(unbundled_indicator, abjad.Clef):
+    assert indicator.latent, repr(indicator)
+    if isinstance(indicator, abjad.Clef):
         return
-    key = _indicator_to_key(unbundled_indicator, manifests)
+    key = _indicator_to_key(indicator, manifests)
     if key is not None:
         key = f"“{key}”"
     else:
-        key = type(unbundled_indicator).__name__
-    if isinstance(unbundled_indicator, abjad.Instrument):
+        key = type(indicator).__name__
+    if isinstance(indicator, abjad.Instrument):
         if status == "explicit":
             tag = _tags.EXPLICIT_INSTRUMENT_ALERT
         elif status == "reapplied":
@@ -495,7 +492,11 @@ def treat_persistent_wrapper(
     else:
         _attach_color_literal(wrapper, status, existing_deactivate=wrapper.deactivate)
         _attach_latent_indicator_alert(
-            manifests, wrapper, status, existing_deactivate=wrapper.deactivate
+            manifests,
+            wrapper.component,
+            unbundled_indicator,
+            status,
+            existing_deactivate=wrapper.deactivate,
         )
         _attach_color_cancelation_literal(
             wrapper,
