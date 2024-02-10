@@ -97,8 +97,6 @@ def clb(
     )
     wrappers.append(wrapper)
     tag = _helpers.function_name(_frame())
-    # TODO: remove *SPANNER tags?
-    tag = tag.append(_tags.CLB_SPANNER)
     _tags.wrappers(wrappers, tag)
     return wrappers
 
@@ -136,8 +134,6 @@ def covered(
     )
     wrappers.append(wrapper)
     tag = _helpers.function_name(_frame())
-    # TODO: remove *SPANNER tags?
-    tag = tag.append(_tags.COVERED_SPANNER)
     _tags.wrappers(wrappers, tag)
     return wrappers
 
@@ -173,8 +169,6 @@ def damp(
     )
     wrappers.append(wrapper)
     tag = _helpers.function_name(_frame())
-    # TODO: remove *SPANNER tags?
-    tag = tag.append(_tags.DAMP_SPANNER)
     _tags.wrappers(wrappers, tag)
     return wrappers
 
@@ -212,8 +206,6 @@ def half_clt(
     )
     wrappers.append(wrapper)
     tag = _helpers.function_name(_frame())
-    # TODO: remove *SPANNER tags?
-    tag = tag.append(_tags.HALF_CLT_SPANNER)
     _tags.wrappers(wrappers, tag)
     return wrappers
 
@@ -250,7 +242,6 @@ def material_annotation(
     )
     wrappers.append(wrapper)
     tag = _helpers.function_name(_frame())
-    # TODO: remove *SPANNER tags?
     tag = tag.append(_tags.MATERIAL_ANNOTATION_SPANNER)
     _tags.wrappers(wrappers, tag)
     return wrappers
@@ -287,7 +278,6 @@ def metric_modulation(
     )
     wrappers.append(wrapper)
     tag = _helpers.function_name(_frame())
-    # TODO: remove *SPANNER tags?
     tag = tag.append(_tags.METRIC_MODULATION_SPANNER)
     _tags.wrappers(wrappers, tag)
     return wrappers
@@ -344,8 +334,6 @@ def pizzicato(
     )
     wrappers.append(wrapper)
     tag = _helpers.function_name(_frame())
-    # TODO: remove *SPANNER tags?
-    tag = tag.append(_tags.PIZZICATO_SPANNER)
     _tags.wrappers(wrappers, tag)
     return wrappers
 
@@ -382,8 +370,6 @@ def spazzolato(
     )
     wrappers.append(wrapper)
     tag = _helpers.function_name(_frame())
-    # TODO: remove *SPANNER tags?
-    tag = tag.append(_tags.SPAZZOLATO_SPANNER)
     _tags.wrappers(wrappers, tag)
     return wrappers
 
@@ -427,8 +413,6 @@ def string_number(
     )
     wrappers.append(wrapper)
     tag = _helpers.function_name(_frame())
-    # TODO: remove *SPANNER tags?
-    tag = tag.append(_tags.STRING_NUMBER_SPANNER)
     _tags.wrappers(wrappers, tag)
     return wrappers
 
@@ -465,8 +449,6 @@ def tasto(
     )
     wrappers.append(wrapper)
     tag = _helpers.function_name(_frame())
-    # TODO: remove *SPANNER tags?
-    tag = tag.append(_tags.TASTO_SPANNER)
     _tags.wrappers(wrappers, tag)
     return wrappers
 
@@ -541,7 +523,5 @@ def xfb(
     )
     wrappers.append(wrapper)
     tag = _helpers.function_name(_frame())
-    # TODO: remove *SPANNER tags?
-    tag = tag.append(_tags.BOW_SPEED_SPANNER)
     _tags.wrappers(wrappers, tag)
     return wrappers

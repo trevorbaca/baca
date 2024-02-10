@@ -353,7 +353,6 @@ def circle_bow(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.CIRCLE_BOW_SPANNER)
     if qualifier is None:
         string = r"\baca-circle-markup =|"
     else:
@@ -660,7 +659,6 @@ def scp(
 ) -> list[abjad.Wrapper]:
     assert argument == (), repr(argument)
     tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.SCP_SPANNER)
     wrappers = text(
         (),
         descriptor,
@@ -732,7 +730,6 @@ def vibrato(
 ) -> list[abjad.Wrapper]:
     assert argument == (), repr(argument)
     tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.VIBRATO_SPANNER)
     wrappers = text(
         (),
         descriptor,
