@@ -311,17 +311,16 @@ def flat_glissando(
                 )
 
 
-# TODO: harmonize tag-handling
-def force_accidental(argument, *, tag: abjad.Tag = abjad.Tag()) -> None:
+def force_accidental(argument, *, tag: abjad.Tag | None = None) -> None:
+    tag = tag or abjad.Tag()
+    tag = tag.append(_helpers.function_name(_frame()))
     cautionary = False
     forced = True
     parenthesized = False
-    if tag.string:
-        if not tag.only_edition() and not tag.not_editions():
-            raise Exception(f"tag must have edition: {tag!r}.")
-        here_tag = _helpers.function_name(_frame())
-        alternative_tag = tag.append(here_tag)
-        primary_tag = alternative_tag.invert_edition_tags()
+    if not tag.only_edition() and not tag.not_editions():
+        raise Exception(f"tag must have edition: {tag!r}.")
+    alternative_tag = tag
+    primary_tag = alternative_tag.invert_edition_tags()
     pleaves = _select.pleaves(argument)
     for pleaf in pleaves:
         if isinstance(pleaf, abjad.Note):

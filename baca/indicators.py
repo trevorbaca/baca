@@ -430,11 +430,8 @@ def dynamic(
     *tweaks: abjad.Tweak,
     parent_alignment_x: int | float | None = None,
     self_alignment_x: int | float | None = None,
-    # TODO: remove tag=abjad.Tag() keyword
-    tag: abjad.Tag = abjad.Tag(),
 ) -> list[abjad.Wrapper]:
     wrappers = []
-    tag = tag.append(_helpers.function_name(_frame()))
     if parent_alignment_x is not None:
         tweaks = tweaks + (
             abjad.Tweak(rf"- \tweak parent-alignment-X {parent_alignment_x}"),
@@ -455,9 +452,9 @@ def dynamic(
         wrapper = _attach_persistent_indicator(
             leaf,
             indicator,
-            tag=tag,
         )
         wrappers.append(wrapper)
+    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 
