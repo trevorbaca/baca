@@ -232,7 +232,7 @@ def half_clt(
 
 def material_annotation(
     argument,
-    items: str | list,
+    items: str,
     *tweaks: abjad.Tweak,
     left_broken: bool = False,
     right_broken: bool = False,
@@ -374,7 +374,7 @@ def pizzicato(
 def spazzolato(
     argument,
     *tweaks: abjad.Tweak,
-    items: str | list = r"\baca-spazzolato-markup =|",
+    items: str = r"\baca-spazzolato-markup =|",
     left_broken: bool = False,
     right_broken: bool = False,
     staff_padding: int | float | None = None,

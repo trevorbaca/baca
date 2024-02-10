@@ -15,7 +15,7 @@ from . import typings as _typings
 
 def bow_speed(
     argument,
-    items: str | list,
+    items: str,
     *tweaks: _typings.IndexedTweak,
     bookend: bool = False,
     left_broken: bool = False,

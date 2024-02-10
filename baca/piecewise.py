@@ -344,13 +344,13 @@ def _iterate_pieces(
 
 
 def _prepare_text_spanner_arguments(
-    items,
+    descriptor: str,
     direction: int | None = None,
     *,
     left_broken_text,
     lilypond_id,
 ):
-    original_items = items
+    original_items = descriptor
     if direction == abjad.DOWN:
         shape_to_style = {
             "=>": r"\baca-dashed-line-with-arrow",
@@ -367,26 +367,22 @@ def _prepare_text_spanner_arguments(
             "->": r"\baca-solid-line-with-arrow",
             "-|": r"\baca-solid-line-with-hook",
         }
-    if isinstance(items, str):
-        items_: list[str | abjad.Markup] = []
-        current_item: list[str] = []
-        for word in items.split():
-            if word in shape_to_style:
-                if current_item:
-                    item_ = " ".join(current_item)
-                    items_.append(item_)
-                    current_item = []
-                items_.append(word)
-            else:
-                current_item.append(word)
-        if current_item:
-            assert all(isinstance(_, str) for _ in current_item), repr(current_item)
-            item_ = " ".join(current_item)
-            items_.append(item_)
-        for item in items:
-            assert isinstance(item, str | abjad.Markup), repr(item)
-        items = items_
-    specifiers = []
+    items_ = []
+    current_item: list = []
+    for word in descriptor.split():
+        if word in shape_to_style:
+            if current_item:
+                item_ = " ".join(current_item)
+                items_.append(item_)
+                current_item.clear()
+            items_.append(word)
+        else:
+            current_item.append(word)
+    if current_item:
+        item_ = " ".join(current_item)
+        items_.append(item_)
+    items = items_
+    assert all(isinstance(_, str) for _ in items), repr(items)
     if len(items) == 1:
         message = f"lone item not yet implemented ({original_items!r})."
         raise NotImplementedError(message)
@@ -406,20 +402,16 @@ def _prepare_text_spanner_arguments(
         raise ValueError(message)
     stop_text_span = abjad.StopTextSpan(command=command)
     cyclic_items = abjad.CyclicTuple(items)
+    specifiers = []
     for i, item in enumerate(cyclic_items):
+        assert isinstance(item, str), repr(item)
         if item in shape_to_style:
             continue
-        if isinstance(item, str) and item.startswith("\\"):
+        if item.startswith("\\"):
             item_markup = rf"- \baca-text-spanner-left-markup {item}"
-        elif isinstance(item, str):
-            item_markup = rf'- \baca-text-spanner-left-text "{item}"'
         else:
-            item_markup = item
-            assert isinstance(item_markup, abjad.Markup), repr(item_markup)
-            string = item_markup.string
-            item_markup = abjad.Markup(r"\upright {string}")
-            assert isinstance(item_markup, abjad.Markup)
-        assert isinstance(item_markup, str | abjad.Markup)
+            item_markup = rf'- \baca-text-spanner-left-text "{item}"'
+        assert isinstance(item_markup, str)
         style = r"\baca-invisible-line"
         if cyclic_items[i + 1] in shape_to_style:
             style = shape_to_style[cyclic_items[i + 1]]
@@ -427,20 +419,15 @@ def _prepare_text_spanner_arguments(
         else:
             right_text = cyclic_items[i + 1]
         right_markup: str | abjad.Markup
-        if isinstance(right_text, str):
-            if "hook" not in style:
-                if right_text.startswith("\\"):
-                    right_markup = r"- \baca-text-spanner-right-markup"
-                    right_markup += rf" {right_text}"
-                else:
-                    right_markup = r"- \baca-text-spanner-right-text"
-                    right_markup += rf' "{right_text}"'
+        if "hook" not in style:
+            if right_text.startswith("\\"):
+                right_markup = r"- \baca-text-spanner-right-markup"
+                right_markup += rf" {right_text}"
             else:
-                right_markup = abjad.Markup(rf"\upright {right_text}")
+                right_markup = r"- \baca-text-spanner-right-text"
+                right_markup += rf' "{right_text}"'
         else:
-            assert isinstance(right_text, abjad.Markup)
-            string = right_text.string
-            right_markup = abjad.Markup(r"\upright {string}")
+            right_markup = abjad.Markup(rf"\upright {right_text}")
         if lilypond_id is None:
             command = r"\startTextSpan"
         elif lilypond_id == 1:
