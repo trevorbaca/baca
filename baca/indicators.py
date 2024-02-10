@@ -617,8 +617,6 @@ def global_fermata(argument, description: str = "fermata") -> list[abjad.Wrapper
         abjad.attach(
             _enums.FERMATA_MEASURE,
             leaf,
-            # TODO: remove enum tag?
-            tag=_tags.FERMATA_MEASURE,
             wrapper=True,
         )
         wrappers.append(wrapper)
