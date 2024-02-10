@@ -6,25 +6,6 @@ import os
 
 import abjad
 
-_contents_not_imported = (
-    "array",
-    "build",
-    "dynamics",
-    "math",
-    "mspanners",
-    "override",
-    "path",
-    "piecewise",
-    "rspanners",
-    "score",
-    "section",
-    "select",
-    "sequence",
-    "spanners",
-    "treat",
-    "typings",
-)
-
 
 def call(argument):
     if callable(argument):
@@ -57,8 +38,7 @@ def function_name(frame, *, n=None):
     parts.reverse()
     if parts[0] == "baca":
         parts.pop()
-    if file_name in _contents_not_imported:
-        parts.append(file_name)
+    parts.append(file_name)
     if "self" in frame.f_locals:
         class_name = frame.f_locals["self"].__class__.__name__
         parts.append(class_name)
