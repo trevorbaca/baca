@@ -311,6 +311,7 @@ def flat_glissando(
                 )
 
 
+# TODO: harmonize tag-handling
 def force_accidental(argument, *, tag: abjad.Tag = abjad.Tag()) -> None:
     cautionary = False
     forced = True

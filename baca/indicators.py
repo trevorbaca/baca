@@ -430,6 +430,7 @@ def dynamic(
     *tweaks: abjad.Tweak,
     parent_alignment_x: int | float | None = None,
     self_alignment_x: int | float | None = None,
+    # TODO: remove tag=abjad.Tag() keyword
     tag: abjad.Tag = abjad.Tag(),
 ) -> list[abjad.Wrapper]:
     wrappers = []

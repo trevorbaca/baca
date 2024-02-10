@@ -22,16 +22,13 @@ def _attach_spanner_start(
     direction: abjad.Vertical | None = None,
     left_broken: bool = False,
     staff_padding: int | float | None = None,
-    # TODO: remove tag=None keyword
-    tag: abjad.Tag | None = None,
 ) -> abjad.Wrapper:
     unbundled_indicator = _indicators._unbundle_indicator(spanner_start)
     assert unbundled_indicator.spanner_start is True
     if staff_padding is not None:
         tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
     spanner_start = _tweaks.bundle_tweaks(spanner_start, tweaks)
-    tag = tag or abjad.Tag()
-    tag = tag.append(_helpers.function_name(_frame()))
+    tag = _helpers.function_name(_frame())
     # TODO: maybe move into _indicators._attach_persistent_indicator()?
     tag = tag.append(_tags.SPANNER_START)
     if left_broken:
@@ -50,13 +47,10 @@ def _attach_spanner_stop(
     spanner_stop,
     *,
     right_broken: bool = False,
-    # TODO: remove tag=None keyword
-    tag: abjad.Tag | None = None,
 ) -> abjad.Wrapper:
     assert spanner_stop.spanner_stop is True, repr(spanner_stop)
+    tag = _helpers.function_name(_frame())
     # TODO: maybe move into _indicators._attach_persistent_indicator()?
-    tag = tag or abjad.Tag()
-    tag = tag.append(_helpers.function_name(_frame()))
     tag = tag.append(_tags.SPANNER_STOP)
     if right_broken:
         tag = tag.append(_tags.RIGHT_BROKEN)
@@ -167,7 +161,6 @@ def hairpin(
     first_leaf = abjad.select.leaf(argument, 0)
     final_leaf = abjad.select.leaf(argument, -1)
     if start_dynamic is not None:
-        # TODO: remove after typehinting:
         assert isinstance(start_dynamic, abjad.Dynamic), repr(start_dynamic)
         wrappers_ = _indicators.dynamic(
             first_leaf,
