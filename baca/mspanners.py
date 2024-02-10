@@ -15,7 +15,7 @@ from . import typings as _typings
 
 def bow_speed(
     argument,
-    items: str,
+    descriptor: str,
     *tweaks: _typings.IndexedTweak,
     bookend: bool = False,
     left_broken: bool = False,
@@ -23,16 +23,15 @@ def bow_speed(
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    tag = _helpers.function_name(_frame())
-    tag = tag.append(_tags.BOW_SPEED_SPANNER)
     lilypond_id = "BowSpeed"
     specifiers = _piecewise.parse_text_spanner_descriptor(
-        items,
+        descriptor,
         left_broken_text=left_broken_text,
         lilypond_id=lilypond_id,
     )
     if len(specifiers) == 1:
         specifier = specifiers[0]
+        assert specifier.indicator is None, repr(specifier)
         wrappers = []
         wrapper = _spanners._attach_spanner_start(
             argument,
@@ -59,5 +58,7 @@ def bow_speed(
             specifiers=specifiers,
             staff_padding=staff_padding,
         )
+    tag = _helpers.function_name(_frame())
+    tag = tag.append(_tags.BOW_SPEED_SPANNER)
     _tags.wrappers(wrappers, tag)
     return wrappers

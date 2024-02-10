@@ -510,7 +510,7 @@ def parse_text_spanner_descriptor(
     left_broken_text,
     lilypond_id,
 ):
-    original_items = descriptor
+    original_descriptor = descriptor
     if direction == abjad.DOWN:
         shape_to_style = {
             "=>": r"\baca-dashed-line-with-arrow",
@@ -544,7 +544,7 @@ def parse_text_spanner_descriptor(
     items = items_
     assert all(isinstance(_, str) for _ in items), repr(items)
     if len(items) == 1:
-        message = f"lone item not yet implemented ({original_items!r})."
+        message = f"lone item not yet implemented ({original_descriptor!r})."
         raise NotImplementedError(message)
     if lilypond_id is None:
         command = r"\stopTextSpan"
@@ -648,7 +648,7 @@ def parse_text_spanner_descriptor(
 
 def scp(
     argument,
-    items: str,
+    descriptor: str,
     *tweaks: _typings.IndexedTweak,
     bookend: bool = False,
     do_not_start_spanner_on_final_piece: bool = False,
@@ -663,7 +663,7 @@ def scp(
     tag = tag.append(_tags.SCP_SPANNER)
     wrappers = text(
         (),
-        items,
+        descriptor,
         *tweaks,
         bookend=bookend,
         do_not_start_spanner_on_final_piece=do_not_start_spanner_on_final_piece,
@@ -680,7 +680,7 @@ def scp(
 
 def text(
     argument,
-    items: str,
+    descriptor: str,
     *tweaks: _typings.IndexedTweak,
     bookend: bool = True,
     direction: int | None = None,
@@ -697,9 +697,9 @@ def text(
         assert pieces, repr(pieces)
     if not pieces:
         assert argument, repr(argument)
-    assert isinstance(items, str), repr(items)
+    assert isinstance(descriptor, str), repr(descriptor)
     specifiers = parse_text_spanner_descriptor(
-        items,
+        descriptor,
         direction=direction,
         left_broken_text=left_broken_text,
         lilypond_id=lilypond_id,
@@ -722,7 +722,7 @@ def text(
 
 def vibrato(
     argument,
-    items: str,
+    descriptor: str,
     *tweaks: _typings.IndexedTweak,
     bookend: bool = False,
     left_broken: bool = False,
@@ -735,7 +735,7 @@ def vibrato(
     tag = tag.append(_tags.VIBRATO_SPANNER)
     wrappers = text(
         (),
-        items,
+        descriptor,
         *tweaks,
         bookend=bookend,
         left_broken=left_broken,
