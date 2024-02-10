@@ -39,6 +39,7 @@ def function_name(frame, *, n=None):
     if parts[0] == "baca":
         parts.pop()
     modules = ("array", "build", "dynamics", "math", "mspanners", "override", "path")
+    # TODO: add "rspanners"
     modules += ("piecewise", "score", "section", "select", "sequence", "spanners")
     modules += ("treat", "typings")
     if file_name in modules:

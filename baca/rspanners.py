@@ -14,46 +14,6 @@ from . import spanners as _spanners
 from . import tags as _tags
 
 
-def _prepare_start_trill_span(
-    *,
-    alteration,
-    force_trill_pitch_head_accidental,
-    harmonic,
-    start_trill_span,
-):
-    assert isinstance(start_trill_span, abjad.StartTrillSpan), repr(start_trill_span)
-    interval = pitch = None
-    if alteration is not None:
-        prototype = (abjad.NamedPitch, abjad.NamedInterval, str)
-        assert isinstance(alteration, prototype), repr(alteration)
-        try:
-            pitch = abjad.NamedPitch(alteration)
-        except Exception:
-            pass
-        try:
-            interval = abjad.NamedInterval(alteration)
-        except Exception:
-            pass
-    start_trill_span_ = start_trill_span
-    assert isinstance(start_trill_span_, (abjad.StartTrillSpan, abjad.Bundle))
-    if pitch is not None or interval is not None:
-        start_trill_span_ = dataclasses.replace(
-            start_trill_span_, interval=interval, pitch=pitch
-        )
-    if force_trill_pitch_head_accidental is True:
-        start_trill_span_ = dataclasses.replace(
-            start_trill_span_,
-            force_trill_pitch_head_accidental=force_trill_pitch_head_accidental,
-        )
-    if harmonic is True:
-        # TODO: replace this with a (one-word) predefined function
-        string = "#(lambda (grob) (grob-interpret-markup grob"
-        string += r' #{ \markup \musicglyph #"noteheads.s0harmonic" #}))'
-        string = rf"- \tweak TrillPitchHead.stencil {string}"
-        start_trill_span_ = abjad.bundle(start_trill_span_, string)
-    return start_trill_span_
-
-
 def clb(
     argument,
     string_number: int,
@@ -292,7 +252,6 @@ def ottava(
     leaf = abjad.select.leaf(argument, -1)
     wrappers_ = _indicators.ottava(leaf, 0)
     wrappers.extend(wrappers_)
-    # TODO: tag wrappers here
     return wrappers
 
 
@@ -458,12 +417,36 @@ def trill(
     stop_trill_span: abjad.StopTrillSpan = abjad.StopTrillSpan(),
 ) -> list[abjad.Wrapper]:
     argument = _spanners._with_next_nonobgc_leaf(argument)
-    start_trill_span_ = _prepare_start_trill_span(
-        alteration=alteration,
-        force_trill_pitch_head_accidental=force_trill_pitch_head_accidental,
-        harmonic=harmonic,
-        start_trill_span=start_trill_span,
-    )
+    assert isinstance(start_trill_span, abjad.StartTrillSpan), repr(start_trill_span)
+    interval = pitch = None
+    if alteration is not None:
+        prototype = (abjad.NamedPitch, abjad.NamedInterval, str)
+        assert isinstance(alteration, prototype), repr(alteration)
+        try:
+            pitch = abjad.NamedPitch(alteration)
+        except Exception:
+            pass
+        try:
+            interval = abjad.NamedInterval(alteration)
+        except Exception:
+            pass
+    if pitch is not None or interval is not None:
+        start_trill_span = dataclasses.replace(
+            start_trill_span, interval=interval, pitch=pitch
+        )
+    if force_trill_pitch_head_accidental is True:
+        start_trill_span = dataclasses.replace(
+            start_trill_span,
+            force_trill_pitch_head_accidental=force_trill_pitch_head_accidental,
+        )
+    start_trill_span_: abjad.StartTrillSpan | abjad.Bundle = start_trill_span
+    start_trill_span_ = start_trill_span
+    if harmonic is True:
+        # TODO: replace this with a (one-word) predefined function
+        string = "#(lambda (grob) (grob-interpret-markup grob"
+        string += r' #{ \markup \musicglyph #"noteheads.s0harmonic" #}))'
+        string = rf"- \tweak TrillPitchHead.stencil {string}"
+        start_trill_span_ = abjad.bundle(start_trill_span_, string)
     wrappers = []
     wrapper = _spanners._attach_spanner_start(
         argument,
