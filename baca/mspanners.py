@@ -121,11 +121,9 @@ def scp(
     do_not_start_spanner_on_final_piece: bool = False,
     left_broken: bool = False,
     left_broken_text: str | None = None,
-    pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    assert argument == (), repr(argument)
     lilypond_id = "SCP"
     specifiers = _piecewise.parse_text_spanner_descriptor(
         descriptor,
@@ -136,7 +134,7 @@ def scp(
         specifier = specifiers[0]
         wrappers = []
         wrapper = _spanners._attach_spanner_start(
-            pieces,
+            argument,
             specifier.spanner_start,
             *tweaks,
             bound_details_right_padding=bound_details_right_padding,
@@ -145,7 +143,7 @@ def scp(
         )
         wrappers.append(wrapper)
         wrapper = _spanners._attach_spanner_stop(
-            pieces,
+            argument,
             specifier.spanner_stop,
             right_broken=right_broken,
         )
@@ -157,7 +155,7 @@ def scp(
             bookend=bookend,
             bound_details_right_padding=bound_details_right_padding,
             left_broken=left_broken,
-            pieces=pieces,
+            pieces=argument,
             right_broken=right_broken,
             specifiers=specifiers,
             staff_padding=staff_padding,
