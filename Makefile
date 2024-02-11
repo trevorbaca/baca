@@ -46,15 +46,12 @@ isort-reformat:
 	baca scr
 
 mypy:
-	clear
 	mypy baca
 
 pytest:
-	clear
 	pytest .
 
 pytest-x:
-	clear
 	pytest -x .
 
 reformat:
@@ -62,7 +59,6 @@ reformat:
 	make isort-reformat
 
 check:
-	clear
 	make black-check
 	make flake8
 	make isort-check

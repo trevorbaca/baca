@@ -110,3 +110,53 @@ def circle_bow(
         )
     _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers
+
+
+def vibrato(
+    argument,
+    descriptor: str,
+    *tweaks: _typings.IndexedTweak,
+    bookend: bool = False,
+    left_broken: bool = False,
+    left_broken_text: str | None = None,
+    pieces: list[list[abjad.Leaf]] | None = None,
+    right_broken: bool = False,
+    staff_padding: int | float | None = None,
+) -> list[abjad.Wrapper]:
+    assert argument == (), repr(argument)
+    lilypond_id = "Vibrato"
+    specifiers = _piecewise.parse_text_spanner_descriptor(
+        descriptor,
+        left_broken_text=left_broken_text,
+        lilypond_id=lilypond_id,
+    )
+    if len(specifiers) == 1:
+        specifier = specifiers[0]
+        wrappers = []
+        wrapper = _spanners._attach_spanner_start(
+            argument,
+            specifier.spanner_start,
+            *tweaks,
+            left_broken=left_broken,
+            staff_padding=staff_padding,
+        )
+        wrappers.append(wrapper)
+        wrapper = _spanners._attach_spanner_stop(
+            argument,
+            specifier.spanner_stop,
+            right_broken=right_broken,
+        )
+        wrappers.append(wrapper)
+    else:
+        wrappers = _piecewise._iterate_pieces(
+            (),
+            *tweaks,
+            bookend=bookend,
+            left_broken=left_broken,
+            pieces=pieces,
+            right_broken=right_broken,
+            specifiers=specifiers,
+            staff_padding=staff_padding,
+        )
+    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
+    return wrappers

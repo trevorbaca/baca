@@ -676,29 +676,3 @@ def text(
     )
     _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers
-
-
-def vibrato(
-    argument,
-    descriptor: str,
-    *tweaks: _typings.IndexedTweak,
-    bookend: bool = False,
-    left_broken: bool = False,
-    left_broken_text: str | None = None,
-    pieces: list[list[abjad.Leaf]] | None = None,
-    right_broken: bool = False,
-) -> list[abjad.Wrapper]:
-    assert argument == (), repr(argument)
-    wrappers = text(
-        (),
-        descriptor,
-        *tweaks,
-        bookend=bookend,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id="Vibrato",
-        pieces=pieces,
-        right_broken=right_broken,
-    )
-    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
-    return wrappers
