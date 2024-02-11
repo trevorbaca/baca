@@ -48,11 +48,10 @@ def bow_speed(
         wrappers.append(wrapper)
     else:
         wrappers = _piecewise._iterate_pieces(
-            (),
+            argument,
             *tweaks,
             bookend=bookend,
             left_broken=left_broken,
-            pieces=argument,
             right_broken=right_broken,
             specifiers=specifiers,
             staff_padding=staff_padding,
@@ -100,10 +99,9 @@ def circle_bow(
         wrappers.append(wrapper)
     else:
         wrappers = _piecewise._iterate_pieces(
-            (),
+            argument,
             *tweaks,
             left_broken=left_broken,
-            pieces=argument,
             right_broken=right_broken,
             specifiers=specifiers,
             staff_padding=staff_padding,
@@ -150,12 +148,11 @@ def scp(
         wrappers.append(wrapper)
     else:
         wrappers = _piecewise._iterate_pieces(
-            (),
+            argument,
             *tweaks,
             bookend=bookend,
             bound_details_right_padding=bound_details_right_padding,
             left_broken=left_broken,
-            pieces=argument,
             right_broken=right_broken,
             specifiers=specifiers,
             staff_padding=staff_padding,
@@ -199,11 +196,10 @@ def vibrato(
         wrappers.append(wrapper)
     else:
         wrappers = _piecewise._iterate_pieces(
-            (),
+            argument,
             *tweaks,
             bookend=bookend,
             left_broken=left_broken,
-            pieces=argument,
             right_broken=right_broken,
             specifiers=specifiers,
             staff_padding=staff_padding,
@@ -252,13 +248,12 @@ def text(
         wrappers.append(wrapper)
     else:
         wrappers = _piecewise._iterate_pieces(
-            (),
+            argument,
             *tweaks,
             bookend=bookend,
             do_not_start_spanner_on_final_piece=do_not_start_spanner_on_final_piece,
             leak_spanner_stop=leak_spanner_stop,
             left_broken=left_broken,
-            pieces=argument,
             right_broken=right_broken,
             specifiers=specifiers,
             staff_padding=staff_padding,

@@ -143,7 +143,7 @@ def _attach_specifier(
 
 
 def _iterate_pieces(
-    argument,
+    pieces,
     *tweaks: _typings.IndexedTweak,
     attach_stop_hairpin_on_right_broken_final_piece: bool = False,
     bookend: bool = False,
@@ -151,17 +151,10 @@ def _iterate_pieces(
     do_not_start_spanner_on_final_piece: bool = False,
     leak_spanner_stop: bool = False,
     left_broken: bool = False,
-    # TODO: eliminate pieces=None keyword
-    pieces: list | None = None,
     right_broken: bool = False,
     specifiers: typing.Sequence = (),
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    if pieces:
-        assert not argument, repr(argument)
-    if argument:
-        assert not pieces, repr(pieces)
-    pieces = pieces or [argument]
     assert isinstance(tweaks, tuple), repr(tweaks)
     for tweak in tweaks:
         assert isinstance(tweak, abjad.Tweak | tuple), repr(tweak)
@@ -360,13 +353,12 @@ def hairpin(
         next_leaf = _select.rleaf(argument, -1)
         argument[-1].append(next_leaf)
     wrappers = _iterate_pieces(
-        (),
+        argument,
         *tweaks,
         attach_stop_hairpin_on_right_broken_final_piece=True,
         bookend=bookend,
         do_not_start_spanner_on_final_piece=do_not_start_spanner_on_final_piece,
         left_broken=left_broken,
-        pieces=argument,
         right_broken=right_broken,
         specifiers=specifiers,
     )
