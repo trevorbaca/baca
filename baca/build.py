@@ -1152,7 +1152,11 @@ def print_all_timing(timing):
     if hasattr(timing, "make_score"):
         python_runtime = timing.make_score + timing.postprocess_score
         print_timing("Python runtime", python_runtime)
-    print_timing("LilyPond runtime", int(timing.lilypond))
+    if timing.lilypond == "SKIPPED":
+        lilypond_runtime = "SKIPPED"
+    else:
+        lilypond_runtime = int(timing.lilypond)
+    print_timing("LilyPond runtime", lilypond_runtime)
 
 
 def print_always(string=""):
@@ -1189,7 +1193,7 @@ def print_tags(string):
 
 
 def print_timing(title, timer):
-    if isinstance(timer, int):
+    if isinstance(timer, int | str):
         count = timer
     else:
         count = int(timer.elapsed_time)
