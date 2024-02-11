@@ -119,11 +119,9 @@ def vibrato(
     bookend: bool = False,
     left_broken: bool = False,
     left_broken_text: str | None = None,
-    pieces: list[list[abjad.Leaf]] | None = None,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    assert argument == (), repr(argument)
     lilypond_id = "Vibrato"
     specifiers = _piecewise.parse_text_spanner_descriptor(
         descriptor,
@@ -153,7 +151,7 @@ def vibrato(
             *tweaks,
             bookend=bookend,
             left_broken=left_broken,
-            pieces=pieces,
+            pieces=argument,
             right_broken=right_broken,
             specifiers=specifiers,
             staff_padding=staff_padding,
