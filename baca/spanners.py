@@ -19,12 +19,16 @@ def _attach_spanner_start(
     argument,
     spanner_start,
     *tweaks: _typings.IndexedTweak,
+    bound_details_right_padding: int | float | None = None,
     direction: abjad.Vertical | None = None,
     left_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> abjad.Wrapper:
     unbundled_indicator = _indicators._unbundle_indicator(spanner_start)
     assert unbundled_indicator.spanner_start is True
+    if bound_details_right_padding is not None:
+        string = rf"- \tweak bound-details.right.padding {bound_details_right_padding}"
+        tweaks = tweaks + (abjad.Tweak(string),)
     if staff_padding is not None:
         tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
     spanner_start = _tweaks.bundle_tweaks(spanner_start, tweaks)

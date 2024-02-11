@@ -117,6 +117,7 @@ def scp(
     descriptor: str,
     *tweaks: _typings.IndexedTweak,
     bookend: bool = False,
+    bound_details_right_padding: int | float | None = None,
     do_not_start_spanner_on_final_piece: bool = False,
     left_broken: bool = False,
     left_broken_text: str | None = None,
@@ -126,23 +127,6 @@ def scp(
 ) -> list[abjad.Wrapper]:
     assert argument == (), repr(argument)
     lilypond_id = "SCP"
-    """
-    wrappers = text(
-        (),
-        descriptor,
-        *tweaks,
-        bookend=bookend,
-        do_not_start_spanner_on_final_piece=do_not_start_spanner_on_final_piece,
-        left_broken=left_broken,
-        left_broken_text=left_broken_text,
-        lilypond_id="SCP",
-        pieces=pieces,
-        right_broken=right_broken,
-        staff_padding=staff_padding,
-    )
-    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
-    return wrappers
-    """
     specifiers = _piecewise.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=left_broken_text,
@@ -152,16 +136,15 @@ def scp(
         specifier = specifiers[0]
         wrappers = []
         wrapper = _spanners._attach_spanner_start(
-            # argument,
             pieces,
             specifier.spanner_start,
             *tweaks,
+            bound_details_right_padding=bound_details_right_padding,
             left_broken=left_broken,
             staff_padding=staff_padding,
         )
         wrappers.append(wrapper)
         wrapper = _spanners._attach_spanner_stop(
-            # argument,
             pieces,
             specifier.spanner_stop,
             right_broken=right_broken,
@@ -172,6 +155,7 @@ def scp(
             (),
             *tweaks,
             bookend=bookend,
+            bound_details_right_padding=bound_details_right_padding,
             left_broken=left_broken,
             pieces=pieces,
             right_broken=right_broken,
