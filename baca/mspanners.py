@@ -49,7 +49,7 @@ def bow_speed(
         wrappers.append(wrapper)
     else:
         if bookend is None:
-            bookend = False
+            bookend = True
         wrappers = _piecewise._iterate_pieces(
             argument,
             *tweaks,
@@ -263,7 +263,7 @@ def vibrato(
         wrappers.append(wrapper)
     else:
         if bookend is None:
-            bookend = False
+            bookend = True
         wrappers = _piecewise._iterate_pieces(
             argument,
             *tweaks,
