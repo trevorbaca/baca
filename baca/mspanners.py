@@ -55,6 +55,8 @@ def bow_speed(
     else:
         if do_not_bookend is None:
             do_not_bookend = False
+        if rleak is True:
+            argument[-1] = _piecewise._rleak_next_nonobgc_leaf(argument[-1])
         wrappers = _piecewise._iterate_pieces(
             argument,
             *tweaks,
@@ -109,6 +111,8 @@ def circle_bow(
         )
         wrappers.append(wrapper)
     else:
+        if rleak is True:
+            argument[-1] = _piecewise._rleak_next_nonobgc_leaf(argument[-1])
         wrappers = _piecewise._iterate_pieces(
             argument,
             *tweaks,
@@ -142,9 +146,9 @@ def scp(
         lilypond_id=lilypond_id,
     )
     if len(specifiers) == 1:
+        assert do_not_bookend is None, repr(do_not_bookend)
         if rleak is True:
             argument = _piecewise._rleak_next_nonobgc_leaf(argument)
-        assert do_not_bookend is None, repr(do_not_bookend)
         specifier = specifiers[0]
         wrappers = []
         wrapper = _spanners._attach_spanner_start(
@@ -165,6 +169,8 @@ def scp(
     else:
         if do_not_bookend is None:
             do_not_bookend = False
+        if rleak is True:
+            argument[-1] = _piecewise._rleak_next_nonobgc_leaf(argument[-1])
         wrappers = _piecewise._iterate_pieces(
             argument,
             *tweaks,
@@ -206,9 +212,9 @@ def text(
     if debug is True:
         breakpoint()
     if len(specifiers) == 1:
+        assert do_not_bookend is None, repr(do_not_bookend)
         if rleak is True:
             argument = _piecewise._rleak_next_nonobgc_leaf(argument)
-        assert do_not_bookend is None, repr(do_not_bookend)
         specifier = specifiers[0]
         wrappers = []
         wrapper = _spanners._attach_spanner_start(
@@ -228,6 +234,8 @@ def text(
     else:
         if do_not_bookend is None:
             do_not_bookend = False
+        if rleak is True:
+            argument[-1] = _piecewise._rleak_next_nonobgc_leaf(argument[-1])
         wrappers = _piecewise._iterate_pieces(
             argument,
             *tweaks,
@@ -262,9 +270,9 @@ def vibrato(
         lilypond_id=lilypond_id,
     )
     if len(specifiers) == 1:
+        assert do_not_bookend is None, repr(do_not_bookend)
         if rleak is True:
             argument = _piecewise._rleak_next_nonobgc_leaf(argument)
-        assert do_not_bookend is None, repr(do_not_bookend)
         specifier = specifiers[0]
         wrappers = []
         wrapper = _spanners._attach_spanner_start(
@@ -284,6 +292,8 @@ def vibrato(
     else:
         if do_not_bookend is None:
             do_not_bookend = False
+        if rleak is True:
+            argument[-1] = _piecewise._rleak_next_nonobgc_leaf(argument[-1])
         wrappers = _piecewise._iterate_pieces(
             argument,
             *tweaks,
