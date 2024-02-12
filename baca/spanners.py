@@ -9,7 +9,6 @@ import abjad
 from . import helpers as _helpers
 from . import indicators as _indicators
 from . import piecewise as _piecewise
-from . import select as _select
 from . import tags as _tags
 from . import tweaks as _tweaks
 from . import typings as _typings
@@ -64,13 +63,6 @@ def _attach_spanner_stop(
     return wrapper
 
 
-def _rleak_next_nonobgc_leaf(argument):
-    result = _select.rleak(argument)
-    if abjad.get.parentage(result[-1]).get(abjad.OnBeatGraceContainer):
-        result = _select.rleak(argument, grace=False)
-    return result
-
-
 def beam(
     argument,
     *tweaks: abjad.Tweak,
@@ -113,7 +105,7 @@ def hairpin(
     rleak: bool = False,
 ) -> list[abjad.Wrapper]:
     if rleak is True:
-        argument = _rleak_next_nonobgc_leaf(argument)
+        argument = _piecewise._rleak_next_nonobgc_leaf(argument)
     specifiers = _piecewise.parse_hairpin_descriptor(
         descriptor,
         forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,

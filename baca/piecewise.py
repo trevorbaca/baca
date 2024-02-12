@@ -326,6 +326,13 @@ def _iterate_pieces(
     return wrappers
 
 
+def _rleak_next_nonobgc_leaf(argument):
+    result = _select.rleak(argument)
+    if abjad.get.parentage(result[-1]).get(abjad.OnBeatGraceContainer):
+        result = _select.rleak(argument, grace=False)
+    return result
+
+
 def hairpin(
     argument,
     descriptor: str,
@@ -351,8 +358,7 @@ def hairpin(
         forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
     )
     if rleak is True:
-        next_leaf = _select.rleaf(argument, -1)
-        argument[-1].append(next_leaf)
+        argument[-1] = _rleak_next_nonobgc_leaf(argument[-1])
     if do_not_bookend is None:
         do_not_bookend = False
     wrappers = _iterate_pieces(

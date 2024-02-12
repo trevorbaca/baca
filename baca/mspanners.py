@@ -27,7 +27,7 @@ def bow_speed(
 ) -> list[abjad.Wrapper]:
     assert do_not_bookend is not False, repr(do_not_bookend)
     if rleak is True:
-        argument = _spanners._rleak_next_nonobgc_leaf(argument)
+        argument = _piecewise._rleak_next_nonobgc_leaf(argument)
     lilypond_id = "BowSpeed"
     specifiers = _piecewise.parse_text_spanner_descriptor(
         descriptor,
@@ -84,7 +84,7 @@ def circle_bow(
         assert isinstance(qualifier, str), repr(qualifier)
         descriptor = rf"\baca-circle-{qualifier}-markup =|"
     if rleak is True:
-        argument = _spanners._rleak_next_nonobgc_leaf(argument)
+        argument = _piecewise._rleak_next_nonobgc_leaf(argument)
     lilypond_id = "CircleBow"
     specifiers = _piecewise.parse_text_spanner_descriptor(
         descriptor,
@@ -136,7 +136,7 @@ def scp(
 ) -> list[abjad.Wrapper]:
     assert do_not_bookend is not False, repr(do_not_bookend)
     if rleak is True:
-        argument = _spanners._rleak_next_nonobgc_leaf(argument)
+        argument = _piecewise._rleak_next_nonobgc_leaf(argument)
     lilypond_id = "SCP"
     specifiers = _piecewise.parse_text_spanner_descriptor(
         descriptor,
@@ -198,7 +198,7 @@ def text(
     assert isinstance(descriptor, str), repr(descriptor)
     assert do_not_bookend is not False, repr(do_not_bookend)
     if rleak is True:
-        argument = _spanners._rleak_next_nonobgc_leaf(argument)
+        argument = _piecewise._rleak_next_nonobgc_leaf(argument)
     specifiers = _piecewise.parse_text_spanner_descriptor(
         descriptor,
         direction=direction,
@@ -256,7 +256,7 @@ def vibrato(
 ) -> list[abjad.Wrapper]:
     assert do_not_bookend is not False, repr(do_not_bookend)
     if rleak is True:
-        argument = _spanners._rleak_next_nonobgc_leaf(argument)
+        argument = _piecewise._rleak_next_nonobgc_leaf(argument)
     lilypond_id = "Vibrato"
     specifiers = _piecewise.parse_text_spanner_descriptor(
         descriptor,
