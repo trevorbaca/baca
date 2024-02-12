@@ -17,7 +17,7 @@ def bow_speed(
     argument,
     descriptor: str,
     *tweaks: _typings.IndexedTweak,
-    bookend: bool = False,
+    bookend: bool | None = None,
     left_broken: bool = False,
     left_broken_text: str | None = None,
     right_broken: bool = False,
@@ -30,6 +30,7 @@ def bow_speed(
         lilypond_id=lilypond_id,
     )
     if len(specifiers) == 1:
+        assert bookend is None, repr(bookend)
         specifier = specifiers[0]
         wrappers = []
         wrapper = _spanners._attach_spanner_start(
@@ -47,6 +48,8 @@ def bow_speed(
         )
         wrappers.append(wrapper)
     else:
+        if bookend is None:
+            bookend = False
         wrappers = _piecewise._iterate_pieces(
             argument,
             *tweaks,
@@ -114,7 +117,7 @@ def scp(
     argument,
     descriptor: str,
     *tweaks: _typings.IndexedTweak,
-    bookend: bool = False,
+    bookend: bool | None = None,
     bound_details_right_padding: int | float | None = None,
     do_not_start_spanner_on_final_piece: bool = False,
     left_broken: bool = False,
@@ -129,6 +132,7 @@ def scp(
         lilypond_id=lilypond_id,
     )
     if len(specifiers) == 1:
+        assert bookend is None, repr(bookend)
         specifier = specifiers[0]
         wrappers = []
         wrapper = _spanners._attach_spanner_start(
@@ -147,58 +151,13 @@ def scp(
         )
         wrappers.append(wrapper)
     else:
+        if bookend is None:
+            bookend = False
         wrappers = _piecewise._iterate_pieces(
             argument,
             *tweaks,
             bookend=bookend,
             bound_details_right_padding=bound_details_right_padding,
-            left_broken=left_broken,
-            right_broken=right_broken,
-            specifiers=specifiers,
-            staff_padding=staff_padding,
-        )
-    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
-    return wrappers
-
-
-def vibrato(
-    argument,
-    descriptor: str,
-    *tweaks: _typings.IndexedTweak,
-    bookend: bool = False,
-    left_broken: bool = False,
-    left_broken_text: str | None = None,
-    right_broken: bool = False,
-    staff_padding: int | float | None = None,
-) -> list[abjad.Wrapper]:
-    lilypond_id = "Vibrato"
-    specifiers = _piecewise.parse_text_spanner_descriptor(
-        descriptor,
-        left_broken_text=left_broken_text,
-        lilypond_id=lilypond_id,
-    )
-    if len(specifiers) == 1:
-        specifier = specifiers[0]
-        wrappers = []
-        wrapper = _spanners._attach_spanner_start(
-            argument,
-            specifier.spanner_start,
-            *tweaks,
-            left_broken=left_broken,
-            staff_padding=staff_padding,
-        )
-        wrappers.append(wrapper)
-        wrapper = _spanners._attach_spanner_stop(
-            argument,
-            specifier.spanner_stop,
-            right_broken=right_broken,
-        )
-        wrappers.append(wrapper)
-    else:
-        wrappers = _piecewise._iterate_pieces(
-            argument,
-            *tweaks,
-            bookend=bookend,
             left_broken=left_broken,
             right_broken=right_broken,
             specifiers=specifiers,
@@ -259,6 +218,56 @@ def text(
             bookend=bookend,
             do_not_start_spanner_on_final_piece=do_not_start_spanner_on_final_piece,
             leak_spanner_stop=leak_spanner_stop,
+            left_broken=left_broken,
+            right_broken=right_broken,
+            specifiers=specifiers,
+            staff_padding=staff_padding,
+        )
+    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
+    return wrappers
+
+
+def vibrato(
+    argument,
+    descriptor: str,
+    *tweaks: _typings.IndexedTweak,
+    bookend: bool | None = None,
+    left_broken: bool = False,
+    left_broken_text: str | None = None,
+    right_broken: bool = False,
+    staff_padding: int | float | None = None,
+) -> list[abjad.Wrapper]:
+    lilypond_id = "Vibrato"
+    specifiers = _piecewise.parse_text_spanner_descriptor(
+        descriptor,
+        left_broken_text=left_broken_text,
+        lilypond_id=lilypond_id,
+    )
+    if len(specifiers) == 1:
+        assert bookend is None, repr(bookend)
+        specifier = specifiers[0]
+        wrappers = []
+        wrapper = _spanners._attach_spanner_start(
+            argument,
+            specifier.spanner_start,
+            *tweaks,
+            left_broken=left_broken,
+            staff_padding=staff_padding,
+        )
+        wrappers.append(wrapper)
+        wrapper = _spanners._attach_spanner_stop(
+            argument,
+            specifier.spanner_stop,
+            right_broken=right_broken,
+        )
+        wrappers.append(wrapper)
+    else:
+        if bookend is None:
+            bookend = False
+        wrappers = _piecewise._iterate_pieces(
+            argument,
+            *tweaks,
+            bookend=bookend,
             left_broken=left_broken,
             right_broken=right_broken,
             specifiers=specifiers,
