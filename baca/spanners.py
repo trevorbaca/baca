@@ -64,7 +64,7 @@ def _attach_spanner_stop(
     return wrapper
 
 
-def _with_next_nonobgc_leaf(argument):
+def _rleak_next_nonobgc_leaf(argument):
     result = _select.rleak(argument)
     if abjad.get.parentage(result[-1]).get(abjad.OnBeatGraceContainer):
         result = _select.rleak(argument, grace=False)
@@ -113,7 +113,7 @@ def hairpin(
     rleak: bool = False,
 ) -> list[abjad.Wrapper]:
     if rleak is True:
-        argument = _with_next_nonobgc_leaf(argument)
+        argument = _rleak_next_nonobgc_leaf(argument)
     specifiers = _piecewise.parse_hairpin_descriptor(
         descriptor,
         forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
