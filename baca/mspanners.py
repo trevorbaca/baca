@@ -23,6 +23,7 @@ def bow_speed(
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
+    assert bookend is not True, repr(bookend)
     lilypond_id = "BowSpeed"
     specifiers = _piecewise.parse_text_spanner_descriptor(
         descriptor,
@@ -125,6 +126,7 @@ def scp(
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
+    assert bookend is not True, repr(bookend)
     lilypond_id = "SCP"
     specifiers = _piecewise.parse_text_spanner_descriptor(
         descriptor,
@@ -182,6 +184,7 @@ def text(
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
+    assert bookend is not True, repr(bookend)
     assert isinstance(descriptor, str), repr(descriptor)
     specifiers = _piecewise.parse_text_spanner_descriptor(
         descriptor,
@@ -237,6 +240,7 @@ def vibrato(
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
+    assert bookend is not True, repr(bookend)
     lilypond_id = "Vibrato"
     specifiers = _piecewise.parse_text_spanner_descriptor(
         descriptor,
