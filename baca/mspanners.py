@@ -17,13 +17,13 @@ def bow_speed(
     argument,
     descriptor: str,
     *tweaks: _typings.IndexedTweak,
-    bookend: bool | None = None,
+    do_not_bookend: bool | None = None,
     left_broken: bool = False,
     left_broken_text: str | None = None,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    assert bookend is not True, repr(bookend)
+    assert do_not_bookend is not False, repr(do_not_bookend)
     lilypond_id = "BowSpeed"
     specifiers = _piecewise.parse_text_spanner_descriptor(
         descriptor,
@@ -31,7 +31,7 @@ def bow_speed(
         lilypond_id=lilypond_id,
     )
     if len(specifiers) == 1:
-        assert bookend is None, repr(bookend)
+        assert do_not_bookend is None, repr(do_not_bookend)
         specifier = specifiers[0]
         wrappers = []
         wrapper = _spanners._attach_spanner_start(
@@ -49,12 +49,12 @@ def bow_speed(
         )
         wrappers.append(wrapper)
     else:
-        if bookend is None:
-            bookend = True
+        if do_not_bookend is None:
+            do_not_bookend = False
         wrappers = _piecewise._iterate_pieces(
             argument,
             *tweaks,
-            bookend=bookend,
+            do_not_bookend=do_not_bookend,
             left_broken=left_broken,
             right_broken=right_broken,
             specifiers=specifiers,
@@ -118,7 +118,7 @@ def scp(
     argument,
     descriptor: str,
     *tweaks: _typings.IndexedTweak,
-    bookend: bool | None = None,
+    do_not_bookend: bool | None = None,
     bound_details_right_padding: int | float | None = None,
     do_not_start_spanner_on_final_piece: bool = False,
     left_broken: bool = False,
@@ -126,7 +126,7 @@ def scp(
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    assert bookend is not True, repr(bookend)
+    assert do_not_bookend is not False, repr(do_not_bookend)
     lilypond_id = "SCP"
     specifiers = _piecewise.parse_text_spanner_descriptor(
         descriptor,
@@ -134,7 +134,7 @@ def scp(
         lilypond_id=lilypond_id,
     )
     if len(specifiers) == 1:
-        assert bookend is None, repr(bookend)
+        assert do_not_bookend is None, repr(do_not_bookend)
         specifier = specifiers[0]
         wrappers = []
         wrapper = _spanners._attach_spanner_start(
@@ -153,12 +153,12 @@ def scp(
         )
         wrappers.append(wrapper)
     else:
-        if bookend is None:
-            bookend = True
+        if do_not_bookend is None:
+            do_not_bookend = False
         wrappers = _piecewise._iterate_pieces(
             argument,
             *tweaks,
-            bookend=bookend,
+            do_not_bookend=do_not_bookend,
             bound_details_right_padding=bound_details_right_padding,
             left_broken=left_broken,
             right_broken=right_broken,
@@ -173,7 +173,7 @@ def text(
     argument,
     descriptor: str,
     *tweaks: _typings.IndexedTweak,
-    bookend: bool | None = None,
+    do_not_bookend: bool | None = None,
     debug: bool = False,
     direction: int | None = None,
     do_not_start_spanner_on_final_piece: bool = False,
@@ -184,7 +184,7 @@ def text(
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    assert bookend is not True, repr(bookend)
+    assert do_not_bookend is not False, repr(do_not_bookend)
     assert isinstance(descriptor, str), repr(descriptor)
     specifiers = _piecewise.parse_text_spanner_descriptor(
         descriptor,
@@ -195,7 +195,7 @@ def text(
     if debug is True:
         breakpoint()
     if len(specifiers) == 1:
-        assert bookend is None, repr(bookend)
+        assert do_not_bookend is None, repr(do_not_bookend)
         specifier = specifiers[0]
         wrappers = []
         wrapper = _spanners._attach_spanner_start(
@@ -213,12 +213,12 @@ def text(
         )
         wrappers.append(wrapper)
     else:
-        if bookend is None:
-            bookend = True
+        if do_not_bookend is None:
+            do_not_bookend = False
         wrappers = _piecewise._iterate_pieces(
             argument,
             *tweaks,
-            bookend=bookend,
+            do_not_bookend=do_not_bookend,
             do_not_start_spanner_on_final_piece=do_not_start_spanner_on_final_piece,
             leak_spanner_stop=leak_spanner_stop,
             left_broken=left_broken,
@@ -234,13 +234,13 @@ def vibrato(
     argument,
     descriptor: str,
     *tweaks: _typings.IndexedTweak,
-    bookend: bool | None = None,
+    do_not_bookend: bool | None = None,
     left_broken: bool = False,
     left_broken_text: str | None = None,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    assert bookend is not True, repr(bookend)
+    assert do_not_bookend is not False, repr(do_not_bookend)
     lilypond_id = "Vibrato"
     specifiers = _piecewise.parse_text_spanner_descriptor(
         descriptor,
@@ -248,7 +248,7 @@ def vibrato(
         lilypond_id=lilypond_id,
     )
     if len(specifiers) == 1:
-        assert bookend is None, repr(bookend)
+        assert do_not_bookend is None, repr(do_not_bookend)
         specifier = specifiers[0]
         wrappers = []
         wrapper = _spanners._attach_spanner_start(
@@ -266,12 +266,12 @@ def vibrato(
         )
         wrappers.append(wrapper)
     else:
-        if bookend is None:
-            bookend = True
+        if do_not_bookend is None:
+            do_not_bookend = False
         wrappers = _piecewise._iterate_pieces(
             argument,
             *tweaks,
-            bookend=bookend,
+            do_not_bookend=do_not_bookend,
             left_broken=left_broken,
             right_broken=right_broken,
             specifiers=specifiers,

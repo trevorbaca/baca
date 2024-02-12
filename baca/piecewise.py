@@ -146,7 +146,7 @@ def _iterate_pieces(
     pieces,
     *tweaks: _typings.IndexedTweak,
     attach_stop_hairpin_on_right_broken_final_piece: bool = False,
-    bookend: bool = False,
+    do_not_bookend: bool = False,
     bound_details_right_padding: int | float | None = None,
     do_not_start_spanner_on_final_piece: bool = False,
     leak_spanner_stop: bool = False,
@@ -159,7 +159,8 @@ def _iterate_pieces(
     for tweak in tweaks:
         assert isinstance(tweak, abjad.Tweak | tuple), repr(tweak)
     assert pieces is not None
-    assert isinstance(bookend, bool), repr(bookend)
+    assert isinstance(do_not_bookend, bool), repr(do_not_bookend)
+    bookend = not do_not_bookend
     assert isinstance(do_not_start_spanner_on_final_piece, bool)
     assert isinstance(leak_spanner_stop, bool), repr(leak_spanner_stop)
     assert isinstance(left_broken, bool), repr(left_broken)
@@ -329,7 +330,7 @@ def hairpin(
     argument,
     descriptor: str,
     *tweaks: _typings.IndexedTweak,
-    bookend: bool = True,
+    do_not_bookend: bool | None = None,
     do_not_start_spanner_on_final_piece: bool = False,
     forbid_al_niente_to_bar_line: bool = False,
     left_broken: bool = False,
@@ -337,7 +338,7 @@ def hairpin(
     rleak: bool = False,
 ) -> list[abjad.Wrapper]:
     assert isinstance(descriptor, str), repr(descriptor)
-    assert isinstance(bookend, bool), repr(bookend)
+    assert do_not_bookend is not False, repr(do_not_bookend)
     assert isinstance(do_not_start_spanner_on_final_piece, bool)
     assert isinstance(left_broken, bool), repr(left_broken)
     assert isinstance(right_broken, bool), repr(right_broken)
@@ -352,11 +353,13 @@ def hairpin(
     if rleak is True:
         next_leaf = _select.rleaf(argument, -1)
         argument[-1].append(next_leaf)
+    if do_not_bookend is None:
+        do_not_bookend = False
     wrappers = _iterate_pieces(
         argument,
         *tweaks,
         attach_stop_hairpin_on_right_broken_final_piece=True,
-        bookend=bookend,
+        do_not_bookend=do_not_bookend,
         do_not_start_spanner_on_final_piece=do_not_start_spanner_on_final_piece,
         left_broken=left_broken,
         right_broken=right_broken,
