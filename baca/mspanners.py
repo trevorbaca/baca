@@ -152,7 +152,7 @@ def scp(
         wrappers.append(wrapper)
     else:
         if bookend is None:
-            bookend = False
+            bookend = True
         wrappers = _piecewise._iterate_pieces(
             argument,
             *tweaks,
