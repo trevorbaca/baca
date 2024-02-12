@@ -212,7 +212,8 @@ def text(
     argument,
     descriptor: str,
     *tweaks: _typings.IndexedTweak,
-    bookend: bool = True,
+    bookend: bool | None = None,
+    debug: bool = False,
     direction: int | None = None,
     do_not_start_spanner_on_final_piece: bool = False,
     leak_spanner_stop: bool = False,
@@ -229,7 +230,10 @@ def text(
         left_broken_text=left_broken_text,
         lilypond_id=lilypond_id,
     )
+    if debug is True:
+        breakpoint()
     if len(specifiers) == 1:
+        assert bookend is None, repr(bookend)
         specifier = specifiers[0]
         wrappers = []
         wrapper = _spanners._attach_spanner_start(
@@ -247,6 +251,8 @@ def text(
         )
         wrappers.append(wrapper)
     else:
+        if bookend is None:
+            bookend = True
         wrappers = _piecewise._iterate_pieces(
             argument,
             *tweaks,
