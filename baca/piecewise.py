@@ -334,7 +334,7 @@ def hairpin(
     forbid_al_niente_to_bar_line: bool = False,
     left_broken: bool = False,
     right_broken: bool = False,
-    with_next_leaf: bool = False,
+    rleak: bool = False,
 ) -> list[abjad.Wrapper]:
     assert isinstance(descriptor, str), repr(descriptor)
     assert isinstance(bookend, bool), repr(bookend)
@@ -349,7 +349,7 @@ def hairpin(
         descriptor,
         forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
     )
-    if with_next_leaf is True:
+    if rleak is True:
         next_leaf = _select.rleaf(argument, -1)
         argument[-1].append(next_leaf)
     wrappers = _iterate_pieces(
