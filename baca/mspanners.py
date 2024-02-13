@@ -135,7 +135,6 @@ def scp(
     left_broken: bool = False,
     left_broken_text: str | None = None,
     right_broken: bool = False,
-    rleak: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     assert do_not_bookend is not False, repr(do_not_bookend)
@@ -147,7 +146,7 @@ def scp(
     )
     if len(specifiers) == 1:
         assert do_not_bookend is None, repr(do_not_bookend)
-        if rleak is True:
+        if do_not_rleak is False:
             argument = _piecewise._rleak_next_nonobgc_leaf(argument)
         specifier = specifiers[0]
         wrappers = []
@@ -169,7 +168,7 @@ def scp(
     else:
         if do_not_bookend is None:
             do_not_bookend = False
-        if rleak is True:
+        if do_not_rleak is False:
             argument[-1] = _piecewise._rleak_next_nonobgc_leaf(argument[-1])
         wrappers = _piecewise._iterate_pieces(
             argument,
