@@ -176,6 +176,7 @@ def iterate_pieces(
     pieces,
     *tweaks: _typings.IndexedTweak,
     attach_stop_hairpin_on_right_broken_final_piece: bool = False,
+    debug: bool = False,
     do_not_bookend: bool = False,
     bound_details_right_padding: int | float | None = None,
     do_not_start_spanner_on_final_piece: bool = False,
@@ -208,6 +209,12 @@ def iterate_pieces(
     assert isinstance(specifiers, list), repr(specifiers)
     assert all(isinstance(_, Specifier) for _ in specifiers), repr(specifiers)
     assert isinstance(staff_padding, int | float | type(None)), repr(staff_padding)
+    # if len(specifiers) != len(pieces):
+    if False:
+        message = f"{len(specifiers)} specifiers != {len(pieces)} pieces:"
+        for specifier in specifiers:
+            message += "\n\t" + str(specifier)
+        raise Exception(message)
     cyclic_specifiers = abjad.CyclicTuple(specifiers)
     if bound_details_right_padding is not None:
         string = rf"- \tweak bound-details.right.padding {bound_details_right_padding}"
@@ -220,7 +227,18 @@ def iterate_pieces(
     just_bookended_leaf = None
     previous_had_bookend = None
     wrappers = []
+    if debug:
+        print()
+        for specifier in specifiers:
+            print(specifier)
+        print()
+        for piece in pieces:
+            print(piece)
+        print()
+        breakpoint()
     for current_piece_index, piece in enumerate(pieces):
+        if debug:
+            print(current_piece_index, piece)
         start_leaf = abjad.select.leaf(piece, 0)
         stop_leaf = abjad.select.leaf(piece, -1)
         is_first_piece = current_piece_index == 0
@@ -231,6 +249,7 @@ def iterate_pieces(
             and right_broken is True
             and attach_stop_hairpin_on_right_broken_final_piece is True
         ):
+            # raise Exception("do not use this branch.")
             specifier = Specifier(spanner_stop=abjad.StopHairpin())
             tag_ = _helpers.function_name(_frame(), n=1)
             tag_ = tag_.append(_tags.RIGHT_BROKEN)
