@@ -19,57 +19,6 @@ from . import typings as _typings
 from .enums import enums as _enums
 
 
-def _attach_persistent_indicator(
-    leaf: abjad.Leaf,
-    indicator: typing.Any,
-    *,
-    context: str | None = None,
-    deactivate: bool = False,
-    direction: abjad.Vertical | None = None,
-    manifests=None,
-    tag: abjad.Tag | None = None,
-) -> abjad.Wrapper:
-    unbundled = _unbundle_indicator(indicator)
-    assert unbundled.persistent is True, repr(indicator)
-    if context is not None:
-        assert isinstance(context, str), repr(context)
-    assert isinstance(deactivate, bool), repr(deactivate)
-    manifests = manifests or {}
-    assert isinstance(manifests, dict), repr(manifests)
-    tag = tag or abjad.Tag()
-    tag = tag.append(_helpers.function_name(_frame()))
-    unbundled_indicator = _unbundle_indicator(indicator)
-    if getattr(unbundled_indicator, "spanner_start", False) is True:
-        tag = tag.append(_tags.SPANNER_START)
-    if getattr(unbundled_indicator, "spanner_stop", False) is True:
-        tag = tag.append(_tags.SPANNER_STOP)
-    reapplied = _treat.remove_reapplied_wrappers(leaf, indicator)
-    wrapper = abjad.attach(
-        indicator,
-        leaf,
-        context=context,
-        deactivate=deactivate,
-        direction=direction,
-        tag=tag,
-        wrapper=True,
-    )
-    if _treat.compare_persistent_indicators(indicator, reapplied):
-        result = _treat.treat_persistent_wrapper(manifests, wrapper, "redundant")
-        if result is not None:
-            assert isinstance(result, abjad.Wrapper)
-            wrapper = result
-    return wrapper
-
-
-def _is_maybe_bundled(argument, prototype):
-    if isinstance(argument, prototype):
-        return True
-    if isinstance(argument, abjad.Bundle):
-        if isinstance(argument.indicator, prototype):
-            return True
-    return False
-
-
 def _prepare_alternate_bow_strokes(*tweaks, downbow_first, full):
     if downbow_first:
         if full:
@@ -86,12 +35,6 @@ def _prepare_alternate_bow_strokes(*tweaks, downbow_first, full):
     for indicator in indicators:
         assert isinstance(indicator, abjad.Articulation | abjad.Bundle)
     return indicators
-
-
-def _unbundle_indicator(argument):
-    if isinstance(argument, abjad.Bundle):
-        return argument.indicator
-    return argument
 
 
 def accent(argument) -> list[abjad.Wrapper]:
@@ -193,6 +136,48 @@ def articulations(argument, articulations: list) -> list[abjad.Wrapper]:
     return wrappers
 
 
+def attach_persistent_indicator(
+    leaf: abjad.Leaf,
+    indicator: typing.Any,
+    *,
+    context: str | None = None,
+    deactivate: bool = False,
+    direction: abjad.Vertical | None = None,
+    manifests=None,
+    tag: abjad.Tag | None = None,
+) -> abjad.Wrapper:
+    unbundled_indicator = unbundle_indicator(indicator)
+    assert unbundled_indicator.persistent is True, repr(indicator)
+    if context is not None:
+        assert isinstance(context, str), repr(context)
+    assert isinstance(deactivate, bool), repr(deactivate)
+    manifests = manifests or {}
+    assert isinstance(manifests, dict), repr(manifests)
+    tag = tag or abjad.Tag()
+    tag = tag.append(_helpers.function_name(_frame()))
+    unbundled_indicator = unbundle_indicator(indicator)
+    if getattr(unbundled_indicator, "spanner_start", False) is True:
+        tag = tag.append(_tags.SPANNER_START)
+    if getattr(unbundled_indicator, "spanner_stop", False) is True:
+        tag = tag.append(_tags.SPANNER_STOP)
+    reapplied = _treat.remove_reapplied_wrappers(leaf, indicator)
+    wrapper = abjad.attach(
+        indicator,
+        leaf,
+        context=context,
+        deactivate=deactivate,
+        direction=direction,
+        tag=tag,
+        wrapper=True,
+    )
+    if _treat.compare_persistent_indicators(indicator, reapplied):
+        result = _treat.treat_persistent_wrapper(manifests, wrapper, "redundant")
+        if result is not None:
+            assert isinstance(result, abjad.Wrapper)
+            wrapper = result
+    return wrapper
+
+
 def bar_line(
     argument, abbreviation: str = "|", *, site: str = "after"
 ) -> list[abjad.Wrapper]:
@@ -253,7 +238,7 @@ def clef(argument, clef: str) -> list[abjad.Wrapper]:
     wrappers = []
     for leaf in abjad.select.leaves(argument):
         indicator = abjad.Clef(clef)
-        wrapper = _attach_persistent_indicator(
+        wrapper = attach_persistent_indicator(
             leaf,
             indicator,
             tag=tag,
@@ -457,7 +442,7 @@ def dynamic(
             raise Exception(f"use baca.hairpin() instead: {indicator!r}")
         assert isinstance(indicator, abjad.Dynamic), repr(indicator)
         indicator = _tweaks.bundle_tweaks(indicator, tweaks)
-        wrapper = _attach_persistent_indicator(
+        wrapper = attach_persistent_indicator(
             leaf,
             indicator,
         )
@@ -642,7 +627,7 @@ def instrument(
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.select.leaves(argument):
-        wrapper = _attach_persistent_indicator(
+        wrapper = attach_persistent_indicator(
             leaf,
             instrument,
             manifests=manifests,
@@ -864,7 +849,7 @@ def metronome_mark(
                 wrapper=True,
             )
         else:
-            wrapper = _attach_persistent_indicator(
+            wrapper = attach_persistent_indicator(
                 leaf,
                 indicator_,
                 manifests=manifests,
@@ -915,7 +900,7 @@ def ottava(argument, n: int) -> list[abjad.Wrapper]:
     wrappers = []
     for leaf in abjad.select.leaves(argument):
         indicator = abjad.Ottava(n=n)
-        wrapper = _attach_persistent_indicator(
+        wrapper = attach_persistent_indicator(
             leaf,
             indicator,
             tag=tag,
@@ -1033,7 +1018,7 @@ def short_instrument_name(
     tag = tag.append(_tags.NOT_PARTS)
     wrappers = []
     for leaf in abjad.select.leaves(argument):
-        wrapper = _attach_persistent_indicator(
+        wrapper = attach_persistent_indicator(
             leaf,
             short_instrument_name,
             deactivate=deactivate,
@@ -1094,14 +1079,14 @@ def staff_lines(argument, n: int) -> list[abjad.Wrapper]:
     wrappers = []
     for leaf in abjad.select.leaves(argument):
         bar_extent = _classes.BarExtent(n)
-        wrapper = _attach_persistent_indicator(
+        wrapper = attach_persistent_indicator(
             leaf,
             bar_extent,
             tag=_helpers.function_name(_frame(), n=1).append(_tags.NOT_PARTS),
         )
         wrappers.append(wrapper)
         staff_lines = _classes.StaffLines(n)
-        wrapper = _attach_persistent_indicator(
+        wrapper = attach_persistent_indicator(
             leaf,
             staff_lines,
             tag=_helpers.function_name(_frame(), n=2),
@@ -1248,6 +1233,12 @@ def triple_staccato(
     return wrappers
 
 
+def unbundle_indicator(argument):
+    if isinstance(argument, abjad.Bundle):
+        return argument.indicator
+    return argument
+
+
 def up_arpeggio(argument) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
@@ -1317,7 +1308,7 @@ def voice_number(argument, n: int | None = None) -> list[abjad.Wrapper]:
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
         command = abjad.VoiceNumber(n)
-        wrapper = _attach_persistent_indicator(
+        wrapper = attach_persistent_indicator(
             leaf,
             command,
             tag=tag,
