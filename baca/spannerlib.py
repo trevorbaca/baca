@@ -46,7 +46,68 @@ class Specifier:
             prototype = (abjad.StopHairpin, abjad.StopTextSpan)
             assert isinstance(unbundled, prototype), repr(self.spanner_stop)
 
-    # TODO: why ordered this way?
+    def _attach_indicators(
+        self,
+        leaf,
+        current_piece_index,
+        tag,
+        tweaks,
+        total_pieces,
+        *,
+        just_bookended_leaf=None,
+    ) -> list[abjad.Wrapper]:
+        assert isinstance(leaf, abjad.Leaf), repr(leaf)
+        assert isinstance(current_piece_index, int), repr(current_piece_index)
+        assert isinstance(tag, abjad.Tag), repr(tag)
+        for tweak in tweaks:
+            assert isinstance(tweak, abjad.Tweak | tuple), repr(tweak)
+        assert isinstance(total_pieces, int), repr(total_pieces)
+        if just_bookended_leaf is not None:
+            assert isinstance(just_bookended_leaf, abjad.Leaf), repr(
+                just_bookended_leaf
+            )
+        wrappers = []
+        prototype = (
+            abjad.Dynamic,
+            abjad.StartHairpin,
+            abjad.StopHairpin,
+            abjad.StartTextSpan,
+            abjad.StopTextSpan,
+        )
+        for indicator in self:
+            unbundled_indicator = _indicatorlib.unbundle_indicator(indicator)
+            assert isinstance(unbundled_indicator, prototype), repr(indicator)
+            if leaf is just_bookended_leaf and not isinstance(
+                unbundled_indicator, abjad.StartHairpin
+            ):
+                continue
+            if not isinstance(indicator, abjad.Bundle):
+                indicator = dataclasses.replace(indicator)
+            if isinstance(
+                unbundled_indicator, abjad.StartTextSpan | abjad.StartHairpin
+            ):
+                for item in tweaks:
+                    if isinstance(item, abjad.Tweak):
+                        new_tweak = item
+                    else:
+                        assert isinstance(item, tuple), repr(item)
+                        new_tweak = item[0]
+                    assert isinstance(new_tweak, abjad.Tweak), repr(item)
+                indicator = _tweaks.bundle_tweaks(
+                    indicator,
+                    tweaks,
+                    i=current_piece_index,
+                    total=total_pieces,
+                    overwrite=True,
+                )
+            wrapper = _indicatorlib.attach_persistent_indicator(
+                leaf,
+                indicator,
+                tag=tag,
+            )
+            wrappers.append(wrapper)
+        return wrappers
+
     @property
     def indicators(self) -> list:
         result: list = []
@@ -111,66 +172,6 @@ def attach_spanner_stop(
     return wrapper
 
 
-def _attach_indicators(
-    leaf,
-    specifier,
-    current_piece_index,
-    tag,
-    tweaks,
-    total_pieces,
-    *,
-    just_bookended_leaf=None,
-) -> list[abjad.Wrapper]:
-    assert isinstance(leaf, abjad.Leaf), repr(leaf)
-    assert isinstance(specifier, Specifier), repr(specifier)
-    assert isinstance(current_piece_index, int), repr(current_piece_index)
-    assert isinstance(tag, abjad.Tag), repr(tag)
-    for tweak in tweaks:
-        assert isinstance(tweak, abjad.Tweak | tuple), repr(tweak)
-    assert isinstance(total_pieces, int), repr(total_pieces)
-    if just_bookended_leaf is not None:
-        assert isinstance(just_bookended_leaf, abjad.Leaf), repr(just_bookended_leaf)
-    wrappers = []
-    prototype = (
-        abjad.Dynamic,
-        abjad.StartHairpin,
-        abjad.StopHairpin,
-        abjad.StartTextSpan,
-        abjad.StopTextSpan,
-    )
-    for indicator in specifier:
-        unbundled_indicator = _indicatorlib.unbundle_indicator(indicator)
-        assert isinstance(unbundled_indicator, prototype), repr(indicator)
-        if leaf is just_bookended_leaf and not isinstance(
-            unbundled_indicator, abjad.StartHairpin
-        ):
-            continue
-        if not isinstance(indicator, abjad.Bundle):
-            indicator = dataclasses.replace(indicator)
-        if isinstance(unbundled_indicator, abjad.StartTextSpan | abjad.StartHairpin):
-            for item in tweaks:
-                if isinstance(item, abjad.Tweak):
-                    new_tweak = item
-                else:
-                    assert isinstance(item, tuple), repr(item)
-                    new_tweak = item[0]
-                assert isinstance(new_tweak, abjad.Tweak), repr(item)
-            indicator = _tweaks.bundle_tweaks(
-                indicator,
-                tweaks,
-                i=current_piece_index,
-                total=total_pieces,
-                overwrite=True,
-            )
-        wrapper = _indicatorlib.attach_persistent_indicator(
-            leaf,
-            indicator,
-            tag=tag,
-        )
-        wrappers.append(wrapper)
-    return wrappers
-
-
 def iterate_pieces(
     pieces,
     *tweaks: _typings.IndexedTweak,
@@ -233,9 +234,8 @@ def iterate_pieces(
             specifier = Specifier(spanner_stop=abjad.StopHairpin())
             tag_ = _helpers.function_name(_frame(), n=1)
             tag_ = tag_.append(_tags.RIGHT_BROKEN)
-            wrappers_ = _attach_indicators(
+            wrappers_ = specifier._attach_indicators(
                 stop_leaf,
-                specifier,
                 current_piece_index,
                 tag_,
                 tweaks,
@@ -301,9 +301,8 @@ def iterate_pieces(
                 tag_ = tag_.append(_tags.LEFT_BROKEN)
         if is_final_piece and right_broken:
             tag_ = tag_.append(_tags.RIGHT_BROKEN)
-        wrappers_ = _attach_indicators(
+        wrappers_ = specifier._attach_indicators(
             start_leaf,
-            specifier,
             current_piece_index,
             tag_,
             tweaks,
@@ -319,9 +318,8 @@ def iterate_pieces(
                 next_bundle = dataclasses.replace(next_bundle, spanner_start=None)
             if next_bundle.compound():
                 next_bundle = dataclasses.replace(next_bundle, spanner_start=None)
-            wrappers_ = _attach_indicators(
+            wrappers_ = next_bundle._attach_indicators(
                 stop_leaf,
-                next_bundle,
                 current_piece_index,
                 tag_,
                 tweaks,
@@ -342,9 +340,8 @@ def iterate_pieces(
             tag_ = _helpers.function_name(_frame(), n=4)
             if right_broken:
                 tag_ = tag_.append(_tags.RIGHT_BROKEN)
-            wrappers_ = _attach_indicators(
+            wrappers_ = specifier._attach_indicators(
                 stop_leaf,
-                specifier,
                 current_piece_index,
                 tag_,
                 tweaks,
