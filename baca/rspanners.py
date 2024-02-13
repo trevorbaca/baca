@@ -9,6 +9,7 @@ import abjad
 
 from . import helpers as _helpers
 from . import indicators as _indicators
+from . import spannerlib as _spannerlib
 from . import spanners as _spanners
 from . import tags as _tags
 
@@ -33,7 +34,7 @@ def clb(
         markup = r"\baca-damp-clb-four-markup"
     else:
         raise Exception(string_number)
-    specifiers = _spanners.parse_text_spanner_descriptor(
+    specifiers = _spannerlib.parse_text_spanner_descriptor(
         f"{markup} =|",
         left_broken_text=r"\baca-left-broken-clb-markup",
         lilypond_id="CLB",
@@ -41,7 +42,7 @@ def clb(
     assert len(specifiers) == 1
     specifier = specifiers[0]
     wrappers = []
-    wrapper = _spanners.attach_spanner_start(
+    wrapper = _spannerlib.attach_spanner_start(
         argument,
         specifier.spanner_start,
         *tweaks,
@@ -49,7 +50,7 @@ def clb(
         staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
-    wrapper = _spanners.attach_spanner_stop(
+    wrapper = _spannerlib.attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
@@ -69,7 +70,7 @@ def covered(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners.rleak_next_nonobgc_leaf(argument)
-    specifiers = _spanners.parse_text_spanner_descriptor(
+    specifiers = _spannerlib.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=left_broken_text,
         lilypond_id="Covered",
@@ -77,7 +78,7 @@ def covered(
     assert len(specifiers) == 1
     specifier = specifiers[0]
     wrappers = []
-    wrapper = _spanners.attach_spanner_start(
+    wrapper = _spannerlib.attach_spanner_start(
         argument,
         specifier.spanner_start,
         *tweaks,
@@ -85,7 +86,7 @@ def covered(
         staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
-    wrapper = _spanners.attach_spanner_stop(
+    wrapper = _spannerlib.attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
@@ -103,7 +104,7 @@ def damp(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners.rleak_next_nonobgc_leaf(argument)
-    specifiers = _spanners.parse_text_spanner_descriptor(
+    specifiers = _spannerlib.parse_text_spanner_descriptor(
         r"\baca-damp-markup =|",
         left_broken_text=r"\baca-left-broken-damp-markup",
         lilypond_id="Damp",
@@ -111,7 +112,7 @@ def damp(
     assert len(specifiers) == 1
     specifier = specifiers[0]
     wrappers = []
-    wrapper = _spanners.attach_spanner_start(
+    wrapper = _spannerlib.attach_spanner_start(
         argument,
         specifier.spanner_start,
         *tweaks,
@@ -119,7 +120,7 @@ def damp(
         staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
-    wrapper = _spanners.attach_spanner_stop(
+    wrapper = _spannerlib.attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
@@ -139,7 +140,7 @@ def half_clt(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners.rleak_next_nonobgc_leaf(argument)
-    specifiers = _spanners.parse_text_spanner_descriptor(
+    specifiers = _spannerlib.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=left_broken_text,
         lilypond_id="HalfCLT",
@@ -147,7 +148,7 @@ def half_clt(
     assert len(specifiers) == 1
     specifier = specifiers[0]
     wrappers = []
-    wrapper = _spanners.attach_spanner_start(
+    wrapper = _spannerlib.attach_spanner_start(
         argument,
         specifier.spanner_start,
         *tweaks,
@@ -155,7 +156,7 @@ def half_clt(
         staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
-    wrapper = _spanners.attach_spanner_stop(
+    wrapper = _spannerlib.attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
@@ -174,7 +175,7 @@ def material_annotation(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners.rleak_next_nonobgc_leaf(argument)
-    specifiers = _spanners.parse_text_spanner_descriptor(
+    specifiers = _spannerlib.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=None,
         lilypond_id="MaterialAnnotation",
@@ -182,7 +183,7 @@ def material_annotation(
     assert len(specifiers) == 1
     specifier = specifiers[0]
     wrappers = []
-    wrapper = _spanners.attach_spanner_start(
+    wrapper = _spannerlib.attach_spanner_start(
         argument,
         specifier.spanner_start,
         *tweaks,
@@ -190,7 +191,7 @@ def material_annotation(
         staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
-    wrapper = _spanners.attach_spanner_stop(
+    wrapper = _spannerlib.attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
@@ -210,7 +211,7 @@ def metric_modulation(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners.rleak_next_nonobgc_leaf(argument)
-    specifiers = _spanners.parse_text_spanner_descriptor(
+    specifiers = _spannerlib.parse_text_spanner_descriptor(
         "MM =|",
         left_broken_text=None,
         lilypond_id="MetricModulation",
@@ -218,7 +219,7 @@ def metric_modulation(
     assert len(specifiers) == 1
     specifier = specifiers[0]
     wrappers = []
-    wrapper = _spanners.attach_spanner_start(
+    wrapper = _spannerlib.attach_spanner_start(
         argument,
         specifier.spanner_start,
         *tweaks,
@@ -226,7 +227,7 @@ def metric_modulation(
         staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
-    wrapper = _spanners.attach_spanner_stop(
+    wrapper = _spannerlib.attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
@@ -266,7 +267,7 @@ def pizzicato(
 ) -> list[abjad.Wrapper]:
     if without_next_leaf is False:
         argument = _spanners.rleak_next_nonobgc_leaf(argument)
-    specifiers = _spanners.parse_text_spanner_descriptor(
+    specifiers = _spannerlib.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=r"\baca-left-broken-pizz-markup",
         lilypond_id="Pizzicato",
@@ -274,7 +275,7 @@ def pizzicato(
     assert len(specifiers) == 1
     specifier = specifiers[0]
     wrappers = []
-    wrapper = _spanners.attach_spanner_start(
+    wrapper = _spannerlib.attach_spanner_start(
         argument,
         specifier.spanner_start,
         *tweaks,
@@ -282,7 +283,7 @@ def pizzicato(
         staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
-    wrapper = _spanners.attach_spanner_stop(
+    wrapper = _spannerlib.attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
@@ -301,7 +302,7 @@ def spazzolato(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners.rleak_next_nonobgc_leaf(argument)
-    specifiers = _spanners.parse_text_spanner_descriptor(
+    specifiers = _spannerlib.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=r"\baca-left-broken-spazz-markup",
         lilypond_id="Spazzolato",
@@ -309,7 +310,7 @@ def spazzolato(
     assert len(specifiers) == 1
     specifier = specifiers[0]
     wrappers = []
-    wrapper = _spanners.attach_spanner_start(
+    wrapper = _spannerlib.attach_spanner_start(
         argument,
         specifier.spanner_start,
         *tweaks,
@@ -317,7 +318,7 @@ def spazzolato(
         staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
-    wrapper = _spanners.attach_spanner_stop(
+    wrapper = _spannerlib.attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
@@ -343,7 +344,7 @@ def string_number(
         descriptor = f"{string_number} ||"
     else:
         descriptor = f"{string_number} =|"
-    specifiers = _spanners.parse_text_spanner_descriptor(
+    specifiers = _spannerlib.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=f"{(string_number)}",
         lilypond_id="StringNumber",
@@ -351,7 +352,7 @@ def string_number(
     assert len(specifiers) == 1
     specifier = specifiers[0]
     wrappers = []
-    wrapper = _spanners.attach_spanner_start(
+    wrapper = _spannerlib.attach_spanner_start(
         argument,
         specifier.spanner_start,
         *tweaks,
@@ -359,7 +360,7 @@ def string_number(
         staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
-    wrapper = _spanners.attach_spanner_stop(
+    wrapper = _spannerlib.attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
@@ -378,7 +379,7 @@ def tasto(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners.rleak_next_nonobgc_leaf(argument)
-    specifiers = _spanners.parse_text_spanner_descriptor(
+    specifiers = _spannerlib.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=r"\baca-left-broken-t-markup",
         lilypond_id="SCP",
@@ -386,7 +387,7 @@ def tasto(
     assert len(specifiers) == 1
     specifier = specifiers[0]
     wrappers = []
-    wrapper = _spanners.attach_spanner_start(
+    wrapper = _spannerlib.attach_spanner_start(
         argument,
         specifier.spanner_start,
         *tweaks,
@@ -394,7 +395,7 @@ def tasto(
         staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
-    wrapper = _spanners.attach_spanner_stop(
+    wrapper = _spannerlib.attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
@@ -448,7 +449,7 @@ def trill(
         string = rf"- \tweak TrillPitchHead.stencil {string}"
         start_trill_span_ = abjad.bundle(start_trill_span_, string)
     wrappers = []
-    wrapper = _spanners.attach_spanner_start(
+    wrapper = _spannerlib.attach_spanner_start(
         argument,
         start_trill_span_,
         *tweaks,
@@ -456,7 +457,7 @@ def trill(
         staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
-    wrapper = _spanners.attach_spanner_stop(
+    wrapper = _spannerlib.attach_spanner_stop(
         argument,
         stop_trill_span,
         right_broken=right_broken,
@@ -474,7 +475,7 @@ def xfb(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners.rleak_next_nonobgc_leaf(argument)
-    specifiers = _spanners.parse_text_spanner_descriptor(
+    specifiers = _spannerlib.parse_text_spanner_descriptor(
         "XFB =|",
         left_broken_text=r"\baca-left-broken-xfb-markup",
         lilypond_id="BowSpeed",
@@ -482,7 +483,7 @@ def xfb(
     assert len(specifiers) == 1
     specifier = specifiers[0]
     wrappers = []
-    wrapper = _spanners.attach_spanner_start(
+    wrapper = _spannerlib.attach_spanner_start(
         argument,
         specifier.spanner_start,
         *tweaks,
@@ -490,7 +491,7 @@ def xfb(
         staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
-    wrapper = _spanners.attach_spanner_stop(
+    wrapper = _spannerlib.attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,

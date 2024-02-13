@@ -7,6 +7,7 @@ from inspect import currentframe as _frame
 import abjad
 
 from . import helpers as _helpers
+from . import spannerlib as _spannerlib
 from . import spanners as _spanners
 from . import tags as _tags
 from . import typings as _typings
@@ -32,7 +33,7 @@ def hairpin(
         assert descriptor[0] in ("o", "<", ">"), repr(descriptor)
     if right_broken is True:
         assert descriptor[-1] == "!", repr(descriptor)
-    specifiers = _spanners.parse_hairpin_descriptor(
+    specifiers = _spannerlib.parse_hairpin_descriptor(
         descriptor,
         forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
     )
@@ -40,7 +41,7 @@ def hairpin(
         argument[-1] = _spanners.rleak_next_nonobgc_leaf(argument[-1])
     if do_not_bookend is None:
         do_not_bookend = False
-    wrappers = _spanners.iterate_pieces(
+    wrappers = _spannerlib.iterate_pieces(
         argument,
         *tweaks,
         attach_stop_hairpin_on_right_broken_final_piece=True,
