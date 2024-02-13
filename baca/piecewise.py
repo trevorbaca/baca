@@ -23,8 +23,8 @@ def hairpin(
     do_not_start_spanner_on_final_piece: bool = False,
     forbid_al_niente_to_bar_line: bool = False,
     left_broken: bool = False,
-    # match: bool = False,
-    match: bool = True,
+    match: bool = False,
+    # match: bool = True,
     right_broken: bool = False,
     rleak: bool = False,
 ) -> list[abjad.Wrapper]:

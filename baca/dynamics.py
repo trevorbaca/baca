@@ -285,6 +285,7 @@ def make_dynamic(
     if "_" in string:
         raise Exception(f"use hyphens instead of underscores ({string!r}).")
     if string == "niente":
+        raise Exception("ASDF")
         indicator = abjad.Dynamic("niente", command=r"\!")
     elif string.endswith("-ancora") and '"' not in string:
         dynamic = string.split("-")[0]

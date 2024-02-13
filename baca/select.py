@@ -3919,14 +3919,6 @@ def rleak(argument, *, count: int = 1, grace: bool | None = None) -> list[abjad.
     return argument
 
 
-def rleak_runs(argument, start=0, stop=None):
-    runs = abjad.select.runs(argument)
-    if start != 0 or stop is not None:
-        runs = runs[start:stop]
-    runs = [rleaves(_) for _ in runs]
-    return runs
-
-
 def rleaves(
     argument,
     *,
