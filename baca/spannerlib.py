@@ -295,7 +295,7 @@ def iterate_pieces(
             ):
                 if do_not_start_spanner_on_final_piece is True:
                     specifier = dataclasses.replace(specifier, spanner_start=None)
-        tag_ = _helpers.function_name(_frame(), n=2)
+        tag_ = _helpers.function_name(_frame(), n=1)
         if is_first_piece or previous_had_bookend:
             specifier = dataclasses.replace(specifier, spanner_stop=None)
             if left_broken:
@@ -312,7 +312,7 @@ def iterate_pieces(
         )
         wrappers.extend(wrappers_)
         if should_bookend:
-            tag_ = _helpers.function_name(_frame(), n=3)
+            tag_ = _helpers.function_name(_frame(), n=2)
             if is_final_piece and right_broken:
                 tag_ = tag_.append(_tags.RIGHT_BROKEN)
             if specifier.bookended_spanner_start is not None:
@@ -338,7 +338,7 @@ def iterate_pieces(
             if leak_spanner_stop:
                 spanner_stop = dataclasses.replace(spanner_stop, leak=True)
             specifier = Specifier(spanner_stop=spanner_stop)
-            tag_ = _helpers.function_name(_frame(), n=4)
+            tag_ = _helpers.function_name(_frame(), n=3)
             if right_broken:
                 tag_ = tag_.append(_tags.RIGHT_BROKEN)
             wrappers_ = specifier._attach_indicators(
