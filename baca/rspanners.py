@@ -9,7 +9,6 @@ import abjad
 
 from . import helpers as _helpers
 from . import indicators as _indicators
-from . import piecewise as _piecewise
 from . import spanners as _spanners
 from . import tags as _tags
 
@@ -22,7 +21,7 @@ def clb(
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    argument = _piecewise._rleak_next_nonobgc_leaf(argument)
+    argument = _spanners.rleak_next_nonobgc_leaf(argument)
     assert string_number in (1, 2, 3, 4), repr(string_number)
     if string_number == 1:
         markup = r"\baca-damp-clb-one-markup"
@@ -34,7 +33,7 @@ def clb(
         markup = r"\baca-damp-clb-four-markup"
     else:
         raise Exception(string_number)
-    specifiers = _piecewise.parse_text_spanner_descriptor(
+    specifiers = _spanners.parse_text_spanner_descriptor(
         f"{markup} =|",
         left_broken_text=r"\baca-left-broken-clb-markup",
         lilypond_id="CLB",
@@ -69,8 +68,8 @@ def covered(
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    argument = _piecewise._rleak_next_nonobgc_leaf(argument)
-    specifiers = _piecewise.parse_text_spanner_descriptor(
+    argument = _spanners.rleak_next_nonobgc_leaf(argument)
+    specifiers = _spanners.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=left_broken_text,
         lilypond_id="Covered",
@@ -103,8 +102,8 @@ def damp(
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    argument = _piecewise._rleak_next_nonobgc_leaf(argument)
-    specifiers = _piecewise.parse_text_spanner_descriptor(
+    argument = _spanners.rleak_next_nonobgc_leaf(argument)
+    specifiers = _spanners.parse_text_spanner_descriptor(
         r"\baca-damp-markup =|",
         left_broken_text=r"\baca-left-broken-damp-markup",
         lilypond_id="Damp",
@@ -139,8 +138,8 @@ def half_clt(
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    argument = _piecewise._rleak_next_nonobgc_leaf(argument)
-    specifiers = _piecewise.parse_text_spanner_descriptor(
+    argument = _spanners.rleak_next_nonobgc_leaf(argument)
+    specifiers = _spanners.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=left_broken_text,
         lilypond_id="HalfCLT",
@@ -174,8 +173,8 @@ def material_annotation(
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    argument = _piecewise._rleak_next_nonobgc_leaf(argument)
-    specifiers = _piecewise.parse_text_spanner_descriptor(
+    argument = _spanners.rleak_next_nonobgc_leaf(argument)
+    specifiers = _spanners.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=None,
         lilypond_id="MaterialAnnotation",
@@ -210,8 +209,8 @@ def metric_modulation(
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    argument = _piecewise._rleak_next_nonobgc_leaf(argument)
-    specifiers = _piecewise.parse_text_spanner_descriptor(
+    argument = _spanners.rleak_next_nonobgc_leaf(argument)
+    specifiers = _spanners.parse_text_spanner_descriptor(
         "MM =|",
         left_broken_text=None,
         lilypond_id="MetricModulation",
@@ -243,7 +242,7 @@ def ottava(
     argument,
     n: int = 1,
 ) -> list[abjad.Wrapper]:
-    argument = _piecewise._rleak_next_nonobgc_leaf(argument)
+    argument = _spanners.rleak_next_nonobgc_leaf(argument)
     assert isinstance(n, int), repr(n)
     wrappers = []
     leaf = abjad.select.leaf(argument, 0)
@@ -266,8 +265,8 @@ def pizzicato(
     without_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
     if without_next_leaf is False:
-        argument = _piecewise._rleak_next_nonobgc_leaf(argument)
-    specifiers = _piecewise.parse_text_spanner_descriptor(
+        argument = _spanners.rleak_next_nonobgc_leaf(argument)
+    specifiers = _spanners.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=r"\baca-left-broken-pizz-markup",
         lilypond_id="Pizzicato",
@@ -301,8 +300,8 @@ def spazzolato(
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    argument = _piecewise._rleak_next_nonobgc_leaf(argument)
-    specifiers = _piecewise.parse_text_spanner_descriptor(
+    argument = _spanners.rleak_next_nonobgc_leaf(argument)
+    specifiers = _spanners.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=r"\baca-left-broken-spazz-markup",
         lilypond_id="Spazzolato",
@@ -337,14 +336,14 @@ def string_number(
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    argument = _piecewise._rleak_next_nonobgc_leaf(argument)
+    argument = _spanners.rleak_next_nonobgc_leaf(argument)
     assert isinstance(string_number, str), repr(string_number)
     assert string_number in ("I", "II", "III", "IV"), repr(string_number)
     if invisible_line is True:
         descriptor = f"{string_number} ||"
     else:
         descriptor = f"{string_number} =|"
-    specifiers = _piecewise.parse_text_spanner_descriptor(
+    specifiers = _spanners.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=f"{(string_number)}",
         lilypond_id="StringNumber",
@@ -378,8 +377,8 @@ def tasto(
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    argument = _piecewise._rleak_next_nonobgc_leaf(argument)
-    specifiers = _piecewise.parse_text_spanner_descriptor(
+    argument = _spanners.rleak_next_nonobgc_leaf(argument)
+    specifiers = _spanners.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=r"\baca-left-broken-t-markup",
         lilypond_id="SCP",
@@ -417,7 +416,7 @@ def trill(
     start_trill_span: abjad.StartTrillSpan = abjad.StartTrillSpan(),
     stop_trill_span: abjad.StopTrillSpan = abjad.StopTrillSpan(),
 ) -> list[abjad.Wrapper]:
-    argument = _piecewise._rleak_next_nonobgc_leaf(argument)
+    argument = _spanners.rleak_next_nonobgc_leaf(argument)
     assert isinstance(start_trill_span, abjad.StartTrillSpan), repr(start_trill_span)
     interval = pitch = None
     if alteration is not None:
@@ -474,8 +473,8 @@ def xfb(
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    argument = _piecewise._rleak_next_nonobgc_leaf(argument)
-    specifiers = _piecewise.parse_text_spanner_descriptor(
+    argument = _spanners.rleak_next_nonobgc_leaf(argument)
+    specifiers = _spanners.parse_text_spanner_descriptor(
         "XFB =|",
         left_broken_text=r"\baca-left-broken-xfb-markup",
         lilypond_id="BowSpeed",

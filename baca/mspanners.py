@@ -7,7 +7,6 @@ from inspect import currentframe as _frame
 import abjad
 
 from . import helpers as _helpers
-from . import piecewise as _piecewise
 from . import spanners as _spanners
 from . import tags as _tags
 from . import typings as _typings
@@ -26,7 +25,7 @@ def bow_speed(
 ) -> list[abjad.Wrapper]:
     assert do_not_bookend is not False, repr(do_not_bookend)
     lilypond_id = "BowSpeed"
-    specifiers = _piecewise.parse_text_spanner_descriptor(
+    specifiers = _spanners.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=left_broken_text,
         lilypond_id=lilypond_id,
@@ -34,7 +33,7 @@ def bow_speed(
     if len(specifiers) == 1:
         assert do_not_bookend is None, repr(do_not_bookend)
         if do_not_rleak is False:
-            argument = _piecewise._rleak_next_nonobgc_leaf(argument)
+            argument = _spanners.rleak_next_nonobgc_leaf(argument)
         specifier = specifiers[0]
         wrappers = []
         wrapper = _spanners._attach_spanner_start(
@@ -55,8 +54,8 @@ def bow_speed(
         if do_not_bookend is None:
             do_not_bookend = False
         if do_not_rleak is False:
-            argument[-1] = _piecewise._rleak_next_nonobgc_leaf(argument[-1])
-        wrappers = _piecewise._iterate_pieces(
+            argument[-1] = _spanners.rleak_next_nonobgc_leaf(argument[-1])
+        wrappers = _spanners.iterate_pieces(
             argument,
             *tweaks,
             do_not_bookend=do_not_bookend,
@@ -85,14 +84,14 @@ def circle_bow(
         assert isinstance(qualifier, str), repr(qualifier)
         descriptor = rf"\baca-circle-{qualifier}-markup =|"
     lilypond_id = "CircleBow"
-    specifiers = _piecewise.parse_text_spanner_descriptor(
+    specifiers = _spanners.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=left_broken_text,
         lilypond_id=lilypond_id,
     )
     if len(specifiers) == 1:
         if do_not_rleak is False:
-            argument = _piecewise._rleak_next_nonobgc_leaf(argument)
+            argument = _spanners.rleak_next_nonobgc_leaf(argument)
         specifier = specifiers[0]
         wrappers = []
         wrapper = _spanners._attach_spanner_start(
@@ -111,8 +110,8 @@ def circle_bow(
         wrappers.append(wrapper)
     else:
         if do_not_rleak is False:
-            argument[-1] = _piecewise._rleak_next_nonobgc_leaf(argument[-1])
-        wrappers = _piecewise._iterate_pieces(
+            argument[-1] = _spanners.rleak_next_nonobgc_leaf(argument[-1])
+        wrappers = _spanners.iterate_pieces(
             argument,
             *tweaks,
             left_broken=left_broken,
@@ -139,7 +138,7 @@ def scp(
 ) -> list[abjad.Wrapper]:
     assert do_not_bookend is not False, repr(do_not_bookend)
     lilypond_id = "SCP"
-    specifiers = _piecewise.parse_text_spanner_descriptor(
+    specifiers = _spanners.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=left_broken_text,
         lilypond_id=lilypond_id,
@@ -147,7 +146,7 @@ def scp(
     if len(specifiers) == 1:
         assert do_not_bookend is None, repr(do_not_bookend)
         if do_not_rleak is False:
-            argument = _piecewise._rleak_next_nonobgc_leaf(argument)
+            argument = _spanners.rleak_next_nonobgc_leaf(argument)
         specifier = specifiers[0]
         wrappers = []
         wrapper = _spanners._attach_spanner_start(
@@ -169,8 +168,8 @@ def scp(
         if do_not_bookend is None:
             do_not_bookend = False
         if do_not_rleak is False:
-            argument[-1] = _piecewise._rleak_next_nonobgc_leaf(argument[-1])
-        wrappers = _piecewise._iterate_pieces(
+            argument[-1] = _spanners.rleak_next_nonobgc_leaf(argument[-1])
+        wrappers = _spanners.iterate_pieces(
             argument,
             *tweaks,
             do_not_bookend=do_not_bookend,
@@ -202,7 +201,7 @@ def text(
 ) -> list[abjad.Wrapper]:
     assert isinstance(descriptor, str), repr(descriptor)
     assert do_not_bookend is not False, repr(do_not_bookend)
-    specifiers = _piecewise.parse_text_spanner_descriptor(
+    specifiers = _spanners.parse_text_spanner_descriptor(
         descriptor,
         direction=direction,
         left_broken_text=left_broken_text,
@@ -213,7 +212,7 @@ def text(
     if len(specifiers) == 1:
         assert do_not_bookend is None, repr(do_not_bookend)
         if do_not_rleak is False:
-            argument = _piecewise._rleak_next_nonobgc_leaf(argument)
+            argument = _spanners.rleak_next_nonobgc_leaf(argument)
         specifier = specifiers[0]
         wrappers = []
         wrapper = _spanners._attach_spanner_start(
@@ -234,8 +233,8 @@ def text(
         if do_not_bookend is None:
             do_not_bookend = False
         if do_not_rleak is False:
-            argument[-1] = _piecewise._rleak_next_nonobgc_leaf(argument[-1])
-        wrappers = _piecewise._iterate_pieces(
+            argument[-1] = _spanners.rleak_next_nonobgc_leaf(argument[-1])
+        wrappers = _spanners.iterate_pieces(
             argument,
             *tweaks,
             do_not_bookend=do_not_bookend,
@@ -263,7 +262,7 @@ def vibrato(
 ) -> list[abjad.Wrapper]:
     assert do_not_bookend is not False, repr(do_not_bookend)
     lilypond_id = "Vibrato"
-    specifiers = _piecewise.parse_text_spanner_descriptor(
+    specifiers = _spanners.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=left_broken_text,
         lilypond_id=lilypond_id,
@@ -271,7 +270,7 @@ def vibrato(
     if len(specifiers) == 1:
         assert do_not_bookend is None, repr(do_not_bookend)
         if do_not_rleak is False:
-            argument = _piecewise._rleak_next_nonobgc_leaf(argument)
+            argument = _spanners.rleak_next_nonobgc_leaf(argument)
         specifier = specifiers[0]
         wrappers = []
         wrapper = _spanners._attach_spanner_start(
@@ -292,8 +291,8 @@ def vibrato(
         if do_not_bookend is None:
             do_not_bookend = False
         if do_not_rleak is False:
-            argument[-1] = _piecewise._rleak_next_nonobgc_leaf(argument[-1])
-        wrappers = _piecewise._iterate_pieces(
+            argument[-1] = _spanners.rleak_next_nonobgc_leaf(argument[-1])
+        wrappers = _spanners.iterate_pieces(
             argument,
             *tweaks,
             do_not_bookend=do_not_bookend,
