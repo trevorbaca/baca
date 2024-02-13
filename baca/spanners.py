@@ -18,55 +18,6 @@ from . import tweaks as _tweaks
 from . import typings as _typings
 
 
-def _attach_spanner_start(
-    argument,
-    spanner_start,
-    *tweaks: _typings.IndexedTweak,
-    bound_details_right_padding: int | float | None = None,
-    direction: abjad.Vertical | None = None,
-    left_broken: bool = False,
-    staff_padding: int | float | None = None,
-) -> abjad.Wrapper:
-    unbundled_indicator = _indicators._unbundle_indicator(spanner_start)
-    assert unbundled_indicator.spanner_start is True
-    if bound_details_right_padding is not None:
-        string = rf"- \tweak bound-details.right.padding {bound_details_right_padding}"
-        tweaks = tweaks + (abjad.Tweak(string),)
-    if staff_padding is not None:
-        tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
-    spanner_start = _tweaks.bundle_tweaks(spanner_start, tweaks)
-    first_leaf = abjad.select.leaf(argument, 0)
-    wrapper = _indicators._attach_persistent_indicator(
-        first_leaf,
-        spanner_start,
-        direction=direction,
-    )
-    tag = _helpers.function_name(_frame())
-    if left_broken:
-        tag = tag.append(_tags.LEFT_BROKEN)
-    _tags.wrappers([wrapper], tag)
-    return wrapper
-
-
-def _attach_spanner_stop(
-    argument,
-    spanner_stop,
-    *,
-    right_broken: bool = False,
-) -> abjad.Wrapper:
-    assert spanner_stop.spanner_stop is True, repr(spanner_stop)
-    final_leaf = abjad.select.leaf(argument, -1)
-    wrapper = _indicators._attach_persistent_indicator(
-        final_leaf,
-        spanner_stop,
-    )
-    tag = _helpers.function_name(_frame())
-    if right_broken:
-        tag = tag.append(_tags.RIGHT_BROKEN)
-    _tags.wrappers([wrapper], tag)
-    return wrapper
-
-
 def _attach_specifier(
     leaf,
     specifier,
@@ -191,6 +142,55 @@ class Specifier:
         return False
 
 
+def attach_spanner_start(
+    argument,
+    spanner_start,
+    *tweaks: _typings.IndexedTweak,
+    bound_details_right_padding: int | float | None = None,
+    direction: abjad.Vertical | None = None,
+    left_broken: bool = False,
+    staff_padding: int | float | None = None,
+) -> abjad.Wrapper:
+    unbundled_indicator = _indicators._unbundle_indicator(spanner_start)
+    assert unbundled_indicator.spanner_start is True
+    if bound_details_right_padding is not None:
+        string = rf"- \tweak bound-details.right.padding {bound_details_right_padding}"
+        tweaks = tweaks + (abjad.Tweak(string),)
+    if staff_padding is not None:
+        tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
+    spanner_start = _tweaks.bundle_tweaks(spanner_start, tweaks)
+    first_leaf = abjad.select.leaf(argument, 0)
+    wrapper = _indicators._attach_persistent_indicator(
+        first_leaf,
+        spanner_start,
+        direction=direction,
+    )
+    tag = _helpers.function_name(_frame())
+    if left_broken:
+        tag = tag.append(_tags.LEFT_BROKEN)
+    _tags.wrappers([wrapper], tag)
+    return wrapper
+
+
+def attach_spanner_stop(
+    argument,
+    spanner_stop,
+    *,
+    right_broken: bool = False,
+) -> abjad.Wrapper:
+    assert spanner_stop.spanner_stop is True, repr(spanner_stop)
+    final_leaf = abjad.select.leaf(argument, -1)
+    wrapper = _indicators._attach_persistent_indicator(
+        final_leaf,
+        spanner_stop,
+    )
+    tag = _helpers.function_name(_frame())
+    if right_broken:
+        tag = tag.append(_tags.RIGHT_BROKEN)
+    _tags.wrappers([wrapper], tag)
+    return wrapper
+
+
 def beam(
     argument,
     *tweaks: abjad.Tweak,
@@ -205,7 +205,7 @@ def beam(
         abjad.detach(abjad.StopBeam, leaf)
     wrappers = []
     if start_beam is not None:
-        wrapper = _attach_spanner_start(
+        wrapper = attach_spanner_start(
             argument,
             start_beam,
             *tweaks,
@@ -213,7 +213,7 @@ def beam(
         )
         wrappers.append(wrapper)
     if stop_beam is not None:
-        wrapper = _attach_spanner_stop(
+        wrapper = attach_spanner_stop(
             argument,
             stop_beam,
         )
@@ -296,7 +296,7 @@ def hairpin(
         )
         wrappers.extend(wrappers_)
     if start_hairpin is not None:
-        wrapper = _attach_spanner_start(
+        wrapper = attach_spanner_start(
             argument,
             start_hairpin,
             *tweaks,
@@ -304,7 +304,7 @@ def hairpin(
         )
         wrappers.append(wrapper)
     if stop_hairpin is not None:
-        wrapper = _attach_spanner_stop(
+        wrapper = attach_spanner_stop(
             argument,
             stop_hairpin,
             right_broken=right_broken,
@@ -756,14 +756,14 @@ def slur(
         stop_slur_ = stop_slur or abjad.StopSlur()
     wrappers = []
     if start_slur_ is not None:
-        wrapper = _attach_spanner_start(
+        wrapper = attach_spanner_start(
             argument,
             start_slur_,
             *tweaks,
         )
         wrappers.append(wrapper)
     if stop_slur_ is not None:
-        wrapper = _attach_spanner_stop(
+        wrapper = attach_spanner_stop(
             argument,
             stop_slur_,
         )
@@ -782,14 +782,14 @@ def sustain_pedal(
     assert isinstance(stop_piano_pedal, abjad.StopPianoPedal), repr(stop_piano_pedal)
     wrappers = []
     if start_piano_pedal is not None:
-        wrapper = _attach_spanner_start(
+        wrapper = attach_spanner_start(
             argument,
             start_piano_pedal,
             *tweaks,
         )
         wrappers.append(wrapper)
     if stop_piano_pedal is not None:
-        wrapper = _attach_spanner_stop(
+        wrapper = attach_spanner_stop(
             argument,
             stop_piano_pedal,
         )

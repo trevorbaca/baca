@@ -36,7 +36,7 @@ def bow_speed(
             argument = _spanners.rleak_next_nonobgc_leaf(argument)
         specifier = specifiers[0]
         wrappers = []
-        wrapper = _spanners._attach_spanner_start(
+        wrapper = _spanners.attach_spanner_start(
             argument,
             specifier.spanner_start,
             *tweaks,
@@ -44,7 +44,7 @@ def bow_speed(
             staff_padding=staff_padding,
         )
         wrappers.append(wrapper)
-        wrapper = _spanners._attach_spanner_stop(
+        wrapper = _spanners.attach_spanner_stop(
             argument,
             specifier.spanner_stop,
             right_broken=right_broken,
@@ -94,7 +94,7 @@ def circle_bow(
             argument = _spanners.rleak_next_nonobgc_leaf(argument)
         specifier = specifiers[0]
         wrappers = []
-        wrapper = _spanners._attach_spanner_start(
+        wrapper = _spanners.attach_spanner_start(
             argument,
             specifier.spanner_start,
             *tweaks,
@@ -102,7 +102,7 @@ def circle_bow(
             staff_padding=staff_padding,
         )
         wrappers.append(wrapper)
-        wrapper = _spanners._attach_spanner_stop(
+        wrapper = _spanners.attach_spanner_stop(
             argument,
             specifier.spanner_stop,
             right_broken=right_broken,
@@ -149,7 +149,7 @@ def scp(
             argument = _spanners.rleak_next_nonobgc_leaf(argument)
         specifier = specifiers[0]
         wrappers = []
-        wrapper = _spanners._attach_spanner_start(
+        wrapper = _spanners.attach_spanner_start(
             argument,
             specifier.spanner_start,
             *tweaks,
@@ -158,7 +158,7 @@ def scp(
             staff_padding=staff_padding,
         )
         wrappers.append(wrapper)
-        wrapper = _spanners._attach_spanner_stop(
+        wrapper = _spanners.attach_spanner_stop(
             argument,
             specifier.spanner_stop,
             right_broken=right_broken,
@@ -215,7 +215,7 @@ def text(
             argument = _spanners.rleak_next_nonobgc_leaf(argument)
         specifier = specifiers[0]
         wrappers = []
-        wrapper = _spanners._attach_spanner_start(
+        wrapper = _spanners.attach_spanner_start(
             argument,
             specifier.spanner_start,
             *tweaks,
@@ -223,7 +223,7 @@ def text(
             staff_padding=staff_padding,
         )
         wrappers.append(wrapper)
-        wrapper = _spanners._attach_spanner_stop(
+        wrapper = _spanners.attach_spanner_stop(
             argument,
             specifier.spanner_stop,
             right_broken=right_broken,
@@ -273,7 +273,7 @@ def vibrato(
             argument = _spanners.rleak_next_nonobgc_leaf(argument)
         specifier = specifiers[0]
         wrappers = []
-        wrapper = _spanners._attach_spanner_start(
+        wrapper = _spanners.attach_spanner_start(
             argument,
             specifier.spanner_start,
             *tweaks,
@@ -281,7 +281,7 @@ def vibrato(
             staff_padding=staff_padding,
         )
         wrappers.append(wrapper)
-        wrapper = _spanners._attach_spanner_stop(
+        wrapper = _spanners.attach_spanner_stop(
             argument,
             specifier.spanner_stop,
             right_broken=right_broken,

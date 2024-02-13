@@ -41,7 +41,7 @@ def clb(
     assert len(specifiers) == 1
     specifier = specifiers[0]
     wrappers = []
-    wrapper = _spanners._attach_spanner_start(
+    wrapper = _spanners.attach_spanner_start(
         argument,
         specifier.spanner_start,
         *tweaks,
@@ -49,7 +49,7 @@ def clb(
         staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
-    wrapper = _spanners._attach_spanner_stop(
+    wrapper = _spanners.attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
@@ -77,7 +77,7 @@ def covered(
     assert len(specifiers) == 1
     specifier = specifiers[0]
     wrappers = []
-    wrapper = _spanners._attach_spanner_start(
+    wrapper = _spanners.attach_spanner_start(
         argument,
         specifier.spanner_start,
         *tweaks,
@@ -85,7 +85,7 @@ def covered(
         staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
-    wrapper = _spanners._attach_spanner_stop(
+    wrapper = _spanners.attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
@@ -111,7 +111,7 @@ def damp(
     assert len(specifiers) == 1
     specifier = specifiers[0]
     wrappers = []
-    wrapper = _spanners._attach_spanner_start(
+    wrapper = _spanners.attach_spanner_start(
         argument,
         specifier.spanner_start,
         *tweaks,
@@ -119,7 +119,7 @@ def damp(
         staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
-    wrapper = _spanners._attach_spanner_stop(
+    wrapper = _spanners.attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
@@ -147,7 +147,7 @@ def half_clt(
     assert len(specifiers) == 1
     specifier = specifiers[0]
     wrappers = []
-    wrapper = _spanners._attach_spanner_start(
+    wrapper = _spanners.attach_spanner_start(
         argument,
         specifier.spanner_start,
         *tweaks,
@@ -155,7 +155,7 @@ def half_clt(
         staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
-    wrapper = _spanners._attach_spanner_stop(
+    wrapper = _spanners.attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
@@ -182,7 +182,7 @@ def material_annotation(
     assert len(specifiers) == 1
     specifier = specifiers[0]
     wrappers = []
-    wrapper = _spanners._attach_spanner_start(
+    wrapper = _spanners.attach_spanner_start(
         argument,
         specifier.spanner_start,
         *tweaks,
@@ -190,7 +190,7 @@ def material_annotation(
         staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
-    wrapper = _spanners._attach_spanner_stop(
+    wrapper = _spanners.attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
@@ -218,7 +218,7 @@ def metric_modulation(
     assert len(specifiers) == 1
     specifier = specifiers[0]
     wrappers = []
-    wrapper = _spanners._attach_spanner_start(
+    wrapper = _spanners.attach_spanner_start(
         argument,
         specifier.spanner_start,
         *tweaks,
@@ -226,7 +226,7 @@ def metric_modulation(
         staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
-    wrapper = _spanners._attach_spanner_stop(
+    wrapper = _spanners.attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
@@ -274,7 +274,7 @@ def pizzicato(
     assert len(specifiers) == 1
     specifier = specifiers[0]
     wrappers = []
-    wrapper = _spanners._attach_spanner_start(
+    wrapper = _spanners.attach_spanner_start(
         argument,
         specifier.spanner_start,
         *tweaks,
@@ -282,7 +282,7 @@ def pizzicato(
         staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
-    wrapper = _spanners._attach_spanner_stop(
+    wrapper = _spanners.attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
@@ -309,7 +309,7 @@ def spazzolato(
     assert len(specifiers) == 1
     specifier = specifiers[0]
     wrappers = []
-    wrapper = _spanners._attach_spanner_start(
+    wrapper = _spanners.attach_spanner_start(
         argument,
         specifier.spanner_start,
         *tweaks,
@@ -317,7 +317,7 @@ def spazzolato(
         staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
-    wrapper = _spanners._attach_spanner_stop(
+    wrapper = _spanners.attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
@@ -351,7 +351,7 @@ def string_number(
     assert len(specifiers) == 1
     specifier = specifiers[0]
     wrappers = []
-    wrapper = _spanners._attach_spanner_start(
+    wrapper = _spanners.attach_spanner_start(
         argument,
         specifier.spanner_start,
         *tweaks,
@@ -359,7 +359,7 @@ def string_number(
         staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
-    wrapper = _spanners._attach_spanner_stop(
+    wrapper = _spanners.attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
@@ -386,7 +386,7 @@ def tasto(
     assert len(specifiers) == 1
     specifier = specifiers[0]
     wrappers = []
-    wrapper = _spanners._attach_spanner_start(
+    wrapper = _spanners.attach_spanner_start(
         argument,
         specifier.spanner_start,
         *tweaks,
@@ -394,7 +394,7 @@ def tasto(
         staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
-    wrapper = _spanners._attach_spanner_stop(
+    wrapper = _spanners.attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
@@ -448,7 +448,7 @@ def trill(
         string = rf"- \tweak TrillPitchHead.stencil {string}"
         start_trill_span_ = abjad.bundle(start_trill_span_, string)
     wrappers = []
-    wrapper = _spanners._attach_spanner_start(
+    wrapper = _spanners.attach_spanner_start(
         argument,
         start_trill_span_,
         *tweaks,
@@ -456,7 +456,7 @@ def trill(
         staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
-    wrapper = _spanners._attach_spanner_stop(
+    wrapper = _spanners.attach_spanner_stop(
         argument,
         stop_trill_span,
         right_broken=right_broken,
@@ -482,7 +482,7 @@ def xfb(
     assert len(specifiers) == 1
     specifier = specifiers[0]
     wrappers = []
-    wrapper = _spanners._attach_spanner_start(
+    wrapper = _spanners.attach_spanner_start(
         argument,
         specifier.spanner_start,
         *tweaks,
@@ -490,7 +490,7 @@ def xfb(
         staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
-    wrapper = _spanners._attach_spanner_stop(
+    wrapper = _spanners.attach_spanner_stop(
         argument,
         specifier.spanner_stop,
         right_broken=right_broken,
