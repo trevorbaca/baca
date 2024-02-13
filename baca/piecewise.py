@@ -22,6 +22,7 @@ def hairpin(
     do_not_start_spanner_on_final_piece: bool = False,
     forbid_al_niente_to_bar_line: bool = False,
     left_broken: bool = False,
+    match: bool = False,
     right_broken: bool = False,
     rleak: bool = False,
 ) -> list[abjad.Wrapper]:
@@ -42,10 +43,17 @@ def hairpin(
         argument[-1] = _spanners.rleak_next_nonobgc_leaf(argument[-1])
     if do_not_bookend is None:
         do_not_bookend = False
+    if match is True and len(specifiers) != len(argument):
+        message = f"\n{len(specifiers)} specifiers ...."
+        for specifier in specifiers:
+            message += "\n\t" + str(specifier)
+        message += f"\n{len(argument)} argument pieces ..."
+        for piece in argument:
+            message += "\n\t" + str(piece)
+        raise Exception(message)
     wrappers = _spannerlib.iterate_pieces(
         argument,
         *tweaks,
-        attach_stop_hairpin_on_right_broken_final_piece=True,
         debug=debug,
         do_not_bookend=do_not_bookend,
         do_not_start_spanner_on_final_piece=do_not_start_spanner_on_final_piece,

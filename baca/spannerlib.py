@@ -175,7 +175,6 @@ def attach_spanner_stop(
 def iterate_pieces(
     pieces,
     *tweaks: _typings.IndexedTweak,
-    attach_stop_hairpin_on_right_broken_final_piece: bool = False,
     debug: bool = False,
     do_not_bookend: bool = False,
     bound_details_right_padding: int | float | None = None,
@@ -244,23 +243,6 @@ def iterate_pieces(
         is_first_piece = current_piece_index == 0
         is_penultimate_piece = current_piece_index == total_pieces - 2
         is_final_piece = current_piece_index == total_pieces - 1
-        if (
-            is_final_piece
-            and right_broken is True
-            and attach_stop_hairpin_on_right_broken_final_piece is True
-        ):
-            # raise Exception("do not use this branch.")
-            specifier = Specifier(spanner_stop=abjad.StopHairpin())
-            tag_ = _helpers.function_name(_frame(), n=1)
-            tag_ = tag_.append(_tags.RIGHT_BROKEN)
-            wrappers_ = specifier._attach_indicators(
-                stop_leaf,
-                current_piece_index,
-                tag_,
-                tweaks,
-                total_pieces,
-            )
-            wrappers.extend(wrappers_)
         if (
             bookend is True
             and current_piece_index == total_pieces - 1
