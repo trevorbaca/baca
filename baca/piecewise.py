@@ -18,11 +18,13 @@ def hairpin(
     descriptor: str,
     *tweaks: _typings.IndexedTweak,
     debug: bool = False,
+    cyclic: bool = False,
     do_not_bookend: bool | None = None,
     do_not_start_spanner_on_final_piece: bool = False,
     forbid_al_niente_to_bar_line: bool = False,
     left_broken: bool = False,
-    match: bool = False,
+    # match: bool = False,
+    match: bool = True,
     right_broken: bool = False,
     rleak: bool = False,
 ) -> list[abjad.Wrapper]:
@@ -43,7 +45,7 @@ def hairpin(
         argument[-1] = _spanners.rleak_next_nonobgc_leaf(argument[-1])
     if do_not_bookend is None:
         do_not_bookend = False
-    if match is True and len(specifiers) != len(argument):
+    if cyclic is False and match is True and len(specifiers) != len(argument):
         message = f"\n{len(specifiers)} specifiers ...."
         for specifier in specifiers:
             message += "\n\t" + str(specifier)

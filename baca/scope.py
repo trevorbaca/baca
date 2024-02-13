@@ -32,6 +32,11 @@ class DynamicScope:
         except TypeError:
             return 1
 
+    def anchor(self):
+        leaves = self.rleaves()
+        assert abjad.get.has_indicator(leaves[-1], _enums.ANCHOR_NOTE)
+        return leaves
+
     def leaf(self, n, *, grace=None):
         return abjad.select.leaf(self.argument, n, exclude=_enums.HIDDEN, grace=grace)
 

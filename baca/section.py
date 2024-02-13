@@ -1739,11 +1739,15 @@ class DictionaryGetItemWrapper:
                 result.extend(leaves)
         return result
 
-    def get(self, start, stop=None):
+    def get(self, start, stop=None, *, anchor=False):
         if stop is not None:
-            return self.__getitem__((start, stop))
+            leaves = self.__getitem__((start, stop))
         else:
-            return self.__getitem__(start)
+            leaves = self.__getitem__(start)
+        if anchor is True:
+            leaves = _select.rleaves(leaves)
+            assert abjad.get.has_indicator(leaves[-1], _enums.ANCHOR_NOTE)
+        return leaves
 
     def leaves(self):
         result = []
