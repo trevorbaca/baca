@@ -256,6 +256,9 @@ def iterate_pieces(
         is_right_broken_final_piece = False
         start_leaf = abjad.select.leaf(piece, 0)
         stop_leaf = abjad.select.leaf(piece, -1)
+        specifier = cyclic_specifiers[current_piece_index]
+        unbundled_specifier = _indicatorlib.unbundle_indicator(specifier)
+        spanner_start = unbundled_specifier.spanner_start
         if (
             bookend is True
             and is_final_piece
@@ -266,14 +269,7 @@ def iterate_pieces(
             should_bookend = True
         else:
             should_bookend = False
-        specifier = cyclic_specifiers[current_piece_index]
-        unbundled_specifier = _indicatorlib.unbundle_indicator(specifier)
-        unbundled_spanner_start = unbundled_specifier.spanner_start
-        if (
-            is_final_piece
-            and right_broken
-            and not isinstance(unbundled_spanner_start, abjad.StartTextSpan)
-        ):
+        if right_broken and not isinstance(spanner_start, abjad.StartTextSpan):
             should_bookend = False
         if is_final_piece and just_backstole_right_text:
             specifier = dataclasses.replace(specifier, spanner_start=None)
