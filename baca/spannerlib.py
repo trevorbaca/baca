@@ -90,8 +90,6 @@ class Specifier:
             abjad.StartTextSpan,
             abjad.StopTextSpan,
         )
-        if is_left_broken_first_piece:
-            tag = tag.append(_tags.LEFT_BROKEN)
         for indicator in self:
             unbundled_indicator = _indicatorlib.unbundle_indicator(indicator)
             assert isinstance(unbundled_indicator, prototype), repr(indicator)
@@ -119,6 +117,11 @@ class Specifier:
                     overwrite=True,
                 )
             tag_ = tag
+            if (
+                is_left_broken_first_piece
+                and getattr(unbundled_indicator, "spanner_start", False) is True
+            ):
+                tag_ = tag_.append(_tags.LEFT_BROKEN)
             if (
                 is_right_broken_final_piece
                 and getattr(unbundled_indicator, "spanner_stop", False) is True
@@ -303,10 +306,8 @@ def iterate_pieces(
         if is_first_piece or previous_had_bookend:
             specifier = dataclasses.replace(specifier, spanner_stop=None)
         if is_first_piece and left_broken:
-            # tag_ = tag_.append(_tags.LEFT_BROKEN)
             is_left_broken_first_piece = True
         if is_final_piece and right_broken:
-            # tag_ = tag_.append(_tags.RIGHT_BROKEN)
             is_right_broken_final_piece = True
         wrappers_ = specifier.attach_indicators(
             start_leaf,
