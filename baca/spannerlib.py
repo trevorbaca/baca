@@ -46,7 +46,21 @@ class Specifier:
             prototype = (abjad.StopHairpin, abjad.StopTextSpan)
             assert isinstance(unbundled, prototype), repr(self.spanner_stop)
 
-    def _attach_indicators(
+    @property
+    def indicators(self) -> list:
+        result: list = []
+        if self.spanner_stop:
+            result.append(self.spanner_stop)
+        if self.indicator:
+            result.append(self.indicator)
+        if self.spanner_start:
+            result.append(self.spanner_start)
+        return result
+
+    def compound(self) -> bool:
+        return bool(self.indicator) and bool(self.spanner_start)
+
+    def attach_indicators(
         self,
         leaf,
         current_piece_index,
@@ -107,20 +121,6 @@ class Specifier:
             )
             wrappers.append(wrapper)
         return wrappers
-
-    @property
-    def indicators(self) -> list:
-        result: list = []
-        if self.spanner_stop:
-            result.append(self.spanner_stop)
-        if self.indicator:
-            result.append(self.indicator)
-        if self.spanner_start:
-            result.append(self.spanner_start)
-        return result
-
-    def compound(self) -> bool:
-        return bool(self.indicator) and bool(self.spanner_start)
 
 
 def attach_spanner_start(
@@ -290,11 +290,11 @@ def iterate_pieces(
         tag_ = _helpers.function_name(_frame(), n=1)
         if is_first_piece or previous_had_bookend:
             specifier = dataclasses.replace(specifier, spanner_stop=None)
-            if left_broken:
-                tag_ = tag_.append(_tags.LEFT_BROKEN)
+        if is_first_piece and left_broken:
+            tag_ = tag_.append(_tags.LEFT_BROKEN)
         if is_final_piece and right_broken:
             tag_ = tag_.append(_tags.RIGHT_BROKEN)
-        wrappers_ = specifier._attach_indicators(
+        wrappers_ = specifier.attach_indicators(
             start_leaf,
             current_piece_index,
             tag_,
@@ -311,7 +311,7 @@ def iterate_pieces(
                 next_specifier = dataclasses.replace(next_specifier, spanner_start=None)
             if next_specifier.compound():
                 next_specifier = dataclasses.replace(next_specifier, spanner_start=None)
-            wrappers_ = next_specifier._attach_indicators(
+            wrappers_ = next_specifier.attach_indicators(
                 stop_leaf,
                 current_piece_index,
                 tag_,
@@ -331,7 +331,7 @@ def iterate_pieces(
             tag_ = _helpers.function_name(_frame(), n=3)
             if right_broken:
                 tag_ = tag_.append(_tags.RIGHT_BROKEN)
-            wrappers_ = specifier._attach_indicators(
+            wrappers_ = specifier.attach_indicators(
                 stop_leaf,
                 current_piece_index,
                 tag_,
