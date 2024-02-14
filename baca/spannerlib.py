@@ -314,9 +314,6 @@ def iterate_pieces(
         )
         wrappers.extend(wrappers_)
         if should_bookend:
-            tag_ = _helpers.function_name(_frame(), n=2)
-            if is_final_piece and right_broken:
-                tag_ = tag_.append(_tags.RIGHT_BROKEN)
             if specifier.bookended_spanner_start is not None:
                 next_specifier = dataclasses.replace(next_specifier, spanner_start=None)
             if next_specifier.compound():
@@ -324,7 +321,7 @@ def iterate_pieces(
             wrappers_ = next_specifier.attach_indicators(
                 stop_leaf,
                 current_piece_index,
-                tag_,
+                _helpers.function_name(_frame(), n=2),
                 tweaks,
                 total_pieces,
             )
