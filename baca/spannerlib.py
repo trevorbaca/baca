@@ -68,7 +68,9 @@ class Specifier:
         tweaks,
         total_pieces,
         *,
-        just_bookended_leaf=None,
+        is_left_broken_first_piece: bool = False,
+        is_right_broken_final_piece: bool = False,
+        just_bookended_leaf: abjad.Leaf | None = None,
     ) -> list[abjad.Wrapper]:
         assert isinstance(leaf, abjad.Leaf), repr(leaf)
         assert isinstance(current_piece_index, int), repr(current_piece_index)
@@ -88,6 +90,8 @@ class Specifier:
             abjad.StartTextSpan,
             abjad.StopTextSpan,
         )
+        if is_left_broken_first_piece:
+            tag = tag.append(_tags.LEFT_BROKEN)
         for indicator in self:
             unbundled_indicator = _indicatorlib.unbundle_indicator(indicator)
             assert isinstance(unbundled_indicator, prototype), repr(indicator)
@@ -114,10 +118,16 @@ class Specifier:
                     total=total_pieces,
                     overwrite=True,
                 )
+            tag_ = tag
+            if (
+                is_right_broken_final_piece
+                and getattr(unbundled_indicator, "spanner_stop", False) is True
+            ):
+                tag_ = tag_.append(_tags.RIGHT_BROKEN)
             wrapper = _indicatorlib.attach_persistent_indicator(
                 leaf,
                 indicator,
-                tag=tag,
+                tag=tag_,
             )
             wrappers.append(wrapper)
         return wrappers
@@ -237,8 +247,10 @@ def iterate_pieces(
         if debug:
             print(current_piece_index, piece)
         is_first_piece = current_piece_index == 0
+        is_left_broken_first_piece = False
         is_penultimate_piece = current_piece_index == total_pieces - 2
         is_final_piece = current_piece_index == total_pieces - 1
+        is_right_broken_final_piece = False
         start_leaf = abjad.select.leaf(piece, 0)
         stop_leaf = abjad.select.leaf(piece, -1)
         if (
@@ -291,15 +303,19 @@ def iterate_pieces(
         if is_first_piece or previous_had_bookend:
             specifier = dataclasses.replace(specifier, spanner_stop=None)
         if is_first_piece and left_broken:
-            tag_ = tag_.append(_tags.LEFT_BROKEN)
+            # tag_ = tag_.append(_tags.LEFT_BROKEN)
+            is_left_broken_first_piece = True
         if is_final_piece and right_broken:
-            tag_ = tag_.append(_tags.RIGHT_BROKEN)
+            # tag_ = tag_.append(_tags.RIGHT_BROKEN)
+            is_right_broken_final_piece = True
         wrappers_ = specifier.attach_indicators(
             start_leaf,
             current_piece_index,
             tag_,
             tweaks,
             total_pieces,
+            is_left_broken_first_piece=is_left_broken_first_piece,
+            is_right_broken_final_piece=is_right_broken_final_piece,
             just_bookended_leaf=just_bookended_leaf,
         )
         wrappers.extend(wrappers_)
