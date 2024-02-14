@@ -284,10 +284,7 @@ def make_dynamic(
     indicator: abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin | abjad.Bundle
     if "_" in string:
         raise Exception(f"use hyphens instead of underscores ({string!r}).")
-    if string == "niente":
-        raise Exception("ASDF")
-        indicator = abjad.Dynamic("niente", command=r"\!")
-    elif string.endswith("-ancora") and '"' not in string:
+    if string.endswith("-ancora") and '"' not in string:
         dynamic = string.split("-")[0]
         command = rf"\baca-{dynamic}-ancora"
         indicator = abjad.Dynamic(dynamic, command=command)
