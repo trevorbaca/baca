@@ -337,13 +337,14 @@ def iterate_pieces(
             specifier = Specifier(spanner_stop=spanner_stop)
             tag_ = _helpers.function_name(_frame(), n=3)
             if right_broken:
-                tag_ = tag_.append(_tags.RIGHT_BROKEN)
+                is_right_broken_final_piece = True
             wrappers_ = specifier.attach_indicators(
                 stop_leaf,
                 current_piece_index,
                 tag_,
                 tweaks,
                 total_pieces,
+                is_right_broken_final_piece=is_right_broken_final_piece,
             )
             wrappers.extend(wrappers_)
         previous_had_bookend = should_bookend
