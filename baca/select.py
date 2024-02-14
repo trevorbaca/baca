@@ -1048,6 +1048,7 @@ def lparts(
     counts: typing.Sequence[int],
     *,
     exclude: abjad.typings.Exclude | None = None,
+    # TODO: change default to abjad.EXACT
     overhang: bool | abjad.enums.Comparison = False,
 ) -> list[list[abjad.Leaf]]:
     r"""

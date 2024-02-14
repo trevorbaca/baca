@@ -179,7 +179,6 @@ def iterate_pieces(
     do_not_bookend: bool = False,
     bound_details_right_padding: int | float | None = None,
     do_not_start_spanner_on_final_piece: bool = False,
-    leak_spanner_stop: bool = False,
     left_broken: bool = False,
     right_broken: bool = False,
     specifiers: typing.Sequence = (),
@@ -192,7 +191,6 @@ def iterate_pieces(
     assert isinstance(do_not_bookend, bool), repr(do_not_bookend)
     bookend = not do_not_bookend
     assert isinstance(do_not_start_spanner_on_final_piece, bool)
-    assert isinstance(leak_spanner_stop, bool), repr(leak_spanner_stop)
     assert isinstance(left_broken, bool), repr(left_broken)
     assert isinstance(pieces, list | _scope.DynamicScope), repr(pieces)
     piece_prototype = (
@@ -332,11 +330,9 @@ def iterate_pieces(
             is_final_piece
             and not just_backstole_right_text
             and next_bundle.spanner_stop
-            and ((start_leaf is not stop_leaf) or leak_spanner_stop)
+            and (start_leaf is not stop_leaf)
         ):
             spanner_stop = dataclasses.replace(next_bundle.spanner_stop)
-            if leak_spanner_stop:
-                spanner_stop = dataclasses.replace(spanner_stop, leak=True)
             specifier = Specifier(spanner_stop=spanner_stop)
             tag_ = _helpers.function_name(_frame(), n=3)
             if right_broken:
