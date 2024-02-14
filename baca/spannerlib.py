@@ -42,9 +42,8 @@ class Specifier:
             prototype = (abjad.StartHairpin, abjad.StartTextSpan)
             assert isinstance(unbundled, prototype), repr(self.spanner_start)
         if self.spanner_stop is not None:
-            unbundled = _indicatorlib.unbundle_indicator(self.spanner_stop)
             prototype = (abjad.StopHairpin, abjad.StopTextSpan)
-            assert isinstance(unbundled, prototype), repr(self.spanner_stop)
+            assert isinstance(self.spanner_stop, prototype), repr(self.spanner_stop)
 
     @property
     def indicators(self) -> list:
