@@ -12,7 +12,6 @@ from . import dynamics as _dynamics
 from . import helpers as _helpers
 from . import indicatorlib as _indicatorlib
 from . import scope as _scope
-from . import tags as _tags
 from . import tweaks as _tweaks
 from . import typings as _typings
 
@@ -46,7 +45,7 @@ class HairpinSpecifier:
         if self.spanner_stop is not None:
             assert isinstance(self.spanner_stop, abjad.StopHairpin)
 
-    def attach_indicators(
+    def attach_items(
         self,
         leaf,
         current_piece_index,
@@ -61,8 +60,7 @@ class HairpinSpecifier:
         assert isinstance(leaf, abjad.Leaf), repr(leaf)
         assert isinstance(current_piece_index, int), repr(current_piece_index)
         assert isinstance(tag, abjad.Tag), repr(tag)
-        for tweak in tweaks:
-            assert isinstance(tweak, abjad.Tweak | tuple), repr(tweak)
+        assert isinstance(tweaks, tuple), repr(tweaks)
         assert isinstance(total_pieces, int), repr(total_pieces)
         assert isinstance(just_bookended_leaf, abjad.Leaf | type(None))
         wrappers = []
@@ -82,23 +80,17 @@ class HairpinSpecifier:
                     total=total_pieces,
                     overwrite=True,
                 )
-            tag_ = tag
-            if (
-                is_left_broken_first_piece
-                and getattr(indicator, "spanner_start", False) is True
-            ):
-                # TODO: move attach_persistent_indicator?
-                tag_ = tag_.append(_tags.LEFT_BROKEN)
-            if (
-                is_right_broken_final_piece
-                and getattr(indicator, "spanner_stop", False) is True
-            ):
-                # TODO: move attach_persistent_indicator?
-                tag_ = tag_.append(_tags.RIGHT_BROKEN)
+            left_broken, right_broken = False, False
+            if is_left_broken_first_piece and isinstance(indicator, abjad.StartHairpin):
+                left_broken = True
+            if is_right_broken_final_piece and isinstance(indicator, abjad.StopHairpin):
+                right_broken = True
             wrapper = _indicatorlib.attach_persistent_indicator(
                 leaf,
                 item,
-                tag=tag_,
+                left_broken=left_broken,
+                right_broken=right_broken,
+                tag=tag,
             )
             wrappers.append(wrapper)
         return wrappers
@@ -184,7 +176,7 @@ def iterate_hairpin_pieces(
             is_left_broken_first_piece = True
         if is_final_piece and right_broken:
             is_right_broken_final_piece = True
-        wrappers_ = specifier.attach_indicators(
+        wrappers_ = specifier.attach_items(
             start_leaf,
             current_piece_index,
             tag_,
@@ -198,7 +190,7 @@ def iterate_hairpin_pieces(
         if should_bookend:
             if next_specifier.indicator and next_specifier.spanner_start:
                 next_specifier = dataclasses.replace(next_specifier, spanner_start=None)
-            wrappers_ = next_specifier.attach_indicators(
+            wrappers_ = next_specifier.attach_items(
                 stop_leaf,
                 current_piece_index,
                 _helpers.function_name(_frame(), n=2),
@@ -218,7 +210,7 @@ def iterate_hairpin_pieces(
             tag_ = _helpers.function_name(_frame(), n=3)
             if right_broken:
                 is_right_broken_final_piece = True
-            wrappers_ = specifier.attach_indicators(
+            wrappers_ = specifier.attach_items(
                 stop_leaf,
                 current_piece_index,
                 tag_,

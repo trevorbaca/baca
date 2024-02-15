@@ -19,7 +19,9 @@ def attach_persistent_indicator(
     context: str | None = None,
     deactivate: bool = False,
     direction: abjad.Vertical | None = None,
+    left_broken: bool = False,
     manifests=None,
+    right_broken: bool = False,
     tag: abjad.Tag | None = None,
 ) -> abjad.Wrapper:
     unbundled_indicator = unbundle_indicator(indicator)
@@ -36,6 +38,10 @@ def attach_persistent_indicator(
         tag = tag.append(_tags.SPANNER_START)
     if getattr(unbundled_indicator, "spanner_stop", False) is True:
         tag = tag.append(_tags.SPANNER_STOP)
+    if left_broken is True:
+        tag = tag.append(_tags.LEFT_BROKEN)
+    if right_broken is True:
+        tag = tag.append(_tags.RIGHT_BROKEN)
     reapplied = _treat.remove_reapplied_wrappers(leaf, indicator)
     wrapper = abjad.attach(
         indicator,
