@@ -129,7 +129,6 @@ def iterate_hairpin_pieces(
         is_final_piece = current_piece_index == total_pieces - 1
         is_left_broken_first_piece = False
         is_right_broken_final_piece = False
-        start_leaf = abjad.select.leaf(piece, 0)
         specifier = cyclic_specifiers[current_piece_index]
         if (
             is_final_piece
@@ -137,12 +136,11 @@ def iterate_hairpin_pieces(
             and do_not_start_spanner_on_final_piece is True
         ):
             specifier = dataclasses.replace(specifier, spanner_start=None)
-        if is_first_piece:
-            specifier = dataclasses.replace(specifier, spanner_stop=None)
         if is_first_piece and left_broken:
             is_left_broken_first_piece = True
         if is_final_piece and right_broken:
             is_right_broken_final_piece = True
+        start_leaf = abjad.select.leaf(piece, 0)
         wrappers_ = specifier.attach_indicators(
             start_leaf,
             current_piece_index,
