@@ -21,7 +21,6 @@ def hairpin(
     cyclic: bool = False,
     do_not_bookend: bool | None = None,
     do_not_start_spanner_on_final_piece: bool = False,
-    forbid_al_niente_to_bar_line: bool = False,
     left_broken: bool = False,
     match: bool = False,
     # match: bool = True,
@@ -37,10 +36,7 @@ def hairpin(
         assert descriptor[0] in ("o", "<", ">"), repr(descriptor)
     if right_broken is True:
         assert descriptor[-1] == "!", repr(descriptor)
-    specifiers = _hairpinlib.parse_hairpin_descriptor(
-        descriptor,
-        forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
-    )
+    specifiers = _hairpinlib.parse_hairpin_descriptor(descriptor)
     if rleak is True:
         argument[-1] = _spanners.rleak_next_nonobgc_leaf(argument[-1])
     if do_not_bookend is None:

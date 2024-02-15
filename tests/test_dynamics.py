@@ -22,20 +22,14 @@ def test_ancora_effort_dynamics():
 
 def test_al_niente_start_hairpins():
     """
-    Al niente start hairpins are special-cased to carry to-barline tweaks.
+    Al niente start hairpins are no longer special-cased to carry to-barline tweaks.
     """
 
     dynamic = baca.dynamics.make_dynamic(">o")
-    assert dynamic == abjad.Bundle(
-        indicator=abjad.StartHairpin(shape=">o"),
-        tweaks=(abjad.Tweak(string="- \\tweak to-barline ##t", tag=None),),
-    )
+    assert dynamic == abjad.StartHairpin(shape=">o")
 
     dynamic = baca.dynamics.make_dynamic("|>o")
-    assert dynamic == abjad.Bundle(
-        indicator=abjad.StartHairpin(shape="|>o"),
-        tweaks=(abjad.Tweak(string="- \\tweak to-barline ##t", tag=None),),
-    )
+    assert dynamic == abjad.StartHairpin(shape="|>o")
 
 
 def test_appena_udibile():

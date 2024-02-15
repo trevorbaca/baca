@@ -119,10 +119,7 @@ def test_single_hairpin_08():
     assert len(specifiers) == 1
     assert specifiers[0] == baca.hairpinlib.HairpinSpecifier(
         indicator=abjad.Dynamic("f"),
-        spanner_start=abjad.Bundle(
-            indicator=abjad.StartHairpin(">o"),
-            tweaks=(abjad.Tweak(string="- \\tweak to-barline ##t"),),
-        ),
+        spanner_start=abjad.StartHairpin(">o"),
     )
 
 

@@ -276,9 +276,8 @@ def linear(bounds: str, *, effort: bool = False) -> str:
     return string
 
 
-# TODO: maybe remove forbid_al_niente_to_bar_line?
 def make_dynamic(
-    string: str, *, forbid_al_niente_to_bar_line: bool = False
+    string,
 ) -> abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin | abjad.Bundle:
     assert isinstance(string, str), repr(string)
     scheme_manifest = SchemeManifest()
@@ -355,9 +354,6 @@ def make_dynamic(
         indicator = abjad.Dynamic(f"{string}", command=command)
     elif string in abjad.StartHairpin.known_shapes:
         indicator = abjad.StartHairpin(string)
-        # TODO: maybe remove?
-        if string.endswith(">o") and not forbid_al_niente_to_bar_line:
-            indicator = abjad.bundle(indicator, r"- \tweak to-barline ##t")
     elif string == "!":
         indicator = abjad.StopHairpin()
     elif string == "?":

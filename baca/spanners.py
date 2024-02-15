@@ -51,17 +51,13 @@ def hairpin(
     descriptor: str,
     *tweaks: abjad.Tweak,
     debug=False,
-    forbid_al_niente_to_bar_line: bool = False,
     left_broken: bool = False,
     right_broken: bool = False,
     rleak: bool = False,
 ) -> list[abjad.Wrapper]:
     if rleak is True:
         argument = rleak_next_nonobgc_leaf(argument)
-    specifiers = _hairpinlib.parse_hairpin_descriptor(
-        descriptor,
-        forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
-    )
+    specifiers = _hairpinlib.parse_hairpin_descriptor(descriptor)
     start_dynamic, start_hairpin, stop_dynamic, stop_hairpin = None, None, None, None
     if len(specifiers) == 1:
         specifier = specifiers[0]

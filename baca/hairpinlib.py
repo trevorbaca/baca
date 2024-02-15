@@ -221,7 +221,6 @@ def iterate_hairpin_pieces(
 
 def parse_hairpin_descriptor(
     descriptor: str,
-    forbid_al_niente_to_bar_line: bool = False,
 ) -> list[HairpinSpecifier]:
     assert isinstance(descriptor, str), repr(descriptor)
     indicators = []
@@ -233,9 +232,7 @@ def parse_hairpin_descriptor(
         if string == "-":
             indicator = "-"
         else:
-            indicator = _dynamics.make_dynamic(
-                string, forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line
-            )
+            indicator = _dynamics.make_dynamic(string)
         indicators.append(indicator)
     # TODO: does this duplicate len(indicators) == 1 branch below?
     if len(indicators) == 1:
