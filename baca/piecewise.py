@@ -53,7 +53,7 @@ def hairpin(
         for piece in argument:
             message += "\n\t" + str(piece)
         raise Exception(message)
-    wrappers = _spannerlib.iterate_pieces(
+    wrappers = _spannerlib.iterate_hairpin_pieces(
         argument,
         *tweaks,
         debug=debug,

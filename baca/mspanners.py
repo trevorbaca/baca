@@ -56,7 +56,7 @@ def bow_speed(
             do_not_bookend = False
         if do_not_rleak is False:
             argument[-1] = _spanners.rleak_next_nonobgc_leaf(argument[-1])
-        wrappers = _spannerlib.iterate_pieces(
+        wrappers = _spannerlib.iterate_text_spanner_pieces(
             argument,
             *tweaks,
             do_not_bookend=do_not_bookend,
@@ -112,7 +112,7 @@ def circle_bow(
     else:
         if do_not_rleak is False:
             argument[-1] = _spanners.rleak_next_nonobgc_leaf(argument[-1])
-        wrappers = _spannerlib.iterate_pieces(
+        wrappers = _spannerlib.iterate_text_spanner_pieces(
             argument,
             *tweaks,
             left_broken=left_broken,
@@ -170,7 +170,7 @@ def scp(
             do_not_bookend = False
         if do_not_rleak is False:
             argument[-1] = _spanners.rleak_next_nonobgc_leaf(argument[-1])
-        wrappers = _spannerlib.iterate_pieces(
+        wrappers = _spannerlib.iterate_text_spanner_pieces(
             argument,
             *tweaks,
             do_not_bookend=do_not_bookend,
@@ -234,7 +234,7 @@ def text(
             do_not_bookend = False
         if do_not_rleak is False:
             argument[-1] = _spanners.rleak_next_nonobgc_leaf(argument[-1])
-        wrappers = _spannerlib.iterate_pieces(
+        wrappers = _spannerlib.iterate_text_spanner_pieces(
             argument,
             *tweaks,
             do_not_bookend=do_not_bookend,
@@ -291,7 +291,7 @@ def vibrato(
             do_not_bookend = False
         if do_not_rleak is False:
             argument[-1] = _spanners.rleak_next_nonobgc_leaf(argument[-1])
-        wrappers = _spannerlib.iterate_pieces(
+        wrappers = _spannerlib.iterate_text_spanner_pieces(
             argument,
             *tweaks,
             do_not_bookend=do_not_bookend,

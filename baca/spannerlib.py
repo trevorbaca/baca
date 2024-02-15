@@ -185,7 +185,173 @@ def attach_spanner_stop(
     return wrapper
 
 
-def iterate_pieces(
+def iterate_hairpin_pieces(
+    pieces,
+    *tweaks: _typings.IndexedTweak,
+    debug: bool = False,
+    do_not_bookend: bool = False,
+    bound_details_right_padding: int | float | None = None,
+    do_not_start_spanner_on_final_piece: bool = False,
+    left_broken: bool = False,
+    right_broken: bool = False,
+    specifiers: typing.Sequence = (),
+    staff_padding: int | float | None = None,
+) -> list[abjad.Wrapper]:
+    assert isinstance(tweaks, tuple), repr(tweaks)
+    for tweak in tweaks:
+        assert isinstance(tweak, abjad.Tweak | tuple), repr(tweak)
+    assert pieces is not None
+    assert isinstance(do_not_bookend, bool), repr(do_not_bookend)
+    bookend = not do_not_bookend
+    assert isinstance(do_not_start_spanner_on_final_piece, bool)
+    assert isinstance(left_broken, bool), repr(left_broken)
+    assert isinstance(pieces, list | _scope.DynamicScope), repr(pieces)
+    piece_prototype = (
+        list,
+        abjad.Container,
+        abjad.LogicalTie,
+        abjad.Note,
+        _scope.DynamicScope,
+    )
+    for piece in pieces:
+        assert isinstance(piece, piece_prototype), repr(piece)
+    assert isinstance(right_broken, bool), repr(right_broken)
+    assert isinstance(specifiers, list), repr(specifiers)
+    assert all(isinstance(_, Specifier) for _ in specifiers), repr(specifiers)
+    assert isinstance(staff_padding, int | float | type(None)), repr(staff_padding)
+    # if len(specifiers) != len(pieces):
+    if False:
+        message = f"{len(specifiers)} specifiers != {len(pieces)} pieces:"
+        for specifier in specifiers:
+            message += "\n\t" + str(specifier)
+        raise Exception(message)
+    cyclic_specifiers = abjad.CyclicTuple(specifiers)
+    if bound_details_right_padding is not None:
+        string = rf"- \tweak bound-details.right.padding {bound_details_right_padding}"
+        tweaks = tweaks + (abjad.Tweak(string),)
+    if staff_padding is not None:
+        tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
+    total_pieces = len(pieces)
+    assert 0 < total_pieces, repr(total_pieces)
+    just_backstole_right_text = False
+    just_bookended_leaf = None
+    previous_had_bookend = False
+    wrappers = []
+    if debug:
+        print()
+        for specifier in specifiers:
+            print(specifier)
+        print()
+        for piece in pieces:
+            print(piece)
+        print()
+        breakpoint()
+    for current_piece_index, piece in enumerate(pieces):
+        if debug:
+            print(current_piece_index, piece)
+        is_first_piece = current_piece_index == 0
+        is_left_broken_first_piece = False
+        is_penultimate_piece = current_piece_index == total_pieces - 2
+        is_final_piece = current_piece_index == total_pieces - 1
+        is_right_broken_final_piece = False
+        start_leaf = abjad.select.leaf(piece, 0)
+        stop_leaf = abjad.select.leaf(piece, -1)
+        specifier = cyclic_specifiers[current_piece_index]
+        if (
+            bookend is True
+            and is_final_piece
+            and right_broken is False
+            and do_not_start_spanner_on_final_piece is False
+            and not isinstance(piece, abjad.Leaf)
+            and 1 < len(piece)
+        ):
+            should_bookend = True
+        else:
+            should_bookend = False
+        if is_final_piece and just_backstole_right_text:
+            specifier = dataclasses.replace(specifier, spanner_start=None)
+        next_specifier = cyclic_specifiers[current_piece_index + 1]
+        next_unbundled_specifier = _indicatorlib.unbundle_indicator(next_specifier)
+        next_unbundled_spanner_start = next_unbundled_specifier.spanner_start
+        if should_bookend and specifier.bookended_spanner_start:
+            specifier = dataclasses.replace(
+                specifier, spanner_start=specifier.bookended_spanner_start
+            )
+        if (
+            is_penultimate_piece
+            and (
+                (isinstance(pieces[-1], abjad.Leaf) or len(pieces[-1]) == 1)
+                or do_not_start_spanner_on_final_piece is True
+            )
+            and isinstance(next_unbundled_spanner_start, abjad.StartTextSpan)
+        ):
+            specifier = dataclasses.replace(
+                specifier, spanner_start=specifier.bookended_spanner_start
+            )
+            just_backstole_right_text = True
+        if (
+            is_final_piece
+            and specifier.spanner_start
+            and do_not_start_spanner_on_final_piece is True
+        ):
+            specifier = dataclasses.replace(specifier, spanner_start=None)
+        tag_ = _helpers.function_name(_frame(), n=1)
+        if is_first_piece or previous_had_bookend:
+            specifier = dataclasses.replace(specifier, spanner_stop=None)
+        if is_first_piece and left_broken:
+            is_left_broken_first_piece = True
+        if is_final_piece and right_broken:
+            is_right_broken_final_piece = True
+        wrappers_ = specifier.attach_indicators(
+            start_leaf,
+            current_piece_index,
+            tag_,
+            tweaks,
+            total_pieces,
+            is_left_broken_first_piece=is_left_broken_first_piece,
+            is_right_broken_final_piece=is_right_broken_final_piece,
+            just_bookended_leaf=just_bookended_leaf,
+        )
+        wrappers.extend(wrappers_)
+        if should_bookend:
+            if specifier.bookended_spanner_start is not None:
+                next_specifier = dataclasses.replace(next_specifier, spanner_start=None)
+            if next_specifier.compound():
+                next_specifier = dataclasses.replace(next_specifier, spanner_start=None)
+            wrappers_ = next_specifier.attach_indicators(
+                stop_leaf,
+                current_piece_index,
+                _helpers.function_name(_frame(), n=2),
+                tweaks,
+                total_pieces,
+            )
+            wrappers.extend(wrappers_)
+            just_bookended_leaf = stop_leaf
+        elif (
+            is_final_piece
+            and not just_backstole_right_text
+            and next_specifier.spanner_stop
+            and (start_leaf is not stop_leaf)
+        ):
+            spanner_stop = dataclasses.replace(next_specifier.spanner_stop)
+            specifier = Specifier(spanner_stop=spanner_stop)
+            tag_ = _helpers.function_name(_frame(), n=3)
+            if right_broken:
+                is_right_broken_final_piece = True
+            wrappers_ = specifier.attach_indicators(
+                stop_leaf,
+                current_piece_index,
+                tag_,
+                tweaks,
+                total_pieces,
+                is_right_broken_final_piece=is_right_broken_final_piece,
+            )
+            wrappers.extend(wrappers_)
+        previous_had_bookend = should_bookend
+    return wrappers
+
+
+def iterate_text_spanner_pieces(
     pieces,
     *tweaks: _typings.IndexedTweak,
     debug: bool = False,
