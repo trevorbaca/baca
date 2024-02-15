@@ -149,7 +149,6 @@ class TextSpannerSpecifier:
         *,
         is_left_broken_first_piece: bool = False,
         is_right_broken_final_piece: bool = False,
-        just_bookended_leaf: abjad.Leaf | None = None,
     ) -> list[abjad.Wrapper]:
         assert isinstance(leaf, abjad.Leaf), repr(leaf)
         assert isinstance(current_piece_index, int), repr(current_piece_index)
@@ -157,16 +156,11 @@ class TextSpannerSpecifier:
         for tweak in tweaks:
             assert isinstance(tweak, abjad.Tweak | tuple), repr(tweak)
         assert isinstance(total_pieces, int), repr(total_pieces)
-        # assert isinstance(just_bookended_leaf, abjad.Leaf | type(None))
-        assert just_bookended_leaf is None, repr(just_bookended_leaf)
         wrappers = []
         prototype = (abjad.Bundle, abjad.StartTextSpan, abjad.StopTextSpan)
         for item in self:
             indicator = _indicatorlib.unbundle_indicator(item)
             assert isinstance(item, prototype), repr(item)
-            # TODO: hoist above this function
-            if leaf is just_bookended_leaf:
-                continue
             if not isinstance(item, abjad.Bundle):
                 item = dataclasses.replace(item)
             if isinstance(indicator, abjad.StartTextSpan):
@@ -319,6 +313,7 @@ def iterate_hairpin_pieces(
     for current_piece_index, piece in enumerate(pieces):
         if debug:
             print(current_piece_index, piece)
+        assert previous_had_bookend is False, repr(previous_had_bookend)
         is_first_piece = current_piece_index == 0
         is_left_broken_first_piece = False
         is_final_piece = current_piece_index == total_pieces - 1
@@ -445,7 +440,6 @@ def iterate_text_spanner_pieces(
     total_pieces = len(pieces)
     assert 0 < total_pieces, repr(total_pieces)
     just_backstole_right_text = False
-    just_bookended_leaf = None
     previous_had_bookend = False
     wrappers = []
     if debug:
@@ -460,6 +454,7 @@ def iterate_text_spanner_pieces(
     for current_piece_index, piece in enumerate(pieces):
         if debug:
             print(current_piece_index, piece)
+        assert previous_had_bookend is False, repr(previous_had_bookend)
         is_first_piece = current_piece_index == 0
         is_left_broken_first_piece = False
         is_penultimate_piece = current_piece_index == total_pieces - 2
@@ -521,7 +516,6 @@ def iterate_text_spanner_pieces(
             total_pieces,
             is_left_broken_first_piece=is_left_broken_first_piece,
             is_right_broken_final_piece=is_right_broken_final_piece,
-            just_bookended_leaf=just_bookended_leaf,
         )
         wrappers.extend(wrappers_)
         if should_bookend:
@@ -535,7 +529,6 @@ def iterate_text_spanner_pieces(
                 total_pieces,
             )
             wrappers.extend(wrappers_)
-            just_bookended_leaf = stop_leaf
         elif (
             is_final_piece
             and not just_backstole_right_text
