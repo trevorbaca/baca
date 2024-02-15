@@ -35,9 +35,7 @@ class HairpinSpecifier:
 
     def __post_init__(self):
         if self.indicator is not None:
-            # TODO: this should be abjad.Dynamic only:
-            prototype = (abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin)
-            assert isinstance(self.indicator, prototype), repr(self.indicator)
+            assert isinstance(self.indicator, abjad.Dynamic), repr(self.indicator)
         if self.spanner_start is not None:
             assert isinstance(self.spanner_start, abjad.Bundle | abjad.StartHairpin)
             indicator = _indicatorlib.unbundle_indicator(self.spanner_start)
@@ -267,12 +265,11 @@ def parse_hairpin_descriptor(
         if _indicatorlib.is_maybe_bundled(indicator, abjad.StartHairpin):
             assert isinstance(indicator, abjad.StartHairpin)
             specifier = HairpinSpecifier(spanner_start=indicator)
-        else:
-            # TODO: stop-hairpin should be spanner_stop=stop_hairpin
-            assert isinstance(indicator, abjad.Dynamic | abjad.StopHairpin), repr(
-                indicator
-            )
+        elif isinstance(indicator, abjad.Dynamic):
             specifier = HairpinSpecifier(indicator=indicator)
+        else:
+            assert isinstance(indicator, abjad.StopHairpin)
+            specifier = HairpinSpecifier(spanner_stop=indicator)
         specifiers.append(specifier)
         return specifiers
     for left, right in abjad.sequence.nwise(indicators):
@@ -288,22 +285,30 @@ def parse_hairpin_descriptor(
         elif _indicatorlib.is_maybe_bundled(left, abjad.Dynamic) and right == "-":
             specifier = HairpinSpecifier(indicator=left)
             specifiers.append(specifier)
-        elif left == "-" and _indicatorlib.is_maybe_bundled(
-            right, abjad.StartHairpin | abjad.StopHairpin
-        ):
-            specifier = HairpinSpecifier(indicator=right)
+        elif left == "-" and _indicatorlib.is_maybe_bundled(right, abjad.StartHairpin):
+            specifier = HairpinSpecifier(spanner_start=right)
+            specifiers.append(specifier)
+        elif left == "-" and _indicatorlib.is_maybe_bundled(right, abjad.StopHairpin):
+            specifier = HairpinSpecifier(spanner_stop=right)
             specifiers.append(specifier)
         elif _indicatorlib.is_maybe_bundled(
-            left, abjad.Dynamic | abjad.StopHairpin
+            left, abjad.Dynamic
         ) and _indicatorlib.is_maybe_bundled(right, abjad.StartHairpin):
             specifier = HairpinSpecifier(indicator=left, spanner_start=right)
             specifiers.append(specifier)
-    if indicators and _indicatorlib.is_maybe_bundled(
-        indicators[-1], abjad.Dynamic | abjad.StopHairpin
-    ):
-        indicator = indicators[-1]
-        # TODO: stop-hairpin should be spanner_stop=stop_hairpin
-        assert isinstance(indicator, abjad.Dynamic | abjad.StopHairpin), repr(indicator)
-        specifier = HairpinSpecifier(indicator=indicator)
-        specifiers.append(specifier)
+        elif _indicatorlib.is_maybe_bundled(
+            left, abjad.StopHairpin
+        ) and _indicatorlib.is_maybe_bundled(right, abjad.StartHairpin):
+            specifier = HairpinSpecifier(spanner_stop=left, spanner_start=right)
+            specifiers.append(specifier)
+    if indicators:
+        final_indicator = indicators[-1]
+        if isinstance(final_indicator, abjad.Dynamic):
+            specifier = HairpinSpecifier(indicator=final_indicator)
+            specifiers.append(specifier)
+        elif isinstance(final_indicator, abjad.StopHairpin):
+            specifier = HairpinSpecifier(spanner_stop=final_indicator)
+            specifiers.append(specifier)
+        else:
+            pass
     return specifiers

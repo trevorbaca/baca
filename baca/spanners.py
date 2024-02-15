@@ -72,15 +72,8 @@ def hairpin(
         first, second = specifiers
         start_dynamic = first.indicator
         start_hairpin = first.spanner_start
-        if isinstance(second.indicator, abjad.Dynamic):
-            stop_dynamic = second.indicator
-        else:
-            assert isinstance(second.indicator, abjad.StopHairpin)
-            stop_hairpin = second.indicator
-        if second.spanner_start:
-            raise Exception(descriptor)
-        if second.spanner_stop:
-            raise Exception(descriptor)
+        stop_dynamic = second.indicator
+        stop_hairpin = second.spanner_stop
     else:
         raise NotImplementedError(descriptor)
     if start_dynamic is not None:

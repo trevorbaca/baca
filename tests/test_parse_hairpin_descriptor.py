@@ -46,7 +46,7 @@ def test_single_hairpin_01():
         spanner_start=abjad.StartHairpin("<"),
     )
     assert specifiers[1] == baca.hairpinlib.HairpinSpecifier(
-        indicator=abjad.StopHairpin(),
+        spanner_stop=abjad.StopHairpin(),
     )
 
 
@@ -79,7 +79,7 @@ def test_single_hairpin_04():
         spanner_start=abjad.StartHairpin("<"),
     )
     assert specifiers[1] == baca.hairpinlib.HairpinSpecifier(
-        indicator=abjad.StopHairpin(),
+        spanner_stop=abjad.StopHairpin(),
     )
 
 
@@ -170,8 +170,8 @@ def test_multiple_hairpins_03():
         spanner_start=abjad.StartHairpin("--"),
     )
     assert specifiers[1] == baca.hairpinlib.HairpinSpecifier(
-        indicator=abjad.StopHairpin(),
         spanner_start=abjad.StartHairpin(">"),
+        spanner_stop=abjad.StopHairpin(),
     )
     assert specifiers[2] == baca.hairpinlib.HairpinSpecifier(
         indicator=abjad.Dynamic("p"),
@@ -185,7 +185,7 @@ def test_multiple_hairpins_04():
         indicator=abjad.Dynamic("mf"),
     )
     assert specifiers[1] == baca.hairpinlib.HairpinSpecifier(
-        indicator=abjad.StartHairpin("o<"),
+        spanner_start=abjad.StartHairpin("o<"),
     )
     assert specifiers[2] == baca.hairpinlib.HairpinSpecifier(
         indicator=abjad.Dynamic("p"),
