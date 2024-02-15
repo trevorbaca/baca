@@ -155,19 +155,16 @@ def iterate_hairpin_pieces(
             is_right_broken_final_piece=is_right_broken_final_piece,
         )
         wrappers.extend(wrappers_)
-        next_specifier = cyclic_specifiers[current_piece_index + 1]
         if (
-            bookend is True
-            and is_final_piece
+            is_final_piece is True
+            and bookend is True
             and right_broken is False
             and do_not_start_spanner_on_final_piece is False
             and not isinstance(piece, abjad.Leaf)
             and 1 < len(piece)
         ):
-            should_bookend = True
-        else:
-            should_bookend = False
-        if should_bookend:
+            next_specifier = cyclic_specifiers[current_piece_index + 1]
+            # TODO: change to "if next_specifier.spanner_start":
             if next_specifier.indicator and next_specifier.spanner_start:
                 next_specifier = dataclasses.replace(next_specifier, spanner_start=None)
             wrappers_ = next_specifier.attach_indicators(
@@ -176,26 +173,6 @@ def iterate_hairpin_pieces(
                 _helpers.function_name(_frame(), n=2),
                 tweaks,
                 total_pieces,
-            )
-            wrappers.extend(wrappers_)
-        elif (
-            is_final_piece
-            and next_specifier.spanner_stop
-            and (start_leaf is not stop_leaf)
-        ):
-            breakpoint()
-            spanner_stop = dataclasses.replace(next_specifier.spanner_stop)
-            specifier = HairpinSpecifier(spanner_stop=spanner_stop)
-            tag_ = _helpers.function_name(_frame(), n=3)
-            if right_broken:
-                is_right_broken_final_piece = True
-            wrappers_ = specifier.attach_indicators(
-                stop_leaf,
-                current_piece_index,
-                tag_,
-                tweaks,
-                total_pieces,
-                is_right_broken_final_piece=is_right_broken_final_piece,
             )
             wrappers.extend(wrappers_)
     return wrappers
