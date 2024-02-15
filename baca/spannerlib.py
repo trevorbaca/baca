@@ -64,23 +64,19 @@ class HairpinSpecifier:
         for tweak in tweaks:
             assert isinstance(tweak, abjad.Tweak | tuple), repr(tweak)
         assert isinstance(total_pieces, int), repr(total_pieces)
-        if just_bookended_leaf is not None:
-            assert isinstance(just_bookended_leaf, abjad.Leaf), repr(
-                just_bookended_leaf
-            )
+        assert isinstance(just_bookended_leaf, abjad.Leaf | type(None))
         wrappers = []
         prototype = (abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin)
-        # TODO: change to "for item in self"
         for item in self:
-            unbundled_indicator = _indicatorlib.unbundle_indicator(item)
-            assert isinstance(unbundled_indicator, prototype), repr(item)
+            indicator = _indicatorlib.unbundle_indicator(item)
+            assert isinstance(indicator, prototype), repr(item)
             if leaf is just_bookended_leaf and not isinstance(
-                unbundled_indicator, abjad.StartHairpin
+                indicator, abjad.StartHairpin
             ):
                 continue
             if not isinstance(item, abjad.Bundle):
                 item = dataclasses.replace(item)
-            if isinstance(unbundled_indicator, abjad.StartHairpin):
+            if isinstance(indicator, abjad.StartHairpin):
                 for tweak in tweaks:
                     if isinstance(tweak, abjad.Tweak):
                         new_tweak = tweak
@@ -98,13 +94,13 @@ class HairpinSpecifier:
             tag_ = tag
             if (
                 is_left_broken_first_piece
-                and getattr(unbundled_indicator, "spanner_start", False) is True
+                and getattr(indicator, "spanner_start", False) is True
             ):
                 # TODO: move attach_persistent_indicator?
                 tag_ = tag_.append(_tags.LEFT_BROKEN)
             if (
                 is_right_broken_final_piece
-                and getattr(unbundled_indicator, "spanner_stop", False) is True
+                and getattr(indicator, "spanner_stop", False) is True
             ):
                 # TODO: move attach_persistent_indicator?
                 tag_ = tag_.append(_tags.RIGHT_BROKEN)
@@ -161,10 +157,8 @@ class TextSpannerSpecifier:
         for tweak in tweaks:
             assert isinstance(tweak, abjad.Tweak | tuple), repr(tweak)
         assert isinstance(total_pieces, int), repr(total_pieces)
-        if just_bookended_leaf is not None:
-            assert isinstance(just_bookended_leaf, abjad.Leaf), repr(
-                just_bookended_leaf
-            )
+        # assert isinstance(just_bookended_leaf, abjad.Leaf | type(None))
+        assert just_bookended_leaf is None, repr(just_bookended_leaf)
         wrappers = []
         prototype = (abjad.Bundle, abjad.StartTextSpan, abjad.StopTextSpan)
         for item in self:
