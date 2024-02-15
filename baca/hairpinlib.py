@@ -154,8 +154,6 @@ def iterate_hairpin_pieces(
         if (
             is_final_piece is True
             and do_not_bookend is False
-            # and right_broken is False
-            and do_not_start_spanner_on_final_piece is False
             and not isinstance(piece, abjad.Leaf)
             and 1 < len(piece)
         ):
