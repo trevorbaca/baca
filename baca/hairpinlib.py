@@ -50,21 +50,16 @@ class HairpinSpecifier:
         *,
         is_left_broken_first_piece: bool = False,
         is_right_broken_final_piece: bool = False,
-        just_bookended_leaf: abjad.Leaf | None = None,
     ) -> list[abjad.Wrapper]:
         assert isinstance(leaf, abjad.Leaf), repr(leaf)
         assert isinstance(current_piece_index, int), repr(current_piece_index)
         assert isinstance(tag, abjad.Tag), repr(tag)
         assert isinstance(tweaks, tuple), repr(tweaks)
         assert isinstance(total_pieces, int), repr(total_pieces)
-        assert isinstance(just_bookended_leaf, abjad.Leaf | type(None))
         wrappers = []
         prototype = (abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin)
         for indicator in self:
             assert isinstance(indicator, prototype), repr(indicator)
-            if leaf is just_bookended_leaf:
-                if not isinstance(indicator, abjad.StartHairpin):
-                    continue
             if isinstance(indicator, abjad.StartHairpin):
                 indicator = _tweaks.bundle_tweaks(
                     indicator,
@@ -129,7 +124,6 @@ def iterate_hairpin_pieces(
         tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
     total_pieces = len(pieces)
     assert 0 < total_pieces, repr(total_pieces)
-    just_bookended_leaf = None
     wrappers = []
     for current_piece_index, piece in enumerate(pieces):
         is_first_piece = current_piece_index == 0
@@ -172,7 +166,6 @@ def iterate_hairpin_pieces(
             total_pieces,
             is_left_broken_first_piece=is_left_broken_first_piece,
             is_right_broken_final_piece=is_right_broken_final_piece,
-            just_bookended_leaf=just_bookended_leaf,
         )
         wrappers.extend(wrappers_)
         if should_bookend:
@@ -186,7 +179,6 @@ def iterate_hairpin_pieces(
                 total_pieces,
             )
             wrappers.extend(wrappers_)
-            just_bookended_leaf = stop_leaf
         elif (
             is_final_piece
             and next_specifier.spanner_stop
