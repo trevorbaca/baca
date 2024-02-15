@@ -5,7 +5,7 @@ Tweaks.
 import abjad
 
 
-def bundle_tweaks(argument, tweaks, i=None, total=None, overwrite=False):
+def bundle_tweaks(argument, tweaks, *, i=None, total=None, overwrite=False):
     if not tweaks:
         return argument
     all_tweaks = []

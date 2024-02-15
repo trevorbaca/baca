@@ -64,16 +64,10 @@ class TextSpannerSpecifier:
         for item in self:
             indicator = _indicatorlib.unbundle_indicator(item)
             assert isinstance(item, prototype), repr(item)
+            # TODO: remove this branch?
             if not isinstance(item, abjad.Bundle):
                 item = dataclasses.replace(item)
             if isinstance(indicator, abjad.StartTextSpan):
-                for tweak in tweaks:
-                    if isinstance(tweak, abjad.Tweak):
-                        new_tweak = tweak
-                    else:
-                        assert isinstance(tweak, tuple), repr(tweak)
-                        new_tweak = tweak[0]
-                    assert isinstance(new_tweak, abjad.Tweak), repr(tweak)
                 item = _tweaks.bundle_tweaks(
                     item,
                     tweaks,
@@ -148,21 +142,8 @@ def iterate_text_spanner_pieces(
     total_pieces = len(pieces)
     assert 0 < total_pieces, repr(total_pieces)
     just_backstole_right_text = False
-    previous_had_bookend = False
     wrappers = []
-    if debug:
-        print()
-        for specifier in specifiers:
-            print(specifier)
-        print()
-        for piece in pieces:
-            print(piece)
-        print()
-        breakpoint()
     for current_piece_index, piece in enumerate(pieces):
-        if debug:
-            print(current_piece_index, piece)
-        assert previous_had_bookend is False, repr(previous_had_bookend)
         is_first_piece = current_piece_index == 0
         is_left_broken_first_piece = False
         is_penultimate_piece = current_piece_index == total_pieces - 2
@@ -210,7 +191,7 @@ def iterate_text_spanner_pieces(
         ):
             specifier = dataclasses.replace(specifier, spanner_start=None)
         tag_ = _helpers.function_name(_frame(), n=1)
-        if is_first_piece or previous_had_bookend:
+        if is_first_piece:
             specifier = dataclasses.replace(specifier, spanner_stop=None)
         if is_first_piece and left_broken:
             is_left_broken_first_piece = True
@@ -257,7 +238,6 @@ def iterate_text_spanner_pieces(
                 is_right_broken_final_piece=is_right_broken_final_piece,
             )
             wrappers.extend(wrappers_)
-        previous_had_bookend = should_bookend
     return wrappers
 
 

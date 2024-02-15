@@ -74,16 +74,10 @@ class HairpinSpecifier:
                 indicator, abjad.StartHairpin
             ):
                 continue
+            # TODO: maybe remove this branch?
             if not isinstance(item, abjad.Bundle):
                 item = dataclasses.replace(item)
             if isinstance(indicator, abjad.StartHairpin):
-                for tweak in tweaks:
-                    if isinstance(tweak, abjad.Tweak):
-                        new_tweak = tweak
-                    else:
-                        assert isinstance(tweak, tuple), repr(tweak)
-                        new_tweak = tweak[0]
-                    assert isinstance(new_tweak, abjad.Tweak), repr(tweak)
                 item = _tweaks.bundle_tweaks(
                     item,
                     tweaks,
@@ -147,12 +141,6 @@ def iterate_hairpin_pieces(
     assert isinstance(specifiers, list), repr(specifiers)
     assert all(isinstance(_, HairpinSpecifier) for _ in specifiers), repr(specifiers)
     assert isinstance(staff_padding, int | float | type(None)), repr(staff_padding)
-    # if len(specifiers) != len(pieces):
-    if False:
-        message = f"{len(specifiers)} specifiers != {len(pieces)} pieces:"
-        for specifier in specifiers:
-            message += "\n\t" + str(specifier)
-        raise Exception(message)
     cyclic_specifiers = abjad.CyclicTuple(specifiers)
     if bound_details_right_padding is not None:
         string = rf"- \tweak bound-details.right.padding {bound_details_right_padding}"
@@ -163,21 +151,8 @@ def iterate_hairpin_pieces(
     assert 0 < total_pieces, repr(total_pieces)
     just_backstole_right_text = False
     just_bookended_leaf = None
-    previous_had_bookend = False
     wrappers = []
-    if debug:
-        print()
-        for specifier in specifiers:
-            print(specifier)
-        print()
-        for piece in pieces:
-            print(piece)
-        print()
-        breakpoint()
     for current_piece_index, piece in enumerate(pieces):
-        if debug:
-            print(current_piece_index, piece)
-        assert previous_had_bookend is False, repr(previous_had_bookend)
         is_first_piece = current_piece_index == 0
         is_left_broken_first_piece = False
         is_final_piece = current_piece_index == total_pieces - 1
@@ -206,7 +181,7 @@ def iterate_hairpin_pieces(
         ):
             specifier = dataclasses.replace(specifier, spanner_start=None)
         tag_ = _helpers.function_name(_frame(), n=1)
-        if is_first_piece or previous_had_bookend:
+        if is_first_piece:
             specifier = dataclasses.replace(specifier, spanner_stop=None)
         if is_first_piece and left_broken:
             is_left_broken_first_piece = True
@@ -255,7 +230,6 @@ def iterate_hairpin_pieces(
                 is_right_broken_final_piece=is_right_broken_final_piece,
             )
             wrappers.extend(wrappers_)
-        previous_had_bookend = should_bookend
     return wrappers
 
 
