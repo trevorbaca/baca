@@ -62,11 +62,8 @@ class TextSpannerSpecifier:
         wrappers = []
         prototype = (abjad.Bundle, abjad.StartTextSpan, abjad.StopTextSpan)
         for item in self:
-            indicator = _indicatorlib.unbundle_indicator(item)
             assert isinstance(item, prototype), repr(item)
-            # TODO: remove this branch?
-            if not isinstance(item, abjad.Bundle):
-                item = dataclasses.replace(item)
+            indicator = _indicatorlib.unbundle_indicator(item)
             if isinstance(indicator, abjad.StartTextSpan):
                 item = _tweaks.bundle_tweaks(
                     item,

@@ -74,9 +74,6 @@ class HairpinSpecifier:
                 indicator, abjad.StartHairpin
             ):
                 continue
-            # TODO: maybe remove this branch?
-            if not isinstance(item, abjad.Bundle):
-                item = dataclasses.replace(item)
             if isinstance(indicator, abjad.StartHairpin):
                 item = _tweaks.bundle_tweaks(
                     item,
