@@ -99,7 +99,6 @@ def iterate_hairpin_pieces(
     assert isinstance(pieces, list), repr(pieces)
     assert isinstance(tweaks, tuple), repr(tweaks)
     assert isinstance(do_not_bookend, bool), repr(do_not_bookend)
-    bookend = not do_not_bookend
     assert isinstance(do_not_start_spanner_on_final_piece, bool)
     assert isinstance(left_broken, bool), repr(left_broken)
     assert isinstance(pieces, list | _scope.DynamicScope), repr(pieces)
@@ -131,7 +130,6 @@ def iterate_hairpin_pieces(
         is_left_broken_first_piece = False
         is_right_broken_final_piece = False
         start_leaf = abjad.select.leaf(piece, 0)
-        stop_leaf = abjad.select.leaf(piece, -1)
         specifier = cyclic_specifiers[current_piece_index]
         if (
             is_final_piece
@@ -157,16 +155,16 @@ def iterate_hairpin_pieces(
         wrappers.extend(wrappers_)
         if (
             is_final_piece is True
-            and bookend is True
+            and do_not_bookend is False
             and right_broken is False
             and do_not_start_spanner_on_final_piece is False
             and not isinstance(piece, abjad.Leaf)
             and 1 < len(piece)
         ):
             next_specifier = cyclic_specifiers[current_piece_index + 1]
-            # TODO: change to "if next_specifier.spanner_start":
-            if next_specifier.indicator and next_specifier.spanner_start:
-                next_specifier = dataclasses.replace(next_specifier, spanner_start=None)
+            next_specifier = dataclasses.replace(next_specifier, spanner_start=None)
+            assert next_specifier.spanner_start is None, repr(next_specifier)
+            stop_leaf = abjad.select.leaf(piece, -1)
             wrappers_ = next_specifier.attach_indicators(
                 stop_leaf,
                 current_piece_index,
