@@ -18,8 +18,7 @@ from . import typings as _typings
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class HairpinSpecifier:
-    # TODO: should only be abjad.Dynamic:
-    indicator: abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin | None = None
+    indicator: abjad.Dynamic | None = None
     spanner_start: abjad.Bundle | abjad.StartHairpin | None = None
     spanner_stop: abjad.StopHairpin | None = None
 
@@ -141,8 +140,8 @@ def iterate_hairpin_pieces(
     wrappers = []
     for current_piece_index, piece in enumerate(pieces):
         is_first_piece = current_piece_index == 0
-        is_left_broken_first_piece = False
         is_final_piece = current_piece_index == total_pieces - 1
+        is_left_broken_first_piece = False
         is_right_broken_final_piece = False
         start_leaf = abjad.select.leaf(piece, 0)
         stop_leaf = abjad.select.leaf(piece, -1)
