@@ -224,69 +224,43 @@ def parse_hairpin_descriptor(descriptor: str) -> list[HairpinSpecifier]:
         else:
             indicator = _dynamics.make_dynamic(string)
         indicators.append(indicator)
-    # TODO: remove in favor of loop
-    if len(indicators) == 1:
-        indicator = indicators[0]
-        if isinstance(indicator, abjad.StartHairpin):
-            specifier = HairpinSpecifier(spanner_start=indicator)
-        elif isinstance(indicator, abjad.StopHairpin):
-            specifier = HairpinSpecifier(spanner_stop=indicator)
-        else:
-            assert isinstance(indicator, abjad.Dynamic), repr(indicator)
-            specifier = HairpinSpecifier(indicator=indicator)
-        specifiers.append(specifier)
-        return specifiers
-    # TODO: remove in favor of loop
-    if isinstance(indicators[0], abjad.StartHairpin):
-        indicator = indicators.pop(0)
-        assert isinstance(indicator, abjad.StartHairpin)
-        specifier = HairpinSpecifier(spanner_start=indicator)
-        specifiers.append(specifier)
-    # TODO: remove in favor of loop
-    if len(indicators) == 1:
-        indicator = indicators[0]
-        if isinstance(indicator, abjad.StartHairpin):
-            specifier = HairpinSpecifier(spanner_start=indicator)
-        elif isinstance(indicator, abjad.StopHairpin):
-            specifier = HairpinSpecifier(spanner_stop=indicator)
-        else:
-            assert isinstance(indicator, abjad.Dynamic), repr(indicator)
-            specifier = HairpinSpecifier(indicator=indicator)
-        specifiers.append(specifier)
-        return specifiers
+    skip_next_start_hairpin = False
     for left, right in abjad.sequence.nwise(indicators):
-        if isinstance(left, abjad.StartHairpin) and isinstance(
-            right, abjad.StartHairpin
-        ):
-            raise Exception("consecutive start hairpin commands.")
+        specifier = None
+        if isinstance(left, abjad.StartHairpin) and skip_next_start_hairpin is False:
+            specifier = HairpinSpecifier(spanner_start=left)
         elif isinstance(left, abjad.Dynamic) and isinstance(right, abjad.Dynamic):
             specifier = HairpinSpecifier(indicator=left)
-            specifiers.append(specifier)
         elif isinstance(left, abjad.Dynamic) and right == "-":
             specifier = HairpinSpecifier(indicator=left)
-            specifiers.append(specifier)
         elif left == "-" and isinstance(right, abjad.StartHairpin):
             specifier = HairpinSpecifier(spanner_start=right)
-            specifiers.append(specifier)
+            skip_next_start_hairpin = True
         elif left == "-" and isinstance(right, abjad.StopHairpin):
             specifier = HairpinSpecifier(spanner_stop=right)
-            specifiers.append(specifier)
         elif isinstance(left, abjad.Dynamic) and isinstance(right, abjad.StartHairpin):
             specifier = HairpinSpecifier(indicator=left, spanner_start=right)
-            specifiers.append(specifier)
+            skip_next_start_hairpin = True
         elif isinstance(left, abjad.StopHairpin) and isinstance(
             right, abjad.StartHairpin
         ):
             specifier = HairpinSpecifier(spanner_stop=left, spanner_start=right)
+            skip_next_start_hairpin = True
+        else:
+            skip_next_start_hairpin = False
+        if specifier is not None:
             specifiers.append(specifier)
     if indicators:
         final_indicator = indicators[-1]
-        if isinstance(final_indicator, abjad.Dynamic):
-            specifier = HairpinSpecifier(indicator=final_indicator)
-            specifiers.append(specifier)
-        elif isinstance(final_indicator, abjad.StopHairpin):
+        specifier = None
+        if isinstance(final_indicator, abjad.StopHairpin):
             specifier = HairpinSpecifier(spanner_stop=final_indicator)
-            specifiers.append(specifier)
+        elif isinstance(final_indicator, abjad.Dynamic):
+            specifier = HairpinSpecifier(indicator=final_indicator)
         else:
-            pass
+            assert isinstance(final_indicator, abjad.StartHairpin)
+            if skip_next_start_hairpin is False:
+                specifier = HairpinSpecifier(spanner_start=final_indicator)
+        if specifier is not None:
+            specifiers.append(specifier)
     return specifiers
