@@ -19,20 +19,15 @@ from . import typings as _typings
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class HairpinSpecifier:
-    bookended_spanner_start: abjad.Bundle | None = None
     # TODO: should only be abjad.Dynamic:
     indicator: abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin | None = None
-    spanner_start: abjad.StartHairpin | abjad.StartTextSpan | abjad.Bundle | None = None
-    spanner_stop: abjad.StopHairpin | abjad.StopTextSpan | None = None
+    spanner_start: abjad.StartHairpin | abjad.Bundle | None = None
+    spanner_stop: abjad.StopHairpin | None = None
 
     def __iter__(self) -> typing.Iterator:
         return iter(self.indicators)
 
     def __post_init__(self):
-        if self.bookended_spanner_start is not None:
-            assert isinstance(self.bookended_spanner_start, abjad.Bundle)
-            unbundled = _indicatorlib.unbundle_indicator(self.bookended_spanner_start)
-            assert isinstance(unbundled, abjad.StartTextSpan), repr(unbundled)
         if self.indicator is not None:
             unbundled = _indicatorlib.unbundle_indicator(self.indicator)
             # TODO: this should be abjad.Dynamic only:
@@ -40,11 +35,9 @@ class HairpinSpecifier:
             assert isinstance(unbundled, prototype), repr(self.indicator)
         if self.spanner_start is not None:
             unbundled = _indicatorlib.unbundle_indicator(self.spanner_start)
-            prototype = (abjad.StartHairpin, abjad.StartTextSpan)
-            assert isinstance(unbundled, prototype), repr(self.spanner_start)
+            assert isinstance(unbundled, abjad.StartHairpin), repr(self.spanner_start)
         if self.spanner_stop is not None:
-            prototype = (abjad.StopHairpin, abjad.StopTextSpan)
-            assert isinstance(self.spanner_stop, prototype), repr(self.spanner_stop)
+            assert isinstance(self.spanner_stop, abjad.StopHairpin)
 
     @property
     def indicators(self) -> list:
@@ -87,9 +80,8 @@ class HairpinSpecifier:
             abjad.Dynamic,
             abjad.StartHairpin,
             abjad.StopHairpin,
-            abjad.StartTextSpan,
-            abjad.StopTextSpan,
         )
+        # TODO: change to "for item in self"
         for indicator in self:
             unbundled_indicator = _indicatorlib.unbundle_indicator(indicator)
             assert isinstance(unbundled_indicator, prototype), repr(indicator)
@@ -99,9 +91,7 @@ class HairpinSpecifier:
                 continue
             if not isinstance(indicator, abjad.Bundle):
                 indicator = dataclasses.replace(indicator)
-            if isinstance(
-                unbundled_indicator, abjad.StartTextSpan | abjad.StartHairpin
-            ):
+            if isinstance(unbundled_indicator, abjad.StartHairpin):
                 for item in tweaks:
                     if isinstance(item, abjad.Tweak):
                         new_tweak = item
@@ -121,11 +111,13 @@ class HairpinSpecifier:
                 is_left_broken_first_piece
                 and getattr(unbundled_indicator, "spanner_start", False) is True
             ):
+                # TODO: move attach_persistent_indicator?
                 tag_ = tag_.append(_tags.LEFT_BROKEN)
             if (
                 is_right_broken_final_piece
                 and getattr(unbundled_indicator, "spanner_stop", False) is True
             ):
+                # TODO: move attach_persistent_indicator?
                 tag_ = tag_.append(_tags.RIGHT_BROKEN)
             wrapper = _indicatorlib.attach_persistent_indicator(
                 leaf,
@@ -370,7 +362,6 @@ def iterate_hairpin_pieces(
             print(current_piece_index, piece)
         is_first_piece = current_piece_index == 0
         is_left_broken_first_piece = False
-        is_penultimate_piece = current_piece_index == total_pieces - 2
         is_final_piece = current_piece_index == total_pieces - 1
         is_right_broken_final_piece = False
         start_leaf = abjad.select.leaf(piece, 0)
@@ -390,24 +381,6 @@ def iterate_hairpin_pieces(
         if is_final_piece and just_backstole_right_text:
             specifier = dataclasses.replace(specifier, spanner_start=None)
         next_specifier = cyclic_specifiers[current_piece_index + 1]
-        next_unbundled_specifier = _indicatorlib.unbundle_indicator(next_specifier)
-        next_unbundled_spanner_start = next_unbundled_specifier.spanner_start
-        if should_bookend and specifier.bookended_spanner_start:
-            specifier = dataclasses.replace(
-                specifier, spanner_start=specifier.bookended_spanner_start
-            )
-        if (
-            is_penultimate_piece
-            and (
-                (isinstance(pieces[-1], abjad.Leaf) or len(pieces[-1]) == 1)
-                or do_not_start_spanner_on_final_piece is True
-            )
-            and isinstance(next_unbundled_spanner_start, abjad.StartTextSpan)
-        ):
-            specifier = dataclasses.replace(
-                specifier, spanner_start=specifier.bookended_spanner_start
-            )
-            just_backstole_right_text = True
         if (
             is_final_piece
             and specifier.spanner_start
@@ -433,8 +406,6 @@ def iterate_hairpin_pieces(
         )
         wrappers.extend(wrappers_)
         if should_bookend:
-            if specifier.bookended_spanner_start is not None:
-                next_specifier = dataclasses.replace(next_specifier, spanner_start=None)
             if next_specifier.compound():
                 next_specifier = dataclasses.replace(next_specifier, spanner_start=None)
             wrappers_ = next_specifier.attach_indicators(
