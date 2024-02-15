@@ -276,12 +276,10 @@ def linear(bounds: str, *, effort: bool = False) -> str:
     return string
 
 
-def make_dynamic(
-    string,
-) -> abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin | abjad.Bundle:
+def make_dynamic(string: str) -> abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin:
     assert isinstance(string, str), repr(string)
     scheme_manifest = SchemeManifest()
-    indicator: abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin | abjad.Bundle
+    indicator: abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin
     if "_" in string:
         raise Exception(f"use hyphens instead of underscores ({string!r}).")
     if string.endswith("-ancora") and '"' not in string:
@@ -368,6 +366,6 @@ def make_dynamic(
             failed = True
         if failed:
             raise Exception(f"the string {string!r} initializes no known dynamic.")
-    prototype = (abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin, abjad.Bundle)
+    prototype = (abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin)
     assert isinstance(indicator, prototype), repr(indicator)
     return indicator
