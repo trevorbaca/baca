@@ -6,6 +6,7 @@ from inspect import currentframe as _frame
 
 import abjad
 
+from . import hairpinlib as _hairpinlib
 from . import helpers as _helpers
 from . import indicatorlib as _indicatorlib
 from . import indicators as _indicators
@@ -57,7 +58,7 @@ def hairpin(
 ) -> list[abjad.Wrapper]:
     if rleak is True:
         argument = rleak_next_nonobgc_leaf(argument)
-    specifiers = _spannerlib.parse_hairpin_descriptor(
+    specifiers = _hairpinlib.parse_hairpin_descriptor(
         descriptor,
         forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
     )

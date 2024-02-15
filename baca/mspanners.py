@@ -10,6 +10,7 @@ from . import helpers as _helpers
 from . import spannerlib as _spannerlib
 from . import spanners as _spanners
 from . import tags as _tags
+from . import textspannerlib as _textspannerlib
 from . import typings as _typings
 
 
@@ -26,7 +27,7 @@ def bow_speed(
 ) -> list[abjad.Wrapper]:
     assert do_not_bookend is not False, repr(do_not_bookend)
     lilypond_id = "BowSpeed"
-    specifiers = _spannerlib.parse_text_spanner_descriptor(
+    specifiers = _textspannerlib.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=left_broken_text,
         lilypond_id=lilypond_id,
@@ -56,7 +57,7 @@ def bow_speed(
             do_not_bookend = False
         if do_not_rleak is False:
             argument[-1] = _spanners.rleak_next_nonobgc_leaf(argument[-1])
-        wrappers = _spannerlib.iterate_text_spanner_pieces(
+        wrappers = _textspannerlib.iterate_text_spanner_pieces(
             argument,
             *tweaks,
             do_not_bookend=do_not_bookend,
@@ -85,7 +86,7 @@ def circle_bow(
         assert isinstance(qualifier, str), repr(qualifier)
         descriptor = rf"\baca-circle-{qualifier}-markup =|"
     lilypond_id = "CircleBow"
-    specifiers = _spannerlib.parse_text_spanner_descriptor(
+    specifiers = _textspannerlib.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=left_broken_text,
         lilypond_id=lilypond_id,
@@ -112,7 +113,7 @@ def circle_bow(
     else:
         if do_not_rleak is False:
             argument[-1] = _spanners.rleak_next_nonobgc_leaf(argument[-1])
-        wrappers = _spannerlib.iterate_text_spanner_pieces(
+        wrappers = _textspannerlib.iterate_text_spanner_pieces(
             argument,
             *tweaks,
             left_broken=left_broken,
@@ -139,7 +140,7 @@ def scp(
 ) -> list[abjad.Wrapper]:
     assert do_not_bookend is not False, repr(do_not_bookend)
     lilypond_id = "SCP"
-    specifiers = _spannerlib.parse_text_spanner_descriptor(
+    specifiers = _textspannerlib.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=left_broken_text,
         lilypond_id=lilypond_id,
@@ -170,7 +171,7 @@ def scp(
             do_not_bookend = False
         if do_not_rleak is False:
             argument[-1] = _spanners.rleak_next_nonobgc_leaf(argument[-1])
-        wrappers = _spannerlib.iterate_text_spanner_pieces(
+        wrappers = _textspannerlib.iterate_text_spanner_pieces(
             argument,
             *tweaks,
             do_not_bookend=do_not_bookend,
@@ -201,7 +202,7 @@ def text(
 ) -> list[abjad.Wrapper]:
     assert isinstance(descriptor, str), repr(descriptor)
     assert do_not_bookend is not False, repr(do_not_bookend)
-    specifiers = _spannerlib.parse_text_spanner_descriptor(
+    specifiers = _textspannerlib.parse_text_spanner_descriptor(
         descriptor,
         direction=direction,
         left_broken_text=left_broken_text,
@@ -234,7 +235,7 @@ def text(
             do_not_bookend = False
         if do_not_rleak is False:
             argument[-1] = _spanners.rleak_next_nonobgc_leaf(argument[-1])
-        wrappers = _spannerlib.iterate_text_spanner_pieces(
+        wrappers = _textspannerlib.iterate_text_spanner_pieces(
             argument,
             *tweaks,
             do_not_bookend=do_not_bookend,
@@ -261,7 +262,7 @@ def vibrato(
 ) -> list[abjad.Wrapper]:
     assert do_not_bookend is not False, repr(do_not_bookend)
     lilypond_id = "Vibrato"
-    specifiers = _spannerlib.parse_text_spanner_descriptor(
+    specifiers = _textspannerlib.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=left_broken_text,
         lilypond_id=lilypond_id,
@@ -291,7 +292,7 @@ def vibrato(
             do_not_bookend = False
         if do_not_rleak is False:
             argument[-1] = _spanners.rleak_next_nonobgc_leaf(argument[-1])
-        wrappers = _spannerlib.iterate_text_spanner_pieces(
+        wrappers = _textspannerlib.iterate_text_spanner_pieces(
             argument,
             *tweaks,
             do_not_bookend=do_not_bookend,

@@ -6,8 +6,8 @@ from inspect import currentframe as _frame
 
 import abjad
 
+from . import hairpinlib as _hairpinlib
 from . import helpers as _helpers
-from . import spannerlib as _spannerlib
 from . import spanners as _spanners
 from . import tags as _tags
 from . import typings as _typings
@@ -37,7 +37,7 @@ def hairpin(
         assert descriptor[0] in ("o", "<", ">"), repr(descriptor)
     if right_broken is True:
         assert descriptor[-1] == "!", repr(descriptor)
-    specifiers = _spannerlib.parse_hairpin_descriptor(
+    specifiers = _hairpinlib.parse_hairpin_descriptor(
         descriptor,
         forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
     )
@@ -53,7 +53,7 @@ def hairpin(
         for piece in argument:
             message += "\n\t" + str(piece)
         raise Exception(message)
-    wrappers = _spannerlib.iterate_hairpin_pieces(
+    wrappers = _hairpinlib.iterate_hairpin_pieces(
         argument,
         *tweaks,
         debug=debug,

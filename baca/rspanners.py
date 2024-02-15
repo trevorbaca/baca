@@ -12,6 +12,7 @@ from . import indicators as _indicators
 from . import spannerlib as _spannerlib
 from . import spanners as _spanners
 from . import tags as _tags
+from . import textspannerlib as _textspannerlib
 
 
 def clb(
@@ -34,7 +35,7 @@ def clb(
         markup = r"\baca-damp-clb-four-markup"
     else:
         raise Exception(string_number)
-    specifiers = _spannerlib.parse_text_spanner_descriptor(
+    specifiers = _textspannerlib.parse_text_spanner_descriptor(
         f"{markup} =|",
         left_broken_text=r"\baca-left-broken-clb-markup",
         lilypond_id="CLB",
@@ -70,7 +71,7 @@ def covered(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners.rleak_next_nonobgc_leaf(argument)
-    specifiers = _spannerlib.parse_text_spanner_descriptor(
+    specifiers = _textspannerlib.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=left_broken_text,
         lilypond_id="Covered",
@@ -104,7 +105,7 @@ def damp(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners.rleak_next_nonobgc_leaf(argument)
-    specifiers = _spannerlib.parse_text_spanner_descriptor(
+    specifiers = _textspannerlib.parse_text_spanner_descriptor(
         r"\baca-damp-markup =|",
         left_broken_text=r"\baca-left-broken-damp-markup",
         lilypond_id="Damp",
@@ -140,7 +141,7 @@ def half_clt(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners.rleak_next_nonobgc_leaf(argument)
-    specifiers = _spannerlib.parse_text_spanner_descriptor(
+    specifiers = _textspannerlib.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=left_broken_text,
         lilypond_id="HalfCLT",
@@ -175,7 +176,7 @@ def material_annotation(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners.rleak_next_nonobgc_leaf(argument)
-    specifiers = _spannerlib.parse_text_spanner_descriptor(
+    specifiers = _textspannerlib.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=None,
         lilypond_id="MaterialAnnotation",
@@ -211,7 +212,7 @@ def metric_modulation(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners.rleak_next_nonobgc_leaf(argument)
-    specifiers = _spannerlib.parse_text_spanner_descriptor(
+    specifiers = _textspannerlib.parse_text_spanner_descriptor(
         "MM =|",
         left_broken_text=None,
         lilypond_id="MetricModulation",
@@ -267,7 +268,7 @@ def pizzicato(
 ) -> list[abjad.Wrapper]:
     if without_next_leaf is False:
         argument = _spanners.rleak_next_nonobgc_leaf(argument)
-    specifiers = _spannerlib.parse_text_spanner_descriptor(
+    specifiers = _textspannerlib.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=r"\baca-left-broken-pizz-markup",
         lilypond_id="Pizzicato",
@@ -302,7 +303,7 @@ def spazzolato(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners.rleak_next_nonobgc_leaf(argument)
-    specifiers = _spannerlib.parse_text_spanner_descriptor(
+    specifiers = _textspannerlib.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=r"\baca-left-broken-spazz-markup",
         lilypond_id="Spazzolato",
@@ -344,7 +345,7 @@ def string_number(
         descriptor = f"{string_number} ||"
     else:
         descriptor = f"{string_number} =|"
-    specifiers = _spannerlib.parse_text_spanner_descriptor(
+    specifiers = _textspannerlib.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=f"{(string_number)}",
         lilypond_id="StringNumber",
@@ -379,7 +380,7 @@ def tasto(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners.rleak_next_nonobgc_leaf(argument)
-    specifiers = _spannerlib.parse_text_spanner_descriptor(
+    specifiers = _textspannerlib.parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=r"\baca-left-broken-t-markup",
         lilypond_id="SCP",
@@ -475,7 +476,7 @@ def xfb(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _spanners.rleak_next_nonobgc_leaf(argument)
-    specifiers = _spannerlib.parse_text_spanner_descriptor(
+    specifiers = _textspannerlib.parse_text_spanner_descriptor(
         "XFB =|",
         left_broken_text=r"\baca-left-broken-xfb-markup",
         lilypond_id="BowSpeed",
