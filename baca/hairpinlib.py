@@ -134,6 +134,29 @@ def iterate_hairpin_pieces(
         stop_leaf = abjad.select.leaf(piece, -1)
         specifier = cyclic_specifiers[current_piece_index]
         if (
+            is_final_piece
+            and specifier.spanner_start
+            and do_not_start_spanner_on_final_piece is True
+        ):
+            specifier = dataclasses.replace(specifier, spanner_start=None)
+        if is_first_piece:
+            specifier = dataclasses.replace(specifier, spanner_stop=None)
+        if is_first_piece and left_broken:
+            is_left_broken_first_piece = True
+        if is_final_piece and right_broken:
+            is_right_broken_final_piece = True
+        wrappers_ = specifier.attach_indicators(
+            start_leaf,
+            current_piece_index,
+            _helpers.function_name(_frame(), n=1),
+            tweaks,
+            total_pieces,
+            is_left_broken_first_piece=is_left_broken_first_piece,
+            is_right_broken_final_piece=is_right_broken_final_piece,
+        )
+        wrappers.extend(wrappers_)
+        next_specifier = cyclic_specifiers[current_piece_index + 1]
+        if (
             bookend is True
             and is_final_piece
             and right_broken is False
@@ -144,30 +167,6 @@ def iterate_hairpin_pieces(
             should_bookend = True
         else:
             should_bookend = False
-        next_specifier = cyclic_specifiers[current_piece_index + 1]
-        if (
-            is_final_piece
-            and specifier.spanner_start
-            and do_not_start_spanner_on_final_piece is True
-        ):
-            specifier = dataclasses.replace(specifier, spanner_start=None)
-        tag_ = _helpers.function_name(_frame(), n=1)
-        if is_first_piece:
-            specifier = dataclasses.replace(specifier, spanner_stop=None)
-        if is_first_piece and left_broken:
-            is_left_broken_first_piece = True
-        if is_final_piece and right_broken:
-            is_right_broken_final_piece = True
-        wrappers_ = specifier.attach_indicators(
-            start_leaf,
-            current_piece_index,
-            tag_,
-            tweaks,
-            total_pieces,
-            is_left_broken_first_piece=is_left_broken_first_piece,
-            is_right_broken_final_piece=is_right_broken_final_piece,
-        )
-        wrappers.extend(wrappers_)
         if should_bookend:
             if next_specifier.indicator and next_specifier.spanner_start:
                 next_specifier = dataclasses.replace(next_specifier, spanner_start=None)
@@ -184,6 +183,7 @@ def iterate_hairpin_pieces(
             and next_specifier.spanner_stop
             and (start_leaf is not stop_leaf)
         ):
+            breakpoint()
             spanner_stop = dataclasses.replace(next_specifier.spanner_stop)
             specifier = HairpinSpecifier(spanner_stop=spanner_stop)
             tag_ = _helpers.function_name(_frame(), n=3)
