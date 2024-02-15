@@ -131,8 +131,6 @@ class HairpinSpecifier:
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class TextSpannerSpecifier:
     bookended_spanner_start: abjad.Bundle | None = None
-    # TODO: should only be abjad.Dynamic:
-    indicator: abjad.Dynamic | abjad.StartHairpin | abjad.StopHairpin | None = None
     spanner_start: abjad.StartHairpin | abjad.StartTextSpan | abjad.Bundle | None = None
     spanner_stop: abjad.StopHairpin | abjad.StopTextSpan | None = None
 
@@ -144,32 +142,20 @@ class TextSpannerSpecifier:
             assert isinstance(self.bookended_spanner_start, abjad.Bundle)
             unbundled = _indicatorlib.unbundle_indicator(self.bookended_spanner_start)
             assert isinstance(unbundled, abjad.StartTextSpan), repr(unbundled)
-        if self.indicator is not None:
-            unbundled = _indicatorlib.unbundle_indicator(self.indicator)
-            # TODO: this should be abjad.Dynamic only:
-            prototype = (abjad.StartHairpin, abjad.StopHairpin, abjad.Dynamic)
-            assert isinstance(unbundled, prototype), repr(self.indicator)
         if self.spanner_start is not None:
             unbundled = _indicatorlib.unbundle_indicator(self.spanner_start)
-            prototype = (abjad.StartHairpin, abjad.StartTextSpan)
-            assert isinstance(unbundled, prototype), repr(self.spanner_start)
+            assert isinstance(unbundled, abjad.StartTextSpan), repr(self.spanner_start)
         if self.spanner_stop is not None:
-            prototype = (abjad.StopHairpin, abjad.StopTextSpan)
-            assert isinstance(self.spanner_stop, prototype), repr(self.spanner_stop)
+            assert isinstance(self.spanner_stop, abjad.StopTextSpan)
 
     @property
     def indicators(self) -> list:
         result: list = []
         if self.spanner_stop:
             result.append(self.spanner_stop)
-        if self.indicator:
-            result.append(self.indicator)
         if self.spanner_start:
             result.append(self.spanner_start)
         return result
-
-    def compound(self) -> bool:
-        return bool(self.indicator) and bool(self.spanner_start)
 
     def attach_indicators(
         self,
@@ -195,24 +181,18 @@ class TextSpannerSpecifier:
             )
         wrappers = []
         prototype = (
-            abjad.Dynamic,
-            abjad.StartHairpin,
-            abjad.StopHairpin,
             abjad.StartTextSpan,
             abjad.StopTextSpan,
         )
         for indicator in self:
             unbundled_indicator = _indicatorlib.unbundle_indicator(indicator)
             assert isinstance(unbundled_indicator, prototype), repr(indicator)
-            if leaf is just_bookended_leaf and not isinstance(
-                unbundled_indicator, abjad.StartHairpin
-            ):
+            # TODO: hoist above this function
+            if leaf is just_bookended_leaf:
                 continue
             if not isinstance(indicator, abjad.Bundle):
                 indicator = dataclasses.replace(indicator)
-            if isinstance(
-                unbundled_indicator, abjad.StartTextSpan | abjad.StartHairpin
-            ):
+            if isinstance(unbundled_indicator, abjad.StartTextSpan):
                 for item in tweaks:
                     if isinstance(item, abjad.Tweak):
                         new_tweak = item
@@ -232,11 +212,13 @@ class TextSpannerSpecifier:
                 is_left_broken_first_piece
                 and getattr(unbundled_indicator, "spanner_start", False) is True
             ):
+                # TODO: move to attach_persistent_indicator?
                 tag_ = tag_.append(_tags.LEFT_BROKEN)
             if (
                 is_right_broken_final_piece
                 and getattr(unbundled_indicator, "spanner_stop", False) is True
             ):
+                # TODO: move to attach_persistent_indicator?
                 tag_ = tag_.append(_tags.RIGHT_BROKEN)
             wrapper = _indicatorlib.attach_persistent_indicator(
                 leaf,
@@ -477,12 +459,6 @@ def iterate_text_spanner_pieces(
         specifiers
     )
     assert isinstance(staff_padding, int | float | type(None)), repr(staff_padding)
-    # if len(specifiers) != len(pieces):
-    if False:
-        message = f"{len(specifiers)} specifiers != {len(pieces)} pieces:"
-        for specifier in specifiers:
-            message += "\n\t" + str(specifier)
-        raise Exception(message)
     cyclic_specifiers = abjad.CyclicTuple(specifiers)
     if bound_details_right_padding is not None:
         string = rf"- \tweak bound-details.right.padding {bound_details_right_padding}"
@@ -573,8 +549,6 @@ def iterate_text_spanner_pieces(
         wrappers.extend(wrappers_)
         if should_bookend:
             if specifier.bookended_spanner_start is not None:
-                next_specifier = dataclasses.replace(next_specifier, spanner_start=None)
-            if next_specifier.compound():
                 next_specifier = dataclasses.replace(next_specifier, spanner_start=None)
             wrappers_ = next_specifier.attach_indicators(
                 stop_leaf,
@@ -840,6 +814,4 @@ def parse_text_spanner_descriptor(
             spanner_stop=stop_text_span,
         )
         specifiers.append(specifier)
-    for specifier in specifiers:
-        assert specifier.indicator is None, repr(specifier)
     return specifiers
