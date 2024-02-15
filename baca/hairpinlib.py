@@ -129,7 +129,6 @@ def iterate_hairpin_pieces(
         tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
     total_pieces = len(pieces)
     assert 0 < total_pieces, repr(total_pieces)
-    just_backstole_right_text = False
     just_bookended_leaf = None
     wrappers = []
     for current_piece_index, piece in enumerate(pieces):
@@ -151,8 +150,6 @@ def iterate_hairpin_pieces(
             should_bookend = True
         else:
             should_bookend = False
-        if is_final_piece and just_backstole_right_text:
-            specifier = dataclasses.replace(specifier, spanner_start=None)
         next_specifier = cyclic_specifiers[current_piece_index + 1]
         if (
             is_final_piece
@@ -192,7 +189,6 @@ def iterate_hairpin_pieces(
             just_bookended_leaf = stop_leaf
         elif (
             is_final_piece
-            and not just_backstole_right_text
             and next_specifier.spanner_stop
             and (start_leaf is not stop_leaf)
         ):
