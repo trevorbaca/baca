@@ -174,14 +174,11 @@ def iterate_hairpin_pieces(
                 total_pieces,
             )
             wrappers.extend(wrappers_)
-        elif (
-            is_final_piece is True
-            and do_not_bookend is False
-            and not isinstance(piece, abjad.Leaf)
-            and 1 < len(piece)
-        ):
+        elif is_final_piece is True and do_not_bookend is False and 1 < len(piece):
             if right_broken is True:
                 raise Exception("do not bookend on right-broken hairpin")
+            if isinstance(piece, abjad.Leaf):
+                raise Exception(piece)
             next_specifier = cyclic_specifiers[current_piece_index + 1]
             next_specifier = dataclasses.replace(next_specifier, spanner_start=None)
             assert next_specifier.spanner_start is None, repr(next_specifier)
