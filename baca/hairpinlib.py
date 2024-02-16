@@ -87,10 +87,12 @@ class HairpinSpecifier:
 def iterate_hairpin_pieces(
     pieces: list,
     *tweaks: _typings.IndexedTweak,
+    bound_details_right_padding: int | float | None = None,
+    cyclic: bool = False,
     debug: bool = False,
     do_not_bookend: bool = False,
-    bound_details_right_padding: int | float | None = None,
     do_not_start_spanner_on_final_piece: bool = False,
+    glue: bool = False,
     left_broken: bool = False,
     right_broken: bool = False,
     specifiers: list[HairpinSpecifier] | None = None,
@@ -100,6 +102,7 @@ def iterate_hairpin_pieces(
     assert isinstance(tweaks, tuple), repr(tweaks)
     assert isinstance(do_not_bookend, bool), repr(do_not_bookend)
     assert isinstance(do_not_start_spanner_on_final_piece, bool)
+    assert isinstance(glue, bool)
     assert isinstance(left_broken, bool), repr(left_broken)
     assert isinstance(pieces, list | _scope.DynamicScope), repr(pieces)
     piece_prototype = (
@@ -115,6 +118,15 @@ def iterate_hairpin_pieces(
     assert isinstance(specifiers, list), repr(specifiers)
     assert all(isinstance(_, HairpinSpecifier) for _ in specifiers), repr(specifiers)
     assert isinstance(staff_padding, int | float | type(None)), repr(staff_padding)
+    if glue is True and (len(pieces) != len(specifiers) - 1):
+        message = f"\n{len(specifiers)} specifiers ...."
+        for specifier in specifiers:
+            message += "\n\t" + str(specifier)
+        message += f"\n{len(pieces)} pieces ..."
+        for piece in pieces:
+            message += "\n\t" + str(piece)
+        message += "len(pieces) must equal len(specifiers) - 1 when glue=True."
+        raise Exception(message)
     cyclic_specifiers = abjad.CyclicTuple(specifiers)
     if bound_details_right_padding is not None:
         string = rf"- \tweak bound-details.right.padding {bound_details_right_padding}"
@@ -151,7 +163,18 @@ def iterate_hairpin_pieces(
             is_right_broken_final_piece=is_right_broken_final_piece,
         )
         wrappers.extend(wrappers_)
-        if (
+        if is_final_piece is True and glue is True:
+            final_specifier = specifiers[-1]
+            final_leaf = abjad.select.leaf(piece, -1)
+            wrappers_ = final_specifier.attach_indicators(
+                final_leaf,
+                current_piece_index + 1,
+                _helpers.function_name(_frame(), n=3),
+                tweaks,
+                total_pieces,
+            )
+            wrappers.extend(wrappers_)
+        elif (
             is_final_piece is True
             and do_not_bookend is False
             and not isinstance(piece, abjad.Leaf)
@@ -162,9 +185,12 @@ def iterate_hairpin_pieces(
             next_specifier = cyclic_specifiers[current_piece_index + 1]
             next_specifier = dataclasses.replace(next_specifier, spanner_start=None)
             assert next_specifier.spanner_start is None, repr(next_specifier)
-            stop_leaf = abjad.select.leaf(piece, -1)
+            if cyclic is False:
+                # assert next_specifier.indicator is None, repr(next_specifier)
+                pass
+            final_leaf = abjad.select.leaf(piece, -1)
             wrappers_ = next_specifier.attach_indicators(
-                stop_leaf,
+                final_leaf,
                 current_piece_index,
                 _helpers.function_name(_frame(), n=2),
                 tweaks,
