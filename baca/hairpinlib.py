@@ -175,7 +175,6 @@ def iterate_hairpin_pieces(
             )
             wrappers.extend(wrappers_)
         elif is_final_piece is True and cyclic is True and do_not_bookend is False:
-            # raise Exception(piece)
             if right_broken is True:
                 raise Exception("do not bookend on right-broken hairpin")
             if isinstance(piece, abjad.Leaf):
