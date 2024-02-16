@@ -185,8 +185,7 @@ def iterate_hairpin_pieces(
             next_specifier = dataclasses.replace(next_specifier, spanner_start=None)
             assert next_specifier.spanner_start is None, repr(next_specifier)
             if cyclic is False:
-                # assert next_specifier.indicator is None, repr(next_specifier)
-                pass
+                assert next_specifier.indicator is None, repr(next_specifier)
             final_leaf = abjad.select.leaf(piece, -1)
             wrappers_ = next_specifier.attach_indicators(
                 final_leaf,
