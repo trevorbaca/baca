@@ -56,7 +56,7 @@ def hairpin(
     rleak: bool = False,
 ) -> list[abjad.Wrapper]:
     if rleak is True:
-        argument = rleak_next_nonobgc_leaf(argument)
+        argument = _select.rleak_next_nonobgc_leaf(argument)
     specifiers = _hairpinlib.parse_hairpin_descriptor(descriptor)
     start_dynamic, start_hairpin, stop_dynamic, stop_hairpin = None, None, None, None
     if len(specifiers) == 1:
@@ -125,13 +125,6 @@ def hairpin(
         wrappers.append(wrapper)
     _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers
-
-
-def rleak_next_nonobgc_leaf(argument):
-    result = _select.rleak(argument)
-    if abjad.get.parentage(result[-1]).get(abjad.OnBeatGraceContainer):
-        result = _select.rleak(argument, grace=False)
-    return result
 
 
 def slur(

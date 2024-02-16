@@ -3920,6 +3920,13 @@ def rleak(argument, *, count: int = 1, grace: bool | None = None) -> list[abjad.
     return argument
 
 
+def rleak_next_nonobgc_leaf(argument):
+    result = rleak(argument)
+    if abjad.get.parentage(result[-1]).get(abjad.OnBeatGraceContainer):
+        result = rleak(argument, grace=False)
+    return result
+
+
 def rleaves(
     argument,
     *,

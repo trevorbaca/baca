@@ -12,7 +12,6 @@ from . import math
 from . import mspanners
 from . import override
 from . import path
-from . import piecewise
 from . import score
 from . import section
 from . import select
