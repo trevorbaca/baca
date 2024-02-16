@@ -102,37 +102,14 @@ def iterate_hairpin_pieces(
     assert isinstance(tweaks, tuple), repr(tweaks)
     assert isinstance(do_not_bookend, bool), repr(do_not_bookend)
     assert isinstance(do_not_start_spanner_on_final_piece, bool)
-    assert isinstance(glue, bool)
+    assert isinstance(glue, bool), repr(glue)
     assert isinstance(left_broken, bool), repr(left_broken)
     assert isinstance(pieces, list | _scope.DynamicScope), repr(pieces)
-    piece_prototype = (
-        list,
-        abjad.Container,
-        abjad.LogicalTie,
-        abjad.Note,
-        _scope.DynamicScope,
-    )
-    for piece in pieces:
-        assert isinstance(piece, piece_prototype), repr(piece)
     assert isinstance(right_broken, bool), repr(right_broken)
     assert isinstance(specifiers, list), repr(specifiers)
     assert all(isinstance(_, HairpinSpecifier) for _ in specifiers), repr(specifiers)
     assert isinstance(staff_padding, int | float | type(None)), repr(staff_padding)
-    if glue is True and (len(pieces) != len(specifiers) - 1):
-        message = f"\n{len(specifiers)} specifiers ...."
-        for specifier in specifiers:
-            message += "\n\t" + str(specifier)
-        message += f"\n{len(pieces)} pieces ..."
-        for piece in pieces:
-            message += "\n\t" + str(piece)
-        message += "\nlen(pieces) must equal len(specifiers) - 1 when glue=True."
-        raise Exception(message)
     cyclic_specifiers = abjad.CyclicTuple(specifiers)
-    if bound_details_right_padding is not None:
-        string = rf"- \tweak bound-details.right.padding {bound_details_right_padding}"
-        tweaks = tweaks + (abjad.Tweak(string),)
-    if staff_padding is not None:
-        tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
     total_pieces = len(pieces)
     assert 0 < total_pieces, repr(total_pieces)
     wrappers = []

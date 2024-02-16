@@ -103,35 +103,24 @@ def iterate_text_spanner_pieces(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     assert isinstance(tweaks, tuple), repr(tweaks)
-    for tweak in tweaks:
-        assert isinstance(tweak, abjad.Tweak | tuple), repr(tweak)
     assert pieces is not None
     assert isinstance(do_not_bookend, bool), repr(do_not_bookend)
     bookend = not do_not_bookend
     assert isinstance(do_not_start_spanner_on_final_piece, bool)
     assert isinstance(left_broken, bool), repr(left_broken)
     assert isinstance(pieces, list | _scope.DynamicScope), repr(pieces)
-    piece_prototype = (
-        list,
-        abjad.Container,
-        abjad.LogicalTie,
-        abjad.Note,
-        _scope.DynamicScope,
-    )
-    for piece in pieces:
-        assert isinstance(piece, piece_prototype), repr(piece)
     assert isinstance(right_broken, bool), repr(right_broken)
     assert isinstance(specifiers, list), repr(specifiers)
     assert all(isinstance(_, TextSpannerSpecifier) for _ in specifiers), repr(
         specifiers
     )
     assert isinstance(staff_padding, int | float | type(None)), repr(staff_padding)
+    tweaks = _tweaks.extend(
+        tweaks,
+        bound_details_right_padding=bound_details_right_padding,
+        staff_padding=staff_padding,
+    )
     cyclic_specifiers = abjad.CyclicTuple(specifiers)
-    if bound_details_right_padding is not None:
-        string = rf"- \tweak bound-details.right.padding {bound_details_right_padding}"
-        tweaks = tweaks + (abjad.Tweak(string),)
-    if staff_padding is not None:
-        tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
     total_pieces = len(pieces)
     assert 0 < total_pieces, repr(total_pieces)
     just_backstole_right_text = False

@@ -50,6 +50,15 @@ def hairpin(
         for piece in argument:
             message += "\n\t" + str(piece)
         raise Exception(message)
+    if glue is True and (len(argument) != len(specifiers) - 1):
+        message = f"\n{len(specifiers)} specifiers ...."
+        for specifier in specifiers:
+            message += "\n\t" + str(specifier)
+        message += f"\n{len(argument)} pieces ..."
+        for piece in argument:
+            message += "\n\t" + str(piece)
+        message += "\nlen(argument) must equal len(specifiers) - 1 when glue=True."
+        raise Exception(message)
     wrappers = _hairpinlib.iterate_hairpin_pieces(
         argument,
         *tweaks,

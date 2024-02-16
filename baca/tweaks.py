@@ -23,6 +23,20 @@ def bundle_tweaks(argument, tweaks, *, i=None, total=None, overwrite=False):
     return bundle
 
 
+def extend(
+    tweaks,
+    *,
+    bound_details_right_padding: int | float | None = None,
+    staff_padding: int | float | None = None,
+):
+    if bound_details_right_padding is not None:
+        string = rf"- \tweak bound-details.right.padding {bound_details_right_padding}"
+        tweaks = tweaks + (abjad.Tweak(string),)
+    if staff_padding is not None:
+        tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
+    return tweaks
+
+
 def validate_indexed_tweaks(tweaks):
     if tweaks is None:
         return
