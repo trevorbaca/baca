@@ -125,7 +125,7 @@ def iterate_hairpin_pieces(
         message += f"\n{len(pieces)} pieces ..."
         for piece in pieces:
             message += "\n\t" + str(piece)
-        message += "len(pieces) must equal len(specifiers) - 1 when glue=True."
+        message += "\nlen(pieces) must equal len(specifiers) - 1 when glue=True."
         raise Exception(message)
     cyclic_specifiers = abjad.CyclicTuple(specifiers)
     if bound_details_right_padding is not None:
@@ -174,21 +174,17 @@ def iterate_hairpin_pieces(
                 total_pieces,
             )
             wrappers.extend(wrappers_)
-        elif is_final_piece is True and do_not_bookend is False:
+        elif is_final_piece is True and cyclic is True and do_not_bookend is False:
+            # raise Exception(piece)
             if right_broken is True:
                 raise Exception("do not bookend on right-broken hairpin")
             if isinstance(piece, abjad.Leaf):
                 raise Exception(piece)
             if len(piece) == 1:
                 raise Exception(f"do not booked length-1 piece: {piece}.")
-            if cyclic is False:
-                raise Exception("bookend only when cyclic=True.")
             next_specifier = cyclic_specifiers[current_piece_index + 1]
             next_specifier = dataclasses.replace(next_specifier, spanner_start=None)
             assert next_specifier.spanner_start is None, repr(next_specifier)
-            if cyclic is False:
-                assert next_specifier.indicator is None, repr(next_specifier)
-                assert next_specifier.spanner_stop is not None, repr(next_specifier)
             final_leaf = abjad.select.leaf(piece, -1)
             wrappers_ = next_specifier.attach_indicators(
                 final_leaf,
