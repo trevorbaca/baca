@@ -181,11 +181,14 @@ def iterate_hairpin_pieces(
                 raise Exception(piece)
             if len(piece) == 1:
                 raise Exception(f"do not booked length-1 piece: {piece}.")
+            if cyclic is False:
+                raise Exception("bookend only when cyclic=True.")
             next_specifier = cyclic_specifiers[current_piece_index + 1]
             next_specifier = dataclasses.replace(next_specifier, spanner_start=None)
             assert next_specifier.spanner_start is None, repr(next_specifier)
             if cyclic is False:
                 assert next_specifier.indicator is None, repr(next_specifier)
+                assert next_specifier.spanner_stop is not None, repr(next_specifier)
             final_leaf = abjad.select.leaf(piece, -1)
             wrappers_ = next_specifier.attach_indicators(
                 final_leaf,
