@@ -169,7 +169,7 @@ def iterate_hairpin_pieces(
             wrappers_ = final_specifier.attach_indicators(
                 final_leaf,
                 current_piece_index + 1,
-                _helpers.function_name(_frame(), n=3),
+                _helpers.function_name(_frame(), n=2),
                 tweaks,
                 total_pieces,
             )
@@ -192,7 +192,7 @@ def iterate_hairpin_pieces(
             wrappers_ = next_specifier.attach_indicators(
                 final_leaf,
                 current_piece_index,
-                _helpers.function_name(_frame(), n=2),
+                _helpers.function_name(_frame(), n=3),
                 tweaks,
                 total_pieces,
             )
