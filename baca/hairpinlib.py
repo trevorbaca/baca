@@ -107,8 +107,8 @@ def hairpin(
     assert isinstance(left_broken, bool), repr(left_broken)
     assert isinstance(right_broken, bool), repr(right_broken)
     # TODO:
-    # if do_not_bookend is True:
-    #     assert cyclic is True, repr(cyclic)
+    if do_not_bookend is True:
+        assert cyclic is True, repr(cyclic)
     if do_not_start_spanner_on_final_piece is True:
         assert cyclic is True, repr(cyclic)
     if left_broken is True:
