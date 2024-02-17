@@ -92,9 +92,6 @@ def cyclic(
     *tweaks: _typings.IndexedTweak,
     do_not_bookend: bool = False,
     do_not_start_spanner_on_final_piece: bool = False,
-    # TODO: test always glue=False
-    # TODO: remove glue keyword
-    glue: bool = False,
     left_broken: bool = False,
     right_broken: bool = False,
     rleak: bool = False,
@@ -104,6 +101,7 @@ def cyclic(
     assert isinstance(do_not_start_spanner_on_final_piece, bool)
     assert isinstance(left_broken, bool), repr(left_broken)
     assert isinstance(right_broken, bool), repr(right_broken)
+    assert isinstance(rleak, bool), repr(rleak)
     if left_broken is True:
         assert descriptor[0] in ("o", "<", ">"), repr(descriptor)
     if right_broken is True:
@@ -111,22 +109,12 @@ def cyclic(
     specifiers = parse_hairpin_descriptor(descriptor)
     if rleak is True:
         argument[-1] = _select.rleak_next_nonobgc_leaf(argument[-1])
-    if glue is True and (len(argument) != len(specifiers) - 1):
-        message = f"\n{len(specifiers)} specifiers ...."
-        for specifier in specifiers:
-            message += "\n\t" + str(specifier)
-        message += f"\n{len(argument)} pieces ..."
-        for piece in argument:
-            message += "\n\t" + str(piece)
-        message += "\nlen(argument) must equal len(specifiers) - 1 when glue=True."
-        raise Exception(message)
     wrappers = iterate_hairpin_pieces(
         argument,
         *tweaks,
         cyclic=True,
         do_not_bookend=do_not_bookend,
         do_not_start_spanner_on_final_piece=do_not_start_spanner_on_final_piece,
-        glue=glue,
         left_broken=left_broken,
         right_broken=right_broken,
         specifiers=specifiers,
