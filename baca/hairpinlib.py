@@ -182,9 +182,6 @@ def _iterate_cyclic_hairpin_pieces(
 def _iterate_hairpin_pieces(
     pieces: list,
     *tweaks: _typings.IndexedTweak,
-    cyclic: bool = False,
-    do_not_bookend: bool = False,
-    do_not_start_spanner_on_final_piece: bool = False,
     glue: bool = False,
     left_broken: bool = False,
     right_broken: bool = False,
@@ -192,8 +189,6 @@ def _iterate_hairpin_pieces(
 ) -> list[abjad.Wrapper]:
     assert isinstance(pieces, list), repr(pieces)
     assert isinstance(tweaks, tuple), repr(tweaks)
-    assert isinstance(do_not_bookend, bool), repr(do_not_bookend)
-    assert isinstance(do_not_start_spanner_on_final_piece, bool)
     assert isinstance(glue, bool), repr(glue)
     assert isinstance(left_broken, bool), repr(left_broken)
     assert isinstance(pieces, list | _scope.DynamicScope), repr(pieces)
@@ -210,12 +205,6 @@ def _iterate_hairpin_pieces(
         is_left_broken_first_piece = False
         is_right_broken_final_piece = False
         specifier = cyclic_specifiers[current_piece_index]
-        if (
-            is_final_piece
-            and specifier.spanner_start
-            and do_not_start_spanner_on_final_piece is True
-        ):
-            specifier = dataclasses.replace(specifier, spanner_start=None)
         if is_first_piece and left_broken:
             is_left_broken_first_piece = True
         if is_final_piece and right_broken:
@@ -241,26 +230,6 @@ def _iterate_hairpin_pieces(
                 tweaks,
                 total_pieces,
             )
-            wrappers.extend(wrappers_)
-        elif is_final_piece is True and cyclic is True and do_not_bookend is False:
-            if right_broken is True:
-                raise Exception("do not bookend on right-broken hairpin")
-            if isinstance(piece, abjad.Leaf):
-                raise Exception(piece)
-            if len(piece) == 1:
-                raise Exception(f"do not booked length-1 piece: {piece}.")
-            next_specifier = cyclic_specifiers[current_piece_index + 1]
-            next_specifier = dataclasses.replace(next_specifier, spanner_start=None)
-            assert next_specifier.spanner_start is None, repr(next_specifier)
-            final_leaf = abjad.select.leaf(piece, -1)
-            wrappers_ = _bookend_final_cyclic_piece(
-                final_leaf,
-                next_specifier,
-                current_piece_index,
-                tweaks,
-                total_pieces,
-            )
-            _tags.wrappers(wrappers_, _helpers.function_name(_frame(), n=3))
             wrappers.extend(wrappers_)
     return wrappers
 
