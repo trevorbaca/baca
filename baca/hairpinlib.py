@@ -46,6 +46,7 @@ class HairpinSpecifier:
         self,
         leaf,
         current_piece_index,
+        # TODO: remove tag parameter
         tag,
         tweaks,
         total_pieces,
@@ -55,6 +56,7 @@ class HairpinSpecifier:
     ) -> list[abjad.Wrapper]:
         assert isinstance(leaf, abjad.Leaf), repr(leaf)
         assert isinstance(current_piece_index, int), repr(current_piece_index)
+        # TODO: remove tag parameter
         assert isinstance(tag, abjad.Tag), repr(tag)
         assert isinstance(tweaks, tuple), repr(tweaks)
         assert isinstance(total_pieces, int), repr(total_pieces)
@@ -80,6 +82,7 @@ class HairpinSpecifier:
                 indicator,
                 left_broken=left_broken,
                 right_broken=right_broken,
+                # TODO: remove and tag below
                 tag=tag,
             )
             wrappers.append(wrapper)
@@ -93,17 +96,92 @@ def _bookend_final_cyclic_piece(
     wrappers_ = next_specifier.attach_indicators(
         final_leaf,
         current_piece_index,
+        # TODO: remove and tag below
         _helpers.function_name(_frame()),
         tweaks,
         total_pieces,
     )
+    # TODO: tag wrappers here
     return wrappers_
+
+
+def _iterate_cyclic_hairpin_pieces(
+    pieces: list,
+    *tweaks: _typings.IndexedTweak,
+    do_not_bookend: bool = False,
+    do_not_start_spanner_on_final_piece: bool = False,
+    left_broken: bool = False,
+    right_broken: bool = False,
+    specifiers: list[HairpinSpecifier] | None = None,
+) -> list[abjad.Wrapper]:
+    assert isinstance(pieces, list), repr(pieces)
+    assert isinstance(tweaks, tuple), repr(tweaks)
+    assert isinstance(do_not_bookend, bool), repr(do_not_bookend)
+    assert isinstance(do_not_start_spanner_on_final_piece, bool)
+    assert isinstance(left_broken, bool), repr(left_broken)
+    assert isinstance(pieces, list | _scope.DynamicScope), repr(pieces)
+    assert isinstance(right_broken, bool), repr(right_broken)
+    assert isinstance(specifiers, list), repr(specifiers)
+    assert all(isinstance(_, HairpinSpecifier) for _ in specifiers), repr(specifiers)
+    cyclic_specifiers = abjad.CyclicTuple(specifiers)
+    total_pieces = len(pieces)
+    assert 0 < total_pieces, repr(total_pieces)
+    wrappers = []
+    for current_piece_index, piece in enumerate(pieces):
+        is_first_piece = current_piece_index == 0
+        is_final_piece = current_piece_index == total_pieces - 1
+        is_left_broken_first_piece = False
+        is_right_broken_final_piece = False
+        specifier = cyclic_specifiers[current_piece_index]
+        if (
+            is_final_piece
+            and specifier.spanner_start
+            and do_not_start_spanner_on_final_piece is True
+        ):
+            specifier = dataclasses.replace(specifier, spanner_start=None)
+        if is_first_piece and left_broken:
+            is_left_broken_first_piece = True
+        if is_final_piece and right_broken:
+            is_right_broken_final_piece = True
+        start_leaf = abjad.select.leaf(piece, 0)
+        wrappers_ = specifier.attach_indicators(
+            start_leaf,
+            current_piece_index,
+            # TODO: only 1 tag for this function
+            _helpers.function_name(_frame(), n=1),
+            tweaks,
+            total_pieces,
+            is_left_broken_first_piece=is_left_broken_first_piece,
+            is_right_broken_final_piece=is_right_broken_final_piece,
+        )
+        wrappers.extend(wrappers_)
+        if is_final_piece is True and do_not_bookend is False:
+            if right_broken is True:
+                raise Exception("do not bookend on right-broken hairpin")
+            if isinstance(piece, abjad.Leaf):
+                raise Exception(piece)
+            if len(piece) == 1:
+                raise Exception(f"do not booked length-1 piece: {piece}.")
+            next_specifier = cyclic_specifiers[current_piece_index + 1]
+            next_specifier = dataclasses.replace(next_specifier, spanner_start=None)
+            assert next_specifier.spanner_start is None, repr(next_specifier)
+            final_leaf = abjad.select.leaf(piece, -1)
+            wrappers_ = _bookend_final_cyclic_piece(
+                final_leaf,
+                next_specifier,
+                current_piece_index,
+                tweaks,
+                total_pieces,
+            )
+            # TODO: only 1 tag for this function
+            _tags.wrappers(wrappers_, _helpers.function_name(_frame(), n=3))
+            wrappers.extend(wrappers_)
+    return wrappers
 
 
 def _iterate_hairpin_pieces(
     pieces: list,
     *tweaks: _typings.IndexedTweak,
-    bound_details_right_padding: int | float | None = None,
     cyclic: bool = False,
     do_not_bookend: bool = False,
     do_not_start_spanner_on_final_piece: bool = False,
@@ -111,7 +189,6 @@ def _iterate_hairpin_pieces(
     left_broken: bool = False,
     right_broken: bool = False,
     specifiers: list[HairpinSpecifier] | None = None,
-    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     assert isinstance(pieces, list), repr(pieces)
     assert isinstance(tweaks, tuple), repr(tweaks)
@@ -123,7 +200,6 @@ def _iterate_hairpin_pieces(
     assert isinstance(right_broken, bool), repr(right_broken)
     assert isinstance(specifiers, list), repr(specifiers)
     assert all(isinstance(_, HairpinSpecifier) for _ in specifiers), repr(specifiers)
-    assert isinstance(staff_padding, int | float | type(None)), repr(staff_padding)
     cyclic_specifiers = abjad.CyclicTuple(specifiers)
     total_pieces = len(pieces)
     assert 0 < total_pieces, repr(total_pieces)
@@ -212,10 +288,9 @@ def cyclic(
     specifiers = parse_hairpin_descriptor(descriptor)
     if rleak is True:
         argument[-1] = _select.rleak_next_nonobgc_leaf(argument[-1])
-    wrappers = _iterate_hairpin_pieces(
+    wrappers = _iterate_cyclic_hairpin_pieces(
         argument,
         *tweaks,
-        cyclic=True,
         do_not_bookend=do_not_bookend,
         do_not_start_spanner_on_final_piece=do_not_start_spanner_on_final_piece,
         left_broken=left_broken,
