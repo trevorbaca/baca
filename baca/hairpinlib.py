@@ -163,9 +163,8 @@ def _iterate_cyclic_hairpin_pieces(
                 tweaks,
                 total_pieces,
             )
-            # TODO: only 1 tag for this function
-            _tags.wrappers(wrappers_, _helpers.function_name(_frame(), n=3))
             wrappers.extend(wrappers_)
+    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 
@@ -219,6 +218,7 @@ def _iterate_hairpin_pieces(
                 total_pieces,
             )
             wrappers.extend(wrappers_)
+    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 
