@@ -93,8 +93,7 @@ def _bookend_final_cyclic_piece(
         tweaks,
         total_pieces,
     )
-    # TODO: tag wrappers here
-    # _tags.wrappers(wrappers, _helpers.function_name(_frame()))
+    _tags.wrappers(wrappers_, _helpers.function_name(_frame()))
     return wrappers_
 
 
