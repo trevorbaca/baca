@@ -282,6 +282,7 @@ def exact(
     right_broken: bool = False,
     rleak: bool = False,
 ) -> list[abjad.Wrapper]:
+    argument = list(argument)
     assert isinstance(descriptor, str), repr(descriptor)
     assert isinstance(left_broken, bool), repr(left_broken)
     assert isinstance(right_broken, bool), repr(right_broken)
@@ -485,6 +486,8 @@ def parse_exact_hairpin_descriptor(descriptor: str) -> list[ExactHairpinSpecifie
                     start_dynamic = _dynamics.make_dynamic(start_dynamic_string)
                 if stop_indicator_string:
                     stop_indicator = _dynamics.make_dynamic(stop_indicator_string)
+            elif string == "!":
+                stop_indicator = _dynamics.make_dynamic(string)
             else:
                 start_dynamic = _dynamics.make_dynamic(string)
         assert isinstance(start_dynamic, abjad.Dynamic | type(None))
