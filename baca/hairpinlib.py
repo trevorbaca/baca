@@ -208,16 +208,16 @@ def _iterate_hairpin_pieces(
             is_right_broken_final_piece=is_right_broken_final_piece,
         )
         wrappers.extend(wrappers_)
-        if is_final_piece is True and glue is True:
-            final_specifier = specifiers[-1]
-            final_leaf = abjad.select.leaf(piece, -1)
-            wrappers_ = final_specifier.attach_indicators(
-                final_leaf,
-                current_piece_index + 1,
-                tweaks,
-                total_pieces,
-            )
-            wrappers.extend(wrappers_)
+    if glue is True:
+        final_specifier = specifiers[-1]
+        final_leaf = abjad.select.leaf(piece, -1)
+        wrappers_ = final_specifier.attach_indicators(
+            final_leaf,
+            current_piece_index + 1,
+            tweaks,
+            total_pieces,
+        )
+        wrappers.extend(wrappers_)
     _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
