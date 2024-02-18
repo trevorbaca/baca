@@ -1,5 +1,5 @@
 """
-hairpinlib.py.
+hairpins.py.
 """
 
 import dataclasses
