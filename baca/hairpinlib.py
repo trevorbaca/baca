@@ -86,7 +86,7 @@ class HairpinSpecifier:
                 tag=tag,
             )
             wrappers.append(wrapper)
-        # TODO: tag wrappers
+        _tags.wrappers(wrappers, _helpers.function_name(_frame()))
         return wrappers
 
 
