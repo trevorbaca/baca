@@ -46,8 +46,6 @@ class HairpinSpecifier:
         self,
         leaf,
         current_piece_index,
-        # TODO: remove tag parameter
-        tag,
         tweaks,
         total_pieces,
         *,
@@ -56,8 +54,6 @@ class HairpinSpecifier:
     ) -> list[abjad.Wrapper]:
         assert isinstance(leaf, abjad.Leaf), repr(leaf)
         assert isinstance(current_piece_index, int), repr(current_piece_index)
-        # TODO: remove tag parameter
-        assert isinstance(tag, abjad.Tag), repr(tag)
         assert isinstance(tweaks, tuple), repr(tweaks)
         assert isinstance(total_pieces, int), repr(total_pieces)
         wrappers = []
@@ -82,8 +78,6 @@ class HairpinSpecifier:
                 indicator,
                 left_broken=left_broken,
                 right_broken=right_broken,
-                # TODO: remove and tag below
-                tag=tag,
             )
             wrappers.append(wrapper)
         _tags.wrappers(wrappers, _helpers.function_name(_frame()))
@@ -96,12 +90,11 @@ def _bookend_final_cyclic_piece(
     wrappers_ = next_specifier.attach_indicators(
         final_leaf,
         current_piece_index,
-        # TODO: remove and tag below
-        _helpers.function_name(_frame()),
         tweaks,
         total_pieces,
     )
     # TODO: tag wrappers here
+    # _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers_
 
 
@@ -147,8 +140,6 @@ def _iterate_cyclic_hairpin_pieces(
         wrappers_ = specifier.attach_indicators(
             start_leaf,
             current_piece_index,
-            # TODO: only 1 tag for this function
-            _helpers.function_name(_frame(), n=1),
             tweaks,
             total_pieces,
             is_left_broken_first_piece=is_left_broken_first_piece,
@@ -213,7 +204,6 @@ def _iterate_hairpin_pieces(
         wrappers_ = specifier.attach_indicators(
             start_leaf,
             current_piece_index,
-            _helpers.function_name(_frame(), n=1),
             tweaks,
             total_pieces,
             is_left_broken_first_piece=is_left_broken_first_piece,
@@ -226,7 +216,6 @@ def _iterate_hairpin_pieces(
             wrappers_ = final_specifier.attach_indicators(
                 final_leaf,
                 current_piece_index + 1,
-                _helpers.function_name(_frame(), n=2),
                 tweaks,
                 total_pieces,
             )
