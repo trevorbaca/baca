@@ -8,6 +8,7 @@ import abjad
 from . import array
 from . import build
 from . import dynamics
+from . import hairpinlib
 from . import math
 from . import mspanners
 from . import override

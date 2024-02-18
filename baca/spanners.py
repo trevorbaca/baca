@@ -6,11 +6,7 @@ from inspect import currentframe as _frame
 
 import abjad
 
-from . import hairpinlib as _hairpinlib
 from . import helpers as _helpers
-from . import indicatorlib as _indicatorlib
-from . import indicators as _indicators
-from . import select as _select
 from . import spannerlib as _spannerlib
 from . import tags as _tags
 
@@ -40,87 +36,6 @@ def beam(
         wrapper = _spannerlib.attach_spanner_stop(
             argument,
             stop_beam,
-        )
-        wrappers.append(wrapper)
-    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
-    return wrappers
-
-
-def hairpin(
-    argument,
-    descriptor: str,
-    *tweaks: abjad.Tweak,
-    debug=False,
-    left_broken: bool = False,
-    right_broken: bool = False,
-    rleak: bool = False,
-) -> list[abjad.Wrapper]:
-    if rleak is True:
-        argument = _select.rleak_next_nonobgc_leaf(argument)
-    specifiers = _hairpinlib.parse_hairpin_descriptor(descriptor)
-    start_dynamic, start_hairpin, stop_dynamic, stop_hairpin = None, None, None, None
-    if len(specifiers) == 1:
-        specifier = specifiers[0]
-        start_dynamic = specifier.indicator
-        start_hairpin = specifier.spanner_start
-        stop_hairpin = specifier.spanner_stop
-    elif len(specifiers) == 2:
-        first, second = specifiers
-        start_dynamic = first.indicator
-        start_hairpin = first.spanner_start
-        stop_dynamic = second.indicator
-        stop_hairpin = second.spanner_stop
-    else:
-        raise NotImplementedError(descriptor)
-    if start_dynamic is not None:
-        assert _indicatorlib.is_maybe_bundled(start_dynamic, abjad.Dynamic), repr(
-            start_dynamic
-        )
-        if left_broken is True:
-            message = f"left-broken must begin with hairpin: {descriptor!r}"
-            raise Exception(message)
-    if start_hairpin is not None:
-        assert _indicatorlib.is_maybe_bundled(start_hairpin, abjad.StartHairpin), repr(
-            start_hairpin
-        )
-    if stop_dynamic is not None:
-        assert isinstance(stop_dynamic, abjad.Dynamic), repr(stop_dynamic)
-    if stop_hairpin is not None:
-        assert isinstance(stop_hairpin, abjad.StopHairpin), repr(stop_hairpin)
-    if right_broken is True:
-        assert start_hairpin is not None, repr(start_hairpin)
-        if not isinstance(stop_hairpin, abjad.StopHairpin):
-            message = f"right-broken must have stop-hairpin: {descriptor!r}"
-            raise Exception(message)
-    wrappers = []
-    first_leaf = abjad.select.leaf(argument, 0)
-    final_leaf = abjad.select.leaf(argument, -1)
-    if start_dynamic is not None:
-        assert isinstance(start_dynamic, abjad.Dynamic), repr(start_dynamic)
-        wrappers_ = _indicators.dynamic(
-            first_leaf,
-            start_dynamic,
-        )
-        wrappers.extend(wrappers_)
-    if stop_dynamic is not None:
-        wrappers_ = _indicators.dynamic(
-            final_leaf,
-            stop_dynamic,
-        )
-        wrappers.extend(wrappers_)
-    if start_hairpin is not None:
-        wrapper = _spannerlib.attach_spanner_start(
-            argument,
-            start_hairpin,
-            *tweaks,
-            left_broken=left_broken,
-        )
-        wrappers.append(wrapper)
-    if stop_hairpin is not None:
-        wrapper = _spannerlib.attach_spanner_stop(
-            argument,
-            stop_hairpin,
-            right_broken=right_broken,
         )
         wrappers.append(wrapper)
     _tags.wrappers(wrappers, _helpers.function_name(_frame()))
