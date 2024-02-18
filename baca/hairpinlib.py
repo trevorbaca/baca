@@ -184,7 +184,6 @@ def _iterate_hairpin_pieces(
     assert isinstance(right_broken, bool), repr(right_broken)
     assert isinstance(specifiers, list), repr(specifiers)
     assert all(isinstance(_, HairpinSpecifier) for _ in specifiers), repr(specifiers)
-    cyclic_specifiers = abjad.CyclicTuple(specifiers)
     total_pieces = len(pieces)
     assert 0 < total_pieces, repr(total_pieces)
     wrappers = []
@@ -193,7 +192,10 @@ def _iterate_hairpin_pieces(
         is_final_piece = current_piece_index == total_pieces - 1
         is_left_broken_first_piece = False
         is_right_broken_final_piece = False
-        specifier = cyclic_specifiers[current_piece_index]
+        try:
+            specifier = specifiers[current_piece_index]
+        except IndexError:
+            continue
         if is_first_piece and left_broken:
             is_left_broken_first_piece = True
         if is_final_piece and right_broken:
