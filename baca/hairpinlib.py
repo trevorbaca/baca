@@ -261,14 +261,14 @@ def hairpin(
     argument,
     descriptor: str,
     *tweaks: _typings.IndexedTweak,
+    extra_specifiers: bool = False,
     glue: bool = False,
     left_broken: bool = False,
-    match: bool = False,
-    # match: bool = True,
     right_broken: bool = False,
     rleak: bool = False,
 ) -> list[abjad.Wrapper]:
     assert isinstance(descriptor, str), repr(descriptor)
+    assert isinstance(extra_specifiers, bool), repr(extra_specifiers)
     assert isinstance(left_broken, bool), repr(left_broken)
     assert isinstance(right_broken, bool), repr(right_broken)
     if left_broken is True:
@@ -278,22 +278,26 @@ def hairpin(
     specifiers = parse_hairpin_descriptor(descriptor)
     if rleak is True:
         argument[-1] = _select.rleak_next_nonobgc_leaf(argument[-1])
-    if match is True and len(specifiers) != len(argument):
+    if glue is True:
+        if len(argument) != len(specifiers) - 1:
+            message = f"\n{len(specifiers)} specifiers ...."
+            for specifier in specifiers:
+                message += "\n\t" + str(specifier)
+            message += f"\n{len(argument)} pieces ..."
+            for piece in argument:
+                message += "\n\t" + str(piece)
+            message += "\nlen(specifiers) must equal len(argument) - 1 when glue=True."
+            raise Exception(message)
+    elif extra_specifiers is True:
+        assert len(argument) <= len(specifiers)
+    elif len(specifiers) != len(argument):
         message = f"\n{len(specifiers)} specifiers ...."
         for specifier in specifiers:
             message += "\n\t" + str(specifier)
         message += f"\n{len(argument)} argument pieces ..."
         for piece in argument:
             message += "\n\t" + str(piece)
-        raise Exception(message)
-    if glue is True and (len(argument) != len(specifiers) - 1):
-        message = f"\n{len(specifiers)} specifiers ...."
-        for specifier in specifiers:
-            message += "\n\t" + str(specifier)
-        message += f"\n{len(argument)} pieces ..."
-        for piece in argument:
-            message += "\n\t" + str(piece)
-        message += "\nlen(argument) must equal len(specifiers) - 1 when glue=True."
+        message += "\nlen(specifiers) must equal len(argument)."
         raise Exception(message)
     wrappers = _iterate_hairpin_pieces(
         argument,
