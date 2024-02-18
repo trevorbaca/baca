@@ -11,11 +11,27 @@ import abjad
 from . import dynamics as _dynamics
 from . import helpers as _helpers
 from . import indicatorlib as _indicatorlib
+from . import indicators as _indicators
 from . import scope as _scope
 from . import select as _select
 from . import tags as _tags
 from . import tweaks as _tweaks
 from . import typings as _typings
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class ExactHairpinSpecifier:
+    start_dynamic: abjad.Dynamic | None = None
+    spanner_start: abjad.StartHairpin | None = None
+    stop_indicator: abjad.Dynamic | abjad.StopHairpin | None = None
+
+    def __post_init__(self):
+        if self.start_dynamic is not None:
+            assert isinstance(self.start_dynamic, abjad.Dynamic)
+        if self.spanner_start is not None:
+            assert isinstance(self.spanner_start, abjad.StartHairpin)
+        if self.stop_indicator is not None:
+            assert isinstance(self.stop_indicator, abjad.Dynamic | abjad.StopHairpin)
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -257,6 +273,87 @@ def cyclic(
     return wrappers
 
 
+def exact(
+    argument,
+    descriptor: str,
+    *tweaks: _typings.IndexedTweak,
+    allow_extra_specifiers: bool = False,
+    left_broken: bool = False,
+    right_broken: bool = False,
+    rleak: bool = False,
+) -> list[abjad.Wrapper]:
+    assert isinstance(descriptor, str), repr(descriptor)
+    assert isinstance(left_broken, bool), repr(left_broken)
+    assert isinstance(right_broken, bool), repr(right_broken)
+    if left_broken is True:
+        assert descriptor[0] in ("o", "<", ">"), repr(descriptor)
+    if right_broken is True:
+        assert descriptor[-1] == "!", repr(descriptor)
+    if rleak is True:
+        argument[-1] = _select.rleak_next_nonobgc_leaf(argument[-1])
+    specifiers = parse_exact_hairpin_descriptor(descriptor)
+    if len(specifiers) == 1:
+        argument = [argument]
+    elif len(specifiers) != len(argument):
+        message = f"\n{len(specifiers)} specifiers ...."
+        for specifier in specifiers:
+            message += "\n\t" + str(specifier)
+        message += f"\n{len(argument)} argument pieces ..."
+        for piece in argument:
+            message += "\n\t" + str(piece)
+        message += "\nlen(specifiers) must equal len(argument)."
+        raise Exception(message)
+    total_pieces = len(argument)
+    wrappers = []
+    for current_piece_index, piece in enumerate(argument):
+        is_first_piece = current_piece_index == 0
+        is_final_piece = current_piece_index == total_pieces - 1
+        is_left_broken_first_piece = False
+        is_right_broken_final_piece = False
+        if is_first_piece and left_broken:
+            is_left_broken_first_piece = True
+        if is_final_piece and right_broken:
+            is_right_broken_final_piece = True
+        specifier = specifiers[current_piece_index]
+        first_leaf = abjad.select.leaf(piece, 0)
+        final_leaf = abjad.select.leaf(piece, -1)
+        if specifier.start_dynamic is not None:
+            wrappers_ = _indicators.dynamic(
+                first_leaf,
+                specifier.start_dynamic,
+            )
+            wrappers.extend(wrappers_)
+        if specifier.spanner_start is not None:
+            indicator = _tweaks.bundle_tweaks(
+                specifier.spanner_start,
+                tweaks,
+                i=current_piece_index,
+                total=total_pieces,
+                overwrite=True,
+            )
+            wrapper = _indicatorlib.attach_persistent_indicator(
+                first_leaf,
+                indicator,
+                left_broken=is_left_broken_first_piece,
+            )
+            wrappers.append(wrapper)
+        if isinstance(specifier.stop_indicator, abjad.StopHairpin):
+            wrapper = _indicatorlib.attach_persistent_indicator(
+                final_leaf,
+                specifier.stop_indicator,
+                right_broken=is_right_broken_final_piece,
+            )
+            wrappers.append(wrapper)
+        elif specifier.stop_indicator is not None:
+            wrappers_ = _indicators.dynamic(
+                final_leaf,
+                specifier.stop_indicator,
+            )
+            wrappers.extend(wrappers_)
+    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
+    return wrappers
+
+
 def hairpin(
     argument,
     descriptor: str,
@@ -361,4 +458,44 @@ def parse_hairpin_descriptor(descriptor: str) -> list[HairpinSpecifier]:
                 specifier = HairpinSpecifier(spanner_start=final_indicator)
         if specifier is not None:
             specifiers.append(specifier)
+    return specifiers
+
+
+known_shapes = ("o<|", "o<", "<|", "<", "|>o", ">o", "|>", ">", "--")
+
+
+def parse_exact_hairpin_descriptor(descriptor: str) -> list[ExactHairpinSpecifier]:
+    assert isinstance(descriptor, str), repr(descriptor)
+    specifiers = []
+    for string in descriptor.split():
+        start_dynamic, spanner_start, stop_indicator = None, None, None
+        for shape in known_shapes:
+            if shape in string:
+                start_dynamic_string, stop_indicator_string = string.split(shape)
+                if start_dynamic_string:
+                    start_dynamic = _dynamics.make_dynamic(start_dynamic_string)
+                spanner_start = _dynamics.make_dynamic(shape)
+                if stop_indicator_string:
+                    stop_indicator = _dynamics.make_dynamic(stop_indicator_string)
+                break
+        else:
+            if "+" in string:
+                start_dynamic_string, stop_indicator_string = string.split("+")
+                if start_dynamic_string:
+                    start_dynamic = _dynamics.make_dynamic(start_dynamic_string)
+                if stop_indicator_string:
+                    stop_indicator = _dynamics.make_dynamic(stop_indicator_string)
+            else:
+                start_dynamic = _dynamics.make_dynamic(string)
+        assert isinstance(start_dynamic, abjad.Dynamic | type(None))
+        assert isinstance(spanner_start, abjad.StartHairpin | type(None))
+        assert isinstance(
+            stop_indicator, abjad.Dynamic | abjad.StopHairpin | type(None)
+        )
+        specifier = ExactHairpinSpecifier(
+            start_dynamic=start_dynamic,
+            spanner_start=spanner_start,
+            stop_indicator=stop_indicator,
+        )
+        specifiers.append(specifier)
     return specifiers
