@@ -391,7 +391,9 @@ def dynamic(
             abjad.Tweak(rf"- \tweak self-alignment-X {self_alignment_x}"),
         )
     for leaf in abjad.select.leaves(argument):
-        if isinstance(dynamic, str):
+        if dynamic == "-":
+            continue
+        elif isinstance(dynamic, str):
             indicator = _dynamics.make_dynamic(dynamic)
         else:
             indicator = dynamic
