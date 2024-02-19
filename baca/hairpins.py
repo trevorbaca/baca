@@ -184,59 +184,6 @@ def _iterate_cyclic_hairpin_pieces(
     return wrappers
 
 
-def _iterate_hairpin_pieces(
-    pieces: list,
-    *tweaks: _typings.IndexedTweak,
-    glue: bool = False,
-    left_broken: bool = False,
-    right_broken: bool = False,
-    specifiers: list[HairpinSpecifier] | None = None,
-) -> list[abjad.Wrapper]:
-    assert isinstance(pieces, list), repr(pieces)
-    assert isinstance(tweaks, tuple), repr(tweaks)
-    assert isinstance(glue, bool), repr(glue)
-    assert isinstance(left_broken, bool), repr(left_broken)
-    assert isinstance(pieces, list | _scope.DynamicScope), repr(pieces)
-    assert isinstance(right_broken, bool), repr(right_broken)
-    assert isinstance(specifiers, list), repr(specifiers)
-    assert all(isinstance(_, HairpinSpecifier) for _ in specifiers), repr(specifiers)
-    total_pieces = len(pieces)
-    assert 0 < total_pieces, repr(total_pieces)
-    wrappers = []
-    for current_piece_index, piece in enumerate(pieces):
-        is_first_piece = current_piece_index == 0
-        is_final_piece = current_piece_index == total_pieces - 1
-        is_left_broken_first_piece = False
-        is_right_broken_final_piece = False
-        specifier = specifiers[current_piece_index]
-        if is_first_piece and left_broken:
-            is_left_broken_first_piece = True
-        if is_final_piece and right_broken:
-            is_right_broken_final_piece = True
-        start_leaf = abjad.select.leaf(piece, 0)
-        wrappers_ = specifier.attach_indicators(
-            start_leaf,
-            current_piece_index,
-            tweaks,
-            total_pieces,
-            is_left_broken_first_piece=is_left_broken_first_piece,
-            is_right_broken_final_piece=is_right_broken_final_piece,
-        )
-        wrappers.extend(wrappers_)
-    if glue is True:
-        final_specifier = specifiers[-1]
-        final_leaf = abjad.select.leaf(piece, -1)
-        wrappers_ = final_specifier.attach_indicators(
-            final_leaf,
-            current_piece_index + 1,
-            tweaks,
-            total_pieces,
-        )
-        wrappers.extend(wrappers_)
-    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
-    return wrappers
-
-
 def cyclic(
     argument,
     descriptor: str,
@@ -273,7 +220,7 @@ def cyclic(
     return wrappers
 
 
-def exact(
+def hairpin(
     argument,
     descriptor: str,
     *tweaks: _typings.IndexedTweak,
@@ -361,60 +308,6 @@ def exact(
                 specifier.stop_indicator,
             )
             wrappers.extend(wrappers_)
-    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
-    return wrappers
-
-
-def hairpin(
-    argument,
-    descriptor: str,
-    *tweaks: _typings.IndexedTweak,
-    extra_specifiers: bool = False,
-    glue: bool = False,
-    left_broken: bool = False,
-    right_broken: bool = False,
-    rleak: bool = False,
-) -> list[abjad.Wrapper]:
-    assert isinstance(descriptor, str), repr(descriptor)
-    assert isinstance(extra_specifiers, bool), repr(extra_specifiers)
-    assert isinstance(left_broken, bool), repr(left_broken)
-    assert isinstance(right_broken, bool), repr(right_broken)
-    if left_broken is True:
-        assert descriptor[0] in ("o", "<", ">"), repr(descriptor)
-    if right_broken is True:
-        assert descriptor[-1] == "!", repr(descriptor)
-    specifiers = parse_hairpin_descriptor(descriptor)
-    if rleak is True:
-        argument[-1] = _select.rleak_next_nonobgc_leaf(argument[-1])
-    if glue is True:
-        if len(argument) != len(specifiers) - 1:
-            message = f"\n{len(specifiers)} specifiers ...."
-            for specifier in specifiers:
-                message += "\n\t" + str(specifier)
-            message += f"\n{len(argument)} pieces ..."
-            for piece in argument:
-                message += "\n\t" + str(piece)
-            message += "\nlen(specifiers) must equal len(argument) - 1 when glue=True."
-            raise Exception(message)
-    elif extra_specifiers is True:
-        assert len(argument) <= len(specifiers)
-    elif len(specifiers) != len(argument):
-        message = f"\n{len(specifiers)} specifiers ...."
-        for specifier in specifiers:
-            message += "\n\t" + str(specifier)
-        message += f"\n{len(argument)} argument pieces ..."
-        for piece in argument:
-            message += "\n\t" + str(piece)
-        message += "\nlen(specifiers) must equal len(argument)."
-        raise Exception(message)
-    wrappers = _iterate_hairpin_pieces(
-        argument,
-        *tweaks,
-        glue=glue,
-        left_broken=left_broken,
-        right_broken=right_broken,
-        specifiers=specifiers,
-    )
     _tags.wrappers(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
