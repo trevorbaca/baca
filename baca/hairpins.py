@@ -21,13 +21,13 @@ from . import typings as _typings
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class ExactHairpinSpecifier:
-    start_dynamic: abjad.Dynamic | None = None
+    start_dynamic: abjad.Dynamic | abjad.StopHairpin | None = None
     spanner_start: abjad.StartHairpin | None = None
     stop_indicator: abjad.Dynamic | abjad.StopHairpin | None = None
 
     def __post_init__(self):
         if self.start_dynamic is not None:
-            assert isinstance(self.start_dynamic, abjad.Dynamic)
+            assert isinstance(self.start_dynamic, abjad.Dynamic | abjad.StopHairpin)
         if self.spanner_start is not None:
             assert isinstance(self.spanner_start, abjad.StartHairpin)
         if self.stop_indicator is not None:
@@ -278,12 +278,14 @@ def exact(
     descriptor: str,
     *tweaks: _typings.IndexedTweak,
     allow_extra_specifiers: bool = False,
+    extra_specifiers: bool = False,
     left_broken: bool = False,
     right_broken: bool = False,
     rleak: bool = False,
 ) -> list[abjad.Wrapper]:
     argument = list(argument)
     assert isinstance(descriptor, str), repr(descriptor)
+    assert isinstance(extra_specifiers, bool), repr(extra_specifiers)
     assert isinstance(left_broken, bool), repr(left_broken)
     assert isinstance(right_broken, bool), repr(right_broken)
     if left_broken is True:
@@ -295,6 +297,8 @@ def exact(
     specifiers = parse_exact_hairpin_descriptor(descriptor)
     if len(specifiers) == 1:
         argument = [argument]
+    elif extra_specifiers is True:
+        assert len(argument) <= len(specifiers)
     elif len(specifiers) != len(argument):
         message = f"\n{len(specifiers)} specifiers ...."
         for specifier in specifiers:
@@ -318,7 +322,13 @@ def exact(
         specifier = specifiers[current_piece_index]
         first_leaf = abjad.select.leaf(piece, 0)
         final_leaf = abjad.select.leaf(piece, -1)
-        if specifier.start_dynamic is not None:
+        if isinstance(specifier.start_dynamic, abjad.StopHairpin):
+            wrapper = _indicatorlib.attach_persistent_indicator(
+                first_leaf,
+                specifier.start_dynamic,
+            )
+            wrappers.append(wrapper)
+        elif specifier.start_dynamic is not None:
             wrappers_ = _indicators.dynamic(
                 first_leaf,
                 specifier.start_dynamic,
@@ -490,7 +500,7 @@ def parse_exact_hairpin_descriptor(descriptor: str) -> list[ExactHairpinSpecifie
                 stop_indicator = _dynamics.make_dynamic(string)
             else:
                 start_dynamic = _dynamics.make_dynamic(string)
-        assert isinstance(start_dynamic, abjad.Dynamic | type(None))
+        assert isinstance(start_dynamic, abjad.Dynamic | abjad.StopHairpin | type(None))
         assert isinstance(spanner_start, abjad.StartHairpin | type(None))
         assert isinstance(
             stop_indicator, abjad.Dynamic | abjad.StopHairpin | type(None)
