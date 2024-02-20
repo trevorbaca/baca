@@ -399,13 +399,12 @@ def levine_multiphonic(n: int) -> str:
 def multistage_leaf_glissando(
     argument,
     pairs,
-    final_pitch,
+    final_pitch=None,
     *,
     rleak_final_stage=False,
     use_pleaves_lleak=False,
 ):
-    assert isinstance(pairs, list), repr(pairs)
-    assert all(isinstance(_, tuple) for _ in pairs), repr(pairs)
+    assert isinstance(pairs, str), repr(pairs)
     if rleak_final_stage:
         leaves = _select.pleaves(argument)
         if use_pleaves_lleak is True:
@@ -417,6 +416,28 @@ def multistage_leaf_glissando(
         if use_pleaves_lleak is True:
             leaves = _select.lleak(leaves)
         untie(leaves)
+    total_leaves = len(leaves)
+    if isinstance(pairs, str):
+        result = []
+        strings = pairs.split()
+        total_pitches = len(strings)
+        final_pitch = strings[-1]
+        cumulative_leaves = 0
+        for i, string in enumerate(strings[:-1]):
+            if ":" in string:
+                pitch, leaf_count = string.split(":")
+            else:
+                pitch = string
+                leaf_count = "1"
+            leaf_count = int(leaf_count)
+            if i == total_pitches - 2 and leaf_count == 1:
+                leaf_count = total_leaves - (cumulative_leaves + 1)
+            pair = (pitch, leaf_count + 1)
+            result.append(pair)
+            cumulative_leaves += leaf_count
+        pairs = result
+    assert isinstance(pairs, list), repr(pairs)
+    assert all(isinstance(_, tuple) for _ in pairs), repr(pairs)
     start, stop = 0, None
     for pair_1, pair_2 in abjad.sequence.nwise(pairs):
         start_pitch, leaf_count = pair_1
