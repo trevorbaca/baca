@@ -453,26 +453,18 @@ def multistage_leaf_glissando(
     stop = None
     if leaf_count is not None:
         stop = start + leaf_count
-
     if rleak:
-
-        def _final_selector(argument):
-            result = _select.rleaves(argument)
-            result = result[start:stop]
-            return result
-
+        result = _select.rleaves(argument)
+        result = result[start:stop]
     else:
-
-        def _final_selector(argument):
-            return abjad.select.leaves(argument)[start:stop]
-
+        result = abjad.select.leaves(argument)[start:stop]
     glissando(
-        _final_selector(argument),
+        result,
         allow_repeats=True,
         hide_middle_note_heads=True,
     )
     _pitchtools.interpolate_pitches(
-        _final_selector(argument),
+        result,
         start_pitch,
         final_pitch,
     )
