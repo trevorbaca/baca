@@ -398,7 +398,7 @@ def levine_multiphonic(n: int) -> str:
 
 def multistage_glissando(
     leaves,
-    string: str,
+    descriptor: str,
     *,
     rleak: bool = False,
 ):
@@ -406,33 +406,22 @@ def multistage_glissando(
     if rleak:
         leaves = _select.rleak(leaves)
     untie(leaves)
-    total_leaves = len(leaves)
-    pairs: list[tuple[str, int]] = []
-    words = string.split()
-    total_pitches = len(words)
-    cumulative_leaves = 0
-    for i, word in enumerate(words[:-1]):
-        if ":" in word:
-            pitch, leaf_count_string = word.split(":")
+    strings, total_leaves = descriptor.split(), len(leaves)
+    start_index, stop_index, cumulative_leaves = 0, 0, 0
+    for i, string in enumerate(strings[:-1]):
+        if ":" in string:
+            start_pitch, leaf_count_string = string.split(":")
         else:
-            pitch = word
-            leaf_count_string = "1"
+            start_pitch, leaf_count_string = string, "1"
         leaf_count = int(leaf_count_string)
-        if i == total_pitches - 2 and leaf_count == 1:
+        if i == len(strings) - 2 and leaf_count == 1:
             leaf_count = total_leaves - (cumulative_leaves + 1)
-        pair = (pitch, leaf_count + 1)
-        pairs.append(pair)
         cumulative_leaves += leaf_count
-    assert all(isinstance(_, tuple) for _ in pairs), repr(pairs)
-    final_pitch = words[-1]
-    start_index, stop_index = 0, 0
-    for i, pair in enumerate(pairs):
-        start_pitch, leaf_count = pair
-        if i == len(pairs) - 1:
-            stop_pitch = final_pitch
+        if i == len(strings) - 1:
+            stop_pitch = strings[-1]
         else:
-            stop_pitch = pairs[i + 1][0]
-        stop_index = start_index + leaf_count
+            stop_pitch = strings[i + 1].split(":")[0]
+        stop_index = start_index + leaf_count + 1
         glissando(
             leaves[start_index:stop_index],
             allow_repeats=True,
