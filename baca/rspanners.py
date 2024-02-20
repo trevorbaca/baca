@@ -100,6 +100,7 @@ def covered(
 def damp(
     argument,
     *tweaks: abjad.Tweak,
+    bound_details_right_padding: int | float | None = None,
     left_broken: bool = False,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
@@ -117,6 +118,7 @@ def damp(
         argument,
         specifier.spanner_start,
         *tweaks,
+        bound_details_right_padding=bound_details_right_padding,
         left_broken=left_broken,
         staff_padding=staff_padding,
     )
