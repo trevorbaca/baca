@@ -410,7 +410,6 @@ def multistage_glissando(
     pairs: list[tuple[str, int]] = []
     words = string.split()
     total_pitches = len(words)
-    final_pitch = words[-1]
     cumulative_leaves = 0
     for i, word in enumerate(words[:-1]):
         if ":" in word:
@@ -425,39 +424,26 @@ def multistage_glissando(
         pairs.append(pair)
         cumulative_leaves += leaf_count
     assert all(isinstance(_, tuple) for _ in pairs), repr(pairs)
-    start, stop = 0, None
-    for pair_1, pair_2 in abjad.sequence.nwise(pairs):
-        start_pitch, leaf_count = pair_1
-        stop_pitch = pair_2[0]
-        stop = start + leaf_count
+    final_pitch = words[-1]
+    start_index, stop_index = 0, 0
+    for i, pair in enumerate(pairs):
+        start_pitch, leaf_count = pair
+        if i == len(pairs) - 1:
+            stop_pitch = final_pitch
+        else:
+            stop_pitch = pairs[i + 1][0]
+        stop_index = start_index + leaf_count
         glissando(
-            leaves[start:stop],
+            leaves[start_index:stop_index],
             allow_repeats=True,
             hide_middle_note_heads=True,
         )
         _pitchtools.interpolate_pitches(
-            leaves[start:stop],
+            leaves[start_index:stop_index],
             start_pitch,
             stop_pitch,
         )
-        start = stop - 1
-    pair = pairs[-1]
-    start_pitch, leaf_count = pair
-    assert isinstance(start_pitch, str), repr(start_pitch)
-    assert isinstance(leaf_count, (int, type(None))), repr(leaf_count)
-    stop = None
-    if leaf_count is not None:
-        stop = start + leaf_count
-    glissando(
-        leaves[start:stop],
-        allow_repeats=True,
-        hide_middle_note_heads=True,
-    )
-    _pitchtools.interpolate_pitches(
-        leaves[start:stop],
-        start_pitch,
-        final_pitch,
-    )
+        start_index = stop_index - 1
 
 
 def untie(argument) -> None:
