@@ -397,12 +397,12 @@ def levine_multiphonic(n: int) -> str:
 
 
 def multistage_glissando(
-    argument,
+    leaves,
     string: str,
     *,
     rleak: bool = False,
 ):
-    leaves = _select.pleaves(argument)
+    assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
     if rleak:
         leaves = _select.rleak(leaves)
     untie(leaves)
@@ -429,19 +429,14 @@ def multistage_glissando(
     for pair_1, pair_2 in abjad.sequence.nwise(pairs):
         start_pitch, leaf_count = pair_1
         stop_pitch = pair_2[0]
-        assert isinstance(start_pitch, str), repr(start_pitch)
-        assert isinstance(stop_pitch, str), repr(stop_pitch)
-        assert isinstance(leaf_count, int), repr(leaf_count)
         stop = start + leaf_count
-        leaves = _select.pleaves(argument)
-        leaves = leaves[start:stop]
         glissando(
-            leaves,
+            leaves[start:stop],
             allow_repeats=True,
             hide_middle_note_heads=True,
         )
         _pitchtools.interpolate_pitches(
-            leaves,
+            leaves[start:stop],
             start_pitch,
             stop_pitch,
         )
@@ -453,18 +448,13 @@ def multistage_glissando(
     stop = None
     if leaf_count is not None:
         stop = start + leaf_count
-    if rleak:
-        result = _select.rleaves(argument)
-        result = result[start:stop]
-    else:
-        result = abjad.select.leaves(argument)[start:stop]
     glissando(
-        result,
+        leaves[start:stop],
         allow_repeats=True,
         hide_middle_note_heads=True,
     )
     _pitchtools.interpolate_pitches(
-        result,
+        leaves[start:stop],
         start_pitch,
         final_pitch,
     )
