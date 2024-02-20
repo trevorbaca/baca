@@ -401,11 +401,8 @@ def multistage_leaf_glissando(
     string: str,
     *,
     rleak: bool = False,
-    use_pleaves_lleak: bool = False,
 ):
     leaves = _select.pleaves(argument)
-    if use_pleaves_lleak is True:
-        leaves = _select.lleak(leaves)
     if rleak:
         leaves = _select.rleak(leaves)
     untie(leaves)
@@ -437,8 +434,6 @@ def multistage_leaf_glissando(
         assert isinstance(leaf_count, int), repr(leaf_count)
         stop = start + leaf_count
         leaves = _select.pleaves(argument)
-        if use_pleaves_lleak is True:
-            leaves = _select.lleak(leaves)
         leaves = leaves[start:stop]
         glissando(
             leaves,
