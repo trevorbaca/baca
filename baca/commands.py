@@ -403,17 +403,12 @@ def multistage_leaf_glissando(
     rleak_final_stage: bool = False,
     use_pleaves_lleak: bool = False,
 ):
+    leaves = _select.pleaves(argument)
+    if use_pleaves_lleak is True:
+        leaves = _select.lleak(leaves)
     if rleak_final_stage:
-        leaves = _select.pleaves(argument)
-        if use_pleaves_lleak is True:
-            leaves = _select.lleak(leaves)
         leaves = _select.rleak(leaves)
-        untie(leaves)
-    else:
-        leaves = _select.pleaves(argument)
-        if use_pleaves_lleak is True:
-            leaves = _select.lleak(leaves)
-        untie(leaves)
+    untie(leaves)
     total_leaves = len(leaves)
     pairs: list[tuple[str, int]] = []
     words = string.split()
