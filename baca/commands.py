@@ -400,13 +400,13 @@ def multistage_leaf_glissando(
     argument,
     string: str,
     *,
-    rleak_final_stage: bool = False,
+    rleak: bool = False,
     use_pleaves_lleak: bool = False,
 ):
     leaves = _select.pleaves(argument)
     if use_pleaves_lleak is True:
         leaves = _select.lleak(leaves)
-    if rleak_final_stage:
+    if rleak:
         leaves = _select.rleak(leaves)
     untie(leaves)
     total_leaves = len(leaves)
@@ -459,7 +459,7 @@ def multistage_leaf_glissando(
     if leaf_count is not None:
         stop = start + leaf_count
 
-    if rleak_final_stage:
+    if rleak:
 
         def _final_selector(argument):
             result = _select.rleaves(argument)
