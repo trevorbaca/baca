@@ -37,7 +37,7 @@ from .commands import (
     force_accidental,
     glissando,
     levine_multiphonic,
-    multistage_leaf_glissando,
+    multistage_glissando,
     untie,
 )
 from .constellation import *

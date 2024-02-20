@@ -396,7 +396,7 @@ def levine_multiphonic(n: int) -> str:
     return rf'\baca-boxed-markup "L.{n}"'
 
 
-def multistage_leaf_glissando(
+def multistage_glissando(
     argument,
     string: str,
     *,
