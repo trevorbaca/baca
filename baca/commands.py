@@ -239,7 +239,7 @@ def finger_pressure_transition(argument) -> None:
 
 def flat_glissando(
     argument,
-    pitch: str | abjad.NamedPitch | abjad.StaffPosition | None = None,
+    pitch: str | abjad.NamedPitch | None = None,
     *tweaks: abjad.Tweak,
     allow_hidden: bool = False,
     allow_repitch: bool = False,
@@ -250,11 +250,10 @@ def flat_glissando(
     left_broken: bool = False,
     right_broken: bool = False,
     right_broken_show_next: bool = False,
-    stop_pitch: str | abjad.NamedPitch | abjad.StaffPosition | None = None,
+    stop_pitch: str | abjad.NamedPitch | None = None,
 ) -> None:
-    prototype = (str, abjad.NamedPitch, abjad.StaffPosition)
     if pitch is not None:
-        assert isinstance(pitch, prototype), repr(pitch)
+        assert isinstance(pitch, str | abjad.NamedPitch), repr(pitch)
     if stop_pitch is not None:
         assert type(pitch) is type(stop_pitch), repr((pitch, stop_pitch))
     glissando(
@@ -270,34 +269,21 @@ def flat_glissando(
         right_broken_show_next=right_broken_show_next,
     )
     untie(argument)
-    # if isinstance(pitch, abjad.StaffPosition):
-    #     raise Exception(pitch, "AAA")
     if pitch is not None:
-        if stop_pitch is None:
-            if isinstance(pitch, abjad.StaffPosition):
-                _pitchtools.staff_position(
-                    argument,
-                    pitch,
-                    allow_hidden=allow_hidden,
-                    allow_repitch=allow_repitch,
-                    mock=mock,
-                )
-            else:
-                _pitchtools.pitch(
-                    argument,
-                    pitch,
-                    allow_hidden=allow_hidden,
-                    allow_repitch=allow_repitch,
-                    mock=mock,
-                )
-        else:
-            assert isinstance(pitch, str | abjad.NamedPitch)
-            assert isinstance(stop_pitch, str | abjad.NamedPitch)
+        if stop_pitch is not None:
             _pitchtools.interpolate_pitches(
                 argument,
                 pitch,
                 stop_pitch,
                 allow_hidden=allow_hidden,
+                mock=mock,
+            )
+        else:
+            _pitchtools.pitch(
+                argument,
+                pitch,
+                allow_hidden=allow_hidden,
+                allow_repitch=allow_repitch,
                 mock=mock,
             )
 
