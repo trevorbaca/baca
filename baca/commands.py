@@ -250,14 +250,10 @@ def flat_glissando(
     left_broken: bool = False,
     right_broken: bool = False,
     right_broken_show_next: bool = False,
-    stop_pitch: str | None = None,
 ) -> None:
-    if pitch is None:
-        assert stop_pitch is None, repr(stop_pitch)
     if pitch is not None:
         assert isinstance(pitch, str), repr(pitch)
-    if stop_pitch is not None:
-        assert isinstance(stop_pitch, str), repr(stop_pitch)
+    stop_pitch = None
     if pitch is not None:
         if " " in pitch:
             parts: list[str] = []
@@ -270,7 +266,6 @@ def flat_glissando(
             if len(parts) == 1:
                 pitch = parts[0]
             elif len(parts) == 2:
-                assert stop_pitch is None, repr(stop_pitch)
                 pitch, stop_pitch = parts
             else:
                 raise Exception(parts)
