@@ -269,21 +269,23 @@ def flat_glissando(
         right_broken_show_next=right_broken_show_next,
     )
     untie(argument)
+    if pitch is None:
+        assert stop_pitch is None, repr(stop_pitch)
     if pitch is not None:
-        if stop_pitch is not None:
-            _pitchtools.interpolate_pitches(
-                argument,
-                pitch,
-                stop_pitch,
-                allow_hidden=allow_hidden,
-                mock=mock,
-            )
-        else:
+        if stop_pitch is None or pitch == stop_pitch:
             _pitchtools.pitch(
                 argument,
                 pitch,
                 allow_hidden=allow_hidden,
                 allow_repitch=allow_repitch,
+                mock=mock,
+            )
+        else:
+            _pitchtools.interpolate_pitches(
+                argument,
+                pitch,
+                stop_pitch,
+                allow_hidden=allow_hidden,
                 mock=mock,
             )
 
