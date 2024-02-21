@@ -239,7 +239,7 @@ def finger_pressure_transition(argument) -> None:
 
 def flat_glissando(
     argument,
-    pitch: str | abjad.NamedPitch | None = None,
+    pitch: str | None = None,
     *tweaks: abjad.Tweak,
     allow_hidden: bool = False,
     allow_repitch: bool = False,
@@ -250,12 +250,14 @@ def flat_glissando(
     left_broken: bool = False,
     right_broken: bool = False,
     right_broken_show_next: bool = False,
-    stop_pitch: str | abjad.NamedPitch | None = None,
+    stop_pitch: str | None = None,
 ) -> None:
+    if pitch is None:
+        assert stop_pitch is None, repr(stop_pitch)
     if pitch is not None:
-        assert isinstance(pitch, str | abjad.NamedPitch), repr(pitch)
+        assert isinstance(pitch, str), repr(pitch)
     if stop_pitch is not None:
-        assert type(pitch) is type(stop_pitch), repr((pitch, stop_pitch))
+        assert isinstance(stop_pitch, str), repr(stop_pitch)
     glissando(
         argument,
         *tweaks,
@@ -269,8 +271,6 @@ def flat_glissando(
         right_broken_show_next=right_broken_show_next,
     )
     untie(argument)
-    if pitch is None:
-        assert stop_pitch is None, repr(stop_pitch)
     if pitch is not None:
         if stop_pitch is None or pitch == stop_pitch:
             _pitchtools.pitch(
