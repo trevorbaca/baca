@@ -242,8 +242,11 @@ def flat_glissando(
     pitch: str | None = None,
     *tweaks: abjad.Tweak,
     allow_hidden: bool = False,
+    allow_repeats=True,
     allow_repitch: bool = False,
+    allow_ties=True,
     do_not_hide_middle_note_heads: bool = False,
+    do_not_transpose: bool = False,
     mock: bool = False,
     hide_middle_stems: bool = False,
     hide_stem_selector: typing.Callable | None = None,
@@ -251,6 +254,10 @@ def flat_glissando(
     right_broken: bool = False,
     right_broken_show_next: bool = False,
 ) -> None:
+    # if pitch is None:
+    #     allow_repeats = False
+    #     allow_ties = False
+    #     do_not_hide_middle_note_heads = True
     if pitch is not None:
         assert isinstance(pitch, str), repr(pitch)
     stop_pitch = None
@@ -289,6 +296,7 @@ def flat_glissando(
                 pitch,
                 allow_hidden=allow_hidden,
                 allow_repitch=allow_repitch,
+                do_not_transpose=do_not_transpose,
                 mock=mock,
             )
         else:
