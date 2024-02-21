@@ -240,7 +240,7 @@ def finger_pressure_transition(argument) -> None:
 def flat_glissando(
     argument,
     pitch: str | abjad.NamedPitch | abjad.StaffPosition | None = None,
-    *tweaks,
+    *tweaks: abjad.Tweak,
     allow_hidden: bool = False,
     allow_repitch: bool = False,
     do_not_hide_middle_note_heads: bool = False,
@@ -270,6 +270,8 @@ def flat_glissando(
         right_broken_show_next=right_broken_show_next,
     )
     untie(argument)
+    # if isinstance(pitch, abjad.StaffPosition):
+    #     raise Exception(pitch, "AAA")
     if pitch is not None:
         if stop_pitch is None:
             if isinstance(pitch, abjad.StaffPosition):
@@ -289,26 +291,15 @@ def flat_glissando(
                     mock=mock,
                 )
         else:
-            if isinstance(pitch, abjad.StaffPosition):
-                assert isinstance(stop_pitch, abjad.StaffPosition)
-                raise Exception("port interpolate_staff_positions()")
-                _pitchtools.interpolate_staff_positions(
-                    argument,
-                    pitch,
-                    stop_pitch,
-                    allow_hidden=allow_hidden,
-                    mock=mock,
-                )
-            else:
-                assert isinstance(pitch, str | abjad.NamedPitch)
-                assert isinstance(stop_pitch, str | abjad.NamedPitch)
-                _pitchtools.interpolate_pitches(
-                    argument,
-                    pitch,
-                    stop_pitch,
-                    allow_hidden=allow_hidden,
-                    mock=mock,
-                )
+            assert isinstance(pitch, str | abjad.NamedPitch)
+            assert isinstance(stop_pitch, str | abjad.NamedPitch)
+            _pitchtools.interpolate_pitches(
+                argument,
+                pitch,
+                stop_pitch,
+                allow_hidden=allow_hidden,
+                mock=mock,
+            )
 
 
 def force_accidental(argument, *, tag: abjad.Tag | None = None) -> None:
@@ -364,7 +355,6 @@ def glissando(
     parenthesize_repeats: bool = False,
     right_broken: bool = False,
     right_broken_show_next: bool = False,
-    style: str | None = None,
     zero_padding: bool = False,
 ) -> None:
     leaves = abjad.select.leaves(argument)
