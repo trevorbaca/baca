@@ -260,12 +260,12 @@ def finger_pressure_transition(argument) -> None:
 def flat_glissando_without_pitch(
     argument,
     *tweaks: _typings.IndexedTweak,
-    do_not_hide_middle_note_heads: bool = False,
     hide_middle_stems: bool = False,
     left_broken: bool = False,
     right_broken: bool = False,
     rleak: bool = False,
 ) -> None:
+    assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
     untie(argument)
     if rleak is True:
         argument = _select.rleak(argument)
@@ -273,7 +273,7 @@ def flat_glissando_without_pitch(
         argument,
         *tweaks,
         allow_repeats=True,
-        hide_middle_note_heads=not do_not_hide_middle_note_heads,
+        hide_middle_note_heads=True,
         hide_middle_stems=hide_middle_stems,
         left_broken=left_broken,
         right_broken=right_broken,
@@ -333,7 +333,6 @@ def multistage_glissando(
     *tweaks: _typings.IndexedTweak,
     allow_hidden: bool = False,
     allow_repitch: bool = False,
-    debug: bool = False,
     do_not_transpose: bool = False,
     hide_middle_stems: bool = False,
     left_broken: bool = False,
@@ -343,9 +342,9 @@ def multistage_glissando(
     rleak: bool = False,
 ) -> None:
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
+    untie(leaves)
     if rleak:
         leaves = _select.rleak(leaves)
-    untie(leaves)
     total_leaves = len(leaves)
     strings: list[str] = []
     for string in descriptor.split():
