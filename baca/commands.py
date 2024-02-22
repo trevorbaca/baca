@@ -38,23 +38,16 @@ def basic_glissando(
     argument,
     *tweaks: abjad.Tweak,
     allow_repeats: bool = False,
-    allow_ties: bool = False,
     hide_middle_note_heads: bool = False,
     right_broken: bool = False,
     zero_padding: bool = False,
 ) -> None:
     leaves = abjad.select.leaves(argument)
-    tweaks_ = []
-    prototype = (abjad.Tweak, tuple)
-    for tweak in tweaks or []:
-        assert isinstance(tweak, prototype), repr(tweak)
-        tweaks_.append(tweak)
     tag = _helpers.function_name(_frame())
     abjad.glissando(
         leaves,
-        *tweaks_,
+        *tweaks,
         allow_repeats=allow_repeats,
-        allow_ties=allow_ties,
         hide_middle_note_heads=hide_middle_note_heads,
         right_broken=right_broken,
         tag=tag,
@@ -270,9 +263,8 @@ def flat_glissando(
     pitch: str | None = None,
     *tweaks: abjad.Tweak,
     allow_hidden: bool = False,
-    allow_repeats=True,
+    allow_repeats: bool = True,
     allow_repitch: bool = False,
-    allow_ties=True,
     do_not_hide_middle_note_heads: bool = False,
     do_not_transpose: bool = False,
     mock: bool = False,
@@ -284,7 +276,6 @@ def flat_glissando(
 ) -> None:
     # if pitch is None:
     #     allow_repeats = False
-    #     allow_ties = False
     #     do_not_hide_middle_note_heads = True
     if pitch is not None:
         assert isinstance(pitch, str), repr(pitch)
@@ -308,6 +299,7 @@ def flat_glissando(
         argument,
         *tweaks,
         allow_repeats=True,
+        # TODO: remove allow_ties=True?
         allow_ties=True,
         hide_middle_note_heads=not do_not_hide_middle_note_heads,
         hide_middle_stems=hide_middle_stems,
