@@ -1189,7 +1189,7 @@ def interpolate_pitches(
         >>> rmakers.beam(tuplets)
         >>> _ = baca.clef(abjad.select.leaf(tuplets, 0), "treble")
         >>> baca.interpolate_pitches(tuplets, "Eb4", "F#5")
-        >>> baca.glissando(
+        >>> baca.basic_glissando(
         ...     tuplets,
         ...     allow_repeats=True,
         ...     hide_middle_note_heads=True,

@@ -36,7 +36,6 @@ from .commands import (
     finger_pressure_transition,
     flat_glissando,
     force_accidental,
-    glissando,
     levine_multiphonic,
     multistage_glissando,
     untie,

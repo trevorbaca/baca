@@ -304,7 +304,7 @@ def flat_glissando(
                 pitch, stop_pitch = parts
             else:
                 raise Exception(parts)
-    glissando(
+    abjad.glissando(
         argument,
         *tweaks,
         allow_repeats=True,
@@ -315,6 +315,7 @@ def flat_glissando(
         left_broken=left_broken,
         right_broken=right_broken,
         right_broken_show_next=right_broken_show_next,
+        tag=_helpers.function_name(_frame()),
     )
     untie(argument)
     if pitch is not None:
@@ -378,44 +379,6 @@ def force_accidental(argument, *, tag: abjad.Tag | None = None) -> None:
                 )
 
 
-def glissando(
-    argument,
-    *tweaks: abjad.Tweak,
-    allow_repeats: bool = False,
-    allow_ties: bool = False,
-    hide_middle_note_heads: bool = False,
-    hide_middle_stems: bool = False,
-    hide_stem_selector: typing.Callable | None = None,
-    left_broken: bool = False,
-    parenthesize_repeats: bool = False,
-    right_broken: bool = False,
-    right_broken_show_next: bool = False,
-    zero_padding: bool = False,
-) -> None:
-    leaves = abjad.select.leaves(argument)
-    tweaks_ = []
-    prototype = (abjad.Tweak, tuple)
-    for tweak in tweaks or []:
-        assert isinstance(tweak, prototype), repr(tweak)
-        tweaks_.append(tweak)
-    tag = _helpers.function_name(_frame())
-    abjad.glissando(
-        leaves,
-        *tweaks_,
-        allow_repeats=allow_repeats,
-        allow_ties=allow_ties,
-        hide_middle_note_heads=hide_middle_note_heads,
-        hide_middle_stems=hide_middle_stems,
-        hide_stem_selector=hide_stem_selector,
-        left_broken=left_broken,
-        parenthesize_repeats=parenthesize_repeats,
-        right_broken=right_broken,
-        right_broken_show_next=right_broken_show_next,
-        tag=tag,
-        zero_padding=zero_padding,
-    )
-
-
 def levine_multiphonic(n: int) -> str:
     assert isinstance(n, int), repr(n)
     return rf'\baca-boxed-markup "L.{n}"'
@@ -447,10 +410,11 @@ def multistage_glissando(
         else:
             stop_pitch = strings[i + 1].split(":")[0]
         stop_index = start_index + leaf_count + 1
-        glissando(
+        abjad.glissando(
             leaves[start_index:stop_index],
             allow_repeats=True,
             hide_middle_note_heads=True,
+            tag=_helpers.function_name(_frame()),
         )
         _pitchtools.interpolate_pitches(
             leaves[start_index:stop_index],
