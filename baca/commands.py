@@ -37,7 +37,8 @@ def _validate_bcps(bcps):
 def basic_glissando(
     argument,
     *tweaks: abjad.Tweak,
-    allow_repeats: bool = False,
+    allow_repeats=None,
+    do_not_allow_repeats: bool = False,
     hide_middle_note_heads: bool = False,
     right_broken: bool = False,
     zero_padding: bool = False,
@@ -47,7 +48,7 @@ def basic_glissando(
     abjad.glissando(
         leaves,
         *tweaks,
-        allow_repeats=allow_repeats,
+        allow_repeats=not do_not_allow_repeats,
         hide_middle_note_heads=hide_middle_note_heads,
         right_broken=right_broken,
         tag=tag,
