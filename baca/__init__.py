@@ -29,6 +29,7 @@ from .anchor import (
     resume_after,
 )
 from .commands import (
+    basic_glissando,
     bcps,
     color,
     durations,

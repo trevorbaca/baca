@@ -34,6 +34,44 @@ def _validate_bcps(bcps):
         assert len(bcp) == 2, repr(bcp)
 
 
+def basic_glissando(
+    argument,
+    *tweaks: abjad.Tweak,
+    allow_repeats: bool = False,
+    allow_ties: bool = False,
+    hide_middle_note_heads: bool = False,
+    hide_middle_stems: bool = False,
+    hide_stem_selector: typing.Callable | None = None,
+    left_broken: bool = False,
+    parenthesize_repeats: bool = False,
+    right_broken: bool = False,
+    right_broken_show_next: bool = False,
+    zero_padding: bool = False,
+) -> None:
+    leaves = abjad.select.leaves(argument)
+    tweaks_ = []
+    prototype = (abjad.Tweak, tuple)
+    for tweak in tweaks or []:
+        assert isinstance(tweak, prototype), repr(tweak)
+        tweaks_.append(tweak)
+    tag = _helpers.function_name(_frame())
+    abjad.glissando(
+        leaves,
+        *tweaks_,
+        allow_repeats=allow_repeats,
+        allow_ties=allow_ties,
+        hide_middle_note_heads=hide_middle_note_heads,
+        hide_middle_stems=hide_middle_stems,
+        hide_stem_selector=hide_stem_selector,
+        left_broken=left_broken,
+        parenthesize_repeats=parenthesize_repeats,
+        right_broken=right_broken,
+        right_broken_show_next=right_broken_show_next,
+        tag=tag,
+        zero_padding=zero_padding,
+    )
+
+
 def bcps(
     argument,
     bcps,
