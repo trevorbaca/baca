@@ -36,21 +36,20 @@ def _validate_bcps(bcps):
 
 def basic_glissando(
     argument,
-    *tweaks: abjad.Tweak,
+    *tweaks: _typings.IndexedTweak,
     do_not_allow_repeats: bool = False,
     hide_middle_note_heads: bool = False,
     right_broken: bool = False,
     zero_padding: bool = False,
 ) -> None:
     leaves = abjad.select.leaves(argument)
-    tag = _helpers.function_name(_frame())
     abjad.glissando(
         leaves,
         *tweaks,
         allow_repeats=not do_not_allow_repeats,
         hide_middle_note_heads=hide_middle_note_heads,
         right_broken=right_broken,
-        tag=tag,
+        tag=_helpers.function_name(_frame()),
         zero_padding=zero_padding,
     )
 
@@ -258,71 +257,6 @@ def finger_pressure_transition(argument) -> None:
     )
 
 
-def flat_glissando(
-    argument,
-    pitch: str,
-    *tweaks: abjad.Tweak,
-    allow_hidden: bool = False,
-    allow_repitch: bool = False,
-    do_not_hide_middle_note_heads: bool = False,
-    do_not_transpose: bool = False,
-    mock: bool = False,
-    hide_middle_stems: bool = False,
-    hide_stem_selector: typing.Callable | None = None,
-    left_broken: bool = False,
-    right_broken: bool = False,
-    right_broken_show_next: bool = False,
-) -> None:
-    assert isinstance(pitch, str), repr(pitch)
-    stop_pitch = None
-    if pitch is not None:
-        if " " in pitch:
-            parts: list[str] = []
-            for part in pitch.split():
-                if part.endswith(">"):
-                    parts[-1] += " " + part
-                else:
-                    parts.append(part)
-            assert len(parts) in (1, 2), repr(parts)
-            if len(parts) == 1:
-                pitch = parts[0]
-            elif len(parts) == 2:
-                pitch, stop_pitch = parts
-            else:
-                raise Exception(parts)
-    untie(argument)
-    abjad.glissando(
-        argument,
-        *tweaks,
-        allow_repeats=True,
-        hide_middle_note_heads=not do_not_hide_middle_note_heads,
-        hide_middle_stems=hide_middle_stems,
-        hide_stem_selector=hide_stem_selector,
-        left_broken=left_broken,
-        right_broken=right_broken,
-        right_broken_show_next=right_broken_show_next,
-        tag=_helpers.function_name(_frame()),
-    )
-    if pitch is not None:
-        if stop_pitch is None or pitch == stop_pitch:
-            _pitchtools.pitch(
-                argument,
-                pitch,
-                allow_hidden=allow_hidden,
-                allow_repitch=allow_repitch,
-                do_not_transpose=do_not_transpose,
-                mock=mock,
-            )
-        else:
-            _pitchtools.interpolate_pitches(
-                argument,
-                pitch,
-                stop_pitch,
-                allow_hidden=allow_hidden,
-                mock=mock,
-            )
-
-
 def flat_glissando_without_pitch(
     argument,
     *tweaks: _typings.IndexedTweak,
@@ -331,7 +265,6 @@ def flat_glissando_without_pitch(
     hide_stem_selector: typing.Callable | None = None,
     left_broken: bool = False,
     right_broken: bool = False,
-    right_broken_show_next: bool = False,
 ) -> None:
     untie(argument)
     abjad.glissando(
@@ -343,7 +276,6 @@ def flat_glissando_without_pitch(
         hide_stem_selector=hide_stem_selector,
         left_broken=left_broken,
         right_broken=right_broken,
-        right_broken_show_next=right_broken_show_next,
         tag=_helpers.function_name(_frame()),
     )
 
@@ -409,19 +341,18 @@ def multistage_glissando(
     right_broken: bool = False,
     right_broken_show_next: bool = False,
     rleak: bool = False,
-):
+) -> None:
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
     if rleak:
         leaves = _select.rleak(leaves)
     untie(leaves)
-    strings, total_leaves = descriptor.split(), len(leaves)
-    parts: list[str] = []
-    for part in descriptor.split():
-        if part.endswith(">"):
-            parts[-1] += " " + part
+    total_leaves = len(leaves)
+    strings: list[str] = []
+    for string in descriptor.split():
+        if string.endswith(">"):
+            strings[-1] += " " + string
         else:
-            parts.append(part)
-    strings = parts[:]
+            strings.append(string)
     if len(strings) == 1:
         strings *= 2
     start_index, stop_index, cumulative_leaves = 0, 0, 0
