@@ -262,18 +262,19 @@ def flat_glissando_without_pitch(
     *tweaks: _typings.IndexedTweak,
     do_not_hide_middle_note_heads: bool = False,
     hide_middle_stems: bool = False,
-    hide_stem_selector: typing.Callable | None = None,
     left_broken: bool = False,
     right_broken: bool = False,
+    rleak: bool = False,
 ) -> None:
     untie(argument)
+    if rleak is True:
+        argument = _select.rleak(argument)
     abjad.glissando(
         argument,
         *tweaks,
         allow_repeats=True,
         hide_middle_note_heads=not do_not_hide_middle_note_heads,
         hide_middle_stems=hide_middle_stems,
-        hide_stem_selector=hide_stem_selector,
         left_broken=left_broken,
         right_broken=right_broken,
         tag=_helpers.function_name(_frame()),
@@ -335,7 +336,6 @@ def multistage_glissando(
     debug: bool = False,
     do_not_transpose: bool = False,
     hide_middle_stems: bool = False,
-    hide_stem_selector: typing.Callable | None = None,
     left_broken: bool = False,
     mock: bool = False,
     right_broken: bool = False,
@@ -376,7 +376,6 @@ def multistage_glissando(
             allow_repeats=True,
             hide_middle_note_heads=True,
             hide_middle_stems=hide_middle_stems,
-            hide_stem_selector=hide_stem_selector,
             left_broken=left_broken,
             right_broken=right_broken,
             right_broken_show_next=right_broken_show_next,
