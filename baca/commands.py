@@ -260,7 +260,7 @@ def finger_pressure_transition(argument) -> None:
 
 def flat_glissando(
     argument,
-    pitch: str | None = None,
+    pitch: str,
     *tweaks: abjad.Tweak,
     allow_hidden: bool = False,
     allow_repitch: bool = False,
@@ -273,11 +273,7 @@ def flat_glissando(
     right_broken: bool = False,
     right_broken_show_next: bool = False,
 ) -> None:
-    # if pitch is None:
-    #     allow_repeats = False
-    #     do_not_hide_middle_note_heads = True
-    if pitch is not None:
-        assert isinstance(pitch, str), repr(pitch)
+    assert isinstance(pitch, str), repr(pitch)
     stop_pitch = None
     if pitch is not None:
         if " " in pitch:
@@ -325,6 +321,31 @@ def flat_glissando(
                 allow_hidden=allow_hidden,
                 mock=mock,
             )
+
+
+def flat_glissando_without_pitch(
+    argument,
+    *tweaks: _typings.IndexedTweak,
+    do_not_hide_middle_note_heads: bool = False,
+    hide_middle_stems: bool = False,
+    hide_stem_selector: typing.Callable | None = None,
+    left_broken: bool = False,
+    right_broken: bool = False,
+    right_broken_show_next: bool = False,
+) -> None:
+    untie(argument)
+    abjad.glissando(
+        argument,
+        *tweaks,
+        allow_repeats=True,
+        hide_middle_note_heads=not do_not_hide_middle_note_heads,
+        hide_middle_stems=hide_middle_stems,
+        hide_stem_selector=hide_stem_selector,
+        left_broken=left_broken,
+        right_broken=right_broken,
+        right_broken_show_next=right_broken_show_next,
+        tag=_helpers.function_name(_frame()),
+    )
 
 
 def force_accidental(argument, *, tag: abjad.Tag | None = None) -> None:
