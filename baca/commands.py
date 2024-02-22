@@ -257,30 +257,6 @@ def finger_pressure_transition(argument) -> None:
     )
 
 
-def flat_glissando_without_pitch(
-    argument,
-    *tweaks: _typings.IndexedTweak,
-    hide_middle_stems: bool = False,
-    left_broken: bool = False,
-    right_broken: bool = False,
-    rleak: bool = False,
-) -> None:
-    assert all(isinstance(_, abjad.Leaf) for _ in argument), repr(argument)
-    untie(argument)
-    if rleak is True:
-        argument = _select.rleak(argument)
-    abjad.glissando(
-        argument,
-        *tweaks,
-        allow_repeats=True,
-        hide_middle_note_heads=True,
-        hide_middle_stems=hide_middle_stems,
-        left_broken=left_broken,
-        right_broken=right_broken,
-        tag=_helpers.function_name(_frame()),
-    )
-
-
 def force_accidental(argument, *, tag: abjad.Tag | None = None) -> None:
     tag = tag or abjad.Tag()
     tag = tag.append(_helpers.function_name(_frame()))
@@ -329,7 +305,7 @@ def levine_multiphonic(n: int) -> str:
 
 def multistage_glissando(
     leaves,
-    descriptor: str,
+    descriptor: str | None = None,
     *tweaks: _typings.IndexedTweak,
     allow_hidden: bool = False,
     allow_repitch: bool = False,
@@ -342,16 +318,20 @@ def multistage_glissando(
     rleak: bool = False,
 ) -> None:
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
+    assert isinstance(descriptor, str | type(None)), repr(descriptor)
     untie(leaves)
     if rleak:
         leaves = _select.rleak(leaves)
     total_leaves = len(leaves)
     strings: list[str] = []
-    for string in descriptor.split():
-        if string.endswith(">"):
-            strings[-1] += " " + string
-        else:
-            strings.append(string)
+    if isinstance(descriptor, str):
+        for string in descriptor.split():
+            if string.endswith(">"):
+                strings[-1] += " " + string
+            else:
+                strings.append(string)
+    else:
+        strings.append("UNPITCHED")
     if len(strings) == 1:
         strings *= 2
     start_index, stop_index, cumulative_leaves = 0, 0, 0
@@ -380,7 +360,9 @@ def multistage_glissando(
             right_broken_show_next=right_broken_show_next,
             tag=_helpers.function_name(_frame()),
         )
-        if start_pitch == stop_pitch:
+        if start_pitch == "UNPITCHED":
+            pass
+        elif start_pitch == stop_pitch:
             _pitchtools.pitch(
                 leaves[start_index:stop_index],
                 start_pitch,

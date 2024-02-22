@@ -34,7 +34,6 @@ from .commands import (
     color,
     durations,
     finger_pressure_transition,
-    flat_glissando_without_pitch,
     force_accidental,
     levine_multiphonic,
     multistage_glissando,
