@@ -377,6 +377,12 @@ def multistage_glissando(
     leaves,
     descriptor: str,
     *,
+    allow_hidden: bool = False,
+    allow_repitch: bool = False,
+    debug: bool = False,
+    do_not_transpose: bool = False,
+    hide_middle_stems: bool = False,
+    mock: bool = False,
     rleak: bool = False,
 ):
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
@@ -384,6 +390,8 @@ def multistage_glissando(
         leaves = _select.rleak(leaves)
     untie(leaves)
     strings, total_leaves = descriptor.split(), len(leaves)
+    if len(strings) == 1:
+        strings *= 2
     start_index, stop_index, cumulative_leaves = 0, 0, 0
     for i, string in enumerate(strings[:-1]):
         if ":" in string:
@@ -403,13 +411,26 @@ def multistage_glissando(
             leaves[start_index:stop_index],
             allow_repeats=True,
             hide_middle_note_heads=True,
+            hide_middle_stems=hide_middle_stems,
             tag=_helpers.function_name(_frame()),
         )
-        _pitchtools.interpolate_pitches(
-            leaves[start_index:stop_index],
-            start_pitch,
-            stop_pitch,
-        )
+        # if debug is True:
+        #     breakpoint()
+        if start_pitch == stop_pitch:
+            _pitchtools.pitch(
+                leaves[start_index:stop_index],
+                start_pitch,
+                allow_hidden=allow_hidden,
+                allow_repitch=allow_repitch,
+                do_not_transpose=do_not_transpose,
+                mock=mock,
+            )
+        else:
+            _pitchtools.interpolate_pitches(
+                leaves[start_index:stop_index],
+                start_pitch,
+                stop_pitch,
+            )
         start_index = stop_index - 1
 
 
