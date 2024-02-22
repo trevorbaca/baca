@@ -263,7 +263,6 @@ def flat_glissando(
     pitch: str | None = None,
     *tweaks: abjad.Tweak,
     allow_hidden: bool = False,
-    allow_repeats: bool = True,
     allow_repitch: bool = False,
     do_not_hide_middle_note_heads: bool = False,
     do_not_transpose: bool = False,
