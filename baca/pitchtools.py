@@ -1191,7 +1191,6 @@ def interpolate_pitches(
         >>> baca.interpolate_pitches(tuplets, "Eb4", "F#5")
         >>> baca.basic_glissando(
         ...     tuplets,
-        ...     allow_repeats=True,
         ...     hide_middle_note_heads=True,
         ... )
         >>> _ = baca.override.glissando_thickness(tuplets, 3)
