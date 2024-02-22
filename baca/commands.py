@@ -376,13 +376,15 @@ def levine_multiphonic(n: int) -> str:
 def multistage_glissando(
     leaves,
     descriptor: str,
-    *,
+    *tweaks: _typings.IndexedTweak,
     allow_hidden: bool = False,
     allow_repitch: bool = False,
     debug: bool = False,
     do_not_transpose: bool = False,
     hide_middle_stems: bool = False,
+    left_broken: bool = False,
     mock: bool = False,
+    right_broken: bool = False,
     rleak: bool = False,
 ):
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
@@ -409,13 +411,14 @@ def multistage_glissando(
         stop_index = start_index + leaf_count + 1
         abjad.glissando(
             leaves[start_index:stop_index],
+            *tweaks,
             allow_repeats=True,
             hide_middle_note_heads=True,
             hide_middle_stems=hide_middle_stems,
+            left_broken=left_broken,
+            right_broken=right_broken,
             tag=_helpers.function_name(_frame()),
         )
-        # if debug is True:
-        #     breakpoint()
         if start_pitch == stop_pitch:
             _pitchtools.pitch(
                 leaves[start_index:stop_index],
