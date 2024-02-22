@@ -407,6 +407,7 @@ def multistage_glissando(
     left_broken: bool = False,
     mock: bool = False,
     right_broken: bool = False,
+    right_broken_show_next: bool = False,
     rleak: bool = False,
 ):
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
@@ -414,6 +415,13 @@ def multistage_glissando(
         leaves = _select.rleak(leaves)
     untie(leaves)
     strings, total_leaves = descriptor.split(), len(leaves)
+    parts: list[str] = []
+    for part in descriptor.split():
+        if part.endswith(">"):
+            parts[-1] += " " + part
+        else:
+            parts.append(part)
+    strings = parts[:]
     if len(strings) == 1:
         strings *= 2
     start_index, stop_index, cumulative_leaves = 0, 0, 0
@@ -440,6 +448,7 @@ def multistage_glissando(
             hide_stem_selector=hide_stem_selector,
             left_broken=left_broken,
             right_broken=right_broken,
+            right_broken_show_next=right_broken_show_next,
             tag=_helpers.function_name(_frame()),
         )
         if start_pitch == stop_pitch:
