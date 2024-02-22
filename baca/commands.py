@@ -295,12 +295,11 @@ def flat_glissando(
                 pitch, stop_pitch = parts
             else:
                 raise Exception(parts)
+    untie(argument)
     abjad.glissando(
         argument,
         *tweaks,
         allow_repeats=True,
-        # TODO: remove allow_ties=True?
-        allow_ties=True,
         hide_middle_note_heads=not do_not_hide_middle_note_heads,
         hide_middle_stems=hide_middle_stems,
         hide_stem_selector=hide_stem_selector,
@@ -309,7 +308,6 @@ def flat_glissando(
         right_broken_show_next=right_broken_show_next,
         tag=_helpers.function_name(_frame()),
     )
-    untie(argument)
     if pitch is not None:
         if stop_pitch is None or pitch == stop_pitch:
             _pitchtools.pitch(
