@@ -40,12 +40,7 @@ def basic_glissando(
     allow_repeats: bool = False,
     allow_ties: bool = False,
     hide_middle_note_heads: bool = False,
-    hide_middle_stems: bool = False,
-    hide_stem_selector: typing.Callable | None = None,
-    left_broken: bool = False,
-    parenthesize_repeats: bool = False,
     right_broken: bool = False,
-    right_broken_show_next: bool = False,
     zero_padding: bool = False,
 ) -> None:
     leaves = abjad.select.leaves(argument)
@@ -61,12 +56,7 @@ def basic_glissando(
         allow_repeats=allow_repeats,
         allow_ties=allow_ties,
         hide_middle_note_heads=hide_middle_note_heads,
-        hide_middle_stems=hide_middle_stems,
-        hide_stem_selector=hide_stem_selector,
-        left_broken=left_broken,
-        parenthesize_repeats=parenthesize_repeats,
         right_broken=right_broken,
-        right_broken_show_next=right_broken_show_next,
         tag=tag,
         zero_padding=zero_padding,
     )
