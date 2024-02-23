@@ -309,7 +309,10 @@ def multistage_glissando(
     *tweaks: _typings.IndexedTweak,
     allow_hidden: bool = False,
     allow_repitch: bool = False,
+    do_not_allow_repeats: bool = False,
+    do_not_hide_middle_note_heads: bool = False,
     do_not_transpose: bool = False,
+    do_not_untie: bool = False,
     hide_middle_stems: bool = False,
     left_broken: bool = False,
     mock: bool = False,
@@ -319,7 +322,8 @@ def multistage_glissando(
 ) -> None:
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
     assert isinstance(descriptor, str | type(None)), repr(descriptor)
-    untie(leaves)
+    if do_not_untie is False:
+        untie(leaves)
     if rleak:
         leaves = _select.rleak(leaves)
     total_leaves = len(leaves)
@@ -352,8 +356,8 @@ def multistage_glissando(
         abjad.glissando(
             leaves[start_index:stop_index],
             *tweaks,
-            allow_repeats=True,
-            hide_middle_note_heads=True,
+            allow_repeats=not do_not_allow_repeats,
+            hide_middle_note_heads=not do_not_hide_middle_note_heads,
             hide_middle_stems=hide_middle_stems,
             left_broken=left_broken,
             right_broken=right_broken,
