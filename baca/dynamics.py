@@ -233,7 +233,7 @@ class SchemeManifest:
 
 def linear(bounds: str, *, effort: bool = False) -> str:
     r"""
-    Makes niente swells.
+    Makes string of dynamics linearly interpolated between ``bounds``.
 
         >>> baca.dynamics.linear("p f")
         'p mp mf f'
