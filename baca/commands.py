@@ -38,11 +38,14 @@ def basic_glissando(
     argument,
     *tweaks: _typings.IndexedTweak,
     do_not_allow_repeats: bool = False,
+    do_not_untie: bool = False,
     hide_middle_note_heads: bool = False,
     right_broken: bool = False,
     zero_padding: bool = False,
 ) -> None:
     leaves = abjad.select.leaves(argument)
+    if do_not_untie is False:
+        untie(leaves)
     abjad.glissando(
         leaves,
         *tweaks,
