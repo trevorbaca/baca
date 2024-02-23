@@ -324,6 +324,12 @@ def multistage_glissando(
     assert isinstance(descriptor, str | type(None)), repr(descriptor)
     if do_not_untie is False:
         untie(leaves)
+        # total = len(leaves)
+        # for i, leaf in enumerate(leaves):
+        #     if 0 < i:
+        #         abjad.detach(abjad.RepeatTie, leaf)
+        #     if i < total - 1:
+        #        abjad.detach(abjad.Tie, leaf)
     if rleak:
         leaves = _select.rleak(leaves)
     total_leaves = len(leaves)
@@ -384,10 +390,9 @@ def multistage_glissando(
         start_index = stop_index - 1
 
 
+# TODO: maybe remove? or teach about 0 and -1?
 def untie(argument) -> None:
     indicators = [abjad.Tie, abjad.RepeatTie]
-    leaves = abjad.select.leaves(argument)
-    assert isinstance(leaves, list)
-    for leaf in leaves:
+    for leaf in abjad.select.leaves(argument):
         for indicator in indicators:
             abjad.detach(indicator, leaf)
