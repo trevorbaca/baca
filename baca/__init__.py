@@ -35,8 +35,8 @@ from .commands import (
     durations,
     finger_pressure_transition,
     force_accidental,
+    glissando,
     levine_multiphonic,
-    multistage_glissando,
     untie,
 )
 from .constellation import *

@@ -301,12 +301,7 @@ def force_accidental(argument, *, tag: abjad.Tag | None = None) -> None:
                 )
 
 
-def levine_multiphonic(n: int) -> str:
-    assert isinstance(n, int), repr(n)
-    return rf'\baca-boxed-markup "L.{n}"'
-
-
-def multistage_glissando(
+def glissando(
     leaves,
     descriptor: str | None = None,
     *tweaks: _typings.IndexedTweak,
@@ -391,6 +386,11 @@ def multistage_glissando(
                 stop_pitch,
             )
         start_index = stop_index - 1
+
+
+def levine_multiphonic(n: int) -> str:
+    assert isinstance(n, int), repr(n)
+    return rf'\baca-boxed-markup "L.{n}"'
 
 
 # TODO: maybe remove? or teach about 0 and -1?
