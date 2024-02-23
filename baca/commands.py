@@ -34,29 +34,6 @@ def _validate_bcps(bcps):
         assert len(bcp) == 2, repr(bcp)
 
 
-def basic_glissando(
-    argument,
-    *tweaks: _typings.IndexedTweak,
-    do_not_allow_repeats: bool = False,
-    do_not_untie: bool = False,
-    hide_middle_note_heads: bool = False,
-    right_broken: bool = False,
-    zero_padding: bool = False,
-) -> None:
-    leaves = abjad.select.leaves(argument)
-    if do_not_untie is False:
-        untie(leaves)
-    abjad.glissando(
-        leaves,
-        *tweaks,
-        allow_repeats=not do_not_allow_repeats,
-        hide_middle_note_heads=hide_middle_note_heads,
-        right_broken=right_broken,
-        tag=_helpers.function_name(_frame()),
-        zero_padding=zero_padding,
-    )
-
-
 def bcps(
     argument,
     bcps,
@@ -320,7 +297,7 @@ def glissando(
     staff_position: bool = False,
     zero_padding: bool = False,
 ) -> None:
-    assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
+    leaves = abjad.select.leaves(leaves)
     assert isinstance(descriptor, str | type(None)), repr(descriptor)
     if do_not_untie is False:
         untie(leaves)

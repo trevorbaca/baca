@@ -1189,10 +1189,7 @@ def interpolate_pitches(
         >>> rmakers.beam(tuplets)
         >>> _ = baca.clef(abjad.select.leaf(tuplets, 0), "treble")
         >>> baca.interpolate_pitches(tuplets, "Eb4", "F#5")
-        >>> baca.basic_glissando(
-        ...     tuplets,
-        ...     hide_middle_note_heads=True,
-        ... )
+        >>> baca.glissando(tuplets)
         >>> _ = baca.override.glissando_thickness(tuplets, 3)
         >>> rmakers.swap_trivial(lilypond_file["Staff"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
