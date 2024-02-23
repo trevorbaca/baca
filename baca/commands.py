@@ -318,6 +318,7 @@ def glissando(
     right_broken_show_next: bool = False,
     rleak: bool = False,
     staff_position: bool = False,
+    zero_padding: bool = False,
 ) -> None:
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
     assert isinstance(descriptor, str | type(None)), repr(descriptor)
@@ -368,6 +369,7 @@ def glissando(
             right_broken=right_broken,
             right_broken_show_next=right_broken_show_next,
             tag=_helpers.function_name(_frame()),
+            zero_padding=zero_padding,
         )
         if start_pitch == "UNPITCHED":
             pass
