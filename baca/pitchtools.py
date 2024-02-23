@@ -72,6 +72,21 @@ def _do_cluster_command(
     return chords
 
 
+def _do_diatonic_cluster_command(argument, widths):
+    widths = abjad.CyclicTuple(widths)
+    for i, plt in enumerate(_select.plts(argument)):
+        width = widths[i]
+        start = _get_lowest_diatonic_pitch_number(plt)
+        numbers = range(start, start + width)
+        change = abjad.pitch._diatonic_pc_number_to_pitch_class_number
+        numbers_ = [(12 * (_ // 7)) + change[_ % 7] for _ in numbers]
+        pitches = [abjad.NamedPitch(_) for _ in numbers_]
+        for pleaf in plt:
+            chord = abjad.Chord(pleaf)
+            chord.note_heads[:] = pitches
+            abjad.mutate.replace(pleaf, chord, wrappers=True)
+
+
 def _do_interpolate_register_command(argument, start_pitch, stop_pitch):
     plts = _select.plts(argument)
     length = len(plts)
@@ -319,7 +334,7 @@ def _do_staff_position_interpolation_command(
     else:
         assert isinstance(start, abjad.StaffPosition)
         clef = abjad.get.effective(
-            plts[0],
+            abjad.select.leaf(plts, 0),
             abjad.Clef,
             default=abjad.Clef("treble"),
         )
@@ -337,7 +352,7 @@ def _do_staff_position_interpolation_command(
     else:
         assert isinstance(stop, abjad.StaffPosition)
         clef = abjad.get.effective(
-            plts[0],
+            abjad.select.leaf(plts, 0),
             abjad.Clef,
             default=abjad.Clef("treble"),
         )
@@ -351,6 +366,16 @@ def _do_staff_position_interpolation_command(
     )
     assert new_lt is None, repr(new_lt)
     return False
+
+
+def _get_lowest_diatonic_pitch_number(plt):
+    if isinstance(plt.head, abjad.Note):
+        pitch = plt.head.written_pitch
+    elif isinstance(plt.head, abjad.Chord):
+        pitch = plt.head.written_pitches[0]
+    else:
+        raise TypeError(plt)
+    return pitch._get_diatonic_pitch_number()
 
 
 def _get_registration(start_pitch, stop_pitch, i, length):
@@ -525,31 +550,6 @@ def _set_pitch(leaf, transposition):
         pitches = [transposition(_) for _ in leaf.written_pitches]
         leaf.written_pitches = pitches
     abjad.detach(_enums.NOT_YET_REGISTERED, leaf)
-
-
-def _do_diatonic_cluster_command(argument, widths):
-    widths = abjad.CyclicTuple(widths)
-    for i, plt in enumerate(_select.plts(argument)):
-        width = widths[i]
-        start = _get_lowest_diatonic_pitch_number(plt)
-        numbers = range(start, start + width)
-        change = abjad.pitch._diatonic_pc_number_to_pitch_class_number
-        numbers_ = [(12 * (_ // 7)) + change[_ % 7] for _ in numbers]
-        pitches = [abjad.NamedPitch(_) for _ in numbers_]
-        for pleaf in plt:
-            chord = abjad.Chord(pleaf)
-            chord.note_heads[:] = pitches
-            abjad.mutate.replace(pleaf, chord, wrappers=True)
-
-
-def _get_lowest_diatonic_pitch_number(plt):
-    if isinstance(plt.head, abjad.Note):
-        pitch = plt.head.written_pitch
-    elif isinstance(plt.head, abjad.Chord):
-        pitch = plt.head.written_pitches[0]
-    else:
-        raise TypeError(plt)
-    return pitch._get_diatonic_pitch_number()
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)

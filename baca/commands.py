@@ -317,6 +317,7 @@ def glissando(
     right_broken: bool = False,
     right_broken_show_next: bool = False,
     rleak: bool = False,
+    staff_position: bool = False,
 ) -> None:
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
     assert isinstance(descriptor, str | type(None)), repr(descriptor)
@@ -371,20 +372,39 @@ def glissando(
         if start_pitch == "UNPITCHED":
             pass
         elif start_pitch == stop_pitch:
-            _pitchtools.pitch(
-                leaves[start_index:stop_index],
-                start_pitch,
-                allow_hidden=allow_hidden,
-                allow_repitch=allow_repitch,
-                do_not_transpose=do_not_transpose,
-                mock=mock,
-            )
+            if staff_position is True:
+                _pitchtools.staff_position(
+                    leaves[start_index:stop_index],
+                    int(start_pitch),
+                    allow_hidden=allow_hidden,
+                    allow_repitch=allow_repitch,
+                    mock=mock,
+                )
+            else:
+                _pitchtools.pitch(
+                    leaves[start_index:stop_index],
+                    start_pitch,
+                    allow_hidden=allow_hidden,
+                    allow_repitch=allow_repitch,
+                    do_not_transpose=do_not_transpose,
+                    mock=mock,
+                )
         else:
-            _pitchtools.interpolate_pitches(
-                leaves[start_index:stop_index],
-                start_pitch,
-                stop_pitch,
-            )
+            if staff_position is True:
+                _pitchtools._do_staff_position_interpolation_command(
+                    leaves[start_index:stop_index],
+                    abjad.StaffPosition(int(start_pitch)),
+                    abjad.StaffPosition(int(stop_pitch)),
+                    allow_hidden=allow_hidden,
+                    mock=mock,
+                    pitches_instead_of_staff_positions=False,
+                )
+            else:
+                _pitchtools.interpolate_pitches(
+                    leaves[start_index:stop_index],
+                    start_pitch,
+                    stop_pitch,
+                )
         start_index = stop_index - 1
 
 
