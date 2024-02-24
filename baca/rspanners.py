@@ -66,7 +66,7 @@ def covered(
     *tweaks: abjad.Tweak,
     descriptor: str = r"\baca-covered-markup =|",
     left_broken: bool = False,
-    left_broken_text: str = r"\baca-left-broken-covered-markup",
+    left_broken_text: str = r"\baca-parenthesized-cov-markup",
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:

@@ -247,38 +247,6 @@ baca-left-broken-legno-markup =
     }
 
 
-%%% COVERED MARKUP %%%
-
-baca-cov-markup =
-    \markup
-    \upright
-    \line {
-        %%%\hspace #-0.5
-        cov.
-        %%%%\hspace #-0.5
-    }
-
-baca-covered-markup =
-    \markup
-    \upright
-    \line {
-        %%%\hspace #-0.5
-        covered
-        %%%%\hspace #-0.5
-    }
-
-baca-left-broken-covered-markup =
-    \markup
-    \upright
-    \line {
-        (
-        \hspace #-0.85
-        cov.
-        \hspace #-0.85
-        )
-        \hspace #0.5
-    }
-
 %%% DIAMOND MARKUP %%%
 
 baca-black-diamond-markup =
