@@ -333,7 +333,7 @@ def spazzolato(
 
 def string_number(
     argument,
-    string_number: int | str,
+    string_number: int,
     *tweaks: abjad.Tweak,
     invisible_line: bool = False,
     left_broken: bool = False,
@@ -341,19 +341,19 @@ def string_number(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     argument = _select.rleak_next_nonobgc_leaf(argument)
-    assert isinstance(string_number, str), repr(string_number)
-    assert string_number in ("I", "II", "III", "IV", 1, 2, 3, 4), repr(string_number)
-    if string_number in (1, "I"):
+    assert isinstance(string_number, int), repr(string_number)
+    assert string_number in (1, 2, 3, 4), repr(string_number)
+    if string_number == 1:
         string_number_markup = r"\baca-string-i-markup"
         left_broken_text = r"\baca-left-broken-string-i-markup"
-    elif string_number in (2, "II"):
+    elif string_number == 2:
         string_number_markup = r"\baca-string-ii-markup"
         left_broken_text = r"\baca-left-broken-string-ii-markup"
-    elif string_number in (3, "III"):
+    elif string_number == 3:
         string_number_markup = r"\baca-string-iii-markup"
         left_broken_text = r"\baca-left-broken-string-iii-markup"
     else:
-        assert string_number in (4, "IV")
+        assert string_number == 4, repr(string_number)
         string_number_markup = r"\baca-string-iv-markup"
         left_broken_text = r"\baca-left-broken-string-iv-markup"
     if invisible_line is True:
