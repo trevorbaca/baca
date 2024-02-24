@@ -333,7 +333,7 @@ def spazzolato(
 
 def string_number(
     argument,
-    string_number: str,
+    string_number: int | str,
     *tweaks: abjad.Tweak,
     invisible_line: bool = False,
     left_broken: bool = False,
@@ -342,14 +342,27 @@ def string_number(
 ) -> list[abjad.Wrapper]:
     argument = _select.rleak_next_nonobgc_leaf(argument)
     assert isinstance(string_number, str), repr(string_number)
-    assert string_number in ("I", "II", "III", "IV"), repr(string_number)
-    if invisible_line is True:
-        descriptor = f"{string_number} ||"
+    assert string_number in ("I", "II", "III", "IV", 1, 2, 3, 4), repr(string_number)
+    if string_number in (1, "I"):
+        string_number_markup = r"\baca-string-i-markup"
+        left_broken_text = r"\baca-left-broken-string-i-markup"
+    elif string_number in (2, "II"):
+        string_number_markup = r"\baca-string-ii-markup"
+        left_broken_text = r"\baca-left-broken-string-ii-markup"
+    elif string_number in (3, "III"):
+        string_number_markup = r"\baca-string-iii-markup"
+        left_broken_text = r"\baca-left-broken-string-iii-markup"
     else:
-        descriptor = f"{string_number} =|"
+        assert string_number in (4, "IV")
+        string_number_markup = r"\baca-string-iv-markup"
+        left_broken_text = r"\baca-left-broken-string-iv-markup"
+    if invisible_line is True:
+        descriptor = f"{string_number_markup} ||"
+    else:
+        descriptor = f"{string_number_markup} =|"
     specifiers = _textspannerlib.parse_text_spanner_descriptor(
         descriptor,
-        left_broken_text=f"{(string_number)}",
+        left_broken_text=left_broken_text,
         lilypond_id="StringNumber",
     )
     assert len(specifiers) == 1

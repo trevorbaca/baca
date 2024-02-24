@@ -43,6 +43,54 @@ baca-left-broken-pizz-markup =
         \hspace #0.5
     }
 
+baca-left-broken-string-i-markup =
+    \markup
+    \upright
+    \line {
+        (
+        \hspace #-0.5
+        I
+        \hspace #-0.5
+        )
+        \hspace #0.5
+    }
+
+baca-left-broken-string-ii-markup =
+    \markup
+    \upright
+    \line {
+        (
+        \hspace #-0.5
+        II
+        \hspace #-0.5
+        )
+        \hspace #0.5
+    }
+
+baca-left-broken-string-iii-markup =
+    \markup
+    \upright
+    \line {
+        (
+        \hspace #-0.5
+        III
+        \hspace #-0.5
+        )
+        \hspace #0.5
+    }
+
+baca-left-broken-string-iv-markup =
+    \markup
+    \upright
+    \line {
+        (
+        \hspace #-0.5
+        IV
+        \hspace #-0.5
+        )
+        \hspace #0.5
+    }
+
 baca-leggieriss-markup = \markup leggieriss.
 
 baca-leggierissimo-markup = \markup leggierissimo
