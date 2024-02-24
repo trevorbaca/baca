@@ -2657,6 +2657,7 @@ def phead(
     return pheads(argument, exclude=exclude)[n]
 
 
+# TODO: remove grace=None keyword
 def pheads(
     argument, *, exclude: abjad.typings.Exclude | None = None, grace: bool | None = None
 ) -> list[abjad.Note | abjad.Chord]:
@@ -2768,6 +2769,7 @@ def pheads(
     return [_[0] for _ in result]
 
 
+# TODO: remove grace=None keyword
 def pleaf(
     argument,
     n: int,
@@ -2860,6 +2862,7 @@ def pleaf(
     return pleaf
 
 
+# TODO: remove grace=None keyword
 def pleaves(
     argument, *, exclude: abjad.typings.Exclude | None = None, grace: bool | None = None
 ) -> list[abjad.Leaf]:
@@ -2977,6 +2980,7 @@ def pleaves(
     return items
 
 
+# TODO: remove grace=None keyword
 def plt(
     argument,
     n: int,
@@ -3068,6 +3072,7 @@ def plt(
     return plts(argument, exclude=exclude, grace=grace)[n]
 
 
+# TODO: remove grace=None keyword
 def plts(
     argument, *, exclude: abjad.typings.Exclude | None = None, grace: bool | None = None
 ) -> list[abjad.LogicalTie]:
@@ -3862,6 +3867,7 @@ def rleaf(
     return rleaves(argument, exclude=exclude)[n]
 
 
+# TODO: remove grace=None keyword
 def rleak(argument, *, count: int = 1, grace: bool | None = None) -> list[abjad.Leaf]:
     r"""
     Leaks to the right.
@@ -3927,6 +3933,7 @@ def rleak_next_nonobgc_leaf(argument):
     return result
 
 
+# TODO: remove grace=None keyword
 def rleaves(
     argument,
     *,
@@ -4443,6 +4450,7 @@ def sort_by_timeline(leaves):
     return leaves
 
 
+# TODO: remove grace=None keyword
 def tleaf(
     argument,
     n: int = 0,
@@ -4533,6 +4541,7 @@ def tleaf(
     return tleaves(argument, exclude=exclude, grace=grace)[n]
 
 
+# TODO: remove grace=None keyword
 def tleaves(
     argument,
     *,
