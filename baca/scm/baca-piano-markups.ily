@@ -1,12 +1,10 @@
-%%% PIANO MARKUPS %%%
+%%% ORDINARY %%%
 
-baca-senza-pedale-markup = \markup
-    "senza pedale"
+baca-senza-pedale-markup = \markup "senza pedale"
 
-baca-depress-silently-markup = \baca-boxed-markup \markup
-    \whiteout
-    "depress silently"
+%%% BOXED %%%
 
-baca-tuning-pegs-markup = \baca-boxed-markup \markup
-    \whiteout
-    "tuning pegs"
+baca-boxed-depress-silently-markup =
+    \baca-boxed-markup \markup \whiteout "depress silently"
+
+baca-boxed-tuning-pegs-markup = \baca-boxed-markup \markup \whiteout "tuning pegs"

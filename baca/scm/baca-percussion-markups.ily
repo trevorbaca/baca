@@ -1,129 +1,129 @@
-%%% BOXED INSTRUMENT MARKUPS %%%
+%%% BOXED %%%
 
-baca-bass-drum-markup = \baca-boxed-markup \markup
+baca-boxed-bass-drum-markup = \baca-boxed-markup \markup
     \whiteout
     "bass drum"
 
-baca-bd-fingertips-markup = \baca-boxed-markup \markup
+baca-boxed-bd-fingertips-markup = \baca-boxed-markup \markup
     \whiteout
     "BD (fingertips)"
 
-baca-bd-markup = \baca-boxed-markup \markup
+baca-boxed-bd-markup = \baca-boxed-markup \markup
     \whiteout
     BD
 
-baca-bd-sponge-markup = \baca-boxed-markup \markup
+baca-boxed-bd-sponge-markup = \baca-boxed-markup \markup
     \whiteout
     "BD (sponge)"
 
-baca-bd-struck-markup = \baca-boxed-markup \markup
+baca-boxed-bd-struck-markup = \baca-boxed-markup \markup
     \whiteout
     "BD (struck)"
 
-baca-bd-struck-then-superball-markup = \baca-boxed-markup \markup
+baca-boxed-bd-struck-then-superball-markup = \baca-boxed-markup \markup
     \whiteout
     "BD (struck then superball)"
 
-baca-bd-superball-markup = \baca-boxed-markup \markup
+baca-boxed-bd-superball-markup = \baca-boxed-markup \markup
     \whiteout
     "BD (superball)"
 
-baca-bd-rolled-markup = \baca-boxed-markup \markup
+baca-boxed-bd-rolled-markup = \baca-boxed-markup \markup
     \whiteout
     "BD (rolled)"
 
-baca-brake-drum-markup = \baca-boxed-markup \markup
+baca-boxed-brake-drum-markup = \baca-boxed-markup \markup
     \whiteout
     "brake drum"
 
-baca-brake-drum-paper-towel-markup = \baca-boxed-markup \markup
+baca-boxed-brake-drum-paper-towel-markup = \baca-boxed-markup \markup
     \whiteout
     "brake drum (paper towel)"
 
-baca-castanets-markup = \baca-boxed-markup \markup
+baca-boxed-castanets-markup = \baca-boxed-markup \markup
     \whiteout
     castanets
 
-baca-crotale-markup = \baca-boxed-markup \markup
+baca-boxed-crotale-markup = \baca-boxed-markup \markup
     \whiteout
     crotale
 
-baca-crotales-bowed-markup = \baca-boxed-markup \markup
+baca-boxed-crotales-bowed-markup = \baca-boxed-markup \markup
     \whiteout
     "crotales (bowed)"
 
-baca-glockenspiel-markup = \baca-boxed-markup \markup
+baca-boxed-glockenspiel-markup = \baca-boxed-markup \markup
     \whiteout
     glockenspiel
 
-baca-marimba-attackless-markup = \baca-boxed-markup \markup
+baca-boxed-marimba-attackless-markup = \baca-boxed-markup \markup
     \whiteout
     "marimba (attackless)"
 
-baca-purpleheart-markup = \baca-boxed-markup \markup
+baca-boxed-purpleheart-markup = \baca-boxed-markup \markup
     \whiteout
     purpleheart
 
-baca-ratchet-markup = \baca-boxed-markup \markup
+baca-boxed-ratchet-markup = \baca-boxed-markup \markup
     \whiteout
     ratchet
 
-baca-slate-brush-markup = \baca-boxed-markup \markup
+baca-boxed-slate-brush-markup = \baca-boxed-markup \markup
     \whiteout
     "slate (brush)"
 
-baca-slate-scrape-markup = \baca-boxed-markup \markup
+baca-boxed-slate-scrape-markup = \baca-boxed-markup \markup
     \whiteout
     "slate (scrape)"
 
-baca-snare-drum-markup = \baca-boxed-markup \markup
+baca-boxed-snare-drum-markup = \baca-boxed-markup \markup
     \whiteout
     "snare drum"
 
-baca-sponges-markup = \baca-boxed-markup \markup
+baca-boxed-sponges-markup = \baca-boxed-markup \markup
     \whiteout
     "sponges"
 
-baca-struck-markup = \baca-boxed-markup \markup
+baca-boxed-struck-markup = \baca-boxed-markup \markup
     \whiteout
     struck
 
-baca-superball-markup = \baca-boxed-markup \markup
+baca-boxed-superball-markup = \baca-boxed-markup \markup
     \whiteout
     superball
 
-baca-suspended-cymbal-markup = \baca-boxed-markup \markup
+baca-boxed-suspended-cymbal-markup = \baca-boxed-markup \markup
     \whiteout
     "suspended cymbal"
 
-baca-tam-tam-markup = \baca-boxed-markup \markup
+baca-boxed-tam-tam-markup = \baca-boxed-markup \markup
     \whiteout
     tam-tam
 
-baca-to-marimba-markup = \baca-boxed-markup \markup
+baca-boxed-to-marimba-markup = \baca-boxed-markup \markup
     \whiteout
     "to marimba"
 
-baca-triangle-markup = \baca-boxed-markup \markup
+baca-boxed-triangle-markup = \baca-boxed-markup \markup
     \whiteout
     triangle
 
-baca-triangle-small-beater-markup = \baca-boxed-markup \markup
+baca-boxed-triangle-small-beater-markup = \baca-boxed-markup \markup
     \whiteout
     "triangle (small beater)"
 
-baca-very-small-maraca-markup = \baca-boxed-markup \markup
+baca-boxed-very-small-maraca-markup = \baca-boxed-markup \markup
     \whiteout
     "very small maraca"
 
-baca-woodblock-markup = \baca-boxed-markup \markup
+baca-boxed-woodblock-markup = \baca-boxed-markup \markup
     \whiteout
     woodblock
 
-baca-xl-tam-tam-markup = \baca-boxed-markup \markup
+baca-boxed-xl-tam-tam-markup = \baca-boxed-markup \markup
     \whiteout
     "XL tam-tam"
 
-baca-xylophone-markup = \baca-boxed-markup \markup
+baca-boxed-xylophone-markup = \baca-boxed-markup \markup
     \whiteout
     xylophone
