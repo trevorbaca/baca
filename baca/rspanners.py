@@ -272,7 +272,7 @@ def pizzicato(
         argument = _select.rleak_next_nonobgc_leaf(argument)
     specifiers = _textspannerlib.parse_text_spanner_descriptor(
         descriptor,
-        left_broken_text=r"\baca-left-broken-pizz-markup",
+        left_broken_text=r"\baca-parenthesized-pizz-markup",
         lilypond_id="Pizzicato",
     )
     assert len(specifiers) == 1
@@ -345,17 +345,17 @@ def string_number(
     assert string_number in (1, 2, 3, 4), repr(string_number)
     if string_number == 1:
         string_number_markup = r"\baca-string-i-markup"
-        left_broken_text = r"\baca-left-broken-string-i-markup"
+        left_broken_text = r"\baca-parenthesized-string-i-markup"
     elif string_number == 2:
         string_number_markup = r"\baca-string-ii-markup"
-        left_broken_text = r"\baca-left-broken-string-ii-markup"
+        left_broken_text = r"\baca-parenthesized-string-ii-markup"
     elif string_number == 3:
         string_number_markup = r"\baca-string-iii-markup"
-        left_broken_text = r"\baca-left-broken-string-iii-markup"
+        left_broken_text = r"\baca-parenthesized-string-iii-markup"
     else:
         assert string_number == 4, repr(string_number)
         string_number_markup = r"\baca-string-iv-markup"
-        left_broken_text = r"\baca-left-broken-string-iv-markup"
+        left_broken_text = r"\baca-parenthesized-string-iv-markup"
     if invisible_line is True:
         descriptor = f"{string_number_markup} ||"
     else:
