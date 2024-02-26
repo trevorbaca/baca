@@ -263,12 +263,12 @@ def pizzicato(
     argument,
     *tweaks: abjad.Tweak,
     descriptor: str = r"\baca-pizz-markup =|",
+    do_not_rleak: bool = False,
     left_broken: bool = False,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
-    without_next_leaf: bool = False,
 ) -> list[abjad.Wrapper]:
-    if without_next_leaf is False:
+    if do_not_rleak is False:
         argument = _select.rleak_next_nonobgc_leaf(argument)
     specifiers = _textspannerlib.parse_text_spanner_descriptor(
         descriptor,
