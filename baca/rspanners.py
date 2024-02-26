@@ -266,13 +266,14 @@ def pizzicato(
     do_not_rleak: bool = False,
     left_broken: bool = False,
     right_broken: bool = False,
+    left_broken_text: str = r"\baca-parenthesized-pizz-markup",
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     if do_not_rleak is False:
         argument = _select.rleak_next_nonobgc_leaf(argument)
     specifiers = _textspannerlib.parse_text_spanner_descriptor(
         descriptor,
-        left_broken_text=r"\baca-parenthesized-pizz-markup",
+        left_broken_text=left_broken_text,
         lilypond_id="Pizzicato",
     )
     assert len(specifiers) == 1
