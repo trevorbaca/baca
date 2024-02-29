@@ -426,6 +426,7 @@ def trill(
     argument,
     *tweaks: abjad.Tweak,
     alteration: str | None = None,
+    do_not_rleak: bool = False,
     force_trill_pitch_head_accidental: bool = False,
     harmonic: bool = False,
     left_broken: bool = False,
@@ -434,7 +435,8 @@ def trill(
     start_trill_span: abjad.StartTrillSpan = abjad.StartTrillSpan(),
     stop_trill_span: abjad.StopTrillSpan = abjad.StopTrillSpan(),
 ) -> list[abjad.Wrapper]:
-    argument = _select.rleak_next_nonobgc_leaf(argument)
+    if do_not_rleak is False:
+        argument = _select.rleak_next_nonobgc_leaf(argument)
     assert isinstance(start_trill_span, abjad.StartTrillSpan), repr(start_trill_span)
     interval = pitch = None
     if alteration is not None:
