@@ -141,6 +141,7 @@ def _do_pitch_command(
     allow_repeats: bool = False,
     allow_repitch: bool = False,
     do_not_transpose: bool = False,
+    # TODO: change exact=False to strict=False
     exact: bool = False,
     mock: bool = False,
     previous_pitches_consumed: int = 0,
@@ -1382,6 +1383,7 @@ def pitches(
     allow_repeats: bool = False,
     allow_repitch: bool = False,
     do_not_transpose: bool = False,
+    # TODO: change exact=False to strict=False
     exact: bool = False,
     ignore_incomplete: bool = False,
     metadata: dict | None = None,
@@ -3102,6 +3104,7 @@ def staff_positions(
     allow_obgc_mutation: bool = False,
     allow_out_of_range: bool = False,
     allow_repeats: bool = False,
+    # TODO: change exact=False to strict=False
     exact: bool = False,
     mock: bool = False,
 ) -> None:
