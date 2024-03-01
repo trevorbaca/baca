@@ -1284,6 +1284,7 @@ def natural_clusters(
 
 # TODO: forbid pitch() from casting note to chord;
 #       for chord construction to happen before calling function
+# TODO: return plts that have been pitched
 def pitch(
     argument,
     pitch,
@@ -1370,6 +1371,7 @@ def pitch(
 
 # TODO: forbid pitches() from casting note to chord;
 #       for chord construction to happen before calling function
+# TODO: return plts that have been pitched
 def pitches(
     argument,
     pitches,
