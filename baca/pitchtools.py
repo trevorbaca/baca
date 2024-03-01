@@ -1282,6 +1282,8 @@ def natural_clusters(
     return chords
 
 
+# TODO: forbid pitch() from casting note to chord;
+#       for chord construction to happen before calling function
 def pitch(
     argument,
     pitch,
@@ -1366,6 +1368,8 @@ def pitch(
     return mutated_score
 
 
+# TODO: forbid pitches() from casting note to chord;
+#       for chord construction to happen before calling function
 def pitches(
     argument,
     pitches,
