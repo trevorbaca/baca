@@ -35,7 +35,9 @@ def _coerce_pitches(pitches):
         assert "~" not in pitches, repr(pitches)
         pitches = _parse_string(pitches)
     items = []
+    prototype = (str, int, float)
     for item in pitches:
+        assert isinstance(item, prototype), repr(item)
         if isinstance(item, str):
             assert "+" not in pitches, repr(pitches)
             assert "~" not in pitches, repr(pitches)
