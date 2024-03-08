@@ -141,10 +141,9 @@ def _do_pitch_command(
     allow_repeats: bool = False,
     allow_repitch: bool = False,
     do_not_transpose: bool = False,
-    # TODO: change exact=False to strict=False
-    exact: bool = False,
     mock: bool = False,
     previous_pitches_consumed: int = 0,
+    strict: bool = False,
 ) -> tuple[int, bool]:
     assert isinstance(previous_pitches_consumed, int)
     pitches = _coerce_pitches(pitches)
@@ -158,11 +157,11 @@ def _do_pitch_command(
         plt = abjad.get.logical_tie(pleaf)
         if plt.head is pleaf:
             plts.append(plt)
-    if exact is True and len(pitches) != len(plts):
+    if strict is True and len(pitches) != len(plts):
         message = f"PLT count ({len(plts)}) does not match"
         message += f" pitch count ({len(pitches)})."
         raise Exception(message)
-    if exact is False and not isinstance(pitches, abjad.CyclicTuple | Loop):
+    if strict is False and not isinstance(pitches, abjad.CyclicTuple | Loop):
         pitches = abjad.CyclicTuple(pitches)
     pitches_consumed = 0
     mutated_score = False
@@ -234,7 +233,7 @@ def _do_staff_position_command(
     allow_obgc_mutation=False,
     allow_out_of_range=False,
     allow_repitch=False,
-    exact=False,
+    strict=False,
     mock=False,
     set_chord_pitches_equal=False,
 ):
@@ -269,7 +268,7 @@ def _do_staff_position_command(
                 abjad.attach(_enums.ALLOW_OUT_OF_RANGE, pleaf)
             abjad.attach(_enums.ALLOW_REPEAT_PITCH, pleaf)
             abjad.attach(_enums.DO_NOT_TRANSPOSE, pleaf)
-    if exact and plt_count != len(numbers):
+    if strict and plt_count != len(numbers):
         message = f"PLT count ({plt_count}) does not match"
         message += f" staff position count ({len(numbers)})."
         raise Exception(message)
@@ -1383,12 +1382,11 @@ def pitches(
     allow_repeats: bool = False,
     allow_repitch: bool = False,
     do_not_transpose: bool = False,
-    # TODO: change exact=False to strict=False
-    exact: bool = False,
     ignore_incomplete: bool = False,
     metadata: dict | None = None,
     mock: bool = False,
     name: str = "",
+    strict: bool = False,
 ) -> bool:
     r"""
     Treats plts in ``argument`` according to ``pitches``.
@@ -1608,7 +1606,7 @@ def pitches(
         allow_repeats=allow_repeats,
         allow_repitch=allow_repitch,
         do_not_transpose=do_not_transpose,
-        exact=exact,
+        strict=strict,
         mock=mock,
         previous_pitches_consumed=previous_pitches_consumed,
     )
@@ -3104,9 +3102,8 @@ def staff_positions(
     allow_obgc_mutation: bool = False,
     allow_out_of_range: bool = False,
     allow_repeats: bool = False,
-    # TODO: change exact=False to strict=False
-    exact: bool = False,
     mock: bool = False,
+    strict: bool = False,
 ) -> None:
     r"""
     Sets staff positions of plts in ``argument`` to ``numbers``.
