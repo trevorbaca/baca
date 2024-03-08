@@ -33,8 +33,8 @@ def _coerce_pitches(pitches):
     if isinstance(pitches, str):
         assert "+" not in pitches, repr(pitches)
         assert "~" not in pitches, repr(pitches)
-        # assert "<" not in pitches, repr(pitches)
-        # assert ">" not in pitches, repr(pitches)
+        assert "<" not in pitches, repr(pitches)
+        assert ">" not in pitches, repr(pitches)
         pitches = _parse_string(pitches)
     items = []
     prototype = (str, int, float)
@@ -43,13 +43,9 @@ def _coerce_pitches(pitches):
         if isinstance(item, str):
             assert "+" not in pitches, repr(pitches)
             assert "~" not in pitches, repr(pitches)
-            # assert "<" not in pitches, repr(pitches)
-            # assert ">" not in pitches, repr(pitches)
-        if isinstance(item, str) and "<" in item and ">" in item:
-            item = item.strip("<")
-            item = item.strip(">")
-            item = set(abjad.NamedPitch(_) for _ in item.split())
-        elif isinstance(item, str) and ":" in item:
+            assert "<" not in pitches, repr(pitches)
+            assert ">" not in pitches, repr(pitches)
+        if isinstance(item, str) and ":" in item:
             item = set(abjad.NamedPitch(_) for _ in item.split(":"))
         else:
             item = abjad.NamedPitch(item)
