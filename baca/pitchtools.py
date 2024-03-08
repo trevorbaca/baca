@@ -33,6 +33,8 @@ def _coerce_pitches(pitches):
     if isinstance(pitches, str):
         assert "+" not in pitches, repr(pitches)
         assert "~" not in pitches, repr(pitches)
+        # assert "<" not in pitches, repr(pitches)
+        # assert ">" not in pitches, repr(pitches)
         pitches = _parse_string(pitches)
     items = []
     prototype = (str, int, float)
@@ -41,6 +43,8 @@ def _coerce_pitches(pitches):
         if isinstance(item, str):
             assert "+" not in pitches, repr(pitches)
             assert "~" not in pitches, repr(pitches)
+            # assert "<" not in pitches, repr(pitches)
+            # assert ">" not in pitches, repr(pitches)
         if isinstance(item, str) and "<" in item and ">" in item:
             item = item.strip("<")
             item = item.strip(">")
@@ -1320,7 +1324,7 @@ def pitch(
         >>> music = abjad.sequence.flatten(nested_music)
         >>> rmakers.written_duration(music, 1)
         >>> voice.extend(music)
-        >>> _ = baca.pitch(voice, "<C4 D4 E4>")
+        >>> _ = baca.pitch(voice, "C4:D4:E4")
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1473,7 +1477,7 @@ def pitches(
         >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(time_signatures())
         >>> voice.extend(music)
-        >>> _ = baca.pitches(voice, "C4 F4 F#4 <B4 C#5> D5")
+        >>> _ = baca.pitches(voice, "C4 F4 F#4 B4:C#5 D5")
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1536,7 +1540,7 @@ def pitches(
         >>> music = baca.make_even_divisions(time_signatures())
         >>> voice.extend(music)
         >>> _ = baca.pitches(
-        ...     voice, "<C4 D4 E4 F4 G4 A4 B4 C4>", allow_repeats=True)
+        ...     voice, "C4:D4:E4:F4:G4:A4:B4:C4", allow_repeats=True)
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP

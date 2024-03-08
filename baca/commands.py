@@ -324,7 +324,10 @@ def glissando(
     start_index, stop_index, cumulative_leaves = 0, 0, 0
     for i, string in enumerate(strings[:-1]):
         if ":" in string:
-            start_pitch, leaf_count_string = string.split(":")
+            # start_pitch, leaf_count_string = string.split(":")
+            raise Exception(string)
+        if "/" in string:
+            start_pitch, leaf_count_string = string.split("/")
         else:
             start_pitch, leaf_count_string = string, "1"
         leaf_count = int(leaf_count_string)
@@ -334,7 +337,8 @@ def glissando(
         if i == len(strings) - 1:
             stop_pitch = strings[-1]
         else:
-            stop_pitch = strings[i + 1].split(":")[0]
+            # stop_pitch = strings[i + 1].split(":")[0]
+            stop_pitch = strings[i + 1].split("/")[0]
         stop_index = start_index + leaf_count + 1
         abjad.glissando(
             leaves[start_index:stop_index],
