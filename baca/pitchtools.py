@@ -45,8 +45,11 @@ def _coerce_pitches(pitches):
             item = item.strip("<")
             item = item.strip(">")
             item = set(abjad.NamedPitch(_) for _ in item.split())
+        elif isinstance(item, str) and ":" in item:
+            item = set(abjad.NamedPitch(_) for _ in item.split(":"))
         else:
             item = abjad.NamedPitch(item)
+        assert isinstance(item, abjad.NamedPitch | set), repr(item)
         items.append(item)
     cyclic_pitches = abjad.CyclicTuple(items)
     return cyclic_pitches
