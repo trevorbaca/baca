@@ -1287,14 +1287,14 @@ def natural_clusters(
 # TODO: return plts that have been pitched
 def pitch(
     argument,
-    pitch,
+    pitch: str,
     *,
     allow_hidden: bool = False,
     allow_obgc_mutation: bool = False,
     allow_out_of_range: bool = False,
     allow_repitch: bool = False,
-    mock: bool = False,
     do_not_transpose: bool = False,
+    mock: bool = False,
 ) -> bool:
     r"""
     Treats plts in ``argument`` according to ``pitch``.
@@ -1350,11 +1350,13 @@ def pitch(
             }
 
     """
-    assert isinstance(pitch, int | str | list | tuple | abjad.Pitch), repr(pitch)
-    if isinstance(pitch, list | tuple) and len(pitch) == 1:
-        raise Exception(f"one-note chord {pitch!r}?")
+    assert isinstance(pitch, str), repr(pitch)
+    assert isinstance(allow_hidden, bool), repr(allow_hidden)
+    assert isinstance(allow_obgc_mutation, bool), repr(allow_obgc_mutation)
     assert isinstance(allow_out_of_range, bool), repr(allow_out_of_range)
+    assert isinstance(allow_repitch, bool), repr(allow_repitch)
     assert isinstance(do_not_transpose, bool), repr(do_not_transpose)
+    assert isinstance(mock, bool), repr(mock)
     result = _do_pitch_command(
         argument,
         [pitch],
