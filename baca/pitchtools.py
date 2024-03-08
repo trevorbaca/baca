@@ -31,9 +31,14 @@ def _coerce_pitches(pitches):
     if isinstance(pitches, Loop):
         return pitches
     if isinstance(pitches, str):
+        assert "+" not in pitches, repr(pitches)
+        assert "~" not in pitches, repr(pitches)
         pitches = _parse_string(pitches)
     items = []
     for item in pitches:
+        if isinstance(item, str):
+            assert "+" not in pitches, repr(pitches)
+            assert "~" not in pitches, repr(pitches)
         if isinstance(item, str) and "<" in item and ">" in item:
             item = item.strip("<")
             item = item.strip(">")
@@ -1351,6 +1356,8 @@ def pitch(
 
     """
     assert isinstance(pitch, str), repr(pitch)
+    assert "+" not in pitch, repr(pitch)
+    assert "~" not in pitch, repr(pitch)
     assert isinstance(allow_hidden, bool), repr(allow_hidden)
     assert isinstance(allow_obgc_mutation, bool), repr(allow_obgc_mutation)
     assert isinstance(allow_out_of_range, bool), repr(allow_out_of_range)
@@ -1686,7 +1693,7 @@ def register(
         >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(time_signatures())
         >>> voice.extend(music)
-        >>> _ = baca.pitches(voice, "G4 G+4 G#4 G#+4 A~4 Ab4 Ab~4")
+        >>> _ = baca.pitches(voice, "G4 Gqs4 G#4 Gtqs4 Aqf4 Ab4 Atqf4")
         >>> _ = baca.register(voice, 15)
         >>> baca.docs.remove_deactivated_wrappers(score)
         >>> lilypond_file = baca.lilypond.file(score, includes=["baca.ily"])
