@@ -43,15 +43,11 @@ def _coerce_pitches(pitches):
             item = item.strip("<")
             item = item.strip(">")
             item = set(abjad.NamedPitch(_) for _ in item.split())
-        elif isinstance(item, str):
-            item = abjad.NamedPitch(item)
-        elif isinstance(item, collections.abc.Iterable):
-            item = set(abjad.NamedPitch(_) for _ in item)
         else:
             item = abjad.NamedPitch(item)
         items.append(item)
-    pitches = abjad.CyclicTuple(items)
-    return pitches
+    cyclic_pitches = abjad.CyclicTuple(items)
+    return cyclic_pitches
 
 
 def _do_cluster_command(
@@ -1366,7 +1362,7 @@ def pitch(
     assert isinstance(mock, bool), repr(mock)
     result = _do_pitch_command(
         argument,
-        [pitch],
+        pitch,
         allow_hidden=allow_hidden,
         allow_obgc_mutation=allow_obgc_mutation,
         allow_repeats=True,
