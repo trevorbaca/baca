@@ -1289,7 +1289,8 @@ def natural_clusters(
 
 
 # TODO: forbid pitch() from casting note to chord;
-#       for chord construction to happen before calling function
+#       for chord construction to happen before calling function;
+#       at a minimum, allow for something like baca.notes_to_chords()
 # TODO: return plts that have been pitched
 def pitch(
     argument,
@@ -1381,6 +1382,7 @@ def pitch(
 
 # TODO: forbid pitches() from casting note to chord;
 #       for chord construction to happen before calling function
+#       at a minimum, allow for something like baca.notes_to_chords()
 # TODO: return plts that have been pitched
 def pitches(
     argument,
