@@ -1391,6 +1391,7 @@ def pitches(
     allow_hidden: bool = False,
     allow_obgc_mutation: bool = False,
     allow_octaves: bool = False,
+    allow_out_of_range: bool = False,
     allow_repeats: bool = False,
     allow_repitch: bool = False,
     do_not_transpose: bool = False,
@@ -1591,6 +1592,7 @@ def pitches(
             }
 
     """
+    assert isinstance(allow_out_of_range, bool), repr(allow_out_of_range)
     if do_not_transpose not in (None, True, False):
         raise Exception(f"do_not_transpose must be boolean (not {do_not_transpose!r}).")
     if ignore_incomplete not in (None, True, False):
@@ -1613,8 +1615,9 @@ def pitches(
         argument,
         pitches,
         allow_hidden=allow_hidden,
-        allow_octaves=allow_octaves,
         allow_obgc_mutation=allow_obgc_mutation,
+        allow_octaves=allow_octaves,
+        allow_out_of_range=allow_out_of_range,
         allow_repeats=allow_repeats,
         allow_repitch=allow_repitch,
         do_not_transpose=do_not_transpose,
