@@ -12,6 +12,7 @@ class SchemeManifest:
         ("baca-f-sub-but-accents-continue-sffz", "f"),
         ("baca-ffp", "p"),
         ("baca-fffp", "p"),
+        # TODO: remove niente dynamic
         ("niente", "niente"),
         ("baca-p-sub-but-accents-continue-sffz", "p"),
         #
@@ -100,11 +101,15 @@ class SchemeManifest:
         ("baca-fff-fff", "fff"),
         #
         ("baca-sff", "ff"),
-        ("baca-sffp", "p"),
         ("baca-sffpp", "pp"),
+        ("baca-sffp", "p"),
+        ("baca-sffmp", "mp"),
+        ("baca-sffmf", "mf"),
         ("baca-sfffz", "fff"),
         ("baca-sffz", "ff"),
         ("baca-sfpp", "pp"),
+        ("baca-sfmp", "mp"),
+        ("baca-sfmf", "mf"),
         ("baca-sfz-f", "f"),
         ("baca-sfz-p", "p"),
     )
@@ -201,11 +206,15 @@ class SchemeManifest:
             'baca-fff-ff'
             'baca-fff-fff'
             'baca-sff'
-            'baca-sffp'
             'baca-sffpp'
+            'baca-sffp'
+            'baca-sffmp'
+            'baca-sffmf'
             'baca-sfffz'
             'baca-sffz'
             'baca-sfpp'
+            'baca-sfmp'
+            'baca-sfmf'
             'baca-sfz-f'
             'baca-sfz-p'
 

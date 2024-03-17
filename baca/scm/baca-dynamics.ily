@@ -1252,8 +1252,12 @@ baca-fff-scratch = #(
 %%% SFORZANDO DYNAMICS %%%
 
 baca-sff = #(make-dynamic-script "sff")
+baca-sffmf = #(make-dynamic-script "sffmf")
+baca-sffmp = #(make-dynamic-script "sffmp")
 baca-sffp = #(make-dynamic-script "sffp")
 baca-sffpp = #(make-dynamic-script "sffpp")
+baca-sfmf = #(make-dynamic-script "sfmf")
+baca-sfmp = #(make-dynamic-script "sfmp")
 baca-sfpp = #(make-dynamic-script "sfpp")
 baca-sffz = #(make-dynamic-script "sffz")
 baca-sfffz = #(make-dynamic-script "sfffz")
