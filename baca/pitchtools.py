@@ -1371,6 +1371,7 @@ def pitch(
         pitch,
         allow_hidden=allow_hidden,
         allow_obgc_mutation=allow_obgc_mutation,
+        allow_out_of_range=allow_out_of_range,
         allow_repeats=True,
         allow_repitch=allow_repitch,
         do_not_transpose=do_not_transpose,
