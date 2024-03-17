@@ -88,6 +88,18 @@ baca-boxed-xp-markup = \baca-boxed-markup \markup \whiteout XP
 
 %%% PARENTHESIZED %%%
 
+baca-parenthesized-half-harm-markup =
+    \markup
+    \upright
+    \line {
+        (
+        \hspace #-0.5
+        "half-harm."
+        \hspace #-0.5
+        )
+        \hspace #0.5
+    }
+
 baca-parenthesized-pizz-markup =
     \markup
     \upright
