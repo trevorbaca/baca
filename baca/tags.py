@@ -169,7 +169,6 @@ NOT_YET_REGISTERED_COLORING = abjad.Tag("NOT_YET_REGISTERED_COLORING")
 OCTAVE_COLORING = abjad.Tag("OCTAVE_COLORING")
 OUT_OF_RANGE_COLORING = abjad.Tag("OUT_OF_RANGE_COLORING")
 REPEAT_PITCH_CLASS_COLORING = abjad.Tag("REPEAT_PITCH_CLASS_COLORING")
-TACET_COLORING = abjad.Tag("TACET_COLORING")
 
 # RHYTHM
 
@@ -489,7 +488,6 @@ def music_annotation_tags():
         Tag(string='SPACING')
         Tag(string='SPACING_OVERRIDE')
         Tag(string='STAGE_NUMBER')
-        Tag(string='TACET_COLORING')
 
     """
     return [
@@ -507,7 +505,6 @@ def music_annotation_tags():
         SPACING,
         SPACING_OVERRIDE,
         STAGE_NUMBER,
-        TACET_COLORING,
     ]
 
 

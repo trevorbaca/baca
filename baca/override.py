@@ -1350,13 +1350,6 @@ def sustain_pedal_staff_padding(
     )
 
 
-# TODO: remove?
-def tacet(argument, color="#green") -> list[abjad.Wrapper]:
-    wrappers = mmrest_color(argument, color)
-    _tags.wrappers(wrappers, _tags.TACET_COLORING, _helpers.function_name(_frame()))
-    return wrappers
-
-
 def text_script_color(argument, color: str = "#red") -> list[abjad.Wrapper]:
     return _do_override(
         _frame(),
