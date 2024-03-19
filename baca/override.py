@@ -243,28 +243,20 @@ def bar_line_transparent(argument) -> list[abjad.Wrapper]:
 
 
 def bar_line_x_extent(
-    leaves,
+    argument,
     pair: tuple[int | float, int | float],
     *,
     after: bool = False,
     context: str = "Score",
 ) -> list[abjad.Wrapper]:
-    # TODO: use _do_override()
-    assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
-    first_tag = _helpers.function_name(_frame(), n=1)
-    final_tag = _helpers.function_name(_frame(), n=2)
-    return _do_override_command(
-        leaves,
+    return _do_override(
+        _frame(),
+        argument,
         "BarLine",
         "X_extent",
         f"#'({pair[0]} . {pair[1]})",
-        first_tag,
-        final_tag,
         after=after,
-        allowlist=None,
-        blocklist=None,
         context=context,
-        deactivate=False,
     )
 
 
@@ -1398,6 +1390,7 @@ def sustain_pedal_staff_padding(
     )
 
 
+# TODO: remove?
 def tacet(argument, color="#green") -> list[abjad.Wrapper]:
     wrappers = mmrest_color(argument, color)
     _tags.wrappers(wrappers, _tags.TACET_COLORING, _helpers.function_name(_frame()))
