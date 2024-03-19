@@ -10,30 +10,19 @@ from . import helpers as _helpers
 from . import tags as _tags
 
 
-def _do_override_command(
-    leaves,
+def _do_override(
+    frame,
+    argument,
     grob,
     attribute,
     value,
-    first_tag,
-    final_tag,
     *,
     after=False,
-    allowlist=None,
-    blocklist=None,
     context=None,
-    deactivate=False,
 ) -> list[abjad.Wrapper]:
-    if blocklist:
-        for leaf in leaves:
-            if isinstance(leaf, blocklist):
-                raise Exception(f"{type(leaf).__name__} is forbidden.")
-    if allowlist:
-        for leaf in leaves:
-            if not isinstance(leaf, allowlist):
-                names = ",".join(_.__name__ for _ in allowlist)
-                violator = type(leaf).__name__
-                raise Exception(f"only {names} (not {violator}) allowed.")
+    leaves = abjad.select.leaves(argument)
+    first_tag = _helpers.function_name(frame, n=1)
+    final_tag = _helpers.function_name(frame, n=2)
     lilypond_type = context
     if lilypond_type is not None:
         assert isinstance(lilypond_type, str), repr(lilypond_type)
@@ -58,9 +47,7 @@ def _do_override_command(
     if after is True:
         site = "after"
     literal = abjad.LilyPondLiteral(string, site=site)
-    wrapper_1 = abjad.attach(
-        literal, leaves[0], deactivate=deactivate, tag=first_tag, wrapper=True
-    )
+    wrapper_1 = abjad.attach(literal, leaves[0], tag=first_tag, wrapper=True)
     if once:
         return [wrapper_1]
     override = abjad.LilyPondOverride(
@@ -71,35 +58,8 @@ def _do_override_command(
     )
     string = override.revert_string
     literal = abjad.LilyPondLiteral(string, site="after")
-    wrapper_2 = abjad.attach(
-        literal, leaves[-1], deactivate=deactivate, tag=final_tag, wrapper=True
-    )
+    wrapper_2 = abjad.attach(literal, leaves[-1], tag=final_tag, wrapper=True)
     return [wrapper_1, wrapper_2]
-
-
-def _do_override(
-    frame,
-    argument,
-    grob,
-    attribute,
-    value,
-    *,
-    after=False,
-    context=None,
-) -> list[abjad.Wrapper]:
-    leaves = abjad.select.leaves(argument)
-    first_tag = _helpers.function_name(frame, n=1)
-    final_tag = _helpers.function_name(frame, n=2)
-    return _do_override_command(
-        leaves,
-        grob,
-        attribute,
-        value,
-        first_tag,
-        final_tag,
-        after=after,
-        context=context,
-    )
 
 
 def accidental_extra_offset(
