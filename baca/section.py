@@ -1257,6 +1257,8 @@ def _reapply_persistent_indicators(
     contexts: list[abjad.Component],
     manifests: dict,
     mementos: list[_memento.Memento],
+    *,
+    deactivate: bool = False,
 ):
     for memento in mementos:
         if memento.manifest is not None:
@@ -1296,6 +1298,7 @@ def _reapply_persistent_indicators(
                     result.previous_indicator,
                     result.leaf,
                     synthetic_offset=result.synthetic_offset,
+                    deactivate=deactivate,
                     tag=result.edition.append(function_name),
                     wrapper=True,
                 )
@@ -1326,6 +1329,7 @@ def _reapply_persistent_indicators(
                 result.previous_indicator,
                 result.leaf,
                 check_duplicate_indicator=True,
+                deactivate=deactivate,
                 synthetic_offset=result.synthetic_offset,
                 tag=tag,
                 wrapper=True,
@@ -2551,6 +2555,7 @@ def reapply_persistent_indicators(
     voices: VoiceCache,
     previous_persistent_indicators: dict,
     *,
+    deactivate_contexts: typing.Sequence[str] = (),
     manifests: dict | None = None,
 ):
     manifests = manifests or {}
@@ -2569,9 +2574,15 @@ def reapply_persistent_indicators(
         for component in abjad.get.parentage(leaf):
             if isinstance(component, abjad.Context):
                 assert isinstance(component.name, str), repr(component.name)
+                deactivate = component.name in deactivate_contexts
                 if component.name not in already_reapplied_contexts:
                     mementos = previous_persistent_indicators.get(component.name, [])
-                    _reapply_persistent_indicators(contexts, manifests, mementos)
+                    _reapply_persistent_indicators(
+                        contexts,
+                        manifests,
+                        mementos,
+                        deactivate=deactivate,
+                    )
                     already_reapplied_contexts.add(component.name)
 
 
