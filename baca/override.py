@@ -566,21 +566,6 @@ def hairpin_shorten_pair(
     )
 
 
-def hairpin_start_shift(argument, name: str) -> list[abjad.Wrapper]:
-    wrappers = []
-    dynamic = abjad.Dynamic(name)
-    width = dynamic._to_width[str(dynamic.name)]
-    extra_offset_x = -width
-    hairpin_shorten_left = width - 1.25
-    wrappers_ = dynamic_text_extra_offset(argument, (extra_offset_x, 0))
-    wrappers.extend(wrappers_)
-    wrappers_ = dynamic_text_x_extent_zero(argument)
-    wrappers.extend(wrappers_)
-    wrappers_ = hairpin_shorten_pair(argument, (hairpin_shorten_left, 0))
-    wrappers.extend(wrappers_)
-    return wrappers
-
-
 def hairpin_stencil_false(argument) -> list[abjad.Wrapper]:
     return _override(
         _frame(),
