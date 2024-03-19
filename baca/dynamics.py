@@ -12,8 +12,6 @@ class SchemeManifest:
         ("baca-f-sub-but-accents-continue-sffz", "f"),
         ("baca-ffp", "p"),
         ("baca-fffp", "p"),
-        # TODO: remove niente dynamic
-        ("niente", "niente"),
         ("baca-p-sub-but-accents-continue-sffz", "p"),
         #
         ("baca-pppf", "f"),
@@ -130,7 +128,6 @@ class SchemeManifest:
             'baca-f-sub-but-accents-continue-sffz'
             'baca-ffp'
             'baca-fffp'
-            'niente'
             'baca-p-sub-but-accents-continue-sffz'
             'baca-pppf'
             'baca-pppff'
