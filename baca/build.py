@@ -1288,6 +1288,7 @@ def show_annotations(file, *, undo=False):
         tags_ = (
             baca.tags.MATERIAL_ANNOTATION_SPANNER,
             baca.tags.MOMENT_ANNOTATION_SPANNER,
+            baca.tags.STAFF_HIGHLIGHT,
         )
         return bool(set(tags) & set(tags_))
 
