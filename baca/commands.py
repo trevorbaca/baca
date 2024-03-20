@@ -392,7 +392,6 @@ def levine_multiphonic(n: int) -> str:
     return rf'\baca-boxed-markup "L.{n}"'
 
 
-# TODO: maybe remove? or teach about 0 and -1?
 def untie(argument) -> None:
     indicators = [abjad.Tie, abjad.RepeatTie]
     for leaf in abjad.select.leaves(argument):

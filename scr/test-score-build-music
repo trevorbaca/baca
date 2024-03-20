@@ -56,7 +56,9 @@ def _test_build(build):
                     message = _make_pass_string(f"{baca.path.trim(layout_ly)} same")
                 else:
                     diffs.append(lines[:30])
-                    message = _make_fail_string(f"{baca.path.trim(layout_ly)} different")
+                    message = _make_fail_string(
+                        f"{baca.path.trim(layout_ly)} different"
+                    )
                     result = 99
                 messages.append(message)
         music_pdf = build / "music.pdf"

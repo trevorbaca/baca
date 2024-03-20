@@ -66,7 +66,7 @@ def _test_section(section_directory, *, do_not_call_lilypond=False):
     names.sort()
     layout_ly = section_directory / "layout.ly"
     if layout_ly.exists():
-         names.append("layout.ly")
+        names.append("layout.ly")
     names.sort()
     path_to_results = {}
     for name in names:
@@ -110,7 +110,8 @@ def _test_section(section_directory, *, do_not_call_lilypond=False):
             strings_ = _make_result_strings(path, results)
             strings.extend(strings_)
         for part in abjad.sequence.partition_by_counts(
-            strings, [4], cyclic=True, overhang=True):
+            strings, [4], cyclic=True, overhang=True
+        ):
             pass
             # print(", ".join(part))
     result = 0

@@ -43,7 +43,7 @@ def _doctest_files(current_directory, files, globals_, report_only_first_failure
             test_count += test_count_
             doctest_output = string_buffer.getvalue()
         assert sys.path[0] == parent_directory
-        del(sys.path[0])
+        del sys.path[0]
         if failure_count_:
             failed_file_paths.append(os.path.relpath(file_))
             error_messages.append(doctest_output)

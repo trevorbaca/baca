@@ -24,5 +24,6 @@ def main():
         skip_section_collection=arguments.skip_ly_files,
     )
 
+
 if __name__ == "__main__":
     main()
