@@ -487,6 +487,7 @@ def music_annotation_tags():
         Tag(string='REPEAT_PITCH_CLASS_COLORING')
         Tag(string='SPACING')
         Tag(string='SPACING_OVERRIDE')
+        Tag(string='STAFF_HIGHLIGHT')
         Tag(string='STAGE_NUMBER')
 
     """
@@ -504,6 +505,7 @@ def music_annotation_tags():
         REPEAT_PITCH_CLASS_COLORING,
         SPACING,
         SPACING_OVERRIDE,
+        STAFF_HIGHLIGHT,
         STAGE_NUMBER,
     ]
 
