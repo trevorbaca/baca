@@ -510,6 +510,29 @@ def music_annotation_tags():
     ]
 
 
+def ottava_color_tags():
+    """
+    Gets ottava color tags.
+
+    ..  container:: example
+
+        >>> for tag in baca.tags.ottava_color_tags():
+        ...     tag
+        ...
+        Tag(string='EXPLICIT_OTTAVA_COLOR')
+        Tag(string='REAPPLIED_OTTAVA')
+        Tag(string='REAPPLIED_OTTAVA_COLOR')
+        Tag(string='REDUNDANT_OTTAVA_COLOR')
+
+    """
+    return [
+        EXPLICIT_OTTAVA_COLOR,
+        REAPPLIED_OTTAVA,
+        REAPPLIED_OTTAVA_COLOR,
+        REDUNDANT_OTTAVA_COLOR,
+    ]
+
+
 def persistent_indicator_color_expression_tags(*, build=False):
     """
     Gets persistent indicator color expression tags.
@@ -540,6 +563,13 @@ def persistent_indicator_color_expression_tags(*, build=False):
         Tag(string='REDUNDANT_INSTRUMENT_ALERT')
         Tag(string='REDUNDANT_INSTRUMENT_COLOR')
         Tag(string='REDRAWN_REDUNDANT_INSTRUMENT_COLOR')
+        Tag(string='EXPLICIT_METRONOME_MARK_WITH_COLOR')
+        Tag(string='REAPPLIED_METRONOME_MARK_WITH_COLOR')
+        Tag(string='REDUNDANT_METRONOME_MARK_WITH_COLOR')
+        Tag(string='EXPLICIT_OTTAVA_COLOR')
+        Tag(string='REAPPLIED_OTTAVA')
+        Tag(string='REAPPLIED_OTTAVA_COLOR')
+        Tag(string='REDUNDANT_OTTAVA_COLOR')
         Tag(string='EXPLICIT_SHORT_INSTRUMENT_NAME_ALERT')
         Tag(string='EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR')
         Tag(string='REAPPLIED_SHORT_INSTRUMENT_NAME_ALERT')
@@ -551,9 +581,6 @@ def persistent_indicator_color_expression_tags(*, build=False):
         Tag(string='REDUNDANT_SHORT_INSTRUMENT_NAME_ALERT')
         Tag(string='REDUNDANT_SHORT_INSTRUMENT_NAME_COLOR')
         Tag(string='REDRAWN_REDUNDANT_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='EXPLICIT_METRONOME_MARK_WITH_COLOR')
-        Tag(string='REAPPLIED_METRONOME_MARK_WITH_COLOR')
-        Tag(string='REDUNDANT_METRONOME_MARK_WITH_COLOR')
         Tag(string='EXPLICIT_STAFF_LINES_COLOR')
         Tag(string='REAPPLIED_STAFF_LINES_COLOR')
         Tag(string='REDUNDANT_STAFF_LINES_COLOR')
@@ -586,6 +613,13 @@ def persistent_indicator_color_expression_tags(*, build=False):
         Tag(string='REDUNDANT_INSTRUMENT_ALERT')
         Tag(string='REDUNDANT_INSTRUMENT_COLOR')
         Tag(string='REDRAWN_REDUNDANT_INSTRUMENT_COLOR')
+        Tag(string='EXPLICIT_METRONOME_MARK_WITH_COLOR')
+        Tag(string='REAPPLIED_METRONOME_MARK_WITH_COLOR')
+        Tag(string='REDUNDANT_METRONOME_MARK_WITH_COLOR')
+        Tag(string='EXPLICIT_OTTAVA_COLOR')
+        Tag(string='REAPPLIED_OTTAVA')
+        Tag(string='REAPPLIED_OTTAVA_COLOR')
+        Tag(string='REDUNDANT_OTTAVA_COLOR')
         Tag(string='EXPLICIT_SHORT_INSTRUMENT_NAME_ALERT')
         Tag(string='EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR')
         Tag(string='REAPPLIED_SHORT_INSTRUMENT_NAME_ALERT')
@@ -597,9 +631,6 @@ def persistent_indicator_color_expression_tags(*, build=False):
         Tag(string='REDUNDANT_SHORT_INSTRUMENT_NAME_ALERT')
         Tag(string='REDUNDANT_SHORT_INSTRUMENT_NAME_COLOR')
         Tag(string='REDRAWN_REDUNDANT_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='EXPLICIT_METRONOME_MARK_WITH_COLOR')
-        Tag(string='REAPPLIED_METRONOME_MARK_WITH_COLOR')
-        Tag(string='REDUNDANT_METRONOME_MARK_WITH_COLOR')
         Tag(string='EXPLICIT_STAFF_LINES_COLOR')
         Tag(string='REAPPLIED_STAFF_LINES_COLOR')
         Tag(string='REDUNDANT_STAFF_LINES_COLOR')
@@ -614,8 +645,9 @@ def persistent_indicator_color_expression_tags(*, build=False):
     tags.extend(clef_color_tags(build=build))
     tags.extend(dynamic_color_tags())
     tags.extend(instrument_color_tags())
-    tags.extend(short_instrument_name_color_tags())
     tags.extend(metronome_mark_color_expression_tags())
+    tags.extend(ottava_color_tags())
+    tags.extend(short_instrument_name_color_tags())
     tags.extend(staff_lines_color_tags(build=build))
     tags.extend(time_signature_color_tags(build=build))
     return tags
