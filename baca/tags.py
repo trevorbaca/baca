@@ -276,33 +276,6 @@ def activate(score, *tags):
 
 
 def clef_color_tags(*, build=False):
-    """
-    Gets clef color tags.
-
-    ..  container:: example
-
-        >>> for tag in baca.tags.clef_color_tags():
-        ...     tag
-        ...
-        Tag(string='EXPLICIT_CLEF_COLOR')
-        Tag(string='EXPLICIT_CLEF_REDRAW_COLOR')
-        Tag(string='REAPPLIED_CLEF_COLOR')
-        Tag(string='REAPPLIED_CLEF_REDRAW_COLOR')
-        Tag(string='REDUNDANT_CLEF_COLOR')
-        Tag(string='REDUNDANT_CLEF_REDRAW_COLOR')
-
-        >>> for tag in baca.tags.clef_color_tags(build=True):
-        ...     tag
-        ...
-        Tag(string='EXPLICIT_CLEF_COLOR')
-        Tag(string='EXPLICIT_CLEF_REDRAW_COLOR')
-        Tag(string='REAPPLIED_CLEF_COLOR')
-        Tag(string='REAPPLIED_CLEF_REDRAW_COLOR')
-        Tag(string='REDUNDANT_CLEF_COLOR')
-        Tag(string='REDUNDANT_CLEF_REDRAW_COLOR')
-        Tag(string='REAPPLIED_CLEF')
-
-    """
     tags = [
         EXPLICIT_CLEF_COLOR,
         EXPLICIT_CLEF_REDRAW_COLOR,
@@ -330,20 +303,6 @@ def deactivate(score, *tags):
 
 
 def dynamic_color_tags():
-    """
-    Gets dynamic color tags.
-
-    ..  container:: example
-
-        >>> for tag in baca.tags.dynamic_color_tags():
-        ...     tag
-        ...
-        Tag(string='EXPLICIT_DYNAMIC_COLOR')
-        Tag(string='REAPPLIED_DYNAMIC')
-        Tag(string='REAPPLIED_DYNAMIC_COLOR')
-        Tag(string='REDUNDANT_DYNAMIC_COLOR')
-
-    """
     return [
         EXPLICIT_DYNAMIC_COLOR,
         REAPPLIED_DYNAMIC,
@@ -370,25 +329,6 @@ def has_persistence_tag(tag):
 
 
 def instrument_color_tags():
-    """
-    Gets instrument color tags.
-
-    ..  container:: example
-
-        >>> for tag in baca.tags.instrument_color_tags():
-        ...     tag
-        ...
-        Tag(string='EXPLICIT_INSTRUMENT_ALERT')
-        Tag(string='EXPLICIT_INSTRUMENT_COLOR')
-        Tag(string='REAPPLIED_INSTRUMENT_COLOR')
-        Tag(string='REAPPLIED_INSTRUMENT_ALERT')
-        Tag(string='REDRAWN_EXPLICIT_INSTRUMENT_COLOR')
-        Tag(string='REDRAWN_REAPPLIED_INSTRUMENT_COLOR')
-        Tag(string='REDUNDANT_INSTRUMENT_ALERT')
-        Tag(string='REDUNDANT_INSTRUMENT_COLOR')
-        Tag(string='REDRAWN_REDUNDANT_INSTRUMENT_COLOR')
-
-    """
     return [
         EXPLICIT_INSTRUMENT_ALERT,
         EXPLICIT_INSTRUMENT_COLOR,
@@ -403,22 +343,6 @@ def instrument_color_tags():
 
 
 def layout_removal_tags():
-    """
-    Gets layout removal tags.
-
-    ..  container:: example
-
-        >>> for tag in baca.tags.layout_removal_tags():
-        ...     tag
-        ...
-        Tag(string='EXPLICIT_TIME_SIGNATURE_COLOR')
-        Tag(string='LOCAL_MEASURE_NUMBER')
-        Tag(string='MEASURE_NUMBER')
-        Tag(string='RED_START_BAR')
-        Tag(string='REDUNDANT_TIME_SIGNATURE_COLOR')
-        Tag(string='STAGE_NUMBER')
-
-    """
     return [
         EXPLICIT_TIME_SIGNATURE_COLOR,
         LOCAL_MEASURE_NUMBER,
@@ -430,19 +354,6 @@ def layout_removal_tags():
 
 
 def metronome_mark_color_expression_tags():
-    """
-    Gets metronome mark color expression tags.
-
-    ..  container:: example
-
-        >>> for tag in baca.tags.metronome_mark_color_expression_tags():
-        ...     tag
-        ...
-        Tag(string='EXPLICIT_METRONOME_MARK_WITH_COLOR')
-        Tag(string='REAPPLIED_METRONOME_MARK_WITH_COLOR')
-        Tag(string='REDUNDANT_METRONOME_MARK_WITH_COLOR')
-
-    """
     return [
         EXPLICIT_METRONOME_MARK_WITH_COLOR,
         REAPPLIED_METRONOME_MARK_WITH_COLOR,
@@ -451,46 +362,10 @@ def metronome_mark_color_expression_tags():
 
 
 def metronome_mark_color_suppression_tags():
-    """
-    Gets metronome mark color suppression tags.
-
-    ..  container:: example
-
-        >>> for tag in baca.tags.metronome_mark_color_suppression_tags():
-        ...     tag
-        ...
-        Tag(string='EXPLICIT_METRONOME_MARK')
-        Tag(string='REDUNDANT_METRONOME_MARK')
-
-    """
     return [EXPLICIT_METRONOME_MARK, REDUNDANT_METRONOME_MARK]
 
 
 def music_annotation_tags():
-    """
-    Gets music annotation tags.
-
-    ..  container:: example
-
-        >>> for tag in baca.tags.music_annotation_tags():
-        ...     tag
-        Tag(string='CLOCK_TIME')
-        Tag(string='FIGURE_LABEL')
-        Tag(string='INVISIBLE_MUSIC_COLORING')
-        Tag(string='LOCAL_MEASURE_NUMBER')
-        Tag(string='MATERIAL_ANNOTATION_MARKUP')
-        Tag(string='MATERIAL_ANNOTATION_SPANNER')
-        Tag(string='MOCK_COLORING')
-        Tag(string='MOMENT_ANNOTATION_SPANNER')
-        Tag(string='NOT_YET_PITCHED_COLORING')
-        Tag(string='OCTAVE_COLORING')
-        Tag(string='REPEAT_PITCH_CLASS_COLORING')
-        Tag(string='SPACING')
-        Tag(string='SPACING_OVERRIDE')
-        Tag(string='STAFF_HIGHLIGHT')
-        Tag(string='STAGE_NUMBER')
-
-    """
     return [
         CLOCK_TIME,
         FIGURE_LABEL,
@@ -511,20 +386,6 @@ def music_annotation_tags():
 
 
 def ottava_color_tags():
-    """
-    Gets ottava color tags.
-
-    ..  container:: example
-
-        >>> for tag in baca.tags.ottava_color_tags():
-        ...     tag
-        ...
-        Tag(string='EXPLICIT_OTTAVA_COLOR')
-        Tag(string='REAPPLIED_OTTAVA')
-        Tag(string='REAPPLIED_OTTAVA_COLOR')
-        Tag(string='REDUNDANT_OTTAVA_COLOR')
-
-    """
     return [
         EXPLICIT_OTTAVA_COLOR,
         REAPPLIED_OTTAVA,
@@ -534,113 +395,6 @@ def ottava_color_tags():
 
 
 def persistent_indicator_color_expression_tags(*, build=False):
-    """
-    Gets persistent indicator color expression tags.
-
-    >>> import pathlib
-
-    ..  container:: example
-
-        >>> tags = baca.tags.persistent_indicator_color_expression_tags()
-        >>> for tag in tags:
-        ...     tag
-        Tag(string='EXPLICIT_CLEF_COLOR')
-        Tag(string='EXPLICIT_CLEF_REDRAW_COLOR')
-        Tag(string='REAPPLIED_CLEF_COLOR')
-        Tag(string='REAPPLIED_CLEF_REDRAW_COLOR')
-        Tag(string='REDUNDANT_CLEF_COLOR')
-        Tag(string='REDUNDANT_CLEF_REDRAW_COLOR')
-        Tag(string='EXPLICIT_DYNAMIC_COLOR')
-        Tag(string='REAPPLIED_DYNAMIC')
-        Tag(string='REAPPLIED_DYNAMIC_COLOR')
-        Tag(string='REDUNDANT_DYNAMIC_COLOR')
-        Tag(string='EXPLICIT_INSTRUMENT_ALERT')
-        Tag(string='EXPLICIT_INSTRUMENT_COLOR')
-        Tag(string='REAPPLIED_INSTRUMENT_COLOR')
-        Tag(string='REAPPLIED_INSTRUMENT_ALERT')
-        Tag(string='REDRAWN_EXPLICIT_INSTRUMENT_COLOR')
-        Tag(string='REDRAWN_REAPPLIED_INSTRUMENT_COLOR')
-        Tag(string='REDUNDANT_INSTRUMENT_ALERT')
-        Tag(string='REDUNDANT_INSTRUMENT_COLOR')
-        Tag(string='REDRAWN_REDUNDANT_INSTRUMENT_COLOR')
-        Tag(string='EXPLICIT_METRONOME_MARK_WITH_COLOR')
-        Tag(string='REAPPLIED_METRONOME_MARK_WITH_COLOR')
-        Tag(string='REDUNDANT_METRONOME_MARK_WITH_COLOR')
-        Tag(string='EXPLICIT_OTTAVA_COLOR')
-        Tag(string='REAPPLIED_OTTAVA')
-        Tag(string='REAPPLIED_OTTAVA_COLOR')
-        Tag(string='REDUNDANT_OTTAVA_COLOR')
-        Tag(string='EXPLICIT_SHORT_INSTRUMENT_NAME_ALERT')
-        Tag(string='EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='REAPPLIED_SHORT_INSTRUMENT_NAME_ALERT')
-        Tag(string='REAPPLIED_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='REDRAWN_EXPLICIT_SHORT_INSTRUMENT_NAME')
-        Tag(string='REDRAWN_EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='REDRAWN_REAPPLIED_SHORT_INSTRUMENT_NAME')
-        Tag(string='REDRAWN_REAPPLIED_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='REDUNDANT_SHORT_INSTRUMENT_NAME_ALERT')
-        Tag(string='REDUNDANT_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='REDRAWN_REDUNDANT_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='EXPLICIT_STAFF_LINES_COLOR')
-        Tag(string='REAPPLIED_STAFF_LINES_COLOR')
-        Tag(string='REDUNDANT_STAFF_LINES_COLOR')
-        Tag(string='EXPLICIT_TIME_SIGNATURE_COLOR')
-        Tag(string='REAPPLIED_TIME_SIGNATURE_COLOR')
-        Tag(string='REDUNDANT_TIME_SIGNATURE_COLOR')
-
-        Build directory:
-
-        >>> tags = baca.tags.persistent_indicator_color_expression_tags(build=True)
-        >>> for tag in tags:
-        ...     tag
-        Tag(string='EXPLICIT_CLEF_COLOR')
-        Tag(string='EXPLICIT_CLEF_REDRAW_COLOR')
-        Tag(string='REAPPLIED_CLEF_COLOR')
-        Tag(string='REAPPLIED_CLEF_REDRAW_COLOR')
-        Tag(string='REDUNDANT_CLEF_COLOR')
-        Tag(string='REDUNDANT_CLEF_REDRAW_COLOR')
-        Tag(string='REAPPLIED_CLEF')
-        Tag(string='EXPLICIT_DYNAMIC_COLOR')
-        Tag(string='REAPPLIED_DYNAMIC')
-        Tag(string='REAPPLIED_DYNAMIC_COLOR')
-        Tag(string='REDUNDANT_DYNAMIC_COLOR')
-        Tag(string='EXPLICIT_INSTRUMENT_ALERT')
-        Tag(string='EXPLICIT_INSTRUMENT_COLOR')
-        Tag(string='REAPPLIED_INSTRUMENT_COLOR')
-        Tag(string='REAPPLIED_INSTRUMENT_ALERT')
-        Tag(string='REDRAWN_EXPLICIT_INSTRUMENT_COLOR')
-        Tag(string='REDRAWN_REAPPLIED_INSTRUMENT_COLOR')
-        Tag(string='REDUNDANT_INSTRUMENT_ALERT')
-        Tag(string='REDUNDANT_INSTRUMENT_COLOR')
-        Tag(string='REDRAWN_REDUNDANT_INSTRUMENT_COLOR')
-        Tag(string='EXPLICIT_METRONOME_MARK_WITH_COLOR')
-        Tag(string='REAPPLIED_METRONOME_MARK_WITH_COLOR')
-        Tag(string='REDUNDANT_METRONOME_MARK_WITH_COLOR')
-        Tag(string='EXPLICIT_OTTAVA_COLOR')
-        Tag(string='REAPPLIED_OTTAVA')
-        Tag(string='REAPPLIED_OTTAVA_COLOR')
-        Tag(string='REDUNDANT_OTTAVA_COLOR')
-        Tag(string='EXPLICIT_SHORT_INSTRUMENT_NAME_ALERT')
-        Tag(string='EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='REAPPLIED_SHORT_INSTRUMENT_NAME_ALERT')
-        Tag(string='REAPPLIED_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='REDRAWN_EXPLICIT_SHORT_INSTRUMENT_NAME')
-        Tag(string='REDRAWN_EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='REDRAWN_REAPPLIED_SHORT_INSTRUMENT_NAME')
-        Tag(string='REDRAWN_REAPPLIED_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='REDUNDANT_SHORT_INSTRUMENT_NAME_ALERT')
-        Tag(string='REDUNDANT_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='REDRAWN_REDUNDANT_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='EXPLICIT_STAFF_LINES_COLOR')
-        Tag(string='REAPPLIED_STAFF_LINES_COLOR')
-        Tag(string='REDUNDANT_STAFF_LINES_COLOR')
-        Tag(string='REAPPLIED_STAFF_LINES')
-        Tag(string='EXPLICIT_TIME_SIGNATURE_COLOR')
-        Tag(string='REAPPLIED_TIME_SIGNATURE_COLOR')
-        Tag(string='REDUNDANT_TIME_SIGNATURE_COLOR')
-        Tag(string='REAPPLIED_TIME_SIGNATURE')
-
-    """
     tags = []
     tags.extend(clef_color_tags(build=build))
     tags.extend(dynamic_color_tags())
@@ -654,62 +408,12 @@ def persistent_indicator_color_expression_tags(*, build=False):
 
 
 def persistent_indicator_color_suppression_tags():
-    """
-    Gets persistent indicator color suppression tags.
-
-    ..  container:: example
-
-        >>> tags = baca.tags.persistent_indicator_color_suppression_tags()
-        >>> for tag in tags:
-        ...     tag
-        ...
-        Tag(string='EXPLICIT_METRONOME_MARK')
-        Tag(string='REDUNDANT_METRONOME_MARK')
-
-    """
     tags = []
     tags.extend(metronome_mark_color_suppression_tags())
     return tags
 
 
 def persistent_indicator_tags():
-    """
-    Gets persistent indicator tags.
-
-    ..  container:: example
-
-        >>> for tag in baca.tags.persistent_indicator_tags():
-        ...     tag
-        ...
-        Tag(string='EXPLICIT_CLEF')
-        Tag(string='REAPPLIED_CLEF')
-        Tag(string='REDUNDANT_CLEF')
-        Tag(string='EXPLICIT_DYNAMIC')
-        Tag(string='REAPPLIED_DYNAMIC')
-        Tag(string='REDUNDANT_DYNAMIC')
-        Tag(string='EXPLICIT_INSTRUMENT')
-        Tag(string='REAPPLIED_INSTRUMENT')
-        Tag(string='REDUNDANT_INSTRUMENT')
-        Tag(string='EXPLICIT_SHORT_INSTRUMENT_NAME')
-        Tag(string='REAPPLIED_SHORT_INSTRUMENT_NAME')
-        Tag(string='REDUNDANT_SHORT_INSTRUMENT_NAME')
-        Tag(string='EXPLICIT_METRONOME_MARK')
-        Tag(string='REAPPLIED_METRONOME_MARK')
-        Tag(string='REDUNDANT_METRONOME_MARK')
-        Tag(string='EXPLICIT_OTTAVA')
-        Tag(string='REAPPLIED_OTTAVA')
-        Tag(string='REDUNDANT_OTTAVA')
-        Tag(string='EXPLICIT_PERSISTENT_OVERRIDE')
-        Tag(string='REAPPLIED_PERSISTENT_OVERRIDE')
-        Tag(string='REDUNDANT_PERSISTENT_OVERRIDE')
-        Tag(string='EXPLICIT_STAFF_LINES')
-        Tag(string='REAPPLIED_STAFF_LINES')
-        Tag(string='REDUNDANT_STAFF_LINES')
-        Tag(string='EXPLICIT_TIME_SIGNATURE')
-        Tag(string='REAPPLIED_TIME_SIGNATURE')
-        Tag(string='REDUNDANT_TIME_SIGNATURE')
-
-    """
     return [
         EXPLICIT_CLEF,
         REAPPLIED_CLEF,
@@ -751,26 +455,6 @@ def persistent_indicator_tags():
 
 
 def short_instrument_name_color_tags():
-    """
-    Gets short instrument name color tags.
-
-    ..  container:: example
-
-        >>> for tag in baca.tags.short_instrument_name_color_tags():
-        ...     tag
-        Tag(string='EXPLICIT_SHORT_INSTRUMENT_NAME_ALERT')
-        Tag(string='EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='REAPPLIED_SHORT_INSTRUMENT_NAME_ALERT')
-        Tag(string='REAPPLIED_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='REDRAWN_EXPLICIT_SHORT_INSTRUMENT_NAME')
-        Tag(string='REDRAWN_EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='REDRAWN_REAPPLIED_SHORT_INSTRUMENT_NAME')
-        Tag(string='REDRAWN_REAPPLIED_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='REDUNDANT_SHORT_INSTRUMENT_NAME_ALERT')
-        Tag(string='REDUNDANT_SHORT_INSTRUMENT_NAME_COLOR')
-        Tag(string='REDRAWN_REDUNDANT_SHORT_INSTRUMENT_NAME_COLOR')
-
-    """
     return [
         EXPLICIT_SHORT_INSTRUMENT_NAME_ALERT,
         EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR,
@@ -787,36 +471,10 @@ def short_instrument_name_color_tags():
 
 
 def spacing_markup_tags():
-    """
-    Gets markup spacing tags.
-
-    ..  container:: example
-
-        >>> for tag in baca.tags.spacing_markup_tags():
-        ...     tag
-        ...
-        Tag(string='SPACING')
-        Tag(string='SPACING_OVERRIDE')
-
-    """
     return [SPACING, SPACING_OVERRIDE]
 
 
 def spacing_tags():
-    """
-    Gets spacing tags.
-
-    ..  container:: example
-
-        >>> for tag in baca.tags.spacing_tags():
-        ...     tag
-        ...
-        Tag(string='SPACING_COMMAND')
-        Tag(string='SPACING')
-        Tag(string='SPACING_OVERRIDE_COMMAND')
-        Tag(string='SPACING_OVERRIDE')
-
-    """
     return [
         SPACING_COMMAND,
         SPACING,
@@ -826,29 +484,6 @@ def spacing_tags():
 
 
 def staff_lines_color_tags(*, build=False):
-    """
-    Gets staff lines color tags.
-
-    ..  container:: example
-
-        >>> for tag in baca.tags.staff_lines_color_tags():
-        ...     tag
-        ...
-        Tag(string='EXPLICIT_STAFF_LINES_COLOR')
-        Tag(string='REAPPLIED_STAFF_LINES_COLOR')
-        Tag(string='REDUNDANT_STAFF_LINES_COLOR')
-
-        Build directory:
-
-        >>> for tag in baca.tags.staff_lines_color_tags(build=True):
-        ...     tag
-        ...
-        Tag(string='EXPLICIT_STAFF_LINES_COLOR')
-        Tag(string='REAPPLIED_STAFF_LINES_COLOR')
-        Tag(string='REDUNDANT_STAFF_LINES_COLOR')
-        Tag(string='REAPPLIED_STAFF_LINES')
-
-    """
     tags = [
         EXPLICIT_STAFF_LINES_COLOR,
         REAPPLIED_STAFF_LINES_COLOR,
@@ -860,29 +495,6 @@ def staff_lines_color_tags(*, build=False):
 
 
 def time_signature_color_tags(*, build=False):
-    """
-    Gets time signature color tags.
-
-    ..  container:: example
-
-        >>> for tag in baca.tags.time_signature_color_tags():
-        ...     tag
-        ...
-        Tag(string='EXPLICIT_TIME_SIGNATURE_COLOR')
-        Tag(string='REAPPLIED_TIME_SIGNATURE_COLOR')
-        Tag(string='REDUNDANT_TIME_SIGNATURE_COLOR')
-
-        Build directory:
-
-        >>> for tag in baca.tags.time_signature_color_tags(build=True):
-        ...     tag
-        ...
-        Tag(string='EXPLICIT_TIME_SIGNATURE_COLOR')
-        Tag(string='REAPPLIED_TIME_SIGNATURE_COLOR')
-        Tag(string='REDUNDANT_TIME_SIGNATURE_COLOR')
-        Tag(string='REAPPLIED_TIME_SIGNATURE')
-
-    """
     tags = [
         EXPLICIT_TIME_SIGNATURE_COLOR,
         REAPPLIED_TIME_SIGNATURE_COLOR,
