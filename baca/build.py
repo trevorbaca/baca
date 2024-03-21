@@ -362,14 +362,14 @@ def _populate_verbose_repository(section_directory):
         return
     print_main_task("Populating _verbose repository ...")
     for name in ("music.ly", "music.ily", "layout.ly"):
-        tagged = section_directory / name
-        if not tagged.exists():
+        path = section_directory / name
+        if not path.exists():
             continue
-        with tagged.open() as pointer:
+        with path.open() as pointer:
             lines = pointer.readlines()
         string = "".join(lines)
         parts = []
-        for part in tagged.parts:
+        for part in path.parts:
             if part == os.path.sep:
                 pass
             elif part == "Scores":
@@ -388,10 +388,10 @@ def _populate_untagged_repository(section_directory):
         return
     print_main_task("Populating _untagged repository ...")
     for name in ("music.ly", "music.ily", "layout.ly"):
-        tagged = section_directory / name
-        if not tagged.exists():
+        path = section_directory / name
+        if not path.exists():
             continue
-        with tagged.open() as pointer:
+        with path.open() as pointer:
             lines = pointer.readlines()
         lines_ = []
         for line in lines:
@@ -403,7 +403,7 @@ def _populate_untagged_repository(section_directory):
         string = "".join(lines)
         string = abjad.tag.remove_tags(string)
         parts = []
-        for part in tagged.parts:
+        for part in path.parts:
             if part == os.path.sep:
                 pass
             elif part == "Scores":
@@ -416,19 +416,19 @@ def _populate_untagged_repository(section_directory):
             _untagged.parent.mkdir(parents=True)
         _untagged.write_text(string)
     for name in ("music.ly", "music.ily", "layout.ly"):
-        tagged = section_directory / name
-        if not tagged.exists():
+        path = section_directory / name
+        if not path.exists():
             continue
         safekeeping = section_directory / f"{name}.original"
-        shutil.copyfile(tagged, safekeeping)
-        color_persistent_indicators(tagged, undo=True)
-        show_annotations(tagged, undo=True)
+        shutil.copyfile(path, safekeeping)
+        color_persistent_indicators(path, undo=True)
+        show_annotations(path, undo=True)
     print_main_task("Populating _bw repository ...")
     for name in ("music.ly", "music.ily", "layout.ly"):
-        tagged = section_directory / name
-        if not tagged.exists():
+        path = section_directory / name
+        if not path.exists():
             continue
-        with tagged.open() as pointer:
+        with path.open() as pointer:
             lines = pointer.readlines()
         lines_ = []
         for line in lines:
@@ -446,7 +446,7 @@ def _populate_untagged_repository(section_directory):
         lines = lines_
         string = "".join(lines)
         parts = []
-        for part in tagged.parts:
+        for part in path.parts:
             if part == os.path.sep:
                 pass
             elif part == "Scores":
@@ -459,20 +459,20 @@ def _populate_untagged_repository(section_directory):
             _bw.parent.mkdir(parents=True)
         _bw.write_text(string)
     for name in ("music.ly", "music.ily", "layout.ly"):
-        tagged = section_directory / name
-        if not tagged.exists():
+        path = section_directory / name
+        if not path.exists():
             continue
         safekeeping = section_directory / f"{name}.original"
-        shutil.move(safekeeping, tagged)
+        shutil.move(safekeeping, path)
 
 
 def _remove_function_name_comments(section_directory):
     print_file_handling("Removing function name comments ...")
     for name in ("music.ly", "music.ily", "layout.ly"):
-        tagged = section_directory / name
-        if not tagged.exists():
+        path = section_directory / name
+        if not path.exists():
             continue
-        with tagged.open() as pointer:
+        with path.open() as pointer:
             lines = pointer.readlines()
         lines_ = []
         for line in lines:
@@ -482,7 +482,7 @@ def _remove_function_name_comments(section_directory):
             lines_.append(line)
         lines = lines_
         string = "".join(lines)
-        tagged.write_text(string)
+        path.write_text(string)
 
 
 def _remove_lilypond_warnings(
@@ -517,10 +517,10 @@ def _remove_lilypond_warnings(
 def _remove_site_comments(section_directory):
     print_file_handling("Removing site comments ...")
     for name in ("music.ly", "music.ily", "layout.ly"):
-        tagged = section_directory / name
-        if not tagged.exists():
+        path = section_directory / name
+        if not path.exists():
             continue
-        remove_site_comments(tagged)
+        remove_site_comments(path)
 
 
 def _trim_music_ly(ly):
