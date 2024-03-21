@@ -33,6 +33,40 @@ def _call_lilypond_on_music_ly_in_section(music_ly, music_pdf_mtime):
     return int(timer.elapsed_time)
 
 
+def _color_persistent_indicators(
+    text: str, messages: list[str], build: bool, *, undo: bool = False
+) -> str:
+    assert isinstance(text, str), repr(text)
+    name = "persistent indicator"
+
+    def _activate(tags):
+        tags_ = baca.tags.persistent_indicator_color_expression_tags(build=build)
+        return bool(set(tags) & set(tags_))
+
+    def _deactivate(tags):
+        tags_ = baca.tags.persistent_indicator_color_suppression_tags()
+        return bool(set(tags) & set(tags_))
+
+    if undo:
+        messages.append(f"Uncoloring {name}s ...")
+        text = baca.tags._activate_tags(
+            text, _deactivate, "persistent indicator color suppression", messages
+        )
+        text = baca.tags._deactivate_tags(
+            text, _activate, "persistent indicator color expression", messages
+        )
+    else:
+        messages.append(f"Coloring {name}s ...")
+        text = baca.tags._activate_tags(
+            text, _activate, "persistent indicator color expression", messages
+        )
+        text = baca.tags._deactivate_tags(
+            text, _deactivate, "persistent indicator color suppression", messages
+        )
+    messages.append("")
+    return text
+
+
 def _display_lilypond_log_errors(lilypond_log_file_path):
     lilypond_log_file_path = pathlib.Path(lilypond_log_file_path)
     with lilypond_log_file_path.open() as file_pointer:
@@ -717,12 +751,13 @@ def color_persistent_indicators(file, *, undo=False):
     messages = []
     text = file.read_text()
     build = "builds" in file.parts
+    # TODO: remove everything because redundant with _color_persistent_indicators()?
     text = baca.tags.color_clefs(text, messages, build, undo=undo)
     text = baca.tags.color_dynamics(text, messages, undo=undo)
     text = baca.tags.color_instruments(text, messages, undo=undo)
     text = baca.tags.color_short_instrument_names(text, messages, undo=undo)
     text = baca.tags.color_metronome_marks(text, messages, undo=undo)
-    text = baca.tags.color_persistent_indicators(text, messages, build, undo=undo)
+    text = _color_persistent_indicators(text, messages, build, undo=undo)
     text = baca.tags.color_staff_lines(text, messages, build, undo=undo)
     text = baca.tags.color_time_signatures(text, messages, build, undo=undo)
     file.write_text(text)
@@ -814,7 +849,7 @@ def handle_build_tags(_sections_directory):
             text, messages, bol_measure_numbers, final_measure_number
         )
         build = "builds" in file.parts
-        text = baca.tags.color_persistent_indicators(text, messages, build, undo=True)
+        text = _color_persistent_indicators(text, messages, build, undo=True)
         text = baca.tags.show_music_annotations(text, messages, undo=True)
         text = baca.tags.join_broken_spanners(text, messages)
         text = baca.tags.show_tag(

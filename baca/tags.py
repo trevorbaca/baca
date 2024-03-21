@@ -511,9 +511,11 @@ def wrappers(wrappers: list[abjad.Wrapper], *tags: abjad.Tag):
             wrapper.tag = wrapper.tag.append(tag)
 
 
+# TODO: maybe move to build.py?
 # BUILD FUNCTIONS
 
 
+# TODO: make public or move to build.py
 def _activate_tags(
     text: str,
     match: typing.Callable,
@@ -562,6 +564,7 @@ def _activate_tags(
     return text
 
 
+# TODO: make public or move to build.py
 def _deactivate_tags(
     text: str,
     match: typing.Callable,
@@ -672,40 +675,6 @@ def color_metronome_marks(text: str, messages: list[str], *, undo: bool = False)
         )
         text = _deactivate_tags(
             text, _deactivate, "metronome mark color suppression", messages
-        )
-    messages.append("")
-    return text
-
-
-def color_persistent_indicators(
-    text: str, messages: list[str], build: bool, *, undo: bool = False
-) -> str:
-    assert isinstance(text, str), repr(text)
-    name = "persistent indicator"
-
-    def _activate(tags):
-        tags_ = persistent_indicator_color_expression_tags(build=build)
-        return bool(set(tags) & set(tags_))
-
-    def _deactivate(tags):
-        tags_ = persistent_indicator_color_suppression_tags()
-        return bool(set(tags) & set(tags_))
-
-    if undo:
-        messages.append(f"Uncoloring {name}s ...")
-        text = _activate_tags(
-            text, _deactivate, "persistent indicator color suppression", messages
-        )
-        text = _deactivate_tags(
-            text, _activate, "persistent indicator color expression", messages
-        )
-    else:
-        messages.append(f"Coloring {name}s ...")
-        text = _activate_tags(
-            text, _activate, "persistent indicator color expression", messages
-        )
-        text = _deactivate_tags(
-            text, _deactivate, "persistent indicator color suppression", messages
         )
     messages.append("")
     return text
