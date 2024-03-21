@@ -751,15 +751,7 @@ def color_persistent_indicators(file, *, undo=False):
     messages = []
     text = file.read_text()
     build = "builds" in file.parts
-    # TODO: remove everything because redundant with _color_persistent_indicators()?
-    text = baca.tags.color_clefs(text, messages, build, undo=undo)
-    text = baca.tags.color_dynamics(text, messages, undo=undo)
-    text = baca.tags.color_instruments(text, messages, undo=undo)
-    text = baca.tags.color_short_instrument_names(text, messages, undo=undo)
-    text = baca.tags.color_metronome_marks(text, messages, undo=undo)
     text = _color_persistent_indicators(text, messages, build, undo=undo)
-    text = baca.tags.color_staff_lines(text, messages, build, undo=undo)
-    text = baca.tags.color_time_signatures(text, messages, build, undo=undo)
     file.write_text(text)
     return messages
 
