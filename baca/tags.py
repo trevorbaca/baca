@@ -259,73 +259,7 @@ REAPPLIED_TIME_SIGNATURE_COLOR = abjad.Tag("REAPPLIED_TIME_SIGNATURE_COLOR")
 REDUNDANT_TIME_SIGNATURE = abjad.Tag("REDUNDANT_TIME_SIGNATURE")
 REDUNDANT_TIME_SIGNATURE_COLOR = abjad.Tag("REDUNDANT_TIME_SIGNATURE_COLOR")
 
-
-def activate(score, *tags):
-    assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
-    for leaf in abjad.iterate.leaves(score):
-        if not isinstance(leaf, abjad.Skip):
-            continue
-        wrappers = abjad.get.wrappers(leaf)
-        for wrapper in wrappers:
-            if wrapper.tag is None:
-                continue
-            for tag in tags:
-                if tag.string in wrapper.tag.words():
-                    wrapper.deactivate = False
-                    break
-
-
-def clef_color_tags(*, build=False):
-    tags = [
-        EXPLICIT_CLEF_COLOR,
-        EXPLICIT_CLEF_REDRAW_COLOR,
-        REAPPLIED_CLEF_COLOR,
-        REAPPLIED_CLEF_REDRAW_COLOR,
-        REDUNDANT_CLEF_COLOR,
-        REDUNDANT_CLEF_REDRAW_COLOR,
-    ]
-    if build is True:
-        tags.append(REAPPLIED_CLEF)
-    return tags
-
-
-def deactivate(score, *tags):
-    assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
-    for leaf in abjad.iterate.leaves(score):
-        wrappers = abjad.get.wrappers(leaf)
-        for wrapper in wrappers:
-            if wrapper.tag is None:
-                continue
-            for tag in tags:
-                if tag.string in wrapper.tag.words():
-                    wrapper.deactivate = True
-                    break
-
-
-def dynamic_color_tags():
-    return [
-        EXPLICIT_DYNAMIC_COLOR,
-        REAPPLIED_DYNAMIC,
-        REAPPLIED_DYNAMIC_COLOR,
-        REDUNDANT_DYNAMIC_COLOR,
-    ]
-
-
-def has_persistence_tag(tag):
-    """
-    Is true when tag has persistence tag.
-
-    ..  container:: example
-
-        >>> baca.tags.has_persistence_tag(abjad.Tag("FOO"))
-        False
-
-    """
-    tags = persistent_indicator_tags()
-    for word in tag.words():
-        if type(tag)(word) in tags:
-            return True
-    return False
+# TAG GROUPS
 
 
 def instrument_color_tags():
@@ -353,14 +287,6 @@ def layout_removal_tags():
     ]
 
 
-def metronome_mark_color_expression_tags():
-    return [
-        EXPLICIT_METRONOME_MARK_WITH_COLOR,
-        REAPPLIED_METRONOME_MARK_WITH_COLOR,
-        REDUNDANT_METRONOME_MARK_WITH_COLOR,
-    ]
-
-
 def metronome_mark_color_suppression_tags():
     return [EXPLICIT_METRONOME_MARK, REDUNDANT_METRONOME_MARK]
 
@@ -383,28 +309,6 @@ def music_annotation_tags():
         STAFF_HIGHLIGHT,
         STAGE_NUMBER,
     ]
-
-
-def ottava_color_tags():
-    return [
-        EXPLICIT_OTTAVA_COLOR,
-        REAPPLIED_OTTAVA,
-        REAPPLIED_OTTAVA_COLOR,
-        REDUNDANT_OTTAVA_COLOR,
-    ]
-
-
-def persistent_indicator_color_expression_tags(*, build=False):
-    tags = []
-    tags.extend(clef_color_tags(build=build))
-    tags.extend(dynamic_color_tags())
-    tags.extend(instrument_color_tags())
-    tags.extend(metronome_mark_color_expression_tags())
-    tags.extend(ottava_color_tags())
-    tags.extend(short_instrument_name_color_tags())
-    tags.extend(staff_lines_color_tags(build=build))
-    tags.extend(time_signature_color_tags(build=build))
-    return tags
 
 
 def persistent_indicator_color_suppression_tags():
@@ -483,26 +387,52 @@ def spacing_tags():
     ]
 
 
-def staff_lines_color_tags(*, build=False):
-    tags = [
-        EXPLICIT_STAFF_LINES_COLOR,
-        REAPPLIED_STAFF_LINES_COLOR,
-        REDUNDANT_STAFF_LINES_COLOR,
-    ]
-    if build is True:
-        tags.append(REAPPLIED_STAFF_LINES)
-    return tags
+# PUBLIC FUNCTIONS
 
 
-def time_signature_color_tags(*, build=False):
-    tags = [
-        EXPLICIT_TIME_SIGNATURE_COLOR,
-        REAPPLIED_TIME_SIGNATURE_COLOR,
-        REDUNDANT_TIME_SIGNATURE_COLOR,
-    ]
-    if build is True:
-        tags.append(REAPPLIED_TIME_SIGNATURE)
-    return tags
+def activate(score, *tags):
+    assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
+    for leaf in abjad.iterate.leaves(score):
+        if not isinstance(leaf, abjad.Skip):
+            continue
+        wrappers = abjad.get.wrappers(leaf)
+        for wrapper in wrappers:
+            if wrapper.tag is None:
+                continue
+            for tag in tags:
+                if tag.string in wrapper.tag.words():
+                    wrapper.deactivate = False
+                    break
+
+
+def deactivate(score, *tags):
+    assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
+    for leaf in abjad.iterate.leaves(score):
+        wrappers = abjad.get.wrappers(leaf)
+        for wrapper in wrappers:
+            if wrapper.tag is None:
+                continue
+            for tag in tags:
+                if tag.string in wrapper.tag.words():
+                    wrapper.deactivate = True
+                    break
+
+
+def has_persistence_tag(tag):
+    """
+    Is true when tag has persistence tag.
+
+    ..  container:: example
+
+        >>> baca.tags.has_persistence_tag(abjad.Tag("FOO"))
+        False
+
+    """
+    tags = persistent_indicator_tags()
+    for word in tag.words():
+        if type(tag)(word) in tags:
+            return True
+    return False
 
 
 def wrappers(wrappers: list[abjad.Wrapper], *tags: abjad.Tag):
@@ -511,11 +441,11 @@ def wrappers(wrappers: list[abjad.Wrapper], *tags: abjad.Tag):
             wrapper.tag = wrapper.tag.append(tag)
 
 
-# TODO: maybe move to build.py?
-# BUILD FUNCTIONS
+# TODO: move to build.py
+# BUILD HELPERS
 
 
-# TODO: make public or move to build.py
+# TODO: move to build.py
 def _activate_tags(
     text: str,
     match: typing.Callable,
@@ -564,7 +494,7 @@ def _activate_tags(
     return text
 
 
-# TODO: make public or move to build.py
+# TODO: move to build.py
 def _deactivate_tags(
     text: str,
     match: typing.Callable,
@@ -583,137 +513,8 @@ def _deactivate_tags(
     )
 
 
-def color_clefs(
-    text: str, messages: list[str], build: bool, *, undo: bool = False
-) -> str:
-    messages.append("Coloring clefs ...")
-    name = "clef color"
-
-    def match(tags):
-        tags_ = clef_color_tags(build=build)
-        return bool(set(tags) & set(tags_))
-
-    if not undo:
-        text = _activate_tags(text, match, name, messages)
-    else:
-        text = _deactivate_tags(text, match, name, messages)
-    messages.append("")
-    return text
-
-
-def color_dynamics(text: str, messages: list[str], *, undo: bool = False) -> str:
-    messages.append("Coloring dynamics ...")
-    name = "dynamic color"
-
-    def match(tags):
-        tags_ = dynamic_color_tags()
-        return bool(set(tags) & set(tags_))
-
-    if not undo:
-        text = _activate_tags(text, match, name, messages)
-    else:
-        text = _deactivate_tags(text, match, name, messages)
-    messages.append("")
-    return text
-
-
-def color_instruments(text: str, messages: list[str], *, undo: bool = False) -> str:
-    messages.append("Coloring instruments ...")
-    name = "instrument color"
-
-    def match(tags):
-        tags_ = instrument_color_tags()
-        return bool(set(tags) & set(tags_))
-
-    if not undo:
-        text = _activate_tags(text, match, name, messages)
-    else:
-        text = _deactivate_tags(text, match, name, messages)
-    messages.append("")
-    return text
-
-
-def color_short_instrument_names(
-    text: str, messages: list[str], *, undo: bool = False
-) -> str:
-    messages.append("Coloring short instrument names ...")
-    name = "short instrument name color"
-
-    def match(tags):
-        tags_ = short_instrument_name_color_tags()
-        return bool(set(tags) & set(tags_))
-
-    if not undo:
-        text = _activate_tags(text, match, name, messages)
-    else:
-        text = _deactivate_tags(text, match, name, messages)
-    messages.append("")
-    return text
-
-
-def color_metronome_marks(text: str, messages: list[str], *, undo: bool = False) -> str:
-    def _activate(tags):
-        tags_ = metronome_mark_color_expression_tags()
-        return bool(set(tags) & set(tags_))
-
-    def _deactivate(tags):
-        tags_ = metronome_mark_color_suppression_tags()
-        return bool(set(tags) & set(tags_))
-
-    if undo:
-        messages.append("Uncoloring metronome marks ...")
-        text = _activate_tags(
-            text, _deactivate, "metronome mark color suppression", messages
-        )
-        text = _deactivate_tags(
-            text, _activate, "metronome mark color expression", messages
-        )
-    else:
-        messages.append("Coloring metronome marks ...")
-        text = _activate_tags(
-            text, _activate, "metronome mark color experssion", messages
-        )
-        text = _deactivate_tags(
-            text, _deactivate, "metronome mark color suppression", messages
-        )
-    messages.append("")
-    return text
-
-
-def color_staff_lines(
-    text: str, messages: list[str], build: bool, *, undo: bool = False
-) -> str:
-    messages.append("Coloring staff lines ...")
-    name = "staff lines color"
-
-    def match(tags):
-        tags_ = staff_lines_color_tags(build=build)
-        return bool(set(tags) & set(tags_))
-
-    if not undo:
-        text = _activate_tags(text, match, name, messages)
-    else:
-        text = _deactivate_tags(text, match, name, messages)
-    messages.append("")
-    return text
-
-
-def color_time_signatures(
-    text: str, messages: list[str], build: bool, *, undo: bool = False
-) -> str:
-    messages.append("Coloring time signatures ...")
-    name = "time signature color"
-
-    def match(tags):
-        tags_ = time_signature_color_tags(build=build)
-        return bool(set(tags) & set(tags_))
-
-    if not undo:
-        text = _activate_tags(text, match, name, messages)
-    else:
-        text = _deactivate_tags(text, match, name, messages)
-    messages.append("")
-    return text
+# TODO: move to build.py
+# BUILD FUNCTIONS
 
 
 def handle_edition_tags(

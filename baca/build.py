@@ -40,7 +40,7 @@ def _color_persistent_indicators(
     name = "persistent indicator"
 
     def _activate(tags):
-        tags_ = baca.tags.persistent_indicator_color_expression_tags(build=build)
+        tags_ = _persistent_indicator_color_expression_tags(build=build)
         return bool(set(tags) & set(tags_))
 
     def _deactivate(tags):
@@ -389,6 +389,60 @@ def _make_section_pdf(
         _log_timing(section_directory, timing)
     if also_untagged is True and not do_not_populate_remote_repos:
         _populate_untagged_repository(section_directory)
+
+
+def _persistent_indicator_color_expression_tags(*, build=False):
+    tags = []
+    clef_color_tags = [
+        baca.tags.EXPLICIT_CLEF_COLOR,
+        baca.tags.EXPLICIT_CLEF_REDRAW_COLOR,
+        baca.tags.REAPPLIED_CLEF_COLOR,
+        baca.tags.REAPPLIED_CLEF_REDRAW_COLOR,
+        baca.tags.REDUNDANT_CLEF_COLOR,
+        baca.tags.REDUNDANT_CLEF_REDRAW_COLOR,
+    ]
+    if build is True:
+        clef_color_tags.append(baca.tags.REAPPLIED_CLEF)
+    tags.extend(clef_color_tags)
+    dynamic_color_tags = [
+        baca.tags.EXPLICIT_DYNAMIC_COLOR,
+        baca.tags.REAPPLIED_DYNAMIC,
+        baca.tags.REAPPLIED_DYNAMIC_COLOR,
+        baca.tags.REDUNDANT_DYNAMIC_COLOR,
+    ]
+    tags.extend(dynamic_color_tags)
+    tags.extend(baca.tags.instrument_color_tags())
+    metronome_mark_color_expression_tags = [
+        baca.tags.EXPLICIT_METRONOME_MARK_WITH_COLOR,
+        baca.tags.REAPPLIED_METRONOME_MARK_WITH_COLOR,
+        baca.tags.REDUNDANT_METRONOME_MARK_WITH_COLOR,
+    ]
+    tags.extend(metronome_mark_color_expression_tags)
+    ottava_color_tags = [
+        baca.tags.EXPLICIT_OTTAVA_COLOR,
+        baca.tags.REAPPLIED_OTTAVA,
+        baca.tags.REAPPLIED_OTTAVA_COLOR,
+        baca.tags.REDUNDANT_OTTAVA_COLOR,
+    ]
+    tags.extend(ottava_color_tags)
+    tags.extend(baca.tags.short_instrument_name_color_tags())
+    staff_lines_color_tags = [
+        baca.tags.EXPLICIT_STAFF_LINES_COLOR,
+        baca.tags.REAPPLIED_STAFF_LINES_COLOR,
+        baca.tags.REDUNDANT_STAFF_LINES_COLOR,
+    ]
+    if build is True:
+        staff_lines_color_tags.append(baca.tags.REAPPLIED_STAFF_LINES)
+    tags.extend(staff_lines_color_tags)
+    time_signature_color_tags = [
+        baca.tags.EXPLICIT_TIME_SIGNATURE_COLOR,
+        baca.tags.REAPPLIED_TIME_SIGNATURE_COLOR,
+        baca.tags.REDUNDANT_TIME_SIGNATURE_COLOR,
+    ]
+    if build is True:
+        time_signature_color_tags.append(baca.tags.REAPPLIED_TIME_SIGNATURE)
+    tags.extend(time_signature_color_tags)
+    return tags
 
 
 def _populate_verbose_repository(section_directory):
