@@ -17,7 +17,7 @@ def main():
     for file in sorted(pathlib.Path(directory).glob("**/*")):
         if file.suffix in (".ily", ".ly"):
             text, messages = file.read_text(), []
-            text_ = baca.tags.show_tag(text, tag, messages, undo=arguments.undo)
+            text_ = baca.build.show_tag(text, tag, messages, undo=arguments.undo)
             if text_ != text:
                 file.write_text(text_)
             if messages:

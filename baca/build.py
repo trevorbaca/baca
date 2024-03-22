@@ -10,9 +10,58 @@ import shutil
 import sys
 import time
 import types
+import typing
 
 import abjad
 import baca
+
+
+def _activate_tags(
+    text: str,
+    match: typing.Callable,
+    name: str,
+    messages: list,
+    *,
+    prepend_empty_chord: bool = False,
+    undo: bool = False,
+):
+    assert isinstance(text, str), repr(text)
+    assert callable(match), repr(match)
+    assert isinstance(messages, list), repr(messages)
+    assert isinstance(name, str), repr(name)
+    if undo:
+        text, count, skipped = abjad.deactivate(
+            text,
+            match,
+            prepend_empty_chord=prepend_empty_chord,
+        )
+    else:
+        text, count, skipped = abjad.activate(text, match)
+    if undo:
+        adjective = "inactive"
+        gerund = "deactivating"
+    else:
+        adjective = "active"
+        gerund = "activating"
+    new_messages = []
+    total = count + skipped
+    if total == 0:
+        new_messages.append(f"found no {name} tags")
+    if 0 < total:
+        tags = abjad.string.pluralize("tag", total)
+        new_messages.append(f"found {total} {name} {tags}")
+        if 0 < count:
+            tags = abjad.string.pluralize("tag", count)
+            message = f"{gerund} {count} {name} {tags}"
+            new_messages.append(message)
+        if 0 < skipped:
+            tags = abjad.string.pluralize("tag", skipped)
+            message = f"skipping {skipped} ({adjective}) {name} {tags}"
+            new_messages.append(message)
+    new_messages = [abjad.string.capitalize_start(_) + " ..." for _ in new_messages]
+    if messages is not None:
+        messages.extend(new_messages)
+    return text
 
 
 def _call_lilypond_on_music_ly_in_section(music_ly, music_pdf_mtime):
@@ -49,22 +98,40 @@ def _color_persistent_indicators(
 
     if undo:
         messages.append(f"Uncoloring {name}s ...")
-        text = baca.tags._activate_tags(
+        text = _activate_tags(
             text, _deactivate, "persistent indicator color suppression", messages
         )
-        text = baca.tags._deactivate_tags(
+        text = _deactivate_tags(
             text, _activate, "persistent indicator color expression", messages
         )
     else:
         messages.append(f"Coloring {name}s ...")
-        text = baca.tags._activate_tags(
+        text = _activate_tags(
             text, _activate, "persistent indicator color expression", messages
         )
-        text = baca.tags._deactivate_tags(
+        text = _deactivate_tags(
             text, _deactivate, "persistent indicator color suppression", messages
         )
     messages.append("")
     return text
+
+
+def _deactivate_tags(
+    text: str,
+    match: typing.Callable,
+    name: str,
+    messages: list,
+    *,
+    prepend_empty_chord: bool = False,
+):
+    return _activate_tags(
+        text,
+        match,
+        name,
+        messages=messages,
+        prepend_empty_chord=prepend_empty_chord,
+        undo=True,
+    )
 
 
 def _display_lilypond_log_errors(lilypond_log_file_path):
@@ -95,7 +162,7 @@ def _externalize_music_ly(music_ly):
     for file in (music_ly, music_ily):
         text = file.read_text()
         messages = []
-        text = baca.tags.not_topmost(text, messages)
+        text = _not_topmost(text, messages)
         file.write_text(text)
         if messages:
             messages = "\n".join(messages) + "\n"
@@ -147,6 +214,138 @@ def _get_preamble_time_signatures(path):
     return None
 
 
+def _handle_edition_tags(
+    text: str, messages: list[str], directory_name: str, my_name: str
+) -> str:
+    """
+    Handles edition tags.
+
+    The logic here is important:
+
+        * deactivations run first:
+
+            -TAG (where TAG is either my directory or my buildtype)
+
+            +TAG (where TAG is neither my directory nor my buildtype)
+
+        * activations run afterwards:
+
+            TAG_SET such that there exists at least one build-forbid -TAG (equal to
+            neither my directory nor my buildtype) in TAG_SET and such that there exists
+            no -TAG (equal to either my directory or my buildtype) in TAG_SET
+
+            +TAG (where TAG is either my directory or my buildtype)
+
+        Notionally: first we deactivate anything that is tagged EITHER specifically
+        against me OR specifically for another build; then we activate anything that is
+        deactivated for editions other than me; then we activate anything is tagged
+        specifically for me.
+
+    """
+    assert isinstance(text, str), repr(text)
+    assert isinstance(directory_name, str), repr(directory_name)
+    assert my_name in ("SECTION", "SCORE", "PARTS"), repr(my_name)
+    messages.append("Handling edition tags ...")
+    this_edition = abjad.Tag(f"+{my_name}")
+    not_this_edition = abjad.Tag(f"-{my_name}")
+    directory_name = abjad.string.to_shout_case(directory_name)
+    this_directory = abjad.Tag(f"+{directory_name}")
+    not_this_directory = abjad.Tag(f"-{directory_name}")
+
+    def _deactivate(tags):
+        if not_this_edition in tags:
+            return True
+        if not_this_directory in tags:
+            return True
+        for tag in tags:
+            if tag.string.startswith("+"):
+                return True
+        return False
+
+    text = _deactivate_tags(text, _deactivate, "other-edition", messages)
+
+    def _activate(tags):
+        for tag in tags:
+            if tag in [not_this_edition, not_this_directory]:
+                return False
+        for tag in tags:
+            if tag.string.startswith("-"):
+                return True
+        return bool(set(tags) & set([this_edition, this_directory]))
+
+    text = _activate_tags(text, _activate, "this-edition", messages)
+    messages.append("")
+    return text
+
+
+def _handle_fermata_bar_lines(
+    text: str,
+    messages: list[str],
+    bol_measure_numbers: list | None,
+    final_measure_number: int | None,
+) -> str:
+    messages.append("Handling fermata bar lines ...")
+
+    def _activate(tags):
+        return bool(set(tags) & set([baca.tags.FERMATA_MEASURE]))
+
+    # activate fermata measure bar line adjustment tags ...
+    text = _activate_tags(text, _activate, "bar line adjustment", messages)
+    # ... then deactivate non-EOL tags
+    if bol_measure_numbers:
+        eol_measure_numbers = [_ - 1 for _ in bol_measure_numbers[1:]]
+        if final_measure_number is not None:
+            eol_measure_numbers.append(final_measure_number)
+        eol_measure_numbers = [abjad.Tag(f"MEASURE_{_}") for _ in eol_measure_numbers]
+
+        def _deactivate(tags):
+            if baca.tags.FERMATA_MEASURE in tags:
+                if not bool(set(tags) & set(eol_measure_numbers)):
+                    return True
+            return False
+
+        text = _deactivate_tags(text, _deactivate, "EOL fermata bar line", messages)
+    messages.append("")
+    return text
+
+
+def _handle_mol_tags(
+    text: str,
+    messages: list[str],
+    bol_measure_numbers: list | None,
+    final_measure_number: int | None,
+) -> str:
+    messages.append("Handling MOL tags ...")
+
+    # activate all middle-of-line tags ...
+    def _activate(tags):
+        tags_ = set([baca.tags.NOT_MOL, baca.tags.ONLY_MOL])
+        return bool(set(tags) & tags_)
+
+    text = _activate_tags(text, _activate, "MOL", messages)
+    # ... then deactivate conflicting middle-of-line tags
+    if bol_measure_numbers:
+        nonmol_measure_numbers = bol_measure_numbers[:]
+        if final_measure_number is not None:
+            nonmol_measure_numbers.append(final_measure_number + 1)
+        nonmol_measure_numbers = [
+            abjad.Tag(f"MEASURE_{_}") for _ in nonmol_measure_numbers
+        ]
+
+        def _deactivate(tags):
+            if baca.tags.NOT_MOL in tags:
+                if not bool(set(tags) & set(nonmol_measure_numbers)):
+                    return True
+            if baca.tags.ONLY_MOL in tags:
+                if bool(set(tags) & set(nonmol_measure_numbers)):
+                    return True
+            return False
+
+        text = _deactivate_tags(text, _deactivate, "conflicting MOL", messages)
+    messages.append("")
+    return text
+
+
 def _handle_section_tags(section_directory):
     assert section_directory.is_dir()
     print_file_handling("Writing section tag files ...")
@@ -167,14 +366,12 @@ def _handle_section_tags(section_directory):
         _tags_file = music_ly.with_name(f".{name}.tags")
         messages = []
         text = path.read_text()
-        text = baca.tags.handle_edition_tags(
-            text, messages, section_directory.name, "SECTION"
-        )
-        text = baca.tags.handle_fermata_bar_lines(
+        text = _handle_edition_tags(text, messages, section_directory.name, "SECTION")
+        text = _handle_fermata_bar_lines(
             text, messages, bol_measure_numbers, final_measure_number
         )
-        text = baca.tags.handle_shifted_clefs(text, messages, bol_measure_numbers)
-        text = baca.tags.handle_mol_tags(
+        text = _handle_shifted_clefs(text, messages, bol_measure_numbers)
+        text = _handle_mol_tags(
             text, messages, bol_measure_numbers, final_measure_number
         )
         path.write_text(text)
@@ -184,6 +381,49 @@ def _handle_section_tags(section_directory):
         text = "\n".join(messages) + "\n"
         with _tags_file.open("a") as pointer:
             pointer.write(text)
+
+
+def _handle_shifted_clefs(
+    text: str, messages: list[str], bol_measure_numbers: list | None
+) -> str:
+    messages.append("Handling shifted clefs ...")
+
+    def _activate(tags):
+        return baca.tags.SHIFTED_CLEF in tags
+
+    # set X-extent to false and left-shift measure-initial clefs ...
+    text = _activate_tags(text, _activate, "shifted clef", messages)
+    # ... then unshift clefs at beginning-of-line
+    if bol_measure_numbers:
+        bol_measure_numbers = [abjad.Tag(f"MEASURE_{_}") for _ in bol_measure_numbers]
+
+        def _deactivate(tags):
+            if baca.tags.SHIFTED_CLEF not in tags:
+                return False
+            if any(_ in tags for _ in bol_measure_numbers):
+                return True
+            return False
+
+        text = _deactivate_tags(text, _deactivate, "BOL clef", messages)
+    messages.append("")
+    return text
+
+
+def _join_broken_spanners(text: str, messages: list[str]) -> str:
+    messages.append("Joining broken spanners ...")
+
+    def _activate(tags):
+        tags_ = [baca.tags.SHOW_TO_JOIN_BROKEN_SPANNERS]
+        return bool(set(tags) & set(tags_))
+
+    def _deactivate(tags):
+        tags_ = [baca.tags.HIDE_TO_JOIN_BROKEN_SPANNERS]
+        return bool(set(tags) & set(tags_))
+
+    text = _activate_tags(text, _activate, "broken spanner expression", messages)
+    text = _deactivate_tags(text, _deactivate, "broken spanner suppression", messages)
+    messages.append("")
+    return text
 
 
 def _log_timing(section_directory, timing):
@@ -389,6 +629,38 @@ def _make_section_pdf(
         _log_timing(section_directory, timing)
     if also_untagged is True and not do_not_populate_remote_repos:
         _populate_untagged_repository(section_directory)
+
+
+def _music_annotation_tags():
+    return [
+        baca.tags.CLOCK_TIME,
+        baca.tags.FIGURE_LABEL,
+        baca.tags.INVISIBLE_MUSIC_COLORING,
+        baca.tags.LOCAL_MEASURE_NUMBER,
+        baca.tags.MATERIAL_ANNOTATION_MARKUP,
+        baca.tags.MATERIAL_ANNOTATION_SPANNER,
+        baca.tags.MOCK_COLORING,
+        baca.tags.MOMENT_ANNOTATION_SPANNER,
+        baca.tags.NOT_YET_PITCHED_COLORING,
+        baca.tags.OCTAVE_COLORING,
+        baca.tags.REPEAT_PITCH_CLASS_COLORING,
+        baca.tags.SPACING,
+        baca.tags.SPACING_OVERRIDE,
+        baca.tags.STAFF_HIGHLIGHT,
+        baca.tags.STAGE_NUMBER,
+    ]
+
+
+def _not_topmost(text: str, messages: list[str]) -> str:
+    messages.append(f"Deactivating {baca.tags.NOT_TOPMOST.string} ...")
+
+    def _deactivate(tags):
+        tags_ = [baca.tags.NOT_TOPMOST]
+        return bool(set(tags) & set(tags_))
+
+    text = _deactivate_tags(text, _deactivate, "not topmost", messages)
+    messages.append("")
+    return text
 
 
 def _persistent_indicator_color_expression_tags(*, build=False):
@@ -609,6 +881,31 @@ def _remove_site_comments(section_directory):
         if not path.exists():
             continue
         remove_site_comments(path)
+
+
+def _show_music_annotations(
+    text: str, messages: list[str], *, undo: bool = False
+) -> str:
+    name = "music annotation"
+
+    def match(tags):
+        tags_ = _music_annotation_tags()
+        return bool(set(tags) & set(tags_))
+
+    def match_2(tags):
+        tags_ = [baca.tags.INVISIBLE_MUSIC_COMMAND]
+        return bool(set(tags) & set(tags_))
+
+    if not undo:
+        messages.append(f"Showing {name}s ...")
+        text = _activate_tags(text, match, name, messages)
+        text = _deactivate_tags(text, match_2, name, messages)
+    else:
+        messages.append(f"Hiding {name}s ...")
+        text = _activate_tags(text, match_2, name, messages)
+        text = _deactivate_tags(text, match, name, messages)
+    messages.append("")
+    return text
 
 
 def _trim_music_ly(ly):
@@ -886,19 +1183,19 @@ def handle_build_tags(_sections_directory):
             assert "-parts" in str(file)
             my_name = "PARTS"
         text = file.read_text()
-        text = baca.tags.handle_edition_tags(text, messages, "_sections", my_name)
-        text = baca.tags.handle_fermata_bar_lines(
+        text = _handle_edition_tags(text, messages, "_sections", my_name)
+        text = _handle_fermata_bar_lines(
             text, messages, bol_measure_numbers, final_measure_number
         )
-        text = baca.tags.handle_shifted_clefs(text, messages, bol_measure_numbers)
-        text = baca.tags.handle_mol_tags(
+        text = _handle_shifted_clefs(text, messages, bol_measure_numbers)
+        text = _handle_mol_tags(
             text, messages, bol_measure_numbers, final_measure_number
         )
         build = "builds" in file.parts
         text = _color_persistent_indicators(text, messages, build, undo=True)
-        text = baca.tags.show_music_annotations(text, messages, undo=True)
-        text = baca.tags.join_broken_spanners(text, messages)
-        text = baca.tags.show_tag(
+        text = _show_music_annotations(text, messages, undo=True)
+        text = _join_broken_spanners(text, messages)
+        text = show_tag(
             text,
             "left-broken-should-deactivate",
             messages,
@@ -906,47 +1203,47 @@ def handle_build_tags(_sections_directory):
             undo=True,
         )
         if file.name != final_ily_name:
-            text = baca.tags.show_tag(text, baca.tags.ANCHOR_NOTE, messages)
-            text = baca.tags.show_tag(text, baca.tags.ANCHOR_SKIP, messages)
-            text = baca.tags.show_tag(
+            text = show_tag(text, baca.tags.ANCHOR_NOTE, messages)
+            text = show_tag(text, baca.tags.ANCHOR_SKIP, messages)
+            text = show_tag(
                 text,
                 baca.tags.ANCHOR_NOTE,
                 messages,
                 prepend_empty_chord=True,
                 undo=True,
             )
-            text = baca.tags.show_tag(
+            text = show_tag(
                 text,
                 baca.tags.ANCHOR_SKIP,
                 messages,
                 prepend_empty_chord=True,
                 undo=True,
             )
-            text = baca.tags.show_tag(
+            text = show_tag(
                 text,
                 "anchor-should-activate",
                 messages,
                 match=match_anchor_should_activate,
             )
-            text = baca.tags.show_tag(
+            text = show_tag(
                 text,
                 "anchor-should-deactivate",
                 messages,
                 match=match_anchor_should_deactivate,
                 undo=True,
             )
-            text = baca.tags.show_tag(
+            text = show_tag(
                 text,
                 baca.tags.EOS_STOP_MM_SPANNER,
                 messages,
             )
-        text = baca.tags.show_tag(
+        text = show_tag(
             text,
             baca.tags.METRIC_MODULATION_IS_STRIPPED,
             messages,
             undo=True,
         )
-        text = baca.tags.show_tag(
+        text = show_tag(
             text,
             baca.tags.METRIC_MODULATION_IS_SCALED,
             messages,
@@ -1374,7 +1671,7 @@ def show_annotations(file, *, undo=False):
         return bool(set(tags) & set(tags_))
 
     text = file.read_text()
-    text = baca.tags.show_tag(
+    text = show_tag(
         text,
         "annotation spanners",
         messages,
@@ -1389,25 +1686,59 @@ def show_annotations(file, *, undo=False):
         )
         return bool(set(tags) & set(tags_))
 
-    text = baca.tags.show_tag(text, baca.tags.CLOCK_TIME, messages, undo=undo)
-    text = baca.tags.show_tag(text, baca.tags.FIGURE_LABEL, messages, undo=undo)
-    text = baca.tags.show_tag(
-        text, baca.tags.INVISIBLE_MUSIC_COMMAND, messages, undo=not undo
-    )
-    text = baca.tags.show_tag(
-        text, baca.tags.INVISIBLE_MUSIC_COLORING, messages, undo=undo
-    )
-    text = baca.tags.show_tag(text, baca.tags.LOCAL_MEASURE_NUMBER, messages, undo=undo)
-    text = baca.tags.show_tag(text, baca.tags.MEASURE_NUMBER, messages, undo=undo)
-    text = baca.tags.show_tag(text, baca.tags.MOCK_COLORING, messages, undo=undo)
-    text = text = baca.tags.show_music_annotations(text, messages, undo=undo)
-    text = baca.tags.show_tag(
-        text, baca.tags.NOT_YET_PITCHED_COLORING, messages, undo=undo
-    )
-    text = baca.tags.show_tag(text, "spacing", messages, match=_spacing, undo=undo)
-    text = baca.tags.show_tag(text, baca.tags.STAGE_NUMBER, messages, undo=undo)
+    text = show_tag(text, baca.tags.CLOCK_TIME, messages, undo=undo)
+    text = show_tag(text, baca.tags.FIGURE_LABEL, messages, undo=undo)
+    text = show_tag(text, baca.tags.INVISIBLE_MUSIC_COMMAND, messages, undo=not undo)
+    text = show_tag(text, baca.tags.INVISIBLE_MUSIC_COLORING, messages, undo=undo)
+    text = show_tag(text, baca.tags.LOCAL_MEASURE_NUMBER, messages, undo=undo)
+    text = show_tag(text, baca.tags.MEASURE_NUMBER, messages, undo=undo)
+    text = show_tag(text, baca.tags.MOCK_COLORING, messages, undo=undo)
+    text = text = _show_music_annotations(text, messages, undo=undo)
+    text = show_tag(text, baca.tags.NOT_YET_PITCHED_COLORING, messages, undo=undo)
+    text = show_tag(text, "spacing", messages, match=_spacing, undo=undo)
+    text = show_tag(text, baca.tags.STAGE_NUMBER, messages, undo=undo)
     file.write_text(text)
     return messages
+
+
+def show_tag(
+    text: str,
+    tag: abjad.Tag | str,
+    messages: list[str],
+    *,
+    match: typing.Callable | None = None,
+    prepend_empty_chord: bool = False,
+    undo: bool = False,
+) -> str:
+    if match is not None:
+        assert callable(match)
+    if isinstance(tag, str):
+        assert match is not None, repr(match)
+        name = tag
+    else:
+        assert isinstance(tag, abjad.Tag), repr(tag)
+        name = tag.string
+
+    if match is None:
+
+        def match(tags):
+            tags_ = [tag]
+            return bool(set(tags) & set(tags_))
+
+    if not undo:
+        messages.append(f"Showing {name} tags ...")
+        text = _activate_tags(text, match, name, messages)
+    else:
+        messages.append(f"Hiding {name} tags ...")
+        text = _deactivate_tags(
+            text,
+            match,
+            name,
+            messages,
+            prepend_empty_chord=prepend_empty_chord,
+        )
+    messages.append("")
+    return text
 
 
 def timed(timing_attribute):

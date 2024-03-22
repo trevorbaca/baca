@@ -23,7 +23,7 @@ def test_metronome_mark_color_suppression_tags():
 
 def test_music_annotation_tags():
 
-    assert baca.tags.music_annotation_tags() == [
+    assert baca.build._music_annotation_tags() == [
         baca.tags.CLOCK_TIME,
         baca.tags.FIGURE_LABEL,
         baca.tags.INVISIBLE_MUSIC_COLORING,
@@ -150,7 +150,7 @@ def test_persistent_indicator_color_suppression_tags():
 
 def test_persistent_indicator_tags():
 
-    assert baca.tags.persistent_indicator_tags() == [
+    assert baca.section._persistent_indicator_tags() == [
         baca.tags.EXPLICIT_CLEF,
         baca.tags.REAPPLIED_CLEF,
         baca.tags.REDUNDANT_CLEF,

@@ -1236,6 +1236,47 @@ def _move_global_rests(
             topmost_staff = False
 
 
+def _persistent_indicator_tags():
+    return [
+        _tags.EXPLICIT_CLEF,
+        _tags.REAPPLIED_CLEF,
+        _tags.REDUNDANT_CLEF,
+        #
+        _tags.EXPLICIT_DYNAMIC,
+        _tags.REAPPLIED_DYNAMIC,
+        _tags.REDUNDANT_DYNAMIC,
+        #
+        _tags.EXPLICIT_INSTRUMENT,
+        _tags.REAPPLIED_INSTRUMENT,
+        _tags.REDUNDANT_INSTRUMENT,
+        #
+        _tags.EXPLICIT_SHORT_INSTRUMENT_NAME,
+        _tags.REAPPLIED_SHORT_INSTRUMENT_NAME,
+        _tags.REDUNDANT_SHORT_INSTRUMENT_NAME,
+        #
+        _tags.EXPLICIT_METRONOME_MARK,
+        _tags.REAPPLIED_METRONOME_MARK,
+        _tags.REDUNDANT_METRONOME_MARK,
+        #
+        _tags.EXPLICIT_OTTAVA,
+        _tags.REAPPLIED_OTTAVA,
+        _tags.REDUNDANT_OTTAVA,
+        #
+        _tags.EXPLICIT_PERSISTENT_OVERRIDE,
+        _tags.REAPPLIED_PERSISTENT_OVERRIDE,
+        _tags.REDUNDANT_PERSISTENT_OVERRIDE,
+        #
+        _tags.EXPLICIT_STAFF_LINES,
+        _tags.REAPPLIED_STAFF_LINES,
+        _tags.REDUNDANT_STAFF_LINES,
+        #
+        _tags.EXPLICIT_TIME_SIGNATURE,
+        _tags.REAPPLIED_TIME_SIGNATURE,
+        _tags.REDUNDANT_TIME_SIGNATURE,
+        #
+    ]
+
+
 def _populate_offset_to_measure_number(first_measure_number, global_skips):
     measure_number = first_measure_number
     offset_to_measure_number = {}
@@ -3020,12 +3061,20 @@ def treat_untreated_persistent_wrappers(score, *, manifests=None):
         abjad.MetronomeMark,
         _classes.Ritardando,
     )
+
+    def has_persistence_tag(tag):
+        tags = _persistent_indicator_tags()
+        for word in tag.words():
+            if type(tag)(word) in tags:
+                return True
+        return False
+
     for leaf in abjad.iterate.leaves(score):
         for wrapper in abjad.get.wrappers(leaf):
             indicator = wrapper.unbundle_indicator()
             if not getattr(indicator, "persistent", False):
                 continue
-            if wrapper.tag and _tags.has_persistence_tag(wrapper.tag):
+            if wrapper.tag and has_persistence_tag(wrapper.tag):
                 continue
             if isinstance(indicator, abjad.Instrument):
                 prototype = abjad.Instrument
