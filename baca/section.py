@@ -2077,6 +2077,20 @@ def get_voice_names(score):
     return tuple(voice_names)
 
 
+def instrument_color_tags():
+    return [
+        _tags.EXPLICIT_INSTRUMENT_ALERT,
+        _tags.EXPLICIT_INSTRUMENT_COLOR,
+        _tags.REAPPLIED_INSTRUMENT_COLOR,
+        _tags.REAPPLIED_INSTRUMENT_ALERT,
+        _tags.REDRAWN_EXPLICIT_INSTRUMENT_COLOR,
+        _tags.REDRAWN_REAPPLIED_INSTRUMENT_COLOR,
+        _tags.REDUNDANT_INSTRUMENT_ALERT,
+        _tags.REDUNDANT_INSTRUMENT_COLOR,
+        _tags.REDRAWN_REDUNDANT_INSTRUMENT_COLOR,
+    ]
+
+
 def label_moment_numbers(global_skips, moment_markup):
     if not moment_markup:
         return
@@ -2467,8 +2481,8 @@ def postprocess_score(
             )
             _tags.deactivate(
                 score,
-                *_tags.instrument_color_tags(),
-                *_tags.short_instrument_name_color_tags(),
+                *instrument_color_tags(),
+                *short_instrument_name_color_tags(),
             )
         _reanalyze_trending_dynamics(manifests, score)
         _reanalyze_reapplied_synthetic_wrappers(score)
@@ -2682,6 +2696,22 @@ def set_up_score(
     if score_persistent_indicators:
         contexts = abjad.select.components(score, abjad.Context)
         _reapply_persistent_indicators(contexts, manifests, score_persistent_indicators)
+
+
+def short_instrument_name_color_tags():
+    return [
+        _tags.EXPLICIT_SHORT_INSTRUMENT_NAME_ALERT,
+        _tags.EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR,
+        _tags.REAPPLIED_SHORT_INSTRUMENT_NAME_ALERT,
+        _tags.REAPPLIED_SHORT_INSTRUMENT_NAME_COLOR,
+        _tags.REDRAWN_EXPLICIT_SHORT_INSTRUMENT_NAME,
+        _tags.REDRAWN_EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR,
+        _tags.REDRAWN_REAPPLIED_SHORT_INSTRUMENT_NAME,
+        _tags.REDRAWN_REAPPLIED_SHORT_INSTRUMENT_NAME_COLOR,
+        _tags.REDUNDANT_SHORT_INSTRUMENT_NAME_ALERT,
+        _tags.REDUNDANT_SHORT_INSTRUMENT_NAME_COLOR,
+        _tags.REDRAWN_REDUNDANT_SHORT_INSTRUMENT_NAME_COLOR,
+    ]
 
 
 def sort_dictionary(dictionary):

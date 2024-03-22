@@ -687,7 +687,7 @@ def _persistent_indicator_color_expression_tags(*, build=False):
         baca.tags.REDUNDANT_DYNAMIC_COLOR,
     ]
     tags.extend(dynamic_color_tags)
-    tags.extend(baca.tags.instrument_color_tags())
+    tags.extend(baca.section.instrument_color_tags())
     metronome_mark_color_expression_tags = [
         baca.tags.EXPLICIT_METRONOME_MARK_WITH_COLOR,
         baca.tags.REAPPLIED_METRONOME_MARK_WITH_COLOR,
@@ -701,7 +701,7 @@ def _persistent_indicator_color_expression_tags(*, build=False):
         baca.tags.REDUNDANT_OTTAVA_COLOR,
     ]
     tags.extend(ottava_color_tags)
-    tags.extend(baca.tags.short_instrument_name_color_tags())
+    tags.extend(baca.section.short_instrument_name_color_tags())
     staff_lines_color_tags = [
         baca.tags.EXPLICIT_STAFF_LINES_COLOR,
         baca.tags.REAPPLIED_STAFF_LINES_COLOR,
