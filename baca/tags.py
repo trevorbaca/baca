@@ -296,8 +296,6 @@ def short_instrument_name_color_tags():
 def activate(score, *tags):
     assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
     for leaf in abjad.iterate.leaves(score):
-        if not isinstance(leaf, abjad.Skip):
-            continue
         wrappers = abjad.get.wrappers(leaf)
         for wrapper in wrappers:
             if wrapper.tag is None:

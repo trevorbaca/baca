@@ -2465,6 +2465,12 @@ def postprocess_score(
                 score["Skips"],
                 parts_metric_modulation_multiplier=parts_metric_modulation_multiplier,
             )
+            # TODO: make this work:
+            # _tags.deactivate(
+            #     score,
+            #     *_tags.instrument_color_tags(),
+            #     *_tags.short_instrument_name_color_tags(),
+            # )
         _reanalyze_trending_dynamics(manifests, score)
         _reanalyze_reapplied_synthetic_wrappers(score)
         if not do_not_transpose_score:
