@@ -258,32 +258,7 @@ REDUNDANT_TIME_SIGNATURE = abjad.Tag("REDUNDANT_TIME_SIGNATURE")
 REDUNDANT_TIME_SIGNATURE_COLOR = abjad.Tag("REDUNDANT_TIME_SIGNATURE_COLOR")
 
 
-def activate(score, *tags):
-    assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
-    for leaf in abjad.iterate.leaves(score):
-        wrappers = abjad.get.wrappers(leaf)
-        for wrapper in wrappers:
-            if wrapper.tag is None:
-                continue
-            for tag in tags:
-                if tag.string in wrapper.tag.words():
-                    wrapper.deactivate = False
-                    break
-
-
-def deactivate(score, *tags):
-    assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
-    for leaf in abjad.iterate.leaves(score):
-        wrappers = abjad.get.wrappers(leaf)
-        for wrapper in wrappers:
-            if wrapper.tag is None:
-                continue
-            for tag in tags:
-                if tag.string in wrapper.tag.words():
-                    wrapper.deactivate = True
-                    break
-
-
+# TODO: change to tag_wrappers()
 def wrappers(wrappers: list[abjad.Wrapper], *tags: abjad.Tag):
     for wrapper in wrappers:
         for tag in tags:

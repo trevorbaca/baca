@@ -1848,6 +1848,19 @@ class VoiceCache:
         return iter(self._voices)
 
 
+def activate_tags(score, *tags):
+    assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
+    for leaf in abjad.iterate.leaves(score):
+        wrappers = abjad.get.wrappers(leaf)
+        for wrapper in wrappers:
+            if wrapper.tag is None:
+                continue
+            for tag in tags:
+                if tag.string in wrapper.tag.words():
+                    wrapper.deactivate = False
+                    break
+
+
 def append_anchor_note(argument, *, runtime=None):
     leaf = abjad.get.leaf(argument, 0)
     parentage = abjad.get.parentage(leaf)
@@ -2054,6 +2067,19 @@ def color_repeat_pitch_classes(score):
             string = r"\baca-repeat-pitch-class-coloring"
             literal = abjad.LilyPondLiteral(string, site="before")
             abjad.attach(literal, leaf, tag=tag)
+
+
+def deactivate_tags(score, *tags):
+    assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
+    for leaf in abjad.iterate.leaves(score):
+        wrappers = abjad.get.wrappers(leaf)
+        for wrapper in wrappers:
+            if wrapper.tag is None:
+                continue
+            for tag in tags:
+                if tag.string in wrapper.tag.words():
+                    wrapper.deactivate = True
+                    break
 
 
 def extend_beams(score):
@@ -2479,7 +2505,7 @@ def postprocess_score(
                 score["Skips"],
                 parts_metric_modulation_multiplier=parts_metric_modulation_multiplier,
             )
-            _tags.deactivate(
+            deactivate_tags(
                 score,
                 *instrument_color_tags(),
                 *short_instrument_name_color_tags(),
