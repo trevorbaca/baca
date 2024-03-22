@@ -258,8 +258,7 @@ REDUNDANT_TIME_SIGNATURE = abjad.Tag("REDUNDANT_TIME_SIGNATURE")
 REDUNDANT_TIME_SIGNATURE_COLOR = abjad.Tag("REDUNDANT_TIME_SIGNATURE_COLOR")
 
 
-# TODO: change to tag_wrappers()
-def wrappers(wrappers: list[abjad.Wrapper], *tags: abjad.Tag):
+def tag(wrappers: list[abjad.Wrapper], *tags: abjad.Tag):
     for wrapper in wrappers:
         for tag in tags:
             wrapper.tag = wrapper.tag.append(tag)

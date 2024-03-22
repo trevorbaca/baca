@@ -38,7 +38,7 @@ def beam(
             stop_beam,
         )
         wrappers.append(wrapper)
-    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
+    _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 
@@ -69,7 +69,7 @@ def slur(
             stop_slur_,
         )
         wrappers.append(wrapper)
-    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
+    _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 
@@ -95,5 +95,5 @@ def sustain_pedal(
             stop_piano_pedal,
         )
         wrappers.append(wrapper)
-    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
+    _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers

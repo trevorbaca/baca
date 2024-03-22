@@ -44,7 +44,7 @@ def bcps(
 ) -> list[abjad.Wrapper]:
     wrappers: list[abjad.Wrapper] = []
     tag = _helpers.function_name(_frame())
-    _tags.wrappers(wrappers, tag)
+    _tags.tag(wrappers, tag)
     bcps_ = list(bcps)
     bcps_ = helper(bcps_, argument)
     bcps = abjad.CyclicTuple(bcps_)

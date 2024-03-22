@@ -96,7 +96,7 @@ class HairpinSpecifier:
                 right_broken=right_broken,
             )
             wrappers.append(wrapper)
-        _tags.wrappers(wrappers, _helpers.function_name(_frame()))
+        _tags.tag(wrappers, _helpers.function_name(_frame()))
         return wrappers
 
 
@@ -109,7 +109,7 @@ def _bookend_final_cyclic_piece(
         tweaks,
         total_pieces,
     )
-    _tags.wrappers(wrappers_, _helpers.function_name(_frame()))
+    _tags.tag(wrappers_, _helpers.function_name(_frame()))
     return wrappers_
 
 
@@ -180,7 +180,7 @@ def _iterate_cyclic_hairpin_pieces(
                 total_pieces,
             )
             wrappers.extend(wrappers_)
-    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
+    _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 
@@ -216,7 +216,7 @@ def cyclic(
         right_broken=right_broken,
         specifiers=specifiers,
     )
-    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
+    _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 
@@ -308,7 +308,7 @@ def hairpin(
                 specifier.stop_indicator,
             )
             wrappers.extend(wrappers_)
-    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
+    _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 

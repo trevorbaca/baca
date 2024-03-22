@@ -66,7 +66,7 @@ def bow_speed(
             specifiers=specifiers,
             staff_padding=staff_padding,
         )
-    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
+    _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 
@@ -121,7 +121,7 @@ def circle_bow(
             specifiers=specifiers,
             staff_padding=staff_padding,
         )
-    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
+    _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 
@@ -181,7 +181,7 @@ def scp(
             specifiers=specifiers,
             staff_padding=staff_padding,
         )
-    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
+    _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 
@@ -245,7 +245,7 @@ def text(
             specifiers=specifiers,
             staff_padding=staff_padding,
         )
-    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
+    _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 
@@ -301,5 +301,5 @@ def vibrato(
             specifiers=specifiers,
             staff_padding=staff_padding,
         )
-    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
+    _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers

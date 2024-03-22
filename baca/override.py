@@ -275,7 +275,7 @@ def clef_shift(
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
     wrappers = []
     wrappers_ = clef_x_extent_false(argument)
-    _tags.wrappers(wrappers_, _tags.SHIFTED_CLEF, measure_number_tag)
+    _tags.tag(wrappers_, _tags.SHIFTED_CLEF, measure_number_tag)
     wrappers.extend(wrappers_)
     extra_offset_x: int | float
     if isinstance(clef, str):
@@ -288,7 +288,7 @@ def clef_shift(
         extra_offset_x = -width
     pair = (extra_offset_x, 0)
     wrappers_ = clef_extra_offset(argument, pair)
-    _tags.wrappers(wrappers_, _tags.SHIFTED_CLEF, measure_number_tag)
+    _tags.tag(wrappers_, _tags.SHIFTED_CLEF, measure_number_tag)
     wrappers.extend(wrappers_)
     return wrappers
 

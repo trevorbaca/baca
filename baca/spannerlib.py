@@ -39,7 +39,7 @@ def attach_spanner_start(
     tag = _helpers.function_name(_frame())
     if left_broken:
         tag = tag.append(_tags.LEFT_BROKEN)
-    _tags.wrappers([wrapper], tag)
+    _tags.tag([wrapper], tag)
     return wrapper
 
 
@@ -58,5 +58,5 @@ def attach_spanner_stop(
     tag = _helpers.function_name(_frame())
     if right_broken:
         tag = tag.append(_tags.RIGHT_BROKEN)
-    _tags.wrappers([wrapper], tag)
+    _tags.tag([wrapper], tag)
     return wrapper

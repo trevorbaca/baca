@@ -221,7 +221,7 @@ def close_volta(
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
     # TODO: make this override visible to the composer:
     wrappers_ = _override.bar_line_x_extent([skip], (0, 1.5), after=after)
-    _tags.wrappers(wrappers_, tag, measure_number_tag, _tags.ONLY_MOL)
+    _tags.tag(wrappers_, tag, measure_number_tag, _tags.ONLY_MOL)
     wrappers.extend(wrappers_)
     return wrappers
 
@@ -318,11 +318,11 @@ def double_volta(skip, first_measure_number) -> list[abjad.Wrapper]:
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
     # TODO: make this override visible to the composer:
     wrappers_ = _override.bar_line_x_extent([skip], (0, 3))
-    _tags.wrappers(wrappers_, tag, _tags.NOT_MOL, measure_number_tag)
+    _tags.tag(wrappers_, tag, _tags.NOT_MOL, measure_number_tag)
     wrappers.extend(wrappers_)
     # TODO: make this override visible to the composer:
     wrappers_ = _override.bar_line_x_extent([skip], (0, 4))
-    _tags.wrappers(wrappers_, tag, _tags.ONLY_MOL, measure_number_tag)
+    _tags.tag(wrappers_, tag, _tags.ONLY_MOL, measure_number_tag)
     wrappers.extend(wrappers_)
     return wrappers
 
@@ -406,7 +406,7 @@ def dynamic(
             indicator,
         )
         wrappers.append(wrapper)
-    _tags.wrappers(wrappers, _helpers.function_name(_frame()))
+    _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
 
@@ -445,10 +445,10 @@ def edition(argument, *, not_parts: str, only_parts: str) -> list[abjad.Wrapper]
     assert isinstance(only_parts, str), repr(only_parts)
     wrappers = []
     wrappers_ = markup(argument, not_parts)
-    _tags.wrappers(wrappers_, _tags.NOT_PARTS)
+    _tags.tag(wrappers_, _tags.NOT_PARTS)
     wrappers.extend(wrappers_)
     wrappers_ = markup(argument, only_parts)
-    _tags.wrappers(wrappers_, _tags.ONLY_PARTS)
+    _tags.tag(wrappers_, _tags.ONLY_PARTS)
     wrappers.extend(wrappers_)
     return wrappers
 
@@ -844,11 +844,11 @@ def open_volta(skip, first_measure_number) -> list[abjad.Wrapper]:
     measure_number_tag = abjad.Tag(f"MEASURE_{measure_number}")
     # TODO: make this override visible to the composer:
     wrappers_ = _override.bar_line_x_extent([skip], (0, 2))
-    _tags.wrappers(wrappers_, tag, _tags.NOT_MOL, measure_number_tag)
+    _tags.tag(wrappers_, tag, _tags.NOT_MOL, measure_number_tag)
     wrappers.extend(wrappers_)
     # TODO: make this override visible to the composer:
     wrappers_ = _override.bar_line_x_extent([skip], (0, 3))
-    _tags.wrappers(wrappers_, tag, _tags.ONLY_MOL, measure_number_tag)
+    _tags.tag(wrappers_, tag, _tags.ONLY_MOL, measure_number_tag)
     wrappers.extend(wrappers_)
     return wrappers
 
