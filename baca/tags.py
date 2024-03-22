@@ -274,27 +274,6 @@ def instrument_color_tags():
     ]
 
 
-def layout_removal_tags():
-    return [
-        EXPLICIT_TIME_SIGNATURE_COLOR,
-        LOCAL_MEASURE_NUMBER,
-        MEASURE_NUMBER,
-        RED_START_BAR,
-        REDUNDANT_TIME_SIGNATURE_COLOR,
-        STAGE_NUMBER,
-    ]
-
-
-def metronome_mark_color_suppression_tags():
-    return [EXPLICIT_METRONOME_MARK, REDUNDANT_METRONOME_MARK]
-
-
-def persistent_indicator_color_suppression_tags():
-    tags = []
-    tags.extend(metronome_mark_color_suppression_tags())
-    return tags
-
-
 def short_instrument_name_color_tags():
     return [
         EXPLICIT_SHORT_INSTRUMENT_NAME_ALERT,
@@ -308,19 +287,6 @@ def short_instrument_name_color_tags():
         REDUNDANT_SHORT_INSTRUMENT_NAME_ALERT,
         REDUNDANT_SHORT_INSTRUMENT_NAME_COLOR,
         REDRAWN_REDUNDANT_SHORT_INSTRUMENT_NAME_COLOR,
-    ]
-
-
-def spacing_markup_tags():
-    return [SPACING, SPACING_OVERRIDE]
-
-
-def spacing_tags():
-    return [
-        SPACING_COMMAND,
-        SPACING,
-        SPACING_OVERRIDE_COMMAND,
-        SPACING_OVERRIDE,
     ]
 
 

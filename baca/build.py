@@ -93,7 +93,7 @@ def _color_persistent_indicators(
         return bool(set(tags) & set(tags_))
 
     def _deactivate(tags):
-        tags_ = baca.tags.persistent_indicator_color_suppression_tags()
+        tags_ = _persistent_indicator_color_suppression_tags()
         return bool(set(tags) & set(tags_))
 
     if undo:
@@ -631,6 +631,10 @@ def _make_section_pdf(
         _populate_untagged_repository(section_directory)
 
 
+def _metronome_mark_color_suppression_tags():
+    return [baca.tags.EXPLICIT_METRONOME_MARK, baca.tags.REDUNDANT_METRONOME_MARK]
+
+
 def _music_annotation_tags():
     return [
         baca.tags.CLOCK_TIME,
@@ -714,6 +718,12 @@ def _persistent_indicator_color_expression_tags(*, build=False):
     if build is True:
         time_signature_color_tags.append(baca.tags.REAPPLIED_TIME_SIGNATURE)
     tags.extend(time_signature_color_tags)
+    return tags
+
+
+def _persistent_indicator_color_suppression_tags():
+    tags = []
+    tags.extend(_metronome_mark_color_suppression_tags())
     return tags
 
 

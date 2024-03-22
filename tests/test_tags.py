@@ -3,7 +3,7 @@ import baca
 
 def test_layout_removal_tags():
 
-    assert baca.tags.layout_removal_tags() == [
+    assert baca.section._layout_removal_tags() == [
         baca.tags.EXPLICIT_TIME_SIGNATURE_COLOR,
         baca.tags.LOCAL_MEASURE_NUMBER,
         baca.tags.MEASURE_NUMBER,
@@ -15,7 +15,7 @@ def test_layout_removal_tags():
 
 def test_metronome_mark_color_suppression_tags():
 
-    assert baca.tags.metronome_mark_color_suppression_tags() == [
+    assert baca.build._metronome_mark_color_suppression_tags() == [
         baca.tags.EXPLICIT_METRONOME_MARK,
         baca.tags.REDUNDANT_METRONOME_MARK,
     ]
@@ -142,7 +142,7 @@ def test_persistent_indicator_color_expression_tags():
 
 def test_persistent_indicator_color_suppression_tags():
 
-    assert baca.tags.persistent_indicator_color_suppression_tags() == [
+    assert baca.build._persistent_indicator_color_suppression_tags() == [
         baca.tags.EXPLICIT_METRONOME_MARK,
         baca.tags.REDUNDANT_METRONOME_MARK,
     ]
@@ -178,22 +178,4 @@ def test_persistent_indicator_tags():
         baca.tags.EXPLICIT_TIME_SIGNATURE,
         baca.tags.REAPPLIED_TIME_SIGNATURE,
         baca.tags.REDUNDANT_TIME_SIGNATURE,
-    ]
-
-
-def test_spacing_markup_tags():
-
-    assert baca.tags.spacing_markup_tags() == [
-        baca.tags.SPACING,
-        baca.tags.SPACING_OVERRIDE,
-    ]
-
-
-def test_spacing_tags():
-
-    assert baca.tags.spacing_tags() == [
-        baca.tags.SPACING_COMMAND,
-        baca.tags.SPACING,
-        baca.tags.SPACING_OVERRIDE_COMMAND,
-        baca.tags.SPACING_OVERRIDE,
     ]

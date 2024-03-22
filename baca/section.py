@@ -1095,6 +1095,17 @@ def _label_measure_numbers(first_measure_number, global_skips):
             )
 
 
+def _layout_removal_tags():
+    return [
+        _tags.EXPLICIT_TIME_SIGNATURE_COLOR,
+        _tags.LOCAL_MEASURE_NUMBER,
+        _tags.MEASURE_NUMBER,
+        _tags.RED_START_BAR,
+        _tags.REDUNDANT_TIME_SIGNATURE_COLOR,
+        _tags.STAGE_NUMBER,
+    ]
+
+
 def _magnify_staves(magnify_staves, score):
     if magnify_staves is None:
         return
@@ -1417,7 +1428,7 @@ def _reanalyze_trending_dynamics(manifests, score):
 
 
 def _remove_layout_tags(score):
-    layout_removal_tags = _tags.layout_removal_tags()
+    layout_removal_tags = _layout_removal_tags()
     for leaf in abjad.iterate.leaves(score):
         for wrapper in abjad.get.wrappers(leaf):
             if wrapper.tag is None:
