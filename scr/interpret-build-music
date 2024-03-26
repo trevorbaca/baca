@@ -12,16 +12,16 @@ def main():
     directory = pathlib.Path(directory)
     parser = argparse.ArgumentParser(description="Activate tags in LilyPond files.")
     parser.add_argument(
-        "--keep-ly-files", help="keep .[i]ly files", action="store_true"
+        "--keep-temporary-files", help="keep .[i]ly files", action="store_true"
     )
     parser.add_argument(
-        "--skip-ly-files", help="skip .[i]ly files", action="store_true"
+        "--skip-temporary-files", help="skip .[i]ly files", action="store_true"
     )
     arguments = parser.parse_args()
     baca.build.interpret_build_music(
         directory,
-        debug_sections=arguments.keep_ly_files,
-        skip_section_collection=arguments.skip_ly_files,
+        debug_sections=arguments.keep_temporary_files,
+        skip_section_collection=arguments.skip_temporary_files,
     )
 
 
