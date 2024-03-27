@@ -527,13 +527,14 @@ class SpacingSection:
     persistent: typing.ClassVar[bool] = True
 
     def __post_init__(self):
-        assert isinstance(self.pair, tuple), repr(self.pair)
+        assert isinstance(self.pair, tuple) or self.pair == "ZEBRA", repr(self.pair)
 
     def _get_contributions(self, leaf=None):
         contributions = abjad.ContributionsBySite()
-        numerator, denominator = self.pair
-        string = rf"\baca-new-spacing-section #{numerator} #{denominator}"
-        contributions.before.commands.append(string)
+        if self.pair != "ZEBRA":
+            numerator, denominator = self.pair
+            string = rf"\baca-new-spacing-section #{numerator} #{denominator}"
+            contributions.before.commands.append(string)
         return contributions
 
     @staticmethod

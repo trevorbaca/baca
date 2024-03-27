@@ -86,6 +86,8 @@ class SpacingSpecifier:
                 item = measures[measure_number]
                 if isinstance(item, tuple):
                     pair = item
+                elif item is False:
+                    pair = "ZEBRA"
                 else:
                     assert isinstance(item, abjad.Duration), repr(item)
                     pair = item.pair
