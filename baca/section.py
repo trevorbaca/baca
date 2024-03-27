@@ -697,12 +697,11 @@ def _collect_persistent_indicators(
 
 
 def _color_mock_pitch(score):
-    indicator = _enums.MOCK
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.MOCK_COLORING)
     leaves = []
     for pleaf in abjad.iterate.leaves(score, pitched=True):
-        if not abjad.get.has_indicator(pleaf, indicator):
+        if not abjad.get.has_indicator(pleaf, _enums.MOCK):
             continue
         string = r"\baca-mock-coloring"
         literal = abjad.LilyPondLiteral(string, site="before")
@@ -711,12 +710,11 @@ def _color_mock_pitch(score):
 
 
 def _color_not_yet_pitched(score):
-    indicator = _enums.NOT_YET_PITCHED
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.NOT_YET_PITCHED_COLORING)
     leaves = []
     for pleaf in abjad.iterate.leaves(score, pitched=True):
-        if not abjad.get.has_indicator(pleaf, indicator):
+        if not abjad.get.has_indicator(pleaf, _enums.NOT_YET_PITCHED):
             continue
         string = r"\baca-not-yet-pitched-coloring"
         literal = abjad.LilyPondLiteral(string, site="before")
@@ -730,11 +728,10 @@ def _color_not_yet_pitched(score):
 
 
 def _color_not_yet_registered(score):
-    indicator = _enums.NOT_YET_REGISTERED
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.NOT_YET_REGISTERED_COLORING)
     for pleaf in abjad.iterate.leaves(score, pitched=True):
-        if not abjad.get.has_indicator(pleaf, indicator):
+        if not abjad.get.has_indicator(pleaf, _enums.NOT_YET_REGISTERED):
             continue
         string = r"\baca-not-yet-registered-coloring"
         literal = abjad.LilyPondLiteral(string, site="before")
@@ -1286,6 +1283,22 @@ def _persistent_indicator_tags():
         _tags.REDUNDANT_TIME_SIGNATURE,
         #
     ]
+
+
+def _pitch_unpitched_anchor_notes(score):
+    pleaves = []
+    for pleaf in abjad.iterate.leaves(score, pitched=True):
+        if not abjad.get.has_indicator(pleaf, _enums.ANCHOR_NOTE):
+            continue
+        if not abjad.get.has_indicator(pleaf, _enums.NOT_YET_PITCHED):
+            continue
+        pleaves.append(pleaf)
+    _pitchtools.staff_position(
+        pleaves,
+        0,
+        allow_hidden=True,
+        set_chord_pitches_equal=True,
+    )
 
 
 def _populate_offset_to_measure_number(first_measure_number, global_skips):
@@ -2441,7 +2454,7 @@ def postprocess_score(
     section_number=None,
 ):
     assert isinstance(score, abjad.Score), repr(score)
-    if not doctest:
+    if doctest is False:
         assert isinstance(environment, _build.Environment), repr(environment)
         assert isinstance(manifests, dict), repr(manifests)
     assert isinstance(all_music_in_part_containers, bool)
@@ -2465,7 +2478,7 @@ def postprocess_score(
     assert all(0 < _ for _ in fermata_measure_empty_overrides)
     assert isinstance(final_section, bool)
     assert isinstance(first_section, bool)
-    if not doctest:
+    if doctest is False:
         skips = _select.skips(score["Skips"])
         if abjad.get.has_indicator(skips[-1], _enums.ANCHOR_SKIP):
             skips = skips[:-1]
@@ -2477,29 +2490,29 @@ def postprocess_score(
     if parts_metric_modulation_multiplier is not None:
         assert isinstance(parts_metric_modulation_multiplier, tuple)
         assert len(parts_metric_modulation_multiplier) == 2
-    if not doctest:
+    if doctest is False:
         previous_persistent_indicators = previous_metadata.get(
             "persistent_indicators", {}
         )
     voice_name_to_parameter_to_state: dict[str, dict] = {}
     with abjad.ForbidUpdate(component=score, update_on_exit=True):
-        if not doctest:
+        if doctest is False:
             offset_to_measure_number = _populate_offset_to_measure_number(
                 first_measure_number,
                 score["Skips"],
             )
         extend_beams(score)
         _attach_sounds_during(score)
-        if not first_section:
+        if first_section is False:
             _clone_section_initial_short_instrument_name(score)
-        if not doctest:
+        if doctest is False:
             cached_time_signatures = remove_redundant_time_signatures(score["Skips"])
         fmns = _get_fermata_measure_numbers(first_measure_number, score)
         if empty_fermata_measures and not fermata_measure_empty_overrides:
             fermata_measure_empty_overrides = [
                 _ - first_measure_number + 1 for _ in fmns.fermata_measure_numbers
             ]
-        if not doctest:
+        if doctest is False:
             treat_untreated_persistent_wrappers(score, manifests=manifests)
             span_metronome_marks(
                 score["Skips"],
@@ -2512,13 +2525,14 @@ def postprocess_score(
             )
         _reanalyze_trending_dynamics(manifests, score)
         _reanalyze_reapplied_synthetic_wrappers(score)
-        if not do_not_transpose_score:
+        if do_not_transpose_score is False:
             transpose_score(score)
-        if not do_not_color_not_yet_registered:
+        if do_not_color_not_yet_registered is False:
             _color_not_yet_registered(score)
         _color_mock_pitch(score)
         _set_intermittent_to_staff_position_zero(score)
-        if not do_not_color_not_yet_pitched:
+        _pitch_unpitched_anchor_notes(score)
+        if do_not_color_not_yet_pitched is False:
             _color_not_yet_pitched(score)
         _set_not_yet_pitched_to_staff_position_zero(score)
         _clean_up_repeat_tie_direction(score)
@@ -2527,29 +2541,29 @@ def postprocess_score(
             _error_on_not_yet_pitched(score)
         _check_doubled_dynamics(score)
         color_out_of_range_pitches(score)
-        if not doctest:
+        if doctest is False:
             _check_persistent_indicators(
                 do_not_require_short_instrument_names,
                 score,
             )
-        if not do_not_color_repeat_pitch_classes:
+        if do_not_color_repeat_pitch_classes is False:
             color_repeat_pitch_classes(score)
         if color_octaves:
             _color_octaves_alias(score)
         _attach_shadow_tie_indicators(score)
-        if not do_not_force_nonnatural_accidentals:
+        if do_not_force_nonnatural_accidentals is False:
             _force_nonnatural_accidentals(score)
         _label_duration_multipliers(score)
         _style_framed_notes(score)
         _magnify_staves(magnify_staves, score)
-        if not doctest:
+        if doctest is False:
             _whitespace_leaves(score)
             _comment_measure_numbers(
                 first_measure_number,
                 offset_to_measure_number,
                 score,
             )
-            if not first_section:
+            if first_section is False:
                 _style_first_measure(
                     score["Skips"],
                     section_number,
@@ -2583,7 +2597,7 @@ def postprocess_score(
         score,
     )
     _clean_up_obgcs(score)
-    if not do_not_check_wellformedness:
+    if do_not_check_wellformedness is False:
         count, message = abjad.wf.tabulate_wellformedness(
             score,
             check_out_of_range_pitches=False,
@@ -2595,7 +2609,7 @@ def postprocess_score(
         )
         if violators:
             raise Exception(f"{len(violators)} /    {total} out of range pitches")
-    if not doctest:
+    if doctest is False:
         previous_stop_clock_time: typing.Optional[str]
         if environment.section_not_included_in_score:
             previous_stop_clock_time = "0'00''"
