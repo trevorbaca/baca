@@ -14,62 +14,6 @@ from . import textspannerlib as _textspannerlib
 from . import typings as _typings
 
 
-def bow_speed(
-    argument,
-    descriptor: str,
-    *tweaks: _typings.IndexedTweak,
-    do_not_bookend: bool | None = None,
-    do_not_rleak: bool = False,
-    left_broken: bool = False,
-    left_broken_text: str | None = None,
-    right_broken: bool = False,
-    staff_padding: int | float | None = None,
-) -> list[abjad.Wrapper]:
-    assert do_not_bookend is not False, repr(do_not_bookend)
-    lilypond_id = "BowSpeed"
-    specifiers = _textspannerlib.parse_text_spanner_descriptor(
-        descriptor,
-        left_broken_text=left_broken_text,
-        lilypond_id=lilypond_id,
-    )
-    if len(specifiers) == 1:
-        assert do_not_bookend is None, repr(do_not_bookend)
-        if do_not_rleak is False:
-            argument = _select.rleak_next_nonobgc_leaf(argument)
-        specifier = specifiers[0]
-        wrappers = []
-        wrapper = _spannerlib.attach_spanner_start(
-            argument,
-            specifier.spanner_start,
-            *tweaks,
-            left_broken=left_broken,
-            staff_padding=staff_padding,
-        )
-        wrappers.append(wrapper)
-        wrapper = _spannerlib.attach_spanner_stop(
-            argument,
-            specifier.spanner_stop,
-            right_broken=right_broken,
-        )
-        wrappers.append(wrapper)
-    else:
-        if do_not_bookend is None:
-            do_not_bookend = False
-        if do_not_rleak is False:
-            argument[-1] = _select.rleak_next_nonobgc_leaf(argument[-1])
-        wrappers = _textspannerlib.iterate_text_spanner_pieces(
-            argument,
-            *tweaks,
-            do_not_bookend=do_not_bookend,
-            left_broken=left_broken,
-            right_broken=right_broken,
-            specifiers=specifiers,
-            staff_padding=staff_padding,
-        )
-    _tags.tag(wrappers, _helpers.function_name(_frame()))
-    return wrappers
-
-
 def circle_bow(
     argument,
     *tweaks: _typings.IndexedTweak,
