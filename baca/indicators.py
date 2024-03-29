@@ -12,6 +12,7 @@ from . import dynamics as _dynamics
 from . import helpers as _helpers
 from . import indicatorlib as _indicatorlib
 from . import override as _override
+from . import postevent as _postevent
 from . import tags as _tags
 from . import tweak as _tweak
 from . import typings as _typings
@@ -745,18 +746,17 @@ def markup(
     direction: abjad.Vertical = abjad.UP,
     parent_alignment_x: int | float | None = None,
     self_alignment_x: int | float | None = None,
+    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     assert isinstance(markup, str), repr(markup)
     assert direction in (abjad.DOWN, abjad.UP), repr(direction)
     tag = _helpers.function_name(_frame())
     if parent_alignment_x is not None:
-        tweaks = tweaks + (
-            abjad.Tweak(rf"- \tweak parent-alignment-X {parent_alignment_x}"),
-        )
+        tweaks = tweaks + (_postevent.parent_alignment_x(parent_alignment_x),)
     if self_alignment_x is not None:
-        tweaks = tweaks + (
-            abjad.Tweak(rf"- \tweak self-alignment-X {self_alignment_x}"),
-        )
+        tweaks = tweaks + (_postevent.self_alignment_x(self_alignment_x),)
+    if staff_padding is not None:
+        tweaks = tweaks + (_postevent.staff_padding(staff_padding),)
     wrappers = []
     for leaf in abjad.select.leaves(argument):
         indicator: abjad.Markup | abjad.Bundle
