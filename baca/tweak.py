@@ -37,6 +37,11 @@ def extend(
     return tweaks
 
 
+def note_head_style_harmonic(note_head):
+    assert isinstance(note_head, abjad.NoteHead), repr(note_head)
+    abjad.tweak(note_head, abjad.Tweak(r"\tweak style #'harmonic"))
+
+
 def validate_indexed_tweaks(tweaks):
     if tweaks is None:
         return

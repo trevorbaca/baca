@@ -14,7 +14,7 @@ from . import indicators as _indicators
 from . import scope as _scope
 from . import select as _select
 from . import tags as _tags
-from . import tweaks as _tweaks
+from . import tweak as _tweak
 from . import typings as _typings
 
 
@@ -34,7 +34,7 @@ def attach_spanner_start(
         tweaks = tweaks + (abjad.Tweak(string),)
     if staff_padding is not None:
         tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
-    spanner_start = _tweaks.bundle_tweaks(spanner_start, tweaks)
+    spanner_start = _tweak.bundle_tweaks(spanner_start, tweaks)
     first_leaf = abjad.select.leaf(argument, 0)
     wrapper = _indicatorlib.attach_persistent_indicator(
         first_leaf,
@@ -115,7 +115,7 @@ class TextSpannerSpecifier:
             assert isinstance(item, prototype), repr(item)
             indicator = _indicatorlib.unbundle_indicator(item)
             if isinstance(indicator, abjad.StartTextSpan):
-                item = _tweaks.bundle_tweaks(
+                item = _tweak.bundle_tweaks(
                     item,
                     tweaks,
                     i=current_piece_index,
@@ -167,7 +167,7 @@ def iterate_text_spanner_pieces(
         specifiers
     )
     assert isinstance(staff_padding, int | float | type(None)), repr(staff_padding)
-    tweaks = _tweaks.extend(
+    tweaks = _tweak.extend(
         tweaks,
         bound_details_right_padding=bound_details_right_padding,
         staff_padding=staff_padding,

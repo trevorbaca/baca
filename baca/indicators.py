@@ -13,7 +13,7 @@ from . import helpers as _helpers
 from . import indicatorlib as _indicatorlib
 from . import override as _override
 from . import tags as _tags
-from . import tweaks as _tweaks
+from . import tweak as _tweak
 from . import typings as _typings
 from .enums import enums as _enums
 
@@ -30,7 +30,7 @@ def _prepare_alternate_bow_strokes(*tweaks, downbow_first, full):
         else:
             strings = ["upbow", "downbow"]
     indicators = [abjad.Articulation(_) for _ in strings]
-    indicators = [_tweaks.bundle_tweaks(_, tweaks) for _ in indicators]
+    indicators = [_tweak.bundle_tweaks(_, tweaks) for _ in indicators]
     for indicator in indicators:
         assert isinstance(indicator, abjad.Articulation | abjad.Bundle)
     return indicators
@@ -106,7 +106,7 @@ def articulation(
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
         indicator = abjad.Articulation(string)
-        indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+        indicator = _tweak.bundle_tweaks(indicator, tweaks)
         wrapper = abjad.attach(
             indicator,
             leaf,
@@ -160,7 +160,7 @@ def bend_after(
     for i, leaf in enumerate(leaves):
         number = cyclic_numbers[i]
         indicator = abjad.BendAfter(number)
-        indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+        indicator = _tweak.bundle_tweaks(indicator, tweaks)
         if indicator is not None:
             wrapper = abjad.attach(
                 indicator,
@@ -178,7 +178,7 @@ def breathe(argument, *tweaks: abjad.Tweak) -> list[abjad.Wrapper]:
     for leaf in abjad.select.leaves(argument):
         indicator: abjad.LilyPondLiteral | abjad.Bundle
         indicator = abjad.LilyPondLiteral(r"\breathe", site="after")
-        indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+        indicator = _tweak.bundle_tweaks(indicator, tweaks)
         wrapper = abjad.attach(
             indicator,
             leaf,
@@ -239,7 +239,7 @@ def color_fingerings(
         number = cyclic_numbers[i]
         if number != 0:
             fingering = abjad.ColorFingering(number)
-            fingering = _tweaks.bundle_tweaks(fingering, tweaks, i=i, total=total)
+            fingering = _tweak.bundle_tweaks(fingering, tweaks, i=i, total=total)
             wrapper = abjad.attach(fingering, leaf, direction=abjad.UP, wrapper=True)
             wrappers.append(wrapper)
     return wrappers
@@ -266,7 +266,7 @@ def damp(argument, *tweaks: abjad.Tweak) -> list[abjad.Wrapper]:
     for leaf in abjad.iterate.leaves(argument):
         indicator: abjad.Articulation | abjad.Bundle
         indicator = abjad.Articulation("baca-damp")
-        indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+        indicator = _tweak.bundle_tweaks(indicator, tweaks)
         wrapper = abjad.attach(
             indicator,
             leaf,
@@ -363,7 +363,7 @@ def down_bow(
             indicator = abjad.Articulation("baca-full-downbow")
         else:
             indicator = abjad.Articulation("downbow")
-        indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+        indicator = _tweak.bundle_tweaks(indicator, tweaks)
         wrapper = abjad.attach(
             indicator,
             leaf,
@@ -400,7 +400,7 @@ def dynamic(
         if isinstance(indicator, abjad.StartHairpin | abjad.StopHairpin):
             raise Exception(f"use baca.hairpin() instead: {indicator!r}")
         assert isinstance(indicator, abjad.Dynamic), repr(indicator)
-        indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+        indicator = _tweak.bundle_tweaks(indicator, tweaks)
         wrapper = _indicatorlib.attach_persistent_indicator(
             leaf,
             indicator,
@@ -459,7 +459,7 @@ def espressivo(argument, *tweaks: abjad.Tweak) -> list[abjad.Wrapper]:
     for leaf in abjad.select.leaves(argument):
         indicator: abjad.Articulation | abjad.Bundle
         indicator = abjad.Articulation("espressivo")
-        indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+        indicator = _tweak.bundle_tweaks(indicator, tweaks)
         wrapper = abjad.attach(
             indicator,
             leaf,
@@ -505,7 +505,7 @@ def flageolet(argument, *tweaks: abjad.Tweak) -> list[abjad.Wrapper]:
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
         indicator = abjad.Articulation("flageolet")
-        indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+        indicator = _tweak.bundle_tweaks(indicator, tweaks)
         wrapper = abjad.attach(
             indicator,
             leaf,
@@ -727,7 +727,7 @@ def mark(
     wrappers = []
     for leaf in abjad.select.leaves(argument):
         rehearsal_mark = abjad.RehearsalMark(markup=string, site=site)
-        rehearsal_mark = _tweaks.bundle_tweaks(rehearsal_mark, tweaks)
+        rehearsal_mark = _tweak.bundle_tweaks(rehearsal_mark, tweaks)
         wrapper = abjad.attach(
             rehearsal_mark,
             leaf,
@@ -796,7 +796,7 @@ def metronome_mark(
         _classes.Ritardando,
     )
     assert isinstance(indicator_, prototype), repr(indicator_)
-    indicator_ = _tweaks.bundle_tweaks(indicator_, tweaks)
+    indicator_ = _tweak.bundle_tweaks(indicator_, tweaks)
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.select.leaves(argument):
@@ -918,7 +918,7 @@ def rehearsal_mark(
     for leaf in abjad.select.leaves(argument):
         indicator: abjad.Markup | abjad.Bundle
         indicator = abjad.Markup(string)
-        indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+        indicator = _tweak.bundle_tweaks(indicator, tweaks)
         tag = _helpers.function_name(_frame())
         wrapper = abjad.attach(
             indicator,
@@ -1077,7 +1077,7 @@ def stop_on_string(
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
         indicator = abjad.Articulation("baca-stop-on-string")
-        indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+        indicator = _tweak.bundle_tweaks(indicator, tweaks)
         wrapper = abjad.attach(
             indicator,
             leaf,
@@ -1144,7 +1144,7 @@ def text_mark(
     wrappers = []
     for leaf in abjad.select.leaves(argument):
         mark = abjad.TextMark(string=string, site=site)
-        result = _tweaks.bundle_tweaks(mark, tweaks)
+        result = _tweak.bundle_tweaks(mark, tweaks)
         wrapper = abjad.attach(
             result,
             leaf,
@@ -1181,7 +1181,7 @@ def triple_staccato(
         tweaks = tweaks + (abjad.Tweak(rf"- \tweak padding {padding}"),)
     for leaf in abjad.iterate.leaves(argument):
         indicator = abjad.Articulation("baca-staccati #3")
-        indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+        indicator = _tweak.bundle_tweaks(indicator, tweaks)
         wrapper = abjad.attach(
             indicator,
             leaf,
@@ -1228,7 +1228,7 @@ def up_bow(
             indicator = abjad.Articulation("baca-full-upbow")
         else:
             indicator = abjad.Articulation("upbow")
-        indicator = _tweaks.bundle_tweaks(indicator, tweaks)
+        indicator = _tweak.bundle_tweaks(indicator, tweaks)
         wrapper = abjad.attach(
             indicator,
             leaf,

@@ -15,7 +15,7 @@ from . import indicators as _indicators
 from . import scope as _scope
 from . import select as _select
 from . import tags as _tags
-from . import tweaks as _tweaks
+from . import tweak as _tweak
 from . import typings as _typings
 
 
@@ -77,7 +77,7 @@ class HairpinSpecifier:
         for indicator in self:
             assert isinstance(indicator, prototype), repr(indicator)
             if isinstance(indicator, abjad.StartHairpin):
-                indicator = _tweaks.bundle_tweaks(
+                indicator = _tweak.bundle_tweaks(
                     indicator,
                     tweaks,
                     i=current_piece_index,
@@ -282,7 +282,7 @@ def hairpin(
             )
             wrappers.extend(wrappers_)
         if specifier.spanner_start is not None:
-            indicator = _tweaks.bundle_tweaks(
+            indicator = _tweak.bundle_tweaks(
                 specifier.spanner_start,
                 tweaks,
                 i=current_piece_index,
