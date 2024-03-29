@@ -1452,6 +1452,40 @@ def _remove_layout_tags(score):
                     break
 
 
+def _replace_rests_with_multimeasure_rests(
+    offset_to_measure_number,
+    score,
+    time_signatures,
+):
+    if len(offset_to_measure_number) == len(time_signatures) + 1:
+        items = list(offset_to_measure_number.items())
+        offset_to_measure_number = dict(items[:-1])
+    assert len(offset_to_measure_number) == len(time_signatures)
+    offsets = offset_to_measure_number.keys()
+    pairs = zip(offsets, time_signatures, strict=True)
+    offset_to_time_signature = dict(pairs)
+    for voice in abjad.select.components(score, abjad.Voice):
+        leaves = abjad.select.leaves(voice)
+        groups = abjad.select.group_by_measure(leaves)
+        for group in groups:
+            if not all(isinstance(_, abjad.Rest) for _ in group):
+                continue
+            parents = [abjad.get.parentage(_).parent for _ in group]
+            if any(_ is not voice for _ in parents):
+                continue
+            start_offset = abjad.get.timespan(group[0]).start_offset
+            if start_offset not in offset_to_time_signature:
+                continue
+            stop_offset = abjad.get.timespan(group[-1]).stop_offset
+            if stop_offset not in offset_to_time_signature:
+                continue
+            time_signature = offset_to_time_signature[start_offset]
+            pair = time_signature.pair
+            multimeasure_rest = abjad.MultimeasureRest(1, multiplier=pair)
+            abjad.mutate.replace(group[:1], [multimeasure_rest], wrappers=True)
+            abjad.mutate.replace(group[1:], [])
+
+
 def _set_intermittent_to_staff_position_zero(score):
     pleaves = []
     for voice in abjad.iterate.components(score, abjad.Voice):
@@ -2438,6 +2472,7 @@ def postprocess_score(
     do_not_color_not_yet_registered=False,
     do_not_color_repeat_pitch_classes=False,
     do_not_force_nonnatural_accidentals=False,
+    do_not_replace_rests_with_multimeasure_rests=False,
     do_not_require_short_instrument_names=False,
     do_not_transpose_score=False,
     empty_fermata_measures=False,
@@ -2495,12 +2530,20 @@ def postprocess_score(
             "persistent_indicators", {}
         )
     voice_name_to_parameter_to_state: dict[str, dict] = {}
+    offset_to_measure_number = _populate_offset_to_measure_number(
+        first_measure_number,
+        score["Skips"],
+    )
+    if do_not_replace_rests_with_multimeasure_rests is False:
+        """
+        _replace_rests_with_multimeasure_rests(
+            offset_to_measure_number,
+            score,
+            time_signatures,
+        )
+        """
+        pass
     with abjad.ForbidUpdate(component=score, update_on_exit=True):
-        if doctest is False:
-            offset_to_measure_number = _populate_offset_to_measure_number(
-                first_measure_number,
-                score["Skips"],
-            )
         extend_beams(score)
         _attach_sounds_during(score)
         if first_section is False:
