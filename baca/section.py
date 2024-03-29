@@ -2535,14 +2535,11 @@ def postprocess_score(
         score["Skips"],
     )
     if do_not_replace_rests_with_multimeasure_rests is False:
-        """
         _replace_rests_with_multimeasure_rests(
             offset_to_measure_number,
             score,
             time_signatures,
         )
-        """
-        pass
     with abjad.ForbidUpdate(component=score, update_on_exit=True):
         extend_beams(score)
         _attach_sounds_during(score)
