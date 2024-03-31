@@ -1793,9 +1793,9 @@ def write_layout_ly(
     assert isinstance(layout, baca.layout.Layout), repr(layout)
     layout_py = layout_directory / "layout.py"
     layout_ly = layout_directory / file_name
-    if layout.spacing_overrides is not None:
-        assert layout.default_spacing is not None
-    if layout.default_spacing is None:
+    if layout.spacing.spacing_overrides is not None:
+        assert layout.spacing.default_spacing is not None
+    if layout.spacing.default_spacing is None:
         eol_measure_numbers = None
         fermata_measure_numbers = None
         measure_count = None
@@ -1858,7 +1858,7 @@ def write_layout_ly(
         append_anchor_skip=has_anchor_skip,
         layout=True,
     )
-    layout(score, page_layout_profile, has_anchor_skip=has_anchor_skip)
+    layout.spacing(score, page_layout_profile, has_anchor_skip=has_anchor_skip)
     # TODO: separate 'breaks' from Layout:
     layout.breaks(score)
     offset_to_measure_number = baca.section._populate_offset_to_measure_number(

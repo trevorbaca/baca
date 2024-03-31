@@ -17,26 +17,16 @@ magic_lilypond_eol_adjustment = abjad.Fraction(35, 24)
 fermata_measure_duration = abjad.Duration(1, 4)
 
 
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class _LBSD:
-
-    y_offset: int
-    alignment_distances: tuple
-
-    def _get_contributions(self, component=None):
-        contributions = abjad.ContributionsBySite()
-        alignment_distances = " ".join(str(_) for _ in self.alignment_distances)
-        string = rf"\baca-lbsd #{self.y_offset} #'({alignment_distances})"
-        contributions.before.commands.append(string)
-        return contributions
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Breaks:
 
-    bol_measure_numbers: list[int]
-    page_count: int
-    skip_index_to_indicators: dict[int, tuple]
+    __slots__ = ("bol_measure_numbers", "page_count", "skip_index_to_indicators")
+
+    def __init__(self, *pages: "Page"):
+        triple = self._initialize(pages)
+        bol_measure_numbers, page_count, skip_index_to_indicators = triple
+        self.bol_measure_numbers = bol_measure_numbers
+        self.page_count = page_count
+        self.skip_index_to_indicators = skip_index_to_indicators
 
     def __call__(self, score):
         assert isinstance(score, abjad.Score), repr(score)
@@ -62,25 +52,8 @@ class Breaks:
                     tag=_tags.BREAK.append(_helpers.function_name(_frame(), n=2)),
                 )
 
-
-class Layout:
-
-    __slots__ = ("default_spacing", "breaks", "spacing_overrides")
-
-    def __init__(
-        self,
-        *pages: "Page",
-        default_spacing: abjad.Duration | tuple[int, int] | None = None,
-        spacing_overrides: list["Override"] | None = None,
-    ):
-        breaks = self._initialize_breaks(pages)
-        self.breaks = breaks
-        if default_spacing is not None:
-            default_spacing = abjad.Duration(default_spacing)
-        self.default_spacing = default_spacing
-        self.spacing_overrides = spacing_overrides
-
-    def _initialize_breaks(self, pages):
+    @staticmethod
+    def _initialize(pages):
         page_count = len(pages)
         assert 0 < page_count, repr(page_count)
         first_system = pages[0].systems[0]
@@ -111,14 +84,70 @@ class Layout:
                 alignment_distances = abjad.sequence.flatten(
                     alignment_distances, depth=-1
                 )
-                lbsd = _LBSD(alignment_distances=alignment_distances, y_offset=y_offset)
+                lbsd = LBSD(alignment_distances=alignment_distances, y_offset=y_offset)
                 skip_index_to_indicators[skip_index] = (literal, lbsd)
-        breaks = Breaks(
-            bol_measure_numbers=bol_measure_numbers,
-            page_count=page_count,
-            skip_index_to_indicators=skip_index_to_indicators,
-        )
-        return breaks
+        return bol_measure_numbers, page_count, skip_index_to_indicators
+
+
+class Layout:
+
+    __slots__ = ("breaks", "spacing")
+
+    def __init__(
+        self,
+        *pages: "Page",
+        default_spacing: abjad.Duration | tuple[int, int] | None = None,
+        spacing_overrides: list["Override"] | None = None,
+    ):
+        self.breaks = Breaks(*pages)
+        self.spacing = Spacing(default_spacing, spacing_overrides)
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class LBSD:
+
+    y_offset: int
+    alignment_distances: tuple
+
+    def _get_contributions(self, component=None):
+        contributions = abjad.ContributionsBySite()
+        alignment_distances = " ".join(str(_) for _ in self.alignment_distances)
+        string = rf"\baca-lbsd #{self.y_offset} #'({alignment_distances})"
+        contributions.before.commands.append(string)
+        return contributions
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class Override:
+
+    measures: int | tuple[int, int] | list
+    duration: tuple[int, int]
+
+
+class Page:
+
+    __slots__ = ("number", "systems")
+
+    def __init__(self, number: int, *systems):
+        assert isinstance(number, int), repr(number)
+        self.number = number
+        assert all(isinstance(_, System) for _ in systems), repr(systems)
+        self.systems = list(systems)
+
+
+class Spacing:
+
+    __slots__ = ("default_spacing", "spacing_overrides")
+
+    def __init__(
+        self,
+        default_spacing: abjad.Duration | tuple[int, int] | None = None,
+        spacing_overrides: list["Override"] | None = None,
+    ):
+        if default_spacing is not None:
+            default_spacing = abjad.Duration(default_spacing)
+        self.default_spacing = default_spacing
+        self.spacing_overrides = spacing_overrides
 
     def __call__(self, score, page_layout_profile=None, *, has_anchor_skip=False):
         if self.default_spacing is None:
@@ -225,24 +254,6 @@ class Layout:
                     deactivate=True,
                     tag=tag.append(_helpers.function_name(_frame(), n=3)),
                 )
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class Override:
-
-    measures: int | tuple[int, int] | list
-    duration: tuple[int, int]
-
-
-class Page:
-
-    __slots__ = ("number", "systems")
-
-    def __init__(self, number: int, *systems):
-        assert isinstance(number, int), repr(number)
-        self.number = number
-        assert all(isinstance(_, System) for _ in systems), repr(systems)
-        self.systems = list(systems)
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
