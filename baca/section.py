@@ -2271,189 +2271,6 @@ def label_stage_numbers(global_skips, stage_markup):
     )
 
 
-def make_layout_ly(
-    spacing,
-    *,
-    curtail_measure_count=None,
-    do_not_write_metadata=False,
-    file_name="layout.ly",
-    page_layout_context_only=False,
-    time_signatures=None,
-):
-    layout_directory = pathlib.Path(os.getcwd())
-    _build.print_main_task("Making layout ...")
-    assert isinstance(spacing, _layout.Layout), repr(spacing)
-    layout_py = layout_directory / "layout.py"
-    layout_ly = layout_directory / file_name
-    if spacing.overrides is not None:
-        assert spacing.fallback_duration is not None
-    if spacing.fallback_duration is None:
-        eol_measure_numbers = None
-        fermata_measure_numbers = None
-        measure_count = None
-    else:
-        tuple_ = _path.get_measure_profile_metadata(layout_py)
-        first_measure_number = tuple_[0]
-        measure_count = tuple_[1]
-        fermata_measure_numbers = tuple_[2] or []
-        first_measure_number = first_measure_number or 1
-        fermata_measure_numbers = [
-            _ - (first_measure_number - 1) for _ in fermata_measure_numbers
-        ]
-        eol_measure_numbers = []
-        for bol_measure_number in spacing.breaks.bol_measure_numbers[1:]:
-            eol_measure_number = bol_measure_number - 1
-            eol_measure_numbers.append(eol_measure_number)
-    page_layout_profile = {
-        "eol_measure_numbers": eol_measure_numbers,
-        "fermata_measure_numbers": fermata_measure_numbers,
-        "measure_count": measure_count,
-    }
-    has_anchor_skip = _path.get_metadata(layout_directory).get("has_anchor_skip")
-    document_name = abjad.string.to_shout_case(layout_directory.name)
-    if time_signatures is not None:
-        first_measure_number = 1
-    elif layout_directory.parent.name == "sections":
-        string = "first_measure_number"
-        first_measure_number = _path.get_metadata(layout_directory).get(string, 1)
-        if not bool(first_measure_number):
-            _build.print_file_handling("Can not find first measure number ...")
-            first_measure_number = False
-        assert isinstance(first_measure_number, int)
-        time_signatures = _path.get_metadata(layout_directory).get("time_signatures")
-    else:
-        first_measure_number = 1
-        time_signatures = []
-        contents_directory = _path.get_contents_directory(layout_directory)
-        sections_directory = contents_directory / "sections"
-        for section_directory in sorted(sections_directory.glob("*")):
-            if not section_directory.is_dir():
-                continue
-            time_signatures_ = _path.get_metadata(section_directory).get(
-                "time_signatures",
-            )
-            time_signatures.extend(time_signatures_)
-    if first_measure_number is False:
-        raise Exception("first_measure_number should not be false")
-        _build.print_file_handling(f"Skipping {_path.trim(layout_py)} ...")
-        sys.exit(1)
-    assert abjad.string.is_shout_case(document_name)
-    score = _docs.make_empty_score(1, do_not_move_global_context=True)
-    time_signatures_ = [abjad.TimeSignature.from_string(_) for _ in time_signatures]
-    set_up_score(
-        score,
-        time_signatures_,
-        append_anchor_skip=has_anchor_skip,
-        layout=True,
-    )
-    spacing(score, page_layout_profile, has_anchor_skip=has_anchor_skip)
-    # TODO: separate 'breaks' from Layout:
-    apply_breaks(score, spacing.breaks)
-    offset_to_measure_number = _populate_offset_to_measure_number(
-        first_measure_number,
-        score["Skips"],
-    )
-    _comment_measure_numbers(first_measure_number, offset_to_measure_number, score)
-    _whitespace_leaves(score)
-    _add_container_identifiers(score, None)
-    style_anchor_skip(score)
-    _remove_layout_tags(score)
-    lilypond_file = _lilypond.file(score)
-    context = lilypond_file["Skips"]
-    if curtail_measure_count is not None:
-        del context[curtail_measure_count:]
-    context.lilypond_type = "PageLayout"
-    context.name = "PageLayout"
-    skips = _select.skips(context)
-    for skip in skips:
-        abjad.detach(abjad.TimeSignature, skip)
-    score = lilypond_file["Score"]
-    del score["MusicContext"]
-    score = lilypond_file["Score"]
-    if page_layout_context_only:
-        context = score["PageLayout"]
-    else:
-        context = score
-    for component in abjad.iterate.components(context):
-        component.tag = component.tag.retain_shoutcase()
-        for wrapper in abjad.get.wrappers(component):
-            wrapper.tag = wrapper.tag.retain_shoutcase()
-    text = abjad.lilypond(context, tags=True)
-    text = text.replace("Skips", "PageLayout")
-    text = text.replace("GlobalSkips", "PageLayout")
-    text = abjad.tag.left_shift_tags(text)
-    layout_ly = layout_directory / file_name
-    lines = []
-    # TODO: remove first_page_number embedding
-    if layout_directory.parent.name == "sections":
-        if layout_directory.name != "01":
-            previous_section_number = str(int(layout_directory.name) - 1).zfill(2)
-            previous_section_directory = (
-                layout_directory.parent / previous_section_number
-            )
-            previous_layout_ly = previous_section_directory / "layout.ly"
-            if previous_layout_ly.is_file():
-                result = _build._get_preamble_page_count_overview(previous_layout_ly)
-                if result is not None:
-                    _, _, final_page_number = result
-                    first_page_number = final_page_number + 1
-                    line = f"% first_page_number = {first_page_number}"
-                    lines.append(line)
-    page_count = spacing.breaks.page_count
-    lines.append(f"% page_count = {page_count}")
-    time_signatures = [str(_) for _ in time_signatures]
-    measure_count = len(time_signatures)
-    if has_anchor_skip:
-        lines.append(f"% measure_count = {measure_count} + 1")
-    else:
-        lines.append(f"% measure_count = {measure_count}")
-    string = pprint.pformat(time_signatures, compact=True, width=80 - 3)
-    lines_ = string.split("\n")
-    lines_ = [_.strip("[").strip("]") for _ in lines_]
-    lines_ = ["% " + _ for _ in lines_]
-    lines_.insert(0, "% time_signatures = [")
-    lines_.append("%  ]")
-    lines.extend(lines_)
-    header = "\n".join(lines) + "\n\n"
-    layout_ly.write_text(header + text + "\n")
-    counter = abjad.string.pluralize("measure", measure_count)
-    message = f"Writing {measure_count} + 1 {counter} to"
-    message += f" {_path.trim(layout_ly)} ..."
-    _build.print_file_handling(message)
-    bol_measure_numbers = []
-    skips = abjad.iterate.leaves(score["PageLayout"], abjad.Skip)
-    for i, skip in enumerate(skips):
-        for literal in abjad.get.indicators(skip, abjad.LilyPondLiteral):
-            if literal.argument in (r"\break", r"\pageBreak"):
-                measure_number = first_measure_number + i
-                bol_measure_numbers.append(measure_number)
-                continue
-    count = len(bol_measure_numbers)
-    numbers = abjad.string.pluralize("number", count)
-    if not do_not_write_metadata:
-        metadata = layout_directory / ".metadata"
-        string = _path.trim(metadata)
-        message = f"Writing BOL measure {numbers} to {string} ..."
-        _build.print_file_handling(message)
-        if layout_directory.name.endswith("-parts"):
-            if document_name is not None:
-                part_dictionary = _path.get_metadata(layout_directory).get(
-                    document_name,
-                    {},
-                )
-            else:
-                part_dictionary = {}
-            part_dictionary["bol_measure_numbers"] = bol_measure_numbers
-            assert abjad.string.is_shout_case(document_name)
-            _path.add_metadatum(layout_directory, document_name, part_dictionary)
-        else:
-            _path.add_metadatum(
-                layout_directory,
-                "bol_measure_numbers",
-                bol_measure_numbers,
-            )
-
-
 @_build.timed("postprocess_score")
 def postprocess_score(
     score,
@@ -3255,3 +3072,186 @@ def wrap(items):
             raise Exception(item)
         time_signatures.append(time_signature)
     return TimeSignatureServer(time_signatures)
+
+
+def write_layout_ly(
+    spacing,
+    *,
+    curtail_measure_count=None,
+    do_not_write_metadata=False,
+    file_name="layout.ly",
+    page_layout_context_only=False,
+    time_signatures=None,
+):
+    layout_directory = pathlib.Path(os.getcwd())
+    _build.print_main_task("Making layout ...")
+    assert isinstance(spacing, _layout.Layout), repr(spacing)
+    layout_py = layout_directory / "layout.py"
+    layout_ly = layout_directory / file_name
+    if spacing.overrides is not None:
+        assert spacing.fallback_duration is not None
+    if spacing.fallback_duration is None:
+        eol_measure_numbers = None
+        fermata_measure_numbers = None
+        measure_count = None
+    else:
+        tuple_ = _path.get_measure_profile_metadata(layout_py)
+        first_measure_number = tuple_[0]
+        measure_count = tuple_[1]
+        fermata_measure_numbers = tuple_[2] or []
+        first_measure_number = first_measure_number or 1
+        fermata_measure_numbers = [
+            _ - (first_measure_number - 1) for _ in fermata_measure_numbers
+        ]
+        eol_measure_numbers = []
+        for bol_measure_number in spacing.breaks.bol_measure_numbers[1:]:
+            eol_measure_number = bol_measure_number - 1
+            eol_measure_numbers.append(eol_measure_number)
+    page_layout_profile = {
+        "eol_measure_numbers": eol_measure_numbers,
+        "fermata_measure_numbers": fermata_measure_numbers,
+        "measure_count": measure_count,
+    }
+    has_anchor_skip = _path.get_metadata(layout_directory).get("has_anchor_skip")
+    document_name = abjad.string.to_shout_case(layout_directory.name)
+    if time_signatures is not None:
+        first_measure_number = 1
+    elif layout_directory.parent.name == "sections":
+        string = "first_measure_number"
+        first_measure_number = _path.get_metadata(layout_directory).get(string, 1)
+        if not bool(first_measure_number):
+            _build.print_file_handling("Can not find first measure number ...")
+            first_measure_number = False
+        assert isinstance(first_measure_number, int)
+        time_signatures = _path.get_metadata(layout_directory).get("time_signatures")
+    else:
+        first_measure_number = 1
+        time_signatures = []
+        contents_directory = _path.get_contents_directory(layout_directory)
+        sections_directory = contents_directory / "sections"
+        for section_directory in sorted(sections_directory.glob("*")):
+            if not section_directory.is_dir():
+                continue
+            time_signatures_ = _path.get_metadata(section_directory).get(
+                "time_signatures",
+            )
+            time_signatures.extend(time_signatures_)
+    if first_measure_number is False:
+        raise Exception("first_measure_number should not be false")
+        _build.print_file_handling(f"Skipping {_path.trim(layout_py)} ...")
+        sys.exit(1)
+    assert abjad.string.is_shout_case(document_name)
+    score = _docs.make_empty_score(1, do_not_move_global_context=True)
+    time_signatures_ = [abjad.TimeSignature.from_string(_) for _ in time_signatures]
+    set_up_score(
+        score,
+        time_signatures_,
+        append_anchor_skip=has_anchor_skip,
+        layout=True,
+    )
+    spacing(score, page_layout_profile, has_anchor_skip=has_anchor_skip)
+    # TODO: separate 'breaks' from Layout:
+    apply_breaks(score, spacing.breaks)
+    offset_to_measure_number = _populate_offset_to_measure_number(
+        first_measure_number,
+        score["Skips"],
+    )
+    _comment_measure_numbers(first_measure_number, offset_to_measure_number, score)
+    _whitespace_leaves(score)
+    _add_container_identifiers(score, None)
+    style_anchor_skip(score)
+    _remove_layout_tags(score)
+    lilypond_file = _lilypond.file(score)
+    context = lilypond_file["Skips"]
+    if curtail_measure_count is not None:
+        del context[curtail_measure_count:]
+    context.lilypond_type = "PageLayout"
+    context.name = "PageLayout"
+    skips = _select.skips(context)
+    for skip in skips:
+        abjad.detach(abjad.TimeSignature, skip)
+    score = lilypond_file["Score"]
+    del score["MusicContext"]
+    score = lilypond_file["Score"]
+    if page_layout_context_only:
+        context = score["PageLayout"]
+    else:
+        context = score
+    for component in abjad.iterate.components(context):
+        component.tag = component.tag.retain_shoutcase()
+        for wrapper in abjad.get.wrappers(component):
+            wrapper.tag = wrapper.tag.retain_shoutcase()
+    text = abjad.lilypond(context, tags=True)
+    text = text.replace("Skips", "PageLayout")
+    text = text.replace("GlobalSkips", "PageLayout")
+    text = abjad.tag.left_shift_tags(text)
+    layout_ly = layout_directory / file_name
+    lines = []
+    # TODO: remove first_page_number embedding
+    if layout_directory.parent.name == "sections":
+        if layout_directory.name != "01":
+            previous_section_number = str(int(layout_directory.name) - 1).zfill(2)
+            previous_section_directory = (
+                layout_directory.parent / previous_section_number
+            )
+            previous_layout_ly = previous_section_directory / "layout.ly"
+            if previous_layout_ly.is_file():
+                result = _build._get_preamble_page_count_overview(previous_layout_ly)
+                if result is not None:
+                    _, _, final_page_number = result
+                    first_page_number = final_page_number + 1
+                    line = f"% first_page_number = {first_page_number}"
+                    lines.append(line)
+    page_count = spacing.breaks.page_count
+    lines.append(f"% page_count = {page_count}")
+    time_signatures = [str(_) for _ in time_signatures]
+    measure_count = len(time_signatures)
+    if has_anchor_skip:
+        lines.append(f"% measure_count = {measure_count} + 1")
+    else:
+        lines.append(f"% measure_count = {measure_count}")
+    string = pprint.pformat(time_signatures, compact=True, width=80 - 3)
+    lines_ = string.split("\n")
+    lines_ = [_.strip("[").strip("]") for _ in lines_]
+    lines_ = ["% " + _ for _ in lines_]
+    lines_.insert(0, "% time_signatures = [")
+    lines_.append("%  ]")
+    lines.extend(lines_)
+    header = "\n".join(lines) + "\n\n"
+    layout_ly.write_text(header + text + "\n")
+    counter = abjad.string.pluralize("measure", measure_count)
+    message = f"Writing {measure_count} + 1 {counter} to"
+    message += f" {_path.trim(layout_ly)} ..."
+    _build.print_file_handling(message)
+    bol_measure_numbers = []
+    skips = abjad.iterate.leaves(score["PageLayout"], abjad.Skip)
+    for i, skip in enumerate(skips):
+        for literal in abjad.get.indicators(skip, abjad.LilyPondLiteral):
+            if literal.argument in (r"\break", r"\pageBreak"):
+                measure_number = first_measure_number + i
+                bol_measure_numbers.append(measure_number)
+                continue
+    count = len(bol_measure_numbers)
+    numbers = abjad.string.pluralize("number", count)
+    if not do_not_write_metadata:
+        metadata = layout_directory / ".metadata"
+        string = _path.trim(metadata)
+        message = f"Writing BOL measure {numbers} to {string} ..."
+        _build.print_file_handling(message)
+        if layout_directory.name.endswith("-parts"):
+            if document_name is not None:
+                part_dictionary = _path.get_metadata(layout_directory).get(
+                    document_name,
+                    {},
+                )
+            else:
+                part_dictionary = {}
+            part_dictionary["bol_measure_numbers"] = bol_measure_numbers
+            assert abjad.string.is_shout_case(document_name)
+            _path.add_metadatum(layout_directory, document_name, part_dictionary)
+        else:
+            _path.add_metadatum(
+                layout_directory,
+                "bol_measure_numbers",
+                bol_measure_numbers,
+            )

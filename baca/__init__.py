@@ -8,6 +8,7 @@ import abjad
 from . import array
 from . import build
 from . import dynamics
+from . import layout
 from . import math
 from . import override
 from . import path
@@ -44,7 +45,6 @@ from .classes import *
 from .hairpins import hairpin
 from .helpers import call
 from .indicators import *
-from .layout import *
 from .lilypond import file
 from .memento import *
 from .parts import Part, PartAssignment, assign_part

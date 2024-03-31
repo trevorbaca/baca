@@ -17,22 +17,41 @@ magic_lilypond_eol_adjustment = abjad.Fraction(35, 24)
 fermata_measure_duration = abjad.Duration(1, 4)
 
 
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class _LBSD:
+
+    y_offset: int
+    alignment_distances: tuple
+
+    def _get_contributions(self, component=None):
+        contributions = abjad.ContributionsBySite()
+        alignment_distances = " ".join(str(_) for _ in self.alignment_distances)
+        string = rf"\baca-lbsd #{self.y_offset} #'({alignment_distances})"
+        contributions.before.commands.append(string)
+        return contributions
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class _Page:
+
+    number: int
+    systems: list
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class BreakMeasureMap:
+
+    bol_measure_numbers: list[int]
+    page_count: int
+    skip_index_to_indicators: dict[int, tuple]
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Layout:
 
-    def __init__(
-        self,
-        fallback_duration=None,
-        *,
-        breaks=None,
-        overrides=None,
-    ):
-        if breaks is not None:
-            assert isinstance(breaks, BreakMeasureMap), repr(breaks)
-        self.breaks = breaks
-        if fallback_duration is not None:
-            fallback_duration = abjad.Duration(fallback_duration)
-        self.fallback_duration = fallback_duration
-        self.overrides = overrides
+    fallback_duration: abjad.Duration
+    breaks: BreakMeasureMap | None = None
+    overrides: list["Override"] | None = None
 
     def __call__(self, score, page_layout_profile=None, *, has_anchor_skip=False):
         if self.fallback_duration is None:
@@ -50,9 +69,9 @@ class Layout:
             else:
                 measures[n] = self.fallback_duration
             measures[n + 1] = fermata_measure_duration
-        for region in self.overrides or []:
-            token = region.measures
-            duration = region.duration
+        for override in self.overrides or []:
+            token = override.measures
+            duration = override.duration
             measure_numbers = []
             if isinstance(token, int):
                 measure_numbers.append(token)
@@ -144,41 +163,39 @@ class Layout:
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class LBSD:
+class Override:
 
-    y_offset: int
-    alignment_distances: tuple
-
-    def _get_contributions(self, component=None):
-        contributions = abjad.ContributionsBySite()
-        alignment_distances = " ".join(str(_) for _ in self.alignment_distances)
-        string = rf"\baca-lbsd #{self.y_offset} #'({alignment_distances})"
-        contributions.before.commands.append(string)
-        return contributions
+    measures: int | tuple[int, int] | list
+    duration: tuple[int, int]
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class PageSpecifier:
+class System:
 
-    number: int
-    systems: list
+    measure: int
+    y_offset: int
+    distances: tuple[int, ...]
 
 
-def breaks(*page_specifiers):
-    page_count = len(page_specifiers)
+def layout(
+    *pages,
+    default_spacing=None,
+    spacing_overrides=None,
+):
+    page_count = len(pages)
     assert 0 < page_count, repr(page_count)
-    first_system = page_specifiers[0].systems[0]
+    first_system = pages[0].systems[0]
     assert first_system.measure == 1, repr(first_system)
     bol_measure_numbers = []
     skip_index_to_indicators = {}
-    for i, page_specifier in enumerate(page_specifiers):
+    for i, page in enumerate(pages):
         page_number = i + 1
-        if page_specifier.number is not None:
-            if page_specifier.number != page_number:
-                message = f"page number ({page_specifier.number})"
+        if page.number is not None:
+            if page.number != page_number:
+                message = f"page number ({page.number})"
                 message += f" is not {page_number}."
                 raise Exception(message)
-        for j, system in enumerate(page_specifier.systems):
+        for j, system in enumerate(page.systems):
             measure_number = system.measure
             bol_measure_numbers.append(measure_number)
             skip_index = measure_number - 1
@@ -191,52 +208,21 @@ def breaks(*page_specifiers):
             else:
                 literal = abjad.LilyPondLiteral(r"\break", site="before")
             alignment_distances = abjad.sequence.flatten(alignment_distances, depth=-1)
-            lbsd = LBSD(alignment_distances=alignment_distances, y_offset=y_offset)
+            lbsd = _LBSD(alignment_distances=alignment_distances, y_offset=y_offset)
             skip_index_to_indicators[skip_index] = (literal, lbsd)
-    breaks = BreakMeasureMap(
+    break_measure_map = BreakMeasureMap(
         bol_measure_numbers=bol_measure_numbers,
         page_count=page_count,
         skip_index_to_indicators=skip_index_to_indicators,
     )
-    return breaks
+    if default_spacing is not None:
+        default_spacing = abjad.Duration(default_spacing)
+    return Layout(
+        breaks=break_measure_map,
+        fallback_duration=default_spacing,
+        overrides=spacing_overrides,
+    )
 
 
 def page(number, *systems):
-    systems_ = list(systems)
-    return PageSpecifier(number=number, systems=systems_)
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class region:
-
-    measures: int | tuple[int, int] | list
-    duration: tuple[int, int]
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class BreakMeasureMap:
-
-    bol_measure_numbers: list[int]
-    page_count: int
-    skip_index_to_indicators: dict[int, tuple]
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class system:
-
-    measure: int
-    y_offset: int
-    distances: tuple[int, ...]
-
-
-def make_layout(
-    *pages,
-    spacing=None,
-    overrides=None,
-):
-    breaks_ = breaks(*pages)
-    return Layout(
-        breaks=breaks_,
-        fallback_duration=spacing,
-        overrides=overrides,
-    )
+    return _Page(number=number, systems=list(systems))

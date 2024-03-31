@@ -4,19 +4,19 @@ import pytest
 
 def test_layout_01():
     """
-    baca.breaks() raises exception on out-of-sequence page speicfiers.
+    Raises exception on out-of-sequence page numbers.
     """
 
     with pytest.raises(Exception) as foo:
-        baca.breaks(
-            baca.page(
+        baca.layout.layout(
+            baca.layout.page(
                 1,
-                baca.system(measure=1, y_offset=20, distances=(15, 20, 20)),
-                baca.system(measure=13, y_offset=140, distances=(15, 20, 20)),
+                baca.layout.System(1, y_offset=20, distances=(15, 20, 20)),
+                baca.layout.System(13, y_offset=140, distances=(15, 20, 20)),
             ),
-            baca.page(
+            baca.layout.page(
                 9,
-                baca.system(measure=23, y_offset=20, distances=(15, 20, 20)),
+                baca.layout.System(23, y_offset=20, distances=(15, 20, 20)),
             ),
         )
 
