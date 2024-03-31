@@ -45,16 +45,40 @@ class BreakMeasureMap:
     page_count: int
     skip_index_to_indicators: dict[int, tuple]
 
+    def __call__(self, score):
+        assert isinstance(score, abjad.Score), repr(score)
+        context = score["Skips"]
+        skips = _select.skips(context)
+        measure_count = len(skips)
+        literal = abjad.LilyPondLiteral(r"\autoPageBreaksOff", site="before")
+        abjad.attach(
+            literal,
+            skips[0],
+            tag=_tags.BREAK.append(_helpers.function_name(_frame(), n=1)),
+        )
+        for skip_index in range(measure_count):
+            skip = skips[skip_index]
+            indicators = self.skip_index_to_indicators.get(
+                skip_index,
+                [abjad.LilyPondLiteral(r"\noBreak", site="before")],
+            )
+            for indicator in indicators:
+                abjad.attach(
+                    indicator,
+                    skip,
+                    tag=_tags.BREAK.append(_helpers.function_name(_frame(), n=2)),
+                )
+
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Layout:
 
-    fallback_duration: abjad.Duration
+    default_spacing: abjad.Duration
     breaks: BreakMeasureMap | None = None
-    overrides: list["Override"] | None = None
+    spacing_overrides: list["Override"] | None = None
 
     def __call__(self, score, page_layout_profile=None, *, has_anchor_skip=False):
-        if self.fallback_duration is None:
+        if self.default_spacing is None:
             return
         page_layout_profile = page_layout_profile or {}
         skips_context = score["Skips"]
@@ -67,9 +91,9 @@ class Layout:
             if n in fermata_measure_numbers:
                 measures[n] = fermata_measure_duration
             else:
-                measures[n] = self.fallback_duration
+                measures[n] = self.default_spacing
             measures[n + 1] = fermata_measure_duration
-        for override in self.overrides or []:
+        for override in self.spacing_overrides or []:
             token = override.measures
             duration = override.duration
             measure_numbers = []
@@ -109,7 +133,7 @@ class Layout:
                     assert isinstance(item, abjad.Duration), repr(item)
                     pair = item.pair
             else:
-                duration = self.fallback_duration
+                duration = self.default_spacing
                 assert isinstance(duration, abjad.Duration), repr(duration)
                 pair = duration.pair
             assert pair is not None
@@ -217,8 +241,8 @@ def layout(
         default_spacing = abjad.Duration(default_spacing)
     return Layout(
         breaks=break_measure_map,
-        fallback_duration=default_spacing,
-        overrides=spacing_overrides,
+        default_spacing=default_spacing,
+        spacing_overrides=spacing_overrides,
     )
 
 
