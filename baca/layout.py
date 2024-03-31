@@ -54,7 +54,9 @@ class SpacingSpecifier:
             else:
                 measures[n] = self.fallback_duration
             measures[n + 1] = fermata_measure_duration
-        for token, duration in self.overrides or []:
+        for region in self.overrides or []:
+            token = region.measures
+            duration = region.duration
             measure_numbers = []
             if isinstance(token, int):
                 measure_numbers.append(token)
@@ -227,11 +229,11 @@ def page(number, *systems):
     return PageSpecifier(number=number, systems=systems_)
 
 
-# TODO: use dataclass
-space = collections.namedtuple(
-    "space",
-    ["measures", "duration"],
-)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class region:
+
+    measures: int | tuple[int, int] | list
+    duration: tuple[int, int]
 
 
 # TODO: use dataclass
