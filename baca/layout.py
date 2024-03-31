@@ -17,7 +17,7 @@ magic_lilypond_eol_adjustment = abjad.Fraction(35, 24)
 fermata_measure_duration = abjad.Duration(1, 4)
 
 
-class SpacingSpecifier:
+class Layout:
 
     def __init__(
         self,
@@ -164,13 +164,6 @@ class PageSpecifier:
     systems: list
 
 
-def make_skip_selector(n):
-    def selector(argument):
-        return _select.skip(argument, n)
-
-    return selector
-
-
 def breaks(*page_specifiers):
     page_count = len(page_specifiers)
     assert 0 < page_count, repr(page_count)
@@ -242,7 +235,7 @@ def make_layout(
     overrides=None,
 ):
     breaks_ = breaks(*pages)
-    return SpacingSpecifier(
+    return Layout(
         breaks=breaks_,
         fallback_duration=spacing,
         overrides=overrides,

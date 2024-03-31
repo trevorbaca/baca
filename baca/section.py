@@ -2282,7 +2282,7 @@ def make_layout_ly(
 ):
     layout_directory = pathlib.Path(os.getcwd())
     _build.print_main_task("Making layout ...")
-    assert isinstance(spacing, _layout.SpacingSpecifier), repr(spacing)
+    assert isinstance(spacing, _layout.Layout), repr(spacing)
     layout_py = layout_directory / "layout.py"
     layout_ly = layout_directory / file_name
     if spacing.overrides is not None:
@@ -2347,7 +2347,7 @@ def make_layout_ly(
         layout=True,
     )
     spacing(score, page_layout_profile, has_anchor_skip=has_anchor_skip)
-    # TODO: separate 'breaks' from SpacingSpecifier:
+    # TODO: separate 'breaks' from Layout:
     apply_breaks(score, spacing.breaks)
     offset_to_measure_number = _populate_offset_to_measure_number(
         first_measure_number,
