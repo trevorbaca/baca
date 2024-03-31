@@ -115,9 +115,7 @@ class Layout:
             assert pair is not None
             eol_adjusted = False
             if (measure_number in eol_measure_numbers) or (
-                self.breaks is not None
-                and measure_number == measure_count
-                and not has_anchor_skip
+                measure_number == measure_count and not has_anchor_skip
             ):
                 pair_ = pair
                 numerator = pair[0] * magic_lilypond_eol_adjustment.numerator

@@ -3075,7 +3075,7 @@ def wrap(items):
 
 
 def write_layout_ly(
-    spacing,
+    layout,
     *,
     curtail_measure_count=None,
     do_not_write_metadata=False,
@@ -3085,12 +3085,12 @@ def write_layout_ly(
 ):
     layout_directory = pathlib.Path(os.getcwd())
     _build.print_main_task("Making layout ...")
-    assert isinstance(spacing, _layout.Layout), repr(spacing)
+    assert isinstance(layout, _layout.Layout), repr(layout)
     layout_py = layout_directory / "layout.py"
     layout_ly = layout_directory / file_name
-    if spacing.overrides is not None:
-        assert spacing.fallback_duration is not None
-    if spacing.fallback_duration is None:
+    if layout.overrides is not None:
+        assert layout.fallback_duration is not None
+    if layout.fallback_duration is None:
         eol_measure_numbers = None
         fermata_measure_numbers = None
         measure_count = None
@@ -3104,14 +3104,16 @@ def write_layout_ly(
             _ - (first_measure_number - 1) for _ in fermata_measure_numbers
         ]
         eol_measure_numbers = []
-        for bol_measure_number in spacing.breaks.bol_measure_numbers[1:]:
+        for bol_measure_number in layout.breaks.bol_measure_numbers[1:]:
             eol_measure_number = bol_measure_number - 1
             eol_measure_numbers.append(eol_measure_number)
+    # TODO: use dataclass:
     page_layout_profile = {
         "eol_measure_numbers": eol_measure_numbers,
         "fermata_measure_numbers": fermata_measure_numbers,
         "measure_count": measure_count,
     }
+    # TODO: do not read from environment; pass into function instead:
     has_anchor_skip = _path.get_metadata(layout_directory).get("has_anchor_skip")
     document_name = abjad.string.to_shout_case(layout_directory.name)
     if time_signatures is not None:
@@ -3149,9 +3151,9 @@ def write_layout_ly(
         append_anchor_skip=has_anchor_skip,
         layout=True,
     )
-    spacing(score, page_layout_profile, has_anchor_skip=has_anchor_skip)
+    layout(score, page_layout_profile, has_anchor_skip=has_anchor_skip)
     # TODO: separate 'breaks' from Layout:
-    apply_breaks(score, spacing.breaks)
+    apply_breaks(score, layout.breaks)
     offset_to_measure_number = _populate_offset_to_measure_number(
         first_measure_number,
         score["Skips"],
@@ -3202,7 +3204,7 @@ def write_layout_ly(
                     first_page_number = final_page_number + 1
                     line = f"% first_page_number = {first_page_number}"
                     lines.append(line)
-    page_count = spacing.breaks.page_count
+    page_count = layout.breaks.page_count
     lines.append(f"% page_count = {page_count}")
     time_signatures = [str(_) for _ in time_signatures]
     measure_count = len(time_signatures)
