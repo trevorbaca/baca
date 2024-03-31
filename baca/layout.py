@@ -2,7 +2,6 @@
 Layout.
 """
 
-import collections
 import dataclasses
 from inspect import currentframe as _frame
 
@@ -19,9 +18,6 @@ fermata_measure_duration = abjad.Duration(1, 4)
 
 
 class SpacingSpecifier:
-    """
-    Spacing specifier.
-    """
 
     def __init__(
         self,
@@ -149,9 +145,6 @@ class SpacingSpecifier:
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class LBSD:
-    """
-    Line-break system details.
-    """
 
     y_offset: int
     alignment_distances: tuple
@@ -166,9 +159,6 @@ class LBSD:
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class PageSpecifier:
-    """
-    Page specifier.
-    """
 
     number: int
     systems: list
@@ -182,9 +172,6 @@ def make_skip_selector(n):
 
 
 def breaks(*page_specifiers):
-    """
-    Makes break measure map.
-    """
     page_count = len(page_specifiers)
     assert 0 < page_count, repr(page_count)
     first_system = page_specifiers[0].systems[0]
@@ -222,9 +209,6 @@ def breaks(*page_specifiers):
 
 
 def page(number, *systems):
-    """
-    Makes page specifier.
-    """
     systems_ = list(systems)
     return PageSpecifier(number=number, systems=systems_)
 
@@ -236,18 +220,20 @@ class region:
     duration: tuple[int, int]
 
 
-# TODO: use dataclass
-BreakMeasureMap = collections.namedtuple(
-    "BreakMeasureMap",
-    ["bol_measure_numbers", "page_count", "skip_index_to_indicators"],
-)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class BreakMeasureMap:
+
+    bol_measure_numbers: list[int]
+    page_count: int
+    skip_index_to_indicators: dict[int, tuple]
 
 
-# TODO: use dataclass
-system = collections.namedtuple(
-    "system",
-    ["measure", "y_offset", "distances"],
-)
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class system:
+
+    measure: int
+    y_offset: int
+    distances: tuple[int, ...]
 
 
 def make_layout(
@@ -255,9 +241,6 @@ def make_layout(
     spacing=None,
     overrides=None,
 ):
-    """
-    Makes layout.
-    """
     breaks_ = breaks(*pages)
     return SpacingSpecifier(
         breaks=breaks_,
