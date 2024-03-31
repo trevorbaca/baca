@@ -32,14 +32,7 @@ class _LBSD:
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class _Page:
-
-    number: int
-    systems: list
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class BreakMeasureMap:
+class Breaks:
 
     bol_measure_numbers: list[int]
     page_count: int
@@ -70,12 +63,62 @@ class BreakMeasureMap:
                 )
 
 
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Layout:
 
-    default_spacing: abjad.Duration
-    breaks: BreakMeasureMap | None = None
-    spacing_overrides: list["Override"] | None = None
+    __slots__ = ("default_spacing", "breaks", "spacing_overrides")
+
+    def __init__(
+        self,
+        *pages: "Page",
+        default_spacing: abjad.Duration | tuple[int, int] | None = None,
+        spacing_overrides: list["Override"] | None = None,
+    ):
+        breaks = self._initialize_breaks(pages)
+        self.breaks = breaks
+        if default_spacing is not None:
+            default_spacing = abjad.Duration(default_spacing)
+        self.default_spacing = default_spacing
+        self.spacing_overrides = spacing_overrides
+
+    def _initialize_breaks(self, pages):
+        page_count = len(pages)
+        assert 0 < page_count, repr(page_count)
+        first_system = pages[0].systems[0]
+        assert first_system.measure == 1, repr(first_system)
+        bol_measure_numbers = []
+        skip_index_to_indicators = {}
+        for i, page in enumerate(pages):
+            page_number = i + 1
+            if page.number is not None:
+                if page.number != page_number:
+                    message = f"page number ({page.number})"
+                    message += f" is not {page_number}."
+                    raise Exception(message)
+            for j, system in enumerate(page.systems):
+                measure_number = system.measure
+                bol_measure_numbers.append(measure_number)
+                skip_index = measure_number - 1
+                y_offset = system.y_offset
+                assert isinstance(system.distances, tuple | list), repr(
+                    system.distances
+                )
+                alignment_distances = system.distances
+                assert 0 <= skip_index
+                if j == 0:
+                    literal = abjad.LilyPondLiteral(r"\pageBreak", site="before")
+                else:
+                    literal = abjad.LilyPondLiteral(r"\break", site="before")
+                alignment_distances = abjad.sequence.flatten(
+                    alignment_distances, depth=-1
+                )
+                lbsd = _LBSD(alignment_distances=alignment_distances, y_offset=y_offset)
+                skip_index_to_indicators[skip_index] = (literal, lbsd)
+        breaks = Breaks(
+            bol_measure_numbers=bol_measure_numbers,
+            page_count=page_count,
+            skip_index_to_indicators=skip_index_to_indicators,
+        )
+        return breaks
 
     def __call__(self, score, page_layout_profile=None, *, has_anchor_skip=False):
         if self.default_spacing is None:
@@ -191,60 +234,20 @@ class Override:
     duration: tuple[int, int]
 
 
+class Page:
+
+    __slots__ = ("number", "systems")
+
+    def __init__(self, number: int, *systems):
+        assert isinstance(number, int), repr(number)
+        self.number = number
+        assert all(isinstance(_, System) for _ in systems), repr(systems)
+        self.systems = list(systems)
+
+
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class System:
 
     measure: int
     y_offset: int
     distances: tuple[int, ...]
-
-
-def layout(
-    *pages,
-    default_spacing=None,
-    spacing_overrides=None,
-):
-    page_count = len(pages)
-    assert 0 < page_count, repr(page_count)
-    first_system = pages[0].systems[0]
-    assert first_system.measure == 1, repr(first_system)
-    bol_measure_numbers = []
-    skip_index_to_indicators = {}
-    for i, page in enumerate(pages):
-        page_number = i + 1
-        if page.number is not None:
-            if page.number != page_number:
-                message = f"page number ({page.number})"
-                message += f" is not {page_number}."
-                raise Exception(message)
-        for j, system in enumerate(page.systems):
-            measure_number = system.measure
-            bol_measure_numbers.append(measure_number)
-            skip_index = measure_number - 1
-            y_offset = system.y_offset
-            assert isinstance(system.distances, tuple | list), repr(system.distances)
-            alignment_distances = system.distances
-            assert 0 <= skip_index
-            if j == 0:
-                literal = abjad.LilyPondLiteral(r"\pageBreak", site="before")
-            else:
-                literal = abjad.LilyPondLiteral(r"\break", site="before")
-            alignment_distances = abjad.sequence.flatten(alignment_distances, depth=-1)
-            lbsd = _LBSD(alignment_distances=alignment_distances, y_offset=y_offset)
-            skip_index_to_indicators[skip_index] = (literal, lbsd)
-    break_measure_map = BreakMeasureMap(
-        bol_measure_numbers=bol_measure_numbers,
-        page_count=page_count,
-        skip_index_to_indicators=skip_index_to_indicators,
-    )
-    if default_spacing is not None:
-        default_spacing = abjad.Duration(default_spacing)
-    return Layout(
-        breaks=break_measure_map,
-        default_spacing=default_spacing,
-        spacing_overrides=spacing_overrides,
-    )
-
-
-def page(number, *systems):
-    return _Page(number=number, systems=list(systems))

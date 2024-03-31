@@ -8,13 +8,13 @@ def test_layout_01():
     """
 
     with pytest.raises(Exception) as foo:
-        baca.layout.layout(
-            baca.layout.page(
+        baca.layout.Layout(
+            baca.layout.Page(
                 1,
                 baca.layout.System(1, y_offset=20, distances=(15, 20, 20)),
                 baca.layout.System(13, y_offset=140, distances=(15, 20, 20)),
             ),
-            baca.layout.page(
+            baca.layout.Page(
                 9,
                 baca.layout.System(23, y_offset=20, distances=(15, 20, 20)),
             ),
