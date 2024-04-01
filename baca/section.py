@@ -14,6 +14,7 @@ import abjad
 from . import build as _build
 from . import classes as _classes
 from . import helpers as _helpers
+from . import layout as _layout
 from . import memento as _memento
 from . import override as _override
 from . import parts as _parts
@@ -101,7 +102,7 @@ def _analyze_memento(contexts, dictionary, memento):
     previous_indicator = _memento_to_indicator(dictionary, memento)
     if previous_indicator is None:
         return
-    if isinstance(previous_indicator, _classes.SpacingSection):
+    if isinstance(previous_indicator, _layout.SpacingSection):
         return
     for context in contexts:
         if context.name == memento.context:

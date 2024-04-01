@@ -3,11 +3,11 @@ Layout.
 """
 
 import dataclasses
+import typing
 from inspect import currentframe as _frame
 
 import abjad
 
-from . import classes as _classes
 from . import helpers as _helpers
 from . import select as _select
 from . import tags as _tags
@@ -218,7 +218,7 @@ class Spacing:
                 denominator = pair[1] * magic_lilypond_eol_adjustment.denominator
                 pair = numerator, denominator
                 eol_adjusted = True
-            spacing_section = _classes.SpacingSection(pair=pair)
+            spacing_section = SpacingSection(pair=pair)
             tag = _tags.SPACING_COMMAND
             abjad.attach(
                 spacing_section,
@@ -254,6 +254,37 @@ class Spacing:
                     deactivate=True,
                     tag=tag.append(_helpers.function_name(_frame(), n=3)),
                 )
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class SpacingSection:
+
+    pair: tuple[int, int]
+
+    context: typing.ClassVar[str] = "Score"
+    persistent: typing.ClassVar[bool] = True
+
+    def __post_init__(self):
+        assert isinstance(self.pair, tuple) or self.pair == "ZEBRA", repr(self.pair)
+
+    def _get_contributions(self, leaf=None):
+        contributions = abjad.ContributionsBySite()
+        if self.pair != "ZEBRA":
+            numerator, denominator = self.pair
+            string = rf"\baca-new-spacing-section #{numerator} #{denominator}"
+            contributions.before.commands.append(string)
+        return contributions
+
+    # TODO: can this be removed?
+    @staticmethod
+    def from_string(string) -> "SpacingSection":
+        """
+        Makes spacing section from fraction ``string``.
+        """
+        raise Exception("ASDF")
+        strings = string.split("/")
+        pair = int(strings[0]), int(strings[1])
+        return SpacingSection(pair=pair)
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)

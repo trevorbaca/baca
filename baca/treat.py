@@ -8,6 +8,7 @@ import abjad
 
 from . import classes as _classes
 from . import helpers as _helpers
+from . import layout as _layout
 from . import memento as _memento
 from . import tags as _tags
 
@@ -33,7 +34,7 @@ def _attach_color_literal(
         return
     if isinstance(unbundled_indicator, _classes.BarExtent):
         return
-    if isinstance(unbundled_indicator, _classes.SpacingSection):
+    if isinstance(unbundled_indicator, _layout.SpacingSection):
         return
     stem = _to_indicator_stem(unbundled_indicator)
     grob = _indicator_to_grob(unbundled_indicator)
