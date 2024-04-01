@@ -1796,9 +1796,9 @@ def write_layout_ly(
         assert isinstance(spacing, baca.layout.Spacing), repr(spacing)
     layout_py = layout_directory / "layout.py"
     layout_ly = layout_directory / file_name
-    if spacing is not None and spacing.spacing_overrides is not None:
-        assert spacing.default_spacing is not None
-    if spacing is not None and spacing.default_spacing is None:
+    if spacing is not None and spacing.overrides is not None:
+        assert spacing.default is not None
+    if spacing is not None and spacing.default is None:
         eol_measure_numbers = None
         fermata_measure_numbers = None
         measure_count = None

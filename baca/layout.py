@@ -89,20 +89,6 @@ class Breaks:
         return bol_measure_numbers, page_count, skip_index_to_indicators
 
 
-class Layout:
-
-    __slots__ = ("breaks", "spacing")
-
-    def __init__(
-        self,
-        *pages: "Page",
-        default_spacing: abjad.Duration | tuple[int, int] | None = None,
-        spacing_overrides: list["Override"] | None = None,
-    ):
-        self.breaks = Breaks(*pages)
-        self.spacing = Spacing(default_spacing, spacing_overrides)
-
-
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class LBSD:
 
@@ -137,22 +123,18 @@ class Page:
 
 class Spacing:
 
-    __slots__ = ("default_spacing", "spacing_overrides")
+    __slots__ = ("default", "overrides")
 
     def __init__(
         self,
-        default_spacing: abjad.Duration | tuple[int, int] | None = None,
-        spacing_overrides: list["Override"] | None = None,
+        default: tuple[int, int],
+        overrides: list["Override"] | None = None,
     ):
-        assert default_spacing is not None, repr(default_spacing)
-        if default_spacing is not None:
-            default_spacing = abjad.Duration(default_spacing)
-        self.default_spacing = default_spacing
-        self.spacing_overrides = spacing_overrides
+        assert isinstance(default, tuple), repr(default)
+        self.default = default
+        self.overrides = overrides
 
     def __call__(self, score, page_layout_profile=None, *, has_anchor_skip=False):
-        if self.default_spacing is None:
-            return
         page_layout_profile = page_layout_profile or {}
         skips_context = score["Skips"]
         skips = _select.skips(skips_context)
@@ -164,9 +146,9 @@ class Spacing:
             if n in fermata_measure_numbers:
                 measures[n] = fermata_measure_duration
             else:
-                measures[n] = self.default_spacing
+                measures[n] = self.default
             measures[n + 1] = fermata_measure_duration
-        for override in self.spacing_overrides or []:
+        for override in self.overrides or []:
             token = override.measures
             duration = override.duration
             measure_numbers = []
@@ -206,9 +188,7 @@ class Spacing:
                     assert isinstance(item, abjad.Duration), repr(item)
                     pair = item.pair
             else:
-                duration = self.default_spacing
-                assert isinstance(duration, abjad.Duration), repr(duration)
-                pair = duration.pair
+                pair = self.default
             assert pair is not None
             eol_adjusted = False
             if (measure_number in eol_measure_numbers) or (

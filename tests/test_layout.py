@@ -9,7 +9,7 @@ def test_layout_01():
     """
 
     with pytest.raises(Exception) as foo:
-        baca.layout.Layout(
+        baca.layout.Breaks(
             baca.layout.Page(
                 1,
                 baca.layout.System(1, y_offset=20, distances=(15, 20, 20)),
