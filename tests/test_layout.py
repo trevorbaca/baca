@@ -35,7 +35,7 @@ def test_SpacingSection():
         r"""
         \new Voice
         {
-            \baca-new-spacing-section #2 #24
+            \baca-new-strict-spacing-section #2 #24
             c'4
             d'4
             e'4

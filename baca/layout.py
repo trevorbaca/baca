@@ -277,7 +277,7 @@ class SpacingSection:
             contributions.before.commands.append(string)
         else:
             numerator, denominator = self.pair
-            string = rf"\baca-new-spacing-section #{numerator} #{denominator}"
+            string = rf"\baca-new-strict-spacing-section #{numerator} #{denominator}"
             contributions.before.commands.append(string)
         return contributions
 
