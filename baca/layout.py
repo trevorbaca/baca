@@ -123,15 +123,24 @@ class Page:
 
 class Spacing:
 
-    __slots__ = ("default", "overrides")
+    __slots__ = (
+        "default",
+        "forbid_new_spacing_section",
+        "lax_spacing_section",
+        "overrides",
+    )
 
     def __init__(
         self,
         default: tuple[int, int],
+        forbid_new_spacing_section: list[int] | None = None,
+        lax_spacing_section: list[int] | None = None,
         overrides: list["Override"] | None = None,
     ):
         assert isinstance(default, tuple), repr(default)
         self.default = default
+        self.forbid_new_spacing_section = forbid_new_spacing_section or []
+        self.lax_spacing_section = lax_spacing_section or []
         self.overrides = overrides
 
     def __call__(self, score, page_layout_profile=None, *, has_anchor_skip=False):
@@ -182,14 +191,14 @@ class Spacing:
                 item = measures[measure_number]
                 if isinstance(item, tuple):
                     pair = item
-                elif item is False:
-                    pair = "ZEBRA"
-                else:
-                    assert isinstance(item, abjad.Duration), repr(item)
+                elif isinstance(item, abjad.Duration):
                     pair = item.pair
+                else:
+                    assert item is False, repr(item)
+                    pair = "ZEBRA"
             else:
                 pair = self.default
-            assert pair is not None
+            assert isinstance(pair, tuple) or pair == "ZEBRA", repr(pair)
             eol_adjusted = False
             if (measure_number in eol_measure_numbers) or (
                 measure_number == measure_count and not has_anchor_skip
@@ -199,13 +208,23 @@ class Spacing:
                 denominator = pair[1] * magic_lilypond_eol_adjustment.denominator
                 pair = numerator, denominator
                 eol_adjusted = True
-            spacing_section = SpacingSection(pair=pair)
+
+            forbid_new_spacing_section = False
+            if measure_number in self.forbid_new_spacing_section:
+                forbid_new_spacing_section = True
+            spacing_section = SpacingSection(
+                pair=pair,
+                forbid_new_spacing_section=forbid_new_spacing_section,
+                lax_spacing_section=measure_number in self.lax_spacing_section,
+            )
             tag = _tags.SPACING_COMMAND
             abjad.attach(
                 spacing_section,
                 skip,
                 tag=tag.append(_helpers.function_name(_frame(), n=1)),
             )
+            if forbid_new_spacing_section is True:
+                continue
             if eol_adjusted:
                 multiplier = magic_lilypond_eol_adjustment
                 string_ = f"[[{pair_[0]}/{pair_[1]} * {multiplier!s}]]"
@@ -241,6 +260,8 @@ class Spacing:
 class SpacingSection:
 
     pair: tuple[int, int]
+    forbid_new_spacing_section: bool = False
+    lax_spacing_section: bool = False
 
     context: typing.ClassVar[str] = "Score"
     persistent: typing.ClassVar[bool] = True
@@ -250,7 +271,13 @@ class SpacingSection:
 
     def _get_contributions(self, leaf=None):
         contributions = abjad.ContributionsBySite()
-        if self.pair != "ZEBRA":
+        if self.forbid_new_spacing_section is True or self.pair == "ZEBRA":
+            pass
+        elif self.lax_spacing_section is True:
+            numerator, denominator = self.pair
+            string = rf"\baca-new-lax-spacing-section #{numerator} #{denominator}"
+            contributions.before.commands.append(string)
+        else:
             numerator, denominator = self.pair
             string = rf"\baca-new-spacing-section #{numerator} #{denominator}"
             contributions.before.commands.append(string)
