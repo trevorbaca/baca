@@ -191,14 +191,12 @@ class Spacing:
                 item = measures[measure_number]
                 if isinstance(item, tuple):
                     pair = item
-                elif isinstance(item, abjad.Duration):
-                    pair = item.pair
                 else:
-                    assert item is False, repr(item)
-                    pair = "ZEBRA"
+                    assert isinstance(item, abjad.Duration), repr(item)
+                    pair = item.pair
             else:
                 pair = self.default
-            assert isinstance(pair, tuple) or pair == "ZEBRA", repr(pair)
+            assert isinstance(pair, tuple), repr(pair)
             eol_adjusted = False
             if (measure_number in eol_measure_numbers) or (
                 measure_number == measure_count and not has_anchor_skip
@@ -267,11 +265,11 @@ class SpacingSection:
     persistent: typing.ClassVar[bool] = True
 
     def __post_init__(self):
-        assert isinstance(self.pair, tuple) or self.pair == "ZEBRA", repr(self.pair)
+        assert isinstance(self.pair, tuple), repr(self.pair)
 
     def _get_contributions(self, leaf=None):
         contributions = abjad.ContributionsBySite()
-        if self.forbid_new_spacing_section is True or self.pair == "ZEBRA":
+        if self.forbid_new_spacing_section is True:
             pass
         elif self.lax_spacing_section is True:
             numerator, denominator = self.pair
