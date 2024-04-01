@@ -144,6 +144,7 @@ class Spacing:
         default_spacing: abjad.Duration | tuple[int, int] | None = None,
         spacing_overrides: list["Override"] | None = None,
     ):
+        assert default_spacing is not None, repr(default_spacing)
         if default_spacing is not None:
             default_spacing = abjad.Duration(default_spacing)
         self.default_spacing = default_spacing
@@ -274,17 +275,6 @@ class SpacingSection:
             string = rf"\baca-new-spacing-section #{numerator} #{denominator}"
             contributions.before.commands.append(string)
         return contributions
-
-    # TODO: can this be removed?
-    @staticmethod
-    def from_string(string) -> "SpacingSection":
-        """
-        Makes spacing section from fraction ``string``.
-        """
-        raise Exception("ASDF")
-        strings = string.split("/")
-        pair = int(strings[0]), int(strings[1])
-        return SpacingSection(pair=pair)
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)

@@ -6,6 +6,11 @@ def bound_details_right_padding(n):
     return tweak
 
 
+def color(string):
+    tweak = abjad.Tweak(rf"- \tweak color {string}")
+    return tweak
+
+
 def direction_down():
     tweak = abjad.Tweak(r"- \tweak direction #down")
     return tweak

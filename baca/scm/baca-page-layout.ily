@@ -59,6 +59,17 @@ baca-new-lax-spacing-section = #(
     #}
     )
 
+baca-new-spacing-section = #(
+    define-music-function (n d music) (number? number? ly:music?)
+    #{
+    \set Score.proportionalNotationDuration = #(ly:make-moment n d)
+    \override Score.strict-grace-spacing = ##t
+    \override Score.strict-note-spacing = ##t
+    \newSpacingSection
+    $music
+    #}
+    )
+
 baca-new-strict-spacing-section = #(
     define-music-function (n d music) (number? number? ly:music?)
     #{

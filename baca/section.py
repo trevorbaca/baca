@@ -2307,21 +2307,21 @@ def postprocess_score(
     if parts_metric_modulation_multiplier is not None:
         assert isinstance(parts_metric_modulation_multiplier, tuple)
         assert len(parts_metric_modulation_multiplier) == 2
+    voice_name_to_parameter_to_state: dict[str, dict] = {}
     if doctest is False:
         previous_persistent_indicators = previous_metadata.get(
             "persistent_indicators", {}
         )
-    voice_name_to_parameter_to_state: dict[str, dict] = {}
-    offset_to_measure_number = _populate_offset_to_measure_number(
-        first_measure_number,
-        score["Skips"],
-    )
-    if do_not_replace_rests_with_multimeasure_rests is False:
-        _replace_rests_with_multimeasure_rests(
-            offset_to_measure_number,
-            score,
-            time_signatures,
+        offset_to_measure_number = _populate_offset_to_measure_number(
+            first_measure_number,
+            score["Skips"],
         )
+        if do_not_replace_rests_with_multimeasure_rests is False:
+            _replace_rests_with_multimeasure_rests(
+                offset_to_measure_number,
+                score,
+                time_signatures,
+            )
     with abjad.ForbidUpdate(component=score, update_on_exit=True):
         extend_beams(score)
         _attach_sounds_during(score)
