@@ -1,6 +1,14 @@
 import abjad
 
 
+def bound_details_right_end_on_accidental_false(*, index=None):
+    tweak = abjad.Tweak(r"- \tweak bound-details.right.end-on-accidental ##f")
+    if index is not None:
+        assert isinstance(index, int), repr(index)
+        tweak = (tweak, index)
+    return tweak
+
+
 def bound_details_right_padding(n):
     tweak = abjad.Tweak(rf"- \tweak bound-details.right.padding {n}")
     return tweak
