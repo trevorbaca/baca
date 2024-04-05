@@ -18,6 +18,12 @@ from . import tweak as _tweak
 from . import typings as _typings
 
 
+def _rleak_final_item(argument):
+    result = list(argument)
+    result[-1] = _select.rleak_next_nonobgc_leaf(argument[-1])
+    return result
+
+
 def attach_spanner_start(
     argument,
     spanner_start,
@@ -495,7 +501,7 @@ def bow_speed(
         if do_not_bookend is None:
             do_not_bookend = False
         if rleak is True:
-            argument[-1] = _select.rleak_next_nonobgc_leaf(argument[-1])
+            argument = _rleak_final_item(argument)
         wrappers = iterate_text_spanner_pieces(
             argument,
             *tweaks,
@@ -551,7 +557,7 @@ def circle_bow(
         wrappers.append(wrapper)
     else:
         if rleak is True:
-            argument[-1] = _select.rleak_next_nonobgc_leaf(argument[-1])
+            argument = _rleak_final_item(argument)
         wrappers = iterate_text_spanner_pieces(
             argument,
             *tweaks,
@@ -884,7 +890,7 @@ def scp(
     if len(specifiers) == 1:
         assert do_not_bookend is None, repr(do_not_bookend)
         if rleak is True:
-            argument = _select.rleak_next_nonobgc_leaf(argument)
+            argument = _rleak_final_item(argument)
         specifier = specifiers[0]
         wrappers = []
         wrapper = attach_spanner_start(
@@ -906,7 +912,7 @@ def scp(
         if do_not_bookend is None:
             do_not_bookend = False
         if rleak is True:
-            argument[-1] = _select.rleak_next_nonobgc_leaf(argument[-1])
+            argument = _rleak_final_item(argument)
         wrappers = iterate_text_spanner_pieces(
             argument,
             *tweaks,
@@ -1158,7 +1164,7 @@ def text(
         if do_not_bookend is None:
             do_not_bookend = False
         if rleak is True:
-            argument[-1] = _select.rleak_next_nonobgc_leaf(argument[-1])
+            argument = _rleak_final_item(argument)
         wrappers = iterate_text_spanner_pieces(
             argument,
             *tweaks,
@@ -1279,7 +1285,7 @@ def vibrato(
         if do_not_bookend is None:
             do_not_bookend = False
         if rleak is True:
-            argument[-1] = _select.rleak_next_nonobgc_leaf(argument[-1])
+            argument = _rleak_final_item(argument)
         wrappers = iterate_text_spanner_pieces(
             argument,
             *tweaks,
