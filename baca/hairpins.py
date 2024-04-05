@@ -206,7 +206,7 @@ def cyclic(
         assert descriptor[-1] == "!", repr(descriptor)
     specifiers = parse_hairpin_descriptor(descriptor)
     if rleak is True:
-        argument[-1] = _select.rleak_next_nonobgc_leaf(argument[-1])
+        argument = _select.rleak_final_item_next_nonobgc_leaf(argument)
     wrappers = _iterate_cyclic_hairpin_pieces(
         argument,
         *tweaks,
@@ -240,7 +240,7 @@ def hairpin(
     if right_broken is True:
         assert descriptor[-1] == "!", repr(descriptor)
     if rleak is True:
-        argument[-1] = _select.rleak_next_nonobgc_leaf(argument[-1])
+        argument = _select.rleak_final_item_next_nonobgc_leaf(argument)
     specifiers = parse_exact_hairpin_descriptor(descriptor)
     if len(specifiers) == 1:
         argument = [argument]

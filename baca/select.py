@@ -3933,6 +3933,12 @@ def rleak_next_nonobgc_leaf(argument):
     return result
 
 
+def rleak_final_item_next_nonobgc_leaf(argument):
+    result = list(argument)
+    result[-1] = rleak_next_nonobgc_leaf(argument[-1])
+    return result
+
+
 # TODO: remove grace=None keyword
 def rleaves(
     argument,
