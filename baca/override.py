@@ -709,6 +709,18 @@ def note_column_force_hshift(argument, n: int | float) -> list[abjad.Wrapper]:
     )
 
 
+def note_column_x_extent(
+    argument, pair: tuple[int | float, int | float]
+) -> list[abjad.Wrapper]:
+    return _override(
+        _frame(),
+        argument,
+        grob="NoteColumn",
+        attribute="X-extent",
+        value=pair,
+    )
+
+
 def note_head_color(argument, color: str) -> list[abjad.Wrapper]:
     return _override(
         _frame(),
