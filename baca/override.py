@@ -699,7 +699,7 @@ def mmrest_text_transparent(argument) -> list[abjad.Wrapper]:
     )
 
 
-def note_column_shift(argument, n: int | float) -> list[abjad.Wrapper]:
+def note_column_force_hshift(argument, n: int | float) -> list[abjad.Wrapper]:
     return _override(
         _frame(),
         argument,
