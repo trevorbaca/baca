@@ -45,7 +45,7 @@ def staff_padding(n):
 
 
 def to_bar_line_false(*, index=None):
-    tweak = abjad.Tweak(r"- \tweak to-barline ##t")
+    tweak = abjad.Tweak(r"- \tweak to-barline ##f")
     if index is not None:
         assert isinstance(index, int), repr(index)
         tweak = (tweak, index)
