@@ -18,6 +18,38 @@ from . import tweak as _tweak
 from . import typings as _typings
 
 
+def _attach_simplex_spanner_indicators(
+    argument,
+    spanner_start,
+    spanner_stop,
+    *tweaks: _typings.IndexedTweak,
+    bound_details_right_padding: int | float | None = None,
+    direction: abjad.Vertical | None = None,
+    left_broken: bool = False,
+    right_broken: bool = False,
+    staff_padding: int | float | None = None,
+) -> list[abjad.Wrapper]:
+    wrappers = []
+    wrapper = _attach_spanner_start(
+        argument,
+        spanner_start,
+        *tweaks,
+        bound_details_right_padding=bound_details_right_padding,
+        direction=direction,
+        left_broken=left_broken,
+        staff_padding=staff_padding,
+    )
+    wrappers.append(wrapper)
+    wrapper = _attach_spanner_stop(
+        argument,
+        spanner_stop,
+        right_broken=right_broken,
+    )
+    wrappers.append(wrapper)
+    _tags.tag(wrappers, _helpers.function_name(_frame()))
+    return wrappers
+
+
 def _attach_spanner_start(
     argument,
     spanner_start,
@@ -434,21 +466,13 @@ def beam(
     for leaf in abjad.iterate.leaves(argument, grace=False):
         abjad.detach(abjad.StartBeam, leaf)
         abjad.detach(abjad.StopBeam, leaf)
-    wrappers = []
-    if start_beam is not None:
-        wrapper = _attach_spanner_start(
-            argument,
-            start_beam,
-            *tweaks,
-            direction=direction,
-        )
-        wrappers.append(wrapper)
-    if stop_beam is not None:
-        wrapper = _attach_spanner_stop(
-            argument,
-            stop_beam,
-        )
-        wrappers.append(wrapper)
+    wrappers = _attach_simplex_spanner_indicators(
+        argument,
+        start_beam,
+        stop_beam,
+        *tweaks,
+        direction=direction,
+    )
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
@@ -539,21 +563,15 @@ def clb(
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    wrappers = []
-    wrapper = _attach_spanner_start(
+    wrappers = _attach_simplex_spanner_indicators(
         argument,
         specifier.spanner_start,
+        specifier.spanner_stop,
         *tweaks,
         left_broken=left_broken,
+        right_broken=right_broken,
         staff_padding=staff_padding,
     )
-    wrappers.append(wrapper)
-    wrapper = _attach_spanner_stop(
-        argument,
-        specifier.spanner_stop,
-        right_broken=right_broken,
-    )
-    wrappers.append(wrapper)
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
@@ -577,21 +595,15 @@ def covered(
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    wrappers = []
-    wrapper = _attach_spanner_start(
+    wrappers = _attach_simplex_spanner_indicators(
         argument,
         specifier.spanner_start,
+        specifier.spanner_stop,
         *tweaks,
         left_broken=left_broken,
+        right_broken=right_broken,
         staff_padding=staff_padding,
     )
-    wrappers.append(wrapper)
-    wrapper = _attach_spanner_stop(
-        argument,
-        specifier.spanner_stop,
-        right_broken=right_broken,
-    )
-    wrappers.append(wrapper)
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
@@ -614,22 +626,16 @@ def damp(
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    wrappers = []
-    wrapper = _attach_spanner_start(
+    wrappers = _attach_simplex_spanner_indicators(
         argument,
         specifier.spanner_start,
+        specifier.spanner_stop,
         *tweaks,
         bound_details_right_padding=bound_details_right_padding,
         left_broken=left_broken,
+        right_broken=right_broken,
         staff_padding=staff_padding,
     )
-    wrappers.append(wrapper)
-    wrapper = _attach_spanner_stop(
-        argument,
-        specifier.spanner_stop,
-        right_broken=right_broken,
-    )
-    wrappers.append(wrapper)
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
@@ -653,21 +659,15 @@ def half_clt(
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    wrappers = []
-    wrapper = _attach_spanner_start(
+    wrappers = _attach_simplex_spanner_indicators(
         argument,
         specifier.spanner_start,
+        specifier.spanner_stop,
         *tweaks,
         left_broken=left_broken,
+        right_broken=right_broken,
         staff_padding=staff_padding,
     )
-    wrappers.append(wrapper)
-    wrapper = _attach_spanner_stop(
-        argument,
-        specifier.spanner_stop,
-        right_broken=right_broken,
-    )
-    wrappers.append(wrapper)
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
@@ -690,21 +690,15 @@ def material_annotation(
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    wrappers = []
-    wrapper = _attach_spanner_start(
+    wrappers = _attach_simplex_spanner_indicators(
         argument,
         specifier.spanner_start,
+        specifier.spanner_stop,
         *tweaks,
         left_broken=left_broken,
+        right_broken=right_broken,
         staff_padding=staff_padding,
     )
-    wrappers.append(wrapper)
-    wrapper = _attach_spanner_stop(
-        argument,
-        specifier.spanner_stop,
-        right_broken=right_broken,
-    )
-    wrappers.append(wrapper)
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.MATERIAL_ANNOTATION_SPANNER)
     _tags.tag(wrappers, tag)
@@ -728,21 +722,15 @@ def metric_modulation(
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    wrappers = []
-    wrapper = _attach_spanner_start(
+    wrappers = _attach_simplex_spanner_indicators(
         argument,
         specifier.spanner_start,
+        specifier.spanner_stop,
         *tweaks,
         left_broken=left_broken,
+        right_broken=right_broken,
         staff_padding=staff_padding,
     )
-    wrappers.append(wrapper)
-    wrapper = _attach_spanner_stop(
-        argument,
-        specifier.spanner_stop,
-        right_broken=right_broken,
-    )
-    wrappers.append(wrapper)
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.METRIC_MODULATION_SPANNER)
     _tags.tag(wrappers, tag)
@@ -788,21 +776,15 @@ def pizzicato(
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    wrappers = []
-    wrapper = _attach_spanner_start(
+    wrappers = _attach_simplex_spanner_indicators(
         argument,
         specifier.spanner_start,
+        specifier.spanner_stop,
         *tweaks,
         left_broken=left_broken,
+        right_broken=right_broken,
         staff_padding=staff_padding,
     )
-    wrappers.append(wrapper)
-    wrapper = _attach_spanner_stop(
-        argument,
-        specifier.spanner_stop,
-        right_broken=right_broken,
-    )
-    wrappers.append(wrapper)
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
@@ -850,20 +832,12 @@ def slur(
     else:
         start_slur_ = start_slur or abjad.StartSlur()
         stop_slur_ = stop_slur or abjad.StopSlur()
-    wrappers = []
-    if start_slur_ is not None:
-        wrapper = _attach_spanner_start(
-            argument,
-            start_slur_,
-            *tweaks,
-        )
-        wrappers.append(wrapper)
-    if stop_slur_ is not None:
-        wrapper = _attach_spanner_stop(
-            argument,
-            stop_slur_,
-        )
-        wrappers.append(wrapper)
+    wrappers = _attach_simplex_spanner_indicators(
+        argument,
+        start_slur_,
+        stop_slur_,
+        *tweaks,
+    )
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
@@ -886,21 +860,15 @@ def spazzolato(
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    wrappers = []
-    wrapper = _attach_spanner_start(
+    wrappers = _attach_simplex_spanner_indicators(
         argument,
         specifier.spanner_start,
+        specifier.spanner_stop,
         *tweaks,
         left_broken=left_broken,
+        right_broken=right_broken,
         staff_padding=staff_padding,
     )
-    wrappers.append(wrapper)
-    wrapper = _attach_spanner_stop(
-        argument,
-        specifier.spanner_stop,
-        right_broken=right_broken,
-    )
-    wrappers.append(wrapper)
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
@@ -943,21 +911,15 @@ def string_number(
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    wrappers = []
-    wrapper = _attach_spanner_start(
+    wrappers = _attach_simplex_spanner_indicators(
         argument,
         specifier.spanner_start,
+        specifier.spanner_stop,
         *tweaks,
         left_broken=left_broken,
+        right_broken=right_broken,
         staff_padding=staff_padding,
     )
-    wrappers.append(wrapper)
-    wrapper = _attach_spanner_stop(
-        argument,
-        specifier.spanner_stop,
-        right_broken=right_broken,
-    )
-    wrappers.append(wrapper)
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
@@ -971,19 +933,12 @@ def sustain_pedal(
     assert isinstance(start_piano_pedal, abjad.StartPianoPedal), repr(start_piano_pedal)
     assert isinstance(stop_piano_pedal, abjad.StopPianoPedal), repr(stop_piano_pedal)
     wrappers = []
-    if start_piano_pedal is not None:
-        wrapper = _attach_spanner_start(
-            argument,
-            start_piano_pedal,
-            *tweaks,
-        )
-        wrappers.append(wrapper)
-    if stop_piano_pedal is not None:
-        wrapper = _attach_spanner_stop(
-            argument,
-            stop_piano_pedal,
-        )
-        wrappers.append(wrapper)
+    wrappers = _attach_simplex_spanner_indicators(
+        argument,
+        start_piano_pedal,
+        stop_piano_pedal,
+        *tweaks,
+    )
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
@@ -1006,21 +961,15 @@ def tasto(
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    wrappers = []
-    wrapper = _attach_spanner_start(
+    wrappers = _attach_simplex_spanner_indicators(
         argument,
         specifier.spanner_start,
+        specifier.spanner_stop,
         *tweaks,
         left_broken=left_broken,
+        right_broken=right_broken,
         staff_padding=staff_padding,
     )
-    wrappers.append(wrapper)
-    wrapper = _attach_spanner_stop(
-        argument,
-        specifier.spanner_stop,
-        right_broken=right_broken,
-    )
-    wrappers.append(wrapper)
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
@@ -1132,21 +1081,15 @@ def trill(
         string += r' #{ \markup \musicglyph #"noteheads.s0harmonic" #}))'
         string = rf"- \tweak TrillPitchHead.stencil {string}"
         start_trill_span_ = abjad.bundle(start_trill_span_, string)
-    wrappers = []
-    wrapper = _attach_spanner_start(
+    wrappers = _attach_simplex_spanner_indicators(
         argument,
         start_trill_span_,
+        stop_trill_span,
         *tweaks,
         left_broken=left_broken,
+        right_broken=right_broken,
         staff_padding=staff_padding,
     )
-    wrappers.append(wrapper)
-    wrapper = _attach_spanner_stop(
-        argument,
-        stop_trill_span,
-        right_broken=right_broken,
-    )
-    wrappers.append(wrapper)
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
 
@@ -1195,20 +1138,14 @@ def xfb(
     )
     assert len(specifiers) == 1
     specifier = specifiers[0]
-    wrappers = []
-    wrapper = _attach_spanner_start(
+    wrappers = _attach_simplex_spanner_indicators(
         argument,
         specifier.spanner_start,
+        specifier.spanner_stop,
         *tweaks,
         left_broken=left_broken,
+        right_broken=right_broken,
         staff_padding=staff_padding,
     )
-    wrappers.append(wrapper)
-    wrapper = _attach_spanner_stop(
-        argument,
-        specifier.spanner_stop,
-        right_broken=right_broken,
-    )
-    wrappers.append(wrapper)
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
