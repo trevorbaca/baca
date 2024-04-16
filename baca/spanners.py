@@ -11,6 +11,7 @@ import abjad
 from . import helpers as _helpers
 from . import indicatorlib as _indicatorlib
 from . import indicators as _indicators
+from . import postevent as _postevent
 from . import scope as _scope
 from . import select as _select
 from . import tags as _tags
@@ -62,10 +63,11 @@ def _attach_spanner_start(
     unbundled_indicator = _indicatorlib.unbundle_indicator(spanner_start)
     assert unbundled_indicator.spanner_start is True
     if bound_details_right_padding is not None:
-        string = rf"- \tweak bound-details.right.padding {bound_details_right_padding}"
-        tweaks = tweaks + (abjad.Tweak(string),)
+        tweak = _postevent.bound_details_right_padding(bound_details_right_padding)
+        tweaks = tweaks + (tweak,)
     if staff_padding is not None:
-        tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
+        tweak = _postevent.staff_padding(staff_padding)
+        tweaks = tweaks + (tweak,)
     spanner_start = _tweak.bundle_tweaks(spanner_start, tweaks)
     first_leaf = abjad.select.leaf(argument, 0)
     wrapper = _indicatorlib.attach_persistent_indicator(
