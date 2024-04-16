@@ -18,131 +18,7 @@ from . import tweak as _tweak
 from . import typings as _typings
 
 
-def attach_spanner_start(
-    argument,
-    spanner_start,
-    *tweaks: _typings.IndexedTweak,
-    bound_details_right_padding: int | float | None = None,
-    direction: abjad.Vertical | None = None,
-    left_broken: bool = False,
-    staff_padding: int | float | None = None,
-) -> abjad.Wrapper:
-    unbundled_indicator = _indicatorlib.unbundle_indicator(spanner_start)
-    assert unbundled_indicator.spanner_start is True
-    if bound_details_right_padding is not None:
-        string = rf"- \tweak bound-details.right.padding {bound_details_right_padding}"
-        tweaks = tweaks + (abjad.Tweak(string),)
-    if staff_padding is not None:
-        tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
-    spanner_start = _tweak.bundle_tweaks(spanner_start, tweaks)
-    first_leaf = abjad.select.leaf(argument, 0)
-    wrapper = _indicatorlib.attach_persistent_indicator(
-        first_leaf,
-        spanner_start,
-        direction=direction,
-    )
-    tag = _helpers.function_name(_frame())
-    if left_broken:
-        tag = tag.append(_tags.LEFT_BROKEN)
-    _tags.tag([wrapper], tag)
-    return wrapper
-
-
-def attach_spanner_stop(
-    argument,
-    spanner_stop,
-    *,
-    right_broken: bool = False,
-) -> abjad.Wrapper:
-    assert spanner_stop.spanner_stop is True, repr(spanner_stop)
-    final_leaf = abjad.select.leaf(argument, -1)
-    wrapper = _indicatorlib.attach_persistent_indicator(
-        final_leaf,
-        spanner_stop,
-    )
-    tag = _helpers.function_name(_frame())
-    if right_broken:
-        tag = tag.append(_tags.RIGHT_BROKEN)
-    _tags.tag([wrapper], tag)
-    return wrapper
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class TextSpannerSpecifier:
-    bookended_spanner_start: abjad.Bundle | None = None
-    spanner_start: abjad.Bundle | abjad.StartTextSpan | None = None
-    spanner_stop: abjad.StopTextSpan | None = None
-
-    def __iter__(self) -> typing.Iterator:
-        result: list = []
-        if self.spanner_stop:
-            result.append(self.spanner_stop)
-        if self.spanner_start:
-            result.append(self.spanner_start)
-        return iter(result)
-
-    def __post_init__(self):
-        if self.bookended_spanner_start is not None:
-            assert isinstance(self.bookended_spanner_start, abjad.Bundle)
-            indicator = _indicatorlib.unbundle_indicator(self.bookended_spanner_start)
-            assert isinstance(indicator, abjad.StartTextSpan)
-        if self.spanner_start is not None:
-            assert isinstance(self.spanner_start, abjad.Bundle | abjad.StartTextSpan)
-            indicator = _indicatorlib.unbundle_indicator(self.spanner_start)
-            assert isinstance(indicator, abjad.StartTextSpan), repr(indicator)
-        if self.spanner_stop is not None:
-            assert isinstance(self.spanner_stop, abjad.StopTextSpan)
-
-    def attach_items(
-        self,
-        leaf,
-        current_piece_index,
-        tag,
-        tweaks,
-        total_pieces,
-        *,
-        is_left_broken_first_piece: bool = False,
-        is_right_broken_final_piece: bool = False,
-    ) -> list[abjad.Wrapper]:
-        assert isinstance(leaf, abjad.Leaf), repr(leaf)
-        assert isinstance(current_piece_index, int), repr(current_piece_index)
-        assert isinstance(tag, abjad.Tag), repr(tag)
-        assert isinstance(tweaks, tuple), repr(tweaks)
-        assert isinstance(total_pieces, int), repr(total_pieces)
-        wrappers = []
-        prototype = (abjad.Bundle, abjad.StartTextSpan, abjad.StopTextSpan)
-        for item in self:
-            assert isinstance(item, prototype), repr(item)
-            indicator = _indicatorlib.unbundle_indicator(item)
-            if isinstance(indicator, abjad.StartTextSpan):
-                item = _tweak.bundle_tweaks(
-                    item,
-                    tweaks,
-                    i=current_piece_index,
-                    total=total_pieces,
-                    overwrite=True,
-                )
-            left_broken, right_broken = False, False
-            if is_left_broken_first_piece and isinstance(
-                indicator, abjad.StartTextSpan
-            ):
-                left_broken = True
-            if is_right_broken_final_piece and isinstance(
-                indicator, abjad.StopTextSpan
-            ):
-                right_broken = True
-            wrapper = _indicatorlib.attach_persistent_indicator(
-                leaf,
-                item,
-                left_broken=left_broken,
-                right_broken=right_broken,
-                tag=tag,
-            )
-            wrappers.append(wrapper)
-        return wrappers
-
-
-def iterate_text_spanner_pieces(
+def _iterate_text_spanner_pieces(
     pieces,
     *tweaks: _typings.IndexedTweak,
     debug: bool = False,
@@ -275,13 +151,13 @@ def iterate_text_spanner_pieces(
     return wrappers
 
 
-def parse_text_spanner_descriptor(
+def _parse_text_spanner_descriptor(
     descriptor: str,
     direction: int | None = None,
     *,
     left_broken_text: str | None = None,
     lilypond_id: str | int | None = None,
-) -> list[TextSpannerSpecifier]:
+) -> list["TextSpannerSpecifier"]:
     if left_broken_text is not None:
         assert isinstance(left_broken_text, str), repr(left_broken_text)
     if lilypond_id is not None:
@@ -422,6 +298,130 @@ def parse_text_spanner_descriptor(
     return specifiers
 
 
+def attach_spanner_start(
+    argument,
+    spanner_start,
+    *tweaks: _typings.IndexedTweak,
+    bound_details_right_padding: int | float | None = None,
+    direction: abjad.Vertical | None = None,
+    left_broken: bool = False,
+    staff_padding: int | float | None = None,
+) -> abjad.Wrapper:
+    unbundled_indicator = _indicatorlib.unbundle_indicator(spanner_start)
+    assert unbundled_indicator.spanner_start is True
+    if bound_details_right_padding is not None:
+        string = rf"- \tweak bound-details.right.padding {bound_details_right_padding}"
+        tweaks = tweaks + (abjad.Tweak(string),)
+    if staff_padding is not None:
+        tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
+    spanner_start = _tweak.bundle_tweaks(spanner_start, tweaks)
+    first_leaf = abjad.select.leaf(argument, 0)
+    wrapper = _indicatorlib.attach_persistent_indicator(
+        first_leaf,
+        spanner_start,
+        direction=direction,
+    )
+    tag = _helpers.function_name(_frame())
+    if left_broken:
+        tag = tag.append(_tags.LEFT_BROKEN)
+    _tags.tag([wrapper], tag)
+    return wrapper
+
+
+def attach_spanner_stop(
+    argument,
+    spanner_stop,
+    *,
+    right_broken: bool = False,
+) -> abjad.Wrapper:
+    assert spanner_stop.spanner_stop is True, repr(spanner_stop)
+    final_leaf = abjad.select.leaf(argument, -1)
+    wrapper = _indicatorlib.attach_persistent_indicator(
+        final_leaf,
+        spanner_stop,
+    )
+    tag = _helpers.function_name(_frame())
+    if right_broken:
+        tag = tag.append(_tags.RIGHT_BROKEN)
+    _tags.tag([wrapper], tag)
+    return wrapper
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class TextSpannerSpecifier:
+    bookended_spanner_start: abjad.Bundle | None = None
+    spanner_start: abjad.Bundle | abjad.StartTextSpan | None = None
+    spanner_stop: abjad.StopTextSpan | None = None
+
+    def __iter__(self) -> typing.Iterator:
+        result: list = []
+        if self.spanner_stop:
+            result.append(self.spanner_stop)
+        if self.spanner_start:
+            result.append(self.spanner_start)
+        return iter(result)
+
+    def __post_init__(self):
+        if self.bookended_spanner_start is not None:
+            assert isinstance(self.bookended_spanner_start, abjad.Bundle)
+            indicator = _indicatorlib.unbundle_indicator(self.bookended_spanner_start)
+            assert isinstance(indicator, abjad.StartTextSpan)
+        if self.spanner_start is not None:
+            assert isinstance(self.spanner_start, abjad.Bundle | abjad.StartTextSpan)
+            indicator = _indicatorlib.unbundle_indicator(self.spanner_start)
+            assert isinstance(indicator, abjad.StartTextSpan), repr(indicator)
+        if self.spanner_stop is not None:
+            assert isinstance(self.spanner_stop, abjad.StopTextSpan)
+
+    def attach_items(
+        self,
+        leaf,
+        current_piece_index,
+        tag,
+        tweaks,
+        total_pieces,
+        *,
+        is_left_broken_first_piece: bool = False,
+        is_right_broken_final_piece: bool = False,
+    ) -> list[abjad.Wrapper]:
+        assert isinstance(leaf, abjad.Leaf), repr(leaf)
+        assert isinstance(current_piece_index, int), repr(current_piece_index)
+        assert isinstance(tag, abjad.Tag), repr(tag)
+        assert isinstance(tweaks, tuple), repr(tweaks)
+        assert isinstance(total_pieces, int), repr(total_pieces)
+        wrappers = []
+        prototype = (abjad.Bundle, abjad.StartTextSpan, abjad.StopTextSpan)
+        for item in self:
+            assert isinstance(item, prototype), repr(item)
+            indicator = _indicatorlib.unbundle_indicator(item)
+            if isinstance(indicator, abjad.StartTextSpan):
+                item = _tweak.bundle_tweaks(
+                    item,
+                    tweaks,
+                    i=current_piece_index,
+                    total=total_pieces,
+                    overwrite=True,
+                )
+            left_broken, right_broken = False, False
+            if is_left_broken_first_piece and isinstance(
+                indicator, abjad.StartTextSpan
+            ):
+                left_broken = True
+            if is_right_broken_final_piece and isinstance(
+                indicator, abjad.StopTextSpan
+            ):
+                right_broken = True
+            wrapper = _indicatorlib.attach_persistent_indicator(
+                leaf,
+                item,
+                left_broken=left_broken,
+                right_broken=right_broken,
+                tag=tag,
+            )
+            wrappers.append(wrapper)
+        return wrappers
+
+
 def beam(
     argument,
     *tweaks: abjad.Tweak,
@@ -457,22 +457,22 @@ def bow_speed(
     argument,
     descriptor: str,
     *tweaks: _typings.IndexedTweak,
-    do_not_bookend: bool | None = None,
+    do_not_bookend: bool = False,
     left_broken: bool = False,
     left_broken_text: str | None = None,
     right_broken: bool = False,
     rleak: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    assert do_not_bookend is not False, repr(do_not_bookend)
+    assert isinstance(do_not_bookend, bool), repr(do_not_bookend)
     lilypond_id = "BowSpeed"
-    specifiers = parse_text_spanner_descriptor(
+    specifiers = _parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=left_broken_text,
         lilypond_id=lilypond_id,
     )
     if len(specifiers) == 1:
-        assert do_not_bookend is None, repr(do_not_bookend)
+        assert do_not_bookend is False, repr(do_not_bookend)
         if rleak is True:
             argument = _select.rleak_next_nonobgc_leaf(argument)
         specifier = specifiers[0]
@@ -492,11 +492,9 @@ def bow_speed(
         )
         wrappers.append(wrapper)
     else:
-        if do_not_bookend is None:
-            do_not_bookend = False
         if rleak is True:
             argument = _select.rleak_final_item_next_nonobgc_leaf(argument)
-        wrappers = iterate_text_spanner_pieces(
+        wrappers = _iterate_text_spanner_pieces(
             argument,
             *tweaks,
             do_not_bookend=do_not_bookend,
@@ -525,7 +523,7 @@ def circle_bow(
         assert isinstance(qualifier, str), repr(qualifier)
         descriptor = rf"\baca-circle-{qualifier}-markup =|"
     lilypond_id = "CircleBow"
-    specifiers = parse_text_spanner_descriptor(
+    specifiers = _parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=left_broken_text,
         lilypond_id=lilypond_id,
@@ -552,7 +550,7 @@ def circle_bow(
     else:
         if rleak is True:
             argument = _select.rleak_final_item_next_nonobgc_leaf(argument)
-        wrappers = iterate_text_spanner_pieces(
+        wrappers = _iterate_text_spanner_pieces(
             argument,
             *tweaks,
             left_broken=left_broken,
@@ -586,7 +584,7 @@ def clb(
         markup = r"\baca-damp-clb-four-markup"
     else:
         raise Exception(string_number)
-    specifiers = parse_text_spanner_descriptor(
+    specifiers = _parse_text_spanner_descriptor(
         f"{markup} =|",
         left_broken_text=r"\baca-left-broken-clb-markup",
         lilypond_id="CLB",
@@ -624,7 +622,7 @@ def covered(
 ) -> list[abjad.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
-    specifiers = parse_text_spanner_descriptor(
+    specifiers = _parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=left_broken_text,
         lilypond_id="Covered",
@@ -661,7 +659,7 @@ def damp(
 ) -> list[abjad.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
-    specifiers = parse_text_spanner_descriptor(
+    specifiers = _parse_text_spanner_descriptor(
         r"\baca-damp-markup =|",
         left_broken_text=r"\baca-left-broken-damp-markup",
         lilypond_id="Damp",
@@ -700,7 +698,7 @@ def half_clt(
 ) -> list[abjad.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
-    specifiers = parse_text_spanner_descriptor(
+    specifiers = _parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=left_broken_text,
         lilypond_id="HalfCLT",
@@ -737,7 +735,7 @@ def material_annotation(
 ) -> list[abjad.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
-    specifiers = parse_text_spanner_descriptor(
+    specifiers = _parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=None,
         lilypond_id="MaterialAnnotation",
@@ -775,7 +773,7 @@ def metric_modulation(
 ) -> list[abjad.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
-    specifiers = parse_text_spanner_descriptor(
+    specifiers = _parse_text_spanner_descriptor(
         "MM =|",
         left_broken_text=None,
         lilypond_id="MetricModulation",
@@ -835,7 +833,7 @@ def pizzicato(
 ) -> list[abjad.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
-    specifiers = parse_text_spanner_descriptor(
+    specifiers = _parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=left_broken_text,
         lilypond_id="Pizzicato",
@@ -865,7 +863,7 @@ def scp(
     argument,
     descriptor: str,
     *tweaks: _typings.IndexedTweak,
-    do_not_bookend: bool | None = None,
+    do_not_bookend: bool = False,
     bound_details_right_padding: int | float | None = None,
     do_not_start_spanner_on_final_piece: bool = False,
     left_broken: bool = False,
@@ -874,15 +872,15 @@ def scp(
     rleak: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    assert do_not_bookend is not False, repr(do_not_bookend)
+    assert isinstance(do_not_bookend, bool), repr(do_not_bookend)
     lilypond_id = "SCP"
-    specifiers = parse_text_spanner_descriptor(
+    specifiers = _parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=left_broken_text,
         lilypond_id=lilypond_id,
     )
     if len(specifiers) == 1:
-        assert do_not_bookend is None, repr(do_not_bookend)
+        assert do_not_bookend is False, repr(do_not_bookend)
         if rleak is True:
             argument = _select.rleak_final_item_next_nonobgc_leaf(argument)
         specifier = specifiers[0]
@@ -903,11 +901,9 @@ def scp(
         )
         wrappers.append(wrapper)
     else:
-        if do_not_bookend is None:
-            do_not_bookend = False
         if rleak is True:
             argument = _select.rleak_final_item_next_nonobgc_leaf(argument)
-        wrappers = iterate_text_spanner_pieces(
+        wrappers = _iterate_text_spanner_pieces(
             argument,
             *tweaks,
             do_not_bookend=do_not_bookend,
@@ -963,7 +959,7 @@ def spazzolato(
 ) -> list[abjad.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
-    specifiers = parse_text_spanner_descriptor(
+    specifiers = _parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=r"\baca-left-broken-spazz-markup",
         lilypond_id="Spazzolato",
@@ -1020,7 +1016,7 @@ def string_number(
         descriptor = f"{string_number_markup} ||"
     else:
         descriptor = f"{string_number_markup} =|"
-    specifiers = parse_text_spanner_descriptor(
+    specifiers = _parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=left_broken_text,
         lilypond_id="StringNumber",
@@ -1083,7 +1079,7 @@ def tasto(
 ) -> list[abjad.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
-    specifiers = parse_text_spanner_descriptor(
+    specifiers = _parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=r"\baca-left-broken-t-markup",
         lilypond_id="SCP",
@@ -1113,8 +1109,7 @@ def text(
     argument,
     descriptor: str,
     *tweaks: _typings.IndexedTweak,
-    do_not_bookend: bool | None = None,
-    debug: bool = False,
+    do_not_bookend: bool = False,
     direction: int | None = None,
     do_not_start_spanner_on_final_piece: bool = False,
     left_broken: bool = False,
@@ -1125,17 +1120,15 @@ def text(
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     assert isinstance(descriptor, str), repr(descriptor)
-    assert do_not_bookend is not False, repr(do_not_bookend)
-    specifiers = parse_text_spanner_descriptor(
+    assert isinstance(do_not_bookend, bool), repr(do_not_bookend)
+    specifiers = _parse_text_spanner_descriptor(
         descriptor,
         direction=direction,
         left_broken_text=left_broken_text,
         lilypond_id=lilypond_id,
     )
-    if debug is True:
-        breakpoint()
     if len(specifiers) == 1:
-        assert do_not_bookend is None, repr(do_not_bookend)
+        assert do_not_bookend is False, repr(do_not_bookend)
         if rleak is True:
             argument = _select.rleak_next_nonobgc_leaf(argument)
         specifier = specifiers[0]
@@ -1155,11 +1148,9 @@ def text(
         )
         wrappers.append(wrapper)
     else:
-        if do_not_bookend is None:
-            do_not_bookend = False
         if rleak is True:
             argument = _select.rleak_final_item_next_nonobgc_leaf(argument)
-        wrappers = iterate_text_spanner_pieces(
+        wrappers = _iterate_text_spanner_pieces(
             argument,
             *tweaks,
             do_not_bookend=do_not_bookend,
@@ -1241,22 +1232,22 @@ def vibrato(
     argument,
     descriptor: str,
     *tweaks: _typings.IndexedTweak,
-    do_not_bookend: bool | None = None,
+    do_not_bookend: bool = False,
     left_broken: bool = False,
     left_broken_text: str | None = None,
     right_broken: bool = False,
     rleak: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    assert do_not_bookend is not False, repr(do_not_bookend)
+    assert isinstance(do_not_bookend, bool), repr(do_not_bookend)
     lilypond_id = "Vibrato"
-    specifiers = parse_text_spanner_descriptor(
+    specifiers = _parse_text_spanner_descriptor(
         descriptor,
         left_broken_text=left_broken_text,
         lilypond_id=lilypond_id,
     )
     if len(specifiers) == 1:
-        assert do_not_bookend is None, repr(do_not_bookend)
+        assert do_not_bookend is False, repr(do_not_bookend)
         if rleak is True:
             argument = _select.rleak_next_nonobgc_leaf(argument)
         specifier = specifiers[0]
@@ -1276,11 +1267,9 @@ def vibrato(
         )
         wrappers.append(wrapper)
     else:
-        if do_not_bookend is None:
-            do_not_bookend = False
         if rleak is True:
             argument = _select.rleak_final_item_next_nonobgc_leaf(argument)
-        wrappers = iterate_text_spanner_pieces(
+        wrappers = _iterate_text_spanner_pieces(
             argument,
             *tweaks,
             do_not_bookend=do_not_bookend,
@@ -1303,7 +1292,7 @@ def xfb(
 ) -> list[abjad.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
-    specifiers = parse_text_spanner_descriptor(
+    specifiers = _parse_text_spanner_descriptor(
         "XFB =|",
         left_broken_text=r"\baca-left-broken-xfb-markup",
         lilypond_id="BowSpeed",
