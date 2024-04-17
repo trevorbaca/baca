@@ -24,8 +24,17 @@ def direction_down():
     return tweak
 
 
-def padding(n):
-    tweak = abjad.Tweak(rf"- \tweak padding {n}")
+def extra_offset(pair):
+    x, y = pair
+    tweak = abjad.Tweak(rf"- \tweak extra-offset #'({x} . {y})")
+    return tweak
+
+
+def padding(n, *, not_postevent=False):
+    if not_postevent is True:
+        tweak = abjad.Tweak(rf"\tweak padding {n}")
+    else:
+        tweak = abjad.Tweak(rf"- \tweak padding {n}")
     return tweak
 
 

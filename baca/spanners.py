@@ -27,6 +27,7 @@ def _attach_simplex_spanner_indicators(
     bound_details_right_padding: int | float | None = None,
     direction: abjad.Vertical | None = None,
     left_broken: bool = False,
+    padding: int | float | None = None,
     right_broken: bool = False,
     staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
@@ -38,6 +39,7 @@ def _attach_simplex_spanner_indicators(
         bound_details_right_padding=bound_details_right_padding,
         direction=direction,
         left_broken=left_broken,
+        padding=padding,
         staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
@@ -58,12 +60,16 @@ def _attach_spanner_start(
     bound_details_right_padding: int | float | None = None,
     direction: abjad.Vertical | None = None,
     left_broken: bool = False,
+    padding: int | float | None = None,
     staff_padding: int | float | None = None,
 ) -> abjad.Wrapper:
     unbundled_indicator = _indicatorlib.unbundle_indicator(spanner_start)
     assert unbundled_indicator.spanner_start is True
     if bound_details_right_padding is not None:
         tweak = _postevent.bound_details_right_padding(bound_details_right_padding)
+        tweaks = tweaks + (tweak,)
+    if padding is not None:
+        tweak = _postevent.padding(padding)
         tweaks = tweaks + (tweak,)
     if staff_padding is not None:
         tweak = _postevent.staff_padding(staff_padding)
@@ -1045,6 +1051,7 @@ def trill(
     force_trill_pitch_head_accidental: bool = False,
     harmonic: bool = False,
     left_broken: bool = False,
+    padding: int | float | None = None,
     right_broken: bool = False,
     rleak: bool = False,
     staff_padding: int | float | None = None,
@@ -1090,6 +1097,7 @@ def trill(
         *tweaks,
         left_broken=left_broken,
         right_broken=right_broken,
+        padding=padding,
         staff_padding=staff_padding,
     )
     _tags.tag(wrappers, _helpers.function_name(_frame()))

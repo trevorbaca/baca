@@ -101,9 +101,11 @@ def articulation(
 ) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     if padding is not None:
-        tweaks = tweaks + (abjad.Tweak(rf"- \tweak padding {padding}"),)
+        tweak = _postevent.padding(padding)
+        tweaks = tweaks + (tweak,)
     if staff_padding is not None:
-        tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
+        tweak = _postevent.staff_padding(staff_padding)
+        tweaks = tweaks + (tweak,)
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
         indicator = abjad.Articulation(string)
@@ -351,11 +353,11 @@ def down_bow(
     parent_alignment_x: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     if padding is not None:
-        tweaks = tweaks + (abjad.Tweak(rf"- \tweak padding {padding}"),)
+        tweak = _postevent.padding(padding)
+        tweaks = tweaks + (tweak,)
     if parent_alignment_x is not None:
-        tweaks = tweaks + (
-            abjad.Tweak(rf"- \tweak parent-alignment-X {parent_alignment_x}"),
-        )
+        tweak = _postevent.parent_alignment_x(parent_alignment_x)
+        tweaks = tweaks + (tweak,)
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.select.leaves(argument):
@@ -384,13 +386,10 @@ def dynamic(
 ) -> list[abjad.Wrapper]:
     wrappers = []
     if parent_alignment_x is not None:
-        tweaks = tweaks + (
-            abjad.Tweak(rf"- \tweak parent-alignment-X {parent_alignment_x}"),
-        )
+        tweak = _postevent.parent_alignment_x(parent_alignment_x)
+        tweaks = tweaks + (tweak,)
     if self_alignment_x is not None:
-        tweaks = tweaks + (
-            abjad.Tweak(rf"- \tweak self-alignment-X {self_alignment_x}"),
-        )
+        tweaks = tweaks + (_postevent.self_alignment_x(self_alignment_x),)
     for leaf in abjad.select.leaves(argument):
         if dynamic == "-":
             continue
@@ -724,7 +723,8 @@ def mark(
     assert isinstance(string, abjad.Markup | str), repr(string)
     tag = _helpers.function_name(_frame())
     if padding is not None:
-        tweaks = tweaks + (abjad.Tweak(rf"\tweak padding {padding}"),)
+        tweak = _postevent.padding(padding, not_postevent=True)
+        tweaks = tweaks + (tweak,)
     wrappers = []
     for leaf in abjad.select.leaves(argument):
         rehearsal_mark = abjad.RehearsalMark(markup=string, site=site)
@@ -910,10 +910,11 @@ def rehearsal_mark(
     assert isinstance(font_size, int | float), repr(font_size)
     string = rf'\baca-rehearsal-mark-markup "{string}" #{font_size}'
     if extra_offset is not None:
-        x, y = extra_offset
-        tweaks = tweaks + (abjad.Tweak(rf"- \tweak extra-offset #'({x} . {y})"),)
+        tweak = _postevent.extra_offset(extra_offset)
+        tweaks = tweaks + (tweak,)
     if padding is not None:
-        tweaks = tweaks + (abjad.Tweak(rf"- \tweak padding {padding}"),)
+        tweak = _postevent.padding(padding)
+        tweaks = tweaks + (tweak,)
     wrappers = []
     for leaf in abjad.select.leaves(argument):
         indicator: abjad.Markup | abjad.Bundle
@@ -1178,7 +1179,8 @@ def triple_staccato(
     tag = _helpers.function_name(_frame())
     wrappers = []
     if padding is not None:
-        tweaks = tweaks + (abjad.Tweak(rf"- \tweak padding {padding}"),)
+        tweak = _postevent.padding(padding)
+        tweaks = tweaks + (tweak,)
     for leaf in abjad.iterate.leaves(argument):
         indicator = abjad.Articulation("baca-staccati #3")
         indicator = _tweak.bundle_tweaks(indicator, tweaks)
@@ -1217,11 +1219,11 @@ def up_bow(
     tag = _helpers.function_name(_frame())
     wrappers = []
     if padding is not None:
-        tweaks = tweaks + (abjad.Tweak(rf"- \tweak padding {padding}"),)
+        tweak = _postevent.padding(padding)
+        tweaks = tweaks + (tweak,)
     if parent_alignment_x is not None:
-        tweaks = tweaks + (
-            abjad.Tweak(rf"- \tweak parent-alignment-X {parent_alignment_x}"),
-        )
+        tweak = _postevent.parent_alignment_x(parent_alignment_x)
+        tweaks = tweaks + (tweak,)
     for leaf in abjad.iterate.leaves(argument):
         indicator: abjad.Articulation | abjad.Bundle
         if full:
