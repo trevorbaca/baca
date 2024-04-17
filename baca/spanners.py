@@ -26,6 +26,7 @@ def _attach_simplex_spanner_indicators(
     *tweaks: _typings.IndexedTweak,
     bound_details_right_padding: int | float | None = None,
     direction: abjad.Vertical | None = None,
+    grob: str | None = None,
     left_broken: bool = False,
     padding: int | float | None = None,
     right_broken: bool = False,
@@ -38,6 +39,7 @@ def _attach_simplex_spanner_indicators(
         *tweaks,
         bound_details_right_padding=bound_details_right_padding,
         direction=direction,
+        grob=grob,
         left_broken=left_broken,
         padding=padding,
         staff_padding=staff_padding,
@@ -59,6 +61,7 @@ def _attach_spanner_start(
     *tweaks: _typings.IndexedTweak,
     bound_details_right_padding: int | float | None = None,
     direction: abjad.Vertical | None = None,
+    grob: str | None = None,
     left_broken: bool = False,
     padding: int | float | None = None,
     staff_padding: int | float | None = None,
@@ -66,13 +69,16 @@ def _attach_spanner_start(
     unbundled_indicator = _indicatorlib.unbundle_indicator(spanner_start)
     assert unbundled_indicator.spanner_start is True
     if bound_details_right_padding is not None:
-        tweak = _postevent.bound_details_right_padding(bound_details_right_padding)
+        tweak = _postevent.bound_details_right_padding(
+            bound_details_right_padding,
+            grob=grob,
+        )
         tweaks = tweaks + (tweak,)
     if padding is not None:
-        tweak = _postevent.padding(padding)
+        tweak = _postevent.padding(padding, grob=grob)
         tweaks = tweaks + (tweak,)
     if staff_padding is not None:
-        tweak = _postevent.staff_padding(staff_padding)
+        tweak = _postevent.staff_padding(staff_padding, grob=grob)
         tweaks = tweaks + (tweak,)
     spanner_start = _tweak.bundle_tweaks(spanner_start, tweaks)
     first_leaf = abjad.select.leaf(argument, 0)
@@ -1062,6 +1068,7 @@ def trill(
         argument = _select.rleak_next_nonobgc_leaf(argument)
     assert isinstance(start_trill_span, abjad.StartTrillSpan), repr(start_trill_span)
     interval = pitch = None
+    grob = None
     if alteration is not None:
         prototype = (abjad.NamedPitch, abjad.NamedInterval, str)
         assert isinstance(alteration, prototype), repr(alteration)
@@ -1073,6 +1080,7 @@ def trill(
             interval = abjad.NamedInterval(alteration)
         except Exception:
             pass
+        grob = "TrillSpanner"
     if pitch is not None or interval is not None:
         start_trill_span = dataclasses.replace(
             start_trill_span, interval=interval, pitch=pitch
@@ -1095,6 +1103,7 @@ def trill(
         start_trill_span_,
         stop_trill_span,
         *tweaks,
+        grob=grob,
         left_broken=left_broken,
         right_broken=right_broken,
         padding=padding,

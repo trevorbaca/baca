@@ -9,8 +9,11 @@ def bound_details_right_end_on_accidental_false(*, index=None):
     return tweak
 
 
-def bound_details_right_padding(n):
-    tweak = abjad.Tweak(rf"- \tweak bound-details.right.padding {n}")
+def bound_details_right_padding(n, *, grob=None):
+    if grob is None:
+        tweak = abjad.Tweak(rf"- \tweak bound-details.right.padding {n}")
+    else:
+        tweak = abjad.Tweak(rf"- \tweak {grob}.bound-details.right.padding {n}")
     return tweak
 
 
@@ -30,11 +33,17 @@ def extra_offset(pair):
     return tweak
 
 
-def padding(n, *, not_postevent=False):
+def padding(n, *, grob=None, not_postevent=False):
     if not_postevent is True:
-        tweak = abjad.Tweak(rf"\tweak padding {n}")
+        if grob is None:
+            tweak = abjad.Tweak(rf"\tweak padding {n}")
+        else:
+            tweak = abjad.Tweak(rf"\tweak {grob}.padding {n}")
     else:
-        tweak = abjad.Tweak(rf"- \tweak padding {n}")
+        if grob is None:
+            tweak = abjad.Tweak(rf"- \tweak padding {n}")
+        else:
+            tweak = abjad.Tweak(rf"- \tweak {grob}.padding {n}")
     return tweak
 
 
@@ -48,8 +57,11 @@ def self_alignment_x(n):
     return tweak
 
 
-def staff_padding(n):
-    tweak = abjad.Tweak(rf"- \tweak staff-padding {n}")
+def staff_padding(n, *, grob=None):
+    if grob is None:
+        tweak = abjad.Tweak(rf"- \tweak staff-padding {n}")
+    else:
+        tweak = abjad.Tweak(rf"- \tweak {grob}.staff-padding {n}")
     return tweak
 
 
