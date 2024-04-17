@@ -2253,12 +2253,12 @@ def postprocess_score(
     do_not_color_not_yet_pitched=False,
     do_not_color_not_yet_registered=False,
     do_not_color_repeat_pitch_classes=False,
+    do_not_error_on_not_yet_pitched=False,
     do_not_force_nonnatural_accidentals=False,
     do_not_replace_rests_with_multimeasure_rests=False,
     do_not_require_short_instrument_names=False,
     do_not_transpose_score=False,
     empty_fermata_measures=False,
-    error_on_not_yet_pitched=False,
     fermata_extra_offset_y=2.5,
     fermata_measure_empty_overrides=(),
     final_section=False,
@@ -2354,13 +2354,13 @@ def postprocess_score(
         _color_mock_pitch(score)
         _set_intermittent_to_staff_position_zero(score)
         _pitch_unpitched_anchor_notes(score)
+        if not do_not_error_on_not_yet_pitched:
+            _error_on_not_yet_pitched(score)
         if do_not_color_not_yet_pitched is False:
             _color_not_yet_pitched(score)
         _set_not_yet_pitched_to_staff_position_zero(score)
         _clean_up_repeat_tie_direction(score)
         _clean_up_laissez_vibrer_tie_direction(score)
-        if error_on_not_yet_pitched:
-            _error_on_not_yet_pitched(score)
         _check_doubled_dynamics(score)
         color_out_of_range_pitches(score)
         if doctest is False:
