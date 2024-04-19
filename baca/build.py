@@ -448,15 +448,15 @@ def _log_timing(section_directory, timing):
         pointer.write("\n")
         line = time.strftime("%Y-%m-%d %H:%M:%S") + "\n"
         pointer.write(line)
-        python_runtime = timing.make_score + timing.postprocess_score
+        python_runtime = timing.make_score + timing.postprocess
         counter = abjad.string.pluralize("second", python_runtime)
         line = f"Python runtime: {python_runtime} {counter}\n"
         pointer.write(line)
         counter = abjad.string.pluralize("second", timing.make_score)
         line = f"  make_score(): {timing.make_score} {counter}\n"
         pointer.write(line)
-        counter = abjad.string.pluralize("second", timing.postprocess_score)
-        line = f"  postprocess_score(): {timing.postprocess_score} {counter}\n"
+        counter = abjad.string.pluralize("second", timing.postprocess)
+        line = f"  postprocess(): {timing.postprocess} {counter}\n"
         pointer.write(line)
         if timing.lilypond == "SKIPPED":
             line = f"LilyPond runtime: {timing.lilypond}\n"
@@ -955,7 +955,7 @@ def _make_empty_mapping_proxy():
 class Timing:
     lilypond: int | None = None
     make_score: int | None = None
-    postprocess_score: int | None = None
+    postprocess: int | None = None
 
 
 @dataclasses.dataclass(frozen=True, slots=True, order=True, unsafe_hash=True)
@@ -1539,7 +1539,7 @@ def persist_lilypond_file(
 
 def print_all_timing(timing):
     if hasattr(timing, "make_score"):
-        python_runtime = timing.make_score + timing.postprocess_score
+        python_runtime = timing.make_score + timing.postprocess
         print_timing("Python runtime", python_runtime)
     if timing.lilypond == "SKIPPED":
         lilypond_runtime = "SKIPPED"

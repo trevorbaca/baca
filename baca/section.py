@@ -2236,8 +2236,8 @@ def label_stage_numbers(global_skips, stage_markup):
     )
 
 
-@_build.timed("postprocess_score")
-def postprocess_score(
+@_build.timed("postprocess")
+def postprocess(
     score,
     environment: _build.Environment,
     manifests: dict,
