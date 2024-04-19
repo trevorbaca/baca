@@ -42,7 +42,6 @@ html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 htmlhelp_basename = "BačaAPIdoc"
 
 intersphinx_mapping = {
-    "http://josiahwolfoberholtzer.com/uqbar/": None,
     "http://www.sphinx-doc.org/en/master/": None,
     "https://docs.python.org/3.10/": None,
 }
