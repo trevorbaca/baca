@@ -66,7 +66,7 @@ def staff_padding(n, *, grob=None):
 
 
 def style_trill():
-    tweak = abjad.Tweak(rf"- \tweak style #'trill")
+    tweak = abjad.Tweak(r"- \tweak style #'trill")
     return tweak
 
 
