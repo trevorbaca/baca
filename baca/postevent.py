@@ -27,9 +27,9 @@ def direction_down():
     return tweak
 
 
-def extra_offset(pair):
+def extra_offset(pair, *, tag=None):
     x, y = pair
-    tweak = abjad.Tweak(rf"- \tweak extra-offset #'({x} . {y})")
+    tweak = abjad.Tweak(rf"- \tweak extra-offset #'({x} . {y})", tag=tag)
     return tweak
 
 
@@ -62,6 +62,11 @@ def staff_padding(n, *, grob=None):
         tweak = abjad.Tweak(rf"- \tweak staff-padding {n}")
     else:
         tweak = abjad.Tweak(rf"- \tweak {grob}.staff-padding {n}")
+    return tweak
+
+
+def style_trill():
+    tweak = abjad.Tweak(rf"- \tweak style #'trill")
     return tweak
 
 
