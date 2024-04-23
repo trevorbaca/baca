@@ -9,11 +9,14 @@ def bound_details_right_end_on_accidental_false(*, index=None):
     return tweak
 
 
-def bound_details_right_padding(n, *, grob=None):
+def bound_details_right_padding(n, *, grob=None, index=None):
     if grob is None:
         tweak = abjad.Tweak(rf"- \tweak bound-details.right.padding {n}")
     else:
         tweak = abjad.Tweak(rf"- \tweak {grob}.bound-details.right.padding {n}")
+    if index is not None:
+        assert isinstance(index, int), repr(index)
+        tweak = (tweak, index)
     return tweak
 
 
