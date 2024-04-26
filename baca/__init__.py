@@ -12,12 +12,12 @@ from . import layout
 from . import math
 from . import override
 from . import path
-from . import postevent
 from . import score
 from . import section
 from . import select
 from . import sequence
 from . import spanners
+from . import tweak
 from . import typings
 from .enums import colors, enums
 from .anchor import (
