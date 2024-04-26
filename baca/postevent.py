@@ -87,3 +87,13 @@ def to_bar_line_true(*, index=None):
         assert isinstance(index, int), repr(index)
         tweak = (tweak, index)
     return tweak
+
+
+def x_extent_zero():
+    tweak = abjad.Tweak(r"- \tweak X-extent #'(0 . 0)")
+    return tweak
+
+
+def x_offset(n):
+    tweak = abjad.Tweak(rf"- \tweak X-offset {n}")
+    return tweak
