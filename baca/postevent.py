@@ -1,6 +1,13 @@
 import abjad
 
 
+def _handle_index(tweak, *, index=None):
+    if index is not None:
+        assert isinstance(index, int), repr(index)
+        tweak = (tweak, index)
+    return tweak
+
+
 def bound_details_left_broken_text(string, *, grob=None, index=None):
     if grob is None:
         tweak = abjad.Tweak(rf"- \tweak bound-details.left-broken.text {string}")
@@ -118,6 +125,17 @@ def staff_padding(n, *, grob=None):
     else:
         tweak = abjad.Tweak(rf"- \tweak {grob}.staff-padding {n}")
     return tweak
+
+
+def style_harmonic(*, index=None, target=None):
+    string = r"\tweak style #'harmonic"
+    if target is not None:
+        abjad.tweak(target, string)
+    else:
+        string = "- " + string
+        tweak = abjad.Tweak(string)
+        tweak = _handle_index(tweak, index=index)
+        return tweak
 
 
 def style_trill(*, index=None):

@@ -12,7 +12,6 @@ from . import helpers as _helpers
 from . import pitchtools as _pitchtools
 from . import select as _select
 from . import tags as _tags
-from . import tweak as _tweak
 from . import typings as _typings
 
 
@@ -119,7 +118,7 @@ def bcps(
             style=style,
         )
         if tweaks:
-            start_text_span = _tweak.bundle_tweaks(start_text_span, tweaks)
+            start_text_span = _helpers.bundle_tweaks(start_text_span, tweaks)
         if _is_rest(lt.head) and (_is_rest(next_leaf) or next_leaf is None):
             pass
         else:
@@ -154,7 +153,7 @@ def bcps(
             if bcp_fraction > next_bcp_fraction:
                 articulation = abjad.Articulation("upbow")
                 if bow_change_tweaks:
-                    articulation = _tweak.bundle_tweaks(
+                    articulation = _helpers.bundle_tweaks(
                         articulation,
                         bow_change_tweaks,
                     )
@@ -168,7 +167,7 @@ def bcps(
             elif bcp_fraction < next_bcp_fraction:
                 articulation = abjad.Articulation("downbow")
                 if bow_change_tweaks:
-                    articulation = _tweak.bundle_tweaks(
+                    articulation = _helpers.bundle_tweaks(
                         articulation,
                         bow_change_tweaks,
                     )
@@ -184,7 +183,7 @@ def bcps(
             if previous_bcp_fraction < bcp_fraction > next_bcp_fraction:
                 articulation = abjad.Articulation("upbow")
                 if bow_change_tweaks:
-                    articulation = _tweak.bundle_tweaks(
+                    articulation = _helpers.bundle_tweaks(
                         articulation,
                         bow_change_tweaks,
                     )
@@ -198,7 +197,7 @@ def bcps(
             elif previous_bcp_fraction > bcp_fraction < next_bcp_fraction:
                 articulation = abjad.Articulation("downbow")
                 if bow_change_tweaks:
-                    articulation = _tweak.bundle_tweaks(
+                    articulation = _helpers.bundle_tweaks(
                         articulation,
                         bow_change_tweaks,
                     )

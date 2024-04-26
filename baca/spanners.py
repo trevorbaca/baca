@@ -15,7 +15,6 @@ from . import postevent as _postevent
 from . import scope as _scope
 from . import select as _select
 from . import tags as _tags
-from . import tweak as _tweak
 from . import typings as _typings
 
 
@@ -80,7 +79,7 @@ def _attach_spanner_start(
     if staff_padding is not None:
         tweak = _postevent.staff_padding(staff_padding, grob=grob)
         tweaks = tweaks + (tweak,)
-    spanner_start = _tweak.bundle_tweaks(spanner_start, tweaks)
+    spanner_start = _helpers.bundle_tweaks(spanner_start, tweaks)
     first_leaf = abjad.select.leaf(argument, 0)
     wrapper = _indicatorlib.attach_persistent_indicator(
         first_leaf,
@@ -113,6 +112,20 @@ def _attach_spanner_stop(
     return wrapper
 
 
+def _extend_tweaks(
+    tweaks,
+    *,
+    bound_details_right_padding: int | float | None = None,
+    staff_padding: int | float | None = None,
+):
+    if bound_details_right_padding is not None:
+        string = rf"- \tweak bound-details.right.padding {bound_details_right_padding}"
+        tweaks = tweaks + (abjad.Tweak(string),)
+    if staff_padding is not None:
+        tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
+    return tweaks
+
+
 def _iterate_text_spanner_pieces(
     pieces,
     *tweaks: _typings.IndexedTweak,
@@ -138,7 +151,7 @@ def _iterate_text_spanner_pieces(
         specifiers
     )
     assert isinstance(staff_padding, int | float | type(None)), repr(staff_padding)
-    tweaks = _tweak.extend(
+    tweaks = _extend_tweaks(
         tweaks,
         bound_details_right_padding=bound_details_right_padding,
         staff_padding=staff_padding,
@@ -441,7 +454,7 @@ class _TextSpannerSpecifier:
             assert isinstance(item, prototype), repr(item)
             indicator = _indicatorlib.unbundle_indicator(item)
             if isinstance(indicator, abjad.StartTextSpan):
-                item = _tweak.bundle_tweaks(
+                item = _helpers.bundle_tweaks(
                     item,
                     tweaks,
                     i=current_piece_index,

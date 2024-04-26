@@ -7,6 +7,24 @@ import os
 import abjad
 
 
+def bundle_tweaks(argument, tweaks, *, i=None, total=None, overwrite=False):
+    if not tweaks:
+        return argument
+    all_tweaks = []
+    for item in tweaks:
+        if isinstance(item, tuple):
+            assert len(item) == 2
+            item, index = item
+            if 0 <= index and index != i:
+                continue
+            if index < 0 and index != -(total - i):
+                continue
+        assert isinstance(item, abjad.Tweak), repr(item)
+        all_tweaks.append(item)
+    bundle = abjad.bundle(argument, *all_tweaks, overwrite=overwrite)
+    return bundle
+
+
 def call(argument):
     if callable(argument):
         argument()
