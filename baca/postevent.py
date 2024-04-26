@@ -1,6 +1,39 @@
 import abjad
 
 
+def bound_details_left_broken_text(string, *, grob=None, index=None):
+    if grob is None:
+        tweak = abjad.Tweak(rf"- \tweak bound-details.left-broken.text {string}")
+    else:
+        tweak = abjad.Tweak(rf"- \tweak {grob}.bound-details.left-broken.text {string}")
+    if index is not None:
+        assert isinstance(index, int), repr(index)
+        tweak = (tweak, index)
+    return tweak
+
+
+def bound_details_left_padding(n, *, grob=None, index=None):
+    if grob is None:
+        tweak = abjad.Tweak(rf"- \tweak bound-details.left.padding {n}")
+    else:
+        tweak = abjad.Tweak(rf"- \tweak {grob}.bound-details.left.padding {n}")
+    if index is not None:
+        assert isinstance(index, int), repr(index)
+        tweak = (tweak, index)
+    return tweak
+
+
+def bound_details_left_text(string, *, grob=None, index=None):
+    if grob is None:
+        tweak = abjad.Tweak(rf"- \tweak bound-details.left.text {string}")
+    else:
+        tweak = abjad.Tweak(rf"- \tweak {grob}.bound-details.left.text {string}")
+    if index is not None:
+        assert isinstance(index, int), repr(index)
+        tweak = (tweak, index)
+    return tweak
+
+
 def bound_details_right_end_on_accidental_false(*, index=None):
     tweak = abjad.Tweak(r"- \tweak bound-details.right.end-on-accidental ##f")
     if index is not None:
@@ -20,6 +53,11 @@ def bound_details_right_padding(n, *, grob=None, index=None):
     return tweak
 
 
+def bound_details_right_y(n):
+    tweak = abjad.Tweak(rf"- \tweak bound-details.right.Y {n}")
+    return tweak
+
+
 def color(string):
     tweak = abjad.Tweak(rf"- \tweak color {string}")
     return tweak
@@ -33,6 +71,14 @@ def direction_down():
 def extra_offset(pair, *, tag=None):
     x, y = pair
     tweak = abjad.Tweak(rf"- \tweak extra-offset #'({x} . {y})", tag=tag)
+    return tweak
+
+
+def font_size(n, *, index=None):
+    tweak = abjad.Tweak(rf"- \tweak font-size {n}")
+    if index is not None:
+        assert isinstance(index, int), repr(index)
+        tweak = (tweak, index)
     return tweak
 
 
@@ -60,6 +106,12 @@ def self_alignment_x(n):
     return tweak
 
 
+def shorten_pair(pair):
+    x, y = pair
+    tweak = abjad.Tweak(rf"- \tweak shorten-pair #'({x} . {y})")
+    return tweak
+
+
 def staff_padding(n, *, grob=None):
     if grob is None:
         tweak = abjad.Tweak(rf"- \tweak staff-padding {n}")
@@ -68,8 +120,11 @@ def staff_padding(n, *, grob=None):
     return tweak
 
 
-def style_trill():
+def style_trill(*, index=None):
     tweak = abjad.Tweak(r"- \tweak style #'trill")
+    if index is not None:
+        assert isinstance(index, int), repr(index)
+        tweak = (tweak, index)
     return tweak
 
 
@@ -89,8 +144,8 @@ def to_bar_line_true(*, index=None):
     return tweak
 
 
-def x_extent_zero():
-    tweak = abjad.Tweak(r"- \tweak X-extent #'(0 . 0)")
+def x_extent_zero(*, tag=None):
+    tweak = abjad.Tweak(r"- \tweak X-extent #'(0 . 0)", tag=tag)
     return tweak
 
 
