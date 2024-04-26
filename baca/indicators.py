@@ -174,12 +174,16 @@ def bend_after(
     return wrappers
 
 
-def breathe(argument, *tweaks: abjad.Tweak) -> list[abjad.Wrapper]:
+def breathe(argument, *tweaks: abjad.Tweak, extra_offset=None) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.select.leaves(argument):
         indicator: abjad.LilyPondLiteral | abjad.Bundle
         indicator = abjad.LilyPondLiteral(r"\breathe", site="after")
+        if extra_offset is not None:
+            x, y = extra_offset
+            tweak = abjad.Tweak(rf"\tweak extra-offset #'({x} . {y})")
+            tweaks = tweaks + (tweak,)
         indicator = _helpers.bundle_tweaks(indicator, tweaks)
         wrapper = abjad.attach(
             indicator,

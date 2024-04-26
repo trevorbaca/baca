@@ -91,11 +91,11 @@ def font_size(n, *, index=None):
 
 def padding(n, *, event=False, grob=None):
     if grob is None:
-        string = rf"\tweak padding {n}"
+        string = rf"- \tweak padding {n}"
     else:
-        string = rf"\tweak {grob}.padding {n}"
-    if event is False:
-        string = "- " + string
+        string = rf"- \tweak {grob}.padding {n}"
+    if event is True:
+        string = string.removeprefix("- ")
     tweak = abjad.Tweak(string)
     return tweak
 
@@ -156,6 +156,14 @@ def to_bar_line_true(*, index=None):
     if index is not None:
         assert isinstance(index, int), repr(index)
         tweak = (tweak, index)
+    return tweak
+
+
+def x_extent_false(*, event=False, tag=None):
+    string = r"- \tweak X-extent ##f"
+    if event is True:
+        string = string.removeprefix("- ")
+    tweak = abjad.Tweak(string, tag=tag)
     return tweak
 
 
