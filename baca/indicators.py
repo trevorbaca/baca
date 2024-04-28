@@ -95,16 +95,8 @@ def articulation(
     argument,
     string: str,
     *tweaks: abjad.Tweak,
-    padding: int | float | None = None,
-    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
-    if padding is not None:
-        tweak = _tweak.padding(padding)
-        tweaks = tweaks + (tweak,)
-    if staff_padding is not None:
-        tweak = _tweak.staff_padding(staff_padding)
-        tweaks = tweaks + (tweak,)
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
         indicator = abjad.Articulation(string)
@@ -747,19 +739,10 @@ def markup(
     markup: str,
     *tweaks: abjad.Tweak,
     direction: abjad.Vertical = abjad.UP,
-    parent_alignment_x: int | float | None = None,
-    self_alignment_x: int | float | None = None,
-    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     assert isinstance(markup, str), repr(markup)
     assert direction in (abjad.DOWN, abjad.UP), repr(direction)
     tag = _helpers.function_name(_frame())
-    if parent_alignment_x is not None:
-        tweaks = tweaks + (_tweak.parent_alignment_x(parent_alignment_x),)
-    if self_alignment_x is not None:
-        tweaks = tweaks + (_tweak.self_alignment_x(self_alignment_x),)
-    if staff_padding is not None:
-        tweaks = tweaks + (_tweak.staff_padding(staff_padding),)
     wrappers = []
     for leaf in abjad.select.leaves(argument):
         indicator: abjad.Markup | abjad.Bundle
