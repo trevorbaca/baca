@@ -14,7 +14,6 @@ from . import indicators as _indicators
 from . import scope as _scope
 from . import select as _select
 from . import tags as _tags
-from . import tweak as _tweak
 from . import typings as _typings
 
 
@@ -23,25 +22,19 @@ def _attach_simplex_spanner_indicators(
     spanner_start,
     spanner_stop,
     *tweaks: _typings.IndexedTweak,
-    bound_details_right_padding: int | float | None = None,
     direction: abjad.Vertical | None = None,
     grob: str | None = None,
     left_broken: bool = False,
-    padding: int | float | None = None,
     right_broken: bool = False,
-    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     wrappers = []
     wrapper = _attach_spanner_start(
         argument,
         spanner_start,
         *tweaks,
-        bound_details_right_padding=bound_details_right_padding,
         direction=direction,
         grob=grob,
         left_broken=left_broken,
-        padding=padding,
-        staff_padding=staff_padding,
     )
     wrappers.append(wrapper)
     wrapper = _attach_spanner_stop(
@@ -58,27 +51,12 @@ def _attach_spanner_start(
     argument,
     spanner_start,
     *tweaks: _typings.IndexedTweak,
-    bound_details_right_padding: int | float | None = None,
     direction: abjad.Vertical | None = None,
     grob: str | None = None,
     left_broken: bool = False,
-    padding: int | float | None = None,
-    staff_padding: int | float | None = None,
 ) -> abjad.Wrapper:
     unbundled_indicator = _indicatorlib.unbundle_indicator(spanner_start)
     assert unbundled_indicator.spanner_start is True
-    if bound_details_right_padding is not None:
-        tweak = _tweak.bound_details_right_padding(
-            bound_details_right_padding,
-            grob=grob,
-        )
-        tweaks = tweaks + (tweak,)
-    if padding is not None:
-        tweak = _tweak.padding(padding, grob=grob)
-        tweaks = tweaks + (tweak,)
-    if staff_padding is not None:
-        tweak = _tweak.staff_padding(staff_padding, grob=grob)
-        tweaks = tweaks + (tweak,)
     spanner_start = _helpers.bundle_tweaks(spanner_start, tweaks)
     first_leaf = abjad.select.leaf(argument, 0)
     wrapper = _indicatorlib.attach_persistent_indicator(
@@ -112,31 +90,15 @@ def _attach_spanner_stop(
     return wrapper
 
 
-def _extend_tweaks(
-    tweaks,
-    *,
-    bound_details_right_padding: int | float | None = None,
-    staff_padding: int | float | None = None,
-):
-    if bound_details_right_padding is not None:
-        string = rf"- \tweak bound-details.right.padding {bound_details_right_padding}"
-        tweaks = tweaks + (abjad.Tweak(string),)
-    if staff_padding is not None:
-        tweaks = tweaks + (abjad.Tweak(rf"- \tweak staff-padding {staff_padding}"),)
-    return tweaks
-
-
 def _iterate_text_spanner_pieces(
     pieces,
     *tweaks: _typings.IndexedTweak,
     debug: bool = False,
     do_not_bookend: bool = False,
-    bound_details_right_padding: int | float | None = None,
     do_not_start_spanner_on_final_piece: bool = False,
     left_broken: bool = False,
     right_broken: bool = False,
     specifiers: typing.Sequence = (),
-    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     assert isinstance(tweaks, tuple), repr(tweaks)
     assert pieces is not None
@@ -149,12 +111,6 @@ def _iterate_text_spanner_pieces(
     assert isinstance(specifiers, list), repr(specifiers)
     assert all(isinstance(_, _TextSpannerSpecifier) for _ in specifiers), repr(
         specifiers
-    )
-    assert isinstance(staff_padding, int | float | type(None)), repr(staff_padding)
-    tweaks = _extend_tweaks(
-        tweaks,
-        bound_details_right_padding=bound_details_right_padding,
-        staff_padding=staff_padding,
     )
     cyclic_specifiers = abjad.CyclicTuple(specifiers)
     total_pieces = len(pieces)
@@ -513,7 +469,6 @@ def bow_speed(
     left_broken_text: str | None = None,
     right_broken: bool = False,
     rleak: bool = False,
-    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     wrappers = text(
         argument,
@@ -525,7 +480,6 @@ def bow_speed(
         lilypond_id="BowSpeed",
         right_broken=right_broken,
         rleak=rleak,
-        staff_padding=staff_padding,
     )
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
@@ -539,7 +493,6 @@ def circle_bow(
     qualifier: str | None = None,
     right_broken: bool = False,
     rleak: bool = False,
-    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     if qualifier is None:
         descriptor = r"\baca-circle-markup =|"
@@ -555,7 +508,6 @@ def circle_bow(
         lilypond_id="CircleBow",
         right_broken=right_broken,
         rleak=rleak,
-        staff_padding=staff_padding,
     )
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
@@ -568,7 +520,6 @@ def clb(
     left_broken: bool = False,
     rleak: bool = False,
     right_broken: bool = False,
-    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
@@ -597,7 +548,6 @@ def clb(
         *tweaks,
         left_broken=left_broken,
         right_broken=right_broken,
-        staff_padding=staff_padding,
     )
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
@@ -611,7 +561,6 @@ def covered(
     left_broken_text: str = r"\baca-parenthesized-cov-markup",
     rleak: bool = False,
     right_broken: bool = False,
-    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
@@ -629,7 +578,6 @@ def covered(
         *tweaks,
         left_broken=left_broken,
         right_broken=right_broken,
-        staff_padding=staff_padding,
     )
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
@@ -638,11 +586,9 @@ def covered(
 def damp(
     argument,
     *tweaks: abjad.Tweak,
-    bound_details_right_padding: int | float | None = None,
     left_broken: bool = False,
     rleak: bool = False,
     right_broken: bool = False,
-    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
@@ -658,10 +604,8 @@ def damp(
         specifier.spanner_start,
         specifier.spanner_stop,
         *tweaks,
-        bound_details_right_padding=bound_details_right_padding,
         left_broken=left_broken,
         right_broken=right_broken,
-        staff_padding=staff_padding,
     )
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
@@ -675,7 +619,6 @@ def half_clt(
     left_broken_text: str = r"\baca-left-broken-half-clt-markup",
     rleak: bool = False,
     right_broken: bool = False,
-    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
@@ -693,7 +636,6 @@ def half_clt(
         *tweaks,
         left_broken=left_broken,
         right_broken=right_broken,
-        staff_padding=staff_padding,
     )
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
@@ -706,7 +648,6 @@ def material_annotation(
     left_broken: bool = False,
     rleak: bool = False,
     right_broken: bool = False,
-    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
@@ -724,7 +665,6 @@ def material_annotation(
         *tweaks,
         left_broken=left_broken,
         right_broken=right_broken,
-        staff_padding=staff_padding,
     )
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.MATERIAL_ANNOTATION_SPANNER)
@@ -738,7 +678,6 @@ def metric_modulation(
     left_broken: bool = False,
     rleak: bool = False,
     right_broken: bool = False,
-    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
@@ -756,7 +695,6 @@ def metric_modulation(
         *tweaks,
         left_broken=left_broken,
         right_broken=right_broken,
-        staff_padding=staff_padding,
     )
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.METRIC_MODULATION_SPANNER)
@@ -792,7 +730,6 @@ def pizzicato(
     rleak: bool = False,
     right_broken: bool = False,
     left_broken_text: str = r"\baca-parenthesized-pizz-markup",
-    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
@@ -810,7 +747,6 @@ def pizzicato(
         *tweaks,
         left_broken=left_broken,
         right_broken=right_broken,
-        staff_padding=staff_padding,
     )
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
@@ -821,26 +757,22 @@ def scp(
     descriptor: str,
     *tweaks: _typings.IndexedTweak,
     do_not_bookend: bool = False,
-    bound_details_right_padding: int | float | None = None,
     do_not_start_spanner_on_final_piece: bool = False,
     left_broken: bool = False,
     left_broken_text: str | None = None,
     right_broken: bool = False,
     rleak: bool = False,
-    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     wrappers = text(
         argument,
         descriptor,
         *tweaks,
-        bound_details_right_padding=bound_details_right_padding,
         do_not_bookend=do_not_bookend,
         left_broken=left_broken,
         left_broken_text=left_broken_text,
         lilypond_id="SCP",
         right_broken=right_broken,
         rleak=rleak,
-        staff_padding=staff_padding,
     )
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
@@ -876,7 +808,6 @@ def spazzolato(
     left_broken: bool = False,
     right_broken: bool = False,
     rleak: bool = False,
-    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
@@ -894,7 +825,6 @@ def spazzolato(
         *tweaks,
         left_broken=left_broken,
         right_broken=right_broken,
-        staff_padding=staff_padding,
     )
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
@@ -908,7 +838,6 @@ def string_number(
     left_broken: bool = False,
     rleak: bool = False,
     right_broken: bool = False,
-    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
@@ -945,7 +874,6 @@ def string_number(
         *tweaks,
         left_broken=left_broken,
         right_broken=right_broken,
-        staff_padding=staff_padding,
     )
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
@@ -977,7 +905,6 @@ def tasto(
     left_broken: bool = False,
     right_broken: bool = False,
     rleak: bool = False,
-    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
@@ -995,7 +922,6 @@ def tasto(
         *tweaks,
         left_broken=left_broken,
         right_broken=right_broken,
-        staff_padding=staff_padding,
     )
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
@@ -1005,7 +931,6 @@ def text(
     argument,
     descriptor: str,
     *tweaks: _typings.IndexedTweak,
-    bound_details_right_padding: int | float | None = None,
     do_not_bookend: bool = False,
     direction: int | None = None,
     do_not_start_spanner_on_final_piece: bool = False,
@@ -1014,7 +939,6 @@ def text(
     lilypond_id: int | str | None = None,
     right_broken: bool = False,
     rleak: bool = False,
-    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     assert isinstance(descriptor, str), repr(descriptor)
     assert isinstance(do_not_bookend, bool), repr(do_not_bookend)
@@ -1034,9 +958,7 @@ def text(
             argument,
             specifier.spanner_start,
             *tweaks,
-            bound_details_right_padding=bound_details_right_padding,
             left_broken=left_broken,
-            staff_padding=staff_padding,
         )
         wrappers.append(wrapper)
         wrapper = _attach_spanner_stop(
@@ -1051,13 +973,11 @@ def text(
         wrappers = _iterate_text_spanner_pieces(
             argument,
             *tweaks,
-            bound_details_right_padding=bound_details_right_padding,
             do_not_bookend=do_not_bookend,
             do_not_start_spanner_on_final_piece=do_not_start_spanner_on_final_piece,
             left_broken=left_broken,
             right_broken=right_broken,
             specifiers=specifiers,
-            staff_padding=staff_padding,
         )
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
@@ -1070,10 +990,8 @@ def trill(
     force_trill_pitch_head_accidental: bool = False,
     harmonic: bool = False,
     left_broken: bool = False,
-    padding: int | float | None = None,
     right_broken: bool = False,
     rleak: bool = False,
-    staff_padding: int | float | None = None,
     start_trill_span: abjad.StartTrillSpan = abjad.StartTrillSpan(),
     stop_trill_span: abjad.StopTrillSpan = abjad.StopTrillSpan(),
 ) -> list[abjad.Wrapper]:
@@ -1119,8 +1037,6 @@ def trill(
         grob=grob,
         left_broken=left_broken,
         right_broken=right_broken,
-        padding=padding,
-        staff_padding=staff_padding,
     )
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
@@ -1135,7 +1051,6 @@ def vibrato(
     left_broken_text: str | None = None,
     right_broken: bool = False,
     rleak: bool = False,
-    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     wrappers = text(
         argument,
@@ -1147,7 +1062,6 @@ def vibrato(
         lilypond_id="Vibrato",
         right_broken=right_broken,
         rleak=rleak,
-        staff_padding=staff_padding,
     )
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
@@ -1159,7 +1073,6 @@ def xfb(
     left_broken: bool = False,
     right_broken: bool = False,
     rleak: bool = False,
-    staff_padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
@@ -1177,7 +1090,6 @@ def xfb(
         *tweaks,
         left_broken=left_broken,
         right_broken=right_broken,
-        staff_padding=staff_padding,
     )
     _tags.tag(wrappers, _helpers.function_name(_frame()))
     return wrappers
