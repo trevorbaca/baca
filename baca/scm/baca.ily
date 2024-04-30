@@ -20,3 +20,4 @@
 \include "baca-wind-markups.ily"
 \include "morley-adjust-lv-ties.ily"
 \include "morley-dashed-staff-lines.ily"
+\include "nalesnik-shape-repeat-tie-column.ily"
