@@ -18,6 +18,14 @@ from . import typings as _typings
 from .enums import enums as _enums
 
 
+def _assert_no_post_event_tweaks(tweaks, command):
+    for tweak in tweaks:
+        if tweak.post_event() is True:
+            message = f"LilyPond {command} is not a post-event:"
+            message += f"\n    {tweak}"
+            raise Exception(message)
+
+
 def _prepare_alternate_bow_strokes(*tweaks, downbow_first, full):
     if downbow_first:
         if full:
@@ -166,16 +174,13 @@ def bend_after(
     return wrappers
 
 
-def breathe(argument, *tweaks: abjad.Tweak, extra_offset=None) -> list[abjad.Wrapper]:
+def breathe(argument, *tweaks: abjad.Tweak) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
+    _assert_no_post_event_tweaks(tweaks, r"\breathe")
     wrappers = []
     for leaf in abjad.select.leaves(argument):
         indicator: abjad.LilyPondLiteral | abjad.Bundle
         indicator = abjad.LilyPondLiteral(r"\breathe", site="after")
-        if extra_offset is not None:
-            x, y = extra_offset
-            tweak = abjad.Tweak(rf"\tweak extra-offset #'({x} . {y})")
-            tweaks = tweaks + (tweak,)
         indicator = _helpers.bundle_tweaks(indicator, tweaks)
         wrapper = abjad.attach(
             indicator,
@@ -345,13 +350,9 @@ def down_bow(
     *tweaks: abjad.Tweak,
     full: bool = False,
     padding: int | float | None = None,
-    parent_alignment_x: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     if padding is not None:
         tweak = _tweak.padding(padding)
-        tweaks = tweaks + (tweak,)
-    if parent_alignment_x is not None:
-        tweak = _tweak.parent_alignment_x(parent_alignment_x)
         tweaks = tweaks + (tweak,)
     tag = _helpers.function_name(_frame())
     wrappers = []
@@ -376,15 +377,8 @@ def dynamic(
     argument,
     dynamic: str | abjad.Dynamic,
     *tweaks: abjad.Tweak,
-    parent_alignment_x: int | float | None = None,
-    self_alignment_x: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     wrappers = []
-    if parent_alignment_x is not None:
-        tweak = _tweak.parent_alignment_x(parent_alignment_x)
-        tweaks = tweaks + (tweak,)
-    if self_alignment_x is not None:
-        tweaks = tweaks + (_tweak.self_alignment_x(self_alignment_x),)
     for leaf in abjad.select.leaves(argument):
         if dynamic == "-":
             continue
@@ -888,16 +882,12 @@ def rehearsal_mark(
     argument,
     string: str,
     *tweaks: abjad.Tweak,
-    extra_offset: tuple | None = None,
     font_size: int = 10,
     padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     assert isinstance(string, str), repr(string)
     assert isinstance(font_size, int | float), repr(font_size)
     string = rf'\baca-rehearsal-mark-markup "{string}" #{font_size}'
-    if extra_offset is not None:
-        tweak = _tweak.extra_offset(extra_offset)
-        tweaks = tweaks + (tweak,)
     if padding is not None:
         tweak = _tweak.padding(padding)
         tweaks = tweaks + (tweak,)
@@ -1200,15 +1190,11 @@ def up_bow(
     *tweaks: abjad.Tweak,
     full: bool = False,
     padding: int | float | None = None,
-    parent_alignment_x: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     if padding is not None:
         tweak = _tweak.padding(padding)
-        tweaks = tweaks + (tweak,)
-    if parent_alignment_x is not None:
-        tweak = _tweak.parent_alignment_x(parent_alignment_x)
         tweaks = tweaks + (tweak,)
     for leaf in abjad.iterate.leaves(argument):
         indicator: abjad.Articulation | abjad.Bundle

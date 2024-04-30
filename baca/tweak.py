@@ -75,9 +75,12 @@ def direction_down():
     return tweak
 
 
-def extra_offset(pair, *, tag=None):
+def extra_offset(pair, *, event=False, tag=None):
     x, y = pair
-    tweak = abjad.Tweak(rf"- \tweak extra-offset #'({x} . {y})", tag=tag)
+    string = rf"- \tweak extra-offset #'({x} . {y})"
+    if event is True:
+        string = string.removeprefix("- ")
+    tweak = abjad.Tweak(string, tag=tag)
     return tweak
 
 
