@@ -706,14 +706,11 @@ def mark(
     argument,
     string: str,
     *tweaks: abjad.Tweak,
-    padding: int | float | None = None,
     site: str = "before",
 ) -> list[abjad.Wrapper]:
     assert isinstance(string, abjad.Markup | str), repr(string)
+    _assert_no_post_event_tweaks(tweaks, r"\mark")
     tag = _helpers.function_name(_frame())
-    if padding is not None:
-        tweak = _tweak.padding(padding, event=True)
-        tweaks = tweaks + (tweak,)
     wrappers = []
     for leaf in abjad.select.leaves(argument):
         rehearsal_mark = abjad.RehearsalMark(markup=string, site=site)
