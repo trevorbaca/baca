@@ -13,7 +13,6 @@ from . import helpers as _helpers
 from . import indicatorlib as _indicatorlib
 from . import override as _override
 from . import tags as _tags
-from . import tweak as _tweak
 from . import typings as _typings
 from .enums import enums as _enums
 
@@ -349,11 +348,7 @@ def down_bow(
     argument,
     *tweaks: abjad.Tweak,
     full: bool = False,
-    padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
-    if padding is not None:
-        tweak = _tweak.padding(padding)
-        tweaks = tweaks + (tweak,)
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.select.leaves(argument):
@@ -880,14 +875,10 @@ def rehearsal_mark(
     string: str,
     *tweaks: abjad.Tweak,
     font_size: int = 10,
-    padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     assert isinstance(string, str), repr(string)
     assert isinstance(font_size, int | float), repr(font_size)
     string = rf'\baca-rehearsal-mark-markup "{string}" #{font_size}'
-    if padding is not None:
-        tweak = _tweak.padding(padding)
-        tweaks = tweaks + (tweak,)
     wrappers = []
     for leaf in abjad.select.leaves(argument):
         indicator: abjad.Markup | abjad.Bundle
@@ -1147,13 +1138,9 @@ def tie(argument) -> list[abjad.Wrapper]:
 def triple_staccato(
     argument,
     *tweaks: abjad.Tweak,
-    padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
-    if padding is not None:
-        tweak = _tweak.padding(padding)
-        tweaks = tweaks + (tweak,)
     for leaf in abjad.iterate.leaves(argument):
         indicator = abjad.Articulation("baca-staccati #3")
         indicator = _helpers.bundle_tweaks(indicator, tweaks)
@@ -1186,13 +1173,9 @@ def up_bow(
     argument,
     *tweaks: abjad.Tweak,
     full: bool = False,
-    padding: int | float | None = None,
 ) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
-    if padding is not None:
-        tweak = _tweak.padding(padding)
-        tweaks = tweaks + (tweak,)
     for leaf in abjad.iterate.leaves(argument):
         indicator: abjad.Articulation | abjad.Bundle
         if full:
