@@ -1,62 +1,48 @@
 import abjad
 
 
-def _handle_index(tweak, *, index=None):
-    if index is not None:
-        assert isinstance(index, int), repr(index)
-        tweak = (tweak, index)
-    return tweak
-
-
 def bound_details_left_broken_text(string, *, grob=None, index=None):
     if grob is None:
-        tweak = abjad.Tweak(rf"- \tweak bound-details.left-broken.text {string}")
+        tweak = abjad.Tweak(
+            rf"- \tweak bound-details.left-broken.text {string}", i=index
+        )
     else:
-        tweak = abjad.Tweak(rf"- \tweak {grob}.bound-details.left-broken.text {string}")
-    if index is not None:
-        assert isinstance(index, int), repr(index)
-        tweak = (tweak, index)
+        tweak = abjad.Tweak(
+            rf"- \tweak {grob}.bound-details.left-broken.text {string}", i=index
+        )
     return tweak
 
 
 def bound_details_left_padding(n, *, grob=None, index=None):
     if grob is None:
-        tweak = abjad.Tweak(rf"- \tweak bound-details.left.padding {n}")
+        tweak = abjad.Tweak(rf"- \tweak bound-details.left.padding {n}", i=index)
     else:
-        tweak = abjad.Tweak(rf"- \tweak {grob}.bound-details.left.padding {n}")
-    if index is not None:
-        assert isinstance(index, int), repr(index)
-        tweak = (tweak, index)
+        tweak = abjad.Tweak(rf"- \tweak {grob}.bound-details.left.padding {n}", i=index)
     return tweak
 
 
 def bound_details_left_text(string, *, grob=None, index=None):
     if grob is None:
-        tweak = abjad.Tweak(rf"- \tweak bound-details.left.text {string}")
+        tweak = abjad.Tweak(rf"- \tweak bound-details.left.text {string}", i=index)
     else:
-        tweak = abjad.Tweak(rf"- \tweak {grob}.bound-details.left.text {string}")
-    if index is not None:
-        assert isinstance(index, int), repr(index)
-        tweak = (tweak, index)
+        tweak = abjad.Tweak(
+            rf"- \tweak {grob}.bound-details.left.text {string}", i=index
+        )
     return tweak
 
 
 def bound_details_right_end_on_accidental_false(*, index=None):
-    tweak = abjad.Tweak(r"- \tweak bound-details.right.end-on-accidental ##f")
-    if index is not None:
-        assert isinstance(index, int), repr(index)
-        tweak = (tweak, index)
+    tweak = abjad.Tweak(r"- \tweak bound-details.right.end-on-accidental ##f", i=index)
     return tweak
 
 
 def bound_details_right_padding(n, *, grob=None, index=None):
     if grob is None:
-        tweak = abjad.Tweak(rf"- \tweak bound-details.right.padding {n}")
+        tweak = abjad.Tweak(rf"- \tweak bound-details.right.padding {n}", i=index)
     else:
-        tweak = abjad.Tweak(rf"- \tweak {grob}.bound-details.right.padding {n}")
-    if index is not None:
-        assert isinstance(index, int), repr(index)
-        tweak = (tweak, index)
+        tweak = abjad.Tweak(
+            rf"- \tweak {grob}.bound-details.right.padding {n}", i=index
+        )
     return tweak
 
 
@@ -85,10 +71,7 @@ def extra_offset(pair, *, event=False, tag=None):
 
 
 def font_size(n, *, index=None):
-    tweak = abjad.Tweak(rf"- \tweak font-size {n}")
-    if index is not None:
-        assert isinstance(index, int), repr(index)
-        tweak = (tweak, index)
+    tweak = abjad.Tweak(rf"- \tweak font-size {n}", i=index)
     return tweak
 
 
@@ -133,32 +116,22 @@ def style_harmonic(*, index=None, target=None):
         abjad.tweak(target, string)
     else:
         string = "- " + string
-        tweak = abjad.Tweak(string)
-        tweak = _handle_index(tweak, index=index)
+        tweak = abjad.Tweak(string, i=index)
         return tweak
 
 
 def style_trill(*, index=None):
-    tweak = abjad.Tweak(r"- \tweak style #'trill")
-    if index is not None:
-        assert isinstance(index, int), repr(index)
-        tweak = (tweak, index)
+    tweak = abjad.Tweak(r"- \tweak style #'trill", i=index)
     return tweak
 
 
 def to_bar_line_false(*, index=None):
-    tweak = abjad.Tweak(r"- \tweak to-barline ##f")
-    if index is not None:
-        assert isinstance(index, int), repr(index)
-        tweak = (tweak, index)
+    tweak = abjad.Tweak(r"- \tweak to-barline ##f", i=index)
     return tweak
 
 
 def to_bar_line_true(*, index=None):
-    tweak = abjad.Tweak(r"- \tweak to-barline ##t")
-    if index is not None:
-        assert isinstance(index, int), repr(index)
-        tweak = (tweak, index)
+    tweak = abjad.Tweak(r"- \tweak to-barline ##t", i=index)
     return tweak
 
 
