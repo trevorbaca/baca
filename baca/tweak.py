@@ -1,6 +1,21 @@
 import abjad
 
 
+def _handle_tweak(string, *, event=False, grob=None, i=None, tag=None, target=None):
+    if grob is not None:
+        string = grob + "." + string
+    string = r"- \tweak " + string
+    if event is True or target is not None:
+        string = string.removeprefix("- ")
+    if target is not None:
+        assert i is None, repr(i)
+        abjad.tweak(target, string, tag=tag)
+        return None
+    else:
+        tweak = abjad.Tweak(string, i=i, tag=tag)
+        return tweak
+
+
 def bound_details_left_broken_text(string, *, grob=None, i=None):
     if grob is None:
         tweak = abjad.Tweak(rf"- \tweak bound-details.left-broken.text {string}", i=i)
@@ -90,33 +105,25 @@ def self_alignment_x(n):
     return tweak
 
 
-def shorten_pair(pair):
+def shorten_pair(pair, *, event=False, grob=None, i=None, tag=None, target=None):
     x, y = pair
-    tweak = abjad.Tweak(rf"- \tweak shorten-pair #'({x} . {y})")
-    return tweak
+    string = f"shorten-pair #'({x} . {y})"
+    return _handle_tweak(string, event=event, grob=grob, i=i, tag=tag, target=target)
 
 
-def staff_padding(n, *, grob=None):
-    if grob is None:
-        tweak = abjad.Tweak(rf"- \tweak staff-padding {n}")
-    else:
-        tweak = abjad.Tweak(rf"- \tweak {grob}.staff-padding {n}")
-    return tweak
+def staff_padding(n, *, event=False, grob=None, i=None, tag=None, target=None):
+    string = f"staff-padding {n}"
+    return _handle_tweak(string, event=event, grob=grob, i=i, tag=tag, target=target)
 
 
-def style_harmonic(*, i=None, target=None):
-    string = r"\tweak style #'harmonic"
-    if target is not None:
-        abjad.tweak(target, string)
-    else:
-        string = "- " + string
-        tweak = abjad.Tweak(string, i=i)
-        return tweak
+def style_harmonic(*, event=False, grob=None, i=None, tag=None, target=None):
+    string = "style #'harmonic"
+    return _handle_tweak(string, event=event, grob=grob, i=i, tag=tag, target=target)
 
 
-def style_trill(*, i=None):
-    tweak = abjad.Tweak(r"- \tweak style #'trill", i=i)
-    return tweak
+def style_trill(*, event=False, grob=None, i=None, tag=None, target=None):
+    string = "style #'trill"
+    return _handle_tweak(string, event=event, grob=grob, i=i, tag=tag, target=target)
 
 
 def to_bar_line_false(*, i=None):
