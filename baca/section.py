@@ -1994,6 +1994,7 @@ def cache_leaves(score, measure_count, voice_abbreviations=None):
     return voice_name_to_leaves_by_measure
 
 
+# TODO: reintegrate into rebuild()?
 def cache_leaves_in_voice(voice, measure_count):
     assert isinstance(voice, abjad.Voice)
     measure_number_to_leaves = {}
