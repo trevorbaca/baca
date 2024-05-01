@@ -12,7 +12,6 @@ from . import helpers as _helpers
 from . import pitchtools as _pitchtools
 from . import select as _select
 from . import tags as _tags
-from . import typings as _typings
 
 
 def _is_rest(argument):
@@ -36,8 +35,8 @@ def _validate_bcps(bcps):
 def bcps(
     argument,
     bcps,
-    *tweaks: _typings.IndexedTweak,
-    bow_change_tweaks: typing.Sequence[_typings.IndexedTweak] = (),
+    *tweaks: abjad.Tweak,
+    bow_change_tweaks: typing.Sequence[abjad.Tweak] = (),
     final_spanner: bool = False,
     helper: typing.Callable = lambda x, y: x,
 ) -> list[abjad.Wrapper]:
@@ -280,7 +279,7 @@ def force_accidental(argument, *, tag: abjad.Tag | None = None) -> None:
 def glissando(
     leaves,
     descriptor: str | None = None,
-    *tweaks: _typings.IndexedTweak,
+    *tweaks: abjad.Tweak,
     allow_hidden: bool = False,
     allow_repitch: bool = False,
     do_not_allow_repeats: bool = False,

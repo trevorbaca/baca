@@ -14,14 +14,13 @@ from . import indicators as _indicators
 from . import scope as _scope
 from . import select as _select
 from . import tags as _tags
-from . import typings as _typings
 
 
 def _attach_simplex_spanner_indicators(
     argument,
     spanner_start,
     spanner_stop,
-    *tweaks: _typings.IndexedTweak,
+    *tweaks: abjad.Tweak,
     direction: abjad.Vertical | None = None,
     grob: str | None = None,
     left_broken: bool = False,
@@ -50,7 +49,7 @@ def _attach_simplex_spanner_indicators(
 def _attach_spanner_start(
     argument,
     spanner_start,
-    *tweaks: _typings.IndexedTweak,
+    *tweaks: abjad.Tweak,
     direction: abjad.Vertical | None = None,
     grob: str | None = None,
     left_broken: bool = False,
@@ -92,7 +91,7 @@ def _attach_spanner_stop(
 
 def _iterate_text_spanner_pieces(
     pieces,
-    *tweaks: _typings.IndexedTweak,
+    *tweaks: abjad.Tweak,
     debug: bool = False,
     do_not_bookend: bool = False,
     do_not_start_spanner_on_final_piece: bool = False,
@@ -463,7 +462,7 @@ def beam(
 def bow_speed(
     argument,
     descriptor: str,
-    *tweaks: _typings.IndexedTweak,
+    *tweaks: abjad.Tweak,
     do_not_bookend: bool = False,
     left_broken: bool = False,
     left_broken_text: str | None = None,
@@ -487,7 +486,7 @@ def bow_speed(
 
 def circle_bow(
     argument,
-    *tweaks: _typings.IndexedTweak,
+    *tweaks: abjad.Tweak,
     left_broken: bool = False,
     left_broken_text: str | None = r"\baca-left-broken-circle-bowing-markup",
     qualifier: str | None = None,
@@ -755,7 +754,7 @@ def pizzicato(
 def scp(
     argument,
     descriptor: str,
-    *tweaks: _typings.IndexedTweak,
+    *tweaks: abjad.Tweak,
     do_not_bookend: bool = False,
     do_not_start_spanner_on_final_piece: bool = False,
     left_broken: bool = False,
@@ -930,7 +929,7 @@ def tasto(
 def text(
     argument,
     descriptor: str,
-    *tweaks: _typings.IndexedTweak,
+    *tweaks: abjad.Tweak,
     do_not_bookend: bool = False,
     direction: int | None = None,
     do_not_start_spanner_on_final_piece: bool = False,
@@ -1045,7 +1044,7 @@ def trill(
 def vibrato(
     argument,
     descriptor: str,
-    *tweaks: _typings.IndexedTweak,
+    *tweaks: abjad.Tweak,
     do_not_bookend: bool = False,
     left_broken: bool = False,
     left_broken_text: str | None = None,

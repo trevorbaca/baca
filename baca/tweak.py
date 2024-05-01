@@ -1,48 +1,42 @@
 import abjad
 
 
-def bound_details_left_broken_text(string, *, grob=None, index=None):
+def bound_details_left_broken_text(string, *, grob=None, i=None):
     if grob is None:
-        tweak = abjad.Tweak(
-            rf"- \tweak bound-details.left-broken.text {string}", i=index
-        )
+        tweak = abjad.Tweak(rf"- \tweak bound-details.left-broken.text {string}", i=i)
     else:
         tweak = abjad.Tweak(
-            rf"- \tweak {grob}.bound-details.left-broken.text {string}", i=index
+            rf"- \tweak {grob}.bound-details.left-broken.text {string}", i=i
         )
     return tweak
 
 
-def bound_details_left_padding(n, *, grob=None, index=None):
+def bound_details_left_padding(n, *, grob=None, i=None):
     if grob is None:
-        tweak = abjad.Tweak(rf"- \tweak bound-details.left.padding {n}", i=index)
+        tweak = abjad.Tweak(rf"- \tweak bound-details.left.padding {n}", i=i)
     else:
-        tweak = abjad.Tweak(rf"- \tweak {grob}.bound-details.left.padding {n}", i=index)
+        tweak = abjad.Tweak(rf"- \tweak {grob}.bound-details.left.padding {n}", i=i)
     return tweak
 
 
-def bound_details_left_text(string, *, grob=None, index=None):
+def bound_details_left_text(string, *, grob=None, i=None):
     if grob is None:
-        tweak = abjad.Tweak(rf"- \tweak bound-details.left.text {string}", i=index)
+        tweak = abjad.Tweak(rf"- \tweak bound-details.left.text {string}", i=i)
     else:
-        tweak = abjad.Tweak(
-            rf"- \tweak {grob}.bound-details.left.text {string}", i=index
-        )
+        tweak = abjad.Tweak(rf"- \tweak {grob}.bound-details.left.text {string}", i=i)
     return tweak
 
 
-def bound_details_right_end_on_accidental_false(*, index=None):
-    tweak = abjad.Tweak(r"- \tweak bound-details.right.end-on-accidental ##f", i=index)
+def bound_details_right_end_on_accidental_false(*, i=None):
+    tweak = abjad.Tweak(r"- \tweak bound-details.right.end-on-accidental ##f", i=i)
     return tweak
 
 
-def bound_details_right_padding(n, *, grob=None, index=None):
+def bound_details_right_padding(n, *, grob=None, i=None):
     if grob is None:
-        tweak = abjad.Tweak(rf"- \tweak bound-details.right.padding {n}", i=index)
+        tweak = abjad.Tweak(rf"- \tweak bound-details.right.padding {n}", i=i)
     else:
-        tweak = abjad.Tweak(
-            rf"- \tweak {grob}.bound-details.right.padding {n}", i=index
-        )
+        tweak = abjad.Tweak(rf"- \tweak {grob}.bound-details.right.padding {n}", i=i)
     return tweak
 
 
@@ -70,8 +64,8 @@ def extra_offset(pair, *, event=False, tag=None):
     return tweak
 
 
-def font_size(n, *, index=None):
-    tweak = abjad.Tweak(rf"- \tweak font-size {n}", i=index)
+def font_size(n, *, i=None):
+    tweak = abjad.Tweak(rf"- \tweak font-size {n}", i=i)
     return tweak
 
 
@@ -110,28 +104,28 @@ def staff_padding(n, *, grob=None):
     return tweak
 
 
-def style_harmonic(*, index=None, target=None):
+def style_harmonic(*, i=None, target=None):
     string = r"\tweak style #'harmonic"
     if target is not None:
         abjad.tweak(target, string)
     else:
         string = "- " + string
-        tweak = abjad.Tweak(string, i=index)
+        tweak = abjad.Tweak(string, i=i)
         return tweak
 
 
-def style_trill(*, index=None):
-    tweak = abjad.Tweak(r"- \tweak style #'trill", i=index)
+def style_trill(*, i=None):
+    tweak = abjad.Tweak(r"- \tweak style #'trill", i=i)
     return tweak
 
 
-def to_bar_line_false(*, index=None):
-    tweak = abjad.Tweak(r"- \tweak to-barline ##f", i=index)
+def to_bar_line_false(*, i=None):
+    tweak = abjad.Tweak(r"- \tweak to-barline ##f", i=i)
     return tweak
 
 
-def to_bar_line_true(*, index=None):
-    tweak = abjad.Tweak(r"- \tweak to-barline ##t", i=index)
+def to_bar_line_true(*, i=None):
+    tweak = abjad.Tweak(r"- \tweak to-barline ##t", i=i)
     return tweak
 
 

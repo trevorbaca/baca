@@ -15,7 +15,6 @@ from . import indicators as _indicators
 from . import scope as _scope
 from . import select as _select
 from . import tags as _tags
-from . import typings as _typings
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
@@ -114,7 +113,7 @@ def _bookend_final_cyclic_piece(
 
 def _iterate_cyclic_hairpin_pieces(
     pieces: list,
-    *tweaks: _typings.IndexedTweak,
+    *tweaks: abjad.Tweak,
     do_not_bookend: bool = False,
     do_not_start_spanner_on_final_piece: bool = False,
     left_broken: bool = False,
@@ -186,7 +185,7 @@ def _iterate_cyclic_hairpin_pieces(
 def cyclic(
     argument,
     descriptor: str,
-    *tweaks: _typings.IndexedTweak,
+    *tweaks: abjad.Tweak,
     do_not_bookend: bool = False,
     do_not_start_spanner_on_final_piece: bool = False,
     left_broken: bool = False,
@@ -222,7 +221,7 @@ def cyclic(
 def hairpin(
     argument,
     descriptor: str,
-    *tweaks: _typings.IndexedTweak,
+    *tweaks: abjad.Tweak,
     allow_extra_specifiers: bool = False,
     extra_specifiers: bool = False,
     left_broken: bool = False,

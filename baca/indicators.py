@@ -13,7 +13,6 @@ from . import helpers as _helpers
 from . import indicatorlib as _indicatorlib
 from . import override as _override
 from . import tags as _tags
-from . import typings as _typings
 from .enums import enums as _enums
 
 
@@ -231,7 +230,7 @@ def close_volta(
 def color_fingerings(
     argument,
     numbers: list[int],
-    *tweaks: _typings.IndexedTweak,
+    *tweaks: abjad.Tweak,
 ) -> list[abjad.Wrapper]:
     cyclic_numbers = abjad.CyclicTuple(numbers)
     wrappers = []

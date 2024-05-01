@@ -12,20 +12,13 @@ def bundle_tweaks(argument, tweaks, *, i=None, total=None, overwrite=False):
         return argument
     all_tweaks = []
     for item in tweaks:
-        if isinstance(item, abjad.Tweak) and item.i is not None:
+        assert isinstance(item, abjad.Tweak), repr(item)
+        if item.i is not None:
             item, index = item, item.i
             if 0 <= index and index != i:
                 continue
             if index < 0 and index != -(total - i):
                 continue
-        elif isinstance(item, tuple):
-            assert len(item) == 2
-            item, index = item
-            if 0 <= index and index != i:
-                continue
-            if index < 0 and index != -(total - i):
-                continue
-        assert isinstance(item, abjad.Tweak), repr(item)
         all_tweaks.append(item)
     bundle = abjad.bundle(argument, *all_tweaks, overwrite=overwrite)
     return bundle
