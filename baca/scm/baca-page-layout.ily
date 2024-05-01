@@ -37,6 +37,18 @@ baca-lbsd = #(
     #}
     )
 
+baca-lbsd-xy = #(
+    define-music-function (x-offset y-offset distances) (number? number? list?)
+    #{
+    \overrideProperty
+    Score.NonMusicalPaperColumn.line-break-system-details.X-offset #x-offset
+    \overrideProperty
+    Score.NonMusicalPaperColumn.line-break-system-details.Y-offset #y-offset
+    \overrideProperty
+    Score.NonMusicalPaperColumn.line-break-system-details.alignment-distances #distances
+    #}
+    )
+
 %%% FERMATA MEASURES %%%
 
 baca-fermata-measure = #(

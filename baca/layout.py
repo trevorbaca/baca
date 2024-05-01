@@ -64,27 +64,23 @@ class Breaks:
             page_number = i + 1
             if page.number is not None:
                 if page.number != page_number:
-                    message = f"page number ({page.number})"
-                    message += f" is not {page_number}."
+                    message = f"page number ({page.number}) is not {page_number}."
                     raise Exception(message)
             for j, system in enumerate(page.systems):
                 measure_number = system.measure
                 bol_measure_numbers.append(measure_number)
                 skip_index = measure_number - 1
-                y_offset = system.y_offset
-                assert isinstance(system.distances, tuple | list), repr(
-                    system.distances
-                )
-                alignment_distances = system.distances
                 assert 0 <= skip_index
                 if j == 0:
                     literal = abjad.LilyPondLiteral(r"\pageBreak", site="before")
                 else:
                     literal = abjad.LilyPondLiteral(r"\break", site="before")
-                alignment_distances = abjad.sequence.flatten(
-                    alignment_distances, depth=-1
+                alignment_distances = abjad.sequence.flatten(system.distances, depth=-1)
+                lbsd = LBSD(
+                    alignment_distances=alignment_distances,
+                    y_offset=system.y_offset,
+                    x_offset=system.x_offset,
                 )
-                lbsd = LBSD(alignment_distances=alignment_distances, y_offset=y_offset)
                 skip_index_to_indicators[skip_index] = (literal, lbsd)
         return bol_measure_numbers, page_count, skip_index_to_indicators
 
@@ -94,11 +90,16 @@ class LBSD:
 
     y_offset: int
     alignment_distances: tuple
+    x_offset: int | None = None
 
     def _get_contributions(self, component=None):
         contributions = abjad.ContributionsBySite()
         alignment_distances = " ".join(str(_) for _ in self.alignment_distances)
-        string = rf"\baca-lbsd #{self.y_offset} #'({alignment_distances})"
+        if self.x_offset is None:
+            string = rf"\baca-lbsd #{self.y_offset}"
+        else:
+            string = rf"\baca-lbsd-xy #{self.x_offset} #{self.y_offset}"
+        string += f" #'({alignment_distances})"
         contributions.before.commands.append(string)
         return contributions
 
@@ -288,3 +289,4 @@ class System:
     measure: int
     y_offset: int
     distances: tuple[int, ...]
+    x_offset: int | None = None
