@@ -37,6 +37,8 @@ def _test_build(build):
     music_ly = build / "music.ly"
     if music_ly.exists():
         layout_py = build / "layout.py"
+        if layout_py.exists():
+            os.system("python layout.py")
         os.system("interpret-build-music")
         if layout_py.exists():
             layout_ly = build / "layout.ly"
