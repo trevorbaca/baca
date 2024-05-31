@@ -1,5 +1,5 @@
 """
-Interpret.
+Section.
 """
 
 import copy
@@ -425,6 +425,22 @@ def _check_persistent_indicators_for_leaf(
     clef = abjad.get.effective(leaf, abjad.Clef)
     if clef is None:
         raise Exception(f"{voice_name} leaf {i} ({leaf!s}) missing clef.")
+
+
+def _check_nontrivial_skip_filled_tuplets(score):
+    tuplets = abjad.select.tuplets(score)
+    violators = []
+    for tuplet in tuplets:
+        if tuplet.multiplier == (1, 1):
+            continue
+        for component in tuplet:
+            if not isinstance(component, abjad.Skip):
+                break
+        else:
+            violators.append(tuplet)
+    if violators:
+        message = f"Found {len(violators)} nontrivial skip-filled tuplets."
+        raise Exception(message)
 
 
 def _clean_up_laissez_vibrer_tie_direction(score):
@@ -2250,6 +2266,7 @@ def postprocess(
     color_octaves=False,
     comment_measure_numbers=False,
     doctest=False,
+    # do_not_check_nontrivial_skip_filled_tuplets=False,
     do_not_check_wellformedness=False,
     do_not_color_not_yet_pitched=False,
     do_not_color_not_yet_registered=False,
@@ -2432,6 +2449,8 @@ def postprocess(
         )
         if violators:
             raise Exception(f"{len(violators)} /    {total} out of range pitches")
+    # if do_not_check_nontrivial_skip_filled_tuplets is False:
+    #     _check_nontrivial_skip_filled_tuplets(score)
     if doctest is False:
         previous_stop_clock_time: typing.Optional[str]
         if environment.section_not_included_in_score:

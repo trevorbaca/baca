@@ -1468,6 +1468,24 @@ def prolate(
     return tuplet
 
 
+def replace_nontrivial_skip_filled_tuplets(argument):
+    tuplets = abjad.select.tuplets(argument)
+    violators = []
+    for tuplet in tuplets:
+        if tuplet.multiplier == (1, 1):
+            continue
+        for component in tuplet:
+            if not isinstance(component, abjad.Skip):
+                break
+        else:
+            violators.append(tuplet)
+    for tuplet in violators:
+        duration = abjad.get.duration(tuplet)
+        skip = abjad.Skip(1, multiplier=duration.pair)
+        assert duration == abjad.get.duration(skip)
+        abjad.mutate.replace([tuplet], [skip])
+
+
 def style_accelerando(
     container: abjad.Container | abjad.Tuplet, exponent: float = 0.625
 ) -> abjad.Container | abjad.Tuplet:
