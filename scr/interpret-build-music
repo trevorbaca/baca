@@ -8,8 +8,6 @@ import baca
 
 
 def main():
-    directory = os.getcwd()
-    directory = pathlib.Path(directory)
     parser = argparse.ArgumentParser(description="Activate tags in LilyPond files.")
     parser.add_argument(
         "--keep-temporary-files", help="keep .[i]ly files", action="store_true"
@@ -18,10 +16,12 @@ def main():
         "--skip-temporary-files", help="skip .[i]ly files", action="store_true"
     )
     arguments = parser.parse_args()
+    directory = os.getcwd()
+    directory = pathlib.Path(directory)
     baca.build.interpret_build_music(
         directory,
-        debug_sections=arguments.keep_temporary_files,
-        skip_section_collection=arguments.skip_temporary_files,
+        keep_temporary_files=arguments.keep_temporary_files,
+        skip_temporary_files=arguments.skip_temporary_files,
     )
 
 

@@ -8,6 +8,7 @@ import os
 import pathlib
 import pprint
 import shutil
+import signal
 import sys
 import time
 import types
@@ -15,6 +16,17 @@ import typing
 
 import abjad
 import baca
+
+
+class TimeoutException(Exception):
+    pass
+
+
+def handler(signum, frame):
+    raise TimeoutException("Function call timed out")
+
+
+signal.signal(signal.SIGALRM, handler)
 
 
 def _activate_tags(
@@ -65,10 +77,14 @@ def _activate_tags(
     return text
 
 
-def _call_lilypond_on_music_ly_in_section(music_ly, music_pdf_mtime):
+def _call_lilypond_on_music_ly_in_section(
+    music_ly, music_pdf_mtime, lilypond_timeout=0
+):
     music_pdf = music_ly.with_name("music.pdf")
     with abjad.Timer() as timer:
-        run_lilypond(music_ly, pdf_mtime=music_pdf_mtime)
+        run_lilypond(
+            music_ly, lilypond_timeout=lilypond_timeout, pdf_mtime=music_pdf_mtime
+        )
         music_ly_pdf = music_ly.parent / "music.ly.pdf"
         if music_ly_pdf.is_file():
             shutil.move(str(music_ly_pdf), str(music_pdf))
@@ -586,6 +602,7 @@ def _make_section_pdf(
     *,
     also_untagged=False,
     do_not_call_lilypond=False,
+    lilypond_timeout=0,
     log_timing=False,
     print_timing=False,
 ):
@@ -623,6 +640,7 @@ def _make_section_pdf(
         timing.lilypond = _call_lilypond_on_music_ly_in_section(
             music_ly,
             music_pdf_mtime,
+            lilypond_timeout=lilypond_timeout,
         )
     if print_timing:
         print_all_timing(timing)
@@ -1029,14 +1047,14 @@ def argv():
     return list(sys.argv)
 
 
-def build_part(part_directory, debug_sections=False):
+def build_part(part_directory, keep_temporary_files=False):
     assert part_directory.parent.name.endswith("-parts"), repr(part_directory)
     part_pdf = part_directory / "part.pdf"
     print_always(f"Building {baca.path.trim(part_pdf)} ...")
     layout_py = part_directory / "layout.py"
     # TODO: consider removing or hoisting to make
     os.system(f"python {layout_py}")
-    interpret_build_music(part_directory, debug_sections=debug_sections)
+    interpret_build_music(part_directory, keep_temporary_files=keep_temporary_files)
     front_cover_tex = part_directory / "front-cover.tex"
     interpret_tex_file(front_cover_tex)
     preface_tex = part_directory / "preface.tex"
@@ -1047,11 +1065,11 @@ def build_part(part_directory, debug_sections=False):
     interpret_tex_file(part_tex)
 
 
-def build_score(score_directory, debug_sections=False):
+def build_score(score_directory, keep_temporary_files=False):
     assert score_directory.name.endswith("-score"), repr(score_directory)
     assert score_directory.parent.name == "builds", repr(score_directory)
     print_main_task("Building score ...")
-    interpret_build_music(score_directory, debug_sections=debug_sections)
+    interpret_build_music(score_directory, keep_temporary_files=keep_temporary_files)
     for stem in (
         "front-cover",
         "blank",
@@ -1076,7 +1094,7 @@ def build_score(score_directory, debug_sections=False):
         sys.exit(1)
 
 
-def collect_section_lys(_sections_directory):
+def collect_temporary_files(_sections_directory):
     contents_directory = baca.path.get_contents_directory(_sections_directory)
     sections_directory = contents_directory / "sections"
     section_lys = sorted(sections_directory.glob("**/music.ly"))
@@ -1403,13 +1421,13 @@ def handle_part_tags(directory):
 def interpret_build_music(
     build_directory,
     *,
-    debug_sections=False,
-    skip_section_collection=False,
+    keep_temporary_files=False,
+    skip_temporary_files=False,
 ):
     """
-    Interprets music.ly file in build directory.
+    Interprets build directory music.ly file.
 
-    Collects sections and handles tags.
+    Collects temporary files and handles tags.
     """
     build_type = None
     if build_directory.name.endswith("-score"):
@@ -1427,12 +1445,12 @@ def interpret_build_music(
     else:
         assert build_type == "part"
         _sections_directory = build_directory.parent / "_sections"
-    if skip_section_collection:
-        print_file_handling("Skipping section collection ...")
+    if skip_temporary_files:
+        print_file_handling("Skipping temporary files ...")
     else:
-        collect_section_lys(_sections_directory)
+        collect_temporary_files(_sections_directory)
     if build_directory.parent.name.endswith("-parts"):
-        if skip_section_collection:
+        if skip_temporary_files:
             print_tags("Skipping tag handling ...")
         else:
             handle_part_tags(build_directory)
@@ -1449,7 +1467,7 @@ def interpret_build_music(
             _sections_directory, _builds_sections_directory, dirs_exist_ok=True
         )
     remove = None
-    if _sections_directory.is_dir() and not debug_sections:
+    if _sections_directory.is_dir() and not keep_temporary_files:
         remove = _sections_directory
     music_pdf = music_ly.with_name("music.pdf")
     if music_pdf.is_file():
@@ -1501,6 +1519,8 @@ def persist_lilypond_file(
     timing: Timing,
     lilypond_file: abjad.LilyPondFile,
     metadata: types.MappingProxyType,
+    *,
+    lilypond_timeout: int = 0,
 ):
     print_main_task("Persisting LilyPond file ...")
     assert isinstance(arguments, types.SimpleNamespace), repr(arguments)
@@ -1532,6 +1552,7 @@ def persist_lilypond_file(
             timing,
             also_untagged=arguments.also_untagged,
             do_not_call_lilypond=arguments.do_not_call_lilypond,
+            lilypond_timeout=lilypond_timeout,
             log_timing=arguments.log_timing,
             print_timing=arguments.print_timing,
         )
@@ -1629,7 +1650,7 @@ def remove_site_comments(path: pathlib.Path) -> None:
     path.write_text(string)
 
 
-def run_lilypond(ly_file_path, *, pdf_mtime=None, remove=None):
+def run_lilypond(ly_file_path, *, lilypond_timeout=0, pdf_mtime=None, remove=None):
     assert ly_file_path.exists(), repr(ly_file_path)
     string = f"Calling LilyPond (with includes) on {baca.path.trim(ly_file_path)} ..."
     print_file_handling(string)
@@ -1639,11 +1660,16 @@ def run_lilypond(ly_file_path, *, pdf_mtime=None, remove=None):
     lilypond_log_file_path = directory / lilypond_log_file_name
     with abjad.TemporaryDirectoryChange(directory=directory):
         flags = get_includes()
-        abjad.io.run_lilypond(
-            str(ly_file_path),
-            flags=flags,
-            lilypond_log_file_path=(lilypond_log_file_path),
-        )
+        try:
+            signal.alarm(lilypond_timeout)
+            abjad.io.run_lilypond(
+                str(ly_file_path),
+                flags=flags,
+                lilypond_log_file_path=(lilypond_log_file_path),
+            )
+            signal.alarm(0)
+        except TimeoutException as e:
+            print(e)
         _remove_lilypond_warnings(
             lilypond_log_file_path,
             crescendo_too_small=True,

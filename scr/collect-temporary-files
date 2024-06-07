@@ -1,0 +1,20 @@
+#! /usr/bin/env python
+import argparse
+import os
+import pathlib
+
+import baca
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Collect section .[i]ly files.")
+    arguments = parser.parse_args()
+    directory = os.getcwd()
+    directory = pathlib.Path(directory)
+    assert directory.parent.name == "builds", repr(directory)
+    _sections_directory = directory / "_sections"
+    baca.build.collect_temporary_files(_sections_directory)
+
+
+if __name__ == "__main__":
+    main()
