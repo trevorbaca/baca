@@ -1379,6 +1379,7 @@ def handle_part_tags(_sections_directory, part_identifier=None):
             undo=True,
         )
         if part_identifier is not None:
+            parts_directory = _sections_directory.parent
             parts_directory_name = abjad.string.to_shout_case(parts_directory.name)
             name = f"{parts_directory_name}_{part_identifier}"
             text = show_tag(
