@@ -1286,13 +1286,12 @@ def handle_build_tags(_sections_directory):
             pointer.write(text)
 
 
-def handle_part_tags(directory):
-    directory = pathlib.Path(directory)
-    if not directory.parent.name.endswith("-parts"):
-        print_always("Must call script in part directory ...")
+def handle_part_tags(_sections_directory, part_identifier=None):
+    if not _sections_directory.parent.name.endswith("-parts"):
+        print_always("Must call in part directory ...")
         sys.exit(1)
-    parts_directory = directory.parent
 
+    """
     def _activate(
         path,
         tag,
@@ -1329,6 +1328,7 @@ def handle_part_tags(directory):
             name=name,
             deactivate=True,
         )
+    """
 
     def _parse_part_identifier(path):
         if path.suffix == ".ly":
@@ -1350,72 +1350,102 @@ def handle_part_tags(directory):
         else:
             raise TypeError(path)
 
-    music_ly = list(directory.glob("*music.ly"))[0]
-    _activate(
-        parts_directory,
-        "+PARTS",
-    )
-    _deactivate(
-        parts_directory,
-        "-PARTS",
-    )
-    _deactivate(
-        parts_directory,
-        "HIDE_IN_PARTS",
-    )
-    part_identifier = _parse_part_identifier(music_ly)
-    if part_identifier is None:
-        message = f"No part identifier found in {baca.path.trim(music_ly)} ..."
-        print_file_handling(message)
-        sys.exit()
-    parts_directory_name = abjad.string.to_shout_case(parts_directory.name)
-    name = f"{parts_directory_name}_{part_identifier}"
-    _activate(
-        parts_directory,
-        f"+{name}",
-    )
-    _deactivate(
-        parts_directory,
-        f"-{name}",
-    )
-    _deactivate(
-        parts_directory,
-        str(baca.tags.METRIC_MODULATION_IS_SCALED),
-    )
-    _deactivate(
-        parts_directory,
-        str(baca.tags.METRIC_MODULATION_IS_NOT_SCALED),
-    )
-    _activate(
-        parts_directory,
-        str(baca.tags.METRIC_MODULATION_IS_STRIPPED),
-    )
-    # HACK TO HIDE ALL POST-FERMATA-MEASURE TRANSPARENT BAR LINES;
-    # this only works if parts contain no EOL fermata measure:
-    _deactivate(
-        parts_directory,
-        str(baca.tags.FERMATA_MEASURE),
-    )
-    _activate(
-        parts_directory,
-        str(baca.tags.NOT_TOPMOST),
-    )
-    _deactivate(
-        parts_directory,
-        str(baca.tags.FERMATA_MEASURE_EMPTY_BAR_EXTENT),
-    )
-    _deactivate(
-        parts_directory,
-        str(baca.tags.FERMATA_MEASURE_NEXT_BAR_EXTENT),
-    )
-    _deactivate(
-        parts_directory,
-        str(baca.tags.FERMATA_MEASURE_RESUME_BAR_EXTENT),
-    )
-    _deactivate(
-        parts_directory,
-        str(baca.tags.EXPLICIT_BAR_EXTENT),
-    )
+    for file in sorted(_sections_directory.glob("*ily")):
+        messages = []
+        assert "secitons" not in file.parts
+        assert "builds" in file.parts
+        if "-score" in str(file):
+            my_name = "SCORE"
+        else:
+            assert "-parts" in str(file)
+            my_name = "PARTS"
+        assert my_name == "PARTS"
+        text = file.read_text()
+        text = show_tag(
+            text,
+            baca.tags.ONLY_PARTS,
+            messages,
+        )
+        text = show_tag(
+            text,
+            baca.tags.NOT_PARTS,
+            messages,
+            undo=True,
+        )
+        text = show_tag(
+            text,
+            baca.tags.HIDE_IN_PARTS,
+            messages,
+            undo=True,
+        )
+        if part_identifier is not None:
+            parts_directory_name = abjad.string.to_shout_case(parts_directory.name)
+            name = f"{parts_directory_name}_{part_identifier}"
+            text = show_tag(
+                text,
+                f"+{name}",
+                messages,
+            )
+            text = show_tag(
+                text,
+                f"-{name}",
+                messages,
+                undo=True,
+            )
+        text = show_tag(
+            text,
+            baca.tags.METRIC_MODULATION_IS_SCALED,
+            messages,
+            undo=True,
+        )
+        text = show_tag(
+            text,
+            baca.tags.METRIC_MODULATION_IS_NOT_SCALED,
+            messages,
+            undo=True,
+        )
+        text = show_tag(
+            text,
+            baca.tags.METRIC_MODULATION_IS_STRIPPED,
+            messages,
+        )
+        # HACK TO HIDE ALL POST-FERMATA-MEASURE TRANSPARENT BAR LINES;
+        # this only works if parts contain no EOL fermata measure:
+        text = show_tag(
+            text,
+            baca.tags.FERMATA_MEASURE,
+            messages,
+            undo=True,
+        )
+        text = show_tag(
+            text,
+            baca.tags.NOT_TOPMOST,
+            messages,
+        )
+        text = show_tag(
+            text,
+            baca.tags.FERMATA_MEASURE_EMPTY_BAR_EXTENT,
+            messages,
+            undo=True,
+        )
+        text = show_tag(
+            text,
+            baca.tags.FERMATA_MEASURE_NEXT_BAR_EXTENT,
+            messages,
+            undo=True,
+        )
+        text = show_tag(
+            text,
+            baca.tags.FERMATA_MEASURE_RESUME_BAR_EXTENT,
+            messages,
+            undo=True,
+        )
+        text = show_tag(
+            text,
+            baca.tags.EXPLICIT_BAR_EXTENT,
+            messages,
+            undo=True,
+        )
 
 
 def interpret_build_music(
@@ -1453,7 +1483,8 @@ def interpret_build_music(
         if skip_temporary_files:
             print_tags("Skipping tag handling ...")
         else:
-            handle_part_tags(build_directory)
+            # handle_part_tags(build_directory)
+            handle_part_tags(_sections_directory)
     contents_directory = baca.path.get_contents_directory(build_directory)
     metadata = baca.path.get_metadata(contents_directory)
     do_not_populate_remote_repos = metadata.get("do_not_populate_remote_repos")
