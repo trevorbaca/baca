@@ -51,7 +51,7 @@ def _get_global_spanner_extra_offsets(
 
 
 def _make_lilypond_file(
-    include_layout_ly,
+    include_layout_ily,
     includes,
     preamble,
     score,
@@ -71,7 +71,7 @@ def _make_lilypond_file(
         lilypond_language_token=False,
         tag=tag,
     )
-    if include_layout_ly:
+    if include_layout_ily:
         assert len(lilypond_file["score"].items) == 1
         score = lilypond_file["Score"]
         assert isinstance(score, abjad.Score)
@@ -94,7 +94,7 @@ def _make_lilypond_file(
 def file(
     score,
     clock_time_extra_offset=None,
-    include_layout_ly=False,
+    include_layout_ily=False,
     includes=None,
     local_measure_number_extra_offset=None,
     measure_number_extra_offset=None,
@@ -120,7 +120,7 @@ def file(
     )
     preamble.extend(strings)
     lilypond_file = _make_lilypond_file(
-        include_layout_ly,
+        include_layout_ily,
         includes,
         preamble,
         score,

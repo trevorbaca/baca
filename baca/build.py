@@ -1837,7 +1837,7 @@ def timed(timing_attribute):
     return decorator
 
 
-def write_layout_ly(
+def write_layout_ily(
     breaks,
     spacing=None,
     *,
