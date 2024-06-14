@@ -133,6 +133,10 @@ def extern(
     text = "".join(lines_)
     path.write_text(text)
     lines = []
+    string = abjad.Configuration().get_lilypond_version_string()
+    string = rf'\version "{string}"'
+    lines.append(string + "\n")
+    lines.append("\n")
     items = list(finished_variables.items())
     total = len(items)
     for i, item in enumerate(items):
