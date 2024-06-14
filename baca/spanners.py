@@ -1025,7 +1025,7 @@ def trill(
     if harmonic is True:
         # TODO: replace this with a (one-word) predefined function
         string = "#(lambda (grob) (grob-interpret-markup grob"
-        string += r' #{ \markup \musicglyph #"noteheads.s0harmonic" #}))'
+        string += r' #{ \markup \musicglyph "noteheads.s0harmonic" #}))'
         string = rf"- \tweak TrillPitchHead.stencil {string}"
         start_trill_span_ = abjad.bundle(start_trill_span_, string)
     wrappers = _attach_simplex_spanner_indicators(
