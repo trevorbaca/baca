@@ -56,7 +56,7 @@ def chead(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -67,7 +67,7 @@ def chead(
                         ~
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         bf'16
@@ -78,7 +78,7 @@ def chead(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         bf'16
@@ -149,7 +149,7 @@ def cheads(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -162,7 +162,7 @@ def cheads(
                         ~
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         bf'16
@@ -175,7 +175,7 @@ def cheads(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         bf'16
@@ -255,7 +255,7 @@ def clparts(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \abjad-color-music #'red
                         \time 7/4
@@ -272,7 +272,7 @@ def clparts(
                         \abjad-color-music #'red
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         \abjad-color-music #'red
                         r16
@@ -289,7 +289,7 @@ def clparts(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \abjad-color-music #'red
                         r16
@@ -462,7 +462,7 @@ def enchain(argument, counts: typing.Sequence[int]) -> list[list]:
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -480,7 +480,7 @@ def enchain(argument, counts: typing.Sequence[int]) -> list[list]:
                         <d' e'>16
                         _ \markup { \bold \with-color #blue * }
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         _ \markup { \bold \with-color #blue * }
@@ -498,7 +498,7 @@ def enchain(argument, counts: typing.Sequence[int]) -> list[list]:
                         ^ \markup { \bold \with-color #red * }
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         ^ \markup { \bold \with-color #red * }
@@ -841,7 +841,7 @@ def lleaf(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -853,7 +853,7 @@ def lleaf(
                         \abjad-color-music #'green
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         bf'16
@@ -864,7 +864,7 @@ def lleaf(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         bf'16
@@ -994,7 +994,7 @@ def lleaves(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -1006,7 +1006,7 @@ def lleaves(
                         \abjad-color-music #'red
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         \abjad-color-music #'blue
                         r16
@@ -1023,7 +1023,7 @@ def lleaves(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         bf'16
@@ -1098,7 +1098,7 @@ def lparts(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \abjad-color-music #'red
                         \time 7/4
@@ -1115,7 +1115,7 @@ def lparts(
                         \abjad-color-music #'red
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         \abjad-color-music #'red
                         r16
@@ -1129,7 +1129,7 @@ def lparts(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         bf'16
@@ -1194,7 +1194,7 @@ def lt(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -1205,7 +1205,7 @@ def lt(
                         ~
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         bf'16
@@ -1216,7 +1216,7 @@ def lt(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         bf'16
@@ -1281,7 +1281,7 @@ def ltleaf(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -1293,7 +1293,7 @@ def ltleaf(
                         ~
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         bf'16
@@ -1304,7 +1304,7 @@ def ltleaf(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         bf'16
@@ -1384,7 +1384,7 @@ def ltleaves(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -1400,7 +1400,7 @@ def ltleaves(
                         \abjad-color-music #'red
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         \abjad-color-music #'blue
                         r16
@@ -1417,7 +1417,7 @@ def ltleaves(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \abjad-color-music #'blue
                         r16
@@ -1486,7 +1486,7 @@ def ltqrun(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -1497,7 +1497,7 @@ def ltqrun(
                         ~
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         d'16
@@ -1508,7 +1508,7 @@ def ltqrun(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         e'16
@@ -1580,7 +1580,7 @@ def ltqruns(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -1596,7 +1596,7 @@ def ltqruns(
                         \abjad-color-music #'blue
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         \abjad-color-music #'red
@@ -1612,7 +1612,7 @@ def ltqruns(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         \abjad-color-music #'red
@@ -1686,7 +1686,7 @@ def ltrun(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -1697,7 +1697,7 @@ def ltrun(
                         ~
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         d'16
@@ -1708,7 +1708,7 @@ def ltrun(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         \abjad-color-music #'green
@@ -1780,7 +1780,7 @@ def ltruns(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -1796,7 +1796,7 @@ def ltruns(
                         \abjad-color-music #'red
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         \abjad-color-music #'blue
@@ -1812,7 +1812,7 @@ def ltruns(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         \abjad-color-music #'red
@@ -1901,7 +1901,7 @@ def lts(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \abjad-color-music #'red
                         \time 7/4
@@ -1918,7 +1918,7 @@ def lts(
                         \abjad-color-music #'red
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         \abjad-color-music #'blue
                         r16
@@ -1935,7 +1935,7 @@ def lts(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \abjad-color-music #'red
                         r16
@@ -2296,7 +2296,7 @@ def ntrun(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -2307,7 +2307,7 @@ def ntrun(
                         ~
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         d'16
@@ -2318,7 +2318,7 @@ def ntrun(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         \abjad-color-music #'green
@@ -2390,7 +2390,7 @@ def ntruns(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -2406,7 +2406,7 @@ def ntruns(
                         \abjad-color-music #'red
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         \abjad-color-music #'blue
@@ -2422,7 +2422,7 @@ def ntruns(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         \abjad-color-music #'red
@@ -2617,7 +2617,7 @@ def phead(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -2628,7 +2628,7 @@ def phead(
                         ~
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         bf'16
@@ -2639,7 +2639,7 @@ def phead(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         bf'16
@@ -2717,7 +2717,7 @@ def pheads(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -2732,7 +2732,7 @@ def pheads(
                         ~
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         \abjad-color-music #'red
@@ -2747,7 +2747,7 @@ def pheads(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         \abjad-color-music #'red
@@ -2820,7 +2820,7 @@ def pleaf(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -2831,7 +2831,7 @@ def pleaf(
                         ~
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         bf'16
@@ -2842,7 +2842,7 @@ def pleaf(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         bf'16
@@ -2925,7 +2925,7 @@ def pleaves(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -2941,7 +2941,7 @@ def pleaves(
                         \abjad-color-music #'red
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         \abjad-color-music #'blue
@@ -2957,7 +2957,7 @@ def pleaves(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         \abjad-color-music #'red
@@ -3031,7 +3031,7 @@ def plt(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -3042,7 +3042,7 @@ def plt(
                         ~
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         bf'16
@@ -3053,7 +3053,7 @@ def plt(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         bf'16
@@ -3132,7 +3132,7 @@ def plts(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -3148,7 +3148,7 @@ def plts(
                         \abjad-color-music #'blue
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         \abjad-color-music #'red
@@ -3164,7 +3164,7 @@ def plts(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         \abjad-color-music #'red
@@ -3234,7 +3234,7 @@ def ptail(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -3245,7 +3245,7 @@ def ptail(
                         ~
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         bf'16
@@ -3256,7 +3256,7 @@ def ptail(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         bf'16
@@ -3333,7 +3333,7 @@ def ptails(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -3348,7 +3348,7 @@ def ptails(
                         \abjad-color-music #'blue
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         \abjad-color-music #'red
@@ -3363,7 +3363,7 @@ def ptails(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         \abjad-color-music #'red
@@ -3432,7 +3432,7 @@ def ptlt(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -3443,7 +3443,7 @@ def ptlt(
                         ~
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         bf'16
@@ -3454,7 +3454,7 @@ def ptlt(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         bf'16
@@ -3528,7 +3528,7 @@ def ptlts(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -3542,7 +3542,7 @@ def ptlts(
                         ~
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         \abjad-color-music #'blue
@@ -3556,7 +3556,7 @@ def ptlts(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         \abjad-color-music #'red
@@ -3624,7 +3624,7 @@ def qrun(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -3635,7 +3635,7 @@ def qrun(
                         ~
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         d'16
@@ -3646,7 +3646,7 @@ def qrun(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         e'16
@@ -3718,7 +3718,7 @@ def qruns(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -3734,7 +3734,7 @@ def qruns(
                         \abjad-color-music #'blue
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         \abjad-color-music #'red
@@ -3750,7 +3750,7 @@ def qruns(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         \abjad-color-music #'red
@@ -3827,7 +3827,7 @@ def rleaf(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -3838,7 +3838,7 @@ def rleaf(
                         ~
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         bf'16
@@ -3849,7 +3849,7 @@ def rleaf(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \abjad-color-music #'green
                         r16
@@ -3999,7 +3999,7 @@ def rleaves(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -4010,7 +4010,7 @@ def rleaves(
                         ~
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         \abjad-color-music #'red
                         r16
@@ -4027,7 +4027,7 @@ def rleaves(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \abjad-color-music #'red
                         r16
@@ -4160,7 +4160,7 @@ def rrun(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -4171,7 +4171,7 @@ def rrun(
                         ~
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         \abjad-color-music #'green
@@ -4187,7 +4187,7 @@ def rrun(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \abjad-color-music #'green
                         r16
@@ -4255,7 +4255,7 @@ def rruns(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -4271,7 +4271,7 @@ def rruns(
                         \abjad-color-music #'red
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         \abjad-color-music #'red
                         r16
@@ -4288,7 +4288,7 @@ def rruns(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \abjad-color-music #'blue
                         r16
@@ -4507,7 +4507,7 @@ def tleaf(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -4519,7 +4519,7 @@ def tleaf(
                         ~
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         bf'16
@@ -4530,7 +4530,7 @@ def tleaf(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         bf'16
@@ -4615,7 +4615,7 @@ def tleaves(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -4631,7 +4631,7 @@ def tleaves(
                         \abjad-color-music #'red
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         \abjad-color-music #'blue
                         r16
@@ -4648,7 +4648,7 @@ def tleaves(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \abjad-color-music #'blue
                         r16
@@ -4783,7 +4783,7 @@ def wleaf(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -4795,7 +4795,7 @@ def wleaf(
                         \abjad-color-music #'green
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         bf'16
@@ -4806,7 +4806,7 @@ def wleaf(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         r16
                         bf'16
@@ -4860,7 +4860,7 @@ def wleaf(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -4871,7 +4871,7 @@ def wleaf(
                         ~
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         r16
                         bf'16
@@ -4882,7 +4882,7 @@ def wleaf(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \abjad-color-music #'green
                         r16
@@ -4956,7 +4956,7 @@ def wleaves(
                 \context Voice = "Voice"
                 {
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \time 7/4
                         r16
@@ -4968,7 +4968,7 @@ def wleaves(
                         \abjad-color-music #'red
                         <d' e'>16
                     }
-                    \times 8/9
+                    \tuplet 9/8
                     {
                         \abjad-color-music #'blue
                         r16
@@ -4985,7 +4985,7 @@ def wleaves(
                         <e' fs'>16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
-                    \times 10/9
+                    \tuplet 9/10
                     {
                         \abjad-color-music #'blue
                         r16
