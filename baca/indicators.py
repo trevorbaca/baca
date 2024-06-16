@@ -807,7 +807,7 @@ def one_voice(argument) -> list[abjad.Wrapper]:
 def open_volta(skip, first_measure_number) -> list[abjad.Wrapper]:
     assert isinstance(first_measure_number, int), repr(first_measure_number)
     wrappers = []
-    wrappers_ = bar_line(skip, ".|:", site="before")
+    wrappers_ = bar_line(skip, ".|:-|", site="before")
     wrappers.extend(wrappers_)
     tag = _helpers.function_name(_frame())
     measure_number = abjad.get.measure_number(skip)
