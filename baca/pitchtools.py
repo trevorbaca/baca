@@ -2559,7 +2559,7 @@ def replace_with_clusters(
                             \once \override NoteHead.text =
                             \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <c' e' g'>16
-                            ^ \markup \center-align \concat { \natural \flat }
+                            ^ \markup \center-column { \natural \flat }
                             [
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
@@ -2568,7 +2568,7 @@ def replace_with_clusters(
                             \once \override NoteHead.text =
                             \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <d' f' a' c''>16
-                            ^ \markup \center-align \concat { \natural \flat }
+                            ^ \markup \center-column { \natural \flat }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -2576,7 +2576,7 @@ def replace_with_clusters(
                             \once \override NoteHead.text =
                             \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <bf' d'' f''>16
-                            ^ \markup \center-align \concat { \natural \flat }
+                            ^ \markup \center-column { \natural \flat }
                             ]
                         }
                         {
@@ -2587,7 +2587,7 @@ def replace_with_clusters(
                             \once \override NoteHead.text =
                             \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <fs'' a'' c''' e'''>16
-                            ^ \markup \center-align \concat { \natural \flat }
+                            ^ \markup \center-column { \natural \flat }
                             [
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
@@ -2596,7 +2596,7 @@ def replace_with_clusters(
                             \once \override NoteHead.text =
                             \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <e'' g'' b''>16
-                            ^ \markup \center-align \concat { \natural \flat }
+                            ^ \markup \center-column { \natural \flat }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -2604,7 +2604,7 @@ def replace_with_clusters(
                             \once \override NoteHead.text =
                             \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <ef'' g'' b'' d'''>16
-                            ^ \markup \center-align \concat { \natural \flat }
+                            ^ \markup \center-column { \natural \flat }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -2612,7 +2612,7 @@ def replace_with_clusters(
                             \once \override NoteHead.text =
                             \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <af'' c''' e'''>16
-                            ^ \markup \center-align \concat { \natural \flat }
+                            ^ \markup \center-column { \natural \flat }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -2620,7 +2620,7 @@ def replace_with_clusters(
                             \once \override NoteHead.text =
                             \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <g'' b'' d''' f'''>16
-                            ^ \markup \center-align \concat { \natural \flat }
+                            ^ \markup \center-column { \natural \flat }
                             ]
                         }
                         {
@@ -2631,7 +2631,7 @@ def replace_with_clusters(
                             \once \override NoteHead.text =
                             \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             <a' c'' e''>16
-                            ^ \markup \center-align \concat { \natural \flat }
+                            ^ \markup \center-column { \natural \flat }
                         }
                     }
                 }
@@ -2680,7 +2680,7 @@ def replace_with_clusters(
                         \once \override NoteHead.text =
                         \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <e' g' b'>2
-                        ^ \markup \center-align \natural
+                        ^ \markup \center-column \natural
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
                         \once \override Arpeggio.X-offset = #-2
@@ -2688,7 +2688,7 @@ def replace_with_clusters(
                         \once \override NoteHead.text =
                         \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <e' g' b'>4.
-                        ^ \markup \center-align \natural
+                        ^ \markup \center-column \natural
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
                         \once \override Arpeggio.X-offset = #-2
@@ -2696,7 +2696,7 @@ def replace_with_clusters(
                         \once \override NoteHead.text =
                         \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <e' g' b'>2
-                        ^ \markup \center-align \natural
+                        ^ \markup \center-column \natural
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
                         \once \override Arpeggio.X-offset = #-2
@@ -2704,7 +2704,7 @@ def replace_with_clusters(
                         \once \override NoteHead.text =
                         \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <e' g' b'>4.
-                        ^ \markup \center-align \natural
+                        ^ \markup \center-column \natural
                     }
                 >>
             }
@@ -2752,7 +2752,7 @@ def replace_with_clusters(
                         \once \override NoteHead.text =
                         \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <c' e' g'>2
-                        ^ \markup \center-align \concat { \natural \flat }
+                        ^ \markup \center-column { \natural \flat }
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
                         \once \override Arpeggio.X-offset = #-2
@@ -2760,7 +2760,7 @@ def replace_with_clusters(
                         \once \override NoteHead.text =
                         \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <d' f' a'>4.
-                        ^ \markup \center-align \concat { \natural \flat }
+                        ^ \markup \center-column { \natural \flat }
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
                         \once \override Arpeggio.X-offset = #-2
@@ -2768,7 +2768,7 @@ def replace_with_clusters(
                         \once \override NoteHead.text =
                         \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <e' g' b'>2
-                        ^ \markup \center-align \concat { \natural \flat }
+                        ^ \markup \center-column { \natural \flat }
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
                         \once \override Arpeggio.X-offset = #-2
@@ -2776,7 +2776,7 @@ def replace_with_clusters(
                         \once \override NoteHead.text =
                         \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <f' a' c''>4.
-                        ^ \markup \center-align \concat { \natural \flat }
+                        ^ \markup \center-column { \natural \flat }
                     }
                 >>
             }
@@ -2823,7 +2823,7 @@ def replace_with_clusters(
                         \once \override NoteHead.text =
                         \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <g' b' d''>2
-                        ^ \markup \center-align \concat { \natural \flat }
+                        ^ \markup \center-column { \natural \flat }
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
                         \once \override Arpeggio.X-offset = #-2
@@ -2831,7 +2831,7 @@ def replace_with_clusters(
                         \once \override NoteHead.text =
                         \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <g' b' d''>4.
-                        ^ \markup \center-align \concat { \natural \flat }
+                        ^ \markup \center-column { \natural \flat }
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
                         \once \override Arpeggio.X-offset = #-2
@@ -2839,7 +2839,7 @@ def replace_with_clusters(
                         \once \override NoteHead.text =
                         \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <g' b' d''>2
-                        ^ \markup \center-align \concat { \natural \flat }
+                        ^ \markup \center-column { \natural \flat }
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
                         \once \override Arpeggio.X-offset = #-2
@@ -2847,7 +2847,7 @@ def replace_with_clusters(
                         \once \override NoteHead.text =
                         \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <g' b' d''>4.
-                        ^ \markup \center-align \concat { \natural \flat }
+                        ^ \markup \center-column { \natural \flat }
                     }
                 >>
             }
@@ -2894,7 +2894,7 @@ def replace_with_clusters(
                         \once \override NoteHead.text =
                         \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <e'>2
-                        ^ \markup \center-align \concat { \natural \flat }
+                        ^ \markup \center-column { \natural \flat }
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
                         \once \override Arpeggio.X-offset = #-2
@@ -2902,7 +2902,7 @@ def replace_with_clusters(
                         \once \override NoteHead.text =
                         \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <e' g'>4.
-                        ^ \markup \center-align \concat { \natural \flat }
+                        ^ \markup \center-column { \natural \flat }
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
                         \once \override Arpeggio.X-offset = #-2
@@ -2910,7 +2910,7 @@ def replace_with_clusters(
                         \once \override NoteHead.text =
                         \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <e' g' b'>2
-                        ^ \markup \center-align \concat { \natural \flat }
+                        ^ \markup \center-column { \natural \flat }
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
                         \once \override Arpeggio.X-offset = #-2
@@ -2918,7 +2918,7 @@ def replace_with_clusters(
                         \once \override NoteHead.text =
                         \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <e' g' b' d''>4.
-                        ^ \markup \center-align \concat { \natural \flat }
+                        ^ \markup \center-column { \natural \flat }
                     }
                 >>
             }
@@ -2965,7 +2965,7 @@ def replace_with_clusters(
                         \once \override NoteHead.text =
                         \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <e'>2
-                        ^ \markup \center-align \concat { \natural \flat }
+                        ^ \markup \center-column { \natural \flat }
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
                         \once \override Arpeggio.X-offset = #-2
@@ -2973,7 +2973,7 @@ def replace_with_clusters(
                         \once \override NoteHead.text =
                         \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <e' g' b'>4.
-                        ^ \markup \center-align \concat { \natural \flat }
+                        ^ \markup \center-column { \natural \flat }
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
                         \once \override Arpeggio.X-offset = #-2
@@ -2981,7 +2981,7 @@ def replace_with_clusters(
                         \once \override NoteHead.text =
                         \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <e'>2
-                        ^ \markup \center-align \concat { \natural \flat }
+                        ^ \markup \center-column { \natural \flat }
                         \once \override Accidental.stencil = ##f
                         \once \override AccidentalCautionary.stencil = ##f
                         \once \override Arpeggio.X-offset = #-2
@@ -2989,7 +2989,7 @@ def replace_with_clusters(
                         \once \override NoteHead.text =
                         \markup \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         <e' g' b'>4.
-                        ^ \markup \center-align \concat { \natural \flat }
+                        ^ \markup \center-column { \natural \flat }
                     }
                 >>
             }
