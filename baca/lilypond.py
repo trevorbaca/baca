@@ -78,7 +78,7 @@ def _make_lilypond_file(
         include = abjad.Container(tag=tag)
         literal = abjad.LilyPondLiteral("", site="absolute_before")
         abjad.attach(literal, include, tag=None)
-        string = r'\include "layout.ly"'
+        string = r'\include "layout.ily"'
         literal = abjad.LilyPondLiteral(string, site="opening")
         abjad.attach(literal, include, tag=tag)
         container = abjad.Container([include, score], simultaneous=True, tag=tag)

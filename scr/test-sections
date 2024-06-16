@@ -64,9 +64,9 @@ def _test_section(section_directory, *, do_not_call_lilypond=False):
         # names.extend(["clicktrack.midi", "music.midi"])
         pass
     names.sort()
-    layout_ly = section_directory / "layout.ly"
-    if layout_ly.exists():
-        names.append("layout.ly")
+    layout_ily = section_directory / "layout.ily"
+    if layout_ily.exists():
+        names.append("layout.ily")
     names.sort()
     path_to_results = {}
     for name in names:

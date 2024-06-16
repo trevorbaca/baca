@@ -370,7 +370,7 @@ def _handle_section_tags(section_directory):
     text = music_ly.read_text()
     text = abjad.tag.left_shift_tags(text)
     music_ly.write_text(text)
-    for name in ("layout.ly", "music.ily", "music.ly"):
+    for name in ("layout.ily", "music.ily", "music.ly"):
         path = music_ly.with_name(name)
         if not path.exists():
             continue
@@ -614,9 +614,9 @@ def _make_section_pdf(
     if music_ly.is_file() and music_ly_mtime < os.path.getmtime(music_ly):
         print_file_handling(f"Writing {baca.path.trim(music_ly)} ...")
     print_file_handling("Removing section tag files ...")
-    _layout_ly_tags = music_ly.with_name(".layout.ly.tags")
-    if _layout_ly_tags.exists():
-        _layout_ly_tags.unlink()
+    _layout_ily_tags = music_ly.with_name(".layout.ily.tags")
+    if _layout_ily_tags.exists():
+        _layout_ily_tags.unlink()
     _music_ily_tags = music_ly.with_name(".music.ily.tags")
     if _music_ily_tags.exists():
         _music_ily_tags.unlink()
@@ -750,7 +750,7 @@ def _populate_verbose_repository(section_directory):
     if os.environ.get("GITHUB_WORKSPACE"):
         return
     print_main_task("Populating _verbose repository ...")
-    for name in ("music.ly", "music.ily", "layout.ly"):
+    for name in ("music.ly", "music.ily", "layout.ily"):
         path = section_directory / name
         if not path.exists():
             continue
@@ -776,7 +776,7 @@ def _populate_untagged_repository(section_directory):
     if os.environ.get("GITHUB_WORKSPACE"):
         return
     print_main_task("Populating _untagged repository ...")
-    for name in ("music.ly", "music.ily", "layout.ly"):
+    for name in ("music.ly", "music.ily", "layout.ily"):
         path = section_directory / name
         if not path.exists():
             continue
@@ -804,7 +804,7 @@ def _populate_untagged_repository(section_directory):
         if not _untagged.parent.is_dir():
             _untagged.parent.mkdir(parents=True)
         _untagged.write_text(string)
-    for name in ("music.ly", "music.ily", "layout.ly"):
+    for name in ("music.ly", "music.ily", "layout.ily"):
         path = section_directory / name
         if not path.exists():
             continue
@@ -813,7 +813,7 @@ def _populate_untagged_repository(section_directory):
         color_persistent_indicators(path, undo=True)
         show_annotations(path, undo=True)
     print_main_task("Populating _bw repository ...")
-    for name in ("music.ly", "music.ily", "layout.ly"):
+    for name in ("music.ly", "music.ily", "layout.ily"):
         path = section_directory / name
         if not path.exists():
             continue
@@ -847,7 +847,7 @@ def _populate_untagged_repository(section_directory):
         if not _bw.parent.is_dir():
             _bw.parent.mkdir(parents=True)
         _bw.write_text(string)
-    for name in ("music.ly", "music.ily", "layout.ly"):
+    for name in ("music.ly", "music.ily", "layout.ily"):
         path = section_directory / name
         if not path.exists():
             continue
@@ -857,7 +857,7 @@ def _populate_untagged_repository(section_directory):
 
 def _remove_function_name_comments(section_directory):
     print_file_handling("Removing function name comments ...")
-    for name in ("music.ly", "music.ily", "layout.ly"):
+    for name in ("music.ly", "music.ily", "layout.ily"):
         path = section_directory / name
         if not path.exists():
             continue
@@ -905,7 +905,7 @@ def _remove_lilypond_warnings(
 
 def _remove_site_comments(section_directory):
     print_file_handling("Removing site comments ...")
-    for name in ("music.ly", "music.ily", "layout.ly"):
+    for name in ("music.ly", "music.ily", "layout.ily"):
         path = section_directory / name
         if not path.exists():
             continue
@@ -1843,7 +1843,7 @@ def write_layout_ily(
     *,
     curtail_measure_count=None,
     do_not_write_metadata=False,
-    file_name="layout.ly",
+    file_name="layout.ily",
     page_layout_context_only=False,
     time_signatures=None,
 ):
@@ -1853,7 +1853,7 @@ def write_layout_ily(
     if spacing is not None:
         assert isinstance(spacing, baca.layout.Spacing), repr(spacing)
     layout_py = layout_directory / "layout.py"
-    layout_ly = layout_directory / file_name
+    layout_ily = layout_directory / file_name
     if spacing is not None and spacing.overrides is not None:
         assert spacing.default is not None
     if spacing is not None and spacing.default is None:
@@ -1957,7 +1957,7 @@ def write_layout_ily(
     text = text.replace("Skips", "PageLayout")
     text = text.replace("GlobalSkips", "PageLayout")
     text = abjad.tag.left_shift_tags(text)
-    layout_ly = layout_directory / file_name
+    layout_ily = layout_directory / file_name
     lines = []
     # TODO: remove first_page_number embedding
     if layout_directory.parent.name == "sections":
@@ -1966,9 +1966,9 @@ def write_layout_ily(
             previous_section_directory = (
                 layout_directory.parent / previous_section_number
             )
-            previous_layout_ly = previous_section_directory / "layout.ly"
-            if previous_layout_ly.is_file():
-                result = _get_preamble_page_count_overview(previous_layout_ly)
+            previous_layout_ily = previous_section_directory / "layout.ily"
+            if previous_layout_ily.is_file():
+                result = _get_preamble_page_count_overview(previous_layout_ily)
                 if result is not None:
                     _, _, final_page_number = result
                     first_page_number = final_page_number + 1
@@ -1990,10 +1990,10 @@ def write_layout_ily(
     lines_.append("%  ]")
     lines.extend(lines_)
     header = "\n".join(lines) + "\n\n"
-    layout_ly.write_text(header + text + "\n")
+    layout_ily.write_text(header + text + "\n")
     counter = abjad.string.pluralize("measure", measure_count)
     message = f"Writing {measure_count} + 1 {counter} to"
-    message += f" {baca.path.trim(layout_ly)} ..."
+    message += f" {baca.path.trim(layout_ily)} ..."
     print_file_handling(message)
     bol_measure_numbers = []
     skips = abjad.iterate.leaves(score["PageLayout"], abjad.Skip)

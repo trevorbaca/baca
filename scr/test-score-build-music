@@ -41,25 +41,25 @@ def _test_build(build):
             os.system("python layout.py")
         os.system("interpret-build-music")
         if layout_py.exists():
-            layout_ly = build / "layout.ly"
-            if layout_ly.exists():
-                message = _make_pass_string(f"{baca.path.trim(layout_ly)} found")
+            layout_ily = build / "layout.ily"
+            if layout_ily.exists():
+                message = _make_pass_string(f"{baca.path.trim(layout_ily)} found")
             else:
-                message = _make_fail_string(f"{baca.path.trim(layout_ly)} missing")
+                message = _make_fail_string(f"{baca.path.trim(layout_ily)} missing")
                 result = 99
             messages.append(message)
-            if layout_ly.exists():
+            if layout_ily.exists():
                 tmp = build / "tmp"
-                os.system(f"git diff --color=always {layout_ly} > {tmp} 2>&1")
+                os.system(f"git diff --color=always {layout_ily} > {tmp} 2>&1")
                 with open(tmp) as pointer:
                     lines = pointer.readlines()
                 tmp.unlink()
                 if not lines:
-                    message = _make_pass_string(f"{baca.path.trim(layout_ly)} same")
+                    message = _make_pass_string(f"{baca.path.trim(layout_ily)} same")
                 else:
                     diffs.append(lines[:30])
                     message = _make_fail_string(
-                        f"{baca.path.trim(layout_ly)} different"
+                        f"{baca.path.trim(layout_ily)} different"
                     )
                     result = 99
                 messages.append(message)
