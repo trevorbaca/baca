@@ -1959,6 +1959,10 @@ def write_layout_ily(
     text = abjad.tag.left_shift_tags(text)
     layout_ily = layout_directory / file_name
     lines = []
+    string = abjad.Configuration().get_lilypond_version_string()
+    string = rf'\version "{string}"'
+    lines.append(string)
+    lines.append("")
     # TODO: remove first_page_number embedding
     if layout_directory.parent.name == "sections":
         if layout_directory.name != "01":
