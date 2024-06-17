@@ -190,23 +190,6 @@ def _externalize_music_ly(music_ly):
                 pointer.write(messages)
 
 
-def _get_preamble_page_count_overview(path):
-    assert path.is_file(), repr(path)
-    first_page_number, page_count = 1, None
-    with open(path) as pointer:
-        for line in pointer.readlines():
-            if line.startswith("% first_page_number = "):
-                line = line.strip("% first_page_number = ")
-                first_page_number = eval(line)
-            if line.startswith("% page_count = "):
-                line = line.strip("% page_count = ")
-                page_count = eval(line)
-    if isinstance(page_count, int):
-        final_page_number = first_page_number + page_count - 1
-        return first_page_number, page_count, final_page_number
-    return None
-
-
 def _handle_edition_tags(
     text: str, messages: list[str], directory_name: str, my_name: str
 ) -> str:
@@ -1934,29 +1917,9 @@ def write_layout_ily(
     string = rf'\version "{string}"'
     lines.append(string)
     lines.append("")
-    if layout_directory.parent.name == "sections":
-        if layout_directory.name != "01":
-            previous_section_number = str(int(layout_directory.name) - 1).zfill(2)
-            previous_section_directory = (
-                layout_directory.parent / previous_section_number
-            )
-            previous_layout_ily = previous_section_directory / "layout.ily"
-            if previous_layout_ily.is_file():
-                result = _get_preamble_page_count_overview(previous_layout_ily)
-                if result is not None:
-                    _, _, final_page_number = result
-                    first_page_number = final_page_number + 1
-                    line = f"% first_page_number = {first_page_number}"
-                    lines.append(line)
-    page_count = breaks.page_count
-    lines.append(f"% page_count = {page_count}")
-    measure_count = len(time_signatures)
-    if has_anchor_skip:
-        lines.append(f"% measure_count = {measure_count} + 1")
-    else:
-        lines.append(f"% measure_count = {measure_count}")
     header = "\n".join(lines) + "\n\n"
     layout_ily_path.write_text(header + text + "\n")
+    measure_count = len(time_signatures)
     counter = abjad.string.pluralize("measure", measure_count)
     message = f"Writing {measure_count} + 1 {counter} to"
     message += f" {baca.path.trim(layout_ily_path)} ..."
@@ -1972,7 +1935,7 @@ def write_layout_ily(
     count = len(bol_measure_numbers)
     numbers = abjad.string.pluralize("number", count)
     if not do_not_write_metadata:
-        print_file_handling(f"Writing BOL measure {numbers} to .metadata ...")
+        print_file_handling(f"Writing BOL measure numbers {numbers} to .metadata ...")
         baca.path.add_metadatum(
             layout_directory,
             "bol_measure_numbers",
