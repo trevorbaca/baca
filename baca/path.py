@@ -204,52 +204,6 @@ def get_wrapper_directory(path: pathlib.Path):
     raise Exception(path)
 
 
-def get_measure_profile_metadata(path: pathlib.Path) -> tuple[int, int, list]:
-    """
-    Gets measure profile metadata.
-
-    Reads section metadata when path is section.
-
-    Reads score metadata when path is not section.
-
-    Returns tuple of three metadata: first measure number; measure count; list of fermata
-    measure numbers.
-    """
-    assert isinstance(path, pathlib.Path), repr(path)
-    if path.parent.parent.name == "sections":
-        string = "first_measure_number"
-        first_measure_number = get_metadata(path.parent).get(string, 1)
-        assert isinstance(first_measure_number, int), repr(first_measure_number)
-        time_signatures = get_metadata(path.parent).get("time_signatures")
-        assert isinstance(time_signatures, list)
-        if bool(time_signatures):
-            measure_count = len(time_signatures)
-        else:
-            measure_count = 0
-        string = "fermata_measure_numbers"
-        fermata_measure_numbers = get_metadata(path.parent).get(string, [])
-    else:
-        first_measure_number = 1
-        measure_count = 0
-        fermata_measure_numbers = []
-        contents_directory = get_contents_directory(path)
-        sections_directory = contents_directory / "sections"
-        section_directories = list(sorted(sections_directory.glob("*")))
-        for section_directory in section_directories:
-            if not section_directory.is_dir():
-                continue
-            time_signatures = get_metadata(section_directory).get("time_signatures")
-            assert isinstance(time_signatures, list)
-            measure_count += len(time_signatures)
-            fermata_measure_numbers_ = get_metadata(section_directory).get(
-                "fermata_measure_numbers",
-                [],
-            )
-            fermata_measure_numbers.extend(fermata_measure_numbers_)
-    assert isinstance(fermata_measure_numbers, list), repr(fermata_measure_numbers)
-    return (first_measure_number, measure_count, fermata_measure_numbers)
-
-
 def get_metadata(directory: pathlib.Path) -> types.MappingProxyType:
     assert isinstance(directory, pathlib.Path), repr(directory)
     assert directory.is_dir(), repr(directory)

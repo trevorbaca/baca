@@ -6,7 +6,6 @@ import dataclasses
 import functools
 import os
 import pathlib
-import pprint
 import shutil
 import signal
 import sys
@@ -205,29 +204,6 @@ def _get_preamble_page_count_overview(path):
     if isinstance(page_count, int):
         final_page_number = first_page_number + page_count - 1
         return first_page_number, page_count, final_page_number
-    return None
-
-
-def _get_preamble_time_signatures(path):
-    assert path.is_file(), repr(path)
-    start_line = "% time_signatures = ["
-    stop_line = "%  ]"
-    lines = []
-    with open(path) as pointer:
-        for line in pointer.readlines():
-            if line.startswith(stop_line):
-                lines.append("]")
-                break
-            if lines:
-                lines.append(line.strip("%").strip("\n"))
-            elif line.startswith(start_line):
-                lines.append("[")
-        string = "".join(lines)
-        try:
-            time_signatures = eval(string)
-        except Exception:
-            return []
-        return time_signatures
     return None
 
 
@@ -1146,6 +1122,42 @@ def get_includes():
     return string
 
 
+def get_measure_profile_metadata(path: pathlib.Path) -> tuple[int, int, list]:
+    assert isinstance(path, pathlib.Path), repr(path)
+    if path.parent.parent.name == "sections":
+        string = "first_measure_number"
+        first_measure_number = baca.path.get_metadata(path.parent).get(string, 1)
+        assert isinstance(first_measure_number, int), repr(first_measure_number)
+        time_signatures = baca.path.get_metadata(path.parent).get("time_signatures")
+        assert isinstance(time_signatures, list)
+        measure_count = len(time_signatures)
+        string = "fermata_measure_numbers"
+        fermata_measure_numbers = baca.path.get_metadata(path.parent).get(string, [])
+    else:
+        assert "builds" in path.parts, repr(path)
+        first_measure_number = 1
+        measure_count = 0
+        fermata_measure_numbers = []
+        contents_directory = baca.path.get_contents_directory(path)
+        sections_directory = contents_directory / "sections"
+        section_directories = list(sorted(sections_directory.glob("*")))
+        for section_directory in section_directories:
+            if not section_directory.is_dir():
+                continue
+            time_signatures = baca.path.get_metadata(section_directory).get(
+                "time_signatures"
+            )
+            assert isinstance(time_signatures, list)
+            measure_count += len(time_signatures)
+            fermata_measure_numbers_ = baca.path.get_metadata(section_directory).get(
+                "fermata_measure_numbers",
+                [],
+            )
+            fermata_measure_numbers.extend(fermata_measure_numbers_)
+    assert isinstance(fermata_measure_numbers, list), repr(fermata_measure_numbers)
+    return (first_measure_number, measure_count, fermata_measure_numbers)
+
+
 def handle_build_tags(_sections_directory):
     print_file_handling("Writing build tag files ...")
     contents_directory = baca.path.get_contents_directory(_sections_directory)
@@ -1849,12 +1861,14 @@ def write_layout_ily(
 ):
     # TODO: pass necessary info into function; do not call os.getcwd()
     layout_directory = pathlib.Path(os.getcwd())
-    print_main_task("Making layout ...")
+    layout_ily_path = layout_directory / file_name
+    if time_signatures is not None:
+        assert isinstance(time_signatures, list), repr(time_signatures)
+        assert all(isinstance(_, str) for _ in time_signatures), repr(time_signatures)
+    print_main_task(f"Writing {baca.path.trim(layout_ily_path)} ...")
     assert isinstance(breaks, baca.layout.Breaks), repr(breaks)
     if spacing is not None:
         assert isinstance(spacing, baca.layout.Spacing), repr(spacing)
-    layout_py = layout_directory / "layout.py"
-    layout_ily = layout_directory / file_name
     if spacing is not None and spacing.overrides is not None:
         assert spacing.default is not None
     if spacing is not None and spacing.default is None:
@@ -1862,7 +1876,8 @@ def write_layout_ily(
         fermata_measure_numbers = None
         measure_count = None
     else:
-        tuple_ = baca.path.get_measure_profile_metadata(layout_py)
+        layout_py = layout_directory / "layout.py"
+        tuple_ = get_measure_profile_metadata(layout_py)
         first_measure_number = tuple_[0]
         measure_count = tuple_[1]
         fermata_measure_numbers = tuple_[2] or []
@@ -1887,6 +1902,7 @@ def write_layout_ily(
             "time_signatures"
         )
     else:
+        assert "builds" in layout_directory.parts, repr(layout_directory)
         first_measure_number = 1
         time_signatures = []
         contents_directory = baca.path.get_contents_directory(layout_directory)
@@ -1898,14 +1914,19 @@ def write_layout_ily(
                 "time_signatures",
             )
             time_signatures.extend(time_signatures_)
-    if first_measure_number is False:
-        raise Exception("first_measure_number should not be false")
-        print_file_handling(f"Skipping {baca.path.trim(layout_py)} ...")
-        sys.exit(1)
+    assert isinstance(time_signatures, list), repr(time_signatures)
+    assert all(isinstance(_, str) for _ in time_signatures), repr(time_signatures)
+    assert isinstance(first_measure_number, int), repr(first_measure_number)
     score = baca.docs.make_empty_score(1, do_not_move_global_context=True)
     time_signatures_ = [abjad.TimeSignature.from_string(_) for _ in time_signatures]
-    # TODO: do not read from environment; pass into function instead:
-    has_anchor_skip = baca.path.get_metadata(layout_directory).get("has_anchor_skip")
+    if "sections" in layout_directory.parts:
+        # TODO: do not read from environment; pass into function instead:
+        has_anchor_skip = baca.path.get_metadata(layout_directory).get(
+            "has_anchor_skip"
+        )
+    else:
+        assert "builds" in layout_directory.parts
+        has_anchor_skip = False
     baca.section.set_up_score(
         score,
         time_signatures_,
@@ -1955,7 +1976,6 @@ def write_layout_ily(
     text = text.replace("Skips", "PageLayout")
     text = text.replace("GlobalSkips", "PageLayout")
     text = abjad.tag.left_shift_tags(text)
-    layout_ily = layout_directory / file_name
     lines = []
     string = abjad.Configuration().get_lilypond_version_string()
     string = rf'\version "{string}"'
@@ -1977,24 +1997,16 @@ def write_layout_ily(
                     lines.append(line)
     page_count = breaks.page_count
     lines.append(f"% page_count = {page_count}")
-    time_signatures = [str(_) for _ in time_signatures]
     measure_count = len(time_signatures)
     if has_anchor_skip:
         lines.append(f"% measure_count = {measure_count} + 1")
     else:
         lines.append(f"% measure_count = {measure_count}")
-    string = pprint.pformat(time_signatures, compact=True, width=80 - 3)
-    lines_ = string.split("\n")
-    lines_ = [_.strip("[").strip("]") for _ in lines_]
-    lines_ = ["% " + _ for _ in lines_]
-    lines_.insert(0, "% time_signatures = [")
-    lines_.append("%  ]")
-    lines.extend(lines_)
     header = "\n".join(lines) + "\n\n"
-    layout_ily.write_text(header + text + "\n")
+    layout_ily_path.write_text(header + text + "\n")
     counter = abjad.string.pluralize("measure", measure_count)
     message = f"Writing {measure_count} + 1 {counter} to"
-    message += f" {baca.path.trim(layout_ily)} ..."
+    message += f" {baca.path.trim(layout_ily_path)} ..."
     print_file_handling(message)
     bol_measure_numbers = []
     skips = abjad.iterate.leaves(score["PageLayout"], abjad.Skip)
