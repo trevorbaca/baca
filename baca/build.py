@@ -1873,12 +1873,6 @@ def write_layout_ily(
         for bol_measure_number in breaks.bol_measure_numbers[1:]:
             eol_measure_number = bol_measure_number - 1
             eol_measure_numbers.append(eol_measure_number)
-    # TODO: use dataclass:
-    page_layout_profile = {
-        "eol_measure_numbers": eol_measure_numbers,
-        "fermata_measure_numbers": fermata_measure_numbers,
-        "measure_count": measure_count,
-    }
     # TODO: do not read from environment; pass into function instead:
     has_anchor_skip = baca.path.get_metadata(layout_directory).get("has_anchor_skip")
     document_name = abjad.string.to_shout_case(layout_directory.name)
@@ -1920,6 +1914,11 @@ def write_layout_ily(
         layout=True,
     )
     if spacing is not None:
+        page_layout_profile = baca.layout.PageLayoutProfile(
+            eol_measure_numbers=eol_measure_numbers,
+            fermata_measure_numbers=fermata_measure_numbers,
+            measure_count=measure_count,
+        )
         spacing(score, page_layout_profile, has_anchor_skip=has_anchor_skip)
     breaks(score)
     offset_to_measure_number = baca.section._populate_offset_to_measure_number(

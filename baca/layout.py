@@ -122,6 +122,19 @@ class Page:
         self.systems = list(systems)
 
 
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class PageLayoutProfile:
+
+    eol_measure_numbers: list[int]
+    fermata_measure_numbers: list[int]
+    measure_count: int
+
+    def __post_init__(self):
+        assert isinstance(self.eol_measure_numbers, list)
+        assert isinstance(self.fermata_measure_numbers, list)
+        assert isinstance(self.measure_count, int)
+
+
 class Spacing:
 
     __slots__ = (
@@ -144,13 +157,12 @@ class Spacing:
         self.lax_spacing_section = lax_spacing_section or []
         self.overrides = overrides
 
-    def __call__(self, score, page_layout_profile=None, *, has_anchor_skip=False):
-        page_layout_profile = page_layout_profile or {}
+    def __call__(self, score, page_layout_profile, *, has_anchor_skip=False):
         skips_context = score["Skips"]
         skips = _select.skips(skips_context)
-        measure_count = page_layout_profile.get("measure_count") or len(skips)
-        fermata_measure_numbers = page_layout_profile.get("fermata_measure_numbers", [])
-        eol_measure_numbers = page_layout_profile.get("eol_measure_numbers", [])
+        measure_count = page_layout_profile.measure_count or len(skips)
+        fermata_measure_numbers = page_layout_profile.fermata_measure_numbers or []
+        eol_measure_numbers = page_layout_profile.eol_measure_numbers or []
         measures = {}
         for n in range(1, measure_count + 1):
             if n in fermata_measure_numbers:
@@ -207,7 +219,6 @@ class Spacing:
                 denominator = pair[1] * magic_lilypond_eol_adjustment.denominator
                 pair = numerator, denominator
                 eol_adjusted = True
-
             forbid_new_spacing_section = False
             if measure_number in self.forbid_new_spacing_section:
                 forbid_new_spacing_section = True
