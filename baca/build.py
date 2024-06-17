@@ -1825,7 +1825,6 @@ def timed(timing_attribute):
 def write_layout_ily(
     breaks,
     time_signature_fractions,
-    spacing=None,
     *,
     curtail_measure_count=None,
     do_not_write_metadata=False,
@@ -1834,6 +1833,7 @@ def write_layout_ily(
     first_measure_number=1,
     has_anchor_skip=False,
     page_layout_context_only=False,
+    spacing=None,
 ):
     # TODO: pass necessary info into function; do not call os.getcwd()
     layout_directory = pathlib.Path(os.getcwd())
