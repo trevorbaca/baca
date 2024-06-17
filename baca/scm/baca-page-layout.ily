@@ -65,7 +65,7 @@ baca-fermata-measure = #(
 baca-new-lax-spacing-section = #(
     define-music-function (n d music) (number? number? ly:music?)
     #{
-    \set Score.proportionalNotationDuration = \musicLength 1*n/d
+    \set Score.proportionalNotationDuration = \musicLength 1 * #(/ n d)
     \newSpacingSection
     $music
     #}
@@ -74,7 +74,7 @@ baca-new-lax-spacing-section = #(
 baca-new-strict-spacing-section = #(
     define-music-function (n d music) (number? number? ly:music?)
     #{
-    \set Score.proportionalNotationDuration = \musicLength 1*n/d
+    \set Score.proportionalNotationDuration = \musicLength 1 * #(/ n d)
     \override Score.SpacingSpanner.strict-grace-spacing = ##t
     \override Score.SpacingSpanner.strict-note-spacing = ##t
     \newSpacingSection
