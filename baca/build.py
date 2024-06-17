@@ -1889,11 +1889,9 @@ def write_layout_ily(
     if spacing is not None and spacing.default is None:
         eol_measure_numbers = None
         fermata_measure_numbers = None
-        measure_count = None
     else:
         layout_py = layout_directory / "layout.py"
         tuple_ = get_measure_profile_metadata(layout_py)
-        measure_count = tuple_[1]
         fermata_measure_numbers = tuple_[2] or []
         fermata_measure_numbers = [
             _ - (first_measure_number - 1) for _ in fermata_measure_numbers
@@ -1916,7 +1914,7 @@ def write_layout_ily(
         page_layout_profile = baca.layout.PageLayoutProfile(
             eol_measure_numbers=eol_measure_numbers,
             fermata_measure_numbers=fermata_measure_numbers,
-            measure_count=measure_count,
+            measure_count=len(time_signatures),
         )
         spacing(score, page_layout_profile, has_anchor_skip=has_anchor_skip)
     breaks(score)
