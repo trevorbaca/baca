@@ -983,6 +983,19 @@ class Environment:
 Timer = abjad.Timer
 
 
+def accumulate_fermata_measure_numbers(sections_directory):
+    assert sections_directory.name == "sections", repr(sections_directory)
+    fermata_measure_numbers = []
+    for section_directory in sorted(sections_directory.glob("*")):
+        if not section_directory.is_dir():
+            continue
+        dictionary = baca.path.get_metadata(section_directory)
+        fermata_measure_numbers_ = dictionary.get("fermata_measure_numbers", [])
+        fermata_measure_numbers.extend(fermata_measure_numbers_)
+    assert all(isinstance(_, int) for _ in fermata_measure_numbers)
+    return fermata_measure_numbers
+
+
 def accumulate_time_signatures(sections_directory):
     assert sections_directory.name == "sections", repr(sections_directory)
     time_signatures = []
@@ -990,7 +1003,7 @@ def accumulate_time_signatures(sections_directory):
         if not section_directory.is_dir():
             continue
         dictionary = baca.path.get_metadata(section_directory)
-        time_signatures_ = dictionary.get("time_signatures")
+        time_signatures_ = dictionary.get("time_signatures", [])
         time_signatures.extend(time_signatures_)
     assert all(isinstance(_, str) for _ in time_signatures), repr(time_signatures)
     return time_signatures
@@ -1133,42 +1146,6 @@ def get_includes():
     strings.append(f" --include={baca_contents}/scm")
     string = " ".join(strings)
     return string
-
-
-def get_measure_profile_metadata(path: pathlib.Path) -> tuple[int, int, list]:
-    assert isinstance(path, pathlib.Path), repr(path)
-    if path.parent.parent.name == "sections":
-        string = "first_measure_number"
-        first_measure_number = baca.path.get_metadata(path.parent).get(string, 1)
-        assert isinstance(first_measure_number, int), repr(first_measure_number)
-        time_signatures = baca.path.get_metadata(path.parent).get("time_signatures")
-        assert isinstance(time_signatures, list)
-        measure_count = len(time_signatures)
-        string = "fermata_measure_numbers"
-        fermata_measure_numbers = baca.path.get_metadata(path.parent).get(string, [])
-    else:
-        assert "builds" in path.parts, repr(path)
-        first_measure_number = 1
-        measure_count = 0
-        fermata_measure_numbers = []
-        contents_directory = baca.path.get_contents_directory(path)
-        sections_directory = contents_directory / "sections"
-        section_directories = list(sorted(sections_directory.glob("*")))
-        for section_directory in section_directories:
-            if not section_directory.is_dir():
-                continue
-            time_signatures = baca.path.get_metadata(section_directory).get(
-                "time_signatures"
-            )
-            assert isinstance(time_signatures, list)
-            measure_count += len(time_signatures)
-            fermata_measure_numbers_ = baca.path.get_metadata(section_directory).get(
-                "fermata_measure_numbers",
-                [],
-            )
-            fermata_measure_numbers.extend(fermata_measure_numbers_)
-    assert isinstance(fermata_measure_numbers, list), repr(fermata_measure_numbers)
-    return (first_measure_number, measure_count, fermata_measure_numbers)
 
 
 def handle_build_tags(_sections_directory):
@@ -1869,30 +1846,29 @@ def write_layout_ily(
     *,
     curtail_measure_count=None,
     do_not_write_metadata=False,
+    fermata_measure_numbers=None,
     file_name="layout.ily",
     first_measure_number=1,
     has_anchor_skip=False,
     page_layout_context_only=False,
 ):
-    assert isinstance(time_signature_fractions, list)
-    assert all(isinstance(_, str) for _ in time_signature_fractions)
-    assert isinstance(first_measure_number, int), repr(first_measure_number)
     # TODO: pass necessary info into function; do not call os.getcwd()
     layout_directory = pathlib.Path(os.getcwd())
     layout_ily_path = layout_directory / file_name
     print_main_task(f"Writing {baca.path.trim(layout_ily_path)} ...")
     assert isinstance(breaks, baca.layout.Breaks), repr(breaks)
+    assert isinstance(time_signature_fractions, list)
+    assert all(isinstance(_, str) for _ in time_signature_fractions)
     if spacing is not None:
         assert isinstance(spacing, baca.layout.Spacing), repr(spacing)
     if spacing is not None and spacing.overrides is not None:
         assert spacing.default is not None
+    assert isinstance(first_measure_number, int), repr(first_measure_number)
+    fermata_measure_numbers = fermata_measure_numbers or []
+    assert isinstance(fermata_measure_numbers, list), repr(fermata_measure_numbers)
     if spacing is not None and spacing.default is None:
         eol_measure_numbers = None
-        fermata_measure_numbers = None
     else:
-        layout_py = layout_directory / "layout.py"
-        tuple_ = get_measure_profile_metadata(layout_py)
-        fermata_measure_numbers = tuple_[2] or []
         fermata_measure_numbers = [
             _ - (first_measure_number - 1) for _ in fermata_measure_numbers
         ]
