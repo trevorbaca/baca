@@ -1847,6 +1847,7 @@ def write_layout_ily(
     page_layout_context_only=False,
     time_signatures=None,
 ):
+    # TODO: pass necessary info into function; do not call os.getcwd()
     layout_directory = pathlib.Path(os.getcwd())
     print_main_task("Making layout ...")
     assert isinstance(breaks, baca.layout.Breaks), repr(breaks)
@@ -1873,9 +1874,6 @@ def write_layout_ily(
         for bol_measure_number in breaks.bol_measure_numbers[1:]:
             eol_measure_number = bol_measure_number - 1
             eol_measure_numbers.append(eol_measure_number)
-    # TODO: do not read from environment; pass into function instead:
-    has_anchor_skip = baca.path.get_metadata(layout_directory).get("has_anchor_skip")
-    document_name = abjad.string.to_shout_case(layout_directory.name)
     if time_signatures is not None:
         first_measure_number = 1
     elif layout_directory.parent.name == "sections":
@@ -1904,9 +1902,10 @@ def write_layout_ily(
         raise Exception("first_measure_number should not be false")
         print_file_handling(f"Skipping {baca.path.trim(layout_py)} ...")
         sys.exit(1)
-    assert abjad.string.is_shout_case(document_name)
     score = baca.docs.make_empty_score(1, do_not_move_global_context=True)
     time_signatures_ = [abjad.TimeSignature.from_string(_) for _ in time_signatures]
+    # TODO: do not read from environment; pass into function instead:
+    has_anchor_skip = baca.path.get_metadata(layout_directory).get("has_anchor_skip")
     baca.section.set_up_score(
         score,
         time_signatures_,
@@ -1962,7 +1961,6 @@ def write_layout_ily(
     string = rf'\version "{string}"'
     lines.append(string)
     lines.append("")
-    # TODO: remove first_page_number embedding
     if layout_directory.parent.name == "sections":
         if layout_directory.name != "01":
             previous_section_number = str(int(layout_directory.name) - 1).zfill(2)
@@ -2009,24 +2007,9 @@ def write_layout_ily(
     count = len(bol_measure_numbers)
     numbers = abjad.string.pluralize("number", count)
     if not do_not_write_metadata:
-        metadata = layout_directory / ".metadata"
-        string = baca.path.trim(metadata)
-        message = f"Writing BOL measure {numbers} to {string} ..."
-        print_file_handling(message)
-        if layout_directory.name.endswith("-parts"):
-            if document_name is not None:
-                part_dictionary = baca.path.get_metadata(layout_directory).get(
-                    document_name,
-                    {},
-                )
-            else:
-                part_dictionary = {}
-            part_dictionary["bol_measure_numbers"] = bol_measure_numbers
-            assert abjad.string.is_shout_case(document_name)
-            baca.path.add_metadatum(layout_directory, document_name, part_dictionary)
-        else:
-            baca.path.add_metadatum(
-                layout_directory,
-                "bol_measure_numbers",
-                bol_measure_numbers,
-            )
+        print_file_handling(f"Writing BOL measure {numbers} to .metadata ...")
+        baca.path.add_metadatum(
+            layout_directory,
+            "bol_measure_numbers",
+            bol_measure_numbers,
+        )

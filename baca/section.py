@@ -535,7 +535,6 @@ def _collect_metadata(
 ) -> tuple[types.MappingProxyType, types.MappingProxyType]:
     metadata_, persist_ = {}, {}
     persist_["alive_during_section"] = _collect_alive_during_section(score)
-    # baca.build.write_layout_ily() adds bol_measure_numbers to metadata
     bol_measure_numbers = metadata.get("bol_measure_numbers")
     if bol_measure_numbers:
         metadata_["bol_measure_numbers"] = bol_measure_numbers
