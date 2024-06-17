@@ -1871,6 +1871,7 @@ def write_layout_ily(
     do_not_write_metadata=False,
     file_name="layout.ily",
     first_measure_number=1,
+    has_anchor_skip=False,
     page_layout_context_only=False,
 ):
     assert isinstance(time_signature_fractions, list)
@@ -1905,14 +1906,6 @@ def write_layout_ily(
     time_signatures = [
         abjad.TimeSignature.from_string(_) for _ in time_signature_fractions
     ]
-    if "sections" in layout_directory.parts:
-        # TODO: do not read from environment; pass into function instead:
-        has_anchor_skip = baca.path.get_metadata(layout_directory).get(
-            "has_anchor_skip"
-        )
-    else:
-        assert "builds" in layout_directory.parts
-        has_anchor_skip = False
     baca.section.set_up_score(
         score,
         time_signatures,
