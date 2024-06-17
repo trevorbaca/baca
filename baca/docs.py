@@ -288,7 +288,7 @@ def make_single_staff_score(
     leaf = abjad.select.leaf(voice, 0)
     abjad.attach(time_signature, leaf)
     if pndfs is not None:
-        string = f"#(ly:make-moment {pndfs})"
+        string = rf"\musicLength 1*{pndfs}"
         abjad.setting(score).proportionalNotationDuration = string
     return score
 

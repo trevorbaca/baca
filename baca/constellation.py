@@ -81,7 +81,7 @@ Constellation.
     ...         \override TextScript.color = #blue
     ...         \override TextScript.staff-padding = 10
     ...         \override TimeSignature.stencil = ##f
-    ...         proportionalNotationDuration = #(ly:make-moment 1 24)
+    ...         proportionalNotationDuration = \musicLength 1*1/24
     ...     }
     ... }
     ... '''

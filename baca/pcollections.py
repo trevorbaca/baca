@@ -827,7 +827,7 @@ def illustrate_harmonic_series(harmonic_series) -> abjad.LilyPondFile:
     abjad.override(staff).TextScript.staff_padding = 6
     abjad.override(staff).TimeSignature.stencil = False
     score = abjad.Score([staff], name="Score")
-    abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 8)"
+    abjad.setting(score).proportionalNotationDuration = r"\musicLength 8"
     lilypond_file = abjad.LilyPondFile([score])
     return lilypond_file
 
