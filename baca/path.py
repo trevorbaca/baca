@@ -191,6 +191,13 @@ def get_contents_directory(path: pathlib.Path):
     return contents_directory
 
 
+def get_sections_directory(directory_string: str):
+    directory_path = pathlib.Path(directory_string)
+    contents_directory = get_contents_directory(directory_path)
+    sections_directory = contents_directory / "sections"
+    return sections_directory
+
+
 def get_wrapper_directory(path: pathlib.Path):
     assert isinstance(path, pathlib.Path), repr(path)
     parts = str(path).split(os.sep)

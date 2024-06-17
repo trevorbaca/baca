@@ -983,6 +983,19 @@ class Environment:
 Timer = abjad.Timer
 
 
+def accumulate_time_signatures(sections_directory):
+    assert sections_directory.name == "sections", repr(sections_directory)
+    time_signatures = []
+    for section_directory in sorted(sections_directory.glob("*")):
+        if not section_directory.is_dir():
+            continue
+        dictionary = baca.path.get_metadata(section_directory)
+        time_signatures_ = dictionary.get("time_signatures")
+        time_signatures.extend(time_signatures_)
+    assert all(isinstance(_, str) for _ in time_signatures), repr(time_signatures)
+    return time_signatures
+
+
 # TODO: integrate argparse
 def arguments(arguments):
     known_arguments = (
@@ -1851,20 +1864,21 @@ def timed(timing_attribute):
 
 def write_layout_ily(
     breaks,
+    time_signature_fractions,
     spacing=None,
     *,
     curtail_measure_count=None,
     do_not_write_metadata=False,
     file_name="layout.ily",
+    first_measure_number=1,
     page_layout_context_only=False,
-    time_signatures=None,
 ):
+    assert isinstance(time_signature_fractions, list)
+    assert all(isinstance(_, str) for _ in time_signature_fractions)
+    assert isinstance(first_measure_number, int), repr(first_measure_number)
     # TODO: pass necessary info into function; do not call os.getcwd()
     layout_directory = pathlib.Path(os.getcwd())
     layout_ily_path = layout_directory / file_name
-    if time_signatures is not None:
-        assert isinstance(time_signatures, list), repr(time_signatures)
-        assert all(isinstance(_, str) for _ in time_signatures), repr(time_signatures)
     print_main_task(f"Writing {baca.path.trim(layout_ily_path)} ...")
     assert isinstance(breaks, baca.layout.Breaks), repr(breaks)
     if spacing is not None:
@@ -1878,10 +1892,8 @@ def write_layout_ily(
     else:
         layout_py = layout_directory / "layout.py"
         tuple_ = get_measure_profile_metadata(layout_py)
-        first_measure_number = tuple_[0]
         measure_count = tuple_[1]
         fermata_measure_numbers = tuple_[2] or []
-        first_measure_number = first_measure_number or 1
         fermata_measure_numbers = [
             _ - (first_measure_number - 1) for _ in fermata_measure_numbers
         ]
@@ -1889,36 +1901,10 @@ def write_layout_ily(
         for bol_measure_number in breaks.bol_measure_numbers[1:]:
             eol_measure_number = bol_measure_number - 1
             eol_measure_numbers.append(eol_measure_number)
-    if time_signatures is not None:
-        first_measure_number = 1
-    elif layout_directory.parent.name == "sections":
-        string = "first_measure_number"
-        first_measure_number = baca.path.get_metadata(layout_directory).get(string, 1)
-        if not bool(first_measure_number):
-            print_file_handling("Can not find first measure number ...")
-            first_measure_number = False
-        assert isinstance(first_measure_number, int)
-        time_signatures = baca.path.get_metadata(layout_directory).get(
-            "time_signatures"
-        )
-    else:
-        assert "builds" in layout_directory.parts, repr(layout_directory)
-        first_measure_number = 1
-        time_signatures = []
-        contents_directory = baca.path.get_contents_directory(layout_directory)
-        sections_directory = contents_directory / "sections"
-        for section_directory in sorted(sections_directory.glob("*")):
-            if not section_directory.is_dir():
-                continue
-            time_signatures_ = baca.path.get_metadata(section_directory).get(
-                "time_signatures",
-            )
-            time_signatures.extend(time_signatures_)
-    assert isinstance(time_signatures, list), repr(time_signatures)
-    assert all(isinstance(_, str) for _ in time_signatures), repr(time_signatures)
-    assert isinstance(first_measure_number, int), repr(first_measure_number)
     score = baca.docs.make_empty_score(1, do_not_move_global_context=True)
-    time_signatures_ = [abjad.TimeSignature.from_string(_) for _ in time_signatures]
+    time_signatures = [
+        abjad.TimeSignature.from_string(_) for _ in time_signature_fractions
+    ]
     if "sections" in layout_directory.parts:
         # TODO: do not read from environment; pass into function instead:
         has_anchor_skip = baca.path.get_metadata(layout_directory).get(
@@ -1929,7 +1915,7 @@ def write_layout_ily(
         has_anchor_skip = False
     baca.section.set_up_score(
         score,
-        time_signatures_,
+        time_signatures,
         append_anchor_skip=has_anchor_skip,
         layout=True,
     )
