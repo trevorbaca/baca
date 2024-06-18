@@ -43,6 +43,11 @@ def _add_container_identifiers(score, section_number):
         contexts.append(context)
     except ValueError:
         pass
+    try:
+        context = score["PageLayout"]
+        contexts.append(context)
+    except ValueError:
+        pass
     for voice in abjad.iterate.components(score, abjad.Voice):
         if voice._has_indicator(_enums.INTERMITTENT):
             continue
@@ -747,6 +752,7 @@ def _color_not_yet_registered(score):
 
 
 def _comment_measure_numbers(first_measure_number, offset_to_measure_number, score):
+    tag = _helpers.function_name(_frame())
     for leaf in abjad.iterate.leaves(score):
         offset = abjad.get.timespan(leaf).start_offset
         measure_number = offset_to_measure_number.get(offset, None)
@@ -762,7 +768,7 @@ def _comment_measure_numbers(first_measure_number, offset_to_measure_number, sco
             local_measure_number += 1
             string = f"% [{context.name} measure {local_measure_number}]"
         literal = abjad.LilyPondLiteral(string, site="absolute_before")
-        abjad.attach(literal, leaf, tag=_helpers.function_name(_frame()))
+        abjad.attach(literal, leaf, tag=tag)
 
 
 def _error_on_not_yet_pitched(score):

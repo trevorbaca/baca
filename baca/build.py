@@ -1848,16 +1848,12 @@ def write_layout_ily(
     curtail_measure_count=None,
     do_not_write_metadata=False,
     fermata_measure_numbers=None,
-    file_name="layout.ily",
     first_measure_number=1,
     has_anchor_skip=False,
     page_layout_context_only=False,
     spacing=None,
 ) -> tuple[abjad.LilyPondFile, list[int]]:
-    # TODO: pass necessary info into function; do not call os.getcwd()
-    layout_directory = pathlib.Path(os.getcwd())
-    layout_ily_path = layout_directory / file_name
-    print_main_task(f"Writing {baca.path.trim(layout_ily_path)} ...")
+    print_main_task("Making layout ...")
     assert isinstance(breaks, baca.layout.Breaks), repr(breaks)
     assert isinstance(time_signature_fractions, list)
     assert all(isinstance(_, str) for _ in time_signature_fractions)
@@ -1900,19 +1896,19 @@ def write_layout_ily(
         first_measure_number,
         score["Skips"],
     )
-    baca.section._comment_measure_numbers(
-        first_measure_number, offset_to_measure_number, score
-    )
-    baca.section._whitespace_leaves(score)
-    baca.section._add_container_identifiers(score, None)
     baca.section.style_anchor_skip(score)
-    baca.section._remove_layout_tags(score)
     lilypond_file = baca.lilypond.file(score)
     context = lilypond_file["Skips"]
     if curtail_measure_count is not None:
         del context[curtail_measure_count:]
     context.lilypond_type = "PageLayout"
     context.name = "PageLayout"
+    baca.section._whitespace_leaves(score)
+    baca.section._add_container_identifiers(score, None)
+    baca.section._remove_layout_tags(score)
+    baca.section._comment_measure_numbers(
+        first_measure_number, offset_to_measure_number, score
+    )
     skips = baca.select.skips(context)
     for skip in skips:
         abjad.detach(abjad.TimeSignature, skip)
@@ -1928,32 +1924,31 @@ def write_layout_ily(
         component.tag = component.tag.retain_shoutcase()
         for wrapper in abjad.get.wrappers(component):
             wrapper.tag = wrapper.tag.retain_shoutcase()
-    text = abjad.lilypond(context, tags=True)
-    text = text.replace("Skips", "PageLayout")
-    text = text.replace("GlobalSkips", "PageLayout")
-    text = abjad.tag.left_shift_tags(text)
-    lines = []
-    string = abjad.Configuration().get_lilypond_version_string()
-    string = rf'\version "{string}"'
-    lines.append(string)
-    lines.append("")
-    header = "\n".join(lines) + "\n\n"
-    layout_ily_path.write_text(header + text + "\n")
-    measure_count = len(time_signatures)
-    counter = abjad.string.pluralize("measure", measure_count)
-    message = f"Writing {measure_count} + 1 {counter} to"
-    message += f" {baca.path.trim(layout_ily_path)} ..."
-    print_file_handling(message)
-    print(breaks.bol_measure_numbers, "ASDF")
     bol_measure_numbers = [
         _ + first_measure_number - 1 for _ in breaks.bol_measure_numbers
     ]
     return lilypond_file, bol_measure_numbers
 
 
-def persist_layout_ily(directory, lilypond_file):
-    pass
+def persist_layout_ily(directory, lilypond_file, *, file_name="layout.ily"):
+    layout_ily_path = directory / file_name
+    print_file_handling(f"Persisting {baca.path.trim(layout_ily_path)} ...")
+    assert len(lilypond_file.items) == 2
+    block = lilypond_file.items.pop()
+    score = block.items.pop()
+    lilypond_file.items.append(score)
+    lilypond_file.items.insert(0, "")
+    string = abjad.lilypond(lilypond_file, tags=True) + "\n"
+    lines = string.split("\n")
+    assert "abjad.LilyPondFile._get_format_pieces()" in lines[0]
+    assert "baca.lilypond._make_lilypond_file()" in lines[1]
+    lines = lines[2:]
+    string = "\n".join(lines)
+    layout_ily_path.write_text(string)
 
 
 def write_bol_metadata(directory, bol_measure_numbers):
+    _metadata_path = directory / ".metadata"
+    message = f"Writing {baca.path.trim(_metadata_path)} BOL measure numbers ..."
+    print_file_handling(message)
     baca.path.add_metadatum(directory, "bol_measure_numbers", bol_measure_numbers)
