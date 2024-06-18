@@ -1944,13 +1944,10 @@ def write_layout_ily(
     message = f"Writing {measure_count} + 1 {counter} to"
     message += f" {baca.path.trim(layout_ily_path)} ..."
     print_file_handling(message)
-    bol_measure_numbers = []
-    for i, skip in enumerate(abjad.iterate.leaves(score["PageLayout"], abjad.Skip)):
-        for literal in abjad.get.indicators(skip, abjad.LilyPondLiteral):
-            if literal.argument in (r"\break", r"\pageBreak"):
-                measure_number = first_measure_number + i
-                bol_measure_numbers.append(measure_number)
-                continue
+    print(breaks.bol_measure_numbers, "ASDF")
+    bol_measure_numbers = [
+        _ + first_measure_number - 1 for _ in breaks.bol_measure_numbers
+    ]
     return lilypond_file, bol_measure_numbers
 
 
