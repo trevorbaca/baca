@@ -1951,9 +1951,6 @@ def write_layout_ily(
                 measure_number = first_measure_number + i
                 bol_measure_numbers.append(measure_number)
                 continue
-    baca.path.add_metadatum(
-        layout_directory, "bol_measure_numbers", bol_measure_numbers
-    )
     return lilypond_file, bol_measure_numbers
 
 
@@ -1962,4 +1959,4 @@ def persist_layout_ily(directory, lilypond_file):
 
 
 def write_bol_metadata(directory, bol_measure_numbers):
-    pass
+    baca.path.add_metadatum(directory, "bol_measure_numbers", bol_measure_numbers)
