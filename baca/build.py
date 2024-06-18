@@ -936,6 +936,25 @@ class Timing:
 
 
 @dataclasses.dataclass(frozen=True, slots=True, order=True, unsafe_hash=True)
+class BuildDirectoryEnvironment:
+    build_directory: pathlib.Path
+    fermata_measure_numbers: list[int]
+    time_signatures: list[str]
+
+
+def read_build_directory_environment() -> BuildDirectoryEnvironment:
+    build_directory = pathlib.Path(os.getcwd())
+    sections_directory = baca.path.get_contents_directory(build_directory) / "sections"
+    time_signatures = accumulate_time_signatures(sections_directory)
+    fermata_measure_numbers = accumulate_fermata_measure_numbers(sections_directory)
+    return baca.build.BuildDirectoryEnvironment(
+        build_directory=build_directory,
+        fermata_measure_numbers=fermata_measure_numbers,
+        time_signatures=time_signatures,
+    )
+
+
+@dataclasses.dataclass(frozen=True, slots=True, order=True, unsafe_hash=True)
 class Environment:
     arguments: tuple[str, ...] = dataclasses.field(default_factory=tuple)
     first_measure_number: int = 1
@@ -1834,7 +1853,7 @@ def write_layout_ily(
     has_anchor_skip=False,
     page_layout_context_only=False,
     spacing=None,
-):
+) -> tuple[abjad.LilyPondFile, list[int]]:
     # TODO: pass necessary info into function; do not call os.getcwd()
     layout_directory = pathlib.Path(os.getcwd())
     layout_ily_path = layout_directory / file_name
@@ -1905,6 +1924,7 @@ def write_layout_ily(
     else:
         context = score
     for component in abjad.iterate.components(context):
+        assert component.tag is not None
         component.tag = component.tag.retain_shoutcase()
         for wrapper in abjad.get.wrappers(component):
             wrapper.tag = wrapper.tag.retain_shoutcase()
@@ -1925,19 +1945,21 @@ def write_layout_ily(
     message += f" {baca.path.trim(layout_ily_path)} ..."
     print_file_handling(message)
     bol_measure_numbers = []
-    skips = abjad.iterate.leaves(score["PageLayout"], abjad.Skip)
-    for i, skip in enumerate(skips):
+    for i, skip in enumerate(abjad.iterate.leaves(score["PageLayout"], abjad.Skip)):
         for literal in abjad.get.indicators(skip, abjad.LilyPondLiteral):
             if literal.argument in (r"\break", r"\pageBreak"):
                 measure_number = first_measure_number + i
                 bol_measure_numbers.append(measure_number)
                 continue
-    count = len(bol_measure_numbers)
-    numbers = abjad.string.pluralize("number", count)
-    if not do_not_write_metadata:
-        print_file_handling(f"Writing BOL measure numbers {numbers} to .metadata ...")
-        baca.path.add_metadatum(
-            layout_directory,
-            "bol_measure_numbers",
-            bol_measure_numbers,
-        )
+    baca.path.add_metadatum(
+        layout_directory, "bol_measure_numbers", bol_measure_numbers
+    )
+    return lilypond_file, bol_measure_numbers
+
+
+def persist_layout_ily(directory, lilypond_file):
+    pass
+
+
+def write_bol_metadata(directory, bol_measure_numbers):
+    pass
