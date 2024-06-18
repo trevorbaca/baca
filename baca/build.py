@@ -1937,7 +1937,6 @@ def persist_layout_ily(directory, lilypond_file, *, file_name="layout.ily"):
     block = lilypond_file.items.pop()
     score = block.items.pop()
     lilypond_file.items.append(score)
-    lilypond_file.items.insert(0, "")
     string = abjad.lilypond(lilypond_file, tags=True) + "\n"
     lines = string.split("\n")
     assert "abjad.LilyPondFile._get_format_pieces()" in lines[0]
