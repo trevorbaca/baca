@@ -44,23 +44,24 @@ def add_metadatum(path: pathlib.Path, name: str, value) -> None:
     write_metadata_py(path, metadata)
 
 
-def extern(
+def externalize(
     path: pathlib.Path,
-    include_path: pathlib.Path,
-):
-    """
-    Externalizes LilyPond file parsable chunks.
-
-    Produces skeleton ``.ly`` together with ``.ily``.
-
-    Overwrites ``path`` with skeleton ``.ly``.
-
-    Writes ``.ily`` to ``include_path``.
-    """
+    *,
+    do_not_tag: bool = False,
+    file_name: str | None = None,
+    in_place: bool = False,
+) -> pathlib.Path | None:
     assert isinstance(path, pathlib.Path), repr(path)
-    assert isinstance(include_path, pathlib.Path), repr(include_path)
+    if in_place is True:
+        assert file_name is None, repr(file_name)
+        path_ily = None
+    elif file_name is None:
+        path_ily = path.with_suffix(".ily")
+    else:
+        path_ily = path.with_name(file_name)
+    if path_ily is not None:
+        assert path_ily.suffix == ".ily", repr(path_ily)
     tag = _helpers.function_name(_frame())
-    assert isinstance(include_path, type(path)), repr(include_path)
     preamble_lines: list[str] = []
     score_lines: list[str] = []
     stack: dict[str, list[str]] = {}
@@ -94,11 +95,14 @@ def extern(
                 indent = count * " "
                 dereference_string = indent + rf"{{ \{name} }}"
                 first_line = finished_variables[name][0]
-                result = abjad.tag.double_tag([dereference_string], tag)
-                dereference = []
-                for tag_line in result[:1]:
-                    dereference.append(indent + tag_line)
-                dereference.append(result[-1])
+                if do_not_tag is False:
+                    result = abjad.tag.double_tag([dereference_string], tag)
+                    dereference = []
+                    for tag_line in result[:1]:
+                        dereference.append(indent + tag_line)
+                    dereference.append(result[-1])
+                else:
+                    dereference = [dereference_string]
                 dereference = [_ + "\n" for _ in dereference]
                 if bool(stack):
                     items = list(stack.items())
@@ -110,21 +114,26 @@ def extern(
             items[-1][-1].append(line)
         else:
             score_lines.append(line)
-    lines = []
-    if include_path.parent == path.parent:
-        include_name = include_path.name
-    else:
-        include_name = str(include_path)
-    include_line = f'\\include "{include_name}"'
-    include_lines = abjad.tag.double_tag([include_line], tag)
-    include_lines = [_ + "\n" for _ in include_lines]
-    last_include = 0
-    for i, line in enumerate(preamble_lines):
-        if line.startswith(r"\include"):
-            last_include = i
-    preamble_lines[last_include + 1 : last_include + 1] = include_lines
+    if in_place is False:
+        assert path_ily is not None
+        if path_ily.parent == path.parent:
+            include_name = path_ily.name
+        else:
+            include_name = str(path_ily)
+        include_line = f'\\include "{include_name}"'
+        if do_not_tag is False:
+            include_lines = abjad.tag.double_tag([include_line], tag)
+        else:
+            include_lines = [include_line]
+        include_lines = [_ + "\n" for _ in include_lines]
+        last_include = 0
+        for i, line in enumerate(preamble_lines):
+            if line.startswith(r"\include"):
+                last_include = i
+        preamble_lines[last_include + 1 : last_include + 1] = include_lines
     if preamble_lines[-2] == "\n":
         del preamble_lines[-2]
+    lines = []
     lines.extend(preamble_lines)
     lines.extend(score_lines)
     lines_ = []
@@ -133,10 +142,11 @@ def extern(
     text = "".join(lines_)
     path.write_text(text)
     lines = []
-    string = abjad.Configuration().get_lilypond_version_string()
-    string = rf'\version "{string}"'
-    lines.append(string + "\n")
-    lines.append("\n")
+    if in_place is False:
+        string = abjad.Configuration().get_lilypond_version_string()
+        string = rf'\version "{string}"'
+        lines.append(string + "\n")
+        lines.append("\n")
     items = list(finished_variables.items())
     total = len(items)
     for i, item in enumerate(items):
@@ -148,7 +158,10 @@ def extern(
         words = first_line.split()
         index = words.index("%*%")
         first_line = " ".join(words[:index])
-        first_lines = abjad.tag.double_tag([first_line], tag)
+        if do_not_tag is False:
+            first_lines = abjad.tag.double_tag([first_line], tag)
+        else:
+            first_lines = [first_line]
         first_lines = [_ + "\n" for _ in first_lines]
         lines.extend(first_lines)
         for variable_line in variable_lines[1:]:
@@ -174,14 +187,27 @@ def extern(
         words = last_line.split()
         index = words.index("%*%")
         last_line = " ".join(words[:index])
-        last_lines = abjad.tag.double_tag([last_line], tag)
+        if do_not_tag is False:
+            last_lines = abjad.tag.double_tag([last_line], tag)
+        else:
+            last_lines = [last_line]
         last_lines = [_ + "\n" for _ in last_lines]
         lines[-1:] = last_lines
         if i < total - 1:
             lines.append("\n")
             lines.append("\n")
-    text = "".join(lines)
-    include_path.write_text(text)
+    if in_place is False:
+        assert path_ily is not None
+        text = "".join(lines)
+        path_ily.write_text(text)
+        return path_ily
+    else:
+        assert "context Score" in score_lines[0]
+        score_lines[0] = "page-layout-score = " + score_lines[0]
+        lines_ = preamble_lines + lines + ["\n\n"] + score_lines
+        text = "".join(lines_)
+        path.write_text(text)
+        return None
 
 
 def get_contents_directory(path: pathlib.Path):

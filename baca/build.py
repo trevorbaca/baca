@@ -169,22 +169,24 @@ def _display_lilypond_log_errors(lilypond_log_file_path):
             print_always(line)
 
 
-def _externalize_music_ly(music_ly):
-    music_ily = music_ly.with_name("music.ily")
+def _externalize_layout_ily_path(layout_ily_path):
+    print_file_handling(f"Externalizing {baca.path.trim(layout_ily_path)} ...")
+    baca.path.externalize(layout_ily_path, do_not_tag=True, in_place=True)
+
+
+def _externalize_music_ly_path(music_ly):
     print_file_handling(f"Externalizing {baca.path.trim(music_ly)} ...")
-    baca.path.extern(music_ly, music_ily)
-    assert music_ily.is_file()
-    assert music_ily.parent.parent.name == "sections"
+    assert "sections" in music_ly.parts, repr(music_ly)
+    music_ily = baca.path.externalize(music_ly)
     for file in (music_ly, music_ily):
         text = file.read_text()
         messages = []
         text = _not_topmost(text, messages)
         file.write_text(text)
         if messages:
+            message = "Appending not-topmost tags messages ..."
+            print_file_handling(message, log_only=True)
             messages = "\n".join(messages) + "\n"
-            print_file_handling(
-                "Appending not-topmost tags messages ...", log_only=True
-            )
             _tags_file = file.with_name(f".{file.name}.tags")
             with _tags_file.open("a") as pointer:
                 pointer.write(messages)
@@ -582,7 +584,7 @@ def _make_section_pdf(
     _music_ly_tags = music_ly.with_name(".music.ly.tags")
     if _music_ly_tags.exists():
         _music_ly_tags.unlink()
-    _externalize_music_ly(music_ly)
+    _externalize_music_ly_path(music_ly)
     _handle_section_tags(section_directory)
     contents_directory = baca.path.get_contents_directory(section_directory)
     metadata = baca.path.get_metadata(contents_directory)
@@ -1549,7 +1551,21 @@ def persist_as_ly(argument, ly_file_path):
     abjad.persist.as_ly(argument, ly_file_path)
 
 
-def persist_layout_ily(directory, lilypond_file, *, file_name="layout.ily"):
+def persist_build_layout_ily(
+    directory: pathlib.Path, lilypond_file: abjad.LilyPondFile
+) -> None:
+    persist_section_layout_ily(directory, lilypond_file)
+    layout_ily_path = directory / "layout.ily"
+    _externalize_layout_ily_path(layout_ily_path)
+
+
+def persist_section_layout_ily(
+    directory: pathlib.Path,
+    lilypond_file: abjad.LilyPondFile,
+    *,
+    file_name: str = "layout.ily",
+    externalize: bool = False,
+) -> None:
     layout_ily_path = directory / file_name
     print_file_handling(f"Persisting {baca.path.trim(layout_ily_path)} ...")
     assert len(lilypond_file.items) == 2
