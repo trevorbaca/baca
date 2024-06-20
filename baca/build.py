@@ -1549,6 +1549,22 @@ def persist_as_ly(argument, ly_file_path):
     abjad.persist.as_ly(argument, ly_file_path)
 
 
+def persist_layout_ily(directory, lilypond_file, *, file_name="layout.ily"):
+    layout_ily_path = directory / file_name
+    print_file_handling(f"Persisting {baca.path.trim(layout_ily_path)} ...")
+    assert len(lilypond_file.items) == 2
+    block = lilypond_file.items.pop()
+    score = block.items.pop()
+    lilypond_file.items.append(score)
+    string = abjad.lilypond(lilypond_file, tags=True) + "\n"
+    lines = string.split("\n")
+    assert "abjad.LilyPondFile._get_format_pieces()" in lines[0]
+    assert "baca.lilypond._make_lilypond_file()" in lines[1]
+    lines = lines[2:]
+    string = "\n".join(lines)
+    layout_ily_path.write_text(string)
+
+
 def persist_lilypond_file(
     arguments: types.SimpleNamespace,
     section_directory: pathlib.Path,
@@ -1839,111 +1855,6 @@ def timed(timing_attribute):
         return wrapper
 
     return decorator
-
-
-def write_layout_ily(
-    breaks,
-    time_signature_fractions,
-    *,
-    curtail_measure_count=None,
-    do_not_write_metadata=False,
-    fermata_measure_numbers=None,
-    first_measure_number=1,
-    has_anchor_skip=False,
-    page_layout_context_only=False,
-    spacing=None,
-) -> tuple[abjad.LilyPondFile, list[int]]:
-    print_main_task("Making layout ...")
-    assert isinstance(breaks, baca.layout.Breaks), repr(breaks)
-    assert isinstance(time_signature_fractions, list)
-    assert all(isinstance(_, str) for _ in time_signature_fractions)
-    if spacing is not None:
-        assert isinstance(spacing, baca.layout.Spacing), repr(spacing)
-    if spacing is not None and spacing.overrides is not None:
-        assert spacing.default is not None
-    assert isinstance(first_measure_number, int), repr(first_measure_number)
-    fermata_measure_numbers = fermata_measure_numbers or []
-    assert isinstance(fermata_measure_numbers, list), repr(fermata_measure_numbers)
-    if spacing is not None and spacing.default is None:
-        eol_measure_numbers = None
-    else:
-        fermata_measure_numbers = [
-            _ - (first_measure_number - 1) for _ in fermata_measure_numbers
-        ]
-        eol_measure_numbers = []
-        for bol_measure_number in breaks.bol_measure_numbers[1:]:
-            eol_measure_number = bol_measure_number - 1
-            eol_measure_numbers.append(eol_measure_number)
-    score = baca.docs.make_empty_score(1, do_not_move_global_context=True)
-    time_signatures = [
-        abjad.TimeSignature.from_string(_) for _ in time_signature_fractions
-    ]
-    baca.section.set_up_score(
-        score,
-        time_signatures,
-        append_anchor_skip=has_anchor_skip,
-        layout=True,
-    )
-    if spacing is not None:
-        page_layout_profile = baca.layout.PageLayoutProfile(
-            eol_measure_numbers=eol_measure_numbers,
-            fermata_measure_numbers=fermata_measure_numbers,
-            measure_count=len(time_signatures),
-        )
-        spacing(score, page_layout_profile, has_anchor_skip=has_anchor_skip)
-    breaks(score)
-    offset_to_measure_number = baca.section._populate_offset_to_measure_number(
-        first_measure_number,
-        score["Skips"],
-    )
-    baca.section.style_anchor_skip(score)
-    lilypond_file = baca.lilypond.file(score)
-    context = lilypond_file["Skips"]
-    if curtail_measure_count is not None:
-        del context[curtail_measure_count:]
-    context.lilypond_type = "PageLayout"
-    context.name = "PageLayout"
-    baca.section._whitespace_leaves(score)
-    baca.section._add_container_identifiers(score, None)
-    baca.section._remove_layout_tags(score)
-    baca.section._comment_measure_numbers(
-        first_measure_number, offset_to_measure_number, score
-    )
-    skips = baca.select.skips(context)
-    for skip in skips:
-        abjad.detach(abjad.TimeSignature, skip)
-    score = lilypond_file["Score"]
-    del score["MusicContext"]
-    score = lilypond_file["Score"]
-    if page_layout_context_only:
-        context = score["PageLayout"]
-    else:
-        context = score
-    for component in abjad.iterate.components(context):
-        assert component.tag is not None
-        component.tag = component.tag.retain_shoutcase()
-        for wrapper in abjad.get.wrappers(component):
-            wrapper.tag = wrapper.tag.retain_shoutcase()
-    bol_measure_numbers = [
-        _ + first_measure_number - 1 for _ in breaks.bol_measure_numbers
-    ]
-    return lilypond_file, bol_measure_numbers
-
-
-def persist_layout_ily(directory, lilypond_file, *, file_name="layout.ily"):
-    layout_ily_path = directory / file_name
-    print_file_handling(f"Persisting {baca.path.trim(layout_ily_path)} ...")
-    assert len(lilypond_file.items) == 2
-    block = lilypond_file.items.pop()
-    score = block.items.pop()
-    lilypond_file.items.append(score)
-    string = abjad.lilypond(lilypond_file, tags=True) + "\n"
-    lines = string.split("\n")
-    assert "abjad.LilyPondFile._get_format_pieces()" in lines[0]
-    assert "baca.lilypond._make_lilypond_file()" in lines[1]
-    lines = lines[2:]
-    string = "\n".join(lines)
-    layout_ily_path.write_text(string)
 
 
 def write_bol_metadata(directory, bol_measure_numbers):
