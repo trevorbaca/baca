@@ -2316,8 +2316,7 @@ def make_layout_score(
             measure_count,
             has_anchor_skip=has_anchor_skip,
         )
-    context = score["Skips"]
-    breaks.add_breaks_to_skips(context)
+    breaks.add_breaks_to_context(score["Breaks"])
     offset_to_measure_number = _populate_offset_to_measure_number(
         first_measure_number,
         score["Skips"],

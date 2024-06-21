@@ -28,8 +28,8 @@ class Breaks:
         self.page_count = page_count
         self.skip_index_to_indicators = skip_index_to_indicators
 
-    def add_breaks_to_skips(self, context):
-        assert context.name == "Skips"
+    def add_breaks_to_context(self, context):
+        assert context.name == "Breaks"
         skips = _select.skips(context)
         measure_count = len(skips)
         literal = abjad.LilyPondLiteral(r"\autoPageBreaksOff", site="before")
