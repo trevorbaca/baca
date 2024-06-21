@@ -2264,11 +2264,9 @@ def make_layout_score(
     breaks,
     time_signature_fractions,
     *,
-    do_not_write_metadata=False,
     fermata_measure_numbers=None,
     first_measure_number=1,
     has_anchor_skip=False,
-    page_layout_context_only=False,
     spacing=None,
 ) -> tuple[abjad.LilyPondFile, list[int]]:
     assert isinstance(breaks, _layout.Breaks), repr(breaks)
@@ -2328,10 +2326,7 @@ def make_layout_score(
     score = lilypond_file["Score"]
     del score["MusicContext"]
     score = lilypond_file["Score"]
-    if page_layout_context_only:
-        context = score["PageLayout"]
-    else:
-        context = score
+    context = score
     for component in abjad.iterate.components(context):
         assert component.tag is not None
         component.tag = component.tag.retain_shoutcase()
