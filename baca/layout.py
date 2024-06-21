@@ -157,12 +157,20 @@ class Spacing:
         self.lax_spacing_section = lax_spacing_section or []
         self.overrides = overrides
 
-    def __call__(self, score, page_layout_profile, *, has_anchor_skip=False):
+    def __call__(
+        self,
+        score,
+        eol_measure_numbers,
+        fermata_measure_numbers,
+        measure_count,
+        *,
+        has_anchor_skip=False,
+    ):
         skips_context = score["Skips"]
         skips = _select.skips(skips_context)
-        measure_count = page_layout_profile.measure_count or len(skips)
-        fermata_measure_numbers = page_layout_profile.fermata_measure_numbers or []
-        eol_measure_numbers = page_layout_profile.eol_measure_numbers or []
+        measure_count = measure_count or len(skips)
+        fermata_measure_numbers = fermata_measure_numbers or []
+        eol_measure_numbers = eol_measure_numbers or []
         measures = {}
         for n in range(1, measure_count + 1):
             if n in fermata_measure_numbers:

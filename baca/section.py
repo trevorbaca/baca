@@ -2299,13 +2299,15 @@ def make_layout_score(
         append_anchor_skip=has_anchor_skip,
         layout=True,
     )
+    measure_count = len(time_signatures)
     if spacing is not None:
-        page_layout_profile = _layout.PageLayoutProfile(
-            eol_measure_numbers=eol_measure_numbers,
-            fermata_measure_numbers=fermata_measure_numbers,
-            measure_count=len(time_signatures),
+        spacing(
+            score,
+            eol_measure_numbers,
+            fermata_measure_numbers,
+            measure_count,
+            has_anchor_skip=has_anchor_skip,
         )
-        spacing(score, page_layout_profile, has_anchor_skip=has_anchor_skip)
     breaks(score)
     offset_to_measure_number = _populate_offset_to_measure_number(
         first_measure_number,
