@@ -36,7 +36,7 @@ class Breaks:
         abjad.attach(
             literal,
             skips[0],
-            tag=_tags.BREAK.append(_helpers.function_name(_frame(), n=1)),
+            tag=None,
         )
         for skip_index in range(measure_count):
             skip = skips[skip_index]
@@ -48,7 +48,7 @@ class Breaks:
                 abjad.attach(
                     indicator,
                     skip,
-                    tag=_tags.BREAK.append(_helpers.function_name(_frame(), n=2)),
+                    tag=None,
                 )
 
     @staticmethod
