@@ -97,7 +97,9 @@ def lilypond_file(score, *, includes=None):
     return lilypond_file
 
 
-def make_empty_score(*counts, do_not_move_global_context=False, no_skips=False):
+def make_empty_score(
+    *counts, do_not_move_global_context=False, make_breaks_context=False, no_skips=False
+):
     r"""
     Makes empty score for doc examples.
 
@@ -223,7 +225,7 @@ def make_empty_score(*counts, do_not_move_global_context=False, no_skips=False):
 
     """
     tag = _helpers.function_name(_frame())
-    global_context = _score.make_global_context()
+    global_context = _score.make_global_context(make_breaks_context=make_breaks_context)
     # TODO: cleaner to just make global skips instead of deleting global rests:
     del global_context["Rests"]
     single_staff = len(counts) == 1

@@ -35,20 +35,30 @@ def attach_lilypond_tag(tag, context, *, part_manifest=None):
     abjad.attach(literal, context, tag=tag)
 
 
-def make_global_context():
+def make_global_context(*, make_breaks_context=False):
     tag = _helpers.function_name(_frame())
+    contexts = []
     global_rests = abjad.Context(
         lilypond_type="GlobalRests",
         name="Rests",
         tag=tag,
     )
+    contexts.append(global_rests)
     global_skips = abjad.Context(
         lilypond_type="GlobalSkips",
         name="Skips",
         tag=tag,
     )
+    contexts.append(global_skips)
+    if make_breaks_context is True:
+        global_breaks = abjad.Context(
+            lilypond_type="GlobalSkips",
+            name="Breaks",
+            tag=tag,
+        )
+        contexts.append(global_breaks)
     global_context = abjad.Context(
-        [global_rests, global_skips],
+        contexts,
         lilypond_type="GlobalContext",
         simultaneous=True,
         name="GlobalContext",

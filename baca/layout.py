@@ -28,9 +28,8 @@ class Breaks:
         self.page_count = page_count
         self.skip_index_to_indicators = skip_index_to_indicators
 
-    def __call__(self, score):
-        assert isinstance(score, abjad.Score), repr(score)
-        context = score["Skips"]
+    def add_breaks_to_skips(self, context):
+        assert context.name == "Skips"
         skips = _select.skips(context)
         measure_count = len(skips)
         literal = abjad.LilyPondLiteral(r"\autoPageBreaksOff", site="before")
@@ -157,7 +156,7 @@ class Spacing:
         self.lax_spacing_section = lax_spacing_section or []
         self.overrides = overrides
 
-    def __call__(
+    def add_spacing_to_score(
         self,
         score,
         eol_measure_numbers,

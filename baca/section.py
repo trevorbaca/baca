@@ -1167,6 +1167,7 @@ def _make_global_skips(
     time_signatures,
     *,
     append_anchor_skip=False,
+    attach_time_signatures=False,
 ):
     for time_signature in time_signatures:
         skip = abjad.Skip(
@@ -1175,19 +1176,22 @@ def _make_global_skips(
             tag=_helpers.function_name(_frame(), n=1),
         )
         global_skips.append(skip)
-        abjad.attach(
-            time_signature,
-            skip,
-            context="Score",
-            tag=_helpers.function_name(_frame(), n=2),
-        )
+        if attach_time_signatures is True:
+            abjad.attach(
+                time_signature,
+                skip,
+                context="Score",
+                tag=_helpers.function_name(_frame(), n=2),
+            )
     if append_anchor_skip:
         tag = _helpers.function_name(_frame(), n=3)
         tag = tag.append(_tags.ANCHOR_SKIP)
         skip = abjad.Skip(1, multiplier=(1, 4), tag=tag)
         abjad.attach(_enums.ANCHOR_SKIP, skip)
         global_skips.append(skip)
-        if time_signature != abjad.TimeSignature((1, 4)):
+        if attach_time_signatures is True and time_signature != abjad.TimeSignature(
+            (1, 4)
+        ):
             time_signature = abjad.TimeSignature((1, 4))
             abjad.attach(time_signature, skip, context="Score", tag=None)
 
@@ -2289,7 +2293,11 @@ def make_layout_score(
         for bol_measure_number in breaks.bol_measure_numbers[1:]:
             eol_measure_number = bol_measure_number - 1
             eol_measure_numbers.append(eol_measure_number)
-    score = _docs.make_empty_score(1, do_not_move_global_context=True)
+    score = _docs.make_empty_score(
+        1,
+        do_not_move_global_context=True,
+        make_breaks_context=True,
+    )
     time_signatures = [
         abjad.TimeSignature.from_string(_) for _ in time_signature_fractions
     ]
@@ -2301,14 +2309,15 @@ def make_layout_score(
     )
     measure_count = len(time_signatures)
     if spacing is not None:
-        spacing(
+        spacing.add_spacing_to_score(
             score,
             eol_measure_numbers,
             fermata_measure_numbers,
             measure_count,
             has_anchor_skip=has_anchor_skip,
         )
-    breaks(score)
+    context = score["Skips"]
+    breaks.add_breaks_to_skips(context)
     offset_to_measure_number = _populate_offset_to_measure_number(
         first_measure_number,
         score["Skips"],
@@ -2658,8 +2667,21 @@ def set_up_score(
     manifests = manifests or {}
     assert isinstance(manifests, dict), repr(manifests)
     skips = score["Skips"]
-    _make_global_skips(skips, time_signatures, append_anchor_skip=append_anchor_skip)
+    _make_global_skips(
+        skips,
+        time_signatures,
+        append_anchor_skip=append_anchor_skip,
+        attach_time_signatures=True,
+    )
     _label_measure_numbers(first_measure_number, skips)
+    if "Breaks" in score:
+        breaks = score["Breaks"]
+        _make_global_skips(
+            breaks,
+            time_signatures,
+            append_anchor_skip=append_anchor_skip,
+        )
+        _label_measure_numbers(first_measure_number, breaks)
     if "Rests" in score:
         _make_global_rests(score["Rests"], time_signatures)
     if score_persistent_indicators:
