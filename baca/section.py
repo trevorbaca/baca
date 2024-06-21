@@ -2264,7 +2264,6 @@ def make_layout_score(
     breaks,
     time_signature_fractions,
     *,
-    curtail_measure_count=None,
     do_not_write_metadata=False,
     fermata_measure_numbers=None,
     first_measure_number=1,
@@ -2317,8 +2316,6 @@ def make_layout_score(
     style_anchor_skip(score)
     lilypond_file = _lilypond.file(score)
     context = lilypond_file["Skips"]
-    if curtail_measure_count is not None:
-        del context[curtail_measure_count:]
     context.lilypond_type = "PageLayout"
     context.name = "PageLayout"
     _whitespace_leaves(score)
