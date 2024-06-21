@@ -158,14 +158,13 @@ class Spacing:
 
     def add_spacing_to_score(
         self,
-        score,
+        skips_context,
         eol_measure_numbers,
         fermata_measure_numbers,
         measure_count,
         *,
         has_anchor_skip=False,
     ):
-        skips_context = score["Skips"]
         skips = _select.skips(skips_context)
         measure_count = measure_count or len(skips)
         fermata_measure_numbers = fermata_measure_numbers or []

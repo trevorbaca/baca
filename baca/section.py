@@ -2315,7 +2315,7 @@ def make_layout_score(
     measure_count = len(time_signatures)
     if spacing is not None:
         spacing.add_spacing_to_score(
-            score,
+            score["Skips"],
             eol_measure_numbers,
             fermata_measure_numbers,
             measure_count,
