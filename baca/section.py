@@ -41,6 +41,11 @@ def _add_container_identifiers(score, section_number):
     except ValueError:
         pass
     try:
+        context = score["Breaks"]
+        contexts.append(context)
+    except ValueError:
+        pass
+    try:
         context = score["Rests"]
         contexts.append(context)
     except ValueError:
