@@ -156,17 +156,19 @@ class Spacing:
         self.lax_spacing_section = lax_spacing_section or []
         self.overrides = overrides
 
-    def add_spacing_to_score(
+    def add_spacing_to_contexts(
         self,
-        skips_context,
+        spacing_commands_context,
+        spacing_annotations_context,
         eol_measure_numbers,
         fermata_measure_numbers,
         measure_count,
         *,
         has_anchor_skip=False,
     ):
-        skips = _select.skips(skips_context)
-        measure_count = measure_count or len(skips)
+        spacing_commands_skips = _select.skips(spacing_commands_context)
+        spacing_annotations_skips = _select.skips(spacing_annotations_context)
+        measure_count = measure_count or len(spacing_commands_skips)
         fermata_measure_numbers = fermata_measure_numbers or []
         eol_measure_numbers = eol_measure_numbers or []
         measures = {}
@@ -177,19 +179,20 @@ class Spacing:
                 measures[n] = self.default
             measures[n + 1] = fermata_measure_duration
         for override in self.overrides or []:
-            token = override.measures
             duration = override.duration
             measure_numbers = []
-            if isinstance(token, int):
-                measure_numbers.append(token)
-            elif isinstance(token, tuple):
-                start, stop = token
+            if isinstance(override.measures, int):
+                measure_numbers.append(override.measures)
+            elif isinstance(override.measures, tuple):
+                start, stop = override.measures
                 for measure_number in range(start, stop + 1):
                     measure_numbers.append(measure_number)
-            elif isinstance(token, list):
-                measure_numbers.extend(token)
+            elif isinstance(override.measures, list):
+                measure_numbers.extend(override.measures)
             else:
-                raise TypeError(f"token must be int, pair or list (not {token!r}).")
+                raise TypeError(
+                    f"override must be int, pair or list (not {override.measures!r})."
+                )
             for n in measure_numbers:
                 if n < 1:
                     message = f"Nonpositive measure number ({n}) not allowed."
@@ -200,10 +203,11 @@ class Spacing:
                     measures[n] = duration
                     continue
                 raise Exception(message)
-        measure_count = len(skips)
-        for measure_index, skip in enumerate(skips):
+        measure_count = len(spacing_commands_skips)
+        for measure_index in range(measure_count):
+            spacing_commands_skip = spacing_commands_skips[measure_index]
+            spacing_annotations_skip = spacing_annotations_skips[measure_index]
             measure_number = measure_index + 1
-            pair = None
             if has_anchor_skip and measure_number == measure_count:
                 pair = (1, 4)
             elif measures:
@@ -236,7 +240,7 @@ class Spacing:
             tag = _tags.SPACING_COMMAND
             abjad.attach(
                 spacing_section,
-                skip,
+                spacing_commands_skip,
                 tag=tag.append(_helpers.function_name(_frame(), n=1)),
             )
             if forbid_new_spacing_section is True:
@@ -255,8 +259,8 @@ class Spacing:
                 )
                 abjad.attach(
                     start_text_span,
-                    skip,
-                    context=skips_context.name,
+                    spacing_annotations_skip,
+                    context=spacing_annotations_context.name,
                     deactivate=True,
                     tag=tag.append(_helpers.function_name(_frame(), n=2)),
                 )
@@ -265,8 +269,8 @@ class Spacing:
                 stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanSPM")
                 abjad.attach(
                     stop_text_span,
-                    skip,
-                    context=skips_context.name,
+                    spacing_annotations_skip,
+                    context=spacing_annotations_context.name,
                     deactivate=True,
                     tag=tag.append(_helpers.function_name(_frame(), n=3)),
                 )

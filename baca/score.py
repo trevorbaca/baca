@@ -35,28 +35,47 @@ def attach_lilypond_tag(tag, context, *, part_manifest=None):
     abjad.attach(literal, context, tag=tag)
 
 
-def make_global_context(*, make_breaks_context=False):
+def make_global_context(
+    *,
+    make_breaks_context=False,
+    make_spacing_annotations_context=False,
+    make_spacing_commands_context=False,
+):
     tag = _helpers.function_name(_frame())
     contexts = []
-    global_rests = abjad.Context(
+    context = abjad.Context(
         lilypond_type="GlobalRests",
         name="Rests",
         tag=tag,
     )
-    contexts.append(global_rests)
-    global_skips = abjad.Context(
+    contexts.append(context)
+    context = abjad.Context(
         lilypond_type="GlobalSkips",
         name="Skips",
         tag=tag,
     )
-    contexts.append(global_skips)
+    contexts.append(context)
     if make_breaks_context is True:
-        global_breaks = abjad.Context(
+        context = abjad.Context(
             lilypond_type="GlobalSkips",
             name="Breaks",
             tag=tag,
         )
-        contexts.append(global_breaks)
+        contexts.append(context)
+    if make_spacing_commands_context is True:
+        context = abjad.Context(
+            lilypond_type="GlobalSkips",
+            name="SpacingCommands",
+            tag=tag,
+        )
+        contexts.append(context)
+    if make_spacing_annotations_context is True:
+        context = abjad.Context(
+            lilypond_type="GlobalSkips",
+            name="SpacingAnnotations",
+            tag=tag,
+        )
+        contexts.append(context)
     global_context = abjad.Context(
         contexts,
         lilypond_type="GlobalContext",

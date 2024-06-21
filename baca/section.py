@@ -46,6 +46,16 @@ def _add_container_identifiers(score, section_number):
     except ValueError:
         pass
     try:
+        context = score["SpacingCommands"]
+        contexts.append(context)
+    except ValueError:
+        pass
+    try:
+        context = score["SpacingAnnotations"]
+        contexts.append(context)
+    except ValueError:
+        pass
+    try:
         context = score["Rests"]
         contexts.append(context)
     except ValueError:
@@ -2302,6 +2312,8 @@ def make_layout_score(
         1,
         do_not_move_global_context=True,
         make_breaks_context=True,
+        make_spacing_annotations_context=True,
+        make_spacing_commands_context=True,
     )
     time_signatures = [
         abjad.TimeSignature.from_string(_) for _ in time_signature_fractions
@@ -2314,14 +2326,17 @@ def make_layout_score(
     )
     measure_count = len(time_signatures)
     if spacing is not None:
-        spacing.add_spacing_to_score(
-            score["Skips"],
+        spacing.add_spacing_to_contexts(
+            score["SpacingCommands"],
+            score["SpacingAnnotations"],
             eol_measure_numbers,
             fermata_measure_numbers,
             measure_count,
             has_anchor_skip=has_anchor_skip,
         )
-    breaks.add_breaks_to_context(score["Breaks"])
+    breaks.add_breaks_to_context(
+        score["Breaks"],
+    )
     offset_to_measure_number = _populate_offset_to_measure_number(
         first_measure_number,
         score["Skips"],
@@ -2686,6 +2701,22 @@ def set_up_score(
             append_anchor_skip=append_anchor_skip,
         )
         _label_measure_numbers(first_measure_number, breaks)
+    if "SpacingCommands" in score:
+        context = score["SpacingCommands"]
+        _make_global_skips(
+            context,
+            time_signatures,
+            append_anchor_skip=append_anchor_skip,
+        )
+        _label_measure_numbers(first_measure_number, context)
+    if "SpacingAnnotations" in score:
+        context = score["SpacingAnnotations"]
+        _make_global_skips(
+            context,
+            time_signatures,
+            append_anchor_skip=append_anchor_skip,
+        )
+        _label_measure_numbers(first_measure_number, context)
     if "Rests" in score:
         _make_global_rests(score["Rests"], time_signatures)
     if score_persistent_indicators:
