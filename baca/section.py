@@ -168,6 +168,64 @@ def _assert_nonoverlapping_rhythms(rhythms, voice):
         previous_stop_offset = stop_offset
 
 
+def _attach_measure_number_spanners(first_measure_number, global_skips):
+    skips = _select.skips(global_skips)
+    total = len(skips)
+    for measure_index, skip in enumerate(skips):
+        local_measure_number = measure_index + 1
+        measure_number = first_measure_number + measure_index
+        if measure_index < total - 1:
+            tag = _tags.LOCAL_MEASURE_NUMBER
+            tag = tag.append(_helpers.function_name(_frame()))
+            string = r"- \baca-start-lmn-left-only"
+            string += f' "{local_measure_number}"'
+            start_text_span = abjad.StartTextSpan(
+                command=r"\bacaStartTextSpanLMN", left_text=string
+            )
+            abjad.attach(
+                start_text_span,
+                skip,
+                context=global_skips.name,
+                deactivate=True,
+                tag=tag,
+            )
+            tag = _tags.MEASURE_NUMBER
+            tag = tag.append(_helpers.function_name(_frame()))
+            string = r"- \baca-start-mn-left-only"
+            string += f' "{measure_number}"'
+            start_text_span = abjad.StartTextSpan(
+                command=r"\bacaStartTextSpanMN", left_text=string
+            )
+            abjad.attach(
+                start_text_span,
+                skip,
+                context=global_skips.name,
+                deactivate=True,
+                tag=tag,
+            )
+        if 0 < measure_index:
+            tag = _tags.LOCAL_MEASURE_NUMBER
+            tag = tag.append(_helpers.function_name(_frame()))
+            stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanLMN")
+            abjad.attach(
+                stop_text_span,
+                skip,
+                context=global_skips.name,
+                deactivate=True,
+                tag=tag,
+            )
+            tag = _tags.MEASURE_NUMBER
+            tag = tag.append(_helpers.function_name(_frame()))
+            stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanMN")
+            abjad.attach(
+                stop_text_span,
+                skip,
+                context=global_skips.name,
+                deactivate=True,
+                tag=tag,
+            )
+
+
 # This exists because of an incompletely implemented behavior in LilyPond;
 # LilyPond doesn't understand repeat-tied notes to be tied;
 # because of this LilyPond incorrectly prints accidentals in front of some
@@ -1046,64 +1104,6 @@ def _label_duration_multipliers(score):
                 tag_ = tag_.append(_tags.REST_VOICE)
             abjad.attach(markup, leaf, deactivate=True, direction=abjad.UP, tag=tag_)
             already_labeled.add(leaf)
-
-
-def _label_measure_numbers(first_measure_number, global_skips):
-    skips = _select.skips(global_skips)
-    total = len(skips)
-    for measure_index, skip in enumerate(skips):
-        local_measure_number = measure_index + 1
-        measure_number = first_measure_number + measure_index
-        if measure_index < total - 1:
-            tag = _tags.LOCAL_MEASURE_NUMBER
-            tag = tag.append(_helpers.function_name(_frame()))
-            string = r"- \baca-start-lmn-left-only"
-            string += f' "{local_measure_number}"'
-            start_text_span = abjad.StartTextSpan(
-                command=r"\bacaStartTextSpanLMN", left_text=string
-            )
-            abjad.attach(
-                start_text_span,
-                skip,
-                context=global_skips.name,
-                deactivate=True,
-                tag=tag,
-            )
-            tag = _tags.MEASURE_NUMBER
-            tag = tag.append(_helpers.function_name(_frame()))
-            string = r"- \baca-start-mn-left-only"
-            string += f' "{measure_number}"'
-            start_text_span = abjad.StartTextSpan(
-                command=r"\bacaStartTextSpanMN", left_text=string
-            )
-            abjad.attach(
-                start_text_span,
-                skip,
-                context=global_skips.name,
-                deactivate=True,
-                tag=tag,
-            )
-        if 0 < measure_index:
-            tag = _tags.LOCAL_MEASURE_NUMBER
-            tag = tag.append(_helpers.function_name(_frame()))
-            stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanLMN")
-            abjad.attach(
-                stop_text_span,
-                skip,
-                context=global_skips.name,
-                deactivate=True,
-                tag=tag,
-            )
-            tag = _tags.MEASURE_NUMBER
-            tag = tag.append(_helpers.function_name(_frame()))
-            stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanMN")
-            abjad.attach(
-                stop_text_span,
-                skip,
-                context=global_skips.name,
-                deactivate=True,
-                tag=tag,
-            )
 
 
 def _layout_removal_tags():
@@ -2674,7 +2674,8 @@ def set_up_score(
             append_anchor_skip=append_anchor_skip,
             attach_time_signatures=True,
         )
-        _label_measure_numbers(first_measure_number, context)
+        if "Skips" not in score:
+            _attach_measure_number_spanners(first_measure_number, context)
         do_not_attach_time_signatures = True
     if "Skips" in score:
         context = score["Skips"]
@@ -2684,7 +2685,7 @@ def set_up_score(
             append_anchor_skip=append_anchor_skip,
             attach_time_signatures=not do_not_attach_time_signatures,
         )
-        _label_measure_numbers(first_measure_number, context)
+        _attach_measure_number_spanners(first_measure_number, context)
     if "Breaks" in score:
         context = score["Breaks"]
         _make_global_skips(
@@ -2692,7 +2693,6 @@ def set_up_score(
             time_signatures,
             append_anchor_skip=append_anchor_skip,
         )
-        _label_measure_numbers(first_measure_number, context)
     if "SpacingCommands" in score:
         context = score["SpacingCommands"]
         _make_global_skips(
@@ -2700,7 +2700,6 @@ def set_up_score(
             time_signatures,
             append_anchor_skip=append_anchor_skip,
         )
-        _label_measure_numbers(first_measure_number, context)
     if "SpacingAnnotations" in score:
         context = score["SpacingAnnotations"]
         _make_global_skips(
@@ -2708,7 +2707,6 @@ def set_up_score(
             time_signatures,
             append_anchor_skip=append_anchor_skip,
         )
-        _label_measure_numbers(first_measure_number, context)
     if "Rests" in score:
         _make_global_rests(score["Rests"], time_signatures)
     if score_persistent_indicators:
