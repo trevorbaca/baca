@@ -60,11 +60,6 @@ def _add_container_identifiers(score, section_number):
         contexts.append(context)
     except ValueError:
         pass
-    try:
-        context = score["PageLayout"]
-        contexts.append(context)
-    except ValueError:
-        pass
     for voice in abjad.iterate.components(score, abjad.Voice):
         if voice._has_indicator(_enums.INTERMITTENT):
             continue

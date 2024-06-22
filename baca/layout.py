@@ -121,19 +121,6 @@ class Page:
         self.systems = list(systems)
 
 
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class PageLayoutProfile:
-
-    eol_measure_numbers: list[int]
-    fermata_measure_numbers: list[int]
-    measure_count: int
-
-    def __post_init__(self):
-        assert isinstance(self.eol_measure_numbers, list)
-        assert isinstance(self.fermata_measure_numbers, list)
-        assert isinstance(self.measure_count, int)
-
-
 class Spacing:
 
     __slots__ = (
