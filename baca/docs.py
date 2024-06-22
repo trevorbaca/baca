@@ -100,11 +100,11 @@ def lilypond_file(score, *, includes=None):
 def make_empty_score(
     *counts,
     do_not_make_music_context=False,
+    do_not_make_skips_context=False,
     do_not_move_global_context=False,
     make_breaks_context=False,
     make_spacing_commands_context=False,
     make_spacing_annotations_context=False,
-    no_skips=False,
 ):
     r"""
     Makes empty score for doc examples.
@@ -235,13 +235,12 @@ def make_empty_score(
     tag = _helpers.function_name(_frame())
     contexts = []
     global_context = _score.make_global_context(
+        do_not_make_rests_context=True,
         make_breaks_context=make_breaks_context,
         make_spacing_annotations_context=make_spacing_annotations_context,
         make_spacing_commands_context=make_spacing_commands_context,
     )
     contexts.append(global_context)
-    # TODO: cleaner to just make global skips instead of deleting global rests:
-    del global_context["Rests"]
     if do_not_make_music_context is False:
         single_staff = len(counts) == 1
         single_voice = single_staff and counts[0] == 1
@@ -282,7 +281,7 @@ def make_empty_score(
     score = abjad.Score(contexts, name="Score", tag=tag)
     if not do_not_move_global_context:
         _move_global_context(score)
-    if no_skips is True:
+    if do_not_make_skips_context is True:
         del score["Skips"]
     for context in abjad.select.components(score, abjad.Context):
         if len(context) == 1:

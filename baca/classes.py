@@ -41,7 +41,7 @@ class Accelerando:
 
     ..  container:: example
 
-        >>> score = baca.docs.make_empty_score(1, no_skips=True)
+        >>> score = baca.docs.make_empty_score(1, do_not_make_skips_context=True)
         >>> voice = score["Music"]
         >>> voice.append("c'4")
         >>> accelerando = baca.Accelerando()
@@ -316,7 +316,7 @@ class Ritardando:
 
     ..  container:: example
 
-        >>> score = baca.docs.make_empty_score(1, no_skips=True)
+        >>> score = baca.docs.make_empty_score(1, do_not_make_skips_context=True)
         >>> voice = score["Music"]
         >>> voice.append("c'4")
         >>> ritardando = baca.Ritardando()

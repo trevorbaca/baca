@@ -2309,8 +2309,8 @@ def make_layout_score(
             eol_measure_number = bol_measure_number - 1
             eol_measure_numbers.append(eol_measure_number)
     score = _docs.make_empty_score(
-        # 1,
         do_not_make_music_context=True,
+        do_not_make_skips_context=True,
         do_not_move_global_context=True,
         make_breaks_context=bool(breaks),
         make_spacing_annotations_context=bool(spacing),
@@ -2341,13 +2341,10 @@ def make_layout_score(
     )
     offset_to_measure_number = _populate_offset_to_measure_number(
         first_measure_number,
-        score["Skips"],
+        score["Breaks"],
     )
     style_anchor_skip(score)
     lilypond_file = _lilypond.file(score)
-    context = lilypond_file["Skips"]
-    context.lilypond_type = "PageLayout"
-    context.name = "PageLayout"
     _whitespace_leaves(score)
     _add_container_identifiers(score, None)
     _remove_layout_tags(score)
@@ -2358,10 +2355,6 @@ def make_layout_score(
         component.tag = component.tag.retain_shoutcase()
         for wrapper in abjad.get.wrappers(component):
             wrapper.tag = wrapper.tag.retain_shoutcase()
-    for skip in score["PageLayout"][:-1]:
-        assert isinstance(skip, abjad.Skip), repr(skip)
-        indicators = abjad.get.indicators(skip)
-        assert len(indicators) == 2, repr(indicators)
     bol_measure_numbers = [
         _ + first_measure_number - 1 for _ in breaks.bol_measure_numbers
     ]
@@ -2686,22 +2679,23 @@ def set_up_score(
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     manifests = manifests or {}
     assert isinstance(manifests, dict), repr(manifests)
-    skips = score["Skips"]
-    _make_global_skips(
-        skips,
-        time_signatures,
-        append_anchor_skip=append_anchor_skip,
-        attach_time_signatures=not do_not_attach_time_signatures,
-    )
-    _label_measure_numbers(first_measure_number, skips)
-    if "Breaks" in score:
-        breaks = score["Breaks"]
+    if "Skips" in score:
+        context = score["Skips"]
         _make_global_skips(
-            breaks,
+            context,
+            time_signatures,
+            append_anchor_skip=append_anchor_skip,
+            attach_time_signatures=not do_not_attach_time_signatures,
+        )
+        _label_measure_numbers(first_measure_number, context)
+    if "Breaks" in score:
+        context = score["Breaks"]
+        _make_global_skips(
+            context,
             time_signatures,
             append_anchor_skip=append_anchor_skip,
         )
-        _label_measure_numbers(first_measure_number, breaks)
+        _label_measure_numbers(first_measure_number, context)
     if "SpacingCommands" in score:
         context = score["SpacingCommands"]
         _make_global_skips(
@@ -3084,6 +3078,8 @@ def span_metronome_marks(global_skips, *, parts_metric_modulation_multiplier=Non
 
 
 def style_anchor_skip(score):
+    if "Skips" not in score:
+        return
     global_skips = score["Skips"]
     skip = abjad.get.leaf(global_skips, -1)
     if not abjad.get.has_indicator(skip, _enums.ANCHOR_SKIP):
