@@ -2314,10 +2314,10 @@ def make_layout_score(
         spacing.add_spacing_to_contexts(
             score["SpacingCommands"],
             score["SpacingAnnotations"],
-            eol_measure_numbers,
-            fermata_measure_numbers,
-            measure_count,
+            eol_measure_numbers=eol_measure_numbers,
+            fermata_measure_numbers=fermata_measure_numbers,
             has_anchor_skip=has_anchor_skip,
+            measure_count=measure_count,
         )
     breaks.add_breaks_to_context(
         score["Breaks"],
@@ -2657,8 +2657,10 @@ def set_up_score(
     *,
     append_anchor_skip: bool = False,
     do_not_attach_time_signatures: bool = False,
+    # TODO: remove unused docs=False keyword
     docs: bool = False,
     first_measure_number: int = 1,
+    # TODO: remove unused layout=False keyword
     layout: bool = False,
     manifests: dict | None = None,
     score_persistent_indicators: list[_memento.Memento] | None = None,

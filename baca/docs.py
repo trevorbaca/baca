@@ -101,6 +101,7 @@ def make_empty_score(
     *counts,
     do_not_make_music_context=False,
     do_not_make_skips_context=False,
+    # TODO: remove do_not_move_global_context=False keyword; always keep global context
     do_not_move_global_context=False,
     make_breaks_context=False,
     make_spacing_commands_context=False,

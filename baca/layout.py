@@ -146,13 +146,14 @@ class Spacing:
     def add_spacing_to_contexts(
         self,
         spacing_commands_context,
-        spacing_annotations_context,
-        eol_measure_numbers,
-        fermata_measure_numbers,
-        measure_count,
+        spacing_annotations_context=None,
         *,
+        eol_measure_numbers=None,
+        fermata_measure_numbers=None,
         has_anchor_skip=False,
+        measure_count=None,
     ):
+        assert spacing_commands_context.name == "SpacingCommands"
         spacing_commands_skips = _select.skips(spacing_commands_context)
         spacing_annotations_skips = _select.skips(spacing_annotations_context)
         measure_count = measure_count or len(spacing_commands_skips)
@@ -193,7 +194,8 @@ class Spacing:
         measure_count = len(spacing_commands_skips)
         for measure_index in range(measure_count):
             spacing_commands_skip = spacing_commands_skips[measure_index]
-            spacing_annotations_skip = spacing_annotations_skips[measure_index]
+            if spacing_annotations_skips:
+                spacing_annotations_skip = spacing_annotations_skips[measure_index]
             measure_number = measure_index + 1
             if has_anchor_skip and measure_number == measure_count:
                 pair = (1, 4)
@@ -230,6 +232,8 @@ class Spacing:
                 tag=_helpers.function_name(_frame(), n=1),
             )
             if forbid_new_spacing_section is True:
+                continue
+            if spacing_annotations_context is None:
                 continue
             if eol_adjusted:
                 multiplier = magic_lilypond_eol_adjustment
