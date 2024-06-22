@@ -237,11 +237,10 @@ class Spacing:
                 forbid_new_spacing_section=forbid_new_spacing_section,
                 lax_spacing_section=measure_number in self.lax_spacing_section,
             )
-            tag = _tags.SPACING_COMMAND
             abjad.attach(
                 spacing_section,
                 spacing_commands_skip,
-                tag=tag.append(_helpers.function_name(_frame(), n=1)),
+                tag=_helpers.function_name(_frame(), n=1),
             )
             if forbid_new_spacing_section is True:
                 continue

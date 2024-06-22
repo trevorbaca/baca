@@ -777,7 +777,6 @@ def _music_annotation_tags():
         baca.tags.OCTAVE_COLORING,
         baca.tags.REPEAT_PITCH_CLASS_COLORING,
         baca.tags.SPACING,
-        baca.tags.SPACING_OVERRIDE,
         baca.tags.STAFF_HIGHLIGHT,
         baca.tags.STAGE_NUMBER,
     ]
@@ -1933,10 +1932,7 @@ def show_annotations(file, *, undo=False):
     )
 
     def _spacing(tags):
-        tags_ = (
-            baca.tags.SPACING,
-            baca.tags.SPACING_OVERRIDE,
-        )
+        tags_ = (baca.tags.SPACING,)
         return bool(set(tags) & set(tags_))
 
     text = show_tag(text, baca.tags.CLOCK_TIME, messages, undo=undo)

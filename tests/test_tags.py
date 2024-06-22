@@ -36,7 +36,6 @@ def test_music_annotation_tags():
         baca.tags.OCTAVE_COLORING,
         baca.tags.REPEAT_PITCH_CLASS_COLORING,
         baca.tags.SPACING,
-        baca.tags.SPACING_OVERRIDE,
         baca.tags.STAFF_HIGHLIGHT,
         baca.tags.STAGE_NUMBER,
     ]
