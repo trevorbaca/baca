@@ -35,31 +35,19 @@ def _add_container_identifiers(score, section_number):
     else:
         section_number = ""
     contexts = []
-    try:
-        context = score["Skips"]
-        contexts.append(context)
-    except ValueError:
-        pass
-    try:
-        context = score["Breaks"]
-        contexts.append(context)
-    except ValueError:
-        pass
-    try:
-        context = score["SpacingCommands"]
-        contexts.append(context)
-    except ValueError:
-        pass
-    try:
-        context = score["SpacingAnnotations"]
-        contexts.append(context)
-    except ValueError:
-        pass
-    try:
-        context = score["Rests"]
-        contexts.append(context)
-    except ValueError:
-        pass
+    for global_context_name in (
+        "Skips",
+        "Breaks",
+        "SpacingCommands",
+        "SpacingAnnotations",
+        "Rests",
+        "TimeSignatures",
+    ):
+        try:
+            context = score[global_context_name]
+            contexts.append(context)
+        except ValueError:
+            pass
     for voice in abjad.iterate.components(score, abjad.Voice):
         if voice._has_indicator(_enums.INTERMITTENT):
             continue
@@ -2449,7 +2437,11 @@ def postprocess(
         if first_section is False:
             _clone_section_initial_short_instrument_name(score)
         if doctest is False:
-            cached_time_signatures = remove_redundant_time_signatures(score["Skips"])
+            if "TimeSignatures" in score:
+                context = score["TimeSignatures"]
+            else:
+                context = score["Skips"]
+            cached_time_signatures = remove_redundant_time_signatures(context)
         fmns = _get_fermata_measure_numbers(first_measure_number, score)
         if empty_fermata_measures and not fermata_measure_empty_overrides:
             fermata_measure_empty_overrides = [
@@ -2674,6 +2666,16 @@ def set_up_score(
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     manifests = manifests or {}
     assert isinstance(manifests, dict), repr(manifests)
+    if "TimeSignatures" in score:
+        context = score["TimeSignatures"]
+        _make_global_skips(
+            context,
+            time_signatures,
+            append_anchor_skip=append_anchor_skip,
+            attach_time_signatures=True,
+        )
+        _label_measure_numbers(first_measure_number, context)
+        do_not_attach_time_signatures = True
     if "Skips" in score:
         context = score["Skips"]
         _make_global_skips(

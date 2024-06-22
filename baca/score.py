@@ -42,6 +42,7 @@ def make_global_context(
     make_breaks_context=False,
     make_spacing_annotations_context=False,
     make_spacing_commands_context=False,
+    make_time_signatures_context=False,
 ):
     tag = _helpers.function_name(_frame())
     contexts = []
@@ -56,6 +57,13 @@ def make_global_context(
         context = abjad.Context(
             lilypond_type="GlobalSkips",
             name="Skips",
+            tag=tag,
+        )
+        contexts.append(context)
+    if make_time_signatures_context is True:
+        context = abjad.Context(
+            lilypond_type="GlobalSkips",
+            name="TimeSignatures",
             tag=tag,
         )
         contexts.append(context)
