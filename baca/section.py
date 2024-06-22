@@ -2311,9 +2311,9 @@ def make_layout_score(
     score = _docs.make_empty_score(
         1,
         do_not_move_global_context=True,
-        make_breaks_context=True,
-        make_spacing_annotations_context=True,
-        make_spacing_commands_context=True,
+        make_breaks_context=bool(breaks),
+        make_spacing_annotations_context=bool(spacing),
+        make_spacing_commands_context=bool(spacing),
     )
     time_signatures = [
         abjad.TimeSignature.from_string(_) for _ in time_signature_fractions
