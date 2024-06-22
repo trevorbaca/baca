@@ -2309,7 +2309,8 @@ def make_layout_score(
             eol_measure_number = bol_measure_number - 1
             eol_measure_numbers.append(eol_measure_number)
     score = _docs.make_empty_score(
-        1,
+        # 1,
+        do_not_make_music_context=True,
         do_not_move_global_context=True,
         make_breaks_context=bool(breaks),
         make_spacing_annotations_context=bool(spacing),
@@ -2322,6 +2323,7 @@ def make_layout_score(
         score,
         time_signatures,
         append_anchor_skip=has_anchor_skip,
+        do_not_attach_time_signatures=True,
         layout=True,
     )
     measure_count = len(time_signatures)
@@ -2350,18 +2352,16 @@ def make_layout_score(
     _add_container_identifiers(score, None)
     _remove_layout_tags(score)
     _comment_measure_numbers(first_measure_number, offset_to_measure_number, score)
-    skips = _select.skips(context)
-    for skip in skips:
-        abjad.detach(abjad.TimeSignature, skip)
     score = lilypond_file["Score"]
-    del score["MusicContext"]
-    score = lilypond_file["Score"]
-    context = score
-    for component in abjad.iterate.components(context):
+    for component in abjad.iterate.components(score):
         assert component.tag is not None
         component.tag = component.tag.retain_shoutcase()
         for wrapper in abjad.get.wrappers(component):
             wrapper.tag = wrapper.tag.retain_shoutcase()
+    for skip in score["PageLayout"][:-1]:
+        assert isinstance(skip, abjad.Skip), repr(skip)
+        indicators = abjad.get.indicators(skip)
+        assert len(indicators) == 2, repr(indicators)
     bol_measure_numbers = [
         _ + first_measure_number - 1 for _ in breaks.bol_measure_numbers
     ]
@@ -2676,6 +2676,7 @@ def set_up_score(
     time_signatures: typing.Sequence[abjad.TimeSignature],
     *,
     append_anchor_skip: bool = False,
+    do_not_attach_time_signatures: bool = False,
     docs: bool = False,
     first_measure_number: int = 1,
     layout: bool = False,
@@ -2690,7 +2691,7 @@ def set_up_score(
         skips,
         time_signatures,
         append_anchor_skip=append_anchor_skip,
-        attach_time_signatures=True,
+        attach_time_signatures=not do_not_attach_time_signatures,
     )
     _label_measure_numbers(first_measure_number, skips)
     if "Breaks" in score:

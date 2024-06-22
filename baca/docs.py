@@ -99,6 +99,7 @@ def lilypond_file(score, *, includes=None):
 
 def make_empty_score(
     *counts,
+    do_not_make_music_context=False,
     do_not_move_global_context=False,
     make_breaks_context=False,
     make_spacing_commands_context=False,
@@ -229,50 +230,56 @@ def make_empty_score(
         }
 
     """
+    if do_not_make_music_context is True:
+        assert counts == (), repr(counts)
     tag = _helpers.function_name(_frame())
+    contexts = []
     global_context = _score.make_global_context(
         make_breaks_context=make_breaks_context,
         make_spacing_annotations_context=make_spacing_annotations_context,
         make_spacing_commands_context=make_spacing_commands_context,
     )
+    contexts.append(global_context)
     # TODO: cleaner to just make global skips instead of deleting global rests:
     del global_context["Rests"]
-    single_staff = len(counts) == 1
-    single_voice = single_staff and counts[0] == 1
-    staves, voice_number = [], 1
-    for staff_index, voice_count in enumerate(counts):
-        if single_staff:
-            name = "Staff"
-        else:
-            staff_number = staff_index + 1
-            name = f"Staff.{staff_number}"
-        simultaneous = 1 < voice_count
-        staff = abjad.Staff(name=name, simultaneous=simultaneous, tag=tag)
-        voices = []
-        for voice_index in range(voice_count):
-            if single_voice:
-                name = "Music"
+    if do_not_make_music_context is False:
+        single_staff = len(counts) == 1
+        single_voice = single_staff and counts[0] == 1
+        staves, voice_number = [], 1
+        for staff_index, voice_count in enumerate(counts):
+            if single_staff:
+                name = "Staff"
             else:
-                name = f"Music.{voice_number}"
-            voice = abjad.Voice(name=name, tag=tag)
-            voices.append(voice)
-            voice_number += 1
-        staff.extend(voices)
-        staves.append(staff)
-    if len(staves) == 1:
-        music = staves
-        simultaneous = False
-    else:
-        music = [abjad.StaffGroup(staves, name="StaffGroup")]
-        simultaneous = True
-    music_context = abjad.Context(
-        music,
-        lilypond_type="MusicContext",
-        simultaneous=simultaneous,
-        name="MusicContext",
-        tag=tag,
-    )
-    score = abjad.Score([global_context, music_context], name="Score", tag=tag)
+                staff_number = staff_index + 1
+                name = f"Staff.{staff_number}"
+            simultaneous = 1 < voice_count
+            staff = abjad.Staff(name=name, simultaneous=simultaneous, tag=tag)
+            voices = []
+            for voice_index in range(voice_count):
+                if single_voice:
+                    name = "Music"
+                else:
+                    name = f"Music.{voice_number}"
+                voice = abjad.Voice(name=name, tag=tag)
+                voices.append(voice)
+                voice_number += 1
+            staff.extend(voices)
+            staves.append(staff)
+        if len(staves) == 1:
+            music = staves
+            simultaneous = False
+        else:
+            music = [abjad.StaffGroup(staves, name="StaffGroup")]
+            simultaneous = True
+        music_context = abjad.Context(
+            music,
+            lilypond_type="MusicContext",
+            simultaneous=simultaneous,
+            name="MusicContext",
+            tag=tag,
+        )
+        contexts.append(music_context)
+    score = abjad.Score(contexts, name="Score", tag=tag)
     if not do_not_move_global_context:
         _move_global_context(score)
     if no_skips is True:
