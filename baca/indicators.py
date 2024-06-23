@@ -750,11 +750,12 @@ def markup(
 
 
 def metronome_mark(
-    argument,
+    skip: abjad.Skip,
     indicator,
     *tweaks: abjad.Tweak,
     manifests=None,
 ) -> list[abjad.Wrapper]:
+    assert isinstance(skip, abjad.Skip), repr(skip)
     manifests = manifests or {}
     if isinstance(indicator, str):
         indicator_ = manifests["abjad.MetronomeMark"][indicator]
@@ -770,22 +771,21 @@ def metronome_mark(
     indicator_ = _helpers.bundle_tweaks(indicator_, tweaks)
     tag = _helpers.function_name(_frame())
     wrappers = []
-    for leaf in abjad.select.leaves(argument):
-        if isinstance(indicator_, abjad.MetricModulation):
-            wrapper = abjad.attach(
-                indicator_,
-                leaf,
-                tag=tag,
-                wrapper=True,
-            )
-        else:
-            wrapper = _indicatorlib.attach_persistent_indicator(
-                leaf,
-                indicator_,
-                manifests=manifests,
-                tag=tag,
-            )
-        wrappers.append(wrapper)
+    if isinstance(indicator_, abjad.MetricModulation):
+        wrapper = abjad.attach(
+            indicator_,
+            skip,
+            tag=tag,
+            wrapper=True,
+        )
+    else:
+        wrapper = _indicatorlib.attach_persistent_indicator(
+            skip,
+            indicator_,
+            manifests=manifests,
+            tag=tag,
+        )
+    wrappers.append(wrapper)
     return wrappers
 
 
