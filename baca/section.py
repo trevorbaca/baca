@@ -2750,7 +2750,10 @@ def sort_dictionary(dictionary):
         dictionary[key] = value
 
 
-def span_metronome_marks(global_skips, *, parts_metric_modulation_multiplier=None):
+def span_metronome_marks(
+    global_skips, *, hide=False, parts_metric_modulation_multiplier=None
+):
+    assert global_skips.name == "Skips", repr(global_skips.name)
     indicator_count = 0
     skips = _select.skips(global_skips)
     final_leaf_metronome_mark = abjad.get.indicator(skips[-1], abjad.MetronomeMark)
@@ -2783,7 +2786,7 @@ def span_metronome_marks(global_skips, *, parts_metric_modulation_multiplier=Non
             continue
         if metronome_mark is not None:
             wrapper = abjad.get.wrapper(skip, abjad.MetronomeMark)
-            metronome_mark = dataclasses.replace(metronome_mark, hide=True)
+            metronome_mark = dataclasses.replace(metronome_mark, hide=hide)
             abjad.detach(abjad.MetronomeMark, skip)
             wrapper = abjad.attach(
                 metronome_mark,
