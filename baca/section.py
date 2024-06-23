@@ -332,14 +332,8 @@ def _calculate_clock_times(
     skips,
     rests,
 ):
-    if rests is None:
-        return types.SimpleNamespace(
-            duration_clock_string=None,
-            clock_times=None,
-            start_clock_time=None,
-            stop_clock_time=None,
-        )
-    assert (len(skips) == len(rests)) or (len(skips) == len(rests) + 1)
+    if rests is not None:
+        assert (len(skips) == len(rests)) or (len(skips) == len(rests) + 1)
     start_clock_time = previous_stop_clock_time
     start_clock_time = start_clock_time or "0'00''"
     start_offset = abjad.Duration.from_clock_string(start_clock_time)
@@ -976,6 +970,15 @@ def _get_measure_timespan(measure_number, score):
         measure_number,
     )
     return abjad.Timespan(start_offset, stop_offset)
+
+
+def _global_rests_are_meaningful(context):
+    assert context.name == "Rests"
+    for skip in context:
+        indicators = abjad.get.indicators(skip)
+        if 2 < len(indicators):
+            return True
+    return False
 
 
 def _label_clock_time(
@@ -2356,6 +2359,7 @@ def postprocess(
     clock_time_override=None,
     color_octaves=False,
     comment_measure_numbers=False,
+    delete_nonmeaningful_global_rests=False,
     doctest=False,
     # do_not_check_nontrivial_skip_filled_tuplets=False,
     do_not_check_wellformedness=False,
@@ -2387,6 +2391,7 @@ def postprocess(
     if clock_time_override is not None:
         assert isinstance(clock_time_override, abjad.MetronomeMark)
     assert isinstance(color_octaves, bool)
+    assert isinstance(delete_nonmeaningful_global_rests, bool)
     assert isinstance(do_not_check_wellformedness, bool)
     assert isinstance(do_not_force_nonnatural_accidentals, bool)
     assert isinstance(do_not_require_short_instrument_names, bool)
@@ -2532,6 +2537,9 @@ def postprocess(
         score,
     )
     _clean_up_obgcs(score)
+    if delete_nonmeaningful_global_rests and "Rests" in score:
+        if not _global_rests_are_meaningful(score["Rests"]):
+            del score["Rests"]
     if do_not_check_wellformedness is False:
         count, message = abjad.wf.tabulate_wellformedness(
             score,
