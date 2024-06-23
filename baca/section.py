@@ -2786,7 +2786,7 @@ def span_metronome_marks(
             continue
         if metronome_mark is not None:
             wrapper = abjad.get.wrapper(skip, abjad.MetronomeMark)
-            metronome_mark = dataclasses.replace(metronome_mark, hide=hide)
+            metronome_mark = dataclasses.replace(metronome_mark, hide=True)
             abjad.detach(abjad.MetronomeMark, skip)
             wrapper = abjad.attach(
                 metronome_mark,
@@ -2794,6 +2794,15 @@ def span_metronome_marks(
                 tag=wrapper.tag,
                 wrapper=True,
             )
+            if hide is False:
+                foo = dataclasses.replace(metronome_mark, hide=False)
+                string = abjad.lilypond(foo)
+                literal = abjad.LilyPondLiteral(string)
+                abjad.attach(
+                    literal,
+                    skip,
+                    tag=_tags.LILYPOND_TEMPO_COMMAND,
+                )
         if metric_modulation is not None:
             wrapper_ = abjad.get.wrapper(skip, abjad.MetricModulation)
             metric_modulation = dataclasses.replace(metric_modulation, hide=True)
