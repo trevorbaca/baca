@@ -1,3 +1,5 @@
+\version "2.25.16"
+
 %%% BOXED %%%
 
 baca-boxed-bass-drum-markup = \baca-boxed-markup \markup

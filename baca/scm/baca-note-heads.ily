@@ -1,3 +1,5 @@
+\version "2.25.16"
+
 %%% SHAPE NOTE-HEADS %%%
 
 baca-black-diamond-note-head = #(
@@ -45,14 +47,14 @@ baca-triangle-note-head = #(
 baca-slap-tongue-note-head = #(
     define-music-function (music) (ly:music?)
     #{
-    \override NoteHead #'stencil = #(
+    \override NoteHead.stencil = #(
         lambda
         (grob)
         (grob-interpret-markup grob (markup #:musicglyph "scripts.sforzato"))
         )
-    \override NoteHead #'extra-offset = #'(0.1 . 0.0)
+    \override NoteHead.extra-offset = #'(0.1 . 0.0)
     $music
-    \revert NoteHead #'stencil
-    \revert NoteHead #'extra-offset
+    \revert NoteHead.stencil
+    \revert NoteHead.extra-offset
     #}
     )

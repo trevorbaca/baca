@@ -1,3 +1,5 @@
+\version "2.25.16"
+
 %%% BAR LINE COLORING %%%
 
 baca-thick-red-bar-line = #(

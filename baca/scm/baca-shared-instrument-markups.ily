@@ -1,3 +1,5 @@
+\version "2.25.16"
+
 %%% SHARED INSTRUMENT MARKUPS %%%
 
 baca-attackless-markup = \markup

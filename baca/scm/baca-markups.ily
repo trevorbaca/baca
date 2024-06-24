@@ -1,3 +1,5 @@
+\version "2.25.16"
+
 %%% ACCIDENTAL MARKUP %%%
 
 baca-sharp-markup = \markup
@@ -25,7 +27,7 @@ baca-left-broken-xfb-markup =
 baca-full-downbow-markup =
     \markup
     \combine
-    \musicglyph #"scripts.downbow"
+    \musicglyph "scripts.downbow"
     \path #0.15
     #'(
         (moveto 0.7375 0.05)
@@ -36,7 +38,7 @@ baca-full-downbow-markup =
 baca-full-upbow-markup =
     \markup
     \combine
-    \musicglyph #"scripts.upbow"
+    \musicglyph "scripts.upbow"
     \path #0.15
     #'(
         (moveto 0.62 2.005)
@@ -59,7 +61,7 @@ baca-stop-on-string-markup =
 baca-stop-on-string-full-downbow-markup =
     \markup
     \combine
-    \musicglyph #"scripts.downbow"
+    \musicglyph "scripts.downbow"
     \path #0.15
     #'(
         (moveto 0.7375 0.05)
@@ -73,7 +75,7 @@ baca-stop-on-string-full-downbow-markup =
 baca-stop-on-string-full-upbow-markup =
     \markup
     \combine
-    \musicglyph #"scripts.upbow"
+    \musicglyph "scripts.upbow"
     \path #0.15
     #'(
         (moveto 0.62 2.005)
@@ -251,18 +253,18 @@ baca-left-broken-legno-markup =
 
 baca-black-diamond-markup =
     \markup
-    \musicglyph #"noteheads.s2harmonic"
+    \musicglyph "noteheads.s2harmonic"
 
 baca-diamond-markup =
     \markup
-    \musicglyph #"noteheads.s0harmonic"
+    \musicglyph "noteheads.s0harmonic"
 
 baca-diamond-parenthesized-double-diamond-markup =
     \markup
     \concat {
         \general-align #Y #2.5
         \scale #'(0.75 . 0.75)
-        \musicglyph #"noteheads.s0harmonic"
+        \musicglyph "noteheads.s0harmonic"
         \hspace #0.45
         \general-align #Y #1
         \scale #'(1 . 1.5)
@@ -273,8 +275,8 @@ baca-diamond-parenthesized-double-diamond-markup =
         \scale #'(0.75 . 0.75)
         \column
         {
-            \musicglyph #"noteheads.s0harmonic"
-            \musicglyph #"noteheads.s0harmonic"
+            \musicglyph "noteheads.s0harmonic"
+            \musicglyph "noteheads.s0harmonic"
         }
         \hspace #-0.15
         \general-align #Y #1
@@ -288,8 +290,8 @@ baca-double-black-diamond-markup =
     \scale #'(0.75 . 0.75)
     \column
     {
-        \musicglyph #"noteheads.s2harmonic"
-        \musicglyph #"noteheads.s2harmonic"
+        \musicglyph "noteheads.s2harmonic"
+        \musicglyph "noteheads.s2harmonic"
     }
 
 baca-double-diamond-markup =
@@ -298,8 +300,8 @@ baca-double-diamond-markup =
     \scale #'(0.75 . 0.75)
     \column
     {
-        \musicglyph #"noteheads.s0harmonic"
-        \musicglyph #"noteheads.s0harmonic"
+        \musicglyph "noteheads.s0harmonic"
+        \musicglyph "noteheads.s0harmonic"
     }
 
 baca-double-diamond-parenthesized-top-markup =
@@ -314,11 +316,11 @@ baca-double-diamond-parenthesized-top-markup =
                 \general-align #Y #0.75
                 "("
                 \general-align #Y #1
-                \musicglyph #"noteheads.s0harmonic"
+                \musicglyph "noteheads.s0harmonic"
                 \general-align #Y #0.75
                 ")"
                 }
-            \musicglyph #"noteheads.s0harmonic"
+            \musicglyph "noteheads.s0harmonic"
         }
     }
 
@@ -328,9 +330,9 @@ baca-triple-black-diamond-markup =
     \scale #'(0.75 . 0.75)
     \column
     {
-        \musicglyph #"noteheads.s2harmonic"
-        \musicglyph #"noteheads.s2harmonic"
-        \musicglyph #"noteheads.s2harmonic"
+        \musicglyph "noteheads.s2harmonic"
+        \musicglyph "noteheads.s2harmonic"
+        \musicglyph "noteheads.s2harmonic"
     }
 
 baca-triple-diamond-markup =
@@ -339,9 +341,9 @@ baca-triple-diamond-markup =
     \scale #'(0.75 . 0.75)
     \column
     {
-        \musicglyph #"noteheads.s0harmonic"
-        \musicglyph #"noteheads.s0harmonic"
-        \musicglyph #"noteheads.s0harmonic"
+        \musicglyph "noteheads.s0harmonic"
+        \musicglyph "noteheads.s0harmonic"
+        \musicglyph "noteheads.s0harmonic"
     }
 
 baca-triple-diamond-parenthesized-top-markup =
@@ -356,12 +358,12 @@ baca-triple-diamond-parenthesized-top-markup =
                 \general-align #Y #0.75
                 "("
                 \general-align #Y #1
-                \musicglyph #"noteheads.s0harmonic"
+                \musicglyph "noteheads.s0harmonic"
                 \general-align #Y #0.75
                 ")"
                 }
-            \musicglyph #"noteheads.s0harmonic"
-            \musicglyph #"noteheads.s0harmonic"
+            \musicglyph "noteheads.s0harmonic"
+            \musicglyph "noteheads.s0harmonic"
         }
     }
 
@@ -395,21 +397,21 @@ baca-duration-multiplier-markup = #(
 baca-fermata-markup =
     \markup
     \with-dimensions-from \null
-    \musicglyph #"scripts.ufermata"
+    \musicglyph "scripts.ufermata"
 
 baca-long-fermata-markup = \markup
     \with-dimensions-from \null
-    \musicglyph #"scripts.ulongfermata"
+    \musicglyph "scripts.ulongfermata"
 
 baca-short-fermata-markup =
     \markup
     \with-dimensions-from \null
-    \musicglyph #"scripts.ushortfermata"
+    \musicglyph "scripts.ushortfermata"
 
 baca-very-long-fermata-markup =
     \markup
     \with-dimensions-from \null
-    \musicglyph #"scripts.uverylongfermata"
+    \musicglyph "scripts.uverylongfermata"
 
 %%% NULL MARKUP %%%
 

@@ -1,3 +1,5 @@
+\version "2.25.16"
+
 %%% ORDINARY %%%
 
 baca-senza-pedale-markup = \markup "senza pedale"

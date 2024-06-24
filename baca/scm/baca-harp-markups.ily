@@ -1,3 +1,5 @@
+\version "2.25.16"
+
 %%% HARP MARKUPS %%%
 
 baca-bisb-markup = \markup

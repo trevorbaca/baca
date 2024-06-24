@@ -1,3 +1,5 @@
+\version "2.25.16"
+
 % Author: David Nalesnik
 % Date: 2015-04-17
 % https://lists.gnu.org/archive/html/lilypond-user/2015-04/msg00513.html
@@ -5,7 +7,7 @@
 % shaping-bezier-curves/shape-tie-column/README.md
 
 shapeRepeatTieColumn =
-#(define-music-function (parser location all-offsets) (list?)
+#(define-music-function (all-offsets) (list?)
    #{
      \override RepeatTieColumn.before-line-breaking =
      #(lambda (grob)

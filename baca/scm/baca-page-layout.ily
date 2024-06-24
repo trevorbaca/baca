@@ -1,3 +1,5 @@
+\version "2.25.16"
+
 %%% BAR LINES %%%
 
 baca-bar-line-visible = #(

@@ -1,3 +1,5 @@
+\version "2.25.16"
+
 %%% NOTE: Use ...
 %%%
 %%%       DynamicText.X-extent = #'(0 . 0)

@@ -1,3 +1,5 @@
+\version "2.25.16"
+
 baca-broken-spanner-staff-padding = #(
     define-scheme-function (staff-padding-left staff-padding-right) (number? number?)
     (lambda (grob)
@@ -17,7 +19,7 @@ baca-broken-spanner-staff-padding = #(
   EXAMPLE:
 
   \tweak after-line-breaking #(baca-broken-spanner-staff-padding 3 1.5)
-  \times 8/10
+  \tuplet 10/8
   {
     a b c' d' e'
     \break

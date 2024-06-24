@@ -1,3 +1,5 @@
+\version "2.25.16"
+
 %%% SYMBOL %%%
 
 baca-circle-bowing-markup =
