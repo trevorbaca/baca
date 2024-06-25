@@ -83,3 +83,14 @@ baca-new-strict-spacing-section = #(
     $music
     #}
     )
+
+baca-new-vanilla-spacing-section = #(
+    define-music-function (music) (ly:music?)
+    #{
+    \set Score.proportionalNotationDuration = ##f
+    \override Score.SpacingSpanner.strict-grace-spacing = ##f
+    \override Score.SpacingSpanner.strict-note-spacing = ##f
+    \newSpacingSection
+    $music
+    #}
+    )
