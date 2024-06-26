@@ -2273,27 +2273,28 @@ def make_layout_score(
     first_measure_number=1,
     has_anchor_skip=False,
     spacing=None,
+    spacing_dictionary=None,
 ) -> tuple[abjad.LilyPondFile, list[int]]:
     assert isinstance(breaks, _layout.Breaks), repr(breaks)
     assert isinstance(time_signature_fractions, list)
     assert all(isinstance(_, str) for _ in time_signature_fractions)
     if spacing is not None:
         assert isinstance(spacing, _layout.Spacing), repr(spacing)
+    if spacing_dictionary is not None:
+        assert isinstance(spacing_dictionary, dict), repr(spacing_dictionary)
     if spacing is not None and spacing.overrides is not None:
         assert spacing.default is not None
     assert isinstance(first_measure_number, int), repr(first_measure_number)
     fermata_measure_numbers = fermata_measure_numbers or []
     assert isinstance(fermata_measure_numbers, list), repr(fermata_measure_numbers)
-    if spacing is not None and spacing.default is None:
-        eol_measure_numbers = None
-    else:
-        fermata_measure_numbers = [
-            _ - (first_measure_number - 1) for _ in fermata_measure_numbers
-        ]
-        eol_measure_numbers = []
-        for bol_measure_number in breaks.bol_measure_numbers()[1:]:
-            eol_measure_number = bol_measure_number - 1
-            eol_measure_numbers.append(eol_measure_number)
+    fermata_measure_numbers = [
+        _ - (first_measure_number - 1) for _ in fermata_measure_numbers
+    ]
+    eol_measure_numbers = []
+    for bol_measure_number in breaks.bol_measure_numbers()[1:]:
+        eol_measure_number = bol_measure_number - 1
+        eol_measure_numbers.append(eol_measure_number)
+    # TODO: use _docs only in docs
     score = _docs.make_empty_score(
         do_not_make_music_context=True,
         do_not_make_skips_context=True,
