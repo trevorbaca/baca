@@ -2291,7 +2291,7 @@ def make_layout_score(
             _ - (first_measure_number - 1) for _ in fermata_measure_numbers
         ]
         eol_measure_numbers = []
-        for bol_measure_number in breaks.bol_measure_numbers[1:]:
+        for bol_measure_number in breaks.bol_measure_numbers()[1:]:
             eol_measure_number = bol_measure_number - 1
             eol_measure_numbers.append(eol_measure_number)
     score = _docs.make_empty_score(
@@ -2342,7 +2342,7 @@ def make_layout_score(
         for wrapper in abjad.get.wrappers(component):
             wrapper.tag = wrapper.tag.retain_shoutcase()
     bol_measure_numbers = [
-        _ + first_measure_number - 1 for _ in breaks.bol_measure_numbers
+        _ + first_measure_number - 1 for _ in breaks.bol_measure_numbers()
     ]
     return lilypond_file, bol_measure_numbers
 

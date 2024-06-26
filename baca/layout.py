@@ -17,21 +17,24 @@ magic_lilypond_eol_adjustment = abjad.Fraction(35, 24)
 fermata_measure_duration = abjad.Duration(1, 4)
 
 
+@dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
 class Breaks:
 
-    __slots__ = ("bol_measure_numbers", "page_count", "skip_index_to_indicators")
+    pages: typing.List["Page"] = dataclasses.field(default_factory=list)
 
-    def __init__(self, *pages: "Page"):
-        triple = self._initialize(pages)
-        bol_measure_numbers, page_count, skip_index_to_indicators = triple
-        self.bol_measure_numbers = bol_measure_numbers
-        self.page_count = page_count
-        self.skip_index_to_indicators = skip_index_to_indicators
+    def __init__(self, *arguments: "Page"):
+        for page_number, argument in enumerate(arguments, start=1):
+            assert isinstance(argument, Page), repr(argument)
+            if argument.number != page_number:
+                message = f"page number ({argument.number}) is not {page_number}"
+                raise Exception(message)
+        self.pages = list(arguments)
 
     def add_breaks_to_context(self, context):
         assert context.name == "Breaks"
         skips = _select.skips(context)
         measure_count = len(skips)
+        _, skip_index_to_indicators = self._iterate_pages()
         literal = abjad.LilyPondLiteral(r"\autoPageBreaksOff", site="before")
         abjad.attach(
             literal,
@@ -40,7 +43,7 @@ class Breaks:
         )
         for skip_index in range(measure_count):
             skip = skips[skip_index]
-            indicators = self.skip_index_to_indicators.get(
+            indicators = skip_index_to_indicators.get(
                 skip_index,
                 [abjad.LilyPondLiteral(r"\noBreak", site="before")],
             )
@@ -51,16 +54,12 @@ class Breaks:
                     tag=None,
                 )
 
-    @staticmethod
-    def _initialize(pages):
-        page_count = len(pages)
-        assert 0 < page_count, repr(page_count)
-        first_system = pages[0].systems[0]
+    def _iterate_pages(self):
+        first_system = self.pages[0].systems[0]
         assert first_system.measure == 1, repr(first_system)
         bol_measure_numbers = []
         skip_index_to_indicators = {}
-        for i, page in enumerate(pages):
-            page_number = i + 1
+        for page_number, page in enumerate(self.pages, start=1):
             if page.number is not None:
                 if page.number != page_number:
                     message = f"page number ({page.number}) is not {page_number}."
@@ -81,7 +80,11 @@ class Breaks:
                     x_offset=system.x_offset,
                 )
                 skip_index_to_indicators[skip_index] = (literal, lbsd)
-        return bol_measure_numbers, page_count, skip_index_to_indicators
+        return bol_measure_numbers, skip_index_to_indicators
+
+    def bol_measure_numbers(self):
+        bol_measure_numbers, _ = self._iterate_pages()
+        return bol_measure_numbers
 
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
