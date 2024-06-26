@@ -71,10 +71,7 @@ class Breaks:
         )
         _, skip_index_to_indicators = self._iterate_pages()
         for i, skip in enumerate(context):
-            indicators = skip_index_to_indicators.get(
-                i,
-                [abjad.LilyPondLiteral(r"\noBreak", site="before")],
-            )
+            indicators = skip_index_to_indicators.get(i, [])
             for indicator in indicators:
                 abjad.attach(
                     indicator,
