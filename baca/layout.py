@@ -297,3 +297,34 @@ class System:
     y_offset: int
     distances: tuple[int, ...]
     x_offset: int | None = None
+
+
+def apply_spacing_dictionary(context, spacing_dictionary):
+    assert context.name == "SpacingCommands"
+    for n, skip in enumerate(context, start=1):
+        value = spacing_dictionary.get(n)
+        if value is None:
+            continue
+        elif value == "vanilla":
+            string = r"\baca-new-vanilla-spacing-section"
+            literal = abjad.LilyPondLiteral(string, site="before")
+            abjad.attach(
+                literal,
+                skip,
+            )
+        elif isinstance(value, tuple):
+            n, d = value
+            string = rf"\baca-new-strict-spacing-section #{n} #{d}"
+            literal = abjad.LilyPondLiteral(string, site="before")
+            abjad.attach(
+                literal,
+                skip,
+            )
+        elif isinstance(value, list):
+            assert all(isinstance(_, str) for _ in value), repr(value)
+            literal = abjad.LilyPondLiteral(value, site="before")
+            abjad.attach(
+                literal,
+                skip,
+            )
+            skip._hide_body = True

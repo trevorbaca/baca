@@ -2280,10 +2280,10 @@ def make_layout_score(
     assert all(isinstance(_, str) for _ in time_signature_fractions)
     if spacing is not None:
         assert isinstance(spacing, _layout.Spacing), repr(spacing)
+        assert spacing_dictionary is None
     if spacing_dictionary is not None:
         assert isinstance(spacing_dictionary, dict), repr(spacing_dictionary)
-    if spacing is not None and spacing.overrides is not None:
-        assert spacing.default is not None
+        assert spacing is None
     assert isinstance(first_measure_number, int), repr(first_measure_number)
     fermata_measure_numbers = fermata_measure_numbers or []
     assert isinstance(fermata_measure_numbers, list), repr(fermata_measure_numbers)
@@ -2294,7 +2294,7 @@ def make_layout_score(
         do_not_move_global_context=True,
         make_breaks_context=bool(breaks),
         make_spacing_annotations_context=bool(spacing),
-        make_spacing_commands_context=bool(spacing),
+        make_spacing_commands_context=bool(spacing) | bool(spacing_dictionary),
     )
     time_signatures = [
         abjad.TimeSignature.from_string(_) for _ in time_signature_fractions
@@ -2321,6 +2321,8 @@ def make_layout_score(
         )
         if spacing.annotate_spacing is False:
             del score["SpacingAnnotations"]
+    elif spacing_dictionary is not None:
+        _layout.apply_spacing_dictionary(score["SpacingCommands"], spacing_dictionary)
     style_anchor_skip(score)
     lilypond_file = _lilypond.file(score)
     _whitespace_leaves(score)
