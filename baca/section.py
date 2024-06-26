@@ -2322,9 +2322,7 @@ def make_layout_score(
             has_anchor_skip=has_anchor_skip,
             measure_count=measure_count,
         )
-    breaks.add_breaks_to_context(
-        score["Breaks"],
-    )
+    breaks.attach_indicators(score["Breaks"])
     offset_to_measure_number = _populate_offset_to_measure_number(
         first_measure_number,
         score["Breaks"],

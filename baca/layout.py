@@ -30,21 +30,49 @@ class Breaks:
                 raise Exception(message)
         self.pages = list(arguments)
 
-    def add_breaks_to_context(self, context):
+    def _iterate_pages(self):
+        first_system = self.pages[0].systems[0]
+        assert first_system.measure == 1, repr(first_system)
+        bol_measure_numbers = []
+        skip_index_to_indicators = {}
+        for page in self.pages:
+            for j, system in enumerate(page.systems):
+                measure_number, indicators = system.measure, []
+                bol_measure_numbers.append(measure_number)
+                skip_index = measure_number - 1
+                assert 0 <= skip_index
+                if j == 0 and 1 < page.number:
+                    literal = abjad.LilyPondLiteral(r"\pageBreak", site="before")
+                    indicators.append(literal)
+                elif 0 < j:
+                    literal = abjad.LilyPondLiteral(r"\break", site="before")
+                    indicators.append(literal)
+                alignment_distances = abjad.sequence.flatten(system.distances, depth=-1)
+                lbsd = LBSD(
+                    alignment_distances=alignment_distances,
+                    y_offset=system.y_offset,
+                    x_offset=system.x_offset,
+                )
+                indicators.append(lbsd)
+                skip_index_to_indicators[skip_index] = indicators
+        return bol_measure_numbers, skip_index_to_indicators
+
+    def attach_indicators(self, context):
         assert context.name == "Breaks"
-        skips = _select.skips(context)
-        measure_count = len(skips)
-        _, skip_index_to_indicators = self._iterate_pages()
-        literal = abjad.LilyPondLiteral(r"\autoPageBreaksOff", site="before")
         abjad.attach(
-            literal,
-            skips[0],
+            abjad.LilyPondLiteral(r"\autoLineBreaksOff", site="before"),
+            context[0],
             tag=None,
         )
-        for skip_index in range(measure_count):
-            skip = skips[skip_index]
+        abjad.attach(
+            abjad.LilyPondLiteral(r"\autoPageBreaksOff", site="before"),
+            context[0],
+            tag=None,
+        )
+        _, skip_index_to_indicators = self._iterate_pages()
+        for i, skip in enumerate(context):
             indicators = skip_index_to_indicators.get(
-                skip_index,
+                i,
                 [abjad.LilyPondLiteral(r"\noBreak", site="before")],
             )
             for indicator in indicators:
@@ -53,34 +81,6 @@ class Breaks:
                     skip,
                     tag=None,
                 )
-
-    def _iterate_pages(self):
-        first_system = self.pages[0].systems[0]
-        assert first_system.measure == 1, repr(first_system)
-        bol_measure_numbers = []
-        skip_index_to_indicators = {}
-        for page_number, page in enumerate(self.pages, start=1):
-            if page.number is not None:
-                if page.number != page_number:
-                    message = f"page number ({page.number}) is not {page_number}."
-                    raise Exception(message)
-            for j, system in enumerate(page.systems):
-                measure_number = system.measure
-                bol_measure_numbers.append(measure_number)
-                skip_index = measure_number - 1
-                assert 0 <= skip_index
-                if j == 0:
-                    literal = abjad.LilyPondLiteral(r"\pageBreak", site="before")
-                else:
-                    literal = abjad.LilyPondLiteral(r"\break", site="before")
-                alignment_distances = abjad.sequence.flatten(system.distances, depth=-1)
-                lbsd = LBSD(
-                    alignment_distances=alignment_distances,
-                    y_offset=system.y_offset,
-                    x_offset=system.x_offset,
-                )
-                skip_index_to_indicators[skip_index] = (literal, lbsd)
-        return bol_measure_numbers, skip_index_to_indicators
 
     def bol_measure_numbers(self):
         bol_measure_numbers, _ = self._iterate_pages()
