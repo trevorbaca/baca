@@ -2266,14 +2266,14 @@ def label_stage_numbers(global_skips, stage_markup):
 
 
 def make_layout_score(
-    breaks,
-    time_signature_fractions,
+    breaks: _layout.Breaks,
+    time_signature_fractions: list[str],
     *,
-    fermata_measure_numbers=None,
-    first_measure_number=1,
-    has_anchor_skip=False,
-    spacing=None,
-    spacing_dictionary=None,
+    fermata_measure_numbers: list[int] | None = None,
+    first_measure_number: int = 1,
+    has_anchor_skip: bool = False,
+    spacing: _layout.Spacing | None = None,
+    spacing_dictionary: dict | None = None,
 ) -> tuple[abjad.LilyPondFile, list[int]]:
     assert isinstance(breaks, _layout.Breaks), repr(breaks)
     assert isinstance(time_signature_fractions, list)
@@ -2287,13 +2287,6 @@ def make_layout_score(
     assert isinstance(first_measure_number, int), repr(first_measure_number)
     fermata_measure_numbers = fermata_measure_numbers or []
     assert isinstance(fermata_measure_numbers, list), repr(fermata_measure_numbers)
-    fermata_measure_numbers = [
-        _ - (first_measure_number - 1) for _ in fermata_measure_numbers
-    ]
-    eol_measure_numbers = []
-    for bol_measure_number in breaks.bol_measure_numbers()[1:]:
-        eol_measure_number = bol_measure_number - 1
-        eol_measure_numbers.append(eol_measure_number)
     # TODO: use _docs only in docs
     score = _docs.make_empty_score(
         do_not_make_music_context=True,
@@ -2313,39 +2306,38 @@ def make_layout_score(
         do_not_attach_time_signatures=True,
         layout=True,
     )
-    measure_count = len(time_signatures)
+    breaks.attach_indicators(score["Breaks"])
     if spacing is not None:
+        fmns = [_ - (first_measure_number - 1) for _ in fermata_measure_numbers]
+        eol_measure_numbers = [_ - 1 for _ in breaks.bol_measure_numbers()[1:]]
+        measure_count = len(time_signatures)
         spacing.attach_indicators(
             score["SpacingCommands"],
             score["SpacingAnnotations"],
             eol_measure_numbers=eol_measure_numbers,
-            fermata_measure_numbers=fermata_measure_numbers,
+            fermata_measure_numbers=fmns,
             has_anchor_skip=has_anchor_skip,
             measure_count=measure_count,
         )
         if spacing.annotate_spacing is False:
             del score["SpacingAnnotations"]
-    breaks.attach_indicators(score["Breaks"])
-    offset_to_measure_number = _populate_offset_to_measure_number(
-        first_measure_number,
-        score["Breaks"],
-    )
     style_anchor_skip(score)
     lilypond_file = _lilypond.file(score)
     _whitespace_leaves(score)
     _add_container_identifiers(score, None)
     _remove_layout_tags(score)
+    offset_to_measure_number = _populate_offset_to_measure_number(
+        first_measure_number,
+        score["Breaks"],
+    )
     _comment_measure_numbers(first_measure_number, offset_to_measure_number, score)
-    score = lilypond_file["Score"]
     for component in abjad.iterate.components(score):
         assert component.tag is not None
         component.tag = component.tag.retain_shoutcase()
         for wrapper in abjad.get.wrappers(component):
             wrapper.tag = wrapper.tag.retain_shoutcase()
-    bol_measure_numbers = [
-        _ + first_measure_number - 1 for _ in breaks.bol_measure_numbers()
-    ]
-    return lilypond_file, bol_measure_numbers
+    bolmns = [_ + first_measure_number - 1 for _ in breaks.bol_measure_numbers()]
+    return lilypond_file, bolmns
 
 
 @_build.timed("postprocess")
