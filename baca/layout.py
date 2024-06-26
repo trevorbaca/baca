@@ -128,9 +128,10 @@ class Spacing:
 
     default: tuple[int, int]
     annotate_spacing: bool = False
-    forbid_new_spacing_section: list[int] = dataclasses.field(default_factory=list)
-    lax_spacing_section: list[int] = dataclasses.field(default_factory=list)
+    empty_spacing_sections: list[int] = dataclasses.field(default_factory=list)
+    lax_spacing_sections: list[int] = dataclasses.field(default_factory=list)
     overrides: list["Override"] = dataclasses.field(default_factory=list)
+    vanilla_spacing_sections: list[int] = dataclasses.field(default_factory=list)
 
     def attach_indicators(
         self,
@@ -167,9 +168,8 @@ class Spacing:
             elif isinstance(override.measures, list):
                 measure_numbers.extend(override.measures)
             else:
-                raise TypeError(
-                    f"override must be int, pair or list (not {override.measures!r})."
-                )
+                message = f"must be int, pair, list (not {override.measures!r})."
+                raise TypeError(message)
             for n in measure_numbers:
                 if n < 1:
                     message = f"Nonpositive measure number ({n}) not allowed."
@@ -192,12 +192,15 @@ class Spacing:
                 item = measures[measure_number]
                 if isinstance(item, tuple):
                     pair = item
+                elif item == "vanilla":
+                    pair = "vanilla"
                 else:
                     assert isinstance(item, abjad.Duration), repr(item)
                     pair = item.pair
             else:
                 pair = self.default
-            assert isinstance(pair, tuple), repr(pair)
+            if not isinstance(pair, tuple):
+                assert pair == "vanilla"
             eol_adjusted = False
             if (measure_number in eol_measure_numbers) or (
                 measure_number == measure_count and not has_anchor_skip
@@ -207,24 +210,26 @@ class Spacing:
                 denominator = pair[1] * magic_lilypond_eol_adjustment.denominator
                 pair = numerator, denominator
                 eol_adjusted = True
-            forbid_new_spacing_section = False
-            if measure_number in self.forbid_new_spacing_section:
-                forbid_new_spacing_section = True
             spacing_section = SpacingSection(
+                empty=measure_number in self.empty_spacing_sections,
+                lax=measure_number in self.lax_spacing_sections,
                 pair=pair,
-                forbid_new_spacing_section=forbid_new_spacing_section,
-                lax_spacing_section=measure_number in self.lax_spacing_section,
+                vanilla=measure_number in self.vanilla_spacing_sections,
             )
             abjad.attach(
                 spacing_section,
                 spacing_commands_skip,
                 tag=_helpers.function_name(_frame(), n=1),
             )
-            if forbid_new_spacing_section is True:
+            if self.annotate_spacing is False:
                 continue
             if spacing_annotations_context is None:
                 continue
-            if self.annotate_spacing is False:
+            if measure_number in self.empty_spacing_sections:
+                continue
+            if measure_number in self.lax_spacing_sections:
+                continue
+            if measure_number in self.vanilla_spacing_sections:
                 continue
             if eol_adjusted:
                 multiplier = magic_lilypond_eol_adjustment
@@ -260,24 +265,24 @@ class Spacing:
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class SpacingSection:
 
-    pair: tuple[int, int]
-    forbid_new_spacing_section: bool = False
-    lax_spacing_section: bool = False
+    pair: tuple[int, int] | None = None
+    empty: bool = False
+    lax: bool = False
+    vanilla: bool = False
 
     context: typing.ClassVar[str] = "Score"
     persistent: typing.ClassVar[bool] = True
 
-    def __post_init__(self):
-        assert isinstance(self.pair, tuple), repr(self.pair)
-
     def _get_contributions(self, leaf=None):
         contributions = abjad.ContributionsBySite()
-        if self.forbid_new_spacing_section is True:
+        if self.empty is True:
             pass
-        elif self.lax_spacing_section is True:
+        elif self.lax is True:
             numerator, denominator = self.pair
             string = rf"\baca-new-lax-spacing-section #{numerator} #{denominator}"
             contributions.before.commands.append(string)
+        elif self.vanilla is True:
+            contributions.before.commands.append(r"\baca-new-vanilla-spacing-section")
         else:
             numerator, denominator = self.pair
             string = rf"\baca-new-strict-spacing-section #{numerator} #{denominator}"
