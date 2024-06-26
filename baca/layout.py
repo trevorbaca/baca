@@ -20,7 +20,7 @@ fermata_measure_duration = abjad.Duration(1, 4)
 @dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
 class Breaks:
 
-    pages: typing.List["Page"] = dataclasses.field(default_factory=list)
+    pages: list["Page"] = dataclasses.field(default_factory=list)
 
     def __init__(self, *arguments: "Page"):
         for page_number, argument in enumerate(arguments, start=1):
@@ -110,9 +110,11 @@ class Override:
     duration: tuple[int, int]
 
 
+@dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
 class Page:
 
-    __slots__ = ("number", "systems")
+    number: int
+    systems: list["System"] = dataclasses.field(default_factory=list)
 
     def __init__(self, number: int, *systems):
         assert isinstance(number, int), repr(number)
@@ -121,32 +123,14 @@ class Page:
         self.systems = list(systems)
 
 
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Spacing:
 
-    __slots__ = (
-        "annotate_spacing",
-        "default",
-        "forbid_new_spacing_section",
-        "lax_spacing_section",
-        "overrides",
-    )
-
-    def __init__(
-        self,
-        default: tuple[int, int],
-        *,
-        annotate_spacing: bool = False,
-        forbid_new_spacing_section: list[int] | None = None,
-        lax_spacing_section: list[int] | None = None,
-        overrides: list["Override"] | None = None,
-    ):
-        assert isinstance(default, tuple), repr(default)
-        self.default = default
-        assert isinstance(annotate_spacing, bool), repr(annotate_spacing)
-        self.annotate_spacing = annotate_spacing
-        self.forbid_new_spacing_section = forbid_new_spacing_section or []
-        self.lax_spacing_section = lax_spacing_section or []
-        self.overrides = overrides
+    default: tuple[int, int]
+    annotate_spacing: bool = False
+    forbid_new_spacing_section: list[int] = dataclasses.field(default_factory=list)
+    lax_spacing_section: list[int] = dataclasses.field(default_factory=list)
+    overrides: list["Override"] = dataclasses.field(default_factory=list)
 
     def attach_indicators(
         self,
