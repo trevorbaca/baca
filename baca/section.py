@@ -2314,7 +2314,7 @@ def make_layout_score(
     )
     measure_count = len(time_signatures)
     if spacing is not None:
-        spacing.add_spacing_to_contexts(
+        spacing.attach_indicators(
             score["SpacingCommands"],
             score["SpacingAnnotations"],
             eol_measure_numbers=eol_measure_numbers,
@@ -2322,6 +2322,8 @@ def make_layout_score(
             has_anchor_skip=has_anchor_skip,
             measure_count=measure_count,
         )
+        if spacing.annotate_spacing is False:
+            del score["SpacingAnnotations"]
     breaks.attach_indicators(score["Breaks"])
     offset_to_measure_number = _populate_offset_to_measure_number(
         first_measure_number,

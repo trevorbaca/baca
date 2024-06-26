@@ -124,6 +124,7 @@ class Page:
 class Spacing:
 
     __slots__ = (
+        "annotate_spacing",
         "default",
         "forbid_new_spacing_section",
         "lax_spacing_section",
@@ -133,17 +134,21 @@ class Spacing:
     def __init__(
         self,
         default: tuple[int, int],
+        *,
+        annotate_spacing: bool = False,
         forbid_new_spacing_section: list[int] | None = None,
         lax_spacing_section: list[int] | None = None,
         overrides: list["Override"] | None = None,
     ):
         assert isinstance(default, tuple), repr(default)
         self.default = default
+        assert isinstance(annotate_spacing, bool), repr(annotate_spacing)
+        self.annotate_spacing = annotate_spacing
         self.forbid_new_spacing_section = forbid_new_spacing_section or []
         self.lax_spacing_section = lax_spacing_section or []
         self.overrides = overrides
 
-    def add_spacing_to_contexts(
+    def attach_indicators(
         self,
         spacing_commands_context,
         spacing_annotations_context=None,
@@ -234,6 +239,8 @@ class Spacing:
             if forbid_new_spacing_section is True:
                 continue
             if spacing_annotations_context is None:
+                continue
+            if self.annotate_spacing is False:
                 continue
             if eol_adjusted:
                 multiplier = magic_lilypond_eol_adjustment
