@@ -293,13 +293,13 @@ def clef_shift(
     return wrappers
 
 
-def clef_whiteout(argument, n: int | float) -> list[abjad.Wrapper]:
+def clef_whiteout_true(argument) -> list[abjad.Wrapper]:
     return _override(
         _frame(),
         argument,
         grob="Clef",
         attribute="whiteout",
-        value=n,
+        value=True,
         context="Staff",
     )
 
@@ -1587,6 +1587,36 @@ def time_signature_transparent(argument) -> list[abjad.Wrapper]:
         attribute="transparent",
         value=True,
         context="Score",
+    )
+
+
+def tpa_whiteout_true(argument) -> list[abjad.Wrapper]:
+    return _override(
+        _frame(),
+        argument,
+        grob="TrillPitchAccidental",
+        attribute="whiteout",
+        value=True,
+    )
+
+
+def tph_whiteout_true(argument) -> list[abjad.Wrapper]:
+    return _override(
+        _frame(),
+        argument,
+        grob="TrillPitchHead",
+        attribute="whiteout",
+        value=True,
+    )
+
+
+def tpp_whiteout_true(argument) -> list[abjad.Wrapper]:
+    return _override(
+        _frame(),
+        argument,
+        grob="TrillPitchParentheses",
+        attribute="whiteout",
+        value=True,
     )
 
 
