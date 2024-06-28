@@ -919,6 +919,7 @@ def rehearsal_mark_extra_offset(
     argument,
     pair: tuple[int | float, int | float],
     *,
+    after: bool = False,
     context: str = "Score",
 ) -> list[abjad.Wrapper]:
     return _override(
@@ -927,6 +928,7 @@ def rehearsal_mark_extra_offset(
         "RehearsalMark",
         "extra_offset",
         f"#'({pair[0]} . {pair[1]})",
+        after=after,
         context=context,
     )
 
