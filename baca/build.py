@@ -1351,7 +1351,10 @@ def handle_build_tags(_sections_directory):
         # TODO: can't this be simplified to just baca.tags.RIGHT_BROKEN?
         #       Because right-broken things should always deactivate?
         if baca.tags.SPANNER_STOP in tags and baca.tags.RIGHT_BROKEN in tags:
-            return True
+            # return True
+            # 2024-06-28 changed to false for wttc cello part;
+            # TODO: maybe should stay this way permanently?
+            return False
         if baca.tags.HIDE_TO_JOIN_BROKEN_SPANNERS in tags:
             return True
         return False
