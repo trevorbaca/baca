@@ -1164,7 +1164,7 @@ def _make_global_rests(global_rests, time_signatures):
 
 
 def _make_global_skips(
-    global_skips,
+    context,
     time_signatures,
     *,
     append_anchor_skip=False,
@@ -1176,7 +1176,7 @@ def _make_global_skips(
             multiplier=time_signature.pair,
             tag=_helpers.function_name(_frame(), n=1),
         )
-        global_skips.append(skip)
+        context.append(skip)
         if attach_time_signatures is True:
             abjad.attach(
                 time_signature,
@@ -1189,12 +1189,10 @@ def _make_global_skips(
         tag = tag.append(_tags.ANCHOR_SKIP)
         skip = abjad.Skip(1, multiplier=(1, 4), tag=tag)
         abjad.attach(_enums.ANCHOR_SKIP, skip)
-        global_skips.append(skip)
-        if attach_time_signatures is True and time_signature != abjad.TimeSignature(
-            (1, 4)
-        ):
-            time_signature = abjad.TimeSignature((1, 4))
-            abjad.attach(time_signature, skip, context="Score", tag=None)
+        context.append(skip)
+        anchor_time_signature = abjad.TimeSignature((1, 4))
+        if attach_time_signatures is True and time_signature != anchor_time_signature:
+            abjad.attach(anchor_time_signature, skip, context="Score", tag=None)
 
 
 def _mark_section_number(global_skips, section_number):
@@ -3090,39 +3088,40 @@ def span_metronome_marks(
 
 
 def style_anchor_skip(score):
-    if "Skips" not in score:
-        return
-    global_skips = score["Skips"]
-    skip = abjad.get.leaf(global_skips, -1)
-    if not abjad.get.has_indicator(skip, _enums.ANCHOR_SKIP):
-        return
-    for literal in abjad.get.indicators(skip, abjad.LilyPondLiteral):
-        if r"\baca-time-signature-color" in literal.argument:
-            abjad.detach(literal, skip)
-    tag = _helpers.function_name(_frame(), n=1)
-    tag = tag.append(_tags.ANCHOR_SKIP)
-    _append_tag_to_wrappers(skip, tag)
-    if abjad.get.has_indicator(skip, abjad.TimeSignature):
-        tag = _helpers.function_name(_frame(), n=2)
+    anchor_skips = []
+    for context in abjad.select.components(score, abjad.Context):
+        if abjad.get.has_indicator(context[-1], _enums.ANCHOR_SKIP):
+            anchor_skips.append(context[-1])
+    for anchor_skip in anchor_skips:
+        for literal in abjad.get.indicators(anchor_skip, abjad.LilyPondLiteral):
+            if r"\baca-time-signature-color" in literal.argument:
+                abjad.detach(literal, anchor_skip)
+        tag = _helpers.function_name(_frame(), n=1)
+        tag = tag.append(_tags.ANCHOR_SKIP)
+        _append_tag_to_wrappers(anchor_skip, tag)
+        if abjad.get.has_indicator(anchor_skip, abjad.TimeSignature):
+            tag = _helpers.function_name(_frame(), n=2)
+            tag = tag.append(_tags.ANCHOR_SKIP)
+            abjad.attach(
+                abjad.LilyPondLiteral(
+                    r"\baca-time-signature-transparent", site="before"
+                ),
+                anchor_skip,
+                tag=tag,
+            )
+        tag = _helpers.function_name(_frame(), n=3)
         tag = tag.append(_tags.ANCHOR_SKIP)
         abjad.attach(
-            abjad.LilyPondLiteral(r"\baca-time-signature-transparent", site="before"),
-            skip,
+            abjad.LilyPondLiteral(
+                [
+                    r"\once \override Score.BarLine.transparent = ##t",
+                    r"\once \override Score.SpanBar.transparent = ##t",
+                ],
+                site="after",
+            ),
+            anchor_skip,
             tag=tag,
         )
-    tag = _helpers.function_name(_frame(), n=3)
-    tag = tag.append(_tags.ANCHOR_SKIP)
-    abjad.attach(
-        abjad.LilyPondLiteral(
-            [
-                r"\once \override Score.BarLine.transparent = ##t",
-                r"\once \override Score.SpanBar.transparent = ##t",
-            ],
-            site="after",
-        ),
-        skip,
-        tag=tag,
-    )
 
 
 def transpose_score(score):
