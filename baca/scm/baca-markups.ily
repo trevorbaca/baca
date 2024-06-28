@@ -425,6 +425,7 @@ baca-null-markup = \markup \null
 baca-rehearsal-mark-markup = #(
     define-music-function (string font-size) (string? number?)
     #{
+    - \tweak X-extent ##f
     - \tweak font-size #font-size
     - \markup
     \with-dimensions-from \null
