@@ -616,6 +616,19 @@ def laissez_vibrer_tie_direction_up(argument) -> list[abjad.Wrapper]:
     )
 
 
+def metronome_mark_extra_offset(
+    argument, pair: tuple, *, context: str = "Score"
+) -> list[abjad.Wrapper]:
+    return _override(
+        _frame(),
+        argument,
+        grob="MetronomeMark",
+        attribute="extra_offset",
+        value=pair,
+        context=context,
+    )
+
+
 def mmrest_color(argument, color: str = "#red") -> list[abjad.Wrapper]:
     return _override(
         _frame(),
