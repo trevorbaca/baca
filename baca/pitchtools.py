@@ -906,7 +906,7 @@ def deviation(
 
         >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
+        >>> baca.section.set_up_score(score, time_signatures())
         >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(time_signatures())
         >>> voice.extend(music)
@@ -981,7 +981,7 @@ def displacement(argument, displacements: list[int]) -> None:
 
         >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
+        >>> baca.section.set_up_score(score, time_signatures())
         >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(time_signatures())
         >>> voice.extend(music)
@@ -1313,7 +1313,7 @@ def pitch(
 
         >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
+        >>> baca.section.set_up_score(score, time_signatures())
         >>> voice = score["Music"]
         >>> time_signatures = time_signatures()
         >>> durations = [_.duration for _ in time_signatures]
@@ -1411,7 +1411,7 @@ def pitches(
 
         >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
+        >>> baca.section.set_up_score(score, time_signatures())
         >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(time_signatures())
         >>> voice.extend(music)
@@ -1473,7 +1473,7 @@ def pitches(
 
         >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
+        >>> baca.section.set_up_score(score, time_signatures())
         >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(time_signatures())
         >>> voice.extend(music)
@@ -1535,7 +1535,7 @@ def pitches(
 
         >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
+        >>> baca.section.set_up_score(score, time_signatures())
         >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(time_signatures())
         >>> voice.extend(music)
@@ -1696,7 +1696,7 @@ def register(
 
         >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
+        >>> baca.section.set_up_score(score, time_signatures())
         >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(time_signatures())
         >>> voice.extend(music)
@@ -1970,7 +1970,7 @@ def register(
         >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
         >>> time_signatures = baca.section.wrap(time_signatures)
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
+        >>> baca.section.set_up_score(score, time_signatures())
         >>> pitches = [6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]
         >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(time_signatures())
@@ -2064,7 +2064,7 @@ def register(
         >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
         >>> time_signatures = baca.section.wrap(time_signatures)
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
+        >>> baca.section.set_up_score(score, time_signatures())
         >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(time_signatures())
         >>> voice.extend(music)
@@ -2158,7 +2158,7 @@ def register(
         >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
         >>> time_signatures = baca.section.wrap(time_signatures)
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
+        >>> baca.section.set_up_score(score, time_signatures())
         >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(time_signatures())
         >>> voice.extend(music)
@@ -2252,7 +2252,7 @@ def register(
         >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
         >>> time_signatures = baca.section.wrap(time_signatures)
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
+        >>> baca.section.set_up_score(score, time_signatures())
         >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(time_signatures())
         >>> voice.extend(music)
@@ -2346,7 +2346,7 @@ def register(
         >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = 4 * [(4, 8), (3, 8)]
         >>> time_signatures = baca.section.wrap(time_signatures)
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
+        >>> baca.section.set_up_score(score, time_signatures())
         >>> voice = score["Music"]
         >>> music = baca.make_even_divisions(time_signatures())
         >>> voice.extend(music)
@@ -2643,7 +2643,7 @@ def replace_with_clusters(
 
         >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
+        >>> baca.section.set_up_score(score, time_signatures())
         >>> voice = score["Music"]
         >>> music = baca.make_notes(time_signatures(), repeat_ties=True)
         >>> voice.extend(music)
@@ -2715,7 +2715,7 @@ def replace_with_clusters(
 
         >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
+        >>> baca.section.set_up_score(score, time_signatures())
         >>> voice = score["Music"]
         >>> music = baca.make_notes(time_signatures(), repeat_ties=True)
         >>> voice.extend(music)
@@ -2787,7 +2787,7 @@ def replace_with_clusters(
 
         >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
+        >>> baca.section.set_up_score(score, time_signatures())
         >>> voice = score["Music"]
         >>> music = baca.make_notes(time_signatures(), repeat_ties=True)
         >>> voice.extend(music)
@@ -2858,7 +2858,7 @@ def replace_with_clusters(
 
         >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
+        >>> baca.section.set_up_score(score, time_signatures())
         >>> voice = score["Music"]
         >>> music = baca.make_notes(time_signatures(), repeat_ties=True)
         >>> voice.extend(music)
@@ -2929,7 +2929,7 @@ def replace_with_clusters(
 
         >>> score = baca.docs.make_empty_score(1)
         >>> time_signatures = baca.section.wrap([(4, 8), (3, 8), (4, 8), (3, 8)])
-        >>> baca.section.set_up_score(score, time_signatures(), docs=True)
+        >>> baca.section.set_up_score(score, time_signatures())
         >>> voice = score["Music"]
         >>> music = baca.make_notes(time_signatures(), repeat_ties=True)
         >>> voice.extend(music)

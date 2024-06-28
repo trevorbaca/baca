@@ -2302,7 +2302,6 @@ def make_layout_score(
         time_signatures,
         append_anchor_skip=has_anchor_skip,
         do_not_attach_time_signatures=True,
-        layout=True,
     )
     breaks.attach_indicators(score["Breaks"])
     if spacing is not None:
@@ -2658,11 +2657,7 @@ def set_up_score(
     *,
     append_anchor_skip: bool = False,
     do_not_attach_time_signatures: bool = False,
-    # TODO: remove unused docs=False keyword
-    docs: bool = False,
     first_measure_number: int = 1,
-    # TODO: remove unused layout=False keyword
-    layout: bool = False,
     manifests: dict | None = None,
     score_persistent_indicators: list[_memento.Memento] | None = None,
 ) -> None:
