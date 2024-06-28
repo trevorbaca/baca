@@ -341,7 +341,7 @@ def _externalize_music_ly_path(music_ly):
 
 
 def _handle_edition_tags(
-    text: str, messages: list[str], directory_name: str, my_name: str
+    text: str, messages: list[str], build_identifier: str, build_type: str
 ) -> str:
     """
     Handles edition tags.
@@ -367,16 +367,25 @@ def _handle_edition_tags(
         deactivated for editions other than me; then we activate anything is tagged
         specifically for me.
 
+    Also:
+
+        For scores, build_identifier should be something like
+            TABLOID_SCORE
+            ARCH_A_SCORE
+        For parts, build_identifier should be something like
+            LETTER_PARTS_CELLO
+            LETTER_PARTS_TRUMPET_3
+
     """
     assert isinstance(text, str), repr(text)
-    assert isinstance(directory_name, str), repr(directory_name)
-    assert my_name in ("SECTION", "SCORE", "PARTS"), repr(my_name)
+    assert abjad.string.is_shout_case(build_identifier), repr(build_identifier)
+    assert not build_identifier.endswith("_PARTS"), repr(build_identifier)
+    assert build_type in ("SECTION", "SCORE", "PARTS"), repr(build_type)
     messages.append("Handling edition tags ...")
-    this_edition = abjad.Tag(f"+{my_name}")
-    not_this_edition = abjad.Tag(f"-{my_name}")
-    directory_name = abjad.string.to_shout_case(directory_name)
-    this_directory = abjad.Tag(f"+{directory_name}")
-    not_this_directory = abjad.Tag(f"-{directory_name}")
+    this_edition = abjad.Tag(f"+{build_type}")
+    not_this_edition = abjad.Tag(f"-{build_type}")
+    this_directory = abjad.Tag(f"+{build_identifier}")
+    not_this_directory = abjad.Tag(f"-{build_identifier}")
 
     def _deactivate(tags):
         if not_this_edition in tags:
@@ -492,7 +501,7 @@ def _handle_section_tags(section_directory):
         _tags_file = music_ly.with_name(f".{name}.tags")
         messages = []
         text = path.read_text()
-        text = _handle_edition_tags(text, messages, section_directory.name, "SECTION")
+        text = _handle_edition_tags(text, messages, "SECTION", "SECTION")
         text = _handle_fermata_bar_lines(
             text, messages, bol_measure_numbers, final_measure_number
         )
@@ -1348,7 +1357,14 @@ def handle_build_tags(_sections_directory):
         return False
 
     build_directory = _sections_directory.parent
-    assert build_directory.parent.name == "builds", repr(build_directory)
+    if "score" in str(build_directory):
+        assert build_directory.parent.name == "builds", repr(build_directory)
+        build_identifier = abjad.string.to_shout_case(build_directory.name)
+    else:
+        assert "-parts" in str(build_directory)
+        assert build_directory.parent.parent.name == "builds", repr(build_directory)
+        build_identifier = build_directory.parent.name + "_" + build_directory.name
+        build_identifier = abjad.string.to_shout_case(build_identifier)
     for file in sorted(_sections_directory.glob("*ly")):
         bol_measure_numbers = baca.path.get_metadata(build_directory).get(
             "bol_measure_numbers"
@@ -1360,12 +1376,12 @@ def handle_build_tags(_sections_directory):
         assert "sections" not in file.parts
         assert "builds" in file.parts
         if "-score" in str(file):
-            my_name = "SCORE"
+            build_type = "SCORE"
         else:
             assert "-parts" in str(file)
-            my_name = "PARTS"
+            build_type = "PARTS"
         text = file.read_text()
-        text = _handle_edition_tags(text, messages, "_sections", my_name)
+        text = _handle_edition_tags(text, messages, build_identifier, build_type)
         text = _handle_fermata_bar_lines(
             text, messages, bol_measure_numbers, final_measure_number
         )
@@ -1440,79 +1456,11 @@ def handle_build_tags(_sections_directory):
 
 
 def handle_part_tags(_sections_directory, part_identifier=None):
-    if not _sections_directory.parent.name.endswith("-parts"):
+    if not _sections_directory.parent.parent.name.endswith("-parts"):
         print_always("Must call in part directory ...")
         sys.exit(1)
-
-    """
-    def _activate(
-        path,
-        tag,
-        *,
-        deactivate=False,
-        name=None,
-    ):
-        if isinstance(tag, str):
-            tag_ = abjad.Tag(tag)
-        else:
-            assert callable(tag)
-            tag_ = tag
-        assert isinstance(tag_, abjad.Tag) or callable(tag_)
-        if deactivate:
-            result = baca.path.deactivate(path, tag_, name=name)
-            assert result is not None
-            count, skipped, messages = result
-        else:
-            result = baca.path.activate(path, tag_, name=name)
-            assert result is not None
-            count, skipped, messages = result
-        for message in messages:
-            print_tags(message)
-
-    def _deactivate(
-        path,
-        tag,
-        *,
-        name=None,
-    ):
-        _activate(
-            path,
-            tag,
-            name=name,
-            deactivate=True,
-        )
-    """
-
-    def _parse_part_identifier(path):
-        if path.suffix == ".ly":
-            part_identifier = None
-            with path.open("r") as pointer:
-                for line in pointer.readlines():
-                    if line.startswith("% part_identifier = "):
-                        line = line.strip("% part_identifier = ")
-                        part_identifier = eval(line)
-                        return part_identifier
-        elif path.name.endswith("layout.py"):
-            part_identifier = None
-            with path.open("r") as pointer:
-                for line in pointer.readlines():
-                    if line.startswith("part_identifier = "):
-                        line = line.strip("part_identifier = ")
-                        part_identifier = eval(line)
-                        return part_identifier
-        else:
-            raise TypeError(path)
-
     for file in sorted(_sections_directory.glob("*ily")):
         messages = []
-        assert "secitons" not in file.parts
-        assert "builds" in file.parts
-        if "-score" in str(file):
-            my_name = "SCORE"
-        else:
-            assert "-parts" in str(file)
-            my_name = "PARTS"
-        assert my_name == "PARTS"
         text = file.read_text()
         text = show_tag(
             text,
@@ -1608,27 +1556,22 @@ def interpret_build_music(
     keep_temporary_files=False,
     skip_temporary_files=False,
 ):
-    """
-    Interprets build directory music.ly file.
-
-    Collects temporary files and handles tags.
-    """
     build_type = None
     if build_directory.name.endswith("-score"):
-        build_type = "score"
+        build_type = "SCORE"
     if build_directory.parent.name.endswith("-parts"):
-        build_type = "part"
+        build_type = "PART"
     if build_type is None:
         print_always("Must call script in score directory or part directory ...")
         sys.exit(1)
     music_ly = build_directory / "music.ly"
     if not music_ly.is_file():
         raise Exception(f"Missing {baca.path.trim(music_ly)} ...")
-    if build_type == "score":
+    if build_type == "SCORE":
         _sections_directory = build_directory / "_sections"
     else:
-        assert build_type == "part"
-        _sections_directory = build_directory.parent / "_sections"
+        assert build_type == "PART"
+        _sections_directory = build_directory / "_sections"
     if skip_temporary_files:
         print_file_handling("Skipping temporary files ...")
     else:
