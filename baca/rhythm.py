@@ -375,7 +375,7 @@ class AfterGrace:
             temporary_voice = abjad.Voice(grace_leaves, name="TemporaryVoice")
             abjad.beam(grace_leaves)
             temporary_voice[:] = []
-        agc = abjad.AfterGraceContainer(grace_leaves, tag=tag)
+        agc = abjad.AfterGraceContainer(grace_leaves, fraction=(15, 16), tag=tag)
         last_leaf = abjad.get.leaf(main_components, -1)
         abjad.attach(agc, last_leaf)
         return main_components
@@ -541,7 +541,11 @@ class IndependentAfterGrace:
             temporary_voice = abjad.Voice(grace_leaves, name="TemporaryVoice")
             abjad.beam(grace_leaves)
             temporary_voice[:] = []
-        iagc = abjad.IndependentAfterGraceContainer(grace_leaves, tag=tag)
+        iagc = abjad.IndependentAfterGraceContainer(
+            grace_leaves,
+            fraction=(15, 16),
+            tag=tag,
+        )
         main_components.append(iagc)
         return main_components
 
