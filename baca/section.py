@@ -1736,8 +1736,6 @@ def _style_framed_notes(score):
             leaf.multiplier = multiplier.pair
             literal = abjad.LilyPondLiteral(r"\once \override Accidental.stencil = ##f")
             abjad.attach(literal, leaf, tag=tag)
-            literal = abjad.LilyPondLiteral(r"\once \override NoteHead.stencil = ##f")
-            abjad.attach(literal, leaf, tag=tag)
             literal = abjad.LilyPondLiteral(r"\once \override Stem.thickness = 6")
             abjad.attach(literal, leaf, tag=tag)
 
