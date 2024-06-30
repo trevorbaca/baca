@@ -1169,13 +1169,19 @@ def _make_global_skips(
     *,
     append_anchor_skip=False,
     attach_time_signatures=False,
+    measure_initial_grace_notes=None,
 ):
-    for time_signature in time_signatures:
+    measure_initial_grace_notes = measure_initial_grace_notes or {}
+    for n, time_signature in enumerate(time_signatures, start=1):
         skip = abjad.Skip(
             1,
             multiplier=time_signature.pair,
             tag=_helpers.function_name(_frame(), n=1),
         )
+        grace_string = measure_initial_grace_notes.get(n, None)
+        if grace_string is not None:
+            assert "grace" in grace_string, repr(grace_string)
+            skip._measure_initial_grace_note = grace_string
         context.append(skip)
         if attach_time_signatures is True:
             abjad.attach(
@@ -2268,21 +2274,23 @@ def make_layout_score(
     fermata_measure_numbers: list[int] | None = None,
     first_measure_number: int = 1,
     has_anchor_skip: bool = False,
+    measure_initial_grace_notes: dict | None = None,
     spacing: _layout.Spacing | None = None,
     spacing_dictionary: dict | None = None,
 ) -> tuple[abjad.LilyPondFile, list[int]]:
     assert isinstance(breaks, _layout.Breaks), repr(breaks)
     assert isinstance(time_signature_fractions, list)
     assert all(isinstance(_, str) for _ in time_signature_fractions)
+    assert isinstance(first_measure_number, int), repr(first_measure_number)
+    fermata_measure_numbers = fermata_measure_numbers or []
+    assert isinstance(fermata_measure_numbers, list), repr(fermata_measure_numbers)
+    measure_initial_grace_notes = measure_initial_grace_notes or {}
     if spacing is not None:
         assert isinstance(spacing, _layout.Spacing), repr(spacing)
         assert spacing_dictionary is None
     if spacing_dictionary is not None:
         assert isinstance(spacing_dictionary, dict), repr(spacing_dictionary)
         assert spacing is None
-    assert isinstance(first_measure_number, int), repr(first_measure_number)
-    fermata_measure_numbers = fermata_measure_numbers or []
-    assert isinstance(fermata_measure_numbers, list), repr(fermata_measure_numbers)
     # TODO: use _docs only in docs
     score = _docs.make_empty_score(
         do_not_make_music_context=True,
@@ -2300,6 +2308,7 @@ def make_layout_score(
         time_signatures,
         append_anchor_skip=has_anchor_skip,
         do_not_attach_time_signatures=True,
+        measure_initial_grace_notes=measure_initial_grace_notes,
     )
     breaks.attach_indicators(score["Breaks"])
     if spacing is not None:
@@ -2657,10 +2666,12 @@ def set_up_score(
     do_not_attach_time_signatures: bool = False,
     first_measure_number: int = 1,
     manifests: dict | None = None,
+    measure_initial_grace_notes: dict | None = None,
     score_persistent_indicators: list[_memento.Memento] | None = None,
 ) -> None:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     manifests = manifests or {}
+    measure_initial_grace_notes = measure_initial_grace_notes or {}
     assert isinstance(manifests, dict), repr(manifests)
     if "TimeSignatures" in score:
         context = score["TimeSignatures"]
@@ -2669,6 +2680,7 @@ def set_up_score(
             time_signatures,
             append_anchor_skip=append_anchor_skip,
             attach_time_signatures=True,
+            measure_initial_grace_notes=measure_initial_grace_notes,
         )
         if "Skips" not in score:
             _attach_measure_number_spanners(first_measure_number, context)
@@ -2680,6 +2692,7 @@ def set_up_score(
             time_signatures,
             append_anchor_skip=append_anchor_skip,
             attach_time_signatures=not do_not_attach_time_signatures,
+            measure_initial_grace_notes=measure_initial_grace_notes,
         )
         _attach_measure_number_spanners(first_measure_number, context)
     if "Breaks" in score:
@@ -2688,6 +2701,7 @@ def set_up_score(
             context,
             time_signatures,
             append_anchor_skip=append_anchor_skip,
+            measure_initial_grace_notes=measure_initial_grace_notes,
         )
     if "SpacingCommands" in score:
         context = score["SpacingCommands"]
@@ -2695,6 +2709,7 @@ def set_up_score(
             context,
             time_signatures,
             append_anchor_skip=append_anchor_skip,
+            measure_initial_grace_notes=measure_initial_grace_notes,
         )
     if "SpacingAnnotations" in score:
         context = score["SpacingAnnotations"]
@@ -2702,6 +2717,7 @@ def set_up_score(
             context,
             time_signatures,
             append_anchor_skip=append_anchor_skip,
+            measure_initial_grace_notes=measure_initial_grace_notes,
         )
     if "Rests" in score:
         _make_global_rests(score["Rests"], time_signatures)
