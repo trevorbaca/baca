@@ -1178,10 +1178,10 @@ def _make_global_skips(
             multiplier=time_signature.pair,
             tag=_helpers.function_name(_frame(), n=1),
         )
-        grace_string = measure_initial_grace_notes.get(n, None)
-        if grace_string is not None:
-            assert "grace" in grace_string, repr(grace_string)
-            skip._measure_initial_grace_note = grace_string
+        grace_strings = measure_initial_grace_notes.get(n, None)
+        if grace_strings is not None:
+            assert "grace" in repr(grace_strings), repr(grace_strings)
+            skip._measure_initial_grace_note = grace_strings
         context.append(skip)
         if attach_time_signatures is True:
             abjad.attach(
