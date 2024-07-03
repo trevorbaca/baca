@@ -94,7 +94,7 @@ baca-new-strict-spacing-section = #(
     #}
     )
 
-baca-new-vanilla-spacing-section = #(
+baca-new-natural-spacing-section = #(
     define-music-function (music) (ly:music?)
     #{
     \set Score.proportionalNotationDuration = ##f

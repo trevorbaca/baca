@@ -131,7 +131,7 @@ class Spacing:
     empty_spacing_sections: list[int] = dataclasses.field(default_factory=list)
     lax_spacing_sections: list[int] = dataclasses.field(default_factory=list)
     overrides: list["Override"] = dataclasses.field(default_factory=list)
-    vanilla_spacing_sections: list[int] = dataclasses.field(default_factory=list)
+    natural_spacing_sections: list[int] = dataclasses.field(default_factory=list)
 
     def attach_indicators(
         self,
@@ -192,15 +192,15 @@ class Spacing:
                 item = measures[measure_number]
                 if isinstance(item, tuple):
                     pair = item
-                elif item == "vanilla":
-                    pair = "vanilla"
+                elif item == "natural":
+                    pair = "natural"
                 else:
                     assert isinstance(item, abjad.Duration), repr(item)
                     pair = item.pair
             else:
                 pair = self.default
             if not isinstance(pair, tuple):
-                assert pair == "vanilla"
+                assert pair == "natural"
             eol_adjusted = False
             if (measure_number in eol_measure_numbers) or (
                 measure_number == measure_count and not has_anchor_skip
@@ -214,7 +214,7 @@ class Spacing:
                 empty=measure_number in self.empty_spacing_sections,
                 lax=measure_number in self.lax_spacing_sections,
                 pair=pair,
-                vanilla=measure_number in self.vanilla_spacing_sections,
+                natural=measure_number in self.natural_spacing_sections,
             )
             abjad.attach(
                 spacing_section,
@@ -229,7 +229,7 @@ class Spacing:
                 continue
             if measure_number in self.lax_spacing_sections:
                 continue
-            if measure_number in self.vanilla_spacing_sections:
+            if measure_number in self.natural_spacing_sections:
                 continue
             if eol_adjusted:
                 multiplier = magic_lilypond_eol_adjustment
@@ -268,7 +268,7 @@ class SpacingSection:
     pair: tuple[int, int] | None = None
     empty: bool = False
     lax: bool = False
-    vanilla: bool = False
+    natural: bool = False
 
     context: typing.ClassVar[str] = "Score"
     persistent: typing.ClassVar[bool] = True
@@ -281,8 +281,8 @@ class SpacingSection:
             numerator, denominator = self.pair
             string = rf"\baca-new-lax-spacing-section #{numerator} #{denominator}"
             contributions.before.commands.append(string)
-        elif self.vanilla is True:
-            contributions.before.commands.append(r"\baca-new-vanilla-spacing-section")
+        elif self.natural is True:
+            contributions.before.commands.append(r"\baca-new-natural-spacing-section")
         else:
             numerator, denominator = self.pair
             string = rf"\baca-new-strict-spacing-section #{numerator} #{denominator}"
@@ -305,8 +305,8 @@ def apply_spacing_dictionary(context, spacing_dictionary):
         value = spacing_dictionary.get(n)
         if value is None:
             continue
-        elif value == "vanilla":
-            string = r"\baca-new-vanilla-spacing-section"
+        elif value == "natural":
+            string = r"\baca-new-natural-spacing-section"
             literal = abjad.LilyPondLiteral(string, site="before")
             abjad.attach(
                 literal,
