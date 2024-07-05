@@ -282,7 +282,12 @@ class SpacingSection:
             string = rf"\baca-new-lax-spacing-section #{numerator} #{denominator}"
             contributions.before.commands.append(string)
         elif self.natural is True:
-            contributions.before.commands.append(r"\baca-new-natural-spacing-section")
+            contributions.before.commands.extend([
+                r"\set Score.proportionalNotationDuration = ##f",
+                r"\override Score.SpacingSpanner.strict-grace-spacing = ##f",
+                r"\override Score.SpacingSpanner.strict-note-spacing = ##f",
+                r"\newSpacingSection",
+            ])
         else:
             numerator, denominator = self.pair
             string = rf"\baca-new-strict-spacing-section #{numerator} #{denominator}"
@@ -306,8 +311,15 @@ def apply_spacing_dictionary(context, spacing_dictionary):
         if value is None:
             continue
         elif value == "natural":
-            string = r"\baca-new-natural-spacing-section"
-            literal = abjad.LilyPondLiteral(string, site="before")
+            literal = abjad.LilyPondLiteral(
+                [
+                    r"\set Score.proportionalNotationDuration = ##f",
+                    r"\override Score.SpacingSpanner.strict-grace-spacing = ##f",
+                    r"\override Score.SpacingSpanner.strict-note-spacing = ##f",
+                    r"\newSpacingSection",
+                ],
+                site="before",
+            )
             abjad.attach(
                 literal,
                 skip,
