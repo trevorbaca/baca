@@ -65,8 +65,9 @@ baca-fermata-measure = #(
 % SPACING SECTIONS
 
 baca-start-nonstrict-spacing-section = #(
-    define-music-function (music) (ly:music?)
+    define-music-function (n d music) (number? number? ly:music?)
     #{
+    \set Score.proportionalNotationDuration = \musicLength 1 * #(/ n d)
     \override Score.SpacingSpanner.strict-grace-spacing = ##f
     \override Score.SpacingSpanner.strict-note-spacing = ##f
     \newSpacingSection

@@ -14,7 +14,7 @@ from . import tags as _tags
 
 magic_lilypond_eol_adjustment = abjad.Fraction(35, 24)
 
-fermata_measure_duration = abjad.Duration(1, 4)
+fermata_measure_duration_pair = (1, 4)
 
 
 @dataclasses.dataclass(order=True, slots=True, unsafe_hash=True)
@@ -129,7 +129,7 @@ class Spacing:
     default: tuple[int, int]
     annotate_spacing: bool = False
     overrides: list["Override"] = dataclasses.field(default_factory=list)
-    start_nonstrict_spacing: list[int] = dataclasses.field(default_factory=list)
+    nonstrict_overrides: list["Override"] = dataclasses.field(default_factory=list)
 
     def attach_indicators(
         self,
@@ -147,37 +147,21 @@ class Spacing:
         measure_count = measure_count or len(spacing_commands_skips)
         fermata_measure_numbers = fermata_measure_numbers or []
         eol_measure_numbers = eol_measure_numbers or []
-        measures = {}
+        measure_number_to_duration_pair = {}
         for n in range(1, measure_count + 1):
             if n in fermata_measure_numbers:
-                measures[n] = fermata_measure_duration
+                measure_number_to_duration_pair[n] = fermata_measure_duration_pair
             else:
-                measures[n] = self.default
-            measures[n + 1] = fermata_measure_duration
-        for override in self.overrides or []:
-            duration = override.duration
-            measure_numbers = []
-            if isinstance(override.measures, int):
-                measure_numbers.append(override.measures)
-            elif isinstance(override.measures, tuple):
-                start, stop = override.measures
-                for measure_number in range(start, stop + 1):
-                    measure_numbers.append(measure_number)
-            elif isinstance(override.measures, list):
-                measure_numbers.extend(override.measures)
-            else:
-                message = f"must be int, pair, list (not {override.measures!r})."
-                raise TypeError(message)
-            for n in measure_numbers:
-                if n < 1:
-                    message = f"Nonpositive measure number ({n}) not allowed."
-                elif measure_count < n:
-                    message = f"measure number {n} greater than"
-                    message += f" last measure number ({measure_count})."
-                else:
-                    measures[n] = duration
-                    continue
-                raise Exception(message)
+                measure_number_to_duration_pair[n] = self.default
+            measure_number_to_duration_pair[n + 1] = fermata_measure_duration_pair
+        self._read_override_list(
+            self.overrides, measure_count, measure_number_to_duration_pair
+        )
+        nonstrict_measure_numbers = self._read_override_list(
+            self.nonstrict_overrides,
+            measure_count,
+            measure_number_to_duration_pair,
+        )
         measure_count = len(spacing_commands_skips)
         for measure_index in range(measure_count):
             spacing_commands_skip = spacing_commands_skips[measure_index]
@@ -186,19 +170,11 @@ class Spacing:
             measure_number = measure_index + 1
             if has_anchor_skip and measure_number == measure_count:
                 pair = (1, 4)
-            elif measures:
-                item = measures[measure_number]
-                if isinstance(item, tuple):
-                    pair = item
-                elif item == "nonstrict":
-                    pair = "nonstrict"
-                else:
-                    assert isinstance(item, abjad.Duration), repr(item)
-                    pair = item.pair
+            elif measure_number_to_duration_pair:
+                pair = measure_number_to_duration_pair[measure_number]
             else:
                 pair = self.default
-            if not isinstance(pair, tuple):
-                assert pair == "nonstrict"
+            assert isinstance(pair, tuple), repr(pair)
             eol_adjusted = False
             if (measure_number in eol_measure_numbers) or (
                 measure_number == measure_count and not has_anchor_skip
@@ -210,7 +186,7 @@ class Spacing:
                 eol_adjusted = True
             spacing_section = SpacingSection(
                 pair=pair,
-                nonstrict=measure_number in self.start_nonstrict_spacing,
+                nonstrict=measure_number in nonstrict_measure_numbers,
             )
             abjad.attach(
                 spacing_section,
@@ -220,8 +196,6 @@ class Spacing:
             if self.annotate_spacing is False:
                 continue
             if spacing_annotations_context is None:
-                continue
-            if measure_number in self.start_nonstrict_spacing:
                 continue
             if eol_adjusted:
                 multiplier = magic_lilypond_eol_adjustment
@@ -253,6 +227,35 @@ class Spacing:
                     tag=tag.append(_helpers.function_name(_frame(), n=3)),
                 )
 
+    @staticmethod
+    def _read_override_list(override_list, measure_count, measure_number_to_duration):
+        all_override_measure_numbers = []
+        for override in override_list or []:
+            override_measure_numbers = []
+            if isinstance(override.measures, int):
+                override_measure_numbers.append(override.measures)
+            elif isinstance(override.measures, tuple):
+                start, stop = override.measures
+                for measure_number in range(start, stop + 1):
+                    override_measure_numbers.append(measure_number)
+            elif isinstance(override.measures, list):
+                override_measure_numbers.extend(override.measures)
+            else:
+                message = f"must be int, pair, list (not {override.measures!r})."
+                raise TypeError(message)
+            for n in override_measure_numbers:
+                if n < 1:
+                    message = f"Nonpositive measure number ({n}) not allowed."
+                elif measure_count < n:
+                    message = f"measure number {n} greater than"
+                    message += f" final measure number ({measure_count})."
+                else:
+                    measure_number_to_duration[n] = override.duration
+                    continue
+                raise Exception(message)
+            all_override_measure_numbers.extend(override_measure_numbers)
+        return all_override_measure_numbers
+
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class SpacingSection:
@@ -265,13 +268,12 @@ class SpacingSection:
 
     def _get_contributions(self, leaf=None):
         contributions = abjad.ContributionsBySite()
+        n, d = self.pair
         if self.nonstrict is True:
-            string = r"\baca-start-nonstrict-spacing-section"
-            contributions.before.commands.append(string)
+            string = rf"\baca-start-nonstrict-spacing-section #{n} #{d}"
         else:
-            n, d = self.pair
             string = rf"\baca-start-strict-spacing-section #{n} #{d}"
-            contributions.before.commands.append(string)
+        contributions.before.commands.append(string)
         return contributions
 
 
@@ -290,16 +292,7 @@ def apply_spacing_dictionary(context, spacing_dictionary):
         value = spacing_dictionary.get(n)
         if value is None:
             continue
-        elif value == "nonstrict":
-            literal = abjad.LilyPondLiteral(
-                r"\baca-start-nonstrict-spacing-section",
-                site="before",
-            )
-            abjad.attach(
-                literal,
-                skip,
-            )
-        elif isinstance(value, tuple):
+        if isinstance(value, tuple):
             n, d = value
             string = rf"\baca-start-strict-spacing-section #{n} #{d}"
             literal = abjad.LilyPondLiteral(string, site="before")
@@ -307,11 +300,16 @@ def apply_spacing_dictionary(context, spacing_dictionary):
                 literal,
                 skip,
             )
-        elif isinstance(value, list):
-            assert all(isinstance(_, str) for _ in value), repr(value)
-            literal = abjad.LilyPondLiteral(value, site="before")
+        else:
+            assert isinstance(value, str), repr(value)
+            assert value.startswith("nonstrict"), repr(value)
+            _, fraction = value.split()
+            n, d = fraction.split("/")
+            literal = abjad.LilyPondLiteral(
+                rf"\baca-start-nonstrict-spacing-section #{n} #{d}",
+                site="before",
+            )
             abjad.attach(
                 literal,
                 skip,
             )
-            skip._hide_body = True
