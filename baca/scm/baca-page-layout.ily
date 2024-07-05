@@ -74,3 +74,13 @@ baca-new-strict-spacing-section = #(
     $music
     #}
     )
+
+baca-start-nonstrict-spacing-section = #(
+    define-music-function (n d music) (number? number? ly:music?)
+    #{
+    \override Score.SpacingSpanner.strict-grace-spacing = ##f
+    \override Score.SpacingSpanner.strict-note-spacing = ##f
+    \newSpacingSection
+    $music
+    #}
+    )
