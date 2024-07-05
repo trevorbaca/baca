@@ -128,7 +128,6 @@ class Spacing:
 
     default: tuple[int, int]
     annotate_spacing: bool = False
-    lax_spacing_sections: list[int] = dataclasses.field(default_factory=list)
     overrides: list["Override"] = dataclasses.field(default_factory=list)
     natural_spacing_sections: list[int] = dataclasses.field(default_factory=list)
 
@@ -210,7 +209,6 @@ class Spacing:
                 pair = numerator, denominator
                 eol_adjusted = True
             spacing_section = SpacingSection(
-                lax=measure_number in self.lax_spacing_sections,
                 pair=pair,
                 natural=measure_number in self.natural_spacing_sections,
             )
@@ -222,8 +220,6 @@ class Spacing:
             if self.annotate_spacing is False:
                 continue
             if spacing_annotations_context is None:
-                continue
-            if measure_number in self.lax_spacing_sections:
                 continue
             if measure_number in self.natural_spacing_sections:
                 continue
@@ -262,8 +258,6 @@ class Spacing:
 class SpacingSection:
 
     pair: tuple[int, int] | None = None
-    empty: bool = False
-    lax: bool = False
     natural: bool = False
 
     context: typing.ClassVar[str] = "Score"
@@ -271,13 +265,7 @@ class SpacingSection:
 
     def _get_contributions(self, leaf=None):
         contributions = abjad.ContributionsBySite()
-        if self.empty is True:
-            pass
-        elif self.lax is True:
-            numerator, denominator = self.pair
-            string = rf"\baca-new-lax-spacing-section #{numerator} #{denominator}"
-            contributions.before.commands.append(string)
-        elif self.natural is True:
+        if self.natural is True:
             contributions.before.commands.extend(
                 [
                     r"\set Score.proportionalNotationDuration = ##f",
