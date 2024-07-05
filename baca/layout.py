@@ -270,7 +270,7 @@ class SpacingSection:
             contributions.before.commands.append(string)
         else:
             n, d = self.pair
-            string = rf"\baca-new-strict-spacing-section #{n} #{d}"
+            string = rf"\baca-start-strict-spacing-section #{n} #{d}"
             contributions.before.commands.append(string)
         return contributions
 
@@ -301,7 +301,7 @@ def apply_spacing_dictionary(context, spacing_dictionary):
             )
         elif isinstance(value, tuple):
             n, d = value
-            string = rf"\baca-new-strict-spacing-section #{n} #{d}"
+            string = rf"\baca-start-strict-spacing-section #{n} #{d}"
             literal = abjad.LilyPondLiteral(string, site="before")
             abjad.attach(
                 literal,
