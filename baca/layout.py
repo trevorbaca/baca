@@ -129,7 +129,7 @@ class Spacing:
     default: tuple[int, int]
     annotate_spacing: bool = False
     overrides: list["Override"] = dataclasses.field(default_factory=list)
-    natural_spacing_sections: list[int] = dataclasses.field(default_factory=list)
+    start_nonstrict_spacing: list[int] = dataclasses.field(default_factory=list)
 
     def attach_indicators(
         self,
@@ -190,15 +190,15 @@ class Spacing:
                 item = measures[measure_number]
                 if isinstance(item, tuple):
                     pair = item
-                elif item == "natural":
-                    pair = "natural"
+                elif item == "nonstrict":
+                    pair = "nonstrict"
                 else:
                     assert isinstance(item, abjad.Duration), repr(item)
                     pair = item.pair
             else:
                 pair = self.default
             if not isinstance(pair, tuple):
-                assert pair == "natural"
+                assert pair == "nonstrict"
             eol_adjusted = False
             if (measure_number in eol_measure_numbers) or (
                 measure_number == measure_count and not has_anchor_skip
@@ -210,7 +210,7 @@ class Spacing:
                 eol_adjusted = True
             spacing_section = SpacingSection(
                 pair=pair,
-                natural=measure_number in self.natural_spacing_sections,
+                nonstrict=measure_number in self.start_nonstrict_spacing,
             )
             abjad.attach(
                 spacing_section,
@@ -221,7 +221,7 @@ class Spacing:
                 continue
             if spacing_annotations_context is None:
                 continue
-            if measure_number in self.natural_spacing_sections:
+            if measure_number in self.start_nonstrict_spacing:
                 continue
             if eol_adjusted:
                 multiplier = magic_lilypond_eol_adjustment
@@ -258,14 +258,14 @@ class Spacing:
 class SpacingSection:
 
     pair: tuple[int, int] | None = None
-    natural: bool = False
+    nonstrict: bool = False
 
     context: typing.ClassVar[str] = "Score"
     persistent: typing.ClassVar[bool] = True
 
     def _get_contributions(self, leaf=None):
         contributions = abjad.ContributionsBySite()
-        if self.natural is True:
+        if self.nonstrict is True:
             string = r"\baca-start-nonstrict-spacing-section"
             contributions.before.commands.append(string)
         else:
@@ -290,7 +290,7 @@ def apply_spacing_dictionary(context, spacing_dictionary):
         value = spacing_dictionary.get(n)
         if value is None:
             continue
-        elif value == "natural":
+        elif value == "nonstrict":
             literal = abjad.LilyPondLiteral(
                 r"\baca-start-nonstrict-spacing-section",
                 site="before",
