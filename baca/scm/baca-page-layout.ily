@@ -64,6 +64,7 @@ baca-fermata-measure = #(
 
 %%% SPACING SECTIONS %%%
 
+% baca-new-spacing-section-with-pnd
 baca-new-lax-spacing-section = #(
     define-music-function (n d music) (number? number? ly:music?)
     #{
@@ -73,16 +74,7 @@ baca-new-lax-spacing-section = #(
     #}
     )
 
-baca-new-strict-spacing-nonsection = #(
-    define-music-function (n d music) (number? number? ly:music?)
-    #{
-    \set Score.proportionalNotationDuration = \musicLength 1 * #(/ n d)
-    \override Score.SpacingSpanner.strict-grace-spacing = ##t
-    \override Score.SpacingSpanner.strict-note-spacing = ##t
-    $music
-    #}
-    )
-
+% baca-new-spacing-section-with-strict-pnd
 baca-new-strict-spacing-section = #(
     define-music-function (n d music) (number? number? ly:music?)
     #{
@@ -94,6 +86,18 @@ baca-new-strict-spacing-section = #(
     #}
     )
 
+% baca-strict-pnd
+baca-new-strict-spacing-nonsection = #(
+    define-music-function (n d music) (number? number? ly:music?)
+    #{
+    \set Score.proportionalNotationDuration = \musicLength 1 * #(/ n d)
+    \override Score.SpacingSpanner.strict-grace-spacing = ##t
+    \override Score.SpacingSpanner.strict-note-spacing = ##t
+    $music
+    #}
+    )
+
+% baca-cancel-strict-pnd-for-new-spacing-section
 baca-new-natural-spacing-section = #(
     define-music-function (music) (ly:music?)
     #{
