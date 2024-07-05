@@ -1,6 +1,6 @@
 \version "2.25.16"
 
-%%% BCP SPANNER %%%
+% BCP SPANNER
 
 bacaStartTextSpanBCP = #(
     make-music 'TextSpanEvent 'span-direction START 'spanner-id "BCP"
@@ -47,7 +47,7 @@ baca-bcp-spanner-right-text = #(
     #}
     ) 
 
-%%% BOW SPEED SPANNER %%%
+% BOW SPEED SPANNER
 
 bacaStartTextSpanBowSpeed = #(
     make-music 'TextSpanEvent 'span-direction START 'spanner-id "BowSpeed"
@@ -57,7 +57,7 @@ bacaStopTextSpanBowSpeed = #(
     make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "BowSpeed"
     )
 
-%%% CLB SPANNER %%%
+% CLB SPANNER
 
 bacaStartTextSpanCLB = #(
     make-music 'TextSpanEvent 'span-direction START 'spanner-id "CLB"
@@ -67,7 +67,7 @@ bacaStopTextSpanCLB = #(
     make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "CLB"
     )
 
-%%% CLOCK TIME SPANNER %%%
+% CLOCK TIME SPANNER
 
 clock-time-extra-offset = #'(0 . 16)
 
@@ -229,7 +229,7 @@ baca-start-ct-both-right-fermata = #(
     #}
     )
 
-%%% CIRCLE BOW SPANNER %%%
+% CIRCLE BOW SPANNER
 
 bacaStartTextSpanCircleBow = #(
     make-music 'TextSpanEvent 'span-direction START 'spanner-id "CircleBow"
@@ -239,7 +239,7 @@ bacaStopTextSpanCircleBow = #(
     make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "CircleBow"
     )
 
-%%% COVERED SPANNER %%%
+% COVERED SPANNER
 
 bacaStartTextSpanCovered = #(
     make-music 'TextSpanEvent 'span-direction START 'spanner-id "Covered"
@@ -249,7 +249,7 @@ bacaStopTextSpanCovered = #(
     make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "Covered"
     )
 
-%%% DAMP SPANNER %%%
+% DAMP SPANNER
 
 bacaStartTextSpanDamp = #(
     make-music 'TextSpanEvent 'span-direction START 'spanner-id "Damp"
@@ -259,7 +259,7 @@ bacaStopTextSpanDamp = #(
     make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "Damp"
     )
 
-%%% HALF CLT SPANNER %%%
+% HALF CLT SPANNER
 
 bacaStartTextSpanHalfCLT = #(
     make-music 'TextSpanEvent 'span-direction START 'spanner-id "HalfCLT"
@@ -269,7 +269,7 @@ bacaStopTextSpanHalfCLT = #(
     make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "HalfCLT"
     )
 
-%%% LOCAL MEASURE NUMBER SPANNER %%%
+% LOCAL MEASURE NUMBER SPANNER
 
 local-measure-number-extra-offset = #'(0 . 10)
 
@@ -346,7 +346,7 @@ baca-start-lmn-both = #(
     #}
     )
 
-%%% MATERIAL ANNOTATION SPANNER %%%
+% MATERIAL ANNOTATION SPANNER
 
 bacaStartTextSpanMaterialAnnotation = #(
     make-music 'TextSpanEvent 'span-direction START 'spanner-id "MaterialAnnotation"
@@ -356,7 +356,7 @@ bacaStopTextSpanMaterialAnnotation = #(
     make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "MaterialAnnotation"
     )
 
-%%% MEASURE NUMBER SPANNER %%%
+% MEASURE NUMBER SPANNER
 
 measure-number-extra-offset = #'(0 . 10)
 
@@ -433,7 +433,7 @@ baca-start-mn-both = #(
     #}
     )
 
-%%% METRIC MODULATION SPANNER %%%
+% METRIC MODULATION SPANNER
 
 bacaStartTextSpanMetricModulation = #(
     make-music 'TextSpanEvent 'span-direction START 'spanner-id "MetricModulation"
@@ -443,7 +443,7 @@ bacaStopTextSpanMetricModulation = #(
     make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "MetricModulation"
     )
 
-%%% METRONOME MARK SPANNER %%%
+% METRONOME MARK SPANNER
 
 bacaStartTextSpanMM = #(
     make-music 'TextSpanEvent 'span-direction START 'spanner-id "MM"
@@ -826,7 +826,7 @@ baca-colored-bracketed-mixed-number-metric-modulation-tuplet-rhs = #(
     #}
     )
 
-%%% MOMENT NUMBER SPANNER %%%
+% MOMENT NUMBER SPANNER
 
 moment-number-extra-offset = #'(0 . 16)
 
@@ -940,7 +940,7 @@ baca-start-xnm-both = #(
     #}
     )
 
-%%% PITCH ANNOTATION SPANNER %%%
+% PITCH ANNOTATION SPANNER
 
 bacaStartTextSpanPitchAnnotation = #(
     make-music 'TextSpanEvent 'span-direction START 'spanner-id "PitchAnnotation"
@@ -950,7 +950,7 @@ bacaStopTextSpanPitchAnnotation = #(
     make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "PitchAnnotation"
     )
 
-%%% PIZZICATO SPANNER %%%
+% PIZZICATO SPANNER
 
 bacaStartTextSpanPizzicato = #(
     make-music 'TextSpanEvent 'span-direction START 'spanner-id "Pizzicato"
@@ -960,7 +960,7 @@ bacaStopTextSpanPizzicato = #(
     make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "Pizzicato"
     )
 
-%%% RHYTHM ANNOTATION SPANNER %%%
+% RHYTHM ANNOTATION SPANNER
 
 bacaStartTextSpanRhythmAnnotation = #(
     make-music 'TextSpanEvent 'span-direction START 'spanner-id "RhythmAnnotation"
@@ -970,7 +970,7 @@ bacaStopTextSpanRhythmAnnotation = #(
     make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "RhythmAnnotation"
     )
 
-%%% SCP SPANNER %%%
+% SCP SPANNER
 
 bacaStartTextSpanSCP = #(
     make-music 'TextSpanEvent 'span-direction START 'spanner-id "SCP"
@@ -980,7 +980,7 @@ bacaStopTextSpanSCP = #(
     make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "SCP"
     )
 
-%%% SPACING MARKUP SPANNER %%%
+% SPACING MARKUP SPANNER
 
 spacing-extra-offset = #'(0 . 19)
 
@@ -1057,7 +1057,7 @@ baca-start-spm-both = #(
     #}
     )
 
-%%% SPAZZOLATO SPANNER %%%
+% SPAZZOLATO SPANNER
 
 bacaStartTextSpanSpazzolato = #(
     make-music 'TextSpanEvent 'span-direction START 'spanner-id "Spazzolato"
@@ -1067,7 +1067,7 @@ bacaStopTextSpanSpazzolato = #(
     make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "Spazzolato"
     )
 
-%%% STAGE NUMBER SPANNER %%%
+% STAGE NUMBER SPANNER
 
 stage-number-extra-offset = #'(0 . 13)
 
@@ -1181,7 +1181,7 @@ baca-start-snm-both = #(
     #}
     )
 
-%%% STRING NUMBER SPANNER %%%
+% STRING NUMBER SPANNER
 
 bacaStartTextSpanStringNumber = #(
     make-music 'TextSpanEvent 'span-direction START 'spanner-id "StringNumber"
@@ -1191,7 +1191,7 @@ bacaStopTextSpanStringNumber = #(
     make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "StringNumber"
     )
 
-%%% TEXT SPANNER %%%
+% TEXT SPANNER
 
 baca-text-spanner-left-markup = #(
     define-music-function (markup music) (markup? ly:music?)
@@ -1229,7 +1229,7 @@ baca-text-spanner-right-text = #(
     #}
     )
 
-%%% VIBRATO SPANNER %%%
+% VIBRATO SPANNER
 
 bacaStartTextSpanVibrato = #(
     make-music 'TextSpanEvent 'span-direction START 'spanner-id "Vibrato"

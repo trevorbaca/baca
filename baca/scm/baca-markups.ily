@@ -1,6 +1,6 @@
 \version "2.25.16"
 
-%%% ACCIDENTAL MARKUP %%%
+% ACCIDENTAL MARKUP
 
 baca-sharp-markup = \markup
     \line {
@@ -8,7 +8,7 @@ baca-sharp-markup = \markup
         \sharp
     }
 
-%%% BOWSPEED MARKUP %%%
+% BOWSPEED MARKUP
 
 baca-left-broken-xfb-markup =
     \markup
@@ -22,7 +22,7 @@ baca-left-broken-xfb-markup =
         \hspace #0.75
     }
 
-%%% BOWSTROKE MARKUP %%%
+% BOWSTROKE MARKUP
 
 baca-full-downbow-markup =
     \markup
@@ -86,7 +86,7 @@ baca-stop-on-string-full-upbow-markup =
         (closepath)
         )
 
-%%% BOXED ABBREVIATION %%%
+% BOXED ABBREVIATION
 
 baca-boxed-markup = #(
     define-music-function (text) (markup?)
@@ -98,7 +98,7 @@ baca-boxed-markup = #(
     #}
     )
 
-%%% CIRCLE BOWING MARKUP %%%
+% CIRCLE BOWING MARKUP
 
 baca-circle-bowing-markup =
     \markup
@@ -135,7 +135,7 @@ baca-left-broken-circle-bowing-markup =
         \hspace #0.5
     }
 
-%%% DAMP MARKUP (intentionally out of alphabetical order) %%%
+% DAMP MARKUP (intentionally out of alphabetical order)
 
 baca-damp-markup =
     \markup
@@ -172,7 +172,7 @@ baca-left-broken-damp-markup =
         \hspace #0.5
     }
 
-%%% CLB MARKUP %%%
+% CLB MARKUP
 
 baca-damp-clb-one-markup =
     \markup
@@ -222,7 +222,7 @@ baca-left-broken-clb-markup =
         \hspace #0.75
     }
 
-%%% CLT MARKUP
+% CLT MARKUP
 
 baca-left-broken-half-clt-markup =
     \markup
@@ -249,7 +249,7 @@ baca-left-broken-legno-markup =
     }
 
 
-%%% DIAMOND MARKUP %%%
+% DIAMOND MARKUP
 
 baca-black-diamond-markup =
     \markup
@@ -367,7 +367,7 @@ baca-triple-diamond-parenthesized-top-markup =
         }
     }
 
-%%% DOUBLE FLAGEOLET MARKUP %%%
+% DOUBLE FLAGEOLET MARKUP
 
 baca-double-flageolet-markup =
     \markup
@@ -380,7 +380,7 @@ baca-double-flageolet-markup =
         \draw-circle #2 #0.3 ##f
     }
 
-%%% DURATION MULTIPLIER MARKUP %%%
+% DURATION MULTIPLIER MARKUP
 
 baca-duration-multiplier-markup = #(
     define-music-function (n d) (string? string?)
@@ -392,7 +392,7 @@ baca-duration-multiplier-markup = #(
     #}
     )
 
-%%% FERMATA MARKUP %%%
+% FERMATA MARKUP
 
 baca-fermata-markup =
     \markup
@@ -413,11 +413,11 @@ baca-very-long-fermata-markup =
     \with-dimensions-from \null
     \musicglyph "scripts.uverylongfermata"
 
-%%% NULL MARKUP %%%
+% NULL MARKUP
 
 baca-null-markup = \markup \null
 
-%%% REHEARSAL MARKS %%%
+% REHEARSAL MARKS
 
 % IMPORTANT: markup attach direction must be neutral or down (- or _);
 %            markup attach direction of up (^) negatively impacts global
@@ -436,7 +436,7 @@ baca-rehearsal-mark-markup = #(
     #}
     )
 
-%%% SCP MARKUP %%%
+% SCP MARKUP
 
 baca-left-broken-t-markup =
     \markup
@@ -450,7 +450,7 @@ baca-left-broken-t-markup =
         \hspace #0.75
     }
 
-%%% SPAZZOLATO MARKUP %%%
+% SPAZZOLATO MARKUP
 
 baca-spazzolato-markup =
     \markup
@@ -469,7 +469,7 @@ baca-left-broken-spazz-markup =
         \hspace #0.75
     }
 
-%%% VIBRATO MARKUP %%%
+% VIBRATO MARKUP
 
 baca-non-vib-markup =
     \markup

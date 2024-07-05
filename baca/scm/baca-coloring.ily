@@ -1,6 +1,6 @@
 \version "2.25.16"
 
-%%% BAR LINE COLORING %%%
+% BAR LINE COLORING
 
 baca-thick-red-bar-line = #(
     define-music-function (music) (ly:music?)
@@ -12,7 +12,7 @@ baca-thick-red-bar-line = #(
     #}
     )
 
-%%% INSTRUMENT COLORING %%%
+% INSTRUMENT COLORING
 
 baca-explicit-instrument-markup = #(
     define-music-function string (string?)
@@ -41,7 +41,7 @@ baca-redundant-instrument-markup = #(
     #}
     )
 
-%%% MUSIC COLORING %%%
+% MUSIC COLORING
 
 baca-mock-coloring = #(
     define-music-function (music) (ly:music?)
@@ -91,7 +91,7 @@ baca-repeat-pitch-class-coloring = #(
     #}
     )
 
-%%% SHORT INSTRUMENT NAME COLORING %%%
+% SHORT INSTRUMENT NAME COLORING
 
 baca-explicit-short-instrument-name-markup = #(
     define-music-function string (string?)
@@ -120,7 +120,7 @@ baca-redundant-short-instrument-name-markup = #(
     #}
     )
 
-%%% TIME SIGNATURE COLORING %%%
+% TIME SIGNATURE COLORING
 
 baca-time-signature-color = #(
     define-music-function (color music) (color? ly:music?)
@@ -138,7 +138,7 @@ baca-time-signature-transparent = #(
     #}
     )
 
-%%% NOTES
+% NOTES
 
 % Note that this works:
 %zebra = #(

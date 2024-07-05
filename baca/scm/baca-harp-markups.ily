@@ -1,6 +1,6 @@
 \version "2.25.16"
 
-%%% HARP MARKUPS %%%
+% HARP MARKUPS
 
 baca-bisb-markup = \markup
     \whiteout

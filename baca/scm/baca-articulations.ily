@@ -115,7 +115,7 @@ baca-damp = #(make-articulation 'bacadamp)
 baca-double-diamond = #(make-articulation 'bacadoublediamond)
 baca-double-flageolet = #(make-articulation 'bacadoubleflageolet)
 
-%%% STACCATO ARTICULATIONS (MULTIPLE) %%%
+% STACCATO ARTICULATIONS (MULTIPLE)
 
 baca-staccati = #(define-music-function (dots) (integer?)
     (let ((script (make-music 'ArticulationEvent
@@ -132,7 +132,7 @@ baca-staccati = #(define-music-function (dots) (integer?)
        (ly:music-property script 'tweaks)))
      script))
 
-%%% LEAVE FILE-FINAL %%%
+% LEAVE FILE-FINAL
 
 \layout
 {

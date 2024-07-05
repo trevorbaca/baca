@@ -1,6 +1,6 @@
 \version "2.25.16"
 
-%%% SYMBOL %%%
+% SYMBOL
 
 baca-circle-bowing-markup =
     \markup
@@ -24,7 +24,7 @@ baca-circle-bowing-markup =
         \filled-box #'(-0.35 . 0.35) #'(-0.35 . 0.35) #0
     }
 
-%%% MARKUPS %%%
+% MARKUPS
 
 baca-circle-markup = \markup \concat {
     \baca-circle-bowing-markup \hspace #1.25

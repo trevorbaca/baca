@@ -1,16 +1,16 @@
 \version "2.25.16"
 
-%%% NOTE: Use ...
-%%%
-%%%       DynamicText.X-extent = #'(0 . 0)
-%%%
-%%% ... instead of ...
-%%%
-%%%       DynamicText.X-extent = ##f
-%%%
-%%% ... to avoid warnings in LilyPond log.
+% NOTE: Use ...
+%
+%       DynamicText.X-extent = #'(0 . 0)
+%
+% ... instead of ...
+%
+%       DynamicText.X-extent = ##f
+%
+% ... to avoid warnings in LilyPond log.
 
-%%% ANCORA DYNAMICS %%%
+% ANCORA DYNAMICS
 
 #(define-markup-command
     (baca-ancora-dynamic layout props dynamic)
@@ -68,7 +68,7 @@ baca-fff-ancora = #(
     (markup #:baca-ancora-dynamic "fff")
     )
 
-%%% COMPOSITE DYNAMICS %%%
+% COMPOSITE DYNAMICS
 
 baca-pppf = #(make-dynamic-script "pppf")
 
@@ -90,7 +90,7 @@ baca-pff = #(make-dynamic-script "pff")
 
 baca-pfff = #(make-dynamic-script "pfff")
 
-%%% COMPOSITE DYNAMICS (WITH DELIMITER) %%%
+% COMPOSITE DYNAMICS (WITH DELIMITER)
 
 #(define-markup-command
     (baca-delimited-composite-dynamic layout props left right)
@@ -449,7 +449,7 @@ baca-fff-fff = #(
     (markup #:baca-delimited-composite-dynamic "fff" "fff")
     )
 
-%%% EFFORT DYNAMICS %%%
+% EFFORT DYNAMICS
 
 #(define-markup-command
     (baca-effort-dynamic layout props left dynamic right)
@@ -519,7 +519,7 @@ baca-effort-sffz = #(
     (markup #:baca-effort-dynamic -0.3 "sffz" -0.2)
     )
 
-%%% EFFORT ANCORA DYNAMICS %%%
+% EFFORT ANCORA DYNAMICS
 
 #(define-markup-command
     (baca-effort-ancora-dynamic layout props left dynamic right)
@@ -591,7 +591,7 @@ baca-effort-ancora-sffz = #(
     (markup #:baca-effort-ancora-dynamic -0.3 "sffz" -0.2)
     )
 
-%%% EFFORT DYNAMICS (PARENTHESIZED) %%%
+% EFFORT DYNAMICS (PARENTHESIZED)
 
 baca-effort-ppppp-parenthesized = #(
     make-dynamic-script
@@ -761,7 +761,7 @@ baca-effort-fffff-parenthesized = #(
         )
     )
 
-%%% EFFORT DYNAMICS (SEMPRE) %%%
+% EFFORT DYNAMICS (SEMPRE)
 
 #(define-markup-command
     (baca-effort-dynamic-sempre layout props left dynamic right)
@@ -843,13 +843,13 @@ baca-effort-fffff-sempre = #(
     (markup #:baca-effort-dynamic-sempre -0.4 "fffff" -0.2)
     )
 
-%%% FP DYNAMICS %%%
+% FP DYNAMICS
 
 baca-ffp = #(make-dynamic-script "ffp")
 
 baca-fffp = #(make-dynamic-script "fffp")
 
-%%% PARENTHESIZED DYNAMICS %%%
+% PARENTHESIZED DYNAMICS
 
 baca-ppppp-parenthesized = #(
     make-dynamic-script
@@ -1019,11 +1019,11 @@ baca-fffff-parenthesized = #(
         )
     )
 
-%%% MEZZO %%%
+% MEZZO
 
 baca-m = #(make-dynamic-script "m")
 
-%%% POCO SCRATCH DYNAMICS %%%
+% POCO SCRATCH DYNAMICS
 
 #(define-markup-command
     (baca-poco-scratch-dynamic layout props dynamic)
@@ -1082,7 +1082,7 @@ baca-fff-poco-scratch = #(
     (markup #:baca-poco-scratch-dynamic "fff")
     )
 
-%%% POSS. DYNAMICS %%%
+% POSS. DYNAMICS
 
 #(define-markup-command
     (baca-poss-dynamic layout props dynamic)
@@ -1130,7 +1130,7 @@ baca-fff-poss = #(
     (markup #:baca-poss-dynamic "fff")
     )
 
-%%% SEMPRE DYNAMICS %%%
+% SEMPRE DYNAMICS
 
 #(define-markup-command
     (baca-sempre-dynamic layout props dynamic)
@@ -1193,7 +1193,7 @@ baca-fff-sempre = #(
     (markup #:baca-sempre-dynamic "fff")
     )
 
-%%% SCRATCH DYNAMICS %%%
+% SCRATCH DYNAMICS
 
 #(define-markup-command
     (baca-scratch-dynamic layout props dynamic)
@@ -1251,7 +1251,7 @@ baca-fff-scratch = #(
     (markup #:baca-scratch-dynamic "fff")
     )
 
-%%% SFORZANDO DYNAMICS %%%
+% SFORZANDO DYNAMICS
 
 baca-sff = #(make-dynamic-script "sff")
 baca-sffmf = #(make-dynamic-script "sffmf")
@@ -1264,7 +1264,7 @@ baca-sfpp = #(make-dynamic-script "sfpp")
 baca-sffz = #(make-dynamic-script "sffz")
 baca-sfffz = #(make-dynamic-script "sfffz")
 
-%%% SFORZANDO ANCORA DYNAMICS %%%
+% SFORZANDO ANCORA DYNAMICS
 
 baca-sf-ancora = #(
     make-dynamic-script
@@ -1311,7 +1311,7 @@ baca-sfffz-ancora = #(
     (markup #:baca-ancora-dynamic "sfffz")
     )
 
-%%% SFORZANDO / TENUTO DYNAMICS %%%
+% SFORZANDO / TENUTO DYNAMICS
 
 baca-sfz-f = #(
     make-dynamic-script
@@ -1339,7 +1339,7 @@ baca-sfz-p = #(
         )
     )
 
-%%% SUBITO DYNAMICS %%%
+% SUBITO DYNAMICS
 
 baca-ppp-sub = 
     #(make-dynamic-script
@@ -1429,7 +1429,7 @@ baca-fff-sub =
         )
     )
 
-%%% SUB. EFFORT DYNAMICS %%%
+% SUB. EFFORT DYNAMICS
 
 #(define-markup-command
     (baca-effort-sub-dynamic layout props left dynamic right)
@@ -1491,7 +1491,7 @@ baca-fff-effort-sub = #(
     (markup #:baca-effort-sub-dynamic -0.4 "fff" -0.2)
     )
 
-%%% TEXT-ONLY DYNAMICS %%%
+% TEXT-ONLY DYNAMICS
 
 baca-appena-udibile = 
     #(make-dynamic-script
@@ -1512,7 +1512,7 @@ baca-niente = #(
         )
     )
 
-%%% TEXTUAL DYNAMICS %%%
+% TEXTUAL DYNAMICS
 
 baca-p-sub-but-accents-continue-sffz = 
     #(make-dynamic-script
@@ -1559,7 +1559,7 @@ baca-f-sub-but-accents-continue-sffz =
         )
     )
 
-%%% WHITEOUT DYNAMICS %%%
+% WHITEOUT DYNAMICS
 
 #(define-markup-command
     (baca-whiteout-dynamic layout props dynamic)

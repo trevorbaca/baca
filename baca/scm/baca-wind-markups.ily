@@ -1,7 +1,7 @@
 \version "2.25.16"
 \include "baca-markups.ily"
 
-%%% ORDINARY %%%
+% ORDINARY
 
 baca-airtone-markup = \markup \upright airtone
 
@@ -11,7 +11,7 @@ baca-covered-markup = \markup \upright covered
 
 baca-fluttertongue-markup = \markup \upright fluttertongue
 
-%%% BOXED %%%
+% BOXED
 
 baca-boxed-airtone-markup = \baca-boxed-markup \markup
     \whiteout
@@ -53,7 +53,7 @@ baca-boxed-to-bass-flute-markup = \baca-boxed-markup \markup
     \whiteout
     "to bass flute"
 
-%%% PARENTHESIZED %%%
+% PARENTHESIZED
 
 baca-parenthesized-air-markup =
     \markup

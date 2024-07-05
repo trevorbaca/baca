@@ -1,6 +1,6 @@
 \version "2.25.16"
 
-%%% SFORZANDO MARKUPS %%%
+% SFORZANDO MARKUPS
 
 baca-pppz-markup = \markup \dynamic pppz
 

@@ -1,7 +1,7 @@
 \version "2.25.16"
 \include "baca-markups.ily"
 
-%%% ORDINARY %%%
+% ORDINARY
 
 baca-bow-on-wooden-mute-markup = \markup "bow on wooden mute"
 
@@ -57,7 +57,7 @@ baca-tasto-plus-xfb-markup = \markup \whiteout "tasto + XFB"
 
 baca-vib-poco-markup = \markup "vib. poco"
 
-%%% BOXED %%%
+% BOXED
 
 baca-boxed-arco-markup = \baca-boxed-markup \markup \whiteout arco
 
@@ -87,7 +87,7 @@ baca-boxed-xfb-markup = \baca-boxed-markup \markup \whiteout XFB
 
 baca-boxed-xp-markup = \baca-boxed-markup \markup \whiteout XP
 
-%%% PARENTHESIZED %%%
+% PARENTHESIZED
 
 baca-parenthesized-half-harm-markup =
     \markup

@@ -1,10 +1,10 @@
 \version "2.25.16"
 
-%%% ORDINARY %%%
+% ORDINARY
 
 baca-senza-pedale-markup = \markup "senza pedale"
 
-%%% BOXED %%%
+% BOXED
 
 baca-boxed-depress-silently-markup =
     \baca-boxed-markup \markup \whiteout "depress silently"

@@ -1,6 +1,6 @@
 \version "2.25.16"
 
-%%% PARTIALS (A) %%%
+% PARTIALS (A)
 
 baca-seven-a = \markup
   \line { "7°/A" }
@@ -14,7 +14,7 @@ baca-thirteen-a = \markup
 baca-fourteen-a = \markup
   \line { "14°/A" }
 
-%%% PARTIALS (Bb) %%%
+% PARTIALS (Bb)
 
 baca-seven-b-flat = \markup
   \line {
@@ -52,7 +52,7 @@ baca-thirteen-b-flat = \markup
     \flat
     }
 
-%%% PARTIALS (C) %%%
+% PARTIALS (C)
 
 baca-seven-c = \markup
   \line { "7°/C" }
@@ -66,7 +66,7 @@ baca-eleven-c = \markup
 baca-thirteen-c = \markup
   \line { "13°/C" }
 
-%%% PARTIALS (D) %%%
+% PARTIALS (D)
 
 baca-seven-d = \markup
   \line { "7°/D" }
@@ -80,7 +80,7 @@ baca-fourteen-d = \markup
 baca-fifteen-d = \markup
   \line { "15°/D" }
 
-%%% PARTIALS (Db) %%%
+% PARTIALS (Db)
 
 baca-five-d-flat = \markup
   \line {
@@ -118,7 +118,7 @@ baca-thirteen-d-flat = \markup
     \flat
     }
 
-%%% PARTIALS (E) %%%
+% PARTIALS (E)
 
 baca-five-e = \markup
   \line { "5°/E" }
@@ -132,7 +132,7 @@ baca-nine-e = \markup
 baca-eleven-e = \markup
   \line { "11°/E" }
 
-%%% PARTIALS (Eb) %%%
+% PARTIALS (Eb)
 
 baca-five-e-flat = \markup
   \line {
@@ -197,7 +197,7 @@ baca-thirteen-plus-nine-e-flat = \markup
     \flat
     }
 
-%%% F %%%
+% F
 
 baca-eleven-f-markup = \markup
   \line { "11°/F" }

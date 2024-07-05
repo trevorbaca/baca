@@ -1,6 +1,6 @@
 \version "2.25.16"
 
-%%% SHAPE NOTE-HEADS %%%
+% SHAPE NOTE-HEADS
 
 baca-black-diamond-note-head = #(
     define-music-function (music) (ly:music?)
@@ -42,7 +42,7 @@ baca-triangle-note-head = #(
     #}
     )
 
-%%% SLAP-TONGUE NOTE-HEAD %%%
+% SLAP-TONGUE NOTE-HEAD
 
 baca-slap-tongue-note-head = #(
     define-music-function (music) (ly:music?)

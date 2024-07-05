@@ -1,6 +1,6 @@
 \version "2.25.16"
 
-%%% BAR LINES %%%
+% BAR LINES
 
 baca-bar-line-visible = #(
     define-music-function (music) (ly:music?)
@@ -10,7 +10,7 @@ baca-bar-line-visible = #(
     #}
     )
 
-%%% BAR NUMBERS %%%
+% BAR NUMBERS
 
 #(define-markup-command (oval layout props arg)
  (markup?)
@@ -27,7 +27,7 @@ baca-bar-line-visible = #(
  (make-oval-markup
   (robust-bar-number-function barnum measure-pos alt-number context)))
 
-%%% BREAKS %%%
+% BREAKS
 
 baca-lbsd = #(
     define-music-function (y-offset distances) (number? list?)
@@ -51,7 +51,7 @@ baca-lbsd-xy = #(
     #}
     )
 
-%%% FERMATA MEASURES %%%
+% FERMATA MEASURES
 
 baca-fermata-measure = #(
     define-music-function (music) (ly:music?)
@@ -62,7 +62,7 @@ baca-fermata-measure = #(
     #}
     )
 
-%%% SPACING SECTIONS %%%
+% SPACING SECTIONS
 
 baca-new-lax-spacing-section = #(
     define-music-function (n d music) (number? number? ly:music?)
