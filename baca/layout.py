@@ -128,6 +128,9 @@ class Spacing:
 
     default: tuple[int, int]
     annotate_spacing: bool = False
+    centered_bar_number_transparent_true: list[int] = dataclasses.field(
+        default_factory=list
+    )
     overrides: list["Override"] = dataclasses.field(default_factory=list)
     nonstrict_overrides: list["Override"] = dataclasses.field(default_factory=list)
 
@@ -193,6 +196,14 @@ class Spacing:
                 spacing_commands_skip,
                 tag=_helpers.function_name(_frame(), n=1),
             )
+            if measure_number in self.centered_bar_number_transparent_true:
+                string = r"\once \override Score.CenteredBarNumber.transparent = ##t"
+                literal = abjad.LilyPondLiteral(string)
+                abjad.attach(
+                    literal,
+                    spacing_commands_skip,
+                    tag=_helpers.function_name(_frame(), n=4),
+                )
             if self.annotate_spacing is False:
                 continue
             if spacing_annotations_context is None:
