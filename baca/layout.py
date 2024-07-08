@@ -131,8 +131,8 @@ class Spacing:
     centered_bar_number_transparent_true: list[int] = dataclasses.field(
         default_factory=list
     )
-    overrides: list["Override"] = dataclasses.field(default_factory=list)
     nonstrict_overrides: list["Override"] = dataclasses.field(default_factory=list)
+    strict_overrides: list["Override"] = dataclasses.field(default_factory=list)
 
     def attach_indicators(
         self,
@@ -158,7 +158,7 @@ class Spacing:
                 measure_number_to_duration_pair[n] = self.default
             measure_number_to_duration_pair[n + 1] = fermata_measure_duration_pair
         self._read_override_list(
-            self.overrides, measure_count, measure_number_to_duration_pair
+            self.strict_overrides, measure_count, measure_number_to_duration_pair
         )
         nonstrict_measure_numbers = self._read_override_list(
             self.nonstrict_overrides,
