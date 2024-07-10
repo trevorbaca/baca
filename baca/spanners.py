@@ -56,7 +56,7 @@ def _attach_spanner_start(
 ) -> abjad.Wrapper:
     unbundled_indicator = _indicatorlib.unbundle_indicator(spanner_start)
     assert unbundled_indicator.spanner_start is True
-    spanner_start = _helpers.bundle_tweaks(spanner_start, tweaks)
+    spanner_start = _helpers.bundle_tweaks(spanner_start, tweaks, i=0, total=1)
     first_leaf = abjad.select.leaf(argument, 0)
     wrapper = _indicatorlib.attach_persistent_indicator(
         first_leaf,
