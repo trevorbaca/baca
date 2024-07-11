@@ -1,6 +1,6 @@
 \version "2.25.16"
 
-list-grob-properties = #(lambda (grob)
+print-grob-properties = #(lambda (grob)
   (ly:message "")
   (ly:message "(ly:grob? grob)")
   (ly:message "~s" (ly:grob? grob))
@@ -71,8 +71,6 @@ list-grob-properties = #(lambda (grob)
   (ly:message "(ly:grob-system grob)")
   (ly:message "~s" (ly:grob-system grob))
   (ly:message "")
-  (ly:message "")
-  (ly:message "")
   (ly:message "(grob::name grob)")
   (ly:message "~s" (grob::name grob))
   (ly:message "")
@@ -86,3 +84,40 @@ list-grob-properties = #(lambda (grob)
   (ly:message "")
   (grob::display-objects grob)
   )
+
+%{
+  \once \override Staff.Clef.after-line-breaking = #print-grob-properties
+  c'4
+%}
+
+print-spanner-properties = #(lambda (grob)
+    (ly:message "")
+    (ly:message "(grob::name grob): ~s" (grob::name grob))
+    (ly:message "(ly:grob? grob): ~s" (ly:grob? grob))
+    (ly:message "(ly:spanner? grob): ~s" (ly:spanner? grob))
+    (ly:message "(ly:item? grob): ~s" (ly:item? grob))
+    (ly:message "(ly:spanner-bound grob -1): ~s" (ly:spanner-bound grob -1))
+    (ly:message "(ly:spanner-bound grob 1): ~s" (ly:spanner-bound grob 1))
+    (ly:message "(ly:spanner-broken-neighbor grob -1): ~s"
+      (ly:spanner-broken-neighbor grob -1))
+    (ly:message "(ly:spanner-broken-neighbor grob 1): ~s"
+      (ly:spanner-broken-neighbor grob 1))
+    (ly:message "(first-broken-spanner? grob): ~s" (first-broken-spanner? grob))
+    (ly:message "(middle-broken-spanner? grob): ~s" (middle-broken-spanner? grob))
+    (ly:message "(end-broken-spanner? grob): ~s" (end-broken-spanner? grob))
+    (ly:message "(not-first-broken-spanner? grob): ~s" (not-first-broken-spanner? grob))
+    (ly:message "(not-last-broken-spanner? grob): ~s" (not-last-broken-spanner? grob))
+    (ly:message "(unbroken-or-first-broken-spanner? grob): ~s"
+      (unbroken-or-first-broken-spanner? grob))
+    (ly:message "(unbroken-or-last-broken-spanner? grob): ~s"
+      (unbroken-or-last-broken-spanner? grob))
+    (ly:message "(unbroken-spanner? grob): ~s" (unbroken-spanner? grob))
+    (ly:message "")
+    )
+
+%{
+  {
+    \override TupletBracket.after-line-breaking = #print-spanner-properties
+    \times 8/10 { c'4 d' e' f' g' \break a' b' c'' d'' e'' }
+  }
+%}
