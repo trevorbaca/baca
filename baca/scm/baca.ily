@@ -4,6 +4,7 @@
 \include "baca-articulations.ily"
 \include "baca-circle-bow-markups.ily"
 \include "baca-coloring.ily"
+\include "baca-debug.ily"
 \include "baca-dynamics.ily"
 \include "baca-harp-markups.ily"
 \include "baca-line-breaking.ily"
