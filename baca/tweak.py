@@ -37,6 +37,13 @@ def bound_details_left_text(
     return _handle_tweak(string, event=event, grob=grob, i=i, tag=tag, target=target)
 
 
+def bound_details_right_attach_dir(
+    n, *, event=False, grob=None, i=None, tag=None, target=None
+):
+    string = f"bound-details.right.attach-dir {n}"
+    return _handle_tweak(string, event=event, grob=grob, i=i, tag=tag, target=target)
+
+
 def bound_details_right_end_on_accidental_false(
     *, event=False, grob=None, i=None, tag=None, target=None
 ):
