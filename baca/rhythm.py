@@ -352,11 +352,14 @@ def _style_accelerando(
 class AfterGrace:
     grace_note_numerators: list
     main_note_numerator: int
+    fraction_string: str | None = None
 
     def __post_init__(self):
         assert isinstance(self.grace_note_numerators, list), repr(
             self.grace_note_numerators
         )
+        if self.fraction_string is not None:
+            assert isinstance(self.fraction_string, str), repr(self.fraction_string)
 
     def __call__(self, denominator, tag: abjad.Tag):
         tag = tag.append(_helpers.function_name(_frame()))
@@ -375,7 +378,12 @@ class AfterGrace:
             temporary_voice = abjad.Voice(grace_leaves, name="TemporaryVoice")
             abjad.beam(grace_leaves)
             temporary_voice[:] = []
-        agc = abjad.AfterGraceContainer(grace_leaves, fraction=(15, 16), tag=tag)
+        if self.fraction_string is None:
+            fraction = (15, 16)
+        else:
+            n_string, d_string = self.fraction_string.split("/")
+            fraction = int(n_string), int(d_string)
+        agc = abjad.AfterGraceContainer(grace_leaves, fraction=fraction, tag=tag)
         last_leaf = abjad.get.leaf(main_components, -1)
         abjad.attach(agc, last_leaf)
         return main_components
