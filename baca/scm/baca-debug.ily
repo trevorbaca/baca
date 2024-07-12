@@ -59,6 +59,12 @@ print-spanner-properties = #(lambda (grob)
     (ly:message "(ly:grob-property grob 'bound-details): ~s"
       (ly:grob-property grob 'bound-details))
     (ly:message "")
+    (ly:message "(assoc-get 'left (ly:grob-property grob 'bound-details)):")
+    (ly:message "~s" (assoc-get 'left (ly:grob-property grob 'bound-details)))
+    (ly:message "")
+    (ly:message "(assoc-get 'right (ly:grob-property grob 'bound-details)):")
+    (ly:message "~s" (assoc-get 'right (ly:grob-property grob 'bound-details)))
+    (ly:message "")
     (ly:message "(ly:grob-property grob 'left-bound-info): ~s"
       (ly:grob-property grob 'left-bound-info))
     (ly:message "")
