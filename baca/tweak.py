@@ -136,3 +136,13 @@ def x_extent_zero(*, event=False, grob=None, i=None, tag=None, target=None):
 def x_offset(n, *, event=False, grob=None, i=None, tag=None, target=None):
     string = f"X-offset {n}"
     return _handle_tweak(string, event=event, grob=grob, i=i, tag=tag, target=target)
+
+
+def y_extent_false(*, event=False, grob=None, i=None, tag=None, target=None):
+    string = "Y-extent ##f"
+    return _handle_tweak(string, event=event, grob=grob, i=i, tag=tag, target=target)
+
+
+def y_extent_zero(*, event=False, grob=None, i=None, tag=None, target=None):
+    string = "Y-extent #'(0 . 0)"
+    return _handle_tweak(string, event=event, grob=grob, i=i, tag=tag, target=target)
