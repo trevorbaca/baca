@@ -21,8 +21,14 @@ print-grob-properties = #( lambda (grob)
   (ly:message "(ly:grob-original grob): ~s" (ly:grob-original grob))
   (ly:message "(ly:grob-parent grob 0): ~s" (ly:grob-parent grob 0))
   (ly:message "(ly:grob-parent grob 1): ~s" (ly:grob-parent grob 1))
+  (ly:message "(ly:grob-property grob 'break-align-anchor): ~s"
+    (ly:grob-property grob 'break-align-anchor))
+  (ly:message "(ly:grob-property grob 'break-align-anchor-alignment): ~s"
+    (ly:grob-property grob 'break-align-anchor-alignment))
   (ly:message "(ly:grob-property grob 'break-align-symbol): ~s"
     (ly:grob-property grob 'break-align-symbol))
+  (ly:message "(ly:grob-property grob 'break-align-symbols): ~s"
+    (ly:grob-property grob 'break-align-symbols))
   (ly:message "(ly:grob-property grob 'break-visibility): ~s"
     (ly:grob-property grob 'break-visibility))
   (ly:message "(ly:grob-property grob 'font-size): ~s"
