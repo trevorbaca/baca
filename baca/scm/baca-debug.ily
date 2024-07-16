@@ -37,6 +37,8 @@ print-grob-properties = #( lambda (grob)
     (ly:grob-property grob 'non-musical))
   (ly:message "(ly:grob-property grob 'outside-staff-priority): ~s"
     (ly:grob-property grob 'outside-staff-priority))
+  (ly:message "(ly:grob-property grob 'stencil): ~s"
+    (ly:grob-property grob 'stencil))
   (ly:message "(ly:grob-relative-coordinate grob grob 0): ~s"
     (ly:grob-relative-coordinate grob grob 0))
   (ly:message "(ly:grob-relative-coordinate grob grob 1): ~s"
