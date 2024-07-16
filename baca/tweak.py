@@ -73,6 +73,13 @@ def direction_down(*, event=False, grob=None, i=None, tag=None, target=None):
     return _handle_tweak(string, event=event, grob=grob, i=i, tag=tag, target=target)
 
 
+def endpoint_alignments_center_center(
+    *, event=False, grob=None, i=None, tag=None, target=None
+):
+    string = "endpoint-alignments #'(0 . 0)"
+    return _handle_tweak(string, event=event, grob=grob, i=i, tag=tag, target=target)
+
+
 def endpoint_alignments_left_center(
     *, event=False, grob=None, i=None, tag=None, target=None
 ):
