@@ -128,6 +128,7 @@ class Spacing:
 
     default: tuple[int, int]
     annotate_spacing: bool = False
+    centered_bar_number_extra_offset: dict = dataclasses.field(default_factory=dict)
     centered_bar_number_transparent_true: list[int] = dataclasses.field(
         default_factory=list
     )
@@ -203,6 +204,16 @@ class Spacing:
                     literal,
                     spacing_commands_skip,
                     tag=_helpers.function_name(_frame(), n=4),
+                )
+            if measure_number in self.centered_bar_number_extra_offset:
+                pair = self.centered_bar_number_extra_offset[measure_number]
+                string = r"\once \override Score.CenteredBarNumber.extra-offset"
+                string += f" = #'({pair[0]} . {pair[1]})"
+                literal = abjad.LilyPondLiteral(string)
+                abjad.attach(
+                    literal,
+                    spacing_commands_skip,
+                    tag=_helpers.function_name(_frame(), n=5),
                 )
             if self.annotate_spacing is False:
                 continue
