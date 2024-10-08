@@ -38,7 +38,7 @@ def chead(
         >>> result
         Chord("<fs' gs'>4")
 
-        >>> abjad.label.by_selector(result, lone=True)
+        >>> abjad.label.color_leaves(result, "#green")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -131,7 +131,7 @@ def cheads(
         Chord("<a'' b''>16")
         Chord("<fs' gs'>4")
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -237,7 +237,7 @@ def clparts(
         [Chord("<e' fs'>16"), Rest('r16'), Note("bf'16")]
         [Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")]
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -341,7 +341,7 @@ def cmgroups(
         [Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")]
         [Note("g'8"), Note("a'8"), Note("b'8"), Rest('r8')]
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', staff])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -547,7 +547,7 @@ def grace(
         >>> result
         Note("gf'16")
 
-        >>> abjad.label.by_selector(result, lone=True)
+        >>> abjad.label.color_leaves(result, "#green")
         >>> lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', staff])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -607,7 +607,7 @@ def graces(
         Note("af'16")
         Note("gf'16")
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', staff])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -692,7 +692,7 @@ def hleaf(
         >>> result
         Note("d'8")
 
-        >>> abjad.label.by_selector(result, lone=True)
+        >>> abjad.label.color_leaves(result, "#green")
         >>> lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', staff])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -753,7 +753,7 @@ def hleaves(
         Note("e'8")
         Note("f'8")
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', staff])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -823,7 +823,7 @@ def lleaf(
         >>> result
         Chord("<d' e'>16")
 
-        >>> abjad.label.by_selector(result, lone=True)
+        >>> abjad.label.color_leaves(result, "#green")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -901,7 +901,7 @@ def lleak(argument, count: int = 1) -> list[abjad.Leaf]:
         [Rest('r8'), Note("d'8"), Note("e'8")]
         [Rest('r8'), Note("f'8"), Note("g'8"), Note("a'8")]
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', staff])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -976,7 +976,7 @@ def lleaves(
         Chord("<e' fs'>4")
         Chord("<e' fs'>16")
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1080,7 +1080,7 @@ def lparts(
         [Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")]
         [Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")]
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1176,7 +1176,7 @@ def lt(
         >>> result
         LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
-        >>> abjad.label.by_selector(result, lone=True)
+        >>> abjad.label.color_leaves(result, "#green")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1263,7 +1263,7 @@ def ltleaf(
         >>> result
         Note("bf'16")
 
-        >>> abjad.label.by_selector(result, lone=True)
+        >>> abjad.label.color_leaves(result, "#green")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1366,7 +1366,7 @@ def ltleaves(
         Rest('r4')
         Rest('r16')
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1468,7 +1468,7 @@ def ltqrun(
         >>> result
         [LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])]
 
-        >>> abjad.label.by_selector(result, lone=True)
+        >>> abjad.label.color_leaves(result, "#green")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1562,7 +1562,7 @@ def ltqruns(
         [LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")])]
         [LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])]
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1668,7 +1668,7 @@ def ltrun(
         >>> result
         [LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])]
 
-        >>> abjad.label.by_selector(result, lone=True)
+        >>> abjad.label.color_leaves(result, "#green")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1762,7 +1762,7 @@ def ltruns(
         [LogicalTie(items=[Note("d'16")]), LogicalTie(items=[Note("d'16")]), LogicalTie(items=[Note("d'16")]), LogicalTie(items=[Chord("<e' fs'>4"), Chord("<e' fs'>16")])]
         [LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])]
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1883,7 +1883,7 @@ def lts(
         LogicalTie(items=[Note("e'16")])
         LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -1984,7 +1984,7 @@ def mgroups(
         ...
         [Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")]
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', staff])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2053,7 +2053,7 @@ def mleaves(
         Note("a'8")
         Note("b'8")
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', staff])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2109,7 +2109,7 @@ def mleaves(
         Note("b'8")
         Rest('r8')
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', staff])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2172,7 +2172,7 @@ def mmrest(
         >>> result
         MultimeasureRest('R1')
 
-        >>> abjad.label.by_selector(result, lone=True)
+        >>> abjad.label.color_leaves(result, "#green")
         >>> lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', staff])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2222,7 +2222,7 @@ def mmrests(
         MultimeasureRest('R1')
         MultimeasureRest('R1')
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', staff])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2278,7 +2278,7 @@ def ntrun(
         >>> result
         [Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")]
 
-        >>> abjad.label.by_selector(result, lone=True)
+        >>> abjad.label.color_leaves(result, "#green")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2372,7 +2372,7 @@ def ntruns(
         [Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16")]
         [Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")]
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2475,7 +2475,7 @@ def omgroups(
         [Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")]
         [Note("g'8"), Note("a'8"), Note("b'8"), Rest('r8'), Note("d''8")]
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', staff])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2599,7 +2599,7 @@ def phead(
         >>> result
         Chord("<fs' gs'>4")
 
-        >>> abjad.label.by_selector(result, lone=True)
+        >>> abjad.label.color_leaves(result, "#green")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2699,7 +2699,7 @@ def pheads(
         Note("e'16")
         Chord("<fs' gs'>4")
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2802,7 +2802,7 @@ def pleaf(
         >>> result
         Chord("<fs' gs'>16")
 
-        >>> abjad.label.by_selector(result, lone=True)
+        >>> abjad.label.color_leaves(result, "#green")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -2907,7 +2907,7 @@ def pleaves(
         Chord("<fs' gs'>4")
         Chord("<fs' gs'>16")
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3013,7 +3013,7 @@ def plt(
         >>> result
         LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
-        >>> abjad.label.by_selector(result, lone=True)
+        >>> abjad.label.color_leaves(result, "#green")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3114,7 +3114,7 @@ def plts(
         LogicalTie(items=[Note("e'16")])
         LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3216,7 +3216,7 @@ def ptail(
         >>> result
         Chord("<fs' gs'>16")
 
-        >>> abjad.label.by_selector(result, lone=True)
+        >>> abjad.label.color_leaves(result, "#green")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3315,7 +3315,7 @@ def ptails(
         Note("e'16")
         Chord("<fs' gs'>16")
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3414,7 +3414,7 @@ def ptlt(
         >>> result
         LogicalTie(items=[Note("e'16")])
 
-        >>> abjad.label.by_selector(result, lone=True)
+        >>> abjad.label.color_leaves(result, "#green")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3510,7 +3510,7 @@ def ptlts(
         LogicalTie(items=[Chord("<a'' b''>16")])
         LogicalTie(items=[Note("e'16")])
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3606,7 +3606,7 @@ def qrun(
         >>> result
         [Chord("<fs' gs'>4"), Chord("<fs' gs'>16")]
 
-        >>> abjad.label.by_selector(result, lone=True)
+        >>> abjad.label.color_leaves(result, "#green")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3700,7 +3700,7 @@ def qruns(
         [Note("e'16"), Note("e'16"), Note("e'16")]
         [Chord("<fs' gs'>4"), Chord("<fs' gs'>16")]
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3809,7 +3809,7 @@ def rleaf(
         >>> result
         Rest('r16')
 
-        >>> abjad.label.by_selector(result, lone=True)
+        >>> abjad.label.color_leaves(result, "#green")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -3888,7 +3888,7 @@ def rleak(argument, *, count: int = 1, grace: bool | None = None) -> list[abjad.
         [Note("d'8"), Note("e'8"), Rest('r8')]
         [Note("f'8"), Note("g'8"), Note("a'8")]
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', staff])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3981,7 +3981,7 @@ def rleaves(
         Chord("<e' fs'>16")
         Rest('r16')
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -4075,7 +4075,7 @@ def rmleaves(
         Note("f'8")
         Note("g'8")
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', staff])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4142,7 +4142,7 @@ def rrun(
         >>> result
         [Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')]
 
-        >>> abjad.label.by_selector(result, lone=True)
+        >>> abjad.label.color_leaves(result, "#green")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -4237,7 +4237,7 @@ def rruns(
         [Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')]
         [Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")]
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -4341,7 +4341,7 @@ def skip(
         >>> result
         Skip('s8')
 
-        >>> abjad.label.by_selector(result, lone=True)
+        >>> abjad.label.color_leaves(result, "#green")
         >>> lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', staff])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4399,7 +4399,7 @@ def skips(
         Skip('s8')
         Skip('s8')
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> lilypond_file = abjad.LilyPondFile([r'\include "abjad.ily"', staff])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4489,7 +4489,7 @@ def tleaf(
         >>> result
         Note("bf'16")
 
-        >>> abjad.label.by_selector(result, lone=True)
+        >>> abjad.label.color_leaves(result, "#green")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -4597,7 +4597,7 @@ def tleaves(
         Chord("<fs' gs'>4")
         Chord("<fs' gs'>16")
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -4765,7 +4765,7 @@ def wleaf(
         >>> result
         Chord("<d' e'>16")
 
-        >>> abjad.label.by_selector(result, lone=True)
+        >>> abjad.label.color_leaves(result, "#green")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -4842,7 +4842,7 @@ def wleaf(
         >>> result
         Rest('r16')
 
-        >>> abjad.label.by_selector(result, lone=True)
+        >>> abjad.label.color_leaves(result, "#green")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -4938,7 +4938,7 @@ def wleaves(
         Chord("<e' fs'>16")
         Rest('r16')
 
-        >>> abjad.label.by_selector(result)
+        >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::

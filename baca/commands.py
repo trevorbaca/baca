@@ -211,10 +211,6 @@ def bcps(
     return wrappers
 
 
-def color(argument, *, lone: bool = False) -> None:
-    return abjad.label.by_selector(argument, lone=lone)
-
-
 def durations(items):
     return [abjad.Duration(_) for _ in items]
 

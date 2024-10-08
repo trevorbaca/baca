@@ -30,7 +30,6 @@ from .anchor import (
 )
 from .commands import (
     bcps,
-    color,
     durations,
     finger_pressure_transition,
     force_accidental,
