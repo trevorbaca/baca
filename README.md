@@ -8,3 +8,4 @@ bača
     https://github.com/ambv/black)
 
 Requires Python 3.10+.
+
