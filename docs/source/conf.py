@@ -3,7 +3,7 @@ import sphinx_rtd_theme
 add_parentheses = True
 autodoc_member_order = "groupwise"
 
-copyright = "1997-2024, Trevor Bača"
+copyright = "1997-2025, Trevor Bača"
 
 exclude_patterns = []
 extensions = [
@@ -38,12 +38,11 @@ html_theme_options = {
     "sticky_navigation": True,
     "style_external_links": True,
 }
-html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 htmlhelp_basename = "BačaAPIdoc"
 
 intersphinx_mapping = {
-    "http://www.sphinx-doc.org/en/master/": None,
-    "https://docs.python.org/3.10/": None,
+    "python": ("https://docs.python.org/3", None),
+    "sphinx": ("http://www.sphinx-doc.org/en/master/", None),
 }
 
 master_doc = "index"
