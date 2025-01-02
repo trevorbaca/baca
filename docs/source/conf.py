@@ -1,5 +1,3 @@
-import sphinx_rtd_theme
-
 add_parentheses = True
 autodoc_member_order = "groupwise"
 
