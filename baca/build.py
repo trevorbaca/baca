@@ -668,7 +668,7 @@ def _make_section_clicktrack(lilypond_file, mtime, section_directory):
     score_block = abjad.Block("score", [score, abjad.Block("midi")])
     lilypond_file = abjad.LilyPondFile([score_block])
     print_file_handling(f"Writing {baca.path.trim(clicktrack_path)} ...")
-    abjad.persist.as_midi(lilypond_file, clicktrack_file_name)
+    abjad.persist.as_pdf(lilypond_file, clicktrack_file_name)
     ly_path = section_directory / "clicktrack.ly"
     if ly_path.exists():
         ly_path.unlink()
@@ -696,7 +696,7 @@ def _make_section_midi(lilypond_file, mtime, section_directory):
     lilypond_file = abjad.LilyPondFile([score_block])
     tmp_midi = section_directory / "tmp.midi"
     print_file_handling(f"Writing {baca.path.trim(music_midi)} ...")
-    abjad.persist.as_midi(lilypond_file, tmp_midi)
+    abjad.persist.as_pdf(lilypond_file, tmp_midi)
     if tmp_midi.is_file():
         shutil.move(tmp_midi, music_midi)
     tmp_ly = tmp_midi.with_suffix(".ly")
