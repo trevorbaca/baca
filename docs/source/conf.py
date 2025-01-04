@@ -1,4 +1,5 @@
-add_parentheses = True
+### https://www.sphinx-doc.org/en/master/usage/configuration.html ###
+
 autodoc_member_order = "groupwise"
 
 copyright = "1997-2025, Trevor Bača"
@@ -30,10 +31,10 @@ html_show_sourcelink = True
 html_static_path = ["_static"]
 html_theme = "sphinx_rtd_theme"
 html_theme_options = {
-    "collapse_navigation": True,
-    "navigation_depth": -1,
-    "sticky_navigation": True,
+    "navigation_depth": 1,
+    "sticky_navigation": False,
     "style_external_links": True,
+    "style_nav_header_background": "#eeccaa",
 }
 htmlhelp_basename = "BačaAPIdoc"
 
@@ -42,16 +43,11 @@ intersphinx_mapping = {
     "sphinx": ("http://www.sphinx-doc.org/en/master/", None),
 }
 
-master_doc = "index"
-
 project = "Bača API"
 pygments_style = "sphinx"
 
 release = ""
 
-source_suffix = ".rst"
-
-templates_path = ["_templates"]
 todo_include_todos = True
 
 uqbar_api_member_documenter_classes = [
