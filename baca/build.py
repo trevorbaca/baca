@@ -1665,7 +1665,7 @@ def persist_section_layout_ily(
     block = lilypond_file.items.pop()
     score = block.items.pop()
     lilypond_file.items.append(score)
-    string = abjad.lilypond(lilypond_file, keep_tags=True) + "\n"
+    string = abjad.lilypond(lilypond_file, tags=True) + "\n"
     lines = string.split("\n")
     assert "abjad.LilyPondFile._get_format_pieces()" in lines[0]
     assert "baca.lilypond._make_lilypond_file()" in lines[1]
