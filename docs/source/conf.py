@@ -14,7 +14,6 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx.ext.todo",
     "sphinx.ext.viewcode",
-    "sphinx_autodoc_typehints",
     "sphinx_toggleprompt",
     "uqbar.sphinx.api",
     "uqbar.sphinx.book",
