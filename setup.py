@@ -24,7 +24,7 @@ if __name__ == "__main__":
         author="Trevor Bača",
         author_email="trevor.baca@gmail.com",
         description="Trevor Bača's Abjad library.",
-        # extras_require=extras_require,
+        extras_require=extras_require,
         install_requires=[
             "abjad>=3.19",
             "sphinx",
