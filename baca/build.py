@@ -728,7 +728,7 @@ def _make_section_pdf(
     music_ly = section_directory / "music.ly"
     music_pdf = section_directory / "music.pdf"
     music_ly_mtime = os.path.getmtime(music_ly) if music_ly.is_file() else 0
-    abjad.persist.as_ly(lilypond_file, music_ly, keep_tags=True)
+    abjad.persist.as_ly(lilypond_file, music_ly, tags=True)
     if music_ly.is_file() and music_ly_mtime < os.path.getmtime(music_ly):
         print_file_handling(f"Writing {baca.path.trim(music_ly)} ...")
     print_file_handling("Removing section tag files ...")
@@ -1079,7 +1079,7 @@ def _trim_music_ly(ly):
 
 
 def _write_music_ly(lilypond_file, music_ly):
-    abjad.persist.as_ly(lilypond_file, music_ly, keep_tags=True)
+    abjad.persist.as_ly(lilypond_file, music_ly, tags=True)
 
 
 def _make_empty_mapping_proxy():
