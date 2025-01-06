@@ -13,24 +13,12 @@ def read_version():
     return __version__
 
 
-extras_require = {
-    "toggleprompt_no_deps": [
-        "sphinx-toggleprompt @ git+https://github.com/external-repo#egg=sphinx-toggleprompt --no-deps"
-    ]
-}
-
 if __name__ == "__main__":
     setuptools.setup(
         author="Trevor Bača",
         author_email="trevor.baca@gmail.com",
         description="Trevor Bača's Abjad library.",
-        extras_require=extras_require,
-        install_requires=[
-            "abjad>=3.19",
-            "sphinx",
-            "sphinx-rtd-theme",
-            # "sphinx-toggleprompt",
-        ],
+        install_requires=["abjad>=3.19"],
         keywords="abjad, lilypond, music composition, music notation",
         license="MIT",
         name="baca",
