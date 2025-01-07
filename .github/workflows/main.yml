@@ -87,9 +87,9 @@ jobs:
         make flake8
         echo; echo Running isort ...
         make isort-check
-        # TODO:
-        # echo; echo Running mypy ...
-        # mypy --config-file=$GITHUB_WORKSPACE/mypy.ini baca
+        export MYPYPATH=$MYPYPATH:/tmp/abjad
+        echo; echo Running mypy ...
+        make mypy
 
     - name: Run pytest
       run: |
