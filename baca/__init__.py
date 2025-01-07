@@ -81,6 +81,6 @@ from .rhythm import (
 )
 from .scope import scope
 
-if sys.version_info[:2] < (3, 10):
-    raise ImportError("Requires Python 3.10 or later")
+if sys.version_info[:2] < (3, 12):
+    raise ImportError("Requires Python 3.12 or later")
 del sys

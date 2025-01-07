@@ -7,5 +7,4 @@ bača
     https://img.shields.io/badge/code%20style-black-000000.svg)](
     https://github.com/ambv/black)
 
-Requires Python 3.10+.
-
+Requires Python 3.12+.
