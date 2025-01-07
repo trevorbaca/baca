@@ -18,7 +18,7 @@ if __name__ == "__main__":
         author="Trevor Bača",
         author_email="trevor.baca@gmail.com",
         description="Trevor Bača's Abjad library.",
-        install_requires=["abjad>=3.19"],
+        install_requires=["abjad>=3.20"],
         keywords="abjad, lilypond, music composition, music notation",
         license="MIT",
         name="baca",
