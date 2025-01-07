@@ -33,10 +33,14 @@ jobs:
 
     - name: Install LilyPond
       run: |
-        lilypond_url=http://lilypond.org/download/binaries/linux-64/
-        lilypond_source=lilypond-2.23.0-1.linux-64.sh
-        wget -q -O /tmp/lilypond $lilypond_url/$lilypond_source
-        sh /tmp/lilypond --batch
+        lilypond_version=2.25.22
+        lilypond_archive=lilypond-${lilypond_version}-linux-x86_64.tar.gz
+        lilypond_url=https://gitlab.com/lilypond/lilypond/-/releases/
+        lilypond_url=${lilypond_url}/v${lilypond_version}/downloads/${lilypond_archive}
+        echo ${lilypond_url}
+        cd /tmp
+        wget -q ${lilypond_url}
+        tar -xf ${lilypond_archive}
 
     - name: Upgrade pip
       run: |
@@ -72,7 +76,7 @@ jobs:
         echo; echo Running pytest --version ...
         pytest --version
         echo; echo Running lilypond --version ...
-        export PATH=/home/runner/bin:${PATH}
+        export PATH=/tmp/lilypond-2.25.22/bin:${PATH}
         lilypond --version
 
     - name: Run checks
@@ -83,6 +87,7 @@ jobs:
         make flake8
         echo; echo Running isort ...
         make isort-check
+        # TODO:
         # echo; echo Running mypy ...
         # mypy --config-file=$GITHUB_WORKSPACE/mypy.ini baca
 
