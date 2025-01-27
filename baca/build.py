@@ -570,7 +570,7 @@ def _log_timing(section_directory, timing):
         if part == os.path.sep:
             pass
         elif part == "Scores":
-            parts.append("_timing")
+            parts.extend(["Regression", "timing"])
         else:
             parts.append(part)
     _timing_repo = "/" + os.path.sep.join(parts)
