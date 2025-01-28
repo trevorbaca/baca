@@ -866,7 +866,7 @@ def _persistent_indicator_color_suppression_tags():
 def _populate_verbose_repository(section_directory):
     if os.environ.get("GITHUB_WORKSPACE"):
         return
-    print_main_task("Populating _verbose repository ...")
+    print_main_task("Populating $REGRESSION/verbose repository ...")
     for name in ("music.ly", "music.ily", "layout.ily"):
         path = section_directory / name
         if not path.exists():
@@ -879,7 +879,7 @@ def _populate_verbose_repository(section_directory):
             if part == os.path.sep:
                 pass
             elif part == "Scores":
-                parts.append("_verbose")
+                parts.extend(["Regression", "verbose"])
             else:
                 parts.append(part)
         _untagged = "/" + os.path.sep.join(parts)
@@ -892,7 +892,7 @@ def _populate_verbose_repository(section_directory):
 def _populate_untagged_repository(section_directory):
     if os.environ.get("GITHUB_WORKSPACE"):
         return
-    print_main_task("Populating _untagged repository ...")
+    print_main_task("Populating $REGRESSION/untagged repository ...")
     for name in ("music.ly", "music.ily", "layout.ily"):
         path = section_directory / name
         if not path.exists():
@@ -913,7 +913,7 @@ def _populate_untagged_repository(section_directory):
             if part == os.path.sep:
                 pass
             elif part == "Scores":
-                parts.append("_untagged")
+                parts.extend(["Regression", "untagged"])
             else:
                 parts.append(part)
         _untagged = "/" + os.path.sep.join(parts)
@@ -929,7 +929,7 @@ def _populate_untagged_repository(section_directory):
         shutil.copyfile(path, safekeeping)
         color_persistent_indicators(path, undo=True)
         show_annotations(path, undo=True)
-    print_main_task("Populating _bw repository ...")
+    print_main_task("Populating $REGRESSION/bw repository ...")
     for name in ("music.ly", "music.ily", "layout.ily"):
         path = section_directory / name
         if not path.exists():
@@ -956,7 +956,7 @@ def _populate_untagged_repository(section_directory):
             if part == os.path.sep:
                 pass
             elif part == "Scores":
-                parts.append("_bw")
+                parts.extend(["Regression", "bw"])
             else:
                 parts.append(part)
         _bw = "/" + os.path.sep.join(parts)
@@ -1589,10 +1589,10 @@ def interpret_build_music(
     metadata = baca.path.get_metadata(contents_directory)
     do_not_populate_remote_repos = metadata.get("do_not_populate_remote_repos")
     if "trevor" in _sections_directory.parts and not do_not_populate_remote_repos:
-        print_main_task("Populating _builds repository ...")
+        print_main_task("Populating $REGRESSION/scorebuilds repository ...")
         parts = list(_sections_directory.parts)
         assert parts[3] == "Scores"
-        parts[3] = "_builds"
+        parts[3:4] = ["Regression", "scorebuilds"]
         _builds_sections_directory = os.sep + os.sep.join(parts[1:])
         shutil.copytree(
             _sections_directory, _builds_sections_directory, dirs_exist_ok=True
