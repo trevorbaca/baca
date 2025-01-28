@@ -1100,8 +1100,8 @@ class BuildDirectoryEnvironment:
     time_signatures: list[str]
 
 
-def read_build_directory_environment() -> BuildDirectoryEnvironment:
-    build_directory = pathlib.Path(os.getcwd())
+def read_build_directory_environment(layout_py_path) -> BuildDirectoryEnvironment:
+    build_directory = pathlib.Path(layout_py_path).parent
     sections_directory = baca.path.get_contents_directory(build_directory) / "sections"
     time_signatures = accumulate_time_signatures(sections_directory)
     fermata_measure_numbers = accumulate_fermata_measure_numbers(sections_directory)
