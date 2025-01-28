@@ -61,7 +61,7 @@ jobs:
         python -m pip install -e .
 
     - name: Prime parser tables
-      run: /tmp/abjad/scr/prime-parser-tables
+      run: /tmp/abjad/scr/prime_parser_tables.py
 
     - name: Log versions
       run: |
