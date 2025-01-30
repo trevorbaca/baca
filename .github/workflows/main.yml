@@ -32,15 +32,7 @@ jobs:
         echo "\$PATH:" $PATH
 
     - name: Install LilyPond
-      run: |
-        lilypond_version=2.25.22
-        lilypond_archive=lilypond-${lilypond_version}-linux-x86_64.tar.gz
-        lilypond_url=https://gitlab.com/lilypond/lilypond/-/releases/
-        lilypond_url=${lilypond_url}/v${lilypond_version}/downloads/${lilypond_archive}
-        echo ${lilypond_url}
-        cd /tmp
-        wget -q ${lilypond_url}
-        tar -xf ${lilypond_archive}
+      uses: Abjad/install-lilypond@v2.25.23
 
     - name: Upgrade pip
       run: |
@@ -76,7 +68,7 @@ jobs:
         echo; echo Running pytest --version ...
         pytest --version
         echo; echo Running lilypond --version ...
-        export PATH=/tmp/lilypond-2.25.22/bin:${PATH}
+        export PATH=/tmp/lilypond-2.25.23/bin:${PATH}
         lilypond --version
 
     - name: Run checks
