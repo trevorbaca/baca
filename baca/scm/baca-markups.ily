@@ -27,7 +27,7 @@ baca-left-broken-xfb-markup =
 baca-full-downbow-markup =
     \markup
     \combine
-    \musicglyph "scripts.downbow"
+    \musicglyph "scripts.udownbow"
     \path #0.15
     #'(
         (moveto 0.7375 0.05)
@@ -38,7 +38,7 @@ baca-full-downbow-markup =
 baca-full-upbow-markup =
     \markup
     \combine
-    \musicglyph "scripts.upbow"
+    \musicglyph "scripts.uupbow"
     \path #0.15
     #'(
         (moveto 0.62 2.005)
@@ -61,7 +61,7 @@ baca-stop-on-string-markup =
 baca-stop-on-string-full-downbow-markup =
     \markup
     \combine
-    \musicglyph "scripts.downbow"
+    \musicglyph "scripts.udownbow"
     \path #0.15
     #'(
         (moveto 0.7375 0.05)
@@ -75,7 +75,7 @@ baca-stop-on-string-full-downbow-markup =
 baca-stop-on-string-full-upbow-markup =
     \markup
     \combine
-    \musicglyph "scripts.upbow"
+    \musicglyph "scripts.uupbow"
     \path #0.15
     #'(
         (moveto 0.62 2.005)
