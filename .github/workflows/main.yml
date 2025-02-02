@@ -81,7 +81,7 @@ jobs:
 
     - name: Install this package
       run: |
-        python -m pip install -e .
+        python -m pip install .
 
     - name: Log Python dependencies
       run: |
