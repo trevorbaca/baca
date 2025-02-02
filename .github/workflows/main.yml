@@ -9,6 +9,7 @@ on:
 
 env:
   MYPYPATH: /tmp/abjad:/tmp/abjad-ext-rmakers
+  PYTHONUNBUFFERED: TRUE
 
 jobs:
   build:
@@ -68,7 +69,7 @@ jobs:
     - name: Install trevor/dev branch of Abjad
       run: |
         git clone -b trevor/dev https://github.com/Abjad/abjad.git /tmp/abjad
-        python -m pip install -e /tmp/abjad[dev]
+        python -m pip install /tmp/abjad[dev]
 
     - name: Prime parser tables
       run: /tmp/abjad/scr/prime_parser_tables.py
