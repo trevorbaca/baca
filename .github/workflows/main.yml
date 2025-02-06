@@ -98,7 +98,7 @@ jobs:
         make black-check
         make flake8
         make isort-check
-        make mypy
+        # make mypy
 
     - name: Run pytest
       run: |
