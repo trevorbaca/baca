@@ -1,7 +1,6 @@
 import abjad
-import pytest
 import baca
-
+import pytest
 from abjadext import rmakers
 
 

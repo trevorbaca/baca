@@ -5,21 +5,22 @@ SimpleNamespace = types.SimpleNamespace
 
 import abjad
 
-from . import array
-from . import build
-from . import dynamics
-from . import layout
-from . import math
-from . import override
-from . import path
-from . import score
-from . import section
-from . import select
-from . import sequence
-from . import spanners
-from . import tweak
-from . import typings
-from .enums import colors, enums
+from . import (
+    array,
+    build,
+    dynamics,
+    layout,
+    math,
+    override,
+    path,
+    score,
+    section,
+    select,
+    sequence,
+    spanners,
+    tweak,
+    typings,
+)
 from .anchor import (
     anchor,
     anchor_after,
@@ -28,6 +29,7 @@ from .anchor import (
     resume,
     resume_after,
 )
+from .classes import *
 from .commands import (
     bcps,
     durations,
@@ -39,10 +41,10 @@ from .commands import (
 )
 from .constellation import *
 from .docs import global_context_string
-from .imbricate import imbricate
-from .classes import *
+from .enums import colors, enums
 from .hairpins import hairpin
 from .helpers import call
+from .imbricate import imbricate
 from .indicators import *
 from .lilypond import file
 from .memento import *
@@ -56,10 +58,9 @@ from .pcollections import (
     RegistrationComponent,
 )
 from .pitchtools import *
-
 from .rhythm import (
-    from_collection,
     LMR,
+    from_collection,
     make_accelerando,
     make_bgcs,
     make_even_divisions,

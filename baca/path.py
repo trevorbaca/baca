@@ -7,9 +7,8 @@ import os
 import pathlib
 import types
 
-import black
-
 import abjad
+import black
 
 
 def _get_previous_section(path: pathlib.Path):
