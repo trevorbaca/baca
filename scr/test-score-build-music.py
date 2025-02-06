@@ -39,7 +39,7 @@ def _test_build(build):
         layout_py = build / "layout.py"
         if layout_py.exists():
             os.system("python layout.py")
-        os.system("interpret-build-music")
+        os.system("interpret-build-music.py")
         if layout_py.exists():
             layout_ily = build / "layout.ily"
             if layout_ily.exists():
@@ -78,7 +78,6 @@ def _test_build(build):
 
 def main():
     builds = _get_builds()
-    count = len(builds)
     messages, diffs, result = [], [], 0
     for i, build in enumerate(builds):
         messages_, diffs_, result_ = _test_build(build)

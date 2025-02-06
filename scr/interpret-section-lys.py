@@ -1,5 +1,4 @@
 #! /usr/bin/env python
-import argparse
 import os
 import pathlib
 
@@ -8,8 +7,6 @@ import baca
 
 def main():
     current_directory = pathlib.Path(os.getcwd())
-    parser = argparse.ArgumentParser(description="Call LilyPond on sections in score.")
-    arguments = parser.parse_args()
     contents_directory = baca.path.get_contents_directory(current_directory)
     sections_directory = contents_directory / "sections"
     for path in sorted(sections_directory.glob("[0-9]*")):

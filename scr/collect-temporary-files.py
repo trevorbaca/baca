@@ -1,5 +1,4 @@
 #! /usr/bin/env python
-import argparse
 import os
 import pathlib
 
@@ -7,8 +6,6 @@ import baca
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Collect section .[i]ly files.")
-    arguments = parser.parse_args()
     directory = os.getcwd()
     directory = pathlib.Path(directory)
     assert "builds" in directory.parts, repr(directory)

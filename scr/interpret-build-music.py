@@ -2,7 +2,6 @@
 import argparse
 import os
 import pathlib
-import sys
 
 import baca
 
