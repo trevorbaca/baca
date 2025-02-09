@@ -93,12 +93,12 @@ jobs:
         pip --version
         pytest --version
 
-    - name: Run checks
+    - name: Run lints
       run: |
         make black-check
         make flake8
         make isort-check
-        # make mypy
+        make mypy
 
     - name: Run pytest
       run: |
