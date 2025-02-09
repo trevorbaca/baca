@@ -34,18 +34,14 @@ isort-reformat:
 	      --thirdparty=abjad --thirdparty=abjadext --thirdparty=baca \
 	      --thirdparty=ply --thirdparty=uqbar --trailing-comma --use-parentheses .
 
-# TODO
-# mypy:
-#	mypy baca
+mypy:
+	mypy baca
 
 pytest:
 	pytest .
 
 reformat: black-reformat isort-reformat
 
-lint: black-check flake8 isort-check
-
-# TODO
-# lint: black-check flake8 isort-check mypy
+lint: black-check flake8 isort-check mypy
 
 test: lint pytest
