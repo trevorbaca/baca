@@ -1,5 +1,5 @@
 .PHONY: black-check black-reformat clean docs flake8 install isort-check \
-	isort-reformat pytest reformat lint test
+	isort-reformat mypy pytest reformat lint test
 
 black-check:
 	black --check --diff .
