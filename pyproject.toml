@@ -18,3 +18,4 @@ Homepage = "https://github.com/trevorbaca/baca"
 
 [tool.setuptools]
 packages = ["baca"]
+package-dir = { "" = "source" }
