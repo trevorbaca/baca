@@ -66,7 +66,7 @@ uqbar_api_title = "Bača API"
 uqbar_book_console_setup = [
     "import abjad",
     "import baca",
-    "from abjadext import rmakers",
+    "import rmakers",
 ]
 uqbar_book_console_teardown = []
 uqbar_book_extensions = [

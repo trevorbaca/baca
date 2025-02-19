@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  MYPYPATH: /tmp/abjad:/tmp/abjad-ext-rmakers
+  MYPYPATH: /tmp/abjad:/tmp/rmakers
   PYTHONUNBUFFERED: TRUE
 
 jobs:
@@ -76,8 +76,8 @@ jobs:
 
     - name: Install rmakers
       run: |
-        git clone https://github.com/Abjad/abjad-ext-rmakers.git /tmp/abjad-ext-rmakers
-        python -m pip install /tmp/abjad-ext-rmakers
+        git clone https://github.com/Abjad/rmakers.git /tmp/rmakers
+        python -m pip install /tmp/rmakers
 
     - name: Install this package
       run: |

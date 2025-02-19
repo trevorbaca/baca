@@ -8,7 +8,7 @@ import typing
 from inspect import currentframe as _frame
 
 import abjad
-from abjadext import rmakers
+import rmakers
 
 from . import helpers as _helpers
 from . import select as _select
