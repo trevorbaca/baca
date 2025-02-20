@@ -4,7 +4,10 @@ requires = ["setuptools>=61.0"]
 
 [project]
 authors = [{name = "Trevor Bača", email = "trevor.baca@gmail.com"}]
-dependencies = ["abjad>=3.21"]
+dependencies = [
+    "abjad>=3.21",
+    "sphinx-toggleprompt>=0.6.0"
+]
 description = "Trevor Bača's Abjad library."
 keywords = ["abjad", "lilypond", "music composition", "music notation"]
 license = { text = "MIT" }
