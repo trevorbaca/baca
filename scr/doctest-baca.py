@@ -6,7 +6,6 @@ import pathlib
 import sys
 
 import abjad
-import abjadext
 import baca
 import rmakers
 
@@ -78,7 +77,6 @@ def _doctest_files(current_directory, files, globals_, report_only_first_failure
 def _get_globals():
     globals_ = {}
     globals_["abjad"] = abjad
-    globals_["abjadext"] = abjadext
     globals_["baca"] = baca
     if nauert is not None:
         globals_["nauert"] = nauert
