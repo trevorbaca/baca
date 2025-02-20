@@ -1,7 +1,8 @@
 import abjad
-import baca
 import pytest
 import rmakers
+
+import baca
 
 
 def test_exceptions_01():

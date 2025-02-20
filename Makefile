@@ -25,14 +25,14 @@ install:
 	python -m pip install -e .
 
 isort-check:
-	isort --case-sensitive --check-only --line-width=88 --multi-line=3 \
-	      --thirdparty=abjad --thirdparty=abjadext --thirdparty=baca \
-	      --thirdparty=ply --thirdparty=uqbar --trailing-comma --use-parentheses .
+	isort --case-sensitive --check-only --diff --line-width=88 --multi-line=3 \
+	      --project=baca --thirdparty=abjad --thirdparty=ply --thirdparty=uqbar \
+		  --trailing-comma --use-parentheses .
 
 isort-reformat:
 	isort --case-sensitive --line-width=88 --multi-line=3 \
-	      --thirdparty=abjad --thirdparty=abjadext --thirdparty=baca \
-	      --thirdparty=ply --thirdparty=uqbar --trailing-comma --use-parentheses .
+	      --project=baca --thirdparty=abjad --thirdparty=ply --thirdparty=uqbar \
+		  --trailing-comma --use-parentheses .
 
 mypy:
 	mypy source

@@ -1,5 +1,6 @@
-import baca
 import pytest
+
+import baca
 
 
 def test_parts_01():

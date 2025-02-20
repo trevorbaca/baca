@@ -1,7 +1,8 @@
 import abjad
-import baca
 import pytest
 import rmakers
+
+import baca
 
 
 @pytest.fixture(autouse=True)

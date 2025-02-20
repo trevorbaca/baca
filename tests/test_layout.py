@@ -1,6 +1,7 @@
 import abjad
-import baca
 import pytest
+
+import baca
 
 
 def test_layout_01():

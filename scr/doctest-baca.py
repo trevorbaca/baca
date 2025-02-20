@@ -6,13 +6,10 @@ import pathlib
 import sys
 
 import abjad
-import baca
+import nauert
 import rmakers
 
-try:
-    from abjadext import nauert
-except ImportError:
-    nauert = None
+import baca
 
 
 def _doctest_files(current_directory, files, globals_, report_only_first_failure=False):
