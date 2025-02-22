@@ -6,8 +6,12 @@ import pathlib
 import sys
 
 import abjad
-import nauert
 import rmakers
+
+try:
+    import nauert
+except ImportError:
+    nauert = None
 
 import baca
 
