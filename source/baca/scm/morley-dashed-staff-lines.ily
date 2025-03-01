@@ -1,4 +1,4 @@
-\version "2.25.16"
+\version "2.25.23"
 
 % Author: Thomas Morley
 % http://lists.gnu.org/archive/html/lilypond-user/2012-12/msg00715.html

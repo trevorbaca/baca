@@ -1,4 +1,4 @@
-\version "2.25.16"
+\version "2.25.23"
 
 % BAR LINES
 
@@ -78,7 +78,7 @@ baca-start-nonstrict-spacing-section = #(
 baca-start-strict-spacing-section = #(
     define-music-function (n d music) (number? number? ly:music?)
     #{
-    \set Score.proportionalNotationDuration = #(/ n d)
+    \set Score.proportionalNotationDurationAsMoment = #(/ n d)
     \override Score.SpacingSpanner.strict-grace-spacing = ##t
     \override Score.SpacingSpanner.strict-note-spacing = ##t
     \newSpacingSection
