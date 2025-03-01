@@ -42,7 +42,7 @@ def add_metadatum(path: pathlib.Path, name: str, value) -> None:
 def get_contents_directory(path: pathlib.Path):
     assert isinstance(path, pathlib.Path), repr(path)
     wrapper_directory = get_wrapper_directory(path)
-    contents_directory = wrapper_directory / wrapper_directory.name
+    contents_directory = wrapper_directory / "source" / wrapper_directory.name
     return contents_directory
 
 
