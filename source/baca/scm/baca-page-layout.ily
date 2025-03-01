@@ -78,7 +78,7 @@ baca-start-nonstrict-spacing-section = #(
 baca-start-strict-spacing-section = #(
     define-music-function (n d music) (number? number? ly:music?)
     #{
-    \set Score.proportionalNotationDurationAsMoment = #(/ n d)
+    \set Score.proportionalNotationDuration = #(/ n d)
     \override Score.SpacingSpanner.strict-grace-spacing = ##t
     \override Score.SpacingSpanner.strict-note-spacing = ##t
     \newSpacingSection
