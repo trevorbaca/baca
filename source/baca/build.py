@@ -1592,8 +1592,8 @@ def interpret_build_music(
     if "trevor" in _sections_directory.parts and not do_not_populate_remote_repos:
         print_main_task("Populating $REGRESSION/scorebuilds repository ...")
         parts = list(_sections_directory.parts)
-        assert parts[3] == "Scores"
-        parts[3:4] = ["Regression", "scorebuilds"]
+        assert parts[4] == "Scores"
+        parts[4:5] = ["Regression", "scorebuilds"]
         _builds_sections_directory = os.sep + os.sep.join(parts[1:])
         shutil.copytree(
             _sections_directory, _builds_sections_directory, dirs_exist_ok=True
