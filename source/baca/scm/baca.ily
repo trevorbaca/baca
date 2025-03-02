@@ -1,4 +1,4 @@
-\version "2.25.23"
+\version "2.25.24"
 \language "english"
 \include "abjad.ily"
 \include "baca-articulations.ily"

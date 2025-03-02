@@ -1,4 +1,4 @@
-\version "2.25.23"
+\version "2.25.24"
 
 print-grob-properties = #( lambda (grob)
   (ly:message "")

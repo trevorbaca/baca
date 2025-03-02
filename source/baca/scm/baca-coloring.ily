@@ -1,4 +1,4 @@
-\version "2.25.23"
+\version "2.25.24"
 
 % BAR LINE COLORING
 

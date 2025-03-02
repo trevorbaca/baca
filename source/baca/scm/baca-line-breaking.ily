@@ -1,4 +1,4 @@
-\version "2.25.23"
+\version "2.25.24"
 
 baca-broken-spanner-staff-padding = #(
     define-scheme-function (staff-padding-left staff-padding-right) (number? number?)

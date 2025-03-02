@@ -1,4 +1,4 @@
-\version "2.25.23"
+\version "2.25.24"
 
 baca-dashed-line-with-arrow = #(
     define-music-function (music) (ly:music?)
