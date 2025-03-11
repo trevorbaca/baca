@@ -1,4 +1,3 @@
-### https://www.sphinx-doc.org/en/master/usage/configuration.html ###
 import os
 import sys
 
@@ -6,9 +5,8 @@ sys.path.insert(0, os.path.abspath("../../source"))
 
 autodoc_member_order = "groupwise"
 
-copyright = "1997-2025, Trevor Bača"
+copyright = "1997-2025, Trevor Bača."
 
-exclude_patterns = []
 extensions = [
     "abjad.ext.sphinx",
     "sphinx.ext.autodoc",
@@ -30,27 +28,27 @@ graphviz_dot_args = ["-s32"]
 graphviz_output_format = "svg"
 
 html_last_updated_fmt = "%b %d, %Y"
-html_show_sourcelink = True
+html_show_sphinx = False
 html_static_path = ["_static"]
 html_theme = "sphinx_rtd_theme"
 html_theme_options = {
     "navigation_depth": 1,
     "sticky_navigation": False,
     "style_external_links": True,
-    "style_nav_header_background": "#eeccaa",
+    "style_nav_header_background": "#ffeedd",
 }
-htmlhelp_basename = "BačaAPIdoc"
 
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
     "sphinx": ("http://www.sphinx-doc.org/en/master/", None),
 }
 
-project = "Bača API"
+project = "Bača"
 pygments_style = "sphinx"
 
-release = ""
+smartquotes = True
 
+templates_path = ["_templates"]
 todo_include_todos = True
 
 uqbar_api_member_documenter_classes = [
@@ -75,4 +73,4 @@ uqbar_book_strict = False
 uqbar_book_use_black = True
 uqbar_book_use_cache = True
 
-version = ""
+version = "3.21"
