@@ -24,5 +24,13 @@ doctest_optionflags = "ELLIPSIS NORMALIZE_WHITESPACE"
 testpaths = ["source", "tests"]
 
 [tool.setuptools]
+include-package-data = true
 packages = ["baca"]
 package-dir = { "" = "source" }
+
+[tool.setuptools.package-data]
+"*" = ["README.md", "conftest.py"]
+"abjad" = ["**/*"]
+
+[tool.setuptools.exclude-package-data]
+"*" = ["docs/*"]

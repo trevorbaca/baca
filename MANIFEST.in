@@ -1,7 +1,0 @@
-include MANIFEST.in
-include README.md
-include conftest.py
-include pytest.ini
-
-recursive-include baca/ *
-prune docs/
