@@ -18,6 +18,11 @@ version = "3.21"
 [project.urls]
 Homepage = "https://github.com/trevorbaca/baca"
 
+[tool.pytest.ini_options]
+addopts = "--doctest-modules"
+doctest_optionflags = "ELLIPSIS NORMALIZE_WHITESPACE"
+testpaths = ["source", "tests"]
+
 [tool.setuptools]
 packages = ["baca"]
 package-dir = { "" = "source" }
