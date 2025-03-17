@@ -21,6 +21,7 @@ from . import (
     tweak,
     typings,
 )
+from ._version import __version__
 from .anchor import (
     anchor,
     anchor_after,
@@ -81,7 +82,3 @@ from .rhythm import (
     style_ritardando,
 )
 from .scope import scope
-
-if sys.version_info[:2] < (3, 12):
-    raise ImportError("Requires Python 3.12 or later")
-del sys

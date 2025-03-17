@@ -1,5 +1,5 @@
-bača
-====
+Bača 3.22
+=========
 
 [![Python 3.12](
     https://img.shields.io/badge/python-3.12-blue.svg)](
@@ -12,5 +12,3 @@ bača
 [![Code style: black](
     https://img.shields.io/badge/code%20style-black-000000.svg)](
     https://github.com/ambv/black)
-
-Requires Python 3.12+.

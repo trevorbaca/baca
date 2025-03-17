@@ -35,7 +35,7 @@ html_theme_options = {
     "navigation_depth": 1,
     "sticky_navigation": False,
     "style_external_links": True,
-    "style_nav_header_background": "#ffeedd",
+    "style_nav_header_background": "#000000",
 }
 
 intersphinx_mapping = {
@@ -73,4 +73,4 @@ uqbar_book_strict = False
 uqbar_book_use_black = True
 uqbar_book_use_cache = True
 
-version = "3.21"
+version = "3.22"

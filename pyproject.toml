@@ -5,7 +5,7 @@ requires = ["setuptools>=61.0"]
 [project]
 authors = [{name = "Trevor Bača", email = "trevor.baca@gmail.com"}]
 dependencies = [
-    "abjad>=3.21",
+    "abjad>=3.22",
 ]
 description = "Trevor Bača's Abjad library."
 keywords = ["abjad", "lilypond", "music composition", "music notation"]
@@ -13,7 +13,7 @@ license = { text = "MIT" }
 name = "baca"
 readme = "README.md"
 requires-python = ">=3.12"
-version = "3.21"
+version = "3.22"
 
 [project.urls]
 Homepage = "https://github.com/trevorbaca/baca"
