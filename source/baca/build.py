@@ -1219,13 +1219,13 @@ def build_part(part_directory, keep_temporary_files=False):
     os.system(f"python {layout_py}")
     interpret_build_music(part_directory, keep_temporary_files=keep_temporary_files)
     front_cover_tex = part_directory / "front-cover.tex"
-    interpret_tex_file(front_cover_tex)
+    run_xelatex(front_cover_tex)
     preface_tex = part_directory / "preface.tex"
-    interpret_tex_file(preface_tex)
+    run_xelatex(preface_tex)
     back_cover_tex = part_directory / "back-cover.tex"
-    interpret_tex_file(back_cover_tex)
+    run_xelatex(back_cover_tex)
     part_tex = part_directory / "part.tex"
-    interpret_tex_file(part_tex)
+    run_xelatex(part_tex)
 
 
 def build_score(score_directory, keep_temporary_files=False):
@@ -1244,11 +1244,11 @@ def build_score(score_directory, keep_temporary_files=False):
         tex = score_directory / f"{stem}.tex"
         pdf = score_directory / f"{stem}.pdf"
         if tex.is_file():
-            interpret_tex_file(tex)
+            run_xelatex(tex)
         elif pdf.is_file():
             print_file_handling(f"Using existing {baca.path.trim(pdf)} ...")
     score_tex = score_directory / "score.tex"
-    interpret_tex_file(score_tex)
+    run_xelatex(score_tex)
     score_pdf = score_directory / "score.pdf"
     if not score_pdf.is_file():
         print_error(f"Can not find {baca.path.trim(score_pdf)} ...")
@@ -1607,39 +1607,6 @@ def interpret_build_music(
     run_lilypond(music_ly, remove=remove)
 
 
-def interpret_tex_file(tex):
-    if not tex.is_file():
-        print_error(f"Can not find {baca.path.trim(tex)} ...")
-        return
-    executables = abjad.io.find_executable("xelatex")
-    executables = [pathlib.Path(_) for _ in executables]
-    if not executables:
-        executable_name = "pdflatex"
-    else:
-        executable_name = "xelatex"
-    print_file_handling(f"Calling {executable_name} on {baca.path.trim(tex)} ...")
-    command = f" {executable_name} -halt-on-error"
-    command += " -interaction=nonstopmode"
-    command += f" --jobname={tex.stem}"
-    command += f" -output-directory={tex.parent} {tex}"
-    command += f" 1>{tex.stem}.log 2>&1"
-    command_called_twice = f"{command}; {command}"
-    with abjad.TemporaryDirectoryChange(directory=tex.parent):
-        abjad.io.spawn_subprocess(command_called_twice)
-        source = tex.with_suffix(".log")
-        name = "." + tex.stem + ".tex.log"
-        target = tex.parent / name
-        shutil.move(str(source), str(target))
-        for path in sorted(tex.parent.glob("*.aux")):
-            path.unlink()
-    pdf = tex.with_suffix(".pdf")
-    if pdf.is_file():
-        print_success(f"Found {baca.path.trim(pdf)} ...")
-    else:
-        print_error(f"Can not produce {baca.path.trim(pdf)} ...")
-        sys.exit(1)
-
-
 def persist_as_ly(argument, ly_file_path):
     print_file_handling(f"Writing {baca.path.trim(ly_file_path)} ...")
     abjad.persist.as_ly(argument, ly_file_path)
@@ -1852,6 +1819,41 @@ def run_lilypond(ly_file_path, *, lilypond_timeout=0, pdf_mtime=None, remove=Non
             print_error("PDF MISSING IN run_lilypond()")
             os.system("cat .music.ly.log")
         assert lilypond_log_file_path.exists()
+
+
+def run_xelatex(tex_file_path):
+    if not tex_file_path.is_file():
+        print_error(f"Can not find {baca.path.trim(tex_file_path)} ...")
+        return
+    executables = abjad.io.find_executable("xelatex")
+    executables = [pathlib.Path(_) for _ in executables]
+    if not executables:
+        executable_name = "pdflatex"
+    else:
+        executable_name = "xelatex"
+    print_file_handling(
+        f"Calling {executable_name} on {baca.path.trim(tex_file_path)} ..."
+    )
+    command = f" {executable_name} -halt-on-error"
+    command += " -interaction=nonstopmode"
+    command += f" --jobname={tex_file_path.stem}"
+    command += f" -output-directory={tex_file_path.parent} {tex_file_path}"
+    command += f" 1>{tex_file_path.stem}.log 2>&1"
+    command_called_twice = f"{command}; {command}"
+    with abjad.TemporaryDirectoryChange(directory=tex_file_path.parent):
+        abjad.io.spawn_subprocess(command_called_twice)
+        source = tex_file_path.with_suffix(".log")
+        name = "." + tex_file_path.stem + ".tex_file_path.log"
+        target = tex_file_path.parent / name
+        shutil.move(str(source), str(target))
+        for path in sorted(tex_file_path.parent.glob("*.aux")):
+            path.unlink()
+    pdf = tex_file_path.with_suffix(".pdf")
+    if pdf.is_file():
+        print_success(f"Found {baca.path.trim(pdf)} ...")
+    else:
+        print_error(f"Can not produce {baca.path.trim(pdf)} ...")
+        sys.exit(1)
 
 
 def show_annotations(file, *, undo=False):
