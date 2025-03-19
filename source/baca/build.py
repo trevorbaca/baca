@@ -151,8 +151,8 @@ def _deactivate_tags(
     )
 
 
-def _display_lilypond_log_errors(lilypond_log_file_path):
-    lilypond_log_file_path = pathlib.Path(lilypond_log_file_path)
+def _display_lilypond_log_errors(lilypond_log_file_path: pathlib.Path):
+    assert isinstance(lilypond_log_file_path, pathlib.Path)
     with lilypond_log_file_path.open() as file_pointer:
         lines = file_pointer.readlines()
     error = False
@@ -166,8 +166,7 @@ def _display_lilypond_log_errors(lilypond_log_file_path):
             error = True
             break
     if error:
-        for line in lines[:10]:
-            print_always(line)
+        print_always("".join(lines[:10]))
 
 
 def _externalize(
@@ -1779,22 +1778,34 @@ def remove_site_comments(path: pathlib.Path) -> None:
     path.write_text(string)
 
 
-def run_lilypond(ly_file_path, *, lilypond_timeout=0, pdf_mtime=None, remove=None):
+def run_lilypond(
+    ly_file_path: pathlib.Path,
+    *,
+    lilypond_timeout: int = 0,
+    pdf_mtime: float | None = None,
+    remove: pathlib.Path | None = None,
+):
+    assert isinstance(ly_file_path, pathlib.Path), repr(ly_file_path)
     assert ly_file_path.exists(), repr(ly_file_path)
+    if pdf_mtime is not None:
+        assert isinstance(pdf_mtime, float), repr(pdf_mtime)
+    if remove is not None:
+        assert isinstance(remove, pathlib.Path), repr(remove)
     string = f"Calling LilyPond (with includes) on {baca.path.trim(ly_file_path)} ..."
     print_file_handling(string)
     directory = ly_file_path.parent
     pdf = ly_file_path.with_suffix(".pdf")
     lilypond_log_file_name = "." + ly_file_path.name + ".log"
     lilypond_log_file_path = directory / lilypond_log_file_name
+    exit_code = 0
     with abjad.TemporaryDirectoryChange(directory=directory):
         flags = get_includes()
         try:
             signal.alarm(lilypond_timeout)
-            abjad.io.run_lilypond(
+            exit_code = abjad.io.run_lilypond(
                 str(ly_file_path),
                 flags=flags,
-                lilypond_log_file_path=(lilypond_log_file_path),
+                lilypond_log_file_path=lilypond_log_file_path,
             )
             signal.alarm(0)
         except TimeoutException as e:
@@ -1809,16 +1820,13 @@ def run_lilypond(ly_file_path, *, lilypond_timeout=0, pdf_mtime=None, remove=Non
         if remove is not None:
             print_file_remove(f"Removing {baca.path.trim(remove)} ...")
             shutil.rmtree(str(remove))
-        if pdf.is_file():
+        if exit_code == 0 and pdf.is_file():
             if pdf_mtime is not None and pdf_mtime < os.path.getmtime(pdf):
                 print_success(f"Modified {baca.path.trim(pdf)} ...")
             else:
                 print_success(f"Found {baca.path.trim(pdf)} ...")
-        else:
-            print_error(f"Can not find {baca.path.trim(pdf)} ...")
-            print_error("PDF MISSING IN run_lilypond()")
-            os.system("cat .music.ly.log")
         assert lilypond_log_file_path.exists()
+    return exit_code
 
 
 def run_xelatex(tex_file_path):
