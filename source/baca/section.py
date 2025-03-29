@@ -484,22 +484,6 @@ def _check_persistent_indicators_for_leaf(
         raise Exception(f"{voice_name} leaf {i} ({leaf!s}) missing clef.")
 
 
-def _check_nontrivial_skip_filled_tuplets(score):
-    tuplets = abjad.select.tuplets(score)
-    violators = []
-    for tuplet in tuplets:
-        if tuplet.multiplier == (1, 1):
-            continue
-        for component in tuplet:
-            if not isinstance(component, abjad.Skip):
-                break
-        else:
-            violators.append(tuplet)
-    if violators:
-        message = f"Found {len(violators)} nontrivial skip-filled tuplets."
-        raise Exception(message)
-
-
 def _clean_up_laissez_vibrer_tie_direction(score):
     default = abjad.Clef("treble")
     for note in abjad.iterate.leaves(score, abjad.Note):
@@ -2360,7 +2344,6 @@ def postprocess(
     comment_measure_numbers=False,
     delete_nonmeaningful_global_rests=False,
     doctest=False,
-    # do_not_check_nontrivial_skip_filled_tuplets=False,
     do_not_check_wellformedness=False,
     do_not_color_not_yet_pitched=False,
     do_not_color_not_yet_registered=False,
@@ -2369,6 +2352,7 @@ def postprocess(
     do_not_force_nonnatural_accidentals=False,
     do_not_replace_rests_with_multimeasure_rests=False,
     do_not_require_short_instrument_names=False,
+    do_not_span_metronome_marks=False,
     do_not_transpose_score=False,
     empty_fermata_measures=False,
     fermata_extra_offset_y=2.5,
@@ -2453,10 +2437,11 @@ def postprocess(
             ]
         if doctest is False:
             treat_untreated_persistent_wrappers(score, manifests=manifests)
-            span_metronome_marks(
-                score["Skips"],
-                parts_metric_modulation_multiplier=parts_metric_modulation_multiplier,
-            )
+            if do_not_span_metronome_marks is False:
+                span_metronome_marks(
+                    score["Skips"],
+                    parts_metric_modulation_multiplier=parts_metric_modulation_multiplier,
+                )
             deactivate_tags(
                 score,
                 *instrument_color_tags(),
@@ -2551,8 +2536,6 @@ def postprocess(
         )
         if violators:
             raise Exception(f"{len(violators)} /    {total} out of range pitches")
-    # if do_not_check_nontrivial_skip_filled_tuplets is False:
-    #     _check_nontrivial_skip_filled_tuplets(score)
     if doctest is False:
         previous_stop_clock_time: typing.Optional[str]
         if environment.section_not_included_in_score:
