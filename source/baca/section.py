@@ -2354,6 +2354,7 @@ def postprocess(
     do_not_require_short_instrument_names=False,
     do_not_span_metronome_marks=False,
     do_not_transpose_score=False,
+    do_not_treat_untreated_persistent_indicators=False,
     empty_fermata_measures=False,
     fermata_extra_offset_y=2.5,
     fermata_measure_empty_overrides=(),
@@ -2436,7 +2437,8 @@ def postprocess(
                 _ - first_measure_number + 1 for _ in fmns.fermata_measure_numbers
             ]
         if doctest is False:
-            treat_untreated_persistent_wrappers(score, manifests=manifests)
+            if do_not_treat_untreated_persistent_indicators is False:
+                treat_untreated_persistent_wrappers(score, manifests=manifests)
             if do_not_span_metronome_marks is False:
                 span_metronome_marks(
                     score["Skips"],
