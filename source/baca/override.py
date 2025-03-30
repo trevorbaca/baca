@@ -191,13 +191,26 @@ def bar_line_hair_thickness(
     )
 
 
-def bar_line_transparent(argument) -> list[abjad.Wrapper]:
+def bar_line_transparent(argument, *, after: bool = False) -> list[abjad.Wrapper]:
     return _override(
         _frame(),
         argument,
         "BarLine",
         "transparent",
         True,
+        after=after,
+        context="Score",
+    )
+
+
+def bar_line_transparent_false(argument, *, after: bool = False) -> list[abjad.Wrapper]:
+    return _override(
+        _frame(),
+        argument,
+        "BarLine",
+        "transparent",
+        False,
+        after=after,
         context="Score",
     )
 
@@ -1234,13 +1247,26 @@ def span_bar_extra_offset(
     )
 
 
-def span_bar_transparent(argument) -> list[abjad.Wrapper]:
+def span_bar_transparent(argument, *, after: bool = False) -> list[abjad.Wrapper]:
     return _override(
         _frame(),
         argument,
         "SpanBar",
         "transparent",
         True,
+        after=after,
+        context="Score",
+    )
+
+
+def span_bar_transparent_false(argument, *, after: bool = False) -> list[abjad.Wrapper]:
+    return _override(
+        _frame(),
+        argument,
+        "SpanBar",
+        "transparent",
+        False,
+        after=after,
         context="Score",
     )
 
