@@ -2648,6 +2648,7 @@ def set_up_score(
     time_signatures: typing.Sequence[abjad.TimeSignature],
     *,
     append_anchor_skip: bool = False,
+    do_not_attach_measure_number_spanners: bool = False,
     do_not_attach_time_signatures: bool = False,
     first_measure_number: int = 1,
     manifests: dict | None = None,
@@ -2668,7 +2669,8 @@ def set_up_score(
             measure_initial_grace_notes=measure_initial_grace_notes,
         )
         if "Skips" not in score:
-            _attach_measure_number_spanners(first_measure_number, context)
+            if do_not_attach_measure_number_spanners is False:
+                _attach_measure_number_spanners(first_measure_number, context)
         do_not_attach_time_signatures = True
     if "Skips" in score:
         context = score["Skips"]
@@ -2679,7 +2681,8 @@ def set_up_score(
             attach_time_signatures=not do_not_attach_time_signatures,
             measure_initial_grace_notes=measure_initial_grace_notes,
         )
-        _attach_measure_number_spanners(first_measure_number, context)
+        if do_not_attach_measure_number_spanners is False:
+            _attach_measure_number_spanners(first_measure_number, context)
     if "Breaks" in score:
         context = score["Breaks"]
         _make_global_skips(
