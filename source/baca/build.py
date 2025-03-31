@@ -216,9 +216,12 @@ def _externalize(
                 del stack[name]
                 count = len(line) - len(line.lstrip())
                 indent = count * " "
-                dereference_string = indent + rf"{{ \{name} }}"
                 first_line = finished_variables[name][0]
-                dereference = [dereference_string]
+                dereference = []
+                dereference.append(indent + "{")
+                local_indent = 4 * " "
+                dereference.append(indent + local_indent + "\\" + name)
+                dereference.append(indent + "}")
                 dereference = [_ + "\n" for _ in dereference]
                 if bool(stack):
                     items = list(stack.items())
@@ -271,7 +274,11 @@ def _externalize(
         words = first_line.split()
         index = words.index("%*%")
         first_line = " ".join(words[:index])
-        first_lines = [first_line]
+        words = first_line.split(" = ")
+        assert len(words) == 2, repr(words)
+        first_lines = []
+        first_lines.append(words[0] + " =")
+        first_lines.extend(words[1:])
         first_lines = [_ + "\n" for _ in first_lines]
         lines.extend(first_lines)
         for variable_line in variable_lines[1:]:
