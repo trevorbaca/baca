@@ -2350,6 +2350,7 @@ def postprocess(
     do_not_color_repeat_pitch_classes=False,
     do_not_error_on_not_yet_pitched=False,
     do_not_force_nonnatural_accidentals=False,
+    do_not_label_clock_time=False,
     do_not_replace_rests_with_multimeasure_rests=False,
     do_not_require_short_instrument_names=False,
     do_not_span_metronome_marks=False,
@@ -2546,13 +2547,20 @@ def postprocess(
             result = previous_metadata.get("stop_clock_time")
             assert isinstance(result, (str, type(None))), repr(result)
             previous_stop_clock_time = result
-        clock_time = _label_clock_time(
-            clock_time_override,
-            fmns.fermata_measure_numbers,
-            first_measure_number,
-            previous_stop_clock_time,
-            score,
-        )
+        if do_not_label_clock_time is True:
+            clock_time = types.SimpleNamespace(
+                duration_clock_string="NONE",
+                start_clock_time="NONE",
+                stop_clock_time="NONE",
+            )
+        else:
+            clock_time = _label_clock_time(
+                clock_time_override,
+                fmns.fermata_measure_numbers,
+                first_measure_number,
+                previous_stop_clock_time,
+                score,
+            )
         final_measure_number = first_measure_number + measure_count - 1
         persistent_indicators = _collect_persistent_indicators(
             manifests,
