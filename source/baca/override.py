@@ -629,6 +629,19 @@ def laissez_vibrer_tie_direction_up(argument) -> list[abjad.Wrapper]:
     )
 
 
+def metronome_mark_break_align_symbols(
+    argument, symbols: str, *, context: str = "Score"
+) -> list[abjad.Wrapper]:
+    return _override(
+        _frame(),
+        argument,
+        grob="MetronomeMark",
+        attribute="break_align_symbols",
+        value=symbols,
+        context=context,
+    )
+
+
 def metronome_mark_extra_offset(
     argument, pair: tuple, *, context: str = "Score"
 ) -> list[abjad.Wrapper]:
