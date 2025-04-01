@@ -98,6 +98,22 @@ baca-boxed-markup = #(
     #}
     )
 
+baca-dimensionless-boxed-markup = #(
+    define-music-function (string font-size) (string? number?)
+    #{
+    - \tweak X-extent ##f
+    - \tweak font-size #font-size
+    - \markup
+    \with-dimensions-from \null
+    \halign #-1
+    \override #'(box-padding . 0.5)
+    \box
+    \combine
+    \halign #0 #string
+    \halign #0 \transparent "O"
+    #}
+    )
+
 % CIRCLE BOWING MARKUP
 
 baca-circle-bowing-markup =
@@ -416,25 +432,6 @@ baca-very-long-fermata-markup =
 % NULL MARKUP
 
 baca-null-markup = \markup \null
-
-% REHEARSAL MARKS
-
-% IMPORTANT: markup attach direction must be neutral or down (- or _);
-%            markup attach direction of up (^) negatively impacts global
-%            skips context vertical spacing
-baca-rehearsal-mark-markup = #(
-    define-music-function (string font-size) (string? number?)
-    #{
-    - \tweak X-extent ##f
-    - \tweak font-size #font-size
-    - \markup
-    \with-dimensions-from \null
-    \halign #-1
-    \override #'(box-padding . 0.5)
-    \box
-    { \combine \halign #0 #string \halign #0 \transparent "O" }
-    #}
-    )
 
 % SCP MARKUP
 

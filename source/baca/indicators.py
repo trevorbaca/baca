@@ -278,6 +278,36 @@ def damp(argument, *tweaks: abjad.Tweak) -> list[abjad.Wrapper]:
     return wrappers
 
 
+def dimensionless_boxed_markup(
+    argument,
+    string: str,
+    *tweaks: abjad.Tweak,
+    font_size: int = 10,
+) -> list[abjad.Wrapper]:
+    assert isinstance(string, str), repr(string)
+    assert isinstance(font_size, int | float), repr(font_size)
+    string = rf'\baca-dimensionless-boxed-markup "{string}" #{font_size}'
+    wrappers = []
+    for leaf in abjad.select.leaves(argument):
+        indicator: abjad.Markup | abjad.Bundle
+        indicator = abjad.Markup(string)
+        indicator = _helpers.bundle_tweaks(indicator, tweaks)
+        tag = _helpers.function_name(_frame())
+        wrapper = abjad.attach(
+            indicator,
+            leaf,
+            # IMPORTANT:
+            # markup attach direction must be neutral or down (- or _);
+            # markup attach direction of up (^) negatively impacts global
+            # skips context vertical spacing
+            direction=abjad.CENTER,
+            tag=tag,
+            wrapper=True,
+        )
+        wrappers.append(wrapper)
+    return wrappers
+
+
 def double_flageolet(argument) -> list[abjad.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
@@ -862,32 +892,6 @@ def quadruple_staccato(argument) -> list[abjad.Wrapper]:
         wrapper = abjad.attach(
             indicator,
             leaf,
-            tag=tag,
-            wrapper=True,
-        )
-        wrappers.append(wrapper)
-    return wrappers
-
-
-def rehearsal_mark(
-    argument,
-    string: str,
-    *tweaks: abjad.Tweak,
-    font_size: int = 10,
-) -> list[abjad.Wrapper]:
-    assert isinstance(string, str), repr(string)
-    assert isinstance(font_size, int | float), repr(font_size)
-    string = rf'\baca-rehearsal-mark-markup "{string}" #{font_size}'
-    wrappers = []
-    for leaf in abjad.select.leaves(argument):
-        indicator: abjad.Markup | abjad.Bundle
-        indicator = abjad.Markup(string)
-        indicator = _helpers.bundle_tweaks(indicator, tweaks)
-        tag = _helpers.function_name(_frame())
-        wrapper = abjad.attach(
-            indicator,
-            leaf,
-            direction=abjad.CENTER,
             tag=tag,
             wrapper=True,
         )
