@@ -726,29 +726,6 @@ def marcato(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def mark(
-    argument,
-    string: str,
-    *tweaks: abjad.Tweak,
-    site: str = "before",
-) -> list[abjad.Wrapper]:
-    assert isinstance(string, abjad.Markup | str), repr(string)
-    _assert_no_post_event_tweaks(tweaks, r"\mark")
-    tag = _helpers.function_name(_frame())
-    wrappers = []
-    for leaf in abjad.select.leaves(argument):
-        rehearsal_mark = abjad.RehearsalMark(markup=string, site=site)
-        rehearsal_mark = _helpers.bundle_tweaks(rehearsal_mark, tweaks)
-        wrapper = abjad.attach(
-            rehearsal_mark,
-            leaf,
-            tag=tag,
-            wrapper=True,
-        )
-        wrappers.append(wrapper)
-    return wrappers
-
-
 def markup(
     argument,
     markup: str,
@@ -891,6 +868,29 @@ def quadruple_staccato(argument) -> list[abjad.Wrapper]:
         indicator = abjad.Articulation("baca-staccati #4")
         wrapper = abjad.attach(
             indicator,
+            leaf,
+            tag=tag,
+            wrapper=True,
+        )
+        wrappers.append(wrapper)
+    return wrappers
+
+
+def rehearsal_mark(
+    argument,
+    string: str,
+    *tweaks: abjad.Tweak,
+    site: str = "before",
+) -> list[abjad.Wrapper]:
+    assert isinstance(string, abjad.Markup | str), repr(string)
+    _assert_no_post_event_tweaks(tweaks, r"\mark")
+    tag = _helpers.function_name(_frame())
+    wrappers = []
+    for leaf in abjad.select.leaves(argument):
+        rehearsal_mark = abjad.RehearsalMark(markup=string, site=site)
+        rehearsal_mark = _helpers.bundle_tweaks(rehearsal_mark, tweaks)
+        wrapper = abjad.attach(
+            rehearsal_mark,
             leaf,
             tag=tag,
             wrapper=True,
