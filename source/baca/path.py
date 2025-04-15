@@ -105,13 +105,17 @@ def remove_metadatum(path: pathlib.Path, name: str):
 
 def trim(path: pathlib.Path):
     assert isinstance(path, pathlib.Path), repr(path)
-    wrapper_directory = get_wrapper_directory(path)
-    count = len(wrapper_directory.parts)
-    parts = path.parts
-    parts = parts[count:]
-    path = pathlib.Path(*parts)
-    if str(path) == ".":
-        return str(path)
+    try:
+        wrapper_directory = get_wrapper_directory(path)
+    except Exception:
+        wrapper_directory = None
+    if wrapper_directory is not None:
+        count = len(wrapper_directory.parts)
+        parts = path.parts
+        parts = parts[count:]
+        path = pathlib.Path(*parts)
+        if str(path) == ".":
+            return str(path)
     return str(path)
 
 
