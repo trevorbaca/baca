@@ -8,11 +8,10 @@ import typing
 import abjad
 
 from . import sequence as _sequence
+from . import typings as _typings
 
 
-def chead(
-    argument, n: int, *, exclude: abjad.typings.Exclude | None = None
-) -> abjad.Chord:
+def chead(argument, n: int, *, exclude: _typings.Exclude | None = None) -> abjad.Chord:
     r"""
     Selects chord head ``n`` in ``argument``.
 
@@ -96,9 +95,7 @@ def chead(
     return cheads(argument, exclude=exclude)[n]
 
 
-def cheads(
-    argument, *, exclude: abjad.typings.Exclude | None = None
-) -> list[abjad.Chord]:
+def cheads(argument, *, exclude: _typings.Exclude | None = None) -> list[abjad.Chord]:
     r"""
     Selects chord heads in ``argument``.
 
@@ -203,7 +200,7 @@ def clparts(
     argument,
     counts: typing.Sequence[int],
     *,
-    exclude: abjad.typings.Exclude | None = None,
+    exclude: _typings.Exclude | None = None,
 ) -> list[list[abjad.Leaf]]:
     r"""
     Selects leaves cyclically partitioned by ``counts`` (with overhang).
@@ -318,7 +315,7 @@ def clparts(
 
 # TODO: maybe remove in favor of cyclic=True keyword to baca.select.mgroups()?
 def cmgroups(
-    argument, counts: list[int] = [1], *, exclude: abjad.typings.Exclude | None = None
+    argument, counts: list[int] = [1], *, exclude: _typings.Exclude | None = None
 ) -> list[list[abjad.Leaf]]:
     r"""
     Partitions measure-grouped leaves (cyclically).
@@ -527,7 +524,7 @@ def enchain(argument, counts: typing.Sequence[int]) -> list[list]:
 
 
 def grace(
-    argument, n: int = 0, *, exclude: abjad.typings.Exclude | None = None
+    argument, n: int = 0, *, exclude: _typings.Exclude | None = None
 ) -> abjad.Leaf:
     r"""
     Selects grace ``n``.
@@ -581,9 +578,7 @@ def grace(
     return graces(argument, exclude=exclude)[n]
 
 
-def graces(
-    argument, *, exclude: abjad.typings.Exclude | None = None
-) -> list[abjad.Leaf]:
+def graces(argument, *, exclude: _typings.Exclude | None = None) -> list[abjad.Leaf]:
     r"""
     Selects graces.
 
@@ -672,7 +667,7 @@ def has_grace_container(argument):
 
 # TODO: change name to baca.select.nongrace_leaf()
 def hleaf(
-    argument, n: int = 0, *, exclude: abjad.typings.Exclude | None = None
+    argument, n: int = 0, *, exclude: _typings.Exclude | None = None
 ) -> abjad.Leaf:
     r"""
     Selects haupt leaf ``n``.
@@ -727,9 +722,7 @@ def hleaf(
 
 
 # TODO: change name to baca.select.nongrace_leaves()
-def hleaves(
-    argument, *, exclude: abjad.typings.Exclude | None = None
-) -> list[abjad.Leaf]:
+def hleaves(argument, *, exclude: _typings.Exclude | None = None) -> list[abjad.Leaf]:
     r"""
     Selects haupt leaves.
 
@@ -795,7 +788,7 @@ def lleaf(
     n: int = 0,
     *,
     count: int = 1,
-    exclude: abjad.typings.Exclude | None = None,
+    exclude: _typings.Exclude | None = None,
 ) -> abjad.Leaf:
     r"""
     Selects leaf ``n`` from leaves leaked to the left.
@@ -940,7 +933,7 @@ def lleak(argument, count: int = 1) -> list[abjad.Leaf]:
 
 
 def lleaves(
-    argument, *, count: int = 1, exclude: abjad.typings.Exclude | None = None
+    argument, *, count: int = 1, exclude: _typings.Exclude | None = None
 ) -> list[abjad.Leaf]:
     r"""
     Selects leaves, leaked to the left.
@@ -1047,7 +1040,7 @@ def lparts(
     argument,
     counts: typing.Sequence[int],
     *,
-    exclude: abjad.typings.Exclude | None = None,
+    exclude: _typings.Exclude | None = None,
     # TODO: change default to abjad.EXACT
     overhang: bool | abjad.enums.Comparison = False,
 ) -> list[list[abjad.Leaf]]:
@@ -1149,7 +1142,7 @@ def lparts(
 
 
 def lt(
-    argument, n: int, *, exclude: abjad.typings.Exclude | None = None
+    argument, n: int, *, exclude: _typings.Exclude | None = None
 ) -> abjad.LogicalTie:
     r"""
     Selects logical tie ``n``.
@@ -1236,7 +1229,7 @@ def lt(
 
 
 def ltleaf(
-    argument, n: int = 0, *, exclude: abjad.typings.Exclude | None = None
+    argument, n: int = 0, *, exclude: _typings.Exclude | None = None
 ) -> abjad.Leaf:
     r"""
     Selects left-trimmed leaf ``n``.
@@ -1320,9 +1313,7 @@ def ltleaf(
     return ltleaves(argument, exclude=exclude)[n]
 
 
-def ltleaves(
-    argument, *, exclude: abjad.typings.Exclude | None = None
-) -> list[abjad.Leaf]:
+def ltleaves(argument, *, exclude: _typings.Exclude | None = None) -> list[abjad.Leaf]:
     r"""
     Selects left-trimmed leaves.
 
@@ -1441,7 +1432,7 @@ def ltleaves(
 
 
 def ltqrun(
-    argument, n: int, *, exclude: abjad.typings.Exclude | None = None
+    argument, n: int, *, exclude: _typings.Exclude | None = None
 ) -> list[abjad.LogicalTie]:
     r"""
     Selects logical tie equipitch run ``n``.
@@ -1528,7 +1519,7 @@ def ltqrun(
 
 
 def ltqruns(
-    argument, *, exclude: abjad.typings.Exclude | None = None
+    argument, *, exclude: _typings.Exclude | None = None
 ) -> list[list[abjad.LogicalTie]]:
     r"""
     Selects logical tie equipitch runs.
@@ -1641,7 +1632,7 @@ def ltqruns(
 
 
 def ltrun(
-    argument, n: int, *, exclude: abjad.typings.Exclude | None = None
+    argument, n: int, *, exclude: _typings.Exclude | None = None
 ) -> list[abjad.LogicalTie]:
     r"""
     Selects logical tie run ``n``.
@@ -1731,7 +1722,7 @@ def ltrun(
 
 
 def ltruns(
-    argument, *, exclude: abjad.typings.Exclude | None = None
+    argument, *, exclude: _typings.Exclude | None = None
 ) -> list[list[abjad.LogicalTie]]:
     r"""
     Selects logical tie runs.
@@ -1839,7 +1830,7 @@ def ltruns(
 def lts(
     argument,
     *,
-    exclude: abjad.typings.Exclude | None = None,
+    exclude: _typings.Exclude | None = None,
     nontrivial: bool | None = None,
 ) -> list[abjad.LogicalTie]:
     r"""
@@ -1962,7 +1953,7 @@ def mgroups(
     argument,
     counts: typing.Sequence[int] = [1],
     *,
-    exclude: abjad.typings.Exclude | None = None,
+    exclude: _typings.Exclude | None = None,
 ) -> list[list[abjad.Leaf]]:
     r"""
     Partitions measure-grouped leaves.
@@ -2025,7 +2016,7 @@ def mgroups(
 
 
 def mleaves(
-    argument, count: int, *, exclude: abjad.typings.Exclude | None = None
+    argument, count: int, *, exclude: _typings.Exclude | None = None
 ) -> list[abjad.Leaf]:
     r"""
     Selects all leaves in ``count`` measures.
@@ -2156,7 +2147,7 @@ def mleaves(
 
 
 def mmrest(
-    argument, n: int, *, exclude: abjad.typings.Exclude | None = None
+    argument, n: int, *, exclude: _typings.Exclude | None = None
 ) -> abjad.MultimeasureRest:
     r"""
     Selects multimeasure rest ``n``.
@@ -2200,7 +2191,7 @@ def mmrest(
 
 
 def mmrests(
-    argument, *, exclude: abjad.typings.Exclude | None = None
+    argument, *, exclude: _typings.Exclude | None = None
 ) -> list[abjad.MultimeasureRest]:
     r"""
     Selects multimeasure rests.
@@ -2251,7 +2242,7 @@ def mmrests(
 
 
 def ntrun(
-    argument, n: int, *, exclude: abjad.typings.Exclude | None = None
+    argument, n: int, *, exclude: _typings.Exclude | None = None
 ) -> list[abjad.Leaf]:
     r"""
     Selects nontrivial run ``n``.
@@ -2341,7 +2332,7 @@ def ntrun(
 
 
 def ntruns(
-    argument, *, exclude: abjad.typings.Exclude | None = None
+    argument, *, exclude: _typings.Exclude | None = None
 ) -> list[list[abjad.Leaf]]:
     r"""
     Selects nontrivial runs.
@@ -2451,7 +2442,7 @@ def omgroups(
     argument,
     counts: typing.Sequence[int] = [1],
     *,
-    exclude: abjad.typings.Exclude | None = None,
+    exclude: _typings.Exclude | None = None,
 ) -> list[list[abjad.Leaf]]:
     r"""
     Partitions measure-grouped leaves (with overhang).
@@ -2523,7 +2514,7 @@ def ompltgroups(
     argument,
     counts: typing.Sequence[int] = [1],
     *,
-    exclude: abjad.typings.Exclude | None = None,
+    exclude: _typings.Exclude | None = None,
 ) -> list[list[abjad.LogicalTie]]:
     """
     Partitions measure-grouped plts (with overhang).
@@ -2572,7 +2563,7 @@ def partition_in_halves(argument) -> list[list]:
 
 
 def phead(
-    argument, n: int, *, exclude: abjad.typings.Exclude | None = None
+    argument, n: int, *, exclude: _typings.Exclude | None = None
 ) -> abjad.Note | abjad.Chord:
     r"""
     Selects pitched head ``n``.
@@ -2659,7 +2650,7 @@ def phead(
 
 # TODO: remove grace=None keyword
 def pheads(
-    argument, *, exclude: abjad.typings.Exclude | None = None, grace: bool | None = None
+    argument, *, exclude: _typings.Exclude | None = None, grace: bool | None = None
 ) -> list[abjad.Note | abjad.Chord]:
     r"""
     Selects pitched heads.
@@ -2774,7 +2765,7 @@ def pleaf(
     argument,
     n: int,
     *,
-    exclude: abjad.typings.Exclude | None = None,
+    exclude: _typings.Exclude | None = None,
     grace: bool | None = None,
 ) -> abjad.Note | abjad.Chord:
     r"""
@@ -2864,7 +2855,7 @@ def pleaf(
 
 # TODO: remove grace=None keyword
 def pleaves(
-    argument, *, exclude: abjad.typings.Exclude | None = None, grace: bool | None = None
+    argument, *, exclude: _typings.Exclude | None = None, grace: bool | None = None
 ) -> list[abjad.Leaf]:
     r"""
     Selects pitched leaves.
@@ -2985,7 +2976,7 @@ def plt(
     argument,
     n: int,
     *,
-    exclude: abjad.typings.Exclude | None = None,
+    exclude: _typings.Exclude | None = None,
     grace: bool | None = None,
 ) -> abjad.LogicalTie:
     r"""
@@ -3074,7 +3065,7 @@ def plt(
 
 # TODO: remove grace=None keyword
 def plts(
-    argument, *, exclude: abjad.typings.Exclude | None = None, grace: bool | None = None
+    argument, *, exclude: _typings.Exclude | None = None, grace: bool | None = None
 ) -> list[abjad.LogicalTie]:
     r"""
     Selects pitched logical ties.
@@ -3189,7 +3180,7 @@ def plts(
 
 
 def ptail(
-    argument, n: int, *, exclude: abjad.typings.Exclude | None = None
+    argument, n: int, *, exclude: _typings.Exclude | None = None
 ) -> abjad.Note | abjad.Chord:
     r"""
     Selects pitched tail ``n``.
@@ -3275,7 +3266,7 @@ def ptail(
 
 
 def ptails(
-    argument, *, exclude: abjad.typings.Exclude | None = None
+    argument, *, exclude: _typings.Exclude | None = None
 ) -> list[abjad.Note | abjad.Chord]:
     r"""
     Selects pitched tails.
@@ -3387,7 +3378,7 @@ def ptails(
 
 
 def ptlt(
-    argument, n: int, *, exclude: abjad.typings.Exclude | None = None
+    argument, n: int, *, exclude: _typings.Exclude | None = None
 ) -> abjad.LogicalTie:
     r"""
     Selects pitched trivial logical tie ``n``.
@@ -3473,7 +3464,7 @@ def ptlt(
 
 
 def ptlts(
-    argument, *, exclude: abjad.typings.Exclude | None = None
+    argument, *, exclude: _typings.Exclude | None = None
 ) -> list[abjad.LogicalTie]:
     r"""
     Selects pitched trivial logical ties.
@@ -3579,7 +3570,7 @@ def ptlts(
 
 
 def qrun(
-    argument, n: int, *, exclude: abjad.typings.Exclude | None = None
+    argument, n: int, *, exclude: _typings.Exclude | None = None
 ) -> list[abjad.Leaf]:
     r"""
     Selects equipitch run ``n``.
@@ -3666,7 +3657,7 @@ def qrun(
 
 
 def qruns(
-    argument, *, exclude: abjad.typings.Exclude | None = None
+    argument, *, exclude: _typings.Exclude | None = None
 ) -> list[list[abjad.Leaf]]:
     r"""
     Selects equipitch runs.
@@ -3781,7 +3772,7 @@ def rest(argument, n: int):
 
 
 def rleaf(
-    argument, n: int = 0, *, exclude: abjad.typings.Exclude | None = None
+    argument, n: int = 0, *, exclude: _typings.Exclude | None = None
 ) -> abjad.Leaf:
     r"""
     Selects leaf ``n`` from leaves leaked to the right.
@@ -3944,7 +3935,7 @@ def rleaves(
     argument,
     *,
     count: int = 1,
-    exclude: abjad.typings.Exclude | None = None,
+    exclude: _typings.Exclude | None = None,
     grace: bool | None = None,
 ) -> list[abjad.Leaf]:
     r"""
@@ -4049,7 +4040,7 @@ def rleaves(
 
 
 def rmleaves(
-    argument, count: int, *, exclude: abjad.typings.Exclude | None = None
+    argument, count: int, *, exclude: _typings.Exclude | None = None
 ) -> list[abjad.Leaf]:
     r"""
     Selects all leaves in ``count`` measures, leaked one leaf to the right.
@@ -4115,7 +4106,7 @@ def rmleaves(
 
 
 def rrun(
-    argument, n: int, *, exclude: abjad.typings.Exclude | None = None
+    argument, n: int, *, exclude: _typings.Exclude | None = None
 ) -> list[abjad.Leaf]:
     r"""
     Selects run ``n`` (leaked to the right).
@@ -4206,7 +4197,7 @@ def rrun(
 
 
 def rruns(
-    argument, *, exclude: abjad.typings.Exclude | None = None
+    argument, *, exclude: _typings.Exclude | None = None
 ) -> list[list[abjad.Leaf]]:
     r"""
     Selects runs (leaked to the right).
@@ -4320,9 +4311,7 @@ def runs(argument, *, exclude=None, rleak=False):
     return result
 
 
-def skip(
-    argument, n: int, *, exclude: abjad.typings.Exclude | None = None
-) -> abjad.Skip:
+def skip(argument, n: int, *, exclude: _typings.Exclude | None = None) -> abjad.Skip:
     r"""
     Selects skip ``n``.
 
@@ -4376,7 +4365,7 @@ def skip(
 
 
 def skips(
-    argument, *, exclude: abjad.typings.Exclude | None = None
+    argument, *, exclude: _typings.Exclude | None = None
 ) -> list[abjad.Component]:
     r"""
     Selects skips.
@@ -4461,7 +4450,7 @@ def tleaf(
     argument,
     n: int = 0,
     *,
-    exclude: abjad.typings.Exclude | None = None,
+    exclude: _typings.Exclude | None = None,
     grace: bool | None = None,
 ) -> abjad.Leaf:
     r"""
@@ -4551,7 +4540,7 @@ def tleaf(
 def tleaves(
     argument,
     *,
-    exclude: abjad.typings.Exclude | None = None,
+    exclude: _typings.Exclude | None = None,
     grace: bool | None = None,
 ) -> list[abjad.Leaf]:
     r"""
@@ -4737,7 +4726,7 @@ def untupletted_first_leaf(argument) -> list:
 
 
 def wleaf(
-    argument, n: int = 0, *, exclude: abjad.typings.Exclude | None = None
+    argument, n: int = 0, *, exclude: _typings.Exclude | None = None
 ) -> abjad.Leaf:
     r"""
     Selects leaf ``n`` from leaves leaked wide.
@@ -4900,9 +4889,7 @@ def wleaf(
     return wleaves(argument, exclude=exclude)[n]
 
 
-def wleaves(
-    argument, *, exclude: abjad.typings.Exclude | None = None
-) -> list[abjad.Leaf]:
+def wleaves(argument, *, exclude: _typings.Exclude | None = None) -> list[abjad.Leaf]:
     r"""
     Selects leaves, leaked "wide" (to both the left and right).
 
