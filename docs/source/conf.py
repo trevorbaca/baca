@@ -73,4 +73,4 @@ uqbar_book_strict = False
 uqbar_book_use_black = True
 uqbar_book_use_cache = True
 
-version = "3.23"
+version = "3.24"
