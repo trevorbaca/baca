@@ -967,7 +967,7 @@ def period_of_rotation(sequence) -> int:
     return len(sequence) // degree_of_rotational_symmetry(sequence)
 
 
-def quarters(durations: list[abjad.Duration]) -> list[list[abjad.Duration]]:
+def quarters(durations: list[abjad.Duration]) -> list[abjad.Duration]:
     r"""
     Splits ``durations`` into quarters.
 
@@ -975,24 +975,23 @@ def quarters(durations: list[abjad.Duration]) -> list[list[abjad.Duration]]:
 
         >>> durations = abjad.durations([(2, 4), (6, 4)])
         >>> for list_ in baca.sequence.quarters(durations): list_
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
-        [Duration(1, 4)]
+        Duration(1, 4)
+        Duration(1, 4)
+        Duration(1, 4)
+        Duration(1, 4)
+        Duration(1, 4)
+        Duration(1, 4)
+        Duration(1, 4)
+        Duration(1, 4)
 
     """
     assert isinstance(durations, list), repr(durations)
     assert all(isinstance(_, abjad.Duration) for _ in durations), repr(durations)
     weights = abjad.durations([(1, 4)])
     lists = abjad.sequence.split(durations, weights, cyclic=True, overhang=True)
-    assert isinstance(lists, list)
-    for list_ in lists:
-        assert all(isinstance(_, abjad.Duration) for _ in list_), repr(lists)
-    return lists
+    result = abjad.sequence.flatten(lists, depth=-1)
+    assert all(isinstance(_, abjad.Duration) for _ in result), repr(result)
+    return result
 
 
 def repeat_by(sequence, counts: list[int], *, cyclic: bool = False):
