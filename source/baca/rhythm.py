@@ -1096,7 +1096,8 @@ def make_monads(fractions) -> list[abjad.Leaf | abjad.Tuplet]:
     music: list[abjad.Leaf | abjad.Tuplet] = []
     pitch = 0
     for fraction in fractions.split():
-        leaves = abjad.makers.make_leaves([pitch], [fraction])
+        duration = abjad.Duration(fraction)
+        leaves = abjad.makers.make_leaves([pitch], [duration])
         music.extend(leaves)
     assert all(isinstance(_, abjad.Leaf | abjad.Tuplet) for _ in music)
     return music
