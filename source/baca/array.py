@@ -2735,7 +2735,8 @@ class PitchArrayRow:
                 measure_pitches.append(cell_pitches)
             measure_duration = cell.width * basic_cell_duration
             measure_durations.append(measure_duration)
-        leaves = abjad.makers.make_leaves(measure_pitches, measure_durations)
+        pitch_lists = abjad.makers.make_pitch_lists(measure_pitches)
+        leaves = abjad.makers.make_leaves(pitch_lists, measure_durations)
         container = abjad.Container(leaves)
         return container, time_signature
 

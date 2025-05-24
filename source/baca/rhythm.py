@@ -55,15 +55,17 @@ def _evaluate_basic_item(item, denominator, voice_name, tag):
         elif isinstance(item, Tie):
             rmakers.tie(components, tag=tag)
     elif isinstance(item, int) and 0 < item:
+        pitch_list = [abjad.NamedPitch("c'")]
         leaf_duration = abjad.Duration(item, denominator)
-        components = abjad.makers.make_leaves([0], [leaf_duration], tag=tag)
+        components = abjad.makers.make_leaves([pitch_list], [leaf_duration], tag=tag)
     elif isinstance(item, int) and item < 0:
         leaf_duration = abjad.Duration(-item, denominator)
-        components = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
+        components = abjad.makers.make_leaves([[]], [leaf_duration], tag=tag)
     elif isinstance(item, Chord):
         chord_duration = abjad.Duration(item.numerator, denominator)
         pitch_tuple = item.note_head_count * (0,)
-        components = abjad.makers.make_leaves([pitch_tuple], [chord_duration], tag=tag)
+        pitch_lists = abjad.makers.make_pitch_lists([pitch_tuple])
+        components = abjad.makers.make_leaves(pitch_lists, [chord_duration], tag=tag)
     elif isinstance(item, AfterGrace):
         components = item(denominator, tag)
     elif isinstance(item, IndependentAfterGrace):
@@ -112,24 +114,27 @@ def _evaluate_item(
 ) -> abjad.Component | list[abjad.Component]:
     capture_original_item: bool | abjad.Component = False
     if isinstance(item, int) and 0 < item:
+        pitch_list = [abjad.NamedPitch("c'")]
         leaf_duration = abjad.Duration(item, denominator)
-        notes = abjad.makers.make_leaves([0], [leaf_duration], tag=tag)
+        notes = abjad.makers.make_leaves([pitch_list], [leaf_duration], tag=tag)
         components.extend(notes)
         result = notes
     elif isinstance(item, int) and item < 0:
         leaf_duration = abjad.Duration(-item, denominator)
-        rests = abjad.makers.make_leaves([None], [leaf_duration], tag=tag)
+        rests = abjad.makers.make_leaves([[]], [leaf_duration], tag=tag)
         components.extend(rests)
         result = rests
     elif isinstance(item, Chord):
         chord_duration = abjad.Duration(item.numerator, denominator)
         pitch_tuple = item.note_head_count * (0,)
-        chords = abjad.makers.make_leaves([pitch_tuple], [chord_duration], tag=tag)
+        pitch_lists = abjad.makers.make_pitch_lists([pitch_tuple])
+        chords = abjad.makers.make_leaves(pitch_lists, [chord_duration], tag=tag)
         components.extend(chords)
         result = chords
     elif isinstance(item, abjad.Tuplet):
+        pitch_list = [abjad.NamedPitch(99)]
         duration = abjad.get.duration(item)
-        dummy_notes = abjad.makers.make_leaves([99], [duration], tag=tag)
+        dummy_notes = abjad.makers.make_leaves([pitch_list], [duration], tag=tag)
         components.extend(dummy_notes)
         result = dummy_notes
         capture_original_item = item
@@ -143,15 +148,17 @@ def _evaluate_item(
         result = components_
     elif isinstance(item, Container):
         container = item(denominator, voice_name, tag)
+        pitch_list = [abjad.NamedPitch(100)]
         duration = abjad.get.duration(container)
-        dummy_notes = abjad.makers.make_leaves([100], [duration], tag=tag)
+        dummy_notes = abjad.makers.make_leaves([pitch_list], [duration], tag=tag)
         components.extend(dummy_notes)
         result = dummy_notes
         capture_original_item = container
     elif isinstance(item, Feather):
+        pitch_list = [abjad.NamedPitch(98)]
         tuplet = item(denominator, voice_name, tag)
         duration = abjad.get.duration(tuplet)
-        dummy_notes = abjad.makers.make_leaves([98], [duration], tag=tag)
+        dummy_notes = abjad.makers.make_leaves([pitch_list], [duration], tag=tag)
         components.extend(dummy_notes)
         result = dummy_notes
         capture_original_item = tuplet
@@ -202,15 +209,17 @@ def _evaluate_item(
             rmakers.tie(result, tag=tag)
     elif isinstance(item, TremoloContainer):
         container = item(denominator, voice_name, tag)
+        pitch_list = [abjad.NamedPitch(101)]
         duration = abjad.get.duration(container)
-        dummy_notes = abjad.makers.make_leaves([101], [duration], tag=tag)
+        dummy_notes = abjad.makers.make_leaves([pitch_list], [duration], tag=tag)
         components.extend(dummy_notes)
         result = dummy_notes
         capture_original_item = container
     elif isinstance(item, Tuplet):
+        pitch_list = [abjad.NamedPitch(97)]
         tuplet = item(denominator, voice_name, tag)
         duration = abjad.get.duration(tuplet)
-        dummy_notes = abjad.makers.make_leaves([97], [duration], tag=tag)
+        dummy_notes = abjad.makers.make_leaves([pitch_list], [duration], tag=tag)
         components.extend(dummy_notes)
         result = dummy_notes
         capture_original_item = tuplet
@@ -750,10 +759,15 @@ class OBGC:
             components = _evaluate_basic_item(item, denominator, voice_name, tag)
             nongrace_leaves.extend(components)
         dummy_voice = abjad.Voice(nongrace_leaves, name=voice_name, tag=tag)
+        pitch_list = [abjad.NamedPitch("c'")]
         grace_note_durations = [
             abjad.Duration(_, denominator) for _ in self.grace_note_numerators
         ]
-        grace_leaves = abjad.makers.make_leaves([0], grace_note_durations, tag=tag)
+        grace_leaves = abjad.makers.make_leaves(
+            [pitch_list],
+            grace_note_durations,
+            tag=tag,
+        )
         if self.grace_leaf_duration is True:
             nongrace_duration = abjad.get.duration(nongrace_leaves)
             grace_leaf_duration = nongrace_duration / len(grace_leaves)
@@ -904,21 +918,22 @@ def from_collection(
             pair = talea[i]
             duration = -abjad.Duration(*pair)
             tag = _helpers.function_name(_frame(), n=1)
-            rests = abjad.makers.make_leaves([None], [duration], tag=tag)
+            rests = abjad.makers.make_leaves([[]], [duration], tag=tag)
             leaves.extend(rests)
             i += 1
         pair = talea[i]
         duration = abjad.Duration(*pair)
         assert 0 < duration, repr(duration)
         tag = _helpers.function_name(_frame(), n=3)
-        pleaves = abjad.makers.make_leaves([item], [duration], tag=tag)
+        pitch_lists = abjad.makers.make_pitch_lists([item])
+        pleaves = abjad.makers.make_leaves(pitch_lists, [duration], tag=tag)
         leaves.extend(pleaves)
         i += 1
         while abjad.Fraction(*talea[i]) < 0 and not i % len(talea) == 0:
             pair = talea[i]
             duration = -abjad.Duration(*pair)
             tag = _helpers.function_name(_frame(), n=4)
-            rests = abjad.makers.make_leaves([None], [duration], tag=tag)
+            rests = abjad.makers.make_leaves([[]], [duration], tag=tag)
             leaves.extend(rests)
             i += 1
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
@@ -988,8 +1003,11 @@ def make_bgcs(
             bgcs.append(None)
             continue
         grace_token = list(segment_part[:-1])
+        pitch_lists = abjad.makers.make_pitch_lists(grace_token)
         grace_leaves = abjad.makers.make_leaves(
-            grace_token, [duration], tag=_helpers.function_name(_frame(), n=1)
+            pitch_lists,
+            [duration],
+            tag=_helpers.function_name(_frame(), n=1),
         )
         container = abjad.BeforeGraceContainer(
             grace_leaves,
@@ -1094,10 +1112,10 @@ def make_mmrests(
 
 def make_monads(fractions) -> list[abjad.Leaf | abjad.Tuplet]:
     music: list[abjad.Leaf | abjad.Tuplet] = []
-    pitch = 0
+    pitch_list = [abjad.NamedPitch("c'")]
     for fraction in fractions.split():
         duration = abjad.Duration(fraction)
-        leaves = abjad.makers.make_leaves([pitch], [duration])
+        leaves = abjad.makers.make_leaves([pitch_list], [duration])
         music.extend(leaves)
     assert all(isinstance(_, abjad.Leaf | abjad.Tuplet) for _ in music)
     return music
@@ -1239,13 +1257,15 @@ def make_rhythm(
                     if "SPACER" in strings:
                         spacer_skip = component
                         if "+" in strings:
-                            spacer_pitch = 0
+                            spacer_pitch_list = [abjad.NamedPitch("c'")]
                         else:
                             assert "-" in strings
-                            spacer_pitch = None
+                            spacer_pitch_list = []
                         needed_duration = total_duration - existing_duration
                         leaves = abjad.makers.make_leaves(
-                            [spacer_pitch], [needed_duration], tag=tag
+                            [spacer_pitch_list],
+                            [needed_duration],
+                            tag=tag,
                         )
                         assert abjad.get.duration(leaves) == needed_duration
                         unchanged_duration = abjad.get.duration(components[:i])

@@ -760,8 +760,9 @@ def bass_to_octave(argument, n: int) -> None:
         Octave-transposes music such that the lowest note appears in octave 3:
 
         >>> collections = [(0, 2, 10), 17, (15, 16, 30), (7, 20), 9]
-        >>> duration = abjad.Duration(1, 4)
-        >>> leaves = abjad.makers.make_leaves(collections, [duration])
+        >>> pitch_lists = abjad.makers.make_pitch_lists(collections)
+        >>> durations = [abjad.Duration(1, 4)]
+        >>> leaves = abjad.makers.make_leaves(pitch_lists, durations)
         >>> baca.bass_to_octave(leaves, 3)
         >>> lilypond_file = abjad.illustrators.components(leaves)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -793,8 +794,9 @@ def bass_to_octave(argument, n: int) -> None:
         appears in octave 3:
 
         >>> collections = [(0, 2, 10), 17, (15, 16, 30), (7, 20), 9]
-        >>> duration = abjad.Duration(1, 4)
-        >>> leaves = abjad.makers.make_leaves(collections, [duration])
+        >>> pitch_lists = abjad.makers.make_pitch_lists(collections)
+        >>> durations = [abjad.Duration(1, 4)]
+        >>> leaves = abjad.makers.make_leaves(pitch_lists, durations)
         >>> _ = [baca.bass_to_octave(_, 3) for _ in leaves]
         >>> lilypond_file = abjad.illustrators.components(leaves)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -833,8 +835,9 @@ def center_to_octave(argument, n: int) -> None:
     ..  container:: example
 
         >>> collections = [(0, 2, 10), 17, (15, 16, 30), (7, 20), 9]
-        >>> duration = abjad.Duration(1, 4)
-        >>> leaves = abjad.makers.make_leaves(collections, [duration])
+        >>> pitch_lists = abjad.makers.make_pitch_lists(collections)
+        >>> durations = [abjad.Duration(1, 4)]
+        >>> leaves = abjad.makers.make_leaves(pitch_lists, durations)
         >>> _ = baca.center_to_octave(leaves, 3)
         >>> lilypond_file = abjad.illustrators.components(leaves)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -866,8 +869,9 @@ def center_to_octave(argument, n: int) -> None:
         appears in octave 3:
 
         >>> collections = [(0, 2, 10), 17, (15, 16, 30), (7, 20), 9]
-        >>> duration = abjad.Duration(1, 4)
-        >>> leaves = abjad.makers.make_leaves(collections, [duration])
+        >>> pitch_lists = abjad.makers.make_pitch_lists(collections)
+        >>> durations = [abjad.Duration(1, 4)]
+        >>> leaves = abjad.makers.make_leaves(pitch_lists, durations)
         >>> _ = [baca.center_to_octave(_, 3) for _ in leaves]
         >>> lilypond_file = abjad.illustrators.components(leaves)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1046,9 +1050,9 @@ def displacement(argument, displacements: list[int]) -> None:
 
         Octave-displaces PLTs:
 
-        >>> pitches = 3 * [0, 2, 3]
-        >>> duration = abjad.Duration(1, 4)
-        >>> leaves = abjad.makers.make_leaves(pitches, [duration])
+        >>> pitch_lists = abjad.makers.make_pitch_lists(3 * [0, 2, 3])
+        >>> durations = [abjad.Duration(1, 4)]
+        >>> leaves = abjad.makers.make_leaves(pitch_lists, durations)
         >>> container = abjad.Container(leaves)
         >>> baca.displacement(container, [0, 0, -1, -1, 1, 1])
         >>> lilypond_file = abjad.illustrators.components([container])
@@ -1085,9 +1089,9 @@ def displacement(argument, displacements: list[int]) -> None:
 
         Octave-displaces chords:
 
-        >>> pitches = 6 * [(0, 2, 3)]
-        >>> duration = abjad.Duration(1, 4)
-        >>> leaves = abjad.makers.make_leaves(pitches, [duration])
+        >>> pitches = abjad.makers.make_pitch_lists(6 * [(0, 2, 3)])
+        >>> durations = [abjad.Duration(1, 4)]
+        >>> leaves = abjad.makers.make_leaves(pitches, durations)
         >>> container = abjad.Container(leaves)
         >>> baca.displacement(container, [0, 0, -1, -1, 1, 1])
         >>> lilypond_file = abjad.illustrators.components([container])
@@ -1792,9 +1796,10 @@ def register(
 
         Octave-transposes all PLTs to the octave rooted at -6:
 
-        >>> pitches = [0, 2, 10, 18, 16, 15, 20, 19, 9]
-        >>> duration = abjad.Duration(1, 4)
-        >>> leaves = abjad.makers.make_leaves(pitches, [duration])
+        >>> numbers = [0, 2, 10, 18, 16, 15, 20, 19, 9]
+        >>> pitch_lists = abjad.makers.make_pitch_lists(numbers)
+        >>> durations = [abjad.Duration(1, 4)]
+        >>> leaves = abjad.makers.make_leaves(pitch_lists, durations)
         >>> container = abjad.Container(leaves)
         >>> _ = baca.register(container, -6)
         >>> lilypond_file = abjad.illustrators.components([container])
@@ -1831,9 +1836,10 @@ def register(
 
         Octave-transposes all PLTs to an octave interpolated from -6 to 18:
 
-        >>> pitches = [0, 2, 10, 18, 16, 15, 20, 19, 9]
-        >>> duration = abjad.Duration(1, 4)
-        >>> leaves = abjad.makers.make_leaves(pitches, [duration])
+        >>> numbers = [0, 2, 10, 18, 16, 15, 20, 19, 9]
+        >>> pitch_lists = abjad.makers.make_pitch_lists(numbers)
+        >>> durations = [abjad.Duration(1, 4)]
+        >>> leaves = abjad.makers.make_leaves(pitch_lists, durations)
         >>> container = abjad.Container(leaves)
         >>> _ = baca.register(container, -6, 18)
         >>> lilypond_file = abjad.illustrators.components([container])
@@ -3021,8 +3027,9 @@ def soprano_to_octave(argument, n: int) -> None:
     ..  container:: example
 
         >>> collections = [(0, 2, 10), 17, (15, 16, 30), (7, 20), 9]
-        >>> duration = abjad.Duration(1, 4)
-        >>> leaves = abjad.makers.make_leaves(collections, [duration])
+        >>> pitch_lists = abjad.makers.make_pitch_lists(collections)
+        >>> durations = [abjad.Duration(1, 4)]
+        >>> leaves = abjad.makers.make_leaves(pitch_lists, durations)
         >>> container = abjad.Container(leaves)
         >>> baca.soprano_to_octave(container, 3)
         >>> lilypond_file = abjad.illustrators.components([container])
@@ -3053,12 +3060,13 @@ def soprano_to_octave(argument, n: int) -> None:
 
     ..  container:: example
 
-        Octave-transposes music that such that the highest note in each pitched logical
-        tie appears in octave 3:
+        Octave-transposes music that such that the highest note in each pitched
+        logical tie appears in octave 3:
 
         >>> collections = [(0, 2, 10), 17, (15, 16, 30), (7, 20), 9]
-        >>> duration = abjad.Duration(1, 4)
-        >>> leaves = abjad.makers.make_leaves(collections, [duration])
+        >>> pitch_lists = abjad.makers.make_pitch_lists(collections)
+        >>> durations = [abjad.Duration(1, 4)]
+        >>> leaves = abjad.makers.make_leaves(pitch_lists, durations)
         >>> container = abjad.Container(leaves)
         >>> for plt in baca.select.plts(container):
         ...     baca.soprano_to_octave(plt, 3)
