@@ -2422,6 +2422,7 @@ def postprocess(
                 time_signatures,
             )
     with abjad.ForbidUpdate(component=score, update_on_exit=True):
+        abjad.makers.tweak_tuplet_bracket_edge_height(score)
         extend_beams(score)
         _attach_sounds_during(score)
         if first_section is False:
