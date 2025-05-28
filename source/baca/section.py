@@ -2423,6 +2423,7 @@ def postprocess(
             )
     with abjad.ForbidUpdate(component=score, update_on_exit=True):
         abjad.makers.tweak_tuplet_bracket_edge_height(score)
+        abjad.makers.tweak_tuplet_number_text(score)
         extend_beams(score)
         _attach_sounds_during(score)
         if first_section is False:
