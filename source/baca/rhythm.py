@@ -1020,6 +1020,7 @@ def make_bgcs(
     return bgcs, collection
 
 
+# TODO: remove?
 def make_even_divisions(time_signatures) -> list[abjad.Leaf | abjad.Tuplet]:
     tag = _helpers.function_name(_frame())
     durations = [_.duration for _ in time_signatures]
