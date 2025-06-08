@@ -1519,6 +1519,27 @@ def replace_nontrivial_skip_filled_tuplets(argument):
         abjad.mutate.replace([tuplet], [skip])
 
 
+def set_tuplet_ratios_in_terms_of(argument, denominator):
+    for tuplet in abjad.select.tuplets(argument):
+        tuplet_duration = abjad.get.duration(tuplet)
+        tuplet_duration_with_denominator = abjad.duration.with_denominator(
+            tuplet_duration, denominator
+        )
+        numerator_, denominator_ = tuplet.multiplier
+        contents_duration = abjad.Duration(denominator_, numerator_) * tuplet_duration
+        contents_duration_with_denominator = abjad.duration.with_denominator(
+            contents_duration, denominator
+        )
+        pair = (
+            tuplet_duration_with_denominator[0],
+            contents_duration_with_denominator[0],
+        )
+        assert abjad.Duration(tuplet.multiplier) == abjad.Duration(pair), repr(
+            (tuplet, pair)
+        )
+        tuplet.multiplier = pair
+
+
 def style_accelerando(
     container: abjad.Container | abjad.Tuplet, exponent: float = 0.625
 ) -> abjad.Container | abjad.Tuplet:
