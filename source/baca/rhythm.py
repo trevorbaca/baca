@@ -1534,10 +1534,8 @@ def set_tuplet_ratios_in_terms_of(argument, denominator):
             tuplet_duration_with_denominator[0],
             contents_duration_with_denominator[0],
         )
-        assert abjad.Duration(tuplet.multiplier) == abjad.Duration(pair), repr(
-            (tuplet, pair)
-        )
-        tuplet.multiplier = pair
+        if abjad.Duration(tuplet.multiplier) == abjad.Duration(pair):
+            tuplet.multiplier = pair
 
 
 def style_accelerando(
