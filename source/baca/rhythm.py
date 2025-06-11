@@ -1479,10 +1479,6 @@ def prolate(
             extra_count *= -1
         new_contents_count = contents_count + extra_count
         tuplet_multiplier = abjad.Fraction(new_contents_count, contents_count)
-        if not abjad.Duration(tuplet_multiplier).normalized():
-            message = f"{tuplet!r} gives {tuplet_multiplier}"
-            message += " with {contents_count} and {new_contents_count}."
-            raise Exception(message)
         pair = abjad.duration.pair(tuplet_multiplier)
         multiplier = pair
     elif isinstance(treatment, str) and ":" in treatment:
@@ -1497,8 +1493,8 @@ def prolate(
     else:
         raise Exception(f"bad treatment: {treatment!r}.")
     tuplet.multiplier = multiplier
-    if not abjad.Duration(tuplet.multiplier).normalized():
-        tuplet.normalize_multiplier()
+    if not tuplet.ratio.normalized():
+        tuplet.normalize_ratio()
     return tuplet
 
 
