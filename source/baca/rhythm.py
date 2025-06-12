@@ -3,6 +3,7 @@ Rhythm.
 """
 
 import dataclasses
+import fractions
 import math as python_math
 import typing
 from inspect import currentframe as _frame
@@ -1492,7 +1493,7 @@ def prolate(
         multiplier = pair
     else:
         raise Exception(f"bad treatment: {treatment!r}.")
-    tuplet.multiplier = multiplier
+    tuplet.ratio = abjad.Ratio(multiplier[1], multiplier[0])
     if not tuplet.ratio.normalized():
         tuplet.normalize_ratio()
     return tuplet
@@ -1502,7 +1503,7 @@ def replace_nontrivial_skip_filled_tuplets(argument):
     tuplets = abjad.select.tuplets(argument)
     violators = []
     for tuplet in tuplets:
-        if tuplet.multiplier == (1, 1):
+        if tuplet.ratio == abjad.Ratio(1, 1):
             continue
         for component in tuplet:
             if not isinstance(component, abjad.Skip):
@@ -1522,17 +1523,18 @@ def set_tuplet_ratios_in_terms_of(argument, denominator):
         tuplet_duration_with_denominator = abjad.duration.with_denominator(
             tuplet_duration, denominator
         )
-        numerator_, denominator_ = tuplet.multiplier
+        numerator_ = tuplet.ratio.denominator
+        denominator_ = tuplet.ratio.numerator
         contents_duration = abjad.Duration(denominator_, numerator_) * tuplet_duration
         contents_duration_with_denominator = abjad.duration.with_denominator(
             contents_duration, denominator
         )
         pair = (
-            tuplet_duration_with_denominator[0],
             contents_duration_with_denominator[0],
+            tuplet_duration_with_denominator[0],
         )
-        if abjad.Duration(tuplet.multiplier) == abjad.Duration(pair):
-            tuplet.multiplier = pair
+        if tuplet.ratio.as_fraction() == fractions.Fraction(*pair):
+            tuplet.ratio = abjad.Ratio(*pair)
 
 
 def style_accelerando(
