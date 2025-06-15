@@ -1494,7 +1494,7 @@ def prolate(
     else:
         raise Exception(f"bad treatment: {treatment!r}.")
     tuplet.ratio = abjad.Ratio(multiplier[1], multiplier[0])
-    if not tuplet.ratio.normalized():
+    if not tuplet.ratio.is_normalized():
         tuplet.normalize_ratio()
     return tuplet
 
