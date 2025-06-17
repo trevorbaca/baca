@@ -282,7 +282,7 @@ def compare_persistent_indicators(indicator_1, indicator_2) -> bool:
         return False
     if not isinstance(indicator_1, abjad.Dynamic):
         return indicator_1 == indicator_2
-    if indicator_1.sforzando or indicator_2.sforzando:
+    if indicator_1.is_sforzando() or indicator_2.is_sforzando():
         return False
     if indicator_1.name == indicator_2.name:
         return indicator_1.command == indicator_2.command

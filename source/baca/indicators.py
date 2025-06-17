@@ -18,7 +18,7 @@ from .enums import enums as _enums
 
 def _assert_no_post_event_tweaks(tweaks, command):
     for tweak in tweaks:
-        if tweak.post_event() is True:
+        if tweak.is_post_event() is True:
             message = f"LilyPond {command} is not a post-event:"
             message += f"\n    {tweak}"
             raise Exception(message)
