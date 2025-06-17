@@ -558,11 +558,11 @@ class PitchArray:
             >>> score = abjad.Score(name="Score")
             >>> score.append(abjad.Staff("c'8 d'8 e'8 f'8", name="Staff_1"))
             >>> score.append(abjad.Staff("c'4 d'4", name="Staff_2"))
-            >>> tuplet = abjad.Tuplet((2, 3), "c'8 d'8 e'8")
+            >>> tuplet = abjad.Tuplet("3:2", "c'8 d'8 e'8")
             >>> staff = abjad.Staff(
             ...     [
-            ...         abjad.Tuplet((2, 3), "c'8 d'8 e'8"),
-            ...         abjad.Tuplet((2, 3), "c'8 d'8 e'8"),
+            ...         abjad.Tuplet("3:2", "c'8 d'8 e'8"),
+            ...         abjad.Tuplet("3:2", "c'8 d'8 e'8"),
             ...     ],
             ...     name="Staff_3",
             ... )
@@ -621,8 +621,8 @@ class PitchArray:
             >>> score.append(abjad.Staff("c'4 d'4", name="Staff_2"))
             >>> staff = abjad.Staff(
             ...     [
-            ...         abjad.Tuplet((2, 3), "c'8 d'8 e'8"),
-            ...         abjad.Tuplet((2, 3), "c'8 d'8 e'8"),
+            ...         abjad.Tuplet("3:2", "c'8 d'8 e'8"),
+            ...         abjad.Tuplet("3:2", "c'8 d'8 e'8"),
             ...     ],
             ...     name="Staff_3",
             ... )

@@ -850,8 +850,8 @@ class Tuplet:
             extra_duration = abjad.Duration(self.extra_counts, denominator)
             prolated_duration = contents_duration + extra_duration
             multiplier = prolated_duration / contents_duration
-            pair = multiplier.numerator, multiplier.denominator
-            tuplet = abjad.Tuplet(pair, components, tag=tag)
+            ratio = abjad.Ratio(multiplier.denominator, multiplier.numerator)
+            tuplet = abjad.Tuplet(ratio, components, tag=tag)
         else:
             assert isinstance(self.extra_counts, str)
             tuplet = abjad.Tuplet(self.extra_counts, components, tag=tag)
@@ -1451,8 +1451,8 @@ def nest(containers: list[abjad.Tuplet], treatment: str) -> abjad.Tuplet:
         contents_duration = abjad.get.duration(containers)
         target_duration = contents_duration + addendum
         multiplier = target_duration / contents_duration
-        pair = abjad.duration.pair(multiplier)
-        nested_tuplet = abjad.Tuplet(pair, [])
+        ratio = abjad.Ratio(multiplier.denominator, multiplier.numerator)
+        nested_tuplet = abjad.Tuplet(ratio, [])
         abjad.mutate.wrap(containers, nested_tuplet)
     else:
         assert ":" in treatment
