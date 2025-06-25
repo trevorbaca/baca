@@ -15,6 +15,8 @@ from . import tags as _tags
 
 
 def _is_rest(argument):
+    if argument is None:
+        return False
     prototype = (abjad.Rest, abjad.MultimeasureRest, abjad.Skip)
     if isinstance(argument, prototype):
         return True
@@ -61,7 +63,7 @@ def bcps(
                     add_right_text_to_me = lt.head
                     break
                 nonrest_count += 1
-    if final_spanner and not _is_rest(lts[-1]) and len(lts[-1]) == 1:
+    if final_spanner and len(lts[-1]) == 1 and not _is_rest(lts[-1].head):
         next_leaf_after_argument = abjad.get.leaf(lts[-1][-1], 1)
         if next_leaf_after_argument is None:
             message = "can not attach final spanner: argument includes end of score."
