@@ -519,7 +519,7 @@ def _clean_up_repeat_tie_direction(score):
         for note_head in note_heads:
             staff_position = clef.to_staff_position(note_head.written_pitch)
             if staff_position.number == 0:
-                wrapper = abjad.get.indicator(leaf, abjad.RepeatTie, unwrap=False)
+                wrapper = abjad.get.indicator(leaf, abjad.RepeatTie, wrapper=True)
                 abjad.detach(wrapper, leaf)
                 bundle = abjad.bundle(wrapper.get_item(), r"- \tweak direction #up")
                 abjad.attach(bundle, leaf, tag=wrapper.tag)
@@ -2532,7 +2532,7 @@ def postprocess(
     if do_not_check_wellformedness is False:
         count, message = abjad.wf.tabulate_wellformedness(
             score,
-            check_out_of_range_pitches=False,
+            do_not_check_out_of_range_pitches=True,
         )
         if count:
             raise Exception("\n" + message)

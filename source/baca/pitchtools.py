@@ -409,7 +409,7 @@ def _make_cluster(
     if start_pitch is None:
         start_pitch = plt.head.written_pitch
     pitches = _make_cluster_pitches(start_pitch, width)
-    key_cluster = abjad.KeyCluster(include_flat_markup=(not hide_flat_markup))
+    key_cluster = abjad.KeyCluster(hide_flat_markup=hide_flat_markup)
     for pleaf in plt:
         chord = abjad.Chord(pitches, pleaf.written_duration)
         wrappers = abjad.get.wrappers(pleaf)

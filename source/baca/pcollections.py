@@ -1006,7 +1006,11 @@ def accumulate_and_repartition(segments, ratios, counts):
     segments = _sequence.helianthate(segments, -1, 1)
     sequences = [segments, ratios]
     subsegments = []
-    for segment, ratio in abjad.sequence.zip(sequences, cyclic=True, truncate=False):
+    for segment, ratio in abjad.sequence.zip(
+        sequences,
+        cyclic=True,
+        do_not_truncate=True,
+    ):
         subsegments_ = abjad.sequence.partition_by_ratio_of_lengths(segment, ratio)
         subsegments.extend(subsegments_)
     groups = abjad.sequence.partition_by_counts(

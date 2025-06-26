@@ -296,7 +296,7 @@ class PitchArray:
         Returns tuple.
         """
         columns = []
-        cells = abjad.sequence.zip(self.rows, truncate=False)
+        cells = abjad.sequence.zip(self.rows, do_not_truncate=True)
         for i, cells in enumerate(cells):
             column = PitchArrayColumn(cells)
             column._parent_array = self
