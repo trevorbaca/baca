@@ -340,6 +340,7 @@ def _to_indicator_stem(indicator) -> str:
 
 
 def remove_reapplied_wrappers(leaf, item):
+    assert isinstance(leaf, abjad.Leaf), repr(leaf)
     if isinstance(item, abjad.Bundle):
         indicator = item.indicator
     else:

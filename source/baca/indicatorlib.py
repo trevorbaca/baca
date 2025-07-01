@@ -20,7 +20,7 @@ def attach_persistent_indicator(
     deactivate: bool = False,
     direction: abjad.Vertical | None = None,
     left_broken: bool = False,
-    manifests=None,
+    manifests: dict | None = None,
     right_broken: bool = False,
     tag: abjad.Tag | None = None,
 ) -> abjad.Wrapper:
@@ -33,7 +33,6 @@ def attach_persistent_indicator(
     assert isinstance(manifests, dict), repr(manifests)
     tag = tag or abjad.Tag()
     tag = tag.append(_helpers.function_name(_frame()))
-    unbundled_indicator = unbundle_indicator(indicator)
     if getattr(unbundled_indicator, "spanner_start", False) is True:
         tag = tag.append(_tags.SPANNER_START)
     if getattr(unbundled_indicator, "spanner_stop", False) is True:
@@ -42,17 +41,19 @@ def attach_persistent_indicator(
         tag = tag.append(_tags.LEFT_BROKEN)
     if right_broken is True:
         tag = tag.append(_tags.RIGHT_BROKEN)
-    reapplied = _treat.remove_reapplied_wrappers(leaf, indicator)
-    wrapper = abjad.attach(
+    reapplied_indicator = _treat.remove_reapplied_wrappers(leaf, indicator)
+    assert not isinstance(reapplied_indicator, abjad.Wrapper)
+    abjad.attach(
         indicator,
         leaf,
         context=context,
         deactivate=deactivate,
         direction=direction,
         tag=tag,
-        wrapper=True,
     )
-    if _treat.compare_persistent_indicators(indicator, reapplied):
+    retrieved_wrappers = abjad.get.wrappers(leaf, unbundled_indicator)
+    wrapper = retrieved_wrappers[-1]
+    if _treat.compare_persistent_indicators(indicator, reapplied_indicator):
         result = _treat.treat_persistent_wrapper(manifests, wrapper, "redundant")
         if result is not None:
             assert isinstance(result, abjad.Wrapper)
