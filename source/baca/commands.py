@@ -73,12 +73,14 @@ def bcps(
     for lt in lts:
         stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanBCP")
         if not final_spanner and lt is lts[-1] and not _is_rest(lt.head):
-            wrapper = abjad.attach(
+            # wrapper = abjad.attach(
+            abjad.attach(
                 stop_text_span,
                 lt.head,
                 tag=_helpers.function_name(_frame(), n=1),
-                wrapper=True,
+                # wrapper=True,
             )
+            wrapper = abjad.get.wrappers(lt.head, stop_text_span)[-1]
             wrappers.append(wrapper)
             break
         previous_leaf = abjad.get.leaf(lt.head, -1)
@@ -123,28 +125,35 @@ def bcps(
         if _is_rest(lt.head) and (_is_rest(next_leaf) or next_leaf is None):
             pass
         else:
-            wrapper = abjad.attach(
+            # wrapper = abjad.attach(
+            abjad.attach(
                 start_text_span,
                 lt.head,
                 tag=_helpers.function_name(_frame(), n=2),
-                wrapper=True,
+                # wrapper=True,
             )
+            wrapper = abjad.get.wrappers(lt.head, start_text_span)[-1]
             wrappers.append(wrapper)
         if 0 < i - 1:
-            wrapper = abjad.attach(
+            # wrapper = abjad.attach(
+            abjad.attach(
                 stop_text_span,
                 lt.head,
                 tag=_helpers.function_name(_frame(), n=3),
-                wrapper=True,
+                # wrapper=True,
             )
+            wrapper = abjad.get.wrappers(lt.head, stop_text_span)[-1]
             wrappers.append(wrapper)
         if lt is lts[-1] and final_spanner:
-            wrapper = abjad.attach(
+            # wrapper = abjad.attach(
+            abjad.attach(
                 stop_text_span,
                 next_leaf_after_argument,
                 tag=_helpers.function_name(_frame(), n=4),
-                wrapper=True,
+                # wrapper=True,
             )
+            assert next_leaf_after_argument is not None
+            wrapper = abjad.get.wrappers(next_leaf_after_argument, stop_text_span)[-1]
             wrappers.append(wrapper)
         bcp_fraction = abjad.Fraction(*bcp)
         next_bcp_fraction = abjad.Fraction(*bcps[i])
@@ -158,12 +167,14 @@ def bcps(
                         articulation,
                         bow_change_tweaks,
                     )
-                wrapper = abjad.attach(
+                # wrapper = abjad.attach(
+                abjad.attach(
                     articulation,
                     lt.head,
                     tag=_helpers.function_name(_frame(), n=5),
-                    wrapper=True,
+                    # wrapper=True,
                 )
+                wrapper = abjad.get.wrappers(lt.head, articulation)[-1]
                 wrappers.append(wrapper)
             elif bcp_fraction < next_bcp_fraction:
                 articulation = abjad.Articulation("downbow")
@@ -172,12 +183,14 @@ def bcps(
                         articulation,
                         bow_change_tweaks,
                     )
-                wrapper = abjad.attach(
+                # wrapper = abjad.attach(
+                abjad.attach(
                     articulation,
                     lt.head,
                     tag=_helpers.function_name(_frame(), n=6),
-                    wrapper=True,
+                    # wrapper=True,
                 )
+                wrapper = abjad.get.wrappers(lt.head, articulation)[-1]
                 wrappers.append(wrapper)
         else:
             previous_bcp_fraction = abjad.Fraction(*previous_bcp)
@@ -188,12 +201,14 @@ def bcps(
                         articulation,
                         bow_change_tweaks,
                     )
-                wrapper = abjad.attach(
+                # wrapper = abjad.attach(
+                abjad.attach(
                     articulation,
                     lt.head,
                     tag=_helpers.function_name(_frame(), n=7),
-                    wrapper=True,
+                    # wrapper=True,
                 )
+                wrapper = abjad.get.wrappers(lt.head, articulation)[-1]
                 wrappers.append(wrapper)
             elif previous_bcp_fraction > bcp_fraction < next_bcp_fraction:
                 articulation = abjad.Articulation("downbow")
@@ -202,12 +217,14 @@ def bcps(
                         articulation,
                         bow_change_tweaks,
                     )
-                wrapper = abjad.attach(
+                # wrapper = abjad.attach(
+                abjad.attach(
                     articulation,
                     lt.head,
                     tag=_helpers.function_name(_frame(), n=8),
-                    wrapper=True,
+                    # wrapper=True,
                 )
+                wrapper = abjad.get.wrappers(lt.head, articulation)[-1]
                 wrappers.append(wrapper)
         previous_bcp = bcp
     return wrappers

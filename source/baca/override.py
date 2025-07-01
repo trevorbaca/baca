@@ -47,7 +47,8 @@ def _override(
     if after is True:
         site = "after"
     literal = abjad.LilyPondLiteral(string, site=site)
-    wrapper_1 = abjad.attach(literal, leaves[0], tag=first_tag, wrapper=True)
+    abjad.attach(literal, leaves[0], tag=first_tag)
+    wrapper_1 = abjad.get.wrappers(leaves[0], literal)[-1]
     if once:
         return [wrapper_1]
     override = abjad.LilyPondOverride(
@@ -58,7 +59,8 @@ def _override(
     )
     string = override.revert_string
     literal = abjad.LilyPondLiteral(string, site="after")
-    wrapper_2 = abjad.attach(literal, leaves[-1], tag=final_tag, wrapper=True)
+    abjad.attach(literal, leaves[-1], tag=final_tag)
+    wrapper_2 = abjad.get.wrappers(leaves[-1], literal)[-1]
     return [wrapper_1, wrapper_2]
 
 
