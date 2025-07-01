@@ -479,7 +479,8 @@ def treat_persistent_wrapper(
             tag=abjad.Tag(string),
         )
         abjad.detach(wrapper, leaf)
-        wrapper = abjad.attach(
+        # wrapper = abjad.attach(
+        abjad.attach(
             bundle,
             leaf,
             context=wrapper.context,
@@ -487,8 +488,9 @@ def treat_persistent_wrapper(
             direction=wrapper.direction,
             synthetic_offset=wrapper.synthetic_offset,
             tag=wrapper.tag,
-            wrapper=True,
+            # wrapper=True,
         )
+        wrapper = abjad.get.wrappers(leaf, bundle)[-1]
         _set_status_tag(wrapper, status)
         return wrapper
     else:
@@ -509,12 +511,14 @@ def treat_persistent_wrapper(
         if isinstance(unbundled_indicator, abjad.Clef):
             string = rf"\set {context.lilypond_type}.forceClef = ##t"
             literal = abjad.LilyPondLiteral(string, site="before")
-            wrapper_ = abjad.attach(
+            # wrapper_ = abjad.attach(
+            abjad.attach(
                 literal,
                 wrapper.component,
                 tag=wrapper.tag.append(_helpers.function_name(_frame(), n=2)),
-                wrapper=True,
+                # wrapper=True,
             )
+            wrapper_ = abjad.get.wrappers(wrapper.component, literal)[-1]
             _set_status_tag(wrapper_, status, stem="CLEF")
         _set_status_tag(wrapper, status)
         _attach_color_redraw_literal(
@@ -529,11 +533,13 @@ def treat_persistent_wrapper(
             strings = unbundled_indicator._get_lilypond_format(context=context)
             literal = abjad.LilyPondLiteral(strings, site="absolute_after")
             stem = _to_indicator_stem(unbundled_indicator)
-            wrapper_ = abjad.attach(
+            # wrapper_ = abjad.attach(
+            abjad.attach(
                 literal,
                 leaf,
                 tag=existing_tag.append(_helpers.function_name(_frame(), n=3)),
-                wrapper=True,
+                # wrapper=True,
             )
+            wrapper_ = abjad.get.wrappers(leaf, literal)[-1]
             _set_status_tag(wrapper_, status, redraw=True, stem=stem)
         return None

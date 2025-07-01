@@ -1368,14 +1368,16 @@ def _reapply_persistent_indicators(
         if isinstance(result.previous_indicator, tempo_prototype):
             function_name = _helpers.function_name(_frame(), n=2)
             if result.status == "reapplied":
-                wrapper = abjad.attach(
+                # wrapper = abjad.attach(
+                abjad.attach(
                     result.previous_indicator,
                     result.leaf,
                     synthetic_offset=result.synthetic_offset,
                     deactivate=deactivate,
                     tag=result.edition.append(function_name),
-                    wrapper=True,
+                    # wrapper=True,
                 )
+                wrapper = abjad.get.wrappers(result.leaf, result.previous_indicator)[-1]
                 _treat.treat_persistent_wrapper(manifests, wrapper, result.status)
             else:
                 assert result.status in ("redundant", None), repr(result.status)
@@ -1399,19 +1401,21 @@ def _reapply_persistent_indicators(
             if _tags.NOT_PARTS.string not in tag.string:
                 tag = tag.append(_tags.NOT_PARTS)
         try:
-            wrapper = abjad.attach(
+            # wrapper = abjad.attach(
+            abjad.attach(
                 result.previous_indicator,
                 result.leaf,
                 check_duplicate_indicator=True,
                 deactivate=deactivate,
                 synthetic_offset=result.synthetic_offset,
                 tag=tag,
-                wrapper=True,
+                # wrapper=True,
             )
             attached = True
         except abjad.PersistentIndicatorError:
             pass
         if attached:
+            wrapper = abjad.get.wrappers(result.leaf, result.previous_indicator)[-1]
             _treat.treat_persistent_wrapper(manifests, wrapper, result.status)
 
 
@@ -2788,12 +2792,14 @@ def span_metronome_marks(
             wrapper = abjad.get.wrapper(skip, abjad.MetronomeMark)
             metronome_mark = dataclasses.replace(metronome_mark, hide=True)
             abjad.detach(abjad.MetronomeMark, skip)
-            wrapper = abjad.attach(
+            # wrapper = abjad.attach(
+            abjad.attach(
                 metronome_mark,
                 skip,
                 tag=wrapper.tag,
-                wrapper=True,
+                # wrapper=True,
             )
+            wrapper = abjad.get.wrappers(skip, metronome_mark)[-1]
             if hide is False:
                 foo = dataclasses.replace(metronome_mark, hide=False)
                 string = abjad.lilypond(foo)
