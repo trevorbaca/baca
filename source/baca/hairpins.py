@@ -65,7 +65,7 @@ class HairpinSpecifier:
         *,
         is_left_broken_first_piece: bool = False,
         is_right_broken_final_piece: bool = False,
-    ) -> list[abjad.Wrapper]:
+    ) -> list[abjad.wrapper.Wrapper]:
         assert isinstance(leaf, abjad.Leaf), repr(leaf)
         assert isinstance(current_piece_index, int), repr(current_piece_index)
         assert isinstance(tweaks, tuple), repr(tweaks)
@@ -119,7 +119,7 @@ def _iterate_cyclic_hairpin_pieces(
     left_broken: bool = False,
     right_broken: bool = False,
     specifiers: list[HairpinSpecifier] | None = None,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     assert isinstance(pieces, list), repr(pieces)
     assert isinstance(tweaks, tuple), repr(tweaks)
     assert isinstance(do_not_bookend, bool), repr(do_not_bookend)
@@ -191,7 +191,7 @@ def cyclic(
     left_broken: bool = False,
     right_broken: bool = False,
     rleak: bool = False,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     assert isinstance(descriptor, str), repr(descriptor)
     assert isinstance(do_not_bookend, bool), repr(do_not_bookend)
     assert isinstance(do_not_start_spanner_on_final_piece, bool)
@@ -227,7 +227,7 @@ def hairpin(
     left_broken: bool = False,
     right_broken: bool = False,
     rleak: bool = False,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     argument = list(argument)
     assert isinstance(descriptor, str), repr(descriptor)
     assert isinstance(extra_specifiers, bool), repr(extra_specifiers)

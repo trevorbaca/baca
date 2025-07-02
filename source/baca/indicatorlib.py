@@ -23,7 +23,7 @@ def attach_persistent_indicator(
     manifests: dict | None = None,
     right_broken: bool = False,
     tag: abjad.Tag | None = None,
-) -> abjad.Wrapper:
+) -> abjad.wrapper.Wrapper:
     unbundled_indicator = unbundle_indicator(indicator)
     assert unbundled_indicator.persistent is True, repr(indicator)
     if context is not None:
@@ -42,7 +42,7 @@ def attach_persistent_indicator(
     if right_broken is True:
         tag = tag.append(_tags.RIGHT_BROKEN)
     reapplied_indicator = _treat.remove_reapplied_wrappers(leaf, indicator)
-    assert not isinstance(reapplied_indicator, abjad.Wrapper)
+    assert not isinstance(reapplied_indicator, abjad.wrapper.Wrapper)
     abjad.attach(
         indicator,
         leaf,
@@ -56,7 +56,7 @@ def attach_persistent_indicator(
     if _treat.compare_persistent_indicators(indicator, reapplied_indicator):
         result = _treat.treat_persistent_wrapper(manifests, wrapper, "redundant")
         if result is not None:
-            assert isinstance(result, abjad.Wrapper)
+            assert isinstance(result, abjad.wrapper.Wrapper)
             wrapper = result
     return wrapper
 

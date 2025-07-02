@@ -25,7 +25,7 @@ def _attach_simplex_spanner_indicators(
     grob: str | None = None,
     left_broken: bool = False,
     right_broken: bool = False,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     wrappers = []
     wrapper = _attach_spanner_start(
         argument,
@@ -53,7 +53,7 @@ def _attach_spanner_start(
     direction: abjad.Vertical | None = None,
     grob: str | None = None,
     left_broken: bool = False,
-) -> abjad.Wrapper:
+) -> abjad.wrapper.Wrapper:
     unbundled_indicator = _indicatorlib.unbundle_indicator(spanner_start)
     assert unbundled_indicator.spanner_start is True
     spanner_start = _helpers.bundle_tweaks(spanner_start, tweaks, i=0, total=1)
@@ -75,7 +75,7 @@ def _attach_spanner_stop(
     spanner_stop,
     *,
     right_broken: bool = False,
-) -> abjad.Wrapper:
+) -> abjad.wrapper.Wrapper:
     assert spanner_stop.spanner_stop is True, repr(spanner_stop)
     final_leaf = abjad.select.leaf(argument, -1)
     wrapper = _indicatorlib.attach_persistent_indicator(
@@ -98,7 +98,7 @@ def _iterate_text_spanner_pieces(
     left_broken: bool = False,
     right_broken: bool = False,
     specifiers: typing.Sequence = (),
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     assert isinstance(tweaks, tuple), repr(tweaks)
     assert pieces is not None
     assert isinstance(do_not_bookend, bool), repr(do_not_bookend)
@@ -397,7 +397,7 @@ class _TextSpannerSpecifier:
         *,
         is_left_broken_first_piece: bool = False,
         is_right_broken_final_piece: bool = False,
-    ) -> list[abjad.Wrapper]:
+    ) -> list[abjad.wrapper.Wrapper]:
         assert isinstance(leaf, abjad.Leaf), repr(leaf)
         assert isinstance(current_piece_index, int), repr(current_piece_index)
         assert isinstance(tag, abjad.Tag), repr(tag)
@@ -442,7 +442,7 @@ def beam(
     direction: abjad.Vertical | None = None,
     start_beam: abjad.StartBeam = abjad.StartBeam(),
     stop_beam: abjad.StopBeam = abjad.StopBeam(),
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     assert isinstance(start_beam, abjad.StartBeam), repr(start_beam)
     assert isinstance(stop_beam, abjad.StopBeam), repr(stop_beam)
     for leaf in abjad.iterate.leaves(argument, grace=False):
@@ -468,7 +468,7 @@ def bow_speed(
     left_broken_text: str | None = None,
     right_broken: bool = False,
     rleak: bool = False,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     wrappers = text(
         argument,
         descriptor,
@@ -492,7 +492,7 @@ def circle_bow(
     qualifier: str | None = None,
     right_broken: bool = False,
     rleak: bool = False,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     if qualifier is None:
         descriptor = r"\baca-circle-markup =|"
     else:
@@ -519,7 +519,7 @@ def clb(
     left_broken: bool = False,
     rleak: bool = False,
     right_broken: bool = False,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
     assert string_number in (1, 2, 3, 4), repr(string_number)
@@ -560,7 +560,7 @@ def covered(
     left_broken_text: str = r"\baca-parenthesized-cov-markup",
     rleak: bool = False,
     right_broken: bool = False,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
     specifiers = _parse_text_spanner_descriptor(
@@ -588,7 +588,7 @@ def damp(
     left_broken: bool = False,
     rleak: bool = False,
     right_broken: bool = False,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
     specifiers = _parse_text_spanner_descriptor(
@@ -618,7 +618,7 @@ def half_clt(
     left_broken_text: str = r"\baca-left-broken-half-clt-markup",
     rleak: bool = False,
     right_broken: bool = False,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
     specifiers = _parse_text_spanner_descriptor(
@@ -647,7 +647,7 @@ def material_annotation(
     left_broken: bool = False,
     rleak: bool = False,
     right_broken: bool = False,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
     specifiers = _parse_text_spanner_descriptor(
@@ -677,7 +677,7 @@ def metric_modulation(
     left_broken: bool = False,
     rleak: bool = False,
     right_broken: bool = False,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
     specifiers = _parse_text_spanner_descriptor(
@@ -706,7 +706,7 @@ def ottava(
     n: int = 1,
     *,
     rleak: bool = False,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
     assert isinstance(n, int), repr(n)
@@ -729,7 +729,7 @@ def pizzicato(
     rleak: bool = False,
     right_broken: bool = False,
     left_broken_text: str = r"\baca-parenthesized-pizz-markup",
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
     specifiers = _parse_text_spanner_descriptor(
@@ -761,7 +761,7 @@ def scp(
     left_broken_text: str | None = None,
     right_broken: bool = False,
     rleak: bool = False,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     wrappers = text(
         argument,
         descriptor,
@@ -783,7 +783,7 @@ def slur(
     phrasing_slur: bool = False,
     start_slur: abjad.StartSlur | None = None,
     stop_slur: abjad.StopSlur | None = None,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     if phrasing_slur is True:
         start_slur_ = start_slur or abjad.StartPhrasingSlur()
         stop_slur_ = stop_slur or abjad.StopPhrasingSlur()
@@ -807,7 +807,7 @@ def spazzolato(
     left_broken: bool = False,
     right_broken: bool = False,
     rleak: bool = False,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
     specifiers = _parse_text_spanner_descriptor(
@@ -837,7 +837,7 @@ def string_number(
     left_broken: bool = False,
     rleak: bool = False,
     right_broken: bool = False,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
     assert isinstance(string_number, int), repr(string_number)
@@ -883,7 +883,7 @@ def sustain_pedal(
     *tweaks: abjad.Tweak,
     start_piano_pedal: abjad.StartPianoPedal = abjad.StartPianoPedal(),
     stop_piano_pedal: abjad.StopPianoPedal = abjad.StopPianoPedal(),
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     assert isinstance(start_piano_pedal, abjad.StartPianoPedal), repr(start_piano_pedal)
     assert isinstance(stop_piano_pedal, abjad.StopPianoPedal), repr(stop_piano_pedal)
     wrappers = []
@@ -904,7 +904,7 @@ def tasto(
     left_broken: bool = False,
     right_broken: bool = False,
     rleak: bool = False,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
     specifiers = _parse_text_spanner_descriptor(
@@ -938,7 +938,7 @@ def text(
     lilypond_id: int | str | None = None,
     right_broken: bool = False,
     rleak: bool = False,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     assert isinstance(descriptor, str), repr(descriptor)
     assert isinstance(do_not_bookend, bool), repr(do_not_bookend)
     specifiers = _parse_text_spanner_descriptor(
@@ -993,7 +993,7 @@ def trill(
     rleak: bool = False,
     start_trill_span: abjad.StartTrillSpan = abjad.StartTrillSpan(),
     stop_trill_span: abjad.StopTrillSpan = abjad.StopTrillSpan(),
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
     assert isinstance(start_trill_span, abjad.StartTrillSpan), repr(start_trill_span)
@@ -1050,7 +1050,7 @@ def vibrato(
     left_broken_text: str | None = None,
     right_broken: bool = False,
     rleak: bool = False,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     wrappers = text(
         argument,
         descriptor,
@@ -1072,7 +1072,7 @@ def xfb(
     left_broken: bool = False,
     right_broken: bool = False,
     rleak: bool = False,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     if rleak is True:
         argument = _select.rleak_next_nonobgc_leaf(argument)
     specifiers = _parse_text_spanner_descriptor(

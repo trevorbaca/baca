@@ -41,8 +41,8 @@ def bcps(
     bow_change_tweaks: typing.Sequence[abjad.Tweak] = (),
     final_spanner: bool = False,
     helper: typing.Callable = lambda x, y: x,
-) -> list[abjad.Wrapper]:
-    wrappers: list[abjad.Wrapper] = []
+) -> list[abjad.wrapper.Wrapper]:
+    wrappers: list[abjad.wrapper.Wrapper] = []
     tag = _helpers.function_name(_frame())
     _tags.tag(wrappers, tag)
     bcps_ = list(bcps)
@@ -139,6 +139,7 @@ def bcps(
             wrapper = abjad.get.wrappers(lt.head, stop_text_span)[-1]
             wrappers.append(wrapper)
         if lt is lts[-1] and final_spanner:
+            assert next_leaf_after_argument is not None
             abjad.attach(
                 stop_text_span,
                 next_leaf_after_argument,

@@ -42,7 +42,7 @@ def _prepare_alternate_bow_strokes(*tweaks, downbow_first, full):
     return indicators
 
 
-def accent(argument) -> list[abjad.Wrapper]:
+def accent(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -62,7 +62,7 @@ def alternate_bow_strokes(
     *tweaks: abjad.Tweak,
     downbow_first: bool = True,
     full: bool = False,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     indicators = _prepare_alternate_bow_strokes(
         *tweaks, downbow_first=downbow_first, full=full
@@ -82,7 +82,7 @@ def alternate_bow_strokes(
     return wrappers
 
 
-def arpeggio(argument) -> list[abjad.Wrapper]:
+def arpeggio(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -101,7 +101,7 @@ def articulation(
     argument,
     string: str,
     *tweaks: abjad.Tweak,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -117,7 +117,7 @@ def articulation(
     return wrappers
 
 
-def articulations(argument, articulations: list) -> list[abjad.Wrapper]:
+def articulations(argument, articulations: list) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     leaves = abjad.iterate.leaves(argument)
@@ -137,13 +137,13 @@ def articulations(argument, articulations: list) -> list[abjad.Wrapper]:
 
 def bar_line(
     argument, abbreviation: str = "|", *, site: str = "after"
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     assert isinstance(abbreviation, str), repr(abbreviation)
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.select.leaves(argument):
         indicator = abjad.BarLine(abbreviation, site=site)
-        wrapper = abjad.attach(
+        abjad.attach(
             indicator,
             leaf,
             tag=tag,
@@ -157,7 +157,7 @@ def bend_after(
     argument,
     numbers: list,
     *tweaks: abjad.Tweak,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     leaves = abjad.iterate.leaves(argument)
@@ -177,7 +177,7 @@ def bend_after(
     return wrappers
 
 
-def breathe(argument, *tweaks: abjad.Tweak) -> list[abjad.Wrapper]:
+def breathe(argument, *tweaks: abjad.Tweak) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     _assert_no_post_event_tweaks(tweaks, r"\breathe")
     wrappers = []
@@ -195,7 +195,7 @@ def breathe(argument, *tweaks: abjad.Tweak) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def clef(argument, clef: str) -> list[abjad.Wrapper]:
+def clef(argument, clef: str) -> list[abjad.wrapper.Wrapper]:
     assert isinstance(clef, str), repr(clef)
     tag = _helpers.function_name(_frame())
     wrappers = []
@@ -212,7 +212,7 @@ def clef(argument, clef: str) -> list[abjad.Wrapper]:
 
 def close_volta(
     skip, first_measure_number, site: str = "before"
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     assert isinstance(first_measure_number, int), repr(first_measure_number)
     assert isinstance(site, str), repr(site)
     wrappers = []
@@ -236,7 +236,7 @@ def color_fingerings(
     argument,
     numbers: list[int],
     *tweaks: abjad.Tweak,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     cyclic_numbers = abjad.CyclicTuple(numbers)
     wrappers = []
     leaves = abjad.select.leaves(argument)
@@ -256,7 +256,7 @@ def color_fingerings(
     return wrappers
 
 
-def cross_staff(argument) -> list[abjad.Wrapper]:
+def cross_staff(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -271,7 +271,7 @@ def cross_staff(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def damp(argument, *tweaks: abjad.Tweak) -> list[abjad.Wrapper]:
+def damp(argument, *tweaks: abjad.Tweak) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -293,7 +293,7 @@ def dimensionless_boxed_markup(
     string: str,
     *tweaks: abjad.Tweak,
     font_size: int = 10,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     assert isinstance(string, str), repr(string)
     assert isinstance(font_size, int | float), repr(font_size)
     string = rf'\baca-dimensionless-boxed-markup "{string}" #{font_size}'
@@ -318,7 +318,7 @@ def dimensionless_boxed_markup(
     return wrappers
 
 
-def double_flageolet(argument) -> list[abjad.Wrapper]:
+def double_flageolet(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -333,7 +333,7 @@ def double_flageolet(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def double_staccato(argument) -> list[abjad.Wrapper]:
+def double_staccato(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -348,7 +348,7 @@ def double_staccato(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def double_volta(skip, first_measure_number) -> list[abjad.Wrapper]:
+def double_volta(skip, first_measure_number) -> list[abjad.wrapper.Wrapper]:
     assert isinstance(first_measure_number, int), repr(first_measure_number)
     wrappers = []
     wrappers_ = bar_line(skip, ":.|.:", site="before")
@@ -368,7 +368,7 @@ def double_volta(skip, first_measure_number) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def down_arpeggio(argument) -> list[abjad.Wrapper]:
+def down_arpeggio(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -387,7 +387,7 @@ def down_bow(
     argument,
     *tweaks: abjad.Tweak,
     full: bool = False,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.select.leaves(argument):
@@ -411,7 +411,7 @@ def dynamic(
     argument,
     dynamic: str | abjad.Dynamic,
     *tweaks: abjad.Tweak,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     wrappers = []
     for leaf in abjad.select.leaves(argument):
         if dynamic == "-":
@@ -433,7 +433,7 @@ def dynamic(
     return wrappers
 
 
-def dynamic_down(argument) -> list[abjad.Wrapper]:
+def dynamic_down(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -448,7 +448,7 @@ def dynamic_down(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def dynamic_up(argument) -> list[abjad.Wrapper]:
+def dynamic_up(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -463,7 +463,9 @@ def dynamic_up(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def edition(argument, *, not_parts: str, only_parts: str) -> list[abjad.Wrapper]:
+def edition(
+    argument, *, not_parts: str, only_parts: str
+) -> list[abjad.wrapper.Wrapper]:
     assert isinstance(not_parts, str), repr(not_parts)
     assert isinstance(only_parts, str), repr(only_parts)
     wrappers = []
@@ -476,7 +478,7 @@ def edition(argument, *, not_parts: str, only_parts: str) -> list[abjad.Wrapper]
     return wrappers
 
 
-def espressivo(argument, *tweaks: abjad.Tweak) -> list[abjad.Wrapper]:
+def espressivo(argument, *tweaks: abjad.Tweak) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.select.leaves(argument):
@@ -493,7 +495,7 @@ def espressivo(argument, *tweaks: abjad.Tweak) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def extend_beam(argument) -> list[abjad.Wrapper]:
+def extend_beam(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -508,7 +510,7 @@ def extend_beam(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def fermata(argument) -> list[abjad.Wrapper]:
+def fermata(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -523,7 +525,7 @@ def fermata(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def flageolet(argument, *tweaks: abjad.Tweak) -> list[abjad.Wrapper]:
+def flageolet(argument, *tweaks: abjad.Tweak) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -539,7 +541,9 @@ def flageolet(argument, *tweaks: abjad.Tweak) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def global_fermata(argument, description: str = "fermata") -> list[abjad.Wrapper]:
+def global_fermata(
+    argument, description: str = "fermata"
+) -> list[abjad.wrapper.Wrapper]:
     description_to_command = {
         "short": "shortfermata",
         "fermata": "fermata",
@@ -601,7 +605,7 @@ def instrument(
     argument,
     key: str,
     manifests: dict,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     assert isinstance(key, str), repr(key)
     assert isinstance(manifests, dict), repr(manifests)
     dictionary = manifests["abjad.Instrument"]
@@ -624,7 +628,7 @@ def instrument_name(
     string: str,
     *,
     context: str = "Staff",
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     assert isinstance(string, str), repr(string)
     assert string.startswith("\\"), repr(string)
     tag = _helpers.function_name(_frame())
@@ -642,7 +646,7 @@ def instrument_name(
     return wrappers
 
 
-def invisible_music(argument) -> list[abjad.Wrapper]:
+def invisible_music(argument) -> list[abjad.wrapper.Wrapper]:
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
         tag = _helpers.function_name(_frame(), n=1)
@@ -671,7 +675,7 @@ def invisible_music(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def laissez_vibrer(argument) -> list[abjad.Wrapper]:
+def laissez_vibrer(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -691,7 +695,7 @@ def literal(
     string: str | list[str],
     *,
     site: str = "before",
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.select.leaves(argument):
@@ -706,7 +710,7 @@ def literal(
     return wrappers
 
 
-def long_fermata(argument) -> list[abjad.Wrapper]:
+def long_fermata(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -721,7 +725,7 @@ def long_fermata(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def marcato(argument) -> list[abjad.Wrapper]:
+def marcato(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -741,7 +745,7 @@ def markup(
     markup: str,
     *tweaks: abjad.Tweak,
     direction: abjad.Vertical = abjad.UP,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     assert isinstance(markup, str), repr(markup)
     assert direction in (abjad.DOWN, abjad.UP), repr(direction)
     tag = _helpers.function_name(_frame())
@@ -771,7 +775,7 @@ def metronome_mark(
     indicator,
     *tweaks: abjad.Tweak,
     manifests=None,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     assert isinstance(skip, abjad.Skip), repr(skip)
     manifests = manifests or {}
     if isinstance(indicator, str):
@@ -806,7 +810,7 @@ def metronome_mark(
     return wrappers
 
 
-def one_voice(argument) -> list[abjad.Wrapper]:
+def one_voice(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -821,7 +825,7 @@ def one_voice(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def open_volta(skip, first_measure_number) -> list[abjad.Wrapper]:
+def open_volta(skip, first_measure_number) -> list[abjad.wrapper.Wrapper]:
     assert isinstance(first_measure_number, int), repr(first_measure_number)
     wrappers = []
     wrappers_ = bar_line(skip, ".|:-|", site="before")
@@ -841,7 +845,7 @@ def open_volta(skip, first_measure_number) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def ottava(argument, n: int) -> list[abjad.Wrapper]:
+def ottava(argument, n: int) -> list[abjad.wrapper.Wrapper]:
     assert isinstance(n, int), repr(n)
     tag = _helpers.function_name(_frame())
     wrappers = []
@@ -856,7 +860,7 @@ def ottava(argument, n: int) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def parenthesize(argument) -> list[abjad.Wrapper]:
+def parenthesize(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.select.leaves(argument):
@@ -871,7 +875,7 @@ def parenthesize(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def quadruple_staccato(argument) -> list[abjad.Wrapper]:
+def quadruple_staccato(argument) -> list[abjad.wrapper.Wrapper]:
     wrappers = []
     tag = _helpers.function_name(_frame())
     for leaf in abjad.iterate.leaves(argument):
@@ -891,7 +895,7 @@ def rehearsal_mark(
     string: str,
     *tweaks: abjad.Tweak,
     site: str = "before",
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     assert isinstance(string, abjad.Markup | str), repr(string)
     _assert_no_post_event_tweaks(tweaks, r"\mark")
     tag = _helpers.function_name(_frame())
@@ -909,7 +913,7 @@ def rehearsal_mark(
     return wrappers
 
 
-def repeat_tie(argument) -> list[abjad.Wrapper]:
+def repeat_tie(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.select.leaves(argument):
@@ -924,7 +928,7 @@ def repeat_tie(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def short_fermata(argument) -> list[abjad.Wrapper]:
+def short_fermata(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -946,7 +950,7 @@ def short_instrument_name(
     *,
     context: str = "Staff",
     deactivate: bool = False,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     assert isinstance(key, str), repr(key)
     assert isinstance(manifests, dict), repr(manifests)
     dictionary = manifests["abjad.ShortInstrumentName"]
@@ -966,7 +970,7 @@ def short_instrument_name(
     return wrappers
 
 
-def snap_pizzicato(argument) -> list[abjad.Wrapper]:
+def snap_pizzicato(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -981,7 +985,7 @@ def snap_pizzicato(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def staccatissimo(argument) -> list[abjad.Wrapper]:
+def staccatissimo(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -996,7 +1000,7 @@ def staccatissimo(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def staccato(argument) -> list[abjad.Wrapper]:
+def staccato(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -1011,7 +1015,7 @@ def staccato(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def staff_lines(argument, n: int) -> list[abjad.Wrapper]:
+def staff_lines(argument, n: int) -> list[abjad.wrapper.Wrapper]:
     assert isinstance(n, int), repr(n)
     wrappers = []
     for leaf in abjad.select.leaves(argument):
@@ -1032,7 +1036,7 @@ def staff_lines(argument, n: int) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def stem_tremolo(argument, *, tremolo_flags: int = 32) -> list[abjad.Wrapper]:
+def stem_tremolo(argument, *, tremolo_flags: int = 32) -> list[abjad.wrapper.Wrapper]:
     wrappers = []
     tag = _helpers.function_name(_frame())
     for leaf in abjad.select.leaves(argument):
@@ -1050,7 +1054,7 @@ def stem_tremolo(argument, *, tremolo_flags: int = 32) -> list[abjad.Wrapper]:
 def stop_on_string(
     argument,
     *tweaks: abjad.Tweak,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -1066,7 +1070,7 @@ def stop_on_string(
     return wrappers
 
 
-def stop_trill(argument) -> list[abjad.Wrapper]:
+def stop_trill(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -1081,7 +1085,7 @@ def stop_trill(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def stopped(argument) -> list[abjad.Wrapper]:
+def stopped(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -1096,7 +1100,7 @@ def stopped(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def tenuto(argument) -> list[abjad.Wrapper]:
+def tenuto(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -1116,7 +1120,7 @@ def text_end_mark(
     string: str,
     *tweaks: abjad.Tweak,
     site: str = "after",
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     assert isinstance(string, str), repr(string)
     tag = _helpers.function_name(_frame())
     wrappers = []
@@ -1138,7 +1142,7 @@ def text_mark(
     string: str,
     *tweaks: abjad.Tweak,
     site: str = "before",
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     assert isinstance(string, str), repr(string)
     tag = _helpers.function_name(_frame())
     wrappers = []
@@ -1155,7 +1159,7 @@ def text_mark(
     return wrappers
 
 
-def tie(argument) -> list[abjad.Wrapper]:
+def tie(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.select.leaves(argument):
@@ -1173,7 +1177,7 @@ def tie(argument) -> list[abjad.Wrapper]:
 def triple_staccato(
     argument,
     *tweaks: abjad.Tweak,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -1189,7 +1193,7 @@ def triple_staccato(
     return wrappers
 
 
-def up_arpeggio(argument) -> list[abjad.Wrapper]:
+def up_arpeggio(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -1208,7 +1212,7 @@ def up_bow(
     argument,
     *tweaks: abjad.Tweak,
     full: bool = False,
-) -> list[abjad.Wrapper]:
+) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -1228,7 +1232,7 @@ def up_bow(
     return wrappers
 
 
-def very_long_fermata(argument) -> list[abjad.Wrapper]:
+def very_long_fermata(argument) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     wrappers = []
     for leaf in abjad.iterate.leaves(argument):
@@ -1243,7 +1247,7 @@ def very_long_fermata(argument) -> list[abjad.Wrapper]:
     return wrappers
 
 
-def voice_number(argument, n: int | None = None) -> list[abjad.Wrapper]:
+def voice_number(argument, n: int | None = None) -> list[abjad.wrapper.Wrapper]:
     tag = _helpers.function_name(_frame())
     if n is not None:
         assert isinstance(n, int), repr(n)

@@ -395,6 +395,7 @@ class AfterGrace:
             fraction = int(n_string), int(d_string)
         agc = abjad.AfterGraceContainer(grace_leaves, fraction=fraction, tag=tag)
         last_leaf = abjad.get.leaf(main_components, -1)
+        assert last_leaf is not None
         abjad.attach(agc, last_leaf)
         return main_components
 
@@ -466,6 +467,7 @@ class BeforeGrace:
             else:
                 raise Exception
         bgc = abjad.BeforeGraceContainer(grace_leaves, command=command, tag=tag)
+        assert first_leaf is not None
         abjad.attach(bgc, first_leaf, tag=tag)
         return main_components
 

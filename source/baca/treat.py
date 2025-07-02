@@ -20,7 +20,7 @@ def _attach_color_literal(
     redraw=False,
     cancelation=False,
 ):
-    assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
+    assert isinstance(wrapper, abjad.wrapper.Wrapper), repr(wrapper)
     unbundled_indicator = wrapper.unbundle_indicator()
     if getattr(unbundled_indicator, "hide", False) is True:
         return
@@ -235,7 +235,7 @@ def _indicator_to_key(indicator, manifests):
 
 
 def _set_status_tag(wrapper, status, redraw=None, stem=None):
-    assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
+    assert isinstance(wrapper, abjad.wrapper.Wrapper), repr(wrapper)
     unbundled_indicator = wrapper.unbundle_indicator()
     stem = stem or _to_indicator_stem(unbundled_indicator)
     prefix = None
@@ -424,10 +424,10 @@ def remove_reapplied_wrappers(leaf, item):
 
 
 def treat_persistent_wrapper(
-    manifests: dict, wrapper: abjad.Wrapper, status: str
-) -> abjad.Wrapper | None:
+    manifests: dict, wrapper: abjad.wrapper.Wrapper, status: str
+) -> abjad.wrapper.Wrapper | None:
     assert isinstance(manifests, dict), repr(manifests)
-    assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
+    assert isinstance(wrapper, abjad.wrapper.Wrapper), repr(wrapper)
     assert isinstance(status, str), repr(status)
     unbundled_indicator = wrapper.unbundle_indicator()
     unbundled_indicator.persistent is True, repr(wrapper)
@@ -509,6 +509,7 @@ def treat_persistent_wrapper(
         if isinstance(unbundled_indicator, abjad.Clef):
             string = rf"\set {context.lilypond_type}.forceClef = ##t"
             literal = abjad.LilyPondLiteral(string, site="before")
+            assert wrapper.component is not None
             abjad.attach(
                 literal,
                 wrapper.component,
