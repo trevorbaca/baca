@@ -10,6 +10,7 @@ import typing
 from inspect import currentframe as _frame
 
 import abjad
+import rmakers
 
 from . import build as _build
 from . import classes as _classes
@@ -2423,7 +2424,7 @@ def postprocess(
             )
     with abjad.ForbidUpdate(component=score, update_on_exit=True):
         abjad.makers.tweak_tuplet_bracket_edge_height(score)
-        abjad.makers.tweak_tuplet_number_text(score)
+        rmakers.tweak_tuplet_number_text_calc_fraction_text(score)
         extend_beams(score)
         _attach_sounds_during(score)
         if first_section is False:
