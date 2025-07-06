@@ -259,7 +259,7 @@ def _externalize(
     path.write_text(text)
     lines = []
     if in_place is False:
-        string = abjad.Configuration().get_lilypond_version_string()
+        string = abjad.configuration.Configuration().get_lilypond_version_string()
         string = rf'\version "{string}"'
         lines.append(string + "\n")
         lines.append("\n")
