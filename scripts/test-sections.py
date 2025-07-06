@@ -19,7 +19,7 @@ def _capture_diff(path):
     _out = path.with_name(".out")
     if _out.exists():
         _out.unlink()
-    with abjad.FilesystemState(remove=[_out]):
+    with abjad.contextmanagers.FilesystemState(remove=[_out]):
         command = f'git diff --color=always -I"\version.*" {path.name} > .out'
         os.system(command)
         with open(_out) as pointer:

@@ -81,7 +81,7 @@ def _call_lilypond_on_music_ly_in_section(
     music_ly, music_pdf_mtime, lilypond_timeout=0
 ):
     music_pdf = music_ly.with_name("music.pdf")
-    with abjad.Timer() as timer:
+    with abjad.contextmanagers.Timer() as timer:
         run_lilypond(
             music_ly, lilypond_timeout=lilypond_timeout, pdf_mtime=music_pdf_mtime
         )
@@ -259,7 +259,7 @@ def _externalize(
     path.write_text(text)
     lines = []
     if in_place is False:
-        string = abjad.configuration.Configuration().get_lilypond_version_string()
+        string = abjad.configuration.Configuration().lilypond_version_string()
         string = rf'\version "{string}"'
         lines.append(string + "\n")
         lines.append("\n")
@@ -1147,7 +1147,7 @@ class Environment:
         return False
 
 
-Timer = abjad.Timer
+Timer = abjad.contextmanagers.Timer
 
 
 def accumulate_fermata_measure_numbers(sections_directory):
@@ -1805,7 +1805,7 @@ def run_lilypond(
     lilypond_log_file_name = "." + ly_file_path.name + ".log"
     lilypond_log_file_path = directory / lilypond_log_file_name
     exit_code = 0
-    with abjad.TemporaryDirectoryChange(directory=directory):
+    with abjad.contextmanagers.TemporaryDirectoryChange(directory=directory):
         flags = get_includes()
         try:
             signal.alarm(lilypond_timeout)
@@ -1855,7 +1855,7 @@ def run_xelatex(tex_file_path):
     command += f" -output-directory={tex_file_path.parent} {tex_file_path}"
     command += f" 1>{tex_file_path.stem}.log 2>&1"
     command_called_twice = f"{command}; {command}"
-    with abjad.TemporaryDirectoryChange(directory=tex_file_path.parent):
+    with abjad.contextmanagers.TemporaryDirectoryChange(directory=tex_file_path.parent):
         abjad.io.spawn_subprocess(command_called_twice)
         source = tex_file_path.with_suffix(".log")
         name = "." + tex_file_path.stem + ".tex_file_path.log"
@@ -1970,7 +1970,7 @@ def timed(timing_attribute):
                 for argument in arguments:
                     if isinstance(argument, Environment):
                         timing = argument.timing
-            with abjad.Timer() as timer:
+            with abjad.contextmanagers.Timer() as timer:
                 result = function(*arguments, **keywords)
             if timing is not None:
                 setattr(timing, timing_attribute, int(timer.elapsed_time))

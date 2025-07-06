@@ -257,7 +257,7 @@ class PersistentOverride:
         return string
 
     def _get_contributions(self, component=None):
-        contributions = abjad.ContributionsBySite()
+        contributions = abjad._contributions.ContributionsBySite()
         if self.hide:
             return contributions
         strings = [self._get_lilypond_format()]

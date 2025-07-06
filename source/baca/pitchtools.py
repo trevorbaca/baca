@@ -63,7 +63,7 @@ def _do_cluster_command(
     leaf = abjad.select.leaf(argument, 0)
     root = abjad.get.parentage(leaf).root
     widths = abjad.CyclicTuple(widths)
-    with abjad.ForbidUpdate(component=root):
+    with abjad.contextmanagers.ForbidUpdate(component=root):
         chords = []
         for i, plt in enumerate(_select.plts(argument)):
             width = widths[i]

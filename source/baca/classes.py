@@ -101,7 +101,7 @@ class Accelerando:
         return self._get_markup().string
 
     def _get_contributions(self, *, component=None, wrapper=None):
-        contributions = abjad.ContributionsBySite()
+        contributions = abjad._contributions.ContributionsBySite()
         if not self.hide:
             markup = self._get_markup()
             string = markup._get_lilypond_format(wrapper=wrapper)
@@ -187,7 +187,7 @@ class BarExtent:
         return (bottom, top)
 
     def _get_contributions(self, component=None):
-        contributions = abjad.ContributionsBySite()
+        contributions = abjad._contributions.ContributionsBySite()
         if self.hide:
             return contributions
         bar_extent = self._get_bar_extent(component)
@@ -376,7 +376,7 @@ class Ritardando:
         return self._get_markup().string
 
     def _get_contributions(self, *, component=None, wrapper=None):
-        contributions = abjad.ContributionsBySite()
+        contributions = abjad._contributions.ContributionsBySite()
         if not self.hide:
             markup = self._get_markup()
             string = markup._get_lilypond_format(wrapper=wrapper)
@@ -450,7 +450,7 @@ class StaffLines:
         return strings
 
     def _get_contributions(self, component=None):
-        contributions = abjad.ContributionsBySite()
+        contributions = abjad._contributions.ContributionsBySite()
         if self.hide:
             return contributions
         staff = abjad.get.parentage(component).get(abjad.Staff)
