@@ -1011,7 +1011,7 @@ def accumulate_and_repartition(segments, ratios, counts):
         cyclic=True,
         do_not_truncate=True,
     ):
-        subsegments_ = abjad.sequence.partition_by_ratio_of_lengths(segment, ratio)
+        subsegments_ = abjad.sequence.partition_by_proportion_of_lengths(segment, ratio)
         subsegments.extend(subsegments_)
     groups = abjad.sequence.partition_by_counts(
         subsegments, counts, cyclic=True, overhang=True
