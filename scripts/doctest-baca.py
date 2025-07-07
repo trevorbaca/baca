@@ -32,7 +32,7 @@ def _doctest_files(current_directory, files, globals_, report_only_first_failure
         parent_directory = str(file_.parent)
         sys.path.insert(0, parent_directory)
         string_buffer = io.StringIO()
-        with abjad.RedirectedStreams(stdout=string_buffer):
+        with abjad.contextmanagers.RedirectedStreams(stdout=string_buffer):
             failure_count_, test_count_ = doctest.testfile(
                 file_,
                 module_relative=False,
