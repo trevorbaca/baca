@@ -622,12 +622,12 @@ def _make_section_clicktrack(lilypond_file, mtime, section_directory):
     global_skips = lilypond_file["Skips"]
     time_signatures = []
     for skip in global_skips[:-1]:
-        time_signature = abjad.get.effective(skip, abjad.TimeSignature)
+        time_signature = abjad.get.effective_indicator(skip, abjad.TimeSignature)
         time_signatures.append(time_signature)
     skips = abjad.select.leaves(global_skips)[:-1]
     metronome_marks = []
     for skip in skips:
-        metronome_mark = abjad.get.effective(skip, abjad.MetronomeMark)
+        metronome_mark = abjad.get.effective_indicator(skip, abjad.MetronomeMark)
         metronome_marks.append(metronome_mark)
     if metronome_marks[0] is None:
         for metronome_mark in metronome_marks:

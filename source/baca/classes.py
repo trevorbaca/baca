@@ -196,7 +196,7 @@ class BarExtent:
         bottom, top = bar_extent
         string = r"\override Staff.BarLine.bar-extent = "
         string += f"#'({bottom} . {top})"
-        previous = abjad.get.effective(component, BarExtent, n=-1)
+        previous = abjad.get.effective_indicator(component, BarExtent, n=-1)
         if previous is None or previous.line_count <= self.line_count:
             contributions.before.commands.append(string)
         else:

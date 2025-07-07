@@ -341,7 +341,7 @@ def _calculate_clock_times(
     if clock_time_override:
         metronome_mark = clock_time_override
         abjad.attach(metronome_mark, skips[0])
-    if abjad.get.effective(skips[0], abjad.MetronomeMark) is None:
+    if abjad.get.effective_indicator(skips[0], abjad.MetronomeMark) is None:
         return types.SimpleNamespace(
             duration_clock_string=None,
             clock_times=None,
@@ -467,20 +467,20 @@ def _check_persistent_indicators_for_leaf(
         abjad.MetronomeMark,
         _classes.Ritardando,
     )
-    mark = abjad.get.effective(leaf, prototype)
+    mark = abjad.get.effective_indicator(leaf, prototype)
     if mark is None:
         message = f"{voice_name} leaf {i} ({leaf!s}) missing metronome mark."
         raise Exception(message)
-    instrument = abjad.get.effective(leaf, abjad.Instrument)
+    instrument = abjad.get.effective_indicator(leaf, abjad.Instrument)
     if instrument is None:
         message = f"{voice_name} leaf {i} ({leaf!s}) missing instrument."
         raise Exception(message)
     if not do_not_require_short_instrument_names:
-        name = abjad.get.effective(leaf, abjad.ShortInstrumentName)
+        name = abjad.get.effective_indicator(leaf, abjad.ShortInstrumentName)
         if name is None:
             message = f"{voice_name} leaf {i} ({leaf!s}) missing short instrument name."
             raise Exception(message)
-    clef = abjad.get.effective(leaf, abjad.Clef)
+    clef = abjad.get.effective_indicator(leaf, abjad.Clef)
     if clef is None:
         raise Exception(f"{voice_name} leaf {i} ({leaf!s}) missing clef.")
 
@@ -492,7 +492,7 @@ def _clean_up_laissez_vibrer_tie_direction(score):
             continue
         if not abjad.get.has_indicator(note, abjad.LaissezVibrer):
             continue
-        clef = abjad.get.effective(note, abjad.Clef, default=default)
+        clef = abjad.get.effective_indicator(note, abjad.Clef, default=default)
         staff_position = clef.to_staff_position(note.written_pitch)
         if staff_position == abjad.StaffPosition(0):
             abjad.override(note).LaissezVibrerTie.direction = abjad.UP
@@ -512,7 +512,7 @@ def _clean_up_repeat_tie_direction(score):
             continue
         if not abjad.get.has_indicator(leaf, abjad.RepeatTie):
             continue
-        clef = abjad.get.effective(leaf, abjad.Clef, default=default)
+        clef = abjad.get.effective_indicator(leaf, abjad.Clef, default=default)
         if hasattr(leaf, "written_pitch"):
             note_heads = [leaf.note_head]
         else:
@@ -1584,8 +1584,12 @@ def _style_fermata_measures(
                 continue
             empty_staff_lines = _classes.StaffLines(0)
             empty_bar_extent = _classes.BarExtent(0)
-            previous_staff_lines = abjad.get.effective(leaf, _classes.StaffLines)
-            previous_bar_extent = abjad.get.effective(leaf, _classes.BarExtent)
+            previous_staff_lines = abjad.get.effective_indicator(
+                leaf, _classes.StaffLines
+            )
+            previous_bar_extent = abjad.get.effective_indicator(
+                leaf, _classes.BarExtent
+            )
             next_leaf = abjad.get.leaf(leaf, 1)
             anchors = (_enums.ANCHOR_NOTE, _enums.ANCHOR_SKIP)
             if next_leaf is not None:
@@ -1593,8 +1597,12 @@ def _style_fermata_measures(
                     next_leaf = None
             next_staff_lines = None
             if next_leaf is not None:
-                next_staff_lines = abjad.get.effective(next_leaf, _classes.StaffLines)
-                next_bar_extent = abjad.get.effective(next_leaf, _classes.BarExtent)
+                next_staff_lines = abjad.get.effective_indicator(
+                    next_leaf, _classes.StaffLines
+                )
+                next_bar_extent = abjad.get.effective_indicator(
+                    next_leaf, _classes.BarExtent
+                )
             if (
                 previous_staff_lines != empty_staff_lines
             ) and not abjad.get.has_indicator(leaf, _classes.StaffLines):
@@ -2075,7 +2083,7 @@ def color_out_of_range_pitches(score):
                 continue
             if abjad.get.has_indicator(pleaf, indicator):
                 continue
-            instrument = abjad.get.effective(pleaf, abjad.Instrument)
+            instrument = abjad.get.effective_indicator(pleaf, abjad.Instrument)
             if instrument is None:
                 continue
             if not abjad.iterpitches.sounding_pitches_are_in_range(
@@ -2401,7 +2409,7 @@ def postprocess(
             skips = skips[:-1]
         time_signatures = []
         for skip in skips:
-            time_signature = abjad.get.effective(skip, abjad.TimeSignature)
+            time_signature = abjad.get.effective_indicator(skip, abjad.TimeSignature)
             time_signatures.append(time_signature)
         measure_count = len(time_signatures)
     if parts_metric_modulation_multiplier is not None:
@@ -2572,7 +2580,7 @@ def postprocess(
         )
         first_metronome_mark = True
         skip = abjad.select.leaf(score["Skips"], 0)
-        metronome_mark = abjad.get.effective(skip, abjad.MetronomeMark)
+        metronome_mark = abjad.get.effective_indicator(skip, abjad.MetronomeMark)
         if metronome_mark is None:
             first_metronome_mark = False
         new_metadata, new_persist = _collect_metadata(
@@ -3173,7 +3181,7 @@ def treat_untreated_persistent_wrappers(score, *, manifests=None):
             else:
                 prototype = type(indicator)
             # TODO: optimize
-            previous_indicator = abjad.get.effective(leaf, prototype, n=-1)
+            previous_indicator = abjad.get.effective_indicator(leaf, prototype, n=-1)
             if _treat.compare_persistent_indicators(previous_indicator, indicator):
                 status = "redundant"
             else:

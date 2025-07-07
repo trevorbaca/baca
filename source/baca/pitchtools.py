@@ -247,7 +247,7 @@ def _do_staff_position_command(
     plt_count = 0
     mutated_score = False
     for i, plt in enumerate(_select.plts(argument)):
-        clef = abjad.get.effective(
+        clef = abjad.get.effective_indicator(
             plt.head,
             abjad.Clef,
             default=abjad.Clef("treble"),
@@ -298,13 +298,13 @@ def _do_staff_position_interpolation_command(
         start_staff_position = start
     else:
         start_phead = plts[0].head
-        clef = abjad.get.effective(start_phead, abjad.Clef)
+        clef = abjad.get.effective_indicator(start_phead, abjad.Clef)
         start_staff_position = clef.to_staff_position(start)
     if isinstance(stop, abjad.StaffPosition):
         stop_staff_position = stop
     else:
         stop_phead = plts[-1].head
-        clef = abjad.get.effective(
+        clef = abjad.get.effective_indicator(
             stop_phead,
             abjad.Clef,
             default=abjad.Clef("treble"),
@@ -317,7 +317,7 @@ def _do_staff_position_interpolation_command(
         staff_position = unit_distance * i + start_staff_position.number
         staff_position = round(staff_position)
         staff_position = abjad.StaffPosition(staff_position)
-        clef = abjad.get.effective(
+        clef = abjad.get.effective_indicator(
             plt.head,
             abjad.Clef,
             default=abjad.Clef("treble"),
@@ -339,7 +339,7 @@ def _do_staff_position_interpolation_command(
         start_pitch = start
     else:
         assert isinstance(start, abjad.StaffPosition)
-        clef = abjad.get.effective(
+        clef = abjad.get.effective_indicator(
             abjad.select.leaf(plts, 0),
             abjad.Clef,
             default=abjad.Clef("treble"),
@@ -357,7 +357,7 @@ def _do_staff_position_interpolation_command(
         stop_pitch = stop
     else:
         assert isinstance(stop, abjad.StaffPosition)
-        clef = abjad.get.effective(
+        clef = abjad.get.effective_indicator(
             abjad.select.leaf(plts, 0),
             abjad.Clef,
             default=abjad.Clef("treble"),
