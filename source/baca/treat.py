@@ -38,6 +38,7 @@ def _attach_color_literal(
         return
     stem = _to_indicator_stem(unbundled_indicator)
     grob = _indicator_to_grob(unbundled_indicator)
+    assert wrapper.context is not None
     context = wrapper._find_correct_effective_context(
         wrapper.component, wrapper.context
     )
@@ -447,6 +448,7 @@ def treat_persistent_wrapper(
     )
     if isinstance(unbundled_indicator, prototype):
         return None
+    assert wrapper.context is not None
     context = wrapper._find_correct_effective_context(
         wrapper.component, wrapper.context
     )
