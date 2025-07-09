@@ -897,7 +897,7 @@ def attach_bgcs(
 
 def from_collection(
     collection: _collection_typing,
-    counts: list[int],
+    counts: list[int | str],
     denominator: int,
     prolation: int | str | abjad.Duration | None = None,
 ) -> abjad.Tuplet:
@@ -1221,7 +1221,7 @@ def make_rhythm(
     *,
     boundary_depth: int | None = None,
     do_not_rewrite_meter: bool = False,
-    reference_meters: typing.Sequence[abjad.Meter] = (),
+    reference_meters: typing.Sequence[abjad.Meter] | None = None,
     tag: abjad.Tag | None = None,
     voice_name: str | None = None,
 ) -> abjad.Voice:
@@ -1232,6 +1232,9 @@ def make_rhythm(
         assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     if do_not_rewrite_meter is False:
         assert time_signatures is not None, repr(time_signatures)
+    if reference_meters is None:
+        reference_meters = []
+    assert isinstance(reference_meters, list), repr(reference_meters)
     tag = tag or abjad.Tag()
     tag = tag.append(_helpers.function_name(_frame()))
     timespan_to_original_item: list[tuple[abjad.Timespan, typing.Any]] = []
