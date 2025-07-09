@@ -522,7 +522,7 @@ def _clean_up_repeat_tie_direction(score):
             if staff_position.number == 0:
                 wrapper = abjad.get.wrapper(leaf, abjad.RepeatTie)
                 abjad.detach(wrapper, leaf)
-                bundle = abjad.bundle(wrapper.get_item(), r"- \tweak direction #up")
+                bundle = abjad.bundle(wrapper.indicator, r"- \tweak direction #up")
                 abjad.attach(bundle, leaf, tag=wrapper.tag)
                 break
 
