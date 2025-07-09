@@ -38,9 +38,9 @@ def _attach_color_literal(
         return
     stem = _to_indicator_stem(unbundled_indicator)
     grob = _indicator_to_grob(unbundled_indicator)
-    assert wrapper.context is not None
+    assert wrapper.context_name is not None
     context = wrapper._find_correct_effective_context(
-        wrapper.component, wrapper.context
+        wrapper.component, wrapper.context_name
     )
     assert isinstance(context, abjad.Context), repr(context)
     string = rf"\override {context.lilypond_type}.{grob}.color ="
@@ -448,9 +448,9 @@ def treat_persistent_wrapper(
     )
     if isinstance(unbundled_indicator, prototype):
         return None
-    assert wrapper.context is not None
+    assert wrapper.context_name is not None
     context = wrapper._find_correct_effective_context(
-        wrapper.component, wrapper.context
+        wrapper.component, wrapper.context_name
     )
     assert isinstance(context, abjad.Context), repr(wrapper)
     leaf = wrapper.component
@@ -484,7 +484,7 @@ def treat_persistent_wrapper(
         abjad.attach(
             bundle,
             leaf,
-            context=wrapper.context,
+            context=wrapper.context_name,
             deactivate=wrapper.deactivate,
             direction=wrapper.direction,
             synthetic_offset=wrapper.synthetic_offset,
