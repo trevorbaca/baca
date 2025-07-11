@@ -91,7 +91,7 @@ class LBSD:
     alignment_distances: tuple
     x_offset: int | None = None
 
-    def _get_contributions(self, component=None):
+    def _get_contributions(self):
         contributions = abjad._contributions.ContributionsBySite()
         alignment_distances = " ".join(str(_) for _ in self.alignment_distances)
         if self.x_offset is None:
@@ -288,7 +288,7 @@ class SpacingSection:
     context: typing.ClassVar[str] = "Score"
     persistent: typing.ClassVar[bool] = True
 
-    def _get_contributions(self, leaf=None):
+    def _get_contributions(self):
         contributions = abjad._contributions.ContributionsBySite()
         n, d = self.pair
         if self.nonstrict is True:

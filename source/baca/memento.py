@@ -256,7 +256,7 @@ class PersistentOverride:
         string = override.override_string
         return string
 
-    def _get_contributions(self, component=None):
+    def _get_contributions(self):
         contributions = abjad._contributions.ContributionsBySite()
         if self.hide:
             return contributions

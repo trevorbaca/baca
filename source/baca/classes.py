@@ -186,17 +186,17 @@ class BarExtent:
             bottom = -line_count_to_bar_extent[self.line_count]
         return (bottom, top)
 
-    def _get_contributions(self, *, component=None):
+    def _get_contributions(self, *, wrapper=None):
         contributions = abjad._contributions.ContributionsBySite()
         if self.hide:
             return contributions
-        bar_extent = self._get_bar_extent(component)
+        bar_extent = self._get_bar_extent(wrapper.component)
         if bar_extent is None:
             return contributions
         bottom, top = bar_extent
         string = r"\override Staff.BarLine.bar-extent = "
         string += f"#'({bottom} . {top})"
-        previous = abjad.get.effective_indicator(component, BarExtent, n=-1)
+        previous = abjad.get.effective_indicator(wrapper.component, BarExtent, n=-1)
         if previous is None or previous.line_count <= self.line_count:
             contributions.before.commands.append(string)
         else:
@@ -449,11 +449,11 @@ class StaffLines:
         strings.append(r"\startStaff")
         return strings
 
-    def _get_contributions(self, *, component=None):
+    def _get_contributions(self, *, wrapper=None):
         contributions = abjad._contributions.ContributionsBySite()
         if self.hide:
             return contributions
-        staff = abjad.get.parentage(component).get(abjad.Staff)
+        staff = abjad.get.parentage(wrapper.component).get(abjad.Staff)
         strings = self._get_lilypond_format(context=staff)
         contributions.before.commands.extend(strings)
         return contributions
