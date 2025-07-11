@@ -100,7 +100,7 @@ class Accelerando:
     def _get_lilypond_format(self):
         return self._get_markup().string
 
-    def _get_contributions(self, *, component=None, wrapper=None):
+    def _get_contributions(self, *, wrapper=None):
         contributions = abjad._contributions.ContributionsBySite()
         if not self.hide:
             markup = self._get_markup()
@@ -186,7 +186,7 @@ class BarExtent:
             bottom = -line_count_to_bar_extent[self.line_count]
         return (bottom, top)
 
-    def _get_contributions(self, component=None):
+    def _get_contributions(self, *, component=None):
         contributions = abjad._contributions.ContributionsBySite()
         if self.hide:
             return contributions
@@ -375,7 +375,7 @@ class Ritardando:
     def _get_lilypond_format(self):
         return self._get_markup().string
 
-    def _get_contributions(self, *, component=None, wrapper=None):
+    def _get_contributions(self, *, wrapper=None):
         contributions = abjad._contributions.ContributionsBySite()
         if not self.hide:
             markup = self._get_markup()
@@ -449,7 +449,7 @@ class StaffLines:
         strings.append(r"\startStaff")
         return strings
 
-    def _get_contributions(self, component=None):
+    def _get_contributions(self, *, component=None):
         contributions = abjad._contributions.ContributionsBySite()
         if self.hide:
             return contributions
