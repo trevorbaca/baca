@@ -325,6 +325,14 @@ def _bracket_metric_modulation(metric_modulation, metronome_mark):
     return command
 
 
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class ClockTimes:
+    duration_clock_string: str | None
+    clock_times: list[abjad.Duration] | None
+    start_clock_time: str
+    stop_clock_time: str | None
+
+
 def _calculate_clock_times(
     clock_time_override,
     fermata_measure_numbers,
@@ -342,7 +350,7 @@ def _calculate_clock_times(
         metronome_mark = clock_time_override
         abjad.attach(metronome_mark, skips[0])
     if abjad.get.effective_indicator(skips[0], abjad.MetronomeMark) is None:
-        return types.SimpleNamespace(
+        return ClockTimes(
             duration_clock_string=None,
             clock_times=None,
             start_clock_time=start_clock_time,
@@ -370,7 +378,7 @@ def _calculate_clock_times(
     stop_clock_time = clock_times[-1].to_clock_string()
     duration = clock_times[-1] - clock_times[0]
     duration_clock_string = duration.to_clock_string()
-    return types.SimpleNamespace(
+    return ClockTimes(
         duration_clock_string=duration_clock_string,
         clock_times=clock_times,
         start_clock_time=start_clock_time,
@@ -905,6 +913,13 @@ def _force_nonnatural_accidentals(score):
                 note_head.is_forced = True
 
 
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class FermataMeasureNumbers:
+    fermata_start_offsets: list[abjad.Offset]
+    fermata_measure_numbers: list[int]
+    final_measure_is_fermata: bool
+
+
 def _get_fermata_measure_numbers(first_measure_number, score):
     fermata_start_offsets, fermata_measure_numbers = [], []
     final_measure_is_fermata = False
@@ -923,7 +938,7 @@ def _get_fermata_measure_numbers(first_measure_number, score):
             timespan = abjad.get.timespan(rest)
             fermata_start_offsets.append(timespan.start_offset)
             fermata_measure_numbers.append(measure_number)
-    return types.SimpleNamespace(
+    return FermataMeasureNumbers(
         fermata_start_offsets=fermata_start_offsets,
         fermata_measure_numbers=fermata_measure_numbers,
         final_measure_is_fermata=final_measure_is_fermata,
@@ -966,6 +981,13 @@ def _global_rests_are_meaningful(context):
     return False
 
 
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class LabeledClockTimes:
+    duration_clock_string: str | None
+    start_clock_time: str
+    stop_clock_time: str | None
+
+
 def _label_clock_time(
     clock_time_override,
     fermata_measure_numbers,
@@ -990,7 +1012,7 @@ def _label_clock_time(
         rests,
     )
     if times.clock_times is None:
-        return types.SimpleNamespace(
+        return LabeledClockTimes(
             duration_clock_string=None,
             start_clock_time=times.start_clock_time,
             stop_clock_time=None,
@@ -1058,7 +1080,7 @@ def _label_clock_time(
                 deactivate=True,
                 tag=tag.append(_helpers.function_name(_frame())),
             )
-    return types.SimpleNamespace(
+    return LabeledClockTimes(
         duration_clock_string=times.duration_clock_string,
         start_clock_time=times.start_clock_time,
         stop_clock_time=times.stop_clock_time,
@@ -1554,13 +1576,13 @@ def _style_anchor_notes(score):
 
 
 def _style_fermata_measures(
-    fermata_extra_offset_y,
-    fermata_measure_empty_overrides,
+    fermata_extra_offset_y: float,
+    fermata_measure_empty_overrides: list[int],
     fermata_start_offsets,
     final_section,
     offset_to_measure_number,
     score,
-):
+) -> None:
     if not fermata_measure_empty_overrides:
         return
     if not fermata_start_offsets:
@@ -1578,6 +1600,8 @@ def _style_fermata_measures(
             if start_offset not in fermata_start_offsets:
                 continue
             voice = abjad.get.parentage(leaf).get(abjad.Voice)
+            assert voice is not None
+            assert hasattr(voice, "name")
             if "Rests" in voice.name:
                 continue
             if start_offset not in empty_fermata_measure_start_offsets:
@@ -2372,8 +2396,8 @@ def postprocess(
     do_not_transpose_score=False,
     do_not_treat_untreated_persistent_indicators=False,
     empty_fermata_measures=False,
-    fermata_extra_offset_y=2.5,
-    fermata_measure_empty_overrides=(),
+    fermata_extra_offset_y: float = 2.5,
+    fermata_measure_empty_overrides: typing.Sequence[int] | None = None,
     final_section=False,
     first_section=False,
     global_rests_in_every_staff=False,
@@ -2406,6 +2430,10 @@ def postprocess(
         persist = environment.persist
         previous_metadata = environment.previous_metadata
         section_number = environment.section_number
+    if fermata_measure_empty_overrides is None:
+        fermata_measure_empty_overrides = []
+    assert isinstance(fermata_measure_empty_overrides, list)
+    assert all(isinstance(_, int) for _ in fermata_measure_empty_overrides)
     assert all(0 < _ for _ in fermata_measure_empty_overrides)
     assert isinstance(final_section, bool)
     assert isinstance(first_section, bool)
@@ -2565,7 +2593,7 @@ def postprocess(
             assert isinstance(result, (str, type(None))), repr(result)
             previous_stop_clock_time = result
         if do_not_label_clock_time is True:
-            clock_time = types.SimpleNamespace(
+            clock_time = LabeledClockTimes(
                 duration_clock_string="NONE",
                 start_clock_time="NONE",
                 stop_clock_time="NONE",
