@@ -1649,20 +1649,24 @@ def _style_fermata_measures(
                 previous_line_count = 5
                 if previous_staff_lines is not None:
                     previous_line_count = previous_staff_lines.line_count
-                resume_staff_lines = _classes.StaffLines(previous_line_count, hide=True)
+                # resume_staff_lines = _classes.StaffLines(previous_line_count, hide=True)
+                resume_staff_lines = _classes.StaffLines(previous_line_count)
                 abjad.attach(
                     resume_staff_lines,
                     leaf,
+                    hide=True,
                     synthetic_offset=abjad.Offset(99),
                     tag=_helpers.function_name(_frame(), n=5),
                 )
                 previous_line_count = 5
                 if previous_bar_extent is not None:
                     previous_line_count = previous_bar_extent.line_count
-                resume_bar_extent = _classes.BarExtent(previous_line_count, hide=True)
+                # resume_bar_extent = _classes.BarExtent(previous_line_count, hide=True)
+                resume_bar_extent = _classes.BarExtent(previous_line_count)
                 abjad.attach(
                     resume_bar_extent,
                     leaf,
+                    hide=True,
                     synthetic_offset=abjad.Offset(99),
                     tag=_helpers.function_name(_frame(), n=6).append(
                         _tags.FERMATA_MEASURE_RESUME_BAR_EXTENT
@@ -2797,16 +2801,19 @@ def span_metronome_marks(
             continue
         if metronome_mark is not None:
             wrapper = abjad.get.wrapper(skip, abjad.MetronomeMark)
-            metronome_mark = dataclasses.replace(metronome_mark, hide=True)
+            # metronome_mark = dataclasses.replace(metronome_mark, hide=True)
+            metronome_mark = dataclasses.replace(metronome_mark)
             abjad.detach(abjad.MetronomeMark, skip)
             abjad.attach(
                 metronome_mark,
                 skip,
+                hide=True,
                 tag=wrapper.tag,
             )
             wrapper = abjad.get.wrappers(skip, metronome_mark)[-1]
             if hide is False:
-                foo = dataclasses.replace(metronome_mark, hide=False)
+                # foo = dataclasses.replace(metronome_mark, hide=False)
+                foo = dataclasses.replace(metronome_mark)
                 string = abjad.lilypond(foo)
                 literal = abjad.LilyPondLiteral(string)
                 abjad.attach(
@@ -2816,11 +2823,13 @@ def span_metronome_marks(
                 )
         if metric_modulation is not None:
             wrapper_ = abjad.get.wrapper(skip, abjad.MetricModulation)
-            metric_modulation = dataclasses.replace(metric_modulation, hide=True)
+            # metric_modulation = dataclasses.replace(metric_modulation, hide=True)
+            metric_modulation = dataclasses.replace(metric_modulation)
             abjad.detach(abjad.MetricModulation, skip)
             abjad.attach(
                 metric_modulation,
                 skip,
+                hide=True,
                 tag=wrapper_.tag,
             )
         if accelerando is not None:

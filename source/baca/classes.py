@@ -71,8 +71,8 @@ class Accelerando:
                 }
             }
 
-    Tweak extra-offset to align accelerando markup with other metronome mark spanner
-    pieces.
+    Tweak extra-offset to align accelerando markup with other metronome mark
+    spanner pieces.
 
     Accelerandi format as LilyPond markup.
 
@@ -102,7 +102,8 @@ class Accelerando:
 
     def _get_contributions(self, *, wrapper=None):
         contributions = abjad._contributions.ContributionsBySite()
-        if not self.hide:
+        if self.hide is False:
+            # if wrapper.hide is False:
             markup = self._get_markup()
             string = markup._get_lilypond_format(wrapper=wrapper)
             contributions.after.markup.append(string)
@@ -149,7 +150,7 @@ class BarExtent:
     """
 
     line_count: int
-    hide: bool = False
+    # hide: bool = False
 
     context: typing.ClassVar[str] = "Staff"
     persistent: typing.ClassVar[bool] = True
@@ -158,7 +159,7 @@ class BarExtent:
         if not isinstance(self.line_count, int):
             raise Exception(f"line count must be integer (not {self.line_count!r}).")
         assert 0 <= self.line_count, repr(self.line_count)
-        assert isinstance(self.hide, bool), repr(self.hide)
+        # assert isinstance(self.hide, bool), repr(self.hide)
 
     def _get_bar_extent(self, component):
         if not isinstance(component, abjad.Leaf):
@@ -188,7 +189,8 @@ class BarExtent:
 
     def _get_contributions(self, *, wrapper=None):
         contributions = abjad._contributions.ContributionsBySite()
-        if self.hide:
+        # if self.hide:
+        if wrapper.hide is True:
             return contributions
         bar_extent = self._get_bar_extent(wrapper.component)
         if bar_extent is None:
@@ -377,7 +379,8 @@ class Ritardando:
 
     def _get_contributions(self, *, wrapper=None):
         contributions = abjad._contributions.ContributionsBySite()
-        if not self.hide:
+        if self.hide is False:
+            # if wrapper.hide is False:
             markup = self._get_markup()
             string = markup._get_lilypond_format(wrapper=wrapper)
             contributions.after.markup.append(string)
@@ -424,7 +427,7 @@ class StaffLines:
     """
 
     line_count: int
-    hide: bool = False
+    # hide: bool = False
 
     context: typing.ClassVar[str] = "Staff"
     persistent: typing.ClassVar[bool] = True
@@ -433,7 +436,7 @@ class StaffLines:
         if not isinstance(self.line_count, int):
             raise Exception(f"line count must be integer (not {self.line_count!r}).")
         assert 0 <= self.line_count, repr(self.line_count)
-        assert isinstance(self.hide, bool), repr(self.hide)
+        # assert isinstance(self.hide, bool), repr(self.hide)
 
     def _get_lilypond_format(self, context=None):
         if isinstance(context, abjad.Context):
@@ -451,7 +454,8 @@ class StaffLines:
 
     def _get_contributions(self, *, wrapper=None):
         contributions = abjad._contributions.ContributionsBySite()
-        if self.hide:
+        # if self.hide:
+        if wrapper.hide is True:
             return contributions
         staff = abjad.get.parentage(wrapper.component).get(abjad.Staff)
         strings = self._get_lilypond_format(context=staff)
