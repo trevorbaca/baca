@@ -2255,8 +2255,12 @@ def mmrests(
 
     """
     prototype = abjad.MultimeasureRest
-    items = abjad.select.leaves(argument, prototype, exclude=exclude)
-    return items
+    leaves = abjad.select.leaves(argument, prototype, exclude=exclude)
+    mmrests = []
+    for leaf in leaves:
+        assert isinstance(leaf, prototype)
+        mmrests.append(leaf)
+    return mmrests
 
 
 def ntrun(
@@ -4400,9 +4404,7 @@ def skip(argument, n: int, *, exclude: _typings.Exclude | None = None) -> abjad.
     return skip
 
 
-def skips(
-    argument, *, exclude: _typings.Exclude | None = None
-) -> list[abjad.Component]:
+def skips(argument, *, exclude: _typings.Exclude | None = None) -> list[abjad.Skip]:
     r"""
     Selects skips.
 

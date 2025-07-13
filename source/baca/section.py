@@ -38,6 +38,182 @@ class Analysis:
     synthetic_offset: typing.Any
 
 
+class CacheGetItemWrapper:
+    def __init__(
+        self,
+        voice_name_to_leaves_by_measure: dict[str, dict],
+        voice_abbreviations: dict[str, str],
+    ) -> None:
+        self.voice_name_to_leaves_by_measure = voice_name_to_leaves_by_measure
+        self.abbreviation_to_voice_name = {}
+        for abbreviation, voice_name in voice_abbreviations.items():
+            self.abbreviation_to_voice_name[abbreviation] = voice_name
+        self._score: abjad.Score
+        self._measure_count: int
+        self._voice_abbreviations: dict
+
+    def __getattr__(self, string):
+        return self.__getitem__(string)
+
+    def __getitem__(self, argument):
+        try:
+            measure_number_to_leaves = self.voice_name_to_leaves_by_measure[argument]
+        except KeyError:
+            voice_name = self.abbreviation_to_voice_name[argument]
+            measure_number_to_leaves = self.voice_name_to_leaves_by_measure[voice_name]
+        return DictionaryGetItemWrapper(measure_number_to_leaves)
+
+    @staticmethod
+    def _get_for_voice(result, voice, argument) -> None:
+        if isinstance(argument, int):
+            assert 1 <= argument, repr(argument)
+            result_ = voice[argument]
+            result.append(result_)
+        elif isinstance(argument, tuple):
+            assert len(argument) == 2, repr(argument)
+            result_ = voice[argument]
+            result.append(result_)
+        else:
+            assert isinstance(argument, list), repr(argument)
+            for pair in argument:
+                assert isinstance(pair, tuple), repr(pair)
+                assert len(pair) == 2, repr(pair)
+                result_ = voice[pair]
+                result.append(result_)
+
+    def get(self, *items):
+        result = []
+        for item in items:
+            if isinstance(item, str):
+                voice = self[item]
+                result.append(voice)
+            elif isinstance(item, tuple):
+                assert len(item) == 2, repr(item)
+                if isinstance(item[0], str):
+                    voice = self[item[0]]
+                    self._get_for_voice(result, voice, item[1])
+                else:
+                    assert isinstance(item[0], list), repr(item[0])
+                    for abbreviation in item[0]:
+                        assert isinstance(abbreviation, str), repr(abbreviation)
+                        voice = self[abbreviation]
+                        self._get_for_voice(result, voice, item[1])
+            else:
+                assert isinstance(item, list), repr(item)
+                for item_ in item:
+                    result_ = self.get(item_)
+                    result.append(result_)
+        return result
+
+    def rebuild(self) -> None:
+        cache = cache_leaves(
+            self._score,
+            self._measure_count,
+            voice_abbreviations=self._voice_abbreviations,
+        )
+        self.voice_name_to_leaves_by_measure = cache.voice_name_to_leaves_by_measure
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class ClockTimes:
+    duration_clock_string: str | None
+    clock_times: list[abjad.Duration] | None
+    start_clock_time: str
+    stop_clock_time: str | None
+
+
+class DictionaryGetItemWrapper:
+    def __init__(
+        self,
+        measure_number_to_leaves: dict[int, list[abjad.Leaf]],
+    ) -> None:
+        self.measure_number_to_leaves = measure_number_to_leaves
+
+    def __getitem__(self, argument):
+        if isinstance(argument, int):
+            result = self.measure_number_to_leaves[argument]
+        else:
+            result = []
+            assert isinstance(argument, tuple), repr(argument)
+            start, stop = argument
+            assert 0 < start, repr(start)
+            assert 0 < stop, repr(stop)
+            for number in range(start, stop + 1):
+                try:
+                    leaves = self.measure_number_to_leaves[number]
+                except KeyError:
+                    leaves = []
+                result.extend(leaves)
+        return result
+
+    def get(self, start, stop=None, *, anchor=False) -> list[abjad.Leaf]:
+        if stop is not None:
+            leaves = self.__getitem__((start, stop))
+        else:
+            leaves = self.__getitem__(start)
+        if anchor is True:
+            leaves = _select.rleaves(leaves)
+            assert abjad.get.has_indicator(leaves[-1], _enums.ANCHOR_NOTE)
+        return leaves
+
+    def leaves(self) -> list[abjad.Leaf]:
+        result: list[abjad.Leaf] = []
+        for measure_number, leaves in self.measure_number_to_leaves.items():
+            result.extend(leaves)
+        return result
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class FermataMeasureNumbers:
+    fermata_start_offsets: list[abjad.Offset]
+    fermata_measure_numbers: list[int]
+    final_measure_is_fermata: bool
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class LabeledClockTimes:
+    duration_clock_string: str | None
+    start_clock_time: str
+    stop_clock_time: str | None
+
+
+@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
+class TimeSignatureServer:
+    time_signatures: list[abjad.TimeSignature]
+
+    def __call__(self, start=None, stop=None) -> list[abjad.TimeSignature]:
+        if start is None and stop is None:
+            return self.time_signatures
+        assert 0 < start, start
+        if stop is None:
+            stop = start
+        assert 0 < stop, stop
+        return self.time_signatures[start - 1 : stop]
+
+
+class VoiceCache:
+    def __init__(self, score, voice_abbreviations=None) -> None:
+        voices = []
+        for voice in abjad.select.components(score, abjad.Voice):
+            assert voice.name is not None
+            if hasattr(self, voice.name):
+                continue
+            voices.append(voice)
+            setattr(self, voice.name, voice)
+            if voice_abbreviations:
+                for abbreviation, voice_name in voice_abbreviations.items():
+                    if voice_name == voice.name:
+                        setattr(self, abbreviation, voice)
+        self._voices = voices
+
+    def __call__(self, abbreviation) -> abjad.Voice:
+        voice = getattr(self, abbreviation)
+        return voice
+
+    def __iter__(self):
+        return iter(self._voices)
+
+
 def _add_container_identifiers(
     score: abjad.Score, section_number: str | None
 ) -> dict[str, tuple[_parts.PartAssignment, abjad.Timespan]]:
@@ -334,23 +510,15 @@ def _bracket_metric_modulation(
     return command
 
 
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class ClockTimes:
-    duration_clock_string: str | None
-    clock_times: list[abjad.Duration] | None
-    start_clock_time: str
-    stop_clock_time: str | None
-
-
 def _calculate_clock_times(
-    clock_time_override: None,
+    clock_time_override: abjad.MetronomeMark | None,
     fermata_measure_numbers: list[int],
     first_measure_number: int,
-    previous_stop_clock_time: str,
+    previous_stop_clock_time: str | None,
     skips: list[abjad.Skip],
     rests: list[abjad.MultimeasureRest],
 ) -> ClockTimes:
-    if rests is not None:
+    if 0 < len(rests):
         assert (len(skips) == len(rests)) or (len(skips) == len(rests) + 1)
     start_clock_time = previous_stop_clock_time
     start_clock_time = start_clock_time or "0'00''"
@@ -469,7 +637,9 @@ def _check_duplicate_part_assignments(
         raise Exception(message)
 
 
-def _check_persistent_indicators(do_not_require_short_instrument_names, score):
+def _check_persistent_indicators(
+    do_not_require_short_instrument_names: bool, score: abjad.Score
+) -> None:
     indicator = _enums.SOUNDS_DURING_SECTION
     for voice in abjad.iterate.components(score, abjad.Voice):
         if not abjad.get.has_indicator(voice, indicator):
@@ -481,8 +651,11 @@ def _check_persistent_indicators(do_not_require_short_instrument_names, score):
 
 
 def _check_persistent_indicators_for_leaf(
-    do_not_require_short_instrument_names, leaf, i, voice_name
-):
+    do_not_require_short_instrument_names: bool,
+    leaf: abjad.Leaf,
+    i: int,
+    voice_name: str | None,
+) -> None:
     prototype = (
         _classes.Accelerando,
         abjad.MetronomeMark,
@@ -506,7 +679,7 @@ def _check_persistent_indicators_for_leaf(
         raise Exception(f"{voice_name} leaf {i} ({leaf!s}) missing clef.")
 
 
-def _clean_up_laissez_vibrer_tie_direction(score):
+def _clean_up_laissez_vibrer_tie_direction(score: abjad.Score) -> None:
     default = abjad.Clef("treble")
     for note in abjad.iterate.leaves(score, abjad.Note):
         if note.written_duration < 1:
@@ -519,14 +692,15 @@ def _clean_up_laissez_vibrer_tie_direction(score):
             abjad.override(note).LaissezVibrerTie.direction = abjad.UP
 
 
-def _clean_up_obgcs(score):
+def _clean_up_obgcs(score: abjad.Score) -> None:
     for obgc in abjad.select.components(score, abjad.OnBeatGraceContainer):
+        assert isinstance(obgc, abjad.OnBeatGraceContainer)
         obgc.match_first_nongrace_leaf()
         obgc.set_grace_leaf_multipliers()
         obgc.attach_lilypond_one_voice()
 
 
-def _clean_up_repeat_tie_direction(score):
+def _clean_up_repeat_tie_direction(score: abjad.Score) -> None:
     default = abjad.Clef("treble")
     for leaf in abjad.iterate.leaves(score, pitched=True):
         if leaf.written_duration < 1:
@@ -548,10 +722,11 @@ def _clean_up_repeat_tie_direction(score):
                 break
 
 
-def _clone_section_initial_short_instrument_name(score):
+def _clone_section_initial_short_instrument_name(score: abjad.Score) -> None:
     prototype = abjad.ShortInstrumentName
     for context in abjad.iterate.components(score, abjad.Context):
         first_leaf = abjad.get.leaf(context, 0)
+        assert first_leaf is not None
         if abjad.get.has_indicator(first_leaf, abjad.InstrumentName):
             continue
         short_instrument_name = abjad.get.indicator(first_leaf, prototype)
@@ -572,14 +747,16 @@ def _clone_section_initial_short_instrument_name(score):
         )
 
 
-def _collect_alive_during_section(score):
+def _collect_alive_during_section(score: abjad.Score) -> list[str]:
     result = []
     for context in abjad.iterate.components(score, abjad.Context):
+        assert context.name is not None
         if context.name not in result:
             result.append(context.name)
     return result
 
 
+# TODO: maybe create PersistData, Metadata dataclasses?
 def _collect_metadata(
     clock_time,
     container_to_part_assignment,
@@ -596,7 +773,8 @@ def _collect_metadata(
     time_signatures,
     voice_name_to_parameter_to_state,
 ) -> tuple[types.MappingProxyType, types.MappingProxyType]:
-    metadata_, persist_ = {}, {}
+    metadata_ = {}
+    persist_: dict[str, bool | list[str]] = {}
     persist_["alive_during_section"] = _collect_alive_during_section(score)
     bol_measure_numbers = metadata.get("bol_measure_numbers")
     if bol_measure_numbers:
@@ -656,13 +834,13 @@ def _collect_persistent_indicators(
     manifests,
     previous_persistent_indicators,
     score,
-):
-    result = {}
-    contexts = abjad.iterate.components(score, abjad.Context)
-    contexts = list(contexts)
-    contexts.sort(key=lambda _: _.name)
-    name_to_wrappers = {}
+) -> dict[str, list[_memento.Memento]]:
+    result: dict[str, list[_memento.Memento]] = {}
+    contexts = abjad.select.components(score, abjad.Context)
+    contexts.sort(key=lambda _: _.name or "")
+    name_to_wrappers: dict[str, list[abjad.wrapper.Wrapper]] = {}
     for context in contexts:
+        assert context.name is not None
         if context.name not in name_to_wrappers:
             name_to_wrappers[context.name] = []
         wrappers = context._dependent_wrappers[:]
@@ -697,6 +875,7 @@ def _collect_persistent_indicators(
             leaf = wrapper.component
             parentage = abjad.get.parentage(leaf)
             first_context = parentage.get(abjad.Context)
+            assert isinstance(first_context, abjad.Context)
             indicator = wrapper.unbundle_indicator()
             if isinstance(indicator, abjad.Glissando):
                 continue
@@ -730,8 +909,8 @@ def _collect_persistent_indicators(
             elif isinstance(indicator, abjad.ShortInstrumentName):
                 manifest = "short_instrument_names"
             else:
-                prototype = type(indicator)
-                prototype = _prototype_string(prototype)
+                prototype_ = type(indicator)
+                prototype = _prototype_string(prototype_)
             value = _treat._indicator_to_key(indicator, manifests)
             if value is None and prototype != "abjad.VoiceNumber":
                 raise Exception(f"can not find in manifest:\n\n  {indicator}")
@@ -767,7 +946,7 @@ def _collect_persistent_indicators(
     return result
 
 
-def _color_mock_pitch(score):
+def _color_mock_pitch(score: abjad.Score) -> None:
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.MOCK_COLORING)
     leaves = []
@@ -780,7 +959,7 @@ def _color_mock_pitch(score):
         leaves.append(pleaf)
 
 
-def _color_not_yet_pitched(score):
+def _color_not_yet_pitched(score: abjad.Score) -> None:
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.NOT_YET_PITCHED_COLORING)
     leaves = []
@@ -798,7 +977,7 @@ def _color_not_yet_pitched(score):
         leaves.append(pleaf)
 
 
-def _color_not_yet_registered(score):
+def _color_not_yet_registered(score: abjad.Score) -> None:
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.NOT_YET_REGISTERED_COLORING)
     for pleaf in abjad.iterate.leaves(score, pitched=True):
@@ -809,7 +988,11 @@ def _color_not_yet_registered(score):
         abjad.attach(literal, pleaf, tag=tag)
 
 
-def _comment_measure_numbers(first_measure_number, offset_to_measure_number, score):
+def _comment_measure_numbers(
+    first_measure_number: int,
+    offset_to_measure_number: dict[abjad.Offset, int],
+    score: abjad.Score,
+) -> None:
     tag = _helpers.function_name(_frame())
     for leaf in abjad.iterate.leaves(score):
         offset = abjad.get.timespan(leaf).start_offset
@@ -817,6 +1000,7 @@ def _comment_measure_numbers(first_measure_number, offset_to_measure_number, sco
         if measure_number is None:
             continue
         context = abjad.get.parentage(leaf).get(abjad.Context)
+        assert isinstance(context, abjad.Context)
         if abjad.get.has_indicator(leaf, _enums.ANCHOR_SKIP):
             string = "% [anchor skip]"
         elif abjad.get.has_indicator(leaf, _enums.ANCHOR_NOTE):
@@ -829,7 +1013,7 @@ def _comment_measure_numbers(first_measure_number, offset_to_measure_number, sco
         abjad.attach(literal, leaf, tag=tag)
 
 
-def _error_on_not_yet_pitched(score):
+def _error_on_not_yet_pitched(score: abjad.Score) -> None:
     violators = []
     for voice in abjad.iterate.components(score, abjad.Voice):
         for leaf in abjad.iterate.leaves(voice):
@@ -842,10 +1026,11 @@ def _error_on_not_yet_pitched(score):
         raise Exception(message)
 
 
-def _extend_beam(leaf):
+def _extend_beam(leaf: abjad.Leaf) -> None:
     if not abjad.get.has_indicator(leaf, abjad.StopBeam):
         parentage = abjad.get.parentage(leaf)
         voice = parentage.get(abjad.Voice)
+        assert isinstance(voice, abjad.Voice)
         message = f"{leaf!s} in {voice.name} has no StopBeam."
         raise Exception(message)
     abjad.detach(abjad.StopBeam, leaf)
@@ -860,6 +1045,7 @@ def _extend_beam(leaf):
         if next_leaf is None:
             parentage = abjad.get.parentage(current_leaf)
             voice = parentage.get(abjad.Voice)
+            assert isinstance(voice, abjad.Voice)
             message = f"no leaf follows {current_leaf!s} in {voice.name};"
             message += "\n\tDo not set extend_beam=True on last figure."
             raise Exception(message)
@@ -875,7 +1061,7 @@ def _extend_beam(leaf):
         current_leaf = next_leaf
 
 
-def _find_first_measure_number(previous_metadata):
+def _find_first_measure_number(previous_metadata: dict) -> int:
     assert previous_metadata, repr(previous_metadata)
     previous_final_measure_number = previous_metadata.get("final_measure_number")
     if previous_final_measure_number is None:
@@ -884,12 +1070,13 @@ def _find_first_measure_number(previous_metadata):
     return first_measure_number
 
 
-def _find_repeat_pitch_classes(argument):
-    violators = []
+def _find_repeat_pitch_classes(argument) -> list[abjad.LogicalTie]:
+    violators: list[abjad.LogicalTie] = []
     for voice in abjad.iterate.components(argument, abjad.Voice):
         if abjad.get.has_indicator(voice, _enums.INTERMITTENT):
             continue
-        previous_lt, previous_pcs = None, set()
+        previous_lt: abjad.LogicalTie | None = None
+        previous_pcs: set[abjad.NamedPitchClass] = set()
         for lt in abjad.iterate.logical_ties(voice):
             if abjad.get.has_indicator(lt.head, _enums.HIDDEN):
                 written_pitches = set()
@@ -906,6 +1093,7 @@ def _find_repeat_pitch_classes(argument):
                 pass
             elif pcs & previous_pcs:
                 if previous_lt not in violators:
+                    assert previous_lt is not None
                     violators.append(previous_lt)
                 if lt not in violators:
                     violators.append(lt)
@@ -914,7 +1102,7 @@ def _find_repeat_pitch_classes(argument):
     return violators
 
 
-def _force_nonnatural_accidentals(score):
+def _force_nonnatural_accidentals(score: abjad.Score) -> None:
     natural = abjad.Accidental("natural")
     for plt in _select.plts(score):
         if isinstance(plt[0], abjad.Note):
@@ -922,18 +1110,14 @@ def _force_nonnatural_accidentals(score):
         else:
             note_heads = plt[0].note_heads
         for note_head in note_heads:
+            assert note_head is not None
             if note_head.written_pitch.accidental != natural:
                 note_head.is_forced = True
 
 
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class FermataMeasureNumbers:
-    fermata_start_offsets: list[abjad.Offset]
-    fermata_measure_numbers: list[int]
-    final_measure_is_fermata: bool
-
-
-def _get_fermata_measure_numbers(first_measure_number, score):
+def _get_fermata_measure_numbers(
+    first_measure_number: int, score: abjad.Score
+) -> FermataMeasureNumbers:
     fermata_start_offsets, fermata_measure_numbers = [], []
     final_measure_is_fermata = False
     if "Rests" in score:
@@ -958,14 +1142,19 @@ def _get_fermata_measure_numbers(first_measure_number, score):
     )
 
 
-def _get_measure_number_tag(leaf, offset_to_measure_number):
+def _get_measure_number_tag(
+    leaf: abjad.Leaf, offset_to_measure_number: dict[abjad.Offset, int]
+) -> abjad.Tag | None:
     start_offset = abjad.get.timespan(leaf).start_offset
     measure_number = offset_to_measure_number.get(start_offset)
     if measure_number is not None:
         return abjad.Tag(f"MEASURE_{measure_number}")
+    return None
 
 
-def _get_measure_offsets(score, start_measure, stop_measure):
+def _get_measure_offsets(
+    score: abjad.Score, start_measure: int, stop_measure: int
+) -> tuple[abjad.Offset, abjad.Offset]:
     skips = _select.skips(score["Skips"])
     start_skip = skips[start_measure - 1]
     assert isinstance(start_skip, abjad.Skip), start_skip
@@ -976,7 +1165,7 @@ def _get_measure_offsets(score, start_measure, stop_measure):
     return start_offset, stop_offset
 
 
-def _get_measure_timespan(measure_number, score):
+def _get_measure_timespan(measure_number: int, score: abjad.Score) -> abjad.Timespan:
     start_offset, stop_offset = _get_measure_offsets(
         score,
         measure_number,
@@ -985,7 +1174,7 @@ def _get_measure_timespan(measure_number, score):
     return abjad.Timespan(start_offset, stop_offset)
 
 
-def _global_rests_are_meaningful(context):
+def _global_rests_are_meaningful(context: abjad.Context) -> bool:
     assert context.name == "Rests"
     for skip in context:
         indicators = abjad.get.indicators(skip)
@@ -994,28 +1183,25 @@ def _global_rests_are_meaningful(context):
     return False
 
 
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class LabeledClockTimes:
-    duration_clock_string: str | None
-    start_clock_time: str
-    stop_clock_time: str | None
-
-
 def _label_clock_time(
-    clock_time_override,
-    fermata_measure_numbers,
-    first_measure_number,
-    previous_stop_clock_time,
-    score,
-):
+    clock_time_override: abjad.MetronomeMark | None,
+    fermata_measure_numbers: list[int],
+    first_measure_number: int,
+    previous_stop_clock_time: str | None,
+    score: abjad.Score,
+) -> LabeledClockTimes:
     skips = _select.skips(score["Skips"])
+    rests: list[abjad.MultimeasureRest] = []
     if "Rests" not in score:
-        rests = None
+        rests = []
     else:
         for context in abjad.iterate.components(score, abjad.Context):
             if context.name == "Rests":
                 break
-        rests = abjad.select.rests(context)
+        items = abjad.select.rests(context)
+        for item in items:
+            assert isinstance(item, abjad.MultimeasureRest)
+            rests.append(item)
     times = _calculate_clock_times(
         clock_time_override,
         fermata_measure_numbers,
@@ -1100,7 +1286,7 @@ def _label_clock_time(
     )
 
 
-def _label_duration_multipliers(score):
+def _label_duration_multipliers(score: abjad.Score) -> None:
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.DURATION_MULTIPLIER)
     already_labeled = set()
@@ -1129,7 +1315,7 @@ def _label_duration_multipliers(score):
             already_labeled.add(leaf)
 
 
-def _layout_removal_tags():
+def _layout_removal_tags() -> list[abjad.Tag]:
     return [
         _tags.EXPLICIT_TIME_SIGNATURE_COLOR,
         _tags.LOCAL_MEASURE_NUMBER,
@@ -1140,17 +1326,20 @@ def _layout_removal_tags():
     ]
 
 
-def _magnify_staves(magnify_staves, score):
+def _magnify_staves(
+    magnify_staves: float | tuple[float, str] | None, score: abjad.Score
+) -> None:
     if magnify_staves is None:
         return
     if isinstance(magnify_staves, tuple):
-        multiplier, tag = magnify_staves
+        multiplier, tag_ = magnify_staves
     else:
-        multiplier, tag = magnify_staves, None
-    multiplier = abjad.Fraction(multiplier)
-    numerator, denominator = abjad.duration.pair(multiplier)
+        # multiplier, tag_ = magnify_staves, None
+        multiplier, tag_ = magnify_staves, ""
+    fraction_multiplier = abjad.Fraction(multiplier)
+    numerator, denominator = abjad.duration.pair(fraction_multiplier)
     string = rf"\magnifyStaff #{numerator}/{denominator}"
-    tag = abjad.Tag(tag)
+    tag = abjad.Tag(tag_)
     tag = tag.append(_helpers.function_name(_frame()))
     for staff in abjad.iterate.components(score, abjad.Staff):
         first_leaf = abjad.get.leaf(staff, 0)
@@ -1159,7 +1348,7 @@ def _magnify_staves(magnify_staves, score):
         abjad.attach(literal, first_leaf, tag=tag)
 
 
-def _make_global_context():
+def _make_global_context() -> abjad.Context:
     global_rests = abjad.Context(lilypond_type="GlobalRests", name="Rests")
     global_skips = abjad.Context(lilypond_type="GlobalSkips", name="Skips")
     global_context = abjad.Context(
@@ -1171,7 +1360,9 @@ def _make_global_context():
     return global_context
 
 
-def _make_global_rests(global_rests, time_signatures):
+def _make_global_rests(
+    global_rests: abjad.Context, time_signatures: list[abjad.TimeSignature]
+) -> None:
     rests = []
     for time_signature in time_signatures:
         rest = abjad.MultimeasureRest(
@@ -1184,13 +1375,13 @@ def _make_global_rests(global_rests, time_signatures):
 
 
 def _make_global_skips(
-    context,
-    time_signatures,
+    context: abjad.Context,
+    time_signatures: list[abjad.TimeSignature],
     *,
-    append_anchor_skip=False,
-    attach_time_signatures=False,
-    measure_initial_grace_notes=None,
-):
+    append_anchor_skip: bool = False,
+    attach_time_signatures: bool = False,
+    measure_initial_grace_notes: dict[int, typing.Any] | None = None,
+) -> None:
     measure_initial_grace_notes = measure_initial_grace_notes or {}
     for n, time_signature in enumerate(time_signatures, start=1):
         skip = abjad.Skip(
@@ -1221,7 +1412,7 @@ def _make_global_skips(
             abjad.attach(anchor_time_signature, skip, context="Score", tag=None)
 
 
-def _mark_section_number(global_skips, section_number):
+def _mark_section_number(global_skips: abjad.Context, section_number: int) -> None:
     skip = _select.skip(global_skips, 0)
     abjad.attach(
         abjad.LilyPondLiteral(r"\baca-thick-red-bar-line"),
@@ -1231,7 +1422,7 @@ def _mark_section_number(global_skips, section_number):
     )
 
 
-def _memento_to_indicator(dictionary, memento):
+def _memento_to_indicator(dictionary: dict, memento: _memento.Memento) -> typing.Any:
     if memento.manifest is not None:
         if dictionary is None:
             raise Exception(f"can not find {memento.manifest!r} manifest.")
@@ -1261,16 +1452,18 @@ def _memento_to_indicator(dictionary, memento):
 
 
 def _move_global_rests(
-    global_rests_in_every_staff,
-    global_rests_in_topmost_staff,
-    score,
-):
+    global_rests_in_every_staff: bool,
+    global_rests_in_topmost_staff: bool,
+    score: abjad.Score,
+) -> None:
     if not (global_rests_in_topmost_staff or global_rests_in_every_staff):
         return
     if "Rests" not in score:
         return
     global_rests = score["Rests"]
-    score["GlobalContext"].remove(global_rests)
+    context = score["GlobalContext"]
+    assert isinstance(context, abjad.Context)
+    context.remove(global_rests)
     music_context = score["MusicContext"]
     if global_rests_in_topmost_staff is True:
         for staff in abjad.iterate.components(music_context, abjad.Staff):
@@ -1289,7 +1482,7 @@ def _move_global_rests(
             topmost_staff = False
 
 
-def _persistent_indicator_tags():
+def _persistent_indicator_tags() -> list[abjad.Tag]:
     return [
         _tags.EXPLICIT_CLEF,
         _tags.REAPPLIED_CLEF,
@@ -1330,7 +1523,7 @@ def _persistent_indicator_tags():
     ]
 
 
-def _pitch_unpitched_anchor_notes(score):
+def _pitch_unpitched_anchor_notes(score: abjad.Score) -> None:
     pleaves = []
     for pleaf in abjad.iterate.leaves(score, pitched=True):
         if not abjad.get.has_indicator(pleaf, _enums.ANCHOR_NOTE):
@@ -1346,7 +1539,9 @@ def _pitch_unpitched_anchor_notes(score):
     )
 
 
-def _populate_offset_to_measure_number(first_measure_number, global_skips):
+def _populate_offset_to_measure_number(
+    first_measure_number: int, global_skips: abjad.Context
+) -> dict[abjad.Offset, int]:
     measure_number = first_measure_number
     offset_to_measure_number = {}
     for skip in _select.skips(global_skips):
@@ -1356,7 +1551,7 @@ def _populate_offset_to_measure_number(first_measure_number, global_skips):
     return offset_to_measure_number
 
 
-def _prototype_string(class_):
+def _prototype_string(class_) -> str:
     parts = class_.__module__.split(".")
     if parts[-1] != class_.__name__:
         parts.append(class_.__name__)
@@ -1364,12 +1559,13 @@ def _prototype_string(class_):
 
 
 def _reapply_persistent_indicators(
-    contexts: list[abjad.Component],
+    contexts: list[abjad.Context],
     manifests: dict,
     mementos: list[_memento.Memento],
     *,
     deactivate: bool = False,
-):
+) -> None:
+    assert all(isinstance(_, abjad.Context) for _ in contexts)
     for memento in mementos:
         if memento.manifest is not None:
             if memento.manifest == "instruments":
@@ -1451,7 +1647,7 @@ def _reapply_persistent_indicators(
             _treat.treat_persistent_wrapper(manifests, wrapper, result.status)
 
 
-def _reanalyze_reapplied_synthetic_wrappers(score):
+def _reanalyze_reapplied_synthetic_wrappers(score: abjad.Score) -> None:
     function_name = _helpers.function_name(_frame())
     for leaf in abjad.iterate.leaves(score):
         for wrapper in abjad.get.wrappers(leaf):
@@ -1476,7 +1672,7 @@ def _reanalyze_reapplied_synthetic_wrappers(score):
                 wrapper._synthetic_offset = None
 
 
-def _reanalyze_trending_dynamics(manifests, score):
+def _reanalyze_trending_dynamics(manifests: dict, score: abjad.Score) -> None:
     for leaf in abjad.iterate.leaves(score):
         for wrapper in abjad.get.wrappers(leaf):
             if isinstance(
@@ -1485,7 +1681,7 @@ def _reanalyze_trending_dynamics(manifests, score):
                 _treat.treat_persistent_wrapper(manifests, wrapper, "explicit")
 
 
-def _remove_layout_tags(score):
+def _remove_layout_tags(score: abjad.Score) -> None:
     layout_removal_tags = _layout_removal_tags()
     for leaf in abjad.iterate.leaves(score):
         for wrapper in abjad.get.wrappers(leaf):
@@ -1498,10 +1694,10 @@ def _remove_layout_tags(score):
 
 
 def _replace_rests_with_multimeasure_rests(
-    offset_to_measure_number,
-    score,
-    time_signatures,
-):
+    offset_to_measure_number: dict[abjad.Offset, int],
+    score: abjad.Score,
+    time_signatures: list[abjad.TimeSignature],
+) -> None:
     if len(offset_to_measure_number) == len(time_signatures) + 1:
         items = list(offset_to_measure_number.items())
         offset_to_measure_number = dict(items[:-1])
@@ -1531,7 +1727,7 @@ def _replace_rests_with_multimeasure_rests(
             abjad.mutate.replace(group[1:], [])
 
 
-def _set_intermittent_to_staff_position_zero(score):
+def _set_intermittent_to_staff_position_zero(score: abjad.Score) -> None:
     pleaves = []
     for voice in abjad.iterate.components(score, abjad.Voice):
         if voice._has_indicator(_enums.INTERMITTENT):
@@ -1546,7 +1742,7 @@ def _set_intermittent_to_staff_position_zero(score):
     )
 
 
-def _set_not_yet_pitched_to_staff_position_zero(score):
+def _set_not_yet_pitched_to_staff_position_zero(score: abjad.Score) -> None:
     pleaves = []
     for pleaf in abjad.iterate.leaves(score, pitched=True):
         if not abjad.get.has_indicator(pleaf, _enums.NOT_YET_PITCHED):
@@ -1561,10 +1757,10 @@ def _set_not_yet_pitched_to_staff_position_zero(score):
 
 
 def _shift_measure_initial_clefs(
-    first_measure_number,
-    offset_to_measure_number,
-    score,
-):
+    first_measure_number: int,
+    offset_to_measure_number: dict[abjad.Offset, int],
+    score: abjad.Score,
+) -> None:
     for staff in abjad.iterate.components(score, abjad.Staff):
         for leaf in abjad.iterate.leaves(staff):
             start_offset = abjad.get.timespan(leaf).start_offset
@@ -1580,7 +1776,7 @@ def _shift_measure_initial_clefs(
             _override.clef_shift(leaf, clef, first_measure_number)
 
 
-def _style_anchor_notes(score):
+def _style_anchor_notes(score: abjad.Score) -> None:
     for note in abjad.select.components(score, abjad.Note):
         if not abjad.get.has_indicator(note, _enums.ANCHOR_NOTE):
             continue
@@ -1591,10 +1787,10 @@ def _style_anchor_notes(score):
 def _style_fermata_measures(
     fermata_extra_offset_y: float,
     fermata_measure_empty_overrides: list[int],
-    fermata_start_offsets,
-    final_section,
-    offset_to_measure_number,
-    score,
+    fermata_start_offsets: list[abjad.Offset],
+    final_section: bool,
+    offset_to_measure_number: dict[abjad.Offset, int],
+    score: abjad.Score,
 ) -> None:
     if not fermata_measure_empty_overrides:
         return
@@ -1743,7 +1939,7 @@ def _style_fermata_measures(
             )
 
 
-def _style_first_measure(global_skips, section_number):
+def _style_first_measure(global_skips: abjad.Context, section_number: str) -> None:
     skip = _select.skip(global_skips, 0)
     abjad.attach(
         abjad.LilyPondLiteral(r"\baca-thick-red-bar-line"),
@@ -1767,7 +1963,7 @@ def _style_first_measure(global_skips, section_number):
     )
 
 
-def _style_framed_notes(score):
+def _style_framed_notes(score: abjad.Score) -> None:
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.FRAMED_LEAF)
     for leaf in abjad.iterate.leaves(score):
@@ -1782,14 +1978,14 @@ def _style_framed_notes(score):
             abjad.attach(literal, leaf, tag=tag)
 
 
-def _update_score_one_time(score):
+def _update_score_one_time(score: abjad.Score) -> None:
     is_forbidden_to_update = score._is_forbidden_to_update
     score._is_forbidden_to_update = False
     abjad._updatelib._update_now(score, offsets=True)
     score._is_forbidden_to_update = is_forbidden_to_update
 
 
-def _whitespace_leaves(score):
+def _whitespace_leaves(score: abjad.Score) -> None:
     for leaf in abjad.iterate.leaves(score):
         literal = abjad.LilyPondLiteral("", site="absolute_before")
         abjad.attach(literal, leaf, tag=None)
@@ -1804,148 +2000,7 @@ def _whitespace_leaves(score):
         abjad.attach(literal, container, tag=None)
 
 
-class CacheGetItemWrapper:
-    def __init__(self, voice_name_to_leaves_by_measure, voice_abbreviations):
-        self.voice_name_to_leaves_by_measure = voice_name_to_leaves_by_measure
-        self.abbreviation_to_voice_name = {}
-        for abbreviation, voice_name in voice_abbreviations.items():
-            self.abbreviation_to_voice_name[abbreviation] = voice_name
-
-    def __getattr__(self, string):
-        return self.__getitem__(string)
-
-    def __getitem__(self, argument):
-        try:
-            measure_number_to_leaves = self.voice_name_to_leaves_by_measure[argument]
-        except KeyError:
-            voice_name = self.abbreviation_to_voice_name[argument]
-            measure_number_to_leaves = self.voice_name_to_leaves_by_measure[voice_name]
-        return DictionaryGetItemWrapper(measure_number_to_leaves)
-
-    @staticmethod
-    def _get_for_voice(result, voice, argument):
-        if isinstance(argument, int):
-            assert 1 <= argument, repr(argument)
-            result_ = voice[argument]
-            result.append(result_)
-        elif isinstance(argument, tuple):
-            assert len(argument) == 2, repr(argument)
-            result_ = voice[argument]
-            result.append(result_)
-        else:
-            assert isinstance(argument, list), repr(argument)
-            for pair in argument:
-                assert isinstance(pair, tuple), repr(pair)
-                assert len(pair) == 2, repr(pair)
-                result_ = voice[pair]
-                result.append(result_)
-
-    def get(self, *items):
-        result = []
-        for item in items:
-            if isinstance(item, str):
-                voice = self[item]
-                result.append(voice)
-            elif isinstance(item, tuple):
-                assert len(item) == 2, repr(item)
-                if isinstance(item[0], str):
-                    voice = self[item[0]]
-                    self._get_for_voice(result, voice, item[1])
-                else:
-                    assert isinstance(item[0], list), repr(item[0])
-                    for abbreviation in item[0]:
-                        assert isinstance(abbreviation, str), repr(abbreviation)
-                        voice = self[abbreviation]
-                        self._get_for_voice(result, voice, item[1])
-            else:
-                assert isinstance(item, list), repr(item)
-                for item_ in item:
-                    result_ = self.get(item_)
-                    result.append(result_)
-        return result
-
-    def rebuild(self):
-        cache = cache_leaves(
-            self._score, self._measure_count, self._voice_abbreviations
-        )
-        self.voice_name_to_leaves_by_measure = cache.voice_name_to_leaves_by_measure
-
-
-class DictionaryGetItemWrapper:
-    def __init__(self, measure_number_to_leaves):
-        self.measure_number_to_leaves = measure_number_to_leaves
-
-    def __getitem__(self, argument):
-        if isinstance(argument, int):
-            result = self.measure_number_to_leaves[argument]
-        else:
-            result = []
-            assert isinstance(argument, tuple), repr(argument)
-            start, stop = argument
-            assert 0 < start, repr(start)
-            assert 0 < stop, repr(stop)
-            for number in range(start, stop + 1):
-                try:
-                    leaves = self.measure_number_to_leaves[number]
-                except KeyError:
-                    leaves = []
-                result.extend(leaves)
-        return result
-
-    def get(self, start, stop=None, *, anchor=False):
-        if stop is not None:
-            leaves = self.__getitem__((start, stop))
-        else:
-            leaves = self.__getitem__(start)
-        if anchor is True:
-            leaves = _select.rleaves(leaves)
-            assert abjad.get.has_indicator(leaves[-1], _enums.ANCHOR_NOTE)
-        return leaves
-
-    def leaves(self):
-        result = []
-        for measure_number, leaves in self.measure_number_to_leaves.items():
-            result.extend(leaves)
-        return result
-
-
-@dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
-class TimeSignatureServer:
-    time_signatures: list[abjad.TimeSignature]
-
-    def __call__(self, start=None, stop=None):
-        if start is None and stop is None:
-            return self.time_signatures
-        assert 0 < start, start
-        if stop is None:
-            stop = start
-        assert 0 < stop, stop
-        return self.time_signatures[start - 1 : stop]
-
-
-class VoiceCache:
-    def __init__(self, score, voice_abbreviations=None):
-        voices = []
-        for voice in abjad.select.components(score, abjad.Voice):
-            if hasattr(self, voice.name):
-                continue
-            voices.append(voice)
-            setattr(self, voice.name, voice)
-            if voice_abbreviations:
-                for abbreviation, voice_name in voice_abbreviations.items():
-                    if voice_name == voice.name:
-                        setattr(self, abbreviation, voice)
-        self._voices = voices
-
-    def __call__(self, abbreviation):
-        voice = getattr(self, abbreviation)
-        return voice
-
-    def __iter__(self):
-        return iter(self._voices)
-
-
-def activate_tags(score, *tags):
+def activate_tags(score: abjad.Score, *tags: abjad.Tag) -> None:
     assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
     for leaf in abjad.iterate.leaves(score):
         wrappers = abjad.get.wrappers(leaf)
@@ -1958,10 +2013,11 @@ def activate_tags(score, *tags):
                     break
 
 
-def append_anchor_note(argument, *, runtime=None):
+def append_anchor_note(argument, *, runtime=None) -> None:
     leaf = abjad.get.leaf(argument, 0)
     parentage = abjad.get.parentage(leaf)
     voice = parentage.get(abjad.Voice, n=-1)
+    assert isinstance(voice, abjad.Voice)
     tag = _helpers.function_name(_frame(), n=1)
     tag = tag.append(_tags.ANCHOR_NOTE)
     tag = tag.append(_tags.HIDDEN)
@@ -2018,17 +2074,21 @@ def append_anchor_note(argument, *, runtime=None):
     voice.append(note)
 
 
-def cache_leaves(score, measure_count, voice_abbreviations=None):
+def cache_leaves(
+    score: abjad.Score, measure_count: int, voice_abbreviations: dict | None = None
+) -> CacheGetItemWrapper:
     measure_timespans = []
     for measure_index in range(measure_count):
         measure_number = measure_index + 1
         measure_timespan = _get_measure_timespan(measure_number, score)
         measure_timespans.append(measure_timespan)
-    voice_name_to_leaves_by_measure = {}
+    voice_name_to_leaves_by_measure_dict: dict[str, dict] = {}
     for leaf in abjad.select.leaves(score):
         parentage = abjad.get.parentage(leaf)
         context = parentage.get(abjad.Context)
-        measure_number_to_leaves = voice_name_to_leaves_by_measure.setdefault(
+        assert isinstance(context, abjad.Context)
+        assert context.name is not None
+        measure_number_to_leaves = voice_name_to_leaves_by_measure_dict.setdefault(
             context.name, {}
         )
         leaf_timespan = abjad.get.timespan(leaf)
@@ -2043,7 +2103,8 @@ def cache_leaves(score, measure_count, voice_abbreviations=None):
                 cached_leaves.append(leaf)
     if voice_abbreviations:
         voice_name_to_leaves_by_measure = CacheGetItemWrapper(
-            voice_name_to_leaves_by_measure, voice_abbreviations
+            voice_name_to_leaves_by_measure_dict,
+            voice_abbreviations,
         )
         voice_name_to_leaves_by_measure._score = score
         voice_name_to_leaves_by_measure._measure_count = measure_count
@@ -2052,9 +2113,11 @@ def cache_leaves(score, measure_count, voice_abbreviations=None):
 
 
 # TODO: reintegrate into rebuild()?
-def cache_leaves_in_voice(voice, measure_count):
+def cache_leaves_in_voice(
+    voice: abjad.Voice, measure_count: int
+) -> DictionaryGetItemWrapper:
     assert isinstance(voice, abjad.Voice)
-    measure_number_to_leaves = {}
+    measure_number_to_leaves: dict[int, list[abjad.Leaf]] = {}
     for measure_index in range(measure_count):
         measure_number = measure_index + 1
         measure_number_to_leaves[measure_number] = []
@@ -2064,18 +2127,21 @@ def cache_leaves_in_voice(voice, measure_count):
     return DictionaryGetItemWrapper(measure_number_to_leaves)
 
 
-def cache_voices(score, voice_abbreviations=None):
+def cache_voices(
+    score: abjad.Score, voice_abbreviations: dict | None = None
+) -> VoiceCache:
     return VoiceCache(score, voice_abbreviations)
 
 
-def color_octaves(score):
+def color_octaves(score: abjad.Score) -> None:
     vertical_moments = abjad.iterate_vertical_moments(score)
     markup = abjad.Markup(r"\markup OCTAVE")
     bundle = abjad.bundle(markup, r"- \tweak color #red")
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.OCTAVE_COLORING)
     for vertical_moment in vertical_moments:
-        pleaves, pitches = [], []
+        pleaves: list[abjad.Chord | abjad.Note] = []
+        pitches = []
         for leaf in vertical_moment.leaves:
             if abjad.get.has_indicator(leaf, _enums.HIDDEN):
                 continue
@@ -2107,7 +2173,7 @@ def color_octaves(score):
 _color_octaves_alias = color_octaves
 
 
-def color_out_of_range_pitches(score):
+def color_out_of_range_pitches(score: abjad.Score) -> None:
     indicator = _enums.ALLOW_OUT_OF_RANGE
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.OUT_OF_RANGE_COLORING)
@@ -2128,7 +2194,7 @@ def color_out_of_range_pitches(score):
                 abjad.attach(literal, pleaf, tag=tag)
 
 
-def color_repeat_pitch_classes(score):
+def color_repeat_pitch_classes(score: abjad.Score) -> None:
     tag = _helpers.function_name(_frame())
     tag = tag.append(_tags.REPEAT_PITCH_CLASS_COLORING)
     lts = _find_repeat_pitch_classes(score)
@@ -2139,7 +2205,7 @@ def color_repeat_pitch_classes(score):
             abjad.attach(literal, leaf, tag=tag)
 
 
-def deactivate_tags(score, *tags):
+def deactivate_tags(score: abjad.Score, *tags: abjad.Tag) -> None:
     assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
     for leaf in abjad.iterate.leaves(score):
         wrappers = abjad.get.wrappers(leaf)
@@ -2152,13 +2218,13 @@ def deactivate_tags(score, *tags):
                     break
 
 
-def extend_beams(score):
+def extend_beams(score: abjad.Score) -> None:
     for leaf in abjad.iterate.leaves(score):
         if abjad.get.indicator(leaf, _enums.RIGHT_OPEN_BEAM):
             _extend_beam(leaf)
 
 
-def get_voice_names(score):
+def get_voice_names(score: abjad.Score) -> tuple[str, ...]:
     voice_names = ["Skips", "Rests"]
     for voice in abjad.iterate.components(score, abjad.Voice):
         if voice.name is not None:
@@ -2173,7 +2239,7 @@ def get_voice_names(score):
     return tuple(voice_names)
 
 
-def instrument_color_tags():
+def instrument_color_tags() -> list[abjad.Tag]:
     return [
         _tags.EXPLICIT_INSTRUMENT_ALERT,
         _tags.EXPLICIT_INSTRUMENT_COLOR,
@@ -2187,7 +2253,10 @@ def instrument_color_tags():
     ]
 
 
-def label_moment_numbers(global_skips, moment_markup):
+def label_moment_numbers(
+    global_skips: abjad.Context,
+    moment_markup: list[tuple[str, int] | tuple[str, int, str]],
+) -> None:
     if not moment_markup:
         return
     skips = _select.skips(global_skips)
@@ -2244,7 +2313,10 @@ def label_moment_numbers(global_skips, moment_markup):
     )
 
 
-def label_stage_numbers(global_skips, stage_markup):
+def label_stage_numbers(
+    global_skips: abjad.Context,
+    stage_markup: list[tuple[str, int] | tuple[str, int, str]],
+) -> None:
     if not stage_markup:
         return
     tag = _tags.STAGE_NUMBER
@@ -2406,7 +2478,7 @@ def postprocess(
     first_section: bool = False,
     global_rests_in_every_staff: bool = False,
     global_rests_in_topmost_staff: bool = False,
-    magnify_staves: float | None = None,
+    magnify_staves: float | tuple[float, str] | None = None,
     part_manifest: tuple[_parts.Part, ...] | None = None,
     parts_metric_modulation_multiplier: tuple[float, float] | None = None,
     section_number: str | None = None,
@@ -2458,9 +2530,11 @@ def postprocess(
         previous_persistent_indicators = previous_metadata.get(
             "persistent_indicators", {}
         )
+        context = score["Skips"]
+        assert isinstance(context, abjad.Context)
         offset_to_measure_number = _populate_offset_to_measure_number(
             first_measure_number,
-            score["Skips"],
+            context,
         )
         if do_not_replace_rests_with_multimeasure_rests is False:
             _replace_rests_with_multimeasure_rests(
@@ -2480,6 +2554,7 @@ def postprocess(
                 context = score["TimeSignatures"]
             else:
                 context = score["Skips"]
+            assert isinstance(context, abjad.Context)
             cached_time_signatures = remove_redundant_time_signatures(context)
         fmns = _get_fermata_measure_numbers(first_measure_number, score)
         if empty_fermata_measures and not fermata_measure_empty_overrides:
@@ -2490,8 +2565,10 @@ def postprocess(
             if do_not_treat_untreated_persistent_indicators is False:
                 treat_untreated_persistent_wrappers(score, manifests=manifests)
             if do_not_span_metronome_marks is False:
+                context = score["Skips"]
+                assert isinstance(context, abjad.Context)
                 span_metronome_marks(
-                    score["Skips"],
+                    context,
                     parts_metric_modulation_multiplier=parts_metric_modulation_multiplier,
                 )
             deactivate_tags(
@@ -2540,8 +2617,11 @@ def postprocess(
                 score,
             )
             if first_section is False:
+                context = score["Skips"]
+                assert isinstance(context, abjad.Context)
+                assert section_number is not None
                 _style_first_measure(
-                    score["Skips"],
+                    context,
                     section_number,
                 )
             _style_fermata_measures(
@@ -2574,7 +2654,9 @@ def postprocess(
     )
     _clean_up_obgcs(score)
     if delete_nonmeaningful_global_rests and "Rests" in score:
-        if not _global_rests_are_meaningful(score["Rests"]):
+        context_ = score["Rests"]
+        assert isinstance(context_, abjad.Context)
+        if not _global_rests_are_meaningful(context_):
             del score["Rests"]
     if do_not_check_wellformedness is False:
         count, message = abjad.wf.tabulate_wellformedness(
@@ -2617,7 +2699,12 @@ def postprocess(
             score,
         )
         first_metronome_mark = True
-        skip = abjad.select.leaf(score["Skips"], 0)
+        skips_ = score["Skips"]
+        assert isinstance(skips_, abjad.Context)
+        assert all(isinstance(_, abjad.Skip) for _ in skips_)
+        # skip = abjad.select.leaf(score["Skips"], 0)
+        assert isinstance(skips_[0], abjad.Skip)
+        skip = skips_[0]
         metronome_mark = abjad.get.effective_indicator(skip, abjad.MetronomeMark)
         if metronome_mark is None:
             first_metronome_mark = False
@@ -2644,7 +2731,7 @@ def postprocess(
         return new_metadata
 
 
-def proxy(mapping):
+def proxy(mapping) -> types.MappingProxyType:
     return types.MappingProxyType(mapping)
 
 
@@ -2652,9 +2739,11 @@ def reapply_persistent_indicators(
     voices: VoiceCache,
     previous_persistent_indicators: dict,
     *,
-    deactivate_contexts: typing.Sequence[str] = (),
+    deactivate_contexts: list[str] | None = None,
     manifests: dict | None = None,
-):
+) -> None:
+    if deactivate_contexts is None:
+        deactivate_contexts = []
     manifests = manifests or {}
     already_reapplied_contexts = {"Score"}
     previous_persistent_indicators = dict(previous_persistent_indicators)
@@ -2683,7 +2772,7 @@ def reapply_persistent_indicators(
                     already_reapplied_contexts.add(component.name)
 
 
-def remove_redundant_time_signatures(global_skips):
+def remove_redundant_time_signatures(global_skips: abjad.Context) -> list[str]:
     previous_time_signature = None
     cached_time_signatures = []
     skips = _select.skips(global_skips)
@@ -2702,7 +2791,7 @@ def remove_redundant_time_signatures(global_skips):
 
 def set_up_score(
     score: abjad.Score,
-    time_signatures: typing.Sequence[abjad.TimeSignature],
+    time_signatures: list[abjad.TimeSignature],
     *,
     append_anchor_skip: bool = False,
     do_not_attach_measure_number_spanners: bool = False,
@@ -2744,6 +2833,7 @@ def set_up_score(
             _attach_measure_number_spanners(first_measure_number, context)
     if "Breaks" in score:
         context = score["Breaks"]
+        assert isinstance(context, abjad.Context)
         _make_global_skips(
             context,
             time_signatures,
@@ -2752,6 +2842,7 @@ def set_up_score(
         )
     if "SpacingCommands" in score:
         context = score["SpacingCommands"]
+        assert isinstance(context, abjad.Context)
         _make_global_skips(
             context,
             time_signatures,
@@ -2760,6 +2851,7 @@ def set_up_score(
         )
     if "SpacingAnnotations" in score:
         context = score["SpacingAnnotations"]
+        assert isinstance(context, abjad.Context)
         _make_global_skips(
             context,
             time_signatures,
@@ -2767,13 +2859,15 @@ def set_up_score(
             measure_initial_grace_notes=measure_initial_grace_notes,
         )
     if "Rests" in score:
-        _make_global_rests(score["Rests"], time_signatures)
+        context = score["Rests"]
+        assert isinstance(context, abjad.Context)
+        _make_global_rests(context, time_signatures)
     if score_persistent_indicators:
         contexts = abjad.select.components(score, abjad.Context)
         _reapply_persistent_indicators(contexts, manifests, score_persistent_indicators)
 
 
-def short_instrument_name_color_tags():
+def short_instrument_name_color_tags() -> list[abjad.Tag]:
     return [
         _tags.EXPLICIT_SHORT_INSTRUMENT_NAME_ALERT,
         _tags.EXPLICIT_SHORT_INSTRUMENT_NAME_COLOR,
@@ -2789,7 +2883,7 @@ def short_instrument_name_color_tags():
     ]
 
 
-def sort_dictionary(dictionary):
+def sort_dictionary(dictionary: dict) -> None:
     items = list(dictionary.items())
     items.sort()
     dictionary.clear()
@@ -2800,8 +2894,11 @@ def sort_dictionary(dictionary):
 
 
 def span_metronome_marks(
-    global_skips, *, hide=False, parts_metric_modulation_multiplier=None
-):
+    global_skips: abjad.Context,
+    *,
+    hide: bool = False,
+    parts_metric_modulation_multiplier: tuple[float, float] | None = None,
+) -> None:
     assert global_skips.name == "Skips", repr(global_skips.name)
     indicator_count = 0
     skips = _select.skips(global_skips)
@@ -3079,6 +3176,8 @@ def span_metronome_marks(
         color = _treat._status_to_color[status]
         string = f"{status.upper()}_METRONOME_MARK_WITH_COLOR"
         tag = abjad.Tag(string)
+        # TODO: pass around only strings:
+        left_text_with_color: str | abjad.Markup
         if isinstance(left_text, str):
             string = left_text.replace(
                 "baca-metronome-mark-spanner-left-markup",
@@ -3148,12 +3247,13 @@ def span_metronome_marks(
         )
 
 
-def style_anchor_skip(score):
+def style_anchor_skip(score: abjad.Score) -> None:
     anchor_skips = []
     for context in abjad.select.components(score, abjad.Context):
         if abjad.get.has_indicator(context[-1], _enums.ANCHOR_SKIP):
             anchor_skips.append(context[-1])
     for anchor_skip in anchor_skips:
+        assert isinstance(anchor_skip, abjad.Skip)
         for literal in abjad.get.indicators(anchor_skip, abjad.LilyPondLiteral):
             if r"\baca-time-signature-color" in literal.argument:
                 abjad.detach(literal, anchor_skip)
@@ -3185,7 +3285,7 @@ def style_anchor_skip(score):
         )
 
 
-def transpose_score(score):
+def transpose_score(score: abjad.Score) -> None:
     for pleaf in _select.pleaves(score):
         if abjad.get.has_indicator(pleaf, _enums.DO_NOT_TRANSPOSE):
             continue
@@ -3194,7 +3294,9 @@ def transpose_score(score):
         abjad.iterpitches.transpose_from_sounding_pitch(pleaf)
 
 
-def treat_untreated_persistent_wrappers(score, *, manifests=None):
+def treat_untreated_persistent_wrappers(
+    score: abjad.Score, *, manifests: dict | None = None
+) -> None:
     manifests = manifests or {}
     dynamic_prototype = (abjad.Dynamic, abjad.StartHairpin)
     tempo_prototype = (
@@ -3217,6 +3319,7 @@ def treat_untreated_persistent_wrappers(score, *, manifests=None):
                 continue
             if wrapper.tag and has_persistence_tag(wrapper.tag):
                 continue
+            prototype: type | tuple[type, ...]
             if isinstance(indicator, abjad.Instrument):
                 prototype = abjad.Instrument
             elif isinstance(indicator, dynamic_prototype):
@@ -3240,7 +3343,7 @@ def update_voice_name_to_parameter_to_state(
     parameter: str,
     name: str,
     state: dict,
-):
+) -> None:
     assert isinstance(voice_name_to_parameter_to_state, dict), repr(
         voice_name_to_parameter_to_state
     )
@@ -3258,7 +3361,7 @@ def update_voice_name_to_parameter_to_state(
     voice_name_to_parameter_to_state[voice_name] = voice_name_to_parameter_to_state_
 
 
-def wrap(items):
+def wrap(items) -> TimeSignatureServer:
     time_signatures = []
     for item in items:
         if isinstance(item, tuple):
