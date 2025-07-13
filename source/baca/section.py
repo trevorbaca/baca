@@ -29,7 +29,18 @@ from . import treat as _treat
 from .enums import enums as _enums
 
 
-def _add_container_identifiers(score, section_number):
+@dataclasses.dataclass
+class Analysis:
+    leaf: abjad.Leaf
+    previous_indicator: typing.Any
+    status: typing.Any
+    edition: typing.Any
+    synthetic_offset: typing.Any
+
+
+def _add_container_identifiers(
+    score: abjad.Score, section_number: str | None
+) -> dict[str, tuple[_parts.PartAssignment, abjad.Timespan]]:
     if section_number is not None:
         assert section_number, repr(section_number)
         section_number = f"number.{int(section_number)}"
@@ -54,8 +65,9 @@ def _add_container_identifiers(score, section_number):
             continue
         contexts.append(voice)
     container_to_part_assignment = {}
-    context_name_to_count = {}
+    context_name_to_count: dict[str, int] = {}
     for context in contexts:
+        assert isinstance(context, abjad.Context), repr(context)
         assert context.name is not None, repr(context)
         count = context_name_to_count.get(context.name, 0)
         if count == 0:
@@ -84,6 +96,7 @@ def _add_container_identifiers(score, section_number):
                 globals_ = globals()
                 globals_["PartAssignment"] = _parts.PartAssignment
                 part = eval(part, globals_)
+                assert isinstance(part, _parts.PartAssignment)
                 container_identifier = f"{context_identifier}.container"
                 if 1 < total_part_containers:
                     container_identifier += f".{part_container_count}"
@@ -92,32 +105,35 @@ def _add_container_identifiers(score, section_number):
                 )
                 assert container_identifier not in container_to_part_assignment
                 timespan = container._get_timespan()
-                pair = (part, timespan)
+                assert isinstance(timespan, abjad.Timespan)
+                pair: tuple[_parts.PartAssignment, abjad.Timespan] = (part, timespan)
                 container_to_part_assignment[container_identifier] = pair
                 container.identifier = f"%*% {container_identifier}"
     for staff in abjad.iterate.components(score, abjad.Staff):
         if section_number:
             context_identifier = f"{section_number}.{staff.name}"
         else:
+            assert staff.name is not None
             context_identifier = staff.name
         staff.identifier = f"%*% {context_identifier}"
     return container_to_part_assignment
 
 
-def _analyze_memento(contexts, dictionary, memento):
+def _analyze_memento(contexts, dictionary, memento) -> Analysis | None:
     previous_indicator = _memento_to_indicator(dictionary, memento)
     if previous_indicator is None:
-        return
+        return None
     if isinstance(previous_indicator, _layout.SpacingSection):
-        return
+        return None
     for context in contexts:
         if context.name == memento.context:
             memento_context = context
             break
     else:
         # context alive in previous section doesn't exist in this section
-        return
+        return None
     leaf = abjad.get.leaf(memento_context, 0)
+    assert leaf is not None
     if isinstance(previous_indicator, abjad.Instrument):
         prototype = abjad.Instrument
     else:
@@ -147,7 +163,7 @@ def _analyze_memento(contexts, dictionary, memento):
     )
 
 
-def _append_tag_to_wrappers(leaf, tag):
+def _append_tag_to_wrappers(leaf: abjad.Leaf, tag: abjad.Tag) -> None:
     assert isinstance(tag, abjad.Tag), repr(tag)
     for wrapper in abjad.get.wrappers(leaf):
         if isinstance(wrapper.unbundle_indicator(), abjad.LilyPondLiteral):
@@ -158,18 +174,9 @@ def _append_tag_to_wrappers(leaf, tag):
             wrapper.tag = tag_
 
 
-def _assert_nonoverlapping_rhythms(rhythms, voice):
-    previous_stop_offset = 0
-    for rhythm in rhythms:
-        start_offset = rhythm.start_offset
-        if start_offset < previous_stop_offset:
-            raise Exception(f"{voice} has overlapping rhythms.")
-        duration = abjad.get.duration(rhythm.annotation)
-        stop_offset = start_offset + duration
-        previous_stop_offset = stop_offset
-
-
-def _attach_measure_number_spanners(first_measure_number, global_skips):
+def _attach_measure_number_spanners(
+    first_measure_number: int, global_skips: abjad.Context
+) -> None:
     skips = _select.skips(global_skips)
     total = len(skips)
     for measure_index, skip in enumerate(skips):
@@ -231,7 +238,7 @@ def _attach_measure_number_spanners(first_measure_number, global_skips):
 # LilyPond doesn't understand repeat-tied notes to be tied;
 # because of this LilyPond incorrectly prints accidentals in front of some
 # repeat-tied notes; this function works around LilyPond's behavior
-def _attach_shadow_tie_indicators(score):
+def _attach_shadow_tie_indicators(score: abjad.Score) -> None:
     tag = _helpers.function_name(_frame())
     for plt in _select.plts(score):
         if len(plt) == 1:
@@ -244,14 +251,16 @@ def _attach_shadow_tie_indicators(score):
             abjad.attach(bundle, pleaf, tag=tag)
 
 
-def _attach_sounds_during(score):
+def _attach_sounds_during(score: abjad.Score) -> None:
     for voice in abjad.iterate.components(score, abjad.Voice):
         pleaves = _select.pleaves(voice)
         if bool(pleaves):
             abjad.attach(_enums.SOUNDS_DURING_SECTION, voice)
 
 
-def _bracket_metric_modulation(metric_modulation, metronome_mark):
+def _bracket_metric_modulation(
+    metric_modulation: abjad.MetricModulation, metronome_mark: abjad.MetronomeMark
+) -> str:
     if metronome_mark.decimal is not True:
         arguments = metronome_mark._get_markup_arguments()
         mm_length = arguments["duration_log"]
@@ -334,13 +343,13 @@ class ClockTimes:
 
 
 def _calculate_clock_times(
-    clock_time_override,
-    fermata_measure_numbers,
-    first_measure_number,
-    previous_stop_clock_time,
-    skips,
-    rests,
-):
+    clock_time_override: None,
+    fermata_measure_numbers: list[int],
+    first_measure_number: int,
+    previous_stop_clock_time: str,
+    skips: list[abjad.Skip],
+    rests: list[abjad.MultimeasureRest],
+) -> ClockTimes:
     if rests is not None:
         assert (len(skips) == len(rests)) or (len(skips) == len(rests) + 1)
     start_clock_time = previous_stop_clock_time
@@ -386,7 +395,7 @@ def _calculate_clock_times(
     )
 
 
-def _check_all_music_in_part_containers(score):
+def _check_all_music_in_part_containers(score: abjad.Score) -> None:
     indicator = _enums.MULTIMEASURE_REST_CONTAINER
     for voice in abjad.iterate.components(score, abjad.Voice):
         for component in voice:
@@ -406,7 +415,7 @@ def _check_all_music_in_part_containers(score):
             raise Exception(message)
 
 
-def _check_anchors_are_final(score):
+def _check_anchors_are_final(score: abjad.Score) -> None:
     anchor_count, violators = 0, []
     for leaf in abjad.iterate.leaves(score):
         if abjad.get.has_indicator(leaf, (_enums.ANCHOR_NOTE, _enums.ANCHOR_SKIP)):
@@ -420,11 +429,13 @@ def _check_anchors_are_final(score):
         raise Exception(message)
 
 
-def _check_doubled_dynamics(score):
+def _check_doubled_dynamics(score: abjad.Score) -> None:
     for leaf in abjad.iterate.leaves(score):
         dynamics = abjad.get.indicators(leaf, abjad.Dynamic)
         if 1 < len(dynamics):
             voice = abjad.get.parentage(leaf).get(abjad.Voice)
+            assert isinstance(voice, abjad.Voice)
+            assert voice.name is not None
             message = f"leaf {str(leaf)} in {voice.name} has"
             message += f" {len(dynamics)} dynamics attached:"
             for dynamic in dynamics:
@@ -432,12 +443,14 @@ def _check_doubled_dynamics(score):
             raise Exception(message)
 
 
-def _check_duplicate_part_assignments(dictionary, part_manifest):
+def _check_duplicate_part_assignments(
+    dictionary: dict, part_manifest: tuple[_parts.Part, ...] | None
+) -> None:
     if not dictionary:
         return
     if not part_manifest:
         return
-    part_to_timespans = {}
+    part_to_timespans: dict[str, list[abjad.Timespan]] = {}
     for identifier, (part_assignment, timespan) in dictionary.items():
         for part in part_assignment.make_parts():
             if part.identifier() not in part_to_timespans:
@@ -1791,15 +1804,6 @@ def _whitespace_leaves(score):
         abjad.attach(literal, container, tag=None)
 
 
-@dataclasses.dataclass
-class Analysis:
-    leaf: abjad.Leaf
-    previous_indicator: typing.Any
-    status: typing.Any
-    edition: typing.Any
-    synthetic_offset: typing.Any
-
-
 class CacheGetItemWrapper:
     def __init__(self, voice_name_to_leaves_by_measure, voice_abbreviations):
         self.voice_name_to_leaves_by_measure = voice_name_to_leaves_by_measure
@@ -2371,41 +2375,41 @@ def make_layout_score(
 
 @_build.timed("postprocess")
 def postprocess(
-    score,
+    score: abjad.Score,
     environment: _build.Environment,
     manifests: dict,
     *,
-    all_music_in_part_containers=False,
-    attach_instruments_by_hand=False,
-    clock_time_extra_offset=None,
-    clock_time_override=None,
-    color_octaves=False,
-    comment_measure_numbers=False,
-    delete_nonmeaningful_global_rests=False,
-    doctest=False,
-    do_not_check_wellformedness=False,
-    do_not_color_not_yet_pitched=False,
-    do_not_color_not_yet_registered=False,
-    do_not_color_repeat_pitch_classes=False,
-    do_not_error_on_not_yet_pitched=False,
-    do_not_force_nonnatural_accidentals=False,
-    do_not_label_clock_time=False,
-    do_not_replace_rests_with_multimeasure_rests=False,
-    do_not_require_short_instrument_names=False,
-    do_not_span_metronome_marks=False,
-    do_not_transpose_score=False,
-    do_not_treat_untreated_persistent_indicators=False,
-    empty_fermata_measures=False,
+    all_music_in_part_containers: bool = False,
+    attach_instruments_by_hand: bool = False,
+    clock_time_extra_offset: float | None = None,
+    clock_time_override: abjad.MetronomeMark | None = None,
+    color_octaves: bool = False,
+    comment_measure_numbers: bool = False,
+    delete_nonmeaningful_global_rests: bool = False,
+    doctest: bool = False,
+    do_not_check_wellformedness: bool = False,
+    do_not_color_not_yet_pitched: bool = False,
+    do_not_color_not_yet_registered: bool = False,
+    do_not_color_repeat_pitch_classes: bool = False,
+    do_not_error_on_not_yet_pitched: bool = False,
+    do_not_force_nonnatural_accidentals: bool = False,
+    do_not_label_clock_time: bool = False,
+    do_not_replace_rests_with_multimeasure_rests: bool = False,
+    do_not_require_short_instrument_names: bool = False,
+    do_not_span_metronome_marks: bool = False,
+    do_not_transpose_score: bool = False,
+    do_not_treat_untreated_persistent_indicators: bool = False,
+    empty_fermata_measures: bool = False,
     fermata_extra_offset_y: float = 2.5,
     fermata_measure_empty_overrides: typing.Sequence[int] | None = None,
-    final_section=False,
-    first_section=False,
-    global_rests_in_every_staff=False,
-    global_rests_in_topmost_staff=False,
-    magnify_staves=None,
-    part_manifest=None,
-    parts_metric_modulation_multiplier=None,
-    section_number=None,
+    final_section: bool = False,
+    first_section: bool = False,
+    global_rests_in_every_staff: bool = False,
+    global_rests_in_topmost_staff: bool = False,
+    magnify_staves: float | None = None,
+    part_manifest: tuple[_parts.Part, ...] | None = None,
+    parts_metric_modulation_multiplier: tuple[float, float] | None = None,
+    section_number: str | None = None,
 ):
     assert isinstance(score, abjad.Score), repr(score)
     if doctest is False:
@@ -2714,6 +2718,7 @@ def set_up_score(
     assert isinstance(manifests, dict), repr(manifests)
     if "TimeSignatures" in score:
         context = score["TimeSignatures"]
+        assert isinstance(context, abjad.Context)
         _make_global_skips(
             context,
             time_signatures,
@@ -2727,6 +2732,7 @@ def set_up_score(
         do_not_attach_time_signatures = True
     if "Skips" in score:
         context = score["Skips"]
+        assert isinstance(context, abjad.Context)
         _make_global_skips(
             context,
             time_signatures,
