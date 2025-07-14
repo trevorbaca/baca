@@ -224,9 +224,9 @@ def _indicator_to_key(
     indicator: typing.Any,
     wrapper: abjad.wrapper.Wrapper,
     manifests: dict,
-) -> int | str | _memento.PersistentOverride | dict[str, bool]:
+) -> int | str | _memento.PersistentOverride | dict[str, bool] | abjad.Markup | None:
     assert isinstance(wrapper, abjad.wrapper.Wrapper), repr(wrapper)
-    key: int | str | _memento.PersistentOverride | dict[str, bool]
+    key: int | str | _memento.PersistentOverride | dict[str, bool] | abjad.Markup | None
     if isinstance(indicator, abjad.Clef):
         key = indicator.name
     elif isinstance(indicator, abjad.Dynamic):
@@ -255,9 +255,8 @@ def _indicator_to_key(
         key = indicator.line_count
     elif isinstance(indicator, _classes.StaffLines):
         key = indicator.line_count
-    # TODO: maybe this cases can be eliminated; fall through for accel, rit?
     elif isinstance(indicator, _classes.Accelerando | _classes.Ritardando):
-        key = {"hide": wrapper.hide}
+        key = indicator.markup
     else:
         key = str(indicator)
     return key

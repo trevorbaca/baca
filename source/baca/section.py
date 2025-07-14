@@ -296,15 +296,7 @@ def _add_container_identifiers(
 
 
 def _analyze_memento(contexts, dictionary, memento) -> Analysis | None:
-    # previous_indicator = _memento_to_indicator(dictionary, memento)
-    result = _memento_to_indicator(dictionary, memento)
-    hide_dictionary: dict | None = None
-    if isinstance(result, tuple):
-        assert len(result) == 2
-        previous_indicator, hide_dictionary = result
-        assert isinstance(hide_dictionary, dict), repr(hide_dictionary)
-    else:
-        previous_indicator = result
+    previous_indicator = _memento_to_indicator(dictionary, memento)
     if previous_indicator is None:
         return None
     if isinstance(previous_indicator, _layout.SpacingSection):
@@ -921,7 +913,12 @@ def _collect_persistent_indicators(
                 prototype_ = type(indicator)
                 prototype = _prototype_string(prototype_)
             value = _treat._indicator_to_key(indicator, wrapper, manifests)
-            if value is None and prototype != "abjad.VoiceNumber":
+            # if value is None and prototype != "abjad.VoiceNumber":
+            if value is None and prototype not in (
+                "abjad.VoiceNumber",
+                "baca.Accelerando",
+                "baca.Ritardando",
+            ):
                 raise Exception(f"can not find in manifest:\n\n  {indicator}")
             editions = wrapper.tag.editions()
             if editions:
@@ -1431,7 +1428,6 @@ def _mark_section_number(global_skips: abjad.Context, section_number: int) -> No
     )
 
 
-# TODO: maybe returning hide_dictionary is unnecessary?
 def _memento_to_indicator(dictionary: dict, memento: _memento.Memento) -> typing.Any:
     if memento.manifest is not None:
         if dictionary is None:
@@ -1451,15 +1447,6 @@ def _memento_to_indicator(dictionary: dict, memento: _memento.Memento) -> typing
         indicator = class_(line_count=memento.value)
     elif memento.value is None:
         indicator = class_()
-    elif isinstance(memento.value, dict):
-        assert class_ in (_classes.Accelerando, _classes.Ritardando)
-        # if class_ is _classes.Ritardando:
-        #     indicator = class_(**memento.value)
-        # else:
-        #     assert class_ is _classes.Accelerando
-        #    indicator = (class_(), memento.value)
-        # TODO: maybe pair is unnecessary, just pass instantiated object?
-        indicator = (class_(), memento.value)
     else:
         try:
             indicator = class_(memento.value)
