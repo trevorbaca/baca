@@ -79,7 +79,7 @@ class Accelerando:
     Accelerandi are not followed by any type of dashed line.
     """
 
-    hide: bool = False
+    # hide: bool = False
     markup: abjad.Markup | None = None
 
     context: typing.ClassVar[str] = "Score"
@@ -90,7 +90,7 @@ class Accelerando:
     trend: typing.ClassVar[bool] = True
 
     def __post_init__(self):
-        assert isinstance(self.hide, bool), repr(self.hide)
+        # assert isinstance(self.hide, bool), repr(self.hide)
         if self.markup is not None:
             assert isinstance(self.markup, abjad.Markup), repr(self.markup)
 
@@ -101,9 +101,10 @@ class Accelerando:
         return self._get_markup().string
 
     def _get_contributions(self, *, wrapper=None):
+        assert wrapper is not None
         contributions = abjad._contributions.ContributionsBySite()
-        if self.hide is False:
-            # if wrapper.hide is False:
+        # if self.hide is False:
+        if wrapper.hide is False:
             markup = self._get_markup()
             string = markup._get_lilypond_format(wrapper=wrapper)
             contributions.after.markup.append(string)
@@ -348,15 +349,15 @@ class Ritardando:
                 }
             }
 
-    Tweak extra-offset to align ritardando markup with other metronome mark spanner
-    pieces.
+    Tweak extra-offset to align ritardando markup with other metronome mark
+    spanner pieces.
 
     Ritardandi format as LilyPond markup.
 
     Ritardandi are not followed by any type of dashed line or other spanner.
     """
 
-    hide: bool = False
+    # hide: bool = False
     markup: abjad.Markup | None = None
 
     context: typing.ClassVar[str] = "Score"
@@ -366,7 +367,7 @@ class Ritardando:
     trend: typing.ClassVar[bool] = True
 
     def __post_init__(self):
-        assert isinstance(self.hide, bool), repr(self.hide)
+        # assert isinstance(self.hide, bool), repr(self.hide)
         if self.markup is not None:
             assert isinstance(self.markup, abjad.Markup), repr(self.markup)
 
@@ -379,8 +380,8 @@ class Ritardando:
 
     def _get_contributions(self, *, wrapper=None):
         contributions = abjad._contributions.ContributionsBySite()
-        if self.hide is False:
-            # if wrapper.hide is False:
+        # if self.hide is False:
+        if wrapper.hide is False:
             markup = self._get_markup()
             string = markup._get_lilypond_format(wrapper=wrapper)
             contributions.after.markup.append(string)

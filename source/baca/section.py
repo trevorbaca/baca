@@ -296,7 +296,15 @@ def _add_container_identifiers(
 
 
 def _analyze_memento(contexts, dictionary, memento) -> Analysis | None:
-    previous_indicator = _memento_to_indicator(dictionary, memento)
+    # previous_indicator = _memento_to_indicator(dictionary, memento)
+    result = _memento_to_indicator(dictionary, memento)
+    hide_dictionary: dict | None = None
+    if isinstance(result, tuple):
+        assert len(result) == 2
+        previous_indicator, hide_dictionary = result
+        assert isinstance(hide_dictionary, dict), repr(hide_dictionary)
+    else:
+        previous_indicator = result
     if previous_indicator is None:
         return None
     if isinstance(previous_indicator, _layout.SpacingSection):
@@ -756,6 +764,7 @@ def _collect_alive_during_section(score: abjad.Score) -> list[str]:
     return result
 
 
+# TODO: typehint arguments
 # TODO: maybe create PersistData, Metadata dataclasses?
 def _collect_metadata(
     clock_time,
@@ -831,9 +840,9 @@ def _collect_metadata(
 
 
 def _collect_persistent_indicators(
-    manifests,
-    previous_persistent_indicators,
-    score,
+    manifests: dict,
+    previous_persistent_indicators: dict,
+    score: abjad.Score,
 ) -> dict[str, list[_memento.Memento]]:
     result: dict[str, list[_memento.Memento]] = {}
     contexts = abjad.select.components(score, abjad.Context)
@@ -911,7 +920,7 @@ def _collect_persistent_indicators(
             else:
                 prototype_ = type(indicator)
                 prototype = _prototype_string(prototype_)
-            value = _treat._indicator_to_key(indicator, manifests)
+            value = _treat._indicator_to_key(indicator, wrapper, manifests)
             if value is None and prototype != "abjad.VoiceNumber":
                 raise Exception(f"can not find in manifest:\n\n  {indicator}")
             editions = wrapper.tag.editions()
@@ -1422,6 +1431,7 @@ def _mark_section_number(global_skips: abjad.Context, section_number: int) -> No
     )
 
 
+# TODO: maybe returning hide_dictionary is unnecessary?
 def _memento_to_indicator(dictionary: dict, memento: _memento.Memento) -> typing.Any:
     if memento.manifest is not None:
         if dictionary is None:
@@ -1442,7 +1452,14 @@ def _memento_to_indicator(dictionary: dict, memento: _memento.Memento) -> typing
     elif memento.value is None:
         indicator = class_()
     elif isinstance(memento.value, dict):
-        indicator = class_(**memento.value)
+        assert class_ in (_classes.Accelerando, _classes.Ritardando)
+        # if class_ is _classes.Ritardando:
+        #     indicator = class_(**memento.value)
+        # else:
+        #     assert class_ is _classes.Accelerando
+        #    indicator = (class_(), memento.value)
+        # TODO: maybe pair is unnecessary, just pass instantiated object?
+        indicator = (class_(), memento.value)
     else:
         try:
             indicator = class_(memento.value)
@@ -2965,20 +2982,24 @@ def span_metronome_marks(
             )
         if accelerando is not None:
             wrapper = abjad.get.wrapper(skip, _classes.Accelerando)
-            hidden_accelerando = dataclasses.replace(accelerando, hide=True)
+            # hidden_accelerando = dataclasses.replace(accelerando, hide=True)
+            hidden_accelerando = dataclasses.replace(accelerando)
             abjad.detach(_classes.Accelerando, skip)
             abjad.attach(
                 hidden_accelerando,
                 skip,
+                hide=True,
                 tag=wrapper.tag,
             )
         if ritardando is not None:
             wrapper = abjad.get.wrapper(skip, _classes.Ritardando)
-            hidden_ritardando = dataclasses.replace(ritardando, hide=True)
+            # hidden_ritardando = dataclasses.replace(ritardando, hide=True)
+            hidden_ritardando = dataclasses.replace(ritardando)
             abjad.detach(_classes.Ritardando, skip)
             abjad.attach(
                 hidden_ritardando,
                 skip,
+                hide=True,
                 tag=wrapper.tag,
             )
         if skip is skips[-1]:

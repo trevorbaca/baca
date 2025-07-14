@@ -146,6 +146,7 @@ def _attach_color_cancelation_literal(
 def _attach_latent_indicator_alert(
     manifests,
     leaf: abjad.Leaf,
+    wrapper: abjad.wrapper.Wrapper,
     indicator: typing.Any,
     status: str,
     existing_deactivate: bool = False,
@@ -155,7 +156,7 @@ def _attach_latent_indicator_alert(
     assert indicator.latent, repr(indicator)
     if isinstance(indicator, abjad.Clef):
         return
-    key = _indicator_to_key(indicator, manifests)
+    key = _indicator_to_key(indicator, wrapper, manifests)
     if key is not None:
         key = f"“{key}”"
     else:
@@ -223,8 +224,11 @@ def _indicator_to_grob(indicator) -> str:
 
 
 def _indicator_to_key(
-    indicator: typing.Any, manifests: dict
+    indicator: typing.Any,
+    wrapper: abjad.wrapper.Wrapper,
+    manifests: dict,
 ) -> int | str | _memento.PersistentOverride | dict[str, bool]:
+    assert isinstance(wrapper, abjad.wrapper.Wrapper), repr(wrapper)
     key: int | str | _memento.PersistentOverride | dict[str, bool]
     if isinstance(indicator, abjad.Clef):
         key = indicator.name
@@ -254,8 +258,10 @@ def _indicator_to_key(
         key = indicator.line_count
     elif isinstance(indicator, _classes.StaffLines):
         key = indicator.line_count
+    # TODO: maybe this cases can be eliminated; fall through for accel, rit?
     elif isinstance(indicator, _classes.Accelerando | _classes.Ritardando):
-        key = {"hide": indicator.hide}
+        # key = {"hide": indicator.hide}
+        key = {"hide": wrapper.hide}
     else:
         key = str(indicator)
     return key
@@ -549,6 +555,7 @@ def treat_persistent_wrapper(
         _attach_latent_indicator_alert(
             manifests,
             wrapper.component,
+            wrapper,
             unbundled_indicator,
             status,
             existing_deactivate=wrapper.deactivate,
