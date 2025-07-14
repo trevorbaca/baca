@@ -22,10 +22,9 @@ def _attach_color_literal(
     cancelation: bool = False,
 ) -> None:
     assert isinstance(wrapper, abjad.wrapper.Wrapper), repr(wrapper)
-    unbundled_indicator = wrapper.unbundle_indicator()
-    # TODO: remove because indicators no longer have "hide"
-    if getattr(unbundled_indicator, "hide", False) is True:
+    if wrapper.hide is True:
         return
+    unbundled_indicator = wrapper.unbundle_indicator()
     if isinstance(unbundled_indicator, abjad.Instrument):
         return
     if not getattr(unbundled_indicator, "persistent", False):
@@ -106,13 +105,10 @@ def _attach_color_redraw_literal(
     existing_deactivate: bool = False,
     existing_tag: abjad.Tag | None = None,
 ) -> None:
+    if wrapper.hide is True:
+        return
     unbundled_indicator = wrapper.unbundle_indicator()
     if getattr(unbundled_indicator, "redraw", False) is False:
-        return
-    # TODO: remove because indicators no longer have "hide"
-    if getattr(unbundled_indicator, "hide", False) is True:
-        return
-    if wrapper.hide is True:
         return
     _attach_color_literal(
         wrapper,
@@ -128,13 +124,11 @@ def _attach_color_cancelation_literal(
     existing_deactivate: bool = False,
     existing_tag: abjad.Tag | None = None,
 ) -> None:
+    assert isinstance(wrapper, abjad.wrapper.Wrapper), repr(wrapper)
+    if wrapper.hide is True:
+        return
     unbundled_indicator = wrapper.unbundle_indicator()
     if getattr(unbundled_indicator, "latent", False) is True:
-        return
-    # TODO: remove because indicators no longer have "hide"
-    if getattr(unbundled_indicator, "hide", False) is True:
-        return
-    if wrapper.hide is True:
         return
     if getattr(unbundled_indicator, "redraw", False) is False:
         return
@@ -590,7 +584,6 @@ def treat_persistent_wrapper(
             isinstance(
                 unbundled_indicator,
                 abjad.Instrument | abjad.ShortInstrumentName,
-                # ) and not getattr(unbundled_indicator, "hide", False):
             )
             and wrapper.hide is False
         ):
