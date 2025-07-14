@@ -79,7 +79,6 @@ class Accelerando:
     Accelerandi are not followed by any type of dashed line.
     """
 
-    # hide: bool = False
     markup: abjad.Markup | None = None
 
     context: typing.ClassVar[str] = "Score"
@@ -90,7 +89,6 @@ class Accelerando:
     trend: typing.ClassVar[bool] = True
 
     def __post_init__(self):
-        # assert isinstance(self.hide, bool), repr(self.hide)
         if self.markup is not None:
             assert isinstance(self.markup, abjad.Markup), repr(self.markup)
 
@@ -103,7 +101,6 @@ class Accelerando:
     def _get_contributions(self, *, wrapper=None):
         assert wrapper is not None
         contributions = abjad._contributions.ContributionsBySite()
-        # if self.hide is False:
         if wrapper.hide is False:
             markup = self._get_markup()
             string = markup._get_lilypond_format(wrapper=wrapper)
@@ -151,7 +148,6 @@ class BarExtent:
     """
 
     line_count: int
-    # hide: bool = False
 
     context: typing.ClassVar[str] = "Staff"
     persistent: typing.ClassVar[bool] = True
@@ -160,7 +156,6 @@ class BarExtent:
         if not isinstance(self.line_count, int):
             raise Exception(f"line count must be integer (not {self.line_count!r}).")
         assert 0 <= self.line_count, repr(self.line_count)
-        # assert isinstance(self.hide, bool), repr(self.hide)
 
     def _get_bar_extent(self, component):
         if not isinstance(component, abjad.Leaf):
@@ -190,7 +185,6 @@ class BarExtent:
 
     def _get_contributions(self, *, wrapper=None):
         contributions = abjad._contributions.ContributionsBySite()
-        # if self.hide:
         if wrapper.hide is True:
             return contributions
         bar_extent = self._get_bar_extent(wrapper.component)
@@ -357,7 +351,6 @@ class Ritardando:
     Ritardandi are not followed by any type of dashed line or other spanner.
     """
 
-    # hide: bool = False
     markup: abjad.Markup | None = None
 
     context: typing.ClassVar[str] = "Score"
@@ -367,7 +360,6 @@ class Ritardando:
     trend: typing.ClassVar[bool] = True
 
     def __post_init__(self):
-        # assert isinstance(self.hide, bool), repr(self.hide)
         if self.markup is not None:
             assert isinstance(self.markup, abjad.Markup), repr(self.markup)
 
@@ -380,7 +372,6 @@ class Ritardando:
 
     def _get_contributions(self, *, wrapper=None):
         contributions = abjad._contributions.ContributionsBySite()
-        # if self.hide is False:
         if wrapper.hide is False:
             markup = self._get_markup()
             string = markup._get_lilypond_format(wrapper=wrapper)
@@ -428,7 +419,6 @@ class StaffLines:
     """
 
     line_count: int
-    # hide: bool = False
 
     context: typing.ClassVar[str] = "Staff"
     persistent: typing.ClassVar[bool] = True
@@ -437,7 +427,6 @@ class StaffLines:
         if not isinstance(self.line_count, int):
             raise Exception(f"line count must be integer (not {self.line_count!r}).")
         assert 0 <= self.line_count, repr(self.line_count)
-        # assert isinstance(self.hide, bool), repr(self.hide)
 
     def _get_lilypond_format(self, context=None):
         if isinstance(context, abjad.Context):
@@ -455,7 +444,6 @@ class StaffLines:
 
     def _get_contributions(self, *, wrapper=None):
         contributions = abjad._contributions.ContributionsBySite()
-        # if self.hide:
         if wrapper.hide is True:
             return contributions
         staff = abjad.get.parentage(wrapper.component).get(abjad.Staff)

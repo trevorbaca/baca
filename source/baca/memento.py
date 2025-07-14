@@ -227,7 +227,6 @@ class PersistentOverride:
     attribute: str | None = None
     context: str | None = None
     grob: str | None = None
-    # hide: bool = False
     value: str | None = None
 
     persistent: typing.ClassVar[bool] = True
@@ -240,7 +239,6 @@ class PersistentOverride:
             assert isinstance(self.context, str), repr(self.context)
         if self.grob is not None:
             assert isinstance(self.grob, str), repr(self.grob)
-        # assert isinstance(self.hide, bool), repr(self.hide)
 
     def _get_lilypond_format(self, context=None):
         if isinstance(context, abjad.Context):
@@ -260,7 +258,6 @@ class PersistentOverride:
     def _get_contributions(self, *, wrapper=None):
         assert wrapper is not None
         contributions = abjad._contributions.ContributionsBySite()
-        # if self.hide:
         if wrapper.hide is True:
             return contributions
         strings = [self._get_lilypond_format()]

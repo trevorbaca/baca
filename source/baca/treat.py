@@ -23,6 +23,7 @@ def _attach_color_literal(
 ) -> None:
     assert isinstance(wrapper, abjad.wrapper.Wrapper), repr(wrapper)
     unbundled_indicator = wrapper.unbundle_indicator()
+    # TODO: remove because indicators no longer have "hide"
     if getattr(unbundled_indicator, "hide", False) is True:
         return
     if isinstance(unbundled_indicator, abjad.Instrument):
@@ -108,6 +109,7 @@ def _attach_color_redraw_literal(
     unbundled_indicator = wrapper.unbundle_indicator()
     if getattr(unbundled_indicator, "redraw", False) is False:
         return
+    # TODO: remove because indicators no longer have "hide"
     if getattr(unbundled_indicator, "hide", False) is True:
         return
     if wrapper.hide is True:
@@ -129,6 +131,7 @@ def _attach_color_cancelation_literal(
     unbundled_indicator = wrapper.unbundle_indicator()
     if getattr(unbundled_indicator, "latent", False) is True:
         return
+    # TODO: remove because indicators no longer have "hide"
     if getattr(unbundled_indicator, "hide", False) is True:
         return
     if wrapper.hide is True:
@@ -260,7 +263,6 @@ def _indicator_to_key(
         key = indicator.line_count
     # TODO: maybe this cases can be eliminated; fall through for accel, rit?
     elif isinstance(indicator, _classes.Accelerando | _classes.Ritardando):
-        # key = {"hide": indicator.hide}
         key = {"hide": wrapper.hide}
     else:
         key = str(indicator)
@@ -584,9 +586,14 @@ def treat_persistent_wrapper(
             existing_deactivate=wrapper.deactivate,
             existing_tag=existing_tag,
         )
-        if isinstance(
-            unbundled_indicator, abjad.Instrument | abjad.ShortInstrumentName
-        ) and not getattr(unbundled_indicator, "hide", False):
+        if (
+            isinstance(
+                unbundled_indicator,
+                abjad.Instrument | abjad.ShortInstrumentName,
+                # ) and not getattr(unbundled_indicator, "hide", False):
+            )
+            and wrapper.hide is False
+        ):
             strings = unbundled_indicator._get_lilypond_format(context=context)
             literal = abjad.LilyPondLiteral(strings, site="absolute_after")
             stem = _to_indicator_stem(unbundled_indicator)
