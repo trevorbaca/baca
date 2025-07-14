@@ -658,6 +658,7 @@ def _make_section_clicktrack(lilypond_file, mtime, section_directory):
             units_per_minute = round(metronome_mark.units_per_minute)
             metronome_mark = dataclasses.replace(
                 metronome_mark,
+                # TOD: metronome mark no longer has `hide` property
                 hide=False,
                 units_per_minute=units_per_minute,
             )

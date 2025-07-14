@@ -2,6 +2,7 @@
 Treat.
 """
 
+import typing
 from inspect import currentframe as _frame
 
 import abjad
@@ -14,12 +15,12 @@ from . import tags as _tags
 
 
 def _attach_color_literal(
-    wrapper,
-    status,
-    existing_deactivate=None,
-    redraw=False,
-    cancelation=False,
-):
+    wrapper: abjad.wrapper.Wrapper,
+    status: str,
+    existing_deactivate: bool = False,
+    redraw: bool = False,
+    cancelation: bool = False,
+) -> None:
     assert isinstance(wrapper, abjad.wrapper.Wrapper), repr(wrapper)
     unbundled_indicator = wrapper.unbundle_indicator()
     if getattr(unbundled_indicator, "hide", False) is True:
@@ -38,6 +39,7 @@ def _attach_color_literal(
         return
     stem = _to_indicator_stem(unbundled_indicator)
     grob = _indicator_to_grob(unbundled_indicator)
+    assert wrapper.component is not None
     assert wrapper.context_name is not None
     context = wrapper._find_correct_effective_context(
         wrapper.component, wrapper.context_name
@@ -98,12 +100,17 @@ def _attach_color_literal(
 
 
 def _attach_color_redraw_literal(
-    wrapper, status, existing_deactivate=None, existing_tag=None
-):
+    wrapper: abjad.wrapper.Wrapper,
+    status: str,
+    existing_deactivate: bool = False,
+    existing_tag: abjad.Tag | None = None,
+) -> None:
     unbundled_indicator = wrapper.unbundle_indicator()
-    if not getattr(unbundled_indicator, "redraw", False):
+    if getattr(unbundled_indicator, "redraw", False) is False:
         return
-    if getattr(unbundled_indicator, "hide", False):
+    if getattr(unbundled_indicator, "hide", False) is True:
+        return
+    if wrapper.hide is True:
         return
     _attach_color_literal(
         wrapper,
@@ -114,14 +121,19 @@ def _attach_color_redraw_literal(
 
 
 def _attach_color_cancelation_literal(
-    wrapper, status, existing_deactivate=None, existing_tag=None
-):
+    wrapper: abjad.wrapper.Wrapper,
+    status: str,
+    existing_deactivate: bool = False,
+    existing_tag: abjad.Tag | None = None,
+) -> None:
     unbundled_indicator = wrapper.unbundle_indicator()
-    if getattr(unbundled_indicator, "latent", False):
+    if getattr(unbundled_indicator, "latent", False) is True:
         return
-    if getattr(unbundled_indicator, "hide", False):
+    if getattr(unbundled_indicator, "hide", False) is True:
         return
-    if not getattr(unbundled_indicator, "redraw", False):
+    if wrapper.hide is True:
+        return
+    if getattr(unbundled_indicator, "redraw", False) is False:
         return
     _attach_color_literal(
         wrapper,
@@ -132,8 +144,12 @@ def _attach_color_cancelation_literal(
 
 
 def _attach_latent_indicator_alert(
-    manifests, leaf, indicator, status, existing_deactivate=None
-):
+    manifests,
+    leaf: abjad.Leaf,
+    indicator: typing.Any,
+    status: str,
+    existing_deactivate: bool = False,
+) -> None:
     if not getattr(indicator, "latent", False):
         return
     assert indicator.latent, repr(indicator)
@@ -153,14 +169,18 @@ def _attach_latent_indicator_alert(
             assert status == "redundant", repr(status)
             tag = _tags.REDUNDANT_INSTRUMENT_ALERT
         left, right = "(", ")"
-        markup = _status_to_instrument_markup[status]
+        markup_ = _status_to_instrument_markup[status]
         assert isinstance(tag, abjad.Tag), repr(tag)
         string = f"{left}{key}{right}"
-        string = rf'\{markup} "{string}"'
+        string = rf'\{markup_} "{string}"'
         markup = abjad.Markup(string)
         tag = tag.append(_helpers.function_name(_frame()))
         abjad.attach(
-            markup, leaf, deactivate=existing_deactivate, direction=abjad.UP, tag=tag
+            markup,
+            leaf,
+            deactivate=existing_deactivate,
+            direction=abjad.UP,
+            tag=tag,
         )
 
 
@@ -171,9 +191,11 @@ def _get_key(dictionary, value):
                 return key
 
 
-def _get_tag(status, stem, prefix=None, suffix=None):
-    stem = abjad.string.delimit_words(stem)
-    stem = "_".join([_.upper() for _ in stem])
+def _get_tag(
+    status: str, stem: str, prefix: str | None = None, suffix: str | None = None
+) -> abjad.Tag:
+    words = abjad.string.delimit_words(stem)
+    stem = "_".join([_.upper() for _ in words])
     if suffix is not None:
         name = f"{status.upper()}_{stem}_{suffix.upper()}"
     else:
@@ -184,7 +206,7 @@ def _get_tag(status, stem, prefix=None, suffix=None):
     return tag
 
 
-def _indicator_to_grob(indicator):
+def _indicator_to_grob(indicator) -> str:
     if isinstance(indicator, abjad.Dynamic):
         return "DynamicText"
     elif isinstance(indicator, abjad.Instrument):
@@ -200,7 +222,10 @@ def _indicator_to_grob(indicator):
     return type(indicator).__name__
 
 
-def _indicator_to_key(indicator, manifests):
+def _indicator_to_key(
+    indicator: typing.Any, manifests: dict
+) -> int | str | _memento.PersistentOverride | dict[str, bool]:
+    key: int | str | _memento.PersistentOverride | dict[str, bool]
     if isinstance(indicator, abjad.Clef):
         key = indicator.name
     elif isinstance(indicator, abjad.Dynamic):
@@ -219,6 +244,7 @@ def _indicator_to_key(indicator, manifests):
     elif isinstance(indicator, abjad.TimeSignature):
         key = f"{indicator.numerator}/{indicator.denominator}"
     elif isinstance(indicator, abjad.VoiceNumber):
+        assert indicator.n is not None
         key = indicator.n
     elif isinstance(indicator, abjad.Ottava):
         key = indicator.n
@@ -235,7 +261,13 @@ def _indicator_to_key(indicator, manifests):
     return key
 
 
-def _set_status_tag(wrapper, status, redraw=None, stem=None):
+def _set_status_tag(
+    wrapper: abjad.wrapper.Wrapper,
+    status: str,
+    redraw: bool = False,
+    # TODO: restrict to str only?
+    stem: str | None = None,
+) -> None:
     assert isinstance(wrapper, abjad.wrapper.Wrapper), repr(wrapper)
     unbundled_indicator = wrapper.unbundle_indicator()
     stem = stem or _to_indicator_stem(unbundled_indicator)
@@ -278,7 +310,10 @@ _status_to_redraw_color = {
 }
 
 
-def compare_persistent_indicators(indicator_1, indicator_2) -> bool:
+def compare_persistent_indicators(
+    indicator_1: typing.Any,
+    indicator_2: typing.Any,
+) -> bool:
     if type(indicator_1) is not type(indicator_2):
         return False
     if not isinstance(indicator_1, abjad.Dynamic):
@@ -290,7 +325,7 @@ def compare_persistent_indicators(indicator_1, indicator_2) -> bool:
     return False
 
 
-def _to_indicator_stem(indicator) -> str:
+def _to_indicator_stem(indicator: typing.Any) -> str:
     """
     Changes ``indicator`` to stem.
 
@@ -340,18 +375,27 @@ def _to_indicator_stem(indicator) -> str:
     return abjad.string.to_shout_case(stem)
 
 
-def remove_reapplied_wrappers(leaf, item):
+def remove_reapplied_wrappers(leaf: abjad.Leaf, item: typing.Any) -> list | None:
     assert isinstance(leaf, abjad.Leaf), repr(leaf)
     if isinstance(item, abjad.Bundle):
         indicator = item.indicator
     else:
         indicator = item
     if not getattr(indicator, "persistent", False):
-        return
+        return None
     if getattr(indicator, "parameter", None) == "TEXT_SPANNER":
-        return
+        return None
     if abjad.get.timespan(leaf).start_offset != 0:
-        return
+        return None
+    prototype: (
+        type[abjad.Instrument]
+        | tuple[type[abjad.Dynamic], type[abjad.StartHairpin]]
+        | tuple[
+            type[abjad.MetronomeMark],
+            type[_classes.Accelerando],
+            type[_classes.Ritardando],
+        ]
+    )
     dynamic_prototype = (abjad.Dynamic, abjad.StartHairpin)
     tempo_prototype = (
         abjad.MetronomeMark,
@@ -392,6 +436,7 @@ def remove_reapplied_wrappers(leaf, item):
     effective_wrapper = abjad.get.effective_wrapper(leaf, prototype)
     if effective_wrapper and effective_wrapper not in wrappers:
         component = effective_wrapper.component
+        assert component is not None
         start_1 = abjad.get.timespan(leaf).start_offset
         start_2 = abjad.get.timespan(component).start_offset
         if start_1 == start_2:
@@ -411,6 +456,7 @@ def remove_reapplied_wrappers(leaf, item):
         unbundled_indicator = wrapper.unbundle_indicator()
         if isinstance(unbundled_indicator, prototype):
             reapplied_indicators.append(unbundled_indicator)
+        assert wrapper.component is not None
         abjad.detach(wrapper, wrapper.component)
     if reapplied_wrappers:
         count = len(reapplied_indicators)
@@ -422,13 +468,17 @@ def remove_reapplied_wrappers(leaf, item):
             message += " expecting 1.\n\n"
             raise Exception(message)
         return reapplied_indicators[0]
+    return None
 
 
 def treat_persistent_wrapper(
-    manifests: dict, wrapper: abjad.wrapper.Wrapper, status: str
+    manifests: dict,
+    wrapper: abjad.wrapper.Wrapper,
+    status: str,
 ) -> abjad.wrapper.Wrapper | None:
     assert isinstance(manifests, dict), repr(manifests)
     assert isinstance(wrapper, abjad.wrapper.Wrapper), repr(wrapper)
+    assert wrapper.component is not None
     assert isinstance(status, str), repr(status)
     unbundled_indicator = wrapper.unbundle_indicator()
     unbundled_indicator.persistent is True, repr(wrapper)
@@ -495,6 +545,7 @@ def treat_persistent_wrapper(
         return wrapper
     else:
         _attach_color_literal(wrapper, status, existing_deactivate=wrapper.deactivate)
+        assert isinstance(wrapper.component, abjad.Leaf)
         _attach_latent_indicator_alert(
             manifests,
             wrapper.component,
