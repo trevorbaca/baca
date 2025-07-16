@@ -1047,7 +1047,12 @@ def make_mmrests(
     if not head:
         tag = _helpers.function_name(_frame(), n=1)
         for time_signature in time_signatures:
-            mmrest = abjad.MultimeasureRest(1, multiplier=time_signature.pair, tag=tag)
+            if isinstance(time_signature, abjad.TimeSignature):
+                pair = time_signature.pair
+            else:
+                assert isinstance(time_signature, abjad.Duration)
+                pair = time_signature.pair()
+            mmrest = abjad.MultimeasureRest(1, multiplier=pair, tag=tag)
             mmrests.append(mmrest)
     else:
         assert isinstance(head, str)
@@ -1338,7 +1343,7 @@ def make_single_attack(time_signatures, duration) -> list[abjad.Leaf | abjad.Tup
     durations = [_.duration for _ in time_signatures]
     tag = _helpers.function_name(_frame())
     duration = abjad.Duration(duration)
-    numerator, denominator = duration.pair
+    numerator, denominator = duration.pair()
     tuplets = rmakers.incised(
         durations,
         fill_with_rests=True,

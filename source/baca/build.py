@@ -96,7 +96,7 @@ def _call_lilypond_on_music_ly_in_section(
         decrescendo_too_small=True,
         overwriting_glissando=True,
     )
-    return int(timer.elapsed_time)
+    return int(timer.elapsed_time())
 
 
 def _color_persistent_indicators(
@@ -1806,7 +1806,7 @@ def run_lilypond(
     lilypond_log_file_name = "." + ly_file_path.name + ".log"
     lilypond_log_file_path = directory / lilypond_log_file_name
     exit_code = 0
-    with abjad.contextmanagers.TemporaryDirectoryChange(directory=directory):
+    with abjad.contextmanagers.temporary_directory_change(directory=directory):
         flags = get_includes()
         try:
             signal.alarm(lilypond_timeout)
@@ -1856,7 +1856,9 @@ def run_xelatex(tex_file_path):
     command += f" -output-directory={tex_file_path.parent} {tex_file_path}"
     command += f" 1>{tex_file_path.stem}.log 2>&1"
     command_called_twice = f"{command}; {command}"
-    with abjad.contextmanagers.TemporaryDirectoryChange(directory=tex_file_path.parent):
+    with abjad.contextmanagers.temporary_directory_change(
+        directory=tex_file_path.parent
+    ):
         abjad.io.spawn_subprocess(command_called_twice)
         source = tex_file_path.with_suffix(".log")
         name = "." + tex_file_path.stem + ".tex_file_path.log"
@@ -1974,7 +1976,7 @@ def timed(timing_attribute):
             with abjad.contextmanagers.Timer() as timer:
                 result = function(*arguments, **keywords)
             if timing is not None:
-                setattr(timing, timing_attribute, int(timer.elapsed_time))
+                setattr(timing, timing_attribute, int(timer.elapsed_time()))
             return result
 
         return wrapper
