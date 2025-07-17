@@ -416,7 +416,7 @@ def _make_cluster(
         abjad.detach(object, pleaf)
         abjad.mutate.replace(pleaf, chord, wrappers=True)
         for wrapper in wrappers:
-            abjad.attach(wrapper, chord, direction=wrapper.direction)
+            abjad.attach(wrapper, chord, direction=wrapper.direction())
         abjad.attach(key_cluster, chord, direction=direction)
         abjad.attach(_enums.ALLOW_REPEAT_PITCH, chord)
         abjad.detach(_enums.NOT_YET_PITCHED, chord)

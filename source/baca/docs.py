@@ -314,7 +314,7 @@ def make_single_staff_score(
 def remove_deactivated_wrappers(score):
     for leaf in abjad.iterate.leaves(score):
         for wrapper in abjad.get.wrappers(leaf):
-            if wrapper.tag is None:
+            if wrapper.tag() is None:
                 continue
-            if wrapper.deactivate:
+            if wrapper.deactivate():
                 abjad.detach(wrapper, leaf)

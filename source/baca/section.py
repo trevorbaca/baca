@@ -345,9 +345,9 @@ def _append_tag_to_wrappers(leaf: abjad.Leaf, tag: abjad.Tag) -> None:
         if isinstance(wrapper.unbundle_indicator(), abjad.LilyPondLiteral):
             if wrapper.unbundle_indicator().argument == "":
                 continue
-        if tag.string not in wrapper.tag.string:
-            tag_ = wrapper.tag.append(tag)
-            wrapper.tag = tag_
+        if tag.string not in wrapper.tag().string:
+            tag_ = wrapper.tag().append(tag)
+            wrapper.tag_setter(tag_)
 
 
 def _attach_measure_number_spanners(
@@ -717,8 +717,8 @@ def _clean_up_repeat_tie_direction(score: abjad.Score) -> None:
             if staff_position.number == 0:
                 wrapper = abjad.get.wrapper(leaf, abjad.RepeatTie)
                 abjad.detach(wrapper, leaf)
-                bundle = abjad.bundle(wrapper.indicator, r"- \tweak direction #up")
-                abjad.attach(bundle, leaf, tag=wrapper.tag)
+                bundle = abjad.bundle(wrapper.indicator(), r"- \tweak direction #up")
+                abjad.attach(bundle, leaf, tag=wrapper.tag())
                 break
 
 
@@ -867,13 +867,14 @@ def _collect_persistent_indicators(
         )
         for wrapper in dictionary.values():
             if not isinstance(
-                wrapper.unbundle_indicator(), do_not_persist_on_anchor_leaf
+                wrapper.unbundle_indicator(),
+                do_not_persist_on_anchor_leaf,
             ):
                 wrappers.append(wrapper)
         if wrappers:
             result[name] = []
         for wrapper in wrappers:
-            leaf = wrapper.component
+            leaf = wrapper.component()
             parentage = abjad.get.parentage(leaf)
             first_context = parentage.get(abjad.Context)
             assert isinstance(first_context, abjad.Context)
@@ -920,7 +921,7 @@ def _collect_persistent_indicators(
                 "baca.Ritardando",
             ):
                 raise Exception(f"can not find in manifest:\n\n  {indicator}")
-            editions = wrapper.tag.editions()
+            editions = wrapper.tag().editions()
             if editions:
                 words = [_.string for _ in editions]
                 string = ":".join(words)
@@ -932,7 +933,7 @@ def _collect_persistent_indicators(
                 edition=editions,
                 manifest=manifest,
                 prototype=prototype,
-                synthetic_offset=wrapper.synthetic_offset,
+                synthetic_offset=wrapper.synthetic_offset(),
                 value=value,
             )
             mementos.append(memento)
@@ -1592,7 +1593,8 @@ def _reapply_persistent_indicators(
             wrapper = abjad.get.wrapper(result.leaf, abjad.TimeSignature)
             function_name = _helpers.function_name(_frame(), n=1)
             result.edition = result.edition.append(function_name)
-            wrapper.tag = wrapper.tag.append(result.edition)
+            tag_ = wrapper.tag().append(result.edition)
+            wrapper.tag_setter(tag_)
             _treat.treat_persistent_wrapper(manifests, wrapper, result.status)
             continue
         # TODO: change to parameter comparison
@@ -1625,7 +1627,8 @@ def _reapply_persistent_indicators(
                 else:
                     assert 1 < len(wrappers), repr(wrappers)
                     wrapper = abjad.get.wrapper(result.leaf, abjad.MetronomeMark)
-                wrapper.tag = wrapper.tag.append(result.edition)
+                tag_ = wrapper.tag().append(result.edition)
+                wrapper.tag_setter(tag_)
                 _treat.treat_persistent_wrapper(manifests, wrapper, result.status)
             continue
         attached = False
@@ -1655,12 +1658,13 @@ def _reanalyze_reapplied_synthetic_wrappers(score: abjad.Score) -> None:
     function_name = _helpers.function_name(_frame())
     for leaf in abjad.iterate.leaves(score):
         for wrapper in abjad.get.wrappers(leaf):
-            if wrapper.synthetic_offset is None:
+            synthetic_offset = wrapper.synthetic_offset()
+            if synthetic_offset is None:
                 continue
-            if 0 <= wrapper.synthetic_offset:
+            if 0 <= synthetic_offset:
                 continue
-            if "REAPPLIED" in wrapper.tag.string:
-                string = wrapper.tag.string
+            if "REAPPLIED" in wrapper.tag().string:
+                string = wrapper.tag().string
                 string = string.replace("REAPPLIED", "EXPLICIT")
                 words = string.split(":")
                 if abjad.sequence.has_duplicates(words):
@@ -1672,7 +1676,7 @@ def _reanalyze_reapplied_synthetic_wrappers(score: abjad.Score) -> None:
                 string = ":".join(words)
                 tag_ = abjad.Tag(string)
                 tag_ = tag_.append(function_name)
-                wrapper._tag = tag_
+                wrapper.tag_setter(tag_)
                 wrapper._synthetic_offset = None
 
 
@@ -1689,9 +1693,9 @@ def _remove_layout_tags(score: abjad.Score) -> None:
     layout_removal_tags = _layout_removal_tags()
     for leaf in abjad.iterate.leaves(score):
         for wrapper in abjad.get.wrappers(leaf):
-            if wrapper.tag is None:
+            if wrapper.tag() is None:
                 continue
-            for word in wrapper.tag.words():
+            for word in wrapper.tag().words():
                 if abjad.Tag(word) in layout_removal_tags:
                     abjad.detach(wrapper, leaf)
                     break
@@ -1769,9 +1773,9 @@ def _shift_measure_initial_clefs(
         for leaf in abjad.iterate.leaves(staff):
             start_offset = abjad.get.timespan(leaf).start_offset
             wrapper = abjad.get.wrapper(leaf, abjad.Clef)
-            if wrapper is None or not wrapper.tag:
+            if wrapper is None or not wrapper.tag():
                 continue
-            if _tags.EXPLICIT_CLEF.string not in wrapper.tag.words():
+            if _tags.EXPLICIT_CLEF.string not in wrapper.tag().words():
                 continue
             measure_number = offset_to_measure_number.get(start_offset)
             if measure_number is None:
@@ -2007,11 +2011,11 @@ def activate_tags(score: abjad.Score, *tags: abjad.Tag) -> None:
     for leaf in abjad.iterate.leaves(score):
         wrappers = abjad.get.wrappers(leaf)
         for wrapper in wrappers:
-            if wrapper.tag is None:
+            if wrapper.tag() is None:
                 continue
             for tag in tags:
-                if tag.string in wrapper.tag.words():
-                    wrapper.deactivate = False
+                if tag.string in wrapper.tag().words():
+                    wrapper.deactivate_setter(False)
                     break
 
 
@@ -2212,11 +2216,11 @@ def deactivate_tags(score: abjad.Score, *tags: abjad.Tag) -> None:
     for leaf in abjad.iterate.leaves(score):
         wrappers = abjad.get.wrappers(leaf)
         for wrapper in wrappers:
-            if wrapper.tag is None:
+            if wrapper.tag() is None:
                 continue
             for tag in tags:
-                if tag.string in wrapper.tag.words():
-                    wrapper.deactivate = True
+                if tag.string in wrapper.tag().words():
+                    wrapper.deactivate_setter(True)
                     break
 
 
@@ -2442,7 +2446,8 @@ def make_layout_score(
         assert component.tag is not None
         component.tag = component.tag.retain_shoutcase()
         for wrapper in abjad.get.wrappers(component):
-            wrapper.tag = wrapper.tag.retain_shoutcase()
+            tag_ = wrapper.tag().retain_shoutcase()
+            wrapper.tag_setter(tag_)
     bolmns = [_ + first_measure_number - 1 for _ in breaks.bol_measure_numbers()]
     return lilypond_file, bolmns
 
@@ -2664,6 +2669,7 @@ def postprocess(
         count, message = abjad.wf.tabulate_wellformedness(
             score,
             do_not_check_out_of_range_pitches=True,
+            do_not_check_unmatched_stop_text_spans=True,
         )
         if count:
             raise Exception("\n" + message)
@@ -2921,7 +2927,7 @@ def span_metronome_marks(
         wrapper = abjad.get.wrapper(skip, abjad.MetronomeMark)
         if wrapper is not None:
             metronome_mark = wrapper.unbundle_indicator()
-            metronome_mark_tweaks = getattr(wrapper.indicator, "tweaks", ())
+            metronome_mark_tweaks = getattr(wrapper.indicator(), "tweaks", ())
         metric_modulation = abjad.get.indicator(skip, abjad.MetricModulation)
         accelerando = abjad.get.indicator(skip, _classes.Accelerando)
         ritardando = abjad.get.indicator(skip, _classes.Ritardando)
@@ -2940,7 +2946,7 @@ def span_metronome_marks(
                 metronome_mark,
                 skip,
                 hide=True,
-                tag=wrapper.tag,
+                tag=wrapper.tag(),
             )
             wrapper = abjad.get.wrappers(skip, metronome_mark)[-1]
             if hide is False:
@@ -2960,7 +2966,7 @@ def span_metronome_marks(
                 metric_modulation,
                 skip,
                 hide=True,
-                tag=wrapper_.tag,
+                tag=wrapper_.tag(),
             )
         if accelerando is not None:
             wrapper = abjad.get.wrapper(skip, _classes.Accelerando)
@@ -2970,7 +2976,7 @@ def span_metronome_marks(
                 hidden_accelerando,
                 skip,
                 hide=True,
-                tag=wrapper.tag,
+                tag=wrapper.tag(),
             )
         if ritardando is not None:
             wrapper = abjad.get.wrapper(skip, _classes.Ritardando)
@@ -2980,7 +2986,7 @@ def span_metronome_marks(
                 hidden_ritardando,
                 skip,
                 hide=True,
-                tag=wrapper.tag,
+                tag=wrapper.tag(),
             )
         if skip is skips[-1]:
             break
@@ -2992,7 +2998,7 @@ def span_metronome_marks(
             wrapper = abjad.get.wrapper(skip, _classes.Ritardando)
         has_trend = accelerando is not None or ritardando is not None
         indicator_count += 1
-        tag = wrapper.tag
+        tag = wrapper.tag()
         stripped_left_text = None
         if metronome_mark is not None:
             if metric_modulation is not None:
@@ -3204,7 +3210,7 @@ def span_metronome_marks(
             )
         if right_text:
             wrapper = abjad.get.wrapper(skips[-1], abjad.MetronomeMark)
-            tag = wrapper.tag
+            tag = wrapper.tag()
             string = tag.string
             if "EXPLICIT" in string:
                 status = "explicit"
@@ -3318,7 +3324,7 @@ def treat_untreated_persistent_wrappers(
             indicator = wrapper.unbundle_indicator()
             if not getattr(indicator, "persistent", False):
                 continue
-            if wrapper.tag and has_persistence_tag(wrapper.tag):
+            if wrapper.tag() is not None and has_persistence_tag(wrapper.tag()):
                 continue
             prototype: type | tuple[type, ...]
             if isinstance(indicator, abjad.Instrument):
