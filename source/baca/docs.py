@@ -75,7 +75,7 @@ def _move_global_context(score):
 def attach_time_signature(voice: abjad.Voice) -> None:
     assert isinstance(voice, abjad.Voice), repr(voice)
     duration = abjad.get.duration(voice)
-    time_signature = abjad.TimeSignature(duration.pair())
+    time_signature = abjad.TimeSignature(duration.get_pair())
     leaf = abjad.select.leaf(voice, 0)
     abjad.detach(abjad.TimeSignature, leaf)
     abjad.attach(time_signature, leaf)
@@ -302,7 +302,7 @@ def make_single_staff_score(
         time_signature = abjad.TimeSignature(pair)
     else:
         duration = abjad.get.duration(voice)
-        time_signature = abjad.TimeSignature(duration.pair())
+        time_signature = abjad.TimeSignature(duration.get_pair())
     leaf = abjad.select.leaf(voice, 0)
     abjad.attach(time_signature, leaf)
     if pndfs is not None:

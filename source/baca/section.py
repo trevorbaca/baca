@@ -1045,7 +1045,7 @@ def _extend_beam(leaf: abjad.Leaf) -> None:
     abjad.detach(abjad.StopBeam, leaf)
     if not abjad.get.has_indicator(leaf, abjad.StartBeam):
         abjad.detach(abjad.BeamCount, leaf)
-        left = leaf.written_duration.flag_count()
+        left = leaf.written_duration.get_flag_count()
         beam_count = abjad.BeamCount(left, 1)
         abjad.attach(beam_count, leaf, check_duplicate_indicator=True)
     current_leaf = leaf
@@ -1063,7 +1063,7 @@ def _extend_beam(leaf: abjad.Leaf) -> None:
             abjad.detach(abjad.StartBeam, next_leaf)
             if not abjad.get.has_indicator(next_leaf, abjad.StopBeam):
                 abjad.detach(abjad.BeamCount, next_leaf)
-                right = next_leaf.written_duration.flag_count()
+                right = next_leaf.written_duration.get_flag_count()
                 beam_count = abjad.BeamCount(1, right)
                 abjad.attach(beam_count, next_leaf, check_duplicate_indicator=True)
             return
@@ -1979,7 +1979,7 @@ def _style_framed_notes(score: abjad.Score) -> None:
             duration = abjad.get.duration(leaf)
             leaf.written_duration = abjad.Duration(1, 4)
             multiplier = 4 * duration
-            leaf.multiplier = multiplier.pair()
+            leaf.multiplier = multiplier.get_pair()
             literal = abjad.LilyPondLiteral(r"\once \override Accidental.stencil = ##f")
             abjad.attach(literal, leaf, tag=tag)
             literal = abjad.LilyPondLiteral(r"\once \override Stem.thickness = 6")
@@ -3376,7 +3376,7 @@ def wrap(items) -> TimeSignatureServer:
         if isinstance(item, tuple):
             time_signature = abjad.TimeSignature(item)
         elif isinstance(item, abjad.Duration):
-            pair = item.pair()
+            pair = item.get_pair()
             time_signature = abjad.TimeSignature(pair)
         elif hasattr(item, "pair"):
             pair = getattr(item, "pair")
