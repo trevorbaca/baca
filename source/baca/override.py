@@ -42,7 +42,7 @@ def _override(
         property_path=attribute,
         value=value,
     )
-    string = override.override_string
+    string = override.override_string()
     site = "before"
     if after is True:
         site = "after"
@@ -57,7 +57,7 @@ def _override(
         is_revert=True,
         property_path=attribute,
     )
-    string = override.revert_string
+    string = override.revert_string()
     literal = abjad.LilyPondLiteral(string, site="after")
     abjad.attach(literal, leaves[-1], tag=final_tag)
     wrapper_2 = abjad.get.wrappers(leaves[-1], literal)[-1]

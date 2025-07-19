@@ -252,7 +252,7 @@ class PersistentOverride:
             property_path=self.attribute,
             value=self.value,
         )
-        string = override.override_string
+        string = override.override_string()
         return string
 
     def _get_contributions(self, *, wrapper=None):

@@ -1026,7 +1026,7 @@ def make_bgcs(
 # TODO: remove?
 def make_even_divisions(time_signatures) -> list[abjad.Leaf | abjad.Tuplet]:
     tag = _helpers.function_name(_frame())
-    durations = [_.duration for _ in time_signatures]
+    durations = [_.get_duration() for _ in time_signatures]
     tuplets = rmakers.even_division(durations, [8], tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(tuplets, time_signatures)
     rmakers.beam(voice, tag=tag)
@@ -1137,7 +1137,7 @@ def make_notes(
 ) -> list[abjad.Leaf | abjad.Tuplet]:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     tag = _helpers.function_name(_frame())
-    durations = [_.duration for _ in time_signatures]
+    durations = [_.get_duration() for _ in time_signatures]
     components = rmakers.note(durations, tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
     rmakers.rewrite_meter(voice)
@@ -1156,7 +1156,7 @@ def make_repeat_tied_notes(
     do_not_rewrite_meter: bool = False,
 ) -> list[abjad.Leaf | abjad.Tuplet]:
     tag = _helpers.function_name(_frame())
-    durations = [_.duration for _ in time_signatures]
+    durations = [_.get_duration() for _ in time_signatures]
     leaves_and_tuplets = rmakers.note(durations, tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(leaves_and_tuplets, time_signatures)
     rmakers.beam(_select.plts(voice))
@@ -1185,7 +1185,7 @@ def make_repeated_duration_notes(
     elif isinstance(weights, tuple):
         assert len(weights) == 2
         weights = [abjad.Duration(weights)]
-    durations = [_.duration for _ in time_signatures]
+    durations = [_.get_duration() for _ in time_signatures]
     durations = [sum(durations)]
     weights = abjad.durations(weights)
     durations = abjad.sequence.split(durations, weights, cyclic=True, overhang=True)
@@ -1206,7 +1206,7 @@ def make_repeated_duration_notes(
 def make_rests(time_signatures) -> list[abjad.Rest | abjad.Tuplet]:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     tag = _helpers.function_name(_frame())
-    durations = [_.duration for _ in time_signatures]
+    durations = [_.get_duration() for _ in time_signatures]
     components = rmakers.note(durations, tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
     lts = _select.lts(voice)
@@ -1257,7 +1257,7 @@ def make_rhythm(
         assert isinstance(result, abjad.Component | list), repr(result)
     assert all(isinstance(_, abjad.Component) for _ in components), repr(components)
     if time_signatures is not None:
-        total_duration = sum(_.duration for _ in time_signatures)
+        total_duration = sum(_.get_duration() for _ in time_signatures)
         existing_duration = sum(
             [abjad.get.duration(_) for _ in components if not isinstance(_, abjad.Skip)]
         )
@@ -1340,7 +1340,7 @@ def make_rhythm(
 
 def make_single_attack(time_signatures, duration) -> list[abjad.Leaf | abjad.Tuplet]:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
-    durations = [_.duration for _ in time_signatures]
+    durations = [_.get_duration() for _ in time_signatures]
     tag = _helpers.function_name(_frame())
     duration = abjad.Duration(duration)
     numerator, denominator = duration.pair()
@@ -1366,7 +1366,7 @@ def make_single_attack(time_signatures, duration) -> list[abjad.Leaf | abjad.Tup
 
 def make_tied_notes(time_signatures) -> list[abjad.Note | abjad.Tuplet]:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
-    durations = [_.duration for _ in time_signatures]
+    durations = [_.get_duration() for _ in time_signatures]
     tag = _helpers.function_name(_frame())
     components = rmakers.note(durations, tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
@@ -1388,7 +1388,7 @@ def make_tied_repeated_durations(
 ) -> list[abjad.Leaf | abjad.Tuplet]:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     tag = _helpers.function_name(_frame())
-    durations = [_.duration for _ in time_signatures]
+    durations = [_.get_duration() for _ in time_signatures]
     durations = [sum(durations)]
     weights = abjad.durations(weights)
     durations = abjad.sequence.split(durations, weights, cyclic=True, overhang=True)

@@ -1326,7 +1326,7 @@ def pitch(
         >>> baca.section.set_up_score(score, time_signatures())
         >>> voice = score["Music"]
         >>> time_signatures = time_signatures()
-        >>> durations = [_.duration for _ in time_signatures]
+        >>> durations = [_.get_duration() for _ in time_signatures]
         >>> nested_music = rmakers.note(durations)
         >>> music = abjad.sequence.flatten(nested_music)
         >>> rmakers.written_duration(music, abjad.Duration(1))
