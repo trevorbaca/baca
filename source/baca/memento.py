@@ -258,7 +258,7 @@ class PersistentOverride:
     def _get_contributions(self, *, wrapper=None):
         assert wrapper is not None
         contributions = abjad._contributions.ContributionsBySite()
-        if wrapper.hide() is True:
+        if wrapper.get_hide() is True:
             return contributions
         strings = [self._get_lilypond_format()]
         if self.after:
