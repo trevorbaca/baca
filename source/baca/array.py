@@ -103,9 +103,9 @@ class PitchArray:
         Returns new pitch array.
         """
         assert isinstance(argument, PitchArray), repr(argument)
-        assert self.depth == argument.depth, repr((self.depth, argument.depth))
+        assert self.depth() == argument.depth(), repr((self.depth(), argument.depth()))
         new_array = PitchArray([])
-        for self_row, arg_row in zip(self.rows, argument.rows):
+        for self_row, arg_row in zip(self.rows(), argument.rows()):
             new_row = self_row + arg_row
             new_array.append_row(new_row)
         return new_array
@@ -117,13 +117,13 @@ class PitchArray:
         Returns true or false.
         """
         if isinstance(argument, PitchArrayRow):
-            return argument in self.rows
+            return argument in self.rows()
         elif isinstance(argument, PitchArrayColumn):
-            return argument in self.columns
+            return argument in self.columns()
         elif isinstance(argument, PitchArrayCell):
-            return argument in self.cells
+            return argument in self.cells()
         elif isinstance(argument, abjad.NamedPitch):
-            for pitch in self.pitches:
+            for pitch in self.pitches():
                 if argument == pitch:
                     return True
             return False
@@ -136,7 +136,7 @@ class PitchArray:
 
         Returns new pitch array.
         """
-        return type(self)(self.cell_tokens_by_row)
+        return type(self)(self.cell_tokens_by_row())
 
     def __eq__(self, argument):
         """
@@ -146,7 +146,7 @@ class PitchArray:
         Returns true or false.
         """
         if isinstance(argument, type(self)):
-            for self_row, arg_row in zip(self.rows, argument.rows):
+            for self_row, arg_row in zip(self.rows(), argument.rows()):
                 if not self_row == arg_row:
                     return False
                 return True
@@ -158,7 +158,7 @@ class PitchArray:
 
         Returns pitch array row.
         """
-        return self.rows.__getitem__(argument)
+        return self.rows().__getitem__(argument)
 
     def __hash__(self):
         """
@@ -200,7 +200,7 @@ class PitchArray:
         Returns pitch array.
         """
         assert isinstance(argument, PitchArray), repr(argument)
-        for self_row, arg_row in zip(self.rows, argument.rows):
+        for self_row, arg_row in zip(self.rows(), argument.rows()):
             self_row += arg_row
         return self
 
@@ -216,7 +216,7 @@ class PitchArray:
         """
         Gets repr.
         """
-        return f"{type(self).__name__}(rows={self.rows})"
+        return f"{type(self).__name__}(rows={self.rows()})"
 
     def __setitem__(self, i, argument):
         """
@@ -230,26 +230,23 @@ class PitchArray:
         argument._parent_array = self
         self._rows[i] = argument
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         String representation of pitch array.
-
-        Returns string.
         """
-        return self._two_by_two_format_string
+        return self._two_by_two_format_string()
 
     ### PRIVATE PROPERTIES ###
 
-    @property
     def _two_by_two_format_string(self):
-        return "\n".join([str(_) for _ in self.rows])
+        return "\n".join([str(_) for _ in self.rows()])
 
     ### PRIVATE METHODS ###
 
     def _column_format_width_at_index(self, index):
-        columns = self.columns
+        columns = self.columns()
         column = columns[index]
-        return column._column_format_width
+        return column._column_format_width()
 
     def _format_cells(self, cells):
         result = [str(cell) for cell in cells]
@@ -258,25 +255,22 @@ class PitchArray:
 
     ### PUBLIC PROPERTIES ###
 
-    @property
     def cell_tokens_by_row(self):
         """
         Gets cells tokens of pitch array by row.
 
         Returns tuple.
         """
-        return tuple([row.cell_tokens for row in self.rows])
+        return tuple([row.cell_tokens() for row in self.rows()])
 
-    @property
     def cell_widths_by_row(self):
         """
         Gets cell widths of pitch array by row.
 
         Returns tuple.
         """
-        return tuple([row.cell_widths for row in self.rows])
+        return tuple([row.cell_widths() for row in self.rows()])
 
-    @property
     def cells(self):
         """
         Gets cells of pitch array.
@@ -284,11 +278,10 @@ class PitchArray:
         Returns set.
         """
         cells = set([])
-        for row in self.rows:
-            cells.update(row.cells)
+        for row in self.rows():
+            cells.update(row.cells())
         return cells
 
-    @property
     def columns(self):
         """
         Gets columns of pitch array.
@@ -296,7 +289,7 @@ class PitchArray:
         Returns tuple.
         """
         columns = []
-        cells = abjad.sequence.zip(self.rows, do_not_truncate=True)
+        cells = abjad.sequence.zip(self.rows(), do_not_truncate=True)
         for i, cells in enumerate(cells):
             column = PitchArrayColumn(cells)
             column._parent_array = self
@@ -304,28 +297,23 @@ class PitchArray:
             columns.append(column)
         return tuple(columns)
 
-    @property
-    def depth(self):
+    def depth(self) -> int:
         """
         Gets depth of pitch array.
 
         Defined equal to number of pitch array rows in pitch array.
-
-        Returns nonnegative integer.
         """
-        return len(self.rows)
+        return len(self.rows())
 
-    @property
     def dimensions(self):
         """
         Gets dimensions of pitch array.
 
         Returns pair.
         """
-        return self.depth, self.width
+        return self.depth(), self.width()
 
-    @property
-    def has_voice_crossing(self):
+    def has_voice_crossing(self) -> bool:
         """
         Is true when pitch array has voice crossing.
 
@@ -340,35 +328,31 @@ class PitchArray:
             [  ] [d'] [bqf    ]
             [g'     ] [fs'] [ ]
 
-            >>> array.has_voice_crossing
+            >>> array.has_voice_crossing()
             True
 
-        Returns true or false.
         """
-        for column in self.columns:
-            if column.has_voice_crossing:
+        for column in self.columns():
+            if column.has_voice_crossing():
                 return True
         return False
 
-    @property
     def is_rectangular(self):
         """
         Is true when no rows in pitch array are defective.
 
         Returns true or false.
         """
-        return all(not row.is_defective for row in self.rows)
+        return all(not row.is_defective() for row in self.rows())
 
-    @property
     def pitches(self):
         """
         Gets pitches in pitch array.
 
         Returns tuple.
         """
-        return abjad.sequence.flatten(self.pitches_by_row, depth=-1)
+        return abjad.sequence.flatten(self.pitches_by_row(), depth=-1)
 
-    @property
     def pitches_by_row(self):
         """
         Gets pitches in pitch array by row.
@@ -376,11 +360,10 @@ class PitchArray:
         Returns tuple.
         """
         pitches = []
-        for row in self.rows:
-            pitches.append(row.pitches)
+        for row in self.rows():
+            pitches.append(row.pitches())
         return tuple(pitches)
 
-    @property
     def rows(self):
         """
         Gets rows in pitch array.
@@ -389,42 +372,32 @@ class PitchArray:
         """
         return tuple(self._rows)
 
-    @property
-    def size(self):
+    def size(self) -> int:
         """
         Gets size of pitch array.
 
         Defined equal to the product of depth and width.
-
-        Returns nonnegative integer.
         """
-        return self.depth * self.width
+        return self.depth() * self.width()
 
-    @property
-    def voice_crossing_count(self):
+    def voice_crossing_count(self) -> int:
         """
         Gets voice crossing count of pitch array.
-
-        Returns nonnegative integer.
         """
         count = 0
-        for column in self.columns:
-            if column.has_voice_crossing:
+        for column in self.columns():
+            if column.has_voice_crossing():
                 count += 1
         return count
 
-    @property
-    def weight(self):
+    def weight(self) -> int:
         """
         Gets weight of pitch array.
 
         Defined equal to the sum of the weight of the rows in pitch array.
-
-        Returns nonnegative integer.
         """
-        return sum([row.weight for row in self.rows])
+        return sum([row.weight() for row in self.rows()])
 
-    @property
     def width(self):
         """
         Gets width of pitch array.
@@ -434,7 +407,7 @@ class PitchArray:
         Returns nonnegative integer.
         """
         try:
-            return max([row.width for row in self.rows])
+            return max([row.width() for row in self.rows()])
         except ValueError:
             return 0
 
@@ -448,11 +421,11 @@ class PitchArray:
         """
         assert isinstance(column, PitchArrayColumn), repr(column)
         column._parent_array = self
-        column_depth = column.depth
-        if self.depth < column_depth:
+        column_depth = column.depth()
+        if self.depth() < column_depth:
             self.pad_to_depth(column_depth)
-        self.pad_to_width(self.width)
-        for row, cell in zip(self.rows, column):
+        self.pad_to_width(self.width())
+        for row, cell in zip(self.rows(), column):
             row.append(cell)
 
     def append_row(self, row):
@@ -488,7 +461,7 @@ class PitchArray:
 
         Returns none.
         """
-        for row, pitch_list in zip(self.rows, pitch_lists):
+        for row, pitch_list in zip(self.rows(), pitch_lists):
             row.apply_pitches(pitch_list)
 
     def copy_subarray(self, upper_left_pair, lower_right_pair):
@@ -498,9 +471,9 @@ class PitchArray:
         ..  container:: example
 
             >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
-            >>> array[0].cells[0].append_pitch(0)
-            >>> array[0].cells[1].append_pitch(2)
-            >>> array[1].cells[2].append_pitch(4)
+            >>> array[0].cells()[0].append_pitch(0)
+            >>> array[0].cells()[1].append_pitch(2)
+            >>> array[1].cells()[2].append_pitch(4)
 
             >>> print(array)
             [c'] [d'    ] [  ]
@@ -523,7 +496,7 @@ class PitchArray:
         if not start_j <= stop_j:
             raise Exception("start column must not be greater than stop column.")
         new_array = type(self)([])
-        rows = self.rows
+        rows = self.rows()
         row_indices = range(start_i, stop_i)
         for row_index in row_indices:
             new_row = rows[row_index].copy_subrow(start_j, stop_j)
@@ -679,14 +652,14 @@ class PitchArray:
         array_depth = len(score)
         pitch_array = class_.from_counts(array_depth, array_width)
         items = _make_multiplied_quarter_notes(offsets)
-        for leaf_iterable, pitch_array_row in zip(score, pitch_array.rows):
+        for leaf_iterable, pitch_array_row in zip(score, pitch_array.rows()):
             durations = []
             leaves = abjad.iterate.leaves(leaf_iterable)
             for leaf in leaves:
                 durations.append(abjad.get.duration(leaf))
             parts = abjad.mutate.split(items, durations, cyclic=False)
             part_lengths = [len(part) for part in parts]
-            cells = pitch_array_row.cells
+            cells = pitch_array_row.cells()
             grouped_cells = abjad.sequence.partition_by_counts(
                 cells, part_lengths, cyclic=False, overhang=False
             )
@@ -694,15 +667,15 @@ class PitchArray:
                 pitch_array_row.merge(group)
             leaves = abjad.iterate.leaves(leaf_iterable)
             if populate:
-                for cell, leaf in zip(pitch_array_row.cells, leaves):
-                    cell.pitches.extend(abjad.iterate.pitches(leaf))
+                for cell, leaf in zip(pitch_array_row.cells(), leaves):
+                    cell.pitches().extend(abjad.iterate.pitches(leaf))
         return pitch_array
 
     def has_spanning_cell_over_index(self, index) -> bool:
         """
         Is true when pitch array has one or more spanning cells over ``index``.
         """
-        rows = self.rows
+        rows = self.rows()
         return any(row.has_spanning_cell_over_index(index) for row in rows)
 
     def list_nonspanning_subarrays(self):
@@ -746,10 +719,10 @@ class PitchArray:
         Returns list.
         """
         unspanned_indices = []
-        for i in range(self.width + 1):
+        for i in range(self.width() + 1):
             if not self.has_spanning_cell_over_index(i):
                 unspanned_indices.append(i)
-        array_depth = self.depth
+        array_depth = self.depth()
         subarrays = []
         pairs = abjad.sequence.nwise(unspanned_indices)
         for start_column, stop_column in pairs:
@@ -765,10 +738,10 @@ class PitchArray:
 
         Returns none.
         """
-        self_depth = self.depth
+        self_depth = self.depth()
         if depth < self_depth:
             raise Exception("pad depth must be not less than array depth.")
-        self_width = self.width
+        self_width = self.width()
         missing_rows = depth - self_depth
         for i in range(missing_rows):
             row = PitchArrayRow([])
@@ -781,10 +754,10 @@ class PitchArray:
 
         Returns none.
         """
-        self_width = self.width
+        self_width = self.width()
         if width < self_width:
             raise Exception("pad width must not be less than array width.")
-        for row in self.rows:
+        for row in self.rows():
             row.pad_to_width(width)
 
     def pop_column(self, column_index):
@@ -793,9 +766,9 @@ class PitchArray:
 
         Returns pitch array column.
         """
-        column = self.columns[column_index]
+        column = self.columns()[column_index]
         column._parent_array = None
-        for cell in column.cells:
+        for cell in column.cells():
             cell.withdraw()
         return column
 
@@ -815,7 +788,7 @@ class PitchArray:
 
         Returns none.
         """
-        if row not in self.rows:
+        if row not in self.rows():
             raise Exception("row not in array.")
         self._rows.remove(row)
         row._parent_array = None
@@ -870,7 +843,7 @@ class PitchArray:
         """
         staff, score = abjad.Staff(name="Staff"), abjad.Score(name="Score")
         score.append(staff)
-        for row in self.rows:
+        for row in self.rows():
             container, time_signature = row.to_measure(cell_duration_denominator)
             staff.append(container)
             leaf = abjad.select.leaf(container, 0)
@@ -896,43 +869,43 @@ class PitchArrayCell:
         >>> cell
         PitchArrayCell(width=2)
 
-        >>> cell.column_indices
+        >>> cell.column_indices()
         (1, 2)
 
-        >>> cell.indices
+        >>> cell.indices()
         (0, (1, 2))
 
-        >>> cell.is_first_in_row
+        >>> cell.is_first_in_row()
         False
 
-        >>> cell.is_final_in_row
+        >>> cell.is_final_in_row()
         False
 
-        >>> cell.next
+        >>> cell.next()
         PitchArrayCell(width=1)
 
-        >>> cell.parent_array
+        >>> cell.parent_array()
         PitchArray(rows=(PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(width=2), PitchArrayCell(width=1))), PitchArrayRow(cells=(PitchArrayCell(width=2), PitchArrayCell(width=1), PitchArrayCell(width=1)))))
 
-        >>> cell.parent_column
+        >>> cell.parent_column()
         PitchArrayColumn(cells=(PitchArrayCell(width=2), PitchArrayCell(width=2)))
 
-        >>> cell.parent_row
+        >>> cell.parent_row()
         PitchArrayRow(cells=(PitchArrayCell(width=1), PitchArrayCell(width=2), PitchArrayCell(width=1)))
 
-        >>> cell.pitches is None
+        >>> cell.pitches() is None
         True
 
-        >>> cell.previous
+        >>> cell.previous()
         PitchArrayCell(width=1)
 
-        >>> cell.row_index
+        >>> cell.row_index()
         0
 
-        >>> cell.item
+        >>> cell.item()
         2
 
-        >>> cell.width
+        >>> cell.width()
         2
 
     ..  container:: example
@@ -1025,80 +998,70 @@ class PitchArrayCell:
         """
         Gets repr of pitch array cell.
         """
-        if self.pitches:
-            pitches = " ".join([_.name for _ in self.pitches or []])
-            return f'PitchArrayCell(pitches="{pitches}", width={self.width})'
+        if self.pitches():
+            pitches = " ".join([_.name for _ in self.pitches() or []])
+            return f'PitchArrayCell(pitches="{pitches}", width={self.width()})'
         else:
-            return f"PitchArrayCell(width={self.width})"
+            return f"PitchArrayCell(width={self.width()})"
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         Gets string representation of pitch array cell.
-
-        Returns string.
         """
-        return self._format_string
+        return self._format_string()
 
     ### PRIVATE PROPERTIES ###
 
-    @property
     def _composite_column_width(self):
         composite_column_width = 0
-        columns = self.parent_array.columns
-        for column_index in self.column_indices:
-            composite_column_width += columns[column_index]._column_format_width
+        columns = self.parent_array().columns()
+        for column_index in self.column_indices():
+            composite_column_width += columns[column_index]._column_format_width()
         return composite_column_width
 
-    @property
     def _conditional_pitch_string(self):
-        if self.pitches:
-            return self._pitch_string
+        if self.pitches():
+            return self._pitch_string()
         else:
             return " "
 
-    @property
     def _format_pitch_width_string(self):
-        if self.pitches:
-            if self.width == 1:
-                return self._pitch_string
+        if self.pitches():
+            if self.width() == 1:
+                return self._pitch_string()
             else:
-                return f"{self._pitch_string} {self._width_string}"
+                return f"{self._pitch_string()} {self._width_string()}"
         else:
-            return self._width_string
+            return self._width_string()
 
-    @property
     def _format_row_column_repr_string(self):
-        return self._format_pitch_width_string
+        return self._format_pitch_width_string()
 
-    @property
     def _format_string(self):
-        if self.parent_column is not None:
-            if self._is_final_cell_in_row:
-                cell_width = self._composite_column_width - 2
+        if self.parent_column() is not None:
+            if self._is_final_cell_in_row():
+                cell_width = self._composite_column_width() - 2
             else:
-                cell_width = self._composite_column_width - 3
-            return f"[{self._conditional_pitch_string.ljust(cell_width)}]"
+                cell_width = self._composite_column_width() - 3
+            return f"[{self._conditional_pitch_string().ljust(cell_width)}]"
         else:
-            return f"[{self._conditional_pitch_string}]"
+            return f"[{self._conditional_pitch_string()}]"
 
-    @property
     def _is_final_cell_in_row(self):
-        if self.parent_row is not None:
-            if self.column_indices[-1] == (self.parent_row.width - 1):
+        if self.parent_row() is not None:
+            if self.column_indices()[-1] == (self.parent_row().width() - 1):
                 return True
             return False
         return True
 
-    @property
     def _pitch_string(self):
-        if self.pitches:
-            return " ".join([pitch.name for pitch in self.pitches])
+        if self.pitches():
+            return " ".join([pitch.name for pitch in self.pitches()])
         else:
             return ""
 
-    @property
     def _width_string(self):
-        return f"x{self.width}"
+        return f"x{self.width()}"
 
     ### PRIVATE METHODS ###
 
@@ -1125,7 +1088,7 @@ class PitchArrayCell:
                 pitch_token, width = cell_token
                 pitches = self._parse_pitch_token(pitch_token)
         elif isinstance(cell_token, type(self)):
-            pitches, width = cell_token.pitches, cell_token.width
+            pitches, width = cell_token.pitches(), cell_token.width()
         else:
             raise Exception("cell item must be integer width, pitch or pair.")
         return pitches, width
@@ -1146,13 +1109,12 @@ class PitchArrayCell:
         return pitches
 
     def _withdraw(self):
-        parent_row = self.parent_row
+        parent_row = self.parent_row()
         parent_row.remove(self)
         return self
 
     ### PUBLIC PROPERTIES ###
 
-    @property
     def column_indices(self):
         """
         Gets column start and stop indices.
@@ -1163,7 +1125,7 @@ class PitchArrayCell:
 
             >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
             >>> cell = array[0][1]
-            >>> cell.column_indices
+            >>> cell.column_indices()
             (1, 2)
 
         ..  container:: example
@@ -1171,18 +1133,17 @@ class PitchArrayCell:
             Gets column start and stop indices of cell outside array:
 
             >>> cell = baca.array.PitchArrayCell()
-            >>> cell.column_indices is None
+            >>> cell.column_indices() is None
             True
 
         Returns tuple or none.
         """
-        if self.parent_row is not None:
-            if self.width == 1:
-                return (self.column_start_index,)
-            elif 1 < self.width:
-                return self.column_start_index, self.column_stop_index
+        if self.parent_row() is not None:
+            if self.width() == 1:
+                return (self.column_start_index(),)
+            elif 1 < self.width():
+                return self.column_start_index(), self.column_stop_index()
 
-    @property
     def column_start_index(self):
         """
         Gets column start index.
@@ -1193,7 +1154,7 @@ class PitchArrayCell:
 
             >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
             >>> cell = array[0][1]
-            >>> cell.column_start_index
+            >>> cell.column_start_index()
             1
 
         ..  container:: example
@@ -1201,20 +1162,19 @@ class PitchArrayCell:
             Gets column start index of cell outside array:
 
             >>> cell = baca.array.PitchArrayCell()
-            >>> cell.column_start_index is None
+            >>> cell.column_start_index() is None
             True
 
         Returns nonnegative integer or none.
         """
-        if self.parent_row is None:
+        if self.parent_row() is None:
             return
         start_index = 0
-        for cell in self.parent_row.cells:
+        for cell in self.parent_row().cells():
             if cell is self:
                 return start_index
-            start_index += cell.width
+            start_index += cell.width()
 
-    @property
     def column_stop_index(self):
         """
         Gets column stop index.
@@ -1225,7 +1185,7 @@ class PitchArrayCell:
 
             >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
             >>> cell = array[0][1]
-            >>> cell.column_stop_index
+            >>> cell.column_stop_index()
             2
 
         ..  container:: example
@@ -1233,15 +1193,14 @@ class PitchArrayCell:
             Gets column stop index of cell outside array:
 
             >>> cell = baca.array.PitchArrayCell()
-            >>> cell.column_stop_index is None
+            >>> cell.column_stop_index() is None
             True
 
         Returns nonnegative integer or none.
         """
-        if self.parent_row is not None:
-            return self.column_start_index + self.width - 1
+        if self.parent_row() is not None:
+            return self.column_start_index() + self.width() - 1
 
-    @property
     def indices(self):
         """
         Gets indices.
@@ -1256,7 +1215,7 @@ class PitchArrayCell:
 
             >>> for row in array:
             ...     for cell in row:
-            ...         cell.indices
+            ...         cell.indices()
             ...
             (0, (0,))
             (0, (1, 2))
@@ -1267,10 +1226,9 @@ class PitchArrayCell:
 
         Returns pair.
         """
-        return self.row_index, self.column_indices
+        return self.row_index(), self.column_indices()
 
-    @property
-    def is_final_in_row(self):
+    def is_final_in_row(self) -> bool:
         """
         Is true when pitch array cell is last in row.
 
@@ -1284,7 +1242,7 @@ class PitchArrayCell:
 
             >>> for row in array:
             ...     for cell in row:
-            ...         cell, cell.is_final_in_row
+            ...         cell, cell.is_final_in_row()
             ...
             (PitchArrayCell(width=1), False)
             (PitchArrayCell(width=2), False)
@@ -1295,13 +1253,12 @@ class PitchArrayCell:
 
         Returns true or false.
         """
-        if self.parent_row is not None:
-            if self.column_indices[-1] == self.parent_row.width - 1:
+        if self.parent_row() is not None:
+            if self.column_indices()[-1] == self.parent_row().width() - 1:
                 return True
         return False
 
-    @property
-    def is_first_in_row(self):
+    def is_first_in_row(self) -> bool:
         """
         Is true when pitch array cell is first in row.
 
@@ -1315,7 +1272,7 @@ class PitchArrayCell:
 
             >>> for row in array:
             ...     for cell in row:
-            ...         cell, cell.is_first_in_row
+            ...         cell, cell.is_first_in_row()
             ...
             (PitchArrayCell(width=1), True)
             (PitchArrayCell(width=2), False)
@@ -1324,68 +1281,68 @@ class PitchArrayCell:
             (PitchArrayCell(width=1), False)
             (PitchArrayCell(width=1), False)
 
-        Returns true or false.
         """
-        if self.parent_row is not None:
-            if self.column_indices[0] == 0:
+        if self.parent_row() is not None:
+            if self.column_indices()[0] == 0:
                 return True
         return False
 
-    @property
     def item(self):
         """
         Gets item.
 
         ..  container:: example
 
-            >>> baca.array.PitchArrayCell(width=1).item
+            >>> baca.array.PitchArrayCell(width=1).item()
             1
 
-            >>> baca.array.PitchArrayCell(width=2).item
+            >>> baca.array.PitchArrayCell(width=2).item()
             2
 
-            >>> baca.array.PitchArrayCell("c'").item
+            >>> baca.array.PitchArrayCell("c'").item()
             ('c', 4)
 
-            >>> baca.array.PitchArrayCell("c'", width=2).item
+            >>> baca.array.PitchArrayCell("c'", width=2).item()
             (('c', 4), 2)
 
-            >>> baca.array.PitchArrayCell("c' d'").item
+            >>> baca.array.PitchArrayCell("c' d'").item()
             [('c', 4), ('d', 4)]
 
-            >>> baca.array.PitchArrayCell("c' d'", width=2).item
+            >>> baca.array.PitchArrayCell("c' d'", width=2).item()
             ([('c', 4), ('d', 4)], 2)
 
         """
-        if not self.pitches:
-            return self.width
-        elif len(self.pitches) == 1:
-            if self.width == 1:
+        if not self.pitches():
+            return self.width()
+        elif len(self.pitches()) == 1:
+            if self.width() == 1:
                 return (
-                    self.pitches[0].pitch_class.name,
-                    self.pitches[0].octave.number,
+                    self.pitches()[0].pitch_class.name,
+                    self.pitches()[0].octave.number,
                 )
             else:
                 return (
-                    (self.pitches[0].pitch_class.name, self.pitches[0].octave.number),
-                    self.width,
+                    (
+                        self.pitches()[0].pitch_class.name,
+                        self.pitches()[0].octave.number,
+                    ),
+                    self.width(),
                 )
         else:
-            if self.width == 1:
+            if self.width() == 1:
                 return [
                     (pitch.pitch_class.name, pitch.octave.number)
-                    for pitch in self.pitches
+                    for pitch in self.pitches()
                 ]
             else:
                 return (
                     [
                         (pitch.pitch_class.name, pitch.octave.number)
-                        for pitch in self.pitches
+                        for pitch in self.pitches()
                     ],
-                    self.width,
+                    self.width(),
                 )
 
-    @property
     def next(self):
         """
         Gets next pitch array cell in row after this pitch array cell.
@@ -1399,8 +1356,8 @@ class PitchArrayCell:
             [     ] [ ] [ ]
 
             >>> for row in array:
-            ...     for cell in row.cells[:-1]:
-            ...         cell, cell.next
+            ...     for cell in row.cells()[:-1]:
+            ...         cell, cell.next()
             ...
             (PitchArrayCell(width=1), PitchArrayCell(width=2))
             (PitchArrayCell(width=2), PitchArrayCell(width=1))
@@ -1409,38 +1366,35 @@ class PitchArrayCell:
 
         Returns pitch array cell.
         """
-        if self.parent_row is not None:
-            if self.is_final_in_row:
+        if self.parent_row() is not None:
+            if self.is_final_in_row():
                 raise Exception("cell is last in row.")
-            return self.parent_row[self.column_indices[-1] + 1]
+            return self.parent_row()[self.column_indices()[-1] + 1]
         raise Exception("cell has no parent row.")
 
-    @property
     def parent_array(self):
         """
         Gets parent array.
 
         Return pitch array.
         """
-        parent_row = self.parent_row
+        parent_row = self.parent_row()
         if parent_row is not None:
-            return parent_row.parent_array
+            return parent_row.parent_array()
         return None
 
-    @property
     def parent_column(self):
         """
         Gets parent column.
 
         Returns pitch array column.
         """
-        parent_array = self.parent_array
+        parent_array = self.parent_array()
         if parent_array is not None:
-            start_column_index = self.column_indices[0]
-            return parent_array.columns[start_column_index]
+            start_column_index = self.column_indices()[0]
+            return parent_array.columns()[start_column_index]
         return None
 
-    @property
     def parent_row(self):
         """
         Gets parent row.
@@ -1449,7 +1403,6 @@ class PitchArrayCell:
         """
         return self._parent_row
 
-    @property
     def pitches(self):
         """
         Gets and sets pitches of pitch array cell.
@@ -1458,8 +1411,7 @@ class PitchArrayCell:
         """
         return self._pitches
 
-    @pitches.setter
-    def pitches(self, pitches):
+    def set_pitches(self, pitches):
         if pitches is None:
             self._pitches = None
             return
@@ -1469,7 +1421,6 @@ class PitchArrayCell:
         pitches = [abjad.NamedPitch(_) for _ in pitches]
         self._pitches = pitches
 
-    @property
     def previous(self):
         """
         Gets pitch array cell in row prior to this pitch array cell.
@@ -1483,8 +1434,8 @@ class PitchArrayCell:
             [     ] [ ] [ ]
 
             >>> for row in array:
-            ...     for cell in row.cells[1:]:
-            ...         cell, cell.previous
+            ...     for cell in row.cells()[1:]:
+            ...         cell, cell.previous()
             ...
             (PitchArrayCell(width=2), PitchArrayCell(width=1))
             (PitchArrayCell(width=1), PitchArrayCell(width=2))
@@ -1493,36 +1444,29 @@ class PitchArrayCell:
 
         Returns pitch array cell.
         """
-        if self.parent_row is not None:
-            if self.is_first_in_row:
+        if self.parent_row() is not None:
+            if self.is_first_in_row():
                 raise Exception("cell is first in row.")
-            return self.parent_row[self.column_indices[0] - 1]
+            return self.parent_row()[self.column_indices()[0] - 1]
         raise Exception("cell has no parent row.")
 
-    @property
-    def row_index(self):
+    def row_index(self) -> int | None:
         """
         Gets row index.
-
-        Returns nonnegative integer or none.
         """
-        parent_row = self.parent_row
+        parent_row = self.parent_row()
         if parent_row is not None:
-            return parent_row.row_index
+            return parent_row.row_index()
         return None
 
-    @property
-    def weight(self):
+    def weight(self) -> int:
         """
         Gets weight.
 
         Weight defined equal to number of pitches in cell.
-
-        Returns nonnegative integer.
         """
-        return len(self.pitches or [])
+        return len(self.pitches() or [])
 
-    @property
     def width(self):
         """
         Gets width.
@@ -1541,7 +1485,7 @@ class PitchArrayCell:
 
         Returns none.
         """
-        if self.pitches is None:
+        if self.pitches() is None:
             self._pitches = []
         pitch = abjad.NamedPitch(pitch)
         self._pitches.append(pitch)
@@ -1553,25 +1497,25 @@ class PitchArrayCell:
         ..  container:: example
 
             >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
-            >>> array[0].cells[0].append_pitch(0)
-            >>> array[0].cells[1].append_pitch(2)
-            >>> array[0].cells[1].append_pitch(4)
+            >>> array[0].cells()[0].append_pitch(0)
+            >>> array[0].cells()[1].append_pitch(2)
+            >>> array[0].cells()[1].append_pitch(4)
 
             >>> print(array)
             [c'] [d' e'    ] [ ]
             [          ] [ ] [ ]
 
-            >>> array[0].cells[0].matches_cell(array[0].cells[0])
+            >>> array[0].cells()[0].matches_cell(array[0].cells()[0])
             True
 
-            >>> array[0].cells[0].matches_cell(array[0].cells[1])
+            >>> array[0].cells()[0].matches_cell(array[0].cells()[1])
             False
 
         Returns true or false.
         """
         if isinstance(argument, type(self)):
-            if self.pitches == argument.pitches:
-                if self.width == argument.width:
+            if self.pitches() == argument.pitches():
+                if self.width() == argument.width():
                     return True
         return False
 
@@ -1593,10 +1537,10 @@ class PitchArrayColumn:
         [  ] [d'] [bqf    ]
         [g'     ] [fs'] [ ]
 
-        >>> array.columns[0]
+        >>> array.columns()[0]
         PitchArrayColumn(cells=(PitchArrayCell(width=1), PitchArrayCell(pitches="g'", width=2)))
 
-        >>> print(array.columns[0])
+        >>> print(array.columns()[0])
         [  ]
         [g'     ]
 
@@ -1619,13 +1563,13 @@ class PitchArrayColumn:
 
     def __eq__(self, argument):
         """
-        Is true when ``argument`` is a pitch array column with pitch array cells equal to
-        those of this pitch array column.
+        Is true when ``argument`` is a pitch array column with pitch array
+        cells equal to those of this pitch array column.
 
         Returns true or false.
         """
         if isinstance(argument, PitchArrayColumn):
-            for self_cell, arg_cell in zip(self.cells, argument.cells):
+            for self_cell, arg_cell in zip(self.cells(), argument.cells()):
                 if not self_cell == arg_cell:
                     return False
             return True
@@ -1637,7 +1581,7 @@ class PitchArrayColumn:
 
         Returns pitch array cell or slice or pitch array cells.
         """
-        return self.cells.__getitem__(argument)
+        return self.cells().__getitem__(argument)
 
     def __hash__(self):
         """
@@ -1659,7 +1603,7 @@ class PitchArrayColumn:
         """
         Gets repr.
         """
-        return f"{type(self).__name__}(cells={self.cells})"
+        return f"{type(self).__name__}(cells={self.cells()})"
 
     def __str__(self):
         """
@@ -1667,7 +1611,7 @@ class PitchArrayColumn:
 
         Returns string.
         """
-        result = [str(cell) for cell in self.cells]
+        result = [str(cell) for cell in self.cells()]
         result = "\n".join(result)
         return result
 
@@ -1675,8 +1619,8 @@ class PitchArrayColumn:
 
     def _cells_starting_at_index(self, index):
         result = []
-        for cell in self.cells:
-            if cell.column_indices[0] == index:
+        for cell in self.cells():
+            if cell.column_indices()[0] == index:
                 result.append(cell)
         result = tuple(result)
         return result
@@ -1711,97 +1655,86 @@ class PitchArrayColumn:
 
         Returns none.
         """
-        for cell in self.cells:
+        for cell in self.cells():
             cell.pitch = None
 
     ### PRIVATE PROPERTIES ###
 
-    @property
     def _column_format_max_string_width(self):
-        strings = self._start_cell_conditional_pitch_strings
+        strings = self._start_cell_conditional_pitch_strings()
         if strings:
             return max([len(string) for string in strings])
         else:
             return 0
 
-    @property
     def _column_format_width(self):
         format_width = 0
-        if self._has_closed_cell_on_left:
+        if self._has_closed_cell_on_left():
             format_width += 1
-        max_string_width = self._column_format_max_string_width
+        max_string_width = self._column_format_max_string_width()
         format_width += max_string_width
-        if self._has_closed_cell_on_right:
+        if self._has_closed_cell_on_right():
             format_width += 1
-        if not self._is_final_column_in_array:
+        if not self._is_final_column_in_array():
             format_width += 1
         return format_width
 
-    @property
     def _format_contents_string(self):
         result = []
-        for cell in self.cells:
-            result.append(cell._format_row_column_repr_string)
+        for cell in self.cells():
+            result.append(cell._format_row_column_repr_string())
         result = ", ".join(result)
         return result
 
-    @property
     def _has_closed_cell_on_left(self):
-        if self.column_index is not None:
-            for cell in self.cells:
-                if cell.column_indices[0] == self.column_index:
+        if self.column_index() is not None:
+            for cell in self.cells():
+                if cell.column_indices()[0] == self.column_index():
                     return True
             return False
         return True
 
-    @property
     def _has_closed_cell_on_right(self):
-        if self.column_index is not None:
-            for cell in self.cells:
-                if cell.column_indices[-1] == self.column_index:
+        if self.column_index() is not None:
+            for cell in self.cells():
+                if cell.column_indices()[-1] == self.column_index():
                     return True
             return True
         return True
 
-    @property
     def _is_final_column_in_array(self):
-        if self.parent_array is not None:
-            if self.column_index == (self.parent_array.width - 1):
+        if self.parent_array() is not None:
+            if self.column_index() == (self.parent_array().width() - 1):
                 return True
         return False
 
-    @property
     def _start_cell_conditional_pitch_strings(self):
-        result = [cell._conditional_pitch_string for cell in self._start_cells]
+        result = [cell._conditional_pitch_string() for cell in self._start_cells()]
         result = tuple(result)
         return result
 
-    @property
     def _start_cells(self):
-        column_index = self.column_index
+        column_index = self.column_index()
         return self._cells_starting_at_index(column_index)
 
     ### PUBLIC PROPERTIES ###
 
-    @property
     def cell_tokens(self):
         """
         Gets cells items of pitch array column.
 
         Returns tuple.
         """
-        return tuple([cell.item for cell in self.cells])
+        return tuple([cell.item() for cell in self.cells()])
 
-    @property
     def cell_widths(self):
         """
         Gets cell widths of pitch array column.
 
         Returns tuple.
         """
-        return tuple([cell.width for cell in self.cells])
+        return tuple([cell.width() for cell in self.cells()])
 
-    @property
     def cells(self):
         """
         Gets cells of pitch array column.
@@ -1810,37 +1743,29 @@ class PitchArrayColumn:
         """
         return tuple(self._cells)
 
-    @property
-    def column_index(self):
+    def column_index(self) -> int:
         """
         Gets column index of pitch array column.
-
-        Returns nonnegative integer.
         """
         return self._column_index
 
-    @property
-    def depth(self):
+    def depth(self) -> int:
         """
         Gets depth of pitch array column.
 
         Defined equal to number of pitch array cells in pitch array column.
-
-        Returns nonnegative integer.
         """
-        return len(self.cells)
+        return len(self.cells())
 
-    @property
     def dimensions(self):
         """
         Gets dimensions of pitch array column.
 
         Returns pair.
         """
-        return self.depth, self.width
+        return self.depth(), self.width()
 
-    @property
-    def has_voice_crossing(self):
+    def has_voice_crossing(self) -> bool:
         """
         Is true when pitch array column has voice crossing.
 
@@ -1855,36 +1780,33 @@ class PitchArrayColumn:
             [  ] [d'] [bqf    ]
             [g'     ] [fs'] [ ]
 
-            >>> for column in array.columns:
-            ...     column.has_voice_crossing
+            >>> for column in array.columns():
+            ...     column.has_voice_crossing()
             ...
             False
             True
             True
             False
 
-        Returns true or false.
         """
-        for upper, lower in abjad.sequence.nwise(self.cells):
-            lower_pitches = lower.pitches or ()
+        for upper, lower in abjad.sequence.nwise(self.cells()):
+            lower_pitches = lower.pitches() or ()
             for lower_pitch in lower_pitches:
-                upper_pitches = upper.pitches or ()
+                upper_pitches = upper.pitches() or ()
                 for upper_pitch in upper_pitches:
                     if upper_pitch < lower_pitch:
                         return True
         return False
 
-    @property
-    def is_defective(self):
+    def is_defective(self) -> bool:
         """
-        Is true when pitch array column depth does not equal depth of parent array.
-
-        Returns true or false.
+        Is true when pitch array column depth does not equal depth of parent
+        array.
         """
-        if self.parent_array is not None:
-            return not self.depth == self.parent_array.depth
+        if self.parent_array() is not None:
+            return not self.depth() == self.parent_array().depth()
+        return False
 
-    @property
     def parent_array(self):
         """
         Gets parent array that houses pitch array column.
@@ -1893,7 +1815,6 @@ class PitchArrayColumn:
         """
         return self._parent_array
 
-    @property
     def pitches(self):
         """
         Gets pitches in pitch array column.
@@ -1901,11 +1822,10 @@ class PitchArrayColumn:
         Returns tuple.
         """
         pitches = []
-        for cell in self.cells:
-            pitches.extend(cell.pitches or [])
+        for cell in self.cells():
+            pitches.extend(cell.pitches() or [])
         return tuple(pitches)
 
-    @property
     def start_cells(self):
         """
         Gets start cells in pitch array column.
@@ -1921,8 +1841,8 @@ class PitchArrayColumn:
             [  ] [d'] [bf bqf    ]
             [g'     ] [fs'   ] [ ]
 
-            >>> for column in array.columns:
-            ...     column.start_cells
+            >>> for column in array.columns():
+            ...     column.start_cells()
             ...
             [PitchArrayCell(width=1), PitchArrayCell(pitches="g'", width=2)]
             [PitchArrayCell(pitches="d'", width=1)]
@@ -1932,13 +1852,12 @@ class PitchArrayColumn:
         Returns list.
         """
         start_cells = []
-        column_index = self.column_index
-        for cell in self.cells:
-            if cell.column_indices[0] == column_index:
+        column_index = self.column_index()
+        for cell in self.cells():
+            if cell.column_indices()[0] == column_index:
                 start_cells.append(cell)
         return list(start_cells)
 
-    @property
     def start_pitches(self):
         """
         Gets start pitches in pitch array column.
@@ -1950,8 +1869,8 @@ class PitchArrayColumn:
             ...     [(7, 2), (6, 1), 1],
             ... ])
 
-            >>> for column in array.columns:
-            ...     column.start_pitches
+            >>> for column in array.columns():
+            ...     column.start_pitches()
             ...
             [NamedPitch("g'")]
             [NamedPitch("d'")]
@@ -1961,12 +1880,11 @@ class PitchArrayColumn:
         Returns list.
         """
         start_pitches = []
-        for cell in self.start_cells:
-            if cell.pitches is not None:
-                start_pitches.extend(cell.pitches)
+        for cell in self.start_cells():
+            if cell.pitches() is not None:
+                start_pitches.extend(cell.pitches())
         return list(start_pitches)
 
-    @property
     def stop_cells(self):
         """
         Gets stop cells in pitch array column.
@@ -1974,13 +1892,12 @@ class PitchArrayColumn:
         Returns tuple.
         """
         start_cells = []
-        column_index = self.column_index
-        for cell in self.cells:
-            if cell.column_indices[-1] == column_index:
+        column_index = self.column_index()
+        for cell in self.cells():
+            if cell.column_indices()[-1] == column_index:
                 start_cells.append(cell)
         return tuple(start_cells)
 
-    @property
     def stop_pitches(self):
         """
         Gets stop pitches in pitch array column.
@@ -1988,23 +1905,19 @@ class PitchArrayColumn:
         Returns tuple.
         """
         stop_pitches = []
-        for cell in self.stop_cells:
-            stop_pitches.extend(cell.pitches or [])
+        for cell in self.stop_cells():
+            stop_pitches.extend(cell.pitches() or [])
         return tuple(stop_pitches)
 
-    @property
-    def weight(self):
+    def weight(self) -> int:
         """
         Gets weight of pitch array column.
 
         Defined equal to the sum of the weight of pitch array cells in pitch array
         column.
-
-        Returns nonnegative integer.
         """
-        return sum([cell.weight for cell in self.cells])
+        return sum([cell.weight() for cell in self.cells()])
 
-    @property
     def width(self):
         """
         Gets width of pitch array column.
@@ -2015,7 +1928,7 @@ class PitchArrayColumn:
 
         Returns 1 or 0.
         """
-        if 1 <= len(self.cells):
+        if 1 <= len(self.cells()):
             return 1
         else:
             return 0
@@ -2030,9 +1943,9 @@ class PitchArrayRow:
         A pitch array row:
 
         >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
-        >>> array[0].cells[0].append_pitch(0)
-        >>> array[0].cells[1].append_pitch(2)
-        >>> array[1].cells[2].append_pitch(4)
+        >>> array[0].cells()[0].append_pitch(0)
+        >>> array[0].cells()[1].append_pitch(2)
+        >>> array[1].cells()[2].append_pitch(4)
         >>> print(array)
         [c'] [d'    ] [  ]
         [       ] [ ] [e']
@@ -2040,13 +1953,13 @@ class PitchArrayRow:
         >>> array[0]
         PitchArrayRow(cells=(PitchArrayCell(pitches="c'", width=1), PitchArrayCell(pitches="d'", width=2), PitchArrayCell(width=1)))
 
-        >>> array[0].cell_widths
+        >>> array[0].cell_widths()
         (1, 2, 1)
 
-        >>> array[0].dimensions
+        >>> array[0].dimensions()
         (1, 4)
 
-        >>> array[0].pitches
+        >>> array[0].pitches()
         (NamedPitch("c'"), NamedPitch("d'"))
 
     """
@@ -2074,9 +1987,9 @@ class PitchArrayRow:
         ..  container:: example
 
             >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
-            >>> array[0].cells[0].append_pitch(0)
-            >>> array[0].cells[1].append_pitch(2)
-            >>> array[1].cells[2].append_pitch(4)
+            >>> array[0].cells()[0].append_pitch(0)
+            >>> array[0].cells()[1].append_pitch(2)
+            >>> array[1].cells()[2].append_pitch(4)
 
             >>> print(array)
             [c'] [d'    ] [  ]
@@ -2095,8 +2008,8 @@ class PitchArrayRow:
         self_copy = copy.copy(self)
         arg_copy = copy.copy(argument)
         new_row = PitchArrayRow([])
-        new_row.extend(self_copy.cells)
-        new_row.extend(arg_copy.cells)
+        new_row.extend(self_copy.cells())
+        new_row.extend(arg_copy.cells())
         return new_row
 
     def __copy__(self):
@@ -2106,7 +2019,7 @@ class PitchArrayRow:
         Returns new pitch array row.
         """
         new_cells = []
-        for cell in self.cells:
+        for cell in self.cells():
             new_cell = copy.copy(cell)
             new_cells.append(new_cell)
         return PitchArrayRow(new_cells)
@@ -2119,7 +2032,7 @@ class PitchArrayRow:
         Returns true or false.
         """
         if isinstance(argument, PitchArrayRow):
-            for self_cell, arg_cell in zip(self.cells, argument.cells):
+            for self_cell, arg_cell in zip(self.cells(), argument.cells()):
                 if not self_cell.matches_cell(arg_cell):
                     return False
                 return True
@@ -2132,18 +2045,18 @@ class PitchArrayRow:
         Returns pitch array cell or slice of pitch array cells.
         """
         if isinstance(argument, int):
-            if 0 <= argument < self.width:
+            if 0 <= argument < self.width():
                 accumulated_width = 0
-                for cell in self.cells:
-                    total_width = accumulated_width + cell.width
+                for cell in self.cells():
+                    total_width = accumulated_width + cell.width()
                     if accumulated_width <= argument < total_width:
                         return cell
                     accumulated_width = total_width
-            elif 0 < abs(argument) < self.width:
+            elif 0 < abs(argument) < self.width():
                 accumulated_width = 0
                 abs_arg = abs(argument)
-                for cell in reversed(self.cells):
-                    total_width = accumulated_width + cell.width
+                for cell in reversed(self.cells()):
+                    total_width = accumulated_width + cell.width()
                     if accumulated_width < abs_arg <= total_width:
                         return cell
                     accumulated_width = total_width
@@ -2151,7 +2064,7 @@ class PitchArrayRow:
                 raise Exception("no such cell in row.")
         elif isinstance(argument, slice):
             cells = []
-            start, stop, step = argument.indices(self.width)
+            start, stop, step = argument.indices(self.width())
             for cell_index in range(start, stop, step):
                 cell = self[cell_index]
                 if len(cells) == 0:
@@ -2179,9 +2092,9 @@ class PitchArrayRow:
         ..  container:: example
 
             >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
-            >>> array[0].cells[0].append_pitch(0)
-            >>> array[0].cells[1].append_pitch(2)
-            >>> array[1].cells[2].append_pitch(4)
+            >>> array[0].cells()[0].append_pitch(0)
+            >>> array[0].cells()[1].append_pitch(2)
+            >>> array[1].cells()[2].append_pitch(4)
 
             >>> print(array)
             [c'] [d'    ] [  ]
@@ -2198,7 +2111,7 @@ class PitchArrayRow:
         if not isinstance(argument, PitchArrayRow):
             raise Exception("must be pitch array row.")
         copy_arg = copy.copy(argument)
-        self.extend(copy_arg.cells)
+        self.extend(copy_arg.cells())
         return self
 
     def __iter__(self):
@@ -2207,7 +2120,7 @@ class PitchArrayRow:
 
         Returns generator.
         """
-        return iter(self.cells)
+        return iter(self.cells())
 
     def __len__(self):
         """
@@ -2217,7 +2130,7 @@ class PitchArrayRow:
 
         Returns nonnegative integer.
         """
-        return self.width
+        return self.width()
 
     def __ne__(self, argument):
         """
@@ -2231,7 +2144,7 @@ class PitchArrayRow:
         """
         Gets repr.
         """
-        return f"{type(self).__name__}(cells={self.cells})"
+        return f"{type(self).__name__}(cells={self.cells()})"
 
     def __str__(self):
         """
@@ -2239,58 +2152,55 @@ class PitchArrayRow:
 
         Returns string.
         """
-        result = [str(cell) for cell in self.cells]
+        result = [str(cell) for cell in self.cells()]
         result = " ".join(result)
         return result
 
     ### PRIVATE PROPERTIES ###
 
-    @property
     def _compact_summary(self):
-        len_self = len(self.cells)
+        len_self = len(self.cells())
         if not len_self:
             return ""
         elif 0 < len_self <= 8:
-            result = [cell._format_row_column_repr_string for cell in self.cells]
+            result = [cell._format_row_column_repr_string() for cell in self.cells()]
             return ", ".join(result)
         else:
-            left = ", ".join([_._format_row_column_repr_string for _ in self.cells[:2]])
+            left = ", ".join(
+                [_._format_row_column_repr_string() for _ in self.cells()[:2]]
+            )
             right = ", ".join(
-                [_._format_row_column_repr_string for _ in self.cells[-2:]]
+                [_._format_row_column_repr_string() for _ in self.cells()[-2:]]
             )
             number_in_middle = len_self - 4
             middle = f", ... [{number_in_middle}] ..., "
             return left + middle + right
 
-    @property
     def _format_contents_string(self):
         result = []
-        for cell in self.cells:
-            result.append(cell._format_row_column_repr_string)
+        for cell in self.cells():
+            result.append(cell._format_row_column_repr_string())
         result = ", ".join(result)
         return result
 
     ### PUBLIC PROPERTIES ###
 
-    @property
     def cell_tokens(self):
         """
         Gets cell items of pitch array row.
 
         Returns tuple.
         """
-        return tuple([cell.item for cell in self.cells])
+        return tuple([cell.item() for cell in self.cells()])
 
-    @property
     def cell_widths(self):
         """
         Gets cell widths of pitch array row.
 
         Returns tuple.
         """
-        return tuple([cell.width for cell in self.cells])
+        return tuple([cell.width() for cell in self.cells()])
 
-    @property
     def cells(self):
         """
         Gets cells of pitch array row.
@@ -2299,48 +2209,40 @@ class PitchArrayRow:
         """
         return tuple(self._cells)
 
-    @property
-    def depth(self):
+    def depth(self) -> int:
         """
         Gets depth of pitch array row.
 
         Defined equal to ``1``.
-
-        Returns ``1``.
         """
         return 1
 
-    @property
     def dimensions(self):
         """
         Gets dimensions of pitch array row.
 
         Returns pair.
         """
-        return self.depth, self.width
+        return self.depth(), self.width()
 
-    @property
-    def is_defective(self):
+    def is_defective(self) -> bool:
         """
-        Is true when width of pitch array row does not equal width of parent pitch array.
-
-        Returns true or false.
+        Is true when width of pitch array row does not equal width of parent
+        pitch array.
         """
-        if self.parent_array is not None:
-            return not self.width == self.parent_array.width
+        if self.parent_array() is not None:
+            return not self.width() == self.parent_array().width()
         return False
 
-    @property
     def is_in_range(self):
         """
-        Is true when all pitches in pitch array row are in pitch range of pitch array
-        row.
+        Is true when all pitches in pitch array row are in pitch range of pitch
+        array row.
 
         Returns true or false.
         """
-        return all(pitch in self.pitch_range for pitch in self.pitches)
+        return all(pitch in self.pitch_range() for pitch in self.pitches())
 
-    @property
     def parent_array(self):
         """
         Gets parent pitch array housing pitch array row.
@@ -2349,7 +2251,6 @@ class PitchArrayRow:
         """
         return self._parent_array
 
-    @property
     def pitch_range(self):
         """
         Gets and sets pitch range of pitch array row.
@@ -2358,13 +2259,11 @@ class PitchArrayRow:
         """
         return self._pitch_range
 
-    @pitch_range.setter
-    def pitch_range(self, argument):
+    def set_pitch_range(self, argument):
         if not isinstance(argument, abjad.PitchRange):
             raise Exception("must be pitch range.")
         self._pitch_range = argument
 
-    @property
     def pitches(self):
         """
         Gets pitches in pitch array row.
@@ -2372,35 +2271,28 @@ class PitchArrayRow:
         Returns tuple.
         """
         pitches = []
-        for cell in self.cells:
-            if cell.pitches is not None:
-                pitches.extend(cell.pitches)
+        for cell in self.cells():
+            if cell.pitches() is not None:
+                pitches.extend(cell.pitches())
         return tuple(pitches)
 
-    @property
-    def row_index(self):
+    def row_index(self) -> int:
         """
         Gets row index of pitch array row in parent pitch array.
-
-        Returns nonnegative integer.
         """
-        parent_array = self.parent_array
+        parent_array = self.parent_array()
         if parent_array is not None:
             return parent_array._rows.index(self)
         raise Exception("row has no parent array.")
 
-    @property
-    def weight(self):
+    def weight(self) -> int:
         """
         Gets weight of pitch array row.
 
         Defined equal to sum of weights of pitch array cells in pitch array row.
-
-        Returns nonnegative integer.
         """
-        return sum([cell.weight for cell in self.cells])
+        return sum([cell.weight() for cell in self.cells()])
 
-    @property
     def width(self):
         """
         Gets width of pitch array row.
@@ -2409,7 +2301,7 @@ class PitchArrayRow:
 
         Returns nonnegative integer.
         """
-        return sum([cell.width for cell in self.cells])
+        return sum([cell.width() for cell in self.cells()])
 
     ### PUBLIC METHODS ###
 
@@ -2420,9 +2312,9 @@ class PitchArrayRow:
         ..  container:: example
 
             >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
-            >>> array[0].cells[0].append_pitch(abjad.NamedPitch(0))
-            >>> array[0].cells[1].append_pitch(abjad.NamedPitch(2))
-            >>> array[0].cells[1].append_pitch(abjad.NamedPitch(4))
+            >>> array[0].cells()[0].append_pitch(abjad.NamedPitch(0))
+            >>> array[0].cells()[1].append_pitch(abjad.NamedPitch(2))
+            >>> array[0].cells()[1].append_pitch(abjad.NamedPitch(4))
 
             >>> print(array)
             [c'] [d' e'    ] [ ]
@@ -2468,9 +2360,9 @@ class PitchArrayRow:
         """
         pitch_tokens = list(pitch_tokens[:])
         if pitch_tokens:
-            for cell in self.cells:
-                if cell.pitches:
-                    cell.pitches = [pitch_tokens.pop(0)]
+            for cell in self.cells():
+                if cell.pitches():
+                    cell.set_pitches([pitch_tokens.pop(0)])
         else:
             self.empty_pitches()
 
@@ -2481,9 +2373,9 @@ class PitchArrayRow:
         ..  container:: example
 
             >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
-            >>> array[0].cells[0].append_pitch(0)
-            >>> array[0].cells[1].append_pitch(2)
-            >>> array[1].cells[2].append_pitch(4)
+            >>> array[0].cells()[0].append_pitch(0)
+            >>> array[0].cells()[1].append_pitch(2)
+            >>> array[1].cells()[2].append_pitch(4)
 
             >>> print(array)
             [c'] [d'    ] [  ]
@@ -2497,7 +2389,7 @@ class PitchArrayRow:
         Returns new pitch array row.
         """
         argument = slice(start, stop)
-        start, stop, step = argument.indices(self.width)
+        start, stop, step = argument.indices(self.width())
         if not step == 1:
             raise Exception("step no implemented.")
         column_indices = set(range(start, stop, step))
@@ -2506,8 +2398,8 @@ class PitchArrayRow:
         new_cells = []
         for cell in cells:
             if cell not in new_cells:
-                trim = [_ for _ in cell.column_indices if _ not in column_indices]
-                new_width = cell.width - len(trim)
+                trim = [_ for _ in cell.column_indices() if _ not in column_indices]
+                new_width = cell.width() - len(trim)
                 new_cell = copy.copy(cell)
                 new_cell._width = new_width
                 new_cells.append(new_cell)
@@ -2521,9 +2413,9 @@ class PitchArrayRow:
         ..  container:: example
 
             >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
-            >>> array[0].cells[0].append_pitch(0)
-            >>> array[0].cells[1].append_pitch(2)
-            >>> array[1].cells[2].append_pitch(4)
+            >>> array[0].cells()[0].append_pitch(0)
+            >>> array[0].cells()[1].append_pitch(2)
+            >>> array[1].cells()[2].append_pitch(4)
 
             >>> print(array)
             [c'] [d'    ] [  ]
@@ -2537,8 +2429,8 @@ class PitchArrayRow:
 
         Returns none.
         """
-        for cell in self.cells:
-            cell.pitches = []
+        for cell in self.cells():
+            cell.set_pitches([])
 
     def extend(self, cells):
         """
@@ -2547,9 +2439,9 @@ class PitchArrayRow:
         ..  container:: example
 
             >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
-            >>> array[0].cells[0].append_pitch(0)
-            >>> array[0].cells[1].append_pitch(2)
-            >>> array[1].cells[2].append_pitch(4)
+            >>> array[0].cells()[0].append_pitch(0)
+            >>> array[0].cells()[1].append_pitch(2)
+            >>> array[1].cells()[2].append_pitch(4)
 
             >>> print(array)
             [c'] [d'    ] [  ]
@@ -2576,9 +2468,9 @@ class PitchArrayRow:
         ..  container:: example
 
             >>> array = baca.array.PitchArray([[1, 2, 1], [2, 1, 1]])
-            >>> array[0].cells[0].append_pitch(0)
-            >>> array[0].cells[1].append_pitch(2)
-            >>> array[1].cells[2].append_pitch(4)
+            >>> array[0].cells()[0].append_pitch(0)
+            >>> array[0].cells()[1].append_pitch(2)
+            >>> array[1].cells()[2].append_pitch(4)
 
             >>> print(array)
             [c'] [d'    ] [  ]
@@ -2603,7 +2495,7 @@ class PitchArrayRow:
             cell = self[i]
         except Exception:
             return False
-        return cell.column_indices[0] < i
+        return cell.column_indices()[0] < i
 
     def index(self, cell):
         """
@@ -2624,12 +2516,12 @@ class PitchArrayRow:
         width = 0
         for cell in cells:
             assert isinstance(cell, PitchArrayCell), repr(cell)
-            if cell.parent_row is not self:
+            if cell.parent_row() is not self:
                 raise Exception("cells must belong to row.")
-            column_indices.extend(cell.column_indices)
-            if cell.pitches is not None:
-                pitches.extend(cell.pitches)
-            width += cell.width
+            column_indices.extend(cell.column_indices())
+            if cell.pitches() is not None:
+                pitches.extend(cell.pitches())
+            width += cell.width()
         start = min(column_indices)
         stop = start + len(column_indices)
         strict_series = list(range(start, stop))
@@ -2648,7 +2540,7 @@ class PitchArrayRow:
 
         Returns none.
         """
-        self_width = self.width
+        self_width = self.width()
         if width < self_width:
             raise Exception("pad width must not be less than row width.")
         missing_width = width - self_width
@@ -2672,7 +2564,7 @@ class PitchArrayRow:
 
         Returns none.
         """
-        for i, item in enumerate(self.cells):
+        for i, item in enumerate(self.cells()):
             if item is cell:
                 self._cells.pop(i)
                 break
@@ -2698,7 +2590,7 @@ class PitchArrayRow:
             [  ] [d'] [bf bqf    ]
             [g'     ] [fs'   ] [ ]
 
-            >>> measure, time_signature = array.rows[0].to_measure()
+            >>> measure, time_signature = array.rows()[0].to_measure()
             >>> staff = abjad.Staff([measure])
             >>> score = abjad.Score([staff], name="Score")
             >>> leaf = abjad.select.leaf(score, 0)
@@ -2720,20 +2612,20 @@ class PitchArrayRow:
                 }
 
         """
-        pair = (self.width, cell_duration_denominator)
+        pair = (self.width(), cell_duration_denominator)
         time_signature = abjad.TimeSignature(pair)
         basic_cell_duration = abjad.Duration(1, cell_duration_denominator)
         measure_pitches: list[int | None] = []
         measure_durations = []
-        for cell in self.cells:
-            cell_pitches = cell.pitches
+        for cell in self.cells():
+            cell_pitches = cell.pitches()
             if not cell_pitches:
                 measure_pitches.append(None)
             elif len(cell_pitches) == 1:
                 measure_pitches.append(cell_pitches[0])
             else:
                 measure_pitches.append(cell_pitches)
-            measure_duration = cell.width * basic_cell_duration
+            measure_duration = cell.width() * basic_cell_duration
             measure_durations.append(measure_duration)
         pitch_lists = abjad.makers.make_pitch_lists(measure_pitches)
         leaves = abjad.makers.make_leaves(pitch_lists, measure_durations)
@@ -2746,8 +2638,8 @@ class PitchArrayRow:
 
         Returns pitch array row.
         """
-        if self.parent_array is not None:
-            self.parent_array.remove_row(self)
+        if self.parent_array() is not None:
+            self.parent_array().remove_row(self)
         return self
 
 
@@ -2817,7 +2709,7 @@ def pitch_arrays_to_score(pitch_arrays) -> abjad.Score:
     staff_group = abjad.StaffGroup(name="Staff_Group")
     score.append(staff_group)
     staves = []
-    for i in range(pitch_arrays[0].depth):
+    for i in range(pitch_arrays[0].depth()):
         staff = abjad.Staff(name=f"Staff_{i + 1}")
         staves.append(staff)
     staff_group.extend(staves)
