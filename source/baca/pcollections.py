@@ -688,14 +688,13 @@ class HarmonicSeries:
         fundamental = abjad.NamedPitch(fundamental)
         self._fundamental = fundamental
 
-    @property
     def fundamental(self) -> abjad.NamedPitch:
         """
         Gets fundamental.
 
         ..  container:: example
 
-            >>> baca.HarmonicSeries("C2").fundamental
+            >>> baca.HarmonicSeries("C2").fundamental()
             NamedPitch('c,')
 
         """
@@ -711,7 +710,7 @@ class HarmonicSeries:
             Partial(fundamental=NamedPitch('c,'), number=7)
 
         """
-        return Partial(fundamental=self.fundamental, number=n)
+        return Partial(fundamental=self.fundamental(), number=n)
 
 
 def illustrate_harmonic_series(harmonic_series) -> abjad.LilyPondFile:

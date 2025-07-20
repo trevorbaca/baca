@@ -705,7 +705,7 @@ Constellation.
     Here's the generator of constellation 1:
 
     >>> constellation = circuit[1 - 1]
-    >>> generator = abjad.sequence.flatten(constellation.generator)
+    >>> generator = abjad.sequence.flatten(constellation.generator())
     >>> generator = abjad.Chord(generator, (1, 4))
     >>> constellation.color_chord(generator)
     >>> constellation.label_chord(generator)
@@ -783,7 +783,7 @@ Constellation.
     Here're the generator and pivot for constellation 1:
 
     >>> constellation = circuit[1 - 1]
-    >>> generator = abjad.sequence.flatten(constellation.generator)
+    >>> generator = abjad.sequence.flatten(constellation.generator())
     >>> generator = abjad.Chord(generator, (1, 4))
     >>> constellation.color_chord(generator)
     >>> constellation.label_chord(generator)
@@ -868,7 +868,7 @@ Constellation.
     Here's the generator of constellation 1:
 
     >>> constellation = circuit[1 - 1]
-    >>> generator = abjad.sequence.flatten(constellation.generator)
+    >>> generator = abjad.sequence.flatten(constellation.generator())
     >>> generator = abjad.Chord(generator, (1, 4))
     >>> constellation.label_chord(generator)
     >>> leaves = [generator]
@@ -908,7 +908,7 @@ Constellation.
     Here's the generator and pivot of constellation 1:
 
     >>> constellation = circuit[1 - 1]
-    >>> generator = abjad.sequence.flatten(constellation.generator)
+    >>> generator = abjad.sequence.flatten(constellation.generator())
     >>> generator = abjad.Chord(generator, (1, 4))
     >>> constellation.label_chord(generator)
     >>> pivot = baca.constellation.find_pivot(constellation, circuit[1])
@@ -995,7 +995,7 @@ Constellation.
 
     >>> generators = []
     >>> for constellation in circuit:
-    ...     generator = abjad.sequence.flatten(constellation.generator)
+    ...     generator = abjad.sequence.flatten(constellation.generator())
     ...     generator = abjad.Chord(generator, (1, 4))
     ...     constellation.color_chord(generator)
     ...     generators.append(generator)
@@ -1349,7 +1349,7 @@ Constellation.
     >>> generators, pivots = [], []
     >>> length = len(circuit)
     >>> for i, constellation in enumerate(circuit):
-    ...     generator = abjad.sequence.flatten(constellation.generator)
+    ...     generator = abjad.sequence.flatten(constellation.generator())
     ...     generator = abjad.Chord(generator, (1, 4))
     ...     constellation.color_chord(generator)
     ...     generators.append(generator)
@@ -1724,7 +1724,7 @@ Constellation.
 
     >>> generators = []
     >>> for constellation in circuit:
-    ...     generator = abjad.sequence.flatten(constellation.generator)
+    ...     generator = abjad.sequence.flatten(constellation.generator())
     ...     generator = abjad.Chord(generator, (1, 4))
     ...     generators.append(generator)
 
@@ -1779,7 +1779,7 @@ Constellation.
     >>> generators = []
     >>> length = len(circuit)
     >>> for i, constellation in enumerate(circuit):
-    ...     generator = abjad.sequence.flatten(constellation.generator)
+    ...     generator = abjad.sequence.flatten(constellation.generator())
     ...     generator = abjad.Chord(generator, (1, 4))
     ...     generators.append(generator)
     ...     next_constellation = circuit[(i + 1) % length]
@@ -1982,7 +1982,7 @@ def find_pivot(constellation_a, constellation_b):
     """
     Finds pivot from ``constellation_a`` to ``constellation_b``.
     """
-    b_generator = abjad.sequence.flatten(constellation_b.generator)
+    b_generator = abjad.sequence.flatten(constellation_b.generator())
     b_generator = abjad.PitchSet(b_generator)
     for set_ in constellation_a:
         if set_ == b_generator:
@@ -2022,7 +2022,7 @@ class Constellation:
     def __init__(self, circuit, generator):
         self._circuit = circuit
         self._generator = generator
-        self._sets = constellate(generator, circuit.range_)
+        self._sets = constellate(generator, circuit.range_())
 
     ### SPECIAL METHODS ###
 
@@ -2078,14 +2078,12 @@ class Constellation:
 
     ### PUBLIC PROPERTIES ###
 
-    @property
     def circuit(self):
         """
         Gets circuit to which constellation belongs.
         """
         return self._circuit
 
-    @property
     def generator(self):
         """
         Gets constellation generator.
@@ -2099,7 +2097,7 @@ class Constellation:
         Colors ``chord`` according to constellation generator.
         """
         colors = ["#red", "#blue", "#green"]
-        color_map = abjad.ColorMap(colors=colors, pitch_iterables=self.generator)
+        color_map = abjad.ColorMap(colors=colors, pitch_iterables=self.generator())
         abjad.label.color_note_heads(chord, color_map)
 
     def label_chord(self, chord):
@@ -2107,7 +2105,7 @@ class Constellation:
         Labels ``chord`` with constellation and chord number.
         """
         assert isinstance(chord, abjad.Chord)
-        constellation_index = self.circuit._constellations.index(self)
+        constellation_index = self.circuit()._constellations.index(self)
         constellation_number = constellation_index + 1
         numbers = [_.number for _ in chord.written_pitches]
         set_ = abjad.PitchSet(numbers)
@@ -2169,7 +2167,6 @@ class Circuit:
 
     ### PUBLIC PROPERTIES ###
 
-    @property
     def range_(self):
         """
         Gets pitch range.

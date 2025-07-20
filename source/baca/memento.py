@@ -56,51 +56,45 @@ class Memento:
                 assert type(value).__name__ == "PersistentOverride", repr(value)
         self._value = value
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Gets repr.
         """
-        return f"baca.{type(self).__name__}(context={self.context!r}, edition={self.edition!r}, manifest={self.manifest!r}, prototype={self.prototype!r}, synthetic_offset={self.synthetic_offset!r}, value={self.value!r})"
+        return f"baca.{type(self).__name__}(context={self.get_context()!r}, edition={self.get_edition()!r}, manifest={self.get_manifest()!r}, prototype={self.get_prototype()!r}, synthetic_offset={self.get_synthetic_offset()!r}, value={self.get_value()!r})"
 
     ### PUBLIC PROPERTIES ###
 
-    @property
-    def context(self):
+    def get_context(self):
         """
         Gets (name of local) context.
         """
         return self._context
 
-    @property
-    def edition(self):
+    def get_edition(self):
         """
         Gets edition.
         """
         return self._edition
 
-    @property
-    def manifest(self):
+    def get_manifest(self):
         """
         Gets manifest.
         """
         return self._manifest
 
-    @property
-    def prototype(self):
+    def get_prototype(self):
         """
         Gets prototype.
         """
         return self._prototype
 
-    @property
-    def synthetic_offset(self):
+    def get_synthetic_offset(self):
         """
         Gets synthetic offset.
         """
         return self._synthetic_offset
 
-    @property
-    def value(self):
+    def get_value(self):
         """
         Gets value.
         """

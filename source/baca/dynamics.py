@@ -112,7 +112,6 @@ class SchemeManifest:
         ("baca-sfz-p", "p"),
     )
 
-    @property
     def dynamics(self) -> list[str]:
         """
         Gets dynamics.
@@ -120,7 +119,7 @@ class SchemeManifest:
         ..  container:: example
 
             >>> scheme_manifest = baca.dynamics.SchemeManifest()
-            >>> for dynamic in scheme_manifest.dynamics:
+            >>> for dynamic in scheme_manifest.dynamics():
             ...     dynamic
             ...
             'baca-appena-udibile'
@@ -337,7 +336,7 @@ def make_dynamic(string: str) -> abjad.Dynamic | abjad.StartHairpin | abjad.Stop
         dynamic = string.split("-")[0]
         command = rf"\baca-{dynamic}-whiteout"
         indicator = abjad.Dynamic(dynamic, command=command)
-    elif "baca-" + string in scheme_manifest.dynamics:
+    elif "baca-" + string in scheme_manifest.dynamics():
         name = scheme_manifest.dynamic_to_steady_state(string)
         command = "\\baca-" + string
         pieces = string.split("-")

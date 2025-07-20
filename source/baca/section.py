@@ -302,7 +302,7 @@ def _analyze_memento(contexts, dictionary, memento) -> Analysis | None:
     if isinstance(previous_indicator, _layout.SpacingSection):
         return None
     for context in contexts:
-        if context.name == memento.context:
+        if context.name == memento.get_context():
             memento_context = context
             break
     else:
@@ -324,12 +324,12 @@ def _analyze_memento(contexts, dictionary, memento) -> Analysis | None:
         status = "reapplied"
     else:
         status = "redundant"
-    edition = memento.edition or abjad.Tag()
-    if memento.synthetic_offset is None:
+    edition = memento.get_edition() or abjad.Tag()
+    if memento.get_synthetic_offset() is None:
         synthetic_offset = None
     else:
-        assert 0 < memento.synthetic_offset, repr(memento)
-        synthetic_offset = -memento.synthetic_offset
+        assert 0 < memento.get_synthetic_offset(), repr(memento)
+        synthetic_offset = -memento.get_synthetic_offset()
     return Analysis(
         leaf=leaf,
         previous_indicator=previous_indicator,
@@ -1432,27 +1432,27 @@ def _mark_section_number(global_skips: abjad.Context, section_number: int) -> No
 
 
 def _memento_to_indicator(dictionary: dict, memento: _memento.Memento) -> typing.Any:
-    if memento.manifest is not None:
+    if memento.get_manifest() is not None:
         if dictionary is None:
-            raise Exception(f"can not find {memento.manifest!r} manifest.")
-        return dictionary.get(memento.value)
+            raise Exception(f"can not find {memento.get_manifest()!r} manifest.")
+        return dictionary.get(memento.get_value())
     baca = importlib.import_module("baca")
     globals_ = globals()
     globals_["baca"] = baca
-    class_ = eval(memento.prototype, globals_)
+    class_ = eval(memento.get_prototype(), globals_)
     if hasattr(class_, "from_string"):
-        indicator = class_.from_string(memento.value)
-    elif class_ is abjad.Dynamic and memento.value.startswith("\\"):
-        indicator = class_(name="", command=memento.value)
-    elif isinstance(memento.value, class_):
-        indicator = memento.value
+        indicator = class_.from_string(memento.get_value())
+    elif class_ is abjad.Dynamic and memento.get_value().startswith("\\"):
+        indicator = class_(name="", command=memento.get_value())
+    elif isinstance(memento.get_value(), class_):
+        indicator = memento.get_value()
     elif class_ is _classes.StaffLines:
-        indicator = class_(line_count=memento.value)
-    elif memento.value is None:
+        indicator = class_(line_count=memento.get_value())
+    elif memento.get_value() is None:
         indicator = class_()
     else:
         try:
-            indicator = class_(memento.value)
+            indicator = class_(memento.get_value())
         except Exception:
             raise Exception(repr(memento))
     return indicator
@@ -1574,15 +1574,15 @@ def _reapply_persistent_indicators(
 ) -> None:
     assert all(isinstance(_, abjad.Context) for _ in contexts)
     for memento in mementos:
-        if memento.manifest is not None:
-            if memento.manifest == "instruments":
+        if memento.get_manifest() is not None:
+            if memento.get_manifest() == "instruments":
                 dictionary = manifests["abjad.Instrument"]
-            elif memento.manifest == "metronome_marks":
+            elif memento.get_manifest() == "metronome_marks":
                 dictionary = manifests.get("abjad.MetronomeMark")
-            elif memento.manifest == "short_instrument_names":
+            elif memento.get_manifest() == "short_instrument_names":
                 dictionary = manifests["abjad.ShortInstrumentName"]
             else:
-                raise Exception(memento.manifest)
+                raise Exception(memento.get_manifest())
         else:
             dictionary = None
         result = _analyze_memento(contexts, dictionary, memento)
