@@ -1087,18 +1087,19 @@ def _find_repeat_pitch_classes(argument) -> list[abjad.LogicalTie]:
         previous_lt: abjad.LogicalTie | None = None
         previous_pcs: set[abjad.NamedPitchClass] = set()
         for lt in abjad.iterate.logical_ties(voice):
-            if abjad.get.has_indicator(lt.head, _enums.HIDDEN):
+            head = lt.get_head()
+            if abjad.get.has_indicator(head, _enums.HIDDEN):
                 written_pitches = set()
-            elif isinstance(lt.head, abjad.Note):
-                written_pitches = set([lt.head.written_pitch])
-            elif isinstance(lt.head, abjad.Chord):
-                written_pitches = set(lt.head.written_pitches)
+            elif isinstance(head, abjad.Note):
+                written_pitches = set([head.written_pitch])
+            elif isinstance(head, abjad.Chord):
+                written_pitches = set(head.written_pitches)
             else:
                 written_pitches = set()
             pcs = set(abjad.NamedPitchClass(_) for _ in written_pitches)
             if abjad.get.has_indicator(
-                lt.head, _enums.NOT_YET_PITCHED
-            ) or abjad.get.has_indicator(lt.head, _enums.ALLOW_REPEAT_PITCH):
+                head, _enums.NOT_YET_PITCHED
+            ) or abjad.get.has_indicator(head, _enums.ALLOW_REPEAT_PITCH):
                 pass
             elif pcs & previous_pcs:
                 if previous_lt not in violators:

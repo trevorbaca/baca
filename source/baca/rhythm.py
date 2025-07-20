@@ -892,7 +892,7 @@ def attach_bgcs(
     pairs = zip(bgcs, lts)
     for bgc, lt in pairs:
         if bgc is not None:
-            abjad.attach(bgc, lt.head, tag=tag)
+            abjad.attach(bgc, lt.get_head(), tag=tag)
 
 
 def from_collection(
