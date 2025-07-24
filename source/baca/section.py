@@ -2151,7 +2151,7 @@ def color_octaves(score: abjad.Score) -> None:
     for vertical_moment in vertical_moments:
         pleaves: list[abjad.Chord | abjad.Note] = []
         pitches = []
-        for leaf in vertical_moment.leaves:
+        for leaf in vertical_moment.get_leaves():
             if abjad.get.has_indicator(leaf, _enums.HIDDEN):
                 continue
             if abjad.get.has_indicator(leaf, _enums.STAFF_POSITION):
