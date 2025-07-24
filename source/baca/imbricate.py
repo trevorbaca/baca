@@ -22,7 +22,7 @@ def _matches_pitch(pitched_leaf, pitch_object):
     else:
         raise TypeError(pitched_leaf)
     if isinstance(pitch_object, int | float):
-        source = [_.number for _ in written_pitches]
+        source = [_.get_number() for _ in written_pitches]
     elif isinstance(pitch_object, abjad.NamedPitch):
         source = written_pitches
     elif isinstance(pitch_object, abjad.NumberedPitch):

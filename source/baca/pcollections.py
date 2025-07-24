@@ -518,19 +518,21 @@ class ChordalSpacingSpecifier:
     def _sort_pitch_classes_descending(self, start, pitch_classes):
         pitch_classes, pitch_classes_, iterations = pitch_classes[:], [], 0
         if self.minimum_semitones is not None:
-            candidate = abjad.NumberedPitchClass(start.number - self.minimum_semitones)
+            candidate = abjad.NumberedPitchClass(
+                start.get_number() - self.minimum_semitones
+            )
         else:
-            candidate = abjad.NumberedPitchClass(start.number - 1)
+            candidate = abjad.NumberedPitchClass(start.get_number() - 1)
         while pitch_classes:
             if candidate in pitch_classes:
                 pitch_classes_.append(candidate)
                 pitch_classes.remove(candidate)
                 if self.minimum_semitones is not None:
                     candidate = abjad.NumberedPitchClass(
-                        candidate.number - self.minimum_semitones
+                        candidate.get_number() - self.minimum_semitones
                     )
             else:
-                candidate = abjad.NumberedPitchClass(candidate.number - 1)
+                candidate = abjad.NumberedPitchClass(candidate.get_number() - 1)
             if 999 <= iterations:
                 raise Exception("stuck in while-loop.")
             iterations += 1
@@ -1095,7 +1097,7 @@ def alpha(collection):
     """
     numbers = []
     for pc in collection:
-        pc = abs(float(pc.number))
+        pc = abs(float(pc.get_number()))
         is_integer = True
         if not abjad.math.is_integer_equivalent_number(pc):
             is_integer = False
@@ -2231,7 +2233,7 @@ def pitches_to_octave_adjustment(pitches, *, anchor=abjad.DOWN, octave_number=4)
         elif anchor == abjad.CENTER:
             soprano = max(pitches)
             bass = min(pitches)
-            centroid = (soprano.number + bass.number) / 2.0
+            centroid = (soprano.get_number() + bass.get_number()) / 2.0
             pitch = abjad.NumberedPitch(centroid)
         else:
             raise ValueError(anchor)

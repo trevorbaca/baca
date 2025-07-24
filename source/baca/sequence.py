@@ -1146,7 +1146,7 @@ def repeat_subruns_to_length(notes, pairs, *, history=False):
         new_notes = []
         for i in range(pair[0], pair[0] + pair[1]):
             source = notes[i % len_notes]
-            pitch_number = source.written_pitch.number
+            pitch_number = source.written_pitch.get_number()
             new_note = abjad.Note(pitch_number, source.written_duration)
             if history:
                 abjad.attach(history, new_note)

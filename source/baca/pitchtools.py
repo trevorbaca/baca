@@ -385,8 +385,8 @@ def _get_lowest_diatonic_pitch_number(plt):
 
 
 def _get_registration(start_pitch, stop_pitch, i, length):
-    start_pitch = start_pitch.number
-    stop_pitch = stop_pitch.number
+    start_pitch = start_pitch.get_number()
+    stop_pitch = stop_pitch.get_number()
     compass = stop_pitch - start_pitch
     fraction = abjad.Fraction(i, length)
     addendum = fraction * compass

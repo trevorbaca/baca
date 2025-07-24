@@ -1967,7 +1967,7 @@ def constellate(generator, range_):
                 interval += 12
             else:
                 break
-        transpositions_ = [[_.number for _ in set_] for set_ in transpositions_]
+        transpositions_ = [[_.get_number() for _ in set_] for set_ in transpositions_]
         transpositions.append(transpositions_)
     sequences = abjad.enumerate.outer_product(transpositions)
     sets = []
@@ -2107,7 +2107,7 @@ class Constellation:
         assert isinstance(chord, abjad.Chord)
         constellation_index = self.circuit()._constellations.index(self)
         constellation_number = constellation_index + 1
-        numbers = [_.number for _ in chord.written_pitches]
+        numbers = [_.get_number() for _ in chord.written_pitches]
         set_ = abjad.PitchSet(numbers)
         chord_index = self._sets.index(set_)
         chord_number = chord_index + 1
