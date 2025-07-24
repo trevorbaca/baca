@@ -161,7 +161,7 @@ class BarExtent:
         if not isinstance(component, abjad.Leaf):
             return None
         staff = abjad.get.parentage(component).get(abjad.Staff)
-        staff_parent = abjad.get.parentage(staff).parent
+        staff_parent = abjad.get.parentage(staff).get_parent()
         if staff_parent[0] is not staff and staff_parent[-1] is not staff:
             return None
         bottom, top = -2, 2
@@ -205,7 +205,7 @@ class BarExtent:
     @staticmethod
     def _staff_is_effectively_bottommost(staff):
         assert isinstance(staff, abjad.Staff)
-        staff_parent = abjad.get.parentage(staff).parent
+        staff_parent = abjad.get.parentage(staff).get_parent()
         if staff_parent[-1] is not staff:
             return False
         if len(staff_parent) == 1:
@@ -219,7 +219,7 @@ class BarExtent:
             for leaf in abjad.iterate.leaves(sibling):
                 if not isinstance(leaf, empty_prototype):
                     return True
-        staff_grandparent = abjad.get.parentage(staff_parent).parent
+        staff_grandparent = abjad.get.parentage(staff_parent).get_parent()
         if staff_grandparent is None:
             return True
         if staff_grandparent[-1] is staff_parent:
@@ -231,7 +231,7 @@ class BarExtent:
     @staticmethod
     def _staff_is_effectively_topmost(staff):
         assert isinstance(staff, abjad.Staff)
-        staff_parent = abjad.get.parentage(staff).parent
+        staff_parent = abjad.get.parentage(staff).get_parent()
         if staff_parent[0] is not staff:
             return False
         if len(staff_parent) == 1:
@@ -245,7 +245,7 @@ class BarExtent:
             for leaf in abjad.iterate.leaves(sibling):
                 if not isinstance(leaf, empty_prototype):
                     return True
-        staff_grandparent = abjad.get.parentage(staff_parent).parent
+        staff_grandparent = abjad.get.parentage(staff_parent).get_parent()
         if staff_grandparent is None:
             return True
         if staff_grandparent[0] is staff_parent:

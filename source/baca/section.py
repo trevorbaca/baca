@@ -1722,7 +1722,7 @@ def _replace_rests_with_multimeasure_rests(
         for group in groups:
             if not all(isinstance(_, abjad.Rest) for _ in group):
                 continue
-            parents = [abjad.get.parentage(_).parent for _ in group]
+            parents = [abjad.get.parentage(_).get_parent() for _ in group]
             if any(_ is not voice for _ in parents):
                 continue
             start_offset = abjad.get.timespan(group[0]).start_offset
